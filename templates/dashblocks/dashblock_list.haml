@@ -1,0 +1,43 @@
+- extends "smartmin/list.html"
+
+- block search-form
+  %form.form-inline{role:"form"}
+    -if not filtered_type
+      %select.form-control{name:"type", style:"width:180px;margin-bottom:0px"}
+      - if filtered_type.id == type.id
+        %option{value:"0", selected: None}
+          \-----
+      - else
+        %option{value:"0" }>
+          \-----"
+      - for type in types
+        - if filtered_type.id == type.id
+          %option{value:"={ type.id }", selected: None}
+            {{ type.name }}
+        - else
+          %option{value:"={ type.id }" }
+            {{ type.name }}
+    -else
+      %input{ type:"hidden", name:"type", value:"{{filtered_type.id}}" }
+
+    %input.input-medium.search-query.form-control{ type:"text", name:"search", value:"={ search }"}
+    %button.btn.btn-default{type:"submit"}
+      Search
+
+-block table-buttons
+  .pull-right
+    %form.form-inline{action:"{% url 'dashblocks.dashblock_create' %}", method:"get"}
+      -if not filtered_type
+        %select.form-control{name:"type", style:"width:180px;margin-bottom:0px"}
+          - for type in types
+            - if filterred_type.id == type.id
+              %option{ value:"={ type.id }", selected: None}
+                {{ type.name }}
+            - else
+              %option{ value:"{{ type.id }}" }
+                {{ type.name }}
+      -else
+        %input{ type:"hidden", name:"type", value:"{{filtered_type.id}}" }
+
+      %button.btn.btn-primary{type:"submit", value:"Add", name:"Add"}
+        Add

@@ -1,0 +1,92 @@
+- extends "base.html"
+
+- load thumbnail compress ureport
+
+- block banner
+  - if banner_bg and org|config:"join-text"
+    .banner-bg
+      .container
+        .banner-join-text
+          %nobr
+            {{ org|config:"join_text"|upper }}
+
+- block extra-style
+  {{ block.super }}
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+  :css
+    .banner-bg {
+        {% if banner_bg %}
+          {% thumbnail banner_bg.image "1280" crop="center" as im %}
+            background-image: url({{im.url}});
+          {% empty %}
+            background-color: #EEEEEE;
+          {% endthumbnail %}
+        {% endif %}
+      }
+
+
+    .content {
+      background-color: rgba(255, 255, 255, 0.7);
+      font-family: SharpSansBold;
+      font-size: 14pt;
+    }
+
+    div.jqcloud {
+      background-color: #fff;
+    }
+
+    div.jqcloud span.w10 {
+      background-color: {{ org|config:"primary_color"|transparency:"1" }};
+      color: #fff;
+
+    }
+
+    div.jqcloud span.w9 {
+      background-color: {{ org|config:"primary_color"|transparency:"0.9"}};
+      color: #fff;
+    }
+
+    div.jqcloud span.w8 {
+      background-color: {{ org|config:"primary_color"|transparency:"0.8"}};
+      color: #fff;
+    }
+
+    div.jqcloud span.w7 {
+      background-color: {{ org|config:"primary_color"|transparency:"0.7"}};
+      color: #fff;
+    }
+
+    div.jqcloud span.w6 {
+      background-color: {{ org|config:"primary_color"|transparency:"0.6"}};
+      color: #fff;
+    }
+
+    div.jqcloud span.w5 {
+      background-color: {{ org|config:"primary_color"|transparency:"0.5"}};
+      color: {{ org|config:"primary_color"}};
+    }
+
+    div.jqcloud span.w4 {
+      background-color: {{ org|config:"primary_color"|transparency:"0.4"}};
+      color: {{ org|config:"primary_color"}};
+    }
+
+    div.jqcloud span.w3 {
+      background-color: {{ org|config:"primary_color"|transparency:"0.3"}};
+      color: {{ org|config:"primary_color"}};
+    }
+
+    div.jqcloud span.w2 {
+      background-color: {{ org|config:"primary_color"|transparency:"0.2"}};
+      color: {{ org|config:"primary_color"}};
+    }
+
+    div.jqcloud span.w1 {
+      background-color: {{ org|config:"primary_color"|transparency:"0.1"}};
+      color: {{ org|config:"primary_color"}};
+    }
+
+
+- block extra-script
+  {{ block.super }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>

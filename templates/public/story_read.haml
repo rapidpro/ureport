@@ -1,0 +1,98 @@
+- extends "public_base.html"
+- load thumbnail compress
+
+-block subtitle
+  &nbsp;- {{ story.title }}
+
+- block hero
+  .hero-container
+    .hero-dark-container
+      .container
+        .col-md-6
+          .story-hero
+            .hero-title.primary-bg-color
+              {{ story.category|upper }}
+            .story-hero-title
+              {{ story.title|upper }}
+            -if story.created_by.first_name
+              .hero-author
+                BY {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
+            .hero-info
+              Scroll to read more
+
+  - block banner
+    {{ block.super }}
+
+
+- block content
+  .row
+    .col-md-8.right-col-border
+      .section
+        %h1.level-1-title
+          U-REPORT STORY CONTINUES
+        .level-1-title-description.secondary-color
+
+        .card.card-padding
+          .story-details
+            .block-video.pull-right
+              %iframe{ width:"360", height:"270", src:"//www.youtube.com/embed/{{story.video_id}}", frameborder:"0"}
+            {{ story.content|safe }}
+
+    .col-md-4
+      .section
+        %h1.level-1-title
+          RELATED POLLS
+        .level-1-title-description.secondary-color
+        .card.card-padding
+          - for related_poll in related_polls|slice:"5"
+            .related-poll
+              %a{ href: "{% url 'public.poll_read' related_poll.id %}" }
+                {{ related_poll.title }}
+      %hr.aaa
+      .section
+        %h1.level-1-title
+          RELATED STORIES
+        .level-1-title-description.secondary-color
+
+        - for story in related_stories|slice:"3"
+          .card.card-padding{ style: "margin-bottom: 15px" }
+            .related-story
+              .related-story-image
+                - if story.get_image
+                  {% thumbnail story.get_image "400x300" crop="center" as im %}
+                  <img width="100%" src="{{im.url}}" />
+                  {% endthumbnail %}
+                - else
+                  <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+              .related-story-title.primary-color
+                {{ story.title|upper }}
+              .related-story-date
+                {{ story.created_on|date:"M j. Y" }}
+              .related-story-teaser
+                {{ story.short_teaser|safe }}
+              %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
+                READ MORE &#8594;
+
+  %hr.aaa
+  - include "public/archived_stories.html"
+
+- block extra-style
+  {{ block.super }}
+  :css
+    .hero-container {
+      {% thumbnail story.get_category_image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+    }
+
+    .block-video {
+    margin-left: 10px;
+    }
+
+-block extra-script
+  {{ block.super }}
+  {% compress js %}
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/archived_stories.coffee" />
+  {% endcompress %}

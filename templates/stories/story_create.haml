@@ -1,0 +1,35 @@
+- extends "smartmin/create.html"
+
+
+- block extra-style
+  %link{rel:"stylesheet", type:"text/css", href:"{{ STATIC_URL }}css/prettify.css"}
+  %link{rel:"stylesheet", type:"text/css", href:"{{ STATIC_URL }}css/bootstrap3-wysihtml5.min.css"}
+
+  :css
+    #id_content {
+      width: 93%;
+      height: 250px;
+      margin-right: 20px;
+    }
+
+- block extra-script
+  <script src="{{ STATIC_URL }}js/wysihtml5-advanced.js"></script>
+  <script src="{{ STATIC_URL }}js/prettify.js"></script>
+  <script src="{{ STATIC_URL }}js/bootstrap3-wysihtml5.all.min.js"></script>
+
+  :javascript
+    $(function(){
+      $("#id_content").wysihtml5({
+        parserRules: wysihtml5ParserRules,
+        "font-styles": true,
+        color: true,
+        html: true,  
+        image: false,                             
+        {% if user.is_superuser or perms.stories.story_html %}
+        html: true,
+        {% else %}
+        html: false,
+        {% endif %}
+        stylesheets: ["{{ STATIC_URL }}css/wysiwyg-color.css"], 
+      });
+    });

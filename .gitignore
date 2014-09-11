@@ -5,13 +5,16 @@ __pycache__/
 # C extensions
 *.so
 
+# PyCharm
+.idea/
+
 # Distribution / packaging
 .Python
 env/
+bin/
 build/
 develop-eggs/
 dist/
-downloads/
 eggs/
 lib/
 lib64/
@@ -21,12 +24,9 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+*.pyc
+*~
+*.class
 
 # Installer logs
 pip-log.txt
@@ -42,13 +42,34 @@ coverage.xml
 
 # Translations
 *.mo
-*.pot
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Rope
+.ropeproject
 
 # Django stuff:
 *.log
+*.pot
 
 # Sphinx documentation
 docs/_build/
 
-# PyBuilder
-target/
+# General
+.DS_Store
+
+# Dev
+dash.sqlite
+
+# never check in the settings file/link
+ureport/settings.py
+
+# ignore sitestatic directory
+sitestatic/
+config/
+deploy
+media/
+db/

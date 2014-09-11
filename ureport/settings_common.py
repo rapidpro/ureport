@@ -1,0 +1,402 @@
+from django.utils.translation import ugettext_lazy as _
+
+# Django settings for tns_glass project.
+THUMBNAIL_DEBUG = False
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    ('Nyaruka', 'code@nyaruka.com'),
+)
+
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'dash.sqlite',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+# set the mail settings, we send throught gmail
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'server@nyaruka.com'
+DEFAULT_FROM_EMAIL = 'server@nyaruka.com'
+EMAIL_HOST_PASSWORD = 'NOTREAL'
+EMAIL_USE_TLS = True
+
+API_ENDPOINT = 'http://localhost:8001'
+SITE_HOST_PATTERN = 'http://%s.localhost:8000'
+
+# On Unix systems, a value of None will cause Django to use the same
+# timezone as the operating system.
+# If running in a Windows environment this must be set to the same as your
+# system time zone
+TIME_ZONE = 'GMT'
+USER_TIME_ZONE = 'Africa/Kigali'
+
+MODELTRANSLATION_TRANSLATION_REGISTRY = "translation"
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en-us'
+
+# Available languages for translation
+LANGUAGES = (('en_us', "English"),)
+DEFAULT_LANGUAGE = "en_us"
+
+SITE_ID = 1
+
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
+USE_I18N = True
+
+# If you set this to False, Django will not format dates, numbers and
+# calendars according to the current locale
+USE_L10N = True
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
+MEDIA_ROOT = ''
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = ''
+
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/home/media/media.lawrence.com/static/"
+STATIC_ROOT = ''
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = '/static/'
+COMPRESS_URL = '/static/'
+
+# URL prefix for admin static files -- CSS, JavaScript and images.
+# Make sure to use a trailing slash.
+# Examples: "http://foo.com/static/admin/", "/static/admin/".
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_PRECOMPILERS = (
+    ('text/coffeescript', 'coffee --compile --stdio'),
+    ('text/less', 'lessc {infile} {outfile}'),
+)
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = 'bangbangrootplaydeadn7#^+-u-#1wm=y3a$-#^jps5tihx5v_@-_(kxumq_$+$5r)bxo'
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'hamlpy.template.loaders.HamlPyFilesystemLoader',
+    'hamlpy.template.loaders.HamlPyAppDirectoriesLoader',
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    
+#     'django.template.loaders.eggs.Loader',
+)
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',    
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+    'dash.orgs.context_processors.user_group_perms_processor',
+    'dash.orgs.context_processors.set_org_processor',
+)
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'dash.orgs.middleware.SetOrgMiddleware',
+)
+
+ROOT_URLCONF = 'ureport.urls'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.cache.RedisCache',
+        'LOCATION': '127.0.0.1:6379:1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+        }
+    }
+}
+
+ORG_CONFIG_FIELDS =[ dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-report locally"), required=True)),
+                     dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-report"), required=False)),
+                     dict(name='join_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False)),
+                     dict(name='primary_color', field=dict(help_text=_("The primary color for styling for this organization"), required=False)),
+                     dict(name='secondary_color', field=dict(help_text=_("The secondary color for styling for this organization"), required=False)),
+                     dict(name='colors', field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False)),
+                     dict(name='google_tracking_id', field=dict(help_text=_("The Google Analytics Tracking ID for this organization"), required=False)),
+                     dict(name='youtube_channel_url', field=dict(help_text=_("The URL to the Youtube channel for this organization"), required=False)),
+                     dict(name='facebook_page_url', field=dict(help_text=_("The URL to the Facebook page for this organization"), required=False)),
+                     dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
+                     dict(name='twitter_user_widget', field=dict(help_text=_("The Twitter widget used for following new users"), required=False)),
+                     dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
+                     dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters"))),
+                     dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters"))),
+                     dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters"))),
+                     dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters"))),
+                     dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters"))),
+                     dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters"))),
+                     dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters"))),
+                     dict(name='featured_state', field=dict(help_text=_("Choose the featured State of reporters shown on the home page")))]
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
+
+    # mo-betta permission management
+    'guardian',
+
+    # error logging
+    'raven.contrib.django',
+
+    # versioning of our data
+    'reversion',
+
+    # the django admin
+    'django.contrib.admin',
+
+
+    # compress our CSS and js
+    'compressor',
+
+    # thumbnail
+    'sorl.thumbnail',
+
+    # smartmin
+    'smartmin',
+
+    # import tasks
+    'smartmin.csv_imports',
+
+    # smartmin users
+    'smartmin.users',
+
+    # async tasks,
+    'djcelery',
+
+    # dash apps
+    'dash.orgs',
+    'dash.dashblocks',
+    'dash.stories',
+    'dash.utils',
+
+    # ureport apps
+    'ureport.polls',
+    'ureport.categories',
+    'ureport.news',
+)
+
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class':'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'httprouterthread': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+        },
+    }
+}
+
+#-----------------------------------------------------------------------------------
+# Directory Configuration
+#-----------------------------------------------------------------------------------
+import os
+
+PROJECT_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)))
+RESOURCES_DIR = os.path.join(PROJECT_DIR, '../resources')
+
+RESOURCES_DIR = os.path.join(PROJECT_DIR, '../resources')
+FIXTURE_DIRS = (os.path.join(PROJECT_DIR, '../fixtures'),)
+TESTFILES_DIR = os.path.join(PROJECT_DIR, '../testfiles')
+TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, '../templates'),)
+STATICFILES_DIRS = (os.path.join(PROJECT_DIR, '../static'), os.path.join(PROJECT_DIR, '../media'), )
+STATIC_ROOT = os.path.join(PROJECT_DIR, '../sitestatic')
+MEDIA_ROOT = os.path.join(PROJECT_DIR, '../media')
+MEDIA_URL = "/media/"
+
+#-----------------------------------------------------------------------------------
+# Permission Management
+#-----------------------------------------------------------------------------------
+
+# this lets us easily create new permissions across our objects
+PERMISSIONS = {
+    '*': ('create', # can create an object
+          'read',   # can read an object, viewing it's details
+          'update', # can update an object
+          'delete', # can delete an object,
+          'list'),  # can view a list of the objects
+
+    'dashblocks.dashblock': ('html', ),
+    'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join'),
+    'polls.poll': ('questions',),
+    'stories.story': ('html',),
+
+}
+
+# assigns the permissions that each group should have
+GROUP_PERMISSIONS = {
+    "Administrators": (
+        'categories.category.*',
+        'categories.categoryimage.*',
+        'dashblocks.dashblock.*',
+        'dashblocks.dashblocktype.*',
+        'news.newsitem.*',
+        'news.video.*',
+        'orgs.org_edit',
+        'orgs.org_home',
+        'orgs.org_manage_accounts',
+        'orgs.org_profile',
+        'orgs.orgbackground.*',
+        'polls.poll.*',
+        'polls.pollcategory.*',
+        'polls.featuredresponse.*',
+        'stories.story.*',
+        'users.user_profile',
+    ),
+    "Editors": (
+        'orgs.org_home',
+        'orgs.org_profile',
+        'users.user_profile',
+        'dashblocks.dashblock.*',
+    ),
+    "Viewers": []
+}
+
+#-----------------------------------------------------------------------------------
+# Login / Logout
+#-----------------------------------------------------------------------------------
+LOGIN_URL = "/users/login/"
+LOGOUT_URL = "/users/logout/"
+LOGIN_REDIRECT_URL = "/manage/org/choose/"
+LOGOUT_REDIRECT_URL = "/"
+
+#-----------------------------------------------------------------------------------
+# Guardian Configuration
+#-----------------------------------------------------------------------------------
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
+
+ANONYMOUS_USER_ID = -1
+
+#-----------------------------------------------------------------------------------
+# Async tasks with django-celery
+#-----------------------------------------------------------------------------------
+
+import djcelery
+djcelery.setup_loader()
+
+CELERY_RESULT_BACKEND = 'database'
+
+BROKER_BACKEND = 'redis'
+BROKER_HOST = 'localhost'
+BROKER_PORT = 6379
+BROKER_VHOST = '1'
+
+#-----------------------------------------------------------------------------------
+# Django-Nose config
+#-----------------------------------------------------------------------------------
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+SOUTH_TESTS_MIGRATE = False
+
+#-----------------------------------------------------------------------------------
+# SMS Configs
+#-----------------------------------------------------------------------------------
+
+RAPIDSMS_TABS = []
+SMS_APPS = [ 'mileage' ]
+
+# change this to your specific backend for your install
+DEFAULT_BACKEND = "console"
+
+# change this to the country code for your install
+DEFAULT_COUNTRY_CODE = "250"
+
+#-----------------------------------------------------------------------------------
+# Debug Toolbar
+#-----------------------------------------------------------------------------------
+
+INTERNAL_IPS = ('127.0.0.1',)
+
+#-----------------------------------------------------------------------------------
+# Crontab Settings
+#-----------------------------------------------------------------------------------
+
+from datetime import timedelta
+
+CELERYBEAT_SCHEDULE = {
+    "runs-every-hour": {
+        "task": "reminders.tasks.check_reminders",
+        "schedule": timedelta(hours=1),
+    },
+}
+
+

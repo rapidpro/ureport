@@ -1,0 +1,283 @@
+-extends "public_base.html"
+
+-load compress thumbnail humanize ureport
+
+- block hero
+  .hero-container
+    .hero-dark-container
+    .poll-hero
+      .container
+        .row
+          .col-sm-12
+            .hero-title.primary-bg-color
+              - if tab == 'list'
+                CURRENT POLL IN {{ latest_poll.category|upper }}
+              - else
+                {{ latest_poll.category|upper }}
+
+        .row
+          .col-sm-6
+            .hero-description.poll-hero-title
+              {{ latest_poll.title|upper }}
+            .hero-description.poll-hero-questions
+              {{ latest_poll.questions.count }} QUESTION{{ latest_poll.questions.count|pluralize:"S" }} POLLED ON THIS TOPIC
+
+              .poll-hero-circle-outer
+              .poll-hero-circle-inner.primary-border-color
+
+          .col-sm-6.left-col-border{style:"border-color:#FFF"}
+            .hero-description
+              {{ latest_poll.response_percentage }}%
+              %span
+                RESPONSE RATE
+            .hero-description
+              {{ latest_poll.completed_runs|intcomma }}
+              %span
+                RESPONDED OUT OF
+              {{ latest_poll.runs|intcomma }}
+              %span
+                POLLED
+
+        .latest-poll-questions
+          - with latest_poll.questions.all as questions
+            .row-no-padding
+              - for question in questions
+                {% if forloop.counter0 == 4 %}</div><div class="row-no-padding">{% endif %}
+                .col-sm-3
+                  .top-poll-question
+                    {% if forloop.counter0 <= 3 %}
+                    .question-hline{ class: "{% if forloop.first %}hline-first{% endif %} {% if forloop.counter0 == 3 or forloop.last %}hline-last{% endif %}" }
+                    .question-vline{ class: "{% if forloop.last or forloop.counter0 == 3 %}vline-last{% endif %}" }
+                    {% endif %}
+                    .question-date.primary-bg-color{ style: "{% if forloop.counter0 > 3 %}margin-top: 20px{% endif %}" }
+                      {{ question.created_on|date:"M j. Y" }}
+                    .question-title
+                      {{ question.title }}
+
+  - block banner
+    {{ block.super }}
+
+
+- block content
+  .section
+    %h1.level-1-title
+      POLL RESULTS
+
+    .poll-questions
+      {% for question in latest_poll.questions.all %}
+        .poll-question
+          .white-card-container
+            .white-card-inner
+              .white-card-title.primary-bg-color
+                {{ question.created_on|date:"M j. Y"|upper }}
+              .white-card-content.white-card-padding
+                .poll-question-title
+                  {{ question.title }}
+                .poll-question-response-rate
+                  {{ question.get_responded|intcomma }} responded out of {{ question.get_polled|intcomma }} polled
+                .poll-question-visualization
+                  .poll-question-tabs-border.primary-border-color{role:"tablist"}
+                    .poll-question-tabs.primary-bg-color
+                      - if question.is_open_ended
+                        %a.poll-question-tab.active.primary-color.primary-bg-color{ href:"#keywords-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
+                          KEYWORDS
+                      - else
+
+                        %a.poll-question-tab.active.primary-color.primary-bg-color{href:"#statistics-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
+                          STATISTICS
+
+                        %a.poll-question-tab.inactive.primary-color.primary-bg-color{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
+                          LOCATIONS
+
+
+                  .tab-content
+                    - if question.is_open_ended
+                      .tab-pane.active{id:"keywords-tab-{{ question.id }}"}
+                        .poll-word-cloud{data-question:"{{ question.id }}", id:"word-cloud-{{ question.id }}" }
+                          .loading-placeholder{id:"word-cloud-{{ question.id }}-placeholder"}
+                            %img{src:"{{ STATIC_URL }}img/loading.gif"}
+
+                    - else
+                      .tab-pane{id:"locations-tab-{{ question.id }}"}
+                        .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
+                          .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
+                            %img{src:"{{ STATIC_URL }}img/loading.gif"}
+
+                      .tab-pane.active{id:"statistics-tab-{{ question.id }}"}
+                        .poll-graph
+                          -with results=question.get_results.0
+                            -with categories=results.categories
+                              -for category in categories
+                                .poll-category
+                                  .category-container{ class:"poll-category-{% cycle '1' '2' '3' '4' '5' '6' %}" }
+                                    .category-dash
+
+                                    .category-percent
+                                      {% widthratio category.count results.set 100 %}%
+
+                                    .category-label-below
+                                      {{ category.label }}
+
+                                    .category-bar{ style:"width:{% widthratio category.count results.set 90 %}%" }
+                                      &nbsp;
+
+                                    .category-label-above
+                                      {{ category.label }}
+
+
+      {% endfor %}
+
+
+  %hr.aaa
+  .row
+    .col-md-8
+      .section
+        %h1.level-1-title
+          FEATURED ANSWERS
+        .level-1-title-description.secondary-color
+        - if not latest_poll_responses
+          .current-poll-featured-response{style:"width: 100%"}
+            .card.card-padding
+              .featured-response-text.no-answers
+                No featured answers.
+
+        - for response in latest_poll_responses|slice:"4"
+          .current-poll-featured-response{class:"{% cycle 'right-part' 'left-part' %} for{{ forloop.counter}} len{{latest_poll_responses|length}}"}
+            .card.card-padding
+              .featured-response-text
+                {{ response.message }}
+              .half-border.none-color
+              .featured-response-reporter
+                - if response.reporter
+                  {{ response.reporter|title }}
+              .featured-response-region
+                U-reporter in {{ response.location }}
+
+    .col-md-4.left-col-border
+      .section
+        %h1.level-1-title
+          RELATED STORIES
+        .level-1-title-description.secondary-color
+        .card.card-padding
+          - if not related_stories
+            No related stories.
+
+          - for story in related_stories|slice:"1"
+            .related-story-image
+              - if story.get_image
+                {% thumbnail story.get_image "400x300" crop="center" as im %}
+                <img width="100%" src="{{im.url}}" />
+                {% endthumbnail %}
+              - else
+                <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+            .related-story-title.primary-color
+              {{ story.title|upper }}
+            .related-story-date
+              {{ story.created_on|date:"M j. Y" }}
+            .related-story-teaser
+              {{ story.short_teaser|safe }}
+            %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
+              READ MORE &#8594;
+
+  %hr.aaa
+  -include "public/all_polls.html"
+
+
+- block extra-style
+  {{ block.super }}
+
+  :css
+    .hero-container {
+      {% if latest_poll %}
+      {% thumbnail latest_poll.get_category_image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endif%}
+    }
+
+    .poll-graph {
+      height: 400px;
+    }
+
+    .poll-map {
+      height: 500px;
+      width: 100%;
+    }
+
+    .leaflet-container {
+      background: #fff;
+    }
+
+    .top-color {
+      color: rgb(0,104,55);
+    }
+
+    .other-color {
+      color: rgb(165,0,38);
+    }
+
+    .poll-word-cloud {
+      width: 100%;
+      height: 750px;
+    }
+
+-block extra-script
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jqcloud.min.js"></script>
+  {% compress js %}
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/locations.coffee" />
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/all_polls.coffee" />
+  {% endcompress %}
+  :javascript
+    $(function(){
+
+      $(".poll-question-tab").on('click', function (){
+        $(this).parent('.poll-question-tabs').children('.poll-question-tab').removeClass('active');
+        $(this).parent('.poll-question-tabs').children('.poll-question-tab').children('a').removeClass('primary-bg-color')
+        $(this).parent('.poll-question-tabs').children('.poll-question-tab').children('a').addClass('primary-color')
+
+        $(this).addClass('active');
+        $(this).children('a').removeClass('primary-color');
+        $(this).children('a').addClass('primary-bg-color');
+      });
+
+      $(".poll-question-tab").on('shown.bs.tab', function(e) {
+         var tabPaneShown = e.target.getAttribute('href');
+         var mapDiv = $(tabPaneShown).children('.poll-map');
+
+         if (mapDiv.length) {
+            var map = mapDiv.data('map');
+            map.invalidateSize(false);
+         }
+      });
+
+
+      $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
+        $(".poll-map").each(function(){
+          var question = $(this).attr("data-question");
+          map = window.initMap('map-' + question, boundaries, question);
+
+          $(this).data('map', map);
+        });
+      });
+
+      $(".poll-word-cloud").each(function(){
+        var question = $(this).attr("data-question");
+        $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
+          var results = result[0];
+          var cloudData = [];
+
+          for (i=0; i<=25; i++){
+            word = results.categories[i];
+            label = word.label.trim().toUpperCase();
+            cloudData.push({ text: label, weight: Math.sqrt(word.count)})
+          }
+
+          $('#word-cloud-' + question + '-placeholder').hide();
+          $('#word-cloud-' + question).jQCloud(cloudData);
+
+        });
+      });
+    });

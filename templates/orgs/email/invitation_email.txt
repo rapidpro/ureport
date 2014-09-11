@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% trans "You are invited to join {{org.name}}." %}
+
+{% trans "Click this link to join" %}
+{{org.name}}
+      https://{{ org.slug }}.ureport.io/org/join/{{invitation.secret}}/

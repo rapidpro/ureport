@@ -1,0 +1,498 @@
+- extends "public_base.html"
+
+-load compress ureport dashblocks thumbnail
+
+- block hero
+  - load_qbs request.org 'ureporters'
+
+  - for d_block in ureporters|slice:":1"
+    .hero-container
+      .hero-dark-container
+        .container
+          .row
+            .col-md-7
+              .hero-dark-content
+                .hero-title.primary-bg-color
+                  U-REPORTERS IN {{org.name|upper}}
+                .hero-description
+                  {{ d_block.short_content_teaser|safe }}
+                .hero-info
+                  Scroll to Learn more
+
+
+  - block banner
+    {{ block.super }}
+
+- block content
+  - load_qbs request.org 'ureporters'
+  - for d_block in ureporters|slice:":1"
+    .section
+      %h1.level-1-title
+        WHO WE ARE
+      .level-1-title-description.secondary-color
+      .ureporters-text
+        {{d_block.content|safe}}
+
+    %hr.aaa
+    .section
+      %h1.level-1-title
+        U-REPORTER STATISTICS
+      .level-1-title-description.secondary-color
+      .row
+        .col-md-7
+          .white-card-container
+            .white-card-inner
+              .white-card-title.primary-bg-color
+                AGE
+              .white-card-content.white-card-padding
+                .contact-field-graph-age{ data-contact-field:'{{org|config:"born_label"}}', id: "graph-contact-field-age"}
+                  #graph-contact-field-age-placeholder.loading-placeholder
+                    %img{src:"{{ STATIC_URL }}img/loading.gif"}
+        .col-md-5
+          .white-card-container
+            .white-card-inner
+              .white-card-title.primary-bg-color
+                GENDER
+              .white-card-content.white-card-padding
+                .contact-field-graph-gender{ data-contact-field:'{{org|config:"gender_label"}}', id: "graph-contact-field-gender"}
+                  %table.ureporter-gender{style:"width:100%"}
+                    %tbody
+                      %tr
+                        %td.male-gender
+                          .icon-gender.primary-color
+                            .glyph.icon-Icon-02
+
+                          #male-percentage.primary-border-color.percentage-gender
+                            %span ---
+                          #male-summary.summary-gender
+
+                        %td.female-gender
+                          .icon-gender.primary-color
+                            .glyph.icon-Icon-01
+
+                          #female-percentage.primary-border-color.percentage-gender
+                            %span ---
+                          #female-summary.summary-gender
+
+      .row
+        .col-md-12
+          .white-card-container
+            .white-card-inner
+              .white-card-title.primary-bg-color
+                WHERE ARE YOU REPORTERS FROM?
+              .white-card-content.white-card-padding
+                .ureport-location-map{data-contact-field:'{{org|config:"gender_label"}}', id: "ureport-location-map-id"}
+                  #ureport-location-map-id-placeholder.loading-placeholder
+                    %img{src:"{{ STATIC_URL }}img/loading.gif"}
+
+
+      .row
+        .col-md-12
+          .white-card-container
+            .white-card-inner
+              .white-card-title.primary-bg-color
+                REGISTRATION RATE: IN THE PAST 6 MONTHS
+              .white-card-content.white-card-padding
+                .contact-field-graph-registration{ data-contact-field:'{{org|config:"registration_label"}}', id: "graph-contact-field-registration"}
+                  #graph-contact-field-registration-placeholder.loading-placeholder
+                    %img{src:"{{ STATIC_URL }}img/loading.gif"}
+      .row
+        .col-md-12
+          .white-card-container
+            .white-card-inner
+              .white-card-title.primary-bg-color
+                OCCUPATION: TOP 9 MOST MENTIONED
+              .white-card-content.white-card-padding
+                .contact-field-graph-occupation{ data-contact-field:'{{org|config:"occupation_label"}}', id: "graph-contact-field-occupation"}
+                  #graph-contact-field-occupation-placeholder.loading-placeholder
+                    %img{src:"{{ STATIC_URL }}img/loading.gif"}
+
+
+
+-block extra-script
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/highcharts.js"></script>
+  {% compress js %}
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureporters.coffee" />
+  {% endcompress %}
+
+  :javascript
+    $(function(){
+      $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
+        $(".ureport-location-map").each(function(){
+          var locationField = $(this).attr("data-contact-field");
+          var ajaxUrl = '/contact_field_results/?contact_field=' + encodeURIComponent(locationField);
+
+          var colorsList = gradientFactory.generate({
+            from: '#DDDDDD',
+            to: '{{ org|config:"primary_color"}}',
+            stops: 6
+          });
+
+          window.initMap('ureport-location-map-id', boundaries, ajaxUrl, colorsList);
+        });
+      });
+    });
+    $(function(){
+      $(".contact-field-graph-age").each(function(){
+        var contactField = $(this).attr("data-contact-field");
+        $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+          var results = result[0];
+          var categories = [];
+          var data = [];
+
+          var total = 0;
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            total += category.count;
+          }
+
+          var percentage_lookup = {};
+
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            label = category.label.trim().toUpperCase();
+            categories.push("Age " + label);
+
+            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+            percentage_lookup[label] = Math.round(percentage);
+
+            if (parseInt(percentage_lookup[label])) {
+              data.push({ name:label,  y: Math.round(percentage) });
+            }
+          }
+
+          console.log(data);
+
+          $('#graph-contact-field-age-placeholder').hide();
+          $('#graph-contact-field-age').highcharts({
+            chart: {
+                type: 'column'
+            },
+            credits: {
+              enabled: false
+            },
+            legend: {
+              enabled: false
+            },
+            title: {
+                text: null
+            },
+            subtitle: {
+                text: null
+            },
+            xAxis: {
+              categories: categories,
+              labels : {
+                  rotation: 0
+              },
+              minorTickLength: 0,
+              tickLength: 0
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '(%)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.x}</span><table>',
+                pointFormat: '<tr>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    color: '{{ org|config:"primary_color"}}',
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    dataLabels:  {
+                      enabled: true,
+                      format: '<b>{point.y:.0f}%</b>'
+                    }
+                }
+            },
+            series: [ {name: 'Age' , data: data} ]
+          });
+        });
+      });
+    });
+
+   $(function(){
+      $(".contact-field-graph-gender").each(function(){
+        var contactField = $(this).attr("data-contact-field");
+        $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+          var results = result[0];
+          var categories = [];
+
+          var total = 0;
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            total += category.count;
+          }
+
+          var percentage_lookup = {};
+          var count_lookup = {};
+
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            label = category.label.trim().toUpperCase();
+            categories.push(label);
+
+            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+            percentage_lookup[label] = Math.round(percentage);
+            count_lookup[label] = category.count
+
+          }
+
+          $("#male-percentage").text(percentage_lookup['MALE'] + "%");
+          $("#male-summary").text("(" + count_lookup['MALE'] + " out of " + total + ")");
+
+          $("#female-percentage").text(percentage_lookup['FEMALE'] + "%");
+          $("#female-summary").text("(" + count_lookup['MALE'] + " out of " + total + ")");
+
+        });
+      });
+    });
+    $(function(){
+      $(".contact-field-graph-registration").each(function(){
+        var contactField = $(this).attr("data-contact-field");
+        $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+          var results = result[0];
+          var categories = [];
+          var data = [];
+
+          var months = ['JAN', 'FEB', 'MAR', 'APR', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+          var total = 0;
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            total += category.count;
+          }
+
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            label = Date.parse(category.label);
+            categories.push(label);
+
+            data.push({ name:label,  y: category.count })
+          }
+
+          console.log(categories);
+          console.log(data);
+
+          $('#graph-contact-field-registration-placeholder').hide();
+          $('#graph-contact-field-registration').highcharts({
+            chart: {
+                type: 'area'
+            },
+            credits: {
+              enabled: false
+            },
+            legend: {
+              enabled: false
+            },
+            title: {
+                text: null
+            },
+            subtitle: {
+                text: null
+            },
+            xAxis: {
+              categories: categories,
+              type: 'datetime',
+              labels : {
+                  step: 4,
+                  formatter: function () {
+
+                     return months[ new Date(this.value).getMonth()];
+                  }
+              }
+            },
+            yAxis: {
+                min: 0,
+                gridLineColor: '{{ org|config:"primary_color" }}',
+                gridLineWidth: 0.3,
+                labels: {
+                  style: {
+                    color:'{{ org|config:"primary_color" }}',
+                    fontFamily: "Times New Roman",
+                    fontSize: 14
+                    }
+                },
+                title: {
+                    text: 'Registered',
+                    offset: 0,
+                    x: -60,
+                    y: 30,
+                    align: 'low',
+                    rotation: 0,
+                    style: {
+                       color:'{{ org|config:"primary_color" }}',
+                    }
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                     return '<table><tr><td style="padding:0; font-size: 24px; font-family:SharpSansBold; "><b>'+ this.y + '</b></td></tr></table><span style="font-size:14px; font-family:Times New Roman">(Week of ' + Highcharts.dateFormat('%e/%m', this.x) +')</span>';
+                },
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                area: {
+                    color: '{{ org|config:"primary_color"}}',
+                    fillOpacity: 0.2,
+                    pointPadding: 0.1,
+                    borderWidth: 0
+                }
+            },
+            series: [ {name: 'registration' , data: data } ]
+            });
+          });
+        });
+      });
+      $(function() {
+        $(".contact-field-graph-occupation").each(function(){
+          var contactField = $(this).attr('data-contact-field');
+          $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+            var results = result[0];
+            var data = [];
+            var categories = [];
+
+            var total = 0;
+            for (i=0; i<results.categories.length; i++){
+              category = results.categories[i];
+             total += category.count;
+            }
+
+            var percentage_lookup = {};
+
+            for (i=0; i<results.categories.length; i++){
+              category = results.categories[i];
+              label = category.label.trim();
+              categories.push('');
+              categories.push(label);
+
+              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+              percentage_lookup[label] = Math.round(percentage);
+
+              data.push({ name:"", y: 0});
+              data.push({ name:label,  y: Math.round(percentage) });
+            }
+
+            $('#graph-contact-field-occupation-placeholder').hide();
+            $('#graph-contact-field-occupation').highcharts({
+            chart: {
+                type: 'areaspline',
+                spacingTop: 30
+            },
+            credits: {
+              enabled: false
+            },
+            legend: {
+              enabled: false
+            },
+            title: {
+                text: null
+            },
+            subtitle: {
+                text: null
+            },
+            xAxis: {
+              categories: categories,
+              tickWidth: 0,
+              labels : {
+                  enabled: false,
+              }
+            },
+            yAxis: {
+                min: 0,
+                gridLineWidth: 0,
+                labels: {
+                  enabled: false
+                },
+                title: {
+                    text: null
+                }
+            },
+            tooltip: {
+                enabled: false
+            },
+            plotOptions: {
+                areaspline: {
+                    color: '{{ org|config:"primary_color"}}',
+                    fillOpacity: 1,
+                    pointPadding: 0.1,
+                    borderWidth: 0,
+                    marker: {
+                      enabled: false,
+                      states: {
+                        hover: {
+                          enabled: false
+                      }
+                      }
+                    },
+                    dataLabels: {
+                      enabled: true,
+                      useHTML: true,
+                      y: 3,
+                      crop: false,
+                      overflow: "none",
+                      formatter: function() {
+                        if (this.y > 0) {
+                        return '<div style="font-family: SharpSansBold;text-align: center; width: 80px; line-height: 100%; font-size: 24px;color:{{ org|config:"primary_color"}};">'+ this.y + '%</div><div style="text-align:center; width: 80px; line-height: 120%; font-size: 14px; font-family:Times New Roman; white-space: normal;">' + this.x.toUpperCase() + '</div><div style="height: 35px;width: 2px;margin-left: auto;margin-right: auto; border-left: 1px solid; border-color:{{ org|config:"primary_color"}};"></div>'
+
+                        }
+                        else return '';
+                      }
+                    }
+                }
+            },
+            series: [ {name: null , data: data } ]
+            });
+          });
+        });
+      });
+
+- block extra-style
+  - load_qbs request.org 'ureporters'
+  {{ block.super }}
+  :css
+   .hero-container {
+      {% for d_block in ureporters|slice:":1" %}
+      {% thumbnail d_block.image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }
+
+    .ureport-location-map  {
+      height: 500px;
+      width: 100%;
+    }
+
+    .leaflet-container {
+      background: #fff;
+    }
+
+    .top-color {
+      color: {{ org|config:"primary_color"}};
+    }
+
+    #graph-contact-field-age {
+      height: 200px;
+    }
+
+    #graph-contact-field-gender {
+      height: 200px;
+    }
+
+    #graph-contact-field-age-placeholder {
+      min-height: 200px;
+      padding-top: 50px;
+    }

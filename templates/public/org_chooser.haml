@@ -1,0 +1,22 @@
+-extends "frame.haml"
+
+-block navbar
+  &nbsp;
+
+-block footer
+  &nbsp;
+
+-block content
+  -if not orgs
+    %h2 No sites installed.
+    %a{ href:"{% url 'orgs.org_create' %}"} Add an organization to get started.
+
+  -else
+    %h2 Select your site:
+    %ul.org-chooser
+    -for org in orgs
+      %a{ href:"{{org.host}}" }
+        %li= org.name
+
+
+

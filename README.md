@@ -1,4 +1,4 @@
-ureport
-=======
+dash 
+====
 
-Dashboard module for UReport working against RapidPro data
+Dashboard framework for TextIt apps

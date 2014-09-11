@@ -1,0 +1,161 @@
+/* fonts */
+
+div.jqcloud {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 10px;
+  line-height: normal;
+}
+
+div.jqcloud a {
+  font-size: inherit;
+  text-decoration: none;
+}
+
+div.jqcloud span.w10 {
+  font-size: 400%;
+}
+
+div.jqcloud span.w9 {
+  font-size: 400%;
+}
+
+div.jqcloud span.w8 {
+  font-size: 350%;
+}
+
+div.jqcloud span.w7 {
+  font-size: 300%;
+}
+
+div.jqcloud span.w6 {
+  font-size: 250%;
+}
+
+div.jqcloud span.w5 {
+  font-size: 200%;
+}
+
+div.jqcloud span.w4 {
+  font-size: 150%;
+}
+
+div.jqcloud span.w3 {
+  font-size: 100%;
+}
+
+div.jqcloud span.w2 {
+  font-size: 100%;
+}
+
+div.jqcloud span.w1 {
+  font-size: 100%;
+}
+
+/* colors */
+
+div.jqcloud {
+  color: #09f;
+}
+
+div.jqcloud a {
+  color: inherit; }
+
+div.jqcloud a:hover {
+  color: #0df; }
+
+div.jqcloud a:hover {
+  color: #0cf; }
+
+div.jqcloud span.w10 {
+  background-color: #08306b;
+  color: #fff;
+  height: 200px;
+  width: 200px;
+  line-height: 200px;
+}
+
+div.jqcloud span.w9 {
+  background-color: #08519c;
+  color: #fff;
+  height: 190px;
+  width: 190px;
+  line-height: 190px;
+}
+
+
+div.jqcloud span.w8 {
+  background-color: #2171b5;
+  color: #fff;
+  height: 180px;
+  width: 180px;
+  line-height: 180px;
+}
+
+div.jqcloud span.w7 {
+  background-color: #4292c6;
+  color: #fff;
+  height: 170px;
+  width: 170px;
+  line-height: 170px;
+}
+
+div.jqcloud span.w6 {
+  background-color: #6baed6;
+  color: #fff;
+  height: 160px;
+  width: 160px;
+  line-height: 160px;
+}
+
+div.jqcloud span.w5 {
+  background-color: #9ecae1;
+  color: #fff;
+  height: 140px;
+  width: 140px;
+  line-height: 140px;
+}
+
+div.jqcloud span.w4 {
+  background-color: #c6dbef;
+  color: #08306b;
+  height: 120px;
+  width: 120px;
+  line-height: 120px;
+}
+
+div.jqcloud span.w3 {
+  background-color: #deebf7;
+  color: #08306b;
+  height: 100px;
+  width: 100px;
+  line-height: 100px;
+}
+
+div.jqcloud span.w2 {
+  background-color: #f7fbff;
+  color: #08306b;
+  height: 80px;
+  width: 80px;
+  line-height: 80px;
+}
+
+div.jqcloud span.w1 {
+  background-color: #fafcff;
+  color: #08306b;
+  height: 60px;
+  width: 60px;
+  line-height: 60px;
+}
+
+/* layout */
+
+div.jqcloud {
+  overflow: hidden;
+  position: relative;
+}
+
+div.jqcloud span {
+  border-radius: 100%;
+  text-align: center;
+  border: 1px #eee solid;
+}

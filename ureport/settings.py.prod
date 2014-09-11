@@ -1,0 +1,161 @@
+# import our default settings
+from settings_common import *
+import os
+
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+COMPRESS_ENABLED = True
+
+HOSTNAME = 'nigeria.ureport.in'
+ALLOWED_HOSTS = ['.ureport.in']
+SESSION_COOKIE_DOMAIN = 'ureport.in'
+SESSION_COOKIE_SECURE = True
+
+# these guys will get email from sentry
+ADMINS = (
+   ('Nyaruka Ops', 'ops@nyaruka.com'),
+)
+
+# set the mail settings, we send through gmail
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '${gmail_user}'
+DEFAULT_FROM_EMAIL = '${gmail_user}'
+EMAIL_HOST_PASSWORD = '${gmail_password}'
+EMAIL_USE_TLS = True
+
+MANAGERS = ADMINS
+
+# add gunicorn
+INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat',)
+
+# Set your DSN value
+RAVEN_CONFIG = {
+    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN')
+}
+
+# we store files on S3 on prod boxes
+AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME='dl-ureport'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+# these two settings will cause our aws files to never expire
+# see http://developer.yahoo.com/performance/rules.html#expires
+AWS_QUERYSTRING_AUTH = False
+AWS_HEADERS = {
+'Expires': 'Wed, 1 Jan 2020 20:00:00 GMT',
+'Cache-Control': 'max-age=86400',
+}
+
+# static dir is different for prod
+STATIC_URL = '/sitestatic/'
+COMPRESS_URL = '/sitestatic/'
+
+# our media is all on S3
+MEDIA_URL = 'http://dl-ureport.s3.amazonaws.com/'
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+API_ENDPOINT = 'https://api.rapidpro.io'
+SITE_HOST_PATTERN = 'https://%s.ureport.in'
+
+# Set your production database settings here
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ureport',
+        'USER': 'ureport',
+        'PASSWORD': 'nyarukaglue',
+        'HOST': 'rds-internal.ureport.in',
+        'PORT': '5432', 
+        'CONN_MAX_AGE': 60,
+        'OPTIONS': {
+        }  
+    }
+}
+
+# no debug toolbar in prod
+MIDDLEWARE_CLASSES = (
+    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'reversion.middleware.RevisionMiddleware',
+    'smartmin.middleware.AjaxRedirect',
+    'django.middleware.locale.LocaleMiddleware',
+    'dash.orgs.middleware.SetOrgMiddleware',
+)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}
+
+# use our cache backend for sessions
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+SESSION_CACHE_ALIAS = "default"
+
+# trust connections that are coming in on this protocol
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
+
+# compress arguments
+COMPRESS_CSS_HASHING_METHOD = 'content'
+COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE_CONTEXT = dict(STATIC_URL=STATIC_URL, base_template='frame.html', debug=False, testing=False)
+
+REDIS_HOST = 'redis-internal.ureport.in'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.cache.RedisCache',
+        'LOCATION': '%s:6379:1' % REDIS_HOST,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+        }
+    }
+}

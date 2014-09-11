@@ -1,0 +1,26 @@
+-e git+https://github.com/nyaruka/smartmin.git@to_django_1_7#egg=smartmin-dev
+-e git+https://github.com/django/django.git@stable/1.7.x#egg=django
+celery
+coverage
+django-celery
+django-compressor
+django-debug-toolbar
+django-digest
+django-guardian
+django-nose
+django-reversion
+django-rosetta
+django-storages
+boto
+Pillow
+celery-with-redis
+gunicorn
+nose
+pisa
+raven
+django-redis
+psycopg2
+xlutils
+mock
+sorl-thumbnail==11.12.1b
+hamlpy

@@ -1,0 +1,118 @@
+- extends "public/poll_base.html"
+
+- load thumbnail
+
+- block question-render
+  .poll-graph{ data-question: "{{ question.id }}", id: "graph-{{ question.id }}" }
+
+-block extra-script
+  <script src="{{ STATIC_URL }}js/highcharts.js"></script>
+  :javascript
+    $(function(){
+
+      $(".poll-graph").each(function(){
+        var question = $(this).attr("data-question");
+        $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
+          var results = result[0];
+          var categories = [];
+          var data = [];
+
+          var total = 0;
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            total += category.count;
+          }
+
+          // set the height of the chart according to our number of questions
+          $("#graph-" + question).height(results.categories.length * 60);
+
+
+          var percentage_lookup = {};
+          var colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            label = category.label.trim().toUpperCase();
+            categories.push(label);
+
+            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+            percentage_lookup[label] = Math.round(percentage);
+
+            data.push({ y: percentage, color: colors[i%colors.length]})
+          }
+
+          console.log(result);
+          console.log("percentages");
+          console.log(percentage_lookup);
+
+          $("#graph-" + question).highcharts({
+            title: null,
+            chart: {
+              type: 'bar',
+              animation: false,
+            },
+            legend: {
+              enabled: false
+            },
+            credits: {
+              enabled: false
+            },
+            xAxis: {
+              categories: categories,
+              opposite: true,
+              labels: {
+                enabled: true,
+                formatter: function(){ return "" + percentage_lookup[this.value] + " %"; },
+                align: 'right',
+                x: -5,
+                style: {
+                  fontSize: '30px',
+                  color: colors[0]
+                }
+              },
+              lineColor: 'transparent',
+              minorTickLength: 0,
+              tickLength: 0
+            },
+            tooltip: {
+              enabled: false
+            },
+            series: [{
+              data: data,
+              pointWidth: 36
+            }],
+            yAxis: {
+              max: 100,
+              gridLineColor: 'transparent',
+              labels: { enabled: false },
+              title: { text: null }
+            },
+            plotOptions: {
+              series: {
+                animation: false,
+                dataLabels: {
+                  inside: true,
+                  align: 'left',
+                  formatter: function(){ return this.key; },
+                  enabled: true,
+                  color: "#ccc",
+                  x: 5
+                }
+              }
+            }
+          });
+          console.log("categories: " + categories);
+          console.log("data: " + data);
+        });
+      });
+    });
+
+- block extra-style
+  {{ block.super }}
+  :css
+    .poll-graph {
+      height: 400px;
+    }
+
+    .highcharts-xaxis-labels {
+      font-size: 36px;
+    }

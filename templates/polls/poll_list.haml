@@ -1,0 +1,7 @@
+-extends "smartmin/list.html"
+-load i18n
+
+-block table-buttons
+  -if view.add_button
+    <a class="btn btn-primary pull-right" href="./create/">{% trans "Add" %}</a>
+

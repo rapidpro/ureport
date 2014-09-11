@@ -1,0 +1,35 @@
+- extends "smartmin/list.html"
+
+- load thumbnail smartmin
+
+- block table
+  .row
+    - for obj in object_list
+      .col-md-3
+        .category-obj
+          - for field in fields
+            - if field in link_fields
+              %a{href:"{% get_field_link field obj %}"}
+                .category-name
+                  {% get_value obj field %}
+                .category-image
+                  {% thumbnail obj.image "640x360" crop="top" as im %}
+                  <img width="100%" src="{{im.url}}" />
+                  {% empty %}
+                  <img width="100%" src="{{ STATIC_URL }}img/missing-image.png">
+                  {% endthumbnail %}
+
+- block extra-style
+  {{ block.super }}
+  :css
+    .category-obj{
+      margin-bottom: 25px;
+    }
+
+    .category-name {
+      text-align: center;
+      color: #aaaaaa;
+      text-decoration: none;
+    }
+
+

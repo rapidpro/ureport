@@ -1,0 +1,89 @@
+-extends "public/poll_base.html"
+
+-load thumbnail compress
+
+-block question-render
+  .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
+
+-block extra-style
+  {{ block.super }}
+
+  :css
+    .poll-map {
+      height: 500px;
+      width: 100%;
+    }
+
+    .admin-name {
+
+    }
+
+    .leaflet-container {
+      background: #fff;
+    }
+
+    .leaflet-container .legend {
+      line-height: 13px;
+      color: #555;
+      font-size:10px;
+    }
+
+    .leaflet-container .legend i {
+      width: 13px;
+      height: 13px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+
+    .leaflet-container .info {
+      color: #333;
+    }
+
+    .top-border {
+      border-top: 1px solid #333;
+      margin-top: 10px;
+    }
+
+    .info-count {
+      font-size: 24px;
+      padding-right: 10px;
+      line-height: 100%;
+    }
+
+    .info-tiny {
+      font-size: 9px;
+      padding-right: 10px;
+      line-height: 80%;
+    }
+
+    .info-percentage {
+      font-size: 36px;
+      line-height: 100%;
+    }
+
+    .top-color {
+      color: rgb(0,104,55);
+    }
+
+    .other-color {
+      color: rgb(165,0,38);
+    }
+
+
+-block extra-script
+  {{ block.super }}
+  {% compress js %}
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/locations.coffee" />
+  {% endcompress %}
+
+  :javascript
+    $(function(){
+      $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
+        $(".poll-map").each(function(){
+          var question = $(this).attr("data-question");
+          window.initMap('map-' + question, boundaries, question);
+        });
+      });
+    });
+}
