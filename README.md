@@ -3,7 +3,7 @@ dash
 
 Dashboard framework for TextIt apps
 
-** Note that this app is still in heavy development, specifically the migrations will likely reset in the next week, so if you fork keep that in mind. **
+Note that this app is still in heavy development, specifically the migrations will likely reset in the next week, so if you fork keep that in mind.
 
 Getting Started
 ================
