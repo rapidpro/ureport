@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^manage/', include('dash.dashblocks.urls')),
     url(r'^manage/', include('dash.stories.urls')),
     url(r'^manage/', include('ureport.polls.urls')),
-    url(r'^manage/', include('ureport.categories.urls')),
+    url(r'^manage/', include('dash.categories.urls')),
     url(r'^manage/', include('ureport.news.urls')),
     url(r'^users/', include('dash.users.urls')),
 )

@@ -1,6 +1,6 @@
 - extends "public_base.html"
 
--load compress ureport dashblocks thumbnail
+-load compress ureport dashblocks thumbnail i18n
 
 - block hero
   - load_qbs request.org 'ureporters'
@@ -13,11 +13,12 @@
             .col-md-7
               .hero-dark-content
                 .hero-title.primary-bg-color
-                  U-REPORTERS IN {{org.name|upper}}
+                  - trans "U-REPORTERS IN"
+                  {{org.name|upper}}
                 .hero-description
-                  {{ d_block.short_content_teaser|safe }}
+                  {{ d_block.summary|safe }}
                 .hero-info
-                  Scroll to Learn more
+                  - trans "Scroll to Learn more"
 
 
   - block banner
@@ -28,7 +29,7 @@
   - for d_block in ureporters|slice:":1"
     .section
       %h1.level-1-title
-        WHO WE ARE
+        - trans "WHO WE ARE"
       .level-1-title-description.secondary-color
       .ureporters-text
         {{d_block.content|safe}}
@@ -36,14 +37,14 @@
     %hr.aaa
     .section
       %h1.level-1-title
-        U-REPORTER STATISTICS
+        - trans "U-REPORTER STATISTICS"
       .level-1-title-description.secondary-color
       .row
         .col-md-7
           .white-card-container
             .white-card-inner
               .white-card-title.primary-bg-color
-                AGE
+                - trans "AGE"
               .white-card-content.white-card-padding
                 .contact-field-graph-age{ data-contact-field:'{{org|config:"born_label"}}', id: "graph-contact-field-age"}
                   #graph-contact-field-age-placeholder.loading-placeholder
@@ -52,7 +53,7 @@
           .white-card-container
             .white-card-inner
               .white-card-title.primary-bg-color
-                GENDER
+                - trans "GENDER"
               .white-card-content.white-card-padding
                 .contact-field-graph-gender{ data-contact-field:'{{org|config:"gender_label"}}', id: "graph-contact-field-gender"}
                   %table.ureporter-gender{style:"width:100%"}
@@ -79,7 +80,7 @@
           .white-card-container
             .white-card-inner
               .white-card-title.primary-bg-color
-                WHERE ARE YOU REPORTERS FROM?
+                - trans "WHERE ARE U-REPORTERS FROM?"
               .white-card-content.white-card-padding
                 .ureport-location-map{data-contact-field:'{{org|config:"gender_label"}}', id: "ureport-location-map-id"}
                   #ureport-location-map-id-placeholder.loading-placeholder
@@ -91,7 +92,7 @@
           .white-card-container
             .white-card-inner
               .white-card-title.primary-bg-color
-                REGISTRATION RATE: IN THE PAST 6 MONTHS
+                - trans "REGISTRATION RATE: IN THE PAST 6 MONTHS"
               .white-card-content.white-card-padding
                 .contact-field-graph-registration{ data-contact-field:'{{org|config:"registration_label"}}', id: "graph-contact-field-registration"}
                   #graph-contact-field-registration-placeholder.loading-placeholder
@@ -101,7 +102,7 @@
           .white-card-container
             .white-card-inner
               .white-card-title.primary-bg-color
-                OCCUPATION: TOP 9 MOST MENTIONED
+                - trans "OCCUPATION: TOP 9 MOST MENTIONED"
               .white-card-content.white-card-padding
                 .contact-field-graph-occupation{ data-contact-field:'{{org|config:"occupation_label"}}', id: "graph-contact-field-occupation"}
                   #graph-contact-field-occupation-placeholder.loading-placeholder
@@ -162,8 +163,6 @@
             }
           }
 
-          console.log(data);
-
           $('#graph-contact-field-age-placeholder').hide();
           $('#graph-contact-field-age').highcharts({
             chart: {
@@ -210,6 +209,9 @@
                     borderWidth: 0,
                     dataLabels:  {
                       enabled: true,
+                      style : {
+                        fontFamily: "SharpSansBold"
+                      },
                       format: '<b>{point.y:.0f}%</b>'
                     }
                 }
@@ -241,18 +243,25 @@
             label = category.label.trim().toUpperCase();
             categories.push(label);
 
-            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-            percentage_lookup[label] = Math.round(percentage);
-            count_lookup[label] = category.count
-
+            if (total > 0){
+              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+              percentage_lookup[label] = Math.round(percentage);
+              count_lookup[label] = category.count
+            }
           }
 
-          $("#male-percentage").text(percentage_lookup['MALE'] + "%");
-          $("#male-summary").text("(" + count_lookup['MALE'] + " out of " + total + ")");
+          male_label = "{{org|config:"male_label"|upper }}";
+          female_label = "{{org|config:"female_label"|upper }}";
 
-          $("#female-percentage").text(percentage_lookup['FEMALE'] + "%");
-          $("#female-summary").text("(" + count_lookup['MALE'] + " out of " + total + ")");
+          if (male_label in percentage_lookup){
+            $("#male-percentage").text(percentage_lookup[male_label] + "%");
+            $("#male-summary").text(window.intcomma(count_lookup[male_label]));
+          }
 
+          if (female_label in percentage_lookup){
+            $("#female-percentage").text(percentage_lookup[female_label] + "%");
+            $("#female-summary").text(window.intcomma(count_lookup[female_label]));
+          }
         });
       });
     });
@@ -279,9 +288,6 @@
 
             data.push({ name:label,  y: category.count })
           }
-
-          console.log(categories);
-          console.log(data);
 
           $('#graph-contact-field-registration-placeholder').hide();
           $('#graph-contact-field-registration').highcharts({
@@ -387,7 +393,7 @@
             $('#graph-contact-field-occupation').highcharts({
             chart: {
                 type: 'areaspline',
-                spacingTop: 30
+                spacingTop: 75
             },
             credits: {
               enabled: false
@@ -432,7 +438,7 @@
                       states: {
                         hover: {
                           enabled: false
-                      }
+                        }
                       }
                     },
                     dataLabels: {

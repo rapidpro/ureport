@@ -1,6 +1,6 @@
 - extends "public_base.html"
 
-- load thumbnail humanize ureport compress
+- load thumbnail humanize ureport compress i18n
 
 - block hero
   .hero-container
@@ -9,77 +9,86 @@
         .row
           .col-sm-7
             .hero-dark-content
-              .hero-title.primary-bg-color
-                CURRENT POLL
-              .hero-description
-                {{ latest_poll.title }}
+              - if latest_poll
+                .hero-title.primary-bg-color
+                  -trans "CURRENT POLL"
+                .hero-description
+                  {{ latest_poll.title }}
 
-    .hero-stats-container
-      .container
-        .row
-          .col-sm-offset-7.col-sm-5
-            .index-current-poll-stats.card.card-padding
-              .hr-header.primary-color RESPONSE RATE
-              .stats
-                {{ latest_poll.response_percentage }}%
-                %span.stats-small
-                  ({{ latest_poll.completed_runs|intcomma }} Responded out of {{ latest_poll.runs|intcomma }})
-
-              - with regions=latest_poll.best_and_worst
-                - if regions
-                  .hr-header.primary-color RESPONDER'S RATE BY LOCATION
-                  .stats
-                    %table.regions
-                      %tr
-                        %td.region-key{ colspan: "3" }
-                          Most responded
-
-                        %td.region-key{ colspan: "2"}
-                          Least responded
-
-                      %tr{ style:"postion: relative" }
-                        -for region in regions
-                          %td.region-bar-cell
-                            .region-bar-container{ class: "{% if forloop.last %}last-region{% endif %}" }
-                              .region-percentage
-                                {{ region.percent }}%
-
-                              -if forloop.counter > 3
-                                .region-bar-light{style:"height:{{ region.percent }}%;"}
-                              .region-bar.primary-bg-color{style:"height:{{ region.percent }}%;"}
-
-                      %tr
-                        -for region in regions
-                          %td.region-name{ class: "{% if forloop.last %}last-region{% endif %}" }
-                            {{ region.boundary }}
-
-                      %tr
-                        -for region in regions
-                          %td.region-registered{ class: "{% if forloop.last %}last-region{% endif %}" }
-                            %div {{ region.responded|intcomma }} of {{ region.total|intcomma }}
-
-              - if trending_words
-                .hr-header.primary-color TRENDING WORDS
+    - if latest_poll
+      .hero-stats-container
+        .container
+          .row
+            .col-sm-offset-7.col-sm-5
+              .index-current-poll-stats.card.card-padding
+                .hr-header.primary-color
+                  - trans "RESPONSE RATE"
                 .stats
-                  {% for word in trending_words|slice:"5"%}{{ word.strip }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                  {{ latest_poll.response_percentage }}%
+                  %span.stats-small
+                    ({{ latest_poll.completed_runs|intcomma }}
+                    - trans "Responded out of"
+                    {{ latest_poll.runs|intcomma }})
 
-              - with f_responses=latest_poll.responses|slice:":4"
-                - if f_responses
-                  .hr-header.primary-color FEATURED RESPONSES
+                - with regions=latest_poll.best_and_worst
+                  - if regions
+                    .hr-header.primary-color
+                      - trans "RESPONDER'S RATE BY LOCATION"
+                    .stats
+                      %table.regions
+                        %tr
+                          %td.region-key{ colspan: "3" }
+                            - trans "Most responded"
+
+                          %td.region-key{ colspan: "2"}
+                            - trans "Least responded"
+
+                        %tr{ style:"postion: relative" }
+                          -for region in regions
+                            %td.region-bar-cell
+                              .region-bar-container{ class: "{% if forloop.last %}last-region{% endif %}" }
+                                .region-percentage
+                                  {{ region.percent }}%
+
+                                -if forloop.counter > 3
+                                  .region-bar-light{style:"height:{{ region.percent }}%;"}
+                                .region-bar.primary-bg-color{style:"height:{{ region.percent }}%;"}
+
+                        %tr
+                          -for region in regions
+                            %td.region-name{ class: "{% if forloop.last %}last-region{% endif %}" }
+                              {{ region.boundary }}
+
+                        %tr
+                          -for region in regions
+                            %td.region-registered{ class: "{% if forloop.last %}last-region{% endif %}" }
+                              %div {{ region.responded|intcomma }} of {{ region.total|intcomma }}
+
+                - if trending_words
+                  .hr-header.primary-color
+                    - trans "TRENDING WORDS"
                   .stats
-                    #current-poll-featured-response-carousel.carousel.slide{data-ride:"carousel"}
-                      %ol.carousel-indicators
-                        - for response in f_responses
-                          %li{data-target:"#current-poll-featured-response-carousel", data-slide-to:"{{forloop.counter}}", class:"{% if forloop.first %}active{% endif %}"}
-                            {{forloop.counter}}
+                    {% for word in trending_words|slice:"5"%}{{ word.strip }}{% if not forloop.last %}, {% endif %}{% endfor %}
 
-                      .carousel-inner
-                        - for response in f_responses
-                          .item{ class:"{% if forloop.first %}active{% endif %}"}
-                            response.message
+                - with f_responses=latest_poll.get_featured_responses|slice:":4"
+                  - if f_responses
+                    .hr-header.primary-color
+                      - trans "FEATURED RESPONSES"
+                    .stats
+                      #current-poll-featured-response-carousel.carousel.slide{data-ride:"carousel"}
+                        %ol.carousel-indicators
+                          - for response in f_responses
+                            %li{data-target:"#current-poll-featured-response-carousel", data-slide-to:"{{forloop.counter}}", class:"{% if forloop.first %}active{% endif %}"}
+                              {{forloop.counter}}
 
-            %a.hero-link.primary-bg-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
-              VIEW FULL RESULT &#8594;
+                        .carousel-inner
+                          - for response in f_responses
+                            .item{ class:"{% if forloop.first %}active{% endif %}"}
+                              {{ response.message }}
+
+              %a.hero-link.primary-bg-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
+                - trans "VIEW FULL RESULT"
+                &#8594;
     
   - block banner
     {{ block.super }}
@@ -89,13 +98,14 @@
 - block content
   .section
     %h1.level-1-title
-      U-REPORTERS IN NIGERIA
+      - trans "U-REPORTERS IN"
+      {{ org.name|upper }}
     .level-1-title-description.secondary-color
     .card.card-padding
       .row
         .col-md-4
           .hr-header.primary-color
-            TOTAL # OF U-REPORTERS
+            - trans "TOTAL # OF U-REPORTERS"
           .reporters-count
             - with reporters=org|reporter_count
               - if reporters
@@ -105,13 +115,13 @@
 
           - if most_active_regions
             .hr-header.primary-color
-              4 MOST ACTIVE REGIONS
+              - trans "4 MOST ACTIVE REGIONS"
             .most-active-regions
               {% for region in most_active_regions|slice:"4" %}{{ region }}{% if not forloop.last %}, {% endif %}{% endfor %}
 
         .col-md-4
           .hr-header.primary-color
-            RATE BY GENDER
+            - trans "RATE BY GENDER"
           .gender-stats{ data-contact-field:'{{org|config:"gender_label"}}', id: "gender-stats"}
             %table.gender
               %tbody
@@ -136,14 +146,14 @@
 
         .col-md-4
           .hr-header.primary-color
-            RATE BY AGE
+            - trans "RATE BY AGE"
           .age-stats{ data-contact-field:'{{org|config:"born_label"}}', id: "age-chart"}
 
 
   %hr.aaa
   .section
     %h1.level-1-title
-      WHAT U-REPORTERS ARE SAYING
+      - trans "WHAT U-REPORTERS ARE SAYING"
     .level-1-title-description.secondary-color
 
     #brick-container
@@ -151,17 +161,18 @@
         .brick.size11{data-priority:"{% if forloop.counter == 1 %}4{% else %}{% cycle '3' '2' %}{% endif %}"}
           .brick-inner
             .brick-title.primary-bg-color
-              FEATURED VIDEO
+              - trans "FEATURED VIDEO"
             .brick-content{style:"padding: 0px; width: 100%; height:325px; bottom:40px;"}
               %iframe{ width:"100%", height:"100%", src:"//www.youtube.com/embed/{{ vid.video_id }}?rel=0&autohide=1&showinfo=0", frameborder:"0"}
             %a.brick-link.primary-bg-color{ href:"http://www.youtube.com/watch?v={{ vid.video_id }}"}
-              WATCH MORE VIDEOS &#8594;
+              - trans "WATCH MORE VIDEOS"
+              &#8594;
 
       {% if org|config:"featured_state" and False %}
       .brick.size21{data-priority:"5"}
         .brick-inner
           .brick-title.primary-bg-color
-            FEATURED REGION
+            - trans "FEATURED REGION"
           .brick-content{style:"bottom:0;"}
             .brick-align{style:"padding: 40px 10px;"}
               - include "public/featured_region.html"
@@ -173,11 +184,25 @@
           .brick-title.facebook-bg-color
             FACEBOOK
           .brick-content
-            .brick-align{style:"padding: 40px 0px 10px 0px;"}
-              .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"100%", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+            .brick-align{style:"padding: 40px 0px 10px 0px; max-width:98%; overflow:hidden;"}
+              .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
         %a.facebook-bg-color.brick-link{ href:'{{ org|config:"facebook_page_url" }}' }
-          VIEW MORE STORIES ON FACEBOOK &#8594;
+          - trans "VIEW MORE STORIES ON FACEBOOK"
+          &#8594;
 
+      {% endif %}
+
+      {% if org|config:"instagram_username" %}
+      .brick.size12{data-priority:"3"}
+        .brick-inner
+          .brick-title.instagram-bg-color
+            INSTAGRAM
+          .brick-content
+            .brick-align{style:"padding: 0px"}
+              %iframe{ src:'http://widget.websta.me/in/{{ org|config:"instagram_username"}}/?s=160&w=2&h=4&b=0&p=-5px', allowtransparency:"true", frameborder:"0", scrolling:"no", style:"border:none;overflow:scroll;height:650px;width: 100%;"}
+        %a.instagram-bg-color.brick-link{ href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
+          - trans "VIEW MORE ON INSTAGRAM"
+          &#8594;
       {% endif %}
 
       {% if  org|config:"twitter_user_widget" and org|config:"twitter_handle" %}
@@ -193,37 +218,26 @@
               %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-widget-id:'{{ org|config:"twitter_user_widget" }}', width:"340px", height:"600px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
           %a.twitter-bg-color.brick-link{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
-            READ MORE TWEETS ON TWITTER &#8594;
+            - trans "READ MORE TWEETS ON TWITTER"
+            &#8594;
       {% endif %}
 
       - if news
         .brick.size12{data-priority:"4"}
           .brick-inner
             .brick-title.primary-bg-color
-              NEWS FEED
+              - trans "NEWS FEED"
             .brick-content
-              .brick-align
+              .brick-align.news-list-align
                 .brick-news-list
-                  - for item in news|slice:"3"
-                    .news-item
-                      .news-item-title.primary-color
-                        {{ item.title }}
-                        .news-item-date.pull-right
-                          {{ item.created_on|date }}
-                      .news-item-description
-                        {{ item.description|truncatechars:"300" }}
-                      .news-item-link
-                        %a{href:"{{item.link}}"}
-                          Read This Story &#8594;
-                    -if forloop.first or not forloop.last
-                      %hr.aaa
+
 
       - for story in stories
         - if forloop.counter < 3
           .brick.size12{data-priority:"{% cycle '4' '3' '2' %}"}
             .brick-inner
               .brick-title.primary-bg-color.float-left
-                U-REPORTER STORY
+                - trans "U-REPORTER STORY"
               .brick-content
                 .brick-long-story-image
                   - if story.get_image
@@ -241,12 +255,13 @@
                     {{ story.summary|linebreaksbr }}
 
               %a.brick-link.primary-bg-color{ href:"{% url 'public.story_read' story.pk %}" }
-                READ FULL STORY &#8594;
+                - trans "READ FULL STORY"
+                &#8594;
         - else
           .brick.size11{data-priority:"{% cycle '4' '3' '2' %}"}
             .brick-inner
               .brick-title.primary-bg-color.float-left
-                U-REPORTER STORY
+                - trans "U-REPORTER STORY"
               .brick-content{style:"bottom:0;"}
                 .brick-short-story-image
                   - if story.get_image
@@ -259,14 +274,15 @@
               .brick-short-story-title
                 {{ story.title|title }}
               %a.brick-link.primary-bg-color{ href:"{% url 'public.story_read' story.pk %}" }
-                READ FULL STORY &#8594;
+                - trans "READ FULL STORY"
+                &#8594;
 
       - if stories|length < 12
         - for ot_story in other_stories|slice:"5"
           .brick.size11{data-priority:"{% cycle '4' '3' '2' %}"}
             .brick-inner
               .brick-title.primary-bg-color.float-left
-                U-REPORTER STORY
+                - trans "U-REPORTER STORY"
 
               .brick-content
                 - if ot_story.get_image
@@ -280,7 +296,8 @@
                   {{ ot_story.title|title }}
 
               %a.brick-link.primary-bg-color{href:"{% url 'public.story_read' ot_story.pk %}"}
-                READ FULL STORY &#8594;
+                - trans "READ FULL STORY"
+                &#8594;
 
       - for poll in recent_polls|slice:"3"
         .brick.size21{data-priority:"{% cycle '4' '3' '2' %}"}
@@ -294,7 +311,9 @@
                   .brick-poll-title
                     {{ poll.get_first_question.title|title }}
                   .brick-poll-response-percentage
-                    {{ poll.response_percentage }}% Response Rate | {{ poll.created_on|date }}
+                    {{ poll.response_percentage }}%
+                    - trans "Response Rate"
+                    | {{ poll.created_on|date }}
 
             .brick-block-half-width
               - if poll.get_featured_responses
@@ -309,7 +328,8 @@
 
 
             %a.brick-link.primary-bg-color{ href: "{% url 'public.poll_read' poll.id %}" }
-              VIEW FULL RESULT &#8594;
+              - trans "VIEW FULL RESULT"
+              &#8594;
 
 
 - block extra-style
@@ -345,11 +365,11 @@
     }
 
     .leaflet-container .info {
-      color: #333;
+      color: #000;
     }
 
     .top-border {
-      border-top: 1px solid #333;
+      border-top: 1px solid #000;
       margin-top: 5px;
     }
 
@@ -400,11 +420,48 @@
   {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/featured_region.coffee" />
   {% endcompress %}
-  {% compress js %}
-  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/resize.coffee" />
-  {% endcompress %}
-
   :javascript
+
+    var newsPage = 1;
+    function loadNews(page) {
+      $.ajax({url:'/news/?page=' + page, dataType:'json'}).done(function(data){
+         for (i=0; i<data.news.length; i++) {
+           newsItem = data.news[i];
+
+           html = '<div class="news-item">';
+           html += '<div class="news-item-title primary-color">';
+           html += newsItem.title;
+           html += '<div class="news-item-date pull-right">';
+           html += newsItem.created_on;
+           html += '</div></div><div class="news-item-description">';
+           html += newsItem.description;
+           html += '</div><div class="news-item-link">';
+           html += '<a href="';
+           html += newsItem.link;
+           html += '">Read This Story &#8594;';
+           html += '</a></div></div><hr class="aaa">';
+
+           $(".brick-news-list").append(html);
+
+      }
+      newsPage += 1;
+    });
+    }
+
+    $(document).ready(function() {
+      loadNews(newsPage);
+    });
+
+    jQuery(
+      function($) {
+        $('.brick-news-list').bind('scroll', function() {
+          if($(this).scrollTop() + $(this).innerHeight()>=$(this)[0].scrollHeight){
+            loadNews(newsPage);
+          }
+       })
+     }
+   );
+
 
     $(function(){
       $(".brick-poll-chart").each(function(){
@@ -538,16 +595,25 @@
             label = category.label.trim().toUpperCase();
             categories.push(label);
 
-            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-            percentage_lookup[label] = Math.round(percentage);
-            count_lookup[label] = category.count
+            if (total > 0){
+              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+              percentage_lookup[label] = Math.round(percentage);
+              count_lookup[label] = category.count;
+            }
           }
 
-          $("#male-percentage").text(percentage_lookup['MALE'] + "%");
-          $("#male-summary").text("(" + count_lookup['MALE'] + " out of " + total + ")");
+          male_label = "{{org|config:"male_label"|upper }}";
+          female_label = "{{org|config:"female_label"|upper }}";
 
-          $("#female-percentage").text(percentage_lookup['FEMALE'] + "%");
-          $("#female-summary").text("(" + count_lookup['MALE'] + " out of " + total + ")");
+          if (male_label in percentage_lookup){
+            $("#male-percentage").text(percentage_lookup[male_label] + "%");
+            $("#male-summary").text(window.intcomma(count_lookup[male_label]));
+          }
+
+          if (female_label in percentage_lookup){
+            $("#female-percentage").text(percentage_lookup[female_label] + "%");
+            $("#female-summary").text(window.intcomma(count_lookup[female_label]));
+          }
         });
       });
     });
@@ -631,6 +697,9 @@
                     borderWidth: 0,
                     dataLabels:  {
                       enabled: true,
+                      style: {
+                        fontFamily: "SharpSansBold"
+                      },
                       verticalAlign:"bottom",
                       format: '<b>{point.y:.0f}%</b>'
                     }

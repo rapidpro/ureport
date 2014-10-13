@@ -5,3 +5,24 @@
   -if view.add_button
     <a class="btn btn-primary pull-right" href="./create/">{% trans "Add" %}</a>
 
+-block extra-style
+  :css
+      td.field_created_on {
+        white-space: nowrap;
+      }
+
+      td.field_category {
+        white-space: nowrap;
+      }
+
+      td.field_questions {
+        text-align: center;
+      }
+
+      td.field_featured_responses {
+        text-align: center;
+      }
+
+      td.field_images {
+        text-align: center;
+      }

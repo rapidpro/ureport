@@ -1,6 +1,7 @@
 from django import template
 from django.template import TemplateSyntaxError
 from django.template.defaultfilters import stringfilter
+from django.conf import settings
 
 register = template.Library()
 
@@ -40,15 +41,22 @@ def org_color(org, index):
     if org_colors:
        org_colors = org_colors.split(',')
     else:
-        org_colors = [org.get_config('primary_color').strip(), org.get_config('secondary_color').strip()]
+        if org.get_config('primary_color') and org.get_config('secondary_color'):
+            org_colors = [org.get_config('primary_color').strip(), org.get_config('secondary_color').strip()]
+        else:
+            org_colors = [getattr(settings, 'UREPORT_DEFAULT_PRIMARY_COLOR'), getattr(settings, 'UREPORT_DEFAULT_SECONDARY_COLOR')]
 
     return org_colors[int(index) % len(org_colors)].strip()
 
 
 @register.filter
 def transparency(color, alpha):
+    if not color:
+        return color
+
     if color[0] == '#':
         color = color[1:]
+
     if len(color) != 6:
         raise TemplateSyntaxError("add_transparency expect a long hexadecimal color, got: [%s]" % color)
 

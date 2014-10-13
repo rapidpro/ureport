@@ -1,12 +1,3 @@
-
-intcomma = (value) ->
-  origValue = String(value);
-  newValue = origValue.replace(/^(-?\d+)(\d{3})/, '$1,$2')
-  if origValue == newValue
-    return newValue
-  else
-    return intcomma(newValue)
-
 initMap = (id, geojson, question) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
 
@@ -18,13 +9,12 @@ initMap = (id, geojson, question) ->
 
   info = null
 
-  totalAnswered = 0
-  totalRegistered = 0
+  overallResults = null
+  countryResults = null
 
   topCategory = null
-
-  totalTop = -1
-  totalOther = -1
+  otherCategory = null
+  displayOthers = false
 
   mainLabelName = "All States"
 
@@ -69,7 +59,7 @@ initMap = (id, geojson, question) ->
       upper = breaks[idx]
 
       if lower < 50 and upper < 50
-        category = "Other"
+        category = otherCategory
         upper = 100 - upper
 
         div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i> " + upper + "% " + category + "<br/>"
@@ -115,6 +105,9 @@ initMap = (id, geojson, question) ->
     map.addLayer(states)
     map.fitBounds(states.getBounds(), {paddingTopLeft: [200, 0]})
 
+    overallResults = countryResults
+    info.update()
+
   resetHighlight = (e) ->
     states.resetStyle(e.target)
     info.update()
@@ -123,28 +116,28 @@ initMap = (id, geojson, question) ->
     if (e.target.feature.properties.level == 1)
       map.fitBounds(e.target.getBounds(), {paddingTopLeft: [200, 0]})
       mainLabelName = e.target.feature.properties.name + " (State)"
-      loadBoundary(e.target.feature.properties.id, e.target)
+      loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
     else
       resetBoundaries()
       scale.update()
       mainLabelName = "All States"
 
+  loadBoundary = (boundary, target) ->
+    boundaryId = if boundary then boundary.id else null
 
-
-  loadBoundary = (boundaryId, target) ->
     # load our actual data
-    if not boundaryId
+    if not boundary
       segment = {location:"State"}
+      overallResults = countryResults
     else
       segment = {location:"District", parent:boundaryId}
+      overallResults = boundaryResults[boundaryId]
 
     $.ajax({url:'/pollquestion/' + question + '/results/?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (data) ->
       # calculate the most common category if we haven't already
       if not topCategory
         categoryCounts = {}
-        totalRegistered = 0
-        totalAnswered = 0
 
         for boundary in data
           for category in boundary['categories']
@@ -153,42 +146,72 @@ initMap = (id, geojson, question) ->
             else
               categoryCounts[category.label] = category.count
 
-          totalRegistered += (boundary.set + boundary.unset)
-          totalAnswered += boundary.set
-
-        totalTop = -1
+        topCount = -1
+        numCategories = 0
         for category, count of categoryCounts
-          if count > totalTop
-            totalTop = count
+          numCategories += 1
+          if count > topCount
             topCategory = category
+            topCount = count
 
-        # our total for others
-        totalOther = 0
-        for category, count of categoryCounts
-          if category != topCategory
-            totalOther += count
+        # more than two categories? set our other category label to Other
+        if numCategories > 2
+          otherCategory = "Other*"
+          displayOthers = true
+        else
+          # otherwise, set it to our other category
+          displayOthers = false
+          for category, count of categoryCounts
+            if category != topCategory
+              otherCategory = category
+              break
+
+        countryResults = {percentage: 0, totalTop:0, totalOther:0, set:0, unset:0, others: {}}
+        for boundary in data
+          for category in boundary['categories']
+            if category.label == topCategory
+              countryResults.totalTop += category.count
+            else
+              countryResults.totalOther += category.count
+
+              if category.label of countryResults.others
+                countryResults.others[category.label] += category.count
+              else
+                countryResults.others[category.label] = category.count
+
+          countryResults.set += boundary.set
+          countryResults.unset += boundary.unset
+
+        if countryResults.set + countryResults.unset > 0
+          countryResults.percentage = Math.round((100 * countryResults.totalTop) / countryResults.set)
+
+        overallResults = countryResults
 
         # add our legend
         legend = L.control(position: "bottomright")
         legend.onAdd = (map) -> updateLegend(map, topCategory)
         legend.addTo(map)
 
-      # update our summary total
-      info.update()
-      scale.update(boundaryId)
-
       # now calculate the percentage for each admin boundary
       boundaryResults = {}
       for boundary in data
         # calculate the percentage of our top category vs the others
         boundary.percentage = -1
+        boundary.others = {}
 
         for category in boundary['categories']
           if category.label == topCategory and boundary.set
+            boundary.totalTop = category.count
+            boundary.totalOther = boundary.set - category.count
             boundary.percentage = Math.round((100 * category.count) / boundary.set)
-            break
+          else
+            boundary.others[category.label] = category.count
 
         boundaryResults[boundary['boundary']] = boundary
+
+      # update our summary total
+      info.update()
+      scale.update(boundaryId)
 
       # we are displaying the districts of a state, load the geojson for it
       boundaryUrl = '/boundaries/'
@@ -264,58 +287,53 @@ initMap = (id, geojson, question) ->
   info.update = (props) ->
     html = ""
 
+    label = mainLabelName
+    results = overallResults
+
+    if props? and props.id of boundaryResults
+      label = props.name
+      results = boundaryResults[props.id]
+
     # wait until we have the totalRegistered to avoid division by zero
     if topCategory
       html = "<div class='info'>"
-      html += "<h2 class='admin-name'>" + mainLabelName + "</h2>"
+      html += "<h2 class='admin-name'>" + label + "</h2>"
 
-      html += "<div class='top-border'>PARTICIPATION LEVEL</div>"
-      html += "<div><table><tr><td class='info-count'>" + intcomma(totalTop+totalOther) + "</td><td class='info-count'>" + intcomma(totalRegistered) + "</td></tr>"
-      html += "<tr><td class='info-tiny'>Responses</td><td class='info-tiny'>Reporters in " + mainLabelName + "</td></tr></table></div>"
+      html += "<div class='top-border primary-color'>PARTICIPATION LEVEL</div>"
+      html += "<div><table><tr><td class='info-count'>" + window.intcomma(results.set) + "</td><td class='info-count'>" + window.intcomma(results.set + results.unset) + "</td></tr>"
+      html += "<tr><td class='info-tiny'>Responses</td><td class='info-tiny'>Reporters in " + label + "</td></tr></table></div>"
 
-      html += "<div class='top-border'>RESULTS</div>"
+      html += "<div class='top-border primary-color'>RESULTS</div>"
 
-      percentage = Math.round((100 * totalTop) / (totalTop + totalOther))
-      if percentage < 0
+      percentage = results.percentage
+      if percentage < 0 or results.set == 0
         percentageTop = "--"
         percentageOther = "--"
       else
         percentageTop = percentage + "%"
         percentageOther = (100 - percentage) + "%"
 
-      html += "<div class='info-percentage top-color'>" + percentageTop + "</div>"
-      html += "<div class='info-tiny'>" + topCategory + "</div>"
+      html += "<div class='results'><table width='100%'>"
 
-      html += "<div class='info-percentage other-color top-border' style='padding-top: 10px'>" + percentageOther + "</div>"
-      html += "<div class='info-tiny'>Other</div>"
 
-      html += "</div>"
- 
-    if props?
-      result = boundaryResults[props.id]
+      html += "<tr class='row-top'><td class='info-percentage'>" + percentageTop + "</td>"
+      html += "<td class='info-label'>" + topCategory + "</td></tr>"
 
-      html = "<div class='info'>"
-      html += "<h2 class='admin-name'>" + props.name + "</h2>"
+      html += "<tr class='row-other'><td class='info-percentage other-color top-border primary-border-color'>" + percentageOther + "</td>"
+      html += "<td class='info-label top-border primary-border-color'>" + otherCategory + "</td></tr>"
 
-      html += "<div class='top-border'>PARTICIPATION LEVEL</div>"
-      html += "<div><table><tr><td class='info-count'>" + intcomma(result.set) + "</td><td class='info-count'>" + intcomma(result.set + result.unset) + "</td></tr>"
-      html += "<tr><td class='info-tiny'>Responses</td><td class='info-tiny'>Reporters in " + props.name + "</td></tr></table></div>"
+      html += "</table></div>"
 
-      html += "<div class='top-border'>RESULTS</div>"
-
-      percentage = result.percentage
-      if percentage < 0
-        percentageTop = "--"
-        percentageOther = "--"
-      else
-        percentageTop = percentage + " %"
-        percentageOther = (100 - percentage) + " %"
-
-      html += "<div class='info-percentage top-color'>" + percentageTop + "</div>"
-      html += "<div class='info-tiny'>" + topCategory + "</div>"
-
-      html += "<div class='info-percentage other-color top-border' style='padding-top: 10px'>" + percentageOther + "</div>"
-      html += "<div class='info-tiny'>Other</div>"
+      if displayOthers and results.set > 0
+        html += "<div class='other-details'>"
+        html += "<div class='other-help'>* Other answers include:</div><table>"
+        for label, count of results.others
+          percentage = Math.round((100 * count) / results.set)
+          html += "<tr>"
+          html += "<td class='detail-percentage'>" + percentage + "%</td>"
+          html += "<td class='detail-label'>" + label + "</td>"
+          html += "</tr>"
+        html += "</table></div>"
 
       html += "</div>"
 

@@ -6,7 +6,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 COMPRESS_ENABLED = True
 
-HOSTNAME = 'nigeria.ureport.in'
+HOSTNAME = 'ureport.in'
 ALLOWED_HOSTS = ['.ureport.in']
 SESSION_COOKIE_DOMAIN = 'ureport.in'
 SESSION_COOKIE_SECURE = True
@@ -65,20 +65,11 @@ STATICFILES_FINDERS = (
 API_ENDPOINT = 'https://api.rapidpro.io'
 SITE_HOST_PATTERN = 'https://%s.ureport.in'
 
-# Set your production database settings here
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ureport',
-        'USER': 'ureport',
-        'PASSWORD': 'nyarukaglue',
-        'HOST': 'rds-internal.ureport.in',
-        'PORT': '5432', 
-        'CONN_MAX_AGE': 60,
-        'OPTIONS': {
-        }  
-    }
-}
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
+
+# reuse our connections for up to 60 seconds
+DATABASES['default']['CONN_MAX_AGE'] = 60
 
 # no debug toolbar in prod
 MIDDLEWARE_CLASSES = (
@@ -115,7 +106,11 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
-        }
+        },
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
     },
     'loggers': {
         'django.db.backends': {
@@ -131,6 +126,10 @@ LOGGING = {
         'sentry.errors': {
             'level': 'DEBUG',
             'handlers': ['console'],
+            'propagate': False,
+        },
+        'django.security.DisallowedHost': {
+            'handlers': ['null'],
             'propagate': False,
         },
     },

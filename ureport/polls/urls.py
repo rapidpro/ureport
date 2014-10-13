@@ -1,4 +1,3 @@
-from .views import PollCRUDL, FeaturedResponseCRUDL
+from .views import PollCRUDL
 
 urlpatterns = PollCRUDL().as_urlpatterns()
-urlpatterns += FeaturedResponseCRUDL().as_urlpatterns()

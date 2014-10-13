@@ -1,12 +1,14 @@
+- load i18n
+
 .section
   %h1.level-1-title
-    MORE POLLS
+    - trans "MORE POLLS"
   .level-1-title-description.secondary-color
   .card.card-padding
     .row
       .col-md-4
         .filter-title.primary-color
-          FILTER
+          - trans "FILTER"
         %hr.hr12.primary-border-color
         %ul.categories.poll-filters
           %li
@@ -19,9 +21,9 @@
 
       .col-md-8.left-col-border
         .filter-title.primary-color
-          POLL LIST
+          - trans "POLL LIST"
           .pull-right.poll-list-description
-            All polls from most recent to oldest
+            - trans "All polls from most recent to oldest"
         %hr.hr12.primary-border-color
         %ul.polls
           - for poll in polls

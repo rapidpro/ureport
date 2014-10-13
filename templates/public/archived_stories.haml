@@ -1,12 +1,14 @@
+- load i18n
+
 .section
   %h1.level-1-title
-    ARCHIVED STORIES
+    - trans "ARCHIVED STORIES"
   .level-1-title-description.secondary-color
   .card.card-padding
     .row
       .col-md-4
         .filter-title.primary-color
-          FILTER
+          - trans "FILTER"
         %hr.hr12.primary-border-color
         %ul.categories.stories-filters
           %li
@@ -19,7 +21,7 @@
 
       .col-md-8.left-col-border
         .filter-title.primary-color
-          LIST
+          - trans "LIST"
         %hr.hr12.primary-border-color
         %ul.archived-stories
           - for archived_story in other_stories

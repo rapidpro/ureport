@@ -1,11 +1,13 @@
-from dash.api import API
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from django import forms
 from django.core.urlresolvers import reverse
-from ureport.categories.models import Category
-from .models import Poll, PollQuestion, FeaturedResponse
+from dash.categories.models import Category, CategoryImage
+from .models import Poll, PollQuestion, FeaturedResponse, PollImage
 from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
+from django.forms import ModelForm
+import re
 
 class PollForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -20,39 +22,58 @@ class PollForm(forms.ModelForm):
         flows = api.get_flows()
         self.fields['flow_id'].choices = [(f['flow'], f['name']) for f in flows]
 
+        # only display category images for this org which are active
+        self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')
 
     is_active = forms.BooleanField(required=False)
     flow_id = forms.ChoiceField(choices=[])
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = forms.ModelChoiceField(Category.objects.filter(id__lte=-1))
+    category_image = forms.ModelChoiceField(CategoryImage.objects.filter(id__lte=0), required=False)
 
     class Meta:
         model = Poll
-        fields = ('is_active', 'is_featured', 'flow_id', 'title', 'category', 'image')
+        fields = ('is_active', 'is_featured', 'flow_id', 'title', 'category', 'category_image')
 
-class FeaturedResponseForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        self.org = kwargs['org']
-        del kwargs['org']
 
-        super(FeaturedResponseForm, self).__init__(*args, **kwargs)
-        self.fields['poll'].queryset = Poll.objects.filter(org=self.org)
+class QuestionForm(ModelForm):
+    """
+    Validates that all included questions have titles.
+    """
+    def clean(self):
+        cleaned = self.cleaned_data
+        included_count = 0
 
-    poll = forms.ModelChoiceField(Poll.objects.filter(id__lte=-1))
-    message = forms.CharField(max_length=255, widget=forms.Textarea,
-                              help_text=_("The message sent by the U-reporter you want to feature"))
+        # look at all our included polls
+        for key in cleaned.keys():
+            match = re.match('ruleset_(\d+)_include', key)
+
+            # this field is being included
+            if match and cleaned[key]:
+                # get the title for it
+                title_key = 'ruleset_%s_title' % match.group(1)
+                if not cleaned[title_key]:
+                    raise ValidationError(_("You must include a title for every included question."))
+
+                included_count += 1
+
+        if not included_count:
+            raise ValidationError(_("You must include at least one poll question."))
+
+        return cleaned
 
     class Meta:
-        model = FeaturedResponse
-        fields = ('is_active', 'poll', 'location', 'reporter', 'message')
+        model = Poll
+        fields = ('id',)
 
 class PollCRUDL(SmartCRUDL):
     model = Poll
-    actions = ('create', 'list', 'update', 'questions')
+    actions = ('create', 'list', 'update', 'questions', 'images', 'responses')
 
     class Create(OrgPermsMixin, SmartCreateView):
         form_class = PollForm
         success_url = 'id@polls.poll_questions'
+        success_message = _("Your poll has been created, now pick which questions to include.")
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Create, self).get_form_kwargs()
@@ -64,9 +85,109 @@ class PollCRUDL(SmartCRUDL):
             obj.org = self.request.org
             return obj
 
-    class Questions(OrgPermsMixin, SmartUpdateView):
+    class Images(OrgObjPermsMixin, SmartUpdateView):
+        success_url = 'id@polls.poll_responses'
+        title = _("Poll Images")
+        success_message = _("Now enter any responses you'd like to feature. (if any)")
+
+        def get_form(self, form_class):
+            form = super(PollCRUDL.Images, self).get_form(form_class)
+            form.fields.clear()
+
+            idx = 1
+
+            # add existing images
+            for image in self.object.images.all().order_by('pk'):
+                image_field_name = 'image_%d' % idx
+                image_field = forms.ImageField(required=False, initial=image.image, label=_("Image %d") % idx,
+                                               help_text=_("Image to display on poll page and in previews. (optional)"))
+
+                self.form.fields[image_field_name] = image_field
+                idx += 1
+
+            while idx <= 3:
+                self.form.fields['image_%d' % idx] = forms.ImageField(required=False, label=_("Image %d") % idx,
+                                                                      help_text=_("Image to display on poll page and in previews (optional)"))
+                idx += 1
+
+            return form
+
+        def post_save(self, obj):
+            obj = super(PollCRUDL.Images, self).post_save(obj)
+
+            # remove our existing images
+            self.object.images.all().delete()
+
+            # overwrite our new ones
+            # TODO: this could probably be done more elegantly
+            for idx in range(1, 4):
+                image = self.form.cleaned_data.get('image_%d' % idx, None)
+
+                if image:
+                    PollImage.objects.create(poll=self.object, image=image,
+                                             created_by=self.request.user, modified_by=self.request.user)
+
+            return obj
+
+    class Responses(OrgObjPermsMixin, SmartUpdateView):
         success_url = '@polls.poll_list'
+        title = _("Featured Poll Responses")
+        success_message = _("Your poll has been updated.")
+
+        def get_form(self, form_class):
+            form = super(PollCRUDL.Responses, self).get_form(form_class)
+            form.fields.clear()
+
+            existing_responses = list(self.object.featured_responses.all().order_by('pk'))
+
+            # add existing responses
+            for idx in range(1, 4):
+                if existing_responses:
+                    response = existing_responses.pop(0)
+                else:
+                    response = None
+
+                # reporter, location, response
+                reporter_args = dict(max_length=64, required=False,
+                                     label=_("Response %d Reporter") % idx, help_text=_("The name or alias of the responder."))
+                if response: reporter_args['initial'] = response.reporter
+                self.form.fields['reporter_%d' % idx] = forms.CharField(**reporter_args)
+
+                location_args = dict(max_length=64, required=False,
+                                     label=_("Response %d Location") % idx, help_text=_("The location of the responder."))
+                if response: location_args['initial'] = response.location
+                self.form.fields['location_%d' % idx] = forms.CharField(**location_args)
+
+                message_args = dict(max_length=255, required=False, widget=forms.Textarea,
+                                    label=_("Response %d Message") % idx, help_text=_("The text of the featured response."))
+                if response: message_args['initial'] = response.message
+                self.form.fields['message_%d' % idx] = forms.CharField(**message_args)
+
+            return form
+
+        def post_save(self, obj):
+            obj = super(PollCRUDL.Responses, self).post_save(obj)
+
+            # remove our existing responses
+            self.object.featured_responses.all().delete()
+
+            # overwrite our new ones
+            for idx in range(1, 4):
+                location = self.form.cleaned_data.get('location_%d' % idx, None)
+                reporter = self.form.cleaned_data.get('reporter_%d' % idx, None)
+                message = self.form.cleaned_data.get('message_%d' % idx, None)
+
+                if location and reporter and message:
+                    FeaturedResponse.objects.create(poll=self.object,
+                                                    location=location, reporter=reporter, message=message,
+                                                    created_by=self.request.user, modified_by=self.request.user)
+            return obj
+
+    class Questions(OrgObjPermsMixin, SmartUpdateView):
+        success_url = 'id@polls.poll_images'
         title = _("Poll Questions")
+        form_class = QuestionForm
+        success_message = _("Now set what images you want displayed on your poll page. (if any)")
 
         def get_rulesets(self):
             api = self.object.org.get_api()
@@ -90,13 +211,19 @@ class PollCRUDL(SmartCRUDL):
             # fetch this single flow so we load what rules are available
             rulesets = self.get_rulesets()
 
+            initial = self.derive_initial()
+
             for ruleset in rulesets:
-                include_field = forms.BooleanField(label=_("Include"), required=False, initial=False,
-                                                   help_text=_("Whether to include this question in your public results"))
                 include_field_name = 'ruleset_%d_include' % ruleset['id']
-                title_field = forms.CharField(label=_("Title"), initial=ruleset['label'], widget=forms.Textarea,
-                                              help_text=_("The question posed to your audience, will be displayed publicly"))
+                include_field_initial = initial.get(include_field_name, False)
+                include_field = forms.BooleanField(label=_("Include"), required=False, initial=include_field_initial,
+                                                   help_text=_("Whether to include this question in your public results"))
+
                 title_field_name = 'ruleset_%d_title' % ruleset['id']
+                title_field_initial = initial.get(title_field_name, ruleset['label'])
+                title_field = forms.CharField(label=_("Title"), widget=forms.Textarea, required=False, initial=title_field_initial,
+                                              help_text=_("The question posed to your audience, will be displayed publicly"))
+
 
                 self.form.fields[include_field_name] = include_field
                 self.form.fields[title_field_name] = title_field
@@ -133,6 +260,14 @@ class PollCRUDL(SmartCRUDL):
 
             return self.object
 
+        def post_save(self, obj):
+            obj = super(PollCRUDL.Questions, self).post_save(obj)
+
+            # clear our cache of featured polls
+            Poll.clear_brick_polls_cache(obj.org)
+
+            return obj
+
         def derive_initial(self):
             initial = dict()
 
@@ -143,66 +278,39 @@ class PollCRUDL(SmartCRUDL):
             return initial
 
     class List(OrgPermsMixin, SmartListView):
-        fields = ('title', 'category', 'questions', 'created_on')
-        link_fields = ('title', 'questions')
+        search_fields = ('title__icontains',)
+        fields = ('title', 'category', 'questions', 'featured_responses', 'images', 'created_on')
+        link_fields = ('title', 'questions', 'featured_responses', 'images')
+        default_order = ('-created_on', 'id')
 
         def get_queryset(self):
             queryset = super(PollCRUDL.List, self).get_queryset().filter(org=self.request.org)
             return queryset
 
         def get_questions(self, obj):
-            q_count = obj.questions.count()
+            return obj.questions.count()
 
-            if not q_count:
-                return _("No Questions")
-            elif q_count == 1:
-                return _("1 Question")
-            else:
-                return _("%d Questions") % q_count
+        def get_images(self, obj):
+            return obj.images.count()
+
+        def get_featured_responses(self, obj):
+            return obj.featured_responses.count()
 
         def lookup_field_link(self, context, field, obj):
             if field == 'questions':
                 return reverse('polls.poll_questions', args=[obj.pk])
+            elif field == 'images':
+                return reverse('polls.poll_images', args=[obj.pk])
+            elif field == 'featured_responses':
+                return reverse('polls.poll_responses', args=[obj.pk])
             else:
                 return super(PollCRUDL.List, self).lookup_field_link(context, field, obj)
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
-        fields = ('is_active', 'is_featured', 'flow_id', 'title', 'category', 'image')
+        fields = ('is_active', 'is_featured', 'flow_id', 'title', 'category', 'category_image')
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Update, self).get_form_kwargs()
-            kwargs['org'] = self.request.org
-            return kwargs
-
-
-class FeaturedResponseCRUDL(SmartCRUDL):
-    model = FeaturedResponse
-    actions = ('create', 'list', 'update')
-
-    class Create(OrgPermsMixin, SmartCreateView):
-        form_class = FeaturedResponseForm
-        fields = ('poll', 'location', 'reporter', 'message')
-
-        def get_form_kwargs(self):
-            kwargs = super(FeaturedResponseCRUDL.Create, self).get_form_kwargs()
-            kwargs['org'] = self.request.org
-            return kwargs
-
-    class List(OrgPermsMixin, SmartListView):
-        fields = ('poll', 'location', 'message')
-
-        def get_queryset(self):
-            queryset = super(FeaturedResponseCRUDL.List, self).get_queryset().filter(poll__org=self.request.org)
-            return queryset
-
-    class Update(OrgObjPermsMixin, SmartUpdateView):
-        form_class = FeaturedResponseForm
-
-        def get_object_org(self):
-            return self.get_object().poll.org
-
-        def get_form_kwargs(self):
-            kwargs = super(FeaturedResponseCRUDL.Update, self).get_form_kwargs()
             kwargs['org'] = self.request.org
             return kwargs

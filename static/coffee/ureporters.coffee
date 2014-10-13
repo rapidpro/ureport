@@ -1,11 +1,3 @@
-intcomma = (value) ->
-  origValue = String(value);
-  newValue = origValue.replace(/^(-?\d+)(\d{3})/, '$1,$2')
-  if origValue == newValue
-    return newValue
-  else
-    return intcomma(newValue)
-
 initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
 
@@ -67,7 +59,8 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
       upper = breaks[idx]
 
-      div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i> " + upper + "% of the " + topBoundary.label + " total<br/>"
+      if topBoundary
+        div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i> " + upper + "% of the " + topBoundary.label + " total<br/>"
       
       i++
 
@@ -131,7 +124,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
       # calculate the most common category if we haven't already
       if not topBoundary
         boundaryCounts = {}
-        topPopulated = 0
+        topPopulated = -1
 
         for boundary in data
           totalRegistered += boundary.set + boundary.unset
@@ -148,7 +141,10 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
       mainLabelRegistered = 0
       boundaryResults = {}
       for boundary in data
-        boundary.percentage = Math.round((100 * (boundary.set + boundary.unset)) / topBoundary.population)
+        if topBoundary.population
+          boundary.percentage = Math.round((100 * (boundary.set + boundary.unset)) / topBoundary.population)
+        else
+          boundary.percentage = 0
         boundaryResults[boundary['boundary']] = boundary
         mainLabelRegistered += boundary.set + boundary.unset
         info.update()
@@ -231,21 +227,20 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + mainLabelName + "</h2>"
 
-      html += "<div class='top-border'>POPULATION</div>"
+      html += "<div class='top-border primary-color'>POPULATION</div>"
       html += "<div><table><tr><td class='info-count'>" + intcomma(mainLabelRegistered) + "</td></tr>"
       html += "<tr><td class='info-tiny'>Registered in " + mainLabelName + "</td></tr></table></div>"
 
     if props?
       result = boundaryResults[props.id]
-      console.log(result)
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
 
-      html += "<div class='top-border'>POPULATION</div>"
+      html += "<div class='top-border primary-color'>POPULATION</div>"
       html += "<div><table><tr><td class='info-count'>" + intcomma(result.set + result.unset) + "</td></tr>"
       html += "<tr><td class='info-tiny'>Registered in " + props.name + "</td></tr></table></div>"
 
-      html += "<div class='top-border'>DENSITY</div>"
+      html += "<div class='top-border primary-color'>DENSITY</div>"
 
       percentage = result.percentage
       if percentage < 0

@@ -1,13 +1,3 @@
-intcomma = (value) ->
-  origValue = String(value);
-  newValue = origValue.replace(/^(-?\d+)(\d{3})/, '$1,$2')
-  if origValue == newValue
-    return newValue
-  else
-    return intcomma(newValue)
-
-
-
 initMap = (id, geojson, question, region) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
 
@@ -228,7 +218,7 @@ initMap = (id, geojson, question, region) ->
       html += "<h2 class='admin-name'>" + mainLabelName + "</h2>"
 
       html += "<div class='top-border'>PARTICIPATION LEVEL</div>"
-      html += "<div><table><tr><td class='info-count'>" + mainLabelAnswered + "</td><td class='info-count'>" + intcomma(mainLabelRegistered) + "</td></tr>"
+      html += "<div><table><tr><td class='info-count'>" + mainLabelAnswered + "</td><td class='info-count'>" + window.intcomma(mainLabelRegistered) + "</td></tr>"
       html += "<tr><td class='info-tiny'>Responses</td><td class='info-tiny'>Registered in " + mainLabelName + "</td></tr></table></div>"
 
       html += "<div class='top-border'>RESPONSE RATE</div>"
@@ -256,7 +246,7 @@ initMap = (id, geojson, question, region) ->
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
 
       html += "<div class='top-border'>PARTICIPATION LEVEL</div>"
-      html += "<div><table><tr><td class='info-count'>" + result.set + "</td><td class='info-count'>" + intcomma(result.set + result.unset) + "</td></tr>"
+      html += "<div><table><tr><td class='info-count'>" + result.set + "</td><td class='info-count'>" + window.intcomma(result.set + result.unset) + "</td></tr>"
       html += "<tr><td class='info-tiny'>Responses</td><td class='info-tiny'>Registered in " + props.name + "</td></tr></table></div>"
 
       html += "<div class='top-border'>RESPONSE RATE</div>"

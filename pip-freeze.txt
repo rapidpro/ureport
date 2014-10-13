@@ -41,3 +41,5 @@ wsgiref==0.1.2
 xlrd==0.9.3
 xlutils==1.7.1
 xlwt==0.7.5
+-e git+https://github.com/rapidpro/dash.git#egg=dash
+dj-database-url==0.2.1

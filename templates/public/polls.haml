@@ -1,6 +1,6 @@
 -extends "public_base.html"
 
--load compress thumbnail humanize ureport
+-load compress thumbnail humanize ureport i18n
 
 - block hero
   .hero-container
@@ -11,16 +11,19 @@
           .col-sm-12
             .hero-title.primary-bg-color
               - if tab == 'list'
-                CURRENT POLL IN {{ latest_poll.category|upper }}
-              - else
-                {{ latest_poll.category|upper }}
+                - trans "CURRENT POLL IN"
+              {{ latest_poll.category|upper }}
 
         .row
           .col-sm-6
             .hero-description.poll-hero-title
               {{ latest_poll.title|upper }}
             .hero-description.poll-hero-questions
-              {{ latest_poll.questions.count }} QUESTION{{ latest_poll.questions.count|pluralize:"S" }} POLLED ON THIS TOPIC
+              {% blocktrans count questions=latest_poll.questions.count %}
+                {{ questions }} QUESTION POLLED ON THIS TOPIC
+              {% plural %}
+                {{ questions }} QUESTIONS POLLED ON THIS TOPIC
+              {% endblocktrans %}
 
               .poll-hero-circle-outer
               .poll-hero-circle-inner.primary-border-color
@@ -29,14 +32,14 @@
             .hero-description
               {{ latest_poll.response_percentage }}%
               %span
-                RESPONSE RATE
+                - trans "RESPONSE RATE"
             .hero-description
               {{ latest_poll.completed_runs|intcomma }}
               %span
-                RESPONDED OUT OF
+                - trans "RESPONDED OUT OF"
               {{ latest_poll.runs|intcomma }}
               %span
-                POLLED
+                - trans "POLLED"
 
         .latest-poll-questions
           - with latest_poll.questions.all as questions
@@ -61,7 +64,7 @@
 - block content
   .section
     %h1.level-1-title
-      POLL RESULTS
+      - trans "POLL RESULTS"
 
     .poll-questions
       {% for question in latest_poll.questions.all %}
@@ -74,20 +77,22 @@
                 .poll-question-title
                   {{ question.title }}
                 .poll-question-response-rate
-                  {{ question.get_responded|intcomma }} responded out of {{ question.get_polled|intcomma }} polled
+                  {{ question.get_responded|intcomma }}
+                  -trans "responded out of"
+                  {{ question.get_polled|intcomma }} polled
                 .poll-question-visualization
                   .poll-question-tabs-border.primary-border-color{role:"tablist"}
                     .poll-question-tabs.primary-bg-color
                       - if question.is_open_ended
                         %a.poll-question-tab.active.primary-color.primary-bg-color{ href:"#keywords-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                          KEYWORDS
+                          - trans "KEYWORDS"
                       - else
 
                         %a.poll-question-tab.active.primary-color.primary-bg-color{href:"#statistics-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                          STATISTICS
+                          - trans "STATISTICS"
 
                         %a.poll-question-tab.inactive.primary-color.primary-bg-color{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                          LOCATIONS
+                          - trans "LOCATIONS"
 
 
                   .tab-content
@@ -133,16 +138,16 @@
     .col-md-8
       .section
         %h1.level-1-title
-          FEATURED ANSWERS
+          - trans "FEATURED ANSWERS"
         .level-1-title-description.secondary-color
-        - if not latest_poll_responses
+        - if not latest_poll.get_featured_responses
           .current-poll-featured-response{style:"width: 100%"}
             .card.card-padding
               .featured-response-text.no-answers
-                No featured answers.
+                - trans "No featured answers."
 
-        - for response in latest_poll_responses|slice:"4"
-          .current-poll-featured-response{class:"{% cycle 'right-part' 'left-part' %} for{{ forloop.counter}} len{{latest_poll_responses|length}}"}
+        - for response in latest_poll.get_featured_responses|slice:"4"
+          .current-poll-featured-response{class:"{% cycle 'right-part' 'left-part' %} for{{ forloop.counter}} len{{latest_poll.get_featured_responses|length}}"}
             .card.card-padding
               .featured-response-text
                 {{ response.message }}
@@ -151,16 +156,17 @@
                 - if response.reporter
                   {{ response.reporter|title }}
               .featured-response-region
-                U-reporter in {{ response.location }}
+                - trans "U-reporter in"
+                {{ response.location }}
 
     .col-md-4.left-col-border
       .section
         %h1.level-1-title
-          RELATED STORIES
+          - trans "RELATED STORIES"
         .level-1-title-description.secondary-color
         .card.card-padding
           - if not related_stories
-            No related stories.
+            -trans "No related stories."
 
           - for story in related_stories|slice:"1"
             .related-story-image
@@ -177,7 +183,25 @@
             .related-story-teaser
               {{ story.short_teaser|safe }}
             %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
-              READ MORE &#8594;
+              - trans "READ MORE"
+              &#8594;
+
+  %hr.aaa
+  .section
+    %h1.level-1-title
+      - trans "FEATURED IMAGES"
+    .card.card-padding
+      .row
+        - if not latest_poll.get_featured_images
+          .col-md-12.no-content
+            - trans "No featured images yet."
+        - for poll_image in latest_poll.get_featured_images|slice:"3"
+          .col-md-4{class:"{% cycle 'small-pad-right' 'small-pad-middle' 'small-pad-left' %}"}
+            {% thumbnail poll_image.image "1200x800" as im %}
+            <a href="{{ im.url}}" data-lightbox="poll-image-garelly-{{ latest_poll.id }}">
+            <img width="100%" height="100%" src="{{im.url}}" />
+            </a>
+            {% endthumbnail %}
 
   %hr.aaa
   -include "public/all_polls.html"
@@ -195,10 +219,6 @@
         background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
       {% endthumbnail %}
       {% endif%}
-    }
-
-    .poll-graph {
-      height: 400px;
     }
 
     .poll-map {
@@ -269,10 +289,12 @@
           var results = result[0];
           var cloudData = [];
 
-          for (i=0; i<=25; i++){
+          for (i=0; i<=25 && i<=results.categories.length; i++){
             word = results.categories[i];
-            label = word.label.trim().toUpperCase();
-            cloudData.push({ text: label, weight: Math.sqrt(word.count)})
+            if (word){
+              label = word.label.trim().toUpperCase();
+              cloudData.push({ text: label, weight: Math.sqrt(word.count)})
+            }
           }
 
           $('#word-cloud-' + question + '-placeholder').hide();

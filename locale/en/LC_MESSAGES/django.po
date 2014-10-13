@@ -1,0 +1,1166 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-21 21:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: dash/dashblocks/views.py:280
+msgid "Content Blocks"
+msgstr ""
+
+#: dash/dashblocks/views.py:282
+#, python-format
+msgid "%s Blocks"
+msgstr ""
+
+#: dash/orgs/models.py:15 dash/orgs/models.py:236
+msgid "Name"
+msgstr ""
+
+#: dash/orgs/models.py:16 dash/orgs/views.py:108
+msgid "The name of this organization"
+msgstr ""
+
+#: dash/orgs/models.py:19
+msgid "The logo that should be used for this organization"
+msgstr ""
+
+#: dash/orgs/models.py:21 dash/orgs/views.py:221
+msgid "Administrators"
+msgstr ""
+
+#: dash/orgs/models.py:22
+msgid "The administrators in your organization"
+msgstr ""
+
+#: dash/orgs/models.py:24 dash/orgs/views.py:221
+#: templates/orgs/org_manage_accounts.haml:22
+msgid "Viewers"
+msgstr ""
+
+#: dash/orgs/models.py:25
+msgid "The viewers in your organization"
+msgstr ""
+
+#: dash/orgs/models.py:27 dash/orgs/views.py:221
+#: templates/orgs/org_manage_accounts.haml:19
+msgid "Editors"
+msgstr ""
+
+#: dash/orgs/models.py:28
+msgid "The editors in your organization"
+msgstr ""
+
+#: dash/orgs/models.py:30
+msgid "Language"
+msgstr ""
+
+#: dash/orgs/models.py:31
+msgid "The main language used by this organization"
+msgstr ""
+
+#: dash/orgs/models.py:33
+msgid "Subdomain"
+msgstr ""
+
+#: dash/orgs/models.py:33
+msgid "This subdomain is not available"
+msgstr ""
+
+#: dash/orgs/models.py:34
+msgid "The subdomain for this UReport instance"
+msgstr ""
+
+#: dash/orgs/models.py:37
+msgid "The API token for the RapidPro account this dashboard is tied to"
+msgstr ""
+
+#: dash/orgs/models.py:40
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+
+#: dash/orgs/models.py:172
+msgid "Administrator"
+msgstr ""
+
+#: dash/orgs/models.py:173
+msgid "Editor"
+msgstr ""
+
+#: dash/orgs/models.py:174
+msgid "Viewer"
+msgstr ""
+
+#: dash/orgs/models.py:178 dash/orgs/models.py:232
+msgid "Org"
+msgstr ""
+
+#: dash/orgs/models.py:179
+msgid "The organization to which the account is invited to view"
+msgstr ""
+
+#: dash/orgs/models.py:181
+msgid "Email"
+msgstr ""
+
+#: dash/orgs/models.py:181
+msgid "The email to which we send the invitation of the viewer"
+msgstr ""
+
+#: dash/orgs/models.py:183
+msgid "Secret"
+msgstr ""
+
+#: dash/orgs/models.py:184
+msgid "a unique code associated with this invitation"
+msgstr ""
+
+#: dash/orgs/models.py:186
+msgid "User Role"
+msgstr ""
+
+#: dash/orgs/models.py:218
+#, python-format
+msgid "%s Invitation"
+msgstr ""
+
+#: dash/orgs/models.py:228
+msgid "Banner"
+msgstr ""
+
+#: dash/orgs/models.py:229
+msgid "Pattern"
+msgstr ""
+
+#: dash/orgs/models.py:233
+msgid "The organization in which the image will be used"
+msgstr ""
+
+#: dash/orgs/models.py:237
+msgid "The name to describe this background"
+msgstr ""
+
+#: dash/orgs/models.py:239
+msgid "Background type"
+msgstr ""
+
+#: dash/orgs/models.py:241
+msgid "The image file"
+msgstr ""
+
+#: dash/orgs/views.py:102
+msgid "Your first name"
+msgstr ""
+
+#: dash/orgs/views.py:103
+msgid "Your last name"
+msgstr ""
+
+#: dash/orgs/views.py:104
+msgid "Your email address"
+msgstr ""
+
+#: dash/orgs/views.py:106
+msgid "Your password, at least eight letters please"
+msgstr ""
+
+#: dash/orgs/views.py:107
+msgid "Organization"
+msgstr ""
+
+#: dash/orgs/views.py:109
+msgid "The subdomain of this organization"
+msgstr ""
+
+#: dash/orgs/views.py:117
+msgid "That email address is already used"
+msgstr ""
+
+#: dash/orgs/views.py:125
+msgid "Passwords must contain at least 8 letters."
+msgstr ""
+
+#: dash/orgs/views.py:148 dash/orgs/views.py:208
+msgid "Your Account"
+msgstr ""
+
+#: dash/orgs/views.py:215
+msgid "Not Set"
+msgstr ""
+
+#: dash/orgs/views.py:220
+msgid "Invite people to your organization"
+msgstr ""
+
+#: dash/orgs/views.py:222
+msgid "User group"
+msgstr ""
+
+#: dash/orgs/views.py:232
+msgid "One of the emails you entered is invalid."
+msgstr ""
+
+#: dash/orgs/views.py:246
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr ""
+
+#: dash/orgs/views.py:378
+msgid "Select your Organization"
+msgstr ""
+
+#: dash/orgs/views.py:388
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+
+#: dash/orgs/views.py:434
+msgid "Create"
+msgstr ""
+
+#: dash/orgs/views.py:442
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+
+#: dash/orgs/views.py:510 dash/orgs/views.py:561
+#, python-format
+msgid "Join %(name)s"
+msgstr ""
+
+#: dash/orgs/views.py:530
+msgid "Join"
+msgstr ""
+
+#: dash/orgs/views.py:538
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+
+#: dash/stories/models.py:9
+msgid "The title for this story"
+msgstr ""
+
+#: dash/stories/models.py:12
+msgid "Whether this story is featured"
+msgstr ""
+
+#: dash/stories/models.py:13
+msgid "The summary for the story"
+msgstr ""
+
+#: dash/stories/models.py:15
+msgid "The body of text for the story"
+msgstr ""
+
+#: dash/stories/models.py:18
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+
+#: dash/stories/models.py:21
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+
+#: dash/stories/models.py:24
+msgid "The category for this story"
+msgstr ""
+
+#: dash/stories/models.py:26
+msgid "The organization this story belongs to"
+msgstr ""
+
+#: dash/stories/models.py:74 templates/frame.haml:233
+#: templates/frame.haml.py:395 templates/public/stories.haml:7
+msgid "Stories"
+msgstr ""
+
+#: dash/stories/models.py:78 ureport/categories/models.py:32
+#: ureport/polls/models.py:189
+msgid "The name to describe this image"
+msgstr ""
+
+#: dash/stories/models.py:81
+msgid "The story to associate to"
+msgstr ""
+
+#: dash/stories/models.py:84 ureport/categories/models.py:38
+#: ureport/polls/models.py:195
+msgid "The image file to use"
+msgstr ""
+
+#: dash/stories/views.py:36
+msgid "Yes"
+msgstr ""
+
+#: dash/stories/views.py:37
+msgid "No"
+msgstr ""
+
+#: dash/stories/views.py:56
+msgid "Story Images"
+msgstr ""
+
+#: dash/stories/views.py:67 dash/stories/views.py:74
+#: ureport/polls/views.py:129 ureport/polls/views.py:136
+#, python-format
+msgid "Image %d"
+msgstr ""
+
+#: dash/stories/views.py:68
+msgid "Image to display on story page and in previews. (optional)"
+msgstr ""
+
+#: dash/stories/views.py:75
+msgid "Image to display on story page and in previews (optional)"
+msgstr ""
+
+#: templates/dashblocks/dashblock_about_pages.haml:7
+#: templates/dashblocks/dashblock_join_engage_pages.haml:8
+#: templates/dashblocks/dashblock_list.haml:60
+#: templates/dashblocks/dashblock_ureporters_pages.haml:8
+#: templates/dashblocks/dashblock_youtube_videos.haml:8
+#: templates/polls/poll_list.haml:6
+msgid "Add"
+msgstr ""
+
+#: templates/dashblocks/dashblock_form.haml:8
+msgid "Gallery"
+msgstr ""
+
+#: templates/dashblocks/dashblock_form.haml:17
+msgid "Add Image"
+msgstr ""
+
+#: templates/dashblocks/dashblock_list.haml:33
+msgid "Search"
+msgstr ""
+
+#: templates/frame.haml:8 templates/public/org_chooser.haml:7
+msgid "U-report"
+msgstr ""
+
+#: templates/frame.haml:159 templates/frame.haml.py:362
+msgid "Toggle navigation"
+msgstr ""
+
+#: templates/frame.haml:167
+msgid "Admin"
+msgstr ""
+
+#: templates/frame.haml:175
+msgid "Configuration"
+msgstr ""
+
+#: templates/frame.haml:181
+msgid "Orgs"
+msgstr ""
+
+#: templates/frame.haml:187
+msgid "Users"
+msgstr ""
+
+#: templates/frame.haml:193
+msgid "Content Types"
+msgstr ""
+
+#: templates/frame.haml:200
+msgid "Backgrounds"
+msgstr ""
+
+#: templates/frame.haml:209
+msgid "Content"
+msgstr ""
+
+#: templates/frame.haml:225 templates/frame.haml.py:389
+msgid "Polls"
+msgstr ""
+
+#: templates/frame.haml:241
+msgid "News Items"
+msgstr ""
+
+#: templates/frame.haml:249 templates/frame.haml.py:256
+#: ureport/categories/models.py:28
+msgid "Categories"
+msgstr ""
+
+#: templates/frame.haml:264
+msgid "Category Images"
+msgstr ""
+
+#: templates/frame.haml:276
+msgid "Pages & Videos"
+msgstr ""
+
+#: templates/frame.haml:284
+msgid "About Content"
+msgstr ""
+
+#: templates/frame.haml:290
+msgid "Contact Us Content"
+msgstr ""
+
+#: templates/frame.haml:296
+msgid "Missions Content"
+msgstr ""
+
+#: templates/frame.haml:302
+msgid "Join &amp; Engage Content"
+msgstr ""
+
+#: templates/frame.haml:308
+msgid "Join Steps Content"
+msgstr ""
+
+#: templates/frame.haml:314
+msgid "U-reporters Content"
+msgstr ""
+
+#: templates/frame.haml:320
+msgid "Videos"
+msgstr ""
+
+#: templates/frame.haml:337
+msgid "Logout"
+msgstr ""
+
+#: templates/frame.haml:343 templates/smartmin/users/login.haml:49
+msgid "Login"
+msgstr ""
+
+#: templates/frame.haml:383
+msgid "About"
+msgstr ""
+
+#: templates/frame.haml:401
+msgid "U-reporters"
+msgstr ""
+
+#: templates/frame.haml:407
+msgid "Join & Engage"
+msgstr ""
+
+#: templates/frame.haml:463
+msgid "FOLLOW US ON:"
+msgstr ""
+
+#: templates/orgs/email/invitation_email.html:8
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='https://%(org.subdomain)s.report.in/"
+"org/join/%(secret)s/'>click here</a>.\n"
+"  "
+msgstr ""
+
+#: templates/orgs/org_home.haml:8
+msgid "Edit"
+msgstr ""
+
+#: templates/orgs/org_home.haml:13
+msgid "Manage Users"
+msgstr ""
+
+#: templates/orgs/org_manage_accounts.haml:13
+msgid "Accounts"
+msgstr ""
+
+#: templates/orgs/org_manage_accounts.haml:16
+msgid "Admins"
+msgstr ""
+
+#: templates/orgs/org_manage_accounts.haml:25
+msgid "Remove"
+msgstr ""
+
+#: templates/orgs/org_manage_accounts.haml:32
+msgid "You must have at least one administator"
+msgstr ""
+
+#: templates/public/about.haml:15 templates/public/about.haml.py:48
+msgid "ABOUT U-REPORT"
+msgstr ""
+
+#: templates/public/about.haml:21 templates/public/ureporters.haml:23
+msgid "Scroll to Learn more"
+msgstr ""
+
+#: templates/public/about.haml:60
+msgid "The mission of U-report"
+msgstr ""
+
+#: templates/public/about.haml:99
+msgid "Why Join U-report?"
+msgstr ""
+
+#: templates/public/about.haml:104
+msgid "Speak out on what's happening in your community"
+msgstr ""
+
+#: templates/public/about.haml:107
+msgid ""
+"Use Ureport results and information to update and increase citizen's "
+"awareness"
+msgstr ""
+
+#: templates/public/about.haml:110
+msgid "Participate in nationwide campaigns to help improve your country"
+msgstr ""
+
+#: templates/public/about.haml:113
+#, python-format
+msgid "Share what's happening around %(country)s with other U-reporters"
+msgstr ""
+
+#: templates/public/about.haml:119
+msgid "CLICK HERE TO JOIN"
+msgstr ""
+
+#: templates/public/about.haml:132
+msgid "U-REPORT VIDEOS"
+msgstr ""
+
+#: templates/public/about.haml:139
+msgid "No videos yet."
+msgstr ""
+
+#: templates/public/about.haml:157
+msgid "WATCH IT ON YOUTUBE"
+msgstr ""
+
+#: templates/public/all_polls.haml:5
+msgid "MORE POLLS"
+msgstr ""
+
+#: templates/public/all_polls.haml:12
+#: templates/public/archived_stories.haml:12
+msgid "FILTER"
+msgstr ""
+
+#: templates/public/all_polls.haml:31
+msgid "POLL LIST"
+msgstr ""
+
+#: templates/public/all_polls.haml:33
+msgid "All polls from most recent to oldest"
+msgstr ""
+
+#: templates/public/archived_stories.haml:5
+msgid "ARCHIVED STORIES"
+msgstr ""
+
+#: templates/public/archived_stories.haml:31
+msgid "LIST"
+msgstr ""
+
+#: templates/public/index.haml:13
+msgid "CURRENT POLL"
+msgstr ""
+
+#: templates/public/index.haml:30 templates/public/polls.haml:43
+msgid "RESPONSE RATE"
+msgstr ""
+
+#: templates/public/index.haml:36
+msgid "Responded out of"
+msgstr ""
+
+#: templates/public/index.haml:44
+msgid "RESPONDER'S RATE BY LOCATION"
+msgstr ""
+
+#: templates/public/index.haml:50
+msgid "Most responded"
+msgstr ""
+
+#: templates/public/index.haml:54
+msgid "Least responded"
+msgstr ""
+
+#: templates/public/index.haml:96
+msgid "TRENDING WORDS"
+msgstr ""
+
+#: templates/public/index.haml:106
+msgid "FEATURED RESPONSES"
+msgstr ""
+
+#: templates/public/index.haml:133 templates/public/index.haml.py:481
+msgid "VIEW FULL RESULT"
+msgstr ""
+
+#: templates/public/index.haml:153 templates/public/ureporters.haml:16
+msgid "U-REPORTERS IN"
+msgstr ""
+
+#: templates/public/index.haml:161
+msgid "TOTAL # OF U-REPORTERS"
+msgstr ""
+
+#: templates/public/index.haml:175
+msgid "4 MOST ACTIVE REGIONS"
+msgstr ""
+
+#: templates/public/index.haml:185
+msgid "RATE BY GENDER"
+msgstr ""
+
+#: templates/public/index.haml:220
+msgid "RATE BY AGE"
+msgstr ""
+
+#: templates/public/index.haml:230
+msgid "WHAT U-REPORTERS ARE SAYING"
+msgstr ""
+
+#: templates/public/index.haml:238
+msgid "FEATURED VIDEO"
+msgstr ""
+
+#: templates/public/index.haml:244
+msgid "WATCH MORE VIDEOS"
+msgstr ""
+
+#: templates/public/index.haml:255
+msgid "FEATURED REGION"
+msgstr ""
+
+#: templates/public/index.haml:279
+msgid "VIEW MORE STORIES ON FACEBOOK"
+msgstr ""
+
+#: templates/public/index.haml:300
+msgid "READ MORE TWEETS ON TWITTER"
+msgstr ""
+
+#: templates/public/index.haml:311
+msgid "NEWS FEED"
+msgstr ""
+
+#: templates/public/index.haml:329
+msgid "Read This Story"
+msgstr ""
+
+#: templates/public/index.haml:350 templates/public/index.haml.py:384
+#: templates/public/index.haml:415
+msgid "U-REPORTER STORY"
+msgstr ""
+
+#: templates/public/index.haml:375 templates/public/index.haml.py:402
+#: templates/public/index.haml:433 templates/public/stories.haml:35
+#: templates/public/stories.haml.py:111
+msgid "READ FULL STORY"
+msgstr ""
+
+#: templates/public/index.haml:456
+msgid "Response Rate"
+msgstr ""
+
+#: templates/public/join_engage.haml:16
+msgid "JOIN U-REPORT"
+msgstr ""
+
+#: templates/public/join_engage.haml:43
+msgid "HOW TO JOIN"
+msgstr ""
+
+#: templates/public/join_engage.haml:72
+#, python-format
+msgid ""
+"\n"
+"              * U-report is a free program sponsored by UNICEF with help of "
+"Network Providers in %(org.name)s. U-report will not ask for any payments "
+"nor personal financial information, PLEASE disregard any messages which ask "
+"you for payment either on this number or on the Facebook and Twitter pages. "
+"All U-report services (all msg on %(org|config:\"shortcode\")s) are free.\n"
+"\n"
+"            "
+msgstr ""
+
+#: templates/public/join_engage.haml:82
+msgid "U-REPORT ON SOCIAL MEDIA"
+msgstr ""
+
+#: templates/public/join_engage.haml:113
+msgid "TWEET TO"
+msgstr ""
+
+#: templates/public/join_engage.haml:133
+msgid "COMPOSE NEW TWEET"
+msgstr ""
+
+#: templates/public/polls.haml:14
+msgid "CURRENT POLL IN"
+msgstr ""
+
+#: templates/public/polls.haml:29
+#, python-format
+msgid ""
+"\n"
+"                %(questions)s QUESTION POLLED ON THIS TOPIC\n"
+"              "
+msgid_plural ""
+"\n"
+"                %(questions)s QUESTIONS POLLED ON THIS TOPIC\n"
+"              "
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/public/polls.haml:49
+msgid "RESPONDED OUT OF"
+msgstr ""
+
+#: templates/public/polls.haml:53
+msgid "POLLED"
+msgstr ""
+
+#: templates/public/polls.haml:95
+msgid "POLL RESULTS"
+msgstr ""
+
+#: templates/public/polls.haml:112
+msgid "responded out of"
+msgstr ""
+
+#: templates/public/polls.haml:120
+msgid "KEYWORDS"
+msgstr ""
+
+#: templates/public/polls.haml:125
+msgid "STATISTICS"
+msgstr ""
+
+#: templates/public/polls.haml:129
+msgid "LOCATIONS"
+msgstr ""
+
+#: templates/public/polls.haml:204
+msgid "FEATURED ANSWERS"
+msgstr ""
+
+#: templates/public/polls.haml:211
+msgid "No featured answers."
+msgstr ""
+
+#: templates/public/polls.haml:230
+msgid "U-reporter in"
+msgstr ""
+
+#: templates/public/polls.haml:242 templates/public/story_read.haml:113
+msgid "RELATED STORIES"
+msgstr ""
+
+#: templates/public/polls.haml:247 templates/public/story_read.haml:118
+msgid "No related stories."
+msgstr ""
+
+#: templates/public/polls.haml:270 templates/public/story_read.haml:144
+msgid "READ MORE"
+msgstr ""
+
+#: templates/public/polls.haml:282 templates/public/story_read.haml:86
+msgid "FEATURED IMAGES"
+msgstr ""
+
+#: templates/public/polls.haml:288
+msgid "No featured images yet."
+msgstr ""
+
+#: templates/public/stories.haml:19
+msgid "FEATURED STORY"
+msgstr ""
+
+#: templates/public/stories.haml:26 templates/public/story_read.haml:22
+msgid "BY"
+msgstr ""
+
+#: templates/public/stories.haml:55
+msgid "LATEST U-REPORT STORIES"
+msgstr ""
+
+#: templates/public/stories.haml:60
+msgid "FILTERED BY"
+msgstr ""
+
+#: templates/public/story_read.haml:27
+msgid "Scroll to read more"
+msgstr ""
+
+#: templates/public/story_read.haml:46
+msgid "U-REPORT STORY CONTINUES"
+msgstr ""
+
+#: templates/public/story_read.haml:65
+msgid "RELATED POLLS"
+msgstr ""
+
+#: templates/public/story_read.haml:70
+msgid "No related polls."
+msgstr ""
+
+#: templates/public/story_read.haml:91
+msgid "No featured images."
+msgstr ""
+
+#: templates/public/ureporters.haml:44
+msgid "WHO WE ARE"
+msgstr ""
+
+#: templates/public/ureporters.haml:55
+msgid "U-REPORTER STATISTICS"
+msgstr ""
+
+#: templates/public/ureporters.haml:63
+msgid "AGE"
+msgstr ""
+
+#: templates/public/ureporters.haml:79
+msgid "GENDER"
+msgstr ""
+
+#: templates/public/ureporters.haml:118
+msgid "WHERE ARE U-REPORTERS FROM?"
+msgstr ""
+
+#: templates/public/ureporters.haml:138
+msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
+msgstr ""
+
+#: templates/public/ureporters.haml:156
+msgid "OCCUPATION: TOP 9 MOST MENTIONED"
+msgstr ""
+
+#: templates/smartmin/users/login.haml:14
+msgid "Sign in"
+msgstr ""
+
+#: templates/smartmin/users/login.haml:54
+msgid "Forgot Password?"
+msgstr ""
+
+#: ureport/categories/models.py:11
+msgid "The name of this category"
+msgstr ""
+
+#: ureport/categories/models.py:14
+msgid "An optional image that can describe this category"
+msgstr ""
+
+#: ureport/categories/models.py:17 ureport/polls/models.py:24
+msgid "The organization this category applies to"
+msgstr ""
+
+#: ureport/categories/models.py:35
+msgid "The category this image represents"
+msgstr ""
+
+#: ureport/news/models.py:9
+msgid "The title for this item"
+msgstr ""
+
+#: ureport/news/models.py:12
+msgid "A short summary description for this item"
+msgstr ""
+
+#: ureport/news/models.py:15
+msgid "A link that should be associated with this item"
+msgstr ""
+
+#: ureport/news/models.py:18 ureport/news/models.py:34
+msgid "The category this item belongs to"
+msgstr ""
+
+#: ureport/news/models.py:21
+msgid "The organization this item belongs to"
+msgstr ""
+
+#: ureport/news/models.py:25
+msgid "The title for this Video"
+msgstr ""
+
+#: ureport/news/models.py:28
+msgid "A short summary description for this video"
+msgstr ""
+
+#: ureport/news/models.py:31
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr ""
+
+#: ureport/news/models.py:37
+msgid "The organization this video belongs to"
+msgstr ""
+
+#: ureport/polls/models.py:22
+msgid "The name of this poll category"
+msgstr ""
+
+#: ureport/polls/models.py:31
+msgid "Poll Categories"
+msgstr ""
+
+#: ureport/polls/models.py:38
+msgid "The Flow this Poll is based on"
+msgstr ""
+
+#: ureport/polls/models.py:40
+msgid "The title for this Poll"
+msgstr ""
+
+#: ureport/polls/models.py:42
+msgid "The category this Poll belongs to"
+msgstr ""
+
+#: ureport/polls/models.py:44
+msgid "Whether this poll should be featured on the homepage"
+msgstr ""
+
+#: ureport/polls/models.py:46
+msgid "The organization this poll is part of"
+msgstr ""
+
+#: ureport/polls/models.py:192
+msgid "The poll to associate to"
+msgstr ""
+
+#: ureport/polls/models.py:203
+msgid "The poll for this response"
+msgstr ""
+
+#: ureport/polls/models.py:206
+msgid "The location for this response"
+msgstr ""
+
+#: ureport/polls/models.py:209
+msgid "The name of the sender of the message"
+msgstr ""
+
+#: ureport/polls/models.py:212
+msgid "The featured response message"
+msgstr ""
+
+#: ureport/polls/models.py:224
+msgid "The poll this question is part of"
+msgstr ""
+
+#: ureport/polls/models.py:226
+msgid "The title of this question"
+msgstr ""
+
+#: ureport/polls/models.py:227
+msgid "The RuleSet this question is based on"
+msgstr ""
+
+#: ureport/polls/views.py:46
+msgid "The message sent by the U-reporter you want to feature"
+msgstr ""
+
+#: ureport/polls/views.py:83
+msgid "You must include a title for every included question."
+msgstr ""
+
+#: ureport/polls/views.py:88
+msgid "You must include at least one poll question."
+msgstr ""
+
+#: ureport/polls/views.py:103
+msgid "Your poll has been created, now pick which questions to include."
+msgstr ""
+
+#: ureport/polls/views.py:117
+msgid "Poll Images"
+msgstr ""
+
+#: ureport/polls/views.py:118
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr ""
+
+#: ureport/polls/views.py:130
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr ""
+
+#: ureport/polls/views.py:137
+msgid "Image to display on poll page and in previews (optional)"
+msgstr ""
+
+#: ureport/polls/views.py:161
+msgid "Featured Poll Responses"
+msgstr ""
+
+#: ureport/polls/views.py:162
+msgid "Your poll has been updated."
+msgstr ""
+
+#: ureport/polls/views.py:179
+#, python-format
+msgid "Response %d Reporter"
+msgstr ""
+
+#: ureport/polls/views.py:179
+msgid "The name or alias of the responder."
+msgstr ""
+
+#: ureport/polls/views.py:184
+#, python-format
+msgid "Response %d Location"
+msgstr ""
+
+#: ureport/polls/views.py:184
+msgid "The location of the responder."
+msgstr ""
+
+#: ureport/polls/views.py:189
+#, python-format
+msgid "Response %d Message"
+msgstr ""
+
+#: ureport/polls/views.py:189
+msgid "The text of the featured response."
+msgstr ""
+
+#: ureport/polls/views.py:215
+msgid "Poll Questions"
+msgstr ""
+
+#: ureport/polls/views.py:217
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr ""
+
+#: ureport/polls/views.py:242
+msgid "Include"
+msgstr ""
+
+#: ureport/polls/views.py:243
+msgid "Whether to include this question in your public results"
+msgstr ""
+
+#: ureport/polls/views.py:245
+msgid "Title"
+msgstr ""
+
+#: ureport/polls/views.py:246
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr ""
+
+#: ureport/settings_common.py:157
+msgid "The shortcode that users will use to contact U-report locally"
+msgstr ""
+
+#: ureport/settings_common.py:158
+msgid "The short text used to direct visitors to join U-report"
+msgstr ""
+
+#: ureport/settings_common.py:159
+msgid "The color used to draw the text on the join bar"
+msgstr ""
+
+#: ureport/settings_common.py:160
+msgid "The color used to draw the background on the join bar"
+msgstr ""
+
+#: ureport/settings_common.py:161
+msgid "The primary color for styling for this organization"
+msgstr ""
+
+#: ureport/settings_common.py:162
+msgid "The secondary color for styling for this organization"
+msgstr ""
+
+#: ureport/settings_common.py:163
+msgid "The background color for the site"
+msgstr ""
+
+#: ureport/settings_common.py:164
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr ""
+
+#: ureport/settings_common.py:165
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr ""
+
+#: ureport/settings_common.py:166
+msgid "The URL to the Youtube channel for this organization"
+msgstr ""
+
+#: ureport/settings_common.py:167
+msgid "The URL to the Facebook page for this organization"
+msgstr ""
+
+#: ureport/settings_common.py:168
+msgid "The Twitter handle for this organization"
+msgstr ""
+
+#: ureport/settings_common.py:169
+msgid "The Twitter widget used for following new users"
+msgstr ""
+
+#: ureport/settings_common.py:170
+msgid "The Twitter widget used for searching"
+msgstr ""
+
+#: ureport/settings_common.py:171
+msgid "The name of txbhe Contact Group that contains registered reporters"
+msgstr ""
+
+#: ureport/settings_common.py:172
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
+msgstr ""
+
+#: ureport/settings_common.py:173
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr ""
+
+#: ureport/settings_common.py:174
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
+msgstr ""
+
+#: ureport/settings_common.py:175
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr ""
+
+#: ureport/settings_common.py:176
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr ""
+
+#: ureport/settings_common.py:177
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr ""
+
+#: ureport/settings_common.py:178
+msgid "The label assigned to U-reporters that are Male."
+msgstr ""
+
+#: ureport/settings_common.py:179
+msgid "The label assigned to U-reporters that are Female."
+msgstr ""
+
+#: ureport/translation.py:14
+msgid "Something to trigger localizations"
+msgstr ""

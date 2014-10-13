@@ -11,20 +11,23 @@
     .hero-container
       .hero-dark-container
         .container
-          .col-md-6
-            .story-hero
-              .hero-title.primary-bg-color
-                FEATURED STORY
-              .story-hero-title
-                {{ main_story.title|upper }}
-              -if story.created_by.first_name
-                .hero-author
-                  BY {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
-              .hero-info
-                {{ main_story.short_teaser }}
-              .hero-title.hero-link.primary-bg-color
-                %a{href:"{% url 'public.story_read' main_story.pk %}"}
-                  READ FULL STORY &#8594;
+          .row
+            .col-md-6
+              .story-hero
+                .hero-title.primary-bg-color
+                  - trans "FEATURED STORY"
+                .story-hero-title
+                  {{ main_story.title|upper }}
+                -if story.created_by.first_name
+                  .hero-author
+                    - trans "BY"
+                    {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
+                .hero-info
+                  {{ main_story.short_teaser }}
+                .hero-title.hero-link.primary-bg-color
+                  %a{href:"{% url 'public.story_read' main_story.pk %}"}
+                    - trans "READ FULL STORY"
+                    &#8594;
 
   - block banner
     {{ block.super }}
@@ -32,11 +35,11 @@
 - block content
   .section
     %h1.level-1-title
-      LATEST U-REPORT STORIES
+      - trans "LATEST U-REPORT STORIES"
     .level-1-title-description.secondary-color
     .card.card-padding
       .filter-title.primary-color
-        FILTERED BY
+        - trans "FILTERED BY"
       %hr.hr12.primary-bg-color
       .featured-stories-filters
         .row
@@ -72,7 +75,8 @@
                 .featured-story-teaser
                   {{ featured_story.short_teaser|safe }}
               %a.featured-story-link.primary-bg-color{href:"{% url 'public.story_read' featured_story.pk %}"}
-                READ FULL STORY &#8594;
+                - trans "READ FULL STORY"
+                &#8594;
 
   %hr.aaa
   - include "public/archived_stories.html"

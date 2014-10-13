@@ -1,5 +1,5 @@
 - extends "public_base.html"
-- load thumbnail compress
+- load thumbnail compress i18n
 
 -block subtitle
   &nbsp;- {{ story.title }}
@@ -16,9 +16,10 @@
               {{ story.title|upper }}
             -if story.created_by.first_name
               .hero-author
-                BY {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
+                - trans "BY"
+                {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
             .hero-info
-              Scroll to read more
+              - trans "Scroll to read more"
 
   - block banner
     {{ block.super }}
@@ -29,20 +30,24 @@
     .col-md-8.right-col-border
       .section
         %h1.level-1-title
-          U-REPORT STORY CONTINUES
+          - trans "U-REPORT STORY CONTINUES"
         .level-1-title-description.secondary-color
 
         .card.card-padding
           .story-details
-            .block-video.pull-right
-              %iframe{ width:"360", height:"270", src:"//www.youtube.com/embed/{{story.video_id}}", frameborder:"0"}
+            - if story.video_id
+              .block-video.pull-right
+                %iframe{ width:"360", height:"270", src:"//www.youtube.com/embed/{{story.video_id}}", frameborder:"0"}
             {{ story.content|safe }}
 
     .col-md-4
       .section
         %h1.level-1-title
-          RELATED POLLS
+          - trans "RELATED POLLS"
         .level-1-title-description.secondary-color
+        - if not related_polls
+          .card.card-padding.no-content
+            - trans "No related polls."
         .card.card-padding
           - for related_poll in related_polls|slice:"5"
             .related-poll
@@ -51,8 +56,30 @@
       %hr.aaa
       .section
         %h1.level-1-title
-          RELATED STORIES
+          - trans "FEATURED IMAGES"
+
+        - if not story_featured_images
+          .card.card-padding.no-content
+            - trans "No featured images."
+        - else
+          .card.card-padding
+            .story-featured-images-list
+              - for featured_image in story_featured_images
+                .story-featured-image{style:"{% if not forloop.last %}margin-bottom: 10px;{% endif %}"}
+                  {% thumbnail featured_image.image "1200x800" as im %}
+                  <a href="{{ im.url}}" data-lightbox="story-featured-image-garelly-{{ story.id }}">
+                  <img width="100%" src="{{im.url}}" />
+                  </a>
+                  {% endthumbnail %}
+
+      %hr.aaa
+      .section
+        %h1.level-1-title
+          - trans "RELATED STORIES"
         .level-1-title-description.secondary-color
+        - if not related_stories
+          .card.card-padding.no-content
+            - trans "No related stories."
 
         - for story in related_stories|slice:"3"
           .card.card-padding{ style: "margin-bottom: 15px" }
@@ -71,7 +98,8 @@
               .related-story-teaser
                 {{ story.short_teaser|safe }}
               %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
-                READ MORE &#8594;
+                - trans "READ MORE"
+                &#8594;
 
   %hr.aaa
   - include "public/archived_stories.html"

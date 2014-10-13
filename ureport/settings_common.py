@@ -1,4 +1,6 @@
+import sys
 from django.utils.translation import ugettext_lazy as _
+from hamlpy import templatize
 
 # Django settings for tns_glass project.
 THUMBNAIL_DEBUG = False
@@ -32,23 +34,25 @@ EMAIL_USE_TLS = True
 
 API_ENDPOINT = 'http://localhost:8001'
 SITE_HOST_PATTERN = 'http://%s.localhost:8000'
+SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 
 # On Unix systems, a value of None will cause Django to use the same
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone
 TIME_ZONE = 'GMT'
-USER_TIME_ZONE = 'Africa/Kigali'
+USER_TIME_ZONE = 'GMT'
+USE_TZ = True
 
 MODELTRANSLATION_TRANSLATION_REGISTRY = "translation"
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 # Available languages for translation
-LANGUAGES = (('en_us', "English"),)
-DEFAULT_LANGUAGE = "en_us"
+LANGUAGES = (('en', "English"), ('fr', "French"))
+DEFAULT_LANGUAGE = "en"
 
 SITE_ID = 1
 
@@ -77,13 +81,13 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
-COMPRESS_URL = '/static/'
+STATIC_URL = '/sitestatic/'
+COMPRESS_URL = '/sitestatic/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = '/sitestatic/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -153,27 +157,35 @@ CACHES = {
     }
 }
 
+if 'test' in sys.argv:
+    CACHES['default'] = {'BACKEND': 'django.core.cache.backends.dummy.DummyCache',}
+
+
 ORG_CONFIG_FIELDS =[ dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-report locally"), required=True)),
                      dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-report"), required=False)),
-                     dict(name='join_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False)),
-                     dict(name='primary_color', field=dict(help_text=_("The primary color for styling for this organization"), required=False)),
-                     dict(name='secondary_color', field=dict(help_text=_("The secondary color for styling for this organization"), required=False)),
-                     dict(name='colors', field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False)),
+                     dict(name='join_fg_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False), superuser_only=True),
+                     dict(name='join_bg_color', field=dict(help_text=_("The color used to draw the background on the join bar"), required=False), superuser_only=True),
+                     dict(name='primary_color', field=dict(help_text=_("The primary color for styling for this organization"), required=False), superuser_only=True),
+                     dict(name='secondary_color', field=dict(help_text=_("The secondary color for styling for this organization"), required=False), superuser_only=True),
+                     dict(name='bg_color', field=dict(help_text=_("The background color for the site"), required=False), superuser_only=True),
+                     dict(name='colors', field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False), superuser_only=True),
                      dict(name='google_tracking_id', field=dict(help_text=_("The Google Analytics Tracking ID for this organization"), required=False)),
                      dict(name='youtube_channel_url', field=dict(help_text=_("The URL to the Youtube channel for this organization"), required=False)),
                      dict(name='facebook_page_url', field=dict(help_text=_("The URL to the Facebook page for this organization"), required=False)),
+                     dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), required=False)),
                      dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
                      dict(name='twitter_user_widget', field=dict(help_text=_("The Twitter widget used for following new users"), required=False)),
                      dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
-                     dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters"))),
-                     dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters"))),
-                     dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters"))),
-                     dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters"))),
-                     dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters"))),
-                     dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters"))),
-                     dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters"))),
-                     dict(name='featured_state', field=dict(help_text=_("Choose the featured State of reporters shown on the home page")))]
-
+                     dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True),
+                     dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")), superuser_only=True),
+                     dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters")), superuser_only=True),
+                     dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters")), superuser_only=True),
+                     dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")), superuser_only=True),
+                     dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters")), superuser_only=True),
+                     dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters")), superuser_only=True),
+                     dict(name='male_label', field=dict(help_text=_("The label assigned to U-reporters that are Male.")), superuser_only=True),
+                     dict(name='female_label', field=dict(help_text=_("The label assigned to U-reporters that are Female.")), superuser_only=True)]
+#                     dict(name='featured_state', field=dict(help_text=_("Choose the featured State of reporters shown on the home page")))]
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -220,10 +232,10 @@ INSTALLED_APPS = (
     'dash.dashblocks',
     'dash.stories',
     'dash.utils',
+    'dash.categories',
 
     # ureport apps
     'ureport.polls',
-    'ureport.categories',
     'ureport.news',
 )
 
@@ -270,6 +282,7 @@ import os
 PROJECT_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)))
 RESOURCES_DIR = os.path.join(PROJECT_DIR, '../resources')
 
+LOCALE_PATHS = (os.path.join(PROJECT_DIR, '../locale'),)
 RESOURCES_DIR = os.path.join(PROJECT_DIR, '../resources')
 FIXTURE_DIRS = (os.path.join(PROJECT_DIR, '../fixtures'),)
 TESTFILES_DIR = os.path.join(PROJECT_DIR, '../testfiles')
@@ -293,8 +306,8 @@ PERMISSIONS = {
 
     'dashblocks.dashblock': ('html', ),
     'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join'),
-    'polls.poll': ('questions',),
-    'stories.story': ('html',),
+    'polls.poll': ('questions', 'responses', 'images'),
+    'stories.story': ('html', 'images'),
 
 }
 
@@ -314,17 +327,29 @@ GROUP_PERMISSIONS = {
         'orgs.orgbackground.*',
         'polls.poll.*',
         'polls.pollcategory.*',
+        'polls.pollimage.*',
         'polls.featuredresponse.*',
         'stories.story.*',
+        'stories.storyimage.*',
         'users.user_profile',
     ),
     "Editors": (
+        'categories.category.*',
+        'categories.categoryimage.*',
+        'dashblocks.dashblock.*',
+        'dashblocks.dashblocktype.*',
+        'news.newsitem.*',
+        'news.video.*',
         'orgs.org_home',
         'orgs.org_profile',
+        'polls.poll.*',
+        'polls.pollcategory.*',
+        'polls.pollimage.*',
+        'polls.featuredresponse.*',
+        'stories.story.*',
+        'stories.storyimage.*',
         'users.user_profile',
-        'dashblocks.dashblock.*',
     ),
-    "Viewers": []
 }
 
 #-----------------------------------------------------------------------------------
@@ -399,4 +424,8 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
-
+#-----------------------------------------------------------------------------------
+# U-report Defaults
+#-----------------------------------------------------------------------------------
+UREPORT_DEFAULT_PRIMARY_COLOR = '#FFFF00'
+UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'

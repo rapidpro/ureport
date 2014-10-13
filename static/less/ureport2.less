@@ -35,20 +35,30 @@ body {
   background-color: #dfdfdf;
 
   footer {
-    min-height: 100px;
-    padding: 25px 0px;
-    line-height: 50px;
+    background-image: url("/sitestatic/img/footer.png");
+    background-repeat: no-repeat;
+    padding-left: 140px;
+    min-height: 85px;
+    line-height: 100%;
     color: #808080;
     font-size: .85em;
 
-    .follow-us {
-      a {
-        padding: 0px 0px 0px 5px;
-      }
+    .terms-privacy {
+      padding-top: 20px;
     }
 
-    .login-link {
-      text-align: right;
+    .follow-us {
+      float: right;
+      padding-top: 20px;
+
+      a {
+        padding-top: 20px;
+      }
+
+      .login-link {
+        text-align: right;
+        padding-top: 10px;
+      }
     }
   }
 }
@@ -187,7 +197,7 @@ body {
 }
 
 .hero-container {
-  min-height: 520px;
+  min-height: 600px;
   background-size: cover;
   position: relative;
 
@@ -214,7 +224,7 @@ body {
   font-size: .75em;
   z-index:100;
   display: inline-block;
-  padding: 8px 8px 4px 8px;
+  padding: 8px 8px 8px 8px;
   margin-bottom: 10px;
 }
 
@@ -282,7 +292,7 @@ body {
     display: block;
     color: #fff;
     text-align: center;
-    padding: 12px 0px 8px 0px;
+    padding: 12px 0px 12px 0px;
     font-size: .90em;
     min-width: 300px;
     max-width: 375px;
@@ -354,7 +364,7 @@ body {
     font-style: normal;
     font-family: @sans-family;
     text-align: center;
-
+    padding-bottom: 4px;
     width: 100%;
   }
 
@@ -445,6 +455,17 @@ body {
 .stories-filtered {
   min-height: 500px;
   margin-top: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+
+  .story-filtered {
+    padding-left: 5px;
+    padding-right: 5px;
+
+    .white-card-inner {
+      margin-bottom: 10px;
+    }
+  }
 
   .white-card-container {
     max-width: 345px;
@@ -457,7 +478,8 @@ body {
 }
 
 .featured-story-title {
-  font-size: 1.2em;
+  font-size: .9em;
+  line-height: 130%;
 
   @media (min-width: 992px) {
     margin-top: -20px;
@@ -648,6 +670,10 @@ h1 {
   background-color: #4aaad4;
 }
 
+.instagram-bg-color {
+  background-color: #517fa4;
+}
+
 .tweet-button-intent {
   padding: 10px;
   text-align: right;
@@ -664,6 +690,7 @@ h1 {
 
   a {
     color: #333;
+    font-size: .85em;
     text-decoration: underline;
     padding: 10px 0px;
   }
@@ -676,7 +703,7 @@ h1 {
 }
 
 .none-color {
-  background-color: #333;
+  background-color: #000;
 }
 
 .filter-title {
@@ -704,7 +731,7 @@ ul.archived-stories, ul.polls {
     margin: 10px 0px;
 
     a {
-      color: #333;
+      color: #000;
       text-decoration: underline;
       font-size: .85em;
       line-height: 120%;
@@ -937,7 +964,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     height: 26px;
     display: inline-block;
     text-align: center;
-    line-height: 24px;
+    line-height: 22px;
     padding-top: 2px;
     font-size: .75em;
     text-decoration: none;
@@ -967,7 +994,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   font-size: .75em;
   z-index:100;
   display: inline-block;
-  padding: 8px 14px 4px 14px;
+  padding: 8px 14px 8px 14px;
   margin-bottom: 5px;
   position: absolute;
   left: 0px;
@@ -979,7 +1006,7 @@ a.brick-link {
   line-height: 100%;
   width: 100%;
   z-index: 100;
-  padding: 8px 14px 4px 14px;
+  padding: 8px 14px 8px 14px;
   text-align: right;
   display: block;
   color: #fff;
@@ -997,6 +1024,10 @@ a.brick-link:hover {
 
 .brick-align {
   padding: 20px;
+
+  &.news-list-align {
+    padding-right: 5px;
+  }
 }
 
 .brick-short-story-image {
@@ -1053,7 +1084,8 @@ a.brick-link:hover {
 }
 
 .brick-poll-title {
-  font-family: seric;
+  font-family: @serif-family;
+  line-height: 130%;
 }
 
 .brick-poll-response-percentage {
@@ -1151,7 +1183,9 @@ a.brick-link:hover {
 .social-content {
   position: absolute;
   top: 30px;
-  padding:0 10px;
+  padding:0 0 0 10px;
+  max-width: 97%;
+  overflow: hidden;
 }
 
 .social-link {
@@ -1182,7 +1216,7 @@ a.brick-link:hover {
   position: absolute;
   color: #fff;
   display: inline-block;
-  padding: 8px 14px 4px 14px;
+  padding: 8px 14px 8px 14px;
   line-height: 100%;
   font-size: .75em;
   z-index: 100;
@@ -1401,7 +1435,7 @@ a.brick-link:hover {
 .news-item-title {
   font-size: .8em;
   list-style: 100%;
-  margin: 15px 0px 10px 0px;
+  margin: 15px 10px 10px 0px;
 
 }
 
@@ -1419,6 +1453,7 @@ a.brick-link:hover {
   font-size: 0.7em;
   line-height: 120%;
   text-align: right;
+  padding-right: 10px;
 
   a {
     color: #aaa;
@@ -1431,7 +1466,7 @@ a.brick-link:hover {
 }
 
 .brick-news-list {
-  max-height: 650px;
+  max-height: 595px;
   overflow: scroll;
   margin-top: 20px;
 
@@ -1492,8 +1527,7 @@ a.brick-link:hover {
         top: 0px;
         left: 0px;
         height: 33px;
-        line-height: 30px;
-        padding-top: 5px;
+        line-height: 33px;
         margin-left: 10px;
         color: #bbb;
         background: #fff;
@@ -1507,8 +1541,7 @@ a.brick-link:hover {
         top: 0px;
         left: 0px;
         height: 33px;
-        line-height: 30px;
-        padding-top: 5px;
+        line-height: 33px;
         margin-left: 10px;
         color: #bbb;
         text-transform: uppercase;
@@ -1722,6 +1755,8 @@ a.brick-link:hover {
 }
 
 .admin-name {
+  font-family: @sans-family;
+
   @media (max-width: 768px) {
     font-size: 1.5em;
     margin-top: 10px;
@@ -1764,18 +1799,18 @@ a.brick-link:hover {
 }
 
 .leaflet-container .info {
-  color: #333;
+  color: #000;
 
   @media (max-width: 768px) {
     width: 125px;
     margin: 0;
   }
-
 }
 
 .top-border {
-  border-top: 1px solid #333;
+  border-top: 1px solid #000;
   margin-top: 10px;
+  font-family: @sans-family;
 
   @media (max-width: 768px) {
     margin-top: 5px;
@@ -1787,6 +1822,7 @@ a.brick-link:hover {
   font-size: 2em;
   padding-right: 10px;
   line-height: 100%;
+  font-family: @sans-family;
 
   @media (max-width: 768px) {
     font-size: 1.7em;
@@ -1797,14 +1833,42 @@ a.brick-link:hover {
   font-size: .75em;
   padding-right: 10px;
   line-height: 80%;
+  font-family: @serif-family;
 }
 
-.info-percentage {
-  font-size: 3em;
-  line-height: 100%;
+.results {
+  .info-percentage {
+    font-size: 3em;
+    line-height: 100%;
+    font-family: @sans-family;
+    vertical-align: top;
+    width: 75px;
 
-  @media (max-width: 768px){
-    font-size: 2em;
+    @media (max-width: 768px){
+      font-size: 2em;
+    }
+  }
+
+  .row-other td {
+    padding-top: 3px;
+
+    &.info-label {
+      padding-top: 8px;
+    }
+  }
+
+  .row-top td {
+    padding-bottom: 5px;
+  }
+
+  .info-label {
+    padding-top: 3px;
+    padding-left: 10px;
+    font-size: 1.3em;
+    line-height: 100%;
+    max-width: 150px;
+    font-family: @sans-family;
+    vertical-align: top;
   }
 }
 
@@ -1814,19 +1878,76 @@ a.brick-link:hover {
       margin: 0;
     }
   }
+
+  .other-details {
+    padding-top: 10px;
+    font-style: italic;
+    font-family: @serif-family;
+
+    .other-help {
+      font-weight: bold;
+    }
+
+    .detail-percentage {
+      padding-right: 3px;
+      text-align: right;
+    }
+  }
 }
 
 .banner {
-  height: 50px;
   text-align: center;
   color: #fff;
-  line-height: 44px;
-  font-size: 1.2em;
+  line-height: 65px;
+  font-size: 30px;
   font-family: @sans-family;
-  padding-top: 6px;
 }
 
 #ureport-announcement {
   font-size: .75em;
   font-family: @sans-family;
+}
+
+.alert-danger {
+  background-image: none;
+  background: rgb(157, 38, 29);
+  box-shadow: none;
+  text-shadow: none;
+  color: white;
+}
+
+.list-table {
+  &.table-bordered {
+    border: none;
+
+    thead {
+      tr {
+        th {
+          border: none;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          border: none;
+          border-top: 1px solid #ccc;
+        }
+      }
+    }
+  }
+}
+
+.story-featured-images-list {
+  max-height: 600px;
+  overflow: scroll;
+}
+
+.level-1-title-description {
+  font-family: @serif-family;
+  font-size: .75em;
+  font-style: italic;
+  line-height: 150%;
+
 }

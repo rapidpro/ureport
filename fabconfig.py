@@ -10,10 +10,9 @@ config = dict(
     settings='settings.py.dev',
     dbms='psql',
     db='ureport',
-    custom_domains='*.ureport.in ureport.in',
+    custom_domains='*.ureport.in ureport.in *.ureport.staging.nyaruka.com',
     prod_host='report1',
     sqldump=False,
-
     celery=(),
 
     compress=True,
@@ -21,5 +20,5 @@ config = dict(
                region='eu-west-1',
                primary='report1',
                instances=[dict(name='report1', host='report1.ureport.in', id='i-5c86951c'),
-                          dict(name='report2', host='report2.ureport.in', id='i-86ab5cc4')])
+                          dict(name='report2', host='report2.ureport.in', id='i-e89fd8aa')])
 )

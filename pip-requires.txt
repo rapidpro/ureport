@@ -1,5 +1,6 @@
 -e git+https://github.com/nyaruka/smartmin.git@to_django_1_7#egg=smartmin-dev
 -e git+https://github.com/django/django.git@stable/1.7.x#egg=django
+-e git+https://github.com/rapidpro/dash.git#egg=dash
 celery
 coverage
 django-celery
@@ -11,6 +12,7 @@ django-nose
 django-reversion
 django-rosetta
 django-storages
+dj-database-url
 boto
 Pillow
 celery-with-redis
