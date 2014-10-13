@@ -1,9 +1,7 @@
-dash 
-====
+U-report
+=========
 
-Dashboard framework for TextIt apps
-
-Note that this app is still in heavy development, specifically the migrations will likely reset in the next week, so if you fork keep that in mind.
+This is the U-report dashboard built on data collected by RapidPro.
 
 Getting Started
 ================

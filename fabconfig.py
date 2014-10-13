@@ -2,6 +2,7 @@ config = dict(
     port='8025',
     app_dir='ureport',
     friendly_name='UReport',
+    repository='ssh://git@github.com/rapidpro/ureport.git',
     domain='ureport.in',
     name='ureport',
     repo='ureport',
