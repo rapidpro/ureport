@@ -3,6 +3,8 @@ U-report
 
 This is the U-report dashboard built on data collected by RapidPro.
 
+Built for UNICEF by Nyaruka - http://nyaruka.com
+
 Getting Started
 ================
 
