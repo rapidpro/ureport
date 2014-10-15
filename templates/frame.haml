@@ -362,6 +362,10 @@
                 %a{href:'{{ org|config:"facebook_page_url" }}'}
                   %img{src:"{{ STATIC_URL}}img/facebook_footer.png"}
 
+              - if org|config:"instagram_username"
+                %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
+                  %img{src:"{{ STATIC_URL}}img/instagram_footer.png"}
+
               - if org|config:"twitter_handle"
                 %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
                   %img{src:"{{ STATIC_URL}}img/twitter_footer.png"}
