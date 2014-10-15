@@ -40,6 +40,7 @@
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/lightbox.css"}
       %link{ type:"text/less", rel:"stylesheet", href:"{{ STATIC_URL }}less/ureport2.less"}
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/jqcloud.css" }
+      %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/social-icons.css"}
 
   - if org
     :css
@@ -360,19 +361,23 @@
 
               - if org|config:"facebook_page_url"
                 %a{href:'{{ org|config:"facebook_page_url" }}'}
-                  %img{src:"{{ STATIC_URL}}img/facebook_footer.png"}
+                  %span.symbol.footer-icon
+                    circlefacebook
 
               - if org|config:"instagram_username"
                 %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
-                  %img{src:"{{ STATIC_URL}}img/instagram_footer.png"}
+                  %span.symbol.footer-icon
+                    circleinstagram
 
               - if org|config:"twitter_handle"
                 %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
-                  %img{src:"{{ STATIC_URL}}img/twitter_footer.png"}
+                  %span.symbol.footer-icon
+                    circletwitterbird
 
               - if org|config:"youtube_channel_url"
                 %a{href:'{{ org|config:"youtube_channel_url" }}'}
-                  %img{src:"{{ STATIC_URL}}img/youtube_footer.png"}
+                  %span.symbol.footer-icon
+                    circleyoutube
 
           - if not request.user.is_authenticated
             .login-link
