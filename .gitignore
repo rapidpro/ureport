@@ -73,3 +73,6 @@ config/
 deploy
 media/
 db/
+
+# symlink to dash for dev
+ureport/dash
