@@ -20,6 +20,6 @@ config = dict(
     elb = dict(name='UReport',
                region='eu-west-1',
                primary='report1',
-               instances=[dict(name='report1', host='report1.ureport.in', id='i-5c86951c'),
+               instances=[dict(name='report1', host='report1.ureport.in', id='i-5ccaec1f'),
                           dict(name='report2', host='report2.ureport.in', id='i-e89fd8aa')])
 )
