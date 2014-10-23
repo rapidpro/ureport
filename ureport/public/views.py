@@ -176,7 +176,6 @@ class ReportersResultsView(SmartReadView):
         contact_field = self.request.GET.get('contact_field', None)
         if self.get_object() and contact_field:
             api_data = self.get_object().get_contact_field_results(contact_field, segment)
-
             output_data = self.get_object().organize_categories_data(contact_field, api_data)
 
         return HttpResponse(json.dumps(output_data))
