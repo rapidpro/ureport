@@ -3,340 +3,338 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# stucampo <stuart.campo@gmail.com>, 2014
-# Vincent Turmine <vincent.turmine@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-21 21:42+0000\n"
-"PO-Revision-Date: 2014-09-22 12:57+0000\n"
-"Last-Translator: Vincent Turmine <vincent.turmine@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/ureport/language/fr/)\n"
+"PO-Revision-Date: 2014-09-26 18:11+0000\n"
+"Last-Translator: Evan Wheeler <evanmwheeler@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/ureport/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: dash/dashblocks/views.py:280
 msgid "Content Blocks"
-msgstr "Blocs"
+msgstr "Bloques de contenido"
 
 #: dash/dashblocks/views.py:282
 #, python-format
 msgid "%s Blocks"
-msgstr "%s Blocs"
+msgstr "%s Bloques"
 
 #: dash/orgs/models.py:15 dash/orgs/models.py:236
 msgid "Name"
-msgstr "Nom"
+msgstr "Nombre"
 
 #: dash/orgs/models.py:16 dash/orgs/views.py:108
 msgid "The name of this organization"
-msgstr "Nom de l'organisation"
+msgstr "El nombre de esta organización"
 
 #: dash/orgs/models.py:19
 msgid "The logo that should be used for this organization"
-msgstr "Le logo qui doit être utilisé pour l'organisation"
+msgstr "El logotipo que se debe usar para esta organización"
 
 #: dash/orgs/models.py:21 dash/orgs/views.py:221
 msgid "Administrators"
-msgstr "Administrateurs"
+msgstr "Administradores"
 
 #: dash/orgs/models.py:22
 msgid "The administrators in your organization"
-msgstr "Les administrateurs de votre organisation"
+msgstr "Los administradores en su organización"
 
 #: dash/orgs/models.py:24 dash/orgs/views.py:221
 #: templates/orgs/org_manage_accounts.haml:22
 msgid "Viewers"
-msgstr "Visiteurs"
+msgstr "Visitantes"
 
 #: dash/orgs/models.py:25
 msgid "The viewers in your organization"
-msgstr "Visiteurs de votre organisation"
+msgstr "Los visitantes en su organización"
 
 #: dash/orgs/models.py:27 dash/orgs/views.py:221
 #: templates/orgs/org_manage_accounts.haml:19
 msgid "Editors"
-msgstr "Editeurs"
+msgstr "Editores"
 
 #: dash/orgs/models.py:28
 msgid "The editors in your organization"
-msgstr "Les éditeurs de votre organisation"
+msgstr "Los editores en su organización"
 
 #: dash/orgs/models.py:30
 msgid "Language"
-msgstr "Langue"
+msgstr "Idioma"
 
 #: dash/orgs/models.py:31
 msgid "The main language used by this organization"
-msgstr "La langue principale de votre organisation"
+msgstr "El idioma principal usado por esta organización"
 
 #: dash/orgs/models.py:33
 msgid "Subdomain"
-msgstr "Sous-domaine"
+msgstr "Subcampo"
 
 #: dash/orgs/models.py:33
 msgid "This subdomain is not available"
-msgstr "Le sous-domaine n'est pas disponible"
+msgstr "Este subcampo no está disponible"
 
 #: dash/orgs/models.py:34
 msgid "The subdomain for this UReport instance"
-msgstr "Le sous-domaine pour ce U-report"
+msgstr "El subcampo para este caso de UReport"
 
 #: dash/orgs/models.py:37
 msgid "The API token for the RapidPro account this dashboard is tied to"
-msgstr "L'API token du tableau de bord auquel ce compte RapidPro est lié"
+msgstr "El token de la API para la cuenta RapidPro a la que está conectada este panel"
 
 #: dash/orgs/models.py:40
 msgid ""
 "JSON blob used to store configuration information associated with this "
 "organization"
-msgstr "JSON blob utilisé pour stocker les éléments de configuration relative à cette organisation"
+msgstr "El archivo JSON usado para almacenar la información sobre la configuración relacionada con esta organización"
 
 #: dash/orgs/models.py:172
 msgid "Administrator"
-msgstr "Administrateur"
+msgstr "Administrador"
 
 #: dash/orgs/models.py:173
 msgid "Editor"
-msgstr "Editeur"
+msgstr "Editor"
 
 #: dash/orgs/models.py:174
 msgid "Viewer"
-msgstr "Visiteur"
+msgstr "Visitante"
 
 #: dash/orgs/models.py:178 dash/orgs/models.py:232
 msgid "Org"
-msgstr "Organisation"
+msgstr "Organización"
 
 #: dash/orgs/models.py:179
 msgid "The organization to which the account is invited to view"
-msgstr "L'organisation à laquelle le compte est invité pour visiter"
+msgstr "La organización a la que esta cuenta está invitada a visitar"
 
 #: dash/orgs/models.py:181
 msgid "Email"
-msgstr "Email"
+msgstr "Correo electrónico"
 
 #: dash/orgs/models.py:181
 msgid "The email to which we send the invitation of the viewer"
-msgstr "L'email du visiteur à qui nous envoyons l'invitation"
+msgstr "El correo electrónico al que enviamos la invitación del visitante"
 
 #: dash/orgs/models.py:183
 msgid "Secret"
-msgstr "Secret"
+msgstr "Código secreto"
 
 #: dash/orgs/models.py:184
 msgid "a unique code associated with this invitation"
-msgstr "un code unique associé avec l'invitation"
+msgstr "un código único relacionado con esta invitación"
 
 #: dash/orgs/models.py:186
 msgid "User Role"
-msgstr "Rôle Utilisateur"
+msgstr "Función del usuario"
 
 #: dash/orgs/models.py:218
 #, python-format
 msgid "%s Invitation"
-msgstr "%s Invitation"
+msgstr "Invitación de %s "
 
 #: dash/orgs/models.py:228
 msgid "Banner"
-msgstr "Bannière"
+msgstr "Banner"
 
 #: dash/orgs/models.py:229
 msgid "Pattern"
-msgstr "Motif"
+msgstr "Patrón"
 
 #: dash/orgs/models.py:233
 msgid "The organization in which the image will be used"
-msgstr "L'organisation pour laquelle l'image sera utilisée"
+msgstr "La organización en la que se utilizará la imagen"
 
 #: dash/orgs/models.py:237
 msgid "The name to describe this background"
-msgstr "Le nom pour décrire cet arrière-plan"
+msgstr "El nombre para describir este fondo"
 
 #: dash/orgs/models.py:239
 msgid "Background type"
-msgstr "Type d'arrière-plan"
+msgstr "Tipo de fondo"
 
 #: dash/orgs/models.py:241
 msgid "The image file"
-msgstr "Le fichier image"
+msgstr "El archivo de la imagen"
 
 #: dash/orgs/views.py:102
 msgid "Your first name"
-msgstr "Votre prénom"
+msgstr "Su nombre"
 
 #: dash/orgs/views.py:103
 msgid "Your last name"
-msgstr "Votre nom"
+msgstr "Su apellido"
 
 #: dash/orgs/views.py:104
 msgid "Your email address"
-msgstr "Votre adresse email"
+msgstr "Su dirección de correo electrónico"
 
 #: dash/orgs/views.py:106
 msgid "Your password, at least eight letters please"
-msgstr "Votre mot de passe, avec au moins 8 lettres"
+msgstr "Su contraseña, como mínimo ocho letras por favor"
 
 #: dash/orgs/views.py:107
 msgid "Organization"
-msgstr "Organisation"
+msgstr "Organización"
 
 #: dash/orgs/views.py:109
 msgid "The subdomain of this organization"
-msgstr "Le sous-domaine de votre organisation"
+msgstr "El subcampo de esta organización"
 
 #: dash/orgs/views.py:117
 msgid "That email address is already used"
-msgstr "Cet email est déjà utilisé"
+msgstr "La dirección de correo electrónico ya ha sido utilizada"
 
 #: dash/orgs/views.py:125
 msgid "Passwords must contain at least 8 letters."
-msgstr "Les mots de passe doivent contenir au moins 8 lettres"
+msgstr "Las contraseñas deben contener como mínimo 8 letras."
 
 #: dash/orgs/views.py:148 dash/orgs/views.py:208
 msgid "Your Account"
-msgstr "Votre compte"
+msgstr "Su cuenta"
 
 #: dash/orgs/views.py:215
 msgid "Not Set"
-msgstr "Non-installé"
+msgstr "No establecida"
 
 #: dash/orgs/views.py:220
 msgid "Invite people to your organization"
-msgstr "Invitez des membres de votre organisation"
+msgstr "Invitar a personas a su organización"
 
 #: dash/orgs/views.py:222
 msgid "User group"
-msgstr "Groupe utilisateur"
+msgstr "Grupo de usuarios"
 
 #: dash/orgs/views.py:232
 msgid "One of the emails you entered is invalid."
-msgstr "Un des emails que vous avez saisi est erroné"
+msgstr "Uno de los correos electrónicos que ingresó es inválido."
 
 #: dash/orgs/views.py:246
 #, python-format
 msgid "Manage %(name)s Accounts"
-msgstr "Gérer les comptes de %(name)s"
+msgstr "Manejar las cuentas de %(name)s "
 
 #: dash/orgs/views.py:378
 msgid "Select your Organization"
-msgstr "Choisir votre organisation"
+msgstr "Elija su Organización"
 
 #: dash/orgs/views.py:388
 msgid ""
 "Your account is not associated to an organization. Please Contact the "
 "adminstrator."
-msgstr "Votre compte n'est pas associé à une organisation. SVP, contactez l'administrateur."
+msgstr "Su cuenta no está asociada a una organización. Por favor, contacte al administrador."
 
 #: dash/orgs/views.py:434
 msgid "Create"
-msgstr "Créer"
+msgstr "Crear"
 
 #: dash/orgs/views.py:442
 msgid ""
 "Your invitation link is invalid. Please contact your organization "
 "administrator."
-msgstr "Le lien de votre invitation n'est pas valide. SVP, contacter l'administrateur de votre organisation."
+msgstr "El enlace de su invitación es inválido. Por favor, contacte al administrador de su organización."
 
 #: dash/orgs/views.py:510 dash/orgs/views.py:561
 #, python-format
 msgid "Join %(name)s"
-msgstr "Rejoindre %(name)s"
+msgstr "Participar en %(name)s"
 
 #: dash/orgs/views.py:530
 msgid "Join"
-msgstr "Rejoindre"
+msgstr "Participar"
 
 #: dash/orgs/views.py:538
 msgid ""
 "Your invitation link has expired. Please contact your organization "
 "administrator."
-msgstr "Votre invitation a expirée. SVP, contactez l'administrateur de votre organisation"
+msgstr "El enlace de su invitación ha vencido. Por favor, contacte al administrador de su organización."
 
 #: dash/stories/models.py:9
 msgid "The title for this story"
-msgstr "Le titre de l'article"
+msgstr "El título para esta historia"
 
 #: dash/stories/models.py:12
 msgid "Whether this story is featured"
-msgstr "Si cet article est sélectionné "
+msgstr "Si esta historia está exhibida"
 
 #: dash/stories/models.py:13
 msgid "The summary for the story"
-msgstr "Le résumé de l'article"
+msgstr "El resumen de la historia"
 
 #: dash/stories/models.py:15
 msgid "The body of text for the story"
-msgstr "Le texte principal de l'article"
+msgstr "El cuerpo del texto para la historia"
 
 #: dash/stories/models.py:18
 msgid ""
 "The id of the YouTube video that should be linked to this story (this is the"
 " text that comes afer v= and before & in the YouTube URL)"
-msgstr "L'ID de la vidéo YouTube que vous souhaitez lier a cet article (le code après v= et avant & au niveau de l'URL YouTube)"
+msgstr "El ID del video en YouTube que debe estar vinculado a esta historia (este es el texto que viene después de v= y antes de & en el URL de YouTube)"
 
 #: dash/stories/models.py:21
 msgid ""
 "Any tags for this story, separated by spaces, can be used to do more "
 "advanced filtering, optional"
-msgstr "Chaque mot-clé de l'article séparé par des espaces peut être utiliser pour des filtres, optionnel"
+msgstr "Se puede usar cualquier etiqueta para esta historia, separada por espacios, para tener un filtro más avanzado, opcional"
 
 #: dash/stories/models.py:24
 msgid "The category for this story"
-msgstr "La rubrique pour cet article"
+msgstr "La categoría para esta historia"
 
 #: dash/stories/models.py:26
 msgid "The organization this story belongs to"
-msgstr "L'organisation à qui appartient l'article"
+msgstr "La organización a la pertenece esta historia"
 
 #: dash/stories/models.py:74 templates/frame.haml:233
 #: templates/frame.haml.py:395 templates/public/stories.haml:7
 msgid "Stories"
-msgstr "Articles"
+msgstr "Historias"
 
 #: dash/stories/models.py:78 ureport/categories/models.py:32
 #: ureport/polls/models.py:189
 msgid "The name to describe this image"
-msgstr "Le nom pour décrire cette image"
+msgstr "El nombre para describir esta imagen"
 
 #: dash/stories/models.py:81
 msgid "The story to associate to"
-msgstr "L'article à associer à"
+msgstr "La historia para relacionarla con"
 
 #: dash/stories/models.py:84 ureport/categories/models.py:38
 #: ureport/polls/models.py:195
 msgid "The image file to use"
-msgstr "Le fichier image à utiliser"
+msgstr "El archivo de la imagen que se va a utilizar"
 
 #: dash/stories/views.py:36
 msgid "Yes"
-msgstr "Oui"
+msgstr "Sí"
 
 #: dash/stories/views.py:37
 msgid "No"
-msgstr "Non"
+msgstr "No"
 
 #: dash/stories/views.py:56
 msgid "Story Images"
-msgstr "Images de l'article"
+msgstr "Imágenes para la historia"
 
 #: dash/stories/views.py:67 dash/stories/views.py:74
 #: ureport/polls/views.py:129 ureport/polls/views.py:136
 #, python-format
 msgid "Image %d"
-msgstr "Image %d"
+msgstr "%d de imagen "
 
 #: dash/stories/views.py:68
 msgid "Image to display on story page and in previews. (optional)"
-msgstr "Image à afficher au sein de l'article et du résumé (optionnel)"
+msgstr "Imagen para mostrar en la página de la historia y en las vistas previas. (opcional)"
 
 #: dash/stories/views.py:75
 msgid "Image to display on story page and in previews (optional)"
-msgstr "Image à afficher au sein de l'article et des résumés (optionnel)"
+msgstr "Imagen para mostrar en la página de la historia y en las vistas previas. (opcional)"
 
 #: templates/dashblocks/dashblock_about_pages.haml:7
 #: templates/dashblocks/dashblock_join_engage_pages.haml:8
@@ -345,19 +343,19 @@ msgstr "Image à afficher au sein de l'article et des résumés (optionnel)"
 #: templates/dashblocks/dashblock_youtube_videos.haml:8
 #: templates/polls/poll_list.haml:6
 msgid "Add"
-msgstr "Ajouter"
+msgstr "Agregar"
 
 #: templates/dashblocks/dashblock_form.haml:8
 msgid "Gallery"
-msgstr "Galerie Photos"
+msgstr "Galería"
 
 #: templates/dashblocks/dashblock_form.haml:17
 msgid "Add Image"
-msgstr "Ajouter une image"
+msgstr "Agregar imagen"
 
 #: templates/dashblocks/dashblock_list.haml:33
 msgid "Search"
-msgstr "Rechercher"
+msgstr "Buscar"
 
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-report"
@@ -365,96 +363,96 @@ msgstr "U-report"
 
 #: templates/frame.haml:159 templates/frame.haml.py:362
 msgid "Toggle navigation"
-msgstr "Toggle de navigation"
+msgstr "Navegación toggle"
 
 #: templates/frame.haml:167
 msgid "Admin"
-msgstr "Administrateurs"
+msgstr "Administrador"
 
 #: templates/frame.haml:175
 msgid "Configuration"
-msgstr "Configuration"
+msgstr "Configuración"
 
 #: templates/frame.haml:181
 msgid "Orgs"
-msgstr "Organisations"
+msgstr "Organizaciones"
 
 #: templates/frame.haml:187
 msgid "Users"
-msgstr "Utilisateurs"
+msgstr "Usuarios"
 
 #: templates/frame.haml:193
 msgid "Content Types"
-msgstr "Types de contenu"
+msgstr "Tipos de contenido"
 
 #: templates/frame.haml:200
 msgid "Backgrounds"
-msgstr "Images de fond"
+msgstr "Fondos"
 
 #: templates/frame.haml:209
 msgid "Content"
-msgstr "Contenu"
+msgstr "Contenido"
 
 #: templates/frame.haml:225 templates/frame.haml.py:389
 msgid "Polls"
-msgstr "Sondages"
+msgstr "Encuestas"
 
 #: templates/frame.haml:241
 msgid "News Items"
-msgstr "Nouveaux sujets"
+msgstr "Ítems nuevos"
 
 #: templates/frame.haml:249 templates/frame.haml.py:256
 #: ureport/categories/models.py:28
 msgid "Categories"
-msgstr "Rubriques"
+msgstr "Categorías"
 
 #: templates/frame.haml:264
 msgid "Category Images"
-msgstr "Images de la Rubrique"
+msgstr "Imágenes de categorías"
 
 #: templates/frame.haml:276
 msgid "Pages & Videos"
-msgstr "Pages & Vidéos"
+msgstr "Páginas y videos"
 
 #: templates/frame.haml:284
 msgid "About Content"
-msgstr "Contenu \"A propos\""
+msgstr "Sobre contenido"
 
 #: templates/frame.haml:290
 msgid "Contact Us Content"
-msgstr "Contenus \"Contacter-Nous\""
+msgstr "Contenido de Contáctenos"
 
 #: templates/frame.haml:296
 msgid "Missions Content"
-msgstr "Contenu \"Missions\""
+msgstr "Contenido de misiones"
 
 #: templates/frame.haml:302
 msgid "Join &amp; Engage Content"
-msgstr "Contenu de \"Rejoindre & s'engager\""
+msgstr "Participar en &amp; Contenido de participar"
 
 #: templates/frame.haml:308
 msgid "Join Steps Content"
-msgstr "Contenu \"Etapes d'inscription\""
+msgstr "Contenido de pasos para participar"
 
 #: templates/frame.haml:314
 msgid "U-reporters Content"
-msgstr "Contenu \"U-reporters\""
+msgstr "Contenido de U-reporters "
 
 #: templates/frame.haml:320
 msgid "Videos"
-msgstr "Vidéos"
+msgstr "Videos"
 
 #: templates/frame.haml:337
 msgid "Logout"
-msgstr "Se déconnecter"
+msgstr "Salir"
 
 #: templates/frame.haml:343 templates/smartmin/users/login.haml:49
 msgid "Login"
-msgstr "Se connecter"
+msgstr "Entrar"
 
 #: templates/frame.haml:383
 msgid "About"
-msgstr "A propos"
+msgstr "Sobre"
 
 #: templates/frame.haml:401
 msgid "U-reporters"
@@ -462,11 +460,11 @@ msgstr "U-reporters"
 
 #: templates/frame.haml:407
 msgid "Join & Engage"
-msgstr "Rejoindre & S'engager"
+msgstr "Entrar y participar"
 
 #: templates/frame.haml:463
 msgid "FOLLOW US ON:"
-msgstr "NOUS SUIVRE SUR :"
+msgstr "SÍGANOS EN:"
 
 #: templates/orgs/email/invitation_email.html:8
 #, python-format
@@ -476,218 +474,218 @@ msgid ""
 "      <br/>\n"
 "      To accept the invitation, <a href='https://%(org.subdomain)s.report.in/org/join/%(secret)s/'>click here</a>.\n"
 "  "
-msgstr "\n      Vous avez été invités à rejoindre  %(org)s.\n      <br/>\n      Pour accepter, <a href='https://%(org.subdomain)s.report.in/org/join/%(secret)s/'>cliquer sur ce lien</a>.\n  "
+msgstr ""
 
 #: templates/orgs/org_home.haml:8
 msgid "Edit"
-msgstr "Editer"
+msgstr "Editar"
 
 #: templates/orgs/org_home.haml:13
 msgid "Manage Users"
-msgstr "Gérer les utilisateurs"
+msgstr "Manejar usuarios"
 
 #: templates/orgs/org_manage_accounts.haml:13
 msgid "Accounts"
-msgstr "Comptes"
+msgstr "Cuentas"
 
 #: templates/orgs/org_manage_accounts.haml:16
 msgid "Admins"
-msgstr "Administrateurs"
+msgstr "Administradores"
 
 #: templates/orgs/org_manage_accounts.haml:25
 msgid "Remove"
-msgstr "Retirer"
+msgstr "Retirar"
 
 #: templates/orgs/org_manage_accounts.haml:32
 msgid "You must have at least one administator"
-msgstr "Vous devez avoir au moins un administrateur"
+msgstr "Debe tener un administrador como mínimo"
 
 #: templates/public/about.haml:15 templates/public/about.haml.py:48
 msgid "ABOUT U-REPORT"
-msgstr "A PROPOS DE U-REPORT"
+msgstr "SOBRE U-REPORT"
 
 #: templates/public/about.haml:21 templates/public/ureporters.haml:23
 msgid "Scroll to Learn more"
-msgstr "Défiler pour en savoir plus"
+msgstr "Mueva el cursor para saber más sobre"
 
 #: templates/public/about.haml:60
 msgid "The mission of U-report"
-msgstr "La mission d'U-report"
+msgstr "La misión de U-report"
 
 #: templates/public/about.haml:99
 msgid "Why Join U-report?"
-msgstr "Pourquoi s'inscrire à U-Report ?"
+msgstr "¿Por qué participar en el U-report?"
 
 #: templates/public/about.haml:104
 msgid "Speak out on what's happening in your community"
-msgstr "Dire haut et fort ce qui se passe dans ta communauté"
+msgstr "Hablar sobre lo que está sucediendo en su comunidad"
 
 #: templates/public/about.haml:107
 msgid ""
 "Use Ureport results and information to update and increase citizen's "
 "awareness"
-msgstr "Exploiter les résultats d'U-report pour informer et éveiller les citoyens"
+msgstr "Usar los resultados e información de U-report para actualizar y sensibilizar a los ciudadanos"
 
 #: templates/public/about.haml:110
 msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "Participer aux campagnes nationales pour aider à l'amélioration de ton pays"
+msgstr "Participar en campañas nacionales para ayudar a mejorar su país"
 
 #: templates/public/about.haml:113
 #, python-format
 msgid "Share what's happening around %(country)s with other U-reporters"
-msgstr "Partager ce qui se passe au %(country)s avec les U-reporters"
+msgstr "Compartir lo que está sucediendo en %(country)s con otros U-reporters"
 
 #: templates/public/about.haml:119
 msgid "CLICK HERE TO JOIN"
-msgstr "CLIQUEZ ICI POUR S'INSCRIRE"
+msgstr "HAGA CLIC AQUÍ PARA PARTICIPAR"
 
 #: templates/public/about.haml:132
 msgid "U-REPORT VIDEOS"
-msgstr "VIDEOS DE L'U-REPORT"
+msgstr "VIDEOS U-REPORT"
 
 #: templates/public/about.haml:139
 msgid "No videos yet."
-msgstr "Aucune vidéo"
+msgstr "Todavía sin videos."
 
 #: templates/public/about.haml:157
 msgid "WATCH IT ON YOUTUBE"
-msgstr "REGARDER SUR YOUTUBE"
+msgstr "VERLO EN YOUTUBE"
 
 #: templates/public/all_polls.haml:5
 msgid "MORE POLLS"
-msgstr "+ DE SONDAGES"
+msgstr "MÁS ENCUESTAS"
 
 #: templates/public/all_polls.haml:12
 #: templates/public/archived_stories.haml:12
 msgid "FILTER"
-msgstr "FILTRER"
+msgstr "FILTRO"
 
 #: templates/public/all_polls.haml:31
 msgid "POLL LIST"
-msgstr "LISTE DES SONDAGES"
+msgstr "LISTA DE ENCUESTAS"
 
 #: templates/public/all_polls.haml:33
 msgid "All polls from most recent to oldest"
-msgstr "Tous les sondages du plus récent au plus ancien"
+msgstr "Todas las encuestas, desde la más reciente hasta la más antigua"
 
 #: templates/public/archived_stories.haml:5
 msgid "ARCHIVED STORIES"
-msgstr "ARTICLES ARCHIVES"
+msgstr "HISTORIAS ARCHIVADAS"
 
 #: templates/public/archived_stories.haml:31
 msgid "LIST"
-msgstr "LISTE"
+msgstr "LISTA"
 
 #: templates/public/index.haml:13
 msgid "CURRENT POLL"
-msgstr "SONDAGE EN COURS"
+msgstr "ENCUESTA ACTUAL"
 
 #: templates/public/index.haml:30 templates/public/polls.haml:43
 msgid "RESPONSE RATE"
-msgstr "TAUX DE REPONSE"
+msgstr "TASA DE RESPUESTA"
 
 #: templates/public/index.haml:36
 msgid "Responded out of"
-msgstr "Réponses sur "
+msgstr "Repondido a partir de"
 
 #: templates/public/index.haml:44
 msgid "RESPONDER'S RATE BY LOCATION"
-msgstr "TAUX DE REPONSES PAR REGION"
+msgstr "TASA DE RESPUESTA POR UBICACIÓN"
 
 #: templates/public/index.haml:50
 msgid "Most responded"
-msgstr "Plus de réponses"
+msgstr "Más respondidas"
 
 #: templates/public/index.haml:54
 msgid "Least responded"
-msgstr "Moins de réponses"
+msgstr "Menos respondidas"
 
 #: templates/public/index.haml:96
 msgid "TRENDING WORDS"
-msgstr "LES MOTS LES PLUS FRÉQUENTS"
+msgstr "PALABRAS MÁS FRECUENTES"
 
 #: templates/public/index.haml:106
 msgid "FEATURED RESPONSES"
-msgstr "REPONSES SELECTIONNES"
+msgstr "RESPUESTAS EXHIBIDAS"
 
 #: templates/public/index.haml:133 templates/public/index.haml.py:481
 msgid "VIEW FULL RESULT"
-msgstr "VOIR TOUS LES RESULTATS"
+msgstr "VER RESULTADO TOTAL"
 
 #: templates/public/index.haml:153 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
-msgstr "U-REPORTERS  - "
+msgstr "U-REPORTERS EN"
 
 #: templates/public/index.haml:161
 msgid "TOTAL # OF U-REPORTERS"
-msgstr "NB TOTAL DE U-REPORTERS"
+msgstr "TOTAL # DE U-REPORTERS"
 
 #: templates/public/index.haml:175
 msgid "4 MOST ACTIVE REGIONS"
-msgstr "LES 4 REGIONS LES PLUS ACTIVES"
+msgstr "4 REGIONES MÁS ACTIVAS"
 
 #: templates/public/index.haml:185
 msgid "RATE BY GENDER"
-msgstr "TAUX PAR GENRE"
+msgstr "TASA POR GÉNERO"
 
 #: templates/public/index.haml:220
 msgid "RATE BY AGE"
-msgstr "TAUX PAR AGE"
+msgstr "TASA POR EDAD"
 
 #: templates/public/index.haml:230
 msgid "WHAT U-REPORTERS ARE SAYING"
-msgstr "CE QUE DISENT LES U-REPORTERS"
+msgstr "LO QUE LOS U-REPORTERS ESTÁN DICIENDO"
 
 #: templates/public/index.haml:238
 msgid "FEATURED VIDEO"
-msgstr "VIDEO SELECTIONNEE"
+msgstr "VIDEO EXHIBIDO"
 
 #: templates/public/index.haml:244
 msgid "WATCH MORE VIDEOS"
-msgstr "REGARDER PLUS DE VIDEOS"
+msgstr "VER MÁS VIDEOS"
 
 #: templates/public/index.haml:255
 msgid "FEATURED REGION"
-msgstr "REGION SELECTIONNEE"
+msgstr "REGIÓN EXHIBIDA"
 
 #: templates/public/index.haml:279
 msgid "VIEW MORE STORIES ON FACEBOOK"
-msgstr "VOIR PLUS D'ARTICLES SUR FACEBOOK"
+msgstr "VER MÁS HISTORIAS EN FACEBOOK"
 
 #: templates/public/index.haml:300
 msgid "READ MORE TWEETS ON TWITTER"
-msgstr "LIRE PLUS DE TWEETS SUR TWITTER"
+msgstr "LEER MÁS TWEETS EN TWITTER"
 
 #: templates/public/index.haml:311
 msgid "NEWS FEED"
-msgstr "FIL D'ACTUALITES"
+msgstr "PÁGINA DE NOTICIAS"
 
 #: templates/public/index.haml:329
 msgid "Read This Story"
-msgstr "Lire cet article"
+msgstr "Leer esta historia"
 
 #: templates/public/index.haml:350 templates/public/index.haml.py:384
 #: templates/public/index.haml:415
 msgid "U-REPORTER STORY"
-msgstr "ARTICLE DE U-REPORTERS"
+msgstr "HISTORIA DE U-REPORTER"
 
 #: templates/public/index.haml:375 templates/public/index.haml.py:402
 #: templates/public/index.haml:433 templates/public/stories.haml:35
 #: templates/public/stories.haml.py:111
 msgid "READ FULL STORY"
-msgstr "LIRE TOUT L'ARTICLE"
+msgstr "LEER HISTORIA COMPLETA"
 
 #: templates/public/index.haml:456
 msgid "Response Rate"
-msgstr "Taux de réponse"
+msgstr "Tasa de respuesta"
 
 #: templates/public/join_engage.haml:16
 msgid "JOIN U-REPORT"
-msgstr "S'INSCRIRE A U-REPORT"
+msgstr "PARTICIPAR EN EL U-REPORT"
 
 #: templates/public/join_engage.haml:43
 msgid "HOW TO JOIN"
-msgstr "COMMENT S'INSCRIRE"
+msgstr "CÓMO PARTICIPAR"
 
 #: templates/public/join_engage.haml:72
 #, python-format
@@ -696,23 +694,23 @@ msgid ""
 "              * U-report is a free program sponsored by UNICEF with help of Network Providers in %(org.name)s. U-report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-report services (all msg on %(org|config:\"shortcode\")s) are free.\n"
 "\n"
 "            "
-msgstr "\n              * U-report est une application gratuite offerte par UNICEF avec l'aide des opérateurs réseau %(org.name)s. U-report ne requiert aucun paiement ni information financière personnelle. Ne tenez jamais compte des messages vous demandant un paiement sur ce numéro, Facebook ou page Twitter. Tous les services et fonctions d'U-report (tous les SMS envoyés au %(org|config:\"shortcode\")s) sont gratuits.\n\n            "
+msgstr ""
 
 #: templates/public/join_engage.haml:82
 msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr "U-REPORT SUR LES MEDIAS SOCIAUX"
+msgstr "U-REPORT EN LOS MEDIOS SOCIALES"
 
 #: templates/public/join_engage.haml:113
 msgid "TWEET TO"
-msgstr "ENVOYER UN TWEET A"
+msgstr "TUITEAR A"
 
 #: templates/public/join_engage.haml:133
 msgid "COMPOSE NEW TWEET"
-msgstr "COMPOSER UN NOUVEAU TWEET"
+msgstr "ESCRIBIR NUEVO TUIT"
 
 #: templates/public/polls.haml:14
 msgid "CURRENT POLL IN"
-msgstr "SONDAGE EN COURS SUR LE THÈME :"
+msgstr "ENCUESTA ACTUAL EN"
 
 #: templates/public/polls.haml:29
 #, python-format
@@ -724,440 +722,440 @@ msgid_plural ""
 "\n"
 "                %(questions)s QUESTIONS POLLED ON THIS TOPIC\n"
 "              "
-msgstr[0] "\n                %(questions)s QUESTION POSEE SUR CE SUJET\n              "
-msgstr[1] "\n                %(questions)s QUESTIONS POSÉES SUR CE SUJET           "
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/public/polls.haml:49
 msgid "RESPONDED OUT OF"
-msgstr "REPONSES SUR"
+msgstr "RESPONDIDO A PARTIR DE"
 
 #: templates/public/polls.haml:53
 msgid "POLLED"
-msgstr "INTERROGES"
+msgstr "ENCUESTADO"
 
 #: templates/public/polls.haml:95
 msgid "POLL RESULTS"
-msgstr "RESULTATS DU SONDAGE"
+msgstr "RESULTADOS DE LA ENCUESTA"
 
 #: templates/public/polls.haml:112
 msgid "responded out of"
-msgstr "réponses sur "
+msgstr "respondido a partir de"
 
 #: templates/public/polls.haml:120
 msgid "KEYWORDS"
-msgstr "MOT-CLES"
+msgstr "PALABRAS CLAVE"
 
 #: templates/public/polls.haml:125
 msgid "STATISTICS"
-msgstr "STATISTIQUES"
+msgstr "ESTADÍSTICAS"
 
 #: templates/public/polls.haml:129
 msgid "LOCATIONS"
-msgstr "CARTOGRAPHIE"
+msgstr "UBICACIONES"
 
 #: templates/public/polls.haml:204
 msgid "FEATURED ANSWERS"
-msgstr "REPONSES SELECTIONNEES"
+msgstr "RESPUESTAS EXHIBIDAS"
 
 #: templates/public/polls.haml:211
 msgid "No featured answers."
-msgstr "Aucune réponse sélectionnée"
+msgstr "Sin respuestas exhibidas."
 
 #: templates/public/polls.haml:230
 msgid "U-reporter in"
-msgstr "U-report - "
+msgstr "U-reporter en"
 
 #: templates/public/polls.haml:242 templates/public/story_read.haml:113
 msgid "RELATED STORIES"
-msgstr "ARTICLES ASSOCIES"
+msgstr "HISTORIAS RELACIONADAS"
 
 #: templates/public/polls.haml:247 templates/public/story_read.haml:118
 msgid "No related stories."
-msgstr "AUCUN ARTICLE ASSOCIE"
+msgstr "Sin historias relacionadas."
 
 #: templates/public/polls.haml:270 templates/public/story_read.haml:144
 msgid "READ MORE"
-msgstr "EN SAVOIR PLUS"
+msgstr "LEER MÁS"
 
 #: templates/public/polls.haml:282 templates/public/story_read.haml:86
 msgid "FEATURED IMAGES"
-msgstr "IMAGES SELECTIONNEES"
+msgstr "IMÁGENES EXHIBIDAS"
 
 #: templates/public/polls.haml:288
 msgid "No featured images yet."
-msgstr "Aucune image sélectionnée"
+msgstr "Todavía sin imágenes exhibidas."
 
 #: templates/public/stories.haml:19
 msgid "FEATURED STORY"
-msgstr "ARTICLE SELECTIONNE"
+msgstr "HISTORIA EXHIBIDA"
 
 #: templates/public/stories.haml:26 templates/public/story_read.haml:22
 msgid "BY"
-msgstr "PAR"
+msgstr "POR"
 
 #: templates/public/stories.haml:55
 msgid "LATEST U-REPORT STORIES"
-msgstr "DERNIERS ARTICLES U-REPORT"
+msgstr "ÚLTIMAS HISTORIAS DE U-REPORT"
 
 #: templates/public/stories.haml:60
 msgid "FILTERED BY"
-msgstr "FILTRE PAR"
+msgstr "FILTRADO POR"
 
 #: templates/public/story_read.haml:27
 msgid "Scroll to read more"
-msgstr "Dérouler pour lire plus d'information"
+msgstr "Mueva el cursor para leer más"
 
 #: templates/public/story_read.haml:46
 msgid "U-REPORT STORY CONTINUES"
-msgstr "L'ARTICLE U-REPORT CONTINUE"
+msgstr "LA HISTORIA DE U-REPORT CONTINÚA"
 
 #: templates/public/story_read.haml:65
 msgid "RELATED POLLS"
-msgstr "SONDAGES ASSOCIES"
+msgstr "ENCUESTAS RELACIONADAS"
 
 #: templates/public/story_read.haml:70
 msgid "No related polls."
-msgstr "Aucune sondage associé."
+msgstr "Sin encuestas relacionadas."
 
 #: templates/public/story_read.haml:91
 msgid "No featured images."
-msgstr "Aucune image sélectionnée"
+msgstr "Sin imágenes exhibidas."
 
 #: templates/public/ureporters.haml:44
 msgid "WHO WE ARE"
-msgstr "QUI SOMME NOUS"
+msgstr "QUIÉNES SOMOS"
 
 #: templates/public/ureporters.haml:55
 msgid "U-REPORTER STATISTICS"
-msgstr "STATISTIQUES DES U-REPORTERS"
+msgstr "ESTADÍSTICAS DE U-REPORTER "
 
 #: templates/public/ureporters.haml:63
 msgid "AGE"
-msgstr "AGE"
+msgstr "EDAD"
 
 #: templates/public/ureporters.haml:79
 msgid "GENDER"
-msgstr "GENRE"
+msgstr "GÉNERO"
 
 #: templates/public/ureporters.haml:118
 msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr "D'OU VIENNENT LES U-REPORTES ?"
+msgstr "¿DE DÓNDE SON LOS U-REPORTERS?"
 
 #: templates/public/ureporters.haml:138
 msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr "TAUX D'ENREGISTREMENT DEPUIS 6 MOIS"
+msgstr "TASA DE REGISTRO: EN LOS ÚLTIMOS 6 MESES"
 
 #: templates/public/ureporters.haml:156
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-msgstr "LES 9 EMPLOIS LES PLUS FREQUENTS"
+msgstr "OCUPACIÓN: LAS 9 MÁS MENCIONADAS"
 
 #: templates/smartmin/users/login.haml:14
 msgid "Sign in"
-msgstr "Se connecter"
+msgstr "Entrar"
 
 #: templates/smartmin/users/login.haml:54
 msgid "Forgot Password?"
-msgstr "Mot de passe oublié ?"
+msgstr "¿Olvidó su clave?"
 
 #: ureport/categories/models.py:11
 msgid "The name of this category"
-msgstr "Nom de la rubrique"
+msgstr "El nombre de esta categoría"
 
 #: ureport/categories/models.py:14
 msgid "An optional image that can describe this category"
-msgstr "Une image optionnelle qui peut décrire cette rubrique"
+msgstr "Una imagen opcional que pueda describir esta categoría"
 
 #: ureport/categories/models.py:17 ureport/polls/models.py:24
 msgid "The organization this category applies to"
-msgstr "L'organisation à laquelle la rubrique s'applique"
+msgstr "La organización a la que se aplica esta categoría"
 
 #: ureport/categories/models.py:35
 msgid "The category this image represents"
-msgstr "La rubrique que cette image représente"
+msgstr "La categoría que representa esta imagen"
 
 #: ureport/news/models.py:9
 msgid "The title for this item"
-msgstr "Le titre de ce sujet"
+msgstr "El título para este ítem"
 
 #: ureport/news/models.py:12
 msgid "A short summary description for this item"
-msgstr "Une description sommaire de ce sujet"
+msgstr "Una breve descripción para este ítem"
 
 #: ureport/news/models.py:15
 msgid "A link that should be associated with this item"
-msgstr "Un lien qui devrait être associé à ce sujet"
+msgstr "Un enlace que debe estar asociado con este ítem"
 
 #: ureport/news/models.py:18 ureport/news/models.py:34
 msgid "The category this item belongs to"
-msgstr "La rubrique à laquelle ce sujet appartient"
+msgstr "La categoría a la que pertenece este ítem"
 
 #: ureport/news/models.py:21
 msgid "The organization this item belongs to"
-msgstr "L'organisation à laquelle ce sujet appartient"
+msgstr "La organización a la que pertenece este ítem"
 
 #: ureport/news/models.py:25
 msgid "The title for this Video"
-msgstr "Le titre pour cette vidéo"
+msgstr "El título para este video"
 
 #: ureport/news/models.py:28
 msgid "A short summary description for this video"
-msgstr "Une description sommaire pour cette vidéo"
+msgstr "Una breve descripción para este video"
 
 #: ureport/news/models.py:31
 msgid "The id of the YouTube video that should be linked to this item"
-msgstr "L'ID de la vidéo Youtube qui devrait être associé à ce sujet"
+msgstr "El ID del video YouTube que tiene que estar asociado a este ítem"
 
 #: ureport/news/models.py:37
 msgid "The organization this video belongs to"
-msgstr "L'organisation à la quelle la vidéo appartient"
+msgstr "La organización a la que pertenece este video"
 
 #: ureport/polls/models.py:22
 msgid "The name of this poll category"
-msgstr "Le nom de la rubrique de ce sondage"
+msgstr "El nombre de esta categoría de encuesta"
 
 #: ureport/polls/models.py:31
 msgid "Poll Categories"
-msgstr "Catégories des sondages"
+msgstr "Categorías de encuestas"
 
 #: ureport/polls/models.py:38
 msgid "The Flow this Poll is based on"
-msgstr "Le Flux de cet sondage est basé sur"
+msgstr "El Flujo de esta Encuesta se basa en"
 
 #: ureport/polls/models.py:40
 msgid "The title for this Poll"
-msgstr "Le titre du sondage"
+msgstr "El título para esta Encuesta"
 
 #: ureport/polls/models.py:42
 msgid "The category this Poll belongs to"
-msgstr "La catégorie dont ce sondage fait partie"
+msgstr "La categoría para esta Encuesta pertenece a"
 
 #: ureport/polls/models.py:44
 msgid "Whether this poll should be featured on the homepage"
-msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgstr "Si esta encuesta se debería exhibir en la página principal"
 
 #: ureport/polls/models.py:46
 msgid "The organization this poll is part of"
-msgstr "L'organisation dont ce sondage fait partie"
+msgstr "La organización a la que pertenece esta encuesta"
 
 #: ureport/polls/models.py:192
 msgid "The poll to associate to"
-msgstr ""
+msgstr "La encuesta está relacionada con"
 
 #: ureport/polls/models.py:203
 msgid "The poll for this response"
-msgstr "Le sondage pour cette réponse"
+msgstr "La encuesta para esta respuesta"
 
 #: ureport/polls/models.py:206
 msgid "The location for this response"
-msgstr "La localisation de cette réponse"
+msgstr "La ubicación para esta respuesta"
 
 #: ureport/polls/models.py:209
 msgid "The name of the sender of the message"
-msgstr "Le nom de l'expéditeur de ce message"
+msgstr "El nombre del remitente del mensaje"
 
 #: ureport/polls/models.py:212
 msgid "The featured response message"
-msgstr "Le texte de la réponse sélectionnée"
+msgstr "El mensaje de respuesta exhibido"
 
 #: ureport/polls/models.py:224
 msgid "The poll this question is part of"
-msgstr "Le sondage dont cette question fait partie"
+msgstr "La encuesta de la que forma parte esta pregunta"
 
 #: ureport/polls/models.py:226
 msgid "The title of this question"
-msgstr "Le titre de cette question"
+msgstr "El título de esta pregunta"
 
 #: ureport/polls/models.py:227
 msgid "The RuleSet this question is based on"
-msgstr "Le jeu des règles sur lequel cette question est basée"
+msgstr "El RuleSet en el que se basa esta pregunta"
 
 #: ureport/polls/views.py:46
 msgid "The message sent by the U-reporter you want to feature"
-msgstr "Le message envoyé au U-reporter que tu veux sélectionner"
+msgstr "El mensaje enviado por el U-reporter que desea exhibir"
 
 #: ureport/polls/views.py:83
 msgid "You must include a title for every included question."
-msgstr "Vous devez donner un titre pour toute question inclue"
+msgstr "Debe incluir un título para cada pregunta incluida. "
 
 #: ureport/polls/views.py:88
 msgid "You must include at least one poll question."
-msgstr "Vous devez inclure au moins une question"
+msgstr "Debe incluir una pregunta de la encuesta como mínimo."
 
 #: ureport/polls/views.py:103
 msgid "Your poll has been created, now pick which questions to include."
-msgstr "Votre sondage a été créé, maintenant choisissez les question à inclure"
+msgstr "Su encuesta ha sido creada, ahora elija qué preguntas desea incluir."
 
 #: ureport/polls/views.py:117
 msgid "Poll Images"
-msgstr "Images du sondage"
+msgstr "Imágenes de la encuesta"
 
 #: ureport/polls/views.py:118
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr "Maintenant, entrer tout question que vous aimeriez mettre en avant (si vous en avez)"
+msgstr "Ahora ingrese cualquier respuesta que quisiera mostrar. (si la hubiera)"
 
 #: ureport/polls/views.py:130
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr "Image à afficher sur la page du sondage et des résumés (optionnel)"
+msgstr "Imagen para mostrar en la página de la encuesta y en las vistas previas. (opcional)"
 
 #: ureport/polls/views.py:137
 msgid "Image to display on poll page and in previews (optional)"
-msgstr "Image à afficher sur la page du sondage et des résumés (optionnel)"
+msgstr "Imagen para mostrar en la página de la encuesta y en las vistas previas. (opcional)"
 
 #: ureport/polls/views.py:161
 msgid "Featured Poll Responses"
-msgstr "Réponses aux sondages sélectionnées"
+msgstr "Respuestas de la encuesta exhibidas"
 
 #: ureport/polls/views.py:162
 msgid "Your poll has been updated."
-msgstr "Votre sondage a été mis a jour."
+msgstr "Su encuesta ha sido actualizada."
 
 #: ureport/polls/views.py:179
 #, python-format
 msgid "Response %d Reporter"
-msgstr "Réponse %d Reporter"
+msgstr "%d Reporter de la respuesta"
 
 #: ureport/polls/views.py:179
 msgid "The name or alias of the responder."
-msgstr "Le nom ou pseudo du répondeur"
+msgstr "El nombre o sobrenombre del encuestado"
 
 #: ureport/polls/views.py:184
 #, python-format
 msgid "Response %d Location"
-msgstr "Réponse %d Localisation"
+msgstr "%d Ubicación de la respuesta"
 
 #: ureport/polls/views.py:184
 msgid "The location of the responder."
-msgstr "La localisation du répondeur"
+msgstr "La ubicación del encuestado."
 
 #: ureport/polls/views.py:189
 #, python-format
 msgid "Response %d Message"
-msgstr "Réponse %d Message"
+msgstr "%d message de la respuesta"
 
 #: ureport/polls/views.py:189
 msgid "The text of the featured response."
-msgstr "Le texte de la réponse sélectionnée"
+msgstr "El texto de la respuesta exhibida."
 
 #: ureport/polls/views.py:215
 msgid "Poll Questions"
-msgstr "Questions du sondage"
+msgstr "Preguntas de la encuesta"
 
 #: ureport/polls/views.py:217
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr "Selectionner les images que vous voulez visionner sur le page du sondage"
+msgstr "Ahora envíe las imágenes que desea mostrar en su página de encuesta. (si la hubiera)"
 
 #: ureport/polls/views.py:242
 msgid "Include"
-msgstr "Inclure"
+msgstr "Incluir"
 
 #: ureport/polls/views.py:243
 msgid "Whether to include this question in your public results"
-msgstr "Si vous souhaitez inclure cette question dans les résultats publics"
+msgstr "Si incluir esta pregunta en sus resultados publicados"
 
 #: ureport/polls/views.py:245
 msgid "Title"
-msgstr "Titre"
+msgstr "Título"
 
 #: ureport/polls/views.py:246
 msgid "The question posed to your audience, will be displayed publicly"
-msgstr "La question posé à votre audience, "
+msgstr "La pregunta planteada a su público, será exhibida para todos"
 
 #: ureport/settings_common.py:157
 msgid "The shortcode that users will use to contact U-report locally"
-msgstr "Le numéro court à travers lequel les utilisateurs peuvent contacter U-report"
+msgstr "El código abreviado que los usuarios usarán para contactarse con U-report localmente"
 
 #: ureport/settings_common.py:158
 msgid "The short text used to direct visitors to join U-report"
-msgstr "Le texte a utilisé pour encourager les visiteurs à rejoindre U-report"
+msgstr "El código abreviado usado para que los visitantes participen en el U-report"
 
 #: ureport/settings_common.py:159
 msgid "The color used to draw the text on the join bar"
-msgstr "La couleur du texte de la barre \"Rejoindre\""
+msgstr "El color usado para el texto en la barra de participar"
 
 #: ureport/settings_common.py:160
 msgid "The color used to draw the background on the join bar"
-msgstr "La couleur de fond du bandeau \"Inscription\""
+msgstr "El color usado para el fondo en la barra de participar"
 
 #: ureport/settings_common.py:161
 msgid "The primary color for styling for this organization"
-msgstr "Couleur principale de votre organisation"
+msgstr "El color primario para el diseño de esta organización"
 
 #: ureport/settings_common.py:162
 msgid "The secondary color for styling for this organization"
-msgstr "Couleur secondaire de votre organisation"
+msgstr "El color secundario para el diseño de esta organización"
 
 #: ureport/settings_common.py:163
 msgid "The background color for the site"
-msgstr "La couleur de fond de votre site"
+msgstr "El color de fondo para el sitio"
 
 #: ureport/settings_common.py:164
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Définir jusqu'à 6 couleurs pour le style des graphiques, mettre une virgule entre les couleurs"
+msgstr "Hasta 6 colores para los gráficos, coloque una coma entre cada color"
 
 #: ureport/settings_common.py:165
 msgid "The Google Analytics Tracking ID for this organization"
-msgstr "ID de Google Analytics Tracking pour cette organisation"
+msgstr "El ID de Google Analytics Tracking para esta organización"
 
 #: ureport/settings_common.py:166
 msgid "The URL to the Youtube channel for this organization"
-msgstr "URL de la chaine Youtube de cette organisation"
+msgstr "El URL para el canal de YouTube para esta organización"
 
 #: ureport/settings_common.py:167
 msgid "The URL to the Facebook page for this organization"
-msgstr "URL de la page Facebook de cette organisation"
+msgstr "El URL para la página de Facebook para esta organización"
 
 #: ureport/settings_common.py:168
 msgid "The Twitter handle for this organization"
-msgstr "Le lien Twitter de cette organisation"
+msgstr "La función de Twitter para esta organización"
 
 #: ureport/settings_common.py:169
 msgid "The Twitter widget used for following new users"
-msgstr "Le widget Twitter utilisé pour suivre les nouveaux utilisateurs"
+msgstr "El widget de Twitter usado para los siguientes usuarios nuevos"
 
 #: ureport/settings_common.py:170
 msgid "The Twitter widget used for searching"
-msgstr "Le widget Twitter utilisé pour les recherches"
+msgstr "El widget de Twitter usado para la búsqueda"
 
 #: ureport/settings_common.py:171
 msgid "The name of txbhe Contact Group that contains registered reporters"
-msgstr "Nom du groupe contenant les U-reporters inscrits"
+msgstr "El nombre del Grupo de Contactos txbhe que contiene periodistas registrados"
 
 #: ureport/settings_common.py:172
 msgid ""
 "The label of the Contact Field that contains the birth date of reporters"
-msgstr "Libellé du champ contenant la date de naissance des U-reporters"
+msgstr "El nivel de Campo de Contactos que contiene la fecha de nacimiento de los periodistas"
 
 #: ureport/settings_common.py:173
 msgid "The label of the Contact Field that contains the gender of reporters"
-msgstr "Libellé du champ contenant le genre des U-reporters"
+msgstr "La etiqueta del Campo de Contactos que contiene el género de los periodistas"
 
 #: ureport/settings_common.py:174
 msgid ""
 "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Libellé du champ contenant l'occupation des U-reporters"
+msgstr "La etiqueta del Campo de Contactos que contiene la ocupación de los periodistas"
 
 #: ureport/settings_common.py:175
 msgid ""
 "The label of the Contact Field that contains the registration date of "
 "reporters"
-msgstr "Libellé du champ contenant la date de naissance des U-reporters"
+msgstr "La etiqueta del Campo de Contactos que contiene la fecha de registro de los periodistas"
 
 #: ureport/settings_common.py:176
 msgid "The label of the Contact Field that contains the State of reporters"
-msgstr "Libellé du champ contenant l'Etat des U-reporters"
+msgstr "La etiqueta del Campo de Contactos que contiene el Estado de los periodistas"
 
 #: ureport/settings_common.py:177
 msgid "The label of the Contact Field that contains the District of reporters"
-msgstr "Libellé du champ contenant le District des U-reporters"
+msgstr "La etiqueta del Campo de Contactos que contiene el Distrito de los periodistas"
 
 #: ureport/settings_common.py:178
 msgid "The label assigned to U-reporters that are Male."
-msgstr "Cette étiquette est assignée pour les U-reporters masculins."
+msgstr "La etiqueta asignada a los U-reporters que son hombres."
 
 #: ureport/settings_common.py:179
 msgid "The label assigned to U-reporters that are Female."
-msgstr "Cette étiquette est assignée pour les U-reporters féminins."
+msgstr "La etiqueta asignada a los U-reporters que son mujeres."
 
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"
-msgstr "Quelque chose pour déclencher les localisations"
+msgstr "Algo para activar las localizaciones "
