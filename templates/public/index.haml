@@ -581,10 +581,16 @@
           var results = result[0];
           var categories = [];
 
+          male_label = "{{org|config:"male_label"|upper }}";
+          female_label = "{{org|config:"female_label"|upper }}";
+
           var total = 0;
           for (i=0; i<results.categories.length; i++){
             category = results.categories[i];
-            total += category.count;
+            label = category.label.trim().toUpperCase()
+            if (label == male_label || label == female_label) {
+              total += category.count;
+            }
           }
 
           var percentage_lookup = {};
@@ -601,9 +607,6 @@
               count_lookup[label] = category.count;
             }
           }
-
-          male_label = "{{org|config:"male_label"|upper }}";
-          female_label = "{{org|config:"female_label"|upper }}";
 
           if (male_label in percentage_lookup){
             $("#male-percentage").text(percentage_lookup[male_label] + "%");
