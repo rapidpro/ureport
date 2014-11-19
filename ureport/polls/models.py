@@ -105,6 +105,9 @@ class Poll(SmartModel):
             if not b_and_w:
                 api = self.org.get_api()
                 boundary_results = api.get_ruleset_results(question.ruleset_id, segment=dict(location='State'))
+                if not boundary_results:
+                    return []
+
                 boundary_responses = dict()
                 for boundary in boundary_results:
                     total = boundary['set'] + boundary['unset']
@@ -134,7 +137,7 @@ class Poll(SmartModel):
         The response rate for this flow
         """
         flow = self.get_flow()
-        if flow['completed_runs']:
+        if flow and flow['completed_runs']:
             return int(round((flow['completed_runs'] * 100.0) / flow['runs']))
         else:
             return '--'
@@ -179,11 +182,15 @@ class Poll(SmartModel):
 
     def runs(self):
         flow = self.get_flow()
-        return flow['runs']
+        if flow:
+            return flow['runs']
+        return "--"
 
     def completed_runs(self):
         flow = self.get_flow()
-        return flow['completed_runs']
+        if flow:
+            return flow['completed_runs']
+        return "--"
 
     def get_featured_images(self):
         return self.images.filter(is_active=True).exclude(image='').order_by('-created_on')
@@ -245,24 +252,29 @@ class PollQuestion(SmartModel):
         api = self.poll.org.get_api()
         return api.get_ruleset_results(self.ruleset_id, segment=segment)
 
+    def get_results_dict_data(self):
+        if self.get_results():
+            return self.get_results()[0]
+        return dict(set=0, unset=0, categories=[])
+
     def is_open_ended(self):
         cache_key = 'open_ended:%d' % self.id
         open_ended = cache.get(cache_key, None)
 
         if open_ended is None:
-            open_ended = self.get_results()[0].get('open_ended', False)
+            open_ended = self.get_results_dict_data().get('open_ended', False)
             cache.set(cache_key, open_ended, OPEN_ENDED_CACHE_TIME)
 
         return open_ended
 
     def get_responded(self):
-        return self.get_results()[0]['set']
+        return self.get_results_dict_data()['set']
 
     def get_polled(self):
-        return self.get_results()[0]['set'] + self.get_results()[0]['unset']
+        return self.get_results_dict_data()['set'] + self.get_results()[0]['unset']
 
     def get_words(self):
-        return self.get_results()[0]['categories']
+        return self.get_results_dict_data()['categories']
 
     def __unicode__(self):
         return self.title

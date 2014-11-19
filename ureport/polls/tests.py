@@ -226,27 +226,36 @@ class PollTest(DashTest):
 
     def test_best_and_worst(self):
 
+        poll1 = Poll.objects.create(flow_id=1,
+                                    title="Poll 1",
+                                    category=self.health_uganda,
+                                    is_featured=True,
+                                    org=self.uganda,
+                                    created_by=self.admin,
+                                    modified_by=self.admin)
+
+        poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                     title='question poll 1',
+                                                     ruleset_id=101,
+                                                     created_by=self.admin,
+                                                     modified_by=self.admin)
+
         with patch('dash.api.API.get_ruleset_results') as mock:
             mock.return_value = [{u'open_ended': False, u'label': u'Abia', u'set': 338, u'unset': 36, u'boundary': u'R3713501', u'categories': [{u'count': 80, u'label': u'Yes'}, {u'count': 258, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Adamawa', u'set': 84, u'unset': 7, u'boundary': u'R3720358', u'categories': [{u'count': 41, u'label': u'Yes'}, {u'count': 43, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Akwa Ibom', u'set': 149, u'unset': 14, u'boundary': u'R3715359', u'categories': [{u'count': 41, u'label': u'Yes'}, {u'count': 108, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Anambra', u'set': 319, u'unset': 50, u'boundary': u'R3715505', u'categories': [{u'count': 81, u'label': u'Yes'}, {u'count': 238, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Bauchi', u'set': 59, u'unset': 5, u'boundary': u'R3722233', u'categories': [{u'count': 20, u'label': u'Yes'}, {u'count': 39, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Bayelsa', u'set': 102, u'unset': 11, u'boundary': u'R3715844', u'categories': [{u'count': 26, u'label': u'Yes'}, {u'count': 76, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Benue', u'set': 267, u'unset': 27, u'boundary': u'R3716076', u'categories': [{u'count': 115, u'label': u'Yes'}, {u'count': 152, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Borno', u'set': 76, u'unset': 5, u'boundary': u'R3721167', u'categories': [{u'count': 16, u'label': u'Yes'}, {u'count': 60, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Cross River', u'set': 120, u'unset': 17, u'boundary': u'R3716250', u'categories': [{u'count': 29, u'label': u'Yes'}, {u'count': 91, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Delta', u'set': 168, u'unset': 22, u'boundary': u'R3716950', u'categories': [{u'count': 39, u'label': u'Yes'}, {u'count': 129, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Ebonyi', u'set': 134, u'unset': 14, u'boundary': u'R3717071', u'categories': [{u'count': 24, u'label': u'Yes'}, {u'count': 110, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Edo', u'set': 193, u'unset': 17, u'boundary': u'R3717119', u'categories': [{u'count': 50, u'label': u'Yes'}, {u'count': 143, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Ekiti', u'set': 151, u'unset': 22, u'boundary': u'R3717154', u'categories': [{u'count': 27, u'label': u'Yes'}, {u'count': 124, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Enugu', u'set': 291, u'unset': 37, u'boundary': u'R3717212', u'categories': [{u'count': 109, u'label': u'Yes'}, {u'count': 182, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Federal Capital Territory', u'set': 940, u'unset': 87, u'boundary': u'R3717259', u'categories': [{u'count': 328, u'label': u'Yes'}, {u'count': 612, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Gombe', u'set': 73, u'unset': 7, u'boundary': u'R3720422', u'categories': [{u'count': 26, u'label': u'Yes'}, {u'count': 47, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Imo', u'set': 233, u'unset': 14, u'boundary': u'R3717825', u'categories': [{u'count': 50, u'label': u'Yes'}, {u'count': 183, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Jigawa', u'set': 69, u'unset': 5, u'boundary': u'R3703236', u'categories': [{u'count': 26, u'label': u'Yes'}, {u'count': 43, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Kaduna', u'set': 291, u'unset': 34, u'boundary': u'R3709353', u'categories': [{u'count': 121, u'label': u'Yes'}, {u'count': 170, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Kano', u'set': 222, u'unset': 23, u'boundary': u'R3710302', u'categories': [{u'count': 79, u'label': u'Yes'}, {u'count': 143, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Katsina', u'set': 293, u'unset': 23, u'boundary': u'R3711481', u'categories': [{u'count': 105, u'label': u'Yes'}, {u'count': 188, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Kebbi', u'set': 124, u'unset': 19, u'boundary': u'R3707933', u'categories': [{u'count': 34, u'label': u'Yes'}, {u'count': 90, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Kogi', u'set': 108, u'unset': 13, u'boundary': u'R3717971', u'categories': [{u'count': 41, u'label': u'Yes'}, {u'count': 67, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Kwara', u'set': 183, u'unset': 23, u'boundary': u'R3718090', u'categories': [{u'count': 68, u'label': u'Yes'}, {u'count': 115, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Lagos', u'set': 460, u'unset': 33, u'boundary': u'R3718182', u'categories': [{u'count': 172, u'label': u'Yes'}, {u'count': 288, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Nasarawa', u'set': 182, u'unset': 16, u'boundary': u'R3720495', u'categories': [{u'count': 52, u'label': u'Yes'}, {u'count': 130, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Niger', u'set': 224, u'unset': 21, u'boundary': u'R3718384', u'categories': [{u'count': 68, u'label': u'Yes'}, {u'count': 156, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Ogun', u'set': 274, u'unset': 16, u'boundary': u'R3718463', u'categories': [{u'count': 81, u'label': u'Yes'}, {u'count': 193, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Ondo', u'set': 271, u'unset': 19, u'boundary': u'R3718605', u'categories': [{u'count': 45, u'label': u'Yes'}, {u'count': 226, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Osun', u'set': 133, u'unset': 16, u'boundary': u'R3718720', u'categories': [{u'count': 51, u'label': u'Yes'}, {u'count': 82, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Oyo', u'set': 187, u'unset': 12, u'boundary': u'R3720554', u'categories': [{u'count': 65, u'label': u'Yes'}, {u'count': 122, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Plateau', u'set': 416, u'unset': 31, u'boundary': u'R3720611', u'categories': [{u'count': 151, u'label': u'Yes'}, {u'count': 265, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Rivers', u'set': 192, u'unset': 18, u'boundary': u'R3720743', u'categories': [{u'count': 49, u'label': u'Yes'}, {u'count': 143, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Sokoto', u'set': 143, u'unset': 15, u'boundary': u'R3707368', u'categories': [{u'count': 60, u'label': u'Yes'}, {u'count': 83, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Taraba', u'set': 142, u'unset': 8, u'boundary': u'R3720850', u'categories': [{u'count': 60, u'label': u'Yes'}, {u'count': 82, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Yobe', u'set': 50, u'unset': 7, u'boundary': u'R3698564', u'categories': [{u'count': 16, u'label': u'Yes'}, {u'count': 34, u'label': u'No'}]}, {u'open_ended': False, u'label': u'Zamfara', u'set': 85, u'unset': 9, u'boundary': u'R3706956', u'categories': [{u'count': 28, u'label': u'Yes'}, {u'count': 57, u'label': u'No'}]}]
-
-            poll1 = Poll.objects.create(flow_id=1,
-                                        title="Poll 1",
-                                        category=self.health_uganda,
-                                        is_featured=True,
-                                        org=self.uganda,
-                                        created_by=self.admin,
-                                        modified_by=self.admin)
-
-            poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                         title='question poll 1',
-                                                         ruleset_id=101,
-                                                         created_by=self.admin,
-                                                         modified_by=self.admin)
 
             results = [{'percent': 91, 'boundary': u'Federal Capital Territory', 'total': 1027, 'type': 'best', 'responded': 940}, {'percent': 93, 'boundary': u'Lagos', 'total': 493, 'type': 'best', 'responded': 460}, {'percent': 93, 'boundary': u'Plateau', 'total': 447, 'type': 'best', 'responded': 416}, {'percent': 92, 'boundary': u'Bauchi', 'total': 64, 'type': 'worst', 'responded': 59}, {'percent': 87, 'boundary': u'Yobe', 'total': 57, 'type': 'worst', 'responded': 50}]
 
             self.assertEquals(poll1.best_and_worst(), results)
             mock.assert_called_once_with(poll1_question.ruleset_id, segment=dict(location="State"))
+
+        with patch('dash.api.API.get_ruleset_results') as mock:
+            mock.return_value = None
+
+            results = []
+
+            self.assertEquals(poll1.best_and_worst(), results)
+            mock.assert_called_once_with(poll1_question.ruleset_id, segment=dict(location="State"))
+
 
     def test_get_featured_responses(self):
         poll1 = Poll.objects.create(flow_id=1,
@@ -290,33 +299,46 @@ class PollTest(DashTest):
         self.assertEquals(poll1.get_featured_responses()[1], featured_response1)
 
     def test_runs(self):
+        poll1 = Poll.objects.create(flow_id=1,
+                                    title="Poll 1",
+                                    category=self.health_uganda,
+                                    is_featured=True,
+                                    org=self.uganda,
+                                    created_by=self.admin,
+                                    modified_by=self.admin)
+
+
         with patch('dash.api.API.get_flow') as mock:
             mock.return_value = dict(runs=50)
-
-            poll1 = Poll.objects.create(flow_id=1,
-                                        title="Poll 1",
-                                        category=self.health_uganda,
-                                        is_featured=True,
-                                        org=self.uganda,
-                                        created_by=self.admin,
-                                        modified_by=self.admin)
 
             self.assertEquals(poll1.runs(), 50)
             mock.assert_called_once_with(poll1.flow_id)
 
+        with patch('dash.api.API.get_flow') as mock:
+            mock.return_value = None
+
+            self.assertEquals(poll1.runs(), "--")
+            mock.assert_called_once_with(poll1.flow_id)
+
     def test_completed_runs(self):
+        poll1 = Poll.objects.create(flow_id=1,
+                                    title="Poll 1",
+                                    category=self.health_uganda,
+                                    is_featured=True,
+                                    org=self.uganda,
+                                    created_by=self.admin,
+                                    modified_by=self.admin)
+
         with patch('dash.api.API.get_flow') as mock:
             mock.return_value = dict(completed_runs=30)
 
-            poll1 = Poll.objects.create(flow_id=1,
-                                        title="Poll 1",
-                                        category=self.health_uganda,
-                                        is_featured=True,
-                                        org=self.uganda,
-                                        created_by=self.admin,
-                                        modified_by=self.admin)
-
             self.assertEquals(poll1.completed_runs(), 30)
+            mock.assert_called_once_with(poll1.flow_id)
+
+        with patch('dash.api.API.get_flow') as mock:
+            mock.return_value = None
+
+            self.assertEquals(poll1.completed_runs(), "--")
             mock.assert_called_once_with(poll1.flow_id)
 
     def test_response_percentage(self):
@@ -340,6 +362,11 @@ class PollTest(DashTest):
             self.assertEquals(poll1.response_percentage(), "--")
             mock.assert_called_once_with(poll1.flow_id)
 
+        with patch('dash.api.API.get_flow') as mock:
+            mock.return_value = None
+
+            self.assertEquals(poll1.response_percentage(), "--")
+            mock.assert_called_once_with(poll1.flow_id)
 
 
 
