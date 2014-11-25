@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-21 21:42+0000\n"
-"PO-Revision-Date: 2014-11-24 17:06+0000\n"
+"PO-Revision-Date: 2014-11-24 19:58+0000\n"
 "Last-Translator: renaud gaudin <rgaudin@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/ureport/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -517,7 +517,7 @@ msgstr "L'objectif de U-report"
 
 #: templates/public/about.haml:99
 msgid "Why Join U-report?"
-msgstr "Pourquoi s'inscrire à U-report ?"
+msgstr "Pourquoi rejoindre U-report ?"
 
 #: templates/public/about.haml:104
 msgid "Speak out on what's happening in your community"
@@ -527,7 +527,7 @@ msgstr "Dire haut et fort ce qui se passe dans ta communauté"
 msgid ""
 "Use Ureport results and information to update and increase citizen's "
 "awareness"
-msgstr "Exploiter les résultats de U-Report pour informer et éveiller les citoyens"
+msgstr "Exploiter les résultats de U-report pour informer et éveiller les citoyens"
 
 #: templates/public/about.haml:110
 msgid "Participate in nationwide campaigns to help improve your country"
@@ -540,7 +540,7 @@ msgstr "Partager ce qui se passe au %(country)s avec les U-reporters"
 
 #: templates/public/about.haml:119
 msgid "CLICK HERE TO JOIN"
-msgstr "CLIQUE ICI POUR T'INSCRIRE"
+msgstr "CLIQUE ICI POUR NOUS REJOINDRE"
 
 #: templates/public/about.haml:132
 msgid "U-REPORT VIDEOS"
@@ -585,7 +585,7 @@ msgstr "SONDAGE EN COURS"
 
 #: templates/public/index.haml:30 templates/public/polls.haml:43
 msgid "RESPONSE RATE"
-msgstr "TAUX DE REPONSE"
+msgstr "TAUX DE RÉPONSE"
 
 #: templates/public/index.haml:36
 msgid "Responded out of"
@@ -684,11 +684,11 @@ msgstr "Taux de réponse"
 
 #: templates/public/join_engage.haml:16
 msgid "JOIN U-REPORT"
-msgstr "S'INSCRIRE À U-REPORT"
+msgstr "REJOINDRE U-REPORT"
 
 #: templates/public/join_engage.haml:43
 msgid "HOW TO JOIN"
-msgstr "COMMENT S'INSCRIRE"
+msgstr "COMMENT REJOINDRE U-REPORT"
 
 #: templates/public/join_engage.haml:72
 #, python-format
@@ -802,7 +802,7 @@ msgstr "DERNIERS ARTICLES U-REPORT"
 
 #: templates/public/stories.haml:60
 msgid "FILTERED BY"
-msgstr "FILTRÉ PAR"
+msgstr "FILTRÉS PAR"
 
 #: templates/public/story_read.haml:27
 msgid "Scroll to read more"
@@ -846,7 +846,7 @@ msgstr "D'OÙ VIENNENT LES U-REPORTERS ?"
 
 #: templates/public/ureporters.haml:138
 msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr "TAUX D'ENREGISTREMENT: 6 DERNIERS MOIS"
+msgstr "INSCRIPTIONS U-REPORTERS: 6 DERNIERS MOIS"
 
 #: templates/public/ureporters.haml:156
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
