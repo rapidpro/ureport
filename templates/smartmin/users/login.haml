@@ -25,7 +25,7 @@
               %label{ for:"={ field.name }"}
                 {{ field.label }}
               .input
-                {{ field|addcss:"form-control" }}
+                {{ field|add_css:"form-control" }}
 
               - if field.error
                 %span.help-block
