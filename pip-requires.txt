@@ -1,5 +1,5 @@
--e git+https://github.com/nyaruka/smartmin.git@to_django_1_7#egg=smartmin-dev
--e git+https://github.com/django/django.git@stable/1.7.x#egg=django
+-e git+https://github.com/nyaruka/smartmin.git#egg=smartmin-dev
+Django==1.7.1
 -e git+https://github.com/rapidpro/dash.git#egg=dash
 celery
 coverage
@@ -24,5 +24,5 @@ django-redis
 psycopg2
 xlutils
 mock
-sorl-thumbnail==11.12.1b
+sorl-thumbnail==12.1c
 hamlpy
