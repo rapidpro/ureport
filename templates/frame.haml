@@ -311,6 +311,10 @@
                   %a.primary-color{ href:"{% url 'public.join' %}"}
                     - trans "Join & Engage"
 
+                %li.level1{ class:"{% active request 'jobs' %}"}
+                  %a.primary-color{ href:"{% url 'public.jobs' %}"}
+                    - trans "Jobs"
+
                 -#%li.level1.dropdown
                 -#  %a.primary-color.dropdown-toggle{type:"button", data-toggle:"dropdown"}
                 -#    Language
