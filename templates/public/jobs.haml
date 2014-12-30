@@ -1,0 +1,96 @@
+- extends "public_base.html"
+
+- load thumbnail ureport i18n compress
+
+-block subtitle
+  &nbsp;-
+  -trans "Stories"
+
+- block hero
+  - for main_entry in sources.0.get_entries|slice:"1"
+    .hero-container
+      .hero-dark-container
+        .container
+          .row
+            .col-md-6
+              .story-hero
+                .hero-title.primary-bg-color
+                  - trans "FEATURED JOBS"
+                .story-hero-title
+                  {{ main_entry.title|upper }}
+
+                .hero-info
+                  {{ main_entry.summary|safe|truncatewords:20 }}
+                .hero-title.hero-link.primary-bg-color
+                  %a{href:"{{ main_entry.link }}"}
+                    - trans "SEE JOB DETAILS"
+                    &#8594;
+
+  - block banner
+    {{ block.super }}
+
+- block content
+  .section
+    %h1.level-1-title
+      - trans "LATEST U-REPORT JOBS"
+  .row
+    .stories-filtered
+      - for source in sources
+        .col-md-4
+          .white-card-container
+            .white-card-inner{style:"min-height:400px,"}
+              %h2.level-1-title
+                %a{href:"{{ source.get_return_page }}"}
+                  {{ source.title|upper }}
+
+              - for entry in source.get_entries|slice:"5"
+                .white-card-content.white-card-padding
+                  .featured-story-title
+                    {{ entry.title }}
+                  .half-border.none-color
+                  .featured-story-teaser
+                    {{ entry.summary|safe|truncatewords:20 }}
+                  %a{href:"{{ entry.link }}"}
+                    - trans "SEE JOB DETAILS"
+                    &#8594;
+
+  -#%hr.aaa
+  -#- include "public/archived_stories.html"
+
+
+-block extra-script
+  {{ block.super }}
+  {% compress js %}
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/archived_stories.coffee" />
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/featured_stories.coffee" />
+  {% endcompress %}
+
+
+- block extra-style
+  {{ block.super }}
+
+  :css
+    .hero-container {
+      {% for main_story in featured|slice:"1" %}
+      {% thumbnail main_story.get_category_image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }
+
+    .summary {
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    span.link {
+      padding:10px;
+    }
+
+    span.link > a {
+      color: #fff;
+
+    }
+

@@ -1,4 +1,5 @@
 from django.views.decorators.cache import cache_page
+from ureport.jobs.views import JobsView
 from .views import *
 
 urlpatterns = patterns('',
@@ -14,6 +15,7 @@ urlpatterns = patterns('',
     (r'^ureporters/$', UreportersView.as_view(), {}, 'public.ureporters'),
     (r'^stories/$', StoriesView.as_view(), {}, 'public.stories'),
     (r'^story/(?P<pk>\d+)/$', StoryReadView.as_view(), {}, 'public.story_read'),
+    (r'^jobs/$', JobsView.as_view(), {}, 'public.jobs'),
     (r'^join/$', JoinEngageView.as_view(), {}, 'public.join'),
 )
 

@@ -34,6 +34,7 @@ redis==2.10.1
 requests==2.3.0
 simplejson==3.6.0
 six==1.7.3
+feedparser==5.1.3
 -e git+https://github.com/nyaruka/smartmin.git@to_django_1_7#egg=smartmin-dev
 sorl-thumbnail==11.12.1b
 sqlparse==0.1.11
