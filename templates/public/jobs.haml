@@ -7,7 +7,7 @@
   -trans "Jobs"
 
 - block hero
-  - for main_entry in sources.0.get_entries|slice:"1"
+  - for main_entry in rss_sources.0.get_entries|slice:"1"
     .hero-container
       .hero-dark-container
         .container
@@ -35,7 +35,15 @@
       - trans "LATEST U-REPORT JOBS"
   .row
     .stories-filtered
-      - for source in sources
+      - for twit in twitter_sources
+        .col-md-4
+          %a.twitter-timeline{href:"{{ twit.source }}", data-widget-id:"{{ twit.widget_id }}" }
+            Tweets by @{{ twit.get_username }}
+      - for fb in facebook_sources
+        .col-md-4
+          %a.twitter-timeline{href:"{{ b }}"}
+            - trans "Tweets by @XKMATO"
+      - for source in rss_sources
         .col-md-4
           .white-card-container
             .white-card-inner{style:"min-height:400px,"}
@@ -43,7 +51,7 @@
                 %a{href:"{{ source.get_return_page }}"}
                   {{ source.title|upper }}
 
-              - for entry in source.get_entries|slice:"5"
+              - for entry in source.get_entries|slice:"2"
                 .white-card-content.white-card-padding
                   .featured-story-title
                     {{ entry.title }}
@@ -60,6 +68,7 @@
 
 -block extra-script
   {{ block.super }}
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/archived_stories.coffee" />
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/featured_stories.coffee" />
