@@ -42,7 +42,8 @@
             Tweets by @{{ twit.get_username }}
       - for fb in facebook_sources
         .col-md-4
-          .fb-like-box{data-href:"{{ fb.source }}", data-height:"400px", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"true"}
+          .white-card-container
+            .fb-like-box{data-href:"{{ fb.source }}", data-height:"400px", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
       - for source in rss_sources
         .col-md-4
           .white-card-container
