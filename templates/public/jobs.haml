@@ -7,6 +7,7 @@
   -trans "Jobs"
 
 - block hero
+  #fb-root
   - for main_entry in rss_sources.0.get_entries|slice:"1"
     .hero-container
       .hero-dark-container
@@ -41,8 +42,7 @@
             Tweets by @{{ twit.get_username }}
       - for fb in facebook_sources
         .col-md-4
-          %a.twitter-timeline{href:"{{ b }}"}
-            - trans "Tweets by @XKMATO"
+          .fb-like-box{data-href:"{{ fb.source }}", data-height:"400px", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"true"}
       - for source in rss_sources
         .col-md-4
           .white-card-container
@@ -68,6 +68,14 @@
 
 -block extra-script
   {{ block.super }}
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=207764629258353&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/archived_stories.coffee" />
