@@ -35,24 +35,24 @@
     %h1.level-1-title
       - trans "LATEST U-REPORT JOBS"
   .row
-    .stories-filtered
+    .jobs-filtered
       - for twit in twitter_sources
-        .col-md-4
+        .col-md-4{style:"height:400px"}
           %a.twitter-timeline{href:"{{ twit.source }}", data-widget-id:"{{ twit.widget_id }}" }
             Tweets by @{{ twit.get_username }}
       - for fb in facebook_sources
-        .col-md-4
+        .col-md-4{style:"height:400px"}
           .white-card-container
             .fb-like-box{data-href:"{{ fb.source }}", data-height:"400px", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
       - for source in rss_sources
-        .col-md-4
+        .col-md-4{style:"height:400px"}
           .white-card-container
-            .white-card-inner{style:"min-height:400px,"}
+            .white-card-inner{style:"height:400px; overflow:auto"}
               %h2.level-1-title
                 %a{href:"{{ source.get_return_page }}"}
                   {{ source.title|upper }}
 
-              - for entry in source.get_entries|slice:"2"
+              - for entry in source.get_entries|slice:"6"
                 .white-card-content.white-card-padding
                   .featured-story-title
                     {{ entry.title }}
