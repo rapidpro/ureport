@@ -385,7 +385,10 @@
                 - trans "Login"
 
         .terms-privacy
-          ©2014 UREPORT
+          %span.copyright
+            ©2014 UREPORT
+          %a.primary-color{href:"{% url 'public.jobs' %}"}
+            - trans "| Jobs"
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>
