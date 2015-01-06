@@ -36,6 +36,29 @@
       - trans "LATEST U-REPORT JOBS"
   .row
     .jobs-filtered
+      - for source in rss_sources
+        .col-md-4{style:"height:500px; padding-bottom:50px; margin-bottom:50px"}
+          .white-card-container
+            .white-card-inner{style:"height:500px"}
+              %h2.level-1-title{style:"background-color: #81DAF5"}
+                %a{href:"{{ source.get_return_page }}", style:"color:white"}
+                  {{ source.title|upper }}
+              %div{style:"height:400px; overflow:auto"}
+                - for entry in source.get_entries|slice:"6"
+                  .white-card-content.white-card-padding
+                    .featured-story-title
+                      {{ entry.title }}
+                    .half-border.none-color
+                    .featured-story-teaser
+                      {{ entry.summary|safe|truncatewords:20 }}
+                    %a{href:"{{ entry.link }}"}
+                      - trans "SEE JOB DETAILS"
+                      &#8594;
+              %a.featured-story-link.primary-bg-color{href:"{{ source.get_return_page }}", style:"background-color: green"}
+                - trans "See All Jobs"
+                &#8594;
+  .row
+    .jobs-filtered
       - for twit in twitter_sources
         .col-md-4{style:"height:400px"}
           %a.twitter-timeline{href:"{{ twit.source }}", data-widget-id:"{{ twit.widget_id }}" }
@@ -44,24 +67,6 @@
         .col-md-4{style:"height:400px"}
           .white-card-container
             .fb-like-box{data-href:"{{ fb.source }}", data-height:"400px", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
-      - for source in rss_sources
-        .col-md-4{style:"height:400px"}
-          .white-card-container
-            .white-card-inner{style:"height:400px; overflow:auto"}
-              %h2.level-1-title
-                %a{href:"{{ source.get_return_page }}"}
-                  {{ source.title|upper }}
-
-              - for entry in source.get_entries|slice:"6"
-                .white-card-content.white-card-padding
-                  .featured-story-title
-                    {{ entry.title }}
-                  .half-border.none-color
-                  .featured-story-teaser
-                    {{ entry.summary|safe|truncatewords:20 }}
-                  %a{href:"{{ entry.link }}"}
-                    - trans "SEE JOB DETAILS"
-                    &#8594;
 
   -#%hr.aaa
   -#- include "public/archived_stories.html"
