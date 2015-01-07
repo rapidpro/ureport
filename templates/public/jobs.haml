@@ -44,21 +44,19 @@
                 %a{href:"{{ source.get_return_page }}", style:"color:white"}
                   {{ source.title|upper }}
               %div{style:"height:400px; overflow:auto"}
-                - for entry in source.get_entries|slice:"6"
+                - for entry in source.get_entries
                   .white-card-content.white-card-padding
                     .featured-story-title
                       {{ entry.title }}
                     .half-border.none-color
                     .featured-story-teaser
-                      {{ entry.summary|safe|truncatewords:20 }}
+                      {{ entry.summary|safe }}
                     %a{href:"{{ entry.link }}"}
                       - trans "SEE JOB DETAILS"
                       &#8594;
               %a.featured-story-link.primary-bg-color{href:"{{ source.get_return_page }}", style:"background-color: green"}
                 - trans "See All Jobs"
                 &#8594;
-  .row
-    .jobs-filtered
       - for twit in twitter_sources
         .col-md-4{style:"height:400px"}
           %a.twitter-timeline{href:"{{ twit.source }}", data-widget-id:"{{ twit.widget_id }}" }
