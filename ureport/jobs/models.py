@@ -14,6 +14,7 @@ class Source(models.Model):
     title = models.CharField(max_length=100, blank=True)
     widget_id = models.CharField(max_length=50, blank=True, null=True)
     source_type = models.CharField(max_length=1, choices=SOURCE_TYPES)
+    is_featured = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.title or self.get_username()

@@ -16,5 +16,6 @@ class JobsView(SmartTemplateView):
         context['rss_sources'] = Source.objects.filter(source_type=Source.RSS).order_by('-pk')
         context['twitter_sources'] = Source.objects.filter(source_type=Source.TWITTER).order_by('-pk')
         context['facebook_sources'] = Source.objects.filter(source_type=Source.FACEBOOK).order_by('-pk')
+        context['featured_source'] = Source.objects.filter(is_featured=True)[0]
 
         return context
