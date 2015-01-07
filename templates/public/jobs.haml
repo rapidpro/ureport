@@ -8,7 +8,7 @@
 
 - block hero
   #fb-root
-  - for main_entry in featured_source.get_entries|slice:"1"
+  - for main_entry in featured_source.0.get_entries|slice:"1"
     .hero-container
       .hero-dark-container
         .container

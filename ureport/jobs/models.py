@@ -32,6 +32,9 @@ class Source(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        if self.is_featured:
+            Source.objects.filter(is_featured=True).update(is_featured=False)
+            self.is_featured = True
         if self.source_type == Source.RSS and not self.title:
             feed = feedparser.parse(self.source)
             self.title = feed['feed']['title']
