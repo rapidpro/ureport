@@ -32,7 +32,7 @@ class Source(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        if self.source_type == Source.RSS:
+        if self.source_type == Source.RSS and not self.title:
             feed = feedparser.parse(self.source)
             self.title = feed['feed']['title']
         super(Source, self).save()
