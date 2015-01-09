@@ -76,3 +76,9 @@ db/
 
 # symlink to dash for dev
 dash
+
+#collected by pip
+src
+
+#some play around files
+ureport/playground

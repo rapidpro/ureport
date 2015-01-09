@@ -1,5 +1,8 @@
+from django.conf import settings
+from django.conf.urls import include, patterns, url
 from django.views.decorators.cache import cache_page
-from .views import *
+from .views import IndexView, NewsView, AboutView, PollsView, PollReadView, PollQuestionResultsView, \
+    ReportersResultsView, BoundaryView, UreportersView, StoriesView, StoryReadView, JoinEngageView
 
 urlpatterns = patterns('',
     (r'^$', IndexView.as_view(), {}, 'public.index'),
@@ -17,3 +20,6 @@ urlpatterns = patterns('',
     (r'^join/$', JoinEngageView.as_view(), {}, 'public.join'),
 )
 
+for optional_page in getattr(settings, 'OPTIONAL_PUBLIC_PAGES', []):
+    path, app = optional_page
+    urlpatterns += patterns('', url(r'^%s/' % path, include('%s.urls' % app)))
