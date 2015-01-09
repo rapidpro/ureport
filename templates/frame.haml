@@ -351,42 +351,45 @@
 
         - block content
 
-  .footer-container
-    .container
-      %footer
-        .follow-us
-          -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
-            - trans "FOLLOW US ON:"
-            .{style:"display: inline;"}
+  - block footer
+    .footer-container
+      .container
+        %footer
+          .follow-us
+            -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
+              - trans "FOLLOW US ON:"
+              .{style:"display: inline;"}
 
-              - if org|config:"facebook_page_url"
-                %a{href:'{{ org|config:"facebook_page_url" }}'}
-                  %span.symbol.footer-icon
-                    circlefacebook
+                - if org|config:"facebook_page_url"
+                  %a{href:'{{ org|config:"facebook_page_url" }}'}
+                    %span.symbol.footer-icon
+                      circlefacebook
 
-              - if org|config:"instagram_username"
-                %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
-                  %span.symbol.footer-icon
-                    circleinstagram
+                - if org|config:"instagram_username"
+                  %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
+                    %span.symbol.footer-icon
+                      circleinstagram
 
-              - if org|config:"twitter_handle"
-                %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
-                  %span.symbol.footer-icon
-                    circletwitterbird
+                - if org|config:"twitter_handle"
+                  %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
+                    %span.symbol.footer-icon
+                      circletwitterbird
 
-              - if org|config:"youtube_channel_url"
-                %a{href:'{{ org|config:"youtube_channel_url" }}'}
-                  %span.symbol.footer-icon
-                    circleyoutube
+                - if org|config:"youtube_channel_url"
+                  %a{href:'{{ org|config:"youtube_channel_url" }}'}
+                    %span.symbol.footer-icon
+                      circleyoutube
 
-          - if not request.user.is_authenticated
-            .login-link
-              %a.primary-color{href:"/users/login/"} 
-                - trans "Login"
+            - if not request.user.is_authenticated
+              .login-link
+                %a.primary-color{href:"/users/login/"}
+                  - trans "Login"
 
-        .terms-privacy
-          %span.copyright
-            ©2014 UREPORT
+          .terms-privacy
+            %span.copyright
+              ©2014 UREPORT
+            %span
+              - block extra_footer_links
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>
