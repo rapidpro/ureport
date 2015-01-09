@@ -1,4 +1,5 @@
 from django import template
+from django.core.urlresolvers import reverse
 from django.template import TemplateSyntaxError
 from django.template.defaultfilters import stringfilter
 from django.conf import settings
@@ -86,3 +87,18 @@ class LessBlockNode(template.Node):
 
 # register our tag
 lessblock = register.tag(lessblock)
+
+
+class RenderOptionalPages(template.Node):
+    def render(self, context):
+        html = ''
+        for optional_page in getattr(settings, 'OPTIONAL_PUBLIC_PAGES', []):
+            app = optional_page[1].split('.')[-1]
+            html += '<span>|<a class="primary-color" href="%s"> %s </a></span>' % (
+                reverse('%s.index' % app), app.capitalize())
+        return html
+
+
+@register.tag(name="add_optional_pages")
+def get_optional_pages(parser, token):
+    return RenderOptionalPages()
