@@ -29,7 +29,7 @@ class Source(models.Model):
 
     def get_return_page(self):
         if self.source_type in [Source.FACEBOOK, Source.TWITTER]:
-            return self.sources
+            return self.source
         return '/'.join(self.source.split('/')[:3])
 
     def get_username(self):
