@@ -20,15 +20,22 @@ class Source(models.Model):
         return self.title or self.get_username()
 
     def get_entries(self):
-        feed = feedparser.parse(self.source)
-        return feed['entries']
+        try:
+            feed = feedparser.parse(self.source)
+            return feed['entries']
+        except Exception as e:
+            #log e somewhere
+            return []
 
     def get_return_page(self):
+        if self.source_type in [Source.FACEBOOK, Source.TWITTER]:
+            return self.sources
         return '/'.join(self.source.split('/')[:3])
 
     def get_username(self):
         if self.source_type in [Source.FACEBOOK, Source.TWITTER]:
             return self.source.split('/')[3]
+        return None
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
