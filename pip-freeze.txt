@@ -5,9 +5,9 @@ boto==2.36.0
 celery==3.1.17
 celery-with-redis==3.0
 coverage==3.7.1
--e git+https://github.com/nyaruka/smartmin.git@5b203cb9b6491b5856ffb8e2762593e0a3e79ad8#egg=smartmin-master
--e git+https://github.com/rapidpro/rapidpro-python@89597b7cd899a44a9bdb6cd04efba9d60561cf1e#egg=RapidPro_Python_Client-master
--e git+https://github.com/rapidpro/dash.git@4dd17e1d612a64dab57b1f47ac6c3f1df15bcc00#egg=dash-master
+-e git+https://github.com/nyaruka/smartmin.git#egg=smartmin-master
+-e git+https://github.com/rapidpro/rapidpro-python#egg=RapidPro_Python_Client-master
+-e git+https://github.com/rapidpro/dash.git#egg=dash-master
 dj-database-url==0.3.0
 Django==1.7.2
 django-appconf==1.0.1
