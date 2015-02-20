@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.db import models
 from smartmin.models import SmartModel
 from dash.orgs.models import Org
