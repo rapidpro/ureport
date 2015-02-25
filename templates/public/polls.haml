@@ -42,7 +42,7 @@
                 - trans "POLLED"
 
         .latest-poll-questions
-          - with latest_poll.questions.all as questions
+          - with latest_poll.get_questions as questions
             .row-no-padding
               - for question in questions
                 {% if forloop.counter0 == 4 %}</div><div class="row-no-padding">{% endif %}
@@ -67,7 +67,7 @@
       - trans "POLL RESULTS"
 
     .poll-questions
-      {% for question in latest_poll.questions.all %}
+      {% for question in latest_poll.get_questions %}
         .poll-question
           .white-card-container
             .white-card-inner

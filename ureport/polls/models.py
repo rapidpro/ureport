@@ -175,11 +175,14 @@ class Poll(SmartModel):
         return self.featured_responses.filter(is_active=True).order_by('-created_on')
 
     def get_first_question(self):
-        questions = self.questions.filter(is_active=True)
+        questions = self.get_questions()
 
         for question in questions:
             if not question.is_open_ended():
                 return question
+
+    def get_questions(self):
+        return self.questions.filter(is_active=True).order_by('pk')
 
     def runs(self):
         flow = self.get_flow()
