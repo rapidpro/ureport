@@ -7,9 +7,10 @@
     .hero-dark-container
     .poll-hero
       .container
+        .hero-small-background
         .row
           .col-sm-12
-            .hero-title.primary-bg-color
+            .hero-title.hero-top-title.primary-bg-color
               - if tab == 'list'
                 - trans "CURRENT POLL IN"
               {{ latest_poll.category|upper }}
@@ -41,7 +42,7 @@
               %span
                 - trans "POLLED"
 
-        .latest-poll-questions
+        .latest-poll-questions.hide-on-small
           - with latest_poll.get_questions as questions
             .row-no-padding
               - for question in questions
@@ -91,7 +92,7 @@
                         %a.poll-question-tab.active.primary-color.primary-bg-color{href:"#statistics-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                           - trans "STATISTICS"
 
-                        %a.poll-question-tab.inactive.primary-color.primary-bg-color{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
+                        %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                           - trans "LOCATIONS"
 
 
@@ -103,10 +104,11 @@
                             %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
                     - else
-                      .tab-pane{id:"locations-tab-{{ question.id }}"}
-                        .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
-                          .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
-                            %img{src:"{{ STATIC_URL }}img/loading.gif"}
+                      -if not is_iorg
+                        .tab-pane{id:"locations-tab-{{ question.id }}"}
+                          .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
+                            .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
+                              %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
                       .tab-pane.active{id:"statistics-tab-{{ question.id }}"}
                         .poll-graph
@@ -214,6 +216,16 @@
     .hero-container {
       {% if latest_poll %}
       {% thumbnail latest_poll.get_category_image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endif%}
+    }
+
+    .hero-small-background {
+      {% if latest_poll %}
+      {% thumbnail latest_poll.get_category_image "768x508" crop="top" as im %}
         background-image:url('{{im.url}}');
       {% empty %}
         background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');

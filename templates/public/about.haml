@@ -8,10 +8,11 @@
     .hero-container
       .hero-dark-container
         .container
+          .hero-small-background
           .row
             .col-md-7
               .hero-dark-content
-                .hero-title.primary-bg-color
+                .hero-title.hero-top-title.primary-bg-color
                   - trans "ABOUT U-REPORT"
                 .hero-description
                   {{ d_block.summary }}
@@ -85,34 +86,34 @@
                   %nobr.primary-color
                     - trans "CLICK HERE TO JOIN"
                     &#8594;
+      -if not is_iorg
+        .col-md-4
+          .section
+            %h1.level-1-title
+              - trans "U-REPORT VIDEOS"
+              .level-1-title-description.secondary-color
 
-      .col-md-4
-        .section
-          %h1.level-1-title
-            - trans "U-REPORT VIDEOS"
-            .level-1-title-description.secondary-color
+          .card.card-padding
+            - if not videos
+              .yt-block-content.no-content
+                -trans "No videos yet."
+            .yt-videos
+              - for vid in videos
+                .yt-block
+                  %iframe{ width:"100%", height:"225", src:"//www.youtube.com/embed/{{ vid.video_id }}", frameborder:"0"}
+                  .yt-block-title.primary-color
+                    {{ vid.title|upper }}
+                  .yt-block-created-on
+                    {{ vid.created_on|date|upper }}
 
-        .card.card-padding
-          - if not videos
-            .yt-block-content.no-content
-              -trans "No videos yet."
-          .yt-videos
-            - for vid in videos
-              .yt-block
-                %iframe{ width:"100%", height:"225", src:"//www.youtube.com/embed/{{ vid.video_id }}", frameborder:"0"}
-                .yt-block-title.primary-color
-                  {{ vid.title|upper }}
-                .yt-block-created-on
-                  {{ vid.created_on|date|upper }}
+                  .yt-block-content
+                    {{ vid.description|truncatechars:"250" }}
+                    %a{ href:"http://www.youtube.com/watch?v={{ vid.video_id }}", style:"font-family:SharpSansBold; font-size:.75em;"}
+                      %nobr.primary-color
+                        - trans "WATCH IT ON YOUTUBE"
+                        &#8594;
 
-                .yt-block-content
-                  {{ vid.description|truncatechars:"250" }}
-                  %a{ href:"http://www.youtube.com/watch?v={{ vid.video_id }}", style:"font-family:SharpSansBold; font-size:.75em;"}
-                    %nobr.primary-color
-                      - trans "WATCH IT ON YOUTUBE"
-                      &#8594;
-
-              %hr.aaa
+                %hr.aaa
 
 - block extra-style
   {{ block.super }}
@@ -121,6 +122,16 @@
    .hero-container {
       {% for d_block in about|slice:":1"%}
       {% thumbnail d_block.image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }
+
+    .hero-small-background {
+      {% for d_block in about|slice:":1"%}
+      {% thumbnail d_block.image "768x508" crop="center" as im %}
         background-image:url('{{im.url}}');
       {% empty %}
         background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');

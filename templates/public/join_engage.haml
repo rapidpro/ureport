@@ -9,10 +9,11 @@
     .hero-container
       .hero-dark-container
         .container
+          .hero-small-background
           .row
             .col-md-7
               .hero-dark-content
-                .hero-title.primary-bg-color
+                .hero-title.hero-top-title.primary-bg-color
                   - trans "JOIN U-REPORT"
                 .hero-description
                   {{ d_block.short_content_teaser|safe }}
@@ -34,7 +35,7 @@
 
       .row
         - for join_step in join_steps
-          .col-md-6
+          .col-sm-6
             .join-container
               .join-inner
                 .join-title.primary-bg-color
@@ -52,51 +53,52 @@
             - blocktrans
               * U-report is a free program sponsored by UNICEF with help of Network Providers in {{ org.name }}. U-report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-report services (all msg on {{ org|config:"shortcode"}}) are free.
 
-      %hr.aaa
-      .section
-        %h1.level-1-title
-          - trans "U-REPORT ON SOCIAL MEDIA"
-        .level-1-title-description.secondary-color
-        .row
-          {% if org|config:"facebook_page_url" %}
-            .col-md-4.small-pad-right
+      -if not is_iorg
+        %hr.aaa
+        .section
+          %h1.level-1-title
+            - trans "U-REPORT ON SOCIAL MEDIA"
+          .level-1-title-description.secondary-color
+          .row
+            {% if org|config:"facebook_page_url" %}
+              .col-md-4.small-pad-right
+                .social-container
+                  .social-inner
+                    .social-title.facebook-bg-color
+                      FACEBOOK
+                    .social-content{style:"padding-left:0px"}
+                      .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"570", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+            {% endif %}
+
+            {% if  org|config:"twitter_user_widget" and org|config:"twitter_handle" %}
+            .col-md-4.small-pad-middle
               .social-container
                 .social-inner
-                  .social-title.facebook-bg-color
-                    FACEBOOK
-                  .social-content{style:"padding-left:0px"}
-                    .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"570", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
-          {% endif %}
+                  .social-title.twitter-bg-color
+                    TWITTER
+                  .social-content
+                    %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
 
-          {% if  org|config:"twitter_user_widget" and org|config:"twitter_handle" %}
-          .col-md-4.small-pad-middle
-            .social-container
-              .social-inner
-                .social-title.twitter-bg-color
-                  TWITTER
-                .social-content
-                  %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
+                    %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-widget-id:'{{ org|config:"twitter_user_widget" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
-                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-widget-id:'{{ org|config:"twitter_user_widget" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+                  %a.social-link.twitter-bg-color.tweet-button{href:'https://twitter.com/intent/tweet?screen_name={{ org|config:"twitter_handle"}}'}
+                    - trans "TWEET TO"
+                    @{{ org|config:"twitter_handle"|upper}} &#8594;
 
-                %a.social-link.twitter-bg-color.tweet-button{href:'https://twitter.com/intent/tweet?screen_name={{ org|config:"twitter_handle"}}'}
-                  - trans "TWEET TO"
-                  @{{ org|config:"twitter_handle"|upper}} &#8594;
+            {% endif %}
 
-          {% endif %}
-
-          {% if org|config:"twitter_search_widget" %}
-          .col-md-4.small-pad-left
-            .social-container
-              .social-inner
-                .social-title.primary-bg-color
-                  {{org.name|upper}} &num;HASHTAGS
-                .social-content
-                  %a.twitter-timeline{href:'https://twitter.com/{{ org|config:"twitter_user_widget" }}', data-widget-id:'{{ org|config:"twitter_search_widget" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:'{{org|config:"primary_color"}}'}
-                %a.social-link.primary-bg-color.tweet-button{href:"https://twitter.com/intent/tweet?hashtags=ureport{{org.name}}%2Cureport%2C{{org.name}}"}
-                  - trans "COMPOSE NEW TWEET"
-                  &#8594;
-          {% endif %}
+            {% if org|config:"twitter_search_widget" %}
+            .col-md-4.small-pad-left
+              .social-container
+                .social-inner
+                  .social-title.primary-bg-color
+                    {{org.name|upper}} &num;HASHTAGS
+                  .social-content
+                    %a.twitter-timeline{href:'https://twitter.com/{{ org|config:"twitter_user_widget" }}', data-widget-id:'{{ org|config:"twitter_search_widget" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:'{{org|config:"primary_color"}}'}
+                  %a.social-link.primary-bg-color.tweet-button{href:"https://twitter.com/intent/tweet?hashtags=ureport{{org.name}}%2Cureport%2C{{org.name}}"}
+                    - trans "COMPOSE NEW TWEET"
+                    &#8594;
+            {% endif %}
 
 
 - block extra-style
@@ -106,6 +108,16 @@
    .hero-container {
       {% for d_block in join_engage|slice:":1"%}
       {% thumbnail d_block.image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }
+
+   .hero-small-background {
+      {% for d_block in join_engage|slice:":1"%}
+      {% thumbnail d_block.image "768x508" crop="top" as im %}
         background-image:url('{{im.url}}');
       {% empty %}
         background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');

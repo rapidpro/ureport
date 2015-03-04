@@ -10,6 +10,7 @@ from ureport.news.models import Video, NewsItem
 import math
 from datetime import timedelta, datetime
 
+
 class IndexView(SmartTemplateView):
     template_name = 'public/index.html'
 

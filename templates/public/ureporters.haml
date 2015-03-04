@@ -46,67 +46,74 @@
               .white-card-title.primary-bg-color
                 - trans "AGE"
               .white-card-content.white-card-padding
-                .contact-field-graph-age{ data-contact-field:'{{org|config:"born_label"}}', id: "graph-contact-field-age"}
-                  #graph-contact-field-age-placeholder.loading-placeholder
-                    %img{src:"{{ STATIC_URL }}img/loading.gif"}
+                -if is_iorg
+                  -include "public/mobile_age_include.haml"
+                -else
+                  .contact-field-graph-age{ data-contact-field:'{{org|config:"born_label"}}', id: "graph-contact-field-age"}
+                    #graph-contact-field-age-placeholder.loading-placeholder
+                      %img{src:"{{ STATIC_URL }}img/loading.gif"}
         .col-md-5
           .white-card-container
             .white-card-inner
               .white-card-title.primary-bg-color
                 - trans "GENDER"
               .white-card-content.white-card-padding
-                .contact-field-graph-gender{ data-contact-field:'{{org|config:"gender_label"}}', id: "graph-contact-field-gender"}
-                  %table.ureporter-gender{style:"width:100%"}
-                    %tbody
-                      %tr
-                        %td.male-gender
-                          .icon-gender.primary-color
-                            .glyph.icon-Icon-02
+                -if is_iorg
+                  -include "public/mobile_gender_include.haml"
+                -else
+                  .contact-field-graph-gender{ data-contact-field:'{{org|config:"gender_label"}}', id: "graph-contact-field-gender"}
+                    %table.ureporter-gender{style:"width:100%"}
+                      %tbody
+                        %tr
+                          %td.male-gender
+                            .icon-gender.primary-color
+                              .glyph.icon-Icon-02
 
-                          #male-percentage.primary-border-color.percentage-gender
-                            %span ---
-                          #male-summary.summary-gender
+                            #male-percentage.primary-border-color.percentage-gender
+                              %span ---
+                            #male-summary.summary-gender
 
-                        %td.female-gender
-                          .icon-gender.primary-color
-                            .glyph.icon-Icon-01
+                          %td.female-gender
+                            .icon-gender.primary-color
+                              .glyph.icon-Icon-01
 
-                          #female-percentage.primary-border-color.percentage-gender
-                            %span ---
-                          #female-summary.summary-gender
+                            #female-percentage.primary-border-color.percentage-gender
+                              %span ---
+                            #female-summary.summary-gender
 
-      .row
-        .col-md-12
-          .white-card-container
-            .white-card-inner
-              .white-card-title.primary-bg-color
-                - trans "WHERE ARE U-REPORTERS FROM?"
-              .white-card-content.white-card-padding
-                .ureport-location-map{data-contact-field:'{{org|config:"gender_label"}}', id: "ureport-location-map-id"}
-                  #ureport-location-map-id-placeholder.loading-placeholder
-                    %img{src:"{{ STATIC_URL }}img/loading.gif"}
+      -if not is_iorg
+        .row
+          .col-md-12
+            .white-card-container
+              .white-card-inner
+                .white-card-title.primary-bg-color
+                  - trans "WHERE ARE U-REPORTERS FROM?"
+                .white-card-content.white-card-padding
+                  .ureport-location-map{data-contact-field:'{{org|config:"gender_label"}}', id: "ureport-location-map-id"}
+                    #ureport-location-map-id-placeholder.loading-placeholder
+                      %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
-      .row
-        .col-md-12
-          .white-card-container
-            .white-card-inner
-              .white-card-title.primary-bg-color
-                - trans "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-              .white-card-content.white-card-padding
-                .contact-field-graph-registration{ data-contact-field:'{{org|config:"registration_label"}}', id: "graph-contact-field-registration"}
-                  #graph-contact-field-registration-placeholder.loading-placeholder
-                    %img{src:"{{ STATIC_URL }}img/loading.gif"}
+        .row
+          .col-md-12
+            .white-card-container
+              .white-card-inner
+                .white-card-title.primary-bg-color
+                  - trans "REGISTRATION RATE: IN THE PAST 6 MONTHS"
+                .white-card-content.white-card-padding
+                  .contact-field-graph-registration{ data-contact-field:'{{org|config:"registration_label"}}', id: "graph-contact-field-registration"}
+                    #graph-contact-field-registration-placeholder.loading-placeholder
+                      %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
-      .row
-        .col-md-12
-          .white-card-container
-            .white-card-inner
-              .white-card-title.primary-bg-color
-                - trans "OCCUPATION: TOP 9 MOST MENTIONED"
-              .white-card-content.white-card-padding
-                .contact-field-graph-occupation{ data-contact-field:'{{org|config:"occupation_label"}}', id: "graph-contact-field-occupation"}
-                  #graph-contact-field-occupation-placeholder.loading-placeholder
-                    %img{src:"{{ STATIC_URL }}img/loading.gif"}
+        .row
+          .col-md-12
+            .white-card-container
+              .white-card-inner
+                .white-card-title.primary-bg-color
+                  - trans "OCCUPATION: TOP 9 MOST MENTIONED"
+                .white-card-content.white-card-padding
+                  .contact-field-graph-occupation{ data-contact-field:'{{org|config:"occupation_label"}}', id: "graph-contact-field-occupation"}
+                    #graph-contact-field-occupation-placeholder.loading-placeholder
+                      %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
 
 
