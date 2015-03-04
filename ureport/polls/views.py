@@ -258,6 +258,9 @@ class PollCRUDL(SmartCRUDL):
                 else:
                     PollQuestion.objects.filter(poll=poll, ruleset_id=rid).delete()
 
+            # delete poll questions for old rulesets
+            PollQuestion.objects.filter(poll=poll).exclude(ruleset_id__in=[ruleset['id'] for ruleset in rulesets]).delete()
+
             return self.object
 
         def post_save(self, obj):
@@ -288,13 +291,13 @@ class PollCRUDL(SmartCRUDL):
             return queryset
 
         def get_questions(self, obj):
-            return obj.questions.count()
+            return obj.get_questions().count()
 
         def get_images(self, obj):
-            return obj.images.count()
+            return obj.get_images().count()
 
         def get_featured_responses(self, obj):
-            return obj.featured_responses.count()
+            return obj.get_featured_responses().count()
 
         def lookup_field_link(self, context, field, obj):
             if field == 'questions':
