@@ -176,7 +176,7 @@
     -if not is_iorg
       #brick-container
         - for vid in videos|slice:"5"
-          .brick.video-brick.size11{data-priority:"{% if forloop.counter == 1 %}4{% else %}{% cycle '3' '2' %}{% endif %}"}
+          .brick.hide-on-small.video-brick.size11{data-priority:"{% if forloop.counter == 1 %}4{% else %}{% cycle '3' '2' %}{% endif %}"}
             .brick-inner
               .brick-title.primary-bg-color
                 - trans "FEATURED VIDEO"
@@ -187,7 +187,7 @@
                 &#8594;
 
         {% if org|config:"featured_state" and False %}
-        .brick.state-brick.size21{data-priority:"5"}
+        .brick.hide-on-small.state-brick.size21{data-priority:"5"}
           .brick-inner
             .brick-title.primary-bg-color
               - trans "FEATURED REGION"
@@ -197,7 +197,7 @@
         {% endif %}
 
         {% if org|config:"facebook_page_url" %}
-        .brick.facebook-brick.size12{data-priority:"3"}
+        .brick.hide-on-small.facebook-brick.size12{data-priority:"3"}
           .brick-inner
             .brick-title.facebook-bg-color
               FACEBOOK
@@ -210,7 +210,7 @@
         {% endif %}
 
         {% if org|config:"instagram_username" %}
-        .brick.instagram-brick.size12{data-priority:"3"}
+        .brick.hide-on-small.instagram-brick.size12{data-priority:"3"}
           .brick-inner
             .brick-title.instagram-bg-color
               INSTAGRAM
@@ -223,7 +223,7 @@
         {% endif %}
 
         {% if  org|config:"twitter_user_widget" and org|config:"twitter_handle" %}
-        .brick.twitter-brick.size12{data-priority:"3"}
+        .brick.hide-on-small.twitter-brick.size12{data-priority:"3"}
           .brick-inner
             .brick-title.twitter-bg-color
               TWITTER
@@ -239,7 +239,7 @@
               &#8594;
         {% endif %}
 
-        .brick.news-brick.size12{data-priority:"4"}
+        .brick.hide-on-small.news-brick.size12{data-priority:"4"}
           .brick-inner
             .brick-title.primary-bg-color
               - trans "NEWS FEED"
@@ -315,7 +315,7 @@
                   &#8594;
 
         - for poll in recent_polls|slice:"3"
-          .brick.poll-brick.size21{data-priority:"{% cycle '4' '3' '2' %}"}
+          .brick.hide-on-small.poll-brick.size21{data-priority:"{% cycle '4' '3' '2' %}"}
             .brick-inner
               .brick-title.primary-bg-color
                 {{ poll.category|upper }}

@@ -82,7 +82,7 @@
                             #female-summary.summary-gender
 
       -if not is_iorg
-        .row.ureporter-states
+        .row.ureporter-states.hide-on-small
           .col-md-12
             .white-card-container
               .white-card-inner
@@ -93,7 +93,7 @@
                     #ureport-location-map-id-placeholder.loading-placeholder
                       %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
-        .row.ureporter-registrations
+        .row.ureporter-registrations.hide-on-small
           .col-md-12
             .white-card-container
               .white-card-inner
@@ -104,7 +104,7 @@
                     #graph-contact-field-registration-placeholder.loading-placeholder
                       %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
-        .row.ureporter-occupations
+        .row.ureporter-occupations.hide-on-small
           .col-md-12
             .white-card-container
               .white-card-inner
