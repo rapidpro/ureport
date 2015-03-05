@@ -8,9 +8,10 @@
   .hero-container
     .hero-dark-container
       .container
+        .hero-small-background
         .col-md-6
           .story-hero
-            .hero-title.primary-bg-color
+            .hero-title.hero-top-title.primary-bg-color
               {{ story.category|upper }}
             .story-hero-title
               {{ story.title|upper }}
@@ -109,6 +110,14 @@
   :css
     .hero-container {
       {% thumbnail story.get_category_image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+    }
+
+    .hero-small-background {
+      {% thumbnail story.get_category_image "678x508" crop="top" as im %}
         background-image:url('{{im.url}}');
       {% empty %}
         background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');

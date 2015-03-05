@@ -11,10 +11,11 @@
     .hero-container
       .hero-dark-container
         .container
+          .hero-small-background
           .row
             .col-md-6
               .story-hero
-                .hero-title.primary-bg-color
+                .hero-title.hero-top-title.primary-bg-color
                   - trans "FEATURED STORY"
                 .story-hero-title
                   {{ main_story.title|upper }}
@@ -33,7 +34,7 @@
     {{ block.super }}
 
 - block content
-  .section
+  .section.hide-on-small
     %h1.level-1-title
       - trans "LATEST U-REPORT STORIES"
     .level-1-title-description.secondary-color
@@ -53,30 +54,33 @@
               %input.category{ type:"radio", name:"category", value:"{{category.id}}", id:"category-{{category.id}}"}=
               %label{ for:"category-{{category.id}}" }= category.name
   .row
-    .stories-filtered
-      - for featured_story in featured
-        .col-md-4.story-filtered{ data-category:"{{ featured_story.category.id }}" }
-          .white-card-container
-            .white-card-inner{style:"min-height:400px,"}
-              .white-card-title.primary-bg-color
-                {{ featured_story.category|upper }}
-              .white-card-image.featured-story-image
-                - if featured_story.get_image
-                  {% thumbnail featured_story.get_image "300x200" crop="top" as im %}
-                  <img width="100%" src="{{im.url}}" />
-                  {% endthumbnail %}
-                - else
-                  <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+    .col-sm-12
+      .stories-filtered
+        - for featured_story in featured
+          %hr.card-clear
 
-              .white-card-content.white-card-padding
-                .featured-story-title
-                  {{ featured_story.title }}
-                .half-border.none-color
-                .featured-story-teaser
-                  {{ featured_story.short_teaser|safe }}
-              %a.featured-story-link.primary-bg-color{href:"{% url 'public.story_read' featured_story.pk %}"}
-                - trans "READ FULL STORY"
-                &#8594;
+          .story-filtered{ data-category:"{{ featured_story.category.id }}" }
+            .white-card-container
+              .white-card-inner{style:"min-height:400px,"}
+                .white-card-title.primary-bg-color
+                  {{ featured_story.category|upper }}
+                .white-card-image.featured-story-image
+                  - if featured_story.get_image
+                    {% thumbnail featured_story.get_image "300x200" crop="top" as im %}
+                    <img width="100%" src="{{im.url}}" />
+                    {% endthumbnail %}
+                  - else
+                    <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+
+                .white-card-content.white-card-padding
+                  .featured-story-title
+                    {{ featured_story.title }}
+                  .half-border.none-color
+                  .featured-story-teaser
+                    {{ featured_story.short_teaser|safe }}
+                %a.featured-story-link.primary-bg-color{href:"{% url 'public.story_read' featured_story.pk %}"}
+                  - trans "READ FULL STORY"
+                  &#8594;
 
   %hr.aaa
   - include "public/archived_stories.html"
@@ -97,6 +101,16 @@
     .hero-container {
       {% for main_story in featured|slice:"1" %}
       {% thumbnail main_story.get_category_image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }
+
+    .hero-small-background {
+      {% for main_story in featured|slice:"1" %}
+      {% thumbnail main_story.get_category_image "768x508" crop="top" as im %}
         background-image:url('{{im.url}}');
       {% empty %}
         background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');

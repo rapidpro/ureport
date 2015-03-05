@@ -6,6 +6,19 @@ from django.conf import settings
 register = template.Library()
 
 @register.filter
+def question_results(question):
+    if not question:
+        return None
+
+    try:
+        results = question.get_results()
+        return results[0]
+    except:
+        import traceback
+        traceback.print_exc()
+        return None
+
+@register.filter
 def reporter_count(org):
     if not org:
         return None
@@ -19,6 +32,74 @@ def reporter_count(org):
             return group['size']
 
     return 0
+
+@register.filter
+def age_stats(org):
+    if not org:
+        return None
+
+    try:
+        born_field = org.get_config('born_label')
+        api_data = org.get_contact_field_results(born_field, None)
+        output_data = org.organize_categories_data(born_field, api_data)[0]
+
+        total = output_data['set']
+        for category in output_data['categories']:
+            if category['count']:
+                category['percentage'] = int(category['count'] * 100 / total)
+            else:
+                category['percentage'] = 0
+
+        return output_data['categories']
+
+    except:
+        # we never want to blow up the view
+        import traceback
+        traceback.print_exc()
+
+    return None
+
+@register.filter
+def gender_stats(org):
+    if not org:
+        return None
+
+    gender_field = org.get_config('gender_label')
+    gender_data = None
+    if gender_field:
+        gender_data = org.get_contact_field_results(gender_field, None)
+
+    if gender_data:
+        try:
+            # not segmented, so just get the first segment
+            gender_data = gender_data[0]
+            male_label = org.get_config('male_label').lower()
+            female_label = org.get_config('female_label').lower()
+
+            if male_label and female_label:
+                male_count = 0
+                female_count = 0
+
+                for category in gender_data['categories']:
+                    if category['label'].lower() == male_label:
+                        male_count += category['count']
+                    elif category['label'].lower() == female_label:
+                        female_count += category['count']
+
+                total_count = male_count + female_count
+                male_percentage = 0
+                if male_count > 0:
+                    male_percentage = int(male_count * 100.0 / total_count)
+                female_percentage = 100 - male_percentage
+                return dict(total_count=total_count,
+                            male_count=male_count, male_percentage=male_percentage,
+                            female_count=female_count, female_percentage=female_percentage)
+        except:
+            # we never want to blow up the page, but let's log what happened
+            import traceback
+            traceback.print_exc()
+
+    return None
 
 @register.filter
 def get_range(value):

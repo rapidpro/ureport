@@ -1,5 +1,5 @@
 @serif-family: "Times New Roman", Times, serif;
-@sans-family: SharpSansBold;
+@sans-family: SharpSansBold, Arial, Helvetica, sans-serif;
 @font-color: #000;
 
 body {
@@ -7,7 +7,7 @@ body {
   color: @font-color;
   font-size: 14pt;
   line-height: 110%;
-  font-family: SharpSansBold;
+  font-family: @sans-family;
 }
 
 #ureport-admin-navbar {
@@ -35,39 +35,36 @@ body {
   background-color: #dfdfdf;
 
   footer {
-    background-image: url("/sitestatic/img/footer.png");
-    background-repeat: no-repeat;
-    padding-left: 140px;
-    min-height: 85px;
-    line-height: 100%;
     color: #808080;
     font-size: .85em;
+    line-height: 85px;
+    min-height: 85px;
 
     .terms-privacy {
-      padding-top: 20px;
+        .footer-logo {
+          margin-top: -5px;
+          padding-right: 10px;
+        }
+        display: inline-block;
     }
 
     .follow-us {
       float: right;
-      padding-top: 20px;
 
       a {
-        padding-top: 20px;
         text-decoration: none;
-        color: 808080;
+        color: #808080;
 
         .symbol {
           color: #808080;
           font-size: 40px;
-
         }
-
       }
 
-      .login-link {
-        text-align: right;
-        padding-top: 10px;
-      }
+    }
+
+    .login-link {
+      text-align: center;
     }
   }
 }
@@ -117,12 +114,10 @@ body {
 
 #brand {
   min-height: 95px;
-  padding: 5px 15px;
+   padding: 5px 0px 5px 15px;
 }
 
 .public-nav {
-
-
   .public-nav-ul {
 
     li.level1 {
@@ -411,8 +406,8 @@ body {
 
   }
 
-
   .hr-header {
+    font-family: @sans-family;
     font-size: .65em;
     margin-bottom: 5px;
     border-bottom: 1px solid;
@@ -470,9 +465,15 @@ body {
   .story-filtered {
     padding-left: 5px;
     padding-right: 5px;
+    width: 33.3%;
+    float: left;
 
     .white-card-inner {
       margin-bottom: 10px;
+    }
+
+    .clear-both {
+      clear: both;
     }
   }
 
@@ -515,6 +516,7 @@ body {
   padding-right: 10px;
   text-align: right;
   font-size: .75em;
+  font-family: @sans-family;
 
   &:hover {
     text-decoration: none;
@@ -526,6 +528,7 @@ body {
   font-size: 1.5em;
   line-height: 120%;
   margin-bottom: 10px;
+  font-family: @sans-family;
 }
 
 .most-active-regions {
@@ -540,6 +543,7 @@ body {
   line-height: 100%;
   vertical-align: bottom;
   text-align: center;
+  font-family: @sans-family;
 }
 
 table.gender {
@@ -604,6 +608,7 @@ h1 {
   line-height: 40px;
   margin-top: 10px;
   margin-bottom: 0px;
+  font-family: @sans-family;
 }
 .subsection {
   display: table;
@@ -950,6 +955,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 .poll-question-title {
   font-size: 1.25em;
   line-height: 120%;
+  font-family: @sans-family;
 }
 
 .poll-question-response-rate {
@@ -978,6 +984,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     font-size: .75em;
     text-decoration: none;
     background-color: #dedede;
+    font-family: @sans-family;
 
     &.active {
       color: #fff;
@@ -992,118 +999,166 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   font-size: 100px;
 }
 
+#iorg-brick-container {
+  .brick {
+    margin-bottom: 15px;
+    width: 100%;
+  }
 
-.brick-inner {
-  display: block;
-}
+  .size12 {
+    height: auto;
+  }
 
-.brick-title {
-  color: #fff;
-  line-height: 100%;
-  font-size: .75em;
-  z-index:100;
-  display: inline-block;
-  padding: 8px 14px 8px 14px;
-  margin-bottom: 5px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-}
+  .brick-inner {
+    position: relative;
+    background-color: #fff;
+  }
 
-a.brick-link {
-  color: #fff;
-  line-height: 100%;
-  width: 100%;
-  z-index: 100;
-  padding: 8px 14px 8px 14px;
-  text-align: right;
-  display: block;
-  color: #fff;
-  font-size: .75em;
-  position: absolute;
-  bottom: 0px;
-}
+  .brick-title {
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 8px 14px 8px 14px;
+    font-family: @sans-family;
+  }
 
-a.brick-link:hover {
-  decoration: none;
-}
+  .brick-long-story-title {
+    padding: 10px;
+  }
 
-.brick-content {
-}
+  .brick-link {
+    display: block;
+    width: 100%;
+    text-align: right;
+    color: #fff;
+    padding: 8px 14px 8px 14px;
+    font-size: .75em;
+    line-height: 100%;
+    margin-top: 10px;
+    font-family: @sans-family;
+  }
 
-.brick-align {
-  padding: 20px;
-
-  &.news-list-align {
-    padding-right: 5px;
+  .brick-long-story-text {
+    padding: 10px;
+    font-family: @serif-family;
   }
 }
 
-.brick-short-story-image {
-}
+#brick-container {
 
-.brick-short-story-title {
-  padding: 10px 14px;
-  color: #fff;
-  position: absolute;
-  bottom: 20px;
-  font-size: 1em;
-  dispay: block;
-  text-shadow: 1px 1px 1px black;
-}
+  .brick-inner {
+    display: block;
+  }
 
-.brick-long-story-title {
-}
+  .brick-title {
+    color: #fff;
+    line-height: 100%;
+    font-size: .75em;
+    z-index: 100;
+    display: inline-block;
+    padding: 8px 14px 8px 14px;
+    margin-bottom: 5px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
 
-.brick-long-story-text {
-  font-family: @serif-family;
-}
+  a.brick-link {
+    color: #fff;
+    line-height: 100%;
+    width: 100%;
+    z-index: 100;
+    padding: 8px 14px 8px 14px;
+    text-align: right;
+    display: block;
+    color: #fff;
+    font-size: .75em;
+    position: absolute;
+    bottom: 0px;
+  }
 
-.brick-poll-main-question {
-}
+  a.brick-link:hover {
+    decoration: none;
+  }
 
-.brick-poll-chart {
-  width: 350px;
-  height: 300px;
-}
+  .brick-content {
+  }
 
-.brick-block-half-width {
-  width: 49%;
-  display: block;
-  float: left;
-}
+  .brick-align {
+    padding: 20px;
 
-.brick-block-vcenter-container {
-  display: table;
-  height: 350px;
-}
+    &.news-list-align {
+      padding-right: 5px;
+    }
+  }
 
-.brick-block-vcenter-content {
-  display: table-cell;
-  vertical-align: middle;
-  padding: 14px;
-}
+  .brick-short-story-image {
+  }
 
-.brick-poll-content {
-  width: 49%;
-  display: inline-block;
-  position: absolute;
-  left: 49%;
-  top: 0px;
-}
+  .brick-short-story-title {
+    padding: 10px 14px;
+    color: #fff;
+    position: absolute;
+    bottom: 20px;
+    font-size: 1em;
+    dispay: block;
+    text-shadow: 1px 1px 1px black;
+  }
 
-.brick-poll-title {
-  font-family: @serif-family;
-  line-height: 130%;
-}
+  .brick-long-story-title {
+  }
 
-.brick-poll-response-percentage {
-  color: #aaa;
-  margin-top: 10px;
-  font-size: .75em;
-  font-style: italic;
-  font-family: @serif-family;
-  padding-bottom: 40px;
+  .brick-long-story-text {
+    font-family: @serif-family;
+  }
+
+  .brick-poll-main-question {
+  }
+
+  .brick-poll-chart {
+    width: 350px;
+    height: 300px;
+  }
+
+  .brick-block-half-width {
+    width: 49%;
+    display: block;
+    float: left;
+  }
+
+  .brick-block-vcenter-container {
+    display: table;
+    height: 350px;
+  }
+
+  .brick-block-vcenter-content {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 14px;
+  }
+
+  .brick-poll-content {
+    width: 49%;
+    display: inline-block;
+    position: absolute;
+    left: 49%;
+    top: 0px;
+  }
+
+  .brick-poll-title {
+    font-family: @serif-family;
+    line-height: 130%;
+  }
+
+  .brick-poll-response-percentage {
+    color: #aaa;
+    margin-top: 10px;
+    font-size: .75em;
+    font-style: italic;
+    font-family: @serif-family;
+    padding-bottom: 40px;
+  }
 }
 
 .yt-videos {
@@ -1138,11 +1193,12 @@ a.brick-link:hover {
 .join-container {
   background-color: #FFFFFF;
   margin-bottom: 20px;
+  max-width: 500px;
 }
 
 .join-inner {
   position: relative;
-  height: 500px;
+  max-width: 500px;
 }
 
 .join-title {
@@ -1153,20 +1209,20 @@ a.brick-link:hover {
   line-height: 100%;
   font-size: .75em;
   z-index: 100;
+  font-family: @sans-family;
 }
 
 .join-image {
-  position:absolute;
   width: 100%;
+  max-width: 500px;
 }
 
 .join-text {
-  position: absolute;
-  top: 340px;
   padding: 20px;
   font-family: @serif-family;
   line-height: 150%;
   font-size: .8em;
+  min-height: 190px;
 }
 
 .social-container {
@@ -1229,11 +1285,21 @@ a.brick-link:hover {
   line-height: 100%;
   font-size: .75em;
   z-index: 100;
+  font-family: @sans-family;
+}
 
+.card-clear {
+  height: 1px;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
 }
 
 .white-card-content {
   width: 100%;
+  min-height: 220px;
+
   &.white-card-padding {
     padding: 40px 15px 15px 15px;
   }
@@ -1543,6 +1609,13 @@ a.brick-link:hover {
         padding-right: 5px;
         text-transform: uppercase;
         font-size: .85em;
+        overflow:hidden;
+        margin-right: 40px;
+        font-family: @sans-family;
+
+        @media (max-width: 768px) {
+          font-size: .65em;
+        }
       }
 
       .category-label-above {
@@ -1555,10 +1628,85 @@ a.brick-link:hover {
         color: #bbb;
         text-transform: uppercase;
         font-size: .85em;
+        overflow:hidden;
+        margin-right: 40px;
+        font-family: @sans-family;
+
+        @media (max-width: 768px) {
+          font-size: .65em;
+        }
       }
 
       .category-percent {
         position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 10%;
+        background: #fff;
+        text-align: left;
+        font-size: 1.5em;
+        padding-left: 10px;
+        font-family: @sans-family;
+
+        @media (max-width: 768px) {
+          font-size: 1em;
+          padding-left: 3px;
+        }
+
+      }
+    }
+  }
+}
+
+.age-graph {
+  width: 100%;
+
+  .age-category {
+    line-height: 35px;
+    margin-top: 10px;
+    position: relative;
+    clear: both;
+
+    .age-container {
+      height: 33px;
+      width: 100%;
+
+      .age-bar {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        height: 33px;
+      }
+
+      .age-label-below {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 33px;
+        line-height: 33px;
+        margin-left: 10px;
+        color: #bbb;
+        background: #fff;
+        padding-right: 5px;
+        text-transform: uppercase;
+        font-size: .85em;
+      }
+
+      .age-label-above {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 33px;
+        line-height: 33px;
+        margin-left: 10px;
+        color: #bbb;
+        text-transform: uppercase;
+        font-size: .85em;
+      }
+
+      .age-percent {
+        position: absolute;
+        font-family: @sans-family;
         right: 0px;
         top: 0px;
         width: 10%;
@@ -1571,7 +1719,6 @@ a.brick-link:hover {
           font-size: 1em;
           padding-left: 3px;
         }
-
       }
     }
   }
@@ -1661,7 +1808,7 @@ a.brick-link:hover {
     top: 30px;
     left: 8px;
     font-size: 1em;
-    font-family: SharpSansBold;
+    font-family: @sans-family;
     line-height: 120%;
 
     @media (max-width: 768px) {
@@ -1677,7 +1824,7 @@ a.brick-link:hover {
     top: 30px;
     left: 160px;
     font-size: 1em;
-    font-family: SharpSansBold;
+    font-family: @sans-family;
     line-height: 120%;
 
     @media (max-width: 768px) {
@@ -1732,7 +1879,20 @@ a.brick-link:hover {
   padding-top: 150px;
   min-height: 400px;
   width: 100%;
+}
 
+.keyword-placeholder {
+  text-align: center;
+  width: 100%;
+  min-height: 300px;
+
+  .keyword {
+    padding: 1px 5px 4px 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+    color: #fff;
+    font-family: @sans-family;
+  }
 }
 
 .small-pad-left {
@@ -1907,8 +2067,9 @@ a.brick-link:hover {
 .banner {
   text-align: center;
   color: #fff;
-  line-height: 65px;
+  line-height: 35px;
   font-size: 30px;
+  padding: 10px 10px 10px 10px;
   font-family: @sans-family;
 }
 
@@ -1959,4 +2120,195 @@ a.brick-link:hover {
   font-style: italic;
   line-height: 150%;
 
+}
+
+.show-on-small {
+  display: none;
+}
+
+/* Small Devices */
+@media (max-width: 768px) {
+
+  .navbar-collapse.collapse {
+    float: none !important;
+
+    .navbar-nav {
+      float: none !important;
+      padding: 0px 0px 10px 5px;
+      margin-bottom: 0px;
+
+      li.level1 {
+        display: inline-block;
+        float: none !important;
+        height: auto;
+
+        a:hover, a:focus {
+          border-top: 0px;
+        }
+
+        &.active a {
+          border-top: 0px;
+        }
+      }
+      ul {
+        list-style-type: none;
+      }
+    }
+  }
+
+  .banner {
+    font-size: 22px;
+    line-height: 35px;
+    padding: 5px 5px 5px 5px;
+  }
+
+  .hero-container {
+    background-image: none !important;
+    background-color: #262626;
+    min-height: 0px;
+
+    .hero-top-title {
+      margin-bottom: 200px;
+    }
+
+    .poll-hero {
+      .poll-hero-title {
+        font-size: 1em;
+      }
+    }
+
+    .hero-small-background {
+      position: absolute;
+      background-size: cover;
+      background-repeat: no-repeat;
+      top: 0px;
+      left: 0px;
+      height: 240px;
+      width: 100%;
+    }
+  }
+
+  .hero-description {
+  }
+
+  .welcome-container {
+    padding: 0px 0px 0px 0px;
+
+    .welcome-logo {
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .welcome-text {
+      padding: 5%;
+    }
+  }
+
+  .public-nav .public-nav-ul {
+    li.level1 {
+      height: 30px;
+      padding: 0px 5px 0px 0px;
+
+      a {
+        padding-top: 5px;
+      }
+
+      :last-child {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .ureport-world {
+    width: 100%;
+    padding: 0px;
+  }
+
+  .left-divider {
+    border-left: none;
+  }
+
+  .subsection {
+    display: table;
+  }
+
+  .container {
+
+  }
+
+  .content {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .footer-container footer {
+    line-height: 50px;
+
+    .follow-us {
+      float: left;
+    }
+  }
+
+  .hide-on-small {
+    display: none !important;
+  }
+
+  .show-on-small {
+    display: block !important;
+  }
+
+  .stories-filtered {
+    .story-filtered {
+      width: 95%;
+      float: none;
+    }
+  }
+
+  .join-text {
+    min-height: 0px;
+  }
+
+  .poll-word-cloud {
+    min-height: 400px!important;
+  }
+
+  .brick.size21 {
+    display: none;
+  }
+}
+
+/* Medium Devices */
+@media (min-width: 768px) and (max-width:992px) {
+  .stories-filtered {
+    .story-filtered {
+      width: 50%;
+    }
+  }
+
+  .card-clear:nth-child(4n+5) {
+    clear: both;
+  }
+}
+
+@media(min-width:992px) {
+  .card-clear:nth-child(6n+7) {
+    clear: both;
+  }
+}
+
+.navbar-collapse.collapse {
+  display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+  float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: -15px !important;
+}
+
+.navbar-right {
+  float: right!important;
 }

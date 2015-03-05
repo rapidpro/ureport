@@ -143,14 +143,6 @@
     - if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
       %header#ureport-admin-navbar.navbar.navbar-static-top{ role:"banner"}
         .container
-          .navbar-header
-            %button.navbar-toggle{ type:"button", data-toggle:"collapse", data-target:"#ureport-admin-top-navbar-collapse"}
-              %span.sr-only
-                - trans "Toggle navigation"
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-
           #ureport-admin-brand.navbar-brand
             - trans "Admin"
 
@@ -274,16 +266,9 @@
       %header#ureport-public-navbar.ureport-header-navbar.ureport-public-navbar.navbar.navbar-static-top{ role:"banner"}
         .container
           .navbar-header
-            %button.navbar-toggle{ type:"button", data-toggle:"collapse", data-target:"#ureport-public-navbar-collapse"}
-              %span.sr-only
-                - trans "Toggle navigation"
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-
             %a#brand.navbar-brand{ href:"/"}
               - block brand
-                {% thumbnail org.logo "196x86" format="PNG" as im %}
+                {% thumbnail org.logo "230x86" format="PNG" as im %}
                 %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
                 {% endthumbnail %}
 
@@ -354,38 +339,38 @@
   .footer-container
     .container
       %footer
-        .follow-us
-          -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
-            - trans "FOLLOW US ON:"
-            .{style:"display: inline;"}
+        .row
+          .col-sm-6
+            .terms-privacy
+              %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
+              ©2014 UNICEF
 
-              - if org|config:"facebook_page_url"
-                %a{href:'{{ org|config:"facebook_page_url" }}'}
-                  %span.symbol.footer-icon
-                    circlefacebook
+          .col-sm-6
+            .follow-us
+              -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
+                - trans "FOLLOW US ON:"
+                - if org|config:"facebook_page_url"
+                  %a{href:'{{ org|config:"facebook_page_url" }}'}
+                    %img.footer-social{ src:"{{ STATIC_URL }}img/facebook.png" }
 
-              - if org|config:"instagram_username"
-                %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
-                  %span.symbol.footer-icon
-                    circleinstagram
+                - if org|config:"instagram_username"
+                  %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
+                    %img.footer-social{ src:"{{ STATIC_URL }}img/instagram.png" }
 
-              - if org|config:"twitter_handle"
-                %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
-                  %span.symbol.footer-icon
-                    circletwitterbird
+                - if org|config:"twitter_handle"
+                  %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
+                    %img.footer-social{ src:"{{ STATIC_URL }}img/twitter.png" }
 
-              - if org|config:"youtube_channel_url"
-                %a{href:'{{ org|config:"youtube_channel_url" }}'}
-                  %span.symbol.footer-icon
-                    circleyoutube
+                - if org|config:"youtube_channel_url"
+                  %a{href:'{{ org|config:"youtube_channel_url" }}'}
+                    %img.footer-social{ src:"{{ STATIC_URL }}img/youtube.png" }
 
-          - if not request.user.is_authenticated
-            .login-link
-              %a.primary-color{href:"/users/login/"} 
-                - trans "Login"
-
-        .terms-privacy
-          ©2014 UREPORT
+        - if not request.user.is_authenticated and not is_iorg
+          .row
+            .col-sm-12
+              .login-link
+                %a.primary-color{href:"/users/login/"}
+                  - trans "Login"
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>
