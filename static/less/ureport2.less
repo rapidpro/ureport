@@ -1879,7 +1879,20 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   padding-top: 150px;
   min-height: 400px;
   width: 100%;
+}
 
+.keyword-placeholder {
+  text-align: center;
+  width: 100%;
+  min-height: 300px;
+
+  .keyword {
+    padding: 1px 5px 4px 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+    color: #fff;
+    font-family: @sans-family;
+  }
 }
 
 .small-pad-left {
@@ -2254,6 +2267,19 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
   .join-text {
     min-height: 0px;
+  }
+
+  .poll-word-cloud {
+    min-height: 400px!important;
+  }
+
+  .brick.size21, .brick.facebook-brick, .brick.twitter-brick,
+  .brick.news-brick, .brick.instagram-brick, .brick.video-brick {
+    display: none;
+  }
+
+  .ureporter-registrations, .ureporter-states, .ureporter-occupations {
+    display: none;
   }
 }
 

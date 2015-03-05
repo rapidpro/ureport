@@ -6,6 +6,19 @@ from django.conf import settings
 register = template.Library()
 
 @register.filter
+def question_results(question):
+    if not question:
+        return None
+
+    try:
+        results = question.get_results()
+        return results[0]
+    except:
+        import traceback
+        traceback.print_exc()
+        return None
+
+@register.filter
 def reporter_count(org):
     if not org:
         return None

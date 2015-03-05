@@ -100,8 +100,11 @@
                     - if question.is_open_ended
                       .tab-pane.active{id:"keywords-tab-{{ question.id }}"}
                         .poll-word-cloud{data-question:"{{ question.id }}", id:"word-cloud-{{ question.id }}" }
-                          .loading-placeholder{id:"word-cloud-{{ question.id }}-placeholder"}
-                            %img{src:"{{ STATIC_URL }}img/loading.gif"}
+                          .keyword-placeholder{id:"word-cloud-{{ question.id }}-placeholder"}
+                            -with results=question|question_results
+                              -for category in results.categories|slice:":50"
+                                .keyword.primary-bg-color
+                                  {{ category.label }}
 
                     - else
                       -if not is_iorg
@@ -112,7 +115,7 @@
 
                       .tab-pane.active{id:"statistics-tab-{{ question.id }}"}
                         .poll-graph
-                          -with results=question.get_results.0
+                          -with results=question|question_results
                             -with categories=results.categories
                               -for category in categories
                                 .poll-category
@@ -252,7 +255,7 @@
 
     .poll-word-cloud {
       width: 100%;
-      height: 750px;
+      min-height: 750px;
     }
 
 -block extra-script
