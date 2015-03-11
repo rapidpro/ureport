@@ -55,6 +55,9 @@ class QuestionForm(ModelForm):
                 if not cleaned[title_key]:
                     raise ValidationError(_("You must include a title for every included question."))
 
+                if len(cleaned[title_key]) > 255:
+                    raise ValidationError(_("Title too long. The max limit is 255 characters for each title"))
+
                 included_count += 1
 
         if not included_count:
