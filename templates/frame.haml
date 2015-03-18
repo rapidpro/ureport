@@ -336,41 +336,43 @@
 
         - block content
 
-  .footer-container
-    .container
-      %footer
-        .row
-          .col-sm-6
-            .terms-privacy
-              %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
-              ©2014 UNICEF
-
-          .col-sm-6
-            .follow-us
-              -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
-                - trans "FOLLOW US ON:"
-                - if org|config:"facebook_page_url"
-                  %a{href:'{{ org|config:"facebook_page_url" }}'}
-                    %img.footer-social{ src:"{{ STATIC_URL }}img/facebook.png" }
-
-                - if org|config:"instagram_username"
-                  %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
-                    %img.footer-social{ src:"{{ STATIC_URL }}img/instagram.png" }
-
-                - if org|config:"twitter_handle"
-                  %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
-                    %img.footer-social{ src:"{{ STATIC_URL }}img/twitter.png" }
-
-                - if org|config:"youtube_channel_url"
-                  %a{href:'{{ org|config:"youtube_channel_url" }}'}
-                    %img.footer-social{ src:"{{ STATIC_URL }}img/youtube.png" }
-
-        - if not request.user.is_authenticated and not is_iorg
+  - block footer
+    .footer-container
+      .container
+        %footer
           .row
-            .col-sm-12
-              .login-link
-                %a.primary-color{href:"/users/login/"}
-                  - trans "Login"
+            .col-sm-6
+              .terms-privacy
+                %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
+                ©2014 UNICEF
+
+            .col-sm-6
+              .follow-us
+                -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
+                  - trans "FOLLOW US ON:"
+                  - if org|config:"facebook_page_url"
+                    %a{href:'{{ org|config:"facebook_page_url" }}'}
+                      %img.footer-social{ src:"{{ STATIC_URL }}img/facebook.png" }
+
+                  - if org|config:"instagram_username"
+                    %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
+                      %img.footer-social{ src:"{{ STATIC_URL }}img/instagram.png" }
+
+                  - if org|config:"twitter_handle"
+                    %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
+                      %img.footer-social{ src:"{{ STATIC_URL }}img/twitter.png" }
+
+                  - if org|config:"youtube_channel_url"
+                    %a{href:'{{ org|config:"youtube_channel_url" }}'}
+                      %img.footer-social{ src:"{{ STATIC_URL }}img/youtube.png" }
+
+          - if not request.user.is_authenticated and not is_iorg
+            .row
+              .col-sm-12
+                .login-link
+                  %a.primary-color{href:"/users/login/"}
+                    - trans "Login"
+          - block extra_footer_links
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>
