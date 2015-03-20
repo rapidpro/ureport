@@ -128,11 +128,11 @@
 
 - block extra-style
   {{ block.super }}
-
+  - load_qbs request.org 'jobs'
   :css
     .hero-container {
-      {% for main_story in featured|slice:"1" %}
-      {% thumbnail main_story.get_category_image "1280x678" crop="top" as im %}
+      {% for d_block in jobs|slice:":1"%}
+      {% thumbnail d_block.image "1280x678" crop="top" as im %}
         background-image:url('{{im.url}}');
       {% empty %}
         background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
@@ -141,8 +141,8 @@
     }
 
     .hero-small-background {
-      {% for main_story in featured|slice:"1" %}
-      {% thumbnail main_story.get_category_image "768x508" crop="top" as im %}
+      {% for d_block in jobs|slice:":1"%}
+      {% thumbnail d_block.image "768x508" crop="top" as im %}
         background-image:url('{{im.url}}');
       {% empty %}
         background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
