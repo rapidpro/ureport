@@ -9,7 +9,7 @@ import mock
 from dash.categories.models import Category
 from ureport.news.models import Video, NewsItem
 from ureport.polls.models import Poll, PollQuestion
-from ureport.tests import DashTest, MockAPI
+from ureport.tests import DashTest, MockAPI, UreportJobsTest
 
 
 class PublicTest(DashTest):
@@ -985,3 +985,63 @@ class PublicTest(DashTest):
         self.assertEquals(response.status_code, 200)
 
         self.assertEquals(json.loads(response.content), dict(next=False, news=[]))
+
+class JobsTest(UreportJobsTest):
+    def setUp(self):
+        super(JobsTest, self).setUp()
+        self.uganda = self.create_org('uganda', self.admin)
+        self.nigeria = self.create_org('nigeria', self.admin)
+
+    def test_jobs(self):
+        fb_source_nigeria = self.create_fb_job_source(self.nigeria, self.nigeria.name)
+        fb_source_uganda = self.create_fb_job_source(self.uganda, self.uganda.name)
+
+        tw_source_nigeria = self.create_tw_job_source(self.nigeria, self.nigeria.name)
+        tw_source_uganda = self.create_tw_job_source(self.uganda, self.uganda.name)
+
+        jobs_url = reverse('public.jobs')
+
+        response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertFalse(response.context['featured_job_sources'])
+        self.assertTrue(response.context['other_job_sources'])
+        self.assertEquals(2, len(response.context['other_job_sources']))
+        self.assertEquals(set(response.context['other_job_sources']), set([fb_source_nigeria, tw_source_nigeria]))
+
+        response = self.client.get(jobs_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertFalse(response.context['featured_job_sources'])
+        self.assertTrue(response.context['other_job_sources'])
+        self.assertEquals(2, len(response.context['other_job_sources']))
+        self.assertEquals(set(response.context['other_job_sources']), set([fb_source_uganda, tw_source_uganda]))
+
+        fb_source_nigeria.is_featured = True
+        fb_source_nigeria.save()
+
+        response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue(response.context['featured_job_sources'])
+        self.assertEquals(1, len(response.context['featured_job_sources']))
+        self.assertTrue(fb_source_nigeria in response.context['featured_job_sources'])
+        self.assertTrue(response.context['other_job_sources'])
+        self.assertEquals(1, len(response.context['other_job_sources']))
+        self.assertTrue(tw_source_nigeria in response.context['other_job_sources'])
+
+        fb_source_nigeria.is_active = False
+        fb_source_nigeria.save()
+
+        response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertFalse(response.context['featured_job_sources'])
+        self.assertTrue(response.context['other_job_sources'])
+        self.assertEquals(1, len(response.context['other_job_sources']))
+        self.assertTrue(tw_source_nigeria in response.context['other_job_sources'])
+
+        tw_source_nigeria.is_active = False
+        tw_source_nigeria.save()
+
+        response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertFalse(response.context['featured_job_sources'])
+        self.assertFalse(response.context['other_job_sources'])
+

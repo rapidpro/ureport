@@ -191,9 +191,14 @@
                     - trans "Stories"
 
               - if request.user.is_superuser or org_perms.news.newsitem_list
-                %li.dropdown
+                %li
                   %a{ href:"{% url 'news.newsitem_list' %}"}
                     - trans "News Items"
+
+              - if request.user.is_superuser or org_perms.jobs.jobsource_list
+                %li
+                  %a{ href:"{% url 'jobs.jobsource_list' %}"}
+                    - trans "Job Sources"
 
               - if request.user.is_superuser or org_perms.categories.category_list
                 %li
@@ -377,7 +382,6 @@
                 .login-link
                   %a.primary-color{href:"/users/login/"}
                     - trans "Login"
-          - block extra_footer_links
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>

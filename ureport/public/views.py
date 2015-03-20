@@ -3,6 +3,7 @@ from smartmin.views import *
 from django.utils import timezone
 
 from dash.stories.models import Story
+from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll, PollQuestion
 from dash.categories.models import Category
 from dash.orgs.models import Org
@@ -247,4 +248,21 @@ class JoinEngageView(SmartTemplateView):
         context['org'] = self.request.org
         return context
 
+class JobsView(SmartTemplateView):
+    template_name = 'public/jobs.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(JobsView, self).get_context_data(**kwargs)
+
+        org = self.request.org
+        context['org'] = self.request.org
+        context['featured_job_sources'] = JobSource.objects.filter(org=org,
+                                                                   is_active=True,
+                                                                   is_featured=True).order_by('-created_on')
+
+        context['other_job_sources'] = JobSource.objects.filter(org=org,
+                                                                is_active=True,
+                                                                is_featured=False).order_by('-created_on')
+
+        return context
 

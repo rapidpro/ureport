@@ -1,8 +1,5 @@
 from django.conf.urls import patterns
-from ureport.jobs.views import JobsView
+from ureport.jobs.views import JobSourceCRUDL
 
-__author__ = 'awesome'
 
-urlpatterns = patterns('',
-                       (r'^$', JobsView.as_view(), {}, 'jobs.index'),
-                       )
+urlpatterns = JobSourceCRUDL().as_urlpatterns()

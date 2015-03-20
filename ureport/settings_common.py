@@ -236,6 +236,7 @@ INSTALLED_APPS = (
     # ureport apps
     'ureport.polls',
     'ureport.news',
+    'ureport.jobs',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -317,6 +318,7 @@ GROUP_PERMISSIONS = {
         'categories.categoryimage.*',
         'dashblocks.dashblock.*',
         'dashblocks.dashblocktype.*',
+        'jobs.jobsource.*',
         'news.newsitem.*',
         'news.video.*',
         'orgs.org_edit',
@@ -337,6 +339,7 @@ GROUP_PERMISSIONS = {
         'categories.categoryimage.*',
         'dashblocks.dashblock.*',
         'dashblocks.dashblocktype.*',
+        'jobs.jobsource.*',
         'news.newsitem.*',
         'news.video.*',
         'orgs.org_home',
