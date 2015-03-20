@@ -292,6 +292,11 @@
                   %a.primary-color{ href:"{% url 'public.ureporters' %}"}
                     - trans "U-reporters"
 
+                - if org|config:"show_jobs"
+                  %li.level1{ class:"{% active request 'jobs' %}"}
+                    %a.primary-color{ href:"{% url 'public.ureporters' %}"}
+                      - trans "Jobs"
+
                 %li.level1{ class:"{% active request 'join' %}"}
                   %a.primary-color{ href:"{% url 'public.join' %}"}
                     - trans "Join & Engage"
