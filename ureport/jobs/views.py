@@ -1,4 +1,4 @@
-from dash.orgs.views import OrgPermsMixin
+from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from django.forms import forms
 from django.utils.translation import ugettext_lazy as _
 from smartmin.views import SmartTemplateView, SmartCRUDL, SmartCreateView, SmartUpdateView, SmartListView
@@ -18,7 +18,7 @@ class JobSourceCRUDL(SmartCRUDL):
             obj.org = self.request.org
             return obj
 
-    class Update(OrgPermsMixin, SmartUpdateView):
+    class Update(OrgObjPermsMixin, SmartUpdateView):
         success_url = '@jobs.jobsource_list'
         success_message = _("Your job source has been added successfully")
         fields = ('is_active', 'is_featured', 'title', 'source_type', 'source_url', 'widget_id')

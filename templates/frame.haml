@@ -253,6 +253,10 @@
                         %a{ href:"{% url 'news.video_list' %}"}
                           - trans "Videos"
 
+                      %li
+                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=jobs"}
+                          - trans "Jobs Content"
+
             %ul.nav.navbar-nav.navbar-right
               - block login
                 - if request.user and request.user.is_authenticated
@@ -299,7 +303,7 @@
 
                 - if org|config:"show_jobs"
                   %li.level1{ class:"{% active request 'jobs' %}"}
-                    %a.primary-color{ href:"{% url 'public.ureporters' %}"}
+                    %a.primary-color{ href:"{% url 'public.jobs' %}"}
                       - trans "Jobs"
 
                 %li.level1{ class:"{% active request 'join' %}"}
