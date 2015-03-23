@@ -301,7 +301,7 @@
                   %a.primary-color{ href:"{% url 'public.ureporters' %}"}
                     - trans "U-reporters"
 
-                - if org|config:"show_jobs"
+                - if org|config:"has_jobs"
                   %li.level1{ class:"{% active request 'jobs' %}"}
                     %a.primary-color{ href:"{% url 'public.jobs' %}"}
                       - trans "Jobs"
