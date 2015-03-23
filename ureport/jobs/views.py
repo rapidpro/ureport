@@ -20,7 +20,7 @@ class JobSourceCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         success_url = '@jobs.jobsource_list'
-        success_message = _("Your job source has been added successfully")
+        success_message = _("Your job source has been updated successfully")
         fields = ('is_active', 'is_featured', 'title', 'source_type', 'source_url', 'widget_id')
 
         def pre_save(self, obj):
