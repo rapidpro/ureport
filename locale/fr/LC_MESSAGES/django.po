@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Nyaruka <info@textit.in>, 2015
 # renaud gaudin <rgaudin@gmail.com>, 2014
@@ -11,14 +11,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-25 20:35+0000\n"
+"POT-Creation-Date: 2015-03-25 21:51+0000\n"
 "PO-Revision-Date: 2015-03-25 20:37+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/ureport/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/projects/p/ureport/language/"
+"fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: dash/categories/models.py:12
@@ -62,8 +63,8 @@ msgstr ""
 
 #: dash/dashblocks/models.py:17
 msgid ""
-"A description of where this content type is used on the site and how it will"
-" be dsiplayed"
+"A description of where this content type is used on the site and how it will "
+"be dsiplayed"
 msgstr ""
 
 #: dash/dashblocks/models.py:20
@@ -141,8 +142,8 @@ msgstr "L'ID de la vidéo Youtube à associé à ce sujet"
 
 #: dash/dashblocks/models.py:65
 msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more"
-" advanced filtering, optional"
+"Any tags for this content block, separated by spaces, can be used to do more "
+"advanced filtering, optional"
 msgstr ""
 
 #: dash/dashblocks/models.py:67
@@ -198,7 +199,7 @@ msgstr ""
 msgid "Create Content Block"
 msgstr ""
 
-#: dash/orgs/models.py:22 dash/orgs/models.py:336
+#: dash/orgs/models.py:22 dash/orgs/models.py:338
 msgid "Name"
 msgstr "Nom"
 
@@ -267,74 +268,76 @@ msgstr "Le token API du compte RapidPro lié"
 msgid ""
 "JSON blob used to store configuration information associated with this "
 "organization"
-msgstr "Blob JSON utilisé pour stocker les éléments de configuration relatifs à cette organisation"
+msgstr ""
+"Blob JSON utilisé pour stocker les éléments de configuration relatifs à "
+"cette organisation"
 
-#: dash/orgs/models.py:271
+#: dash/orgs/models.py:273
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: dash/orgs/models.py:272
+#: dash/orgs/models.py:274
 msgid "Editor"
 msgstr "Éditeur"
 
-#: dash/orgs/models.py:273
+#: dash/orgs/models.py:275
 msgid "Viewer"
 msgstr "Visiteur"
 
-#: dash/orgs/models.py:277 dash/orgs/models.py:332
+#: dash/orgs/models.py:279 dash/orgs/models.py:334
 msgid "Org"
 msgstr "Organisation"
 
-#: dash/orgs/models.py:278
+#: dash/orgs/models.py:280
 msgid "The organization to which the account is invited to view"
 msgstr "L'organisation à laquelle le compte est invité"
 
-#: dash/orgs/models.py:280
+#: dash/orgs/models.py:282
 msgid "Email"
 msgstr "Email"
 
-#: dash/orgs/models.py:280
+#: dash/orgs/models.py:282
 msgid "The email to which we send the invitation of the viewer"
 msgstr "L'email du visiteur à qui nous envoyons l'invitation"
 
-#: dash/orgs/models.py:282
+#: dash/orgs/models.py:284
 msgid "Secret"
 msgstr "Secret"
 
-#: dash/orgs/models.py:283
+#: dash/orgs/models.py:285
 msgid "a unique code associated with this invitation"
 msgstr "un code unique associé à l'invitation"
 
-#: dash/orgs/models.py:285
+#: dash/orgs/models.py:287
 msgid "User Role"
 msgstr "Rôle utilisateur"
 
-#: dash/orgs/models.py:316
+#: dash/orgs/models.py:318
 #, python-format
 msgid "%s Invitation"
 msgstr "Invitation %s"
 
-#: dash/orgs/models.py:328
+#: dash/orgs/models.py:330
 msgid "Banner"
 msgstr "Bannière"
 
-#: dash/orgs/models.py:329
+#: dash/orgs/models.py:331
 msgid "Pattern"
 msgstr "Motif"
 
-#: dash/orgs/models.py:333
+#: dash/orgs/models.py:335
 msgid "The organization in which the image will be used"
 msgstr "L'organisation pour laquelle l'image sera utilisée"
 
-#: dash/orgs/models.py:337
+#: dash/orgs/models.py:339
 msgid "The name to describe this background"
 msgstr "Le nom pour décrire cet arrière-plan"
 
-#: dash/orgs/models.py:339
+#: dash/orgs/models.py:341
 msgid "Background type"
 msgstr "Type d'arrière-plan"
 
-#: dash/orgs/models.py:341
+#: dash/orgs/models.py:343
 msgid "The image file"
 msgstr "Le fichier image"
 
@@ -344,7 +347,8 @@ msgid ""
 "\n"
 "      You've been invited to join %(org_name)s.\n"
 "      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
+"a>.\n"
 "  "
 msgstr ""
 
@@ -418,7 +422,9 @@ msgstr "Choisir votre organisation"
 msgid ""
 "Your account is not associated to an organization. Please Contact the "
 "adminstrator."
-msgstr "Votre compte n'est pas associé à une organisation. Merci de contacter l'administrateur."
+msgstr ""
+"Votre compte n'est pas associé à une organisation. Merci de contacter "
+"l'administrateur."
 
 #: dash/orgs/views.py:229 dash/orgs/views.py:239
 msgid "Your Organization"
@@ -453,7 +459,9 @@ msgstr "Créer"
 msgid ""
 "Your invitation link is invalid. Please contact your organization "
 "administrator."
-msgstr "Le lien de votre invitation n'est pas valide. Merci de contacter l'administrateur de votre organisation."
+msgstr ""
+"Le lien de votre invitation n'est pas valide. Merci de contacter "
+"l'administrateur de votre organisation."
 
 #: dash/orgs/views.py:506 dash/orgs/views.py:549
 #, python-format
@@ -468,7 +476,9 @@ msgstr "Rejoindre"
 msgid ""
 "Your invitation link has expired. Please contact your organization "
 "administrator."
-msgstr "Votre invitation a expirée. Merci de contacter l'administrateur de votre organisation"
+msgstr ""
+"Votre invitation a expirée. Merci de contacter l'administrateur de votre "
+"organisation"
 
 #: dash/stories/models.py:10
 msgid "The title for this story"
@@ -488,15 +498,19 @@ msgstr "Le texte principal de l'article"
 
 #: dash/stories/models.py:19
 msgid ""
-"The id of the YouTube video that should be linked to this story (this is the"
-" text that comes afer v= and before & in the YouTube URL)"
-msgstr "L'ID de la vidéo YouTube que vous souhaitez lier à cet article (le code après v= et avant & au niveau de l'URL YouTube)"
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"L'ID de la vidéo YouTube que vous souhaitez lier à cet article (le code "
+"après v= et avant & au niveau de l'URL YouTube)"
 
 #: dash/stories/models.py:22
 msgid ""
 "Any tags for this story, separated by spaces, can be used to do more "
 "advanced filtering, optional"
-msgstr "Chaque mot-clé de l'article séparé par des espaces peut être utiliser pour des filtres (optionnel)"
+msgstr ""
+"Chaque mot-clé de l'article séparé par des espaces peut être utiliser pour "
+"des filtres (optionnel)"
 
 #: dash/stories/models.py:25
 msgid "The category for this story"
@@ -627,7 +641,8 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      Sorry, you cannot log in at this time because we received "
+"%(failed_login_limit)s incorrect login attempts.\n"
 "      "
 msgstr ""
 
@@ -667,7 +682,9 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  <strong>Your password has expired.</strong> Site policy states that you "
+"must pick a new password every %(expire_days)s days, and that passwords must "
+"not have been used within the previous %(window_days)s days.\n"
 "  "
 msgstr ""
 
@@ -763,8 +780,7 @@ msgid "Groups"
 msgstr ""
 
 #: smartmin/users/views.py:198
-msgid ""
-"Users will only get those permissions that are allowed for their group."
+msgid "Users will only get those permissions that are allowed for their group."
 msgstr ""
 
 #: smartmin/users/views.py:199
@@ -851,8 +867,8 @@ msgstr ""
 
 #: smartmin/users/views.py:364
 msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by"
-" entering your email here."
+"Your link has expired for security reasons. Please reinitiate the process by "
+"entering your email here."
 msgstr ""
 
 #: smartmin/views.py:830
@@ -993,11 +1009,13 @@ msgstr "Dire haut et fort ce qui se passe dans ta communauté"
 msgid ""
 "Use Ureport results and information to update and increase citizen's "
 "awareness"
-msgstr "Exploiter les résultats de U-report pour informer et éveiller les citoyens"
+msgstr ""
+"Exploiter les résultats de U-report pour informer et éveiller les citoyens"
 
 #: templates/public/about.haml:111
 msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "Participer aux campagnes nationales pour aider à l'amélioration de ton pays"
+msgstr ""
+"Participer aux campagnes nationales pour aider à l'amélioration de ton pays"
 
 #: templates/public/about.haml:114
 #, python-format
@@ -1148,6 +1166,10 @@ msgstr "LIRE TOUT L'ARTICLE"
 msgid "Response Rate"
 msgstr "Taux de réponse"
 
+#: templates/public/index.haml:680
+msgid "Read This Story"
+msgstr ""
+
 #: templates/public/join_engage.haml:17
 msgid "JOIN U-REPORT"
 msgstr "REJOINDRE U-REPORT"
@@ -1160,7 +1182,11 @@ msgstr "COMMENT REJOINDRE U-REPORT"
 #, python-format
 msgid ""
 "\n"
-"              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(org.name)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(org|config:\"shortcode\")s) are free.\n"
+"              * U-Report is a free program sponsored by UNICEF with help of "
+"Network Providers in %(org.name)s. U-Report will not ask for any payments "
+"nor personal financial information, PLEASE disregard any messages which ask "
+"you for payment either on this number or on the Facebook and Twitter pages. "
+"All U-Report services (all msg on %(org|config:\"shortcode\")s) are free.\n"
 "\n"
 "            "
 msgstr ""
@@ -1191,8 +1217,13 @@ msgid_plural ""
 "\n"
 "                %(questions)s QUESTIONS POLLED ON THIS TOPIC\n"
 "              "
-msgstr[0] "\n                %(questions)s QUESTION POSEE SUR CE SUJET\n              "
-msgstr[1] "\n                %(questions)s QUESTIONS POSÉES SUR CE SUJET           "
+msgstr[0] ""
+"\n"
+"                %(questions)s QUESTION POSEE SUR CE SUJET\n"
+"              "
+msgstr[1] ""
+"\n"
+"                %(questions)s QUESTIONS POSÉES SUR CE SUJET           "
 
 #: templates/public/polls.haml:48
 msgid "RESPONDED OUT OF"
@@ -1436,7 +1467,9 @@ msgstr "Images du sondage"
 
 #: ureport/polls/views.py:94
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr "Maintenant, entrez toute question que vous aimeriez mettre en avant (si vous en avez)"
+msgstr ""
+"Maintenant, entrez toute question que vous aimeriez mettre en avant (si vous "
+"en avez)"
 
 #: ureport/polls/views.py:106
 msgid "Image to display on poll page and in previews. (optional)"
@@ -1487,7 +1520,8 @@ msgstr "Questions du sondage"
 
 #: ureport/polls/views.py:193
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr "Sélectionnez les images que vous voulez afficher sur le page du sondage"
+msgstr ""
+"Sélectionnez les images que vous voulez afficher sur le page du sondage"
 
 #: ureport/polls/views.py:222
 msgid "Include"
@@ -1535,7 +1569,9 @@ msgstr "La couleur de fond du site"
 
 #: ureport/settings_common.py:172
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Définir jusqu'à 6 couleurs pour le style des graphiques. Séparer les couleurs par une virgule."
+msgstr ""
+"Définir jusqu'à 6 couleurs pour le style des graphiques. Séparer les "
+"couleurs par une virgule."
 
 #: ureport/settings_common.py:173
 msgid "The Google Analytics Tracking ID for this organization"

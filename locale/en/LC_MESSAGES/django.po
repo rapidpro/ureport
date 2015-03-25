@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-25 20:35+0000\n"
+"POT-Creation-Date: 2015-03-25 21:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,7 +194,7 @@ msgstr ""
 msgid "Create Content Block"
 msgstr ""
 
-#: dash/orgs/models.py:22 dash/orgs/models.py:336
+#: dash/orgs/models.py:22 dash/orgs/models.py:338
 msgid "Name"
 msgstr ""
 
@@ -265,72 +265,72 @@ msgid ""
 "organization"
 msgstr ""
 
-#: dash/orgs/models.py:271
+#: dash/orgs/models.py:273
 msgid "Administrator"
 msgstr ""
 
-#: dash/orgs/models.py:272
+#: dash/orgs/models.py:274
 msgid "Editor"
 msgstr ""
 
-#: dash/orgs/models.py:273
+#: dash/orgs/models.py:275
 msgid "Viewer"
 msgstr ""
 
-#: dash/orgs/models.py:277 dash/orgs/models.py:332
+#: dash/orgs/models.py:279 dash/orgs/models.py:334
 msgid "Org"
 msgstr ""
 
-#: dash/orgs/models.py:278
+#: dash/orgs/models.py:280
 msgid "The organization to which the account is invited to view"
 msgstr ""
 
-#: dash/orgs/models.py:280
+#: dash/orgs/models.py:282
 msgid "Email"
 msgstr ""
 
-#: dash/orgs/models.py:280
+#: dash/orgs/models.py:282
 msgid "The email to which we send the invitation of the viewer"
 msgstr ""
 
-#: dash/orgs/models.py:282
+#: dash/orgs/models.py:284
 msgid "Secret"
 msgstr ""
 
-#: dash/orgs/models.py:283
+#: dash/orgs/models.py:285
 msgid "a unique code associated with this invitation"
 msgstr ""
 
-#: dash/orgs/models.py:285
+#: dash/orgs/models.py:287
 msgid "User Role"
 msgstr ""
 
-#: dash/orgs/models.py:316
+#: dash/orgs/models.py:318
 #, python-format
 msgid "%s Invitation"
 msgstr ""
 
-#: dash/orgs/models.py:328
+#: dash/orgs/models.py:330
 msgid "Banner"
 msgstr ""
 
-#: dash/orgs/models.py:329
+#: dash/orgs/models.py:331
 msgid "Pattern"
 msgstr ""
 
-#: dash/orgs/models.py:333
+#: dash/orgs/models.py:335
 msgid "The organization in which the image will be used"
 msgstr ""
 
-#: dash/orgs/models.py:337
+#: dash/orgs/models.py:339
 msgid "The name to describe this background"
 msgstr ""
 
-#: dash/orgs/models.py:339
+#: dash/orgs/models.py:341
 msgid "Background type"
 msgstr ""
 
-#: dash/orgs/models.py:341
+#: dash/orgs/models.py:343
 msgid "The image file"
 msgstr ""
 
@@ -1145,6 +1145,10 @@ msgstr ""
 
 #: templates/public/index.haml:481
 msgid "Response Rate"
+msgstr ""
+
+#: templates/public/index.haml:680
+msgid "Read This Story"
 msgstr ""
 
 #: templates/public/join_engage.haml:17
