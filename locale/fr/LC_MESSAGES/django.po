@@ -1,8 +1,9 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Nyaruka <info@textit.in>, 2015
 # renaud gaudin <rgaudin@gmail.com>, 2014
 # stucampo <stuart.campo@gmail.com>, 2014
 # Vincent Turmine <vincent.turmine@gmail.com>, 2014
@@ -10,15 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-25 19:07+0000\n"
-"PO-Revision-Date: 2015-03-25 19:04+0000\n"
+"POT-Creation-Date: 2015-03-25 20:35+0000\n"
+"PO-Revision-Date: 2015-03-25 20:37+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/ureport/language/"
-"fr/)\n"
-"Language: fr\n"
+"Language-Team: French (http://www.transifex.com/projects/p/ureport/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: dash/categories/models.py:12
@@ -33,7 +33,8 @@ msgstr "Une image pour décrire cette rubrique (optionnel)"
 msgid "The organization this category applies to"
 msgstr "L'organisation à laquelle la rubrique s'applique"
 
-#: dash/categories/models.py:31
+#: dash/categories/models.py:31 templates/frame.haml:240
+#: templates/frame.haml.py:247
 msgid "Categories"
 msgstr "Rubriques"
 
@@ -61,8 +62,8 @@ msgstr ""
 
 #: dash/dashblocks/models.py:17
 msgid ""
-"A description of where this content type is used on the site and how it will "
-"be dsiplayed"
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
 msgstr ""
 
 #: dash/dashblocks/models.py:20
@@ -140,8 +141,8 @@ msgstr "L'ID de la vidéo Youtube à associé à ce sujet"
 
 #: dash/dashblocks/models.py:65
 msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more "
-"advanced filtering, optional"
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
 msgstr ""
 
 #: dash/dashblocks/models.py:67
@@ -170,7 +171,7 @@ msgstr "Rechercher"
 msgid "Add"
 msgstr "Ajouter"
 
-#: dash/dashblocks/views.py:12
+#: dash/dashblocks/views.py:12 templates/frame.haml:184
 msgid "Content Types"
 msgstr "Types de contenu"
 
@@ -266,9 +267,7 @@ msgstr "Le token API du compte RapidPro lié"
 msgid ""
 "JSON blob used to store configuration information associated with this "
 "organization"
-msgstr ""
-"Blob JSON utilisé pour stocker les éléments de configuration relatifs à "
-"cette organisation"
+msgstr "Blob JSON utilisé pour stocker les éléments de configuration relatifs à cette organisation"
 
 #: dash/orgs/models.py:271
 msgid "Administrator"
@@ -345,8 +344,7 @@ msgid ""
 "\n"
 "      You've been invited to join %(org_name)s.\n"
 "      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
-"a>.\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
 "  "
 msgstr ""
 
@@ -420,9 +418,7 @@ msgstr "Choisir votre organisation"
 msgid ""
 "Your account is not associated to an organization. Please Contact the "
 "adminstrator."
-msgstr ""
-"Votre compte n'est pas associé à une organisation. Merci de contacter "
-"l'administrateur."
+msgstr "Votre compte n'est pas associé à une organisation. Merci de contacter l'administrateur."
 
 #: dash/orgs/views.py:229 dash/orgs/views.py:239
 msgid "Your Organization"
@@ -457,9 +453,7 @@ msgstr "Créer"
 msgid ""
 "Your invitation link is invalid. Please contact your organization "
 "administrator."
-msgstr ""
-"Le lien de votre invitation n'est pas valide. Merci de contacter "
-"l'administrateur de votre organisation."
+msgstr "Le lien de votre invitation n'est pas valide. Merci de contacter l'administrateur de votre organisation."
 
 #: dash/orgs/views.py:506 dash/orgs/views.py:549
 #, python-format
@@ -474,9 +468,7 @@ msgstr "Rejoindre"
 msgid ""
 "Your invitation link has expired. Please contact your organization "
 "administrator."
-msgstr ""
-"Votre invitation a expirée. Merci de contacter l'administrateur de votre "
-"organisation"
+msgstr "Votre invitation a expirée. Merci de contacter l'administrateur de votre organisation"
 
 #: dash/stories/models.py:10
 msgid "The title for this story"
@@ -496,19 +488,15 @@ msgstr "Le texte principal de l'article"
 
 #: dash/stories/models.py:19
 msgid ""
-"The id of the YouTube video that should be linked to this story (this is the "
-"text that comes afer v= and before & in the YouTube URL)"
-msgstr ""
-"L'ID de la vidéo YouTube que vous souhaitez lier à cet article (le code "
-"après v= et avant & au niveau de l'URL YouTube)"
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
+msgstr "L'ID de la vidéo YouTube que vous souhaitez lier à cet article (le code après v= et avant & au niveau de l'URL YouTube)"
 
 #: dash/stories/models.py:22
 msgid ""
 "Any tags for this story, separated by spaces, can be used to do more "
 "advanced filtering, optional"
-msgstr ""
-"Chaque mot-clé de l'article séparé par des espaces peut être utiliser pour "
-"des filtres (optionnel)"
+msgstr "Chaque mot-clé de l'article séparé par des espaces peut être utiliser pour des filtres (optionnel)"
 
 #: dash/stories/models.py:25
 msgid "The category for this story"
@@ -518,7 +506,8 @@ msgstr "La rubrique pour cet article"
 msgid "The organization this story belongs to"
 msgstr "L'organisation à qui appartient l'article"
 
-#: dash/stories/models.py:83 templates/public/stories.haml:7
+#: dash/stories/models.py:83 templates/frame.haml:224
+#: templates/frame.haml.py:378 templates/public/stories.haml:7
 msgid "Stories"
 msgstr "Articles"
 
@@ -616,8 +605,8 @@ msgstr ""
 msgid "Sign in"
 msgstr "Se connecter"
 
-#: smartmin/templates/smartmin/users/login.html:33
-#: templates/smartmin/users/login.haml:49
+#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:334
+#: templates/frame.haml.py:489 templates/smartmin/users/login.haml:49
 msgid "Login"
 msgstr "Se connecter"
 
@@ -638,8 +627,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"      Sorry, you cannot log in at this time because we received "
-"%(failed_login_limit)s incorrect login attempts.\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
 msgstr ""
 
@@ -679,9 +667,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"  <strong>Your password has expired.</strong> Site policy states that you "
-"must pick a new password every %(expire_days)s days, and that passwords must "
-"not have been used within the previous %(window_days)s days.\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
 msgstr ""
 
@@ -777,7 +763,8 @@ msgid "Groups"
 msgstr ""
 
 #: smartmin/users/views.py:198
-msgid "Users will only get those permissions that are allowed for their group."
+msgid ""
+"Users will only get those permissions that are allowed for their group."
 msgstr ""
 
 #: smartmin/users/views.py:199
@@ -864,8 +851,8 @@ msgstr ""
 
 #: smartmin/users/views.py:364
 msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by "
-"entering your email here."
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
 msgstr ""
 
 #: smartmin/views.py:830
@@ -890,6 +877,98 @@ msgstr ""
 msgid "Import %s"
 msgstr ""
 
+#: templates/frame.haml:8 templates/public/org_chooser.haml:7
+msgid "U-Report"
+msgstr ""
+
+#: templates/frame.haml:158
+msgid "Admin"
+msgstr ""
+
+#: templates/frame.haml:166
+msgid "Configuration"
+msgstr ""
+
+#: templates/frame.haml:172
+msgid "Orgs"
+msgstr ""
+
+#: templates/frame.haml:178
+msgid "Users"
+msgstr ""
+
+#: templates/frame.haml:191
+msgid "Backgrounds"
+msgstr ""
+
+#: templates/frame.haml:200
+msgid "Content"
+msgstr ""
+
+#: templates/frame.haml:216 templates/frame.haml.py:372
+msgid "Polls"
+msgstr "Sondages"
+
+#: templates/frame.haml:232
+msgid "News Items"
+msgstr "Nouveaux Sujets"
+
+#: templates/frame.haml:255
+msgid "Category Images"
+msgstr ""
+
+#: templates/frame.haml:267
+msgid "Pages & Videos"
+msgstr ""
+
+#: templates/frame.haml:275
+msgid "About Content"
+msgstr ""
+
+#: templates/frame.haml:281
+msgid "Contact Us Content"
+msgstr ""
+
+#: templates/frame.haml:287
+msgid "Missions Content"
+msgstr ""
+
+#: templates/frame.haml:293
+msgid "Join &amp; Engage Content"
+msgstr ""
+
+#: templates/frame.haml:299
+msgid "Join Steps Content"
+msgstr ""
+
+#: templates/frame.haml:305
+msgid "U-Reporters Content"
+msgstr ""
+
+#: templates/frame.haml:311
+msgid "Videos"
+msgstr ""
+
+#: templates/frame.haml:328
+msgid "Logout"
+msgstr ""
+
+#: templates/frame.haml:366
+msgid "About"
+msgstr "À Propos"
+
+#: templates/frame.haml:384
+msgid "U-Reporters"
+msgstr ""
+
+#: templates/frame.haml:390
+msgid "Join & Engage"
+msgstr "Nous Rejoindre"
+
+#: templates/frame.haml:455
+msgid "FOLLOW US ON:"
+msgstr "NOUS SUIVRE SUR :"
+
 #: templates/public/about.haml:16 templates/public/about.haml.py:49
 msgid "ABOUT U-REPORT"
 msgstr "À PROPOS DE U-REPORT"
@@ -899,12 +978,12 @@ msgid "Scroll to Learn more"
 msgstr "Défiler pour en savoir plus"
 
 #: templates/public/about.haml:61
-msgid "The mission of U-report"
-msgstr "L'objectif de U-report"
+msgid "The mission of U-Report"
+msgstr ""
 
 #: templates/public/about.haml:100
-msgid "Why Join U-report?"
-msgstr "Pourquoi rejoindre U-report ?"
+msgid "Why Join U-Report?"
+msgstr ""
 
 #: templates/public/about.haml:105
 msgid "Speak out on what's happening in your community"
@@ -914,18 +993,16 @@ msgstr "Dire haut et fort ce qui se passe dans ta communauté"
 msgid ""
 "Use Ureport results and information to update and increase citizen's "
 "awareness"
-msgstr ""
-"Exploiter les résultats de U-report pour informer et éveiller les citoyens"
+msgstr "Exploiter les résultats de U-report pour informer et éveiller les citoyens"
 
 #: templates/public/about.haml:111
 msgid "Participate in nationwide campaigns to help improve your country"
-msgstr ""
-"Participer aux campagnes nationales pour aider à l'amélioration de ton pays"
+msgstr "Participer aux campagnes nationales pour aider à l'amélioration de ton pays"
 
 #: templates/public/about.haml:114
 #, python-format
-msgid "Share what's happening around %(country)s with other U-reporters"
-msgstr "Partager ce qui se passe au %(country)s avec les U-reporters"
+msgid "Share what's happening around %(country)s with other U-Reporters"
+msgstr ""
 
 #: templates/public/about.haml:120
 msgid "CLICK HERE TO JOIN"
@@ -1083,23 +1160,10 @@ msgstr "COMMENT REJOINDRE U-REPORT"
 #, python-format
 msgid ""
 "\n"
-"              * U-report is a free program sponsored by UNICEF with help of "
-"Network Providers in %(org.name)s. U-report will not ask for any payments "
-"nor personal financial information, PLEASE disregard any messages which ask "
-"you for payment either on this number or on the Facebook and Twitter pages. "
-"All U-report services (all msg on %(org|config:\"shortcode\")s) are free.\n"
+"              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(org.name)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(org|config:\"shortcode\")s) are free.\n"
 "\n"
 "            "
 msgstr ""
-"\n"
-"              * U-report %(org.name)s est une application gratuite offerte "
-"par UNICEF avec l'aide des opérateurs. U-report ne requiert aucun paiement "
-"ni information financière personnelle. Ne tenez jamais compte des messages "
-"vous demandant un paiement sur ce numéro, Facebook ou page Twitter. Tous les "
-"services et fonctions de U-report (tous les SMS envoyés au "
-"%(org|config:\"shortcode\")s) sont gratuits.\n"
-"\n"
-"            "
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
@@ -1112,10 +1176,6 @@ msgstr "ENVOYER UN TWEET A"
 #: templates/public/join_engage.haml:135
 msgid "COMPOSE NEW TWEET"
 msgstr "COMPOSER UN NOUVEAU TWEET"
-
-#: templates/public/org_chooser.haml:7
-msgid "U-report"
-msgstr "U-report"
 
 #: templates/public/polls.haml:15
 msgid "CURRENT POLL IN"
@@ -1131,13 +1191,8 @@ msgid_plural ""
 "\n"
 "                %(questions)s QUESTIONS POLLED ON THIS TOPIC\n"
 "              "
-msgstr[0] ""
-"\n"
-"                %(questions)s QUESTION POSEE SUR CE SUJET\n"
-"              "
-msgstr[1] ""
-"\n"
-"                %(questions)s QUESTIONS POSÉES SUR CE SUJET           "
+msgstr[0] "\n                %(questions)s QUESTION POSEE SUR CE SUJET\n              "
+msgstr[1] "\n                %(questions)s QUESTIONS POSÉES SUR CE SUJET           "
 
 #: templates/public/polls.haml:48
 msgid "RESPONDED OUT OF"
@@ -1176,8 +1231,8 @@ msgid "No featured answers."
 msgstr "Aucune réponse sélectionnée"
 
 #: templates/public/polls.haml:237
-msgid "U-reporter in"
-msgstr "U-reporter - "
+msgid "U-Reporter in"
+msgstr ""
 
 #: templates/public/polls.haml:249 templates/public/story_read.haml:114
 msgid "RELATED STORIES"
@@ -1381,9 +1436,7 @@ msgstr "Images du sondage"
 
 #: ureport/polls/views.py:94
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr ""
-"Maintenant, entrez toute question que vous aimeriez mettre en avant (si vous "
-"en avez)"
+msgstr "Maintenant, entrez toute question que vous aimeriez mettre en avant (si vous en avez)"
 
 #: ureport/polls/views.py:106
 msgid "Image to display on poll page and in previews. (optional)"
@@ -1434,8 +1487,7 @@ msgstr "Questions du sondage"
 
 #: ureport/polls/views.py:193
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr ""
-"Sélectionnez les images que vous voulez afficher sur le page du sondage"
+msgstr "Sélectionnez les images que vous voulez afficher sur le page du sondage"
 
 #: ureport/polls/views.py:222
 msgid "Include"
@@ -1454,13 +1506,12 @@ msgid "The question posed to your audience, will be displayed publicly"
 msgstr "La question posé à votre audience sera visible par tous"
 
 #: ureport/settings_common.py:165
-msgid "The shortcode that users will use to contact U-report locally"
+msgid "The shortcode that users will use to contact U-Report locally"
 msgstr ""
-"Le numéro court à travers lequel les utilisateurs peuvent utiliser U-report"
 
 #: ureport/settings_common.py:166
-msgid "The short text used to direct visitors to join U-report"
-msgstr "Le texte utilisé pour encourager les visiteurs à rejoindre U-report"
+msgid "The short text used to direct visitors to join U-Report"
+msgstr ""
 
 #: ureport/settings_common.py:167
 msgid "The color used to draw the text on the join bar"
@@ -1484,9 +1535,7 @@ msgstr "La couleur de fond du site"
 
 #: ureport/settings_common.py:172
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr ""
-"Définir jusqu'à 6 couleurs pour le style des graphiques. Séparer les "
-"couleurs par une virgule."
+msgstr "Définir jusqu'à 6 couleurs pour le style des graphiques. Séparer les couleurs par une virgule."
 
 #: ureport/settings_common.py:173
 msgid "The Google Analytics Tracking ID for this organization"
@@ -1549,12 +1598,12 @@ msgid "The label of the Contact Field that contains the District of reporters"
 msgstr "Libellé du champ contenant le district des U-Reporters"
 
 #: ureport/settings_common.py:187
-msgid "The label assigned to U-reporters that are Male."
-msgstr "Valeur utilisée pour les U-reporters masculins."
+msgid "The label assigned to U-Reporters that are Male."
+msgstr ""
 
 #: ureport/settings_common.py:188
-msgid "The label assigned to U-reporters that are Female."
-msgstr "Valeur utilisée pour les U-reporters féminins."
+msgid "The label assigned to U-Reporters that are Female."
+msgstr ""
 
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"

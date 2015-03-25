@@ -44,7 +44,7 @@
             - if missions
               .subsection
                 .subsection-title
-                  - trans "The mission of U-report"
+                  - trans "The mission of U-Report"
 
                 .missions
                   .row
@@ -70,7 +70,7 @@
 
               .ureport-world.left-divider
                 .subsection-title
-                  - trans "Why Join U-report?"
+                  - trans "Why Join U-Report?"
                 .half-border.primary-bg-color
                 %ul.subsection-content
                   %li
@@ -80,7 +80,7 @@
                   %li
                     - trans "Participate in nationwide campaigns to help improve your country"
                   %li
-                    {% blocktrans with country=org.name %}Share what's happening around {{ country }} with other U-reporters{% endblocktrans %}
+                    {% blocktrans with country=org.name %}Share what's happening around {{ country }} with other U-Reporters{% endblocktrans %}
 
                 %a.subsection-link{ href:"{% url 'public.join' %}"}
                   %nobr.primary-color

@@ -5,7 +5,7 @@
   %meta{ charset:"utf-8"}
   %title
     - block title
-      - trans "U-report"
+      - trans "U-Report"
     - block subtitle
       &nbsp;
   %meta{ name:"description", content:""}
@@ -242,7 +242,7 @@
 
                       %li
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=ureporters"}
-                          - trans "U-reporters Content"
+                          - trans "U-Reporters Content"
 
                       %li
                         %a{ href:"{% url 'news.video_list' %}"}
@@ -290,7 +290,7 @@
 
                 %li.level1{ class:"{% active request 'ureporters' %}"}
                   %a.primary-color{ href:"{% url 'public.ureporters' %}"}
-                    - trans "U-reporters"
+                    - trans "U-Reporters"
 
                 %li.level1{ class:"{% active request 'join' %}"}
                   %a.primary-color{ href:"{% url 'public.join' %}"}
@@ -329,7 +329,7 @@
             - for message in messages
               .alert{ class:"alert-={ message.tags }"}
                 %a.close{ data-dismiss:"alert"}
-                  ×
+                  x
                 {{ message }}
 
         - block pre-content
@@ -343,7 +343,7 @@
           .col-sm-6
             .terms-privacy
               %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
-              ©2014 UNICEF
+              &copy; 2014 UNICEF
 
           .col-sm-6
             .follow-us
