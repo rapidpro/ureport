@@ -256,13 +256,7 @@ class JobsView(SmartTemplateView):
 
         org = self.request.org
         context['org'] = self.request.org
-        context['featured_job_sources'] = JobSource.objects.filter(org=org,
-                                                                   is_active=True,
-                                                                   is_featured=True).order_by('-created_on')
-
-        context['other_job_sources'] = JobSource.objects.filter(org=org,
-                                                                is_active=True,
-                                                                is_featured=False).order_by('-created_on')
-
+        context['job_sources'] = JobSource.objects.filter(org=org,
+                                                          is_active=True).order_by('-is_featured', '-created_on')
         return context
 
