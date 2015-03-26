@@ -74,11 +74,6 @@ deploy
 media/
 db/
 
-# symlink to dash for dev
+# symlink to dash and smartmin for dev
 dash
-
-#collected by pip
-src
-
-#some play around files
-ureport/playground
+smartmin

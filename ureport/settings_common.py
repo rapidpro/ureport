@@ -51,7 +51,7 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = "translation"
 LANGUAGE_CODE = 'en'
 
 # Available languages for translation
-LANGUAGES = (('en', "English"), ('fr', "French"))
+LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"))
 DEFAULT_LANGUAGE = "en"
 
 SITE_ID = 1
@@ -162,8 +162,8 @@ if 'test' in sys.argv:
     CACHES['default'] = {'BACKEND': 'django.core.cache.backends.dummy.DummyCache',}
 
 
-ORG_CONFIG_FIELDS =[ dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-report locally"), required=True)),
-                     dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-report"), required=False)),
+ORG_CONFIG_FIELDS =[ dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-Report locally"), required=True)),
+                     dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-Report"), required=False)),
                      dict(name='join_fg_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False), superuser_only=True),
                      dict(name='join_bg_color', field=dict(help_text=_("The color used to draw the background on the join bar"), required=False), superuser_only=True),
                      dict(name='primary_color', field=dict(help_text=_("The primary color for styling for this organization"), required=False), superuser_only=True),
@@ -184,8 +184,8 @@ ORG_CONFIG_FIELDS =[ dict(name='shortcode', field=dict(help_text=_("The shortcod
                      dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")), superuser_only=True),
                      dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters")), superuser_only=True),
                      dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters")), superuser_only=True),
-                     dict(name='male_label', field=dict(help_text=_("The label assigned to U-reporters that are Male.")), superuser_only=True),
-                     dict(name='female_label', field=dict(help_text=_("The label assigned to U-reporters that are Female.")), superuser_only=True),
+                     dict(name='male_label', field=dict(help_text=_("The label assigned to U-Reporters that are Male.")), superuser_only=True),
+                     dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True),
                      dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), required=False))]
 #                     dict(name='featured_state', field=dict(help_text=_("Choose the featured State of reporters shown on the home page")))]
 INSTALLED_APPS = (
@@ -427,7 +427,7 @@ CELERYBEAT_SCHEDULE = {
 }
 
 #-----------------------------------------------------------------------------------
-# U-report Defaults
+# U-Report Defaults
 #-----------------------------------------------------------------------------------
 UREPORT_DEFAULT_PRIMARY_COLOR = '#FFFF00'
 UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'

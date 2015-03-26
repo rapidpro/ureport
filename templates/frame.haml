@@ -5,7 +5,7 @@
   %meta{ charset:"utf-8"}
   %title
     - block title
-      - trans "U-report"
+      - trans "U-Report"
     - block subtitle
       &nbsp;
   %meta{ name:"description", content:""}
@@ -247,7 +247,7 @@
 
                       %li
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=ureporters"}
-                          - trans "U-reporters Content"
+                          - trans "U-Reporters Content"
 
                       %li
                         %a{ href:"{% url 'news.video_list' %}"}
@@ -299,7 +299,7 @@
 
                 %li.level1{ class:"{% active request 'ureporters' %}"}
                   %a.primary-color{ href:"{% url 'public.ureporters' %}"}
-                    - trans "U-reporters"
+                    - trans "U-Reporters"
 
                 - if org|config:"has_jobs"
                   %li.level1{ class:"{% active request 'jobs' %}"}
@@ -343,7 +343,7 @@
             - for message in messages
               .alert{ class:"alert-={ message.tags }"}
                 %a.close{ data-dismiss:"alert"}
-                  ×
+                  x
                 {{ message }}
 
         - block pre-content

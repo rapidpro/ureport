@@ -656,6 +656,11 @@ class PollTest(DashTest):
             self.assertTrue(response.context['form'].errors)
             self.assertTrue(response.context['form'].errors['__all__'][0], "You must include a title for every included question.")
 
+            post_data = dict(ruleset_8435_include=True, ruleset_8435_title="hello " * 50)
+            response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+            self.assertTrue(response.context['form'].errors)
+            self.assertTrue(response.context['form'].errors['__all__'][0], "Title too long. The max limit is 255 characters for each title")
+
             post_data = dict(ruleset_8435_include=True, ruleset_8435_title="have electricity access")
             response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertTrue(PollQuestion.objects.filter(poll=poll1))

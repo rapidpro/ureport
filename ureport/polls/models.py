@@ -187,9 +187,6 @@ class Poll(SmartModel):
     def get_images(self):
         return self.images.filter(is_active=True).order_by('pk')
 
-    def get_featured_responses(self):
-        return self.featured_responses.filter(is_active=True).order_by('pk')
-
     def runs(self):
         flow = self.get_flow()
         if flow:
