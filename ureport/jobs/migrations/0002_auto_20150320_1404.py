@@ -8,10 +8,7 @@ def generate_job_block_types(apps, schema_editor):
     root = User.objects.filter(username="root").first()
 
     if not root:
-        root = User.objects.filter(username="root2").first()
-
-    if not root:
-        root = User.objects.create(username="root2")
+        root = User.objects.create(username="root")
 
     DashBlockType = apps.get_model("dashblocks", "DashBlockType")
 
