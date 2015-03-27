@@ -180,7 +180,7 @@ ORG_CONFIG_FIELDS =[ dict(name='shortcode', field=dict(help_text=_("The shortcod
                      dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True),
                      dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")), superuser_only=True),
                      dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters")), superuser_only=True),
-                     dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters")), superuser_only=True),
+                     dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters"), required=False), superuser_only=True),
                      dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")), superuser_only=True),
                      dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters")), superuser_only=True),
                      dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters")), superuser_only=True),
