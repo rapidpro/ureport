@@ -104,16 +104,17 @@
                     #graph-contact-field-registration-placeholder.loading-placeholder
                       %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
-        .row.ureporter-occupations.hide-on-small
-          .col-md-12
-            .white-card-container
-              .white-card-inner
-                .white-card-title.primary-bg-color
-                  - trans "OCCUPATION: TOP 9 MOST MENTIONED"
-                .white-card-content.white-card-padding
-                  .contact-field-graph-occupation{ data-contact-field:'{{org|config:"occupation_label"}}', id: "graph-contact-field-occupation"}
-                    #graph-contact-field-occupation-placeholder.loading-placeholder
-                      %img{src:"{{ STATIC_URL }}img/loading.gif"}
+        -if org|config:"occupation_label"
+          .row.ureporter-occupations.hide-on-small
+            .col-md-12
+              .white-card-container
+                .white-card-inner
+                  .white-card-title.primary-bg-color
+                    - trans "OCCUPATION: TOP 9 MOST MENTIONED"
+                  .white-card-content.white-card-padding
+                    .contact-field-graph-occupation{ data-contact-field:'{{org|config:"occupation_label"}}', id: "graph-contact-field-occupation"}
+                      #graph-contact-field-occupation-placeholder.loading-placeholder
+                        %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
 
 
@@ -371,6 +372,8 @@
           });
         });
       });
+
+      {% if org|config:"occupation_label" %}
       $(function() {
         $(".contact-field-graph-occupation").each(function(){
           var contactField = $(this).attr('data-contact-field');
@@ -476,6 +479,7 @@
           });
         });
       });
+      {% endif %}
 
 - block extra-style
   - load_qbs request.org 'ureporters'
