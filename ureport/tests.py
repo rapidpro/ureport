@@ -6,6 +6,8 @@ from mock import Mock
 from django.core.urlresolvers import reverse
 from dash.orgs.models import Org
 from django.http.request import HttpRequest
+from ureport.jobs.models import JobSource
+
 
 class MockAPI(API):
 
@@ -128,6 +130,33 @@ class DashTest(SmartminTest):
 
         self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
         return Org.objects.get(subdomain=subdomain)
+
+class UreportJobsTest(DashTest):
+    FB_SOURCE = 'http://www.facebook.com/%s'
+    TW_SOURCE = 'http://twitter.com/%s'
+    RSS_SOURCE = 'http://dummy.rss.com/%s.xml'
+
+    def create_fb_job_source(self, org, fb_identifier):
+        return JobSource.objects.create(source_url=UreportJobsTest.FB_SOURCE % fb_identifier,
+                                        source_type=JobSource.FACEBOOK,
+                                        org=org,
+                                        created_by=self.admin,
+                                        modified_by=self.admin)
+
+    def create_tw_job_source(self, org, tw_identifier):
+        return JobSource.objects.create(source_url=UreportJobsTest.TW_SOURCE % tw_identifier,
+                                        widget_id='WIDGETID_%s' % tw_identifier,
+                                        source_type=JobSource.TWITTER,
+                                        org=org,
+                                        created_by=self.admin,
+                                        modified_by=self.admin)
+
+    def create_rss_job_source(self, org, rss_identifier):
+        return JobSource.objects.create(source_url=UreportJobsTest.RSS_SOURCE % rss_identifier,
+                                        source_type=JobSource.RSS,
+                                        org=org,
+                                        created_by=self.admin,
+                                        modified_by=self.admin)
 
 
 class SetOrgMiddlewareTest(DashTest):

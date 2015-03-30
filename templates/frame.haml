@@ -191,9 +191,14 @@
                     - trans "Stories"
 
               - if request.user.is_superuser or org_perms.news.newsitem_list
-                %li.dropdown
+                %li
                   %a{ href:"{% url 'news.newsitem_list' %}"}
                     - trans "News Items"
+
+              - if request.user.is_superuser or org_perms.jobs.jobsource_list
+                %li
+                  %a{ href:"{% url 'jobs.jobsource_list' %}"}
+                    - trans "Job Sources"
 
               - if request.user.is_superuser or org_perms.categories.category_list
                 %li
@@ -248,6 +253,10 @@
                         %a{ href:"{% url 'news.video_list' %}"}
                           - trans "Videos"
 
+                      %li
+                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=jobs"}
+                          - trans "Jobs Content"
+
             %ul.nav.navbar-nav.navbar-right
               - block login
                 - if request.user and request.user.is_authenticated
@@ -291,6 +300,11 @@
                 %li.level1{ class:"{% active request 'ureporters' %}"}
                   %a.primary-color{ href:"{% url 'public.ureporters' %}"}
                     - trans "U-Reporters"
+
+                - if org|config:"has_jobs"
+                  %li.level1{ class:"{% active request 'jobs' %}"}
+                    %a.primary-color{ href:"{% url 'public.jobs' %}"}
+                      - trans "Jobs"
 
                 %li.level1{ class:"{% active request 'join' %}"}
                   %a.primary-color{ href:"{% url 'public.join' %}"}
@@ -336,41 +350,42 @@
 
         - block content
 
-  .footer-container
-    .container
-      %footer
-        .row
-          .col-sm-6
-            .terms-privacy
-              %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
-              &copy; 2014 UNICEF
-
-          .col-sm-6
-            .follow-us
-              -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
-                - trans "FOLLOW US ON:"
-                - if org|config:"facebook_page_url"
-                  %a{href:'{{ org|config:"facebook_page_url" }}'}
-                    %img.footer-social{ src:"{{ STATIC_URL }}img/facebook.png" }
-
-                - if org|config:"instagram_username"
-                  %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
-                    %img.footer-social{ src:"{{ STATIC_URL }}img/instagram.png" }
-
-                - if org|config:"twitter_handle"
-                  %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
-                    %img.footer-social{ src:"{{ STATIC_URL }}img/twitter.png" }
-
-                - if org|config:"youtube_channel_url"
-                  %a{href:'{{ org|config:"youtube_channel_url" }}'}
-                    %img.footer-social{ src:"{{ STATIC_URL }}img/youtube.png" }
-
-        - if not request.user.is_authenticated and not is_iorg
+  - block footer
+    .footer-container
+      .container
+        %footer
           .row
-            .col-sm-12
-              .login-link
-                %a.primary-color{href:"/users/login/"}
-                  - trans "Login"
+            .col-sm-6
+              .terms-privacy
+                %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
+                ©2014 UNICEF
+
+            .col-sm-6
+              .follow-us
+                -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
+                  - trans "FOLLOW US ON:"
+                  - if org|config:"facebook_page_url"
+                    %a{href:'{{ org|config:"facebook_page_url" }}'}
+                      %img.footer-social{ src:"{{ STATIC_URL }}img/facebook.png" }
+
+                  - if org|config:"instagram_username"
+                    %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
+                      %img.footer-social{ src:"{{ STATIC_URL }}img/instagram.png" }
+
+                  - if org|config:"twitter_handle"
+                    %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
+                      %img.footer-social{ src:"{{ STATIC_URL }}img/twitter.png" }
+
+                  - if org|config:"youtube_channel_url"
+                    %a{href:'{{ org|config:"youtube_channel_url" }}'}
+                      %img.footer-social{ src:"{{ STATIC_URL }}img/youtube.png" }
+
+          - if not request.user.is_authenticated and not is_iorg
+            .row
+              .col-sm-12
+                .login-link
+                  %a.primary-color{href:"/users/login/"}
+                    - trans "Login"
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>

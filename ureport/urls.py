@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^manage/', include('ureport.polls.urls')),
     url(r'^manage/', include('dash.categories.urls')),
     url(r'^manage/', include('ureport.news.urls')),
+    url(r'^manage/', include('ureport.jobs.urls')),
     url(r'^users/', include('dash.users.urls')),
 )
 

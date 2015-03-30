@@ -1,4 +1,5 @@
 from django import template
+from django.core.urlresolvers import reverse
 from django.template import TemplateSyntaxError
 from django.template.defaultfilters import stringfilter
 from django.conf import settings

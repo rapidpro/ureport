@@ -1,5 +1,8 @@
+from django.conf import settings
+from django.conf.urls import include, patterns, url
 from django.views.decorators.cache import cache_page
-from .views import *
+from .views import IndexView, NewsView, AboutView, PollsView, PollReadView, PollQuestionResultsView, JobsView
+from .views import BoundaryView, UreportersView, StoriesView, StoryReadView, JoinEngageView, ReportersResultsView
 
 urlpatterns = patterns('',
     (r'^$', IndexView.as_view(), {}, 'public.index'),
@@ -15,5 +18,5 @@ urlpatterns = patterns('',
     (r'^stories/$', StoriesView.as_view(), {}, 'public.stories'),
     (r'^story/(?P<pk>\d+)/$', StoryReadView.as_view(), {}, 'public.story_read'),
     (r'^join/$', JoinEngageView.as_view(), {}, 'public.join'),
+    (r'^jobs/$', JobsView.as_view(), {}, 'public.jobs'),
 )
-
