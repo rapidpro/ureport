@@ -17,11 +17,15 @@ class JobSource(SmartModel):
     RSS = 'R'
     SOURCE_TYPES = ((TWITTER, 'Twitter'), (FACEBOOK, 'Facebook'), (RSS, 'RSS'))
 
-    title = models.CharField(max_length=100)
-    source_type = models.CharField(max_length=1, choices=SOURCE_TYPES)
-    source_url = models.URLField()
-    widget_id = models.CharField(max_length=50, blank=True, null=True)
-    is_featured = models.BooleanField(default=False)
+    title = models.CharField(max_length=100, help_text=_("The title or name to reference this Job source."))
+    source_type = models.CharField(max_length=1, choices=SOURCE_TYPES,
+                                   help_text=_("Choose the type for the Job source. Twitter, Facebook or RSS feed"))
+    source_url = models.URLField(help_text=_("The full URL to navigate to this Job source."))
+    widget_id = models.CharField(max_length=50, blank=True, null=True,
+                                 help_text=_("For Twitter, a widget Id is required to embed tweets on the website. "
+                                             "Read carefully the instructions above on how to get the right widget Id"))
+    is_featured = models.BooleanField(default=False,
+                                      help_text=_("Featured job sources are shown first on the jobs page."))
     org = models.ForeignKey(Org,
                             help_text=_("The organization this job source is for"))
 

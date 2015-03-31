@@ -1,8 +1,12 @@
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
+from django.core.urlresolvers import reverse
 from django.forms import forms
+from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from smartmin.views import SmartTemplateView, SmartCRUDL, SmartCreateView, SmartUpdateView, SmartListView
 from ureport.jobs.models import JobSource
+
+
 
 class JobSourceCRUDL(SmartCRUDL):
     model = JobSource
@@ -11,17 +15,38 @@ class JobSourceCRUDL(SmartCRUDL):
     class Create(OrgPermsMixin, SmartCreateView):
         success_url = '@jobs.jobsource_list'
         success_message = _("Your job source has been added successfully")
-        fields = ('is_featured', 'title', 'source_type', 'source_url', 'widget_id')
+
+        def derive_fields(self):
+            source_type = self.request.REQUEST.get('source_type', None)
+            if source_type:
+                source_type = source_type.strip().upper()
+
+            if source_type == JobSource.TWITTER:
+                return ('is_featured', 'title', 'source_url', 'widget_id')
+
+            elif source_type in [JobSource.FACEBOOK, JobSource.RSS]:
+                return ('is_featured', 'title', 'source_url')
+
+            return ('source_type',)
+
 
         def pre_save(self, obj):
             obj = super(JobSourceCRUDL.Create, self).pre_save(obj)
             obj.org = self.request.org
+
+            source_type = self.request.REQUEST.get('source_type')
+            obj.source_type = source_type.strip().upper()
+
             return obj
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         success_url = '@jobs.jobsource_list'
         success_message = _("Your job source has been updated successfully")
-        fields = ('is_active', 'is_featured', 'title', 'source_type', 'source_url', 'widget_id')
+
+        def derive_fields(self):
+            if self.get_object().source_type == JobSource.TWITTER:
+                return ('is_active', 'is_featured', 'title', 'source_url', 'widget_id')
+            return ('is_active', 'is_featured', 'title', 'source_url')
 
         def pre_save(self, obj):
             obj = super(JobSourceCRUDL.Update, self).pre_save(obj)
