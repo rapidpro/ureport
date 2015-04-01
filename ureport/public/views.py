@@ -1,4 +1,6 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from smartmin.views import *
 from django.utils import timezone
 
@@ -9,6 +11,7 @@ from dash.categories.models import Category
 from dash.orgs.models import Org
 from ureport.news.models import Video, NewsItem
 import math
+import pycountry
 from datetime import timedelta, datetime
 
 
@@ -260,3 +263,51 @@ class JobsView(SmartTemplateView):
                                                           is_active=True).order_by('-is_featured', '-created_on')
         return context
 
+class CountriesView(SmartTemplateView):
+    template_name = 'public/countries.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(CountriesView, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(json.dumps(dict(error='Unsupported method GET, please use POST.')),
+                            status=400, content_type='application/json')
+
+    def get(self, request, *args, **kwargs):
+        json_dict = dict(exists='invalid')
+
+        data_dict = dict()
+        try:
+            data_string = request.body
+            data_dict = json.loads(data_string)
+        except ValueError:
+            pass
+
+        if data_dict:
+            text = data_dict['text'].strip()
+            text_length = len(text)
+
+            country = None
+            if text_length == 2:
+                try:
+                    country = pycountry.countries.get(alpha2=text.upper())
+                except KeyError:
+                    pass
+
+            elif text_length == 3:
+                try:
+                    country = pycountry.countries.get(alpha3=text.upper())
+                except KeyError:
+                    pass
+
+            if not country:
+                try:
+                    country = pycountry.countries.get(name=text.title())
+                except KeyError:
+                    pass
+
+            if country:
+                json_dict = dict(exists='valid')
+
+        return HttpResponse(json.dumps(json_dict), status=200, content_type='application/json')

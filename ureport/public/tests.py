@@ -1045,3 +1045,90 @@ class JobsTest(UreportJobsTest):
         self.assertFalse(response.context['featured_job_sources'])
         self.assertFalse(response.context['other_job_sources'])
 
+
+class CountriesTest(DashTest):
+
+
+    def setUp(self):
+        super(CountriesTest, self).setUp()
+        self.uganda = self.create_org('uganda', self.admin)
+
+
+    def test_countries(self):
+        countries_url = reverse('public.countries')
+
+        response = self.client.get(countries_url)
+        self.assertEquals(response.status_code, 400)
+        response_json = json.loads(response.content)
+        self.assertEquals(response_json['error'], "Unsupported method GET, please use POST.")
+
+        response = self.client.get(countries_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 400)
+        response_json = json.loads(response.content)
+        self.assertEquals(response_json['error'], "Unsupported method GET, please use POST.")
+
+        response = self.client.post(countries_url, dict())
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "invalid")
+
+        response = self.client.post(countries_url, dict(), SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "invalid")
+
+        response = self.client.post(countries_url, dict(text="OK"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "invalid")
+
+        response = self.client.post(countries_url, dict(text="OK"), SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "invalid")
+
+        response = self.client.post(countries_url, dict(text='RW'))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+
+        response = self.client.post(countries_url, dict(text='RW'), SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+
+        response = self.client.post(countries_url, dict(text="USA"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+
+        response = self.client.post(countries_url, dict(text="Germany"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+
+        response = self.client.post(countries_url, dict(text="rw"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+
+        response = self.client.post(countries_url, dict(text="usa"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+
+        response = self.client.post(countries_url, dict(text="gErMaNy"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
