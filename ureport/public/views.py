@@ -300,6 +300,8 @@ class CountriesView(SmartTemplateView):
                 pass
 
         if country:
-            json_dict = dict(exists='valid')
+            json_dict = dict(exists='valid', country_code=country.alpha2)
+        else:
+            json_dict['text'] = text
 
         return HttpResponse(json.dumps(json_dict), status=200, content_type='application/json')
