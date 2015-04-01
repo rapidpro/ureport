@@ -274,40 +274,32 @@ class CountriesView(SmartTemplateView):
         return HttpResponse(json.dumps(dict(error='Unsupported method GET, please use POST.')),
                             status=400, content_type='application/json')
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         json_dict = dict(exists='invalid')
 
-        data_dict = dict()
-        try:
-            data_string = request.body
-            data_dict = json.loads(data_string)
-        except ValueError:
-            pass
+        text = request.POST.get('text', '')
+        text_length = len(text)
 
-        if data_dict:
-            text = data_dict['text'].strip()
-            text_length = len(text)
+        country = None
+        if text_length == 2:
+            try:
+                country = pycountry.countries.get(alpha2=text.upper())
+            except KeyError:
+                pass
 
-            country = None
-            if text_length == 2:
-                try:
-                    country = pycountry.countries.get(alpha2=text.upper())
-                except KeyError:
-                    pass
+        elif text_length == 3:
+            try:
+                country = pycountry.countries.get(alpha3=text.upper())
+            except KeyError:
+                pass
 
-            elif text_length == 3:
-                try:
-                    country = pycountry.countries.get(alpha3=text.upper())
-                except KeyError:
-                    pass
+        if not country:
+            try:
+                country = pycountry.countries.get(name=text.title())
+            except KeyError:
+                pass
 
-            if not country:
-                try:
-                    country = pycountry.countries.get(name=text.title())
-                except KeyError:
-                    pass
-
-            if country:
-                json_dict = dict(exists='valid')
+        if country:
+            json_dict = dict(exists='valid')
 
         return HttpResponse(json.dumps(json_dict), status=200, content_type='application/json')
