@@ -5,6 +5,7 @@ from smartmin.views import *
 from django.utils import timezone
 
 from dash.stories.models import Story
+from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll, PollQuestion
 from dash.categories.models import Category
@@ -298,6 +299,9 @@ class CountriesView(SmartTemplateView):
                 country = pycountry.countries.get(name=text.title())
             except KeyError:
                 pass
+
+        if not country:
+            country = CountryAlias.is_valid(text)
 
         if country:
             json_dict = dict(exists='valid', country_code=country.alpha2)

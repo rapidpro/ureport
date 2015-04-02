@@ -28,3 +28,4 @@ mock
 sorl-thumbnail==11.12.1b
 hamlpy
 pycountry
+django-countries

@@ -1,0 +1,34 @@
+from django.contrib.auth.models import User
+from django.db import models
+import pycountry
+from smartmin.models import SmartModel
+from django_countries.fields import CountryField
+from django.utils.translation import ugettext_lazy as _
+
+class CountryAlias(SmartModel):
+    country = CountryField()
+    name = models.CharField(max_length=128, help_text=_("The name for our alias"))
+
+    @classmethod
+    def get_or_create(cls, country, name, user):
+        alias = cls.objects.filter(country=country, name=name).first()
+
+        if not alias:
+            alias = cls.objects.create(country=country, name=name, created_by=user, modified_by=user)
+
+        return alias
+
+    @classmethod
+    def is_valid(cls, text):
+        existing_alias = cls.objects.filter(name__iexact=text).first()
+
+        if not existing_alias:
+            return None
+
+        return pycountry.countries.get(alpha2=existing_alias.country.code)
+
+
+
+
+
+

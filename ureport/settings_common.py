@@ -237,6 +237,7 @@ INSTALLED_APPS = (
     'ureport.polls',
     'ureport.news',
     'ureport.jobs',
+    'ureport.countries',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 
 import mock
 from dash.categories.models import Category
+from ureport.countries.models import CountryAlias
 from ureport.news.models import Video, NewsItem
 from ureport.polls.models import Poll, PollQuestion
 from ureport.tests import DashTest, MockAPI, UreportJobsTest
@@ -1155,3 +1156,14 @@ class CountriesTest(DashTest):
         self.assertTrue('country_code' in response_json)
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "DE")
+
+        alias = CountryAlias.objects.create(name='Etas unies', country='US', created_by=self.admin,
+                                            modified_by=self.admin)
+
+        response = self.client.post(countries_url, dict(text="Etas Unies"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "US")
