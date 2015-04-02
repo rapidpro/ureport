@@ -77,3 +77,6 @@ db/
 # symlink to dash and smartmin for dev
 dash
 smartmin
+
+
+country-list/
