@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.core.cache import cache
 import feedparser
+import HTMLParser
 
 from dash.orgs.models import Org
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.html import strip_tags
 
 from smartmin.models import SmartModel
 
@@ -57,6 +59,11 @@ class JobSource(SmartModel):
             #log e somewhere
             pass
 
+        html_parser = HTMLParser.HTMLParser()
+
+        for entry in entries:
+            summary = entry['summary']
+            entry['summary'] = strip_tags(html_parser.unescape(html_parser.unescape(summary)))
         return entries
 
     def get_return_page(self):
