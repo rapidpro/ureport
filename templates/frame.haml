@@ -185,21 +185,6 @@
                   %a{ href:"{% url 'polls.poll_list' %}"}
                     - trans "Polls"
 
-              - if request.user.is_superuser or org_perms.stories.story_list
-                %li
-                  %a{ href:"{% url 'stories.story_list' %}"}
-                    - trans "Stories"
-
-              - if request.user.is_superuser or org_perms.news.newsitem_list
-                %li
-                  %a{ href:"{% url 'news.newsitem_list' %}"}
-                    - trans "News Items"
-
-              - if request.user.is_superuser or org_perms.jobs.jobsource_list
-                %li
-                  %a{ href:"{% url 'jobs.jobsource_list' %}"}
-                    - trans "Job Sources"
-
               - if request.user.is_superuser or org_perms.categories.category_list
                 %li
                   %a.dropdown-toggle{href:"#", data-toggle:"dropdown"}
@@ -220,14 +205,44 @@
               - if request.user.is_superuser or org_perms.dashblocks.dashblock_list
                 %li.dropdown
                   %a.dropdown-toggle{href:"#", data-toggle:"dropdown"}
-                    - trans "Pages & Videos"
+                    - trans "Content"
                     %b.caret
                   %ul.dropdown-menu
+
+                    - if request.user.is_superuser or org_perms.news.newsitem_list
+                      %li
+                        %a{ href:"{% url 'news.newsitem_list' %}"}
+                          - trans "News Items"
+
+                      %li.divider
+
+                    - if request.user.is_superuser or org_perms.stories.story_list
+                      %li
+                        %a{ href:"{% url 'stories.story_list' %}"}
+                          - trans "Stories"
+
+                      %li.divider
+
+                    - if request.user.is_superuser or org_perms.jobs.jobsource_list
+                      %li
+                        %a{ href:"{% url 'jobs.jobsource_list' %}"}
+                          - trans "Job Sources"
+
+                      -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=jobs"}
+                            - trans "Jobs Content"
+
+                      %li.divider
 
                     -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
                       %li
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=about"}
                           - trans "About Content"
+
+                      %li
+                        %a{ href:"{% url 'news.video_list' %}"}
+                          - trans "Videos"
 
                       %li
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=contact_us"}
@@ -237,6 +252,12 @@
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=missions"}
                           - trans "Missions Content"
 
+                      %li.divider
+                      %li
+                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=ureporters"}
+                          - trans "U-Reporters Content"
+
+                      %li.divider
                       %li
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=join_engage"}
                           - trans "Join &amp; Engage Content"
@@ -245,17 +266,6 @@
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=join_steps"}
                           - trans "Join Steps Content"
 
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=ureporters"}
-                          - trans "U-Reporters Content"
-
-                      %li
-                        %a{ href:"{% url 'news.video_list' %}"}
-                          - trans "Videos"
-
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=jobs"}
-                          - trans "Jobs Content"
 
             %ul.nav.navbar-nav.navbar-right
               - block login
