@@ -46,21 +46,23 @@ class JobSource(SmartModel):
             return cache_value
 
         feed = feedparser.parse(self.source_url)
-        cache.set(key, feed, RSS_JOBS_FEED_CACHE_TIME)
+        cache.set(key, dict(entries=feed['entries']), RSS_JOBS_FEED_CACHE_TIME)
 
         return feed
 
     def get_entries(self):
         entries = []
+
         try:
             feed = self.get_feed()
             entries = feed['entries']
         except Exception as e:
-            #log e somewhere
+            # clear the cache so we try again
+            key = RSS_JOBS_KEY % (self.org.id, self.id)
+            cache.delete(key)
             pass
 
         html_parser = HTMLParser.HTMLParser()
-
         for entry in entries:
             summary = entry['summary']
             entry['summary'] = strip_tags(html_parser.unescape(html_parser.unescape(summary)))
