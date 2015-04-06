@@ -35,7 +35,8 @@
   {{ block.super }}
   :javascript
     $(document).ready(function() {
-      $('.next-part').on('click', function(){
+      $('.next-part').on('click', function(event){
+        event.preventDefault();
         selectedSourceType = $('select#id_source_type').val();
         window.location.href = "{% url 'jobs.jobsource_create'%}?source_type=" + selectedSourceType;
 

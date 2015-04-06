@@ -2318,16 +2318,42 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .rss-card-content {
-  min-height: 200px;
+  min-height: 180px;
 }
 
 .rss-entry-teaser {
-  a {
-    color: #ff9900;
-    display: block;
-  }
+  font-family: "Times New Roman", Times, serif;
+  font-size: .8em;
+  line-height: 150%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 90px;
 
   img {
     max-width: 100%;
   }
+}
+
+.rss-entry-title {
+  font-size: .9em;
+  line-height: 130%;
+  padding-bottom: 5px;
+  border-top: 1px solid #000000;
+    a {
+    color: #ff9900;
+    display: block;
+    text-decoration: none;
+    font-size: 0.9em;
+  }
+}
+
+.rss-entry-link {
+
+    a {
+    color: #ff9900;
+    display: block;
+    text-decoration: none;
+    font-size: 0.9em;
+  }
+
 }
