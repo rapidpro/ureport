@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-import pycountry
+from django_countries import countries
 from smartmin.models import SmartModel
 from django_countries.fields import CountryField
 from django.utils.translation import ugettext_lazy as _
@@ -20,12 +20,12 @@ class CountryAlias(SmartModel):
 
     @classmethod
     def is_valid(cls, text):
-        existing_alias = cls.objects.filter(name__iexact=text).first()
+        existing_alias = cls.objects.filter(name__iexact=text, is_active=True).first()
 
         if not existing_alias:
             return None
 
-        return pycountry.countries.get(alpha2=existing_alias.country.code)
+        return existing_alias.country.code in countries.countries
 
 
 
