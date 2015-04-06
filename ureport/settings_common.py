@@ -440,35 +440,3 @@ UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
 # non org urls
 #-----------------------------------------------------------------------------------
 SITE_ALLOW_NO_ORG = ('public.countries',)
-
-#-----------------------------------------------------------------------------------
-# Django countries
-#-----------------------------------------------------------------------------------
-COUNTRIES_OVERRIDE = {
-    'AC':_('Ascension Island'),
-    'AN':_('Netherlands Antilles'),
-    'CP':_('Clipperton Island'),
-    'CS':_('Serbia and Montenegro'),
-    'CT':_('Canton and Enderbury Islands'),
-    'DD':_('East Germany'),
-    'DG':_('Diego Garcia'),
-    'EA':_('Ceuta and Melilla'),
-    'EU':_('European Union'),
-    'FQ':_('French Southern and Antarctic Territories'),
-    'FX':_('Metropolitan France'),
-    'IC':_('Canary Islands'),
-    'JT':_('Johnston Island'),
-    'MI':_('Midway Islands'),
-    'NQ':_('Dronning Maud Land'),
-    'NT':_('Neutral Zone'),
-    'PC':_('Pacific Islands Trust Territory'),
-    'PU':_('U.S. Miscellaneous Pacific Islands'),
-    'PZ':_('Panama Canal Zone'),
-    'QO':_('Outlying Oceania'),
-    'SU':_('Union of Soviet Socialist Republics'),
-    'TA':_('Tristan da Cunha'),
-    'VD':_('North Vietnam'),
-    'WK':_('Wake Island'),
-    'XK':_('Kosovo'),
-    'YD':_("People's Democratic Republic of Yemen"),
-}
