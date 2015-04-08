@@ -25,7 +25,7 @@ class CountryAlias(SmartModel):
         if not existing_alias:
             return None
 
-        return existing_alias.country.code in countries.countries
+        return existing_alias.country
 
 
 

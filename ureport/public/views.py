@@ -300,10 +300,15 @@ class CountriesView(SmartTemplateView):
             except KeyError:
                 pass
 
+        country_code = None
         if not country:
             country = CountryAlias.is_valid(text)
+            if country:
+                country_code = country.code
 
-        if country:
+        if country and country_code:
+            json_dict = dict(exists='valid', country_code=country_code)
+        elif country:
             json_dict = dict(exists='valid', country_code=country.alpha2)
         else:
             json_dict['text'] = text

@@ -1004,47 +1004,41 @@ class JobsTest(UreportJobsTest):
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertFalse(response.context['featured_job_sources'])
-        self.assertTrue(response.context['other_job_sources'])
-        self.assertEquals(2, len(response.context['other_job_sources']))
-        self.assertEquals(set(response.context['other_job_sources']), set([fb_source_nigeria, tw_source_nigeria]))
+        self.assertTrue(response.context['job_sources'])
+        self.assertEquals(2, len(response.context['job_sources']))
+        self.assertEquals(set(response.context['job_sources']), set([fb_source_nigeria, tw_source_nigeria]))
 
         response = self.client.get(jobs_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertFalse(response.context['featured_job_sources'])
-        self.assertTrue(response.context['other_job_sources'])
-        self.assertEquals(2, len(response.context['other_job_sources']))
-        self.assertEquals(set(response.context['other_job_sources']), set([fb_source_uganda, tw_source_uganda]))
+        self.assertTrue(response.context['job_sources'])
+        self.assertEquals(2, len(response.context['job_sources']))
+        self.assertEquals(set(response.context['job_sources']), set([fb_source_uganda, tw_source_uganda]))
 
         fb_source_nigeria.is_featured = True
         fb_source_nigeria.save()
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertTrue(response.context['featured_job_sources'])
-        self.assertEquals(1, len(response.context['featured_job_sources']))
-        self.assertTrue(fb_source_nigeria in response.context['featured_job_sources'])
-        self.assertTrue(response.context['other_job_sources'])
-        self.assertEquals(1, len(response.context['other_job_sources']))
-        self.assertTrue(tw_source_nigeria in response.context['other_job_sources'])
+        self.assertTrue(response.context['job_sources'])
+        self.assertEquals(2, len(response.context['job_sources']))
+        self.assertEquals(fb_source_nigeria, response.context['job_sources'][0])
+        self.assertEquals(tw_source_nigeria, response.context['job_sources'][1])
 
         fb_source_nigeria.is_active = False
         fb_source_nigeria.save()
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertFalse(response.context['featured_job_sources'])
-        self.assertTrue(response.context['other_job_sources'])
-        self.assertEquals(1, len(response.context['other_job_sources']))
-        self.assertTrue(tw_source_nigeria in response.context['other_job_sources'])
+        self.assertTrue(response.context['job_sources'])
+        self.assertEquals(1, len(response.context['job_sources']))
+        self.assertTrue(tw_source_nigeria in response.context['job_sources'])
 
         tw_source_nigeria.is_active = False
         tw_source_nigeria.save()
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertFalse(response.context['featured_job_sources'])
-        self.assertFalse(response.context['other_job_sources'])
+        self.assertFalse(response.context['job_sources'])
 
 
 class CountriesTest(DashTest):
@@ -1157,10 +1151,10 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "DE")
 
-        alias = CountryAlias.objects.create(name='Etas unies', country='US', created_by=self.admin,
+        alias = CountryAlias.objects.create(name='Etats unies', country='US', created_by=self.admin,
                                             modified_by=self.admin)
 
-        response = self.client.post(countries_url, dict(text="Etas Unies"))
+        response = self.client.post(countries_url, dict(text="Etats Unies"))
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
