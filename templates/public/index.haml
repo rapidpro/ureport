@@ -239,6 +239,7 @@
               &#8594;
         {% endif %}
 
+        {% if news %}
         .brick.hide-on-small.news-brick.size12{data-priority:"4"}
           .brick-inner
             .brick-title.primary-bg-color
@@ -246,6 +247,7 @@
             .brick-content
               .brick-align.news-list-align
                 .brick-news-list
+        {% endif %}
 
         - for story in stories
           - if forloop.counter < 3 and not is_iorg
