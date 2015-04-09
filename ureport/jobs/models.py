@@ -10,7 +10,7 @@ from django.utils.html import strip_tags
 
 from smartmin.models import SmartModel
 
-RSS_JOBS_FEED_CACHE_TIME = getattr(settings, 'RSS_JOBS_FEED_CACHE_TIME', 60 * 60 * 24)
+RSS_JOBS_FEED_CACHE_TIME = getattr(settings, 'RSS_JOBS_FEED_CACHE_TIME', 60 * 60 * 6)
 RSS_JOBS_KEY = 'jobsource:%d:%d'
 
 class JobSource(SmartModel):
