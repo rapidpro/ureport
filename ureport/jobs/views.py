@@ -53,6 +53,11 @@ class JobSourceCRUDL(SmartCRUDL):
             obj.org = self.request.org
             return obj
 
+        def post_save(self, obj):
+            obj = super(JobSourceCRUDL.Update, self).post_save(obj)
+            obj.get_feed(True)
+            return obj
+
     class List(OrgPermsMixin, SmartListView):
         fields = ('title', 'source_type', 'source_url', 'modified_on')
         default_order = ('-created_on', 'id')
