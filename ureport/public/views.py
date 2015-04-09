@@ -157,12 +157,23 @@ class PollQuestionResultsView(SmartReadView):
 class BoundaryView(SmartTemplateView):
 
     def render_to_response(self, context):
-        state_id = self.kwargs.get('osm_id', None)
+        org = self.request.org
 
-        if state_id:
-            boundaries = self.request.org.get_api().get_state_geojson(state_id)
+        if org.get_config('is_global'):
+            from django.conf import settings
+            handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
+            contents = handle.read()
+            handle.close()
+
+            boundaries = json.loads(contents)
         else:
-            boundaries = self.request.org.get_api().get_country_geojson()
+            state_id = self.kwargs.get('osm_id', None)
+
+            if state_id:
+                boundaries = org.get_api().get_state_geojson(state_id)
+            else:
+                boundaries = org.get_api().get_country_geojson()
+
         return HttpResponse(json.dumps(boundaries))
 
 
