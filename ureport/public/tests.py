@@ -3,6 +3,7 @@ from urllib import urlencode
 from dash.api import API
 from dash.stories.models import Story, StoryImage
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 
 import mock
@@ -643,6 +644,19 @@ class PublicTest(DashTest):
                                    )
                             ]
                     )
+
+        self.assertEquals(json.dumps(output), response.content)
+
+        self.uganda.set_config("is_global", True)
+
+        response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+
+        handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
+        contents = handle.read()
+        handle.close()
+
+        output = json.loads(contents)
 
         self.assertEquals(json.dumps(output), response.content)
 
