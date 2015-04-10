@@ -2,7 +2,7 @@ import pycountry
 from smartmin.views import SmartCRUDL, SmartListView
 from .models import CountryAlias
 
-class CountryALiasCRUDL(SmartCRUDL):
+class CountryAliasCRUDL(SmartCRUDL):
     model = CountryAlias
     actions = ('list', 'create', 'update')
 

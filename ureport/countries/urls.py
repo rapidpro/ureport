@@ -1,3 +1,3 @@
 from .views import *
 
-urlpatterns = CountryALiasCRUDL().as_urlpatterns()
+urlpatterns = CountryAliasCRUDL().as_urlpatterns()
