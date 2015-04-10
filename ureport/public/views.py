@@ -1,14 +1,18 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from smartmin.views import *
 from django.utils import timezone
 
 from dash.stories.models import Story
+from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll, PollQuestion
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from ureport.news.models import Video, NewsItem
 import math
+import pycountry
 from datetime import timedelta, datetime
 
 
@@ -153,12 +157,23 @@ class PollQuestionResultsView(SmartReadView):
 class BoundaryView(SmartTemplateView):
 
     def render_to_response(self, context):
-        state_id = self.kwargs.get('osm_id', None)
+        org = self.request.org
 
-        if state_id:
-            boundaries = self.request.org.get_api().get_state_geojson(state_id)
+        if org.get_config('is_global'):
+            from django.conf import settings
+            handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
+            contents = handle.read()
+            handle.close()
+
+            boundaries = json.loads(contents)
         else:
-            boundaries = self.request.org.get_api().get_country_geojson()
+            state_id = self.kwargs.get('osm_id', None)
+
+            if state_id:
+                boundaries = org.get_api().get_state_geojson(state_id)
+            else:
+                boundaries = org.get_api().get_country_geojson()
+
         return HttpResponse(json.dumps(boundaries))
 
 
@@ -260,3 +275,53 @@ class JobsView(SmartTemplateView):
                                                           is_active=True).order_by('-is_featured', '-created_on')
         return context
 
+class CountriesView(SmartTemplateView):
+    template_name = 'public/countries.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(CountriesView, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(json.dumps(dict(error='Unsupported method GET, please use POST.')),
+                            status=400, content_type='application/json')
+
+    def post(self, request, *args, **kwargs):
+        json_dict = dict(exists='invalid')
+
+        text = request.POST.get('text', '')
+        text_length = len(text)
+
+        country = None
+        if text_length == 2:
+            try:
+                country = pycountry.countries.get(alpha2=text.upper())
+            except KeyError:
+                pass
+
+        elif text_length == 3:
+            try:
+                country = pycountry.countries.get(alpha3=text.upper())
+            except KeyError:
+                pass
+
+        if not country:
+            try:
+                country = pycountry.countries.get(name=text.title())
+            except KeyError:
+                pass
+
+        country_code = None
+        if not country:
+            country = CountryAlias.is_valid(text)
+            if country:
+                country_code = country.code
+
+        if country and country_code:
+            json_dict = dict(exists='valid', country_code=country_code)
+        elif country:
+            json_dict = dict(exists='valid', country_code=country.alpha2)
+        else:
+            json_dict['text'] = text
+
+        return HttpResponse(json.dumps(json_dict), status=200, content_type='application/json')

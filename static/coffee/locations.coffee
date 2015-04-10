@@ -33,7 +33,7 @@ initMap = (id, geojson, question) ->
 
   fadeStyle = (feature) ->
     return {
-      weight: 2
+      weight: 1
       opacity: 1
       color: 'white'
       fillOpacity: 0.35
@@ -83,7 +83,7 @@ initMap = (id, geojson, question) ->
         return colors[i]
 
   HIGHLIGHT_STYLE =
-    weight: 6
+    weight: 4
     fillOpacity: 1
 
   highlightFeature = (e) ->

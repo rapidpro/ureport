@@ -78,10 +78,3 @@ class JobSource(SmartModel):
         if self.source_type in [JobSource.FACEBOOK, JobSource.TWITTER]:
             return self.source_url.split('/')[3]
         return None
-
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        if self.source_type == JobSource.RSS and not self.title:
-            feed = self.get_feed()
-            self.title = feed['feed']['title']
-        super(JobSource, self).save()

@@ -186,7 +186,8 @@ ORG_CONFIG_FIELDS =[ dict(name='shortcode', field=dict(help_text=_("The shortcod
                      dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters")), superuser_only=True),
                      dict(name='male_label', field=dict(help_text=_("The label assigned to U-Reporters that are Male.")), superuser_only=True),
                      dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True),
-                     dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), required=False))]
+                     dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), required=False)),
+                     dict(name='is_global', field=dict(help_text=_("If this org if for global data. e.g: It shows a world map instead of a country map."), required=False), superuser_only=True)]
 #                     dict(name='featured_state', field=dict(help_text=_("Choose the featured State of reporters shown on the home page")))]
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -237,6 +238,9 @@ INSTALLED_APPS = (
     'ureport.polls',
     'ureport.news',
     'ureport.jobs',
+    'ureport.countries',
+
+    'django_countries',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -431,3 +435,9 @@ CELERYBEAT_SCHEDULE = {
 #-----------------------------------------------------------------------------------
 UREPORT_DEFAULT_PRIMARY_COLOR = '#FFFF00'
 UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
+
+
+#-----------------------------------------------------------------------------------
+# non org urls
+#-----------------------------------------------------------------------------------
+SITE_ALLOW_NO_ORG = ('public.countries',)

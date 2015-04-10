@@ -3,10 +3,12 @@ from urllib import urlencode
 from dash.api import API
 from dash.stories.models import Story, StoryImage
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 
 import mock
 from dash.categories.models import Category
+from ureport.countries.models import CountryAlias
 from ureport.news.models import Video, NewsItem
 from ureport.polls.models import Poll, PollQuestion
 from ureport.tests import DashTest, MockAPI, UreportJobsTest
@@ -645,6 +647,19 @@ class PublicTest(DashTest):
 
         self.assertEquals(json.dumps(output), response.content)
 
+        self.uganda.set_config("is_global", True)
+
+        response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+
+        handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
+        contents = handle.read()
+        handle.close()
+
+        output = json.loads(contents)
+
+        self.assertEquals(json.dumps(output), response.content)
+
     def test_stories_list(self):
         stories_url = reverse('public.stories')
 
@@ -1003,45 +1018,160 @@ class JobsTest(UreportJobsTest):
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertFalse(response.context['featured_job_sources'])
-        self.assertTrue(response.context['other_job_sources'])
-        self.assertEquals(2, len(response.context['other_job_sources']))
-        self.assertEquals(set(response.context['other_job_sources']), set([fb_source_nigeria, tw_source_nigeria]))
+        self.assertTrue(response.context['job_sources'])
+        self.assertEquals(2, len(response.context['job_sources']))
+        self.assertEquals(set(response.context['job_sources']), set([fb_source_nigeria, tw_source_nigeria]))
 
         response = self.client.get(jobs_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertFalse(response.context['featured_job_sources'])
-        self.assertTrue(response.context['other_job_sources'])
-        self.assertEquals(2, len(response.context['other_job_sources']))
-        self.assertEquals(set(response.context['other_job_sources']), set([fb_source_uganda, tw_source_uganda]))
+        self.assertTrue(response.context['job_sources'])
+        self.assertEquals(2, len(response.context['job_sources']))
+        self.assertEquals(set(response.context['job_sources']), set([fb_source_uganda, tw_source_uganda]))
 
         fb_source_nigeria.is_featured = True
         fb_source_nigeria.save()
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertTrue(response.context['featured_job_sources'])
-        self.assertEquals(1, len(response.context['featured_job_sources']))
-        self.assertTrue(fb_source_nigeria in response.context['featured_job_sources'])
-        self.assertTrue(response.context['other_job_sources'])
-        self.assertEquals(1, len(response.context['other_job_sources']))
-        self.assertTrue(tw_source_nigeria in response.context['other_job_sources'])
+        self.assertTrue(response.context['job_sources'])
+        self.assertEquals(2, len(response.context['job_sources']))
+        self.assertEquals(fb_source_nigeria, response.context['job_sources'][0])
+        self.assertEquals(tw_source_nigeria, response.context['job_sources'][1])
 
         fb_source_nigeria.is_active = False
         fb_source_nigeria.save()
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertFalse(response.context['featured_job_sources'])
-        self.assertTrue(response.context['other_job_sources'])
-        self.assertEquals(1, len(response.context['other_job_sources']))
-        self.assertTrue(tw_source_nigeria in response.context['other_job_sources'])
+        self.assertTrue(response.context['job_sources'])
+        self.assertEquals(1, len(response.context['job_sources']))
+        self.assertTrue(tw_source_nigeria in response.context['job_sources'])
 
         tw_source_nigeria.is_active = False
         tw_source_nigeria.save()
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.status_code, 200)
-        self.assertFalse(response.context['featured_job_sources'])
-        self.assertFalse(response.context['other_job_sources'])
+        self.assertFalse(response.context['job_sources'])
 
+
+class CountriesTest(DashTest):
+
+
+    def setUp(self):
+        super(CountriesTest, self).setUp()
+        self.uganda = self.create_org('uganda', self.admin)
+
+
+    def test_countries(self):
+        countries_url = reverse('public.countries')
+
+        response = self.client.get(countries_url)
+        self.assertEquals(response.status_code, 400)
+        response_json = json.loads(response.content)
+        self.assertEquals(response_json['error'], "Unsupported method GET, please use POST.")
+
+        response = self.client.get(countries_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 400)
+        response_json = json.loads(response.content)
+        self.assertEquals(response_json['error'], "Unsupported method GET, please use POST.")
+
+        response = self.client.post(countries_url, dict())
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('text' in response_json)
+        self.assertEquals(response_json['exists'], "invalid")
+        self.assertEquals(response_json['text'], "")
+        self.assertFalse('country_code' in response_json)
+
+        response = self.client.post(countries_url, dict(), SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "invalid")
+        self.assertEquals(response_json['text'], "")
+        self.assertFalse('country_code' in response_json)
+
+        response = self.client.post(countries_url, dict(text="OK"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "invalid")
+        self.assertEquals(response_json['text'], "OK")
+        self.assertFalse('country_code' in response_json)
+
+        response = self.client.post(countries_url, dict(text="OK"), SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertEquals(response_json['exists'], "invalid")
+        self.assertEquals(response_json['text'], "OK")
+        self.assertFalse('country_code' in response_json)
+
+        response = self.client.post(countries_url, dict(text='RW'))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "RW")
+
+        response = self.client.post(countries_url, dict(text='RW'), SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "RW")
+
+        response = self.client.post(countries_url, dict(text="USA"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "US")
+
+        response = self.client.post(countries_url, dict(text="Germany"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "DE")
+
+        response = self.client.post(countries_url, dict(text="rw"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "RW")
+
+        response = self.client.post(countries_url, dict(text="usa"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "US")
+
+        response = self.client.post(countries_url, dict(text="gErMaNy"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "DE")
+
+        alias = CountryAlias.objects.create(name='Etats unies', country='US', created_by=self.admin,
+                                            modified_by=self.admin)
+
+        response = self.client.post(countries_url, dict(text="Etats Unies"))
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "US")

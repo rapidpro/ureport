@@ -2,11 +2,11 @@ from dash.api import API
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User, Group
 from dash.orgs.middleware import SetOrgMiddleware
-from mock import Mock
-from django.core.urlresolvers import reverse
+from mock import Mock, patch
 from dash.orgs.models import Org
 from django.http.request import HttpRequest
 from ureport.jobs.models import JobSource
+from ureport.public.views import IndexView
 
 
 class MockAPI(API):
@@ -173,8 +173,8 @@ class SetOrgMiddlewareTest(DashTest):
 
     def test_process_request_without_org(self):
         response = self.middleware.process_request(self.request)
-        self.assertEqual(response.template_name, 'public/org_chooser.haml')
-        self.assertFalse(response.context_data['orgs'])
+        self.assertEqual(response, None)
+        self.assertEqual(self.request.org, None)
 
     def test_process_request_with_org(self):
 
@@ -196,17 +196,35 @@ class SetOrgMiddlewareTest(DashTest):
         wrong_subdomain_url = "blabla.ureport.io"
         self.request.get_host.return_value=wrong_subdomain_url
         response = self.middleware.process_request(self.request)
-        self.assertEqual(response.template_name, 'public/org_chooser.haml')
-        self.assertEquals(len(response.context_data['orgs']), 1)
-        self.assertEquals(response.context_data['orgs'][0], ug_org)
+        self.assertEqual(response, None)
         self.assertEqual(self.request.org, None)
-        self.assertEquals(self.request.user.get_org(), None)
 
-        rw_org = self.create_org('rwanda', self.admin)
-        wrong_subdomain_url = "blabla.ureport.io"
-        self.request.get_host.return_value=wrong_subdomain_url
-        response = self.middleware.process_request(self.request)
-        self.assertEqual(response.template_name, 'public/org_chooser.haml')
-        self.assertEquals(len(response.context_data['orgs']), 2)
-        self.assertTrue(rw_org in response.context_data['orgs'])
-        self.assertTrue(ug_org in response.context_data['orgs'])
+    def test_process_view(self):
+        with patch('django.core.urlresolvers.ResolverMatch') as resolver_mock:
+            resolver_mock.url_name.return_value = "public.index"
+
+            self.request.resolver_match = resolver_mock
+
+            ug_org = self.create_org('uganda', self.admin)
+            ug_dash_url = ug_org.subdomain + ".ureport.io"
+            self.request.get_host.return_value=ug_dash_url
+
+            # test invalid subdomain
+            wrong_subdomain_url = "blabla.ureport.io"
+            self.request.get_host.return_value=wrong_subdomain_url
+            self.request.org = None
+            response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
+            self.assertEqual(response.template_name, 'public/org_chooser.haml')
+            self.assertEquals(len(response.context_data['orgs']), 1)
+            self.assertEquals(response.context_data['orgs'][0], ug_org)
+            self.assertEqual(self.request.org, None)
+            self.assertEquals(self.request.user.get_org(), None)
+
+            rw_org = self.create_org('rwanda', self.admin)
+            wrong_subdomain_url = "blabla.ureport.io"
+            self.request.get_host.return_value=wrong_subdomain_url
+            response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
+            self.assertEqual(response.template_name, 'public/org_chooser.haml')
+            self.assertEquals(len(response.context_data['orgs']), 2)
+            self.assertTrue(rw_org in response.context_data['orgs'])
+            self.assertTrue(ug_org in response.context_data['orgs'])

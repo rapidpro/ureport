@@ -72,22 +72,42 @@ class JobSourceTest(UreportJobsTest):
         self.assertEquals(response.status_code, 200)
         self.assertTrue('form' in response.context)
 
-        self.assertEquals(len(response.context['form'].fields), 6)
-        self.assertEquals(set(['is_featured', 'title', 'source_type', 'source_url', 'widget_id', 'loc']),
+        self.assertEquals(len(response.context['form'].fields), 2)
+        self.assertEquals(set(['source_type', 'loc']),
                           set(response.context['form'].fields))
 
-        response = self.client.post(create_url, dict(), SERVER_NAME='uganda.ureport.io')
+        response = self.client.get(create_url + "?source_type=" + JobSource.FACEBOOK, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue('form' in response.context)
+
+        self.assertEquals(len(response.context['form'].fields), 4)
+        self.assertEquals(set(['is_featured', 'title', 'source_url', 'loc']),
+                          set(response.context['form'].fields))
+
+        response = self.client.get(create_url + "?source_type=" + JobSource.TWITTER, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue('form' in response.context)
+
+        self.assertEquals(len(response.context['form'].fields), 5)
+        self.assertEquals(set(['is_featured', 'title', 'source_url', 'widget_id', 'loc']),
+                          set(response.context['form'].fields))
+
+        response = self.client.post(create_url + "?source_type=" + JobSource.FACEBOOK, dict(),
+                                    SERVER_NAME='uganda.ureport.io')
         self.assertTrue(response.context['form'].errors)
-        self.assertEquals(len(response.context['form'].errors), 3)
+        self.assertEquals(len(response.context['form'].errors), 2)
         self.assertTrue('title' in response.context['form'].errors)
-        self.assertTrue('source_type' in response.context['form'].errors)
         self.assertTrue('source_url' in response.context['form'].errors)
 
         self.assertEquals(6, JobSource.objects.all().count())
 
-        post_data = dict(title='Kampala Jobs', source_type=JobSource.FACEBOOK, source_url='http://facebook.com/kampalajobs')
+        post_data = dict(title='Kampala Jobs', source_url='http://facebook.com/kampalajobs')
 
-        response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+        response = self.client.post(create_url + "?source_type=" + JobSource.FACEBOOK,
+                                    post_data,
+                                    follow=True,
+                                    SERVER_NAME='uganda.ureport.io')
+
         self.assertEquals(7, JobSource.objects.all().count())
         self.assertTrue(JobSource.objects.filter(title='Kampala Jobs'))
 
@@ -116,22 +136,20 @@ class JobSourceTest(UreportJobsTest):
         self.assertEquals(response.status_code, 200)
         self.assertTrue('form' in response.context)
 
-        self.assertEquals(len(response.context['form'].fields), 7)
-        self.assertEquals(set(['is_featured', 'title', 'source_type', 'source_url', 'widget_id', 'loc', 'is_active']),
+        self.assertEquals(len(response.context['form'].fields), 5)
+        self.assertEquals(set(['is_featured', 'title', 'source_url', 'loc', 'is_active']),
                           set(response.context['form'].fields))
 
         response = self.client.post(update_url_fb_uganda, dict(), SERVER_NAME='uganda.ureport.io')
         self.assertTrue(response.context['form'].errors)
 
-        self.assertEquals(len(response.context['form'].errors), 3)
+        self.assertEquals(len(response.context['form'].errors), 2)
         self.assertTrue('title' in response.context['form'].errors)
-        self.assertTrue('source_type' in response.context['form'].errors)
         self.assertTrue('source_url' in response.context['form'].errors)
 
         self.assertFalse(JobSource.objects.filter(title='Uganda Jobs').first())
 
-        post_data = dict(is_active=True, title='Uganda Jobs',
-                         source_type=JobSource.FACEBOOK, source_url='http://facebook.com/ugandajobs')
+        post_data = dict(is_active=True, title='Uganda Jobs', source_url='http://facebook.com/ugandajobs')
 
         response = self.client.post(update_url_fb_uganda, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
         self.assertTrue(JobSource.objects.filter(title='Uganda Jobs').first())

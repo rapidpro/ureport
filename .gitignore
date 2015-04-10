@@ -78,7 +78,5 @@ db/
 dash
 smartmin
 
+# country-list repo
 country-list/
-
-# in development
-ureport/countries/
