@@ -87,44 +87,9 @@
         national level for positive social change.
 
       .welcome-flags
-        %a.flag{ href:"http://burundi.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_bi.png" }
-
-        %a.flag{ href:"http://cameroon.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_cm.png" }
-
-        %a.flag{ href:"http://centrafrique.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_cf.png" }
-
-        %a.flag{ href:"http://www.ureport.cd/" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_zr.png" }
-
-        %a.flag{ href:"http://www.ureportindonesia.com/" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_id.png" }
-
-        %a.flag{ href:"http://liberia.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_lr.png" }
-
-        %a.flag{ href:"http://mali.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_ml.png" }
-
-        %a.flag{ href:"http://mexico.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_mx.png" }
-
-        %a.flag{ href:"http://nigeria.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_ng.png" }
-
-        %a.flag{ href:"http://swaziland.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_sz.png" }
-
-        %a.flag{ href:"http://sierraleone.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_sl.png" }
-
-        %a.flag{ href:"http://www.ureport.ug" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_ug.png" }
-
-        %a.flag{ href:"http://www.zambiaureport.org/home/" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_zm.png" }
-
-        %a.flag{ href:"http://zimbabwe.ureport.in" }
-          %img{ src:"{{ STATIC_URL }}/img/flags/flag_zw.png" }
+        - for site in linked_sites
+          %a.flag{ href:"{{ site.host }}" }
+            - if site.is_static
+              %img{ src:"{{ STATIC_URL }}img/flags/{{ site.flag }}" }
+            - else
+              %img{ src:"{{ site.flag }}" }
