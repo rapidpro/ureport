@@ -3,9 +3,10 @@ from django.conf.urls import include, patterns, url
 from django.views.decorators.cache import cache_page
 from .views import IndexView, NewsView, AboutView, PollsView, PollReadView, PollQuestionResultsView, JobsView
 from .views import BoundaryView, UreportersView, StoriesView, StoryReadView, JoinEngageView, ReportersResultsView
-from .views import CountriesView
+from .views import CountriesView, Chooser
 
 urlpatterns = patterns('',
+    (r'^home/$', Chooser.as_view(), {}, 'public.home'),
     (r'^$', IndexView.as_view(), {}, 'public.index'),
     (r'^news/$', NewsView.as_view(), {}, 'public.news'),
     (r'^about/$', AboutView.as_view(), {}, 'public.about'),
@@ -21,5 +22,6 @@ urlpatterns = patterns('',
     (r'^join/$', JoinEngageView.as_view(), {}, 'public.join'),
     (r'^jobs/$', JobsView.as_view(), {}, 'public.jobs'),
     (r'^countries/$', CountriesView.as_view(), {}, 'public.countries'),
+
 
 )

@@ -35,6 +35,7 @@ EMAIL_USE_TLS = True
 API_ENDPOINT = 'http://localhost:8001'
 SITE_HOST_PATTERN = 'http://%s.localhost:8000'
 SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
+SITE_CHOOSER_VIEW_NAME = 'public.home'
 
 # On Unix systems, a value of None will cause Django to use the same
 # timezone as the operating system.
