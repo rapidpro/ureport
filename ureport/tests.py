@@ -217,7 +217,7 @@ class SetOrgMiddlewareTest(DashTest):
             self.request.org = None
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
             self.assertEquals(response.status_code, 302)
-            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_VIEW_NAME))
+            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
             self.assertEqual(self.request.org, None)
             self.assertEquals(self.request.user.get_org(), None)
 
@@ -226,4 +226,4 @@ class SetOrgMiddlewareTest(DashTest):
             self.request.get_host.return_value=wrong_subdomain_url
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
             self.assertEquals(response.status_code, 302)
-            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_VIEW_NAME))
+            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
