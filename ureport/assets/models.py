@@ -16,4 +16,4 @@ class Background(SmartModel):
 
     background_type = models.CharField(max_length=1, choices=BACKGROUND_TYPES, default='P', verbose_name=_("Background type"))
 
-    image = models.ImageField(upload_to='backgrounds', help_text=_("The image file"))
+    image = models.ImageField(upload_to='org_bgs', help_text=_("The image file"))

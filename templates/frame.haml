@@ -166,9 +166,9 @@
                       %a{ href:"{% url 'dashblocks.dashblocktype_list' %}"}
                         - trans "Content Types"
 
-                    - if request.user.is_superuser or org_perms.orgs.orgbackground_list
+                    - if request.user.is_superuser or org_perms.assets.background_list
                       %li
-                        %a{ href:"{% url 'orgs.orgbackground_list' %}"}
+                        %a{ href:"{% url 'assets.background_list' %}"}
                           - trans "Backgrounds"
 
                 %li

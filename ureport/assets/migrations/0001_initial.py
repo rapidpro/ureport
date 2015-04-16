@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('modified_on', models.DateTimeField(help_text=b'When this item was last modified', auto_now=True)),
                 ('name', models.CharField(help_text='The name to describe this background', max_length=128, verbose_name='Name')),
                 ('background_type', models.CharField(default=b'P', max_length=1, verbose_name='Background type', choices=[(b'B', 'Banner'), (b'P', 'Pattern')])),
-                ('image', models.ImageField(help_text='The image file', upload_to=b'backgrounds')),
+                ('image', models.ImageField(help_text='The image file', upload_to=b'org_bgs')),
                 ('created_by', models.ForeignKey(related_name='assets_background_creations', to=settings.AUTH_USER_MODEL, help_text=b'The user which originally created this item')),
                 ('modified_by', models.ForeignKey(related_name='assets_background_modifications', to=settings.AUTH_USER_MODEL, help_text=b'The user which last modified this item')),
                 ('org', models.ForeignKey(related_name='ureport_backgrounds', verbose_name='Org', to='orgs.Org', help_text='The organization in which the image will be used')),
