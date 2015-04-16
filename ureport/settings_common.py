@@ -333,7 +333,6 @@ GROUP_PERMISSIONS = {
         'orgs.org_home',
         'orgs.org_manage_accounts',
         'orgs.org_profile',
-        'orgs.orgbackground.*',
         'polls.poll.*',
         'polls.pollcategory.*',
         'polls.pollimage.*',
