@@ -321,7 +321,7 @@ PERMISSIONS = {
 # assigns the permissions that each group should have
 GROUP_PERMISSIONS = {
     "Administrators": (
-        'assets.background.*',
+        'assets.image.*',
         'categories.category.*',
         'categories.categoryimage.*',
         'dashblocks.dashblock.*',

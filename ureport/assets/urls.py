@@ -1,3 +1,3 @@
-from .views import BackgroundCRUDL
+from .views import ImageCRUDL
 
-urlpatterns = BackgroundCRUDL().as_urlpatterns()
+urlpatterns = ImageCRUDL().as_urlpatterns()
