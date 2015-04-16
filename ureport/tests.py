@@ -1,4 +1,6 @@
 from dash.api import API
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User, Group
 from dash.orgs.middleware import SetOrgMiddleware
@@ -214,9 +216,8 @@ class SetOrgMiddlewareTest(DashTest):
             self.request.get_host.return_value=wrong_subdomain_url
             self.request.org = None
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
-            self.assertEqual(response.template_name, 'public/org_chooser.haml')
-            self.assertEquals(len(response.context_data['orgs']), 1)
-            self.assertEquals(response.context_data['orgs'][0], ug_org)
+            self.assertEquals(response.status_code, 302)
+            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
             self.assertEqual(self.request.org, None)
             self.assertEquals(self.request.user.get_org(), None)
 
@@ -224,7 +225,5 @@ class SetOrgMiddlewareTest(DashTest):
             wrong_subdomain_url = "blabla.ureport.io"
             self.request.get_host.return_value=wrong_subdomain_url
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
-            self.assertEqual(response.template_name, 'public/org_chooser.haml')
-            self.assertEquals(len(response.context_data['orgs']), 2)
-            self.assertTrue(rw_org in response.context_data['orgs'])
-            self.assertTrue(ug_org in response.context_data['orgs'])
+            self.assertEquals(response.status_code, 302)
+            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
