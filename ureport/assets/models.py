@@ -6,7 +6,8 @@ from smartmin.models import SmartModel
 
 
 IMAGE_TYPES = (('B', _("Banner")),
-               ('P', _("Pattern")))
+               ('P', _("Pattern")),
+               ('F', _("Flag")))
 
 class Image(SmartModel):
     org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="images",
