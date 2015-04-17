@@ -241,6 +241,7 @@ INSTALLED_APPS = (
     'ureport.news',
     'ureport.jobs',
     'ureport.countries',
+    'ureport.assets',
 
     'django_countries',
 )
@@ -320,6 +321,7 @@ PERMISSIONS = {
 # assigns the permissions that each group should have
 GROUP_PERMISSIONS = {
     "Administrators": (
+        'assets.image.*',
         'categories.category.*',
         'categories.categoryimage.*',
         'dashblocks.dashblock.*',
@@ -331,7 +333,6 @@ GROUP_PERMISSIONS = {
         'orgs.org_home',
         'orgs.org_manage_accounts',
         'orgs.org_profile',
-        'orgs.orgbackground.*',
         'polls.poll.*',
         'polls.pollcategory.*',
         'polls.pollimage.*',
