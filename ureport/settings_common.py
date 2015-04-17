@@ -35,6 +35,7 @@ EMAIL_USE_TLS = True
 API_ENDPOINT = 'http://localhost:8001'
 SITE_HOST_PATTERN = 'http://%s.localhost:8000'
 SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
+SITE_CHOOSER_URL_NAME = 'public.home'
 
 # On Unix systems, a value of None will cause Django to use the same
 # timezone as the operating system.
@@ -162,7 +163,8 @@ if 'test' in sys.argv:
     CACHES['default'] = {'BACKEND': 'django.core.cache.backends.dummy.DummyCache',}
 
 
-ORG_CONFIG_FIELDS =[ dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-Report locally"), required=True)),
+ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text="Whether this org should be show on the landing page"), supervisor_only=True),
+                     dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-Report locally"), required=True)),
                      dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-Report"), required=False)),
                      dict(name='join_fg_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False), superuser_only=True),
                      dict(name='join_bg_color', field=dict(help_text=_("The color used to draw the background on the join bar"), required=False), superuser_only=True),
@@ -239,6 +241,7 @@ INSTALLED_APPS = (
     'ureport.news',
     'ureport.jobs',
     'ureport.countries',
+    'ureport.assets',
 
     'django_countries',
 )
@@ -318,6 +321,7 @@ PERMISSIONS = {
 # assigns the permissions that each group should have
 GROUP_PERMISSIONS = {
     "Administrators": (
+        'assets.image.*',
         'categories.category.*',
         'categories.categoryimage.*',
         'dashblocks.dashblock.*',
@@ -329,7 +333,6 @@ GROUP_PERMISSIONS = {
         'orgs.org_home',
         'orgs.org_manage_accounts',
         'orgs.org_profile',
-        'orgs.orgbackground.*',
         'polls.poll.*',
         'polls.pollcategory.*',
         'polls.pollimage.*',
@@ -441,3 +444,34 @@ UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
 # non org urls
 #-----------------------------------------------------------------------------------
 SITE_ALLOW_NO_ORG = ('public.countries',)
+
+
+#-----------------------------------------------------------------------------------
+# Old country sites
+#-----------------------------------------------------------------------------------
+PREVIOUS_ORG_SITES = [
+    dict(
+        name="Congo Democratic Republic",
+        host="http://www.ureport.cd/",
+        flag="flag_cd.png",
+        is_static=True,
+    ),
+    dict(
+        name="Indonesia",
+        host="http://www.ureportindonesia.com/",
+        flag="flag_id.png",
+        is_static=True,
+    ),
+    dict(
+        name="Uganda",
+        host="http://www.ureport.ug",
+        flag="flag_ug.png",
+        is_static=True,
+    ),
+    dict(
+        name="Zambia",
+        host="http://www.zambiaureport.org/home/",
+        flag="flag_zm.png",
+        is_static=True,
+    ),
+]
