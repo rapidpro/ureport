@@ -1,15 +1,16 @@
 import json
+import mock
 from urllib import urlencode
-from dash.api import API
-from dash.stories.models import Story, StoryImage
-from dash.orgs.models import Org
+
 from django.core.files.images import ImageFile
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
-
-import mock
+from dash.api import API
 from dash.categories.models import Category
+from dash.stories.models import Story, StoryImage
+from dash.orgs.models import Org
+
 from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.news.models import Video, NewsItem
@@ -309,8 +310,6 @@ class PublicTest(DashTest):
         self.assertTrue(video2 not in response.context['videos'])
         self.assertTrue(video3 in response.context['videos'])
 
-
-
     def test_about(self):
         about_url = reverse('public.about')
 
@@ -380,7 +379,6 @@ class PublicTest(DashTest):
         self.assertTrue(video1 not in response.context['videos'])
         self.assertTrue(video2 not in response.context['videos'])
         self.assertTrue(video3 in response.context['videos'])
-
 
     def test_join_engage(self):
         join_engage_url = reverse('public.join')
@@ -917,7 +915,6 @@ class PublicTest(DashTest):
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.uerport.io')
         self.assertFalse(response.context['story_featured_images'])
 
-
     def test_poll_question_results(self):
         poll1 = Poll.objects.create(flow_id=1,
                                     title="Poll 1",
@@ -974,7 +971,6 @@ class PublicTest(DashTest):
             response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
             mock_results.assert_called_with(poll1_question.ruleset_id, segment=dict(location='State'))
 
-
     def test_reporters_results(self):
         reporters_results = reverse('public.contact_field_results')
 
@@ -1000,8 +996,6 @@ class PublicTest(DashTest):
                 self.assertEquals(response.content, json.dumps("ORGANIZED"))
                 mock_results.assert_called_with('field_name', dict(location='State'))
                 mock_organize.assert_called_with('field_name', "API_RESULTS")
-
-
 
     def test_news(self):
         news_url = reverse('public.news')
@@ -1132,11 +1126,9 @@ class JobsTest(UreportJobsTest):
 
 class CountriesTest(DashTest):
 
-
     def setUp(self):
         super(CountriesTest, self).setUp()
         self.uganda = self.create_org('uganda', self.admin)
-
 
     def test_countries(self):
         countries_url = reverse('public.countries')
