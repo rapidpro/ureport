@@ -50,3 +50,6 @@ xlutils==1.7.1
 xlwt==0.7.5
 pycountry==1.10
 django-countries==3.3
+GitPython-1.0.0
+gitdb-0.6.4
+smmap-0.9.0
