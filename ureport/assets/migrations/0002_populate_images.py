@@ -12,17 +12,19 @@ def populate_images(apps, schema_editor):
 
     for org_bg in OrgBackground.objects.all():
         image_file = None
+        image_filename = None
         try:
             image_file = open(org_bg.image.path, 'rb')
+            image_filename = org_bg.image.path.split('/')[-1]
         except NotImplementedError:
             retrived_image = urllib.urlretrieve(org_bg.image.url)
             image_file = open(retrived_image[0])
+            image_filename = org_bg.image.url.split('/')[-1]
         except IOError:
             pass
 
         if image_file:
             django_image_file = ImageFile(image_file)
-            image_filename = org_bg.image.path.split('/')[-1]
 
             image_obj = Image()
             image_obj.org = org_bg.org
