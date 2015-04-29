@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import urllib
 
 from django.db import models, migrations
 from django.core.files.images import ImageFile
@@ -10,10 +11,20 @@ def populate_images(apps, schema_editor):
     Image = apps.get_model('assets', "Image")
 
     for org_bg in OrgBackground.objects.all():
+        image_file = None
+        image_filename = None
         try:
             image_file = open(org_bg.image.path, 'rb')
-            django_image_file = ImageFile(image_file)
             image_filename = org_bg.image.path.split('/')[-1]
+        except NotImplementedError:
+            retrived_image = urllib.urlretrieve(org_bg.image.url)
+            image_file = open(retrived_image[0])
+            image_filename = org_bg.image.url.split('/')[-1]
+        except IOError:
+            pass
+
+        if image_file:
+            django_image_file = ImageFile(image_file)
 
             image_obj = Image()
             image_obj.org = org_bg.org
@@ -23,8 +34,6 @@ def populate_images(apps, schema_editor):
             image_obj.created_by = org_bg.created_by
             image_obj.modified_by = org_bg.modified_by
             image_obj.image.save(image_filename, django_image_file, save=True)
-        except IOError:
-            pass
 
 
 class Migration(migrations.Migration):
