@@ -1133,17 +1133,13 @@ class CountriesTest(DashTest):
     def test_countries(self):
         countries_url = reverse('public.countries')
 
-        response = self.client.get(countries_url)
-        self.assertEquals(response.status_code, 400)
-        response_json = json.loads(response.content)
-        self.assertEquals(response_json['error'], "Unsupported method GET, please use POST.")
-
-        response = self.client.get(countries_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 400)
-        response_json = json.loads(response.content)
-        self.assertEquals(response_json['error'], "Unsupported method GET, please use POST.")
+        response = self.client.post(countries_url, dict())
+        self.assertEquals(response.status_code, 405)
 
         response = self.client.post(countries_url, dict())
+        self.assertEquals(response.status_code, 405)
+
+        response = self.client.get(countries_url)
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
@@ -1152,7 +1148,7 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['text'], "")
         self.assertFalse('country_code' in response_json)
 
-        response = self.client.post(countries_url, dict(), SERVER_NAME='uganda.ureport.io')
+        response = self.client.get(countries_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
@@ -1160,7 +1156,7 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['text'], "")
         self.assertFalse('country_code' in response_json)
 
-        response = self.client.post(countries_url, dict(text="OK"))
+        response = self.client.get(countries_url + '?text=OK')
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
@@ -1168,7 +1164,7 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['text'], "OK")
         self.assertFalse('country_code' in response_json)
 
-        response = self.client.post(countries_url, dict(text="OK"), SERVER_NAME='uganda.ureport.io')
+        response = self.client.get(countries_url + '?text=OK', SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
@@ -1176,7 +1172,7 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['text'], "OK")
         self.assertFalse('country_code' in response_json)
 
-        response = self.client.post(countries_url, dict(text='RW'))
+        response = self.client.get(countries_url + '?text=RW')
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
@@ -1184,7 +1180,7 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "RW")
 
-        response = self.client.post(countries_url, dict(text='RW'), SERVER_NAME='uganda.ureport.io')
+        response = self.client.get(countries_url + '?text=RW', SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
@@ -1192,7 +1188,7 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "RW")
 
-        response = self.client.post(countries_url, dict(text="USA"))
+        response = self.client.get(countries_url + '?text=USA')
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
@@ -1200,15 +1196,7 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "US")
 
-        response = self.client.post(countries_url, dict(text="Germany"))
-        self.assertEquals(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue('exists' in response_json)
-        self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "DE")
-
-        response = self.client.post(countries_url, dict(text="rw"))
+        response = self.client.get(countries_url + '?text=rw')
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
@@ -1216,7 +1204,7 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "RW")
 
-        response = self.client.post(countries_url, dict(text="usa"))
+        response = self.client.get(countries_url + '?text=usa')
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
@@ -1224,18 +1212,10 @@ class CountriesTest(DashTest):
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "US")
 
-        response = self.client.post(countries_url, dict(text="gErMaNy"))
-        self.assertEquals(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue('exists' in response_json)
-        self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "DE")
+        CountryAlias.objects.create(name='Etats unies', country='US', created_by=self.admin,
+                                    modified_by=self.admin)
 
-        alias = CountryAlias.objects.create(name='Etats unies', country='US', created_by=self.admin,
-                                            modified_by=self.admin)
-
-        response = self.client.post(countries_url, dict(text="Etats Unies"))
+        response = self.client.get(countries_url + '?text=Etats+Unies')
         self.assertEquals(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)

@@ -175,10 +175,11 @@
                   %a{ href:"{% url 'dashblocks.dashblock_list' %}"}
                     - trans "Content"
 
-              - if request.user.is_superuser or perms.countries.countryalias_list
-                %li
-                  %a{ href:"{% url 'countries.countryalias_list' %}"}
-                    - trans "Country Aliases"
+              -if org|config:"is_global"
+                -if request.user.is_superuser or perms.countries.countryalias_list
+                  %li
+                    %a{ href:"{% url 'countries.countryalias_list' %}"}
+                      - trans "Country Aliases"
 
               - if request.user.is_superuser or org_perms.orgs.org_home
                 %li
