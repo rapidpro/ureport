@@ -306,13 +306,9 @@ class CountriesView(SmartTemplateView):
         return super(CountriesView, self).dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse(json.dumps(dict(error='Unsupported method GET, please use POST.')),
-                            status=400, content_type='application/json')
-
-    def post(self, request, *args, **kwargs):
         json_dict = dict(exists='invalid')
 
-        text = request.POST.get('text', '')
+        text = request.GET.get('text', '')
         text_length = len(text)
 
         country = None
