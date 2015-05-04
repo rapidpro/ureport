@@ -97,18 +97,17 @@
         {% if banner_bg %}
           background-image: url({{MEDIA_URL}}{{banner_bg.image}});
         {% else %}
-          background-image: url({{STATIC_URL}}img/default_banner_bg.png);
-        {% endif %}
+          {% if org|config:"join_bg_color" %}
+            background-color: {{ org|config:"join_bg_color" }};
+          {% else %}
+            background-image: url({{STATIC_URL}}img/default_banner_bg.png);
+          {% endif %}
+         {% endif %}
 
         {% if org|config:"join_color" %}
           color: {{ org|config:"join_color"}};
         {% endif %}
 
-        {% if org|config:"join_bg_color" %}
-          background-color: {{ org|config:"join_bg_color" }};
-        {% else %}
-          background-color: #476fc9;
-        {% endif %}
       }
 
       {% for i in 6|get_range %}
