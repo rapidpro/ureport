@@ -11,11 +11,11 @@ IMAGE_TYPES = (('B', _("Banner")),
 
 class Image(SmartModel):
     org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="images",
-                            help_text=_("The organization in which the image will be used"))
+                            help_text=_("The organization to which the image will be used"))
 
     name = models.CharField(verbose_name=_("Name"), max_length=128,
-                            help_text=_("The name to describe this background"))
+                            help_text=_("A short descriptive name for this image"))
 
-    image_type = models.CharField(max_length=1, choices=IMAGE_TYPES, default='P', verbose_name=_("Background type"))
+    image_type = models.CharField(max_length=1, choices=IMAGE_TYPES, default='P', verbose_name=_("Image type"))
 
     image = models.ImageField(upload_to='images', help_text=_("The image file"))
