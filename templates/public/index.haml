@@ -3,20 +3,19 @@
 - load thumbnail humanize ureport compress i18n
 
 - block hero
-  .hero-container
-    .hero-dark-container{style:"height: auto;"}
-      .container
-        .hero-small-background
-        .row
-          .col-sm-7
-            .hero-dark-content
-              - if latest_poll
+  - if latest_poll
+    .hero-container
+      .hero-dark-container{style:"height: auto;"}
+        .container
+          .hero-small-background
+          .row
+            .col-sm-7
+              .hero-dark-content
                 .hero-title.hero-top-title.primary-bg-color
                   -trans "CURRENT POLL"
                 .hero-description
                   {{ latest_poll.title }}
 
-    - if latest_poll
       .hero-stats-container
         .container
           .row
