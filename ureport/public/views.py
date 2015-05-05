@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import redirect
+from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from smartmin.views import *
@@ -16,6 +17,7 @@ from ureport.news.models import Video, NewsItem
 import math
 import pycountry
 from datetime import timedelta, datetime
+from ureport.utils import get_linked_orgs
 
 
 def chooser(request):
@@ -54,6 +56,14 @@ class IndexView(SmartTemplateView):
             context['most_active_regions'] = org.get_most_active_regions()
 
         return context
+
+class Chooser(IndexView):
+    def pre_process(self, request, *args, **kwargs):
+        org = Org.objects.filter(subdomain='www', is_active=True).first()
+        self.request.org = org
+        if not org:
+            linked_sites = get_linked_orgs()
+            return TemplateResponse(request, settings.SITE_CHOOSER_TEMPLATE, dict(orgs=linked_sites))
 
 class NewsView(SmartTemplateView):
 
