@@ -37,75 +37,8 @@ class PublicTest(DashTest):
 
     def test_chooser(self):
         chooser_url = reverse('public.home')
-
-        # remove all orgs
-        Org.objects.all().delete()
-
         response = self.client.get(chooser_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 4)
-
-        # neither uganda nor nigeria should be on the landing page without flag
-        chooser_orgs = response.context['orgs']
-        for org in chooser_orgs:
-            self.assertFalse(org['name'].lower() == 'rwanda')
-            self.assertFalse(org['name'].lower() == 'nigeria')
-
-        # add two orgs nigeria and rwanda
-        self.nigeria = self.create_org('nigeria', self.admin)
-        self.rwanda = self.create_org('rwanda', self.admin)
-
-        response = self.client.get(chooser_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 4)
-
-        # no org is configure to be on landing page
-        chooser_orgs = response.context['orgs']
-        for org in chooser_orgs:
-            self.assertFalse(org['name'].lower() == 'rwanda')
-            self.assertFalse(org['name'].lower() == 'nigeria')
-
-        # change nigeria to be  shown on landing page
-        self.nigeria.set_config('is_on_landing_page', True)
-
-        response = self.client.get(chooser_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 4)
-
-        # nigeria missing flag so not included
-        chooser_orgs = response.context['orgs']
-        for org in chooser_orgs:
-            self.assertFalse(org['name'].lower() == 'rwanda')
-            self.assertFalse(org['name'].lower() == 'nigeria')
-
-        # add flag for nigeria
-        test_image = open("%s/image.jpg" % settings.TESTFILES_DIR, "r")
-        django_image_file = ImageFile(test_image)
-
-        uganda_flag = Image()
-        uganda_flag.name = "nigeria flag"
-        uganda_flag.org = self.nigeria
-        uganda_flag.image_type = 'F'
-        uganda_flag.created_by = self.admin
-        uganda_flag.modified_by = self.admin
-        uganda_flag.image.save('test_image.jpg', django_image_file, save=True)
-
-        # now nigeria should be included on landing page
-        response = self.client.get(chooser_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 5)
-
-        chooser_orgs = response.context['orgs']
-        has_rwanda = False
-        has_nigeria = False
-        for org in chooser_orgs:
-            if org['name'].lower() == 'rwanda':
-                has_rwanda = True
-            if org['name'].lower() == 'nigeria':
-                has_nigeria = True
-
-        self.assertTrue(has_nigeria)
-        self.assertFalse(has_rwanda)
+        self.assertEquals(response.status_code, 302)
 
     @mock.patch('dash.orgs.models.API', MockAPI)
     def test_index(self):

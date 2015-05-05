@@ -34,7 +34,6 @@ EMAIL_USE_TLS = True
 
 API_ENDPOINT = 'http://localhost:8001'
 SITE_HOST_PATTERN = 'http://%s.localhost:8000'
-SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 SITE_CHOOSER_URL_NAME = 'public.home'
 
 # On Unix systems, a value of None will cause Django to use the same
@@ -135,6 +134,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'dash.orgs.context_processors.user_group_perms_processor',
     'dash.orgs.context_processors.set_org_processor',
     'ureport.public.context_processors.set_is_iorg',
+    'ureport.public.context_processors.linked_sites',
 )
 
 MIDDLEWARE_CLASSES = (

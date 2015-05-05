@@ -396,6 +396,15 @@
                     %a{href:'{{ org|config:"youtube_channel_url" }}'}
                       %img.footer-social{ src:"{{ STATIC_URL }}img/youtube.png" }
 
+          -if org|config:"is_global"
+            .welcome-flags
+              - for site in linked_orgs
+                %a.flag{ href:"{{ site.host }}" }
+                  - if site.is_static
+                    %img{ src:"{{ STATIC_URL }}img/flags/{{ site.flag }}" }
+                  - else
+                    %img{ src:"{{ site.flag }}" }
+
           - if not request.user.is_authenticated and not is_iorg
             .row
               .col-sm-12
