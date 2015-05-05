@@ -173,7 +173,7 @@ class LessBlockNode(template.Node):
 # register our tag
 lessblock = register.tag(lessblock)
 
-@register.inclusion_tag('public/org_flags.haml')
+@register.inclusion_tag('public/org_flags.html')
 def show_org_flags():
-    linked_sites = get_linked_orgs()
-    return dict(linked_sites=linked_sites)
+    linked_orgs = get_linked_orgs()
+    return dict(linked_orgs=linked_orgs, STATIC_URL=settings.STATIC_URL)
