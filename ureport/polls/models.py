@@ -35,7 +35,7 @@ class Poll(SmartModel):
     A poll represents a single Flow that has been brought in for
     display and sharing in the UReport platform.
     """
-    flow_id = models.IntegerField(help_text=_("The Flow this Poll is based on"))
+    flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
     category = models.ForeignKey(Category, related_name="polls",
@@ -44,7 +44,7 @@ class Poll(SmartModel):
                                       help_text=_("Whether this poll should be featured on the homepage"))
     category_image = models.ForeignKey(CategoryImage, null=True,
                                        help_text=_("The splash category image to display for the poll (optional)"))
-    org = models.ForeignKey(Org,
+    org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
 
     @classmethod
@@ -253,7 +253,7 @@ class PollQuestion(SmartModel):
                              help_text=_("The poll this question is part of"))
     title = models.CharField(max_length=255,
                              help_text=_("The title of this question"))
-    ruleset_id = models.IntegerField(help_text=_("The RuleSet this question is based on"))
+    ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
 
     def get_results(self, segment=None):
         api = self.poll.org.get_api()
