@@ -396,9 +396,6 @@
                     %a{href:'{{ org|config:"youtube_channel_url" }}'}
                       %img.footer-social{ src:"{{ STATIC_URL }}img/youtube.png" }
 
-          -if org|config:"is_global"
-            - show_org_flags
-
           - if not request.user.is_authenticated and not is_iorg
             .row
               .col-sm-12
