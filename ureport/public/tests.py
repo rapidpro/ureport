@@ -10,12 +10,13 @@ from dash.api import API
 from dash.categories.models import Category
 from dash.stories.models import Story, StoryImage
 from dash.orgs.models import Org
+from temba import Flow, FlowResult
 
 from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.news.models import Video, NewsItem
 from ureport.polls.models import Poll, PollQuestion
-from ureport.tests import DashTest, MockAPI, UreportJobsTest
+from ureport.tests import DashTest, MockAPI, UreportJobsTest, MockTembaClient
 
 
 class PublicTest(DashTest):
@@ -23,7 +24,6 @@ class PublicTest(DashTest):
         super(PublicTest, self).setUp()
         self.uganda = self.create_org('uganda', self.admin)
         self.nigeria = self.create_org('nigeria', self.admin)
-
 
         self.health_uganda = Category.objects.create(org=self.uganda,
                                                      name="Health",
@@ -107,7 +107,7 @@ class PublicTest(DashTest):
         self.assertTrue(has_nigeria)
         self.assertFalse(has_rwanda)
 
-    @mock.patch('dash.orgs.models.API', MockAPI)
+    @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_index(self):
         home_url = reverse('public.index')
 
@@ -131,7 +131,7 @@ class PublicTest(DashTest):
         self.assertFalse(response.context['news'])
         self.assertTrue('most_active_regions' in response.context)
 
-        poll1 = Poll.objects.create(flow_id=1,
+        poll1 = Poll.objects.create(flow_uuid="uuid-1",
                                     title="Poll 1",
                                     category=self.health_uganda,
                                     org=self.uganda,
@@ -149,7 +149,7 @@ class PublicTest(DashTest):
 
         poll1_question = PollQuestion.objects.create(poll=poll1,
                                                      title='question poll 1',
-                                                     ruleset_id='101',
+                                                     ruleset_uuid='uuid-101',
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
@@ -162,7 +162,7 @@ class PublicTest(DashTest):
         self.assertTrue('recent_polls' in response.context)
         self.assertFalse(response.context['recent_polls'])
 
-        poll2 = Poll.objects.create(flow_id=2,
+        poll2 = Poll.objects.create(flow_uuid="uuid-2",
                                         title="Poll 2",
                                         category=self.education_nigeria,
                                         org=self.nigeria,
@@ -171,7 +171,7 @@ class PublicTest(DashTest):
 
         poll2_question = PollQuestion.objects.create(poll=poll2,
                                                      title='question poll 2',
-                                                     ruleset_id='202',
+                                                     ruleset_uuid='uuid-202',
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
@@ -184,7 +184,7 @@ class PublicTest(DashTest):
         self.assertTrue('recent_polls' in response.context)
         self.assertFalse(response.context['recent_polls'])
 
-        poll3 = Poll.objects.create(flow_id=3,
+        poll3 = Poll.objects.create(flow_uuid="uuid-3",
                                     title="Poll 3",
                                     category=self.health_uganda,
                                     org=self.uganda,
@@ -193,7 +193,7 @@ class PublicTest(DashTest):
 
         poll3_question = PollQuestion.objects.create(poll=poll3,
                                                      title='question poll 3',
-                                                     ruleset_id='303',
+                                                     ruleset_uuid='uuid-303',
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
@@ -404,7 +404,7 @@ class PublicTest(DashTest):
         self.assertEquals(response.request['PATH_INFO'], '/ureporters/')
         self.assertEquals(response.context['org'], self.uganda)
 
-    @mock.patch('dash.orgs.models.API', MockAPI)
+    @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_polls_list(self):
         polls_url = reverse('public.polls')
 
@@ -427,7 +427,7 @@ class PublicTest(DashTest):
                                                    created_by=self.admin,
                                                    modified_by=self.admin)
 
-        poll1 = Poll.objects.create(flow_id=1,
+        poll1 = Poll.objects.create(flow_uuid='uuid-1',
                                     title="Poll 1",
                                     category=self.health_uganda,
                                     org=self.uganda,
@@ -436,11 +436,11 @@ class PublicTest(DashTest):
 
         poll1_question = PollQuestion.objects.create(poll=poll1,
                                                      title='question poll 1',
-                                                     ruleset_id='101',
+                                                     ruleset_uuid='uuid-101',
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        poll2 = Poll.objects.create(flow_id=2,
+        poll2 = Poll.objects.create(flow_uuid="uuid-2",
                                     title="Poll 2",
                                     category=education_uganda,
                                     org=self.uganda,
@@ -449,11 +449,11 @@ class PublicTest(DashTest):
 
         poll2_question = PollQuestion.objects.create(poll=poll2,
                                                      title='question poll 2',
-                                                     ruleset_id='102',
+                                                     ruleset_uuid='uuid-102',
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        poll3 = Poll.objects.create(flow_id=3,
+        poll3 = Poll.objects.create(flow_uuid="uuid-3",
                                     title="Poll 1",
                                     category=self.health_uganda,
                                     org=self.uganda,
@@ -462,11 +462,11 @@ class PublicTest(DashTest):
 
         poll3_question = PollQuestion.objects.create(poll=poll3,
                                                      title='question poll 3',
-                                                     ruleset_id='103',
+                                                     ruleset_uuid='uuid-103',
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        poll4 = Poll.objects.create(flow_id=4,
+        poll4 = Poll.objects.create(flow_uuid="uuid-4",
                                     title="Poll 4",
                                     category=self.education_nigeria,
                                     org=self.nigeria,
@@ -475,7 +475,7 @@ class PublicTest(DashTest):
 
         poll4_question = PollQuestion.objects.create(poll=poll4,
                                                      title='question poll 4',
-                                                     ruleset_id='104',
+                                                     ruleset_uuid='uuid-104',
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
@@ -635,16 +635,16 @@ class PublicTest(DashTest):
         self.assertTrue(poll3 not in response.context['polls'])
         self.assertEquals(response.context['polls'][0], poll1)
 
-    @mock.patch('dash.orgs.models.API', MockAPI)
+    @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_polls_read(self):
-        poll1 = Poll.objects.create(flow_id=1,
+        poll1 = Poll.objects.create(flow_uuid="uuid-1",
                                     title="Poll 1",
                                     category=self.health_uganda,
                                     org=self.uganda,
                                     created_by=self.admin,
                                     modified_by=self.admin)
 
-        poll2 = Poll.objects.create(flow_id=2,
+        poll2 = Poll.objects.create(flow_uuid="uuid-2",
                                     title="Poll 2",
                                     category=self.education_nigeria,
                                     org=self.nigeria,
@@ -667,17 +667,18 @@ class PublicTest(DashTest):
         response = self.client.get(uganda_poll_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 404)
 
-    @mock.patch('dash.orgs.models.API', MockAPI)
+        poll1.is_active = False
+        poll1.save()
+
+        response = self.client.get(uganda_poll_read_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 404)
+
     def test_boundary_view(self):
         country_boundary_url = reverse('public.boundaries')
         state_boundary_url = reverse('public.boundaries', args=['R123'])
 
-        mock_api = MockAPI(API)
-
-        response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
-
-        output = dict(
+        with mock.patch("ureport.public.views.get_country_geojson") as mock_get_country_geojson:
+            mock_get_country_geojson.return_value = dict(
                    type="FeatureCollection",
                    features=[
                        dict(
@@ -701,12 +702,19 @@ class PublicTest(DashTest):
                    ]
             )
 
-        self.assertEquals(json.dumps(output), response.content)
+            response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
 
-        response = self.client.get(state_boundary_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+            output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R3713501",
+                                                                                               level=1,
+                                                                                               name="Abia"),
+                                                               geometry=dict(type="MultiPolygon",
+                                                                             coordinates=[[[[7, 5]]]]))])
 
-        output = dict(type="FeatureCollection",
+            self.assertEquals(json.dumps(output), response.content)
+
+        with mock.patch("ureport.public.views.get_state_geojson") as mock_get_state_geojson:
+            mock_get_state_geojson.return_value = dict(type="FeatureCollection",
                     features=[dict(type='Feature',
                                    properties=dict(id="R3713502",
                                                    level=2,
@@ -718,7 +726,17 @@ class PublicTest(DashTest):
                             ]
                     )
 
-        self.assertEquals(json.dumps(output), response.content)
+
+            response = self.client.get(state_boundary_url, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+
+            output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R3713502",
+                                                                                               level=2,
+                                                                                               name="Aba North"),
+                                                               geometry=dict(type="MultiPolygon",
+                                                                             coordinates=[[[[8, 4]]]]))])
+
+            self.assertEquals(json.dumps(output), response.content)
 
         self.uganda.set_config("is_global", True)
 
@@ -813,7 +831,6 @@ class PublicTest(DashTest):
                                                    created_by=self.admin,
                                                    modified_by=self.admin)
 
-
         story1 = Story.objects.create(title="story 1",
                                       content="body contents 1",
                                       category=self.health_uganda,
@@ -844,14 +861,14 @@ class PublicTest(DashTest):
                                       created_by=self.admin,
                                       modified_by=self.admin)
 
-        poll1 = Poll.objects.create(flow_id=1,
+        poll1 = Poll.objects.create(flow_uuid="uuid-1",
                                     title="Poll 1",
                                     category=self.health_uganda,
                                     org=self.uganda,
                                     created_by=self.admin,
                                     modified_by=self.admin)
 
-        poll2 = Poll.objects.create(flow_id=2,
+        poll2 = Poll.objects.create(flow_uuid="uuid-2",
                                     title="Poll 2",
                                     category=education_uganda,
                                     org=self.uganda,
@@ -916,7 +933,7 @@ class PublicTest(DashTest):
         self.assertFalse(response.context['story_featured_images'])
 
     def test_poll_question_results(self):
-        poll1 = Poll.objects.create(flow_id=1,
+        poll1 = Poll.objects.create(flow_uuid="uuid-1",
                                     title="Poll 1",
                                     category=self.health_uganda,
                                     org=self.uganda,
@@ -925,11 +942,11 @@ class PublicTest(DashTest):
 
         poll1_question = PollQuestion.objects.create(poll=poll1,
                                                      title='question poll 1',
-                                                     ruleset_id=101,
+                                                     ruleset_uuid="uuid-101",
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        poll2 = Poll.objects.create(flow_id=2,
+        poll2 = Poll.objects.create(flow_uuid="uuid-2",
                                     title="Poll 2",
                                     category=self.education_nigeria,
                                     org=self.nigeria,
@@ -938,38 +955,34 @@ class PublicTest(DashTest):
 
         poll2_question = PollQuestion.objects.create(poll=poll2,
                                                      title='question poll 2',
-                                                     ruleset_id=102,
+                                                     ruleset_uuid="uuid-102",
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
         uganda_results_url = reverse('public.pollquestion_results', args=[poll1_question.pk])
         nigeria_results_url = reverse('public.pollquestion_results', args=[poll2_question.pk])
 
-        with mock.patch('dash.api.API.get_ruleset_results') as mock_results:
-            mock_results.return_value = [dict(open_ended=False,
-                                      set=3462,
-                                      unset=3694,
-                                      categories=[
-                                          dict(count=2210,
-                                               label='Yes'
-                                               ),
-                                          dict(count=1252,
-                                               label='No'
-                                               )
-                                          ],
-                                      label='All')
-                                      ]
+        self.uganda.set_config('state_label', "State")
 
+        with mock.patch('temba.TembaClient.get_flow_results') as mock_results:
+            mock_results.return_value = FlowResult.deserialize_list([dict(open_ended=False,
+                                              set=3462,
+                                              unset=3694,
+                                              categories=[dict(count=2210, label='Yes'), dict(count=1252, label='No')],
+                                              label='All')])
 
             response = self.client.get(nigeria_results_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 404)
 
             response = self.client.get(uganda_results_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
-            mock_results.assert_called_with(poll1_question.ruleset_id, segment=None)
+            mock_results.assert_called_with(poll1_question.ruleset_uuid, segment=None)
 
-            response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
-            mock_results.assert_called_with(poll1_question.ruleset_id, segment=dict(location='State'))
+            response = self.client.get(
+                uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
+                SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+            mock_results.assert_called_with(poll1_question.ruleset_uuid, segment=dict(location='State'))
 
     def test_reporters_results(self):
         reporters_results = reverse('public.contact_field_results')
@@ -979,19 +992,25 @@ class PublicTest(DashTest):
 
         self.assertEquals(response.content, "[]")
 
-        with mock.patch('dash.api.API.get_contact_field_results') as mock_results:
+        self.uganda.set_config('state_label', 'State')
+
+        with mock.patch('dash.orgs.models.Org.get_contact_field_results') as mock_results:
             mock_results.return_value = "API_RESULTS"
 
             with mock.patch('dash.orgs.models.Org.organize_categories_data') as mock_organize:
                 mock_organize.return_value = "ORGANIZED"
 
-                response = self.client.get(reporters_results + "?" + urlencode(dict(contact_field='field_name')), SERVER_NAME='uganda.ureport.io')
+                response = self.client.get(reporters_results + "?" + urlencode(dict(contact_field='field_name')),
+                                           SERVER_NAME='uganda.ureport.io')
                 self.assertEquals(response.status_code, 200)
                 self.assertEquals(response.content, json.dumps("ORGANIZED"))
                 mock_results.assert_called_with('field_name', None)
                 mock_organize.assert_called_with('field_name', "API_RESULTS")
 
-                response = self.client.get(reporters_results + "?" + urlencode(dict(contact_field='field_name', segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
+                response = self.client.get(
+                    reporters_results + "?" + urlencode(dict(contact_field='field_name',
+                                                             segment=json.dumps(dict(location='State')))),
+                    SERVER_NAME='uganda.ureport.io')
                 self.assertEquals(response.status_code, 200)
                 self.assertEquals(response.content, json.dumps("ORGANIZED"))
                 mock_results.assert_called_with('field_name', dict(location='State'))
@@ -1062,13 +1081,13 @@ class PublicTest(DashTest):
         self.assertEquals(response.status_code, 200)
 
         self.assertEquals(json.loads(response.content), dict(next=False, news=[self.uganda_news2.as_brick_json(),
-                                                                              self.uganda_news1.as_brick_json(),
-                                                                              ]))
+                                                                               self.uganda_news1.as_brick_json()]))
 
         response = self.client.get(news_url + "?page=3", SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
 
         self.assertEquals(json.loads(response.content), dict(next=False, news=[]))
+
 
 class JobsTest(UreportJobsTest):
     def setUp(self):

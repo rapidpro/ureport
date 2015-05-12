@@ -91,29 +91,29 @@ class Poll(SmartModel):
         """
         Returns the underlying flow for this poll
         """
-        api = self.org.get_api()
-        return api.get_flow(self.flow_id)
+        temba_client = self.org.get_temba_client()
+        return temba_client.get_flow(self.flow_uuid)
 
     def best_and_worst(self):
         b_and_w = []
 
         # get our first question
-        question = self.questions.order_by('ruleset_id').first()
+        question = self.questions.order_by('pk').first()
         if question:
             # do we already have a cached set
-            b_and_w = cache.get('b_and_d:%d' % question.ruleset_id, [])
+            b_and_w = cache.get('b_and_d:%s' % question.ruleset_uuid, [])
 
             if not b_and_w:
-                api = self.org.get_api()
-                boundary_results = api.get_ruleset_results(question.ruleset_id, segment=dict(location='State'))
+                temba_client = self.org.get_temba_client()
+                boundary_results = temba_client.get_flow_results(question.ruleset_uuid, segment=dict(location='State'))
                 if not boundary_results:
                     return []
 
                 boundary_responses = dict()
                 for boundary in boundary_results:
-                    total = boundary['set'] + boundary['unset']
-                    responded = boundary['set']
-                    boundary_responses[boundary['label']] = dict(responded=responded, total=total)
+                    total = boundary.set + boundary.unset
+                    responded = boundary.set
+                    boundary_responses[boundary.label] = dict(responded=responded, total=total)
 
                 for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:3]:
                     responded = boundary_responses[boundary]
@@ -129,7 +129,7 @@ class Poll(SmartModel):
                 if b_and_w and b_and_w[0]['responded'] == 0:
                     b_and_w = []
 
-                cache.set('b_and_w:%d' % question.ruleset_id, b_and_w, 900)
+                cache.set('b_and_w:%s' % question.ruleset_uuid, b_and_w, 900)
 
         return b_and_w
 
@@ -138,8 +138,8 @@ class Poll(SmartModel):
         The response rate for this flow
         """
         flow = self.get_flow()
-        if flow and flow['completed_runs']:
-            return int(round((flow['completed_runs'] * 100.0) / flow['runs']))
+        if flow and flow.completed_runs:
+            return int(round((flow.completed_runs * 100.0) / flow.runs))
         else:
             return '--'
 
@@ -190,13 +190,13 @@ class Poll(SmartModel):
     def runs(self):
         flow = self.get_flow()
         if flow:
-            return flow['runs']
+            return flow.runs
         return "--"
 
     def completed_runs(self):
         flow = self.get_flow()
         if flow:
-            return flow['completed_runs']
+            return flow.completed_runs
         return "--"
 
     def get_featured_images(self):
@@ -255,33 +255,50 @@ class PollQuestion(SmartModel):
                              help_text=_("The title of this question"))
     ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
 
-    def get_results(self, segment=None):
-        api = self.poll.org.get_api()
-        return api.get_ruleset_results(self.ruleset_id, segment=segment)
+    def get_client_results(self, segment=None):
+        temba_client = self.poll.org.get_temba_client()
+        return temba_client.get_flow_results(self.ruleset_uuid, segment=segment)
 
-    def get_results_dict_data(self):
+    def get_results(self, segment=None):
+        client_results = self.get_client_results(segment=segment)
+
+        json_results = []
+        for flow_result in client_results:
+            flow_result_json = dict()
+            flow_result_json['set'] = flow_result.set
+            flow_result_json['unset'] = flow_result.unset
+            flow_result_json['open_ended'] = flow_result.open_ended
+            flow_result_json['label'] = flow_result.label
+            flow_result_json['categories'] = [ dict(label=category.label, count=category.count) for category in flow_result.categories]
+            if flow_result.boundary:
+                flow_result_json['boundary'] = flow_result.boundary
+
+            json_results.append(flow_result_json)
+
+        return json_results
+
+    def get_total_summary_data(self):
         if self.get_results():
             return self.get_results()[0]
-        return dict(set=0, unset=0, categories=[])
 
     def is_open_ended(self):
         cache_key = 'open_ended:%d' % self.id
         open_ended = cache.get(cache_key, None)
 
         if open_ended is None:
-            open_ended = self.get_results_dict_data().get('open_ended', False)
+            open_ended = self.get_total_summary_data().get('open_ended', False)
             cache.set(cache_key, open_ended, OPEN_ENDED_CACHE_TIME)
 
         return open_ended
 
     def get_responded(self):
-        return self.get_results_dict_data()['set']
+        return self.get_total_summary_data().get('set', 0)
 
     def get_polled(self):
-        return self.get_results_dict_data()['set'] + self.get_results()[0]['unset']
+        return self.get_total_summary_data().get('set', 0) + self.get_total_summary_data().get('unset', 0)
 
     def get_words(self):
-        return self.get_results_dict_data()['categories']
+        return self.get_total_summary_data().get('categories', [])
 
     def __unicode__(self):
         return self.title

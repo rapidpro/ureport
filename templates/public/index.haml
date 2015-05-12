@@ -137,7 +137,7 @@
             -with gender_stats=org|gender_stats
               .hr-header.primary-color
                 - trans "RATE BY GENDER"
-              .gender-stats
+              .gender-stats{ data-contact-field:'{{org|config:"gender_label"}}'}
                 %table.gender
                   %tbody
                     %tr

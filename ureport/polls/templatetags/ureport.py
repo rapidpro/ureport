@@ -25,12 +25,12 @@ def reporter_count(org):
         return None
 
     reporter_group = org.get_config('reporter_group')
-    api = org.get_api()
 
     if reporter_group:
-        group = api.get_group(reporter_group)
-        if group:
-            return group['size']
+        temba_client = org.get_temba_client()
+        groups = temba_client.get_groups(name=reporter_group)
+        if groups:
+            return groups[0].size
 
     return 0
 

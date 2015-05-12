@@ -5,9 +5,14 @@ from django.utils.translation import ugettext_lazy as _
 from smartmin.models import SmartModel
 
 
-IMAGE_TYPES = (('B', _("Banner")),
-               ('P', _("Pattern")),
-               ('F', _("Flag")))
+BANNER = 'B'
+PATTERN = 'P'
+FLAG = 'F'
+
+IMAGE_TYPES = ((BANNER, _("Banner")),
+               (PATTERN, _("Pattern")),
+               (FLAG, _("Flag")))
+
 
 class Image(SmartModel):
     org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="images",

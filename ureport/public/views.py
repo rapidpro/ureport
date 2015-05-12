@@ -1,3 +1,4 @@
+from dash.utils import get_country_geojson, get_state_geojson
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -174,6 +175,11 @@ class PollQuestionResultsView(SmartReadView):
         segment = self.request.GET.get('segment', None)
         if segment:
             segment = json.loads(segment)
+            location = segment.get('location', None)
+            if location.lower() == 'state':
+                segment['location'] = self.request.org.get_config('state_label')
+            elif location.lower() == 'district':
+                segment['location'] = self.request.org.get_config('district_label')
 
         return HttpResponse(json.dumps(self.object.get_results(segment=segment)))
 
@@ -193,9 +199,9 @@ class BoundaryView(SmartTemplateView):
             state_id = self.kwargs.get('osm_id', None)
 
             if state_id:
-                boundaries = org.get_api().get_state_geojson(state_id)
+                boundaries = get_state_geojson(org, state_id)
             else:
-                boundaries = org.get_api().get_country_geojson()
+                boundaries = get_country_geojson(org)
 
         return HttpResponse(json.dumps(boundaries))
 
@@ -212,6 +218,12 @@ class ReportersResultsView(SmartReadView):
         segment = self.request.GET.get('segment', None)
         if segment:
             segment = json.loads(segment)
+            location = segment.get('location', None)
+            if location.lower() == 'state':
+                segment['location'] = self.request.org.get_config('state_label')
+            elif location.lower() == 'district':
+                segment['location'] = self.request.org.get_config('district_label')
+
 
         contact_field = self.request.GET.get('contact_field', None)
         if self.get_object() and contact_field:
