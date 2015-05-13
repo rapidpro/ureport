@@ -259,6 +259,12 @@
       min-height: 750px;
     }
 
+    .scale {
+      {% if org|config:"is_global" %}
+      display: none;
+      {% endif %}
+    }
+
 -block extra-script
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/jqcloud.min.js"></script>

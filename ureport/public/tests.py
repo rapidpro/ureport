@@ -10,6 +10,7 @@ from dash.api import API
 from dash.categories.models import Category
 from dash.stories.models import Story, StoryImage
 from dash.orgs.models import Org
+import pycountry
 
 from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
@@ -751,7 +752,12 @@ class PublicTest(DashTest):
 
         output = json.loads(contents)
 
-        self.assertEquals(json.dumps(output), response.content)
+        response_content = json.loads(response.content)
+
+        self.assertEquals(set(output.keys()), set(response_content.keys()))
+        self.assertTrue(response_content['features'][0]["properties"]["id"])
+        self.assertEqual(response_content['features'][0]["properties"]["level"], 0)
+
 
     def test_stories_list(self):
         stories_url = reverse('public.stories')
@@ -990,6 +996,14 @@ class PublicTest(DashTest):
 
             response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
             mock_results.assert_called_with(poll1_question.ruleset_id, segment=dict(location='State'))
+
+            self.uganda.set_config("is_global", True)
+            self.uganda.set_config("state_label", "Country Code")
+            response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
+            mock_results.assert_called_with(poll1_question.ruleset_id,
+                                            segment=dict(contact_field="Country Code",
+                                                         values=[elt.alpha2 for elt in pycountry.countries.objects]))
+
 
     def test_reporters_results(self):
         reporters_results = reverse('public.contact_field_results')
