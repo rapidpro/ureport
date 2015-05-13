@@ -16,7 +16,7 @@ initMap = (id, geojson, question) ->
   otherCategory = null
   displayOthers = false
 
-  mainLabelName = "All States"
+  mainLabelName = "All"
 
   colors = ['rgb(165,0,38)','rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,139)','rgb(255,255,191)','rgb(217,239,139)','rgb(166,217,106)','rgb(102,189,99)','rgb(26,152,80)','rgb(0,104,55)']
 
@@ -121,7 +121,7 @@ initMap = (id, geojson, question) ->
     else
       resetBoundaries()
       scale.update()
-      mainLabelName = "All States"
+      mainLabelName = "All"
 
   loadBoundary = (boundary, target) ->
     boundaryId = if boundary then boundary.id else null
@@ -221,8 +221,14 @@ initMap = (id, geojson, question) ->
       $.ajax({url:boundaryUrl, dataType: "json"}).done (data) ->
         for feature in data.features
           result = boundaryResults[feature.properties.id]
-          feature.properties.scores = result.percentage
-          feature.properties.color = calculateColor(result.percentage)
+          if result
+            feature.properties.scores = result.percentage
+            feature.properties.color = calculateColor(result.percentage)
+          else
+            feature.properties.scores = 0
+            feature.properties.color = calculateColor(0)
+            console.log(feature)
+
           feature.properties.borderColor = 'white'
 
         boundaries = L.geoJson(data, { style: visibleStyle, onEachFeature: onEachFeature })

@@ -175,7 +175,18 @@ class PollQuestionResultsView(SmartReadView):
         if segment:
             segment = json.loads(segment)
 
-        return HttpResponse(json.dumps(self.object.get_results(segment=segment)))
+            if self.object.poll.org.get_config('is_global'):
+                if "location" in segment:
+                    del segment["location"]
+                    segment["contact_field"] = self.object.poll.org.get_config('state_label')
+                    segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+
+        results = self.object.get_results(segment=segment)
+        if self.object.poll.org.get_config('is_global'):
+            for elt in results:
+                elt['boundary'] = elt['label']
+
+        return HttpResponse(json.dumps(results))
 
 class BoundaryView(SmartTemplateView):
 
@@ -189,6 +200,11 @@ class BoundaryView(SmartTemplateView):
             handle.close()
 
             boundaries = json.loads(contents)
+
+            for elt in boundaries['features']:
+                elt['properties']['id'] = elt['properties']["hc-a2"]
+                elt['properties']['level'] = 0
+
         else:
             state_id = self.kwargs.get('osm_id', None)
 
