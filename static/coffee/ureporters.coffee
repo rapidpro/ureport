@@ -238,6 +238,11 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
     if props?
       result = boundaryResults[props.id]
+      if not result
+        result =
+          set:0
+          unset:0
+
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
 
