@@ -62,10 +62,11 @@ class Chooser(IndexView):
     def pre_process(self, request, *args, **kwargs):
         if not self.request.org:
             org = Org.objects.filter(subdomain='www', is_active=True).first()
-            self.request.org = org
             if not org:
                 linked_sites = get_linked_orgs()
                 return TemplateResponse(request, settings.SITE_CHOOSER_TEMPLATE, dict(orgs=linked_sites))
+            else:
+                return HttpResponsePermanentRedirect(settings.SITE_HOST_PATTERN % org.subdomain)
 
 class NewsView(SmartTemplateView):
 

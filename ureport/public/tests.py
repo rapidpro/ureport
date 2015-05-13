@@ -111,6 +111,8 @@ class PublicTest(DashTest):
         # if we have www subdomain org we should show its index
         self.www = self.create_org('www', self.admin)
         response = self.client.get(chooser_url)
+        self.assertEquals(response.status_code, 301)
+        response = self.client.get(chooser_url, follow=True)
         self.assertEquals(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
         self.assertFalse('welcome-flags' in response.content)
@@ -118,6 +120,8 @@ class PublicTest(DashTest):
         self.www.set_config('is_global', True)
 
         response = self.client.get(chooser_url)
+        self.assertEquals(response.status_code, 301)
+        response = self.client.get(chooser_url, follow=True)
         self.assertEquals(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
         self.assertTrue('welcome-flags' in response.content)
