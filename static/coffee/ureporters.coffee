@@ -14,7 +14,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
   topBoundary = null
 
-  mainLabelName = "All States"
+  mainLabelName = "All"
   mainLabelRegistered = 0
 
   colors = colorsList
@@ -110,7 +110,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
     else
       resetBoundaries()
       scale.update()
-      mainLabelName = "All States"
+      mainLabelName = "All"
       mainLabelRegistered = totalRegistered
 
   loadBoundary = (boundaryId, target) ->
@@ -158,8 +158,13 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
       $.ajax({url:boundaryUrl, dataType: "json"}).done (data) ->
         for feature in data.features
           result = boundaryResults[feature.properties.id]
-          feature.properties.scores = result.percentage
-          feature.properties.color = calculateColor(result.percentage)
+          if result
+            feature.properties.scores = result.percentage
+            feature.properties.color = calculateColor(result.percentage)
+          else
+            feature.properties.scores = 0
+            feature.properties.color = calculateColor(0)
+
           feature.properties.borderColor = 'white'
 
         boundaries = L.geoJson(data, { style: visibleStyle, onEachFeature: onEachFeature })
