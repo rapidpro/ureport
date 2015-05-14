@@ -237,6 +237,10 @@ class ReportersResultsView(SmartReadView):
             api_data = self.get_object().get_contact_field_results(contact_field, segment)
             output_data = self.get_object().organize_categories_data(contact_field, api_data)
 
+            if self.object.get_config('is_global'):
+                for elt in output_data:
+                    elt['boundary'] = elt['label']
+
         return HttpResponse(json.dumps(output_data))
 
 class StoriesView(SmartTemplateView):

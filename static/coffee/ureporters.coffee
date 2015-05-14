@@ -61,7 +61,6 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
       if topBoundary
         div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i> " + upper + "% of the " + topBoundary.label + " total<br/>"
-      
       i++
 
     return div
