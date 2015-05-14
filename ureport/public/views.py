@@ -179,7 +179,7 @@ class PollQuestionResultsView(SmartReadView):
                     segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
 
         results = self.object.get_results(segment=segment)
-        if self.object.poll.org.get_config('is_global'):
+        if self.object.poll.org.get_config('is_global') and results:
             for elt in results:
                 elt['boundary'] = elt['label']
 
@@ -237,7 +237,7 @@ class ReportersResultsView(SmartReadView):
             api_data = self.get_object().get_contact_field_results(contact_field, segment)
             output_data = self.get_object().organize_categories_data(contact_field, api_data)
 
-            if self.object.get_config('is_global'):
+            if self.object.get_config('is_global') and output_data:
                 for elt in output_data:
                     elt['boundary'] = elt['label']
 
