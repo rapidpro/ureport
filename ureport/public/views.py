@@ -179,14 +179,19 @@ class PollQuestionResultsView(SmartReadView):
                     segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
 
         results = self.object.get_results(segment=segment)
+
+        # for the global page clean the data translating country code to country name
         if self.object.poll.org.get_config('is_global') and results:
             for elt in results:
                 country_code = elt['label']
                 elt['boundary'] = country_code
                 country_name = ""
-                country = pycountry.countries.get(alpha2=country_code)
-                if country:
-                    country_name = country.name
+                try:
+                    country = pycountry.countries.get(alpha2=country_code)
+                    if country:
+                        country_name = country.name
+                except KeyError:
+                    country_name = country_code
                 elt['label'] = country_name
 
         return HttpResponse(json.dumps(results))
@@ -243,14 +248,18 @@ class ReportersResultsView(SmartReadView):
             api_data = self.get_object().get_contact_field_results(contact_field, segment)
             output_data = self.get_object().organize_categories_data(contact_field, api_data)
 
+            # for the global page clean the data translating country code to country name
             if self.object.get_config('is_global') and output_data:
                 for elt in output_data:
                     country_code = elt['label']
                     elt['boundary'] = country_code
                     country_name = ""
-                    country = pycountry.countries.get(alpha2=country_code)
-                    if country:
-                        country_name = country.name
+                    try:
+                        country = pycountry.countries.get(alpha2=country_code)
+                        if country:
+                            country_name = country.name
+                    except KeyError:
+                        country_name = country_code
                     elt['label'] = country_name
 
         return HttpResponse(json.dumps(output_data))
