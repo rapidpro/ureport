@@ -26,7 +26,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
   visibleStyle = (feature) ->
     return {
-      weight: 2
+      weight: 1
       opacity: 1
       color: 'white'
       fillOpacity: 1
@@ -35,7 +35,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
   fadeStyle = (feature) ->
     return {
-      weight: 2
+      weight: 1
       opacity: 1
       color: 'white'
       fillOpacity: 0.35
@@ -75,7 +75,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
         return colors[i]
 
   HIGHLIGHT_STYLE =
-    weight: 6
+    weight: 3
     fillOpacity: 1
 
   highlightFeature = (e) ->
@@ -95,7 +95,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
     states.setStyle(visibleStyle)
     map.addLayer(states)
-    map.fitBounds(states.getBounds(), {paddingTopLeft: [200, 0]})
+    map.fitBounds(states.getBounds(), {step:.25})
 
   resetHighlight = (e) ->
     states.resetStyle(e.target)
@@ -103,7 +103,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
   clickFeature = (e) ->
     if (e.target.feature.properties.level == 1)
-      map.fitBounds(e.target.getBounds(), {paddingTopLeft: [200, 0]})
+      map.fitBounds(e.target.getBounds(), {step:.25})
       mainLabelName = e.target.feature.properties.name + " (State)"
       loadBoundary(e.target.feature.properties.id, e.target)
       scale.update(e.target.feature.properties.level)
@@ -178,10 +178,10 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
           stateResults = boundaryResults
 
         $("#" + id + "-placeholder").hide()
-        map.fitBounds(boundaries.getBounds(), {paddingTopLeft: [200, 0]})
+        map.fitBounds(boundaries.getBounds(), {step:.25})
 
         map.on 'resize', (e) ->
-          map.fitBounds(boundaries.getBounds())
+          map.fitBounds(boundaries.getBounds(), {step:.25})
 
   onEachFeature = (feature, layer) ->
       layer.on
