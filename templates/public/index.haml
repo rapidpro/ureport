@@ -3,94 +3,109 @@
 - load thumbnail humanize ureport compress i18n
 
 - block hero
-  .hero-container
-    .hero-dark-container{style:"height: auto;"}
-      .container
-        .hero-small-background
-        .row
-          .col-sm-7
-            .hero-dark-content
-              - if latest_poll
-                .hero-title.hero-top-title.primary-bg-color
-                  -trans "CURRENT POLL"
-                .hero-description
-                  {{ latest_poll.title }}
-
-    - if latest_poll
-      .hero-stats-container
+  -if org|config:"is_global"
+    .hero-container.global
+      .hero-dark-container
         .container
           .row
-            .col-sm-offset-7.col-sm-5
-              .index-current-poll-stats.card.card-padding
-                .hr-header.primary-color
-                  - trans "RESPONSE RATE"
-                .stats
-                  {{ latest_poll.response_percentage }}%
-                  %span.stats-small
-                    ({{ latest_poll.completed_runs|intcomma }}
-                    - trans "Responded out of"
-                    {{ latest_poll.runs|intcomma }})
+            .col-md-12
+              .welcome-text
+                U-Report is a free youth-facing engagement application led by UNICEF to amplify the voices of youth and empower
+                them to speak out about the issues that matter most to them.
+                %br
+                %br
+                Using this free application, U-Reporters can connect through a range of communication channels to voice their
+                opinions about what is happening in their communities and work together with leaders at the community and
+                national level for positive social change.
+              - show_org_flags
+  -else
+    - if latest_poll
+      .hero-container
+        .hero-dark-container{style:"height: auto;"}
+          .container
+            .hero-small-background
+            .row
+              .col-sm-7
+                .hero-dark-content
+                  .hero-title.hero-top-title.primary-bg-color
+                    -trans "CURRENT POLL"
+                  .hero-description
+                    {{ latest_poll.title }}
 
-                - with regions=latest_poll.best_and_worst
-                  - if regions
-                    .hr-header.primary-color
-                      - trans "RESPONDER'S RATE BY LOCATION"
-                    .stats
-                      %table.regions
-                        %tr
-                          %td.region-key{ colspan: "3" }
-                            - trans "Most responded"
-
-                          %td.region-key{ colspan: "2"}
-                            - trans "Least responded"
-
-                        %tr{ style:"postion: relative" }
-                          -for region in regions
-                            %td.region-bar-cell
-                              .region-bar-container{ class: "{% if forloop.last %}last-region{% endif %}" }
-                                .region-percentage
-                                  {{ region.percent }}%
-
-                                -if forloop.counter > 3
-                                  .region-bar-light{style:"height:{{ region.percent }}%;"}
-                                .region-bar.primary-bg-color{style:"height:{{ region.percent }}%;"}
-
-                        %tr
-                          -for region in regions
-                            %td.region-name{ class: "{% if forloop.last %}last-region{% endif %}" }
-                              {{ region.boundary }}
-
-                        %tr
-                          -for region in regions
-                            %td.region-registered{ class: "{% if forloop.last %}last-region{% endif %}" }
-                              %div {{ region.responded|intcomma }} of {{ region.total|intcomma }}
-
-                - if trending_words
+        .hero-stats-container
+          .container
+            .row
+              .col-sm-offset-7.col-sm-5
+                .index-current-poll-stats.card.card-padding
                   .hr-header.primary-color
-                    - trans "TRENDING WORDS"
+                    - trans "RESPONSE RATE"
                   .stats
-                    {% for word in trending_words|slice:"5"%}{{ word.strip }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                    {{ latest_poll.response_percentage }}%
+                    %span.stats-small
+                      ({{ latest_poll.completed_runs|intcomma }}
+                      - trans "Responded out of"
+                      {{ latest_poll.runs|intcomma }})
 
-                - with f_responses=latest_poll.get_featured_responses|slice:":4"
-                  - if f_responses
+                  - with regions=latest_poll.best_and_worst
+                    - if regions
+                      .hr-header.primary-color
+                        - trans "RESPONDER'S RATE BY LOCATION"
+                      .stats
+                        %table.regions
+                          %tr
+                            %td.region-key{ colspan: "3" }
+                              - trans "Most responded"
+
+                            %td.region-key{ colspan: "2"}
+                              - trans "Least responded"
+
+                          %tr{ style:"postion: relative" }
+                            -for region in regions
+                              %td.region-bar-cell
+                                .region-bar-container{ class: "{% if forloop.last %}last-region{% endif %}" }
+                                  .region-percentage
+                                    {{ region.percent }}%
+
+                                  -if forloop.counter > 3
+                                    .region-bar-light{style:"height:{{ region.percent }}%;"}
+                                  .region-bar.primary-bg-color{style:"height:{{ region.percent }}%;"}
+
+                          %tr
+                            -for region in regions
+                              %td.region-name{ class: "{% if forloop.last %}last-region{% endif %}" }
+                                {{ region.boundary }}
+
+                          %tr
+                            -for region in regions
+                              %td.region-registered{ class: "{% if forloop.last %}last-region{% endif %}" }
+                                %div {{ region.responded|intcomma }} of {{ region.total|intcomma }}
+
+                  - if trending_words
                     .hr-header.primary-color
-                      - trans "FEATURED RESPONSES"
+                      - trans "TRENDING WORDS"
                     .stats
-                      #current-poll-featured-response-carousel.carousel.slide{data-ride:"carousel"}
-                        %ol.carousel-indicators
-                          - for response in f_responses
-                            %li{data-target:"#current-poll-featured-response-carousel", data-slide-to:"{{forloop.counter}}", class:"{% if forloop.first %}active{% endif %}"}
-                              {{forloop.counter}}
+                      {% for word in trending_words|slice:"5"%}{{ word.strip }}{% if not forloop.last %}, {% endif %}{% endfor %}
 
-                        .carousel-inner
-                          - for response in f_responses
-                            .item{ class:"{% if forloop.first %}active{% endif %}"}
-                              {{ response.message }}
+                  - with f_responses=latest_poll.get_featured_responses|slice:":4"
+                    - if f_responses
+                      .hr-header.primary-color
+                        - trans "FEATURED RESPONSES"
+                      .stats
+                        #current-poll-featured-response-carousel.carousel.slide{data-ride:"carousel"}
+                          %ol.carousel-indicators
+                            - for response in f_responses
+                              %li{data-target:"#current-poll-featured-response-carousel", data-slide-to:"{{forloop.counter}}", class:"{% if forloop.first %}active{% endif %}"}
+                                {{forloop.counter}}
 
-              %a.hero-link.primary-bg-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
-                - trans "VIEW FULL RESULT"
-                &#8594;
-    
+                          .carousel-inner
+                            - for response in f_responses
+                              .item{ class:"{% if forloop.first %}active{% endif %}"}
+                                {{ response.message }}
+
+                %a.hero-link.primary-bg-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
+                  - trans "VIEW FULL RESULT"
+                  &#8594;
+
   - block banner
     {{ block.super }}
 
@@ -454,6 +469,10 @@
         background-image:url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
       {% endthumbnail %}
       {% endif%}
+    }
+
+    .hero-container.global {
+      background-image:  url('/sitestatic/img/landing_bg.jpg');
     }
 
    .hero-small-background {

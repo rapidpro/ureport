@@ -1,8 +1,12 @@
+from __future__ import absolute_import
+
+from dash.orgs.models import Org
 from django import template
 from django.core.urlresolvers import reverse
 from django.template import TemplateSyntaxError
 from django.template.defaultfilters import stringfilter
 from django.conf import settings
+from ureport.utils import get_linked_orgs
 
 register = template.Library()
 
@@ -168,3 +172,8 @@ class LessBlockNode(template.Node):
 
 # register our tag
 lessblock = register.tag(lessblock)
+
+@register.inclusion_tag('public/org_flags.html')
+def show_org_flags():
+    linked_orgs = get_linked_orgs()
+    return dict(linked_orgs=linked_orgs, break_pos=len(linked_orgs)/2 ,STATIC_URL=settings.STATIC_URL)

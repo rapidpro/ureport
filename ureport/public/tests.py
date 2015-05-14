@@ -10,6 +10,7 @@ from dash.api import API
 from dash.categories.models import Category
 from dash.stories.models import Story, StoryImage
 from dash.orgs.models import Org
+import pycountry
 
 from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
@@ -107,6 +108,24 @@ class PublicTest(DashTest):
         self.assertTrue(has_nigeria)
         self.assertFalse(has_rwanda)
 
+        # if we have www subdomain org we should show its index
+        self.www = self.create_org('www', self.admin)
+        response = self.client.get(chooser_url)
+        self.assertEquals(response.status_code, 301)
+        response = self.client.get(chooser_url, follow=True)
+        self.assertEquals(response.status_code, 200)
+        self.assertFalse('orgs' in response.context)
+        self.assertFalse('welcome-flags' in response.content)
+
+        self.www.set_config('is_global', True)
+
+        response = self.client.get(chooser_url)
+        self.assertEquals(response.status_code, 301)
+        response = self.client.get(chooser_url, follow=True)
+        self.assertEquals(response.status_code, 200)
+        self.assertFalse('orgs' in response.context)
+        self.assertTrue('welcome-flags' in response.content)
+
     @mock.patch('dash.orgs.models.API', MockAPI)
     def test_index(self):
         home_url = reverse('public.index')
@@ -129,6 +148,12 @@ class PublicTest(DashTest):
         self.assertFalse(response.context['other_stories'])
         self.assertFalse(response.context['videos'])
         self.assertFalse(response.context['news'])
+        self.assertFalse('most_active_regions' in response.context)
+
+        self.uganda.set_config('gender_label', 'Gender')
+        response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEquals(response.context['org'], self.uganda)
         self.assertTrue('most_active_regions' in response.context)
 
         poll1 = Poll.objects.create(flow_id=1,
@@ -731,7 +756,12 @@ class PublicTest(DashTest):
 
         output = json.loads(contents)
 
-        self.assertEquals(json.dumps(output), response.content)
+        response_content = json.loads(response.content)
+
+        self.assertEquals(set(output.keys()), set(response_content.keys()))
+        self.assertTrue(response_content['features'][0]["properties"]["id"])
+        self.assertEqual(response_content['features'][0]["properties"]["level"], 0)
+
 
     def test_stories_list(self):
         stories_url = reverse('public.stories')
@@ -970,6 +1000,14 @@ class PublicTest(DashTest):
 
             response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
             mock_results.assert_called_with(poll1_question.ruleset_id, segment=dict(location='State'))
+
+            self.uganda.set_config("is_global", True)
+            self.uganda.set_config("state_label", "Country Code")
+            response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
+            mock_results.assert_called_with(poll1_question.ruleset_id,
+                                            segment=dict(contact_field="Country Code",
+                                                         values=[elt.alpha2 for elt in pycountry.countries.objects]))
+
 
     def test_reporters_results(self):
         reporters_results = reverse('public.contact_field_results')

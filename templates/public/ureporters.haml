@@ -520,3 +520,9 @@
       min-height: 200px;
       padding-top: 50px;
     }
+
+    .scale {
+      {% if org|config:"is_global" %}
+      display: none;
+      {% endif %}
+    }

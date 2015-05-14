@@ -1,4 +1,7 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponsePermanentRedirect
+from django.shortcuts import redirect
+from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from smartmin.views import *
@@ -15,29 +18,11 @@ from ureport.news.models import Video, NewsItem
 import math
 import pycountry
 from datetime import timedelta, datetime
+from ureport.utils import get_linked_orgs
 
 
-class Chooser(SmartTemplateView):
-    template_name = 'public/org_chooser.haml'
-    permission = False
-
-    def get_context_data(self):
-        all_orgs = Org.objects.filter(is_active=True).order_by('name')
-
-        linked_sites = list(getattr(settings, 'PREVIOUS_ORG_SITES', []))
-
-        # populate a ureport site for each org so we can link off to them
-        for org in all_orgs:
-            host = settings.SITE_HOST_PATTERN % org.subdomain
-            org.host = host
-            if org.get_config('is_on_landing_page'):
-                flag = Image.objects.filter(org=org, is_active=True, image_type='F').first()
-                if flag:
-                    linked_sites.append(dict(name=org.name, host=host, flag=flag.image.url, is_static=False))
-
-        linked_sites_sorted = sorted(linked_sites, key=lambda k: k['name'])
-        return dict(orgs=linked_sites_sorted)
-
+def chooser(request):
+    return redirect(settings.SITE_HOST_PATTERN % 'www')
 
 class IndexView(SmartTemplateView):
     template_name = 'public/index.html'
@@ -67,9 +52,21 @@ class IndexView(SmartTemplateView):
         news = NewsItem.objects.filter(is_active=True, org=org).order_by('-created_on')
         context['news'] = news.count() > 0
 
-        context['most_active_regions'] = org.get_most_active_regions()
+        # we use gender label to estimate the most active region
+        if org.get_config('gender_label'):
+            context['most_active_regions'] = org.get_most_active_regions()
 
         return context
+
+class Chooser(IndexView):
+    def pre_process(self, request, *args, **kwargs):
+        if not self.request.org:
+            org = Org.objects.filter(subdomain='www', is_active=True).first()
+            if not org:
+                linked_sites = get_linked_orgs()
+                return TemplateResponse(request, settings.SITE_CHOOSER_TEMPLATE, dict(orgs=linked_sites))
+            else:
+                return HttpResponsePermanentRedirect(settings.SITE_HOST_PATTERN % org.subdomain)
 
 class NewsView(SmartTemplateView):
 
@@ -175,7 +172,29 @@ class PollQuestionResultsView(SmartReadView):
         if segment:
             segment = json.loads(segment)
 
-        return HttpResponse(json.dumps(self.object.get_results(segment=segment)))
+            if self.object.poll.org.get_config('is_global'):
+                if "location" in segment:
+                    del segment["location"]
+                    segment["contact_field"] = self.object.poll.org.get_config('state_label')
+                    segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+
+        results = self.object.get_results(segment=segment)
+
+        # for the global page clean the data translating country code to country name
+        if self.object.poll.org.get_config('is_global') and results:
+            for elt in results:
+                country_code = elt['label']
+                elt['boundary'] = country_code
+                country_name = ""
+                try:
+                    country = pycountry.countries.get(alpha2=country_code)
+                    if country:
+                        country_name = country.name
+                except KeyError:
+                    country_name = country_code
+                elt['label'] = country_name
+
+        return HttpResponse(json.dumps(results))
 
 class BoundaryView(SmartTemplateView):
 
@@ -189,6 +208,11 @@ class BoundaryView(SmartTemplateView):
             handle.close()
 
             boundaries = json.loads(contents)
+
+            for elt in boundaries['features']:
+                elt['properties']['id'] = elt['properties']["hc-a2"]
+                elt['properties']['level'] = 0
+
         else:
             state_id = self.kwargs.get('osm_id', None)
 
@@ -213,10 +237,30 @@ class ReportersResultsView(SmartReadView):
         if segment:
             segment = json.loads(segment)
 
+            if self.object.get_config('is_global'):
+                if "location" in segment:
+                    del segment["location"]
+                    segment["contact_field"] = self.object.get_config('state_label')
+                    segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+
         contact_field = self.request.GET.get('contact_field', None)
         if self.get_object() and contact_field:
             api_data = self.get_object().get_contact_field_results(contact_field, segment)
             output_data = self.get_object().organize_categories_data(contact_field, api_data)
+
+            # for the global page clean the data translating country code to country name
+            if self.object.get_config('is_global') and output_data:
+                for elt in output_data:
+                    country_code = elt['label']
+                    elt['boundary'] = country_code
+                    country_name = ""
+                    try:
+                        country = pycountry.countries.get(alpha2=country_code)
+                        if country:
+                            country_name = country.name
+                    except KeyError:
+                        country_name = country_code
+                    elt['label'] = country_name
 
         return HttpResponse(json.dumps(output_data))
 

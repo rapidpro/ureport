@@ -16,7 +16,7 @@ initMap = (id, geojson, question) ->
   otherCategory = null
   displayOthers = false
 
-  mainLabelName = "All States"
+  mainLabelName = "All"
 
   colors = ['rgb(165,0,38)','rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,139)','rgb(255,255,191)','rgb(217,239,139)','rgb(166,217,106)','rgb(102,189,99)','rgb(26,152,80)','rgb(0,104,55)']
 
@@ -24,7 +24,7 @@ initMap = (id, geojson, question) ->
 
   visibleStyle = (feature) ->
     return {
-      weight: 2
+      weight: 1
       opacity: 1
       color: 'white'
       fillOpacity: 1
@@ -83,7 +83,7 @@ initMap = (id, geojson, question) ->
         return colors[i]
 
   HIGHLIGHT_STYLE =
-    weight: 4
+    weight: 3
     fillOpacity: 1
 
   highlightFeature = (e) ->
@@ -103,7 +103,7 @@ initMap = (id, geojson, question) ->
 
     states.setStyle(visibleStyle)
     map.addLayer(states)
-    map.fitBounds(states.getBounds(), {paddingTopLeft: [200, 0]})
+    map.fitBounds(states.getBounds(), {step: .25})
 
     overallResults = countryResults
     info.update()
@@ -114,14 +114,14 @@ initMap = (id, geojson, question) ->
 
   clickFeature = (e) ->
     if (e.target.feature.properties.level == 1)
-      map.fitBounds(e.target.getBounds(), {paddingTopLeft: [200, 0]})
+      map.fitBounds(e.target.getBounds(), {step: .25})
       mainLabelName = e.target.feature.properties.name + " (State)"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
     else
       resetBoundaries()
       scale.update()
-      mainLabelName = "All States"
+      mainLabelName = "All"
 
   loadBoundary = (boundary, target) ->
     boundaryId = if boundary then boundary.id else null
@@ -221,8 +221,13 @@ initMap = (id, geojson, question) ->
       $.ajax({url:boundaryUrl, dataType: "json"}).done (data) ->
         for feature in data.features
           result = boundaryResults[feature.properties.id]
-          feature.properties.scores = result.percentage
-          feature.properties.color = calculateColor(result.percentage)
+          if result
+            feature.properties.scores = result.percentage
+            feature.properties.color = calculateColor(result.percentage)
+          else
+            feature.properties.scores = 0
+            feature.properties.color = calculateColor(0)
+
           feature.properties.borderColor = 'white'
 
         boundaries = L.geoJson(data, { style: visibleStyle, onEachFeature: onEachFeature })
@@ -236,10 +241,10 @@ initMap = (id, geojson, question) ->
           stateResults = boundaryResults
 
         $("#" + id + "-placeholder").hide()
-        map.fitBounds(boundaries.getBounds(), {paddingTopLeft: [200, 0]})
+        map.fitBounds(boundaries.getBounds(), {step: .25})
 
         map.on 'resize', (e) ->
-          map.fitBounds(boundaries.getBounds())
+          map.fitBounds(boundaries.getBounds(), {step: .25})
 
 
   onEachFeature = (feature, layer) ->

@@ -68,7 +68,7 @@ SITE_HOST_PATTERN = 'http://%s.ureport.staging.nyaruka.com'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ureport',
+        'NAME': 'ureport_staging',
         'USER': 'ureport',
         'PASSWORD': 'nyarukaglue',
         'HOST': 'localhost',
