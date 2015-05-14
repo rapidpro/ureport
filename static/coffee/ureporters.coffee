@@ -242,6 +242,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
         result =
           set:0
           unset:0
+          percentage:0
 
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
