@@ -24,7 +24,7 @@ initMap = (id, geojson, question) ->
 
   visibleStyle = (feature) ->
     return {
-      weight: 2
+      weight: 1
       opacity: 1
       color: 'white'
       fillOpacity: 1
@@ -83,7 +83,7 @@ initMap = (id, geojson, question) ->
         return colors[i]
 
   HIGHLIGHT_STYLE =
-    weight: 4
+    weight: 3
     fillOpacity: 1
 
   highlightFeature = (e) ->
@@ -103,7 +103,7 @@ initMap = (id, geojson, question) ->
 
     states.setStyle(visibleStyle)
     map.addLayer(states)
-    map.fitBounds(states.getBounds(), {paddingTopLeft: [200, 0]})
+    map.fitBounds(states.getBounds(), {step: .25})
 
     overallResults = countryResults
     info.update()
@@ -114,7 +114,7 @@ initMap = (id, geojson, question) ->
 
   clickFeature = (e) ->
     if (e.target.feature.properties.level == 1)
-      map.fitBounds(e.target.getBounds(), {paddingTopLeft: [200, 0]})
+      map.fitBounds(e.target.getBounds(), {step: .25})
       mainLabelName = e.target.feature.properties.name + " (State)"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
@@ -227,7 +227,6 @@ initMap = (id, geojson, question) ->
           else
             feature.properties.scores = 0
             feature.properties.color = calculateColor(0)
-            console.log(feature)
 
           feature.properties.borderColor = 'white'
 
@@ -242,10 +241,10 @@ initMap = (id, geojson, question) ->
           stateResults = boundaryResults
 
         $("#" + id + "-placeholder").hide()
-        map.fitBounds(boundaries.getBounds(), {paddingTopLeft: [200, 0]})
+        map.fitBounds(boundaries.getBounds(), {step: .25})
 
         map.on 'resize', (e) ->
-          map.fitBounds(boundaries.getBounds())
+          map.fitBounds(boundaries.getBounds(), {step: .25})
 
 
   onEachFeature = (feature, layer) ->
