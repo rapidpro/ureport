@@ -181,7 +181,13 @@ class PollQuestionResultsView(SmartReadView):
         results = self.object.get_results(segment=segment)
         if self.object.poll.org.get_config('is_global') and results:
             for elt in results:
-                elt['boundary'] = elt['label']
+                country_code = elt['label']
+                elt['boundary'] = country_code
+                country_name = ""
+                country = pycountry.countries.get(alpha2=country_code)
+                if country:
+                    country_name = country.name
+                elt['label'] = country_name
 
         return HttpResponse(json.dumps(results))
 
@@ -239,7 +245,13 @@ class ReportersResultsView(SmartReadView):
 
             if self.object.get_config('is_global') and output_data:
                 for elt in output_data:
-                    elt['boundary'] = elt['label']
+                    country_code = elt['label']
+                    elt['boundary'] = country_code
+                    country_name = ""
+                    country = pycountry.countries.get(alpha2=country_code)
+                    if country:
+                        country_name = country.name
+                    elt['label'] = country_name
 
         return HttpResponse(json.dumps(output_data))
 
