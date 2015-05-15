@@ -1016,7 +1016,7 @@ class PublicTest(DashTest):
             self.uganda.set_config("is_global", True)
             self.uganda.set_config("state_label", "Country Code")
             response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
-            mock_results.assert_called_with(poll1_question.ruleset_id,
+            mock_results.assert_called_with(poll1_question.ruleset_uuid,
                                             segment=dict(contact_field="Country Code",
                                                          values=[elt.alpha2 for elt in pycountry.countries.objects]))
 
