@@ -3,60 +3,61 @@
 -load compress thumbnail humanize ureport i18n
 
 - block hero
-  .hero-container
-    .hero-dark-container
-    .poll-hero
-      .container
-        .hero-small-background
-        .row
-          .col-sm-12
-            .hero-title.hero-top-title.primary-bg-color
-              - if tab == 'list'
-                - trans "CURRENT POLL IN"
-              {{ latest_poll.category|upper }}
+  - if latest_poll
+    .hero-container
+      .hero-dark-container
+      .poll-hero
+        .container
+          .hero-small-background
+          .row
+            .col-sm-12
+              .hero-title.hero-top-title.primary-bg-color
+                - if tab == 'list'
+                  - trans "CURRENT POLL IN"
+                {{ latest_poll.category|upper }}
 
-        .row
-          .col-sm-6
-            .hero-description.poll-hero-title
-              {{ latest_poll.title|upper }}
-            .hero-description.poll-hero-questions
-              {% blocktrans count questions=latest_poll.questions.count %}
-                {{ questions }} QUESTION POLLED ON THIS TOPIC
-              {% plural %}
-                {{ questions }} QUESTIONS POLLED ON THIS TOPIC
-              {% endblocktrans %}
+          .row
+            .col-sm-6
+              .hero-description.poll-hero-title
+                {{ latest_poll.title|upper }}
+              .hero-description.poll-hero-questions
+                {% blocktrans count questions=latest_poll.questions.count %}
+                  {{ questions }} QUESTION POLLED ON THIS TOPIC
+                {% plural %}
+                  {{ questions }} QUESTIONS POLLED ON THIS TOPIC
+                {% endblocktrans %}
 
-              .poll-hero-circle-outer
-              .poll-hero-circle-inner.primary-border-color
+                .poll-hero-circle-outer
+                .poll-hero-circle-inner.primary-border-color
 
-          .col-sm-6.left-col-border{style:"border-color:#FFF"}
-            .hero-description
-              {{ latest_poll.response_percentage }}%
-              %span
-                - trans "RESPONSE RATE"
-            .hero-description
-              {{ latest_poll.completed_runs|intcomma }}
-              %span
-                - trans "RESPONDED OUT OF"
-              {{ latest_poll.runs|intcomma }}
-              %span
-                - trans "POLLED"
+            .col-sm-6.left-col-border{style:"border-color:#FFF"}
+              .hero-description
+                {{ latest_poll.response_percentage }}%
+                %span
+                  - trans "RESPONSE RATE"
+              .hero-description
+                {{ latest_poll.completed_runs|intcomma }}
+                %span
+                  - trans "RESPONDED OUT OF"
+                {{ latest_poll.runs|intcomma }}
+                %span
+                  - trans "POLLED"
 
-        .latest-poll-questions.hide-on-small
-          - with latest_poll.get_questions as questions
-            .row-no-padding
-              - for question in questions
-                {% if forloop.counter0 == 4 %}</div><div class="row-no-padding">{% endif %}
-                .col-sm-3
-                  .top-poll-question
-                    {% if forloop.counter0 <= 3 %}
-                    .question-hline{ class: "{% if forloop.first %}hline-first{% endif %} {% if forloop.counter0 == 3 or forloop.last %}hline-last{% endif %}" }
-                    .question-vline{ class: "{% if forloop.last or forloop.counter0 == 3 %}vline-last{% endif %}" }
-                    {% endif %}
-                    .question-date.primary-bg-color{ style: "{% if forloop.counter0 > 3 %}margin-top: 20px{% endif %}" }
-                      {{ question.created_on|date:"M j. Y" }}
-                    .question-title
-                      {{ question.title }}
+          .latest-poll-questions.hide-on-small
+            - with latest_poll.get_questions as questions
+              .row-no-padding
+                - for question in questions
+                  {% if forloop.counter0 == 4 %}</div><div class="row-no-padding">{% endif %}
+                  .col-sm-3
+                    .top-poll-question
+                      {% if forloop.counter0 <= 3 %}
+                      .question-hline{ class: "{% if forloop.first %}hline-first{% endif %} {% if forloop.counter0 == 3 or forloop.last %}hline-last{% endif %}" }
+                      .question-vline{ class: "{% if forloop.last or forloop.counter0 == 3 %}vline-last{% endif %}" }
+                      {% endif %}
+                      .question-date.primary-bg-color{ style: "{% if forloop.counter0 > 3 %}margin-top: 20px{% endif %}" }
+                        {{ question.created_on|date:"M j. Y" }}
+                      .question-title
+                        {{ question.title }}
 
   - block banner
     {{ block.super }}
@@ -256,6 +257,12 @@
     .poll-word-cloud {
       width: 100%;
       min-height: 750px;
+    }
+
+    .scale {
+      {% if org|config:"is_global" %}
+      display: none;
+      {% endif %}
     }
 
 -block extra-script

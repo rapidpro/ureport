@@ -24,19 +24,10 @@
       background-image: url('/sitestatic/img/landing_bg.jpg');
       background-size: cover;
     }
-
     .welcome-container {
       width: 100%;
       padding: 200px 15% 0px 15%;
       position: relative;
-    }
-
-    .welcome-text {
-      color: #fff;
-      padding: 0px 5% 70px 5%;
-      font-size: 1.2em;
-      line-height: 150%;
-      text-align: center;
     }
 
     .welcome-logo {
@@ -47,17 +38,6 @@
       background-image: url('/sitestatic/img/landing_logo.png');
     }
 
-    .welcome-flags {
-      text-align: center;
-    }
-
-    a.flag {
-      display: inline-block;
-      width: 80px;
-      height: 100px;
-      vertical-align: top;
-    }
-
   :css
     @font-face {
       font-family: SharpSansBold;
@@ -66,7 +46,6 @@
            url('{{ STATIC_URL }}fonts/SharpSansNo1-Bold.woff') format('woff');
     }
     @font-face {font-family: SharpSansBoldItalic;src: url('{{ STATIC_URL }}fonts/SharpSansNo1-BoldItalic.otf');}
-
   - compress css
     - block styles
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap.css"}

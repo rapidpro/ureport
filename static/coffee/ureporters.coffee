@@ -14,7 +14,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
   topBoundary = null
 
-  mainLabelName = "All States"
+  mainLabelName = "All"
   mainLabelRegistered = 0
 
   colors = colorsList
@@ -26,7 +26,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
   visibleStyle = (feature) ->
     return {
-      weight: 2
+      weight: 1
       opacity: 1
       color: 'white'
       fillOpacity: 1
@@ -35,7 +35,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
   fadeStyle = (feature) ->
     return {
-      weight: 2
+      weight: 1
       opacity: 1
       color: 'white'
       fillOpacity: 0.35
@@ -61,7 +61,6 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
       if topBoundary
         div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i> " + upper + "% of the " + topBoundary.label + " total<br/>"
-      
       i++
 
     return div
@@ -75,7 +74,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
         return colors[i]
 
   HIGHLIGHT_STYLE =
-    weight: 6
+    weight: 3
     fillOpacity: 1
 
   highlightFeature = (e) ->
@@ -95,7 +94,7 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
     states.setStyle(visibleStyle)
     map.addLayer(states)
-    map.fitBounds(states.getBounds(), {paddingTopLeft: [200, 0]})
+    map.fitBounds(states.getBounds(), {step:.25})
 
   resetHighlight = (e) ->
     states.resetStyle(e.target)
@@ -103,14 +102,14 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
   clickFeature = (e) ->
     if (e.target.feature.properties.level == 1)
-      map.fitBounds(e.target.getBounds(), {paddingTopLeft: [200, 0]})
+      map.fitBounds(e.target.getBounds(), {step:.25})
       mainLabelName = e.target.feature.properties.name + " (State)"
       loadBoundary(e.target.feature.properties.id, e.target)
       scale.update(e.target.feature.properties.level)
     else
       resetBoundaries()
       scale.update()
-      mainLabelName = "All States"
+      mainLabelName = "All"
       mainLabelRegistered = totalRegistered
 
   loadBoundary = (boundaryId, target) ->
@@ -158,8 +157,13 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
       $.ajax({url:boundaryUrl, dataType: "json"}).done (data) ->
         for feature in data.features
           result = boundaryResults[feature.properties.id]
-          feature.properties.scores = result.percentage
-          feature.properties.color = calculateColor(result.percentage)
+          if result
+            feature.properties.scores = result.percentage
+            feature.properties.color = calculateColor(result.percentage)
+          else
+            feature.properties.scores = 0
+            feature.properties.color = calculateColor(0)
+
           feature.properties.borderColor = 'white'
 
         boundaries = L.geoJson(data, { style: visibleStyle, onEachFeature: onEachFeature })
@@ -173,10 +177,10 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
           stateResults = boundaryResults
 
         $("#" + id + "-placeholder").hide()
-        map.fitBounds(boundaries.getBounds(), {paddingTopLeft: [200, 0]})
+        map.fitBounds(boundaries.getBounds(), {step:.25})
 
         map.on 'resize', (e) ->
-          map.fitBounds(boundaries.getBounds())
+          map.fitBounds(boundaries.getBounds(), {step:.25})
 
   onEachFeature = (feature, layer) ->
       layer.on
@@ -233,6 +237,12 @@ initMap = (id, geojson, ajaxUrl, colorsList=[]) ->
 
     if props?
       result = boundaryResults[props.id]
+      if not result
+        result =
+          set:0
+          unset:0
+          percentage:0
+
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
 
