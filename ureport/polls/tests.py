@@ -5,6 +5,7 @@ from django.test import TestCase
 # Create your tests here.
 from mock import patch
 from dash.categories.models import Category, CategoryImage
+import pycountry
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
 from ureport.tests import DashTest, MockAPI
 
