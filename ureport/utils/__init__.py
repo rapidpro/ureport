@@ -28,8 +28,7 @@ def get_linked_orgs():
     return linked_sites_sorted
 
 def get_contact_field_results(org, contact_field, segment):
-
-    if org.get_config('is_global'):
+    if segment and org.get_config('is_global'):
         if "location" in segment:
             del segment["location"]
             segment["contact_field"] = org.get_config('state_label')
