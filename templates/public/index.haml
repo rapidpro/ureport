@@ -9,14 +9,10 @@
         .container
           .row
             .col-md-12
+              .global-org-follow-button
+                %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"false", data-size:"large",  data-lang:"en"}
               .welcome-text
-                U-Report is a free youth-facing engagement application led by UNICEF to amplify the voices of youth and empower
-                them to speak out about the issues that matter most to them.
-                %br
-                %br
-                Using this free application, U-Reporters can connect through a range of communication channels to voice their
-                opinions about what is happening in their communities and work together with leaders at the community and
-                national level for positive social change.
+                @UReportGlobal is a web-based tool utilising Twitter so anyone from any community, anywhere in the world, can respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.
               - show_org_flags
   -else
     - if latest_poll
@@ -119,7 +115,11 @@
       .row
         .col-md-4
           .hr-header.primary-color
-            - trans "TOTAL # OF U-REPORTERS"
+            -if org|config:"is_global"
+              @{{ org|config:"twitter_handle" }}
+              -trans "Members"
+            -else
+              - trans "TOTAL # OF U-REPORTERS"
           .reporters-count
             - with reporters=org|reporter_count
               - if reporters
