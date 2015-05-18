@@ -40,11 +40,11 @@ class UtilsTest(DashTest):
         self.org.set_config("state_label", "Province")
 
         with patch('dash.api.API.get_contact_field_results') as mock:
-            mock.return_value = [dict(label='LABEL_1', set=15, unset=5),
-                                 dict(label='LABEL_2', set=100, unset=200),
-                                 dict(label='LABEL_3', set=50, unset=30)]
+            mock.return_value = [dict(label='UG', set=15, unset=5),
+                                 dict(label='RW', set=100, unset=200),
+                                 dict(label='US', set=50, unset=30)]
 
-            self.assertEquals(self.org.get_most_active_regions(), ['LABEL_2', 'LABEL_3', 'LABEL_1'])
+            self.assertEquals(self.org.get_most_active_regions(), ['Rwanda', 'United States', 'Uganda'])
             segment = dict()
             segment["contact_field"] = "Province"
             segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]

@@ -56,6 +56,9 @@ def get_most_active_regions(org):
         active_regions = [k for k, v in tuples]
         cache.set(cache_key, active_regions, 3600 * 24)
 
+    if org.get_config('is_global'):
+        active_regions = [pycountry.countries.get(alpha2=elt).name for elt in active_regions]
+
     return active_regions
 
 
