@@ -2,7 +2,8 @@ from django.core.urlresolvers import reverse
 from django.template import TemplateSyntaxError
 from django.test import TestCase
 
-# Create your tests here.
+import pycountry
+
 from mock import patch
 from dash.categories.models import Category, CategoryImage
 from temba import FlowResult, Flow

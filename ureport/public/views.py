@@ -249,12 +249,6 @@ class ReportersResultsView(SmartReadView):
                 segment['location'] = self.request.org.get_config('district_label')
 
 
-            if self.object.get_config('is_global'):
-                if "location" in segment:
-                    del segment["location"]
-                    segment["contact_field"] = self.object.get_config('state_label')
-                    segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
-
         contact_field = self.request.GET.get('contact_field', None)
         if self.get_object() and contact_field:
             api_data = self.get_object().get_contact_field_results(contact_field, segment)
