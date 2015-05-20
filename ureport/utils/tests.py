@@ -4,6 +4,7 @@ from mock import patch
 import pycountry
 import pytz
 import redis
+from temba import FlowResult
 from ureport.tests import DashTest
 
 
@@ -21,35 +22,59 @@ class UtilsTest(DashTest):
     def test_get_most_active_regions(self):
         self.org.set_config('gender_label', 'Gender')
 
-        with patch('dash.api.API.get_contact_field_results') as mock:
-            mock.return_value = [dict(label='LABEL_1', set=15, unset=5),
-                                 dict(label='LABEL_2', set=100, unset=200),
-                                 dict(label='LABEL_3', set=50, unset=30)]
+        with patch('temba.TembaClient.get_flow_results') as mock:
+            mock.return_value = FlowResult.deserialize_list([dict(label='LABEL_1',
+                                                                  set=15,
+                                                                  unset=5,
+                                                                  categories=[],
+                                                                  open_ended=None),
+                                                             dict(label='LABEL_2',
+                                                                  set=100,
+                                                                  unset=200,
+                                                                  categories=[],
+                                                                  open_ended=None),
+                                                             dict(label='LABEL_3',
+                                                                  set=50,
+                                                                  unset=30,
+                                                                  categories=[],
+                                                                  open_ended=None)])
 
             self.assertEquals(self.org.get_most_active_regions(), ['LABEL_2', 'LABEL_3', 'LABEL_1'])
-            mock.assert_called_once_with('Gender', dict(location='State'))
+            mock.assert_called_once_with(contact_field='Gender', segment=dict(location='State'))
 
-        with patch('dash.api.API.get_contact_field_results') as mock:
+        with patch('temba.TembaClient.get_flow_results') as mock:
             self.clear_cache()
-            mock.return_value = None
+            mock.return_value = None # FlowResult.deserialize_list([])
 
             self.assertEquals(self.org.get_most_active_regions(), [])
-            mock.assert_called_once_with('Gender', dict(location='State'))
+            mock.assert_called_once_with(contact_field='Gender', segment=dict(location='State'))
 
         self.org.set_config("is_global", True)
         self.org.set_config("state_label", "Province")
 
-        with patch('dash.api.API.get_contact_field_results') as mock:
-            mock.return_value = [dict(label='LABEL_1', set=15, unset=5),
-                                 dict(label='LABEL_2', set=100, unset=200),
-                                 dict(label='LABEL_3', set=50, unset=30)]
+        with patch('temba.TembaClient.get_flow_results') as mock:
+            mock.return_value = FlowResult.deserialize_list([dict(label='LABEL_1',
+                                                                  set=15,
+                                                                  unset=5,
+                                                                  categories=[],
+                                                                  open_ended=None),
+                                                             dict(label='LABEL_2',
+                                                                  set=100,
+                                                                  unset=200,
+                                                                  categories=[],
+                                                                  open_ended=None),
+                                                             dict(label='LABEL_3',
+                                                                  set=50,
+                                                                  unset=30,
+                                                                  categories=[],
+                                                                  open_ended=None)])
 
             self.assertEquals(self.org.get_most_active_regions(), ['LABEL_2', 'LABEL_3', 'LABEL_1'])
             segment = dict()
             segment["contact_field"] = "Province"
             segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
 
-            mock.assert_called_once_with('Gender', segment)
+            mock.assert_called_once_with(contact_field='Gender', segment=segment)
 
     def test_organize_categories_data(self):
 

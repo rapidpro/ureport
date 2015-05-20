@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
 from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
+from dash.utils import temba_client_flow_results_serializer
 from django.conf import settings
 
 # cache whether a question is open ended for a month
@@ -266,21 +267,7 @@ class PollQuestion(SmartModel):
 
     def get_results(self, segment=None):
         client_results = self.get_client_results(segment=segment)
-
-        json_results = []
-        for flow_result in client_results:
-            flow_result_json = dict()
-            flow_result_json['set'] = flow_result.set
-            flow_result_json['unset'] = flow_result.unset
-            flow_result_json['open_ended'] = flow_result.open_ended
-            flow_result_json['label'] = flow_result.label
-            flow_result_json['categories'] = [ dict(label=category.label, count=category.count) for category in flow_result.categories]
-            if flow_result.boundary:
-                flow_result_json['boundary'] = flow_result.boundary
-
-            json_results.append(flow_result_json)
-
-        return json_results
+        return temba_client_flow_results_serializer(client_results)
 
     def get_total_summary_data(self):
         if self.get_results():

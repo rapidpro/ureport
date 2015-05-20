@@ -1,6 +1,7 @@
 import math
 from datetime import timedelta, datetime
 from dash.orgs.models import Org
+from dash.utils import temba_client_flow_results_serializer
 from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
@@ -27,6 +28,7 @@ def get_linked_orgs():
 
     return linked_sites_sorted
 
+
 def get_contact_field_results(org, contact_field, segment):
     if segment and org.get_config('is_global'):
         if "location" in segment:
@@ -34,7 +36,11 @@ def get_contact_field_results(org, contact_field, segment):
             segment["contact_field"] = org.get_config('state_label')
             segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
 
-    return org.get_api().get_contact_field_results(contact_field, segment)
+    temba_client = org.get_temba_client()
+    client_results = temba_client.get_flow_results(contact_field=contact_field, segment=segment)
+
+    return temba_client_flow_results_serializer(client_results)
+
 
 def get_most_active_regions(org):
     cache_key = 'most_active_regions:%d' % org.id
