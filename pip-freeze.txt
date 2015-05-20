@@ -6,8 +6,8 @@ celery==3.1.17
 celery-with-redis==3.0
 coverage==3.7.1
 -e git+https://github.com/nyaruka/smartmin.git#egg=smartmin-master
--e git+https://github.com/rapidpro/rapidpro-python@672eb06dfab935a937043e354966269959f725a4#egg=rapidpro-python
--e git+https://github.com/rapidpro/dash.git@0af96a52b706e4f68521b99b20fceb15eafdcffb#egg=dash
+-e git+https://github.com/rapidpro/rapidpro-python@extends-client#egg=rapidpro-python
+-e git+https://github.com/rapidpro/dash.git@use-rapidpro-client#egg=dash
 dj-database-url==0.3.0
 Django==1.7.2
 django-appconf==1.0.1
