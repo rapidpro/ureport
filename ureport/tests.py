@@ -115,33 +115,24 @@ class MockTembaClient(TembaClient):
 
     def get_flow_results(self, ruleset_id=None, contact_field=None, segment=None):
         return FlowResult.deserialize_list([dict(open_ended=False,
-                     set=3462,
-                     unset=3694,
-                     categories=[dict(count=2210,
-                                      label='Yes'
-                                      ),
-                                 dict(count=1252,
-                                      label='No'
-                                      )
-                                 ],
-                     label='All')
-                ])
+                                                 set=3462,
+                                                 unset=3694,
+                                                 categories=[dict(count=2210, label='Yes'),
+                                                             dict(count=1252, label='No')],
+                                                 label='All')])
 
     def get_flows(self, uuids=None, archived=None, labels=None, before=None, after=None, pager=None):
         return Flow.deserialize_list([dict(runs=300,
-                                     completed_runs=120,
-                                     name='Flow 1',
-                                     uuid='uuid-25',
-                                     participants=300,
-                                     labels="",
-                                     archived=False,
-                                     created_on="2015-04-08T12:48:44.320Z",
-                                     rulesets=[
-                                     dict(node='uuid-8435',
-                                     id="8435",
-                                     response_type="C",
-                                     label='Does your community have power')
-                                     ])])
+                                           completed_runs=120,
+                                           name='Flow 1',
+                                           uuid='uuid-25',
+                                           participants=300,
+                                           labels="",
+                                           archived=False,
+                                           created_on="2015-04-08T12:48:44.320Z",
+                                           rulesets=[dict(node='uuid-8435', id="8435", response_type="C",
+                                                          label='Does your community have power')]
+                                           )])
 
     def get_flow(self, uuid):
         return Flow.deserialize(dict(runs=300,
@@ -152,12 +143,9 @@ class MockTembaClient(TembaClient):
                                      labels="",
                                      archived=False,
                                      created_on="2015-04-08T12:48:44.320Z",
-                                     rulesets=[
-                                     dict(node='uuid-8435',
-                                     id="8435",
-                                     response_type="C",
-                                     label='Does your community have power')
-                                     ]))
+                                     rulesets=[dict(node='uuid-8435', id="8435", response_type="C",
+                                                    label='Does your community have power')]
+                                     ))
 
 
 class DashTest(SmartminTest):

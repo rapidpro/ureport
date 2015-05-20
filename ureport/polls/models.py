@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils import cache
+import pycountry
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
@@ -110,16 +111,15 @@ class Poll(SmartModel):
             b_and_w = cache.get('b_and_d:%s' % question.ruleset_uuid, [])
 
             if not b_and_w:
-                temba_client = self.org.get_temba_client()
-                boundary_results = temba_client.get_flow_results(question.ruleset_uuid, segment=dict(location='State'))
+                boundary_results = question.get_results(segment=dict(location='State'))
                 if not boundary_results:
                     return []
 
                 boundary_responses = dict()
                 for boundary in boundary_results:
-                    total = boundary.set + boundary.unset
-                    responded = boundary.set
-                    boundary_responses[boundary.label] = dict(responded=responded, total=total)
+                    total = boundary['set'] + boundary['unset']
+                    responded = boundary['set']
+                    boundary_responses[boundary['label']] = dict(responded=responded, total=total)
 
                 for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:3]:
                     responded = boundary_responses[boundary]
@@ -266,6 +266,19 @@ class PollQuestion(SmartModel):
         return temba_client.get_flow_results(self.ruleset_uuid, segment=segment)
 
     def get_results(self, segment=None):
+        if segment:
+            location = segment.get('location', None)
+            if location == 'State':
+                segment['location'] = self.poll.org.get_config('state_label')
+            elif location == 'District':
+                segment['location'] = self.poll.org.get_config('district_label')
+
+            if self.poll.org.get_config('is_global'):
+                if "location" in segment:
+                    del segment["location"]
+                    segment["contact_field"] = self.poll.org.get_config('state_label')
+                    segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+
         client_results = self.get_client_results(segment=segment)
         return temba_client_flow_results_serializer(client_results)
 
