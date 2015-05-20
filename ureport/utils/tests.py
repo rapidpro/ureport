@@ -21,6 +21,7 @@ class UtilsTest(DashTest):
 
     def test_get_most_active_regions(self):
         self.org.set_config('gender_label', 'Gender')
+        self.org.set_config("state_label", "Province")
 
         with patch('temba.TembaClient.get_flow_results') as mock:
             mock.return_value = FlowResult.deserialize_list([dict(label='LABEL_1',
@@ -40,17 +41,16 @@ class UtilsTest(DashTest):
                                                                   open_ended=None)])
 
             self.assertEquals(self.org.get_most_active_regions(), ['LABEL_2', 'LABEL_3', 'LABEL_1'])
-            mock.assert_called_once_with(contact_field='Gender', segment=dict(location='State'))
+            mock.assert_called_once_with(contact_field='Gender', segment=dict(location='Province'))
 
         with patch('temba.TembaClient.get_flow_results') as mock:
             self.clear_cache()
             mock.return_value = None # FlowResult.deserialize_list([])
 
             self.assertEquals(self.org.get_most_active_regions(), [])
-            mock.assert_called_once_with(contact_field='Gender', segment=dict(location='State'))
+            mock.assert_called_once_with(contact_field='Gender', segment=dict(location='Province'))
 
         self.org.set_config("is_global", True)
-        self.org.set_config("state_label", "Province")
 
         with patch('temba.TembaClient.get_flow_results') as mock:
             mock.return_value = FlowResult.deserialize_list([dict(label='LABEL_1',

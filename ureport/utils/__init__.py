@@ -30,11 +30,18 @@ def get_linked_orgs():
 
 
 def get_contact_field_results(org, contact_field, segment):
-    if segment and org.get_config('is_global'):
-        if "location" in segment:
-            del segment["location"]
-            segment["contact_field"] = org.get_config('state_label')
-            segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+    if segment:
+        location = segment.get('location', None)
+        if location == 'State':
+            segment['location'] = org.get_config('state_label')
+        elif location == 'District':
+            segment['location'] = org.get_config('district_label')
+
+        if org.get_config('is_global'):
+            if "location" in segment:
+                del segment["location"]
+                segment["contact_field"] = org.get_config('state_label')
+                segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
 
     temba_client = org.get_temba_client()
     client_results = temba_client.get_flow_results(contact_field=contact_field, segment=segment)
