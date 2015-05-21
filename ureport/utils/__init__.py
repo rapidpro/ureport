@@ -158,11 +158,30 @@ def fetch_org_polls_results(org, polls, r=None):
                 poll.fetch_poll_results(states_boundaries_id)
 
 
+def fetch_flows(org):
+    temba_client = org.get_temba_client()
+    flows = temba_client.get_flows()
+
+    for flow in flows:
+        if flow.rulesets:
+            flow_json = dict()
+            flow_json['uuid'] = flow.uuid
+            flow_json['name'] = flow.name
+            flow_json['participants'] = flow.participants
+            flow_json['runs'] = flow.runs
+            flow_json['completed_runs'] = flow.completed_runs
+            flow_json['rulesets'] = [
+                dict(uuid=elt.uuid, label=elt.label, response_type=elt.response_type) for elt in flow.rulesets]
+
+            key = "org:%d:flow:%s" % (org.pk, flow.uuid)
+            cache.set(key, flow_json, 900)
+
+
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
 Org.fetch_org_polls_results = fetch_org_polls_results
-
+Org.fetch_flows = fetch_flows
 
 def substitute_segment(org, segment):
     if not segment:

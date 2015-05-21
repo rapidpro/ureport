@@ -17,5 +17,10 @@ def update_brick_polls_data_cache():
 
         org.fetch_org_polls_results(brick_polls, r)
 
+def update_poll_flows():
+    r = get_redis_connection()
+    for org in Org.objects.filter(is_active=True):
+        org.fetch_flows()
+
 
 

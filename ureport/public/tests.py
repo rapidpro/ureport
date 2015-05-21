@@ -993,31 +993,30 @@ class PublicTest(DashTest):
 
         self.uganda.set_config('state_label', "State")
 
-        with mock.patch('temba.TembaClient.get_flow_results') as mock_results:
-            mock_results.return_value = FlowResult.deserialize_list([dict(open_ended=False,
+        with mock.patch('ureport.polls.models.PollQuestion.get_results') as mock_results:
+            mock_results.return_value = [dict(open_ended=False,
                                               set=3462,
                                               unset=3694,
                                               categories=[dict(count=2210, label='Yes'), dict(count=1252, label='No')],
-                                              label='All')])
+                                              label='All')]
 
             response = self.client.get(nigeria_results_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 404)
 
             response = self.client.get(uganda_results_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
-            mock_results.assert_called_with(poll1_question.ruleset_uuid, segment=None)
+            mock_results.assert_called_with(segment=None)
 
             response = self.client.get(
                 uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
                 SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
-            mock_results.assert_called_with(poll1_question.ruleset_uuid, segment=dict(location='State'))
+            mock_results.assert_called_with(segment=dict(location='State'))
 
             self.uganda.set_config("is_global", True)
             self.uganda.set_config("state_label", "Country Code")
             response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
-            mock_results.assert_called_with(poll1_question.ruleset_uuid,
-                                            segment=dict(contact_field="Country Code",
+            mock_results.assert_called_with(segment=dict(contact_field="Country Code",
                                                          values=[elt.alpha2 for elt in pycountry.countries.objects]))
 
     def test_reporters_results(self):
