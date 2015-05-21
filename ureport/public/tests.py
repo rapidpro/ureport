@@ -702,7 +702,7 @@ class PublicTest(DashTest):
         country_boundary_url = reverse('public.boundaries')
         state_boundary_url = reverse('public.boundaries', args=['R123'])
 
-        with mock.patch("ureport.public.views.get_country_geojson") as mock_get_country_geojson:
+        with mock.patch("dash.orgs.models.Org.get_country_geojson") as mock_get_country_geojson:
             mock_get_country_geojson.return_value = dict(
                    type="FeatureCollection",
                    features=[
@@ -738,7 +738,7 @@ class PublicTest(DashTest):
 
             self.assertEquals(json.dumps(output), response.content)
 
-        with mock.patch("ureport.public.views.get_state_geojson") as mock_get_state_geojson:
+        with mock.patch("dash.orgs.models.Org.get_state_geojson") as mock_get_state_geojson:
             mock_get_state_geojson.return_value = dict(type="FeatureCollection",
                     features=[dict(type='Feature',
                                    properties=dict(id="R3713502",

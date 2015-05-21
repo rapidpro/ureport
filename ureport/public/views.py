@@ -1,4 +1,3 @@
-from dash.utils import get_country_geojson, get_state_geojson
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import redirect
@@ -223,9 +222,9 @@ class BoundaryView(SmartTemplateView):
             state_id = self.kwargs.get('osm_id', None)
 
             if state_id:
-                boundaries = get_state_geojson(org, state_id)
+                boundaries = org.get_state_geojson(state_id)
             else:
-                boundaries = get_country_geojson(org)
+                boundaries = org.get_country_geojson()
 
         return HttpResponse(json.dumps(boundaries))
 

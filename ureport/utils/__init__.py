@@ -5,6 +5,7 @@ from dash.utils import temba_client_flow_results_serializer
 from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
+from django_redis import get_redis_connection
 import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
@@ -140,6 +141,46 @@ def organize_categories_data(org, contact_field, api_data):
 
     return api_data
 
+LOCK_POLL_RESULTS_KEY = 'lock:poll:%d:results'
+LOCK_POLL_RESULTS_TIMEOUT = 60 * 15
+
+
+def fetch_org_polls_results(org, polls, r=None):
+    if not r:
+        r = get_redis_connection()
+
+    states_boundaries_id = org.get_top_level_geojson_ids()
+
+    for poll in polls:
+        key = LOCK_POLL_RESULTS_KEY % poll.pk
+        if not r.get(key):
+            with r.lock(key, timeout=LOCK_POLL_RESULTS_TIMEOUT):
+                poll.fetch_poll_results(states_boundaries_id)
+
+
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
+Org.fetch_org_polls_results = fetch_org_polls_results
+
+
+def substitute_segment(org, segment):
+    if not segment:
+        return segment
+
+    location = segment.get('location', None)
+    if location == 'State':
+        segment['location'] = org.get_config('state_label')
+    elif location == 'District':
+        segment['location'] = org.get_config('district_label')
+
+    if org.get_config('is_global'):
+        if "location" in segment:
+            del segment["location"]
+            del segment["parent"]
+            segment["contact_field"] = org.get_config('state_label')
+            segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+
+    return segment
+
+

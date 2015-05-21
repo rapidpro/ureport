@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
+import json
 from django.db import models
-from django.utils import cache
-import pycountry
+from django.utils.text import slugify
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
@@ -9,12 +9,18 @@ from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
 from dash.utils import temba_client_flow_results_serializer
 from django.conf import settings
+from ureport.utils import substitute_segment
+
 
 # cache whether a question is open ended for a month
 OPEN_ENDED_CACHE_TIME = getattr(settings, 'OPEN_ENDED_CACHE_TIME', 60 * 60 * 24 * 30)
 
 # cache our featured polls for a month (this will be invalidated by questions changing)
 BRICK_POLLS_CACHE_TIME = getattr(settings, 'BRICK_POLLS_CACHE_TIME', 60 * 60 * 30)
+
+CACHE_POLL_RESULTS_KEY = 'poll:%d:results:%d'
+
+CACHE_POLL_RESULTS_TIMEOUT = 60 * 60 * 24
 
 class PollCategory(SmartModel):
     """
@@ -48,6 +54,13 @@ class Poll(SmartModel):
                                        help_text=_("The splash category image to display for the poll (optional)"))
     org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
+
+    def fetch_poll_results(self, country_state_boundary_ids):
+        for question in self.questions.all():
+            question.fetch_results()
+            question.fetch_results(dict(location='State'))
+            for state_id in country_state_boundary_ids:
+                question.fetch_results(dict(location='District', parent=state_id))
 
     @classmethod
     def get_main_poll(cls, org):
@@ -148,7 +161,6 @@ class Poll(SmartModel):
             return int(round((flow.completed_runs * 100.0) / flow.runs))
         else:
             return '--'
-
 
     def get_trending_words(self):
         key = 'trending_words:%d' % self.pk
@@ -261,30 +273,32 @@ class PollQuestion(SmartModel):
                              help_text=_("The title of this question"))
     ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
 
-    def get_client_results(self, segment=None):
+    def fetch_results(self, segment=None):
+        key = CACHE_POLL_RESULTS_KEY % (self.poll.pk, self.pk)
+        if segment:
+            segment = substitute_segment(self.poll.org, segment)
+            key += ":" + slugify(unicode(json.dumps(segment)))
+
         temba_client = self.poll.org.get_temba_client()
-        return temba_client.get_flow_results(self.ruleset_uuid, segment=segment)
+        client_results = temba_client.get_flow_results(self.ruleset_uuid, segment=segment)
+        results = temba_client_flow_results_serializer(client_results)
+
+        cache.set(key, results, CACHE_POLL_RESULTS_TIMEOUT)
 
     def get_results(self, segment=None):
+        key = CACHE_POLL_RESULTS_KEY % (self.poll.pk, self.pk)
         if segment:
-            location = segment.get('location', None)
-            if location == 'State':
-                segment['location'] = self.poll.org.get_config('state_label')
-            elif location == 'District':
-                segment['location'] = self.poll.org.get_config('district_label')
+            segment = substitute_segment(self.poll.org, segment)
+            key += ":" + slugify(unicode(json.dumps(segment)))
 
-            if self.poll.org.get_config('is_global'):
-                if "location" in segment:
-                    del segment["location"]
-                    segment["contact_field"] = self.poll.org.get_config('state_label')
-                    segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
-
-        client_results = self.get_client_results(segment=segment)
-        return temba_client_flow_results_serializer(client_results)
+        cached_value = cache.get(key)
+        if cached_value:
+            return cached_value
 
     def get_total_summary_data(self):
         if self.get_results():
             return self.get_results()[0]
+        return dict()
 
     def is_open_ended(self):
         cache_key = 'open_ended:%d' % self.id
