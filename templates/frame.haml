@@ -1,5 +1,5 @@
 <!doctype html>
-- load compress thumbnail ureport smartmin i18n
+- load compress dashblocks thumbnail ureport smartmin i18n
 
 %head
   %meta{ charset:"utf-8"}
@@ -257,6 +257,10 @@
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=missions"}
                           - trans "Missions Content"
 
+                      %li
+                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=terms_conditions"}
+                          - trans "Terms & Conditions"
+
                       %li.divider
                       %li
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=ureporters"}
@@ -271,6 +275,10 @@
                         %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=join_steps"}
                           - trans "Join Steps Content"
 
+                      %li.divider
+                      %li
+                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=additional_menu"}
+                          - trans "Additional Menu"
 
             %ul.nav.navbar-nav.navbar-right
               - block login
@@ -299,6 +307,11 @@
           - block navigation
             %nav#ureport-public-navbar-collapse.collapse.navbar-collapse.navbar-right.public-nav{role:"navigation"}
               %ul.nav.navbar-nav.public-nav-ul
+                - load_qbs request.org 'additional_menu'
+                - for d_block in additional_menu|slice:":1"
+                  %li.level1{ class:"{% active request 'additional_menu'%}"}
+                    %a.primary-color{href:"{% url 'public.added' %}"}
+                      {{ d_block.title }}
 
                 %li.level1{ class:"{% active request 'about'%}"}
                   %a.primary-color{href:"{% url 'public.about' %}"}
