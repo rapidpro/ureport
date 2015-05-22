@@ -25,9 +25,21 @@
 
 
 - block content
+  - load_qbs request.org 'terms_conditions'
   - load_qbs request.org 'about'
   - load_qbs request.org 'missions'
   - load_qbs request.org 'contact_us'
+
+  - for d_block in terms_conditions|slice:":1"
+    .row
+      .col-md-8.right-col-border
+        .section
+          %h1.level-1-title
+            {{ d_block.title }}
+            .level-1-title-description.secondary-color
+          .card.card-padding
+            .about-details
+              {{d_block.content|safe}}
 
   - for d_block in about|slice:":1"
     .row

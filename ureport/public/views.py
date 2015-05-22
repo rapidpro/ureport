@@ -95,6 +95,15 @@ class NewsView(SmartTemplateView):
         output_json = dict(news=news, next=next)
         return HttpResponse(json.dumps(output_json))
 
+class AdditionalMenu(SmartTemplateView):
+    template_name = 'public/additional_menu.haml'
+
+    def get_context_data(self, **kwargs):
+        context = super(AdditionalMenu, self).get_context_data(**kwargs)
+        org = self.request.org
+
+        context['org'] = org
+        return context
 
 class AboutView(SmartTemplateView):
     template_name = 'public/about.html'
