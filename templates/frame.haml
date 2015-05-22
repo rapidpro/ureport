@@ -309,7 +309,7 @@
               %ul.nav.navbar-nav.public-nav-ul
                 - load_qbs request.org 'additional_menu'
                 - for d_block in additional_menu|slice:":1"
-                  %li.level1{ class:"{% active request 'additional_menu'%}"}
+                  %li.level1{ class:"{% active request 'added'%}"}
                     %a.primary-color{href:"{% url 'public.added' %}"}
                       {{ d_block.title }}
 
