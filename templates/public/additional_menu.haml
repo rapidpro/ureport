@@ -12,17 +12,13 @@
           .row
             .col-md-7
               .hero-dark-content
-                .hero-title.hero-top-title.primary-bg-color
-                  {{ d_block.title }}
-                .hero-description
-                  {{ d_block.summary }}
 
   - block banner
     {{ block.super }}
 
 - block content
   - load_qbs request.org 'additional_menu'
-  - for d_block in additional_menu|slice:"1:5"
+  - for d_block in additional_menu|slice:":5"
     .section
       %h1.level-1-title
         {{d_block.title}}
