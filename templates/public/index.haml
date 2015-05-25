@@ -8,12 +8,21 @@
       .hero-dark-container
         .container
           .row
-            .col-md-12
+            .col-sm-7
               .global-org-follow-button
                 %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"false", data-size:"large",  data-lang:"en"}
-              .welcome-text
+              .global-welcome-text
                 @UReportGlobal is a web-based tool utilising Twitter so anyone from any community, anywhere in the world, can respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.
-              - show_org_flags
+              -if latest_poll
+                .hero-dark-content
+                  .hero-title.hero-top-title.primary-bg-color
+                    -trans "CURRENT POLL"
+                  .hero-description
+                    {{ latest_poll.title }}
+                %a.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
+                  - trans "VIEW FULL RESULT"
+                  &#8594;
+
   -else
     - if latest_poll
       .hero-container
