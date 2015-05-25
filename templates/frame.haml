@@ -383,12 +383,15 @@
       .container
         %footer
           .row
-            .col-sm-6
-              .terms-privacy
-                %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
-                ©2014 UNICEF
+            -if org|config:"is_global"
+              .col-sm-9
+                - show_org_flags
+            -else
+              .col-sm-6
+                .terms-privacy
+                  %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
 
-            .col-sm-6
+            .{class:'{% if org|config:"is_global" %}col-sm-3{% else %}col-sm-6{% endif %}'}
               .follow-us
                 -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
                   - trans "FOLLOW US ON:"
@@ -407,6 +410,9 @@
                   - if org|config:"youtube_channel_url"
                     %a{href:'{{ org|config:"youtube_channel_url" }}'}
                       %img.footer-social{ src:"{{ STATIC_URL }}img/youtube.png" }
+              -if org|config:"is_global"
+                .footer-global-ureport-logo
+                  %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
 
           - if not request.user.is_authenticated and not is_iorg
             .row

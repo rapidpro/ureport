@@ -76,10 +76,6 @@ class Poll(SmartModel):
 
             brick_polls = []
 
-            # for the global site the main poll should be the first in the brick polls
-            if org.get_config('is_global') and main_poll:
-                brick_polls.append(main_poll)
-
             for poll in polls:
                 if poll.get_first_question:
                     brick_polls.append(poll)
