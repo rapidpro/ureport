@@ -79,7 +79,7 @@
                 .poll-question-title
                   {{ question.title }}
                 .poll-question-response-rate
-                  {% blocktrans responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
+                  {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
                     {{ responded }} responded out of {{ polled }} polled
                   {% endblocktrans %}
                 .poll-question-visualization
