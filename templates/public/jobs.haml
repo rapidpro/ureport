@@ -74,7 +74,7 @@
                             {{ entry.summary|safe }}
                           .rss-entry-link
                             %a{href:"{{ entry.link }}"}
-                              Read more
+                              -trans "Read more"
 
                   %a.social-link.rss-bg-color{href:"{{ source.get_return_page }}"}
                     - trans "VISIT"

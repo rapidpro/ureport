@@ -14,7 +14,8 @@
                   %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"false", data-size:"large",  data-lang:"en"}
                 -else
                   %a.primary-color{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
-                    Follow @{{ org|config:"twitter_handle" }}
+                    -trans "Follow"
+                    @{{ org|config:"twitter_handle" }}
                     &#8594;
 
               .global-welcome-text

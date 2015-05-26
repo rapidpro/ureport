@@ -79,9 +79,9 @@
                 .poll-question-title
                   {{ question.title }}
                 .poll-question-response-rate
-                  {{ question.get_responded|intcomma }}
-                  -trans "responded out of"
-                  {{ question.get_polled|intcomma }} polled
+                  {% blocktrans responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
+                    {{ responded }} responded out of {{ polled }} polled
+                  {% endblocktrans %}
                 .poll-question-visualization
                   .poll-question-tabs-border.primary-border-color{role:"tablist"}
                     .poll-question-tabs.primary-bg-color
