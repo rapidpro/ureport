@@ -8,10 +8,13 @@ class ImageCRUDL(SmartCRUDL):
     actions = ('create', 'update', 'list')
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
-        fields = ('is_active', 'name', 'image_type', 'image')
+
+        def derive_fields(self):
+            if self.request.user.is_superuser:
+                return ('is_active', 'org', 'name', 'image_type', 'image')
+            return ('is_active', 'name', 'image_type', 'image')
 
     class List(OrgPermsMixin, SmartListView):
-        fields = ("name", "image_type")
 
         def derive_fields(self):
             if self.request.user.is_superuser:

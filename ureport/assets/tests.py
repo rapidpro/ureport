@@ -110,6 +110,6 @@ class ImageTest(DashTest):
 
         response = self.client.get(nigeria_bg_update_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], nigeria_bg_update_url)
-        self.assertEquals(len(response.context['form'].fields), 5)
+        self.assertEquals(len(response.context['form'].fields), 6)
 
         self.clear_uploads()
