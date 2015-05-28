@@ -69,7 +69,7 @@ class UtilsTest(DashTest):
                                                                   categories=[],
                                                                   open_ended=None)])
 
-            self.assertEquals(self.org.get_most_active_regions(), ['LABEL_2', 'LABEL_3', 'LABEL_1'])
+            self.assertEquals(self.org.get_most_active_regions(), ['Rwanda', 'United States', 'Uganda'])
             segment = dict()
             segment["contact_field"] = "Province"
             segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]

@@ -174,6 +174,7 @@ class LessBlockNode(template.Node):
 lessblock = register.tag(lessblock)
 
 @register.inclusion_tag('public/org_flags.html')
-def show_org_flags():
+def show_org_flags(is_iorg):
     linked_orgs = get_linked_orgs()
-    return dict(linked_orgs=linked_orgs, break_pos=len(linked_orgs)/2 ,STATIC_URL=settings.STATIC_URL)
+    return dict(linked_orgs=linked_orgs, break_pos=min(len(linked_orgs)/2, 9) ,STATIC_URL=settings.STATIC_URL,
+                is_iorg=is_iorg)
