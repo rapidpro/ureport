@@ -32,15 +32,8 @@ def reporter_count(org):
     if not org:
         return None
 
-    reporter_group = org.get_config('reporter_group')
-
-    if reporter_group:
-        key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
-        group = cache.get(key, None)
-        if group:
-            return group.size
-
-    return 0
+    group = org.get_reporter_group()
+    return group.get('size', 0)
 
 @register.filter
 def age_stats(org):

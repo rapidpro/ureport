@@ -427,10 +427,23 @@ INTERNAL_IPS = ('127.0.0.1',)
 from datetime import timedelta
 
 CELERYBEAT_SCHEDULE = {
-    "runs-every-hour": {
-        "task": "reminders.tasks.check_reminders",
+    "update_flows_and_reporters": {
+        "task": "polls.update_flows_and_reporters",
+        "schedule": timedelta(minutes=10),
+    },
+    "update_main_poll": {
+        "task": "polls.update_main_poll",
+        "schedule": timedelta(minutes=5),
+    },
+    "update_brick_polls": {
+        "task": "polls.update_brick_polls",
         "schedule": timedelta(hours=1),
     },
+    "update_other_polls": {
+        "task": "polls.update_other_polls",
+        "schedule": timedelta(hours=24),
+    },
+
 }
 
 #-----------------------------------------------------------------------------------

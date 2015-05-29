@@ -10,7 +10,6 @@ from django_redis import get_redis_connection
 import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
-from ureport.polls.models import CACHE_POLL_FLOW_KEY, CACHE_ORG_FLOWS_KEY, CACHE_ORG_REPORTER_GROUP_KEY
 
 
 def get_linked_orgs():
@@ -30,6 +29,26 @@ def get_linked_orgs():
     linked_sites_sorted = sorted(linked_sites, key=lambda k: k['name'])
 
     return linked_sites_sorted
+
+
+def substitute_segment(org, segment):
+    if not segment:
+        return segment
+
+    location = segment.get('location', None)
+    if location == 'State':
+        segment['location'] = org.get_config('state_label')
+    elif location == 'District':
+        segment['location'] = org.get_config('district_label')
+
+    if org.get_config('is_global'):
+        if "location" in segment:
+            del segment["location"]
+            del segment["parent"]
+            segment["contact_field"] = org.get_config('state_label')
+            segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+
+    return segment
 
 
 def get_contact_field_results(org, contact_field, segment):
@@ -164,10 +183,12 @@ def fetch_org_polls_results(org, polls, r=None):
 
 
 def fetch_flows(org):
+    from ureport.polls.models import CACHE_ORG_FLOWS_KEY
+
     temba_client = org.get_temba_client()
     flows = temba_client.get_flows()
 
-    all_flows = []
+    all_flows = dict()
     for flow in flows:
         if flow.rulesets:
             flow_json = dict()
@@ -179,46 +200,48 @@ def fetch_flows(org):
             flow_json['rulesets'] = [
                 dict(uuid=elt.uuid, label=elt.label, response_type=elt.response_type) for elt in flow.rulesets]
 
-            key = CACHE_POLL_FLOW_KEY % (org.pk, flow.uuid)
-            cache.set(key, flow_json, 900)
-            all_flows.append(flow_json)
+            all_flows[flow.uuid] = flow_json
+
     all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
     cache.set(all_flows_key, all_flows, 900)
 
 
+def get_flows(org):
+    from ureport.polls.models import CACHE_ORG_FLOWS_KEY
+    return cache.get(CACHE_ORG_FLOWS_KEY % org.pk, dict())
+
+
 def fetch_reporter_group(org):
+    from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
+
     reporter_group = org.get_config('reporter_group')
     if reporter_group:
         temba_client = org.get_temba_client()
         groups = temba_client.get_groups(name=reporter_group)
 
         key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
-        cache.set(key, groups[0])
+        group = groups[0]
+        group_dict = dict(size=group.size, name=group.name, uuid=group.uuid)
+        cache.set(key, group_dict)
+
+def get_reporter_group(org):
+    from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
+    reporter_group = org.get_config('reporter_group')
+
+    if reporter_group:
+        key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
+        group_dict = cache.get(key, None)
+        if group_dict:
+            return group_dict
+
+    return dict()
+
 
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
 Org.fetch_org_polls_results = fetch_org_polls_results
 Org.fetch_flows = fetch_flows
+Org.get_flows = get_flows
 Org.fetch_reporter_group = fetch_reporter_group
-
-def substitute_segment(org, segment):
-    if not segment:
-        return segment
-
-    location = segment.get('location', None)
-    if location == 'State':
-        segment['location'] = org.get_config('state_label')
-    elif location == 'District':
-        segment['location'] = org.get_config('district_label')
-
-    if org.get_config('is_global'):
-        if "location" in segment:
-            del segment["location"]
-            del segment["parent"]
-            segment["contact_field"] = org.get_config('state_label')
-            segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
-
-    return segment
-
-
+Org.get_reporter_group = get_reporter_group

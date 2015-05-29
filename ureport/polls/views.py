@@ -19,8 +19,8 @@ class PollForm(forms.ModelForm):
         self.fields['category'].queryset = Category.objects.filter(org=self.org)
 
         # find all the flows on this org, create choices for those
-        flows = cache.get(CACHE_ORG_FLOWS_KEY, [])
-        self.fields['flow_uuid'].choices = [(f['uuid'], f['name']) for f in flows]
+        flows = self.org.get_flows()
+        self.fields['flow_uuid'].choices = [(f['uuid'], f['name']) for f in flows.values()]
 
         # only display category images for this org which are active
         self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')

@@ -108,12 +108,26 @@ class Poll(SmartModel):
         cache_key = 'brick_polls:%d' % org.id
         cache.delete(cache_key)
 
+    @classmethod
+    def get_other_polls(cls, org):
+        main_poll = Poll.get_main_poll(org)
+        brick_polls = Poll.get_brick_polls(org)
+
+        exclude_polls = [poll.pk for poll in brick_polls]
+        if main_poll:
+            exclude_polls.append(main_poll.pk)
+
+        other_polls = Poll.objects.filter(org=org, is_active=True,
+                                          category__is_active=True).exclude(pk__in=exclude_polls).order_by('-created_on')
+
+        return other_polls
+
     def get_flow(self):
         """
         Returns the underlying flow for this poll
         """
-        key = CACHE_POLL_FLOW_KEY % (self.org.pk, self.flow_uuid)
-        return cache.get(key, None)
+        flows_dict = self.org.get_flows()
+        return flows_dict.get(self.flow_uuid, None)
 
     def best_and_worst(self):
         b_and_w = []
