@@ -17,7 +17,8 @@ def question_results(question):
 
     try:
         results = question.get_results()
-        return results[0]
+        if results:
+            return results[0]
     except:
         import traceback
         traceback.print_exc()
@@ -78,10 +79,13 @@ def gender_stats(org):
         try:
             # not segmented, so just get the first segment
             gender_data = gender_data[0]
-            male_label = org.get_config('male_label').lower()
-            female_label = org.get_config('female_label').lower()
+            male_label = org.get_config('male_label')
+            female_label = org.get_config('female_label')
 
             if male_label and female_label:
+                male_label = male_label.lower()
+                female_label = female_label.lower()
+
                 male_count = 0
                 female_count = 0
 

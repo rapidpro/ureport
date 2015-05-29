@@ -966,39 +966,32 @@ class PollQuestionTest(DashTest):
                                                      modified_by=self.admin)
 
         self.assertEquals(unicode(poll_question1), 'question 1')
+        fetched_results = [dict(open_ended=False, set=3462, unset=3694, categories=[dict(count=2210, label='Yes'),
+                                                                                    dict(count=1252, label='No')],
+                                    label='All')]
 
         with patch('temba.TembaClient.get_flow_results') as mock:
-            mock.return_value = FlowResult.deserialize_list([
-                dict(open_ended=False,
-                     set=3462,
-                     unset=3694,
-                     categories=[dict(count=2210,
-                                      label='Yes'
-                                      ),
-                                 dict(count=1252,
-                                      label='No'
-                                      )
-                                 ],
-                     label='All')
-                ])
+            mock.return_value = FlowResult.deserialize_list(fetched_results)
 
             self.uganda.set_config("state_label", "LGA")
 
-            self.assertEquals(poll_question1.get_results(), [dict(open_ended=False, set=3462, unset=3694, categories=[dict(count=2210, label='Yes'), dict(count=1252, label='No')], label='All')])
+            self.assertEquals(poll_question1.fetch_results(), fetched_results)
             mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
 
-            self.assertFalse(poll_question1.is_open_ended())
-            mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
-
-            self.assertEquals(poll_question1.get_responded(), 3462)
-            mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
-
-            self.assertEquals(poll_question1.get_polled(), 3462 + 3694)
-            mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
-
-            self.assertEquals(poll_question1.get_words(), [dict(count=2210, label='Yes'), dict(count=1252, label='No')] )
-            mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
-
-            self.assertEquals(poll_question1.get_results(segment=dict(location='State')), [dict(open_ended=False, set=3462, unset=3694, categories=[dict(count=2210, label='Yes'), dict(count=1252, label='No')], label='All')])
+            self.assertEquals(poll_question1.fetch_results(segment=dict(location='State')), fetched_results)
             mock.assert_called_with(poll_question1.ruleset_uuid, segment=dict(location='LGA'))
 
+        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
+            mock.return_value = fetched_results
+
+            self.assertFalse(poll_question1.is_open_ended())
+            mock.assert_called_with()
+
+            self.assertEquals(poll_question1.get_responded(), 3462)
+            mock.assert_called_with()
+
+            self.assertEquals(poll_question1.get_polled(), 3462 + 3694)
+            mock.assert_called_with()
+
+            self.assertEquals(poll_question1.get_words(), [dict(count=2210, label='Yes'), dict(count=1252, label='No')])
+            mock.assert_called_with()

@@ -53,17 +53,17 @@ class UtilsTest(DashTest):
         self.org.set_config("is_global", True)
 
         with patch('temba.TembaClient.get_flow_results') as mock:
-            mock.return_value = FlowResult.deserialize_list([dict(label='LABEL_1',
+            mock.return_value = FlowResult.deserialize_list([dict(label='UG',
                                                                   set=15,
                                                                   unset=5,
                                                                   categories=[],
                                                                   open_ended=None),
-                                                             dict(label='LABEL_2',
+                                                             dict(label='RW',
                                                                   set=100,
                                                                   unset=200,
                                                                   categories=[],
                                                                   open_ended=None),
-                                                             dict(label='LABEL_3',
+                                                             dict(label='US',
                                                                   set=50,
                                                                   unset=30,
                                                                   categories=[],

@@ -280,6 +280,7 @@ class PollQuestion(SmartModel):
         results = temba_client_flow_results_serializer(client_results)
 
         cache.set(key, results, CACHE_POLL_RESULTS_TIMEOUT)
+        return results
 
     def get_results(self, segment=None):
         key = CACHE_POLL_RESULTS_KEY % (self.poll.pk, self.pk)
@@ -292,8 +293,9 @@ class PollQuestion(SmartModel):
             return cached_value
 
     def get_total_summary_data(self):
-        if self.get_results():
-            return self.get_results()[0]
+        cached_results = self.get_results()
+        if cached_results:
+            return cached_results[0]
         return dict()
 
     def is_open_ended(self):
