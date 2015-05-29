@@ -196,7 +196,7 @@ class PollCRUDL(SmartCRUDL):
             flow = self.object.get_flow()
             rulesets = []
             if flow:
-                rulesets = flow.rulesets
+                rulesets = flow['rulesets']
             return rulesets
 
         def derive_fields(self):
@@ -204,8 +204,8 @@ class PollCRUDL(SmartCRUDL):
 
             fields = []
             for ruleset in rulesets:
-                fields.append('ruleset_%s_include' % ruleset.uuid)
-                fields.append('ruleset_%s_title' % ruleset.uuid)
+                fields.append('ruleset_%s_include' % ruleset['uuid'])
+                fields.append('ruleset_%s_title' % ruleset['uuid'])
 
             return fields
 
@@ -219,13 +219,13 @@ class PollCRUDL(SmartCRUDL):
             initial = self.derive_initial()
 
             for ruleset in rulesets:
-                include_field_name = 'ruleset_%s_include' % ruleset.uuid
+                include_field_name = 'ruleset_%s_include' % ruleset['uuid']
                 include_field_initial = initial.get(include_field_name, False)
                 include_field = forms.BooleanField(label=_("Include"), required=False, initial=include_field_initial,
                                                    help_text=_("Whether to include this question in your public results"))
 
-                title_field_name = 'ruleset_%s_title' % ruleset.uuid
-                title_field_initial = initial.get(title_field_name, ruleset.label)
+                title_field_name = 'ruleset_%s_title' % ruleset['uuid']
+                title_field_initial = initial.get(title_field_name, ruleset['label'])
                 title_field = forms.CharField(label=_("Title"), widget=forms.Textarea, required=False, initial=title_field_initial,
                                               help_text=_("The question posed to your audience, will be displayed publicly"))
 
@@ -242,7 +242,7 @@ class PollCRUDL(SmartCRUDL):
 
             # for each ruleset
             for ruleset in rulesets:
-                r_uuid = ruleset.uuid
+                r_uuid = ruleset['uuid']
 
                 included = data.get('ruleset_%s_include' % r_uuid, False)
                 title = data['ruleset_%s_title' % r_uuid]
@@ -264,7 +264,7 @@ class PollCRUDL(SmartCRUDL):
                     PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).delete()
 
             # delete poll questions for old rulesets
-            PollQuestion.objects.filter(poll=poll).exclude(ruleset_uuid__in=[ruleset.uuid for ruleset in rulesets]).delete()
+            PollQuestion.objects.filter(poll=poll).exclude(ruleset_uuid__in=[ruleset['uuid'] for ruleset in rulesets]).delete()
 
             return self.object
 

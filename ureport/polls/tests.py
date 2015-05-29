@@ -7,7 +7,7 @@ import pycountry
 from mock import patch
 from dash.categories.models import Category, CategoryImage
 from temba import FlowResult, Flow
-from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
+from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, POLL_FLOW_KEY
 from ureport.tests import DashTest, MockAPI, MockTembaClient
 
 
@@ -210,8 +210,7 @@ class PollTest(DashTest):
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
     def test_get_flow(self):
-
-        with patch('temba.TembaClient.get_flow') as mock:
+        with patch('django.core.cache.cache.get') as mock:
             mock.return_value = 'Flow'
 
             poll1 = Poll.objects.create(flow_uuid="uuid-1",
@@ -222,9 +221,9 @@ class PollTest(DashTest):
                                         created_by=self.admin,
                                         modified_by=self.admin)
 
-
             self.assertEquals(poll1.get_flow(), 'Flow')
-            mock.assert_called_once_with(poll1.flow_uuid)
+            key = POLL_FLOW_KEY % (poll1.org.pk, poll1.flow_uuid)
+            mock.assert_called_once_with(key, None)
 
     def test_best_and_worst(self):
 
@@ -310,30 +309,20 @@ class PollTest(DashTest):
                                     modified_by=self.admin)
 
 
-        with patch('temba.TembaClient.get_flow') as mock:
-            mock.return_value = Flow.deserialize(dict(runs=50,
-                                                      completed_runs=120,
-                                                      name='Flow 1',
-                                                      uuid='uuid-1',
-                                                      participants=300,
-                                                      labels="",
-                                                      archived=False,
-                                                      created_on="2015-04-08T12:48:44.320Z",
-                                                      rulesets=[
-                                                      dict(node='386fc244-cc98-476a-b05e-f8a431a4dd41',
-                                                      uuid="uuid-8435",
-                                                      response_type="C",
-                                                      label='Does your community have power')
-                                                      ]))
+        with patch('ureport.polls.models.Poll.get_flow') as mock:
+            mock.return_value = dict(runs=50, completed_runs=120, name='Flow 1', uuid='uuid-1', participants=300,
+                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
+                                     rulesets=[dict(uuid="uuid-8435",response_type="C",
+                                                    label='Does your community have power')])
 
             self.assertEquals(poll1.runs(), 50)
-            mock.assert_called_once_with(poll1.flow_uuid)
+            mock.assert_called_once_with()
 
-        with patch('temba.TembaClient.get_flow') as mock:
+        with patch('ureport.polls.models.Poll.get_flow') as mock:
             mock.return_value = None
 
             self.assertEquals(poll1.runs(), "--")
-            mock.assert_called_once_with(poll1.flow_uuid)
+            mock.assert_called_once_with()
 
     def test_completed_runs(self):
         poll1 = Poll.objects.create(flow_uuid="uuid-1",
@@ -344,30 +333,20 @@ class PollTest(DashTest):
                                     created_by=self.admin,
                                     modified_by=self.admin)
 
-        with patch('temba.TembaClient.get_flow') as mock:
-            mock.return_value = Flow.deserialize(dict(runs=50,
-                                                      completed_runs=30,
-                                                      name='Flow 1',
-                                                      uuid='uuid-1',
-                                                      participants=50,
-                                                      labels="",
-                                                      archived=False,
-                                                      created_on="2015-04-08T12:48:44.320Z",
-                                                      rulesets=[
-                                                      dict(node='386fc244-cc98-476a-b05e-f8a431a4dd41',
-                                                      uuid="uuid-8435",
-                                                      response_type="C",
-                                                      label='Does your community have power')
-                                                      ]))
+        with patch('ureport.polls.models.Poll.get_flow') as mock:
+            mock.return_value = dict(runs=50, completed_runs=30, name='Flow 1', uuid='uuid-1', participants=50,
+                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
+                                     rulesets=[dict(uuid="uuid-8435", response_type="C",
+                                                    label='Does your community have power')])
 
             self.assertEquals(poll1.completed_runs(), 30)
-            mock.assert_called_once_with(poll1.flow_uuid)
+            mock.assert_called_once_with()
 
-        with patch('temba.TembaClient.get_flow') as mock:
+        with patch('ureport.polls.models.Poll.get_flow') as mock:
             mock.return_value = None
 
             self.assertEquals(poll1.completed_runs(), "--")
-            mock.assert_called_once_with(poll1.flow_uuid)
+            mock.assert_called_once_with()
 
     def test_response_percentage(self):
         poll1 = Poll.objects.create(flow_uuid="uuid-1",
@@ -378,51 +357,29 @@ class PollTest(DashTest):
                                     created_by=self.admin,
                                     modified_by=self.admin)
 
-        with patch('temba.TembaClient.get_flow') as mock:
-            mock.return_value = Flow.deserialize(dict(runs=160,
-                                                      completed_runs=80,
-                                                      name='Flow 1',
-                                                      uuid='uuid-1',
-                                                      participants=160,
-                                                      labels="",
-                                                      archived=False,
-                                                      created_on="2015-04-08T12:48:44.320Z",
-                                                      rulesets=[
-                                                      dict(node='386fc244-cc98-476a-b05e-f8a431a4dd41',
-                                                      uuid="uuid-8435",
-                                                      response_type="C",
-                                                      label='Does your community have power')
-                                                      ]))
+        with patch('ureport.polls.models.Poll.get_flow') as mock:
+            mock.return_value = dict(runs=160, completed_runs=80, name='Flow 1', uuid='uuid-1', participants=160,
+                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
+                                     rulesets=[dict(uuid="uuid-8435", response_type="C",
+                                                    label='Does your community have power')])
 
             self.assertEquals(poll1.response_percentage(), 50)
-            mock.assert_called_once_with(poll1.flow_uuid)
+            mock.assert_called_once_with()
 
-        with patch('temba.TembaClient.get_flow') as mock:
-            mock.return_value = Flow.deserialize(dict(runs=160,
-                                                      completed_runs=0,
-                                                      name='Flow 1',
-                                                      uuid='uuid-1',
-                                                      participants=160,
-                                                      labels="",
-                                                      archived=False,
-                                                      created_on="2015-04-08T12:48:44.320Z",
-                                                      rulesets=[
-                                                      dict(node='386fc244-cc98-476a-b05e-f8a431a4dd41',
-                                                      uuid="uuid-8435",
-                                                      response_type="C",
-                                                      label='Does your community have power')
-                                                      ]))
+        with patch('ureport.polls.models.Poll.get_flow') as mock:
+            mock.return_value = dict(runs=160, completed_runs=0, name='Flow 1', uuid='uuid-1', participants=160,
+                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
+                                     rulesets=[dict(uuid="uuid-8435", response_type="C",
+                                                    label='Does your community have power')])
 
             self.assertEquals(poll1.response_percentage(), "--")
-            mock.assert_called_once_with(poll1.flow_uuid)
+            mock.assert_called_once_with()
 
-        with patch('temba.TembaClient.get_flow') as mock:
+        with patch('ureport.polls.models.Poll.get_flow') as mock:
             mock.return_value = None
 
             self.assertEquals(poll1.response_percentage(), "--")
-            mock.assert_called_once_with(poll1.flow_uuid)
-
-
+            mock.assert_called_once_with()
 
     def test_get_featured_images(self):
         poll1 = Poll.objects.create(flow_uuid="uuid-1",
@@ -664,39 +621,33 @@ class PollTest(DashTest):
         response = self.client.get(nigeria_questions_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)
 
-        response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
-        self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 2)
-        self.assertTrue('ruleset_uuid-8435_include' in response.context['form'].fields)
-        self.assertTrue('ruleset_uuid-8435_title' in response.context['form'].fields)
-        self.assertEquals(response.context['form'].fields['ruleset_uuid-8435_title'].initial, 'Does your community have power')
+        with patch('ureport.polls.models.Poll.get_flow') as mock:
+            mock.return_value = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=300,
+                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
+                                     rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
+                                                    label='Does your community have power')])
+
+            response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+            self.assertTrue('form' in response.context)
+            self.assertEquals(len(response.context['form'].fields), 2)
+            self.assertTrue('ruleset_uuid-8435_include' in response.context['form'].fields)
+            self.assertTrue('ruleset_uuid-8435_title' in response.context['form'].fields)
+            self.assertEquals(response.context['form'].fields['ruleset_uuid-8435_title'].initial, 'Does your community have power')
 
         poll1_question = PollQuestion.objects.create(poll=poll1,
                                                      title='question poll 1',
                                                      ruleset_uuid="uuid-101",
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
+
         with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = Flow.deserialize(dict(runs=300,
-                                                      completed_runs=120,
-                                                      name='Flow 1',
-                                                      uuid='uuid-25',
-                                                      participants=300,
-                                                      labels="",
-                                                      archived=False,
-                                                      created_on="2015-04-08T12:48:44.320Z",
-                                                      rulesets=[dict(node='uuid-8435',
-                                                      id=8435,
-                                                      response_type="C",
-                                                      label='Does your community have power'
-                                                      ),
-                                                      dict(node='some-uuid',
-                                                      id=101,
-                                                      response_type="C",
-                                                      label='label on rapid pro'
-                                                      )
-                                                      ]))
+            mock.return_value = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=300,
+                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
+                                     rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
+                                                    label='Does your community have power'),
+                                               dict(uuid='some-uuid', id=101, response_type="C",
+                                                    label='label on rapid pro')])
 
             response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
@@ -747,16 +698,17 @@ class PollTest(DashTest):
 
             poll_question = PollQuestion.objects.filter(poll=poll1)[0]
             self.assertEquals(poll_question.title, 'electricity network coverage')
+            self.assertFalse(PollQuestion.objects.filter(pk=poll1_question.pk))
 
-        with patch('ureport.polls.models.Poll.clear_brick_polls_cache') as mock:
-            mock.return_value = 'Cache cleared'
+            with patch('ureport.polls.models.Poll.clear_brick_polls_cache') as mock:
+                mock.return_value = 'Cache cleared'
 
-            post_data = dict()
-            post_data['ruleset_uuid-8435_include'] = True
-            post_data['ruleset_uuid-8435_title'] = "electricity network coverage"
-            response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+                post_data = dict()
+                post_data['ruleset_uuid-8435_include'] = True
+                post_data['ruleset_uuid-8435_title'] = "electricity network coverage"
+                response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
 
-            mock.assert_called_once_with(poll1.org)
+                mock.assert_called_once_with(poll1.org)
 
     def test_images_poll(self):
         poll1 = Poll.objects.create(flow_uuid="uuid-1",

@@ -22,6 +22,8 @@ CACHE_POLL_RESULTS_KEY = 'poll:%d:results:%d'
 
 CACHE_POLL_RESULTS_TIMEOUT = 60 * 60 * 24
 
+POLL_FLOW_KEY = "org:%d:flow:%s"
+
 class PollCategory(SmartModel):
     """
     This is a dead class but here so we can perform our migration.
@@ -107,8 +109,8 @@ class Poll(SmartModel):
         """
         Returns the underlying flow for this poll
         """
-        temba_client = self.org.get_temba_client()
-        return temba_client.get_flow(self.flow_uuid)
+        key = POLL_FLOW_KEY % (self.org.pk, self.flow_uuid)
+        return cache.get(key, None)
 
     def best_and_worst(self):
         b_and_w = []
@@ -153,8 +155,8 @@ class Poll(SmartModel):
         The response rate for this flow
         """
         flow = self.get_flow()
-        if flow and flow.completed_runs:
-            return int(round((flow.completed_runs * 100.0) / flow.runs))
+        if flow and flow['completed_runs']:
+            return int(round((flow['completed_runs'] * 100.0) / flow['runs']))
         else:
             return '--'
 
@@ -204,13 +206,13 @@ class Poll(SmartModel):
     def runs(self):
         flow = self.get_flow()
         if flow:
-            return flow.runs
+            return flow['runs']
         return "--"
 
     def completed_runs(self):
         flow = self.get_flow()
         if flow:
-            return flow.completed_runs
+            return flow['completed_runs']
         return "--"
 
     def get_featured_images(self):
