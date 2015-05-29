@@ -7,7 +7,7 @@ import pycountry
 from mock import patch
 from dash.categories.models import Category, CategoryImage
 from temba import FlowResult, Flow
-from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, POLL_FLOW_KEY
+from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_FLOW_KEY
 from ureport.tests import DashTest, MockAPI, MockTembaClient
 
 
@@ -222,7 +222,7 @@ class PollTest(DashTest):
                                         modified_by=self.admin)
 
             self.assertEquals(poll1.get_flow(), 'Flow')
-            key = POLL_FLOW_KEY % (poll1.org.pk, poll1.flow_uuid)
+            key = CACHE_POLL_FLOW_KEY % (poll1.org.pk, poll1.flow_uuid)
             mock.assert_called_once_with(key, None)
 
     def test_best_and_worst(self):

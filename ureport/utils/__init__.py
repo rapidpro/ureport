@@ -5,10 +5,12 @@ from dash.utils import temba_client_flow_results_serializer
 from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
+from django.utils.text import slugify
 from django_redis import get_redis_connection
 import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
+from ureport.polls.models import CACHE_POLL_FLOW_KEY, CACHE_ORG_FLOWS_KEY, CACHE_ORG_REPORTER_GROUP_KEY
 
 
 def get_linked_orgs():
@@ -165,6 +167,7 @@ def fetch_flows(org):
     temba_client = org.get_temba_client()
     flows = temba_client.get_flows()
 
+    all_flows = []
     for flow in flows:
         if flow.rulesets:
             flow_json = dict()
@@ -176,15 +179,28 @@ def fetch_flows(org):
             flow_json['rulesets'] = [
                 dict(uuid=elt.uuid, label=elt.label, response_type=elt.response_type) for elt in flow.rulesets]
 
-            key = "org:%d:flow:%s" % (org.pk, flow.uuid)
+            key = CACHE_POLL_FLOW_KEY % (org.pk, flow.uuid)
             cache.set(key, flow_json, 900)
+            all_flows.append(flow_json)
+    all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
+    cache.set(all_flows_key, all_flows, 900)
 
+
+def fetch_reporter_group(org):
+    reporter_group = org.get_config('reporter_group')
+    if reporter_group:
+        temba_client = org.get_temba_client()
+        groups = temba_client.get_groups(name=reporter_group)
+
+        key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
+        cache.set(key, groups[0])
 
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
 Org.fetch_org_polls_results = fetch_org_polls_results
 Org.fetch_flows = fetch_flows
+Org.fetch_reporter_group = fetch_reporter_group
 
 def substitute_segment(org, segment):
     if not segment:

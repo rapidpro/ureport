@@ -2,10 +2,13 @@ from __future__ import absolute_import
 
 from dash.orgs.models import Org
 from django import template
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.template import TemplateSyntaxError
 from django.template.defaultfilters import stringfilter
 from django.conf import settings
+from django.utils.text import slugify
+from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
 from ureport.utils import get_linked_orgs
 
 register = template.Library()
@@ -32,10 +35,10 @@ def reporter_count(org):
     reporter_group = org.get_config('reporter_group')
 
     if reporter_group:
-        temba_client = org.get_temba_client()
-        groups = temba_client.get_groups(name=reporter_group)
-        if groups:
-            return groups[0].size
+        key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
+        group = cache.get(key, None)
+        if group:
+            return group.size
 
     return 0
 

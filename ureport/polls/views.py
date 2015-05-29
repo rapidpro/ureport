@@ -1,8 +1,9 @@
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from django import forms
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from dash.categories.models import Category, CategoryImage
-from .models import Poll, PollQuestion, FeaturedResponse, PollImage
+from .models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_ORG_FLOWS_KEY
 from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
@@ -18,9 +19,8 @@ class PollForm(forms.ModelForm):
         self.fields['category'].queryset = Category.objects.filter(org=self.org)
 
         # find all the flows on this org, create choices for those
-        temba_client = self.org.get_temba_client()
-        flows = temba_client.get_flows()
-        self.fields['flow_uuid'].choices = [(f.uuid, f.name) for f in flows]
+        flows = cache.get(CACHE_ORG_FLOWS_KEY, [])
+        self.fields['flow_uuid'].choices = [(f['uuid'], f['name']) for f in flows]
 
         # only display category images for this org which are active
         self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')

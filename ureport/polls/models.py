@@ -22,7 +22,10 @@ CACHE_POLL_RESULTS_KEY = 'poll:%d:results:%d'
 
 CACHE_POLL_RESULTS_TIMEOUT = 60 * 60 * 24
 
-POLL_FLOW_KEY = "org:%d:flow:%s"
+CACHE_POLL_FLOW_KEY = "org:%d:flow:%s"
+CACHE_ORG_FLOWS_KEY = "org:%d:flows"
+CACHE_ORG_REPORTER_GROUP_KEY = "org:%d:reporters:%s"
+
 
 class PollCategory(SmartModel):
     """
@@ -109,7 +112,7 @@ class Poll(SmartModel):
         """
         Returns the underlying flow for this poll
         """
-        key = POLL_FLOW_KEY % (self.org.pk, self.flow_uuid)
+        key = CACHE_POLL_FLOW_KEY % (self.org.pk, self.flow_uuid)
         return cache.get(key, None)
 
     def best_and_worst(self):
