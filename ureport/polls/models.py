@@ -18,12 +18,12 @@ OPEN_ENDED_CACHE_TIME = getattr(settings, 'OPEN_ENDED_CACHE_TIME', 60 * 60 * 24 
 # cache our featured polls for a month (this will be invalidated by questions changing)
 BRICK_POLLS_CACHE_TIME = getattr(settings, 'BRICK_POLLS_CACHE_TIME', 60 * 60 * 30)
 
+POLL_RESULTS_CACHE_TIME = getattr(settings, 'POLL_RESULTS_CACHE_TIME', 60 * 60 * 24)
+
 CACHE_POLL_RESULTS_KEY = 'poll:%d:results:%d'
 
-CACHE_POLL_RESULTS_TIMEOUT = 60 * 60 * 24
-
-CACHE_POLL_FLOW_KEY = "org:%d:flow:%s"
 CACHE_ORG_FLOWS_KEY = "org:%d:flows"
+
 CACHE_ORG_REPORTER_GROUP_KEY = "org:%d:reporters:%s"
 
 
@@ -298,7 +298,7 @@ class PollQuestion(SmartModel):
         client_results = temba_client.get_flow_results(self.ruleset_uuid, segment=segment)
         results = temba_client_flow_results_serializer(client_results)
 
-        cache.set(key, results, CACHE_POLL_RESULTS_TIMEOUT)
+        cache.set(key, results, POLL_RESULTS_CACHE_TIME)
         return results
 
     def get_results(self, segment=None):
