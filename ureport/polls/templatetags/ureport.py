@@ -41,9 +41,7 @@ def age_stats(org):
         return None
 
     try:
-        born_field = org.get_config('born_label')
-        api_data = org.get_contact_field_results(born_field, None)
-        output_data = org.organize_categories_data(born_field, api_data)[0]
+        output_data = org.get_age_data()
 
         total = output_data['set']
         for category in output_data['categories']:
@@ -66,10 +64,7 @@ def gender_stats(org):
     if not org:
         return None
 
-    gender_field = org.get_config('gender_label')
-    gender_data = None
-    if gender_field:
-        gender_data = org.get_contact_field_results(gender_field, None)
+    gender_data = org.get_gender_data()
 
     if gender_data:
         try:

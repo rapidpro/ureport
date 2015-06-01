@@ -431,6 +431,10 @@ CELERYBEAT_SCHEDULE = {
         "task": "polls.update_flows_and_reporters",
         "schedule": timedelta(minutes=10),
     },
+    "update_org_graphs_data": {
+        "task": "polls.update_org_graphs_data",
+        "schedule": timedelta(minutes=30),
+    },
     "update_main_poll": {
         "task": "polls.update_main_poll",
         "schedule": timedelta(minutes=5),

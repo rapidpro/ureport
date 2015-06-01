@@ -49,4 +49,17 @@ def update_org_flows_and_reporters():
                 org.fetch_reporter_group()
 
 
+@app.task(name='poll.update_org_graphs_data')
+def update_org_graphs_data():
+    r = get_redis_connection()
+
+    key = 'update_graphs_data'
+    if not r.get(key):
+        with r.lock(key, timeout=900):
+            for org in Org.objects.filter(is_active=True):
+                org.fetch_age_data()
+                org.fetch_gender_data()
+                org.fetch_registration_data()
+                org.fetch_occupation_data()
+
 

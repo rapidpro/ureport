@@ -18,7 +18,7 @@ from ureport.news.models import Video, NewsItem
 import math
 import pycountry
 from datetime import timedelta, datetime
-from ureport.utils import get_linked_orgs
+from ureport.utils import get_linked_orgs, substitute_segment
 
 
 def chooser(request):
@@ -180,17 +180,7 @@ class PollQuestionResultsView(SmartReadView):
         segment = self.request.GET.get('segment', None)
         if segment:
             segment = json.loads(segment)
-            location = segment.get('location', None)
-            if location.lower() == 'state':
-                segment['location'] = self.request.org.get_config('state_label')
-            elif location.lower() == 'district':
-                segment['location'] = self.request.org.get_config('district_label')
-
-            if self.object.poll.org.get_config('is_global'):
-                if "location" in segment:
-                    del segment["location"]
-                    segment["contact_field"] = self.object.poll.org.get_config('state_label')
-                    segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+            segment = substitute_segment(self.request.org, segment)
 
         results = self.object.get_results(segment=segment)
 
@@ -250,12 +240,7 @@ class ReportersResultsView(SmartReadView):
         segment = self.request.GET.get('segment', None)
         if segment:
             segment = json.loads(segment)
-            location = segment.get('location', None)
-            if location.lower() == 'state':
-                segment['location'] = self.request.org.get_config('state_label')
-            elif location.lower() == 'district':
-                segment['location'] = self.request.org.get_config('district_label')
-
+            segment = substitute_segment(self.get_object(), segment)
 
         contact_field = self.request.GET.get('contact_field', None)
         if self.get_object() and contact_field:

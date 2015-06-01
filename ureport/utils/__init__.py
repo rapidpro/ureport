@@ -1,3 +1,4 @@
+import json
 import math
 from datetime import timedelta, datetime
 from dash.orgs.models import Org
@@ -52,18 +53,7 @@ def substitute_segment(org, segment):
 
 
 def get_contact_field_results(org, contact_field, segment):
-    if segment:
-        location = segment.get('location', None)
-        if location == 'State':
-            segment['location'] = org.get_config('state_label')
-        elif location == 'District':
-            segment['location'] = org.get_config('district_label')
-
-        if org.get_config('is_global'):
-            if "location" in segment:
-                del segment["location"]
-                segment["contact_field"] = org.get_config('state_label')
-                segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+    segment = json.dumps(substitute_segment(org, segment))
 
     temba_client = org.get_temba_client()
     client_results = temba_client.get_flow_results(contact_field=contact_field, segment=segment)
@@ -224,8 +214,10 @@ def fetch_reporter_group(org):
         group_dict = dict(size=group.size, name=group.name, uuid=group.uuid)
         cache.set(key, group_dict)
 
+
 def get_reporter_group(org):
     from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
+
     reporter_group = org.get_config('reporter_group')
 
     if reporter_group:
@@ -237,6 +229,97 @@ def get_reporter_group(org):
     return dict()
 
 
+def fetch_gender_data(org):
+    from ureport.polls.models import CACHE_ORG_GENDER_DATA_KEY
+
+    gender_field = org.get_config('gender_label')
+
+    if gender_field:
+        gender_data = org.get_contact_field_results(gender_field, None)
+
+        key = CACHE_ORG_GENDER_DATA_KEY % (org.pk, slugify(unicode(gender_field)))
+        cache.set(key, gender_data)
+
+
+def get_gender_data(org):
+    from ureport.polls.models import CACHE_ORG_GENDER_DATA_KEY
+
+    gender_field = org.get_config('gender_label')
+
+    if gender_field:
+        key = CACHE_ORG_GENDER_DATA_KEY % (org.pk, slugify(unicode(gender_field)))
+        return cache.get(key, None)
+
+
+def fetch_age_data(org):
+    from ureport.polls.models import CACHE_ORG_AGE_DATA_KEY
+
+    born_field = org.get_config('born_label')
+
+    if born_field:
+        age_data = org.get_contact_field_results(born_field, None)
+        output_data = org.organize_categories_data(born_field, age_data)[0]
+
+        key = CACHE_ORG_AGE_DATA_KEY % (org.pk, slugify(unicode(born_field)))
+        cache.set(key, output_data)
+
+
+def get_age_data(org):
+    from ureport.polls.models import CACHE_ORG_AGE_DATA_KEY
+
+    born_field = org.get_config('born_label')
+
+    if born_field:
+        key = CACHE_ORG_AGE_DATA_KEY % (org.pk, slugify(unicode(born_field)))
+        return cache.get(key, None)
+
+
+def fetch_registration_data(org):
+    from ureport.polls.models import CACHE_ORG_REGISTRATION_DATA_KEY
+
+    registration_field = org.get_config('born_label')
+
+    if registration_field:
+        age_data = org.get_contact_field_results(registration_field, None)
+
+        key = CACHE_ORG_REGISTRATION_DATA_KEY % (org.pk, slugify(unicode(registration_field)))
+        cache.set(key, age_data)
+
+
+def get_registration_data(org):
+    from ureport.polls.models import CACHE_ORG_REGISTRATION_DATA_KEY
+
+    registration_field = org.get_config('born_label')
+
+    if registration_field:
+        key = CACHE_ORG_REGISTRATION_DATA_KEY % (org.pk, slugify(unicode(registration_field)))
+        return cache.get(key, None)
+
+
+def fetch_occupation_data(org):
+    from ureport.polls.models import CACHE_ORG_OCCUPATION_DATA_KEY
+
+    occupation_field = org.get_config('born_label')
+
+    if occupation_field:
+        age_data = org.get_contact_field_results(occupation_field, None)
+
+        key = CACHE_ORG_OCCUPATION_DATA_KEY % (org.pk, slugify(unicode(occupation_field)))
+        cache.set(key, age_data)
+
+
+def get_occupation_data(org):
+    from ureport.polls.models import CACHE_ORG_AGE_DATA_KEY
+
+    occupation_field = org.get_config('born_label')
+
+    if occupation_field:
+        key = CACHE_ORG_AGE_DATA_KEY % (org.pk, slugify(unicode(occupation_field)))
+        return cache.get(key, None)
+
+
+
+
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
@@ -245,3 +328,11 @@ Org.fetch_flows = fetch_flows
 Org.get_flows = get_flows
 Org.fetch_reporter_group = fetch_reporter_group
 Org.get_reporter_group = get_reporter_group
+Org.fetch_gender_data = fetch_gender_data
+Org.get_gender_data = get_gender_data
+Org.fetch_age_data = fetch_age_data
+Org.get_age_data = get_age_data
+Org.fetch_registration_data = fetch_registration_data
+Org.get_registration_data = get_registration_data
+Org.fetch_occupation_data = fetch_occupation_data
+Org.get_occupation_data = get_occupation_data

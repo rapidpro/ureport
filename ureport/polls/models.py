@@ -26,6 +26,14 @@ CACHE_ORG_FLOWS_KEY = "org:%d:flows"
 
 CACHE_ORG_REPORTER_GROUP_KEY = "org:%d:reporters:%s"
 
+CACHE_ORG_GENDER_DATA_KEY = "org:%d:gender:%s"
+
+CACHE_ORG_AGE_DATA_KEY = "org:%d:age:%s"
+
+CACHE_ORG_REGISTRATION_DATA_KEY = "org:%d:registration:%s"
+
+CACHE_ORG_OCCUPATION_DATA_KEY = "org:%d:occupation:%s"
+
 
 class PollCategory(SmartModel):
     """
