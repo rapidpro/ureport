@@ -57,9 +57,11 @@ def update_org_graphs_data():
     if not r.get(key):
         with r.lock(key, timeout=900):
             for org in Org.objects.filter(is_active=True):
-                org.fetch_age_data()
-                org.fetch_gender_data()
-                org.fetch_registration_data()
-                org.fetch_occupation_data()
+                for data_label in ['born_label', 'registration_label', 'occupation_label', 'gender_label']:
+                    c_field = org.get_config(data_label)
+                    org.fetch_contact_field_results(c_field, None)
 
-
+                states_boundaries_id = org.get_top_level_geojson_ids()
+                org.fetch_contact_field_results(c_field, dict(location='State'))
+                for state_id in states_boundaries_id:
+                    org.fetch_contact_field_results(c_field, dict(location='District', parent=state_id))
