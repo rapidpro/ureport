@@ -623,6 +623,7 @@
         });
       });
 
+      {% if org|config:"featured_state" %}
       $(function(){
         $.ajax({url:'/boundaries/{{ org|config:"featured_state"}}/', dataType: "json"}).done(function(boundaries){
           $(".poll-map").each(function(){
@@ -633,6 +634,7 @@
           });
         });
       });
+      {% endif %}
 
       function layoutBricks(){
         var containerWidth = $('#brick-container').width();
@@ -688,12 +690,22 @@
             for (i=0; i<results.categories.length; i++){
               category = results.categories[i];
               label = category.label.trim().toUpperCase();
-              categories.push(label);
+              if(categories.indexOf(label) >= 0) {
+                if (total > 0){
+                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+                  percentage_lookup[label] += Math.round(percentage);
+                  count_lookup[label] += category.count;
+                }
 
-              if (total > 0){
-                percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-                percentage_lookup[label] = Math.round(percentage);
-                count_lookup[label] = category.count;
+              } else {
+
+                categories.push(label);
+
+                if (total > 0){
+                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+                  percentage_lookup[label] = Math.round(percentage);
+                  count_lookup[label] = category.count;
+                }
               }
             }
 

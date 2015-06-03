@@ -252,17 +252,29 @@
           var percentage_lookup = {};
           var count_lookup = {};
 
-          for (i=0; i<results.categories.length; i++){
+          for (i=0; i<results.categories.length; i++) {
             category = results.categories[i];
             label = category.label.trim().toUpperCase();
-            categories.push(label);
 
-            if (total > 0){
-              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-              percentage_lookup[label] = Math.round(percentage);
-              count_lookup[label] = category.count
-            }
+            if(categories.indexOf(label) >= 0) {
+                if (total > 0){
+                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+                  percentage_lookup[label] += Math.round(percentage);
+                  count_lookup[label] += category.count;
+                }
+
+              } else {
+
+                categories.push(label);
+
+                if (total > 0){
+                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+                  percentage_lookup[label] = Math.round(percentage);
+                  count_lookup[label] = category.count;
+                }
+             }
           }
+
 
 
           if (male_label in percentage_lookup){
