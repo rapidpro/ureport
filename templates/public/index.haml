@@ -365,11 +365,10 @@
 
               .brick-block-half-width
                 - if poll.get_featured_responses
-                  .half-border.primary-bg-color
-                    .brick-poll-details
-                      - for response in poll.get_featured_responses
-                        .brick-poll-featured-response.primary-color
-                          {{ response.message }}
+                  .brick-poll-details.half-border.primary-bg-color
+                    - for response in poll.get_featured_responses
+                      .brick-poll-featured-response.primary-color
+                        {{ response.message }}
                 - else
                   .brick-poll-pie-chart
                     .brick-poll-chart{ data-question: "{{ poll.get_first_question.id }}", id: "graph-{{ poll.get_first_question.id }}" }
