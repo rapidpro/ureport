@@ -12,7 +12,8 @@ def update_main_poll():
         with r.lock(key, timeout=900):
             for org in Org.objects.filter(is_active=True):
                 main_poll = Poll.get_main_poll(org)
-                org.fetch_org_polls_results([main_poll], r)
+                if main_poll:
+                    org.fetch_org_polls_results([main_poll], r)
 
 @app.task(name='polls.update_brick_polls')
 def update_brick_polls():
@@ -59,9 +60,14 @@ def update_org_graphs_data():
             for org in Org.objects.filter(is_active=True):
                 for data_label in ['born_label', 'registration_label', 'occupation_label', 'gender_label']:
                     c_field = org.get_config(data_label)
-                    org.fetch_contact_field_results(c_field, None)
+                    if c_field:
+                        org.fetch_contact_field_results(c_field, None)
 
                 states_boundaries_id = org.get_top_level_geojson_ids()
-                org.fetch_contact_field_results(c_field, dict(location='State'))
-                for state_id in states_boundaries_id:
-                    org.fetch_contact_field_results(c_field, dict(location='District', parent=state_id))
+                c_field = org.get_config('gender_label')
+                if c_field:
+                    if org.get_config('state_label'):
+                        org.fetch_contact_field_results(c_field, dict(location='State'))
+                    if org.get_config('district_label'):
+                        for state_id in states_boundaries_id:
+                            org.fetch_contact_field_results(c_field, dict(location='District', parent=state_id))

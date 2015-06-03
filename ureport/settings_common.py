@@ -387,7 +387,7 @@ ANONYMOUS_USER_ID = -1
 import djcelery
 djcelery.setup_loader()
 
-CELERY_RESULT_BACKEND = 'database'
+CELERY_RESULT_BACKEND = 'djcelery.backends.cache:CacheBackend'
 
 BROKER_BACKEND = 'redis'
 BROKER_HOST = 'localhost'

@@ -80,7 +80,8 @@ def fetch_contact_field_results(org, contact_field, segment):
     client_results = temba_client.get_flow_results(contact_field=contact_field, segment=segment)
 
     results_data = temba_client_flow_results_serializer(client_results)
-    cleaned_results_data = org.organize_categories_data(contact_field, results_data)
+    print results_data
+    cleaned_results_data = results_data #org.organize_categories_data(contact_field, results_data)
 
     key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(segment)))
     cache.set(key, cleaned_results_data)
@@ -244,8 +245,10 @@ def fetch_reporter_group(org):
         groups = temba_client.get_groups(name=reporter_group)
 
         key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
-        group = groups[0]
-        group_dict = dict(size=group.size, name=group.name, uuid=group.uuid)
+        group_dict = dict()
+        if groups:
+            group = groups[0]
+            group_dict = dict(size=group.size, name=group.name, uuid=group.uuid)
         cache.set(key, group_dict)
 
 
