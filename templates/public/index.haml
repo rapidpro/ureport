@@ -623,6 +623,7 @@
         });
       });
 
+      {% if org|config:"featured_state" %}
       $(function(){
         $.ajax({url:'/boundaries/{{ org|config:"featured_state"}}/', dataType: "json"}).done(function(boundaries){
           $(".poll-map").each(function(){
@@ -633,6 +634,7 @@
           });
         });
       });
+      {% endif %}
 
       function layoutBricks(){
         var containerWidth = $('#brick-container').width();
