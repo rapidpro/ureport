@@ -1,3 +1,4 @@
+import json
 from django.core.urlresolvers import reverse
 from django.template import TemplateSyntaxError
 from django.test import TestCase
@@ -948,7 +949,7 @@ class PollQuestionTest(DashTest):
             mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
 
             self.assertEquals(poll_question1.fetch_results(segment=dict(location='State')), fetched_results)
-            mock.assert_called_with(poll_question1.ruleset_uuid, segment=dict(location='LGA'))
+            mock.assert_called_with(poll_question1.ruleset_uuid, segment=json.dumps(dict(location='LGA')))
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = fetched_results

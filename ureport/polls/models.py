@@ -301,11 +301,11 @@ class PollQuestion(SmartModel):
     def fetch_results(self, segment=None):
         key = CACHE_POLL_RESULTS_KEY % (self.poll.pk, self.pk)
         if segment:
-            segment = substitute_segment(self.poll.org, segment)
-            key += ":" + slugify(unicode(json.dumps(segment)))
+            segment = json.dumps(substitute_segment(self.poll.org, segment))
+            key += ":" + slugify(unicode(segment))
 
         temba_client = self.poll.org.get_temba_client()
-        client_results = temba_client.get_flow_results(self.ruleset_uuid, segment=json.dumps(segment))
+        client_results = temba_client.get_flow_results(self.ruleset_uuid, segment=segment)
         results = temba_client_flow_results_serializer(client_results)
 
         cache.set(key, results, POLL_RESULTS_CACHE_TIME)
