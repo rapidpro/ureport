@@ -50,12 +50,16 @@ def substitute_segment(org, segment):
             segment["contact_field"] = org.get_config('state_label')
             segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
 
-    return segment
+    return json.dumps(segment)
 
 
 def clean_global_results_data(org, results, segment):
+    segment_dict = None
+    if segment:
+        segment_dict = json.loads(segment)
+
     # for the global page clean the data translating country code to country name
-    if org.get_config('is_global') and results and segment and 'values' in segment:
+    if org.get_config('is_global') and results and segment_dict and 'values' in segment_dict:
         for elt in results:
             country_code = elt['label']
             elt['boundary'] = country_code
@@ -74,7 +78,7 @@ def clean_global_results_data(org, results, segment):
 def fetch_contact_field_results(org, contact_field, segment):
     from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY
 
-    segment = json.dumps(substitute_segment(org, segment))
+    segment = substitute_segment(org, segment)
 
     temba_client = org.get_temba_client()
     client_results = temba_client.get_flow_results(contact_field=contact_field, segment=segment)
@@ -90,7 +94,7 @@ def fetch_contact_field_results(org, contact_field, segment):
 def get_contact_field_results(org, contact_field, segment):
     from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY
 
-    segment = json.dumps(substitute_segment(org, segment))
+    segment = substitute_segment(org, segment)
 
     key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(segment)))
     return cache.get(key, None)

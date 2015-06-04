@@ -1011,13 +1011,13 @@ class PublicTest(DashTest):
                 uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
                 SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
-            mock_results.assert_called_with(segment=dict(location='State'))
+            mock_results.assert_called_with(segment=json.dumps(dict(location='State')))
 
             self.uganda.set_config("is_global", True)
             self.uganda.set_config("state_label", "Country Code")
             response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
-            mock_results.assert_called_with(segment=dict(contact_field="Country Code",
-                                                         values=[elt.alpha2 for elt in pycountry.countries.objects]))
+            mock_results.assert_called_with(segment=json.dumps(dict(contact_field="Country Code",
+                                                         values=[elt.alpha2 for elt in pycountry.countries.objects])))
 
     def test_reporters_results(self):
         reporters_results = reverse('public.contact_field_results')
@@ -1048,7 +1048,7 @@ class PublicTest(DashTest):
                     SERVER_NAME='uganda.ureport.io')
                 self.assertEquals(response.status_code, 200)
                 self.assertEquals(response.content, json.dumps("ORGANIZED"))
-                mock_results.assert_called_with('field_name', dict(location='State'))
+                mock_results.assert_called_with('field_name', json.dumps(dict(location='State')))
                 mock_organize.assert_called_with('field_name', "API_RESULTS")
 
     def test_news(self):

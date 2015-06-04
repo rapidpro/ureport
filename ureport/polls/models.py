@@ -301,7 +301,7 @@ class PollQuestion(SmartModel):
     def fetch_results(self, segment=None):
         key = CACHE_POLL_RESULTS_KEY % (self.poll.pk, self.pk)
         if segment:
-            segment = json.dumps(substitute_segment(self.poll.org, segment))
+            segment = substitute_segment(self.poll.org, segment)
             key += ":" + slugify(unicode(segment))
 
         temba_client = self.poll.org.get_temba_client()
