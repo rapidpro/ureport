@@ -9,7 +9,6 @@ from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
 from dash.utils import temba_client_flow_results_serializer
 from django.conf import settings
-from ureport.utils import substitute_segment
 
 
 # cache whether a question is open ended for a month
@@ -301,7 +300,7 @@ class PollQuestion(SmartModel):
     def fetch_results(self, segment=None):
         key = CACHE_POLL_RESULTS_KEY % (self.poll.pk, self.pk)
         if segment:
-            segment = substitute_segment(self.poll.org, segment)
+            segment = self.poll.org.substitute_segment(segment)
             key += ":" + slugify(unicode(segment))
 
         temba_client = self.poll.org.get_temba_client()
@@ -314,7 +313,7 @@ class PollQuestion(SmartModel):
     def get_results(self, segment=None):
         key = CACHE_POLL_RESULTS_KEY % (self.poll.pk, self.pk)
         if segment:
-            segment = substitute_segment(self.poll.org, segment)
+            segment = self.poll.org.substitute_segment(segment)
             key += ":" + slugify(unicode(json.dumps(segment)))
 
         cached_value = cache.get(key)

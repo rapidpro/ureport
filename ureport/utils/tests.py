@@ -1,23 +1,68 @@
 from datetime import datetime
+import json
 from django.utils import timezone
 from mock import patch
 import pycountry
 import pytz
 import redis
 from temba import FlowResult
+from ureport.assets.models import FLAG, Image
 from ureport.tests import DashTest
+from ureport.utils import get_linked_orgs, clean_global_results_data
 
 
 class UtilsTest(DashTest):
 
     def setUp(self):
         super(UtilsTest, self).setUp()
-        self.org = self.create_org("uganda", self.admin)
+        self.org = self.create_org("burundi", self.admin)
 
     def clear_cache(self):
         # hardcoded to localhost
         r = redis.StrictRedis(host='localhost', db=1)
         r.flushdb()
+
+    def test_get_linked_orgs(self):
+
+        # we have 4 old org in the settings
+        self.assertEqual(len(get_linked_orgs()), 4)
+        for old_site in get_linked_orgs():
+            self.assertFalse(old_site['name'].lower() == 'burundi')
+
+        self.org.set_config('is_on_landing_page', True)
+
+        # missing flag
+        self.assertEqual(len(get_linked_orgs()), 4)
+        for old_site in get_linked_orgs():
+            self.assertFalse(old_site['name'].lower() == 'burundi')
+
+        Image.objects.create(org=self.org, image_type=FLAG, name='burundi_flag',
+                             image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
+
+        # burundi should be included and be the first; by alphetical order
+        self.assertEqual(len(get_linked_orgs()), 5)
+        self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+
+    def test_substitute_segment(self):
+        self.assertIsNone(self.org.substitute_segment(None))
+
+        self.org.set_config("state_label", "Province")
+        self.assertEqual(self.org.substitute_segment(dict(location='State')), json.dumps(dict(location="Province")))
+
+        self.org.set_config("district_label", "LGA")
+        self.assertEqual(self.org.substitute_segment(dict(location='District')), json.dumps(dict(location="LGA")))
+
+        self.org.set_config("is_global", True)
+        expected = dict(contact_field="Province", values=[elt.alpha2 for elt in pycountry.countries.objects])
+
+        global_segment = self.org.substitute_segment(dict(location='State'))
+        self.assertEqual(global_segment, json.dumps(expected))
+        self.assertFalse('location' in json.loads(global_segment))
+
+        global_segment = self.org.substitute_segment(dict(location='State', parent="country"))
+        self.assertFalse('location' in json.loads(global_segment))
+        self.assertFalse('parent' in json.loads(global_segment))
+        self.assertEqual(global_segment, json.dumps(expected))
 
     def test_get_most_active_regions(self):
         self.org.set_config('gender_label', 'Gender')

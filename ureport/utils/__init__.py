@@ -27,7 +27,7 @@ def get_linked_orgs():
             if flag:
                 linked_sites.append(dict(name=org.name, host=host, flag=flag.image.url, is_static=False))
 
-    linked_sites_sorted = sorted(linked_sites, key=lambda k: k['name'])
+    linked_sites_sorted = sorted(linked_sites, key=lambda k: k['name'].lower())
 
     return linked_sites_sorted
 
@@ -279,3 +279,4 @@ Org.fetch_flows = fetch_flows
 Org.get_flows = get_flows
 Org.fetch_reporter_group = fetch_reporter_group
 Org.get_reporter_group = get_reporter_group
+Org.substitute_segment = substitute_segment

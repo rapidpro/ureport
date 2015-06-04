@@ -18,7 +18,7 @@ from ureport.news.models import Video, NewsItem
 import math
 import pycountry
 from datetime import timedelta, datetime
-from ureport.utils import get_linked_orgs, substitute_segment, clean_global_results_data
+from ureport.utils import get_linked_orgs, clean_global_results_data
 
 
 def chooser(request):
@@ -180,7 +180,7 @@ class PollQuestionResultsView(SmartReadView):
         segment = self.request.GET.get('segment', None)
         if segment:
             segment = json.loads(segment)
-            segment = substitute_segment(self.request.org, segment)
+            segment = self.request.org.substitute_segment(segment)
 
         results = self.object.get_results(segment=segment)
 
@@ -228,7 +228,8 @@ class ReportersResultsView(SmartReadView):
         segment = self.request.GET.get('segment', None)
         if segment:
             segment = json.loads(segment)
-            segment = substitute_segment(self.get_object(), segment)
+            org = self.get_object()
+            segment = org.substitute_segment(segment)
 
         contact_field = self.request.GET.get('contact_field', None)
         if self.get_object() and contact_field:
