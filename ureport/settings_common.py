@@ -426,6 +426,8 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 from datetime import timedelta
 
+CELERY_TIMEZONE = 'UTC'
+
 CELERYBEAT_SCHEDULE = {
     "update_flows_and_reporters": {
         "task": "polls.update_flows_and_reporters",
