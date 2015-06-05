@@ -5,10 +5,11 @@ from mock import patch
 import pycountry
 import pytz
 import redis
-from temba import FlowResult
+from temba import FlowResult, Group
 from ureport.assets.models import FLAG, Image
+from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
 from ureport.tests import DashTest
-from ureport.utils import get_linked_orgs, clean_global_results_data
+from ureport.utils import get_linked_orgs
 
 
 class UtilsTest(DashTest):
@@ -336,3 +337,24 @@ class UtilsTest(DashTest):
                                                 dict(label='Cameraman', count=5)
                                                 ])])
 
+    def test_reporter_group(self):
+        self.clear_cache()
+        with patch('dash.orgs.models.TembaClient.get_groups') as mock:
+            group_dict = dict(uuid="group-uuid", name="reporters", size=25)
+            mock.return_value = Group.deserialize_list([group_dict])
+
+            with patch('django.core.cache.cache.set') as cache_set_mock:
+                cache_set_mock.return_value = "Set"
+
+                self.org.fetch_reporter_group()
+                self.assertFalse(mock.called)
+                self.assertFalse(cache_set_mock.called)
+                self.assertEqual(self.org.get_reporter_group(), dict())
+
+                self.org.set_config("reporter_group", "reporters")
+
+                self.org.fetch_reporter_group()
+                mock.assert_called_with(name='reporters')
+
+                key = CACHE_ORG_REPORTER_GROUP_KEY % (self.org.pk, "reporters")
+                cache_set_mock.assert_called_with(key, group_dict)
