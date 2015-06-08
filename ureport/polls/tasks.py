@@ -50,7 +50,7 @@ def update_org_flows_and_reporters():
                 org.fetch_reporter_group()
 
 
-@app.task(name='poll.update_org_graphs_data')
+@app.task(name='polls.update_org_graphs_data')
 def update_org_graphs_data():
     r = get_redis_connection()
 
