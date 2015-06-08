@@ -270,13 +270,10 @@ def get_reporter_group(org):
     return dict()
 
 
-Org.fetch_contact_field_results = fetch_contact_field_results
+
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
-Org.fetch_org_polls_results = fetch_org_polls_results
-Org.fetch_flows = fetch_flows
 Org.get_flows = get_flows
-Org.fetch_reporter_group = fetch_reporter_group
 Org.get_reporter_group = get_reporter_group
 Org.substitute_segment = substitute_segment
