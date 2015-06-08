@@ -12,7 +12,8 @@ def update_main_poll():
     key = 'update_main_poll'
     if not r.get(key):
         with r.lock(key, timeout=900):
-            for org in Org.objects.filter(is_active=True):
+            active_orgs = Org.objects.filter(is_active=True)
+            for org in active_orgs:
                 main_poll = Poll.get_main_poll(org)
                 if main_poll:
                     fetch_org_polls_results(org, [main_poll], r)
@@ -24,7 +25,8 @@ def update_brick_polls():
     key = 'update_brick_polls'
     if not r.get(key):
         with r.lock(key, timeout=900):
-            for org in Org.objects.filter(is_active=True):
+            active_orgs = Org.objects.filter(is_active=True)
+            for org in active_orgs:
                 brick_polls = Poll.get_brick_polls(org)
                 fetch_org_polls_results(org, brick_polls, r)
 
@@ -36,7 +38,8 @@ def update_other_polls():
     key = 'update_other_polls'
     if not r.get(key):
         with r.lock(key, timeout=900):
-            for org in Org.objects.filter(is_active=True):
+            active_orgs = Org.objects.filter(is_active=True)
+            for org in active_orgs:
                 other_polls = Poll.get_other_polls(org)
                 fetch_org_polls_results(org, other_polls, r)
 
@@ -47,7 +50,8 @@ def update_org_flows_and_reporters():
     key = 'update_flows_and_reporters'
     if not r.get(key):
         with r.lock(key, timeout=900):
-            for org in Org.objects.filter(is_active=True):
+            active_orgs = Org.objects.filter(is_active=True)
+            for org in active_orgs:
                 fetch_flows(org)
                 fetch_reporter_group(org)
 
@@ -59,7 +63,8 @@ def update_org_graphs_data():
     key = 'update_graphs_data'
     if not r.get(key):
         with r.lock(key, timeout=900):
-            for org in Org.objects.filter(is_active=True):
+            active_orgs = Org.objects.filter(is_active=True)
+            for org in active_orgs:
                 for data_label in ['born_label', 'registration_label', 'occupation_label', 'gender_label']:
                     c_field = org.get_config(data_label)
                     if c_field:

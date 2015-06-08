@@ -432,22 +432,27 @@ CELERYBEAT_SCHEDULE = {
     "update_flows_and_reporters": {
         "task": "polls.update_org_flows_and_reporters",
         "schedule": timedelta(minutes=10),
+        "relative": True,
     },
     "update_org_graphs_data": {
         "task": "polls.update_org_graphs_data",
         "schedule": timedelta(minutes=30),
+        "relative": True,
     },
     "update_main_poll": {
         "task": "polls.update_main_poll",
         "schedule": timedelta(minutes=5),
+        "relative": True,
     },
     "update_brick_polls": {
         "task": "polls.update_brick_polls",
         "schedule": timedelta(hours=1),
+        "relative": True,
     },
     "update_other_polls": {
         "task": "polls.update_other_polls",
         "schedule": timedelta(hours=24),
+        "relative": True,
     },
 
 }
