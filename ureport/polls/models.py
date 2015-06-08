@@ -304,7 +304,7 @@ class PollQuestion(SmartModel):
             key += ":" + slugify(unicode(segment))
 
         temba_client = self.poll.org.get_temba_client()
-        client_results = temba_client.get_flow_results(self.ruleset_uuid, segment=segment)
+        client_results = temba_client.get_results(self.ruleset_uuid, segment=segment)
         results = temba_client_flow_results_serializer(client_results)
 
         cache.set(key, results, POLL_RESULTS_CACHE_TIME)

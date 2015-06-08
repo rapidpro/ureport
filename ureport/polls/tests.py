@@ -940,7 +940,7 @@ class PollQuestionTest(DashTest):
                                                                                     dict(count=1252, label='No')],
                                     label='All')]
 
-        with patch('temba.TembaClient.get_flow_results') as mock:
+        with patch('dash.orgs.models.TembaClient.get_results') as mock:
             mock.return_value = FlowResult.deserialize_list(fetched_results)
 
             self.uganda.set_config("state_label", "LGA")

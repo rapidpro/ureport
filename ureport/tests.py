@@ -113,7 +113,7 @@ class MockTembaClient(TembaClient):
     def get_groups(self, uuids=None, name=None, pager=None):
         return Group.deserialize_list([dict(uuid="uuid-8", name=name, size=120)])
 
-    def get_flow_results(self, ruleset_id=None, contact_field=None, segment=None):
+    def get_results(self, ruleset_id=None, contact_field=None, segment=None):
         return FlowResult.deserialize_list([dict(open_ended=False,
                                                  set=3462,
                                                  unset=3694,

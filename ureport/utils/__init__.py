@@ -81,7 +81,7 @@ def fetch_contact_field_results(org, contact_field, segment):
     segment = substitute_segment(org, segment)
 
     temba_client = org.get_temba_client()
-    client_results = temba_client.get_flow_results(contact_field=contact_field, segment=segment)
+    client_results = temba_client.get_results(contact_field=contact_field, segment=segment)
 
     results_data = temba_client_flow_results_serializer(client_results)
     print results_data

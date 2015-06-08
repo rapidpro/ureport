@@ -14,7 +14,8 @@ config = dict(
     custom_domains='*.ureport.in ureport.in *.ureport.staging.nyaruka.com',
     prod_host='report1',
     sqldump=False,
-    celery=(),
+    celery=True,
+    processes=('celery',),
 
     compress=True,
     elb = dict(name='UReport',
