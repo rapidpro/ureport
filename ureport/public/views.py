@@ -180,7 +180,6 @@ class PollQuestionResultsView(SmartReadView):
         segment = self.request.GET.get('segment', None)
         if segment:
             segment = json.loads(segment)
-            segment = self.request.org.substitute_segment(segment)
 
         results = self.object.get_results(segment=segment)
 
@@ -228,8 +227,6 @@ class ReportersResultsView(SmartReadView):
         segment = self.request.GET.get('segment', None)
         if segment:
             segment = json.loads(segment)
-            org = self.get_object()
-            segment = org.substitute_segment(segment)
 
         contact_field = self.request.GET.get('contact_field', None)
         if self.get_object() and contact_field:
