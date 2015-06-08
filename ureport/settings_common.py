@@ -430,7 +430,7 @@ CELERY_TIMEZONE = 'UTC'
 
 CELERYBEAT_SCHEDULE = {
     "update_flows_and_reporters": {
-        "task": "polls.update_flows_and_reporters",
+        "task": "polls.update_org_flows_and_reporters",
         "schedule": timedelta(minutes=10),
     },
     "update_org_graphs_data": {
