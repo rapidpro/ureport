@@ -9,7 +9,7 @@ from temba import FlowResult, Group
 from ureport.assets.models import FLAG, Image
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
 from ureport.tests import DashTest
-from ureport.utils import get_linked_orgs
+from ureport.utils import get_linked_orgs, fetch_reporter_group
 
 
 class UtilsTest(DashTest):
@@ -346,14 +346,14 @@ class UtilsTest(DashTest):
             with patch('django.core.cache.cache.set') as cache_set_mock:
                 cache_set_mock.return_value = "Set"
 
-                self.org.fetch_reporter_group()
+                fetch_reporter_group(self.org)
                 self.assertFalse(mock.called)
                 self.assertFalse(cache_set_mock.called)
                 self.assertEqual(self.org.get_reporter_group(), dict())
 
                 self.org.set_config("reporter_group", "reporters")
 
-                self.org.fetch_reporter_group()
+                fetch_reporter_group(self.org)
                 mock.assert_called_with(name='reporters')
 
                 key = CACHE_ORG_REPORTER_GROUP_KEY % (self.org.pk, "reporters")
