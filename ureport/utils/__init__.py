@@ -267,7 +267,6 @@ def get_reporter_group(org):
     return dict()
 
 
-
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
