@@ -10,7 +10,7 @@ from dash.orgs.models import Org
 from django.http.request import HttpRequest
 from ureport.jobs.models import JobSource
 from ureport.public.views import IndexView
-from temba import TembaClient, FlowResult, Flow, Group
+from temba import TembaClient, Result, Flow, Group
 
 
 class MockAPI(API):
@@ -114,7 +114,7 @@ class MockTembaClient(TembaClient):
         return Group.deserialize_list([dict(uuid="uuid-8", name=name, size=120)])
 
     def get_results(self, ruleset_id=None, contact_field=None, segment=None):
-        return FlowResult.deserialize_list([dict(open_ended=False,
+        return Result.deserialize_list([dict(open_ended=False,
                                                  set=3462,
                                                  unset=3694,
                                                  categories=[dict(count=2210, label='Yes'),

@@ -7,7 +7,7 @@ import pycountry
 
 from mock import patch
 from dash.categories.models import Category, CategoryImage
-from temba import FlowResult, Flow, Group
+from temba import Result, Flow, Group
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
 from ureport.tests import DashTest, MockAPI, MockTembaClient
 
@@ -941,7 +941,7 @@ class PollQuestionTest(DashTest):
                                     label='All')]
 
         with patch('dash.orgs.models.TembaClient.get_results') as mock:
-            mock.return_value = FlowResult.deserialize_list(fetched_results)
+            mock.return_value = Result.deserialize_list(fetched_results)
 
             self.uganda.set_config("state_label", "LGA")
 

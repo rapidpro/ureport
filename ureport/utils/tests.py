@@ -5,7 +5,7 @@ from mock import patch
 import pycountry
 import pytz
 import redis
-from temba import FlowResult, Group
+from temba import Group
 from ureport.assets.models import FLAG, Image
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
 from ureport.tests import DashTest
