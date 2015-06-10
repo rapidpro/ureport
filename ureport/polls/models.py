@@ -182,9 +182,9 @@ class Poll(SmartModel):
         """
         flow = self.get_flow()
         if flow and flow['completed_runs']:
-            return int(round((flow['completed_runs'] * 100.0) / flow['runs']))
+            return "%s%" % int(round((flow['completed_runs'] * 100.0) / flow['runs']))
         else:
-            return '--'
+            return '---'
 
     def get_trending_words(self):
         key = 'trending_words:%d' % self.pk
@@ -233,13 +233,13 @@ class Poll(SmartModel):
         flow = self.get_flow()
         if flow:
             return flow['runs']
-        return "--"
+        return "----"
 
     def completed_runs(self):
         flow = self.get_flow()
         if flow:
             return flow['completed_runs']
-        return "--"
+        return "---"
 
     def get_featured_images(self):
         return self.images.filter(is_active=True).exclude(image='').order_by('-created_on')
@@ -337,10 +337,10 @@ class PollQuestion(SmartModel):
         return open_ended
 
     def get_responded(self):
-        return self.get_total_summary_data().get('set', 0)
+        return self.get_total_summary_data().get('set', '---')
 
     def get_polled(self):
-        return self.get_total_summary_data().get('set', 0) + self.get_total_summary_data().get('unset', 0)
+        return self.get_total_summary_data().get('set', "--") + self.get_total_summary_data().get('unset', "--")
 
     def get_words(self):
         return self.get_total_summary_data().get('categories', [])

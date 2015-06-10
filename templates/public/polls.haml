@@ -32,7 +32,7 @@
 
             .col-sm-6.left-col-border{style:"border-color:#FFF"}
               .hero-description
-                {{ latest_poll.response_percentage }}%
+                {{ latest_poll.response_percentage }}
                 %span
                   - trans "RESPONSE RATE"
               .hero-description
@@ -308,6 +308,11 @@
       $(".poll-word-cloud").each(function(){
         var question = $(this).attr("data-question");
         $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
+
+          if(!result){
+            return;
+          }
+
           var results = result[0];
           var cloudData = [];
 

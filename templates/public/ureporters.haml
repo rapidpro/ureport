@@ -146,6 +146,11 @@
       $(".contact-field-graph-age").each(function(){
         var contactField = $(this).attr("data-contact-field");
         $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+
+          if(!result){
+            return;
+          }
+
           var results = result[0];
           var categories = [];
           var data = [];
@@ -234,6 +239,11 @@
       $(".contact-field-graph-gender").each(function(){
         var contactField = $(this).attr("data-contact-field");
         $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+
+          if(!result){
+              return;
+          }
+
           var results = result[0];
           var categories = [];
 
@@ -293,6 +303,11 @@
       $(".contact-field-graph-registration").each(function(){
         var contactField = $(this).attr("data-contact-field");
         $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+
+          if(!result){
+            return;
+          }
+
           var results = result[0];
           var categories = [];
           var data = [];
@@ -390,6 +405,10 @@
         $(".contact-field-graph-occupation").each(function(){
           var contactField = $(this).attr('data-contact-field');
           $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+
+            if(!result){
+              return;
+            }
 
             var data = [];
             var categories = [];

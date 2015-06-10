@@ -96,14 +96,16 @@ def gender_stats(org):
                     male_percentage = int(male_count * 100.0 / total_count)
                 female_percentage = 100 - male_percentage
                 return dict(total_count=total_count,
-                            male_count=male_count, male_percentage=male_percentage,
-                            female_count=female_count, female_percentage=female_percentage)
+                            male_count=male_count, male_percentage="%s%" % male_percentage,
+                            female_count=female_count, female_percentage="%s%" % female_percentage)
         except:
             # we never want to blow up the page, but let's log what happened
             import traceback
             traceback.print_exc()
 
-    return None
+    return dict(total_count="--",
+                male_count="--", male_percentage="---",
+                female_count="--", female_percentage="---")
 
 @register.filter
 def get_range(value):

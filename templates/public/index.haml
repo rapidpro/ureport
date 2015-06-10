@@ -52,7 +52,7 @@
                   .hr-header.primary-color
                     - trans "RESPONSE RATE"
                   .stats
-                    {{ latest_poll.response_percentage }}%
+                    {{ latest_poll.response_percentage }}
                     %span.stats-small
                       ({{ latest_poll.completed_runs|intcomma }}
                       - trans "Responded out of"
@@ -178,7 +178,7 @@
 
                       %td
                         #male-percentage.primary-border-color.percentage-gender
-                          %span {{ gender_stats.male_percentage }}%
+                          %span {{ gender_stats.male_percentage }}
                         #male-summary.summary-gender
                           {{ gender_stats.male_count|intcomma }}
 
@@ -188,7 +188,7 @@
 
                       %td
                         #female-percentage.primary-border-color.percentage-gender
-                          %span {{ gender_stats.female_percentage }}%
+                          %span {{ gender_stats.female_percentage }}
                         #female-summary.summary-gender
                           {{ gender_stats.female_count|intcomma }}
 
@@ -359,7 +359,7 @@
                     .brick-poll-title
                       {{ poll.get_first_question.title|title }}
                     .brick-poll-response-percentage
-                      {{ poll.response_percentage }}%
+                      {{ poll.response_percentage }}
                       - trans "Response Rate"
                       | {{ poll.created_on|date }}
 
@@ -557,6 +557,10 @@
           var question = $(this).attr("data-question");
 
           $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
+
+            if(!result){
+              return;
+            }
             var results = result[0];
             var categories = [];
             var data = [];
@@ -669,6 +673,11 @@
         $(".gender-stats").each(function(){
           var contactField = $(this).attr("data-contact-field");
           $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+
+            if(!result){
+              return;
+            }
+
             var results = result[0];
             var categories = [];
 
@@ -726,6 +735,11 @@
         $("#age-chart").each(function(){
           var contactField = $(this).attr("data-contact-field");
           $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+
+            if(!result){
+              return;
+            }
+
             var results = result[0];
             var categories = [];
             var data = [];
