@@ -321,7 +321,7 @@ class PollTest(DashTest):
         with patch('ureport.polls.models.Poll.get_flow') as mock:
             mock.return_value = None
 
-            self.assertEquals(poll1.runs(), "--")
+            self.assertEquals(poll1.runs(), "----")
             mock.assert_called_once_with()
 
     def test_completed_runs(self):
@@ -345,7 +345,7 @@ class PollTest(DashTest):
         with patch('ureport.polls.models.Poll.get_flow') as mock:
             mock.return_value = None
 
-            self.assertEquals(poll1.completed_runs(), "--")
+            self.assertEquals(poll1.completed_runs(), "---")
             mock.assert_called_once_with()
 
     def test_response_percentage(self):
@@ -363,7 +363,7 @@ class PollTest(DashTest):
                                      rulesets=[dict(uuid="uuid-8435", response_type="C",
                                                     label='Does your community have power')])
 
-            self.assertEquals(poll1.response_percentage(), 50)
+            self.assertEquals(poll1.response_percentage(), "50%")
             mock.assert_called_once_with()
 
         with patch('ureport.polls.models.Poll.get_flow') as mock:
@@ -372,13 +372,13 @@ class PollTest(DashTest):
                                      rulesets=[dict(uuid="uuid-8435", response_type="C",
                                                     label='Does your community have power')])
 
-            self.assertEquals(poll1.response_percentage(), "--")
+            self.assertEquals(poll1.response_percentage(), "---")
             mock.assert_called_once_with()
 
         with patch('ureport.polls.models.Poll.get_flow') as mock:
             mock.return_value = None
 
-            self.assertEquals(poll1.response_percentage(), "--")
+            self.assertEquals(poll1.response_percentage(), "---")
             mock.assert_called_once_with()
 
     def test_get_featured_images(self):

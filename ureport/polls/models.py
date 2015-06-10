@@ -182,7 +182,8 @@ class Poll(SmartModel):
         """
         flow = self.get_flow()
         if flow and flow['completed_runs']:
-            return "%s%" % int(round((flow['completed_runs'] * 100.0) / flow['runs']))
+            percentage = int(round((flow['completed_runs'] * 100.0) / flow['runs']))
+            return "%s" % (str(percentage) + "%")
         else:
             return '---'
 
