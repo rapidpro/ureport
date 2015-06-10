@@ -157,6 +157,11 @@ def organize_categories_data(org, contact_field, api_data):
 
         for elt in api_data[0]['categories']:
             time_str =  elt['label']
+
+            # ignore anything like None as label
+            if not time_str:
+                continue
+
             parsed_time = tz.localize(datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ'))
 
             # this is in the range we care about
