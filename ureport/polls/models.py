@@ -19,7 +19,7 @@ BRICK_POLLS_CACHE_TIME = getattr(settings, 'BRICK_POLLS_CACHE_TIME', 60 * 60 * 3
 
 POLL_RESULTS_CACHE_TIME = getattr(settings, 'POLL_RESULTS_CACHE_TIME', 60 * 60 * 24)
 
-CACHE_POLL_RESULTS_KEY = 'poll:%d:results:%d'
+CACHE_POLL_RESULTS_KEY = 'org:%d:poll:%d:results:%d'
 
 CACHE_ORG_FLOWS_KEY = "org:%d:flows"
 
@@ -299,7 +299,7 @@ class PollQuestion(SmartModel):
     ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
 
     def fetch_results(self, segment=None):
-        key = CACHE_POLL_RESULTS_KEY % (self.poll.pk, self.pk)
+        key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
             segment = self.poll.org.substitute_segment(segment)
             key += ":" + slugify(unicode(segment))
@@ -312,7 +312,7 @@ class PollQuestion(SmartModel):
         return results
 
     def get_results(self, segment=None):
-        key = CACHE_POLL_RESULTS_KEY % (self.poll.pk, self.pk)
+        key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
             segment = self.poll.org.substitute_segment(segment)
             key += ":" + slugify(unicode(json.dumps(segment)))
