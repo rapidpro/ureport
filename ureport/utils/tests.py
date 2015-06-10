@@ -7,7 +7,7 @@ import pytz
 import redis
 from temba import Group
 from ureport.assets.models import FLAG, Image
-from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
+from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs, fetch_reporter_group
 
@@ -339,22 +339,27 @@ class UtilsTest(DashTest):
 
     def test_reporter_group(self):
         self.clear_cache()
-        with patch('dash.orgs.models.TembaClient.get_groups') as mock:
-            group_dict = dict(uuid="group-uuid", name="reporters", size=25)
-            mock.return_value = Group.deserialize_list([group_dict])
+        with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
+            mock_datetime_ms.return_value = 500
 
-            with patch('django.core.cache.cache.set') as cache_set_mock:
-                cache_set_mock.return_value = "Set"
+            with patch('dash.orgs.models.TembaClient.get_groups') as mock:
+                group_dict = dict(uuid="group-uuid", name="reporters", size=25)
+                mock.return_value = Group.deserialize_list([group_dict])
 
-                fetch_reporter_group(self.org)
-                self.assertFalse(mock.called)
-                self.assertFalse(cache_set_mock.called)
-                self.assertEqual(self.org.get_reporter_group(), dict())
+                with patch('django.core.cache.cache.set') as cache_set_mock:
+                    cache_set_mock.return_value = "Set"
 
-                self.org.set_config("reporter_group", "reporters")
+                    fetch_reporter_group(self.org)
+                    self.assertFalse(mock.called)
+                    self.assertFalse(cache_set_mock.called)
+                    self.assertEqual(self.org.get_reporter_group(), dict())
 
-                fetch_reporter_group(self.org)
-                mock.assert_called_with(name='reporters')
+                    self.org.set_config("reporter_group", "reporters")
 
-                key = CACHE_ORG_REPORTER_GROUP_KEY % (self.org.pk, "reporters")
-                cache_set_mock.assert_called_with(key, group_dict)
+                    fetch_reporter_group(self.org)
+                    mock.assert_called_with(name='reporters')
+
+                    key = CACHE_ORG_REPORTER_GROUP_KEY % (self.org.pk, "reporters")
+                    cache_set_mock.assert_called_with(key,
+                                                      {'time': 500, 'results': group_dict},
+                                                      UREPORT_FETCHED_DATA_CACHE_TIME)

@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import json
+from datetime import datetime
 from django.db import models
 from django.utils.text import slugify
 from smartmin.models import SmartModel
@@ -7,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
 from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
-from dash.utils import temba_client_flow_results_serializer
+from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
 
 
@@ -18,6 +19,8 @@ OPEN_ENDED_CACHE_TIME = getattr(settings, 'OPEN_ENDED_CACHE_TIME', 60 * 60 * 24 
 BRICK_POLLS_CACHE_TIME = getattr(settings, 'BRICK_POLLS_CACHE_TIME', 60 * 60 * 30)
 
 POLL_RESULTS_CACHE_TIME = getattr(settings, 'POLL_RESULTS_CACHE_TIME', 60 * 60 * 24)
+
+UREPORT_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_FETCHED_DATA_CACHE_TIME', 60 * 60 * 24 * 15)
 
 CACHE_POLL_RESULTS_KEY = 'org:%d:poll:%d:results:%d'
 
@@ -304,11 +307,12 @@ class PollQuestion(SmartModel):
             segment = self.poll.org.substitute_segment(segment)
             key += ":" + slugify(unicode(segment))
 
+        this_time = datetime.now()
         temba_client = self.poll.org.get_temba_client()
         client_results = temba_client.get_results(self.ruleset_uuid, segment=segment)
         results = temba_client_flow_results_serializer(client_results)
 
-        cache.set(key, results, POLL_RESULTS_CACHE_TIME)
+        cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, POLL_RESULTS_CACHE_TIME)
         return results
 
     def get_results(self, segment=None):
@@ -319,7 +323,7 @@ class PollQuestion(SmartModel):
 
         cached_value = cache.get(key)
         if cached_value:
-            return cached_value
+            return cached_value['results']
 
     def get_total_summary_data(self):
         cached_results = self.get_results()
