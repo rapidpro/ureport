@@ -156,7 +156,7 @@ def organize_categories_data(org, contact_field, api_data):
         tz = pytz.timezone('UTC')
 
         for elt in api_data[0]['categories']:
-            time_str =  elt['label']
+            time_str = elt['label']
 
             # ignore anything like None as label
             if not time_str:
