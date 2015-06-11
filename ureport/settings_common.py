@@ -443,12 +443,12 @@ CELERYBEAT_SCHEDULE = {
     },
     "update_main_poll": {
         "task": "polls.update_main_poll",
-        "schedule": timedelta(minutes=5),
+        "schedule": timedelta(minutes=10),
         "relative": True,
     },
     "update_brick_polls": {
         "task": "polls.update_brick_polls",
-        "schedule": timedelta(hours=1),
+        "schedule": timedelta(hours=24),
         "relative": True,
     },
     "update_other_polls": {
