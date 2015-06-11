@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import json
+import time
 from datetime import datetime
 from django.db import models
 from django.utils.text import slugify
@@ -20,7 +21,11 @@ BRICK_POLLS_CACHE_TIME = getattr(settings, 'BRICK_POLLS_CACHE_TIME', 60 * 60 * 3
 
 POLL_RESULTS_CACHE_TIME = getattr(settings, 'POLL_RESULTS_CACHE_TIME', 60 * 60 * 24)
 
-UREPORT_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_FETCHED_DATA_CACHE_TIME', 60 * 60 * 24 * 15)
+# big cache time for task cached data, we run more often the task to update the data
+UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME', 60 * 60 * 24 * 15)
+
+# time to cache data we fetch directly from the api not with a task
+UREPORT_RUN_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_RUN_FETCHED_DATA_CACHE_TIME', 60 * 10)
 
 CACHE_POLL_RESULTS_KEY = 'org:%d:poll:%d:results:%d'
 
@@ -72,12 +77,10 @@ class Poll(SmartModel):
     org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
 
-    def fetch_poll_results(self, country_state_boundary_ids):
+    def fetch_poll_results(self):
         for question in self.questions.all():
             question.fetch_results()
             question.fetch_results(dict(location='State'))
-            for state_id in country_state_boundary_ids:
-                question.fetch_results(dict(location='District', parent=state_id))
 
     @classmethod
     def get_main_poll(cls, org):
@@ -302,6 +305,12 @@ class PollQuestion(SmartModel):
     ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
 
     def fetch_results(self, segment=None):
+        from raven.contrib.django.raven_compat.models import client
+
+        cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
+        if segment and segment.get('location', "") == "District":
+            cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
+
         try:
             key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
             if segment:
@@ -313,20 +322,29 @@ class PollQuestion(SmartModel):
             client_results = temba_client.get_results(self.ruleset_uuid, segment=segment)
             results = temba_client_flow_results_serializer(client_results)
 
-            cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, UREPORT_FETCHED_DATA_CACHE_TIME)
+            cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, cache_time)
         except:
+            client.captureException()
             import traceback
             traceback.print_exc()
 
     def get_results(self, segment=None):
+
         key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
-            segment = self.poll.org.substitute_segment(segment)
-            key += ":" + slugify(unicode(json.dumps(segment)))
+            substituted_segment = self.poll.org.substitute_segment(segment)
+            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
 
-        cached_value = cache.get(key)
+        cached_value = cache.get(key, None)
         if cached_value:
             return cached_value['results']
+
+        if segment and segment.get('location', "") == "District":
+            self.fetch_results(segment=segment)
+
+            cached_value = cache.get(key, None)
+            if cached_value:
+                return cached_value['results']
 
     def get_total_summary_data(self):
         cached_results = self.get_results()

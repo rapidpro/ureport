@@ -1,3 +1,4 @@
+import time
 from dash.orgs.models import Org
 from django_redis import get_redis_connection
 from djcelery.app import app
@@ -7,6 +8,8 @@ from ureport.utils import fetch_contact_field_results, fetch_org_polls_results, 
 
 @app.task(name='polls.update_main_poll')
 def update_main_poll():
+
+    start = time.time()
     r = get_redis_connection()
 
     key = 'update_main_poll'
@@ -18,6 +21,7 @@ def update_main_poll():
                 if main_poll:
                     fetch_org_polls_results(org, [main_poll], r)
 
+    print "Task: Update_main_poll took %ss" % (time.time() - start)
 
 @app.task(name='polls.update_brick_polls')
 def update_brick_polls():
@@ -71,12 +75,5 @@ def update_org_graphs_data():
                     c_field = org.get_config(data_label)
                     if c_field:
                         fetch_contact_field_results(org, c_field, None)
-
-                states_boundaries_id = org.get_top_level_geojson_ids()
-                c_field = org.get_config('gender_label')
-                if c_field:
-                    if org.get_config('state_label'):
-                        fetch_contact_field_results(org, c_field, dict(location='State'))
-                    if org.get_config('district_label'):
-                        for state_id in states_boundaries_id:
-                            fetch_contact_field_results(org, c_field, dict(location='District', parent=state_id))
+                        if data_label == 'gender_label':
+                            fetch_contact_field_results(org, c_field, dict(location='State'))

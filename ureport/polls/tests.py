@@ -10,7 +10,7 @@ from mock import patch
 from dash.categories.models import Category, CategoryImage
 from temba import Result, Flow, Group
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
-from ureport.polls.models import UREPORT_FETCHED_DATA_CACHE_TIME
+from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest, MockAPI, MockTembaClient
 
 
@@ -942,6 +942,10 @@ class PollQuestionTest(DashTest):
                                                                                     dict(count=1252, label='No')],
                                     label='All')]
 
+        self.uganda.set_config("state_label", "LGA")
+        self.uganda.set_config("district_label", "District")
+
+
         with patch('dash.orgs.models.TembaClient.get_results') as mock:
             mock.return_value = Result.deserialize_list(fetched_results)
 
@@ -951,14 +955,12 @@ class PollQuestionTest(DashTest):
                 with patch("ureport.polls.models.datetime_to_ms") as mock_datetime_ms:
                     mock_datetime_ms.return_value = 500
 
-                    self.uganda.set_config("state_label", "LGA")
-
                     poll_question1.fetch_results()
                     key = CACHE_POLL_RESULTS_KEY % (poll_question1.poll.org.pk, poll_question1.poll.pk, poll_question1.pk)
 
                     cache_set_mock.assert_called_with(key,
                                                       {'time': 500, 'results':fetched_results},
-                                                      UREPORT_FETCHED_DATA_CACHE_TIME)
+                                                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
                     mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
 
                     poll_question1.fetch_results(segment=dict(location='State'))
@@ -968,9 +970,30 @@ class PollQuestionTest(DashTest):
 
                     cache_set_mock.assert_called_with(key,
                                                       {'time': 500, 'results':fetched_results},
-                                                      UREPORT_FETCHED_DATA_CACHE_TIME)
+                                                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
                     mock.assert_called_with(poll_question1.ruleset_uuid, segment=segment)
+
+        with patch('ureport.polls.models.PollQuestion.fetch_results') as mock:
+            mock.return_value = None
+
+            poll_question1.get_results()
+            self.assertFalse(mock.called)
+
+            poll_question1.get_results(segment=dict(location='State'))
+            self.assertFalse(mock.called)
+
+            with patch('django.core.cache.cache.get') as cache_get_mock:
+                cache_get_mock.return_value = dict(results="RESULTS", time=500)
+
+                poll_question1.get_results(segment=dict(location='District'))
+                self.assertFalse(mock.called)
+
+            with patch('django.core.cache.cache.get') as cache_get_mock:
+                cache_get_mock.return_value = None
+
+                poll_question1.get_results(segment=dict(location='District'))
+                mock.assert_called_with(segment=dict(location='District'))
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = fetched_results

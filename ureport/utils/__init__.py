@@ -11,6 +11,7 @@ from django_redis import get_redis_connection
 import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
+from raven.contrib.django.raven_compat.models import client
 
 
 def get_linked_orgs():
@@ -73,9 +74,14 @@ def clean_global_results_data(org, results, segment):
 
 
 def fetch_contact_field_results(org, contact_field, segment):
-    try:
-        from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
+    from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
+    from ureport.polls.models import UREPORT_RUN_FETCHED_DATA_CACHE_TIME
 
+    cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
+    if segment and segment.get('location', "") == "District":
+        cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
+
+    try:
         segment = substitute_segment(org, segment)
 
         this_time = datetime.now()
@@ -87,10 +93,9 @@ def fetch_contact_field_results(org, contact_field, segment):
         cleaned_results_data = results_data
 
         key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(segment)))
-        cache.set(key,
-                  {'time': datetime_to_ms(this_time), 'results': cleaned_results_data},
-                  UREPORT_FETCHED_DATA_CACHE_TIME)
+        cache.set(key, {'time': datetime_to_ms(this_time), 'results': cleaned_results_data}, cache_time)
     except:
+        client.captureException()
         import traceback
         traceback.print_exc()
 
@@ -98,13 +103,19 @@ def fetch_contact_field_results(org, contact_field, segment):
 def get_contact_field_results(org, contact_field, segment):
     from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY
 
-    segment = substitute_segment(org, segment)
+    subsituted_segment = substitute_segment(org, segment)
 
-    key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(segment)))
+    key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(subsituted_segment)))
     cache_value = cache.get(key, None)
 
     if cache_value:
         return cache_value['results']
+
+    if segment and segment.get('location', "") == "District":
+        fetch_contact_field_results(org, contact_field, segment)
+        cache_value = cache.get(key, None)
+        if cache_value:
+            return cache_value['results']
 
 
 def get_most_active_regions(org):
@@ -214,18 +225,16 @@ def fetch_org_polls_results(org, polls, r=None):
     if not r:
         r = get_redis_connection()
 
-    states_boundaries_id = org.get_top_level_geojson_ids()
-
     for poll in polls:
         key = LOCK_POLL_RESULTS_KEY % poll.pk
         if not r.get(key):
             with r.lock(key, timeout=LOCK_POLL_RESULTS_TIMEOUT):
-                poll.fetch_poll_results(states_boundaries_id)
+                poll.fetch_poll_results()
 
 
 def fetch_flows(org):
     try:
-        from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
+        from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
         this_time = datetime.now()
 
@@ -249,8 +258,9 @@ def fetch_flows(org):
         all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
         cache.set(all_flows_key,
                   {'time': datetime_to_ms(this_time), 'results': all_flows},
-                  UREPORT_FETCHED_DATA_CACHE_TIME)
+                  UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
     except:
+        client.captureException()
         import traceback
         traceback.print_exc()
 
@@ -267,7 +277,7 @@ def get_flows(org):
 
 def fetch_reporter_group(org):
     try:
-        from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
+        from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
         this_time = datetime.now()
 
@@ -283,8 +293,9 @@ def fetch_reporter_group(org):
                 group_dict = dict(size=group.size, name=group.name, uuid=group.uuid)
             cache.set(key,
                       {'time': datetime_to_ms(this_time), 'results': group_dict},
-                      UREPORT_FETCHED_DATA_CACHE_TIME)
+                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
     except:
+        client.captureException()
         import traceback
         traceback.print_exc()
 

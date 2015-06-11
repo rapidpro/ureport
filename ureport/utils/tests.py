@@ -7,7 +7,7 @@ import pytz
 import redis
 from temba import Group
 from ureport.assets.models import FLAG, Image
-from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
+from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs, fetch_reporter_group
 
@@ -362,4 +362,4 @@ class UtilsTest(DashTest):
                     key = CACHE_ORG_REPORTER_GROUP_KEY % (self.org.pk, "reporters")
                     cache_set_mock.assert_called_with(key,
                                                       {'time': 500, 'results': group_dict},
-                                                      UREPORT_FETCHED_DATA_CACHE_TIME)
+                                                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
