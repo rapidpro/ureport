@@ -1,5 +1,6 @@
 import json
 import math
+import time
 from datetime import timedelta, datetime
 from dash.orgs.models import Org
 from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
@@ -77,6 +78,9 @@ def fetch_contact_field_results(org, contact_field, segment):
     from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     from ureport.polls.models import UREPORT_RUN_FETCHED_DATA_CACHE_TIME
 
+    start = time.time()
+    print "Fetching  %s for %s with segment %s" % (contact_field, org.name, segment)
+
     cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     if segment and segment.get('location', "") == "District":
         cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
@@ -91,6 +95,8 @@ def fetch_contact_field_results(org, contact_field, segment):
 
         results_data = temba_client_flow_results_serializer(client_results)
         cleaned_results_data = results_data
+
+        print "Fetch took %ss" % (time.time() - start)
 
         key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(segment)))
         cache.set(key, {'time': datetime_to_ms(this_time), 'results': cleaned_results_data}, cache_time)
@@ -222,6 +228,9 @@ LOCK_POLL_RESULTS_TIMEOUT = 60 * 15
 
 
 def fetch_org_polls_results(org, polls, r=None):
+
+    start = time.time()
+    print "Fetching polls results for %s" % org.name
     if not r:
         r = get_redis_connection()
 
@@ -231,8 +240,12 @@ def fetch_org_polls_results(org, polls, r=None):
             with r.lock(key, timeout=LOCK_POLL_RESULTS_TIMEOUT):
                 poll.fetch_poll_results()
 
+    print "Fetch results for %d polls on %s took %ss" % (len(polls), org.name, time.time() - start)
 
 def fetch_flows(org):
+    start = time.time()
+    print "Fetching flows for %s" % org.name
+
     try:
         from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
@@ -264,6 +277,7 @@ def fetch_flows(org):
         import traceback
         traceback.print_exc()
 
+    print "Fetch %s flows took %ss" % (org.name, time.time() - start)
 
 def get_flows(org):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY
@@ -276,6 +290,8 @@ def get_flows(org):
 
 
 def fetch_reporter_group(org):
+    start = time.time()
+    print "Fetching reporter group for %s" % org.name
     try:
         from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
@@ -298,7 +314,7 @@ def fetch_reporter_group(org):
         client.captureException()
         import traceback
         traceback.print_exc()
-
+    print "Fetch %s reporter group took %ss" % (org.name, time.time() - start)
 
 def get_reporter_group(org):
     from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY

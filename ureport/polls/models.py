@@ -126,7 +126,7 @@ class Poll(SmartModel):
     @classmethod
     def get_other_polls(cls, org):
         main_poll = Poll.get_main_poll(org)
-        brick_polls = Poll.get_brick_polls(org)
+        brick_polls = Poll.get_brick_polls(org)[:5]
 
         exclude_polls = [poll.pk for poll in brick_polls]
         if main_poll:

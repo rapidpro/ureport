@@ -425,6 +425,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 #-----------------------------------------------------------------------------------
 
 from datetime import timedelta
+from celery.schedules import crontab
 
 CELERY_TIMEZONE = 'UTC'
 
@@ -451,7 +452,7 @@ CELERYBEAT_SCHEDULE = {
     },
     "update_other_polls": {
         "task": "polls.update_other_polls",
-        "schedule": timedelta(hours=24),
+        "schedule": crontab(minute=0, hour=3),
         "relative": True,
     },
 
