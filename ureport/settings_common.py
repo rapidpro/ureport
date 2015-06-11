@@ -448,7 +448,7 @@ CELERYBEAT_SCHEDULE = {
     },
     "update_brick_polls": {
         "task": "polls.update_brick_polls",
-        "schedule": timedelta(hours=24),
+        "schedule": crontab(minute=0, hour=1),
         "relative": True,
     },
     "update_other_polls": {
