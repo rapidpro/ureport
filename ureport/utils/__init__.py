@@ -229,18 +229,18 @@ LOCK_POLL_RESULTS_TIMEOUT = 60 * 15
 
 def fetch_org_polls_results(org, polls, r=None):
 
-    start = time.time()
-    print "Fetching polls results for %s" % org.name
     if not r:
         r = get_redis_connection()
 
     for poll in polls:
+        start = time.time()
+        print "Fetching polls results for poll id(%d) - %s" % (poll.pk, poll.title)
+
         key = LOCK_POLL_RESULTS_KEY % poll.pk
         if not r.get(key):
             with r.lock(key, timeout=LOCK_POLL_RESULTS_TIMEOUT):
                 poll.fetch_poll_results()
-
-    print "Fetch results for %d polls on %s took %ss" % (len(polls), org.name, time.time() - start)
+                print "Fetch results for poll id(%d) on %s took %ss" % (poll.pk, org.name, time.time() - start)
 
 def fetch_flows(org):
     start = time.time()

@@ -31,7 +31,7 @@ def update_brick_polls():
 
     key = 'update_brick_polls'
     if not r.get(key):
-        with r.lock(key, timeout=900):
+        with r.lock(key, timeout=3600):
             active_orgs = Org.objects.filter(is_active=True)
             for org in active_orgs:
                 print "=" * 40
@@ -47,7 +47,7 @@ def update_other_polls():
 
     key = 'update_other_polls'
     if not r.get(key):
-        with r.lock(key, timeout=900):
+        with r.lock(key, timeout=10800):
             active_orgs = Org.objects.filter(is_active=True)
             for org in active_orgs:
                 print "=" * 40
