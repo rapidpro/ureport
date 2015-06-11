@@ -6,6 +6,7 @@ import celery
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ureport.settings')
 
+
 class Celery(celery.Celery):
     def on_configure(self):
         import raven
