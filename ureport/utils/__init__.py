@@ -73,22 +73,26 @@ def clean_global_results_data(org, results, segment):
 
 
 def fetch_contact_field_results(org, contact_field, segment):
-    from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
+    try:
+        from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
 
-    segment = substitute_segment(org, segment)
+        segment = substitute_segment(org, segment)
 
-    this_time = datetime.now()
+        this_time = datetime.now()
 
-    temba_client = org.get_temba_client()
-    client_results = temba_client.get_results(contact_field=contact_field, segment=segment)
+        temba_client = org.get_temba_client()
+        client_results = temba_client.get_results(contact_field=contact_field, segment=segment)
 
-    results_data = temba_client_flow_results_serializer(client_results)
-    cleaned_results_data = results_data
+        results_data = temba_client_flow_results_serializer(client_results)
+        cleaned_results_data = results_data
 
-    key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(segment)))
-    cache.set(key,
-              {'time': datetime_to_ms(this_time), 'results': cleaned_results_data},
-              UREPORT_FETCHED_DATA_CACHE_TIME)
+        key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(segment)))
+        cache.set(key,
+                  {'time': datetime_to_ms(this_time), 'results': cleaned_results_data},
+                  UREPORT_FETCHED_DATA_CACHE_TIME)
+    except:
+        import traceback
+        traceback.print_exc()
 
 
 def get_contact_field_results(org, contact_field, segment):
@@ -220,31 +224,35 @@ def fetch_org_polls_results(org, polls, r=None):
 
 
 def fetch_flows(org):
-    from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
+    try:
+        from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
 
-    this_time = datetime.now()
+        this_time = datetime.now()
 
-    temba_client = org.get_temba_client()
-    flows = temba_client.get_flows()
+        temba_client = org.get_temba_client()
+        flows = temba_client.get_flows()
 
-    all_flows = dict()
-    for flow in flows:
-        if flow.rulesets:
-            flow_json = dict()
-            flow_json['uuid'] = flow.uuid
-            flow_json['name'] = flow.name
-            flow_json['participants'] = flow.participants
-            flow_json['runs'] = flow.runs
-            flow_json['completed_runs'] = flow.completed_runs
-            flow_json['rulesets'] = [
-                dict(uuid=elt.uuid, label=elt.label, response_type=elt.response_type) for elt in flow.rulesets]
+        all_flows = dict()
+        for flow in flows:
+            if flow.rulesets:
+                flow_json = dict()
+                flow_json['uuid'] = flow.uuid
+                flow_json['name'] = flow.name
+                flow_json['participants'] = flow.participants
+                flow_json['runs'] = flow.runs
+                flow_json['completed_runs'] = flow.completed_runs
+                flow_json['rulesets'] = [
+                    dict(uuid=elt.uuid, label=elt.label, response_type=elt.response_type) for elt in flow.rulesets]
 
-            all_flows[flow.uuid] = flow_json
+                all_flows[flow.uuid] = flow_json
 
-    all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
-    cache.set(all_flows_key,
-              {'time': datetime_to_ms(this_time), 'results': all_flows},
-              UREPORT_FETCHED_DATA_CACHE_TIME)
+        all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
+        cache.set(all_flows_key,
+                  {'time': datetime_to_ms(this_time), 'results': all_flows},
+                  UREPORT_FETCHED_DATA_CACHE_TIME)
+    except:
+        import traceback
+        traceback.print_exc()
 
 
 def get_flows(org):
@@ -258,23 +266,27 @@ def get_flows(org):
 
 
 def fetch_reporter_group(org):
-    from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
+    try:
+        from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_FETCHED_DATA_CACHE_TIME
 
-    this_time = datetime.now()
+        this_time = datetime.now()
 
-    reporter_group = org.get_config('reporter_group')
-    if reporter_group:
-        temba_client = org.get_temba_client()
-        groups = temba_client.get_groups(name=reporter_group)
+        reporter_group = org.get_config('reporter_group')
+        if reporter_group:
+            temba_client = org.get_temba_client()
+            groups = temba_client.get_groups(name=reporter_group)
 
-        key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
-        group_dict = dict()
-        if groups:
-            group = groups[0]
-            group_dict = dict(size=group.size, name=group.name, uuid=group.uuid)
-        cache.set(key,
-                  {'time': datetime_to_ms(this_time), 'results': group_dict},
-                  UREPORT_FETCHED_DATA_CACHE_TIME)
+            key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
+            group_dict = dict()
+            if groups:
+                group = groups[0]
+                group_dict = dict(size=group.size, name=group.name, uuid=group.uuid)
+            cache.set(key,
+                      {'time': datetime_to_ms(this_time), 'results': group_dict},
+                      UREPORT_FETCHED_DATA_CACHE_TIME)
+    except:
+        import traceback
+        traceback.print_exc()
 
 
 def get_reporter_group(org):

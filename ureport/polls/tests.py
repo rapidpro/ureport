@@ -2,13 +2,15 @@ import json
 from django.core.urlresolvers import reverse
 from django.template import TemplateSyntaxError
 from django.test import TestCase
+from django.utils.text import slugify
 
 import pycountry
 
 from mock import patch
 from dash.categories.models import Category, CategoryImage
 from temba import Result, Flow, Group
-from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
+from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
+from ureport.polls.models import UREPORT_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest, MockAPI, MockTembaClient
 
 
@@ -943,13 +945,32 @@ class PollQuestionTest(DashTest):
         with patch('dash.orgs.models.TembaClient.get_results') as mock:
             mock.return_value = Result.deserialize_list(fetched_results)
 
-            self.uganda.set_config("state_label", "LGA")
+            with patch('django.core.cache.cache.set') as cache_set_mock:
+                cache_set_mock.return_value = "Set"
 
-            self.assertEquals(poll_question1.fetch_results(), fetched_results)
-            mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
+                with patch("ureport.polls.models.datetime_to_ms") as mock_datetime_ms:
+                    mock_datetime_ms.return_value = 500
 
-            self.assertEquals(poll_question1.fetch_results(segment=dict(location='State')), fetched_results)
-            mock.assert_called_with(poll_question1.ruleset_uuid, segment=json.dumps(dict(location='LGA')))
+                    self.uganda.set_config("state_label", "LGA")
+
+                    poll_question1.fetch_results()
+                    key = CACHE_POLL_RESULTS_KEY % (poll_question1.poll.org.pk, poll_question1.poll.pk, poll_question1.pk)
+
+                    cache_set_mock.assert_called_with(key,
+                                                      {'time': 500, 'results':fetched_results},
+                                                      UREPORT_FETCHED_DATA_CACHE_TIME)
+                    mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
+
+                    poll_question1.fetch_results(segment=dict(location='State'))
+
+                    segment = json.dumps(dict(location='LGA'))
+                    key += ":" + slugify(unicode(segment))
+
+                    cache_set_mock.assert_called_with(key,
+                                                      {'time': 500, 'results':fetched_results},
+                                                      UREPORT_FETCHED_DATA_CACHE_TIME)
+
+                    mock.assert_called_with(poll_question1.ruleset_uuid, segment=segment)
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = fetched_results

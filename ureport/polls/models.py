@@ -302,18 +302,21 @@ class PollQuestion(SmartModel):
     ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
 
     def fetch_results(self, segment=None):
-        key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
-        if segment:
-            segment = self.poll.org.substitute_segment(segment)
-            key += ":" + slugify(unicode(segment))
+        try:
+            key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+            if segment:
+                segment = self.poll.org.substitute_segment(segment)
+                key += ":" + slugify(unicode(segment))
 
-        this_time = datetime.now()
-        temba_client = self.poll.org.get_temba_client()
-        client_results = temba_client.get_results(self.ruleset_uuid, segment=segment)
-        results = temba_client_flow_results_serializer(client_results)
+            this_time = datetime.now()
+            temba_client = self.poll.org.get_temba_client()
+            client_results = temba_client.get_results(self.ruleset_uuid, segment=segment)
+            results = temba_client_flow_results_serializer(client_results)
 
-        cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, POLL_RESULTS_CACHE_TIME)
-        return results
+            cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, UREPORT_FETCHED_DATA_CACHE_TIME)
+        except:
+            import traceback
+            traceback.print_exc()
 
     def get_results(self, segment=None):
         key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
