@@ -78,6 +78,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=15),
         "relative": True,
     },
+    "build_boundaries": {
+        "task": "orgs.build_boundaries",
+        "schedule": timedelta(minutes=20),
+        "relative": True,
+    },
 
 }
 

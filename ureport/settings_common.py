@@ -448,12 +448,17 @@ CELERYBEAT_SCHEDULE = {
     },
     "update_brick_polls": {
         "task": "polls.update_brick_polls",
-        "schedule": crontab(minute=0, hour=1),
+        "schedule": timedelta(hours=24),
         "relative": True,
     },
     "update_other_polls": {
         "task": "polls.update_other_polls",
-        "schedule": crontab(minute=0, hour=3),
+        "schedule": timedelta(hours=24),
+        "relative": True,
+    },
+    "build_boundaries": {
+        "task": "orgs.build_boundaries",
+        "schedule": timedelta(days=15),
         "relative": True,
     },
 
