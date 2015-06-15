@@ -337,14 +337,17 @@ def get_global_count():
     if count_cached_value:
         return count_cached_value
 
-    reporter_counter_keys = cache.keys('org:*:reporters:*')
+    try:
+        reporter_counter_keys = cache.keys('org:*:reporters:*')
 
-    cached_values = [cache.get(key) for key in reporter_counter_keys]
+        cached_values = [cache.get(key) for key in reporter_counter_keys]
 
-    count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
+        count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
 
-    # cached for 10 min
-    cache.set('global_count', count, 60 * 10)
+        # cached for 10 min
+        cache.set('global_count', count, 60 * 10)
+    except AttributeError:
+        count = '__'
 
     return count
 
