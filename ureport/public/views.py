@@ -18,7 +18,7 @@ from ureport.news.models import Video, NewsItem
 import math
 import pycountry
 from datetime import timedelta, datetime
-from ureport.utils import get_linked_orgs, clean_global_results_data
+from ureport.utils import get_linked_orgs, clean_global_results_data, get_global_count
 
 
 def chooser(request):
@@ -55,6 +55,10 @@ class IndexView(SmartTemplateView):
         # we use gender label to estimate the most active region
         if org.get_config('gender_label'):
             context['most_active_regions'] = org.get_most_active_regions()
+
+        # global counter
+        if org.get_config('is_global'):
+            context['global_counter'] = get_global_count()
 
         return context
 

@@ -331,6 +331,22 @@ def get_reporter_group(org):
 
     return dict()
 
+def get_global_count():
+
+    count_cached_value = cache.get('global_count', None)
+    if count_cached_value:
+        return count_cached_value
+
+    reporter_counter_keys = cache.keys('org:*:reporters:*')
+
+    cached_values = [cache.get(key) for key in reporter_counter_keys]
+
+    count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
+
+    # cached for 10 min
+    cache.set('global_count', count, 60 * 10)
+
+    return count
 
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
