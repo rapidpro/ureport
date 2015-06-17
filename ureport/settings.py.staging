@@ -6,6 +6,8 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 COMPRESS_ENABLED = True
 
+DASH_IGNORED_SUBDOMAINS = ('staging', 'ureport')
+
 HOSTNAME = 'nigeria.ureport.staging.nyaruka.com'
 ALLOWED_HOSTS = ['.nyaruka.com', '.ureport.in']
 SESSION_COOKIE_DOMAIN = 'ureport.staging.nyaruka.com'
