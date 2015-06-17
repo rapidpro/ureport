@@ -48,10 +48,18 @@ class UtilsTest(DashTest):
         self.assertIsNone(self.org.substitute_segment(None))
 
         self.org.set_config("state_label", "Province")
+        input_segment = dict(location='State')
+        self.assertEqual(self.org.substitute_segment(input_segment), json.dumps(dict(location="Province")))
+        # make sure we did not change the input segment
+        self.assertEqual(input_segment, dict(location='State'))
+
         self.assertEqual(self.org.substitute_segment(dict(location='State')), json.dumps(dict(location="Province")))
 
         self.org.set_config("district_label", "LGA")
-        self.assertEqual(self.org.substitute_segment(dict(location='District')), json.dumps(dict(location="LGA")))
+        input_segment = dict(location='District')
+        self.assertEqual(self.org.substitute_segment(input_segment), json.dumps(dict(location="LGA")))
+        # make sure we did not change the input segment
+        self.assertEqual(input_segment, dict(location='District'))
 
         self.org.set_config("is_global", True)
         expected = dict(contact_field="Province", values=[elt.alpha2 for elt in pycountry.countries.objects])
