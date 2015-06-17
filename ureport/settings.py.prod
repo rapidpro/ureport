@@ -149,7 +149,7 @@ COMPRESS_OFFLINE = True
 COMPRESS_OFFLINE_CONTEXT = dict(STATIC_URL=STATIC_URL, base_template='frame.html', debug=False, testing=False)
 
 REDIS_HOST = 'redis-internal.ureport.in'
-BROKER_HOT = REDIS_HOST
+BROKER_HOST = REDIS_HOST
 
 CACHES = {
     'default': {
