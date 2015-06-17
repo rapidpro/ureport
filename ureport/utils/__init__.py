@@ -1,3 +1,4 @@
+import copy
 import json
 import math
 import time
@@ -34,9 +35,11 @@ def get_linked_orgs():
     return linked_sites_sorted
 
 
-def substitute_segment(org, segment):
-    if not segment:
-        return segment
+def substitute_segment(org, segment_in):
+    if not segment_in:
+        return segment_in
+
+    segment = copy.deepcopy(segment_in)
 
     location = segment.get('location', None)
     if location == 'State':
