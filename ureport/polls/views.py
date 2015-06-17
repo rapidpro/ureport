@@ -1,8 +1,9 @@
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from django import forms
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from dash.categories.models import Category, CategoryImage
-from .models import Poll, PollQuestion, FeaturedResponse, PollImage
+from .models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_ORG_FLOWS_KEY
 from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
@@ -18,22 +19,21 @@ class PollForm(forms.ModelForm):
         self.fields['category'].queryset = Category.objects.filter(org=self.org)
 
         # find all the flows on this org, create choices for those
-        api = self.org.get_api()
-        flows = api.get_flows()
-        self.fields['flow_id'].choices = [(f['flow'], f['name']) for f in flows]
+        flows = self.org.get_flows()
+        self.fields['flow_uuid'].choices = [(f['uuid'], f['name']) for f in flows.values()]
 
         # only display category images for this org which are active
         self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')
 
     is_active = forms.BooleanField(required=False)
-    flow_id = forms.ChoiceField(choices=[])
+    flow_uuid = forms.ChoiceField(choices=[])
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = forms.ModelChoiceField(Category.objects.filter(id__lte=-1))
     category_image = forms.ModelChoiceField(CategoryImage.objects.filter(id__lte=0), required=False)
 
     class Meta:
         model = Poll
-        fields = ('is_active', 'is_featured', 'flow_id', 'title', 'category', 'category_image')
+        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'category', 'category_image')
 
 
 class QuestionForm(ModelForm):
@@ -46,7 +46,7 @@ class QuestionForm(ModelForm):
 
         # look at all our included polls
         for key in cleaned.keys():
-            match = re.match('ruleset_(\d+)_include', key)
+            match = re.match('ruleset_([\w\-]+)_include', key)
 
             # this field is being included
             if match and cleaned[key]:
@@ -193,8 +193,10 @@ class PollCRUDL(SmartCRUDL):
         success_message = _("Now set what images you want displayed on your poll page. (if any)")
 
         def get_rulesets(self):
-            api = self.object.org.get_api()
-            rulesets = api.get_flow(self.object.flow_id)['rulesets']
+            flow = self.object.get_flow()
+            rulesets = []
+            if flow:
+                rulesets = flow['rulesets']
             return rulesets
 
         def derive_fields(self):
@@ -202,8 +204,8 @@ class PollCRUDL(SmartCRUDL):
 
             fields = []
             for ruleset in rulesets:
-                fields.append('ruleset_%d_include' % ruleset['id'])
-                fields.append('ruleset_%d_title' % ruleset['id'])
+                fields.append('ruleset_%s_include' % ruleset['uuid'])
+                fields.append('ruleset_%s_title' % ruleset['uuid'])
 
             return fields
 
@@ -217,12 +219,12 @@ class PollCRUDL(SmartCRUDL):
             initial = self.derive_initial()
 
             for ruleset in rulesets:
-                include_field_name = 'ruleset_%d_include' % ruleset['id']
+                include_field_name = 'ruleset_%s_include' % ruleset['uuid']
                 include_field_initial = initial.get(include_field_name, False)
                 include_field = forms.BooleanField(label=_("Include"), required=False, initial=include_field_initial,
                                                    help_text=_("Whether to include this question in your public results"))
 
-                title_field_name = 'ruleset_%d_title' % ruleset['id']
+                title_field_name = 'ruleset_%s_title' % ruleset['uuid']
                 title_field_initial = initial.get(title_field_name, ruleset['label'])
                 title_field = forms.CharField(label=_("Title"), widget=forms.Textarea, required=False, initial=title_field_initial,
                                               help_text=_("The question posed to your audience, will be displayed publicly"))
@@ -240,11 +242,11 @@ class PollCRUDL(SmartCRUDL):
 
             # for each ruleset
             for ruleset in rulesets:
-                rid = ruleset['id']
+                r_uuid = ruleset['uuid']
 
-                included = data.get('ruleset_%d_include' % rid, False)
-                title = data['ruleset_%d_title' % rid]
-                existing = PollQuestion.objects.filter(poll=poll, ruleset_id=rid).first()
+                included = data.get('ruleset_%s_include' % r_uuid, False)
+                title = data['ruleset_%s_title' % r_uuid]
+                existing = PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).first()
 
                 if included:
                     # already one of our questions, just update our title
@@ -254,15 +256,15 @@ class PollCRUDL(SmartCRUDL):
 
                     # doesn't exist, let's add it
                     else:
-                        poll.questions.create(ruleset_id=rid, title=title,
+                        poll.questions.create(ruleset_uuid=r_uuid, title=title,
                                               created_by=self.request.user, modified_by=self.request.user)
 
                 # not included, remove it from our poll
                 else:
-                    PollQuestion.objects.filter(poll=poll, ruleset_id=rid).delete()
+                    PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).delete()
 
             # delete poll questions for old rulesets
-            PollQuestion.objects.filter(poll=poll).exclude(ruleset_id__in=[ruleset['id'] for ruleset in rulesets]).delete()
+            PollQuestion.objects.filter(poll=poll).exclude(ruleset_uuid__in=[ruleset['uuid'] for ruleset in rulesets]).delete()
 
             return self.object
 
@@ -278,8 +280,8 @@ class PollCRUDL(SmartCRUDL):
             initial = dict()
 
             for question in self.object.questions.all():
-                initial['ruleset_%d_include' % question.ruleset_id] = True
-                initial['ruleset_%d_title' % question.ruleset_id] = question.title
+                initial['ruleset_%s_include' % question.ruleset_uuid] = True
+                initial['ruleset_%s_title' % question.ruleset_uuid] = question.title
 
             return initial
 
@@ -314,7 +316,7 @@ class PollCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
-        fields = ('is_active', 'is_featured', 'flow_id', 'title', 'category', 'category_image')
+        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'category', 'category_image')
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Update, self).get_form_kwargs()

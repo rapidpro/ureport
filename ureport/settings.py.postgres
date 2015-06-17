@@ -12,6 +12,7 @@ API_BOUNDARY_CACHE_TIME = 60 * 60 * 6
 API_GROUP_CACHE_TIME = 60 * 60 * 6
 API_RESULT_CACHE_TIME = 60 * 60 * 6
 
+SITE_API_HOST = 'rapidpro.io'
 API_ENDPOINT = 'https://api.rapidpro.io'
 SITE_HOST_PATTERN = 'http://%s.ureport.io:8000'
 
@@ -48,5 +49,40 @@ DATABASES = {
         'OPTIONS': {
         }
     }
+}
+
+# Faster schedules for staging server
+CELERYBEAT_SCHEDULE = {
+    "update_flows_and_reporters": {
+        "task": "polls.update_org_flows_and_reporters",
+        "schedule": timedelta(minutes=1),
+        "relative": True,
+    },
+    "update_org_graphs_data": {
+        "task": "polls.update_org_graphs_data",
+        "schedule": timedelta(minutes=3),
+        "relative": True,
+    },
+    "update_main_poll": {
+        "task": "polls.update_main_poll",
+        "schedule": timedelta(minutes=1),
+        "relative": True,
+    },
+    "update_brick_polls": {
+        "task": "polls.update_brick_polls",
+        "schedule": timedelta(minutes=10),
+        "relative": True,
+    },
+    "update_other_polls": {
+        "task": "polls.update_other_polls",
+        "schedule": timedelta(minutes=15),
+        "relative": True,
+    },
+    "build_boundaries": {
+        "task": "orgs.build_boundaries",
+        "schedule": timedelta(minutes=20),
+        "relative": True,
+    },
+
 }
 

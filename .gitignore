@@ -80,3 +80,7 @@ smartmin
 
 # country-list repo
 country-list/
+
+# celery
+celerybeat.pid
+celerybeat-schedule

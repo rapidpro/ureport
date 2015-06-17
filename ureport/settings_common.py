@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import sys
 from django.utils.translation import ugettext_lazy as _
 from hamlpy import templatize
@@ -387,7 +388,7 @@ ANONYMOUS_USER_ID = -1
 import djcelery
 djcelery.setup_loader()
 
-CELERY_RESULT_BACKEND = 'database'
+CELERY_RESULT_BACKEND = 'djcelery.backends.cache:CacheBackend'
 
 BROKER_BACKEND = 'redis'
 BROKER_HOST = 'localhost'
@@ -425,12 +426,42 @@ INTERNAL_IPS = ('127.0.0.1',)
 #-----------------------------------------------------------------------------------
 
 from datetime import timedelta
+from celery.schedules import crontab
+
+CELERY_TIMEZONE = 'UTC'
 
 CELERYBEAT_SCHEDULE = {
-    "runs-every-hour": {
-        "task": "reminders.tasks.check_reminders",
-        "schedule": timedelta(hours=1),
+    "update_flows_and_reporters": {
+        "task": "polls.update_org_flows_and_reporters",
+        "schedule": timedelta(minutes=10),
+        "relative": True,
     },
+    "update_org_graphs_data": {
+        "task": "polls.update_org_graphs_data",
+        "schedule": timedelta(minutes=30),
+        "relative": True,
+    },
+    "update_main_poll": {
+        "task": "polls.update_main_poll",
+        "schedule": timedelta(minutes=10),
+        "relative": True,
+    },
+    "update_brick_polls": {
+        "task": "polls.update_brick_polls",
+        "schedule": timedelta(hours=24),
+        "relative": True,
+    },
+    "update_other_polls": {
+        "task": "polls.update_other_polls",
+        "schedule": timedelta(hours=24),
+        "relative": True,
+    },
+    "build_boundaries": {
+        "task": "orgs.build_boundaries",
+        "schedule": timedelta(days=15),
+        "relative": True,
+    },
+
 }
 
 #-----------------------------------------------------------------------------------

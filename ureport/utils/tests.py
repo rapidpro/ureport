@@ -1,35 +1,83 @@
 from datetime import datetime
+import json
 from django.utils import timezone
 from mock import patch
 import pycountry
 import pytz
 import redis
+from temba import Group
+from ureport.assets.models import FLAG, Image
+from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest
+from ureport.utils import get_linked_orgs, fetch_reporter_group
 
 
 class UtilsTest(DashTest):
 
     def setUp(self):
         super(UtilsTest, self).setUp()
-        self.org = self.create_org("uganda", self.admin)
+        self.org = self.create_org("burundi", self.admin)
 
     def clear_cache(self):
         # hardcoded to localhost
         r = redis.StrictRedis(host='localhost', db=1)
         r.flushdb()
 
+    def test_get_linked_orgs(self):
+
+        # we have 4 old org in the settings
+        self.assertEqual(len(get_linked_orgs()), 4)
+        for old_site in get_linked_orgs():
+            self.assertFalse(old_site['name'].lower() == 'burundi')
+
+        self.org.set_config('is_on_landing_page', True)
+
+        # missing flag
+        self.assertEqual(len(get_linked_orgs()), 4)
+        for old_site in get_linked_orgs():
+            self.assertFalse(old_site['name'].lower() == 'burundi')
+
+        Image.objects.create(org=self.org, image_type=FLAG, name='burundi_flag',
+                             image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
+
+        # burundi should be included and be the first; by alphetical order
+        self.assertEqual(len(get_linked_orgs()), 5)
+        self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+
+    def test_substitute_segment(self):
+        self.assertIsNone(self.org.substitute_segment(None))
+
+        self.org.set_config("state_label", "Province")
+        self.assertEqual(self.org.substitute_segment(dict(location='State')), json.dumps(dict(location="Province")))
+
+        self.org.set_config("district_label", "LGA")
+        self.assertEqual(self.org.substitute_segment(dict(location='District')), json.dumps(dict(location="LGA")))
+
+        self.org.set_config("is_global", True)
+        expected = dict(contact_field="Province", values=[elt.alpha2 for elt in pycountry.countries.objects])
+
+        global_segment = self.org.substitute_segment(dict(location='State'))
+        self.assertEqual(global_segment, json.dumps(expected))
+        self.assertFalse('location' in json.loads(global_segment))
+
+        global_segment = self.org.substitute_segment(dict(location='State', parent="country"))
+        self.assertFalse('location' in json.loads(global_segment))
+        self.assertFalse('parent' in json.loads(global_segment))
+        self.assertEqual(global_segment, json.dumps(expected))
+
     def test_get_most_active_regions(self):
         self.org.set_config('gender_label', 'Gender')
+        self.org.set_config("state_label", "Province")
 
-        with patch('dash.api.API.get_contact_field_results') as mock:
-            mock.return_value = [dict(label='LABEL_1', set=15, unset=5),
-                                 dict(label='LABEL_2', set=100, unset=200),
-                                 dict(label='LABEL_3', set=50, unset=30)]
+        with patch('dash.orgs.models.Org.get_contact_field_results') as mock:
+            mock.return_value = [dict(label='LABEL_1', set=15, unset=5, categories=[], open_ended=None),
+                                 dict(label='LABEL_2', set=100, unset=200, categories=[], open_ended=None),
+                                 dict(label='LABEL_3', set=50, unset=30, categories=[], open_ended=None)]
 
             self.assertEquals(self.org.get_most_active_regions(), ['LABEL_2', 'LABEL_3', 'LABEL_1'])
             mock.assert_called_once_with('Gender', dict(location='State'))
 
-        with patch('dash.api.API.get_contact_field_results') as mock:
+        with patch('dash.orgs.models.Org.get_contact_field_results') as mock:
             self.clear_cache()
             mock.return_value = None
 
@@ -37,19 +85,18 @@ class UtilsTest(DashTest):
             mock.assert_called_once_with('Gender', dict(location='State'))
 
         self.org.set_config("is_global", True)
-        self.org.set_config("state_label", "Province")
 
-        with patch('dash.api.API.get_contact_field_results') as mock:
-            mock.return_value = [dict(label='UG', set=15, unset=5),
-                                 dict(label='RW', set=100, unset=200),
-                                 dict(label='US', set=50, unset=30)]
+        with patch('dash.orgs.models.Org.get_contact_field_results') as mock:
+            mock.return_value = [dict(label='UG', set=15, unset=5, categories=[], open_ended=None),
+                                 dict(label='RW', set=100, unset=200, categories=[], open_ended=None),
+                                 dict(label='US', set=50, unset=30, categories=[], open_ended=None)]
 
             self.assertEquals(self.org.get_most_active_regions(), ['Rwanda', 'United States', 'Uganda'])
             segment = dict()
             segment["contact_field"] = "Province"
             segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
 
-            mock.assert_called_once_with('Gender', segment)
+            mock.assert_called_once_with('Gender', dict(location='State'))
 
     def test_organize_categories_data(self):
 
@@ -290,3 +337,29 @@ class UtilsTest(DashTest):
                                                 dict(label='Cameraman', count=5)
                                                 ])])
 
+    def test_reporter_group(self):
+        self.clear_cache()
+        with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
+            mock_datetime_ms.return_value = 500
+
+            with patch('dash.orgs.models.TembaClient.get_groups') as mock:
+                group_dict = dict(uuid="group-uuid", name="reporters", size=25)
+                mock.return_value = Group.deserialize_list([group_dict])
+
+                with patch('django.core.cache.cache.set') as cache_set_mock:
+                    cache_set_mock.return_value = "Set"
+
+                    fetch_reporter_group(self.org)
+                    self.assertFalse(mock.called)
+                    self.assertFalse(cache_set_mock.called)
+                    self.assertEqual(self.org.get_reporter_group(), dict())
+
+                    self.org.set_config("reporter_group", "reporters")
+
+                    fetch_reporter_group(self.org)
+                    mock.assert_called_with(name='reporters')
+
+                    key = CACHE_ORG_REPORTER_GROUP_KEY % (self.org.pk, "reporters")
+                    cache_set_mock.assert_called_with(key,
+                                                      {'time': 500, 'results': group_dict},
+                                                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)

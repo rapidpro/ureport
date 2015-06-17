@@ -2,10 +2,13 @@ from __future__ import absolute_import
 
 from dash.orgs.models import Org
 from django import template
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.template import TemplateSyntaxError
 from django.template.defaultfilters import stringfilter
 from django.conf import settings
+from django.utils.text import slugify
+from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
 from ureport.utils import get_linked_orgs
 
 register = template.Library()
@@ -17,7 +20,8 @@ def question_results(question):
 
     try:
         results = question.get_results()
-        return results[0]
+        if results:
+            return results[0]
     except:
         import traceback
         traceback.print_exc()
@@ -28,15 +32,8 @@ def reporter_count(org):
     if not org:
         return None
 
-    reporter_group = org.get_config('reporter_group')
-    api = org.get_api()
-
-    if reporter_group:
-        group = api.get_group(reporter_group)
-        if group:
-            return group['size']
-
-    return 0
+    group = org.get_reporter_group()
+    return group.get('size', 0)
 
 @register.filter
 def age_stats(org):
@@ -45,8 +42,7 @@ def age_stats(org):
 
     try:
         born_field = org.get_config('born_label')
-        api_data = org.get_contact_field_results(born_field, None)
-        output_data = org.organize_categories_data(born_field, api_data)[0]
+        output_data = org.get_contact_field_results(born_field, None)[0]
 
         total = output_data['set']
         for category in output_data['categories']:
@@ -78,10 +74,13 @@ def gender_stats(org):
         try:
             # not segmented, so just get the first segment
             gender_data = gender_data[0]
-            male_label = org.get_config('male_label').lower()
-            female_label = org.get_config('female_label').lower()
+            male_label = org.get_config('male_label')
+            female_label = org.get_config('female_label')
 
             if male_label and female_label:
+                male_label = male_label.lower()
+                female_label = female_label.lower()
+
                 male_count = 0
                 female_count = 0
 
@@ -97,14 +96,16 @@ def gender_stats(org):
                     male_percentage = int(male_count * 100.0 / total_count)
                 female_percentage = 100 - male_percentage
                 return dict(total_count=total_count,
-                            male_count=male_count, male_percentage=male_percentage,
-                            female_count=female_count, female_percentage=female_percentage)
+                            male_count=male_count, male_percentage="%s%" % male_percentage,
+                            female_count=female_count, female_percentage="%s%" % female_percentage)
         except:
             # we never want to blow up the page, but let's log what happened
             import traceback
             traceback.print_exc()
 
-    return None
+    return dict(total_count="--",
+                male_count="--", male_percentage="---",
+                female_count="--", female_percentage="---")
 
 @register.filter
 def get_range(value):

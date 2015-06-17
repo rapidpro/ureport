@@ -1,18 +1,48 @@
 from __future__ import unicode_literals
+import json
+import time
+from datetime import datetime
 from django.db import models
-from django.utils import cache
+from django.utils.text import slugify
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
 from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
+from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
+
 
 # cache whether a question is open ended for a month
 OPEN_ENDED_CACHE_TIME = getattr(settings, 'OPEN_ENDED_CACHE_TIME', 60 * 60 * 24 * 30)
 
 # cache our featured polls for a month (this will be invalidated by questions changing)
 BRICK_POLLS_CACHE_TIME = getattr(settings, 'BRICK_POLLS_CACHE_TIME', 60 * 60 * 30)
+
+POLL_RESULTS_CACHE_TIME = getattr(settings, 'POLL_RESULTS_CACHE_TIME', 60 * 60 * 24)
+
+# big cache time for task cached data, we run more often the task to update the data
+UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME', 60 * 60 * 24 * 15)
+
+# time to cache data we fetch directly from the api not with a task
+UREPORT_RUN_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_RUN_FETCHED_DATA_CACHE_TIME', 60 * 10)
+
+CACHE_POLL_RESULTS_KEY = 'org:%d:poll:%d:results:%d'
+
+CACHE_ORG_FLOWS_KEY = "org:%d:flows"
+
+CACHE_ORG_REPORTER_GROUP_KEY = "org:%d:reporters:%s"
+
+CACHE_ORG_FIELD_DATA_KEY = "org:%d:field:%s:segment:%s"
+
+CACHE_ORG_GENDER_DATA_KEY = "org:%d:gender:%s"
+
+CACHE_ORG_AGE_DATA_KEY = "org:%d:age:%s"
+
+CACHE_ORG_REGISTRATION_DATA_KEY = "org:%d:registration:%s"
+
+CACHE_ORG_OCCUPATION_DATA_KEY = "org:%d:occupation:%s"
+
 
 class PollCategory(SmartModel):
     """
@@ -35,7 +65,7 @@ class Poll(SmartModel):
     A poll represents a single Flow that has been brought in for
     display and sharing in the UReport platform.
     """
-    flow_id = models.IntegerField(help_text=_("The Flow this Poll is based on"))
+    flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
     category = models.ForeignKey(Category, related_name="polls",
@@ -44,8 +74,13 @@ class Poll(SmartModel):
                                       help_text=_("Whether this poll should be featured on the homepage"))
     category_image = models.ForeignKey(CategoryImage, null=True,
                                        help_text=_("The splash category image to display for the poll (optional)"))
-    org = models.ForeignKey(Org,
+    org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
+
+    def fetch_poll_results(self):
+        for question in self.questions.all():
+            question.fetch_results()
+            question.fetch_results(dict(location='State'))
 
     @classmethod
     def get_main_poll(cls, org):
@@ -88,25 +123,38 @@ class Poll(SmartModel):
         cache_key = 'brick_polls:%d' % org.id
         cache.delete(cache_key)
 
+    @classmethod
+    def get_other_polls(cls, org):
+        main_poll = Poll.get_main_poll(org)
+        brick_polls = Poll.get_brick_polls(org)[:5]
+
+        exclude_polls = [poll.pk for poll in brick_polls]
+        if main_poll:
+            exclude_polls.append(main_poll.pk)
+
+        other_polls = Poll.objects.filter(org=org, is_active=True,
+                                          category__is_active=True).exclude(pk__in=exclude_polls).order_by('-created_on')
+
+        return other_polls
+
     def get_flow(self):
         """
         Returns the underlying flow for this poll
         """
-        api = self.org.get_api()
-        return api.get_flow(self.flow_id)
+        flows_dict = self.org.get_flows()
+        return flows_dict.get(self.flow_uuid, None)
 
     def best_and_worst(self):
         b_and_w = []
 
         # get our first question
-        question = self.questions.order_by('ruleset_id').first()
+        question = self.questions.order_by('pk').first()
         if question:
             # do we already have a cached set
-            b_and_w = cache.get('b_and_d:%d' % question.ruleset_id, [])
+            b_and_w = cache.get('b_and_d:%s' % question.ruleset_uuid, [])
 
             if not b_and_w:
-                api = self.org.get_api()
-                boundary_results = api.get_ruleset_results(question.ruleset_id, segment=dict(location='State'))
+                boundary_results = question.get_results(segment=dict(location='State'))
                 if not boundary_results:
                     return []
 
@@ -130,7 +178,7 @@ class Poll(SmartModel):
                 if b_and_w and b_and_w[0]['responded'] == 0:
                     b_and_w = []
 
-                cache.set('b_and_w:%d' % question.ruleset_id, b_and_w, 900)
+                cache.set('b_and_w:%s' % question.ruleset_uuid, b_and_w, 900)
 
         return b_and_w
 
@@ -140,10 +188,10 @@ class Poll(SmartModel):
         """
         flow = self.get_flow()
         if flow and flow['completed_runs']:
-            return int(round((flow['completed_runs'] * 100.0) / flow['runs']))
+            percentage = int(round((flow['completed_runs'] * 100.0) / flow['runs']))
+            return "%s" % (str(percentage) + "%")
         else:
-            return '--'
-
+            return '---'
 
     def get_trending_words(self):
         key = 'trending_words:%d' % self.pk
@@ -192,13 +240,13 @@ class Poll(SmartModel):
         flow = self.get_flow()
         if flow:
             return flow['runs']
-        return "--"
+        return "----"
 
     def completed_runs(self):
         flow = self.get_flow()
         if flow:
             return flow['completed_runs']
-        return "--"
+        return "---"
 
     def get_featured_images(self):
         return self.images.filter(is_active=True).exclude(image='').order_by('-created_on')
@@ -254,35 +302,74 @@ class PollQuestion(SmartModel):
                              help_text=_("The poll this question is part of"))
     title = models.CharField(max_length=255,
                              help_text=_("The title of this question"))
-    ruleset_id = models.IntegerField(help_text=_("The RuleSet this question is based on"))
+    ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
+
+    def fetch_results(self, segment=None):
+        from raven.contrib.django.raven_compat.models import client
+
+        cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
+        if segment and segment.get('location', "") == "District":
+            cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
+
+        try:
+            key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+            if segment:
+                segment = self.poll.org.substitute_segment(segment)
+                key += ":" + slugify(unicode(segment))
+
+            this_time = datetime.now()
+            temba_client = self.poll.org.get_temba_client()
+            client_results = temba_client.get_results(self.ruleset_uuid, segment=segment)
+            results = temba_client_flow_results_serializer(client_results)
+
+            cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, cache_time)
+        except:
+            client.captureException()
+            import traceback
+            traceback.print_exc()
 
     def get_results(self, segment=None):
-        api = self.poll.org.get_api()
-        return api.get_ruleset_results(self.ruleset_id, segment=segment)
 
-    def get_results_dict_data(self):
-        if self.get_results():
-            return self.get_results()[0]
-        return dict(set=0, unset=0, categories=[])
+        key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+        if segment:
+            substituted_segment = self.poll.org.substitute_segment(segment)
+            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+
+        cached_value = cache.get(key, None)
+        if cached_value:
+            return cached_value['results']
+
+        if segment and segment.get('location', "") == "District":
+            self.fetch_results(segment=segment)
+
+            cached_value = cache.get(key, None)
+            if cached_value:
+                return cached_value['results']
+
+    def get_total_summary_data(self):
+        cached_results = self.get_results()
+        if cached_results:
+            return cached_results[0]
+        return dict()
 
     def is_open_ended(self):
         cache_key = 'open_ended:%d' % self.id
         open_ended = cache.get(cache_key, None)
 
         if open_ended is None:
-            open_ended = self.get_results_dict_data().get('open_ended', False)
+            open_ended = self.get_total_summary_data().get('open_ended', False)
             cache.set(cache_key, open_ended, OPEN_ENDED_CACHE_TIME)
 
         return open_ended
 
     def get_responded(self):
-        return self.get_results_dict_data()['set']
+        return self.get_total_summary_data().get('set', '---')
 
     def get_polled(self):
-        return self.get_results_dict_data()['set'] + self.get_results()[0]['unset']
+        return self.get_total_summary_data().get('set', "--") + self.get_total_summary_data().get('unset', "--")
 
     def get_words(self):
-        return self.get_results_dict_data()['categories']
+        return self.get_total_summary_data().get('categories', [])
 
     def __unicode__(self):
         return self.title

@@ -18,7 +18,7 @@ from ureport.news.models import Video, NewsItem
 import math
 import pycountry
 from datetime import timedelta, datetime
-from ureport.utils import get_linked_orgs
+from ureport.utils import get_linked_orgs, clean_global_results_data, get_global_count
 
 
 def chooser(request):
@@ -55,6 +55,10 @@ class IndexView(SmartTemplateView):
         # we use gender label to estimate the most active region
         if org.get_config('gender_label'):
             context['most_active_regions'] = org.get_most_active_regions()
+
+        # global counter
+        if org.get_config('is_global'):
+            context['global_counter'] = get_global_count()
 
         return context
 
@@ -181,27 +185,9 @@ class PollQuestionResultsView(SmartReadView):
         if segment:
             segment = json.loads(segment)
 
-            if self.object.poll.org.get_config('is_global'):
-                if "location" in segment:
-                    del segment["location"]
-                    segment["contact_field"] = self.object.poll.org.get_config('state_label')
-                    segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
-
         results = self.object.get_results(segment=segment)
 
-        # for the global page clean the data translating country code to country name
-        if self.object.poll.org.get_config('is_global') and results:
-            for elt in results:
-                country_code = elt['label']
-                elt['boundary'] = country_code
-                country_name = ""
-                try:
-                    country = pycountry.countries.get(alpha2=country_code)
-                    if country:
-                        country_name = country.name
-                except KeyError:
-                    country_name = country_code
-                elt['label'] = country_name
+        results = clean_global_results_data(self.request.org, results, segment)
 
         return HttpResponse(json.dumps(results))
 
@@ -226,9 +212,9 @@ class BoundaryView(SmartTemplateView):
             state_id = self.kwargs.get('osm_id', None)
 
             if state_id:
-                boundaries = org.get_api().get_state_geojson(state_id)
+                boundaries = org.get_state_geojson(state_id)
             else:
-                boundaries = org.get_api().get_country_geojson()
+                boundaries = org.get_country_geojson()
 
         return HttpResponse(json.dumps(boundaries))
 
@@ -251,19 +237,7 @@ class ReportersResultsView(SmartReadView):
             api_data = self.get_object().get_contact_field_results(contact_field, segment)
             output_data = self.get_object().organize_categories_data(contact_field, api_data)
 
-            # for the global page clean the data translating country code to country name
-            if self.object.get_config('is_global') and output_data:
-                for elt in output_data:
-                    country_code = elt['label']
-                    elt['boundary'] = country_code
-                    country_name = ""
-                    try:
-                        country = pycountry.countries.get(alpha2=country_code)
-                        if country:
-                            country_name = country.name
-                    except KeyError:
-                        country_name = country_code
-                    elt['label'] = country_name
+            output_data = clean_global_results_data(self.get_object(), output_data, segment)
 
         return HttpResponse(json.dumps(output_data))
 
