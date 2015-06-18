@@ -243,11 +243,6 @@ class SetOrgMiddlewareTest(DashTest):
         self.assertEqual(response, None)
         self.assertEqual(self.request.org, None)
 
-        with self.settings(DASH_IGNORED_SUBDOMAINS=("uganda")):
-            self.request.get_host.return_value=ug_dash_url
-            response = self.middleware.process_request(self.request)
-            self.assertEqual(response, None)
-            self.assertEqual(self.request.org, None)
 
     def test_process_view(self):
         with patch('django.core.urlresolvers.ResolverMatch') as resolver_mock:
