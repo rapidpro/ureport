@@ -7,7 +7,7 @@ celery-with-redis==3.0
 coverage==3.7.1
 -e git+https://github.com/nyaruka/smartmin.git#egg=smartmin-master
 -e git+https://github.com/rapidpro/rapidpro-python#egg=rapidpro-python
--e git+https://github.com/rapidpro/dash.git@remove_ignored_subdomains#egg=dash
+-e git+https://github.com/rapidpro/dash.git#egg=dash
 dj-database-url==0.3.0
 Django==1.7.2
 django-appconf==1.0.1
