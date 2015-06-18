@@ -21,9 +21,6 @@ from datetime import timedelta, datetime
 from ureport.utils import get_linked_orgs, clean_global_results_data, get_global_count
 
 
-def chooser(request):
-    return redirect(settings.SITE_HOST_PATTERN % 'www')
-
 class IndexView(SmartTemplateView):
     template_name = 'public/index.html'
 
@@ -65,7 +62,7 @@ class IndexView(SmartTemplateView):
 class Chooser(IndexView):
     def pre_process(self, request, *args, **kwargs):
         if not self.request.org:
-            org = Org.objects.filter(subdomain='www', is_active=True).first()
+            org = Org.objects.filter(subdomain='', is_active=True).first()
             if not org:
                 linked_sites = get_linked_orgs()
                 return TemplateResponse(request, settings.SITE_CHOOSER_TEMPLATE, dict(orgs=linked_sites))
