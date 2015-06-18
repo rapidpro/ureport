@@ -67,7 +67,7 @@ class Chooser(IndexView):
                 linked_sites = get_linked_orgs()
                 return TemplateResponse(request, settings.SITE_CHOOSER_TEMPLATE, dict(orgs=linked_sites))
             else:
-                return HttpResponsePermanentRedirect(settings.SITE_HOST_PATTERN % org.subdomain)
+                return HttpResponsePermanentRedirect(settings.EMPTY_SUBDOMAIN_HOST)
 
 class NewsView(SmartTemplateView):
 
