@@ -61,7 +61,7 @@ def substitute_segment(org, segment_in):
 def clean_global_results_data(org, results, segment):
 
     # for the global page clean the data translating country code to country name
-    if org.get_config('is_global') and results and segment and 'values' in segment:
+    if org.get_config('is_global') and results and segment and 'location' in segment:
         for elt in results:
             country_code = elt['label']
             elt['boundary'] = country_code

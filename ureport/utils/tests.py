@@ -9,7 +9,7 @@ from temba import Group
 from ureport.assets.models import FLAG, Image
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest
-from ureport.utils import get_linked_orgs, fetch_reporter_group
+from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data
 
 
 class UtilsTest(DashTest):
@@ -43,6 +43,60 @@ class UtilsTest(DashTest):
         # burundi should be included and be the first; by alphetical order
         self.assertEqual(len(get_linked_orgs()), 5)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+
+    def test_clean_global_results_data(self):
+        results = [{"open_ended": False,
+                    "set": 0,
+                    "unset": 0,
+                    "categories": [{"count": 0, "label": "Yes"},
+                                   {"count": 0, "label": "No"}],
+                    "label": "UG"},
+                   {"open_ended": False,
+                    "set": 0,
+                    "unset": 0,
+                    "categories": [{"count": 0, "label": "Yes"},
+                                   {"count": 0, "label": "No"}],
+                    "label": "RW"},
+                   {"open_ended": False,
+                    "set": 0,
+                    "unset": 0,
+                    "categories": [{"count": 0, "label": "Yes"},
+                                   {"count": 0, "label": "No"}],
+                    "label": "MX"}]
+
+        # no segment
+        self.assertEqual(clean_global_results_data(self.org, results, None), results)
+
+        # no location in segment
+        self.assertEqual(clean_global_results_data(self.org, results, dict(allo='State')), results)
+
+        # org not global
+        self.assertEqual(clean_global_results_data(self.org, results, dict(location='State')), results)
+
+        self.org.set_config('is_global', True)
+        cleaned_results = [{"open_ended": False,
+                            "set": 0,
+                            "unset": 0,
+                            "categories": [{"count": 0, "label": "Yes"},
+                                           {"count": 0, "label": "No"}],
+                            "boundary": "UG",
+                            "label": "Uganda"},
+                           {"open_ended": False,
+                            "set": 0,
+                            "unset": 0,
+                            "categories": [{"count": 0, "label": "Yes"},
+                                           {"count": 0, "label": "No"}],
+                            "boundary": "RW",
+                            "label": "Rwanda"},
+                           {"open_ended": False,
+                            "set": 0,
+                            "unset": 0,
+                            "categories": [{"count": 0, "label": "Yes"},
+                                           {"count": 0, "label": "No"}],
+                            "boundary": "MX",
+                            "label": "Mexico"}]
+
+        self.assertEqual(clean_global_results_data(self.org, results, dict(location='State')), cleaned_results)
 
     def test_substitute_segment(self):
         self.assertIsNone(self.org.substitute_segment(None))
