@@ -106,20 +106,27 @@ class PublicTest(DashTest):
         self.assertTrue(has_nigeria)
         self.assertFalse(has_rwanda)
 
-        # if we have www subdomain org we should show its index
-        self.www = self.create_org('www', self.admin)
+        # if no empty subdomain org give a tempate response
         response = self.client.get(chooser_url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue('orgs' in response.context)
+        self.assertTrue('welcome-flags' in response.content)
+
+        # if we have empty subdomain org we should show its index
+        self.global_org = Org.objects.create(subdomain='', name='global', created_by=self.admin, modified_by=self.admin)
+        response = self.client.get(chooser_url, SERVER_NAME='blabla.ureport.io')
         self.assertEquals(response.status_code, 301)
-        response = self.client.get(chooser_url, follow=True)
+        response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
         self.assertFalse('welcome-flags' in response.content)
 
-        self.www.set_config('is_global', True)
+        self.global_org.set_config('is_global', True)
 
-        response = self.client.get(chooser_url)
+        # if the empty org in global the template tag should show the flags
+        response = self.client.get(chooser_url, SERVER_NAME='blabla.ureport.io')
         self.assertEquals(response.status_code, 301)
-        response = self.client.get(chooser_url, follow=True)
+        response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
         self.assertTrue('welcome-flags' in response.content)
