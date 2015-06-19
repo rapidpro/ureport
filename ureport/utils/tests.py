@@ -429,6 +429,7 @@ class UtilsTest(DashTest):
                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
     def test_fetch_old_sites_count(self):
+        self.clear_cache()
         with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
             mock_datetime_ms.return_value = 500
 
