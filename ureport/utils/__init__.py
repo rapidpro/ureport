@@ -291,7 +291,6 @@ def get_flows(org):
     return dict()
 
 
-
 def fetch_reporter_group(org):
     start = time.time()
     print "Fetching reporter group for %s" % org.name
@@ -319,6 +318,7 @@ def fetch_reporter_group(org):
         traceback.print_exc()
     print "Fetch %s reporter group took %ss" % (org.name, time.time() - start)
 
+
 def get_reporter_group(org):
     from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
 
@@ -333,6 +333,32 @@ def get_reporter_group(org):
                 return group_dict
 
     return dict()
+
+
+def fetch_old_sites_count():
+    import requests, re
+    from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
+
+    start = time.time()
+    this_time = datetime.now()
+    linked_sites = list(getattr(settings, 'PREVIOUS_ORG_SITES', []))
+
+    for site in linked_sites:
+        count_link = site.get('count_link', "")
+        if count_link:
+            try:
+                response = requests.get(count_link)
+                response.raise_for_status()
+
+                count = int(re.search(r'\d+', response.content).group())
+                cache.set("org:%s:reporters:%s" % (site.get('name').lower(), 'old-site'),
+                          {'time': datetime_to_ms(this_time), 'results': dict(size=count)},
+                          UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+            except:
+                import traceback
+                traceback.print_exc()
+    print "Fetch old sites counts took %ss" % (time.time() - start)
+
 
 def get_global_count():
 
@@ -353,6 +379,7 @@ def get_global_count():
         count = '__'
 
     return count
+
 
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions

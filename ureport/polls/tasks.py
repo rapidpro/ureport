@@ -3,7 +3,8 @@ from dash.orgs.models import Org
 from django_redis import get_redis_connection
 from djcelery.app import app
 from ureport.polls.models import Poll
-from ureport.utils import fetch_contact_field_results, fetch_org_polls_results, fetch_reporter_group, fetch_flows
+from ureport.utils import fetch_contact_field_results, fetch_org_polls_results, fetch_reporter_group, fetch_flows, \
+    fetch_old_sites_count
 
 
 @app.task(name='polls.update_main_poll')
@@ -69,6 +70,7 @@ def update_org_flows_and_reporters():
                 print "=" * 40
                 fetch_flows(org)
                 fetch_reporter_group(org)
+            fetch_old_sites_count()
     print "Task: Update_org_flows_and_reporters took %ss" % (time.time() - start)
 
 @app.task(name='polls.update_org_graphs_data')
