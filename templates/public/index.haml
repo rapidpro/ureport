@@ -29,13 +29,13 @@
                   %a.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
                     - trans "VIEW FULL RESULT"
                     &#8594;
-            -#
-            -#.col-sm-5
-            -#  .index-global-counter.card.card-padding
-            -#    .hr-header.primary-color
-            -#      -trans "All U-Report members"
-            -#    .global-count
-            -#      {{ global_counter|intcomma }}
+
+            .col-sm-5
+              .index-global-counter.card.card-padding
+                .hr-header.primary-color
+                  -trans "All U-Report members"
+                .global-count
+                  {{ global_counter|intcomma }}
 
   -else
     - if latest_poll

@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+from dash_test_runner.tests import MockResponse
 from django.utils import timezone
 from mock import patch
 import pycountry
@@ -9,7 +10,8 @@ from temba import Group
 from ureport.assets.models import FLAG, Image
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest
-from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data
+from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count, \
+    get_global_count
 
 
 class UtilsTest(DashTest):
@@ -425,3 +427,27 @@ class UtilsTest(DashTest):
                     cache_set_mock.assert_called_with(key,
                                                       {'time': 500, 'results': group_dict},
                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
+    def test_fetch_old_sites_count(self):
+        self.clear_cache()
+        with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
+            mock_datetime_ms.return_value = 500
+
+            with patch('requests.get') as mock_get:
+                mock_get.side_effect = [MockResponse(200, '300'), MockResponse(200, '50\n')]
+
+                with patch('django.core.cache.cache.set') as cache_set_mock:
+                    cache_set_mock.return_value = "Set"
+
+                    fetch_old_sites_count()
+                    self.assertEqual(mock_get.call_count, 2)
+                    mock_get.assert_any_call('http://ureport.ug/count.txt')
+                    mock_get.assert_any_call('http://www.zambiaureport.org/count.txt/')
+
+                    self.assertEqual(cache_set_mock.call_count, 2)
+                    cache_set_mock.assert_any_call('org:uganda:reporters:old-site',
+                                                   {'time': 500, 'results': dict(size=300)},
+                                                   UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                    cache_set_mock.assert_any_call('org:zambia:reporters:old-site',
+                                                   {'time': 500, 'results': dict(size=50)},
+                                                   UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
