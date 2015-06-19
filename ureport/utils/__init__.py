@@ -351,7 +351,8 @@ def fetch_old_sites_count():
                 response.raise_for_status()
 
                 count = int(re.search(r'\d+', response.content).group())
-                cache.set("org:%s:reporters:%s" % (site.get('name').lower(), 'old-site'),
+                key = "org:%s:reporters:%s" % (site.get('name').lower(), 'old-site')
+                cache.set(key,
                           {'time': datetime_to_ms(this_time), 'results': dict(size=count)},
                           UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
             except:
@@ -376,6 +377,8 @@ def get_global_count():
         # cached for 10 min
         cache.set('global_count', count, 60 * 10)
     except AttributeError:
+        import traceback
+        traceback.print_exc()
         count = '__'
 
     return count
