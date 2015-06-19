@@ -7,7 +7,7 @@ TEMPLATE_DEBUG = DEBUG
 COMPRESS_ENABLED = True
 
 EMPTY_SUBDOMAIN_HOST = 'http://nigeria.ureport.staging.nyaruka.com'
-HOSTNAME = 'nigeria.ureport.staging.nyaruka.com'
+HOSTNAME = 'ureport.staging.nyaruka.com'
 ALLOWED_HOSTS = ['.nyaruka.com', '.ureport.in']
 SESSION_COOKIE_DOMAIN = 'ureport.staging.nyaruka.com'
 SESSION_COOKIE_SECURE = False
@@ -63,7 +63,6 @@ STATICFILES_FINDERS = (
 )
 
 API_ENDPOINT = 'https://api.rapidpro.io'
-SITE_HOST_PATTERN = 'http://%s.ureport.staging.nyaruka.com'
 
 # Set your production database settings here
 DATABASES = {

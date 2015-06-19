@@ -23,7 +23,7 @@ def get_linked_orgs():
 
     # populate a ureport site for each org so we can link off to them
     for org in all_orgs:
-        host = settings.SITE_HOST_PATTERN % org.subdomain
+        host = org.build_host_link()
         org.host = host
         if org.get_config('is_on_landing_page'):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
