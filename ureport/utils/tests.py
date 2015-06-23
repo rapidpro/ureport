@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+from dash_test_runner.tests import MockResponse
 from django.utils import timezone
 from mock import patch
 import pycountry
@@ -9,7 +10,8 @@ from temba import Group
 from ureport.assets.models import FLAG, Image
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest
-from ureport.utils import get_linked_orgs, fetch_reporter_group
+from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count, \
+    get_global_count
 
 
 class UtilsTest(DashTest):
@@ -43,6 +45,60 @@ class UtilsTest(DashTest):
         # burundi should be included and be the first; by alphetical order
         self.assertEqual(len(get_linked_orgs()), 5)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+
+    def test_clean_global_results_data(self):
+        results = [{"open_ended": False,
+                    "set": 0,
+                    "unset": 0,
+                    "categories": [{"count": 0, "label": "Yes"},
+                                   {"count": 0, "label": "No"}],
+                    "label": "UG"},
+                   {"open_ended": False,
+                    "set": 0,
+                    "unset": 0,
+                    "categories": [{"count": 0, "label": "Yes"},
+                                   {"count": 0, "label": "No"}],
+                    "label": "RW"},
+                   {"open_ended": False,
+                    "set": 0,
+                    "unset": 0,
+                    "categories": [{"count": 0, "label": "Yes"},
+                                   {"count": 0, "label": "No"}],
+                    "label": "MX"}]
+
+        # no segment
+        self.assertEqual(clean_global_results_data(self.org, results, None), results)
+
+        # no location in segment
+        self.assertEqual(clean_global_results_data(self.org, results, dict(allo='State')), results)
+
+        # org not global
+        self.assertEqual(clean_global_results_data(self.org, results, dict(location='State')), results)
+
+        self.org.set_config('is_global', True)
+        cleaned_results = [{"open_ended": False,
+                            "set": 0,
+                            "unset": 0,
+                            "categories": [{"count": 0, "label": "Yes"},
+                                           {"count": 0, "label": "No"}],
+                            "boundary": "UG",
+                            "label": "Uganda"},
+                           {"open_ended": False,
+                            "set": 0,
+                            "unset": 0,
+                            "categories": [{"count": 0, "label": "Yes"},
+                                           {"count": 0, "label": "No"}],
+                            "boundary": "RW",
+                            "label": "Rwanda"},
+                           {"open_ended": False,
+                            "set": 0,
+                            "unset": 0,
+                            "categories": [{"count": 0, "label": "Yes"},
+                                           {"count": 0, "label": "No"}],
+                            "boundary": "MX",
+                            "label": "Mexico"}]
+
+        self.assertEqual(clean_global_results_data(self.org, results, dict(location='State')), cleaned_results)
 
     def test_substitute_segment(self):
         self.assertIsNone(self.org.substitute_segment(None))
@@ -371,3 +427,27 @@ class UtilsTest(DashTest):
                     cache_set_mock.assert_called_with(key,
                                                       {'time': 500, 'results': group_dict},
                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
+    def test_fetch_old_sites_count(self):
+        self.clear_cache()
+        with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
+            mock_datetime_ms.return_value = 500
+
+            with patch('requests.get') as mock_get:
+                mock_get.side_effect = [MockResponse(200, '300'), MockResponse(200, '50\n')]
+
+                with patch('django.core.cache.cache.set') as cache_set_mock:
+                    cache_set_mock.return_value = "Set"
+
+                    fetch_old_sites_count()
+                    self.assertEqual(mock_get.call_count, 2)
+                    mock_get.assert_any_call('http://ureport.ug/count.txt')
+                    mock_get.assert_any_call('http://www.zambiaureport.org/count.txt/')
+
+                    self.assertEqual(cache_set_mock.call_count, 2)
+                    cache_set_mock.assert_any_call('org:uganda:reporters:old-site',
+                                                   {'time': 500, 'results': dict(size=300)},
+                                                   UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                    cache_set_mock.assert_any_call('org:zambia:reporters:old-site',
+                                                   {'time': 500, 'results': dict(size=50)},
+                                                   UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)

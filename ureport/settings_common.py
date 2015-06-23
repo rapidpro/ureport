@@ -35,7 +35,7 @@ EMAIL_USE_TLS = True
 
 EMPTY_SUBDOMAIN_HOST = 'http://localhost:8000'
 API_ENDPOINT = 'http://localhost:8001'
-SITE_HOST_PATTERN = 'http://%s.localhost:8000'
+HOSTNAME = 'localhost:8000'
 SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 SITE_CHOOSER_URL_NAME = 'public.home'
 
@@ -434,27 +434,27 @@ CELERY_TIMEZONE = 'UTC'
 CELERYBEAT_SCHEDULE = {
     "update_flows_and_reporters": {
         "task": "polls.update_org_flows_and_reporters",
-        "schedule": timedelta(minutes=10),
+        "schedule": timedelta(minutes=20),
         "relative": True,
     },
     "update_org_graphs_data": {
         "task": "polls.update_org_graphs_data",
-        "schedule": timedelta(minutes=30),
+        "schedule": timedelta(minutes=60),
         "relative": True,
     },
     "update_main_poll": {
         "task": "polls.update_main_poll",
-        "schedule": timedelta(minutes=10),
+        "schedule": timedelta(minutes=20),
         "relative": True,
     },
     "update_brick_polls": {
         "task": "polls.update_brick_polls",
-        "schedule": timedelta(hours=24),
+        "schedule": timedelta(hours=48),
         "relative": True,
     },
     "update_other_polls": {
         "task": "polls.update_other_polls",
-        "schedule": timedelta(hours=24),
+        "schedule": timedelta(hours=48),
         "relative": True,
     },
     "build_boundaries": {
@@ -462,7 +462,6 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(days=15),
         "relative": True,
     },
-
 }
 
 #-----------------------------------------------------------------------------------
@@ -499,11 +498,13 @@ PREVIOUS_ORG_SITES = [
         host="http://www.ureport.ug",
         flag="flag_ug.png",
         is_static=True,
+        count_link='http://ureport.ug/count.txt',
     ),
     dict(
         name="Zambia",
         host="http://www.zambiaureport.org/home/",
         flag="flag_zm.png",
         is_static=True,
+        count_link='http://www.zambiaureport.org/count.txt/',
     ),
 ]

@@ -6,6 +6,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 COMPRESS_ENABLED = True
 
+
 EMPTY_SUBDOMAIN_HOST = 'http://ureport.in'
 HOSTNAME = 'ureport.in'
 ALLOWED_HOSTS = ['.ureport.in']
@@ -65,7 +66,7 @@ STATICFILES_FINDERS = (
 )
 
 API_ENDPOINT = 'https://api.rapidpro.io'
-SITE_HOST_PATTERN = 'https://%s.ureport.in'
+
 
 import dj_database_url
 DATABASES['default'] = dj_database_url.config()
