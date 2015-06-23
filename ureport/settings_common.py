@@ -434,27 +434,27 @@ CELERY_TIMEZONE = 'UTC'
 CELERYBEAT_SCHEDULE = {
     "update_flows_and_reporters": {
         "task": "polls.update_org_flows_and_reporters",
-        "schedule": timedelta(minutes=10),
+        "schedule": timedelta(minutes=20),
         "relative": True,
     },
     "update_org_graphs_data": {
         "task": "polls.update_org_graphs_data",
-        "schedule": timedelta(minutes=30),
+        "schedule": timedelta(minutes=60),
         "relative": True,
     },
     "update_main_poll": {
         "task": "polls.update_main_poll",
-        "schedule": timedelta(minutes=10),
+        "schedule": timedelta(minutes=20),
         "relative": True,
     },
     "update_brick_polls": {
         "task": "polls.update_brick_polls",
-        "schedule": timedelta(hours=24),
+        "schedule": timedelta(hours=48),
         "relative": True,
     },
     "update_other_polls": {
         "task": "polls.update_other_polls",
-        "schedule": timedelta(hours=24),
+        "schedule": timedelta(hours=48),
         "relative": True,
     },
     "build_boundaries": {
