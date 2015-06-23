@@ -190,6 +190,11 @@ class PollTest(DashTest):
         self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
         self.assertTrue(poll3 in Poll.get_brick_polls(self.uganda))
 
+        with patch('ureport.polls.models.Poll.get_first_question') as mock_first_question:
+            mock_first_question.return_value = None
+
+            self.assertFalse(Poll.get_brick_polls(self.uganda))
+
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
         poll3.is_featured = True

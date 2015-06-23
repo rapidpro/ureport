@@ -112,7 +112,7 @@ class Poll(SmartModel):
             brick_polls = []
 
             for poll in polls:
-                if poll.get_first_question:
+                if poll.get_first_question():
                     brick_polls.append(poll)
             cache.set(cache_key, brick_polls, BRICK_POLLS_CACHE_TIME)
 
