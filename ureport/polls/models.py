@@ -323,6 +323,10 @@ class PollQuestion(SmartModel):
             results = temba_client_flow_results_serializer(client_results)
 
             cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, cache_time)
+
+            # delete the open ended cache
+            cache.delete('open_ended:%d' % self.id)
+
         except:
             client.captureException()
             import traceback

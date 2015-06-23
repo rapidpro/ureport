@@ -20,6 +20,13 @@ class PollForm(forms.ModelForm):
 
         # find all the flows on this org, create choices for those
         flows = self.org.get_flows()
+
+        # if cache empty we fetch from RapidPro API, for Better UX
+        if not flows:
+            from ureport.utils import fetch_flows
+            fetch_flows(self.org)
+            flows = self.org.get_flows()
+
         self.fields['flow_uuid'].choices = [(f['uuid'], f['name']) for f in flows.values()]
 
         # only display category images for this org which are active
