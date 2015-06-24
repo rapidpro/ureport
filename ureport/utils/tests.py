@@ -10,8 +10,8 @@ from temba import Group
 from ureport.assets.models import FLAG, Image
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest
-from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count, \
-    get_global_count
+from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count
+from ureport.utils import get_global_count, GLOBAL_COUNT_CACHE_KEY
 
 
 class UtilsTest(DashTest):
@@ -413,20 +413,25 @@ class UtilsTest(DashTest):
                 with patch('django.core.cache.cache.set') as cache_set_mock:
                     cache_set_mock.return_value = "Set"
 
-                    fetch_reporter_group(self.org)
-                    self.assertFalse(mock.called)
-                    self.assertFalse(cache_set_mock.called)
-                    self.assertEqual(self.org.get_reporter_group(), dict())
+                    with patch('django.core.cache.cache.delete') as cache_delete_mock:
+                        cache_delete_mock.return_value = "Deleted"
 
-                    self.org.set_config("reporter_group", "reporters")
+                        fetch_reporter_group(self.org)
+                        self.assertFalse(mock.called)
+                        self.assertFalse(cache_set_mock.called)
+                        self.assertEqual(self.org.get_reporter_group(), dict())
 
-                    fetch_reporter_group(self.org)
-                    mock.assert_called_with(name='reporters')
+                        self.org.set_config("reporter_group", "reporters")
 
-                    key = CACHE_ORG_REPORTER_GROUP_KEY % (self.org.pk, "reporters")
-                    cache_set_mock.assert_called_with(key,
-                                                      {'time': 500, 'results': group_dict},
-                                                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                        fetch_reporter_group(self.org)
+                        mock.assert_called_with(name='reporters')
+
+                        key = CACHE_ORG_REPORTER_GROUP_KEY % (self.org.pk, "reporters")
+                        cache_set_mock.assert_called_with(key,
+                                                          {'time': 500, 'results': group_dict},
+                                                          UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
+                        cache_delete_mock.assert_called_with(GLOBAL_COUNT_CACHE_KEY)
 
     def test_fetch_old_sites_count(self):
         self.clear_cache()
@@ -439,15 +444,21 @@ class UtilsTest(DashTest):
                 with patch('django.core.cache.cache.set') as cache_set_mock:
                     cache_set_mock.return_value = "Set"
 
-                    fetch_old_sites_count()
-                    self.assertEqual(mock_get.call_count, 2)
-                    mock_get.assert_any_call('http://ureport.ug/count.txt')
-                    mock_get.assert_any_call('http://www.zambiaureport.org/count.txt/')
+                    with patch('django.core.cache.cache.delete') as cache_delete_mock:
+                        cache_delete_mock.return_value = "Deleted"
 
-                    self.assertEqual(cache_set_mock.call_count, 2)
-                    cache_set_mock.assert_any_call('org:uganda:reporters:old-site',
-                                                   {'time': 500, 'results': dict(size=300)},
-                                                   UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-                    cache_set_mock.assert_any_call('org:zambia:reporters:old-site',
-                                                   {'time': 500, 'results': dict(size=50)},
-                                                   UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                        fetch_old_sites_count()
+                        self.assertEqual(mock_get.call_count, 2)
+                        mock_get.assert_any_call('http://ureport.ug/count.txt')
+                        mock_get.assert_any_call('http://www.zambiaureport.org/count.txt/')
+
+                        self.assertEqual(cache_set_mock.call_count, 2)
+                        cache_set_mock.assert_any_call('org:uganda:reporters:old-site',
+                                                       {'time': 500, 'results': dict(size=300)},
+                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
+                        cache_set_mock.assert_any_call('org:zambia:reporters:old-site',
+                                                       {'time': 500, 'results': dict(size=50)},
+                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
+                        cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)

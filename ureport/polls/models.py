@@ -112,7 +112,7 @@ class Poll(SmartModel):
             brick_polls = []
 
             for poll in polls:
-                if poll.get_first_question:
+                if poll.get_first_question():
                     brick_polls.append(poll)
             cache.set(cache_key, brick_polls, BRICK_POLLS_CACHE_TIME)
 
@@ -323,6 +323,10 @@ class PollQuestion(SmartModel):
             results = temba_client_flow_results_serializer(client_results)
 
             cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, cache_time)
+
+            # delete the open ended cache
+            cache.delete('open_ended:%d' % self.id)
+
         except:
             client.captureException()
             import traceback

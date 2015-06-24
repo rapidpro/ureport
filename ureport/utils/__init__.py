@@ -15,6 +15,8 @@ import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
 
+GLOBAL_COUNT_CACHE_KEY = 'global_count'
+
 
 def get_linked_orgs():
     all_orgs = Org.objects.filter(is_active=True).order_by('name')
@@ -316,6 +318,9 @@ def fetch_reporter_group(org):
         client.captureException()
         import traceback
         traceback.print_exc()
+    # delete the global count cache to force a recalculate at the end
+    cache.delete(GLOBAL_COUNT_CACHE_KEY)
+
     print "Fetch %s reporter group took %ss" % (org.name, time.time() - start)
 
 
@@ -358,12 +363,16 @@ def fetch_old_sites_count():
             except:
                 import traceback
                 traceback.print_exc()
+
+    # delete the global count cache to force a recalculate at the end
+    cache.delete(GLOBAL_COUNT_CACHE_KEY)
+
     print "Fetch old sites counts took %ss" % (time.time() - start)
 
 
 def get_global_count():
 
-    count_cached_value = cache.get('global_count', None)
+    count_cached_value = cache.get(GLOBAL_COUNT_CACHE_KEY, None)
     if count_cached_value:
         return count_cached_value
 
@@ -375,7 +384,7 @@ def get_global_count():
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
 
         # cached for 10 min
-        cache.set('global_count', count, 60 * 10)
+        cache.set(GLOBAL_COUNT_CACHE_KEY, count, 60 * 10)
     except AttributeError:
         import traceback
         traceback.print_exc()
