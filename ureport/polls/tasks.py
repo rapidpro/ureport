@@ -1,3 +1,4 @@
+import logging
 import time
 from dash.orgs.models import Org
 from django_redis import get_redis_connection
@@ -6,6 +7,7 @@ from ureport.polls.models import Poll
 from ureport.utils import fetch_contact_field_results, fetch_org_polls_results, fetch_reporter_group, fetch_flows, \
     fetch_old_sites_count
 
+logger = logging.getLogger(__name__)
 
 @app.task(name='polls.update_main_poll')
 def update_main_poll():
@@ -92,3 +94,13 @@ def update_org_graphs_data():
                             fetch_contact_field_results(org, c_field, dict(location='State'))
 
     print "Task: Update_org_graph_data took %ss" % (time.time() - start)
+
+@app.task(track_started=True, name='fetch_poll')
+def fetch_poll(poll_id):
+    try:
+        # get our poll
+        from .models import Poll
+        poll = Poll.objects.get(pk=poll_id)
+        poll.fetch_poll_results()
+    except Exception as e:
+        logger.exception("Error fetching poll results: %s" % str(e))
