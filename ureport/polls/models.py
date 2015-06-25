@@ -83,6 +83,11 @@ class Poll(SmartModel):
             question.fetch_results(dict(location='State'))
 
     @classmethod
+    def fetch_poll_results_task(cls, poll):
+        from ureport.polls.tasks import fetch_poll
+        fetch_poll.delay(poll.pk)
+
+    @classmethod
     def get_main_poll(cls, org):
         poll_with_questions = PollQuestion.objects.filter(is_active=True, poll__org=org).values_list('poll', flat=True)
 

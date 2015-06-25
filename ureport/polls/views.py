@@ -281,6 +281,8 @@ class PollCRUDL(SmartCRUDL):
             # clear our cache of featured polls
             Poll.clear_brick_polls_cache(obj.org)
 
+            Poll.fetch_poll_results_task(obj)
+
             return obj
 
         def derive_initial(self):
