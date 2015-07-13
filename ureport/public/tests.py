@@ -912,10 +912,10 @@ class PublicTest(DashTest):
         uganda_story_read_url = reverse('public.story_read', args=[story1.pk])
         nigeria_story_read_url = reverse('public.story_read', args=[story4.pk])
 
-        response = self.client.get(nigeria_story_read_url, SERVER_NAME='uganda.uerport.io')
+        response = self.client.get(nigeria_story_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 404)
 
-        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.uerport.io')
+        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response.context['org'], self.uganda)
 
@@ -938,7 +938,7 @@ class PublicTest(DashTest):
         story_image1 = StoryImage.objects.create(story=story1, image='stories/someimage.jpg', name='image 1',
                                                  created_by=self.admin, modified_by=self.admin)
 
-        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.uerport.io')
+        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
 
         self.assertEquals(len(response.context['story_featured_images']), 1)
         self.assertEquals(response.context['story_featured_images'][0], story_image1)
@@ -946,7 +946,7 @@ class PublicTest(DashTest):
         story_image2 = StoryImage.objects.create(story=story1, image='stories/someimage.jpg', name='image 2',
                                                  created_by=self.admin, modified_by=self.admin)
 
-        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.uerport.io')
+        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
 
         self.assertEquals(len(response.context['story_featured_images']), 2)
         self.assertEquals(response.context['story_featured_images'][0], story_image2)
@@ -955,7 +955,7 @@ class PublicTest(DashTest):
         story_image2.is_active = False
         story_image2.save()
         
-        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.uerport.io')
+        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
 
         self.assertEquals(len(response.context['story_featured_images']), 1)
         self.assertEquals(response.context['story_featured_images'][0], story_image1)
@@ -963,7 +963,7 @@ class PublicTest(DashTest):
         story_image1.image = ''
         story_image1.save()
         
-        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.uerport.io')
+        response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertFalse(response.context['story_featured_images'])
 
     def test_poll_question_results(self):
