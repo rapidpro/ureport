@@ -1,6 +1,11 @@
 U-report  
 =========
 
+[![Build Status][master-build-image]][travis-ci]
+
+[travis-ci]: https://travis-ci.org/rapidpro/ureport/
+[master-build-image]: https://travis-ci.org/rapidpro/ureport.svg?branch=master
+
 This is the U-report dashboard built on data collected by RapidPro.
 
 Built for UNICEF by Nyaruka - http://nyaruka.com
