@@ -9,7 +9,7 @@ COMPRESS_ENABLED = True
 
 EMPTY_SUBDOMAIN_HOST = 'http://ureport.in'
 HOSTNAME = 'ureport.in'
-ALLOWED_HOSTS = ['.ureport.in']
+ALLOWED_HOSTS = ['*']
 SESSION_COOKIE_DOMAIN = 'ureport.in'
 SESSION_COOKIE_SECURE = True
 
