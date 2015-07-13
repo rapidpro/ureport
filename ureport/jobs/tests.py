@@ -46,12 +46,12 @@ class JobSourceTest(UreportJobsTest):
     def test_list_job_source(self):
         list_url = reverse('jobs.jobsource_list')
 
-        response = self.client.get(list_url, SERVER_NAME='uganda.ureport.oi')
+        response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)
 
         self.login(self.admin)
 
-        response = self.client.get(list_url, SERVER_NAME='uganda.ureport.oi')
+        response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(len(response.context['object_list']), 3)
         self.assertTrue(self.fb_source_uganda in response.context['object_list'])

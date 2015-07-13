@@ -597,12 +597,12 @@ class PollTest(DashTest):
                                     org=self.nigeria,
                                     created_by=self.admin,
                                     modified_by=self.admin)
-        response = self.client.get(list_url, SERVER_NAME='uganda.ureport.oi')
+        response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)
 
         self.login(self.admin)
 
-        response = self.client.get(list_url, SERVER_NAME='uganda.ureport.oi')
+        response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(len(response.context['object_list']), 1)
         self.assertFalse(poll2 in response.context['object_list'])

@@ -224,7 +224,7 @@ class SetOrgMiddlewareTest(DashTest):
 
         ug_org = self.create_org('uganda', self.admin)
         ug_dash_url = ug_org.subdomain + ".ureport.io"
-        self.request.get_host.return_value=ug_dash_url
+        self.request.get_host.return_value = ug_dash_url
 
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
