@@ -17,7 +17,7 @@ before_script:
 - psql -U postgres -c "CREATE USER ureport WITH PASSWORD 'nyaruka';"
 - psql -U postgres -c "ALTER ROLE ureport WITH SUPERUSER;"
 - psql -U ureport postgres -c "CREATE DATABASE ureport;"
-- ln -s $TRAVIS_BUILD_DIR/ureport/settings.py.postgres $TRAVIS_BUILD_DIR/casepro/settings.py
+- ln -s $TRAVIS_BUILD_DIR/ureport/settings.py.postgres $TRAVIS_BUILD_DIR/ureport/settings.py
 script:
 - coverage run --source="." manage.py test ureport ureport/assets ureport/countries ureport/jobs ureport/news ureport/polls ureport/public ureport/utils --verbosity=2 --noinput
 after_success:
