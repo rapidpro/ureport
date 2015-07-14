@@ -24,8 +24,8 @@ def generate_job_block_types(apps, schema_editor):
                                         has_color=False,
                                         has_video=False,
                                         has_tags=False,
-                                        created_by=root,
-                                        modified_by=root)
+                                        created_by_id=root.id,
+                                        modified_by_id=root.id)
 
 
 
