@@ -140,11 +140,7 @@
         .row
           .col-md-4
             .hr-header.primary-color
-              -if org|config:"is_global"
-                @{{ org|config:"twitter_handle" }}
-                -trans "Members"
-              -else
-                - trans "TOTAL # OF U-REPORTERS"
+              - trans "TOTAL # OF U-REPORTERS"
             .reporters-count
               - with reporters=org|reporter_count
                 - if reporters
