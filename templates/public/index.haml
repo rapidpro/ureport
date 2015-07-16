@@ -19,7 +19,8 @@
                     &#8594;
 
               .global-welcome-text
-                @UReportGlobal is a web-based tool utilising Twitter so anyone from any community, anywhere in the world, can respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.
+                -blocktrans
+                  U-Report is social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.
               -if latest_poll
                 .hero-dark-content
                   .hero-title.primary-bg-color
@@ -129,81 +130,77 @@
     {{ block.super }}
 
 - block content
-  .section
-    %h1.level-1-title
-      - trans "U-REPORTERS IN"
-      {{ org.name|upper }}
-    .level-1-title-description.secondary-color
-    .card.card-padding
-      .row
-        .col-md-4
-          .hr-header.primary-color
-            -if org|config:"is_global"
-              @{{ org|config:"twitter_handle" }}
-              -trans "Members"
-            -else
+  -if not org|config:"is_global"
+    .section
+      %h1.level-1-title
+        - trans "U-REPORTERS IN"
+        {{ org.name|upper }}
+      .level-1-title-description.secondary-color
+      .card.card-padding
+        .row
+          .col-md-4
+            .hr-header.primary-color
               - trans "TOTAL # OF U-REPORTERS"
-          .reporters-count
-            - with reporters=org|reporter_count
-              - if reporters
-                {{ reporters|intcomma }}
-              - else
-                000,000
+            .reporters-count
+              - with reporters=org|reporter_count
+                - if reporters
+                  {{ reporters|intcomma }}
+                - else
+                  000,000
 
-          - if most_active_regions
-            .hr-header.primary-color
-              - trans "4 MOST ACTIVE REGIONS"
-            .most-active-regions
-              {% for region in most_active_regions|slice:"4" %}{{ region }}{% if not forloop.last %}, {% endif %}{% endfor %}
-
-        -if is_iorg
-          .col-md-4
-            .hr-header.primary-color{ style:"margin-top:10px;" }
-              - trans "RATE BY GENDER"
-            .gender-stats
-              -include "public/mobile_gender_include.html"
-
-          .col-md-4
-            .hr-header.primary-color
-              -trans "RATE BY AGE"
-
-            .age-stats
-              -include "public/mobile_age_include.html"
-
-        -if not is_iorg
-          .col-md-4
-            -with gender_stats=org|gender_stats
+            - if most_active_regions
               .hr-header.primary-color
+                - trans "4 MOST ACTIVE REGIONS"
+              .most-active-regions
+                {% for region in most_active_regions|slice:"4" %}{{ region }}{% if not forloop.last %}, {% endif %}{% endfor %}
+
+          -if is_iorg
+            .col-md-4
+              .hr-header.primary-color{ style:"margin-top:10px;" }
                 - trans "RATE BY GENDER"
-              .gender-stats{ data-contact-field:'{{org|config:"gender_label"}}'}
-                %table.gender
-                  %tbody
-                    %tr
-                      %td
-                        .icon-gender.primary-color
-                          .glyph.icon-Icon-02
+              .gender-stats
+                -include "public/mobile_gender_include.html"
 
-                      %td
-                        #male-percentage.primary-border-color.percentage-gender
-                          %span {{ gender_stats.male_percentage }}
-                        #male-summary.summary-gender
-                          {{ gender_stats.male_count|intcomma }}
+            .col-md-4
+              .hr-header.primary-color
+                -trans "RATE BY AGE"
 
-                      %td.female-gender
-                        .icon-gender.primary-color
-                          .glyph.icon-Icon-01
+              .age-stats
+                -include "public/mobile_age_include.html"
 
-                      %td
-                        #female-percentage.primary-border-color.percentage-gender
-                          %span {{ gender_stats.female_percentage }}
-                        #female-summary.summary-gender
-                          {{ gender_stats.female_count|intcomma }}
+          -if not is_iorg
+            .col-md-4
+              -with gender_stats=org|gender_stats
+                .hr-header.primary-color
+                  - trans "RATE BY GENDER"
+                .gender-stats{ data-contact-field:'{{org|config:"gender_label"}}'}
+                  %table.gender
+                    %tbody
+                      %tr
+                        %td
+                          .icon-gender.primary-color
+                            .glyph.icon-Icon-02
 
-          .col-md-4
-            .hr-header.primary-color
-              - trans "RATE BY AGE"
-            .age-stats{ data-contact-field:'{{org|config:"born_label"}}', id: "age-chart"}
+                        %td
+                          #male-percentage.primary-border-color.percentage-gender
+                            %span {{ gender_stats.male_percentage }}
+                          #male-summary.summary-gender
+                            {{ gender_stats.male_count|intcomma }}
 
+                        %td.female-gender
+                          .icon-gender.primary-color
+                            .glyph.icon-Icon-01
+
+                        %td
+                          #female-percentage.primary-border-color.percentage-gender
+                            %span {{ gender_stats.female_percentage }}
+                          #female-summary.summary-gender
+                            {{ gender_stats.female_count|intcomma }}
+
+            .col-md-4
+              .hr-header.primary-color
+                - trans "RATE BY AGE"
+              .age-stats{ data-contact-field:'{{org|config:"born_label"}}', id: "age-chart"}
 
   %hr.aaa
   .section
@@ -292,7 +289,7 @@
             .brick.story-brick.size12{data-priority:"{% cycle '4' '3' '2' %}"}
               .brick-inner
                 .brick-title.primary-bg-color.float-left
-                  - trans "U-REPORTER STORY"
+                  - trans "STORY"
                 .brick-content
                   .brick-long-story-image
                     - if story.get_image
@@ -316,7 +313,7 @@
             .brick.story-brick.size11{data-priority:"{% cycle '4' '3' '2' %}"}
               .brick-inner
                 .brick-title.primary-bg-color.float-left
-                  - trans "U-REPORTER STORY"
+                  - trans "STORY"
                 .brick-content{style:"bottom:0;"}
                   .brick-short-story-image
                     - if story.get_image
@@ -337,7 +334,7 @@
             .brick.story-brick.size11{data-priority:"{% cycle '4' '3' '2' %}"}
               .brick-inner
                 .brick-title.primary-bg-color.float-left
-                  - trans "U-REPORTER STORY"
+                  - trans "STORY"
 
                 .brick-content
                   - if ot_story.get_image
@@ -391,7 +388,7 @@
             .brick.story-brick.size12
               .brick-inner
                 .brick-title.primary-bg-color.float-left
-                  - trans "U-REPORTER STORY"
+                  - trans "STORY"
                 .brick-content
                   .brick-long-story-image
                     - if story.get_image
