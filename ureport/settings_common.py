@@ -3,6 +3,11 @@ import sys
 from django.utils.translation import ugettext_lazy as _
 from hamlpy import templatize
 
+#-----------------------------------------------------------------------------------
+# Sets TESTING to True if this configuration is read during a unit test
+#-----------------------------------------------------------------------------------
+TESTING = sys.argv[1:2] == ['test']
+
 # Django settings for tns_glass project.
 THUMBNAIL_DEBUG = False
 
