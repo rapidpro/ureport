@@ -1,3 +1,4 @@
+import re
 from django.contrib.auth.models import User
 from django.db import models
 from django_countries import countries
@@ -10,7 +11,14 @@ class CountryAlias(SmartModel):
     name = models.CharField(max_length=128, help_text=_("The name for our alias"))
 
     @classmethod
+    def name_stemming(cls, name):
+        words = re.split(r'\W+', name, re.UNICODE)
+        return " ".join([word.lower() for word in words if word])
+
+    @classmethod
     def get_or_create(cls, country, name, user):
+
+        name = CountryAlias.name_stemming(name)
         alias = cls.objects.filter(country=country, name=name).first()
 
         if not alias:
