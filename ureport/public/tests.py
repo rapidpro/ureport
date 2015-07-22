@@ -1280,3 +1280,21 @@ class CountriesTest(DashTest):
         self.assertTrue('country_code' in response_json)
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "US")
+
+        # country text has quotes
+        response = self.client.get(countries_url + '?text="Etats+Unies"')
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "US")
+
+        # country text has quotes an spaces
+        response = self.client.get(countries_url + '?text="    Etats+Unies  "')
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "US")
