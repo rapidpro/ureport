@@ -11,14 +11,14 @@ class CountryAlias(SmartModel):
     name = models.CharField(max_length=128, help_text=_("The name for our alias"))
 
     @classmethod
-    def name_stemming(cls, name):
+    def normalize_name(cls, name):
         words = re.split(r'\W+', name, re.UNICODE)
         return " ".join([word.lower() for word in words if word])
 
     @classmethod
     def get_or_create(cls, country, name, user):
 
-        name = CountryAlias.name_stemming(name)
+        name = CountryAlias.normalize_name(name)
         alias = cls.objects.filter(country=country, name=name).first()
 
         if not alias:

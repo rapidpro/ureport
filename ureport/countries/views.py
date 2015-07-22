@@ -8,7 +8,7 @@ class CountryAliasForm(forms.ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data['name']
-        return CountryAlias.name_stemming(name)
+        return CountryAlias.normalize_name(name)
 
     class Meta:
         model = CountryAlias

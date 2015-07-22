@@ -327,7 +327,7 @@ class CountriesView(SmartTemplateView):
         json_dict = dict(exists='invalid')
 
         whole_text = request.GET.get('text', '')
-        text = CountryAlias.name_stemming(whole_text)
+        text = CountryAlias.normalize_name(whole_text)
 
         text_length = len(text)
 
