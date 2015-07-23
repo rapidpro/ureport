@@ -45,6 +45,19 @@ class UtilsTest(DashTest):
         # burundi should be included and be the first; by alphetical order
         self.assertEqual(len(get_linked_orgs()), 5)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+        with self.settings(HOSTNAME='localhost:8000'):
+            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
+            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://burundi.localhost:8000')
+
+            self.org.domain = 'ureport.bi'
+            self.org.save()
+
+            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
+            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://burundi.localhost:8000')
+
+            with self.settings(SESSION_COOKIE_SECURE=True):
+                self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://ureport.bi')
+                self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'https://burundi.localhost:8000')
 
     def test_clean_global_results_data(self):
         results = [{"open_ended": False,

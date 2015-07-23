@@ -13,6 +13,7 @@ from ureport.utils import get_linked_orgs
 
 register = template.Library()
 
+
 @register.filter
 def question_results(question):
     if not question:
@@ -27,6 +28,7 @@ def question_results(question):
         traceback.print_exc()
         return None
 
+
 @register.filter
 def reporter_count(org):
     if not org:
@@ -34,6 +36,7 @@ def reporter_count(org):
 
     group = org.get_reporter_group()
     return group.get('size', 0)
+
 
 @register.filter
 def age_stats(org):
@@ -59,6 +62,7 @@ def age_stats(org):
         traceback.print_exc()
 
     return None
+
 
 @register.filter
 def gender_stats(org):
@@ -107,9 +111,11 @@ def gender_stats(org):
                 male_count="--", male_percentage="---",
                 female_count="--", female_percentage="---")
 
+
 @register.filter
 def get_range(value):
     return range(value)
+
 
 @register.filter
 def config(org, name):
@@ -117,6 +123,7 @@ def config(org, name):
         return None
 
     return org.get_config(name)
+
 
 @register.filter
 def org_color(org, index):
@@ -162,6 +169,7 @@ def lessblock(parser, token):
     parser.delete_first_token()
     return LessBlockNode(nodelist)
 
+
 class LessBlockNode(template.Node):
     def __init__(self, nodelist):
         self.nodelist = nodelist
@@ -174,8 +182,10 @@ class LessBlockNode(template.Node):
 # register our tag
 lessblock = register.tag(lessblock)
 
-@register.inclusion_tag('public/org_flags.html')
-def show_org_flags(is_iorg):
-    linked_orgs = get_linked_orgs()
-    return dict(linked_orgs=linked_orgs, break_pos=min(len(linked_orgs)/2, 9) ,STATIC_URL=settings.STATIC_URL,
-                is_iorg=is_iorg)
+
+@register.inclusion_tag('public/org_flags.html', takes_context=True)
+def show_org_flags(context):
+    request = context['request']
+    linked_orgs = get_linked_orgs(request.user.is_authenticated)
+    return dict(linked_orgs=linked_orgs, break_pos=min(len(linked_orgs)/2, 9), STATIC_URL=settings.STATIC_URL,
+                is_iorg=context['is_iorg'])
