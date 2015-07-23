@@ -18,14 +18,14 @@ from raven.contrib.django.raven_compat.models import client
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
 
-def get_linked_orgs():
+def get_linked_orgs(authenticated=False):
     all_orgs = Org.objects.filter(is_active=True).order_by('name')
 
     linked_sites = list(getattr(settings, 'PREVIOUS_ORG_SITES', []))
 
     # populate a ureport site for each org so we can link off to them
     for org in all_orgs:
-        host = org.build_host_link()
+        host = org.build_host_link(authenticated)
         org.host = host
         if org.get_config('is_on_landing_page'):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
