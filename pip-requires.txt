@@ -30,3 +30,4 @@ hamlpy
 pycountry
 django-countries
 GitPython
+regex
