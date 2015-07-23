@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import re
+import regex
 
 from django.db import models, migrations
 
 
 def normalize_name(name):
-    words = re.split(r'\W+', name, re.UNICODE)
-    return " ".join([word.lower() for word in words if word])
+    words = regex.split(r"\W+", unicode(name).lower(), flags=regex.UNICODE | regex.V0)
+    output = " ".join([word for word in words if word])
+    return output
 
 
 def normalize_country_aliases(apps, schema_editor):
@@ -15,9 +16,12 @@ def normalize_country_aliases(apps, schema_editor):
 
     for alias in CountryAlias.objects.all():
         name = alias.name
-        new_name = normalize_name(name)
+        new_name = normalize_name(unicode(name))
         alias.name = new_name
         alias.save()
+
+    # Delete aliases with empty names after normalization
+    CountryAlias.objects.filter(name="").delete()
 
 
 class Migration(migrations.Migration):

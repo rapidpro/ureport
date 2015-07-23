@@ -1,10 +1,10 @@
-import re
+import regex
 from django.contrib.auth.models import User
 from django.db import models
-from django_countries import countries
 from smartmin.models import SmartModel
 from django_countries.fields import CountryField
 from django.utils.translation import ugettext_lazy as _
+
 
 class CountryAlias(SmartModel):
     country = CountryField()
@@ -12,7 +12,7 @@ class CountryAlias(SmartModel):
 
     @classmethod
     def normalize_name(cls, name):
-        words = re.split(r'\W+', name, re.UNICODE)
+        words = regex.split(r"\W+", unicode(name).lower(), flags=regex.UNICODE | regex.V0)
         return " ".join([word.lower() for word in words if word])
 
     @classmethod

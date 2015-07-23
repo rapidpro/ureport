@@ -1,10 +1,15 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import json
 import mock
-from urllib import urlencode
+from urllib import urlencode, quote
 
 from django.core.files.images import ImageFile
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.utils.encoding import iri_to_uri
+from django.utils.http import urlquote
 
 from dash.api import API
 from dash.categories.models import Category
@@ -1298,3 +1303,53 @@ class CountriesTest(DashTest):
         self.assertTrue('country_code' in response_json)
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "US")
+
+        # unicode aliases
+        CountryAlias.objects.create(name=u"এ্যান্ডোরা",
+                                    country="AD",
+                                    created_by=self.admin,
+                                    modified_by=self.admin)
+
+        response = self.client.get(countries_url + '?text=%s' % urlquote(u'এ্যান্ডোরা'))
+
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "AD")
+
+        response = self.client.get(countries_url + '?text="   %s   "' % urlquote(u"এ্যান্ডোরা"))
+
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "AD")
+
+
+        # unicode aliases
+        CountryAlias.objects.create(name="Madžarska",
+                                    country="MD",
+                                    created_by=self.admin,
+                                    modified_by=self.admin)
+
+        response = self.client.get(countries_url + '?text=%s' % urlquote("Madžarska"))
+
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "MD")
+
+        response = self.client.get(countries_url + '?text="   %s   "' % urlquote("Madžarska"))
+
+        self.assertEquals(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue('exists' in response_json)
+        self.assertTrue('country_code' in response_json)
+        self.assertEquals(response_json['exists'], "valid")
+        self.assertEquals(response_json['country_code'], "MD")
+
