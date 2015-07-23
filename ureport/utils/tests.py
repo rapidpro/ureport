@@ -59,7 +59,6 @@ class UtilsTest(DashTest):
                 self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://ureport.bi')
                 self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'https://burundi.localhost:8000')
 
-
     def test_clean_global_results_data(self):
         results = [{"open_ended": False,
                     "set": 0,
