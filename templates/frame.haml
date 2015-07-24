@@ -418,7 +418,7 @@
             .row
               .col-sm-12
                 .login-link
-                  %a.primary-color{href:"{{ org.build_host_link }}/users/login/"}
+                  %a.primary-color{href:"{% org_host_link %}/users/login/"}
                     - trans "Login"
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
