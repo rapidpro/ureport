@@ -1,12 +1,14 @@
 import json
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.http import HttpRequest
 from django.template import TemplateSyntaxError
 from django.test import TestCase
 from django.utils.text import slugify
 
 import pycountry
 
-from mock import patch
+from mock import patch, Mock
 from dash.categories.models import Category, CategoryImage
 from temba import Result, Flow, Group
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
@@ -858,7 +860,7 @@ class PollTest(DashTest):
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_templatetags(self):
-        from ureport.polls.templatetags.ureport import reporter_count, config, org_color, transparency
+        from ureport.polls.templatetags.ureport import reporter_count, config, org_color, transparency, show_org_flags
 
         self.assertIsNone(reporter_count(None))
         self.assertEquals(reporter_count(self.uganda), 0)
@@ -914,6 +916,22 @@ class PollTest(DashTest):
 
         with self.assertRaises(TemplateSyntaxError):
             transparency('#abc', 0.5)
+
+        with patch('ureport.polls.templatetags.ureport.get_linked_orgs') as mock_get_linked_orgs:
+            mock_get_linked_orgs.return_value = ['linked_org']
+
+            self.request = Mock(spec=HttpRequest)
+            self.request.user = User.objects.get(pk=1)
+
+            with patch('django.contrib.auth.models.User.is_authenticated') as mock_authenticated:
+                mock_authenticated.return_value = True
+
+                show_org_flags(dict(is_iorg=True, request=self.request))
+                mock_get_linked_orgs.assert_called_with(True)
+
+                mock_authenticated.return_value = False
+                show_org_flags(dict(is_iorg=True, request=self.request))
+                mock_get_linked_orgs.assert_called_with(False)
 
 
 class PollQuestionTest(DashTest):
