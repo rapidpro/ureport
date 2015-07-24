@@ -186,6 +186,6 @@ lessblock = register.tag(lessblock)
 @register.inclusion_tag('public/org_flags.html', takes_context=True)
 def show_org_flags(context):
     request = context['request']
-    linked_orgs = get_linked_orgs(request.user.is_authenticated)
+    linked_orgs = get_linked_orgs(request.user.is_authenticated())
     return dict(linked_orgs=linked_orgs, break_pos=min(len(linked_orgs)/2, 9), STATIC_URL=settings.STATIC_URL,
                 is_iorg=context['is_iorg'])
