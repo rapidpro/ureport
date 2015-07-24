@@ -10,7 +10,7 @@ EMPTY_SUBDOMAIN_HOST = 'http://nigeria.ureport.staging.nyaruka.com'
 HOSTNAME = 'ureport.staging.nyaruka.com'
 ALLOWED_HOSTS = ['.nyaruka.com', '.ureport.in']
 SESSION_COOKIE_DOMAIN = 'ureport.staging.nyaruka.com'
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
 
 # these guys will get email from sentry
 ADMINS = (
