@@ -861,6 +861,7 @@ class PollTest(DashTest):
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_templatetags(self):
         from ureport.polls.templatetags.ureport import reporter_count, config, org_color, transparency, show_org_flags
+        from ureport.polls.templatetags.ureport import org_host_link
 
         self.assertIsNone(reporter_count(None))
         self.assertEquals(reporter_count(self.uganda), 0)
@@ -920,18 +921,40 @@ class PollTest(DashTest):
         with patch('ureport.polls.templatetags.ureport.get_linked_orgs') as mock_get_linked_orgs:
             mock_get_linked_orgs.return_value = ['linked_org']
 
-            self.request = Mock(spec=HttpRequest)
-            self.request.user = User.objects.get(pk=1)
+            request = Mock(spec=HttpRequest)
+            request.user = User.objects.get(pk=1)
 
             with patch('django.contrib.auth.models.User.is_authenticated') as mock_authenticated:
                 mock_authenticated.return_value = True
 
-                show_org_flags(dict(is_iorg=True, request=self.request))
+                show_org_flags(dict(is_iorg=True, request=request))
                 mock_get_linked_orgs.assert_called_with(True)
 
                 mock_authenticated.return_value = False
-                show_org_flags(dict(is_iorg=True, request=self.request))
+                show_org_flags(dict(is_iorg=True, request=request))
                 mock_get_linked_orgs.assert_called_with(False)
+
+        request = Mock(spec=HttpRequest)
+        request.user = User.objects.get(pk=1)
+
+        with patch('django.contrib.auth.models.User.is_authenticated') as mock_authenticated:
+            mock_authenticated.return_value = True
+
+            self.assertEqual(org_host_link(dict(request=request)), 'https://ureport.io')
+
+            request.org = self.nigeria
+            self.assertEqual(org_host_link(dict(request=request)), 'http://nigeria.ureport.io')
+
+            with self.settings(SESSION_COOKIE_SECURE=True):
+                self.assertEqual(org_host_link(dict(request=request)), 'https://nigeria.ureport.io')
+
+            self.nigeria.domain = "ureport.ng"
+            self.nigeria.save()
+
+            self.assertEqual(org_host_link(dict(request=request)), 'http://nigeria.ureport.io')
+
+            with self.settings(SESSION_COOKIE_SECURE=True):
+                self.assertEqual(org_host_link(dict(request=request)), 'https://nigeria.ureport.io')
 
 
 class PollQuestionTest(DashTest):

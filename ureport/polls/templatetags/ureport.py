@@ -189,3 +189,14 @@ def show_org_flags(context):
     linked_orgs = get_linked_orgs(request.user.is_authenticated())
     return dict(linked_orgs=linked_orgs, break_pos=min(len(linked_orgs)/2, 9), STATIC_URL=settings.STATIC_URL,
                 is_iorg=context['is_iorg'])
+
+
+@register.simple_tag(takes_context=True)
+def org_host_link(context):
+    request = context['request']
+    try:
+        org = request.org
+        return org.build_host_link(True)
+    except Exception as e:
+        return "https://%s" % getattr(settings, 'HOSTNAME', 'localhost')
+
