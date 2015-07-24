@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import redirect
@@ -316,6 +319,7 @@ class JobsView(SmartTemplateView):
                                                           is_active=True).order_by('-is_featured', '-created_on')
         return context
 
+
 class CountriesView(SmartTemplateView):
     template_name = 'public/countries.html'
 
@@ -326,7 +330,9 @@ class CountriesView(SmartTemplateView):
     def get(self, request, *args, **kwargs):
         json_dict = dict(exists='invalid')
 
-        text = request.GET.get('text', '')
+        whole_text = request.GET.get('text', '')
+        text = CountryAlias.normalize_name(whole_text)
+
         text_length = len(text)
 
         country = None
@@ -359,6 +365,6 @@ class CountriesView(SmartTemplateView):
         elif country:
             json_dict = dict(exists='valid', country_code=country.alpha2)
         else:
-            json_dict['text'] = text
+            json_dict['text'] = whole_text
 
         return HttpResponse(json.dumps(json_dict), status=200, content_type='application/json')

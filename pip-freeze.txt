@@ -55,3 +55,4 @@ wsgiref==0.1.2
 xlrd==0.9.3
 xlutils==1.7.1
 xlwt==1.0.0
+regex==2015.07.19
