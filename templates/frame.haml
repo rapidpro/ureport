@@ -10,6 +10,9 @@
       &nbsp;
   %meta{ name:"description", content:""}
   %meta{ name:"author", content:""}
+
+  - if has_better_domain
+    %meta{name:"robots", content:"noindex"}
   
   <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
   <!--[if lt IE 9]>
@@ -414,7 +417,7 @@
                 .footer-global-ureport-logo
                   %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
 
-          - if not request.user.is_authenticated and not is_iorg
+          - if not request.user.is_authenticated and not is_iorg and not login_hidden
             .row
               .col-sm-12
                 .login-link
