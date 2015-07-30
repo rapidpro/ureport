@@ -1,14 +1,14 @@
 
-def set_dot_in_hidden(request):
-    dot_in_hidden = True
+def set_has_better_domain(request):
+    has_better_domain = True
     if request.META.get('HTTP_HOST', '').find('ureport.in') >= 0 and not request.org.domain:
-        dot_in_hidden = False
+        has_better_domain = False
 
     login_hidden = False
     if request.org.domain:
         login_hidden = True
 
-    return dict(dot_in_hidden=dot_in_hidden, login_hidden=login_hidden)
+    return dict(has_better_domain=has_better_domain, login_hidden=login_hidden)
 
 
 def set_is_iorg(request):
