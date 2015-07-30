@@ -5,7 +5,7 @@ def set_has_better_domain(request):
         has_better_domain = False
 
     login_hidden = False
-    if request.org.domain:
+    if request.org and request.org.domain:
         login_hidden = True
 
     return dict(has_better_domain=has_better_domain, login_hidden=login_hidden)
