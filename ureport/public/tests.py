@@ -136,6 +136,30 @@ class PublicTest(DashTest):
         self.assertFalse('orgs' in response.context)
         self.assertTrue('welcome-flags' in response.content)
 
+    def test_has_better_domain_processors(self):
+        home_url = reverse('public.index')
+
+        # using subdomain wihout domain on org, login is shown and indexing should be allow
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertFalse('<meta content="noindex" name="robots">' in response.content)
+        self.assertTrue('nigeria.ureport.io/users/login/' in response.content)
+
+        self.nigeria.domain = "ureport.ng"
+        self.nigeria.save()
+
+        # using subdomain wihout domain on org, indexing is disallowed but login should be shown
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertTrue("<meta content=\'noindex\' name=\'robots\' />" in response.content)
+        self.assertTrue('nigeria.ureport.io/users/login/' in response.content)
+
+        # using custom domain, login is hidden  and indexing should be allow
+        response = self.client.get(home_url, HTTP_HOST='ureport.ng')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertFalse("<meta content=\'noindex\' name=\'robots\' />" in response.content)
+        self.assertFalse('nigeria.ureport.io/users/login/' in response.content)
+
     @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_index(self):
         home_url = reverse('public.index')
@@ -1352,4 +1376,3 @@ class CountriesTest(DashTest):
         self.assertTrue('country_code' in response_json)
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "MD")
-
