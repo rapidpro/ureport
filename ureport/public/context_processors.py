@@ -1,12 +1,22 @@
 
 def set_has_better_domain(request):
-    has_better_domain = True
-    if request.META.get('HTTP_HOST', '').find('ureport.in') >= 0 and not request.org.domain:
-        has_better_domain = False
+    org = request.org
 
-    login_hidden = False
-    if request.org and request.org.domain:
-        login_hidden = True
+    # our defaults, prevent indexing and hide login link
+    has_better_domain = True
+    login_hidden = True
+
+    # lookup if we are using the subdomain
+    using_subdomain = request.META.get('HTTP_HOST', '').find('ureport.in') >= 0
+
+    if org:
+        # when using subdomain we can allow login link
+        if using_subdomain:
+            login_hidden = False
+
+        # no custom domain allow indexing
+        if not org.domain:
+            has_better_domain = False
 
     return dict(has_better_domain=has_better_domain, login_hidden=login_hidden)
 
