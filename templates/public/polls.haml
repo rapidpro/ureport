@@ -299,7 +299,7 @@
       $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
         $(".poll-map").each(function(){
           var question = $(this).attr("data-question");
-          map = window.initMap('map-' + question, boundaries, question);
+          map = window.initMap('map-' + question, boundaries, question, '{{ org|config:"district_label"}}');
 
           $(this).data('map', map);
         });
