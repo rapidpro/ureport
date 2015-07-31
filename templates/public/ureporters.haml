@@ -138,7 +138,7 @@
             stops: 6
           });
 
-          window.initMap('ureport-location-map-id', boundaries, ajaxUrl, colorsList);
+          window.initMap('ureport-location-map-id', boundaries, ajaxUrl,  '{{ org|config:"district_label"}}', colorsList);
         });
       });
     });

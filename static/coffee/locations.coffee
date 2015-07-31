@@ -1,5 +1,7 @@
-initMap = (id, geojson, question) ->
+initMap = (id, geojson, question, districtLabel) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
+
+  allowDistrictZoom = districtLabel.trim() != ''
 
   boundaries = null
   boundaryResults = null
@@ -113,7 +115,7 @@ initMap = (id, geojson, question) ->
     info.update()
 
   clickFeature = (e) ->
-    if (e.target.feature.properties.level == 1)
+    if (allowDistrictZoom and e.target.feature.properties.level == 1)
       map.fitBounds(e.target.getBounds(), {step: .25})
       mainLabelName = e.target.feature.properties.name + " (State)"
       loadBoundary(e.target.feature.properties, e.target)
