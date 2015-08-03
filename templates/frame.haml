@@ -417,7 +417,7 @@
                 .footer-global-ureport-logo
                   %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
 
-          - if not request.user.is_authenticated and not is_iorg and not login_hidden
+          - if not request.user.is_authenticated and not is_iorg and show_login
             .row
               .col-sm-12
                 .login-link
