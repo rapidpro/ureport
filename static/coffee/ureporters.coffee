@@ -81,12 +81,14 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
 
   highlightFeature = (e) ->
     layer = e.target
-    layer.setStyle(HIGHLIGHT_STYLE)
+    console.log(layer)
+    if layer.feature.properties.level == 1 and boundaries is states or layer.feature.properties.level == 2 and boundaries isnt states
+      layer.setStyle(HIGHLIGHT_STYLE)
 
-    if (!L.Browser.ie && !L.Browser.opera)
-      layer.bringToFront()
+      if (!L.Browser.ie && !L.Browser.opera)
+        layer.bringToFront()
 
-    info.update(layer.feature.properties)
+      info.update(layer.feature.properties)
 
   resetBoundaries = ->
     map.removeLayer(boundaries)
