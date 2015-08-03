@@ -417,14 +417,6 @@
                 .footer-global-ureport-logo
                   %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
 
-          <!-- HTTP_HOST: {{request.META.HTTP_HOST}} -->
-          <!-- SERVER_NAME: {{request.META.SERVER_NAME}} -->
-          <!-- SERVER_PORT: {{request.META.SERVER_PORT}} -->
-
-          <!-- authenticated: {{request.user.is_autheticated }} -->
-          <!-- iorg: {{is_iorg }} -->
-          <!-- show_login: {{show_login }} -->
-
           - if not request.user.is_authenticated and not is_iorg and show_login
             .row
               .col-sm-12
