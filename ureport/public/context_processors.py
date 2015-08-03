@@ -14,7 +14,7 @@ def set_has_better_domain(request):
 
     # our defaults, prevent indexing and hide login link
     has_better_domain = True
-    login_hidden = True
+    show_login = False
 
     hostname = getattr(settings, 'HOSTNAME', 'localhost')
 
@@ -24,13 +24,13 @@ def set_has_better_domain(request):
     if org:
         # when using subdomain we can allow login link
         if using_subdomain:
-            login_hidden = False
+            show_login = True
 
         # no custom domain or not using sudomain, allow indexing
         if not org.domain or not using_subdomain:
             has_better_domain = False
 
-    return dict(has_better_domain=has_better_domain, login_hidden=login_hidden)
+    return dict(has_better_domain=has_better_domain, show_login=show_login)
 
 
 def set_is_iorg(request):
