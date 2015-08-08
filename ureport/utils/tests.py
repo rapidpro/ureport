@@ -28,14 +28,14 @@ class UtilsTest(DashTest):
     def test_get_linked_orgs(self):
 
         # we have 4 old org in the settings
-        self.assertEqual(len(get_linked_orgs()), 4)
+        self.assertEqual(len(get_linked_orgs()), 3)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'burundi')
 
         self.org.set_config('is_on_landing_page', True)
 
         # missing flag
-        self.assertEqual(len(get_linked_orgs()), 4)
+        self.assertEqual(len(get_linked_orgs()), 3)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'burundi')
 
@@ -43,7 +43,7 @@ class UtilsTest(DashTest):
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
         # burundi should be included and be the first; by alphetical order
-        self.assertEqual(len(get_linked_orgs()), 5)
+        self.assertEqual(len(get_linked_orgs()), 4)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
         with self.settings(HOSTNAME='localhost:8000'):
             self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
