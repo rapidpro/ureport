@@ -1,0 +1,126 @@
+- extends 'smartmin/form.html'
+- load smartmin i18n
+
+- block form-span
+  col-md-12
+
+- block fields
+  %table.table.table-condensed{ style:'margin-bottom:0px;'}
+    %thead
+      %tr
+        %th
+          - trans "Accounts"
+        %th.permission
+          - trans "Admins"
+        %th.permission
+          - trans "Editors"
+        %th.permission
+          - trans "Remove"
+    %tbody
+      %tr#admin-error.hide
+        %td.alert.alert-error{colspan:'5'}
+          - trans "You must have at least one administator"
+      - for user in org_users
+        %tr
+          %td
+            {{user.email}}
+            - if user.first_name or user.last_name
+              ({{user.first_name}} {{ user.last_name}})
+
+          - with group_fields|get:user as row_fields
+            - for check_name in row_fields
+              %td.check.permission
+                {{form|field:check_name}}
+          %td.check.permission
+            %input{type:'checkbox'}
+      // pending invites
+      - for invite in invites
+        %tr.invite
+          %td
+            {{invite.email}} (Invite Sent)
+          %td.permission
+            - if invite.user_group == 'A'
+              %input{ type:'checkbox', disabled: None, checked: None}
+            - else
+              %input{ type:'checkbox', disabled: None}
+          %td.permission
+            - if invite.user_group == 'E'
+              %input{ type:'checkbox', disabled: None, checked: None}
+            - else
+              %input{ type:'checkbox', disabled: None}
+          %td{ height: '3px' }
+
+      %tr
+        %td.form{colspan:'1'}
+          - render_field 'emails'
+        %td.form{colspan:'3'}
+          - render_field 'user_group'
+
+- block extra-style
+  :css
+    input[type="checkbox"] {
+      width: 50px;
+    }
+    .form-horizontal .control-label {
+      width: 100%;
+      text-align: left;
+    }
+
+    input.form-control, textarea.form-control, select.form-control {
+      width: 100%;
+    }
+
+
+- block extra-script
+  {{block.super}}
+
+  :javascript
+    $(function() {
+      // initialize the table cell checkboxes
+      var boxes = $("td.check");
+      boxes.each(function() {
+        var list_input = $(this).children("input[type='checkbox']");
+        if (list_input[0].checked) {
+          $(this).addClass("checked");
+        } else {
+          $(this).removeClass("checked");
+        }
+      });
+    });
+
+    $(function() {
+      // update the cells checkbox on click
+
+      $("td.check input[type='checkbox']").on('click', function(){
+        var cell = $(this).parent("td.check");
+        var ipt = $(this);
+
+        if (!cell.hasClass("checked")) {
+          allCells = cell.parent().children('td.check');
+          allHiddenInputs = allCells.find("input[type='checkbox']");
+
+          // Uncheck everything First
+          allCells.removeClass('checked');
+          allHiddenInputs.prop('checked', false);
+
+          // Check the clicked cell
+          cell.addClass('checked');
+          ipt.prop('checked', true);
+
+        }
+
+        hasAdmin = false;
+        // validate that we always have an admin first
+        // to show error if no admin is remaining
+        $("td.check").parent().find("input[id*='administrators']").each(function() {
+           hasAdmin = hasAdmin || $(this).prop('checked')
+        })
+
+        if (!hasAdmin) {
+          $('#admin-error').show();
+        } else {
+          $('#admin-error').hide();
+        }
+
+      });
+    });

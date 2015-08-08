@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^', include('ureport.public.urls')),
-    url(r'^manage/', include('dash.orgs.urls')),
+    url(r'^manage/', include('ureport.org_ext.urls')),
     url(r'^manage/', include('dash.dashblocks.urls')),
     url(r'^manage/', include('dash.stories.urls')),
     url(r'^manage/', include('ureport.polls.urls')),

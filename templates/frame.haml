@@ -157,7 +157,7 @@
                     %b.caret
                   %ul.dropdown-menu
                     %li
-                      %a{href:"{% url 'orgs.org_list' %}"}
+                      %a{href:"{% url 'org_ext.org_list' %}"}
                         - trans "Orgs"
 
                     %li
@@ -185,7 +185,7 @@
 
               - if request.user.is_superuser or org_perms.orgs.org_home
                 %li
-                  %a{ href:"{% url 'orgs.org_home' %}"}
+                  %a{ href:"{% url 'org_ext.org_home' %}"}
                     {{ org.name }}
 
               - if request.user.is_superuser or org_perms.polls.poll_list

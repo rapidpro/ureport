@@ -1,0 +1,21 @@
+- extends "smartmin/read.html"
+
+- load i18n
+
+- block read-buttons
+  - if request.user.is_superuser or org_perms.org_ext.org_edit
+    %a.btn.btn-primary.pull-right{href:"{% url 'org_ext.org_edit' %}", role:"button"}
+      - trans "Edit"
+  - if request.user.is_superuser or org_perms.org_ext.org_manage_accounts
+    %a.btn.btn-primary.pull-right.manage{href:"{% url 'org_ext.org_manage_accounts' %}", role:"button"}
+      - trans "Manage Users"
+
+- block extra-style
+  :css
+    td.read-label {
+      width: 200px;
+    }
+
+    a.manage {
+      margin-right: 10px;
+    }
