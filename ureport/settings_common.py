@@ -245,6 +245,7 @@ INSTALLED_APPS = (
     'dash.categories',
 
     # ureport apps
+    'ureport.org_ext',
     'ureport.polls',
     'ureport.news',
     'ureport.jobs',
@@ -320,7 +321,7 @@ PERMISSIONS = {
           'list'),  # can view a list of the objects
 
     'dashblocks.dashblock': ('html', ),
-    'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join'),
+    'org_ext.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
     'polls.poll': ('questions', 'responses', 'images'),
     'stories.story': ('html', 'images'),
 
@@ -337,10 +338,10 @@ GROUP_PERMISSIONS = {
         'jobs.jobsource.*',
         'news.newsitem.*',
         'news.video.*',
-        'orgs.org_edit',
-        'orgs.org_home',
-        'orgs.org_manage_accounts',
-        'orgs.org_profile',
+        'org_ext.org_edit',
+        'org_ext.org_home',
+        'org_ext.org_manage_accounts',
+        'org_ext.org_profile',
         'polls.poll.*',
         'polls.pollcategory.*',
         'polls.pollimage.*',
@@ -357,8 +358,8 @@ GROUP_PERMISSIONS = {
         'jobs.jobsource.*',
         'news.newsitem.*',
         'news.video.*',
-        'orgs.org_home',
-        'orgs.org_profile',
+        'org_ext.org_home',
+        'org_ext.org_profile',
         'polls.poll.*',
         'polls.pollcategory.*',
         'polls.pollimage.*',

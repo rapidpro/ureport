@@ -9,6 +9,7 @@ from ureport.utils import fetch_contact_field_results, fetch_org_polls_results, 
 
 logger = logging.getLogger(__name__)
 
+
 @app.task(name='polls.update_main_poll')
 def update_main_poll():
 
@@ -27,6 +28,7 @@ def update_main_poll():
 
     print "Task: Update_main_poll took %ss" % (time.time() - start)
 
+
 @app.task(name='polls.update_brick_polls')
 def update_brick_polls():
     start = time.time()
@@ -42,6 +44,7 @@ def update_brick_polls():
                 fetch_org_polls_results(org, brick_polls, r)
 
     print "Task: Update_brick_polls took %ss" % (time.time() - start)
+
 
 @app.task(name='polls.update_other_polls')
 def update_other_polls():
@@ -59,6 +62,7 @@ def update_other_polls():
 
     print "Task: Update_other_polls took %ss" % (time.time() - start)
 
+
 @app.task(name='polls.update_org_flows_and_reporters')
 def update_org_flows_and_reporters():
     start = time.time()
@@ -74,6 +78,7 @@ def update_org_flows_and_reporters():
                 fetch_reporter_group(org)
             fetch_old_sites_count()
     print "Task: Update_org_flows_and_reporters took %ss" % (time.time() - start)
+
 
 @app.task(name='polls.update_org_graphs_data')
 def update_org_graphs_data():
@@ -94,6 +99,7 @@ def update_org_graphs_data():
                             fetch_contact_field_results(org, c_field, dict(location='State'))
 
     print "Task: Update_org_graph_data took %ss" % (time.time() - start)
+
 
 @app.task(track_started=True, name='fetch_poll')
 def fetch_poll(poll_id):
