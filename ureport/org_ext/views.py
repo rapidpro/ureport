@@ -1,18 +1,19 @@
 from __future__ import absolute_import, unicode_literals
 
-
 from dash.orgs.models import Org
 from dash.orgs.views import OrgCRUDL, InferOrgMixin, OrgPermsMixin, SmartUpdateView
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.utils.translation import ugettext_lazy as _
 
 from smartmin.views import SmartCRUDL
+from ureport.org_ext import OrgCache, refresh_caches
 
 
 class OrgExtCRUDL(SmartCRUDL):
-    actions = ('create', 'list', 'update', 'choose', 'home', 'edit',
-               'manage_accounts', 'create_login', 'join', 'chooser')
+    actions = ('create', 'list', 'update', 'choose', 'home', 'edit', 'manage_accounts', 'create_login', 'join',
+               'chooser', 'refresh_cache')
     model = Org
 
     class Create(OrgCRUDL.Create):
@@ -53,3 +54,12 @@ class OrgExtCRUDL(SmartCRUDL):
     class Chooser(OrgCRUDL.Chooser):
         pass
 
+    class RefreshCache(SmartUpdateView):
+        fields = ('id',)
+        success_message = None
+        success_url = '@org_ext.org_home'
+
+        def pre_process(self, request, *args, **kwargs):
+            cache = OrgCache(int(request.REQUEST['cache']))
+            refresh_caches(self.get_object(), [cache])
+            self.success_message = _("Refreshed %s cache for this organization") % cache.name

@@ -321,7 +321,7 @@ PERMISSIONS = {
           'list'),  # can view a list of the objects
 
     'dashblocks.dashblock': ('html', ),
-    'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join'),
+    'org_ext.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
     'polls.poll': ('questions', 'responses', 'images'),
     'stories.story': ('html', 'images'),
 
