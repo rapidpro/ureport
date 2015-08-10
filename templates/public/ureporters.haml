@@ -166,12 +166,12 @@
           for (i=0; i<results.categories.length; i++){
             category = results.categories[i];
             label = category.label.trim().toUpperCase();
-            categories.push("Age " + label);
 
             percentage = (category.count == 0) ? 0 : category.count * 100 / total;
             percentage_lookup[label] = Math.round(percentage);
 
             if (parseInt(percentage_lookup[label])) {
+              categories.push("Age " + label);
               data.push({ name:label,  y: Math.round(percentage) });
             }
           }
