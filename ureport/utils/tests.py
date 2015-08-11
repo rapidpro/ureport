@@ -10,7 +10,8 @@ from temba import Group
 from ureport.assets.models import FLAG, Image
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.tests import DashTest
-from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count
+from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count, \
+    get_reporter_group
 from ureport.utils import get_global_count, GLOBAL_COUNT_CACHE_KEY
 
 
@@ -445,6 +446,12 @@ class UtilsTest(DashTest):
                                                           UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
                         cache_delete_mock.assert_called_with(GLOBAL_COUNT_CACHE_KEY)
+
+                        with patch('django.core.cache.cache.get') as cache_get_mock:
+                            cache_get_mock.return_value = {'time': 500, 'results': group_dict}
+
+                            self.assertEqual(get_reporter_group(self.org), group_dict)
+
 
     def test_fetch_old_sites_count(self):
         self.clear_cache()
