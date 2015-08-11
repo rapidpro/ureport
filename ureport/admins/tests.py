@@ -1,7 +1,8 @@
 from django.core.urlresolvers import reverse
 from mock import patch
-from ureport.admins import OrgCache
+from ureport.admins import OrgCache, refresh_caches
 from ureport.tests import DashTest
+from django.template import TemplateSyntaxError
 
 
 class PollTest(DashTest):
@@ -10,7 +11,7 @@ class PollTest(DashTest):
         self.uganda = self.create_org('uganda', self.admin)
         self.nigeria = self.create_org('nigeria', self.admin)
 
-    def test_refresh_cache(self):
+    def test_refresh_cache_view(self):
         refresh_cache_url = reverse('admins.org_refresh_cache', args=[self.uganda.pk])
 
         post_data = dict(cache=1)
@@ -34,7 +35,7 @@ class PollTest(DashTest):
 
             self.login(self.superuser)
 
-            with self.assertRaises(KeyError):
+            with self.assertRaises(TemplateSyntaxError):
                 self.client.get(refresh_cache_url, SERVER_NAME='uganda.ureport.io')
 
             with self.assertRaises(KeyError):
@@ -49,6 +50,5 @@ class PollTest(DashTest):
             self.assertEqual(response.context['org'], self.uganda)
             self.assertEqual(response.request['PATH_INFO'], reverse('orgs.org_home'))
             self.assertTrue("Refreshed boundaries cache for this organization" in response.content)
-
 
             mock_refresh_caches.assert_called_once_with(self.uganda, [OrgCache.boundaries])

@@ -1,7 +1,7 @@
 from dash.orgs.models import Org
 from enum import Enum
-from ureport.admins.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows
-from ureport.admins.tasks import refresh_org_graphs_data, refresh_org_reporters
+from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows
+from ureport.polls.tasks import refresh_org_graphs_data, refresh_org_reporters
 
 
 class OrgCache(Enum):

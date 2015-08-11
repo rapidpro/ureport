@@ -16,7 +16,7 @@ class AdminCRUDL(SmartCRUDL):
         success_message = None
         success_url = '@orgs.org_home'
 
-        def pre_process(self, request, *args, **kwargs):
-            cache = OrgCache(int(request.REQUEST['cache']))
+        def post_save(self, obj):
+            cache = OrgCache(int(self.request.REQUEST['cache']))
             refresh_caches(self.get_object(), [cache])
             self.success_message = _("Refreshed %s cache for this organization") % cache.name
