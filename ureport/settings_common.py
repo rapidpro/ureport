@@ -245,6 +245,7 @@ INSTALLED_APPS = (
     'dash.categories',
 
     # ureport apps
+    'ureport.admins',
     'ureport.polls',
     'ureport.news',
     'ureport.jobs',
@@ -320,7 +321,7 @@ PERMISSIONS = {
           'list'),  # can view a list of the objects
 
     'dashblocks.dashblock': ('html', ),
-    'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join'),
+    'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
     'polls.poll': ('questions', 'responses', 'images'),
     'stories.story': ('html', 'images'),
 
