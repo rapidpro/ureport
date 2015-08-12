@@ -90,7 +90,7 @@ initMap = (id, geojson, question, districtLabel) ->
 
   highlightFeature = (e) ->
     layer = e.target
-    if layer.feature.properties.level == 1 and boundaries is states or layer.feature.properties.level == 2 and boundaries isnt states
+    if not layer.feature.properties.level or layer.feature.properties.level == 1 and boundaries is states or layer.feature.properties.level == 2 and boundaries isnt states
       layer.setStyle(HIGHLIGHT_STYLE)
 
       if (!L.Browser.ie && !L.Browser.opera)
