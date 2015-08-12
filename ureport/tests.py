@@ -13,7 +13,7 @@ from ureport.public.views import IndexView
 from temba import TembaClient, Result, Flow, Group
 
 
-class MockAPI(API):
+class MockAPI(API):  # pragma: no cover
 
     def get_group(self, name):
         return dict(group=8, name=name, size=120)
