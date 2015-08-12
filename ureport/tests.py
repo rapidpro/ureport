@@ -108,6 +108,7 @@ class MockAPI(API):
             )
         ]
 
+
 class MockTembaClient(TembaClient):
 
     def get_groups(self, uuids=None, name=None, pager=None):
@@ -174,6 +175,7 @@ class DashTest(SmartminTest):
 
         self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
         return Org.objects.get(subdomain=subdomain)
+
 
 class UreportJobsTest(DashTest):
     FB_SOURCE = 'http://www.facebook.com/%s'
@@ -242,7 +244,6 @@ class SetOrgMiddlewareTest(DashTest):
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
         self.assertEqual(self.request.org, None)
-
 
     def test_process_view(self):
         with patch('django.core.urlresolvers.ResolverMatch') as resolver_mock:
