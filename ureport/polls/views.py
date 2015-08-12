@@ -1,6 +1,5 @@
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from django import forms
-from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from dash.categories.models import Category, CategoryImage
 from .models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_ORG_FLOWS_KEY

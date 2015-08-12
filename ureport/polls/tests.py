@@ -1122,5 +1122,9 @@ class PollQuestionTest(DashTest):
             with patch('ureport.polls.tasks.fetch_reporter_group') as mock_fetch_reporter_group:
                 mock_fetch_reporter_group.return_value = 'FETCHED'
 
-                refresh_org_reporters(self.org.pk)
-                mock_fetch_reporter_group.assert_called_once_with(self.org)
+                with patch('ureport.polls.tasks.fetch_old_sites_count') as mock_fetch_old_sites_count:
+                    mock_fetch_old_sites_count.return_value = 'FETCHED'
+
+                    refresh_org_reporters(self.org.pk)
+                    mock_fetch_reporter_group.assert_called_once_with(self.org)
+                    mock_fetch_old_sites_count.assert_called_once_with()

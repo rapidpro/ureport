@@ -1,9 +1,8 @@
-import json
 from dash.api import API
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from smartmin.tests import SmartminTest
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from dash.orgs.middleware import SetOrgMiddleware
 from mock import Mock, patch
 from dash.orgs.models import Org
