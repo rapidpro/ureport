@@ -13,6 +13,8 @@ from dash.categories.models import Category, CategoryImage
 from temba import Result, Flow, Group
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
+from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows
+from ureport.polls.tasks import refresh_org_reporters, refresh_org_graphs_data, fetch_poll
 from ureport.tests import DashTest, MockAPI, MockTembaClient
 
 
@@ -1060,3 +1062,65 @@ class PollQuestionTest(DashTest):
 
             self.assertEquals(poll_question1.get_words(), [dict(count=2210, label='Yes'), dict(count=1252, label='No')])
             mock.assert_called_with()
+
+    def test_tasks(self):
+        self.org = self.create_org("burundi", self.admin)
+
+        self.education = Category.objects.create(org=self.org,
+                                                 name="Education",
+                                                 created_by=self.admin,
+                                                 modified_by=self.admin)
+
+        self.poll = Poll.objects.create(flow_uuid="uuid-1",
+                                        title="Poll 1",
+                                        category=self.education,
+                                        org=self.org,
+                                        created_by=self.admin,
+                                        modified_by=self.admin)
+
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+
+            with patch('ureport.polls.models.Poll.fetch_poll_results') as mock_fetch_poll_results:
+                mock_fetch_poll_results.return_value = 'FETCHED'
+
+                fetch_poll(self.poll.id)
+                mock_fetch_poll_results.assert_called_once_with()
+
+            with patch('ureport.polls.tasks.fetch_main_poll_results') as mock_fetch_main_poll_results:
+                mock_fetch_main_poll_results.return_value = 'FETCHED'
+
+                refresh_main_poll(self.org.pk)
+                mock_fetch_main_poll_results.assert_called_once_with(self.org)
+
+            with patch('ureport.polls.tasks.fetch_brick_polls_results') as mock_fetch_brick_polls_results:
+                mock_fetch_brick_polls_results.return_value = 'FETCHED'
+
+                refresh_brick_polls(self.org.pk)
+                mock_fetch_brick_polls_results.assert_called_once_with(self.org)
+
+            with patch('ureport.polls.tasks.fetch_other_polls_results') as mock_fetch_other_polls_results:
+                mock_fetch_other_polls_results.return_value = 'FETCHED'
+
+                refresh_other_polls(self.org.pk)
+                mock_fetch_other_polls_results.assert_called_once_with(self.org)
+
+            with patch('ureport.polls.tasks.fetch_org_graph_data') as mock_fetch_org_graph_data:
+                mock_fetch_org_graph_data.return_value = 'FETCHED'
+
+                refresh_org_graphs_data(self.org.pk)
+                mock_fetch_org_graph_data.assert_called_once_with(self.org)
+
+            with patch('ureport.polls.tasks.fetch_flows') as mock_fetch_flows:
+                mock_fetch_flows.return_value = 'FETCHED'
+
+                refresh_org_flows(self.org.pk)
+                mock_fetch_flows.assert_called_once_with(self.org)
+
+            with patch('ureport.polls.tasks.fetch_reporter_group') as mock_fetch_reporter_group:
+                mock_fetch_reporter_group.return_value = 'FETCHED'
+
+                refresh_org_reporters(self.org.pk)
+                mock_fetch_reporter_group.assert_called_once_with(self.org)
