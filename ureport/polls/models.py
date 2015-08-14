@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 import json
-import time
 from datetime import datetime
 from django.db import models
 from django.utils.text import slugify

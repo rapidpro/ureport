@@ -3,24 +3,19 @@ from __future__ import unicode_literals
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponsePermanentRedirect
-from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from smartmin.views import *
-from django.utils import timezone
 
 from dash.stories.models import Story
-from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll, PollQuestion
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from ureport.news.models import Video, NewsItem
-import math
 import pycountry
-from datetime import timedelta, datetime
 from ureport.utils import get_linked_orgs, clean_global_results_data, get_global_count
 
 
@@ -62,6 +57,7 @@ class IndexView(SmartTemplateView):
 
         return context
 
+
 class Chooser(IndexView):
     def pre_process(self, request, *args, **kwargs):
         if not self.request.org:
@@ -72,9 +68,10 @@ class Chooser(IndexView):
             else:
                 return HttpResponsePermanentRedirect(org.build_host_link())
 
+
 class NewsView(SmartTemplateView):
 
-    def render_to_response(self, context):
+    def render_to_response(self, context, **kwargs):
 
         org = self.request.org
 
@@ -90,14 +87,15 @@ class NewsView(SmartTemplateView):
             news_page = None
 
         news = []
-        next = False
+        next_page = False
         if news_page:
-            next = news_page.has_next()
+            next_page = news_page.has_next()
             for elt in news_page.object_list:
                 news.append(elt.as_brick_json())
 
-        output_json = dict(news=news, next=next)
+        output_json = dict(news=news, next=next_page)
         return HttpResponse(json.dumps(output_json))
+
 
 class AdditionalMenu(SmartTemplateView):
     template_name = 'public/additional_menu.haml'
@@ -108,6 +106,7 @@ class AdditionalMenu(SmartTemplateView):
 
         context['org'] = org
         return context
+
 
 class AboutView(SmartTemplateView):
     template_name = 'public/about.html'
@@ -122,6 +121,7 @@ class AboutView(SmartTemplateView):
         context['videos'] = videos
 
         return context
+
 
 class PollContextMixin(object):
 
@@ -139,7 +139,8 @@ class PollContextMixin(object):
         context['latest_poll'] = main_poll
 
         context['categories'] = Category.objects.filter(org=org, is_active=True).order_by('name')
-        context['polls'] = Poll.objects.filter(org=org, is_active=True, category__is_active=True).order_by('-created_on')
+        context['polls'] = Poll.objects.filter(org=org, is_active=True,
+                                               category__is_active=True).order_by('-created_on')
 
         context['related_stories'] = []
         if main_poll:
@@ -160,6 +161,7 @@ class PollsView(PollContextMixin, SmartTemplateView):
 
         return context
 
+
 class PollReadView(PollContextMixin, SmartReadView):
     template_name = 'public/polls.html'
     model = Poll
@@ -172,6 +174,7 @@ class PollReadView(PollContextMixin, SmartReadView):
     def derive_main_poll(self):
         return self.get_object()
 
+
 class PollQuestionResultsView(SmartReadView):
     model = PollQuestion
 
@@ -180,7 +183,7 @@ class PollQuestionResultsView(SmartReadView):
         queryset = queryset.filter(poll__org=self.request.org, is_active=True)
         return queryset
 
-    def render_to_response(self, context):
+    def render_to_response(self, context, **kwargs):
         segment = self.request.GET.get('segment', None)
         if segment:
             segment = json.loads(segment)
@@ -191,9 +194,10 @@ class PollQuestionResultsView(SmartReadView):
 
         return HttpResponse(json.dumps(results))
 
+
 class BoundaryView(SmartTemplateView):
 
-    def render_to_response(self, context):
+    def render_to_response(self, context, **kwargs):
         org = self.request.org
 
         if org.get_config('is_global'):
@@ -225,7 +229,7 @@ class ReportersResultsView(SmartReadView):
     def get_object(self):
         return self.request.org
 
-    def render_to_response(self, context):
+    def render_to_response(self, context, **kwargs):
         output_data = []
 
         segment = self.request.GET.get('segment', None)
@@ -240,6 +244,7 @@ class ReportersResultsView(SmartReadView):
             output_data = clean_global_results_data(self.get_object(), output_data, segment)
 
         return HttpResponse(json.dumps(output_data))
+
 
 class StoriesView(SmartTemplateView):
     template_name = 'public/stories.html'
@@ -281,13 +286,15 @@ class StoryReadView(SmartReadView):
         related_polls = Poll.objects.filter(org=org, is_active=True, category=story_category).order_by('-created_on')
         context['related_polls'] = related_polls
 
-        related_stories = Story.objects.filter(org=org, is_active=True, category=story_category, featured=True).exclude(pk=story.pk)
+        related_stories = Story.objects.filter(org=org, is_active=True,
+                                               category=story_category, featured=True).exclude(pk=story.pk)
         related_stories = related_stories.order_by('-created_on')
         context['related_stories'] = related_stories
 
         context['story_featured_images'] = story.get_featured_images()
 
         return context
+
 
 class UreportersView(SmartTemplateView):
     template_name = 'public/ureporters.html'
@@ -306,6 +313,7 @@ class JoinEngageView(SmartTemplateView):
 
         context['org'] = self.request.org
         return context
+
 
 class JobsView(SmartTemplateView):
     template_name = 'public/jobs.html'

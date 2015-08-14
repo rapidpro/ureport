@@ -245,6 +245,7 @@ INSTALLED_APPS = (
     'dash.categories',
 
     # ureport apps
+    'ureport.admins',
     'ureport.polls',
     'ureport.news',
     'ureport.jobs',
@@ -320,7 +321,7 @@ PERMISSIONS = {
           'list'),  # can view a list of the objects
 
     'dashblocks.dashblock': ('html', ),
-    'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join'),
+    'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
     'polls.poll': ('questions', 'responses', 'images'),
     'stories.story': ('html', 'images'),
 
@@ -442,32 +443,37 @@ from celery.schedules import crontab
 CELERY_TIMEZONE = 'UTC'
 
 CELERYBEAT_SCHEDULE = {
-    "update_flows_and_reporters": {
-        "task": "polls.update_org_flows_and_reporters",
+    "refresh_flows": {
+        "task": "polls.refresh_org_flows",
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
-    "update_org_graphs_data": {
-        "task": "polls.update_org_graphs_data",
+    "refresh_reporters": {
+        "task": "polls.refresh_org_reporters",
+        "schedule": timedelta(minutes=20),
+        "relative": True,
+    },
+    "refresh_org_graphs_data": {
+        "task": "polls.refresh_org_graphs_data",
         "schedule": timedelta(minutes=60),
         "relative": True,
     },
-    "update_main_poll": {
-        "task": "polls.update_main_poll",
+    "refresh_main_poll": {
+        "task": "polls.refresh_main_poll",
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
-    "update_brick_polls": {
-        "task": "polls.update_brick_polls",
+    "refresh_brick_polls": {
+        "task": "polls.refresh_brick_polls",
         "schedule": timedelta(hours=48),
         "relative": True,
     },
-    "update_other_polls": {
-        "task": "polls.update_other_polls",
+    "refresh_other_polls": {
+        "task": "polls.refresh_other_polls",
         "schedule": timedelta(hours=48),
         "relative": True,
     },
-    "build_boundaries": {
+    "rebuild_boundaries": {
         "task": "orgs.build_boundaries",
         "schedule": timedelta(days=15),
         "relative": True,

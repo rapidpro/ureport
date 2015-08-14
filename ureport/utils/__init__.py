@@ -14,6 +14,7 @@ import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
+from ureport.polls.models import Poll
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
@@ -232,10 +233,9 @@ LOCK_POLL_RESULTS_KEY = 'lock:poll:%d:results'
 LOCK_POLL_RESULTS_TIMEOUT = 60 * 15
 
 
-def fetch_org_polls_results(org, polls, r=None):
+def _fetch_org_polls_results(org, polls):
 
-    if not r:
-        r = get_redis_connection()
+    r = get_redis_connection()
 
     for poll in polls:
         start = time.time()
@@ -246,6 +246,32 @@ def fetch_org_polls_results(org, polls, r=None):
             with r.lock(key, timeout=LOCK_POLL_RESULTS_TIMEOUT):
                 poll.fetch_poll_results()
                 print "Fetch results for poll id(%d) on %s took %ss" % (poll.pk, org.name, time.time() - start)
+
+
+def fetch_main_poll_results(org):
+    main_poll = Poll.get_main_poll(org)
+    if main_poll:
+        _fetch_org_polls_results(org, [main_poll])
+
+
+def fetch_brick_polls_results(org):
+    brick_polls = Poll.get_brick_polls(org)[:5]
+    _fetch_org_polls_results(org, brick_polls)
+
+
+def fetch_other_polls_results(org):
+    other_polls = Poll.get_other_polls(org)
+    _fetch_org_polls_results(org, other_polls)
+
+
+def fetch_org_graph_data(org):
+    for data_label in ['born_label', 'registration_label', 'occupation_label', 'gender_label']:
+        c_field = org.get_config(data_label)
+        if c_field:
+            fetch_contact_field_results(org, c_field, None)
+            if data_label == 'gender_label':
+                fetch_contact_field_results(org, c_field, dict(location='State'))
+
 
 def fetch_flows(org):
     start = time.time()
@@ -283,6 +309,7 @@ def fetch_flows(org):
         traceback.print_exc()
 
     print "Fetch %s flows took %ss" % (org.name, time.time() - start)
+
 
 def get_flows(org):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY

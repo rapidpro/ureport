@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+from dash.categories.models import Category
 from dash_test_runner.tests import MockResponse
 from django.utils import timezone
 from mock import patch
@@ -8,10 +9,11 @@ import pytz
 import redis
 from temba import Group
 from ureport.assets.models import FLAG, Image
-from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
+from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count
-from ureport.utils import get_global_count, GLOBAL_COUNT_CACHE_KEY
+from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
+from ureport.utils import fetch_other_polls_results, get_reporter_group, _fetch_org_polls_results
 
 
 class UtilsTest(DashTest):
@@ -19,6 +21,18 @@ class UtilsTest(DashTest):
     def setUp(self):
         super(UtilsTest, self).setUp()
         self.org = self.create_org("burundi", self.admin)
+
+        self.education = Category.objects.create(org=self.org,
+                                                 name="Education",
+                                                 created_by=self.admin,
+                                                 modified_by=self.admin)
+
+        self.poll = Poll.objects.create(flow_uuid="uuid-1",
+                                        title="Poll 1",
+                                        category=self.education,
+                                        org=self.org,
+                                        created_by=self.admin,
+                                        modified_by=self.admin)
 
     def clear_cache(self):
         # hardcoded to localhost
@@ -445,6 +459,47 @@ class UtilsTest(DashTest):
                                                           UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
                         cache_delete_mock.assert_called_with(GLOBAL_COUNT_CACHE_KEY)
+
+                        with patch('django.core.cache.cache.get') as cache_get_mock:
+                            cache_get_mock.return_value = {'time': 500, 'results': group_dict}
+
+                            self.assertEqual(get_reporter_group(self.org), group_dict)
+
+    def test_fetch_poll_results(self):
+        with self.settings(CACHES = {'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                                 'LOCATION': '127.0.0.1:6379:1',
+                                                 'OPTIONS': {
+                                                     'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+                                                 }
+                                                 }}):
+            with patch('ureport.polls.models.Poll.fetch_poll_results') as mock_poll_model_fetch_results:
+                mock_poll_model_fetch_results.return_value = "DONE"
+
+                polls = [self.poll]
+                _fetch_org_polls_results(self.org, polls)
+                mock_poll_model_fetch_results.assert_called_with()
+                mock_poll_model_fetch_results.mock_reset()
+
+            with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
+                mock_main_poll.return_value = self.poll
+
+                fetch_main_poll_results(self.org)
+                mock_poll_model_fetch_results.assert_called_once_with()
+                mock_poll_model_fetch_results.mock_reset()
+
+            with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
+                mock_brick_polls.return_value = [self.poll]
+
+                fetch_brick_polls_results(self.org)
+                mock_poll_model_fetch_results.assert_called_once_with()
+                mock_poll_model_fetch_results.mock_reset()
+
+            with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
+                mock_other_polls.return_value = [self.poll]
+
+                fetch_other_polls_results(self.org)
+                mock_poll_model_fetch_results.assert_called_once_with()
+                mock_poll_model_fetch_results.mock_reset()
 
     def test_fetch_old_sites_count(self):
         self.clear_cache()

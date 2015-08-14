@@ -1,9 +1,8 @@
-import json
 from dash.api import API
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from smartmin.tests import SmartminTest
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from dash.orgs.middleware import SetOrgMiddleware
 from mock import Mock, patch
 from dash.orgs.models import Org
@@ -13,7 +12,7 @@ from ureport.public.views import IndexView
 from temba import TembaClient, Result, Flow, Group
 
 
-class MockAPI(API):
+class MockAPI(API):  # pragma: no cover
 
     def get_group(self, name):
         return dict(group=8, name=name, size=120)
@@ -108,6 +107,7 @@ class MockAPI(API):
             )
         ]
 
+
 class MockTembaClient(TembaClient):
 
     def get_groups(self, uuids=None, name=None, pager=None):
@@ -174,6 +174,7 @@ class DashTest(SmartminTest):
 
         self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
         return Org.objects.get(subdomain=subdomain)
+
 
 class UreportJobsTest(DashTest):
     FB_SOURCE = 'http://www.facebook.com/%s'
@@ -242,7 +243,6 @@ class SetOrgMiddlewareTest(DashTest):
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
         self.assertEqual(self.request.org, None)
-
 
     def test_process_view(self):
         with patch('django.core.urlresolvers.ResolverMatch') as resolver_mock:
