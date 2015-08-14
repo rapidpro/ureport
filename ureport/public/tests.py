@@ -39,6 +39,22 @@ class PublicTest(DashTest):
                                                          created_by=self.admin,
                                                          modified_by=self.admin)
 
+    def test_org_config_fields(self):
+        edit_url = reverse('orgs.org_edit')
+
+        response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertLoginRedirect(response)
+
+        self.login(self.admin)
+        response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertTrue('form' in response.context)
+        self.assertEquals(len(response.context['form'].fields), 13)
+
+        self.login(self.superuser)
+        response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertTrue('form' in response.context)
+        self.assertEquals(len(response.context['form'].fields), 30)
+
     def test_chooser(self):
         chooser_url = reverse('public.home')
 
@@ -368,6 +384,10 @@ class PublicTest(DashTest):
         self.assertTrue(video1 not in response.context['videos'])
         self.assertTrue(video2 not in response.context['videos'])
         self.assertTrue(video3 in response.context['videos'])
+
+        self.nigeria.set_config('custom_html', '<div>INCLUDE MY CUSTOM HTML</div>')
+        response = self.client.get(home_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertTrue('<div>INCLUDE MY CUSTOM HTML</div>' in response.content)
 
     def test_about(self):
         about_url = reverse('public.about')
