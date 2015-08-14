@@ -15,8 +15,6 @@ class OrgCache(Enum):
 
 
 def refresh_caches(org, caches):
-    if not org:
-        return
 
     if OrgCache.boundaries in caches:
         Org.rebuild_org_boundaries_task(org)
