@@ -396,6 +396,10 @@ ANONYMOUS_USER_ID = -1
 import djcelery
 djcelery.setup_loader()
 
+# by default, celery doesn't have any timeout on our redis connections, this fixes that
+BROKER_TRANSPORT_OPTIONS = {'socket_timeout': 5}
+
+
 CELERY_RESULT_BACKEND = 'djcelery.backends.cache:CacheBackend'
 
 BROKER_BACKEND = 'redis'
