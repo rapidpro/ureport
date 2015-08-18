@@ -39,7 +39,6 @@ class ApiTest(TestCase):
 
     def test_get_non_existing_flow_info(self):
         request = self.factory.post('/api/flow/999')
-        flow_info = json.loads(get_flow_info(request, 999).content)
-        self.assertEqual(flow_info['poll_id'], 0)
-        self.assertEqual(flow_info['flow_uuid'], 0)
-        self.assertEqual(flow_info['title'], None)
+        flow_info = get_flow_info(request, 999)
+        self.assertEqual(flow_info.status_code, 404)
+        self.assertEqual(flow_info.content, '<h1>Page not found</h1>')
