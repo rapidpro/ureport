@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^manage/', include('ureport.countries.urls')),
     url(r'^manage/', include('ureport.assets.urls')),
     url(r'^users/', include('dash.users.urls')),
+    url(r'^api/', include('ureport.api.urls')),
 )
 
 if settings.DEBUG:
