@@ -253,6 +253,7 @@ INSTALLED_APPS = (
     'ureport.jobs',
     'ureport.countries',
     'ureport.assets',
+    'ureport.api',
 
     'django_countries',
     'rest_framework',
