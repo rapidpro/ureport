@@ -33,7 +33,8 @@ class OrgReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Org
-        exclude = ('administrators', 'viewers', 'editors', 'api_token', 'config', 'logo')
+        exclude = ('administrators', 'viewers', 'editors', 'api_token', 'config', 'logo','created_on', 'modified_on',
+                   'created_by', 'modified_by', )
 
     def get_logo_url(self, obj):
         if obj.logo:
