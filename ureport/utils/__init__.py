@@ -26,7 +26,7 @@ def json_date_to_datetime(date_str):
     iso_format = '%Y-%m-%dT%H:%M:%S.%f'
     if date_str.endswith('Z'):
         iso_format += 'Z'
-    return datetime.datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
+    return datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
 
 
 def get_linked_orgs(authenticated=False):
