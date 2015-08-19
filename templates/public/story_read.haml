@@ -41,12 +41,12 @@
                 %iframe{ width:"360", height:"270", src:"//www.youtube.com/embed/{{story.video_id}}", frameborder:"0"}
             {{ story.content|safe }}
 
-      - if not is_iorg and story.get_audio_link
+      - if not is_iorg and story.audio_link
         .section
           %h1.level-1-title
             -trans "AUDIO"
           .card.card-padding
-            <audio src="{{ story.get_audio_link}}" preload="auto" />
+            <audio src="{{ story.audio_link}}" preload="auto" />
 
 
     .col-md-4
