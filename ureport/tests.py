@@ -1,6 +1,7 @@
 from dash.api import API
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User
 from dash.orgs.middleware import SetOrgMiddleware
@@ -9,7 +10,7 @@ from dash.orgs.models import Org
 from django.http.request import HttpRequest
 from ureport.jobs.models import JobSource
 from ureport.public.views import IndexView
-from temba import TembaClient, Result, Flow, Group
+from temba import TembaClient, Result, Flow, Group, Contact as TembaContact
 
 
 class MockAPI(API):  # pragma: no cover
@@ -109,6 +110,12 @@ class MockAPI(API):  # pragma: no cover
 
 
 class MockTembaClient(TembaClient):
+
+    def get_contacts(self, uuids=None, urns=None, groups=None, pager=None):
+        return [TembaContact.create(
+                uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
+                fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),
+                language='eng', modified_on=timezone.now())]
 
     def get_groups(self, uuids=None, name=None, pager=None):
         return Group.deserialize_list([dict(uuid="uuid-8", name=name, size=120)])

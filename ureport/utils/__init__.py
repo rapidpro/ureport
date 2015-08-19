@@ -19,6 +19,16 @@ from ureport.polls.models import Poll
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
 
+def json_date_to_datetime(date_str):
+    """
+    Parses a datetime from a JSON string value
+    """
+    iso_format = '%Y-%m-%dT%H:%M:%S.%f'
+    if date_str.endswith('Z'):
+        iso_format += 'Z'
+    return datetime.datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
+
+
 def get_linked_orgs(authenticated=False):
     all_orgs = Org.objects.filter(is_active=True).order_by('name')
 

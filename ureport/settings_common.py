@@ -248,6 +248,7 @@ INSTALLED_APPS = (
 
     # ureport apps
     'ureport.admins',
+    'ureport.contacts',
     'ureport.polls',
     'ureport.news',
     'ureport.jobs',
@@ -257,40 +258,6 @@ INSTALLED_APPS = (
     'django_countries',
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'INFO',
-            'class':'logging.StreamHandler',
-            'formatter': 'verbose'
-        }
-    },
-    'loggers': {
-        'httprouterthread': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        },
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-        },
-    }
-}
 
 #-----------------------------------------------------------------------------------
 # Directory Configuration
