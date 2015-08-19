@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from ureport.api.views import PollList, PollDetails, NewsItemList, NewsItemDetails, VideoList, VideoDetails, ImageList, \
-    ImageDetails, OrgList, OrgDetails, StoryList, StoryDetails
+    ImageDetails, OrgList, OrgDetails, StoryList, StoryDetails, TokenCRUDL
 
 __author__ = 'kenneth'
 
@@ -28,3 +28,5 @@ urlpatterns = patterns('',
                        url(r'^stories/org/(?P<org>[\w]+)/$', StoryList.as_view()),
                        url(r'^stories/(?P<pk>[\w]+)/$', StoryDetails.as_view()),
                        )
+
+urlpatterns += TokenCRUDL().as_urlpatterns()

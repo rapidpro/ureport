@@ -1,6 +1,8 @@
 from dash.orgs.models import Org
 from dash.stories.models import Story
+from rest_framework.authtoken.models import Token
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from smartmin.views import SmartCRUDL, SmartListView
 from ureport.api.serializers import PollReadSerializer, NewsItemReadSerializer, VideoReadSerializer, ImageReadSerializer, \
     OrgReadSerializer, StoryReadSerializer
 from ureport.assets.models import Image
@@ -8,6 +10,15 @@ from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
 
 __author__ = 'kenneth'
+
+
+class TokenCRUDL(SmartCRUDL):
+    model = Token
+    actions = ('list', )
+
+    class List(SmartListView):
+        search_fields = ('user__username__icontains','user__first_name__icontains', 'user__last_name__icontains')
+        fields = ('user', 'key')
 
 
 class OrgList(ListAPIView):
