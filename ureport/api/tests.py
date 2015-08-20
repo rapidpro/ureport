@@ -1,9 +1,10 @@
+from collections import OrderedDict
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
-from ureport.assets.models import Image
+from ureport.api.serializers import generate_absolute_url_from_file, CategoryReadSerializer
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
 
@@ -12,6 +13,8 @@ class UreportAPITests(APITestCase):
 
     def setUp(self):
         self.superuser = User.objects.create_superuser(username="super", email="super@user.com", password="super")
+        self.other_user = User.objects.create_user(username="other_user", email="other_user@user.com",
+                                                   password="super")
         self.uganda = self.create_org('uganda', self.superuser)
         self.nigeria = self.create_org('testserver', self.superuser)
 
@@ -77,21 +80,39 @@ class UreportAPITests(APITestCase):
 
     def test_orgs_list(self):
         url = '/api/v1/orgs/'
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], Org.objects.count())
 
-    def test_polls_list(self):
-        url = '/api/v1/polls/'
+    def test_single_org(self):
+        url = '/api/v1/orgs/%d/' % self.uganda_video.pk
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['count'], Poll.objects.count())
+        org = self.uganda
+        logo_url = generate_absolute_url_from_file(response, org.logo) if org.logo else None
+        self.assertDictEqual(response.data, dict(id=org.pk,
+                                                 logo_url=logo_url,
+                                                 is_active=org.is_active,
+                                                 name=org.name,
+                                                 language=org.language,
+                                                 subdomain=org.subdomain,
+                                                 domain=org.domain,
+                                                 timezone=org.timezone))
 
     def test_polls_by_org_list(self):
         url = '/api/v1/polls/org/%d/' % self.uganda.pk
         url2 = '/api/v1/polls/org/%d/' % self.nigeria.pk
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -102,21 +123,30 @@ class UreportAPITests(APITestCase):
 
     def test_single_poll(self):
         url = '/api/v1/polls/%d/' % self.reg_poll.pk
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['id'], self.reg_poll.pk)
-
-    def test_news_item_list(self):
-        url = '/api/v1/news-items/'
-        self.client.login(username=self.superuser.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['count'], NewsItem.objects.count())
+        poll = self.reg_poll
+        category = response.data.pop('category')
+        self.assertDictEqual(response.data, dict(id=poll.pk,
+                                             flow_uuid=poll.flow_uuid,
+                                             title=poll.title,
+                                             org=poll.org_id,
+                                             ))
+        self.assertDictEqual(dict(category), dict(OrderedDict(is_active=poll.category.is_active,
+                                                  name=poll.category.name,
+                                                  image_url=CategoryReadSerializer().
+                                                  get_image_url(poll.category))))
 
     def test_news_item_by_org_list(self):
-        url = '/api/v1/news-items/org/%d/' % self.uganda.pk
-        url1 = '/api/v1/news-items/org/%d/' % self.nigeria.pk
+        url = '/api/v1/news/org/%d/' % self.uganda.pk
+        url1 = '/api/v1/news/org/%d/' % self.nigeria.pk
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -126,22 +156,32 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.data['count'], NewsItem.objects.filter(org=self.nigeria).count())
 
     def test_single_news_item(self):
-        url = '/api/v1/news-items/%d/' % self.news_item.pk
+        url = '/api/v1/news/%d/' % self.news_item.pk
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['id'], self.news_item.pk)
-
-    def test_video_list(self):
-        url = '/api/v1/videos/'
-        self.client.login(username=self.superuser.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['count'], Video.objects.count())
+        news = self.news_item
+        category = response.data.pop('category')
+        self.assertDictEqual(response.data, dict(id=news.pk,
+                                                 short_description=news.short_description(),
+                                                 is_active=news.is_active,
+                                                 title=news.title,
+                                                 description=news.description,
+                                                 link=news.link,
+                                                 org=news.org_id))
+        self.assertDictEqual(dict(category), dict(is_active=news.category.is_active,
+                                                  name=news.category.name,
+                                                  image_url=CategoryReadSerializer().get_image_url(news.category)))
 
     def test_video_by_org_list(self):
         url = '/api/v1/videos/org/%d/' % self.uganda.pk
         url1 = '/api/v1/videos/org/%d/' % self.nigeria.pk
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -152,7 +192,20 @@ class UreportAPITests(APITestCase):
 
     def test_single_video(self):
         url = '/api/v1/videos/%d/' % self.uganda_video.pk
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['id'], self.uganda_video.pk)
+        video = self.uganda_video
+        category = response.data.pop('category')
+        self.assertDictEqual(response.data, dict(id=video.pk,
+                                                 is_active=video.is_active,
+                                                 title=video.title,
+                                                 video_id=video.video_id,
+                                                 description=video.description,
+                                                 org=video.org_id))
+        self.assertDictEqual(dict(category), dict(is_active=video.category.is_active,
+                                                  name=video.category.name,
+                                                  image_url=CategoryReadSerializer().get_image_url(video.category)))

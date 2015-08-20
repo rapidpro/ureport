@@ -12,15 +12,6 @@ from ureport.polls.models import Poll
 __author__ = 'kenneth'
 
 
-class TokenCRUDL(SmartCRUDL):
-    model = Token
-    actions = ('list', )
-
-    class List(SmartListView):
-        search_fields = ('user__username__icontains','user__first_name__icontains', 'user__last_name__icontains')
-        fields = ('user', 'key')
-
-
 class OrgList(ListAPIView):
     serializer_class = OrgReadSerializer
     queryset = Org.objects.all()
@@ -35,7 +26,7 @@ class BaseListAPIView(ListAPIView):
     def get_queryset(self):
         q = self.model.objects.all()
         if self.kwargs.get('org', None):
-            q = q.filter(org__id=self.kwargs.get('org'))
+            q = q.filter(org_id=self.kwargs.get('org'))
         return q
 
 

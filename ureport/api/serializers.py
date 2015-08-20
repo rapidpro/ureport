@@ -10,6 +10,10 @@ from ureport.polls.models import Poll
 __author__ = 'kenneth'
 
 
+def generate_absolute_url_from_file(request, file):
+    return request.build_absolute_uri(file.url)
+
+
 class CategoryReadSerializer(serializers.ModelSerializer):
     image_url = SerializerMethodField()
 
@@ -18,13 +22,13 @@ class CategoryReadSerializer(serializers.ModelSerializer):
         exclude = ('org', 'image', 'created_on', 'modified_on', 'created_by', 'modified_by', 'id')
 
     def get_image_url(self, obj):
-        url = None
+        image = None
         if obj.image:
-            url = obj.image.url
+            image = obj.image
         elif obj.get_first_image():
-            url = obj.get_first_image().url
-        if url:
-            return self.context['request'].build_absolute_uri(url)
+            image = obj.get_first_image()
+        if image:
+            return generate_absolute_url_from_file(self.context['request'], image)
         return None
 
 
@@ -38,7 +42,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
 
     def get_logo_url(self, obj):
         if obj.logo:
-            return self.context['request'].build_absolute_uri(obj.logo.url)
+            return generate_absolute_url_from_file(self.context['request'], obj.logo)
         return None
 
 
@@ -51,7 +55,7 @@ class StoryReadSerializer(serializers.ModelSerializer):
         exclude = ('created_on', 'modified_on', 'created_by', 'modified_by', 'content')
 
     def get_images(self, obj):
-        return [self.context['request'].build_absolute_uri(image.image.url) for image in obj.get_featured_images()]
+        return [generate_absolute_url_from_file(self.context['request'], image) for image in obj.get_featured_images()]
 
 
 class PollReadSerializer(serializers.ModelSerializer):
@@ -90,4 +94,4 @@ class ImageReadSerializer(serializers.ModelSerializer):
         exclude = ('image', 'created_on', 'modified_on', 'created_by', 'modified_by')
 
     def get_image_url(self, obj):
-        return self.context['request'].build_absolute_uri(obj.image.url)
+        return generate_absolute_url_from_file(self.context['request'], obj.image)
