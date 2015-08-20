@@ -1,10 +1,11 @@
 from collections import OrderedDict
 from dash.categories.models import Category
 from dash.orgs.models import Org
+from dash.stories.models import Story
 from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
-from ureport.api.serializers import generate_absolute_url_from_file, CategoryReadSerializer
+from ureport.api.serializers import generate_absolute_url_from_file, CategoryReadSerializer, StoryReadSerializer
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
 
@@ -31,6 +32,7 @@ class UreportAPITests(APITestCase):
         self.another_poll = self.create_poll('another')
         self.news_item = self.create_news_item('Some item')
         self.create_video('Test Video')
+        self.create_story("Test Story")
 
     def create_org(self, subdomain, user):
 
@@ -77,6 +79,18 @@ class UreportAPITests(APITestCase):
                                                  org=self.uganda,
                                                  created_by=self.superuser,
                                                  modified_by=self.superuser)
+
+    def create_story(self, title):
+        self.uganda_story = Story.objects.create(title=title,
+                                                 featured=True,
+                                                 summary="This is a test summary",
+                                                 content="This is test content",
+                                                 video_id='iouiou',
+                                                 tags='tag1, tag2, tag3',
+                                                 category=self.health_uganda,
+                                                 created_by=self.superuser,
+                                                 modified_by=self.superuser,
+                                                 org=self.uganda)
 
     def test_orgs_list(self):
         url = '/api/v1/orgs/'
@@ -209,3 +223,40 @@ class UreportAPITests(APITestCase):
         self.assertDictEqual(dict(category), dict(is_active=video.category.is_active,
                                                   name=video.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(video.category)))
+
+    def test_story_by_org_list(self):
+        url = '/api/v1/stories/org/%d/' % self.uganda.pk
+        url1 = '/api/v1/stories/org/%d/' % self.nigeria.pk
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.client.login(username=self.superuser.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['count'], Story.objects.filter(org=self.uganda).count())
+        response = self.client.get(url1)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['count'], Story.objects.filter(org=self.nigeria).count())
+
+    def test_single_story(self):
+        url = '/api/v1/stories/%d/' % self.uganda_story.pk
+        self.client.login(username=self.other_user.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.client.login(username=self.superuser.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        story = self.uganda_story
+        category = response.data.pop('category')
+        self.assertDictEqual(response.data, dict(id=story.pk,
+                                                 is_active=story.is_active,
+                                                 title=story.title,
+                                                 video_id=story.video_id,
+                                                 summary=story.summary,
+                                                 featured=story.featured,
+                                                 tags=story.tags,
+                                                 images=StoryReadSerializer().get_images(story),
+                                                 org=story.org_id))
+        self.assertDictEqual(dict(category), dict(is_active=story.category.is_active,
+                                                  name=story.category.name,
+                                                  image_url=CategoryReadSerializer().get_image_url(story.category)))

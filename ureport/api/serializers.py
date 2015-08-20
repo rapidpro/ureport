@@ -19,7 +19,7 @@ class CategoryReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        exclude = ('org', 'image', 'created_on', 'modified_on', 'created_by', 'modified_by', 'id')
+        fields = ('image_url', 'is_active', 'name',)
 
     def get_image_url(self, obj):
         image = None
@@ -37,8 +37,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Org
-        exclude = ('administrators', 'viewers', 'editors', 'api_token', 'config', 'logo','created_on', 'modified_on',
-                   'created_by', 'modified_by', )
+        fields = ('id', 'logo_url', 'is_active', 'name', 'language', 'subdomain', 'domain', 'timezone', )
 
     def get_logo_url(self, obj):
         if obj.logo:
@@ -52,10 +51,11 @@ class StoryReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Story
-        exclude = ('created_on', 'modified_on', 'created_by', 'modified_by', 'content')
+        fields = ('id', 'is_active', 'title', 'featured', 'summary', 'video_id', 'tags', 'org', 'images', 'category')
 
     def get_images(self, obj):
-        return [generate_absolute_url_from_file(self.context['request'], image) for image in obj.get_featured_images()]
+        return [generate_absolute_url_from_file(self.context['request'], image.image)
+                for image in obj.get_featured_images()]
 
 
 class PollReadSerializer(serializers.ModelSerializer):
@@ -72,7 +72,7 @@ class NewsItemReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NewsItem
-        exclude = ('created_on', 'modified_on', 'created_by', 'modified_by')
+        fields = ('id', 'short_description', 'category', 'is_active', 'title', 'description', 'link', 'org')
 
     def get_short_description(self, obj):
         return obj.short_description()
@@ -83,7 +83,7 @@ class VideoReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        exclude = ('created_on', 'modified_on', 'created_by', 'modified_by')
+        fields = ('id', 'category', 'is_active', 'title', 'description', 'video_id', 'org')
 
 
 class ImageReadSerializer(serializers.ModelSerializer):
@@ -91,7 +91,7 @@ class ImageReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Image
-        exclude = ('image', 'created_on', 'modified_on', 'created_by', 'modified_by')
+        fields = ('image_url', 'image_type', 'org', 'name',)
 
     def get_image_url(self, obj):
         return generate_absolute_url_from_file(self.context['request'], obj.image)
