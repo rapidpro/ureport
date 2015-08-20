@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+import logging
 import sys
 from django.utils.translation import ugettext_lazy as _
 from hamlpy import templatize
@@ -521,3 +522,6 @@ PREVIOUS_ORG_SITES = [
         count_link='http://www.zambiaureport.org/count.txt/',
     ),
 ]
+
+# Disable logging during test runs.
+logging.disable(logging.CRITICAL)

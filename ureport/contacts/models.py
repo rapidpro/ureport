@@ -32,21 +32,80 @@ class Contact(models.Model):
 
     district = models.CharField(max_length=255, verbose_name=_("District Field"), null=True)
 
+
+    @classmethod
+    def kwargs_from_temba(cls, org, temba_contact):
+
+        state = ''
+        state_field = org.get_config('state_label')
+        if state_field:
+            state = temba_contact.fields.get(state_field.lower(), '')
+            if not state:
+                state = ''
+
+        district = ''
+        district_field = org.get_config('district_label')
+        if district_field:
+            district = temba_contact.fields.get(district_field.lower(), '')
+            if not district:
+                district = ''
+
+        registered_on = None
+        registration_field = org.get_config('registration_label')
+        if registration_field:
+            registered_on = temba_contact.fields.get(registration_field.lower(), None)
+            if registered_on:
+                registered_on = json_date_to_datetime(registered_on)
+
+        occupation = ''
+        occupation_field = org.get_config('occupation_label')
+        if occupation_field:
+            occupation = temba_contact.fields.get(occupation_field.lower(), '')
+            if not occupation:
+                occupation = ''
+
+        born = 0
+        born_field = org.get_config('born_label')
+        if born_field:
+            try:
+                born = int(temba_contact.fields.get(born_field.lower(), 0))
+            except ValueError:
+                pass
+            except TypeError:
+                pass
+
+        gender = ''
+        gender_field = org.get_config('gender_label')
+        female_label = org.get_config('female_label')
+        male_label = org.get_config('male_label')
+
+        if gender_field:
+            gender = temba_contact.fields.get(gender_field.lower(), '')
+
+            if gender and gender.lower() == female_label.lower():
+                gender = cls.FEMALE
+            elif gender and gender.lower() == male_label.lower():
+                gender = cls.MALE
+            else:
+                gender = ''
+
+        return dict(org=org, uuid=temba_contact.uuid, gender=gender, born=born, occupation=occupation,
+                    registered_on=registered_on, district=district, state=state)
+
+    @classmethod
+    def update_or_create_from_temba(cls, org, temba_contact):
+        kwargs = cls.kwargs_from_temba(org, temba_contact)
+
+        existing = cls.objects.filter(org=org, uuid=kwargs['uuid'])
+        if existing:
+            existing.update(**kwargs)
+            return existing.first()
+        else:
+            return cls.objects.create(**kwargs)
+
     @classmethod
     def import_contacts(cls, org):
-
-        org_config = json.loads(org.config)
-
-        reporter_group = org_config.get('reporter_group', '').lower()
-
-        gender_label = org_config.get('gender_label', '').lower()
-        born_label = org_config.get('born_label', '').lower()
-        registration_label = org_config.get('registration_label', '').lower()
-        occupation_label = org_config.get('occupation_label', '').lower()
-        state_label = org_config.get('state_label', '').lower()
-        district_label = org_config.get('district_label', '').lower()
-        female_label = org_config.get('female_label', '').lower()
-        male_label = org_config.get('male_label', '').lower()
+        reporter_group = org.get_config('reporter_group')
 
         temba_client = org.get_temba_client()
         api_groups = temba_client.get_groups(name=reporter_group)
@@ -54,38 +113,13 @@ class Contact(models.Model):
         if not api_groups:
             return
 
+        seen_uuids = []
+
         api_contacts = temba_client.get_contacts(groups=[api_groups[0]])
         for contact in api_contacts:
-            existing = cls.objects.filter(org=org, uuid=contact.uuid)
-            fields = contact.fields
+            cls.update_or_create_from_temba(org, contact)
+            seen_uuids.append(contact.uuid)
 
-            gender = fields.get(gender_label, None)
-            if gender.lower() == female_label:
-                gender = cls.FEMALE
-            elif gender.lower() == male_label:
-                gender = cls.MALE
-            else:
-                gender = None
+        # remove any contacts that's no longer a ureporter
+        cls.objects.filter(org=org).exclude(uuid__in=seen_uuids).delete()
 
-            born = (fields.get(born_label, 0))
-
-            try:
-                born = int(born)
-            except ValueError:
-                born = 0
-
-            registered_on = fields.get(registration_label, None)
-            if registered_on:
-                registered_on = json_date_to_datetime(registered_on)
-
-            occupation = fields.get(occupation_label, None)
-            state = fields.get(state_label.lower(), None)
-            district = fields.get(district_label, None)
-
-            kwargs = dict(uuid=contact.uuid, org=org, gender=gender, registered_on=registered_on, born=born,
-                          occupation=occupation, state=state, district=district)
-
-            if existing:
-                existing.update(**kwargs)
-            else:
-                cls.objects.create(**kwargs)
