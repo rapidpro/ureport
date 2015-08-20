@@ -41,6 +41,14 @@
                 %iframe{ width:"360", height:"270", src:"//www.youtube.com/embed/{{story.video_id}}", frameborder:"0"}
             {{ story.content|safe }}
 
+      - if not is_iorg and story.audio_link
+        .section
+          %h1.level-1-title
+            -trans "AUDIO"
+          .card.card-padding
+            <audio src="{{ story.audio_link}}" preload="auto" />
+
+
     .col-md-4
       .section
         %h1.level-1-title
@@ -128,8 +136,33 @@
     margin-left: 10px;
     }
 
+    .audiojs {
+      width: 100%;
+    }
+
+    .audiojs .play-pause {
+      min-width: 40px;
+    }
+
+    .audiojs .scrubber {
+      min-width: calc(100% - 170px);
+      width: initial;
+    }
+
+    .audiojs .time {
+      float: right;
+    }
+
 -block extra-script
   {{ block.super }}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/audiojs/audio.min.js"></script>
+  <script>
+    audiojs.events.ready(function() {
+    var as = audiojs.createAll();
+    as
+    });
+  </script>
+
   {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/archived_stories.coffee" />
   {% endcompress %}
