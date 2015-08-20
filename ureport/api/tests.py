@@ -89,7 +89,7 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.data['count'], Org.objects.count())
 
     def test_single_org(self):
-        url = '/api/v1/orgs/%d/' % self.uganda_video.pk
+        url = '/api/v1/orgs/%d/' % self.uganda.pk
         self.client.login(username=self.other_user.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
