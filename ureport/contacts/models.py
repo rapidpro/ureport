@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import json
 from dash.orgs.models import Org
 from django.db import models
+from django.db.models import Sum
 from django.utils.translation import ugettext_lazy as _
 from ureport.utils import json_date_to_datetime
 
@@ -31,7 +32,6 @@ class Contact(models.Model):
     state = models.CharField(max_length=255, verbose_name=_("State Field"), null=True)
 
     district = models.CharField(max_length=255, verbose_name=_("District Field"), null=True)
-
 
     @classmethod
     def kwargs_from_temba(cls, org, temba_contact):
@@ -123,3 +123,44 @@ class Contact(models.Model):
         # remove any contacts that's no longer a ureporter
         cls.objects.filter(org=org).exclude(uuid__in=seen_uuids).delete()
 
+
+class ReportersCounter(models.Model):
+
+    ALL_REPORTERS = 'A'
+    FEMALE_REPORTERS = 'F'
+    MALE_REPORTERS = 'M'
+
+    COUNT_TYPE_CHOICES = ((ALL_REPORTERS, _("All Reporters")),
+                          (FEMALE_REPORTERS, _("Female Reporters")),
+                          (MALE_REPORTERS, _("Male Reporters")))
+
+    org = models.ForeignKey(Org, related_name='reporters_counters')
+
+    counter_type = models.CharField(max_length=1, choices=COUNT_TYPE_CHOICES)
+
+    count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    @classmethod
+    def create_all(cls, org):
+        """
+        Creates all reporters counters for a given org
+        """
+        counters = []
+        for counter_type, _name in cls.COUNT_TYPE_CHOICES:
+            counters.append(cls.objects.create(org=org, counter_type=counter_type))
+        return counters
+
+    @classmethod
+    def get_counts(cls, org, counter_types=None):
+        """
+        Gets all reporters counts by counter type for the given org
+        """
+        counters = cls.objects.filter(org=org)
+        if counter_types:
+            counters = counters.filter(counter_type__in=counter_types)
+        counter_counts = counters.values('counter_type').order_by('counter_type').annotate(count_sum=Sum('count'))
+
+        return {c['counter_type']: c['count_sum'] for c in counter_counts}
+
+    class Meta:
+        index_together = ('org', 'counter_type')

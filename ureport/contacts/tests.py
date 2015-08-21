@@ -52,8 +52,6 @@ class ContactTest(DashTest):
         # try creating contact from them
         Contact.objects.create(**kwargs)
 
-
-
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_contact(self):
         Contact.import_contacts(self.nigeria)
