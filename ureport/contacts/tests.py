@@ -1,6 +1,6 @@
 from ureport.tests import DashTest, MockTembaClient
 from mock import patch
-from .models import Contact
+from .models import Contact, ReportersCounter
 from temba.types import Contact as TembaContact
 from ureport.utils import json_date_to_datetime
 
@@ -63,6 +63,37 @@ class ContactTest(DashTest):
         self.assertEqual(contact.gender, 'F')
         self.assertEqual(contact.born, 1990)
 
+    def test_reporters_counter(self):
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
+        Contact.objects.create(uuid='C-007', org=self.nigeria, gender='M', born=1990, occupation='Student',
+                               registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='Lagos',
+                               district='Oyo')
 
+        expected = dict()
+        expected['total-reporters'] = 1
+        expected['gender:m'] = 1
+        expected['occupation:student'] = 1
+        expected['born:1990'] = 1
+        expected['registered_on:2014-01-02'] = 1
+        expected['state:lagos'] = 1
+        expected['district:lagos:oyo'] = 1
 
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+
+        Contact.objects.create(uuid='C-008', org=self.nigeria, gender='M', born=1980, occupation='Teacher',
+                               registered_on=json_date_to_datetime('2014-01-02T03:07:05.000'), state='Lagos',
+                               district='Oyo')
+
+        expected = dict()
+        expected['total-reporters'] = 2
+        expected['gender:m'] = 2
+        expected['occupation:student'] = 1
+        expected['occupation:teacher'] = 1
+        expected['born:1990'] = 1
+        expected['born:1980'] = 1
+        expected['registered_on:2014-01-02'] = 2
+        expected['state:lagos'] = 2
+        expected['district:lagos:oyo'] = 2
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
