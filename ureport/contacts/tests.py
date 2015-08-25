@@ -23,7 +23,7 @@ class ContactTest(DashTest):
 
         temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
                                             groups=['G-001', 'G-007'],
-                                            fields={'registration date': None, 'state': None,
+                                            fields={'registration_date': None, 'state': None,
                                                     'lga': None, 'occupation': None, 'born': None,
                                                     'gender': None},
                                             language='eng')
@@ -38,7 +38,7 @@ class ContactTest(DashTest):
 
         temba_contact = TembaContact.create(uuid='C-007', name="Jan", urns=['tel:123'],
                                             groups=['G-001', 'G-007'],
-                                            fields={'registration date': '2014-01-02T03:04:05.000', 'state':'Lagos',
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
                                                     'lga': 'Oyo', 'occupation': 'Student', 'born': '1990',
                                                     'gender': 'Male'},
                                             language='eng')
