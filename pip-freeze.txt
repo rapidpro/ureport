@@ -3,7 +3,7 @@ GitPython==1.0.0
 Markdown==2.6.2
 Pillow==2.8.2
 Pygments==2.0.2
--e git+https://github.com/rapidpro/rapidpro-python@9fc94eb6f4dfeeca684d20acc64798bd5eaad676#egg=RapidPro_Python_Client-master
+rapidpro-python
 amqp==1.4.6
 anyjson==0.3.3
 billiard==3.3.0.19
@@ -11,7 +11,7 @@ boto==2.36.0
 celery==3.1.17
 celery-with-redis==3.0
 coverage==3.7.1
--e git+https://github.com/rapidpro/dash.git@65e29914e5b073436f6e0fc09bf0b86be79421ce#egg=dash-master
+-e git+https://github.com/rapidpro/dash.git@689d32a8ee97a2819fec5ee27f2256ec97f86d68#egg=dash-master
 dj-database-url==0.3.0
 django-appconf==1.0.1
 django-celery==3.1.16
@@ -43,12 +43,11 @@ psycopg2==2.6.1
 pycountry==1.12
 python-dateutil==2.4.2
 pytz==2015.4
--e git+https://github.com/rapidpro/rapidpro-python@9fc94eb6f4dfeeca684d20acc64798bd5eaad676#egg=rapidpro_python-master
 raven==5.3.1
 redis==2.10.3
 requests==2.7.0
 six==1.9.0
--e git+https://github.com/nyaruka/smartmin.git@049eeb2677ba01f83685c190aa63d014511b50e4#egg=smartmin-master
+-e git+https://github.com/nyaruka/smartmin.git@e14f017c1e208a13aa7a844a30379d97e8ce57ea#egg=smartmin-master
 smmap==0.9.0
 sorl-thumbnail==12.3
 sqlparse==0.1.15
