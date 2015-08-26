@@ -16,7 +16,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
 
   topBoundary = null
 
-  mainLabelName = "All"
+  mainLabelName = gettext("All")
   mainLabelRegistered = 0
 
   colors = colorsList
@@ -106,13 +106,13 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
   clickFeature = (e) ->
     if (allowDistrictZoom and e.target.feature.properties.level == 1)
       map.fitBounds(e.target.getBounds(), {step:.25})
-      mainLabelName = e.target.feature.properties.name + " (State)"
+      mainLabelName = e.target.feature.properties.name + " (" + gettext("State") + ")"
       loadBoundary(e.target.feature.properties.id, e.target)
       scale.update(e.target.feature.properties.level)
     else
       resetBoundaries()
       scale.update()
-      mainLabelName = "All"
+      mainLabelName = gettext("All")
       mainLabelRegistered = totalRegistered
 
   loadBoundary = (boundaryId, target) ->
@@ -213,8 +213,8 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     html += "<div class='scale-map-circle-inner'></div>"
     html += "<div class='scale-map-hline primary-border-color'></div>"
     html += "<div class='scale-map-vline primary-border-color'></div>"
-    html += "<div class='national-level primary-color'>NATIONAL</div>"
-    html += "<div class='state-level primary-color'>STATE</div>"
+    html += "<div class='national-level primary-color'>" + gettext("NATIONAL") + "</div>"
+    html += "<div class='state-level primary-color'>" + gettext("STATE") + "</div>"
 
     @_div.innerHTML = html
 
@@ -234,9 +234,9 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + mainLabelName + "</h2>"
 
-      html += "<div class='top-border primary-color'>POPULATION</div>"
+      html += "<div class='top-border primary-color'>" + gettext("POPULATION") + "</div>"
       html += "<div><table><tr><td class='info-count'>" + intcomma(mainLabelRegistered) + "</td></tr>"
-      html += "<tr><td class='info-tiny'>Registered in " + mainLabelName + "</td></tr></table></div>"
+      html += "<tr><td class='info-tiny'>" + gettext("Registered in") + " " + mainLabelName + "</td></tr></table></div>"
 
     if props?
       result = boundaryResults[props.id]
@@ -249,11 +249,11 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
 
-      html += "<div class='top-border primary-color'>POPULATION</div>"
+      html += "<div class='top-border primary-color'>" + gettext("POPULATION") + "</div>"
       html += "<div><table><tr><td class='info-count'>" + intcomma(result.set + result.unset) + "</td></tr>"
-      html += "<tr><td class='info-tiny'>Registered in " + props.name + "</td></tr></table></div>"
+      html += "<tr><td class='info-tiny'>" + gettext("Registered in") + " " + props.name + "</td></tr></table></div>"
 
-      html += "<div class='top-border primary-color'>DENSITY</div>"
+      html += "<div class='top-border primary-color'>" + gettext("DENSITY") + "</div>"
 
       percentage = result.percentage
       if percentage < 0

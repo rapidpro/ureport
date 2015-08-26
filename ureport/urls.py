@@ -6,6 +6,11 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
+# javascript translation packages
+js_info_dict = {
+    'packages': (),  # this is empty due to the fact that all translation are in one folder
+}
+
 urlpatterns = patterns('',
     url(r'^', include('ureport.public.urls')),
     url(r'^manage/', include('ureport.admins.urls')),
@@ -19,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^manage/', include('ureport.countries.urls')),
     url(r'^manage/', include('ureport.assets.urls')),
     url(r'^users/', include('dash.users.urls')),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict)
 )
 
 if settings.DEBUG:
