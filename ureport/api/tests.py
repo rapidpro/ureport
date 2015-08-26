@@ -14,8 +14,6 @@ class UreportAPITests(APITestCase):
 
     def setUp(self):
         self.superuser = User.objects.create_superuser(username="super", email="super@user.com", password="super")
-        self.other_user = User.objects.create_user(username="other_user", email="other_user@user.com",
-                                                   password="super")
         self.uganda = self.create_org('uganda', self.superuser)
         self.nigeria = self.create_org('testserver', self.superuser)
 
@@ -94,9 +92,6 @@ class UreportAPITests(APITestCase):
 
     def test_orgs_list(self):
         url = '/api/v1/orgs/'
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -104,9 +99,6 @@ class UreportAPITests(APITestCase):
 
     def test_single_org(self):
         url = '/api/v1/orgs/%d/' % self.uganda.pk
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -124,9 +116,6 @@ class UreportAPITests(APITestCase):
     def test_polls_by_org_list(self):
         url = '/api/v1/polls/org/%d/' % self.uganda.pk
         url2 = '/api/v1/polls/org/%d/' % self.nigeria.pk
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -137,9 +126,6 @@ class UreportAPITests(APITestCase):
 
     def test_single_poll(self):
         url = '/api/v1/polls/%d/' % self.reg_poll.pk
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -158,9 +144,6 @@ class UreportAPITests(APITestCase):
     def test_news_item_by_org_list(self):
         url = '/api/v1/news/org/%d/' % self.uganda.pk
         url1 = '/api/v1/news/org/%d/' % self.nigeria.pk
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -171,9 +154,6 @@ class UreportAPITests(APITestCase):
 
     def test_single_news_item(self):
         url = '/api/v1/news/%d/' % self.news_item.pk
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -193,9 +173,6 @@ class UreportAPITests(APITestCase):
     def test_video_by_org_list(self):
         url = '/api/v1/videos/org/%d/' % self.uganda.pk
         url1 = '/api/v1/videos/org/%d/' % self.nigeria.pk
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -206,9 +183,6 @@ class UreportAPITests(APITestCase):
 
     def test_single_video(self):
         url = '/api/v1/videos/%d/' % self.uganda_video.pk
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -227,9 +201,6 @@ class UreportAPITests(APITestCase):
     def test_story_by_org_list(self):
         url = '/api/v1/stories/org/%d/' % self.uganda.pk
         url1 = '/api/v1/stories/org/%d/' % self.nigeria.pk
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -240,9 +211,6 @@ class UreportAPITests(APITestCase):
 
     def test_single_story(self):
         url = '/api/v1/stories/%d/' % self.uganda_story.pk
-        self.client.login(username=self.other_user.username, password='super')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
