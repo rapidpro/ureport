@@ -1,8 +1,6 @@
 from dash.orgs.models import Org
 from dash.stories.models import Story
-from rest_framework.authtoken.models import Token
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from smartmin.views import SmartCRUDL, SmartListView
 from ureport.api.serializers import PollReadSerializer, NewsItemReadSerializer, VideoReadSerializer, ImageReadSerializer, \
     OrgReadSerializer, StoryReadSerializer
 from ureport.assets.models import Image
