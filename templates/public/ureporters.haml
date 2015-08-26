@@ -171,7 +171,7 @@
             percentage_lookup[label] = Math.round(percentage);
 
             if (parseInt(percentage_lookup[label])) {
-              categories.push("Age " + label);
+              categories.push('{% trans "Age" %} ' + label);
               data.push({ name:label,  y: Math.round(percentage) });
             }
           }
@@ -312,7 +312,7 @@
           var categories = [];
           var data = [];
 
-          var months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+          var months = {{months|safe}};
 
           var total = 0;
           for (i=0; i<results.categories.length; i++){
@@ -368,7 +368,7 @@
                     }
                 },
                 title: {
-                    text: 'Registered',
+                    text: '{% trans "Registered" %}',
                     offset: 0,
                     x: -60,
                     y: 30,
@@ -381,7 +381,7 @@
             },
             tooltip: {
                 formatter: function() {
-                     return '<table><tr><td style="padding:0; font-size: 24px; font-family:SharpSansBold; "><b>'+ this.y + '</b></td></tr></table><span style="font-size:14px; font-family:Times New Roman">(Week of ' + Highcharts.dateFormat('%e/%m', this.x) +')</span>';
+                     return '<table><tr><td style="padding:0; font-size: 24px; font-family:SharpSansBold; "><b>'+ this.y + '</b></td></tr></table><span style="font-size:14px; font-family:Times New Roman">({% trans "Week of" %} ' + Highcharts.dateFormat('%e/%m', this.x) +')</span>';
                 },
                 shared: true,
                 useHTML: true
