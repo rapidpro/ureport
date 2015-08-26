@@ -12,17 +12,17 @@ __author__ = 'kenneth'
 
 class OrgList(ListAPIView):
     serializer_class = OrgReadSerializer
-    queryset = Org.objects.all()
+    queryset = Org.objects.filter(is_active=True)
 
 
 class OrgDetails(RetrieveAPIView):
     serializer_class = OrgReadSerializer
-    queryset = Org.objects.all()
+    queryset = Org.objects.filter(is_active=True)
 
 
 class BaseListAPIView(ListAPIView):
     def get_queryset(self):
-        q = self.model.objects.all()
+        q = self.model.objects.filter(is_active=True)
         if self.kwargs.get('org', None):
             q = q.filter(org_id=self.kwargs.get('org'))
         return q
@@ -41,7 +41,7 @@ class PollList(BaseListAPIView):
 
 class PollDetails(RetrieveAPIView):
     serializer_class = PollReadSerializer
-    queryset = Poll.objects.all()
+    queryset = Poll.objects.filter(is_active=True)
 
 
 class NewsItemList(BaseListAPIView):
@@ -51,7 +51,7 @@ class NewsItemList(BaseListAPIView):
 
 class NewsItemDetails(RetrieveAPIView):
     serializer_class = NewsItemReadSerializer
-    queryset = NewsItem.objects.all()
+    queryset = NewsItem.objects.filter(is_active=True)
 
 
 class VideoList(BaseListAPIView):
@@ -61,7 +61,7 @@ class VideoList(BaseListAPIView):
 
 class VideoDetails(RetrieveAPIView):
     serializer_class = VideoReadSerializer
-    queryset = Video.objects.all()
+    queryset = Video.objects.filter(is_active=True)
 
 
 class ImageList(BaseListAPIView):
@@ -71,7 +71,7 @@ class ImageList(BaseListAPIView):
 
 class ImageDetails(RetrieveAPIView):
     serializer_class = ImageReadSerializer
-    queryset = Image.objects.all()
+    queryset = Image.objects.filter(is_active=True)
 
 
 class StoryList(BaseListAPIView):
@@ -81,6 +81,6 @@ class StoryList(BaseListAPIView):
 
 class StoryDetails(RetrieveAPIView):
     serializer_class = StoryReadSerializer
-    queryset = Story.objects.all()
+    queryset = Story.objects.filter(is_active=True)
 
 

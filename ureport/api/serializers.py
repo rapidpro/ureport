@@ -19,7 +19,7 @@ class CategoryReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('image_url', 'is_active', 'name',)
+        fields = ('image_url', 'name',)
 
     def get_image_url(self, obj):
         image = None
@@ -37,7 +37,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Org
-        fields = ('id', 'logo_url', 'is_active', 'name', 'language', 'subdomain', 'domain', 'timezone', )
+        fields = ('id', 'logo_url', 'name', 'language', 'subdomain', 'domain', 'timezone', )
 
     def get_logo_url(self, obj):
         if obj.logo:
@@ -51,7 +51,7 @@ class StoryReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Story
-        fields = ('id', 'is_active', 'title', 'featured', 'summary', 'video_id', 'tags', 'org', 'images', 'category')
+        fields = ('id', 'title', 'featured', 'summary', 'video_id', 'audio_link', 'tags', 'org', 'images', 'category')
 
     def get_images(self, obj):
         return [generate_absolute_url_from_file(self.context['request'], image.image)
@@ -72,7 +72,7 @@ class NewsItemReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NewsItem
-        fields = ('id', 'short_description', 'category', 'is_active', 'title', 'description', 'link', 'org')
+        fields = ('id', 'short_description', 'category', 'title', 'description', 'link', 'org')
 
     def get_short_description(self, obj):
         return obj.short_description()
@@ -83,7 +83,7 @@ class VideoReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ('id', 'category', 'is_active', 'title', 'description', 'video_id', 'org')
+        fields = ('id', 'category', 'title', 'description', 'video_id', 'org')
 
 
 class ImageReadSerializer(serializers.ModelSerializer):

@@ -106,7 +106,6 @@ class UreportAPITests(APITestCase):
         logo_url = generate_absolute_url_from_file(response, org.logo) if org.logo else None
         self.assertDictEqual(response.data, dict(id=org.pk,
                                                  logo_url=logo_url,
-                                                 is_active=org.is_active,
                                                  name=org.name,
                                                  language=org.language,
                                                  subdomain=org.subdomain,
@@ -136,8 +135,7 @@ class UreportAPITests(APITestCase):
                                              title=poll.title,
                                              org=poll.org_id,
                                              ))
-        self.assertDictEqual(dict(category), dict(OrderedDict(is_active=poll.category.is_active,
-                                                  name=poll.category.name,
+        self.assertDictEqual(dict(category), dict(OrderedDict(name=poll.category.name,
                                                   image_url=CategoryReadSerializer().
                                                   get_image_url(poll.category))))
 
@@ -161,13 +159,11 @@ class UreportAPITests(APITestCase):
         category = response.data.pop('category')
         self.assertDictEqual(response.data, dict(id=news.pk,
                                                  short_description=news.short_description(),
-                                                 is_active=news.is_active,
                                                  title=news.title,
                                                  description=news.description,
                                                  link=news.link,
                                                  org=news.org_id))
-        self.assertDictEqual(dict(category), dict(is_active=news.category.is_active,
-                                                  name=news.category.name,
+        self.assertDictEqual(dict(category), dict(name=news.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(news.category)))
 
     def test_video_by_org_list(self):
@@ -189,13 +185,11 @@ class UreportAPITests(APITestCase):
         video = self.uganda_video
         category = response.data.pop('category')
         self.assertDictEqual(response.data, dict(id=video.pk,
-                                                 is_active=video.is_active,
                                                  title=video.title,
                                                  video_id=video.video_id,
                                                  description=video.description,
                                                  org=video.org_id))
-        self.assertDictEqual(dict(category), dict(is_active=video.category.is_active,
-                                                  name=video.category.name,
+        self.assertDictEqual(dict(category), dict(name=video.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(video.category)))
 
     def test_story_by_org_list(self):
@@ -217,14 +211,13 @@ class UreportAPITests(APITestCase):
         story = self.uganda_story
         category = response.data.pop('category')
         self.assertDictEqual(response.data, dict(id=story.pk,
-                                                 is_active=story.is_active,
                                                  title=story.title,
                                                  video_id=story.video_id,
+                                                 audio_link=story.audio_link,
                                                  summary=story.summary,
                                                  featured=story.featured,
                                                  tags=story.tags,
                                                  images=StoryReadSerializer().get_images(story),
                                                  org=story.org_id))
-        self.assertDictEqual(dict(category), dict(is_active=story.category.is_active,
-                                                  name=story.category.name,
+        self.assertDictEqual(dict(category), dict(name=story.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(story.category)))
