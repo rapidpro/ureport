@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import calendar
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponsePermanentRedirect
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from smartmin.views import *
 
@@ -302,7 +304,12 @@ class UreportersView(SmartTemplateView):
     def get_context_data(self, **kwargs):
         context = super(UreportersView, self).get_context_data(**kwargs)
 
-        context['org'] = self.request.org
+        org = self.request.org
+        context['org'] = org
+
+        # remove the first option '' from calender.month_abbr
+        context['months'] = [str(_('%s')) % m for m in calendar.month_abbr][1:]
+
         return context
 
 class JoinEngageView(SmartTemplateView):

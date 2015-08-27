@@ -15,7 +15,7 @@ initMap = (id, geojson, question, region) ->
   topCategory = null
 
 
-  mainLabelName = "All States"
+  mainLabelName = gettext("All States")
   $.ajax({url:"/boundaries/", dataType: "json"}).done (data) ->
     for feature in data.features
       if feature.properties.id == region
@@ -217,11 +217,11 @@ initMap = (id, geojson, question, region) ->
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + mainLabelName + "</h2>"
 
-      html += "<div class='top-border'>PARTICIPATION LEVEL</div>"
+      html += "<div class='top-border'>" + gettext("PARTICIPATION LEVEL") + "</div>"
       html += "<div><table><tr><td class='info-count'>" + mainLabelAnswered + "</td><td class='info-count'>" + window.intcomma(mainLabelRegistered) + "</td></tr>"
-      html += "<tr><td class='info-tiny'>Responses</td><td class='info-tiny'>Registered in " + mainLabelName + "</td></tr></table></div>"
+      html += "<tr><td class='info-tiny'>" + gettext("Responses") + "</td><td class='info-tiny'>" + gettext("Registered in") + " " + mainLabelName + "</td></tr></table></div>"
 
-      html += "<div class='top-border'>RESPONSE RATE</div>"
+      html += "<div class='top-border'>" + gettext("RESPONSE RATE") + "</div>"
 
       percentage = Math.round((100 * mainLabelAnswered) / mainLabelRegistered)
       if percentage < 0
@@ -235,7 +235,7 @@ initMap = (id, geojson, question, region) ->
       html += "<div class='info-tiny'>" + topCategory + "</div>"
 
       html += "<div class='info-percentage other-color top-border' style='padding-top: 10px'>" + percentageOther + "</div>"
-      html += "<div class='info-tiny'>Other</div>"
+      html += "<div class='info-tiny'>" + gettext("Other") + "</div>"
 
       html += "</div>"
  
@@ -245,11 +245,11 @@ initMap = (id, geojson, question, region) ->
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
 
-      html += "<div class='top-border'>PARTICIPATION LEVEL</div>"
+      html += "<div class='top-border'>" + gettext("PARTICIPATION LEVEL") + "</div>"
       html += "<div><table><tr><td class='info-count'>" + result.set + "</td><td class='info-count'>" + window.intcomma(result.set + result.unset) + "</td></tr>"
-      html += "<tr><td class='info-tiny'>Responses</td><td class='info-tiny'>Registered in " + props.name + "</td></tr></table></div>"
+      html += "<tr><td class='info-tiny'>" + gettext("Responses") + "</td><td class='info-tiny'>" + gettext("Registered in") + " " + props.name + "</td></tr></table></div>"
 
-      html += "<div class='top-border'>RESPONSE RATE</div>"
+      html += "<div class='top-border'>" + gettext("RESPONSE RATE") + "</div>"
 
       percentage = result.percentage
       if percentage < 0
@@ -263,7 +263,7 @@ initMap = (id, geojson, question, region) ->
       html += "<div class='info-tiny'>" + topCategory + "</div>"
 
       html += "<div class='info-percentage other-color top-border' style='padding-top: 10px'>" + percentageOther + "</div>"
-      html += "<div class='info-tiny'>Other</div>"
+      html += "<div class='info-tiny'>" + gettext("Other") + "</div>"
 
       html += "</div>"
 
