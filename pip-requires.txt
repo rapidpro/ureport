@@ -13,6 +13,8 @@ django-nose
 django-reversion
 django-rosetta
 django-storages
+django-rest-swagger
+djangorestframework
 dj-database-url
 boto
 Pillow

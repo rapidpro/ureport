@@ -152,6 +152,16 @@ class PublicTest(DashTest):
         self.assertFalse('orgs' in response.context)
         self.assertTrue('welcome-flags' in response.content)
 
+        self.assertEqual(response.request['SERVER_NAME'], 'ureport.io')
+        self.assertEqual(response.request['wsgi.url_scheme'], 'http')
+
+        with self.settings(SESSION_COOKIE_SECURE=True):
+            response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
+            self.assertEquals(response.status_code, 200)
+
+            self.assertEqual(response.request['SERVER_NAME'], 'ureport.io')
+            self.assertEqual(response.request['wsgi.url_scheme'], 'http')
+
     def test_has_better_domain_processors(self):
         home_url = reverse('public.index')
 

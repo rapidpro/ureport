@@ -24,7 +24,8 @@ urlpatterns = patterns('',
     url(r'^manage/', include('ureport.countries.urls')),
     url(r'^manage/', include('ureport.assets.urls')),
     url(r'^users/', include('dash.users.urls')),
-    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict)
+    url(r'^api/v1/', include('ureport.api.urls')),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 )
 
 if settings.DEBUG:
