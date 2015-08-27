@@ -257,6 +257,7 @@ INSTALLED_APPS = (
 
     'django_countries',
     'rest_framework',
+    'rest_framework_swagger',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -531,4 +532,12 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10,                 # Default to 10
     'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
     'MAX_PAGINATE_BY': 100,
+}
+
+SWAGGER_SETTINGS = {
+    'api_version': '0.1',
+    'api_path': '/api/v1/',
+    'enabled_methods': [
+        'get'
+    ],
 }

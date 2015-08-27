@@ -91,7 +91,7 @@ class ImageReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Image
-        fields = ('image_url', 'image_type', 'org', 'name',)
+        fields = ('id', 'image_url', 'image_type', 'org', 'name',)
 
     def get_image_url(self, obj):
         return generate_absolute_url_from_file(self.context['request'], obj.image)

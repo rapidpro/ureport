@@ -1,10 +1,12 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 from ureport.api.views import PollList, PollDetails, NewsItemList, NewsItemDetails, VideoList, VideoDetails, ImageList, \
     ImageDetails, OrgList, OrgDetails, StoryList, StoryDetails
 
 __author__ = 'kenneth'
 
 urlpatterns = patterns('',
+                       url(r'^docs/', include('rest_framework_swagger.urls')),
+
                        url(r'^orgs/$', OrgList.as_view()),
                        url(r'^orgs/(?P<pk>[\w]+)/$', OrgDetails.as_view()),
 
