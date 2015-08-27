@@ -253,8 +253,11 @@ INSTALLED_APPS = (
     'ureport.jobs',
     'ureport.countries',
     'ureport.assets',
+    'ureport.api',
 
     'django_countries',
+    'rest_framework',
+    'rest_framework_swagger',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -520,3 +523,21 @@ PREVIOUS_ORG_SITES = [
         count_link='http://www.zambiaureport.org/count.txt/',
     ),
 ]
+
+
+#-----------------------------------------------------------------------------------
+# rest_framework config
+#-----------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    'PAGINATE_BY': 10,                 # Default to 10
+    'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
+    'MAX_PAGINATE_BY': 100,
+}
+
+SWAGGER_SETTINGS = {
+    'api_version': '0.1',
+    'api_path': '/api/v1/',
+    'enabled_methods': [
+        'get'
+    ],
+}
