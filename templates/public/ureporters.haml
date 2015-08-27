@@ -125,6 +125,8 @@
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureporters.coffee" />
   {% endcompress %}
 
+  {% include "public/strings_values.html" %}
+
   :javascript
     $(function(){
       $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-26 15:40+0000\n"
+"POT-Creation-Date: 2015-08-27 10:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -768,6 +768,7 @@ msgstr ""
 
 #: templates/public/all_polls.haml:19
 #: templates/public/archived_stories.haml:19 templates/public/stories.haml:69
+#: templates/public/strings_values.haml:5
 msgid "All"
 msgstr ""
 
@@ -1083,6 +1084,67 @@ msgstr ""
 msgid "No featured images."
 msgstr ""
 
+#: templates/public/strings_values.haml:6
+msgid "Even"
+msgstr ""
+
+#: templates/public/strings_values.haml:7
+#: templates/public/strings_values.haml:10
+msgid "State"
+msgstr ""
+
+#: templates/public/strings_values.haml:8
+msgid "Other"
+msgstr ""
+
+#: templates/public/strings_values.haml:9
+msgid "National"
+msgstr ""
+
+#: templates/public/strings_values.haml:11
+msgid "Participation Level"
+msgstr ""
+
+#: templates/public/strings_values.haml:12
+msgid "Responses"
+msgstr ""
+
+#: templates/public/strings_values.haml:13
+msgid "Reporters in"
+msgstr ""
+
+#: templates/public/strings_values.haml:14
+msgid "Results"
+msgstr ""
+
+#: templates/public/strings_values.haml:15
+msgid "*Other answers include"
+msgstr ""
+
+#: templates/public/strings_values.haml:16
+msgid "Population"
+msgstr ""
+
+#: templates/public/strings_values.haml:17
+msgid "Registered in"
+msgstr ""
+
+#: templates/public/strings_values.haml:18
+msgid "Density"
+msgstr ""
+
+#: templates/public/strings_values.haml:19
+msgid "total"
+msgstr ""
+
+#: templates/public/strings_values.haml:20
+msgid "of"
+msgstr ""
+
+#: templates/public/strings_values.haml:21
+msgid "the"
+msgstr ""
+
 #: templates/public/ureporters.haml:44
 msgid "WHO WE ARE"
 msgstr ""
@@ -1111,15 +1173,15 @@ msgstr ""
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
 msgstr ""
 
-#: templates/public/ureporters.haml:241
+#: templates/public/ureporters.haml:243
 msgid "Age"
 msgstr ""
 
-#: templates/public/ureporters.haml:438
+#: templates/public/ureporters.haml:440
 msgid "Registered"
 msgstr ""
 
-#: templates/public/ureporters.haml:451
+#: templates/public/ureporters.haml:453
 msgid "Week of"
 msgstr ""
 

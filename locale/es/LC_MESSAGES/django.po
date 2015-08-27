@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-26 15:40+0000\n"
+"POT-Creation-Date: 2015-08-27 10:08+0000\n"
 "PO-Revision-Date: 2015-05-22 07:03+0000\n"
 "Last-Translator: Kidus <kidus.asfaw@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/ureport/language/"
@@ -838,6 +838,7 @@ msgstr "FILTRO"
 
 #: templates/public/all_polls.haml:19
 #: templates/public/archived_stories.haml:19 templates/public/stories.haml:69
+#: templates/public/strings_values.haml:5
 msgid "All"
 msgstr ""
 
@@ -1182,6 +1183,73 @@ msgstr "Sin encuestas relacionadas."
 msgid "No featured images."
 msgstr "Sin imágenes destacadas."
 
+#: templates/public/strings_values.haml:6
+msgid "Even"
+msgstr ""
+
+#: templates/public/strings_values.haml:7
+#: templates/public/strings_values.haml:10
+msgid "State"
+msgstr ""
+
+#: templates/public/strings_values.haml:8
+msgid "Other"
+msgstr ""
+
+#: templates/public/strings_values.haml:9
+msgid "National"
+msgstr ""
+
+#: templates/public/strings_values.haml:11
+msgid "Participation Level"
+msgstr ""
+
+#: templates/public/strings_values.haml:12
+#, fuzzy
+#| msgid "Response Rate"
+msgid "Responses"
+msgstr "Tasa de respuesta"
+
+#: templates/public/strings_values.haml:13
+#, fuzzy
+#| msgid "U-Reporter in"
+msgid "Reporters in"
+msgstr "U-Reporter en"
+
+#: templates/public/strings_values.haml:14
+msgid "Results"
+msgstr ""
+
+#: templates/public/strings_values.haml:15
+msgid "*Other answers include"
+msgstr ""
+
+#: templates/public/strings_values.haml:16
+#, fuzzy
+#| msgid "Configuration"
+msgid "Population"
+msgstr "Configuración"
+
+#: templates/public/strings_values.haml:17
+msgid "Registered in"
+msgstr ""
+
+#: templates/public/strings_values.haml:18
+msgid "Density"
+msgstr ""
+
+#: templates/public/strings_values.haml:19
+msgid "total"
+msgstr ""
+
+#: templates/public/strings_values.haml:20
+msgid "of"
+msgstr ""
+
+#: templates/public/strings_values.haml:21
+msgid "the"
+msgstr ""
+
 #: templates/public/ureporters.haml:44
 msgid "WHO WE ARE"
 msgstr "QUIÉNES SOMOS"
@@ -1210,15 +1278,15 @@ msgstr "TASA DE REGISTRO: EN LOS ÚLTIMOS 6 MESES"
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
 msgstr "OCUPACIÓN: LAS 9 MÁS MENCIONADAS"
 
-#: templates/public/ureporters.haml:241
+#: templates/public/ureporters.haml:243
 msgid "Age"
 msgstr ""
 
-#: templates/public/ureporters.haml:438
+#: templates/public/ureporters.haml:440
 msgid "Registered"
 msgstr ""
 
-#: templates/public/ureporters.haml:451
+#: templates/public/ureporters.haml:453
 msgid "Week of"
 msgstr ""
 
