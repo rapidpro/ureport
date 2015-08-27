@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-27 10:08+0000\n"
+"POT-Creation-Date: 2015-08-27 17:29+0000\n"
 "PO-Revision-Date: 2015-03-25 19:04+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/ureport/language/"
@@ -193,11 +193,12 @@ msgid "Add Image"
 msgstr "إضافة صورة "
 
 #: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
+#: smartmin/templates/smartmin/list.html:14
 msgid "Search"
 msgstr "بحث "
 
 #: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
-#: templates/polls/poll_list.haml:6
+#: smartmin/templates/smartmin/list.html:25 templates/polls/poll_list.haml:6
 msgid "Add"
 msgstr "إضافة "
 
@@ -214,13 +215,13 @@ msgstr "مجموعات المحتوى الخاصة بالصفحة الإلكتر
 msgid "%s Blocks"
 msgstr "مجموعات الصفحة الإلكترونية %s"
 
-#: dash/dashblocks/views.py:159
+#: dash/dashblocks/views.py:159 smartmin/views.py:1097
 #, fuzzy, python-format
 #| msgid "Edit"
 msgid "Edit %s"
 msgstr "تعديل "
 
-#: dash/dashblocks/views.py:183
+#: dash/dashblocks/views.py:183 smartmin/views.py:1286
 #, fuzzy, python-format
 #| msgid "Create"
 msgid "Create %s"
@@ -456,6 +457,8 @@ msgid "Admins"
 msgstr "المشرف "
 
 #: dash/orgs/templates/orgs/org_manage_accounts.haml:22
+#: smartmin/templates/smartmin/delete_confirm.html:26
+#: smartmin/templates/smartmin/update.html:10
 msgid "Remove"
 msgstr "حذف "
 
@@ -502,7 +505,7 @@ msgstr "أحد عناوين البريد الإلكتروني المدخلة خ�
 msgid "Manage %(name)s Accounts"
 msgstr "لتحكم في حسابات %(name)s"
 
-#: dash/orgs/views.py:439
+#: dash/orgs/views.py:439 smartmin/views.py:1261
 msgid "Create"
 msgstr "إنشاء "
 
@@ -610,6 +613,391 @@ msgstr "الصورة التي تريد إدراجها في صفحة عرض ال�
 #: dash/stories/views.py:98
 msgid "Image to display on story page and in previews (optional)"
 msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
+
+#: smartmin/templates/smartmin/delete_confirm.html:11
+#, fuzzy
+#| msgid "Remove"
+msgid "Remove Item?"
+msgstr "حذف "
+
+#: smartmin/templates/smartmin/delete_confirm.html:13
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+
+#: smartmin/templates/smartmin/delete_confirm.html:17
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
+msgstr ""
+
+#: smartmin/templates/smartmin/delete_confirm.html:24
+#: smartmin/templates/smartmin/form.html:50
+#: smartmin/templates/smartmin/update.html:8
+#: templates/jobs/jobsource_create.haml:33
+msgid "Cancel"
+msgstr ""
+
+#: smartmin/templates/smartmin/list.html:79
+#, python-format
+msgid ""
+"\n"
+"\t\t%(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: smartmin/templates/smartmin/list.html:85
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+
+#: smartmin/templates/smartmin/list.html:95
+#: smartmin/templates/smartmin/list.html:97
+msgid "Previous"
+msgstr ""
+
+#: smartmin/templates/smartmin/list.html:128
+#: smartmin/templates/smartmin/list.html:130
+#: templates/jobs/jobsource_create.haml:30
+msgid "Next"
+msgstr ""
+
+#: smartmin/templates/smartmin/read.html:13
+msgid "edit"
+msgstr ""
+
+#: smartmin/templates/smartmin/users/login.html:10
+#: templates/smartmin/users/login.haml:14
+msgid "Sign in"
+msgstr "تسجيل الدخول "
+
+#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:381
+#: templates/frame.haml.py:563 templates/smartmin/users/login.haml:49
+msgid "Login"
+msgstr "تسجيل الدخول "
+
+#: smartmin/templates/smartmin/users/login.html:35
+#: templates/smartmin/users/login.haml:54
+msgid "Forgot Password?"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/templates/smartmin/users/user_expired.html:7
+msgid "Token Expired"
+msgstr ""
+
+#: smartmin/templates/smartmin/users/user_failed.html:9
+msgid "Login Failure"
+msgstr ""
+
+#: smartmin/templates/smartmin/users/user_failed.html:11
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received "
+"%(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+
+#: smartmin/templates/smartmin/users/user_failed.html:18
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+
+#: smartmin/templates/smartmin/users/user_failed.html:25
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
+msgstr ""
+
+#: smartmin/templates/smartmin/users/user_failed.html:27
+msgid "Please contact the website administrator to have your password reset."
+msgstr ""
+
+#: smartmin/templates/smartmin/users/user_failed.html:39
+#, fuzzy
+#| msgid "Your email address"
+msgid "Email Address"
+msgstr "عنوان البريد الإلكتروني الخاص بك "
+
+#: smartmin/templates/smartmin/users/user_failed.html:41
+msgid "Recover"
+msgstr ""
+
+#: smartmin/templates/smartmin/users/user_forget.html:6
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
+msgstr ""
+
+#: smartmin/templates/smartmin/users/user_newpassword.html:7
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you "
+"must pick a new password every %(expire_days)s days, and that passwords must "
+"not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+
+#: smartmin/users/views.py:28 smartmin/users/views.py:64
+#: smartmin/users/views.py:79 smartmin/users/views.py:124
+#: smartmin/users/views.py:223 smartmin/users/views.py:250
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "New Password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:36 smartmin/users/views.py:70
+#: smartmin/users/views.py:102 smartmin/users/views.py:148
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
+msgstr ""
+
+#: smartmin/users/views.py:73 smartmin/users/views.py:105
+#: smartmin/users/views.py:151
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
+msgstr ""
+
+#: smartmin/users/views.py:78 smartmin/users/views.py:201
+#: smartmin/users/views.py:249
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:80
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Confirm Password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:86
+msgid "Please enter your password to save changes."
+msgstr ""
+
+#: smartmin/users/views.py:95
+msgid "Confirm the new password by filling the this field"
+msgstr ""
+
+#: smartmin/users/views.py:98
+msgid "New password doesn't match with its confirmation"
+msgstr ""
+
+#: smartmin/users/views.py:110
+#, fuzzy
+#| msgid "Email"
+msgid "Your Email"
+msgstr "البريد الإلكتروني "
+
+#: smartmin/users/views.py:117
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
+msgstr ""
+
+#: smartmin/users/views.py:122
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Current Password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:123
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Your current password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:125
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Your new password."
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:126
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Confirm new Password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:127
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Confirm your new password."
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:132
+msgid "Please enter your password to save changes"
+msgstr ""
+
+#: smartmin/users/views.py:141
+msgid "Confirm your new password by entering it here"
+msgstr ""
+
+#: smartmin/users/views.py:144
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr ""
+
+#: smartmin/users/views.py:197
+msgid "New user created successfully."
+msgstr ""
+
+#: smartmin/users/views.py:200 smartmin/users/views.py:222
+msgid "Groups"
+msgstr ""
+
+#: smartmin/users/views.py:200
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr ""
+
+#: smartmin/users/views.py:201
+msgid "Set the user's initial password here."
+msgstr ""
+
+#: smartmin/users/views.py:220
+#, fuzzy
+#| msgid "Login"
+msgid "Last Login"
+msgstr "تسجيل الدخول "
+
+#: smartmin/users/views.py:221
+msgid "Is Active"
+msgstr ""
+
+#: smartmin/users/views.py:221
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this user is allowed to log into the site"
+msgstr "هل تعتقد أن هذا الإستطلاع إستثنائي ويجب نشره في الصفحة الرئيسية؟"
+
+#: smartmin/users/views.py:222
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr ""
+
+#: smartmin/users/views.py:223
+msgid "You can reset the user's password by entering a new password here"
+msgstr ""
+
+#: smartmin/users/views.py:248
+msgid "Username"
+msgstr ""
+
+#: smartmin/users/views.py:249
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Your password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:250
+msgid "If you want to set a new password, enter it here"
+msgstr ""
+
+#: smartmin/users/views.py:251
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Confirm New Password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:251
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Confirm your new password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:266
+msgid "Edit your profile"
+msgstr ""
+
+#: smartmin/users/views.py:269
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Password Recovery"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:273
+msgid "An Email has been sent to your account with further instructions."
+msgstr ""
+
+#: smartmin/users/views.py:301
+msgid "Password Recovery Request"
+msgstr ""
+
+#: smartmin/users/views.py:310
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Pick a new password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:312
+#, fuzzy
+#| msgid "Your poll has been updated."
+msgid "Your password has successfully been updated, thank you."
+msgstr "تم تحديث الإستطلاع الخاص بك "
+
+#: smartmin/users/views.py:338
+#, python-format
+msgid "You are now logged in as %s"
+msgstr ""
+
+#: smartmin/users/views.py:351
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
+msgstr ""
+
+#: smartmin/users/views.py:354
+#, fuzzy
+#| msgid "Forgot Password?"
+msgid "Reset your Password"
+msgstr "هل نسيت كلمة السر؟ "
+
+#: smartmin/users/views.py:365
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by "
+"entering your email here."
+msgstr ""
+
+#: smartmin/views.py:838
+msgid "Submit"
+msgstr ""
+
+#: smartmin/views.py:845
+msgid "Form"
+msgstr ""
+
+#: smartmin/views.py:1166
+msgid "Save Changes"
+msgstr ""
+
+#: smartmin/views.py:1277
+#, fuzzy, python-format
+#| msgid "Your poll has been updated."
+msgid "Your new %s has been created."
+msgstr "تم تحديث الإستطلاع الخاص بك "
+
+#: smartmin/views.py:1296
+#, python-format
+msgid "Import %s"
+msgstr ""
 
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 #, fuzzy
@@ -719,11 +1107,6 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: templates/frame.haml:381 templates/frame.haml.py:563
-#: templates/smartmin/users/login.haml:49
-msgid "Login"
-msgstr "تسجيل الدخول "
-
 #: templates/frame.haml:421
 msgid "About"
 msgstr ""
@@ -768,14 +1151,6 @@ msgid ""
 "        <div>After you create the widget copy the widget id from the url as "
 "shown on</div>\n"
 "      "
-msgstr ""
-
-#: templates/jobs/jobsource_create.haml:30
-msgid "Next"
-msgstr ""
-
-#: templates/jobs/jobsource_create.haml:33
-msgid "Cancel"
 msgstr ""
 
 #: templates/jobs/jobsource_create.haml:40
@@ -1315,14 +1690,6 @@ msgstr ""
 msgid "Week of"
 msgstr ""
 
-#: templates/smartmin/users/login.haml:14
-msgid "Sign in"
-msgstr "تسجيل الدخول "
-
-#: templates/smartmin/users/login.haml:54
-msgid "Forgot Password?"
-msgstr "هل نسيت كلمة السر؟ "
-
 #: ureport/admins/views.py:22
 #, fuzzy, python-format
 #| msgid "The name of this organization"
@@ -1745,66 +2112,6 @@ msgstr ""
 
 #~ msgid "Organization"
 #~ msgstr "المنظمة "
-
-#, fuzzy
-#~| msgid "Forgot Password?"
-#~ msgid "New Password"
-#~ msgstr "هل نسيت كلمة السر؟ "
-
-#, fuzzy
-#~| msgid "Forgot Password?"
-#~ msgid "Password"
-#~ msgstr "هل نسيت كلمة السر؟ "
-
-#, fuzzy
-#~| msgid "Forgot Password?"
-#~ msgid "Confirm Password"
-#~ msgstr "هل نسيت كلمة السر؟ "
-
-#, fuzzy
-#~| msgid "Email"
-#~ msgid "Your Email"
-#~ msgstr "البريد الإلكتروني "
-
-#, fuzzy
-#~| msgid "Forgot Password?"
-#~ msgid "Current Password"
-#~ msgstr "هل نسيت كلمة السر؟ "
-
-#, fuzzy
-#~| msgid "Forgot Password?"
-#~ msgid "Confirm new Password"
-#~ msgstr "هل نسيت كلمة السر؟ "
-
-#, fuzzy
-#~| msgid "Login"
-#~ msgid "Last Login"
-#~ msgstr "تسجيل الدخول "
-
-#, fuzzy
-#~| msgid "Forgot Password?"
-#~ msgid "Your password"
-#~ msgstr "هل نسيت كلمة السر؟ "
-
-#, fuzzy
-#~| msgid "Forgot Password?"
-#~ msgid "Confirm New Password"
-#~ msgstr "هل نسيت كلمة السر؟ "
-
-#, fuzzy
-#~| msgid "Your poll has been updated."
-#~ msgid "Your password has successfully been updated, thank you."
-#~ msgstr "تم تحديث الإستطلاع الخاص بك "
-
-#, fuzzy
-#~| msgid "Forgot Password?"
-#~ msgid "Reset your Password"
-#~ msgstr "هل نسيت كلمة السر؟ "
-
-#, fuzzy
-#~| msgid "Your poll has been updated."
-#~ msgid "Your new %s has been created."
-#~ msgstr "تم تحديث الإستطلاع الخاص بك "
 
 #~ msgid "U-REPORTER STORY"
 #~ msgstr "مقالات يوريبورت U-REPORT"

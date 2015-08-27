@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-27 10:08+0000\n"
+"POT-Creation-Date: 2015-08-27 17:29+0000\n"
 "PO-Revision-Date: 2015-05-22 07:03+0000\n"
 "Last-Translator: Kidus <kidus.asfaw@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/ureport/language/"
@@ -190,11 +190,12 @@ msgid "Add Image"
 msgstr "Agregar imagen"
 
 #: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
+#: smartmin/templates/smartmin/list.html:14
 msgid "Search"
 msgstr "Buscar"
 
 #: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
-#: templates/polls/poll_list.haml:6
+#: smartmin/templates/smartmin/list.html:25 templates/polls/poll_list.haml:6
 msgid "Add"
 msgstr "Agregar"
 
@@ -211,12 +212,12 @@ msgstr "Bloques de contenido"
 msgid "%s Blocks"
 msgstr "%s Bloques"
 
-#: dash/dashblocks/views.py:159
+#: dash/dashblocks/views.py:159 smartmin/views.py:1097
 #, python-format
 msgid "Edit %s"
 msgstr "Editar %s"
 
-#: dash/dashblocks/views.py:183
+#: dash/dashblocks/views.py:183 smartmin/views.py:1286
 #, python-format
 msgid "Create %s"
 msgstr "Crear %s"
@@ -454,6 +455,8 @@ msgid "Admins"
 msgstr "Administradores"
 
 #: dash/orgs/templates/orgs/org_manage_accounts.haml:22
+#: smartmin/templates/smartmin/delete_confirm.html:26
+#: smartmin/templates/smartmin/update.html:10
 msgid "Remove"
 msgstr "Retirar"
 
@@ -498,7 +501,7 @@ msgstr "Uno de los correos electrónicos que ingresó es inválido."
 msgid "Manage %(name)s Accounts"
 msgstr "Manejar las cuentas de %(name)s "
 
-#: dash/orgs/views.py:439
+#: dash/orgs/views.py:439 smartmin/views.py:1261
 msgid "Create"
 msgstr "Crear"
 
@@ -611,6 +614,386 @@ msgstr ""
 "Imagen para mostrar en la página de la historia y en las vistas previas. "
 "(opcional)"
 
+#: smartmin/templates/smartmin/delete_confirm.html:11
+msgid "Remove Item?"
+msgstr "¿Remover contenido?"
+
+#: smartmin/templates/smartmin/delete_confirm.html:13
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Estás seguro de querer removerlo <b>%(object)s</b>?"
+
+#: smartmin/templates/smartmin/delete_confirm.html:17
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
+msgstr ""
+"Una vez que lo remuevas, se irá para siempre. No hay manera de deshacer esta "
+"operación."
+
+#: smartmin/templates/smartmin/delete_confirm.html:24
+#: smartmin/templates/smartmin/form.html:50
+#: smartmin/templates/smartmin/update.html:8
+#: templates/jobs/jobsource_create.haml:33
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: smartmin/templates/smartmin/list.html:79
+#, python-format
+msgid ""
+"\n"
+"\t\t%(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t\t%(counter)s resultado\n"
+"\t"
+msgstr[1] ""
+"\n"
+"         %(counter)s resultados\n"
+"        "
+
+#: smartmin/templates/smartmin/list.html:85
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"⇥Resultados %(start)s-%(end)s of %(count)s\n"
+"⇥"
+
+#: smartmin/templates/smartmin/list.html:95
+#: smartmin/templates/smartmin/list.html:97
+msgid "Previous"
+msgstr "Anterior"
+
+#: smartmin/templates/smartmin/list.html:128
+#: smartmin/templates/smartmin/list.html:130
+#: templates/jobs/jobsource_create.haml:30
+msgid "Next"
+msgstr "Siguiente"
+
+#: smartmin/templates/smartmin/read.html:13
+msgid "edit"
+msgstr "editar"
+
+#: smartmin/templates/smartmin/users/login.html:10
+#: templates/smartmin/users/login.haml:14
+msgid "Sign in"
+msgstr "Entrar"
+
+#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:381
+#: templates/frame.haml.py:563 templates/smartmin/users/login.haml:49
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: smartmin/templates/smartmin/users/login.html:35
+#: templates/smartmin/users/login.haml:54
+msgid "Forgot Password?"
+msgstr "¿Olvidó su clave?"
+
+#: smartmin/templates/smartmin/users/user_expired.html:7
+msgid "Token Expired"
+msgstr "Ficha Expirada"
+
+#: smartmin/templates/smartmin/users/user_failed.html:9
+msgid "Login Failure"
+msgstr "Error de acceso"
+
+#: smartmin/templates/smartmin/users/user_failed.html:11
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received "
+"%(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Disculpa, no puedes entrar en este momento porque hemos recibido "
+"%(failed_login_limit)s datos incorrectos de acceso."
+
+#: smartmin/templates/smartmin/users/user_failed.html:18
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Por favor esperat %(lockout_timeout)s minutos antes de intentar el acceso "
+"nuevamente."
+
+#: smartmin/templates/smartmin/users/user_failed.html:25
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
+msgstr ""
+"Alternativamente, puedes llenar el formulario de abajo para recuperar tu "
+"contraseña por e-mail."
+
+#: smartmin/templates/smartmin/users/user_failed.html:27
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Por favor contacta al administrador web para recuperar tu contraseña."
+
+#: smartmin/templates/smartmin/users/user_failed.html:39
+msgid "Email Address"
+msgstr "Correo electrónico"
+
+#: smartmin/templates/smartmin/users/user_failed.html:41
+msgid "Recover"
+msgstr "Recuperar"
+
+#: smartmin/templates/smartmin/users/user_forget.html:6
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
+msgstr ""
+"Por favor ingresa el correo electrónico con el que te registraste y te "
+"ayudaremos a recuperar tu contraseña."
+
+#: smartmin/templates/smartmin/users/user_newpassword.html:7
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you "
+"must pick a new password every %(expire_days)s days, and that passwords must "
+"not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Tu contraseña expiró.</strong> La política sel sitio establece que "
+"debes elegir una nueva clave cada %(expire_days)s días, y que tu nueva "
+"contraseña no debe haber sido usada previamente a %(window_days)s días."
+
+#: smartmin/users/views.py:28 smartmin/users/views.py:64
+#: smartmin/users/views.py:79 smartmin/users/views.py:124
+#: smartmin/users/views.py:223 smartmin/users/views.py:250
+msgid "New Password"
+msgstr "Nueva Contraseña"
+
+#: smartmin/users/views.py:36 smartmin/users/views.py:70
+#: smartmin/users/views.py:102 smartmin/users/views.py:148
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
+msgstr ""
+"Las contraseñas deben tener al menos 8 caracteres, incluyendo una letra "
+"mayúscula, una minúscula y un número"
+
+#: smartmin/users/views.py:73 smartmin/users/views.py:105
+#: smartmin/users/views.py:151
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
+msgstr ""
+"Has usado esta contraseña anteriormente, por favor elige una nueva clave."
+
+#: smartmin/users/views.py:78 smartmin/users/views.py:201
+#: smartmin/users/views.py:249
+msgid "Password"
+msgstr "Contraseña"
+
+#: smartmin/users/views.py:80
+msgid "Confirm Password"
+msgstr "Confirma tu Contraseña"
+
+#: smartmin/users/views.py:86
+msgid "Please enter your password to save changes."
+msgstr "Por favor pon tu clave para guardar los cambios."
+
+#: smartmin/users/views.py:95
+msgid "Confirm the new password by filling the this field"
+msgstr "Confirma tu nueva contraseña llenando este campo"
+
+#: smartmin/users/views.py:98
+msgid "New password doesn't match with its confirmation"
+msgstr "No coincide la confirmación de tu nueva contraseña"
+
+#: smartmin/users/views.py:110
+msgid "Your Email"
+msgstr "Tu correo electrónico"
+
+#: smartmin/users/views.py:117
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
+msgstr ""
+"La recuperación de correo electrónico no es viable, por favor contacta a tu "
+"administrador web para reiniciar tu contraseña manualmente."
+
+#: smartmin/users/views.py:122
+msgid "Current Password"
+msgstr "Contraseña Actual"
+
+#: smartmin/users/views.py:123
+msgid "Your current password"
+msgstr "Tu contraseña actual"
+
+#: smartmin/users/views.py:125
+msgid "Your new password."
+msgstr "Tu nueva contraseña."
+
+#: smartmin/users/views.py:126
+msgid "Confirm new Password"
+msgstr "Confirma tu nueva Contraseña"
+
+#: smartmin/users/views.py:127
+msgid "Confirm your new password."
+msgstr "Confirma tu nueva contraseña."
+
+#: smartmin/users/views.py:132
+msgid "Please enter your password to save changes"
+msgstr "Por favor pon tu contraseña para guardar cambios"
+
+#: smartmin/users/views.py:141
+msgid "Confirm your new password by entering it here"
+msgstr "Confirma aquí tu nueva contraseña "
+
+#: smartmin/users/views.py:144
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr ""
+"No coinciden tu nueva clave y su confirmación, por favor inténtalo nuevamente"
+
+#: smartmin/users/views.py:197
+msgid "New user created successfully."
+msgstr "Nuevo usuario creado exitosamente"
+
+#: smartmin/users/views.py:200 smartmin/users/views.py:222
+msgid "Groups"
+msgstr "Grupos"
+
+#: smartmin/users/views.py:200
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Los usuarios sólo conseguirán los permisos asignados para su grupo."
+
+#: smartmin/users/views.py:201
+msgid "Set the user's initial password here."
+msgstr "Define la clave inicial del usuario aquí."
+
+#: smartmin/users/views.py:220
+msgid "Last Login"
+msgstr "Último inicio de sesión"
+
+#: smartmin/users/views.py:221
+msgid "Is Active"
+msgstr "Está Activo"
+
+#: smartmin/users/views.py:221
+msgid "Whether this user is allowed to log into the site"
+msgstr "Si el usuario tiene permiso de acceder al sitio"
+
+#: smartmin/users/views.py:222
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr ""
+"Los usuarios solamente conseguirán los permisos permitidos para su grupo"
+
+#: smartmin/users/views.py:223
+msgid "You can reset the user's password by entering a new password here"
+msgstr ""
+"Puedes reiniciar la clave del usuario colocando una nueva contraseña aquí"
+
+#: smartmin/users/views.py:248
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: smartmin/users/views.py:249
+msgid "Your password"
+msgstr "Tu clave"
+
+#: smartmin/users/views.py:250
+msgid "If you want to set a new password, enter it here"
+msgstr "Si quieres poner una nueva clave, colócala aquí"
+
+#: smartmin/users/views.py:251
+msgid "Confirm New Password"
+msgstr "Confirmar Nueva Contraseña"
+
+#: smartmin/users/views.py:251
+msgid "Confirm your new password"
+msgstr "Confirmar tu nueva contraseña"
+
+#: smartmin/users/views.py:266
+msgid "Edit your profile"
+msgstr "Edita tu perfil"
+
+#: smartmin/users/views.py:269
+msgid "Password Recovery"
+msgstr "Recuperación de Contraseña"
+
+#: smartmin/users/views.py:273
+msgid "An Email has been sent to your account with further instructions."
+msgstr ""
+"Un correo electrónico ha sido enviado a tu cuenta con más instrucciones."
+
+#: smartmin/users/views.py:301
+msgid "Password Recovery Request"
+msgstr "Petición de Recuperación de Clave"
+
+#: smartmin/users/views.py:310
+msgid "Pick a new password"
+msgstr "Elige una nueva clave"
+
+#: smartmin/users/views.py:312
+msgid "Your password has successfully been updated, thank you."
+msgstr "Tu contraseña ha sido actualizada con éxito, muchas gracias."
+
+#: smartmin/users/views.py:338
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Ya te conectaste como %s"
+
+#: smartmin/users/views.py:351
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
+msgstr ""
+"Contraseña Actualizada con Éxito. Ahora puedes iniciar sesión usando tu "
+"nueva contraseña."
+
+#: smartmin/users/views.py:354
+msgid "Reset your Password"
+msgstr "Resetea tu Contraseña"
+
+#: smartmin/users/views.py:365
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by "
+"entering your email here."
+msgstr ""
+"Tu enlace ha expirado por razones de seguridad. Por favor reinicia el "
+"proceso colocando tu correo electrónico aquí."
+
+#: smartmin/views.py:838
+msgid "Submit"
+msgstr "Enviar"
+
+#: smartmin/views.py:845
+msgid "Form"
+msgstr "Formulario"
+
+#: smartmin/views.py:1166
+msgid "Save Changes"
+msgstr "Guardar Cambios"
+
+#: smartmin/views.py:1277
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Tu nuevo %s ha sido creado."
+
+#: smartmin/views.py:1296
+#, python-format
+msgid "Import %s"
+msgstr "Importar %s"
+
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
 msgstr "U-Report"
@@ -707,11 +1090,6 @@ msgstr ""
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: templates/frame.haml:381 templates/frame.haml.py:563
-#: templates/smartmin/users/login.haml:49
-msgid "Login"
-msgstr "Iniciar sesión"
-
 #: templates/frame.haml:421
 msgid "About"
 msgstr "Acerca "
@@ -753,14 +1131,6 @@ msgid ""
 "shown on</div>\n"
 "      "
 msgstr ""
-
-#: templates/jobs/jobsource_create.haml:30
-msgid "Next"
-msgstr "Siguiente"
-
-#: templates/jobs/jobsource_create.haml:33
-msgid "Cancel"
-msgstr "Cancelar"
 
 #: templates/jobs/jobsource_create.haml:40
 msgid "Back"
@@ -1290,14 +1660,6 @@ msgstr ""
 msgid "Week of"
 msgstr ""
 
-#: templates/smartmin/users/login.haml:14
-msgid "Sign in"
-msgstr "Entrar"
-
-#: templates/smartmin/users/login.haml:54
-msgid "Forgot Password?"
-msgstr "¿Olvidó su clave?"
-
 #: ureport/admins/views.py:22
 #, fuzzy, python-format
 #| msgid "The name of this organization"
@@ -1726,286 +2088,6 @@ msgstr "Algo para activar las localizaciones "
 
 #~ msgid "Organization"
 #~ msgstr "Organización"
-
-#~ msgid "Remove Item?"
-#~ msgstr "¿Remover contenido?"
-
-#~ msgid ""
-#~ "\n"
-#~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "Estás seguro de querer removerlo <b>%(object)s</b>?"
-
-#~ msgid ""
-#~ "Once it is removed, it will be gone forever. There is no way to undo this "
-#~ "operation."
-#~ msgstr ""
-#~ "Una vez que lo remuevas, se irá para siempre. No hay manera de deshacer "
-#~ "esta operación."
-
-#~ msgid ""
-#~ "\n"
-#~ "\t\t%(counter)s result\n"
-#~ "\t"
-#~ msgid_plural ""
-#~ "\n"
-#~ "         %(counter)s results\n"
-#~ "        "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "\t\t%(counter)s resultado\n"
-#~ "\t"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "         %(counter)s resultados\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "\tResults %(start)s-%(end)s of %(count)s\n"
-#~ "\t"
-#~ msgstr ""
-#~ "\n"
-#~ "⇥Resultados %(start)s-%(end)s of %(count)s\n"
-#~ "⇥"
-
-#~ msgid "Previous"
-#~ msgstr "Anterior"
-
-#~ msgid "edit"
-#~ msgstr "editar"
-
-#~ msgid "Token Expired"
-#~ msgstr "Ficha Expirada"
-
-#~ msgid "Login Failure"
-#~ msgstr "Error de acceso"
-
-#~ msgid ""
-#~ "\n"
-#~ "      Sorry, you cannot log in at this time because we received "
-#~ "%(failed_login_limit)s incorrect login attempts.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Disculpa, no puedes entrar en este momento porque hemos recibido "
-#~ "%(failed_login_limit)s datos incorrectos de acceso."
-
-#~ msgid ""
-#~ "\n"
-#~ "      Please wait %(lockout_timeout)s minutes before to try log in "
-#~ "again.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Por favor esperat %(lockout_timeout)s minutos antes de intentar el acceso "
-#~ "nuevamente."
-
-#~ msgid ""
-#~ "Alternatively, you can fill out the form below to have your password "
-#~ "reset via e-mail."
-#~ msgstr ""
-#~ "Alternativamente, puedes llenar el formulario de abajo para recuperar tu "
-#~ "contraseña por e-mail."
-
-#~ msgid ""
-#~ "Please contact the website administrator to have your password reset."
-#~ msgstr ""
-#~ "Por favor contacta al administrador web para recuperar tu contraseña."
-
-#~ msgid "Email Address"
-#~ msgstr "Correo electrónico"
-
-#~ msgid "Recover"
-#~ msgstr "Recuperar"
-
-#~ msgid ""
-#~ "Please enter the email address you used to sign up and we will help you "
-#~ "recover your password."
-#~ msgstr ""
-#~ "Por favor ingresa el correo electrónico con el que te registraste y te "
-#~ "ayudaremos a recuperar tu contraseña."
-
-#~ msgid ""
-#~ "\n"
-#~ "  <strong>Your password has expired.</strong> Site policy states that you "
-#~ "must pick a new password every %(expire_days)s days, and that passwords "
-#~ "must not have been used within the previous %(window_days)s days.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "<strong>Tu contraseña expiró.</strong> La política sel sitio establece "
-#~ "que debes elegir una nueva clave cada %(expire_days)s días, y que tu "
-#~ "nueva contraseña no debe haber sido usada previamente a %(window_days)s "
-#~ "días."
-
-#~ msgid "New Password"
-#~ msgstr "Nueva Contraseña"
-
-#~ msgid ""
-#~ "Passwords must have at least 8 characters, including one uppercase, one "
-#~ "lowercase and one number"
-#~ msgstr ""
-#~ "Las contraseñas deben tener al menos 8 caracteres, incluyendo una letra "
-#~ "mayúscula, una minúscula y un número"
-
-#~ msgid ""
-#~ "You have used this password before in the past year, please use a new "
-#~ "password."
-#~ msgstr ""
-#~ "Has usado esta contraseña anteriormente, por favor elige una nueva clave."
-
-#~ msgid "Password"
-#~ msgstr "Contraseña"
-
-#~ msgid "Confirm Password"
-#~ msgstr "Confirma tu Contraseña"
-
-#~ msgid "Please enter your password to save changes."
-#~ msgstr "Por favor pon tu clave para guardar los cambios."
-
-#~ msgid "Confirm the new password by filling the this field"
-#~ msgstr "Confirma tu nueva contraseña llenando este campo"
-
-#~ msgid "New password doesn't match with its confirmation"
-#~ msgstr "No coincide la confirmación de tu nueva contraseña"
-
-#~ msgid "Your Email"
-#~ msgstr "Tu correo electrónico"
-
-#~ msgid ""
-#~ "E-mail recovery is not supported, please contact the website "
-#~ "administrator to reset your password manually."
-#~ msgstr ""
-#~ "La recuperación de correo electrónico no es viable, por favor contacta a "
-#~ "tu administrador web para reiniciar tu contraseña manualmente."
-
-#~ msgid "Current Password"
-#~ msgstr "Contraseña Actual"
-
-#~ msgid "Your current password"
-#~ msgstr "Tu contraseña actual"
-
-#~ msgid "Your new password."
-#~ msgstr "Tu nueva contraseña."
-
-#~ msgid "Confirm new Password"
-#~ msgstr "Confirma tu nueva Contraseña"
-
-#~ msgid "Confirm your new password."
-#~ msgstr "Confirma tu nueva contraseña."
-
-#~ msgid "Please enter your password to save changes"
-#~ msgstr "Por favor pon tu contraseña para guardar cambios"
-
-#~ msgid "Confirm your new password by entering it here"
-#~ msgstr "Confirma aquí tu nueva contraseña "
-
-#~ msgid "Mismatch between your new password and confirmation, try again"
-#~ msgstr ""
-#~ "No coinciden tu nueva clave y su confirmación, por favor inténtalo "
-#~ "nuevamente"
-
-#~ msgid "New user created successfully."
-#~ msgstr "Nuevo usuario creado exitosamente"
-
-#~ msgid "Groups"
-#~ msgstr "Grupos"
-
-#~ msgid ""
-#~ "Users will only get those permissions that are allowed for their group."
-#~ msgstr "Los usuarios sólo conseguirán los permisos asignados para su grupo."
-
-#~ msgid "Set the user's initial password here."
-#~ msgstr "Define la clave inicial del usuario aquí."
-
-#~ msgid "Last Login"
-#~ msgstr "Último inicio de sesión"
-
-#~ msgid "Is Active"
-#~ msgstr "Está Activo"
-
-#~ msgid "Whether this user is allowed to log into the site"
-#~ msgstr "Si el usuario tiene permiso de acceder al sitio"
-
-#~ msgid ""
-#~ "Users will only get those permissions that are allowed for their group"
-#~ msgstr ""
-#~ "Los usuarios solamente conseguirán los permisos permitidos para su grupo"
-
-#~ msgid "You can reset the user's password by entering a new password here"
-#~ msgstr ""
-#~ "Puedes reiniciar la clave del usuario colocando una nueva contraseña aquí"
-
-#~ msgid "Username"
-#~ msgstr "Nombre de usuario"
-
-#~ msgid "Your password"
-#~ msgstr "Tu clave"
-
-#~ msgid "If you want to set a new password, enter it here"
-#~ msgstr "Si quieres poner una nueva clave, colócala aquí"
-
-#~ msgid "Confirm New Password"
-#~ msgstr "Confirmar Nueva Contraseña"
-
-#~ msgid "Confirm your new password"
-#~ msgstr "Confirmar tu nueva contraseña"
-
-#~ msgid "Edit your profile"
-#~ msgstr "Edita tu perfil"
-
-#~ msgid "Password Recovery"
-#~ msgstr "Recuperación de Contraseña"
-
-#~ msgid "An Email has been sent to your account with further instructions."
-#~ msgstr ""
-#~ "Un correo electrónico ha sido enviado a tu cuenta con más instrucciones."
-
-#~ msgid "Password Recovery Request"
-#~ msgstr "Petición de Recuperación de Clave"
-
-#~ msgid "Pick a new password"
-#~ msgstr "Elige una nueva clave"
-
-#~ msgid "Your password has successfully been updated, thank you."
-#~ msgstr "Tu contraseña ha sido actualizada con éxito, muchas gracias."
-
-#~ msgid "You are now logged in as %s"
-#~ msgstr "Ya te conectaste como %s"
-
-#~ msgid ""
-#~ "Password Updated Successfully. Now you can log in using your new password."
-#~ msgstr ""
-#~ "Contraseña Actualizada con Éxito. Ahora puedes iniciar sesión usando tu "
-#~ "nueva contraseña."
-
-#~ msgid "Reset your Password"
-#~ msgstr "Resetea tu Contraseña"
-
-#~ msgid ""
-#~ "Your link has expired for security reasons. Please reinitiate the process "
-#~ "by entering your email here."
-#~ msgstr ""
-#~ "Tu enlace ha expirado por razones de seguridad. Por favor reinicia el "
-#~ "proceso colocando tu correo electrónico aquí."
-
-#~ msgid "Submit"
-#~ msgstr "Enviar"
-
-#~ msgid "Form"
-#~ msgstr "Formulario"
-
-#~ msgid "Save Changes"
-#~ msgstr "Guardar Cambios"
-
-#~ msgid "Your new %s has been created."
-#~ msgstr "Tu nuevo %s ha sido creado."
-
-#~ msgid "Import %s"
-#~ msgstr "Importar %s"
 
 #~ msgid "U-REPORTER STORY"
 #~ msgstr "HISTORIA DE U-REPORTER"
