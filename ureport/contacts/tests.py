@@ -53,8 +53,15 @@ class ContactTest(DashTest):
         Contact.objects.create(**kwargs)
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
-    def test_contact(self):
-        Contact.import_contacts(self.nigeria)
+    def test_fetch_contacts(self):
+        # contact no longer in ureporters
+        Contact.objects.create(uuid='C-OLD', org=self.nigeria, gender='M', born=1985, occupation='Pirate',
+                               registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='Lagos',
+                               district='Oyo')
+
+        Contact.fetch_contacts(self.nigeria)
+        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid='C-OLD').first())
+
         contact = Contact.objects.get()
         self.assertEqual(contact.uuid, '000-001')
         self.assertEqual(contact.org, self.nigeria)

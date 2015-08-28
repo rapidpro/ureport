@@ -110,7 +110,7 @@ class Contact(models.Model):
             return cls.objects.create(**kwargs)
 
     @classmethod
-    def import_contacts(cls, org):
+    def fetch_contacts(cls, org):
         reporter_group = org.get_config('reporter_group')
 
         temba_client = org.get_temba_client()
@@ -126,7 +126,7 @@ class Contact(models.Model):
             cls.update_or_create_from_temba(org, contact)
             seen_uuids.append(contact.uuid)
 
-        # remove any contacts that's no longer a ureporter
+        # remove any contact that's no longer a ureporter
         cls.objects.filter(org=org).exclude(uuid__in=seen_uuids).delete()
 
 
