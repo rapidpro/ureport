@@ -138,8 +138,9 @@ class PollList(BaseListAPIView):
             if self.request.query_params.get('latest') == 'true':
                 org = self.kwargs.get('org')
                 main_poll = Poll.get_main_poll(org)
-                latest_poll_id = main_poll.id
-                q = q.filter(id=latest_poll_id)
+                if main_poll:
+                    latest_poll_id = main_poll.id
+                    q = q.filter(id=latest_poll_id)
 
         return q
 
