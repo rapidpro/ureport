@@ -101,6 +101,7 @@ class PollList(BaseListAPIView):
     * **title** - the TITLE of the poll (string)
     * **org** - the ID of the org that owns this poll (int)
     * **category** - the CATEGORIES of of this poll (dictionary)
+    * **latest** - the latest poll, if set to 'true' (dictionary)
 
     Example:
 
@@ -133,6 +134,13 @@ class PollList(BaseListAPIView):
         q = super(PollList, self).get_queryset()
         if self.request.query_params.get('flow_uuid', None):
             q = q.filter(flow_uuid=self.request.query_params.get('flow_uuid'))
+        if self.request.query_params.get('latest', None):
+            if self.request.query_params.get('latest') == 'true':
+                org = self.kwargs.get('org')
+                main_poll = Poll.get_main_poll(org)
+                latest_poll_id = main_poll.id
+                q = q.filter(id=latest_poll_id)
+
         return q
 
 
@@ -461,5 +469,3 @@ class StoryDetails(RetrieveAPIView):
     """
     serializer_class = StoryReadSerializer
     queryset = Story.objects.filter(is_active=True)
-
-
