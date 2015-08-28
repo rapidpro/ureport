@@ -7,7 +7,6 @@ from django.db.models import Sum
 from django.utils.translation import ugettext_lazy as _
 import regex
 from ureport.locations.models import Boundary
-from ureport.utils import json_date_to_datetime
 
 
 class Contact(models.Model):
@@ -42,6 +41,8 @@ class Contact(models.Model):
 
     @classmethod
     def kwargs_from_temba(cls, org, temba_contact):
+        from ureport.utils import json_date_to_datetime
+
 
         state = ''
         district = ''

@@ -57,6 +57,8 @@ class IndexView(SmartTemplateView):
         if org.get_config('is_global'):
             context['global_counter'] = get_global_count()
 
+        context['gender_stats'] = org.get_gender_stats()
+
         return context
 
 
@@ -309,6 +311,8 @@ class UreportersView(SmartTemplateView):
 
         # remove the first option '' from calender.month_abbr
         context['months'] = [str(_('%s')) % m for m in calendar.month_abbr][1:]
+
+        context['gender_stats'] = org.get_gender_stats()
 
         return context
 

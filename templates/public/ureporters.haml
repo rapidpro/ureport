@@ -1,6 +1,6 @@
 - extends "public_base.html"
 
--load compress ureport dashblocks thumbnail i18n
+-load compress ureport dashblocks thumbnail i18n humanize
 
 - block hero
   - load_qbs request.org 'ureporters'
@@ -61,7 +61,7 @@
                 -if is_iorg
                   -include "public/mobile_gender_include.haml"
                 -else
-                  .contact-field-graph-gender{ data-contact-field:'{{org|config:"gender_label"}}', id: "graph-contact-field-gender"}
+                  .contact-field-graph-gender
                     %table.ureporter-gender{style:"width:100%"}
                       %tbody
                         %tr
@@ -70,16 +70,18 @@
                               .glyph.icon-Icon-02
 
                             #male-percentage.primary-border-color.percentage-gender
-                              %span ---
+                              %span {{ gender_stats.male_percentage }}
                             #male-summary.summary-gender
+                              {{ gender_stats.male_count|intcomma }}
 
                           %td.female-gender
                             .icon-gender.primary-color
                               .glyph.icon-Icon-01
 
                             #female-percentage.primary-border-color.percentage-gender
-                              %span ---
+                              %span {{ gender_stats.female_percentage }}
                             #female-summary.summary-gender
+                              {{ gender_stats.female_count|intcomma }}
 
       -if not is_iorg
         .row.ureporter-states.hide-on-small
