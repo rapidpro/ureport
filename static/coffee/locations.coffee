@@ -18,7 +18,7 @@ initMap = (id, geojson, question, districtLabel) ->
   otherCategory = null
   displayOthers = false
 
-  mainLabelName = "All"
+  mainLabelName = window.string_All
 
   colors = ['rgb(165,0,38)','rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,139)','rgb(255,255,191)','rgb(217,239,139)','rgb(166,217,106)','rgb(102,189,99)','rgb(26,152,80)','rgb(0,104,55)']
 
@@ -71,7 +71,7 @@ initMap = (id, geojson, question, districtLabel) ->
 
         div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i> " + lower + "% " + category + "<br/>"
       else
-        div.innerHTML += "<i style=\"background:" + colors[i] + "\"></i>Even<br/>"
+        div.innerHTML += "<i style=\"background:" + colors[i] + "\"></i>" + window.string_Even + "<br/>"
       i++
 
     return div
@@ -118,13 +118,13 @@ initMap = (id, geojson, question, districtLabel) ->
   clickFeature = (e) ->
     if (allowDistrictZoom and e.target.feature.properties.level == 1)
       map.fitBounds(e.target.getBounds(), {step: .25})
-      mainLabelName = e.target.feature.properties.name + " (State)"
+      mainLabelName = e.target.feature.properties.name + " (" + window.string_State + ")"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
     else
       resetBoundaries()
       scale.update()
-      mainLabelName = "All"
+      mainLabelName = window.string_All
 
   loadBoundary = (boundary, target) ->
     boundaryId = if boundary then boundary.id else null
@@ -159,7 +159,7 @@ initMap = (id, geojson, question, districtLabel) ->
 
         # more than two categories? set our other category label to Other
         if numCategories > 2
-          otherCategory = "Other*"
+          otherCategory = window.string_Other
           displayOthers = true
         else
           # otherwise, set it to our other category
@@ -278,8 +278,8 @@ initMap = (id, geojson, question, districtLabel) ->
     html += "<div class='scale-map-circle-inner'></div>"
     html += "<div class='scale-map-hline primary-border-color'></div>"
     html += "<div class='scale-map-vline primary-border-color'></div>"
-    html += "<div class='national-level primary-color'>NATIONAL</div>"
-    html += "<div class='state-level primary-color'>STATE</div>"
+    html += "<div class='national-level primary-color'>" + window.string_National.toUpperCase() + "</div>"
+    html += "<div class='state-level primary-color'>" + window.string_State.toUpperCase() + "</div>"
 
     @_div.innerHTML = html
 
@@ -307,11 +307,11 @@ initMap = (id, geojson, question, districtLabel) ->
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + label + "</h2>"
 
-      html += "<div class='top-border primary-color'>PARTICIPATION LEVEL</div>"
+      html += "<div class='top-border primary-color'>" + window.string_Participation_Level.toUpperCase() + "</div>"
       html += "<div><table><tr><td class='info-count'>" + window.intcomma(results.set) + "</td><td class='info-count'>" + window.intcomma(results.set + results.unset) + "</td></tr>"
-      html += "<tr><td class='info-tiny'>Responses</td><td class='info-tiny'>Reporters in " + label + "</td></tr></table></div>"
+      html += "<tr><td class='info-tiny'>" + window.string_Responses + "</td><td class='info-tiny'>" + window.string_Reporters_in + " " + label + "</td></tr></table></div>"
 
-      html += "<div class='top-border primary-color'>RESULTS</div>"
+      html += "<div class='top-border primary-color'>" + window.string_Results.toUpperCase() + "</div>"
 
       percentage = results.percentage
       if percentage < 0 or results.set == 0
@@ -334,7 +334,7 @@ initMap = (id, geojson, question, districtLabel) ->
 
       if displayOthers and results.set > 0
         html += "<div class='other-details'>"
-        html += "<div class='other-help'>* Other answers include:</div><table>"
+        html += "<div class='other-help'>" + window.string_Other_answers +":" + "</div><table>"
         for label, count of results.others
           percentage = Math.round((100 * count) / results.set)
           html += "<tr>"

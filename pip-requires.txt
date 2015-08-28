@@ -1,6 +1,6 @@
 -e git+https://github.com/nyaruka/smartmin.git#egg=smartmin
 Django==1.7.2
--e git+https://github.com/rapidpro/rapidpro-python#egg=rapidpro-python
+rapidpro-python
 -e git+https://github.com/rapidpro/dash.git#egg=dash
 celery
 coverage
@@ -13,6 +13,8 @@ django-nose
 django-reversion
 django-rosetta
 django-storages
+django-rest-swagger
+djangorestframework
 dj-database-url
 boto
 Pillow

@@ -46,7 +46,8 @@
         .row
           .col-md-12
             %input.category{ type:"radio", name:"category", value:"-1", checked:"true", id:"category-all"}
-            %label{ for:"category-all" } All
+            %label{ for:"category-all" }
+              -trans "All"
 
         .row
           -for category in categories

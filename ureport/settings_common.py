@@ -249,6 +249,7 @@ INSTALLED_APPS = (
 
     # ureport apps
     'ureport.admins',
+    'ureport.api',
     'ureport.assets',
     'ureport.contacts',
     'ureport.countries',
@@ -258,6 +259,8 @@ INSTALLED_APPS = (
     'ureport.polls',
 
     'django_countries',
+    'rest_framework',
+    'rest_framework_swagger',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -526,3 +529,20 @@ PREVIOUS_ORG_SITES = [
 
 # Disable logging during test runs.
 logging.disable(logging.CRITICAL)
+
+#-----------------------------------------------------------------------------------
+# rest_framework config
+#-----------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    'PAGINATE_BY': 10,                 # Default to 10
+    'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
+    'MAX_PAGINATE_BY': 100,
+}
+
+SWAGGER_SETTINGS = {
+    'api_version': '0.1',
+    'api_path': '/api/v1/',
+    'enabled_methods': [
+        'get'
+    ],
+}
