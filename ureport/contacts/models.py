@@ -6,6 +6,7 @@ from django.db import models
 from django.db.models import Sum
 from django.utils.translation import ugettext_lazy as _
 import regex
+from ureport.locations.models import Boundary
 from ureport.utils import json_date_to_datetime
 
 
@@ -43,18 +44,22 @@ class Contact(models.Model):
     def kwargs_from_temba(cls, org, temba_contact):
 
         state = ''
+        district = ''
+
         state_field = org.get_config('state_label')
         if state_field:
-            state = temba_contact.fields.get(cls.make_key(state_field), '')
-            if not state:
-                state = ''
+            state_name = temba_contact.fields.get(cls.make_key(state_field), None)
+            state_boundary = Boundary.objects.filter(org=org, level=1, name__iexact=state_name).first()
+            if state_boundary:
+                state = state_boundary.osm_id
 
-        district = ''
-        district_field = org.get_config('district_label')
-        if district_field:
-            district = temba_contact.fields.get(cls.make_key(district_field), '')
-            if not district:
-                district = ''
+            district_field = org.get_config('district_label')
+            if district_field:
+                district_name = temba_contact.fields.get(cls.make_key(district_field), None)
+                district_boundary = Boundary.objects.filter(org=org, level=2, name__iexact=district_name,
+                                                            parent=state_boundary).first()
+                if district_boundary:
+                    district = district_boundary.osm_id
 
         registered_on = None
         registration_field = org.get_config('registration_label')

@@ -72,10 +72,10 @@ BEGIN
     END IF;
 
     IF _contact.state IS NOT NULL THEN
-      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('state:', LOWER(_contact.state)), _count);
+      PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('state:', UPPER(_contact.state)), _count);
 
       IF _contact.district IS NOT NULL THEN
-        PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('district:', LOWER(_contact.state), ':', LOWER(_contact.district)), _count);
+        PERFORM ureport_insert_reporters_counter(_contact.org_id, CONCAT('district:', UPPER(_contact.district)), _count);
       END IF;
 
     END IF;
