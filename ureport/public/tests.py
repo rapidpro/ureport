@@ -18,6 +18,7 @@ from dash.orgs.models import Org
 
 from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
+from ureport.locations.models import Boundary
 from ureport.news.models import Video, NewsItem
 from ureport.polls.models import Poll, PollQuestion
 from ureport.tests import DashTest, MockAPI, UreportJobsTest, MockTembaClient
@@ -764,68 +765,54 @@ class PublicTest(DashTest):
 
     def test_boundary_view(self):
         country_boundary_url = reverse('public.boundaries')
-        state_boundary_url = reverse('public.boundaries', args=['R123'])
+        state_boundary_url = reverse('public.boundaries', args=['R23456'])
 
-        with mock.patch("dash.orgs.models.Org.get_country_geojson") as mock_get_country_geojson:
-            mock_get_country_geojson.return_value = dict(
-                   type="FeatureCollection",
-                   features=[
-                       dict(
-                           type='Feature',
-                           properties=dict(
-                               id="R3713501",
-                               level=1,
-                               name="Abia"
-                           ),
-                           geometry=dict(
-                               type="MultiPolygon",
-                               coordinates=[
-                                   [
-                                       [
-                                           [7, 5]
-                                       ]
-                                   ]
-                               ]
-                           )
-                       )
-                   ]
-            )
+        self.country = Boundary.objects.create(org=self.uganda, osm_id="R12345", name="Uganda", level=0, parent=None,
+                                               geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
 
-            response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
-            self.assertEquals(response.status_code, 200)
+        self.kampala = Boundary.objects.create(org=self.uganda, osm_id="R23456", name="Kampala",
+                                               level=1, parent=self.country,
+                                               geometry='{"type":"MultiPolygon", "coordinates":[[3, 4]]}')
 
-            output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R3713501",
+        self.lugogo = Boundary.objects.create(org=self.uganda, osm_id="R34567", name="Lugogo", level=2,
+                                              parent=self.kampala,
+                                              geometry='{"type":"MultiPolygon", "coordinates":[[5, 6]]}')
+
+        self.mbarara = Boundary.objects.create(org=self.uganda, osm_id="R987", name="Mbarara",
+                                               level=1, parent=self.country,
+                                               geometry='{"type":"MultiPolygon", "coordinates":[[9, 9]]}')
+
+        self.falcons = Boundary.objects.create(org=self.uganda, osm_id="R9988", name="Falcons", level=2,
+                                               parent=self.mbarara,
+                                               geometry='{"type":"MultiPolygon", "coordinates":[[8, 8]]}')
+
+        response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+
+        output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R987",
                                                                                                level=1,
-                                                                                               name="Abia"),
-                                                               geometry=dict(type="MultiPolygon",
-                                                                             coordinates=[[[[7, 5]]]]))])
+                                                                                               name='Mbarara'),
+                                                               geometry=dict(type='MultiPolygon',
+                                                                             coordinates=[[9, 9]])),
+                                                          dict(type='Feature', properties=dict(id="R23456",
+                                                                                               level=1,
+                                                                                               name='Kampala'),
+                                                               geometry=dict(type='MultiPolygon',
+                                                                             coordinates=[[3, 4]]))
 
-            self.assertEquals(json.dumps(output), response.content)
+                                                          ])
 
-        with mock.patch("dash.orgs.models.Org.get_state_geojson") as mock_get_state_geojson:
-            mock_get_state_geojson.return_value = dict(type="FeatureCollection",
-                    features=[dict(type='Feature',
-                                   properties=dict(id="R3713502",
-                                                   level=2,
-                                                   name="Aba North"),
-                                   geometry=dict(type="MultiPolygon",
-                                                 coordinates=[[[[8, 4]]]]
-                                                 )
-                                   )
-                            ]
-                    )
+        self.assertEquals(json.dumps(output), response.content)
 
+        response = self.client.get(state_boundary_url, SERVER_NAME='uganda.ureport.io')
 
-            response = self.client.get(state_boundary_url, SERVER_NAME='uganda.ureport.io')
-            self.assertEquals(response.status_code, 200)
-
-            output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R3713502",
+        output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R34567",
                                                                                                level=2,
-                                                                                               name="Aba North"),
-                                                               geometry=dict(type="MultiPolygon",
-                                                                             coordinates=[[[[8, 4]]]]))])
+                                                                                               name='Lugogo'),
+                                                               geometry=dict(type='MultiPolygon',
+                                                                             coordinates=[[5,6]]))])
 
-            self.assertEquals(json.dumps(output), response.content)
+        self.assertEquals(json.dumps(output), response.content)
 
         self.uganda.set_config("is_global", True)
 
@@ -1092,27 +1079,16 @@ class PublicTest(DashTest):
 
         self.uganda.set_config('state_label', 'State')
 
-        with mock.patch('dash.orgs.models.Org.get_contact_field_results') as mock_results:
-            mock_results.return_value = "API_RESULTS"
+        with mock.patch('dash.orgs.models.Org.get_locations_stats') as mock_locations_stats:
+            mock_locations_stats.return_value = 'LOCATIONS_STATS'
 
-            with mock.patch('dash.orgs.models.Org.organize_categories_data') as mock_organize:
-                mock_organize.return_value = "ORGANIZED"
-
-                response = self.client.get(reporters_results + "?" + urlencode(dict(contact_field='field_name')),
-                                           SERVER_NAME='uganda.ureport.io')
-                self.assertEquals(response.status_code, 200)
-                self.assertEquals(response.content, json.dumps("ORGANIZED"))
-                mock_results.assert_called_with('field_name', None)
-                mock_organize.assert_called_with('field_name', "API_RESULTS")
-
-                response = self.client.get(
-                    reporters_results + "?" + urlencode(dict(contact_field='field_name',
-                                                             segment=json.dumps(dict(location='State')))),
+            response = self.client.get(
+                    reporters_results + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
                     SERVER_NAME='uganda.ureport.io')
-                self.assertEquals(response.status_code, 200)
-                self.assertEquals(response.content, json.dumps("ORGANIZED"))
-                mock_results.assert_called_with('field_name', dict(location='State'))
-                mock_organize.assert_called_with('field_name', "API_RESULTS")
+
+            self.assertEquals(response.status_code, 200)
+            self.assertEquals(response.content, json.dumps("LOCATIONS_STATS"))
+            mock_locations_stats.assert_called_with(dict(location='State'))
 
     def test_news(self):
         news_url = reverse('public.news')

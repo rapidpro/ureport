@@ -33,7 +33,7 @@ class LocationTest(DashTest):
 
         # Old boundary should be deleted after we fetch boundaries
         old_boundary = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None, level=0,
-                                               geometry='{"type":"MultiPolygon", "cordinates":[[1, 2]]}')
+                                               geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
 
         Boundary.fetch_boundaries(self.nigeria)
         self.assertIsNone(Boundary.objects.filter(org=self.nigeria, osm_id__iexact='OLD123').first())
