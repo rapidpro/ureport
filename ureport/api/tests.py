@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from ureport.api.serializers import generate_absolute_url_from_file, CategoryReadSerializer, StoryReadSerializer
 from ureport.news.models import NewsItem, Video
-from ureport.polls.models import Poll
+from ureport.polls.models import Poll, PollQuestion
 
 
 class UreportAPITests(APITestCase):
@@ -29,6 +29,9 @@ class UreportAPITests(APITestCase):
         self.reg_poll = self.create_poll('registration')
         self.another_poll = self.create_poll('another')
         self.featured_poll = self.create_poll('featured', is_featured=True)
+        self.poll_question = PollQuestion.objects.create(poll=self.featured_poll, title='test question',
+                                                         ruleset_uuid='uuid', created_by=self.superuser,
+                                                         modified_by=self.superuser)
         self.news_item = self.create_news_item('Some item')
         self.create_video('Test Video')
         self.create_story("Test Story")
@@ -151,7 +154,6 @@ class UreportAPITests(APITestCase):
         self.assertDictEqual(response.data, dict(id=poll.pk,
                                              flow_uuid=poll.flow_uuid,
                                              title=poll.title,
-                                             is_featured=poll.is_featured,
                                              org=poll.org_id,
                                              ))
         self.assertDictEqual(dict(category), dict(OrderedDict(name=poll.category.name,
