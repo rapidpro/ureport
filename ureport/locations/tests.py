@@ -56,6 +56,6 @@ class LocationTest(DashTest):
                          dict(type='Feature', geometry=dict(type='MultiPolygon', coordinates=['COORDINATES']),
                               properties=dict(id='R12345', level=0, name='Nigeria')))
 
-        self.assertEqual(country_boundary.as_geojson(),
+        self.assertEqual(state_boundary.as_geojson(),
                          dict(type='Feature', geometry=dict(type='MultiPolygon', coordinates=['COORDINATES']),
                               properties=dict(id='R23456', level=1, name='Lagos')))
