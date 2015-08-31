@@ -1,6 +1,6 @@
 from dash.orgs.models import Org
 from dash.stories.models import Story
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, get_object_or_404
 from ureport.api.serializers import PollReadSerializer, NewsItemReadSerializer, VideoReadSerializer, ImageReadSerializer, \
     OrgReadSerializer, StoryReadSerializer
 from ureport.assets.models import Image
@@ -161,6 +161,12 @@ class PollDetails(RetrieveAPIView):
     """
     serializer_class = PollReadSerializer
     queryset = Poll.objects.filter(is_active=True)
+
+    def get_object(self):
+        if self.kwargs.get('org'):
+            org = get_object_or_404(Org.objects.all(), pk=self.kwargs.get('org'))
+            return Poll.get_main_poll(org)
+        return super(PollDetails, self).get_object()
 
 
 class NewsItemList(BaseListAPIView):
