@@ -58,6 +58,8 @@ class IndexView(SmartTemplateView):
             context['global_counter'] = get_global_count()
 
         context['gender_stats'] = org.get_gender_stats()
+        context['age_stats'] = org.get_age_stats()
+        context['reporters'] = org.get_reporters_count()
 
         return context
 
@@ -313,8 +315,14 @@ class UreportersView(SmartTemplateView):
         context['months'] = [str(_('%s')) % m for m in calendar.month_abbr][1:]
 
         context['gender_stats'] = org.get_gender_stats()
+        context['age_stats'] = org.get_age_stats()
+
+        context['registration_stats'] = org.get_registration_stats()
+
+        context['occupation_stats'] = org.get_occupation_stats()
 
         return context
+
 
 class JoinEngageView(SmartTemplateView):
     template_name = 'public/join_engage.html'

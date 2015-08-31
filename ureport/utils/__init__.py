@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import copy
 import json
 import math
@@ -9,6 +11,7 @@ from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.encoding import force_text
 from django_redis import get_redis_connection
 import pycountry
 import pytz
@@ -466,6 +469,87 @@ def get_gender_stats(org):
                 male_count=male_count, male_percentage=str(male_percentage) + "%")
 
 
+def get_age_stats(org):
+    now = timezone.now()
+    current_year = now.year
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    age_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
+
+    age_counts_interval = dict()
+    total = 0
+    for year_key, age_count in age_counts.iteritems():
+        total += age_count
+        decade = int(math.floor((current_year - int(year_key)) / 10)) * 10
+        key = "%s-%s" % (decade, decade+10)
+        if age_counts_interval.get(key, None):
+            age_counts_interval[key] += age_count
+        else:
+            age_counts_interval[key] = age_count
+
+    age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
+    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems() if v], key=lambda i: i))
+
+
+def get_reporters_count(org):
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    return org_contacts_counts.get("total-reporters", 0)
+
+
+def get_registration_stats(org):
+    now = timezone.now()
+    six_months_ago = now - timedelta(days=180)
+    six_months_ago = six_months_ago - timedelta(six_months_ago.weekday())
+    tz = pytz.timezone('UTC')
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registred_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
+
+    interval_dict = dict()
+
+    for date_key, date_count  in registred_on_counts.iteritems():
+        parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
+
+        # this is in the range we care about
+        if parsed_time > six_months_ago:
+            # get the week of the year
+            dict_key = parsed_time.strftime("%W")
+
+            if interval_dict.get(dict_key, None):
+                interval_dict[dict_key] += date_count
+            else:
+                interval_dict[dict_key] = date_count
+
+    # build our final dict using week numbers
+    categories = []
+    start = six_months_ago
+    while start < timezone.now():
+        week_dict = start.strftime("%W")
+        count = interval_dict.get(week_dict, 0)
+        categories.append(dict(label=start.strftime("%m/%d/%y"), count=count))
+
+        start = start + timedelta(days=7)
+
+    return json.dumps(categories)
+
+
+def get_occupation_stats(org):
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    occupation_counts = {k[11:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("occupation")}
+
+    return json.dumps([dict(label=k, count=v)
+                       for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()])
+
+
+Org.get_occupation_stats = get_occupation_stats
+Org.get_registration_stats = get_registration_stats
+Org.get_reporters_count = get_reporters_count
+Org.get_age_stats = get_age_stats
 Org.get_gender_stats = get_gender_stats
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions

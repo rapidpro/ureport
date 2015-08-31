@@ -1,9 +1,42 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
 from ureport.locations.models import Boundary
 from ureport.tests import DashTest, MockTembaClient
 from mock import patch
-from .models import Contact, ReportersCounter
-from temba.types import Contact as TembaContact
+from .models import Contact, ReportersCounter, ContactField
+from temba.types import Contact as TembaContact, Field as TembaContactField
 from ureport.utils import json_date_to_datetime
+
+
+class ContactFieldTest(DashTest):
+    def setUp(self):
+        super(ContactFieldTest, self).setUp()
+        self.nigeria = self.create_org('nigeria', self.admin)
+
+    def test_kwargs_from_temba(self):
+        temba_contact_field = TembaContactField.create(key='foo', label='Bar', value_type='T')
+
+        kwargs = ContactField.kwargs_from_temba(self.nigeria, temba_contact_field)
+        self.assertEqual(kwargs, dict(org=self.nigeria, key='foo', label='Bar', value_type='T'))
+
+        # try creating contact from them
+        ContactField.objects.create(**kwargs)
+
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    def test_fetch_contact_fields(self):
+        ContactField.objects.create(org=self.nigeria, key='old', label='Old', value_type='T')
+
+        ContactField.fetch_contact_fields(self.nigeria)
+
+        self.assertIsNone(ContactField.objects.filter(key='old', org=self.nigeria).first())
+
+        contact_field = ContactField.objects.get()
+        self.assertEqual(contact_field.org, self.nigeria)
+        self.assertEqual(contact_field.key, 'occupation')
+        self.assertEqual(contact_field.label, 'Activité')
+        self.assertEqual(contact_field.value_type, 'T')
 
 
 class ContactTest(DashTest):
@@ -14,7 +47,7 @@ class ContactTest(DashTest):
         self.nigeria.set_config('registration_label', "Registration Date")
         self.nigeria.set_config('state_label', "State")
         self.nigeria.set_config('district_label', "LGA")
-        self.nigeria.set_config('occupation_label', "Occupation")
+        self.nigeria.set_config('occupation_label', "Activité")
         self.nigeria.set_config('born_label', "Born")
         self.nigeria.set_config('gender_label', 'Gender')
         self.nigeria.set_config('female_label', "Female")
@@ -27,6 +60,20 @@ class ContactTest(DashTest):
                                              parent=self.country, geometry='{"foo":"bar-state"}')
         self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo", level=2,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
+
+        self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
+                                                             label='Registration Date', value_type='T')
+
+        self.state_field = ContactField.objects.create(org=self.nigeria, key='state', label='State', value_type='S')
+        self.district_field = ContactField.objects.create(org=self.nigeria, key='lga', label='LGA', value_type='D')
+        self.occupation_field = ContactField.objects.create(org=self.nigeria, key='occupation', label='Activité',
+                                                            value_type='T')
+
+        self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
+        self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
+
+
+
 
     def test_kwargs_from_temba(self):
 
