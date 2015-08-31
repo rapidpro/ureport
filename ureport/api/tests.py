@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from ureport.api.serializers import generate_absolute_url_from_file, CategoryReadSerializer, StoryReadSerializer
 from ureport.news.models import NewsItem, Video
-from ureport.polls.models import Poll
+from ureport.polls.models import Poll, PollQuestion
 
 
 class UreportAPITests(APITestCase):
@@ -28,12 +28,12 @@ class UreportAPITests(APITestCase):
                                                          modified_by=self.superuser)
         self.reg_poll = self.create_poll('registration')
         self.another_poll = self.create_poll('another')
+        self.poll_q = self.create_poll_question('poll Q')
         self.news_item = self.create_news_item('Some item')
         self.create_video('Test Video')
         self.create_story("Test Story")
 
     def create_org(self, subdomain, user):
-
         email = subdomain + "@user.com"
         first_name = subdomain + "_First"
         last_name = subdomain + "_Last"
@@ -41,7 +41,7 @@ class UreportAPITests(APITestCase):
 
         orgs = Org.objects.filter(subdomain=subdomain)
         if orgs:
-            org =orgs[0]
+            org = orgs[0]
             org.name = name
             org.save()
         else:
@@ -54,20 +54,27 @@ class UreportAPITests(APITestCase):
 
     def create_poll(self, title):
         return Poll.objects.create(flow_uuid="uuid-1",
-                                    title=title,
-                                    category=self.health_uganda,
-                                    org=self.uganda,
-                                    created_by=self.superuser,
-                                    modified_by=self.superuser)
+                                   title=title,
+                                   category=self.health_uganda,
+                                   org=self.uganda,
+                                   created_by=self.superuser,
+                                   modified_by=self.superuser)
+
+    def create_poll_question(self, title):
+        return PollQuestion.objects.create(poll=self.reg_poll,
+                                           title=title,
+                                           ruleset_uuid=1,
+                                           created_by=self.superuser,
+                                           modified_by=self.superuser)
 
     def create_news_item(self, title):
         return NewsItem.objects.create(title=title,
-                                                    description='uganda description 1',
-                                                    link='http://uganda.ug',
-                                                    category=self.health_uganda,
-                                                    org=self.uganda,
-                                                    created_by=self.superuser,
-                                                    modified_by=self.superuser)
+                                       description='uganda description 1',
+                                       link='http://uganda.ug',
+                                       category=self.health_uganda,
+                                       org=self.uganda,
+                                       created_by=self.superuser,
+                                       modified_by=self.superuser)
 
     def create_video(self, title):
         self.uganda_video = Video.objects.create(title=title,
@@ -123,6 +130,23 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], Poll.objects.filter(org=self.nigeria).count())
 
+    def test_featured_poll_by_org_list_when_featured_poll_exists(self):
+        url = '/api/v1/polls/org/%d/featured/' % self.uganda.pk
+        self.reg_poll.is_featured = True
+        self.reg_poll.save()
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['count'], 1)
+        self.reg_poll.is_featured = False
+        self.reg_poll.save()
+
+    def test_featured_poll_by_org_list_when_no_featured_poll_exists(self):
+        self.create_poll_question('poll Q')
+        url = '/api/v1/polls/org/%d/featured/' % self.uganda.pk
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['count'], 0)
+
     def test_single_poll(self):
         url = '/api/v1/polls/%d/' % self.reg_poll.pk
         self.client.login(username=self.superuser.username, password='super')
@@ -131,10 +155,10 @@ class UreportAPITests(APITestCase):
         poll = self.reg_poll
         category = response.data.pop('category')
         self.assertDictEqual(response.data, dict(id=poll.pk,
-                                             flow_uuid=poll.flow_uuid,
-                                             title=poll.title,
-                                             org=poll.org_id,
-                                             ))
+                                                 flow_uuid=poll.flow_uuid,
+                                                 title=poll.title,
+                                                 org=poll.org_id,
+                                                 ))
         self.assertDictEqual(dict(category), dict(OrderedDict(name=poll.category.name,
                                                   image_url=CategoryReadSerializer().
                                                   get_image_url(poll.category))))

@@ -134,14 +134,6 @@ class PollList(BaseListAPIView):
         q = super(PollList, self).get_queryset()
         if self.request.query_params.get('flow_uuid', None):
             q = q.filter(flow_uuid=self.request.query_params.get('flow_uuid'))
-        if self.request.query_params.get('latest', None):
-            if self.request.query_params.get('latest') == 'true':
-                org = self.kwargs.get('org')
-                main_poll = Poll.get_main_poll(org)
-                if main_poll:
-                    latest_poll_id = main_poll.id
-                    q = q.filter(id=latest_poll_id)
-
         return q
 
 
@@ -170,6 +162,49 @@ class PollDetails(RetrieveAPIView):
     """
     serializer_class = PollReadSerializer
     queryset = Poll.objects.filter(is_active=True)
+
+
+class FeaturedPollList(BaseListAPIView):
+    """
+    This endpoint allows you to list the featured poll.
+
+    ## Listing Featured Poll
+
+    Example:
+
+        GET /api/v1/polls/org/1/featured/
+
+    Response is a list with the single featured poll, or an empty results list if none is featured:
+
+        {
+            "count": 1,
+            "next": "/api/v1/polls/org/1/featured",
+            "previous": null,
+            "results": [
+            {
+                "id": 2,
+                "flow_uuid": "8d82bac4-0f11-4dfa-822b-50a4d76c8998",
+                "title": "the featured poll",
+                "org": 1,
+                "category": {
+                    "image_url": null,
+                    "name": "some category name"
+                }
+            },
+            ...
+        }
+    """
+    serializer_class = PollReadSerializer
+    model = Poll
+
+    def get_queryset(self):
+        q = super(FeaturedPollList, self).get_queryset()
+        if not len(q):
+            return q
+        else:
+            org = self.kwargs.get('org')
+            main_poll = Poll.get_main_poll(org)
+            return q.filter(id=main_poll.id, is_featured=True)
 
 
 class NewsItemList(BaseListAPIView):
