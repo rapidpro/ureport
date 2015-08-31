@@ -11,6 +11,7 @@ urlpatterns = patterns('',
                        url(r'^orgs/(?P<pk>[\w]+)/$', OrgDetails.as_view()),
 
                        url(r'^polls/org/(?P<org>[\w]+)/$', PollList.as_view()),
+                       url(r'^polls/org/(?P<org>[\w]+)/featured/$', PollDetails.as_view()),
                        url(r'^polls/(?P<pk>[\w]+)/$', PollDetails.as_view()),
 
                        url(r'^news/org/(?P<org>[\w]+)/$', NewsItemList.as_view()),

@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from ureport.api.serializers import generate_absolute_url_from_file, CategoryReadSerializer, StoryReadSerializer
 from ureport.news.models import NewsItem, Video
-from ureport.polls.models import Poll
+from ureport.polls.models import Poll, PollQuestion
 
 
 class UreportAPITests(APITestCase):
@@ -28,6 +28,10 @@ class UreportAPITests(APITestCase):
                                                          modified_by=self.superuser)
         self.reg_poll = self.create_poll('registration')
         self.another_poll = self.create_poll('another')
+        self.featured_poll = self.create_poll('featured', is_featured=True)
+        self.poll_question = PollQuestion.objects.create(poll=self.featured_poll, title='test question',
+                                                         ruleset_uuid='uuid', created_by=self.superuser,
+                                                         modified_by=self.superuser)
         self.news_item = self.create_news_item('Some item')
         self.create_video('Test Video')
         self.create_story("Test Story")
@@ -52,11 +56,12 @@ class UreportAPITests(APITestCase):
         self.assertEquals(Org.objects.filter(domain=subdomain).count(), 1)
         return Org.objects.get(domain=subdomain)
 
-    def create_poll(self, title):
+    def create_poll(self, title, is_featured=False):
         return Poll.objects.create(flow_uuid="uuid-1",
                                     title=title,
                                     category=self.health_uganda,
                                     org=self.uganda,
+                                    is_featured=is_featured,
                                     created_by=self.superuser,
                                     modified_by=self.superuser)
 
@@ -129,6 +134,22 @@ class UreportAPITests(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         poll = self.reg_poll
+        category = response.data.pop('category')
+        self.assertDictEqual(response.data, dict(id=poll.pk,
+                                             flow_uuid=poll.flow_uuid,
+                                             title=poll.title,
+                                             org=poll.org_id,
+                                             ))
+        self.assertDictEqual(dict(category), dict(OrderedDict(name=poll.category.name,
+                                                  image_url=CategoryReadSerializer().
+                                                  get_image_url(poll.category))))
+
+    def test_featured_poll(self):
+        url = '/api/v1/polls/org/%d/featured/' % self.uganda.pk
+        self.client.login(username=self.superuser.username, password='super')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        poll = self.featured_poll
         category = response.data.pop('category')
         self.assertDictEqual(response.data, dict(id=poll.pk,
                                              flow_uuid=poll.flow_uuid,
