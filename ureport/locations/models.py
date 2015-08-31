@@ -63,3 +63,8 @@ class Boundary(models.Model):
 
         # remove any boundary that's no longer on rapidpro
         cls.objects.filter(org=org).exclude(osm_id__in=seen_ids).delete()
+
+    def as_geojson(self):
+        return dict(type='Feature', geometry=json.loads(self.geometry),
+                    properties=dict(id=self.osm_id, level=self.level, name=self.name))
+

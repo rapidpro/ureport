@@ -18,6 +18,7 @@ import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
 from ureport.contacts.models import ReportersCounter
+from ureport.locations.models import Boundary
 from ureport.polls.models import Poll
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
@@ -546,6 +547,32 @@ def get_occupation_stats(org):
                        for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()])
 
 
+def get_locations_stats(org, segment):
+    parent = segment.get('parent', None)
+    field_type = segment.get('location', None)
+
+    location_stats = []
+
+    if not field_type or field_type.lower() not in ['state', 'district']:
+        return location_stats
+
+    field_type = field_type.lower()
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    if field_type == 'state':
+        boundaries = Boundary.objects.filter(org=org, level=1).values('osm_id', 'name')
+        location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
+
+    else:
+        boundaries = Boundary.objects.filter(org=org, level=2, parent__osm_id__iexact=parent).values('osm_id', 'name')
+        location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
+
+    return [dict(boundary=elt['osm_id'], label=elt['name'], set=location_counts.get(elt['osm_id'], 0), unset=0)
+                       for elt in boundaries]
+
+
+Org.get_locations_stats = get_locations_stats
 Org.get_occupation_stats = get_occupation_stats
 Org.get_registration_stats = get_registration_stats
 Org.get_reporters_count = get_reporters_count

@@ -222,9 +222,11 @@ class BoundaryView(SmartTemplateView):
             state_id = self.kwargs.get('osm_id', None)
 
             if state_id:
-                boundaries = org.get_state_geojson(state_id)
+                location_boundaries = org.boundaries.filter(level=2, parent__osm_id=state_id)
             else:
-                boundaries = org.get_country_geojson()
+                location_boundaries = org.boundaries.filter(level=1)
+
+            boundaries = dict(type='FeatureCollection', features=[elt.as_geojson() for elt in location_boundaries])
 
         return HttpResponse(json.dumps(boundaries))
 
@@ -242,12 +244,7 @@ class ReportersResultsView(SmartReadView):
         if segment:
             segment = json.loads(segment)
 
-        contact_field = self.request.GET.get('contact_field', None)
-        if self.get_object() and contact_field:
-            api_data = self.get_object().get_contact_field_results(contact_field, segment)
-            output_data = self.get_object().organize_categories_data(contact_field, api_data)
-
-            output_data = clean_global_results_data(self.get_object(), output_data, segment)
+            output_data = self.get_object().get_locations_stats(segment)
 
         return HttpResponse(json.dumps(output_data))
 
