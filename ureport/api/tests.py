@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from random import randint
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from dash.stories.models import Story
@@ -62,7 +63,7 @@ class UreportAPITests(APITestCase):
         return Org.objects.get(domain=subdomain)
 
     def create_poll(self, title, is_featured=False):
-        return Poll.objects.create(flow_uuid="uuid-1",
+        return Poll.objects.create(flow_uuid=str(randint(1000, 9999)),
                                    title=title,
                                    category=self.health_uganda,
                                    org=self.uganda,
@@ -129,6 +130,13 @@ class UreportAPITests(APITestCase):
         response = self.client.get(url2)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], Poll.objects.filter(org=self.nigeria).count())
+
+    def test_polls_by_org_list_with_flow_uuid_parameter(self):
+        url = '/api/v1/polls/org/%d/?flow_uuid=%s' % (self.uganda.pk, self.reg_poll.flow_uuid)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['count'], 1)
+        self.assertEqual(response.data['results'][0]['title'], 'registration')
 
     def test_featured_poll_by_org_list_when_featured_polls_exists(self):
         url = '/api/v1/polls/org/%d/featured/' % self.uganda.pk
