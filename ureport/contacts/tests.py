@@ -211,6 +211,7 @@ class ContactTest(DashTest):
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_tasks(self):
 
         with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
