@@ -122,7 +122,7 @@ class MockTembaClient(TembaClient):
         return [TembaBoundary.create(boundary='R12345', name='Nigeria', parent=None, level=0, geometry=geometry),
                 TembaBoundary.create(boundary='R23456', name='Lagos', parent="R12345", level=1, geometry=geometry)]
 
-    def get_contacts(self, uuids=None, urns=None, groups=None, pager=None):
+    def get_contacts(self, uuids=None, urns=None, groups=None, after=None, before=None, pager=None):
         return [TembaContact.create(
                 uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
                 fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),

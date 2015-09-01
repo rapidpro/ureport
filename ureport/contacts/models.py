@@ -162,7 +162,7 @@ class Contact(models.Model):
             return cls.objects.create(**kwargs)
 
     @classmethod
-    def fetch_contacts(cls, org):
+    def fetch_contacts(cls, org, after=None):
         reporter_group = org.get_config('reporter_group')
 
         temba_client = org.get_temba_client()
@@ -173,7 +173,7 @@ class Contact(models.Model):
 
         seen_uuids = []
 
-        api_contacts = temba_client.get_contacts(groups=[api_groups[0]])
+        api_contacts = temba_client.get_contacts(groups=[api_groups[0]], after=after)
         for contact in api_contacts:
             cls.update_or_create_from_temba(org, contact)
             seen_uuids.append(contact.uuid)

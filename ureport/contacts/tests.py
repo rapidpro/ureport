@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+from datetime import datetime
+from django.utils import timezone
+import pytz
 
 from ureport.locations.models import Boundary
 from ureport.tests import DashTest, MockTembaClient
 from mock import patch
 from .models import Contact, ReportersCounter, ContactField
-from temba.types import Contact as TembaContact, Field as TembaContactField
+from temba.types import Contact as TembaContact, Field as TembaContactField, Group as TembaGroup
 from ureport.utils import json_date_to_datetime
 
 
@@ -72,9 +75,6 @@ class ContactTest(DashTest):
         self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
         self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
 
-
-
-
     def test_kwargs_from_temba(self):
 
         temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
@@ -109,7 +109,6 @@ class ContactTest(DashTest):
         # try creating contact from them
         Contact.objects.create(**kwargs)
 
-
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=['G-001', 'G-007'],
                                             fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
@@ -126,23 +125,39 @@ class ContactTest(DashTest):
         # try creating contact from them
         Contact.objects.create(**kwargs)
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_fetch_contacts(self):
         # contact no longer in ureporters
         Contact.objects.create(uuid='C-OLD', org=self.nigeria, gender='M', born=1985, occupation='Pirate',
                                registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='Lagos',
                                district='Oyo')
 
-        Contact.fetch_contacts(self.nigeria)
-        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid='C-OLD').first())
+        with patch('dash.orgs.models.TembaClient.get_groups') as mock_groups:
+            group = TembaGroup.create(uuid="uuid-8", name=None, size=120)
+            mock_groups.return_value = [group]
 
-        contact = Contact.objects.get()
-        self.assertEqual(contact.uuid, '000-001')
-        self.assertEqual(contact.org, self.nigeria)
-        self.assertEqual(contact.state, 'R-LAGOS')
-        self.assertEqual(contact.district, 'R-OYO')
-        self.assertEqual(contact.gender, 'F')
-        self.assertEqual(contact.born, 1990)
+            with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
+                mock_contacts.return_value = [TembaContact.create(uuid='000-001', name="Ann",
+                                                                  urns=['tel:1234'], groups=['000-002'],
+                                                                  fields=dict(state="Lagos", lga="Oyo",
+                                                                              gender='Female', born="1990"),
+                                                                  language='eng', modified_on=timezone.now())]
+
+                Contact.fetch_contacts(self.nigeria)
+                self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid='C-OLD').first())
+
+                mock_contacts.assert_called_with(groups=[group], after=None)
+
+                contact = Contact.objects.get()
+                self.assertEqual(contact.uuid, '000-001')
+                self.assertEqual(contact.org, self.nigeria)
+                self.assertEqual(contact.state, 'R-LAGOS')
+                self.assertEqual(contact.district, 'R-OYO')
+                self.assertEqual(contact.gender, 'F')
+                self.assertEqual(contact.born, 1990)
+
+                Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
+                mock_contacts.assert_called_with(groups=[group],
+                                                 after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
 
     def test_reporters_counter(self):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
@@ -177,4 +192,3 @@ class ContactTest(DashTest):
         expected['district:R-OYO'] = 2
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
-
