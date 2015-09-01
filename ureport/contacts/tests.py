@@ -9,6 +9,7 @@ from ureport.locations.models import Boundary
 from ureport.tests import DashTest, MockTembaClient
 from mock import patch
 from .models import Contact, ReportersCounter, ContactField
+from ureport.contacts.tasks import fetch_contacts_task
 from temba.types import Contact as TembaContact, Field as TembaContactField, Group as TembaGroup
 from ureport.utils import json_date_to_datetime
 
@@ -209,3 +210,26 @@ class ContactTest(DashTest):
         expected['district:R-OYO'] = 2
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+
+    def test_tasks(self):
+
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+            with patch('ureport.contacts.tasks.Contact.fetch_contacts') as mock_fetch_contacts:
+                mock_fetch_contacts.return_value = 'FETCHED'
+
+                fetch_contacts_task(self.nigeria.pk, True)
+                mock_fetch_contacts.assert_called_once_with(self.nigeria, after=None)
+
+                mock_fetch_contacts.reset_mock()
+
+                with patch('django.core.cache.cache.get') as cache_get_mock:
+                    date_str = '2014-01-02T01:04:05.000Z'
+                    d1 = json_date_to_datetime(date_str)
+
+                    cache_get_mock.return_value = date_str
+
+                    fetch_contacts_task(self.nigeria.pk)
+                    mock_fetch_contacts.assert_called_once_with(self.nigeria, after=d1)
