@@ -26,9 +26,18 @@ class UreportAPITests(APITestCase):
                                                          name="Education",
                                                          created_by=self.superuser,
                                                          modified_by=self.superuser)
+
         self.reg_poll = self.create_poll('registration')
         self.another_poll = self.create_poll('another')
-        self.poll_q = self.create_poll_question('poll Q')
+        self.first_featured_poll = self.create_poll('first featured', is_featured=True)
+        self.first_poll_question = PollQuestion.objects.create(
+            poll=self.first_featured_poll, title='test question', ruleset_uuid='uuid1',
+            created_by=self.superuser, modified_by=self.superuser)
+        self.second_featured_poll = self.create_poll('second featured', is_featured=True)
+        self.second_poll_question = PollQuestion.objects.create(
+            poll=self.second_featured_poll, title='another test question', ruleset_uuid='uuid2',
+            created_by=self.superuser, modified_by=self.superuser)
+
         self.news_item = self.create_news_item('Some item')
         self.create_video('Test Video')
         self.create_story("Test Story")
@@ -52,20 +61,14 @@ class UreportAPITests(APITestCase):
         self.assertEquals(Org.objects.filter(domain=subdomain).count(), 1)
         return Org.objects.get(domain=subdomain)
 
-    def create_poll(self, title):
+    def create_poll(self, title, is_featured=False):
         return Poll.objects.create(flow_uuid="uuid-1",
                                    title=title,
                                    category=self.health_uganda,
                                    org=self.uganda,
+                                   is_featured=is_featured,
                                    created_by=self.superuser,
                                    modified_by=self.superuser)
-
-    def create_poll_question(self, title):
-        return PollQuestion.objects.create(poll=self.reg_poll,
-                                           title=title,
-                                           ruleset_uuid=1,
-                                           created_by=self.superuser,
-                                           modified_by=self.superuser)
 
     def create_news_item(self, title):
         return NewsItem.objects.create(title=title,
@@ -99,14 +102,12 @@ class UreportAPITests(APITestCase):
 
     def test_orgs_list(self):
         url = '/api/v1/orgs/'
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], Org.objects.count())
 
     def test_single_org(self):
         url = '/api/v1/orgs/%d/' % self.uganda.pk
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         org = self.uganda
@@ -122,7 +123,6 @@ class UreportAPITests(APITestCase):
     def test_polls_by_org_list(self):
         url = '/api/v1/polls/org/%d/' % self.uganda.pk
         url2 = '/api/v1/polls/org/%d/' % self.nigeria.pk
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], Poll.objects.filter(org=self.uganda).count())
@@ -130,26 +130,22 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], Poll.objects.filter(org=self.nigeria).count())
 
-    def test_featured_poll_by_org_list_when_featured_poll_exists(self):
+    def test_featured_poll_by_org_list_when_featured_polls_exists(self):
         url = '/api/v1/polls/org/%d/featured/' % self.uganda.pk
-        self.reg_poll.is_featured = True
-        self.reg_poll.save()
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['count'], 1)
-        self.reg_poll.is_featured = False
-        self.reg_poll.save()
+        self.assertEqual(response.data['count'], 2)
+        self.assertEqual(response.data['results'][0]['title'], 'second featured')
+        self.assertEqual(response.data['results'][1]['title'], 'first featured')
 
-    def test_featured_poll_by_org_list_when_no_featured_poll_exists(self):
-        self.create_poll_question('poll Q')
-        url = '/api/v1/polls/org/%d/featured/' % self.uganda.pk
+    def test_featured_poll_by_org_list_when_no_featured_polls_exists(self):
+        url = '/api/v1/polls/org/%d/featured/' % self.nigeria.pk
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], 0)
 
     def test_single_poll(self):
         url = '/api/v1/polls/%d/' % self.reg_poll.pk
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         poll = self.reg_poll
@@ -166,7 +162,6 @@ class UreportAPITests(APITestCase):
     def test_news_item_by_org_list(self):
         url = '/api/v1/news/org/%d/' % self.uganda.pk
         url1 = '/api/v1/news/org/%d/' % self.nigeria.pk
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], NewsItem.objects.filter(org=self.uganda).count())
@@ -176,7 +171,6 @@ class UreportAPITests(APITestCase):
 
     def test_single_news_item(self):
         url = '/api/v1/news/%d/' % self.news_item.pk
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         news = self.news_item
@@ -193,7 +187,6 @@ class UreportAPITests(APITestCase):
     def test_video_by_org_list(self):
         url = '/api/v1/videos/org/%d/' % self.uganda.pk
         url1 = '/api/v1/videos/org/%d/' % self.nigeria.pk
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], Video.objects.filter(org=self.uganda).count())
@@ -203,7 +196,6 @@ class UreportAPITests(APITestCase):
 
     def test_single_video(self):
         url = '/api/v1/videos/%d/' % self.uganda_video.pk
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         video = self.uganda_video
@@ -219,7 +211,6 @@ class UreportAPITests(APITestCase):
     def test_story_by_org_list(self):
         url = '/api/v1/stories/org/%d/' % self.uganda.pk
         url1 = '/api/v1/stories/org/%d/' % self.nigeria.pk
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], Story.objects.filter(org=self.uganda).count())
@@ -229,7 +220,6 @@ class UreportAPITests(APITestCase):
 
     def test_single_story(self):
         url = '/api/v1/stories/%d/' % self.uganda_story.pk
-        self.client.login(username=self.superuser.username, password='super')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         story = self.uganda_story

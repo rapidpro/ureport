@@ -101,7 +101,6 @@ class PollList(BaseListAPIView):
     * **title** - the TITLE of the poll (string)
     * **org** - the ID of the org that owns this poll (int)
     * **category** - the CATEGORIES of of this poll (dictionary)
-    * **latest** - the latest poll, if set to 'true' (dictionary)
 
     Example:
 
@@ -166,21 +165,32 @@ class PollDetails(RetrieveAPIView):
 
 class FeaturedPollList(BaseListAPIView):
     """
-    This endpoint allows you to list the featured poll.
+    This endpoint allows you to list all featured polls for an organisation.
 
-    ## Listing Featured Poll
+    ## Listing Featured Polls
 
     Example:
 
         GET /api/v1/polls/org/1/featured/
 
-    Response is a list with the single featured poll, or an empty results list if none is featured:
+    Response is a list of the featured polls, most recent first. \
+    An empty list is returned if there are no polls with questions.
 
         {
-            "count": 1,
+            "count": 2,
             "next": "/api/v1/polls/org/1/featured",
             "previous": null,
             "results": [
+            {
+                "id": 1,
+                "flow_uuid": "a22991df-6d84-4b94-b6da-7b00086a2023",
+                "title": "test",
+                "org": 1,
+                "category": {
+                    "image_url": "http://fake.ureport.in/media/categories/StraightOuttaSomewhere_2.jpg",
+                    "name": "tests"
+                }
+            },
             {
                 "id": 2,
                 "flow_uuid": "8d82bac4-0f11-4dfa-822b-50a4d76c8998",
@@ -190,21 +200,15 @@ class FeaturedPollList(BaseListAPIView):
                     "image_url": null,
                     "name": "some category name"
                 }
-            },
-            ...
+            }
         }
     """
     serializer_class = PollReadSerializer
     model = Poll
 
     def get_queryset(self):
-        q = super(FeaturedPollList, self).get_queryset()
-        if not len(q):
-            return q
-        else:
-            org = self.kwargs.get('org')
-            main_poll = Poll.get_main_poll(org)
-            return q.filter(id=main_poll.id, is_featured=True)
+        q = super(FeaturedPollList, self).get_queryset().filter(is_featured=True).order_by('-created_on')
+        return q
 
 
 class NewsItemList(BaseListAPIView):
