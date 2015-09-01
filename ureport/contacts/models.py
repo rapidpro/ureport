@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 import json
 from dash.orgs.models import Org
+from django.core.cache import cache
 from django.db import models
 from django.db.models import Sum
 from django.utils.translation import ugettext_lazy as _
@@ -15,6 +16,10 @@ class ContactField(models.Model):
     """
     Corresponds to a RapidPro contact field
     """
+
+    CONTACT_FIELDS_CACHE_TIMEOUT = 60 * 60 * 24 * 15
+    CONTACT_FIELDS_CACHE_KEY = 'org:%d:contact_fields'
+
     org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="contactfields")
 
     label = models.CharField(verbose_name=_("Label"), max_length=36)
@@ -54,11 +59,30 @@ class ContactField(models.Model):
         # remove any contact field that's no longer return on the API
         cls.objects.filter(org=org).exclude(key__in=seen_keys).delete()
 
+        key = cls.CONTACT_FIELDS_CACHE_KEY % org.id
+        cache.set(key, seen_keys, cls.CONTACT_FIELDS_CACHE_TIMEOUT)
+
+        return seen_keys
+
+    @classmethod
+    def get_contact_fields(cls, org):
+        key = cls.CONTACT_FIELDS_CACHE_KEY % org.id
+
+        fields_keys = cache.get(key, None)
+        if fields_keys:
+            return fields_keys
+
+        fields_keys = cls.fetch_contact_fields(org)
+        return fields_keys
+
 
 class Contact(models.Model):
     """
     Corresponds to a RapidPro contact
     """
+
+    CONTACT_LAST_FETCHED_CACHE_KEY = 'last:fetch_contacts:%d'
+
     MALE = 'M'
     FEMALE = 'F'
     GENDER_CHOICES = ((MALE, _("Male")), (FEMALE, _("Female")))
@@ -178,8 +202,7 @@ class Contact(models.Model):
             cls.update_or_create_from_temba(org, contact)
             seen_uuids.append(contact.uuid)
 
-        # remove any contact that's no longer a ureporter
-        cls.objects.filter(org=org).exclude(uuid__in=seen_uuids).delete()
+        return seen_uuids
 
 
 class ReportersCounter(models.Model):

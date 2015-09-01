@@ -31,15 +31,36 @@ class ContactFieldTest(DashTest):
     def test_fetch_contact_fields(self):
         ContactField.objects.create(org=self.nigeria, key='old', label='Old', value_type='T')
 
-        ContactField.fetch_contact_fields(self.nigeria)
+        field_keys = ContactField.fetch_contact_fields(self.nigeria)
+
+        self.assertEqual(field_keys, ['occupation'])
 
         self.assertIsNone(ContactField.objects.filter(key='old', org=self.nigeria).first())
 
         contact_field = ContactField.objects.get()
+
         self.assertEqual(contact_field.org, self.nigeria)
         self.assertEqual(contact_field.key, 'occupation')
         self.assertEqual(contact_field.label, 'Activité')
         self.assertEqual(contact_field.value_type, 'T')
+
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    def test_get_contact_fields(self):
+
+        field_keys = ContactField.get_contact_fields(self.nigeria)
+        self.assertEqual(field_keys, ['occupation'])
+
+        with patch('django.core.cache.cache.get') as cache_get_mock:
+            cache_get_mock.return_value = None
+
+            field_keys = ContactField.get_contact_fields(self.nigeria)
+            self.assertEqual(field_keys, ['occupation'])
+
+            cache_get_mock.return_value = ['occupation']
+            with patch('ureport.contacts.models.ContactField.fetch_contact_fields') as mock_fetch:
+
+                ContactField.get_contact_fields(self.nigeria)
+                self.assertFalse(mock_fetch.called)
 
 
 class ContactTest(DashTest):
@@ -126,10 +147,6 @@ class ContactTest(DashTest):
         Contact.objects.create(**kwargs)
 
     def test_fetch_contacts(self):
-        # contact no longer in ureporters
-        Contact.objects.create(uuid='C-OLD', org=self.nigeria, gender='M', born=1985, occupation='Pirate',
-                               registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='Lagos',
-                               district='Oyo')
 
         with patch('dash.orgs.models.TembaClient.get_groups') as mock_groups:
             group = TembaGroup.create(uuid="uuid-8", name=None, size=120)
@@ -142,9 +159,9 @@ class ContactTest(DashTest):
                                                                               gender='Female', born="1990"),
                                                                   language='eng', modified_on=timezone.now())]
 
-                Contact.fetch_contacts(self.nigeria)
-                self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid='C-OLD').first())
+                seen_uuids = Contact.fetch_contacts(self.nigeria)
 
+                self.assertEqual(seen_uuids, ['000-001'])
                 mock_contacts.assert_called_with(groups=[group], after=None)
 
                 contact = Contact.objects.get()

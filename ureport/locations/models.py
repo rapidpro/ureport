@@ -1,15 +1,18 @@
 import json
+from django.core.cache import cache
 from django.db import models
 from dash.orgs.models import Org
 from django.utils.translation import ugettext_lazy as _
-
-# Create your models here.
 
 
 class Boundary(models.Model):
     """
     Corresponds to a RapidPro AdminBoundary
     """
+
+    BOUNDARIES_CACHE_TIMEOUT = 60 * 60 * 24 * 15
+    BOUNDARIES_CACHE_KEY = 'org:%d:boundaries'
+
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="boundaries")
 
     osm_id = models.CharField(max_length=15,
@@ -63,6 +66,22 @@ class Boundary(models.Model):
 
         # remove any boundary that's no longer on rapidpro
         cls.objects.filter(org=org).exclude(osm_id__in=seen_ids).delete()
+
+        key = cls.BOUNDARIES_CACHE_KEY % org.id
+        cache.set(key, seen_ids, cls.BOUNDARIES_CACHE_TIMEOUT)
+
+        return seen_ids
+
+    @classmethod
+    def get_boundaries(cls, org):
+        key = cls.BOUNDARIES_CACHE_KEY % org.id
+
+        boundary_ids = cache.get(key, None)
+        if boundary_ids:
+            return boundary_ids
+
+        boundary_ids = cls.fetch_boundaries(org)
+        return boundary_ids
 
     def as_geojson(self):
         return dict(type='Feature', geometry=json.loads(self.geometry),

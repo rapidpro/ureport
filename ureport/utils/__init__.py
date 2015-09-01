@@ -27,6 +27,14 @@ ORG_CONTACT_COUNT_KEY = 'org:%d:contacts-counts'
 ORG_CONTACT_COUNT_TIMEOUT = 300
 
 
+def datetime_to_json_date(dt):
+    """
+    Formats a datetime as a string for inclusion in JSON
+    """
+    # always output as UTC / Z and always include milliseconds
+    as_utc = dt.astimezone(pytz.utc)
+    return as_utc.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z'
+
 
 def json_date_to_datetime(date_str):
     """

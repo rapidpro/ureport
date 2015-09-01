@@ -12,7 +12,7 @@ from ureport.assets.models import FLAG, Image
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count, \
-    json_date_to_datetime
+    json_date_to_datetime, datetime_to_json_date
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, get_reporter_group, _fetch_org_polls_results
 
@@ -42,11 +42,13 @@ class UtilsTest(DashTest):
 
     def test_datetime_to_json_date(self):
         d1 = datetime(2014, 1, 2, 3, 4, 5, tzinfo=pytz.utc)
+        self.assertEqual(datetime_to_json_date(d1), '2014-01-02T03:04:05.000Z')
         self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05.000Z'), d1)
         self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05.000'), d1)
 
         tz = pytz.timezone("Africa/Kigali")
         d2 = tz.localize(datetime(2014, 1, 2, 3, 4, 5))
+        self.assertEqual(datetime_to_json_date(d2), '2014-01-02T01:04:05.000Z')
         self.assertEqual(json_date_to_datetime('2014-01-02T01:04:05.000Z'), d2.astimezone(pytz.utc))
         self.assertEqual(json_date_to_datetime('2014-01-02T01:04:05.000'), d2.astimezone(pytz.utc))
 

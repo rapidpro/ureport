@@ -59,3 +59,22 @@ class LocationTest(DashTest):
         self.assertEqual(state_boundary.as_geojson(),
                          dict(type='Feature', geometry=dict(type='MultiPolygon', coordinates=['COORDINATES']),
                               properties=dict(id='R23456', level=1, name='Lagos')))
+
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    def test_get_boundaries(self):
+
+        boundaries_ids = Boundary.get_boundaries(self.nigeria)
+        self.assertEqual(boundaries_ids, ['R12345', 'R23456'])
+
+        with patch('django.core.cache.cache.get') as cache_get_mock:
+            cache_get_mock.return_value = None
+
+            boundaries_ids = Boundary.get_boundaries(self.nigeria)
+            self.assertEqual(boundaries_ids, ['R12345', 'R23456'])
+
+            cache_get_mock.return_value = ['R12345', 'R23456']
+
+            with patch('ureport.locations.models.Boundary.fetch_boundaries') as mock_fetch:
+
+                Boundary.get_boundaries(self.nigeria)
+                self.assertFalse(mock_fetch.called)
