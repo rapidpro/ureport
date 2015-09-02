@@ -114,14 +114,35 @@ class PollList(BaseListAPIView):
             "previous": null,
             "results": [
             {
-                "id": 1,
-                "flow_uuid": "a22991df-6d84-4b94-b6da-7b00086a2023",
-                "title": "test",
+                "id": 2,
+                "flow_uuid": "a497ba0f-6b58-4bed-ba52-05c3f40403e2",
+                "title": "Food Poll",
                 "org": 1,
+                "questions": [
+                    {
+                        "title": "Are you hungry",
+                        "ruleset_uuid": "ea74b2c2-7425-443a-97cb-331d4e11abb6",
+                        "is_open_ended": false,
+                        "total_summary_data": {}
+                    },
+                    {
+                        "title": "What would you like to eat",
+                        "ruleset_uuid": "66e08f93-cdff-4dbc-bd02-c746770a4fac",
+                        "is_open_ended": false,
+                        "total_summary_data": {}
+                    },
+                    {
+                        "title": "Where would you like to eat",
+                        "ruleset_uuid": "e31755dd-c61a-460c-acaf-0eeee1ce0107",
+                        "is_open_ended": false,
+                        "total_summary_data": {}
+                    }
+                ],
                 "category": {
-                    "image_url": "http://fake.ureport.in/media/categories/StraightOuttaSomewhere_2.jpg",
+                    "image_url": "http://test.ureport.in/media/categories/StraightOuttaSomewhere_2.jpg",
                     "name": "tests"
-                }
+                },
+                "created_on": "2015-09-02T08:53:30.313251Z"
             },
             ...
         }
@@ -149,14 +170,35 @@ class PollDetails(RetrieveAPIView):
     Response is a single poll with that ID:
 
         {
-            "id": 1,
-            "flow_uuid": "a22991df-6d84-4b94-b6da-7b00086a2023",
-            "title": "test",
+            "id": 2,
+            "flow_uuid": "a497ba0f-6b58-4bed-ba52-05c3f40403e2",
+            "title": "Food Poll",
             "org": 1,
+            "questions": [
+                {
+                    "title": "Are you hungry",
+                    "ruleset_uuid": "ea74b2c2-7425-443a-97cb-331d4e11abb6",
+                    "is_open_ended": false,
+                    "total_summary_data": {}
+                },
+                {
+                    "title": "What would you like to eat",
+                    "ruleset_uuid": "66e08f93-cdff-4dbc-bd02-c746770a4fac",
+                    "is_open_ended": false,
+                    "total_summary_data": {}
+                },
+                {
+                    "title": "Where would you like to eat",
+                    "ruleset_uuid": "e31755dd-c61a-460c-acaf-0eeee1ce0107",
+                    "is_open_ended": false,
+                    "total_summary_data": {}
+                }
+            ],
             "category": {
-                "image_url": "http://fake.ureport.in/media/categories/StraightOuttaSomewhere_2.jpg",
+                "image_url": "http://test.ureport.in/media/categories/StraightOuttaSomewhere_2.jpg",
                 "name": "tests"
-            }
+            },
+            "created_on": "2015-09-02T08:53:30.313251Z"
         }
     """
     serializer_class = PollReadSerializer
@@ -177,30 +219,42 @@ class FeaturedPollList(BaseListAPIView):
     An empty list is returned if there are no polls with questions.
 
         {
-            "count": 2,
-            "next": "/api/v1/polls/org/1/featured",
+            "count": 389,
+            "next": "/api/v1/polls/org/1/?page=2",
             "previous": null,
             "results": [
             {
-                "id": 1,
-                "flow_uuid": "a22991df-6d84-4b94-b6da-7b00086a2023",
-                "title": "test",
-                "org": 1,
-                "category": {
-                    "image_url": "http://fake.ureport.in/media/categories/StraightOuttaSomewhere_2.jpg",
-                    "name": "tests"
-                }
-            },
-            {
                 "id": 2,
-                "flow_uuid": "8d82bac4-0f11-4dfa-822b-50a4d76c8998",
-                "title": "the featured poll",
+                "flow_uuid": "a497ba0f-6b58-4bed-ba52-05c3f40403e2",
+                "title": "Food Poll",
                 "org": 1,
+                "questions": [
+                    {
+                        "title": "Are you hungry",
+                        "ruleset_uuid": "ea74b2c2-7425-443a-97cb-331d4e11abb6",
+                        "is_open_ended": false,
+                        "total_summary_data": {}
+                    },
+                    {
+                        "title": "What would you like to eat",
+                        "ruleset_uuid": "66e08f93-cdff-4dbc-bd02-c746770a4fac",
+                        "is_open_ended": false,
+                        "total_summary_data": {}
+                    },
+                    {
+                        "title": "Where would you like to eat",
+                        "ruleset_uuid": "e31755dd-c61a-460c-acaf-0eeee1ce0107",
+                        "is_open_ended": false,
+                        "total_summary_data": {}
+                    }
+                ],
                 "category": {
-                    "image_url": null,
-                    "name": "some category name"
-                }
-            }
+                    "image_url": "http://test.ureport.in/media/categories/StraightOuttaSomewhere_2.jpg",
+                    "name": "tests"
+                },
+                "created_on": "2015-09-02T08:53:30.313251Z"
+            },
+            ...
         }
     """
     serializer_class = PollReadSerializer
