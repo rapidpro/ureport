@@ -158,10 +158,13 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         poll = self.reg_poll
         category = response.data.pop('category')
+        print response.data
         self.assertDictEqual(response.data, dict(id=poll.pk,
                                                  flow_uuid=poll.flow_uuid,
                                                  title=poll.title,
                                                  org=poll.org_id,
+                                                 created_on=poll.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+                                                 questions=list(poll.questions.all())
                                                  ))
         self.assertDictEqual(dict(category), dict(OrderedDict(name=poll.category.name,
                                                   image_url=CategoryReadSerializer().
@@ -188,7 +191,8 @@ class UreportAPITests(APITestCase):
                                                  title=news.title,
                                                  description=news.description,
                                                  link=news.link,
-                                                 org=news.org_id))
+                                                 org=news.org_id,
+                                                 created_on=news.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ')))
         self.assertDictEqual(dict(category), dict(name=news.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(news.category)))
 
@@ -212,7 +216,8 @@ class UreportAPITests(APITestCase):
                                                  title=video.title,
                                                  video_id=video.video_id,
                                                  description=video.description,
-                                                 org=video.org_id))
+                                                 org=video.org_id,
+                                                 created_on=video.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ')))
         self.assertDictEqual(dict(category), dict(name=video.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(video.category)))
 
@@ -240,6 +245,7 @@ class UreportAPITests(APITestCase):
                                                  featured=story.featured,
                                                  tags=story.tags,
                                                  images=StoryReadSerializer().get_images(story),
-                                                 org=story.org_id))
+                                                 org=story.org_id,
+                                                 created_on=story.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ')))
         self.assertDictEqual(dict(category), dict(name=story.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(story.category)))

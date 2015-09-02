@@ -5,7 +5,7 @@ from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 from ureport.assets.models import Image
 from ureport.news.models import NewsItem, Video
-from ureport.polls.models import Poll
+from ureport.polls.models import Poll, PollQuestion
 
 __author__ = 'kenneth'
 
@@ -19,7 +19,7 @@ class CategoryReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('image_url', 'name',)
+        fields = ('image_url', 'name', )
 
     def get_image_url(self, obj):
         image = None
@@ -51,19 +51,32 @@ class StoryReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Story
-        fields = ('id', 'title', 'featured', 'summary', 'video_id', 'audio_link', 'tags', 'org', 'images', 'category')
+        fields = ('id', 'title', 'featured', 'summary', 'video_id', 'audio_link', 'tags', 'org', 'images', 'category',
+                  'created_on')
 
     def get_images(self, obj):
         return [generate_absolute_url_from_file(self.context['request'], image.image)
                 for image in obj.get_featured_images()]
 
 
+class PollQuestionReadSerializer(serializers.ModelSerializer):
+    total_summary_data = SerializerMethodField()
+
+    class Meta:
+        model = PollQuestion
+        fields = ('title', 'ruleset_uuid', 'is_open_ended', 'total_summary_data', )
+
+    def get_total_summary_data(self, obj):
+        return obj.get_total_summary_data()
+
+
 class PollReadSerializer(serializers.ModelSerializer):
     category = CategoryReadSerializer()
+    questions = PollQuestionReadSerializer(many=True)
 
     class Meta:
         model = Poll
-        fields = ('id', 'flow_uuid', 'title', 'org', 'category')
+        fields = ('id', 'flow_uuid', 'title', 'org', 'questions', 'category', 'created_on')
 
 
 class NewsItemReadSerializer(serializers.ModelSerializer):
@@ -72,7 +85,7 @@ class NewsItemReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NewsItem
-        fields = ('id', 'short_description', 'category', 'title', 'description', 'link', 'org')
+        fields = ('id', 'short_description', 'category', 'title', 'description', 'link', 'org', 'created_on')
 
     def get_short_description(self, obj):
         return obj.short_description()
@@ -83,7 +96,7 @@ class VideoReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ('id', 'category', 'title', 'description', 'video_id', 'org')
+        fields = ('id', 'category', 'title', 'description', 'video_id', 'org', 'created_on')
 
 
 class ImageReadSerializer(serializers.ModelSerializer):
@@ -91,7 +104,7 @@ class ImageReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Image
-        fields = ('id', 'image_url', 'image_type', 'org', 'name',)
+        fields = ('id', 'image_url', 'image_type', 'org', 'name', 'created_on')
 
     def get_image_url(self, obj):
         return generate_absolute_url_from_file(self.context['request'], obj.image)

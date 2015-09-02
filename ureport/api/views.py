@@ -2,10 +2,10 @@ from dash.orgs.models import Org
 from dash.stories.models import Story
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from ureport.api.serializers import PollReadSerializer, NewsItemReadSerializer, VideoReadSerializer, ImageReadSerializer, \
-    OrgReadSerializer, StoryReadSerializer
+    OrgReadSerializer, StoryReadSerializer, PollQuestionReadSerializer
 from ureport.assets.models import Image
 from ureport.news.models import NewsItem, Video
-from ureport.polls.models import Poll
+from ureport.polls.models import Poll, PollQuestion
 
 __author__ = 'kenneth'
 
@@ -81,7 +81,7 @@ class OrgDetails(RetrieveAPIView):
 
 class BaseListAPIView(ListAPIView):
     def get_queryset(self):
-        q = self.model.objects.filter(is_active=True)
+        q = self.model.objects.filter(is_active=True).order_by('-created_on')
         if self.kwargs.get('org', None):
             q = q.filter(org_id=self.kwargs.get('org'))
         return q
@@ -106,7 +106,7 @@ class PollList(BaseListAPIView):
 
         GET /api/v1/polls/org/1/
 
-    Response is the list of polls on the flow, most recent first:
+    Response is the list of polls, most recent first:
 
         {
             "count": 389,
