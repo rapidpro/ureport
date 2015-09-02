@@ -334,7 +334,9 @@ initMap = (id, geojson, question, districtLabel) ->
 
       if displayOthers and results.set > 0
         html += "<div class='other-details'>"
-        html += "<div class='other-help'>" + window.string_Other_answers +":" + "</div><table>"
+        html += "<div class='other-help'>"
+        html += window.string_Other_answers
+        html += ":</div><table>"
         for label, count of results.others
           percentage = Math.round((100 * count) / results.set)
           html += "<tr>"
