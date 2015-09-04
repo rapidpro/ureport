@@ -17,7 +17,7 @@ from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_re
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, get_reporter_group, _fetch_org_polls_results
 from ureport.utils import get_gender_stats, get_age_stats, json_date_to_datetime, datetime_to_json_date
-from ureport.utils import get_ureporters_locations_stats
+from ureport.utils import get_ureporters_locations_stats, get_registration_stats
 
 
 
@@ -613,3 +613,25 @@ class UtilsTest(DashTest):
         self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district', parent='R-STATE')),
                          [dict(boundary='R-DISTRICT', label='District', set=3)])
 
+    def test_get_registration_stats(self):
+
+        tz = pytz.timezone('UTC')
+        with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 6))):
+
+            stats = json.loads(get_registration_stats(self.org))
+
+            for entry in stats:
+                self.assertEqual(entry['count'], 0)
+
+            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-27', count=3)
+            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-06-30', count=4)
+            ReportersCounter.objects.create(org=self.org, type='registered_on:2014-11-25', count=6)
+
+            stats = json.loads(get_registration_stats(self.org))
+
+            non_zero_keys = ['08/24/15', '06/29/15']
+
+            for entry in stats:
+                self.assertFalse(entry['label'].endswith('14'))
+                if entry['count'] != 0:
+                    self.assertTrue(entry['label'] in non_zero_keys)
