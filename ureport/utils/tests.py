@@ -624,14 +624,16 @@ class UtilsTest(DashTest):
                 self.assertEqual(entry['count'], 0)
 
             ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-27', count=3)
+            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-25', count=6)
             ReportersCounter.objects.create(org=self.org, type='registered_on:2015-06-30', count=4)
             ReportersCounter.objects.create(org=self.org, type='registered_on:2014-11-25', count=6)
 
             stats = json.loads(get_registration_stats(self.org))
 
-            non_zero_keys = ['08/24/15', '06/29/15']
+            non_zero_keys = {'08/24/15': 9, '06/29/15': 4}
 
             for entry in stats:
                 self.assertFalse(entry['label'].endswith('14'))
                 if entry['count'] != 0:
-                    self.assertTrue(entry['label'] in non_zero_keys)
+                    self.assertTrue(entry['label'] in non_zero_keys.keys())
+                    self.assertEqual(entry['count'], non_zero_keys[entry['label']])
