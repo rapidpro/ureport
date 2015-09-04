@@ -567,17 +567,19 @@ class UtilsTest(DashTest):
         now_year = now.year
 
         two_years_ago = now_year - 2
+        five_years_ago = now_year - 5
         twelve_years_ago = now_year - 12
         forthy_five_years_ago = now_year - 45
 
         ReportersCounter.objects.create(org=self.org, type='born:%s' % two_years_ago, count=2)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=6)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % five_years_ago, count=1)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=5)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % forthy_five_years_ago, count=2)
 
         ReportersCounter.objects.create(org=self.org, type='born:10', count=10)
         ReportersCounter.objects.create(org=self.org, type='born:732837', count=20)
 
-        self.assertEqual(get_age_stats(self.org), json.dumps([dict(name='0-10', y=20), dict(name='10-20', y=60),
+        self.assertEqual(get_age_stats(self.org), json.dumps([dict(name='0-10', y=30), dict(name='10-20', y=50),
                                                               dict(name='40-50', y=20)]))
 
     def test_get_ureporters_locations_stats(self):
