@@ -1079,8 +1079,8 @@ class PublicTest(DashTest):
 
         self.uganda.set_config('state_label', 'State')
 
-        with mock.patch('dash.orgs.models.Org.get_locations_stats') as mock_locations_stats:
-            mock_locations_stats.return_value = 'LOCATIONS_STATS'
+        with mock.patch('dash.orgs.models.Org.get_ureporters_locations_stats') as mock_ureporters_locations_stats:
+            mock_ureporters_locations_stats.return_value = 'LOCATIONS_STATS'
 
             response = self.client.get(
                     reporters_results + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
@@ -1088,7 +1088,7 @@ class PublicTest(DashTest):
 
             self.assertEquals(response.status_code, 200)
             self.assertEquals(response.content, json.dumps("LOCATIONS_STATS"))
-            mock_locations_stats.assert_called_with(dict(location='State'))
+            mock_ureporters_locations_stats.assert_called_with(dict(location='State'))
 
     def test_news(self):
         news_url = reverse('public.news')

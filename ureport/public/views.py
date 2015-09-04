@@ -244,7 +244,7 @@ class ReportersResultsView(SmartReadView):
         if segment:
             segment = json.loads(segment)
 
-            output_data = self.get_object().get_locations_stats(segment)
+            output_data = self.get_object().get_ureporters_locations_stats(segment)
 
         return HttpResponse(json.dumps(output_data))
 

@@ -555,7 +555,7 @@ def get_occupation_stats(org):
                        for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()])
 
 
-def get_locations_stats(org, segment):
+def get_ureporters_locations_stats(org, segment):
     parent = segment.get('parent', None)
     field_type = segment.get('location', None)
 
@@ -576,11 +576,11 @@ def get_locations_stats(org, segment):
         boundaries = Boundary.objects.filter(org=org, level=2, parent__osm_id__iexact=parent).values('osm_id', 'name')
         location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
 
-    return [dict(boundary=elt['osm_id'], label=elt['name'], set=location_counts.get(elt['osm_id'], 0), unset=0)
-                       for elt in boundaries]
+    return [dict(boundary=elt['osm_id'], label=elt['name'], set=location_counts.get(elt['osm_id'], 0))
+            for elt in boundaries]
 
 
-Org.get_locations_stats = get_locations_stats
+Org.get_ureporters_locations_stats = get_ureporters_locations_stats
 Org.get_occupation_stats = get_occupation_stats
 Org.get_registration_stats = get_registration_stats
 Org.get_reporters_count = get_reporters_count
