@@ -18,7 +18,11 @@
             -if story.written_by
               .hero-author
                 - trans "BY"
-                {{ story.written_by }}
+                {{ story.written_by|upper }}
+            -elif story.created_by.first_name
+              .hero-author
+                - trans "BY"
+                {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
             .hero-info
               - trans "Scroll to read more"
 
