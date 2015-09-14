@@ -54,9 +54,37 @@ class Boundary(models.Model):
             return cls.objects.create(**kwargs)
 
     @classmethod
+    def build_global_boundaries(cls):
+
+        from django.conf import settings
+        from temba import Boundary as TembaBoundary
+        from temba.types import Geometry as TembaGeometry
+        handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
+        contents = handle.read()
+        handle.close()
+
+        boundaries_json = json.loads(contents)
+
+        boundaries = []
+        for elt in boundaries_json['features']:
+            temba_geometry = TembaGeometry.create(type=elt['geometry']['type'],
+                                                  coordinates=elt['geometry']['coordinates'])
+
+            temba_boundary = TembaBoundary.create(level=0, name=elt['properties']['name'],
+                                                  boundary=elt['properties']['hc-a2'], geometry=temba_geometry)
+
+            boundaries.append(temba_boundary)
+
+        return boundaries
+
+    @classmethod
     def fetch_boundaries(cls, org):
-        temba_client = org.get_temba_client()
-        api_boundaries = temba_client.get_boundaries()
+
+        if org.get_config('is_global'):
+            api_boundaries = cls.build_global_boundaries()
+        else:
+            temba_client = org.get_temba_client()
+            api_boundaries = temba_client.get_boundaries()
 
         seen_ids = []
 

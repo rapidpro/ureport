@@ -60,6 +60,18 @@ class LocationTest(DashTest):
                          dict(type='Feature', geometry=dict(type='MultiPolygon', coordinates=['COORDINATES']),
                               properties=dict(id='R23456', level=1, name='Lagos')))
 
+        with patch('ureport.locations.models.Boundary.build_global_boundaries') as mock_global_boundaries:
+            mock_global_boundaries.return_value = []
+
+            Boundary.fetch_boundaries(self.nigeria)
+            self.assertFalse(mock_global_boundaries.called)
+
+            self.nigeria.set_config('is_global', True)
+
+            Boundary.fetch_boundaries(self.nigeria)
+            self.assertTrue(mock_global_boundaries.called)
+            mock_global_boundaries.assert_called_once()
+
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_get_boundaries(self):
 

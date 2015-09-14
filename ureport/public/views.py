@@ -207,17 +207,7 @@ class BoundaryView(SmartTemplateView):
         org = self.request.org
 
         if org.get_config('is_global'):
-            from django.conf import settings
-            handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
-            contents = handle.read()
-            handle.close()
-
-            boundaries = json.loads(contents)
-
-            for elt in boundaries['features']:
-                elt['properties']['id'] = elt['properties']["hc-a2"]
-                elt['properties']['level'] = 0
-
+            location_boundaries = org.boundaries.filter(level=0)
         else:
             state_id = self.kwargs.get('osm_id', None)
 
@@ -226,7 +216,7 @@ class BoundaryView(SmartTemplateView):
             else:
                 location_boundaries = org.boundaries.filter(level=1)
 
-            boundaries = dict(type='FeatureCollection', features=[elt.as_geojson() for elt in location_boundaries])
+        boundaries = dict(type='FeatureCollection', features=[elt.as_geojson() for elt in location_boundaries])
 
         return HttpResponse(json.dumps(boundaries))
 

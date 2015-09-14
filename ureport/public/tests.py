@@ -819,17 +819,13 @@ class PublicTest(DashTest):
         response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
 
-        handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
-        contents = handle.read()
-        handle.close()
+        output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R12345",
+                                                                                               level=0,
+                                                                                               name='Uganda'),
+                                                               geometry=dict(type='MultiPolygon',
+                                                                             coordinates=[[1, 2]]))])
 
-        output = json.loads(contents)
-
-        response_content = json.loads(response.content)
-
-        self.assertEquals(set(output.keys()), set(response_content.keys()))
-        self.assertTrue(response_content['features'][0]["properties"]["id"])
-        self.assertEqual(response_content['features'][0]["properties"]["level"], 0)
+        self.assertEquals(json.dumps(output), response.content)
 
     def test_stories_list(self):
         stories_url = reverse('public.stories')
