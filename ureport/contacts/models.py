@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import json
 from dash.orgs.models import Org
 from django.core.cache import cache
-from django.db import models
+from django.db import models, DataError
 from django.db.models import Sum
 from django.utils.translation import ugettext_lazy as _
 import regex
@@ -119,18 +119,24 @@ class Contact(models.Model):
 
         state_field = org.get_config('state_label')
         if state_field:
-            state_name = temba_contact.fields.get(cls.find_contact_field_key(org, state_field), None)
-            state_boundary = Boundary.objects.filter(org=org, level=1, name__iexact=state_name).first()
-            if state_boundary:
-                state = state_boundary.osm_id
+            if org.get_config('is_global'):
+                state_name = temba_contact.fields.get(cls.find_contact_field_key(org, state_field), None)
+                if state_name:
+                    state = state_name
 
-            district_field = org.get_config('district_label')
-            if district_field:
-                district_name = temba_contact.fields.get(cls.find_contact_field_key(org, district_field), None)
-                district_boundary = Boundary.objects.filter(org=org, level=2, name__iexact=district_name,
+            else:
+                state_name = temba_contact.fields.get(cls.find_contact_field_key(org, state_field), None)
+                state_boundary = Boundary.objects.filter(org=org, level=1, name__iexact=state_name).first()
+                if state_boundary:
+                    state = state_boundary.osm_id
+
+                district_field = org.get_config('district_label')
+                if district_field:
+                    district_name = temba_contact.fields.get(cls.find_contact_field_key(org, district_field), None)
+                    district_boundary = Boundary.objects.filter(org=org, level=2, name__iexact=district_name,
                                                             parent=state_boundary).first()
-                if district_boundary:
-                    district = district_boundary.osm_id
+                    if district_boundary:
+                        district = district_boundary.osm_id
 
         registered_on = None
         registration_field = org.get_config('registration_label')
@@ -176,14 +182,21 @@ class Contact(models.Model):
 
     @classmethod
     def update_or_create_from_temba(cls, org, temba_contact):
+        from raven.contrib.django.raven_compat.models import client
+
         kwargs = cls.kwargs_from_temba(org, temba_contact)
 
-        existing = cls.objects.filter(org=org, uuid=kwargs['uuid'])
-        if existing:
-            existing.update(**kwargs)
-            return existing.first()
-        else:
-            return cls.objects.create(**kwargs)
+        try:
+            existing = cls.objects.filter(org=org, uuid=kwargs['uuid'])
+            if existing:
+                existing.update(**kwargs)
+                return existing.first()
+            else:
+                return cls.objects.create(**kwargs)
+        except DataError as e:
+            client.captureException()
+            import traceback
+            traceback.print_exc()
 
     @classmethod
     def fetch_contacts(cls, org, after=None):

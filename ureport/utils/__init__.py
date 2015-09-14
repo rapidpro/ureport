@@ -569,7 +569,8 @@ def get_ureporters_locations_stats(org, segment):
     org_contacts_counts = get_org_contacts_counts(org)
 
     if field_type == 'state':
-        boundaries = Boundary.objects.filter(org=org, level=1).values('osm_id', 'name')
+        boundary_top_level = 0 if org.get_config('is_global') else 1
+        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
 
     else:
