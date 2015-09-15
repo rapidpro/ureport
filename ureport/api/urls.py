@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url, include
-from ureport.api.views import PollList, PollDetails, NewsItemList, NewsItemDetails, VideoList, VideoDetails, ImageList, \
+from ureport.api.views import PollList, PollDetails, FeaturedPollList, NewsItemList, NewsItemDetails, VideoList, VideoDetails, ImageList, \
     ImageDetails, OrgList, OrgDetails, StoryList, StoryDetails
 
 __author__ = 'kenneth'
@@ -11,6 +11,7 @@ urlpatterns = patterns('',
                        url(r'^orgs/(?P<pk>[\w]+)/$', OrgDetails.as_view()),
 
                        url(r'^polls/org/(?P<org>[\w]+)/$', PollList.as_view()),
+                       url(r'^polls/org/(?P<org>[\w]+)/featured/$', FeaturedPollList.as_view()),
                        url(r'^polls/(?P<pk>[\w]+)/$', PollDetails.as_view()),
 
                        url(r'^news/org/(?P<org>[\w]+)/$', NewsItemList.as_view()),
