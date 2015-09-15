@@ -3,7 +3,7 @@ GitPython==1.0.0
 Markdown==2.6.2
 Pillow==2.8.2
 Pygments==2.0.2
-rapidpro-python
+-e git+https://github.com/rapidpro/rapidpro-python.git#egg=dash
 amqp==1.4.6
 anyjson==0.3.3
 billiard==3.3.0.19
