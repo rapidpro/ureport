@@ -16,7 +16,6 @@ logger = logging.getLogger(__name__)
 @app.task(name='contacts.fetch_contacts_task')
 def fetch_contacts_task(org_id=None, fetch_all=False):
 
-    start = time.time()
     r = get_redis_connection()
 
     key = 'fetch_contacts'
@@ -33,6 +32,9 @@ def fetch_contacts_task(org_id=None, fetch_all=False):
                 active_orgs = Org.objects.filter(pk=org_id)
 
             for org in active_orgs:
+
+                start = time.time()
+
                 last_fetched_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % org.id
 
                 after = cache.get(last_fetched_key, None)
@@ -42,10 +44,18 @@ def fetch_contacts_task(org_id=None, fetch_all=False):
                 if fetch_all:
                     after = None
 
-                Boundary.get_boundaries(org)
-                ContactField.get_contact_fields(org)
-                Contact.fetch_contacts(org, after=after)
+                try:
+                    Boundary.get_boundaries(org)
+                    ContactField.get_contact_fields(org)
+                    Contact.fetch_contacts(org, after=after)
 
-                cache.set(last_fetched_key, datetime_to_json_date(datetime.now().replace(tzinfo=pytz.utc)))
+                    cache.set(last_fetched_key, datetime_to_json_date(datetime.now().replace(tzinfo=pytz.utc)))
 
-            print "Task: fetch_contacts took %ss" % (time.time() - start)
+                    print "Task: fetch_contacts for %s took %ss" % (org.name, time.time() - start)
+
+                except Exception as e:
+                    import traceback
+                    traceback.print_exc()
+                    logger.exception("Error fetching contacts: %s" % str(e))
+
+
