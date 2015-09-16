@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
 from dash.api import API
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -9,8 +13,8 @@ from dash.orgs.models import Org
 from django.http.request import HttpRequest
 from ureport.jobs.models import JobSource
 from ureport.public.views import IndexView
-from temba import TembaClient, Result, Flow, Group
-
+from temba import TembaClient, Result, Flow, Group, Boundary as TembaBoundary
+from temba.types import Geometry as TembaGeometry
 
 class MockAPI(API):  # pragma: no cover
 
@@ -109,6 +113,11 @@ class MockAPI(API):  # pragma: no cover
 
 
 class MockTembaClient(TembaClient):
+
+    def get_boundaries(self, pager=None):
+        geometry = TembaGeometry.create(type='MultiPolygon', coordinates=['COORDINATES'])
+        return [TembaBoundary.create(boundary='R12345', name='Nigeria', parent=None, level=0, geometry=geometry),
+                TembaBoundary.create(boundary='R23456', name='Lagos', parent="R12345", level=1, geometry=geometry)]
 
     def get_groups(self, uuids=None, name=None, pager=None):
         return Group.deserialize_list([dict(uuid="uuid-8", name=name, size=120)])

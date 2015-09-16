@@ -248,12 +248,13 @@ INSTALLED_APPS = (
 
     # ureport apps
     'ureport.admins',
-    'ureport.polls',
-    'ureport.news',
-    'ureport.jobs',
-    'ureport.countries',
-    'ureport.assets',
     'ureport.api',
+    'ureport.assets',
+    'ureport.countries',
+    'ureport.jobs',
+    'ureport.locations',
+    'ureport.news',
+    'ureport.polls',
 
     'django_countries',
     'rest_framework',
