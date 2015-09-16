@@ -13,8 +13,9 @@ from dash.orgs.models import Org
 from django.http.request import HttpRequest
 from ureport.jobs.models import JobSource
 from ureport.public.views import IndexView
-from temba import TembaClient, Result, Flow, Group, Boundary as TembaBoundary
+from temba import TembaClient, Result, Flow, Group, Boundary as TembaBoundary, Field as TembaContactField
 from temba.types import Geometry as TembaGeometry
+
 
 class MockAPI(API):  # pragma: no cover
 
@@ -118,6 +119,9 @@ class MockTembaClient(TembaClient):
         geometry = TembaGeometry.create(type='MultiPolygon', coordinates=['COORDINATES'])
         return [TembaBoundary.create(boundary='R12345', name='Nigeria', parent=None, level=0, geometry=geometry),
                 TembaBoundary.create(boundary='R23456', name='Lagos', parent="R12345", level=1, geometry=geometry)]
+
+    def get_fields(self, pager=None):
+        return [TembaContactField.create(key='occupation', label='Activité', value_type='T')]
 
     def get_groups(self, uuids=None, name=None, pager=None):
         return Group.deserialize_list([dict(uuid="uuid-8", name=name, size=120)])

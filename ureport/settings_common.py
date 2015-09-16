@@ -250,6 +250,7 @@ INSTALLED_APPS = (
     'ureport.admins',
     'ureport.api',
     'ureport.assets',
+    'ureport.contacts',
     'ureport.countries',
     'ureport.jobs',
     'ureport.locations',
