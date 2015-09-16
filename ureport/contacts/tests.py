@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+from datetime import datetime
+from django.utils import timezone
 
 from mock import patch
-from ureport.contacts.models import ContactField
-from ureport.tests import DashTest, TembaContactField, MockTembaClient
+import pytz
+from ureport.contacts.models import ContactField, Contact
+from ureport.locations.models import Boundary
+from ureport.tests import DashTest, TembaContactField, MockTembaClient, TembaContact
+from temba import Group as TembaGroup
+from ureport.utils import json_date_to_datetime
 
 
 class ContactFieldTest(DashTest):
@@ -56,3 +62,116 @@ class ContactFieldTest(DashTest):
                 ContactField.get_contact_fields(self.nigeria)
                 self.assertFalse(mock_fetch.called)
 
+
+class ContactTest(DashTest):
+    def setUp(self):
+        super(ContactTest, self).setUp()
+        self.nigeria = self.create_org('nigeria', self.admin)
+        self.nigeria.set_config('reporter_group', "Ureporters")
+        self.nigeria.set_config('registration_label', "Registration Date")
+        self.nigeria.set_config('state_label', "State")
+        self.nigeria.set_config('district_label', "LGA")
+        self.nigeria.set_config('occupation_label', "Activité")
+        self.nigeria.set_config('born_label', "Born")
+        self.nigeria.set_config('gender_label', 'Gender')
+        self.nigeria.set_config('female_label', "Female")
+        self.nigeria.set_config('male_label', 'Male')
+
+        # boundaries fetched
+        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria", level=0, parent=None,
+                                               geometry='{"foo":"bar-country"}')
+        self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos", level=1,
+                                             parent=self.country, geometry='{"foo":"bar-state"}')
+        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo", level=2,
+                                                parent=self.state, geometry='{"foo":"bar-state"}')
+
+        self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
+                                                             label='Registration Date', value_type='T')
+
+        self.state_field = ContactField.objects.create(org=self.nigeria, key='state', label='State', value_type='S')
+        self.district_field = ContactField.objects.create(org=self.nigeria, key='lga', label='LGA', value_type='D')
+        self.occupation_field = ContactField.objects.create(org=self.nigeria, key='occupation', label='Activité',
+                                                            value_type='T')
+
+        self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
+        self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
+
+    def test_kwargs_from_temba(self):
+
+        temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
+                                            groups=['G-001', 'G-007'],
+                                            fields={'registration_date': None, 'state': None,
+                                                    'lga': None, 'occupation': None, 'born': None,
+                                                    'gender': None},
+                                            language='eng')
+
+        kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
+
+        self.assertEqual(kwargs, dict(uuid='C-006', org=self.nigeria, gender='', born=0, occupation='',
+                                      registered_on=None, state='', district=''))
+
+        # try creating contact from them
+        Contact.objects.create(**kwargs)
+
+        # Invalid boundaries become ''
+        temba_contact = TembaContact.create(uuid='C-007', name="Jan", urns=['tel:123'],
+                                            groups=['G-001', 'G-007'],
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z',
+                                                    'state': 'Kigali', 'lga': 'Oyo', 'occupation': 'Student',
+                                                    'born': '1990', 'gender': 'Male'},
+                                            language='eng')
+
+        kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
+
+        self.assertEqual(kwargs, dict(uuid='C-007', org=self.nigeria, gender='M', born=1990, occupation='Student',
+                                      registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='',
+                                      district=''))
+
+        # try creating contact from them
+        Contact.objects.create(**kwargs)
+
+        temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
+                                            groups=['G-001', 'G-007'],
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
+                                                    'lga': 'Oyo', 'occupation': 'Student', 'born': '1990',
+                                                    'gender': 'Male'},
+                                            language='eng')
+
+        kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
+
+        self.assertEqual(kwargs, dict(uuid='C-008', org=self.nigeria, gender='M', born=1990, occupation='Student',
+                                      registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='R-LAGOS',
+                                      district='R-OYO'))
+
+        # try creating contact from them
+        Contact.objects.create(**kwargs)
+
+    def test_fetch_contacts(self):
+
+        with patch('dash.orgs.models.TembaClient.get_groups') as mock_groups:
+            group = TembaGroup.create(uuid="uuid-8", name=None, size=120)
+            mock_groups.return_value = [group]
+
+            with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
+                mock_contacts.return_value = [TembaContact.create(uuid='000-001', name="Ann",
+                                                                  urns=['tel:1234'], groups=['000-002'],
+                                                                  fields=dict(state="Lagos", lga="Oyo",
+                                                                              gender='Female', born="1990"),
+                                                                  language='eng', modified_on=timezone.now())]
+
+                seen_uuids = Contact.fetch_contacts(self.nigeria)
+
+                self.assertEqual(seen_uuids, ['000-001'])
+                mock_contacts.assert_called_with(groups=[group], after=None)
+
+                contact = Contact.objects.get()
+                self.assertEqual(contact.uuid, '000-001')
+                self.assertEqual(contact.org, self.nigeria)
+                self.assertEqual(contact.state, 'R-LAGOS')
+                self.assertEqual(contact.district, 'R-OYO')
+                self.assertEqual(contact.gender, 'F')
+                self.assertEqual(contact.born, 1990)
+
+                Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
+                mock_contacts.assert_called_with(groups=[group],
+                                                 after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))

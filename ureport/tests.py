@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 from dash.api import API
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User
 from dash.orgs.middleware import SetOrgMiddleware
@@ -14,6 +15,7 @@ from django.http.request import HttpRequest
 from ureport.jobs.models import JobSource
 from ureport.public.views import IndexView
 from temba import TembaClient, Result, Flow, Group, Boundary as TembaBoundary, Field as TembaContactField
+from temba import Contact as TembaContact, Group as TembaGroup
 from temba.types import Geometry as TembaGeometry
 
 
@@ -122,6 +124,12 @@ class MockTembaClient(TembaClient):
 
     def get_fields(self, pager=None):
         return [TembaContactField.create(key='occupation', label='Activité', value_type='T')]
+
+    def get_contacts(self, uuids=None, urns=None, groups=None, after=None, before=None, pager=None):
+        return [TembaContact.create(
+                uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
+                fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),
+                language='eng', modified_on=timezone.now())]
 
     def get_groups(self, uuids=None, name=None, pager=None):
         return Group.deserialize_list([dict(uuid="uuid-8", name=name, size=120)])
