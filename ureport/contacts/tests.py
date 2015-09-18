@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from mock import patch
 import pytz
-from ureport.contacts.models import ContactField, Contact
+from ureport.contacts.models import ContactField, Contact, ReportersCounter
 from ureport.locations.models import Boundary
 from ureport.tests import DashTest, TembaContactField, MockTembaClient, TembaContact
 from temba import Group as TembaGroup
@@ -175,3 +175,38 @@ class ContactTest(DashTest):
                 Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
                 mock_contacts.assert_called_with(groups=[group],
                                                  after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
+
+    def test_reporters_counter(self):
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
+        Contact.objects.create(uuid='C-007', org=self.nigeria, gender='M', born=1990, occupation='Student',
+                               registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='R-LAGOS',
+                               district='R-OYO')
+
+        expected = dict()
+        expected['total-reporters'] = 1
+        expected['gender:m'] = 1
+        expected['occupation:student'] = 1
+        expected['born:1990'] = 1
+        expected['registered_on:2014-01-02'] = 1
+        expected['state:R-LAGOS'] = 1
+        expected['district:R-OYO'] = 1
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+
+        Contact.objects.create(uuid='C-008', org=self.nigeria, gender='M', born=1980, occupation='Teacher',
+                               registered_on=json_date_to_datetime('2014-01-02T03:07:05.000'), state='R-LAGOS',
+                               district='R-OYO')
+
+        expected = dict()
+        expected['total-reporters'] = 2
+        expected['gender:m'] = 2
+        expected['occupation:student'] = 1
+        expected['occupation:teacher'] = 1
+        expected['born:1990'] = 1
+        expected['born:1980'] = 1
+        expected['registered_on:2014-01-02'] = 2
+        expected['state:R-LAGOS'] = 2
+        expected['district:R-OYO'] = 2
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+

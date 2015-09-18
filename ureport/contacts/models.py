@@ -1,6 +1,7 @@
 from dash.orgs.models import Org
 from django.core.cache import cache
 from django.db import models, DataError
+from django.db.models import Sum
 from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
@@ -212,3 +213,26 @@ class Contact(models.Model):
 
         return seen_uuids
 
+
+class ReportersCounter(models.Model):
+
+    org = models.ForeignKey(Org, related_name='reporters_counters')
+
+    type = models.CharField(max_length=255)
+
+    count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    @classmethod
+    def get_counts(cls, org, types=None):
+        """
+        Gets all reporters counts by counter type for the given org
+        """
+        counters = cls.objects.filter(org=org)
+        if types:
+            counters = counters.filter(counter_type__in=types)
+        counter_counts = counters.values('type').order_by('type').annotate(count_sum=Sum('count'))
+
+        return {c['type']: c['count_sum'] for c in counter_counts}
+
+    class Meta:
+        index_together = ('org', 'type')
