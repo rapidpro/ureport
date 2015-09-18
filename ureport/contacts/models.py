@@ -78,6 +78,7 @@ class Contact(models.Model):
     """
 
     CONTACT_LAST_FETCHED_CACHE_KEY = 'last:fetch_contacts:%d'
+    CONTACT_LAST_FETCHED_CACHE_TIMEOUT = 60 * 60 * 24 * 30
 
     MALE = 'M'
     FEMALE = 'F'

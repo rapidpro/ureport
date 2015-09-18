@@ -49,7 +49,8 @@ def fetch_contacts_task(org_id=None, fetch_all=False):
                     ContactField.get_contact_fields(org)
                     Contact.fetch_contacts(org, after=after)
 
-                    cache.set(last_fetched_key, datetime_to_json_date(datetime.now().replace(tzinfo=pytz.utc)))
+                    cache.set(last_fetched_key, datetime_to_json_date(datetime.now().replace(tzinfo=pytz.utc)),
+                              Contact.CONTACT_LAST_FETCHED_CACHE_KEY)
 
                     print "Task: fetch_contacts for %s took %ss" % (org.name, time.time() - start)
 
