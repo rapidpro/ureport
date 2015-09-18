@@ -197,6 +197,9 @@ class Contact(models.Model):
 
     @classmethod
     def fetch_contacts(cls, org, after=None):
+
+        print "START== Fetching contacts for %s" % org.name
+
         reporter_group = org.get_config('reporter_group')
 
         temba_client = org.get_temba_client()
