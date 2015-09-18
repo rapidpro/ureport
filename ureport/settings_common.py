@@ -487,7 +487,7 @@ CELERYBEAT_SCHEDULE = {
     },
     "fetch_contacts": {
         "task": "contacts.fetch_contacts_task",
-        "schedule": timedelta(minutes=30),
+        "schedule": timedelta(minutes=10),
         "relative": True,
      },
 }
