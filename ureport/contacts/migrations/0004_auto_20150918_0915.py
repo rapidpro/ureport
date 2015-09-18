@@ -13,14 +13,14 @@ CREATE OR REPLACE FUNCTION
 RETURNS VOID AS $$
 BEGIN
   INSERT INTO contacts_reporterscounter("org_id", "type", "count") VALUES(_org_id, _type, _count);
-  PERFORM ureport_may_be_squash_reporterscounters(_org_id, _type);
+  PERFORM ureport_maybe_squash_reporterscounters(_org_id, _type);
 END;
 $$ LANGUAGE plpgsql;
 -----------------------------------------------------------------------------
 -- Every 100 inserts or so this will squash the counters by gathering
 -----------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION
-  ureport_may_be_squash_reporterscounters(_org_id INT, _type VARCHAR)
+  ureport_maybe_squash_reporterscounters(_org_id INT, _type VARCHAR)
 RETURNS VOID AS $$
 BEGIN
   IF RANDOM() < .01 THEN
