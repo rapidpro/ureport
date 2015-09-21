@@ -142,11 +142,10 @@
             .hr-header.primary-color
               - trans "TOTAL # OF U-REPORTERS"
             .reporters-count
-              - with reporters=org|reporter_count
-                - if reporters
-                  {{ reporters|intcomma }}
-                - else
-                  000,000
+              - if reporters
+                {{ reporters|intcomma }}
+              - else
+                000,000
 
             - if most_active_regions
               .hr-header.primary-color
@@ -170,32 +169,31 @@
 
           -if not is_iorg
             .col-md-4
-              -with gender_stats=org|gender_stats
-                .hr-header.primary-color
-                  - trans "RATE BY GENDER"
-                .gender-stats{ data-contact-field:'{{org|config:"gender_label"}}'}
-                  %table.gender
-                    %tbody
-                      %tr
-                        %td
-                          .icon-gender.primary-color
-                            .glyph.icon-Icon-02
+              .hr-header.primary-color
+                - trans "RATE BY GENDER"
+              .gender-stats{ data-contact-field:'{{org|config:"gender_label"}}'}
+                %table.gender
+                  %tbody
+                    %tr
+                      %td
+                        .icon-gender.primary-color
+                          .glyph.icon-Icon-02
 
-                        %td
-                          #male-percentage.primary-border-color.percentage-gender
-                            %span {{ gender_stats.male_percentage }}
-                          #male-summary.summary-gender
-                            {{ gender_stats.male_count|intcomma }}
+                      %td
+                        #male-percentage.primary-border-color.percentage-gender
+                          %span {{ gender_stats.male_percentage }}
+                        #male-summary.summary-gender
+                          {{ gender_stats.male_count|intcomma }}
 
-                        %td.female-gender
-                          .icon-gender.primary-color
-                            .glyph.icon-Icon-01
+                      %td.female-gender
+                        .icon-gender.primary-color
+                          .glyph.icon-Icon-01
 
-                        %td
-                          #female-percentage.primary-border-color.percentage-gender
-                            %span {{ gender_stats.female_percentage }}
-                          #female-summary.summary-gender
-                            {{ gender_stats.female_count|intcomma }}
+                      %td
+                        #female-percentage.primary-border-color.percentage-gender
+                          %span {{ gender_stats.female_percentage }}
+                        #female-summary.summary-gender
+                          {{ gender_stats.female_count|intcomma }}
 
             .col-md-4
               .hr-header.primary-color
@@ -673,162 +671,77 @@
         });
       });
 
-      $(function(){
-        $(".gender-stats").each(function(){
-          var contactField = $(this).attr("data-contact-field");
-          $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
-
-            if(!result){
-              return;
-            }
-
-            var results = result[0];
-            var categories = [];
-
-            male_label = "{{org|config:"male_label"|upper }}";
-            female_label = "{{org|config:"female_label"|upper }}";
-
-            var total = 0;
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              label = category.label.trim().toUpperCase()
-              if (label == male_label || label == female_label) {
-                total += category.count;
-              }
-            }
-
-            var percentage_lookup = {};
-            var count_lookup = {};
-
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              label = category.label.trim().toUpperCase();
-              if(categories.indexOf(label) >= 0) {
-                if (total > 0){
-                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-                  percentage_lookup[label] += Math.round(percentage);
-                  count_lookup[label] += category.count;
-                }
-
-              } else {
-
-                categories.push(label);
-
-                if (total > 0){
-                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-                  percentage_lookup[label] = Math.round(percentage);
-                  count_lookup[label] = category.count;
-                }
-              }
-            }
-
-            if (male_label in percentage_lookup){
-              $("#male-percentage").text(percentage_lookup[male_label] + "%");
-              $("#male-summary").text(window.intcomma(count_lookup[male_label]));
-            }
-
-            if (female_label in percentage_lookup){
-              $("#female-percentage").text(percentage_lookup[female_label] + "%");
-              $("#female-summary").text(window.intcomma(count_lookup[female_label]));
-            }
-          });
-        });
-      });
 
       $(function(){
         $("#age-chart").each(function(){
-          var contactField = $(this).attr("data-contact-field");
-          $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
 
-            if(!result){
-              return;
-            }
+           var data = {{ age_stats|safe }}
 
-            var results = result[0];
-            var categories = [];
-            var data = [];
+           var categories = [];
 
-            var total = 0;
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              total += category.count;
-            }
+           for (i=0; i<data.length; i++) {
+             categories.push(data[i].name)
+           }
 
-            var percentage_lookup = {};
-
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              label = category.label.trim().toUpperCase();
-
-              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-              percentage_lookup[label] = Math.round(percentage);
-
-              if (parseInt(percentage_lookup[label])) {
-                categories.push(label);
-                data.push({ name:label,  y: Math.round(percentage) });
-              }
-            }
-
-            $('#age-chart').highcharts({
-              chart: {
-                type: 'column',
-                spacing: [ 3, 5, 3, 5]
-              },
-              credits: {
-                enabled: false
-              },
-              legend: {
-                enabled: false
-              },
-              title: {
-                  text: null
-              },
-              subtitle: {
-                  text: null
-              },
-              xAxis: {
-                categories: categories,
-                labels : {
-                    rotation: 0,
-                    style: {
-                      fontSize: 10,
-                      fontFamily: 'serif'
-                  }
-                },
-                minorTickLength: 0,
-                tickLength: 0
-              },
-              yAxis: {
-                min: 0,
-                labels: {
-                  enabled: false
-                },
-                gridLineWidth: 0,
-                title: {
-                  text: null
-                }
-              },
-              tooltip: {
-                enabled: false
-              },
-              plotOptions: {
-                  column: {
-                      color: '{{ org|config:"primary_color"}}',
-                      pointPadding: 0.2,
-                      pointWidth: 30,
-                      borderWidth: 0,
-                      dataLabels:  {
-                        enabled: true,
-                        style: {
-                          fontFamily: "SharpSansBold"
-                        },
-                        verticalAlign:"bottom",
-                        format: '<b>{point.y:.0f}%</b>'
-                      }
-                  }
-              },
-              series: [ {name: 'Age' , data: data} ]
-            });
-          });
-        });
-      });
+           $('#age-chart').highcharts({
+             chart: {
+               type: 'column',
+               spacing: [ 3, 5, 3, 5]
+             },
+             credits: {
+               enabled: false
+             },
+             legend: {
+               enabled: false
+             },
+             title: {
+                 text: null
+             },
+             subtitle: {
+                 text: null
+             },
+             xAxis: {
+               categories: categories,
+               labels : {
+                   rotation: 0,
+                   style: {
+                     fontSize: 10,
+                     fontFamily: 'serif'
+                 }
+               },
+               minorTickLength: 0,
+               tickLength: 0
+             },
+             yAxis: {
+               min: 0,
+               labels: {
+                 enabled: false
+               },
+               gridLineWidth: 0,
+               title: {
+                 text: null
+               }
+             },
+             tooltip: {
+               enabled: false
+             },
+             plotOptions: {
+                 column: {
+                     color: '{{ org|config:"primary_color"}}',
+                     pointPadding: 0.2,
+                     pointWidth: 30,
+                     borderWidth: 0,
+                     dataLabels:  {
+                       enabled: true,
+                       style: {
+                         fontFamily: "SharpSansBold"
+                       },
+                       verticalAlign:"bottom",
+                       format: '<b>{point.y:.0f}%</b>'
+                     }
+                 }
+             },
+             series: [ {name: 'Age' , data: {{ age_stats|safe }} } ]
+           });
+         });
+       });

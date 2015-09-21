@@ -57,6 +57,10 @@ class IndexView(SmartTemplateView):
         if org.get_config('is_global'):
             context['global_counter'] = get_global_count()
 
+        context['gender_stats'] = org.get_gender_stats()
+        context['age_stats'] = org.get_age_stats()
+        context['reporters'] = org.get_reporters_count()
+
         return context
 
 
@@ -203,26 +207,19 @@ class BoundaryView(SmartTemplateView):
         org = self.request.org
 
         if org.get_config('is_global'):
-            from django.conf import settings
-            handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
-            contents = handle.read()
-            handle.close()
-
-            boundaries = json.loads(contents)
-
-            for elt in boundaries['features']:
-                elt['properties']['id'] = elt['properties']["hc-a2"]
-                elt['properties']['level'] = 0
-
+            location_boundaries = org.boundaries.filter(level=0)
         else:
             state_id = self.kwargs.get('osm_id', None)
 
             if state_id:
-                boundaries = org.get_state_geojson(state_id)
+                location_boundaries = org.boundaries.filter(level=2, parent__osm_id=state_id)
             else:
-                boundaries = org.get_country_geojson()
+                location_boundaries = org.boundaries.filter(level=1)
+
+        boundaries = dict(type='FeatureCollection', features=[elt.as_geojson() for elt in location_boundaries])
 
         return HttpResponse(json.dumps(boundaries))
+
 
 
 class ReportersResultsView(SmartReadView):
@@ -309,6 +306,11 @@ class UreportersView(SmartTemplateView):
 
         # remove the first option '' from calender.month_abbr
         context['months'] = [str(_('%s')) % m for m in calendar.month_abbr][1:]
+
+        context['gender_stats'] = org.get_gender_stats()
+        context['age_stats'] = org.get_age_stats()
+        context['registration_stats'] = org.get_registration_stats()
+        context['occupation_stats'] = org.get_occupation_stats()
 
         return context
 
