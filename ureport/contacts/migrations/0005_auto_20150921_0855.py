@@ -79,14 +79,14 @@ BEGIN
     PERFORM ureport_increment_counter_for_contact(_new_contact, TRUE);
 
   -- Contact is being deleted, decrement all reporters counters for its values
-  ELIF _new_contact IS NULL THEN
+  ELSIF _new_contact IS NULL THEN
     PERFORM ureport_increment_counter_for_contact(_old_contact, FALSE);
 
   -- no org id, decrement all reporters counters for its previous values
-  ELIF _new_contact.org_id IS NULL THEN
+  ELSIF _new_contact.org_id IS NULL THEN
     PERFORM ureport_increment_counter_for_contact(_old_contact, FALSE);
 
-  ELIF _new_contact.org_id = _old_contact.org_id THEN
+  ELSIF _new_contact.org_id = _old_contact.org_id THEN
 
     IF _new_contact.gender != _old_contact.gender THEN
       PERFORM ureport_insert_reporters_counter(_old_contact.org_id, CONCAT('gender:', LOWER(_old_contact.gender)), -1);
