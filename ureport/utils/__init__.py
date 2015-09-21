@@ -16,9 +16,13 @@ import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
+from ureport.contacts.models import ReportersCounter
 from ureport.polls.models import Poll
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
+
+ORG_CONTACT_COUNT_KEY = 'org:%d:contacts-counts'
+ORG_CONTACT_COUNT_TIMEOUT = 300
 
 
 def datetime_to_json_date(dt):
@@ -441,6 +445,38 @@ def get_global_count():
     return count
 
 
+def get_org_contacts_counts(org):
+
+    key = ORG_CONTACT_COUNT_KEY % org.pk
+    # org_contacts_counts = cache.get(key, None)
+    # if org_contacts_counts:
+    #     return org_contacts_counts
+
+    org_contacts_counts = ReportersCounter.get_counts(org)
+    cache.set(key, org_contacts_counts, ORG_CONTACT_COUNT_TIMEOUT)
+    return org_contacts_counts
+
+
+def get_gender_stats(org):
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    female_count = org_contacts_counts.get('gender:f', 0)
+    male_count = org_contacts_counts.get('gender:m', 0)
+
+    if not female_count and not male_count:
+        return dict(female_count=female_count, female_percentage="---",
+                    male_count=male_count, male_percentage="---")
+
+    total = female_count + male_count
+
+    female_percentage = female_count * 100 / total
+    male_percentage = 100 - female_percentage
+
+    return dict(female_count=female_count, female_percentage=str(female_percentage) + "%",
+                male_count=male_count, male_percentage=str(male_percentage) + "%")
+
+
+Org.get_gender_stats = get_gender_stats
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
