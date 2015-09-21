@@ -73,17 +73,8 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION ureport_adjust_counter_for_contact(_new_contact contacts_contact, _old_contact contacts_contact)
 RETURNS VOID AS $$
 BEGIN
-  -- Contact being created, increment counters for contact NEW
-  IF _old_contact IS NULL THEN
-
-    PERFORM ureport_increment_counter_for_contact(_new_contact, TRUE);
-
-  -- Contact is being deleted, decrement all reporters counters for its values
-  ELSIF _new_contact IS NULL THEN
-    PERFORM ureport_increment_counter_for_contact(_old_contact, FALSE);
-
   -- no org id, decrement all reporters counters for its previous values
-  ELSIF _new_contact.org_id IS NULL THEN
+  IF _new_contact.org_id IS NULL THEN
     PERFORM ureport_increment_counter_for_contact(_old_contact, FALSE);
 
   ELSIF _new_contact.org_id = _old_contact.org_id THEN
@@ -129,9 +120,17 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION ureport_update_counters() RETURNS TRIGGER AS $$
 BEGIN
 
-  IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' OR TG_OP = 'DELETE' THEN
+  -- Contact being created, increment counters for contact NEW
+  IF TG_OP = 'INSERT' THEN
+    PERFORM ureport_increment_counter_for_contact(NEW, TRUE);
+  ELSIF TG_OP = 'UPDATE' THEN
+    -- If a contact is changed, adjust the counters
     PERFORM ureport_adjust_counter_for_contact(NEW, OLD);
-
+  -- Contact is being deleted
+  ELSIF TG_OP = 'DELETE' THEN
+    -- A contact is deleted, decrement all reporters counters for its values
+    PERFORM ureport_increment_counter_for_contact(OLD, FALSE);
+  -- Contacts table is being truncated
   ELSIF TG_OP = 'TRUNCATE' THEN
    -- Clear all counters
    TRUNCATE contacts_reporterscounter;
