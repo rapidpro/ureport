@@ -10,10 +10,11 @@ import redis
 from temba import Group
 from ureport.assets.models import FLAG, Image
 from ureport.contacts.models import ReportersCounter
+from ureport.locations.models import Boundary
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count, \
-    get_gender_stats, get_age_stats, get_registration_stats
+    get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, get_reporter_group, _fetch_org_polls_results
@@ -580,7 +581,6 @@ class UtilsTest(DashTest):
         self.assertEqual(get_age_stats(self.org), json.dumps([dict(name='0-10', y=30), dict(name='10-20', y=50),
                                                               dict(name='40-50', y=20)]))
 
-
     def test_get_registration_stats(self):
 
         tz = pytz.timezone('UTC')
@@ -605,3 +605,37 @@ class UtilsTest(DashTest):
                 if entry['count'] != 0:
                     self.assertTrue(entry['label'] in non_zero_keys.keys())
                     self.assertEqual(entry['count'], non_zero_keys[entry['label']])
+
+    def test_get_ureporters_locations_stats(self):
+
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict()), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='map')), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='state')), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district')), [])
+
+        self.country = Boundary.objects.create(org=self.org, osm_id="R-COUNTRY", name="Country", level=0, parent=None,
+                                               geometry='{"foo":"bar-country"}')
+        self.state = Boundary.objects.create(org=self.org, osm_id="R-STATE", name="State", level=1,
+                                             parent=self.country, geometry='{"foo":"bar-state"}')
+        self.city = Boundary.objects.create(org=self.org, osm_id="R-CITY", name="City", level=1,
+                                            parent=self.country, geometry='{"foo":"bar-city"}')
+        self.district = Boundary.objects.create(org=self.org, osm_id="R-DISTRICT", name="District", level=2,
+                                                parent=self.state, geometry='{"foo":"bar-district"}')
+
+        ReportersCounter.objects.create(org=self.org, type='state:R-STATE', count=5)
+        ReportersCounter.objects.create(org=self.org, type='district:R-DISTRICT', count=3)
+
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict()), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='map')), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='state')),
+                         [dict(boundary='R-CITY', label='City', set=0), dict(boundary='R-STATE', label='State', set=5)])
+
+        # district without parent
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district')), [])
+
+        # district with wrong parent
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district', parent='BLABLA')), [])
+
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district', parent='R-STATE')),
+                         [dict(boundary='R-DISTRICT', label='District', set=3)])
+
