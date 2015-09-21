@@ -13,7 +13,7 @@ from ureport.contacts.models import ReportersCounter
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count, \
-    get_gender_stats
+    get_gender_stats, get_age_stats
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, get_reporter_group, _fetch_org_polls_results
@@ -557,3 +557,25 @@ class UtilsTest(DashTest):
         self.assertEqual(get_gender_stats(self.org), dict(female_count=2, female_percentage="40%",
                                                           male_count=3, male_percentage="60%"))
 
+    def test_get_age_stats(self):
+
+        self.assertEqual(get_age_stats(self.org), json.dumps([]))
+
+        now = timezone.now()
+        now_year = now.year
+
+        two_years_ago = now_year - 2
+        five_years_ago = now_year - 5
+        twelve_years_ago = now_year - 12
+        forthy_five_years_ago = now_year - 45
+
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % two_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % five_years_ago, count=1)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=5)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % forthy_five_years_ago, count=2)
+
+        ReportersCounter.objects.create(org=self.org, type='born:10', count=10)
+        ReportersCounter.objects.create(org=self.org, type='born:732837', count=20)
+
+        self.assertEqual(get_age_stats(self.org), json.dumps([dict(name='0-10', y=30), dict(name='10-20', y=50),
+                                                              dict(name='40-50', y=20)]))

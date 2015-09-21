@@ -476,6 +476,30 @@ def get_gender_stats(org):
                 male_count=male_count, male_percentage=str(male_percentage) + "%")
 
 
+def get_age_stats(org):
+    now = timezone.now()
+    current_year = now.year
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    age_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
+
+    age_counts_interval = dict()
+    total = 0
+    for year_key, age_count in age_counts.iteritems():
+        total += age_count
+        decade = int(math.floor((current_year - int(year_key)) / 10)) * 10
+        key = "%s-%s" % (decade, decade+10)
+        if age_counts_interval.get(key, None):
+            age_counts_interval[key] += age_count
+        else:
+            age_counts_interval[key] = age_count
+
+    age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
+    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems() if v], key=lambda i: i))
+
+
+Org.get_age_stats = get_age_stats
 Org.get_gender_stats = get_gender_stats
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
