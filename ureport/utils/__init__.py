@@ -499,6 +499,45 @@ def get_age_stats(org):
     return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems() if v], key=lambda i: i))
 
 
+def get_registration_stats(org):
+    now = timezone.now()
+    six_months_ago = now - timedelta(days=180)
+    six_months_ago = six_months_ago - timedelta(six_months_ago.weekday())
+    tz = pytz.timezone('UTC')
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registred_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
+
+    interval_dict = dict()
+
+    for date_key, date_count  in registred_on_counts.iteritems():
+        parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
+
+        # this is in the range we care about
+        if parsed_time > six_months_ago:
+            # get the week of the year
+            dict_key = parsed_time.strftime("%W")
+
+            if interval_dict.get(dict_key, None):
+                interval_dict[dict_key] += date_count
+            else:
+                interval_dict[dict_key] = date_count
+
+    # build our final dict using week numbers
+    categories = []
+    start = six_months_ago
+    while start < timezone.now():
+        week_dict = start.strftime("%W")
+        count = interval_dict.get(week_dict, 0)
+        categories.append(dict(label=start.strftime("%m/%d/%y"), count=count))
+
+        start = start + timedelta(days=7)
+
+    return json.dumps(categories)
+
+
+Org.get_registration_stats = get_registration_stats
 Org.get_age_stats = get_age_stats
 Org.get_gender_stats = get_gender_stats
 Org.get_contact_field_results = get_contact_field_results
