@@ -564,6 +564,13 @@ def get_ureporters_locations_stats(org, segment):
             for elt in boundaries]
 
 
+def get_reporters_count(org):
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    return org_contacts_counts.get("total-reporters", 0)
+
+
+Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
 Org.get_registration_stats = get_registration_stats
 Org.get_age_stats = get_age_stats
