@@ -570,6 +570,17 @@ def get_reporters_count(org):
     return org_contacts_counts.get("total-reporters", 0)
 
 
+def get_occupation_stats(org):
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    occupation_counts = {k[11:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("occupation")}
+
+    return json.dumps([dict(label=k, count=v)
+                       for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()])
+
+
+Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
 Org.get_registration_stats = get_registration_stats

@@ -14,7 +14,8 @@ from ureport.locations.models import Boundary
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count, \
-    get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count
+    get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
+    get_occupation_stats
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, get_reporter_group, _fetch_org_polls_results
@@ -646,3 +647,15 @@ class UtilsTest(DashTest):
         ReportersCounter.objects.create(org=self.org, type='total-reporters', count=5)
 
         self.assertEqual(get_reporters_count(self.org), 5)
+
+    def test_get_occupation_stats(self):
+
+        self.assertEqual(get_occupation_stats(self.org), '[]')
+
+        ReportersCounter.objects.create(org=self.org, type='occupation:student', count=5)
+        ReportersCounter.objects.create(org=self.org, type='occupation:writer', count=2)
+        ReportersCounter.objects.create(org=self.org, type='occupation:all responses', count=13)
+
+        self.assertEqual(get_occupation_stats(self.org), json.dumps([dict(label='writer', count=2),
+                                                                     dict(label='student', count=5)]))
+
