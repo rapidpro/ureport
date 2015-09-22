@@ -319,23 +319,25 @@ class PollTest(DashTest):
                                     created_by=self.admin,
                                     modified_by=self.admin)
 
+        self.assertEquals(poll1.runs(), "----")
 
-        with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = dict(runs=50, completed_runs=120, name='Flow 1', uuid='uuid-1', participants=300,
-                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
-                                     rulesets=[dict(uuid="uuid-8435",response_type="C",
-                                                    label='Does your community have power')])
+        poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                     title='question poll 1',
+                                                     ruleset_uuid="uuid-101",
+                                                     created_by=self.admin,
+                                                     modified_by=self.admin)
 
-            self.assertEquals(poll1.runs(), 50)
-            mock.assert_called_once_with()
+        fetched_results = [dict(open_ended=False, set=40, unset=60, categories=[dict(count=15, label='Yes'),
+                                                                                dict(count=25, label='No')],
+                                label='All')]
 
-        with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = None
+        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
+            mock.return_value = fetched_results
 
-            self.assertEquals(poll1.runs(), "----")
-            mock.assert_called_once_with()
+            self.assertEquals(poll1.runs(), 100)
+            mock.assert_called_with()
 
-    def test_completed_runs(self):
+    def test_responded_runs(self):
         poll1 = Poll.objects.create(flow_uuid="uuid-1",
                                     title="Poll 1",
                                     category=self.health_uganda,
@@ -344,19 +346,22 @@ class PollTest(DashTest):
                                     created_by=self.admin,
                                     modified_by=self.admin)
 
-        with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = dict(runs=50, completed_runs=30, name='Flow 1', uuid='uuid-1', participants=50,
-                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
-                                     rulesets=[dict(uuid="uuid-8435", response_type="C",
-                                                    label='Does your community have power')])
+        self.assertEquals(poll1.responded_runs(), "---")
 
-            self.assertEquals(poll1.completed_runs(), 30)
-            mock.assert_called_once_with()
+        poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                     title='question poll 1',
+                                                     ruleset_uuid="uuid-101",
+                                                     created_by=self.admin,
+                                                     modified_by=self.admin)
 
-        with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = None
+        fetched_results = [dict(open_ended=False, set=40, unset=60, categories=[dict(count=15, label='Yes'),
+                                                                                dict(count=25, label='No')],
+                                label='All')]
 
-            self.assertEquals(poll1.completed_runs(), "---")
+        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
+            mock.return_value = fetched_results
+
+            self.assertEquals(poll1.responded_runs(), 40)
             mock.assert_called_once_with()
 
     def test_response_percentage(self):
@@ -368,29 +373,23 @@ class PollTest(DashTest):
                                     created_by=self.admin,
                                     modified_by=self.admin)
 
-        with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = dict(runs=160, completed_runs=80, name='Flow 1', uuid='uuid-1', participants=160,
-                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
-                                     rulesets=[dict(uuid="uuid-8435", response_type="C",
-                                                    label='Does your community have power')])
+        self.assertEquals(poll1.response_percentage(), "---")
 
-            self.assertEquals(poll1.response_percentage(), "50%")
-            mock.assert_called_once_with()
+        poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                     title='question poll 1',
+                                                     ruleset_uuid="uuid-101",
+                                                     created_by=self.admin,
+                                                     modified_by=self.admin)
 
-        with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = dict(runs=160, completed_runs=0, name='Flow 1', uuid='uuid-1', participants=160,
-                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
-                                     rulesets=[dict(uuid="uuid-8435", response_type="C",
-                                                    label='Does your community have power')])
+        fetched_results = [dict(open_ended=False, set=40, unset=60, categories=[dict(count=15, label='Yes'),
+                                                                                dict(count=25, label='No')],
+                                label='All')]
 
-            self.assertEquals(poll1.response_percentage(), "---")
-            mock.assert_called_once_with()
+        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
+            mock.return_value = fetched_results
 
-        with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = None
-
-            self.assertEquals(poll1.response_percentage(), "---")
-            mock.assert_called_once_with()
+            self.assertEquals(poll1.response_percentage(), "40%")
+            mock.assert_called_with()
 
     def test_get_featured_images(self):
         poll1 = Poll.objects.create(flow_uuid="uuid-1",
@@ -1062,6 +1061,8 @@ class PollQuestionTest(DashTest):
 
             self.assertEquals(poll_question1.get_words(), [dict(count=2210, label='Yes'), dict(count=1252, label='No')])
             mock.assert_called_with()
+
+            self.assertEquals(poll_question1.get_response_percentage(), "48%")
 
     def test_tasks(self):
         self.org = self.create_org("burundi", self.admin)
