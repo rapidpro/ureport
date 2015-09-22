@@ -15,10 +15,10 @@
               {{ story.category|upper }}
             .story-hero-title
               {{ story.title|upper }}
-            -if story.created_by.first_name
+            -if story.get_written_by
               .hero-author
                 - trans "BY"
-                {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
+                {{ story.get_written_by|upper }}
             .hero-info
               - trans "Scroll to read more"
 

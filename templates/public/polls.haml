@@ -36,7 +36,7 @@
                 %span
                   - trans "RESPONSE RATE"
               .hero-description
-                {{ latest_poll.completed_runs|intcomma }}
+                {{ latest_poll.responded_runs|intcomma }}
                 %span
                   - trans "RESPONDED OUT OF"
                 {{ latest_poll.runs|intcomma }}
