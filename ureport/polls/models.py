@@ -190,12 +190,11 @@ class Poll(SmartModel):
         """
         The response rate for this flow
         """
-        flow = self.get_flow()
-        if flow and flow['completed_runs']:
-            percentage = int(round((flow['completed_runs'] * 100.0) / flow['runs']))
-            return "%s" % (str(percentage) + "%")
-        else:
-            return '---'
+        top_question = self.get_questions().first()
+        if top_question:
+            return top_question.get_response_percentage()
+
+        return '---'
 
     def get_trending_words(self):
         key = 'trending_words:%d' % self.pk
@@ -241,15 +240,15 @@ class Poll(SmartModel):
         return self.images.filter(is_active=True).order_by('pk')
 
     def runs(self):
-        flow = self.get_flow()
-        if flow:
-            return flow['runs']
+        top_question = self.get_questions().first()
+        if top_question:
+            return top_question.get_polled()
         return "----"
 
-    def completed_runs(self):
-        flow = self.get_flow()
-        if flow:
-            return flow['completed_runs']
+    def responded_runs(self):
+        top_question = self.get_questions().first()
+        if top_question:
+            return top_question.get_responded()
         return "---"
 
     def get_featured_images(self):
@@ -371,10 +370,18 @@ class PollQuestion(SmartModel):
         return open_ended
 
     def get_responded(self):
-        return self.get_total_summary_data().get('set', '---')
+        return self.get_total_summary_data().get('set', 0)
 
     def get_polled(self):
-        return self.get_total_summary_data().get('set', "--") + self.get_total_summary_data().get('unset', "--")
+        return self.get_total_summary_data().get('set', 0) + self.get_total_summary_data().get('unset', 0)
+
+    def get_response_percentage(self):
+        polled = self.get_polled()
+        responded = self.get_responded()
+        if polled and responded:
+            percentage = int(round((float(responded) * 100.0) / float(polled)))
+            return "%s" % str(percentage) + "%"
+        return "___"
 
     def get_words(self):
         return self.get_total_summary_data().get('categories', [])

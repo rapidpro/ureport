@@ -62,7 +62,7 @@
                   .stats
                     {{ latest_poll.response_percentage }}
                     %span.stats-small
-                      ({{ latest_poll.completed_runs|intcomma }}
+                      ({{ latest_poll.responded_runs|intcomma }}
                       - trans "Responded out of"
                       {{ latest_poll.runs|intcomma }})
 
