@@ -209,11 +209,13 @@ class Contact(models.Model):
             return
 
         seen_uuids = []
+        group_uuid = api_groups[0].uuid
 
-        api_contacts = temba_client.get_contacts(groups=[api_groups[0]], after=after)
+        api_contacts = temba_client.get_contacts(after=after)
         for contact in api_contacts:
-            cls.update_or_create_from_temba(org, contact)
-            seen_uuids.append(contact.uuid)
+            if group_uuid in contact.groups:
+                cls.update_or_create_from_temba(org, contact)
+                seen_uuids.append(contact.uuid)
 
         return seen_uuids
 

@@ -162,8 +162,23 @@ class ContactTest(DashTest):
 
                 seen_uuids = Contact.fetch_contacts(self.nigeria)
 
+                self.assertEqual(seen_uuids, [])
+                mock_contacts.assert_called_with(after=None)
+
+            group = TembaGroup.create(uuid="000-002", name=None, size=120)
+            mock_groups.return_value = [group]
+
+            with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
+                mock_contacts.return_value = [TembaContact.create(uuid='000-001', name="Ann",
+                                                                  urns=['tel:1234'], groups=['000-002'],
+                                                                  fields=dict(state="Lagos", lga="Oyo",
+                                                                              gender='Female', born="1990"),
+                                                                  language='eng', modified_on=timezone.now())]
+
+                seen_uuids = Contact.fetch_contacts(self.nigeria)
+
                 self.assertEqual(seen_uuids, ['000-001'])
-                mock_contacts.assert_called_with(groups=[group], after=None)
+                mock_contacts.assert_called_with(after=None)
 
                 contact = Contact.objects.get()
                 self.assertEqual(contact.uuid, '000-001')
@@ -174,8 +189,7 @@ class ContactTest(DashTest):
                 self.assertEqual(contact.born, 1990)
 
                 Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
-                mock_contacts.assert_called_with(groups=[group],
-                                                 after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
+                mock_contacts.assert_called_with(after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
 
     def test_reporters_counter(self):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
