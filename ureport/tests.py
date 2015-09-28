@@ -16,7 +16,7 @@ from ureport.jobs.models import JobSource
 from ureport.public.views import IndexView
 from temba_client.client import TembaClient, Result, Flow, Group, Boundary as TembaBoundary, Field as TembaContactField
 from temba_client.client import Contact as TembaContact, Group as TembaGroup
-from temba.types import Geometry as TembaGeometry
+from temba_client.types import Geometry as TembaGeometry
 
 
 class MockAPI(API):  # pragma: no cover

@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from dash.orgs.models import Org
 from django.core.cache import cache
 from django.db import models, DataError
@@ -5,7 +6,9 @@ from django.db.models import Sum
 from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
+import pytz
 from ureport.locations.models import Boundary
+from ureport.utils import json_date_to_datetime
 
 
 class ContactField(models.Model):
@@ -210,12 +213,23 @@ class Contact(models.Model):
 
         seen_uuids = []
         group_uuid = api_groups[0].uuid
+        now = datetime.now().replace(tzinfo=pytz.utc)
 
-        api_contacts = temba_client.get_contacts(after=after)
-        for contact in api_contacts:
-            if group_uuid in contact.groups:
-                cls.update_or_create_from_temba(org, contact)
-                seen_uuids.append(contact.uuid)
+        if not after:
+            # consider the after year 2013
+            after = json_date_to_datetime("2013-01-01T00:00:00.000")
+
+        before = after + timedelta(days=60)
+
+        while after < now:
+            api_contacts = temba_client.get_contacts(after=after, before=before)
+            for contact in api_contacts:
+                if group_uuid in contact.groups:
+                    cls.update_or_create_from_temba(org, contact)
+                    seen_uuids.append(contact.uuid)
+
+            after = before
+            before = after + timedelta(days=60)
 
         return seen_uuids
 

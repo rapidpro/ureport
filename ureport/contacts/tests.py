@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.utils import timezone
 
 from mock import patch
@@ -10,7 +10,7 @@ from ureport.contacts.models import ContactField, Contact, ReportersCounter
 from ureport.contacts.tasks import fetch_contacts_task
 from ureport.locations.models import Boundary
 from ureport.tests import DashTest, TembaContactField, MockTembaClient, TembaContact
-from temba import Group as TembaGroup
+from temba_client.client import Group as TembaGroup
 from ureport.utils import json_date_to_datetime
 
 
@@ -163,7 +163,10 @@ class ContactTest(DashTest):
                 seen_uuids = Contact.fetch_contacts(self.nigeria)
 
                 self.assertEqual(seen_uuids, [])
-                mock_contacts.assert_called_with(after=None)
+                mock_contacts.assert_any_call(after=datetime(2013, 01, 01, 0, 0, 0, 000000, pytz.utc),
+                                              before=datetime(2013, 03, 02, 0, 0, 0, 000000, pytz.utc))
+                for args in mock_contacts.call_arg_list:
+                    self.assertEqual(args[0] + timedelta(days=60), args[1])
 
             group = TembaGroup.create(uuid="000-002", name=None, size=120)
             mock_groups.return_value = [group]
@@ -177,8 +180,11 @@ class ContactTest(DashTest):
 
                 seen_uuids = Contact.fetch_contacts(self.nigeria)
 
-                self.assertEqual(seen_uuids, ['000-001'])
-                mock_contacts.assert_called_with(after=None)
+                self.assertTrue('000-001' in seen_uuids)
+                mock_contacts.assert_any_call(after=datetime(2013, 01, 01, 0, 0, 0, 000000, pytz.utc),
+                                              before=datetime(2013, 03, 02, 0, 0, 0, 000000, pytz.utc))
+                for args in mock_contacts.call_arg_list:
+                    self.assertEqual(args[0] + timedelta(days=60), args[1])
 
                 contact = Contact.objects.get()
                 self.assertEqual(contact.uuid, '000-001')
@@ -188,8 +194,11 @@ class ContactTest(DashTest):
                 self.assertEqual(contact.gender, 'F')
                 self.assertEqual(contact.born, 1990)
 
-                Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
-                mock_contacts.assert_called_with(after=datetime(2014, 12, 12, 22, 34, 36, 123000, pytz.utc))
+                Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
+                mock_contacts.assert_any_call(after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc),
+                                              before=datetime(2015, 01, 30, 22, 34, 36, 123000, pytz.utc))
+                for args in mock_contacts.call_arg_list:
+                    self.assertEqual(args[0] + timedelta(days=60), args[1])
 
     def test_reporters_counter(self):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
