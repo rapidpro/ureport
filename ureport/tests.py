@@ -9,7 +9,7 @@ from dash.orgs.models import Org
 from django.http.request import HttpRequest
 from ureport.jobs.models import JobSource
 from ureport.public.views import IndexView
-from temba import TembaClient, Result, Flow, Group
+from temba_client.client import TembaClient, Result, Flow, Group
 
 
 class MockAPI(API):  # pragma: no cover
