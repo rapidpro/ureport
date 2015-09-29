@@ -4,6 +4,7 @@ from mock import patch
 from temba_client.types import Boundary as TembaBoundary, Geometry as TembaGeometry
 from .models import Boundary
 
+
 class LocationTest(DashTest):
     def setUp(self):
         super(LocationTest, self).setUp()
