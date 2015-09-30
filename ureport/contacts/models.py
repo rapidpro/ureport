@@ -214,21 +214,21 @@ class Contact(models.Model):
         seen_uuids = []
         group_uuid = api_groups[0].uuid
 
-        before = timezone.now().replace(tzinfo=pytz.utc)
+        now = timezone.now().replace(tzinfo=pytz.utc)
 
         if not after:
             # consider the after year 2013
             after = json_date_to_datetime("2013-01-01T00:00:00.000")
 
-        while before > after:
+        while after < now:
             pager = temba_client.pager()
-            api_contacts = temba_client.get_contacts(after=after, before=before, pager=pager)
+            api_contacts = temba_client.get_contacts(after=after, pager=pager)
 
             last_contact_index = len(api_contacts) - 1
 
             for i, contact in enumerate(api_contacts):
                 if i == last_contact_index:
-                    before = contact.modified_on
+                    after = contact.modified_on
 
                 if group_uuid in contact.groups:
                     cls.update_or_create_from_temba(org, contact)
