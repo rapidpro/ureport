@@ -59,7 +59,7 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = "translation"
 LANGUAGE_CODE = 'en'
 
 # Available languages for translation
-LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"))
+LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"))
 DEFAULT_LANGUAGE = "en"
 
 SITE_ID = 1

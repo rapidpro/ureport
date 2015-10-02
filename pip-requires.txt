@@ -1,5 +1,5 @@
 -e git+https://github.com/nyaruka/smartmin.git#egg=smartmin
-Django==1.7.2
+Django==1.8.4
 rapidpro-python
 -e git+https://github.com/rapidpro/dash.git#egg=dash
 celery

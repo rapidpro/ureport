@@ -1,8 +1,9 @@
 import json
 from ureport.tests import DashTest, MockTembaClient
 from mock import patch
-from temba.types import Boundary as TembaBoundary, Geometry as TembaGeometry
+from temba_client.types import Boundary as TembaBoundary, Geometry as TembaGeometry
 from .models import Boundary
+
 
 class LocationTest(DashTest):
     def setUp(self):

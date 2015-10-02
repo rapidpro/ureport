@@ -1,14 +1,13 @@
 import logging
 import time
-from datetime import datetime
 from django.core.cache import cache
 from dash.orgs.models import Org
 from django_redis import get_redis_connection
 from djcelery.app import app
-import pytz
+
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.utils import datetime_to_json_date, json_date_to_datetime
+from ureport.utils import json_date_to_datetime
 
 logger = logging.getLogger(__name__)
 
@@ -48,9 +47,6 @@ def fetch_contacts_task(org_id=None, fetch_all=False):
                     Boundary.get_boundaries(org)
                     ContactField.get_contact_fields(org)
                     Contact.fetch_contacts(org, after=after)
-
-                    cache.set(last_fetched_key, datetime_to_json_date(datetime.now().replace(tzinfo=pytz.utc)),
-                              Contact.CONTACT_LAST_FETCHED_CACHE_TIMEOUT)
 
                     print "Task: fetch_contacts for %s took %ss" % (org.name, time.time() - start)
 

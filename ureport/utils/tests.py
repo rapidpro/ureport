@@ -7,7 +7,7 @@ from mock import patch
 import pycountry
 import pytz
 import redis
-from temba import Group
+from temba_client.client import Group
 from ureport.assets.models import FLAG, Image
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary

@@ -2,10 +2,13 @@ from dash.orgs.models import Org
 from django.core.cache import cache
 from django.db import models, DataError
 from django.db.models import Sum
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
+import pytz
 from ureport.locations.models import Boundary
+from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 
 class ContactField(models.Model):
@@ -209,11 +212,34 @@ class Contact(models.Model):
             return
 
         seen_uuids = []
+        group_uuid = api_groups[0].uuid
 
-        api_contacts = temba_client.get_contacts(groups=[api_groups[0]], after=after)
-        for contact in api_contacts:
-            cls.update_or_create_from_temba(org, contact)
-            seen_uuids.append(contact.uuid)
+        now = timezone.now().replace(tzinfo=pytz.utc)
+        before = now
+
+        if not after:
+            # consider the after year 2013
+            after = json_date_to_datetime("2013-01-01T00:00:00.000")
+
+        while before > after:
+            pager = temba_client.pager()
+            api_contacts = temba_client.get_contacts(before=before, after=after, pager=pager)
+
+            last_contact_index = len(api_contacts) - 1
+
+            for i, contact in enumerate(api_contacts):
+                if i == last_contact_index:
+                    before = contact.modified_on
+
+                if group_uuid in contact.groups:
+                    cls.update_or_create_from_temba(org, contact)
+                    seen_uuids.append(contact.uuid)
+
+            if not pager.has_more():
+                cache.set(cls.CONTACT_LAST_FETCHED_CACHE_KEY % org.pk,
+                          datetime_to_json_date(now.replace(tzinfo=pytz.utc)),
+                          cls.CONTACT_LAST_FETCHED_CACHE_TIMEOUT)
+                break
 
         return seen_uuids
 
