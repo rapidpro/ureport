@@ -16,7 +16,6 @@ import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
-from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll
 
@@ -447,6 +446,8 @@ def get_global_count():
 
 
 def get_org_contacts_counts(org):
+
+    from ureport.contacts.models import ReportersCounter
 
     key = ORG_CONTACT_COUNT_KEY % org.pk
     # org_contacts_counts = cache.get(key, None)
