@@ -248,12 +248,14 @@ INSTALLED_APPS = (
 
     # ureport apps
     'ureport.admins',
-    'ureport.polls',
-    'ureport.news',
-    'ureport.jobs',
-    'ureport.countries',
-    'ureport.assets',
     'ureport.api',
+    'ureport.assets',
+    'ureport.contacts',
+    'ureport.countries',
+    'ureport.jobs',
+    'ureport.locations',
+    'ureport.news',
+    'ureport.polls',
 
     'django_countries',
     'rest_framework',
@@ -483,6 +485,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(days=15),
         "relative": True,
     },
+    "fetch_contacts": {
+        "task": "contacts.fetch_contacts_task",
+        "schedule": timedelta(minutes=10),
+        "relative": True,
+     },
 }
 
 #-----------------------------------------------------------------------------------

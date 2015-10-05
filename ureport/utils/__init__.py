@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import copy
 import json
 import math
@@ -17,6 +19,25 @@ from raven.contrib.django.raven_compat.models import client
 from ureport.polls.models import Poll
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
+
+
+def datetime_to_json_date(dt):
+    """
+    Formats a datetime as a string for inclusion in JSON
+    """
+    # always output as UTC / Z and always include milliseconds
+    as_utc = dt.astimezone(pytz.utc)
+    return as_utc.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z'
+
+
+def json_date_to_datetime(date_str):
+    """
+    Parses a datetime from a JSON string value
+    """
+    iso_format = '%Y-%m-%dT%H:%M:%S.%f'
+    if date_str.endswith('Z'):
+        iso_format += 'Z'
+    return datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
 
 
 def get_linked_orgs(authenticated=False):
