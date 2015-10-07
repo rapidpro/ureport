@@ -11,10 +11,13 @@ def clear_contacts(apps, schema_editor):
     # delete fetched contacts
     Contact.objects.all().delete()
 
-    # clear redis cache and locks to allow the next task to fetch all the contacts
-    cache.delete_pattern('last:fetch_contacts:*')
-    cache.delete_pattern('fetch_contacts')
-    cache.delete_pattern('fetch_contacts*')
+    try:
+        # clear redis cache and locks to allow the next task to fetch all the contacts
+        cache.delete_pattern('last:fetch_contacts:*')
+        cache.delete_pattern('fetch_contacts')
+        cache.delete_pattern('fetch_contacts*')
+    except AttributeError as e:
+        print e
 
 
 class Migration(migrations.Migration):
