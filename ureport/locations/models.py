@@ -11,7 +11,7 @@ class Boundary(models.Model):
     """
 
     BOUNDARIES_CACHE_TIMEOUT = 60 * 60 * 24 * 15
-    BOUNDARIES_CACHE_KEY = 'org:%d:boundaries'
+    BOUNDARIES_CACHE_KEY = 'org:%d:boundaries-ids'
 
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="boundaries")
 
