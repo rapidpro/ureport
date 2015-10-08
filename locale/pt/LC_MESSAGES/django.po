@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-27 17:29+0000\n"
-"PO-Revision-Date: 2015-09-21 14:54+0000\n"
+"PO-Revision-Date: 2015-10-06 10:17+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "Uma imagem opcional que pode descrever esta categoria"
 
 #: dash/categories/models.py:25 ureport/polls/models.py:53
 msgid "The organization this category applies to"
-msgstr "A organização desta categoria aplica-se a"
+msgstr "A organização na qual esta história pertence a"
 
 #: dash/categories/models.py:37 templates/frame.haml:237
 #: templates/frame.haml.py:244
@@ -336,7 +336,7 @@ msgstr "Endereço electrónico"
 
 #: dash/orgs/models.py:318
 msgid "The email to which we send the invitation of the viewer"
-msgstr "O email para o qual enviamos o convite da audiência"
+msgstr "O endereço electrónico para o qual enviamos o convite da audiência"
 
 #: dash/orgs/models.py:321
 msgid "Secret"
@@ -481,7 +481,7 @@ msgstr "O título para esta história"
 
 #: dash/stories/models.py:19
 msgid "Whether this story is featured"
-msgstr "Se esta história é caracterizada"
+msgstr "Se esta história é selecionada"
 
 #: dash/stories/models.py:22
 msgid "The summary for the story"
@@ -725,13 +725,13 @@ msgstr "Nova senha não corresponde com a sua confirmação"
 
 #: smartmin/users/views.py:110
 msgid "Your Email"
-msgstr ""
+msgstr "Teu endereço electrónico"
 
 #: smartmin/users/views.py:117
 msgid ""
 "E-mail recovery is not supported, please contact the website administrator "
 "to reset your password manually."
-msgstr ""
+msgstr "A recuperação do teu endereço electrónico não é suportado, por favor, entre em contacto com o administrador do site para redefinir a tua senha manualmente."
 
 #: smartmin/users/views.py:122
 msgid "Current Password"
@@ -890,7 +890,7 @@ msgstr ""
 
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
-msgstr "Você-Reporta"
+msgstr "SMS BIZ"
 
 #: templates/frame.haml:161
 msgid "Admin"
@@ -902,7 +902,7 @@ msgstr "Configuração"
 
 #: templates/frame.haml:175
 msgid "Orgs"
-msgstr ""
+msgstr "Orgs."
 
 #: templates/frame.haml:181
 msgid "Users"
@@ -962,7 +962,7 @@ msgstr "Termos e Condições"
 
 #: templates/frame.haml:338
 msgid "U-Reporters Content"
-msgstr "Conteúdo dos Repórters"
+msgstr "O conteúdo partilhado pela malta SMS BIZ"
 
 #: templates/frame.haml:345
 msgid "Join &amp; Engage Content"
@@ -970,11 +970,11 @@ msgstr ""
 
 #: templates/frame.haml:351
 msgid "Join Steps Content"
-msgstr ""
+msgstr "Conteúdo dos passos de registro"
 
 #: templates/frame.haml:358
 msgid "Additional Menu"
-msgstr ""
+msgstr "Menú adicional"
 
 #: templates/frame.haml:375
 msgid "Logout"
@@ -986,7 +986,7 @@ msgstr "Sobre Nós"
 
 #: templates/frame.haml:439
 msgid "U-Reporters"
-msgstr "Repórters"
+msgstr "A malta SMS BIZ"
 
 #: templates/frame.haml:446 templates/public/jobs.haml:7
 msgid "Jobs"
@@ -1033,19 +1033,19 @@ msgstr ""
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
 msgid "ABOUT U-REPORT"
-msgstr "SOBRE REPÓRTERS"
+msgstr "SOBRE O SMS BIZ"
 
 #: templates/public/about.haml:22 templates/public/ureporters.haml:23
 msgid "Scroll to Learn more"
-msgstr "Rolar para saber mais"
+msgstr "Leia mais abaixo"
 
 #: templates/public/about.haml:80
 msgid "The mission of U-Report"
-msgstr "A missão do Repórter"
+msgstr "A missão da malta SMS BIZ"
 
 #: templates/public/about.haml:119
 msgid "Why Join U-Report?"
-msgstr "Porquê fazer parte do Você-Reporta?"
+msgstr "Porquê fazer parte do SMS BIZ?"
 
 #: templates/public/about.haml:124
 msgid "Speak out on what's happening in your community"
@@ -1059,7 +1059,7 @@ msgstr "Use os resultados e a informação do U-Report para actualizar e aumenta
 
 #: templates/public/about.haml:130
 msgid "Participate in nationwide campaigns to help improve your country"
-msgstr ""
+msgstr "Participe nas campanhas ao nível nacional para ajudar a melhorar o teu país."
 
 #: templates/public/about.haml:133
 #, python-format
@@ -1068,11 +1068,11 @@ msgstr ""
 
 #: templates/public/about.haml:139
 msgid "CLICK HERE TO JOIN"
-msgstr ""
+msgstr "PRESSIONE AQUI PARA SABER COMO TE REGISTARES"
 
 #: templates/public/about.haml:152
 msgid "U-REPORT VIDEOS"
-msgstr "VÍDEOS DO VOCÊ-REPORTA"
+msgstr "VÍDEOS DO SMS BIZ"
 
 #: templates/public/about.haml:159
 msgid "No videos yet."
@@ -1095,7 +1095,7 @@ msgstr "Filtrar"
 #: templates/public/archived_stories.haml:19 templates/public/stories.haml:69
 #: templates/public/strings_values.haml:5
 msgid "All"
-msgstr "Tudo"
+msgstr "Todo o País"
 
 #: templates/public/all_polls.haml:33
 msgid "POLL LIST"
@@ -1103,7 +1103,7 @@ msgstr "LISTA DE INQUÉRITOS"
 
 #: templates/public/all_polls.haml:35
 msgid "All polls from most recent to oldest"
-msgstr ""
+msgstr "Todos os inquéritos do mais recente para o mais antigo."
 
 #: templates/public/archived_stories.haml:5
 msgid "ARCHIVED STORIES"
@@ -1135,7 +1135,7 @@ msgstr "Veja o resultado completo"
 
 #: templates/public/index.haml:48
 msgid "All U-Report members"
-msgstr "Todos membros do Você-Reporta"
+msgstr "Todos os membros do SMS BIZ"
 
 #: templates/public/index.haml:87 templates/public/polls.haml:43
 msgid "RESPONSE RATE"
@@ -1147,7 +1147,7 @@ msgstr "Responderam dos "
 
 #: templates/public/index.haml:101
 msgid "RESPONDER'S RATE BY LOCATION"
-msgstr ""
+msgstr "TAXA DE RESPOSTA POR PROVÍNCIA"
 
 #: templates/public/index.haml:107
 msgid "Most responded"
@@ -1167,15 +1167,15 @@ msgstr "RESPOSTAS SELECIONADAS"
 
 #: templates/public/index.haml:209 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
-msgstr ""
+msgstr "SMS BIZ EM"
 
 #: templates/public/index.haml:217
 msgid "TOTAL # OF U-REPORTERS"
-msgstr "NÚMERO TOTAL DE REPÓRTERS"
+msgstr "NÚMERO TOTAL DE UTILIZADORES DO SMS BIZ"
 
 #: templates/public/index.haml:231
 msgid "4 MOST ACTIVE REGIONS"
-msgstr "4 REGIÕES MAIS ACTIVAS"
+msgstr "4 PROVÍNCIAS ACTIVAS"
 
 #: templates/public/index.haml:242 templates/public/index.haml.py:264
 msgid "RATE BY GENDER"
@@ -1187,7 +1187,7 @@ msgstr "TAXA POR IDADE"
 
 #: templates/public/index.haml:318
 msgid "WHAT U-REPORTERS ARE SAYING"
-msgstr "O QUE OS JOVENS-REPÓRTERS ESTÃO DIZENDO"
+msgstr "AS HISTÓRIAS DA MALTA SMS BIZ"
 
 #: templates/public/index.haml:327
 msgid "FEATURED VIDEO"
@@ -1211,7 +1211,7 @@ msgstr "VEJA MAIS HISTÓRIAS NO INSTAGRAM"
 
 #: templates/public/index.haml:407
 msgid "READ MORE TWEETS ON TWITTER"
-msgstr ""
+msgstr "LEIA MAIS NO TWITTER"
 
 #: templates/public/index.haml:418
 msgid "NEWS FEED"
@@ -1226,39 +1226,39 @@ msgstr "HISTÓRIA"
 #: templates/public/index.haml:517 templates/public/index.haml.py:602
 #: templates/public/stories.haml:36 templates/public/stories.haml.py:117
 msgid "READ FULL STORY"
-msgstr ""
+msgstr "LEIA A HISTÓRIA COMPLETA"
 
 #: templates/public/index.haml:540
 msgid "Response Rate"
-msgstr ""
+msgstr "Taxa de Respostas"
 
 #: templates/public/index.haml:741
 msgid "Read This Story"
-msgstr ""
+msgstr "Ler esta história"
 
 #: templates/public/jobs.haml:22
 msgid "JOBS"
-msgstr ""
+msgstr "VAGAS DE EMPREGO"
 
 #: templates/public/jobs.haml:28
 msgid "Scroll to see job details"
-msgstr ""
+msgstr "Veja abaixo vagas de emprego"
 
 #: templates/public/jobs.haml:78 templates/public/join_engage.haml:115
 msgid "TWEET TO"
-msgstr ""
+msgstr "PARTILHA COM"
 
 #: templates/public/jobs.haml:98
 msgid "Read more"
-msgstr ""
+msgstr "Ler mais"
 
 #: templates/public/jobs.haml:107
 msgid "VISIT"
-msgstr ""
+msgstr "VISITAR"
 
 #: templates/public/join_engage.haml:17
 msgid "JOIN U-REPORT"
-msgstr "FAÇA PARTE DO VOCÊ-REPORTA"
+msgstr "FAÇA PARTE DO SMS BIZ"
 
 #: templates/public/join_engage.haml:44
 msgid "HOW TO JOIN"
@@ -1275,15 +1275,15 @@ msgstr ""
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr "VOCÊ-REPORTA NOS MEIOS DE COMUNICAÇÃO SOCIAL"
+msgstr "SMS BIZ NA MÍDIA SOCIAL"
 
 #: templates/public/join_engage.haml:135
 msgid "COMPOSE NEW TWEET"
-msgstr ""
+msgstr "COMPOR NOVAS PARTILHAS"
 
 #: templates/public/polls.haml:16
 msgid "CURRENT POLL IN"
-msgstr ""
+msgstr "INQUÉRITO ACTUAL EM"
 
 #: templates/public/polls.haml:29
 #, python-format
@@ -1300,11 +1300,11 @@ msgstr[1] ""
 
 #: templates/public/polls.haml:49
 msgid "RESPONDED OUT OF"
-msgstr ""
+msgstr "RESPONDIDOS EM COMPARAÇÃO COM"
 
 #: templates/public/polls.haml:53
 msgid "POLLED"
-msgstr ""
+msgstr "ENVIADOS"
 
 #: templates/public/polls.haml:96
 msgid "POLL RESULTS"
@@ -1332,23 +1332,23 @@ msgstr "LOCALIZAÇÕES"
 
 #: templates/public/polls.haml:213
 msgid "FEATURED ANSWERS"
-msgstr ""
+msgstr "RESPOSTAS SELECIONADAS"
 
 #: templates/public/polls.haml:220
 msgid "No featured answers."
-msgstr ""
+msgstr "Não há respostas selecionadas."
 
 #: templates/public/polls.haml:239
 msgid "U-Reporter in"
-msgstr "Você-Reporta em"
+msgstr "SMS BIZ em"
 
 #: templates/public/polls.haml:251 templates/public/story_read.haml:126
 msgid "RELATED STORIES"
-msgstr ""
+msgstr "HISTÓRIAS RELACIONADAS"
 
 #: templates/public/polls.haml:256 templates/public/story_read.haml:131
 msgid "No related stories."
-msgstr ""
+msgstr "Nenhuma história relacionada."
 
 #: templates/public/polls.haml:279 templates/public/story_read.haml:157
 msgid "READ MORE"
@@ -1356,19 +1356,19 @@ msgstr "LEIA MAIS"
 
 #: templates/public/polls.haml:291 templates/public/story_read.haml:99
 msgid "FEATURED IMAGES"
-msgstr ""
+msgstr "IMAGENS SELECIONADAS"
 
 #: templates/public/polls.haml:297
 msgid "No featured images yet."
-msgstr ""
+msgstr "Ainda não há imagens selecionadas."
 
 #: templates/public/stories.haml:20
 msgid "FEATURED STORY"
-msgstr ""
+msgstr "HISTÓRIAS SELECIONADAS"
 
 #: templates/public/stories.haml:27 templates/public/story_read.haml:23
 msgid "BY"
-msgstr ""
+msgstr "POR"
 
 #: templates/public/stories.haml:56
 msgid "LATEST STORIES"
@@ -1380,27 +1380,27 @@ msgstr "FILTRADO POR"
 
 #: templates/public/story_read.haml:28
 msgid "Scroll to read more"
-msgstr ""
+msgstr "Saiba mais abaixo"
 
 #: templates/public/story_read.haml:47
 msgid "STORY CONTINUES"
-msgstr ""
+msgstr "A HISTÓRIA CONTINUA"
 
 #: templates/public/story_read.haml:65
 msgid "AUDIO"
-msgstr ""
+msgstr "AÚDIO"
 
 #: templates/public/story_read.haml:78
 msgid "RELATED POLLS"
-msgstr ""
+msgstr "INQUÉRITOS RELACIONADOS"
 
 #: templates/public/story_read.haml:83
 msgid "No related polls."
-msgstr ""
+msgstr "Não há inquéritos relacionados."
 
 #: templates/public/story_read.haml:104
 msgid "No featured images."
-msgstr ""
+msgstr "Não há imagens selecionadas."
 
 #: templates/public/strings_values.haml:6
 msgid "Even"
@@ -1409,7 +1409,7 @@ msgstr ""
 #: templates/public/strings_values.haml:7
 #: templates/public/strings_values.haml:10
 msgid "State"
-msgstr ""
+msgstr "Província"
 
 #: templates/public/strings_values.haml:8
 msgid "Other"
@@ -1421,7 +1421,7 @@ msgstr "Nacional"
 
 #: templates/public/strings_values.haml:11
 msgid "Participation Level"
-msgstr ""
+msgstr "Nível de Participação"
 
 #: templates/public/strings_values.haml:12
 msgid "Responses"
@@ -1429,7 +1429,7 @@ msgstr "Respostas"
 
 #: templates/public/strings_values.haml:13
 msgid "Reporters in"
-msgstr ""
+msgstr "Malta SMS BIZ em"
 
 #: templates/public/strings_values.haml:14
 msgid "Results"
@@ -1437,7 +1437,7 @@ msgstr "Resultados"
 
 #: templates/public/strings_values.haml:15
 msgid "*Other answers include"
-msgstr ""
+msgstr "*Outras respostas incluem"
 
 #: templates/public/strings_values.haml:16
 msgid "Population"
@@ -1445,7 +1445,7 @@ msgstr "População"
 
 #: templates/public/strings_values.haml:17
 msgid "Registered in"
-msgstr ""
+msgstr "Registrado em"
 
 #: templates/public/strings_values.haml:18
 msgid "Density"
@@ -1465,31 +1465,31 @@ msgstr ""
 
 #: templates/public/ureporters.haml:44
 msgid "WHO WE ARE"
-msgstr ""
+msgstr "QUEM SOMOS"
 
 #: templates/public/ureporters.haml:55
 msgid "U-REPORTER STATISTICS"
-msgstr "ESTATÍSTICAS DO VOCÊ-REPORTA"
+msgstr "ESTATÍSTICAS DO SMS BIZ"
 
 #: templates/public/ureporters.haml:63
 msgid "AGE"
-msgstr ""
+msgstr "IDADE"
 
 #: templates/public/ureporters.haml:83
 msgid "GENDER"
-msgstr ""
+msgstr "GÊNERO"
 
 #: templates/public/ureporters.haml:127
 msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr "DE ONDE VÊEM OS REPÓRTERS"
+msgstr "DE ONDE VÊEM A MALTA SMS BIZ"
 
 #: templates/public/ureporters.haml:146
 msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr ""
+msgstr "TAXA DE REGISTO: NOS ÚLTIMOS 6 MESES"
 
 #: templates/public/ureporters.haml:166
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-msgstr ""
+msgstr "OCUPAÇÃO: OS TOP 9 MAIS MENCIONADOS"
 
 #: templates/public/ureporters.haml:243
 msgid "Age"
@@ -1497,7 +1497,7 @@ msgstr "Idade"
 
 #: templates/public/ureporters.haml:440
 msgid "Registered"
-msgstr "Registados"
+msgstr "Registrado"
 
 #: templates/public/ureporters.haml:453
 msgid "Week of"
@@ -1514,11 +1514,11 @@ msgstr ""
 
 #: ureport/assets/models.py:17
 msgid "The organization to which the image will be used"
-msgstr ""
+msgstr "A organização na qual a imagem será usada"
 
 #: ureport/assets/models.py:20
 msgid "A short descriptive name for this image"
-msgstr ""
+msgstr "Um nome descritivo curto para esta imagem"
 
 #: ureport/assets/models.py:22
 msgid "Image type"
@@ -1530,19 +1530,19 @@ msgstr ""
 
 #: ureport/countries/models.py:11
 msgid "The name for our alias"
-msgstr ""
+msgstr "O nome para os nossos aliados"
 
 #: ureport/jobs/models.py:22
 msgid "The title or name to reference this Job source."
-msgstr ""
+msgstr "O título ou nome para referenciar esta fonte de emprego."
 
 #: ureport/jobs/models.py:24
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
-msgstr ""
+msgstr "Escolha o tipo para a fonte de Emprego, Twitter, Facebook ou RSS."
 
 #: ureport/jobs/models.py:25
 msgid "The full URL to navigate to this Job source."
-msgstr ""
+msgstr "O URL completo para navegar para esta fonte de emprego."
 
 #: ureport/jobs/models.py:27
 msgid ""
@@ -1552,7 +1552,7 @@ msgstr ""
 
 #: ureport/jobs/models.py:30
 msgid "Featured job sources are shown first on the jobs page."
-msgstr ""
+msgstr "As fontes de emprego selecionadas são mostradas em primeiro lugar na página de emprego."
 
 #: ureport/jobs/models.py:32
 msgid "The organization this job source is for"
@@ -1560,11 +1560,11 @@ msgstr ""
 
 #: ureport/jobs/views.py:17
 msgid "Your job source has been added successfully"
-msgstr ""
+msgstr "A tua fonte de emprego foi adicionada com sucesso"
 
 #: ureport/jobs/views.py:44
 msgid "Your job source has been updated successfully"
-msgstr ""
+msgstr "A tua fonte de emprego foi actualiza com sucesso"
 
 #: ureport/news/models.py:10
 msgid "The title for this item"
@@ -1572,11 +1572,11 @@ msgstr "O título deste item"
 
 #: ureport/news/models.py:13
 msgid "A short summary description for this item"
-msgstr ""
+msgstr "Uma descrição breve do resumo para este item"
 
 #: ureport/news/models.py:16
 msgid "A link that should be associated with this item"
-msgstr ""
+msgstr "Um link que deve ser associado a este item"
 
 #: ureport/news/models.py:19 ureport/news/models.py:43
 msgid "The category this item belongs to"
@@ -1588,11 +1588,11 @@ msgstr ""
 
 #: ureport/news/models.py:34
 msgid "The title for this Video"
-msgstr ""
+msgstr "O título para este Vídeo"
 
 #: ureport/news/models.py:37
 msgid "A short summary description for this video"
-msgstr ""
+msgstr "Uma descrição breve do sumário para este vídeo"
 
 #: ureport/news/models.py:46
 msgid "The organization this video belongs to"
@@ -1600,11 +1600,11 @@ msgstr ""
 
 #: ureport/polls/models.py:51
 msgid "The name of this poll category"
-msgstr ""
+msgstr "O nome da categoria deste inquérito"
 
 #: ureport/polls/models.py:60
 msgid "Poll Categories"
-msgstr ""
+msgstr "Categorias de Inquérito"
 
 #: ureport/polls/models.py:67
 msgid "The Flow this Poll is based on"
@@ -1612,7 +1612,7 @@ msgstr ""
 
 #: ureport/polls/models.py:69
 msgid "The title for this Poll"
-msgstr ""
+msgstr "O título para este Inquérito"
 
 #: ureport/polls/models.py:71
 msgid "The category this Poll belongs to"
@@ -1632,31 +1632,31 @@ msgstr ""
 
 #: ureport/polls/models.py:272
 msgid "The poll to associate to"
-msgstr ""
+msgstr "O inquérito para associar a"
 
 #: ureport/polls/models.py:285
 msgid "The poll for this response"
-msgstr ""
+msgstr "O inquérito para esta resposta"
 
 #: ureport/polls/models.py:288
 msgid "The location for this response"
-msgstr ""
+msgstr "A província para esta resposta"
 
 #: ureport/polls/models.py:291
 msgid "The name of the sender of the message"
-msgstr ""
+msgstr "O nome do remetente da mensagem"
 
 #: ureport/polls/models.py:294
 msgid "The featured response message"
-msgstr ""
+msgstr "Resposta da mensagem selecionada"
 
 #: ureport/polls/models.py:306
 msgid "The poll this question is part of"
-msgstr ""
+msgstr "O inquérito na qual esta pergunta faz parte"
 
 #: ureport/polls/models.py:308
 msgid "The title of this question"
-msgstr ""
+msgstr "O título desta questão"
 
 #: ureport/polls/models.py:309
 msgid "The RuleSet this question is based on"
@@ -1664,43 +1664,43 @@ msgstr ""
 
 #: ureport/polls/views.py:62
 msgid "You must include a title for every included question."
-msgstr ""
+msgstr "Você deve incluir um título para cada questão incluída."
 
 #: ureport/polls/views.py:65
 msgid "Title too long. The max limit is 255 characters for each title"
-msgstr ""
+msgstr "O título é muito longo. O limite máximo é de 255 caracteres por cada título"
 
 #: ureport/polls/views.py:70
 msgid "You must include at least one poll question."
-msgstr ""
+msgstr "Você deve incluir pelo menos uma pergunta do inquérito."
 
 #: ureport/polls/views.py:85
 msgid "Your poll has been created, now pick which questions to include."
-msgstr ""
+msgstr "O teu inquérito foi criado, agora escolha as questões por incluir no inquérito."
 
 #: ureport/polls/views.py:99
 msgid "Poll Images"
-msgstr ""
+msgstr "Imagens do Inquérito"
 
 #: ureport/polls/views.py:100
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr ""
+msgstr "Agora insira quaisquer respostas que você gostaria de selecionar. ( se houver alguma)"
 
 #: ureport/polls/views.py:112
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr ""
+msgstr "A imagem para mostrar na página do inquérito e nas visualizações. (Opcional)"
 
 #: ureport/polls/views.py:119
 msgid "Image to display on poll page and in previews (optional)"
-msgstr ""
+msgstr "A imagem para mostrar na página do inquérito e nas visualizações. (Opcional)"
 
 #: ureport/polls/views.py:143
 msgid "Featured Poll Responses"
-msgstr ""
+msgstr "Respostas do Inquérito selecionado "
 
 #: ureport/polls/views.py:144
 msgid "Your poll has been updated."
-msgstr ""
+msgstr "O teu inquérito foi actualizado."
 
 #: ureport/polls/views.py:161
 #, python-format
@@ -1709,7 +1709,7 @@ msgstr ""
 
 #: ureport/polls/views.py:161
 msgid "The name or alias of the responder."
-msgstr ""
+msgstr "O nome ou alcunha da pessoa que responde."
 
 #: ureport/polls/views.py:166
 #, python-format
@@ -1718,7 +1718,7 @@ msgstr ""
 
 #: ureport/polls/views.py:166
 msgid "The location of the responder."
-msgstr ""
+msgstr "A localização da pessoa que responde."
 
 #: ureport/polls/views.py:171
 #, python-format
@@ -1727,19 +1727,19 @@ msgstr ""
 
 #: ureport/polls/views.py:171
 msgid "The text of the featured response."
-msgstr ""
+msgstr "O texto da resposta selecionada."
 
 #: ureport/polls/views.py:197
 msgid "Poll Questions"
-msgstr ""
+msgstr "QUESTÕES ENVIADAS"
 
 #: ureport/polls/views.py:199
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr ""
+msgstr "Agora defina as imagens que você deseja mostrar na tua página de inquérito. (Se houver)"
 
 #: ureport/polls/views.py:230
 msgid "Include"
-msgstr ""
+msgstr "Incluir"
 
 #: ureport/polls/views.py:231
 msgid "Whether to include this question in your public results"
@@ -1747,11 +1747,11 @@ msgstr ""
 
 #: ureport/polls/views.py:235
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: ureport/polls/views.py:236
 msgid "The question posed to your audience, will be displayed publicly"
-msgstr ""
+msgstr "A pergunta feita a tua audiência, será mostrada publicamente"
 
 #: ureport/public/views.py:311
 #, python-format
@@ -1764,35 +1764,35 @@ msgstr ""
 
 #: ureport/settings_common.py:176
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr "O código curto que os utilizadores usarão para contactar a nível local o Você-Reporta "
+msgstr "O código curto que os utilizadores usarão para contactar a nível local o SMS BIZ"
 
 #: ureport/settings_common.py:177
 msgid "The short text used to direct visitors to join U-Report"
-msgstr "O texto curto usado para direcionar os visitantes para se juntar ao Você-Reporta"
+msgstr "O texto curto usado para direcionar os visitantes para se juntar ao SMS BIZ"
 
 #: ureport/settings_common.py:178
 msgid "The color used to draw the text on the join bar"
-msgstr ""
+msgstr "A cor usada para desenhar o texto na barra de registro"
 
 #: ureport/settings_common.py:179
 msgid "The color used to draw the background on the join bar"
-msgstr ""
+msgstr "A cor usada para desenhar o fundo na barra de registro"
 
 #: ureport/settings_common.py:180
 msgid "The primary color for styling for this organization"
-msgstr ""
+msgstr "A cor primária para definir o estilo para esta organização."
 
 #: ureport/settings_common.py:181
 msgid "The secondary color for styling for this organization"
-msgstr ""
+msgstr "A cor secundária para definir o estilo para esta organização."
 
 #: ureport/settings_common.py:182
 msgid "The background color for the site"
-msgstr ""
+msgstr "A cor de fundo para o site"
 
 #: ureport/settings_common.py:183
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr ""
+msgstr "Até 6 cores para definir o estilo dos gráficos, use a vírgula entre as cores."
 
 #: ureport/settings_common.py:184
 msgid "The Google Analytics Tracking ID for this organization"
@@ -1800,15 +1800,15 @@ msgstr ""
 
 #: ureport/settings_common.py:185
 msgid "The URL to the Youtube channel for this organization"
-msgstr ""
+msgstr "O URL para o canal do Youtube para esta organização"
 
 #: ureport/settings_common.py:186
 msgid "The URL to the Facebook page for this organization"
-msgstr ""
+msgstr "O URL para a página do Facebook para esta organização"
 
 #: ureport/settings_common.py:187
 msgid "The Instagram username for this organization"
-msgstr ""
+msgstr "O nome de utlilizador do Instagram para esta organização"
 
 #: ureport/settings_common.py:188
 msgid "The Twitter handle for this organization"
@@ -1856,11 +1856,11 @@ msgstr ""
 
 #: ureport/settings_common.py:198
 msgid "The label assigned to U-Reporters that are Male."
-msgstr "O rótulo atribuído aos Repórters que são do sexo masculino."
+msgstr "O rótulo atribuído aos utilizadores SMS BIZ de sexo Masculino."
 
 #: ureport/settings_common.py:199
 msgid "The label assigned to U-Reporters that are Female."
-msgstr "O rótulo atribuído ao Você-Reporta que são do sexo Feminino."
+msgstr "O rótulo atribuído aos utilizadores SMS BIZ de sexo Feminino."
 
 #: ureport/settings_common.py:200
 msgid "If there are jobs to be shown on the public site"
