@@ -429,11 +429,14 @@ def get_global_count():
         return count_cached_value
 
     try:
-        reporter_counter_keys = cache.keys('org:*:reporters:*')
+        old_site_reporter_counter_keys = cache.keys('org:*:reporters:old-site')
 
-        cached_values = [cache.get(key) for key in reporter_counter_keys]
+        cached_values = [cache.get(key) for key in old_site_reporter_counter_keys]
 
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
+
+        for org in Org.objects.filter(is_active=True):
+            count += get_reporters_count(org)
 
         # cached for 10 min
         cache.set(GLOBAL_COUNT_CACHE_KEY, count, 60 * 10)
@@ -450,9 +453,9 @@ def get_org_contacts_counts(org):
     from ureport.contacts.models import ReportersCounter
 
     key = ORG_CONTACT_COUNT_KEY % org.pk
-    # org_contacts_counts = cache.get(key, None)
-    # if org_contacts_counts:
-    #     return org_contacts_counts
+    org_contacts_counts = cache.get(key, None)
+    if org_contacts_counts:
+        return org_contacts_counts
 
     org_contacts_counts = ReportersCounter.get_counts(org)
     cache.set(key, org_contacts_counts, ORG_CONTACT_COUNT_TIMEOUT)
