@@ -212,7 +212,13 @@ class Contact(models.Model):
             return
 
         seen_uuids = []
-        group_uuid = api_groups[0].uuid
+
+        group_uuid = None
+
+        for grp in api_groups:
+            if grp.name.lower() == reporter_group.lower():
+                group_uuid = grp.uuid
+                break
 
         now = timezone.now().replace(tzinfo=pytz.utc)
         before = now
