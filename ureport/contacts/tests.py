@@ -148,12 +148,13 @@ class ContactTest(DashTest):
         Contact.objects.create(**kwargs)
 
     def test_fetch_contacts(self):
+        self.nigeria.set_config('reporter_group', 'Reporters')
 
         tz = pytz.timezone('UTC')
         with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 29, 10, 20, 30, 40))):
 
             with patch('dash.orgs.models.TembaClient.get_groups') as mock_groups:
-                group = TembaGroup.create(uuid="uuid-8", name=None, size=120)
+                group = TembaGroup.create(uuid="uuid-8", name='reporters', size=120)
                 mock_groups.return_value = [group]
 
                 with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
@@ -167,7 +168,7 @@ class ContactTest(DashTest):
 
                     self.assertEqual(seen_uuids, [])
 
-                group = TembaGroup.create(uuid="000-002", name=None, size=120)
+                group = TembaGroup.create(uuid="000-002", name='reporters', size=120)
                 mock_groups.return_value = [group]
 
                 with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
@@ -190,6 +191,35 @@ class ContactTest(DashTest):
 
                     Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
                     self.assertTrue('000-001' in seen_uuids)
+
+                # delete the contacts
+                Contact.objects.all().delete()
+
+                group1 = TembaGroup.create(uuid="000-001", name='reporters too', size=10)
+                group2 = TembaGroup.create(uuid="000-002", name='reporters', size=120)
+                mock_groups.return_value = [group1, group2]
+
+                with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
+                    mock_contacts.return_value = [
+                        TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
+                                            fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
+                                            language='eng',
+                                            modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
+
+                    seen_uuids = Contact.fetch_contacts(self.nigeria)
+                    self.assertTrue('000-001' in seen_uuids)
+
+                    contact = Contact.objects.get()
+                    self.assertEqual(contact.uuid, '000-001')
+                    self.assertEqual(contact.org, self.nigeria)
+                    self.assertEqual(contact.state, 'R-LAGOS')
+                    self.assertEqual(contact.district, 'R-OYO')
+                    self.assertEqual(contact.gender, 'F')
+                    self.assertEqual(contact.born, 1990)
+
+                    Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
+                    self.assertTrue('000-001' in seen_uuids)
+
 
     def test_reporters_counter(self):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
