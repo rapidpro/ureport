@@ -580,8 +580,9 @@ def get_occupation_stats(org):
 
     occupation_counts = {k[11:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("occupation")}
 
-    return json.dumps([dict(label=k, count=v)
-                       for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()])
+    return json.dumps(sorted([dict(label=k, count=v)
+                       for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()],
+                             key=lambda i:i['count'], reverse=True)[:9])
 
 
 Org.get_occupation_stats = get_occupation_stats

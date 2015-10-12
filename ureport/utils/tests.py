@@ -656,6 +656,27 @@ class UtilsTest(DashTest):
         ReportersCounter.objects.create(org=self.org, type='occupation:writer', count=2)
         ReportersCounter.objects.create(org=self.org, type='occupation:all responses', count=13)
 
-        self.assertEqual(get_occupation_stats(self.org), json.dumps([dict(label='writer', count=2),
-                                                                     dict(label='student', count=5)]))
+        self.assertEqual(get_occupation_stats(self.org), json.dumps([dict(label='student', count=5),
+                                                                     dict(label='writer', count=2)]))
 
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooAAA', count=1)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooBBB', count=1)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooCCC', count=10)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooDDD', count=11)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooEEE', count=12)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooFFF', count=13)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooGGG', count=14)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooHHH', count=15)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooIII', count=16)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooJJJ', count=17)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooKKK', count=18)
+
+        self.assertEqual(get_occupation_stats(self.org), json.dumps([dict(label='fooKKK', count=18),
+                                                                     dict(label='fooJJJ', count=17),
+                                                                     dict(label='fooIII', count=16),
+                                                                     dict(label='fooHHH', count=15),
+                                                                     dict(label='fooGGG', count=14),
+                                                                     dict(label='fooFFF', count=13),
+                                                                     dict(label='fooEEE', count=12),
+                                                                     dict(label='fooDDD', count=11),
+                                                                     dict(label='fooCCC', count=10)]))
