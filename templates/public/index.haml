@@ -300,7 +300,7 @@
                       %img{width:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
                   .brick-align
                     .brick-long-story-title
-                      {{ story.title|title }}
+                      {{ story.title }}
 
                     .half-border.primary-bg-color
                     .brick-long-story-text
@@ -324,7 +324,7 @@
                       %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
 
                 .brick-short-story-title
-                  {{ story.title|title }}
+                  {{ story.title }}
                 %a.brick-link.primary-bg-color{ href:"{% url 'public.story_read' story.pk %}" }
                   - trans "READ FULL STORY"
                   &#8594;
@@ -345,7 +345,7 @@
                     %img.brick-short-story-image{ height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg" }
 
                   .brick-short-story-title
-                    {{ ot_story.title|title }}
+                    {{ ot_story.title }}
 
                 %a.brick-link.primary-bg-color{href:"{% url 'public.story_read' ot_story.pk %}"}
                   - trans "READ FULL STORY"
@@ -361,7 +361,7 @@
                 .brick-block-vcenter-container
                   .brick-block-vcenter-content
                     .brick-poll-title
-                      {{ poll.get_first_question.title|title }}
+                      {{ poll.get_first_question.title }}
                     .brick-poll-response-percentage
                       {{ poll.response_percentage }}
                       - trans "Response Rate"
@@ -399,7 +399,7 @@
                       %img{width:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
                   .brick-align
                     .brick-long-story-title
-                      {{ story.title|title }}
+                      {{ story.title }}
 
                     .half-border.primary-bg-color
                     .brick-long-story-text
