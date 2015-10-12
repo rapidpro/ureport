@@ -1085,27 +1085,16 @@ class PublicTest(DashTest):
 
         self.uganda.set_config('state_label', 'State')
 
-        with mock.patch('dash.orgs.models.Org.get_contact_field_results') as mock_results:
-            mock_results.return_value = "API_RESULTS"
+        with mock.patch('dash.orgs.models.Org.get_ureporters_locations_stats') as mock_ureporters_locations_stats:
+            mock_ureporters_locations_stats.return_value = 'LOCATIONS_STATS'
 
-            with mock.patch('dash.orgs.models.Org.organize_categories_data') as mock_organize:
-                mock_organize.return_value = "ORGANIZED"
-
-                response = self.client.get(reporters_results + "?" + urlencode(dict(contact_field='field_name')),
-                                           SERVER_NAME='uganda.ureport.io')
-                self.assertEquals(response.status_code, 200)
-                self.assertEquals(response.content, json.dumps("ORGANIZED"))
-                mock_results.assert_called_with('field_name', None)
-                mock_organize.assert_called_with('field_name', "API_RESULTS")
-
-                response = self.client.get(
-                    reporters_results + "?" + urlencode(dict(contact_field='field_name',
-                                                             segment=json.dumps(dict(location='State')))),
+            response = self.client.get(
+                    reporters_results + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
                     SERVER_NAME='uganda.ureport.io')
-                self.assertEquals(response.status_code, 200)
-                self.assertEquals(response.content, json.dumps("ORGANIZED"))
-                mock_results.assert_called_with('field_name', dict(location='State'))
-                mock_organize.assert_called_with('field_name', "API_RESULTS")
+
+            self.assertEquals(response.status_code, 200)
+            self.assertEquals(response.content, json.dumps("LOCATIONS_STATS"))
+            mock_ureporters_locations_stats.assert_called_with(dict(location='State'))
 
     def test_news(self):
         news_url = reverse('public.news')

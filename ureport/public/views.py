@@ -221,7 +221,6 @@ class BoundaryView(SmartTemplateView):
         return HttpResponse(json.dumps(boundaries))
 
 
-
 class ReportersResultsView(SmartReadView):
     model = Org
 
@@ -235,12 +234,7 @@ class ReportersResultsView(SmartReadView):
         if segment:
             segment = json.loads(segment)
 
-        contact_field = self.request.GET.get('contact_field', None)
-        if self.get_object() and contact_field:
-            api_data = self.get_object().get_contact_field_results(contact_field, segment)
-            output_data = self.get_object().organize_categories_data(contact_field, api_data)
-
-            output_data = clean_global_results_data(self.get_object(), output_data, segment)
+            output_data = self.get_object().get_ureporters_locations_stats(segment)
 
         return HttpResponse(json.dumps(output_data))
 
@@ -313,6 +307,7 @@ class UreportersView(SmartTemplateView):
         context['occupation_stats'] = org.get_occupation_stats()
 
         return context
+
 
 class JoinEngageView(SmartTemplateView):
     template_name = 'public/join_engage.html'
