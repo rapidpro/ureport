@@ -554,7 +554,8 @@ class UtilsTest(DashTest):
                                                           male_count=0, male_percentage="---"))
 
         ReportersCounter.objects.create(org=self.org, type='gender:f', count=2)
-        ReportersCounter.objects.create(org=self.org, type='gender:m', count=3)
+        ReportersCounter.objects.create(org=self.org, type='gender:m', count=2)
+        ReportersCounter.objects.create(org=self.org, type='gender:m', count=1)
 
         self.assertEqual(get_gender_stats(self.org), dict(female_count=2, female_percentage="40%",
                                                           male_count=3, male_percentage="60%"))
@@ -573,7 +574,8 @@ class UtilsTest(DashTest):
 
         ReportersCounter.objects.create(org=self.org, type='born:%s' % two_years_ago, count=2)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % five_years_ago, count=1)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=5)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=3)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=2)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % forthy_five_years_ago, count=2)
 
         ReportersCounter.objects.create(org=self.org, type='born:10', count=10)
@@ -593,8 +595,11 @@ class UtilsTest(DashTest):
                 self.assertEqual(entry['count'], 0)
 
             ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-27', count=3)
-            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-25', count=6)
-            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-06-30', count=4)
+            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-25', count=2)
+            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-25', count=3)
+            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-25', count=1)
+            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-06-30', count=2)
+            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-06-30', count=2)
             ReportersCounter.objects.create(org=self.org, type='registered_on:2014-11-25', count=6)
 
             stats = json.loads(get_registration_stats(self.org))
@@ -665,10 +670,12 @@ class UtilsTest(DashTest):
         ReportersCounter.objects.create(org=self.org, type='occupation:fooDDD', count=11)
         ReportersCounter.objects.create(org=self.org, type='occupation:fooEEE', count=12)
         ReportersCounter.objects.create(org=self.org, type='occupation:fooFFF', count=13)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooGGG', count=14)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooGGG', count=8)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooGGG', count=6)
         ReportersCounter.objects.create(org=self.org, type='occupation:fooHHH', count=15)
         ReportersCounter.objects.create(org=self.org, type='occupation:fooIII', count=16)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooJJJ', count=17)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooJJJ', count=2)
+        ReportersCounter.objects.create(org=self.org, type='occupation:fooJJJ', count=15)
         ReportersCounter.objects.create(org=self.org, type='occupation:fooKKK', count=18)
 
         self.assertEqual(get_occupation_stats(self.org), json.dumps([dict(label='fooKKK', count=18),
