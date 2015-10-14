@@ -1,6 +1,6 @@
 - extends "public_base.html"
 
--load compress ureport dashblocks thumbnail i18n
+-load compress ureport dashblocks thumbnail i18n humanize
 
 - block hero
   - load_qbs request.org 'ureporters'
@@ -61,7 +61,7 @@
                 -if is_iorg
                   -include "public/mobile_gender_include.haml"
                 -else
-                  .contact-field-graph-gender{ data-contact-field:'{{org|config:"gender_label"}}', id: "graph-contact-field-gender"}
+                  .contact-field-graph-gender
                     %table.ureporter-gender{style:"width:100%"}
                       %tbody
                         %tr
@@ -70,16 +70,18 @@
                               .glyph.icon-Icon-02
 
                             #male-percentage.primary-border-color.percentage-gender
-                              %span ---
+                              %span {{ gender_stats.male_percentage }}
                             #male-summary.summary-gender
+                              {{ gender_stats.male_count|intcomma }}
 
                           %td.female-gender
                             .icon-gender.primary-color
                               .glyph.icon-Icon-01
 
                             #female-percentage.primary-border-color.percentage-gender
-                              %span ---
+                              %span {{ gender_stats.female_percentage }}
                             #female-summary.summary-gender
+                              {{ gender_stats.female_count|intcomma }}
 
       -if not is_iorg
         .row.ureporter-states.hide-on-small
@@ -133,7 +135,6 @@
         $(".ureport-location-map").each(function(){
           var locationField = $(this).attr("data-contact-field");
           var ajaxUrl = '/contact_field_results/?contact_field=' + encodeURIComponent(locationField);
-
           var colorsList = gradientFactory.generate({
             from: '#DDDDDD',
             to: '{{ org|config:"primary_color"}}',
@@ -144,375 +145,274 @@
         });
       });
     });
+
     $(function(){
       $(".contact-field-graph-age").each(function(){
-        var contactField = $(this).attr("data-contact-field");
-        $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
+        var data = {{age_stats|safe}};
+
+        var categories = [];
+        for (var i=0; i<data.length; i++) {
+          categories.push(data[i].name);
+        }
+
+        $('#graph-contact-field-age-placeholder').hide();
+        $('#graph-contact-field-age').highcharts({
+          chart: {
+              type: 'column'
+          },
+          credits: {
+            enabled: false
+          },
+          legend: {
+            enabled: false
+          },
+          title: {
+              text: null
+          },
+          subtitle: {
+              text: null
+          },
+          xAxis: {
+            categories: categories,
+            labels : {
+                rotation: 0
+            },
+            minorTickLength: 0,
+            tickLength: 0
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: '(%)'
+              }
+          },
+          tooltip: {
+              headerFormat: '<span style="font-size:10px">{point.x}</span><table>',
+              pointFormat: '<tr>' +
+                  '<td style="padding:0"><b>{point.y}</b></td></tr>',
+              footerFormat: '</table>',
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              column: {
+                  color: '{{ org|config:"primary_color"}}',
+                  pointPadding: 0.2,
+                  borderWidth: 0,
+                  dataLabels:  {
+                    enabled: true,
+                    style : {
+                      fontFamily: "SharpSansBold"
+                    },
+                    format: '<b>{point.y:.0f}%</b>'
+                  }
+              }
+          },
+          series: [ {name: 'Age' , data: data} ]
+        });
+      });
+    });
+
+
+
+    $(function(){
+      $(".contact-field-graph-registration").each(function(){
+
+        var results = {{ registration_stats|safe }};
+        var categories = [];
+        var data = [];
+
+        var months = {{months|safe}};
+
+        for (i=0; i<results.length; i++){
+          category = results[i];
+          label = Date.parse(category.label);
+          categories.push(label);
+
+          data.push({ name:label,  y: category.count })
+        }
+
+        $('#graph-contact-field-registration-placeholder').hide();
+        $('#graph-contact-field-registration').highcharts({
+          chart: {
+              type: 'area'
+          },
+          credits: {
+            enabled: false
+          },
+          legend: {
+            enabled: false
+          },
+          title: {
+              text: null
+          },
+          subtitle: {
+              text: null
+          },
+          xAxis: {
+            categories: categories,
+            type: 'datetime',
+            labels : {
+                step: 4,
+                formatter: function () {
+
+                   return months[ new Date(this.value).getMonth()];
+                }
+            }
+          },
+          yAxis: {
+              min: 0,
+              gridLineColor: '{{ org|config:"primary_color" }}',
+              gridLineWidth: 0.3,
+              labels: {
+                style: {
+                  color:'{{ org|config:"primary_color" }}',
+                  fontFamily: "Times New Roman",
+                  fontSize: 14
+                  }
+              },
+              title: {
+                  text: '{% trans "Registered" %}',
+                  offset: 0,
+                  x: -60,
+                  y: 30,
+                  align: 'low',
+                  rotation: 0,
+                  style: {
+                     color:'{{ org|config:"primary_color" }}',
+                  }
+              }
+          },
+          tooltip: {
+              formatter: function() {
+                   return '<table><tr><td style="padding:0; font-size: 24px; font-family:SharpSansBold; "><b>'+ this.y + '</b></td></tr></table><span style="font-size:14px; font-family:Times New Roman">({% trans "Week of" %} ' + Highcharts.dateFormat('%e/%m', this.x) +')</span>';
+              },
+              shared: true,
+              useHTML: true
+          },
+          plotOptions: {
+              area: {
+                  color: '{{ org|config:"primary_color"}}',
+                  fillOpacity: 0.2,
+                  pointPadding: 0.1,
+                  borderWidth: 0
+              }
+          },
+          series: [ {name: 'registration' , data: data } ]
+        });
+      });
+    });
+
+    {% if org|config:"occupation_label" %}
+    $(function() {
+      $(".contact-field-graph-occupation").each(function(){
+
+          var result = {{occupation_stats|safe}};
 
           if(!result){
             return;
           }
 
-          var results = result[0];
-          var categories = [];
           var data = [];
+          var categories = [];
 
-          var total = 0;
-          for (i=0; i<results.categories.length; i++){
-            category = results.categories[i];
-            total += category.count;
-          }
+          if (result){
+            var results = result[0];
+            var total = 0;
+            for (i=0; i<result.length; i++){
+              category = result[i];
+              total += category.count;
+            }
 
-          var percentage_lookup = {};
+            var percentage_lookup = {};
 
-          for (i=0; i<results.categories.length; i++){
-            category = results.categories[i];
-            label = category.label.trim().toUpperCase();
+            for (i=0; i<result.length; i++){
+              category = result[i];
+              label = category.label.trim();
+              categories.push('');
+              categories.push(label);
 
-            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-            percentage_lookup[label] = Math.round(percentage);
+              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+              percentage_lookup[label] = Math.round(percentage);
 
-            if (parseInt(percentage_lookup[label])) {
-              categories.push('{% trans "Age" %} ' + label);
+              data.push({ name:"", y: 0});
               data.push({ name:label,  y: Math.round(percentage) });
             }
           }
 
-          $('#graph-contact-field-age-placeholder').hide();
-          $('#graph-contact-field-age').highcharts({
-            chart: {
-                type: 'column'
-            },
-            credits: {
-              enabled: false
-            },
-            legend: {
-              enabled: false
-            },
-            title: {
-                text: null
-            },
-            subtitle: {
-                text: null
-            },
-            xAxis: {
-              categories: categories,
-              labels : {
-                  rotation: 0
-              },
-              minorTickLength: 0,
-              tickLength: 0
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: '(%)'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.x}</span><table>',
-                pointFormat: '<tr>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    color: '{{ org|config:"primary_color"}}',
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                    dataLabels:  {
-                      enabled: true,
-                      style : {
-                        fontFamily: "SharpSansBold"
-                      },
-                      format: '<b>{point.y:.0f}%</b>'
-                    }
-                }
-            },
-            series: [ {name: 'Age' , data: data} ]
-          });
-        });
-      });
-    });
-
-   $(function(){
-      $(".contact-field-graph-gender").each(function(){
-        var contactField = $(this).attr("data-contact-field");
-        $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
-
-          if(!result){
-              return;
-          }
-
-          var results = result[0];
-          var categories = [];
-
-          male_label = "{{org|config:"male_label"|upper }}";
-          female_label = "{{org|config:"female_label"|upper }}";
-
-          var total = 0;
-          for (i=0; i<results.categories.length; i++){
-            category = results.categories[i];
-            label = category.label.trim().toUpperCase()
-            if (label == male_label || label == female_label) {
-              total += category.count;
+          $('#graph-contact-field-occupation-placeholder').hide();
+          $('#graph-contact-field-occupation').highcharts({
+          chart: {
+              type: 'areaspline',
+              spacingTop: 75
+          },
+          credits: {
+            enabled: false
+          },
+          legend: {
+            enabled: false
+          },
+          title: {
+              text: null
+          },
+          subtitle: {
+              text: null
+          },
+          xAxis: {
+            categories: categories,
+            tickWidth: 0,
+            labels : {
+                enabled: false,
             }
-          }
-
-          var percentage_lookup = {};
-          var count_lookup = {};
-
-          for (i=0; i<results.categories.length; i++) {
-            category = results.categories[i];
-            label = category.label.trim().toUpperCase();
-
-            if(categories.indexOf(label) >= 0) {
-                if (total > 0){
-                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-                  percentage_lookup[label] += Math.round(percentage);
-                  count_lookup[label] += category.count;
-                }
-
-              } else {
-
-                categories.push(label);
-
-                if (total > 0){
-                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-                  percentage_lookup[label] = Math.round(percentage);
-                  count_lookup[label] = category.count;
-                }
-             }
-          }
-
-
-
-          if (male_label in percentage_lookup){
-            $("#male-percentage").text(percentage_lookup[male_label] + "%");
-            $("#male-summary").text(window.intcomma(count_lookup[male_label]));
-          }
-
-          if (female_label in percentage_lookup){
-            $("#female-percentage").text(percentage_lookup[female_label] + "%");
-            $("#female-summary").text(window.intcomma(count_lookup[female_label]));
-          }
-        });
-      });
-    });
-    $(function(){
-      $(".contact-field-graph-registration").each(function(){
-        var contactField = $(this).attr("data-contact-field");
-        $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
-
-          if(!result){
-            return;
-          }
-
-          var results = result[0];
-          var categories = [];
-          var data = [];
-
-          var months = {{months|safe}};
-
-          var total = 0;
-          for (i=0; i<results.categories.length; i++){
-            category = results.categories[i];
-            total += category.count;
-          }
-
-          for (i=0; i<results.categories.length; i++){
-            category = results.categories[i];
-            label = Date.parse(category.label);
-            categories.push(label);
-
-            data.push({ name:label,  y: category.count })
-          }
-
-          $('#graph-contact-field-registration-placeholder').hide();
-          $('#graph-contact-field-registration').highcharts({
-            chart: {
-                type: 'area'
-            },
-            credits: {
+          },
+          yAxis: {
+              min: 0,
+              gridLineWidth: 0,
+              labels: {
+                enabled: false
+              },
+              title: {
+                  text: null
+              }
+          },
+          tooltip: {
               enabled: false
-            },
-            legend: {
-              enabled: false
-            },
-            title: {
-                text: null
-            },
-            subtitle: {
-                text: null
-            },
-            xAxis: {
-              categories: categories,
-              type: 'datetime',
-              labels : {
-                  step: 4,
-                  formatter: function () {
+          },
+          plotOptions: {
+              areaspline: {
+                  color: '{{ org|config:"primary_color"}}',
+                  fillOpacity: 1,
+                  pointPadding: 0.1,
+                  borderWidth: 0,
+                  marker: {
+                    enabled: false,
+                    states: {
+                      hover: {
+                        enabled: false
+                      }
+                    }
+                  },
+                  dataLabels: {
+                    enabled: true,
+                    useHTML: true,
+                    y: 3,
+                    crop: false,
+                    overflow: "none",
+                    formatter: function() {
+                      if (this.y > 0) {
+                      return '<div style="font-family: SharpSansBold;text-align: center; width: 80px; line-height: 100%; font-size: 24px;color:{{ org|config:"primary_color"}};">'+ this.y + '%</div><div style="text-align:center; width: 80px; line-height: 120%; font-size: 14px; font-family:Times New Roman; white-space: normal;">' + this.x.toUpperCase() + '</div><div style="height: 35px;width: 2px;margin-left: auto;margin-right: auto; border-left: 1px solid; border-color:{{ org|config:"primary_color"}};"></div>'
 
-                     return months[ new Date(this.value).getMonth()];
+                      }
+                      else return '';
+                    }
                   }
               }
-            },
-            yAxis: {
-                min: 0,
-                gridLineColor: '{{ org|config:"primary_color" }}',
-                gridLineWidth: 0.3,
-                labels: {
-                  style: {
-                    color:'{{ org|config:"primary_color" }}',
-                    fontFamily: "Times New Roman",
-                    fontSize: 14
-                    }
-                },
-                title: {
-                    text: '{% trans "Registered" %}',
-                    offset: 0,
-                    x: -60,
-                    y: 30,
-                    align: 'low',
-                    rotation: 0,
-                    style: {
-                       color:'{{ org|config:"primary_color" }}',
-                    }
-                }
-            },
-            tooltip: {
-                formatter: function() {
-                     return '<table><tr><td style="padding:0; font-size: 24px; font-family:SharpSansBold; "><b>'+ this.y + '</b></td></tr></table><span style="font-size:14px; font-family:Times New Roman">({% trans "Week of" %} ' + Highcharts.dateFormat('%e/%m', this.x) +')</span>';
-                },
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                area: {
-                    color: '{{ org|config:"primary_color"}}',
-                    fillOpacity: 0.2,
-                    pointPadding: 0.1,
-                    borderWidth: 0
-                }
-            },
-            series: [ {name: 'registration' , data: data } ]
-            });
+          },
+          series: [ {name: null , data: data } ]
           });
         });
       });
-
-      {% if org|config:"occupation_label" %}
-      $(function() {
-        $(".contact-field-graph-occupation").each(function(){
-          var contactField = $(this).attr('data-contact-field');
-          $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
-
-            if(!result){
-              return;
-            }
-
-            var data = [];
-            var categories = [];
-
-            if (result){
-              var results = result[0];
-              var total = 0;
-              for (i=0; i<results.categories.length; i++){
-                category = results.categories[i];
-                total += category.count;
-              }
-
-              var percentage_lookup = {};
-
-              for (i=0; i<results.categories.length; i++){
-                category = results.categories[i];
-                label = category.label.trim();
-                categories.push('');
-                categories.push(label);
-
-                percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-                percentage_lookup[label] = Math.round(percentage);
-
-                data.push({ name:"", y: 0});
-                data.push({ name:label,  y: Math.round(percentage) });
-              }
-            }
-
-            $('#graph-contact-field-occupation-placeholder').hide();
-            $('#graph-contact-field-occupation').highcharts({
-            chart: {
-                type: 'areaspline',
-                spacingTop: 75
-            },
-            credits: {
-              enabled: false
-            },
-            legend: {
-              enabled: false
-            },
-            title: {
-                text: null
-            },
-            subtitle: {
-                text: null
-            },
-            xAxis: {
-              categories: categories,
-              tickWidth: 0,
-              labels : {
-                  enabled: false,
-              }
-            },
-            yAxis: {
-                min: 0,
-                gridLineWidth: 0,
-                labels: {
-                  enabled: false
-                },
-                title: {
-                    text: null
-                }
-            },
-            tooltip: {
-                enabled: false
-            },
-            plotOptions: {
-                areaspline: {
-                    color: '{{ org|config:"primary_color"}}',
-                    fillOpacity: 1,
-                    pointPadding: 0.1,
-                    borderWidth: 0,
-                    marker: {
-                      enabled: false,
-                      states: {
-                        hover: {
-                          enabled: false
-                        }
-                      }
-                    },
-                    dataLabels: {
-                      enabled: true,
-                      useHTML: true,
-                      y: 3,
-                      crop: false,
-                      overflow: "none",
-                      formatter: function() {
-                        if (this.y > 0) {
-                        return '<div style="font-family: SharpSansBold;text-align: center; width: 80px; line-height: 100%; font-size: 24px;color:{{ org|config:"primary_color"}};">'+ this.y + '%</div><div style="text-align:center; width: 80px; line-height: 120%; font-size: 14px; font-family:Times New Roman; white-space: normal;">' + this.x.toUpperCase() + '</div><div style="height: 35px;width: 2px;margin-left: auto;margin-right: auto; border-left: 1px solid; border-color:{{ org|config:"primary_color"}};"></div>'
-
-                        }
-                        else return '';
-                      }
-                    }
-                }
-            },
-            series: [ {name: null , data: data } ]
-            });
-          });
-        });
-      });
-      {% endif %}
+    {% endif %}
 
 - block extra-style
   - load_qbs request.org 'ureporters'
@@ -527,7 +427,6 @@
       {% endthumbnail %}
       {% endfor %}
     }
-
     .ureport-location-map  {
       height: 500px;
       width: 100%;
