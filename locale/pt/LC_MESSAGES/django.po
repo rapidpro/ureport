@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-27 17:29+0000\n"
-"PO-Revision-Date: 2015-10-06 10:17+0000\n"
+"PO-Revision-Date: 2015-10-14 12:06+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -1072,7 +1072,7 @@ msgstr "PRESSIONE AQUI PARA SABER COMO TE REGISTARES"
 
 #: templates/public/about.haml:152
 msgid "U-REPORT VIDEOS"
-msgstr "VÍDEOS DO SMS BIZ"
+msgstr "AUDIO-VÍDEO DO SMS BIZ"
 
 #: templates/public/about.haml:159
 msgid "No videos yet."
