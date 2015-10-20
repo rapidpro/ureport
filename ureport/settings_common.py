@@ -375,6 +375,9 @@ GROUP_PERMISSIONS = {
         'stories.storyimage.*',
         'users.user_profile',
     ),
+    "Global": (
+        'countries.countryalias.*',
+    )
 }
 
 #-----------------------------------------------------------------------------------
