@@ -13,12 +13,12 @@ from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
 from ureport.tests import DashTest
-from ureport.utils import get_linked_orgs, fetch_reporter_group, clean_global_results_data, fetch_old_sites_count, \
+from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
     get_occupation_stats
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
-from ureport.utils import fetch_other_polls_results, get_reporter_group, _fetch_org_polls_results
+from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
 
 
 class UtilsTest(DashTest):
@@ -444,43 +444,6 @@ class UtilsTest(DashTest):
                                                 dict(label='Nurse', count=5),
                                                 dict(label='Cameraman', count=5)
                                                 ])])
-
-    def test_reporter_group(self):
-        self.clear_cache()
-        with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
-            mock_datetime_ms.return_value = 500
-
-            with patch('dash.orgs.models.TembaClient.get_groups') as mock:
-                group_dict = dict(uuid="group-uuid", name="reporters", size=25)
-                mock.return_value = Group.deserialize_list([group_dict])
-
-                with patch('django.core.cache.cache.set') as cache_set_mock:
-                    cache_set_mock.return_value = "Set"
-
-                    with patch('django.core.cache.cache.delete') as cache_delete_mock:
-                        cache_delete_mock.return_value = "Deleted"
-
-                        fetch_reporter_group(self.org)
-                        self.assertFalse(mock.called)
-                        self.assertFalse(cache_set_mock.called)
-                        self.assertEqual(self.org.get_reporter_group(), dict())
-
-                        self.org.set_config("reporter_group", "reporters")
-
-                        fetch_reporter_group(self.org)
-                        mock.assert_called_with(name='reporters')
-
-                        key = CACHE_ORG_REPORTER_GROUP_KEY % (self.org.pk, "reporters")
-                        cache_set_mock.assert_called_with(key,
-                                                          {'time': 500, 'results': group_dict},
-                                                          UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-
-                        cache_delete_mock.assert_called_with(GLOBAL_COUNT_CACHE_KEY)
-
-                        with patch('django.core.cache.cache.get') as cache_get_mock:
-                            cache_get_mock.return_value = {'time': 500, 'results': group_dict}
-
-                            self.assertEqual(get_reporter_group(self.org), group_dict)
 
     def test_fetch_poll_results(self):
         with self.settings(CACHES = {'default': {'BACKEND': 'redis_cache.cache.RedisCache',

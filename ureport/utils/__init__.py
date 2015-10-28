@@ -289,15 +289,6 @@ def fetch_other_polls_results(org):
     _fetch_org_polls_results(org, other_polls)
 
 
-def fetch_org_graph_data(org):
-    for data_label in ['born_label', 'registration_label', 'occupation_label', 'gender_label']:
-        c_field = org.get_config(data_label)
-        if c_field:
-            fetch_contact_field_results(org, c_field, None)
-            if data_label == 'gender_label':
-                fetch_contact_field_results(org, c_field, dict(location='State'))
-
-
 def fetch_flows(org):
     start = time.time()
     print "Fetching flows for %s" % org.name
@@ -341,53 +332,6 @@ def get_flows(org):
     cache_value = cache.get(CACHE_ORG_FLOWS_KEY % org.pk, None)
     if cache_value:
         return cache_value['results']
-
-    return dict()
-
-
-def fetch_reporter_group(org):
-    start = time.time()
-    print "Fetching reporter group for %s" % org.name
-    try:
-        from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-
-        this_time = datetime.now()
-
-        reporter_group = org.get_config('reporter_group')
-        if reporter_group:
-            temba_client = org.get_temba_client()
-            groups = temba_client.get_groups(name=reporter_group)
-
-            key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
-            group_dict = dict()
-            if groups:
-                group = groups[0]
-                group_dict = dict(size=group.size, name=group.name, uuid=group.uuid)
-            cache.set(key,
-                      {'time': datetime_to_ms(this_time), 'results': group_dict},
-                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-    except:
-        client.captureException()
-        import traceback
-        traceback.print_exc()
-    # delete the global count cache to force a recalculate at the end
-    cache.delete(GLOBAL_COUNT_CACHE_KEY)
-
-    print "Fetch %s reporter group took %ss" % (org.name, time.time() - start)
-
-
-def get_reporter_group(org):
-    from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
-
-    reporter_group = org.get_config('reporter_group')
-
-    if reporter_group:
-        key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
-        cache_value = cache.get(key, None)
-        if cache_value:
-            group_dict = cache_value['results']
-            if group_dict:
-                return group_dict
 
     return dict()
 
@@ -581,7 +525,7 @@ def get_occupation_stats(org):
     occupation_counts = {k[11:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("occupation")}
 
     return json.dumps(sorted([dict(label=k, count=v)
-                       for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()],
+                              for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()],
                              key=lambda i:i['count'], reverse=True)[:9])
 
 
@@ -595,5 +539,4 @@ Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
 Org.get_flows = get_flows
-Org.get_reporter_group = get_reporter_group
 Org.substitute_segment = substitute_segment

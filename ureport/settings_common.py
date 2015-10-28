@@ -473,6 +473,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(hours=48),
         "relative": True,
     },
+    "fetch_old_sites_count": {
+        "task": "polls.fetch_old_sites_count",
+        "schedule": timedelta(minutes=20),
+        "relative": True,
+    },
     "fetch_contacts": {
         "task": "contacts.fetch_contacts_task",
         "schedule": timedelta(minutes=10),
