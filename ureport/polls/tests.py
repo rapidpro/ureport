@@ -14,7 +14,7 @@ from temba_client.client import Result, Flow, Group
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows
-from ureport.polls.tasks import refresh_org_reporters, refresh_org_graphs_data, fetch_poll
+from ureport.polls.tasks import fetch_poll, fetch_old_sites_count
 from ureport.tests import DashTest, MockAPI, MockTembaClient
 
 
@@ -861,15 +861,9 @@ class PollTest(DashTest):
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_templatetags(self):
-        from ureport.polls.templatetags.ureport import reporter_count, config, org_color, transparency, show_org_flags
+        from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
         from ureport.polls.templatetags.ureport import org_host_link
 
-        self.assertIsNone(reporter_count(None))
-        self.assertEquals(reporter_count(self.uganda), 0)
-        self.uganda.set_config('reporter_group', 'group_name')
-        with patch("dash.orgs.models.Org.get_reporter_group") as mock:
-            mock.return_value = dict(uuid="uuid-group", name="group_name", size=120)
-            self.assertEquals(reporter_count(self.uganda), 120)
 
         with patch('dash.orgs.models.Org.get_config') as mock:
             mock.return_value = 'Done'
@@ -1108,24 +1102,14 @@ class PollQuestionTest(DashTest):
                 refresh_other_polls(self.org.pk)
                 mock_fetch_other_polls_results.assert_called_once_with(self.org)
 
-            with patch('ureport.polls.tasks.fetch_org_graph_data') as mock_fetch_org_graph_data:
-                mock_fetch_org_graph_data.return_value = 'FETCHED'
-
-                refresh_org_graphs_data(self.org.pk)
-                mock_fetch_org_graph_data.assert_called_once_with(self.org)
-
             with patch('ureport.polls.tasks.fetch_flows') as mock_fetch_flows:
                 mock_fetch_flows.return_value = 'FETCHED'
 
                 refresh_org_flows(self.org.pk)
                 mock_fetch_flows.assert_called_once_with(self.org)
 
-            with patch('ureport.polls.tasks.fetch_reporter_group') as mock_fetch_reporter_group:
-                mock_fetch_reporter_group.return_value = 'FETCHED'
+            with patch('ureport.polls.tasks.fetch_old_sites_count') as mock_fetch_old_sites_count:
+                mock_fetch_old_sites_count.return_value = 'FETCHED'
 
-                with patch('ureport.polls.tasks.fetch_old_sites_count') as mock_fetch_old_sites_count:
-                    mock_fetch_old_sites_count.return_value = 'FETCHED'
-
-                    refresh_org_reporters(self.org.pk)
-                    mock_fetch_reporter_group.assert_called_once_with(self.org)
-                    mock_fetch_old_sites_count.assert_called_once_with()
+                fetch_old_sites_count()
+                mock_fetch_old_sites_count.assert_called_once_with()

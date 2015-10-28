@@ -1,18 +1,17 @@
 -load humanize ureport i18n
--with age_stats=org|age_stats
-  .age-graph
-    -for age_category in age_stats|slice:"0:7"
-      .age-category
-        .age-container
-          .age-percent
-            {{ age_category.percentage }}%
+.age-graph
+  -for age_category in age_stats|slice:"0:7"
+    .age-category
+      .age-container
+        .age-percent
+          {{ age_category.percentage }}%
 
-          .age-label-below
-            {{ age_category.label }}
+        .age-label-below
+          {{ age_category.label }}
 
-          .age-bar.primary-bg-color{ style:"width:{{ age_category.percentage }}%" }
-            &nbsp;
+        .age-bar.primary-bg-color{ style:"width:{{ age_category.percentage }}%" }
+          &nbsp;
 
-          .age-label-above
-            {{ age_category.label }}
+        .age-label-above
+          {{ age_category.label }}
 
