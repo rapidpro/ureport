@@ -458,16 +458,6 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
-    "refresh_reporters": {
-        "task": "polls.refresh_org_reporters",
-        "schedule": timedelta(minutes=20),
-        "relative": True,
-    },
-    "refresh_org_graphs_data": {
-        "task": "polls.refresh_org_graphs_data",
-        "schedule": timedelta(minutes=60),
-        "relative": True,
-    },
     "refresh_main_poll": {
         "task": "polls.refresh_main_poll",
         "schedule": timedelta(minutes=20),
@@ -481,11 +471,6 @@ CELERYBEAT_SCHEDULE = {
     "refresh_other_polls": {
         "task": "polls.refresh_other_polls",
         "schedule": timedelta(hours=48),
-        "relative": True,
-    },
-    "rebuild_boundaries": {
-        "task": "orgs.build_boundaries",
-        "schedule": timedelta(days=15),
         "relative": True,
     },
     "fetch_contacts": {
