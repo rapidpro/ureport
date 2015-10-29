@@ -97,7 +97,11 @@
                 %a.subsection-link{ href:"{% url 'public.join' %}"}
                   %nobr.primary-color
                     - trans "CLICK HERE TO JOIN"
-                    &#8594;
+                    -if is_rtl_org
+                      &#8592;
+                    -else
+                      &#8594;
+
       -if not is_iorg
         .col-md-4.hide-on-small
           .section
@@ -123,7 +127,10 @@
                     %a{ href:"http://www.youtube.com/watch?v={{ vid.video_id }}", style:"font-family:SharpSansBold; font-size:.75em;"}
                       %nobr.primary-color
                         - trans "WATCH IT ON YOUTUBE"
-                        &#8594;
+                        -if is_rtl_org
+                          &#8592;
+                        -else
+                          &#8594;
 
                 %hr.aaa
 

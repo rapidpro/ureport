@@ -59,7 +59,11 @@
 
                   %a.social-link.twitter-bg-color.tweet-button{href:'https://twitter.com/intent/tweet?screen_name={{ source.get_username }}'}
                     - trans "TWEET TO"
-                    @{{ source.get_username }} &#8594;
+                    @{{ source.get_username }}
+                    -if is_rtl_org
+                      &#8592;
+                    -else
+                      &#8594;
 
                 -elif source.source_type == 'R'
                   .social-title.rss-bg-color
@@ -78,7 +82,11 @@
 
                   %a.social-link.rss-bg-color{href:"{{ source.get_return_page }}"}
                     - trans "VISIT"
-                    {{ source.title|upper }} &#8594;
+                    {{ source.title|upper }}
+                    -if is_rtl_org
+                      &#8592;
+                    -else
+                      &#8594;
 
 - block extra-style
   {{ block.super }}

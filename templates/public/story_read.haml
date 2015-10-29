@@ -108,7 +108,10 @@
                 {{ story.short_teaser|safe }}
               %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
                 - trans "READ MORE"
-                &#8594;
+                -if is_rtl_org
+                  &#8592;
+                -else
+                  &#8594;
 
   %hr.aaa
   - include "public/archived_stories.html"
