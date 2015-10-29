@@ -37,17 +37,17 @@
   - compress css
     - block styles
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap.css"}
-      -if is_rtl_org
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap-rtl.min.css"}
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap-theme.css"}
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/smartmin_styles.css"}
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}fonts/icons/style.css"}
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/lightbox.css"}
       %link{ type:"text/less", rel:"stylesheet", href:"{{ STATIC_URL }}less/ureport2.less"}
-      -if is_rtl_org
-        %link{ type:"text/less", rel:"stylesheet", href:"{{ STATIC_URL }}less/ureport-rtl.less"}
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/jqcloud.css" }
       %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/social-icons.css"}
+
+  -if is_rtl_org
+    %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap-rtl.min.css"}
+    %link{ type:"text/less", rel:"stylesheet", href:"{{ STATIC_URL }}less/ureport-rtl.less"}
 
   - if org
     :css
