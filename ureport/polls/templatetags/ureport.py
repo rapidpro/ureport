@@ -1,14 +1,9 @@
 from __future__ import absolute_import
 
-from dash.orgs.models import Org
 from django import template
-from django.core.cache import cache
-from django.core.urlresolvers import reverse
 from django.template import TemplateSyntaxError
-from django.template.defaultfilters import stringfilter
 from django.conf import settings
-from django.utils.text import slugify
-from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
+from django.utils.safestring import mark_safe
 from ureport.utils import get_linked_orgs
 
 register = template.Library()
@@ -40,6 +35,17 @@ def config(org, name):
         return None
 
     return org.get_config(name)
+
+
+@register.filter
+def org_arrow_link(org):
+    if not org:
+        return None
+
+    if org.language in getattr(settings, 'RTL_LANGUAGES', []):
+        return mark_safe("&#8592;")
+
+    return mark_safe("&#8594;")
 
 
 @register.filter

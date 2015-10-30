@@ -1,6 +1,6 @@
 - extends "public_base.html"
 
-- load dashblocks thumbnail i18n
+- load dashblocks thumbnail i18n ureport
 - block hero
   - load_qbs request.org 'about'
 
@@ -97,10 +97,7 @@
                 %a.subsection-link{ href:"{% url 'public.join' %}"}
                   %nobr.primary-color
                     - trans "CLICK HERE TO JOIN"
-                    -if is_rtl_org
-                      &#8592;
-                    -else
-                      &#8594;
+                    {{ org|org_arrow_link }}
 
       -if not is_iorg
         .col-md-4.hide-on-small
@@ -127,10 +124,7 @@
                     %a{ href:"http://www.youtube.com/watch?v={{ vid.video_id }}", style:"font-family:SharpSansBold; font-size:.75em;"}
                       %nobr.primary-color
                         - trans "WATCH IT ON YOUTUBE"
-                        -if is_rtl_org
-                          &#8592;
-                        -else
-                          &#8594;
+                        {{ org|org_arrow_link }}
 
                 %hr.aaa
 

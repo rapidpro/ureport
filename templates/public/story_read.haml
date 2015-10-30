@@ -1,5 +1,5 @@
 - extends "public_base.html"
-- load thumbnail compress i18n
+- load thumbnail compress i18n ureport
 
 -block subtitle
   &nbsp;- {{ story.title }}
@@ -108,10 +108,7 @@
                 {{ story.short_teaser|safe }}
               %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
                 - trans "READ MORE"
-                -if is_rtl_org
-                  &#8592;
-                -else
-                  &#8594;
+                {{ org|org_arrow_link }}
 
   %hr.aaa
   - include "public/archived_stories.html"
