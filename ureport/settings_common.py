@@ -61,6 +61,8 @@ LANGUAGE_CODE = 'en'
 # Available languages for translation
 LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"))
 DEFAULT_LANGUAGE = "en"
+RTL_LANGUAGES = ['ar']
+
 
 SITE_ID = 1
 
@@ -143,6 +145,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'dash.orgs.context_processors.set_org_processor',
     'ureport.public.context_processors.set_has_better_domain',
     'ureport.public.context_processors.set_is_iorg',
+    'ureport.public.context_processors.set_is_rtl_org',
 )
 
 MIDDLEWARE_CLASSES = (

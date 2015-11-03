@@ -862,8 +862,7 @@ class PollTest(DashTest):
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_templatetags(self):
         from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
-        from ureport.polls.templatetags.ureport import org_host_link
-
+        from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link
 
         with patch('dash.orgs.models.Org.get_config') as mock:
             mock.return_value = 'Done'
@@ -950,6 +949,14 @@ class PollTest(DashTest):
 
             with self.settings(SESSION_COOKIE_SECURE=True):
                 self.assertEqual(org_host_link(dict(request=request)), 'https://nigeria.ureport.io')
+
+        self.assertIsNone(org_arrow_link(org=None))
+        self.assertEqual(org_arrow_link(self.uganda), "&#8594;")
+
+        self.uganda.language = 'ar'
+        self.uganda.save()
+
+        self.assertEqual(org_arrow_link(self.uganda), "&#8592;")
 
 
 class PollQuestionTest(DashTest):

@@ -83,7 +83,8 @@
 
                   %a.social-link.twitter-bg-color.tweet-button{href:'https://twitter.com/intent/tweet?screen_name={{ org|config:"twitter_handle"}}'}
                     - trans "TWEET TO"
-                    @{{ org|config:"twitter_handle"|upper}} &#8594;
+                    @{{ org|config:"twitter_handle"|upper}}
+                    {{ org|org_arrow_link }}
 
             {% endif %}
 
@@ -97,7 +98,8 @@
                     %a.twitter-timeline{href:'https://twitter.com/{{ org|config:"twitter_user_widget" }}', data-widget-id:'{{ org|config:"twitter_search_widget" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:'{{org|config:"primary_color"}}'}
                   %a.social-link.primary-bg-color.tweet-button{href:"https://twitter.com/intent/tweet?hashtags=ureport{{org.name}}%2Cureport%2C{{org.name}}"}
                     - trans "COMPOSE NEW TWEET"
-                    &#8594;
+                    {{ org|org_arrow_link }}
+
             {% endif %}
 
 

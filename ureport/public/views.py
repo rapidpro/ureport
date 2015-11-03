@@ -61,6 +61,7 @@ class IndexView(SmartTemplateView):
         context['age_stats'] = org.get_age_stats()
         context['reporters'] = org.get_reporters_count()
 
+
         return context
 
 

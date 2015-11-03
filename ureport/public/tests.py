@@ -175,7 +175,7 @@ class PublicTest(DashTest):
         self.nigeria.domain = "ureport.ng"
         self.nigeria.save()
 
-        # using subdomain wihout domain on org, indexing is disallowed but login should be shown
+        # using subdomain without domain on org, indexing is disallowed but login should be shown
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue("<meta content=\'noindex\' name=\'robots\' />" in response.content)
@@ -186,6 +186,20 @@ class PublicTest(DashTest):
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertFalse("<meta content=\'noindex\' name=\'robots\' />" in response.content)
         self.assertFalse('nigeria.ureport.io/users/login/' in response.content)
+
+    def test_is_rtl_org_processors(self):
+        home_url = reverse('public.index')
+
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertFalse(response.context['is_rtl_org'])
+
+        self.nigeria.language = 'ar'
+        self.nigeria.save()
+
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertTrue(response.context['is_rtl_org'])
 
     @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_index(self):

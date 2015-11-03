@@ -150,6 +150,10 @@
       $(".contact-field-graph-age").each(function(){
         var data = {{age_stats|safe}};
 
+        {% if is_rtl_org %}
+        data.reverse();
+        {% endif %}
+
         var categories = [];
         for (var i=0; i<data.length; i++) {
           categories.push(data[i].name);
@@ -231,6 +235,12 @@
 
           data.push({ name:label,  y: category.count })
         }
+
+        {% if is_rtl_org %}
+        data.reverse();
+        categories.reverse();
+        {% endif %}
+
 
         $('#graph-contact-field-registration-placeholder').hide();
         $('#graph-contact-field-registration').highcharts({
@@ -339,6 +349,11 @@
               data.push({ name:label,  y: Math.round(percentage) });
             }
           }
+
+          {% if is_rtl_org %}
+          data.reverse();
+          categories.reverse();
+          {% endif %}
 
           $('#graph-contact-field-occupation-placeholder').hide();
           $('#graph-contact-field-occupation').highcharts({
