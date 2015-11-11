@@ -16,9 +16,9 @@ class Migration(migrations.Migration):
         PollQuestion = apps.get_model("polls", "PollQuestion")
         PollResponseCategory = apps.get_model("polls", "PollResponseCategory")
 
-        desactivated = 0
+        deactivated = 0
         successes = 0
-        desactivated_ids = []
+        deactivated_ids = []
 
         start = time.time()
 
@@ -74,16 +74,16 @@ class Migration(migrations.Migration):
                 poll.is_active = False
                 poll.save()
 
-                desactivated_ids.append(poll.pk)
-                desactivated += 1
+                deactivated_ids.append(poll.pk)
+                deactivated += 1
                 print "Hidden poll - %s - %d - %s" % (org.name, poll.pk, poll.title)
 
             except Exception as e:
                 raise e
 
         print "Finished populating %d polls in %ss" % (successes, time.time() - start)
-        print "Desactivated %d polls" % desactivated
-        print "Desactivated ids are %s" % ",".join([str(elt) for elt in desactivated_ids])
+        print "Deactivated %d polls" % deactivated
+        print "Deactivated ids are %s" % ",".join([str(elt) for elt in deactivated_ids])
 
 
     dependencies = [
