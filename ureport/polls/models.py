@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import json
 from datetime import datetime
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 from smartmin.models import SmartModel
@@ -58,6 +59,7 @@ class PollCategory(SmartModel):
     class Meta:
         unique_together = ('name', 'org')
         verbose_name_plural = _("Poll Categories")
+
 
 class Poll(SmartModel):
     """
@@ -147,6 +149,26 @@ class Poll(SmartModel):
         """
         flows_dict = self.org.get_flows()
         return flows_dict.get(self.flow_uuid, None)
+
+    def update_or_create_questions(self, user=None):
+        if not user:
+            user = User.objects.get(pk=-1)
+
+        org = self.org
+        temba_client = org.get_temba_client()
+        flow_definition = temba_client.get_flow_definition(self.flow_uuid)
+
+        for ruleset in flow_definition.rule_sets:
+            label = ruleset['label']
+            ruleset_uuid = ruleset['uuid']
+            ruleset_type = ruleset['ruleset_type']
+
+            question = PollQuestion.update_or_create(user, self, label, ruleset_uuid, ruleset_type)
+
+            for rule in ruleset['rules']:
+                category = json.dumps(rule['category'])
+                PollResponseCategory.update_or_create(question, rule['uuid'], category)
+
 
     def best_and_worst(self):
         b_and_w = []
@@ -263,6 +285,7 @@ class Poll(SmartModel):
     def __unicode__(self):
         return self.title
 
+
 class PollImage(SmartModel):
     name = models.CharField(max_length=64,
                             help_text=_("The name to describe this image"))
@@ -275,6 +298,7 @@ class PollImage(SmartModel):
 
     def __unicode__(self):
         return "%s - %s" % (self.poll, self.name)
+
 
 class FeaturedResponse(SmartModel):
     """
@@ -306,6 +330,21 @@ class PollQuestion(SmartModel):
     title = models.CharField(max_length=255,
                              help_text=_("The title of this question"))
     ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
+
+    ruleset_type = models.CharField(max_length=32, default='wait_message')
+
+    @classmethod
+    def update_or_create(cls, user, poll, title, uuid, ruleset_type):
+        existing = cls.objects.filter(ruleset_uuid=uuid, poll=poll)
+
+        if existing:
+            existing.update(ruleset_type=ruleset_type)
+            question = existing.first()
+        else:
+            question = PollQuestion.objects.create(poll=poll, ruleset_uuid=uuid, title=title, ruleset_type=ruleset_type,
+                                                   is_active=False, created_by=user, modified_by=user)
+
+        return question
 
     def fetch_results(self, segment=None):
         from raven.contrib.django.raven_compat.models import client
@@ -388,3 +427,25 @@ class PollQuestion(SmartModel):
 
     def __unicode__(self):
         return self.title
+
+    class Meta:
+        unique_together = ('poll', 'ruleset_uuid')
+
+
+class PollResponseCategory(models.Model):
+    question = models.ForeignKey(PollQuestion, related_name='response_categories')
+
+    rule_uuid = models.CharField(max_length=36, help_text=_("The Rule this response category is based on"))
+
+    category = models.TextField(null=True)
+
+    @classmethod
+    def update_or_create(cls, question, rule_uuid, category):
+        existing = cls.objects.filter(question=question, rule_uuid=rule_uuid)
+        if existing:
+            existing.update(category=category)
+        else:
+            cls.objects.create(question=question, rule_uuid=rule_uuid, category=category)
+
+    class Meta:
+        unique_together = ('question', 'rule_uuid')

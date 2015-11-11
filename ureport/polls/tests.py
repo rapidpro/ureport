@@ -465,14 +465,14 @@ class PollTest(DashTest):
         response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)
 
-        with patch('dash.orgs.models.Org.get_flows') as mock:
+        with patch('dash.orgs.models.Org.get_flows') as mock_get_flows:
             flows_cached = dict()
             flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=300,
                                            labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
                                            rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
                                                           label='Does your community have power')])
 
-            mock.return_value = flows_cached
+            mock_get_flows.return_value = flows_cached
 
             self.login(self.admin)
             response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
@@ -544,14 +544,14 @@ class PollTest(DashTest):
         response = self.client.get(nigeria_update_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)
 
-        with patch('dash.orgs.models.Org.get_flows') as mock:
+        with patch('dash.orgs.models.Org.get_flows') as mock_get_flows:
             flows_cached = dict()
             flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=300,
                                            labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
                                            rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
                                                           label='Does your community have power')])
 
-            mock.return_value = flows_cached
+            mock_get_flows.return_value = flows_cached
 
             response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
@@ -647,19 +647,10 @@ class PollTest(DashTest):
         response = self.client.get(nigeria_questions_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)
 
-        with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=300,
-                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
-                                     rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
-                                                    label='Does your community have power')])
-
-            response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
-            self.assertEquals(response.status_code, 200)
-            self.assertTrue('form' in response.context)
-            self.assertEquals(len(response.context['form'].fields), 2)
-            self.assertTrue('ruleset_uuid-8435_include' in response.context['form'].fields)
-            self.assertTrue('ruleset_uuid-8435_title' in response.context['form'].fields)
-            self.assertEquals(response.context['form'].fields['ruleset_uuid-8435_title'].initial, 'Does your community have power')
+        response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue('form' in response.context)
+        self.assertEquals(len(response.context['form'].fields), 0)
 
         poll1_question = PollQuestion.objects.create(poll=poll1,
                                                      title='question poll 1',
@@ -667,79 +658,62 @@ class PollTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        with patch('ureport.polls.models.Poll.get_flow') as mock:
-            mock.return_value = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=300,
-                                     labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
-                                     rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
-                                                    label='Does your community have power'),
-                                               dict(uuid='some-uuid', id=101, response_type="C",
-                                                    label='label on rapid pro')])
+        response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue('form' in response.context)
+        self.assertEquals(len(response.context['form'].fields), 2)
+        self.assertTrue('ruleset_uuid-101_include' in response.context['form'].fields)
+        self.assertTrue('ruleset_uuid-101_title' in response.context['form'].fields)
+        self.assertEquals(response.context['form'].fields['ruleset_uuid-101_title'].initial, 'question poll 1')
 
-            with patch('ureport.polls.models.Poll.fetch_poll_results_task') as mock_fetch_poll_results_task:
-                mock_fetch_poll_results_task.return_value = "Fetched"
+        post_data = dict()
+        response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+        self.assertTrue(response.context['form'].errors)
+        self.assertTrue(response.context['form'].errors['__all__'][0], 'You must include at least one poll question.')
 
-                response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
-                self.assertEquals(response.status_code, 200)
-                self.assertTrue('form' in response.context)
-                self.assertEquals(len(response.context['form'].fields), 4)
-                self.assertTrue('ruleset_uuid-8435_include' in response.context['form'].fields)
-                self.assertTrue('ruleset_uuid-8435_title' in response.context['form'].fields)
-                self.assertEquals(response.context['form'].fields['ruleset_uuid-8435_title'].initial, 'Does your community have power')
-                self.assertTrue('ruleset_some-uuid_include' in response.context['form'].fields)
-                self.assertTrue('ruleset_some-uuid_title' in response.context['form'].fields)
-                self.assertEquals(response.context['form'].fields['ruleset_some-uuid_title'].initial, 'label on rapid pro')
+        post_data = dict()
+        post_data['ruleset_uuid-101_include'] = True
+        response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+        self.assertTrue(response.context['form'].errors)
+        self.assertTrue(response.context['form'].errors['__all__'][0], "You must include a title for every included question.")
 
-                post_data = dict()
-                response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
-                self.assertTrue(response.context['form'].errors)
-                self.assertTrue(response.context['form'].errors['__all__'][0], 'You must include at least one poll question.')
+        post_data = dict()
+        post_data['ruleset_uuid-101_include'] = True
+        post_data['ruleset_uuid-101_title'] = "hello " * 50
+        response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+        self.assertTrue(response.context['form'].errors)
+        self.assertTrue(response.context['form'].errors['__all__'][0], "Title too long. The max limit is 255 characters for each title")
 
-                post_data = dict()
-                post_data['ruleset_uuid-8435_include'] = True
-                response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
-                self.assertTrue(response.context['form'].errors)
-                self.assertTrue(response.context['form'].errors['__all__'][0], "You must include a title for every included question.")
+        post_data = dict()
+        post_data['ruleset_uuid-101_include'] = True
+        post_data['ruleset_uuid-101_title'] = "have electricity access"
+        response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+        self.assertTrue(PollQuestion.objects.filter(poll=poll1))
 
-                post_data = dict()
-                post_data['ruleset_uuid-8435_include'] = True
-                post_data['ruleset_uuid-8435_title'] = "hello " * 50
-                response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
-                self.assertTrue(response.context['form'].errors)
-                self.assertTrue(response.context['form'].errors['__all__'][0], "Title too long. The max limit is 255 characters for each title")
+        poll_question = PollQuestion.objects.filter(poll=poll1, ruleset_uuid="uuid-101")[0]
+        self.assertEquals(poll_question.title, 'have electricity access')
 
-                post_data = dict()
-                post_data['ruleset_uuid-8435_include'] = True
-                post_data['ruleset_uuid-8435_title'] = "have electricity access"
-                response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
-                self.assertTrue(PollQuestion.objects.filter(poll=poll1))
+        self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_images', args=[poll1.pk]))
 
-                poll_question = PollQuestion.objects.filter(poll=poll1, ruleset_uuid="uuid-8435")[0]
-                self.assertEquals(poll_question.title, 'have electricity access')
+        post_data = dict()
+        post_data['ruleset_uuid-101_include'] = True
+        post_data['ruleset_uuid-101_title'] = "electricity network coverage"
+        response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
 
-                self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_images', args=[poll1.pk]))
+        self.assertTrue(PollQuestion.objects.filter(poll=poll1))
 
-                mock_fetch_poll_results_task.assert_called_once_with(poll1)
+        poll_question = PollQuestion.objects.filter(poll=poll1)[0]
+        self.assertEquals(poll_question.title, 'electricity network coverage')
 
-                post_data = dict()
-                post_data['ruleset_uuid-8435_include'] = True
-                post_data['ruleset_uuid-8435_title'] = "electricity network coverage"
-                response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+        with patch('ureport.polls.models.Poll.clear_brick_polls_cache') as mock:
+            mock.return_value = 'Cache cleared'
 
-                self.assertTrue(PollQuestion.objects.filter(poll=poll1))
+            post_data = dict()
+            post_data['ruleset_uuid-101_include'] = True
+            post_data['ruleset_uuid-101_title'] = "electricity network coverage"
+            response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
 
-                poll_question = PollQuestion.objects.filter(poll=poll1)[0]
-                self.assertEquals(poll_question.title, 'electricity network coverage')
-                self.assertFalse(PollQuestion.objects.filter(pk=poll1_question.pk))
-
-                with patch('ureport.polls.models.Poll.clear_brick_polls_cache') as mock:
-                    mock.return_value = 'Cache cleared'
-
-                    post_data = dict()
-                    post_data['ruleset_uuid-8435_include'] = True
-                    post_data['ruleset_uuid-8435_title'] = "electricity network coverage"
-                    response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
-
-                    mock.assert_called_once_with(poll1.org)
+            mock.assert_called_once_with(poll1.org)
 
     def test_images_poll(self):
         poll1 = Poll.objects.create(flow_uuid="uuid-1",
