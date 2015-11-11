@@ -468,7 +468,7 @@ class PollTest(DashTest):
         with patch('dash.orgs.models.Org.get_flows') as mock:
             flows_cached = dict()
             flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=300,
-                                           labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
+                                           labels="", archived=False, created_on="2015-04-08",
                                            rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
                                                           label='Does your community have power')])
 
@@ -489,7 +489,7 @@ class PollTest(DashTest):
 
             self.assertEquals(len(response.context['form'].fields['flow_uuid'].choices), 1)
             self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][0], 'uuid-25')
-            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][1], 'Flow 1')
+            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][1], 'Flow 1 (2015-04-08)')
 
             response = self.client.post(create_url, dict(), SERVER_NAME='uganda.ureport.io')
             self.assertTrue(response.context['form'].errors)
