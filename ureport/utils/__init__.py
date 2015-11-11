@@ -306,6 +306,7 @@ def fetch_flows(org):
             if flow.rulesets:
                 flow_json = dict()
                 flow_json['uuid'] = flow.uuid
+                flow_json['created_on'] = flow.created_on.strftime('%Y-%m-%d')
                 flow_json['name'] = flow.name
                 flow_json['participants'] = flow.participants
                 flow_json['runs'] = flow.runs
