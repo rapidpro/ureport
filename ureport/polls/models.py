@@ -165,10 +165,17 @@ class Poll(SmartModel):
 
             question = PollQuestion.update_or_create(user, self, label, ruleset_uuid, ruleset_type)
 
+            rapidpro_rules = []
             for rule in ruleset['rules']:
                 category = json.dumps(rule['category'])
-                PollResponseCategory.update_or_create(question, rule['uuid'], category)
+                rule_uuid = rule['uuid']
+                rapidpro_rules.append(rule_uuid)
 
+                PollResponseCategory.update_or_create(question, rule_uuid, category)
+
+            # deactivate if corresponding rules are removed
+            PollResponseCategory.objects.filter(
+                question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
 
     def best_and_worst(self):
         b_and_w = []
@@ -439,13 +446,15 @@ class PollResponseCategory(models.Model):
 
     category = models.TextField(null=True)
 
+    is_active = models.BooleanField(default=True)
+
     @classmethod
     def update_or_create(cls, question, rule_uuid, category):
         existing = cls.objects.filter(question=question, rule_uuid=rule_uuid)
         if existing:
-            existing.update(category=category)
+            existing.update(category=category, is_active=True)
         else:
-            cls.objects.create(question=question, rule_uuid=rule_uuid, category=category)
+            cls.objects.create(question=question, rule_uuid=rule_uuid, category=category, is_active=True)
 
     class Meta:
         unique_together = ('question', 'rule_uuid')
