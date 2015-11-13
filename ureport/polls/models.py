@@ -65,6 +65,7 @@ class Poll(SmartModel):
     display and sharing in the UReport platform.
     """
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
+    base_language = models.CharField(max_length=4, default='base', help_text=_("Th base language of the flow to use"))
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
     category = models.ForeignKey(Category, related_name="polls",
@@ -307,6 +308,8 @@ class PollQuestion(SmartModel):
                              help_text=_("The title of this question"))
     ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
 
+    ruleset_type = models.CharField(max_length=32, default='wait_message')
+
     def fetch_results(self, segment=None):
         from raven.contrib.django.raven_compat.models import client
 
@@ -388,3 +391,6 @@ class PollQuestion(SmartModel):
 
     def __unicode__(self):
         return self.title
+
+    class Meta:
+        unique_together = ('poll', 'ruleset_uuid')
