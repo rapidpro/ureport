@@ -394,3 +394,16 @@ class PollQuestion(SmartModel):
 
     class Meta:
         unique_together = ('poll', 'ruleset_uuid')
+
+
+class PollResponseCategory(models.Model):
+    question = models.ForeignKey(PollQuestion, related_name='response_categories')
+
+    rule_uuid = models.CharField(max_length=36, help_text=_("The Rule this response category is based on"))
+
+    category = models.TextField(null=True)
+
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        unique_together = ('question', 'rule_uuid')
