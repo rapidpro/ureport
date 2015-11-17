@@ -1,7 +1,7 @@
 
 def set_assets_processor(request):
     """
-    Simple context processor that automatically sets 'org' on the context if it
+    Simple context processor that overwrite the assets of 'org' on the context if org
     is present in the request.
     """
     if getattr(request, 'org', None):
