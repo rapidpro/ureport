@@ -1,5 +1,5 @@
 
-def set_org_processor(request):
+def set_assets_processor(request):
     """
     Simple context processor that automatically sets 'org' on the context if it
     is present in the request.
@@ -11,6 +11,6 @@ def set_org_processor(request):
         banner_bg = org.images.filter(is_active=True, image_type='B')
         banner_bg = banner_bg.order_by('-pk').first()
 
-        return dict(org=org, pattern_bg=pattern_bg, banner_bg=banner_bg)
+        return dict(pattern_bg=pattern_bg, banner_bg=banner_bg)
     else:
         return dict()
