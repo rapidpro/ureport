@@ -492,7 +492,7 @@ CELERYBEAT_SCHEDULE = {
 #-----------------------------------------------------------------------------------
 # U-Report Defaults
 #-----------------------------------------------------------------------------------
-UREPORT_DEFAULT_PRIMARY_COLOR = '#FFFF00'
+UREPORT_DEFAULT_PRIMARY_COLOR = '#FFD100'
 UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
 
 
