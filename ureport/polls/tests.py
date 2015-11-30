@@ -872,16 +872,16 @@ class PollTest(DashTest):
             mock.assert_called_with('field_name')
 
         self.assertIsNone(org_color(None, 1))
-        self.assertEquals(org_color(self.uganda, 0), '#FFFF00')
+        self.assertEquals(org_color(self.uganda, 0), '#FFD100')
         self.assertEquals(org_color(self.uganda, 1), '#1F49BF')
-        self.assertEquals(org_color(self.uganda, 2), '#FFFF00')
+        self.assertEquals(org_color(self.uganda, 2), '#FFD100')
         self.assertEquals(org_color(self.uganda, 3), '#1F49BF')
 
         self.uganda.set_config('primary_color', '#aaaaaa')
 
-        self.assertEquals(org_color(self.uganda, 0), '#FFFF00')
+        self.assertEquals(org_color(self.uganda, 0), '#FFD100')
         self.assertEquals(org_color(self.uganda, 1), '#1F49BF')
-        self.assertEquals(org_color(self.uganda, 2), '#FFFF00')
+        self.assertEquals(org_color(self.uganda, 2), '#FFD100')
         self.assertEquals(org_color(self.uganda, 3), '#1F49BF')
 
         self.uganda.set_config('secondary_color', '#bbbbbb')
