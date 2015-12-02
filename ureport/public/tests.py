@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import json
+from dash.dashblocks.models import DashBlock, DashBlockType
 import mock
 from urllib import urlencode, quote
 
@@ -499,6 +500,19 @@ class PublicTest(DashTest):
         response = self.client.get(join_engage_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/join/')
         self.assertEquals(response.context['org'], self.uganda)
+
+        # add shortcode and a join dashblock
+        self.uganda.set_config("shortcode", "3000")
+        join_dashblock_type = DashBlockType.objects.filter(slug='join_engage').first()
+
+        DashBlock.objects.create(title="Join", content="Join", dashblock_type=join_dashblock_type, org=self.uganda,
+                                 created_by=self.admin, modified_by=self.admin)
+
+        response = self.client.get(join_engage_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/join/')
+        self.assertEquals(response.context['org'], self.uganda)
+        self.assertTrue('All U-Report services (all msg on 3000) are free.' in response.content)
+
 
     def test_ureporters(self):
         ureporters_url = reverse('public.ureporters')
