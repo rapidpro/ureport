@@ -2,6 +2,7 @@ initMap = (id, geojson, question, districtLabel) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
 
   allowDistrictZoom = districtLabel.trim() != ''
+  nullDataCount = 0
 
   boundaries = null
   boundaryResults = null
@@ -23,6 +24,14 @@ initMap = (id, geojson, question, districtLabel) ->
   colors = ['rgb(165,0,38)','rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,139)','rgb(255,255,191)','rgb(217,239,139)','rgb(166,217,106)','rgb(102,189,99)','rgb(26,152,80)','rgb(0,104,55)']
 
   breaks = [20, 30, 35, 40, 45, 55, 60, 65, 70, 80, 100]
+
+  updateScaleLabels = (level) ->
+    if level == 2
+      window.string_National = 'state'
+      window.string_State = 'district'
+    else if not level or level < 2
+      window.string_National = 'national'
+      window.string_State = 'state'
 
   visibleStyle = (feature) ->
     return {
@@ -116,7 +125,8 @@ initMap = (id, geojson, question, districtLabel) ->
     info.update()
 
   clickFeature = (e) ->
-    if (allowDistrictZoom and e.target.feature.properties.level == 1)
+    if ([1,2].indexOf(e.target.feature.properties.level) != -1)
+      map.removeLayer(boundaries)
       map.fitBounds(e.target.getBounds(), {step: .25})
       mainLabelName = e.target.feature.properties.name + " (" + window.string_State + ")"
       loadBoundary(e.target.feature.properties, e.target)
@@ -139,6 +149,8 @@ initMap = (id, geojson, question, districtLabel) ->
 
     $.ajax({url:'/pollquestion/' + question + '/results/?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (data) ->
       # calculate the most common category if we haven't already
+      if data == null then nullDataCount++
+      data = data || []
       if not topCategory
         categoryCounts = {}
 
@@ -191,9 +203,10 @@ initMap = (id, geojson, question, districtLabel) ->
         overallResults = countryResults
 
         # add our legend
-        legend = L.control(position: "bottomright")
-        legend.onAdd = (map) -> updateLegend(map, topCategory)
-        legend.addTo(map)
+        if nullDataCount == 1
+          legend = L.control(position: "bottomright")
+          legend.onAdd = (map) -> updateLegend(map, topCategory)
+          legend.addTo(map)
 
       # now calculate the percentage for each admin boundary
       boundaryResults = {}
@@ -222,6 +235,11 @@ initMap = (id, geojson, question, districtLabel) ->
         boundaryUrl += boundaryId + '/'
 
       $.ajax({url:boundaryUrl, dataType: "json"}).done (data) ->
+        if not data
+          resetBoundaries()
+          scale.update()
+          mainLabelName = window.string_All
+          return
         for feature in data.features
           result = boundaryResults[feature.properties.id]
           if result
@@ -272,6 +290,7 @@ initMap = (id, geojson, question, districtLabel) ->
     scaleClass = 'national'
     if level
       scaleClass = 'state'
+    updateScaleLabels(level)
 
     html = "<div class='scale " + scaleClass + "'>"
     html += "<div class='scale-map-circle-outer primary-border-color'></div>"
