@@ -215,10 +215,10 @@ class BoundaryView(SmartTemplateView):
                 elt['properties']['level'] = 0
 
         else:
-            state_id = self.kwargs.get('osm_id', None)
+            parent_id = self.kwargs.get('osm_id', None)
 
-            if state_id:
-                boundaries = org.get_state_geojson(state_id)
+            if parent_id:
+                boundaries = org.get_geojson_by_parent_id(parent_id)
             else:
                 boundaries = org.get_country_geojson()
 
