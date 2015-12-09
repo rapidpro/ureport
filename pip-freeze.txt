@@ -44,7 +44,7 @@ psycopg2==2.6.1
 pycountry==1.12
 python-dateutil==2.4.2
 pytz==2015.4
-rapidpro-python==1.5
+rapidpro-python==1.6.2
 raven==5.3.1
 redis==2.10.3
 regex==2015.07.19
