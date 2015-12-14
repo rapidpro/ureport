@@ -17,12 +17,12 @@ Install dependencies
 ```
 % virtualenv env
 % source env/bin/activate
-% pip install -r pip-requires.txt
+% pip install -r pip-freeze.txt
 ```
 
 Link up a settings file (you'll need to create the postgres db first, username: 'ureport' password: 'nyaruka')
 ```
-% ln -s ureport/settings.py.postgres ureport/settings.py
+% cp ureport/settings.py.postgres ureport/settings.py
 ```
 
 Sync the database, add all our models and create our superuser
