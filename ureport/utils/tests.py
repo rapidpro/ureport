@@ -487,7 +487,7 @@ class UtilsTest(DashTest):
             mock_datetime_ms.return_value = 500
 
             with patch('requests.get') as mock_get:
-                mock_get.side_effect = [MockResponse(200, '300'), MockResponse(200, '50\n')]
+                mock_get.side_effect = [MockResponse(200, '50\n')]
 
                 with patch('django.core.cache.cache.set') as cache_set_mock:
                     cache_set_mock.return_value = "Set"
@@ -496,18 +496,11 @@ class UtilsTest(DashTest):
                         cache_delete_mock.return_value = "Deleted"
 
                         fetch_old_sites_count()
-                        self.assertEqual(mock_get.call_count, 2)
-                        mock_get.assert_any_call('http://ureport.ug/count.txt')
-                        mock_get.assert_any_call('http://www.zambiaureport.org/count.txt/')
+                        mock_get.assert_called_once_with('http://www.zambiaureport.org/count.txt/')
 
-                        self.assertEqual(cache_set_mock.call_count, 2)
-                        cache_set_mock.assert_any_call('org:uganda:reporters:old-site',
-                                                       {'time': 500, 'results': dict(size=300)},
-                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-
-                        cache_set_mock.assert_any_call('org:zambia:reporters:old-site',
-                                                       {'time': 500, 'results': dict(size=50)},
-                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                        cache_set_mock.assert_called_once_with('org:zambia:reporters:old-site',
+                                                               {'time': 500, 'results': dict(size=50)},
+                                                               UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
 
