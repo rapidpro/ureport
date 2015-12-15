@@ -25,14 +25,6 @@ initMap = (id, geojson, question, districtLabel) ->
 
   breaks = [20, 30, 35, 40, 45, 55, 60, 65, 70, 80, 100]
 
-  updateScaleLabels = (level) ->
-    if level == 2
-      window.string_National = 'state'
-      window.string_State = 'district'
-    else if not level or level < 2
-      window.string_National = 'national'
-      window.string_State = 'state'
-
   visibleStyle = (feature) ->
     return {
       weight: 1
@@ -138,11 +130,14 @@ initMap = (id, geojson, question, districtLabel) ->
 
   loadBoundary = (boundary, target) ->
     boundaryId = if boundary then boundary.id else null
-
+    boundaryLevel = if boundary then boundary.level else null
     # load our actual data
     if not boundary
       segment = {location:"State"}
       overallResults = countryResults
+    else if boundary and boundary.level == 2
+      segment = {location:"Ward", parent:boundaryId}
+      overallResults = boundaryResults[boundaryId]
     else
       segment = {location:"District", parent:boundaryId}
       overallResults = boundaryResults[boundaryId]
@@ -227,7 +222,7 @@ initMap = (id, geojson, question, districtLabel) ->
 
       # update our summary total
       info.update()
-      scale.update(boundaryId)
+      scale.update(boundaryLevel)
 
       # we are displaying the districts of a state, load the geojson for it
       boundaryUrl = '/boundaries/'
@@ -288,17 +283,20 @@ initMap = (id, geojson, question, districtLabel) ->
     html = ""
 
     scaleClass = 'national'
-    if level
+    if level and level == 1
       scaleClass = 'state'
-    updateScaleLabels(level)
+    if level and level == 2
+      scaleClass = 'district'
 
     html = "<div class='scale " + scaleClass + "'>"
     html += "<div class='scale-map-circle-outer primary-border-color'></div>"
     html += "<div class='scale-map-circle-inner'></div>"
     html += "<div class='scale-map-hline primary-border-color'></div>"
     html += "<div class='scale-map-vline primary-border-color'></div>"
+    html += "<div class='scale-map-vline-2 primary-border-color'></div>"
     html += "<div class='national-level primary-color'>" + window.string_National.toUpperCase() + "</div>"
     html += "<div class='state-level primary-color'>" + window.string_State.toUpperCase() + "</div>"
+    html += "<div class='district-level primary-color'>" + window.string_District.toUpperCase() + "</div>"
 
     @_div.innerHTML = html
 
