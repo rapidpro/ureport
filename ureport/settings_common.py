@@ -518,7 +518,6 @@ PREVIOUS_ORG_SITES = [
         host="http://www.ureport.ug",
         flag="flag_ug.png",
         is_static=True,
-        count_link='http://ureport.ug/count.txt',
     ),
     dict(
         name="Zambia",
