@@ -616,6 +616,25 @@ class UtilsTest(DashTest):
 
         self.assertEqual(get_reporters_count(self.org), 5)
 
+    def test_get_global_count(self):
+        with self.settings(CACHES = {'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                                 'LOCATION': '127.0.0.1:6379:1',
+                                                 'OPTIONS': {
+                                                     'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+                                                 }
+                                                 }}):
+
+            self.assertEqual(get_global_count(), 0)
+
+            ReportersCounter.objects.create(org=self.org, type='total-reporters', count=5)
+
+            # ignored if not on the global homepage
+            self.assertEqual(get_global_count(), 0)
+
+            # add the org to the homepage
+            self.org.set_config('is_on_landing_page', True)
+            self.assertEqual(get_global_count(), 5)
+
     def test_get_occupation_stats(self):
 
         self.assertEqual(get_occupation_stats(self.org), '[]')

@@ -1394,7 +1394,7 @@ msgid "HOW TO JOIN"
 msgstr "CÓMO PARTICIPAR"
 
 #: templates/public/join_engage.haml:73
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "              * U-Report is a free program sponsored by UNICEF with help of "
