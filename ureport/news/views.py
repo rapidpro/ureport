@@ -2,6 +2,7 @@ from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView
 from .models import NewsItem, Video
 
+
 class NewsItemCRUDL(SmartCRUDL):
     model = NewsItem
     actions = ('create', 'update', 'list')
@@ -15,11 +16,9 @@ class NewsItemCRUDL(SmartCRUDL):
         def get_queryset(self, **kwargs):
             queryset = super(NewsItemCRUDL.List, self).get_queryset(**kwargs)
 
-            if not self.get_user().is_superuser:
-                queryset = queryset.filter(org=self.derive_org())
+            queryset = queryset.filter(org=self.derive_org())
 
             return queryset
-
 
     class Create(OrgPermsMixin, SmartCreateView):
 
@@ -51,11 +50,9 @@ class VideoCRUDL(SmartCRUDL):
         def get_queryset(self, **kwargs):
             queryset = super(VideoCRUDL.List, self).get_queryset(**kwargs)
 
-            if not self.get_user().is_superuser:
-                queryset = queryset.filter(org=self.derive_org())
+            queryset = queryset.filter(org=self.derive_org())
 
             return queryset
-
 
     class Create(OrgPermsMixin, SmartCreateView):
 

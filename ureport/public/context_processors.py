@@ -43,3 +43,16 @@ def set_is_iorg(request):
         is_iorg = True
 
     return dict(is_iorg=is_iorg)
+
+
+def set_is_rtl_org(request):
+    """
+    Context Processor that populates the 'is_rtl_org' context variable with whether
+    the org language is a right to left language
+    """
+    is_rtl_org = False
+    org = request.org
+    if org and org.language in getattr(settings, 'RTL_LANGUAGES', []):
+        is_rtl_org = True
+
+    return dict(is_rtl_org=is_rtl_org)

@@ -50,8 +50,8 @@
       .row
         .col-md-12
           #ureport-announcement
-            - blocktrans
-              * U-Report is a free program sponsored by UNICEF with help of Network Providers in {{ org.name }}. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on {{ org|config:"shortcode"}}) are free.
+            - blocktrans with country=org.name shortcode=org|config:"shortcode"
+              * U-Report is a free program sponsored by UNICEF with help of Network Providers in {{ country }}. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on {{ shortcode}}) are free.
 
       -if not is_iorg
         %hr.aaa
@@ -83,7 +83,8 @@
 
                   %a.social-link.twitter-bg-color.tweet-button{href:'https://twitter.com/intent/tweet?screen_name={{ org|config:"twitter_handle"}}'}
                     - trans "TWEET TO"
-                    @{{ org|config:"twitter_handle"|upper}} &#8594;
+                    @{{ org|config:"twitter_handle"|upper}}
+                    {{ org|org_arrow_link }}
 
             {% endif %}
 
@@ -97,7 +98,8 @@
                     %a.twitter-timeline{href:'https://twitter.com/{{ org|config:"twitter_user_widget" }}', data-widget-id:'{{ org|config:"twitter_search_widget" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:'{{org|config:"primary_color"}}'}
                   %a.social-link.primary-bg-color.tweet-button{href:"https://twitter.com/intent/tweet?hashtags=ureport{{org.name}}%2Cureport%2C{{org.name}}"}
                     - trans "COMPOSE NEW TWEET"
-                    &#8594;
+                    {{ org|org_arrow_link }}
+
             {% endif %}
 
 

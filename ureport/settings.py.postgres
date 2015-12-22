@@ -14,7 +14,7 @@ API_RESULT_CACHE_TIME = 60 * 60 * 6
 
 SITE_API_HOST = 'rapidpro.io'
 API_ENDPOINT = 'https://api.rapidpro.io'
-HOSTNAME = 'ureport.io' if TESTING else 'localhost:8000'
+HOSTNAME = 'ureport.io' if TESTING else 'ureport.io:8000'
 
 
 # we store files on S3 on prod boxes
@@ -53,40 +53,32 @@ DATABASES = {
 }
 
 # # Faster schedules for staging server
-CELERYBEAT_SCHEDULE = {
-    "refresh_flows": {
-        "task": "admins.refresh_org_flows",
-        "schedule": timedelta(minutes=1),
-        "relative": True,
-    },
-    "refresh_reporters": {
-        "task": "admins.refresh_org_reporters",
-        "schedule": timedelta(minutes=1),
-        "relative": True,
-    },
-    "refresh_org_graphs_data": {
-        "task": "admins.refresh_org_graphs_data",
-        "schedule": timedelta(minutes=3),
-        "relative": True,
-    },
-    "refresh_main_poll": {
-        "task": "admins.refresh_main_poll",
-        "schedule": timedelta(minutes=1),
-        "relative": True,
-    },
-    "refresh_brick_polls": {
-        "task": "admins.refresh_brick_polls",
-        "schedule": timedelta(minutes=10),
-        "relative": True,
-    },
-    "refresh_other_polls": {
-        "task": "admins.refresh_other_polls",
-        "schedule": timedelta(minutes=15),
-        "relative": True,
-    },
-    "rebuild_boundaries": {
-        "task": "orgs.build_boundaries",
-        "schedule": timedelta(minutes=20),
-        "relative": True,
-    },
-}
+# CELERYBEAT_SCHEDULE = {
+#     "refresh_flows": {
+#         "task": "admins.refresh_org_flows",
+#         "schedule": timedelta(minutes=1),
+#         "relative": True,
+#     },
+#     "refresh_main_poll": {
+#         "task": "admins.refresh_main_poll",
+#         "schedule": timedelta(minutes=1),
+#         "relative": True,
+#     },
+#     "refresh_brick_polls": {
+#         "task": "admins.refresh_brick_polls",
+#         "schedule": timedelta(minutes=10),
+#         "relative": True,
+#     },
+#     "refresh_other_polls": {
+#         "task": "admins.refresh_other_polls",
+#         "schedule": timedelta(minutes=15),
+#         "relative": True,
+#     },
+#     "fetch_contacts": {
+#         "task": "contacts.fetch_contacts_task",
+#         "schedule": timedelta(minutes=10),
+#         "relative": True,
+#      },
+#
+# }
+#

@@ -16,7 +16,7 @@
                   %a.primary-color{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
                     -trans "Follow"
                     @{{ org|config:"twitter_handle" }}
-                    &#8594;
+                    {{ org|org_arrow_link }}
 
               .global-welcome-text
                 -blocktrans
@@ -29,7 +29,7 @@
                     {{ latest_poll.title }}
                   %a.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
                     - trans "VIEW FULL RESULT"
-                    &#8594;
+                    {{ org|org_arrow_link }}
 
             .col-sm-5
               .index-global-counter.card.card-padding
@@ -62,7 +62,7 @@
                   .stats
                     {{ latest_poll.response_percentage }}
                     %span.stats-small
-                      ({{ latest_poll.completed_runs|intcomma }}
+                      ({{ latest_poll.responded_runs|intcomma }}
                       - trans "Responded out of"
                       {{ latest_poll.runs|intcomma }})
 
@@ -124,7 +124,7 @@
 
                 %a.hero-link.primary-bg-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
                   - trans "VIEW FULL RESULT"
-                  &#8594;
+                  {{ org|org_arrow_link }}
 
   - block banner
     {{ block.super }}
@@ -142,11 +142,10 @@
             .hr-header.primary-color
               - trans "TOTAL # OF U-REPORTERS"
             .reporters-count
-              - with reporters=org|reporter_count
-                - if reporters
-                  {{ reporters|intcomma }}
-                - else
-                  000,000
+              - if reporters
+                {{ reporters|intcomma }}
+              - else
+                000,000
 
             - if most_active_regions
               .hr-header.primary-color
@@ -170,37 +169,36 @@
 
           -if not is_iorg
             .col-md-4
-              -with gender_stats=org|gender_stats
-                .hr-header.primary-color
-                  - trans "RATE BY GENDER"
-                .gender-stats{ data-contact-field:'{{org|config:"gender_label"}}'}
-                  %table.gender
-                    %tbody
-                      %tr
-                        %td
-                          .icon-gender.primary-color
-                            .glyph.icon-Icon-02
+              .hr-header.primary-color
+                - trans "RATE BY GENDER"
+              .gender-stats
+                %table.gender
+                  %tbody
+                    %tr
+                      %td
+                        .icon-gender.primary-color
+                          .glyph.icon-Icon-02
 
-                        %td
-                          #male-percentage.primary-border-color.percentage-gender
-                            %span {{ gender_stats.male_percentage }}
-                          #male-summary.summary-gender
-                            {{ gender_stats.male_count|intcomma }}
+                      %td
+                        #male-percentage.primary-border-color.percentage-gender
+                          %span {{ gender_stats.male_percentage }}
+                        #male-summary.summary-gender
+                          {{ gender_stats.male_count|intcomma }}
 
-                        %td.female-gender
-                          .icon-gender.primary-color
-                            .glyph.icon-Icon-01
+                      %td.female-gender
+                        .icon-gender.primary-color
+                          .glyph.icon-Icon-01
 
-                        %td
-                          #female-percentage.primary-border-color.percentage-gender
-                            %span {{ gender_stats.female_percentage }}
-                          #female-summary.summary-gender
-                            {{ gender_stats.female_count|intcomma }}
+                      %td
+                        #female-percentage.primary-border-color.percentage-gender
+                          %span {{ gender_stats.female_percentage }}
+                        #female-summary.summary-gender
+                          {{ gender_stats.female_count|intcomma }}
 
             .col-md-4
               .hr-header.primary-color
                 - trans "RATE BY AGE"
-              .age-stats{ data-contact-field:'{{org|config:"born_label"}}', id: "age-chart"}
+              .age-stats{ id: "age-chart"}
 
   %hr.aaa
   .section
@@ -219,7 +217,7 @@
                 %iframe{ width:"100%", height:"100%", src:"//www.youtube.com/embed/{{ vid.video_id }}?rel=0&autohide=1&showinfo=0", frameborder:"0"}
               %a.brick-link.primary-bg-color{ href:"http://www.youtube.com/watch?v={{ vid.video_id }}"}
                 - trans "WATCH MORE VIDEOS"
-                &#8594;
+                {{ org|org_arrow_link }}
 
         {% if org|config:"featured_state" and False %}
         .brick.hide-on-small.state-brick.size21{data-priority:"5"}
@@ -241,7 +239,7 @@
                 .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
           %a.facebook-bg-color.brick-link{ href:'{{ org|config:"facebook_page_url" }}' }
             - trans "VIEW MORE STORIES ON FACEBOOK"
-            &#8594;
+            {{ org|org_arrow_link }}
         {% endif %}
 
         {% if org|config:"instagram_username" %}
@@ -251,10 +249,10 @@
               INSTAGRAM
             .brick-content
               .brick-align{style:"padding: 0px"}
-                %iframe{ src:'http://widget.websta.me/in/{{ org|config:"instagram_username"}}/?s=160&w=2&h=4&b=0&p=-5px', allowtransparency:"true", frameborder:"0", scrolling:"no", style:"border:none;overflow:scroll;height:650px;width: 100%;"}
+                %iframe{ src:'https://widget.websta.me/in/{{ org|config:"instagram_username"}}/?s=160&w=2&h=4&b=0&p=-5px', allowtransparency:"true", frameborder:"0", scrolling:"no", style:"border:none;overflow:scroll;height:650px;width: 100%;"}
           %a.instagram-bg-color.brick-link{ href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
             - trans "VIEW MORE ON INSTAGRAM"
-            &#8594;
+            {{ org|org_arrow_link }}
         {% endif %}
 
         {% if  org|config:"twitter_user_widget" and org|config:"twitter_handle" %}
@@ -271,7 +269,7 @@
 
             %a.twitter-bg-color.brick-link{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
               - trans "READ MORE TWEETS ON TWITTER"
-              &#8594;
+              {{ org|org_arrow_link }}
         {% endif %}
 
         {% if news %}
@@ -300,7 +298,7 @@
                       %img{width:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
                   .brick-align
                     .brick-long-story-title
-                      {{ story.title|title }}
+                      {{ story.title }}
 
                     .half-border.primary-bg-color
                     .brick-long-story-text
@@ -308,7 +306,7 @@
 
                 %a.brick-link.primary-bg-color{ href:"{% url 'public.story_read' story.pk %}" }
                   - trans "READ FULL STORY"
-                  &#8594;
+                  {{ org|org_arrow_link }}
           - else
             .brick.story-brick.size11{data-priority:"{% cycle '4' '3' '2' %}"}
               .brick-inner
@@ -324,10 +322,10 @@
                       %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
 
                 .brick-short-story-title
-                  {{ story.title|title }}
+                  {{ story.title }}
                 %a.brick-link.primary-bg-color{ href:"{% url 'public.story_read' story.pk %}" }
                   - trans "READ FULL STORY"
-                  &#8594;
+                  {{ org|org_arrow_link }}
 
         - if stories|length < 12
           - for ot_story in other_stories|slice:"5"
@@ -345,11 +343,11 @@
                     %img.brick-short-story-image{ height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg" }
 
                   .brick-short-story-title
-                    {{ ot_story.title|title }}
+                    {{ ot_story.title }}
 
                 %a.brick-link.primary-bg-color{href:"{% url 'public.story_read' ot_story.pk %}"}
                   - trans "READ FULL STORY"
-                  &#8594;
+                  {{ org|org_arrow_link }}
 
         - for poll in recent_polls|slice:"3"
           .brick.hide-on-small.poll-brick.size21{data-priority:"{% cycle '4' '3' '2' %}"}
@@ -361,7 +359,7 @@
                 .brick-block-vcenter-container
                   .brick-block-vcenter-content
                     .brick-poll-title
-                      {{ poll.get_first_question.title|title }}
+                      {{ poll.get_first_question.title }}
                     .brick-poll-response-percentage
                       {{ poll.response_percentage }}
                       - trans "Response Rate"
@@ -380,7 +378,7 @@
 
               %a.brick-link.primary-bg-color{ href: "{% url 'public.poll_read' poll.id %}" }
                 - trans "VIEW FULL RESULT"
-                &#8594;
+                {{ org|org_arrow_link }}
     -else
       #iorg-brick-container
         - for story in stories
@@ -399,7 +397,7 @@
                       %img{width:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
                   .brick-align
                     .brick-long-story-title
-                      {{ story.title|title }}
+                      {{ story.title }}
 
                     .half-border.primary-bg-color
                     .brick-long-story-text
@@ -407,7 +405,7 @@
 
                 %a.brick-link.primary-bg-color{ href:"{% url 'public.story_read' story.pk %}" }
                   - trans "READ FULL STORY"
-                  &#8594;
+                  {{ org|org_arrow_link }}
 
 - block extra-style
   {{ block.super }}
@@ -673,162 +671,81 @@
         });
       });
 
-      $(function(){
-        $(".gender-stats").each(function(){
-          var contactField = $(this).attr("data-contact-field");
-          $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
-
-            if(!result){
-              return;
-            }
-
-            var results = result[0];
-            var categories = [];
-
-            male_label = "{{org|config:"male_label"|upper }}";
-            female_label = "{{org|config:"female_label"|upper }}";
-
-            var total = 0;
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              label = category.label.trim().toUpperCase()
-              if (label == male_label || label == female_label) {
-                total += category.count;
-              }
-            }
-
-            var percentage_lookup = {};
-            var count_lookup = {};
-
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              label = category.label.trim().toUpperCase();
-              if(categories.indexOf(label) >= 0) {
-                if (total > 0){
-                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-                  percentage_lookup[label] += Math.round(percentage);
-                  count_lookup[label] += category.count;
-                }
-
-              } else {
-
-                categories.push(label);
-
-                if (total > 0){
-                  percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-                  percentage_lookup[label] = Math.round(percentage);
-                  count_lookup[label] = category.count;
-                }
-              }
-            }
-
-            if (male_label in percentage_lookup){
-              $("#male-percentage").text(percentage_lookup[male_label] + "%");
-              $("#male-summary").text(window.intcomma(count_lookup[male_label]));
-            }
-
-            if (female_label in percentage_lookup){
-              $("#female-percentage").text(percentage_lookup[female_label] + "%");
-              $("#female-summary").text(window.intcomma(count_lookup[female_label]));
-            }
-          });
-        });
-      });
 
       $(function(){
         $("#age-chart").each(function(){
-          var contactField = $(this).attr("data-contact-field");
-          $.ajax({url:'/contact_field_results/?contact_field=' + encodeURIComponent(contactField) , dataType: "json"}).done(function(result){
 
-            if(!result){
-              return;
-            }
+           var data = {{ age_stats|safe }};
 
-            var results = result[0];
-            var categories = [];
-            var data = [];
+           {% if is_rtl_org %}
+           data.reverse();
+           {% endif %}
 
-            var total = 0;
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              total += category.count;
-            }
+           var categories = [];
 
-            var percentage_lookup = {};
+           for (i=0; i<data.length; i++) {
+             categories.push(data[i].name)
+           }
 
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              label = category.label.trim().toUpperCase();
-
-              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-              percentage_lookup[label] = Math.round(percentage);
-
-              if (parseInt(percentage_lookup[label])) {
-                categories.push(label);
-                data.push({ name:label,  y: Math.round(percentage) });
-              }
-            }
-
-            $('#age-chart').highcharts({
-              chart: {
-                type: 'column',
-                spacing: [ 3, 5, 3, 5]
-              },
-              credits: {
-                enabled: false
-              },
-              legend: {
-                enabled: false
-              },
-              title: {
-                  text: null
-              },
-              subtitle: {
-                  text: null
-              },
-              xAxis: {
-                categories: categories,
-                labels : {
-                    rotation: 0,
-                    style: {
-                      fontSize: 10,
-                      fontFamily: 'serif'
-                  }
-                },
-                minorTickLength: 0,
-                tickLength: 0
-              },
-              yAxis: {
-                min: 0,
-                labels: {
-                  enabled: false
-                },
-                gridLineWidth: 0,
-                title: {
-                  text: null
-                }
-              },
-              tooltip: {
-                enabled: false
-              },
-              plotOptions: {
-                  column: {
-                      color: '{{ org|config:"primary_color"}}',
-                      pointPadding: 0.2,
-                      pointWidth: 30,
-                      borderWidth: 0,
-                      dataLabels:  {
-                        enabled: true,
-                        style: {
-                          fontFamily: "SharpSansBold"
-                        },
-                        verticalAlign:"bottom",
-                        format: '<b>{point.y:.0f}%</b>'
-                      }
-                  }
-              },
-              series: [ {name: 'Age' , data: data} ]
-            });
-          });
-        });
-      });
+           $('#age-chart').highcharts({
+             chart: {
+               type: 'column',
+               spacing: [ 3, 5, 3, 5]
+             },
+             credits: {
+               enabled: false
+             },
+             legend: {
+               enabled: false
+             },
+             title: {
+                 text: null
+             },
+             subtitle: {
+                 text: null
+             },
+             xAxis: {
+               categories: categories,
+               labels : {
+                   rotation: 0,
+                   style: {
+                     fontSize: 10,
+                     fontFamily: 'serif'
+                 }
+               },
+               minorTickLength: 0,
+               tickLength: 0
+             },
+             yAxis: {
+               min: 0,
+               labels: {
+                 enabled: false
+               },
+               gridLineWidth: 0,
+               title: {
+                 text: null
+               }
+             },
+             tooltip: {
+               enabled: false
+             },
+             plotOptions: {
+                 column: {
+                     color: '{{ org|config:"primary_color"}}',
+                     pointPadding: 0.2,
+                     pointWidth: 30,
+                     borderWidth: 0,
+                     dataLabels:  {
+                       enabled: true,
+                       style: {
+                         fontFamily: "SharpSansBold"
+                       },
+                       verticalAlign:"bottom",
+                       format: '<b>{point.y:.0f}%</b>'
+                     }
+                 }
+             },
+             series: [ {name: 'Age' , data: {{ age_stats|safe }} } ]
+           });
+         });
+       });

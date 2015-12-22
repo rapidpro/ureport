@@ -59,8 +59,11 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = "translation"
 LANGUAGE_CODE = 'en'
 
 # Available languages for translation
-LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"))
+LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"),
+             ('uk', "Ukrainian"))
 DEFAULT_LANGUAGE = "en"
+RTL_LANGUAGES = ['ar']
+
 
 SITE_ID = 1
 
@@ -141,8 +144,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'dash.orgs.context_processors.user_group_perms_processor',
     'dash.orgs.context_processors.set_org_processor',
+    'ureport.assets.context_processors.set_assets_processor',
     'ureport.public.context_processors.set_has_better_domain',
     'ureport.public.context_processors.set_is_iorg',
+    'ureport.public.context_processors.set_is_rtl_org',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -249,12 +254,14 @@ INSTALLED_APPS = (
 
     # ureport apps
     'ureport.admins',
-    'ureport.polls',
-    'ureport.news',
-    'ureport.jobs',
-    'ureport.countries',
-    'ureport.assets',
     'ureport.api',
+    'ureport.assets',
+    'ureport.contacts',
+    'ureport.countries',
+    'ureport.jobs',
+    'ureport.locations',
+    'ureport.news',
+    'ureport.polls',
 
     'django_countries',
     'rest_framework',
@@ -374,6 +381,9 @@ GROUP_PERMISSIONS = {
         'stories.storyimage.*',
         'users.user_profile',
     ),
+    "Global": (
+        'countries.countryalias.*',
+    )
 }
 
 #-----------------------------------------------------------------------------------
@@ -454,16 +464,6 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
-    "refresh_reporters": {
-        "task": "polls.refresh_org_reporters",
-        "schedule": timedelta(minutes=20),
-        "relative": True,
-    },
-    "refresh_org_graphs_data": {
-        "task": "polls.refresh_org_graphs_data",
-        "schedule": timedelta(minutes=60),
-        "relative": True,
-    },
     "refresh_main_poll": {
         "task": "polls.refresh_main_poll",
         "schedule": timedelta(minutes=20),
@@ -479,17 +479,22 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(hours=48),
         "relative": True,
     },
-    "rebuild_boundaries": {
-        "task": "orgs.build_boundaries",
-        "schedule": timedelta(days=15),
+    "fetch_old_sites_count": {
+        "task": "polls.fetch_old_sites_count",
+        "schedule": timedelta(minutes=20),
         "relative": True,
     },
+    "fetch_contacts": {
+        "task": "contacts.fetch_contacts_task",
+        "schedule": timedelta(minutes=10),
+        "relative": True,
+     },
 }
 
 #-----------------------------------------------------------------------------------
 # U-Report Defaults
 #-----------------------------------------------------------------------------------
-UREPORT_DEFAULT_PRIMARY_COLOR = '#FFFF00'
+UREPORT_DEFAULT_PRIMARY_COLOR = '#FFD100'
 UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
 
 

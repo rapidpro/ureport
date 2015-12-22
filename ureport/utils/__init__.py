@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import copy
 import json
 import math
@@ -14,9 +16,32 @@ import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
+from ureport.locations.models import Boundary
 from ureport.polls.models import Poll
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
+
+ORG_CONTACT_COUNT_KEY = 'org:%d:contacts-counts'
+ORG_CONTACT_COUNT_TIMEOUT = 300
+
+
+def datetime_to_json_date(dt):
+    """
+    Formats a datetime as a string for inclusion in JSON
+    """
+    # always output as UTC / Z and always include milliseconds
+    as_utc = dt.astimezone(pytz.utc)
+    return as_utc.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z'
+
+
+def json_date_to_datetime(date_str):
+    """
+    Parses a datetime from a JSON string value
+    """
+    iso_format = '%Y-%m-%dT%H:%M:%S.%f'
+    if date_str.endswith('Z'):
+        iso_format += 'Z'
+    return datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
 
 
 def get_linked_orgs(authenticated=False):
@@ -264,15 +289,6 @@ def fetch_other_polls_results(org):
     _fetch_org_polls_results(org, other_polls)
 
 
-def fetch_org_graph_data(org):
-    for data_label in ['born_label', 'registration_label', 'occupation_label', 'gender_label']:
-        c_field = org.get_config(data_label)
-        if c_field:
-            fetch_contact_field_results(org, c_field, None)
-            if data_label == 'gender_label':
-                fetch_contact_field_results(org, c_field, dict(location='State'))
-
-
 def fetch_flows(org):
     start = time.time()
     print "Fetching flows for %s" % org.name
@@ -290,6 +306,7 @@ def fetch_flows(org):
             if flow.rulesets:
                 flow_json = dict()
                 flow_json['uuid'] = flow.uuid
+                flow_json['created_on'] = flow.created_on.strftime('%Y-%m-%d')
                 flow_json['name'] = flow.name
                 flow_json['participants'] = flow.participants
                 flow_json['runs'] = flow.runs
@@ -316,53 +333,6 @@ def get_flows(org):
     cache_value = cache.get(CACHE_ORG_FLOWS_KEY % org.pk, None)
     if cache_value:
         return cache_value['results']
-
-    return dict()
-
-
-def fetch_reporter_group(org):
-    start = time.time()
-    print "Fetching reporter group for %s" % org.name
-    try:
-        from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-
-        this_time = datetime.now()
-
-        reporter_group = org.get_config('reporter_group')
-        if reporter_group:
-            temba_client = org.get_temba_client()
-            groups = temba_client.get_groups(name=reporter_group)
-
-            key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
-            group_dict = dict()
-            if groups:
-                group = groups[0]
-                group_dict = dict(size=group.size, name=group.name, uuid=group.uuid)
-            cache.set(key,
-                      {'time': datetime_to_ms(this_time), 'results': group_dict},
-                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-    except:
-        client.captureException()
-        import traceback
-        traceback.print_exc()
-    # delete the global count cache to force a recalculate at the end
-    cache.delete(GLOBAL_COUNT_CACHE_KEY)
-
-    print "Fetch %s reporter group took %ss" % (org.name, time.time() - start)
-
-
-def get_reporter_group(org):
-    from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY
-
-    reporter_group = org.get_config('reporter_group')
-
-    if reporter_group:
-        key = CACHE_ORG_REPORTER_GROUP_KEY % (org.pk, slugify(unicode(reporter_group)))
-        cache_value = cache.get(key, None)
-        if cache_value:
-            group_dict = cache_value['results']
-            if group_dict:
-                return group_dict
 
     return dict()
 
@@ -404,11 +374,14 @@ def get_global_count():
         return count_cached_value
 
     try:
-        reporter_counter_keys = cache.keys('org:*:reporters:*')
+        old_site_reporter_counter_keys = cache.keys('org:*:reporters:old-site')
 
-        cached_values = [cache.get(key) for key in reporter_counter_keys]
+        cached_values = [cache.get(key) for key in old_site_reporter_counter_keys]
 
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
+
+        for org in Org.objects.filter(is_active=True):
+            count += get_reporters_count(org)
 
         # cached for 10 min
         cache.set(GLOBAL_COUNT_CACHE_KEY, count, 60 * 10)
@@ -420,9 +393,151 @@ def get_global_count():
     return count
 
 
+def get_org_contacts_counts(org):
+
+    from ureport.contacts.models import ReportersCounter
+
+    key = ORG_CONTACT_COUNT_KEY % org.pk
+    org_contacts_counts = cache.get(key, None)
+    if org_contacts_counts:
+        return org_contacts_counts
+
+    org_contacts_counts = ReportersCounter.get_counts(org)
+    cache.set(key, org_contacts_counts, ORG_CONTACT_COUNT_TIMEOUT)
+    return org_contacts_counts
+
+
+def get_gender_stats(org):
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    female_count = org_contacts_counts.get('gender:f', 0)
+    male_count = org_contacts_counts.get('gender:m', 0)
+
+    if not female_count and not male_count:
+        return dict(female_count=female_count, female_percentage="---",
+                    male_count=male_count, male_percentage="---")
+
+    total = female_count + male_count
+
+    female_percentage = female_count * 100 / total
+    male_percentage = 100 - female_percentage
+
+    return dict(female_count=female_count, female_percentage=str(female_percentage) + "%",
+                male_count=male_count, male_percentage=str(male_percentage) + "%")
+
+
+def get_age_stats(org):
+    now = timezone.now()
+    current_year = now.year
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    age_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
+
+    age_counts_interval = dict()
+    total = 0
+    for year_key, age_count in age_counts.iteritems():
+        total += age_count
+        decade = int(math.floor((current_year - int(year_key)) / 10)) * 10
+        key = "%s-%s" % (decade, decade+10)
+        if age_counts_interval.get(key, None):
+            age_counts_interval[key] += age_count
+        else:
+            age_counts_interval[key] = age_count
+
+    age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
+    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems() if v], key=lambda i: i))
+
+
+def get_registration_stats(org):
+    now = timezone.now()
+    six_months_ago = now - timedelta(days=180)
+    six_months_ago = six_months_ago - timedelta(six_months_ago.weekday())
+    tz = pytz.timezone('UTC')
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registred_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
+
+    interval_dict = dict()
+
+    for date_key, date_count  in registred_on_counts.iteritems():
+        parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
+
+        # this is in the range we care about
+        if parsed_time > six_months_ago:
+            # get the week of the year
+            dict_key = parsed_time.strftime("%W")
+
+            if interval_dict.get(dict_key, None):
+                interval_dict[dict_key] += date_count
+            else:
+                interval_dict[dict_key] = date_count
+
+    # build our final dict using week numbers
+    categories = []
+    start = six_months_ago
+    while start < timezone.now():
+        week_dict = start.strftime("%W")
+        count = interval_dict.get(week_dict, 0)
+        categories.append(dict(label=start.strftime("%m/%d/%y"), count=count))
+
+        start = start + timedelta(days=7)
+
+    return json.dumps(categories)
+
+
+def get_ureporters_locations_stats(org, segment):
+    parent = segment.get('parent', None)
+    field_type = segment.get('location', None)
+
+    location_stats = []
+
+    if not field_type or field_type.lower() not in ['state', 'district']:
+        return location_stats
+
+    field_type = field_type.lower()
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    if field_type == 'state':
+        boundary_top_level = 0 if org.get_config('is_global') else 1
+        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name')
+        location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
+
+    else:
+        boundaries = Boundary.objects.filter(org=org, level=2, parent__osm_id__iexact=parent).values('osm_id', 'name')
+        location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
+
+    return [dict(boundary=elt['osm_id'], label=elt['name'], set=location_counts.get(elt['osm_id'], 0))
+            for elt in boundaries]
+
+
+def get_reporters_count(org):
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    return org_contacts_counts.get("total-reporters", 0)
+
+
+def get_occupation_stats(org):
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    occupation_counts = {k[11:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("occupation")}
+
+    return json.dumps(sorted([dict(label=k, count=v)
+                              for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()],
+                             key=lambda i:i['count'], reverse=True)[:9])
+
+
+Org.get_occupation_stats = get_occupation_stats
+Org.get_reporters_count = get_reporters_count
+Org.get_ureporters_locations_stats = get_ureporters_locations_stats
+Org.get_registration_stats = get_registration_stats
+Org.get_age_stats = get_age_stats
+Org.get_gender_stats = get_gender_stats
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
 Org.organize_categories_data = organize_categories_data
 Org.get_flows = get_flows
-Org.get_reporter_group = get_reporter_group
 Org.substitute_segment = substitute_segment

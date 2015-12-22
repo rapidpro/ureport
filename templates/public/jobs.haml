@@ -59,7 +59,8 @@
 
                   %a.social-link.twitter-bg-color.tweet-button{href:'https://twitter.com/intent/tweet?screen_name={{ source.get_username }}'}
                     - trans "TWEET TO"
-                    @{{ source.get_username }} &#8594;
+                    @{{ source.get_username }}
+                    {{ org|org_arrow_link }}
 
                 -elif source.source_type == 'R'
                   .social-title.rss-bg-color
@@ -78,7 +79,8 @@
 
                   %a.social-link.rss-bg-color{href:"{{ source.get_return_page }}"}
                     - trans "VISIT"
-                    {{ source.title|upper }} &#8594;
+                    {{ source.title|upper }}
+                    {{ org|org_arrow_link }}
 
 - block extra-style
   {{ block.super }}

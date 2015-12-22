@@ -142,8 +142,8 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
         topPopulated = -1
 
         for boundary in data
-          totalRegistered += boundary.set + boundary.unset
-          boundary.population = boundary.set + boundary.unset
+          totalRegistered += boundary.set
+          boundary.population = boundary.set
           if boundary.population > topPopulated
             topPopulated = boundary.population
             topBoundary = boundary
@@ -158,11 +158,11 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
       boundaryResults = {}
       for boundary in data
         if topBoundary.population
-          boundary.percentage = Math.round((100 * (boundary.set + boundary.unset)) / topBoundary.population)
+          boundary.percentage = Math.round((100 * boundary.set) / topBoundary.population)
         else
           boundary.percentage = 0
         boundaryResults[boundary['boundary']] = boundary
-        mainLabelRegistered += boundary.set + boundary.unset
+        mainLabelRegistered += boundary.set
         info.update()
         scale.update(boundaryLevel)
 
@@ -267,7 +267,6 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
       if not result
         result =
           set:0
-          unset:0
           percentage:0
 
       topBoundaryLabel = if topBoundary then topBoundary.label else null
@@ -276,7 +275,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
 
       html += "<div class='top-border primary-color'>" + window.string_Population + "</div>"
-      html += "<div><table><tr><td class='info-count'>" + intcomma(result.set + result.unset) + "</td></tr>"
+      html += "<div><table><tr><td class='info-count'>" + intcomma(result.set) + "</td></tr>"
       html += "<tr><td class='info-tiny'>" + window.string_Registered_in + " " + props.name + "</td></tr></table></div>"
 
       html += "<div class='top-border primary-color'>" + window.string_Density.toUpperCase() + "</div>"
