@@ -27,14 +27,6 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
 
   breaks = [0, 20, 40, 60, 80, 100]
 
-  updateScaleLabels = (level) ->
-    if level == 2
-      window.string_National = 'state'
-      window.string_State = 'district'
-    else if not level or level < 2
-      window.string_National = 'national'
-      window.string_State = 'state'
-
   visibleStyle = (feature) ->
     return {
       weight: 1
@@ -90,7 +82,13 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
 
   highlightFeature = (e) ->
     layer = e.target
-    if not layer.feature.properties.level or layer.feature.properties.level == 1 and boundaries is states or layer.feature.properties.level == 2 and boundaries isnt states
+    if (
+      not layer.feature.properties.level or
+        layer.feature.properties.level == 1 and
+          boundaries is states or
+        (layer.feature.properties.level == 2 or layer.feature.properties.level == 3 )and
+          boundaries isnt states
+    )
       layer.setStyle(HIGHLIGHT_STYLE)
 
       if (!L.Browser.ie && !L.Browser.opera)
@@ -125,10 +123,14 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
       mainLabelName = window.string_All
       mainLabelRegistered = totalRegistered
 
-  loadBoundary = (boundaryId, target) ->
+  loadBoundary = (boundary, target) ->
+    boundaryId = if boundary then boundary.id else null
+    boundaryLevel = if boundary then boundary.level else null
     # load our actual data
-    if not boundaryId
+    if not boundary
       segment = {location:"State"}
+    else if boundary and boundary.level == 2
+      segment = {location:"Ward", parent:boundaryId}
     else
       segment = {location:"District", parent:boundaryId}
 
@@ -137,7 +139,6 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
       if data == null then nullDataCount++
       data = data || []
       if not topBoundary
-        boundaryCounts = {}
         topPopulated = -1
 
         for boundary in data
@@ -150,7 +151,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
         # add our legend
         if nullDataCount == 1
           legend = L.control(position: "bottomright")
-          legend.onAdd = (map) -> updateLegend(map, topCategory)
+          legend.onAdd = (map) -> updateLegend(map, topBoundary)
           legend.addTo(map)
 
       mainLabelRegistered = 0
@@ -163,7 +164,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
         boundaryResults[boundary['boundary']] = boundary
         mainLabelRegistered += boundary.set + boundary.unset
         info.update()
-        scale.update(boundaryId)
+        scale.update(boundaryLevel)
 
       # we are displaying the districts of a state, load the geojson for it
       boundaryUrl = '/boundaries/'
@@ -224,17 +225,20 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     html = ""
 
     scaleClass = 'national'
-    if level
+    if level and level == 1
       scaleClass = 'state'
-    updateScaleLabels(level)
+    if level and level == 2
+      scaleClass = 'district'
 
     html = "<div class='scale " + scaleClass + "'>"
     html += "<div class='scale-map-circle-outer primary-border-color'></div>"
     html += "<div class='scale-map-circle-inner'></div>"
     html += "<div class='scale-map-hline primary-border-color'></div>"
     html += "<div class='scale-map-vline primary-border-color'></div>"
+    html += "<div class='scale-map-vline-2 primary-border-color'></div>"
     html += "<div class='national-level primary-color'>" + window.string_National.toUpperCase() + "</div>"
     html += "<div class='state-level primary-color'>" + window.string_State.toUpperCase() + "</div>"
+    html += "<div class='district-level primary-color'>" + window.string_District.toUpperCase() + "</div>"
 
     @_div.innerHTML = html
 
@@ -266,6 +270,8 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
           unset:0
           percentage:0
 
+      topBoundaryLabel = if topBoundary then topBoundary.label else null
+
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
 
@@ -282,7 +288,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
         percentageTop = percentage + "%"
 
       html += "<div class='info-percentage top-color'>" + percentageTop + "</div>"
-      html += "<div class='info-tiny'>" + window.string_of + " " + window.string_the + " " + topBoundary.label + " total</div>"
+      html += "<div class='info-tiny'>" + window.string_of + " " + window.string_the + " " + topBoundaryLabel + " total</div>"
 
       html += "</div>"
 

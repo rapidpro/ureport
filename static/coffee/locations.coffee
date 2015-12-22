@@ -91,7 +91,13 @@ initMap = (id, geojson, question, districtLabel) ->
 
   highlightFeature = (e) ->
     layer = e.target
-    if not layer.feature.properties.level or layer.feature.properties.level == 1 and boundaries is states or layer.feature.properties.level == 2 and boundaries isnt states
+    if (
+      not layer.feature.properties.level or
+      layer.feature.properties.level == 1 and
+      boundaries is states or
+      (layer.feature.properties.level == 2 or layer.feature.properties.level == 3 )and
+      boundaries isnt states
+    )
       layer.setStyle(HIGHLIGHT_STYLE)
 
       if (!L.Browser.ie && !L.Browser.opera)
@@ -121,6 +127,8 @@ initMap = (id, geojson, question, districtLabel) ->
       map.removeLayer(boundaries)
       map.fitBounds(e.target.getBounds(), {step: .25})
       mainLabelName = e.target.feature.properties.name + " (" + window.string_State + ")"
+      if e.target.feature.properties.level == 2
+        mainLabelName = e.target.feature.properties.name + " (" + window.string_District + ")"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
     else
@@ -314,7 +322,6 @@ initMap = (id, geojson, question, districtLabel) ->
 
     label = mainLabelName
     results = overallResults
-
     if props? and props.id of boundaryResults
       label = props.name
       results = boundaryResults[props.id]
