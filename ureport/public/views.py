@@ -211,9 +211,8 @@ class BoundaryView(SmartTemplateView):
             location_boundaries = org.boundaries.filter(level=0)
         else:
             parent_id = self.kwargs.get('osm_id', None)
-
             if parent_id:
-                location_boundaries = org.get_geojson_by_parent_id(parent_id)
+                location_boundaries = org.boundaries.filter(parent__osm_id=parent_id)
             else:
                 location_boundaries = org.boundaries.filter(level=1)
 
