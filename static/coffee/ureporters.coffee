@@ -2,7 +2,6 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
 
   allowDistrictZoom = districtLabel.trim() != ''
-  nullDataCount = 0
 
   boundaries = null
   boundaryResults = null
@@ -84,10 +83,10 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     layer = e.target
     if (
       not layer.feature.properties.level or
-        layer.feature.properties.level == 1 and
-          boundaries is states or
-        (layer.feature.properties.level == 2 or layer.feature.properties.level == 3 )and
-          boundaries isnt states
+      layer.feature.properties.level == 1 and
+      boundaries is states or
+      layer.feature.properties.level in [2,3] and
+      boundaries isnt states
     )
       layer.setStyle(HIGHLIGHT_STYLE)
 
@@ -111,9 +110,8 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     info.update()
 
   clickFeature = (e) ->
-    if ([1,2].indexOf(e.target.feature.properties.level) != -1)
+    if e.target.feature.properties.level in [2,3] and allowDistrictZoom
       map.removeLayer(boundaries)
-      map.fitBounds(e.target.getBounds(), {step: .25})
       mainLabelName = e.target.feature.properties.name + " (" + window.string_State + ")"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
@@ -136,8 +134,12 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
 
     $.ajax({url: ajaxUrl + '&segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (data) ->
       # calculate the most common category if we haven't already
-      if data == null then nullDataCount++
       data = data || []
+      if data.length == 0
+        resetBoundaries()
+        scale.update()
+        mainLabelName = window.string_All
+        return
       if not topBoundary
         topPopulated = -1
 
@@ -149,10 +151,9 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
             topBoundary = boundary
 
         # add our legend
-        if nullDataCount == 1
-          legend = L.control(position: "bottomright")
-          legend.onAdd = (map) -> updateLegend(map, topBoundary)
-          legend.addTo(map)
+        legend = L.control(position: "bottomright")
+        legend.onAdd = (map) -> updateLegend(map, topBoundary)
+        legend.addTo(map)
 
       mainLabelRegistered = 0
       boundaryResults = {}
@@ -172,12 +173,6 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
         boundaryUrl += boundaryId + '/'
 
       $.ajax({url:boundaryUrl, dataType: "json"}).done (data) ->
-        if not data
-          resetBoundaries()
-          scale.update()
-          mainLabelName = window.string_All
-          mainLabelRegistered = totalRegistered
-          return
         for feature in data.features
           result = boundaryResults[feature.properties.id]
           if result
