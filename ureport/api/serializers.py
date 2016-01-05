@@ -59,7 +59,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
         return obj.get_registration_stats()
 
     def get_occupation_stats(self, obj):
-        obj.get_occupation_stats()
+        return obj.get_occupation_stats()
 
 
 class StoryReadSerializer(serializers.ModelSerializer):
