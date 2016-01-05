@@ -113,6 +113,10 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         org = self.uganda
         logo_url = generate_absolute_url_from_file(response, org.logo) if org.logo else None
+        gender_stats = response.data.pop('gender_stats')
+        age_stats = response.data.pop('age_stats')
+        registration_stats = response.data.pop('registration_stats')
+        occupation_stats = response.data.pop('occupation_stats')
         self.assertDictEqual(response.data, dict(id=org.pk,
                                                  logo_url=logo_url,
                                                  name=org.name,
@@ -120,6 +124,10 @@ class UreportAPITests(APITestCase):
                                                  subdomain=org.subdomain,
                                                  domain=org.domain,
                                                  timezone=org.timezone))
+        self.assertEquals(gender_stats, org.get_gender_stats)
+        self.assertEquals(age_stats, org.get_age_stats)
+        self.assertEquals(registration_stats, org.get_registration_stats)
+        self.assertEquals(occupation_stats, org.get_occupation_stats)
 
     def test_polls_by_org_list(self):
         url = '/api/v1/polls/org/%d/' % self.uganda.pk
