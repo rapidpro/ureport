@@ -34,15 +34,32 @@ class CategoryReadSerializer(serializers.ModelSerializer):
 
 class OrgReadSerializer(serializers.ModelSerializer):
     logo_url = SerializerMethodField()
+    gender_stats = SerializerMethodField()
+    age_stats = SerializerMethodField()
+    registration_stats = SerializerMethodField()
+    occupation_stats = SerializerMethodField()
 
     class Meta:
         model = Org
-        fields = ('id', 'logo_url', 'name', 'language', 'subdomain', 'domain', 'timezone', )
+        fields = ('id', 'logo_url', 'name', 'language', 'subdomain', 'domain', 'timezone', 'gender_stats', 'age_stats',
+                  'registration_stats', 'occupation_stats',)
 
     def get_logo_url(self, obj):
         if obj.logo:
             return generate_absolute_url_from_file(self.context['request'], obj.logo)
         return None
+
+    def get_gender_stats(self, obj):
+        return obj.get_gender_stats()
+
+    def get_age_stats(self, obj):
+        return obj.get_age_stats()
+
+    def get_registration_stats(self, obj):
+        return obj.get_registration_stats()
+
+    def get_occupation_stats(self, obj):
+        obj.get_occupation_stats()
 
 
 class StoryReadSerializer(serializers.ModelSerializer):
