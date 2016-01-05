@@ -1132,7 +1132,7 @@ msgstr "\nUReport - інструмент, що дає змогу будь-ком
 
 #: templates/public/index.haml:32 templates/public/index.haml.py:70
 msgid "CURRENT POLL"
-msgstr "Щойно провели опитування"
+msgstr "АКТУАЛЬНЕ ОПИТУВАННЯ"
 
 #: templates/public/index.haml:38 templates/public/index.haml.py:189
 #: templates/public/index.haml:559
@@ -1278,6 +1278,10 @@ msgid ""
 "\n"
 "            "
 msgstr ""
+"\n"
+"              * U-Report - безкоштовний проектЮНІСЕФ, що впроваджується за підтримки партнерів %(country)s. У рамках проекту не може бути стягнено ніяких коштів. ЮНІСЕФ не запитує про фінансову інформацію. БУДЬ ЛАСКА, ІГНОРУЙТЕ будь які вимоги сплатити кошти як за коротким номером, так і на сторінках у Twitter і Facebook. Усі активності UReport - безкоштовні для учасників. (У тому числі, всі повідомлення на %(shortcode)s)."
+"\n"
+"            "
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
