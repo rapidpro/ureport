@@ -124,10 +124,10 @@ class UreportAPITests(APITestCase):
                                                  subdomain=org.subdomain,
                                                  domain=org.domain,
                                                  timezone=org.timezone))
-        self.assertEquals(gender_stats, org.get_gender_stats)
-        self.assertEquals(age_stats, org.get_age_stats)
-        self.assertEquals(registration_stats, org.get_registration_stats)
-        self.assertEquals(occupation_stats, org.get_occupation_stats)
+        self.assertEquals(gender_stats, org.get_gender_stats())
+        self.assertEquals(age_stats, org.get_age_stats())
+        self.assertEquals(registration_stats, org.get_registration_stats())
+        self.assertEquals(occupation_stats, org.get_occupation_stats())
 
     def test_polls_by_org_list(self):
         url = '/api/v1/polls/org/%d/' % self.uganda.pk
