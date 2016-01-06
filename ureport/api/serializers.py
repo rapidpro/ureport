@@ -1,3 +1,4 @@
+import json
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from dash.stories.models import Story
@@ -53,13 +54,13 @@ class OrgReadSerializer(serializers.ModelSerializer):
         return obj.get_gender_stats()
 
     def get_age_stats(self, obj):
-        return obj.get_age_stats()
+        return json.loads(obj.get_age_stats())
 
     def get_registration_stats(self, obj):
-        return obj.get_registration_stats()
+        return json.loads(obj.get_registration_stats())
 
     def get_occupation_stats(self, obj):
-        return obj.get_occupation_stats()
+        return json.loads(obj.get_occupation_stats())
 
 
 class StoryReadSerializer(serializers.ModelSerializer):

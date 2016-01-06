@@ -46,14 +46,14 @@ class OrgList(ListAPIView):
                 "domain": "ureport.in",
                 "timezone": "Africa/Kampala"
                 "gender_stats": {
-                "female_count": 0,
-                "male_percentage": "---",
-                "female_percentage": "---",
-                "male_count": 0
+                    "female_count": 0,
+                    "male_percentage": "---",
+                    "female_percentage": "---",
+                    "male_count": 0
                 },
-                "age_stats": "[]",
-                "registration_stats": "[{\"count\": 0, \"label\": \"07/06/15\"}]",
-                "occupation_stats": null
+                "age_stats": [],
+                "registration_stats": [{"count": 0, "label": "07/06/15"}],
+                "occupation_stats": []
             },
             ...
         }
@@ -83,14 +83,14 @@ class OrgDetails(RetrieveAPIView):
             "domain": "ureport.in",
             "timezone": "Africa/Kampala"
             "gender_stats": {
-                "female_count": 0,
-                "male_percentage": "---",
-                "female_percentage": "---",
-                "male_count": 0
-            },
-            "age_stats": "[]",
-            "registration_stats": "[{\"count\": 0, \"label\": \"07/06/15\"}, {\"count\": 0, \"label\": \"07/13/15\"}, {\"count\": 0, \"label\": \"07/20/15\"}, {\"count\": 0, \"label\": \"07/27/15\"}, {\"count\": 0, \"label\": \"08/03/15\"}, {\"count\": 0, \"label\": \"08/10/15\"}, {\"count\": 0, \"label\": \"08/17/15\"}, {\"count\": 0, \"label\": \"08/24/15\"}, {\"count\": 0, \"label\": \"08/31/15\"}, {\"count\": 0, \"label\": \"09/07/15\"}, {\"count\": 0, \"label\": \"09/14/15\"}, {\"count\": 0, \"label\": \"09/21/15\"}, {\"count\": 0, \"label\": \"09/28/15\"}, {\"count\": 0, \"label\": \"10/05/15\"}, {\"count\": 0, \"label\": \"10/12/15\"}, {\"count\": 0, \"label\": \"10/19/15\"}, {\"count\": 0, \"label\": \"10/26/15\"}, {\"count\": 0, \"label\": \"11/02/15\"}, {\"count\": 0, \"label\": \"11/09/15\"}, {\"count\": 0, \"label\": \"11/16/15\"}, {\"count\": 0, \"label\": \"11/23/15\"}, {\"count\": 0, \"label\": \"11/30/15\"}, {\"count\": 0, \"label\": \"12/07/15\"}, {\"count\": 0, \"label\": \"12/14/15\"}, {\"count\": 0, \"label\": \"12/21/15\"}, {\"count\": 0, \"label\": \"12/28/15\"}, {\"count\": 0, \"label\": \"01/04/16\"}]",
-            "occupation_stats": null
+                    "female_count": 0,
+                    "male_percentage": "---",
+                    "female_percentage": "---",
+                    "male_count": 0
+                },
+            "age_stats": [],
+            "registration_stats": [{"count": 0, "label": "07/06/15"}],
+            "occupation_stats": []
         }
     """
     serializer_class = OrgReadSerializer
