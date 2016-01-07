@@ -1,3 +1,4 @@
+import json
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from dash.stories.models import Story
@@ -34,15 +35,36 @@ class CategoryReadSerializer(serializers.ModelSerializer):
 
 class OrgReadSerializer(serializers.ModelSerializer):
     logo_url = SerializerMethodField()
+    gender_stats = SerializerMethodField()
+    age_stats = SerializerMethodField()
+    registration_stats = SerializerMethodField()
+    occupation_stats = SerializerMethodField()
+    reporters_count = SerializerMethodField()
 
     class Meta:
         model = Org
-        fields = ('id', 'logo_url', 'name', 'language', 'subdomain', 'domain', 'timezone', )
+        fields = ('id', 'logo_url', 'name', 'language', 'subdomain', 'domain', 'timezone', 'gender_stats', 'age_stats',
+                  'registration_stats', 'occupation_stats', 'reporters_count')
 
     def get_logo_url(self, obj):
         if obj.logo:
             return generate_absolute_url_from_file(self.context['request'], obj.logo)
         return None
+
+    def get_gender_stats(self, obj):
+        return obj.get_gender_stats()
+
+    def get_age_stats(self, obj):
+        return json.loads(obj.get_age_stats())
+
+    def get_registration_stats(self, obj):
+        return json.loads(obj.get_registration_stats())
+
+    def get_occupation_stats(self, obj):
+        return json.loads(obj.get_occupation_stats())
+
+    def get_reporters_count(self, obj):
+        return obj.get_reporters_count()
 
 
 class StoryReadSerializer(serializers.ModelSerializer):
