@@ -1,7 +1,7 @@
 from collections import OrderedDict
 import json
 from random import randint
-from time import timezone
+from django.utils import timezone
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from dash.stories.models import Story
@@ -173,8 +173,8 @@ class UreportAPITests(APITestCase):
                                             male_count=3, male_percentage="60%"))
 
         age_stats = response.data.pop('age_stats')
-        self.assertEqual(age_stats, json.dumps([dict(name='0-10', y=30), dict(name='10-20', y=50),
-                                                dict(name='40-50', y=20)]))
+        self.assertEqual(age_stats, [dict(name='0-10', y=30), dict(name='10-20', y=50),
+                                                dict(name='40-50', y=20)])
 
         reporters_count = response.data.pop('reporters_count')
         self.assertEqual(reporters_count, 5)
