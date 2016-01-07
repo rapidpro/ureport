@@ -105,6 +105,15 @@ class Contact(models.Model):
     district = models.CharField(max_length=255, verbose_name=_("District Field"), null=True)
 
     @classmethod
+    def get_or_create(cls, org, uuid):
+        existing = cls.objects.filter(org=org, uuid=uuid)
+
+        if existing:
+            return existing.first()
+
+        return cls.objects.create(org=org, uuid=uuid)
+
+    @classmethod
     def find_contact_field_key(cls, org, label):
         contact_field = ContactField.objects.filter(org=org, label__iexact=label).first()
         if contact_field:
@@ -248,6 +257,9 @@ class Contact(models.Model):
                 break
 
         return seen_uuids
+
+    class Meta:
+        unique_together = ('org', 'uuid')
 
 
 class ReportersCounter(models.Model):
