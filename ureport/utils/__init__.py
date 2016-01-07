@@ -337,6 +337,23 @@ def get_flows(org):
     return dict()
 
 
+def update_poll_flow_archived(org):
+    flows = get_flows(org)
+
+    if flows:
+        archived_flow_uuids = []
+        active_flow_uuids = []
+
+        for flow in flows.values():
+            if flow.get('archived', False):
+                archived_flow_uuids.append(flow['uuid'])
+            else:
+                active_flow_uuids.append(flow['uuid'])
+
+        Poll.objects.filter(flow_uuid__in=archived_flow_uuids, org=org).update(flow_archived=True)
+        Poll.objects.filter(flow_uuid__in=active_flow_uuids, org=org).update(flow_archived=False)
+
+
 def fetch_old_sites_count():
     import requests, re
     from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME

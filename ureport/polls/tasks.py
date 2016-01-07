@@ -3,7 +3,7 @@ import time
 from dash.orgs.models import Org
 from django_redis import get_redis_connection
 from djcelery.app import app
-from ureport.utils import fetch_flows, fetch_old_sites_count
+from ureport.utils import fetch_flows, fetch_old_sites_count, update_poll_flow_archived
 from ureport.utils import fetch_main_poll_results, fetch_brick_polls_results, fetch_other_polls_results
 
 
@@ -127,6 +127,23 @@ def fetch_poll(poll_id):
         # get our poll
         from .models import Poll
         poll = Poll.objects.get(pk=poll_id)
+
+        # update poll flow_archived
+        update_poll_flow_archived(poll.org)
+
         poll.fetch_poll_results()
     except Exception as e:
         logger.exception("Error fetching poll results: %s" % str(e))
+
+
+@app.task(track_started=True, name='polls.recheck_poll_flow_archived')
+def recheck_poll_flow_archived(org_id=None):
+
+    active_orgs = Org.objects.filter(is_active=True)
+    if org_id:
+        active_orgs = Org.objects.filter(pk=org_id)
+
+    for org in active_orgs:
+        update_poll_flow_archived(org)
+
+    print "Task: recheck_poll_flow_archived done"
