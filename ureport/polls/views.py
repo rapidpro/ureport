@@ -22,7 +22,7 @@ class PollForm(forms.ModelForm):
         flows = self.org.get_flows()
 
         # if cache empty we fetch from RapidPro API, for Better UX
-        if not flows:
+        if not flows:  # pragma: no cover
             from ureport.utils import fetch_flows
             fetch_flows(self.org)
             flows = self.org.get_flows()
