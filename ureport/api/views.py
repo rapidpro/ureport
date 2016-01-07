@@ -45,6 +45,15 @@ class OrgList(ListAPIView):
                 "subdomain": "test",
                 "domain": "ureport.in",
                 "timezone": "Africa/Kampala"
+                "gender_stats": {
+                    "female_count": 0,
+                    "male_percentage": "---",
+                    "female_percentage": "---",
+                    "male_count": 0
+                },
+                "age_stats": [],
+                "registration_stats": [{"count": 0, "label": "07/06/15"}],
+                "occupation_stats": []
             },
             ...
         }
@@ -73,6 +82,15 @@ class OrgDetails(RetrieveAPIView):
             "subdomain": "test",
             "domain": "ureport.in",
             "timezone": "Africa/Kampala"
+            "gender_stats": {
+                    "female_count": 0,
+                    "male_percentage": "---",
+                    "female_percentage": "---",
+                    "male_count": 0
+                },
+            "age_stats": [],
+            "registration_stats": [{"count": 0, "label": "07/06/15"}],
+            "occupation_stats": []
         }
     """
     serializer_class = OrgReadSerializer
