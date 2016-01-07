@@ -39,11 +39,12 @@ class OrgReadSerializer(serializers.ModelSerializer):
     age_stats = SerializerMethodField()
     registration_stats = SerializerMethodField()
     occupation_stats = SerializerMethodField()
+    reporters_count = SerializerMethodField()
 
     class Meta:
         model = Org
         fields = ('id', 'logo_url', 'name', 'language', 'subdomain', 'domain', 'timezone', 'gender_stats', 'age_stats',
-                  'registration_stats', 'occupation_stats',)
+                  'registration_stats', 'occupation_stats', 'reporters_count')
 
     def get_logo_url(self, obj):
         if obj.logo:
@@ -61,6 +62,9 @@ class OrgReadSerializer(serializers.ModelSerializer):
 
     def get_occupation_stats(self, obj):
         return json.loads(obj.get_occupation_stats())
+
+    def get_reporters_count(self, obj):
+        return obj.get_reporters_count()
 
 
 class StoryReadSerializer(serializers.ModelSerializer):

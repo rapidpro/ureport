@@ -1,13 +1,18 @@
 from collections import OrderedDict
 import json
 from random import randint
+from time import timezone
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from dash.stories.models import Story
+from datetime import datetime
 from django.contrib.auth.models import User
+from mock import patch
+import pytz
 from rest_framework import status
 from rest_framework.test import APITestCase
 from ureport.api.serializers import generate_absolute_url_from_file, CategoryReadSerializer, StoryReadSerializer
+from ureport.contacts.models import ReportersCounter
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
 
@@ -118,6 +123,7 @@ class UreportAPITests(APITestCase):
         age_stats = response.data.pop('age_stats')
         registration_stats = response.data.pop('registration_stats')
         occupation_stats = response.data.pop('occupation_stats')
+        reporters_count = response.data.pop('reporters_count')
         self.assertDictEqual(response.data, dict(id=org.pk,
                                                  logo_url=logo_url,
                                                  name=org.name,
@@ -125,10 +131,84 @@ class UreportAPITests(APITestCase):
                                                  subdomain=org.subdomain,
                                                  domain=org.domain,
                                                  timezone=org.timezone))
-        self.assertEquals(gender_stats, org.get_gender_stats())
-        self.assertEquals(age_stats, json.loads(org.get_age_stats()))
-        self.assertEquals(registration_stats, json.loads(org.get_registration_stats()))
-        self.assertEquals(occupation_stats, json.loads(org.get_occupation_stats()))
+
+        self.assertEquals(gender_stats, dict(female_count=0, female_percentage="---",
+                                             male_count=0, male_percentage="---"))
+        self.assertEquals(age_stats, [])
+        self.assertEquals(reporters_count, 0)
+        self.assertEquals(occupation_stats, [])
+
+        ReportersCounter.objects.create(org=org, type='gender:f', count=2)
+        ReportersCounter.objects.create(org=org, type='gender:m', count=2)
+        ReportersCounter.objects.create(org=org, type='gender:m', count=1)
+
+        now = timezone.now()
+        now_year = now.year
+
+        two_years_ago = now_year - 2
+        five_years_ago = now_year - 5
+        twelve_years_ago = now_year - 12
+        forthy_five_years_ago = now_year - 45
+
+        ReportersCounter.objects.create(org=org, type='born:%s' % two_years_ago, count=2)
+        ReportersCounter.objects.create(org=org, type='born:%s' % five_years_ago, count=1)
+        ReportersCounter.objects.create(org=org, type='born:%s' % twelve_years_ago, count=3)
+        ReportersCounter.objects.create(org=org, type='born:%s' % twelve_years_ago, count=2)
+        ReportersCounter.objects.create(org=org, type='born:%s' % forthy_five_years_ago, count=2)
+
+        ReportersCounter.objects.create(org=org, type='born:10', count=10)
+        ReportersCounter.objects.create(org=org, type='born:732837', count=20)
+
+        ReportersCounter.objects.create(org=org, type='total-reporters', count=5)
+
+        ReportersCounter.objects.create(org=org, type='occupation:student', count=5)
+        ReportersCounter.objects.create(org=org, type='occupation:writer', count=2)
+        ReportersCounter.objects.create(org=org, type='occupation:all responses', count=13)
+
+        response = self.client.get(url)
+
+
+        gender_stats = response.data.pop('gender_stats')
+        self.assertEqual(gender_stats, dict(female_count=2, female_percentage="40%",
+                                            male_count=3, male_percentage="60%"))
+
+        age_stats = response.data.pop('age_stats')
+        self.assertEqual(age_stats, json.dumps([dict(name='0-10', y=30), dict(name='10-20', y=50),
+                                                dict(name='40-50', y=20)]))
+
+        reporters_count = response.data.pop('reporters_count')
+        self.assertEqual(reporters_count, 5)
+
+        occupation_stats = response.data.pop('occupation_stats')
+        self.assertEqual(occupation_stats, [dict(label='student', count=5), dict(label='writer', count=2)])
+
+        tz = pytz.timezone('UTC')
+
+        with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 6))):
+
+            for entry in registration_stats:
+                self.assertEqual(entry['count'], 0)
+
+            ReportersCounter.objects.create(org=org, type='registered_on:2015-08-27', count=3)
+            ReportersCounter.objects.create(org=org, type='registered_on:2015-08-25', count=2)
+            ReportersCounter.objects.create(org=org, type='registered_on:2015-08-25', count=3)
+            ReportersCounter.objects.create(org=org, type='registered_on:2015-08-25', count=1)
+            ReportersCounter.objects.create(org=org, type='registered_on:2015-06-30', count=2)
+            ReportersCounter.objects.create(org=org, type='registered_on:2015-06-30', count=2)
+            ReportersCounter.objects.create(org=org, type='registered_on:2014-11-25', count=6)
+
+            response = self.client.get(url)
+
+            stats = response.data.pop('registration_stats')
+
+            non_zero_keys = {'08/24/15': 9, '06/29/15': 4}
+
+            for entry in stats:
+                self.assertFalse(entry['label'].endswith('14'))
+                if entry['count'] != 0:
+                    self.assertTrue(entry['label'] in non_zero_keys.keys())
+                    self.assertEqual(entry['count'], non_zero_keys[entry['label']])
+
 
     def test_polls_by_org_list(self):
         url = '/api/v1/polls/org/%d/' % self.uganda.pk
