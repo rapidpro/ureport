@@ -82,6 +82,9 @@ class Poll(SmartModel):
                             help_text=_("The organization this poll is part of"))
 
     def fetch_poll_results(self):
+        if self.flow_archived:
+            return
+
         for question in self.questions.all():
             question.fetch_results()
             question.fetch_results(dict(location='State'))

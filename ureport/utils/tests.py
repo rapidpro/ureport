@@ -458,28 +458,28 @@ class UtilsTest(DashTest):
                 polls = [self.poll]
                 _fetch_org_polls_results(self.org, polls)
                 mock_poll_model_fetch_results.assert_called_with()
-                mock_poll_model_fetch_results.mock_reset()
+                mock_poll_model_fetch_results.reset_mock()
 
             with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
                 mock_main_poll.return_value = self.poll
 
                 fetch_main_poll_results(self.org)
                 mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                mock_poll_model_fetch_results.reset_mock()
 
             with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
                 mock_brick_polls.return_value = [self.poll]
 
                 fetch_brick_polls_results(self.org)
                 mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                mock_poll_model_fetch_results.reset_mock()
 
             with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
                 mock_other_polls.return_value = [self.poll]
 
                 fetch_other_polls_results(self.org)
                 mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                mock_poll_model_fetch_results.reset_mock()
 
     def test_update_poll_flow_archived(self):
         poll = Poll.objects.filter(pk=self.poll.pk).first()

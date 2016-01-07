@@ -425,7 +425,6 @@ class PollTest(DashTest):
         self.assertTrue(poll_image1 in poll1.get_featured_images())
         self.assertEquals(len(poll1.get_featured_images()), 1)
 
-
     def test_get_categoryimage(self):
 
         poll1 = Poll.objects.create(flow_uuid="uuid-1",
@@ -932,6 +931,38 @@ class PollTest(DashTest):
         self.uganda.save()
 
         self.assertEqual(org_arrow_link(self.uganda), "&#8592;")
+
+    def test_fetch_poll_results(self):
+        with patch('ureport.polls.models.PollQuestion.fetch_results') as mock:
+            mock.return_value = None
+
+            poll1 = Poll.objects.create(flow_uuid="uuid-1",
+                                        title="Poll 1",
+                                        category=self.health_uganda,
+                                        is_featured=True,
+                                        org=self.uganda,
+                                        created_by=self.admin,
+                                        modified_by=self.admin)
+
+            poll1.fetch_poll_results()
+            self.assertFalse(mock.called)
+
+            poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                         title='question poll 1',
+                                                         ruleset_uuid="uuid-101",
+                                                         created_by=self.admin,
+                                                         modified_by=self.admin)
+            poll1.fetch_poll_results()
+            self.assertEqual(mock.call_count, 2)
+            mock.assert_any_call()
+            mock.assert_any_call(dict(location='State'))
+            mock.reset_mock()
+
+            poll1.flow_archived = True
+            poll1.save()
+
+            poll1.fetch_poll_results()
+            self.assertFalse(mock.called)
 
 
 class PollQuestionTest(DashTest):
