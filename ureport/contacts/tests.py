@@ -263,18 +263,31 @@ class ContactTest(DashTest):
                                                'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
                                                }}):
             with patch('ureport.contacts.tasks.Contact.fetch_contacts') as mock_fetch_contacts:
-                mock_fetch_contacts.return_value = 'FETCHED'
+                with patch('ureport.contacts.tasks.Boundary.fetch_boundaries') as mock_fetch_boundaries:
+                    with patch('ureport.contacts.tasks.ContactField.fetch_contact_fields') as mock_fetch_contact_fields:
 
-                fetch_contacts_task(self.nigeria.pk, True)
-                mock_fetch_contacts.assert_called_once_with(self.nigeria, after=None)
+                        mock_fetch_contacts.return_value = 'FETCHED'
+                        mock_fetch_boundaries.return_value = 'FETCHED'
+                        mock_fetch_contact_fields.return_value = 'FETCHED'
 
-                mock_fetch_contacts.reset_mock()
+                        fetch_contacts_task(self.nigeria.pk, True)
+                        mock_fetch_contacts.assert_called_once_with(self.nigeria, after=None)
+                        mock_fetch_boundaries.assert_called_with(self.nigeria)
+                        mock_fetch_contact_fields.assert_called_with(self.nigeria)
+                        self.assertEqual(mock_fetch_boundaries.call_count, 2)
+                        self.assertEqual(mock_fetch_contact_fields.call_count, 2)
 
-                with patch('django.core.cache.cache.get') as cache_get_mock:
-                    date_str = '2014-01-02T01:04:05.000Z'
-                    d1 = json_date_to_datetime(date_str)
+                        mock_fetch_contacts.reset_mock()
+                        mock_fetch_boundaries.reset_mock()
+                        mock_fetch_contact_fields.reset_mock()
 
-                    cache_get_mock.return_value = date_str
+                        with patch('django.core.cache.cache.get') as cache_get_mock:
+                            date_str = '2014-01-02T01:04:05.000Z'
+                            d1 = json_date_to_datetime(date_str)
 
-                    fetch_contacts_task(self.nigeria.pk)
-                    mock_fetch_contacts.assert_called_once_with(self.nigeria, after=d1)
+                            cache_get_mock.return_value = date_str
+
+                            fetch_contacts_task(self.nigeria.pk)
+                            mock_fetch_contacts.assert_called_once_with(self.nigeria, after=d1)
+                            self.assertFalse(mock_fetch_boundaries.called)
+                            self.assertFalse(mock_fetch_contact_fields.called)

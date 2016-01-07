@@ -119,10 +119,10 @@
           {% else %}
             background-image: url({{STATIC_URL}}img/default_banner_bg.png);
           {% endif %}
-         {% endif %}
+        {% endif %}
 
-        {% if org|config:"join_color" %}
-          color: {{ org|config:"join_color"}};
+        {% if org|config:"join_fg_color" %}
+          color: {{ org|config:"join_fg_color"}};
         {% endif %}
 
       }

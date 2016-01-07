@@ -64,7 +64,7 @@
             .white-card-container
               .white-card-inner{style:"min-height:400px,"}
                 .white-card-title.primary-bg-color
-                  {{ featured_story.category|upper }}
+                  {{ featured_story.category.name|upper }}
                 .white-card-image.featured-story-image
                   - if featured_story.get_image
                     {% thumbnail featured_story.get_image "300x200" crop="top" as im %}

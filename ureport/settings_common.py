@@ -59,7 +59,8 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = "translation"
 LANGUAGE_CODE = 'en'
 
 # Available languages for translation
-LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"))
+LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"),
+             ('uk', "Ukrainian"))
 DEFAULT_LANGUAGE = "en"
 RTL_LANGUAGES = ['ar']
 
@@ -143,6 +144,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'dash.orgs.context_processors.user_group_perms_processor',
     'dash.orgs.context_processors.set_org_processor',
+    'ureport.assets.context_processors.set_assets_processor',
     'ureport.public.context_processors.set_has_better_domain',
     'ureport.public.context_processors.set_is_iorg',
     'ureport.public.context_processors.set_is_rtl_org',
@@ -491,7 +493,7 @@ CELERYBEAT_SCHEDULE = {
 #-----------------------------------------------------------------------------------
 # U-Report Defaults
 #-----------------------------------------------------------------------------------
-UREPORT_DEFAULT_PRIMARY_COLOR = '#FFFF00'
+UREPORT_DEFAULT_PRIMARY_COLOR = '#FFD100'
 UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
 
 

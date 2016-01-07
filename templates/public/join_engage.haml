@@ -50,8 +50,8 @@
       .row
         .col-md-12
           #ureport-announcement
-            - blocktrans
-              * U-Report is a free program sponsored by UNICEF with help of Network Providers in {{ org.name }}. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on {{ org|config:"shortcode"}}) are free.
+            - blocktrans with country=org.name shortcode=org|config:"shortcode"
+              * U-Report is a free program sponsored by UNICEF with help of Network Providers in {{ country }}. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on {{ shortcode}}) are free.
 
       -if not is_iorg
         %hr.aaa

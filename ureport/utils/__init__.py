@@ -381,7 +381,8 @@ def get_global_count():
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
 
         for org in Org.objects.filter(is_active=True):
-            count += get_reporters_count(org)
+            if org.get_config('is_on_landing_page'):
+                count += get_reporters_count(org)
 
         # cached for 10 min
         cache.set(GLOBAL_COUNT_CACHE_KEY, count, 60 * 10)

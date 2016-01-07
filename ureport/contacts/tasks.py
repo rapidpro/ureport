@@ -44,6 +44,10 @@ def fetch_contacts_task(org_id=None, fetch_all=False):
                     after = None
 
                 try:
+                    if after is None:
+                        Boundary.fetch_boundaries(org)
+                        ContactField.fetch_contact_fields(org)
+
                     Boundary.get_boundaries(org)
                     ContactField.get_contact_fields(org)
                     Contact.fetch_contacts(org, after=after)
