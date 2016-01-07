@@ -271,6 +271,9 @@ class ContactTest(DashTest):
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria, ['total-reporters', 'gender:m']),
+                         {'total-reporters': 2, 'gender:m': 2})
+
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_tasks(self):
 
