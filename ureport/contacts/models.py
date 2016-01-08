@@ -249,20 +249,19 @@ class Contact(models.Model):
 
         return seen_uuids
 
-	@classmethod
-	def sync_contacts_removed(cls, org, temba_contacts):
-		ureport_contacts = cls.objects.all()
+    @classmethod
+    def sync_contacts_removed(cls, org, temba_contacts):
+        ureport_contacts = cls.objects.all()
 
-		contacts_removed = []
+        contacts_removed = []
 
-		for ureport_contact in ureport_contacts:
+        for ureport_contact in ureport_contacts:
             if ureport_contact.uuid not in temba_contacts:
                 ureport_contact.delete()
                 ReportersCounter(org=org, type='total-reporters', count=-1)
                 contacts_removed.append(ureport_contact)
 
         return contacts_removed
-
 
 class ReportersCounter(models.Model):
 

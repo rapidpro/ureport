@@ -51,7 +51,7 @@ def fetch_contacts_task(org_id=None, fetch_all=False):
                     Boundary.get_boundaries(org)
                     ContactField.get_contact_fields(org)
                     contacts = Contact.fetch_contacts(org, after=after)
-                    Contact.sync_contacts_removed(org, contacts)
+                    Contact.sync_contacts_removed(org, contacts) 
 
                     print "Task: fetch_contacts for %s took %ss" % (org.name, time.time() - start)
 
