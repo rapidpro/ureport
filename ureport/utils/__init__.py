@@ -109,9 +109,6 @@ def fetch_contact_field_results(org, contact_field, segment):
     from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     from ureport.polls.models import UREPORT_RUN_FETCHED_DATA_CACHE_TIME
 
-    start = time.time()
-    print "Fetching  %s for %s with segment %s" % (contact_field, org.name, segment)
-
     cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     if segment and segment.get('location', "") == "District":
         cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
@@ -126,8 +123,6 @@ def fetch_contact_field_results(org, contact_field, segment):
 
         results_data = temba_client_flow_results_serializer(client_results)
         cleaned_results_data = results_data
-
-        print "Fetch took %ss" % (time.time() - start)
 
         key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(segment)))
         cache.set(key, {'time': datetime_to_ms(this_time), 'results': cleaned_results_data}, cache_time)
@@ -263,14 +258,11 @@ def _fetch_org_polls_results(org, polls):
     r = get_redis_connection()
 
     for poll in polls:
-        start = time.time()
-        print "Fetching polls results for poll id(%d) - %s" % (poll.pk, poll.title)
 
         key = LOCK_POLL_RESULTS_KEY % poll.pk
         if not r.get(key):
             with r.lock(key, timeout=LOCK_POLL_RESULTS_TIMEOUT):
                 poll.fetch_poll_results()
-                print "Fetch results for poll id(%d) on %s took %ss" % (poll.pk, org.name, time.time() - start)
 
 
 def fetch_main_poll_results(org):
@@ -290,8 +282,6 @@ def fetch_other_polls_results(org):
 
 
 def fetch_flows(org):
-    start = time.time()
-    print "Fetching flows for %s" % org.name
 
     try:
         from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
@@ -324,8 +314,6 @@ def fetch_flows(org):
         client.captureException()
         import traceback
         traceback.print_exc()
-
-    print "Fetch %s flows took %ss" % (org.name, time.time() - start)
 
 
 def get_flows(org):
@@ -363,8 +351,6 @@ def fetch_old_sites_count():
 
     # delete the global count cache to force a recalculate at the end
     cache.delete(GLOBAL_COUNT_CACHE_KEY)
-
-    print "Fetch old sites counts took %ss" % (time.time() - start)
 
 
 def get_global_count():
