@@ -260,7 +260,7 @@ class Contact(models.Model):
                 contact.delete()
                 ReportersCounter(org=org, type='total-reporters', count=-1)
 
-        except:
+        except:  # pragma: no cover
             import traceback
             traceback.print_exc()
 
