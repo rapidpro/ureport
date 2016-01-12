@@ -1,6 +1,10 @@
 initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
 
+  STATE_LEVEL = 1
+  DISTRICT_LEVEL = 2
+  WARD_LEVEL = 3
+
   allowDistrictZoom = districtLabel.trim() != ''
 
   boundaries = null
@@ -83,9 +87,9 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     layer = e.target
     if (
       not layer.feature.properties.level or
-      layer.feature.properties.level == 1 and
+      layer.feature.properties.level == STATE_LEVEL and
       boundaries is states or
-      layer.feature.properties.level in [2,3] and
+      layer.feature.properties.level in [DISTRICT_LEVEL, WARD_LEVEL] and
       boundaries isnt states
     )
       layer.setStyle(HIGHLIGHT_STYLE)
@@ -110,7 +114,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     info.update()
 
   clickFeature = (e) ->
-    if e.target.feature.properties.level in [2,3] and allowDistrictZoom
+    if e.target.feature.properties.level in [STATE_LEVEL, DISTRICT_LEVEL] and allowDistrictZoom
       map.removeLayer(boundaries)
       mainLabelName = e.target.feature.properties.name + " (" + window.string_State + ")"
       loadBoundary(e.target.feature.properties, e.target)
@@ -127,7 +131,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     # load our actual data
     if not boundary
       segment = {location:"State"}
-    else if boundary and boundary.level == 2
+    else if boundary and boundary.level == DISTRICT_LEVEL
       segment = {location:"Ward", parent:boundaryId}
     else
       segment = {location:"District", parent:boundaryId}
@@ -220,9 +224,9 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     html = ""
 
     scaleClass = 'national'
-    if level and level == 1
+    if level and level == STATE_LEVEL
       scaleClass = 'state'
-    if level and level == 2
+    if level and level == DISTRICT_LEVEL
       scaleClass = 'district'
 
     html = "<div class='scale " + scaleClass + "'>"
