@@ -528,7 +528,20 @@ def get_occupation_stats(org):
 
     return json.dumps(sorted([dict(label=k, count=v)
                               for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()],
-                             key=lambda i:i['count'], reverse=True)[:9])
+                             key=lambda i: i['count'], reverse=True)[:9])
+
+
+def get_regions_stats(org):
+
+    org_contacts_counts = get_org_contacts_counts(org)
+    boundaries_name = Boundary.get_org_top_level_boundaries_name(org)
+
+    boundaries_stats = {k[6:]: v for k, v in org_contacts_counts.iteritems() if len(k) > 7 and k.startswith('state')}
+
+    regions_stats = sorted([dict(name=boundaries_name[k], count=v) for k, v in boundaries_stats.iteritems()
+                            if k and k in boundaries_name], key=lambda i: i['count'], reverse=True)
+
+    return regions_stats
 
 
 Org.get_occupation_stats = get_occupation_stats
@@ -539,6 +552,7 @@ Org.get_age_stats = get_age_stats
 Org.get_gender_stats = get_gender_stats
 Org.get_contact_field_results = get_contact_field_results
 Org.get_most_active_regions = get_most_active_regions
+Org.get_regions_stats = get_regions_stats
 Org.organize_categories_data = organize_categories_data
 Org.get_flows = get_flows
 Org.substitute_segment = substitute_segment
