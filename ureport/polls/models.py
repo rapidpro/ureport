@@ -65,6 +65,7 @@ class Poll(SmartModel):
     display and sharing in the UReport platform.
     """
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
+    flow_date = models.DateTimeField(null=True)
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
     category = models.ForeignKey(Category, related_name="polls",
