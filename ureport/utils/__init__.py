@@ -360,18 +360,35 @@ def get_age_stats(org):
     age_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
 
     age_counts_interval = dict()
+    age_counts_interval['0-14'] = 0
+    age_counts_interval['15-19'] = 0
+    age_counts_interval['20-24'] = 0
+    age_counts_interval['25-30'] = 0
+    age_counts_interval['31-34'] = 0
+    age_counts_interval['35+'] = 0
+
     total = 0
     for year_key, age_count in age_counts.iteritems():
         total += age_count
-        decade = int(math.floor((current_year - int(year_key)) / 10)) * 10
-        key = "%s-%s" % (decade, decade+10)
-        if age_counts_interval.get(key, None):
-            age_counts_interval[key] += age_count
+        age = current_year - int(year_key)
+        if age > 34:
+            age_counts_interval['35+'] += age_count
+        elif age > 30:
+            age_counts_interval['31-34'] += age_count
+        elif age > 24:
+            age_counts_interval['25-30'] += age_count
+        elif age > 19:
+            age_counts_interval['20-24'] += age_count
+        elif age > 14:
+            age_counts_interval['15-19'] += age_count
         else:
-            age_counts_interval[key] = age_count
+            age_counts_interval['0-14'] += age_count
 
-    age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
-    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems() if v], key=lambda i: i))
+    age_stats = age_counts_interval
+    if total > 0:
+        age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
+
+    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems()], key=lambda i: i))
 
 
 def get_registration_stats(org):

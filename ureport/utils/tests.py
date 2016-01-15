@@ -492,7 +492,10 @@ class UtilsTest(DashTest):
 
     def test_get_age_stats(self):
 
-        self.assertEqual(get_age_stats(self.org), json.dumps([]))
+        expected = [dict(name='0-14', y=0), dict(name='15-19', y=0), dict(name='20-24', y=0),
+                    dict(name='25-30', y=0), dict(name='31-34', y=0), dict(name='35+', y=0)]
+
+        self.assertEqual(get_age_stats(self.org), json.dumps(expected))
 
         now = timezone.now()
         now_year = now.year
@@ -500,19 +503,30 @@ class UtilsTest(DashTest):
         two_years_ago = now_year - 2
         five_years_ago = now_year - 5
         twelve_years_ago = now_year - 12
+        fifteen_years_ago = now_year - 15
+        seventeen_years_ago = now_year - 17
+        nineteen_years_ago = now_year - 19
+        thirty_years_ago = now_year - 30
         forthy_five_years_ago = now_year - 45
 
         ReportersCounter.objects.create(org=self.org, type='born:%s' % two_years_ago, count=2)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % five_years_ago, count=1)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=3)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=2)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % forthy_five_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % fifteen_years_ago, count=25)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % seventeen_years_ago, count=40)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % nineteen_years_ago, count=110)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % thirty_years_ago, count=12)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % forthy_five_years_ago, count=6)
 
         ReportersCounter.objects.create(org=self.org, type='born:10', count=10)
         ReportersCounter.objects.create(org=self.org, type='born:732837', count=20)
 
-        self.assertEqual(get_age_stats(self.org), json.dumps([dict(name='0-10', y=30), dict(name='10-20', y=50),
-                                                              dict(name='40-50', y=20)]))
+        # y is the percentage of count over the total count
+        expected = [dict(name='0-14', y=4), dict(name='15-19', y=87), dict(name='20-24', y=0),
+                    dict(name='25-30', y=6), dict(name='31-34', y=0), dict(name='35+', y=3)]
+
+        self.assertEqual(get_age_stats(self.org), json.dumps(expected))
 
     def test_get_registration_stats(self):
 
