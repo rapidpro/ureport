@@ -134,7 +134,9 @@ class UreportAPITests(APITestCase):
 
         self.assertEquals(gender_stats, dict(female_count=0, female_percentage="---",
                                              male_count=0, male_percentage="---"))
-        self.assertEquals(age_stats, [])
+
+        self.assertEqual(age_stats, [dict(name='0-14', y=0), dict(name='15-19', y=0), dict(name='20-24', y=0),
+                                     dict(name='25-30', y=0), dict(name='31-34', y=0), dict(name='35+', y=0)])
         self.assertEquals(reporters_count, 0)
         self.assertEquals(occupation_stats, [])
 
@@ -173,8 +175,8 @@ class UreportAPITests(APITestCase):
                                             male_count=3, male_percentage="60%"))
 
         age_stats = response.data.pop('age_stats')
-        self.assertEqual(age_stats, [dict(name='0-10', y=30), dict(name='10-20', y=50),
-                                                dict(name='40-50', y=20)])
+        self.assertEqual(age_stats, [dict(name='0-14', y=80), dict(name='15-19', y=0), dict(name='20-24', y=0),
+                                     dict(name='25-30', y=0), dict(name='31-34', y=0), dict(name='35+', y=20)])
 
         reporters_count = response.data.pop('reporters_count')
         self.assertEqual(reporters_count, 5)
