@@ -26,7 +26,7 @@ class PollForm(forms.ModelForm):
             fetch_flows(self.org)
             flows = self.org.get_flows()
 
-        self.fields['flow_uuid'].choices = [(f['uuid'], f['name'] + " (" + f.get('created_on', "--") + ")") for f in sorted(flows.values(), key=lambda k:k['name'].lower().strip())]
+        self.fields['flow_uuid'].choices = [(f['uuid'], f['name'] + " (" + f.get('date_hint', "--") + ")") for f in sorted(flows.values(), key=lambda k:k['name'].lower().strip())]
 
         # only display category images for this org which are active
         self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')
@@ -74,6 +74,7 @@ class QuestionForm(ModelForm):
     class Meta:
         model = Poll
         fields = ('id',)
+
 
 class PollCRUDL(SmartCRUDL):
     model = Poll
