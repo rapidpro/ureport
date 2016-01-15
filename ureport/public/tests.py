@@ -221,6 +221,7 @@ class PublicTest(DashTest):
         self.assertTrue('gender_stats' in response.context)
         self.assertTrue('age_stats' in response.context)
         self.assertTrue('reporters' in response.context)
+        self.assertTrue('most_active_regions' in response.context)
 
         self.assertFalse(response.context['recent_polls'])
 
@@ -228,13 +229,6 @@ class PublicTest(DashTest):
         self.assertFalse(response.context['other_stories'])
         self.assertFalse(response.context['videos'])
         self.assertFalse(response.context['news'])
-        self.assertFalse('most_active_regions' in response.context)
-
-        self.uganda.set_config('gender_label', 'Gender')
-        response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
-        self.assertTrue('most_active_regions' in response.context)
 
         poll1 = Poll.objects.create(flow_uuid="uuid-1",
                                     title="Poll 1",

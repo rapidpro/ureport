@@ -15,7 +15,7 @@ from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FET
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
-    get_occupation_stats
+    get_occupation_stats, get_regions_stats
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
@@ -172,39 +172,6 @@ class UtilsTest(DashTest):
         self.assertFalse('location' in json.loads(global_segment))
         self.assertFalse('parent' in json.loads(global_segment))
         self.assertEqual(global_segment, json.dumps(expected))
-
-    def test_get_most_active_regions(self):
-        self.org.set_config('gender_label', 'Gender')
-        self.org.set_config("state_label", "Province")
-
-        with patch('dash.orgs.models.Org.get_contact_field_results') as mock:
-            mock.return_value = [dict(label='LABEL_1', set=15, unset=5, categories=[], open_ended=None),
-                                 dict(label='LABEL_2', set=100, unset=200, categories=[], open_ended=None),
-                                 dict(label='LABEL_3', set=50, unset=30, categories=[], open_ended=None)]
-
-            self.assertEquals(self.org.get_most_active_regions(), ['LABEL_2', 'LABEL_3', 'LABEL_1'])
-            mock.assert_called_once_with('Gender', dict(location='State'))
-
-        with patch('dash.orgs.models.Org.get_contact_field_results') as mock:
-            self.clear_cache()
-            mock.return_value = None
-
-            self.assertEquals(self.org.get_most_active_regions(), [])
-            mock.assert_called_once_with('Gender', dict(location='State'))
-
-        self.org.set_config("is_global", True)
-
-        with patch('dash.orgs.models.Org.get_contact_field_results') as mock:
-            mock.return_value = [dict(label='UG', set=15, unset=5, categories=[], open_ended=None),
-                                 dict(label='RW', set=100, unset=200, categories=[], open_ended=None),
-                                 dict(label='US', set=50, unset=30, categories=[], open_ended=None)]
-
-            self.assertEquals(self.org.get_most_active_regions(), ['Rwanda', 'United States', 'Uganda'])
-            segment = dict()
-            segment["contact_field"] = "Province"
-            segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
-
-            mock.assert_called_once_with('Gender', dict(location='State'))
 
     def test_organize_categories_data(self):
 
@@ -607,6 +574,39 @@ class UtilsTest(DashTest):
 
         self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district', parent='R-STATE')),
                          [dict(boundary='R-DISTRICT', label='District', set=3)])
+
+    def test_get_regions_stats(self):
+
+        self.assertEqual(get_regions_stats(self.org), [])
+
+        Boundary.objects.create(org=self.org, osm_id='R-NIGERIA', name='Nigeria', parent=None, level=0,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        Boundary.objects.create(org=self.org, osm_id='R-LAGOS', name='Lagos', parent=None, level=1,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        Boundary.objects.create(org=self.org, osm_id='R-OYO', name='OYO', parent=None, level=1,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        Boundary.objects.create(org=self.org, osm_id='R-ABUJA', name='Abuja', parent=None, level=1,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        self.assertEqual(get_regions_stats(self.org), [])
+
+        ReportersCounter.objects.create(org=self.org, type='state:R-LAGOS', count=5)
+
+        self.assertEqual(get_regions_stats(self.org), [dict(name='Lagos', count=5)])
+
+        ReportersCounter.objects.create(org=self.org, type='state:R-OYO', count=15)
+
+        self.assertEqual(get_regions_stats(self.org), [dict(name='OYO', count=15), dict(name='Lagos', count=5)])
+
+        self.org.set_config('is_global', True)
+
+        self.assertEqual(get_regions_stats(self.org), [])
+
+        ReportersCounter.objects.create(org=self.org, type='state:R-NIGERIA', count=30)
+        self.assertEqual(get_regions_stats(self.org), [dict(name='Nigeria', count=30)])
 
     def test_get_reporters_count(self):
 
