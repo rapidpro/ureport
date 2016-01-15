@@ -91,3 +91,33 @@ class LocationTest(DashTest):
 
                 Boundary.get_boundaries(self.nigeria)
                 self.assertFalse(mock_fetch.called)
+
+    def test_get_org_top_level_boundaries_name(self):
+
+        self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), dict())
+
+        Boundary.objects.create(org=self.nigeria, osm_id='R-NIGERIA', name='Nigeria', parent=None, level=0,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        Boundary.objects.create(org=self.nigeria, osm_id='R-LAGOS', name='Lagos', parent=None, level=1,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        Boundary.objects.create(org=self.nigeria, osm_id='R-OYO', name='OYO', parent=None, level=1,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        Boundary.objects.create(org=self.nigeria, osm_id='R-ABUJA', name='Abuja', parent=None, level=1,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        expected = dict()
+        expected['R-LAGOS'] = "Lagos"
+        expected['R-ABUJA'] = "Abuja"
+        expected['R-OYO'] = "OYO"
+
+        self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), expected)
+
+        self.nigeria.set_config('is_global', True)
+
+        expected = dict()
+        expected['R-NIGERIA'] = "Nigeria"
+
+        self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), expected)
