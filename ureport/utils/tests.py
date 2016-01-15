@@ -506,7 +506,9 @@ class UtilsTest(DashTest):
         fifteen_years_ago = now_year - 15
         seventeen_years_ago = now_year - 17
         nineteen_years_ago = now_year - 19
+        twenty_years_ago = now_year - 20
         thirty_years_ago = now_year - 30
+        thirty_one_years_ago = now_year - 31
         forthy_five_years_ago = now_year - 45
 
         ReportersCounter.objects.create(org=self.org, type='born:%s' % two_years_ago, count=2)
@@ -516,15 +518,17 @@ class UtilsTest(DashTest):
         ReportersCounter.objects.create(org=self.org, type='born:%s' % fifteen_years_ago, count=25)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % seventeen_years_ago, count=40)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % nineteen_years_ago, count=110)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % twenty_years_ago, count=2)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % thirty_years_ago, count=12)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % forthy_five_years_ago, count=6)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % thirty_one_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % forthy_five_years_ago, count=2)
 
         ReportersCounter.objects.create(org=self.org, type='born:10', count=10)
         ReportersCounter.objects.create(org=self.org, type='born:732837', count=20)
 
         # y is the percentage of count over the total count
-        expected = [dict(name='0-14', y=4), dict(name='15-19', y=87), dict(name='20-24', y=0),
-                    dict(name='25-30', y=6), dict(name='31-34', y=0), dict(name='35+', y=3)]
+        expected = [dict(name='0-14', y=4), dict(name='15-19', y=87), dict(name='20-24', y=1),
+                    dict(name='25-30', y=6), dict(name='31-34', y=1), dict(name='35+', y=1)]
 
         self.assertEqual(get_age_stats(self.org), json.dumps(expected))
 
