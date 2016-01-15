@@ -49,9 +49,7 @@ class IndexView(SmartTemplateView):
         news = NewsItem.objects.filter(is_active=True, org=org).order_by('-created_on')
         context['news'] = news.count() > 0
 
-        # we use gender label to estimate the most active region
-        if org.get_config('gender_label'):
-            context['most_active_regions'] = org.get_most_active_regions()
+        context['most_active_regions'] = org.get_regions_stats()
 
         # global counter
         if org.get_config('is_global'):
