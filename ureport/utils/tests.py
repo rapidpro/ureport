@@ -635,6 +635,12 @@ class UtilsTest(DashTest):
             self.org.set_config('is_on_landing_page', True)
             self.assertEqual(get_global_count(), 5)
 
+            with patch('django.core.cache.cache.get') as cache_get_mock:
+                cache_get_mock.return_value = 20
+
+                self.assertEqual(get_global_count(), 20)
+                cache_get_mock.assert_called_once_with('global_count')
+
     def test_get_occupation_stats(self):
 
         self.assertEqual(get_occupation_stats(self.org), '[]')
