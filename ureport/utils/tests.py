@@ -639,7 +639,7 @@ class UtilsTest(DashTest):
                 cache_get_mock.return_value = 20
 
                 self.assertEqual(get_global_count(), 20)
-                cache_get_mock.assert_called_once_with('global_count')
+                cache_get_mock.assert_called_once_with('global_count', None)
 
     def test_get_occupation_stats(self):
 
