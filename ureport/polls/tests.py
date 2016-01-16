@@ -513,7 +513,7 @@ class PollTest(DashTest):
             self.assertEquals(poll.title, 'Poll 1')
             self.assertEquals(poll.flow_uuid, "uuid-25")
             self.assertEquals(poll.org, self.uganda)
-            self.assertEqual(poll.flow_date, json_date_to_datetime("2015-04-08T08:30:40.000Z"))
+            self.assertEqual(poll.poll_date, json_date_to_datetime("2015-04-08T08:30:40.000Z"))
 
             self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
 
@@ -571,7 +571,7 @@ class PollTest(DashTest):
             self.assertTrue('is_featured' in response.context['form'].fields)
             self.assertTrue('flow_uuid' in response.context['form'].fields)
             self.assertTrue('title' in response.context['form'].fields)
-            self.assertTrue('flow_date' in response.context['form'].fields)
+            self.assertTrue('poll_date' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
             self.assertTrue('category_image' in response.context['form'].fields)
             self.assertTrue('loc' in response.context['form'].fields)
@@ -583,10 +583,10 @@ class PollTest(DashTest):
             self.assertTrue('title' in response.context['form'].errors)
             self.assertTrue('category' in response.context['form'].errors)
             self.assertTrue('flow_uuid' in response.context['form'].errors)
-            self.assertTrue('flow_date' in response.context['form'].errors)
+            self.assertTrue('poll_date' in response.context['form'].errors)
 
             post_data = dict(title='title updated', category=self.health_uganda.pk, flow_uuid="uuid-25",
-                             is_featured=False, flow_date=yesterday.strftime('%Y-%m-%d %H:%M:%S'))
+                             is_featured=False, poll_date=yesterday.strftime('%Y-%m-%d %H:%M:%S'))
             response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertFalse('form' in response.context)
             updated_poll = Poll.objects.get(pk=poll1.pk)

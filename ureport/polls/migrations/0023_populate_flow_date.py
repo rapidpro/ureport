@@ -10,7 +10,7 @@ from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
 class Migration(migrations.Migration):
 
-    def populate_poll_flow_date(apps, schema_editor):
+    def populate_poll_poll_date(apps, schema_editor):
         Poll = apps.get_model('polls', "Poll")
         Org = apps.get_model('orgs', "Org")
 
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                     print "using created_on for flow_date on poll with id %s" % poll.pk
                     date = poll.created_on
 
-                poll.flow_date = date
+                poll.poll_date = date
                 poll.save()
 
     dependencies = [
@@ -40,5 +40,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(populate_poll_flow_date),
+        migrations.RunPython(populate_poll_poll_date),
     ]

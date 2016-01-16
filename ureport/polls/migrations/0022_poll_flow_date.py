@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='poll',
-            name='flow_date',
+            name='poll_date',
             field=models.DateTimeField(null=True),
         ),
     ]

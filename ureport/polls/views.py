@@ -24,7 +24,7 @@ class PollForm(forms.ModelForm):
         flows = self.org.get_flows()
 
         # if cache empty we fetch from RapidPro API, for Better UX
-        if not flows:
+        if not flows:  # pragma: no cover
             from ureport.utils import fetch_flows
             fetch_flows(self.org)
             flows = self.org.get_flows()
@@ -36,14 +36,14 @@ class PollForm(forms.ModelForm):
 
     is_active = forms.BooleanField(required=False)
     flow_uuid = forms.ChoiceField(choices=[])
-    flow_date = forms.DateTimeField()
+    poll_date = forms.DateTimeField()
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = forms.ModelChoiceField(Category.objects.filter(id__lte=-1))
     category_image = forms.ModelChoiceField(CategoryImage.objects.filter(id__lte=0), required=False)
 
     class Meta:
         model = Poll
-        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'flow_date', 'category', 'category_image')
+        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'poll_date', 'category', 'category_image')
 
 
 class QuestionForm(ModelForm):
@@ -101,7 +101,7 @@ class PollCRUDL(SmartCRUDL):
             flow = obj.get_flow()
 
             # refetch the flows if needed
-            if not flow:
+            if not flow:  # pragma: no cover
                 from ureport.utils import fetch_flows
                 fetch_flows(self.org)
                 flow = obj.get_flow()
@@ -112,7 +112,7 @@ class PollCRUDL(SmartCRUDL):
             else:
                 flow_date = timezone.now()
 
-            obj.flow_date = flow_date
+            obj.poll_date = flow_date
             return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
@@ -345,7 +345,7 @@ class PollCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
-        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'flow_date', 'category', 'category_image')
+        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'poll_date', 'category', 'category_image')
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Update, self).get_form_kwargs()
