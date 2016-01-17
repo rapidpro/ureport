@@ -269,6 +269,8 @@ def fetch_old_sites_count():
     this_time = datetime.now()
     linked_sites = list(getattr(settings, 'PREVIOUS_ORG_SITES', []))
 
+    old_site_values = []
+
     for site in linked_sites:
         count_link = site.get('count_link', "")
         if count_link:
@@ -278,9 +280,9 @@ def fetch_old_sites_count():
 
                 count = int(re.search(r'\d+', response.content).group())
                 key = "org:%s:reporters:%s" % (site.get('name').lower(), 'old-site')
-                cache.set(key,
-                          {'time': datetime_to_ms(this_time), 'results': dict(size=count)},
-                          UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                value = {'time': datetime_to_ms(this_time), 'results': dict(size=count)}
+                old_site_values.append(value)
+                cache.set(key, value, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
             except:
                 import traceback
                 traceback.print_exc()
@@ -289,6 +291,7 @@ def fetch_old_sites_count():
     cache.delete(GLOBAL_COUNT_CACHE_KEY)
 
     print "Fetch old sites counts took %ss" % (time.time() - start)
+    return old_site_values
 
 
 def get_global_count():
@@ -301,6 +304,10 @@ def get_global_count():
         old_site_reporter_counter_keys = cache.keys('org:*:reporters:old-site')
 
         cached_values = [cache.get(key) for key in old_site_reporter_counter_keys]
+
+        # no old sites cache values, double check with a fetch
+        if not cached_values:
+            cached_values = fetch_old_sites_count()
 
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
 
