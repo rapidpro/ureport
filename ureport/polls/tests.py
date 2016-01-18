@@ -42,12 +42,7 @@ class PollTest(DashTest):
         self.assertIsNone(Poll.get_main_poll(self.uganda))
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
         self.assertEquals(unicode(poll1), 'Poll 1')
 
@@ -63,12 +58,7 @@ class PollTest(DashTest):
         self.assertEquals(Poll.get_main_poll(self.uganda), poll1)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
-        poll2 = Poll.objects.create(flow_uuid="uuid-2",
-                                    title="Poll 2",
-                                    category=self.health_uganda,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin)
 
         poll2_question = PollQuestion.objects.create(poll=poll2,
                                                      title='question poll 2',
@@ -79,13 +69,7 @@ class PollTest(DashTest):
         self.assertEquals(Poll.get_main_poll(self.uganda), poll2)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
-
-        poll3 = Poll.objects.create(flow_uuid="uuid-3",
-                                    title="Poll 3",
-                                    category=self.health_uganda,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin)
 
         poll3_question = PollQuestion.objects.create(poll=poll3,
                                                      title='question poll 3',
@@ -118,13 +102,7 @@ class PollTest(DashTest):
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
@@ -138,12 +116,7 @@ class PollTest(DashTest):
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
-        poll2 = Poll.objects.create(flow_uuid="uuid-2",
-                                    title="Poll 2",
-                                    category=self.health_uganda,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin)
 
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
@@ -176,12 +149,7 @@ class PollTest(DashTest):
         self.health_uganda.is_active = True
         self.health_uganda.save()
 
-        poll3 = Poll.objects.create(flow_uuid="uuid-3",
-                                    title="Poll 3",
-                                    category=self.health_uganda,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin)
 
         self.assertTrue(Poll.get_brick_polls(self.uganda))
         self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
@@ -229,26 +197,14 @@ class PollTest(DashTest):
         with patch('dash.orgs.models.Org.get_flows') as mock:
             mock.return_value = {'uuid-1': "Flow"}
 
-            poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                        title="Poll 1",
-                                        category=self.health_uganda,
-                                        is_featured=True,
-                                        org=self.uganda,
-                                        created_by=self.admin,
-                                        modified_by=self.admin)
+            poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
             self.assertEquals(poll1.get_flow(), 'Flow')
             mock.assert_called_once_with()
 
     def test_best_and_worst(self):
 
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         poll1_question = PollQuestion.objects.create(poll=poll1,
                                                      title='question poll 1',
@@ -272,19 +228,12 @@ class PollTest(DashTest):
             self.assertEquals(poll1.best_and_worst(), results)
             mock.assert_called_once_with(segment=dict(location="State"))
 
-
     def test_get_featured_responses(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         self.assertFalse(poll1.get_featured_responses())
 
-        featured_response1= FeaturedResponse.objects.create(poll=poll1,
+        featured_response1 = FeaturedResponse.objects.create(poll=poll1,
                                                             location="Kampala",
                                                             reporter="James",
                                                             message="Awesome",
@@ -315,13 +264,7 @@ class PollTest(DashTest):
         self.assertEquals(poll1.get_featured_responses()[1], featured_response1)
 
     def test_runs(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         self.assertEquals(poll1.runs(), "----")
 
@@ -342,13 +285,7 @@ class PollTest(DashTest):
             mock.assert_called_with()
 
     def test_responded_runs(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         self.assertEquals(poll1.responded_runs(), "---")
 
@@ -369,13 +306,7 @@ class PollTest(DashTest):
             mock.assert_called_once_with()
 
     def test_response_percentage(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         self.assertEquals(poll1.response_percentage(), "---")
 
@@ -396,13 +327,7 @@ class PollTest(DashTest):
             mock.assert_called_with()
 
     def test_get_featured_images(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         self.assertFalse(poll1.get_featured_images())
 
@@ -431,13 +356,7 @@ class PollTest(DashTest):
 
     def test_get_categoryimage(self):
 
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         self.assertEquals(poll1.get_category_image(), self.health_uganda.get_first_image())
 
@@ -519,21 +438,9 @@ class PollTest(DashTest):
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_update_poll(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll2 = Poll.objects.create(flow_uuid="uuid-2",
-                                    title="Poll 2",
-                                    category=self.education_nigeria,
-                                    is_featured=True,
-                                    org=self.nigeria,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, featured=True)
 
         uganda_update_url = reverse('polls.poll_update', args=[poll1.pk])
         nigeria_update_url = reverse('polls.poll_update', args=[poll2.pk])
@@ -597,21 +504,10 @@ class PollTest(DashTest):
 
     def test_list_poll(self):
         list_url = reverse('polls.poll_list')
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll2 = Poll.objects.create(flow_uuid="uuid-2",
-                                    title="Poll 2",
-                                    category=self.education_nigeria,
-                                    is_featured=True,
-                                    org=self.nigeria,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, featured=True)
+
         response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)
 
@@ -629,21 +525,10 @@ class PollTest(DashTest):
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_questions_poll(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
 
-        poll2 = Poll.objects.create(flow_uuid="uuid-2",
-                                    title="Poll 2",
-                                    category=self.education_nigeria,
-                                    is_featured=True,
-                                    org=self.nigeria,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
+
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, featured=True)
 
         uganda_questions_url = reverse('polls.poll_questions', args=[poll1.pk])
         nigeria_questions_url = reverse('polls.poll_questions', args=[poll2.pk])
@@ -754,21 +639,9 @@ class PollTest(DashTest):
                     mock.assert_called_once_with(poll1.org)
 
     def test_images_poll(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll2 = Poll.objects.create(flow_uuid="uuid-2",
-                                    title="Poll 2",
-                                    category=self.education_nigeria,
-                                    is_featured=True,
-                                    org=self.nigeria,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, featured=True)
 
         uganda_poll_images_url = reverse('polls.poll_images', args=[poll1.pk])
         nigeria_poll_images_url = reverse('polls.poll_images', args=[poll2.pk])
@@ -812,21 +685,9 @@ class PollTest(DashTest):
         self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_responses', args=[poll1.pk]))
 
     def test_responses_poll(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll2 = Poll.objects.create(flow_uuid="uuid-2",
-                                    title="Poll 2",
-                                    category=self.education_nigeria,
-                                    is_featured=True,
-                                    org=self.nigeria,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, featured=True)
 
         uganda_poll_responses_url = reverse('polls.poll_responses', args=[poll1.pk])
         nigeria_poll_responses_url = reverse('polls.poll_responses', args=[poll2.pk])
@@ -988,13 +849,7 @@ class PollQuestionTest(DashTest):
                                                          modified_by=self.admin)
 
     def test_poll_question_model(self):
-        poll1 = Poll.objects.create(flow_uuid="uuid-1",
-                                    title="Poll 1",
-                                    category=self.health_uganda,
-                                    is_featured=True,
-                                    org=self.uganda,
-                                    created_by=self.admin,
-                                    modified_by=self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
         poll_question1 = PollQuestion.objects.create(poll=poll1,
                                                      title="question 1",
@@ -1085,12 +940,7 @@ class PollQuestionTest(DashTest):
                                                  created_by=self.admin,
                                                  modified_by=self.admin)
 
-        self.poll = Poll.objects.create(flow_uuid="uuid-1",
-                                        title="Poll 1",
-                                        category=self.education,
-                                        org=self.org,
-                                        created_by=self.admin,
-                                        modified_by=self.admin)
+        self.poll = self.create_poll(self.org, "Poll 1", "uuid-1", self.education, self.admin)
 
         with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',

@@ -32,12 +32,7 @@ class UtilsTest(DashTest):
                                                  created_by=self.admin,
                                                  modified_by=self.admin)
 
-        self.poll = Poll.objects.create(flow_uuid="uuid-1",
-                                        title="Poll 1",
-                                        category=self.education,
-                                        org=self.org,
-                                        created_by=self.admin,
-                                        modified_by=self.admin)
+        self.poll = self.create_poll(self.org, "Poll 1", "uuid-1", self.education, self.admin)
 
     def clear_cache(self):
         # hardcoded to localhost
