@@ -210,10 +210,9 @@ class BoundaryView(SmartTemplateView):
         if org.get_config('is_global'):
             location_boundaries = org.boundaries.filter(level=0)
         else:
-            state_id = self.kwargs.get('osm_id', None)
-
-            if state_id:
-                location_boundaries = org.boundaries.filter(level=2, parent__osm_id=state_id)
+            parent_id = self.kwargs.get('osm_id', None)
+            if parent_id:
+                location_boundaries = org.boundaries.filter(parent__osm_id=parent_id)
             else:
                 location_boundaries = org.boundaries.filter(level=1)
 

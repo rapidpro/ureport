@@ -1740,16 +1740,18 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     }
   }
 }
-
+.leaflet-map-pane {
+  margin-top: 25px;
+}
 .scale {
 
   height: 45px;
-  width: 200px;
+  width: 320px;
   background-color: rgba(222, 222, 222, 0.5);
 
   @media (max-width: 768px) {
     height: 30px;
-    width: 130px;
+    width: 200px;
   }
 
   .scale-map-circle-outer {
@@ -1792,13 +1794,13 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   .scale-map-hline {
     height: 6px;
     border-bottom: 6px solid #FFFFFF;
-    width: 150px;
+    width: 250px;
     position: absolute;
     top: 14px;
     left: 30px;
 
     @media (max-width: 768px) {
-      width: 100px;
+      width: 160px;
       top: 8px;
       left: 18px;
     }
@@ -1809,15 +1811,29 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     border-left: 6px solid #FFFFFF;
     height: 14px;
     position: absolute;
-    left: 180px;
+    left: 160px;
     top: 10px;
 
     @media (max-width: 768px) {
       height: 10px;
-      left: 115px;
+      left: 90px;
       top:6px;
     }
+  }
 
+  .scale-map-vline-2 {
+    width:6px;
+    border-left: 6px solid #FFFFFF;
+    height: 14px;
+    position: absolute;
+    left: 280px;
+    top: 10px;
+
+    @media (max-width: 768px) {
+      height: 10px;
+      left: 175px;
+      top:6px;
+    }
   }
 
   .national-level {
@@ -1839,14 +1855,30 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   .state-level {
     position: absolute;
     top: 30px;
-    left: 160px;
+    left: 140px;
     font-size: 1em;
     font-family: @sans-family;
     line-height: 120%;
 
     @media (max-width: 768px) {
       top: 20px;
-      left: 100px;
+      left: 80px;
+      font-size: .7em;
+
+    }
+  }
+
+  .district-level {
+    position: absolute;
+    top: 30px;
+    left: 260px;
+    font-size: 1em;
+    font-family: @sans-family;
+    line-height: 120%;
+
+    @media (max-width: 768px) {
+      top: 20px;
+      left: 160px;
       font-size: .7em;
 
     }
@@ -1854,18 +1886,18 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
   &.state {
     .scale-map-circle-outer {
-      left: 175px;
-
+      left: 145px;
       @media (max-width: 768px) {
-        left: 116px;
+        left: 87px;
       }
 
     }
 
     .scale-map-circle-inner {
-      left: 180px;
+      left: 150px;
+      z-index: 100;
       @media (max-width: 768px) {
-        left:119px
+        left:90px
       }
 
     }
@@ -1879,6 +1911,45 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     }
 
     .state-level {
+      color: #000000;
+    }
+  }
+
+  &.district {
+    .scale-map-circle-outer {
+      left: 275px;
+      @media (max-width: 768px) {
+        left: 172px;
+      }
+
+    }
+
+    .scale-map-circle-inner {
+      left: 280px;
+      z-index: 100;
+      @media (max-width: 768px) {
+        left:175px
+      }
+
+    }
+
+    .scale-map-vline-2 {
+      left: 160px;
+
+      @media (max-width: 768px) {
+        left: 12px;
+      }
+    }
+
+    .scale-map-vline {
+      left: 25px;
+
+      @media (max-width: 768px) {
+        left: 12px;
+      }
+    }
+
+    .district-level {
       color: #000000;
     }
   }

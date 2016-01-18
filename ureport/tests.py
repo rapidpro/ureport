@@ -49,7 +49,7 @@ class MockAPI(API):  # pragma: no cover
                    ]
             )
 
-    def get_state_geojson(self, state_id):
+    def get_geojson_by_parent_id(self, parent_id):
         return dict(type="FeatureCollection",
                     features=[dict(type='Feature',
                                    properties=dict(id="R3713502",
