@@ -12,6 +12,7 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 import re
 
+
 class PollForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.org = kwargs['org']
@@ -30,10 +31,29 @@ class PollForm(forms.ModelForm):
 
     is_active = forms.BooleanField(required=False)
     flow_uuid = forms.ChoiceField(choices=[])
-    poll_date = forms.DateTimeField()
+    poll_date = forms.DateTimeField(required=False)
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = forms.ModelChoiceField(Category.objects.filter(id__lte=-1))
     category_image = forms.ModelChoiceField(CategoryImage.objects.filter(id__lte=0), required=False)
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        poll_date = cleaned_data.get('poll_date')
+        flow_uuid = cleaned_data.get('flow_uuid')
+
+        flows = self.org.get_flows()
+        flow = flows.get(flow_uuid)
+
+        if not poll_date and flow:
+            date = flow.get('created_on', None)
+            if date:
+                poll_date = json_date_to_datetime(date)
+
+        if not poll_date:
+            poll_date = timezone.now()
+
+        cleaned_data['poll_date'] = poll_date
+        return cleaned_data
 
     class Meta:
         model = Poll
@@ -93,12 +113,6 @@ class PollCRUDL(SmartCRUDL):
             obj = super(PollCRUDL.Create, self).pre_save(obj)
             obj.org = self.request.org
             flow = obj.get_flow()
-
-            # refetch the flows if needed
-            if not flow:  # pragma: no cover
-                from ureport.utils import fetch_flows
-                fetch_flows(self.org)
-                flow = obj.get_flow()
 
             date = flow.get('created_on', None)
             if date:

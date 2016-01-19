@@ -506,11 +506,10 @@ class PollTest(DashTest):
             response = self.client.post(uganda_update_url, dict(), SERVER_NAME='uganda.ureport.io')
             self.assertTrue('form' in response.context)
             self.assertTrue(response.context['form'].errors)
-            self.assertEquals(len(response.context['form'].errors), 4)
+            self.assertEquals(len(response.context['form'].errors), 3)
             self.assertTrue('title' in response.context['form'].errors)
             self.assertTrue('category' in response.context['form'].errors)
             self.assertTrue('flow_uuid' in response.context['form'].errors)
-            self.assertTrue('poll_date' in response.context['form'].errors)
 
             post_data = dict(title='title updated', category=self.health_uganda.pk, flow_uuid="uuid-25",
                              is_featured=False, poll_date=yesterday.strftime('%Y-%m-%d %H:%M:%S'))
@@ -521,6 +520,26 @@ class PollTest(DashTest):
             self.assertFalse(updated_poll.is_featured)
 
             self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_list'))
+
+            tz = pytz.timezone('Africa/Kigali')
+            with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
+                flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30', participants=300,
+                                               labels="", archived=False, date_hint="2015-04-08",
+                                               rulesets=[dict(uuid='uuid-8435', id=8436, response_type="C",
+                                                              label='Does your community have power')])
+
+                mock.return_value = flows_cached
+
+                post_data = dict(title='Poll 2', category=self.health_uganda.pk, flow_uuid="uuid-30")
+                post_data = dict(title='Poll 2', category=self.health_uganda.pk, flow_uuid="uuid-30",
+                                 is_featured=False, poll_date="")
+                response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+                self.assertEqual(Poll.objects.all().count(), 2)
+
+                poll = Poll.objects.get(flow_uuid='uuid-30')
+                self.assertEquals(poll.title, 'Poll 2')
+                self.assertEquals(poll.org, self.uganda)
+                self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))
 
     def test_list_poll(self):
         list_url = reverse('polls.poll_list')
