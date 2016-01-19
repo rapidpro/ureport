@@ -774,7 +774,7 @@ class PollTest(DashTest):
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_templatetags(self):
         from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
-        from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link
+        from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results
 
         with patch('dash.orgs.models.Org.get_config') as mock:
             mock.return_value = 'Done'
@@ -869,6 +869,25 @@ class PollTest(DashTest):
         self.uganda.save()
 
         self.assertEqual(org_arrow_link(self.uganda), "&#8592;")
+
+        self.assertFalse(question_results(None))
+
+        with patch('ureport.polls.models.PollQuestion.get_results') as mock_results:
+            mock_results.return_value = ["Results"]
+
+            poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+
+            poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                         title='question poll 1',
+                                                         ruleset_uuid="uuid-101",
+                                                         created_by=self.admin,
+                                                         modified_by=self.admin)
+
+            self.assertEqual(question_results(poll1_question), "Results")
+
+            mock_results.side_effect = KeyError
+
+            self.assertFalse(question_results(None))
 
 
 class PollQuestionTest(DashTest):
