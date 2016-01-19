@@ -195,6 +195,19 @@ class PollTest(DashTest):
         self.assertEquals(Poll.get_brick_polls(self.uganda)[1], poll1)
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
+    def test_get_other_polls(self):
+        polls = []
+        for i in range(10):
+            poll = self.create_poll(self.uganda, "Poll %s" % i, "uuid-%s" % i, self.health_uganda,
+                                    self.admin, featured=True)
+            PollQuestion.objects.create(poll=poll, title='question poll %s' % i, ruleset_uuid='uuid-10-%s' % i,
+                                        created_by=self.admin, modified_by=self.admin)
+
+            polls.append(poll)
+
+        self.assertTrue(Poll.get_other_polls(self.uganda))
+        self.assertEqual(list(Poll.get_other_polls(self.uganda)), [polls[3], polls[2], polls[1], polls[0]])
+
     def test_get_flow(self):
         with patch('dash.orgs.models.Org.get_flows') as mock:
             mock.return_value = {'uuid-1': "Flow"}
@@ -887,7 +900,7 @@ class PollTest(DashTest):
 
             mock_results.side_effect = KeyError
 
-            self.assertFalse(question_results(None))
+            self.assertFalse(question_results(poll1_question))
 
 
 class PollQuestionTest(DashTest):
