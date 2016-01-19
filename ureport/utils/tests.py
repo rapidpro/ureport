@@ -458,7 +458,9 @@ class UtilsTest(DashTest):
                     with patch('django.core.cache.cache.delete') as cache_delete_mock:
                         cache_delete_mock.return_value = "Deleted"
 
-                        fetch_old_sites_count()
+                        old_site_values = fetch_old_sites_count()
+                        self.assertEqual(old_site_values, [{'time': 500, 'results': dict(size=300)},
+                                                           {'time': 500, 'results': dict(size=50)}])
                         self.assertEqual(mock_get.call_count, 2)
                         mock_get.assert_any_call('http://ureport.ug/count.txt')
                         mock_get.assert_any_call('http://www.zambiaureport.org/count.txt/')
@@ -650,16 +652,29 @@ class UtilsTest(DashTest):
                                                  }
                                                  }}):
 
-            self.assertEqual(get_global_count(), 0)
+            with patch('ureport.utils.fetch_old_sites_count') as mock_old_sites_count:
+                mock_old_sites_count.return_value = []
 
-            ReportersCounter.objects.create(org=self.org, type='total-reporters', count=5)
+                self.assertEqual(get_global_count(), 0)
 
-            # ignored if not on the global homepage
-            self.assertEqual(get_global_count(), 0)
+                ReportersCounter.objects.create(org=self.org, type='total-reporters', count=5)
 
-            # add the org to the homepage
-            self.org.set_config('is_on_landing_page', True)
-            self.assertEqual(get_global_count(), 5)
+                # ignored if not on the global homepage
+                self.assertEqual(get_global_count(), 0)
+
+                # add the org to the homepage
+                self.org.set_config('is_on_landing_page', True)
+                self.assertEqual(get_global_count(), 5)
+
+                mock_old_sites_count.return_value = [{'time': 500, 'results': dict(size=300)},
+                                                     {'time': 500, 'results': dict(size=50)}]
+                from django.core.cache import cache
+                cache.delete(GLOBAL_COUNT_CACHE_KEY)
+                self.assertEqual(get_global_count(), 355)
+
+                cache.delete(GLOBAL_COUNT_CACHE_KEY)
+                self.org.set_config('is_on_landing_page', False)
+                self.assertEqual(get_global_count(), 350)
 
             with patch('django.core.cache.cache.get') as cache_get_mock:
                 cache_get_mock.return_value = 20
