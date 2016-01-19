@@ -364,7 +364,7 @@ def get_age_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    age_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
+    year_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
 
     age_counts_interval = dict()
     age_counts_interval['0-14'] = 0
@@ -375,7 +375,7 @@ def get_age_stats(org):
     age_counts_interval['35+'] = 0
 
     total = 0
-    for year_key, age_count in age_counts.iteritems():
+    for year_key, age_count in year_counts.iteritems():
         total += age_count
         age = current_year - int(year_key)
         if age > 34:
