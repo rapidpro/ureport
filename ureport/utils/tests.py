@@ -11,11 +11,12 @@ from temba_client.client import Group
 from ureport.assets.models import FLAG, Image
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
-from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
+from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, \
+    CACHE_ORG_FLOWS_KEY
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
-    get_occupation_stats, get_regions_stats
+    get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
@@ -32,12 +33,7 @@ class UtilsTest(DashTest):
                                                  created_by=self.admin,
                                                  modified_by=self.admin)
 
-        self.poll = Poll.objects.create(flow_uuid="uuid-1",
-                                        title="Poll 1",
-                                        category=self.education,
-                                        org=self.org,
-                                        created_by=self.admin,
-                                        modified_by=self.admin)
+        self.poll = self.create_poll(self.org, "Poll 1", "uuid-1", self.education, self.admin)
 
     def clear_cache(self):
         # hardcoded to localhost
@@ -628,6 +624,36 @@ class UtilsTest(DashTest):
         ReportersCounter.objects.create(org=self.org, type='state:R-NIGERIA', count=30)
         self.assertEqual(get_regions_stats(self.org), [dict(name='Nigeria', count=30)])
 
+    def test_get_org_contacts_counts(self):
+
+        with patch('ureport.contacts.models.ReportersCounter.get_counts') as mock_get_counts:
+            mock_get_counts.return_value = "Counts"
+            with patch('django.core.cache.cache.get') as mock_cache_get:
+                mock_cache_get.return_value = "Cached"
+
+                self.assertEqual(get_org_contacts_counts(self.org), "Cached")
+                mock_cache_get.assert_called_once_with(ORG_CONTACT_COUNT_KEY % self.org.pk, None)
+                self.assertFalse(mock_get_counts.called)
+
+                mock_cache_get.return_value = None
+
+                self.assertEqual(get_org_contacts_counts(self.org), "Counts")
+                mock_get_counts.assert_called_once_with(self.org)
+
+    def test_get_flows(self):
+        with patch('ureport.utils.fetch_flows') as mock_fetch_flows:
+            mock_fetch_flows.return_value = "Fetched"
+            with patch('django.core.cache.cache.get') as mock_cache_get:
+                mock_cache_get.return_value = dict(results="Cached")
+
+                self.assertEqual(get_flows(self.org), "Cached")
+                mock_cache_get.assert_called_once_with(CACHE_ORG_FLOWS_KEY % self.org.pk, None)
+                self.assertFalse(mock_fetch_flows.called)
+
+                mock_cache_get.return_value = None
+                self.assertEqual(get_flows(self.org), "Fetched")
+                mock_fetch_flows.assert_called_once_with(self.org)
+
     def test_get_reporters_count(self):
 
         self.assertEqual(get_reporters_count(self.org), 0)
@@ -667,6 +693,12 @@ class UtilsTest(DashTest):
                 cache.delete(GLOBAL_COUNT_CACHE_KEY)
                 self.org.set_config('is_on_landing_page', False)
                 self.assertEqual(get_global_count(), 350)
+
+            with patch('django.core.cache.cache.get') as cache_get_mock:
+                cache_get_mock.return_value = 20
+
+                self.assertEqual(get_global_count(), 20)
+                cache_get_mock.assert_called_once_with('global_count', None)
 
     def test_get_occupation_stats(self):
 

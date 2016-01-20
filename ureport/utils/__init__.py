@@ -217,10 +217,11 @@ def fetch_flows(org):
     start = time.time()
     print "Fetching flows for %s" % org.name
 
+    this_time = datetime.now()
+    org_flows = dict(time=datetime_to_ms(this_time), results=dict())
+
     try:
         from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-
-        this_time = datetime.now()
 
         temba_client = org.get_temba_client()
         flows = temba_client.get_flows()
@@ -230,7 +231,8 @@ def fetch_flows(org):
             if flow.rulesets:
                 flow_json = dict()
                 flow_json['uuid'] = flow.uuid
-                flow_json['created_on'] = flow.created_on.strftime('%Y-%m-%d')
+                flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
+                flow_json['created_on'] = datetime_to_json_date(flow.created_on)
                 flow_json['name'] = flow.name
                 flow_json['participants'] = flow.participants
                 flow_json['runs'] = flow.runs
@@ -241,15 +243,17 @@ def fetch_flows(org):
                 all_flows[flow.uuid] = flow_json
 
         all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
-        cache.set(all_flows_key,
-                  {'time': datetime_to_ms(this_time), 'results': all_flows},
-                  UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+        org_flows['results'] = all_flows
+        cache.set(all_flows_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
     except:
         client.captureException()
         import traceback
         traceback.print_exc()
 
     print "Fetch %s flows took %ss" % (org.name, time.time() - start)
+
+    return org_flows.get('results')
 
 
 def get_flows(org):
@@ -258,7 +262,7 @@ def get_flows(org):
     if cache_value:
         return cache_value['results']
 
-    return dict()
+    return fetch_flows(org)
 
 
 def fetch_old_sites_count():
