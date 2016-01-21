@@ -202,7 +202,7 @@ class PublicTest(DashTest):
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['is_rtl_org'])
 
-    @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_index(self):
         home_url = reverse('public.index')
 
@@ -526,7 +526,7 @@ class PublicTest(DashTest):
         self.assertEquals(response.request['PATH_INFO'], '/ureporters/')
         self.assertEquals(response.context['org'], self.uganda)
 
-    @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_polls_list(self):
         polls_url = reverse('public.polls')
 
@@ -757,7 +757,7 @@ class PublicTest(DashTest):
         self.assertTrue(poll3 not in response.context['polls'])
         self.assertEquals(response.context['polls'][0], poll1)
 
-    @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_polls_read(self):
         poll1 = Poll.objects.create(flow_uuid="uuid-1",
                                     title="Poll 1",

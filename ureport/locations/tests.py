@@ -1,7 +1,7 @@
 import json
 from ureport.tests import DashTest, MockTembaClient
 from mock import patch
-from temba_client.types import Boundary as TembaBoundary, Geometry as TembaGeometry
+from temba_client.v1.types import Boundary as TembaBoundary, Geometry as TembaGeometry
 from .models import Boundary
 
 
@@ -29,7 +29,7 @@ class LocationTest(DashTest):
         # try creating an object from the kwargs
         Boundary.objects.create(**kwargs)
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_fetch_boundaries(self):
 
         # Old boundary should be deleted after we fetch boundaries
@@ -73,7 +73,7 @@ class LocationTest(DashTest):
             self.assertTrue(mock_global_boundaries.called)
             mock_global_boundaries.assert_called_once()
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_get_boundaries(self):
 
         boundaries_ids = Boundary.get_boundaries(self.nigeria)
