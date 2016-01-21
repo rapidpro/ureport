@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 from datetime import datetime
+from django.db.models.aggregates import Sum
 from django.utils import timezone
 
 from mock import patch
@@ -47,7 +48,6 @@ class ContactFieldTest(DashTest):
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_get_contact_fields(self):
-
         field_keys = ContactField.get_contact_fields(self.nigeria)
         self.assertEqual(field_keys, ['occupation'])
 
@@ -59,7 +59,6 @@ class ContactFieldTest(DashTest):
 
             cache_get_mock.return_value = ['occupation']
             with patch('ureport.contacts.models.ContactField.fetch_contact_fields') as mock_fetch:
-
                 ContactField.get_contact_fields(self.nigeria)
                 self.assertFalse(mock_fetch.called)
 
@@ -79,7 +78,8 @@ class ContactTest(DashTest):
         self.nigeria.set_config('male_label', 'Male')
 
         # boundaries fetched
-        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria", level=0, parent=None,
+        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria", level=0,
+                                               parent=None,
                                                geometry='{"foo":"bar-country"}')
         self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos", level=1,
                                              parent=self.country, geometry='{"foo":"bar-state"}')
@@ -98,7 +98,6 @@ class ContactTest(DashTest):
         self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
 
     def test_kwargs_from_temba(self):
-
         temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
                                             groups=['G-001', 'G-007'],
                                             fields={'registration_date': None, 'state': None,
@@ -133,7 +132,8 @@ class ContactTest(DashTest):
 
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=['G-001', 'G-007'],
-                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z',
+                                                    'state': 'Lagos',
                                                     'lga': 'Oyo', 'occupation': 'Student', 'born': '1990',
                                                     'gender': 'Male'},
                                             language='eng')
@@ -152,7 +152,6 @@ class ContactTest(DashTest):
 
         tz = pytz.timezone('UTC')
         with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 29, 10, 20, 30, 40))):
-
             with patch('dash.orgs.models.TembaClient.get_groups') as mock_groups:
                 group = TembaGroup.create(uuid="uuid-8", name='reporters', size=120)
                 mock_groups.return_value = [group]
@@ -173,8 +172,8 @@ class ContactTest(DashTest):
 
                 with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
                     mock_contacts.return_value = [
-                        TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
-                                            fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
+                        TembaContact.create(uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
+                                            fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),
                                             language='eng',
                                             modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
 
@@ -201,8 +200,8 @@ class ContactTest(DashTest):
 
                 with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
                     mock_contacts.return_value = [
-                        TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
-                                            fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
+                        TembaContact.create(uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
+                                            fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),
                                             language='eng',
                                             modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
 
@@ -219,7 +218,6 @@ class ContactTest(DashTest):
 
                     Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
                     self.assertTrue('000-001' in seen_uuids)
-
 
     def test_reporters_counter(self):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
@@ -257,7 +255,6 @@ class ContactTest(DashTest):
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_tasks(self):
-
         with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
                                                'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
@@ -265,7 +262,6 @@ class ContactTest(DashTest):
             with patch('ureport.contacts.tasks.Contact.fetch_contacts') as mock_fetch_contacts:
                 with patch('ureport.contacts.tasks.Boundary.fetch_boundaries') as mock_fetch_boundaries:
                     with patch('ureport.contacts.tasks.ContactField.fetch_contact_fields') as mock_fetch_contact_fields:
-
                         mock_fetch_contacts.return_value = 'FETCHED'
                         mock_fetch_boundaries.return_value = 'FETCHED'
                         mock_fetch_contact_fields.return_value = 'FETCHED'
@@ -291,3 +287,43 @@ class ContactTest(DashTest):
                             mock_fetch_contacts.assert_called_once_with(self.nigeria, after=d1)
                             self.assertFalse(mock_fetch_boundaries.called)
                             self.assertFalse(mock_fetch_contact_fields.called)
+
+    def test_sync_contacts_removed(self):
+        self.nigeria.set_config('reporter_group', 'Reporters')
+
+        tz = pytz.timezone('UTC')
+        with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 29, 10, 20, 30, 40))):
+            temba_contacts = []
+
+            Contact.objects.create(uuid='C-008', org=self.nigeria, gender='M', born=1980, occupation='Teacher',
+                                   registered_on=json_date_to_datetime('2014-01-02T03:07:05.000'), state='R-LAGOS',
+                                   district='R-OYO')
+
+            self.assertEqual(len(Contact.sync_contacts_removed(self.nigeria, temba_contacts)), 1)
+
+            Contact.objects.all().delete()
+
+            with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
+                Contact.objects.create(uuid='C-008', org=self.nigeria, gender='M', born=1980, occupation='Teacher',
+                                       registered_on=json_date_to_datetime('2014-01-02T03:07:05.000'), state='R-LAGOS',
+                                       district='R-OYO')
+
+                Contact.objects.create(uuid='C-009', org=self.nigeria, gender='F', born=1990, occupation='Engineer',
+                                       registered_on=json_date_to_datetime('2014-01-02T04:07:05.000'), state='R-LAGOS',
+                                       district='R-OYO')
+
+                mock_contacts.return_value = [
+                    TembaContact.create(uuid='C-009', name="Ann", urns=['tel:1234'], groups=['000-002'],
+                                        fields=dict(state="R-LAGOS", lga="Oyo", gender='Female', born="1990"),
+                                        language='eng',
+                                        modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
+
+                temba_contacts = ['C-009']
+                contacts_removed = Contact.sync_contacts_removed(self.nigeria, temba_contacts)
+
+                self.assertEqual(len(contacts_removed), 1)
+
+                reporters_counter = ReportersCounter.objects.filter(org=self.nigeria, type='total-reporters').aggregate(
+                    Sum('count'))
+
+                self.assertEqual(reporters_counter['count__sum'], 1)

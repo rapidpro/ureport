@@ -134,7 +134,7 @@ class Contact(models.Model):
                 if district_field:
                     district_name = temba_contact.fields.get(cls.find_contact_field_key(org, district_field), None)
                     district_boundary = Boundary.objects.filter(org=org, level=2, name__iexact=district_name,
-                                                            parent=state_boundary).first()
+                                                                parent=state_boundary).first()
                     if district_boundary:
                         district = district_boundary.osm_id
 
@@ -249,9 +249,25 @@ class Contact(models.Model):
 
         return seen_uuids
 
+    @classmethod
+    def sync_contacts_removed(cls, org, temba_contacts):
+
+        contacts_removed = []
+        try:
+            contacts_removed = Contact.objects.all().exclude(uuid__in=temba_contacts)
+
+            for contact in contacts_removed:
+                contact.delete()
+                ReportersCounter(org=org, type='total-reporters', count=-1)
+
+        except:  # pragma: no cover
+            import traceback
+            traceback.print_exc()
+
+        return contacts_removed
+
 
 class ReportersCounter(models.Model):
-
     org = models.ForeignKey(Org, related_name='reporters_counters')
 
     type = models.CharField(max_length=255)
