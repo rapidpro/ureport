@@ -15,7 +15,7 @@ import pycountry
 
 from mock import patch, Mock
 from dash.categories.models import Category, CategoryImage
-from temba_client.client import Result, Flow, Group
+from temba_client.v1.types import Result, Flow, Group
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows
@@ -396,7 +396,7 @@ class PollTest(DashTest):
 
         self.assertEquals(poll1.get_category_image(), poll1.category_image.image)
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_create_poll(self):
         create_url = reverse('polls.poll_create')
 
@@ -469,7 +469,7 @@ class PollTest(DashTest):
                 self.assertEquals(poll.org, self.uganda)
                 self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_update_poll(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
@@ -575,7 +575,7 @@ class PollTest(DashTest):
         self.assertTrue(reverse('polls.poll_responses',args=[poll1.pk]) in response.content)
         self.assertTrue(reverse('polls.poll_images',args=[poll1.pk]) in response.content)
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_questions_poll(self):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -784,7 +784,7 @@ class PollTest(DashTest):
         self.assertEquals(response.context['form'].fields['location_1'].initial, 'Youtube Stream')
         self.assertEquals(response.context['form'].fields['message_1'].initial, 'Just give me a reason')
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_templatetags(self):
         from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
         from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results
@@ -937,7 +937,7 @@ class PollQuestionTest(DashTest):
         self.uganda.set_config("district_label", "District")
 
 
-        with patch('dash.orgs.models.TembaClient.get_results') as mock:
+        with patch('dash.orgs.models.TembaClient1.get_results') as mock:
             mock.return_value = Result.deserialize_list(fetched_results)
 
             with patch('django.core.cache.cache.set') as cache_set_mock:

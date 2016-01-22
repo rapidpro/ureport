@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.db import models, migrations
-from temba_client.client import TembaClient
+from temba_client.v1 import TembaClient
 
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         Org = apps.get_model('orgs', "Org")
 
         agent = getattr(settings, 'SITE_API_USER_AGENT', None)
-        host = '%s/api/v1' % settings.API_ENDPOINT
+        host = '%s/api/v1' % settings.SITE_API_HOST
 
         for org in Org.objects.all():
             temba_client = TembaClient(host, org.api_token, user_agent=agent)
