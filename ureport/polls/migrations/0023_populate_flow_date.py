@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         Org = apps.get_model('orgs', "Org")
 
         agent = getattr(settings, 'SITE_API_USER_AGENT', None)
-        host = '%s/api/v1' % settings.SITE_API_HOST
+        host = settings.SITE_API_HOST
 
         for org in Org.objects.all():
             temba_client = TembaClient(host, org.api_token, user_agent=agent)
