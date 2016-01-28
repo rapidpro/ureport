@@ -57,7 +57,7 @@ class Boundary(models.Model):
     def build_global_boundaries(cls):
 
         from django.conf import settings
-        from temba_client.types import Geometry as TembaGeometry, Boundary as TembaBoundary
+        from temba_client.v1.types import Geometry as TembaGeometry, Boundary as TembaBoundary
         handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
         contents = handle.read()
         handle.close()

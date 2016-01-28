@@ -193,7 +193,7 @@ class Contact(models.Model):
                 return existing.first()
             else:
                 return cls.objects.create(**kwargs)
-        except DataError as e:
+        except DataError as e:  # pragma: no cover
             client.captureException()
             import traceback
             traceback.print_exc()

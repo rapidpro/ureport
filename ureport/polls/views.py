@@ -2,12 +2,16 @@ from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from django import forms
 from django.core.urlresolvers import reverse
 from dash.categories.models import Category, CategoryImage
+from django.utils import timezone
+
+from ureport.utils import json_date_to_datetime
 from .models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_ORG_FLOWS_KEY
 from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 import re
+
 
 class PollForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -20,26 +24,40 @@ class PollForm(forms.ModelForm):
         # find all the flows on this org, create choices for those
         flows = self.org.get_flows()
 
-        # if cache empty we fetch from RapidPro API, for Better UX
-        if not flows:
-            from ureport.utils import fetch_flows
-            fetch_flows(self.org)
-            flows = self.org.get_flows()
-
-        self.fields['flow_uuid'].choices = [(f['uuid'], f['name'] + " (" + f.get('created_on', "--") + ")") for f in sorted(flows.values(), key=lambda k:k['name'].lower().strip())]
+        self.fields['flow_uuid'].choices = [(f['uuid'], f['name'] + " (" + f.get('date_hint', "--") + ")") for f in sorted(flows.values(), key=lambda k:k['name'].lower().strip())]
 
         # only display category images for this org which are active
         self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')
 
     is_active = forms.BooleanField(required=False)
     flow_uuid = forms.ChoiceField(choices=[])
+    poll_date = forms.DateTimeField(required=False)
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = forms.ModelChoiceField(Category.objects.filter(id__lte=-1))
     category_image = forms.ModelChoiceField(CategoryImage.objects.filter(id__lte=0), required=False)
 
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        poll_date = cleaned_data.get('poll_date')
+        flow_uuid = cleaned_data.get('flow_uuid')
+
+        flows = self.org.get_flows()
+        flow = flows.get(flow_uuid)
+
+        if not poll_date and flow:
+            date = flow.get('created_on', None)
+            if date:
+                poll_date = json_date_to_datetime(date)
+
+        if not poll_date:
+            poll_date = timezone.now()
+
+        cleaned_data['poll_date'] = poll_date
+        return cleaned_data
+
     class Meta:
         model = Poll
-        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'category', 'category_image')
+        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'poll_date', 'category', 'category_image')
 
 
 class QuestionForm(ModelForm):
@@ -75,6 +93,7 @@ class QuestionForm(ModelForm):
         model = Poll
         fields = ('id',)
 
+
 class PollCRUDL(SmartCRUDL):
     model = Poll
     actions = ('create', 'list', 'update', 'questions', 'images', 'responses')
@@ -82,6 +101,7 @@ class PollCRUDL(SmartCRUDL):
     class Create(OrgPermsMixin, SmartCreateView):
         form_class = PollForm
         success_url = 'id@polls.poll_questions'
+        fields = ('is_featured', 'flow_uuid', 'title', 'category', 'category_image')
         success_message = _("Your poll has been created, now pick which questions to include.")
 
         def get_form_kwargs(self):
@@ -92,6 +112,15 @@ class PollCRUDL(SmartCRUDL):
         def pre_save(self, obj):
             obj = super(PollCRUDL.Create, self).pre_save(obj)
             obj.org = self.request.org
+            flow = obj.get_flow()
+
+            date = flow.get('created_on', None)
+            if date:
+                flow_date = json_date_to_datetime(date)
+            else:
+                flow_date = timezone.now()
+
+            obj.poll_date = flow_date
             return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
@@ -324,7 +353,7 @@ class PollCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
-        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'category', 'category_image')
+        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'poll_date', 'category', 'category_image')
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Update, self).get_form_kwargs()

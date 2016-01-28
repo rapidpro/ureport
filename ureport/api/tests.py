@@ -69,9 +69,11 @@ class UreportAPITests(APITestCase):
         return Org.objects.get(domain=subdomain)
 
     def create_poll(self, title, is_featured=False):
+        now = timezone.now()
         return Poll.objects.create(flow_uuid=str(randint(1000, 9999)),
                                    title=title,
                                    category=self.health_uganda,
+                                   poll_date=now,
                                    org=self.uganda,
                                    is_featured=is_featured,
                                    created_by=self.superuser,

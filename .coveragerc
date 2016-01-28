@@ -1,0 +1,19 @@
+# .coveragerc to control coverage.py
+[run]
+source = ./ureport
+
+[report]
+ignore_errors = True
+precision = 0
+show_missing = True
+
+
+omit =
+    */migrations/*
+    */tests*,
+    *__init__*,
+    *settings*,
+    *management/commands*
+
+[html]
+directory = coverage_html_report
