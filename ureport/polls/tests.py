@@ -903,6 +903,33 @@ class PollTest(DashTest):
 
             self.assertFalse(question_results(poll1_question))
 
+    def test_fetch_poll_results(self):
+        with patch('ureport.polls.models.PollQuestion.fetch_results') as mock:
+            mock.return_value = None
+
+            poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
+
+            poll1.fetch_poll_results()
+            self.assertFalse(mock.called)
+
+            poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                         title='question poll 1',
+                                                         ruleset_uuid="uuid-101",
+                                                         created_by=self.admin,
+                                                         modified_by=self.admin)
+
+            poll1.fetch_poll_results()
+            self.assertEqual(mock.call_count, 2)
+            mock.assert_any_call()
+            mock.assert_any_call(dict(location='State'))
+            mock.reset_mock()
+
+            poll1.flow_archived = True
+            poll1.save()
+
+            poll1.fetch_poll_results()
+            self.assertFalse(mock.called)
+
 
 class PollQuestionTest(DashTest):
     def setUp(self):
