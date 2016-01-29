@@ -18,7 +18,8 @@ from dash.categories.models import Category, CategoryImage
 from temba_client.v1.types import Result, Flow, Group
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows
+from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows, \
+    recheck_poll_flow_archived
 from ureport.polls.tasks import fetch_poll, fetch_old_sites_count
 from ureport.tests import DashTest, MockAPI, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
@@ -1053,3 +1054,9 @@ class PollQuestionTest(DashTest):
 
                 fetch_old_sites_count()
                 mock_fetch_old_sites_count.assert_called_once_with()
+
+            with patch('ureport.polls.tasks.update_poll_flow_archived') as mock_update_poll_flow_archived:
+                mock_update_poll_flow_archived.return_value = 'RECHECKED'
+
+                recheck_poll_flow_archived(self.org.pk)
+                mock_update_poll_flow_archived.assert_called_once_with(self.org)

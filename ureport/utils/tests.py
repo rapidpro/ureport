@@ -16,7 +16,8 @@ from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FET
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
-    get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows
+    get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
+    update_poll_flow_archived
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
@@ -421,28 +422,51 @@ class UtilsTest(DashTest):
                 polls = [self.poll]
                 _fetch_org_polls_results(self.org, polls)
                 mock_poll_model_fetch_results.assert_called_with()
-                mock_poll_model_fetch_results.mock_reset()
+                mock_poll_model_fetch_results.reset_mock()
 
-            with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
-                mock_main_poll.return_value = self.poll
+                with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
+                    mock_main_poll.return_value = self.poll
 
-                fetch_main_poll_results(self.org)
-                mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                    fetch_main_poll_results(self.org)
+                    mock_poll_model_fetch_results.assert_called_once_with()
+                    mock_poll_model_fetch_results.reset_mock()
 
-            with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
-                mock_brick_polls.return_value = [self.poll]
+                with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
+                    mock_brick_polls.return_value = [self.poll]
 
-                fetch_brick_polls_results(self.org)
-                mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                    fetch_brick_polls_results(self.org)
+                    mock_poll_model_fetch_results.assert_called_once_with()
+                    mock_poll_model_fetch_results.reset_mock()
 
-            with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
-                mock_other_polls.return_value = [self.poll]
+                with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
+                    mock_other_polls.return_value = [self.poll]
 
-                fetch_other_polls_results(self.org)
-                mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                    fetch_other_polls_results(self.org)
+                    mock_poll_model_fetch_results.assert_called_once_with()
+                    mock_poll_model_fetch_results.reset_mock()
+
+    def test_update_poll_flow_archived(self):
+        poll = Poll.objects.filter(pk=self.poll.pk).first()
+        self.assertFalse(poll.flow_archived)
+
+        with patch("ureport.utils.get_flows") as mock_get_flows:
+            mock_get_flows.return_value = dict()
+
+            update_poll_flow_archived(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertFalse(poll.flow_archived)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True}}
+
+            update_poll_flow_archived(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertTrue(poll.flow_archived)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1'}}
+
+            update_poll_flow_archived(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertFalse(poll.flow_archived)
 
     def test_fetch_old_sites_count(self):
         self.clear_cache()
