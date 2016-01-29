@@ -65,7 +65,14 @@ class Poll(SmartModel):
     display and sharing in the UReport platform.
     """
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
-    poll_date = models.DateTimeField()
+
+    poll_date = models.DateTimeField(help_text=_("The date to display for this poll. "
+                                                 "Make it empty to use flow created_on."))
+
+    flow_archived = models.BooleanField(default=False,
+                                        help_text=_("Whether the flow for this poll is archived on RapidPro"))
+
+
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
     category = models.ForeignKey(Category, related_name="polls",
@@ -78,6 +85,9 @@ class Poll(SmartModel):
                             help_text=_("The organization this poll is part of"))
 
     def fetch_poll_results(self):
+        if self.flow_archived:
+            return
+
         for question in self.questions.all():
             question.fetch_results()
             question.fetch_results(dict(location='State'))

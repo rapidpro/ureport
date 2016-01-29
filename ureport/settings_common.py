@@ -463,6 +463,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
+    "recheck_poll_flow_archived": {
+        "task": "polls.recheck_poll_flow_archived",
+        "schedule": timedelta(minutes=15),
+        "relative": True,
+    },
     "refresh_main_poll": {
         "task": "polls.refresh_main_poll",
         "schedule": timedelta(minutes=20),

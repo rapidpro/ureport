@@ -18,7 +18,8 @@ from dash.categories.models import Category, CategoryImage
 from temba_client.v1.types import Result, Flow, Group
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows
+from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows, \
+    recheck_poll_flow_archived
 from ureport.polls.tasks import fetch_poll, fetch_old_sites_count
 from ureport.tests import DashTest, MockAPI, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
@@ -902,6 +903,33 @@ class PollTest(DashTest):
 
             self.assertFalse(question_results(poll1_question))
 
+    def test_fetch_poll_results(self):
+        with patch('ureport.polls.models.PollQuestion.fetch_results') as mock:
+            mock.return_value = None
+
+            poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
+
+            poll1.fetch_poll_results()
+            self.assertFalse(mock.called)
+
+            poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                         title='question poll 1',
+                                                         ruleset_uuid="uuid-101",
+                                                         created_by=self.admin,
+                                                         modified_by=self.admin)
+
+            poll1.fetch_poll_results()
+            self.assertEqual(mock.call_count, 2)
+            mock.assert_any_call()
+            mock.assert_any_call(dict(location='State'))
+            mock.reset_mock()
+
+            poll1.flow_archived = True
+            poll1.save()
+
+            poll1.fetch_poll_results()
+            self.assertFalse(mock.called)
+
 
 class PollQuestionTest(DashTest):
     def setUp(self):
@@ -1053,3 +1081,9 @@ class PollQuestionTest(DashTest):
 
                 fetch_old_sites_count()
                 mock_fetch_old_sites_count.assert_called_once_with()
+
+            with patch('ureport.polls.tasks.update_poll_flow_archived') as mock_update_poll_flow_archived:
+                mock_update_poll_flow_archived.return_value = 'RECHECKED'
+
+                recheck_poll_flow_archived(self.org.pk)
+                mock_update_poll_flow_archived.assert_called_once_with(self.org)
