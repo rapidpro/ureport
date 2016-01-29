@@ -97,6 +97,22 @@ class ContactTest(DashTest):
         self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
         self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
 
+    def test_get_or_create(self):
+
+        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid='contact-uuid').first())
+
+        created_contact = Contact.get_or_create(self.nigeria, 'contact-uuid')
+
+        self.assertTrue(created_contact)
+        self.assertIsNone(created_contact.born)
+
+        created_contact.born = '2000'
+        created_contact.save()
+
+        existing_contact = Contact.get_or_create(self.nigeria, 'contact-uuid')
+        self.assertEqual(created_contact.pk, existing_contact.pk)
+        self.assertEqual(existing_contact.born, 2000)
+
     def test_kwargs_from_temba(self):
 
         temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
