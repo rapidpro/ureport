@@ -123,6 +123,11 @@ class PollCRUDL(SmartCRUDL):
             obj.poll_date = flow_date
             return obj
 
+        def post_save(self, obj):
+            obj = super(PollCRUDL.Create, self).post_save(obj)
+            obj.update_or_create_questions(user=self.request.user)
+            return obj
+
     class Images(OrgObjPermsMixin, SmartUpdateView):
         success_url = 'id@polls.poll_responses'
         title = _("Poll Images")
@@ -227,20 +232,13 @@ class PollCRUDL(SmartCRUDL):
         form_class = QuestionForm
         success_message = _("Now set what images you want displayed on your poll page. (if any)")
 
-        def get_rulesets(self):
-            flow = self.object.get_flow()
-            rulesets = []
-            if flow:
-                rulesets = flow['rulesets']
-            return rulesets
-
         def derive_fields(self):
-            rulesets = self.get_rulesets()
+            questions = self.object.questions.all()
 
             fields = []
-            for ruleset in rulesets:
-                fields.append('ruleset_%s_include' % ruleset['uuid'])
-                fields.append('ruleset_%s_title' % ruleset['uuid'])
+            for question in questions:
+                fields.append('ruleset_%s_include' % question.ruleset_uuid)
+                fields.append('ruleset_%s_title' % question.ruleset_uuid)
 
             return fields
 
@@ -249,18 +247,18 @@ class PollCRUDL(SmartCRUDL):
             form.fields.clear()
 
             # fetch this single flow so we load what rules are available
-            rulesets = self.get_rulesets()
+            questions = self.object.questions.all()
 
             initial = self.derive_initial()
 
-            for ruleset in rulesets:
-                include_field_name = 'ruleset_%s_include' % ruleset['uuid']
+            for question in questions:
+                include_field_name = 'ruleset_%s_include' % question.ruleset_uuid
                 include_field_initial = initial.get(include_field_name, False)
                 include_field = forms.BooleanField(label=_("Include"), required=False, initial=include_field_initial,
                                                    help_text=_("Whether to include this question in your public results"))
 
-                title_field_name = 'ruleset_%s_title' % ruleset['uuid']
-                title_field_initial = initial.get(title_field_name, ruleset['label'])
+                title_field_name = 'ruleset_%s_title' % question.ruleset_uuid
+                title_field_initial = initial.get(title_field_name, '')
                 title_field = forms.CharField(label=_("Title"), widget=forms.Textarea, required=False, initial=title_field_initial,
                                               help_text=_("The question posed to your audience, will be displayed publicly"))
 
@@ -271,35 +269,18 @@ class PollCRUDL(SmartCRUDL):
             return self.form
 
         def save(self, obj):
-            rulesets = self.get_rulesets()
             data = self.form.cleaned_data
             poll = self.object
+            questions = poll.questions.all()
 
-            # for each ruleset
-            for ruleset in rulesets:
-                r_uuid = ruleset['uuid']
+            # for each question
+            for question in questions:
+                r_uuid = question.ruleset_uuid
 
                 included = data.get('ruleset_%s_include' % r_uuid, False)
                 title = data['ruleset_%s_title' % r_uuid]
                 existing = PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).first()
-
-                if included:
-                    # already one of our questions, just update our title
-                    if existing:
-                        existing.title = title
-                        existing.save()
-
-                    # doesn't exist, let's add it
-                    else:
-                        poll.questions.create(ruleset_uuid=r_uuid, title=title,
-                                              created_by=self.request.user, modified_by=self.request.user)
-
-                # not included, remove it from our poll
-                else:
-                    PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).delete()
-
-            # delete poll questions for old rulesets
-            PollQuestion.objects.filter(poll=poll).exclude(ruleset_uuid__in=[ruleset['uuid'] for ruleset in rulesets]).delete()
+                PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).update(is_active=included, title=title)
 
             return self.object
 
@@ -317,7 +298,7 @@ class PollCRUDL(SmartCRUDL):
             initial = dict()
 
             for question in self.object.questions.all():
-                initial['ruleset_%s_include' % question.ruleset_uuid] = True
+                initial['ruleset_%s_include' % question.ruleset_uuid] = question.is_active
                 initial['ruleset_%s_title' % question.ruleset_uuid] = question.title
 
             return initial
@@ -359,3 +340,8 @@ class PollCRUDL(SmartCRUDL):
             kwargs = super(PollCRUDL.Update, self).get_form_kwargs()
             kwargs['org'] = self.request.org
             return kwargs
+
+        def post_save(self, obj):
+            obj = super(PollCRUDL.Update, self).post_save(obj)
+            obj.update_or_create_questions(user=self.request.user)
+            return obj

@@ -97,6 +97,22 @@ class ContactTest(DashTest):
         self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
         self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
 
+    def test_get_or_create(self):
+
+        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid='contact-uuid').first())
+
+        created_contact = Contact.get_or_create(self.nigeria, 'contact-uuid')
+
+        self.assertTrue(created_contact)
+        self.assertIsNone(created_contact.born)
+
+        created_contact.born = '2000'
+        created_contact.save()
+
+        existing_contact = Contact.get_or_create(self.nigeria, 'contact-uuid')
+        self.assertEqual(created_contact.pk, existing_contact.pk)
+        self.assertEqual(existing_contact.born, 2000)
+
     def test_kwargs_from_temba(self):
 
         temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
@@ -255,7 +271,10 @@ class ContactTest(DashTest):
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria, ['total-reporters', 'gender:m']),
+                         {'total-reporters': 2, 'gender:m': 2})
+
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_tasks(self):
 
         with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
