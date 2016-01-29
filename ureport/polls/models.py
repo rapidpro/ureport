@@ -67,9 +67,13 @@ class Poll(SmartModel):
     display and sharing in the UReport platform.
     """
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
+
     flow_archived = models.BooleanField(default=False,
                                         help_text=_("Whether the flow for this poll is archived on RapidPro"))
     base_language = models.CharField(max_length=4, default='base', help_text=_("The base language of the flow to use"))
+
+    poll_date = models.DateTimeField()
+
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
     category = models.ForeignKey(Category, related_name="polls",
@@ -384,7 +388,7 @@ class PollQuestion(SmartModel):
             # delete the open ended cache
             cache.delete('open_ended:%d' % self.id)
 
-        except:
+        except:  # pragma: no cover
             client.captureException()
             import traceback
             traceback.print_exc()

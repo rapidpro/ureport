@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# LIliya <lilya.lyu@gmail.com>, 2015
+# LIliya <lilya.lyu@gmail.com>, 2015-2016
+# Nyaruka <info@textit.in>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-09 09:58+0000\n"
-"PO-Revision-Date: 2015-12-16 00:08+0000\n"
+"PO-Revision-Date: 2016-01-13 13:01+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -1277,11 +1278,7 @@ msgid ""
 "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "            "
-msgstr ""
-"\n"
-"              * U-Report - безкоштовний проектЮНІСЕФ, що впроваджується за підтримки партнерів %(country)s. У рамках проекту не може бути стягнено ніяких коштів. ЮНІСЕФ не запитує про фінансову інформацію. БУДЬ ЛАСКА, ІГНОРУЙТЕ будь які вимоги сплатити кошти як за коротким номером, так і на сторінках у Twitter і Facebook. Усі активності UReport - безкоштовні для учасників. (У тому числі, всі повідомлення на %(shortcode)s)."
-"\n"
-"            "
+msgstr "\n* U-Report - безкоштовний проектЮНІСЕФ, що впроваджується за підтримки партнерів %(country)s. У рамках проекту не може бути стягнено ніяких коштів. ЮНІСЕФ не запитує про фінансову інформацію. БУДЬ ЛАСКА, ІГНОРУЙТЕ будь які вимоги сплатити кошти як за коротким номером, так і на сторінках у Twitter і Facebook. Усі активності UReport - безкоштовні для учасників. (У тому числі, всі повідомлення на %(shortcode)s).\n\n                "
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
@@ -1293,7 +1290,7 @@ msgstr "Новий твіт"
 
 #: templates/public/polls.haml:16
 msgid "CURRENT POLL IN"
-msgstr "Актуальне опитування "
+msgstr "Актуальне опитування в"
 
 #: templates/public/polls.haml:29
 #, python-format

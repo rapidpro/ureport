@@ -14,7 +14,7 @@
               .hero-title.hero-top-title.primary-bg-color
                 - if tab == 'list'
                   - trans "CURRENT POLL IN"
-                {{ latest_poll.category|upper }}
+                {{ latest_poll.category.name|upper }}
 
           .row
             .col-sm-6

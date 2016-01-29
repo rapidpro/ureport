@@ -62,7 +62,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-API_ENDPOINT = 'https://api.rapidpro.io'
+SITE_API_HOST = 'https://api.rapidpro.io'
 
 # Set your production database settings here
 DATABASES = {

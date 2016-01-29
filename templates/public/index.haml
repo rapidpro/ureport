@@ -151,7 +151,7 @@
               .hr-header.primary-color
                 - trans "4 MOST ACTIVE REGIONS"
               .most-active-regions
-                {% for region in most_active_regions|slice:"4" %}{{ region }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                {% for region in most_active_regions|slice:"4" %}{{ region.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
 
           -if is_iorg
             .col-md-4
@@ -353,7 +353,7 @@
           .brick.hide-on-small.poll-brick.size21{data-priority:"{% cycle '4' '3' '2' %}"}
             .brick-inner
               .brick-title.primary-bg-color
-                {{ poll.category|upper }}
+                {{ poll.category.name|upper }}
 
               .brick-block-half-width
                 .brick-block-vcenter-container

@@ -57,7 +57,7 @@ class Boundary(models.Model):
     def build_global_boundaries(cls):
 
         from django.conf import settings
-        from temba_client.types import Geometry as TembaGeometry, Boundary as TembaBoundary
+        from temba_client.v1.types import Geometry as TembaGeometry, Boundary as TembaBoundary
         handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
         contents = handle.read()
         handle.close()
@@ -113,3 +113,14 @@ class Boundary(models.Model):
     def as_geojson(self):
         return dict(type='Feature', geometry=json.loads(self.geometry),
                     properties=dict(id=self.osm_id, level=self.level, name=self.name))
+
+    @classmethod
+    def get_org_top_level_boundaries_name(cls, org):
+        if org.get_config('is_global'):
+            top_boundaries = cls.objects.filter(org=org, level=0)
+        else:
+            top_boundaries = cls.objects.filter(org=org, level=1)
+
+        top_boundaries_values = top_boundaries.values('name', 'osm_id')
+
+        return {k['osm_id']: k['name'] for k in top_boundaries_values}
