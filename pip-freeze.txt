@@ -44,13 +44,13 @@ Pygments==2.0.2
 python-dateutil==2.4.2
 pytz==2015.7
 PyYAML==3.11
--e git+https://github.com/rapidpro/rapidpro-python.git@efd1293058d5a494c423927346c4253715e9351d#egg=rapidpro_python-master
+-e git+https://github.com/rapidpro/rapidpro-python.git@df7a389c33887b97faf7509bd423a01745f81435#egg=rapidpro_python-master
 raven==5.3.1
 redis==2.10.3
 regex==2015.7.19
-requests==2.7.0
-six==1.9.0
--e git+https://github.com/nyaruka/smartmin.git@e14f017c1e208a13aa7a844a30379d97e8ce57ea#egg=smartmin-dev
+requests==2.9.1
+six==1.10.0
+-e git+https://github.com/nyaruka/smartmin.git@c3ecb49323c5ba3a3ca603af6f7ec40820bf1c23#egg=smartmin-master
 smmap==0.9.0
 sorl-thumbnail==12.3
 sqlparse==0.1.15
