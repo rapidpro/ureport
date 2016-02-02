@@ -72,6 +72,7 @@ class Poll(SmartModel):
     flow_archived = models.BooleanField(default=False,
                                         help_text=_("Whether the flow for this poll is archived on RapidPro"))
 
+    base_language = models.CharField(max_length=4, default='base', help_text=_("The base language of the flow to use"))
 
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
