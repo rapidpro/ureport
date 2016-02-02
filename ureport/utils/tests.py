@@ -69,9 +69,21 @@ class UtilsTest(DashTest):
         Image.objects.create(org=self.org, image_type=FLAG, name='burundi_flag',
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
-        # burundi should be included and be the first; by alphetical order
+        # burundi should be included and be the first; by alphabetical order by subdomain
         self.assertEqual(len(get_linked_orgs()), 3)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+
+        self.org.subdomain = 'rwanda'
+        self.org.save()
+
+        # rwanda should be included and the second in the list alphabetically by subdomain
+        self.assertEqual(len(get_linked_orgs()), 3)
+        self.assertEqual(get_linked_orgs()[1]['name'].lower(), 'rwanda')
+
+        # revert subdomain to burundi
+        self.org.subdomain = 'burundi'
+        self.org.save()
+
         with self.settings(HOSTNAME='localhost:8000'):
             self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
             self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://burundi.localhost:8000')
