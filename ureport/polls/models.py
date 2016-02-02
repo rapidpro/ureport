@@ -318,6 +318,8 @@ class PollQuestion(SmartModel):
                              help_text=_("The title of this question"))
     ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
 
+    ruleset_type = models.CharField(max_length=32, default='wait_message')
+
     def fetch_results(self, segment=None):
         from raven.contrib.django.raven_compat.models import client
 
@@ -399,3 +401,6 @@ class PollQuestion(SmartModel):
 
     def __unicode__(self):
         return self.title
+
+    class Meta:
+        unique_together = ('poll', 'ruleset_uuid')
