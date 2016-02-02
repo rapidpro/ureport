@@ -54,15 +54,15 @@ class UtilsTest(DashTest):
 
     def test_get_linked_orgs(self):
 
-        # we have 4 old org in the settings
-        self.assertEqual(len(get_linked_orgs()), 3)
+        # we have 2 old org in the settings
+        self.assertEqual(len(get_linked_orgs()), 2)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'burundi')
 
         self.org.set_config('is_on_landing_page', True)
 
         # missing flag
-        self.assertEqual(len(get_linked_orgs()), 3)
+        self.assertEqual(len(get_linked_orgs()), 2)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'burundi')
 
@@ -70,7 +70,7 @@ class UtilsTest(DashTest):
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
         # burundi should be included and be the first; by alphetical order
-        self.assertEqual(len(get_linked_orgs()), 4)
+        self.assertEqual(len(get_linked_orgs()), 3)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
         with self.settings(HOSTNAME='localhost:8000'):
             self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
@@ -459,19 +459,12 @@ class UtilsTest(DashTest):
                         cache_delete_mock.return_value = "Deleted"
 
                         old_site_values = fetch_old_sites_count()
-                        self.assertEqual(old_site_values, [{'time': 500, 'results': dict(size=300)},
-                                                           {'time': 500, 'results': dict(size=50)}])
-                        self.assertEqual(mock_get.call_count, 2)
-                        mock_get.assert_any_call('http://ureport.ug/count.txt')
-                        mock_get.assert_any_call('http://www.zambiaureport.org/count.txt/')
+                        self.assertEqual(old_site_values, [{'time': 500, 'results': dict(size=300)}])
 
-                        self.assertEqual(cache_set_mock.call_count, 2)
-                        cache_set_mock.assert_any_call('org:uganda:reporters:old-site',
+                        mock_get.assert_called_once_with('http://www.zambiaureport.org/count.txt/')
+
+                        cache_set_mock.assert_called_once_with('org:zambia:reporters:old-site',
                                                        {'time': 500, 'results': dict(size=300)},
-                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-
-                        cache_set_mock.assert_any_call('org:zambia:reporters:old-site',
-                                                       {'time': 500, 'results': dict(size=50)},
                                                        UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
