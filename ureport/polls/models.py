@@ -160,6 +160,38 @@ class Poll(SmartModel):
         flows_dict = self.org.get_flows()
         return flows_dict.get(self.flow_uuid, None)
 
+    def update_or_create_questions(self, user=None):
+        if not user:
+            user = User.objects.get(pk=-1)
+
+        org = self.org
+        temba_client = org.get_temba_client()
+        flow_definition = temba_client.get_flow_definition(self.flow_uuid)
+
+        base_language = flow_definition.base_language
+
+        self.base_language = base_language
+        self.save()
+
+        for ruleset in flow_definition.rule_sets:
+            label = ruleset['label']
+            ruleset_uuid = ruleset['uuid']
+            ruleset_type = ruleset['ruleset_type']
+
+            question = PollQuestion.update_or_create(user, self, label, ruleset_uuid, ruleset_type)
+
+            rapidpro_rules = []
+            for rule in ruleset['rules']:
+                category = rule['category'][base_language]
+                rule_uuid = rule['uuid']
+                rapidpro_rules.append(rule_uuid)
+
+                PollResponseCategory.update_or_create(question, rule_uuid, category)
+
+            # deactivate if corresponding rules are removed
+            PollResponseCategory.objects.filter(
+                question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
+
     def best_and_worst(self):
         b_and_w = []
 
@@ -321,6 +353,18 @@ class PollQuestion(SmartModel):
 
     ruleset_type = models.CharField(max_length=32, default='wait_message')
 
+    @classmethod
+    def update_or_create(cls, user, poll, title, uuid, ruleset_type):
+        existing = cls.objects.filter(ruleset_uuid=uuid, poll=poll)
+
+        if existing:
+            existing.update(ruleset_type=ruleset_type)
+            question = existing.first()
+        else:
+            question = PollQuestion.objects.create(poll=poll, ruleset_uuid=uuid, title=title, ruleset_type=ruleset_type,
+                                                   is_active=False, created_by=user, modified_by=user)
+        return question
+
     def fetch_results(self, segment=None):
         from raven.contrib.django.raven_compat.models import client
 
@@ -415,6 +459,14 @@ class PollResponseCategory(models.Model):
     category = models.TextField(null=True)
 
     is_active = models.BooleanField(default=True)
+
+    @classmethod
+    def update_or_create(cls, question, rule_uuid, category):
+        existing = cls.objects.filter(question=question, rule_uuid=rule_uuid)
+        if existing:
+            existing.update(category=category, is_active=True)
+        else:
+            cls.objects.create(question=question, rule_uuid=rule_uuid, category=category, is_active=True)
 
     class Meta:
         unique_together = ('question', 'rule_uuid')
