@@ -79,7 +79,7 @@ class Migration(migrations.Migration):
 
                 deactivated_ids.append(poll.pk)
                 deactivated += 1
-                print "Hidden poll - %s - %d - %s" % (org.name, poll.pk, poll.title)
+                print "Hidden poll - %d on org %d" % (poll.pk, org.pk)
 
             except Exception as e:
                 raise e
