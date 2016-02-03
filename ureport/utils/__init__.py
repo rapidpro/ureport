@@ -56,7 +56,7 @@ def get_linked_orgs(authenticated=False):
         if org.get_config('is_on_landing_page'):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
             if flag:
-                linked_sites.append(dict(name=org.name, host=host, flag=flag.image.url, is_static=False))
+                linked_sites.append(dict(name=org.subdomain, host=host, flag=flag.image.url, is_static=False))
 
     linked_sites_sorted = sorted(linked_sites, key=lambda k: k['name'].lower())
 
