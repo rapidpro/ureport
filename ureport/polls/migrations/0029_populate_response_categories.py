@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
 
                     print "Done ruleset - %s" % ruleset_uuid
 
-                print "Done poll - %s - %d - %s" % (org.name, poll.pk, poll.title)
+                print "Done poll - %d on org %d" % (poll.pk, org.pk)
                 successes += 1
 
             except TembaBadRequestError:
