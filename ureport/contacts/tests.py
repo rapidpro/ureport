@@ -180,9 +180,10 @@ class ContactTest(DashTest):
                                             language='eng',
                                             modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
 
-                    seen_uuids = Contact.fetch_contacts(self.nigeria)
+                    seen_uuids, removed_uuids = Contact.fetch_contacts(self.nigeria)
 
                     self.assertEqual(seen_uuids, [])
+                    self.assertEqual(removed_uuids, ['000-001'])
 
                 group = TembaGroup.create(uuid="000-002", name='reporters', size=120)
                 mock_groups.return_value = [group]
@@ -194,8 +195,9 @@ class ContactTest(DashTest):
                                             language='eng',
                                             modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
 
-                    seen_uuids = Contact.fetch_contacts(self.nigeria)
+                    seen_uuids, removed_uuids = Contact.fetch_contacts(self.nigeria)
                     self.assertTrue('000-001' in seen_uuids)
+                    self.assertEqual(removed_uuids, [])
 
                     contact = Contact.objects.get()
                     self.assertEqual(contact.uuid, '000-001')
@@ -205,8 +207,9 @@ class ContactTest(DashTest):
                     self.assertEqual(contact.gender, 'F')
                     self.assertEqual(contact.born, 1990)
 
-                    Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
+                    seen_uuids, removed_uuids = Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
                     self.assertTrue('000-001' in seen_uuids)
+                    self.assertEqual(removed_uuids, [])
 
                 # delete the contacts
                 Contact.objects.all().delete()
@@ -220,10 +223,15 @@ class ContactTest(DashTest):
                         TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
                                             language='eng',
+                                            modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc)),
+                        TembaContact.create(uuid='000-002', name="Maria",urns=['tel:5678'], groups=['000-001'],
+                                            fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1992"),
+                                            language='eng',
                                             modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
 
-                    seen_uuids = Contact.fetch_contacts(self.nigeria)
+                    seen_uuids, removed_uuids = Contact.fetch_contacts(self.nigeria)
                     self.assertTrue('000-001' in seen_uuids)
+                    self.assertTrue('000-002' in removed_uuids)
 
                     contact = Contact.objects.get()
                     self.assertEqual(contact.uuid, '000-001')
@@ -233,8 +241,10 @@ class ContactTest(DashTest):
                     self.assertEqual(contact.gender, 'F')
                     self.assertEqual(contact.born, 1990)
 
-                    Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
+                    seen_uuids, removed_uuids = Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
                     self.assertTrue('000-001' in seen_uuids)
+                    self.assertTrue('000-002' in removed_uuids)
+
 
 
     def test_reporters_counter(self):
@@ -284,29 +294,35 @@ class ContactTest(DashTest):
             with patch('ureport.contacts.tasks.Contact.fetch_contacts') as mock_fetch_contacts:
                 with patch('ureport.contacts.tasks.Boundary.fetch_boundaries') as mock_fetch_boundaries:
                     with patch('ureport.contacts.tasks.ContactField.fetch_contact_fields') as mock_fetch_contact_fields:
+                        with patch('ureport.contacts.tasks.Contact.deactivate_contacts') as mock_deactivate_contacts:
 
-                        mock_fetch_contacts.return_value = 'FETCHED'
-                        mock_fetch_boundaries.return_value = 'FETCHED'
-                        mock_fetch_contact_fields.return_value = 'FETCHED'
+                            mock_fetch_contacts.return_value = (['000-001'], ['000-002'])
+                            mock_fetch_boundaries.return_value = 'FETCHED'
+                            mock_fetch_contact_fields.return_value = 'FETCHED'
 
-                        fetch_contacts_task(self.nigeria.pk, True)
-                        mock_fetch_contacts.assert_called_once_with(self.nigeria, after=None)
-                        mock_fetch_boundaries.assert_called_with(self.nigeria)
-                        mock_fetch_contact_fields.assert_called_with(self.nigeria)
-                        self.assertEqual(mock_fetch_boundaries.call_count, 2)
-                        self.assertEqual(mock_fetch_contact_fields.call_count, 2)
+                            fetch_contacts_task(self.nigeria.pk, True)
+                            mock_fetch_contacts.assert_called_once_with(self.nigeria, after=None)
+                            mock_fetch_boundaries.assert_called_with(self.nigeria)
+                            mock_fetch_contact_fields.assert_called_with(self.nigeria)
+                            self.assertEqual(mock_fetch_boundaries.call_count, 2)
+                            self.assertEqual(mock_fetch_contact_fields.call_count, 2)
+                            mock_deactivate_contacts.assert_called_once_with(self.nigeria, ['000-001'],
+                                                                             ['000-002'], None)
 
-                        mock_fetch_contacts.reset_mock()
-                        mock_fetch_boundaries.reset_mock()
-                        mock_fetch_contact_fields.reset_mock()
+                            mock_fetch_contacts.reset_mock()
+                            mock_fetch_boundaries.reset_mock()
+                            mock_fetch_contact_fields.reset_mock()
+                            mock_deactivate_contacts.reset_mock()
 
-                        with patch('django.core.cache.cache.get') as cache_get_mock:
-                            date_str = '2014-01-02T01:04:05.000Z'
-                            d1 = json_date_to_datetime(date_str)
+                            with patch('django.core.cache.cache.get') as cache_get_mock:
+                                date_str = '2014-01-02T01:04:05.000Z'
+                                d1 = json_date_to_datetime(date_str)
 
-                            cache_get_mock.return_value = date_str
+                                cache_get_mock.return_value = date_str
 
-                            fetch_contacts_task(self.nigeria.pk)
-                            mock_fetch_contacts.assert_called_once_with(self.nigeria, after=d1)
-                            self.assertFalse(mock_fetch_boundaries.called)
-                            self.assertFalse(mock_fetch_contact_fields.called)
+                                fetch_contacts_task(self.nigeria.pk)
+                                mock_fetch_contacts.assert_called_once_with(self.nigeria, after=d1)
+                                self.assertFalse(mock_fetch_boundaries.called)
+                                self.assertFalse(mock_fetch_contact_fields.called)
+                                mock_deactivate_contacts.assert_called_once_with(self.nigeria, ['000-001'],
+                                                            ['000-002'], d1)

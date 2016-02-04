@@ -87,6 +87,8 @@ class Contact(models.Model):
     FEMALE = 'F'
     GENDER_CHOICES = ((MALE, _("Male")), (FEMALE, _("Female")))
 
+    is_active = models.BooleanField(default=True)
+
     uuid = models.CharField(max_length=36, unique=True)
 
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="contacts")
@@ -209,6 +211,13 @@ class Contact(models.Model):
             traceback.print_exc()
 
     @classmethod
+    def deactivate_contacts(cls, org,  active_uuids, inactive_uuids, after):
+        if after is None:
+            cls.objects.filter(org=org).exclude(uuid__in=active_uuids).update(is_active=False)
+        else:
+            cls.objects.filter(org=org, uuid__in=inactive_uuids).update(is_active=False)
+
+    @classmethod
     def fetch_contacts(cls, org, after=None):
 
         print "START== Fetching contacts for %s" % org.name
@@ -222,6 +231,7 @@ class Contact(models.Model):
             return
 
         seen_uuids = []
+        removed_uuids = []
 
         group_uuid = None
 
@@ -250,6 +260,8 @@ class Contact(models.Model):
                 if group_uuid in contact.groups:
                     cls.update_or_create_from_temba(org, contact)
                     seen_uuids.append(contact.uuid)
+                else:
+                    removed_uuids.append(contact.uuid)
 
             if not pager.has_more():
                 cache.set(cls.CONTACT_LAST_FETCHED_CACHE_KEY % org.pk,
@@ -257,7 +269,7 @@ class Contact(models.Model):
                           cls.CONTACT_LAST_FETCHED_CACHE_TIMEOUT)
                 break
 
-        return seen_uuids
+        return seen_uuids, removed_uuids
 
     class Meta:
         unique_together = ('org', 'uuid')
