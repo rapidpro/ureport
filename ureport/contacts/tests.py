@@ -174,7 +174,7 @@ class ContactTest(DashTest):
                 group = TembaGroup.create(uuid="uuid-8", name='reporters', size=120)
                 mock_groups.return_value = [group]
 
-                with patch('temba_client.clients.CursorQuery.all') as mock_contacts:
+                with patch('temba_client.clients.CursorQuery.iterfetches') as mock_contacts:
                     mock_contacts.return_value = [
                         TembaContact.create(uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),
@@ -189,7 +189,7 @@ class ContactTest(DashTest):
                 group = TembaGroup.create(uuid="000-002", name='reporters', size=120)
                 mock_groups.return_value = [group]
 
-                with patch('temba_client.clients.CursorQuery.all') as mock_contacts:
+                with patch('temba_client.clients.CursorQuery.iterfetches') as mock_contacts:
                     mock_contacts.return_value = [
                         TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
@@ -219,7 +219,7 @@ class ContactTest(DashTest):
                 group2 = TembaGroup.create(uuid="000-002", name='reporters', size=120)
                 mock_groups.return_value = [group1, group2]
 
-                with patch('temba_client.clients.CursorQuery.all') as mock_contacts:
+                with patch('temba_client.clients.CursorQuery.iterfetches') as mock_contacts:
                     mock_contacts.return_value = [
                         TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),

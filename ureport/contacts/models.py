@@ -244,14 +244,9 @@ class Contact(models.Model):
         now = timezone.now().replace(tzinfo=pytz.utc)
         before = now
 
-        if not after:
-            # consider the after year 2013
-            after = json_date_to_datetime("2013-01-01T00:00:00.000")
-
         api_contacts_query = temba_client_2.get_contacts(before=before, after=after)
-        api_contacts = api_contacts_query.all()
 
-        for contact in api_contacts:
+        for contact in api_contacts_query.iterfetches(retry_on_rate_exceed=True):
             if group_uuid in contact.groups:
                 cls.update_or_create_from_temba(org, contact)
                 seen_uuids.append(contact.uuid)
