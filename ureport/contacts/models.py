@@ -225,6 +225,7 @@ class Contact(models.Model):
         reporter_group = org.get_config('reporter_group')
 
         temba_client = org.get_temba_client()
+        temba_client_2 = org.get_temba_client(api_version=2)
         api_groups = temba_client.get_groups(name=reporter_group)
 
         if not api_groups:
@@ -247,27 +248,19 @@ class Contact(models.Model):
             # consider the after year 2013
             after = json_date_to_datetime("2013-01-01T00:00:00.000")
 
-        while before > after:
-            pager = temba_client.pager()
-            api_contacts = temba_client.get_contacts(before=before, after=after, pager=pager)
+        api_contacts_query = temba_client_2.get_contacts(before=before, after=after)
+        api_contacts = api_contacts_query.all()
 
-            last_contact_index = len(api_contacts) - 1
+        for contact in api_contacts:
+            if group_uuid in contact.groups:
+                cls.update_or_create_from_temba(org, contact)
+                seen_uuids.append(contact.uuid)
+            else:
+                removed_uuids.append(contact.uuid)
 
-            for i, contact in enumerate(api_contacts):
-                if i == last_contact_index:
-                    before = contact.modified_on
-
-                if group_uuid in contact.groups:
-                    cls.update_or_create_from_temba(org, contact)
-                    seen_uuids.append(contact.uuid)
-                else:
-                    removed_uuids.append(contact.uuid)
-
-            if not pager.has_more():
-                cache.set(cls.CONTACT_LAST_FETCHED_CACHE_KEY % org.pk,
-                          datetime_to_json_date(now.replace(tzinfo=pytz.utc)),
-                          cls.CONTACT_LAST_FETCHED_CACHE_TIMEOUT)
-                break
+        cache.set(cls.CONTACT_LAST_FETCHED_CACHE_KEY % org.pk,
+                  datetime_to_json_date(now.replace(tzinfo=pytz.utc)),
+                  cls.CONTACT_LAST_FETCHED_CACHE_TIMEOUT)
 
         return seen_uuids, removed_uuids
 

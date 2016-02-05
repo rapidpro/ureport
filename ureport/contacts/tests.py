@@ -9,8 +9,9 @@ import pytz
 from ureport.contacts.models import ContactField, Contact, ReportersCounter
 from ureport.contacts.tasks import fetch_contacts_task
 from ureport.locations.models import Boundary
-from ureport.tests import DashTest, TembaContactField, MockTembaClient, TembaContact
+from ureport.tests import DashTest, TembaContactField, MockTembaClient
 from temba_client.v1.types import Group as TembaGroup
+from temba_client.v2.types import Contact as TembaContact
 from ureport.utils import json_date_to_datetime
 
 
@@ -173,7 +174,7 @@ class ContactTest(DashTest):
                 group = TembaGroup.create(uuid="uuid-8", name='reporters', size=120)
                 mock_groups.return_value = [group]
 
-                with patch('dash.orgs.models.TembaClient1.get_contacts') as mock_contacts:
+                with patch('temba_client.clients.CursorQuery.all') as mock_contacts:
                     mock_contacts.return_value = [
                         TembaContact.create(uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),
@@ -188,7 +189,7 @@ class ContactTest(DashTest):
                 group = TembaGroup.create(uuid="000-002", name='reporters', size=120)
                 mock_groups.return_value = [group]
 
-                with patch('dash.orgs.models.TembaClient1.get_contacts') as mock_contacts:
+                with patch('temba_client.clients.CursorQuery.all') as mock_contacts:
                     mock_contacts.return_value = [
                         TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
@@ -218,7 +219,7 @@ class ContactTest(DashTest):
                 group2 = TembaGroup.create(uuid="000-002", name='reporters', size=120)
                 mock_groups.return_value = [group1, group2]
 
-                with patch('dash.orgs.models.TembaClient1.get_contacts') as mock_contacts:
+                with patch('temba_client.clients.CursorQuery.all') as mock_contacts:
                     mock_contacts.return_value = [
                         TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
