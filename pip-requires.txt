@@ -1,6 +1,6 @@
 -e git+https://github.com/nyaruka/smartmin.git#egg=smartmin
 Django==1.8.4
-rapidpro-python
+-e git+https://github.com/rapidpro/rapidpro-python.git@master#egg=rapidpro-python-2.0
 -e git+https://github.com/rapidpro/dash.git#egg=dash
 celery
 coverage

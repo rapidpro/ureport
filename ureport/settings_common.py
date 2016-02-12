@@ -39,7 +39,7 @@ EMAIL_HOST_PASSWORD = 'NOTREAL'
 EMAIL_USE_TLS = True
 
 EMPTY_SUBDOMAIN_HOST = 'http://localhost:8000'
-API_ENDPOINT = 'http://localhost:8001'
+SITE_API_HOST = 'http://localhost:8001'
 HOSTNAME = 'localhost:8000'
 SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 SITE_CHOOSER_URL_NAME = 'public.home'
@@ -463,6 +463,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
+    "recheck_poll_flow_archived": {
+        "task": "polls.recheck_poll_flow_archived",
+        "schedule": timedelta(minutes=15),
+        "relative": True,
+    },
     "refresh_main_poll": {
         "task": "polls.refresh_main_poll",
         "schedule": timedelta(minutes=20),
@@ -512,13 +517,6 @@ PREVIOUS_ORG_SITES = [
         host="http://www.ureport.cd/",
         flag="flag_cd.png",
         is_static=True,
-    ),
-    dict(
-        name="Uganda",
-        host="http://www.ureport.ug",
-        flag="flag_ug.png",
-        is_static=True,
-        count_link='http://ureport.ug/count.txt',
     ),
     dict(
         name="Zambia",

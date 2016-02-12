@@ -56,7 +56,7 @@ def get_linked_orgs(authenticated=False):
         if org.get_config('is_on_landing_page'):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
             if flag:
-                linked_sites.append(dict(name=org.name, host=host, flag=flag.image.url, is_static=False))
+                linked_sites.append(dict(name=org.subdomain, host=host, flag=flag.image.url, is_static=False))
 
     linked_sites_sorted = sorted(linked_sites, key=lambda k: k['name'].lower())
 
@@ -217,10 +217,11 @@ def fetch_flows(org):
     start = time.time()
     print "Fetching flows for %s" % org.name
 
+    this_time = datetime.now()
+    org_flows = dict(time=datetime_to_ms(this_time), results=dict())
+
     try:
         from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-
-        this_time = datetime.now()
 
         temba_client = org.get_temba_client()
         flows = temba_client.get_flows()
@@ -230,7 +231,8 @@ def fetch_flows(org):
             if flow.rulesets:
                 flow_json = dict()
                 flow_json['uuid'] = flow.uuid
-                flow_json['created_on'] = flow.created_on.strftime('%Y-%m-%d')
+                flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
+                flow_json['created_on'] = datetime_to_json_date(flow.created_on)
                 flow_json['name'] = flow.name
                 flow_json['participants'] = flow.participants
                 flow_json['runs'] = flow.runs
@@ -241,15 +243,17 @@ def fetch_flows(org):
                 all_flows[flow.uuid] = flow_json
 
         all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
-        cache.set(all_flows_key,
-                  {'time': datetime_to_ms(this_time), 'results': all_flows},
-                  UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+        org_flows['results'] = all_flows
+        cache.set(all_flows_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
     except:
         client.captureException()
         import traceback
         traceback.print_exc()
 
     print "Fetch %s flows took %ss" % (org.name, time.time() - start)
+
+    return org_flows.get('results')
 
 
 def get_flows(org):
@@ -258,7 +262,24 @@ def get_flows(org):
     if cache_value:
         return cache_value['results']
 
-    return dict()
+    return fetch_flows(org)
+
+
+def update_poll_flow_archived(org):
+    flows = get_flows(org)
+
+    if flows:
+        archived_flow_uuids = []
+        active_flow_uuids = []
+
+        for flow in flows.values():
+            if flow.get('archived', False):
+                archived_flow_uuids.append(flow['uuid'])
+            else:
+                active_flow_uuids.append(flow['uuid'])
+
+        Poll.objects.filter(flow_uuid__in=archived_flow_uuids, org=org).update(flow_archived=True)
+        Poll.objects.filter(flow_uuid__in=active_flow_uuids, org=org).update(flow_archived=False)
 
 
 def fetch_old_sites_count():
@@ -269,6 +290,8 @@ def fetch_old_sites_count():
     this_time = datetime.now()
     linked_sites = list(getattr(settings, 'PREVIOUS_ORG_SITES', []))
 
+    old_site_values = []
+
     for site in linked_sites:
         count_link = site.get('count_link', "")
         if count_link:
@@ -278,9 +301,9 @@ def fetch_old_sites_count():
 
                 count = int(re.search(r'\d+', response.content).group())
                 key = "org:%s:reporters:%s" % (site.get('name').lower(), 'old-site')
-                cache.set(key,
-                          {'time': datetime_to_ms(this_time), 'results': dict(size=count)},
-                          UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                value = {'time': datetime_to_ms(this_time), 'results': dict(size=count)}
+                old_site_values.append(value)
+                cache.set(key, value, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
             except:
                 import traceback
                 traceback.print_exc()
@@ -289,6 +312,7 @@ def fetch_old_sites_count():
     cache.delete(GLOBAL_COUNT_CACHE_KEY)
 
     print "Fetch old sites counts took %ss" % (time.time() - start)
+    return old_site_values
 
 
 def get_global_count():
@@ -301,6 +325,10 @@ def get_global_count():
         old_site_reporter_counter_keys = cache.keys('org:*:reporters:old-site')
 
         cached_values = [cache.get(key) for key in old_site_reporter_counter_keys]
+
+        # no old sites cache values, double check with a fetch
+        if not cached_values:
+            cached_values = fetch_old_sites_count()
 
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
 
@@ -357,21 +385,38 @@ def get_age_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    age_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
+    year_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
 
     age_counts_interval = dict()
-    total = 0
-    for year_key, age_count in age_counts.iteritems():
-        total += age_count
-        decade = int(math.floor((current_year - int(year_key)) / 10)) * 10
-        key = "%s-%s" % (decade, decade+10)
-        if age_counts_interval.get(key, None):
-            age_counts_interval[key] += age_count
-        else:
-            age_counts_interval[key] = age_count
+    age_counts_interval['0-14'] = 0
+    age_counts_interval['15-19'] = 0
+    age_counts_interval['20-24'] = 0
+    age_counts_interval['25-30'] = 0
+    age_counts_interval['31-34'] = 0
+    age_counts_interval['35+'] = 0
 
-    age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
-    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems() if v], key=lambda i: i))
+    total = 0
+    for year_key, age_count in year_counts.iteritems():
+        total += age_count
+        age = current_year - int(year_key)
+        if age > 34:
+            age_counts_interval['35+'] += age_count
+        elif age > 30:
+            age_counts_interval['31-34'] += age_count
+        elif age > 24:
+            age_counts_interval['25-30'] += age_count
+        elif age > 19:
+            age_counts_interval['20-24'] += age_count
+        elif age > 14:
+            age_counts_interval['15-19'] += age_count
+        else:
+            age_counts_interval['0-14'] += age_count
+
+    age_stats = age_counts_interval
+    if total > 0:
+        age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
+
+    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems()], key=lambda i: i))
 
 
 def get_registration_stats(org):

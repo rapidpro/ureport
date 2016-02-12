@@ -10,7 +10,7 @@ from ureport.contacts.models import ContactField, Contact, ReportersCounter
 from ureport.contacts.tasks import fetch_contacts_task
 from ureport.locations.models import Boundary
 from ureport.tests import DashTest, TembaContactField, MockTembaClient, TembaContact
-from temba_client.client import Group as TembaGroup
+from temba_client.v1.types import Group as TembaGroup
 from ureport.utils import json_date_to_datetime
 
 
@@ -28,7 +28,7 @@ class ContactFieldTest(DashTest):
         # try creating contact from them
         ContactField.objects.create(**kwargs)
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_fetch_contact_fields(self):
         ContactField.objects.create(org=self.nigeria, key='old', label='Old', value_type='T')
 
@@ -45,7 +45,7 @@ class ContactFieldTest(DashTest):
         self.assertEqual(contact_field.label, 'Activité')
         self.assertEqual(contact_field.value_type, 'T')
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_get_contact_fields(self):
 
         field_keys = ContactField.get_contact_fields(self.nigeria)
@@ -96,6 +96,22 @@ class ContactTest(DashTest):
 
         self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
         self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
+
+    def test_get_or_create(self):
+
+        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid='contact-uuid').first())
+
+        created_contact = Contact.get_or_create(self.nigeria, 'contact-uuid')
+
+        self.assertTrue(created_contact)
+        self.assertIsNone(created_contact.born)
+
+        created_contact.born = '2000'
+        created_contact.save()
+
+        existing_contact = Contact.get_or_create(self.nigeria, 'contact-uuid')
+        self.assertEqual(created_contact.pk, existing_contact.pk)
+        self.assertEqual(existing_contact.born, 2000)
 
     def test_kwargs_from_temba(self):
 
@@ -153,11 +169,11 @@ class ContactTest(DashTest):
         tz = pytz.timezone('UTC')
         with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 29, 10, 20, 30, 40))):
 
-            with patch('dash.orgs.models.TembaClient.get_groups') as mock_groups:
+            with patch('dash.orgs.models.TembaClient1.get_groups') as mock_groups:
                 group = TembaGroup.create(uuid="uuid-8", name='reporters', size=120)
                 mock_groups.return_value = [group]
 
-                with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
+                with patch('dash.orgs.models.TembaClient1.get_contacts') as mock_contacts:
                     mock_contacts.return_value = [
                         TembaContact.create(uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),
@@ -171,7 +187,7 @@ class ContactTest(DashTest):
                 group = TembaGroup.create(uuid="000-002", name='reporters', size=120)
                 mock_groups.return_value = [group]
 
-                with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
+                with patch('dash.orgs.models.TembaClient1.get_contacts') as mock_contacts:
                     mock_contacts.return_value = [
                         TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
@@ -199,7 +215,7 @@ class ContactTest(DashTest):
                 group2 = TembaGroup.create(uuid="000-002", name='reporters', size=120)
                 mock_groups.return_value = [group1, group2]
 
-                with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
+                with patch('dash.orgs.models.TembaClient1.get_contacts') as mock_contacts:
                     mock_contacts.return_value = [
                         TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
@@ -255,7 +271,10 @@ class ContactTest(DashTest):
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
-    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria, ['total-reporters', 'gender:m']),
+                         {'total-reporters': 2, 'gender:m': 2})
+
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_tasks(self):
 
         with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
