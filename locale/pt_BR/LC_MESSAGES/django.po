@@ -4,13 +4,13 @@
 # 
 # Translators:
 # Amanda Soares de Souza <amanda@ilhasoft.com.br>, 2015
-# Ilhasoft <contato@ilhasoft.com.br>, 2015
+# Ilhasoft <contato@ilhasoft.com.br>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: U-Report\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-27 17:29+0000\n"
-"PO-Revision-Date: 2015-12-10 20:11+0000\n"
+"PO-Revision-Date: 2016-02-18 17:15+0000\n"
 "Last-Translator: Ilhasoft <contato@ilhasoft.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/ilhasoft/u-report/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -1069,11 +1069,11 @@ msgstr "Compartilhe o que está acontecendo ao redor %(country)s com outros U-Re
 
 #: templates/public/about.haml:139
 msgid "CLICK HERE TO JOIN"
-msgstr "CLICK PARA ENTRAR"
+msgstr "CLIQUE PARA ENTRAR"
 
 #: templates/public/about.haml:152
 msgid "U-REPORT VIDEOS"
-msgstr "VIDEOS DO U-REPORT "
+msgstr "VÍDEOS DO U-REPORT "
 
 #: templates/public/about.haml:159
 msgid "No videos yet."
@@ -1148,7 +1148,7 @@ msgstr "Responderam de"
 
 #: templates/public/index.haml:101
 msgid "RESPONDER'S RATE BY LOCATION"
-msgstr "TAXA DE QUE RESPONDE PELA LOCALIZAÇÃO"
+msgstr "RESPOSTAS POR ESTADO"
 
 #: templates/public/index.haml:107
 msgid "Most responded"
@@ -1168,7 +1168,7 @@ msgstr "RESPOSTAS EM DESTAQUE"
 
 #: templates/public/index.haml:209 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
-msgstr "PARTICIPANTES DO U-REPORTER NO "
+msgstr "PARTICIPANTES DO U-REPORT NO "
 
 #: templates/public/index.haml:217
 msgid "TOTAL # OF U-REPORTERS"
@@ -1882,4 +1882,3 @@ msgstr "Se você precisar incluir alguns códigos HTML personalizados nas suas p
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"
-
