@@ -56,7 +56,7 @@ def get_linked_orgs(authenticated=False):
         if org.get_config('is_on_landing_page'):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
             if flag:
-                linked_sites.append(dict(name=org.name, host=host, flag=flag.image.url, is_static=False))
+                linked_sites.append(dict(name=org.subdomain, host=host, flag=flag.image.url, is_static=False))
 
     linked_sites_sorted = sorted(linked_sites, key=lambda k: k['name'].lower())
 
@@ -103,82 +103,6 @@ def clean_global_results_data(org, results, segment):
             elt['label'] = country_name
 
     return results
-
-
-def fetch_contact_field_results(org, contact_field, segment):
-    from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-    from ureport.polls.models import UREPORT_RUN_FETCHED_DATA_CACHE_TIME
-
-    start = time.time()
-    print "Fetching  %s for %s with segment %s" % (contact_field, org.name, segment)
-
-    cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-    if segment and segment.get('location', "") == "District":
-        cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
-
-    try:
-        segment = substitute_segment(org, segment)
-
-        this_time = datetime.now()
-
-        temba_client = org.get_temba_client()
-        client_results = temba_client.get_results(contact_field=contact_field, segment=segment)
-
-        results_data = temba_client_flow_results_serializer(client_results)
-        cleaned_results_data = results_data
-
-        print "Fetch took %ss" % (time.time() - start)
-
-        key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(segment)))
-        cache.set(key, {'time': datetime_to_ms(this_time), 'results': cleaned_results_data}, cache_time)
-    except:
-        client.captureException()
-        import traceback
-        traceback.print_exc()
-
-
-def get_contact_field_results(org, contact_field, segment):
-    from ureport.polls.models import CACHE_ORG_FIELD_DATA_KEY
-
-    subsituted_segment = substitute_segment(org, segment)
-
-    key = CACHE_ORG_FIELD_DATA_KEY % (org.pk, slugify(unicode(contact_field)), slugify(unicode(subsituted_segment)))
-    cache_value = cache.get(key, None)
-
-    if cache_value:
-        return cache_value['results']
-
-    if segment and segment.get('location', "") == "District":
-        fetch_contact_field_results(org, contact_field, segment)
-        cache_value = cache.get(key, None)
-        if cache_value:
-            return cache_value['results']
-
-
-def get_most_active_regions(org):
-    cache_key = 'most_active_regions:%d' % org.id
-    active_regions = cache.get(cache_key, None)
-
-    if active_regions is None:
-        regions = org.get_contact_field_results(org.get_config('gender_label'), dict(location="State"))
-        active_regions = dict()
-
-        if not regions:
-            return []
-
-        for region in regions:
-            active_regions[region['label']] = region['set'] + region['unset']
-
-        tuples = [(k, v) for k, v in active_regions.iteritems()]
-        tuples.sort(key=lambda t: t[1], reverse=True)
-
-        active_regions = [k for k, v in tuples]
-        cache.set(cache_key, active_regions, 3600 * 24)
-
-    if org.get_config('is_global'):
-        active_regions = [pycountry.countries.get(alpha2=elt).name for elt in active_regions]
-
-    return active_regions
 
 
 def organize_categories_data(org, contact_field, api_data):
@@ -293,10 +217,11 @@ def fetch_flows(org):
     start = time.time()
     print "Fetching flows for %s" % org.name
 
+    this_time = datetime.now()
+    org_flows = dict(time=datetime_to_ms(this_time), results=dict())
+
     try:
         from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-
-        this_time = datetime.now()
 
         temba_client = org.get_temba_client()
         flows = temba_client.get_flows()
@@ -306,7 +231,8 @@ def fetch_flows(org):
             if flow.rulesets:
                 flow_json = dict()
                 flow_json['uuid'] = flow.uuid
-                flow_json['created_on'] = flow.created_on.strftime('%Y-%m-%d')
+                flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
+                flow_json['created_on'] = datetime_to_json_date(flow.created_on)
                 flow_json['name'] = flow.name
                 flow_json['participants'] = flow.participants
                 flow_json['runs'] = flow.runs
@@ -317,15 +243,17 @@ def fetch_flows(org):
                 all_flows[flow.uuid] = flow_json
 
         all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
-        cache.set(all_flows_key,
-                  {'time': datetime_to_ms(this_time), 'results': all_flows},
-                  UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+        org_flows['results'] = all_flows
+        cache.set(all_flows_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
     except:
         client.captureException()
         import traceback
         traceback.print_exc()
 
     print "Fetch %s flows took %ss" % (org.name, time.time() - start)
+
+    return org_flows.get('results')
 
 
 def get_flows(org):
@@ -334,7 +262,24 @@ def get_flows(org):
     if cache_value:
         return cache_value['results']
 
-    return dict()
+    return fetch_flows(org)
+
+
+def update_poll_flow_archived(org):
+    flows = get_flows(org)
+
+    if flows:
+        archived_flow_uuids = []
+        active_flow_uuids = []
+
+        for flow in flows.values():
+            if flow.get('archived', False):
+                archived_flow_uuids.append(flow['uuid'])
+            else:
+                active_flow_uuids.append(flow['uuid'])
+
+        Poll.objects.filter(flow_uuid__in=archived_flow_uuids, org=org).update(flow_archived=True)
+        Poll.objects.filter(flow_uuid__in=active_flow_uuids, org=org).update(flow_archived=False)
 
 
 def fetch_old_sites_count():
@@ -345,6 +290,8 @@ def fetch_old_sites_count():
     this_time = datetime.now()
     linked_sites = list(getattr(settings, 'PREVIOUS_ORG_SITES', []))
 
+    old_site_values = []
+
     for site in linked_sites:
         count_link = site.get('count_link', "")
         if count_link:
@@ -354,9 +301,9 @@ def fetch_old_sites_count():
 
                 count = int(re.search(r'\d+', response.content).group())
                 key = "org:%s:reporters:%s" % (site.get('name').lower(), 'old-site')
-                cache.set(key,
-                          {'time': datetime_to_ms(this_time), 'results': dict(size=count)},
-                          UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                value = {'time': datetime_to_ms(this_time), 'results': dict(size=count)}
+                old_site_values.append(value)
+                cache.set(key, value, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
             except:
                 import traceback
                 traceback.print_exc()
@@ -365,6 +312,7 @@ def fetch_old_sites_count():
     cache.delete(GLOBAL_COUNT_CACHE_KEY)
 
     print "Fetch old sites counts took %ss" % (time.time() - start)
+    return old_site_values
 
 
 def get_global_count():
@@ -377,6 +325,10 @@ def get_global_count():
         old_site_reporter_counter_keys = cache.keys('org:*:reporters:old-site')
 
         cached_values = [cache.get(key) for key in old_site_reporter_counter_keys]
+
+        # no old sites cache values, double check with a fetch
+        if not cached_values:
+            cached_values = fetch_old_sites_count()
 
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
 
@@ -433,21 +385,38 @@ def get_age_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    age_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
+    year_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
 
     age_counts_interval = dict()
-    total = 0
-    for year_key, age_count in age_counts.iteritems():
-        total += age_count
-        decade = int(math.floor((current_year - int(year_key)) / 10)) * 10
-        key = "%s-%s" % (decade, decade+10)
-        if age_counts_interval.get(key, None):
-            age_counts_interval[key] += age_count
-        else:
-            age_counts_interval[key] = age_count
+    age_counts_interval['0-14'] = 0
+    age_counts_interval['15-19'] = 0
+    age_counts_interval['20-24'] = 0
+    age_counts_interval['25-30'] = 0
+    age_counts_interval['31-34'] = 0
+    age_counts_interval['35+'] = 0
 
-    age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
-    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems() if v], key=lambda i: i))
+    total = 0
+    for year_key, age_count in year_counts.iteritems():
+        total += age_count
+        age = current_year - int(year_key)
+        if age > 34:
+            age_counts_interval['35+'] += age_count
+        elif age > 30:
+            age_counts_interval['31-34'] += age_count
+        elif age > 24:
+            age_counts_interval['25-30'] += age_count
+        elif age > 19:
+            age_counts_interval['20-24'] += age_count
+        elif age > 14:
+            age_counts_interval['15-19'] += age_count
+        else:
+            age_counts_interval['0-14'] += age_count
+
+    age_stats = age_counts_interval
+    if total > 0:
+        age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
+
+    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems()], key=lambda i: i))
 
 
 def get_registration_stats(org):
@@ -528,7 +497,20 @@ def get_occupation_stats(org):
 
     return json.dumps(sorted([dict(label=k, count=v)
                               for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()],
-                             key=lambda i:i['count'], reverse=True)[:9])
+                             key=lambda i: i['count'], reverse=True)[:9])
+
+
+def get_regions_stats(org):
+
+    org_contacts_counts = get_org_contacts_counts(org)
+    boundaries_name = Boundary.get_org_top_level_boundaries_name(org)
+
+    boundaries_stats = {k[6:]: v for k, v in org_contacts_counts.iteritems() if len(k) > 7 and k.startswith('state')}
+
+    regions_stats = sorted([dict(name=boundaries_name[k], count=v) for k, v in boundaries_stats.iteritems()
+                            if k and k in boundaries_name], key=lambda i: i['count'], reverse=True)
+
+    return regions_stats
 
 
 Org.get_occupation_stats = get_occupation_stats
@@ -537,8 +519,7 @@ Org.get_ureporters_locations_stats = get_ureporters_locations_stats
 Org.get_registration_stats = get_registration_stats
 Org.get_age_stats = get_age_stats
 Org.get_gender_stats = get_gender_stats
-Org.get_contact_field_results = get_contact_field_results
-Org.get_most_active_regions = get_most_active_regions
+Org.get_regions_stats = get_regions_stats
 Org.organize_categories_data = organize_categories_data
 Org.get_flows = get_flows
 Org.substitute_segment = substitute_segment

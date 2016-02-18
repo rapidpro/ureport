@@ -13,7 +13,7 @@ API_GROUP_CACHE_TIME = 60 * 60 * 6
 API_RESULT_CACHE_TIME = 60 * 60 * 6
 
 SITE_API_HOST = 'rapidpro.io'
-API_ENDPOINT = 'https://api.rapidpro.io'
+SITE_API_HOST = 'https://api.rapidpro.io'
 HOSTNAME = 'ureport.io' if TESTING else 'ureport.io:8000'
 
 

@@ -7,15 +7,17 @@ from mock import patch
 import pycountry
 import pytz
 import redis
-from temba_client.client import Group
+from temba_client.v1.types import Group
 from ureport.assets.models import FLAG, Image
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
-from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
+from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, \
+    CACHE_ORG_FLOWS_KEY
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
-    get_occupation_stats
+    get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
+    update_poll_flow_archived
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
@@ -32,12 +34,7 @@ class UtilsTest(DashTest):
                                                  created_by=self.admin,
                                                  modified_by=self.admin)
 
-        self.poll = Poll.objects.create(flow_uuid="uuid-1",
-                                        title="Poll 1",
-                                        category=self.education,
-                                        org=self.org,
-                                        created_by=self.admin,
-                                        modified_by=self.admin)
+        self.poll = self.create_poll(self.org, "Poll 1", "uuid-1", self.education, self.admin)
 
     def clear_cache(self):
         # hardcoded to localhost
@@ -58,24 +55,36 @@ class UtilsTest(DashTest):
 
     def test_get_linked_orgs(self):
 
-        # we have 4 old org in the settings
-        self.assertEqual(len(get_linked_orgs()), 3)
+        # we have 2 old org in the settings
+        self.assertEqual(len(get_linked_orgs()), 2)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'burundi')
 
         self.org.set_config('is_on_landing_page', True)
 
         # missing flag
-        self.assertEqual(len(get_linked_orgs()), 3)
+        self.assertEqual(len(get_linked_orgs()), 2)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'burundi')
 
         Image.objects.create(org=self.org, image_type=FLAG, name='burundi_flag',
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
-        # burundi should be included and be the first; by alphetical order
-        self.assertEqual(len(get_linked_orgs()), 4)
+        # burundi should be included and be the first; by alphabetical order by subdomain
+        self.assertEqual(len(get_linked_orgs()), 3)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+
+        self.org.subdomain = 'rwanda'
+        self.org.save()
+
+        # rwanda should be included and the second in the list alphabetically by subdomain
+        self.assertEqual(len(get_linked_orgs()), 3)
+        self.assertEqual(get_linked_orgs()[1]['name'].lower(), 'rwanda')
+
+        # revert subdomain to burundi
+        self.org.subdomain = 'burundi'
+        self.org.save()
+
         with self.settings(HOSTNAME='localhost:8000'):
             self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
             self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://burundi.localhost:8000')
@@ -172,39 +181,6 @@ class UtilsTest(DashTest):
         self.assertFalse('location' in json.loads(global_segment))
         self.assertFalse('parent' in json.loads(global_segment))
         self.assertEqual(global_segment, json.dumps(expected))
-
-    def test_get_most_active_regions(self):
-        self.org.set_config('gender_label', 'Gender')
-        self.org.set_config("state_label", "Province")
-
-        with patch('dash.orgs.models.Org.get_contact_field_results') as mock:
-            mock.return_value = [dict(label='LABEL_1', set=15, unset=5, categories=[], open_ended=None),
-                                 dict(label='LABEL_2', set=100, unset=200, categories=[], open_ended=None),
-                                 dict(label='LABEL_3', set=50, unset=30, categories=[], open_ended=None)]
-
-            self.assertEquals(self.org.get_most_active_regions(), ['LABEL_2', 'LABEL_3', 'LABEL_1'])
-            mock.assert_called_once_with('Gender', dict(location='State'))
-
-        with patch('dash.orgs.models.Org.get_contact_field_results') as mock:
-            self.clear_cache()
-            mock.return_value = None
-
-            self.assertEquals(self.org.get_most_active_regions(), [])
-            mock.assert_called_once_with('Gender', dict(location='State'))
-
-        self.org.set_config("is_global", True)
-
-        with patch('dash.orgs.models.Org.get_contact_field_results') as mock:
-            mock.return_value = [dict(label='UG', set=15, unset=5, categories=[], open_ended=None),
-                                 dict(label='RW', set=100, unset=200, categories=[], open_ended=None),
-                                 dict(label='US', set=50, unset=30, categories=[], open_ended=None)]
-
-            self.assertEquals(self.org.get_most_active_regions(), ['Rwanda', 'United States', 'Uganda'])
-            segment = dict()
-            segment["contact_field"] = "Province"
-            segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
-
-            mock.assert_called_once_with('Gender', dict(location='State'))
 
     def test_organize_categories_data(self):
 
@@ -458,28 +434,51 @@ class UtilsTest(DashTest):
                 polls = [self.poll]
                 _fetch_org_polls_results(self.org, polls)
                 mock_poll_model_fetch_results.assert_called_with()
-                mock_poll_model_fetch_results.mock_reset()
+                mock_poll_model_fetch_results.reset_mock()
 
-            with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
-                mock_main_poll.return_value = self.poll
+                with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
+                    mock_main_poll.return_value = self.poll
 
-                fetch_main_poll_results(self.org)
-                mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                    fetch_main_poll_results(self.org)
+                    mock_poll_model_fetch_results.assert_called_once_with()
+                    mock_poll_model_fetch_results.reset_mock()
 
-            with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
-                mock_brick_polls.return_value = [self.poll]
+                with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
+                    mock_brick_polls.return_value = [self.poll]
 
-                fetch_brick_polls_results(self.org)
-                mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                    fetch_brick_polls_results(self.org)
+                    mock_poll_model_fetch_results.assert_called_once_with()
+                    mock_poll_model_fetch_results.reset_mock()
 
-            with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
-                mock_other_polls.return_value = [self.poll]
+                with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
+                    mock_other_polls.return_value = [self.poll]
 
-                fetch_other_polls_results(self.org)
-                mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                    fetch_other_polls_results(self.org)
+                    mock_poll_model_fetch_results.assert_called_once_with()
+                    mock_poll_model_fetch_results.reset_mock()
+
+    def test_update_poll_flow_archived(self):
+        poll = Poll.objects.filter(pk=self.poll.pk).first()
+        self.assertFalse(poll.flow_archived)
+
+        with patch("ureport.utils.get_flows") as mock_get_flows:
+            mock_get_flows.return_value = dict()
+
+            update_poll_flow_archived(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertFalse(poll.flow_archived)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True}}
+
+            update_poll_flow_archived(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertTrue(poll.flow_archived)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1'}}
+
+            update_poll_flow_archived(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertFalse(poll.flow_archived)
 
     def test_fetch_old_sites_count(self):
         self.clear_cache()
@@ -495,18 +494,13 @@ class UtilsTest(DashTest):
                     with patch('django.core.cache.cache.delete') as cache_delete_mock:
                         cache_delete_mock.return_value = "Deleted"
 
-                        fetch_old_sites_count()
-                        self.assertEqual(mock_get.call_count, 2)
-                        mock_get.assert_any_call('http://ureport.ug/count.txt')
-                        mock_get.assert_any_call('http://www.zambiaureport.org/count.txt/')
+                        old_site_values = fetch_old_sites_count()
+                        self.assertEqual(old_site_values, [{'time': 500, 'results': dict(size=300)}])
 
-                        self.assertEqual(cache_set_mock.call_count, 2)
-                        cache_set_mock.assert_any_call('org:uganda:reporters:old-site',
+                        mock_get.assert_called_once_with('http://www.zambiaureport.org/count.txt/')
+
+                        cache_set_mock.assert_called_once_with('org:zambia:reporters:old-site',
                                                        {'time': 500, 'results': dict(size=300)},
-                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-
-                        cache_set_mock.assert_any_call('org:zambia:reporters:old-site',
-                                                       {'time': 500, 'results': dict(size=50)},
                                                        UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
@@ -525,7 +519,10 @@ class UtilsTest(DashTest):
 
     def test_get_age_stats(self):
 
-        self.assertEqual(get_age_stats(self.org), json.dumps([]))
+        expected = [dict(name='0-14', y=0), dict(name='15-19', y=0), dict(name='20-24', y=0),
+                    dict(name='25-30', y=0), dict(name='31-34', y=0), dict(name='35+', y=0)]
+
+        self.assertEqual(get_age_stats(self.org), json.dumps(expected))
 
         now = timezone.now()
         now_year = now.year
@@ -533,19 +530,34 @@ class UtilsTest(DashTest):
         two_years_ago = now_year - 2
         five_years_ago = now_year - 5
         twelve_years_ago = now_year - 12
+        fifteen_years_ago = now_year - 15
+        seventeen_years_ago = now_year - 17
+        nineteen_years_ago = now_year - 19
+        twenty_years_ago = now_year - 20
+        thirty_years_ago = now_year - 30
+        thirty_one_years_ago = now_year - 31
         forthy_five_years_ago = now_year - 45
 
         ReportersCounter.objects.create(org=self.org, type='born:%s' % two_years_ago, count=2)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % five_years_ago, count=1)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=3)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % fifteen_years_ago, count=25)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % seventeen_years_ago, count=40)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % nineteen_years_ago, count=110)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % twenty_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % thirty_years_ago, count=12)
+        ReportersCounter.objects.create(org=self.org, type='born:%s' % thirty_one_years_ago, count=2)
         ReportersCounter.objects.create(org=self.org, type='born:%s' % forthy_five_years_ago, count=2)
 
         ReportersCounter.objects.create(org=self.org, type='born:10', count=10)
         ReportersCounter.objects.create(org=self.org, type='born:732837', count=20)
 
-        self.assertEqual(get_age_stats(self.org), json.dumps([dict(name='0-10', y=30), dict(name='10-20', y=50),
-                                                              dict(name='40-50', y=20)]))
+        # y is the percentage of count over the total count
+        expected = [dict(name='0-14', y=4), dict(name='15-19', y=87), dict(name='20-24', y=1),
+                    dict(name='25-30', y=6), dict(name='31-34', y=1), dict(name='35+', y=1)]
+
+        self.assertEqual(get_age_stats(self.org), json.dumps(expected))
 
     def test_get_registration_stats(self):
 
@@ -608,6 +620,69 @@ class UtilsTest(DashTest):
         self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district', parent='R-STATE')),
                          [dict(boundary='R-DISTRICT', label='District', set=3)])
 
+    def test_get_regions_stats(self):
+
+        self.assertEqual(get_regions_stats(self.org), [])
+
+        Boundary.objects.create(org=self.org, osm_id='R-NIGERIA', name='Nigeria', parent=None, level=0,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        Boundary.objects.create(org=self.org, osm_id='R-LAGOS', name='Lagos', parent=None, level=1,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        Boundary.objects.create(org=self.org, osm_id='R-OYO', name='OYO', parent=None, level=1,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        Boundary.objects.create(org=self.org, osm_id='R-ABUJA', name='Abuja', parent=None, level=1,
+                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        self.assertEqual(get_regions_stats(self.org), [])
+
+        ReportersCounter.objects.create(org=self.org, type='state:R-LAGOS', count=5)
+
+        self.assertEqual(get_regions_stats(self.org), [dict(name='Lagos', count=5)])
+
+        ReportersCounter.objects.create(org=self.org, type='state:R-OYO', count=15)
+
+        self.assertEqual(get_regions_stats(self.org), [dict(name='OYO', count=15), dict(name='Lagos', count=5)])
+
+        self.org.set_config('is_global', True)
+
+        self.assertEqual(get_regions_stats(self.org), [])
+
+        ReportersCounter.objects.create(org=self.org, type='state:R-NIGERIA', count=30)
+        self.assertEqual(get_regions_stats(self.org), [dict(name='Nigeria', count=30)])
+
+    def test_get_org_contacts_counts(self):
+
+        with patch('ureport.contacts.models.ReportersCounter.get_counts') as mock_get_counts:
+            mock_get_counts.return_value = "Counts"
+            with patch('django.core.cache.cache.get') as mock_cache_get:
+                mock_cache_get.return_value = "Cached"
+
+                self.assertEqual(get_org_contacts_counts(self.org), "Cached")
+                mock_cache_get.assert_called_once_with(ORG_CONTACT_COUNT_KEY % self.org.pk, None)
+                self.assertFalse(mock_get_counts.called)
+
+                mock_cache_get.return_value = None
+
+                self.assertEqual(get_org_contacts_counts(self.org), "Counts")
+                mock_get_counts.assert_called_once_with(self.org)
+
+    def test_get_flows(self):
+        with patch('ureport.utils.fetch_flows') as mock_fetch_flows:
+            mock_fetch_flows.return_value = "Fetched"
+            with patch('django.core.cache.cache.get') as mock_cache_get:
+                mock_cache_get.return_value = dict(results="Cached")
+
+                self.assertEqual(get_flows(self.org), "Cached")
+                mock_cache_get.assert_called_once_with(CACHE_ORG_FLOWS_KEY % self.org.pk, None)
+                self.assertFalse(mock_fetch_flows.called)
+
+                mock_cache_get.return_value = None
+                self.assertEqual(get_flows(self.org), "Fetched")
+                mock_fetch_flows.assert_called_once_with(self.org)
+
     def test_get_reporters_count(self):
 
         self.assertEqual(get_reporters_count(self.org), 0)
@@ -624,16 +699,35 @@ class UtilsTest(DashTest):
                                                  }
                                                  }}):
 
-            self.assertEqual(get_global_count(), 0)
+            with patch('ureport.utils.fetch_old_sites_count') as mock_old_sites_count:
+                mock_old_sites_count.return_value = []
 
-            ReportersCounter.objects.create(org=self.org, type='total-reporters', count=5)
+                self.assertEqual(get_global_count(), 0)
 
-            # ignored if not on the global homepage
-            self.assertEqual(get_global_count(), 0)
+                ReportersCounter.objects.create(org=self.org, type='total-reporters', count=5)
 
-            # add the org to the homepage
-            self.org.set_config('is_on_landing_page', True)
-            self.assertEqual(get_global_count(), 5)
+                # ignored if not on the global homepage
+                self.assertEqual(get_global_count(), 0)
+
+                # add the org to the homepage
+                self.org.set_config('is_on_landing_page', True)
+                self.assertEqual(get_global_count(), 5)
+
+                mock_old_sites_count.return_value = [{'time': 500, 'results': dict(size=300)},
+                                                     {'time': 500, 'results': dict(size=50)}]
+                from django.core.cache import cache
+                cache.delete(GLOBAL_COUNT_CACHE_KEY)
+                self.assertEqual(get_global_count(), 355)
+
+                cache.delete(GLOBAL_COUNT_CACHE_KEY)
+                self.org.set_config('is_on_landing_page', False)
+                self.assertEqual(get_global_count(), 350)
+
+            with patch('django.core.cache.cache.get') as cache_get_mock:
+                cache_get_mock.return_value = 20
+
+                self.assertEqual(get_global_count(), 20)
+                cache_get_mock.assert_called_once_with('global_count', None)
 
     def test_get_occupation_stats(self):
 

@@ -13,10 +13,12 @@ from mock import Mock, patch
 from dash.orgs.models import Org
 from django.http.request import HttpRequest
 from ureport.jobs.models import JobSource
+from ureport.polls.models import Poll
 from ureport.public.views import IndexView
-from temba_client.client import TembaClient, Result, Flow, Group, Boundary as TembaBoundary, Field as TembaContactField
-from temba_client.client import Contact as TembaContact, Group as TembaGroup
-from temba_client.types import Geometry as TembaGeometry
+from temba_client.v1 import TembaClient
+from temba_client.v1.types import Result, Flow, Group, Boundary as TembaBoundary, Field as TembaContactField
+from temba_client.v1.types import Contact as TembaContact, Group as TembaGroup
+from temba_client.v1.types import Geometry as TembaGeometry, FlowDefinition
 
 
 class MockAPI(API):  # pragma: no cover
@@ -168,6 +170,14 @@ class MockTembaClient(TembaClient):
                                                     label='Does your community have power')]
                                      ))
 
+    def get_flow_definition(self, uuid):
+        return FlowDefinition.deserialize(dict(metadata=dict(), version=8, base_language='eng', flow_type='',
+                                               action_sets=[], rule_sets=[dict(uuid='ruleset-1-uuid', label='ruleset1',
+                                                                               ruleset_type='wait_message',
+                                                                               rules=[dict(uuid='rule-1-uuid',
+                                                                                           category=dict(eng='Blue')
+                                                                                           )])], entry=''))
+
 
 class DashTest(SmartminTest):
 
@@ -195,6 +205,19 @@ class DashTest(SmartminTest):
 
         self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
         return Org.objects.get(subdomain=subdomain)
+
+    def create_poll(self, org, title, flow_uuid, category, user, featured=False):
+        now = timezone.now()
+        poll = Poll.objects.create(flow_uuid=flow_uuid,
+                                   title=title,
+                                   category=category,
+                                   is_featured=featured,
+                                   org=org,
+                                   poll_date=now,
+                                   created_by=user,
+                                   modified_by=user)
+
+        return poll
 
 
 class UreportJobsTest(DashTest):
