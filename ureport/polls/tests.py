@@ -406,7 +406,7 @@ class PollTest(DashTest):
 
         with patch('dash.orgs.models.Org.get_flows') as mock_get_flows:
             flows_cached = dict()
-            flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=300,
+            flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=None,
                                            labels="", archived=False, created_on="2015-04-08T08:30:40.000Z", date_hint="2015-04-08",
                                            rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
                                                           label='Does your community have power')])
@@ -454,8 +454,8 @@ class PollTest(DashTest):
 
             tz = pytz.timezone('Africa/Kigali')
             with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
-                flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30', participants=300,
-                                               labels="", archived=False, date_hint="2015-04-08",
+                flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30',
+                                               labels="", archived=False, date_hint="2015-04-08", participants=None,
                                                rulesets=[dict(uuid='uuid-8435', id=8436, response_type="C",
                                                               label='Does your community have power')])
 
@@ -492,9 +492,9 @@ class PollTest(DashTest):
 
         with patch('dash.orgs.models.Org.get_flows') as mock_get_flows:
             flows_cached = dict()
-            flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=300,
+            flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25',
                                            labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
-                                           date_hint="2015-04-08",
+                                           date_hint="2015-04-08", participants=None,
                                            rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
                                                           label='Does your community have power')])
 
@@ -537,8 +537,8 @@ class PollTest(DashTest):
 
             tz = pytz.timezone('Africa/Kigali')
             with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
-                flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30', participants=300,
-                                               labels="", archived=False, date_hint="2015-04-08",
+                flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30',
+                                               labels="", archived=False, date_hint="2015-04-08", participants=None,
                                                rulesets=[dict(uuid='uuid-8435', id=8436, response_type="C",
                                                               label='Does your community have power')])
 
