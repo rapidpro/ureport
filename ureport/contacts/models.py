@@ -264,7 +264,7 @@ class Contact(models.Model):
 
         contacts_removed = []
         try:
-            contacts_removed = Contact.objects.all().exclude(uuid__in=temba_contacts)
+            contacts_removed = Contact.objects.filter(org=org).exclude(uuid__in=temba_contacts)
 
             for contact in contacts_removed:
                 contact.delete()
