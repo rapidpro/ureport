@@ -11,7 +11,7 @@ from ureport.contacts.tasks import fetch_contacts_task
 from ureport.locations.models import Boundary
 from ureport.tests import DashTest, TembaContactField, MockTembaClient
 from temba_client.v1.types import Group as TembaGroup
-from temba_client.v2.types import Contact as TembaContact
+from temba_client.v2.types import Contact as TembaContact, ObjectRef
 from ureport.utils import json_date_to_datetime
 
 
@@ -115,9 +115,11 @@ class ContactTest(DashTest):
         self.assertEqual(existing_contact.born, 2000)
 
     def test_kwargs_from_temba(self):
+        group1 = ObjectRef.create(uuid='G-001', name='group-one')
+        group7 = ObjectRef.create(uuid='G-007', name='group-seven')
 
         temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
-                                            groups=['G-001', 'G-007'],
+                                            groups=[group1, group7],
                                             fields={'registration_date': None, 'state': None,
                                                     'lga': None, 'occupation': None, 'born': None,
                                                     'gender': None},
@@ -133,7 +135,7 @@ class ContactTest(DashTest):
 
         # Invalid boundaries become ''
         temba_contact = TembaContact.create(uuid='C-007', name="Jan", urns=['tel:123'],
-                                            groups=['G-001', 'G-007'],
+                                            groups=[group1, group7],
                                             fields={'registration_date': '2014-01-02T03:04:05.000000Z',
                                                     'state': 'Kigali', 'lga': 'Oyo', 'occupation': 'Student',
                                                     'born': '1990', 'gender': 'Male'},
@@ -149,7 +151,7 @@ class ContactTest(DashTest):
         Contact.objects.create(**kwargs)
 
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
-                                            groups=['G-001', 'G-007'],
+                                            groups=[group1, group7],
                                             fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
                                                     'lga': 'Oyo', 'occupation': 'Student', 'born': '1990',
                                                     'gender': 'Male'},
@@ -174,9 +176,11 @@ class ContactTest(DashTest):
                 group = TembaGroup.create(uuid="uuid-8", name='reporters', size=120)
                 mock_groups.return_value = [group]
 
+                group_obj_ref_002 = ObjectRef.create(uuid='000-002', name='reporters')
+
                 with patch('temba_client.clients.CursorQuery.iterfetches') as mock_contacts:
                     mock_contacts.return_value = [
-                        TembaContact.create(uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
+                        TembaContact.create(uuid='000-001', name="Ann", urns=['tel:1234'], groups=[group_obj_ref_002],
                                             fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),
                                             language='eng',
                                             modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
@@ -191,7 +195,7 @@ class ContactTest(DashTest):
 
                 with patch('temba_client.clients.CursorQuery.iterfetches') as mock_contacts:
                     mock_contacts.return_value = [
-                        TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
+                        TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=[group_obj_ref_002],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
                                             language='eng',
                                             modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
@@ -218,14 +222,15 @@ class ContactTest(DashTest):
                 group1 = TembaGroup.create(uuid="000-001", name='reporters too', size=10)
                 group2 = TembaGroup.create(uuid="000-002", name='reporters', size=120)
                 mock_groups.return_value = [group1, group2]
+                group_obj_ref_001 = ObjectRef.create(uuid="000-001", name='reporters too')
 
                 with patch('temba_client.clients.CursorQuery.iterfetches') as mock_contacts:
                     mock_contacts.return_value = [
-                        TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
+                        TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=[group_obj_ref_002],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
                                             language='eng',
                                             modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc)),
-                        TembaContact.create(uuid='000-002', name="Maria",urns=['tel:5678'], groups=['000-001'],
+                        TembaContact.create(uuid='000-002', name="Maria",urns=['tel:5678'], groups=[group_obj_ref_001],
                                             fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1992"),
                                             language='eng',
                                             modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]

@@ -247,7 +247,8 @@ class Contact(models.Model):
         api_contacts_query = temba_client_2.get_contacts(before=before, after=after)
 
         for contact in api_contacts_query.iterfetches(retry_on_rate_exceed=True):
-            if group_uuid in contact.groups:
+            contact_groups_uuids = [group.uuid for group in contact.groups]
+            if group_uuid in contact_groups_uuids:
                 cls.update_or_create_from_temba(org, contact)
                 seen_uuids.append(contact.uuid)
             else:
