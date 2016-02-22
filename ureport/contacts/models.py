@@ -224,35 +224,24 @@ class Contact(models.Model):
 
         reporter_group = org.get_config('reporter_group')
 
-        temba_client = org.get_temba_client()
         temba_client_2 = org.get_temba_client(api_version=2)
-        api_groups = temba_client.get_groups(name=reporter_group)
-
-        if not api_groups:
-            return
 
         seen_uuids = []
         removed_uuids = []
-
-        group_uuid = None
-
-        for grp in api_groups:
-            if grp.name.lower() == reporter_group.lower():
-                group_uuid = grp.uuid
-                break
 
         now = timezone.now().replace(tzinfo=pytz.utc)
         before = now
 
         api_contacts_query = temba_client_2.get_contacts(before=before, after=after)
 
-        for contact in api_contacts_query.iterfetches(retry_on_rate_exceed=True):
-            contact_groups_uuids = [group.uuid for group in contact.groups]
-            if group_uuid in contact_groups_uuids:
-                cls.update_or_create_from_temba(org, contact)
-                seen_uuids.append(contact.uuid)
-            else:
-                removed_uuids.append(contact.uuid)
+        for api_contacts in api_contacts_query.iterfetches(retry_on_rate_exceed=True):
+            for contact in api_contacts:
+                contact_groups_names = [group.name.lower() for group in contact.groups]
+                if reporter_group.lower() in contact_groups_names:
+                    cls.update_or_create_from_temba(org, contact)
+                    seen_uuids.append(contact.uuid)
+                else:
+                    removed_uuids.append(contact.uuid)
 
         cache.set(cls.CONTACT_LAST_FETCHED_CACHE_KEY % org.pk,
                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)),
