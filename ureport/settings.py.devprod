@@ -12,7 +12,7 @@ API_BOUNDARY_CACHE_TIME = 60 * 60 * 6
 API_GROUP_CACHE_TIME = 60 * 60 * 6
 API_RESULT_CACHE_TIME = 60 * 60 * 6
 
-API_ENDPOINT = 'https://api.rapidpro.io'
+SITE_API_HOST = 'https://api.rapidpro.io'
 
 # we store files on S3 on prod boxes
 AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID_UREPORT', 'MISSING_AWS_ACCESS_KEY_ID')
