@@ -261,6 +261,42 @@ class ContactTest(DashTest):
                 self.assertTrue('000-001' in seen_uuids)
                 self.assertTrue('000-002' in removed_uuids)
 
+    def test_deactivate_contacts(self):
+        uganda = self.create_org('uganda', self.admin)
+        Contact.get_or_create(self.nigeria, 'uuid-1')
+        Contact.get_or_create(self.nigeria, 'uuid-2')
+        Contact.get_or_create(self.nigeria, 'uuid-3')
+        Contact.get_or_create(uganda, 'uuid-4')
+
+        active_uuids = ['uuid-1']
+        removed_uuids = ['uuid-2']
+
+        Contact.deactivate_contacts(self.nigeria, active_uuids, removed_uuids, after=timezone.now())
+
+        contact1 = Contact.get_or_create(self.nigeria, 'uuid-1')
+        contact2 = Contact.get_or_create(self.nigeria, 'uuid-2')
+        contact3 = Contact.get_or_create(self.nigeria, 'uuid-3')
+        contact4 = Contact.get_or_create(uganda, 'uuid-4')
+
+        self.assertFalse(contact2.is_active)
+        self.assertTrue(contact1.is_active)
+        self.assertTrue(contact3.is_active)
+        self.assertTrue(contact4.is_active)
+
+        Contact.objects.all().update(is_active=True)
+
+        Contact.deactivate_contacts(self.nigeria, active_uuids, removed_uuids, after=None)
+
+        contact1 = Contact.get_or_create(self.nigeria, 'uuid-1')
+        contact2 = Contact.get_or_create(self.nigeria, 'uuid-2')
+        contact3 = Contact.get_or_create(self.nigeria, 'uuid-3')
+        contact4 = Contact.get_or_create(uganda, 'uuid-4')
+
+        self.assertFalse(contact2.is_active)
+        self.assertTrue(contact1.is_active)
+        self.assertFalse(contact3.is_active)
+        self.assertTrue(contact4.is_active)
+
     def test_reporters_counter(self):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
         Contact.objects.create(uuid='C-007', org=self.nigeria, gender='M', born=1990, occupation='Student',
