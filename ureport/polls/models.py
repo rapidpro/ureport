@@ -89,7 +89,7 @@ class Poll(SmartModel):
         if self.flow_archived:
             return
 
-        for question in self.questions.all():
+        for question in self.questions.filter(is_active=True):
             question.fetch_results()
             question.fetch_results(dict(location='State'))
 
