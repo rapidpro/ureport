@@ -892,6 +892,16 @@ class PollTest(DashTest):
                                                          created_by=self.admin,
                                                          modified_by=self.admin)
 
+            poll1_question.is_active = False
+            poll1_question.save()
+
+            poll1.fetch_poll_results()
+            self.assertFalse(mock.called)
+            mock.reset_mock()
+
+            poll1_question.is_active = True
+            poll1_question.save()
+
             poll1.fetch_poll_results()
             self.assertEqual(mock.call_count, 2)
             mock.assert_any_call()
