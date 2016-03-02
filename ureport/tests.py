@@ -2,7 +2,6 @@
 
 from __future__ import unicode_literals
 
-from dash.api import API
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils import timezone
@@ -19,102 +18,6 @@ from temba_client.v1 import TembaClient
 from temba_client.v1.types import Result, Flow, Group, Boundary as TembaBoundary, Field as TembaContactField
 from temba_client.v1.types import Contact as TembaContact, Group as TembaGroup
 from temba_client.v1.types import Geometry as TembaGeometry, FlowDefinition
-
-
-class MockAPI(API):  # pragma: no cover
-
-    def get_group(self, name):
-        return dict(group=8, name=name, size=120)
-
-    def get_country_geojson(self):
-        return dict(
-                   type="FeatureCollection",
-                   features=[
-                       dict(
-                           type='Feature',
-                           properties=dict(
-                               id="R3713501",
-                               level=1,
-                               name="Abia"
-                           ),
-                           geometry=dict(
-                               type="MultiPolygon",
-                               coordinates=[
-                                   [
-                                       [
-                                           [7, 5]
-                                       ]
-                                   ]
-                               ]
-                           )
-                       )
-                   ]
-            )
-
-    def get_state_geojson(self, state_id):
-        return dict(type="FeatureCollection",
-                    features=[dict(type='Feature',
-                                   properties=dict(id="R3713502",
-                                                   level=2,
-                                                   name="Aba North"),
-                                   geometry=dict(type="MultiPolygon",
-                                                 coordinates=[[[[8, 4]]]]
-                                                 )
-                                   )
-                            ]
-                    )
-
-    def get_ruleset_results(self, ruleset_id, segment=None):
-        return [dict(open_ended=False,
-                     set=3462,
-                     unset=3694,
-                     categories=[dict(count=2210,
-                                      label='Yes'
-                                      ),
-                                 dict(count=1252,
-                                      label='No'
-                                      )
-                                 ],
-                     label='All')
-                ]
-
-    def get_contact_field_results(self, contact_field_label, segment=None):
-        return [
-            dict(
-                open_ended=False,
-                set=3462,
-                unset=3694,
-                categories=[
-                    dict(
-                        count=2210,
-                        label='Yes'
-                    ),
-                    dict(
-                        count=1252,
-                        label='No'
-                    )
-                ],
-                label='All'
-            )
-        ]
-
-    def get_flows(self, filter=None):
-        return [
-            dict(
-                runs=300,
-                completed_runs=120,
-                name='Flow 1',
-                flow_uuid='uuid-25',
-                participants=None,
-                rulesets=[
-                   dict(node='386fc244-cc98-476a-b05e-f8a431a4dd41',
-                        id=8435,
-                        label='Does your community have power'
-                   )
-                ]
-
-            )
-        ]
 
 
 class MockTembaClient(TembaClient):
