@@ -17,7 +17,7 @@ from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
     get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
-    update_poll_flow_archived
+    update_poll_flow_archived, is_dict_equal
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
@@ -763,3 +763,14 @@ class UtilsTest(DashTest):
                                                                      dict(label='fooEEE', count=12),
                                                                      dict(label='fooDDD', count=11),
                                                                      dict(label='fooCCC', count=10)]))
+
+    def test_is_dict_equal(self):
+        self.assertTrue(is_dict_equal({'a': 1, 'b': 2}, {'b': 2, 'a': 1}))
+        self.assertFalse(is_dict_equal({'a': 1, 'b': 2}, {'a': 1, 'b': 3}))
+        self.assertFalse(is_dict_equal({'a': 1, 'b': 2}, {'a': 1, 'c': 2}))
+        self.assertFalse(is_dict_equal({'a': 1, 'b': 2}, {'a': 1, 'b': 2, 'c': 3}))
+
+        self.assertTrue(is_dict_equal({'a': 1, 'b': 2, 'c': 3}, {'a': 1, 'b': 2, 'c': 4}, keys=('a', 'b')))
+
+        self.assertTrue(is_dict_equal({'a': 1, 'b': 2}, {'a': 1, 'b': 2, 'c': None}, ignore_none_values=True))
+        self.assertFalse(is_dict_equal({'a': 1, 'b': 2}, {'a': 1, 'b': 2, 'c': None}, ignore_none_values=False))

@@ -124,3 +124,6 @@ class Boundary(models.Model):
         top_boundaries_values = top_boundaries.values('name', 'osm_id')
 
         return {k['osm_id']: k['name'] for k in top_boundaries_values}
+
+    def release(self):
+        self.delete()

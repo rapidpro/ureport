@@ -16,6 +16,18 @@ class ContactField(models.Model):
     Corresponds to a RapidPro contact field
     """
 
+    TYPE_TEXT = 'T'
+    TYPE_DECIMAL = 'N'
+    TYPE_DATETIME = 'D'
+    TYPE_STATE = 'S'
+    TYPE_DISTRICT = 'I'
+
+    TEMBA_TYPES = {'text': TYPE_TEXT,
+                   'numeric': TYPE_DECIMAL,
+                   'datetime': TYPE_DATETIME,
+                   'state': TYPE_STATE,
+                   'district': TYPE_DISTRICT}
+
     CONTACT_FIELDS_CACHE_TIMEOUT = 60 * 60 * 24 * 15
     CONTACT_FIELDS_CACHE_KEY = 'org:%d:contact_fields'
 
