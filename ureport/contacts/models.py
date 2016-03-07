@@ -99,6 +99,8 @@ class Contact(models.Model):
     FEMALE = 'F'
     GENDER_CHOICES = ((MALE, _("Male")), (FEMALE, _("Female")))
 
+    is_active = models.BooleanField(default=True)
+
     uuid = models.CharField(max_length=36, unique=True)
 
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="contacts")
