@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.test import override_settings
 from django.utils import timezone
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User
@@ -11,6 +12,8 @@ from dash.orgs.middleware import SetOrgMiddleware
 from mock import Mock, patch
 from dash.orgs.models import Org
 from django.http.request import HttpRequest
+
+from ureport.backend.rapidpro import RapidProBackend
 from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll
 from ureport.public.views import IndexView
@@ -82,6 +85,14 @@ class MockTembaClient(TembaClient):
                                                                                            )])], entry=''))
 
 
+class TestBackend(RapidProBackend):
+    """
+    TODO once all backend functionality actually goes through get_backend() this can become a stub
+    """
+    pass
+
+
+@override_settings(SITE_BACKEND='ureport.tests.TestBackend')
 class DashTest(SmartminTest):
 
     def setUp(self):

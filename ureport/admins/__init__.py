@@ -1,7 +1,6 @@
 from dash.orgs.models import Org
 from enum import Enum
 from ureport.locations.models import Boundary
-from ureport.contacts.tasks import fetch_contacts_task
 from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows
 
 
@@ -31,9 +30,3 @@ def refresh_caches(org, caches):
 
     if OrgCache.flows in caches:
         refresh_org_flows.delay(org.pk)
-
-    if OrgCache.recent_reporters in caches:
-        fetch_contacts_task.delay(org.pk)
-
-    if OrgCache.all_reporters in caches:
-        fetch_contacts_task.delay(org.pk, True)
