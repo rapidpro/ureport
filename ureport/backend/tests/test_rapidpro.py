@@ -27,18 +27,20 @@ class FieldSyncerTest(DashTest):
     def test_update_required(self):
         local = ContactField.objects.create(org=self.nigeria, key='foo', label='Bar', value_type='T')
 
-        self.assertFalse(self.syncer.update_required(local,
-                                                     TembaField.create(key='foo', label='Bar', value_type='text')))
+        remote = TembaField.create(key='foo', label='Bar', value_type='text')
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
-        self.assertTrue(self.syncer.update_required(local,
-                                                     TembaField.create(key='foo', label='Baz', value_type='text')))
+        remote = TembaField.create(key='foo', label='Baz', value_type='text')
 
-        self.assertTrue(self.syncer.update_required(local,
-                                                     TembaField.create(key='foo', label='Bar', value_type='numeric')))
+        self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
-        self.assertTrue(self.syncer.update_required(local,
-                                                     TembaField.create(key='foo', label='Baz', value_type='numeric')))
+        remote = TembaField.create(key='foo', label='Bar', value_type='numeric')
+        self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
+        remote = TembaField.create(key='foo', label='Baz', value_type='numeric')
+
+        self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+        
 
 class BoundarySyncerTest(DashTest):
 
@@ -72,23 +74,22 @@ class BoundarySyncerTest(DashTest):
         local = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None, level=0,
                                                    geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
 
-        self.assertFalse(self.syncer.update_required(local, TembaBoundary.create(boundary='OLD123', name='OLD',
-                                                                                 parent=None, level=0,
-                                                                                 geometry=geometry)))
+        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=0, geometry=geometry)
 
-        self.assertTrue(self.syncer.update_required(local, TembaBoundary.create(boundary='OLD123', name='NEW',
-                                                                                parent=None, level=0,
-                                                                                geometry=geometry)))
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
-        self.assertTrue(self.syncer.update_required(local, TembaBoundary.create(boundary='OLD123', name='NEW',
-                                                                                parent=None, level=1,
-                                                                                geometry=geometry)))
+        remote = TembaBoundary.create(boundary='OLD123', name='NEW', parent=None, level=0, geometry=geometry)
+
+        self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+
+        remote = TembaBoundary.create(boundary='OLD123', name='NEW',parent=None, level=1, geometry=geometry)
+
+        self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
         geometry = TembaGeometry.create(type='MultiPolygon', coordinates=[[1, 3]])
+        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=0, geometry=geometry)
 
-        self.assertTrue(self.syncer.update_required(local, TembaBoundary.create(boundary='OLD123', name='OLD',
-                                                                                 parent=None, level=0,
-                                                                                 geometry=geometry)))
+        self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
     def test_delete_local(self):
 

@@ -2,13 +2,12 @@ from __future__ import unicode_literals
 
 import json
 
+from dash.utils import is_dict_equal
 from dash.utils.sync import BaseSyncer, sync_local_to_set, sync_local_to_changes
 
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from . import BaseBackend
-
-from ureport.utils import is_dict_equal
 
 
 class FieldSyncer(BaseSyncer):
@@ -27,7 +26,7 @@ class FieldSyncer(BaseSyncer):
             'value_type': self.model.TEMBA_TYPES.get(remote.value_type, self.model.TYPE_TEXT)
         }
 
-    def update_required(self, local, remote):
+    def update_required(self, local, remote, local_kwags):
         return local.label != remote.label or local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)
 
 
@@ -53,7 +52,7 @@ class BoundarySyncer(BaseSyncer):
             'osm_id': remote.boundary
         }
 
-    def update_required(self, local, remote):
+    def update_required(self, local, remote, local_kwargs):
         if local.name != remote.name:
             return True
 
@@ -159,16 +158,14 @@ class ContactSyncer(BaseSyncer):
             'district': district
         }
 
-    def update_required(self, local, remote):
-        remote_kwargs = self.local_kwargs(local.org, remote)
-
-        if not remote_kwargs:
+    def update_required(self, local, remote, local_kwargs):
+        if not local_kwargs:
             return True
 
-        update = local.gender != remote_kwargs['gender'] or local.born != remote_kwargs['born']
-        update = update or local.occupation != remote_kwargs['occupation']
-        update = update or local.registered_on != remote_kwargs['registered_on']
-        update = update or local.state != remote_kwargs['state'] or local.district != remote_kwargs['district']
+        update = local.gender != local_kwargs['gender'] or local.born != local_kwargs['born']
+        update = update or local.occupation != local_kwargs['occupation']
+        update = update or local.registered_on != local_kwargs['registered_on']
+        update = update or local.state != local_kwargs['state'] or local.district != local_kwargs['district']
         return update
 
 
