@@ -75,6 +75,37 @@ class BoundarySyncer(BaseSyncer):
 class ContactSyncer(BaseSyncer):
     model = Contact
 
+    def get_boundaries_data(self, org):
+
+        cache_attr = '__boundaries__%d' % org.pk
+        if hasattr(self, cache_attr):
+            return getattr(self, cache_attr)
+
+        org_state_boundaries_data = dict()
+        org_district_boundaries_data = dict()
+        state_boundaries = Boundary.objects.filter(org=org, level=1)
+        for state in state_boundaries:
+            org_state_boundaries_data[state.name.lower()] = state.osm_id
+            state_district_data = dict()
+            district_boundaries = Boundary.objects.filter(org=org, level=2, parent=state)
+            for district in district_boundaries:
+                state_district_data[district.name.lower()] = district.osm_id
+
+            org_district_boundaries_data[state.osm_id] = state_district_data
+
+        setattr(self, cache_attr, (org_state_boundaries_data, org_district_boundaries_data))
+        return org_state_boundaries_data, org_district_boundaries_data
+
+    def get_contact_fields(self, org):
+        cache_attr = '__contact_fields__%d' % org.pk
+        if hasattr(self, cache_attr):
+            return getattr(self, cache_attr)
+        contact_fields = ContactField.objects.filter(org=org)
+        contact_fields_data = {elt.label.lower(): elt.key for elt in contact_fields}
+
+        setattr(self, cache_attr, contact_fields_data)
+        return contact_fields_data
+
     def local_kwargs(self, org, remote):
         from ureport.utils import json_date_to_datetime
 
@@ -84,49 +115,56 @@ class ContactSyncer(BaseSyncer):
         if not reporter_group.lower() in contact_groups_names:
             return None
 
+        org_state_boundaries_data, org_district_boundaries_data = self.get_boundaries_data(org)
+        contact_fields = self.get_contact_fields(org)
+
         state = ''
         district = ''
 
         state_field = org.get_config('state_label')
         if state_field:
+            state_field = state_field.lower()
             if org.get_config('is_global'):
-                state_name = remote.fields.get(self.model.find_contact_field_key(org, state_field), None)
+                state_name = remote.fields.get(contact_fields.get(state_field), None)
                 if state_name:
                     state = state_name
 
             else:
-                state_name = remote.fields.get(self.model.find_contact_field_key(org, state_field), None)
-                state_boundary = Boundary.objects.filter(org=org, level=1, name__iexact=state_name).first()
-                if state_boundary:
-                    state = state_boundary.osm_id
+                state_name = remote.fields.get(contact_fields.get(state_field), None)
+                if state_name:
+                    state_name = state_name.lower()
+                    state = org_state_boundaries_data.get(state_name, '')
 
                 district_field = org.get_config('district_label')
                 if district_field:
-                    district_name = remote.fields.get(self.model.find_contact_field_key(org, district_field), None)
-                    district_boundary = Boundary.objects.filter(org=org, level=2, name__iexact=district_name,
-                                                            parent=state_boundary).first()
-                    if district_boundary:
-                        district = district_boundary.osm_id
+                    district_field = district_field.lower()
+                    district_name = remote.fields.get(contact_fields.get(district_field), None)
+                    if district_name:
+                        district_name = district_name.lower()
+                        district = org_district_boundaries_data.get(state, dict()).get(district_name, '')
 
         registered_on = None
         registration_field = org.get_config('registration_label')
         if registration_field:
-            registered_on = remote.fields.get(self.model.find_contact_field_key(org, registration_field), None)
+            registration_field = registration_field.lower()
+            registered_on = remote.fields.get(contact_fields.get(registration_field), None)
             if registered_on:
                 registered_on = json_date_to_datetime(registered_on)
 
         occupation = ''
         occupation_field = org.get_config('occupation_label')
         if occupation_field:
-            occupation = remote.fields.get(self.model.find_contact_field_key(org, occupation_field), '')
+            occupation_field = occupation_field.lower()
+            occupation = remote.fields.get(contact_fields.get(occupation_field), '')
             if not occupation:
                 occupation = ''
 
         born = 0
         born_field = org.get_config('born_label')
         if born_field:
+            born_field = born_field.lower()
             try:
-                born = int(remote.fields.get(self.model.find_contact_field_key(org, born_field), 0))
+                born = int(remote.fields.get(contact_fields.get(born_field), 0))
             except ValueError:
                 pass
             except TypeError:
@@ -138,7 +176,8 @@ class ContactSyncer(BaseSyncer):
         male_label = org.get_config('male_label')
 
         if gender_field:
-            gender = remote.fields.get(self.model.find_contact_field_key(org, gender_field), '')
+            gender_field = gender_field.lower()
+            gender = remote.fields.get(contact_fields.get(gender_field), '')
 
             if gender and gender.lower() == female_label.lower():
                 gender = self.model.FEMALE
