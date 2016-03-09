@@ -31,7 +31,7 @@ def pull_contacts(org, since, until):
 
     boundaries_created, boundaries_updated, boundaries_deleted, ignored = backend.pull_boundaries(org)
 
-    logger.warn("Fetched contact fields for org #%d. "
+    logger.warn("Fetched boundaries for org #%d. "
                 "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, boundaries_created, boundaries_updated,
                                                                     boundaries_deleted, ignored))
 
