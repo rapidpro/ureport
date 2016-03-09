@@ -45,7 +45,7 @@ SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 SITE_CHOOSER_URL_NAME = 'public.home'
 
 
-SITE_BACKEND = 'casepro.backend.rapidpro.RapidProBackend'
+SITE_BACKEND = 'ureport.backend.rapidpro.RapidProBackend'
 
 
 # On Unix systems, a value of None will cause Django to use the same
