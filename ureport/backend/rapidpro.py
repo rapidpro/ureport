@@ -167,6 +167,11 @@ class ContactSyncer(BaseSyncer):
             born_field = born_field.lower()
             try:
                 born = int(remote.fields.get(contact_fields.get(born_field), 0))
+
+                # support only positive django integer field valid values
+                if born < 0 or born > 2147483647:
+                    born = 0
+
             except ValueError:
                 pass
             except TypeError:

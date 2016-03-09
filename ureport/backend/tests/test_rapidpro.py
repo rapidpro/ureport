@@ -204,6 +204,42 @@ class ContactSyncerTest(DashTest):
                           'state': 'R-LAGOS',
                           'district': 'R-OYO'})
 
+        temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
+                                            groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
+                                                    ObjectRef.create(uuid='G-007', name='Actors')],
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
+                                                    'lga': 'Oyo', 'occupation': 'Student', 'born': '-1',
+                                                    'gender': 'Male'},
+                                            language='eng')
+
+        self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
+                         {'org': self.nigeria,
+                          'uuid': 'C-008',
+                          'gender': 'M',
+                          'born': 0,
+                          'occupation': 'Student',
+                          'registered_on': json_date_to_datetime('2014-01-02T03:04:05.000'),
+                          'state': 'R-LAGOS',
+                          'district': 'R-OYO'})
+
+        temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
+                                            groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
+                                                    ObjectRef.create(uuid='G-007', name='Actors')],
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
+                                                    'lga': 'Oyo', 'occupation': 'Student', 'born': '2147483648',
+                                                    'gender': 'Male'},
+                                            language='eng')
+
+        self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
+                         {'org': self.nigeria,
+                          'uuid': 'C-008',
+                          'gender': 'M',
+                          'born': 0,
+                          'occupation': 'Student',
+                          'registered_on': json_date_to_datetime('2014-01-02T03:04:05.000'),
+                          'state': 'R-LAGOS',
+                          'district': 'R-OYO'})
+
 
 @override_settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache', 'LOCATION': '127.0.0.1:6379:1',
                                        'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient', }}})
