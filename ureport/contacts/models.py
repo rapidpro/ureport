@@ -13,6 +13,7 @@ from ureport.locations.models import Boundary
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 CONTACT_LOCK_KEY = 'lock:contact:%d:%s'
+CONTACT_FIELD_LOCK_KEY = 'lock:contact-field:%d:%s'
 
 
 class ContactField(models.Model):
@@ -35,6 +36,8 @@ class ContactField(models.Model):
     CONTACT_FIELDS_CACHE_TIMEOUT = 60 * 60 * 24 * 15
     CONTACT_FIELDS_CACHE_KEY = 'org:%d:contact_fields'
 
+    is_active = models.BooleanField(default=True)
+
     org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="contactfields")
 
     label = models.CharField(verbose_name=_("Label"), max_length=36)
@@ -42,6 +45,10 @@ class ContactField(models.Model):
     key = models.CharField(verbose_name=_("Key"), max_length=36)
 
     value_type = models.CharField(max_length=1, verbose_name="Field Type")
+
+    @classmethod
+    def lock(cls, org, key):
+        return get_redis_connection().lock(CONTACT_FIELD_LOCK_KEY % (org.pk, key), timeout=60)
 
     @classmethod
     def update_or_create_from_temba(cls, org, temba_contact_field):
@@ -90,6 +97,8 @@ class ContactField(models.Model):
         fields_keys = cls.fetch_contact_fields(org)
         return fields_keys
 
+    def release(self):
+        self.delete()
 
 class Contact(models.Model):
     """

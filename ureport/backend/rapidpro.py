@@ -29,6 +29,8 @@ class FieldSyncer(BaseSyncer):
     def update_required(self, local, remote, local_kwags):
         return local.label != remote.label or local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)
 
+    def delete_locale(self, local):
+        local.release()
 
 class BoundarySyncer(BaseSyncer):
     """

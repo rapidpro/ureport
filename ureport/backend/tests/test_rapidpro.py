@@ -491,3 +491,86 @@ class RapidProBackendTest(DashTest):
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 0))
 
         self.assertFalse(Contact.objects.filter(uuid='C-002', is_active=True))
+
+    @patch('dash.orgs.models.TembaClient2.get_fields')
+    def test_pull_fields(self, mock_get_fields):
+
+        ContactField.objects.all().delete()
+
+        mock_get_fields.return_value = MockClientQuery([
+            TembaField.create(key="nick_name", label="Nickname", value_type="text"),
+            TembaField.create(key="age", label="Age", value_type="numeric"),
+        ])
+
+        with self.assertNumQueries(5):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 0))
+
+        ContactField.objects.get(key="nick_name", label="Nickname", value_type="T", is_active=True)
+        ContactField.objects.get(key="age", label="Age", value_type="N", is_active=True)
+
+        mock_get_fields.return_value = MockClientQuery([
+            TembaField.create(key="age", label="Age (Years)", value_type="numeric"),
+            TembaField.create(key="homestate", label="Homestate", value_type="state"),
+        ])
+
+        with self.assertNumQueries(6):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 1, 1, 0))
+
+        ContactField.objects.get(key="nick_name", label="Nickname", value_type="T", is_active=False)
+        ContactField.objects.get(key="age", label="Age (Years)", value_type="N", is_active=True)
+        ContactField.objects.get(key="homestate", label="Homestate", value_type="S", is_active=True)
+
+        # check that no changes means no updates
+        with self.assertNumQueries(3):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 2))
+
+    @patch('dash.orgs.models.TembaClient1.get_boundaries')
+    def test_pull_boundaries(self, mock_get_boundaries):
+
+        Boundary.objects.all().delete()
+        geometry = TembaGeometry.create(type='MultiPolygon', coordinates=[[1, 2]])
+        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=0, geometry=geometry)
+
+        mock_get_boundaries.return_value = [remote]
+
+        with self.assertNumQueries(4):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 0))
+
+        Boundary.objects.all().delete()
+        mock_get_boundaries.return_value = [
+            TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=0, geometry=geometry),
+            TembaBoundary.create(boundary='NEW123', name='NEW', parent=None, level=0, geometry=geometry)
+        ]
+
+        with self.assertNumQueries(7):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 0))
+
+        mock_get_boundaries.return_value = [
+            TembaBoundary.create(boundary='OLD123', name='CHANGED', parent=None, level=0, geometry=geometry),
+            TembaBoundary.create(boundary='NEW123', name='NEW', parent=None, level=0, geometry=geometry)
+        ]
+
+        with self.assertNumQueries(6):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 1, 0, 1))
+
+        mock_get_boundaries.return_value = [
+            TembaBoundary.create(boundary='OLD123', name='CHANGED2', parent=None, level=0, geometry=geometry),
+            TembaBoundary.create(boundary='NEW123', name='NEW_CHANGE', parent=None, level=0, geometry=geometry)
+        ]
+
+        with self.assertNumQueries(7):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
