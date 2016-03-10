@@ -55,15 +55,15 @@ class UtilsTest(DashTest):
 
     def test_get_linked_orgs(self):
 
-        # we have 2 old org in the settings
-        self.assertEqual(len(get_linked_orgs()), 2)
+        # we have 3 old org in the settings
+        self.assertEqual(len(get_linked_orgs()), 3)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'burundi')
 
         self.org.set_config('is_on_landing_page', True)
 
         # missing flag
-        self.assertEqual(len(get_linked_orgs()), 2)
+        self.assertEqual(len(get_linked_orgs()), 3)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'burundi')
 
@@ -71,15 +71,15 @@ class UtilsTest(DashTest):
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
         # burundi should be included and be the first; by alphabetical order by subdomain
-        self.assertEqual(len(get_linked_orgs()), 3)
+        self.assertEqual(len(get_linked_orgs()), 4)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
 
         self.org.subdomain = 'rwanda'
         self.org.save()
 
-        # rwanda should be included and the second in the list alphabetically by subdomain
-        self.assertEqual(len(get_linked_orgs()), 3)
-        self.assertEqual(get_linked_orgs()[1]['name'].lower(), 'rwanda')
+        # rwanda should be included and the third in the list alphabetically by subdomain
+        self.assertEqual(len(get_linked_orgs()), 4)
+        self.assertEqual(get_linked_orgs()[2]['name'].lower(), 'rwanda')
 
         # revert subdomain to burundi
         self.org.subdomain = 'burundi'
