@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import json
 from datetime import datetime
 from django.db import models
+from django.db.models import Sum
 from django.utils.text import slugify
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
@@ -502,3 +503,18 @@ class PollResultsCounter(models.Model):
     type = models.CharField(max_length=255)
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    @classmethod
+    def get_poll_results(cls, poll, types=None):
+        """
+        Get the poll results counts by counter type for a given poll
+        """
+        poll_rulesets = poll.questions.all().values_list('ruleset_uuid', flat=True)
+
+        counters = cls.objects.filter(org=poll.org, ruleset__in=poll_rulesets)
+        if types:
+            counters = counters.filter(type__in=types)
+
+        results = counters.values('type').order_by('type').annotate(count_sum=Sum('count'))
+
+        return {c['type']: c['count_sum'] for c in results}
