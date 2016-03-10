@@ -470,3 +470,24 @@ class PollResponseCategory(models.Model):
 
     class Meta:
         unique_together = ('question', 'rule_uuid')
+
+
+class PollResult(models.Model):
+
+    org = models.ForeignKey(Org, related_name="poll_results")
+
+    flow = models.CharField(max_length=36)
+
+    ruleset = models.CharField(max_length=36)
+
+    contact = models.CharField(max_length=36)
+
+    completed = models.BooleanField()
+
+    category = models.CharField(max_length=255, null=True)
+
+    text = models.CharField(max_length=640, null=True)
+
+    state = models.CharField(max_length=255, null=True)
+
+    district = models.CharField(max_length=255, null=True)
