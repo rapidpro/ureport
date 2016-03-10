@@ -491,3 +491,14 @@ class PollResult(models.Model):
     state = models.CharField(max_length=255, null=True)
 
     district = models.CharField(max_length=255, null=True)
+
+
+class PollResultsCounter(models.Model):
+
+    org = models.ForeignKey(Org, related_name='results_counters')
+
+    ruleset = models.CharField(max_length=36)
+
+    type = models.CharField(max_length=255)
+
+    count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
