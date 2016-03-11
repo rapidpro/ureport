@@ -475,6 +475,8 @@ class PollResponseCategory(models.Model):
 
 class PollResult(models.Model):
 
+    POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%d'
+
     org = models.ForeignKey(Org, related_name="poll_results")
 
     flow = models.CharField(max_length=36)

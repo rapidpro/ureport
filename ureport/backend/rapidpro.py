@@ -2,12 +2,16 @@ from __future__ import unicode_literals
 
 import json
 
+import pytz
 from dash.utils import is_dict_equal
 from dash.utils.sync import BaseSyncer, sync_local_to_set, sync_local_to_changes
+from django.core.cache import cache
+from django.utils import timezone
 
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollResult
+from ureport.utils import datetime_to_json_date
 from . import BaseBackend
 
 
@@ -257,7 +261,11 @@ class RapidProBackend(BaseBackend):
         org = poll.org
         client = self._get_client(org, 2)
 
-        poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=modified_after, before=modified_before)
+        # ignore the TaskState time and use the time we stored in redis
+        now = timezone.now()
+        after = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
+
+        poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=now)
         fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
 
         num_created = 0
@@ -308,5 +316,9 @@ class RapidProBackend(BaseBackend):
             num_synced += len(fetch)
             if progress_callback:
                 progress_callback(num_synced)
+
+        # update the time for this poll from which we fetch next time
+        cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
+                  datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
 
         return num_created, num_updated, num_ignored
