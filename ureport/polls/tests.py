@@ -16,11 +16,13 @@ import pycountry
 from mock import patch, Mock
 from dash.categories.models import Category, CategoryImage
 from temba_client.v1.types import Result, Flow, Group
+
+from dash.orgs.models import TaskState
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY, \
     PollResultsCounter, PollResult
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows, \
-    recheck_poll_flow_archived
+    recheck_poll_flow_archived, pull_results_main_poll, pull_results_brick_polls, pull_results_other_polls
 from ureport.polls.tasks import fetch_poll, fetch_old_sites_count
 from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
@@ -1137,3 +1139,65 @@ class PollResultsTest(DashTest):
         expected['ruleset:%s:category:no:district:R-OYO' % self.poll_question.ruleset_uuid] = 1
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
+
+
+class PollsTasksTest(DashTest):
+    def setUp(self):
+        super(PollsTasksTest, self).setUp()
+        self.nigeria = self.create_org('nigeria', self.admin)
+        self.education_nigeria = Category.objects.create(org=self.nigeria,
+                                                         name="Education",
+                                                         created_by=self.admin,
+                                                         modified_by=self.admin)
+        self.poll = self.create_poll(self.nigeria, "Poll 1", "uuid-1", self.education_nigeria, self.admin)
+
+    @patch('ureport.tests.TestBackend.pull_results')
+    @patch('ureport.polls.models.Poll.get_main_poll')
+    def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results):
+        mock_get_main_poll.return_value = self.poll
+        mock_pull_results.return_value = (1, 2, 3)
+
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+
+            pull_results_main_poll(self.nigeria.pk)
+
+            task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-main-poll')
+            self.assertEqual(task_state.get_last_results()['poll-%d' % self.poll.pk],
+                             {'created': 1, 'updated': 2, 'ignored': 3})
+
+    @patch('ureport.tests.TestBackend.pull_results')
+    @patch('ureport.polls.models.Poll.get_brick_polls')
+    def test_pull_results_brick_polls(self, mock_get_brick_polls, mock_pull_results):
+        mock_get_brick_polls.return_value = [self.poll]
+        mock_pull_results.return_value = (1, 2, 3)
+
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+
+            pull_results_brick_polls(self.nigeria.pk)
+
+            task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-brick-polls')
+            self.assertEqual(task_state.get_last_results()['poll-%d' % self.poll.pk],
+                             {'created': 1, 'updated': 2, 'ignored': 3})
+
+    @patch('ureport.tests.TestBackend.pull_results')
+    @patch('ureport.polls.models.Poll.get_other_polls')
+    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results):
+        mock_get_other_polls.return_value = [self.poll]
+        mock_pull_results.return_value = (1, 2, 3)
+
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+
+            pull_results_other_polls(self.nigeria.pk)
+
+            task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-other-polls')
+            self.assertEqual(task_state.get_last_results()['poll-%d' % self.poll.pk],
+                             {'created': 1, 'updated': 2, 'ignored': 3})
