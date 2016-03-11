@@ -7,6 +7,7 @@ from dash.utils.sync import BaseSyncer, sync_local_to_set, sync_local_to_changes
 
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
+from ureport.polls.models import PollResult
 from . import BaseBackend
 
 
@@ -251,3 +252,61 @@ class RapidProBackend(BaseBackend):
         deleted_fetches = deleted_query.iterfetches(retry_on_rate_exceed=True)
 
         return sync_local_to_changes(org, ContactSyncer(), fetches, deleted_fetches, progress_callback)
+
+    def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
+        org = poll.org
+        client = self._get_client(org, 2)
+
+        poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=modified_after, before=modified_before)
+        fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
+
+        num_created = 0
+        num_updated = 0
+        num_ignored = 0
+        num_synced = 0
+
+        for fetch in fetches:
+            for temba_run in fetch:
+                flow_uuid = temba_run.flow.uuid
+                contact_uuid = temba_run.contact.uuid
+                completed = temba_run.exit_type == 'completed'
+
+                contact_obj = Contact.get_or_create(org, contact_uuid)
+                state = contact_obj.state
+                district = contact_obj.district
+
+                for temba_step in temba_run.steps:
+                    ruleset_uuid = temba_step.node
+                    category = temba_step.category
+                    text = temba_step.text
+
+                    existing = PollResult.objects.filter(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                         contact=contact_uuid)
+                    if existing:
+                        poll_result = existing.first()
+
+                        update_required = poll_result.category != category or poll_result.text != text
+                        update_required = update_required or poll_result.state != state
+                        update_required = update_required or poll_result.district != district
+                        update_required = update_required or poll_result.completed != completed
+
+                        if update_required:
+                            existing.update(category=category, text=text, state=state,
+                                            district=district, completed=completed)
+
+                            num_updated += 1
+                        else:
+                            num_ignored += 1
+
+                    else:
+                        PollResult.objects.create(org=org, flow=flow_uuid, ruleset=ruleset_uuid, contact=contact_uuid,
+                                                  category=category, text=text, state=state,
+                                                  district=district, completed=completed)
+
+                        num_created += 1
+
+            num_synced += len(fetch)
+            if progress_callback:
+                progress_callback(num_synced)
+
+        return num_created, num_updated, num_ignored

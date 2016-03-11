@@ -4,15 +4,20 @@ from __future__ import unicode_literals
 import json
 
 from django.test import override_settings
+from django.utils import timezone
 from mock import patch
 
 from temba_client.v1.types import Boundary as TembaBoundary, Geometry as TembaGeometry
-from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact
+from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact, Step as TembaStep
+from temba_client.v2.types import Run as TembaRun
 
 from dash.test import MockClientQuery
+
+from dash.categories.models import Category
 from ureport.backend.rapidpro import FieldSyncer, BoundarySyncer, ContactSyncer, RapidProBackend
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
+from ureport.polls.models import PollResult
 from ureport.tests import DashTest
 from ureport.utils import json_date_to_datetime
 
@@ -248,6 +253,10 @@ class RapidProBackendTest(DashTest):
         super(RapidProBackendTest, self).setUp()
         self.backend = RapidProBackend()
         self.nigeria = self.create_org('nigeria', self.admin)
+        self.education_nigeria = Category.objects.create(org=self.nigeria,
+                                                         name="Education",
+                                                         created_by=self.admin,
+                                                         modified_by=self.admin)
 
         self.nigeria.set_config('reporter_group', "Ureporters")
         self.nigeria.set_config('registration_label', "Registration Date")
@@ -610,3 +619,102 @@ class RapidProBackendTest(DashTest):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
+
+    @patch('dash.orgs.models.TembaClient2.get_runs')
+    def test_pull_results(self, mock_get_runs):
+
+        PollResult.objects.all().delete()
+        contact = Contact.objects.create(org=self.nigeria, uuid='C-001', gender='M', born=1990, state='R-LAGOS',
+                                         district='R-OYO')
+        poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
+
+        now = timezone.now()
+        temba_run = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                    contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
+                                    steps=[TembaStep.create(node='ruleset-uuid', text="We'll win today", value="win",
+                                                            category='Win', type='ruleset',
+                                                            arrived_on=now, left_on=now)],
+                                    created_on=now, modified_on=now, exited_on=now,
+                                    exit_type='completed')
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run])]
+
+        with self.assertNumQueries(4):
+            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
+
+        poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
+        self.assertEqual(poll_result.state, 'R-LAGOS')
+        self.assertEqual(poll_result.district, 'R-OYO')
+        self.assertEqual(poll_result.contact, 'C-001')
+        self.assertEqual(poll_result.ruleset, 'ruleset-uuid')
+        self.assertEqual(poll_result.flow, 'flow-uuid')
+        self.assertEqual(poll_result.category, 'Win')
+        self.assertEqual(poll_result.text, "We'll win today")
+
+        temba_run_1 = TembaRun.create(id=1235, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                      contact=ObjectRef.create(uuid='C-002', name='Davido'), responded=True,
+                                      steps=[TembaStep.create(node='ruleset-uuid', text="I sing", value="sing",
+                                                              category='Sing', type='ruleset',
+                                                              arrived_on=now, left_on=now)],
+                                      created_on=now, modified_on=now, exited_on=now,
+                                      exit_type='completed')
+
+        temba_run_2 = TembaRun.create(id=1236, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                      contact=ObjectRef.create(uuid='C-003', name='Lebron'), responded=True,
+                                      steps=[TembaStep.create(node='ruleset-uuid', text="I play basketball",
+                                                              value="play", category='Play', type='ruleset',
+                                                              arrived_on=now, left_on=now)],
+                                      created_on=now, modified_on=now, exited_on=now,
+                                      exit_type='completed')
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
+
+        with self.assertNumQueries(8):
+            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (2, 0, 0))
+        self.assertEqual(3, PollResult.objects.all().count())
+        self.assertEqual(3, Contact.objects.all().count())
+
+        contact.state = 'R-KIGALI'
+        contact.district = 'R-GASABO'
+        contact.save()
+
+        temba_run_3 = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                      contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
+                                      steps=[TembaStep.create(node='ruleset-uuid', text="We'll celebrate today",
+                                                              value="celebrate", category='Party', type='ruleset',
+                                                              arrived_on=now, left_on=now)],
+                                      created_on=now, modified_on=now, exited_on=now,
+                                      exit_type='completed')
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
+
+        with self.assertNumQueries(5):
+            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (0, 1, 0))
+
+        poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
+        self.assertEqual(poll_result.state, 'R-KIGALI')
+        self.assertEqual(poll_result.district, 'R-GASABO')
+        self.assertEqual(poll_result.contact, 'C-001')
+        self.assertEqual(poll_result.ruleset, 'ruleset-uuid')
+        self.assertEqual(poll_result.flow, 'flow-uuid')
+        self.assertEqual(poll_result.category, 'Party')
+        self.assertEqual(poll_result.text, "We'll celebrate today")
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
+        with self.assertNumQueries(4):
+            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 1))
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
+
+        with self.assertNumQueries(8):
+            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 2))
