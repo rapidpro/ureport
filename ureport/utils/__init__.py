@@ -5,6 +5,8 @@ import json
 import math
 import time
 from datetime import timedelta, datetime
+
+import six
 from dash.orgs.models import Org
 from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings

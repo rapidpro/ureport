@@ -44,6 +44,10 @@ HOSTNAME = 'localhost:8000'
 SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 SITE_CHOOSER_URL_NAME = 'public.home'
 
+
+SITE_BACKEND = 'ureport.backend.rapidpro.RapidProBackend'
+
+
 # On Unix systems, a value of None will cause Django to use the same
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
@@ -488,11 +492,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
-    "fetch_contacts": {
-        "task": "contacts.fetch_contacts_task",
-        "schedule": timedelta(minutes=10),
-        "relative": True,
-     },
+    'contact-pull': {
+        'task': 'dash.orgs.tasks.trigger_org_task',
+        'schedule': crontab(minute=[0, 10, 20, 30, 40, 50]),
+        'args': ('ureport.contacts.tasks.pull_contacts',)
+    },
 }
 
 #-----------------------------------------------------------------------------------

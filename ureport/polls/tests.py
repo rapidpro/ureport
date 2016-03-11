@@ -21,7 +21,7 @@ from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows, \
     recheck_poll_flow_archived
 from ureport.polls.tasks import fetch_poll, fetch_old_sites_count
-from ureport.tests import DashTest, MockAPI, MockTembaClient
+from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 
