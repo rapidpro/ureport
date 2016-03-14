@@ -237,6 +237,7 @@ def fetch_flows(org):
                 flow_json['created_on'] = datetime_to_json_date(flow.created_on)
                 flow_json['name'] = flow.name
                 flow_json['runs'] = flow.runs
+                flow_json['archived'] = flow.archived
                 flow_json['completed_runs'] = flow.completed_runs
                 flow_json['rulesets'] = [
                     dict(uuid=elt.uuid, label=elt.label, response_type=elt.response_type) for elt in flow.rulesets]
