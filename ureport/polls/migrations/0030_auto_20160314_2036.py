@@ -12,9 +12,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
+            model_name='poll',
+            name='runs_count',
+            field=models.IntegerField(default=0, help_text='The number of polled reporters on this poll'),
+        ),
+        migrations.AddField(
             model_name='pollquestion',
-            name='order',
-            field=models.IntegerField(default=0, help_text='The order number for this question on the poll', null=True, blank=True),
+            name='priority',
+            field=models.IntegerField(default=0, help_text='The priority number for this question on the poll', null=True, blank=True),
         ),
         migrations.AddField(
             model_name='pollquestion',

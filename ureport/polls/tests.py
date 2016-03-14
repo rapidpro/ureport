@@ -614,10 +614,10 @@ class PollTest(DashTest):
         self.assertTrue('form' in response.context)
         self.assertEquals(len(response.context['form'].fields), 4)
         self.assertTrue('ruleset_uuid-101_include' in response.context['form'].fields)
-        self.assertTrue('ruleset_uuid-101_order' in response.context['form'].fields)
+        self.assertTrue('ruleset_uuid-101_priority' in response.context['form'].fields)
         self.assertTrue('ruleset_uuid-101_label' in response.context['form'].fields)
         self.assertTrue('ruleset_uuid-101_title' in response.context['form'].fields)
-        self.assertEquals(response.context['form'].fields['ruleset_uuid-101_order'].initial, 0)
+        self.assertEquals(response.context['form'].fields['ruleset_uuid-101_priority'].initial, 0)
         self.assertEquals(response.context['form'].fields['ruleset_uuid-101_label'].initial, 'question poll 1')
         self.assertEquals(response.context['form'].fields['ruleset_uuid-101_title'].initial, 'question poll 1')
 
@@ -648,14 +648,14 @@ class PollTest(DashTest):
         poll_question = PollQuestion.objects.filter(poll=poll1, ruleset_uuid="uuid-101")[0]
         self.assertEquals(poll_question.title, 'have electricity access')
         self.assertEquals(poll_question.ruleset_label, 'question poll 1')
-        self.assertEqual(poll_question.order, 0)
+        self.assertEquals(poll_question.priority, 0)
 
         self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_images', args=[poll1.pk]))
 
         post_data = dict()
         post_data['ruleset_uuid-101_include'] = True
         post_data['ruleset_uuid-101_title'] = "electricity network coverage"
-        post_data['ruleset_uuid-101_order'] = 5
+        post_data['ruleset_uuid-101_priority'] = 5
         response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
 
         self.assertTrue(PollQuestion.objects.filter(poll=poll1))
@@ -663,7 +663,7 @@ class PollTest(DashTest):
         poll_question = PollQuestion.objects.filter(poll=poll1)[0]
         self.assertEquals(poll_question.title, 'electricity network coverage')
         self.assertEquals(poll_question.ruleset_label, 'question poll 1')
-        self.assertEqual(poll_question.order, 5)
+        self.assertEquals(poll_question.priority, 5)
 
         with patch('ureport.polls.models.Poll.clear_brick_polls_cache') as mock:
             mock.return_value = 'Cache cleared'

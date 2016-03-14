@@ -282,7 +282,7 @@ class Poll(SmartModel):
                 return question
 
     def get_questions(self):
-        return self.questions.filter(is_active=True).order_by('order', 'pk')
+        return self.questions.filter(is_active=True).order_by('-priority', 'pk')
 
     def get_images(self):
         return self.images.filter(is_active=True).order_by('pk')
@@ -360,8 +360,8 @@ class PollQuestion(SmartModel):
     ruleset_label = models.CharField(max_length=255, null=True, blank=True,
                                      help_text=_("The label of the ruleset on RapidPro"))
 
-    order = models.IntegerField(default=0, null=True, blank=True,
-                                help_text=_("The order number for this question on the poll"))
+    priority = models.IntegerField(default=0, null=True, blank=True,
+                                   help_text=_("The priority number for this question on the poll"))
 
 
     @classmethod
