@@ -12,7 +12,6 @@ from django.conf import settings
 from django.utils.encoding import iri_to_uri
 from django.utils.http import urlquote
 
-from dash.api import API
 from dash.categories.models import Category
 from dash.stories.models import Story, StoryImage
 from dash.orgs.models import Org
@@ -22,7 +21,7 @@ from ureport.countries.models import CountryAlias
 from ureport.locations.models import Boundary
 from ureport.news.models import Video, NewsItem
 from ureport.polls.models import Poll, PollQuestion
-from ureport.tests import DashTest, MockAPI, UreportJobsTest, MockTembaClient
+from ureport.tests import DashTest, UreportJobsTest, MockTembaClient
 
 
 class PublicTest(DashTest):

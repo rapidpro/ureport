@@ -44,6 +44,10 @@ HOSTNAME = 'localhost:8000'
 SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 SITE_CHOOSER_URL_NAME = 'public.home'
 
+
+SITE_BACKEND = 'ureport.backend.rapidpro.RapidProBackend'
+
+
 # On Unix systems, a value of None will cause Django to use the same
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
@@ -60,7 +64,7 @@ LANGUAGE_CODE = 'en'
 
 # Available languages for translation
 LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"),
-             ('uk', "Ukrainian"))
+             ('uk', "Ukrainian"), ('my', "Burmese"))
 DEFAULT_LANGUAGE = "en"
 RTL_LANGUAGES = ['ar']
 
@@ -464,6 +468,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
+    "recheck_poll_flow_archived": {
+        "task": "polls.recheck_poll_flow_archived",
+        "schedule": timedelta(minutes=15),
+        "relative": True,
+    },
     "refresh_main_poll": {
         "task": "polls.refresh_main_poll",
         "schedule": timedelta(minutes=20),
@@ -484,11 +493,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
-    "fetch_contacts": {
-        "task": "contacts.fetch_contacts_task",
-        "schedule": timedelta(minutes=10),
-        "relative": True,
-     },
+    'contact-pull': {
+        'task': 'dash.orgs.tasks.trigger_org_task',
+        'schedule': crontab(minute=[0, 10, 20, 30, 40, 50]),
+        'args': ('ureport.contacts.tasks.pull_contacts',)
+    },
 }
 
 #-----------------------------------------------------------------------------------
@@ -515,11 +524,10 @@ PREVIOUS_ORG_SITES = [
         is_static=True,
     ),
     dict(
-        name="Uganda",
-        host="http://www.ureport.ug",
-        flag="flag_ug.png",
+        name="Ireland",
+        host="http://ireland.ureport.in",
+        flag="flag_ir.png",
         is_static=True,
-        count_link='http://ureport.ug/count.txt',
     ),
     dict(
         name="Zambia",

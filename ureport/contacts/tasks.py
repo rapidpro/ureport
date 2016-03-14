@@ -1,62 +1,53 @@
-import logging
+from __future__ import unicode_literals
+
 import time
-from django.core.cache import cache
-from dash.orgs.models import Org
-from django_redis import get_redis_connection
-from djcelery.app import app
+from dash.orgs.tasks import org_task
+from celery.utils.log import get_task_logger
 
-from ureport.contacts.models import ContactField, Contact
-from ureport.locations.models import Boundary
-from ureport.utils import json_date_to_datetime
-
-logger = logging.getLogger(__name__)
+logger = get_task_logger(__name__)
 
 
-@app.task(name='contacts.fetch_contacts_task')
-def fetch_contacts_task(org_id=None, fetch_all=False):
+@org_task('contact-pull')
+def pull_contacts(org, since, until):
+    """
+    Fetches updated contacts from RapidPro and updates local contacts accordingly
+    """
+    from ureport.backend import get_backend
+    backend = get_backend()
 
-    r = get_redis_connection()
+    if not since:
+        logger.warn("First time run for org #%d. Will sync all contacts" % org.pk)
 
-    key = 'fetch_contacts'
-    lock_timeout = 3600
+    start = time.time()
 
-    if org_id:
-        key = 'fetch_contacts:%d' % org_id
-        lock_timeout = 300
+    fields_created, fields_updated, fields_deleted, ignored = backend.pull_fields(org)
 
-    if not r.get(key):
-        with r.lock(key, timeout=lock_timeout):
-            active_orgs = Org.objects.filter(is_active=True)
-            if org_id:
-                active_orgs = Org.objects.filter(pk=org_id)
+    logger.warn("Fetched contact fields for org #%d. "
+                "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, fields_created, fields_updated,
+                                                                    fields_deleted, ignored))
+    logger.warn("Fetch fields for org #%d took %ss" % (org.pk, time.time() - start))
 
-            for org in active_orgs:
+    start_boundaries = time.time()
 
-                start = time.time()
+    boundaries_created, boundaries_updated, boundaries_deleted, ignored = backend.pull_boundaries(org)
 
-                last_fetched_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % org.id
+    logger.warn("Fetched boundaries for org #%d. "
+                "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, boundaries_created, boundaries_updated,
+                                                                    boundaries_deleted, ignored))
 
-                after = cache.get(last_fetched_key, None)
-                if after:
-                    after = json_date_to_datetime(after)
+    logger.warn("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
+    start_contacts = time.time()
 
-                if fetch_all:
-                    after = None
+    contacts_created, contacts_updated, contacts_deleted, ignored = backend.pull_contacts(org, since, until)
 
-                try:
-                    if after is None:
-                        Boundary.fetch_boundaries(org)
-                        ContactField.fetch_contact_fields(org)
+    logger.warn("Fetched contacts for org #%d. "
+                "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, contacts_created, contacts_updated,
+                                                                    contacts_deleted, ignored))
 
-                    Boundary.get_boundaries(org)
-                    ContactField.get_contact_fields(org)
-                    Contact.fetch_contacts(org, after=after)
+    logger.warn("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
 
-                    print "Task: fetch_contacts for %s took %ss" % (org.name, time.time() - start)
-
-                except Exception as e:
-                    import traceback
-                    traceback.print_exc()
-                    logger.exception("Error fetching contacts: %s" % str(e))
-
-
+    return {
+        'fields': {'created': fields_created, 'updated': fields_updated, 'deleted': fields_deleted},
+        'boundaries': {'created': boundaries_created, 'updated': boundaries_updated, 'deleted': boundaries_deleted},
+        'contacts': {'created': contacts_created, 'updated': contacts_updated, 'deleted': contacts_deleted}
+    }

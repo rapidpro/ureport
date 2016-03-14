@@ -5,6 +5,8 @@ import json
 import math
 import time
 from datetime import timedelta, datetime
+
+import six
 from dash.orgs.models import Org
 from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
@@ -56,7 +58,7 @@ def get_linked_orgs(authenticated=False):
         if org.get_config('is_on_landing_page'):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
             if flag:
-                linked_sites.append(dict(name=org.name, host=host, flag=flag.image.url, is_static=False))
+                linked_sites.append(dict(name=org.subdomain, host=host, flag=flag.image.url, is_static=False))
 
     linked_sites_sorted = sorted(linked_sites, key=lambda k: k['name'].lower())
 
@@ -234,7 +236,6 @@ def fetch_flows(org):
                 flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
                 flow_json['created_on'] = datetime_to_json_date(flow.created_on)
                 flow_json['name'] = flow.name
-                flow_json['participants'] = flow.participants
                 flow_json['runs'] = flow.runs
                 flow_json['completed_runs'] = flow.completed_runs
                 flow_json['rulesets'] = [
@@ -263,6 +264,23 @@ def get_flows(org):
         return cache_value['results']
 
     return fetch_flows(org)
+
+
+def update_poll_flow_archived(org):
+    flows = get_flows(org)
+
+    if flows:
+        archived_flow_uuids = []
+        active_flow_uuids = []
+
+        for flow in flows.values():
+            if flow.get('archived', False):
+                archived_flow_uuids.append(flow['uuid'])
+            else:
+                active_flow_uuids.append(flow['uuid'])
+
+        Poll.objects.filter(flow_uuid__in=archived_flow_uuids, org=org).update(flow_archived=True)
+        Poll.objects.filter(flow_uuid__in=active_flow_uuids, org=org).update(flow_archived=False)
 
 
 def fetch_old_sites_count():

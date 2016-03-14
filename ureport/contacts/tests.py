@@ -4,10 +4,12 @@ from __future__ import unicode_literals
 from datetime import datetime
 from django.utils import timezone
 
+from dash.orgs.models import TaskState
+
 from mock import patch
 import pytz
 from ureport.contacts.models import ContactField, Contact, ReportersCounter
-from ureport.contacts.tasks import fetch_contacts_task
+from ureport.contacts.tasks import pull_contacts
 from ureport.locations.models import Boundary
 from ureport.tests import DashTest, TembaContactField, MockTembaClient, TembaContact
 from temba_client.v1.types import Group as TembaGroup
@@ -96,6 +98,22 @@ class ContactTest(DashTest):
 
         self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
         self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
+
+    def test_get_or_create(self):
+
+        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid='contact-uuid').first())
+
+        created_contact = Contact.get_or_create(self.nigeria, 'contact-uuid')
+
+        self.assertTrue(created_contact)
+        self.assertIsNone(created_contact.born)
+
+        created_contact.born = '2000'
+        created_contact.save()
+
+        existing_contact = Contact.get_or_create(self.nigeria, 'contact-uuid')
+        self.assertEqual(created_contact.pk, existing_contact.pk)
+        self.assertEqual(existing_contact.born, 2000)
 
     def test_kwargs_from_temba(self):
 
@@ -255,39 +273,33 @@ class ContactTest(DashTest):
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_tasks(self):
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria, ['total-reporters', 'gender:m']),
+                         {'total-reporters': 2, 'gender:m': 2})
+
+
+class TasksTest(DashTest):
+    def setUp(self):
+        super(TasksTest, self).setUp()
+        self.nigeria = self.create_org('nigeria', self.admin)
+
+    @patch('ureport.tests.TestBackend.pull_fields')
+    @patch('ureport.tests.TestBackend.pull_boundaries')
+    @patch('ureport.tests.TestBackend.pull_contacts')
+    def test_pull_contacts(self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields):
+        mock_pull_fields.return_value = (1, 2, 3, 4)
+        mock_pull_boundaries.return_value = (5, 6, 7, 8)
+        mock_pull_contacts.return_value = (9, 10, 11, 12)
 
         with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
                                                'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
                                                }}):
-            with patch('ureport.contacts.tasks.Contact.fetch_contacts') as mock_fetch_contacts:
-                with patch('ureport.contacts.tasks.Boundary.fetch_boundaries') as mock_fetch_boundaries:
-                    with patch('ureport.contacts.tasks.ContactField.fetch_contact_fields') as mock_fetch_contact_fields:
 
-                        mock_fetch_contacts.return_value = 'FETCHED'
-                        mock_fetch_boundaries.return_value = 'FETCHED'
-                        mock_fetch_contact_fields.return_value = 'FETCHED'
+            pull_contacts(self.nigeria.pk)
 
-                        fetch_contacts_task(self.nigeria.pk, True)
-                        mock_fetch_contacts.assert_called_once_with(self.nigeria, after=None)
-                        mock_fetch_boundaries.assert_called_with(self.nigeria)
-                        mock_fetch_contact_fields.assert_called_with(self.nigeria)
-                        self.assertEqual(mock_fetch_boundaries.call_count, 2)
-                        self.assertEqual(mock_fetch_contact_fields.call_count, 2)
-
-                        mock_fetch_contacts.reset_mock()
-                        mock_fetch_boundaries.reset_mock()
-                        mock_fetch_contact_fields.reset_mock()
-
-                        with patch('django.core.cache.cache.get') as cache_get_mock:
-                            date_str = '2014-01-02T01:04:05.000Z'
-                            d1 = json_date_to_datetime(date_str)
-
-                            cache_get_mock.return_value = date_str
-
-                            fetch_contacts_task(self.nigeria.pk)
-                            mock_fetch_contacts.assert_called_once_with(self.nigeria, after=d1)
-                            self.assertFalse(mock_fetch_boundaries.called)
-                            self.assertFalse(mock_fetch_contact_fields.called)
+            task_state = TaskState.objects.get(org=self.nigeria, task_key='contact-pull')
+            self.assertEqual(task_state.get_last_results(), {
+                'fields': {'created': 1, 'updated': 2, 'deleted': 3},
+                'boundaries': {'created': 5, 'updated': 6, 'deleted': 7},
+                'contacts': {'created': 9, 'updated': 10, 'deleted': 11}
+            })

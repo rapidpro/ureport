@@ -2,9 +2,9 @@
 
 from __future__ import unicode_literals
 
-from dash.api import API
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.test import override_settings
 from django.utils import timezone
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User
@@ -12,109 +12,15 @@ from dash.orgs.middleware import SetOrgMiddleware
 from mock import Mock, patch
 from dash.orgs.models import Org
 from django.http.request import HttpRequest
+
+from ureport.backend.rapidpro import RapidProBackend
 from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll
 from ureport.public.views import IndexView
 from temba_client.v1 import TembaClient
 from temba_client.v1.types import Result, Flow, Group, Boundary as TembaBoundary, Field as TembaContactField
 from temba_client.v1.types import Contact as TembaContact, Group as TembaGroup
-from temba_client.v1.types import Geometry as TembaGeometry
-
-
-class MockAPI(API):  # pragma: no cover
-
-    def get_group(self, name):
-        return dict(group=8, name=name, size=120)
-
-    def get_country_geojson(self):
-        return dict(
-                   type="FeatureCollection",
-                   features=[
-                       dict(
-                           type='Feature',
-                           properties=dict(
-                               id="R3713501",
-                               level=1,
-                               name="Abia"
-                           ),
-                           geometry=dict(
-                               type="MultiPolygon",
-                               coordinates=[
-                                   [
-                                       [
-                                           [7, 5]
-                                       ]
-                                   ]
-                               ]
-                           )
-                       )
-                   ]
-            )
-
-    def get_geojson_by_parent_id(self, parent_id):
-        return dict(type="FeatureCollection",
-                    features=[dict(type='Feature',
-                                   properties=dict(id="R3713502",
-                                                   level=2,
-                                                   name="Aba North"),
-                                   geometry=dict(type="MultiPolygon",
-                                                 coordinates=[[[[8, 4]]]]
-                                                 )
-                                   )
-                            ]
-                    )
-
-    def get_ruleset_results(self, ruleset_id, segment=None):
-        return [dict(open_ended=False,
-                     set=3462,
-                     unset=3694,
-                     categories=[dict(count=2210,
-                                      label='Yes'
-                                      ),
-                                 dict(count=1252,
-                                      label='No'
-                                      )
-                                 ],
-                     label='All')
-                ]
-
-    def get_contact_field_results(self, contact_field_label, segment=None):
-        return [
-            dict(
-                open_ended=False,
-                set=3462,
-                unset=3694,
-                categories=[
-                    dict(
-                        count=2210,
-                        label='Yes'
-                    ),
-                    dict(
-                        count=1252,
-                        label='No'
-                    )
-                ],
-                label='All'
-            )
-        ]
-
-    def get_flows(self, filter=None):
-        return [
-            dict(
-                runs=300,
-                completed_runs=120,
-                name='Flow 1',
-                flow_uuid='uuid-25',
-                participants=300,
-                rulesets=[
-                   dict(node='386fc244-cc98-476a-b05e-f8a431a4dd41',
-                        id=8435,
-                        label='Does your community have power'
-                   )
-                ]
-
-            )
-        ]
+from temba_client.v1.types import Geometry as TembaGeometry, FlowDefinition
 
 
 class MockTembaClient(TembaClient):
@@ -149,7 +55,7 @@ class MockTembaClient(TembaClient):
                                            completed_runs=120,
                                            name='Flow 1',
                                            uuid='uuid-25',
-                                           participants=300,
+                                           participants=None,
                                            labels="",
                                            archived=False,
                                            created_on="2015-04-08T12:48:44.320Z",
@@ -162,7 +68,7 @@ class MockTembaClient(TembaClient):
                                      completed_runs=120,
                                      name='Flow 1',
                                      uuid='uuid-25',
-                                     participants=300,
+                                     participants=None,
                                      labels="",
                                      archived=False,
                                      created_on="2015-04-08T12:48:44.320Z",
@@ -170,7 +76,23 @@ class MockTembaClient(TembaClient):
                                                     label='Does your community have power')]
                                      ))
 
+    def get_flow_definition(self, uuid):
+        return FlowDefinition.deserialize(dict(metadata=dict(), version=8, base_language='eng', flow_type='',
+                                               action_sets=[], rule_sets=[dict(uuid='ruleset-1-uuid', label='ruleset1',
+                                                                               ruleset_type='wait_message',
+                                                                               rules=[dict(uuid='rule-1-uuid',
+                                                                                           category=dict(eng='Blue')
+                                                                                           )])], entry=''))
 
+
+class TestBackend(RapidProBackend):
+    """
+    TODO once all backend functionality actually goes through get_backend() this can become a stub
+    """
+    pass
+
+
+@override_settings(SITE_BACKEND='ureport.tests.TestBackend')
 class DashTest(SmartminTest):
 
     def setUp(self):

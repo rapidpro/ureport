@@ -4,6 +4,9 @@ from django.db import models
 from dash.orgs.models import Org
 from django.utils.translation import ugettext_lazy as _
 
+from django_redis import get_redis_connection
+
+BOUNDARY_LOCK_KEY = 'lock:boundary:%d:%s'
 
 class Boundary(models.Model):
     """
@@ -14,6 +17,8 @@ class Boundary(models.Model):
     BOUNDARIES_CACHE_KEY = 'org:%d:boundaries-osm-ids'
 
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="boundaries")
+
+    is_active = models.BooleanField(default=True)
 
     osm_id = models.CharField(max_length=15,
                               help_text=_("This is the OSM id for this administrative boundary"))
@@ -31,6 +36,10 @@ class Boundary(models.Model):
 
     class Meta:
         unique_together = ('org', 'osm_id')
+
+    @classmethod
+    def lock(cls, org, osm_id):
+        return get_redis_connection().lock(BOUNDARY_LOCK_KEY % (org.pk, osm_id), timeout=60)
 
     @classmethod
     def kwargs_from_temba(cls, org, temba_boundary):
@@ -124,3 +133,6 @@ class Boundary(models.Model):
         top_boundaries_values = top_boundaries.values('name', 'osm_id')
 
         return {k['osm_id']: k['name'] for k in top_boundaries_values}
+
+    def release(self):
+        self.delete()

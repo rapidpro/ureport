@@ -16,7 +16,8 @@ from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FET
 from ureport.tests import DashTest
 from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
-    get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows
+    get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
+    update_poll_flow_archived
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
@@ -54,7 +55,7 @@ class UtilsTest(DashTest):
 
     def test_get_linked_orgs(self):
 
-        # we have 4 old org in the settings
+        # we have 3 old org in the settings
         self.assertEqual(len(get_linked_orgs()), 3)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'burundi')
@@ -69,9 +70,21 @@ class UtilsTest(DashTest):
         Image.objects.create(org=self.org, image_type=FLAG, name='burundi_flag',
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
-        # burundi should be included and be the first; by alphetical order
+        # burundi should be included and be the first; by alphabetical order by subdomain
         self.assertEqual(len(get_linked_orgs()), 4)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+
+        self.org.subdomain = 'rwanda'
+        self.org.save()
+
+        # rwanda should be included and the third in the list alphabetically by subdomain
+        self.assertEqual(len(get_linked_orgs()), 4)
+        self.assertEqual(get_linked_orgs()[2]['name'].lower(), 'rwanda')
+
+        # revert subdomain to burundi
+        self.org.subdomain = 'burundi'
+        self.org.save()
+
         with self.settings(HOSTNAME='localhost:8000'):
             self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
             self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://burundi.localhost:8000')
@@ -421,28 +434,51 @@ class UtilsTest(DashTest):
                 polls = [self.poll]
                 _fetch_org_polls_results(self.org, polls)
                 mock_poll_model_fetch_results.assert_called_with()
-                mock_poll_model_fetch_results.mock_reset()
+                mock_poll_model_fetch_results.reset_mock()
 
-            with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
-                mock_main_poll.return_value = self.poll
+                with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
+                    mock_main_poll.return_value = self.poll
 
-                fetch_main_poll_results(self.org)
-                mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                    fetch_main_poll_results(self.org)
+                    mock_poll_model_fetch_results.assert_called_once_with()
+                    mock_poll_model_fetch_results.reset_mock()
 
-            with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
-                mock_brick_polls.return_value = [self.poll]
+                with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
+                    mock_brick_polls.return_value = [self.poll]
 
-                fetch_brick_polls_results(self.org)
-                mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                    fetch_brick_polls_results(self.org)
+                    mock_poll_model_fetch_results.assert_called_once_with()
+                    mock_poll_model_fetch_results.reset_mock()
 
-            with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
-                mock_other_polls.return_value = [self.poll]
+                with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
+                    mock_other_polls.return_value = [self.poll]
 
-                fetch_other_polls_results(self.org)
-                mock_poll_model_fetch_results.assert_called_once_with()
-                mock_poll_model_fetch_results.mock_reset()
+                    fetch_other_polls_results(self.org)
+                    mock_poll_model_fetch_results.assert_called_once_with()
+                    mock_poll_model_fetch_results.reset_mock()
+
+    def test_update_poll_flow_archived(self):
+        poll = Poll.objects.filter(pk=self.poll.pk).first()
+        self.assertFalse(poll.flow_archived)
+
+        with patch("ureport.utils.get_flows") as mock_get_flows:
+            mock_get_flows.return_value = dict()
+
+            update_poll_flow_archived(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertFalse(poll.flow_archived)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True}}
+
+            update_poll_flow_archived(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertTrue(poll.flow_archived)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1'}}
+
+            update_poll_flow_archived(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertFalse(poll.flow_archived)
 
     def test_fetch_old_sites_count(self):
         self.clear_cache()
@@ -459,19 +495,12 @@ class UtilsTest(DashTest):
                         cache_delete_mock.return_value = "Deleted"
 
                         old_site_values = fetch_old_sites_count()
-                        self.assertEqual(old_site_values, [{'time': 500, 'results': dict(size=300)},
-                                                           {'time': 500, 'results': dict(size=50)}])
-                        self.assertEqual(mock_get.call_count, 2)
-                        mock_get.assert_any_call('http://ureport.ug/count.txt')
-                        mock_get.assert_any_call('http://www.zambiaureport.org/count.txt/')
+                        self.assertEqual(old_site_values, [{'time': 500, 'results': dict(size=300)}])
 
-                        self.assertEqual(cache_set_mock.call_count, 2)
-                        cache_set_mock.assert_any_call('org:uganda:reporters:old-site',
+                        mock_get.assert_called_once_with('http://www.zambiaureport.org/count.txt/')
+
+                        cache_set_mock.assert_called_once_with('org:zambia:reporters:old-site',
                                                        {'time': 500, 'results': dict(size=300)},
-                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-
-                        cache_set_mock.assert_any_call('org:zambia:reporters:old-site',
-                                                       {'time': 500, 'results': dict(size=50)},
                                                        UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
