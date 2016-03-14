@@ -239,6 +239,8 @@ class PollCRUDL(SmartCRUDL):
             fields = []
             for question in questions:
                 fields.append('ruleset_%s_include' % question.ruleset_uuid)
+                fields.append('ruleset_%s_order' % question.ruleset_uuid)
+                fields.append('ruleset_%s_label' % question.ruleset_uuid)
                 fields.append('ruleset_%s_title' % question.ruleset_uuid)
 
             return fields
@@ -258,13 +260,24 @@ class PollCRUDL(SmartCRUDL):
                 include_field = forms.BooleanField(label=_("Include"), required=False, initial=include_field_initial,
                                                    help_text=_("Whether to include this question in your public results"))
 
+                order_field_name = 'ruleset_%s_order' % question.ruleset_uuid
+                order_field_initial = initial.get(order_field_name, 0)
+                order_field = forms.IntegerField(label=_("Order"), required=False, initial=order_field_initial,
+                                                 help_text=_("The position order number for this question on the poll page"))
+
+                label_field_name = 'ruleset_%s_label' % question.ruleset_uuid
+                label_field_initial = initial.get(label_field_name, "")
+                label_field = forms.CharField(label=_("Ruleset Label"), widget=forms.TextInput(attrs={'readonly':'readonly'}), required=False, initial=label_field_initial,
+                                              help_text=_("The question posed to your audience, will be displayed publicly"))
+
                 title_field_name = 'ruleset_%s_title' % question.ruleset_uuid
                 title_field_initial = initial.get(title_field_name, '')
                 title_field = forms.CharField(label=_("Title"), widget=forms.Textarea, required=False, initial=title_field_initial,
                                               help_text=_("The question posed to your audience, will be displayed publicly"))
 
-
                 self.form.fields[include_field_name] = include_field
+                self.form.fields[order_field_name] = order_field
+                self.form.fields[label_field_name] = label_field
                 self.form.fields[title_field_name] = title_field
 
             return self.form
@@ -279,9 +292,14 @@ class PollCRUDL(SmartCRUDL):
                 r_uuid = question.ruleset_uuid
 
                 included = data.get('ruleset_%s_include' % r_uuid, False)
+                order = data.get('ruleset_%s_order' % r_uuid, 0)
+                if order is None:
+                    order = 0
+
                 title = data['ruleset_%s_title' % r_uuid]
-                existing = PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).first()
-                PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).update(is_active=included, title=title)
+
+                PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).update(is_active=included, title=title,
+                                                                                   order=order)
 
             return self.object
 
@@ -300,6 +318,8 @@ class PollCRUDL(SmartCRUDL):
 
             for question in self.object.questions.all():
                 initial['ruleset_%s_include' % question.ruleset_uuid] = question.is_active
+                initial['ruleset_%s_order' % question.ruleset_uuid] = question.order
+                initial['ruleset_%s_label' % question.ruleset_uuid] = question.ruleset_label
                 initial['ruleset_%s_title' % question.ruleset_uuid] = question.title
 
             return initial

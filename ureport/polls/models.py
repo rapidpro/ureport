@@ -278,7 +278,7 @@ class Poll(SmartModel):
                 return question
 
     def get_questions(self):
-        return self.questions.filter(is_active=True).order_by('pk')
+        return self.questions.filter(is_active=True).order_by('order', 'pk')
 
     def get_images(self):
         return self.images.filter(is_active=True).order_by('pk')
@@ -353,15 +353,23 @@ class PollQuestion(SmartModel):
 
     ruleset_type = models.CharField(max_length=32, default='wait_message')
 
+    ruleset_label = models.CharField(max_length=255, null=True, blank=True,
+                                     help_text=_("The label of the ruleset on RapidPro"))
+
+    order = models.IntegerField(default=0, null=True, blank=True,
+                                help_text=_("The order number for this question on the poll"))
+
+
     @classmethod
-    def update_or_create(cls, user, poll, title, uuid, ruleset_type):
+    def update_or_create(cls, user, poll, ruleset_label, uuid, ruleset_type):
         existing = cls.objects.filter(ruleset_uuid=uuid, poll=poll)
 
         if existing:
-            existing.update(ruleset_type=ruleset_type)
+            existing.update(ruleset_type=ruleset_type, ruleset_label=ruleset_label)
             question = existing.first()
         else:
-            question = PollQuestion.objects.create(poll=poll, ruleset_uuid=uuid, title=title, ruleset_type=ruleset_type,
+            question = PollQuestion.objects.create(poll=poll, ruleset_uuid=uuid, title=ruleset_label,
+                                                   ruleset_type=ruleset_type, ruleset_label=ruleset_label,
                                                    is_active=False, created_by=user, modified_by=user)
         return question
 
