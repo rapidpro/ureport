@@ -237,6 +237,7 @@ def fetch_flows(org):
                 flow_json['created_on'] = datetime_to_json_date(flow.created_on)
                 flow_json['name'] = flow.name
                 flow_json['runs'] = flow.runs
+                flow_json['archived'] = flow.archived
                 flow_json['completed_runs'] = flow.completed_runs
                 flow_json['rulesets'] = [
                     dict(uuid=elt.uuid, label=elt.label, response_type=elt.response_type) for elt in flow.rulesets]
@@ -266,21 +267,32 @@ def get_flows(org):
     return fetch_flows(org)
 
 
-def update_poll_flow_archived(org):
+def update_poll_flow_data(org):
     flows = get_flows(org)
 
     if flows:
-        archived_flow_uuids = []
-        active_flow_uuids = []
+        org_polls = Poll.objects.filter(org=org)
+        for poll in org_polls:
+            flow = flows.get(poll.flow_uuid, dict())
 
-        for flow in flows.values():
-            if flow.get('archived', False):
-                archived_flow_uuids.append(flow['uuid'])
-            else:
-                active_flow_uuids.append(flow['uuid'])
+            if flow:
+                archived = flow.get('archived', False)
+                runs_count = flow.get('runs', 0)
+                if not runs_count:
+                    runs_count = 0
 
-        Poll.objects.filter(flow_uuid__in=archived_flow_uuids, org=org).update(flow_archived=True)
-        Poll.objects.filter(flow_uuid__in=active_flow_uuids, org=org).update(flow_archived=False)
+                updated_fields = []
+
+                if archived != poll.flow_archived:
+                    poll.flow_archived = archived
+                    updated_fields.append('flow_archived')
+
+                if runs_count > 0 and runs_count != poll.runs_count:
+                    poll.runs_count = runs_count
+                    updated_fields.append('runs_count')
+
+                if updated_fields:
+                    poll.save(update_fields=updated_fields)
 
 
 def fetch_old_sites_count():

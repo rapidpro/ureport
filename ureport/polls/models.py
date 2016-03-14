@@ -59,6 +59,7 @@ class PollCategory(SmartModel):
         unique_together = ('name', 'org')
         verbose_name_plural = _("Poll Categories")
 
+
 class Poll(SmartModel):
     """
     A poll represents a single Flow that has been brought in for
@@ -73,6 +74,9 @@ class Poll(SmartModel):
                                         help_text=_("Whether the flow for this poll is archived on RapidPro"))
 
     base_language = models.CharField(max_length=4, default='base', help_text=_("The base language of the flow to use"))
+
+    runs_count = models.IntegerField(default=0,
+                                     help_text=_("The number of polled reporters on this poll"))
 
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
@@ -278,7 +282,7 @@ class Poll(SmartModel):
                 return question
 
     def get_questions(self):
-        return self.questions.filter(is_active=True).order_by('pk')
+        return self.questions.filter(is_active=True).order_by('-priority', 'pk')
 
     def get_images(self):
         return self.images.filter(is_active=True).order_by('pk')
@@ -353,15 +357,23 @@ class PollQuestion(SmartModel):
 
     ruleset_type = models.CharField(max_length=32, default='wait_message')
 
+    ruleset_label = models.CharField(max_length=255, null=True, blank=True,
+                                     help_text=_("The label of the ruleset on RapidPro"))
+
+    priority = models.IntegerField(default=0, null=True, blank=True,
+                                   help_text=_("The priority number for this question on the poll"))
+
+
     @classmethod
-    def update_or_create(cls, user, poll, title, uuid, ruleset_type):
+    def update_or_create(cls, user, poll, ruleset_label, uuid, ruleset_type):
         existing = cls.objects.filter(ruleset_uuid=uuid, poll=poll)
 
         if existing:
-            existing.update(ruleset_type=ruleset_type)
+            existing.update(ruleset_type=ruleset_type, ruleset_label=ruleset_label)
             question = existing.first()
         else:
-            question = PollQuestion.objects.create(poll=poll, ruleset_uuid=uuid, title=title, ruleset_type=ruleset_type,
+            question = PollQuestion.objects.create(poll=poll, ruleset_uuid=uuid, title=ruleset_label,
+                                                   ruleset_type=ruleset_type, ruleset_label=ruleset_label,
                                                    is_active=False, created_by=user, modified_by=user)
         return question
 

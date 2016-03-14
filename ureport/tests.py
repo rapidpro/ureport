@@ -58,6 +58,7 @@ class MockTembaClient(TembaClient):
                                            participants=None,
                                            labels="",
                                            archived=False,
+                                           expires=720,
                                            created_on="2015-04-08T12:48:44.320Z",
                                            rulesets=[dict(node='uuid-8435', id="8435", response_type="C",
                                                           label='Does your community have power')]
