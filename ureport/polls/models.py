@@ -404,7 +404,7 @@ class PollQuestion(SmartModel):
         if cached_value:
             return cached_value['results']
 
-        if segment and segment.get('location', "") == "District":
+        if segment and segment.get('location', "") in ('District', 'Ward'):
             self.fetch_results(segment=segment)
 
             cached_value = cache.get(key, None)

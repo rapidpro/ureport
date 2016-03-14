@@ -54,7 +54,7 @@ class PublicTest(DashTest):
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 30)
+        self.assertEquals(len(response.context['form'].fields), 31)
 
     def test_chooser(self):
         chooser_url = reverse('public.home')
@@ -811,6 +811,30 @@ class PublicTest(DashTest):
                                                                geometry=dict(type='MultiPolygon',
                                                                              coordinates=[[1, 2]]))])
 
+        self.assertEquals(json.dumps(output), response.content)
+
+    def test_boundary_view_request_by_parent_id(self):
+        district_boundary_url = reverse('public.boundaries', args=['R987'])
+
+        self.country = Boundary.objects.create(org=self.uganda, osm_id="R12345", name="Uganda", level=0, parent=None,
+                                               geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+
+        self.mbarara = Boundary.objects.create(org=self.uganda, osm_id="R987", name="Mbarara",
+                                               level=1, parent=self.country,
+                                               geometry='{"type":"MultiPolygon", "coordinates":[[9, 9]]}')
+
+        self.ajingi = Boundary.objects.create(org=self.uganda, osm_id="R99100", name="Ajingi", level=3,
+                                              parent=self.mbarara,
+                                              geometry='{"type":"MultiPolygon", "coordinates":[[11, 12]]}')
+
+        response = self.client.get(district_boundary_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+
+        output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R99100",
+                                                                                               level=3,
+                                                                                               name='Ajingi'),
+                                                               geometry=dict(type='MultiPolygon',
+                                                                             coordinates=[[11,12]]))])
         self.assertEquals(json.dumps(output), response.content)
 
     def test_stories_list(self):
