@@ -59,6 +59,7 @@ class PollCategory(SmartModel):
         unique_together = ('name', 'org')
         verbose_name_plural = _("Poll Categories")
 
+
 class Poll(SmartModel):
     """
     A poll represents a single Flow that has been brought in for
@@ -73,6 +74,9 @@ class Poll(SmartModel):
                                         help_text=_("Whether the flow for this poll is archived on RapidPro"))
 
     base_language = models.CharField(max_length=4, default='base', help_text=_("The base language of the flow to use"))
+
+    runs_count = models.IntegerField(default=0,
+                                     help_text=_("The number of polled reporters on this poll"))
 
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
