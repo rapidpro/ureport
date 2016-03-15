@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import json
 
 import pytz
+import time
 from dash.utils import is_dict_equal
 from dash.utils.sync import BaseSyncer, sync_local_to_set, sync_local_to_changes
 from django.core.cache import cache
@@ -261,9 +262,13 @@ class RapidProBackend(BaseBackend):
         org = poll.org
         client = self._get_client(org, 2)
 
+        start = time.time()
+        print "Start fetching runs for %d" % org.pk
+
         # ignore the TaskState time and use the time we stored in redis
         now = timezone.now()
         after = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
+        after = None
 
         poll_runs_query = client.get_runs(flow=poll.flow_uuid, responded=True, after=after, before=now)
         fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
@@ -317,8 +322,12 @@ class RapidProBackend(BaseBackend):
             if progress_callback:
                 progress_callback(num_synced)
 
+            print "Fetched %d runs in %ds" % (num_synced, time.time() - start)
+
+
         # update the time for this poll from which we fetch next time
         cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
 
+        print "Finished fetching results runs in $ds, created %d, updated %d, ignored %d" % (time.time() - start, num_created, num_updated, num_ignored)
         return num_created, num_updated, num_ignored
