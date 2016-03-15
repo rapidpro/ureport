@@ -263,7 +263,7 @@ class RapidProBackend(BaseBackend):
         client = self._get_client(org, 2)
 
         start = time.time()
-        print "Start fetching runs for %d" % org.pk
+        print "Start fetching runs for org #%d" % org.pk
 
         # ignore the TaskState time and use the time we stored in redis
         now = timezone.now()
@@ -281,7 +281,7 @@ class RapidProBackend(BaseBackend):
         fetch_start = time.time()
         for fetch in fetches:
 
-            print "RapidPro API fetch %d - %d took %ds" % (num_synced, num_synced + len(fetch), time.time() - fetch_start)
+            print "RapidPro API fetch org #%d %d - %d took %ds" % (org.pk, num_synced, num_synced + len(fetch), time.time() - fetch_start)
 
             local_sync_start = time.time()
 
@@ -327,8 +327,8 @@ class RapidProBackend(BaseBackend):
             if progress_callback:
                 progress_callback(num_synced)
 
-            print "Local sync ops %d - %d took %ds" % (num_synced - len(fetch), num_synced, time.time() - local_sync_start)
-            print "Total synced %d runs in %ds" % (num_synced, time.time() - start)
+            print "Local sync ops org #%d %d - %d took %ds" % (org.pk, num_synced - len(fetch), num_synced, time.time() - local_sync_start)
+            print "Total synced org #%d %d runs in %ds" % (org.pk, num_synced, time.time() - start)
             fetch_start = time.time()
             print "=" * 40
 
@@ -336,5 +336,5 @@ class RapidProBackend(BaseBackend):
         cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
 
-        print "Finished pulling results runs in %ds, created %d, updated %d, ignored %d" % (time.time() - start, num_created, num_updated, num_ignored)
+        print "Finished pulling results org #%d runs in %ds, created %d, updated %d, ignored %d" % (org.pk, time.time() - start, num_created, num_updated, num_ignored)
         return num_created, num_updated, num_ignored
