@@ -22,7 +22,7 @@ from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
     PollResultsCounter, PollResult
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows, \
-    recheck_poll_flow_archived, pull_results_main_poll, pull_results_brick_polls, pull_results_other_polls
+    recheck_poll_flow_data, pull_results_main_poll, pull_results_brick_polls, pull_results_other_polls
 from ureport.polls.tasks import fetch_poll, fetch_old_sites_count
 from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
@@ -607,6 +607,7 @@ class PollTest(DashTest):
 
         poll1_question = PollQuestion.objects.create(poll=poll1,
                                                      title='question poll 1',
+                                                     ruleset_label='question poll 1',
                                                      ruleset_uuid="uuid-101",
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
@@ -614,9 +615,13 @@ class PollTest(DashTest):
         response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 2)
+        self.assertEquals(len(response.context['form'].fields), 4)
         self.assertTrue('ruleset_uuid-101_include' in response.context['form'].fields)
+        self.assertTrue('ruleset_uuid-101_priority' in response.context['form'].fields)
+        self.assertTrue('ruleset_uuid-101_label' in response.context['form'].fields)
         self.assertTrue('ruleset_uuid-101_title' in response.context['form'].fields)
+        self.assertEquals(response.context['form'].fields['ruleset_uuid-101_priority'].initial, 0)
+        self.assertEquals(response.context['form'].fields['ruleset_uuid-101_label'].initial, 'question poll 1')
         self.assertEquals(response.context['form'].fields['ruleset_uuid-101_title'].initial, 'question poll 1')
 
         post_data = dict()
@@ -645,18 +650,23 @@ class PollTest(DashTest):
 
         poll_question = PollQuestion.objects.filter(poll=poll1, ruleset_uuid="uuid-101")[0]
         self.assertEquals(poll_question.title, 'have electricity access')
+        self.assertEquals(poll_question.ruleset_label, 'question poll 1')
+        self.assertEquals(poll_question.priority, 0)
 
         self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_images', args=[poll1.pk]))
 
         post_data = dict()
         post_data['ruleset_uuid-101_include'] = True
         post_data['ruleset_uuid-101_title'] = "electricity network coverage"
+        post_data['ruleset_uuid-101_priority'] = 5
         response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
 
         self.assertTrue(PollQuestion.objects.filter(poll=poll1))
 
         poll_question = PollQuestion.objects.filter(poll=poll1)[0]
         self.assertEquals(poll_question.title, 'electricity network coverage')
+        self.assertEquals(poll_question.ruleset_label, 'question poll 1')
+        self.assertEquals(poll_question.priority, 5)
 
         with patch('ureport.polls.models.Poll.clear_brick_polls_cache') as mock:
             mock.return_value = 'Cache cleared'
@@ -1069,11 +1079,11 @@ class PollQuestionTest(DashTest):
                 fetch_old_sites_count()
                 mock_fetch_old_sites_count.assert_called_once_with()
 
-            with patch('ureport.polls.tasks.update_poll_flow_archived') as mock_update_poll_flow_archived:
-                mock_update_poll_flow_archived.return_value = 'RECHECKED'
+            with patch('ureport.polls.tasks.update_poll_flow_data') as mock_update_poll_flow_data:
+                mock_update_poll_flow_data.return_value = 'RECHECKED'
 
-                recheck_poll_flow_archived(self.org.pk)
-                mock_update_poll_flow_archived.assert_called_once_with(self.org)
+                recheck_poll_flow_data(self.org.pk)
+                mock_update_poll_flow_data.assert_called_once_with(self.org)
 
 
 class PollResultsTest(DashTest):
