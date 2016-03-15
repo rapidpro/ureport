@@ -329,5 +329,5 @@ class RapidProBackend(BaseBackend):
         cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
 
-        print "Finished fetching results runs in $ds, created %d, updated %d, ignored %d" % (time.time() - start, num_created, num_updated, num_ignored)
+        print "Finished fetching results runs in %ds, created %d, updated %d, ignored %d" % (time.time() - start, num_created, num_updated, num_ignored)
         return num_created, num_updated, num_ignored
