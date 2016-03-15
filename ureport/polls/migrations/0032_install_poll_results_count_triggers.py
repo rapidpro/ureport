@@ -4,12 +4,6 @@ from __future__ import unicode_literals
 from django.db import models, migrations
 
 
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-from django.db import models, migrations
-
-
 # language=SQL
 TRIGGER_SQL = """
 --------------------------------------------------------------------------------------
