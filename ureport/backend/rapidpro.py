@@ -278,7 +278,13 @@ class RapidProBackend(BaseBackend):
         num_ignored = 0
         num_synced = 0
 
+        fetch_start = time.time()
         for fetch in fetches:
+
+            print "RapidPro API fetch %d - %d took %ds" % (num_synced, num_synced + len(fetch), time.time() - fetch_start)
+
+            local_sync_start = time.time()
+
             for temba_run in fetch:
                 flow_uuid = temba_run.flow.uuid
                 contact_uuid = temba_run.contact.uuid
@@ -293,19 +299,18 @@ class RapidProBackend(BaseBackend):
                     category = temba_step.category
                     text = temba_step.text
 
-                    existing = PollResult.objects.filter(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
-                                                         contact=contact_uuid)
-                    if existing:
-                        poll_result = existing.first()
+                    if PollResult.objects.filter(org=org, flow=flow_uuid,
+                                                 ruleset=ruleset_uuid, contact=contact_uuid).exists():
 
-                        update_required = poll_result.category != category or poll_result.text != text
-                        update_required = update_required or poll_result.state != state
-                        update_required = update_required or poll_result.district != district
-                        update_required = update_required or poll_result.completed != completed
+                        if not PollResult.objects.filter(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                         contact=contact_uuid,category=category, text=text,
+                                                         state=state, district=district, completed=completed).exists():
 
-                        if update_required:
-                            existing.update(category=category, text=text, state=state,
-                                            district=district, completed=completed)
+                            PollResult.objects.filter(org=org, flow=flow_uuid,
+                                                      ruleset=ruleset_uuid,
+                                                      contact=contact_uuid).update(category=category, text=text,
+                                                                                   state=state, district=district,
+                                                                                   completed=completed)
 
                             num_updated += 1
                         else:
@@ -322,12 +327,14 @@ class RapidProBackend(BaseBackend):
             if progress_callback:
                 progress_callback(num_synced)
 
-            print "Fetched %d runs in %ds" % (num_synced, time.time() - start)
-
+            print "Local sync ops %d - %d took %ds" % (num_synced - len(fetch), num_synced, time.time() - local_sync_start)
+            print "Total synced %d runs in %ds" % (num_synced, time.time() - start)
+            fetch_start = time.time()
+            print "=" * 40
 
         # update the time for this poll from which we fetch next time
         cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
 
-        print "Finished fetching results runs in %ds, created %d, updated %d, ignored %d" % (time.time() - start, num_created, num_updated, num_ignored)
+        print "Finished pulling results runs in %ds, created %d, updated %d, ignored %d" % (time.time() - start, num_created, num_updated, num_ignored)
         return num_created, num_updated, num_ignored
