@@ -621,7 +621,14 @@ class RapidProBackendTest(DashTest):
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
 
     @patch('dash.orgs.models.TembaClient2.get_runs')
-    def test_pull_results(self, mock_get_runs):
+    @patch('django.utils.timezone.now')
+    @patch('django.core.cache.cache.get')
+    def test_pull_results(self, mock_cache_get, mock_timezone_now, mock_get_runs):
+        mock_cache_get.return_value = None
+
+        now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
+        mock_timezone_now.return_value = now_date
+
 
         PollResult.objects.all().delete()
         contact = Contact.objects.create(org=self.nigeria, uuid='C-001', gender='M', born=1990, state='R-LAGOS',
@@ -643,6 +650,7 @@ class RapidProBackendTest(DashTest):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
+        mock_get_runs.assert_called_with(flow='flow-uuid', responded=True, after=None, before=now)
 
         poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
         self.assertEqual(poll_result.state, 'R-LAGOS')

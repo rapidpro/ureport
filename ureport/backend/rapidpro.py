@@ -265,7 +265,7 @@ class RapidProBackend(BaseBackend):
         now = timezone.now()
         after = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
 
-        poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=now)
+        poll_runs_query = client.get_runs(flow=poll.flow_uuid, responded=True, after=after, before=now)
         fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
 
         num_created = 0
