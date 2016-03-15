@@ -502,18 +502,19 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=[5, 25, 45]),
         'args': ('ureport.polls.tasks.pull_results_main_poll',)
     },
-    'results-pull-brick-polls':  {
-        'task': 'dash.orgs.tasks.trigger_org_task',
-        "schedule": timedelta(hours=48),
-        "relative": True,
-        'args': ('ureport.polls.tasks.pull_results_brick_polls',)
-    },
-    'results-pull-other-polls':  {
-        'task': 'dash.orgs.tasks.trigger_org_task',
-        "schedule": timedelta(hours=48),
-        "relative": True,
-        'args': ('ureport.polls.tasks.pull_results_other_polls',)
-    },
+    #
+    # 'results-pull-brick-polls':  {
+    #     'task': 'dash.orgs.tasks.trigger_org_task',
+    #     "schedule": timedelta(hours=48),
+    #     "relative": True,
+    #     'args': ('ureport.polls.tasks.pull_results_brick_polls',)
+    # },
+    # 'results-pull-other-polls':  {
+    #     'task': 'dash.orgs.tasks.trigger_org_task',
+    #     "schedule": timedelta(hours=48),
+    #     "relative": True,
+    #     'args': ('ureport.polls.tasks.pull_results_other_polls',)
+    # },
 
 }
 
