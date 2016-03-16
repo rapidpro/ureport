@@ -497,6 +497,8 @@ class PollResult(models.Model):
 
     contact = models.CharField(max_length=36)
 
+    date = models.DateTimeField()
+
     completed = models.BooleanField()
 
     category = models.CharField(max_length=255, null=True)

@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 ('flow', models.CharField(max_length=36)),
                 ('ruleset', models.CharField(max_length=36)),
                 ('contact', models.CharField(max_length=36)),
+                ('date', models.DateTimeField()),
                 ('completed', models.BooleanField()),
                 ('category', models.CharField(max_length=255, null=True)),
                 ('text', models.CharField(max_length=640, null=True)),

@@ -318,7 +318,7 @@ class RapidProBackend(BaseBackend):
 
                     else:
                         PollResult.objects.create(org=org, flow=flow_uuid, ruleset=ruleset_uuid, contact=contact_uuid,
-                                                  category=category, text=text, state=state,
+                                                  category=category, text=text, state=state, date=temba_step.arrived_on,
                                                   district=district, completed=completed)
 
                         num_created += 1

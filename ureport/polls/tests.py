@@ -1110,7 +1110,7 @@ class PollResultsTest(DashTest):
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), dict())
 
         poll_result = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
-                                                ruleset=self.poll_question.ruleset_uuid,
+                                                ruleset=self.poll_question.ruleset_uuid, date=self.now,
                                                 contact='contact-uuid', completed=False)
 
         expected = dict()
@@ -1135,7 +1135,7 @@ class PollResultsTest(DashTest):
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
         PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid, ruleset=self.poll_question.ruleset_uuid,
-                                  contact='contact-uuid', category='No', text='Nah', completed=False,
+                                  contact='contact-uuid', category='No', text='Nah', completed=False, date=self.now,
                                   state='R-LAGOS', district='R-oyo')
 
         expected = dict()
