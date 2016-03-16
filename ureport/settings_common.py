@@ -467,8 +467,8 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
-    "recheck_poll_flow_archived": {
-        "task": "polls.recheck_poll_flow_archived",
+    "recheck_poll_flow_data": {
+        "task": "polls.recheck_poll_flow_data",
         "schedule": timedelta(minutes=15),
         "relative": True,
     },
