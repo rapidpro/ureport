@@ -46,6 +46,17 @@ def json_date_to_datetime(date_str):
     return datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
 
 
+def get_dict_from_cursor(cursor):
+    """
+    Returns all rows from a cursor as a dict
+    """
+    desc = cursor.description
+    return [
+        dict(zip([col[0] for col in desc], row))
+        for row in cursor.fetchall()
+    ]
+
+
 def get_linked_orgs(authenticated=False):
     all_orgs = Org.objects.filter(is_active=True).order_by('name')
 
@@ -526,6 +537,24 @@ def get_regions_stats(org):
     return regions_stats
 
 
+def get_segment_org_boundaries(org, segment):
+    location_boundaries = []
+    if not segment:
+        return location_boundaries
+
+    if segment.get('location') == 'District':
+        state_id = segment.get('parent', None)
+        if state_id:
+            location_boundaries = org.boundaries.filter(level=2, parent__osm_id=state_id).values('osm_id', 'name').order_by('osm_id')
+    else:
+        if org.get_config('is_global'):
+            location_boundaries = org.boundaries.filter(level=0).values('osm_id', 'name').order_by('osm_id')
+        else:
+            location_boundaries = org.boundaries.filter(level=1).values('osm_id', 'name').order_by('osm_id')
+
+    return location_boundaries
+
+
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
@@ -536,3 +565,4 @@ Org.get_regions_stats = get_regions_stats
 Org.organize_categories_data = organize_categories_data
 Org.get_flows = get_flows
 Org.substitute_segment = substitute_segment
+Org.get_segment_org_boundaries = get_segment_org_boundaries

@@ -19,7 +19,7 @@ from temba_client.v1.types import Result, Flow, Group
 
 from dash.orgs.models import TaskState
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY, \
-    PollResultsCounter, PollResult
+    PollResultsCounter, PollResult, PollResponseCategory
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows, \
     recheck_poll_flow_data, pull_results_main_poll, pull_results_brick_polls, pull_results_other_polls
@@ -293,12 +293,8 @@ class PollTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        fetched_results = [dict(open_ended=False, set=40, unset=60, categories=[dict(count=15, label='Yes'),
-                                                                                dict(count=25, label='No')],
-                                label='All')]
-
-        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
-            mock.return_value = fetched_results
+        with patch('ureport.polls.models.PollQuestion.get_polled') as mock:
+            mock.return_value = 100
 
             self.assertEquals(poll1.runs(), 100)
             mock.assert_called_with()
@@ -314,12 +310,8 @@ class PollTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        fetched_results = [dict(open_ended=False, set=40, unset=60, categories=[dict(count=15, label='Yes'),
-                                                                                dict(count=25, label='No')],
-                                label='All')]
-
-        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
-            mock.return_value = fetched_results
+        with patch('ureport.polls.models.PollQuestion.get_responded') as mock:
+            mock.return_value = 40
 
             self.assertEquals(poll1.responded_runs(), 40)
             mock.assert_called_once_with()
@@ -335,15 +327,14 @@ class PollTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        fetched_results = [dict(open_ended=False, set=40, unset=60, categories=[dict(count=15, label='Yes'),
-                                                                                dict(count=25, label='No')],
-                                label='All')]
+        with patch('ureport.polls.models.PollQuestion.get_polled') as mock_polled:
+            mock_polled.return_value = 100
+            with patch('ureport.polls.models.PollQuestion.get_responded') as mock_responded:
+                mock_responded.return_value = 40
 
-        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
-            mock.return_value = fetched_results
-
-            self.assertEquals(poll1.response_percentage(), "40%")
-            mock.assert_called_with()
+                self.assertEquals(poll1.response_percentage(), "40%")
+                mock_polled.assert_called_with()
+                mock_responded.assert_called_with()
 
     def test_get_featured_images(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -944,6 +935,10 @@ class PollQuestionTest(DashTest):
                                                          created_by=self.admin,
                                                          modified_by=self.admin)
 
+    def assertResult(self, result, index, category, count):
+        self.assertEquals(count, result['categories'][index]['count'])
+        self.assertEquals(category, result['categories'][index]['label'])
+
     def test_poll_question_model(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
@@ -956,11 +951,25 @@ class PollQuestionTest(DashTest):
         self.assertEquals(unicode(poll_question1), 'question 1')
         fetched_results = [dict(open_ended=False, set=3462, unset=3694, categories=[dict(count=2210, label='Yes'),
                                                                                     dict(count=1252, label='No')],
-                                    label='All')]
+                                label='All')]
 
         self.uganda.set_config("state_label", "LGA")
         self.uganda.set_config("district_label", "District")
 
+        self.assertFalse(poll_question1.is_open_ended())
+
+        PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-1', 'Yes')
+
+        self.assertTrue(poll_question1.is_open_ended())
+
+        PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-2', 'No')
+        PollResponseCategory.objects.filter(category='No').update(is_active=False)
+
+        self.assertTrue(poll_question1.is_open_ended())
+
+        PollResponseCategory.objects.filter(category='No').update(is_active=True)
+
+        self.assertFalse(poll_question1.is_open_ended())
 
         with patch('dash.orgs.models.TembaClient1.get_results') as mock:
             mock.return_value = Result.deserialize_list(fetched_results)
@@ -990,43 +999,122 @@ class PollQuestionTest(DashTest):
 
                     mock.assert_called_with(poll_question1.ruleset_uuid, segment=segment)
 
-        with patch('ureport.polls.models.PollQuestion.fetch_results') as mock:
-            mock.return_value = None
+        now = timezone.now()
 
-            poll_question1.get_results()
-            self.assertFalse(mock.called)
+        PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
+                                  contact='contact-1', date=now, category='All responses', state='', district='',
+                                  text='1 better place', completed=False)
 
-            poll_question1.get_results(segment=dict(location='State'))
-            self.assertFalse(mock.called)
+        PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
+                                  contact='contact-2', date=now, category='All responses', state='', district='',
+                                  text='the great coffee', completed=False)
 
-            with patch('django.core.cache.cache.get') as cache_get_mock:
-                cache_get_mock.return_value = dict(results="RESULTS", time=500)
+        PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
+                                  contact='contact-3', date=now, category='All responses', state='', district='',
+                                  text='1 cup of black tea', completed=False)
 
-                poll_question1.get_results(segment=dict(location='District'))
-                self.assertFalse(mock.called)
+        PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
+                                  contact='contact-4', date=now, category='All responses', state='', district='',
+                                  text='awesome than this encore', completed=False)
 
-            with patch('django.core.cache.cache.get') as cache_get_mock:
-                cache_get_mock.return_value = None
+        PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
+                                  contact='contact-5', date=now, category='All responses', state='', district='',
+                                  text='from an awesome place in kigali', completed=False)
 
-                poll_question1.get_results(segment=dict(location='District'))
-                mock.assert_called_with(segment=dict(location='District'))
+        with patch('ureport.polls.models.PollQuestion.is_open_ended') as mock_open:
+            mock_open.return_value = True
 
-        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
-            mock.return_value = fetched_results
+            results = poll_question1.get_results()
+            result = results[0]
+            self.assertEquals(10, len(result['categories']))
+            self.assertTrue(result['open_ended'])
+            self.assertResult(result, 0, "awesome", 2)
+            self.assertResult(result, 1, "place", 2)
+            self.assertResult(result, 2, "better", 1)
+            self.assertResult(result, 3, "black", 1)
+            self.assertResult(result, 4, "coffee", 1)
+            self.assertResult(result, 5, "cup", 1)
+            self.assertResult(result, 6, "encore", 1)
+            self.assertResult(result, 7, "great", 1)
+            self.assertResult(result, 8, "kigali", 1)
+            self.assertResult(result, 9, "tea", 1)
 
-            self.assertFalse(poll_question1.is_open_ended())
+            self.uganda.language = 'fr'
+            self.uganda.save()
+
+            results = poll_question1.get_results()
+            result = results[0]
+            self.assertEquals(9, len(result['categories']))
+            self.assertTrue(result['open_ended'])
+            self.assertResult(result, 0, "awesome", 2)
+            self.assertResult(result, 1, "place", 2)
+            self.assertResult(result, 2, "better", 1)
+            self.assertResult(result, 3, "black", 1)
+            self.assertResult(result, 4, "coffee", 1)
+            self.assertResult(result, 5, "cup", 1)
+            self.assertResult(result, 6, "great", 1)
+            self.assertResult(result, 7, "kigali", 1)
+            self.assertResult(result, 8, "tea", 1)
+
+            self.uganda.language = 'en'
+            self.uganda.save()
+
+        question_results = dict()
+        question_results['ruleset:%s:total-ruleset-responded' % poll_question1.ruleset_uuid] = 3462
+        question_results['ruleset:%s:total-ruleset-polled' % poll_question1.ruleset_uuid] = 7156
+        question_results['ruleset:%s:category:yes' % poll_question1.ruleset_uuid] = 2210
+        question_results['ruleset:%s:category:no' % poll_question1.ruleset_uuid] = 1252
+
+        with patch('ureport.polls.models.PollQuestion.get_question_results') as mock:
+            mock.return_value = dict()
+
+            self.assertEqual(poll_question1.get_results(), [dict(open_ended=False, set=0, unset=0,
+                                                                 categories=[dict(count=0, label='Yes'),
+                                                                             dict(count=0, label='No')])])
             mock.assert_called_with()
+
+            self.assertEquals(poll_question1.get_responded(), 0)
+            mock.assert_called_with()
+
+            self.assertEquals(poll_question1.get_polled(), 0)
+            mock.assert_called_with()
+
+            self.assertEquals(poll_question1.get_words(), [dict(count=0, label='Yes'), dict(count=0, label='No')])
+            mock.assert_called_with()
+
+            mock.return_value = question_results
+
+            self.assertEqual(poll_question1.get_results(), [dict(open_ended=False, set=3462, unset=3694,
+                                                                 categories=[dict(count=2210, label='Yes'),
+                                                                             dict(count=1252, label='No')])])
 
             self.assertEquals(poll_question1.get_responded(), 3462)
             mock.assert_called_with()
 
-            self.assertEquals(poll_question1.get_polled(), 3462 + 3694)
+            self.assertEquals(poll_question1.get_polled(), 7156)
             mock.assert_called_with()
 
             self.assertEquals(poll_question1.get_words(), [dict(count=2210, label='Yes'), dict(count=1252, label='No')])
             mock.assert_called_with()
 
             self.assertEquals(poll_question1.get_response_percentage(), "48%")
+
+            question_results['ruleset:%s:category:yes:state:R-KGL' % poll_question1.ruleset_uuid] = 10
+            question_results['ruleset:%s:category:yes:state:R-LAGOS' % poll_question1.ruleset_uuid] = 20
+            question_results['ruleset:%s:category:no:state:R-LAGOS' % poll_question1.ruleset_uuid] = 30
+            question_results['ruleset:%s:nocategory:state:R-LAGOS' % poll_question1.ruleset_uuid] = 33
+
+            mock.return_value = question_results
+
+            with patch('dash.orgs.models.Org.get_segment_org_boundaries') as mock_segment_boundaries:
+                mock_segment_boundaries.return_value = [dict(osm_id='R-KGL', name='Kigali'),
+                                                        dict(osm_id='R-LAGOS', name='Lagos')]
+
+                self.assertEqual(poll_question1.get_results(segment=dict(location='State')),
+                                 [dict(open_ended=False, set=10, unset=0, boundary='R-KGL', label='Kigali',
+                                       categories=[dict(count=10, label='Yes'), dict(count=0, label='No')]),
+                                  dict(open_ended=False, set=50, unset=33, boundary='R-LAGOS', label='Lagos',
+                                       categories=[dict(count=20, label='Yes'), dict(count=30, label='No')])])
 
     def test_tasks(self):
         self.org = self.create_org("burundi", self.admin)
@@ -1110,7 +1198,7 @@ class PollResultsTest(DashTest):
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), dict())
 
         poll_result = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
-                                                ruleset=self.poll_question.ruleset_uuid,
+                                                ruleset=self.poll_question.ruleset_uuid, date=self.now,
                                                 contact='contact-uuid', completed=False)
 
         expected = dict()
@@ -1135,7 +1223,7 @@ class PollResultsTest(DashTest):
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
         PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid, ruleset=self.poll_question.ruleset_uuid,
-                                  contact='contact-uuid', category='No', text='Nah', completed=False,
+                                  contact='contact-uuid', category='No', text='Nah', completed=False, date=self.now,
                                   state='R-LAGOS', district='R-oyo')
 
         expected = dict()

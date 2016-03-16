@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 import json
 from datetime import datetime
-from django.db import models
+from django.db import models, connection
 from django.db.models import Sum
 from django.utils.text import slugify
 from smartmin.models import SmartModel
@@ -11,6 +11,7 @@ from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
 from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
+from stop_words import safe_get_stop_words
 
 
 # cache whether a question is open ended for a month
@@ -407,22 +408,87 @@ class PollQuestion(SmartModel):
             traceback.print_exc()
 
     def get_results(self, segment=None):
+        org = self.poll.org
+        open_ended = self.is_open_ended()
+        responded = self.get_responded()
+        polled = self.get_polled()
 
-        key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
-        if segment:
-            substituted_segment = self.poll.org.substitute_segment(segment)
-            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+        results = []
 
-        cached_value = cache.get(key, None)
-        if cached_value:
-            return cached_value['results']
+        if open_ended:
+            cursor = connection.cursor()
 
-        if segment and segment.get('location', "") == "District":
-            self.fetch_results(segment=segment)
+            custom_sql = """
+                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.ruleset = '%s') w group by w.label order by count desc;
+                      """ % self.ruleset_uuid
 
-            cached_value = cache.get(key, None)
-            if cached_value:
-                return cached_value['results']
+            cursor.execute(custom_sql)
+            from ureport.utils import get_dict_from_cursor
+            unclean_categories = get_dict_from_cursor(cursor)
+            categories = []
+
+            ureport_languages = getattr(settings, 'LANGUAGES', [('en', 'English')])
+
+            org_languages = [lang[1].lower() for lang in ureport_languages if lang[0] == org.language]
+
+            if 'english' not in org_languages:
+                org_languages.append('english')
+
+            ignore_words = []
+            for lang in org_languages:
+                ignore_words += safe_get_stop_words(lang)
+
+            categories = []
+
+            for category in unclean_categories:
+                if len(category['label']) > 1 and category['label'] not in ignore_words and len(categories) < 100:
+                    categories.append(dict(label=category['label'], count=int(category['count'])))
+
+            # sort by count, then alphabetically
+            categories = sorted(categories, key=lambda c: (-c['count'], c['label']))
+            results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+
+        else:
+            categories_label = self.response_categories.filter(is_active=True).values_list('category', flat=True)
+            question_results = self.get_question_results()
+
+            if segment:
+
+                location_part = segment.get('location').lower()
+
+                if location_part not in ['state', 'district']:
+                    return None
+
+                location_boundaries = org.get_segment_org_boundaries(segment)
+
+                for boundary in location_boundaries:
+                    categories = []
+                    osm_id = boundary.get('osm_id').upper()
+                    set_count = 0
+                    unset_count_key = "ruleset:%s:nocategory:%s:%s" % (self.ruleset_uuid, location_part, osm_id)
+                    unset_count = question_results.get(unset_count_key, 0)
+
+                    for categorie_label in categories_label:
+                        category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
+                        category_count = question_results.get(category_count_key, 0)
+                        set_count += category_count
+                        categories.append(dict(count=category_count, label=categorie_label))
+
+                    results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
+                                        boundary=osm_id, label=boundary.get('name'),
+                                        categories=categories))
+
+            else:
+                categories = []
+                for categorie_label in categories_label:
+                    category_count_key = "ruleset:%s:category:%s" % (self.ruleset_uuid, categorie_label.lower())
+                    if categorie_label.lower() != 'other':
+                        category_count = question_results.get(category_count_key, 0)
+                        categories.append(dict(count=category_count, label=categorie_label))
+
+                results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+
+        return results
 
     def get_total_summary_data(self):
         cached_results = self.get_results()
@@ -430,21 +496,21 @@ class PollQuestion(SmartModel):
             return cached_results[0]
         return dict()
 
+    def get_question_results(self):
+        return PollResultsCounter.get_question_results(self)
+
     def is_open_ended(self):
-        cache_key = 'open_ended:%d' % self.id
-        open_ended = cache.get(cache_key, None)
-
-        if open_ended is None:
-            open_ended = self.get_total_summary_data().get('open_ended', False)
-            cache.set(cache_key, open_ended, OPEN_ENDED_CACHE_TIME)
-
-        return open_ended
+        return self.response_categories.filter(is_active=True).count() == 1
 
     def get_responded(self):
-        return self.get_total_summary_data().get('set', 0)
+        results = self.get_question_results()
+        key = 'ruleset:%s:total-ruleset-responded' % self.ruleset_uuid
+        return results.get(key, 0)
 
     def get_polled(self):
-        return self.get_total_summary_data().get('set', 0) + self.get_total_summary_data().get('unset', 0)
+        results = self.get_question_results()
+        key = 'ruleset:%s:total-ruleset-polled' % self.ruleset_uuid
+        return results.get(key, 0)
 
     def get_response_percentage(self):
         polled = self.get_polled()
@@ -497,6 +563,8 @@ class PollResult(models.Model):
 
     contact = models.CharField(max_length=36)
 
+    date = models.DateTimeField()
+
     completed = models.BooleanField()
 
     category = models.CharField(max_length=255, null=True)
@@ -528,6 +596,19 @@ class PollResultsCounter(models.Model):
         poll_rulesets = poll.questions.all().values_list('ruleset_uuid', flat=True)
 
         counters = cls.objects.filter(org=poll.org, ruleset__in=poll_rulesets)
+        if types:
+            counters = counters.filter(type__in=types)
+
+        results = counters.values('type').order_by('type').annotate(count_sum=Sum('count'))
+
+        return {c['type']: c['count_sum'] for c in results}
+
+    @classmethod
+    def get_question_results(cls, question, types=None):
+        """
+        Get the poll question results counts by counter type for a given poll
+        """
+        counters = cls.objects.filter(org=question.poll.org, ruleset=question.ruleset_uuid)
         if types:
             counters = counters.filter(type__in=types)
 
