@@ -577,7 +577,7 @@ class PollResult(models.Model):
     district = models.CharField(max_length=255, null=True)
 
     class Meta:
-        index_together = ["flow", "ruleset"]
+        index_together = [["org", "flow", "ruleset"], ["org", "contact"]]
 
 class PollResultsCounter(models.Model):
 
