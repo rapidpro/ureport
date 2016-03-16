@@ -287,17 +287,10 @@ class PollTest(DashTest):
 
         self.assertEquals(poll1.runs(), "----")
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        poll1.runs_count = 100
+        poll1.save()
 
-        with patch('ureport.polls.models.PollQuestion.get_polled') as mock:
-            mock.return_value = 100
-
-            self.assertEquals(poll1.runs(), 100)
-            mock.assert_called_with()
+        self.assertEquals(poll1.runs(), 100)
 
     def test_responded_runs(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -327,14 +320,16 @@ class PollTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        with patch('ureport.polls.models.PollQuestion.get_polled') as mock_polled:
-            mock_polled.return_value = 100
-            with patch('ureport.polls.models.PollQuestion.get_responded') as mock_responded:
-                mock_responded.return_value = 40
+        with patch('ureport.polls.models.PollQuestion.get_responded') as mock_responded:
+            mock_responded.return_value = 40
 
-                self.assertEquals(poll1.response_percentage(), "40%")
-                mock_polled.assert_called_with()
-                mock_responded.assert_called_with()
+            self.assertEquals(poll1.response_percentage(), "---")
+
+            poll1.runs_count = 100
+            poll1.save()
+
+            self.assertEquals(poll1.response_percentage(), "40%")
+            mock_responded.assert_called_with()
 
     def test_get_featured_images(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)

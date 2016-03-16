@@ -238,12 +238,14 @@ class Poll(SmartModel):
 
     def response_percentage(self):
         """
-        The response rate for this flow
+        The response rate for this poll
         """
         top_question = self.get_questions().first()
-        if top_question:
-            return top_question.get_response_percentage()
-
+        if top_question and self.runs_count:
+            responded = top_question.get_responded()
+            polled = self.runs_count
+            percentage = int(round((float(responded) * 100.0) / float(polled)))
+            return "%s" % str(percentage) + "%"
         return '---'
 
     def get_trending_words(self):
@@ -290,9 +292,8 @@ class Poll(SmartModel):
         return self.images.filter(is_active=True).order_by('pk')
 
     def runs(self):
-        top_question = self.get_questions().first()
-        if top_question:
-            return top_question.get_polled()
+        if self.runs_count:
+            return self.runs_count
         return "----"
 
     def responded_runs(self):
