@@ -279,6 +279,7 @@ def get_flows(org):
 
 
 def update_poll_flow_data(org):
+    print "update flow data for org #%d" % org.pk
     flows = get_flows(org)
 
     if flows:
