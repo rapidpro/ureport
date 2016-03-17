@@ -146,4 +146,4 @@ def recheck_poll_flow_data(org_id=None):
     for org in active_orgs:
         update_poll_flow_data(org)
 
-    print "Task: recheck_poll_flow_archived done"
+    print "Task: recheck_poll_flow_data done"
