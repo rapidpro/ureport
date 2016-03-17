@@ -416,7 +416,7 @@ class PollQuestion(SmartModel):
 
         results = []
 
-        if open_ended:
+        if open_ended and not segment:
             cursor = connection.cursor()
 
             custom_sql = """
@@ -474,6 +474,15 @@ class PollQuestion(SmartModel):
                         category_count = question_results.get(category_count_key, 0)
                         set_count += category_count
                         categories.append(dict(count=category_count, label=categorie_label))
+
+                    if open_ended:
+                        # For home page best and worst location responses
+                        from ureport.contacts.models import Contact
+                        if segment.get('location') == 'District':
+                            boundary_contacts_count = Contact.objects.filter(org=org, district=osm_id).count()
+                        else:
+                            boundary_contacts_count = Contact.objects.filter(org=org, state=osm_id).count()
+                        unset_count = boundary_contacts_count - set_count
 
                     results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
                                         boundary=osm_id, label=boundary.get('name'),

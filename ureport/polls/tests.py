@@ -1054,6 +1054,13 @@ class PollQuestionTest(DashTest):
             self.uganda.language = 'en'
             self.uganda.save()
 
+            with patch('ureport.utils.get_dict_from_cursor') as mock_get_dict_from_cursor:
+                # no error for segmenting
+                results = poll_question1.get_results(dict(location='State'))
+                # should not have used the path with custom sql
+                self.assertFalse(mock_get_dict_from_cursor.called)
+
+
         question_results = dict()
         question_results['ruleset:%s:total-ruleset-responded' % poll_question1.ruleset_uuid] = 3462
         question_results['ruleset:%s:total-ruleset-polled' % poll_question1.ruleset_uuid] = 7156
