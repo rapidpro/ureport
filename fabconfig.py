@@ -15,7 +15,7 @@ config = dict(
     prod_host='report1',
     sqldump=False,
     celery=True,
-    processes=('celery',),
+    processes=('celery', 'sync'),
 
     compress=True,
     elb = dict(name='UReport',
