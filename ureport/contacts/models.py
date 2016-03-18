@@ -101,7 +101,7 @@ class ContactField(models.Model):
         self.delete()
 
     class Meta:
-        index_together = [["org", "label"], ["org", "key"]]
+        index_together = ["org", "label"]
 
 
 class Contact(models.Model):
