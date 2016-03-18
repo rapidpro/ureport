@@ -100,9 +100,6 @@ class ContactField(models.Model):
     def release(self):
         self.delete()
 
-    class Meta:
-        index_together = ["org", "label"]
-
 
 class Contact(models.Model):
     """
@@ -294,7 +291,6 @@ class Contact(models.Model):
 
     class Meta:
         unique_together = ('org', 'uuid')
-        index_together = ["org", "uuid"]
 
 
 class ReportersCounter(models.Model):
