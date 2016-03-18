@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterIndexTogether(
             name='contactfield',
-            index_together=set([('org', 'key'), ('org', 'label')]),
+            index_together=set([('org', 'label')]),
         ),
     ]
