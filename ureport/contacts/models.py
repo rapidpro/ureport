@@ -54,10 +54,10 @@ class ContactField(models.Model):
     def update_or_create_from_temba(cls, org, temba_contact_field):
         kwargs = cls.kwargs_from_temba(org, temba_contact_field)
 
-        existing = cls.objects.filter(org=org, key=kwargs['key'])
-        if existing:
-            existing.update(**kwargs)
-            return existing.first()
+        key = kwargs['key']
+        if cls.objects.filter(org=org, key=key).exists():
+            cls.objects.filter(org=org, key=key).update(**kwargs)
+            return cls.objects.filter(org=org, key=key).first()
         else:
             return cls.objects.create(**kwargs)
 
@@ -100,6 +100,10 @@ class ContactField(models.Model):
     def release(self):
         self.delete()
 
+    class Meta:
+        index_together = [["org", "label"], ["org", "key"]]
+
+
 class Contact(models.Model):
     """
     Corresponds to a RapidPro contact
@@ -133,10 +137,9 @@ class Contact(models.Model):
 
     @classmethod
     def get_or_create(cls, org, uuid):
-        existing = cls.objects.filter(org=org, uuid=uuid)
 
-        if existing:
-            return existing.first()
+        if cls.objects.filter(org=org, uuid=uuid).exists():
+            return cls.objects.filter(org=org, uuid=uuid).first()
 
         return cls.objects.create(org=org, uuid=uuid)
 
@@ -174,7 +177,7 @@ class Contact(models.Model):
                 if district_field:
                     district_name = temba_contact.fields.get(cls.find_contact_field_key(org, district_field), None)
                     district_boundary = Boundary.objects.filter(org=org, level=2, name__iexact=district_name,
-                                                            parent=state_boundary).first()
+                                                                parent=state_boundary).first()
                     if district_boundary:
                         district = district_boundary.osm_id
 
@@ -227,10 +230,10 @@ class Contact(models.Model):
         kwargs = cls.kwargs_from_temba(org, temba_contact)
 
         try:
-            existing = cls.objects.filter(org=org, uuid=kwargs['uuid'])
-            if existing:
-                existing.update(**kwargs)
-                return existing.first()
+            uuid = kwargs['uuid']
+            if cls.objects.filter(org=org, uuid=uuid).exists():
+                cls.objects.filter(org=org, uuid=uuid).update(**kwargs)
+                return cls.objects.filter(org=org, uuid=uuid).first()
             else:
                 return cls.objects.create(**kwargs)
         except DataError as e:  # pragma: no cover
@@ -291,6 +294,7 @@ class Contact(models.Model):
 
     class Meta:
         unique_together = ('org', 'uuid')
+        index_together = ["org", "uuid"]
 
 
 class ReportersCounter(models.Model):
