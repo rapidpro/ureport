@@ -335,5 +335,14 @@ class RapidProBackend(BaseBackend):
         cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
 
+        # from django.db import connection as db_connection, reset_queries
+        # print "=" * 60
+        # for query in db_connection.queries:
+        #     print "%s - %s" % (query['time'], query['sql'][:1000])
+        # print "-" * 60
+        # print "took: %f" % (time.time() - start)
+        # print "=" * 60
+        # # reset_queries()
+
         print "Finished pulling results org #%d runs in %ds, created %d, updated %d, ignored %d" % (org.pk, time.time() - start, num_created, num_updated, num_ignored)
         return num_created, num_updated, num_ignored
