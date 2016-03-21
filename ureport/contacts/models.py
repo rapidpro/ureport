@@ -135,7 +135,7 @@ class Contact(models.Model):
     @classmethod
     def get_or_create(cls, org, uuid):
 
-        existing = cls.objects.filter(org=org, uuid=uuid):
+        existing = cls.objects.filter(org=org, uuid=uuid)
 
         if existing:
             return existing.first()
