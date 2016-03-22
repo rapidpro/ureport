@@ -649,7 +649,7 @@ class RapidProBackendTest(DashTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(3):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
@@ -682,12 +682,12 @@ class RapidProBackendTest(DashTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(3):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (2, 0, 0))
         self.assertEqual(3, PollResult.objects.all().count())
-        self.assertEqual(3, Contact.objects.all().count())
+        self.assertEqual(1, Contact.objects.all().count())
 
         contact.state = 'R-KIGALI'
         contact.district = 'R-GASABO'
@@ -703,7 +703,7 @@ class RapidProBackendTest(DashTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(3):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, 1, 0))
@@ -718,14 +718,14 @@ class RapidProBackendTest(DashTest):
         self.assertEqual(poll_result.text, "We'll celebrate today")
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(2):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 1))
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(2):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 2))
