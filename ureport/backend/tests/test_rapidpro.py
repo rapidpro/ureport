@@ -5,7 +5,7 @@ import json
 
 import time
 
-from django.db import connection
+from django.db import connection, reset_queries
 from django.test import override_settings
 from django.utils import timezone
 from mock import patch
@@ -830,7 +830,11 @@ class PerfTest(DashTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
+            print "=" * 60
+            print "\n\n\n"
             print "%s -- %s" % (q['time'], q['sql'])
+
+        reset_queries()
 
         # simulate a subsequent sync with no changes
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
@@ -839,6 +843,12 @@ class PerfTest(DashTest):
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, 0, num_fetches * fetch_size * num_steps))
+
+        slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        for q in slowest_queries:
+            print "%s -- %s" % (q['time'], q['sql'])
+
+        reset_queries()
 
         # simulate an update of 1 value
         for batch in active_fetches:
@@ -859,6 +869,14 @@ class PerfTest(DashTest):
         self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size,
                                                                    num_fetches * fetch_size * (num_steps - 1)))
 
+        slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        for q in slowest_queries:
+            print "=" * 60
+            print "\n\n\n"
+            print "%s -- %s" % (q['time'], q['sql'])
+
+        reset_queries()
+
         # simulate an update of 1 value
         for batch in active_fetches:
             for r in batch:
@@ -877,3 +895,11 @@ class PerfTest(DashTest):
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size * num_steps, 0))
+
+        slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        for q in slowest_queries:
+            print "=" * 60
+            print "\n\n\n"
+            print "%s -- %s" % (q['time'], q['sql'])
+
+        reset_queries()
