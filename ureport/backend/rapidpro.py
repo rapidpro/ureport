@@ -277,6 +277,15 @@ class RapidProBackend(BaseBackend):
         num_ignored = 0
         num_synced = 0
 
+        existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid)
+
+        poll_results_map = dict()
+        for res in existing_poll_results:
+            if res.contact not in poll_results_map:
+                poll_results_map[res.contact] = {res.ruleset: res}
+            else:
+                poll_results_map[res.contact][res.ruleset] = res
+
         fetch_start = time.time()
         for fetch in fetches:
 
@@ -284,43 +293,56 @@ class RapidProBackend(BaseBackend):
 
             local_sync_start = time.time()
 
+            contact_uuids = [run.contact.uuid for run in fetch]
+            contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
+            contacts_map = {c.uuid: c for c in contacts}
+
+            new_poll_results = []
+
             for temba_run in fetch:
                 flow_uuid = temba_run.flow.uuid
                 contact_uuid = temba_run.contact.uuid
                 completed = temba_run.exit_type == 'completed'
 
-                contact_obj = Contact.get_or_create(org, contact_uuid)
-                state = contact_obj.state
-                district = contact_obj.district
+                contact_obj = contacts_map.get(contact_uuid, None)
+
+                state = ''
+                district = ''
+                if contact_obj is not None:
+                    state = contact_obj.state
+                    district = contact_obj.district
 
                 for temba_step in temba_run.steps:
                     ruleset_uuid = temba_step.node
                     category = temba_step.category
                     text = temba_step.text
 
-                    if PollResult.objects.filter(org=org, flow=flow_uuid,
-                                                 ruleset=ruleset_uuid, contact=contact_uuid).exists():
+                    existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
-                        if not PollResult.objects.filter(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
-                                                         contact=contact_uuid,category=category, text=text,
-                                                         state=state, district=district, completed=completed).exists():
+                    if existing_poll_result is not None:
 
-                            PollResult.objects.filter(org=org, flow=flow_uuid,
-                                                      ruleset=ruleset_uuid,
-                                                      contact=contact_uuid).update(category=category, text=text,
-                                                                                   state=state, district=district,
-                                                                                   completed=completed)
+                        update_required = existing_poll_result.category != category or existing_poll_result.text != text
+                        update_required = update_required or existing_poll_result.state != state
+                        update_required = update_required or existing_poll_result.district != district
+                        update_required = update_required or existing_poll_result.completed != completed
+
+                        if update_required:
+                            PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
+                                                                                      state=state, district=district,
+                                                                                      completed=completed)
 
                             num_updated += 1
                         else:
                             num_ignored += 1
 
                     else:
-                        PollResult.objects.create(org=org, flow=flow_uuid, ruleset=ruleset_uuid, contact=contact_uuid,
+                        new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid, contact=contact_uuid,
                                                   category=category, text=text, state=state, date=temba_step.arrived_on,
-                                                  district=district, completed=completed)
+                                                  district=district, completed=completed))
 
                         num_created += 1
+
+            PollResult.objects.bulk_create(new_poll_results)
 
             num_synced += len(fetch)
             if progress_callback:
@@ -334,6 +356,15 @@ class RapidProBackend(BaseBackend):
         # update the time for this poll from which we fetch next time
         cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
+
+        # from django.db import connection as db_connection, reset_queries
+        # print "=" * 60
+        # for query in db_connection.queries:
+        #     print "%s - %s" % (query['time'], query['sql'][:1000])
+        # print "-" * 60
+        # print "took: %f" % (time.time() - start)
+        # print "=" * 60
+        # # reset_queries()
 
         print "Finished pulling results org #%d runs in %ds, created %d, updated %d, ignored %d" % (org.pk, time.time() - start, num_created, num_updated, num_ignored)
         return num_created, num_updated, num_ignored
