@@ -626,3 +626,6 @@ class PollResultsCounter(models.Model):
         results = counters.values('type').order_by('type').annotate(count_sum=Sum('count'))
 
         return {c['type']: c['count_sum'] for c in results}
+
+    class Meta:
+        index_together = ["org", "ruleset", "type"]
