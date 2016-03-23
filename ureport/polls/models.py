@@ -539,4 +539,4 @@ class PollResultsCounter(models.Model):
         return {c['type']: c['count_sum'] for c in results}
 
     class Meta:
-        index_together = ['org', 'ruleset', 'type']
+        index_together = ["org", "ruleset", "type"]
