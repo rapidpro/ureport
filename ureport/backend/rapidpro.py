@@ -289,7 +289,8 @@ class RapidProBackend(BaseBackend):
         fetch_start = time.time()
         for fetch in fetches:
 
-            print "RapidPro API fetch org #%d %d - %d took %ds" % (org.pk, num_synced, num_synced + len(fetch), time.time() - fetch_start)
+            print "RapidPro API fetch org #%d %d - %d took %ds" % (org.pk, num_synced, num_synced + len(fetch),
+                                                                   time.time() - fetch_start)
 
             local_sync_start = time.time()
 
@@ -328,17 +329,18 @@ class RapidProBackend(BaseBackend):
 
                         if update_required:
                             PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
-                                                                                      state=state, district=district,
-                                                                                      completed=completed)
+                                                                                         state=state, district=district,
+                                                                                         completed=completed)
 
                             num_updated += 1
                         else:
                             num_ignored += 1
 
                     else:
-                        new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid, contact=contact_uuid,
-                                                  category=category, text=text, state=state, date=temba_step.arrived_on,
-                                                  district=district, completed=completed))
+                        new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                           contact=contact_uuid, category=category, text=text,
+                                                           state=state, date=temba_step.arrived_on,
+                                                           district=district, completed=completed))
 
                         num_created += 1
 
@@ -348,7 +350,8 @@ class RapidProBackend(BaseBackend):
             if progress_callback:
                 progress_callback(num_synced)
 
-            print "Local sync ops org #%d %d - %d took %ds" % (org.pk, num_synced - len(fetch), num_synced, time.time() - local_sync_start)
+            print "Local sync ops org #%d %d - %d took %ds" % (org.pk, num_synced - len(fetch), num_synced,
+                                                               time.time() - local_sync_start)
             print "Total synced org #%d %d runs in %ds" % (org.pk, num_synced, time.time() - start)
             fetch_start = time.time()
             print "=" * 40
@@ -366,5 +369,7 @@ class RapidProBackend(BaseBackend):
         # print "=" * 60
         # # reset_queries()
 
-        print "Finished pulling results org #%d runs in %ds, created %d, updated %d, ignored %d" % (org.pk, time.time() - start, num_created, num_updated, num_ignored)
+        print "Finished pulling results org #%d runs in %ds, " \
+              "created %d, updated %d, ignored %d" % (org.pk, time.time() - start, num_created,
+                                                      num_updated, num_ignored)
         return num_created, num_updated, num_ignored

@@ -1,6 +1,7 @@
 import logging
 import time
 from dash.orgs.models import Org
+from django.core.cache import cache
 from django_redis import get_redis_connection
 from djcelery.app import app
 
@@ -10,6 +11,23 @@ from ureport.utils import fetch_main_poll_results, fetch_brick_polls_results, fe
 
 
 logger = logging.getLogger(__name__)
+
+
+@org_task('backfill-poll-results-task')
+def backfill_poll_results(org, since, until):
+    from ureport.backend import get_backend
+    from .models import Poll, PollResult
+    backend = get_backend()
+
+    results_log = dict()
+
+    for poll in Poll.objects.filter(org=org):
+        has_filled = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
+        if has_filled is None:
+            created, updated, ignored = backend.pull_results(poll, since, until)
+            results_log['poll-%d' % poll.pk] = {"created": created, "updated": updated, "ignored": ignored}
+
+    return results_log
 
 
 @org_task('results-pull-main-poll')
