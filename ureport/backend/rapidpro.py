@@ -263,7 +263,7 @@ class RapidProBackend(BaseBackend):
         client = self._get_client(org, 2)
 
         start = time.time()
-        print "Start fetching runs for org #%d" % org.pk
+        print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
         # ignore the TaskState time and use the time we stored in redis
         now = timezone.now()
@@ -289,8 +289,9 @@ class RapidProBackend(BaseBackend):
         fetch_start = time.time()
         for fetch in fetches:
 
-            print "RapidPro API fetch org #%d %d - %d took %ds" % (org.pk, num_synced, num_synced + len(fetch),
-                                                                   time.time() - fetch_start)
+            print "RapidPro API fetch for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced,
+                                                                                   num_synced + len(fetch),
+                                                                                   time.time() - fetch_start)
 
             local_sync_start = time.time()
 
@@ -350,9 +351,11 @@ class RapidProBackend(BaseBackend):
             if progress_callback:
                 progress_callback(num_synced)
 
-            print "Local sync ops org #%d %d - %d took %ds" % (org.pk, num_synced - len(fetch), num_synced,
-                                                               time.time() - local_sync_start)
-            print "Total synced org #%d %d runs in %ds" % (org.pk, num_synced, time.time() - start)
+            print "Local sync ops for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced - len(fetch),
+                                                                               num_synced,
+                                                                               time.time() - local_sync_start)
+            print "Total synced for poll #%d on org #%d %d runs in %ds" % (poll.pk, org.pk, num_synced,
+                                                                           time.time() - start)
             fetch_start = time.time()
             print "=" * 40
 
@@ -369,7 +372,7 @@ class RapidProBackend(BaseBackend):
         # print "=" * 60
         # # reset_queries()
 
-        print "Finished pulling results org #%d runs in %ds, " \
-              "created %d, updated %d, ignored %d" % (org.pk, time.time() - start, num_created,
+        print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
+              "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
                                                       num_updated, num_ignored)
         return num_created, num_updated, num_ignored
