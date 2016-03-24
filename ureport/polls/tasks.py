@@ -13,7 +13,7 @@ from ureport.utils import fetch_main_poll_results, fetch_brick_polls_results, fe
 logger = logging.getLogger(__name__)
 
 
-@org_task('backfill-poll-results-task')
+@org_task('backfill-poll-results')
 def backfill_poll_results(org, since, until):
     from ureport.backend import get_backend
     from .models import Poll, PollResult

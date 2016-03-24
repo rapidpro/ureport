@@ -22,7 +22,8 @@ from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
     PollResultsCounter, PollResult
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows, \
-    recheck_poll_flow_data, pull_results_main_poll, pull_results_brick_polls, pull_results_other_polls
+    recheck_poll_flow_data, pull_results_main_poll, pull_results_brick_polls, pull_results_other_polls, \
+    backfill_poll_results
 from ureport.polls.tasks import fetch_poll, fetch_old_sites_count
 from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
@@ -1211,3 +1212,28 @@ class PollsTasksTest(DashTest):
             task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-other-polls')
             self.assertEqual(task_state.get_last_results()['poll-%d' % self.poll.pk],
                              {'created': 1, 'updated': 2, 'ignored': 3})
+
+    @patch('ureport.tests.TestBackend.pull_results')
+    def test_backfill_poll_results(self, mock_pull_results):
+        mock_pull_results.return_value = (1, 2, 3)
+
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+
+            with patch('django.core.cache.cache.get') as cache_get_mock:
+                cache_get_mock.return_value = "Filled"
+
+                backfill_poll_results(self.nigeria.pk)
+                self.assertFalse(mock_pull_results.called)
+
+                cache_get_mock.return_value = None
+
+                backfill_poll_results(self.nigeria.pk)
+
+                task_state = TaskState.objects.get(org=self.nigeria, task_key='backfill-poll-results')
+                self.assertEqual(task_state.get_last_results()['poll-%d' % self.poll.pk],
+                                 {'created': 1, 'updated': 2, 'ignored': 3})
+
+                mock_pull_results.assert_called_once()
