@@ -361,7 +361,7 @@ class RapidProBackend(BaseBackend):
 
         # update the time for this poll from which we fetch next time
         cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
-                  datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
+                  datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
 
         # from django.db import connection as db_connection, reset_queries
         # slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
