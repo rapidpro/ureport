@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterIndexTogether(
             name='pollresult',
-            index_together=set([('org', 'flow', 'ruleset', 'contact')]),
+            index_together=set([('org', 'flow')]),
         ),
     ]

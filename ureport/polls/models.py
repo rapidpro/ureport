@@ -489,7 +489,7 @@ class PollResult(models.Model):
 
     POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%d'
 
-    org = models.ForeignKey(Org, related_name="poll_results")
+    org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
 
     flow = models.CharField(max_length=36)
 
@@ -510,7 +510,7 @@ class PollResult(models.Model):
     district = models.CharField(max_length=255, null=True)
 
     class Meta:
-        index_together = ["org", "flow", "ruleset", "contact"]
+        index_together = ["org", "flow"]
 
 
 class PollResultsCounter(models.Model):

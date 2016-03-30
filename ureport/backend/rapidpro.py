@@ -277,7 +277,7 @@ class RapidProBackend(BaseBackend):
         num_ignored = 0
         num_synced = 0
 
-        existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid)
+        existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
 
         poll_results_map = dict()
         for res in existing_poll_results:
@@ -364,13 +364,12 @@ class RapidProBackend(BaseBackend):
                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
 
         # from django.db import connection as db_connection, reset_queries
-        # print "=" * 60
-        # for query in db_connection.queries:
-        #     print "%s - %s" % (query['time'], query['sql'][:1000])
-        # print "-" * 60
-        # print "took: %f" % (time.time() - start)
-        # print "=" * 60
-        # # reset_queries()
+        # slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        # for q in slowest_queries:
+        #     print "=" * 60
+        #     print "\n\n\n"
+        #     print "%s -- %s" % (q['time'], q['sql'])
+        # reset_queries()
 
         print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
               "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
