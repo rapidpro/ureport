@@ -859,7 +859,7 @@ class PerfTest(DashTest):
                                               value="Val 0",
                                               category='CAT 0',
                                               type='ruleset',
-                                              arrived_on=now, left_on=now)
+                                              arrived_on=now - timedelta(minutes=1), left_on=now)
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 

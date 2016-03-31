@@ -327,11 +327,15 @@ class RapidProBackend(BaseBackend):
                         update_required = update_required or existing_poll_result.state != state
                         update_required = update_required or existing_poll_result.district != district
                         update_required = update_required or existing_poll_result.completed != completed
-                        update_required = update_required and existing_poll_result.date < temba_step.arrived_on
+
+                        # if the reporter answered the step, check if this is a newer run
+                        if existing_poll_result.date is not None:
+                            update_required = update_required and (temba_step.left_on is None or temba_step.arrived_on > existing_poll_result.date)
 
                         if update_required:
                             PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
                                                                                          state=state, district=district,
+                                                                                         date=temba_step.left_on,
                                                                                          completed=completed)
 
                             num_updated += 1
@@ -341,7 +345,7 @@ class RapidProBackend(BaseBackend):
                     else:
                         new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
                                                            contact=contact_uuid, category=category, text=text,
-                                                           state=state, date=temba_step.arrived_on,
+                                                           state=state, date=temba_step.left_on,
                                                            district=district, completed=completed))
 
                         num_created += 1
