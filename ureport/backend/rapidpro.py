@@ -327,6 +327,7 @@ class RapidProBackend(BaseBackend):
                         update_required = update_required or existing_poll_result.state != state
                         update_required = update_required or existing_poll_result.district != district
                         update_required = update_required or existing_poll_result.completed != completed
+                        update_required = update_required and existing_poll_result.date < temba_step.arrived_on
 
                         if update_required:
                             PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,

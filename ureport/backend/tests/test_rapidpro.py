@@ -5,6 +5,7 @@ import json
 
 import time
 
+from datetime import timedelta
 from django.db import connection, reset_queries
 from django.test import override_settings
 from django.utils import timezone
@@ -697,7 +698,7 @@ class RapidProBackendTest(DashTest):
                                       contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
                                       steps=[TembaStep.create(node='ruleset-uuid', text="We'll celebrate today",
                                                               value="celebrate", category='Party', type='ruleset',
-                                                              arrived_on=now, left_on=now)],
+                                                              arrived_on=now + timedelta(minutes=1), left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
                                       exit_type='completed')
 
@@ -850,7 +851,7 @@ class PerfTest(DashTest):
 
         reset_queries()
 
-        # simulate an update of 1 value
+        # simulate ignore of 1 value change from older runs
         for batch in active_fetches:
             for r in batch:
                 r.steps[0] = TembaStep.create(node='ruleset-uuid-0',
@@ -859,6 +860,32 @@ class PerfTest(DashTest):
                                               category='CAT 0',
                                               type='ruleset',
                                               arrived_on=now, left_on=now)
+
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+        start = time.time()
+
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, num_fetches * fetch_size * num_steps))
+
+        slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        for q in slowest_queries:
+            print "=" * 60
+            print "\n\n\n"
+            print "%s -- %s" % (q['time'], q['sql'])
+
+        reset_queries()
+
+        # simulate an update of 1 value
+        for batch in active_fetches:
+            for r in batch:
+                r.steps[0] = TembaStep.create(node='ruleset-uuid-0',
+                                              text="Txt 0",
+                                              value="Val 0",
+                                              category='CAT 0',
+                                              type='ruleset',
+                                              arrived_on=now + timedelta(minutes=1), left_on=now)
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
@@ -885,7 +912,7 @@ class PerfTest(DashTest):
                                             value="V %s" % s,
                                             category='C %s' % s,
                                             type='ruleset',
-                                            arrived_on=now, left_on=now)
+                                            arrived_on=now + timedelta(minutes=1), left_on=now)
                            for s in range(0, num_steps)]
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
