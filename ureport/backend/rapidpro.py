@@ -263,7 +263,7 @@ class RapidProBackend(BaseBackend):
         client = self._get_client(org, 2)
 
         start = time.time()
-        print "Start fetching runs for org #%d" % org.pk
+        print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
         # ignore the TaskState time and use the time we stored in redis
         now = timezone.now()
@@ -277,7 +277,7 @@ class RapidProBackend(BaseBackend):
         num_ignored = 0
         num_synced = 0
 
-        existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid)
+        existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
 
         poll_results_map = dict()
         for res in existing_poll_results:
@@ -289,7 +289,9 @@ class RapidProBackend(BaseBackend):
         fetch_start = time.time()
         for fetch in fetches:
 
-            print "RapidPro API fetch org #%d %d - %d took %ds" % (org.pk, num_synced, num_synced + len(fetch), time.time() - fetch_start)
+            print "RapidPro API fetch for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced,
+                                                                                   num_synced + len(fetch),
+                                                                                   time.time() - fetch_start)
 
             local_sync_start = time.time()
 
@@ -326,19 +328,25 @@ class RapidProBackend(BaseBackend):
                         update_required = update_required or existing_poll_result.district != district
                         update_required = update_required or existing_poll_result.completed != completed
 
+                        # if the reporter answered the step, check if this is a newer run
+                        if existing_poll_result.date is not None:
+                            update_required = update_required and (temba_step.left_on is None or temba_step.arrived_on > existing_poll_result.date)
+
                         if update_required:
                             PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
-                                                                                      state=state, district=district,
-                                                                                      completed=completed)
+                                                                                         state=state, district=district,
+                                                                                         date=temba_step.left_on,
+                                                                                         completed=completed)
 
                             num_updated += 1
                         else:
                             num_ignored += 1
 
                     else:
-                        new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid, contact=contact_uuid,
-                                                  category=category, text=text, state=state, date=temba_step.arrived_on,
-                                                  district=district, completed=completed))
+                        new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                           contact=contact_uuid, category=category, text=text,
+                                                           state=state, date=temba_step.left_on,
+                                                           district=district, completed=completed))
 
                         num_created += 1
 
@@ -348,23 +356,27 @@ class RapidProBackend(BaseBackend):
             if progress_callback:
                 progress_callback(num_synced)
 
-            print "Local sync ops org #%d %d - %d took %ds" % (org.pk, num_synced - len(fetch), num_synced, time.time() - local_sync_start)
-            print "Total synced org #%d %d runs in %ds" % (org.pk, num_synced, time.time() - start)
+            print "Local sync ops for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced - len(fetch),
+                                                                               num_synced,
+                                                                               time.time() - local_sync_start)
+            print "Total synced for poll #%d on org #%d %d runs in %ds" % (poll.pk, org.pk, num_synced,
+                                                                           time.time() - start)
             fetch_start = time.time()
             print "=" * 40
 
         # update the time for this poll from which we fetch next time
         cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
-                  datetime_to_json_date(now.replace(tzinfo=pytz.utc)))
+                  datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
 
         # from django.db import connection as db_connection, reset_queries
-        # print "=" * 60
-        # for query in db_connection.queries:
-        #     print "%s - %s" % (query['time'], query['sql'][:1000])
-        # print "-" * 60
-        # print "took: %f" % (time.time() - start)
-        # print "=" * 60
-        # # reset_queries()
+        # slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        # for q in slowest_queries:
+        #     print "=" * 60
+        #     print "\n\n\n"
+        #     print "%s -- %s" % (q['time'], q['sql'])
+        # reset_queries()
 
-        print "Finished pulling results org #%d runs in %ds, created %d, updated %d, ignored %d" % (org.pk, time.time() - start, num_created, num_updated, num_ignored)
+        print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
+              "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
+                                                      num_updated, num_ignored)
         return num_created, num_updated, num_ignored

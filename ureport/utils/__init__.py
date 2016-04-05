@@ -293,18 +293,16 @@ def update_poll_flow_data(org):
                 if not runs_count:
                     runs_count = 0
 
-                updated_fields = []
+                updated_fields = dict()
 
                 if archived != poll.flow_archived:
-                    poll.flow_archived = archived
-                    updated_fields.append('flow_archived')
+                    updated_fields['flow_archived'] = archived
 
                 if runs_count > 0 and runs_count != poll.runs_count:
-                    poll.runs_count = runs_count
-                    updated_fields.append('runs_count')
+                    updated_fields['runs_count'] = runs_count
 
                 if updated_fields:
-                    poll.save(update_fields=updated_fields)
+                    Poll.objects.filter(pk=poll.pk).update(**updated_fields)
 
 
 def fetch_old_sites_count():

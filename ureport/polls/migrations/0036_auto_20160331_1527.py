@@ -7,12 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0032_install_poll_results_count_triggers'),
+        ('polls', '0035_auto_20160330_1550'),
     ]
 
     operations = [
-        migrations.AlterIndexTogether(
-            name='pollresult',
-            index_together=set([('org', 'flow')]),
+        migrations.AlterField(
+            model_name='pollresult',
+            name='date',
+            field=models.DateTimeField(null=True),
         ),
     ]
