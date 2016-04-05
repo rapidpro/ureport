@@ -55,49 +55,53 @@ class UtilsTest(DashTest):
 
     def test_get_linked_orgs(self):
 
+        # use aaaburundi to force the to be alphabetically first
+        self.org.subdomain = 'aaaburundi'
+        self.org.save()
+
         # we have 3 old org in the settings
-        self.assertEqual(len(get_linked_orgs()), 3)
+        self.assertEqual(len(get_linked_orgs()), 4)
         for old_site in get_linked_orgs():
-            self.assertFalse(old_site['name'].lower() == 'burundi')
+            self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
         self.org.set_config('is_on_landing_page', True)
 
         # missing flag
-        self.assertEqual(len(get_linked_orgs()), 3)
+        self.assertEqual(len(get_linked_orgs()), 4)
         for old_site in get_linked_orgs():
-            self.assertFalse(old_site['name'].lower() == 'burundi')
+            self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
         Image.objects.create(org=self.org, image_type=FLAG, name='burundi_flag',
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
         # burundi should be included and be the first; by alphabetical order by subdomain
-        self.assertEqual(len(get_linked_orgs()), 4)
-        self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+        self.assertEqual(len(get_linked_orgs()), 5)
+        self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'aaaburundi')
 
         self.org.subdomain = 'rwanda'
         self.org.save()
 
         # rwanda should be included and the third in the list alphabetically by subdomain
-        self.assertEqual(len(get_linked_orgs()), 4)
-        self.assertEqual(get_linked_orgs()[2]['name'].lower(), 'rwanda')
+        self.assertEqual(len(get_linked_orgs()), 5)
+        self.assertEqual(get_linked_orgs()[3]['name'].lower(), 'rwanda')
 
         # revert subdomain to burundi
-        self.org.subdomain = 'burundi'
+        self.org.subdomain = 'aaaburundi'
         self.org.save()
 
         with self.settings(HOSTNAME='localhost:8000'):
-            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
-            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://burundi.localhost:8000')
+            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
+            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
 
             self.org.domain = 'ureport.bi'
             self.org.save()
 
-            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
-            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://burundi.localhost:8000')
+            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
+            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
 
             with self.settings(SESSION_COOKIE_SECURE=True):
                 self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://ureport.bi')
-                self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'https://burundi.localhost:8000')
+                self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'https://aaaburundi.localhost:8000')
 
     def test_clean_global_results_data(self):
         results = [{"open_ended": False,
