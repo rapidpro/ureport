@@ -14,14 +14,14 @@ CREATE OR REPLACE FUNCTION
 RETURNS VOID AS $$
 BEGIN
   INSERT INTO polls_pollresultscounter("org_id", "ruleset", "type", "count") VALUES(_org_id, _ruleset, _type, _count);
-  PERFORM ureport_may_be_squash_resultscounters(_org_id, _ruleset, _type);
+  PERFORM ureport_maybe_squash_resultscounters(_org_id, _ruleset, _type);
 END;
 $$ LANGUAGE plpgsql;
 -----------------------------------------------------------------------------
 -- Every 100 inserts or so this will squash the counters by gathering
 -----------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION
-  ureport_may_be_squash_resultscounters(_org_id INT, _ruleset CHAR(36), _type VARCHAR)
+  ureport_maybe_squash_resultscounters(_org_id INT, _ruleset CHAR(36), _type VARCHAR)
 RETURNS VOID AS $$
 BEGIN
   IF RANDOM() < .01 THEN
