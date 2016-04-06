@@ -66,6 +66,9 @@ class Poll(SmartModel):
     A poll represents a single Flow that has been brought in for
     display and sharing in the UReport platform.
     """
+
+    POLL_PULL_RESULTS_TASK_LOCK = 'poll-pull-results-task-lock:%s:%s'
+
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
     poll_date = models.DateTimeField(help_text=_("The date to display for this poll. "
