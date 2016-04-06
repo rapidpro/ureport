@@ -9,9 +9,11 @@ from dash.utils.sync import BaseSyncer, sync_local_to_set, sync_local_to_changes
 from django.core.cache import cache
 from django.utils import timezone
 
+from django_redis import get_redis_connection
+
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult
+from ureport.polls.models import PollResult, Poll
 from ureport.utils import datetime_to_json_date
 from . import BaseBackend
 
@@ -260,123 +262,129 @@ class RapidProBackend(BaseBackend):
 
     def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
         org = poll.org
-        client = self._get_client(org, 2)
+        r = get_redis_connection()
+        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.pk)
+        if r.get(key):
+            print "Skipping for org #%d as it is still running" % org.pk
+        else:
+            with r.lock(key):
+                client = self._get_client(org, 2)
 
-        start = time.time()
-        print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
+                start = time.time()
+                print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
-        # ignore the TaskState time and use the time we stored in redis
-        now = timezone.now()
-        after = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
+                # ignore the TaskState time and use the time we stored in redis
+                now = timezone.now()
+                after = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
 
-        poll_runs_query = client.get_runs(flow=poll.flow_uuid, responded=True, after=after, before=now)
-        fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
+                poll_runs_query = client.get_runs(flow=poll.flow_uuid, responded=True, after=after, before=now)
+                fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
 
-        num_created = 0
-        num_updated = 0
-        num_ignored = 0
-        num_synced = 0
+                num_created = 0
+                num_updated = 0
+                num_ignored = 0
+                num_synced = 0
 
-        existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
+                existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
 
-        poll_results_map = dict()
-        for res in existing_poll_results:
-            if res.contact not in poll_results_map:
-                poll_results_map[res.contact] = {res.ruleset: res}
-            else:
-                poll_results_map[res.contact][res.ruleset] = res
-
-        fetch_start = time.time()
-        for fetch in fetches:
-
-            print "RapidPro API fetch for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced,
-                                                                                   num_synced + len(fetch),
-                                                                                   time.time() - fetch_start)
-
-            local_sync_start = time.time()
-
-            contact_uuids = [run.contact.uuid for run in fetch]
-            contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
-            contacts_map = {c.uuid: c for c in contacts}
-
-            new_poll_results = []
-
-            for temba_run in fetch:
-                flow_uuid = temba_run.flow.uuid
-                contact_uuid = temba_run.contact.uuid
-                completed = temba_run.exit_type == 'completed'
-
-                contact_obj = contacts_map.get(contact_uuid, None)
-
-                state = ''
-                district = ''
-                if contact_obj is not None:
-                    state = contact_obj.state
-                    district = contact_obj.district
-
-                for temba_step in temba_run.steps:
-                    ruleset_uuid = temba_step.node
-                    category = temba_step.category
-                    text = temba_step.text
-
-                    existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
-
-                    if existing_poll_result is not None:
-
-                        update_required = existing_poll_result.category != category or existing_poll_result.text != text
-                        update_required = update_required or existing_poll_result.state != state
-                        update_required = update_required or existing_poll_result.district != district
-                        update_required = update_required or existing_poll_result.completed != completed
-
-                        # if the reporter answered the step, check if this is a newer run
-                        if existing_poll_result.date is not None:
-                            update_required = update_required and (temba_step.left_on is None or temba_step.arrived_on > existing_poll_result.date)
-
-                        if update_required:
-                            PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
-                                                                                         state=state, district=district,
-                                                                                         date=temba_step.left_on,
-                                                                                         completed=completed)
-
-                            num_updated += 1
-                        else:
-                            num_ignored += 1
-
+                poll_results_map = dict()
+                for res in existing_poll_results:
+                    if res.contact not in poll_results_map:
+                        poll_results_map[res.contact] = {res.ruleset: res}
                     else:
-                        new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
-                                                           contact=contact_uuid, category=category, text=text,
-                                                           state=state, date=temba_step.left_on,
-                                                           district=district, completed=completed))
+                        poll_results_map[res.contact][res.ruleset] = res
 
-                        num_created += 1
+                fetch_start = time.time()
+                for fetch in fetches:
 
-            PollResult.objects.bulk_create(new_poll_results)
+                    print "RapidPro API fetch for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced,
+                                                                                           num_synced + len(fetch),
+                                                                                           time.time() - fetch_start)
 
-            num_synced += len(fetch)
-            if progress_callback:
-                progress_callback(num_synced)
+                    local_sync_start = time.time()
 
-            print "Local sync ops for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced - len(fetch),
-                                                                               num_synced,
-                                                                               time.time() - local_sync_start)
-            print "Total synced for poll #%d on org #%d %d runs in %ds" % (poll.pk, org.pk, num_synced,
-                                                                           time.time() - start)
-            fetch_start = time.time()
-            print "=" * 40
+                    contact_uuids = [run.contact.uuid for run in fetch]
+                    contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
+                    contacts_map = {c.uuid: c for c in contacts}
 
-        # update the time for this poll from which we fetch next time
-        cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
-                  datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+                    new_poll_results = []
 
-        # from django.db import connection as db_connection, reset_queries
-        # slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
-        # for q in slowest_queries:
-        #     print "=" * 60
-        #     print "\n\n\n"
-        #     print "%s -- %s" % (q['time'], q['sql'])
-        # reset_queries()
+                    for temba_run in fetch:
+                        flow_uuid = temba_run.flow.uuid
+                        contact_uuid = temba_run.contact.uuid
+                        completed = temba_run.exit_type == 'completed'
 
-        print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
-              "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
-                                                      num_updated, num_ignored)
-        return num_created, num_updated, num_ignored
+                        contact_obj = contacts_map.get(contact_uuid, None)
+
+                        state = ''
+                        district = ''
+                        if contact_obj is not None:
+                            state = contact_obj.state
+                            district = contact_obj.district
+
+                        for temba_step in temba_run.steps:
+                            ruleset_uuid = temba_step.node
+                            category = temba_step.category
+                            text = temba_step.text
+
+                            existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
+
+                            if existing_poll_result is not None:
+
+                                update_required = existing_poll_result.category != category or existing_poll_result.text != text
+                                update_required = update_required or existing_poll_result.state != state
+                                update_required = update_required or existing_poll_result.district != district
+                                update_required = update_required or existing_poll_result.completed != completed
+
+                                # if the reporter answered the step, check if this is a newer run
+                                if existing_poll_result.date is not None:
+                                    update_required = update_required and (temba_step.left_on is None or temba_step.arrived_on > existing_poll_result.date)
+
+                                if update_required:
+                                    PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
+                                                                                                 state=state, district=district,
+                                                                                                 date=temba_step.left_on,
+                                                                                                 completed=completed)
+
+                                    num_updated += 1
+                                else:
+                                    num_ignored += 1
+
+                            else:
+                                new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                                   contact=contact_uuid, category=category, text=text,
+                                                                   state=state, date=temba_step.left_on,
+                                                                   district=district, completed=completed))
+
+                                num_created += 1
+
+                    PollResult.objects.bulk_create(new_poll_results)
+
+                    num_synced += len(fetch)
+                    if progress_callback:
+                        progress_callback(num_synced)
+
+                    print "Local sync ops for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced - len(fetch),
+                                                                                       num_synced,
+                                                                                       time.time() - local_sync_start)
+                    print "Total synced for poll #%d on org #%d %d runs in %ds" % (poll.pk, org.pk, num_synced,
+                                                                                   time.time() - start)
+                    fetch_start = time.time()
+                    print "=" * 40
+
+                # update the time for this poll from which we fetch next time
+                cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
+                          datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+
+                # from django.db import connection as db_connection, reset_queries
+                # slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+                # for q in slowest_queries:
+                #     print "=" * 60
+                #     print "\n\n\n"
+                #     print "%s -- %s" % (q['time'], q['sql'])
+                # reset_queries()
+
+                print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
+                      "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
+                                                              num_updated, num_ignored)
+                return num_created, num_updated, num_ignored
