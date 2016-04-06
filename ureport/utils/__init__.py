@@ -483,11 +483,11 @@ def get_ureporters_locations_stats(org, segment):
 
     if field_type == 'state':
         boundary_top_level = 0 if org.get_config('is_global') else 1
-        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name')
+        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name').order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
 
     else:
-        boundaries = Boundary.objects.filter(org=org, level=2, parent__osm_id__iexact=parent).values('osm_id', 'name')
+        boundaries = Boundary.objects.filter(org=org, level=2, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
         location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
 
     return [dict(boundary=elt['osm_id'], label=elt['name'], set=location_counts.get(elt['osm_id'], 0))

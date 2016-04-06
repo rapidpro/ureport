@@ -277,9 +277,9 @@ class ContactTest(DashTest):
                          {'total-reporters': 2, 'gender:m': 2})
 
 
-class TasksTest(DashTest):
+class ContactsTasksTest(DashTest):
     def setUp(self):
-        super(TasksTest, self).setUp()
+        super(ContactsTasksTest, self).setUp()
         self.nigeria = self.create_org('nigeria', self.admin)
 
     @patch('ureport.tests.TestBackend.pull_fields')

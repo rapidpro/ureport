@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import json
 from datetime import datetime
 from django.db import models
+from django.db.models import Sum
 from django.utils.text import slugify
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
@@ -65,6 +66,9 @@ class Poll(SmartModel):
     A poll represents a single Flow that has been brought in for
     display and sharing in the UReport platform.
     """
+
+    POLL_PULL_RESULTS_TASK_LOCK = 'poll-pull-results-task-lock:%s:%s'
+
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
     poll_date = models.DateTimeField(help_text=_("The date to display for this poll. "
@@ -482,3 +486,60 @@ class PollResponseCategory(models.Model):
 
     class Meta:
         unique_together = ('question', 'rule_uuid')
+
+
+class PollResult(models.Model):
+
+    POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%d'
+
+    org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
+
+    flow = models.CharField(max_length=36)
+
+    ruleset = models.CharField(max_length=36)
+
+    contact = models.CharField(max_length=36)
+
+    date = models.DateTimeField(null=True)
+
+    completed = models.BooleanField()
+
+    category = models.CharField(max_length=255, null=True)
+
+    text = models.CharField(max_length=640, null=True)
+
+    state = models.CharField(max_length=255, null=True)
+
+    district = models.CharField(max_length=255, null=True)
+
+    class Meta:
+        index_together = ["org", "flow"]
+
+
+class PollResultsCounter(models.Model):
+
+    org = models.ForeignKey(Org, related_name='results_counters')
+
+    ruleset = models.CharField(max_length=36)
+
+    type = models.CharField(max_length=255)
+
+    count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    @classmethod
+    def get_poll_results(cls, poll, types=None):
+        """
+        Get the poll results counts by counter type for a given poll
+        """
+        poll_rulesets = poll.questions.all().values_list('ruleset_uuid', flat=True)
+
+        counters = cls.objects.filter(org=poll.org, ruleset__in=poll_rulesets)
+        if types:
+            counters = counters.filter(type__in=types)
+
+        results = counters.values('type').order_by('type').annotate(count_sum=Sum('count'))
+
+        return {c['type']: c['count_sum'] for c in results}
+
+    class Meta:
+        index_together = ["org", "ruleset", "type"]

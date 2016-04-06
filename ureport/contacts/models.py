@@ -100,6 +100,7 @@ class ContactField(models.Model):
     def release(self):
         self.delete()
 
+
 class Contact(models.Model):
     """
     Corresponds to a RapidPro contact
@@ -133,11 +134,11 @@ class Contact(models.Model):
 
     @classmethod
     def get_or_create(cls, org, uuid):
+
         existing = cls.objects.filter(org=org, uuid=uuid)
 
         if existing:
             return existing.first()
-
         return cls.objects.create(org=org, uuid=uuid)
 
     @classmethod
@@ -174,7 +175,7 @@ class Contact(models.Model):
                 if district_field:
                     district_name = temba_contact.fields.get(cls.find_contact_field_key(org, district_field), None)
                     district_boundary = Boundary.objects.filter(org=org, level=2, name__iexact=district_name,
-                                                            parent=state_boundary).first()
+                                                                parent=state_boundary).first()
                     if district_boundary:
                         district = district_boundary.osm_id
 
