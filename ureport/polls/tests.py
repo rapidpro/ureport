@@ -977,7 +977,7 @@ class PollQuestionTest(DashTest):
 
                     cache_set_mock.assert_called_with(key,
                                                       {'time': 500, 'results':fetched_results},
-                                                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                                                      None)
                     mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
 
                     poll_question1.fetch_results(segment=dict(location='State'))
@@ -987,7 +987,7 @@ class PollQuestionTest(DashTest):
 
                     cache_set_mock.assert_called_with(key,
                                                       {'time': 500, 'results':fetched_results},
-                                                      UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                                                      None)
 
                     mock.assert_called_with(poll_question1.ruleset_uuid, segment=segment)
 
