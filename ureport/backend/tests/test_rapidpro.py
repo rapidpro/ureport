@@ -21,7 +21,7 @@ from dash.categories.models import Category
 from ureport.backend.rapidpro import FieldSyncer, BoundarySyncer, ContactSyncer, RapidProBackend
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult
+from ureport.polls.models import PollResult, Poll
 from ureport.tests import DashTest
 from ureport.utils import json_date_to_datetime
 
@@ -783,12 +783,19 @@ class PerfTest(DashTest):
     def test_pull_results(self, mock_cache_get, mock_timezone_now, mock_get_runs):
         mock_cache_get.return_value = None
 
+        from django_redis import get_redis_connection
+        redis_client = get_redis_connection()
+
+
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
         PollResult.objects.all().delete()
 
         poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
+
+        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.pk)
+        redis_client.delete(key)
 
         now = timezone.now()
 
@@ -841,6 +848,7 @@ class PerfTest(DashTest):
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
         start = time.time()
 
+        redis_client.delete(key)
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, 0, num_fetches * fetch_size * num_steps))
@@ -865,6 +873,7 @@ class PerfTest(DashTest):
 
         start = time.time()
 
+        redis_client.delete(key)
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, 0, num_fetches * fetch_size * num_steps))
@@ -891,6 +900,7 @@ class PerfTest(DashTest):
 
         start = time.time()
 
+        redis_client.delete(key)
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size,
@@ -919,6 +929,7 @@ class PerfTest(DashTest):
 
         start = time.time()
 
+        redis_client.delete(key)
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size * num_steps, 0))
@@ -930,3 +941,13 @@ class PerfTest(DashTest):
             print "%s -- %s" % (q['time'], q['sql'])
 
         reset_queries()
+
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+        redis_client.set(key, 'lock-taken')
+
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 0))
+
+        redis_client.delete(key)
