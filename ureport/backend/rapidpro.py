@@ -264,6 +264,12 @@ class RapidProBackend(BaseBackend):
         org = poll.org
         r = get_redis_connection()
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.pk)
+
+        num_created = 0
+        num_updated = 0
+        num_ignored = 0
+        num_synced = 0
+
         if r.get(key):
             print "Skipping for org #%d as it is still running" % org.pk
         else:
@@ -279,11 +285,6 @@ class RapidProBackend(BaseBackend):
 
                 poll_runs_query = client.get_runs(flow=poll.flow_uuid, responded=True, after=after, before=now)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
-
-                num_created = 0
-                num_updated = 0
-                num_ignored = 0
-                num_synced = 0
 
                 existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
 
@@ -387,4 +388,4 @@ class RapidProBackend(BaseBackend):
                 print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
                       "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
                                                               num_updated, num_ignored)
-                return num_created, num_updated, num_ignored
+        return num_created, num_updated, num_ignored
