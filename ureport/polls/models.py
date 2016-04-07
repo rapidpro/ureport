@@ -94,8 +94,6 @@ class Poll(SmartModel):
                             help_text=_("The organization this poll is part of"))
 
     def fetch_poll_results(self):
-        if self.flow_archived:
-            return
 
         for question in self.questions.filter(is_active=True):
             question.fetch_results()
@@ -399,7 +397,7 @@ class PollQuestion(SmartModel):
             client_results = temba_client.get_results(self.ruleset_uuid, segment=segment)
             results = temba_client_flow_results_serializer(client_results)
 
-            cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, cache_time)
+            cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, None)
 
             # delete the open ended cache
             cache.delete('open_ended:%d' % self.id)
