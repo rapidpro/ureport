@@ -1,5 +1,7 @@
 import logging
 import time
+
+from celery import shared_task
 from dash.orgs.models import Org
 from django.core.cache import cache
 from django_redis import get_redis_connection
@@ -28,6 +30,22 @@ def backfill_poll_results(org, since, until):
             results_log['poll-%d' % poll.pk] = {"created": created, "updated": updated, "ignored": ignored}
 
     return results_log
+
+@shared_task
+def backfill_unique_poll_results(poll):
+    from ureport.backend import get_backend
+    from .models import PollResult
+    backend = get_backend()
+
+    created = 0
+    updated = 0
+    ignored = 0
+
+    has_filled = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (poll.org.pk, poll.pk), None)
+    if has_filled is None:
+        created, updated, ignored = backend.pull_results(poll, None, None)
+
+    return {"created": created, "updated": updated, "ignored": ignored}
 
 
 @org_task('results-pull-main-poll')
