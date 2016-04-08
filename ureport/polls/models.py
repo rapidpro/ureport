@@ -100,6 +100,13 @@ class Poll(SmartModel):
             question.fetch_results(dict(location='State'))
 
     @classmethod
+    def trigger_polls_backfill(cls, org, queue='celery'):
+        from ureport.polls.tasks import backfill_unique_poll_results
+        for poll in Poll.objects.filter(org=org):
+            backfill_unique_poll_results.apply_async(poll, queue=queue)
+
+
+    @classmethod
     def fetch_poll_results_task(cls, poll):
         from ureport.polls.tasks import fetch_poll
         fetch_poll.delay(poll.pk)
