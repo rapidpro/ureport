@@ -6,24 +6,6 @@ CREATE OR REPLACE FUNCTION
 RETURNS VOID AS $$
 BEGIN
   INSERT INTO polls_pollresultscounter("org_id", "ruleset", "type", "count") VALUES(_org_id, _ruleset, _type, _count);
-  PERFORM ureport_maybe_squash_resultscounters(_org_id, _ruleset, _type);
-END;
-$$ LANGUAGE plpgsql;
-
------------------------------------------------------------------------------
--- Every 10000 inserts or so this will squash the counters by gathering
------------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION
-  ureport_maybe_squash_resultscounters(_org_id INT, _ruleset CHAR(36), _type VARCHAR)
-RETURNS VOID AS $$
-BEGIN
-  IF RANDOM() < .0001 THEN
-    WITH deleted as (DELETE FROM polls_pollresultscounter
-      WHERE "org_id" = _org_id AND "type" = _type AND "ruleset" = _ruleset
-      RETURNING "count")
-      INSERT INTO polls_pollresultscounter("org_id", "ruleset", "type", "count")
-      VALUES (_org_id, _ruleset, _type ,GREATEST(0, (SELECT SUM("count") FROM deleted)));
-  END IF;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -105,3 +87,18 @@ DROP TRIGGER IF EXISTS ureport_when_poll_results_truncate_then_update_results_co
 CREATE TRIGGER ureport_when_poll_results_truncate_then_update_results_counters
   AFTER TRUNCATE ON polls_pollresult
   EXECUTE PROCEDURE ureport_update_results_counters();
+
+-----------------------------------------------------------------------------
+-- Squash the counters by gathering the counts in one row
+-----------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION
+  ureport_squash_resultscounters(_org_id INT, _ruleset CHAR(36), _type VARCHAR)
+RETURNS VOID AS $$
+BEGIN
+  WITH deleted as (DELETE FROM polls_pollresultscounter
+    WHERE "org_id" = _org_id AND "type" = _type AND "ruleset" = _ruleset
+    RETURNING "count")
+    INSERT INTO polls_pollresultscounter("org_id", "ruleset", "type", "count")
+    VALUES (_org_id, _ruleset, _type ,GREATEST(0, (SELECT SUM("count") FROM deleted)));
+END;
+$$ LANGUAGE plpgsql;
