@@ -18,7 +18,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 -----------------------------------------------------------------------------
--- Every 100 inserts or so this will squash the counters by gathering
+-- Every 10000 inserts or so this will squash the counters by gathering
 -----------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION
   ureport_maybe_squash_resultscounters(_org_id INT, _ruleset CHAR(36), _type VARCHAR)
