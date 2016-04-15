@@ -519,7 +519,8 @@ class PollResult(models.Model):
 
 class PollResultsCounter(models.Model):
 
-    LAST_SQUASH_KEY = 'last_poll_results_counter_squash'
+    LAST_SQUASH_KEY = 'last-poll-results-counter-squash'
+    COUNTS_SQUASH_LOCK = 'poll-results-counter-squash-lock'
 
     org = models.ForeignKey(Org, related_name='results_counters')
 
@@ -533,38 +534,44 @@ class PollResultsCounter(models.Model):
     def squash_counts(cls):
         # get the id of the last count we squashed
         r = get_redis_connection()
-        last_squash = r.get(PollResultsCounter.LAST_SQUASH_KEY)
-        if not last_squash:
-            last_squash = 0
-
-        start = time.time()
-        squash_count = 0
-
-        if last_squash < 1:
-            counters = list(PollResultsCounter.objects.values('org_id', 'ruleset', 'type').annotate(Count('id')).filter(id__count__gt=1).order_by('org_id', 'ruleset', 'type'))
+        key = PollResultsCounter.COUNTS_SQUASH_LOCK
+        if r.get(key):
+            print "Squash arleady running"
         else:
-            counters = list(PollResultsCounter.objects.filter(id__gt=last_squash).values('org_id', 'ruleset', 'type').order_by('org_id', 'ruleset', 'type').distinct('org_id', 'ruleset', 'type'))
+            with r.lock(key):
 
-        total_counters = len(counters)
+                last_squash = r.get(PollResultsCounter.LAST_SQUASH_KEY)
+                if not last_squash:
+                    last_squash = 0
 
-        # get all the new added counters
-        for counter in counters:
-            print "Squashing: %d %s  -  %s" % (counter['org_id'], counter['ruleset'], counter['type'])
+                start = time.time()
+                squash_count = 0
 
-            # perform our atomic squash in SQL by calling our squash method
-            with connection.cursor() as c:
-                c.execute("SELECT ureport_squash_resultscounters(%s, %s, %s);", (counter['org_id'], counter['ruleset'], counter['type']))
+                if last_squash < 1:
+                    counters = list(PollResultsCounter.objects.values('org_id', 'ruleset', 'type').annotate(Count('id')).filter(id__count__gt=1).order_by('org_id', 'ruleset', 'type'))
+                else:
+                    counters = list(PollResultsCounter.objects.filter(id__gt=last_squash).values('org_id', 'ruleset', 'type').order_by('org_id', 'ruleset', 'type').distinct('org_id', 'ruleset', 'type'))
 
-            squash_count += 1
+                total_counters = len(counters)
 
-            print "Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100/total_counters, time.time() - start)
+                # get all the new added counters
+                for counter in counters:
+                    print "Squashing: %d %s  -  %s" % (counter['org_id'], counter['ruleset'], counter['type'])
 
-        # insert our new top squashed id
-        max_id = PollResultsCounter.objects.all().order_by('-id').first()
-        if max_id:
-            r.set(PollResultsCounter.LAST_SQUASH_KEY, max_id.id)
+                    # perform our atomic squash in SQL by calling our squash method
+                    with connection.cursor() as c:
+                        c.execute("SELECT ureport_squash_resultscounters(%s, %s, %s);", (counter['org_id'], counter['ruleset'], counter['type']))
 
-        print "Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start)
+                    squash_count += 1
+
+                    print "Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100/total_counters, time.time() - start)
+
+                # insert our new top squashed id
+                max_id = PollResultsCounter.objects.all().order_by('-id').first()
+                if max_id:
+                    r.set(PollResultsCounter.LAST_SQUASH_KEY, max_id.id)
+
+                print "Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start)
 
     @classmethod
     def get_poll_results(cls, poll, types=None):
