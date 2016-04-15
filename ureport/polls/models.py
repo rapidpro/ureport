@@ -540,15 +540,23 @@ class PollResultsCounter(models.Model):
         start = time.time()
         squash_count = 0
 
+        counters = list(PollResultsCounter.objects.filter(id__gt=last_squash).order_by('org_id', 'ruleset', 'type').distinct('org_id', 'ruleset', 'type'))
+
         # get all the new added counters
-        for counter in PollResultsCounter.objects.filter(id__gt=last_squash).order_by('org_id', 'ruleset', 'type').distinct('org_id', 'ruleset', 'type'):
-            print "Squashing: %d %s  -  %s" % (counter.org_id, counter.ruleset, counter.type)
+        for counter in counters:
 
-            # perform our atomic squash in SQL by calling our squash method
-            with connection.cursor() as c:
-                c.execute("SELECT ureport_squash_resultscounters(%s, %s, %s);", (counter.org_id, counter.ruleset, counter.type))
+            if PollResultsCounter.objects.filter(org_id=counter.org_id, ruleset=counter.ruleset, type=counter.type).count() > 1:
 
-            squash_count += 1
+                print "Squashing: %d %s  -  %s" % (counter.org_id, counter.ruleset, counter.type)
+
+                # perform our atomic squash in SQL by calling our squash method
+                with connection.cursor() as c:
+                    c.execute("SELECT ureport_squash_resultscounters(%s, %s, %s);", (counter.org_id, counter.ruleset, counter.type))
+
+                squash_count += 1
+            else:
+                print "No Squashing: %d %s  -  %s" % (counter.org_id, counter.ruleset, counter.type)
+
 
         # insert our new top squashed id
         max_id = PollResultsCounter.objects.all().order_by('-id').first()
