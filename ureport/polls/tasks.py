@@ -13,6 +13,12 @@ from ureport.utils import fetch_main_poll_results, fetch_brick_polls_results, fe
 logger = logging.getLogger(__name__)
 
 
+@app.task
+def squash_poll_results_counts():
+    from .models import PollResultsCounter
+    PollResultsCounter.squash_counts()
+
+
 @org_task('backfill-poll-results')
 def backfill_poll_results(org, since, until):
     from ureport.backend import get_backend

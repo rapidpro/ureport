@@ -1,8 +1,9 @@
 from __future__ import unicode_literals
 import json
+import time
 from datetime import datetime
-from django.db import models
-from django.db.models import Sum
+from django.db import models, connection
+from django.db.models import Sum, Count
 from django.utils.text import slugify
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
@@ -11,6 +12,8 @@ from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
 from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
+
+from django_redis import get_redis_connection
 
 
 # cache whether a question is open ended for a month
@@ -516,6 +519,9 @@ class PollResult(models.Model):
 
 class PollResultsCounter(models.Model):
 
+    LAST_SQUASH_KEY = 'last-poll-results-counter-squash'
+    COUNTS_SQUASH_LOCK = 'poll-results-counter-squash-lock'
+
     org = models.ForeignKey(Org, related_name='results_counters')
 
     ruleset = models.CharField(max_length=36)
@@ -523,6 +529,49 @@ class PollResultsCounter(models.Model):
     type = models.CharField(max_length=255)
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    @classmethod
+    def squash_counts(cls):
+        # get the id of the last count we squashed
+        r = get_redis_connection()
+        key = PollResultsCounter.COUNTS_SQUASH_LOCK
+        if r.get(key):
+            print "Squash arleady running"
+        else:
+            with r.lock(key):
+
+                last_squash = r.get(PollResultsCounter.LAST_SQUASH_KEY)
+                if not last_squash:
+                    last_squash = 0
+
+                start = time.time()
+                squash_count = 0
+
+                if last_squash < 1:
+                    counters = list(PollResultsCounter.objects.values('org_id', 'ruleset', 'type').annotate(Count('id')).filter(id__count__gt=1).order_by('org_id', 'ruleset', 'type'))
+                else:
+                    counters = list(PollResultsCounter.objects.filter(id__gt=last_squash).values('org_id', 'ruleset', 'type').order_by('org_id', 'ruleset', 'type').distinct('org_id', 'ruleset', 'type'))
+
+                total_counters = len(counters)
+
+                # get all the new added counters
+                for counter in counters:
+                    print "Squashing: %d %s  -  %s" % (counter['org_id'], counter['ruleset'], counter['type'])
+
+                    # perform our atomic squash in SQL by calling our squash method
+                    with connection.cursor() as c:
+                        c.execute("SELECT ureport_squash_resultscounters(%s, %s, %s);", (counter['org_id'], counter['ruleset'], counter['type']))
+
+                    squash_count += 1
+
+                    print "Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100/total_counters, time.time() - start)
+
+                # insert our new top squashed id
+                max_id = PollResultsCounter.objects.all().order_by('-id').first()
+                if max_id:
+                    r.set(PollResultsCounter.LAST_SQUASH_KEY, max_id.id)
+
+                print "Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start)
 
     @classmethod
     def get_poll_results(cls, poll, types=None):
