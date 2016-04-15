@@ -3,7 +3,7 @@ import json
 import time
 from datetime import datetime
 from django.db import models, connection
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.utils.text import slugify
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
@@ -540,23 +540,20 @@ class PollResultsCounter(models.Model):
         start = time.time()
         squash_count = 0
 
-        counters = list(PollResultsCounter.objects.filter(id__gt=last_squash).order_by('org_id', 'ruleset', 'type').distinct('org_id', 'ruleset', 'type'))
+        if last_squash < 1:
+            counters = PollResultsCounter.objects.values('org_id', 'ruleset', 'type').annotate(Count('id')).filter(id__count__gt=1).order_by('org_id', 'ruleset', 'type')
+        else:
+            counters = list(PollResultsCounter.objects.filter(id__gt=last_squash).values('org_id', 'ruleset', 'type').order_by('org_id', 'ruleset', 'type').distinct('org_id', 'ruleset', 'type'))
 
         # get all the new added counters
         for counter in counters:
+            print "Squashing: %d %s  -  %s" % (counter['org_id'], counter['ruleset'], counter['type'])
 
-            if PollResultsCounter.objects.filter(org_id=counter.org_id, ruleset=counter.ruleset, type=counter.type).count() > 1:
+            # perform our atomic squash in SQL by calling our squash method
+            with connection.cursor() as c:
+                c.execute("SELECT ureport_squash_resultscounters(%s, %s, %s);", (counter['org_id'], counter['ruleset'], counter['type']))
 
-                print "Squashing: %d %s  -  %s" % (counter.org_id, counter.ruleset, counter.type)
-
-                # perform our atomic squash in SQL by calling our squash method
-                with connection.cursor() as c:
-                    c.execute("SELECT ureport_squash_resultscounters(%s, %s, %s);", (counter.org_id, counter.ruleset, counter.type))
-
-                squash_count += 1
-            else:
-                print "No Squashing: %d %s  -  %s" % (counter.org_id, counter.ruleset, counter.type)
-
+            squash_count += 1
 
         # insert our new top squashed id
         max_id = PollResultsCounter.objects.all().order_by('-id').first()
