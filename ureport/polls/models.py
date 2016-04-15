@@ -541,9 +541,11 @@ class PollResultsCounter(models.Model):
         squash_count = 0
 
         if last_squash < 1:
-            counters = PollResultsCounter.objects.values('org_id', 'ruleset', 'type').annotate(Count('id')).filter(id__count__gt=1).order_by('org_id', 'ruleset', 'type')
+            counters = list(PollResultsCounter.objects.values('org_id', 'ruleset', 'type').annotate(Count('id')).filter(id__count__gt=1).order_by('org_id', 'ruleset', 'type'))
         else:
             counters = list(PollResultsCounter.objects.filter(id__gt=last_squash).values('org_id', 'ruleset', 'type').order_by('org_id', 'ruleset', 'type').distinct('org_id', 'ruleset', 'type'))
+
+        total_counters = len(counters)
 
         # get all the new added counters
         for counter in counters:
@@ -554,6 +556,8 @@ class PollResultsCounter(models.Model):
                 c.execute("SELECT ureport_squash_resultscounters(%s, %s, %s);", (counter['org_id'], counter['ruleset'], counter['type']))
 
             squash_count += 1
+
+            print "Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100/total_counters, time.time() - start)
 
         # insert our new top squashed id
         max_id = PollResultsCounter.objects.all().order_by('-id').first()
