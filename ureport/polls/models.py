@@ -3,10 +3,12 @@ import json
 import time
 from datetime import datetime
 
+import pytz
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, connection
 from django.db.models import Sum, Count, F
 from django.utils.text import slugify
+from django.utils import timezone
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
@@ -19,6 +21,8 @@ from django_redis import get_redis_connection
 
 
 # cache whether a question is open ended for a month
+from ureport.utils import datetime_to_json_date
+
 OPEN_ENDED_CACHE_TIME = getattr(settings, 'OPEN_ENDED_CACHE_TIME', 60 * 60 * 24 * 30)
 
 # cache our featured polls for a month (this will be invalidated by questions changing)
@@ -495,6 +499,10 @@ class PollResult(models.Model):
 
     POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%d'
 
+    POLL_REBUILD_COUNTS_LOCK = 'poll-rebuild-counts-lock:org:%d:poll:%d'
+
+    POLL_REBUILD_COUNTS_FINISHED_FLAG = 'poll-counts-finished:org:%d:poll:%d'
+
     org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
 
     flow = models.CharField(max_length=36)
@@ -520,7 +528,9 @@ class PollResult(models.Model):
         polls = Poll.objects.all().order_by('org_id', 'flow_uuid').distinct('org_id', 'flow_uuid')
 
         for poll in polls:
-            PollResult.rebuild_counts_for_poll(poll.pk)
+            has_finished = cache.get(PollResult.POLL_REBUILD_COUNTS_FINISHED_FLAG % poll.org_id, poll.pk, None)
+            if not has_finished:
+                PollResult.rebuild_counts_for_poll(poll.pk)
 
     @classmethod
     def rebuild_counts_for_poll(cls, poll_id):
@@ -537,28 +547,38 @@ class PollResult(models.Model):
         org_id = poll.org_id
         flow = poll.flow_uuid
 
-        rulesets = poll.questions.all().values_list('ruleset_uuid', flat=True)
+        r = get_redis_connection()
 
-        # Delete existing counters
-        PollResultsCounter.objects.filter(org_id=org_id, ruleset__in=rulesets).delete()
+        key = PollResult.POLL_REBUILD_COUNTS_LOCK % (org_id, poll_id)
 
-        poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list('pk', flat=True)
+        if r.get(key):
+            print "Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id)
 
-        pair_results_count = len(poll_results_ids)
+        else:
+            with r.lock(key):
+                rulesets = poll.questions.all().values_list('ruleset_uuid', flat=True)
 
-        print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start)
+                # Delete existing counters
+                PollResultsCounter.objects.filter(org_id=org_id, ruleset__in=rulesets).delete()
 
-        i = 0
-        for batch in chunk_list(poll_results_ids, 1000):
-            poll_results = list(PollResult.objects.filter(pk__in=batch))
-            for result in poll_results:
-                result.create_counters()
-                i += 1
+                poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list('pk', flat=True)
 
-            print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, i, pair_results_count, time.time() - start)
-            PollResultsCounter.squash_counts()
+                poll_results_ids_count = len(poll_results_ids)
 
-        print "Finished Rebuilding the counters  for poll #%d on org #%d in %ds" % (poll.pk, org_id, time.time() - start)
+                print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start)
+
+                for batch in chunk_list(poll_results_ids, 1000):
+                    poll_results = list(PollResult.objects.filter(pk__in=batch))
+                    for result in poll_results:
+                        result.create_counters()
+
+                    print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, len(poll_results), poll_results_ids_count, time.time() - start)
+                    PollResultsCounter.squash_counts()
+
+                now = timezone.now()
+                cache.set(PollResult.POLL_REBUILD_COUNTS_FINISHED_FLAG % (org_id, poll_id),
+                          datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+                print "Finished Rebuilding the counters  for poll #%d on org #%d in %ds" % (poll.pk, org_id, time.time() - start)
 
     def create_counters(self):
         update_counters = []
