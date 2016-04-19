@@ -2,8 +2,10 @@ from __future__ import unicode_literals
 import json
 import time
 from datetime import datetime
+
+from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, connection
-from django.db.models import Sum, Count
+from django.db.models import Sum, Count, F
 from django.utils.text import slugify
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
@@ -513,6 +515,96 @@ class PollResult(models.Model):
 
     district = models.CharField(max_length=255, null=True)
 
+    @classmethod
+    def rebuild_counts(cls):
+        from ureport.utils import chunk_list
+        import time
+
+        if PollResultsCounter.objects.all().exists():
+            raise Exception('PollResultsCounter table not TRUNCATED')
+
+        r = get_redis_connection()
+        r.delete(PollResultsCounter.LAST_SQUASH_KEY)
+        r.delete(PollResultsCounter.COUNTS_SQUASH_LOCK)
+
+        start = time.time()
+
+        flow_org_pairs = list(Poll.objects.all().values('org_id', 'flow_uuid').order_by('org_id', 'flow_uuid').distinct('org_id', 'flow_uuid'))
+
+        for flow_org_pair in flow_org_pairs:
+            pair_start = time.time()
+            org_id = flow_org_pair['org_id']
+            flow = flow_org_pair['flow_uuid']
+            pair_results = list(PollResult.objects.filter(org_id=org_id, flow=flow).order_by('org_id', 'flow'))
+
+            pair_results_count = len(pair_results)
+
+            print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - pair_start)
+
+            i = 0
+            for batch in chunk_list(pair_results, 1000):
+                for result in batch:
+                    result.create_counters()
+                    i += 1
+
+                print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, i, pair_results_count, time.time() - pair_start)
+                print "Rebuilding progress time: %ds" % (time.time() - start)
+                PollResultsCounter.squash_counts()
+
+        print "Finished Rebuilding the counters in %ds" % (time.time() - start)
+
+    def create_counters(self):
+        update_counters = []
+
+        if not self.org_id or not self.flow or not self.ruleset:
+            return
+
+        org_id = self.org_id
+        ruleset = ''
+        category = ''
+        state = ''
+        district = ''
+
+        if self.ruleset:
+            ruleset = self.ruleset.lower()
+
+        if self.category:
+            category = self.category.lower()
+
+        if self.state:
+            state = self.state.upper()
+
+        if self.district:
+            district = self.district.upper()
+
+        update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                type='ruleset:%s:total-ruleset-polled' % ruleset).id)
+
+        if category:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id,
+                                                                    ruleset=ruleset,
+                                                                    type='ruleset:%s:total-ruleset-responded' % ruleset).id)
+
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:category:%s' % (ruleset, category)).id)
+
+        if state and category:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:category:%s:state:%s' % (ruleset, category, state)).id)
+
+        elif state:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:nocategory:state:%s' % (ruleset, state)).id)
+
+        if district and category:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:category:%s:district:%s' % (ruleset, category, district)).id)
+        elif district:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:nocategory:district:%s' % (ruleset, district)).id)
+
+        PollResultsCounter.objects.filter(id__in=update_counters).update(count=F('count') + 1)
+
     class Meta:
         index_together = ["org", "flow"]
 
@@ -529,6 +621,16 @@ class PollResultsCounter(models.Model):
     type = models.CharField(max_length=255)
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    @classmethod
+    def get_or_create(cls, org_id, ruleset, type):
+        try:
+            counter, created = PollResultsCounter.objects.get_or_create(org_id=org_id, ruleset=ruleset, type=type)
+        except MultipleObjectsReturned:
+            counter = PollResultsCounter.objects.filter(org_id=org_id, ruleset=ruleset, type=type)
+
+        return counter
+
 
     @classmethod
     def squash_counts(cls):
@@ -556,7 +658,6 @@ class PollResultsCounter(models.Model):
 
                 # get all the new added counters
                 for counter in counters:
-                    print "Squashing: %d %s  -  %s" % (counter['org_id'], counter['ruleset'], counter['type'])
 
                     # perform our atomic squash in SQL by calling our squash method
                     with connection.cursor() as c:
@@ -564,7 +665,8 @@ class PollResultsCounter(models.Model):
 
                     squash_count += 1
 
-                    print "Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100/total_counters, time.time() - start)
+                    if squash_count % 100 == 0:
+                        print "Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100/total_counters, time.time() - start)
 
                 # insert our new top squashed id
                 max_id = PollResultsCounter.objects.all().order_by('-id').first()
