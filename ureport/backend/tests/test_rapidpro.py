@@ -175,7 +175,8 @@ class ContactSyncerTest(DashTest):
                           'occupation': '',
                           'registered_on': None,
                           'state': '',
-                          'district': ''})
+                          'district': '',
+                          'ward': ''})
 
         temba_contact = TembaContact.create(uuid='C-007', name="Jan", urns=['tel:123'],
                                             groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
@@ -193,7 +194,8 @@ class ContactSyncerTest(DashTest):
                           'occupation': 'Student',
                           'registered_on': json_date_to_datetime('2014-01-02T03:04:05.000'),
                           'state': '',
-                          'district': ''})
+                          'district': '',
+                          'ward': ''})
 
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
@@ -211,7 +213,8 @@ class ContactSyncerTest(DashTest):
                           'occupation': 'Student',
                           'registered_on': json_date_to_datetime('2014-01-02T03:04:05.000'),
                           'state': 'R-LAGOS',
-                          'district': 'R-OYO'})
+                          'district': 'R-OYO',
+                          'ward': ''})
 
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
@@ -229,7 +232,8 @@ class ContactSyncerTest(DashTest):
                           'occupation': 'Student',
                           'registered_on': json_date_to_datetime('2014-01-02T03:04:05.000'),
                           'state': 'R-LAGOS',
-                          'district': 'R-OYO'})
+                          'district': 'R-OYO',
+                          'ward': ''})
 
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
@@ -247,7 +251,8 @@ class ContactSyncerTest(DashTest):
                           'occupation': 'Student',
                           'registered_on': json_date_to_datetime('2014-01-02T03:04:05.000'),
                           'state': 'R-LAGOS',
-                          'district': 'R-OYO'})
+                          'district': 'R-OYO',
+                          'ward': ''})
 
 
 @override_settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache', 'LOCATION': '127.0.0.1:6379:1',
@@ -384,7 +389,7 @@ class RapidProBackendTest(DashTest):
             )
         ]
 
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(9):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 2))
@@ -425,7 +430,7 @@ class RapidProBackendTest(DashTest):
             )
         ]
 
-        with self.assertNumQueries(9):
+        with self.assertNumQueries(10):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 1))
@@ -467,7 +472,7 @@ class RapidProBackendTest(DashTest):
             )
         ]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(11):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (3, 0, 0, 0))
@@ -505,7 +510,7 @@ class RapidProBackendTest(DashTest):
             )
         ]
 
-        with self.assertNumQueries(8):
+        with self.assertNumQueries(9):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
