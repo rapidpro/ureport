@@ -127,7 +127,7 @@ class ContactTest(DashTest):
         kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
 
         self.assertEqual(kwargs, dict(uuid='C-006', org=self.nigeria, gender='', born=0, occupation='',
-                                      registered_on=None, state='', district=''))
+                                      registered_on=None, state='', district='', ward=''))
 
         # try creating contact from them
         Contact.objects.create(**kwargs)
@@ -144,7 +144,7 @@ class ContactTest(DashTest):
 
         self.assertEqual(kwargs, dict(uuid='C-007', org=self.nigeria, gender='M', born=1990, occupation='Student',
                                       registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='',
-                                      district=''))
+                                      district='', ward=''))
 
         # try creating contact from them
         Contact.objects.create(**kwargs)
@@ -160,7 +160,7 @@ class ContactTest(DashTest):
 
         self.assertEqual(kwargs, dict(uuid='C-008', org=self.nigeria, gender='M', born=1990, occupation='Student',
                                       registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='R-LAGOS',
-                                      district='R-OYO'))
+                                      district='R-OYO', ward=''))
 
         # try creating contact from them
         Contact.objects.create(**kwargs)
