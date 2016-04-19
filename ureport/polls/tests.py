@@ -1204,7 +1204,7 @@ class PollResultsTest(DashTest):
 
         self.assertEqual(counter1.pk, counter2.pk)
 
-        counter3 = PollResultsCounter.objects.create(org=self.nigeria, ruleset='ruleset=uuid', type='type-a')
+        counter3 = PollResultsCounter.objects.create(org=self.nigeria, ruleset='ruleset-uuid', type='type-a')
 
         counter4 = PollResultsCounter.get_or_create(self.nigeria.id, 'ruleset-uuid', 'type-a')
 

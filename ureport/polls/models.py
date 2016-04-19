@@ -517,41 +517,55 @@ class PollResult(models.Model):
 
     @classmethod
     def rebuild_counts(cls):
+        polls = Poll.objects.all().order_by('org_id', 'flow_uuid').distinct('org_id', 'flow_uuid')
+
+        for poll in polls:
+            PollResult.rebuild_counts_for_poll(poll.pk)
+
+    @classmethod
+    def rebuild_counts_for_poll(cls, poll_id):
         from ureport.utils import chunk_list
         import time
 
-        if PollResultsCounter.objects.all().exists():
-            raise Exception('PollResultsCounter table not TRUNCATED')
-
-        r = get_redis_connection()
-        r.delete(PollResultsCounter.LAST_SQUASH_KEY)
-        r.delete(PollResultsCounter.COUNTS_SQUASH_LOCK)
-
         start = time.time()
 
-        flow_org_pairs = list(Poll.objects.all().values('org_id', 'flow_uuid').order_by('org_id', 'flow_uuid').distinct('org_id', 'flow_uuid'))
+        poll = Poll.objects.filter(id=poll_id).first()
 
-        for flow_org_pair in flow_org_pairs:
-            pair_start = time.time()
-            org_id = flow_org_pair['org_id']
-            flow = flow_org_pair['flow_uuid']
-            pair_results = list(PollResult.objects.filter(org_id=org_id, flow=flow).order_by('org_id', 'flow'))
+        if not poll:
+            return
 
-            pair_results_count = len(pair_results)
+        org_id = poll.org_id
+        flow = poll.flow_uuid
 
-            print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - pair_start)
+        rulesets = poll.questions.all().values_list('ruleset_uuid', flat=True)
 
-            i = 0
-            for batch in chunk_list(pair_results, 1000):
-                for result in batch:
-                    result.create_counters()
-                    i += 1
+        # Delete existing counters
+        PollResultsCounter.objects.filter(org_id=org_id, ruleset__in=rulesets).delete()
 
-                print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, i, pair_results_count, time.time() - pair_start)
-                print "Rebuilding progress time: %ds" % (time.time() - start)
-                PollResultsCounter.squash_counts()
+        poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list('pk', flat=True)
 
-        print "Finished Rebuilding the counters in %ds" % (time.time() - start)
+        pair_results_count = len(poll_results_ids)
+
+        print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start)
+
+        i = 0
+        for batch in chunk_list(poll_results_ids, 1000):
+            poll_results = list(PollResult.objects.filter(pk__in=batch))
+            for result in poll_results:
+                result.create_counters()
+                i += 1
+
+                from django.db import connection as db_connection, reset_queries
+                slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+                for q in slowest_queries:
+                    print "=" * 60
+                    print "\n\n\n"
+                    print "%s -- %s" % (q['time'], q['sql'])
+
+            print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, i, pair_results_count, time.time() - start)
+            PollResultsCounter.squash_counts()
+
+        print "Finished Rebuilding the counters  for poll #%d on org #%d in %ds" % (poll.pk, org_id, time.time() - start)
 
     def create_counters(self):
         update_counters = []
@@ -627,7 +641,7 @@ class PollResultsCounter(models.Model):
         try:
             counter, created = PollResultsCounter.objects.get_or_create(org_id=org_id, ruleset=ruleset, type=type)
         except MultipleObjectsReturned:
-            counter = PollResultsCounter.objects.filter(org_id=org_id, ruleset=ruleset, type=type)
+            counter = PollResultsCounter.objects.filter(org_id=org_id, ruleset=ruleset, type=type).first()
 
         return counter
 
