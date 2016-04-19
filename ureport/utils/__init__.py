@@ -76,6 +76,8 @@ def substitute_segment(org, segment_in):
         segment['location'] = org.get_config('state_label')
     elif location == 'District':
         segment['location'] = org.get_config('district_label')
+    elif location == 'Ward':
+        segment['location'] = org.get_config('ward_label')
 
     if org.get_config('is_global'):
         if "location" in segment:
@@ -474,7 +476,7 @@ def get_ureporters_locations_stats(org, segment):
 
     location_stats = []
 
-    if not field_type or field_type.lower() not in ['state', 'district']:
+    if not field_type or field_type.lower() not in ['state', 'district', 'ward']:
         return location_stats
 
     field_type = field_type.lower()
@@ -485,7 +487,9 @@ def get_ureporters_locations_stats(org, segment):
         boundary_top_level = 0 if org.get_config('is_global') else 1
         boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name').order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
-
+    elif field_type == 'ward':
+        boundaries = Boundary.objects.filter(org=org, level=3, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
+        location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('ward')}
     else:
         boundaries = Boundary.objects.filter(org=org, level=2, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
         location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
