@@ -555,13 +555,6 @@ class PollResult(models.Model):
                 result.create_counters()
                 i += 1
 
-                from django.db import connection as db_connection, reset_queries
-                slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
-                for q in slowest_queries:
-                    print "=" * 60
-                    print "\n\n\n"
-                    print "%s -- %s" % (q['time'], q['sql'])
-
             print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, i, pair_results_count, time.time() - start)
             PollResultsCounter.squash_counts()
 
