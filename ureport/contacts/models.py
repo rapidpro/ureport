@@ -27,12 +27,14 @@ class ContactField(models.Model):
     TYPE_DATETIME = 'D'
     TYPE_STATE = 'S'
     TYPE_DISTRICT = 'I'
+    TYPE_WARD = 'W'
 
     TEMBA_TYPES = {'text': TYPE_TEXT,
                    'numeric': TYPE_DECIMAL,
                    'datetime': TYPE_DATETIME,
                    'state': TYPE_STATE,
-                   'district': TYPE_DISTRICT}
+                   'district': TYPE_DISTRICT,
+                   'ward': TYPE_WARD}
 
     CONTACT_FIELDS_CACHE_TIMEOUT = 60 * 60 * 24 * 15
     CONTACT_FIELDS_CACHE_KEY = 'org:%d:contact_fields'
@@ -133,6 +135,8 @@ class Contact(models.Model):
 
     district = models.CharField(max_length=255, verbose_name=_("District Field"), null=True)
 
+    ward = models.CharField(max_length=255, verbose_name=_("Ward Field"), null=True)
+
     @classmethod
     def get_or_create(cls, org, uuid):
 
@@ -158,6 +162,7 @@ class Contact(models.Model):
 
         state = ''
         district = ''
+        ward = ''
 
         state_field = org.get_config('state_label')
         if state_field:
@@ -179,6 +184,14 @@ class Contact(models.Model):
                                                                 parent=state_boundary).first()
                     if district_boundary:
                         district = district_boundary.osm_id
+
+                ward_field = org.get_config('ward_label')
+                if ward_field:
+                    ward_name = temba_contact.fields.get(cls.find_contact_field_key(org, ward_field), None)
+                    ward_boundary = Boundary.objects.filter(org=org, level=3, name__iexact=ward_name,
+                                                            parent=district_boundary).first()
+                    if ward_boundary:
+                        ward = ward_boundary.osm_id
 
         registered_on = None
         registration_field = org.get_config('registration_label')
@@ -220,7 +233,7 @@ class Contact(models.Model):
                 gender = ''
 
         return dict(org=org, uuid=temba_contact.uuid, gender=gender, born=born, occupation=occupation,
-                    registered_on=registered_on, district=district, state=state)
+                    registered_on=registered_on, ward=ward, district=district, state=state)
 
     @classmethod
     def update_or_create_from_temba(cls, org, temba_contact):
