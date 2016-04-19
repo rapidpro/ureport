@@ -21,7 +21,6 @@ from django_redis import get_redis_connection
 
 
 # cache whether a question is open ended for a month
-from ureport.utils import datetime_to_json_date
 
 OPEN_ENDED_CACHE_TIME = getattr(settings, 'OPEN_ENDED_CACHE_TIME', 60 * 60 * 24 * 30)
 
@@ -534,7 +533,7 @@ class PollResult(models.Model):
 
     @classmethod
     def rebuild_counts_for_poll(cls, poll_id):
-        from ureport.utils import chunk_list
+        from ureport.utils import chunk_list, datetime_to_json_date
         import time
 
         start = time.time()
