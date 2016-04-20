@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import json
 from dash.categories.models import Category
 from dash.orgs.models import Org
@@ -82,10 +83,22 @@ class StoryReadSerializer(serializers.ModelSerializer):
 
 class PollReadSerializer(serializers.ModelSerializer):
     category = CategoryReadSerializer()
+    questions = SerializerMethodField()
 
     class Meta:
         model = Poll
-        fields = ('id', 'flow_uuid', 'title', 'org', 'category')
+        fields = ('id', 'flow_uuid', 'title', 'org', 'category' , 'questions')
+
+    def get_questions(self, obj):
+        questions = []
+        for question in obj.get_questions():
+            results = question.get_results()
+            questions.append({'id': question.pk,
+                              'ruleset_uuid': question.ruleset_uuid,
+                              'title': question.title,
+                              'results': results})
+
+        return questions
 
 
 class NewsItemReadSerializer(serializers.ModelSerializer):
