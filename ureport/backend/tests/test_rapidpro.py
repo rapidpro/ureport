@@ -64,7 +64,8 @@ class BoundarySyncerTest(DashTest):
 
     def test_local_kwargs(self):
         geometry = TembaGeometry.create(type='MultiPolygon', coordinates=['COORDINATES'])
-        country = TembaBoundary.create(boundary='R12345', name='Nigeria', parent=None, level=0, geometry=geometry)
+        country = TembaBoundary.create(boundary='R12345', name='Nigeria', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                       geometry=geometry)
 
         kwargs = self.syncer.local_kwargs(self.nigeria, country)
         self.assertEqual(kwargs, {'org': self.nigeria,
@@ -75,39 +76,46 @@ class BoundarySyncerTest(DashTest):
         # try creating an object from the kwargs
         country_boundary = Boundary.objects.create(**kwargs)
 
-        state = TembaBoundary.create(boundary='R23456', name='Lagos', parent="R12345", level=1, geometry=geometry)
+        state = TembaBoundary.create(boundary='R23456', name='Lagos', parent="R12345", level=Boundary.STATE_LEVEL,
+                                     geometry=geometry)
         kwargs = self.syncer.local_kwargs(self.nigeria, state)
-        self.assertEqual(kwargs, {'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos", 'level': 1,
-                                  'parent': country_boundary,
+        self.assertEqual(kwargs, {'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
+                                  'level': Boundary.STATE_LEVEL, 'parent': country_boundary,
                                   'geometry':json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
 
     def test_update_required(self):
         geometry = TembaGeometry.create(type='MultiPolygon', coordinates=[[1, 2]])
 
-        local = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None, level=0,
-                                                   geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        local = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None,
+                                        level=Boundary.COUNTRY_LEVEL,
+                                        geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
 
-        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=0, geometry=geometry)
+        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                      geometry=geometry)
 
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
-        remote = TembaBoundary.create(boundary='OLD123', name='NEW', parent=None, level=0, geometry=geometry)
+        remote = TembaBoundary.create(boundary='OLD123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                      geometry=geometry)
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
-        remote = TembaBoundary.create(boundary='OLD123', name='NEW',parent=None, level=1, geometry=geometry)
+        remote = TembaBoundary.create(boundary='OLD123', name='NEW',parent=None, level=Boundary.STATE_LEVEL,
+                                      geometry=geometry)
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
         geometry = TembaGeometry.create(type='MultiPolygon', coordinates=[[1, 3]])
-        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=0, geometry=geometry)
+        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                      geometry=geometry)
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
     def test_delete_local(self):
 
-        local = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None, level=0,
-                                                   geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        local = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None,
+                                        level=Boundary.COUNTRY_LEVEL,
+                                        geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
 
         self.syncer.delete_locale(local)
         self.assertFalse(Boundary.objects.filter(pk=local.pk))
@@ -130,14 +138,17 @@ class ContactSyncerTest(DashTest):
         self.nigeria.set_config('male_label', 'Male')
 
         # boundaries fetched
-        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria", level=0, parent=None,
+        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria",
+                                               level=Boundary.COUNTRY_LEVEL, parent=None,
                                                geometry='{"foo":"bar-country"}')
-        self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos", level=1,
+        self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos",
+                                             level=Boundary.STATE_LEVEL,
                                              parent=self.country, geometry='{"foo":"bar-state"}')
-        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo", level=2,
+        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo",
+                                                level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
-        self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja", level=3,
-                                                parent=self.district, geometry='{"foo":"bar-ward"}')
+        self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja", level=Boundary.WARD_LEVEL,
+                                            parent=self.district, geometry='{"foo":"bar-ward"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
                                                              label='Registration Date', value_type='T')
@@ -282,18 +293,25 @@ class RapidProBackendTest(DashTest):
         self.nigeria.set_config('male_label', 'Male')
 
         # boundaries fetched
-        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria", level=0, parent=None,
+        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria",
+                                               level=Boundary.COUNTRY_LEVEL, parent=None,
                                                geometry='{"foo":"bar-country"}')
-        self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos", level=1,
+        self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos",
+                                             level=Boundary.STATE_LEVEL,
                                              parent=self.country, geometry='{"foo":"bar-state"}')
-        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo", level=2,
+        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo",
+                                                level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
+        self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja",
+                                            level=Boundary.WARD_LEVEL,
+                                            parent=self.district, geometry='{"foo":"bar-state"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
                                                              label='Registration Date', value_type='T')
 
         self.state_field = ContactField.objects.create(org=self.nigeria, key='state', label='State', value_type='S')
         self.district_field = ContactField.objects.create(org=self.nigeria, key='lga', label='LGA', value_type='D')
+        self.ward_field = ContactField.objects.create(org=self.nigeria, key='ward', label='Ward', value_type='W')
         self.occupation_field = ContactField.objects.create(org=self.nigeria, key='occupation', label='Activité',
                                                             value_type='T')
 
@@ -593,7 +611,8 @@ class RapidProBackendTest(DashTest):
 
         Boundary.objects.all().delete()
         geometry = TembaGeometry.create(type='MultiPolygon', coordinates=[[1, 2]])
-        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=0, geometry=geometry)
+        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None,
+                                      level=Boundary.COUNTRY_LEVEL, geometry=geometry)
 
         mock_get_boundaries.return_value = [remote]
 
@@ -604,8 +623,10 @@ class RapidProBackendTest(DashTest):
 
         Boundary.objects.all().delete()
         mock_get_boundaries.return_value = [
-            TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=0, geometry=geometry),
-            TembaBoundary.create(boundary='NEW123', name='NEW', parent=None, level=0, geometry=geometry)
+            TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                 geometry=geometry),
+            TembaBoundary.create(boundary='NEW123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                 geometry=geometry)
         ]
 
         with self.assertNumQueries(7):
@@ -614,8 +635,10 @@ class RapidProBackendTest(DashTest):
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 0))
 
         mock_get_boundaries.return_value = [
-            TembaBoundary.create(boundary='OLD123', name='CHANGED', parent=None, level=0, geometry=geometry),
-            TembaBoundary.create(boundary='NEW123', name='NEW', parent=None, level=0, geometry=geometry)
+            TembaBoundary.create(boundary='OLD123', name='CHANGED', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                 geometry=geometry),
+            TembaBoundary.create(boundary='NEW123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                 geometry=geometry)
         ]
 
         with self.assertNumQueries(6):
@@ -624,8 +647,10 @@ class RapidProBackendTest(DashTest):
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 1, 0, 1))
 
         mock_get_boundaries.return_value = [
-            TembaBoundary.create(boundary='OLD123', name='CHANGED2', parent=None, level=0, geometry=geometry),
-            TembaBoundary.create(boundary='NEW123', name='NEW_CHANGE', parent=None, level=0, geometry=geometry)
+            TembaBoundary.create(boundary='OLD123', name='CHANGED2', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                 geometry=geometry),
+            TembaBoundary.create(boundary='NEW123', name='NEW_CHANGE', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                 geometry=geometry)
         ]
 
         with self.assertNumQueries(7):
@@ -767,11 +792,14 @@ class PerfTest(DashTest):
         self.nigeria.set_config('male_label', 'Male')
 
         # boundaries fetched
-        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria", level=0, parent=None,
+        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria",
+                                               level=Boundary.COUNTRY_LEVEL, parent=None,
                                                geometry='{"foo":"bar-country"}')
-        self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos", level=1,
+        self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos",
+                                             level=Boundary.STATE_LEVEL,
                                              parent=self.country, geometry='{"foo":"bar-state"}')
-        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo", level=2,
+        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo",
+                                                level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
