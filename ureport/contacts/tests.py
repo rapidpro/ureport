@@ -82,13 +82,17 @@ class ContactTest(DashTest):
         self.nigeria.set_config('male_label', 'Male')
 
         # boundaries fetched
-        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria", level=0, parent=None,
+        self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria",
+                                               level=Boundary.COUNTRY_LEVEL, parent=None,
                                                geometry='{"foo":"bar-country"}')
-        self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos", level=1,
+        self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos",
+                                             level=Boundary.STATE_LEVEL,
                                              parent=self.country, geometry='{"foo":"bar-state"}')
-        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo", level=2,
+        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo",
+                                                level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
-        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja", level=3,
+        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja",
+                                                level=Boundary.WARD_LEVEL,
                                                 parent=self.district, geometry='{"foo":"bar-ward"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',

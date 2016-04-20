@@ -95,15 +95,15 @@ class ContactSyncer(BaseSyncer):
         org_state_boundaries_data = dict()
         org_district_boundaries_data = dict()
         org_ward_boundaries_data = dict()
-        state_boundaries = Boundary.objects.filter(org=org, level=1)
+        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL)
         for state in state_boundaries:
             org_state_boundaries_data[state.name.lower()] = state.osm_id
             state_district_data = dict()
-            district_boundaries = Boundary.objects.filter(org=org, level=2, parent=state)
+            district_boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, parent=state)
             for district in district_boundaries:
                 state_district_data[district.name.lower()] = district.osm_id
                 district_ward_data = dict()
-                ward_boundaries = Boundary.objects.filter(org=org, level=3, parent=district)
+                ward_boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent=district)
                 for ward in ward_boundaries:
                     district_ward_data[ward.name.lower()] = ward.osm_id
                 org_ward_boundaries_data[district.osm_id] = district_ward_data
