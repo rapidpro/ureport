@@ -18,6 +18,11 @@ def squash_poll_results_counts():
     from .models import PollResultsCounter
     PollResultsCounter.squash_counts()
 
+@app.task
+def rebuild_poll_results_counts():
+    from .models import PollResult
+    PollResult.rebuild_counts()
+
 
 @org_task('backfill-poll-results')
 def backfill_poll_results(org, since, until):
