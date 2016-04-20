@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from collections import OrderedDict
 import json
 from random import randint
@@ -255,10 +256,42 @@ class UreportAPITests(APITestCase):
                                                  flow_uuid=poll.flow_uuid,
                                                  title=poll.title,
                                                  org=poll.org_id,
+                                                 questions=[]
                                                  ))
         self.assertDictEqual(dict(category), dict(OrderedDict(name=poll.category.name,
                                                   image_url=CategoryReadSerializer().
                                                   get_image_url(poll.category))))
+
+        with patch('ureport.polls.models.PollQuestion.get_results') as mock_get_results:
+            mock_get_results.return_value = "RESULT-DICT"
+
+            poll_question = PollQuestion.objects.create(poll=self.reg_poll, title="What's on mind? :)",
+                                                        ruleset_uuid='uuid1', created_by=self.superuser,
+                                                        modified_by=self.superuser)
+
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            category = response.data.pop('category')
+            self.assertDictEqual(response.data, dict(id=poll.pk,
+                                                     flow_uuid=poll.flow_uuid,
+                                                     title=poll.title,
+                                                     org=poll.org_id,
+                                                     questions=[dict(id=poll_question.pk,
+                                                                     ruleset_uuid='uuid1',
+                                                                     title="What's on mind? :)",
+                                                                     results="RESULT-DICT")]))
+
+            poll_question.is_active = False
+            poll_question.save()
+
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            category = response.data.pop('category')
+            self.assertDictEqual(response.data, dict(id=poll.pk,
+                                                     flow_uuid=poll.flow_uuid,
+                                                     title=poll.title,
+                                                     org=poll.org_id,
+                                                     questions=[]))
 
     def test_news_item_by_org_list(self):
         url = '/api/v1/news/org/%d/' % self.uganda.pk
