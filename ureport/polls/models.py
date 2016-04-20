@@ -566,12 +566,14 @@ class PollResult(models.Model):
 
                 print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start)
 
+                processed_results = 0
                 for batch in chunk_list(poll_results_ids, 1000):
                     poll_results = list(PollResult.objects.filter(pk__in=batch))
                     for result in poll_results:
                         result.create_counters()
+                        processed_results += 1
 
-                    print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, len(poll_results), poll_results_ids_count, time.time() - start)
+                    print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
                     PollResultsCounter.squash_counts()
 
                 now = timezone.now()
