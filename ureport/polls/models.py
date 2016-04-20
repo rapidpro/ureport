@@ -527,7 +527,7 @@ class PollResult(models.Model):
         polls = Poll.objects.all().order_by('org_id', 'flow_uuid').distinct('org_id', 'flow_uuid')
 
         for poll in polls:
-            has_finished = cache.get(PollResult.POLL_REBUILD_COUNTS_FINISHED_FLAG % poll.org_id, poll.pk, None)
+            has_finished = cache.get(PollResult.POLL_REBUILD_COUNTS_FINISHED_FLAG % (poll.org_id, poll.pk), None)
             if not has_finished:
                 PollResult.rebuild_counts_for_poll(poll.pk)
 

@@ -1210,6 +1210,25 @@ class PollResultsTest(DashTest):
 
         self.assertTrue(counter4.pk in [counter3.pk, counter1.pk])
 
+    @patch('ureport.polls.models.PollResult.rebuild_counts_for_poll')
+    def test_rebuild_counts(self, mock_rebuild_counts_for_poll):
+        mock_rebuild_counts_for_poll.return_value = "Done"
+        with patch('django.core.cache.cache.get') as cache_get_mock:
+            cache_get_mock.return_value = "Value"
+
+            PollResult.rebuild_counts()
+
+            self.assertFalse(mock_rebuild_counts_for_poll.called)
+
+        with patch('django.core.cache.cache.get') as cache_get_mock:
+            cache_get_mock.return_value = None
+
+            PollResult.rebuild_counts()
+
+            mock_rebuild_counts_for_poll.assert_called_once_with(self.poll.pk)
+
+
+
 
 class PollsTasksTest(DashTest):
     def setUp(self):
@@ -1280,7 +1299,6 @@ class PollsTasksTest(DashTest):
                                                'LOCATION': '127.0.0.1:6379:1',
                                                'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
                                                }}):
-
             with patch('django.core.cache.cache.get') as cache_get_mock:
                 cache_get_mock.return_value = "Filled"
 
