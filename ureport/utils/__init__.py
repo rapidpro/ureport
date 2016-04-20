@@ -5,6 +5,7 @@ import json
 import math
 import time
 from datetime import timedelta, datetime
+from itertools import islice, chain
 
 import six
 from dash.orgs.models import Org
@@ -20,6 +21,7 @@ from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll
+
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
@@ -44,6 +46,17 @@ def json_date_to_datetime(date_str):
     if date_str.endswith('Z'):
         iso_format += 'Z'
     return datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
+
+
+def chunk_list(iterable, size):
+    """
+    Splits a very large list into evenly sized chunks.
+    Returns an iterator of lists that are no more than the size passed in.
+    """
+    source_iter = iter(iterable)
+    while True:
+        chunk_iter = islice(source_iter, size)
+        yield chain([chunk_iter.next()], chunk_iter)
 
 
 def get_linked_orgs(authenticated=False):
@@ -438,11 +451,11 @@ def get_registration_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    registred_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
 
     interval_dict = dict()
 
-    for date_key, date_count  in registred_on_counts.iteritems():
+    for date_key, date_count  in registered_on_counts.iteritems():
         parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
 
         # this is in the range we care about
