@@ -13,7 +13,7 @@ from django_redis import get_redis_connection
 
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll
+from ureport.polls.models import PollResult, Poll, PollResultsCounter
 from ureport.utils import datetime_to_json_date
 from . import BaseBackend
 
@@ -39,6 +39,7 @@ class FieldSyncer(BaseSyncer):
 
     def delete_locale(self, local):
         local.release()
+
 
 class BoundarySyncer(BaseSyncer):
     """
@@ -319,6 +320,9 @@ class RapidProBackend(BaseBackend):
                                                                                            num_synced + len(fetch),
                                                                                            time.time() - fetch_start)
 
+                    poll_result_obj_created = 0
+                    poll_result_obj_updated = 0
+
                     local_sync_start = time.time()
 
                     contact_uuids = [run.contact.uuid for run in fetch]
@@ -368,6 +372,8 @@ class RapidProBackend(BaseBackend):
                                                                                                  completed=completed)
 
                                     num_updated += 1
+                                    poll_result_obj_updated += 1
+
                                 else:
                                     num_ignored += 1
 
@@ -378,12 +384,24 @@ class RapidProBackend(BaseBackend):
                                                                    district=district, completed=completed))
 
                                 num_created += 1
+                                poll_result_obj_created += 1
 
                     PollResult.objects.bulk_create(new_poll_results)
 
                     num_synced += len(fetch)
                     if progress_callback:
                         progress_callback(num_synced)
+
+                    if poll_result_obj_created or poll_result_obj_updated:
+                        # Squash the counter by gathering the counts in one row
+                        PollResultsCounter.squash_counts()
+
+                    print "Created %d, Updated %d for poll #%d on org #%d in fetch of %d - %d runs"% (poll_result_obj_created,
+                                                                                                      poll_result_obj_updated,
+                                                                                                      poll.pk,
+                                                                                                      org.pk,
+                                                                                                      num_synced - len(fetch),
+                                                                                                      num_synced)
 
                     print "Local sync ops for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced - len(fetch),
                                                                                        num_synced,

@@ -68,6 +68,9 @@
                       FACEBOOK
                     .social-content{style:"padding-left:0px"}
                       .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"570", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+                    %a.social-link.facebook-bg-color{ href:'{{ org|config:"facebook_page_url" }}' }
+                      - trans "VIEW MORE STORIES ON FACEBOOK"
+                      {{ org|org_arrow_link }}
             {% endif %}
 
             {% if  org|config:"twitter_user_widget" and org|config:"twitter_handle" %}
