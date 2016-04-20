@@ -1,9 +1,14 @@
 from __future__ import unicode_literals
 import json
+import time
 from datetime import datetime
+
+import pytz
+from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, connection
-from django.db.models import Sum
+from django.db.models import Sum, Count, F
 from django.utils.text import slugify
+from django.utils import timezone
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
@@ -13,8 +18,11 @@ from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
 from stop_words import safe_get_stop_words
 
+from django_redis import get_redis_connection
+
 
 # cache whether a question is open ended for a month
+
 OPEN_ENDED_CACHE_TIME = getattr(settings, 'OPEN_ENDED_CACHE_TIME', 60 * 60 * 24 * 30)
 
 # cache our featured polls for a month (this will be invalidated by questions changing)
@@ -95,8 +103,6 @@ class Poll(SmartModel):
                             help_text=_("The organization this poll is part of"))
 
     def fetch_poll_results(self):
-        if self.flow_archived:
-            return
 
         for question in self.questions.filter(is_active=True):
             question.fetch_results()
@@ -401,7 +407,7 @@ class PollQuestion(SmartModel):
             client_results = temba_client.get_results(self.ruleset_uuid, segment=segment)
             results = temba_client_flow_results_serializer(client_results)
 
-            cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, cache_time)
+            cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, None)
 
             # delete the open ended cache
             cache.delete('open_ended:%d' % self.id)
@@ -568,6 +574,10 @@ class PollResult(models.Model):
 
     POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%d'
 
+    POLL_REBUILD_COUNTS_LOCK = 'poll-rebuild-counts-lock:org:%d:poll:%d'
+
+    POLL_REBUILD_COUNTS_FINISHED_FLAG = 'poll-counts-finished:org:%d:poll:%d'
+
     org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
 
     flow = models.CharField(max_length=36)
@@ -588,11 +598,125 @@ class PollResult(models.Model):
 
     district = models.CharField(max_length=255, null=True)
 
+    @classmethod
+    def rebuild_counts(cls):
+        polls = Poll.objects.all().order_by('org_id', 'flow_uuid').distinct('org_id', 'flow_uuid')
+
+        for poll in polls:
+            has_finished = cache.get(PollResult.POLL_REBUILD_COUNTS_FINISHED_FLAG % (poll.org_id, poll.pk), None)
+            if not has_finished:
+                PollResult.rebuild_counts_for_poll(poll.pk)
+
+    @classmethod
+    def rebuild_counts_for_poll(cls, poll_id):
+        from ureport.utils import chunk_list, datetime_to_json_date
+        import time
+
+        start = time.time()
+
+        poll = Poll.objects.filter(id=poll_id).first()
+
+        if not poll:
+            return
+
+        org_id = poll.org_id
+        flow = poll.flow_uuid
+
+        r = get_redis_connection()
+
+        key = PollResult.POLL_REBUILD_COUNTS_LOCK % (org_id, poll_id)
+
+        if r.get(key):
+            print "Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id)
+
+        else:
+            with r.lock(key):
+                rulesets = poll.questions.all().values_list('ruleset_uuid', flat=True)
+
+                # Delete existing counters
+                PollResultsCounter.objects.filter(org_id=org_id, ruleset__in=rulesets).delete()
+
+                poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list('pk', flat=True)
+
+                poll_results_ids_count = len(poll_results_ids)
+
+                print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start)
+
+                processed_results = 0
+                for batch in chunk_list(poll_results_ids, 1000):
+                    poll_results = list(PollResult.objects.filter(pk__in=batch))
+                    for result in poll_results:
+                        result.create_counters()
+                        processed_results += 1
+
+                    print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
+                    PollResultsCounter.squash_counts()
+
+                now = timezone.now()
+                cache.set(PollResult.POLL_REBUILD_COUNTS_FINISHED_FLAG % (org_id, poll_id),
+                          datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+                print "Finished Rebuilding the counters  for poll #%d on org #%d in %ds" % (poll.pk, org_id, time.time() - start)
+
+    def create_counters(self):
+        update_counters = []
+
+        if not self.org_id or not self.flow or not self.ruleset:
+            return
+
+        org_id = self.org_id
+        ruleset = ''
+        category = ''
+        state = ''
+        district = ''
+
+        if self.ruleset:
+            ruleset = self.ruleset.lower()
+
+        if self.category:
+            category = self.category.lower()
+
+        if self.state:
+            state = self.state.upper()
+
+        if self.district:
+            district = self.district.upper()
+
+        update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                type='ruleset:%s:total-ruleset-polled' % ruleset).id)
+
+        if category:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id,
+                                                                    ruleset=ruleset,
+                                                                    type='ruleset:%s:total-ruleset-responded' % ruleset).id)
+
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:category:%s' % (ruleset, category)).id)
+
+        if state and category:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:category:%s:state:%s' % (ruleset, category, state)).id)
+
+        elif state:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:nocategory:state:%s' % (ruleset, state)).id)
+
+        if district and category:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:category:%s:district:%s' % (ruleset, category, district)).id)
+        elif district:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:nocategory:district:%s' % (ruleset, district)).id)
+
+        PollResultsCounter.objects.filter(id__in=update_counters).update(count=F('count') + 1)
+
     class Meta:
         index_together = ["org", "flow"]
 
 
 class PollResultsCounter(models.Model):
+
+    LAST_SQUASH_KEY = 'last-poll-results-counter-squash'
+    COUNTS_SQUASH_LOCK = 'poll-results-counter-squash-lock'
 
     org = models.ForeignKey(Org, related_name='results_counters')
 
@@ -601,6 +725,59 @@ class PollResultsCounter(models.Model):
     type = models.CharField(max_length=255)
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    @classmethod
+    def get_or_create(cls, org_id, ruleset, type):
+        try:
+            counter, created = PollResultsCounter.objects.get_or_create(org_id=org_id, ruleset=ruleset, type=type)
+        except MultipleObjectsReturned:
+            counter = PollResultsCounter.objects.filter(org_id=org_id, ruleset=ruleset, type=type).first()
+
+        return counter
+
+
+    @classmethod
+    def squash_counts(cls):
+        # get the id of the last count we squashed
+        r = get_redis_connection()
+        key = PollResultsCounter.COUNTS_SQUASH_LOCK
+        if r.get(key):
+            print "Squash arleady running"
+        else:
+            with r.lock(key):
+
+                last_squash = r.get(PollResultsCounter.LAST_SQUASH_KEY)
+                if not last_squash:
+                    last_squash = 0
+
+                start = time.time()
+                squash_count = 0
+
+                if last_squash < 1:
+                    counters = list(PollResultsCounter.objects.values('org_id', 'ruleset', 'type').annotate(Count('id')).filter(id__count__gt=1).order_by('org_id', 'ruleset', 'type'))
+                else:
+                    counters = list(PollResultsCounter.objects.filter(id__gt=last_squash).values('org_id', 'ruleset', 'type').order_by('org_id', 'ruleset', 'type').distinct('org_id', 'ruleset', 'type'))
+
+                total_counters = len(counters)
+
+                # get all the new added counters
+                for counter in counters:
+
+                    # perform our atomic squash in SQL by calling our squash method
+                    with connection.cursor() as c:
+                        c.execute("SELECT ureport_squash_resultscounters(%s, %s, %s);", (counter['org_id'], counter['ruleset'], counter['type']))
+
+                    squash_count += 1
+
+                    if squash_count % 100 == 0:
+                        print "Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100/total_counters, time.time() - start)
+
+                # insert our new top squashed id
+                max_id = PollResultsCounter.objects.all().order_by('-id').first()
+                if max_id:
+                    r.set(PollResultsCounter.LAST_SQUASH_KEY, max_id.id)
+
+                print "Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start)
 
     @classmethod
     def get_poll_results(cls, poll, types=None):

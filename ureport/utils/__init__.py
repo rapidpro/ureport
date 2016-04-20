@@ -5,6 +5,7 @@ import json
 import math
 import time
 from datetime import timedelta, datetime
+from itertools import islice, chain
 
 import six
 from dash.orgs.models import Org
@@ -20,6 +21,7 @@ from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll
+
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
@@ -55,6 +57,17 @@ def get_dict_from_cursor(cursor):
         dict(zip([col[0] for col in desc], row))
         for row in cursor.fetchall()
     ]
+
+
+def chunk_list(iterable, size):
+    """
+    Splits a very large list into evenly sized chunks.
+    Returns an iterator of lists that are no more than the size passed in.
+    """
+    source_iter = iter(iterable)
+    while True:
+        chunk_iter = islice(source_iter, size)
+        yield chain([chunk_iter.next()], chunk_iter)
 
 
 def get_linked_orgs(authenticated=False):

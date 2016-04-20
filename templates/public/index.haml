@@ -10,6 +10,9 @@
           .row
             .col-sm-7
               .global-org-follow-button
+                -if not is_iorg and org|config:"facebook_page_id" and org|config:"facebook_app_id"
+                  <div class="fb-messengermessageus" messenger_app_id="{{ org|config:"facebook_app_id" }}" page_id="{{ org|config:"facebook_page_id" }}" color="blue" size="large" ></div>
+
                 -if not is_iorg
                   %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"false", data-size:"large",  data-lang:"en"}
                 -else
@@ -410,6 +413,11 @@
 - block extra-style
   {{ block.super }}
   :css
+    .fb-messengermessageus {
+      line-height: 16px;
+      margin-bottom: 5px;
+    }
+
     .poll-map {
       height: 300px;
       width: 100%;

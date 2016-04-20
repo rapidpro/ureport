@@ -13,7 +13,7 @@ from django_redis import get_redis_connection
 
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll
+from ureport.polls.models import PollResult, Poll, PollResultsCounter
 from ureport.utils import datetime_to_json_date
 from . import BaseBackend
 
@@ -39,6 +39,7 @@ class FieldSyncer(BaseSyncer):
 
     def delete_locale(self, local):
         local.release()
+
 
 class BoundarySyncer(BaseSyncer):
     """
@@ -264,6 +265,12 @@ class RapidProBackend(BaseBackend):
         org = poll.org
         r = get_redis_connection()
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.pk)
+
+        num_created = 0
+        num_updated = 0
+        num_ignored = 0
+        num_synced = 0
+
         if r.get(key):
             print "Skipping for org #%d as it is still running" % org.pk
         else:
@@ -280,11 +287,6 @@ class RapidProBackend(BaseBackend):
                 poll_runs_query = client.get_runs(flow=poll.flow_uuid, responded=True, after=after, before=now)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
 
-                num_created = 0
-                num_updated = 0
-                num_ignored = 0
-                num_synced = 0
-
                 existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
 
                 poll_results_map = dict()
@@ -300,6 +302,9 @@ class RapidProBackend(BaseBackend):
                     print "RapidPro API fetch for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced,
                                                                                            num_synced + len(fetch),
                                                                                            time.time() - fetch_start)
+
+                    poll_result_obj_created = 0
+                    poll_result_obj_updated = 0
 
                     local_sync_start = time.time()
 
@@ -347,6 +352,8 @@ class RapidProBackend(BaseBackend):
                                                                                                  completed=completed)
 
                                     num_updated += 1
+                                    poll_result_obj_updated += 1
+
                                 else:
                                     num_ignored += 1
 
@@ -357,12 +364,24 @@ class RapidProBackend(BaseBackend):
                                                                    district=district, completed=completed))
 
                                 num_created += 1
+                                poll_result_obj_created += 1
 
                     PollResult.objects.bulk_create(new_poll_results)
 
                     num_synced += len(fetch)
                     if progress_callback:
                         progress_callback(num_synced)
+
+                    if poll_result_obj_created or poll_result_obj_updated:
+                        # Squash the counter by gathering the counts in one row
+                        PollResultsCounter.squash_counts()
+
+                    print "Created %d, Updated %d for poll #%d on org #%d in fetch of %d - %d runs"% (poll_result_obj_created,
+                                                                                                      poll_result_obj_updated,
+                                                                                                      poll.pk,
+                                                                                                      org.pk,
+                                                                                                      num_synced - len(fetch),
+                                                                                                      num_synced)
 
                     print "Local sync ops for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced - len(fetch),
                                                                                        num_synced,
@@ -387,4 +406,4 @@ class RapidProBackend(BaseBackend):
                 print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
                       "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
                                                               num_updated, num_ignored)
-                return num_created, num_updated, num_ignored
+        return num_created, num_updated, num_ignored
