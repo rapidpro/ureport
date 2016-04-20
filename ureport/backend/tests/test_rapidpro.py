@@ -122,6 +122,7 @@ class ContactSyncerTest(DashTest):
         self.nigeria.set_config('registration_label', "Registration Date")
         self.nigeria.set_config('state_label', "State")
         self.nigeria.set_config('district_label', "LGA")
+        self.nigeria.set_config('ward_label', "Ward")
         self.nigeria.set_config('occupation_label', "Activité")
         self.nigeria.set_config('born_label', "Born")
         self.nigeria.set_config('gender_label', 'Gender')
@@ -135,12 +136,15 @@ class ContactSyncerTest(DashTest):
                                              parent=self.country, geometry='{"foo":"bar-state"}')
         self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo", level=2,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
+        self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja", level=3,
+                                                parent=self.district, geometry='{"foo":"bar-ward"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
                                                              label='Registration Date', value_type='T')
 
         self.state_field = ContactField.objects.create(org=self.nigeria, key='state', label='State', value_type='S')
         self.district_field = ContactField.objects.create(org=self.nigeria, key='lga', label='LGA', value_type='D')
+        self.ward_field = ContactField.objects.create(org=self.nigeria, key='ward', label='Ward', value_type='T')
         self.occupation_field = ContactField.objects.create(org=self.nigeria, key='occupation', label='Activité',
                                                             value_type='T')
 
@@ -201,7 +205,7 @@ class ContactSyncerTest(DashTest):
                                             groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
                                                     ObjectRef.create(uuid='G-007', name='Actors')],
                                             fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
-                                                    'lga': 'Oyo', 'occupation': 'Student', 'born': '1990',
+                                                    'lga': 'Oyo', 'ward': 'Ikeja', 'occupation': 'Student', 'born': '1990',
                                                     'gender': 'Male'},
                                             language='eng')
 
@@ -214,7 +218,7 @@ class ContactSyncerTest(DashTest):
                           'registered_on': json_date_to_datetime('2014-01-02T03:04:05.000'),
                           'state': 'R-LAGOS',
                           'district': 'R-OYO',
-                          'ward': ''})
+                          'ward': 'R-IKEJA'})
 
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
