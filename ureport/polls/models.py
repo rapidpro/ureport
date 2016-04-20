@@ -383,7 +383,7 @@ class PollQuestion(SmartModel):
         from raven.contrib.django.raven_compat.models import client
 
         cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-        if segment and segment.get('location', "") == "District":
+        if segment and segment.get('location', "") in ("District", "Ward"):
             cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
 
         try:
@@ -418,7 +418,7 @@ class PollQuestion(SmartModel):
         if cached_value:
             return cached_value['results']
 
-        if segment and segment.get('location', "") == "District":
+        if segment and segment.get('location', "") in ("District", "Ward"):
             self.fetch_results(segment=segment)
 
             cached_value = cache.get(key, None)
@@ -509,6 +509,8 @@ class PollResult(models.Model):
     state = models.CharField(max_length=255, null=True)
 
     district = models.CharField(max_length=255, null=True)
+
+    ward = models.CharField(max_length=255, null=True)
 
     class Meta:
         index_together = ["org", "flow"]

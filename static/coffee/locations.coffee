@@ -1,5 +1,8 @@
 initMap = (id, geojson, question, districtLabel) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
+  STATE_LEVEL = 1
+  DISTRICT_LEVEL = 2
+  WARD_LEVEL = 3
 
   allowDistrictZoom = districtLabel.trim() != ''
 
@@ -90,7 +93,7 @@ initMap = (id, geojson, question, districtLabel) ->
 
   highlightFeature = (e) ->
     layer = e.target
-    if not layer.feature.properties.level or layer.feature.properties.level == 1 and boundaries is states or layer.feature.properties.level == 2 and boundaries isnt states
+    if not layer.feature.properties.level or layer.feature.properties.level == STATE_LEVEL and boundaries is states or layer.feature.properties.level in [DISTRICT_LEVEL, WARD_LEVEL] and boundaries isnt states
       layer.setStyle(HIGHLIGHT_STYLE)
 
       if (!L.Browser.ie && !L.Browser.opera)
@@ -116,9 +119,11 @@ initMap = (id, geojson, question, districtLabel) ->
     info.update()
 
   clickFeature = (e) ->
-    if (allowDistrictZoom and e.target.feature.properties.level == 1)
-      map.fitBounds(e.target.getBounds(), {step: .25})
+    if (allowDistrictZoom and e.target.feature.properties.level in [STATE_LEVEL, DISTRICT_LEVEL])
+      map.removeLayer(boundaries)
       mainLabelName = e.target.feature.properties.name + " (" + window.string_State + ")"
+      if e.target.feature.properties.level == DISTRICT_LEVEL
+        mainLabelName = e.target.feature.properties.name + " (" + window.string_District + ")"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
     else
@@ -128,16 +133,27 @@ initMap = (id, geojson, question, districtLabel) ->
 
   loadBoundary = (boundary, target) ->
     boundaryId = if boundary then boundary.id else null
+    boundaryLevel = if boundary then boundary.level else null
 
     # load our actual data
     if not boundary
       segment = {location:"State"}
       overallResults = countryResults
+    else if boundary and boundary.level == DISTRICT_LEVEL
+      segment = {location:"Ward", parent:boundaryId}
+      overallResults = boundaryResults[boundaryId]
     else
       segment = {location:"District", parent:boundaryId}
       overallResults = boundaryResults[boundaryId]
 
     $.ajax({url:'/pollquestion/' + question + '/results/?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (data) ->
+      data = data || []
+      if data.length == 0
+        resetBoundaries()
+        scale.update()
+        mainLabelName = window.string_All
+        return
+
       # calculate the most common category if we haven't already
       if not topCategory
         categoryCounts = {}
@@ -214,7 +230,7 @@ initMap = (id, geojson, question, districtLabel) ->
 
       # update our summary total
       info.update()
-      scale.update(boundaryId)
+      scale.update(boundaryLevel)
 
       # we are displaying the districts of a state, load the geojson for it
       boundaryUrl = '/boundaries/'
@@ -270,16 +286,20 @@ initMap = (id, geojson, question, districtLabel) ->
     html = ""
 
     scaleClass = 'national'
-    if level
+    if level and level == STATE_LEVEL
       scaleClass = 'state'
+    else if level and level == DISTRICT_LEVEL
+      scaleClass = 'district'
 
     html = "<div class='scale " + scaleClass + "'>"
     html += "<div class='scale-map-circle-outer primary-border-color'></div>"
     html += "<div class='scale-map-circle-inner'></div>"
     html += "<div class='scale-map-hline primary-border-color'></div>"
     html += "<div class='scale-map-vline primary-border-color'></div>"
+    html += "<div class='scale-map-vline-extended primary-border-color'></div>"
     html += "<div class='national-level primary-color'>" + window.string_National.toUpperCase() + "</div>"
     html += "<div class='state-level primary-color'>" + window.string_State.toUpperCase() + "</div>"
+    html += "<div class='district-level primary-color'>" + window.string_District.toUpperCase() + "</div>"
 
     @_div.innerHTML = html
 
