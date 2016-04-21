@@ -147,13 +147,6 @@ initMap = (id, geojson, question, districtLabel) ->
       overallResults = boundaryResults[boundaryId]
 
     $.ajax({url:'/pollquestion/' + question + '/results/?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (data) ->
-      data = data || []
-      if data.length == 0
-        resetBoundaries()
-        scale.update()
-        mainLabelName = window.string_All
-        return
-
       # calculate the most common category if we haven't already
       if not topCategory
         categoryCounts = {}
@@ -238,6 +231,12 @@ initMap = (id, geojson, question, districtLabel) ->
         boundaryUrl += boundaryId + '/'
 
       $.ajax({url:boundaryUrl, dataType: "json"}).done (data) ->
+        # added to reset boundary when district has no wards
+        if data.features.length == 0
+          resetBoundaries()
+          scale.update()
+          mainLabelName = window.string_All
+          return
         for feature in data.features
           result = boundaryResults[feature.properties.id]
           if result
