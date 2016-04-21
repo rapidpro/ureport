@@ -504,7 +504,7 @@ def get_ureporters_locations_stats(org, segment):
     elif field_type == 'ward':
         boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL,
                                              parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
-        location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('ward')}
+        location_counts = {k[5:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('ward')}
     else:
         boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL,
                                              parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
