@@ -237,6 +237,7 @@ class ContactSyncer(BaseSyncer):
         update = update or local.occupation != local_kwargs['occupation']
         update = update or local.registered_on != local_kwargs['registered_on']
         update = update or local.state != local_kwargs['state'] or local.district != local_kwargs['district']
+        update = update or local.ward != local_kwargs['ward']
 
         return update
 
