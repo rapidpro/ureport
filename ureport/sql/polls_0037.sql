@@ -46,13 +46,6 @@ BEGIN
       -- Maps counts without replies; contacts from this district who did not reply
       PERFORM ureport_insert_results_counter(_poll_result.org_id, _poll_result.ruleset, CONCAT('ruleset:', LOWER(_poll_result.ruleset), ':nocategory:', 'district:', UPPER(_poll_result.district)), _count);
     END IF;
-    IF _poll_result.ward IS NOT NULL AND _poll_result.category IS NOT NULL THEN
-      -- Maps counts with category; contacts from this ward that replied with this category
-      PERFORM ureport_insert_results_counter(_poll_result.org_id, _poll_result.ruleset, CONCAT('ruleset:', LOWER(_poll_result.ruleset), ':category:', LOWER(_poll_result.category), ':ward:', UPPER(_poll_result.ward)), _count);
-    ELSIF _poll_result.ward IS NOT NULL THEN
-      -- Maps counts without replies; contacts from this ward who did not reply
-      PERFORM ureport_insert_results_counter(_poll_result.org_id, _poll_result.ruleset, CONCAT('ruleset:', LOWER(_poll_result.ruleset), ':nocategory:', 'ward:', UPPER(_poll_result.ward)), _count);
-    END IF;
   END IF;
 END;
 $$ LANGUAGE plpgsql;
