@@ -312,7 +312,7 @@ class ReportersCounter(models.Model):
         r = get_redis_connection()
         key = ReportersCounter.COUNTS_SQUASH_LOCK
         if r.get(key):
-            print "Squash arleady running"
+            print "Squash reporters counts already running."
         else:
             with r.lock(key):
 
