@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 
 import pytz
+from django.contrib.auth.models import User
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, connection
 from django.db.models import Sum, Count, F
@@ -567,19 +568,88 @@ class PollResult(models.Model):
                 print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start)
 
                 processed_results = 0
+                counters_dict = dict()
+                key_ruleset_map = dict()
+                key_org_id_map = dict()
+
                 for batch in chunk_list(poll_results_ids, 1000):
                     poll_results = list(PollResult.objects.filter(pk__in=batch))
+
                     for result in poll_results:
-                        result.create_counters()
+                        gen_counters = result.generate_counters()
+                        for key in gen_counters.keys():
+                            if key in counters_dict:
+                                counters_dict[key] += gen_counters[key]
+                            else:
+                                counters_dict[key] = gen_counters[key]
+                            key_ruleset_map[key] = result.ruleset
+                            key_org_id_map[key] = result.org_id
                         processed_results += 1
 
-                    print "Progress... added counters for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
-                    PollResultsCounter.squash_counts()
+                print "Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
+
+                counters_to_insert = []
+                for counter_type in counters_dict.keys():
+                    org_id = key_org_id_map[counter_type]
+                    ruleset = key_ruleset_map[counter_type]
+                    count = counters_dict[counter_type]
+                    counters_to_insert.append(PollResultsCounter(org_id=org_id, ruleset=ruleset, type=counter_type,
+                                                                     count=count))
+
+                PollResultsCounter.objects.bulk_create(counters_to_insert)
+                # now squash the counters
+                PollResultsCounter.squash_counts()
 
                 now = timezone.now()
                 cache.set(PollResult.POLL_REBUILD_COUNTS_FINISHED_FLAG % (org_id, poll_id),
                           datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
-                print "Finished Rebuilding the counters  for poll #%d on org #%d in %ds" % (poll.pk, org_id, time.time() - start)
+                print "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll.pk, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
+
+    def generate_counters(self):
+        generated_counters = dict()
+
+        if not self.org_id or not self.flow or not self.ruleset:
+            return generated_counters
+
+        org_id = self.org_id
+        ruleset = ''
+        category = ''
+        state = ''
+        district = ''
+
+        if self.ruleset:
+            ruleset = self.ruleset.lower()
+
+        if self.category:
+            category = self.category.lower()
+
+        if self.state:
+            state = self.state.upper()
+
+        if self.district:
+            district = self.district.upper()
+
+        generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
+
+        if category:
+            generated_counters['ruleset:%s:total-ruleset-responded' % ruleset] = 1
+
+            generated_counters['ruleset:%s:category:%s' % (ruleset, category)] = 1
+
+        if state and category:
+            generated_counters['ruleset:%s:category:%s:state:%s' % (ruleset, category, state)] = 1
+
+        elif state:
+
+            generated_counters['ruleset:%s:nocategory:state:%s' % (ruleset, state)] = 1
+
+        if district and category:
+            generated_counters['ruleset:%s:category:%s:district:%s' % (ruleset, category, district)] = 1
+
+        elif district:
+            generated_counters['ruleset:%s:nocategory:district:%s' % (ruleset, district)] = 1
+
+        return generated_counters
 
     def create_counters(self):
         update_counters = []

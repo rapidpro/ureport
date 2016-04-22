@@ -1151,6 +1151,39 @@ class PollResultsTest(DashTest):
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
+    def test_poll_result_generate_counters(self):
+        poll_result1 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                                 ruleset=self.poll_question.ruleset_uuid, date=self.now,
+                                                 contact='contact-uuid', completed=False)
+
+        gen_counters = poll_result1.generate_counters()
+        self.assertEqual(len(gen_counters.keys()), 1)
+        self.assertTrue('ruleset:%s:total-ruleset-polled' % self.poll_question.ruleset_uuid in gen_counters.keys())
+
+        poll_result2 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                                 ruleset='other-uuid',
+                                                 contact='contact-uuid', category='No', text='Nah', completed=False,
+                                                 date=self.now, state='R-LAGOS', district='R-oyo')
+
+        gen_counters = poll_result2.generate_counters()
+
+        ruleset = poll_result2.ruleset.lower()
+        category = poll_result2.category.lower()
+        state = poll_result2.state.upper()
+        district = poll_result2.district.upper()
+
+        self.assertEqual(len(gen_counters.keys()), 5)
+
+        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
+
+        self.assertTrue('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())
+
+        self.assertTrue('ruleset:%s:category:%s' % (ruleset, category) in gen_counters.keys())
+
+        self.assertTrue('ruleset:%s:category:%s:state:%s' % (ruleset, category, state) in gen_counters.keys())
+
+        self.assertTrue('ruleset:%s:category:%s:district:%s' % (ruleset, category, district) in gen_counters.keys())
+
     def test_poll_result_create_counters(self):
         self.assertFalse(PollResultsCounter.objects.all())
 
