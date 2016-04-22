@@ -1,10 +1,11 @@
-initMap = (id, geojson, question, districtLabel) ->
+initMap = (id, geojson, question, districtLabel, wardLabel) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
   STATE_LEVEL = 1
   DISTRICT_LEVEL = 2
   WARD_LEVEL = 3
 
   allowDistrictZoom = districtLabel.trim() != ''
+  allowWardZoom = wardLabel.trim() != ''
 
   boundaries = null
   boundaryResults = null
@@ -119,11 +120,13 @@ initMap = (id, geojson, question, districtLabel) ->
     info.update()
 
   clickFeature = (e) ->
-    if (allowDistrictZoom and e.target.feature.properties.level in [STATE_LEVEL, DISTRICT_LEVEL])
-      map.removeLayer(boundaries)
+    if (allowDistrictZoom and e.target.feature.properties.level == STATE_LEVEL)
       mainLabelName = e.target.feature.properties.name + " (" + window.string_State + ")"
-      if e.target.feature.properties.level == DISTRICT_LEVEL
-        mainLabelName = e.target.feature.properties.name + " (" + window.string_District + ")"
+      loadBoundary(e.target.feature.properties, e.target)
+      scale.update(e.target.feature.properties.level)
+    else if (allowWardZoom and e.target.feature.properties.level == DISTRICT_LEVEL)
+      map.removeLayer(boundaries)
+      mainLabelName = e.target.feature.properties.name + " (" + window.string_Dsitrict + ")"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
     else
