@@ -453,11 +453,11 @@ def get_registration_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    registred_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
 
     interval_dict = dict()
 
-    for date_key, date_count  in registred_on_counts.iteritems():
+    for date_key, date_count  in registered_on_counts.iteritems():
         parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
 
         # this is in the range we care about

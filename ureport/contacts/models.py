@@ -1,7 +1,8 @@
+import time
 from dash.orgs.models import Org
 from django.core.cache import cache
-from django.db import models, DataError
-from django.db.models import Sum
+from django.db import models, DataError, connection
+from django.db.models import Sum, Count
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
@@ -311,11 +312,58 @@ class Contact(models.Model):
 
 class ReportersCounter(models.Model):
 
+    COUNTS_SQUASH_LOCK = 'org-reporters-counts-squash-lock'
+    LAST_SQUASHED_ID_KEY = 'org-reporters-last-squashed-id'
+
     org = models.ForeignKey(Org, related_name='reporters_counters')
 
     type = models.CharField(max_length=255)
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+    @classmethod
+    def squash_counts(cls):
+        # get the id of the last count we squashed
+        r = get_redis_connection()
+        key = ReportersCounter.COUNTS_SQUASH_LOCK
+        if r.get(key):
+            print "Squash reporters counts already running."
+        else:
+            with r.lock(key):
+
+                last_squash = r.get(ReportersCounter.LAST_SQUASHED_ID_KEY)
+                if not last_squash:
+                    last_squash = 0
+
+                start = time.time()
+                squash_count = 0
+
+                if last_squash < 1:
+                    counters = ReportersCounter.objects.values('org_id', 'type').annotate(Count('id')).filter(id__count__gt=1).order_by('org_id', 'type')
+
+                else:
+                    counters = ReportersCounter.objects.filter(id__gt=last_squash).values('org_id', 'type').order_by('org_id', 'type').distinct('org_id', 'type')
+
+                total_counters = len(counters)
+
+                # get all the new added counters
+                for counter in counters:
+
+                    # perform our atomic squash in SQL by calling our squash method
+                    with connection.cursor() as c:
+                        c.execute("SELECT ureport_squash_reporterscounters(%s, %s);", (counter['org_id'], counter['type']))
+
+                    squash_count += 1
+
+                    if squash_count % 100 == 0:
+                        print "Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100 / total_counters, time.time() - start)
+
+                # insert our new top squashed id
+                max_id = ReportersCounter.objects.all().order_by('-id').first()
+                if max_id:
+                    r.set(ReportersCounter.LAST_SQUASHED_ID_KEY, max_id.id)
+
+                print "Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start)
 
     @classmethod
     def get_counts(cls, org, types=None):
