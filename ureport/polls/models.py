@@ -592,7 +592,7 @@ class PollResult(models.Model):
 
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
                 # now squash the counters
-                PollResultsCounter.squash_counts()
+                PollResultsCounter.squash_counts(from_zero=True)
 
                 now = timezone.now()
                 cache.set(PollResult.POLL_REBUILD_COUNTS_FINISHED_FLAG % (org_id, poll_id),
@@ -725,7 +725,7 @@ class PollResultsCounter(models.Model):
 
 
     @classmethod
-    def squash_counts(cls):
+    def squash_counts(cls, from_zero=False):
         # get the id of the last count we squashed
         r = get_redis_connection()
         key = PollResultsCounter.COUNTS_SQUASH_LOCK
@@ -735,7 +735,9 @@ class PollResultsCounter(models.Model):
             with r.lock(key):
 
                 last_squash = r.get(PollResultsCounter.LAST_SQUASH_KEY)
-                if not last_squash:
+
+                # ignore the cache last ID if from_zero
+                if from_zero or not last_squash:
                     last_squash = 0
 
                 start = time.time()
