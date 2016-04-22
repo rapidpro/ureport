@@ -91,7 +91,7 @@ class ContactTest(DashTest):
         self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo",
                                                 level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
-        self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja",
+        self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja",
                                                 level=Boundary.WARD_LEVEL,
                                                 parent=self.district, geometry='{"foo":"bar-ward"}')
 
@@ -100,7 +100,7 @@ class ContactTest(DashTest):
 
         self.state_field = ContactField.objects.create(org=self.nigeria, key='state', label='State', value_type='S')
         self.district_field = ContactField.objects.create(org=self.nigeria, key='lga', label='LGA', value_type='D')
-        self.district_field = ContactField.objects.create(org=self.nigeria, key='ward', label='Ward', value_type='W')
+        self.ward_field = ContactField.objects.create(org=self.nigeria, key='ward', label='Ward', value_type='W')
         self.occupation_field = ContactField.objects.create(org=self.nigeria, key='occupation', label='Activité',
                                                             value_type='T')
 
@@ -246,6 +246,19 @@ class ContactTest(DashTest):
                     Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
                     self.assertTrue('000-001' in seen_uuids)
 
+    def test_contact_ward_field(self):
+        temba_contact = TembaContact.create(uuid='C-0011', name="Jan", urns=['tel:123'],
+                                            groups=['G-001', 'G-007'],
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
+                                                    'lga': '', 'ward': 'Ikeja', 'occupation': 'Student', 'born': '1990',
+                                                    'gender': 'Male'},
+                                            language='eng')
+
+        kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
+
+        self.assertEqual(kwargs, dict(uuid='C-0011', org=self.nigeria, gender='M', born=1990, occupation='Student',
+                                      registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='R-LAGOS',
+                                      district='', ward=''))
 
     def test_reporters_counter(self):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
