@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contacts', '0011_contactfield_is_active'),
+        ('contacts', '0012_install_triggers'),
     ]
 
     operations = [
