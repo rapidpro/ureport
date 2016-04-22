@@ -256,14 +256,15 @@ class UreportAPITests(APITestCase):
                                                  flow_uuid=poll.flow_uuid,
                                                  title=poll.title,
                                                  org=poll.org_id,
-                                                 questions=[]
-                                                 ))
+                                                 questions=[],
+                                                 created_on=poll.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ')))
+
         self.assertDictEqual(dict(category), dict(OrderedDict(name=poll.category.name,
                                                   image_url=CategoryReadSerializer().
                                                   get_image_url(poll.category))))
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock_get_results:
-            mock_get_results.return_value = "RESULT-DICT"
+            mock_get_results.return_value = [dict(label="All", set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")]
 
             poll_question = PollQuestion.objects.create(poll=self.reg_poll, title="What's on mind? :)",
                                                         ruleset_uuid='uuid1', created_by=self.superuser,
@@ -276,10 +277,14 @@ class UreportAPITests(APITestCase):
                                                      flow_uuid=poll.flow_uuid,
                                                      title=poll.title,
                                                      org=poll.org_id,
+                                                     created_on=poll.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
                                                      questions=[dict(id=poll_question.pk,
                                                                      ruleset_uuid='uuid1',
                                                                      title="What's on mind? :)",
-                                                                     results="RESULT-DICT")]))
+                                                                     results=dict(set=20,
+                                                                                  unset=10,
+                                                                                  open_ended=False,
+                                                                                  categories="CATEGORIES-DICT"))]))
 
             poll_question.is_active = False
             poll_question.save()
@@ -291,6 +296,7 @@ class UreportAPITests(APITestCase):
                                                      flow_uuid=poll.flow_uuid,
                                                      title=poll.title,
                                                      org=poll.org_id,
+                                                     created_on=poll.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
                                                      questions=[]))
 
     def test_news_item_by_org_list(self):
@@ -314,7 +320,8 @@ class UreportAPITests(APITestCase):
                                                  title=news.title,
                                                  description=news.description,
                                                  link=news.link,
-                                                 org=news.org_id))
+                                                 org=news.org_id,
+                                                 created_on=news.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ')))
         self.assertDictEqual(dict(category), dict(name=news.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(news.category)))
 
@@ -338,7 +345,8 @@ class UreportAPITests(APITestCase):
                                                  title=video.title,
                                                  video_id=video.video_id,
                                                  description=video.description,
-                                                 org=video.org_id))
+                                                 org=video.org_id,
+                                                 created_on=video.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ')))
         self.assertDictEqual(dict(category), dict(name=video.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(video.category)))
 
@@ -366,6 +374,7 @@ class UreportAPITests(APITestCase):
                                                  featured=story.featured,
                                                  tags=story.tags,
                                                  images=StoryReadSerializer().get_images(story),
-                                                 org=story.org_id))
+                                                 org=story.org_id,
+                                                 created_on=story.created_on.strftime('%Y-%m-%dT%H:%M:%S.%fZ')))
         self.assertDictEqual(dict(category), dict(name=story.category.name,
                                                   image_url=CategoryReadSerializer().get_image_url(story.category)))
