@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import json
 import time
+from collections import defaultdict
 from datetime import datetime
 
 import pytz
@@ -568,9 +569,7 @@ class PollResult(models.Model):
                 print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start)
 
                 processed_results = 0
-                counters_dict = dict()
-                key_ruleset_map = dict()
-                key_org_id_map = dict()
+                counters_dict = defaultdict(int)
 
                 for batch in chunk_list(poll_results_ids, 1000):
                     poll_results = list(PollResult.objects.filter(pk__in=batch))
@@ -578,23 +577,18 @@ class PollResult(models.Model):
                     for result in poll_results:
                         gen_counters = result.generate_counters()
                         for key in gen_counters.keys():
-                            if key in counters_dict:
-                                counters_dict[key] += gen_counters[key]
-                            else:
-                                counters_dict[key] = gen_counters[key]
-                            key_ruleset_map[key] = result.ruleset
-                            key_org_id_map[key] = result.org_id
+                            counters_dict[(result.org_id, result.ruleset, key)] += gen_counters[key]
+
                         processed_results += 1
 
                 print "Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
 
                 counters_to_insert = []
-                for counter_type in counters_dict.keys():
-                    org_id = key_org_id_map[counter_type]
-                    ruleset = key_ruleset_map[counter_type]
-                    count = counters_dict[counter_type]
+                for counter_tuple in counters_dict.keys():
+                    org_id, ruleset, counter_type = counter_tuple
+                    count = counters_dict[counter_tuple]
                     counters_to_insert.append(PollResultsCounter(org_id=org_id, ruleset=ruleset, type=counter_type,
-                                                                     count=count))
+                                                                 count=count))
 
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
                 # now squash the counters
