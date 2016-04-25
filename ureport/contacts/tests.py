@@ -5,10 +5,12 @@ from datetime import datetime
 from django.db.models.aggregates import Sum
 from django.utils import timezone
 
+from dash.orgs.models import TaskState
+
 from mock import patch
 import pytz
 from ureport.contacts.models import ContactField, Contact, ReportersCounter
-from ureport.contacts.tasks import fetch_contacts_task
+from ureport.contacts.tasks import pull_contacts
 from ureport.locations.models import Boundary
 from ureport.tests import DashTest, TembaContactField, MockTembaClient, TembaContact
 from temba_client.v1.types import Group as TembaGroup
@@ -275,79 +277,61 @@ class ContactTest(DashTest):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria, ['total-reporters', 'gender:m']),
                          {'total-reporters': 2, 'gender:m': 2})
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_tasks(self):
+    def test_squash_reporters(self):
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+            self.assertFalse(ReportersCounter.objects.all())
+
+            counter1 = ReportersCounter.objects.create(org=self.nigeria, type='type-a', count=2)
+            counter2 = ReportersCounter.objects.create(org=self.nigeria, type='type-b', count=1)
+            counter3 = ReportersCounter.objects.create(org=self.nigeria, type='type-a', count=3)
+
+            self.assertEqual(ReportersCounter.objects.all().count(), 3)
+            self.assertEqual(ReportersCounter.objects.filter(type='type-a').count(), 2)
+
+            ReportersCounter.squash_counts()
+
+            self.assertEqual(ReportersCounter.objects.all().count(), 2)
+            # type-a counters are squashed into one row
+            self.assertFalse(ReportersCounter.objects.filter(pk__in=[counter1.pk, counter3.pk]))
+            self.assertEqual(ReportersCounter.objects.filter(type='type-a').count(), 1)
+
+            self.assertTrue(ReportersCounter.objects.filter(pk=counter2.pk))
+
+            counter_type_a = ReportersCounter.objects.filter(type='type-a').first()
+
+            self.assertTrue(counter_type_a.count, 5)
+
+
+class ContactsTasksTest(DashTest):
+    def setUp(self):
+        super(ContactsTasksTest, self).setUp()
+        self.nigeria = self.create_org('nigeria', self.admin)
+
+    @patch('ureport.contacts.models.ReportersCounter.squash_counts')
+    @patch('ureport.tests.TestBackend.pull_fields')
+    @patch('ureport.tests.TestBackend.pull_boundaries')
+    @patch('ureport.tests.TestBackend.pull_contacts')
+    def test_pull_contacts(self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields, mock_squash_counts):
+        mock_pull_fields.return_value = (1, 2, 3, 4)
+        mock_pull_boundaries.return_value = (5, 6, 7, 8)
+        mock_pull_contacts.return_value = (9, 10, 11, 12)
+        mock_squash_counts.return_value = "Called"
 
         with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
                                                'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
                                                }}):
-            with patch('ureport.contacts.tasks.Contact.fetch_contacts') as mock_fetch_contacts:
-                with patch('ureport.contacts.tasks.Boundary.fetch_boundaries') as mock_fetch_boundaries:
-                    with patch('ureport.contacts.tasks.ContactField.fetch_contact_fields') as mock_fetch_contact_fields:
 
-                        mock_fetch_contacts.return_value = 'FETCHED'
-                        mock_fetch_boundaries.return_value = 'FETCHED'
-                        mock_fetch_contact_fields.return_value = 'FETCHED'
+            pull_contacts(self.nigeria.pk)
 
-                        fetch_contacts_task(self.nigeria.pk, True)
-                        mock_fetch_contacts.assert_called_once_with(self.nigeria, after=None)
-                        mock_fetch_boundaries.assert_called_with(self.nigeria)
-                        mock_fetch_contact_fields.assert_called_with(self.nigeria)
-                        self.assertEqual(mock_fetch_boundaries.call_count, 2)
-                        self.assertEqual(mock_fetch_contact_fields.call_count, 2)
+            task_state = TaskState.objects.get(org=self.nigeria, task_key='contact-pull')
+            self.assertEqual(task_state.get_last_results(), {
+                'fields': {'created': 1, 'updated': 2, 'deleted': 3},
+                'boundaries': {'created': 5, 'updated': 6, 'deleted': 7},
+                'contacts': {'created': 9, 'updated': 10, 'deleted': 11}
+            })
 
-                        mock_fetch_contacts.reset_mock()
-                        mock_fetch_boundaries.reset_mock()
-                        mock_fetch_contact_fields.reset_mock()
-
-                        with patch('django.core.cache.cache.get') as cache_get_mock:
-                            date_str = '2014-01-02T01:04:05.000Z'
-                            d1 = json_date_to_datetime(date_str)
-
-                            cache_get_mock.return_value = date_str
-
-                            fetch_contacts_task(self.nigeria.pk)
-                            mock_fetch_contacts.assert_called_once_with(self.nigeria, after=d1)
-                            self.assertFalse(mock_fetch_boundaries.called)
-                            self.assertFalse(mock_fetch_contact_fields.called)
-
-    def test_sync_contacts_removed(self):
-        self.nigeria.set_config('reporter_group', 'Reporters')
-
-        tz = pytz.timezone('UTC')
-        with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 29, 10, 20, 30, 40))):
-            temba_contacts = []
-
-            Contact.objects.create(uuid='C-008', org=self.nigeria, gender='M', born=1980, occupation='Teacher',
-                                   registered_on=json_date_to_datetime('2014-01-02T03:07:05.000'), state='R-LAGOS',
-                                   district='R-OYO')
-
-            self.assertEqual(len(Contact.sync_contacts_removed(self.nigeria, temba_contacts)), 1)
-
-            Contact.objects.all().delete()
-
-            with patch('dash.orgs.models.TembaClient.get_contacts') as mock_contacts:
-                Contact.objects.create(uuid='C-008', org=self.nigeria, gender='M', born=1980, occupation='Teacher',
-                                       registered_on=json_date_to_datetime('2014-01-02T03:07:05.000'), state='R-LAGOS',
-                                       district='R-OYO')
-
-                Contact.objects.create(uuid='C-009', org=self.nigeria, gender='F', born=1990, occupation='Engineer',
-                                       registered_on=json_date_to_datetime('2014-01-02T04:07:05.000'), state='R-LAGOS',
-                                       district='R-OYO')
-
-                mock_contacts.return_value = [
-                    TembaContact.create(uuid='C-009', name="Ann", urns=['tel:1234'], groups=['000-002'],
-                                        fields=dict(state="R-LAGOS", lga="Oyo", gender='Female', born="1990"),
-                                        language='eng',
-                                        modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
-
-                temba_contacts = ['C-009']
-                contacts_removed = Contact.sync_contacts_removed(self.nigeria, temba_contacts)
-
-                self.assertEqual(len(contacts_removed), 1)
-
-                reporters_counter = ReportersCounter.objects.filter(org=self.nigeria, type='total-reporters').aggregate(
-                    Sum('count'))
-
-                self.assertEqual(reporters_counter['count__sum'], 1)
+            mock_squash_counts.assert_called_once_with()

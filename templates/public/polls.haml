@@ -55,7 +55,7 @@
                       .question-vline{ class: "{% if forloop.last or forloop.counter0 == 3 %}vline-last{% endif %}" }
                       {% endif %}
                       .question-date.primary-bg-color{ style: "{% if forloop.counter0 > 3 %}margin-top: 20px{% endif %}" }
-                        {{ question.created_on|date:"M j. Y" }}
+                        {{ latest_poll.poll_date|date:"M j. Y" }}
                       .question-title
                         {{ question.title }}
 
@@ -74,7 +74,7 @@
           .white-card-container
             .white-card-inner
               .white-card-title.primary-bg-color
-                {{ question.created_on|date:"M j. Y"|upper }}
+                {{ latest_poll.poll_date|date:"M j. Y"|upper }}
               .white-card-content.white-card-padding
                 .poll-question-title
                   {{ question.title }}

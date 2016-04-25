@@ -13,11 +13,11 @@ from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, \
     CACHE_ORG_FLOWS_KEY
-from ureport.tests import DashTest
+from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
     get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
-    update_poll_flow_archived
+    fetch_flows, update_poll_flow_data
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
 from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
@@ -55,49 +55,53 @@ class UtilsTest(DashTest):
 
     def test_get_linked_orgs(self):
 
-        # we have 2 old org in the settings
-        self.assertEqual(len(get_linked_orgs()), 2)
+        # use aaaburundi to force the to be alphabetically first
+        self.org.subdomain = 'aaaburundi'
+        self.org.save()
+
+        # we have 3 old org in the settings
+        self.assertEqual(len(get_linked_orgs()), 4)
         for old_site in get_linked_orgs():
-            self.assertFalse(old_site['name'].lower() == 'burundi')
+            self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
         self.org.set_config('is_on_landing_page', True)
 
         # missing flag
-        self.assertEqual(len(get_linked_orgs()), 2)
+        self.assertEqual(len(get_linked_orgs()), 4)
         for old_site in get_linked_orgs():
-            self.assertFalse(old_site['name'].lower() == 'burundi')
+            self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
         Image.objects.create(org=self.org, image_type=FLAG, name='burundi_flag',
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
         # burundi should be included and be the first; by alphabetical order by subdomain
-        self.assertEqual(len(get_linked_orgs()), 3)
-        self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'burundi')
+        self.assertEqual(len(get_linked_orgs()), 5)
+        self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'aaaburundi')
 
         self.org.subdomain = 'rwanda'
         self.org.save()
 
-        # rwanda should be included and the second in the list alphabetically by subdomain
-        self.assertEqual(len(get_linked_orgs()), 3)
-        self.assertEqual(get_linked_orgs()[1]['name'].lower(), 'rwanda')
+        # rwanda should be included and the third in the list alphabetically by subdomain
+        self.assertEqual(len(get_linked_orgs()), 5)
+        self.assertEqual(get_linked_orgs()[3]['name'].lower(), 'rwanda')
 
         # revert subdomain to burundi
-        self.org.subdomain = 'burundi'
+        self.org.subdomain = 'aaaburundi'
         self.org.save()
 
         with self.settings(HOSTNAME='localhost:8000'):
-            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
-            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://burundi.localhost:8000')
+            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
+            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
 
             self.org.domain = 'ureport.bi'
             self.org.save()
 
-            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://burundi.localhost:8000')
-            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://burundi.localhost:8000')
+            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
+            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
 
             with self.settings(SESSION_COOKIE_SECURE=True):
                 self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://ureport.bi')
-                self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'https://burundi.localhost:8000')
+                self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'https://aaaburundi.localhost:8000')
 
     def test_clean_global_results_data(self):
         results = [{"open_ended": False,
@@ -457,28 +461,95 @@ class UtilsTest(DashTest):
                     mock_poll_model_fetch_results.assert_called_once_with()
                     mock_poll_model_fetch_results.reset_mock()
 
-    def test_update_poll_flow_archived(self):
+    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
+    def test_fetch_flows(self):
+
+        with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
+            mock_datetime_ms.return_value = 500
+
+            with patch('django.core.cache.cache.set') as cache_set_mock:
+                flows = fetch_flows(self.org)
+                expected = dict()
+                expected['uuid-25'] = dict(uuid='uuid-25', date_hint="2015-04-08",
+                                           created_on="2015-04-08T12:48:44.320Z",
+                                           name="Flow 1", runs=300, completed_runs=120, archived=False,
+                                           rulesets=[dict(uuid="uuid-8435", label='Does your community have power',
+                                                          response_type="C")])
+
+            self.assertEqual(flows, expected)
+
+            cache_set_mock.assert_called_once_with('org:%d:flows' % self.org.pk, dict(time=500, results=expected),
+                                                   UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+
+    def test_update_poll_flow_data(self):
         poll = Poll.objects.filter(pk=self.poll.pk).first()
         self.assertFalse(poll.flow_archived)
+        self.assertEqual(poll.runs_count, 0)
 
         with patch("ureport.utils.get_flows") as mock_get_flows:
             mock_get_flows.return_value = dict()
 
-            update_poll_flow_archived(self.org)
+            update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertFalse(poll.flow_archived)
+            self.assertEqual(poll.runs_count, 0)
 
             mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True}}
 
-            update_poll_flow_archived(self.org)
+            update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertTrue(poll.flow_archived)
+            self.assertEqual(poll.runs_count, 0)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True, 'runs': 0}}
+
+            update_poll_flow_data(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertTrue(poll.flow_archived)
+            self.assertEqual(poll.runs_count, 0)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True, 'runs': 5}}
+
+            update_poll_flow_data(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertTrue(poll.flow_archived)
+            self.assertEqual(poll.flow_uuid, 'uuid-1')
+            self.assertEqual(poll.runs_count, 5)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True, 'runs': 0}}
+
+            update_poll_flow_data(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertTrue(poll.flow_archived)
+            self.assertEqual(poll.runs_count, 5)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': False, 'runs': 0}}
+
+            update_poll_flow_data(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertFalse(poll.flow_archived)
+            self.assertEqual(poll.runs_count, 5)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': False, 'runs': 3}}
+
+            update_poll_flow_data(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertFalse(poll.flow_archived)
+            self.assertEqual(poll.runs_count, 3)
+
+            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True, 'runs': 2}}
+
+            update_poll_flow_data(self.org)
+            poll = Poll.objects.filter(pk=self.poll.pk).first()
+            self.assertTrue(poll.flow_archived)
+            self.assertEqual(poll.runs_count, 2)
 
             mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1'}}
 
-            update_poll_flow_archived(self.org)
+            update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertFalse(poll.flow_archived)
+            self.assertEqual(poll.runs_count, 2)
 
     def test_fetch_old_sites_count(self):
         self.clear_cache()

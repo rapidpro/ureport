@@ -2,18 +2,15 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from ureport.sql import InstallSQL
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0023_populate_flow_date'),
+        ('polls', '0036_auto_20160331_1527'),
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='poll',
-            name='poll_date',
-            field=models.DateTimeField(null=True),
-        ),
+        InstallSQL('polls_0037')
     ]

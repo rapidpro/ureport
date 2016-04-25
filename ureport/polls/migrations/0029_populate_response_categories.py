@@ -30,59 +30,63 @@ class Migration(migrations.Migration):
             if not host:
                 host = settings.API_ENDPOINT
 
-            temba_client = TembaClient(host, org.api_token, user_agent=agent)
-
             try:
-                flow_definition = temba_client.get_flow_definition(poll.flow_uuid)
-                base_language = flow_definition.base_language
+                temba_client = TembaClient(host, org.api_token, user_agent=agent)
 
-                poll.base_language = base_language
-                poll.save()
+                try:
+                    flow_definition = temba_client.get_flow_definition(poll.flow_uuid)
+                    base_language = flow_definition.base_language
 
-                for ruleset in flow_definition.rule_sets:
-                    label = ruleset['label']
-                    ruleset_uuid = ruleset['uuid']
-                    ruleset_type = ruleset['ruleset_type']
+                    poll.base_language = base_language
+                    poll.save()
 
-                    existing_questions = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll)
-                    if existing_questions:
-                        existing_questions.update(ruleset_type=ruleset_type)
-                        poll_question = existing_questions.first()
-                        print "Updated ruleset - %s" % ruleset_uuid
-                    else:
-                        poll_question = PollQuestion.objects.create(poll=poll, ruleset_uuid=ruleset_uuid, title=label,
-                                                                    ruleset_type=ruleset_type, is_active=False,
-                                                                    created_by=user, modified_by=user)
-                        print "Created ruleset - %s" % ruleset_uuid
+                    for ruleset in flow_definition.rule_sets:
+                        label = ruleset['label']
+                        ruleset_uuid = ruleset['uuid']
+                        ruleset_type = ruleset['ruleset_type']
 
-                    for rule in ruleset['rules']:
-                        category = rule['category'][base_language]
-                        existing_response_category = PollResponseCategory.objects.filter(question=poll_question,
-                                                                                         rule_uuid=rule['uuid'])
-                        if existing_response_category:
-                            existing_response_category.update(category=category)
-                            print "Updated rule - %s" % rule['uuid']
+                        existing_questions = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll)
+                        if existing_questions:
+                            existing_questions.update(ruleset_type=ruleset_type)
+                            poll_question = existing_questions.first()
+                            print "Updated ruleset - %s" % ruleset_uuid
                         else:
-                            PollResponseCategory.objects.create(question=poll_question, rule_uuid=rule['uuid'],
-                                                                category=category)
+                            poll_question = PollQuestion.objects.create(poll=poll, ruleset_uuid=ruleset_uuid, title=label,
+                                                                        ruleset_type=ruleset_type, is_active=False,
+                                                                        created_by=user, modified_by=user)
+                            print "Created ruleset - %s" % ruleset_uuid
 
-                            print "Created rule - %s" % rule['uuid']
+                        for rule in ruleset['rules']:
+                            category = rule['category'][base_language]
+                            existing_response_category = PollResponseCategory.objects.filter(question=poll_question,
+                                                                                             rule_uuid=rule['uuid'])
+                            if existing_response_category:
+                                existing_response_category.update(category=category)
+                                print "Updated rule - %s" % rule['uuid']
+                            else:
+                                PollResponseCategory.objects.create(question=poll_question, rule_uuid=rule['uuid'],
+                                                                    category=category)
 
-                    print "Done ruleset - %s" % ruleset_uuid
+                                print "Created rule - %s" % rule['uuid']
 
-                print "Done poll - %d on org %d" % (poll.pk, org.pk)
-                successes += 1
+                        print "Done ruleset - %s" % ruleset_uuid
 
-            except TembaBadRequestError:
-                poll.is_active = False
-                poll.save()
+                    print "Done poll - %d on org %d" % (poll.pk, org.pk)
+                    successes += 1
 
-                deactivated_ids.append(poll.pk)
-                deactivated += 1
-                print "Hidden poll - %d on org %d" % (poll.pk, org.pk)
+                except TembaBadRequestError:
+                    poll.is_active = False
+                    poll.save()
 
-            except Exception as e:
-                raise e
+                    deactivated_ids.append(poll.pk)
+                    deactivated += 1
+                    print "Hidden poll - %d on org %d" % (poll.pk, org.pk)
+
+                except Exception as e:
+                    raise e
+            except:
+                pass
+            
 
         print "Finished populating %d polls in %ss" % (successes, time.time() - start)
         print "Deactivated %d polls" % deactivated

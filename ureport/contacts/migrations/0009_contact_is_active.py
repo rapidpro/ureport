@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0023_populate_flow_date'),
+        ('contacts', '0008_auto_20160129_0957'),
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='poll',
-            name='poll_date',
-            field=models.DateTimeField(null=True),
+        migrations.AddField(
+            model_name='contact',
+            name='is_active',
+            field=models.BooleanField(default=True),
         ),
     ]
