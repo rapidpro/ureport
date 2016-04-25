@@ -12,7 +12,6 @@ from django.conf import settings
 from django.utils.encoding import iri_to_uri
 from django.utils.http import urlquote
 
-from dash.api import API
 from dash.categories.models import Category
 from dash.stories.models import Story, StoryImage
 from dash.orgs.models import Org
@@ -22,7 +21,7 @@ from ureport.countries.models import CountryAlias
 from ureport.locations.models import Boundary
 from ureport.news.models import Video, NewsItem
 from ureport.polls.models import Poll, PollQuestion
-from ureport.tests import DashTest, MockAPI, UreportJobsTest, MockTembaClient
+from ureport.tests import DashTest, UreportJobsTest, MockTembaClient
 
 
 class PublicTest(DashTest):
@@ -50,12 +49,12 @@ class PublicTest(DashTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 13)
+        self.assertEquals(len(response.context['form'].fields), 15)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 30)
+        self.assertEquals(len(response.context['form'].fields), 32)
 
     def test_chooser(self):
         chooser_url = reverse('public.home')
@@ -65,7 +64,7 @@ class PublicTest(DashTest):
 
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 2)
+        self.assertEquals(len(response.context['orgs']), 4)
 
         # neither uganda nor nigeria should be on the landing page without flag
         chooser_orgs = response.context['orgs']
@@ -79,7 +78,7 @@ class PublicTest(DashTest):
 
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 2)
+        self.assertEquals(len(response.context['orgs']), 4)
 
         # no org is configure to be on landing page
         chooser_orgs = response.context['orgs']
@@ -92,7 +91,7 @@ class PublicTest(DashTest):
 
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 2)
+        self.assertEquals(len(response.context['orgs']), 4)
 
         # nigeria missing flag so not included
         chooser_orgs = response.context['orgs']
@@ -115,7 +114,7 @@ class PublicTest(DashTest):
         # now nigeria should be included on landing page
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 3)
+        self.assertEquals(len(response.context['orgs']), 5)
 
         chooser_orgs = response.context['orgs']
         has_rwanda = False

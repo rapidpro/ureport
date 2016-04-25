@@ -5,7 +5,7 @@ boto==2.36.0
 celery==3.1.19
 celery-with-redis==3.0
 coverage==3.7.1
--e git+https://github.com/rapidpro/dash.git@6806443e5f165c85df99e6f667d48e66751eaf05#egg=dash-master
+-e git+https://github.com/rapidpro/dash.git@ce5696b5c1f24b87958f86650d5b81e02d8e9b0b#egg=dash-master
 dj-database-url==0.3.0
 Django==1.8.4
 django-appconf==1.0.1
@@ -44,7 +44,7 @@ Pygments==2.0.2
 python-dateutil==2.4.2
 pytz==2015.7
 PyYAML==3.11
--e git+https://github.com/rapidpro/rapidpro-python.git@9850b714097089bf5b9903cf139d2a0db31f6360#egg=rapidpro_python-master
+-e git+https://github.com/rapidpro/rapidpro-python.git@78b1738c6f044301e012785623ac8b5f9dd403b0#egg=rapidpro_python-master
 raven==5.3.1
 redis==2.10.3
 regex==2015.7.19

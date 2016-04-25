@@ -239,16 +239,21 @@ class PollCRUDL(SmartCRUDL):
             fields = []
             for question in questions:
                 fields.append('ruleset_%s_include' % question.ruleset_uuid)
+                fields.append('ruleset_%s_priority' % question.ruleset_uuid)
+                fields.append('ruleset_%s_label' % question.ruleset_uuid)
                 fields.append('ruleset_%s_title' % question.ruleset_uuid)
 
             return fields
+
+        def get_questions(self):
+            return self.object.questions.all().order_by('-priority', 'pk')
 
         def get_form(self, form_class):
             form = super(PollCRUDL.Questions, self).get_form(form_class)
             form.fields.clear()
 
             # fetch this single flow so we load what rules are available
-            questions = self.object.questions.all()
+            questions = self.get_questions()
 
             initial = self.derive_initial()
 
@@ -258,13 +263,24 @@ class PollCRUDL(SmartCRUDL):
                 include_field = forms.BooleanField(label=_("Include"), required=False, initial=include_field_initial,
                                                    help_text=_("Whether to include this question in your public results"))
 
+                priority_field_name = 'ruleset_%s_priority' % question.ruleset_uuid
+                priority_field_initial = initial.get(priority_field_name, None)
+                priority_field = forms.IntegerField(label=_("Priority"), required=False, initial=priority_field_initial,
+                                                    help_text=_("The priority of this question on the poll page, higher priority comes first"))
+
+                label_field_name = 'ruleset_%s_label' % question.ruleset_uuid
+                label_field_initial = initial.get(label_field_name, "")
+                label_field = forms.CharField(label=_("Ruleset Label"), widget=forms.TextInput(attrs={'readonly':'readonly'}), required=False, initial=label_field_initial,
+                                              help_text=_("The question posed to your audience, will be displayed publicly"))
+
                 title_field_name = 'ruleset_%s_title' % question.ruleset_uuid
                 title_field_initial = initial.get(title_field_name, '')
                 title_field = forms.CharField(label=_("Title"), widget=forms.Textarea, required=False, initial=title_field_initial,
                                               help_text=_("The question posed to your audience, will be displayed publicly"))
 
-
                 self.form.fields[include_field_name] = include_field
+                self.form.fields[priority_field_name] = priority_field
+                self.form.fields[label_field_name] = label_field
                 self.form.fields[title_field_name] = title_field
 
             return self.form
@@ -272,16 +288,21 @@ class PollCRUDL(SmartCRUDL):
         def save(self, obj):
             data = self.form.cleaned_data
             poll = self.object
-            questions = poll.questions.all()
+            questions = self.get_questions()
 
             # for each question
             for question in questions:
                 r_uuid = question.ruleset_uuid
 
                 included = data.get('ruleset_%s_include' % r_uuid, False)
+                priority = data.get('ruleset_%s_priority' % r_uuid, None)
+                if not priority:
+                    priority = 0
+
                 title = data['ruleset_%s_title' % r_uuid]
-                existing = PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).first()
-                PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).update(is_active=included, title=title)
+
+                PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).update(is_active=included, title=title,
+                                                                                   priority=priority)
 
             return self.object
 
@@ -297,9 +318,12 @@ class PollCRUDL(SmartCRUDL):
 
         def derive_initial(self):
             initial = dict()
+            questions = self.get_questions()
 
-            for question in self.object.questions.all():
+            for question in questions:
                 initial['ruleset_%s_include' % question.ruleset_uuid] = question.is_active
+                initial['ruleset_%s_priority' % question.ruleset_uuid] = question.priority
+                initial['ruleset_%s_label' % question.ruleset_uuid] = question.ruleset_label
                 initial['ruleset_%s_title' % question.ruleset_uuid] = question.title
 
             return initial

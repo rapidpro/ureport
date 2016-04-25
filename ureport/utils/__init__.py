@@ -5,6 +5,9 @@ import json
 import math
 import time
 from datetime import timedelta, datetime
+from itertools import islice, chain
+
+import six
 from dash.orgs.models import Org
 from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
@@ -18,6 +21,7 @@ from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll
+
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
@@ -42,6 +46,17 @@ def json_date_to_datetime(date_str):
     if date_str.endswith('Z'):
         iso_format += 'Z'
     return datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
+
+
+def chunk_list(iterable, size):
+    """
+    Splits a very large list into evenly sized chunks.
+    Returns an iterator of lists that are no more than the size passed in.
+    """
+    source_iter = iter(iterable)
+    while True:
+        chunk_iter = islice(source_iter, size)
+        yield chain([chunk_iter.next()], chunk_iter)
 
 
 def get_linked_orgs(authenticated=False):
@@ -235,6 +250,7 @@ def fetch_flows(org):
                 flow_json['created_on'] = datetime_to_json_date(flow.created_on)
                 flow_json['name'] = flow.name
                 flow_json['runs'] = flow.runs
+                flow_json['archived'] = flow.archived
                 flow_json['completed_runs'] = flow.completed_runs
                 flow_json['rulesets'] = [
                     dict(uuid=elt.uuid, label=elt.label, response_type=elt.response_type) for elt in flow.rulesets]
@@ -264,21 +280,30 @@ def get_flows(org):
     return fetch_flows(org)
 
 
-def update_poll_flow_archived(org):
+def update_poll_flow_data(org):
     flows = get_flows(org)
 
     if flows:
-        archived_flow_uuids = []
-        active_flow_uuids = []
+        org_polls = Poll.objects.filter(org=org)
+        for poll in org_polls:
+            flow = flows.get(poll.flow_uuid, dict())
 
-        for flow in flows.values():
-            if flow.get('archived', False):
-                archived_flow_uuids.append(flow['uuid'])
-            else:
-                active_flow_uuids.append(flow['uuid'])
+            if flow:
+                archived = flow.get('archived', False)
+                runs_count = flow.get('runs', 0)
+                if not runs_count:
+                    runs_count = 0
 
-        Poll.objects.filter(flow_uuid__in=archived_flow_uuids, org=org).update(flow_archived=True)
-        Poll.objects.filter(flow_uuid__in=active_flow_uuids, org=org).update(flow_archived=False)
+                updated_fields = dict()
+
+                if archived != poll.flow_archived:
+                    updated_fields['flow_archived'] = archived
+
+                if runs_count > 0 and runs_count != poll.runs_count:
+                    updated_fields['runs_count'] = runs_count
+
+                if updated_fields:
+                    Poll.objects.filter(pk=poll.pk).update(**updated_fields)
 
 
 def fetch_old_sites_count():
@@ -426,11 +451,11 @@ def get_registration_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    registred_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
 
     interval_dict = dict()
 
-    for date_key, date_count  in registred_on_counts.iteritems():
+    for date_key, date_count  in registered_on_counts.iteritems():
         parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
 
         # this is in the range we care about
@@ -471,11 +496,11 @@ def get_ureporters_locations_stats(org, segment):
 
     if field_type == 'state':
         boundary_top_level = 0 if org.get_config('is_global') else 1
-        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name')
+        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name').order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
 
     else:
-        boundaries = Boundary.objects.filter(org=org, level=2, parent__osm_id__iexact=parent).values('osm_id', 'name')
+        boundaries = Boundary.objects.filter(org=org, level=2, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
         location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
 
     return [dict(boundary=elt['osm_id'], label=elt['name'], set=location_counts.get(elt['osm_id'], 0))
