@@ -286,6 +286,7 @@ class RapidProBackendTest(DashTest):
         self.nigeria.set_config('registration_label', "Registration Date")
         self.nigeria.set_config('state_label', "State")
         self.nigeria.set_config('district_label', "LGA")
+        self.nigeria.set_config('ward_label', "Ward")
         self.nigeria.set_config('occupation_label', "Activité")
         self.nigeria.set_config('born_label', "Born")
         self.nigeria.set_config('gender_label', 'Gender')
@@ -765,6 +766,42 @@ class RapidProBackendTest(DashTest):
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 2))
 
+    @patch('dash.orgs.models.TembaClient2.get_runs')
+    @patch('django.utils.timezone.now')
+    @patch('django.core.cache.cache.get')
+    def test_poll_ward_field(self, mock_cache_get, mock_timezone_now, mock_get_runs):
+        mock_cache_get.return_value = None
+
+        now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
+        mock_timezone_now.return_value = now_date
+
+
+        PollResult.objects.all().delete()
+        contact = Contact.objects.create(org=self.nigeria, uuid='C-021', gender='M', born=1971, state='R-LAGOS',
+                                         district='R-OYO', ward='R-IKEJA')
+
+        poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid-3', self.education_nigeria, self.admin)
+
+        now = timezone.now()
+        temba_run = TembaRun.create(id=4321, flow=ObjectRef.create(uuid='flow-uuid-3', name="Flow 2"),
+                                    contact=ObjectRef.create(uuid='C-021', name='Hyped'), responded=True,
+                                    steps=[TembaStep.create(node='ruleset-uuid', text="Doing it now", value="win",
+                                                            category='Win', type='ruleset',
+                                                            arrived_on=now, left_on=now)],
+                                    created_on=now, modified_on=now, exited_on=now,
+                                    exit_type='completed')
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run])]
+
+        with self.assertNumQueries(11):
+            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
+        mock_get_runs.assert_called_with(flow='flow-uuid-3', responded=True, after=None, before=now)
+
+        poll_result = PollResult.objects.filter(flow='flow-uuid-3', ruleset='ruleset-uuid', contact='C-021').first()
+        self.assertEqual(poll_result.ward, 'R-IKEJA')
+
 
 @override_settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache', 'LOCATION': '127.0.0.1:6379:1',
                                        'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient', }}})
@@ -785,6 +822,7 @@ class PerfTest(DashTest):
         self.nigeria.set_config('registration_label', "Registration Date")
         self.nigeria.set_config('state_label', "State")
         self.nigeria.set_config('district_label', "LGA")
+        self.nigeria.set_config('ward_label', "Ward")
         self.nigeria.set_config('occupation_label', "Activité")
         self.nigeria.set_config('born_label', "Born")
         self.nigeria.set_config('gender_label', 'Gender')
@@ -801,6 +839,9 @@ class PerfTest(DashTest):
         self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo",
                                                 level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
+        self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja",
+                                            level=Boundary.WARD_LEVEL,
+                                            parent=self.district, geometry='{"foo":"bar-ward"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
                                                              label='Registration Date', value_type='T')
