@@ -94,18 +94,24 @@ class ContactSyncer(BaseSyncer):
 
         org_state_boundaries_data = dict()
         org_district_boundaries_data = dict()
-        state_boundaries = Boundary.objects.filter(org=org, level=1)
+        org_ward_boundaries_data = dict()
+        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL)
         for state in state_boundaries:
             org_state_boundaries_data[state.name.lower()] = state.osm_id
             state_district_data = dict()
-            district_boundaries = Boundary.objects.filter(org=org, level=2, parent=state)
+            district_boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, parent=state)
             for district in district_boundaries:
                 state_district_data[district.name.lower()] = district.osm_id
+                district_ward_data = dict()
+                ward_boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent=district)
+                for ward in ward_boundaries:
+                    district_ward_data[ward.name.lower()] = ward.osm_id
+                org_ward_boundaries_data[district.osm_id] = district_ward_data
 
             org_district_boundaries_data[state.osm_id] = state_district_data
 
-        setattr(self, cache_attr, (org_state_boundaries_data, org_district_boundaries_data))
-        return org_state_boundaries_data, org_district_boundaries_data
+        setattr(self, cache_attr, (org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data))
+        return org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data
 
     def get_contact_fields(self, org):
         cache_attr = '__contact_fields__%d' % org.pk
@@ -126,11 +132,12 @@ class ContactSyncer(BaseSyncer):
         if not reporter_group.lower() in contact_groups_names:
             return None
 
-        org_state_boundaries_data, org_district_boundaries_data = self.get_boundaries_data(org)
+        org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data = self.get_boundaries_data(org)
         contact_fields = self.get_contact_fields(org)
 
         state = ''
         district = ''
+        ward = ''
 
         state_field = org.get_config('state_label')
         if state_field:
@@ -153,6 +160,14 @@ class ContactSyncer(BaseSyncer):
                     if district_name:
                         district_name = district_name.lower()
                         district = org_district_boundaries_data.get(state, dict()).get(district_name, '')
+
+                ward_field = org.get_config('ward_label')
+                if ward_field:
+                    ward_field = ward_field.lower()
+                    ward_name = remote.fields.get(contact_fields.get(ward_field), None)
+                    if ward_name:
+                        ward_name = ward_name.lower()
+                        ward = org_ward_boundaries_data.get(district, dict()).get(ward_name, '')
 
         registered_on = None
         registration_field = org.get_config('registration_label')
@@ -210,7 +225,8 @@ class ContactSyncer(BaseSyncer):
             'occupation': occupation,
             'registered_on': registered_on,
             'state': state,
-            'district': district
+            'district': district,
+            'ward': ward
         }
 
     def update_required(self, local, remote, local_kwargs):
@@ -221,6 +237,8 @@ class ContactSyncer(BaseSyncer):
         update = update or local.occupation != local_kwargs['occupation']
         update = update or local.registered_on != local_kwargs['registered_on']
         update = update or local.state != local_kwargs['state'] or local.district != local_kwargs['district']
+        update = update or local.ward != local_kwargs['ward']
+
         return update
 
 
@@ -323,9 +341,11 @@ class RapidProBackend(BaseBackend):
 
                         state = ''
                         district = ''
+                        ward = ''
                         if contact_obj is not None:
                             state = contact_obj.state
                             district = contact_obj.district
+                            ward = contact_obj.ward
 
                         for temba_step in temba_run.steps:
                             ruleset_uuid = temba_step.node
@@ -339,6 +359,7 @@ class RapidProBackend(BaseBackend):
                                 update_required = existing_poll_result.category != category or existing_poll_result.text != text
                                 update_required = update_required or existing_poll_result.state != state
                                 update_required = update_required or existing_poll_result.district != district
+                                update_required = update_required or existing_poll_result.ward != ward
                                 update_required = update_required or existing_poll_result.completed != completed
 
                                 # if the reporter answered the step, check if this is a newer run
@@ -348,7 +369,7 @@ class RapidProBackend(BaseBackend):
                                 if update_required:
                                     PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
                                                                                                  state=state, district=district,
-                                                                                                 date=temba_step.left_on,
+                                                                                                 ward=ward, date=temba_step.left_on,
                                                                                                  completed=completed)
 
                                     num_updated += 1
@@ -360,7 +381,7 @@ class RapidProBackend(BaseBackend):
                             else:
                                 new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
                                                                    contact=contact_uuid, category=category, text=text,
-                                                                   state=state, date=temba_step.left_on,
+                                                                   state=state, date=temba_step.left_on, ward=ward,
                                                                    district=district, completed=completed))
 
                                 num_created += 1

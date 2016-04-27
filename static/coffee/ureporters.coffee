@@ -1,7 +1,11 @@
-initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
+initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
 
+  STATE_LEVEL = 1
+  DISTRICT_LEVEL = 2
+  WARD_LEVEL = 3
   allowDistrictZoom = districtLabel.trim() != ''
+  allowWardZoom = wardLabel.trim() != ''
 
   boundaries = null
   boundaryResults = null
@@ -81,7 +85,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
 
   highlightFeature = (e) ->
     layer = e.target
-    if not layer.feature.properties.level or layer.feature.properties.level == 1 and boundaries is states or layer.feature.properties.level == 2 and boundaries isnt states
+    if not layer.feature.properties.level or layer.feature.properties.level == STATE_LEVEL and boundaries is states or layer.feature.properties.level in [DISTRICT_LEVEL, WARD_LEVEL] and boundaries isnt states
       layer.setStyle(HIGHLIGHT_STYLE)
 
       if (!L.Browser.ie && !L.Browser.opera)
@@ -91,7 +95,6 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
 
   resetBoundaries = ->
     map.removeLayer(boundaries)
-
     boundaries = states
     boundaryResults = stateResults
 
@@ -104,10 +107,14 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     info.update()
 
   clickFeature = (e) ->
-    if (allowDistrictZoom and e.target.feature.properties.level == 1)
-      map.fitBounds(e.target.getBounds(), {step:.25})
-      mainLabelName = e.target.feature.properties.name + " (" + window.String_State + ")"
-      loadBoundary(e.target.feature.properties.id, e.target)
+    if (allowDistrictZoom and e.target.feature.properties.level == STATE_LEVEL)
+      mainLabelName = e.target.feature.properties.name + " (" + window.string_State + ")"
+      loadBoundary(e.target.feature.properties, e.target)
+      scale.update(e.target.feature.properties.level)
+    else if (allowWardZoom and e.target.feature.properties.level == DISTRICT_LEVEL)
+      map.removeLayer(boundaries)
+      mainLabelName = e.target.feature.properties.name + " (" + window.string_Dsitrict + ")"
+      loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
     else
       resetBoundaries()
@@ -115,10 +122,15 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
       mainLabelName = window.string_All
       mainLabelRegistered = totalRegistered
 
-  loadBoundary = (boundaryId, target) ->
+  loadBoundary = (boundary, target) ->
+    boundaryId = if boundary then boundary.id else null
+    boundaryLevel = if boundary then boundary.level else null
+
     # load our actual data
     if not boundaryId
       segment = {location:"State"}
+    else if boundary and boundary.level == DISTRICT_LEVEL
+      segment = {location:"Ward", parent:boundaryId}
     else
       segment = {location:"District", parent:boundaryId}
 
@@ -150,7 +162,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
         boundaryResults[boundary['boundary']] = boundary
         mainLabelRegistered += boundary.set
         info.update()
-        scale.update(boundaryId)
+        scale.update(boundaryLevel)
 
       # we are displaying the districts of a state, load the geojson for it
       boundaryUrl = '/boundaries/'
@@ -158,6 +170,12 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
         boundaryUrl += boundaryId + '/'
 
       $.ajax({url:boundaryUrl, dataType: "json"}).done (data) ->
+        # added to reset boundary when district has no wards
+        if data.features.length == 0
+          resetBoundaries()
+          scale.update()
+          mainLabelName = window.string_All
+          return
         for feature in data.features
           result = boundaryResults[feature.properties.id]
           if result
@@ -205,16 +223,20 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[]) ->
     html = ""
 
     scaleClass = 'national'
-    if level
+    if level and level == STATE_LEVEL
       scaleClass = 'state'
+    else if level and level == DISTRICT_LEVEL
+      scaleClass = 'district'
 
     html = "<div class='scale " + scaleClass + "'>"
     html += "<div class='scale-map-circle-outer primary-border-color'></div>"
     html += "<div class='scale-map-circle-inner'></div>"
     html += "<div class='scale-map-hline primary-border-color'></div>"
     html += "<div class='scale-map-vline primary-border-color'></div>"
+    html += "<div class='scale-map-vline-extended primary-border-color'></div>"
     html += "<div class='national-level primary-color'>" + window.string_National.toUpperCase() + "</div>"
     html += "<div class='state-level primary-color'>" + window.string_State.toUpperCase() + "</div>"
+    html += "<div class='district-level primary-color'>" + window.string_District.toUpperCase() + "</div>"
 
     @_div.innerHTML = html
 

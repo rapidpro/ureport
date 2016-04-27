@@ -8,10 +8,15 @@ from django_redis import get_redis_connection
 
 BOUNDARY_LOCK_KEY = 'lock:boundary:%d:%s'
 
+
 class Boundary(models.Model):
     """
     Corresponds to a RapidPro AdminBoundary
     """
+    COUNTRY_LEVEL = 0
+    STATE_LEVEL = 1
+    DISTRICT_LEVEL = 2
+    WARD_LEVEL = 3
 
     BOUNDARIES_CACHE_TIMEOUT = 60 * 60 * 24 * 15
     BOUNDARIES_CACHE_KEY = 'org:%d:boundaries-osm-ids'
