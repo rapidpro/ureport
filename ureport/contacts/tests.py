@@ -247,6 +247,7 @@ class ContactTest(DashTest):
                     self.assertTrue('000-001' in seen_uuids)
 
     def test_contact_ward_field(self):
+
         temba_contact = TembaContact.create(uuid='C-0011', name="Jan", urns=['tel:123'],
                                             groups=['G-001', 'G-007'],
                                             fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
@@ -255,10 +256,26 @@ class ContactTest(DashTest):
                                             language='eng')
 
         kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
-
+        # invalid parent boundary (district) will yield empty ward
         self.assertEqual(kwargs, dict(uuid='C-0011', org=self.nigeria, gender='M', born=1990, occupation='Student',
                                       registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='R-LAGOS',
                                       district='', ward=''))
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
+        Contact.objects.create(uuid='C-007', org=self.nigeria, gender='M', born=1990, occupation='Student',
+                               registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='R-LAGOS',
+                               district='R-OYO', ward='R-IKEJA')
+        field_count = ReportersCounter.get_counts(self.nigeria)
+
+        self.assertEqual(field_count['ward:R-IKEJA'], 1)
+
+        Contact.objects.create(uuid='C-008', org=self.nigeria, gender='M', born=1980, occupation='Teacher',
+                               registered_on=json_date_to_datetime('2014-01-02T03:07:05.000'), state='R-LAGOS',
+                               district='R-OYO', ward='R-IKEJA')
+
+        field_count = ReportersCounter.get_counts(self.nigeria)
+        self.assertEqual(field_count['ward:R-IKEJA'], 2)
+        Contact.objects.all().delete()
 
     def test_reporters_counter(self):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
