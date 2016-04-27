@@ -1151,6 +1151,39 @@ class PollResultsTest(DashTest):
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
+    def test_poll_result_generate_counters(self):
+        poll_result1 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                                 ruleset=self.poll_question.ruleset_uuid, date=self.now,
+                                                 contact='contact-uuid', completed=False)
+
+        gen_counters = poll_result1.generate_counters()
+        self.assertEqual(len(gen_counters.keys()), 1)
+        self.assertTrue('ruleset:%s:total-ruleset-polled' % self.poll_question.ruleset_uuid in gen_counters.keys())
+
+        poll_result2 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                                 ruleset='other-uuid',
+                                                 contact='contact-uuid', category='No', text='Nah', completed=False,
+                                                 date=self.now, state='R-LAGOS', district='R-oyo')
+
+        gen_counters = poll_result2.generate_counters()
+
+        ruleset = poll_result2.ruleset.lower()
+        category = poll_result2.category.lower()
+        state = poll_result2.state.upper()
+        district = poll_result2.district.upper()
+
+        self.assertEqual(len(gen_counters.keys()), 5)
+
+        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
+
+        self.assertTrue('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())
+
+        self.assertTrue('ruleset:%s:category:%s' % (ruleset, category) in gen_counters.keys())
+
+        self.assertTrue('ruleset:%s:category:%s:state:%s' % (ruleset, category, state) in gen_counters.keys())
+
+        self.assertTrue('ruleset:%s:category:%s:district:%s' % (ruleset, category, district) in gen_counters.keys())
+
     def test_poll_result_create_counters(self):
         self.assertFalse(PollResultsCounter.objects.all())
 
@@ -1193,6 +1226,75 @@ class PollResultsTest(DashTest):
         self.assertEqual(PollResultsCounter.objects.all().count(), 6)
         self.assertEqual(PollResultsCounter.objects.filter(ruleset='other-uuid').count(), 5)
 
+    def test_poll_result_rebuild_counts_for_poll(self):
+        poll_question2 = PollQuestion.objects.create(poll=self.poll, title='question 1', ruleset_uuid='step-2-uuid',
+                                                     created_by=self.admin, modified_by=self.admin)
+
+        poll_question3 = PollQuestion.objects.create(poll=self.poll, title='question 1', ruleset_uuid='step-3-uuid',
+                                                     created_by=self.admin, modified_by=self.admin)
+
+        self.assertFalse(PollResultsCounter.objects.all())
+
+        PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                  ruleset=self.poll_question.ruleset_uuid, date=self.now,
+                                  contact='contact-uuid', completed=False)
+
+        PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                  ruleset=self.poll_question.ruleset_uuid, date=self.now,
+                                  contact='contact-uuid', completed=False)
+
+        PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                  ruleset=poll_question2.ruleset_uuid,
+                                  contact='contact-uuid', category='No', text='Nah', completed=False,
+                                  date=self.now, state='R-LAGOS', district='R-oyo')
+
+        PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                  ruleset=poll_question2.ruleset_uuid,
+                                  contact='contact-uuid', category='No', text='Nah', completed=False,
+                                  date=self.now, state='R-LAGOS', district='R-oyo')
+
+        PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                  ruleset=poll_question3.ruleset_uuid, date=self.now,
+                                  contact='contact-uuid', completed=False)
+
+        PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                  ruleset=poll_question2.ruleset_uuid, date=self.now,
+                                  contact='contact-uuid', completed=False)
+
+        self.assertTrue(PollResultsCounter.objects.all())
+
+        self.assertEqual(PollResultsCounter.objects.all().count(), 14)
+        squash_removed_ids = list(PollResultsCounter.objects.values_list('pk', flat=True))
+
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+            with patch('ureport.polls.models.PollResultsCounter.squash_counts') as mock_squash_count:
+                mock_squash_count.return_value = 'OK'
+
+                PollResult.rebuild_counts_for_poll(self.poll.pk)
+
+                mock_squash_count.assert_called_once_with(from_zero=True)
+                # we remain with 9 counters, after the squash
+                self.assertEqual(PollResultsCounter.objects.all().count(), 7)
+
+                # all the counters not unique were squashed
+                self.assertFalse(PollResultsCounter.objects.filter(pk__in=squash_removed_ids))
+
+                # the squashed should have the count as the sum of the previous same type counters
+                self.assertEqual(PollResultsCounter.objects.filter(ruleset=poll_question2.ruleset_uuid).count(), 5)
+
+                question2_total_polled_type = 'ruleset:%s:total-ruleset-polled' % poll_question2.ruleset_uuid
+                total_polled_counters = PollResultsCounter.objects.filter(type=question2_total_polled_type)
+                self.assertEqual(total_polled_counters.count(), 1)
+                self.assertEqual(total_polled_counters.first().count, 3)
+
+                # the other counts should be equal to 2
+                other_counts = PollResultsCounter.objects.filter(ruleset=poll_question2.ruleset_uuid)
+                other_counts = other_counts.exclude(type=question2_total_polled_type)
+                self.assertEqual(list(other_counts.values_list('count', flat=True).distinct()), [2])
+
     def test_poll_result_counter_get_or_create(self):
         self.assertFalse(PollResultsCounter.objects.all())
         counter1 = PollResultsCounter.get_or_create(self.nigeria.id, 'ruleset-uuid', 'type-a')
@@ -1226,8 +1328,6 @@ class PollResultsTest(DashTest):
             PollResult.rebuild_counts()
 
             mock_rebuild_counts_for_poll.assert_called_once_with(self.poll.pk)
-
-
 
 
 class PollsTasksTest(DashTest):
