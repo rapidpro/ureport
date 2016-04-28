@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from collections import defaultdict
 import json
 
 import pytz
@@ -289,12 +290,9 @@ class RapidProBackend(BaseBackend):
 
                 existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
 
-                poll_results_map = dict()
+                poll_results_map = defaultdict(dict)
                 for res in existing_poll_results:
-                    if res.contact not in poll_results_map:
-                        poll_results_map[res.contact] = {res.ruleset: res}
-                    else:
-                        poll_results_map[res.contact][res.ruleset] = res
+                    poll_results_map[res.contact][res.ruleset] = res
 
                 fetch_start = time.time()
                 for fetch in fetches:
@@ -371,10 +369,6 @@ class RapidProBackend(BaseBackend):
                     num_synced += len(fetch)
                     if progress_callback:
                         progress_callback(num_synced)
-
-                    if poll_result_obj_created or poll_result_obj_updated:
-                        # Squash the counter by gathering the counts in one row
-                        PollResultsCounter.squash_counts()
 
                     print "Created %d, Updated %d for poll #%d on org #%d in fetch of %d - %d runs"% (poll_result_obj_created,
                                                                                                       poll_result_obj_updated,
