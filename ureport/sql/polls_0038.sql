@@ -7,12 +7,3 @@ DROP FUNCTION IF EXISTS ureport_update_results_counters();
 DROP FUNCTION IF EXISTS ureport_increment_counter_for_poll_result(_poll_result polls_pollresult, _add BOOLEAN);
 
 DROP FUNCTION IF EXISTS ureport_insert_results_counter(_org_id INT, _ruleset CHAR(36), _type VARCHAR, _count INT);
-
-
-
-
-
-
-
-
-
