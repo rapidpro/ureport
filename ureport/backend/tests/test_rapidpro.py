@@ -951,3 +951,17 @@ class PerfTest(DashTest):
         self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 0))
 
         redis_client.delete(key)
+
+        PollResult.objects.all().delete()
+
+        start = time.time()
+
+        for batch in active_fetches:
+            for r in batch:
+                r.contact = ObjectRef.create(uuid='C-001', name='Will')
+
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (1, 0, num_fetches * fetch_size * num_steps - 1))

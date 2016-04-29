@@ -294,15 +294,14 @@ class RapidProBackend(BaseBackend):
                 for res in existing_poll_results:
                     poll_results_map[res.contact][res.ruleset] = res
 
+                poll_results_to_save_map = defaultdict(dict)
+
                 fetch_start = time.time()
                 for fetch in fetches:
 
                     print "RapidPro API fetch for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced,
                                                                                            num_synced + len(fetch),
                                                                                            time.time() - fetch_start)
-
-                    poll_result_obj_created = 0
-                    poll_result_obj_updated = 0
 
                     local_sync_start = time.time()
 
@@ -332,6 +331,8 @@ class RapidProBackend(BaseBackend):
 
                             existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
+                            poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
+
                             if existing_poll_result is not None:
 
                                 update_required = existing_poll_result.category != category or existing_poll_result.text != text
@@ -350,40 +351,60 @@ class RapidProBackend(BaseBackend):
                                                                                                  completed=completed)
 
                                     num_updated += 1
-                                    poll_result_obj_updated += 1
-
                                 else:
                                     num_ignored += 1
 
+                            elif poll_result_to_save is not None:
+
+                                replace_save_map = poll_result_to_save.category != category or poll_result_to_save.text != text
+                                replace_save_map = replace_save_map or poll_result_to_save.state != state
+                                replace_save_map = replace_save_map or poll_result_to_save.district != district
+                                replace_save_map = replace_save_map or poll_result_to_save.completed != completed
+
+                                # replace if the step is newer
+                                if poll_result_to_save.date is not None:
+                                    replace_save_map = replace_save_map and (temba_step.left_on is None or temba_step.arrived_on > poll_result_to_save.date)
+
+                                if replace_save_map:
+                                    result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                            contact=contact_uuid, category=category, text=text,
+                                                            state=state, district=district, date=temba_step.left_on,
+                                                            completed=completed)
+
+                                    poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
+
+                                num_ignored += 1
                             else:
-                                new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
-                                                                   contact=contact_uuid, category=category, text=text,
-                                                                   state=state, date=temba_step.left_on,
-                                                                   district=district, completed=completed))
+
+                                result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                        contact=contact_uuid, category=category, text=text,
+                                                        state=state, district=district, date=temba_step.left_on,
+                                                        completed=completed)
+
+                                poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
 
                                 num_created += 1
-                                poll_result_obj_created += 1
-
-                    PollResult.objects.bulk_create(new_poll_results)
 
                     num_synced += len(fetch)
                     if progress_callback:
                         progress_callback(num_synced)
 
-                    print "Created %d, Updated %d for poll #%d on org #%d in fetch of %d - %d runs"% (poll_result_obj_created,
-                                                                                                      poll_result_obj_updated,
-                                                                                                      poll.pk,
-                                                                                                      org.pk,
-                                                                                                      num_synced - len(fetch),
-                                                                                                      num_synced)
-
-                    print "Local sync ops for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced - len(fetch),
+                    print "Processed fetch of %d - %d runs for poll #%d on org #%d" % (num_synced - len(fetch),
                                                                                        num_synced,
-                                                                                       time.time() - local_sync_start)
-                    print "Total synced for poll #%d on org #%d %d runs in %ds" % (poll.pk, org.pk, num_synced,
-                                                                                   time.time() - start)
+                                                                                       poll.pk,
+                                                                                       org.pk)
                     fetch_start = time.time()
                     print "=" * 40
+
+                new_poll_results = []
+
+                for c_key in poll_results_to_save_map.keys():
+                    for r_key in poll_results_to_save_map.get(c_key, dict()):
+                        obj_to_create = poll_results_to_save_map.get(c_key, dict()).get(r_key, None)
+                        if obj_to_create is not None:
+                            new_poll_results.append(obj_to_create)
+
+                PollResult.objects.bulk_create(new_poll_results)
 
                 # update the time for this poll from which we fetch next time
                 cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
