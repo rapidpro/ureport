@@ -612,6 +612,7 @@ class PollResult(models.Model):
         category = ''
         state = ''
         district = ''
+        ward = ''
 
         if self.ruleset:
             ruleset = self.ruleset.lower()
@@ -624,6 +625,9 @@ class PollResult(models.Model):
 
         if self.district:
             district = self.district.upper()
+
+        if self.ward:
+            ward = self.ward.upper()
 
         generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
 
@@ -645,6 +649,12 @@ class PollResult(models.Model):
         elif district:
             generated_counters['ruleset:%s:nocategory:district:%s' % (ruleset, district)] = 1
 
+        if ward and category:
+            generated_counters['ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward)] = 1
+
+        elif ward:
+            generated_counters['ruleset:%s:nocategory:ward:%s' % (ruleset, ward)] = 1
+
         return generated_counters
 
     def create_counters(self):
@@ -658,6 +668,7 @@ class PollResult(models.Model):
         category = ''
         state = ''
         district = ''
+        ward = ''
 
         if self.ruleset:
             ruleset = self.ruleset.lower()
@@ -670,6 +681,9 @@ class PollResult(models.Model):
 
         if self.district:
             district = self.district.upper()
+
+        if self.ward:
+            ward = self.ward.upper()
 
         update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
                                                                 type='ruleset:%s:total-ruleset-polled' % ruleset).id)
@@ -696,6 +710,12 @@ class PollResult(models.Model):
         elif district:
             update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
                                                                     type='ruleset:%s:nocategory:district:%s' % (ruleset, district)).id)
+        if ward and category:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward)).id)
+        elif ward:
+            update_counters.append(PollResultsCounter.get_or_create(org_id=org_id, ruleset=ruleset,
+                                                                    type='ruleset:%s:nocategory:ward:%s' % (ruleset, ward)).id)
 
         PollResultsCounter.objects.filter(id__in=update_counters).update(count=F('count') + 1)
 
