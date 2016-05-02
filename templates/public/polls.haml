@@ -93,8 +93,9 @@
                         %a.poll-question-tab.active.primary-color.primary-bg-color{href:"#statistics-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                           - trans "STATISTICS"
 
-                        %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                          - trans "LOCATIONS"
+                        - if org|config:"state_label"
+                          %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
+                            - trans "LOCATIONS"
 
 
                   .tab-content
@@ -108,7 +109,7 @@
                                   {{ category.label }}
 
                     - else
-                      -if not is_iorg
+                      -if not is_iorg and org|config:"state_label"
                         .tab-pane{id:"locations-tab-{{ question.id }}"}
                           .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
                             .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
