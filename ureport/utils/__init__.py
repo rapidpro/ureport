@@ -489,7 +489,7 @@ def get_ureporters_locations_stats(org, segment):
 
     location_stats = []
 
-    if not field_type or field_type.lower() not in ['state', 'district', 'ward']:
+    if not field_type or field_type.lower() not in ['state', 'district']:
         return location_stats
 
     field_type = field_type.lower()
@@ -501,10 +501,6 @@ def get_ureporters_locations_stats(org, segment):
         boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name')\
             .order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
-    elif field_type == 'ward':
-        boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL,
-                                             parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
-        location_counts = {k[5:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('ward')}
     else:
         boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL,
                                              parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
