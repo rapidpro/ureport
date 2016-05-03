@@ -204,7 +204,7 @@ ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whe
                      dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters")), superuser_only=True),
                      dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters"), required=False), superuser_only=True),
                      dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")), superuser_only=True),
-                     dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters")), superuser_only=True),
+                     dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters"), required=False), superuser_only=True),
                      dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters"), required=False), superuser_only=True),
                      dict(name='ward_label', field=dict(help_text=_("The label of the Contact Field that contains the Ward of reporters"), required=False), superuser_only=True),
                      dict(name='male_label', field=dict(help_text=_("The label assigned to U-Reporters that are Male.")), superuser_only=True),
@@ -500,12 +500,12 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=[0, 10, 20, 30, 40, 50]),
         'args': ('ureport.contacts.tasks.pull_contacts',)
     },
-    # 'backfill-poll-results': {
-    #     'task': 'dash.orgs.tasks.trigger_org_task',
-    #     'schedule': timedelta(minutes=10),
-    #     'relative': True,
-    #     'args': ('ureport.polls.tasks.backfill_poll_results', 'sync')
-    # },
+    'backfill-poll-results': {
+        'task': 'dash.orgs.tasks.trigger_org_task',
+        'schedule': timedelta(minutes=10),
+        'relative': True,
+        'args': ('ureport.polls.tasks.backfill_poll_results', 'sync')
+    },
     # 'results-pull-main-poll':  {
     #     'task': 'dash.orgs.tasks.trigger_org_task',
     #     'schedule': crontab(minute=[5, 25, 45]),
