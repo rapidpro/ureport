@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0037_install_poll_results_count_triggers'),
+        ('polls', '0038_remove_poll_db_triggers'),
     ]
 
     operations = [
