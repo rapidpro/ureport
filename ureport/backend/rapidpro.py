@@ -273,7 +273,7 @@ class RapidProBackend(BaseBackend):
         num_synced = 0
 
         if r.get(key):
-            print "Skipping for org #%d as it is still running" % org.pk
+            print "Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk)
         else:
             with r.lock(key):
                 client = self._get_client(org, 2)
@@ -284,6 +284,11 @@ class RapidProBackend(BaseBackend):
                 # ignore the TaskState time and use the time we stored in redis
                 now = timezone.now()
                 after = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
+
+                pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (org.pk, poll.pk), None)
+                if pull_after_delete is not None:
+                    after = None
+                    poll.delete_poll_results()
 
                 poll_runs_query = client.get_runs(flow=poll.flow_uuid, responded=True, after=after, before=now)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
@@ -303,13 +308,9 @@ class RapidProBackend(BaseBackend):
                                                                                            num_synced + len(fetch),
                                                                                            time.time() - fetch_start)
 
-                    local_sync_start = time.time()
-
                     contact_uuids = [run.contact.uuid for run in fetch]
                     contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
                     contacts_map = {c.uuid: c for c in contacts}
-
-                    new_poll_results = []
 
                     for temba_run in fetch:
                         flow_uuid = temba_run.flow.uuid

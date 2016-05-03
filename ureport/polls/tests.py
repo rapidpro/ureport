@@ -45,6 +45,51 @@ class PollTest(DashTest):
                                                          created_by=self.admin,
                                                          modified_by=self.admin)
 
+    def test_poll_pull_refresh(self):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+
+        pull_refresh_url = reverse('polls.poll_pull_refresh', args=[poll1.pk])
+
+        post_data = dict(poll=poll1.pk)
+
+        with patch('ureport.polls.models.Poll.pull_refresh_task') as mock_pull_refresh:
+            mock_pull_refresh.return_value = 'Done'
+
+            response = self.client.get(pull_refresh_url, SERVER_NAME='uganda.ureport.io')
+            self.assertLoginRedirect(response)
+
+            response = self.client.post(pull_refresh_url, post_data, SERVER_NAME='uganda.ureport.io')
+            self.assertLoginRedirect(response)
+
+            self.login(self.admin)
+
+            response = self.client.get(pull_refresh_url, SERVER_NAME='uganda.ureport.io')
+            self.assertLoginRedirect(response)
+
+            response = self.client.post(pull_refresh_url, post_data, SERVER_NAME='uganda.ureport.io')
+            self.assertLoginRedirect(response)
+
+            self.login(self.superuser)
+
+            with self.assertRaises(TemplateSyntaxError):
+                self.client.get(pull_refresh_url, SERVER_NAME='uganda.ureport.io')
+
+            with self.assertRaises(KeyError):
+                self.client.post(pull_refresh_url, dict(), SERVER_NAME='uganda.ureport.io')
+
+            response = self.client.post(pull_refresh_url, post_data, SERVER_NAME='uganda.ureport.io')
+            self.assertEqual(response.status_code, 302)
+            mock_pull_refresh.assert_called_once_with()
+            mock_pull_refresh.reset_mock()
+
+            response = self.client.post(pull_refresh_url, post_data, SERVER_NAME='uganda.ureport.io', follow=True)
+
+            self.assertEqual(response.context['org'], self.uganda)
+            self.assertEqual(response.request['PATH_INFO'], reverse('polls.poll_list'))
+            self.assertTrue("Scheduled a pull refresh for poll #%d on org #%d" % (poll1.pk, poll1.org_id) in response.content)
+
+            mock_pull_refresh.assert_called_once_with()
+
     def test_poll_get_main_poll(self):
         self.assertIsNone(Poll.get_main_poll(self.uganda))
         self.assertIsNone(Poll.get_main_poll(self.nigeria))

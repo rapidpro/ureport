@@ -340,7 +340,7 @@ PERMISSIONS = {
 
     'dashblocks.dashblock': ('html', ),
     'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
-    'polls.poll': ('questions', 'responses', 'images'),
+    'polls.poll': ('questions', 'responses', 'images', 'pull_refresh'),
     'stories.story': ('html', 'images'),
 
 }
