@@ -1167,6 +1167,8 @@ class PollQuestionTest(DashTest):
             mock.assert_called_with()
 
             mock.return_value = question_results
+            poll1.runs_count = 7156
+            poll1.save()
 
             self.assertEqual(poll_question1.get_results(), [dict(open_ended=False, set=3462, unset=3694,
                                                                  categories=[dict(count=2210, label='Yes'),

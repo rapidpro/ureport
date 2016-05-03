@@ -637,7 +637,11 @@ class PollQuestion(SmartModel):
     def get_polled(self):
         first_question = self.poll.get_questions()[0]
         if self.pk == first_question.pk:
-            return self.poll.runs()
+            try:
+                polled = int(self.poll.runs_count)
+            except ValueError:
+                polled = 0
+            return polled
 
         results = self.get_question_results()
         key = 'ruleset:%s:total-ruleset-polled' % self.ruleset_uuid
