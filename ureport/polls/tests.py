@@ -1200,6 +1200,29 @@ class PollResultsTest(DashTest):
 
             self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
+    def test_poll_results_without_category(self):
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+
+            self.assertEqual(PollResultsCounter.get_poll_results(self.poll), dict())
+
+            PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                      ruleset=self.poll_question.ruleset_uuid, date=self.now,
+                                      contact='contact-uuid', completed=False, state='R-LAGOS',
+                                      district='R-OYO', ward='R-IKEJA')
+
+            self.poll.rebuild_poll_results_counts()
+
+            expected = dict()
+            expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 1
+            expected['ruleset:%s:nocategory:state:R-LAGOS' % self.poll_question.ruleset_uuid] = 1
+            expected['ruleset:%s:nocategory:district:R-OYO' % self.poll_question.ruleset_uuid] = 1
+            expected['ruleset:%s:nocategory:ward:R-IKEJA' % self.poll_question.ruleset_uuid] = 1
+
+            self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
+
     def test_poll_result_generate_counters(self):
         poll_result1 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
                                                  ruleset=self.poll_question.ruleset_uuid, date=self.now,
@@ -1233,6 +1256,8 @@ class PollResultsTest(DashTest):
         self.assertTrue('ruleset:%s:category:%s:state:%s' % (ruleset, category, state) in gen_counters.keys())
 
         self.assertTrue('ruleset:%s:category:%s:district:%s' % (ruleset, category, district) in gen_counters.keys())
+
+        self.assertTrue('ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward) in gen_counters.keys())
 
 
 class PollsTasksTest(DashTest):
