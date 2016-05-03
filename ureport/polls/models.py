@@ -616,6 +616,8 @@ class PollResult(models.Model):
 
     district = models.CharField(max_length=255, null=True)
 
+    ward = models.CharField(max_length=255, null=True)
+
     def generate_counters(self):
         generated_counters = dict()
 
