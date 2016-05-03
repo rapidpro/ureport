@@ -793,7 +793,7 @@ class RapidProBackendTest(DashTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(3):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
