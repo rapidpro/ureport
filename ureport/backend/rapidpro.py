@@ -380,6 +380,7 @@ class RapidProBackend(BaseBackend):
                                 replace_save_map = poll_result_to_save.category != category or poll_result_to_save.text != text
                                 replace_save_map = replace_save_map or poll_result_to_save.state != state
                                 replace_save_map = replace_save_map or poll_result_to_save.district != district
+                                replace_save_map = replace_save_map or poll_result_to_save.ward != ward
                                 replace_save_map = replace_save_map or poll_result_to_save.completed != completed
 
                                 # replace if the step is newer
@@ -389,8 +390,8 @@ class RapidProBackend(BaseBackend):
                                 if replace_save_map:
                                     result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
                                                             contact=contact_uuid, category=category, text=text,
-                                                            state=state, district=district, date=temba_step.left_on,
-                                                            completed=completed)
+                                                            state=state, district=district, ward=ward,
+                                                            date=temba_step.left_on, completed=completed)
 
                                     poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
 
@@ -399,8 +400,8 @@ class RapidProBackend(BaseBackend):
 
                                 result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
                                                         contact=contact_uuid, category=category, text=text,
-                                                        state=state, district=district, date=temba_step.left_on,
-                                                        completed=completed)
+                                                        state=state, district=district, ward=ward,
+                                                        date=temba_step.left_on, completed=completed)
 
                                 poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
 
