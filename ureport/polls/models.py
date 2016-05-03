@@ -79,6 +79,8 @@ class Poll(SmartModel):
 
     POLL_PULL_RESULTS_TASK_LOCK = 'poll-pull-results-task-lock:%s:%s'
 
+    POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = 'poll-results-pull-after-delete-flag:%s:%s'
+
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
     poll_date = models.DateTimeField(help_text=_("The date to display for this poll. "
@@ -141,6 +143,18 @@ class Poll(SmartModel):
             PollResult.objects.filter(pk__in=batch).delete()
 
         print "Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id)
+
+        cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
+
+    def pull_refresh_task(self):
+        from ureport.utils import datetime_to_json_date
+        from ureport.polls.tasks import pull_refresh
+
+        now = timezone.now()
+        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk),
+                  datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+
+        pull_refresh.apply_async((self.pk,), queue='sync')
 
     def rebuild_poll_results_counts(self):
         from ureport.utils import chunk_list
