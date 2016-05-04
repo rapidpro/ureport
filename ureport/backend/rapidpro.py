@@ -278,9 +278,6 @@ class RapidProBackend(BaseBackend):
             with r.lock(key):
                 client = self._get_client(org, 2)
 
-                start = time.time()
-                print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
-
                 # ignore the TaskState time and use the time we stored in redis
                 now = timezone.now()
                 after = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
@@ -289,6 +286,9 @@ class RapidProBackend(BaseBackend):
                 if pull_after_delete is not None:
                     after = None
                     poll.delete_poll_results()
+
+                start = time.time()
+                print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
                 poll_runs_query = client.get_runs(flow=poll.flow_uuid, responded=True, after=after, before=now)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
