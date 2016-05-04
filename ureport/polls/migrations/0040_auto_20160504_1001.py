@@ -13,7 +13,7 @@ ON polls_pollresult (org_id, flow, ruleset, text);
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0038_remove_poll_db_triggers'),
+        ('polls', '0039_pollresult_ward'),
     ]
 
     operations = [
