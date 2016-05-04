@@ -729,6 +729,8 @@ class PollResult(models.Model):
 
     district = models.CharField(max_length=255, null=True)
 
+    ward = models.CharField(max_length=255, null=True)
+
     def generate_counters(self):
         generated_counters = dict()
 
@@ -740,6 +742,7 @@ class PollResult(models.Model):
         category = ''
         state = ''
         district = ''
+        ward = ''
 
         if self.ruleset:
             ruleset = self.ruleset.lower()
@@ -752,6 +755,9 @@ class PollResult(models.Model):
 
         if self.district:
             district = self.district.upper()
+
+        if self.ward:
+            ward = self.ward.upper()
 
         generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
 
@@ -772,6 +778,12 @@ class PollResult(models.Model):
 
         elif district:
             generated_counters['ruleset:%s:nocategory:district:%s' % (ruleset, district)] = 1
+
+        if ward and category:
+            generated_counters['ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward)] = 1
+
+        elif ward:
+            generated_counters['ruleset:%s:nocategory:ward:%s' % (ruleset, ward)] = 1
 
         return generated_counters
 
