@@ -469,6 +469,10 @@ class PollQuestion(SmartModel):
     Represents a single question that was asked in a poll, these questions tie 1-1 to
     the RuleSets in a flow.
     """
+
+    POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
+    POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 5
+
     poll = models.ForeignKey(Poll, related_name='questions',
                              help_text=_("The poll this question is part of"))
     title = models.CharField(max_length=255,
@@ -526,6 +530,15 @@ class PollQuestion(SmartModel):
             traceback.print_exc()
 
     def get_results(self, segment=None):
+        key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+        if segment:
+            substituted_segment = self.poll.org.substitute_segment(segment)
+            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+
+        cached_value = cache.get(key, None)
+        if cached_value:
+            return cached_value["results"]
+
         org = self.poll.org
         open_ended = self.is_open_ended()
         responded = self.get_responded()
@@ -614,6 +627,8 @@ class PollQuestion(SmartModel):
                         categories.append(dict(count=category_count, label=categorie_label))
 
                 results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+
+        cache.set(key, {"results": results}, PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT)
 
         return results
 
@@ -714,6 +729,8 @@ class PollResult(models.Model):
 
     district = models.CharField(max_length=255, null=True)
 
+    ward = models.CharField(max_length=255, null=True)
+
     def generate_counters(self):
         generated_counters = dict()
 
@@ -725,6 +742,7 @@ class PollResult(models.Model):
         category = ''
         state = ''
         district = ''
+        ward = ''
 
         if self.ruleset:
             ruleset = self.ruleset.lower()
@@ -737,6 +755,9 @@ class PollResult(models.Model):
 
         if self.district:
             district = self.district.upper()
+
+        if self.ward:
+            ward = self.ward.upper()
 
         generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
 
@@ -757,6 +778,12 @@ class PollResult(models.Model):
 
         elif district:
             generated_counters['ruleset:%s:nocategory:district:%s' % (ruleset, district)] = 1
+
+        if ward and category:
+            generated_counters['ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward)] = 1
+
+        elif ward:
+            generated_counters['ruleset:%s:nocategory:ward:%s' % (ruleset, ward)] = 1
 
         return generated_counters
 
