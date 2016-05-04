@@ -3,6 +3,12 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 
+#language=SQL
+INDEX_SQL = """
+CREATE INDEX polls_pollresult_org_flow_ruleset_text
+ON polls_pollresult (org_id, flow, ruleset, text);
+
+"""
 
 class Migration(migrations.Migration):
 
@@ -11,8 +17,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterIndexTogether(
-            name='pollresult',
-            index_together=set([('org', 'flow', 'ruleset', 'text'), ('org', 'flow')]),
-        ),
+        migrations.RunSQL(INDEX_SQL)
     ]
