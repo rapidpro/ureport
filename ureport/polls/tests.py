@@ -23,7 +23,7 @@ from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows, \
     recheck_poll_flow_data, pull_results_main_poll, pull_results_brick_polls, pull_results_other_polls, \
-    backfill_poll_results
+    backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_poll, fetch_old_sites_count
 from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
@@ -89,6 +89,24 @@ class PollTest(DashTest):
             self.assertTrue("Scheduled a pull refresh for poll #%d on org #%d" % (poll1.pk, poll1.org_id) in response.content)
 
             mock_pull_refresh.assert_called_once_with()
+
+    @patch('ureport.polls.tasks.pull_refresh.apply_async')
+    @patch('django.core.cache.cache.set')
+    def test_pull_refresh_task(self, mock_cache_set, mock_pull_refresh):
+        tz = pytz.timezone('Africa/Kigali')
+        with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
+
+            poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+
+            poll1.pull_refresh_task()
+
+            now = timezone.now()
+            mock_cache_set.assert_called_once_with(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll1.org_id,
+                                                                                                   poll1.pk),
+                                                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+
+            mock_pull_refresh.assert_called_once_with((poll1.pk,), queue='sync')
+
 
     def test_poll_get_main_poll(self):
         self.assertIsNone(Poll.get_main_poll(self.uganda))
@@ -1259,6 +1277,12 @@ class PollQuestionTest(DashTest):
 
                 recheck_poll_flow_data(self.org.pk)
                 mock_update_poll_flow_data.assert_called_once_with(self.org)
+
+            with patch('ureport.polls.models.Poll.pull_results') as mock_pull_results:
+                mock_pull_results.return_value = "Pulled"
+
+                pull_refresh(self.poll.pk)
+                mock_pull_results.assert_called_once_with(self.poll.pk)
 
 
 class PollResultsTest(DashTest):
