@@ -537,8 +537,8 @@ class PollQuestion(SmartModel):
             cursor = connection.cursor()
 
             custom_sql = """
-                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.ruleset = '%s') w group by w.label order by count desc;
-                      """ % self.ruleset_uuid
+                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s') w group by w.label order by count desc;
+                      """ % (org.id, self.poll.flow_uuid, self.ruleset_uuid)
 
             cursor.execute(custom_sql)
             from ureport.utils import get_dict_from_cursor
@@ -761,7 +761,7 @@ class PollResult(models.Model):
         return generated_counters
 
     class Meta:
-        index_together = ["org", "flow"]
+        index_together = [["org", "flow"], ["org", "flow", "ruleset", "text"]]
 
 
 class PollResultsCounter(models.Model):
