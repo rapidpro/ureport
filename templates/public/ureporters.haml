@@ -84,16 +84,17 @@
                               {{ gender_stats.female_count|intcomma }}
 
       -if not is_iorg
-        .row.ureporter-states.hide-on-small
-          .col-md-12
-            .white-card-container
-              .white-card-inner
-                .white-card-title.primary-bg-color
-                  - trans "WHERE ARE U-REPORTERS FROM?"
-                .white-card-content.white-card-padding
-                  .ureport-location-map{data-contact-field:'{{org|config:"gender_label"}}', id: "ureport-location-map-id"}
-                    #ureport-location-map-id-placeholder.loading-placeholder
-                      %img{src:"{{ STATIC_URL }}img/loading.gif"}
+        -if org|config:"state_label"
+          .row.ureporter-states.hide-on-small
+            .col-md-12
+              .white-card-container
+                .white-card-inner
+                  .white-card-title.primary-bg-color
+                    - trans "WHERE ARE U-REPORTERS FROM?"
+                  .white-card-content.white-card-padding
+                    .ureport-location-map{data-contact-field:'{{org|config:"gender_label"}}', id: "ureport-location-map-id"}
+                      #ureport-location-map-id-placeholder.loading-placeholder
+                        %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
         .row.ureporter-registrations.hide-on-small
           .col-md-12

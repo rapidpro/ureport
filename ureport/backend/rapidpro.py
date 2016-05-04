@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from collections import defaultdict
 import json
 
 import pytz
@@ -94,18 +95,24 @@ class ContactSyncer(BaseSyncer):
 
         org_state_boundaries_data = dict()
         org_district_boundaries_data = dict()
-        state_boundaries = Boundary.objects.filter(org=org, level=1)
+        org_ward_boundaries_data = dict()
+        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL)
         for state in state_boundaries:
             org_state_boundaries_data[state.name.lower()] = state.osm_id
             state_district_data = dict()
-            district_boundaries = Boundary.objects.filter(org=org, level=2, parent=state)
+            district_boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, parent=state)
             for district in district_boundaries:
                 state_district_data[district.name.lower()] = district.osm_id
+                district_ward_data = dict()
+                ward_boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent=district)
+                for ward in ward_boundaries:
+                    district_ward_data[ward.name.lower()] = ward.osm_id
+                org_ward_boundaries_data[district.osm_id] = district_ward_data
 
             org_district_boundaries_data[state.osm_id] = state_district_data
 
-        setattr(self, cache_attr, (org_state_boundaries_data, org_district_boundaries_data))
-        return org_state_boundaries_data, org_district_boundaries_data
+        setattr(self, cache_attr, (org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data))
+        return org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data
 
     def get_contact_fields(self, org):
         cache_attr = '__contact_fields__%d' % org.pk
@@ -126,11 +133,12 @@ class ContactSyncer(BaseSyncer):
         if not reporter_group.lower() in contact_groups_names:
             return None
 
-        org_state_boundaries_data, org_district_boundaries_data = self.get_boundaries_data(org)
+        org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data = self.get_boundaries_data(org)
         contact_fields = self.get_contact_fields(org)
 
         state = ''
         district = ''
+        ward = ''
 
         state_field = org.get_config('state_label')
         if state_field:
@@ -153,6 +161,14 @@ class ContactSyncer(BaseSyncer):
                     if district_name:
                         district_name = district_name.lower()
                         district = org_district_boundaries_data.get(state, dict()).get(district_name, '')
+
+                ward_field = org.get_config('ward_label')
+                if ward_field:
+                    ward_field = ward_field.lower()
+                    ward_name = remote.fields.get(contact_fields.get(ward_field), None)
+                    if ward_name:
+                        ward_name = ward_name.lower()
+                        ward = org_ward_boundaries_data.get(district, dict()).get(ward_name, '')
 
         registered_on = None
         registration_field = org.get_config('registration_label')
@@ -210,7 +226,8 @@ class ContactSyncer(BaseSyncer):
             'occupation': occupation,
             'registered_on': registered_on,
             'state': state,
-            'district': district
+            'district': district,
+            'ward': ward
         }
 
     def update_required(self, local, remote, local_kwargs):
@@ -221,6 +238,8 @@ class ContactSyncer(BaseSyncer):
         update = update or local.occupation != local_kwargs['occupation']
         update = update or local.registered_on != local_kwargs['registered_on']
         update = update or local.state != local_kwargs['state'] or local.district != local_kwargs['district']
+        update = update or local.ward != local_kwargs['ward']
+
         return update
 
 
@@ -289,12 +308,11 @@ class RapidProBackend(BaseBackend):
 
                 existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
 
-                poll_results_map = dict()
+                poll_results_map = defaultdict(dict)
                 for res in existing_poll_results:
-                    if res.contact not in poll_results_map:
-                        poll_results_map[res.contact] = {res.ruleset: res}
-                    else:
-                        poll_results_map[res.contact][res.ruleset] = res
+                    poll_results_map[res.contact][res.ruleset] = res
+
+                poll_results_to_save_map = defaultdict(dict)
 
                 fetch_start = time.time()
                 for fetch in fetches:
@@ -302,9 +320,6 @@ class RapidProBackend(BaseBackend):
                     print "RapidPro API fetch for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced,
                                                                                            num_synced + len(fetch),
                                                                                            time.time() - fetch_start)
-
-                    poll_result_obj_created = 0
-                    poll_result_obj_updated = 0
 
                     local_sync_start = time.time()
 
@@ -323,9 +338,11 @@ class RapidProBackend(BaseBackend):
 
                         state = ''
                         district = ''
+                        ward = ''
                         if contact_obj is not None:
                             state = contact_obj.state
                             district = contact_obj.district
+                            ward = contact_obj.ward
 
                         for temba_step in temba_run.steps:
                             ruleset_uuid = temba_step.node
@@ -334,11 +351,14 @@ class RapidProBackend(BaseBackend):
 
                             existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
+                            poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
+
                             if existing_poll_result is not None:
 
                                 update_required = existing_poll_result.category != category or existing_poll_result.text != text
                                 update_required = update_required or existing_poll_result.state != state
                                 update_required = update_required or existing_poll_result.district != district
+                                update_required = update_required or existing_poll_result.ward != ward
                                 update_required = update_required or existing_poll_result.completed != completed
 
                                 # if the reporter answered the step, check if this is a newer run
@@ -348,48 +368,65 @@ class RapidProBackend(BaseBackend):
                                 if update_required:
                                     PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
                                                                                                  state=state, district=district,
-                                                                                                 date=temba_step.left_on,
+                                                                                                 ward=ward, date=temba_step.left_on,
                                                                                                  completed=completed)
 
                                     num_updated += 1
-                                    poll_result_obj_updated += 1
-
                                 else:
                                     num_ignored += 1
 
+                            elif poll_result_to_save is not None:
+
+                                replace_save_map = poll_result_to_save.category != category or poll_result_to_save.text != text
+                                replace_save_map = replace_save_map or poll_result_to_save.state != state
+                                replace_save_map = replace_save_map or poll_result_to_save.district != district
+                                replace_save_map = replace_save_map or poll_result_to_save.ward != ward
+                                replace_save_map = replace_save_map or poll_result_to_save.completed != completed
+
+                                # replace if the step is newer
+                                if poll_result_to_save.date is not None:
+                                    replace_save_map = replace_save_map and (temba_step.left_on is None or temba_step.arrived_on > poll_result_to_save.date)
+
+                                if replace_save_map:
+                                    result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                            contact=contact_uuid, category=category, text=text,
+                                                            state=state, district=district, ward=ward,
+                                                            date=temba_step.left_on, completed=completed)
+
+                                    poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
+
+                                num_ignored += 1
                             else:
-                                new_poll_results.append(PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
-                                                                   contact=contact_uuid, category=category, text=text,
-                                                                   state=state, date=temba_step.left_on,
-                                                                   district=district, completed=completed))
+
+                                result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                        contact=contact_uuid, category=category, text=text,
+                                                        state=state, district=district, ward=ward,
+                                                        date=temba_step.left_on, completed=completed)
+
+                                poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
 
                                 num_created += 1
-                                poll_result_obj_created += 1
-
-                    PollResult.objects.bulk_create(new_poll_results)
 
                     num_synced += len(fetch)
                     if progress_callback:
                         progress_callback(num_synced)
 
-                    if poll_result_obj_created or poll_result_obj_updated:
-                        # Squash the counter by gathering the counts in one row
-                        PollResultsCounter.squash_counts()
-
-                    print "Created %d, Updated %d for poll #%d on org #%d in fetch of %d - %d runs"% (poll_result_obj_created,
-                                                                                                      poll_result_obj_updated,
-                                                                                                      poll.pk,
-                                                                                                      org.pk,
-                                                                                                      num_synced - len(fetch),
-                                                                                                      num_synced)
-
-                    print "Local sync ops for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced - len(fetch),
+                    print "Processed fetch of %d - %d runs for poll #%d on org #%d" % (num_synced - len(fetch),
                                                                                        num_synced,
-                                                                                       time.time() - local_sync_start)
-                    print "Total synced for poll #%d on org #%d %d runs in %ds" % (poll.pk, org.pk, num_synced,
-                                                                                   time.time() - start)
+                                                                                       poll.pk,
+                                                                                       org.pk)
                     fetch_start = time.time()
                     print "=" * 40
+
+                new_poll_results = []
+
+                for c_key in poll_results_to_save_map.keys():
+                    for r_key in poll_results_to_save_map.get(c_key, dict()):
+                        obj_to_create = poll_results_to_save_map.get(c_key, dict()).get(r_key, None)
+                        if obj_to_create is not None:
+                            new_poll_results.append(obj_to_create)
+
+                PollResult.objects.bulk_create(new_poll_results)
 
                 # update the time for this poll from which we fetch next time
                 cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),

@@ -497,16 +497,18 @@ def get_ureporters_locations_stats(org, segment):
     org_contacts_counts = get_org_contacts_counts(org)
 
     if field_type == 'state':
-        boundary_top_level = 0 if org.get_config('is_global') else 1
-        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name').order_by('osm_id')
+        boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('is_global') else Boundary.STATE_LEVEL
+        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name')\
+            .order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
 
     elif field_type == 'ward':
-        boundaries = Boundary.objects.filter(org=org, level=3, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
+        boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
         location_counts = {k[5:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('ward')}
 
     else:
-        boundaries = Boundary.objects.filter(org=org, level=2, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
+        boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL,
+                                             parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
         location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
 
     return [dict(boundary=elt['osm_id'], label=elt['name'], set=location_counts.get(elt['osm_id'], 0))

@@ -13,29 +13,16 @@ from ureport.utils import fetch_main_poll_results, fetch_brick_polls_results, fe
 logger = logging.getLogger(__name__)
 
 
-@app.task
-def squash_poll_results_counts():
-    from .models import PollResultsCounter
-    PollResultsCounter.squash_counts()
-
-@app.task
-def rebuild_poll_results_counts():
-    from .models import PollResult
-    PollResult.rebuild_counts()
-
-
 @org_task('backfill-poll-results')
 def backfill_poll_results(org, since, until):
-    from ureport.backend import get_backend
     from .models import Poll, PollResult
-    backend = get_backend()
 
     results_log = dict()
 
     for poll in Poll.objects.filter(org=org):
         has_filled = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
         if has_filled is None:
-            created, updated, ignored = backend.pull_results(poll, since, until)
+            created, updated, ignored = Poll.pull_results(poll.id)
             results_log['poll-%d' % poll.pk] = {"created": created, "updated": updated, "ignored": ignored}
 
     return results_log
@@ -43,14 +30,12 @@ def backfill_poll_results(org, since, until):
 
 @org_task('results-pull-main-poll')
 def pull_results_main_poll(org, since, until):
-    from ureport.backend import get_backend
     from .models import Poll
-    backend = get_backend()
 
     results_log = dict()
     main_poll = Poll.get_main_poll(org)
     if main_poll:
-        created, updated, ignored = backend.pull_results(main_poll, since, until)
+        created, updated, ignored = Poll.pull_results(main_poll.id)
         results_log['poll-%d' % main_poll.pk] = {"created": created, "updated": updated, "ignored": ignored}
 
     return results_log
@@ -58,15 +43,13 @@ def pull_results_main_poll(org, since, until):
 
 @org_task('results-pull-brick-polls')
 def pull_results_brick_polls(org, since, until):
-    from ureport.backend import get_backend
     from .models import Poll
-    backend = get_backend()
 
     results_log = dict()
 
     brick_polls = Poll.get_brick_polls(org)[:5]
     for poll in brick_polls:
-        created, updated, ignored = backend.pull_results(poll, since, until)
+        created, updated, ignored = Poll.pull_results(poll.id)
         results_log['poll-%d' % poll.pk] = {"created": created, "updated": updated, "ignored": ignored}
 
     return results_log
@@ -74,14 +57,12 @@ def pull_results_brick_polls(org, since, until):
 
 @org_task('results-pull-other-polls')
 def pull_results_other_polls(org, since, until):
-    from ureport.backend import get_backend
     from .models import Poll
-    backend = get_backend()
 
     results_log = dict()
     other_polls = Poll.get_other_polls(org)
     for poll in other_polls:
-        created, updated, ignored = backend.pull_results(poll, since, until)
+        created, updated, ignored = Poll.pull_results(poll.id)
         results_log['poll-%d' % poll.pk] = {"created": created, "updated": updated, "ignored": ignored}
 
     return results_log
