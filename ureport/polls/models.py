@@ -469,6 +469,10 @@ class PollQuestion(SmartModel):
     Represents a single question that was asked in a poll, these questions tie 1-1 to
     the RuleSets in a flow.
     """
+
+    POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
+    POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 5
+
     poll = models.ForeignKey(Poll, related_name='questions',
                              help_text=_("The poll this question is part of"))
     title = models.CharField(max_length=255,
@@ -526,6 +530,15 @@ class PollQuestion(SmartModel):
             traceback.print_exc()
 
     def get_results(self, segment=None):
+        key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+        if segment:
+            substituted_segment = self.poll.org.substitute_segment(segment)
+            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+
+        cached_value = cache.get(key, None)
+        if cached_value:
+            return cached_value["results"]
+
         org = self.poll.org
         open_ended = self.is_open_ended()
         responded = self.get_responded()
@@ -614,6 +627,8 @@ class PollQuestion(SmartModel):
                         categories.append(dict(count=category_count, label=categorie_label))
 
                 results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+
+        cache.set(key, {"results": results}, PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT)
 
         return results
 
