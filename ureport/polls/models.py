@@ -214,7 +214,8 @@ class Poll(SmartModel):
 
         for question in self.questions.filter(is_active=True):
             question.fetch_results()
-            question.fetch_results(dict(location='State'))
+            if question.poll.org.get_config('state_label'):
+                question.fetch_results(dict(location='State'))
 
     @classmethod
     def fetch_poll_results_task(cls, poll):

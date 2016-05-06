@@ -965,6 +965,13 @@ class PollTest(DashTest):
             poll1_question.save()
 
             poll1.fetch_poll_results()
+            self.assertEqual(mock.call_count, 1)
+            mock.assert_any_call()
+            mock.reset_mock()
+
+            self.uganda.set_config('state_label', 'Province')
+
+            poll1.fetch_poll_results()
             self.assertEqual(mock.call_count, 2)
             mock.assert_any_call()
             mock.assert_any_call(dict(location='State'))
