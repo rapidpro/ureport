@@ -587,7 +587,7 @@ class PollQuestion(SmartModel):
 
                 location_part = segment.get('location').lower()
 
-                if location_part not in ['state', 'district']:
+                if location_part not in ['state', 'district', 'ward']:
                     return None
 
                 location_boundaries = org.get_segment_org_boundaries(segment)
@@ -610,6 +610,8 @@ class PollQuestion(SmartModel):
                         from ureport.contacts.models import Contact
                         if segment.get('location') == 'District':
                             boundary_contacts_count = Contact.objects.filter(org=org, district=osm_id).count()
+                        elif segment.get('location') == 'Ward':
+                            boundary_contacts_count = Contact.objects.filter(org=org, ward=osm_id).count()
                         else:
                             boundary_contacts_count = Contact.objects.filter(org=org, state=osm_id).count()
                         unset_count = boundary_contacts_count - set_count
