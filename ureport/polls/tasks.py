@@ -74,6 +74,13 @@ def pull_refresh(poll_id):
     Poll.pull_results(poll_id)
 
 
+@app.task(name='polls.rebuild_counts')
+def rebuild_counts():
+    from .models import Poll
+    for poll in Poll.objects.all():
+        poll.rebuild_poll_results_counts()
+
+
 @app.task(name='polls.refresh_main_poll')
 def refresh_main_poll(org_id=None):
 
