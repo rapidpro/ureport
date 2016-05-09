@@ -18,7 +18,7 @@ from dash.categories.models import Category
 from dash.orgs.models import Org
 from ureport.news.models import Video, NewsItem
 import pycountry
-from ureport.utils import get_linked_orgs, get_global_count
+from ureport.utils import get_linked_orgs, clean_global_results_data, get_global_count
 
 
 class IndexView(SmartTemplateView):
@@ -194,6 +194,8 @@ class PollQuestionResultsView(SmartReadView):
             segment = json.loads(segment)
 
         results = self.object.get_results(segment=segment)
+
+        results = clean_global_results_data(self.request.org, results, segment)
 
         return HttpResponse(json.dumps(results))
 
