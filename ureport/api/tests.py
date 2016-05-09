@@ -264,7 +264,7 @@ class UreportAPITests(APITestCase):
                                                   get_image_url(poll.category))))
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock_get_results:
-            mock_get_results.return_value = [dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")]
+            mock_get_results.return_value = [dict(label="All", set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")]
 
             poll_question = PollQuestion.objects.create(poll=self.reg_poll, title="What's on mind? :)",
                                                         ruleset_uuid='uuid1', created_by=self.superuser,

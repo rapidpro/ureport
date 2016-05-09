@@ -864,6 +864,7 @@ class PerfTest(DashTest):
         from django_redis import get_redis_connection
         redis_client = get_redis_connection()
 
+
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
@@ -1071,21 +1072,3 @@ class PerfTest(DashTest):
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, num_fetches * fetch_size * num_steps - 1))
-
-        mock_cache_get.side_effect = [now_date, None, now_date, now_date]
-        with patch("ureport.polls.models.Poll.delete_poll_results") as mock_delete_poll_results:
-            mock_delete_poll_results.return_value = "Deleted"
-
-            mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
-
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
-
-            self.assertFalse(mock_delete_poll_results.called)
-
-            redis_client.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk), now_date, None)
-
-            mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
-
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
-
-            mock_delete_poll_results.assert_called_with()
