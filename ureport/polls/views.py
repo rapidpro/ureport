@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from ureport.utils import json_date_to_datetime
 from .models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_ORG_FLOWS_KEY
-from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView, SmartReadView
+from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
@@ -96,7 +96,7 @@ class QuestionForm(ModelForm):
 
 class PollCRUDL(SmartCRUDL):
     model = Poll
-    actions = ('create', 'list', 'update', 'questions', 'images', 'responses', 'pull_refresh')
+    actions = ('create', 'list', 'update', 'questions', 'images', 'responses')
 
     class Create(OrgPermsMixin, SmartCreateView):
         form_class = PollForm
@@ -370,14 +370,3 @@ class PollCRUDL(SmartCRUDL):
             obj = super(PollCRUDL.Update, self).post_save(obj)
             obj.update_or_create_questions(user=self.request.user)
             return obj
-
-    class PullRefresh(SmartUpdateView):
-        fields = ('id',)
-        success_url = '@polls.poll_list'
-        success_message = None
-
-        def post_save(self, obj):
-            poll_id = int(self.request.REQUEST['poll'])
-            poll = Poll.objects.get(pk=poll_id)
-            poll.pull_refresh_task()
-            self.success_message = _("Scheduled a pull refresh for poll #%d on org #%d") % (poll.pk, poll.org_id)

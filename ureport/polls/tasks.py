@@ -68,12 +68,6 @@ def pull_results_other_polls(org, since, until):
     return results_log
 
 
-@app.task(name='polls.pull_refresh')
-def pull_refresh(poll_id):
-    from .models import Poll
-    Poll.pull_results(poll_id)
-
-
 @app.task(name='polls.refresh_main_poll')
 def refresh_main_poll(org_id=None):
 

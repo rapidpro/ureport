@@ -58,4 +58,3 @@ wheel==0.24.0
 xlrd==0.9.3
 xlutils==1.7.1
 xlwt==1.0.0
-stop-words==2015.2.23.1
