@@ -298,7 +298,7 @@ class RapidProBackend(BaseBackend):
 
                 # ignore the TaskState time and use the time we stored in redis
                 now = timezone.now()
-                after = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
+                after = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
 
                 start = time.time()
                 print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
@@ -434,7 +434,7 @@ class RapidProBackend(BaseBackend):
                 PollResult.objects.bulk_create(new_poll_results)
 
                 # update the time for this poll from which we fetch next time
-                cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
+                cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
                           datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
 
                 # from django.db import connection as db_connection, reset_queries

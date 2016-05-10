@@ -20,7 +20,7 @@ def backfill_poll_results(org, since, until):
     results_log = dict()
 
     for poll in Poll.objects.filter(org=org):
-        has_filled = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
+        has_filled = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
         if has_filled is None:
             created, updated, ignored = Poll.pull_results(poll.id)
             results_log['poll-%d' % poll.pk] = {"created": created, "updated": updated, "ignored": ignored}

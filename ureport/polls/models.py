@@ -79,6 +79,10 @@ class Poll(SmartModel):
 
     POLL_PULL_RESULTS_TASK_LOCK = 'poll-pull-results-task-lock:%s:%s'
 
+    POLL_REBUILD_COUNTS_LOCK = 'poll-rebuild-counts-lock:org:%d:poll:%d'
+
+    POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%d'
+
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
     poll_date = models.DateTimeField(help_text=_("The date to display for this poll. "
@@ -154,7 +158,7 @@ class Poll(SmartModel):
 
         r = get_redis_connection()
 
-        key = PollResult.POLL_REBUILD_COUNTS_LOCK % (org_id, poll_id)
+        key = Poll.POLL_REBUILD_COUNTS_LOCK % (org_id, poll_id)
 
         if r.get(key):
             print "Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id)
@@ -591,12 +595,6 @@ class PollResponseCategory(models.Model):
 
 class PollResult(models.Model):
 
-    POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%d'
-
-    POLL_REBUILD_COUNTS_LOCK = 'poll-rebuild-counts-lock:org:%d:poll:%d'
-
-    POLL_REBUILD_COUNTS_FINISHED_FLAG = 'poll-counts-finished:org:%d:poll:%d'
-
     org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
 
     flow = models.CharField(max_length=36)
@@ -680,9 +678,6 @@ class PollResult(models.Model):
 
 
 class PollResultsCounter(models.Model):
-
-    LAST_SQUASH_KEY = 'last-poll-results-counter-squash'
-    COUNTS_SQUASH_LOCK = 'poll-results-counter-squash-lock'
 
     org = models.ForeignKey(Org, related_name='results_counters')
 
