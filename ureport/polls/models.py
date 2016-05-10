@@ -676,7 +676,7 @@ class PollResult(models.Model):
         return generated_counters
 
     class Meta:
-        index_together = ["org", "flow"]
+        index_together = [["org", "flow"], ["org", "flow", "ruleset", "text"]]
 
 
 class PollResultsCounter(models.Model):
