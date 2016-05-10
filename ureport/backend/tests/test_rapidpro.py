@@ -689,7 +689,7 @@ class RapidProBackendTest(DashTest):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
-        mock_get_runs.assert_called_with(flow='flow-uuid', responded=True, after=None, before=now)
+        mock_get_runs.assert_called_with(flow='flow-uuid', after=None, before=now)
 
         poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
         self.assertEqual(poll_result.state, 'R-LAGOS')
@@ -797,7 +797,7 @@ class RapidProBackendTest(DashTest):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
-        mock_get_runs.assert_called_with(flow='flow-uuid-3', responded=True, after=None, before=now)
+        mock_get_runs.assert_called_with(flow='flow-uuid-3', after=None, before=now)
 
         poll_result = PollResult.objects.filter(flow='flow-uuid-3', ruleset='ruleset-uuid', contact='C-021').first()
         self.assertEqual(poll_result.ward, 'R-IKEJA')
@@ -912,6 +912,8 @@ class PerfTest(DashTest):
 
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
+        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before=now)
+
         self.assertEqual((num_created, num_updated, num_ignored), (num_fetches * fetch_size * num_steps, 0, 0))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
@@ -983,6 +985,33 @@ class PerfTest(DashTest):
 
         self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size,
                                                                    num_fetches * fetch_size * (num_steps - 1)))
+
+        slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        for q in slowest_queries:
+            print "=" * 60
+            print "\n\n\n"
+            print "%s -- %s" % (q['time'], q['sql'])
+
+        reset_queries()
+
+        # simulate ignoring actionset nodes
+        for batch in active_fetches:
+            for r in batch:
+                r.steps[0] = TembaStep.create(node='actionset-uuid-0',
+                                              text="What do you think?",
+                                              value="",
+                                              category='',
+                                              type='actionset',
+                                              arrived_on=now + timedelta(minutes=5), left_on=now)
+
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+        start = time.time()
+
+        redis_client.delete(key)
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, num_fetches * fetch_size * num_steps))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
