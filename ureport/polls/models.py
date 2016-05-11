@@ -358,9 +358,9 @@ class Poll(SmartModel):
         The response rate for this poll
         """
         top_question = self.get_questions().first()
-        if top_question and self.runs_count:
+        if top_question:
             responded = top_question.get_responded()
-            polled = self.runs_count
+            polled = top_question.get_polled()
             percentage = int(round((float(responded) * 100.0) / float(polled)))
             return "%s" % str(percentage) + "%"
         return '---'
@@ -409,8 +409,9 @@ class Poll(SmartModel):
         return self.images.filter(is_active=True).order_by('pk')
 
     def runs(self):
-        if self.runs_count:
-            return self.runs_count
+        top_question = self.get_questions().first()
+        if top_question:
+            return top_question.get_polled()
         return "----"
 
     def responded_runs(self):
@@ -650,14 +651,6 @@ class PollQuestion(SmartModel):
         return results.get(key, 0)
 
     def get_polled(self):
-        first_question = self.poll.get_questions()[0]
-        if self.pk == first_question.pk:
-            try:
-                polled = int(self.poll.runs_count)
-            except ValueError:
-                polled = 0
-            return polled
-
         results = self.get_question_results()
         key = 'ruleset:%s:total-ruleset-polled' % self.ruleset_uuid
         return results.get(key, 0)
