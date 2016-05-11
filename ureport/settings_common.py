@@ -583,7 +583,7 @@ REST_FRAMEWORK = {
 
 SWAGGER_SETTINGS = {
     'api_version': '0.1',
-    'api_path': '/api/v1/',
+    'api_path': '/',
     'enabled_methods': [
         'get'
     ],
