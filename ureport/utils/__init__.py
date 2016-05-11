@@ -559,12 +559,14 @@ def get_segment_org_boundaries(org, segment):
     if segment.get('location') == 'District':
         state_id = segment.get('parent', None)
         if state_id:
-            location_boundaries = org.boundaries.filter(level=2, parent__osm_id=state_id).values('osm_id', 'name').order_by('osm_id')
+            location_boundaries = org.boundaries.filter(level=2,
+                                                        is_active=True,
+                                                        parent__osm_id=state_id).values('osm_id', 'name').order_by('osm_id')
     else:
         if org.get_config('is_global'):
-            location_boundaries = org.boundaries.filter(level=0).values('osm_id', 'name').order_by('osm_id')
+            location_boundaries = org.boundaries.filter(level=0, is_active=True).values('osm_id', 'name').order_by('osm_id')
         else:
-            location_boundaries = org.boundaries.filter(level=1).values('osm_id', 'name').order_by('osm_id')
+            location_boundaries = org.boundaries.filter(level=1, is_active=True).values('osm_id', 'name').order_by('osm_id')
 
     return location_boundaries
 
