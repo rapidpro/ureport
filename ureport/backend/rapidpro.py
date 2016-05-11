@@ -298,7 +298,7 @@ class RapidProBackend(BaseBackend):
 
                 # ignore the TaskState time and use the time we stored in redis
                 now = timezone.now()
-                after = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
+                after = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
 
                 pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (org.pk, poll.pk), None)
                 if pull_after_delete is not None:
@@ -308,7 +308,7 @@ class RapidProBackend(BaseBackend):
                 start = time.time()
                 print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
-                poll_runs_query = client.get_runs(flow=poll.flow_uuid, responded=True, after=after, before=now)
+                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=now)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
 
                 existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
@@ -349,6 +349,11 @@ class RapidProBackend(BaseBackend):
                             ruleset_uuid = temba_step.node
                             category = temba_step.category
                             text = temba_step.text
+                            step_type = temba_step.type
+
+                            if step_type != 'ruleset':
+                                num_ignored += 1
+                                continue
 
                             existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
@@ -430,7 +435,7 @@ class RapidProBackend(BaseBackend):
                 PollResult.objects.bulk_create(new_poll_results)
 
                 # update the time for this poll from which we fetch next time
-                cache.set(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
+                cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk),
                           datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
 
                 # from django.db import connection as db_connection, reset_queries

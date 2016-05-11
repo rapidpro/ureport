@@ -351,10 +351,17 @@ class PollTest(DashTest):
 
         self.assertEquals(poll1.runs(), "----")
 
-        poll1.runs_count = 100
-        poll1.save()
+        poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                     title='question poll 1',
+                                                     ruleset_uuid="uuid-101",
+                                                     created_by=self.admin,
+                                                     modified_by=self.admin)
 
-        self.assertEquals(poll1.runs(), 100)
+        with patch('ureport.polls.models.PollQuestion.get_polled') as mock:
+            mock.return_value = 100
+
+            self.assertEquals(poll1.runs(), 100)
+            mock.assert_called_with()
 
     def test_responded_runs(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -384,16 +391,11 @@ class PollTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        with patch('ureport.polls.models.PollQuestion.get_responded') as mock_responded:
-            mock_responded.return_value = 40
-
-            self.assertEquals(poll1.response_percentage(), "---")
-
-            poll1.runs_count = 100
-            poll1.save()
+        with patch('ureport.polls.models.PollQuestion.get_response_percentage') as mock_response_percentage:
+            mock_response_percentage.return_value = "40%"
 
             self.assertEquals(poll1.response_percentage(), "40%")
-            mock_responded.assert_called_with()
+            mock_response_percentage.assert_called_with()
 
     def test_get_featured_images(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -963,6 +965,13 @@ class PollTest(DashTest):
 
             poll1_question.is_active = True
             poll1_question.save()
+
+            poll1.fetch_poll_results()
+            self.assertEqual(mock.call_count, 1)
+            mock.assert_any_call()
+            mock.reset_mock()
+
+            self.uganda.set_config('state_label', 'Province')
 
             poll1.fetch_poll_results()
             self.assertEqual(mock.call_count, 2)

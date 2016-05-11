@@ -20,7 +20,7 @@ def backfill_poll_results(org, since, until):
     results_log = dict()
 
     for poll in Poll.objects.filter(org=org):
-        has_filled = cache.get(PollResult.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
+        has_filled = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.pk), None)
         if has_filled is None:
             created, updated, ignored = Poll.pull_results(poll.id)
             results_log['poll-%d' % poll.pk] = {"created": created, "updated": updated, "ignored": ignored}
@@ -72,6 +72,13 @@ def pull_results_other_polls(org, since, until):
 def pull_refresh(poll_id):
     from .models import Poll
     Poll.pull_results(poll_id)
+
+
+@app.task(name='polls.rebuild_counts')
+def rebuild_counts():
+    from .models import Poll
+    for poll in Poll.objects.all():
+        poll.rebuild_poll_results_counts()
 
 
 @app.task(name='polls.refresh_main_poll')
