@@ -1062,9 +1062,30 @@ class PerfTest(DashTest):
 
         start = time.time()
 
-        for batch in active_fetches:
-            for r in batch:
-                r.contact = ObjectRef.create(uuid='C-001', name='Will')
+        # same contact, same ruleset, same or previous time should all be ignored, only insert one, ignore others
+        active_fetches = []
+        for b in range(0, num_fetches):
+            batch = []
+            for r in range(0, fetch_size):
+                num = b * fetch_size + r
+                batch.append(TembaRun.create(
+                    id=num,
+                    flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                    contact=ObjectRef.create(uuid='C-001', name='Will'),
+                    responded=True,
+                    steps=[TembaStep.create(node='ruleset-uuid-0',
+                                            text="Text %s" % s,
+                                            value="Value %s" % s,
+                                            category='Category %s' % s,
+                                            type='ruleset',
+                                            arrived_on=now, left_on=now)
+                           for s in range(0, num_steps)],
+                    created_on=now,
+                    modified_on=now,
+                    exited_on=now,
+                    exit_type=''))
+
+            active_fetches.append(batch)
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
