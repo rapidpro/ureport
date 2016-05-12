@@ -1291,7 +1291,7 @@ class PollsTasksTest(DashTest):
             pull_results_main_poll(self.nigeria.pk)
 
             task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-main-poll')
-            self.assertEqual(task_state.get_last_results()['poll-%d' % self.poll.pk],
+            self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
                              {'created': 1, 'updated': 2, 'ignored': 3})
 
     @patch('ureport.tests.TestBackend.pull_results')
@@ -1308,7 +1308,7 @@ class PollsTasksTest(DashTest):
             pull_results_brick_polls(self.nigeria.pk)
 
             task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-brick-polls')
-            self.assertEqual(task_state.get_last_results()['poll-%d' % self.poll.pk],
+            self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
                              {'created': 1, 'updated': 2, 'ignored': 3})
 
     @patch('ureport.tests.TestBackend.pull_results')
@@ -1325,7 +1325,7 @@ class PollsTasksTest(DashTest):
             pull_results_other_polls(self.nigeria.pk)
 
             task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-other-polls')
-            self.assertEqual(task_state.get_last_results()['poll-%d' % self.poll.pk],
+            self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
                              {'created': 1, 'updated': 2, 'ignored': 3})
 
     @patch('ureport.tests.TestBackend.pull_results')
@@ -1347,7 +1347,7 @@ class PollsTasksTest(DashTest):
                 backfill_poll_results(self.nigeria.pk)
 
                 task_state = TaskState.objects.get(org=self.nigeria, task_key='backfill-poll-results')
-                self.assertEqual(task_state.get_last_results()['poll-%d' % self.poll.pk],
+                self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
                                  {'created': 1, 'updated': 2, 'ignored': 3})
 
                 mock_pull_results.assert_called_once()
