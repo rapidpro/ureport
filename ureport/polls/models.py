@@ -79,9 +79,9 @@ class Poll(SmartModel):
 
     POLL_PULL_RESULTS_TASK_LOCK = 'poll-pull-results-task-lock:%s:%s'
 
-    POLL_REBUILD_COUNTS_LOCK = 'poll-rebuild-counts-lock:org:%d:poll:%d'
+    POLL_REBUILD_COUNTS_LOCK = 'poll-rebuild-counts-lock:org:%d:poll:%s'
 
-    POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%d'
+    POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%s'
 
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
@@ -158,7 +158,7 @@ class Poll(SmartModel):
 
         r = get_redis_connection()
 
-        key = Poll.POLL_REBUILD_COUNTS_LOCK % (org_id, poll_id)
+        key = Poll.POLL_REBUILD_COUNTS_LOCK % (org_id, flow)
 
         if r.get(key):
             print "Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id)

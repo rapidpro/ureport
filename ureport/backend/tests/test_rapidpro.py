@@ -872,7 +872,7 @@ class PerfTest(DashTest):
 
         poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
 
-        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.pk)
+        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid)
         redis_client.delete(key)
 
         now = timezone.now()
