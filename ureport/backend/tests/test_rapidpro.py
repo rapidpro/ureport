@@ -864,7 +864,6 @@ class PerfTest(DashTest):
         from django_redis import get_redis_connection
         redis_client = get_redis_connection()
 
-
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
@@ -872,7 +871,7 @@ class PerfTest(DashTest):
 
         poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
 
-        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.pk)
+        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid)
         redis_client.delete(key)
 
         now = timezone.now()
