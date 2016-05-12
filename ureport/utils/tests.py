@@ -674,6 +674,11 @@ class UtilsTest(DashTest):
         self.district = Boundary.objects.create(org=self.org, osm_id="R-DISTRICT", name="District", level=2,
                                                 parent=self.state, geometry='{"foo":"bar-district"}')
 
+        inactive_district = Boundary.objects.create(org=self.org, osm_id="R-DISTRICT2", name="District", level=2,
+                                                    parent=self.state, geometry='{"foo":"bar-district"}')
+        inactive_district.is_active = False
+        inactive_district.save()
+
         ReportersCounter.objects.create(org=self.org, type='state:R-STATE', count=5)
         ReportersCounter.objects.create(org=self.org, type='district:R-DISTRICT', count=3)
 
