@@ -306,14 +306,6 @@ class RapidProBackend(BaseBackend):
                 poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=now)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
 
-                existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
-
-                poll_results_map = defaultdict(dict)
-                for res in existing_poll_results:
-                    poll_results_map[res.contact][res.ruleset] = res
-
-                poll_results_to_save_map = defaultdict(dict)
-
                 fetch_start = time.time()
                 for fetch in fetches:
 
@@ -321,13 +313,17 @@ class RapidProBackend(BaseBackend):
                                                                                            num_synced + len(fetch),
                                                                                            time.time() - fetch_start)
 
-                    local_sync_start = time.time()
+                    existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
+
+                    poll_results_map = defaultdict(dict)
+                    for res in existing_poll_results:
+                        poll_results_map[res.contact][res.ruleset] = res
+
+                    poll_results_to_save_map = defaultdict(dict)
 
                     contact_uuids = [run.contact.uuid for run in fetch]
                     contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
                     contacts_map = {c.uuid: c for c in contacts}
-
-                    new_poll_results = []
 
                     for temba_run in fetch:
                         flow_uuid = temba_run.flow.uuid
@@ -416,22 +412,22 @@ class RapidProBackend(BaseBackend):
                     if progress_callback:
                         progress_callback(num_synced)
 
+                    new_poll_results = []
+
+                    for c_key in poll_results_to_save_map.keys():
+                        for r_key in poll_results_to_save_map.get(c_key, dict()):
+                            obj_to_create = poll_results_to_save_map.get(c_key, dict()).get(r_key, None)
+                            if obj_to_create is not None:
+                                new_poll_results.append(obj_to_create)
+
+                    PollResult.objects.bulk_create(new_poll_results)
+
                     print "Processed fetch of %d - %d runs for poll #%d on org #%d" % (num_synced - len(fetch),
                                                                                        num_synced,
                                                                                        poll.pk,
                                                                                        org.pk)
                     fetch_start = time.time()
                     print "=" * 40
-
-                new_poll_results = []
-
-                for c_key in poll_results_to_save_map.keys():
-                    for r_key in poll_results_to_save_map.get(c_key, dict()):
-                        obj_to_create = poll_results_to_save_map.get(c_key, dict()).get(r_key, None)
-                        if obj_to_create is not None:
-                            new_poll_results.append(obj_to_create)
-
-                PollResult.objects.bulk_create(new_poll_results)
 
                 # update the time for this poll from which we fetch next time
                 cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
