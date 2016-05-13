@@ -313,17 +313,17 @@ class RapidProBackend(BaseBackend):
                                                                                            num_synced + len(fetch),
                                                                                            time.time() - fetch_start)
 
-                    existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id)
+                    contact_uuids = [run.contact.uuid for run in fetch]
+                    contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
+                    contacts_map = {c.uuid: c for c in contacts}
+
+                    existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id, contact__in=contact_uuids)
 
                     poll_results_map = defaultdict(dict)
                     for res in existing_poll_results:
                         poll_results_map[res.contact][res.ruleset] = res
 
                     poll_results_to_save_map = defaultdict(dict)
-
-                    contact_uuids = [run.contact.uuid for run in fetch]
-                    contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
-                    contacts_map = {c.uuid: c for c in contacts}
 
                     for temba_run in fetch:
                         flow_uuid = temba_run.flow.uuid
