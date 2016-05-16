@@ -19,11 +19,9 @@ def backfill_poll_results(org, since, until):
 
     results_log = dict()
 
-    for poll in Poll.objects.filter(org=org).distinct('flow_uuid'):
-        has_filled = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), None)
-        if has_filled is None:
-            created, updated, ignored = Poll.pull_results(poll.id)
-            results_log['flow-%s' % poll.flow_uuid] = {"created": created, "updated": updated, "ignored": ignored}
+    for poll in Poll.objects.filter(org=org, has_synced=False).distinct('flow_uuid'):
+        created, updated, ignored = Poll.pull_results(poll.id)
+        results_log['flow-%s' % poll.flow_uuid] = {"created": created, "updated": updated, "ignored": ignored}
 
     return results_log
 

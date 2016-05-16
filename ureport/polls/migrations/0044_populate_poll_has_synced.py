@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         synced_polls = []
 
         for question in PollQuestion.objects.all():
-            if PollResultsCounter.objects.filter(org=question.org, ruleset=question.ruleset_uuid).exists():
+            if PollResultsCounter.objects.filter(org=question.poll.org, ruleset=question.ruleset_uuid).exists():
                 synced_polls.append(question.poll_id)
 
         Poll.objects.filter(pk__in=synced_polls).update(has_synced=True)

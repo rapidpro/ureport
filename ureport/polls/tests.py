@@ -45,11 +45,35 @@ class PollTest(DashTest):
                                                          created_by=self.admin,
                                                          modified_by=self.admin)
 
+    def test_get_public_polls(self):
+
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
+
+        poll3 = self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin, has_synced=True)
+
+        self.assertTrue(Poll.get_public_polls(self.uganda))
+        self.assertEqual(Poll.get_public_polls(self.uganda).count(), 1)
+        self.assertTrue(poll2 in Poll.get_public_polls(self.uganda))
+
+        self.health_uganda.is_active = False
+        self.health_uganda.save()
+
+        self.assertFalse(Poll.get_public_polls(self.uganda))
+
+        self.health_uganda.is_active = True
+        self.health_uganda.save()
+
+        poll2.is_active = False
+        poll2.save()
+
+        self.assertFalse(Poll.get_public_polls(self.uganda))
+
     def test_poll_get_main_poll(self):
         self.assertIsNone(Poll.get_main_poll(self.uganda))
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
         self.assertEquals(unicode(poll1), 'Poll 1')
 
@@ -65,7 +89,7 @@ class PollTest(DashTest):
         self.assertEquals(Poll.get_main_poll(self.uganda), poll1)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
-        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin)
+        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
         poll2_question = PollQuestion.objects.create(poll=poll2,
                                                      title='question poll 2',
@@ -76,7 +100,7 @@ class PollTest(DashTest):
         self.assertEquals(Poll.get_main_poll(self.uganda), poll2)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
-        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin)
+        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
         poll3_question = PollQuestion.objects.create(poll=poll3,
                                                      title='question poll 3',
@@ -109,7 +133,7 @@ class PollTest(DashTest):
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True, has_synced=True)
 
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
@@ -123,7 +147,7 @@ class PollTest(DashTest):
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
-        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin)
+        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
@@ -155,7 +179,7 @@ class PollTest(DashTest):
         self.health_uganda.is_active = True
         self.health_uganda.save()
 
-        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin)
+        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
         self.assertTrue(Poll.get_brick_polls(self.uganda))
         self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
@@ -203,7 +227,7 @@ class PollTest(DashTest):
         polls = []
         for i in range(10):
             poll = self.create_poll(self.uganda, "Poll %s" % i, "uuid-%s" % i, self.health_uganda,
-                                    self.admin, featured=True)
+                                    self.admin, featured=True, has_synced=True)
             PollQuestion.objects.create(poll=poll, title='question poll %s' % i, ruleset_uuid='uuid-10-%s' % i,
                                         created_by=self.admin, modified_by=self.admin)
 
@@ -1355,18 +1379,20 @@ class PollsTasksTest(DashTest):
                                                'LOCATION': '127.0.0.1:6379:1',
                                                'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
                                                }}):
-            with patch('django.core.cache.cache.get') as cache_get_mock:
-                cache_get_mock.return_value = "Filled"
 
-                backfill_poll_results(self.nigeria.pk)
-                self.assertFalse(mock_pull_results.called)
+            self.poll.has_synced = True
+            self.poll.save()
 
-                cache_get_mock.return_value = None
+            backfill_poll_results(self.nigeria.pk)
+            self.assertFalse(mock_pull_results.called)
 
-                backfill_poll_results(self.nigeria.pk)
+            self.poll.has_synced = False
+            self.poll.save()
 
-                task_state = TaskState.objects.get(org=self.nigeria, task_key='backfill-poll-results')
-                self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
+            backfill_poll_results(self.nigeria.pk)
+
+            task_state = TaskState.objects.get(org=self.nigeria, task_key='backfill-poll-results')
+            self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
                                  {'created': 1, 'updated': 2, 'ignored': 3})
 
-                mock_pull_results.assert_called_once()
+            mock_pull_results.assert_called_once()
