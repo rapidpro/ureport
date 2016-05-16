@@ -96,6 +96,9 @@ class Poll(SmartModel):
     runs_count = models.IntegerField(default=0,
                                      help_text=_("The number of polled reporters on this poll"))
 
+    has_synced = models.BooleanField(default=False,
+                                     help_text=_("Whether the poll has finished the initial results sync."))
+
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
     category = models.ForeignKey(Category, related_name="polls",
