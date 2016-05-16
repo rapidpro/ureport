@@ -120,6 +120,8 @@ class Poll(SmartModel):
 
         poll.rebuild_poll_results_counts()
 
+        Poll.objects.filter(pk=poll_id).update(has_synced=True)
+
         return created, updated, ignored
 
     def delete_poll_results_counter(self):

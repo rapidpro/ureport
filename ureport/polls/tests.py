@@ -971,6 +971,25 @@ class PollTest(DashTest):
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
 
+    @patch('ureport.tests.TestBackend.pull_results')
+    def test_poll_pull_results(self, mock_pull_results):
+        mock_pull_results.return_value = (1, 2, 3)
+
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+
+        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               }}):
+
+            self.assertFalse(poll.has_synced)
+            Poll.pull_results(poll.pk)
+
+            poll = Poll.objects.get(pk=poll.pk)
+            self.assertTrue(poll.has_synced)
+
+            mock_pull_results.assert_called_once()
+
 
 class PollQuestionTest(DashTest):
     def setUp(self):
