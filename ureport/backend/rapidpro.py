@@ -300,6 +300,11 @@ class RapidProBackend(BaseBackend):
                 now = timezone.now()
                 after = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), None)
 
+                pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (org.pk, poll.pk), None)
+                if pull_after_delete is not None:
+                    after = None
+                    poll.delete_poll_results()
+
                 start = time.time()
                 print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 

@@ -33,3 +33,4 @@ pycountry
 django-countries
 GitPython
 regex
+stop-words

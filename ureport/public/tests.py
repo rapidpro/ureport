@@ -491,7 +491,6 @@ class PublicTest(DashTest):
         self.assertEquals(response.context['org'], self.uganda)
         self.assertTrue('All U-Report services (all msg on 3000) are free.' in response.content)
 
-
     def test_ureporters(self):
         ureporters_url = reverse('public.ureporters')
 
@@ -721,6 +720,12 @@ class PublicTest(DashTest):
         self.assertTrue(poll3 not in response.context['polls'])
         self.assertEquals(response.context['polls'][0], poll1)
 
+        poll1.has_synced = False
+        poll1.save()
+
+        response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
+        self.assertFalse(response.context['polls'])
+
     @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_polls_read(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
@@ -731,8 +736,20 @@ class PublicTest(DashTest):
         nigeria_poll_read_url = reverse('public.poll_read', args=[poll2.pk])
 
         response = self.client.get(uganda_poll_read_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 404)
+
+        poll1.has_synced = True
+        poll1.save()
+
+        response = self.client.get(uganda_poll_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response.context['object'], poll1)
+
+        response = self.client.get(nigeria_poll_read_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 404)
+
+        poll2.has_synced = True
+        poll2.save()
 
         response = self.client.get(nigeria_poll_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 404)
@@ -923,9 +940,11 @@ class PublicTest(DashTest):
                                       created_by=self.admin,
                                       modified_by=self.admin)
 
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", education_uganda, self.admin)
+
+        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin)
 
         uganda_story_read_url = reverse('public.story_read', args=[story1.pk])
         nigeria_story_read_url = reverse('public.story_read', args=[story4.pk])
@@ -947,6 +966,7 @@ class PublicTest(DashTest):
 
         self.assertEquals(len(response.context['related_polls']), 1)
         self.assertEquals(response.context['related_polls'][0], poll1)
+        self.assertFalse(poll3 in response.context['related_polls'])
 
         self.assertEquals(len(response.context['related_stories']), 1)
         self.assertEquals(response.context['related_stories'][0], story3)

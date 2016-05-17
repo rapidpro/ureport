@@ -18,6 +18,7 @@ from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
 from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
+from stop_words import safe_get_stop_words
 
 from django_redis import get_redis_connection
 
@@ -82,6 +83,8 @@ class Poll(SmartModel):
     POLL_REBUILD_COUNTS_LOCK = 'poll-rebuild-counts-lock:org:%d:poll:%s'
 
     POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%s'
+
+    POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = 'poll-results-pull-after-delete-flag:%s:%s'
 
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
@@ -163,6 +166,22 @@ class Poll(SmartModel):
 
         print "Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id)
 
+        cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
+
+    @classmethod
+    def pull_poll_results_task(cls, poll):
+        from ureport.polls.tasks import pull_refresh
+        pull_refresh.apply_async((poll.pk,), queue='sync')
+
+    def pull_refresh_task(self):
+        from ureport.utils import datetime_to_json_date
+
+        now = timezone.now()
+        cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk),
+                  datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+
+        Poll.pull_poll_results_task(self)
+
     def rebuild_poll_results_counts(self):
         from ureport.utils import chunk_list
         import time
@@ -229,13 +248,8 @@ class Poll(SmartModel):
         fetch_poll.delay(poll.pk)
 
     @classmethod
-    def pull_poll_results_task(cls, poll):
-        from ureport.polls.tasks import pull_refresh
-        pull_refresh.apply_async((poll.pk,), queue='sync')
-
-    @classmethod
     def get_public_polls(cls, org):
-        return Poll.objects.filter(org=org, is_active=True, category__is_active=True)
+        return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True)
 
     @classmethod
     def get_main_poll(cls, org):
@@ -375,7 +389,6 @@ class Poll(SmartModel):
         top_question = self.get_questions().first()
         if top_question:
             return top_question.get_response_percentage()
-
         return '---'
 
     def get_trending_words(self):
@@ -483,6 +496,10 @@ class PollQuestion(SmartModel):
     Represents a single question that was asked in a poll, these questions tie 1-1 to
     the RuleSets in a flow.
     """
+
+    POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
+    POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 5
+
     poll = models.ForeignKey(Poll, related_name='questions',
                              help_text=_("The poll this question is part of"))
     title = models.CharField(max_length=255,
@@ -540,22 +557,107 @@ class PollQuestion(SmartModel):
             traceback.print_exc()
 
     def get_results(self, segment=None):
-
-        key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+        key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
             substituted_segment = self.poll.org.substitute_segment(segment)
             key += ":" + slugify(unicode(json.dumps(substituted_segment)))
 
         cached_value = cache.get(key, None)
         if cached_value:
-            return cached_value['results']
+            return cached_value["results"]
 
-        if segment and segment.get('location', "") == "District":
-            self.fetch_results(segment=segment)
+        org = self.poll.org
+        open_ended = self.is_open_ended()
+        responded = self.get_responded()
+        polled = self.get_polled()
 
-            cached_value = cache.get(key, None)
-            if cached_value:
-                return cached_value['results']
+        results = []
+
+        if open_ended and not segment:
+            cursor = connection.cursor()
+
+            custom_sql = """
+                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s') w group by w.label order by count desc;
+                      """ % (org.id, self.poll.flow_uuid, self.ruleset_uuid)
+
+            cursor.execute(custom_sql)
+            from ureport.utils import get_dict_from_cursor
+            unclean_categories = get_dict_from_cursor(cursor)
+            categories = []
+
+            ureport_languages = getattr(settings, 'LANGUAGES', [('en', 'English')])
+
+            org_languages = [lang[1].lower() for lang in ureport_languages if lang[0] == org.language]
+
+            if 'english' not in org_languages:
+                org_languages.append('english')
+
+            ignore_words = []
+            for lang in org_languages:
+                ignore_words += safe_get_stop_words(lang)
+
+            categories = []
+
+            for category in unclean_categories:
+                if len(category['label']) > 1 and category['label'] not in ignore_words and len(categories) < 100:
+                    categories.append(dict(label=category['label'], count=int(category['count'])))
+
+            # sort by count, then alphabetically
+            categories = sorted(categories, key=lambda c: (-c['count'], c['label']))
+            results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+
+        else:
+            categories_label = self.response_categories.filter(is_active=True).values_list('category', flat=True)
+            question_results = self.get_question_results()
+
+            if segment:
+
+                location_part = segment.get('location').lower()
+
+                if location_part not in ['state', 'district']:
+                    return None
+
+                location_boundaries = org.get_segment_org_boundaries(segment)
+
+                for boundary in location_boundaries:
+                    categories = []
+                    osm_id = boundary.get('osm_id').upper()
+                    set_count = 0
+                    unset_count_key = "ruleset:%s:nocategory:%s:%s" % (self.ruleset_uuid, location_part, osm_id)
+                    unset_count = question_results.get(unset_count_key, 0)
+
+                    for categorie_label in categories_label:
+                        category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
+                        category_count = question_results.get(category_count_key, 0)
+                        set_count += category_count
+                        categories.append(dict(count=category_count, label=categorie_label))
+
+                    if open_ended:
+                        # For home page best and worst location responses
+                        from ureport.contacts.models import Contact
+                        if segment.get('location') == 'District':
+                            boundary_contacts_count = Contact.objects.filter(org=org, district=osm_id).count()
+                        else:
+                            boundary_contacts_count = Contact.objects.filter(org=org, state=osm_id).count()
+                        unset_count = boundary_contacts_count - set_count
+
+                    results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
+                                        boundary=osm_id, label=boundary.get('name'),
+                                        categories=categories))
+
+            else:
+                categories = []
+                for categorie_label in categories_label:
+                    category_count_key = "ruleset:%s:category:%s" % (self.ruleset_uuid, categorie_label.lower())
+                    if categorie_label.lower() != 'other':
+                        category_count = question_results.get(category_count_key, 0)
+                        categories.append(dict(count=category_count, label=categorie_label))
+
+                results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+
+        cache.set(key, {"results": results}, PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT)
+
+        return results
 
     def get_total_summary_data(self):
         cached_results = self.get_results()
@@ -563,21 +665,21 @@ class PollQuestion(SmartModel):
             return cached_results[0]
         return dict()
 
+    def get_question_results(self):
+        return PollResultsCounter.get_question_results(self)
+
     def is_open_ended(self):
-        cache_key = 'open_ended:%d' % self.id
-        open_ended = cache.get(cache_key, None)
-
-        if open_ended is None:
-            open_ended = self.get_total_summary_data().get('open_ended', False)
-            cache.set(cache_key, open_ended, OPEN_ENDED_CACHE_TIME)
-
-        return open_ended
+        return self.response_categories.filter(is_active=True).count() == 1
 
     def get_responded(self):
-        return self.get_total_summary_data().get('set', 0)
+        results = self.get_question_results()
+        key = 'ruleset:%s:total-ruleset-responded' % self.ruleset_uuid
+        return results.get(key, 0)
 
     def get_polled(self):
-        return self.get_total_summary_data().get('set', 0) + self.get_total_summary_data().get('unset', 0)
+        results = self.get_question_results()
+        key = 'ruleset:%s:total-ruleset-polled' % self.ruleset_uuid
+        return results.get(key, 0)
 
     def get_response_percentage(self):
         polled = self.get_polled()
@@ -720,6 +822,19 @@ class PollResultsCounter(models.Model):
         poll_rulesets = poll.questions.all().values_list('ruleset_uuid', flat=True)
 
         counters = cls.objects.filter(org=poll.org, ruleset__in=poll_rulesets)
+        if types:
+            counters = counters.filter(type__in=types)
+
+        results = counters.values('type').order_by('type').annotate(count_sum=Sum('count'))
+
+        return {c['type']: c['count_sum'] for c in results}
+
+    @classmethod
+    def get_question_results(cls, question, types=None):
+        """
+        Get the poll question results counts by counter type for a given poll
+        """
+        counters = cls.objects.filter(org=question.poll.org, ruleset=question.ruleset_uuid)
         if types:
             counters = counters.filter(type__in=types)
 

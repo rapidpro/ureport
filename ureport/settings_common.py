@@ -341,7 +341,7 @@ PERMISSIONS = {
 
     'dashblocks.dashblock': ('html', ),
     'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
-    'polls.poll': ('questions', 'responses', 'images'),
+    'polls.poll': ('questions', 'responses', 'images', 'pull_refresh'),
     'stories.story': ('html', 'images'),
 
 }
@@ -506,25 +506,23 @@ CELERYBEAT_SCHEDULE = {
         'relative': True,
         'args': ('ureport.polls.tasks.backfill_poll_results', 'sync')
     },
-    # 'results-pull-main-poll':  {
-    #     'task': 'dash.orgs.tasks.trigger_org_task',
-    #     'schedule': crontab(minute=[5, 25, 45]),
-    #     'args': ('ureport.polls.tasks.pull_results_main_poll', 'sync')
-    # },
-    #
-    # 'results-pull-brick-polls':  {
-    #     'task': 'dash.orgs.tasks.trigger_org_task',
-    #     "schedule": timedelta(hours=48),
-    #     "relative": True,
-    #     'args': ('ureport.polls.tasks.pull_results_brick_polls', 'sync')
-    # },
-    # 'results-pull-other-polls':  {
-    #     'task': 'dash.orgs.tasks.trigger_org_task',
-    #     "schedule": timedelta(hours=48),
-    #     "relative": True,
-    #     'args': ('ureport.polls.tasks.pull_results_other_polls', 'sync')
-    # },
-
+    'results-pull-main-poll':  {
+        'task': 'dash.orgs.tasks.trigger_org_task',
+        'schedule': crontab(minute=[5, 25, 45]),
+        'args': ('ureport.polls.tasks.pull_results_main_poll', 'sync')
+    },
+    'results-pull-brick-polls':  {
+        'task': 'dash.orgs.tasks.trigger_org_task',
+        "schedule": timedelta(hours=48),
+        "relative": True,
+        'args': ('ureport.polls.tasks.pull_results_brick_polls', 'sync')
+    },
+    'results-pull-other-polls':  {
+        'task': 'dash.orgs.tasks.trigger_org_task',
+        "schedule": timedelta(hours=48),
+        "relative": True,
+        'args': ('ureport.polls.tasks.pull_results_other_polls', 'sync')
+    },
 }
 
 #-----------------------------------------------------------------------------------
