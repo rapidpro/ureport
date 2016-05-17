@@ -229,7 +229,7 @@ class PublicTest(DashTest):
         self.assertFalse(response.context['videos'])
         self.assertFalse(response.context['news'])
 
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
@@ -255,7 +255,7 @@ class PublicTest(DashTest):
         self.assertTrue('recent_polls' in response.context)
         self.assertFalse(response.context['recent_polls'])
 
-        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin)
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, has_synced=True)
 
         poll2_question = PollQuestion.objects.create(poll=poll2,
                                                      title='question poll 2',
@@ -272,7 +272,7 @@ class PublicTest(DashTest):
         self.assertTrue('recent_polls' in response.context)
         self.assertFalse(response.context['recent_polls'])
 
-        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin)
+        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
         poll3_question = PollQuestion.objects.create(poll=poll3,
                                                      title='question poll 3',
@@ -533,7 +533,7 @@ class PublicTest(DashTest):
                                                    created_by=self.admin,
                                                    modified_by=self.admin)
 
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
         poll1_question = PollQuestion.objects.create(poll=poll1,
                                                      title='question poll 1',
@@ -541,7 +541,7 @@ class PublicTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", education_uganda, self.admin)
+        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", education_uganda, self.admin, has_synced=True)
 
         poll2_question = PollQuestion.objects.create(poll=poll2,
                                                      title='question poll 2',
@@ -549,7 +549,7 @@ class PublicTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin)
+        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
         poll3_question = PollQuestion.objects.create(poll=poll3,
                                                      title='question poll 3',
@@ -557,7 +557,7 @@ class PublicTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        poll4 = self.create_poll(self.nigeria, "Poll 4", "uuid-4", self.education_nigeria, self.admin)
+        poll4 = self.create_poll(self.nigeria, "Poll 4", "uuid-4", self.education_nigeria, self.admin, has_synced=True)
 
         poll4_question = PollQuestion.objects.create(poll=poll4,
                                                      title='question poll 4',
