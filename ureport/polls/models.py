@@ -168,15 +168,19 @@ class Poll(SmartModel):
 
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
 
+    @classmethod
+    def pull_poll_results_task(cls, poll):
+        from ureport.polls.tasks import pull_refresh
+        pull_refresh.apply_async((poll.pk,), queue='sync')
+
     def pull_refresh_task(self):
         from ureport.utils import datetime_to_json_date
-        from ureport.polls.tasks import pull_refresh
 
         now = timezone.now()
         cache.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk),
                   datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
 
-        pull_refresh.apply_async((self.pk,), queue='sync')
+        Poll.pull_poll_results_task(self)
 
     def rebuild_poll_results_counts(self):
         from ureport.utils import chunk_list
@@ -242,11 +246,6 @@ class Poll(SmartModel):
     def fetch_poll_results_task(cls, poll):
         from ureport.polls.tasks import fetch_poll
         fetch_poll.delay(poll.pk)
-
-    @classmethod
-    def pull_poll_results_task(cls, poll):
-        from ureport.polls.tasks import pull_refresh
-        pull_refresh.apply_async((poll.pk,), queue='sync')
 
     @classmethod
     def get_public_polls(cls, org):
