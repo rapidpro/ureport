@@ -8,7 +8,7 @@ import pytz
 from django.contrib.auth.models import User
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, connection
-from django.db.models import Sum, Count, F
+from django.db.models import Sum, Count, F, Max
 from django.utils.text import slugify
 from django.utils import timezone
 from smartmin.models import SmartModel
@@ -99,6 +99,9 @@ class Poll(SmartModel):
     runs_count = models.IntegerField(default=0,
                                      help_text=_("The number of polled reporters on this poll"))
 
+    has_synced = models.BooleanField(default=False,
+                                     help_text=_("Whether the poll has finished the initial results sync."))
+
     title = models.CharField(max_length=255,
                              help_text=_("The title for this Poll"))
     category = models.ForeignKey(Category, related_name="polls",
@@ -110,6 +113,18 @@ class Poll(SmartModel):
     org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
 
+    def get_sync_progress(self):
+        if not self.runs_count:
+            return float(0)
+
+        results_added = PollResult.objects.filter(flow=self.flow_uuid, org=self.org_id).values('ruleset').distinct()
+        results_added = results_added.annotate(Count('id')).order_by('-id__count').first()
+        pulled_runs = 0
+        if results_added:
+            pulled_runs = results_added.get("id__count", 0)
+
+        return pulled_runs * 100 / float(self.runs_count)
+
     @classmethod
     def pull_results(cls, poll_id):
         from ureport.backend import get_backend
@@ -119,6 +134,8 @@ class Poll(SmartModel):
         created, updated, ignored = backend.pull_results(poll, None, None)
 
         poll.rebuild_poll_results_counts()
+
+        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
         return created, updated, ignored
 
@@ -227,10 +244,19 @@ class Poll(SmartModel):
         fetch_poll.delay(poll.pk)
 
     @classmethod
+    def pull_poll_results_task(cls, poll):
+        from ureport.polls.tasks import pull_refresh
+        pull_refresh.apply_async((poll.pk,), queue='sync')
+
+    @classmethod
+    def get_public_polls(cls, org):
+        return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True)
+
+    @classmethod
     def get_main_poll(cls, org):
         poll_with_questions = PollQuestion.objects.filter(is_active=True, poll__org=org).values_list('poll', flat=True)
 
-        polls = Poll.objects.filter(org=org, is_active=True, category__is_active=True, pk__in=poll_with_questions).order_by('-created_on')
+        polls = Poll.get_public_polls(org=org).filter(pk__in=poll_with_questions).order_by('-created_on')
 
         main_poll = polls.filter(is_featured=True).first()
 
@@ -249,7 +275,7 @@ class Poll(SmartModel):
 
             main_poll = Poll.get_main_poll(org)
 
-            polls = Poll.objects.filter(org=org, is_active=True, category__is_active=True, pk__in=poll_with_questions).order_by('-is_featured', '-created_on')
+            polls = Poll.get_public_polls(org=org).filter(pk__in=poll_with_questions).order_by('-is_featured', '-created_on')
             if main_poll:
                 polls = polls.exclude(pk=main_poll.pk)
 
@@ -276,8 +302,7 @@ class Poll(SmartModel):
         if main_poll:
             exclude_polls.append(main_poll.pk)
 
-        other_polls = Poll.objects.filter(org=org, is_active=True,
-                                          category__is_active=True).exclude(pk__in=exclude_polls).order_by('-created_on')
+        other_polls = Poll.get_public_polls(org=org).exclude(pk__in=exclude_polls).order_by('-created_on')
 
         return other_polls
 

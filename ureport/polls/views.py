@@ -126,8 +126,9 @@ class PollCRUDL(SmartCRUDL):
         def post_save(self, obj):
             obj = super(PollCRUDL.Create, self).post_save(obj)
             obj.update_or_create_questions(user=self.request.user)
-            return obj
 
+            Poll.pull_poll_results_task(obj)
+            return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
         success_url = 'id@polls.poll_responses'
@@ -330,13 +331,20 @@ class PollCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         search_fields = ('title__icontains',)
-        fields = ('title', 'category', 'questions', 'featured_responses', 'images', 'created_on')
+        fields = ('title', 'category', 'questions', 'featured_responses', 'images', 'sync_status', 'created_on')
         link_fields = ('title', 'questions', 'featured_responses', 'images')
         default_order = ('-created_on', 'id')
 
         def get_queryset(self):
             queryset = super(PollCRUDL.List, self).get_queryset().filter(org=self.request.org)
             return queryset
+
+        def get_sync_status(self, obj):
+            if obj.has_synced:
+                return "Synced 100%"
+
+            sync_progress = obj.get_sync_progress()
+            return "Syncing... {0:.1f}%".format(sync_progress)
 
         def get_questions(self, obj):
             return obj.get_questions().count()
