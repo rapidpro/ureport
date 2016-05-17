@@ -235,7 +235,7 @@ class Poll(SmartModel):
 
     @classmethod
     def get_public_polls(cls, org):
-        return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True)
+        return Poll.objects.filter(org=org, is_active=True, category__is_active=True)
 
     @classmethod
     def get_main_poll(cls, org):
