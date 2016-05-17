@@ -144,8 +144,7 @@ class PollContextMixin(object):
         context['latest_poll'] = main_poll
 
         context['categories'] = Category.objects.filter(org=org, is_active=True).order_by('name')
-        context['polls'] = Poll.objects.filter(org=org, is_active=True,
-                                               category__is_active=True).order_by('-created_on')
+        context['polls'] = Poll.get_public_polls(org=org).order_by('-created_on')
 
         context['related_stories'] = []
         if main_poll:
@@ -173,7 +172,7 @@ class PollReadView(PollContextMixin, SmartReadView):
 
     def derive_queryset(self):
         queryset = super(PollReadView, self).derive_queryset()
-        queryset = queryset.filter(org=self.request.org, is_active=True)
+        queryset = queryset.filter(org=self.request.org, is_active=True, has_synced=True)
         return queryset
 
     def derive_main_poll(self):
@@ -273,7 +272,7 @@ class StoryReadView(SmartReadView):
         context['categories'] = Category.objects.filter(org=org, is_active=True).order_by('name')
         context['other_stories'] = Story.objects.filter(org=org, featured=False, is_active=True).order_by('-created_on')
 
-        related_polls = Poll.objects.filter(org=org, is_active=True, category=story_category).order_by('-created_on')
+        related_polls = Poll.objects.filter(org=org, is_active=True, has_synced=True, category=story_category).order_by('-created_on')
         context['related_polls'] = related_polls
 
         related_stories = Story.objects.filter(org=org, is_active=True,
