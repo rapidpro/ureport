@@ -218,8 +218,8 @@ class Poll(SmartModel):
 
                     for result in poll_results:
                         gen_counters = result.generate_counters()
-                        for key in gen_counters.keys():
-                            counters_dict[(result.org_id, result.ruleset, key)] += gen_counters[key]
+                        for dict_key in gen_counters.keys():
+                            counters_dict[(result.org_id, result.ruleset, dict_key)] += gen_counters[dict_key]
 
                         processed_results += 1
 
