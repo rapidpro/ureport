@@ -532,7 +532,7 @@ class PollQuestion(SmartModel):
         from raven.contrib.django.raven_compat.models import client
 
         cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-        if segment and segment.get('location', "") == "District":
+        if segment and segment.get('location', "") in ("District", "Ward"):
             cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
 
         try:
@@ -614,7 +614,7 @@ class PollQuestion(SmartModel):
 
                 location_part = segment.get('location').lower()
 
-                if location_part not in ['state', 'district']:
+                if location_part not in ['state', 'district', 'ward']:
                     return None
 
                 location_boundaries = org.get_segment_org_boundaries(segment)
