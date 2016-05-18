@@ -201,9 +201,6 @@ class Poll(SmartModel):
 
         else:
             with r.lock(key):
-                # Delete existing counters
-                self.delete_poll_results_counter()
-
                 poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list('pk', flat=True)
 
                 poll_results_ids_count = len(poll_results_ids)
@@ -231,6 +228,9 @@ class Poll(SmartModel):
                     count = counters_dict[counter_tuple]
                     counters_to_insert.append(PollResultsCounter(org_id=org_id, ruleset=ruleset, type=counter_type,
                                                                  count=count))
+
+                # Delete existing counters and then create new counters
+                self.delete_poll_results_counter()
 
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
                 print "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
