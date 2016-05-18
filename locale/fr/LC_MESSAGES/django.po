@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-09 09:58+0000\n"
-"PO-Revision-Date: 2016-05-13 18:38+0000\n"
+"PO-Revision-Date: 2016-05-18 14:21+0000\n"
 "Last-Translator: Ilhasoft <contato@ilhasoft.com.br>\n"
 "Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -1381,7 +1381,7 @@ msgstr "PAR"
 
 #: templates/public/stories.haml:56
 msgid "LATEST STORIES"
-msgstr ""
+msgstr "DERNIERS ARTICLES "
 
 #: templates/public/stories.haml:61
 msgid "FILTERED BY"
@@ -1393,7 +1393,7 @@ msgstr "Défiler pour plus d'information"
 
 #: templates/public/story_read.haml:47
 msgid "STORY CONTINUES"
-msgstr ""
+msgstr "L'HISTOIRE CONTINUE"
 
 #: templates/public/story_read.haml:65
 msgid "AUDIO"
