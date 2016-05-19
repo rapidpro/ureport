@@ -126,7 +126,7 @@ initMap = (id, geojson, question, districtLabel, wardLabel) ->
       scale.update(e.target.feature.properties.level)
     else if (allowWardZoom and e.target.feature.properties.level == DISTRICT_LEVEL)
       map.removeLayer(boundaries)
-      mainLabelName = e.target.feature.properties.name + " (" + window.string_Dsitrict + ")"
+      mainLabelName = e.target.feature.properties.name + " (" + window.string_District + ")"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
     else
@@ -323,6 +323,10 @@ initMap = (id, geojson, question, districtLabel, wardLabel) ->
     if props? and props.id of boundaryResults
       label = props.name
       results = boundaryResults[props.id]
+      if not results
+        results =
+          set:0
+          percentage:0
 
     # wait until we have the totalRegistered to avoid division by zero
     if topCategory

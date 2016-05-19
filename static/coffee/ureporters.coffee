@@ -113,7 +113,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
       scale.update(e.target.feature.properties.level)
     else if (allowWardZoom and e.target.feature.properties.level == DISTRICT_LEVEL)
       map.removeLayer(boundaries)
-      mainLabelName = e.target.feature.properties.name + " (" + window.string_Dsitrict + ")"
+      mainLabelName = e.target.feature.properties.name + " (" + window.string_District + ")"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
     else
@@ -204,10 +204,10 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
           map.fitBounds(boundaries.getBounds(), {step:.25})
 
   onEachFeature = (feature, layer) ->
-      layer.on
-        mouseover: highlightFeature
-        mouseout: resetHighlight
-        click: clickFeature
+    layer.on
+      mouseover: highlightFeature
+      mouseout: resetHighlight
+      click: clickFeature
 
   # turn off leaflet credits
   map.attributionControl.setPrefix('')
@@ -252,13 +252,12 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
   info.update = (props) ->
     html = ""
 
-    if mainLabelRegistered
-      html = "<div class='info'>"
-      html += "<h2 class='admin-name'>" + mainLabelName + "</h2>"
+    html = "<div class='info'>"
+    html += "<h2 class='admin-name'>" + mainLabelName + "</h2>"
 
-      html += "<div class='top-border primary-color'>" + window.string_Population.toUpperCase() + "</div>"
-      html += "<div><table><tr><td class='info-count'>" + intcomma(mainLabelRegistered) + "</td></tr>"
-      html += "<tr><td class='info-tiny'>" + window.string_Registered_in + " " + mainLabelName + "</td></tr></table></div>"
+    html += "<div class='top-border primary-color'>" + window.string_Population.toUpperCase() + "</div>"
+    html += "<div><table><tr><td class='info-count'>" + intcomma(mainLabelRegistered) + "</td></tr>"
+    html += "<tr><td class='info-tiny'>" + window.string_Registered_in + " " + mainLabelName + "</td></tr></table></div>"
 
     if props?
       result = boundaryResults[props.id]
