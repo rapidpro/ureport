@@ -500,7 +500,7 @@ def get_ureporters_locations_stats(org, segment):
 
     location_stats = []
 
-    if not field_type or field_type.lower() not in ['state', 'district']:
+    if not field_type or field_type.lower() not in ['state', 'district', 'ward']:
         return location_stats
 
     field_type = field_type.lower()
@@ -512,6 +512,10 @@ def get_ureporters_locations_stats(org, segment):
         boundaries = Boundary.objects.filter(org=org, level=boundary_top_level, is_active=True).values('osm_id', 'name')\
             .order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
+
+    elif field_type == 'ward':
+        boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
+        location_counts = {k[5:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('ward')}
     else:
         boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, is_active=True,
                                              parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
@@ -559,14 +563,22 @@ def get_segment_org_boundaries(org, segment):
     if segment.get('location') == 'District':
         state_id = segment.get('parent', None)
         if state_id:
-            location_boundaries = org.boundaries.filter(level=2,
+            location_boundaries = org.boundaries.filter(level=Boundary.DISTRICT_LEVEL,
                                                         is_active=True,
                                                         parent__osm_id=state_id).values('osm_id', 'name').order_by('osm_id')
+
+    elif segment.get('location') == 'Ward':
+        district_id = segment.get('parent', None)
+        if district_id:
+            location_boundaries = org.boundaries.filter(level=Boundary.WARD_LEVEL,
+                                                        is_active=True,
+                                                        parent__osm_id=district_id).values('osm_id', 'name').order_by('osm_id')
+
     else:
         if org.get_config('is_global'):
-            location_boundaries = org.boundaries.filter(level=0, is_active=True).values('osm_id', 'name').order_by('osm_id')
+            location_boundaries = org.boundaries.filter(level=Boundary.COUNTRY_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
         else:
-            location_boundaries = org.boundaries.filter(level=1, is_active=True).values('osm_id', 'name').order_by('osm_id')
+            location_boundaries = org.boundaries.filter(level=Boundary.STATE_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
 
     return location_boundaries
 

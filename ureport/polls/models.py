@@ -215,8 +215,8 @@ class Poll(SmartModel):
 
                     for result in poll_results:
                         gen_counters = result.generate_counters()
-                        for key in gen_counters.keys():
-                            counters_dict[(result.org_id, result.ruleset, key)] += gen_counters[key]
+                        for dict_key in gen_counters.keys():
+                            counters_dict[(result.org_id, result.ruleset, dict_key)] += gen_counters[dict_key]
 
                         processed_results += 1
 
@@ -532,7 +532,7 @@ class PollQuestion(SmartModel):
         from raven.contrib.django.raven_compat.models import client
 
         cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-        if segment and segment.get('location', "") == "District":
+        if segment and segment.get('location', "") in ("District", "Ward"):
             cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
 
         try:
@@ -614,7 +614,7 @@ class PollQuestion(SmartModel):
 
                 location_part = segment.get('location').lower()
 
-                if location_part not in ['state', 'district']:
+                if location_part not in ['state', 'district', 'ward']:
                     return None
 
                 location_boundaries = org.get_segment_org_boundaries(segment)

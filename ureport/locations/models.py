@@ -131,9 +131,9 @@ class Boundary(models.Model):
     @classmethod
     def get_org_top_level_boundaries_name(cls, org):
         if org.get_config('is_global'):
-            top_boundaries = cls.objects.filter(org=org, level=0)
+            top_boundaries = cls.objects.filter(org=org, level=cls.COUNTRY_LEVEL)
         else:
-            top_boundaries = cls.objects.filter(org=org, level=1)
+            top_boundaries = cls.objects.filter(org=org, level=cls.STATE_LEVEL)
 
         top_boundaries_values = top_boundaries.values('name', 'osm_id')
 
