@@ -15,10 +15,6 @@ class OrgCache(Enum):
 
 
 def refresh_caches(org, caches):
-
-    if OrgCache.boundaries in caches:
-        Boundary.fetch_boundaries(org)
-
     if OrgCache.main_polls in caches:
         refresh_main_poll.delay(org.pk)
 
