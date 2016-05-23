@@ -206,40 +206,6 @@ def organize_categories_data(org, contact_field, api_data):
 
     return api_data
 
-LOCK_POLL_RESULTS_KEY = 'lock:poll:%d:results'
-LOCK_POLL_RESULTS_TIMEOUT = 60 * 15
-
-
-def _fetch_org_polls_results(org, polls):
-
-    r = get_redis_connection()
-
-    for poll in polls:
-        start = time.time()
-        print "Fetching polls results for poll id(%d) - %s" % (poll.pk, poll.title)
-
-        key = LOCK_POLL_RESULTS_KEY % poll.pk
-        if not r.get(key):
-            with r.lock(key, timeout=LOCK_POLL_RESULTS_TIMEOUT):
-                poll.fetch_poll_results()
-                print "Fetch results for poll id(%d) on %s took %ss" % (poll.pk, org.name, time.time() - start)
-
-
-def fetch_main_poll_results(org):
-    main_poll = Poll.get_main_poll(org)
-    if main_poll:
-        _fetch_org_polls_results(org, [main_poll])
-
-
-def fetch_brick_polls_results(org):
-    brick_polls = Poll.get_brick_polls(org)[:5]
-    _fetch_org_polls_results(org, brick_polls)
-
-
-def fetch_other_polls_results(org):
-    other_polls = Poll.get_other_polls(org)
-    _fetch_org_polls_results(org, other_polls)
-
 
 def fetch_flows(org):
     start = time.time()

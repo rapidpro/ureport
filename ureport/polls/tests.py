@@ -18,13 +18,12 @@ from dash.categories.models import Category, CategoryImage
 from temba_client.v1.types import Result, Flow, Group
 
 from dash.orgs.models import TaskState
-from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY, \
-    PollResultsCounter, PollResult, PollResponseCategory
+from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
+from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-from ureport.polls.tasks import refresh_main_poll, refresh_brick_polls, refresh_other_polls, refresh_org_flows, \
-    recheck_poll_flow_data, pull_results_main_poll, pull_results_brick_polls, pull_results_other_polls, \
-    backfill_poll_results, pull_refresh
-from ureport.polls.tasks import fetch_poll, fetch_old_sites_count
+from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls
+from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
+from ureport.polls.tasks import fetch_old_sites_count
 from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
@@ -964,50 +963,6 @@ class PollTest(DashTest):
 
             self.assertFalse(question_results(poll1_question))
 
-    def test_fetch_poll_results(self):
-        with patch('ureport.polls.models.PollQuestion.fetch_results') as mock:
-            mock.return_value = None
-
-            poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
-
-            poll1.fetch_poll_results()
-            self.assertFalse(mock.called)
-
-            poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                         title='question poll 1',
-                                                         ruleset_uuid="uuid-101",
-                                                         created_by=self.admin,
-                                                         modified_by=self.admin)
-
-            poll1_question.is_active = False
-            poll1_question.save()
-
-            poll1.fetch_poll_results()
-            self.assertFalse(mock.called)
-            mock.reset_mock()
-
-            poll1_question.is_active = True
-            poll1_question.save()
-
-            poll1.fetch_poll_results()
-            self.assertEqual(mock.call_count, 1)
-            mock.assert_any_call()
-            mock.reset_mock()
-
-            self.uganda.set_config('state_label', 'Province')
-
-            poll1.fetch_poll_results()
-            self.assertEqual(mock.call_count, 2)
-            mock.assert_any_call()
-            mock.assert_any_call(dict(location='State'))
-            mock.reset_mock()
-
-            poll1.flow_archived = True
-            poll1.save()
-
-            poll1.fetch_poll_results()
-            # self.assertFalse(mock.called)
-
     def test_delete_poll_results_counter(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
@@ -1117,34 +1072,6 @@ class PollQuestionTest(DashTest):
         PollResponseCategory.objects.filter(category='No').update(is_active=True)
 
         self.assertFalse(poll_question1.is_open_ended())
-
-        with patch('dash.orgs.models.TembaClient1.get_results') as mock:
-            mock.return_value = Result.deserialize_list(fetched_results)
-
-            with patch('django.core.cache.cache.set') as cache_set_mock:
-                cache_set_mock.return_value = "Set"
-
-                with patch("ureport.polls.models.datetime_to_ms") as mock_datetime_ms:
-                    mock_datetime_ms.return_value = 500
-
-                    poll_question1.fetch_results()
-                    key = CACHE_POLL_RESULTS_KEY % (poll_question1.poll.org.pk, poll_question1.poll.pk, poll_question1.pk)
-
-                    cache_set_mock.assert_called_with(key,
-                                                      {'time': 500, 'results':fetched_results},
-                                                      None)
-                    mock.assert_called_with(poll_question1.ruleset_uuid, segment=None)
-
-                    poll_question1.fetch_results(segment=dict(location='State'))
-
-                    segment = json.dumps(dict(location='LGA'))
-                    key += ":" + slugify(unicode(segment))
-
-                    cache_set_mock.assert_called_with(key,
-                                                      {'time': 500, 'results':fetched_results},
-                                                      None)
-
-                    mock.assert_called_with(poll_question1.ruleset_uuid, segment=segment)
 
         now = timezone.now()
 
@@ -1286,30 +1213,6 @@ class PollQuestionTest(DashTest):
                                                'LOCATION': '127.0.0.1:6379:1',
                                                'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
                                                }}):
-
-            with patch('ureport.polls.models.Poll.fetch_poll_results') as mock_fetch_poll_results:
-                mock_fetch_poll_results.return_value = 'FETCHED'
-
-                fetch_poll(self.poll.id)
-                mock_fetch_poll_results.assert_called_once_with()
-
-            with patch('ureport.polls.tasks.fetch_main_poll_results') as mock_fetch_main_poll_results:
-                mock_fetch_main_poll_results.return_value = 'FETCHED'
-
-                refresh_main_poll(self.org.pk)
-                mock_fetch_main_poll_results.assert_called_once_with(self.org)
-
-            with patch('ureport.polls.tasks.fetch_brick_polls_results') as mock_fetch_brick_polls_results:
-                mock_fetch_brick_polls_results.return_value = 'FETCHED'
-
-                refresh_brick_polls(self.org.pk)
-                mock_fetch_brick_polls_results.assert_called_once_with(self.org)
-
-            with patch('ureport.polls.tasks.fetch_other_polls_results') as mock_fetch_other_polls_results:
-                mock_fetch_other_polls_results.return_value = 'FETCHED'
-
-                refresh_other_polls(self.org.pk)
-                mock_fetch_other_polls_results.assert_called_once_with(self.org)
 
             with patch('ureport.polls.tasks.fetch_flows') as mock_fetch_flows:
                 mock_fetch_flows.return_value = 'FETCHED'

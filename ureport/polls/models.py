@@ -235,18 +235,6 @@ class Poll(SmartModel):
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
                 print "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
 
-    def fetch_poll_results(self):
-
-        for question in self.questions.filter(is_active=True):
-            question.fetch_results()
-            if question.poll.org.get_config('state_label'):
-                question.fetch_results(dict(location='State'))
-
-    @classmethod
-    def fetch_poll_results_task(cls, poll):
-        from ureport.polls.tasks import fetch_poll
-        fetch_poll.delay(poll.pk)
-
     @classmethod
     def get_public_polls(cls, org):
         return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True)
@@ -458,6 +446,7 @@ class Poll(SmartModel):
     def __unicode__(self):
         return self.title
 
+
 class PollImage(SmartModel):
     name = models.CharField(max_length=64,
                             help_text=_("The name to describe this image"))
@@ -470,6 +459,7 @@ class PollImage(SmartModel):
 
     def __unicode__(self):
         return "%s - %s" % (self.poll, self.name)
+
 
 class FeaturedResponse(SmartModel):
     """
@@ -514,7 +504,6 @@ class PollQuestion(SmartModel):
     priority = models.IntegerField(default=0, null=True, blank=True,
                                    help_text=_("The priority number for this question on the poll"))
 
-
     @classmethod
     def update_or_create(cls, user, poll, ruleset_label, uuid, ruleset_type):
         existing = cls.objects.filter(ruleset_uuid=uuid, poll=poll)
@@ -527,34 +516,6 @@ class PollQuestion(SmartModel):
                                                    ruleset_type=ruleset_type, ruleset_label=ruleset_label,
                                                    is_active=False, created_by=user, modified_by=user)
         return question
-
-    def fetch_results(self, segment=None):
-        from raven.contrib.django.raven_compat.models import client
-
-        cache_time = UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-        if segment and segment.get('location', "") in ("District", "Ward"):
-            cache_time = UREPORT_RUN_FETCHED_DATA_CACHE_TIME
-
-        try:
-            key = CACHE_POLL_RESULTS_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
-            if segment:
-                segment = self.poll.org.substitute_segment(segment)
-                key += ":" + slugify(unicode(segment))
-
-            this_time = datetime.now()
-            temba_client = self.poll.org.get_temba_client()
-            client_results = temba_client.get_results(self.ruleset_uuid, segment=segment)
-            results = temba_client_flow_results_serializer(client_results)
-
-            cache.set(key, {'time': datetime_to_ms(this_time), 'results': results}, None)
-
-            # delete the open ended cache
-            cache.delete('open_ended:%d' % self.id)
-
-        except:  # pragma: no cover
-            client.captureException()
-            import traceback
-            traceback.print_exc()
 
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
