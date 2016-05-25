@@ -110,6 +110,39 @@ class UreportAPITests(APITestCase):
                                                  modified_by=self.superuser,
                                                  org=self.uganda)
 
+    def test_api_docs_page(self):
+
+        response = self.client.get('/api/v1/docs/')
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get('/api')
+        self.assertEqual(response.status_code, 301)
+
+        response = self.client.get('/api', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request['PATH_INFO'], '/api/v1/docs/')
+
+        response = self.client.get('/api/')
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get('/api/', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request['PATH_INFO'], '/api/v1/docs/')
+
+        response = self.client.get('/api/v1')
+        self.assertEqual(response.status_code, 301)
+
+        response = self.client.get('/api/v1', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request['PATH_INFO'], '/api/v1/docs/')
+
+        response = self.client.get('/api/v1/')
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get('/api/v1/', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request['PATH_INFO'], '/api/v1/docs/')
+
     def test_orgs_list(self):
         url = '/api/v1/orgs/'
         response = self.client.get(url)
