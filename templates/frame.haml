@@ -387,9 +387,10 @@
   #hero.jumbotron
     - block hero
 
-  -if org|config:"join_text"
-    .banner
-      {{ org|config:"join_text" }}
+  - block join-banner
+    -if org|config:"join_text"
+      .banner
+        {{ org|config:"join_text" }}
 
   .container
     - block content-div
