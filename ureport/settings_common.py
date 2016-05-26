@@ -534,12 +534,6 @@ PREVIOUS_ORG_SITES = [
         is_static=True,
     ),
     dict(
-        name="Congo Democratic Republic",
-        host="http://www.ureport.cd/",
-        flag="flag_cd.png",
-        is_static=True,
-    ),
-    dict(
         name="Ireland",
         host="http://ireland.ureport.in",
         flag="flag_ir.png",
