@@ -143,7 +143,7 @@ class PublicTest(DashTest):
         response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
-        self.assertFalse('welcome-flags' in response.content)
+        self.assertTrue('welcome-flags' in response.content) # we now show the flags for all orgs
 
         self.global_org.set_config('is_global', True)
 
