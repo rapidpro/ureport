@@ -19,8 +19,7 @@ from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old
     get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
     fetch_flows, update_poll_flow_data
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
-from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
-from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
+from ureport.utils import get_global_count, GLOBAL_COUNT_CACHE_KEY
 
 
 class UtilsTest(DashTest):
@@ -424,42 +423,6 @@ class UtilsTest(DashTest):
                                                 dict(label='Nurse', count=5),
                                                 dict(label='Cameraman', count=5)
                                                 ])])
-
-    def test_fetch_poll_results(self):
-        with self.settings(CACHES = {'default': {'BACKEND': 'redis_cache.cache.RedisCache',
-                                                 'LOCATION': '127.0.0.1:6379:1',
-                                                 'OPTIONS': {
-                                                     'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
-                                                 }
-                                                 }}):
-            with patch('ureport.polls.models.Poll.fetch_poll_results') as mock_poll_model_fetch_results:
-                mock_poll_model_fetch_results.return_value = "DONE"
-
-                polls = [self.poll]
-                _fetch_org_polls_results(self.org, polls)
-                mock_poll_model_fetch_results.assert_called_with()
-                mock_poll_model_fetch_results.reset_mock()
-
-                with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
-                    mock_main_poll.return_value = self.poll
-
-                    fetch_main_poll_results(self.org)
-                    mock_poll_model_fetch_results.assert_called_once_with()
-                    mock_poll_model_fetch_results.reset_mock()
-
-                with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
-                    mock_brick_polls.return_value = [self.poll]
-
-                    fetch_brick_polls_results(self.org)
-                    mock_poll_model_fetch_results.assert_called_once_with()
-                    mock_poll_model_fetch_results.reset_mock()
-
-                with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
-                    mock_other_polls.return_value = [self.poll]
-
-                    fetch_other_polls_results(self.org)
-                    mock_poll_model_fetch_results.assert_called_once_with()
-                    mock_poll_model_fetch_results.reset_mock()
 
     @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_fetch_flows(self):

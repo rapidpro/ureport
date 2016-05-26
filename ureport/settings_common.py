@@ -475,21 +475,6 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=15),
         "relative": True,
     },
-    "refresh_main_poll": {
-        "task": "polls.refresh_main_poll",
-        "schedule": timedelta(minutes=20),
-        "relative": True,
-    },
-    "refresh_brick_polls": {
-        "task": "polls.refresh_brick_polls",
-        "schedule": timedelta(hours=48),
-        "relative": True,
-    },
-    "refresh_other_polls": {
-        "task": "polls.refresh_other_polls",
-        "schedule": timedelta(hours=48),
-        "relative": True,
-    },
     "fetch_old_sites_count": {
         "task": "polls.fetch_old_sites_count",
         "schedule": timedelta(minutes=20),
