@@ -59,12 +59,14 @@ class PublicTest(DashTest):
     def test_chooser(self):
         chooser_url = reverse('public.home')
 
+        settings_sites_count = len(list(getattr(settings, 'PREVIOUS_ORG_SITES', [])))
+
         # remove all orgs
         Org.objects.all().delete()
 
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 4)
+        self.assertEquals(len(response.context['orgs']), settings_sites_count)
 
         # neither uganda nor nigeria should be on the landing page without flag
         chooser_orgs = response.context['orgs']
@@ -78,7 +80,7 @@ class PublicTest(DashTest):
 
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 4)
+        self.assertEquals(len(response.context['orgs']), settings_sites_count)
 
         # no org is configure to be on landing page
         chooser_orgs = response.context['orgs']
@@ -91,7 +93,7 @@ class PublicTest(DashTest):
 
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 4)
+        self.assertEquals(len(response.context['orgs']), settings_sites_count)
 
         # nigeria missing flag so not included
         chooser_orgs = response.context['orgs']
@@ -114,7 +116,7 @@ class PublicTest(DashTest):
         # now nigeria should be included on landing page
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), 5)
+        self.assertEquals(len(response.context['orgs']), settings_sites_count + 1)
 
         chooser_orgs = response.context['orgs']
         has_rwanda = False

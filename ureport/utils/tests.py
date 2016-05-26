@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 from dash.categories.models import Category
 from dash_test_runner.tests import MockResponse
+from django.conf import settings
 from django.utils import timezone
 from mock import patch
 import pycountry
@@ -58,15 +59,17 @@ class UtilsTest(DashTest):
         self.org.subdomain = 'aaaburundi'
         self.org.save()
 
+        settings_sites_count = len(list(getattr(settings, 'PREVIOUS_ORG_SITES', [])))
+
         # we have 3 old org in the settings
-        self.assertEqual(len(get_linked_orgs()), 4)
+        self.assertEqual(len(get_linked_orgs()), settings_sites_count)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
         self.org.set_config('is_on_landing_page', True)
 
         # missing flag
-        self.assertEqual(len(get_linked_orgs()), 4)
+        self.assertEqual(len(get_linked_orgs()), settings_sites_count)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
@@ -74,15 +77,15 @@ class UtilsTest(DashTest):
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
         # burundi should be included and be the first; by alphabetical order by subdomain
-        self.assertEqual(len(get_linked_orgs()), 5)
+        self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'aaaburundi')
 
         self.org.subdomain = 'rwanda'
         self.org.save()
 
         # rwanda should be included and the third in the list alphabetically by subdomain
-        self.assertEqual(len(get_linked_orgs()), 5)
-        self.assertEqual(get_linked_orgs()[3]['name'].lower(), 'rwanda')
+        self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
+        self.assertEqual(get_linked_orgs()[settings_sites_count-1]['name'].lower(), 'rwanda')
 
         # revert subdomain to burundi
         self.org.subdomain = 'aaaburundi'
