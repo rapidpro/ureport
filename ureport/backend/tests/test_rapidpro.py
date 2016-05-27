@@ -12,7 +12,7 @@ from django.utils import timezone
 from mock import patch
 
 from temba_client.v1.types import Boundary as TembaBoundary, Geometry as TembaGeometry
-from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact, Step as TembaStep
+from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact
 from temba_client.v2.types import Run as TembaRun
 
 from dash.test import MockClientQuery
@@ -346,19 +346,19 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="Customers")],
-                        fields={'age': "34"}, failed=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
-                        fields={'age': "67"}, failed=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[],
-                        fields={'age': "35"}, failed=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False
                     ),
                 ]
             ),
@@ -367,7 +367,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -385,19 +385,19 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "34"}, failed=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
-                        fields={'age': "67"}, failed=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[],
-                        fields={'age': "35"}, failed=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False
                     ),
                 ]
             ),
@@ -406,7 +406,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -426,19 +426,19 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "34"}, failed=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "67"}, failed=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[],
-                        fields={'age': "35"}, failed=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False
                     ),
                 ]
             ),
@@ -447,7 +447,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -468,19 +468,19 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "34"}, failed=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "67"}, failed=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "35"}, failed=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False
                     ),
                 ]
             ),
@@ -489,7 +489,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -518,7 +518,7 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "67", "born": "1992"}, failed=False, blocked=False
+                        fields={'age': "67", "born": "1992"}, stopped=False, blocked=False
                     ),
                 ]
             ),
@@ -527,7 +527,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -556,7 +556,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-002", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -677,7 +677,7 @@ class RapidProBackendTest(DashTest):
         now = timezone.now()
         temba_run = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                     contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
-                                    steps=[TembaStep.create(node='ruleset-uuid', text="We'll win today", value="win",
+                                    steps=[TembaRun.Step.create(node='ruleset-uuid', text="We'll win today", value="win",
                                                             category='Win', type='ruleset',
                                                             arrived_on=now, left_on=now)],
                                     created_on=now, modified_on=now, exited_on=now,
@@ -702,7 +702,7 @@ class RapidProBackendTest(DashTest):
 
         temba_run_1 = TembaRun.create(id=1235, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-002', name='Davido'), responded=True,
-                                      steps=[TembaStep.create(node='ruleset-uuid', text="I sing", value="sing",
+                                      steps=[TembaRun.Step.create(node='ruleset-uuid', text="I sing", value="sing",
                                                               category='Sing', type='ruleset',
                                                               arrived_on=now, left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
@@ -710,7 +710,7 @@ class RapidProBackendTest(DashTest):
 
         temba_run_2 = TembaRun.create(id=1236, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-003', name='Lebron'), responded=True,
-                                      steps=[TembaStep.create(node='ruleset-uuid', text="I play basketball",
+                                      steps=[TembaRun.Step.create(node='ruleset-uuid', text="I play basketball",
                                                               value="play", category='Play', type='ruleset',
                                                               arrived_on=now, left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
@@ -731,7 +731,7 @@ class RapidProBackendTest(DashTest):
 
         temba_run_3 = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
-                                      steps=[TembaStep.create(node='ruleset-uuid', text="We'll celebrate today",
+                                      steps=[TembaRun.Step.create(node='ruleset-uuid', text="We'll celebrate today",
                                                               value="celebrate", category='Party', type='ruleset',
                                                               arrived_on=now + timedelta(minutes=1), left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
@@ -785,7 +785,7 @@ class RapidProBackendTest(DashTest):
         now = timezone.now()
         temba_run = TembaRun.create(id=4321, flow=ObjectRef.create(uuid='flow-uuid-3', name="Flow 2"),
                                     contact=ObjectRef.create(uuid='C-021', name='Hyped'), responded=True,
-                                    steps=[TembaStep.create(node='ruleset-uuid', text="Doing it now", value="win",
+                                    steps=[TembaRun.Step.create(node='ruleset-uuid', text="Doing it now", value="win",
                                                             category='Win', type='ruleset',
                                                             arrived_on=now, left_on=now)],
                                     created_on=now, modified_on=now, exited_on=now,
@@ -891,7 +891,7 @@ class PerfTest(DashTest):
                     flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                     contact=ObjectRef.create(uuid='C-00%d' % num, name=names[num % len(names)]),
                     responded=True,
-                    steps=[TembaStep.create(node='ruleset-uuid-%d' % s,
+                    steps=[TembaRun.Step.create(node='ruleset-uuid-%d' % s,
                                             text="Text %s" % s,
                                             value="Value %s" % s,
                                             category='Category %s' % s,
@@ -941,7 +941,7 @@ class PerfTest(DashTest):
         # simulate ignore of 1 value change from older runs
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaStep.create(node='ruleset-uuid-0',
+                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
                                               text="Txt 0",
                                               value="Val 0",
                                               category='CAT 0',
@@ -968,7 +968,7 @@ class PerfTest(DashTest):
         # simulate an update of 1 value
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaStep.create(node='ruleset-uuid-0',
+                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
                                               text="Txt 0",
                                               value="Val 0",
                                               category='CAT 0',
@@ -996,7 +996,7 @@ class PerfTest(DashTest):
         # simulate ignoring actionset nodes
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaStep.create(node='actionset-uuid-0',
+                r.steps[0] = TembaRun.Step.create(node='actionset-uuid-0',
                                               text="What do you think?",
                                               value="",
                                               category='',
@@ -1023,7 +1023,7 @@ class PerfTest(DashTest):
         # simulate an update of 1 value
         for batch in active_fetches:
             for r in batch:
-                r.steps = [TembaStep.create(node='ruleset-uuid-0',
+                r.steps = [TembaRun.Step.create(node='ruleset-uuid-0',
                                             text="T %s" % s ,
                                             value="V %s" % s,
                                             category='C %s' % s,
@@ -1073,7 +1073,7 @@ class PerfTest(DashTest):
                     flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                     contact=ObjectRef.create(uuid='C-001', name='Will'),
                     responded=True,
-                    steps=[TembaStep.create(node='ruleset-uuid-0',
+                    steps=[TembaRun.Step.create(node='ruleset-uuid-0',
                                             text="Text %s" % s,
                                             value="Value %s" % s,
                                             category='Category %s' % s,
