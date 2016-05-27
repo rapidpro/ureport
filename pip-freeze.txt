@@ -44,7 +44,7 @@ Pygments==2.0.2
 python-dateutil==2.4.2
 pytz==2015.7
 PyYAML==3.11
--e git+https://github.com/rapidpro/rapidpro-python.git@78b1738c6f044301e012785623ac8b5f9dd403b0#egg=rapidpro_python-master
+-e git+https://github.com/rapidpro/rapidpro-python.git@6ab6de508e9815d4cef4388971da3b7e6464de21#egg=rapidpro_python-master
 raven==5.3.1
 redis==2.10.3
 regex==2015.7.19
