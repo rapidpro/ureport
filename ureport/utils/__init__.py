@@ -48,6 +48,17 @@ def json_date_to_datetime(date_str):
     return datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
 
 
+def get_dict_from_cursor(cursor):
+    """
+    Returns all rows from a cursor as a dict
+    """
+    desc = cursor.description
+    return [
+        dict(zip([col[0] for col in desc], row))
+        for row in cursor.fetchall()
+    ]
+
+
 def chunk_list(iterable, size):
     """
     Splits a very large list into evenly sized chunks.
@@ -195,39 +206,9 @@ def organize_categories_data(org, contact_field, api_data):
 
     return api_data
 
-LOCK_POLL_RESULTS_KEY = 'lock:poll:%d:results'
-LOCK_POLL_RESULTS_TIMEOUT = 60 * 15
-
-
-def _fetch_org_polls_results(org, polls):
-
-    r = get_redis_connection()
-
-    for poll in polls:
-
-        key = LOCK_POLL_RESULTS_KEY % poll.pk
-        if not r.get(key):
-            with r.lock(key, timeout=LOCK_POLL_RESULTS_TIMEOUT):
-                poll.fetch_poll_results()
-
-
-def fetch_main_poll_results(org):
-    main_poll = Poll.get_main_poll(org)
-    if main_poll:
-        _fetch_org_polls_results(org, [main_poll])
-
-
-def fetch_brick_polls_results(org):
-    brick_polls = Poll.get_brick_polls(org)[:5]
-    _fetch_org_polls_results(org, brick_polls)
-
-
-def fetch_other_polls_results(org):
-    other_polls = Poll.get_other_polls(org)
-    _fetch_org_polls_results(org, other_polls)
-
 
 def fetch_flows(org):
+    start = time.time()
 
     this_time = datetime.now()
     org_flows = dict(time=datetime_to_ms(this_time), results=dict())
@@ -262,7 +243,6 @@ def fetch_flows(org):
         client.captureException()
         import traceback
         traceback.print_exc()
-
 
     return org_flows.get('results')
 
@@ -483,7 +463,7 @@ def get_ureporters_locations_stats(org, segment):
 
     location_stats = []
 
-    if not field_type or field_type.lower() not in ['state', 'district']:
+    if not field_type or field_type.lower() not in ['state', 'district', 'ward']:
         return location_stats
 
     field_type = field_type.lower()
@@ -492,11 +472,15 @@ def get_ureporters_locations_stats(org, segment):
 
     if field_type == 'state':
         boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('is_global') else Boundary.STATE_LEVEL
-        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level).values('osm_id', 'name')\
+        boundaries = Boundary.objects.filter(org=org, level=boundary_top_level, is_active=True).values('osm_id', 'name')\
             .order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
+
+    elif field_type == 'ward':
+        boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
+        location_counts = {k[5:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('ward')}
     else:
-        boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL,
+        boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, is_active=True,
                                              parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
         location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
 
@@ -534,6 +518,34 @@ def get_regions_stats(org):
     return regions_stats
 
 
+def get_segment_org_boundaries(org, segment):
+    location_boundaries = []
+    if not segment:
+        return location_boundaries
+
+    if segment.get('location') == 'District':
+        state_id = segment.get('parent', None)
+        if state_id:
+            location_boundaries = org.boundaries.filter(level=Boundary.DISTRICT_LEVEL,
+                                                        is_active=True,
+                                                        parent__osm_id=state_id).values('osm_id', 'name').order_by('osm_id')
+
+    elif segment.get('location') == 'Ward':
+        district_id = segment.get('parent', None)
+        if district_id:
+            location_boundaries = org.boundaries.filter(level=Boundary.WARD_LEVEL,
+                                                        is_active=True,
+                                                        parent__osm_id=district_id).values('osm_id', 'name').order_by('osm_id')
+
+    else:
+        if org.get_config('is_global'):
+            location_boundaries = org.boundaries.filter(level=Boundary.COUNTRY_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
+        else:
+            location_boundaries = org.boundaries.filter(level=Boundary.STATE_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
+
+    return location_boundaries
+
+
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
@@ -544,3 +556,4 @@ Org.get_regions_stats = get_regions_stats
 Org.organize_categories_data = organize_categories_data
 Org.get_flows = get_flows
 Org.substitute_segment = substitute_segment
+Org.get_segment_org_boundaries = get_segment_org_boundaries

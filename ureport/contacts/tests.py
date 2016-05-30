@@ -31,41 +31,6 @@ class ContactFieldTest(DashTest):
         # try creating contact from them
         ContactField.objects.create(**kwargs)
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_fetch_contact_fields(self):
-        ContactField.objects.create(org=self.nigeria, key='old', label='Old', value_type='T')
-
-        field_keys = ContactField.fetch_contact_fields(self.nigeria)
-
-        self.assertEqual(field_keys, ['occupation'])
-
-        self.assertIsNone(ContactField.objects.filter(key='old', org=self.nigeria).first())
-
-        contact_field = ContactField.objects.get()
-
-        self.assertEqual(contact_field.org, self.nigeria)
-        self.assertEqual(contact_field.key, 'occupation')
-        self.assertEqual(contact_field.label, 'Activité')
-        self.assertEqual(contact_field.value_type, 'T')
-
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_get_contact_fields(self):
-
-        field_keys = ContactField.get_contact_fields(self.nigeria)
-        self.assertEqual(field_keys, ['occupation'])
-
-        with patch('django.core.cache.cache.get') as cache_get_mock:
-            cache_get_mock.return_value = None
-
-            field_keys = ContactField.get_contact_fields(self.nigeria)
-            self.assertEqual(field_keys, ['occupation'])
-
-            cache_get_mock.return_value = ['occupation']
-            with patch('ureport.contacts.models.ContactField.fetch_contact_fields') as mock_fetch:
-
-                ContactField.get_contact_fields(self.nigeria)
-                self.assertFalse(mock_fetch.called)
-
 
 class ContactTest(DashTest):
     def setUp(self):
@@ -173,79 +138,6 @@ class ContactTest(DashTest):
 
         # try creating contact from them
         Contact.objects.create(**kwargs)
-
-    def test_fetch_contacts(self):
-        self.nigeria.set_config('reporter_group', 'Reporters')
-
-        tz = pytz.timezone('UTC')
-        with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 29, 10, 20, 30, 40))):
-
-            with patch('dash.orgs.models.TembaClient1.get_groups') as mock_groups:
-                group = TembaGroup.create(uuid="uuid-8", name='reporters', size=120)
-                mock_groups.return_value = [group]
-
-                with patch('dash.orgs.models.TembaClient1.get_contacts') as mock_contacts:
-                    mock_contacts.return_value = [
-                        TembaContact.create(uuid='000-001', name="Ann", urns=['tel:1234'], groups=['000-002'],
-                                            fields=dict(state="Lagos", lga="Oyo", gender='Female', born="1990"),
-                                            language='eng',
-                                            modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
-
-                    seen_uuids = Contact.fetch_contacts(self.nigeria)
-
-                    self.assertEqual(seen_uuids, [])
-
-                group = TembaGroup.create(uuid="000-002", name='reporters', size=120)
-                mock_groups.return_value = [group]
-
-                with patch('dash.orgs.models.TembaClient1.get_contacts') as mock_contacts:
-                    mock_contacts.return_value = [
-                        TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
-                                            fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
-                                            language='eng',
-                                            modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
-
-                    seen_uuids = Contact.fetch_contacts(self.nigeria)
-                    self.assertTrue('000-001' in seen_uuids)
-
-                    contact = Contact.objects.get()
-                    self.assertEqual(contact.uuid, '000-001')
-                    self.assertEqual(contact.org, self.nigeria)
-                    self.assertEqual(contact.state, 'R-LAGOS')
-                    self.assertEqual(contact.district, 'R-OYO')
-                    self.assertEqual(contact.gender, 'F')
-                    self.assertEqual(contact.born, 1990)
-
-                    Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
-                    self.assertTrue('000-001' in seen_uuids)
-
-                # delete the contacts
-                Contact.objects.all().delete()
-
-                group1 = TembaGroup.create(uuid="000-001", name='reporters too', size=10)
-                group2 = TembaGroup.create(uuid="000-002", name='reporters', size=120)
-                mock_groups.return_value = [group1, group2]
-
-                with patch('dash.orgs.models.TembaClient1.get_contacts') as mock_contacts:
-                    mock_contacts.return_value = [
-                        TembaContact.create(uuid='000-001', name="Ann",urns=['tel:1234'], groups=['000-002'],
-                                            fields=dict(state="Lagos", lga="Oyo",gender='Female', born="1990"),
-                                            language='eng',
-                                            modified_on=datetime(2015, 9, 20, 10, 20, 30, 400000, pytz.utc))]
-
-                    seen_uuids = Contact.fetch_contacts(self.nigeria)
-                    self.assertTrue('000-001' in seen_uuids)
-
-                    contact = Contact.objects.get()
-                    self.assertEqual(contact.uuid, '000-001')
-                    self.assertEqual(contact.org, self.nigeria)
-                    self.assertEqual(contact.state, 'R-LAGOS')
-                    self.assertEqual(contact.district, 'R-OYO')
-                    self.assertEqual(contact.gender, 'F')
-                    self.assertEqual(contact.born, 1990)
-
-                    Contact.fetch_contacts(self.nigeria, after=datetime(2014, 12, 01, 22, 34, 36, 123000, pytz.utc))
-                    self.assertTrue('000-001' in seen_uuids)
 
     def test_contact_ward_field(self):
 

@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 from dash.categories.models import Category
 from dash_test_runner.tests import MockResponse
+from django.conf import settings
 from django.utils import timezone
 from mock import patch
 import pycountry
@@ -19,8 +20,7 @@ from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old
     get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
     fetch_flows, update_poll_flow_data
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
-from ureport.utils import get_global_count, fetch_main_poll_results, fetch_brick_polls_results, GLOBAL_COUNT_CACHE_KEY
-from ureport.utils import fetch_other_polls_results, _fetch_org_polls_results
+from ureport.utils import get_global_count, GLOBAL_COUNT_CACHE_KEY
 
 
 class UtilsTest(DashTest):
@@ -59,15 +59,17 @@ class UtilsTest(DashTest):
         self.org.subdomain = 'aaaburundi'
         self.org.save()
 
+        settings_sites_count = len(list(getattr(settings, 'PREVIOUS_ORG_SITES', [])))
+
         # we have 3 old org in the settings
-        self.assertEqual(len(get_linked_orgs()), 4)
+        self.assertEqual(len(get_linked_orgs()), settings_sites_count)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
         self.org.set_config('is_on_landing_page', True)
 
         # missing flag
-        self.assertEqual(len(get_linked_orgs()), 4)
+        self.assertEqual(len(get_linked_orgs()), settings_sites_count)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
@@ -75,15 +77,15 @@ class UtilsTest(DashTest):
                              image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
 
         # burundi should be included and be the first; by alphabetical order by subdomain
-        self.assertEqual(len(get_linked_orgs()), 5)
+        self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
         self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'aaaburundi')
 
         self.org.subdomain = 'rwanda'
         self.org.save()
 
         # rwanda should be included and the third in the list alphabetically by subdomain
-        self.assertEqual(len(get_linked_orgs()), 5)
-        self.assertEqual(get_linked_orgs()[3]['name'].lower(), 'rwanda')
+        self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
+        self.assertEqual(get_linked_orgs()[settings_sites_count-1]['name'].lower(), 'rwanda')
 
         # revert subdomain to burundi
         self.org.subdomain = 'aaaburundi'
@@ -425,42 +427,6 @@ class UtilsTest(DashTest):
                                                 dict(label='Cameraman', count=5)
                                                 ])])
 
-    def test_fetch_poll_results(self):
-        with self.settings(CACHES = {'default': {'BACKEND': 'redis_cache.cache.RedisCache',
-                                                 'LOCATION': '127.0.0.1:6379:1',
-                                                 'OPTIONS': {
-                                                     'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
-                                                 }
-                                                 }}):
-            with patch('ureport.polls.models.Poll.fetch_poll_results') as mock_poll_model_fetch_results:
-                mock_poll_model_fetch_results.return_value = "DONE"
-
-                polls = [self.poll]
-                _fetch_org_polls_results(self.org, polls)
-                mock_poll_model_fetch_results.assert_called_with()
-                mock_poll_model_fetch_results.reset_mock()
-
-                with patch('ureport.polls.models.Poll.get_main_poll') as mock_main_poll:
-                    mock_main_poll.return_value = self.poll
-
-                    fetch_main_poll_results(self.org)
-                    mock_poll_model_fetch_results.assert_called_once_with()
-                    mock_poll_model_fetch_results.reset_mock()
-
-                with patch('ureport.polls.models.Poll.get_brick_polls') as mock_brick_polls:
-                    mock_brick_polls.return_value = [self.poll]
-
-                    fetch_brick_polls_results(self.org)
-                    mock_poll_model_fetch_results.assert_called_once_with()
-                    mock_poll_model_fetch_results.reset_mock()
-
-                with patch('ureport.polls.models.Poll.get_other_polls') as mock_other_polls:
-                    mock_other_polls.return_value = [self.poll]
-
-                    fetch_other_polls_results(self.org)
-                    mock_poll_model_fetch_results.assert_called_once_with()
-                    mock_poll_model_fetch_results.reset_mock()
-
     @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_fetch_flows(self):
 
@@ -673,6 +639,11 @@ class UtilsTest(DashTest):
                                             parent=self.country, geometry='{"foo":"bar-city"}')
         self.district = Boundary.objects.create(org=self.org, osm_id="R-DISTRICT", name="District", level=2,
                                                 parent=self.state, geometry='{"foo":"bar-district"}')
+
+        inactive_district = Boundary.objects.create(org=self.org, osm_id="R-DISTRICT2", name="District", level=2,
+                                                    parent=self.state, geometry='{"foo":"bar-district"}')
+        inactive_district.is_active = False
+        inactive_district.save()
 
         ReportersCounter.objects.create(org=self.org, type='state:R-STATE', count=5)
         ReportersCounter.objects.create(org=self.org, type='district:R-DISTRICT', count=3)
