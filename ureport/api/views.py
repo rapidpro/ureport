@@ -14,7 +14,7 @@ class OrgList(ListAPIView):
     """
     This endpoint allows you to list orgs.
 
-    ## Listing Polls
+    ## Listing Orgs
 
     By making a ```GET``` request you can list all the organisations.  Each org has the following attributes:
 

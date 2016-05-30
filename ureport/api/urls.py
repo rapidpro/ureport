@@ -1,10 +1,12 @@
 from django.conf.urls import patterns, url, include
+from django.views.generic import RedirectView
 from ureport.api.views import PollList, PollDetails, FeaturedPollList, NewsItemList, NewsItemDetails, VideoList, VideoDetails, ImageList, \
     ImageDetails, OrgList, OrgDetails, StoryList, StoryDetails
 
 __author__ = 'kenneth'
 
 urlpatterns = patterns('',
+                       url(r'^$', RedirectView.as_view(pattern_name='django.swagger.base.view', permanent=False)),
                        url(r'^docs/', include('rest_framework_swagger.urls')),
 
                        url(r'^orgs/$', OrgList.as_view()),

@@ -121,12 +121,13 @@ class DashTest(SmartminTest):
         self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
         return Org.objects.get(subdomain=subdomain)
 
-    def create_poll(self, org, title, flow_uuid, category, user, featured=False):
+    def create_poll(self, org, title, flow_uuid, category, user, featured=False, has_synced=False):
         now = timezone.now()
         poll = Poll.objects.create(flow_uuid=flow_uuid,
                                    title=title,
                                    category=category,
                                    is_featured=featured,
+                                   has_synced=has_synced,
                                    org=org,
                                    poll_date=now,
                                    created_by=user,

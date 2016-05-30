@@ -69,37 +69,6 @@ class ContactField(models.Model):
         return dict(org=org, label=temba_contact_field.label, key=temba_contact_field.key,
                     value_type=temba_contact_field.value_type)
 
-    @classmethod
-    def fetch_contact_fields(cls, org):
-
-        temba_client = org.get_temba_client()
-        api_contact_fields = temba_client.get_fields()
-
-        seen_keys = []
-
-        for contact_field in api_contact_fields:
-            cls.update_or_create_from_temba(org, contact_field)
-            seen_keys.append(contact_field.key)
-
-        # remove any contact field that's no longer return on the API
-        cls.objects.filter(org=org).exclude(key__in=seen_keys).delete()
-
-        key = cls.CONTACT_FIELDS_CACHE_KEY % org.id
-        cache.set(key, seen_keys, cls.CONTACT_FIELDS_CACHE_TIMEOUT)
-
-        return seen_keys
-
-    @classmethod
-    def get_contact_fields(cls, org):
-        key = cls.CONTACT_FIELDS_CACHE_KEY % org.id
-
-        fields_keys = cache.get(key, None)
-        if fields_keys:
-            return fields_keys
-
-        fields_keys = cls.fetch_contact_fields(org)
-        return fields_keys
-
     def release(self):
         self.delete()
 
@@ -254,57 +223,6 @@ class Contact(models.Model):
             client.captureException()
             import traceback
             traceback.print_exc()
-
-    @classmethod
-    def fetch_contacts(cls, org, after=None):
-
-        print "START== Fetching contacts for %s" % org.name
-
-        reporter_group = org.get_config('reporter_group')
-
-        temba_client = org.get_temba_client()
-        api_groups = temba_client.get_groups(name=reporter_group)
-
-        if not api_groups:
-            return
-
-        seen_uuids = []
-
-        group_uuid = None
-
-        for grp in api_groups:
-            if grp.name.lower() == reporter_group.lower():
-                group_uuid = grp.uuid
-                break
-
-        now = timezone.now().replace(tzinfo=pytz.utc)
-        before = now
-
-        if not after:
-            # consider the after year 2013
-            after = json_date_to_datetime("2013-01-01T00:00:00.000")
-
-        while before > after:
-            pager = temba_client.pager()
-            api_contacts = temba_client.get_contacts(before=before, after=after, pager=pager)
-
-            last_contact_index = len(api_contacts) - 1
-
-            for i, contact in enumerate(api_contacts):
-                if i == last_contact_index:
-                    before = contact.modified_on
-
-                if group_uuid in contact.groups:
-                    cls.update_or_create_from_temba(org, contact)
-                    seen_uuids.append(contact.uuid)
-
-            if not pager.has_more():
-                cache.set(cls.CONTACT_LAST_FETCHED_CACHE_KEY % org.pk,
-                          datetime_to_json_date(now.replace(tzinfo=pytz.utc)),
-                          cls.CONTACT_LAST_FETCHED_CACHE_TIMEOUT)
-                break
-
-        return seen_uuids
 
     class Meta:
         unique_together = ('org', 'uuid')
