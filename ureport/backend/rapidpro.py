@@ -340,10 +340,14 @@ class RapidProBackend(BaseBackend):
                         state = ''
                         district = ''
                         ward = ''
+                        born = None
+                        gender = None
                         if contact_obj is not None:
                             state = contact_obj.state
                             district = contact_obj.district
                             ward = contact_obj.ward
+                            born = contact_obj.born
+                            gender = contact_obj.gender
 
                         for temba_step in temba_run.steps:
                             ruleset_uuid = temba_step.node
@@ -365,6 +369,8 @@ class RapidProBackend(BaseBackend):
                                 update_required = update_required or existing_poll_result.state != state
                                 update_required = update_required or existing_poll_result.district != district
                                 update_required = update_required or existing_poll_result.ward != ward
+                                update_required = update_required or existing_poll_result.born != born
+                                update_required = update_required or existing_poll_result.gender != gender
                                 update_required = update_required or existing_poll_result.completed != completed
 
                                 # if the reporter answered the step, check if this is a newer run
@@ -387,6 +393,8 @@ class RapidProBackend(BaseBackend):
                                 replace_save_map = replace_save_map or poll_result_to_save.state != state
                                 replace_save_map = replace_save_map or poll_result_to_save.district != district
                                 replace_save_map = replace_save_map or poll_result_to_save.ward != ward
+                                replace_save_map = replace_save_map or poll_result_to_save.born != born
+                                replace_save_map = replace_save_map or poll_result_to_save.gender != gender
                                 replace_save_map = replace_save_map or poll_result_to_save.completed != completed
 
                                 # replace if the step is newer
@@ -406,8 +414,8 @@ class RapidProBackend(BaseBackend):
 
                                 result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
                                                         contact=contact_uuid, category=category, text=text,
-                                                        state=state, district=district, ward=ward,
-                                                        date=temba_step.left_on, completed=completed)
+                                                        state=state, district=district, ward=ward, born=born,
+                                                        gender=gender, date=temba_step.left_on, completed=completed)
 
                                 poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
 
