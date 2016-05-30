@@ -740,7 +740,7 @@ class PollResult(models.Model):
             ward = self.ward.upper()
 
         if self.born:
-            born = self.born.lower()
+            born = self.born
 
         if self.gender:
             gender = self.gender.lower()
