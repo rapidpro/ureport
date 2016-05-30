@@ -29,69 +29,6 @@ class LocationTest(DashTest):
         # try creating an object from the kwargs
         Boundary.objects.create(**kwargs)
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_fetch_boundaries(self):
-
-        # Old boundary should be deleted after we fetch boundaries
-        old_boundary = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None, level=0,
-                                               geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
-
-        Boundary.fetch_boundaries(self.nigeria)
-        self.assertIsNone(Boundary.objects.filter(org=self.nigeria, osm_id__iexact='OLD123').first())
-
-        self.assertEqual(Boundary.objects.all().count(), 2)
-
-        country_boundary = Boundary.objects.get(level=0)
-        self.assertEqual(country_boundary.name, "Nigeria")
-        self.assertEqual(country_boundary.osm_id, 'R12345')
-        self.assertIsNone(country_boundary.parent)
-        self.assertEqual(country_boundary.geometry, json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES'])))
-
-        state_boundary = Boundary.objects.get(level=1)
-        self.assertEqual(state_boundary.name, "Lagos")
-        self.assertEqual(state_boundary.osm_id, 'R23456')
-        self.assertEqual(state_boundary.parent, country_boundary)
-        self.assertEqual(state_boundary.geometry, json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES'])))
-
-        self.assertEqual(country_boundary.as_geojson(),
-                         dict(type='Feature', geometry=dict(type='MultiPolygon', coordinates=['COORDINATES']),
-                              properties=dict(id='R12345', level=0, name='Nigeria')))
-
-        self.assertEqual(state_boundary.as_geojson(),
-                         dict(type='Feature', geometry=dict(type='MultiPolygon', coordinates=['COORDINATES']),
-                              properties=dict(id='R23456', level=1, name='Lagos')))
-
-        with patch('ureport.locations.models.Boundary.build_global_boundaries') as mock_global_boundaries:
-            mock_global_boundaries.return_value = []
-
-            Boundary.fetch_boundaries(self.nigeria)
-            self.assertFalse(mock_global_boundaries.called)
-
-            self.nigeria.set_config('is_global', True)
-
-            Boundary.fetch_boundaries(self.nigeria)
-            self.assertTrue(mock_global_boundaries.called)
-            mock_global_boundaries.assert_called_once()
-
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_get_boundaries(self):
-
-        boundaries_ids = Boundary.get_boundaries(self.nigeria)
-        self.assertEqual(boundaries_ids, ['R12345', 'R23456'])
-
-        with patch('django.core.cache.cache.get') as cache_get_mock:
-            cache_get_mock.return_value = None
-
-            boundaries_ids = Boundary.get_boundaries(self.nigeria)
-            self.assertEqual(boundaries_ids, ['R12345', 'R23456'])
-
-            cache_get_mock.return_value = ['R12345', 'R23456']
-
-            with patch('ureport.locations.models.Boundary.fetch_boundaries') as mock_fetch:
-
-                Boundary.get_boundaries(self.nigeria)
-                self.assertFalse(mock_fetch.called)
-
     def test_get_org_top_level_boundaries_name(self):
 
         self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), dict())
@@ -180,4 +117,3 @@ class LocationTest(DashTest):
             self.assertEqual(faroe.level, 0)
             self.assertEqual(faroe.geometry.type, "Polygon")
             self.assertEqual(faroe.geometry.coordinates, [[[5, 6], [7, 8]]])
-

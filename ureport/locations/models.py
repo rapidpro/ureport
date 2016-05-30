@@ -90,40 +90,6 @@ class Boundary(models.Model):
 
         return boundaries
 
-    @classmethod
-    def fetch_boundaries(cls, org):
-
-        if org.get_config('is_global'):
-            api_boundaries = cls.build_global_boundaries()
-        else:
-            temba_client = org.get_temba_client()
-            api_boundaries = temba_client.get_boundaries()
-
-        seen_ids = []
-
-        for boundary in api_boundaries:
-            cls.update_or_create_from_temba(org, boundary)
-            seen_ids.append(boundary.boundary)
-
-        # remove any boundary that's no longer on rapidpro
-        cls.objects.filter(org=org).exclude(osm_id__in=seen_ids).delete()
-
-        key = cls.BOUNDARIES_CACHE_KEY % org.id
-        cache.set(key, seen_ids, cls.BOUNDARIES_CACHE_TIMEOUT)
-
-        return seen_ids
-
-    @classmethod
-    def get_boundaries(cls, org):
-        key = cls.BOUNDARIES_CACHE_KEY % org.id
-
-        boundary_ids = cache.get(key, None)
-        if boundary_ids:
-            return boundary_ids
-
-        boundary_ids = cls.fetch_boundaries(org)
-        return boundary_ids
-
     def as_geojson(self):
         return dict(type='Feature', geometry=json.loads(self.geometry),
                     properties=dict(id=self.osm_id, level=self.level, name=self.name))
@@ -131,9 +97,9 @@ class Boundary(models.Model):
     @classmethod
     def get_org_top_level_boundaries_name(cls, org):
         if org.get_config('is_global'):
-            top_boundaries = cls.objects.filter(org=org, level=0)
+            top_boundaries = cls.objects.filter(org=org, level=cls.COUNTRY_LEVEL)
         else:
-            top_boundaries = cls.objects.filter(org=org, level=1)
+            top_boundaries = cls.objects.filter(org=org, level=cls.STATE_LEVEL)
 
         top_boundaries_values = top_boundaries.values('name', 'osm_id')
 

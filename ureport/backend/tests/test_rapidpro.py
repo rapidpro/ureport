@@ -12,7 +12,7 @@ from django.utils import timezone
 from mock import patch
 
 from temba_client.v1.types import Boundary as TembaBoundary, Geometry as TembaGeometry
-from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact, Step as TembaStep
+from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact
 from temba_client.v2.types import Run as TembaRun
 
 from dash.test import MockClientQuery
@@ -346,19 +346,19 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="Customers")],
-                        fields={'age': "34"}, failed=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
-                        fields={'age': "67"}, failed=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[],
-                        fields={'age': "35"}, failed=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False
                     ),
                 ]
             ),
@@ -367,7 +367,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -385,19 +385,19 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "34"}, failed=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
-                        fields={'age': "67"}, failed=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[],
-                        fields={'age': "35"}, failed=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False
                     ),
                 ]
             ),
@@ -406,7 +406,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -426,19 +426,19 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "34"}, failed=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "67"}, failed=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[],
-                        fields={'age': "35"}, failed=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False
                     ),
                 ]
             ),
@@ -447,7 +447,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -468,19 +468,19 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "34"}, failed=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "67"}, failed=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "35"}, failed=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False
                     ),
                 ]
             ),
@@ -489,7 +489,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -518,7 +518,7 @@ class RapidProBackendTest(DashTest):
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "67", "born": "1992"}, failed=False, blocked=False
+                        fields={'age': "67", "born": "1992"}, stopped=False, blocked=False
                     ),
                 ]
             ),
@@ -527,7 +527,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -556,7 +556,7 @@ class RapidProBackendTest(DashTest):
                 [
                     TembaContact.create(
                         uuid="C-002", name=None, language=None, urns=[], groups=[],
-                        fields=None, failed=True, blocked=False
+                        fields=None, stopped=True, blocked=False
                     ),
                 ]
             )
@@ -677,7 +677,7 @@ class RapidProBackendTest(DashTest):
         now = timezone.now()
         temba_run = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                     contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
-                                    steps=[TembaStep.create(node='ruleset-uuid', text="We'll win today", value="win",
+                                    steps=[TembaRun.Step.create(node='ruleset-uuid', text="We'll win today", value="win",
                                                             category='Win', type='ruleset',
                                                             arrived_on=now, left_on=now)],
                                     created_on=now, modified_on=now, exited_on=now,
@@ -689,7 +689,7 @@ class RapidProBackendTest(DashTest):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
-        mock_get_runs.assert_called_with(flow='flow-uuid', responded=True, after=None, before=now)
+        mock_get_runs.assert_called_with(flow='flow-uuid', after=None, before=now)
 
         poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
         self.assertEqual(poll_result.state, 'R-LAGOS')
@@ -702,7 +702,7 @@ class RapidProBackendTest(DashTest):
 
         temba_run_1 = TembaRun.create(id=1235, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-002', name='Davido'), responded=True,
-                                      steps=[TembaStep.create(node='ruleset-uuid', text="I sing", value="sing",
+                                      steps=[TembaRun.Step.create(node='ruleset-uuid', text="I sing", value="sing",
                                                               category='Sing', type='ruleset',
                                                               arrived_on=now, left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
@@ -710,7 +710,7 @@ class RapidProBackendTest(DashTest):
 
         temba_run_2 = TembaRun.create(id=1236, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-003', name='Lebron'), responded=True,
-                                      steps=[TembaStep.create(node='ruleset-uuid', text="I play basketball",
+                                      steps=[TembaRun.Step.create(node='ruleset-uuid', text="I play basketball",
                                                               value="play", category='Play', type='ruleset',
                                                               arrived_on=now, left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
@@ -731,7 +731,7 @@ class RapidProBackendTest(DashTest):
 
         temba_run_3 = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
-                                      steps=[TembaStep.create(node='ruleset-uuid', text="We'll celebrate today",
+                                      steps=[TembaRun.Step.create(node='ruleset-uuid', text="We'll celebrate today",
                                                               value="celebrate", category='Party', type='ruleset',
                                                               arrived_on=now + timedelta(minutes=1), left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
@@ -785,7 +785,7 @@ class RapidProBackendTest(DashTest):
         now = timezone.now()
         temba_run = TembaRun.create(id=4321, flow=ObjectRef.create(uuid='flow-uuid-3', name="Flow 2"),
                                     contact=ObjectRef.create(uuid='C-021', name='Hyped'), responded=True,
-                                    steps=[TembaStep.create(node='ruleset-uuid', text="Doing it now", value="win",
+                                    steps=[TembaRun.Step.create(node='ruleset-uuid', text="Doing it now", value="win",
                                                             category='Win', type='ruleset',
                                                             arrived_on=now, left_on=now)],
                                     created_on=now, modified_on=now, exited_on=now,
@@ -797,7 +797,7 @@ class RapidProBackendTest(DashTest):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
-        mock_get_runs.assert_called_with(flow='flow-uuid-3', responded=True, after=None, before=now)
+        mock_get_runs.assert_called_with(flow='flow-uuid-3', after=None, before=now)
 
         poll_result = PollResult.objects.filter(flow='flow-uuid-3', ruleset='ruleset-uuid', contact='C-021').first()
         self.assertEqual(poll_result.ward, 'R-IKEJA')
@@ -864,7 +864,6 @@ class PerfTest(DashTest):
         from django_redis import get_redis_connection
         redis_client = get_redis_connection()
 
-
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
@@ -872,7 +871,7 @@ class PerfTest(DashTest):
 
         poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
 
-        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.pk)
+        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid)
         redis_client.delete(key)
 
         now = timezone.now()
@@ -892,7 +891,7 @@ class PerfTest(DashTest):
                     flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                     contact=ObjectRef.create(uuid='C-00%d' % num, name=names[num % len(names)]),
                     responded=True,
-                    steps=[TembaStep.create(node='ruleset-uuid-%d' % s,
+                    steps=[TembaRun.Step.create(node='ruleset-uuid-%d' % s,
                                             text="Text %s" % s,
                                             value="Value %s" % s,
                                             category='Category %s' % s,
@@ -911,6 +910,8 @@ class PerfTest(DashTest):
         start = time.time()
 
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before=now)
 
         self.assertEqual((num_created, num_updated, num_ignored), (num_fetches * fetch_size * num_steps, 0, 0))
 
@@ -940,7 +941,7 @@ class PerfTest(DashTest):
         # simulate ignore of 1 value change from older runs
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaStep.create(node='ruleset-uuid-0',
+                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
                                               text="Txt 0",
                                               value="Val 0",
                                               category='CAT 0',
@@ -967,7 +968,7 @@ class PerfTest(DashTest):
         # simulate an update of 1 value
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaStep.create(node='ruleset-uuid-0',
+                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
                                               text="Txt 0",
                                               value="Val 0",
                                               category='CAT 0',
@@ -992,10 +993,37 @@ class PerfTest(DashTest):
 
         reset_queries()
 
+        # simulate ignoring actionset nodes
+        for batch in active_fetches:
+            for r in batch:
+                r.steps[0] = TembaRun.Step.create(node='actionset-uuid-0',
+                                              text="What do you think?",
+                                              value="",
+                                              category='',
+                                              type='actionset',
+                                              arrived_on=now + timedelta(minutes=5), left_on=now)
+
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+        start = time.time()
+
+        redis_client.delete(key)
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, num_fetches * fetch_size * num_steps))
+
+        slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        for q in slowest_queries:
+            print "=" * 60
+            print "\n\n\n"
+            print "%s -- %s" % (q['time'], q['sql'])
+
+        reset_queries()
+
         # simulate an update of 1 value
         for batch in active_fetches:
             for r in batch:
-                r.steps = [TembaStep.create(node='ruleset-uuid-0',
+                r.steps = [TembaRun.Step.create(node='ruleset-uuid-0',
                                             text="T %s" % s ,
                                             value="V %s" % s,
                                             category='C %s' % s,
@@ -1034,12 +1062,51 @@ class PerfTest(DashTest):
 
         start = time.time()
 
-        for batch in active_fetches:
-            for r in batch:
-                r.contact = ObjectRef.create(uuid='C-001', name='Will')
+        # same contact, same ruleset, same or previous time should all be ignored, only insert one, ignore others
+        active_fetches = []
+        for b in range(0, num_fetches):
+            batch = []
+            for r in range(0, fetch_size):
+                num = b * fetch_size + r
+                batch.append(TembaRun.create(
+                    id=num,
+                    flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                    contact=ObjectRef.create(uuid='C-001', name='Will'),
+                    responded=True,
+                    steps=[TembaRun.Step.create(node='ruleset-uuid-0',
+                                            text="Text %s" % s,
+                                            value="Value %s" % s,
+                                            category='Category %s' % s,
+                                            type='ruleset',
+                                            arrived_on=now, left_on=now)
+                           for s in range(0, num_steps)],
+                    created_on=now,
+                    modified_on=now,
+                    exited_on=now,
+                    exit_type=''))
+
+            active_fetches.append(batch)
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, num_fetches * fetch_size * num_steps - 1))
+
+        mock_cache_get.side_effect = [now_date, None, now_date, now_date]
+        with patch("ureport.polls.models.Poll.delete_poll_results") as mock_delete_poll_results:
+            mock_delete_poll_results.return_value = "Deleted"
+
+            mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+            self.assertFalse(mock_delete_poll_results.called)
+
+            redis_client.set(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk), now_date, None)
+
+            mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+            mock_delete_poll_results.assert_called_with()

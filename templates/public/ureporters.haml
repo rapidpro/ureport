@@ -142,7 +142,7 @@
             stops: 6
           });
 
-          window.initMap('ureport-location-map-id', boundaries, ajaxUrl,  '{{ org|config:"district_label"}}', colorsList);
+          window.initMap('ureport-location-map-id', boundaries, ajaxUrl,  '{{ org|config:"district_label"}}', colorsList, '{{ org|config:"ward_label"}}');
         });
       });
     });

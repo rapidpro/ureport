@@ -97,7 +97,6 @@ class PollReadSerializer(serializers.ModelSerializer):
             results = question.get_results()
             if results:
                 results_dict = results[0]
-                results_dict.pop('label')
             questions.append({'id': question.pk,
                               'ruleset_uuid': question.ruleset_uuid,
                               'title': question.title,

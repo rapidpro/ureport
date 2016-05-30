@@ -387,9 +387,10 @@
   #hero.jumbotron
     - block hero
 
-  -if org|config:"join_text"
-    .banner
-      {{ org|config:"join_text" }}
+  - block join-banner
+    -if org|config:"join_text"
+      .banner
+        {{ org|config:"join_text" }}
 
   .container
     - block content-div
@@ -407,22 +408,18 @@
         - block content
 
   - block footer
-    .footer-container{class:'{% if org|config:"is_global" %}global-footer{% endif %}'}
+    .footer-container{class:'global-footer'}
       .container
         %footer
           .row
-            -if org|config:"is_global"
-              .col-sm-9
-                - show_org_flags
-            -else
-              .col-sm-6
-                .terms-privacy
-                  %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
+            .col-sm-9
+              - show_org_flags
 
-            .{class:'{% if org|config:"is_global" %}col-sm-3{% else %}col-sm-6{% endif %}'}
+            .{class:'col-sm-3'}
               .follow-us
                 -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
-                  - trans "FOLLOW US ON:"
+                  .follow-us-text
+                    - trans "FOLLOW US ON"
                   - if org|config:"facebook_page_url"
                     %a{href:'{{ org|config:"facebook_page_url" }}'}
                       %img.footer-social{ src:"{{ STATIC_URL }}img/facebook_footer_icon.png" }
@@ -438,9 +435,9 @@
                   - if org|config:"youtube_channel_url"
                     %a{href:'{{ org|config:"youtube_channel_url" }}'}
                       %img.footer-social{ src:"{{ STATIC_URL }}img/youtube_footer_icon.png" }
-              -if org|config:"is_global"
-                .footer-global-ureport-logo
-                  %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
+
+              .footer-global-ureport-logo
+                %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
 
           - if not request.user.is_authenticated and not is_iorg and show_login
             .row

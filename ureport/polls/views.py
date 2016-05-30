@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from ureport.utils import json_date_to_datetime
 from .models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_ORG_FLOWS_KEY
-from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView
+from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView, SmartReadView
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
@@ -96,7 +96,7 @@ class QuestionForm(ModelForm):
 
 class PollCRUDL(SmartCRUDL):
     model = Poll
-    actions = ('create', 'list', 'update', 'questions', 'images', 'responses')
+    actions = ('create', 'list', 'update', 'questions', 'images', 'responses', 'pull_refresh')
 
     class Create(OrgPermsMixin, SmartCreateView):
         form_class = PollForm
@@ -126,8 +126,9 @@ class PollCRUDL(SmartCRUDL):
         def post_save(self, obj):
             obj = super(PollCRUDL.Create, self).post_save(obj)
             obj.update_or_create_questions(user=self.request.user)
-            return obj
 
+            Poll.pull_poll_results_task(obj)
+            return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
         success_url = 'id@polls.poll_responses'
@@ -312,8 +313,6 @@ class PollCRUDL(SmartCRUDL):
             # clear our cache of featured polls
             Poll.clear_brick_polls_cache(obj.org)
 
-            Poll.fetch_poll_results_task(obj)
-
             return obj
 
         def derive_initial(self):
@@ -330,13 +329,20 @@ class PollCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         search_fields = ('title__icontains',)
-        fields = ('title', 'category', 'questions', 'featured_responses', 'images', 'created_on')
+        fields = ('title', 'category', 'questions', 'featured_responses', 'images', 'sync_status', 'created_on')
         link_fields = ('title', 'questions', 'featured_responses', 'images')
         default_order = ('-created_on', 'id')
 
         def get_queryset(self):
             queryset = super(PollCRUDL.List, self).get_queryset().filter(org=self.request.org)
             return queryset
+
+        def get_sync_status(self, obj):
+            if obj.has_synced:
+                return "Synced 100%"
+
+            sync_progress = obj.get_sync_progress()
+            return "Syncing... {0:.1f}%".format(sync_progress)
 
         def get_questions(self, obj):
             return obj.get_questions().count()
@@ -370,3 +376,14 @@ class PollCRUDL(SmartCRUDL):
             obj = super(PollCRUDL.Update, self).post_save(obj)
             obj.update_or_create_questions(user=self.request.user)
             return obj
+
+    class PullRefresh(SmartUpdateView):
+        fields = ('id',)
+        success_url = '@polls.poll_list'
+        success_message = None
+
+        def post_save(self, obj):
+            poll_id = int(self.request.REQUEST['poll'])
+            poll = Poll.objects.get(pk=poll_id)
+            poll.pull_refresh_task()
+            self.success_message = _("Scheduled a pull refresh for poll #%d on org #%d") % (poll.pk, poll.org_id)
