@@ -7,6 +7,7 @@ from djcelery.app import app
 
 from dash.orgs.tasks import org_task
 from ureport.utils import fetch_flows, fetch_old_sites_count, update_poll_flow_data
+from ureport.utils import populate_age_and_gender_poll_results
 
 
 logger = logging.getLogger(__name__)
@@ -75,6 +76,22 @@ def pull_refresh(poll_id):
 def rebuild_counts():
     from .models import Poll
     for poll in Poll.objects.all():
+        poll.rebuild_poll_results_counts()
+
+
+@app.task(name='update_results_age_gender')
+def update_results_age_gender(org_id=None):
+    from .models import Poll
+    org = None
+    if org_id:
+        org = Org.objects.filter(pk=org_id).first()
+
+    populate_age_and_gender_poll_results(org)
+
+    polls = Poll.objects.all()
+    if org:
+        polls = polls.filter(org=org)
+    for poll in polls:
         poll.rebuild_poll_results_counts()
 
 

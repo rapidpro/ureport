@@ -549,6 +549,25 @@ def get_segment_org_boundaries(org, segment):
     return location_boundaries
 
 
+def populate_age_and_gender_poll_results(org=None):
+    all_contacts = Contact.objects.all().values_list('id', flat=True)
+
+    if org is not None:
+        all_contacts = Contact.objects.filter(org=org).values_list('id', flat=True)
+
+    start = time.time()
+    i = 0
+
+    for contact_id_batch in chunk_list(all_contacts, 1000):
+        contacts = Contact.objects.filter(id__in=contact_id_batch)
+        for contact in contacts:
+            i += 1
+            results_ids = PollResult.objects.filter(contact=contact.uuid).values_list('id', flat=True)
+            PollResult.objects.filter(id__in=results_ids).update(born=contact.born, gender=contact.gender)
+
+        print "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
+
+
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
