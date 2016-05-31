@@ -19,9 +19,9 @@ import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
-from ureport.locations.models import Boundary
-from ureport.polls.models import Poll
 
+from ureport.locations.models import Boundary
+from ureport.polls.models import Poll, PollResult
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
@@ -547,6 +547,27 @@ def get_segment_org_boundaries(org, segment):
             location_boundaries = org.boundaries.filter(level=Boundary.STATE_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
 
     return location_boundaries
+
+
+def populate_age_and_gender_poll_results(org=None):
+    from ureport.contacts.models import Contact
+
+    all_contacts = Contact.objects.all().values_list('id', flat=True)
+
+    if org is not None:
+        all_contacts = Contact.objects.filter(org=org).values_list('id', flat=True)
+
+    start = time.time()
+    i = 0
+
+    for contact_id_batch in chunk_list(all_contacts, 1000):
+        contacts = Contact.objects.filter(id__in=contact_id_batch)
+        for contact in contacts:
+            i += 1
+            results_ids = PollResult.objects.filter(contact=contact.uuid).values_list('id', flat=True)
+            PollResult.objects.filter(id__in=results_ids).update(born=contact.born, gender=contact.gender)
+
+        print "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
 
 
 Org.get_occupation_stats = get_occupation_stats
