@@ -19,9 +19,10 @@ import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
-from ureport.locations.models import Boundary
-from ureport.polls.models import Poll
 
+from ureport.contacts.models import Contact
+from ureport.locations.models import Boundary
+from ureport.polls.models import Poll, PollResult
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
