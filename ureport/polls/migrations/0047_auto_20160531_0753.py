@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0045_fix_has_synced_field'),
+        ('polls', '0046_add_index_on_pollresults_contact'),
     ]
 
     operations = [
