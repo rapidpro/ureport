@@ -20,7 +20,6 @@ import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
 
-from ureport.contacts.models import Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
 
@@ -551,6 +550,8 @@ def get_segment_org_boundaries(org, segment):
 
 
 def populate_age_and_gender_poll_results(org=None):
+    from ureport.contacts.models import Contact
+
     all_contacts = Contact.objects.all().values_list('id', flat=True)
 
     if org is not None:
