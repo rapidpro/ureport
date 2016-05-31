@@ -705,6 +705,10 @@ class PollResult(models.Model):
 
     ward = models.CharField(max_length=255, null=True)
 
+    gender = models.CharField(max_length=1, null=True)
+
+    born = models.IntegerField(null=True)
+
     def generate_counters(self):
         generated_counters = dict()
 
@@ -717,6 +721,8 @@ class PollResult(models.Model):
         state = ''
         district = ''
         ward = ''
+        born = ''
+        gender = ''
 
         if self.ruleset:
             ruleset = self.ruleset.lower()
@@ -733,12 +739,28 @@ class PollResult(models.Model):
         if self.ward:
             ward = self.ward.upper()
 
+        if self.born:
+            born = self.born
+
+        if self.gender:
+            gender = self.gender.lower()
+
         generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
 
         if category:
             generated_counters['ruleset:%s:total-ruleset-responded' % ruleset] = 1
 
             generated_counters['ruleset:%s:category:%s' % (ruleset, category)] = 1
+
+        if category and born:
+            generated_counters['ruleset:%s:category:%s:born:%s' % (ruleset, category, born)] = 1
+        elif born:
+            generated_counters['ruleset:%s:nocategory:born:%s' % (ruleset, born)] = 1
+
+        if category and gender:
+            generated_counters['ruleset:%s:category:%s:gender:%s' % (ruleset, category, gender)] = 1
+        elif gender:
+            generated_counters['ruleset:%s:nocategory:gender:%s' % (ruleset, gender)] = 1
 
         if state and category:
             generated_counters['ruleset:%s:category:%s:state:%s' % (ruleset, category, state)] = 1
