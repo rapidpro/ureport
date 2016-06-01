@@ -523,9 +523,10 @@ class PollQuestion(SmartModel):
             substituted_segment = self.poll.org.substitute_segment(segment)
             key += ":" + slugify(unicode(json.dumps(substituted_segment)))
 
-        cached_value = cache.get(key, None)
-        if cached_value:
-            return cached_value["results"]
+        #cached_value = cache.get(key, None)
+        #if cached_value:
+
+        #    return cached_value["results"]
 
         org = self.poll.org
         open_ended = self.is_open_ended()
@@ -573,38 +574,103 @@ class PollQuestion(SmartModel):
 
             if segment:
 
-                location_part = segment.get('location').lower()
+                location_part = segment.get('location', '').lower()
+                age_part = segment.get('age', '').lower()
+                gender_part = segment.get('gender', '').lower()
 
-                if location_part not in ['state', 'district', 'ward']:
-                    return None
+                if location_part in ['state', 'district', 'ward']:
 
-                location_boundaries = org.get_segment_org_boundaries(segment)
+                    location_boundaries = org.get_segment_org_boundaries(segment)
 
-                for boundary in location_boundaries:
-                    categories = []
-                    osm_id = boundary.get('osm_id').upper()
-                    set_count = 0
-                    unset_count_key = "ruleset:%s:nocategory:%s:%s" % (self.ruleset_uuid, location_part, osm_id)
-                    unset_count = question_results.get(unset_count_key, 0)
+                    for boundary in location_boundaries:
+                        categories = []
+                        osm_id = boundary.get('osm_id').upper()
+                        set_count = 0
+                        unset_count_key = "ruleset:%s:nocategory:%s:%s" % (self.ruleset_uuid, location_part, osm_id)
+                        unset_count = question_results.get(unset_count_key, 0)
 
-                    for categorie_label in categories_label:
-                        category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
-                        category_count = question_results.get(category_count_key, 0)
-                        set_count += category_count
-                        categories.append(dict(count=category_count, label=categorie_label))
+                        for categorie_label in categories_label:
+                            category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
+                            category_count = question_results.get(category_count_key, 0)
+                            set_count += category_count
+                            categories.append(dict(count=category_count, label=categorie_label))
 
-                    if open_ended:
-                        # For home page best and worst location responses
-                        from ureport.contacts.models import Contact
-                        if segment.get('location') == 'District':
-                            boundary_contacts_count = Contact.objects.filter(org=org, district=osm_id).count()
-                        else:
-                            boundary_contacts_count = Contact.objects.filter(org=org, state=osm_id).count()
-                        unset_count = boundary_contacts_count - set_count
+                        if open_ended:
+                            # For home page best and worst location responses
+                            from ureport.contacts.models import Contact
+                            if segment.get('location') == 'District':
+                                boundary_contacts_count = Contact.objects.filter(org=org, district=osm_id).count()
+                            else:
+                                boundary_contacts_count = Contact.objects.filter(org=org, state=osm_id).count()
+                            unset_count = boundary_contacts_count - set_count
 
-                    results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
-                                        boundary=osm_id, label=boundary.get('name'),
-                                        categories=categories))
+                        results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
+                                            boundary=osm_id, label=boundary.get('name'),
+                                            categories=categories))
+                elif age_part:
+                    poll_year = self.poll.poll_date.year
+
+                    born_results = {k: v for k, v in question_results.iteritems() if k[-9:-5] == 'born'}
+
+                    age_intervals = dict()
+                    age_intervals['35+'] = (35, 2000)
+                    age_intervals['31-34'] = (31, 34)
+                    age_intervals['25-30'] = (25, 30)
+                    age_intervals['20-24'] = (20, 24)
+                    age_intervals['15-19'] = (15, 19)
+                    age_intervals['0-14'] = (0, 14)
+
+                    for age_group in age_intervals.keys():
+                        lower_bound, upper_bound = age_intervals[age_group]
+                        unset_count = 0
+
+                        categories_count = dict()
+                        for categorie_label in categories_label:
+                            if categorie_label.lower() != 'other':
+                                categories_count[categorie_label.lower()] = 0
+
+                        for result_key, result_count in born_results.iteritems():
+                            age = poll_year - int(result_key[-4:])
+
+                            if lower_bound <= age < upper_bound:
+                                if 'nocategory' in result_key:
+                                    unset_count += result_count
+
+                                for categorie_label in categories_label:
+                                    if categorie_label.lower() != 'other':
+                                        if result_key.startswith('ruleset:%s:category:%s:' % (self.ruleset_uuid, categorie_label.lower())):
+                                            categories_count[categorie_label.lower()] += result_count
+
+                        categories = [dict(count=v, label=k) for k, v in categories_count.iteritems()]
+
+                        set_count = sum([elt['count'] for elt in categories])
+
+                        results.append(dict(set=set_count, unset=unset_count, label=age_group,
+                                            categories=categories))
+
+                    results = sorted(results, key=lambda i:i['label'])
+
+                elif gender_part:
+
+                    genders = ['f', 'm']
+                    gender_labels = dict(f=_('Female'), m=_('Male'))
+
+                    for gender in genders:
+                        categories = []
+                        set_count = 0
+                        unset_count_key = "ruleset:%s:nocategory:%s:%s"% (self.ruleset_uuid, 'gender', gender)
+                        unset_count = question_results.get(unset_count_key, 0)
+
+                        for categorie_label in categories_label:
+                            category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), 'gender', gender)
+                            if categorie_label.lower() != 'other':
+                                category_count = question_results.get(category_count_key, 0)
+                                set_count += category_count
+                                categories.append(dict(count=category_count, label=categorie_label))
+
+                        results.append(dict(set=set_count, unset=unset_count, label=gender_labels.get(gender),
+                                            categories=categories))
+
 
             else:
                 categories = []
