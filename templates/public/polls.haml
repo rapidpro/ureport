@@ -127,6 +127,9 @@
                         .tab-pane{id:"gender-tab-{{ question.id }}"}
                           -with seg_results=question|question_segmented_results:"gender"
                             -for results in seg_results
+                              .graph-title
+                                {{results.label}}
+
                               .poll-graph
 
                                 -with categories=results.categories
@@ -146,17 +149,16 @@
 
                                         .category-label-above
                                           {{ category.label }}
-
-                              .graph-title
-                                {{results.label}}
-
-                              %hr
-
+                              -if not forloop.last
+                                %hr
 
                       -if not is_iorg and org|config:"born_label"
                         .tab-pane{id:"age-tab-{{ question.id }}"}
                           -with seg_results=question|question_segmented_results:"age"
                             -for results in seg_results
+                              .graph-title
+                                {{results.label}}
+
                               .poll-graph
 
                                 -with categories=results.categories
@@ -176,12 +178,8 @@
 
                                         .category-label-above
                                           {{ category.label }}
-
-                              .graph-title
-                                {{results.label}}
-                              %hr
-
-
+                              -if not forloop.last
+                                %hr
 
                       .tab-pane.active{id:"statistics-tab-{{ question.id }}"}
                         .poll-graph
@@ -313,8 +311,9 @@
 
     .graph-title {
       text-align: center;
-      margin-bottom: 50px;
-      font-size: 30px;
+      margin-bottom: -20px;
+      font-size: 25px;
+      margin-top: 30px;
     }
 
     .leaflet-container {
