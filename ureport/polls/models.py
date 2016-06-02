@@ -544,7 +544,6 @@ class PollQuestion(SmartModel):
             cursor.execute(custom_sql)
             from ureport.utils import get_dict_from_cursor
             unclean_categories = get_dict_from_cursor(cursor)
-            categories = []
 
             ureport_languages = getattr(settings, 'LANGUAGES', [('en', 'English')])
 
@@ -680,7 +679,8 @@ class PollQuestion(SmartModel):
 
                 results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
 
-        cache.set(key, {"results": results}, PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT)
+        if results:
+            cache.set(key, {"results": results}, PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT)
 
         return results
 
