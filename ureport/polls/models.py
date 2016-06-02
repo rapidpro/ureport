@@ -523,10 +523,9 @@ class PollQuestion(SmartModel):
             substituted_segment = self.poll.org.substitute_segment(segment)
             key += ":" + slugify(unicode(json.dumps(substituted_segment)))
 
-        #cached_value = cache.get(key, None)
-        #if cached_value:
-
-        #    return cached_value["results"]
+        cached_value = cache.get(key, None)
+        if cached_value:
+            return cached_value["results"]
 
         org = self.poll.org
         open_ended = self.is_open_ended()
@@ -670,7 +669,6 @@ class PollQuestion(SmartModel):
 
                         results.append(dict(set=set_count, unset=unset_count, label=gender_labels.get(gender),
                                             categories=categories))
-
 
             else:
                 categories = []
