@@ -381,6 +381,7 @@ class RapidProBackend(BaseBackend):
                                     PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
                                                                                                  state=state, district=district,
                                                                                                  ward=ward, date=temba_step.left_on,
+                                                                                                 born=born, gender=gender,
                                                                                                  completed=completed)
 
                                     num_updated += 1
@@ -405,6 +406,7 @@ class RapidProBackend(BaseBackend):
                                     result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
                                                             contact=contact_uuid, category=category, text=text,
                                                             state=state, district=district, ward=ward,
+                                                            born=born, gender=gender,
                                                             date=temba_step.left_on, completed=completed)
 
                                     poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
