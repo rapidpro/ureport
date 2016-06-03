@@ -1,22 +1,18 @@
 from __future__ import unicode_literals
 import json
-import time
 from collections import defaultdict
-from datetime import datetime
 
 import pytz
 from django.contrib.auth.models import User
-from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, connection
-from django.db.models import Sum, Count, F, Max
+from django.db.models import Sum, Count
 from django.utils.text import slugify
 from django.utils import timezone
 from smartmin.models import SmartModel
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext
 from django.core.cache import cache
 from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
-from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
 from stop_words import safe_get_stop_words
 
@@ -442,6 +438,75 @@ class Poll(SmartModel):
             return self.category_image.image
         elif self.category.is_active:
             return self.category.get_first_image()
+
+    @classmethod
+    def prepare_fields(cls, field_dict, import_params=None, user=None):
+        if not import_params or 'org_id' not in import_params:
+            raise Exception('Import params must include org_id')
+
+        field_dict['created_by'] = user
+        field_dict['org'] = Org.objects.get(pk=import_params['org_id'])
+
+        return field_dict
+
+    @classmethod
+    def create_instance(cls, field_dict):
+        if 'org' not in field_dict:
+            raise ValueError("Import fields dictionary must include org")
+
+        if 'created_by' not in field_dict:
+            raise ValueError("Import fields dictionary must include created_by")
+
+        if 'category' not in field_dict:
+            raise ValueError("Import fields dictionary must include category")
+
+        if 'uuid' not in field_dict:
+            raise ValueError("Import fields dictionary must include uuid")
+
+        if 'name' not in field_dict:
+            raise ValueError("Import fields dictionary must include name")
+
+        if 'created_on' not in field_dict:
+            raise ValueError("Import fields dictionary must include created_on")
+
+        if 'ruleset_uuid' not in field_dict:
+            raise ValueError("Import fields dictionary must include ruleset_uuid")
+
+        if 'question' not in field_dict:
+            raise ValueError("Import fields dictionary must include question")
+
+        org = field_dict.pop('org')
+        user = field_dict.pop('created_by')
+
+        category = field_dict.pop('category')
+
+        uuid = field_dict.pop('uuid')
+        name = field_dict.pop('name')
+        created_on = field_dict.pop('created_on')
+
+        ruleset_uuid = field_dict.pop('ruleset_uuid')
+        question = field_dict.pop('question')
+
+        category_obj = Category.objects.filter(org=org, name=category).first()
+        if not category_obj:
+            category_obj = Category.objects.create(org=org, name=category, created_by=user, modified_by=user)
+
+        existing_polls = Poll.objects.filter(org=org, flow_uuid=uuid, category=category_obj)
+
+        imported_poll = None
+        for poll in existing_polls:
+            if poll.questions.filter(ruleset_uuid=ruleset_uuid).exists():
+                imported_poll = Poll.objects.filter(pk=poll.pk).first()
+
+        if not imported_poll:
+            imported_poll = Poll.objects.create(flow_uuid=uuid, title=name, poll_date=created_on, org=org,
+                                                category=category_obj, created_by=user, modified_by=user)
+
+        poll_question = PollQuestion.update_or_create(user, imported_poll, '', ruleset_uuid, 'wait_message')
+        PollQuestion.objects.filter(pk=poll_question.pk).update(title=question, is_active=True)
+
+        # hide all other questions
+        PollQuestion.objects.filter(poll=imported_poll).exclude(pk=poll_question.pk).update(is_active=False)
 
     def __unicode__(self):
         return self.title

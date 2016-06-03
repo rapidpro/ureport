@@ -15,6 +15,7 @@ import pycountry
 
 from mock import patch, Mock
 from dash.categories.models import Category, CategoryImage
+from smartmin.csv_imports.models import ImportTask
 from temba_client.v1.types import Result, Flow, Group
 
 from dash.orgs.models import TaskState
@@ -43,6 +44,140 @@ class PollTest(DashTest):
                                                          name="Education",
                                                          created_by=self.admin,
                                                          modified_by=self.admin)
+
+    def test_prepare_fields(self):
+
+        with self.assertRaises(Exception):
+            Poll.prepare_fields(dict())
+
+        with self.assertRaises(Exception):
+            Poll.prepare_fields(dict(), dict())
+
+        self.assertEqual(dict(org=self.uganda, created_by=self.superuser),
+                         Poll.prepare_fields(dict(), dict(org_id=self.uganda.pk), user=self.superuser))
+
+    def test_poll_create_instance(self):
+
+        self.assertFalse(Poll.objects.filter(org=self.uganda))
+        self.assertFalse(PollQuestion.objects.filter(poll__org=self.uganda))
+
+        with self.assertRaises(ValueError):
+            Poll.create_instance(dict())
+
+        with self.assertRaises(ValueError):
+            Poll.create_instance(dict(org=self.uganda))
+
+        with self.assertRaises(ValueError):
+            Poll.create_instance(dict(org=self.uganda, created_by=self.superuser))
+
+        with self.assertRaises(ValueError):
+            Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports'))
+
+        with self.assertRaises(ValueError):
+            Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
+                                      uuid='uuid-flow-1'))
+
+        with self.assertRaises(ValueError):
+            Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
+                                      uuid='uuid-flow-1', name='Flow 1'))
+
+        with self.assertRaises(ValueError):
+            Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
+                                      uuid='uuid-flow-1', name='Flow 1', created_on='2010-07-07T14:24:12.753000Z'))
+
+        with self.assertRaises(ValueError):
+            Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
+                                      uuid='uuid-flow-1', name='Sport Activities', created_on='2010-07-07T14:24:12.753000Z',
+                                      ruleset_uuid='question-uuid-1'))
+
+        Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
+                                  uuid='uuid-flow-1', name='Sport Activities', created_on='2010-07-07T14:24:12.753000Z',
+                                  ruleset_uuid='question-uuid-1', question='Did you participate in #CarFreeDay?'))
+
+        self.assertTrue(Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
+        self.assertTrue(PollQuestion.objects.filter(poll__org=self.uganda, ruleset_uuid='question-uuid-1',
+                                                    title='Did you participate in #CarFreeDay?'))
+
+        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 1)
+
+        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 1)
+
+        # same row does not add duplicates
+        Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
+                                  uuid='uuid-flow-1', name='Sport Activities', created_on='2010-07-07T14:24:12.753000Z',
+                                  ruleset_uuid='question-uuid-1', question='Did you participate in #CarFreeDay?'))
+
+        self.assertTrue(Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
+        self.assertTrue(PollQuestion.objects.filter(poll__org=self.uganda, ruleset_uuid='question-uuid-1',
+                                                    title='Did you participate in #CarFreeDay?'))
+
+        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 1)
+
+        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 1)
+
+        # new row add new poll and its questions
+        Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Music',
+                                  uuid='uuid-flow-2', name='Showbiz', created_on='2010-07-07T14:24:12.753000Z',
+                                  ruleset_uuid='question-uuid-2', question='Which concert?'))
+
+        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 2)
+
+        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 2)
+
+        # no hidden question
+        self.assertFalse(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False))
+
+        # same flow without the question should add a new flow
+        Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Music',
+                                  uuid='uuid-flow-2', name='Sounds', created_on='2010-07-07T14:24:12.753000Z',
+                                  ruleset_uuid='question-uuid-3', question='Which album?'))
+
+        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 3)
+
+        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 3)
+        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=True).count(), 3)
+
+        # no hidden question
+        self.assertFalse(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False))
+
+        poll = Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-2').first()
+        question = PollQuestion.update_or_create(self.superuser, poll, '', 'question-uuid-4', 'wait_message')
+        PollQuestion.objects.filter(pk=question.pk).update(is_active=True)
+
+        # same flow with the ruleset question existing should hide old questions without new flow
+        Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Music',
+                                  uuid='uuid-flow-2', name='Sounds', created_on='2010-07-07T14:24:12.753000Z',
+                                  ruleset_uuid='question-uuid-2', question='Which album?'))
+
+        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 3)
+
+        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 4)
+        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=True).count(), 3)
+
+        # poll other questions are hidden
+        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False).count(), 1)
+        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False,
+                                                     ruleset_uuid='question-uuid-4').count(), 1)
+
+
+
+    def test_poll_import(self):
+        import_url = reverse("polls.poll_import")
+
+        response = self.client.get(import_url, SERVER_NAME='uganda.ureport.io')
+        self.assertLoginRedirect(response)
+
+        self.login(self.admin)
+
+        response = self.client.get(import_url, SERVER_NAME='uganda.ureport.io')
+        self.assertLoginRedirect(response)
+
+        self.login(self.superuser)
+
+        response = self.client.get(import_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEqual(response.status_code, 200)
+
+        self.assertTrue('csv_file' in response.context['form'].fields)
 
     def test_poll_pull_refresh(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
