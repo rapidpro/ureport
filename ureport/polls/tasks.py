@@ -19,12 +19,12 @@ def results_cache_update(org, since, until):
 
     pk_list = []
 
-    for question in PollQuestion.objects.filter(org=org, is_active=True):
+    for question in PollQuestion.objects.filter(poll__org=org, is_active=True):
         question.get_results()
         question.get_results(segment=dict(location='State'))
         pk_list.append(question.pk)
 
-    return {'updated': ','.join(pk_list)}
+    return {'updated': pk_list}
 
 @org_task('backfill-poll-results')
 def backfill_poll_results(org, since, until):
