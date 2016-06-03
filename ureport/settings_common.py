@@ -485,6 +485,12 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=[0, 10, 20, 30, 40, 50]),
         'args': ('ureport.contacts.tasks.pull_contacts',)
     },
+    'poll-questions-results-cache-update': {
+        'task': 'dash.orgs.tasks.trigger_org_task',
+        'schedule': timedelta(minutes=10),
+        'relative': True,
+        'args': ('ureport.polls.tasks.poll_questions_results_cache_update',)
+    },
     'backfill-poll-results': {
         'task': 'dash.orgs.tasks.trigger_org_task',
         'schedule': timedelta(minutes=10),
