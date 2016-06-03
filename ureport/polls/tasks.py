@@ -13,8 +13,8 @@ from ureport.utils import populate_age_and_gender_poll_results
 logger = logging.getLogger(__name__)
 
 
-@org_task('poll-questions-results-cache-update')
-def poll_questions_results_cache_update(org, since, until):
+@org_task('results-cache-update')
+def results_cache_update(org, since, until):
     from .models import PollQuestion
 
     pk_list = []
