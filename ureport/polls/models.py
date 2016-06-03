@@ -553,7 +553,7 @@ class PollQuestion(SmartModel):
     """
 
     POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
-    POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 5
+    POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 12
 
     poll = models.ForeignKey(Poll, related_name='questions',
                              help_text=_("The poll this question is part of"))
