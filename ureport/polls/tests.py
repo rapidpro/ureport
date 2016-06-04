@@ -1522,8 +1522,10 @@ class PollsTasksTest(DashTest):
         self.poll = self.create_poll(self.nigeria, "Poll 1", "uuid-1", self.education_nigeria, self.admin)
 
     @patch('ureport.polls.models.PollQuestion.get_results')
-    def test_results_cache_update(self, mock_get_results):
+    @patch('ureport.polls.models.PollQuestion.is_open_ended')
+    def test_results_cache_update(self, mock_is_open_ended, mock_get_results):
         mock_get_results.return_value = "Results"
+        mock_is_open_ended.return_value = False
 
         with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
@@ -1541,6 +1543,13 @@ class PollsTasksTest(DashTest):
                                                          ruleset_uuid="uuid-101",
                                                          created_by=self.admin,
                                                          modified_by=self.admin)
+            results_cache_update(self.nigeria.pk)
+            task_state = TaskState.objects.get(org=self.nigeria, task_key='results-cache-update')
+            self.assertEqual(task_state.get_last_results()['updated'], [])
+
+            self.assertFalse(mock_get_results.called)
+
+            mock_is_open_ended.return_value = True
 
             results_cache_update(self.nigeria.pk)
             task_state = TaskState.objects.get(org=self.nigeria, task_key='results-cache-update')

@@ -20,9 +20,10 @@ def results_cache_update(org, since, until):
     pk_list = []
 
     for question in PollQuestion.objects.filter(poll__org=org, is_active=True):
-        question.get_results()
-        question.get_results(segment=dict(location='State'))
-        pk_list.append(question.pk)
+        if question.is_open_ended():
+            question.get_results()
+            question.get_results(segment=dict(location='State'))
+            pk_list.append(question.pk)
 
     return {'updated': pk_list}
 
