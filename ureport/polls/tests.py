@@ -22,8 +22,7 @@ from dash.orgs.models import TaskState
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
 from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, \
-    results_cache_update
+from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_old_sites_count
 from ureport.tests import DashTest, MockTembaClient
