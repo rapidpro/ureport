@@ -601,7 +601,7 @@ class PollQuestion(SmartModel):
 
         if open_ended and not segment:
             custom_sql = """
-                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls.pollresult.text IS NOT NULL) w group by w.label;
+                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls_pollresult.text IS NOT NULL) w group by w.label;
                       """ % (org.id, self.poll.flow_uuid, self.ruleset_uuid)
 
             unclean_categories = []
