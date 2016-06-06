@@ -240,8 +240,8 @@
             .brick-content
               .brick-align{style:"padding: 30px 0;"}
                 %iframe{ src:'http://ureportapp.ilhasoft.mobi/widget/{{ org|config:"iso_code"}}', allowtransparency:"true", frameborder:"0", scrolling:"yes", style:"border:none;overflow:scroll;height:600px;width: 100%;"}
-          %a.ureportapp-bg-color.brick-link{ href:"{% url 'public.stories' %}"}
-            - trans "CHECK MORE STORIES IN U-REPORT"
+          %a.ureportapp-bg-color.brick-link
+            - trans "CHECK MORE STORIES IN U-REPORT APP"
             {{ org|org_arrow_link }}
         {% endif %}
 
