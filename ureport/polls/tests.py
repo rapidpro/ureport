@@ -1234,7 +1234,7 @@ class PollQuestionTest(DashTest):
         with patch('ureport.polls.models.PollQuestion.is_open_ended') as mock_open:
             mock_open.return_value = True
 
-            results = poll_question1.get_results()
+            results = poll_question1.calculate_results()
             result = results[0]
             self.assertEquals(10, len(result['categories']))
             self.assertTrue(result['open_ended'])
@@ -1252,7 +1252,7 @@ class PollQuestionTest(DashTest):
             self.uganda.language = 'fr'
             self.uganda.save()
 
-            results = poll_question1.get_results()
+            results = poll_question1.calculate_results()
             result = results[0]
             self.assertEquals(9, len(result['categories']))
             self.assertTrue(result['open_ended'])
@@ -1271,7 +1271,7 @@ class PollQuestionTest(DashTest):
 
             with patch('ureport.utils.get_dict_from_cursor') as mock_get_dict_from_cursor:
                 # no error for segmenting
-                results = poll_question1.get_results(dict(location='State'))
+                results = poll_question1.calculate_results(dict(location='State'))
                 # should not have used the path with custom sql
                 self.assertFalse(mock_get_dict_from_cursor.called)
 
@@ -1285,9 +1285,10 @@ class PollQuestionTest(DashTest):
         with patch('ureport.polls.models.PollQuestion.get_question_results') as mock:
             mock.return_value = dict()
 
-            self.assertEqual(poll_question1.get_results(), [dict(open_ended=False, set=0, unset=0,
-                                                                 categories=[dict(count=0, label='Yes'),
-                                                                             dict(count=0, label='No')])])
+            calculated_results = [dict(open_ended=False, set=0, unset=0, categories=[dict(count=0, label='Yes'),
+                                                                                     dict(count=0, label='No')])]
+
+            self.assertEqual(poll_question1.calculate_results(), calculated_results)
             mock.assert_called_with()
 
             self.assertEquals(poll_question1.get_responded(), 0)
@@ -1296,16 +1297,20 @@ class PollQuestionTest(DashTest):
             self.assertEquals(poll_question1.get_polled(), 0)
             mock.assert_called_with()
 
-            self.assertEquals(poll_question1.get_words(), [dict(count=0, label='Yes'), dict(count=0, label='No')])
-            mock.assert_called_with()
+            with patch('ureport.polls.models.PollQuestion.get_results') as mock_get_results:
+                mock_get_results.return_value = calculated_results
+                self.assertEquals(poll_question1.get_words(), [dict(count=0, label='Yes'), dict(count=0, label='No')])
+                mock_get_results.assert_called_with()
 
             mock.return_value = question_results
             poll1.runs_count = 7156
             poll1.save()
 
-            self.assertEqual(poll_question1.get_results(), [dict(open_ended=False, set=3462, unset=3694,
-                                                                 categories=[dict(count=2210, label='Yes'),
-                                                                             dict(count=1252, label='No')])])
+            calculated_results = [dict(open_ended=False, set=3462, unset=3694,
+                                       categories=[dict(count=2210, label='Yes'),
+                                                   dict(count=1252, label='No')])]
+
+            self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
             self.assertEquals(poll_question1.get_responded(), 3462)
             mock.assert_called_with()
@@ -1313,8 +1318,10 @@ class PollQuestionTest(DashTest):
             self.assertEquals(poll_question1.get_polled(), 7156)
             mock.assert_called_with()
 
-            self.assertEquals(poll_question1.get_words(), [dict(count=2210, label='Yes'), dict(count=1252, label='No')])
-            mock.assert_called_with()
+            with patch('ureport.polls.models.PollQuestion.get_results') as mock_get_results:
+                mock_get_results.return_value = calculated_results
+                self.assertEquals(poll_question1.get_words(), [dict(count=2210, label='Yes'), dict(count=1252, label='No')])
+                mock.assert_called_with()
 
             self.assertEquals(poll_question1.get_response_percentage(), "48%")
 
@@ -1329,7 +1336,7 @@ class PollQuestionTest(DashTest):
                 mock_segment_boundaries.return_value = [dict(osm_id='R-KGL', name='Kigali'),
                                                         dict(osm_id='R-LAGOS', name='Lagos')]
 
-                self.assertEqual(poll_question1.get_results(segment=dict(location='State')),
+                self.assertEqual(poll_question1.calculate_results(segment=dict(location='State')),
                                  [dict(open_ended=False, set=10, unset=0, boundary='R-KGL', label='Kigali',
                                        categories=[dict(count=10, label='Yes'), dict(count=0, label='No')]),
                                   dict(open_ended=False, set=50, unset=33, boundary='R-LAGOS', label='Lagos',
@@ -1521,11 +1528,9 @@ class PollsTasksTest(DashTest):
                                                          modified_by=self.admin)
         self.poll = self.create_poll(self.nigeria, "Poll 1", "uuid-1", self.education_nigeria, self.admin)
 
-    @patch('ureport.polls.models.PollQuestion.get_results')
-    @patch('ureport.polls.models.PollQuestion.is_open_ended')
-    def test_results_cache_update(self, mock_is_open_ended, mock_get_results):
-        mock_get_results.return_value = "Results"
-        mock_is_open_ended.return_value = False
+    @patch('ureport.polls.models.PollQuestion.calculate_results')
+    def test_results_cache_update(self, mock_calculate_results):
+        mock_calculate_results.return_value = "Results"
 
         with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
@@ -1536,26 +1541,18 @@ class PollsTasksTest(DashTest):
             task_state = TaskState.objects.get(org=self.nigeria, task_key='results-cache-update')
             self.assertEqual(task_state.get_last_results()['updated'], [])
 
-            self.assertFalse(mock_get_results.called)
+            self.assertFalse(mock_calculate_results.called)
 
             poll_question1 = PollQuestion.objects.create(poll=self.poll,
                                                          title="question 1",
                                                          ruleset_uuid="uuid-101",
                                                          created_by=self.admin,
                                                          modified_by=self.admin)
-            results_cache_update(self.nigeria.pk)
-            task_state = TaskState.objects.get(org=self.nigeria, task_key='results-cache-update')
-            self.assertEqual(task_state.get_last_results()['updated'], [])
-
-            self.assertFalse(mock_get_results.called)
-
-            mock_is_open_ended.return_value = True
 
             results_cache_update(self.nigeria.pk)
             task_state = TaskState.objects.get(org=self.nigeria, task_key='results-cache-update')
             self.assertEqual(task_state.get_last_results()['updated'], [poll_question1.pk])
-            self.assertTrue(mock_get_results.called)
-
+            self.assertTrue(mock_calculate_results.called)
 
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_main_poll')
