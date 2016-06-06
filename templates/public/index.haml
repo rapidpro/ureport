@@ -232,6 +232,19 @@
                 - include "public/featured_region.html"
         {% endif %}
 
+        {% if org|config:"iso_code" %}
+        .brick.hide-on-small.ureportapp-brick.size12{data-priority:"3"}
+          .brick-inner
+            .brick-title.ureportapp-bg-color
+              U-REPORT
+            .brick-content
+              .brick-align{style:"padding: 30px 0;"}
+                %iframe{ src:'http://ureportapp.ilhasoft.mobi/widget/{{ org|config:"iso_code"}}', allowtransparency:"true", frameborder:"0", scrolling:"yes", style:"border:none;overflow:scroll;height:600px;width: 100%;"}
+          %a.ureportapp-bg-color.brick-link{ href:"{% url 'public.stories' %}"}
+            - trans "CHECK MORE STORIES IN U-REPORT"
+            {{ org|org_arrow_link }}
+        {% endif %}
+
         {% if org|config:"facebook_page_url" %}
         .brick.hide-on-small.facebook-brick.size12{data-priority:"3"}
           .brick-inner
