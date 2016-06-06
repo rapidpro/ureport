@@ -3,6 +3,7 @@ import json
 from collections import defaultdict
 
 import pytz
+import re
 from django.contrib.auth.models import User
 from django.db import models, connection
 from django.db.models import Sum, Count
@@ -600,15 +601,20 @@ class PollQuestion(SmartModel):
         results = []
 
         if open_ended and not segment:
-            custom_sql = """
-                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s') w group by w.label order by count desc;
-                      """ % (org.id, self.poll.flow_uuid, self.ruleset_uuid)
 
-            unclean_categories = []
-            with connection.cursor() as cursor:
-                cursor.execute(custom_sql)
-                from ureport.utils import get_dict_from_cursor
-                unclean_categories = get_dict_from_cursor(cursor)
+            texts = PollResult.objects.filter(org_id=org.id, flow=self.poll.flow_uuid, ruleset=self.ruleset_uuid)
+            texts = texts.exclude(text=None).exclude(text='').values_list('text', flat=True)
+
+            texts = list(texts)
+
+            words_count = defaultdict(int)
+
+            for text in texts:
+                splitted_words = re.split('\W+', text)
+                for word in splitted_words:
+                    words_count[word.lower()] += 1
+
+            unclean_categories = [dict(label=k, count=v) for k, v in words_count.iteritems()]
 
             ureport_languages = getattr(settings, 'LANGUAGES', [('en', 'English')])
 

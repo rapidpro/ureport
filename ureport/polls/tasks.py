@@ -13,20 +13,6 @@ from ureport.utils import populate_age_and_gender_poll_results
 logger = logging.getLogger(__name__)
 
 
-@org_task('results-cache-update')
-def results_cache_update(org, since, until):
-    from .models import PollQuestion
-
-    pk_list = []
-
-    for question in PollQuestion.objects.filter(poll__org=org, is_active=True):
-        if question.is_open_ended():
-            question.get_results()
-            question.get_results(segment=dict(location='State'))
-            pk_list.append(question.pk)
-
-    return {'updated': pk_list}
-
 @org_task('backfill-poll-results')
 def backfill_poll_results(org, since, until):
     from .models import Poll, PollResult
