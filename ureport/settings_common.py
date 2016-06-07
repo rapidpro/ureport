@@ -177,7 +177,7 @@ CACHES = {
 }
 
 if 'test' in sys.argv:
-    CACHES['default'] = {'BACKEND': 'django.core.cache.backends.dummy.DummyCache',}
+    CACHES['default']['LOCATION'] = '127.0.0.1:6379:15'
 
 from django.forms import Textarea
 
