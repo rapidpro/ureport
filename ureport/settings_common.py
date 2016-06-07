@@ -196,6 +196,7 @@ ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whe
                      dict(name='facebook_page_id', field=dict(help_text=_("The integer id to the Facebook page for this organization (optional)"), required=False)),
                      dict(name='facebook_app_id', field=dict(help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"), required=False)),
                      dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), required=False)),
+                     dict(name='instagram_widget', field=dict(help_text=_("The Instagram widget for this organization. Get it in https://widgets.websta.me."), required=False)),
                      dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
                      dict(name='twitter_user_widget', field=dict(help_text=_("The Twitter widget used for following new users"), required=False)),
                      dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
