@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import json
 from collections import defaultdict
 
+import logging
 import pytz
 from django.contrib.auth.models import User
 from django.db import models, connection
@@ -18,6 +19,7 @@ from stop_words import safe_get_stop_words
 
 from django_redis import get_redis_connection
 
+logger = logging.getLogger(__name__)
 
 # cache whether a question is open ended for a month
 
@@ -592,6 +594,16 @@ class PollQuestion(SmartModel):
         if cached_value:
             return cached_value["results"]
 
+        if not segment:
+            logger.error('Question get results without segment cache missed', extra={'stack': True,})
+
+        if segment and segment.get('location').lower() == 'state':
+            logger.error('Question get results with state segment cache missed', extra={'stack': True,})
+
+        self.calculate_results(segment=segment)
+
+    def calculate_results(self, segment=None):
+
         org = self.poll.org
         open_ended = self.is_open_ended()
         responded = self.get_responded()
@@ -601,10 +613,9 @@ class PollQuestion(SmartModel):
 
         if open_ended and not segment:
             custom_sql = """
-                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s') w group by w.label order by count desc;
+                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls_pollresult.text IS NOT NULL) w group by w.label;
                       """ % (org.id, self.poll.flow_uuid, self.ruleset_uuid)
 
-            unclean_categories = []
             with connection.cursor() as cursor:
                 cursor.execute(custom_sql)
                 from ureport.utils import get_dict_from_cursor
@@ -680,7 +691,19 @@ class PollQuestion(SmartModel):
 
                 results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
 
-        cache.set(key, {"results": results}, PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT)
+        cache_time = PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT
+        if not segment:
+            cache_time = None
+
+        if segment and segment.get('location').lower() == 'state':
+            cache_time = None
+
+        key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+        if segment:
+            substituted_segment = self.poll.org.substitute_segment(segment)
+            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+
+        cache.set(key, {"results": results}, cache_time)
 
         return results
 
