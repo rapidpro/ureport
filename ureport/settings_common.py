@@ -168,16 +168,16 @@ ROOT_URLCONF = 'ureport.urls'
 
 CACHES = {
     'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
+        'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': '127.0.0.1:6379:1',
         'OPTIONS': {
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
 
 if 'test' in sys.argv:
-    CACHES['default'] = {'BACKEND': 'django.core.cache.backends.dummy.DummyCache',}
+    CACHES['default']['LOCATION'] = '127.0.0.1:6379:15'
 
 from django.forms import Textarea
 

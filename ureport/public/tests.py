@@ -204,7 +204,9 @@ class PublicTest(DashTest):
         self.assertTrue(response.context['is_rtl_org'])
 
     @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_index(self):
+    @mock.patch('django.core.cache.cache.get')
+    def test_index(self, mock_cache_get):
+        mock_cache_get.return_value = None
         home_url = reverse('public.index')
 
         response = self.client.get(home_url, SERVER_NAME='nigeria.ureport.io')

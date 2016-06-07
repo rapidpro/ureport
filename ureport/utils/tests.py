@@ -662,8 +662,9 @@ class UtilsTest(DashTest):
         self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district', parent='R-STATE')),
                          [dict(boundary='R-DISTRICT', label='District', set=3)])
 
-    def test_get_regions_stats(self):
-
+    @patch('django.core.cache.cache.get')
+    def test_get_regions_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
         self.assertEqual(get_regions_stats(self.org), [])
 
         Boundary.objects.create(org=self.org, osm_id='R-NIGERIA', name='Nigeria', parent=None, level=0,
@@ -734,10 +735,10 @@ class UtilsTest(DashTest):
         self.assertEqual(get_reporters_count(self.org), 5)
 
     def test_get_global_count(self):
-        with self.settings(CACHES = {'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES = {'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                  'LOCATION': '127.0.0.1:6379:1',
                                                  'OPTIONS': {
-                                                     'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+                                                     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
                                                  }
                                                  }}):
 
@@ -771,7 +772,9 @@ class UtilsTest(DashTest):
                 self.assertEqual(get_global_count(), 20)
                 cache_get_mock.assert_called_once_with('global_count', None)
 
-    def test_get_occupation_stats(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_occupation_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         self.assertEqual(get_occupation_stats(self.org), '[]')
 
