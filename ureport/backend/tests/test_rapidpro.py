@@ -270,8 +270,8 @@ class ContactSyncerTest(DashTest):
                           'ward': ''})
 
 
-@override_settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache', 'LOCATION': '127.0.0.1:6379:1',
-                                       'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient', }}})
+@override_settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache', 'LOCATION': '127.0.0.1:6379:1',
+                                       'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient', }}})
 class RapidProBackendTest(DashTest):
     def setUp(self):
         super(RapidProBackendTest, self).setUp()
@@ -803,8 +803,8 @@ class RapidProBackendTest(DashTest):
         self.assertEqual(poll_result.ward, 'R-IKEJA')
 
 
-@override_settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache', 'LOCATION': '127.0.0.1:6379:1',
-                                       'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient', }}})
+@override_settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache', 'LOCATION': '127.0.0.1:6379:1',
+                                       'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient', }}})
 class PerfTest(DashTest):
 
     def setUp(self):

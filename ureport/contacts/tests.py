@@ -207,9 +207,9 @@ class ContactTest(DashTest):
                          {'total-reporters': 2, 'gender:m': 2})
 
     def test_squash_reporters(self):
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
             self.assertFalse(ReportersCounter.objects.all())
 
@@ -249,9 +249,9 @@ class ContactsTasksTest(DashTest):
         mock_pull_contacts.return_value = (9, 10, 11, 12)
         mock_squash_counts.return_value = "Called"
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             pull_contacts(self.nigeria.pk)

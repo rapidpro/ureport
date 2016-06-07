@@ -1111,9 +1111,9 @@ class PollTest(DashTest):
                                   ruleset=poll_question.ruleset_uuid, date=timezone.now(),
                                   contact='contact-uuid', completed=False)
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
             poll.rebuild_poll_results_counts()
 
@@ -1142,9 +1142,9 @@ class PollTest(DashTest):
 
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             self.assertFalse(poll.has_synced)
@@ -1352,9 +1352,9 @@ class PollQuestionTest(DashTest):
 
         self.poll = self.create_poll(self.org, "Poll 1", "uuid-1", self.education, self.admin)
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             with patch('ureport.polls.tasks.fetch_flows') as mock_fetch_flows:
@@ -1403,9 +1403,9 @@ class PollResultsTest(DashTest):
         self.last_month = self.now - timedelta(days=30)
 
     def test_poll_results_counters(self):
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             self.assertEqual(PollResultsCounter.get_poll_results(self.poll), dict())
@@ -1459,9 +1459,9 @@ class PollResultsTest(DashTest):
             self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
     def test_poll_results_without_category(self):
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             self.assertEqual(PollResultsCounter.get_poll_results(self.poll), dict())
@@ -1532,9 +1532,9 @@ class PollsTasksTest(DashTest):
     def test_results_cache_update(self, mock_calculate_results):
         mock_calculate_results.return_value = "Results"
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             results_cache_update(self.nigeria.pk)
@@ -1560,9 +1560,9 @@ class PollsTasksTest(DashTest):
         mock_get_main_poll.return_value = self.poll
         mock_pull_results.return_value = (1, 2, 3)
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             pull_results_main_poll(self.nigeria.pk)
@@ -1577,9 +1577,9 @@ class PollsTasksTest(DashTest):
         mock_get_brick_polls.return_value = [self.poll]
         mock_pull_results.return_value = (1, 2, 3)
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             pull_results_brick_polls(self.nigeria.pk)
@@ -1594,9 +1594,9 @@ class PollsTasksTest(DashTest):
         mock_get_other_polls.return_value = [self.poll]
         mock_pull_results.return_value = (1, 2, 3)
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             pull_results_other_polls(self.nigeria.pk)
@@ -1609,9 +1609,9 @@ class PollsTasksTest(DashTest):
     def test_backfill_poll_results(self, mock_pull_results):
         mock_pull_results.return_value = (1, 2, 3)
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
+                                               'OPTIONS': {'CLIENT_CLASS': 'django_redis.client.DefaultClient'}
                                                }}):
 
             self.poll.has_synced = True

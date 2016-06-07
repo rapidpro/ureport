@@ -734,10 +734,10 @@ class UtilsTest(DashTest):
         self.assertEqual(get_reporters_count(self.org), 5)
 
     def test_get_global_count(self):
-        with self.settings(CACHES = {'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES = {'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                  'LOCATION': '127.0.0.1:6379:1',
                                                  'OPTIONS': {
-                                                     'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+                                                     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
                                                  }
                                                  }}):
 
