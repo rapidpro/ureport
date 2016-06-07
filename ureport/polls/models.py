@@ -600,7 +600,7 @@ class PollQuestion(SmartModel):
         if segment and segment.get('location').lower() == 'state':
             logger.error('Question get results with state segment cache missed', extra={'stack': True,})
 
-        self.calculate_results(segment=segment)
+        return self.calculate_results(segment=segment)
 
     def calculate_results(self, segment=None):
 
