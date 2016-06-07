@@ -583,7 +583,7 @@ def populate_age_and_gender_poll_results(org=None):
                 PollResult.objects.filter(id__in=results_ids).update(**update_fields)
 
             if org is None:
-                cache.set(LAST_POPULATED_CONTACT, contact.pk)
+                cache.set(LAST_POPULATED_CONTACT, contact.pk, None)
 
         print "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
 
