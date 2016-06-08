@@ -245,14 +245,14 @@
             {{ org|org_arrow_link }}
         {% endif %}
 
-        {% if org|config:"instagram_username" %}
+        {% if org|config:"instagram_username" and org|config:"instagram_lightwidget_id" %}
         .brick.hide-on-small.instagram-brick.size12{data-priority:"3"}
           .brick-inner
             .brick-title.instagram-bg-color
               INSTAGRAM
             .brick-content
               .brick-align{style:"padding: 0px"}
-                %iframe{ src:'https://widget.websta.me/in/{{ org|config:"instagram_username"}}/?s=160&w=2&h=4&b=0&p=-5px', allowtransparency:"true", frameborder:"0", scrolling:"no", style:"border:none;overflow:scroll;height:650px;width: 100%;"}
+                %iframe.lightwidget-widget{ src:'//lightwidget.com/widgets/{{org|config:"instagram_lightwidget_id"}}.html', id:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}', name:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}',  scrolling:'no', allowtransparency:'true',  style:'width: 100%; border: 0; overflow: hidden;'}
           %a.instagram-bg-color.brick-link{ href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
             - trans "VIEW MORE ON INSTAGRAM"
             {{ org|org_arrow_link }}
@@ -757,3 +757,6 @@
            });
          });
        });
+
+    -if org|config:"instagram_lightwidget_id"
+      <script src="//lightwidget.com/widgets/lightwidget.js"></script>
