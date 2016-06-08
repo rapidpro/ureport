@@ -1008,7 +1008,10 @@ class PublicTest(DashTest):
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertFalse(response.context['story_featured_images'])
 
-    def test_poll_question_results(self):
+    @mock.patch('django.core.cache.cache.get')
+    def test_poll_question_results(self, mock_cache_get):
+        mock_cache_get.return_value = None
+
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
         poll1_question = PollQuestion.objects.create(poll=poll1,

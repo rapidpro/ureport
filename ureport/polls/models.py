@@ -166,6 +166,11 @@ class Poll(SmartModel):
 
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
 
+    def update_questions_results_cache(self):
+        for question in self.questions.all():
+            question.calculate_results()
+            question.calculate_results(segment=dict(location='State'))
+
     @classmethod
     def pull_poll_results_task(cls, poll):
         from ureport.polls.tasks import pull_refresh
@@ -232,6 +237,10 @@ class Poll(SmartModel):
 
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
                 print "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
+
+                start_update_cache = time.time()
+                self.update_questions_results_cache()
+                print "Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache)
 
     @classmethod
     def get_public_polls(cls, org):

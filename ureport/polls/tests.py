@@ -160,8 +160,6 @@ class PollTest(DashTest):
         self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False,
                                                      ruleset_uuid='question-uuid-4').count(), 1)
 
-
-
     def test_poll_import(self):
         import_url = reverse("polls.poll_import")
 
