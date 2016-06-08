@@ -542,7 +542,9 @@ class UtilsTest(DashTest):
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
 
-    def test_get_gender_stats(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_gender_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         self.assertEqual(get_gender_stats(self.org), dict(female_count=0, female_percentage="---",
                                                           male_count=0, male_percentage="---"))
@@ -554,7 +556,9 @@ class UtilsTest(DashTest):
         self.assertEqual(get_gender_stats(self.org), dict(female_count=2, female_percentage="40%",
                                                           male_count=3, male_percentage="60%"))
 
-    def test_get_age_stats(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_age_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         expected = [dict(name='0-14', y=0), dict(name='15-19', y=0), dict(name='20-24', y=0),
                     dict(name='25-30', y=0), dict(name='31-34', y=0), dict(name='35+', y=0)]
@@ -596,7 +600,9 @@ class UtilsTest(DashTest):
 
         self.assertEqual(get_age_stats(self.org), json.dumps(expected))
 
-    def test_get_registration_stats(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_registration_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         tz = pytz.timezone('UTC')
         with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 6))):
@@ -726,7 +732,9 @@ class UtilsTest(DashTest):
                 self.assertEqual(get_flows(self.org), "Fetched")
                 mock_fetch_flows.assert_called_once_with(self.org)
 
-    def test_get_reporters_count(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_reporters_count(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         self.assertEqual(get_reporters_count(self.org), 0)
 

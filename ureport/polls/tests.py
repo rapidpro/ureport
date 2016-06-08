@@ -22,8 +22,7 @@ from dash.orgs.models import TaskState
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
 from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, \
-    results_cache_update
+from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_old_sites_count
 from ureport.tests import DashTest, MockTembaClient
@@ -159,8 +158,6 @@ class PollTest(DashTest):
         self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False).count(), 1)
         self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False,
                                                      ruleset_uuid='question-uuid-4').count(), 1)
-
-
 
     def test_poll_import(self):
         import_url = reverse("polls.poll_import")
@@ -1513,24 +1510,6 @@ class PollsTasksTest(DashTest):
                                                          created_by=self.admin,
                                                          modified_by=self.admin)
         self.poll = self.create_poll(self.nigeria, "Poll 1", "uuid-1", self.education_nigeria, self.admin)
-
-    @patch('ureport.polls.models.PollQuestion.calculate_results')
-    def test_results_cache_update(self, mock_calculate_results):
-        mock_calculate_results.return_value = "Results"
-
-        results_cache_update(self.nigeria.pk)
-        task_state = TaskState.objects.get(org=self.nigeria, task_key='results-cache-update')
-        self.assertEqual(task_state.get_last_results()['updated'], [])
-
-        self.assertFalse(mock_calculate_results.called)
-
-        poll_question1 = PollQuestion.objects.create(poll=self.poll, title="question 1", ruleset_uuid="uuid-101",
-                                                     created_by=self.admin, modified_by=self.admin)
-
-        results_cache_update(self.nigeria.pk)
-        task_state = TaskState.objects.get(org=self.nigeria, task_key='results-cache-update')
-        self.assertEqual(task_state.get_last_results()['updated'], [poll_question1.pk])
-        self.assertTrue(mock_calculate_results.called)
 
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_main_poll')
