@@ -49,12 +49,12 @@ class PublicTest(DashTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 15)
+        self.assertEquals(len(response.context['form'].fields), 16)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 33)
+        self.assertEquals(len(response.context['form'].fields), 34)
 
     def test_chooser(self):
         chooser_url = reverse('public.home')
