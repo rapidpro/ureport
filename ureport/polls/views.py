@@ -369,7 +369,18 @@ class PollCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
-        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'poll_date', 'category', 'category_image')
+        fields = ('is_active', 'is_featured', 'title', 'poll_date', 'category', 'category_image')
+
+        def derive_title(self):
+            obj = self.get_object()
+            flows = obj.org.get_flows()
+
+            flow = flows.get(obj.flow_uuid, dict())
+
+            flow_name = flow.get('name', '')
+            flow_date_hint = flow.get('date_hint', '')
+
+            return "Edit Poll for flow [%s (%s)]" % (flow_name, flow_date_hint)
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Update, self).get_form_kwargs()
