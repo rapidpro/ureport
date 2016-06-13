@@ -149,7 +149,10 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], Org.objects.count())
 
-    def test_single_org(self):
+    @patch('django.core.cache.cache.get')
+    def test_single_org(self, mock_cache_get):
+        mock_cache_get.return_value = None
+
         url = '/api/v1/orgs/%d/' % self.uganda.pk
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)

@@ -1,27 +1,25 @@
 from __future__ import unicode_literals
 import json
-import time
 from collections import defaultdict
-from datetime import datetime
 
+import logging
 import pytz
 from django.contrib.auth.models import User
-from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, connection
-from django.db.models import Sum, Count, F, Max
+from django.db.models import Sum, Count
 from django.utils.text import slugify
 from django.utils import timezone
 from smartmin.models import SmartModel
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext
 from django.core.cache import cache
 from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
-from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
 from stop_words import safe_get_stop_words
 
 from django_redis import get_redis_connection
 
+logger = logging.getLogger(__name__)
 
 # cache whether a question is open ended for a month
 
@@ -168,6 +166,11 @@ class Poll(SmartModel):
 
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
 
+    def update_questions_results_cache(self):
+        for question in self.questions.all():
+            question.calculate_results()
+            question.calculate_results(segment=dict(location='State'))
+
     @classmethod
     def pull_poll_results_task(cls, poll):
         from ureport.polls.tasks import pull_refresh
@@ -234,6 +237,10 @@ class Poll(SmartModel):
 
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
                 print "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
+
+                start_update_cache = time.time()
+                self.update_questions_results_cache()
+                print "Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache)
 
     @classmethod
     def get_public_polls(cls, org):
@@ -443,6 +450,75 @@ class Poll(SmartModel):
         elif self.category.is_active:
             return self.category.get_first_image()
 
+    @classmethod
+    def prepare_fields(cls, field_dict, import_params=None, user=None):
+        if not import_params or 'org_id' not in import_params:
+            raise Exception('Import params must include org_id')
+
+        field_dict['created_by'] = user
+        field_dict['org'] = Org.objects.get(pk=import_params['org_id'])
+
+        return field_dict
+
+    @classmethod
+    def create_instance(cls, field_dict):
+        if 'org' not in field_dict:
+            raise ValueError("Import fields dictionary must include org")
+
+        if 'created_by' not in field_dict:
+            raise ValueError("Import fields dictionary must include created_by")
+
+        if 'category' not in field_dict:
+            raise ValueError("Import fields dictionary must include category")
+
+        if 'uuid' not in field_dict:
+            raise ValueError("Import fields dictionary must include uuid")
+
+        if 'name' not in field_dict:
+            raise ValueError("Import fields dictionary must include name")
+
+        if 'created_on' not in field_dict:
+            raise ValueError("Import fields dictionary must include created_on")
+
+        if 'ruleset_uuid' not in field_dict:
+            raise ValueError("Import fields dictionary must include ruleset_uuid")
+
+        if 'question' not in field_dict:
+            raise ValueError("Import fields dictionary must include question")
+
+        org = field_dict.pop('org')
+        user = field_dict.pop('created_by')
+
+        category = field_dict.pop('category')
+
+        uuid = field_dict.pop('uuid')
+        name = field_dict.pop('name')
+        created_on = field_dict.pop('created_on')
+
+        ruleset_uuid = field_dict.pop('ruleset_uuid')
+        question = field_dict.pop('question')
+
+        category_obj = Category.objects.filter(org=org, name=category).first()
+        if not category_obj:
+            category_obj = Category.objects.create(org=org, name=category, created_by=user, modified_by=user)
+
+        existing_polls = Poll.objects.filter(org=org, flow_uuid=uuid, category=category_obj)
+
+        imported_poll = None
+        for poll in existing_polls:
+            if poll.questions.filter(ruleset_uuid=ruleset_uuid).exists():
+                imported_poll = Poll.objects.filter(pk=poll.pk).first()
+
+        if not imported_poll:
+            imported_poll = Poll.objects.create(flow_uuid=uuid, title=name, poll_date=created_on, org=org,
+                                                category=category_obj, created_by=user, modified_by=user)
+
+        poll_question = PollQuestion.update_or_create(user, imported_poll, '', ruleset_uuid, 'wait_message')
+        PollQuestion.objects.filter(pk=poll_question.pk).update(title=question, is_active=True)
+
+        # hide all other questions
+        PollQuestion.objects.filter(poll=imported_poll).exclude(pk=poll_question.pk).update(is_active=False)
+
     def __unicode__(self):
         return self.title
 
@@ -488,7 +564,7 @@ class PollQuestion(SmartModel):
     """
 
     POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
-    POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 5
+    POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 12
 
     poll = models.ForeignKey(Poll, related_name='questions',
                              help_text=_("The poll this question is part of"))
@@ -527,6 +603,16 @@ class PollQuestion(SmartModel):
         if cached_value:
             return cached_value["results"]
 
+        if not segment:
+            logger.error('Question get results without segment cache missed', extra={'stack': True,})
+
+        if segment and segment.get('location').lower() == 'state':
+            logger.error('Question get results with state segment cache missed', extra={'stack': True,})
+
+        return self.calculate_results(segment=segment)
+
+    def calculate_results(self, segment=None):
+
         org = self.poll.org
         open_ended = self.is_open_ended()
         responded = self.get_responded()
@@ -535,15 +621,13 @@ class PollQuestion(SmartModel):
         results = []
 
         if open_ended and not segment:
-            cursor = connection.cursor()
-
             custom_sql = """
-                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s') w group by w.label order by count desc;
+                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls_pollresult.text IS NOT NULL) w group by w.label;
                       """ % (org.id, self.poll.flow_uuid, self.ruleset_uuid)
-
-            cursor.execute(custom_sql)
-            from ureport.utils import get_dict_from_cursor
-            unclean_categories = get_dict_from_cursor(cursor)
+            with connection.cursor() as cursor:
+                cursor.execute(custom_sql)
+                from ureport.utils import get_dict_from_cursor
+                unclean_categories = get_dict_from_cursor(cursor)
 
             ureport_languages = getattr(settings, 'LANGUAGES', [('en', 'English')])
 
@@ -679,8 +763,19 @@ class PollQuestion(SmartModel):
 
                 results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
 
-        if results:
-            cache.set(key, {"results": results}, PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT)
+        cache_time = PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT
+        if not segment:
+            cache_time = None
+
+        if segment and segment.get('location').lower() == 'state':
+            cache_time = None
+
+        key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+        if segment:
+            substituted_segment = self.poll.org.substitute_segment(segment)
+            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+
+        cache.set(key, {"results": results}, cache_time)
 
         return results
 
