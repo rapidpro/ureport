@@ -50,7 +50,7 @@ redis==2.10.3
 regex==2015.7.19
 requests==2.9.1
 six==1.10.0
--e git+https://github.com/nyaruka/smartmin.git@c3ecb49323c5ba3a3ca603af6f7ec40820bf1c23#egg=smartmin-master
+-e git+https://github.com/nyaruka/smartmin.git@26b7a8980a4894faab9d4cf24ea3d2aefbfdfc1d#egg=smartmin-master
 smmap==0.9.0
 sorl-thumbnail==12.3
 sqlparse==0.1.15
