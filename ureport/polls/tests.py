@@ -10,6 +10,7 @@ from django.template import TemplateSyntaxError
 from django.test import TestCase
 from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
 
 import pycountry
 
@@ -25,6 +26,7 @@ from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_old_sites_count
+from ureport.polls.templatetags.ureport import question_segmented_results
 from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
@@ -1096,6 +1098,23 @@ class PollTest(DashTest):
 
             self.assertFalse(question_results(poll1_question))
 
+        with patch('ureport.polls.models.PollQuestion.get_results') as mock_results:
+            mock_results.return_value = ["Results"]
+
+            poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+
+            poll1_question = PollQuestion.objects.create(poll=poll1,
+                                                         title='question poll 1',
+                                                         ruleset_uuid="uuid-101",
+                                                         created_by=self.admin,
+                                                         modified_by=self.admin)
+
+            self.assertEqual(question_segmented_results(poll1_question, 'gender'), ["Results"])
+
+            mock_results.side_effect = KeyError
+
+            self.assertFalse(question_segmented_results(poll1_question, 'gender'))
+
     def test_delete_poll_results_counter(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
@@ -1333,6 +1352,63 @@ class PollQuestionTest(DashTest):
                                        categories=[dict(count=10, label='Yes'), dict(count=0, label='No')]),
                                   dict(open_ended=False, set=50, unset=33, boundary='R-LAGOS', label='Lagos',
                                        categories=[dict(count=20, label='Yes'), dict(count=30, label='No')])])
+
+            question_results['ruleset:%s:category:yes:gender:m' % poll_question1.ruleset_uuid] = 5
+            question_results['ruleset:%s:category:yes:gender:f' % poll_question1.ruleset_uuid] = 10
+            question_results['ruleset:%s:category:no:gender:m' % poll_question1.ruleset_uuid] = 12
+            question_results['ruleset:%s:nocategory:gender:f' % poll_question1.ruleset_uuid] = 8
+
+            mock.return_value = question_results
+
+            gender_results = poll_question1.calculate_results(segment=dict(gender='Gender'))
+
+            self.assertEqual(gender_results[0]['set'], 10)
+            self.assertEqual(gender_results[0]['unset'], 8)
+            self.assertEqual(gender_results[0]['label'].title(), 'Female')
+            self.assertEqual(gender_results[0]['categories'][0]['count'], 10)
+            self.assertEqual(gender_results[0]['categories'][0]['label'], 'Yes')
+            self.assertEqual(gender_results[0]['categories'][1]['count'], 0)
+            self.assertEqual(gender_results[0]['categories'][1]['label'], 'No')
+
+            self.assertEqual(gender_results[1]['set'], 17)
+            self.assertEqual(gender_results[1]['unset'], 0)
+            self.assertEqual(gender_results[1]['label'].title(), 'Male')
+            self.assertEqual(gender_results[1]['categories'][0]['count'], 5)
+            self.assertEqual(gender_results[1]['categories'][0]['label'], 'Yes')
+            self.assertEqual(gender_results[1]['categories'][1]['count'], 12)
+            self.assertEqual(gender_results[1]['categories'][1]['label'], 'No')
+
+            poll1.poll_date = datetime.now().replace(year=2015)
+            poll1.save()
+
+            question_results['ruleset:%s:category:yes:born:3' % poll_question1.ruleset_uuid] = 5
+            question_results['ruleset:%s:category:yes:born:2000' % poll_question1.ruleset_uuid] = 10
+            question_results['ruleset:%s:category:yes:born:2010' % poll_question1.ruleset_uuid] = 25
+            question_results['ruleset:%s:category:no:born:1990' % poll_question1.ruleset_uuid] = 12
+            question_results['ruleset:%s:nocategory:born:28990' % poll_question1.ruleset_uuid] = 8
+            question_results['ruleset:%s:nocategory:born:1995' % poll_question1.ruleset_uuid] = 100
+
+            age_results = poll_question1.calculate_results(segment=dict(age='Age'))
+
+            self.assertEqual(age_results, [dict(set=25, unset=0,
+                                                categories=[dict(count=25, label='yes'), dict(count=0, label='no')],
+                                                label='0-14'),
+                                           dict(set=10, unset=0,
+                                                categories=[dict(count=10, label='yes'), dict(count=0, label='no')],
+                                                label='15-19'),
+                                           dict(set=0, unset=100,
+                                                categories=[dict(count=0, label='yes'), dict(count=0, label='no')],
+                                                label='20-24'),
+                                           dict(set=12, unset=0,
+                                                categories=[dict(count=0, label='yes'), dict(count=12, label='no')],
+                                                label='25-30'),
+                                           dict(set=0, unset=0,
+                                                categories=[dict(count=0, label='yes'), dict(count=0, label='no')],
+                                                label='31-34'),
+                                           dict(set=0, unset=0,
+                                                categories=[dict(count=0, label='yes'), dict(count=0, label='no')],
+                                                label='35+'),
+                                           ])
 
     def test_tasks(self):
         self.org = self.create_org("burundi", self.admin)
