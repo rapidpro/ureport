@@ -773,6 +773,12 @@ class PollQuestion(SmartModel):
         if segment and segment.get('location', '').lower() == 'state':
             cache_time = None
 
+        if segment and segment.get('age', '').lower() == 'age':
+            cache_time = None
+
+        if segment and segment.get('gender', '').lower() == 'gender':
+            cache_time = None
+
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
             substituted_segment = self.poll.org.substitute_segment(segment)
