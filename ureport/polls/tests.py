@@ -90,11 +90,13 @@ class PollTest(DashTest):
                                       uuid='uuid-flow-1', name='Sport Activities', created_on='2010-07-07T14:24:12.753000Z',
                                       ruleset_uuid='question-uuid-1'))
 
-        Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
-                                  uuid='uuid-flow-1', name='Sport Activities', created_on='2010-07-07T14:24:12.753000Z',
-                                  ruleset_uuid='question-uuid-1', question='Did you participate in #CarFreeDay?'))
+        poll = Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
+                                         uuid='uuid-flow-1', name='Sport Activities',
+                                         created_on='2010-07-07T14:24:12.753000Z', ruleset_uuid='question-uuid-1',
+                                         question='Did you participate in #CarFreeDay?'))
 
         self.assertTrue(Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
+        self.assertTrue(poll in Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
         self.assertTrue(PollQuestion.objects.filter(poll__org=self.uganda, ruleset_uuid='question-uuid-1',
                                                     title='Did you participate in #CarFreeDay?'))
 
