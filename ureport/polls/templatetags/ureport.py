@@ -28,6 +28,7 @@ def question_segmented_results(question, field):
     if not question:
         return None
 
+    segment = None
     if field == 'age':
         segment = dict(age='Age')
     elif field == 'gender':

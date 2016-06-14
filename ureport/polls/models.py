@@ -768,7 +768,7 @@ class PollQuestion(SmartModel):
         if not segment:
             cache_time = None
 
-        if segment and segment.get('location').lower() == 'state':
+        if segment and segment.get('location', '').lower() == 'state':
             cache_time = None
 
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
