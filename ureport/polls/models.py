@@ -518,6 +518,7 @@ class Poll(SmartModel):
 
         # hide all other questions
         PollQuestion.objects.filter(poll=imported_poll).exclude(pk=poll_question.pk).update(is_active=False)
+        return imported_poll
 
     def __unicode__(self):
         return self.title

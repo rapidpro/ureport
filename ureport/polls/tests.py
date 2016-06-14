@@ -90,11 +90,13 @@ class PollTest(DashTest):
                                       uuid='uuid-flow-1', name='Sport Activities', created_on='2010-07-07T14:24:12.753000Z',
                                       ruleset_uuid='question-uuid-1'))
 
-        Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
-                                  uuid='uuid-flow-1', name='Sport Activities', created_on='2010-07-07T14:24:12.753000Z',
-                                  ruleset_uuid='question-uuid-1', question='Did you participate in #CarFreeDay?'))
+        poll = Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
+                                         uuid='uuid-flow-1', name='Sport Activities',
+                                         created_on='2010-07-07T14:24:12.753000Z', ruleset_uuid='question-uuid-1',
+                                         question='Did you participate in #CarFreeDay?'))
 
         self.assertTrue(Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
+        self.assertTrue(poll in Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
         self.assertTrue(PollQuestion.objects.filter(poll__org=self.uganda, ruleset_uuid='question-uuid-1',
                                                     title='Did you participate in #CarFreeDay?'))
 
@@ -706,11 +708,11 @@ class PollTest(DashTest):
 
         with patch('dash.orgs.models.Org.get_flows') as mock_get_flows:
             flows_cached = dict()
-            flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25',
-                                           labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
-                                           date_hint="2015-04-08", participants=None,
-                                           rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
-                                                          label='Does your community have power')])
+            flows_cached['uuid-1'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-1',
+                                          labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
+                                          date_hint="2015-04-08", participants=None,
+                                          rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
+                                                         label='Does your community have power')])
 
             mock_get_flows.return_value = flows_cached
 
@@ -721,10 +723,9 @@ class PollTest(DashTest):
             self.assertEquals(response.status_code, 200)
             self.assertTrue('form' in response.context)
 
-            self.assertEquals(len(response.context['form'].fields), 8)
+            self.assertEquals(len(response.context['form'].fields), 7)
             self.assertTrue('is_active' in response.context['form'].fields)
             self.assertTrue('is_featured' in response.context['form'].fields)
-            self.assertTrue('flow_uuid' in response.context['form'].fields)
             self.assertTrue('title' in response.context['form'].fields)
             self.assertTrue('poll_date' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
@@ -734,12 +735,11 @@ class PollTest(DashTest):
             response = self.client.post(uganda_update_url, dict(), SERVER_NAME='uganda.ureport.io')
             self.assertTrue('form' in response.context)
             self.assertTrue(response.context['form'].errors)
-            self.assertEquals(len(response.context['form'].errors), 3)
+            self.assertEquals(len(response.context['form'].errors), 2)
             self.assertTrue('title' in response.context['form'].errors)
             self.assertTrue('category' in response.context['form'].errors)
-            self.assertTrue('flow_uuid' in response.context['form'].errors)
 
-            post_data = dict(title='title updated', category=self.health_uganda.pk, flow_uuid="uuid-25",
+            post_data = dict(title='title updated', category=self.health_uganda.pk,
                              is_featured=False, poll_date=yesterday.strftime('%Y-%m-%d %H:%M:%S'))
             response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertFalse('form' in response.context)
@@ -751,20 +751,15 @@ class PollTest(DashTest):
 
             tz = pytz.timezone('Africa/Kigali')
             with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
-                flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30',
-                                               labels="", archived=False, date_hint="2015-04-08", participants=None,
-                                               rulesets=[dict(uuid='uuid-8435', id=8436, response_type="C",
-                                                              label='Does your community have power')])
+                response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
+                self.assertContains(response, "Edit Poll for flow [Flow 1 (2015-04-08)]")
 
-                mock_get_flows.return_value = flows_cached
-
-                post_data = dict(title='Poll 2', category=self.health_uganda.pk, flow_uuid="uuid-30")
-                post_data = dict(title='Poll 2', category=self.health_uganda.pk, flow_uuid="uuid-30",
+                post_data = dict(title='Poll 2', category=self.health_uganda.pk,
                                  is_featured=False, poll_date="")
                 response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
                 self.assertEqual(Poll.objects.all().count(), 2)
 
-                poll = Poll.objects.get(flow_uuid='uuid-30')
+                poll = Poll.objects.get(flow_uuid='uuid-1')
                 self.assertEquals(poll.title, 'Poll 2')
                 self.assertEquals(poll.org, self.uganda)
                 self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))

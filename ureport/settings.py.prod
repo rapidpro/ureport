@@ -28,7 +28,7 @@ EMAIL_USE_TLS = True
 MANAGERS = ADMINS
 
 # add gunicorn
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat',)
+INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat', 'storages')
 
 # Set your DSN value
 RAVEN_CONFIG = {
