@@ -170,6 +170,8 @@ class Poll(SmartModel):
         for question in self.questions.all():
             question.calculate_results()
             question.calculate_results(segment=dict(location='State'))
+            question.calculate_results(segment=dict(age='Age'))
+            question.calculate_results(segment=dict(gender='Gender'))
 
     @classmethod
     def pull_poll_results_task(cls, poll):
