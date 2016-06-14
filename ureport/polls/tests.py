@@ -1378,6 +1378,38 @@ class PollQuestionTest(DashTest):
             self.assertEqual(gender_results[1]['categories'][1]['count'], 12)
             self.assertEqual(gender_results[1]['categories'][1]['label'], 'No')
 
+            poll1.poll_date = datetime.now().replace(year=2015)
+            poll1.save()
+
+            question_results['ruleset:%s:category:yes:born:3' % poll_question1.ruleset_uuid] = 5
+            question_results['ruleset:%s:category:yes:born:2000' % poll_question1.ruleset_uuid] = 10
+            question_results['ruleset:%s:category:yes:born:2010' % poll_question1.ruleset_uuid] = 25
+            question_results['ruleset:%s:category:no:born:1990' % poll_question1.ruleset_uuid] = 12
+            question_results['ruleset:%s:nocategory:born:28990' % poll_question1.ruleset_uuid] = 8
+            question_results['ruleset:%s:nocategory:born:1995' % poll_question1.ruleset_uuid] = 100
+
+            age_results = poll_question1.calculate_results(segment=dict(age='Age'))
+
+            self.assertEqual(age_results, [dict(set=25, unset=0,
+                                                categories=[dict(count=25, label='yes'), dict(count=0, label='no')],
+                                                label='0-14'),
+                                           dict(set=10, unset=0,
+                                                categories=[dict(count=10, label='yes'), dict(count=0, label='no')],
+                                                label='15-19'),
+                                           dict(set=0, unset=100,
+                                                categories=[dict(count=0, label='yes'), dict(count=0, label='no')],
+                                                label='20-24'),
+                                           dict(set=12, unset=0,
+                                                categories=[dict(count=0, label='yes'), dict(count=12, label='no')],
+                                                label='25-30'),
+                                           dict(set=0, unset=0,
+                                                categories=[dict(count=0, label='yes'), dict(count=0, label='no')],
+                                                label='31-34'),
+                                           dict(set=0, unset=0,
+                                                categories=[dict(count=0, label='yes'), dict(count=0, label='no')],
+                                                label='35+'),
+                                           ])
+
     def test_tasks(self):
         self.org = self.create_org("burundi", self.admin)
 
