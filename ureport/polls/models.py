@@ -170,6 +170,8 @@ class Poll(SmartModel):
         for question in self.questions.all():
             question.calculate_results()
             question.calculate_results(segment=dict(location='State'))
+            question.calculate_results(segment=dict(age='Age'))
+            question.calculate_results(segment=dict(gender='Gender'))
 
     @classmethod
     def pull_poll_results_task(cls, poll):
@@ -769,6 +771,12 @@ class PollQuestion(SmartModel):
             cache_time = None
 
         if segment and segment.get('location', '').lower() == 'state':
+            cache_time = None
+
+        if segment and segment.get('age', '').lower() == 'age':
+            cache_time = None
+
+        if segment and segment.get('gender', '').lower() == 'gender':
             cache_time = None
 
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
