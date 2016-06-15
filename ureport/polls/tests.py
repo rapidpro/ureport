@@ -23,9 +23,9 @@ from dash.orgs.models import TaskState
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
 from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls
+from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
-from ureport.polls.tasks import fetch_old_sites_count
+from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender
 from ureport.polls.templatetags.ureport import question_segmented_results
 from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
@@ -1445,6 +1445,23 @@ class PollQuestionTest(DashTest):
 
             pull_refresh(self.poll.pk)
             mock_pull_results.assert_called_once_with(self.poll.pk)
+
+        with patch('ureport.polls.models.Poll.rebuild_poll_results_counts') as mock_rebuild_counts:
+            mock_rebuild_counts.return_value = "Rebuilt"
+
+            rebuild_counts()
+            self.assertEqual(mock_rebuild_counts.call_count, Poll.objects.all().count())
+
+        with patch('ureport.polls.models.Poll.rebuild_poll_results_counts') as mock_rebuild_counts:
+            mock_rebuild_counts.return_value = "Rebuilt"
+
+            with patch('ureport.polls.tasks.populate_age_and_gender_poll_results') as mock_populate_age_gender_results:
+                mock_populate_age_gender_results.return_value = 'Populated'
+
+                update_results_age_gender(self.nigeria.pk)
+
+                mock_populate_age_gender_results.assert_called_once_with(self.nigeria)
+                self.assertEqual(mock_rebuild_counts.call_count, Poll.objects.filter(org=self.nigeria).count())
 
 
 class PollResultsTest(DashTest):
