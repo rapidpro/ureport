@@ -97,11 +97,11 @@
                           %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                             - trans "LOCATIONS"
 
-                        - if not is_iorg and org|config:"gender_label" and False
+                        - if not is_iorg and org|config:"gender_label"
                           %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#gender-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                             - trans "GENDER"
 
-                        - if not is_iorg and org|config:"born_label" and False
+                        - if not is_iorg and org|config:"born_label"
                           %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#age-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                             - trans "AGE"
 
