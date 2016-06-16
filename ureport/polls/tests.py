@@ -58,7 +58,9 @@ class PollTest(DashTest):
         self.assertEqual(dict(org=self.uganda, created_by=self.superuser),
                          Poll.prepare_fields(dict(), dict(org_id=self.uganda.pk), user=self.superuser))
 
-    def test_poll_create_instance(self):
+    @patch('ureport.polls.models.Poll.update_or_create_questions')
+    def test_poll_create_instance(self, mock_update_or_create_questions):
+        mock_update_or_create_questions.side_effect = None
 
         self.assertFalse(Poll.objects.filter(org=self.uganda))
         self.assertFalse(PollQuestion.objects.filter(poll__org=self.uganda))
@@ -97,6 +99,8 @@ class PollTest(DashTest):
                                          created_on='2010-07-07T14:24:12.753000Z', ruleset_uuid='question-uuid-1',
                                          question='Did you participate in #CarFreeDay?'))
 
+        mock_update_or_create_questions.assert_called_once_with()
+
         self.assertTrue(Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
         self.assertTrue(poll in Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
         self.assertTrue(PollQuestion.objects.filter(poll__org=self.uganda, ruleset_uuid='question-uuid-1',
@@ -108,7 +112,7 @@ class PollTest(DashTest):
 
         # same row does not add duplicates
         Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category='Sports',
-                                  uuid='uuid-flow-1', name='Sport Activities', created_on='2010-07-07T14:24:12.753000Z',
+                                  uuid='uuid-flow-1', name='Sport Activities Here', created_on='2010-07-07T14:24:12.753000Z',
                                   ruleset_uuid='question-uuid-1', question='Did you participate in #CarFreeDay?'))
 
         self.assertTrue(Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
@@ -116,6 +120,9 @@ class PollTest(DashTest):
                                                     title='Did you participate in #CarFreeDay?'))
 
         self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 1)
+        poll = Poll.objects.filter(org=self.uganda).first()
+        # however update the poll title
+        self.assertEqual(poll.title, "Sport Activities Here")
 
         self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 1)
 
