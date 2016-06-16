@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # LIliya <lilya.lyu@gmail.com>, 2015-2016
 # Nyaruka <info@textit.in>, 2016
@@ -9,145 +9,148 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-09 09:58+0000\n"
+"POT-Creation-Date: 2016-06-16 13:52+0000\n"
 "PO-Revision-Date: 2016-01-13 13:01+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
-"Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/uk/)\n"
+"Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/"
+"uk/)\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: dash/categories/models.py:19
+#: dash/categories/models.py:17
 msgid "The name of this category"
 msgstr "Назва категорії"
 
-#: dash/categories/models.py:22
+#: dash/categories/models.py:20
 msgid "An optional image that can describe this category"
 msgstr "Зображення на вибір для опису категорії"
 
-#: dash/categories/models.py:25 ureport/polls/models.py:53
+#: dash/categories/models.py:23 ureport/polls/models.py:63
 msgid "The organization this category applies to"
 msgstr "Організація, до якої відноситься категорія"
 
-#: dash/categories/models.py:37 templates/frame.haml:253
-#: templates/frame.haml.py:260
+#: dash/categories/models.py:35 templates/frame.haml:260
+#: templates/frame.haml.py:267
 msgid "Categories"
 msgstr "Категорії"
 
-#: dash/categories/models.py:43 dash/stories/models.py:131
-#: ureport/polls/models.py:268
+#: dash/categories/models.py:41 dash/stories/models.py:129
+#: ureport/polls/models.py:534
 msgid "The name to describe this image"
 msgstr "Підпис до зображення"
 
-#: dash/categories/models.py:46
+#: dash/categories/models.py:44
 msgid "The category this image represents"
 msgstr "Категорія зображення"
 
-#: dash/categories/models.py:49 dash/stories/models.py:137
-#: ureport/polls/models.py:274
+#: dash/categories/models.py:47 dash/stories/models.py:135
+#: ureport/polls/models.py:540
 msgid "The image file to use"
 msgstr "Файл зображення"
 
-#: dash/dashblocks/models.py:21
+#: dash/dashblocks/models.py:19
 msgid "The human readable name for this content type"
 msgstr "\"Читабельна\" назва видну контенту"
 
-#: dash/dashblocks/models.py:24
+#: dash/dashblocks/models.py:22
 msgid "The slug to idenfity this content type, used with the template tags"
 msgstr ""
 
-#: dash/dashblocks/models.py:28
+#: dash/dashblocks/models.py:26
 msgid ""
-"A description of where this content type is used on the site and how it will"
-" be dsiplayed"
-msgstr "Опис - де знаходиться цей тип контенту на сайті, і як він відображається"
+"A description of where this content type is used on the site and how it will "
+"be dsiplayed"
+msgstr ""
+"Опис - де знаходиться цей тип контенту на сайті, і як він відображається"
 
-#: dash/dashblocks/models.py:33
+#: dash/dashblocks/models.py:31
 msgid "Whether this content should include a title"
 msgstr "Чи в цей контент входить назва?"
 
-#: dash/dashblocks/models.py:36
+#: dash/dashblocks/models.py:34
 msgid "Whether this content should include an image"
 msgstr "Чи в цей контент входить зображення?"
 
-#: dash/dashblocks/models.py:39
+#: dash/dashblocks/models.py:37
 msgid "Whether this content should use a rich HTML editor"
 msgstr "Чи цей контент використовує HTML-редактор"
 
-#: dash/dashblocks/models.py:42
+#: dash/dashblocks/models.py:40
 msgid "Whether this content should include a summary field"
 msgstr "Чи цей контент включає поле висновку"
 
-#: dash/dashblocks/models.py:45
+#: dash/dashblocks/models.py:43
 msgid "Whether this content should include a link"
 msgstr "Чи в цей контент входить посилання?"
 
-#: dash/dashblocks/models.py:48
+#: dash/dashblocks/models.py:46
 msgid ""
 "Whether this content should allow upload of additional images, ie a gallery"
 msgstr "Чи в цей контент дозволяє додаткові зображення, напр.галерею?"
 
-#: dash/dashblocks/models.py:52
+#: dash/dashblocks/models.py:50
 msgid "Whether this content has a color field"
 msgstr "Чи в цей контент має поле вибору кольору"
 
-#: dash/dashblocks/models.py:55
+#: dash/dashblocks/models.py:53
 msgid "Whether this content should allow setting a YouTube id"
 msgstr "Чи в цей контент дозволяє включити YouTube id"
 
-#: dash/dashblocks/models.py:58
+#: dash/dashblocks/models.py:56
 msgid "Whether this content should allow tags"
 msgstr "Чи в цей контент дозволяє теги"
 
-#: dash/dashblocks/models.py:71
+#: dash/dashblocks/models.py:69
 msgid "Content Type"
 msgstr "Вид контенту"
 
-#: dash/dashblocks/models.py:72
+#: dash/dashblocks/models.py:70
 msgid "The category, or type for this content block"
 msgstr "Категорія/тип для блоку контенту"
 
-#: dash/dashblocks/models.py:76
+#: dash/dashblocks/models.py:74
 msgid "The title for this block of content, optional"
 msgstr "Назва блоку контенту (вибірково)"
 
-#: dash/dashblocks/models.py:79
+#: dash/dashblocks/models.py:77
 msgid "The summary for this item, should be short"
 msgstr "Висновок для цього елементу повинен бути коротким"
 
-#: dash/dashblocks/models.py:82
+#: dash/dashblocks/models.py:80
 msgid "The body of text for this content block, optional"
 msgstr "Текст для блоку контенту (вибірково)"
 
-#: dash/dashblocks/models.py:85
+#: dash/dashblocks/models.py:83
 msgid "Any image that should be displayed with this content block, optional"
 msgstr "Зображення, яке відображатиметься поряд із блоком контенту (вибірково)"
 
-#: dash/dashblocks/models.py:89
+#: dash/dashblocks/models.py:87
 msgid "A background color to use for the image, in the format: #rrggbb"
 msgstr "Колір фону для зображння у форматі #rrggbb"
 
-#: dash/dashblocks/models.py:93
+#: dash/dashblocks/models.py:91
 msgid "Any link that should be associated with this content block, optional"
 msgstr "Посилання, що має відношення до цього блоку контенту (вибірково)"
 
-#: dash/dashblocks/models.py:97 ureport/news/models.py:40
+#: dash/dashblocks/models.py:95 ureport/news/models.py:40
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "ID відео YouTube, що пов'зується із відео"
 
-#: dash/dashblocks/models.py:101
+#: dash/dashblocks/models.py:99
 msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more"
-" advanced filtering, optional"
+"Any tags for this content block, separated by spaces, can be used to do more "
+"advanced filtering, optional"
 msgstr "Теги , розділені пробілом, для розширеного фільтрування (вибірково)"
 
-#: dash/dashblocks/models.py:105
+#: dash/dashblocks/models.py:103
 msgid "The priority for this block, higher priority blocks come first"
 msgstr "Пріоритетність блоку"
 
-#: dash/dashblocks/models.py:110
+#: dash/dashblocks/models.py:108
 msgid "The organization this content block belongs to"
 msgstr "Організація, якій належить блок"
 
@@ -169,215 +172,215 @@ msgstr "Пошук"
 msgid "Add"
 msgstr "Додати"
 
-#: dash/dashblocks/views.py:17 templates/frame.haml:203
+#: dash/dashblocks/views.py:16 templates/frame.haml:210
 msgid "Content Types"
 msgstr "Види контенту"
 
-#: dash/dashblocks/views.py:119
+#: dash/dashblocks/views.py:118
 msgid "Content Blocks"
 msgstr "Блоки контенту"
 
-#: dash/dashblocks/views.py:121
+#: dash/dashblocks/views.py:120
 #, python-format
 msgid "%s Blocks"
 msgstr "Блоки з %s"
 
-#: dash/dashblocks/views.py:159 smartmin/views.py:1097
+#: dash/dashblocks/views.py:158 smartmin/views.py:1099
 #, python-format
 msgid "Edit %s"
 msgstr "Редагувати %s"
 
-#: dash/dashblocks/views.py:183 smartmin/views.py:1286
+#: dash/dashblocks/views.py:182 smartmin/views.py:1289
 #, python-format
 msgid "Create %s"
 msgstr "Створити %s"
 
-#: dash/dashblocks/views.py:185
+#: dash/dashblocks/views.py:184
 msgid "Create Content Block"
 msgstr "Створити контентний блок"
 
-#: dash/orgs/forms.py:14
+#: dash/orgs/forms.py:12
 msgid "Your first name"
 msgstr "Ваше ім'я"
 
-#: dash/orgs/forms.py:15
+#: dash/orgs/forms.py:13
 msgid "Your last name"
 msgstr "Прізвище"
 
-#: dash/orgs/forms.py:16
+#: dash/orgs/forms.py:14
 msgid "Your email address"
 msgstr "Ваш Email "
 
-#: dash/orgs/forms.py:19
+#: dash/orgs/forms.py:17
 msgid "Your password, at least eight letters please"
 msgstr "Пароль -щонайменше 8 символів"
 
-#: dash/orgs/forms.py:25
+#: dash/orgs/forms.py:23
 msgid "That email address is already used"
 msgstr "Email-адреса вже використовується"
 
-#: dash/orgs/forms.py:32
+#: dash/orgs/forms.py:30
 msgid "Passwords must contain at least 8 letters."
 msgstr "У паролі повинно бути не менш ніж 8 літер"
 
-#: dash/orgs/forms.py:51
+#: dash/orgs/forms.py:49
 msgid "This domain is used for subdomains"
 msgstr "Цей домен використовується для субдоменів"
 
-#: dash/orgs/models.py:37 dash/orgs/models.py:377 ureport/assets/models.py:19
+#: dash/orgs/models.py:36 dash/orgs/models.py:381 ureport/assets/models.py:19
 msgid "Name"
 msgstr "Назва"
 
-#: dash/orgs/models.py:38
+#: dash/orgs/models.py:37
 msgid "The name of this organization"
 msgstr "Назва організації"
 
-#: dash/orgs/models.py:42
+#: dash/orgs/models.py:41
 msgid "The logo that should be used for this organization"
 msgstr "Логотип організації"
 
-#: dash/orgs/models.py:45 dash/orgs/views.py:298
+#: dash/orgs/models.py:44 dash/orgs/views.py:297
 msgid "Administrators"
 msgstr "Адміністратори"
 
-#: dash/orgs/models.py:46
+#: dash/orgs/models.py:45
 msgid "The administrators in your organization"
 msgstr "Адміністратори у Вашій організації"
 
-#: dash/orgs/models.py:49
+#: dash/orgs/models.py:48
 msgid "Viewers"
 msgstr "Переглядачі"
 
-#: dash/orgs/models.py:50
+#: dash/orgs/models.py:49
 msgid "The viewers in your organization"
 msgstr "Переглядачі у Вашій організації"
 
-#: dash/orgs/models.py:53 dash/orgs/templates/orgs/org_manage_accounts.haml:19
-#: dash/orgs/views.py:299
+#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
+#: dash/orgs/views.py:298
 msgid "Editors"
 msgstr "Редактори"
 
-#: dash/orgs/models.py:54
+#: dash/orgs/models.py:53
 msgid "The editors in your organization"
 msgstr "Редактори у Вашій організації"
 
-#: dash/orgs/models.py:57
+#: dash/orgs/models.py:56
 msgid "Language"
 msgstr "Мова"
 
-#: dash/orgs/models.py:58
+#: dash/orgs/models.py:57
 msgid "The main language used by this organization"
 msgstr "Мова, що використовується цією організацією"
 
-#: dash/orgs/models.py:61
+#: dash/orgs/models.py:60
 msgid "Subdomain"
 msgstr "Субдомен"
 
-#: dash/orgs/models.py:62
+#: dash/orgs/models.py:61
 msgid "This subdomain is not available"
 msgstr "Субдомен не працює"
 
-#: dash/orgs/models.py:63
+#: dash/orgs/models.py:62
 msgid "The subdomain for this organization"
 msgstr "Субдомен організації"
 
-#: dash/orgs/models.py:66
+#: dash/orgs/models.py:65
 msgid "Domain"
 msgstr "Домен"
 
-#: dash/orgs/models.py:67
+#: dash/orgs/models.py:66
 msgid "This domain is not available"
 msgstr "Домен не працює"
 
-#: dash/orgs/models.py:68
+#: dash/orgs/models.py:67
 msgid "The custom domain for this organization"
 msgstr "Індивідуальний домен організації"
 
-#: dash/orgs/models.py:71
+#: dash/orgs/models.py:70
 msgid "Timezone"
 msgstr "Часовий пояс"
 
-#: dash/orgs/models.py:72
+#: dash/orgs/models.py:71
 msgid "The timezone your organization is in."
 msgstr "Часовий пояс Вашої організації"
 
-#: dash/orgs/models.py:76
+#: dash/orgs/models.py:75
 msgid "The API token for the RapidPro account this dashboard is tied to"
 msgstr "API token у RapidPro, до якого прив'язується адмінпанель"
 
-#: dash/orgs/models.py:81
+#: dash/orgs/models.py:80
 msgid ""
 "JSON blob used to store configuration information associated with this "
 "organization"
 msgstr "JSON blob, що зберігає конфігурацію інформації з даної організації"
 
-#: dash/orgs/models.py:306
+#: dash/orgs/models.py:311
 msgid "Administrator"
 msgstr "Адміністратор"
 
-#: dash/orgs/models.py:307
+#: dash/orgs/models.py:312
 msgid "Editor"
 msgstr "Редактор"
 
-#: dash/orgs/models.py:308
+#: dash/orgs/models.py:313
 msgid "Viewer"
 msgstr "Переглядач"
 
-#: dash/orgs/models.py:313 dash/orgs/models.py:373 ureport/assets/models.py:16
-#: ureport/contacts/models.py:22
+#: dash/orgs/models.py:318 dash/orgs/models.py:377 ureport/assets/models.py:16
+#: ureport/contacts/models.py:44
 msgid "Org"
 msgstr "Орг"
 
-#: dash/orgs/models.py:314
+#: dash/orgs/models.py:319
 msgid "The organization to which the account is invited to view"
 msgstr "Організація, яку акаунт запрошений переглядати"
 
-#: dash/orgs/models.py:317
+#: dash/orgs/models.py:322
 msgid "Email"
 msgstr "Email"
 
-#: dash/orgs/models.py:318
+#: dash/orgs/models.py:323
 msgid "The email to which we send the invitation of the viewer"
 msgstr "Email, на який ми відсилаємо запрошення переглядача"
 
-#: dash/orgs/models.py:321
+#: dash/orgs/models.py:326
 msgid "Secret"
 msgstr "Секрет"
 
-#: dash/orgs/models.py:322
+#: dash/orgs/models.py:327
 msgid "a unique code associated with this invitation"
 msgstr "Унікальний код запрошення"
 
-#: dash/orgs/models.py:325
+#: dash/orgs/models.py:330
 msgid "User Role"
 msgstr "Роль користувача"
 
-#: dash/orgs/models.py:356
+#: dash/orgs/models.py:361
 #, python-format
 msgid "%s Invitation"
 msgstr "Запрошення %s"
 
-#: dash/orgs/models.py:367 ureport/assets/models.py:11
+#: dash/orgs/models.py:373 ureport/assets/models.py:11
 msgid "Banner"
 msgstr "Банер"
 
-#: dash/orgs/models.py:368 ureport/assets/models.py:12
+#: dash/orgs/models.py:374 ureport/assets/models.py:12
 msgid "Pattern"
 msgstr "Малюнок"
 
-#: dash/orgs/models.py:374
+#: dash/orgs/models.py:378
 msgid "The organization in which the image will be used"
 msgstr "Організація, яка використовує зображення"
 
-#: dash/orgs/models.py:378
+#: dash/orgs/models.py:382
 msgid "The name to describe this background"
 msgstr "Назва, що описує фон"
 
-#: dash/orgs/models.py:381
+#: dash/orgs/models.py:385
 msgid "Background type"
 msgstr "Тип фону"
 
-#: dash/orgs/models.py:383 ureport/assets/models.py:24
+#: dash/orgs/models.py:387 ureport/assets/models.py:24
 msgid "The image file"
 msgstr "Файл зображення"
 
@@ -387,7 +390,8 @@ msgid ""
 "\n"
 "      You've been invited to join %(org_name)s.\n"
 "      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
+"a>.\n"
 "  "
 msgstr ""
 
@@ -417,142 +421,152 @@ msgstr "Видалити"
 msgid "You must have at least one administator"
 msgstr "Вам потрібен хоч один адміністратор"
 
-#: dash/orgs/views.py:169
+#: dash/orgs/views.py:168
 msgid "Select your Organization"
 msgstr "Оберіть організацію"
 
-#: dash/orgs/views.py:180
+#: dash/orgs/views.py:179
 msgid ""
 "Your account is not associated to an organization. Please Contact the "
 "adminstrator."
-msgstr "Ваш обліковий запис не пов'язаний з організацією. Будь ласка, зв'яжіться із адмінстратором"
+msgstr ""
+"Ваш обліковий запис не пов'язаний з організацією. Будь ласка, зв'яжіться із "
+"адмінстратором"
 
-#: dash/orgs/views.py:220 dash/orgs/views.py:230
+#: dash/orgs/views.py:219 dash/orgs/views.py:229
 msgid "Your Organization"
 msgstr "Ваша організація"
 
-#: dash/orgs/views.py:227
+#: dash/orgs/views.py:226
 msgid "Not Set"
 msgstr "Не визначено"
 
-#: dash/orgs/views.py:297
+#: dash/orgs/views.py:296
 msgid "Invite people to your organization"
 msgstr "Запросити в організацію"
 
-#: dash/orgs/views.py:300
+#: dash/orgs/views.py:299
 msgid "User group"
 msgstr "Група користувачів"
 
-#: dash/orgs/views.py:311
+#: dash/orgs/views.py:310
 msgid "One of the emails you entered is invalid."
 msgstr "Один з е-мейлів неправильний"
 
-#: dash/orgs/views.py:324
+#: dash/orgs/views.py:323
 #, python-format
 msgid "Manage %(name)s Accounts"
 msgstr "Керувати обл. записом %(name)s "
 
-#: dash/orgs/views.py:439 smartmin/views.py:1261
+#: dash/orgs/views.py:438 smartmin/views.py:1264
 msgid "Create"
 msgstr "Створити"
 
-#: dash/orgs/views.py:447
+#: dash/orgs/views.py:446
 msgid ""
 "Your invitation link is invalid. Please contact your organization "
 "administrator."
 msgstr "Ваше посилання не працює. Зв'яжіться з адміністратором"
 
-#: dash/orgs/views.py:503 dash/orgs/views.py:548
+#: dash/orgs/views.py:502 dash/orgs/views.py:547
 #, python-format
 msgid "Join %(name)s"
 msgstr "Приєднатись до %(name)s "
 
-#: dash/orgs/views.py:525
+#: dash/orgs/views.py:524
 msgid "Join"
 msgstr "приєднатись"
 
-#: dash/orgs/views.py:534
+#: dash/orgs/views.py:533
 msgid ""
 "Your invitation link has expired. Please contact your organization "
 "administrator."
 msgstr "Ваше запрошення застаріло. Зв'яжіться з адміністратором"
 
-#: dash/stories/models.py:15
+#: dash/orgs/views.py:640
+msgid "Task"
+msgstr ""
+
+#: dash/orgs/views.py:644
+msgid "Tasks"
+msgstr ""
+
+#: dash/stories/models.py:13
 msgid "The title for this story"
 msgstr "Назва"
 
-#: dash/stories/models.py:19
+#: dash/stories/models.py:17
 msgid "Whether this story is featured"
 msgstr "Чи це особлива історія?"
 
-#: dash/stories/models.py:22
+#: dash/stories/models.py:20
 msgid "The summary for the story"
 msgstr "Висновок"
 
-#: dash/stories/models.py:24
+#: dash/stories/models.py:22
 msgid "The body of text for the story"
 msgstr "Основний текст"
 
-#: dash/stories/models.py:26
+#: dash/stories/models.py:24
 msgid "The writer of the story"
 msgstr "Автор"
 
-#: dash/stories/models.py:29
+#: dash/stories/models.py:27
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Посилання до файлу mp3"
 
-#: dash/stories/models.py:33
+#: dash/stories/models.py:31
 msgid ""
-"The id of the YouTube video that should be linked to this story (this is the"
-" text that comes afer v= and before & in the YouTube URL)"
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
 msgstr "ID відео в YouTube до цієї історії (після v= в URL ролика)"
 
-#: dash/stories/models.py:39
+#: dash/stories/models.py:37
 msgid ""
 "Any tags for this story, separated by spaces, can be used to do more "
 "advanced filtering, optional"
 msgstr "Тематичні теги, розділені пробілом (вибірково)"
 
-#: dash/stories/models.py:44
+#: dash/stories/models.py:42
 msgid "The category for this story"
 msgstr "Категорії історії"
 
-#: dash/stories/models.py:48
+#: dash/stories/models.py:46
 msgid "The organization this story belongs to"
 msgstr "Організація, якій належить історія"
 
-#: dash/stories/models.py:126 templates/frame.haml:297
-#: templates/frame.haml.py:449 templates/public/stories.haml:7
+#: dash/stories/models.py:124 templates/frame.haml:304
+#: templates/frame.haml.py:456 templates/public/stories.haml:7
 msgid "Stories"
 msgstr "Статті"
 
-#: dash/stories/models.py:134
+#: dash/stories/models.py:132
 msgid "The story to associate to"
 msgstr "Стаття має відношення до "
 
-#: dash/stories/views.py:57
+#: dash/stories/views.py:56
 msgid "Yes"
 msgstr "Так"
 
-#: dash/stories/views.py:58
+#: dash/stories/views.py:57
 msgid "No"
 msgstr "Ні"
 
-#: dash/stories/views.py:77
+#: dash/stories/views.py:76
 msgid "Story Images"
 msgstr "Фотогалерея"
 
-#: dash/stories/views.py:89 dash/stories/views.py:97
-#: ureport/polls/views.py:111 ureport/polls/views.py:118
+#: dash/stories/views.py:88 dash/stories/views.py:96 ureport/polls/views.py:151
+#: ureport/polls/views.py:158
 #, python-format
 msgid "Image %d"
 msgstr "%d зображення"
 
-#: dash/stories/views.py:90
+#: dash/stories/views.py:89
 msgid "Image to display on story page and in previews. (optional)"
 msgstr "Зображення для сторінки статті і в прев'ю (вибірково)"
 
-#: dash/stories/views.py:98
+#: dash/stories/views.py:97
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Зображення для історії та прев'ю (на вибір)"
 
@@ -566,13 +580,16 @@ msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
-msgstr "\nВи впевнені, що цього хочете - видалити  <b>%(object)s</b>?"
+msgstr ""
+"\n"
+"Ви впевнені, що цього хочете - видалити  <b>%(object)s</b>?"
 
 #: smartmin/templates/smartmin/delete_confirm.html:17
 msgid ""
 "Once it is removed, it will be gone forever. There is no way to undo this "
 "operation."
-msgstr "Якщо його видалити, воно зникне назавжди. Подумайте. Скасувати не вийде."
+msgstr ""
+"Якщо його видалити, воно зникне назавжди. Подумайте. Скасувати не вийде."
 
 #: smartmin/templates/smartmin/delete_confirm.html:24
 #: smartmin/templates/smartmin/form.html:50
@@ -591,9 +608,18 @@ msgid_plural ""
 "\n"
 "         %(counter)s results\n"
 "        "
-msgstr[0] "\n  Результати - %(counter)s\n "
-msgstr[1] "\n  Результати - %(counter)s\n "
-msgstr[2] "\n  Результати - %(counter)s\n "
+msgstr[0] ""
+"\n"
+"  Результати - %(counter)s\n"
+" "
+msgstr[1] ""
+"\n"
+"  Результати - %(counter)s\n"
+" "
+msgstr[2] ""
+"\n"
+"  Результати - %(counter)s\n"
+" "
 
 #: smartmin/templates/smartmin/list.html:85
 #, python-format
@@ -601,7 +627,10 @@ msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
-msgstr "\n Результати: %(start)s-%(end)s з %(count)s\n "
+msgstr ""
+"\n"
+" Результати: %(start)s-%(end)s з %(count)s\n"
+" "
 
 #: smartmin/templates/smartmin/list.html:95
 #: smartmin/templates/smartmin/list.html:97
@@ -623,8 +652,8 @@ msgstr "редагувати"
 msgid "Sign in"
 msgstr "Зареєструватись"
 
-#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:397
-#: templates/frame.haml.py:579 templates/smartmin/users/login.haml:49
+#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:404
+#: templates/frame.haml.py:581 templates/smartmin/users/login.haml:49
 msgid "Login"
 msgstr "Увійти"
 
@@ -645,9 +674,13 @@ msgstr "Не вдалось увійти"
 #, python-format
 msgid ""
 "\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      Sorry, you cannot log in at this time because we received "
+"%(failed_login_limit)s incorrect login attempts.\n"
 "      "
-msgstr "\nВибачайте, Ви не можете увійти в свій обліковий запис -  %(failed_login_limit)s невдалих спроб."
+msgstr ""
+"\n"
+"Вибачайте, Ви не можете увійти в свій обліковий запис -  "
+"%(failed_login_limit)s невдалих спроб."
 
 #: smartmin/templates/smartmin/users/user_failed.html:18
 #, python-format
@@ -655,7 +688,9 @@ msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
-msgstr "\nПочекайте %(lockout_timeout)s хв. і зайдіть знову"
+msgstr ""
+"\n"
+"Почекайте %(lockout_timeout)s хв. і зайдіть знову"
 
 #: smartmin/templates/smartmin/users/user_failed.html:25
 msgid ""
@@ -679,199 +714,212 @@ msgstr "Відновити"
 msgid ""
 "Please enter the email address you used to sign up and we will help you "
 "recover your password."
-msgstr "Напишіть адресу, за якою ви реєструвались, і ми щось спробуємо зробити, щоб відновити пароль"
+msgstr ""
+"Напишіть адресу, за якою ви реєструвались, і ми щось спробуємо зробити, щоб "
+"відновити пароль"
 
 #: smartmin/templates/smartmin/users/user_newpassword.html:7
 #, python-format
 msgid ""
 "\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  <strong>Your password has expired.</strong> Site policy states that you "
+"must pick a new password every %(expire_days)s days, and that passwords must "
+"not have been used within the previous %(window_days)s days.\n"
 "  "
-msgstr "\n<strong> Пароль більше не дійсний.</strong> Мусите обирати новий пароль кожні %(expire_days)s днів, і не використовувати цей пароль за %(window_days)s днів до цього."
+msgstr ""
+"\n"
+"<strong> Пароль більше не дійсний.</strong> Мусите обирати новий пароль "
+"кожні %(expire_days)s днів, і не використовувати цей пароль за "
+"%(window_days)s днів до цього."
 
-#: smartmin/users/views.py:28 smartmin/users/views.py:64
-#: smartmin/users/views.py:79 smartmin/users/views.py:124
-#: smartmin/users/views.py:223 smartmin/users/views.py:250
+#: smartmin/users/views.py:28 smartmin/users/views.py:66
+#: smartmin/users/views.py:81 smartmin/users/views.py:126
+#: smartmin/users/views.py:228 smartmin/users/views.py:255
 msgid "New Password"
 msgstr "Новий пароль"
 
-#: smartmin/users/views.py:36 smartmin/users/views.py:70
-#: smartmin/users/views.py:102 smartmin/users/views.py:148
+#: smartmin/users/views.py:36 smartmin/users/views.py:72
+#: smartmin/users/views.py:104 smartmin/users/views.py:150
 msgid ""
 "Passwords must have at least 8 characters, including one uppercase, one "
 "lowercase and one number"
-msgstr "У паролі має бути 8 символів, серед яких великі букви, маленькі букви, і цифри"
+msgstr ""
+"У паролі має бути 8 символів, серед яких великі букви, маленькі букви, і "
+"цифри"
 
-#: smartmin/users/views.py:73 smartmin/users/views.py:105
-#: smartmin/users/views.py:151
+#: smartmin/users/views.py:75 smartmin/users/views.py:107
+#: smartmin/users/views.py:153
 msgid ""
 "You have used this password before in the past year, please use a new "
 "password."
 msgstr "Ви вже використовували цей пароль минулого року. Давайте новий"
 
-#: smartmin/users/views.py:78 smartmin/users/views.py:201
-#: smartmin/users/views.py:249
+#: smartmin/users/views.py:80 smartmin/users/views.py:206
+#: smartmin/users/views.py:254
 msgid "Password"
 msgstr "Пароль"
 
-#: smartmin/users/views.py:80
+#: smartmin/users/views.py:82
 msgid "Confirm Password"
 msgstr "Підтвердити пароль"
 
-#: smartmin/users/views.py:86
+#: smartmin/users/views.py:88
 msgid "Please enter your password to save changes."
 msgstr "Напишіть Ваш пароль, щоб зберегти зміни"
 
-#: smartmin/users/views.py:95
+#: smartmin/users/views.py:97
 msgid "Confirm the new password by filling the this field"
 msgstr "Підтвердіть новий пароль, заповнивши оце поле"
 
-#: smartmin/users/views.py:98
+#: smartmin/users/views.py:100
 msgid "New password doesn't match with its confirmation"
 msgstr "Новий пароль не збігається із підтвердженим"
 
-#: smartmin/users/views.py:110
+#: smartmin/users/views.py:112
 msgid "Your Email"
 msgstr "Ваш Email"
 
-#: smartmin/users/views.py:117
+#: smartmin/users/views.py:119
 msgid ""
 "E-mail recovery is not supported, please contact the website administrator "
 "to reset your password manually."
-msgstr "Відновлення Email-адреси не підтримується. Зв'яжіться з адміністратором, і він\\вона перестановить пароль вручну"
+msgstr ""
+"Відновлення Email-адреси не підтримується. Зв'яжіться з адміністратором, і "
+"він\\вона перестановить пароль вручну"
 
-#: smartmin/users/views.py:122
+#: smartmin/users/views.py:124
 msgid "Current Password"
 msgstr "Теперішній пароль"
 
-#: smartmin/users/views.py:123
+#: smartmin/users/views.py:125
 msgid "Your current password"
 msgstr "Ваш теперішній пароль"
 
-#: smartmin/users/views.py:125
+#: smartmin/users/views.py:127
 msgid "Your new password."
 msgstr "Ваш новий пароль"
 
-#: smartmin/users/views.py:126
+#: smartmin/users/views.py:128
 msgid "Confirm new Password"
 msgstr "Підтвердити новий пароль"
 
-#: smartmin/users/views.py:127
+#: smartmin/users/views.py:129
 msgid "Confirm your new password."
 msgstr "Підтвердіть Ваш новий пароль"
 
-#: smartmin/users/views.py:132
+#: smartmin/users/views.py:134
 msgid "Please enter your password to save changes"
 msgstr "Наберіть Ваш пароль, щоб зберегти "
 
-#: smartmin/users/views.py:141
+#: smartmin/users/views.py:143
 msgid "Confirm your new password by entering it here"
 msgstr "Підтвердіть Ваш пароль - введіть його тут"
 
-#: smartmin/users/views.py:144
+#: smartmin/users/views.py:146
 msgid "Mismatch between your new password and confirmation, try again"
 msgstr "Не збігається, спробуйте ще раз"
 
-#: smartmin/users/views.py:197
+#: smartmin/users/views.py:202
 msgid "New user created successfully."
 msgstr "Створено нового користувача"
 
-#: smartmin/users/views.py:200 smartmin/users/views.py:222
+#: smartmin/users/views.py:205 smartmin/users/views.py:227
 msgid "Groups"
 msgstr "Групи"
 
-#: smartmin/users/views.py:200
-msgid ""
-"Users will only get those permissions that are allowed for their group."
+#: smartmin/users/views.py:205
+msgid "Users will only get those permissions that are allowed for their group."
 msgstr "Користувачі мають лише права, що були надані їхнім групам"
 
-#: smartmin/users/views.py:201
+#: smartmin/users/views.py:206
 msgid "Set the user's initial password here."
 msgstr "Встановити початковий пароль користувача"
 
-#: smartmin/users/views.py:220
+#: smartmin/users/views.py:225
 msgid "Last Login"
 msgstr "Останнє відвідування"
 
-#: smartmin/users/views.py:221
+#: smartmin/users/views.py:226
 msgid "Is Active"
 msgstr "Активний"
 
-#: smartmin/users/views.py:221
+#: smartmin/users/views.py:226
 msgid "Whether this user is allowed to log into the site"
 msgstr "Користувачу дозволено входити на сайт"
 
-#: smartmin/users/views.py:222
+#: smartmin/users/views.py:227
 msgid "Users will only get those permissions that are allowed for their group"
 msgstr "Користувачі матимуть лише ті права, що були надані їхнім групам"
 
-#: smartmin/users/views.py:223
+#: smartmin/users/views.py:228
 msgid "You can reset the user's password by entering a new password here"
 msgstr "Ви можете стерти пароль користувача, якщо ввдедете новий сюди"
 
-#: smartmin/users/views.py:248
+#: smartmin/users/views.py:253
 msgid "Username"
 msgstr "Ім'я користувача"
 
-#: smartmin/users/views.py:249
+#: smartmin/users/views.py:254
 msgid "Your password"
 msgstr "Ваш пароль"
 
-#: smartmin/users/views.py:250
+#: smartmin/users/views.py:255
 msgid "If you want to set a new password, enter it here"
 msgstr "Якщо хочете новий пароль, введіть його сюди"
 
-#: smartmin/users/views.py:251
+#: smartmin/users/views.py:256
 msgid "Confirm New Password"
 msgstr "Підтвердити новий пароль"
 
-#: smartmin/users/views.py:251
+#: smartmin/users/views.py:256
 msgid "Confirm your new password"
 msgstr "Підтвердіть Ваш новий пароль"
 
-#: smartmin/users/views.py:266
+#: smartmin/users/views.py:271
 msgid "Edit your profile"
 msgstr "Редагувати профіль"
 
-#: smartmin/users/views.py:269
+#: smartmin/users/views.py:274
 msgid "Password Recovery"
 msgstr "Відновлення паролю"
 
-#: smartmin/users/views.py:273
+#: smartmin/users/views.py:278
 msgid "An Email has been sent to your account with further instructions."
 msgstr "Вам надіслали лист із подальшими інструкціями"
 
-#: smartmin/users/views.py:301
+#: smartmin/users/views.py:306
 msgid "Password Recovery Request"
 msgstr "Запит на відновлення паролю"
 
-#: smartmin/users/views.py:310
+#: smartmin/users/views.py:315
 msgid "Pick a new password"
 msgstr "Оберіть новий пароль"
 
-#: smartmin/users/views.py:312
+#: smartmin/users/views.py:317
 msgid "Your password has successfully been updated, thank you."
 msgstr "Ваш пароль змінено - дякуємо"
 
-#: smartmin/users/views.py:338
+#: smartmin/users/views.py:343
 #, python-format
 msgid "You are now logged in as %s"
 msgstr "Ви ввійшли на сайт як %s"
 
-#: smartmin/users/views.py:351
+#: smartmin/users/views.py:356
 msgid ""
 "Password Updated Successfully. Now you can log in using your new password."
 msgstr "Пароль оновлено. Можете з ним заходити на сайт"
 
-#: smartmin/users/views.py:354
+#: smartmin/users/views.py:359
 msgid "Reset your Password"
 msgstr "Змінити пароль"
 
-#: smartmin/users/views.py:365
+#: smartmin/users/views.py:371
 msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by"
-" entering your email here."
-msgstr "Ваше посилання не працює з причин безпеки. Будь ласка, відновіть процедуру - введіть ваш email"
+"Your link has expired for security reasons. Please reinitiate the process by "
+"entering your email here."
+msgstr ""
+"Ваше посилання не працює з причин безпеки. Будь ласка, відновіть процедуру - "
+"введіть ваш email"
 
 #: smartmin/views.py:838
 msgid "Submit"
@@ -881,16 +929,16 @@ msgstr "Подати"
 msgid "Form"
 msgstr "Форма"
 
-#: smartmin/views.py:1166
+#: smartmin/views.py:1167
 msgid "Save Changes"
 msgstr "Зберегти"
 
-#: smartmin/views.py:1277
+#: smartmin/views.py:1280
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Ваш новий %s створено"
 
-#: smartmin/views.py:1296
+#: smartmin/views.py:1300
 #, python-format
 msgid "Import %s"
 msgstr "Імпортувати %s"
@@ -899,120 +947,125 @@ msgstr "Імпортувати %s"
 msgid "U-Report"
 msgstr "U-Report"
 
-#: templates/frame.haml:177
+#: templates/frame.haml:184
 msgid "Admin"
 msgstr "Адмін"
 
-#: templates/frame.haml:185
+#: templates/frame.haml:192
 msgid "Configuration"
 msgstr "Конфігурація"
 
-#: templates/frame.haml:191
+#: templates/frame.haml:198
 msgid "Orgs"
 msgstr "Орг"
 
-#: templates/frame.haml:197
+#: templates/frame.haml:204
 msgid "Users"
 msgstr "Користувачі"
 
-#: templates/frame.haml:210
+#: templates/frame.haml:217
 msgid "Images"
 msgstr "Фото"
 
-#: templates/frame.haml:219 templates/frame.haml.py:280
+#: templates/frame.haml:226 templates/frame.haml.py:287
 msgid "Content"
 msgstr "Контент"
 
-#: templates/frame.haml:228
+#: templates/frame.haml:235
 msgid "Country Aliases"
 msgstr "Назви регіонів"
 
-#: templates/frame.haml:245 templates/frame.haml.py:443
+#: templates/frame.haml:252 templates/frame.haml.py:450
 msgid "Polls"
 msgstr "Опитування"
 
-#: templates/frame.haml:268
+#: templates/frame.haml:275
 msgid "Category Images"
 msgstr "Зображення категорії"
 
-#: templates/frame.haml:288
+#: templates/frame.haml:295
 msgid "News Items"
 msgstr "Новини"
 
-#: templates/frame.haml:306
+#: templates/frame.haml:313
 msgid "Job Sources"
 msgstr "Джерела вакансій"
 
-#: templates/frame.haml:313
+#: templates/frame.haml:320
 msgid "Jobs Content"
 msgstr "Контент вакансій"
 
-#: templates/frame.haml:323
+#: templates/frame.haml:330
 msgid "About Content"
 msgstr "Про - контент"
 
-#: templates/frame.haml:329
+#: templates/frame.haml:336
 msgid "Videos"
 msgstr "Відео"
 
-#: templates/frame.haml:335
+#: templates/frame.haml:342
 msgid "Contact Us Content"
 msgstr "Контакти - контент"
 
-#: templates/frame.haml:341
+#: templates/frame.haml:348
 msgid "Missions Content"
 msgstr "Місії - контент"
 
-#: templates/frame.haml:347
+#: templates/frame.haml:354
 msgid "Terms & Conditions"
 msgstr "Умови - контент"
 
-#: templates/frame.haml:354
+#: templates/frame.haml:361
 msgid "U-Reporters Content"
 msgstr "U-репортери - контент"
 
-#: templates/frame.haml:361
+#: templates/frame.haml:368
 msgid "Join &amp; Engage Content"
 msgstr "Приєднуйся! - контент"
 
-#: templates/frame.haml:367
+#: templates/frame.haml:374
 msgid "Join Steps Content"
 msgstr "Приєднуйся, кроки - контент"
 
-#: templates/frame.haml:374
+#: templates/frame.haml:381
 msgid "Additional Menu"
 msgstr "Додаткове меню"
 
-#: templates/frame.haml:391
+#: templates/frame.haml:398
 msgid "Logout"
 msgstr "Вийти"
 
-#: templates/frame.haml:437
+#: templates/frame.haml:444
 msgid "About"
 msgstr "Про нас"
 
-#: templates/frame.haml:455
+#: templates/frame.haml:462
 msgid "U-Reporters"
 msgstr "U-репортери"
 
-#: templates/frame.haml:462 templates/public/jobs.haml:7
+#: templates/frame.haml:469 templates/public/jobs.haml:7
 msgid "Jobs"
 msgstr "Цікаві вакансії"
 
-#: templates/frame.haml:469
+#: templates/frame.haml:476
 msgid "Join & Engage"
 msgstr "Приєднуйся!"
 
-#: templates/frame.haml:540
-msgid "FOLLOW US ON:"
+#: templates/frame.haml:542
+#, fuzzy
+#| msgid "FOLLOW US ON:"
+msgid "FOLLOW US ON"
 msgstr "Приєднуйтесь до нас:"
 
 #: templates/jobs/jobsource_create.haml:8
 msgid ""
 "\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"        To add a Twitter job source you are required to get a widget id from "
+"twitter.\n"
 "      "
-msgstr "\nЩоб додати джерело з Твіттера, отримайте ID віджета з Твіттер"
+msgstr ""
+"\n"
+"Щоб додати джерело з Твіттера, отримайте ID віджета з Твіттер"
 
 #: templates/jobs/jobsource_create.haml:12
 #: templates/jobs/jobsource_update.haml:12
@@ -1023,9 +1076,12 @@ msgstr "Робіть, як у цій інструкції"
 #: templates/jobs/jobsource_update.haml:15
 msgid ""
 "\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"        <div>After you create the widget copy the widget id from the url as "
+"shown on</div>\n"
 "      "
-msgstr "\n<div>Коли створите віджет, скопіюйте його ID з URL, як показано тут n</div>"
+msgstr ""
+"\n"
+"<div>Коли створите віджет, скопіюйте його ID з URL, як показано тут n</div>"
 
 #: templates/jobs/jobsource_create.haml:40
 msgid "Back"
@@ -1034,9 +1090,12 @@ msgstr "Назад"
 #: templates/jobs/jobsource_update.haml:8
 msgid ""
 "\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
+"        Remember for a Twitter job source you are required to get a widget "
+"id from twitter.\n"
 "      "
-msgstr "\nПам'ятайте: для джерела вакансій у Твіттер, отримайте ID віджета з Твіттеру."
+msgstr ""
+"\n"
+"Пам'ятайте: для джерела вакансій у Твіттер, отримайте ID віджета з Твіттеру."
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
 msgid "ABOUT U-REPORT"
@@ -1093,14 +1152,12 @@ msgstr "Дивіться на YouTube"
 msgid "MORE POLLS"
 msgstr "Інші опитування"
 
-#: templates/public/all_polls.haml:12
-#: templates/public/archived_stories.haml:12
+#: templates/public/all_polls.haml:12 templates/public/archived_stories.haml:12
 msgid "FILTER"
 msgstr "Теми"
 
-#: templates/public/all_polls.haml:19
-#: templates/public/archived_stories.haml:19 templates/public/stories.haml:69
-#: templates/public/strings_values.haml:5
+#: templates/public/all_polls.haml:19 templates/public/archived_stories.haml:19
+#: templates/public/stories.haml:69 templates/public/strings_values.haml:5
 msgid "All"
 msgstr "Усі"
 
@@ -1120,126 +1177,132 @@ msgstr "Архів статей"
 msgid "LIST"
 msgstr "Статті"
 
-#: templates/public/index.haml:17
+#: templates/public/index.haml:21
 msgid "Follow"
 msgstr "Приєднатись"
 
-#: templates/public/index.haml:25
+#: templates/public/index.haml:29
 msgid ""
 "\n"
-"                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
+"                  U-Report is a social messaging tool allowing anyone from "
+"any community, anywhere in the world to respond to polls, report issues, "
+"support child rights and work as positive agents of change on behalf of "
+"people in their country.\n"
 "                "
-msgstr "\nUReport - інструмент, що дає змогу будь-кому будь-де брати участь в опитуваннях, висловлювати свою точку зору щодо змін і впливати на них."
+msgstr ""
+"\n"
+"UReport - інструмент, що дає змогу будь-кому будь-де брати участь в "
+"опитуваннях, висловлювати свою точку зору щодо змін і впливати на них."
 
-#: templates/public/index.haml:32 templates/public/index.haml.py:70
+#: templates/public/index.haml:36 templates/public/index.haml.py:74
 msgid "CURRENT POLL"
 msgstr "АКТУАЛЬНЕ ОПИТУВАННЯ"
 
-#: templates/public/index.haml:38 templates/public/index.haml.py:189
-#: templates/public/index.haml:559
+#: templates/public/index.haml:42 templates/public/index.haml.py:193
+#: templates/public/index.haml:563
 msgid "VIEW FULL RESULT"
 msgstr "Результати"
 
-#: templates/public/index.haml:48
+#: templates/public/index.haml:52
 msgid "All U-Report members"
 msgstr "Усі U-репортери"
 
-#: templates/public/index.haml:87 templates/public/polls.haml:43
+#: templates/public/index.haml:91 templates/public/polls.haml:43
 msgid "RESPONSE RATE"
 msgstr "Рівень активності"
 
-#: templates/public/index.haml:93
+#: templates/public/index.haml:97
 msgid "Responded out of"
 msgstr "відповіли із"
 
-#: templates/public/index.haml:101
+#: templates/public/index.haml:105
 msgid "RESPONDER'S RATE BY LOCATION"
 msgstr "Активність у різних областях"
 
-#: templates/public/index.haml:107
+#: templates/public/index.haml:111
 msgid "Most responded"
 msgstr "Набільше"
 
-#: templates/public/index.haml:111
+#: templates/public/index.haml:115
 msgid "Least responded"
 msgstr "Найменше"
 
-#: templates/public/index.haml:153
+#: templates/public/index.haml:157
 msgid "TRENDING WORDS"
 msgstr "Слова у тренді"
 
-#: templates/public/index.haml:163
+#: templates/public/index.haml:167
 msgid "FEATURED RESPONSES"
 msgstr "Цікаві відповіді"
 
-#: templates/public/index.haml:209 templates/public/ureporters.haml:16
+#: templates/public/index.haml:213 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
 msgstr "U-репортери в"
 
-#: templates/public/index.haml:217
+#: templates/public/index.haml:221
 msgid "TOTAL # OF U-REPORTERS"
 msgstr "Всього"
 
-#: templates/public/index.haml:229
+#: templates/public/index.haml:233
 msgid "4 MOST ACTIVE REGIONS"
 msgstr "4 найбільш активні області"
 
-#: templates/public/index.haml:240 templates/public/index.haml.py:261
+#: templates/public/index.haml:244 templates/public/index.haml.py:265
 msgid "RATE BY GENDER"
 msgstr "Стать"
 
-#: templates/public/index.haml:249 templates/public/index.haml.py:302
+#: templates/public/index.haml:253 templates/public/index.haml.py:306
 msgid "RATE BY AGE"
 msgstr "Вік"
 
-#: templates/public/index.haml:314
+#: templates/public/index.haml:318
 msgid "WHAT U-REPORTERS ARE SAYING"
 msgstr "U-репортери кажуть, що думають про..."
 
-#: templates/public/index.haml:323
+#: templates/public/index.haml:327
 msgid "FEATURED VIDEO"
 msgstr "Відео"
 
-#: templates/public/index.haml:329
+#: templates/public/index.haml:333
 msgid "WATCH MORE VIDEOS"
 msgstr "Більше відео"
 
-#: templates/public/index.haml:340
+#: templates/public/index.haml:344
 msgid "FEATURED REGION"
 msgstr "Область"
 
-#: templates/public/index.haml:364
+#: templates/public/index.haml:368 templates/public/join_engage.haml:99
 msgid "VIEW MORE STORIES ON FACEBOOK"
 msgstr "Більше на Facebook"
 
-#: templates/public/index.haml:383
+#: templates/public/index.haml:387
 msgid "VIEW MORE ON INSTAGRAM"
 msgstr "Більше фото на Instagram"
 
-#: templates/public/index.haml:403
+#: templates/public/index.haml:407
 msgid "READ MORE TWEETS ON TWITTER"
 msgstr "Читай більше на Twitter"
 
-#: templates/public/index.haml:414
+#: templates/public/index.haml:418
 msgid "NEWS FEED"
 msgstr "Новини"
 
-#: templates/public/index.haml:430 templates/public/index.haml.py:464
-#: templates/public/index.haml:495 templates/public/index.haml.py:573
+#: templates/public/index.haml:434 templates/public/index.haml.py:468
+#: templates/public/index.haml:499 templates/public/index.haml.py:577
 msgid "STORY"
 msgstr "Стаття"
 
-#: templates/public/index.haml:455 templates/public/index.haml.py:482
-#: templates/public/index.haml:513 templates/public/index.haml.py:598
+#: templates/public/index.haml:459 templates/public/index.haml.py:486
+#: templates/public/index.haml:517 templates/public/index.haml.py:602
 #: templates/public/stories.haml:36 templates/public/stories.haml.py:117
 msgid "READ FULL STORY"
 msgstr "Читати"
 
-#: templates/public/index.haml:536
+#: templates/public/index.haml:540
 msgid "Response Rate"
 msgstr "рівень активності"
 
-#: templates/public/index.haml:737
+#: templates/public/index.haml:746
 msgid "Read This Story"
 msgstr "Читати"
 
@@ -1251,7 +1314,7 @@ msgstr "Цікаві вакансії"
 msgid "Scroll to see job details"
 msgstr "Гортайте вниз"
 
-#: templates/public/jobs.haml:78 templates/public/join_engage.haml:115
+#: templates/public/jobs.haml:78 templates/public/join_engage.haml:119
 msgid "TWEET TO"
 msgstr "Надіслати твіт"
 
@@ -1275,16 +1338,29 @@ msgstr "Як стати учасником?"
 #, python-format
 msgid ""
 "\n"
-"              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+"              * U-Report is a free program sponsored by UNICEF with help of "
+"Network Providers in %(country)s. U-Report will not ask for any payments nor "
+"personal financial information, PLEASE disregard any messages which ask you "
+"for payment either on this number or on the Facebook and Twitter pages. All "
+"U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "            "
-msgstr "\n* U-Report - безкоштовний проектЮНІСЕФ, що впроваджується за підтримки партнерів %(country)s. У рамках проекту не може бути стягнено ніяких коштів. ЮНІСЕФ не запитує про фінансову інформацію. БУДЬ ЛАСКА, ІГНОРУЙТЕ будь які вимоги сплатити кошти як за коротким номером, так і на сторінках у Twitter і Facebook. Усі активності UReport - безкоштовні для учасників. (У тому числі, всі повідомлення на %(shortcode)s).\n\n                "
+msgstr ""
+"\n"
+"* U-Report - безкоштовний проектЮНІСЕФ, що впроваджується за підтримки "
+"партнерів %(country)s. У рамках проекту не може бути стягнено ніяких коштів. "
+"ЮНІСЕФ не запитує про фінансову інформацію. БУДЬ ЛАСКА, ІГНОРУЙТЕ будь які "
+"вимоги сплатити кошти як за коротким номером, так і на сторінках у Twitter і "
+"Facebook. Усі активності UReport - безкоштовні для учасників. (У тому числі, "
+"всі повідомлення на %(shortcode)s).\n"
+"\n"
+"                "
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
 msgstr "U-Report у соцмережах"
 
-#: templates/public/join_engage.haml:136
+#: templates/public/join_engage.haml:140
 msgid "COMPOSE NEW TWEET"
 msgstr "Новий твіт"
 
@@ -1302,9 +1378,15 @@ msgid_plural ""
 "\n"
 "                  %(questions)s QUESTIONS POLLED ON THIS TOPIC\n"
 "                "
-msgstr[0] "\nКількість запитань - %(questions)s"
-msgstr[1] "\nКількість запитань - %(questions)s"
-msgstr[2] "\nКількість запитань - %(questions)s"
+msgstr[0] ""
+"\n"
+"Кількість запитань - %(questions)s"
+msgstr[1] ""
+"\n"
+"Кількість запитань - %(questions)s"
+msgstr[2] ""
+"\n"
+"Кількість запитань - %(questions)s"
 
 #: templates/public/polls.haml:49
 msgid "RESPONDED OUT OF"
@@ -1324,7 +1406,9 @@ msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr "\n%(responded)s відповіли із %(polled)s"
+msgstr ""
+"\n"
+"%(responded)s відповіли із %(polled)s"
 
 #: templates/public/polls.haml:121
 msgid "KEYWORDS"
@@ -1334,39 +1418,47 @@ msgstr "Поширені слова"
 msgid "STATISTICS"
 msgstr "Статистика"
 
-#: templates/public/polls.haml:130
+#: templates/public/polls.haml:131
 msgid "LOCATIONS"
 msgstr "Географія"
 
-#: templates/public/polls.haml:213
+#: templates/public/polls.haml:137 templates/public/ureporters.haml:83
+msgid "GENDER"
+msgstr "Стать"
+
+#: templates/public/polls.haml:143 templates/public/ureporters.haml:63
+msgid "AGE"
+msgstr "Вік"
+
+#: templates/public/polls.haml:313
 msgid "FEATURED ANSWERS"
 msgstr "Цікаві відповіді"
 
-#: templates/public/polls.haml:220
+#: templates/public/polls.haml:320
 msgid "No featured answers."
 msgstr "Поки що не відібрали."
 
-#: templates/public/polls.haml:239
+#: templates/public/polls.haml:339
 msgid "U-Reporter in"
 msgstr "U-репортер, "
 
-#: templates/public/polls.haml:251 templates/public/story_read.haml:126
+#: templates/public/polls.haml:351 templates/public/story_read.haml:126
 msgid "RELATED STORIES"
 msgstr "Статті"
 
-#: templates/public/polls.haml:256 templates/public/story_read.haml:131
+#: templates/public/polls.haml:356 templates/public/story_read.haml:131
 msgid "No related stories."
 msgstr "Поки що немає статтей."
 
-#: templates/public/polls.haml:279 templates/public/story_read.haml:157
+#: templates/public/polls.haml:379 templates/public/story_read.haml:157
 msgid "READ MORE"
 msgstr "Читати"
 
-#: templates/public/polls.haml:291 templates/public/story_read.haml:99
+#: templates/public/polls.haml:391 templates/public/story_read.haml:99
 msgid "FEATURED IMAGES"
 msgstr "Фотогалерея"
 
-#: templates/public/polls.haml:297
+#: templates/public/polls.haml:397
 msgid "No featured images yet."
 msgstr "Поки що немає тематичних зображень."
 
@@ -1428,46 +1520,50 @@ msgid "National"
 msgstr "Вся Україна"
 
 #: templates/public/strings_values.haml:11
+msgid "District"
+msgstr ""
+
+#: templates/public/strings_values.haml:12
 msgid "Participation Level"
 msgstr "Активність"
 
-#: templates/public/strings_values.haml:12
+#: templates/public/strings_values.haml:13
 msgid "Responses"
 msgstr "Відповідей"
 
-#: templates/public/strings_values.haml:13
+#: templates/public/strings_values.haml:14
 msgid "Reporters in"
 msgstr "U-репортери, "
 
-#: templates/public/strings_values.haml:14
+#: templates/public/strings_values.haml:15
 msgid "Results"
 msgstr "Результати"
 
-#: templates/public/strings_values.haml:15
+#: templates/public/strings_values.haml:16
 msgid "*Other answers include"
 msgstr "А також"
 
-#: templates/public/strings_values.haml:16
+#: templates/public/strings_values.haml:17
 msgid "Population"
 msgstr "Населення"
 
-#: templates/public/strings_values.haml:17
+#: templates/public/strings_values.haml:18
 msgid "Registered in"
 msgstr "Зареєстровані, "
 
-#: templates/public/strings_values.haml:18
+#: templates/public/strings_values.haml:19
 msgid "Density"
 msgstr "Густота"
 
-#: templates/public/strings_values.haml:19
+#: templates/public/strings_values.haml:20
 msgid "total"
 msgstr "разом"
 
-#: templates/public/strings_values.haml:20
+#: templates/public/strings_values.haml:21
 msgid "of"
 msgstr ""
 
-#: templates/public/strings_values.haml:21
+#: templates/public/strings_values.haml:22
 msgid "the"
 msgstr ""
 
@@ -1479,31 +1575,23 @@ msgstr "Хто ми?"
 msgid "U-REPORTER STATISTICS"
 msgstr "U-репортери: Статистика"
 
-#: templates/public/ureporters.haml:63
-msgid "AGE"
-msgstr "Вік"
-
-#: templates/public/ureporters.haml:83
-msgid "GENDER"
-msgstr "Стать"
-
-#: templates/public/ureporters.haml:133
+#: templates/public/ureporters.haml:134
 msgid "WHERE ARE U-REPORTERS FROM?"
 msgstr "Звідки ми?"
 
-#: templates/public/ureporters.haml:152
+#: templates/public/ureporters.haml:154
 msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
 msgstr "Нові U-репортери: протягом 6 місяців"
 
-#: templates/public/ureporters.haml:172
+#: templates/public/ureporters.haml:174
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
 msgstr "Чим ми займаємось? Топ 9 "
 
-#: templates/public/ureporters.haml:356
+#: templates/public/ureporters.haml:358
 msgid "Registered"
 msgstr "Зареєстровані"
 
-#: templates/public/ureporters.haml:369
+#: templates/public/ureporters.haml:371
 msgid "Week of"
 msgstr "Тиждень"
 
@@ -1528,23 +1616,23 @@ msgstr "Короткий опис"
 msgid "Image type"
 msgstr "Вид зображення"
 
-#: ureport/contacts/models.py:24
+#: ureport/contacts/models.py:46
 msgid "Label"
 msgstr ""
 
-#: ureport/contacts/models.py:26
+#: ureport/contacts/models.py:48
 msgid "Key"
 msgstr ""
 
-#: ureport/contacts/models.py:88
+#: ureport/contacts/models.py:86 ureport/polls/models.py:744
 msgid "Male"
 msgstr "Хлопці"
 
-#: ureport/contacts/models.py:88
+#: ureport/contacts/models.py:86 ureport/polls/models.py:744
 msgid "Female"
 msgstr "Дівчата"
 
-#: ureport/contacts/models.py:92 ureport/locations/models.py:16
+#: ureport/contacts/models.py:92 ureport/locations/models.py:24
 msgid "Organization"
 msgstr "Організація"
 
@@ -1576,7 +1664,13 @@ msgstr "Область"
 msgid "District Field"
 msgstr ""
 
-#: ureport/contacts/models.py:259
+#: ureport/contacts/models.py:107
+#, fuzzy
+#| msgid "Born Field"
+msgid "Ward Field"
+msgstr "Рік народження"
+
+#: ureport/contacts/models.py:240 ureport/polls/models.py:969
 msgid "Number of items with this counter"
 msgstr ""
 
@@ -1604,7 +1698,8 @@ msgstr "Повна URL цього джерела"
 msgid ""
 "For Twitter, a widget Id is required to embed tweets on the website. Read "
 "carefully the instructions above on how to get the right widget Id"
-msgstr "Для Твіттеру необхідний віджет. Прочитайте інструкції, як отримати ID віджету"
+msgstr ""
+"Для Твіттеру необхідний віджет. Прочитайте інструкції, як отримати ID віджету"
 
 #: ureport/jobs/models.py:30
 msgid "Featured job sources are shown first on the jobs page."
@@ -1622,27 +1717,27 @@ msgstr "Джерело вакансій додано"
 msgid "Your job source has been updated successfully"
 msgstr "Джерело вакансій оновлено"
 
-#: ureport/locations/models.py:19
+#: ureport/locations/models.py:29
 msgid "This is the OSM id for this administrative boundary"
 msgstr ""
 
-#: ureport/locations/models.py:22
+#: ureport/locations/models.py:32
 msgid "The name of our administrative boundary"
 msgstr ""
 
-#: ureport/locations/models.py:24
+#: ureport/locations/models.py:34
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
 msgstr ""
 
-#: ureport/locations/models.py:27
+#: ureport/locations/models.py:37
 msgid "The parent to this political boundary if any"
 msgstr ""
 
-#: ureport/locations/models.py:29
+#: ureport/locations/models.py:39
 msgid "Geometry"
 msgstr ""
 
-#: ureport/locations/models.py:30
+#: ureport/locations/models.py:40
 msgid ""
 "The json representing the geometry type and coordinates of the boundaries"
 msgstr ""
@@ -1679,281 +1774,369 @@ msgstr "Опис"
 msgid "The organization this video belongs to"
 msgstr "Організація, чиє відео"
 
-#: ureport/polls/models.py:51
+#: ureport/polls/models.py:61
 msgid "The name of this poll category"
 msgstr "Назва категорії опитувань"
 
-#: ureport/polls/models.py:60
+#: ureport/polls/models.py:70
 msgid "Poll Categories"
 msgstr "Категорії опитувань"
 
-#: ureport/polls/models.py:67
+#: ureport/polls/models.py:89
 msgid "The Flow this Poll is based on"
 msgstr "Flow , з яким пов'язане опитування"
 
-#: ureport/polls/models.py:69
+#: ureport/polls/models.py:91
+msgid ""
+"The date to display for this poll. Make it empty to use flow created_on."
+msgstr ""
+
+#: ureport/polls/models.py:95
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr ""
+
+#: ureport/polls/models.py:97
+msgid "The base language of the flow to use"
+msgstr ""
+
+#: ureport/polls/models.py:100
+msgid "The number of polled reporters on this poll"
+msgstr ""
+
+#: ureport/polls/models.py:103
+msgid "Whether the poll has finished the initial results sync."
+msgstr ""
+
+#: ureport/polls/models.py:106
 msgid "The title for this Poll"
 msgstr "Назва опитування"
 
-#: ureport/polls/models.py:71
+#: ureport/polls/models.py:108
 msgid "The category this Poll belongs to"
 msgstr "Категорія цього опитування"
 
-#: ureport/polls/models.py:73
+#: ureport/polls/models.py:110
 msgid "Whether this poll should be featured on the homepage"
 msgstr "Чи буде це опитування на головній сторінці?"
 
-#: ureport/polls/models.py:75
+#: ureport/polls/models.py:112
 msgid "The splash category image to display for the poll (optional)"
-msgstr "Зображення з категорії, яке має відображатись разом із опитуванням (вибірково)"
+msgstr ""
+"Зображення з категорії, яке має відображатись разом із опитуванням "
+"(вибірково)"
 
-#: ureport/polls/models.py:77
+#: ureport/polls/models.py:114
 msgid "The organization this poll is part of"
 msgstr "Від якої організації опитування?"
 
-#: ureport/polls/models.py:271
+#: ureport/polls/models.py:537
 msgid "The poll to associate to"
 msgstr "З чим асоціюватиметься опитування"
 
-#: ureport/polls/models.py:284
+#: ureport/polls/models.py:551
 msgid "The poll for this response"
 msgstr "Опитування цієї відповіді"
 
-#: ureport/polls/models.py:287
+#: ureport/polls/models.py:554
 msgid "The location for this response"
 msgstr "Місце знаходження цієї відповіді"
 
-#: ureport/polls/models.py:290
+#: ureport/polls/models.py:557
 msgid "The name of the sender of the message"
 msgstr "Ім'я автора"
 
-#: ureport/polls/models.py:293
+#: ureport/polls/models.py:560
 msgid "The featured response message"
 msgstr "Цікаве повідомлення"
 
-#: ureport/polls/models.py:305
+#: ureport/polls/models.py:576
 msgid "The poll this question is part of"
 msgstr "Це питання є частиною якого опитування?"
 
-#: ureport/polls/models.py:307
+#: ureport/polls/models.py:578
 msgid "The title of this question"
 msgstr "Назва питання"
 
-#: ureport/polls/models.py:308
+#: ureport/polls/models.py:579
 msgid "The RuleSet this question is based on"
 msgstr "RuleSet до цього питання"
 
-#: ureport/polls/views.py:62
+#: ureport/polls/models.py:584
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The label of the ruleset on RapidPro"
+msgstr "Область, де живе автор повідомлення"
+
+#: ureport/polls/models.py:587
+#, fuzzy
+#| msgid "The title of this question"
+msgid "The priority number for this question on the poll"
+msgstr "Назва питання"
+
+#: ureport/polls/models.py:837
+#, fuzzy
+#| msgid "The RuleSet this question is based on"
+msgid "The Rule this response category is based on"
+msgstr "RuleSet до цього питання"
+
+#: ureport/polls/views.py:84
 msgid "You must include a title for every included question."
 msgstr "Вказуйте назву кожного питання"
 
-#: ureport/polls/views.py:65
+#: ureport/polls/views.py:87
 msgid "Title too long. The max limit is 255 characters for each title"
 msgstr "Назва надто довга. Макисмум 255 символів"
 
-#: ureport/polls/views.py:70
+#: ureport/polls/views.py:92
 msgid "You must include at least one poll question."
 msgstr "Вкажіть хоча б одне питання"
 
-#: ureport/polls/views.py:85
+#: ureport/polls/views.py:109
 msgid "Your poll has been created, now pick which questions to include."
 msgstr "Опитування створено. Які питання включити?"
 
-#: ureport/polls/views.py:99
+#: ureport/polls/views.py:139
 msgid "Poll Images"
 msgstr "Зображення до опитувань"
 
-#: ureport/polls/views.py:100
+#: ureport/polls/views.py:140
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Введіть відповіді U-репортерів, які ви хочете виділити (вибірково)"
 
-#: ureport/polls/views.py:112
+#: ureport/polls/views.py:152
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "Зображення для сторінки опитування та в прев‘ю (вибірково)"
 
-#: ureport/polls/views.py:119
+#: ureport/polls/views.py:159
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Зображення для сторінки опитування та в прев‘ю (вибірково)"
 
-#: ureport/polls/views.py:143
+#: ureport/polls/views.py:183
 msgid "Featured Poll Responses"
 msgstr "Цікаві відповіді"
 
-#: ureport/polls/views.py:144
+#: ureport/polls/views.py:184
 msgid "Your poll has been updated."
 msgstr "Опитування змінено"
 
-#: ureport/polls/views.py:161
+#: ureport/polls/views.py:201
 #, python-format
 msgid "Response %d Reporter"
 msgstr "Відповідь %d репортер"
 
-#: ureport/polls/views.py:161
+#: ureport/polls/views.py:201
 msgid "The name or alias of the responder."
 msgstr "Ім'я учасника"
 
-#: ureport/polls/views.py:166
+#: ureport/polls/views.py:206
 #, python-format
 msgid "Response %d Location"
 msgstr "Відповідь %d місце знаходження"
 
-#: ureport/polls/views.py:166
+#: ureport/polls/views.py:206
 msgid "The location of the responder."
 msgstr "Область, де живе автор повідомлення"
 
-#: ureport/polls/views.py:171
+#: ureport/polls/views.py:211
 #, python-format
 msgid "Response %d Message"
 msgstr "Відповідь %d повідомлення"
 
-#: ureport/polls/views.py:171
+#: ureport/polls/views.py:211
 msgid "The text of the featured response."
 msgstr "Текст обраної відповіді"
 
-#: ureport/polls/views.py:197
+#: ureport/polls/views.py:237
 msgid "Poll Questions"
 msgstr "Питання опитувань"
 
-#: ureport/polls/views.py:199
+#: ureport/polls/views.py:239
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr "Тепер оберіть зображення, які мають доповнювати опитування на сторінці (якщо є)"
+msgstr ""
+"Тепер оберіть зображення, які мають доповнювати опитування на сторінці (якщо "
+"є)"
 
-#: ureport/polls/views.py:230
+#: ureport/polls/views.py:268
 msgid "Include"
 msgstr "Включити"
 
-#: ureport/polls/views.py:231
+#: ureport/polls/views.py:269
 msgid "Whether to include this question in your public results"
 msgstr "Чи включати це питання в опубліковані результати"
 
-#: ureport/polls/views.py:235
-msgid "Title"
-msgstr "Назва"
+#: ureport/polls/views.py:273
+msgid "Priority"
+msgstr ""
 
-#: ureport/polls/views.py:236
+#: ureport/polls/views.py:274
+#, fuzzy
+#| msgid "The priority for this block, higher priority blocks come first"
+msgid ""
+"The priority of this question on the poll page, higher priority comes first"
+msgstr "Пріоритетність блоку"
+
+#: ureport/polls/views.py:278
+msgid "Ruleset Label"
+msgstr ""
+
+#: ureport/polls/views.py:279 ureport/polls/views.py:284
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Запитання, поставлене Вашій аудиторії, стане публічним"
 
-#: ureport/public/views.py:303
+#: ureport/polls/views.py:283
+msgid "Title"
+msgstr "Назва"
+
+#: ureport/polls/views.py:404
+#, python-format
+msgid "Scheduled a pull refresh for poll #%d on org #%d"
+msgstr ""
+
+#: ureport/public/views.py:298
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-#: ureport/settings_common.py:180
+#: ureport/settings_common.py:184
 msgid "Whether this org should be show on the landing page"
 msgstr "Чи показувати цю організацію на головній сторінці?"
 
-#: ureport/settings_common.py:181
+#: ureport/settings_common.py:185
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Короткий номер"
 
-#: ureport/settings_common.py:182
+#: ureport/settings_common.py:186
 msgid "The short text used to direct visitors to join U-Report"
-msgstr "Короткий текст для того, щоб відвідувачі сайту приєднувались до UReport"
+msgstr ""
+"Короткий текст для того, щоб відвідувачі сайту приєднувались до UReport"
 
-#: ureport/settings_common.py:183
+#: ureport/settings_common.py:187
 msgid "The color used to draw the text on the join bar"
 msgstr "Колір тексту на смузі \"join\""
 
-#: ureport/settings_common.py:184
+#: ureport/settings_common.py:188
 msgid "The color used to draw the background on the join bar"
 msgstr "Колір фону смуги \"join\""
 
-#: ureport/settings_common.py:185
+#: ureport/settings_common.py:189
 msgid "The primary color for styling for this organization"
 msgstr "Основний колір стилю цієї організації"
 
-#: ureport/settings_common.py:186
+#: ureport/settings_common.py:190
 msgid "The secondary color for styling for this organization"
 msgstr "Додатковий колір стилю організації"
 
-#: ureport/settings_common.py:187
+#: ureport/settings_common.py:191
 msgid "The background color for the site"
 msgstr "Колір фону сайту"
 
-#: ureport/settings_common.py:188
+#: ureport/settings_common.py:192
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "До 6 кольорів для графіків - використовуйте кому між кольорами"
 
-#: ureport/settings_common.py:189
+#: ureport/settings_common.py:193
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Google Analytics ID організації"
 
-#: ureport/settings_common.py:190
+#: ureport/settings_common.py:194
 msgid "The URL to the Youtube channel for this organization"
 msgstr "URL каналу Youtube організації"
 
-#: ureport/settings_common.py:191
+#: ureport/settings_common.py:195
 msgid "The URL to the Facebook page for this organization"
 msgstr "Посилання на Facebook-акаунт"
 
-#: ureport/settings_common.py:192
+#: ureport/settings_common.py:196
+#, fuzzy
+#| msgid "The URL to the Facebook page for this organization"
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr "Посилання на Facebook-акаунт"
+
+#: ureport/settings_common.py:197
+#, fuzzy
+#| msgid "The URL to the Facebook page for this organization"
+msgid ""
+"The integer id to the Facebook app for this organization's chat app "
+"(optional)"
+msgstr "Посилання на Facebook-акаунт"
+
+#: ureport/settings_common.py:198
 msgid "The Instagram username for this organization"
 msgstr "посилання на Instagram організації"
 
-#: ureport/settings_common.py:193
+#: ureport/settings_common.py:199
+msgid "The Instagram widget id from lightwidget.com"
+msgstr ""
+
+#: ureport/settings_common.py:200
 msgid "The Twitter handle for this organization"
 msgstr "Твітер-акаунт організації"
 
-#: ureport/settings_common.py:194
+#: ureport/settings_common.py:201
 msgid "The Twitter widget used for following new users"
 msgstr "Твітер-віджет для того, щоб читати нових користувачів"
 
-#: ureport/settings_common.py:195
+#: ureport/settings_common.py:202
 msgid "The Twitter widget used for searching"
 msgstr "Віждер Твітер для пошуку"
 
-#: ureport/settings_common.py:196
+#: ureport/settings_common.py:203
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "Назва групи з зареєстрованими U-репортерами"
 
-#: ureport/settings_common.py:197
+#: ureport/settings_common.py:204
 msgid ""
 "The label of the Contact Field that contains the birth date of reporters"
 msgstr "Мітка у Contact field із датою народження"
 
-#: ureport/settings_common.py:198
+#: ureport/settings_common.py:205
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Мітка у Contact Field зі статтю"
 
-#: ureport/settings_common.py:199
+#: ureport/settings_common.py:206
 msgid ""
 "The label of the Contact Field that contains the occupation of reporters"
 msgstr "Мітка у  Contact Field  із родом заняття"
 
-#: ureport/settings_common.py:200
+#: ureport/settings_common.py:207
 msgid ""
 "The label of the Contact Field that contains the registration date of "
 "reporters"
 msgstr "Мітка Contact Field , що містить дату реєстрації"
 
-#: ureport/settings_common.py:201
+#: ureport/settings_common.py:208
 msgid "The label of the Contact Field that contains the State of reporters"
 msgstr "Мітка  Contact Field  із областю"
 
-#: ureport/settings_common.py:202
+#: ureport/settings_common.py:209
 msgid "The label of the Contact Field that contains the District of reporters"
 msgstr "Мітка у Contact Field із районом"
 
-#: ureport/settings_common.py:203
+#: ureport/settings_common.py:210
+#, fuzzy
+#| msgid "The label of the Contact Field that contains the State of reporters"
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr "Мітка  Contact Field  із областю"
+
+#: ureport/settings_common.py:211
 msgid "The label assigned to U-Reporters that are Male."
 msgstr "Мітка для U-репортерів-хлопців"
 
-#: ureport/settings_common.py:204
+#: ureport/settings_common.py:212
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Мітка для U-репортерів-дівчат"
 
-#: ureport/settings_common.py:205
+#: ureport/settings_common.py:213
 msgid "If there are jobs to be shown on the public site"
 msgstr "Чи показувати вакансії на сайті?"
 
-#: ureport/settings_common.py:206
+#: ureport/settings_common.py:214
 msgid ""
 "If this org if for global data. e.g: It shows a world map instead of a "
 "country map."
 msgstr "чи це глобальний акаунт? показувати всю карту"
 
-#: ureport/settings_common.py:207
+#: ureport/settings_common.py:215
 msgid ""
 "If you need to include some custom HTML codes in you org pages, like custom "
 "analytics code snippets"
