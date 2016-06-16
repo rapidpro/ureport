@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-16 13:52+0000\n"
+"POT-Creation-Date: 2016-06-16 15:01+0000\n"
 "PO-Revision-Date: 2015-10-14 12:06+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/"
@@ -37,7 +37,7 @@ msgid "Categories"
 msgstr "Categorias"
 
 #: dash/categories/models.py:41 dash/stories/models.py:129
-#: ureport/polls/models.py:534
+#: ureport/polls/models.py:540
 msgid "The name to describe this image"
 msgstr "O nome para descrever esta imagem"
 
@@ -46,7 +46,7 @@ msgid "The category this image represents"
 msgstr "A categoria desta imagem representa"
 
 #: dash/categories/models.py:47 dash/stories/models.py:135
-#: ureport/polls/models.py:540
+#: ureport/polls/models.py:546
 msgid "The image file to use"
 msgstr "O ficheiro de imagem a ser usada"
 
@@ -1607,11 +1607,11 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:744
+#: ureport/contacts/models.py:86 ureport/polls/models.py:750
 msgid "Male"
 msgstr ""
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:744
+#: ureport/contacts/models.py:86 ureport/polls/models.py:750
 msgid "Female"
 msgstr ""
 
@@ -1659,7 +1659,7 @@ msgstr ""
 msgid "Ward Field"
 msgstr "Província"
 
-#: ureport/contacts/models.py:240 ureport/polls/models.py:969
+#: ureport/contacts/models.py:240 ureport/polls/models.py:975
 msgid "Number of items with this counter"
 msgstr ""
 
@@ -1819,51 +1819,51 @@ msgstr ""
 msgid "The organization this poll is part of"
 msgstr ""
 
-#: ureport/polls/models.py:537
+#: ureport/polls/models.py:543
 msgid "The poll to associate to"
 msgstr "O inquérito para associar a"
 
-#: ureport/polls/models.py:551
+#: ureport/polls/models.py:557
 msgid "The poll for this response"
 msgstr "O inquérito para esta resposta"
 
-#: ureport/polls/models.py:554
+#: ureport/polls/models.py:560
 msgid "The location for this response"
 msgstr "A província para esta resposta"
 
-#: ureport/polls/models.py:557
+#: ureport/polls/models.py:563
 msgid "The name of the sender of the message"
 msgstr "O nome do remetente da mensagem"
 
-#: ureport/polls/models.py:560
+#: ureport/polls/models.py:566
 msgid "The featured response message"
 msgstr "Resposta da mensagem selecionada"
 
-#: ureport/polls/models.py:576
+#: ureport/polls/models.py:582
 msgid "The poll this question is part of"
 msgstr "O inquérito na qual esta pergunta faz parte"
 
-#: ureport/polls/models.py:578
+#: ureport/polls/models.py:584
 msgid "The title of this question"
 msgstr "O título desta questão"
 
-#: ureport/polls/models.py:579
+#: ureport/polls/models.py:585
 msgid "The RuleSet this question is based on"
 msgstr ""
 
-#: ureport/polls/models.py:584
+#: ureport/polls/models.py:590
 #, fuzzy
 #| msgid "The location of the responder."
 msgid "The label of the ruleset on RapidPro"
 msgstr "A localização da pessoa que responde."
 
-#: ureport/polls/models.py:587
+#: ureport/polls/models.py:593
 #, fuzzy
 #| msgid "The title of this question"
 msgid "The priority number for this question on the poll"
 msgstr "O título desta questão"
 
-#: ureport/polls/models.py:837
+#: ureport/polls/models.py:843
 #, fuzzy
 #| msgid "The name of this poll category"
 msgid "The Rule this response category is based on"

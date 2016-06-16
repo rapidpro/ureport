@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-16 13:52+0000\n"
+"POT-Creation-Date: 2016-06-16 15:01+0000\n"
 "PO-Revision-Date: 2016-01-13 13:01+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/"
@@ -39,7 +39,7 @@ msgid "Categories"
 msgstr "Категорії"
 
 #: dash/categories/models.py:41 dash/stories/models.py:129
-#: ureport/polls/models.py:534
+#: ureport/polls/models.py:540
 msgid "The name to describe this image"
 msgstr "Підпис до зображення"
 
@@ -48,7 +48,7 @@ msgid "The category this image represents"
 msgstr "Категорія зображення"
 
 #: dash/categories/models.py:47 dash/stories/models.py:135
-#: ureport/polls/models.py:540
+#: ureport/polls/models.py:546
 msgid "The image file to use"
 msgstr "Файл зображення"
 
@@ -1624,11 +1624,11 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:744
+#: ureport/contacts/models.py:86 ureport/polls/models.py:750
 msgid "Male"
 msgstr "Хлопці"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:744
+#: ureport/contacts/models.py:86 ureport/polls/models.py:750
 msgid "Female"
 msgstr "Дівчата"
 
@@ -1670,7 +1670,7 @@ msgstr ""
 msgid "Ward Field"
 msgstr "Рік народження"
 
-#: ureport/contacts/models.py:240 ureport/polls/models.py:969
+#: ureport/contacts/models.py:240 ureport/polls/models.py:975
 msgid "Number of items with this counter"
 msgstr ""
 
@@ -1829,51 +1829,51 @@ msgstr ""
 msgid "The organization this poll is part of"
 msgstr "Від якої організації опитування?"
 
-#: ureport/polls/models.py:537
+#: ureport/polls/models.py:543
 msgid "The poll to associate to"
 msgstr "З чим асоціюватиметься опитування"
 
-#: ureport/polls/models.py:551
+#: ureport/polls/models.py:557
 msgid "The poll for this response"
 msgstr "Опитування цієї відповіді"
 
-#: ureport/polls/models.py:554
+#: ureport/polls/models.py:560
 msgid "The location for this response"
 msgstr "Місце знаходження цієї відповіді"
 
-#: ureport/polls/models.py:557
+#: ureport/polls/models.py:563
 msgid "The name of the sender of the message"
 msgstr "Ім'я автора"
 
-#: ureport/polls/models.py:560
+#: ureport/polls/models.py:566
 msgid "The featured response message"
 msgstr "Цікаве повідомлення"
 
-#: ureport/polls/models.py:576
+#: ureport/polls/models.py:582
 msgid "The poll this question is part of"
 msgstr "Це питання є частиною якого опитування?"
 
-#: ureport/polls/models.py:578
+#: ureport/polls/models.py:584
 msgid "The title of this question"
 msgstr "Назва питання"
 
-#: ureport/polls/models.py:579
+#: ureport/polls/models.py:585
 msgid "The RuleSet this question is based on"
 msgstr "RuleSet до цього питання"
 
-#: ureport/polls/models.py:584
+#: ureport/polls/models.py:590
 #, fuzzy
 #| msgid "The location of the responder."
 msgid "The label of the ruleset on RapidPro"
 msgstr "Область, де живе автор повідомлення"
 
-#: ureport/polls/models.py:587
+#: ureport/polls/models.py:593
 #, fuzzy
 #| msgid "The title of this question"
 msgid "The priority number for this question on the poll"
 msgstr "Назва питання"
 
-#: ureport/polls/models.py:837
+#: ureport/polls/models.py:843
 #, fuzzy
 #| msgid "The RuleSet this question is based on"
 msgid "The Rule this response category is based on"
