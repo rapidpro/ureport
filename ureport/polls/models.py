@@ -514,6 +514,9 @@ class Poll(SmartModel):
             if poll.questions.filter(ruleset_uuid=ruleset_uuid).exists():
                 imported_poll = Poll.objects.filter(pk=poll.pk).first()
 
+                if imported_poll:
+                    Poll.objects.filter(pk=poll.pk).update(title=name)
+
         if not imported_poll:
             imported_poll = Poll.objects.create(flow_uuid=uuid, title=name, poll_date=created_on, org=org,
                                                 category=category_obj, created_by=user, modified_by=user)
@@ -523,6 +526,9 @@ class Poll(SmartModel):
 
         # hide all other questions
         PollQuestion.objects.filter(poll=imported_poll).exclude(pk=poll_question.pk).update(is_active=False)
+
+        imported_poll.update_or_create_questions()
+
         return imported_poll
 
     def __unicode__(self):
