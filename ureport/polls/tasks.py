@@ -66,6 +66,13 @@ def pull_results_other_polls(org, since, until):
     return results_log
 
 
+@app.task()
+def update_or_create_questions(poll_ids):
+    from .models import Poll
+    for poll in Poll.objects.filter(id__in=poll_ids):
+        poll.update_or_create_questions()
+
+
 @app.task(name='polls.pull_refresh')
 def pull_refresh(poll_id):
     from .models import Poll
