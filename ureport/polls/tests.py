@@ -25,7 +25,7 @@ from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCat
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
-from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender
+from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender, update_or_create_questions
 from ureport.polls.templatetags.ureport import question_segmented_results
 from ureport.tests import DashTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
@@ -218,6 +218,15 @@ class PollTest(DashTest):
         self.assertEqual(response.status_code, 200)
 
         self.assertTrue('csv_file' in response.context['form'].fields)
+
+    @patch('ureport.polls.tasks.update_or_create_questions.delay')
+    def test_poll_update_or_create_questions_task(self, mock_task_delay):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "flow-uuid-1", self.health_uganda, self.admin)
+        poll2 = self.create_poll(self.uganda, "Poll 2", "flow-uuid-2", self.health_uganda, self.admin)
+
+        Poll.update_or_create_questions_task([poll1, poll2])
+
+        mock_task_delay.assert_called_once_with([poll1.pk, poll2.pk])
 
     def test_poll_pull_refresh(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
@@ -1489,6 +1498,17 @@ class PollQuestionTest(DashTest):
 
             rebuild_counts()
             self.assertEqual(mock_rebuild_counts.call_count, Poll.objects.all().count())
+
+        with patch('ureport.polls.models.Poll.update_or_create_questions') as mock_update_or_create_questions:
+            mock_update_or_create_questions.side_effect = None
+
+            update_or_create_questions([self.poll.pk])
+            mock_update_or_create_questions.assert_called_once()
+            mock_update_or_create_questions.reset_mock()
+
+            poll2 = self.create_poll(self.uganda, "Poll 2", "flow-uuid-2", self.health_uganda, self.admin)
+            update_or_create_questions([self.poll.pk, poll2.pk])
+            self.assertEqual(mock_update_or_create_questions.call_count, 2)
 
         with patch('ureport.polls.models.Poll.rebuild_poll_results_counts') as mock_rebuild_counts:
             mock_rebuild_counts.return_value = "Rebuilt"
