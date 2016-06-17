@@ -18,6 +18,7 @@ from django.conf import settings
 from stop_words import safe_get_stop_words
 
 from django_redis import get_redis_connection
+from xlrd import XLRDError
 
 logger = logging.getLogger(__name__)
 
@@ -515,7 +516,7 @@ class Poll(SmartModel):
                 imported_poll = Poll.objects.filter(pk=poll.pk).first()
 
                 if imported_poll:
-                    Poll.objects.filter(pk=poll.pk).update(title=name)
+                    Poll.objects.filter(pk=imported_poll.pk).update(title=name)
 
         if not imported_poll:
             imported_poll = Poll.objects.create(flow_uuid=uuid, title=name, poll_date=created_on, org=org,
@@ -544,7 +545,48 @@ class Poll(SmartModel):
 
     @classmethod
     def import_csv(cls, task, log=None):
-        records = SmartModel.import_csv(task=task, log=log)
+        csv_file = task.csv_file
+        csv_file.open()
+
+        # this file isn't good enough, lets write it to local disk
+        from django.conf import settings
+        from uuid import uuid4
+        import os
+
+        # make sure our tmp directory is present (throws if already present)
+        try:
+            os.makedirs(os.path.join(settings.MEDIA_ROOT, 'tmp'))
+        except Exception:
+            pass
+
+        # write our file out
+        tmp_file = os.path.join(settings.MEDIA_ROOT, 'tmp/%s' % str(uuid4()))
+
+        out_file = open(tmp_file, 'wb')
+        out_file.write(csv_file.read())
+        out_file.close()
+
+        filename = out_file
+        user = task.created_by
+
+        import_params = None
+        import_results = dict()
+
+        # additional parameters are optional
+        if task.import_params:
+            try:
+                import_params = json.loads(task.import_params)
+            except:
+                pass
+
+        try:
+            records = cls.import_xls(filename, user, import_params, log, import_results)
+        except XLRDError:
+            records = cls.import_raw_csv(filename, user, import_params, log, import_results)
+        finally:
+            os.remove(tmp_file)
+
+        task.import_results = json.dumps(import_results)
 
         Poll.update_or_create_questions_task(records)
 

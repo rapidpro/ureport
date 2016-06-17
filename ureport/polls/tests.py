@@ -166,26 +166,40 @@ class PollTest(DashTest):
         self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False,
                                                      ruleset_uuid='question-uuid-4').count(), 1)
 
-    @patch('smartmin.models.SmartModel.import_csv')
     @patch('ureport.polls.models.Poll.update_or_create_questions_task')
-    def test_poll_import_csv(self, mock_poll_update_or_create_questions_task, mock_smartmodel_import_csv):
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
-        mock_smartmodel_import_csv.side_effect = [[poll1]]
+    def test_poll_import_csv(self, mock_poll_update_or_create_questions_task):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "flow-uuid-1", self.health_uganda, self.admin)
+        PollQuestion.objects.create(poll=poll1,
+                                    title='question poll 1',
+                                    ruleset_uuid='ruleset-uuid-1',
+                                    created_by=self.admin,
+                                    modified_by=self.admin)
+        poll2 = self.create_poll(self.uganda, "Poll 2", "flow-uuid-2", self.health_uganda, self.admin)
+
+        PollQuestion.objects.create(poll=poll2,
+                                    title='question poll 2',
+                                    ruleset_uuid='ruleset-uuid-2',
+                                    created_by=self.admin,
+                                    modified_by=self.admin)
+
         mock_poll_update_or_create_questions_task.side_effect = None
 
+        import_params = dict(org_id=self.uganda.id, timezone=self.uganda.timezone, original_filename="polls.csv")
+
         task = ImportTask.objects.create(created_by=self.superuser, modified_by=self.superuser,
-                                         csv_file='notneeded.csv', model_class="Poll", import_log="")
+                                         csv_file='test_imports/polls.csv',
+                                         model_class="Poll", import_params=json.dumps(import_params),
+                                         import_log="", task_id="A")
 
         Poll.import_csv(task, log=None)
 
-        mock_poll_update_or_create_questions_task.assert_called_once_with([poll1])
-        mock_poll_update_or_create_questions_task.reset_mock()
+        place_poll = Poll.objects.filter(id=poll1.pk).first()
+        time_poll = Poll.objects.filter(id=poll2.pk).first()
 
-        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin)
-        mock_smartmodel_import_csv.side_effect = [[poll1, poll2]]
+        self.assertEqual(place_poll.title, "Place poll")
+        self.assertEqual(time_poll.title, "Time poll")
 
-        Poll.import_csv(task, log=None)
-        mock_poll_update_or_create_questions_task.assert_called_once_with([poll1, poll2])
+        mock_poll_update_or_create_questions_task.assert_called_once_with([place_poll, time_poll])
 
     def test_poll_import(self):
         import_url = reverse("polls.poll_import")
