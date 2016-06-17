@@ -58,9 +58,7 @@ class PollTest(DashTest):
         self.assertEqual(dict(org=self.uganda, created_by=self.superuser),
                          Poll.prepare_fields(dict(), dict(org_id=self.uganda.pk), user=self.superuser))
 
-    @patch('ureport.polls.models.Poll.update_or_create_questions')
-    def test_poll_create_instance(self, mock_update_or_create_questions):
-        mock_update_or_create_questions.side_effect = None
+    def test_poll_create_instance(self):
 
         self.assertFalse(Poll.objects.filter(org=self.uganda))
         self.assertFalse(PollQuestion.objects.filter(poll__org=self.uganda))
@@ -98,8 +96,6 @@ class PollTest(DashTest):
                                          uuid='uuid-flow-1', name='Sport Activities',
                                          created_on='2010-07-07T14:24:12.753000Z', ruleset_uuid='question-uuid-1',
                                          question='Did you participate in #CarFreeDay?'))
-
-        mock_update_or_create_questions.assert_called_once_with()
 
         self.assertTrue(Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
         self.assertTrue(poll in Poll.objects.filter(org=self.uganda, flow_uuid='uuid-flow-1'))
@@ -169,6 +165,27 @@ class PollTest(DashTest):
         self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False).count(), 1)
         self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False,
                                                      ruleset_uuid='question-uuid-4').count(), 1)
+
+    @patch('smartmin.models.SmartModel.import_csv')
+    @patch('ureport.polls.models.Poll.update_or_create_questions_task')
+    def test_poll_import_csv(self, mock_poll_update_or_create_questions_task, mock_smartmodel_import_csv):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        mock_smartmodel_import_csv.side_effect = [[poll1]]
+        mock_poll_update_or_create_questions_task.side_effect = None
+
+        task = ImportTask.objects.create(created_by=self.superuser, modified_by=self.superuser,
+                                         csv_file='notneeded.csv', model_class="Poll", import_log="")
+
+        Poll.import_csv(task, log=None)
+
+        mock_poll_update_or_create_questions_task.assert_called_once_with([poll1])
+        mock_poll_update_or_create_questions_task.reset_mock()
+
+        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin)
+        mock_smartmodel_import_csv.side_effect = [[poll1, poll2]]
+
+        Poll.import_csv(task, log=None)
+        mock_poll_update_or_create_questions_task.assert_called_once_with([poll1, poll2])
 
     def test_poll_import(self):
         import_url = reverse("polls.poll_import")

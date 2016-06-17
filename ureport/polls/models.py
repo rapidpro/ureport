@@ -527,9 +527,28 @@ class Poll(SmartModel):
         # hide all other questions
         PollQuestion.objects.filter(poll=imported_poll).exclude(pk=poll_question.pk).update(is_active=False)
 
-        imported_poll.update_or_create_questions()
-
         return imported_poll
+
+    @classmethod
+    def update_or_create_questions_task(cls, records):
+        from .tasks import update_or_create_questions
+
+        record_ids = []
+
+        for record in records:
+            record_ids.append(record.id)
+
+        if record_ids:
+            update_or_create_questions.delay(record_ids)
+
+
+    @classmethod
+    def import_csv(cls, task, log=None):
+        records = SmartModel.import_csv(task=task, log=log)
+
+        Poll.update_or_create_questions_task(records)
+
+        return records
 
     def __unicode__(self):
         return self.title
