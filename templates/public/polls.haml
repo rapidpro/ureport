@@ -21,7 +21,7 @@
               .hero-description.poll-hero-title
                 {{ latest_poll.title|upper }}
               .hero-description.poll-hero-questions
-                {% blocktrans count questions=latest_poll.questions.count %}
+                {% blocktrans count questions=latest_poll.get_questions.count %}
                   {{ questions }} QUESTION POLLED ON THIS TOPIC
                 {% plural %}
                   {{ questions }} QUESTIONS POLLED ON THIS TOPIC
