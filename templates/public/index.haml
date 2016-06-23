@@ -69,18 +69,15 @@
                       - trans "Responded out of"
                       {{ latest_poll.runs|intcomma }})
 
-                  - with regions=latest_poll.best_and_worst
+                  - with regions=latest_poll.most_responded_regions
                     - if regions
                       .hr-header.primary-color
                         - trans "RESPONDER'S RATE BY LOCATION"
                       .stats
                         %table.regions
                           %tr
-                            %td.region-key{ colspan: "3" }
+                            %td.region-key{ colspan: "5" }
                               - trans "Most responded"
-
-                            %td.region-key{ colspan: "2"}
-                              - trans "Least responded"
 
                           %tr{ style:"postion: relative" }
                             -for region in regions

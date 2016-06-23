@@ -85,7 +85,7 @@ class Poll(SmartModel):
 
     POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = 'poll-results-pull-after-delete-flag:%s:%s'
 
-    POLL_BEST_AND_WORST_REGIONS_CACHE_KEY = 'b_and_w:%s'
+    POLL_MOST_RESPONDED_REGIONS_CACHE_KEY = 'most-responded-regions:%s'
 
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
@@ -344,14 +344,14 @@ class Poll(SmartModel):
             PollResponseCategory.objects.filter(
                 question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
 
-    def best_and_worst(self):
+    def most_responded_regions(self):
         b_and_w = []
 
         # get our first question
         question = self.questions.order_by('pk').first()
         if question:
             # do we already have a cached set
-            cached = cache.get(Poll.POLL_BEST_AND_WORST_REGIONS_CACHE_KEY % question.ruleset_uuid)
+            cached = cache.get(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % question.ruleset_uuid)
             if cached:
                 return cached
 
@@ -365,21 +365,16 @@ class Poll(SmartModel):
                 responded = boundary['set']
                 boundary_responses[boundary['label']] = dict(responded=responded, total=total)
 
-            for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:3]:
+            for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:5]:
                 responded = boundary_responses[boundary]
                 percent = int(round((100 * responded['responded'])) / responded['total']) if responded['total'] > 0 else 0
                 b_and_w.append(dict(boundary=boundary, responded=responded['responded'], total=responded['total'], type='best', percent=percent))
-
-            for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[-2:]:
-                responded = boundary_responses[boundary]
-                percent = int(round((100 * responded['responded'])) / responded['total']) if responded['total'] > 0 else 0
-                b_and_w.append(dict(boundary=boundary, responded=responded['responded'], total=responded['total'], type='worst', percent=percent))
 
             # no actual results by region yet
             if b_and_w and b_and_w[0]['responded'] == 0:
                 b_and_w = []
 
-            cache.set(Poll.POLL_BEST_AND_WORST_REGIONS_CACHE_KEY % question.ruleset_uuid, b_and_w, 900)
+            cache.set(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % question.ruleset_uuid, b_and_w, 900)
 
         return b_and_w
 
