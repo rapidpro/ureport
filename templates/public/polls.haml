@@ -21,7 +21,7 @@
               .hero-description.poll-hero-title
                 {{ latest_poll.title|upper }}
               .hero-description.poll-hero-questions
-                {% blocktrans count questions=latest_poll.questions.count %}
+                {% blocktrans count questions=latest_poll.get_questions.count %}
                   {{ questions }} QUESTION POLLED ON THIS TOPIC
                 {% plural %}
                   {{ questions }} QUESTIONS POLLED ON THIS TOPIC
@@ -93,9 +93,17 @@
                         %a.poll-question-tab.active.primary-color.primary-bg-color{href:"#statistics-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                           - trans "STATISTICS"
 
-                        - if org|config:"state_label"
+                        - if not is_iorg and org|config:"state_label"
                           %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                             - trans "LOCATIONS"
+
+                        - if not is_iorg and org|config:"gender_label"
+                          %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#gender-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
+                            - trans "GENDER"
+
+                        - if not is_iorg and org|config:"born_label"
+                          %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#age-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
+                            - trans "AGE"
 
 
                   .tab-content
@@ -114,6 +122,64 @@
                           .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
                             .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
                               %img{src:"{{ STATIC_URL }}img/loading.gif"}
+
+                      -if not is_iorg and org|config:"gender_label"
+                        .tab-pane{id:"gender-tab-{{ question.id }}"}
+                          -with seg_results=question|question_segmented_results:"gender"
+                            -for results in seg_results
+                              .graph-title
+                                {{results.label}}
+
+                              .poll-graph
+
+                                -with categories=results.categories
+                                  -for category in categories
+                                    .poll-category
+                                      .category-container{ class:"poll-category-{% cycle '1' '2' '3' '4' '5' '6' %}" }
+                                        .category-dash
+
+                                        .category-percent
+                                          {% widthratio category.count results.set 100 %}%
+
+                                        .category-label-below
+                                          {{ category.label }}
+
+                                        .category-bar{ style:"width:{% widthratio category.count results.set 90 %}%" }
+                                          &nbsp;
+
+                                        .category-label-above
+                                          {{ category.label }}
+                              -if not forloop.last
+                                %hr
+
+                      -if not is_iorg and org|config:"born_label"
+                        .tab-pane{id:"age-tab-{{ question.id }}"}
+                          -with seg_results=question|question_segmented_results:"age"
+                            -for results in seg_results
+                              .graph-title
+                                {{results.label}}
+
+                              .poll-graph
+
+                                -with categories=results.categories
+                                  -for category in categories
+                                    .poll-category
+                                      .category-container{ class:"poll-category-{% cycle '1' '2' '3' '4' '5' '6' %}" }
+                                        .category-dash
+
+                                        .category-percent
+                                          {% widthratio category.count results.set 100 %}%
+
+                                        .category-label-below
+                                          {{ category.label }}
+
+                                        .category-bar{ style:"width:{% widthratio category.count results.set 90 %}%" }
+                                          &nbsp;
+
+                                        .category-label-above
+                                          {{ category.label }}
+                              -if not forloop.last
+                                %hr
 
                       .tab-pane.active{id:"statistics-tab-{{ question.id }}"}
                         .poll-graph
@@ -241,6 +307,13 @@
     .poll-map {
       height: 500px;
       width: 100%;
+    }
+
+    .graph-title {
+      margin-left: 15px;
+      margin-bottom: -20px;
+      font-size: 25px;
+      margin-top: 30px;
     }
 
     .leaflet-container {
