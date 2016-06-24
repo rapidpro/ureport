@@ -199,7 +199,6 @@ ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whe
                      dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), required=False)),
                      dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), required=False)),
                      dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
-                     dict(name='twitter_user_widget', field=dict(help_text=_("The Twitter widget used for following new users"), required=False)),
                      dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
                      dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True),
                      dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")), superuser_only=True),
