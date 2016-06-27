@@ -28,7 +28,7 @@ EMAIL_USE_TLS = True
 MANAGERS = ADMINS
 
 # add gunicorn
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat',)
+INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat', 'storages')
 
 # Set your DSN value
 RAVEN_CONFIG = {
@@ -155,10 +155,10 @@ BROKER_HOST = REDIS_HOST
 
 CACHES = {
     'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
+        'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': '%s:6379:1' % REDIS_HOST,
         'OPTIONS': {
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }

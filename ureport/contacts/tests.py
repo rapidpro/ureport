@@ -207,32 +207,31 @@ class ContactTest(DashTest):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria, ['total-reporters', 'gender:m']),
                          {'total-reporters': 2, 'gender:m': 2})
 
-    def test_squash_reporters(self):
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
-                                               'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
-                                               }}):
-            self.assertFalse(ReportersCounter.objects.all())
+    @patch('redis.client.StrictRedis.get')
+    def test_squash_reporters(self, mock_redis_get):
+        mock_redis_get.return_value = None
 
-            counter1 = ReportersCounter.objects.create(org=self.nigeria, type='type-a', count=2)
-            counter2 = ReportersCounter.objects.create(org=self.nigeria, type='type-b', count=1)
-            counter3 = ReportersCounter.objects.create(org=self.nigeria, type='type-a', count=3)
+        self.assertFalse(ReportersCounter.objects.all())
 
-            self.assertEqual(ReportersCounter.objects.all().count(), 3)
-            self.assertEqual(ReportersCounter.objects.filter(type='type-a').count(), 2)
+        counter1 = ReportersCounter.objects.create(org=self.nigeria, type='type-a', count=2)
+        counter2 = ReportersCounter.objects.create(org=self.nigeria, type='type-b', count=1)
+        counter3 = ReportersCounter.objects.create(org=self.nigeria, type='type-a', count=3)
 
-            ReportersCounter.squash_counts()
+        self.assertEqual(ReportersCounter.objects.all().count(), 3)
+        self.assertEqual(ReportersCounter.objects.filter(type='type-a').count(), 2)
 
-            self.assertEqual(ReportersCounter.objects.all().count(), 2)
-            # type-a counters are squashed into one row
-            self.assertFalse(ReportersCounter.objects.filter(pk__in=[counter1.pk, counter3.pk]))
-            self.assertEqual(ReportersCounter.objects.filter(type='type-a').count(), 1)
+        ReportersCounter.squash_counts()
 
-            self.assertTrue(ReportersCounter.objects.filter(pk=counter2.pk))
+        self.assertEqual(ReportersCounter.objects.all().count(), 2)
+        # type-a counters are squashed into one row
+        self.assertFalse(ReportersCounter.objects.filter(pk__in=[counter1.pk, counter3.pk]))
+        self.assertEqual(ReportersCounter.objects.filter(type='type-a').count(), 1)
 
-            counter_type_a = ReportersCounter.objects.filter(type='type-a').first()
+        self.assertTrue(ReportersCounter.objects.filter(pk=counter2.pk))
 
-            self.assertTrue(counter_type_a.count, 5)
+        counter_type_a = ReportersCounter.objects.filter(type='type-a').first()
+
+        self.assertTrue(counter_type_a.count, 5)
 
 
 class ContactsTasksTest(DashTest):
@@ -250,18 +249,13 @@ class ContactsTasksTest(DashTest):
         mock_pull_contacts.return_value = (9, 10, 11, 12)
         mock_squash_counts.return_value = "Called"
 
-        with self.settings(CACHES={'default': {'BACKEND': 'redis_cache.cache.RedisCache',
-                                               'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {'CLIENT_CLASS': 'redis_cache.client.DefaultClient'}
-                                               }}):
+        pull_contacts(self.nigeria.pk)
 
-            pull_contacts(self.nigeria.pk)
+        task_state = TaskState.objects.get(org=self.nigeria, task_key='contact-pull')
+        self.assertEqual(task_state.get_last_results(), {
+            'fields': {'created': 1, 'updated': 2, 'deleted': 3},
+            'boundaries': {'created': 5, 'updated': 6, 'deleted': 7},
+            'contacts': {'created': 9, 'updated': 10, 'deleted': 11}
+        })
 
-            task_state = TaskState.objects.get(org=self.nigeria, task_key='contact-pull')
-            self.assertEqual(task_state.get_last_results(), {
-                'fields': {'created': 1, 'updated': 2, 'deleted': 3},
-                'boundaries': {'created': 5, 'updated': 6, 'deleted': 7},
-                'contacts': {'created': 9, 'updated': 10, 'deleted': 11}
-            })
-
-            mock_squash_counts.assert_called_once_with()
+        mock_squash_counts.assert_called_once_with()

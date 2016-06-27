@@ -144,7 +144,7 @@ class PollContextMixin(object):
         context['latest_poll'] = main_poll
 
         context['categories'] = Category.objects.filter(org=org, is_active=True).order_by('name')
-        context['polls'] = Poll.get_public_polls(org=org).order_by('-created_on')
+        context['polls'] = Poll.get_public_polls(org=org).order_by('-poll_date')
 
         context['related_stories'] = []
         if main_poll:
