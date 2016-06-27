@@ -23,6 +23,27 @@ def question_results(question):
         traceback.print_exc()
         return None
 
+@register.filter
+def question_segmented_results(question, field):
+    if not question:
+        return None
+
+    segment = None
+    if field == 'age':
+        segment = dict(age='Age')
+    elif field == 'gender':
+        segment = dict(gender='Gender')
+
+
+    try:
+        results = question.get_results(segment=segment)
+        if results:
+            return results
+    except:
+        import traceback
+        traceback.print_exc()
+        return None
+
 
 @register.filter
 def get_range(value):

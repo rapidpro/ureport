@@ -6,6 +6,7 @@ from dash.dashblocks.models import DashBlock, DashBlockType
 import mock
 from urllib import urlencode, quote
 
+from datetime import timedelta
 from django.core.files.images import ImageFile
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -204,7 +205,9 @@ class PublicTest(DashTest):
         self.assertTrue(response.context['is_rtl_org'])
 
     @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_index(self):
+    @mock.patch('django.core.cache.cache.get')
+    def test_index(self, mock_cache_get):
+        mock_cache_get.return_value = None
         home_url = reverse('public.index')
 
         response = self.client.get(home_url, SERVER_NAME='nigeria.ureport.io')
@@ -695,6 +698,17 @@ class PublicTest(DashTest):
         self.assertEquals(response.context['polls'][1], poll2)
         self.assertEquals(response.context['polls'][2], poll1)
 
+        poll1.poll_date = poll3.poll_date + timedelta(days=1)
+        poll1.save()
+
+        response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.context['polls'][0], poll1)
+        self.assertEquals(response.context['polls'][1], poll3)
+        self.assertEquals(response.context['polls'][2], poll2)
+
+        poll1.poll_date = poll1.created_on
+        poll1.save()
+
         poll3.is_active = False
         poll3.save()
 
@@ -1006,7 +1020,10 @@ class PublicTest(DashTest):
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertFalse(response.context['story_featured_images'])
 
-    def test_poll_question_results(self):
+    @mock.patch('django.core.cache.cache.get')
+    def test_poll_question_results(self, mock_cache_get):
+        mock_cache_get.return_value = None
+
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
         poll1_question = PollQuestion.objects.create(poll=poll1,

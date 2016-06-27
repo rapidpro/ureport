@@ -19,9 +19,9 @@ import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
-from ureport.locations.models import Boundary
-from ureport.polls.models import Poll
 
+from ureport.locations.models import Boundary
+from ureport.polls.models import Poll, PollResult
 
 GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
@@ -544,6 +544,45 @@ def get_segment_org_boundaries(org, segment):
             location_boundaries = org.boundaries.filter(level=Boundary.STATE_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
 
     return location_boundaries
+
+
+def populate_age_and_gender_poll_results(org=None):
+    from ureport.contacts.models import Contact
+    LAST_POPULATED_CONTACT = 'last-contact-id-populated'
+
+    last_contact_id_populated = cache.get(LAST_POPULATED_CONTACT, 0)
+
+    all_contacts = Contact.objects.filter(id__gt=last_contact_id_populated).values_list('id', flat=True).order_by('id')
+
+    if org is not None:
+        all_contacts = Contact.objects.filter(org=org).values_list('id', flat=True).order_by('id')
+
+    start = time.time()
+    i = 0
+
+    all_contacts = list(all_contacts)
+
+    for contact_id_batch in chunk_list(all_contacts, 1000):
+        contact_batch = list(contact_id_batch)
+        contacts = Contact.objects.filter(id__in=contact_batch)
+        for contact in contacts:
+            i += 1
+
+            update_fields = dict()
+            if contact.born > 0:
+                update_fields['born'] = contact.born
+
+            if contact.gender != '':
+                update_fields['gender'] = contact.gender
+
+            if update_fields:
+                results_ids = list(PollResult.objects.filter(contact=contact.uuid).values_list('id', flat=True))
+                PollResult.objects.filter(id__in=results_ids).update(**update_fields)
+
+            if org is None:
+                cache.set(LAST_POPULATED_CONTACT, contact.pk, None)
+
+        print "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
 
 
 Org.get_occupation_stats = get_occupation_stats

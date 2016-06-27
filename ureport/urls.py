@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^manage/', include('ureport.countries.urls')),
     url(r'^manage/', include('ureport.assets.urls')),
     url(r'^users/', include('dash.users.urls')),
+    url(r'^manage/', include('smartmin.csv_imports.urls')),
     url(r'^api/$', RedirectView.as_view(pattern_name='django.swagger.base.view', permanent=False)),
 
     url(r'^api/v1/', include('ureport.api.urls')),
