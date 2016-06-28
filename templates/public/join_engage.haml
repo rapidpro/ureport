@@ -134,5 +134,5 @@
 - block extra-script
   {{ block.super }}
   -if not is_iorg
-    if org|config:"twitter_handle"
+    -if org|config:"twitter_handle"
       <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
