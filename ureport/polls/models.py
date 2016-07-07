@@ -175,6 +175,7 @@ class Poll(SmartModel):
             question.calculate_results(segment=dict(location='State'))
             question.calculate_results(segment=dict(age='Age'))
             question.calculate_results(segment=dict(gender='Gender'))
+            question.get_most_responded_regions()
 
     @classmethod
     def pull_poll_results_task(cls, poll):
@@ -345,38 +346,17 @@ class Poll(SmartModel):
                 question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
 
     def most_responded_regions(self):
-        b_and_w = []
-
         # get our first question
-        question = self.questions.order_by('pk').first()
+        question = self.get_first_question()
         if question:
             # do we already have a cached set
             cached = cache.get(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % question.ruleset_uuid)
             if cached:
                 return cached
 
-            boundary_results = question.calculate_results(segment=dict(location='State'))
-            if not boundary_results:
-                return []
+            return question.get_most_responded_regions()
 
-            boundary_responses = dict()
-            for boundary in boundary_results:
-                total = boundary['set'] + boundary['unset']
-                responded = boundary['set']
-                boundary_responses[boundary['label']] = dict(responded=responded, total=total)
-
-            for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:5]:
-                responded = boundary_responses[boundary]
-                percent = int(round((100 * responded['responded'])) / responded['total']) if responded['total'] > 0 else 0
-                b_and_w.append(dict(boundary=boundary, responded=responded['responded'], total=responded['total'], type='best', percent=percent))
-
-            # no actual results by region yet
-            if b_and_w and b_and_w[0]['responded'] == 0:
-                b_and_w = []
-
-            cache.set(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % question.ruleset_uuid, b_and_w, 900)
-
-        return b_and_w
+        return []
 
     def response_percentage(self):
         """
@@ -661,6 +641,34 @@ class PollQuestion(SmartModel):
                                                    is_active=False, created_by=user, modified_by=user)
         return question
 
+    def get_most_responded_regions(self):
+        top_regions = []
+
+        boundary_results = self.get_results(segment=dict(location='State'))
+        if not boundary_results:
+            return []
+
+        boundary_responses = dict()
+        for boundary in boundary_results:
+            total = boundary['set'] + boundary['unset']
+            responded = boundary['set']
+            boundary_responses[boundary['label']] = dict(responded=responded, total=total)
+
+        for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:5]:
+            responded = boundary_responses[boundary]
+            percent = int(round((100 * responded['responded'])) / responded['total']) if responded['total'] > 0 else 0
+            top_regions.append(
+                dict(boundary=boundary, responded=responded['responded'], total=responded['total'], type='best',
+                     percent=percent))
+
+        # no actual results by region yet
+        if top_regions and top_regions[0]['responded'] == 0:
+            top_regions = []
+
+        cache.set(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % self.ruleset_uuid, top_regions, 900)
+
+        return top_regions
+
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
@@ -744,15 +752,6 @@ class PollQuestion(SmartModel):
                             category_count = question_results.get(category_count_key, 0)
                             set_count += category_count
                             categories.append(dict(count=category_count, label=categorie_label))
-
-                        if open_ended:
-                            # For home page best and worst location responses
-                            from ureport.contacts.models import Contact
-                            if segment.get('location') == 'District':
-                                boundary_contacts_count = Contact.objects.filter(org=org, district=osm_id).count()
-                            else:
-                                boundary_contacts_count = Contact.objects.filter(org=org, state=osm_id).count()
-                            unset_count = boundary_contacts_count - set_count
 
                         results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
                                             boundary=osm_id, label=boundary.get('name'),

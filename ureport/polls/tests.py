@@ -507,7 +507,7 @@ class PollTest(DashTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        with patch('ureport.polls.models.PollQuestion.calculate_results') as mock:
+        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = [{u'open_ended': False, u'label': u'Abia', u'set': 338, u'unset': 36, u'boundary': u'R3713501', u'categories': [{u'count': 80, u'label': u'Yes'}, {u'count': 258, u'label': u'No'}]},
                                  {u'open_ended': False, u'label': u'Adamawa', u'set': 84, u'unset': 7, u'boundary': u'R3720358', u'categories': [{u'count': 41, u'label': u'Yes'}, {u'count': 43, u'label': u'No'}]},
                                  {u'open_ended': False, u'label': u'Akwa Ibom', u'set': 149, u'unset': 14, u'boundary': u'R3715359', u'categories': [{u'count': 41, u'label': u'Yes'}, {u'count': 108, u'label': u'No'}]},
@@ -538,8 +538,15 @@ class PollTest(DashTest):
 
             self.assertEquals(poll1.most_responded_regions(), results)
             mock.assert_called_once_with(segment=dict(location="State"))
+            mock.reset_mock()
 
-        with patch('ureport.polls.models.PollQuestion.calculate_results') as mock:
+            with patch('ureport.polls.models.PollQuestion.is_open_ended') as mock_open_ended:
+                mock_open_ended.return_value = True
+
+                self.assertEquals(poll1.most_responded_regions(), [])
+                self.assertFalse(mock.called)
+
+        with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = None
 
             results = []
