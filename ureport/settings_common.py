@@ -541,6 +541,12 @@ PREVIOUS_ORG_SITES = [
         is_static=True,
     ),
     dict(
+        name='United Kingdom',
+        host="http://uk.ureport.in",
+        flag="flag_uk.png",
+        is_static=True,
+    ),
+    dict(
         name="Zambia",
         host="http://www.zambiaureport.org/home/",
         flag="flag_zm.png",
