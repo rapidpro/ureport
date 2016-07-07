@@ -85,7 +85,7 @@ class UtilsTest(DashTest):
 
         # rwanda should be included and the third in the list alphabetically by subdomain
         self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
-        self.assertEqual(get_linked_orgs()[settings_sites_count-1]['name'].lower(), 'rwanda')
+        self.assertEqual(get_linked_orgs()[settings_sites_count-2]['name'].lower(), 'rwanda')
 
         # revert subdomain to burundi
         self.org.subdomain = 'aaaburundi'
