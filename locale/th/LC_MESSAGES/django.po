@@ -4,12 +4,13 @@
 # 
 # Translators:
 # kafaak (นายกาฝาก) <kafaak@gmail.com>, 2016
+# kafaak (นายกาฝาก) <kafaak@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-16 15:01+0000\n"
-"PO-Revision-Date: 2016-06-21 07:51+0000\n"
+"PO-Revision-Date: 2016-07-19 04:48+0000\n"
 "Last-Translator: kafaak (นายกาฝาก) <kafaak@gmail.com>\n"
 "Language-Team: Thai (http://www.transifex.com/rapidpro/ureport/language/th/)\n"
 "MIME-Version: 1.0\n"
@@ -902,7 +903,7 @@ msgstr "นำเข้า %s"
 
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
-msgstr "ยู-รีพอร์ต"
+msgstr "ยูรีพอร์ต"
 
 #: templates/frame.haml:184
 msgid "Admin"
@@ -974,11 +975,11 @@ msgstr "ข้อตกลงและเงื่อนไข"
 
 #: templates/frame.haml:361
 msgid "U-Reporters Content"
-msgstr "เนื้อหาสำหรับหัวข้อ \"ยู-รีพอร์ตเตอร์\""
+msgstr "เนื้อหาสำหรับหัวข้อ \"ยูรีพอร์ตเตอร์\""
 
 #: templates/frame.haml:368
 msgid "Join &amp; Engage Content"
-msgstr "เนื้อหาสำหรับหัวข้อ \"มาร่วมด้วยช่วยกัน\""
+msgstr "เนื้อหาสำหรับหัวข้อ \"เข้าร่วมยูรีพอร์ต\""
 
 #: templates/frame.haml:374
 msgid "Join Steps Content"
@@ -998,7 +999,7 @@ msgstr "เกี่ยวกับ"
 
 #: templates/frame.haml:462
 msgid "U-Reporters"
-msgstr "ยู-รีพอร์ตเตอร์"
+msgstr "เราคือใคร?"
 
 #: templates/frame.haml:469 templates/public/jobs.haml:7
 msgid "Jobs"
@@ -1006,7 +1007,7 @@ msgstr "ตำแหน่งงาน"
 
 #: templates/frame.haml:476
 msgid "Join & Engage"
-msgstr "มาร่วมด้วยช่วยกัน"
+msgstr "เข้าร่วมยูรีพอร์ต"
 
 #: templates/frame.haml:542
 msgid "FOLLOW US ON"
@@ -1045,7 +1046,7 @@ msgstr "\n        โปรดจำไว้ว่าการใส่แห�
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
 msgid "ABOUT U-REPORT"
-msgstr "เกี่ยวกับ ยู-รีพอร์ต"
+msgstr "เกี่ยวกับ ยูรีพอร์ต"
 
 #: templates/public/about.haml:22 templates/public/ureporters.haml:23
 msgid "Scroll to Learn more"
@@ -1053,11 +1054,11 @@ msgstr "เลื่อนเพื่อดูข้อมูลเพิ่ม
 
 #: templates/public/about.haml:80
 msgid "The mission of U-Report"
-msgstr "พันธกิจของยู-รีพอร์ต"
+msgstr "พันธกิจของยูรีพอร์ต"
 
 #: templates/public/about.haml:119
 msgid "Why Join U-Report?"
-msgstr "ทำไมจึงควรเข้าร่วมกับยู-รีพอร์ต?"
+msgstr "ทำไมจึงควรเข้าร่วมกับยูรีพอร์ต?"
 
 #: templates/public/about.haml:124
 msgid "Speak out on what's happening in your community"
@@ -1067,7 +1068,7 @@ msgstr "เล่าให้ฟังว่ากำลังเกิดอะ
 msgid ""
 "Use Ureport results and information to update and increase citizen's "
 "awareness"
-msgstr "ใช้ผลสำรวจและข้อมูลจากยู-รีพอร์ตในการอัพเดตและสร้างความตระหนักให้กับผู้คน"
+msgstr "ใช้ผลสำรวจและข้อมูลจากยูรีพอร์ตในการอัพเดตและสร้างความตระหนักให้กับผู้คน"
 
 #: templates/public/about.haml:130
 msgid "Participate in nationwide campaigns to help improve your country"
@@ -1076,7 +1077,7 @@ msgstr "ร่วมกับแคมเปญระดับประเทศ
 #: templates/public/about.haml:133
 #, python-format
 msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "แบ่งปันสิ่งที่เกิดขึ้นใน %(country)s ให้กับยู-รีพอร์ตเตอร์คนอื่นๆ"
+msgstr "แบ่งปันสิ่งที่เกิดขึ้นใน %(country)s ให้กับยูรีพอร์ตเตอร์คนอื่นๆ"
 
 #: templates/public/about.haml:139
 msgid "CLICK HERE TO JOIN"
@@ -1084,7 +1085,7 @@ msgstr "คลิกที่นี่เพื่อเข้าร่วม"
 
 #: templates/public/about.haml:153
 msgid "U-REPORT VIDEOS"
-msgstr "วิดีโอยู-รีพอร์ต"
+msgstr "วิดีโอยูรีพอร์ต"
 
 #: templates/public/about.haml:160
 msgid "No videos yet."
@@ -1123,7 +1124,7 @@ msgstr "เรื่องราวที่ถูกจัดเก็บ"
 
 #: templates/public/archived_stories.haml:33
 msgid "LIST"
-msgstr ""
+msgstr "รายการ"
 
 #: templates/public/index.haml:21
 msgid "Follow"
@@ -1134,7 +1135,7 @@ msgid ""
 "\n"
 "                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
 "                "
-msgstr "\n                  ยู-รีพอร์ตเป็นเครื่องมือโซเชียลมีเดียที่ให้ใครๆ ก็สามารถตอบโพล รายงานปัญหา สนับสนุนสิทธิเด็ก และร่วมเป็นหนึ่งในพลังที่จะเปลี่ยนแปลงประเทศของตนได้ ไม่ว่าจะอยู่ ณ ที่ใดในโลกก็ตาม\n                "
+msgstr "\n                  ยูรีพอร์ตเป็นเครื่องมือโซเชียลมีเดียที่ให้ใครๆ ก็สามารถตอบโพล รายงานปัญหา สนับสนุนสิทธิเด็ก และร่วมเป็นหนึ่งในพลังที่จะเปลี่ยนแปลงประเทศของตนได้ ไม่ว่าจะอยู่ ณ ที่ใดในโลกก็ตาม\n                "
 
 #: templates/public/index.haml:36 templates/public/index.haml.py:74
 msgid "CURRENT POLL"
@@ -1147,7 +1148,7 @@ msgstr "ดูผลลัพธ์ทั้งหมด"
 
 #: templates/public/index.haml:52
 msgid "All U-Report members"
-msgstr "สมาชิกยู-รีพอร์ตทั้งหมด"
+msgstr "สมาชิกยูรีพอร์ตทั้งหมด"
 
 #: templates/public/index.haml:91 templates/public/polls.haml:43
 msgid "RESPONSE RATE"
@@ -1175,15 +1176,15 @@ msgstr "คำที่กำลังเป็นเทรนดห์"
 
 #: templates/public/index.haml:167
 msgid "FEATURED RESPONSES"
-msgstr ""
+msgstr "คำตอบโพลที่โดดเด่น"
 
 #: templates/public/index.haml:213 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
-msgstr "ยู-รีพอร์ตเตอร์ ใน"
+msgstr "ยูรีพอร์ตเตอร์ ใน"
 
 #: templates/public/index.haml:221
 msgid "TOTAL # OF U-REPORTERS"
-msgstr "จำนวนยู-รีพอร์ตเตอร์ทั้งหมด"
+msgstr "จำนวนยูรีพอร์ตเตอร์ทั้งหมด"
 
 #: templates/public/index.haml:233
 msgid "4 MOST ACTIVE REGIONS"
@@ -1199,7 +1200,7 @@ msgstr "สัดส่วนตามอายุ"
 
 #: templates/public/index.haml:318
 msgid "WHAT U-REPORTERS ARE SAYING"
-msgstr "ยู-รีพอร์ตเตอร์กำลังบอกว่า"
+msgstr "ยูรีพอร์ตเตอร์กำลังบอกว่า"
 
 #: templates/public/index.haml:327
 msgid "FEATURED VIDEO"
@@ -1270,7 +1271,7 @@ msgstr "เยี่ยมชม"
 
 #: templates/public/join_engage.haml:17
 msgid "JOIN U-REPORT"
-msgstr "เข้าร่วมยู-รีพอร์ต"
+msgstr "เข้าร่วมยูรีพอร์ต"
 
 #: templates/public/join_engage.haml:44
 msgid "HOW TO JOIN"
@@ -1283,11 +1284,11 @@ msgid ""
 "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "            "
-msgstr "\n              * ยู-รีพอร์ตเป็นโปรแกรมดาวน์โหลดฟรีที่ได้รับการสนับสนุนโดยองค์การยูนิเซฟ  %(country)s. ยูรีพอร์ตจะไม่ขอให้คุณชำระค่าบริการใดๆ และไม่ขอข้อมูลส่วนตัวด้านการเงิน กรุณาอย่าหลงเชื่อข้อความใดๆ ที่ขอให้คุณชำระค่าบริการหรือขอข้อมูลส่วนตัวใดๆ ของคุณ ไม่ว่าจะผ่านทางช่องทางใดๆ ก็ตาม\n\nอย่างไรก็ดี การใช้งานแอปพลิเคชั่นยู-รีพอร์ต (U-Report) บนสมาร์ทโฟนของท่าน อาจมีค่าใช้บริการดาต้าตามแพ็กเกจที่ท่านได้สมัครไว้กับผู้ให้บริการโทรศัพท์เคลื่อนที่ %(shortcode)s\n\n            "
+msgstr "\n              * ยูรีพอร์ตเป็นโปรแกรมดาวน์โหลดฟรีที่ได้รับการสนับสนุนโดยองค์การยูนิเซฟ  %(country)s. ยูรีพอร์ตจะไม่ขอให้คุณชำระค่าบริการใดๆ และไม่ขอข้อมูลส่วนตัวด้านการเงิน กรุณาอย่าหลงเชื่อข้อความใดๆ ที่ขอให้คุณชำระค่าบริการหรือขอข้อมูลส่วนตัวใดๆ ของคุณ ไม่ว่าจะผ่านทางช่องทางใดๆ ก็ตาม\n\nอย่างไรก็ดี การใช้งานแอปพลิเคชั่นยูรีพอร์ต (U-Report) บนสมาร์ทโฟนของท่าน อาจมีค่าใช้บริการดาต้าตามแพ็กเกจที่ท่านได้สมัครไว้กับผู้ให้บริการโทรศัพท์เคลื่อนที่ %(shortcode)s\n\n            "
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr "ยู-รีพอร์ตบนโซเชียลมีเดีย"
+msgstr "ยูรีพอร์ตบนโซเชียลมีเดีย"
 
 #: templates/public/join_engage.haml:140
 msgid "COMPOSE NEW TWEET"
@@ -1315,7 +1316,7 @@ msgstr "ตอบ จาก"
 
 #: templates/public/polls.haml:53
 msgid "POLLED"
-msgstr ""
+msgstr "ที่ได้รับการสอบถาม"
 
 #: templates/public/polls.haml:96
 msgid "POLL RESULTS"
@@ -1351,15 +1352,15 @@ msgstr "อายุ"
 
 #: templates/public/polls.haml:313
 msgid "FEATURED ANSWERS"
-msgstr ""
+msgstr "คำตอบที่โดดเด่น"
 
 #: templates/public/polls.haml:320
 msgid "No featured answers."
-msgstr ""
+msgstr "ไม่มีคำตอบที่โดดเด่นในตอนนี้"
 
 #: templates/public/polls.haml:339
 msgid "U-Reporter in"
-msgstr "ยู-รีพอร์ตเตอร์ ใน"
+msgstr "ยูรีพอร์ตเตอร์ ใน"
 
 #: templates/public/polls.haml:351 templates/public/story_read.haml:126
 msgid "RELATED STORIES"
@@ -1375,7 +1376,7 @@ msgstr "อ่านเพิ่มเติม"
 
 #: templates/public/polls.haml:391 templates/public/story_read.haml:99
 msgid "FEATURED IMAGES"
-msgstr "รูปภาพที่แนะนำ"
+msgstr "รูปภาพแนะนำ"
 
 #: templates/public/polls.haml:397
 msgid "No featured images yet."
@@ -1383,7 +1384,7 @@ msgstr "ยังไม่มีรูปภาพแนะนำ"
 
 #: templates/public/stories.haml:20
 msgid "FEATURED STORY"
-msgstr "เรื่องราวที่แนะนำ"
+msgstr "เรื่องราวแนะนำ"
 
 #: templates/public/stories.haml:27 templates/public/story_read.haml:23
 msgid "BY"
@@ -1395,7 +1396,7 @@ msgstr "เรื่องราวล่าสุด"
 
 #: templates/public/stories.haml:61
 msgid "FILTERED BY"
-msgstr "กรองโดย"
+msgstr "เลือกแสดงเฉพาะ"
 
 #: templates/public/story_read.haml:28
 msgid "Scroll to read more"
@@ -1403,7 +1404,7 @@ msgstr "เลื่อนเพื่ออ่านเพิ่มเติม
 
 #: templates/public/story_read.haml:47
 msgid "STORY CONTINUES"
-msgstr ""
+msgstr "อ่านเรื่องราวต่อ"
 
 #: templates/public/story_read.haml:65
 msgid "AUDIO"
@@ -1419,7 +1420,7 @@ msgstr "ไม่มีโพลที่เกี่ยวข้อง"
 
 #: templates/public/story_read.haml:104
 msgid "No featured images."
-msgstr "ไม่มีรูปภาพที่แนะนำ"
+msgstr "ไม่มีรูปภาพแนะนำ"
 
 #: templates/public/strings_values.haml:6
 msgid "Even"
@@ -1468,7 +1469,7 @@ msgstr "ประชากร"
 
 #: templates/public/strings_values.haml:18
 msgid "Registered in"
-msgstr ""
+msgstr "ลงทะเบียนใน"
 
 #: templates/public/strings_values.haml:19
 msgid "Density"
@@ -1480,11 +1481,11 @@ msgstr "ทั้งหมด"
 
 #: templates/public/strings_values.haml:21
 msgid "of"
-msgstr ""
+msgstr "จาก"
 
 #: templates/public/strings_values.haml:22
 msgid "the"
-msgstr ""
+msgstr " "
 
 #: templates/public/ureporters.haml:44
 msgid "WHO WE ARE"
@@ -1492,11 +1493,11 @@ msgstr "พวกเราคือใคร"
 
 #: templates/public/ureporters.haml:55
 msgid "U-REPORTER STATISTICS"
-msgstr "สถิติยู-รีพอร์ตเตอร์"
+msgstr "สถิติยูรีพอร์ตเตอร์"
 
 #: templates/public/ureporters.haml:134
 msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr "ยู-รีพอร์ตเตอร์มาจากที่ใดกันบ้าง?"
+msgstr "ยูรีพอร์ตเตอร์มาจากที่ใดกันบ้าง?"
 
 #: templates/public/ureporters.haml:154
 msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
@@ -1508,11 +1509,11 @@ msgstr "9 อาชีพที่ถูกพูดถึงมากที่�
 
 #: templates/public/ureporters.haml:358
 msgid "Registered"
-msgstr ""
+msgstr "จำนวนที่ลงทะเบียน"
 
 #: templates/public/ureporters.haml:371
 msgid "Week of"
-msgstr "สัปดาห์ที่"
+msgstr "ช่วงสัปดาห์"
 
 #: ureport/admins/views.py:22
 #, python-format
@@ -1561,7 +1562,7 @@ msgstr "เพศ"
 
 #: ureport/contacts/models.py:95
 msgid "Gender of the contact"
-msgstr ""
+msgstr "เพศของผู้ติดต่อ"
 
 #: ureport/contacts/models.py:97
 msgid "Born Field"
@@ -1717,7 +1718,7 @@ msgstr "ภาษาตั้งต้นที่ใช้สำหรับ Fl
 
 #: ureport/polls/models.py:100
 msgid "The number of polled reporters on this poll"
-msgstr "จำนวนของยู-รีพอร์ตเตอร์ที่ถูกสอบถามในโพลนี้"
+msgstr "จำนวนของยูรีพอร์ตเตอร์ที่ถูกสอบถามในโพลนี้"
 
 #: ureport/polls/models.py:103
 msgid "Whether the poll has finished the initial results sync."
@@ -1852,7 +1853,7 @@ msgstr ""
 
 #: ureport/polls/views.py:211
 msgid "The text of the featured response."
-msgstr ""
+msgstr "ข้อความของคำตอบโพลที่โดดเด่น"
 
 #: ureport/polls/views.py:237
 msgid "Poll Questions"
@@ -1907,11 +1908,11 @@ msgstr "จะให้แสดงองค์กรนี้บนแลนด
 
 #: ureport/settings_common.py:185
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr "หมายเลขที่ผู้ใช้งานสามารถใช้ติดต่อยู-รีพอร์ตในประเทศได้"
+msgstr "หมายเลขที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตในประเทศได้"
 
 #: ureport/settings_common.py:186
 msgid "The short text used to direct visitors to join U-Report"
-msgstr "ข้อความสั้นๆ สำหรับชวนเชิญให้ผู้ชมมาเข้าร่วมยู-รีพอร์ต"
+msgstr "ข้อความสั้นๆ สำหรับชวนเชิญให้ผู้ชมมาเข้าร่วมยูรีพอร์ต"
 
 #: ureport/settings_common.py:187
 msgid "The color used to draw the text on the join bar"
@@ -1986,30 +1987,30 @@ msgstr ""
 #: ureport/settings_common.py:204
 msgid ""
 "The label of the Contact Field that contains the birth date of reporters"
-msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันเดือนปีเกิดของยู-รีพอร์ตเตอร์"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันเดือนปีเกิดของยูรีพอร์ตเตอร์"
 
 #: ureport/settings_common.py:205
 msgid "The label of the Contact Field that contains the gender of reporters"
-msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลเพศของยู-รีพอร์ตเตอร์"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลเพศของยูรีพอร์ตเตอร์"
 
 #: ureport/settings_common.py:206
 msgid ""
 "The label of the Contact Field that contains the occupation of reporters"
-msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลอาชีพของยู-รีพอร์ตเตอร์"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลอาชีพของยูรีพอร์ตเตอร์"
 
 #: ureport/settings_common.py:207
 msgid ""
 "The label of the Contact Field that contains the registration date of "
 "reporters"
-msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันที่ลงทะเบียนของยู-รีพอร์ตเตอร์"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันที่ลงทะเบียนของยูรีพอร์ตเตอร์"
 
 #: ureport/settings_common.py:208
 msgid "The label of the Contact Field that contains the State of reporters"
-msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลภาคที่อยู่ของยู-รีพอร์ตเตอร์"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลภาคที่อยู่ของยูรีพอร์ตเตอร์"
 
 #: ureport/settings_common.py:209
 msgid "The label of the Contact Field that contains the District of reporters"
-msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลจังหวัดที่อยู่ของยู-รีพอร์ตเตอร์"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลจังหวัดที่อยู่ของยูรีพอร์ตเตอร์"
 
 #: ureport/settings_common.py:210
 msgid "The label of the Contact Field that contains the Ward of reporters"
@@ -2017,11 +2018,11 @@ msgstr ""
 
 #: ureport/settings_common.py:211
 msgid "The label assigned to U-Reporters that are Male."
-msgstr "ป้ายสำหรับมอบหมายให้ยู-รีพอร์ตเตอร์เพศชาย"
+msgstr "ป้ายสำหรับมอบหมายให้ยูรีพอร์ตเตอร์เพศชาย"
 
 #: ureport/settings_common.py:212
 msgid "The label assigned to U-Reporters that are Female."
-msgstr "ป้ายสำหรับมอบหมายให้ยู-รีพอร์ตเตอร์เพศหญิง"
+msgstr "ป้ายสำหรับมอบหมายให้ยูรีพอร์ตเตอร์เพศหญิง"
 
 #: ureport/settings_common.py:213
 msgid "If there are jobs to be shown on the public site"
