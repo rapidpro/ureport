@@ -100,13 +100,25 @@ class QuestionForm(ModelForm):
 
 class PollCRUDL(SmartCRUDL):
     model = Poll
-    actions = ('create', 'list', 'update', 'questions', 'images', 'responses', 'pull_refresh', 'import')
+    actions = ('create', 'list', 'update', 'questions', 'images', 'responses', 'pull_refresh', 'import', 'poll_date')
+
+    class PollDate(OrgObjPermsMixin, SmartUpdateView):
+        form_class = PollForm
+        title = _("Adjust poll date")
+        success_url = 'id@polls.poll_questions'
+        fields = ('poll_date',)
+        success_message = _("Your poll has been updated, now pick which questions to include.")
+
+        def get_form_kwargs(self):
+            kwargs = super(PollCRUDL.PollDate, self).get_form_kwargs()
+            kwargs['org'] = self.request.org
+            return kwargs
 
     class Create(OrgPermsMixin, SmartCreateView):
         form_class = PollForm
-        success_url = 'id@polls.poll_questions'
+        success_url = 'id@polls.poll_poll_date'
         fields = ('is_featured', 'flow_uuid', 'title', 'category', 'category_image')
-        success_message = _("Your poll has been created, now pick which questions to include.")
+        success_message = _("Your poll has been created, now adjust the poll date.")
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Create, self).get_form_kwargs()
