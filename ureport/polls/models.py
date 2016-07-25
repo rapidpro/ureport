@@ -90,7 +90,7 @@ class Poll(SmartModel):
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
     poll_date = models.DateTimeField(help_text=_("The date to display for this poll. "
-                                                 "Make it empty to use RapidPro flow created_on."))
+                                                 "Leave empty to use flow creation date."))
 
     flow_archived = models.BooleanField(default=False,
                                         help_text=_("Whether the flow for this poll is archived on RapidPro"))
