@@ -104,6 +104,7 @@ class PollCRUDL(SmartCRUDL):
 
     class PollDate(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
+        title = _("Adjust poll date")
         success_url = 'id@polls.poll_questions'
         fields = ('poll_date',)
         success_message = _("Your poll has been updated, now pick which questions to include.")
