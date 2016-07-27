@@ -1,27 +1,26 @@
 from __future__ import unicode_literals
 import json
-import time
 from collections import defaultdict
-from datetime import datetime
 
+import logging
 import pytz
 from django.contrib.auth.models import User
-from django.core.exceptions import MultipleObjectsReturned
 from django.db import models, connection
-from django.db.models import Sum, Count, F, Max
+from django.db.models import Sum, Count
 from django.utils.text import slugify
 from django.utils import timezone
 from smartmin.models import SmartModel
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext
 from django.core.cache import cache
 from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
-from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
 from django.conf import settings
 from stop_words import safe_get_stop_words
 
 from django_redis import get_redis_connection
+from xlrd import XLRDError
 
+logger = logging.getLogger(__name__)
 
 # cache whether a question is open ended for a month
 
@@ -85,6 +84,8 @@ class Poll(SmartModel):
     POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%s'
 
     POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = 'poll-results-pull-after-delete-flag:%s:%s'
+
+    POLL_MOST_RESPONDED_REGIONS_CACHE_KEY = 'most-responded-regions:%s'
 
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
@@ -168,6 +169,14 @@ class Poll(SmartModel):
 
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
 
+    def update_questions_results_cache(self):
+        for question in self.questions.all():
+            question.calculate_results()
+            question.calculate_results(segment=dict(location='State'))
+            question.calculate_results(segment=dict(age='Age'))
+            question.calculate_results(segment=dict(gender='Gender'))
+            question.get_most_responded_regions()
+
     @classmethod
     def pull_poll_results_task(cls, poll):
         from ureport.polls.tasks import pull_refresh
@@ -234,6 +243,10 @@ class Poll(SmartModel):
 
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
                 print "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
+
+                start_update_cache = time.time()
+                self.update_questions_results_cache()
+                print "Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache)
 
     @classmethod
     def get_public_polls(cls, org):
@@ -332,43 +345,18 @@ class Poll(SmartModel):
             PollResponseCategory.objects.filter(
                 question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
 
-    def best_and_worst(self):
-        b_and_w = []
-
+    def most_responded_regions(self):
         # get our first question
-        question = self.questions.order_by('pk').first()
+        question = self.get_first_question()
         if question:
             # do we already have a cached set
-            b_and_w = cache.get('b_and_d:%s' % question.ruleset_uuid, [])
+            cached = cache.get(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % question.ruleset_uuid)
+            if cached:
+                return cached
 
-            if not b_and_w:
-                boundary_results = question.get_results(segment=dict(location='State'))
-                if not boundary_results:
-                    return []
+            return question.get_most_responded_regions()
 
-                boundary_responses = dict()
-                for boundary in boundary_results:
-                    total = boundary['set'] + boundary['unset']
-                    responded = boundary['set']
-                    boundary_responses[boundary['label']] = dict(responded=responded, total=total)
-
-                for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:3]:
-                    responded = boundary_responses[boundary]
-                    percent = int(round((100 * responded['responded'])) / responded['total']) if responded['total'] > 0 else 0
-                    b_and_w.append(dict(boundary=boundary, responded=responded['responded'], total=responded['total'], type='best', percent=percent))
-
-                for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[-2:]:
-                    responded = boundary_responses[boundary]
-                    percent = int(round((100 * responded['responded'])) / responded['total']) if responded['total'] > 0 else 0
-                    b_and_w.append(dict(boundary=boundary, responded=responded['responded'], total=responded['total'], type='worst', percent=percent))
-
-                # no actual results by region yet
-                if b_and_w and b_and_w[0]['responded'] == 0:
-                    b_and_w = []
-
-                cache.set('b_and_w:%s' % question.ruleset_uuid, b_and_w, 900)
-
-        return b_and_w
+        return []
 
     def response_percentage(self):
         """
@@ -443,6 +431,142 @@ class Poll(SmartModel):
         elif self.category.is_active:
             return self.category.get_first_image()
 
+    @classmethod
+    def prepare_fields(cls, field_dict, import_params=None, user=None):
+        if not import_params or 'org_id' not in import_params:
+            raise Exception('Import params must include org_id')
+
+        field_dict['created_by'] = user
+        field_dict['org'] = Org.objects.get(pk=import_params['org_id'])
+
+        return field_dict
+
+    @classmethod
+    def create_instance(cls, field_dict):
+        if 'org' not in field_dict:
+            raise ValueError("Import fields dictionary must include org")
+
+        if 'created_by' not in field_dict:
+            raise ValueError("Import fields dictionary must include created_by")
+
+        if 'category' not in field_dict:
+            raise ValueError("Import fields dictionary must include category")
+
+        if 'uuid' not in field_dict:
+            raise ValueError("Import fields dictionary must include uuid")
+
+        if 'name' not in field_dict:
+            raise ValueError("Import fields dictionary must include name")
+
+        if 'created_on' not in field_dict:
+            raise ValueError("Import fields dictionary must include created_on")
+
+        if 'ruleset_uuid' not in field_dict:
+            raise ValueError("Import fields dictionary must include ruleset_uuid")
+
+        if 'question' not in field_dict:
+            raise ValueError("Import fields dictionary must include question")
+
+        org = field_dict.pop('org')
+        user = field_dict.pop('created_by')
+
+        category = field_dict.pop('category')
+
+        uuid = field_dict.pop('uuid')
+        name = field_dict.pop('name')
+        created_on = field_dict.pop('created_on')
+
+        ruleset_uuid = field_dict.pop('ruleset_uuid')
+        question = field_dict.pop('question')
+
+        category_obj = Category.objects.filter(org=org, name=category).first()
+        if not category_obj:
+            category_obj = Category.objects.create(org=org, name=category, created_by=user, modified_by=user)
+
+        existing_polls = Poll.objects.filter(org=org, flow_uuid=uuid, category=category_obj)
+
+        imported_poll = None
+        for poll in existing_polls:
+            if poll.questions.filter(ruleset_uuid=ruleset_uuid).exists():
+                imported_poll = Poll.objects.filter(pk=poll.pk).first()
+
+                if imported_poll:
+                    Poll.objects.filter(pk=imported_poll.pk).update(title=name)
+
+        if not imported_poll:
+            imported_poll = Poll.objects.create(flow_uuid=uuid, title=name, poll_date=created_on, org=org,
+                                                category=category_obj, created_by=user, modified_by=user)
+
+        poll_question = PollQuestion.update_or_create(user, imported_poll, '', ruleset_uuid, 'wait_message')
+        PollQuestion.objects.filter(pk=poll_question.pk).update(title=question, is_active=True)
+
+        # hide all other questions
+        PollQuestion.objects.filter(poll=imported_poll).exclude(pk=poll_question.pk).update(is_active=False)
+
+        return imported_poll
+
+    @classmethod
+    def update_or_create_questions_task(cls, records):
+        from .tasks import update_or_create_questions
+
+        record_ids = []
+
+        for record in records:
+            record_ids.append(record.id)
+
+        if record_ids:
+            update_or_create_questions.delay(record_ids)
+
+
+    @classmethod
+    def import_csv(cls, task, log=None):
+        csv_file = task.csv_file
+        csv_file.open()
+
+        # this file isn't good enough, lets write it to local disk
+        from django.conf import settings
+        from uuid import uuid4
+        import os
+
+        # make sure our tmp directory is present (throws if already present)
+        try:
+            os.makedirs(os.path.join(settings.MEDIA_ROOT, 'tmp'))
+        except Exception:
+            pass
+
+        # write our file out
+        tmp_file = os.path.join(settings.MEDIA_ROOT, 'tmp/%s' % str(uuid4()))
+
+        out_file = open(tmp_file, 'wb')
+        out_file.write(csv_file.read())
+        out_file.close()
+
+        filename = out_file
+        user = task.created_by
+
+        import_params = None
+        import_results = dict()
+
+        # additional parameters are optional
+        if task.import_params:
+            try:
+                import_params = json.loads(task.import_params)
+            except:
+                pass
+
+        try:
+            records = cls.import_xls(filename, user, import_params, log, import_results)
+        except XLRDError:
+            records = cls.import_raw_csv(filename, user, import_params, log, import_results)
+        finally:
+            os.remove(tmp_file)
+
+        task.import_results = json.dumps(import_results)
+
+        Poll.update_or_create_questions_task(records)
+
+        return records
+
     def __unicode__(self):
         return self.title
 
@@ -488,7 +612,7 @@ class PollQuestion(SmartModel):
     """
 
     POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
-    POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 5
+    POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 12
 
     poll = models.ForeignKey(Poll, related_name='questions',
                              help_text=_("The poll this question is part of"))
@@ -517,6 +641,34 @@ class PollQuestion(SmartModel):
                                                    is_active=False, created_by=user, modified_by=user)
         return question
 
+    def get_most_responded_regions(self):
+        top_regions = []
+
+        boundary_results = self.get_results(segment=dict(location='State'))
+        if not boundary_results:
+            return []
+
+        boundary_responses = dict()
+        for boundary in boundary_results:
+            total = boundary['set'] + boundary['unset']
+            responded = boundary['set']
+            boundary_responses[boundary['label']] = dict(responded=responded, total=total)
+
+        for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:5]:
+            responded = boundary_responses[boundary]
+            percent = int(round((100 * responded['responded'])) / responded['total']) if responded['total'] > 0 else 0
+            top_regions.append(
+                dict(boundary=boundary, responded=responded['responded'], total=responded['total'], type='best',
+                     percent=percent))
+
+        # no actual results by region yet
+        if top_regions and top_regions[0]['responded'] == 0:
+            top_regions = []
+
+        cache.set(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % self.ruleset_uuid, top_regions, 900)
+
+        return top_regions
+
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
@@ -527,6 +679,16 @@ class PollQuestion(SmartModel):
         if cached_value:
             return cached_value["results"]
 
+        if not segment:
+            logger.error('Question get results without segment cache missed', extra={'stack': True,})
+
+        if segment and segment.get('location').lower() == 'state':
+            logger.error('Question get results with state segment cache missed', extra={'stack': True,})
+
+        return self.calculate_results(segment=segment)
+
+    def calculate_results(self, segment=None):
+
         org = self.poll.org
         open_ended = self.is_open_ended()
         responded = self.get_responded()
@@ -535,16 +697,13 @@ class PollQuestion(SmartModel):
         results = []
 
         if open_ended and not segment:
-            cursor = connection.cursor()
-
             custom_sql = """
-                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s') w group by w.label order by count desc;
+                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls_pollresult.text IS NOT NULL) w group by w.label;
                       """ % (org.id, self.poll.flow_uuid, self.ruleset_uuid)
-
-            cursor.execute(custom_sql)
-            from ureport.utils import get_dict_from_cursor
-            unclean_categories = get_dict_from_cursor(cursor)
-            categories = []
+            with connection.cursor() as cursor:
+                cursor.execute(custom_sql)
+                from ureport.utils import get_dict_from_cursor
+                unclean_categories = get_dict_from_cursor(cursor)
 
             ureport_languages = getattr(settings, 'LANGUAGES', [('en', 'English')])
 
@@ -573,38 +732,93 @@ class PollQuestion(SmartModel):
 
             if segment:
 
-                location_part = segment.get('location').lower()
+                location_part = segment.get('location', '').lower()
+                age_part = segment.get('age', '').lower()
+                gender_part = segment.get('gender', '').lower()
 
-                if location_part not in ['state', 'district', 'ward']:
-                    return None
+                if location_part in ['state', 'district', 'ward']:
 
-                location_boundaries = org.get_segment_org_boundaries(segment)
+                    location_boundaries = org.get_segment_org_boundaries(segment)
 
-                for boundary in location_boundaries:
-                    categories = []
-                    osm_id = boundary.get('osm_id').upper()
-                    set_count = 0
-                    unset_count_key = "ruleset:%s:nocategory:%s:%s" % (self.ruleset_uuid, location_part, osm_id)
-                    unset_count = question_results.get(unset_count_key, 0)
+                    for boundary in location_boundaries:
+                        categories = []
+                        osm_id = boundary.get('osm_id').upper()
+                        set_count = 0
+                        unset_count_key = "ruleset:%s:nocategory:%s:%s" % (self.ruleset_uuid, location_part, osm_id)
+                        unset_count = question_results.get(unset_count_key, 0)
 
-                    for categorie_label in categories_label:
-                        category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
-                        category_count = question_results.get(category_count_key, 0)
-                        set_count += category_count
-                        categories.append(dict(count=category_count, label=categorie_label))
+                        for categorie_label in categories_label:
+                            category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
+                            category_count = question_results.get(category_count_key, 0)
+                            set_count += category_count
+                            categories.append(dict(count=category_count, label=categorie_label))
 
-                    if open_ended:
-                        # For home page best and worst location responses
-                        from ureport.contacts.models import Contact
-                        if segment.get('location') == 'District':
-                            boundary_contacts_count = Contact.objects.filter(org=org, district=osm_id).count()
-                        else:
-                            boundary_contacts_count = Contact.objects.filter(org=org, state=osm_id).count()
-                        unset_count = boundary_contacts_count - set_count
+                        results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
+                                            boundary=osm_id, label=boundary.get('name'),
+                                            categories=categories))
+                elif age_part:
+                    poll_year = self.poll.poll_date.year
 
-                    results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
-                                        boundary=osm_id, label=boundary.get('name'),
-                                        categories=categories))
+                    born_results = {k: v for k, v in question_results.iteritems() if k[-9:-5] == 'born'}
+
+                    age_intervals = dict()
+                    age_intervals['35+'] = (35, 2000)
+                    age_intervals['31-34'] = (31, 34)
+                    age_intervals['25-30'] = (25, 30)
+                    age_intervals['20-24'] = (20, 24)
+                    age_intervals['15-19'] = (15, 19)
+                    age_intervals['0-14'] = (0, 14)
+
+                    for age_group in age_intervals.keys():
+                        lower_bound, upper_bound = age_intervals[age_group]
+                        unset_count = 0
+
+                        categories_count = dict()
+                        for categorie_label in categories_label:
+                            if categorie_label.lower() != 'other':
+                                categories_count[categorie_label.lower()] = 0
+
+                        for result_key, result_count in born_results.iteritems():
+                            age = poll_year - int(result_key[-4:])
+
+                            if lower_bound <= age < upper_bound:
+                                if 'nocategory' in result_key:
+                                    unset_count += result_count
+
+                                for categorie_label in categories_label:
+                                    if categorie_label.lower() != 'other':
+                                        if result_key.startswith('ruleset:%s:category:%s:' % (self.ruleset_uuid, categorie_label.lower())):
+                                            categories_count[categorie_label.lower()] += result_count
+
+                        categories = [dict(count=v, label=k) for k, v in categories_count.iteritems()]
+
+                        set_count = sum([elt['count'] for elt in categories])
+
+                        results.append(dict(set=set_count, unset=unset_count, label=age_group,
+                                            categories=categories))
+
+                    results = sorted(results, key=lambda i:i['label'])
+
+                elif gender_part:
+
+                    genders = ['f', 'm']
+                    gender_labels = dict(f=_('Female'), m=_('Male'))
+
+                    for gender in genders:
+                        categories = []
+                        set_count = 0
+                        unset_count_key = "ruleset:%s:nocategory:%s:%s"% (self.ruleset_uuid, 'gender', gender)
+                        unset_count = question_results.get(unset_count_key, 0)
+
+                        for categorie_label in categories_label:
+                            category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), 'gender', gender)
+                            if categorie_label.lower() != 'other':
+                                category_count = question_results.get(category_count_key, 0)
+                                set_count += category_count
+                                categories.append(dict(count=category_count, label=categorie_label))
+
+                        results.append(dict(set=set_count, unset=unset_count, label=gender_labels.get(gender),
+                                            categories=categories))
 
             else:
                 categories = []
@@ -616,7 +830,25 @@ class PollQuestion(SmartModel):
 
                 results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
 
-        cache.set(key, {"results": results}, PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT)
+        cache_time = PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT
+        if not segment:
+            cache_time = None
+
+        if segment and segment.get('location', '').lower() == 'state':
+            cache_time = None
+
+        if segment and segment.get('age', '').lower() == 'age':
+            cache_time = None
+
+        if segment and segment.get('gender', '').lower() == 'gender':
+            cache_time = None
+
+        key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+        if segment:
+            substituted_segment = self.poll.org.substitute_segment(segment)
+            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+
+        cache.set(key, {"results": results}, cache_time)
 
         return results
 
@@ -705,6 +937,10 @@ class PollResult(models.Model):
 
     ward = models.CharField(max_length=255, null=True)
 
+    gender = models.CharField(max_length=1, null=True)
+
+    born = models.IntegerField(null=True)
+
     def generate_counters(self):
         generated_counters = dict()
 
@@ -717,6 +953,8 @@ class PollResult(models.Model):
         state = ''
         district = ''
         ward = ''
+        born = ''
+        gender = ''
 
         if self.ruleset:
             ruleset = self.ruleset.lower()
@@ -733,12 +971,28 @@ class PollResult(models.Model):
         if self.ward:
             ward = self.ward.upper()
 
+        if self.born:
+            born = self.born
+
+        if self.gender:
+            gender = self.gender.lower()
+
         generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
 
         if category:
             generated_counters['ruleset:%s:total-ruleset-responded' % ruleset] = 1
 
             generated_counters['ruleset:%s:category:%s' % (ruleset, category)] = 1
+
+        if category and born:
+            generated_counters['ruleset:%s:category:%s:born:%s' % (ruleset, category, born)] = 1
+        elif born:
+            generated_counters['ruleset:%s:nocategory:born:%s' % (ruleset, born)] = 1
+
+        if category and gender:
+            generated_counters['ruleset:%s:category:%s:gender:%s' % (ruleset, category, gender)] = 1
+        elif gender:
+            generated_counters['ruleset:%s:nocategory:gender:%s' % (ruleset, gender)] = 1
 
         if state and category:
             generated_counters['ruleset:%s:category:%s:state:%s' % (ruleset, category, state)] = 1
