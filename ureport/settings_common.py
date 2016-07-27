@@ -152,6 +152,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'ureport.public.context_processors.set_has_better_domain',
     'ureport.public.context_processors.set_is_iorg',
     'ureport.public.context_processors.set_is_rtl_org',
+    'ureport.public.context_processors.set_story_widget_url',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -566,3 +567,5 @@ SWAGGER_SETTINGS = {
         'get'
     ],
 }
+
+STORY_WIDGET_URL = 'http://ureportapp.ilhasoft.mobi/widget/'

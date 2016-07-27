@@ -203,6 +203,14 @@ class PublicTest(DashTest):
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['is_rtl_org'])
 
+    def test_set_story_widget_url(self):
+        import requests
+        story_widget_url = getattr(settings, 'STORY_WIDGET_URL', None)
+        iso_code = 'BRA'
+        full_url = "%s%s" % (story_widget_url, iso_code)
+        r = requests.get(full_url)
+        self.assertEqual(r.status_code, 200)
+
     @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_index(self):
         home_url = reverse('public.index')

@@ -56,3 +56,12 @@ def set_is_rtl_org(request):
         is_rtl_org = True
 
     return dict(is_rtl_org=is_rtl_org)
+
+
+def set_story_widget_url(request):
+    story_widget_url = getattr(settings, 'STORY_WIDGET_URL', None)
+
+    if story_widget_url and not story_widget_url.endswith('/'):
+        story_widget_url = "%s/" % story_widget_url
+
+    return dict(story_widget_url=story_widget_url)
