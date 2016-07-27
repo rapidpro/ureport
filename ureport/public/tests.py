@@ -49,12 +49,12 @@ class PublicTest(DashTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 16)
+        self.assertEquals(len(response.context['form'].fields), 17)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 34)
+        self.assertEquals(len(response.context['form'].fields), 35)
 
     def test_chooser(self):
         chooser_url = reverse('public.home')
@@ -204,12 +204,10 @@ class PublicTest(DashTest):
         self.assertTrue(response.context['is_rtl_org'])
 
     def test_set_story_widget_url(self):
-        import requests
-        story_widget_url = getattr(settings, 'STORY_WIDGET_URL', None)
-        iso_code = 'BRA'
-        full_url = "%s%s" % (story_widget_url, iso_code)
-        r = requests.get(full_url)
-        self.assertEqual(r.status_code, 200)
+        home_url = reverse('public.index')
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertTrue(response.context['story_widget_url'])
 
     @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_index(self):
