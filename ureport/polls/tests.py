@@ -16,6 +16,7 @@ import pycountry
 
 from mock import patch, Mock
 from dash.categories.models import Category, CategoryImage
+from dash.categories.fields import CategoryChoiceField
 from smartmin.csv_imports.models import ImportTask
 from temba_client.v1.types import Result, Flow, Group
 
@@ -721,6 +722,10 @@ class PollTest(DashTest):
             self.assertTrue('flow_uuid' in response.context['form'].fields)
             self.assertTrue('title' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
+            self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+            self.assertEquals(list(response.context['form'].fields['category'].choices),
+                              [('', '---------'),
+                              (self.health_uganda.pk, 'uganda - Health')])
             self.assertTrue('category_image' in response.context['form'].fields)
             self.assertTrue('loc' in response.context['form'].fields)
 
@@ -874,6 +879,10 @@ class PollTest(DashTest):
             self.assertTrue('title' in response.context['form'].fields)
             self.assertTrue('poll_date' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
+            self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+            self.assertEquals(list(response.context['form'].fields['category'].choices),
+                              [('', '---------'),
+                              (self.health_uganda.pk, 'uganda - Health')])
             self.assertTrue('category_image' in response.context['form'].fields)
             self.assertTrue('loc' in response.context['form'].fields)
 
