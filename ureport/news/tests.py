@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from dash.categories.models import Category
+from dash.categories.fields import CategoryChoiceField
 from ureport.news.models import NewsItem, Video
 from ureport.tests import DashTest
 
@@ -43,7 +44,6 @@ class NewsTest(DashTest):
                                                                   link='http://uganda.ug',
                                                                   created_on=self.uganda_news1.created_on.strftime('%b %d, %Y')))
 
-
     def test_create_newsItem(self):
         create_url = reverse('news.newsitem_create')
 
@@ -59,6 +59,10 @@ class NewsTest(DashTest):
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('link' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
+        self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+        self.assertEquals(list(response.context['form'].fields['category'].choices),
+                          [('', '---------'),
+                           (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
         self.assertEquals(NewsItem.objects.count(), 0)
@@ -89,6 +93,10 @@ class NewsTest(DashTest):
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('link' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
+        self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+        self.assertEquals(list(response.context['form'].fields['category'].choices),
+                          [('', '---------'),
+                           (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
         response = self.client.post(create_url, dict(), SERVER_NAME='uganda.ureport.io')
@@ -176,6 +184,10 @@ class NewsTest(DashTest):
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('link' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
+        self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+        self.assertEquals(list(response.context['form'].fields['category'].choices),
+                          [('', '---------'),
+                           (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
         post_data = dict(title='title updated', description='description updated',
@@ -223,6 +235,10 @@ class VideoTest(DashTest):
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('video_id' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
+        self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+        self.assertEquals(list(response.context['form'].fields['category'].choices),
+                          [('', '---------'),
+                           (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
         self.assertEquals(Video.objects.count(), 0)
@@ -346,6 +362,10 @@ class VideoTest(DashTest):
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('video_id' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
+        self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+        self.assertEquals(list(response.context['form'].fields['category'].choices),
+                          [('', '---------'),
+                           (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
         post_data = dict(title='title updated', description='description updated',

@@ -5,6 +5,7 @@ from django import forms
 from django.core.files.base import ContentFile
 from django.core.urlresolvers import reverse
 from dash.categories.models import Category, CategoryImage
+from dash.categories.fields import CategoryChoiceField
 from django.utils import timezone
 from smartmin.csv_imports.models import ImportTask
 
@@ -18,6 +19,13 @@ import re
 
 
 class PollForm(forms.ModelForm):
+    is_active = forms.BooleanField(required=False)
+    flow_uuid = forms.ChoiceField(choices=[])
+    poll_date = forms.DateTimeField(required=False)
+    title = forms.CharField(max_length=255, widget=forms.Textarea)
+    category = CategoryChoiceField(Category.objects.none())
+    category_image = forms.ModelChoiceField(CategoryImage.objects.none(), required=False)
+
     def __init__(self, *args, **kwargs):
         self.org = kwargs['org']
         del kwargs['org']
@@ -32,13 +40,6 @@ class PollForm(forms.ModelForm):
 
         # only display category images for this org which are active
         self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')
-
-    is_active = forms.BooleanField(required=False)
-    flow_uuid = forms.ChoiceField(choices=[])
-    poll_date = forms.DateTimeField(required=False)
-    title = forms.CharField(max_length=255, widget=forms.Textarea)
-    category = forms.ModelChoiceField(Category.objects.filter(id__lte=-1))
-    category_image = forms.ModelChoiceField(CategoryImage.objects.filter(id__lte=0), required=False)
 
     def clean(self):
         cleaned_data = self.cleaned_data
