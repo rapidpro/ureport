@@ -983,6 +983,7 @@ class PollTest(DashTest):
         self.assertEquals(response.context['form'].fields['ruleset_uuid-101_priority'].initial, 0)
         self.assertEquals(response.context['form'].fields['ruleset_uuid-101_label'].initial, 'question poll 1')
         self.assertEquals(response.context['form'].fields['ruleset_uuid-101_title'].initial, 'question poll 1')
+        self.assertContains(response, "The label of the ruleset from RapidPro")
 
         post_data = dict()
         response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
