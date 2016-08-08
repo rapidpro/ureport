@@ -289,7 +289,7 @@ class PollCRUDL(SmartCRUDL):
                 label_field_name = 'ruleset_%s_label' % question.ruleset_uuid
                 label_field_initial = initial.get(label_field_name, "")
                 label_field = forms.CharField(label=_("Ruleset Label"), widget=forms.TextInput(attrs={'readonly':'readonly'}), required=False, initial=label_field_initial,
-                                              help_text=_("The question posed to your audience, will be displayed publicly"))
+                                              help_text=_("The label of the ruleset from RapidPro"))
 
                 title_field_name = 'ruleset_%s_title' % question.ruleset_uuid
                 title_field_initial = initial.get(title_field_name, '')
