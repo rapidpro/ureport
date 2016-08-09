@@ -1395,6 +1395,10 @@ class PollQuestionTest(DashTest):
                                   contact='contact-5', date=now, category='All responses', state='', district='',
                                   text='from an awesome place in kigali', completed=False)
 
+        PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
+                                  contact='contact-5', date=now, category='All responses', state='', district='',
+                                  text='HtTp://kigali.coffee.fbcdn.com/like_image.png', completed=False)
+
         with patch('ureport.polls.models.PollQuestion.is_open_ended') as mock_open:
             mock_open.return_value = True
 
