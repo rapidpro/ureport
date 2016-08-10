@@ -5,6 +5,7 @@ from dash.orgs.models import Org
 from django.utils.translation import ugettext_lazy as _
 from dash.categories.models import Category
 
+
 class NewsItem(SmartModel):
     title = models.CharField(max_length=255,
                              help_text=_("The title for this item"))
@@ -28,6 +29,7 @@ class NewsItem(SmartModel):
 
     def as_brick_json(self):
         return dict(title=self.title, description=self.short_description(), link=self.link, created_on=self.created_on.strftime('%b %d, %Y'))
+
 
 class Video(SmartModel):
     title = models.CharField(max_length=255,
