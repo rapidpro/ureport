@@ -133,7 +133,7 @@ TEMPLATE_LOADERS = (
     'hamlpy.template.loaders.HamlPyAppDirectoriesLoader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    
+
 #     'django.template.loaders.eggs.Loader',
 )
 
@@ -143,7 +143,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
-    'django.core.context_processors.static',    
+    'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
     'dash.orgs.context_processors.user_group_perms_processor',
@@ -153,6 +153,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'ureport.public.context_processors.set_is_iorg',
     'ureport.public.context_processors.set_is_rtl_org',
     'ureport.public.context_processors.set_story_widget_url',
+    'ureport.public.context_processors.set_fb_button_language',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -582,3 +583,15 @@ SWAGGER_SETTINGS = {
 }
 
 STORY_WIDGET_URL = 'http://ureportapp.ilhasoft.mobi/widget/'
+
+FACEBOOK_MESSENGER_LANGUAGES = {
+    'en': 'en_US',
+    'fr': 'fr_FR',
+    'es': 'es_ES',
+    'ar': 'ar_AR',
+    'pt': 'pt_PT',
+    'pt-br': 'pt_BR',
+    'uk': 'uk_UA',
+    'my': 'my_MM',
+    'th': 'th_TH'
+}
