@@ -152,6 +152,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'ureport.public.context_processors.set_has_better_domain',
     'ureport.public.context_processors.set_is_iorg',
     'ureport.public.context_processors.set_is_rtl_org',
+    'ureport.public.context_processors.set_story_widget_url',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -212,6 +213,7 @@ ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whe
                      dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True),
                      dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), required=False)),
                      dict(name='is_global', field=dict(help_text=_("If this org if for global data. e.g: It shows a world map instead of a country map."), required=False), superuser_only=True),
+                     dict(name='iso_code', field=dict(help_text=_("The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."), required=False)),
                      dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), required=False, widget=Textarea))]
 #                     dict(name='featured_state', field=dict(help_text=_("Choose the featured State of reporters shown on the home page")))]
 INSTALLED_APPS = (
@@ -342,7 +344,7 @@ PERMISSIONS = {
 
     'dashblocks.dashblock': ('html', ),
     'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
-    'polls.poll': ('questions', 'responses', 'images', 'pull_refresh'),
+    'polls.poll': ('questions', 'responses', 'images', 'pull_refresh', 'poll_date'),
     'stories.story': ('html', 'images'),
 
 }
@@ -535,9 +537,21 @@ PREVIOUS_ORG_SITES = [
         is_static=True,
     ),
     dict(
+        name="France",
+        host="http://france.ureport.in",
+        flag="flag_fr.png",
+        is_static=True,
+    ),
+    dict(
         name="Ireland",
         host="http://ireland.ureport.in",
         flag="flag_ir.png",
+        is_static=True,
+    ),
+    dict(
+        name='United Kingdom',
+        host="http://uk.ureport.in",
+        flag="flag_uk.png",
         is_static=True,
     ),
     dict(
@@ -566,3 +580,5 @@ SWAGGER_SETTINGS = {
         'get'
     ],
 }
+
+STORY_WIDGET_URL = 'http://ureportapp.ilhasoft.mobi/widget/'

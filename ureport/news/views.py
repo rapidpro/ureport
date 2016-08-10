@@ -1,6 +1,39 @@
+from dash.categories.models import Category
+from dash.categories.fields import CategoryChoiceField
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
+from django import forms
 from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView
 from .models import NewsItem, Video
+
+
+class NewsForm(forms.ModelForm):
+    category = CategoryChoiceField(Category.objects.none())
+
+    def __init__(self, *args, **kwargs):
+        self.org = kwargs['org']
+        del kwargs['org']
+
+        super(NewsForm, self).__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.filter(org=self.org).order_by('name')
+
+    class Meta:
+        model = NewsItem
+        fields = ('is_active', 'title', 'description', 'link', 'category', 'org')
+
+
+class VideoForm(forms.ModelForm):
+    category = CategoryChoiceField(Category.objects.none())
+
+    def __init__(self, *args, **kwargs):
+        self.org = kwargs['org']
+        del kwargs['org']
+
+        super(VideoForm, self).__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.filter(org=self.org).order_by('name')
+
+    class Meta:
+        model = Video
+        fields = ('is_active', 'title', 'description', 'video_id', 'category', 'org')
 
 
 class NewsItemCRUDL(SmartCRUDL):
@@ -8,7 +41,13 @@ class NewsItemCRUDL(SmartCRUDL):
     actions = ('create', 'update', 'list')
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
+        form_class = NewsForm
         fields = ('is_active', 'title', 'description', 'link', 'category')
+
+        def get_form_kwargs(self):
+            kwargs = super(NewsItemCRUDL.Update, self).get_form_kwargs()
+            kwargs['org'] = self.request.org
+            return kwargs
 
     class List(OrgPermsMixin, SmartListView):
         fields = ('title', 'link', 'category')
@@ -21,6 +60,12 @@ class NewsItemCRUDL(SmartCRUDL):
             return queryset
 
     class Create(OrgPermsMixin, SmartCreateView):
+        form_class = NewsForm
+
+        def get_form_kwargs(self):
+            kwargs = super(NewsItemCRUDL.Create, self).get_form_kwargs()
+            kwargs['org'] = self.request.org
+            return kwargs
 
         def derive_fields(self):
             if self.request.user.is_superuser:
@@ -42,7 +87,13 @@ class VideoCRUDL(SmartCRUDL):
     actions = ('create', 'update', 'list')
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
+        form_class = VideoForm
         fields = ('is_active', 'title', 'description', 'video_id', 'category')
+
+        def get_form_kwargs(self):
+            kwargs = super(VideoCRUDL.Update, self).get_form_kwargs()
+            kwargs['org'] = self.request.org
+            return kwargs
 
     class List(OrgPermsMixin, SmartListView):
         fields = ('title', 'video_id', 'category')
@@ -55,6 +106,12 @@ class VideoCRUDL(SmartCRUDL):
             return queryset
 
     class Create(OrgPermsMixin, SmartCreateView):
+        form_class = VideoForm
+
+        def get_form_kwargs(self):
+            kwargs = super(VideoCRUDL.Create, self).get_form_kwargs()
+            kwargs['org'] = self.request.org
+            return kwargs
 
         def derive_fields(self):
             if self.request.user.is_superuser:

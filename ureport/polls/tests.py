@@ -16,6 +16,7 @@ import pycountry
 
 from mock import patch, Mock
 from dash.categories.models import Category, CategoryImage
+from dash.categories.fields import CategoryChoiceField
 from smartmin.csv_imports.models import ImportTask
 from temba_client.v1.types import Result, Flow, Group
 
@@ -721,6 +722,10 @@ class PollTest(DashTest):
             self.assertTrue('flow_uuid' in response.context['form'].fields)
             self.assertTrue('title' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
+            self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+            self.assertEquals(list(response.context['form'].fields['category'].choices),
+                              [('', '---------'),
+                              (self.health_uganda.pk, 'uganda - Health')])
             self.assertTrue('category_image' in response.context['form'].fields)
             self.assertTrue('loc' in response.context['form'].fields)
 
@@ -748,7 +753,7 @@ class PollTest(DashTest):
             self.assertEquals(poll.org, self.uganda)
             self.assertEqual(poll.poll_date, json_date_to_datetime("2015-04-08T08:30:40.000Z"))
 
-            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
+            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_date', args=[poll.pk]))
 
             tz = pytz.timezone('Africa/Kigali')
             with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
@@ -767,6 +772,69 @@ class PollTest(DashTest):
                 self.assertEquals(poll.title, 'Poll 2')
                 self.assertEquals(poll.org, self.uganda)
                 self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))
+
+    def test_poll_poll_date_view(self):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
+
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin,
+                                     featured=True)
+
+        uganda_poll_date_url = reverse('polls.poll_poll_date', args=[poll1.pk])
+        nigeria_poll_date_url = reverse('polls.poll_poll_date', args=[poll2.pk])
+
+        response = self.client.get(uganda_poll_date_url, SERVER_NAME='uganda.ureport.io')
+        self.assertLoginRedirect(response)
+
+        response = self.client.get(nigeria_poll_date_url, SERVER_NAME='uganda.ureport.io')
+        self.assertLoginRedirect(response)
+
+        self.login(self.admin)
+
+        response = self.client.get(nigeria_poll_date_url, SERVER_NAME='uganda.ureport.io')
+        self.assertLoginRedirect(response)
+
+        with patch('dash.orgs.models.Org.get_flows') as mock_get_flows:
+            flows_cached = dict()
+            flows_cached['uuid-1'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-1',
+                                          labels="", archived=False, created_on="2015-04-08T12:48:44.320Z",
+                                          date_hint="2015-04-08", participants=None,
+                                          rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
+                                                         label='Does your community have power')])
+
+            mock_get_flows.return_value = flows_cached
+
+            now = timezone.now()
+            yesterday = now - timedelta(days=1)
+
+            response = self.client.get(uganda_poll_date_url, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+            self.assertTrue('form' in response.context)
+
+            self.assertEquals(len(response.context['form'].fields), 2)
+
+            self.assertTrue('poll_date' in response.context['form'].fields)
+            self.assertTrue('loc' in response.context['form'].fields)
+
+            post_data = dict(poll_date=yesterday.strftime('%Y-%m-%d %H:%M:%S'))
+            response = self.client.post(uganda_poll_date_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+
+            poll = Poll.objects.get(flow_uuid='uuid-1')
+            self.assertEquals(poll.org, self.uganda)
+            self.assertEquals(poll.title, 'Poll 1')
+            self.assertEqual(poll.poll_date, yesterday.replace(microsecond=0))
+
+            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
+
+            tz = pytz.timezone('Africa/Kigali')
+            with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
+                response = self.client.post(uganda_poll_date_url, dict(), follow=True, SERVER_NAME='uganda.ureport.io')
+
+                poll = Poll.objects.get(flow_uuid='uuid-1')
+                self.assertEquals(poll.org, self.uganda)
+                self.assertEquals(poll.title, 'Poll 1')
+                self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))
+
+                self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
 
     @patch('dash.orgs.models.TembaClient1', MockTembaClient)
     def test_update_poll(self):
@@ -811,6 +879,10 @@ class PollTest(DashTest):
             self.assertTrue('title' in response.context['form'].fields)
             self.assertTrue('poll_date' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
+            self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+            self.assertEquals(list(response.context['form'].fields['category'].choices),
+                              [('', '---------'),
+                              (self.health_uganda.pk, 'uganda - Health')])
             self.assertTrue('category_image' in response.context['form'].fields)
             self.assertTrue('loc' in response.context['form'].fields)
 
@@ -911,6 +983,7 @@ class PollTest(DashTest):
         self.assertEquals(response.context['form'].fields['ruleset_uuid-101_priority'].initial, 0)
         self.assertEquals(response.context['form'].fields['ruleset_uuid-101_label'].initial, 'question poll 1')
         self.assertEquals(response.context['form'].fields['ruleset_uuid-101_title'].initial, 'question poll 1')
+        self.assertContains(response, "The label of the ruleset from RapidPro")
 
         post_data = dict()
         response = self.client.post(uganda_questions_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
@@ -1321,6 +1394,10 @@ class PollQuestionTest(DashTest):
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-5', date=now, category='All responses', state='', district='',
                                   text='from an awesome place in kigali', completed=False)
+
+        PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
+                                  contact='contact-5', date=now, category='All responses', state='', district='',
+                                  text='HtTp://kigali.coffee.fbcdn.com/like_image.png', completed=False)
 
         with patch('ureport.polls.models.PollQuestion.is_open_ended') as mock_open:
             mock_open.return_value = True

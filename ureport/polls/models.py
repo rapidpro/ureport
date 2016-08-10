@@ -90,7 +90,7 @@ class Poll(SmartModel):
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
     poll_date = models.DateTimeField(help_text=_("The date to display for this poll. "
-                                                 "Make it empty to use flow created_on."))
+                                                 "Leave empty to use flow creation date."))
 
     flow_archived = models.BooleanField(default=False,
                                         help_text=_("Whether the flow for this poll is archived on RapidPro"))
@@ -698,8 +698,8 @@ class PollQuestion(SmartModel):
 
         if open_ended and not segment:
             custom_sql = """
-                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls_pollresult.text IS NOT NULL) w group by w.label;
-                      """ % (org.id, self.poll.flow_uuid, self.ruleset_uuid)
+                      SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls_pollresult.text IS NOT NULL AND polls_pollresult.text NOT ILIKE '%s') w group by w.label;
+                      """ % (org.id, self.poll.flow_uuid, self.ruleset_uuid, "http%")
             with connection.cursor() as cursor:
                 cursor.execute(custom_sql)
                 from ureport.utils import get_dict_from_cursor
