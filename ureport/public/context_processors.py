@@ -74,7 +74,10 @@ def set_fb_button_language(request):
     the language for load facebook sdk file
     """
     fb_button_language = settings.DEFAULT_LANGUAGE
-    language = request.org.language
+    try:
+        language = request.org.language
+    except:
+        language = fb_button_language
     fb_messenger_languages = getattr(settings, 'FACEBOOK_MESSENGER_LANGUAGES', {})
     fb_button_language = fb_messenger_languages.get(language) if language in fb_messenger_languages else fb_button_language
     return dict(fb_button_language=fb_button_language)
