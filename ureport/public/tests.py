@@ -210,6 +210,12 @@ class PublicTest(DashTest):
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['story_widget_url'])
 
+    def test_set_fb_button_language(self):
+        home_url = reverse('public.index')
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertTrue(response.context['fb_button_language'])
+
     @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
     @mock.patch('django.core.cache.cache.get')
     def test_index(self, mock_cache_get):

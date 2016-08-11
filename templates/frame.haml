@@ -34,6 +34,16 @@
     }
     @font-face {font-family: SharpSansBoldItalic;src: url('{{ STATIC_URL }}fonts/SharpSansNo1-BoldItalic.otf');}
 
+    .public-nav-ul .level1 .fb-messengermessageus {
+      margin-top: 52px;
+    }
+
+    @media (max-width: 768px){
+      .public-nav-ul .level1 .fb-messengermessageus {
+        margin-top: 5px;
+      }
+    }
+
   -block styles
     - if is_rtl_org
       - compress css
@@ -173,7 +183,7 @@
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+    js.src = "//connect.facebook.net/{{ fb_button_language }}/sdk.js#xfbml=1&version=v2.6";
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
@@ -377,6 +387,10 @@
                 %li.level1{ class:"{% active request 'join' %}"}
                   %a.primary-color{ href:"{% url 'public.join' %}"}
                     - trans "Join & Engage"
+
+                -if not is_iorg and not org|config:"is_global" and org|config:"facebook_page_id" and org|config:"facebook_app_id"
+                  %li.level1
+                    %div.fb-messengermessageus{ messenger_app_id:'{{ org|config:"facebook_app_id" }}', page_id:'{{ org|config:"facebook_page_id" }}', color:"blue", size:"large" }
 
                 -#%li.level1.dropdown
                 -#  %a.primary-color.dropdown-toggle{type:"button", data-toggle:"dropdown"}
