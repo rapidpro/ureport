@@ -214,6 +214,13 @@ class PublicTest(DashTest):
         home_url = reverse('public.index')
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertFalse(response.context['fb_button_language'])
+
+        self.nigeria.language = 'ar'
+        self.nigeria.save()
+
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['fb_button_language'])
 
     @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
