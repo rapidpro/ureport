@@ -1306,18 +1306,16 @@ class PollTest(DashTest):
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
 
     @patch('ureport.tests.TestBackend.pull_results')
-    def test_poll_pull_results(self, mock_pull_results):
+    @patch('ureport.polls.models.Poll.rebuild_poll_results_counts')
+    def test_poll_pull_results(self, mock_rebuild_counts, mock_pull_results):
         mock_pull_results.return_value = (1, 2, 3)
+        mock_rebuild_counts.return_value = "Rebuilt"
 
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
-        self.assertFalse(poll.has_synced)
         Poll.pull_results(poll.pk)
-
-        poll = Poll.objects.get(pk=poll.pk)
-        self.assertTrue(poll.has_synced)
-
         mock_pull_results.assert_called_once()
+        mock_rebuild_counts.assert_called_once()
 
 
 class PollQuestionTest(DashTest):
@@ -1657,7 +1655,16 @@ class PollResultsTest(DashTest):
                                                 ruleset=self.poll_question.ruleset_uuid, date=self.now,
                                                 contact='contact-uuid', completed=False)
 
+        self.poll.has_synced = False
+        self.poll.save()
+
+        poll = Poll.objects.get(pk=self.poll.pk)
+        self.assertFalse(poll.has_synced)
+
         self.poll.rebuild_poll_results_counts()
+
+        poll = Poll.objects.get(pk=self.poll.pk)
+        self.assertTrue(poll.has_synced)
 
         expected = dict()
         expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 1
