@@ -444,6 +444,9 @@ class RapidProBackend(BaseBackend):
                     fetch_start = time.time()
                     print "=" * 40
 
+                    if num_synced % 100000 == 0:
+                        poll.rebuild_poll_results_counts()
+
                 # update the time for this poll from which we fetch next time
                 cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
                           datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)

@@ -136,8 +136,6 @@ class Poll(SmartModel):
 
         poll.rebuild_poll_results_counts()
 
-        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
-
         return created, updated, ignored
 
     def delete_poll_results_counter(self):
@@ -241,12 +239,15 @@ class Poll(SmartModel):
                 # Delete existing counters and then create new counters
                 self.delete_poll_results_counter()
 
-                PollResultsCounter.objects.bulk_create(counters_to_insert)
+                new_objs = PollResultsCounter.objects.bulk_create(counters_to_insert)
                 print "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
 
                 start_update_cache = time.time()
                 self.update_questions_results_cache()
                 print "Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache)
+
+                if new_objs:
+                    Poll.objects.filter(org=self.org_id, flow_uuid=self.flow_uuid).update(has_synced=True)
 
     @classmethod
     def get_public_polls(cls, org):
