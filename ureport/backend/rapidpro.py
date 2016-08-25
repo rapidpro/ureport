@@ -298,9 +298,9 @@ class RapidProBackend(BaseBackend):
 
                 # ignore the TaskState time and use the time we stored in redis
                 now = timezone.now()
-                after = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), None)
 
-                pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (org.pk, poll.pk), None)
+                after, resume_cursor, pull_after_delete = poll.get_pull_cached_params()
+
                 if pull_after_delete is not None:
                     after = None
                     poll.delete_poll_results()
@@ -309,7 +309,7 @@ class RapidProBackend(BaseBackend):
                 print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
                 poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=now)
-                fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
+                fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=resume_cursor)
 
                 fetch_start = time.time()
                 for fetch in fetches:
@@ -352,7 +352,7 @@ class RapidProBackend(BaseBackend):
                         for temba_step in temba_run.steps:
                             ruleset_uuid = temba_step.node
                             category = temba_step.category
-                            text = temba_step.text
+                            text = temba_step.messages[0].text if temba_step.messages else ''
                             step_type = temba_step.type
 
                             if step_type != 'ruleset':
@@ -444,9 +444,23 @@ class RapidProBackend(BaseBackend):
                     fetch_start = time.time()
                     print "=" * 40
 
+                    if num_synced == 100000:
+                        poll.rebuild_poll_results_counts()
+                        cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid),
+                                  fetches.get_cursor(), None)
+
+                        print "Break pull rsults for poll#%d on org #%d in %ds, " \
+                              "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
+                                                                      num_updated, num_ignored)
+
+                        return num_created, num_updated, num_ignored
+
                 # update the time for this poll from which we fetch next time
                 cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
                           datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+
+                # clear the saved cursor
+                cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR)
 
                 # from django.db import connection as db_connection, reset_queries
                 # slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
