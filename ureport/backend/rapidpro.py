@@ -446,12 +446,15 @@ class RapidProBackend(BaseBackend):
 
                     if num_synced >= Poll.POLL_RESULTS_MAX_SYNC_RUNS:
                         poll.rebuild_poll_results_counts()
+                        cursor = fetches.get_cursor()
+
                         cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid),
-                                  fetches.get_cursor(), None)
+                                  cursor, None)
 
                         print "Break pull results for poll #%d on org #%d in %ds, " \
-                              "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
-                                                                      num_updated, num_ignored)
+                              "created %d, updated %d, ignored %. Before cursor %s" % (poll.pk, org.pk,
+                                                                                       time.time() - start, num_created,
+                                                                                       num_updated, num_ignored, cursor)
 
                         return num_created, num_updated, num_ignored
 
