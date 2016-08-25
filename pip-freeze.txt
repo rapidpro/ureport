@@ -6,7 +6,7 @@ celery==3.1.23
 celery-with-redis==3.0
 contextlib2==0.5.4
 coverage==3.7.1
--e git+https://github.com/rapidpro/dash.git@feaff4cc156c75253aa65fd4e97138e91dc85530#egg=dash-master
+-e git+https://github.com/rapidpro/dash.git@dd441f1a716dfc716020eb31744650c0f7c2450d#egg=dash-master
 dj-database-url==0.3.0
 Django==1.8.4
 django-appconf==1.0.1
