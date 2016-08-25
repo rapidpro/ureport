@@ -9,7 +9,7 @@ from datetime import timedelta
 from django.db import connection, reset_queries
 from django.test import override_settings
 from django.utils import timezone
-from mock import patch
+from mock import patch, PropertyMock
 
 from temba_client.v1.types import Boundary as TembaBoundary, Geometry as TembaGeometry
 from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact
@@ -1150,6 +1150,37 @@ class PerfTest(DashTest):
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, num_fetches * fetch_size * num_steps - 1))
+
+        redis_client.delete(key)
+
+        PollResult.objects.all().delete()
+
+        with patch('ureport.polls.models.Poll.rebuild_poll_results_counts') as mock_rebuild_counts:
+            with patch('ureport.polls.models.Poll.POLL_RESULTS_MAX_SYNC_RUNS', new_callable=PropertyMock) as mock_max_runs:
+                mock_max_runs.return_value = 300
+                mock_rebuild_counts.return_value = 'REBUILT'
+
+                mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+                num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+                # we fetched two pages
+                self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 2 * fetch_size * num_steps - 1))
+
+                mock_rebuild_counts.assert_called_with()
+
+                mock_max_runs.return_value = 200
+                redis_client.delete(key)
+
+                PollResult.objects.all().delete()
+
+                mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+                num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+                # we fetched one pages
+                self.assertEqual((num_created, num_updated, num_ignored), (1, 0, fetch_size * num_steps - 1))
+                mock_rebuild_counts.assert_called_with()
 
         mock_get_pull_cached_params.side_effect = [(now_date, None, None), (now_date, None, now_date)]
         with patch("ureport.polls.models.Poll.delete_poll_results") as mock_delete_poll_results:
