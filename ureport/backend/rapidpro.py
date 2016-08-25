@@ -452,9 +452,10 @@ class RapidProBackend(BaseBackend):
                                   cursor, None)
 
                         print "Break pull results for poll #%d on org #%d in %ds, " \
-                              "created %d, updated %d, ignored %. Before cursor %s" % (poll.pk, org.pk,
-                                                                                       time.time() - start, num_created,
-                                                                                       num_updated, num_ignored, cursor)
+                              "created %d, updated %d, ignored %d. Before cursor %s" % (poll.pk, org.pk,
+                                                                                        time.time() - start,
+                                                                                        num_created, num_updated,
+                                                                                        num_ignored, cursor)
 
                         return num_created, num_updated, num_ignored
 
