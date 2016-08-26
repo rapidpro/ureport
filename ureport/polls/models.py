@@ -83,6 +83,10 @@ class Poll(SmartModel):
 
     POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%s'
 
+    POLL_RESULTS_MAX_SYNC_RUNS = 100000
+
+    POLL_RESULTS_LAST_PULL_CURSOR = 'last:poll_pull_results_cursor:org:%d:poll:%s'
+
     POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = 'poll-results-pull-after-delete-flag:%s:%s'
 
     POLL_MOST_RESPONDED_REGIONS_CACHE_KEY = 'most-responded-regions:%s'
@@ -139,6 +143,15 @@ class Poll(SmartModel):
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
         return created, updated, ignored
+
+    def get_pull_cached_params(self):
+        after = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.org.pk, self.flow_uuid), None)
+
+        resume_cursor = cache.get(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.org.pk, self.flow_uuid), None)
+
+        pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org.pk, self.pk), None)
+
+        return after, resume_cursor, pull_after_delete
 
     def delete_poll_results_counter(self):
         from ureport.utils import chunk_list

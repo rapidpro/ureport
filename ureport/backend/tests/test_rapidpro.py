@@ -9,7 +9,7 @@ from datetime import timedelta
 from django.db import connection, reset_queries
 from django.test import override_settings
 from django.utils import timezone
-from mock import patch
+from mock import patch, PropertyMock
 
 from temba_client.v1.types import Boundary as TembaBoundary, Geometry as TembaGeometry
 from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact
@@ -666,7 +666,6 @@ class RapidProBackendTest(DashTest):
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
-
         PollResult.objects.all().delete()
         contact = Contact.objects.create(org=self.nigeria, uuid='C-001', gender='M', born=1990, state='R-LAGOS',
                                          district='R-OYO')
@@ -675,9 +674,16 @@ class RapidProBackendTest(DashTest):
         now = timezone.now()
         temba_run = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                     contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
-                                    steps=[TembaRun.Step.create(node='ruleset-uuid', text="We'll win today", value="win",
-                                                            category='Win', type='ruleset',
-                                                            arrived_on=now, left_on=now)],
+                                    steps=[TembaRun.Step.create(node='ruleset-uuid',
+                                                                messages=[
+                                                                    TembaRun.Step.MessageRef.create(
+                                                                        id='M-001',
+                                                                        text="We'll win today",
+                                                                        broadcast=None
+                                                                    )],
+                                                                value="win",
+                                                                category='Win', type='ruleset',
+                                                                arrived_on=now, left_on=now)],
                                     created_on=now, modified_on=now, exited_on=now,
                                     exit_type='completed')
 
@@ -700,17 +706,30 @@ class RapidProBackendTest(DashTest):
 
         temba_run_1 = TembaRun.create(id=1235, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-002', name='Davido'), responded=True,
-                                      steps=[TembaRun.Step.create(node='ruleset-uuid', text="I sing", value="sing",
-                                                              category='Sing', type='ruleset',
-                                                              arrived_on=now, left_on=now)],
+                                      steps=[TembaRun.Step.create(node='ruleset-uuid',
+                                                                  messages=[
+                                                                      TembaRun.Step.MessageRef.create(
+                                                                          id='M-001',
+                                                                          text="I sing",
+                                                                          broadcast=None
+                                                                      )],
+                                                                  value="sing",
+                                                                  category='Sing', type='ruleset',
+                                                                  arrived_on=now, left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
                                       exit_type='completed')
 
         temba_run_2 = TembaRun.create(id=1236, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-003', name='Lebron'), responded=True,
-                                      steps=[TembaRun.Step.create(node='ruleset-uuid', text="I play basketball",
-                                                              value="play", category='Play', type='ruleset',
-                                                              arrived_on=now, left_on=now)],
+                                      steps=[TembaRun.Step.create(node='ruleset-uuid',
+                                                                  messages=[
+                                                                      TembaRun.Step.MessageRef.create(
+                                                                          id='M-001',
+                                                                          text="I play basketball",
+                                                                          broadcast=None
+                                                                      )],
+                                                                  value="play", category='Play', type='ruleset',
+                                                                  arrived_on=now, left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
                                       exit_type='completed')
 
@@ -729,9 +748,15 @@ class RapidProBackendTest(DashTest):
 
         temba_run_3 = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
-                                      steps=[TembaRun.Step.create(node='ruleset-uuid', text="We'll celebrate today",
-                                                              value="celebrate", category='Party', type='ruleset',
-                                                              arrived_on=now + timedelta(minutes=1), left_on=now)],
+                                      steps=[TembaRun.Step.create(node='ruleset-uuid',
+                                                                  messages=[
+                                                                      TembaRun.Step.MessageRef.create(
+                                                                          id='M-001',
+                                                                          text="We'll celebrate today",
+                                                                          broadcast=None
+                                                                      )],
+                                                                  value="celebrate", category='Party', type='ruleset',
+                                                                  arrived_on=now + timedelta(minutes=1), left_on=now)],
                                       created_on=now, modified_on=now, exited_on=now,
                                       exit_type='completed')
 
@@ -783,9 +808,16 @@ class RapidProBackendTest(DashTest):
         now = timezone.now()
         temba_run = TembaRun.create(id=4321, flow=ObjectRef.create(uuid='flow-uuid-3', name="Flow 2"),
                                     contact=ObjectRef.create(uuid='C-021', name='Hyped'), responded=True,
-                                    steps=[TembaRun.Step.create(node='ruleset-uuid', text="Doing it now", value="win",
-                                                            category='Win', type='ruleset',
-                                                            arrived_on=now, left_on=now)],
+                                    steps=[TembaRun.Step.create(node='ruleset-uuid',
+                                                                messages=[
+                                                                    TembaRun.Step.MessageRef.create(
+                                                                        id='M-001',
+                                                                        text="Doing it now",
+                                                                        broadcast=None
+                                                                    )],
+                                                                value="win",
+                                                                category='Win', type='ruleset',
+                                                                arrived_on=now, left_on=now)],
                                     created_on=now, modified_on=now, exited_on=now,
                                     exit_type='completed')
 
@@ -853,9 +885,9 @@ class PerfTest(DashTest):
     @override_settings(DEBUG=True)
     @patch('dash.orgs.models.TembaClient2.get_runs')
     @patch('django.utils.timezone.now')
-    @patch('django.core.cache.cache.get')
-    def test_pull_results(self, mock_cache_get, mock_timezone_now, mock_get_runs):
-        mock_cache_get.return_value = None
+    @patch('ureport.polls.models.Poll.get_pull_cached_params')
+    def test_pull_results(self, mock_get_pull_cached_params, mock_timezone_now, mock_get_runs):
+        mock_get_pull_cached_params.return_value = (None, None, None)
 
         from django_redis import get_redis_connection
         redis_client = get_redis_connection()
@@ -888,11 +920,16 @@ class PerfTest(DashTest):
                     contact=ObjectRef.create(uuid='C-00%d' % num, name=names[num % len(names)]),
                     responded=True,
                     steps=[TembaRun.Step.create(node='ruleset-uuid-%d' % s,
-                                            text="Text %s" % s,
-                                            value="Value %s" % s,
-                                            category='Category %s' % s,
-                                            type='ruleset',
-                                            arrived_on=now, left_on=now)
+                                                messages=[
+                                                    TembaRun.Step.MessageRef.create(
+                                                        id='M-001',
+                                                        text="Text %s" % s,
+                                                        broadcast=None
+                                                    )],
+                                                value="Value %s" % s,
+                                                category='Category %s' % s,
+                                                type='ruleset',
+                                                arrived_on=now, left_on=now)
                            for s in range(0, num_steps)],
                     created_on=now,
                     modified_on=now,
@@ -938,11 +975,16 @@ class PerfTest(DashTest):
         for batch in active_fetches:
             for r in batch:
                 r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
-                                              text="Txt 0",
-                                              value="Val 0",
-                                              category='CAT 0',
-                                              type='ruleset',
-                                              arrived_on=now - timedelta(minutes=1), left_on=now)
+                                                  messages=[
+                                                      TembaRun.Step.MessageRef.create(
+                                                          id='M-001',
+                                                          text="Txt 0",
+                                                          broadcast=None
+                                                      )],
+                                                  value="Val 0",
+                                                  category='CAT 0',
+                                                  type='ruleset',
+                                                  arrived_on=now - timedelta(minutes=1), left_on=now)
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
@@ -965,11 +1007,16 @@ class PerfTest(DashTest):
         for batch in active_fetches:
             for r in batch:
                 r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
-                                              text="Txt 0",
-                                              value="Val 0",
-                                              category='CAT 0',
-                                              type='ruleset',
-                                              arrived_on=now + timedelta(minutes=1), left_on=now)
+                                                  messages=[
+                                                      TembaRun.Step.MessageRef.create(
+                                                          id='M-001',
+                                                          text="Txt 0",
+                                                          broadcast=None
+                                                      )],
+                                                  value="Val 0",
+                                                  category='CAT 0',
+                                                  type='ruleset',
+                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
@@ -993,11 +1040,16 @@ class PerfTest(DashTest):
         for batch in active_fetches:
             for r in batch:
                 r.steps[0] = TembaRun.Step.create(node='actionset-uuid-0',
-                                              text="What do you think?",
-                                              value="",
-                                              category='',
-                                              type='actionset',
-                                              arrived_on=now + timedelta(minutes=5), left_on=now)
+                                                  messages=[
+                                                      TembaRun.Step.MessageRef.create(
+                                                          id='M-001',
+                                                          text="What do you think?",
+                                                          broadcast=None
+                                                      )],
+                                                  value="",
+                                                  category='',
+                                                  type='actionset',
+                                                  arrived_on=now + timedelta(minutes=5), left_on=now)
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
@@ -1020,11 +1072,16 @@ class PerfTest(DashTest):
         for batch in active_fetches:
             for r in batch:
                 r.steps = [TembaRun.Step.create(node='ruleset-uuid-0',
-                                            text="T %s" % s ,
-                                            value="V %s" % s,
-                                            category='C %s' % s,
-                                            type='ruleset',
-                                            arrived_on=now + timedelta(minutes=1), left_on=now)
+                                                messages=[
+                                                    TembaRun.Step.MessageRef.create(
+                                                        id='M-001',
+                                                        text="T %s" % s,
+                                                        broadcast=None
+                                                    )],
+                                                value="V %s" % s,
+                                                category='C %s' % s,
+                                                type='ruleset',
+                                                arrived_on=now + timedelta(minutes=1), left_on=now)
                            for s in range(0, num_steps)]
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
@@ -1070,11 +1127,16 @@ class PerfTest(DashTest):
                     contact=ObjectRef.create(uuid='C-001', name='Will'),
                     responded=True,
                     steps=[TembaRun.Step.create(node='ruleset-uuid-0',
-                                            text="Text %s" % s,
-                                            value="Value %s" % s,
-                                            category='Category %s' % s,
-                                            type='ruleset',
-                                            arrived_on=now, left_on=now)
+                                                messages=[
+                                                    TembaRun.Step.MessageRef.create(
+                                                        id='M-001',
+                                                        text="Text %s" % s,
+                                                        broadcast=None
+                                                    )],
+                                                value="Value %s" % s,
+                                                category='Category %s' % s,
+                                                type='ruleset',
+                                                arrived_on=now, left_on=now)
                            for s in range(0, num_steps)],
                     created_on=now,
                     modified_on=now,
@@ -1089,7 +1151,38 @@ class PerfTest(DashTest):
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, num_fetches * fetch_size * num_steps - 1))
 
-        mock_cache_get.side_effect = [now_date, None, now_date, now_date]
+        redis_client.delete(key)
+
+        PollResult.objects.all().delete()
+
+        with patch('ureport.polls.models.Poll.rebuild_poll_results_counts') as mock_rebuild_counts:
+            with patch('ureport.polls.models.Poll.POLL_RESULTS_MAX_SYNC_RUNS', new_callable=PropertyMock) as mock_max_runs:
+                mock_max_runs.return_value = 300
+                mock_rebuild_counts.return_value = 'REBUILT'
+
+                mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+                num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+                # we fetched two pages
+                self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 2 * fetch_size * num_steps - 1))
+
+                mock_rebuild_counts.assert_called_with()
+
+                mock_max_runs.return_value = 200
+                redis_client.delete(key)
+
+                PollResult.objects.all().delete()
+
+                mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+                num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+                # we fetched one pages
+                self.assertEqual((num_created, num_updated, num_ignored), (1, 0, fetch_size * num_steps - 1))
+                mock_rebuild_counts.assert_called_with()
+
+        mock_get_pull_cached_params.side_effect = [(now_date, None, None), (now_date, None, now_date)]
         with patch("ureport.polls.models.Poll.delete_poll_results") as mock_delete_poll_results:
             mock_delete_poll_results.return_value = "Deleted"
 
