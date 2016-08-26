@@ -296,9 +296,9 @@ class RapidProBackend(BaseBackend):
             with r.lock(key):
                 client = self._get_client(org, 2)
 
-                # ignore the TaskState time and use the time we stored in redis
-                now = timezone.now()
+                sync_started_time = timezone.now()
 
+                # ignore the TaskState time and use the time we stored in redis
                 after, resume_cursor, pull_after_delete = poll.get_pull_cached_params()
 
                 if pull_after_delete is not None:
@@ -308,7 +308,7 @@ class RapidProBackend(BaseBackend):
                 start = time.time()
                 print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
-                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=now)
+                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=sync_started_time)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=resume_cursor)
 
                 fetch_start = time.time()
@@ -461,7 +461,7 @@ class RapidProBackend(BaseBackend):
 
                 # update the time for this poll from which we fetch next time
                 cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
-                          datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+                          datetime_to_json_date(sync_started_time.replace(tzinfo=pytz.utc)), None)
 
                 # clear the saved cursor
                 cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR)
