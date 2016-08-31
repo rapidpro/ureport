@@ -887,7 +887,7 @@ class PerfTest(DashTest):
     @patch('django.utils.timezone.now')
     @patch('ureport.polls.models.Poll.get_pull_cached_params')
     def test_pull_results(self, mock_get_pull_cached_params, mock_timezone_now, mock_get_runs):
-        mock_get_pull_cached_params.return_value = (None, None, None)
+        mock_get_pull_cached_params.return_value = (None, None, None, None, None)
 
         from django_redis import get_redis_connection
         redis_client = get_redis_connection()
@@ -1182,7 +1182,8 @@ class PerfTest(DashTest):
                 self.assertEqual((num_created, num_updated, num_ignored), (1, 0, fetch_size * num_steps - 1))
                 mock_rebuild_counts.assert_called_with()
 
-        mock_get_pull_cached_params.side_effect = [(now_date, None, None), (now_date, None, now_date)]
+        mock_get_pull_cached_params.side_effect = [(now_date, None, None, None, None),
+                                                   (now_date, None, None, None, now_date)]
         with patch("ureport.polls.models.Poll.delete_poll_results") as mock_delete_poll_results:
             mock_delete_poll_results.return_value = "Deleted"
 

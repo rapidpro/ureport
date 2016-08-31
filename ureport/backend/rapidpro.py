@@ -15,7 +15,7 @@ from django_redis import get_redis_connection
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollResult, Poll, PollResultsCounter
-from ureport.utils import datetime_to_json_date
+from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from . import BaseBackend
 
 
@@ -299,7 +299,14 @@ class RapidProBackend(BaseBackend):
                 sync_started_time = timezone.now()
 
                 # ignore the TaskState time and use the time we stored in redis
-                after, resume_cursor, pull_after_delete = poll.get_pull_cached_params()
+                after, before, latest_synced_obj_time, resume_cursor, pull_after_delete = poll.get_pull_cached_params()
+
+                update_latest_time = False
+
+                if resume_cursor is None:
+                    before = timezone.now()
+                    after = latest_synced_obj_time
+                    update_latest_time = True
 
                 if pull_after_delete is not None:
                     after = None
@@ -308,7 +315,7 @@ class RapidProBackend(BaseBackend):
                 start = time.time()
                 print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
-                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=sync_started_time)
+                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=before)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=resume_cursor)
 
                 fetch_start = time.time()
@@ -331,6 +338,10 @@ class RapidProBackend(BaseBackend):
                     poll_results_to_save_map = defaultdict(dict)
 
                     for temba_run in fetch:
+
+                        if update_latest_time and (latest_synced_obj_time is None or temba_run.modified_on > json_date_to_datetime(latest_synced_obj_time)):
+                            latest_synced_obj_time = datetime_to_json_date(temba_run.modified_on.replace(tzinfo=pytz.utc))
+
                         flow_uuid = temba_run.flow.uuid
                         contact_uuid = temba_run.contact.uuid
                         completed = temba_run.exit_type == 'completed'
@@ -448,8 +459,11 @@ class RapidProBackend(BaseBackend):
                         poll.rebuild_poll_results_counts()
                         cursor = fetches.get_cursor()
 
-                        cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid),
-                                  cursor, None)
+                        cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid), cursor, None)
+
+                        cache.set(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (org.pk, poll.flow_uuid), after, None)
+
+                        cache.set(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (org.pk, poll.flow_uuid), before, None)
 
                         print "Break pull results for poll #%d on org #%d in %ds, " \
                               "created %d, updated %d, ignored %d. Before cursor %s" % (poll.pk, org.pk,
@@ -461,7 +475,7 @@ class RapidProBackend(BaseBackend):
 
                 # update the time for this poll from which we fetch next time
                 cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
-                          datetime_to_json_date(sync_started_time.replace(tzinfo=pytz.utc)), None)
+                          latest_synced_obj_time, None)
 
                 # clear the saved cursor
                 cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR)
