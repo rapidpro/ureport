@@ -1302,7 +1302,7 @@ class PerfTest(DashTest):
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid),
-                          '',
+                          'cursor-string',
                           None),
 
                          (Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
