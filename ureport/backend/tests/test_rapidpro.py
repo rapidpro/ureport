@@ -1275,7 +1275,7 @@ class PerfTest(DashTest):
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid),
-                          '',
+                          'cursor-string',
                           None),
 
                          (Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
@@ -1297,7 +1297,7 @@ class PerfTest(DashTest):
         mock_max_runs.return_value = 10000
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
         mock_get_pull_cached_params.side_effect = [(None, '2015-04-08T12:48:44.320Z', None, '2015-04-07T12:48:44.320Z',
-                                                    'cursor', None)]
+                                                    'cursor-string', None)]
 
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
