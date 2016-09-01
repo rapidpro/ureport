@@ -1340,3 +1340,18 @@ class PerfTest(DashTest):
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
         mock_cache_delete.assert_called_once_with(
             Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid))
+        mock_cache_delete.reset_mock()
+        mock_cache_set.reset_mock()
+
+        mock_get_pull_cached_params.side_effect = [(None, None, '2015-04-05T12:48:44.320Z', None, None, None)]
+        mock_get_runs.side_effect = [MockClientQuery(*[])]
+
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          '2015-04-05T12:48:44.320Z',
+                          None)]
+
+        self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
+        mock_cache_delete.assert_called_once_with(
+            Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid))
