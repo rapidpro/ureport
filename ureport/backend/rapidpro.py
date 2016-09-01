@@ -296,17 +296,13 @@ class RapidProBackend(BaseBackend):
             with r.lock(key):
                 client = self._get_client(org, 2)
 
-                sync_started_time = timezone.now()
-
                 # ignore the TaskState time and use the time we stored in redis
-                after, before, latest_synced_obj_time, resume_cursor, pull_after_delete = poll.get_pull_cached_params()
-
-                update_latest_time = False
+                (after, before, latest_synced_obj_time,
+                 batches_latest, resume_cursor, pull_after_delete) = poll.get_pull_cached_params()
 
                 if resume_cursor is None:
-                    before = timezone.now()
+                    before = datetime_to_json_date(timezone.now())
                     after = latest_synced_obj_time
-                    update_latest_time = True
 
                 if pull_after_delete is not None:
                     after = None
@@ -339,8 +335,8 @@ class RapidProBackend(BaseBackend):
 
                     for temba_run in fetch:
 
-                        if update_latest_time and (latest_synced_obj_time is None or temba_run.modified_on > json_date_to_datetime(latest_synced_obj_time)):
-                            latest_synced_obj_time = datetime_to_json_date(temba_run.modified_on.replace(tzinfo=pytz.utc))
+                        if batches_latest is None or temba_run.modified_on > json_date_to_datetime(batches_latest):
+                            batches_latest = datetime_to_json_date(temba_run.modified_on.replace(tzinfo=pytz.utc))
 
                         flow_uuid = temba_run.flow.uuid
                         contact_uuid = temba_run.contact.uuid
@@ -461,24 +457,33 @@ class RapidProBackend(BaseBackend):
 
                         cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid), cursor, None)
 
-                        cache.set(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (org.pk, poll.flow_uuid), after, None)
+                        cache.set(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (org.pk, poll.flow_uuid),
+                                  after, None)
 
-                        cache.set(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (org.pk, poll.flow_uuid), before, None)
+                        cache.set(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (org.pk, poll.flow_uuid),
+                                  before, None)
 
-                        print "Break pull results for poll #%d on org #%d in %ds, " \
-                              "created %d, updated %d, ignored %d. Before cursor %s" % (poll.pk, org.pk,
-                                                                                        time.time() - start,
-                                                                                        num_created, num_updated,
-                                                                                        num_ignored, cursor)
+                        cache.set(Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (org.pk, poll.flow_uuid),
+                                  batches_latest, None)
+
+                        print "Break pull results for poll #%d on org #%d in %ds, "\
+                              " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"\
+                              " Objects: created %d, updated %d, ignored %d. " \
+                              "Before cursor %s" % (poll.pk, org.pk, time.time() - start, after, before, batches_latest,
+                                                    latest_synced_obj_time, num_created, num_updated, num_ignored,
+                                                    cursor)
 
                         return num_created, num_updated, num_ignored
+
+                if (latest_synced_obj_time is None and batches_latest is not None) or json_date_to_datetime(latest_synced_obj_time) <= json_date_to_datetime(batches_latest):
+                    latest_synced_obj_time = batches_latest
 
                 # update the time for this poll from which we fetch next time
                 cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
                           latest_synced_obj_time, None)
 
                 # clear the saved cursor
-                cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR)
+                cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid))
 
                 # from django.db import connection as db_connection, reset_queries
                 # slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
@@ -489,6 +494,8 @@ class RapidProBackend(BaseBackend):
                 # reset_queries()
 
                 print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
-                      "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
-                                                              num_updated, num_ignored)
+                      "Times: sync_latest= %s," \
+                      "Objects: created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start,
+                                                                       latest_synced_obj_time,
+                                                                       num_created, num_updated, num_ignored)
         return num_created, num_updated, num_ignored

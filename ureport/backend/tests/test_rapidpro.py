@@ -23,7 +23,7 @@ from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollResult, Poll
 from ureport.tests import DashTest
-from ureport.utils import json_date_to_datetime
+from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 
 class FieldSyncerTest(DashTest):
@@ -693,7 +693,7 @@ class RapidProBackendTest(DashTest):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
-        mock_get_runs.assert_called_with(flow='flow-uuid', after=None, before=now)
+        mock_get_runs.assert_called_with(flow='flow-uuid', after=None, before=datetime_to_json_date(now))
 
         poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
         self.assertEqual(poll_result.state, 'R-LAGOS')
@@ -827,7 +827,7 @@ class RapidProBackendTest(DashTest):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
-        mock_get_runs.assert_called_with(flow='flow-uuid-3', after=None, before=now)
+        mock_get_runs.assert_called_with(flow='flow-uuid-3', after=None, before=datetime_to_json_date(now))
 
         poll_result = PollResult.objects.filter(flow='flow-uuid-3', ruleset='ruleset-uuid', contact='C-021').first()
         self.assertEqual(poll_result.ward, 'R-IKEJA')
@@ -887,7 +887,7 @@ class PerfTest(DashTest):
     @patch('django.utils.timezone.now')
     @patch('ureport.polls.models.Poll.get_pull_cached_params')
     def test_pull_results(self, mock_get_pull_cached_params, mock_timezone_now, mock_get_runs):
-        mock_get_pull_cached_params.return_value = (None, None, None, None, None)
+        mock_get_pull_cached_params.return_value = (None, None, None, None, None, None)
 
         from django_redis import get_redis_connection
         redis_client = get_redis_connection()
@@ -944,7 +944,7 @@ class PerfTest(DashTest):
 
         num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
-        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before=now)
+        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before=datetime_to_json_date(now))
 
         self.assertEqual((num_created, num_updated, num_ignored), (num_fetches * fetch_size * num_steps, 0, 0))
 
@@ -1182,8 +1182,8 @@ class PerfTest(DashTest):
                 self.assertEqual((num_created, num_updated, num_ignored), (1, 0, fetch_size * num_steps - 1))
                 mock_rebuild_counts.assert_called_with()
 
-        mock_get_pull_cached_params.side_effect = [(now_date, None, None, None, None),
-                                                   (now_date, None, None, None, now_date)]
+        mock_get_pull_cached_params.side_effect = [(now_date, None, None, None, None, None),
+                                                   (now_date, None, None, None, None, now_date)]
         with patch("ureport.polls.models.Poll.delete_poll_results") as mock_delete_poll_results:
             mock_delete_poll_results.return_value = "Deleted"
 
@@ -1200,3 +1200,143 @@ class PerfTest(DashTest):
             num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
 
             mock_delete_poll_results.assert_called_with()
+
+    def get_mock_args_list(self, mock_obj):
+        args_list = []
+        for elt in mock_obj.call_args_list:
+            args_list.append(elt[0])
+
+        return args_list
+
+    @override_settings(DEBUG=True)
+    @patch('django.core.cache.cache.delete')
+    @patch('django.core.cache.cache.set')
+    @patch('dash.orgs.models.TembaClient2.get_runs')
+    @patch('django.utils.timezone.now')
+    @patch('ureport.polls.models.Poll.get_pull_cached_params')
+    @patch('ureport.polls.models.Poll.rebuild_poll_results_counts')
+    @patch('ureport.polls.models.Poll.POLL_RESULTS_MAX_SYNC_RUNS', new_callable=PropertyMock)
+    def test_pull_results_batching(self, mock_max_runs, mock_rebuild_counts, mock_get_pull_cached_params,
+                                   mock_timezone_now, mock_get_runs, mock_cache_set, mock_cache_delete):
+
+        mock_max_runs.return_value = 300
+        mock_rebuild_counts.return_value = 'REBUILT'
+        mock_get_pull_cached_params.side_effect = [(None, None, None, None, None, None)]
+
+        now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
+        day_ago = now_date - timedelta(hours=24)
+        two_days_ago = now_date - timedelta(hours=24)
+
+        mock_timezone_now.return_value = now_date
+
+        PollResult.objects.all().delete()
+
+        poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
+
+        now = timezone.now()
+
+        fetch_size = 250
+        num_fetches = 4
+        num_steps = 5
+        names = ["Ann", "Bob", "Cat"]
+        dates = [day_ago, day_ago, two_days_ago, two_days_ago]
+
+        active_fetches = []
+        for b in range(0, num_fetches):
+            batch = []
+            for r in range(0, fetch_size):
+                num = b * fetch_size + r
+                batch.append(TembaRun.create(
+                    id=num,
+                    flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                    contact=ObjectRef.create(uuid='C-00%d' % num, name=names[num % len(names)]),
+                    responded=True,
+                    steps=[TembaRun.Step.create(node='ruleset-uuid-%d' % s,
+                                                messages=[
+                                                    TembaRun.Step.MessageRef.create(
+                                                        id='M-001',
+                                                        text="Text %s" % s,
+                                                        broadcast=None
+                                                    )],
+                                                value="Value %s" % s,
+                                                category='Category %s' % s,
+                                                type='ruleset',
+                                                arrived_on=now, left_on=now)
+                           for s in range(0, num_steps)],
+                    created_on=dates[b],
+                    modified_on=dates[b],
+                    exited_on=now,
+                    exit_type=''))
+
+            active_fetches.append(batch)
+
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid),
+                          '',
+                          None),
+
+                         (Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          None,
+                          None),
+
+                         (Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          '2015-04-08T12:48:44.320Z',
+                          None),
+
+                         (Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          '2015-04-07T12:48:44.320Z',
+                          None)
+                         ]
+
+        self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
+        self.assertFalse(mock_cache_delete.called)
+
+        mock_max_runs.return_value = 10000
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+        mock_get_pull_cached_params.side_effect = [(None, '2015-04-08T12:48:44.320Z', None, '2015-04-07T12:48:44.320Z',
+                                                    'cursor', None)]
+
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid),
+                          '',
+                          None),
+
+                         (Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          None,
+                          None),
+
+                         (Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          '2015-04-08T12:48:44.320Z',
+                          None),
+
+                         (Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          '2015-04-07T12:48:44.320Z',
+                          None),
+
+                         (Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          '2015-04-07T12:48:44.320Z',
+                          None)
+                         ]
+
+        self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
+        mock_cache_delete.assert_called_once_with(
+            Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid))
+        mock_cache_delete.reset_mock()
+
+        mock_cache_set.reset_mock()
+        mock_max_runs.return_value = 10000
+        mock_get_pull_cached_params.side_effect = [(None, None, None, None, None, None)]
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          '2015-04-07T12:48:44.320Z',
+                          None)]
+
+        self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
+        mock_cache_delete.assert_called_once_with(
+            Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid))
