@@ -475,7 +475,7 @@ class RapidProBackend(BaseBackend):
 
                         return num_created, num_updated, num_ignored
 
-                if (latest_synced_obj_time is None and batches_latest is not None) or json_date_to_datetime(latest_synced_obj_time) <= json_date_to_datetime(batches_latest):
+                if batches_latest is not None and (latest_synced_obj_time is None or json_date_to_datetime(latest_synced_obj_time) <= json_date_to_datetime(batches_latest)):
                     latest_synced_obj_time = batches_latest
 
                 # update the time for this poll from which we fetch next time
