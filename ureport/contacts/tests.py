@@ -31,6 +31,18 @@ class ContactFieldTest(DashTest):
         # try creating contact from them
         ContactField.objects.create(**kwargs)
 
+    def test_update_or_create_from_temba(self):
+        temba_contact_field = TembaContactField.create(key='foo', label='Bar', value_type='T')
+
+        field = ContactField.update_or_create_from_temba(self.nigeria, temba_contact_field)
+
+        self.assertEqual(field.key, 'foo')
+        self.assertEqual(field.label, 'Bar')
+
+        updated_field = ContactField.update_or_create_from_temba(self.nigeria, temba_contact_field)
+
+        self.assertEqual(field.pk, updated_field.pk)
+
 
 class ContactTest(DashTest):
     def setUp(self):
@@ -138,6 +150,22 @@ class ContactTest(DashTest):
 
         # try creating contact from them
         Contact.objects.create(**kwargs)
+
+    def test_update_or_create_from_temba(self):
+        temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
+                                            groups=['G-001', 'G-007'],
+                                            fields={'registration_date': None, 'state': None,
+                                                    'lga': None, 'occupation': None, 'born': None,
+                                                    'gender': None},
+                                            language='eng')
+
+        contact = Contact.update_or_create_from_temba(self.nigeria, temba_contact)
+
+        self.assertEqual(contact.uuid, 'C-006')
+
+        updated_contact = Contact.update_or_create_from_temba(self.nigeria, temba_contact)
+
+        self.assertEqual(contact.pk, updated_contact.pk)
 
     def test_contact_ward_field(self):
 

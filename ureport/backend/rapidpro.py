@@ -15,7 +15,7 @@ from django_redis import get_redis_connection
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollResult, Poll, PollResultsCounter
-from ureport.utils import datetime_to_json_date
+from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from . import BaseBackend
 
 
@@ -297,10 +297,13 @@ class RapidProBackend(BaseBackend):
                 client = self._get_client(org, 2)
 
                 # ignore the TaskState time and use the time we stored in redis
-                now = timezone.now()
-                after = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), None)
+                (after, before, latest_synced_obj_time,
+                 batches_latest, resume_cursor, pull_after_delete) = poll.get_pull_cached_params()
 
-                pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (org.pk, poll.pk), None)
+                if resume_cursor is None:
+                    before = datetime_to_json_date(timezone.now())
+                    after = latest_synced_obj_time
+
                 if pull_after_delete is not None:
                     after = None
                     poll.delete_poll_results()
@@ -308,8 +311,8 @@ class RapidProBackend(BaseBackend):
                 start = time.time()
                 print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
-                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=now)
-                fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
+                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=before)
+                fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=resume_cursor)
 
                 fetch_start = time.time()
                 for fetch in fetches:
@@ -331,6 +334,10 @@ class RapidProBackend(BaseBackend):
                     poll_results_to_save_map = defaultdict(dict)
 
                     for temba_run in fetch:
+
+                        if batches_latest is None or temba_run.modified_on > json_date_to_datetime(batches_latest):
+                            batches_latest = datetime_to_json_date(temba_run.modified_on.replace(tzinfo=pytz.utc))
+
                         flow_uuid = temba_run.flow.uuid
                         contact_uuid = temba_run.contact.uuid
                         completed = temba_run.exit_type == 'completed'
@@ -352,7 +359,7 @@ class RapidProBackend(BaseBackend):
                         for temba_step in temba_run.steps:
                             ruleset_uuid = temba_step.node
                             category = temba_step.category
-                            text = temba_step.text
+                            text = temba_step.messages[0].text if temba_step.messages else ''
                             step_type = temba_step.type
 
                             if step_type != 'ruleset':
@@ -444,9 +451,39 @@ class RapidProBackend(BaseBackend):
                     fetch_start = time.time()
                     print "=" * 40
 
+                    if num_synced >= Poll.POLL_RESULTS_MAX_SYNC_RUNS:
+                        poll.rebuild_poll_results_counts()
+                        cursor = fetches.get_cursor()
+
+                        cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid), cursor, None)
+
+                        cache.set(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (org.pk, poll.flow_uuid),
+                                  after, None)
+
+                        cache.set(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (org.pk, poll.flow_uuid),
+                                  before, None)
+
+                        cache.set(Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (org.pk, poll.flow_uuid),
+                                  batches_latest, None)
+
+                        print "Break pull results for poll #%d on org #%d in %ds, "\
+                              " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"\
+                              " Objects: created %d, updated %d, ignored %d. " \
+                              "Before cursor %s" % (poll.pk, org.pk, time.time() - start, after, before, batches_latest,
+                                                    latest_synced_obj_time, num_created, num_updated, num_ignored,
+                                                    cursor)
+
+                        return num_created, num_updated, num_ignored
+
+                if batches_latest is not None and (latest_synced_obj_time is None or json_date_to_datetime(latest_synced_obj_time) <= json_date_to_datetime(batches_latest)):
+                    latest_synced_obj_time = batches_latest
+
                 # update the time for this poll from which we fetch next time
                 cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
-                          datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
+                          latest_synced_obj_time, None)
+
+                # clear the saved cursor
+                cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid))
 
                 # from django.db import connection as db_connection, reset_queries
                 # slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
@@ -457,6 +494,8 @@ class RapidProBackend(BaseBackend):
                 # reset_queries()
 
                 print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
-                      "created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start, num_created,
-                                                              num_updated, num_ignored)
+                      "Times: sync_latest= %s," \
+                      "Objects: created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start,
+                                                                       latest_synced_obj_time,
+                                                                       num_created, num_updated, num_ignored)
         return num_created, num_updated, num_ignored
