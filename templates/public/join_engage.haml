@@ -42,7 +42,11 @@
                   {{ join_step.title|upper }}
                 .join-image
                   {% thumbnail join_step.image "485" crop="top" as im %}
-                  %img{src:"{{ im.url }}", width:"100%"}
+                  -if join_step.link
+                    %a{href:"{{ join_step.link }}", target:"_blank"}
+                      %img{src:"{{ im.url }}", width:"100%"}
+                  -else
+                    %img{src:"{{ im.url }}", width:"100%"}
                   {% endthumbnail %}
                 .join-text
                   {{ join_step.content }}
