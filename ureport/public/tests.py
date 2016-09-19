@@ -347,6 +347,32 @@ class PublicTest(DashTest):
         self.assertTrue(response.context['other_stories'])
         self.assertTrue(story3 in response.context['other_stories'])
 
+        story4 = Story.objects.create(title="story 4",
+                                      featured=True,
+                                      content="body contents 4",
+                                      org=self.uganda,
+                                      created_by=self.admin,
+                                      modified_by=self.admin)
+
+        response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEquals(response.context['org'], self.uganda)
+
+        self.assertTrue(response.context['stories'])
+        self.assertEqual(response.context['stories'][0].pk, story4.pk)
+        self.assertEqual(response.context['stories'][1].pk, story1.pk)
+
+        story4.featured = False
+        story4.save()
+
+        response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEquals(response.context['org'], self.uganda)
+
+        self.assertTrue(response.context['other_stories'])
+        self.assertEqual(response.context['other_stories'][0].pk, story4.pk)
+        self.assertEqual(response.context['other_stories'][1].pk, story3.pk)
+
         video1 = Video.objects.create(title='video 1',
                                       video_id='video_1',
                                       category=self.health_uganda,

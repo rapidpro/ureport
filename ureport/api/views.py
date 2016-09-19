@@ -136,6 +136,10 @@ class PollList(BaseListAPIView):
                     "flow_uuid": "a497ba0f-6b58-4bed-ba52-05c3f40403e2",
                     "title": "Food Poll",
                     "org": 1,
+                    "category": {
+                        "image_url": null,
+                        "name": "Education"
+                     },
                     "questions": [
                         {
                             "id": 14,
@@ -268,6 +272,10 @@ class PollDetails(RetrieveAPIView):
             "flow_uuid": "a497ba0f-6b58-4bed-ba52-05c3f40403e2",
             "title": "Food Poll",
             "org": 1,
+            "category": {
+                "image_url": null,
+                "name": "Education"
+            },
             "questions": [
                 {
                     "id": 14,
