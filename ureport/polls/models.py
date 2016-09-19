@@ -274,6 +274,8 @@ class Poll(SmartModel):
                 self.update_questions_results_cache()
                 print "Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache)
 
+                print "Poll responses counts for poll #%d on org #%d are %s responded out of %s polled" % (poll_id, org_id, self.responded_runs(), self.runs())
+
     @classmethod
     def get_public_polls(cls, org):
         return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True)

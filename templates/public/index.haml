@@ -506,10 +506,6 @@
       {% endif%}
     }
 
-    .hero-container.global {
-      background-image:  url('/sitestatic/img/landing_bg.jpg');
-    }
-
    .hero-small-background {
       {% if latest_poll %}
       {% thumbnail latest_poll.get_category_image "768x508" crop="top" as im %}
@@ -763,7 +759,7 @@
                      }
                  }
              },
-             series: [ {name: 'Age' , data: {{ age_stats|safe }} } ]
+             series: [ {name: 'Age' , data: data } ]
            });
          });
        });
