@@ -40,6 +40,7 @@ EMAIL_USE_TLS = True
 
 EMPTY_SUBDOMAIN_HOST = 'http://localhost:8000'
 SITE_API_HOST = 'http://localhost:8001'
+SITE_API_USER_AGENT = 'ureport/0.1'
 HOSTNAME = 'localhost:8000'
 SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 SITE_CHOOSER_URL_NAME = 'public.home'
