@@ -171,7 +171,7 @@ class SetOrgMiddlewareTest(DashTest):
 
         self.middleware = SetOrgMiddleware()
         self.request = Mock(spec=HttpRequest)
-        self.request.user = User.objects.get(pk=-1)
+        self.request.user = User.objects.get(username='AnonymousUser')
         self.request.path = '/'
         self.request.get_host.return_value="ureport.io"
         self.request.META = dict(HTTP_HOST=None)
