@@ -556,6 +556,12 @@ PREVIOUS_ORG_SITES = [
         is_static=True,
     ),
     dict(
+        name="Thailand",
+        host="http://thailand.ureport.in",
+        flag="flag_th.png",
+        is_static=True,
+    ),
+    dict(
         name='United Kingdom',
         host="http://uk.ureport.in",
         flag="flag_uk.png",
