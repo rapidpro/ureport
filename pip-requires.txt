@@ -33,4 +33,4 @@ pycountry
 django-countries
 GitPython
 regex
--e git+https://github.com/norkans7/python-stop-words.git@#egg=stop-words-master
+-e git+https://github.com/norkans7/python-stop-words.git#egg=stop-words-master
