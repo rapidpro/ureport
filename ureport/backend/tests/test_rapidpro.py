@@ -1036,6 +1036,95 @@ class PerfTest(DashTest):
 
         reset_queries()
 
+        # Test we update the existing map correctly
+        for batch in active_fetches:
+            for r in batch:
+                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
+                                                  messages=[
+                                                      TembaRun.Step.MessageRef.create(
+                                                          id='M-001',
+                                                          text="Txt 0",
+                                                          broadcast=None
+                                                      )],
+                                                  value="Val 0",
+                                                  category='CAT 1',
+                                                  type='ruleset',
+                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
+
+                r.steps[1] = TembaRun.Step.create(node='ruleset-uuid-0',
+                                                  messages=[
+                                                       TembaRun.Step.MessageRef.create(
+                                                           id='M-001',
+                                                           text="Txt 0",
+                                                           broadcast=None
+                                                       )],
+                                                  value="Val 0",
+                                                  category='CAT 1',
+                                                  type='ruleset',
+                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
+
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+        start = time.time()
+
+        redis_client.delete(key)
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size,
+                                                                   num_fetches * fetch_size * (num_steps - 1)))
+
+        slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        for q in slowest_queries:
+            print "=" * 60
+            print "\n\n\n"
+            print "%s -- %s" % (q['time'], q['sql'])
+
+        reset_queries()
+
+        for batch in active_fetches:
+            for r in batch:
+                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
+                                                  messages=[
+                                                      TembaRun.Step.MessageRef.create(
+                                                          id='M-001',
+                                                          text="Txt 0",
+                                                          broadcast=None
+                                                      )],
+                                                  value="Val 0",
+                                                  category='CAT 2',
+                                                  type='ruleset',
+                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
+
+                r.steps[1] = TembaRun.Step.create(node='ruleset-uuid-0',
+                                                  messages=[
+                                                       TembaRun.Step.MessageRef.create(
+                                                           id='M-001',
+                                                           text="Txt 0",
+                                                           broadcast=None
+                                                       )],
+                                                  value="Val 0",
+                                                  category='CAT 0',
+                                                  type='ruleset',
+                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
+
+        mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
+
+        start = time.time()
+
+        redis_client.delete(key)
+        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size * 2,
+                                                                   num_fetches * fetch_size * (num_steps - 2)))
+
+        slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
+        for q in slowest_queries:
+            print "=" * 60
+            print "\n\n\n"
+            print "%s -- %s" % (q['time'], q['sql'])
+
+        reset_queries()
+
         # simulate ignoring actionset nodes
         for batch in active_fetches:
             for r in batch:
