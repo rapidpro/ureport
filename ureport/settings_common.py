@@ -497,7 +497,7 @@ CELERYBEAT_SCHEDULE = {
     },
     'results-pull-main-poll':  {
         'task': 'dash.orgs.tasks.trigger_org_task',
-        'schedule': crontab(minute=[5, 15, 25, 35, 45, 55]),
+        'schedule': crontab(minute=[5, 25, 45]),
         'args': ('ureport.polls.tasks.pull_results_main_poll', 'sync')
     },
     'results-pull-brick-polls':  {
