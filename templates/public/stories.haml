@@ -51,7 +51,7 @@
 
         .row
           -for category in categories
-            .col-md-3
+            .col-md-4{style: "white-space: nowrap; overflow: hidden;"}
               %input.category{ type:"radio", name:"category", value:"{{category.id}}", id:"category-{{category.id}}"}=
               %label{ for:"category-{{category.id}}" }= category.name
   .row
@@ -133,3 +133,6 @@
 
     }
 
+    .featured-story-teaser img {
+      max-width: 100%;
+    }
