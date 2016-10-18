@@ -1,5 +1,7 @@
-@serif-family: MontserratBold, "Times New Roman", Times, serif;
-@sans-family: OpenSansRegular, Arial, Helvetica, sans-serif;
+@headline-font: MontserratBold, Arial, Helvetica, sans-serif;
+@text-font: RobotoSlab, "Times New Roman", Times, serif;
+@small-text-font: DroidSerif, "Times New Roman", Times, serif;
+
 @font-color: #000;
 
 body {
@@ -7,11 +9,11 @@ body {
   color: @font-color;
   font-size: 14pt;
   line-height: 110%;
-  font-family: @sans-family;
+  font-family: @text-font;
 }
 
 #ureport-admin-navbar {
-  font-family: sans-serif;
+  
   background-color: #000;
   min-height: 35px;
   margin-bottom: 0px;
@@ -27,7 +29,7 @@ body {
   -moz-box-shadow: none;
   box-shadow: none;
 
-  font-family: sans-serif;
+  
   font-size: 10pt;
 }
 
@@ -281,7 +283,7 @@ body {
   .hero-info {
     color: #fff;
     line-height: 120%;
-    font-family: @serif-family;
+    
     font-style: italic;
     margin-top: 10px;
   }
@@ -379,7 +381,7 @@ body {
 
     color: #000;
     font-style: normal;
-    font-family: @sans-family;
+    
     text-align: center;
     padding-bottom: 4px;
     width: 100%;
@@ -387,7 +389,7 @@ body {
 
   .region-registered {
     vertical-align: bottom;
-    font-family: @serif-family;
+    
     font-style: italic;
     font-size: .5em;
     line-height: 110%;
@@ -420,7 +422,7 @@ body {
   }
 
   .hr-header {
-    font-family: @sans-family;
+    
     font-size: .65em;
     margin-bottom: 5px;
     border-bottom: 1px solid;
@@ -441,12 +443,12 @@ body {
     padding-bottom: 20px;
     font-size: 1em;
     font-style: italic;
-    font-family: @serif-family;
+    
   }
 
   .stats-small {
     font-size: .75em;
-    font-family: @serif-family;
+    
   }
 }
 
@@ -511,7 +513,7 @@ body {
 }
 
 .featured-story-teaser {
-  font-family: @serif-family;
+  
   height: 70px;
   font-size: .8em;
   line-height: 150%;
@@ -529,7 +531,7 @@ body {
   padding-right: 10px;
   text-align: right;
   font-size: .75em;
-  font-family: @sans-family;
+  
 
   &:hover {
     text-decoration: none;
@@ -541,11 +543,11 @@ body {
   font-size: 1.5em;
   line-height: 120%;
   margin-bottom: 10px;
-  font-family: @sans-family;
+  
 }
 
 .most-active-regions {
-  font-family: @serif-family;
+  
   font-style: italic;
 }
 
@@ -556,7 +558,7 @@ body {
   line-height: 100%;
   vertical-align: bottom;
   text-align: center;
-  font-family: @sans-family;
+  
 }
 
 table.gender {
@@ -578,7 +580,7 @@ table.gender {
 
   .summary-gender {
     font-size: .60em;
-    font-family: @serif-family;
+    
     font-style: italic;
     text-align: center;
   }
@@ -598,7 +600,7 @@ table.ureporter-gender {
 
   .summary-gender {
    font-size: .60em;
-   font-family: @serif-family;
+   
    font-style: italic;
    text-align: center;
   }
@@ -621,7 +623,7 @@ h1 {
   line-height: 40px;
   margin-top: 10px;
   margin-bottom: 0px;
-  font-family: @sans-family;
+  
 }
 .subsection {
   display: table;
@@ -633,7 +635,7 @@ h1 {
 }
 
 .subsection-content {
-  font-family: @serif-family;
+  
   font-style: italic;
   line-height: 150%;
   font-size: .8em;
@@ -665,7 +667,7 @@ h1 {
 
 .mission-text {
   text-align: center;
-  font-family: @serif-family;
+  
   margin-right: 5%;
   font-size: .8em;
   line-height: 150%;
@@ -680,7 +682,7 @@ h1 {
   padding:5px 20px;
 
   ul {
-    font-family: @serif-family;
+    
     padding-left: 20px;
   }
 }
@@ -959,7 +961,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   .question-title {
     min-height: 100px;
     margin: 0px 10px;
-    font-family: @serif-family;
+    
     font-size: .85em;
     line-height: 125%;
     background-color: rgba(255, 255, 255, 0.8);
@@ -976,7 +978,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 .poll-question-title {
   font-size: 1.25em;
   line-height: 120%;
-  font-family: @sans-family;
+  
 }
 
 .poll-question-response-rate {
@@ -1005,7 +1007,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     font-size: .75em;
     text-decoration: none;
     background-color: #dedede;
-    font-family: @sans-family;
+    
 
     &.active {
       color: #fff;
@@ -1041,7 +1043,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     top: 0;
     left: 0;
     padding: 8px 14px 8px 14px;
-    font-family: @sans-family;
+    
   }
 
   .brick-long-story-title {
@@ -1057,12 +1059,12 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     font-size: .75em;
     line-height: 100%;
     margin-top: 10px;
-    font-family: @sans-family;
+    
   }
 
   .brick-long-story-text {
     padding: 10px;
-    font-family: @serif-family;
+    
   }
 }
 
@@ -1131,7 +1133,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   }
 
   .brick-long-story-text {
-    font-family: @serif-family;
+    
   }
 
   .brick-poll-main-question {
@@ -1168,7 +1170,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   }
 
   .brick-poll-title {
-    font-family: @serif-family;
+    
     line-height: 130%;
   }
 
@@ -1186,7 +1188,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     margin-top: 10px;
     font-size: .75em;
     font-style: italic;
-    font-family: @serif-family;
+    
     padding-bottom: 40px;
   }
 }
@@ -1210,7 +1212,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .yt-block-content {
-  font-family: @serif-family;
+  
   line-height: 120%;
   margin: 10px 0px;
 }
@@ -1239,7 +1241,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   line-height: 100%;
   font-size: .75em;
   z-index: 100;
-  font-family: @sans-family;
+  
 }
 
 .join-image {
@@ -1249,7 +1251,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
 .join-text {
   padding: 20px;
-  font-family: @serif-family;
+  
   line-height: 150%;
   font-size: .8em;
   min-height: 190px;
@@ -1315,7 +1317,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   line-height: 100%;
   font-size: .75em;
   z-index: 100;
-  font-family: @sans-family;
+  
 }
 
 .card-clear {
@@ -1336,7 +1338,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .ureporters-text {
-  font-family: @serif-family;
+  
   line-height: 150%;
   padding: 20px;
   background-color: #FFFFFF;
@@ -1344,23 +1346,23 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .about-details {
-  font-family: @serif-family;
+  
   line-height: 150%;
   font-size: .8em;
 }
 
 .story-details {
-  font-family: @serif-family;
+  
   line-height: 150%;
   font-size: .8em;
 }
 
 .story-teaser {
-  font-family: @serif-family;
+  
 }
 
 .poll-list-description {
-  font-family: @serif-family;
+  
   font-style: italic;
   color: #666;
   font-size: .85em;
@@ -1513,7 +1515,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
 .related-story-teaser {
   font-size: .8em;
-  font-family: @serif-family;
+  
   overflow: hidden;
   line-height: 150%;
   height: 70px;
@@ -1534,12 +1536,11 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .login-form {
-  font-family: sans-serif;
+  
 }
 
 .news-item-title {
   font-size: .8em;
-  list-style: 100%;
   margin: 15px 10px 10px 0px;
 
 }
@@ -1550,7 +1551,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .news-item-description {
-  font-family: @serif-family;
+  
   margin-bottom: 10px;
 }
 
@@ -1582,20 +1583,20 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .no-content {
-  font-family: @sans-family;
+  
 }
 
 .featured-response-text {
-  font-family: @serif-family;
+  
 
   &.no-answers {
-    font-family: @sans-family;
+    
   }
 }
 
 .featured-response-region {
   font-size: .75em;
-  font-family: @serif-family;
+  
   font-style: italic;
 }
 
@@ -1641,7 +1642,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
         font-size: .85em;
         overflow:hidden;
         margin-right: 40px;
-        font-family: @sans-family;
+        
 
         @media (max-width: 768px) {
           font-size: .65em;
@@ -1660,7 +1661,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
         font-size: .85em;
         overflow:hidden;
         margin-right: 40px;
-        font-family: @sans-family;
+        
 
         @media (max-width: 768px) {
           font-size: .65em;
@@ -1676,7 +1677,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
         text-align: left;
         font-size: 1.5em;
         padding-left: 10px;
-        font-family: @sans-family;
+        
 
         @media (max-width: 768px) {
           font-size: 1em;
@@ -1736,7 +1737,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
       .age-percent {
         position: absolute;
-        font-family: @sans-family;
+        
         right: 0px;
         top: 0px;
         width: 10%;
@@ -1856,7 +1857,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     top: 30px;
     left: 8px;
     font-size: 1em;
-    font-family: @sans-family;
+    
     line-height: 120%;
 
     @media (max-width: 768px) {
@@ -1872,7 +1873,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     top: 30px;
     right: 140px;
     font-size: 1em;
-    font-family: @sans-family;
+    
     line-height: 120%;
 
     @media (max-width: 768px) {
@@ -1888,7 +1889,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     top: 30px;
     right: 10px;
     font-size: 1em;
-    font-family: @sans-family;
+    
     line-height: 120%;
 
     @media (max-width: 768px) {
@@ -1994,7 +1995,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     margin-bottom: 10px;
     display: inline-block;
     color: #fff;
-    font-family: @sans-family;
+    
   }
 }
 
@@ -2027,7 +2028,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .admin-name {
-  font-family: @sans-family;
+  
 
   @media (max-width: 768px) {
     font-size: 1.5em;
@@ -2083,7 +2084,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 .top-border {
   border-top: 1px solid #000;
   margin-top: 10px;
-  font-family: @sans-family;
+  
 
   @media (max-width: 768px) {
     margin-top: 5px;
@@ -2095,7 +2096,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   font-size: 2em;
   padding-right: 10px;
   line-height: 100%;
-  font-family: @sans-family;
+  
 
   @media (max-width: 768px) {
     font-size: 1.7em;
@@ -2106,14 +2107,14 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   font-size: .75em;
   padding-right: 10px;
   line-height: 80%;
-  font-family: @serif-family;
+  
 }
 
 .results {
   .info-percentage {
     font-size: 3em;
     line-height: 100%;
-    font-family: @sans-family;
+    
     vertical-align: top;
     width: 75px;
 
@@ -2140,7 +2141,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     font-size: 1.3em;
     line-height: 100%;
     max-width: 150px;
-    font-family: @sans-family;
+    
     vertical-align: top;
   }
 }
@@ -2155,7 +2156,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   .other-details {
     padding-top: 10px;
     font-style: italic;
-    font-family: @serif-family;
+    
 
     .other-help {
       font-weight: bold;
@@ -2174,12 +2175,12 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   line-height: 35px;
   font-size: 30px;
   padding: 10px 10px 10px 10px;
-  font-family: @sans-family;
+  
 }
 
 #ureport-announcement {
   font-size: .75em;
-  font-family: @sans-family;
+  
 }
 
 .alert-danger {
@@ -2219,7 +2220,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .level-1-title-description {
-  font-family: @serif-family;
+  
   font-size: .75em;
   font-style: italic;
   line-height: 150%;
@@ -2422,7 +2423,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .rss-entry-teaser {
-  font-family: "Times New Roman", Times, serif;
+  
   font-size: .8em;
   line-height: 150%;
   overflow-x: auto;
