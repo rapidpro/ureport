@@ -98,7 +98,11 @@
                           %tr
                             -for region in regions
                               %td.region-registered{ class: "{% if forloop.last %}last-region{% endif %}" }
-                                %div {{ region.responded|intcomma }} of {{ region.total|intcomma }}
+                                %div
+                                  {% blocktrans with responded=region.responded|intcomma total=region.total|intcomma %}
+                                  {{ responded }} of {{ total }}
+                                  {% endblocktrans %}
+
 
                   - if trending_words
                     .hr-header.primary-color
