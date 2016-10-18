@@ -31,11 +31,11 @@
                 .poll-hero-circle-inner.primary-border-color
 
             .col-sm-6.left-col-border{style:"border-color:#FFF"}
-              .hero-description
+              .hero-description.small-text
                 {{ latest_poll.response_percentage }}
                 %span
                   - trans "RESPONSE RATE"
-              .hero-description
+              .hero-description.small-text
                 {{ latest_poll.responded_runs|intcomma }}
                 %span
                   - trans "RESPONDED OUT OF"

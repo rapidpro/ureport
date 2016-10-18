@@ -207,7 +207,7 @@
                   dataLabels:  {
                     enabled: true,
                     style : {
-                      fontFamily: "OpenSansRegular"
+                      fontFamily: "MontserratBold"
                     },
                     format: '<b>{point.y:.0f}%</b>'
                   }
@@ -264,6 +264,11 @@
             categories: categories,
             type: 'datetime',
             labels : {
+                style : {
+                  color:'{{ org|config:"primary_color" }}',
+                  fontFamily: "RobotoSlab",
+                  fontSize: 14
+                },
                 step: 4,
                 formatter: function () {
 
@@ -278,7 +283,7 @@
               labels: {
                 style: {
                   color:'{{ org|config:"primary_color" }}',
-                  fontFamily: "Times New Roman",
+                  fontFamily: "RobotoSlab",
                   fontSize: 14
                   }
               },
