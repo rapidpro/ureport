@@ -333,11 +333,11 @@ initMap = (id, geojson, question, districtLabel, wardLabel) ->
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + label + "</h2>"
 
-      html += "<div class='top-border primary-color'>" + window.string_Participation_Level.toUpperCase() + "</div>"
+      html += "<div class='top-border info-title primary-color'>" + window.string_Participation_Level.toUpperCase() + "</div>"
       html += "<div><table><tr><td class='info-count'>" + window.intcomma(results.set) + "</td><td class='info-count'>" + window.intcomma(results.set + results.unset) + "</td></tr>"
       html += "<tr><td class='info-tiny'>" + window.string_Responses + "</td><td class='info-tiny'>" + window.string_Reporters_in + " " + label + "</td></tr></table></div>"
 
-      html += "<div class='top-border primary-color'>" + window.string_Results.toUpperCase() + "</div>"
+      html += "<div class='top-border info-title primary-color'>" + window.string_Results.toUpperCase() + "</div>"
 
       percentage = results.percentage
       if percentage < 0 or results.set == 0
