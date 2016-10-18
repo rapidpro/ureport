@@ -30,7 +30,7 @@
                     -trans "CURRENT POLL"
                   .hero-description
                     {{ latest_poll.title }}
-                  %a.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
+                  %a.hero-link.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
                     - trans "VIEW FULL RESULT"
                     {{ org|org_arrow_link }}
 
