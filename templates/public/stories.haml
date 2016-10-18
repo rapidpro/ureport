@@ -23,7 +23,7 @@
                   .hero-author
                     - trans "BY"
                     {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
-                .hero-info
+                .hero-info.story-hero-info
                   {{ main_story.short_teaser }}
                 .hero-title.hero-link.primary-bg-color
                   %a{href:"{% url 'public.story_read' main_story.pk %}"}

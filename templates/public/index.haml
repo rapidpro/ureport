@@ -30,7 +30,7 @@
                     -trans "CURRENT POLL"
                   .hero-description
                     {{ latest_poll.title }}
-                  %a.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
+                  %a.hero-link.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
                     - trans "VIEW FULL RESULT"
                     {{ org|org_arrow_link }}
 
@@ -437,6 +437,7 @@
       font-size: 18px;
       margin-top: 10px;
       margin-bottom: 5px;
+      font-family: MontserratBold;
     }
 
     .leaflet-container {
@@ -724,7 +725,7 @@
                    rotation: 0,
                    style: {
                      fontSize: 10,
-                     fontFamily: 'serif'
+                     fontFamily: "DroidSerif"
                  }
                },
                minorTickLength: 0,
@@ -752,7 +753,7 @@
                      dataLabels:  {
                        enabled: true,
                        style: {
-                         fontFamily: "SharpSansBold"
+                         fontFamily: "MontserratBold"
                        },
                        verticalAlign:"bottom",
                        format: '<b>{point.y:.0f}%</b>'
