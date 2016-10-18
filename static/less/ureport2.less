@@ -155,7 +155,7 @@ body {
       a {
         padding:0;
         border-top: 10px transparent solid;
-        font-size: .85em;
+        font-size: .75em;
         padding-top: 47px;
 
         @media (max-width: 992px) {
@@ -266,7 +266,7 @@ body {
 
 
   span {
-    font-size: .6em;
+    font-size: .7em;
   }
 }
 
@@ -330,6 +330,7 @@ body {
     font-size: .90em;
     min-width: 300px;
     max-width: 375px;
+    font-family: @headline-font;
 
     @media (min-width: 1200px) {
       margin-left: 20%;
@@ -342,7 +343,7 @@ body {
 }
 
 .regions {
-  font-size: 1em;
+  font-size: 1.2em;
   text-align: center;
 
   .region-name {
@@ -370,7 +371,7 @@ body {
   }
 
   .region-key {
-    font-size: .6em;
+    font-size: .85em;
   }
 
   .region-bar {
@@ -394,7 +395,6 @@ body {
     position: absolute;
     bottom: 0px;
     z-index: 110;
-
     color: #000;
     font-style: normal;
     
@@ -406,8 +406,6 @@ body {
   .region-registered {
     font-family: @small-text-font;
     vertical-align: bottom;
-    
-    font-style: italic;
     font-size: .5em;
     line-height: 110%;
     color: #666;
@@ -440,7 +438,7 @@ body {
 
   .hr-header {
     font-family: @headline-font;
-    font-size: .65em;
+    font-size: .75em;
     margin-bottom: 5px;
     border-bottom: 1px solid;
   }
@@ -458,12 +456,12 @@ body {
 
   .stats {
     padding-bottom: 20px;
-    font-size: 1em;
+    font-size: .75em;
 
   }
 
   .stats-small {
-    font-size: .75em;
+    font-size: .85em;
     
   }
 }
@@ -564,6 +562,9 @@ body {
   font-family: @headline-font;
 }
 
+.most-active-regions {
+  font-size: .75em;
+}
 
 // outside of .table-gender so that primary-border-color can take precedence
 .percentage-gender {
@@ -631,7 +632,7 @@ hr.aaa {
 }
 
 h1 {
-  font-size: 1.25em;
+  font-size: 1em;
   line-height: 40px;
   margin-top: 10px;
   margin-bottom: 0px;
@@ -1267,7 +1268,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   font-size: .75em;
   z-index: 100;
   font-family: @headline-font;
-  
+
 }
 
 .join-image {
@@ -2095,6 +2096,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   line-height: 13px;
   color: #555;
   font-size:.8em;
+  font-family: @small-text-font;
 
   @media (max-width: 768px) {
     width: 60px;
@@ -2122,6 +2124,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
 .leaflet-container .info {
   color: #000;
+  font-size: 14px;
 
   @media (max-width: 768px) {
     width: 125px;
@@ -2225,7 +2228,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   text-align: center;
   color: #fff;
   line-height: 35px;
-  font-size: 30px;
+  font-size: 20pt;
   padding: 10px 10px 10px 10px;
   
 }
@@ -2570,10 +2573,14 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 .global-welcome-text {
   color: #fff;
   font-size: 1.2em;
-  line-height: 150%;
+  line-height: 120%;
   padding: 0 0 30px 0px;
   font-family: @headline-font;
 
+}
+
+.hero-link .global-hero-link {
+  font-size: 11pt;
 }
 
 .footer-global-ureport-logo {
@@ -2598,5 +2605,9 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     font-size: 2.5em;
     line-height: 2em;
   }
+
+}
+.carousel-indicators {
+  bottom: -45px;
 
 }

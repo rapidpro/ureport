@@ -18,7 +18,7 @@
                 .hero-title.hero-top-title.primary-bg-color
                   - trans "FEATURED STORY"
                 .story-hero-title
-                  {{ main_story.title|upper }}
+                  {{ main_story.title }}
                 -if story.created_by.first_name
                   .hero-author
                     - trans "BY"
