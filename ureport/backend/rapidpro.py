@@ -296,6 +296,8 @@ class RapidProBackend(BaseBackend):
             with r.lock(key):
                 client = self._get_client(org, 2)
 
+                questions_uuids = poll.questions.values_list('ruleset_uuid', flat=True)
+
                 # ignore the TaskState time and use the time we stored in redis
                 (after, before, latest_synced_obj_time,
                  batches_latest, resume_cursor, pull_after_delete) = poll.get_pull_cached_params()
@@ -356,15 +358,11 @@ class RapidProBackend(BaseBackend):
                             born = contact_obj.born
                             gender = contact_obj.gender
 
-                        for temba_step in temba_run.steps:
-                            ruleset_uuid = temba_step.node
-                            category = temba_step.category
-                            text = temba_step.messages[0].text if temba_step.messages else ''
-                            step_type = temba_step.type
-
-                            if step_type != 'ruleset':
-                                num_ignored += 1
-                                continue
+                        for temba_value in temba_run.values.values():
+                            ruleset_uuid = temba_value.node
+                            category = temba_value.category
+                            text = temba_value.value
+                            value_date = temba_value.time
 
                             existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
@@ -382,13 +380,13 @@ class RapidProBackend(BaseBackend):
 
                                 # if the reporter answered the step, check if this is a newer run
                                 if existing_poll_result.date is not None:
-                                    update_required = update_required and (temba_step.left_on is None or temba_step.arrived_on > existing_poll_result.date)
+                                    update_required = update_required and (value_date > existing_poll_result.date)
 
                                 if update_required:
                                     # update the db object
                                     PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
                                                                                                  state=state, district=district,
-                                                                                                 ward=ward, date=temba_step.left_on,
+                                                                                                 ward=ward, date=value_date,
                                                                                                  born=born, gender=gender,
                                                                                                  completed=completed)
 
@@ -398,7 +396,7 @@ class RapidProBackend(BaseBackend):
                                     existing_poll_result.state = state
                                     existing_poll_result.district = district
                                     existing_poll_result.ward = ward
-                                    existing_poll_result.date = temba_step.left_on
+                                    existing_poll_result.date = value_date
                                     existing_poll_result.born = born
                                     existing_poll_result.gender = gender
                                     existing_poll_result.completed = completed
@@ -421,14 +419,14 @@ class RapidProBackend(BaseBackend):
 
                                 # replace if the step is newer
                                 if poll_result_to_save.date is not None:
-                                    replace_save_map = replace_save_map and (temba_step.left_on is None or temba_step.arrived_on > poll_result_to_save.date)
+                                    replace_save_map = replace_save_map and (value_date > poll_result_to_save.date)
 
                                 if replace_save_map:
                                     result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
                                                             contact=contact_uuid, category=category, text=text,
                                                             state=state, district=district, ward=ward,
                                                             born=born, gender=gender,
-                                                            date=temba_step.left_on, completed=completed)
+                                                            date=value_date, completed=completed)
 
                                     poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
 
@@ -438,11 +436,75 @@ class RapidProBackend(BaseBackend):
                                 result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
                                                         contact=contact_uuid, category=category, text=text,
                                                         state=state, district=district, ward=ward, born=born,
-                                                        gender=gender, date=temba_step.left_on, completed=completed)
+                                                        gender=gender, date=value_date, completed=completed)
 
                                 poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
 
                                 num_created += 1
+
+                        for temba_path in temba_run.path:
+                            ruleset_uuid = temba_path.node
+                            category = None
+                            text = ""
+                            value_date = temba_path.time
+
+                            if ruleset_uuid in questions_uuids:
+                                existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
+
+                                poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
+
+                                if existing_poll_result is not None:
+                                    if value_date > existing_poll_result.date:
+                                        # update the db object
+                                        PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category,
+                                                                                                     text=text,
+                                                                                                     state=state,
+                                                                                                     district=district,
+                                                                                                     ward=ward,
+                                                                                                     date=value_date,
+                                                                                                     born=born,
+                                                                                                     gender=gender,
+                                                                                                     completed=completed)
+
+                                        # update the map object as well
+                                        existing_poll_result.category = category
+                                        existing_poll_result.text = text
+                                        existing_poll_result.state = state
+                                        existing_poll_result.district = district
+                                        existing_poll_result.ward = ward
+                                        existing_poll_result.date = value_date
+                                        existing_poll_result.born = born
+                                        existing_poll_result.gender = gender
+                                        existing_poll_result.completed = completed
+
+                                        poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
+
+                                        num_updated += 1
+                                    else:
+                                        num_ignored += 1
+
+                                elif poll_result_to_save is not None:
+                                    if value_date > poll_result_to_save.date:
+                                        result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                                contact=contact_uuid, category=category, text=text,
+                                                                state=state, district=district, ward=ward,
+                                                                born=born, gender=gender,
+                                                                date=value_date, completed=completed)
+
+                                        poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
+
+                                    num_ignored += 1
+
+                                else:
+
+                                    result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                            contact=contact_uuid, category=category, text=text,
+                                                            state=state, district=district, ward=ward, born=born,
+                                                            gender=gender, date=value_date, completed=completed)
+
+                                    poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
+
+                                    num_created += 1
 
                     num_synced += len(fetch)
                     if progress_callback:
