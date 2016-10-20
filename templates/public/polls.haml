@@ -250,13 +250,13 @@
               - else
                 <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
             .related-story-title.primary-color
-              {{ story.title|upper }}
+              {{ story.title }}
             .related-story-date
               {{ story.created_on|date:"M j. Y" }}
             .related-story-teaser
               {{ story.short_teaser|safe }}
             %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
-              - trans "READ MORE"
+              - trans "Read more"
               &#8594;
 
   %hr.aaa

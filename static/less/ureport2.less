@@ -271,7 +271,7 @@ body {
 }
 
 .hero-dark-container {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   top: 0px;
   width: 100%;
@@ -299,7 +299,6 @@ body {
     line-height: 120%;
     font-family: @small-text-font;
     
-    font-style: italic;
     margin-top: 10px;
   }
 
@@ -591,7 +590,6 @@ table.gender {
   .gender-count {
     text-align: center;
     font-size: .6em;
-    font-style: italic;
   }
 
   .summary-gender {
@@ -650,7 +648,6 @@ h1 {
 
 .subsection-content {
   
-  font-style: italic;
   line-height: 150%;
   font-size: .8em;
 }
@@ -1074,7 +1071,8 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     display: block;
     width: 100%;
     text-align: right;
-    color: #fff;
+    color: #aaaaaa;
+    background-color: #ffffff;
     padding: 8px 14px 8px 14px;
     font-size: .75em;
     line-height: 100%;
@@ -1115,9 +1113,9 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     width: 100%;
     z-index: 100;
     padding: 8px 14px 8px 14px;
-    text-align: right;
     display: block;
-    color: #fff;
+    color: #aaaaaa;
+    background-color: #ffffff;
     font-size: .75em;
     position: absolute;
     bottom: 0px;
@@ -1144,12 +1142,11 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
   .brick-short-story-title {
     padding: 10px 14px;
-    color: #fff;
     position: absolute;
     bottom: 30px;
     font-size: 1em;
     display: block;
-    text-shadow: 1px 1px 1px black;
+    background-color: #ffffff;
   }
 
   .brick-long-story-title {
@@ -1447,7 +1444,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .story-hero {
-  padding: 40px 0px;
+  padding: 30px 0px;
 
   .story-hero-title {
     font-size: 1.5em;
@@ -1462,7 +1459,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .poll-hero {
-  padding: 20px 0px;
+  padding: 30px 0px;
 
   .poll-hero-title {
     font-size: 1.5em;
@@ -1593,7 +1590,6 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 .news-item-link {
   font-size: 0.7em;
   line-height: 120%;
-  text-align: right;
   padding-right: 10px;
   font-family: @headline-font;
 
@@ -1631,8 +1627,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
 .featured-response-region {
   font-size: .75em;
-  
-  font-style: italic;
+
 }
 
 
@@ -2075,6 +2070,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
 .admin-name {
   font-family: @headline-font;
+  font-size: 2em;
 
   @media (max-width: 768px) {
     font-size: 1.5em;
@@ -2128,10 +2124,22 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   }
 }
 
+.bottom-border {
+  border-bottom: 1px solid #000;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: .8em;
+  }
+}
+
 .top-border {
   border-top: 1px solid #000;
   margin-top: 10px;
-  
+
 
   @media (max-width: 768px) {
     margin-top: 5px;
@@ -2141,11 +2149,13 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
 .info-title {
   font-size: 14px;
+  font-family: @headline-font;
 }
 
 .info-count {
   font-size: 2em;
   padding-right: 10px;
+  padding-bottom: 5px;
   line-height: 100%;
   font-family: @headline-font;
 
@@ -2156,20 +2166,26 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .info-tiny {
-  font-size: .85em;
+  font-size: .9em;
   padding-right: 10px;
   line-height: 80%;
   font-family: @small-text-font;
 
 }
 
+.info-percentage {
+  font-size: 2em;
+  font-family: @headline-font;
+
+}
+
 .results {
   .info-percentage {
-    font-size: 3em;
+    font-size: 2em;
     line-height: 100%;
     font-family: @headline-font;
     vertical-align: top;
-    width: 75px;
+    width: 65px;
 
     @media (max-width: 768px){
       font-size: 2em;
@@ -2190,8 +2206,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
   .info-label {
     padding-top: 3px;
-    padding-left: 10px;
-    font-size: 1.3em;
+    font-size: 2em;
     line-height: 100%;
     max-width: 150px;
     font-family: @headline-font;
@@ -2209,8 +2224,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
   .other-details {
     padding-top: 10px;
-    font-style: italic;
-    
+    font-family: @small-text-font;
 
     .other-help {
       font-weight: bold;
@@ -2218,7 +2232,6 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
     .detail-percentage {
       padding-right: 3px;
-      text-align: right;
     }
   }
 }
@@ -2277,7 +2290,6 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 .level-1-title-description {
   
   font-size: .75em;
-  font-style: italic;
   line-height: 150%;
 
 }
@@ -2514,7 +2526,9 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
     color: #ff9900;
     display: block;
     text-decoration: none;
-    font-size: 0.9em;
+    font-size: 11pt;
+    font-family: @small-text-font;
+
   }
 
 }
@@ -2567,7 +2581,7 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 }
 
 .global-org-follow-button {
-   padding: 80px 0px 60px 0px;
+   padding: 80px 0px 35px 0px;
 }
 
 .global-welcome-text {
@@ -2579,8 +2593,14 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
 }
 
-.hero-link .global-hero-link {
-  font-size: 11pt;
+.hero-link {
+
+  &.global-hero-link {
+     font-size: 11pt;
+     display: inline-block;
+     margin-top: 15px;
+
+  }
 }
 
 .footer-global-ureport-logo {
