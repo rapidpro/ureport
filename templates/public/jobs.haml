@@ -45,13 +45,13 @@
               .social-inner
                 -if source.source_type == 'F'
                   .social-title.facebook-bg-color
-                    {{ source.title }}
+                    {{ source.title|upper }}
                   .social-content{style:"padding-left:0px"}
                     .fb-like-box{data-href:'{{ source.source_url }}', data-width:"315", data-height:"570", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
 
                 -elif source.source_type == 'T'
                   .social-title.twitter-bg-color
-                    {{ source.title }}
+                    {{ source.title|upper }}
                   .social-content
                     %a.twitter-follow-button{ href:'{{ source.source_url }}', data-show-count:"true", data-lang:"en"}
 
@@ -64,7 +64,7 @@
 
                 -elif source.source_type == 'R'
                   .social-title.rss-bg-color
-                    {{ source.title }}
+                    {{ source.title|upper }}
                   .social-content
                     %div{style:"height:530px; overflow:auto"}
                       - for entry in source.get_entries
