@@ -146,6 +146,11 @@
 
       {% endfor %}
 
+      .hide-global-org {
+        {% if org|config:"is_global" %}
+        display:none;
+        {% endif %}
+      }
 
 
   - block extra-less

@@ -241,7 +241,7 @@
               .brick-align{style:"padding: 30px 0;"}
                 %iframe{ src:'{{ story_widget_url }}{{ org|config:"iso_code"}}', allowtransparency:"true", frameborder:"0", scrolling:"yes", style:"border:none;overflow:scroll;height:600px;width: 100%;"}
           %a.ureportapp-bg-color.brick-link
-            - trans "CHECK MORE STORIES IN U-REPORT APP"
+            - trans "Check more stories in U-Report app"
             {{ org|org_arrow_link }}
         {% endif %}
 
@@ -254,7 +254,7 @@
               .brick-align{style:"padding: 40px 0px 10px 0px; max-width:98%; overflow:hidden;"}
                 .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
           %a.facebook-bg-color.brick-link{ href:'{{ org|config:"facebook_page_url" }}' }
-            - trans "VIEW MORE STORIES ON FACEBOOK"
+            - trans "View more stories on Facebook"
             {{ org|org_arrow_link }}
         {% endif %}
 
@@ -267,7 +267,7 @@
               .brick-align{style:"padding: 0px"}
                 %iframe.lightwidget-widget{ src:'//lightwidget.com/widgets/{{org|config:"instagram_lightwidget_id"}}.html', id:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}', name:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}',  scrolling:'no', allowtransparency:'true',  style:'width: 100%; border: 0; overflow: hidden;'}
           %a.instagram-bg-color.brick-link{ href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
-            - trans "VIEW MORE ON INSTAGRAM"
+            - trans "View more on Instagram"
             {{ org|org_arrow_link }}
         {% endif %}
 
@@ -284,7 +284,7 @@
                 %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"340px", height:"600px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
             %a.brick-link{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
-              - trans "READ MORE TWEETS ON TWITTER"
+              - trans "Read more tweets on Twitter"
               {{ org|org_arrow_link }}
         {% endif %}
 
