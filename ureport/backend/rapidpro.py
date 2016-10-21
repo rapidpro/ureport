@@ -385,7 +385,10 @@ class RapidProBackend(BaseBackend):
                                 update_required = update_required or existing_poll_result.born != born
                                 update_required = update_required or existing_poll_result.gender != gender
                                 update_required = update_required or existing_poll_result.completed != completed
-                                update_required = update_required and (value_date > existing_poll_result.date)
+
+                                # if the reporter answered the step, check if this is a newer run
+                                if existing_poll_result.date is not None:
+                                     update_required = update_required and (value_date > existing_poll_result.date)
 
                                 if update_required:
                                     # update the db object
@@ -421,7 +424,10 @@ class RapidProBackend(BaseBackend):
                                 replace_save_map = replace_save_map or poll_result_to_save.born != born
                                 replace_save_map = replace_save_map or poll_result_to_save.gender != gender
                                 replace_save_map = replace_save_map or poll_result_to_save.completed != completed
-                                replace_save_map = replace_save_map and (value_date > poll_result_to_save.date)
+
+                                # replace if the step is newer
+                                if poll_result_to_save.date is not None:
+                                    replace_save_map = replace_save_map and (value_date > poll_result_to_save.date)
 
                                 if replace_save_map:
                                     result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
