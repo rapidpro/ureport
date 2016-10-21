@@ -19,29 +19,29 @@
           .row
             .col-sm-6
               .hero-description.poll-hero-title
-                {{ latest_poll.title|upper }}
+                {{ latest_poll.title }}
               .hero-description.poll-hero-questions
                 {% blocktrans count questions=latest_poll.get_questions.count %}
-                  {{ questions }} QUESTION POLLED ON THIS TOPIC
+                  {{ questions }} question polled on this topic
                 {% plural %}
-                  {{ questions }} QUESTIONS POLLED ON THIS TOPIC
+                  {{ questions }} questions polled on this topic
                 {% endblocktrans %}
 
                 .poll-hero-circle-outer
                 .poll-hero-circle-inner.primary-border-color
 
             .col-sm-6.left-col-border{style:"border-color:#FFF"}
-              .hero-description
+              .hero-description.small-text
                 {{ latest_poll.response_percentage }}
                 %span
-                  - trans "RESPONSE RATE"
-              .hero-description
+                  - trans "response rate"
+              .hero-description.small-text
                 {{ latest_poll.responded_runs|intcomma }}
                 %span
-                  - trans "RESPONDED OUT OF"
+                  - trans "responded out of"
                 {{ latest_poll.runs|intcomma }}
                 %span
-                  - trans "POLLED"
+                  - trans "polled"
 
           .latest-poll-questions.hide-on-small
             - with latest_poll.get_questions as questions
@@ -250,13 +250,13 @@
               - else
                 <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
             .related-story-title.primary-color
-              {{ story.title|upper }}
+              {{ story.title }}
             .related-story-date
               {{ story.created_on|date:"M j. Y" }}
             .related-story-teaser
               {{ story.short_teaser|safe }}
             %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
-              - trans "READ MORE"
+              - trans "Read more"
               &#8594;
 
   %hr.aaa
@@ -309,12 +309,7 @@
       width: 100%;
     }
 
-    .graph-title {
-      margin-left: 15px;
-      margin-bottom: -20px;
-      font-size: 25px;
-      margin-top: 30px;
-    }
+
 
     .leaflet-container {
       background: #fff;
