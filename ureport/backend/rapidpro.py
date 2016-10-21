@@ -385,11 +385,25 @@ class RapidProBackend(BaseBackend):
                                     update_required = update_required and (temba_step.left_on is None or temba_step.arrived_on > existing_poll_result.date)
 
                                 if update_required:
+                                    # update the db object
                                     PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
                                                                                                  state=state, district=district,
                                                                                                  ward=ward, date=temba_step.left_on,
                                                                                                  born=born, gender=gender,
                                                                                                  completed=completed)
+
+                                    # update the map object as well
+                                    existing_poll_result.category = category
+                                    existing_poll_result.text = text
+                                    existing_poll_result.state = state
+                                    existing_poll_result.district = district
+                                    existing_poll_result.ward = ward
+                                    existing_poll_result.date = temba_step.left_on
+                                    existing_poll_result.born = born
+                                    existing_poll_result.gender = gender
+                                    existing_poll_result.completed = completed
+
+                                    poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
 
                                     num_updated += 1
                                 else:

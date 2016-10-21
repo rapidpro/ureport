@@ -27,12 +27,20 @@
 
   :css
     @font-face {
-      font-family: SharpSansBold;
-      src: url('{{ STATIC_URL }}fonts/SharpSansNo1-Bold.eot');
-      src: url('{{ STATIC_URL }}fonts/SharpSansNo1-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-           url('{{ STATIC_URL }}fonts/SharpSansNo1-Bold.woff') format('woff');
+      font-family: MontserratBold;
+      src: url('{{ STATIC_URL }}fonts/Montserrat-Bold.ttf');
     }
-    @font-face {font-family: SharpSansBoldItalic;src: url('{{ STATIC_URL }}fonts/SharpSansNo1-BoldItalic.otf');}
+
+    @font-face {
+      font-family: RobotoSlab;
+      src: url('{{ STATIC_URL }}fonts/RobotoSlab-Regular.ttf');
+    }
+
+    @font-face {
+      font-family: DroidSerif;
+      src: url('{{ STATIC_URL }}fonts/DroidSerif.ttf');
+    }
+
 
     .public-nav-ul .level1 .fb-messengermessageus {
       margin-top: 52px;
@@ -148,6 +156,11 @@
 
       {% endfor %}
 
+      .hide-global-org {
+        {% if org|config:"is_global" %}
+        display:none;
+        {% endif %}
+      }
 
 
   - block extra-less

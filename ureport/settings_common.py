@@ -40,6 +40,7 @@ EMAIL_USE_TLS = True
 
 EMPTY_SUBDOMAIN_HOST = 'http://localhost:8000'
 SITE_API_HOST = 'http://localhost:8001'
+SITE_API_USER_AGENT = 'ureport/0.1'
 HOSTNAME = 'localhost:8000'
 SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 SITE_CHOOSER_URL_NAME = 'public.home'
@@ -64,7 +65,7 @@ LANGUAGE_CODE = 'en'
 
 # Available languages for translation
 LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"),
-             ('uk', "Ukrainian"), ('my', "Burmese"))
+             ('uk', "Ukrainian"), ('my', "Burmese"), ('id', "Indonesian"))
 DEFAULT_LANGUAGE = "en"
 RTL_LANGUAGES = ['ar']
 
@@ -171,7 +172,7 @@ ROOT_URLCONF = 'ureport.urls'
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379:1',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -179,7 +180,7 @@ CACHES = {
 }
 
 if 'test' in sys.argv:
-    CACHES['default']['LOCATION'] = '127.0.0.1:6379:15'
+    CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
 
 from django.forms import Textarea
 
@@ -413,7 +414,7 @@ AUTHENTICATION_BACKENDS = (
     'guardian.backends.ObjectPermissionBackend',
 )
 
-ANONYMOUS_USER_ID = -1
+ANONYMOUS_USER_NAME = 'AnonymousUser'
 
 #-----------------------------------------------------------------------------------
 # Async tasks with django-celery
@@ -553,6 +554,12 @@ PREVIOUS_ORG_SITES = [
         name="Ireland",
         host="http://ireland.ureport.in",
         flag="flag_ir.png",
+        is_static=True,
+    ),
+    dict(
+        name="Thailand",
+        host="http://thailand.ureport.in",
+        flag="flag_th.png",
         is_static=True,
     ),
     dict(
