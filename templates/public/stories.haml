@@ -79,7 +79,7 @@
                   .half-border.none-color
                   .featured-story-teaser
                     {{ featured_story.short_teaser|safe }}
-                %a.featured-story-link.primary-bg-color{href:"{% url 'public.story_read' featured_story.pk %}"}
+                %a.featured-story-link{href:"{% url 'public.story_read' featured_story.pk %}"}
                   - trans "Read full story"
                   {{ org|org_arrow_link }}
 
