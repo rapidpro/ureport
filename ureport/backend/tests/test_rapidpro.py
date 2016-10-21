@@ -21,7 +21,7 @@ from dash.categories.models import Category
 from ureport.backend.rapidpro import FieldSyncer, BoundarySyncer, ContactSyncer, RapidProBackend
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll
+from ureport.polls.models import PollResult, Poll, PollQuestion
 from ureport.tests import DashTest
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
@@ -670,29 +670,29 @@ class RapidProBackendTest(DashTest):
         contact = Contact.objects.create(org=self.nigeria, uuid='C-001', gender='M', born=1990, state='R-LAGOS',
                                          district='R-OYO')
         poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
+        PollQuestion.objects.create(poll=poll, title='question 1', ruleset_uuid='ruleset-uuid',
+                                    created_by=self.admin, modified_by=self.admin)
+
+        PollQuestion.objects.create(poll=poll, title='question 2', ruleset_uuid='ruleset-uuid-2',
+                                    created_by=self.admin, modified_by=self.admin)
 
         now = timezone.now()
         temba_run = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                     contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
-                                    steps=[TembaRun.Step.create(node='ruleset-uuid',
-                                                                messages=[
-                                                                    TembaRun.Step.MessageRef.create(
-                                                                        id='M-001',
-                                                                        text="We'll win today",
-                                                                        broadcast=None
-                                                                    )],
-                                                                value="win",
-                                                                category='Win', type='ruleset',
-                                                                arrived_on=now, left_on=now)],
+                                    values={"win": TembaRun.Value.create(value="We'll win today", category="Win",
+                                                                         node='ruleset-uuid', time=now)},
+                                    path=[TembaRun.Step.create(node='ruleset-uuid', time=now)],
                                     created_on=now, modified_on=now, exited_on=now,
                                     exit_type='completed')
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(3):
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        with self.assertNumQueries(4):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 0, 0, 1))
         mock_get_runs.assert_called_with(flow='flow-uuid', after=None, before=datetime_to_json_date(now))
 
         poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
@@ -706,39 +706,28 @@ class RapidProBackendTest(DashTest):
 
         temba_run_1 = TembaRun.create(id=1235, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-002', name='Davido'), responded=True,
-                                      steps=[TembaRun.Step.create(node='ruleset-uuid',
-                                                                  messages=[
-                                                                      TembaRun.Step.MessageRef.create(
-                                                                          id='M-001',
-                                                                          text="I sing",
-                                                                          broadcast=None
-                                                                      )],
-                                                                  value="sing",
-                                                                  category='Sing', type='ruleset',
-                                                                  arrived_on=now, left_on=now)],
+                                      values={"sing": TembaRun.Value.create(value="I sing", category="Sing",
+                                                                            node='ruleset-uuid', time=now)},
+                                      path=[TembaRun.Step.create(node='ruleset-uuid', time=now)],
                                       created_on=now, modified_on=now, exited_on=now,
                                       exit_type='completed')
 
         temba_run_2 = TembaRun.create(id=1236, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-003', name='Lebron'), responded=True,
-                                      steps=[TembaRun.Step.create(node='ruleset-uuid',
-                                                                  messages=[
-                                                                      TembaRun.Step.MessageRef.create(
-                                                                          id='M-001',
-                                                                          text="I play basketball",
-                                                                          broadcast=None
-                                                                      )],
-                                                                  value="play", category='Play', type='ruleset',
-                                                                  arrived_on=now, left_on=now)],
+                                      values={"play": TembaRun.Value.create(value="I play basketball", category="Play",
+                                                                            node='ruleset-uuid', time=now)},
+                                      path=[TembaRun.Step.create(node='ruleset-uuid', time=now)],
                                       created_on=now, modified_on=now, exited_on=now,
                                       exit_type='completed')
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(3):
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        with self.assertNumQueries(4):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (2, 0, 0))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (2, 0, 0, 0, 0, 2))
         self.assertEqual(3, PollResult.objects.all().count())
         self.assertEqual(1, Contact.objects.all().count())
 
@@ -748,24 +737,22 @@ class RapidProBackendTest(DashTest):
 
         temba_run_3 = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                                       contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
-                                      steps=[TembaRun.Step.create(node='ruleset-uuid',
-                                                                  messages=[
-                                                                      TembaRun.Step.MessageRef.create(
-                                                                          id='M-001',
-                                                                          text="We'll celebrate today",
-                                                                          broadcast=None
-                                                                      )],
-                                                                  value="celebrate", category='Party', type='ruleset',
-                                                                  arrived_on=now + timedelta(minutes=1), left_on=now)],
+                                      values={"party": TembaRun.Value.create(value="We'll celebrate today",
+                                                                             category="Party",
+                                                                             node='ruleset-uuid',
+                                                                             time=now + timedelta(minutes=1))},
+                                      path=[TembaRun.Step.create(node='ruleset-uuid', time=now)],
                                       created_on=now, modified_on=now, exited_on=now,
                                       exit_type='completed')
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
 
-        with self.assertNumQueries(3):
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        with self.assertNumQueries(4):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, 1, 0))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (0, 1, 0, 0, 0, 1))
 
         poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
         self.assertEqual(poll_result.state, 'R-KIGALI')
@@ -777,17 +764,77 @@ class RapidProBackendTest(DashTest):
         self.assertEqual(poll_result.text, "We'll celebrate today")
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
-        with self.assertNumQueries(2):
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        with self.assertNumQueries(3):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 1))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (0, 0, 1, 0, 0, 1))
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(2):
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        with self.assertNumQueries(3):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 2))
+        self.assertEqual( (num_val_created, num_val_updated, num_val_ignored,
+                           num_path_created, num_path_updated, num_path_ignored), (0, 0, 2, 0, 0, 2))
+
+        PollResult.objects.all().delete()
+
+        # actionset uuid are ignored
+        temba_run_4 = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                      contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
+                                      values={"dance": TembaRun.Value.create(value="We'll dance today",
+                                                                             category="Dance",
+                                                                             node='ruleset-uuid',
+                                                                             time=now)},
+                                      path=[TembaRun.Step.create(node='ruleset-uuid', time=now),
+                                            TembaRun.Step.create(node='actionset-uuid', time=now)],
+                                      created_on=now, modified_on=now, exited_on=now,
+                                      exit_type='completed')
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
+
+        with self.assertNumQueries(4):
+            (num_val_created, num_val_updated, num_val_ignored,
+            num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 0, 0, 2))
+
+        PollResult.objects.all().delete()
+
+        # ruleset without values are considered
+        temba_run_4 = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                      contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
+                                      values={"dance": TembaRun.Value.create(value="We'll dance today",
+                                                                             category="Dance",
+                                                                             node='ruleset-uuid',
+                                                                             time=now)},
+                                      path=[TembaRun.Step.create(node='ruleset-uuid', time=now),
+                                            TembaRun.Step.create(node='actionset-uuid', time=now),
+                                            TembaRun.Step.create(node='ruleset-uuid-2', time=now),],
+                                      created_on=now, modified_on=now, exited_on=now,
+                                      exit_type='completed')
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
+
+        with self.assertNumQueries(4):
+            (num_val_created, num_val_updated, num_val_ignored,
+            num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 1, 0, 2))
+
+        poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid-2', contact='C-001').first()
+        self.assertEqual(poll_result.state, 'R-KIGALI')
+        self.assertEqual(poll_result.district, 'R-GASABO')
+        self.assertEqual(poll_result.contact, 'C-001')
+        self.assertEqual(poll_result.ruleset, 'ruleset-uuid-2')
+        self.assertEqual(poll_result.flow, 'flow-uuid')
+        self.assertIsNone(poll_result.category)
+        self.assertEqual(poll_result.text, "")
 
     @patch('dash.orgs.models.TembaClient2.get_runs')
     @patch('django.utils.timezone.now')
@@ -805,28 +852,26 @@ class RapidProBackendTest(DashTest):
 
         poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid-3', self.education_nigeria, self.admin)
 
+        PollQuestion.objects.create(poll=poll, title='question 1', ruleset_uuid='ruleset-uuid',
+                                    created_by=self.admin, modified_by=self.admin)
+
         now = timezone.now()
         temba_run = TembaRun.create(id=4321, flow=ObjectRef.create(uuid='flow-uuid-3', name="Flow 2"),
                                     contact=ObjectRef.create(uuid='C-021', name='Hyped'), responded=True,
-                                    steps=[TembaRun.Step.create(node='ruleset-uuid',
-                                                                messages=[
-                                                                    TembaRun.Step.MessageRef.create(
-                                                                        id='M-001',
-                                                                        text="Doing it now",
-                                                                        broadcast=None
-                                                                    )],
-                                                                value="win",
-                                                                category='Win', type='ruleset',
-                                                                arrived_on=now, left_on=now)],
+                                    values={"win": TembaRun.Value.create(value="We'll win today", category="Win",
+                                                                         node='ruleset-uuid', time=now)},
+                                    path=[TembaRun.Step.create(node='ruleset-uuid', time=now)],
                                     created_on=now, modified_on=now, exited_on=now,
                                     exit_type='completed')
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(3):
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        with self.assertNumQueries(4):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 0))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 0, 0, 1))
         mock_get_runs.assert_called_with(flow='flow-uuid-3', after=None, before=datetime_to_json_date(now))
 
         poll_result = PollResult.objects.filter(flow='flow-uuid-3', ruleset='ruleset-uuid', contact='C-021').first()
@@ -919,18 +964,13 @@ class PerfTest(DashTest):
                     flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                     contact=ObjectRef.create(uuid='C-00%d' % num, name=names[num % len(names)]),
                     responded=True,
-                    steps=[TembaRun.Step.create(node='ruleset-uuid-%d' % s,
-                                                messages=[
-                                                    TembaRun.Step.MessageRef.create(
-                                                        id='M-001',
-                                                        text="Text %s" % s,
-                                                        broadcast=None
-                                                    )],
-                                                value="Value %s" % s,
-                                                category='Category %s' % s,
-                                                type='ruleset',
-                                                arrived_on=now, left_on=now)
-                           for s in range(0, num_steps)],
+                    path=[],
+                    values={key: val for (key, val) in [('category %s' % s,
+                                                         TembaRun.Value.create(value="Text %s" % s,
+                                                                               category='Category %s' % s,
+                                                                               node='ruleset-uuid-%d' % s,
+                                                                               time=now))
+                                                        for s in range(0, num_steps)]},
                     created_on=now,
                     modified_on=now,
                     exited_on=now,
@@ -942,11 +982,14 @@ class PerfTest(DashTest):
 
         start = time.time()
 
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
         mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before=datetime_to_json_date(now))
 
-        self.assertEqual((num_created, num_updated, num_ignored), (num_fetches * fetch_size * num_steps, 0, 0))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored),
+                         (num_fetches * fetch_size * num_steps, 0, 0, 0, 0, 0))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
@@ -961,9 +1004,12 @@ class PerfTest(DashTest):
         start = time.time()
 
         redis_client.delete(key)
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, num_fetches * fetch_size * num_steps))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored),
+                         (0, 0, num_fetches * fetch_size * num_steps, 0, 0, 0))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
@@ -974,26 +1020,21 @@ class PerfTest(DashTest):
         # simulate ignore of 1 value change from older runs
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
-                                                  messages=[
-                                                      TembaRun.Step.MessageRef.create(
-                                                          id='M-001',
-                                                          text="Txt 0",
-                                                          broadcast=None
-                                                      )],
-                                                  value="Val 0",
-                                                  category='CAT 0',
-                                                  type='ruleset',
-                                                  arrived_on=now - timedelta(minutes=1), left_on=now)
-
+                r.values['category 0'] = TembaRun.Value.create(value="Txt 0",
+                                                               category='CAT 0',
+                                                               node='ruleset-uuid-0',
+                                                               time=now - timedelta(minutes=1))
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
         start = time.time()
 
         redis_client.delete(key)
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, num_fetches * fetch_size * num_steps))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored),
+                         (0, 0, num_fetches * fetch_size * num_steps, 0, 0, 0))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
@@ -1006,27 +1047,22 @@ class PerfTest(DashTest):
         # simulate an update of 1 value
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
-                                                  messages=[
-                                                      TembaRun.Step.MessageRef.create(
-                                                          id='M-001',
-                                                          text="Txt 0",
-                                                          broadcast=None
-                                                      )],
-                                                  value="Val 0",
-                                                  category='CAT 0',
-                                                  type='ruleset',
-                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
+                r.values['category 0'] = TembaRun.Value.create(value="Txt 0",
+                                                               category='CAT 0',
+                                                               node='ruleset-uuid-0',
+                                                               time=now + timedelta(minutes=1))
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
         start = time.time()
 
         redis_client.delete(key)
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size,
-                                                                   num_fetches * fetch_size * (num_steps - 1)))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored),
+                         (0, num_fetches * fetch_size, num_fetches * fetch_size * (num_steps - 1), 0, 0, 0))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
@@ -1034,44 +1070,33 @@ class PerfTest(DashTest):
             print "\n\n\n"
             print "%s -- %s" % (q['time'], q['sql'])
 
+        PollResult.objects.all().update(date=now)
         reset_queries()
 
         # Test we update the existing map correctly
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
-                                                  messages=[
-                                                      TembaRun.Step.MessageRef.create(
-                                                          id='M-001',
-                                                          text="Txt 0",
-                                                          broadcast=None
-                                                      )],
-                                                  value="Val 0",
-                                                  category='CAT 1',
-                                                  type='ruleset',
-                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
+                r.values['category 0'] = TembaRun.Value.create(value="Txt 0",
+                                                               category='CAT 1',
+                                                               node='ruleset-uuid-0',
+                                                               time=now + timedelta(minutes=1))
 
-                r.steps[1] = TembaRun.Step.create(node='ruleset-uuid-0',
-                                                  messages=[
-                                                       TembaRun.Step.MessageRef.create(
-                                                           id='M-001',
-                                                           text="Txt 0",
-                                                           broadcast=None
-                                                       )],
-                                                  value="Val 0",
-                                                  category='CAT 1',
-                                                  type='ruleset',
-                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
+                r.values['category 1'] = TembaRun.Value.create(value="Txt 0",
+                                                               category='CAT 1',
+                                                               node='ruleset-uuid-0',
+                                                               time=now + timedelta(minutes=1))
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
         start = time.time()
 
         redis_client.delete(key)
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+        num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size,
-                                                                   num_fetches * fetch_size * (num_steps - 1)))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored),
+                         (0, num_fetches * fetch_size, num_fetches * fetch_size * (num_steps - 1), 0, 0, 0))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
@@ -1079,43 +1104,32 @@ class PerfTest(DashTest):
             print "\n\n\n"
             print "%s -- %s" % (q['time'], q['sql'])
 
+        PollResult.objects.all().update(date=now)
         reset_queries()
 
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaRun.Step.create(node='ruleset-uuid-0',
-                                                  messages=[
-                                                      TembaRun.Step.MessageRef.create(
-                                                          id='M-001',
-                                                          text="Txt 0",
-                                                          broadcast=None
-                                                      )],
-                                                  value="Val 0",
-                                                  category='CAT 2',
-                                                  type='ruleset',
-                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
+                r.values['category 0'] = TembaRun.Value.create(value="Txt 0",
+                                                               category='CAT 2',
+                                                               node='ruleset-uuid-0',
+                                                               time=now + timedelta(minutes=1))
 
-                r.steps[1] = TembaRun.Step.create(node='ruleset-uuid-0',
-                                                  messages=[
-                                                       TembaRun.Step.MessageRef.create(
-                                                           id='M-001',
-                                                           text="Txt 0",
-                                                           broadcast=None
-                                                       )],
-                                                  value="Val 0",
-                                                  category='CAT 0',
-                                                  type='ruleset',
-                                                  arrived_on=now + timedelta(minutes=1), left_on=now)
+                r.values['category 1'] = TembaRun.Value.create(value="Txt 0",
+                                                               category='CAT 0',
+                                                               node='ruleset-uuid-0',
+                                                               time=now + timedelta(minutes=2))
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
         start = time.time()
 
         redis_client.delete(key)
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size * 2,
-                                                                   num_fetches * fetch_size * (num_steps - 2)))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored),
+                         (0, num_fetches * fetch_size * 2, num_fetches * fetch_size * (num_steps - 2), 0, 0, 0))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
@@ -1128,26 +1142,19 @@ class PerfTest(DashTest):
         # simulate ignoring actionset nodes
         for batch in active_fetches:
             for r in batch:
-                r.steps[0] = TembaRun.Step.create(node='actionset-uuid-0',
-                                                  messages=[
-                                                      TembaRun.Step.MessageRef.create(
-                                                          id='M-001',
-                                                          text="What do you think?",
-                                                          broadcast=None
-                                                      )],
-                                                  value="",
-                                                  category='',
-                                                  type='actionset',
-                                                  arrived_on=now + timedelta(minutes=5), left_on=now)
+                r.path = [TembaRun.Step.create(node='actionset-uuid-0', time=now)]
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
         start = time.time()
 
         redis_client.delete(key)
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, num_fetches * fetch_size * num_steps))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored),
+                         (0, 0, num_fetches * fetch_size * num_steps, 0, 0, num_fetches * fetch_size))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
@@ -1155,32 +1162,31 @@ class PerfTest(DashTest):
             print "\n\n\n"
             print "%s -- %s" % (q['time'], q['sql'])
 
+        PollResult.objects.all().update(date=now)
         reset_queries()
 
         # simulate an update of 1 value
         for batch in active_fetches:
             for r in batch:
-                r.steps = [TembaRun.Step.create(node='ruleset-uuid-0',
-                                                messages=[
-                                                    TembaRun.Step.MessageRef.create(
-                                                        id='M-001',
-                                                        text="T %s" % s,
-                                                        broadcast=None
-                                                    )],
-                                                value="V %s" % s,
-                                                category='C %s' % s,
-                                                type='ruleset',
-                                                arrived_on=now + timedelta(minutes=1), left_on=now)
-                           for s in range(0, num_steps)]
+                r.path = []
+                r.values = {key: val for key, val in [('category %s' % s,
+                                                        TembaRun.Value.create(value="T %s" % s,
+                                                                              category='C %s' % s,
+                                                                              node='ruleset-uuid-0',
+                                                                              time=now + timedelta(minutes=int("%d" % (s + 1)))))
+                                                        for s in range(0, num_steps)]}
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
         start = time.time()
 
         redis_client.delete(key)
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, num_fetches * fetch_size * num_steps, 0))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored),
+                         (0, num_fetches * fetch_size * num_steps, 0, 0, 0, 0))
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
@@ -1194,9 +1200,11 @@ class PerfTest(DashTest):
 
         redis_client.set(key, 'lock-taken')
 
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (0, 0, 0))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (0, 0, 0, 0, 0, 0))
 
         redis_client.delete(key)
 
@@ -1215,18 +1223,13 @@ class PerfTest(DashTest):
                     flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                     contact=ObjectRef.create(uuid='C-001', name='Will'),
                     responded=True,
-                    steps=[TembaRun.Step.create(node='ruleset-uuid-0',
-                                                messages=[
-                                                    TembaRun.Step.MessageRef.create(
-                                                        id='M-001',
-                                                        text="Text %s" % s,
-                                                        broadcast=None
-                                                    )],
-                                                value="Value %s" % s,
-                                                category='Category %s' % s,
-                                                type='ruleset',
-                                                arrived_on=now, left_on=now)
-                           for s in range(0, num_steps)],
+                    path=[],
+                    values={key: val for (key, val) in [('category %s' % s,
+                                                        TembaRun.Value.create(value="Text %s" % s,
+                                                                              category='Category %s' % s,
+                                                                              node='ruleset-uuid-0',
+                                                                              time=now))
+                                                        for s in range(0, num_steps)]},
                     created_on=now,
                     modified_on=now,
                     exited_on=now,
@@ -1236,9 +1239,12 @@ class PerfTest(DashTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual((num_created, num_updated, num_ignored), (1, 0, num_fetches * fetch_size * num_steps - 1))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored),
+                         (1, 0, num_fetches * fetch_size * num_steps - 1, 0, 0, 0))
 
         redis_client.delete(key)
 
@@ -1251,10 +1257,13 @@ class PerfTest(DashTest):
 
                 mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-                num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+                (num_val_created, num_val_updated, num_val_ignored,
+                 num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
                 # we fetched two pages
-                self.assertEqual((num_created, num_updated, num_ignored), (1, 0, 2 * fetch_size * num_steps - 1))
+                self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                                  num_path_created, num_path_updated, num_path_ignored),
+                                 (1, 0, 2 * fetch_size * num_steps - 1, 0, 0, 0))
 
                 mock_rebuild_counts.assert_called_with()
 
@@ -1265,10 +1274,13 @@ class PerfTest(DashTest):
 
                 mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-                num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+                (num_val_created, num_val_updated, num_val_ignored,
+                 num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
                 # we fetched one pages
-                self.assertEqual((num_created, num_updated, num_ignored), (1, 0, fetch_size * num_steps - 1))
+                self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                                  num_path_created, num_path_updated, num_path_ignored),
+                                 (1, 0, fetch_size * num_steps - 1, 0, 0, 0))
                 mock_rebuild_counts.assert_called_with()
 
         mock_get_pull_cached_params.side_effect = [(now_date, None, None, None, None, None),
@@ -1278,7 +1290,8 @@ class PerfTest(DashTest):
 
             mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
             self.assertFalse(mock_delete_poll_results.called)
 
@@ -1286,7 +1299,8 @@ class PerfTest(DashTest):
 
             mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-            num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
             mock_delete_poll_results.assert_called_with()
 
@@ -1340,18 +1354,13 @@ class PerfTest(DashTest):
                     flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
                     contact=ObjectRef.create(uuid='C-00%d' % num, name=names[num % len(names)]),
                     responded=True,
-                    steps=[TembaRun.Step.create(node='ruleset-uuid-%d' % s,
-                                                messages=[
-                                                    TembaRun.Step.MessageRef.create(
-                                                        id='M-001',
-                                                        text="Text %s" % s,
-                                                        broadcast=None
-                                                    )],
-                                                value="Value %s" % s,
-                                                category='Category %s' % s,
-                                                type='ruleset',
-                                                arrived_on=now, left_on=now)
-                           for s in range(0, num_steps)],
+                    path=[],
+                    values={key: val for (key, val) in [('category %s' % s,
+                                                         TembaRun.Value.create(value="Text %s" % s,
+                                                                               category='Category %s' % s,
+                                                                               node='ruleset-uuid-%d' % s,
+                                                                               time=now))
+                                                        for s in range(0, num_steps)]},
                     created_on=dates[b],
                     modified_on=dates[b],
                     exited_on=now,
@@ -1361,7 +1370,8 @@ class PerfTest(DashTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid),
                           'cursor-string',
@@ -1388,7 +1398,8 @@ class PerfTest(DashTest):
         mock_get_pull_cached_params.side_effect = [(None, '2015-04-08T12:48:44.320Z', None, '2015-04-07T12:48:44.320Z',
                                                     'cursor-string', None)]
 
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid),
                           'cursor-string',
@@ -1420,7 +1431,8 @@ class PerfTest(DashTest):
         mock_max_runs.return_value = 10000
         mock_get_pull_cached_params.side_effect = [(None, None, None, None, None, None)]
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           '2015-04-07T12:48:44.320Z',
@@ -1435,7 +1447,8 @@ class PerfTest(DashTest):
         mock_get_pull_cached_params.side_effect = [(None, None, '2015-04-05T12:48:44.320Z', None, None, None)]
         mock_get_runs.side_effect = [MockClientQuery(*[])]
 
-        num_created, num_updated, num_ignored = self.backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           '2015-04-05T12:48:44.320Z',

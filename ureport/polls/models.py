@@ -142,13 +142,14 @@ class Poll(SmartModel):
         backend = get_backend()
         poll = Poll.objects.get(pk=poll_id)
 
-        created, updated, ignored = backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
 
         poll.rebuild_poll_results_counts()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
-        return created, updated, ignored
+        return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
 
     def get_pull_cached_params(self):
 
@@ -275,6 +276,9 @@ class Poll(SmartModel):
                 print "Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache)
 
                 print "Poll responses counts for poll #%d on org #%d are %s responded out of %s polled" % (poll_id, org_id, self.responded_runs(), self.runs())
+
+    def get_question_uuids(self):
+        return self.questions.values_list('ruleset_uuid', flat=True)
 
     @classmethod
     def get_public_polls(cls, org):
