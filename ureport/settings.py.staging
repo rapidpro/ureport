@@ -68,7 +68,7 @@ SITE_API_HOST = 'https://api.rapidpro.io'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ureport_staging',
+        'NAME': 'ureport',
         'USER': 'ureport',
         'PASSWORD': 'nyarukaglue',
         'HOST': 'localhost',
