@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import logging
 import pytz
+from datetime import timedelta
 from django.contrib.auth.models import User
 from django.db import models, connection
 from django.db.models import Sum, Count
@@ -337,6 +338,15 @@ class Poll(SmartModel):
         other_polls = Poll.get_public_polls(org=org).exclude(pk__in=exclude_polls).order_by('-created_on')
 
         return other_polls
+
+    @classmethod
+    def get_recent_other_polls(cls, org):
+        now = timezone.now()
+        recent_window = now - timedelta(days=7)
+
+        recent_other_polls = Poll.get_other_polls(org).exclude(created_on__lte=recent_window).order_by('-created_on')
+
+        return recent_other_polls
 
     def get_flow(self):
         """

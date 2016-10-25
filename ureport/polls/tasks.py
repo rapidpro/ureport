@@ -57,7 +57,7 @@ def pull_results_brick_polls(org, since, until):
 
     results_log = dict()
 
-    brick_polls = Poll.get_brick_polls(org)[:5]
+    brick_polls = Poll.get_brick_polls(org).distinct('flow_uuid')[:5]
     for poll in brick_polls:
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(poll.id)
@@ -76,7 +76,26 @@ def pull_results_other_polls(org, since, until):
     from .models import Poll
 
     results_log = dict()
-    other_polls = Poll.get_other_polls(org)
+    other_polls = Poll.get_other_polls(org).distinct('flow_uuid')
+    for poll in other_polls:
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(poll.id)
+        results_log['flow-%s' % poll.flow_uuid] = {"num_val_created": num_val_created,
+                                                   "num_val_updated": num_val_updated,
+                                                   "num_val_ignored": num_val_ignored,
+                                                   "num_path_created": num_path_created,
+                                                   "num_path_updated": num_path_updated,
+                                                   "num_path_ignored": num_path_ignored}
+
+    return results_log
+
+
+@org_task('results-pull-recent-other-polls')
+def pull_results_recent_other_polls(org, since, until):
+    from .models import Poll
+
+    results_log = dict()
+    other_polls = Poll.get_recent_other_polls(org).distinct('flow_uuid')
     for poll in other_polls:
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(poll.id)
