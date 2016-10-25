@@ -95,8 +95,8 @@ def pull_results_recent_other_polls(org, since, until):
     from .models import Poll
 
     results_log = dict()
-    other_polls = Poll.get_recent_other_polls(org).distinct('flow_uuid')
-    for poll in other_polls:
+    recent_other_polls = Poll.get_recent_other_polls(org).distinct('flow_uuid')
+    for poll in recent_other_polls:
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(poll.id)
         results_log['flow-%s' % poll.flow_uuid] = {"num_val_created": num_val_created,
