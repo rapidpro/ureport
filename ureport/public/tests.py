@@ -6,6 +6,7 @@ from dash.dashblocks.models import DashBlock, DashBlockType
 import mock
 from urllib import urlencode, quote
 
+from datetime import timedelta
 from django.core.files.images import ImageFile
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -49,12 +50,12 @@ class PublicTest(DashTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 15)
+        self.assertEquals(len(response.context['form'].fields), 17)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 33)
+        self.assertEquals(len(response.context['form'].fields), 35)
 
     def test_chooser(self):
         chooser_url = reverse('public.home')
@@ -203,8 +204,16 @@ class PublicTest(DashTest):
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['is_rtl_org'])
 
+    def test_set_story_widget_url(self):
+        home_url = reverse('public.index')
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertTrue(response.context['story_widget_url'])
+
     @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_index(self):
+    @mock.patch('django.core.cache.cache.get')
+    def test_index(self, mock_cache_get):
+        mock_cache_get.return_value = None
         home_url = reverse('public.index')
 
         response = self.client.get(home_url, SERVER_NAME='nigeria.ureport.io')
@@ -337,6 +346,32 @@ class PublicTest(DashTest):
         self.assertTrue(story1 in response.context['stories'])
         self.assertTrue(response.context['other_stories'])
         self.assertTrue(story3 in response.context['other_stories'])
+
+        story4 = Story.objects.create(title="story 4",
+                                      featured=True,
+                                      content="body contents 4",
+                                      org=self.uganda,
+                                      created_by=self.admin,
+                                      modified_by=self.admin)
+
+        response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEquals(response.context['org'], self.uganda)
+
+        self.assertTrue(response.context['stories'])
+        self.assertEqual(response.context['stories'][0].pk, story4.pk)
+        self.assertEqual(response.context['stories'][1].pk, story1.pk)
+
+        story4.featured = False
+        story4.save()
+
+        response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEquals(response.context['org'], self.uganda)
+
+        self.assertTrue(response.context['other_stories'])
+        self.assertEqual(response.context['other_stories'][0].pk, story4.pk)
+        self.assertEqual(response.context['other_stories'][1].pk, story3.pk)
 
         video1 = Video.objects.create(title='video 1',
                                       video_id='video_1',
@@ -695,6 +730,17 @@ class PublicTest(DashTest):
         self.assertEquals(response.context['polls'][1], poll2)
         self.assertEquals(response.context['polls'][2], poll1)
 
+        poll1.poll_date = poll3.poll_date + timedelta(days=1)
+        poll1.save()
+
+        response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.context['polls'][0], poll1)
+        self.assertEquals(response.context['polls'][1], poll3)
+        self.assertEquals(response.context['polls'][2], poll2)
+
+        poll1.poll_date = poll1.created_on
+        poll1.save()
+
         poll3.is_active = False
         poll3.save()
 
@@ -1006,7 +1052,10 @@ class PublicTest(DashTest):
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertFalse(response.context['story_featured_images'])
 
-    def test_poll_question_results(self):
+    @mock.patch('django.core.cache.cache.get')
+    def test_poll_question_results(self, mock_cache_get):
+        mock_cache_get.return_value = None
+
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
         poll1_question = PollQuestion.objects.create(poll=poll1,

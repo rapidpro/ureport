@@ -85,7 +85,7 @@ class UtilsTest(DashTest):
 
         # rwanda should be included and the third in the list alphabetically by subdomain
         self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
-        self.assertEqual(get_linked_orgs()[settings_sites_count-1]['name'].lower(), 'rwanda')
+        self.assertEqual(get_linked_orgs()[settings_sites_count-3]['name'].lower(), 'rwanda')
 
         # revert subdomain to burundi
         self.org.subdomain = 'aaaburundi'
@@ -542,7 +542,9 @@ class UtilsTest(DashTest):
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
 
-    def test_get_gender_stats(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_gender_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         self.assertEqual(get_gender_stats(self.org), dict(female_count=0, female_percentage="---",
                                                           male_count=0, male_percentage="---"))
@@ -554,7 +556,9 @@ class UtilsTest(DashTest):
         self.assertEqual(get_gender_stats(self.org), dict(female_count=2, female_percentage="40%",
                                                           male_count=3, male_percentage="60%"))
 
-    def test_get_age_stats(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_age_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         expected = [dict(name='0-14', y=0), dict(name='15-19', y=0), dict(name='20-24', y=0),
                     dict(name='25-30', y=0), dict(name='31-34', y=0), dict(name='35+', y=0)]
@@ -596,7 +600,9 @@ class UtilsTest(DashTest):
 
         self.assertEqual(get_age_stats(self.org), json.dumps(expected))
 
-    def test_get_registration_stats(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_registration_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         tz = pytz.timezone('UTC')
         with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 6))):
@@ -662,8 +668,9 @@ class UtilsTest(DashTest):
         self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district', parent='R-STATE')),
                          [dict(boundary='R-DISTRICT', label='District', set=3)])
 
-    def test_get_regions_stats(self):
-
+    @patch('django.core.cache.cache.get')
+    def test_get_regions_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
         self.assertEqual(get_regions_stats(self.org), [])
 
         Boundary.objects.create(org=self.org, osm_id='R-NIGERIA', name='Nigeria', parent=None, level=0,
@@ -725,7 +732,9 @@ class UtilsTest(DashTest):
                 self.assertEqual(get_flows(self.org), "Fetched")
                 mock_fetch_flows.assert_called_once_with(self.org)
 
-    def test_get_reporters_count(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_reporters_count(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         self.assertEqual(get_reporters_count(self.org), 0)
 
@@ -734,10 +743,10 @@ class UtilsTest(DashTest):
         self.assertEqual(get_reporters_count(self.org), 5)
 
     def test_get_global_count(self):
-        with self.settings(CACHES = {'default': {'BACKEND': 'redis_cache.cache.RedisCache',
+        with self.settings(CACHES = {'default': {'BACKEND': 'django_redis.cache.RedisCache',
                                                  'LOCATION': '127.0.0.1:6379:1',
                                                  'OPTIONS': {
-                                                     'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+                                                     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
                                                  }
                                                  }}):
 
@@ -771,7 +780,9 @@ class UtilsTest(DashTest):
                 self.assertEqual(get_global_count(), 20)
                 cache_get_mock.assert_called_once_with('global_count', None)
 
-    def test_get_occupation_stats(self):
+    @patch('django.core.cache.cache.get')
+    def test_get_occupation_stats(self, mock_cache_get):
+        mock_cache_get.return_value = None
 
         self.assertEqual(get_occupation_stats(self.org), '[]')
 

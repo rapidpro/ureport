@@ -551,11 +551,14 @@ def get_segment_org_boundaries(org, segment):
 
 def populate_age_and_gender_poll_results(org=None):
     from ureport.contacts.models import Contact
+    LAST_POPULATED_CONTACT = 'last-contact-id-populated'
 
-    all_contacts = Contact.objects.all().values_list('id', flat=True)
+    last_contact_id_populated = cache.get(LAST_POPULATED_CONTACT, 0)
+
+    all_contacts = Contact.objects.filter(id__gt=last_contact_id_populated).values_list('id', flat=True).order_by('id')
 
     if org is not None:
-        all_contacts = Contact.objects.filter(org=org).values_list('id', flat=True)
+        all_contacts = Contact.objects.filter(org=org).values_list('id', flat=True).order_by('id')
 
     start = time.time()
     i = 0
@@ -578,6 +581,9 @@ def populate_age_and_gender_poll_results(org=None):
             if update_fields:
                 results_ids = list(PollResult.objects.filter(contact=contact.uuid).values_list('id', flat=True))
                 PollResult.objects.filter(id__in=results_ids).update(**update_fields)
+
+            if org is None:
+                cache.set(LAST_POPULATED_CONTACT, contact.pk, None)
 
         print "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
 

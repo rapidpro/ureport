@@ -68,12 +68,12 @@
                       FACEBOOK
                     .social-content{style:"padding-left:0px"}
                       .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"570", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
-                    %a.social-link.facebook-bg-color{ href:'{{ org|config:"facebook_page_url" }}' }
-                      - trans "VIEW MORE STORIES ON FACEBOOK"
+                    %a.social-link{ href:'{{ org|config:"facebook_page_url" }}' }
+                      - trans "View more stories on Facebook"
                       {{ org|org_arrow_link }}
             {% endif %}
 
-            {% if  org|config:"twitter_user_widget" and org|config:"twitter_handle" %}
+            {% if org|config:"twitter_handle" %}
             .col-md-4.small-pad-middle
               .social-container
                 .social-inner
@@ -82,11 +82,11 @@
                   .social-content
                     %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
 
-                    %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-widget-id:'{{ org|config:"twitter_user_widget" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+                    %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
-                  %a.social-link.twitter-bg-color.tweet-button{href:'https://twitter.com/intent/tweet?screen_name={{ org|config:"twitter_handle"}}'}
-                    - trans "TWEET TO"
-                    @{{ org|config:"twitter_handle"|upper}}
+                  %a.social-link.tweet-button{href:'https://twitter.com/intent/tweet?screen_name={{ org|config:"twitter_handle"}}'}
+                    - trans "Tweet to"
+                    @{{ org|config:"twitter_handle"}}
                     {{ org|org_arrow_link }}
 
             {% endif %}
@@ -99,8 +99,8 @@
                     {{org.name|upper}} &num;HASHTAGS
                   .social-content
                     %a.twitter-timeline{href:'https://twitter.com/{{ org|config:"twitter_user_widget" }}', data-widget-id:'{{ org|config:"twitter_search_widget" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:'{{org|config:"primary_color"}}'}
-                  %a.social-link.primary-bg-color.tweet-button{href:"https://twitter.com/intent/tweet?hashtags=ureport{{org.name}}%2Cureport%2C{{org.name}}"}
-                    - trans "COMPOSE NEW TWEET"
+                  %a.social-link.tweet-button{href:"https://twitter.com/intent/tweet?hashtags=ureport{{org.name}}%2Cureport%2C{{org.name}}"}
+                    - trans "Compose new Tweet"
                     {{ org|org_arrow_link }}
 
             {% endif %}
@@ -131,3 +131,7 @@
     }
 
     
+- block extra-script
+  {{ block.super }}
+  -if not is_iorg and org|config:"twitter_handle"
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>

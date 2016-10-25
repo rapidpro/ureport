@@ -151,10 +151,10 @@ REDIS_HOST = 'localhost'
 
 CACHES = {
     'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': '%s:6379:1' % REDIS_HOST,
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://%s:6379/1' % REDIS_HOST,
         'OPTIONS': {
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }

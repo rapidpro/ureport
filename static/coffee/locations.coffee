@@ -333,11 +333,11 @@ initMap = (id, geojson, question, districtLabel, wardLabel) ->
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + label + "</h2>"
 
-      html += "<div class='top-border primary-color'>" + window.string_Participation_Level.toUpperCase() + "</div>"
+      html += "<div class='bottom-border info-title primary-color'>" + window.string_Participation_Level.toUpperCase() + "</div>"
       html += "<div><table><tr><td class='info-count'>" + window.intcomma(results.set) + "</td><td class='info-count'>" + window.intcomma(results.set + results.unset) + "</td></tr>"
       html += "<tr><td class='info-tiny'>" + window.string_Responses + "</td><td class='info-tiny'>" + window.string_Reporters_in + " " + label + "</td></tr></table></div>"
 
-      html += "<div class='top-border primary-color'>" + window.string_Results.toUpperCase() + "</div>"
+      html += "<div class='bottom-border info-title primary-color'>" + window.string_Results.toUpperCase() + "</div>"
 
       percentage = results.percentage
       if percentage < 0 or results.set == 0
@@ -353,8 +353,8 @@ initMap = (id, geojson, question, districtLabel, wardLabel) ->
       html += "<tr class='row-top'><td class='info-percentage'>" + percentageTop + "</td>"
       html += "<td class='info-label'>" + topCategory + "</td></tr>"
 
-      html += "<tr class='row-other'><td class='info-percentage other-color top-border primary-border-color'>" + percentageOther + "</td>"
-      html += "<td class='info-label top-border primary-border-color'>" + otherCategory + "</td></tr>"
+      html += "<tr class='row-other'><td class='info-percentage other-color primary-border-color'>" + percentageOther + "</td>"
+      html += "<td class='info-label primary-border-color'>" + otherCategory + "</td></tr>"
 
       html += "</table></div>"
 

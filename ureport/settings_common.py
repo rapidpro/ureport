@@ -40,6 +40,7 @@ EMAIL_USE_TLS = True
 
 EMPTY_SUBDOMAIN_HOST = 'http://localhost:8000'
 SITE_API_HOST = 'http://localhost:8001'
+SITE_API_USER_AGENT = 'ureport/0.1'
 HOSTNAME = 'localhost:8000'
 SITE_CHOOSER_TEMPLATE = 'public/org_chooser.haml'
 SITE_CHOOSER_URL_NAME = 'public.home'
@@ -64,7 +65,7 @@ LANGUAGE_CODE = 'en'
 
 # Available languages for translation
 LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"),
-             ('uk', "Ukrainian"), ('my', "Burmese"))
+             ('uk', "Ukrainian"), ('my', "Burmese"), ('id', "Indonesian"))
 DEFAULT_LANGUAGE = "en"
 RTL_LANGUAGES = ['ar']
 
@@ -152,6 +153,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'ureport.public.context_processors.set_has_better_domain',
     'ureport.public.context_processors.set_is_iorg',
     'ureport.public.context_processors.set_is_rtl_org',
+    'ureport.public.context_processors.set_story_widget_url',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -168,16 +170,16 @@ ROOT_URLCONF = 'ureport.urls'
 
 CACHES = {
     'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379:1',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
         'OPTIONS': {
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
 
 if 'test' in sys.argv:
-    CACHES['default'] = {'BACKEND': 'django.core.cache.backends.dummy.DummyCache',}
+    CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
 
 from django.forms import Textarea
 
@@ -195,9 +197,10 @@ ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whe
                      dict(name='facebook_page_url', field=dict(help_text=_("The URL to the Facebook page for this organization"), required=False)),
                      dict(name='facebook_page_id', field=dict(help_text=_("The integer id to the Facebook page for this organization (optional)"), required=False)),
                      dict(name='facebook_app_id', field=dict(help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"), required=False)),
+                     dict(name='facebook_pixel_id', field=dict(help_text=_("The id of the Facebook Pixel for this organization (optional)"), required=False)),
                      dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), required=False)),
+                     dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), required=False)),
                      dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
-                     dict(name='twitter_user_widget', field=dict(help_text=_("The Twitter widget used for following new users"), required=False)),
                      dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
                      dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True),
                      dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")), superuser_only=True),
@@ -211,6 +214,7 @@ ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whe
                      dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True),
                      dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), required=False)),
                      dict(name='is_global', field=dict(help_text=_("If this org if for global data. e.g: It shows a world map instead of a country map."), required=False), superuser_only=True),
+                     dict(name='iso_code', field=dict(help_text=_("The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."), required=False)),
                      dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), required=False, widget=Textarea))]
 #                     dict(name='featured_state', field=dict(help_text=_("Choose the featured State of reporters shown on the home page")))]
 INSTALLED_APPS = (
@@ -341,7 +345,7 @@ PERMISSIONS = {
 
     'dashblocks.dashblock': ('html', ),
     'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
-    'polls.poll': ('questions', 'responses', 'images', 'pull_refresh'),
+    'polls.poll': ('questions', 'responses', 'images', 'pull_refresh', 'poll_date'),
     'stories.story': ('html', 'images'),
 
 }
@@ -409,7 +413,7 @@ AUTHENTICATION_BACKENDS = (
     'guardian.backends.ObjectPermissionBackend',
 )
 
-ANONYMOUS_USER_ID = -1
+ANONYMOUS_USER_NAME = 'AnonymousUser'
 
 #-----------------------------------------------------------------------------------
 # Async tasks with django-celery
@@ -485,12 +489,6 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=[0, 10, 20, 30, 40, 50]),
         'args': ('ureport.contacts.tasks.pull_contacts',)
     },
-    'results-cache-update': {
-        'task': 'dash.orgs.tasks.trigger_org_task',
-        'schedule': timedelta(minutes=10),
-        'relative': True,
-        'args': ('ureport.polls.tasks.results_cache_update',)
-    },
     'backfill-poll-results': {
         'task': 'dash.orgs.tasks.trigger_org_task',
         'schedule': timedelta(minutes=10),
@@ -540,9 +538,33 @@ PREVIOUS_ORG_SITES = [
         is_static=True,
     ),
     dict(
+        name="Guatemala",
+        host="http://guatemala.ureport.in/",
+        flag="flag_gt.png",
+        is_static=True,
+    ),
+    dict(
+        name="France",
+        host="http://france.ureport.in",
+        flag="flag_fr.png",
+        is_static=True,
+    ),
+    dict(
         name="Ireland",
         host="http://ireland.ureport.in",
         flag="flag_ir.png",
+        is_static=True,
+    ),
+    dict(
+        name="Thailand",
+        host="http://thailand.ureport.in",
+        flag="flag_th.png",
+        is_static=True,
+    ),
+    dict(
+        name='United Kingdom',
+        host="http://uk.ureport.in",
+        flag="flag_uk.png",
         is_static=True,
     ),
     dict(
@@ -571,3 +593,5 @@ SWAGGER_SETTINGS = {
         'get'
     ],
 }
+
+STORY_WIDGET_URL = 'http://ureportapp.ilhasoft.mobi/widget/'

@@ -37,10 +37,10 @@ class IndexView(SmartTemplateView):
 
         context['recent_polls'] = Poll.get_brick_polls(org)
 
-        context['stories'] = Story.objects.filter(org=org, is_active=True, featured=True).order_by('created_on')
+        context['stories'] = Story.objects.filter(org=org, is_active=True, featured=True).order_by('-created_on')
 
         other_stories = Story.objects.filter(org=org, is_active=True).exclude(pk__in=context['stories'])
-        other_stories = other_stories.order_by('created_on')
+        other_stories = other_stories.order_by('-created_on')
         context['other_stories'] = other_stories
 
         videos = Video.objects.filter(is_active=True, org=org).order_by('-created_on')
@@ -144,7 +144,7 @@ class PollContextMixin(object):
         context['latest_poll'] = main_poll
 
         context['categories'] = Category.objects.filter(org=org, is_active=True).order_by('name')
-        context['polls'] = Poll.get_public_polls(org=org).order_by('-created_on')
+        context['polls'] = Poll.get_public_polls(org=org).order_by('-poll_date')
 
         context['related_stories'] = []
         if main_poll:

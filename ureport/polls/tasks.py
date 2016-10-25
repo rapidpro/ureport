@@ -13,20 +13,6 @@ from ureport.utils import populate_age_and_gender_poll_results
 logger = logging.getLogger(__name__)
 
 
-@org_task('results-cache-update')
-def results_cache_update(org, since, until):
-    from .models import PollQuestion
-
-    pk_list = []
-
-    for question in PollQuestion.objects.filter(poll__org=org, is_active=True):
-        if question.is_open_ended():
-            question.get_results()
-            question.get_results(segment=dict(location='State'))
-            pk_list.append(question.pk)
-
-    return {'updated': pk_list}
-
 @org_task('backfill-poll-results')
 def backfill_poll_results(org, since, until):
     from .models import Poll, PollResult
@@ -78,6 +64,13 @@ def pull_results_other_polls(org, since, until):
         results_log['flow-%s' % poll.flow_uuid] = {"created": created, "updated": updated, "ignored": ignored}
 
     return results_log
+
+
+@app.task()
+def update_or_create_questions(poll_ids):
+    from .models import Poll
+    for poll in Poll.objects.filter(id__in=poll_ids):
+        poll.update_or_create_questions()
 
 
 @app.task(name='polls.pull_refresh')

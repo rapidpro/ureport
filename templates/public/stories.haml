@@ -18,16 +18,16 @@
                 .hero-title.hero-top-title.primary-bg-color
                   - trans "FEATURED STORY"
                 .story-hero-title
-                  {{ main_story.title|upper }}
+                  {{ main_story.title }}
                 -if story.created_by.first_name
                   .hero-author
                     - trans "BY"
                     {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
-                .hero-info
+                .hero-info.story-hero-info
                   {{ main_story.short_teaser }}
                 .hero-title.hero-link.primary-bg-color
                   %a{href:"{% url 'public.story_read' main_story.pk %}"}
-                    - trans "READ FULL STORY"
+                    - trans "Read full story"
                     {{ org|org_arrow_link }}
 
   - block banner
@@ -51,7 +51,7 @@
 
         .row
           -for category in categories
-            .col-md-3
+            .col-md-4{style: "white-space: nowrap; overflow: hidden;"}
               %input.category{ type:"radio", name:"category", value:"{{category.id}}", id:"category-{{category.id}}"}=
               %label{ for:"category-{{category.id}}" }= category.name
   .row
@@ -79,8 +79,8 @@
                   .half-border.none-color
                   .featured-story-teaser
                     {{ featured_story.short_teaser|safe }}
-                %a.featured-story-link.primary-bg-color{href:"{% url 'public.story_read' featured_story.pk %}"}
-                  - trans "READ FULL STORY"
+                %a.featured-story-link{href:"{% url 'public.story_read' featured_story.pk %}"}
+                  - trans "Read full story"
                   {{ org|org_arrow_link }}
 
   %hr.aaa
@@ -133,3 +133,6 @@
 
     }
 
+    .featured-story-teaser img {
+      max-width: 100%;
+    }
