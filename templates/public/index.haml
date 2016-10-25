@@ -126,7 +126,7 @@
                                 {{ response.message }}
 
                 %a.hero-link.primary-bg-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
-                  - trans "VIEW FULL RESULT"
+                  - trans "View full results"
                   {{ org|org_arrow_link }}
 
   - block banner
@@ -218,8 +218,8 @@
                 - trans "FEATURED VIDEO"
               .brick-content{style:"padding: 0px; width: 100%; height:325px; bottom:40px;"}
                 %iframe{ width:"100%", height:"100%", src:"//www.youtube.com/embed/{{ vid.video_id }}?rel=0&autohide=1&showinfo=0", frameborder:"0"}
-              %a.brick-link.primary-bg-color{ href:"http://www.youtube.com/watch?v={{ vid.video_id }}"}
-                - trans "WATCH MORE VIDEOS"
+              %a.brick-link{ href:"http://www.youtube.com/watch?v={{ vid.video_id }}"}
+                - trans "Watch more videos"
                 {{ org|org_arrow_link }}
 
         {% if org|config:"featured_state" and False %}
@@ -241,7 +241,7 @@
               .brick-align{style:"padding: 30px 0;"}
                 %iframe{ src:'{{ story_widget_url }}{{ org|config:"iso_code"}}', allowtransparency:"true", frameborder:"0", scrolling:"yes", style:"border:none;overflow:scroll;height:600px;width: 100%;"}
           %a.ureportapp-bg-color.brick-link
-            - trans "CHECK MORE STORIES IN U-REPORT APP"
+            - trans "Check more stories in U-Report app"
             {{ org|org_arrow_link }}
         {% endif %}
 
@@ -254,7 +254,7 @@
               .brick-align{style:"padding: 40px 0px 10px 0px; max-width:98%; overflow:hidden;"}
                 .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
           %a.facebook-bg-color.brick-link{ href:'{{ org|config:"facebook_page_url" }}' }
-            - trans "VIEW MORE STORIES ON FACEBOOK"
+            - trans "View more stories on Facebook"
             {{ org|org_arrow_link }}
         {% endif %}
 
@@ -267,7 +267,7 @@
               .brick-align{style:"padding: 0px"}
                 %iframe.lightwidget-widget{ src:'//lightwidget.com/widgets/{{org|config:"instagram_lightwidget_id"}}.html', id:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}', name:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}',  scrolling:'no', allowtransparency:'true',  style:'width: 100%; border: 0; overflow: hidden;'}
           %a.instagram-bg-color.brick-link{ href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
-            - trans "VIEW MORE ON INSTAGRAM"
+            - trans "View more on Instagram"
             {{ org|org_arrow_link }}
         {% endif %}
 
@@ -283,8 +283,8 @@
 
                 %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"340px", height:"600px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
-            %a.twitter-bg-color.brick-link{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
-              - trans "READ MORE TWEETS ON TWITTER"
+            %a.brick-link{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
+              - trans "Read more tweets on Twitter"
               {{ org|org_arrow_link }}
         {% endif %}
 
@@ -320,8 +320,8 @@
                     .brick-long-story-text
                       {{ story.summary|linebreaksbr }}
 
-                %a.brick-link.primary-bg-color{ href:"{% url 'public.story_read' story.pk %}" }
-                  - trans "READ FULL STORY"
+                %a.brick-link{ href:"{% url 'public.story_read' story.pk %}" }
+                  - trans "Read full story"
                   {{ org|org_arrow_link }}
           - else
             .brick.story-brick.size11{data-priority:"{% cycle '4' '3' '2' %}"}
@@ -339,8 +339,8 @@
 
                 .brick-short-story-title
                   {{ story.title }}
-                %a.brick-link.primary-bg-color{ href:"{% url 'public.story_read' story.pk %}" }
-                  - trans "READ FULL STORY"
+                %a.brick-link{ href:"{% url 'public.story_read' story.pk %}" }
+                  - trans "Read full story"
                   {{ org|org_arrow_link }}
 
         - if stories|length < 12
@@ -361,8 +361,8 @@
                   .brick-short-story-title
                     {{ ot_story.title }}
 
-                %a.brick-link.primary-bg-color{href:"{% url 'public.story_read' ot_story.pk %}"}
-                  - trans "READ FULL STORY"
+                %a.brick-link{href:"{% url 'public.story_read' ot_story.pk %}"}
+                  - trans "Read full story"
                   {{ org|org_arrow_link }}
 
         - for poll in recent_polls|slice:"3"
@@ -392,8 +392,8 @@
                     .brick-poll-chart{ data-question: "{{ poll.get_first_question.id }}", id: "graph-{{ poll.get_first_question.id }}" }
 
 
-              %a.brick-link.primary-bg-color{ href: "{% url 'public.poll_read' poll.id %}" }
-                - trans "VIEW FULL RESULT"
+              %a.brick-link{ href: "{% url 'public.poll_read' poll.id %}" }
+                - trans "View full results"
                 {{ org|org_arrow_link }}
     -else
       #iorg-brick-container
@@ -419,8 +419,8 @@
                     .brick-long-story-text
                       {{ story.summary|linebreaksbr }}
 
-                %a.brick-link.primary-bg-color{ href:"{% url 'public.story_read' story.pk %}" }
-                  - trans "READ FULL STORY"
+                %a.brick-link{ href:"{% url 'public.story_read' story.pk %}" }
+                  - trans "Read full story"
                   {{ org|org_arrow_link }}
 
 - block extra-style
@@ -622,7 +622,10 @@
                 text: null
               },
               tooltip: {
-                pointFormat: '<b>{point.percentage:.1f}%</b>'
+                pointFormat: '<b>{point.percentage:.1f}%</b>',
+                style: {
+                  fontFamily: "MontserratBold"
+                }
               },
               plotOptions: {
                 pie: {
@@ -633,7 +636,8 @@
                     enabled: false,
                     format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                        fontFamily: "MontserratBold"
                     }
                   }
                 }

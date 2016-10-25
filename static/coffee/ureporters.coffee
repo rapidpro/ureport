@@ -255,7 +255,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
     html = "<div class='info'>"
     html += "<h2 class='admin-name'>" + mainLabelName + "</h2>"
 
-    html += "<div class='top-border info-title primary-color'>" + window.string_Population.toUpperCase() + "</div>"
+    html += "<div class='bottom-border info-title primary-color'>" + window.string_Population.toUpperCase() + "</div>"
     html += "<div><table><tr><td class='info-count'>" + intcomma(mainLabelRegistered) + "</td></tr>"
     html += "<tr><td class='info-tiny'>" + window.string_Registered_in + " " + mainLabelName + "</td></tr></table></div>"
 
@@ -269,11 +269,11 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
       html = "<div class='info'>"
       html += "<h2 class='admin-name'>" + props.name + "</h2>"
 
-      html += "<div class='top-border info-title primary-color'>" + window.string_Population.toUpperCase() + "</div>"
+      html += "<div class='bottom-border info-title primary-color'>" + window.string_Population.toUpperCase() + "</div>"
       html += "<div><table><tr><td class='info-count'>" + intcomma(result.set) + "</td></tr>"
       html += "<tr><td class='info-tiny'>" + window.string_Registered_in + " " + props.name + "</td></tr></table></div>"
 
-      html += "<div class='top-border info-title primary-color'>" + window.string_Density.toUpperCase() + "</div>"
+      html += "<div class='bottom-border hide-global-org info-title primary-color'>" + window.string_Density.toUpperCase() + "</div>"
 
       percentage = result.percentage
       if percentage < 0
@@ -281,8 +281,8 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
       else
         percentageTop = percentage + "%"
 
-      html += "<div class='info-percentage top-color'>" + percentageTop + "</div>"
-      html += "<div class='info-tiny'>" + window.string_of + " " + window.string_the + " " + topBoundary.label + " total</div>"
+      html += "<div class='info-percentage hide-global-org top-color'>" + percentageTop + "</div>"
+      html += "<div class='info-tiny hide-global-org'>" + window.string_of + " " + window.string_the + " " + topBoundary.label + " total</div>"
 
       html += "</div>"
 

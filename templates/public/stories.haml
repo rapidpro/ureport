@@ -27,7 +27,7 @@
                   {{ main_story.short_teaser }}
                 .hero-title.hero-link.primary-bg-color
                   %a{href:"{% url 'public.story_read' main_story.pk %}"}
-                    - trans "READ FULL STORY"
+                    - trans "Read full story"
                     {{ org|org_arrow_link }}
 
   - block banner
@@ -79,8 +79,8 @@
                   .half-border.none-color
                   .featured-story-teaser
                     {{ featured_story.short_teaser|safe }}
-                %a.featured-story-link.primary-bg-color{href:"{% url 'public.story_read' featured_story.pk %}"}
-                  - trans "READ FULL STORY"
+                %a.featured-story-link{href:"{% url 'public.story_read' featured_story.pk %}"}
+                  - trans "Read full story"
                   {{ org|org_arrow_link }}
 
   %hr.aaa
