@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-26 12:44+0000\n"
+"POT-Creation-Date: 2016-10-26 12:58+0000\n"
 "PO-Revision-Date: 2016-09-20 10:38+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/"
@@ -18,6 +18,571 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: dash/categories/models.py:20
+msgid "The name of this category"
+msgstr "Nama kategori ini"
+
+#: dash/categories/models.py:23
+msgid "An optional image that can describe this category"
+msgstr "Gambar opsional yang bisa menggambarkan kategori ini"
+
+#: dash/categories/models.py:26 ureport/polls/models.py:64
+msgid "The organization this category applies to"
+msgstr "Organisasi kategori ini berlaku untuk"
+
+#: dash/categories/models.py:47 templates/frame.haml:285
+#: templates/frame.haml.py:292
+msgid "Categories"
+msgstr "Kategori"
+
+#: dash/categories/models.py:53 dash/stories/models.py:129
+#: ureport/polls/models.py:604
+msgid "The name to describe this image"
+msgstr "Nama untuk menjelaskan gambar ini"
+
+#: dash/categories/models.py:56
+msgid "The category this image represents"
+msgstr "Kategori gambar ini mewakili"
+
+#: dash/categories/models.py:59 dash/stories/models.py:135
+#: ureport/polls/models.py:610
+msgid "The image file to use"
+msgstr "File gambar yang akan digunakan"
+
+#: dash/dashblocks/models.py:19
+msgid "The human readable name for this content type"
+msgstr "Nama yang familiar untuk jenis konten ini"
+
+#: dash/dashblocks/models.py:22
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "Untuk mengidentifikasi jenis konten ini, digunakan dengan tag template"
+
+#: dash/dashblocks/models.py:26
+msgid ""
+"A description of where this content type is used on the site and how it will "
+"be dsiplayed"
+msgstr ""
+"Sebuah deskripsi di mana jenis konten ini digunakan di dalam situs dan "
+"bagaimana hal itu akan ditampilkan"
+
+#: dash/dashblocks/models.py:31
+msgid "Whether this content should include a title"
+msgstr "Apakah konten ini harus mencakup judul"
+
+#: dash/dashblocks/models.py:34
+msgid "Whether this content should include an image"
+msgstr "Apakah konten ini harus mencakup gambar"
+
+#: dash/dashblocks/models.py:37
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Apakah konten ini harus menggunakan editor HTML"
+
+#: dash/dashblocks/models.py:40
+msgid "Whether this content should include a summary field"
+msgstr "Apakah konten ini harus mencakup rangkuman"
+
+#: dash/dashblocks/models.py:43
+msgid "Whether this content should include a link"
+msgstr "Apakah konten ini harus menyertakan link"
+
+#: dash/dashblocks/models.py:46
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr ""
+"Apakah konten ini harus memungkinkan upload gambar tambahan, di sebuah galeri"
+
+#: dash/dashblocks/models.py:50
+msgid "Whether this content has a color field"
+msgstr "Apakah konten ini memiliki kolom warna"
+
+#: dash/dashblocks/models.py:53
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Apakah konten ini harus memungkinkan pengaturan id YouTube"
+
+#: dash/dashblocks/models.py:56
+msgid "Whether this content should allow tags"
+msgstr "Apakah konten ini harus memungkinkan tag"
+
+#: dash/dashblocks/models.py:69
+msgid "Content Type"
+msgstr "Jenis konten"
+
+#: dash/dashblocks/models.py:70
+msgid "The category, or type for this content block"
+msgstr "Kategori, atau jenis untuk blok konten ini"
+
+#: dash/dashblocks/models.py:74
+msgid "The title for this block of content, optional"
+msgstr "Judul untuk blok konten ini, opsional"
+
+#: dash/dashblocks/models.py:77
+msgid "The summary for this item, should be short"
+msgstr "Ringkasan untuk item ini, harus pendek"
+
+#: dash/dashblocks/models.py:80
+msgid "The body of text for this content block, optional"
+msgstr "Isi teks untuk blok konten ini, opsional"
+
+#: dash/dashblocks/models.py:83
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Setiap gambar yang harus ditampilkan dengan blok konten ini, opsional"
+
+#: dash/dashblocks/models.py:87
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr ""
+"Sebuah warna latar belakang digunakan untuk gambar, dalam format: #rrggbb"
+
+#: dash/dashblocks/models.py:91
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Link yang harus dikaitkan dengan blok konten ini, opsional"
+
+#: dash/dashblocks/models.py:95 ureport/news/models.py:42
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Id dari video YouTube yang harus dikaitkan dengan item ini"
+
+#: dash/dashblocks/models.py:99
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Tag untuk memblokir konten ini, dipisahkan oleh spasi, dapat digunakan untuk "
+"melakukan penyaringan lebih maju, opsional"
+
+#: dash/dashblocks/models.py:103
+msgid "The priority for this block, higher priority blocks come first"
+msgstr ""
+"Prioritas untuk blok ini, blok prioritas yang lebih tinggi datang pertama"
+
+#: dash/dashblocks/models.py:108
+msgid "The organization this content block belongs to"
+msgstr "Organisasi blok konten ini milik"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:8
+msgid "Gallery"
+msgstr "Galeri"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:17
+msgid "Add Image"
+msgstr "Tambah Gambar"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
+msgid "Search"
+msgstr "Cari"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
+#: templates/polls/poll_list.haml:6
+msgid "Add"
+msgstr "Tambah"
+
+#: dash/dashblocks/views.py:16 templates/frame.haml:235
+msgid "Content Types"
+msgstr "Jenis Konten"
+
+#: dash/dashblocks/views.py:118
+msgid "Content Blocks"
+msgstr "Blok Konten"
+
+#: dash/dashblocks/views.py:120
+#, python-format
+msgid "%s Blocks"
+msgstr "%s Blok"
+
+#: dash/dashblocks/views.py:158
+#, python-format
+msgid "Edit %s"
+msgstr "Rubah  %s"
+
+#: dash/dashblocks/views.py:182
+#, python-format
+msgid "Create %s"
+msgstr "Buat %s"
+
+#: dash/dashblocks/views.py:184
+msgid "Create Content Block"
+msgstr "Buat Blok Konten"
+
+#: dash/orgs/forms.py:12
+msgid "Your first name"
+msgstr "Nama depan"
+
+#: dash/orgs/forms.py:13
+msgid "Your last name"
+msgstr "Nama belakang"
+
+#: dash/orgs/forms.py:14
+msgid "Your email address"
+msgstr "Alamat surel"
+
+#: dash/orgs/forms.py:17
+msgid "Your password, at least eight letters please"
+msgstr "Kata kunci, setidaknya delapan huruf"
+
+#: dash/orgs/forms.py:23
+msgid "That email address is already used"
+msgstr "surel tersebut sudah digunakan"
+
+#: dash/orgs/forms.py:30
+msgid "Passwords must contain at least 8 letters."
+msgstr "Kata kunci harus minimal delapan huruf."
+
+#: dash/orgs/forms.py:49
+msgid "This domain is used for subdomains"
+msgstr "Domain ini digunakan untuk subdomain"
+
+#: dash/orgs/models.py:36 dash/orgs/models.py:381 ureport/assets/models.py:19
+msgid "Name"
+msgstr "Nama"
+
+#: dash/orgs/models.py:37
+msgid "The name of this organization"
+msgstr "Nama organisasi ini"
+
+#: dash/orgs/models.py:41
+msgid "The logo that should be used for this organization"
+msgstr "Logo yang akan dipakai di organisasi ini"
+
+#: dash/orgs/models.py:44 dash/orgs/views.py:297
+msgid "Administrators"
+msgstr "Administrators"
+
+#: dash/orgs/models.py:45
+msgid "The administrators in your organization"
+msgstr "Administrator dalam organisasi Anda"
+
+#: dash/orgs/models.py:48
+msgid "Viewers"
+msgstr "Pembaca"
+
+#: dash/orgs/models.py:49
+msgid "The viewers in your organization"
+msgstr "Pembaca di organisasi ini"
+
+#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
+#: dash/orgs/views.py:298
+msgid "Editors"
+msgstr "Editor"
+
+#: dash/orgs/models.py:53
+msgid "The editors in your organization"
+msgstr "Para editor di organisasi ini"
+
+#: dash/orgs/models.py:56
+msgid "Language"
+msgstr "Bahasa"
+
+#: dash/orgs/models.py:57
+msgid "The main language used by this organization"
+msgstr "Bahasa utama yang digunakan untuk organisasi ini"
+
+#: dash/orgs/models.py:60
+msgid "Subdomain"
+msgstr "Subdomain"
+
+#: dash/orgs/models.py:61
+msgid "This subdomain is not available"
+msgstr "Subdomain ini tidak ada"
+
+#: dash/orgs/models.py:62
+msgid "The subdomain for this organization"
+msgstr "Subdomain untuk organisasi ini"
+
+#: dash/orgs/models.py:65
+msgid "Domain"
+msgstr "Domain"
+
+#: dash/orgs/models.py:66
+msgid "This domain is not available"
+msgstr "Domain ini tidak ada"
+
+#: dash/orgs/models.py:67
+msgid "The custom domain for this organization"
+msgstr "Custom domain untuk organisasi ini"
+
+#: dash/orgs/models.py:70
+msgid "Timezone"
+msgstr "Zona waktu"
+
+#: dash/orgs/models.py:71
+msgid "The timezone your organization is in."
+msgstr "Zona waktu di organisasi ini adalah"
+
+#: dash/orgs/models.py:75
+msgid "The API token for the RapidPro account this dashboard is tied to"
+msgstr "API tanda untuk akun RapidPro dashboard ini terkait dengan"
+
+#: dash/orgs/models.py:80
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+"JSON yang digunakan untuk menyimpan informasi konfigurasi yang terkait "
+"dengan organisasi ini"
+
+#: dash/orgs/models.py:311
+msgid "Administrator"
+msgstr "Administrator"
+
+#: dash/orgs/models.py:312
+msgid "Editor"
+msgstr "Editor"
+
+#: dash/orgs/models.py:313
+msgid "Viewer"
+msgstr "Pembaca"
+
+#: dash/orgs/models.py:318 dash/orgs/models.py:377 ureport/assets/models.py:16
+#: ureport/contacts/models.py:44
+msgid "Org"
+msgstr "Org"
+
+#: dash/orgs/models.py:319
+msgid "The organization to which the account is invited to view"
+msgstr "Organisasi yang pengguna diundang untuk melihatnya"
+
+#: dash/orgs/models.py:322
+msgid "Email"
+msgstr "Surel"
+
+#: dash/orgs/models.py:323
+msgid "The email to which we send the invitation of the viewer"
+msgstr "tujuan surel yang kami kirim undangan dari peninjau"
+
+#: dash/orgs/models.py:326
+msgid "Secret"
+msgstr "Rahasia"
+
+#: dash/orgs/models.py:327
+msgid "a unique code associated with this invitation"
+msgstr "kode unik yang terkait dengan undangan ini"
+
+#: dash/orgs/models.py:330
+msgid "User Role"
+msgstr "Peran pengguna"
+
+#: dash/orgs/models.py:361
+#, python-format
+msgid "%s Invitation"
+msgstr "%s Undangan"
+
+#: dash/orgs/models.py:373 ureport/assets/models.py:11
+msgid "Banner"
+msgstr "Spanduk"
+
+#: dash/orgs/models.py:374 ureport/assets/models.py:12
+msgid "Pattern"
+msgstr "Rumus"
+
+#: dash/orgs/models.py:378
+msgid "The organization in which the image will be used"
+msgstr "Organisasi di mana gambar akan digunakan"
+
+#: dash/orgs/models.py:382
+msgid "The name to describe this background"
+msgstr "Nama untuk menggambarkan latar belakang ini"
+
+#: dash/orgs/models.py:385
+msgid "Background type"
+msgstr "Jenis latar belakang"
+
+#: dash/orgs/models.py:387 ureport/assets/models.py:24
+msgid "The image file"
+msgstr "File gambar"
+
+#: dash/orgs/templates/orgs/email/invitation_email.html:9
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
+"a>.\n"
+"  "
+msgstr ""
+"\n"
+"Anda telah diundang untuk bergabung %(org_name)s.\n"
+"<br/>\n"
+"Untuk menerima undangan, <a href='%(host)s%(join_url)s'>Klik disini</a>."
+
+#: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
+msgid "Edit"
+msgstr "Rubah"
+
+#: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
+msgid "Manage Users"
+msgstr "Kelola Pengguna"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:13
+msgid "Accounts"
+msgstr "Akun"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:16
+msgid "Admins"
+msgstr "Admin"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:22
+msgid "Remove"
+msgstr "Hapus"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:29
+msgid "You must have at least one administator"
+msgstr "Kamu harus mempunyai setidaknya satu administrator"
+
+#: dash/orgs/views.py:168
+msgid "Select your Organization"
+msgstr "Pilih Organisasi"
+
+#: dash/orgs/views.py:179
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+"Akun Anda tidak terkait dengan organisasi. Silahkan Hubungi administrator."
+
+#: dash/orgs/views.py:219 dash/orgs/views.py:229
+msgid "Your Organization"
+msgstr "Organisasi Anda"
+
+#: dash/orgs/views.py:226
+msgid "Not Set"
+msgstr "Belum di set"
+
+#: dash/orgs/views.py:296
+msgid "Invite people to your organization"
+msgstr "Undang orang ke organisasi"
+
+#: dash/orgs/views.py:299
+msgid "User group"
+msgstr "Kelompok Pengguna"
+
+#: dash/orgs/views.py:310
+msgid "One of the emails you entered is invalid."
+msgstr "Satu dari email yang dimasukkan tidak sesuai format"
+
+#: dash/orgs/views.py:323
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Kelola %(name)s Pengguna"
+
+#: dash/orgs/views.py:438
+msgid "Create"
+msgstr "Buat"
+
+#: dash/orgs/views.py:446
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+"link undangan Anda tidak valid. Silahkan hubungi administrator organisasi "
+"Anda."
+
+#: dash/orgs/views.py:502 dash/orgs/views.py:547
+#, python-format
+msgid "Join %(name)s"
+msgstr "Gabung %(name)s"
+
+#: dash/orgs/views.py:524
+msgid "Join"
+msgstr "Gabung"
+
+#: dash/orgs/views.py:533
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+"link undangan Anda telah kedaluwarsa. Silahkan hubungi administrator "
+"organisasi Anda."
+
+#: dash/orgs/views.py:640
+msgid "Task"
+msgstr "Tugas"
+
+#: dash/orgs/views.py:644
+msgid "Tasks"
+msgstr "Tugas-tugas"
+
+#: dash/stories/models.py:13
+msgid "The title for this story"
+msgstr "Judul cerita"
+
+#: dash/stories/models.py:17
+msgid "Whether this story is featured"
+msgstr "Cerita ini di tampilkan di halaman depan"
+
+#: dash/stories/models.py:20
+msgid "The summary for the story"
+msgstr "Ringkasan cerita"
+
+#: dash/stories/models.py:22
+msgid "The body of text for the story"
+msgstr "Isi cerita"
+
+#: dash/stories/models.py:24
+msgid "The writer of the story"
+msgstr "Penulis cerita"
+
+#: dash/stories/models.py:27
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Sebuah link ke file mp3 untuk menerbitkan cerita ini"
+
+#: dash/stories/models.py:31
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"Id dari video YouTube yang harus dikaitkan dengan cerita ini (ini adalah "
+"teks yang muncul setelah v = dan sebelum & dalam URL YouTube)"
+
+#: dash/stories/models.py:37
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Tag untuk cerita ini, dipisahkan oleh spasi, dapat digunakan untuk melakukan "
+"penyaringan lebih maju, opsional"
+
+#: dash/stories/models.py:42
+msgid "The category for this story"
+msgstr "Kategori cerita"
+
+#: dash/stories/models.py:46
+msgid "The organization this story belongs to"
+msgstr "Organisasi yang memiliki cerita ini"
+
+#: dash/stories/models.py:124 templates/frame.haml:329
+#: templates/frame.haml.py:481 templates/public/stories.haml:7
+msgid "Stories"
+msgstr "Cerita"
+
+#: dash/stories/models.py:132
+msgid "The story to associate to"
+msgstr "cerita untuk mengaitkan"
+
+#: dash/stories/views.py:59
+msgid "Yes"
+msgstr "Ya"
+
+#: dash/stories/views.py:60
+msgid "No"
+msgstr "Tidak"
+
+#: dash/stories/views.py:79
+msgid "Story Images"
+msgstr "Gambar cerita"
+
+#: dash/stories/views.py:91 dash/stories/views.py:99 ureport/polls/views.py:164
+#: ureport/polls/views.py:171
+#, python-format
+msgid "Image %d"
+msgstr "Gambar %d"
+
+#: dash/stories/views.py:92
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "Gambar untuk ditampilkan pada halaman cerita dan di preview. (pilihan)"
+
+#: dash/stories/views.py:100
+msgid "Image to display on story page and in previews (optional)"
+msgstr "Image to display on story page and in previews (optional)"
 
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
@@ -39,10 +604,6 @@ msgstr "Orgs"
 msgid "Users"
 msgstr "Nama Pengguna"
 
-#: templates/frame.haml:235
-msgid "Content Types"
-msgstr "Jenis Konten"
-
 #: templates/frame.haml:242
 msgid "Images"
 msgstr "Gambar"
@@ -59,10 +620,6 @@ msgstr "Negara Alias"
 msgid "Polls"
 msgstr "Polling"
 
-#: templates/frame.haml:285 templates/frame.haml.py:292
-msgid "Categories"
-msgstr "Kategori"
-
 #: templates/frame.haml:300
 msgid "Category Images"
 msgstr "Gambar Kategori"
@@ -70,11 +627,6 @@ msgstr "Gambar Kategori"
 #: templates/frame.haml:320
 msgid "News Items"
 msgstr "Berita"
-
-#: templates/frame.haml:329 templates/frame.haml.py:481
-#: templates/public/stories.haml:7
-msgid "Stories"
-msgstr "Cerita"
 
 #: templates/frame.haml:338
 msgid "Job Sources"
@@ -199,18 +751,6 @@ msgstr ""
 "\n"
 "Ingat untuk sumber pekerjaan Twitter Anda diminta untuk mendapatkan id "
 "widget dari twitter."
-
-#: templates/orgs/org_home.haml:8
-msgid "Edit"
-msgstr "Rubah"
-
-#: templates/orgs/org_home.haml:13
-msgid "Manage Users"
-msgstr "Kelola Pengguna"
-
-#: templates/polls/poll_list.haml:6
-msgid "Add"
-msgstr "Tambah"
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
 msgid "ABOUT U-REPORT"
@@ -752,29 +1292,13 @@ msgstr "Lupa Password"
 msgid "Refreshed %s cache for this organization"
 msgstr "Refreshed %s cache untuk organisasi ini"
 
-#: ureport/assets/models.py:11
-msgid "Banner"
-msgstr "Spanduk"
-
-#: ureport/assets/models.py:12
-msgid "Pattern"
-msgstr "Rumus"
-
 #: ureport/assets/models.py:13
 msgid "Flag"
 msgstr "Bendera"
 
-#: ureport/assets/models.py:16 ureport/contacts/models.py:44
-msgid "Org"
-msgstr "Org"
-
 #: ureport/assets/models.py:17
 msgid "The organization to which the image will be used"
 msgstr "Organisasi yang akan di gunakan untuk gambar ini"
-
-#: ureport/assets/models.py:19
-msgid "Name"
-msgstr "Nama"
 
 #: ureport/assets/models.py:20
 msgid "A short descriptive name for this image"
@@ -783,10 +1307,6 @@ msgstr "Sebuah nama deskriptif singkat untuk gambar ini"
 #: ureport/assets/models.py:22
 msgid "Image type"
 msgstr "Tipe Gambar"
-
-#: ureport/assets/models.py:24
-msgid "The image file"
-msgstr "File gambar"
 
 #: ureport/contacts/models.py:46
 msgid "Label"
@@ -942,10 +1462,6 @@ msgstr "Judul Video ini"
 msgid "A short summary description for this video"
 msgstr "Deskripsi ringkasan pendek untuk video ini"
 
-#: ureport/news/models.py:42
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "Id dari video YouTube yang harus dikaitkan dengan item ini"
-
 #: ureport/news/models.py:48
 msgid "The organization this video belongs to"
 msgstr "Organisasi video ini milik"
@@ -953,10 +1469,6 @@ msgstr "Organisasi video ini milik"
 #: ureport/polls/models.py:62
 msgid "The name of this poll category"
 msgstr "Nama kategori jajak pendapat ini"
-
-#: ureport/polls/models.py:64
-msgid "The organization this category applies to"
-msgstr "Organisasi kategori ini berlaku untuk"
 
 #: ureport/polls/models.py:71
 msgid "Poll Categories"
@@ -1012,17 +1524,9 @@ msgstr "Kategori gambar untuk ditampilkan untuk jajak pendapat (opsional)"
 msgid "The organization this poll is part of"
 msgstr "organisasi jajak pendapat ini adalah bagian dari"
 
-#: ureport/polls/models.py:604
-msgid "The name to describe this image"
-msgstr "Nama untuk menjelaskan gambar ini"
-
 #: ureport/polls/models.py:607
 msgid "The poll to associate to"
 msgstr "Jajak pendapat untuk mengaitkan ke"
-
-#: ureport/polls/models.py:610
-msgid "The image file to use"
-msgstr "File gambar yang akan digunakan"
 
 #: ureport/polls/models.py:621
 msgid "The poll for this response"
@@ -1104,11 +1608,6 @@ msgstr "Gambar jajak pendapat"
 #: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Sekarang masukkan tanggapan Anda yang ingin di fitur. (jika ada)"
-
-#: ureport/polls/views.py:164 ureport/polls/views.py:171
-#, python-format
-msgid "Image %d"
-msgstr "Gambar %d"
 
 #: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
@@ -1373,386 +1872,6 @@ msgstr ""
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
-
-#~ msgid "The name of this category"
-#~ msgstr "Nama kategori ini"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "Gambar opsional yang bisa menggambarkan kategori ini"
-
-#~ msgid "The category this image represents"
-#~ msgstr "Kategori gambar ini mewakili"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "Nama yang familiar untuk jenis konten ini"
-
-#~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr ""
-#~ "Untuk mengidentifikasi jenis konten ini, digunakan dengan tag template"
-
-#~ msgid ""
-#~ "A description of where this content type is used on the site and how it "
-#~ "will be dsiplayed"
-#~ msgstr ""
-#~ "Sebuah deskripsi di mana jenis konten ini digunakan di dalam situs dan "
-#~ "bagaimana hal itu akan ditampilkan"
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "Apakah konten ini harus mencakup judul"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "Apakah konten ini harus mencakup gambar"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "Apakah konten ini harus menggunakan editor HTML"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "Apakah konten ini harus mencakup rangkuman"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "Apakah konten ini harus menyertakan link"
-
-#~ msgid ""
-#~ "Whether this content should allow upload of additional images, ie a "
-#~ "gallery"
-#~ msgstr ""
-#~ "Apakah konten ini harus memungkinkan upload gambar tambahan, di sebuah "
-#~ "galeri"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "Apakah konten ini memiliki kolom warna"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "Apakah konten ini harus memungkinkan pengaturan id YouTube"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "Apakah konten ini harus memungkinkan tag"
-
-#~ msgid "Content Type"
-#~ msgstr "Jenis konten"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "Kategori, atau jenis untuk blok konten ini"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "Judul untuk blok konten ini, opsional"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "Ringkasan untuk item ini, harus pendek"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "Isi teks untuk blok konten ini, opsional"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr ""
-#~ "Setiap gambar yang harus ditampilkan dengan blok konten ini, opsional"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr ""
-#~ "Sebuah warna latar belakang digunakan untuk gambar, dalam format: #rrggbb"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "Link yang harus dikaitkan dengan blok konten ini, opsional"
-
-#~ msgid ""
-#~ "Any tags for this content block, separated by spaces, can be used to do "
-#~ "more advanced filtering, optional"
-#~ msgstr ""
-#~ "Tag untuk memblokir konten ini, dipisahkan oleh spasi, dapat digunakan "
-#~ "untuk melakukan penyaringan lebih maju, opsional"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr ""
-#~ "Prioritas untuk blok ini, blok prioritas yang lebih tinggi datang pertama"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "Organisasi blok konten ini milik"
-
-#~ msgid "Gallery"
-#~ msgstr "Galeri"
-
-#~ msgid "Add Image"
-#~ msgstr "Tambah Gambar"
-
-#~ msgid "Search"
-#~ msgstr "Cari"
-
-#~ msgid "Content Blocks"
-#~ msgstr "Blok Konten"
-
-#~ msgid "%s Blocks"
-#~ msgstr "%s Blok"
-
-#~ msgid "Edit %s"
-#~ msgstr "Rubah  %s"
-
-#~ msgid "Create %s"
-#~ msgstr "Buat %s"
-
-#~ msgid "Create Content Block"
-#~ msgstr "Buat Blok Konten"
-
-#~ msgid "Your first name"
-#~ msgstr "Nama depan"
-
-#~ msgid "Your last name"
-#~ msgstr "Nama belakang"
-
-#~ msgid "Your email address"
-#~ msgstr "Alamat surel"
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "Kata kunci, setidaknya delapan huruf"
-
-#~ msgid "That email address is already used"
-#~ msgstr "surel tersebut sudah digunakan"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "Kata kunci harus minimal delapan huruf."
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "Domain ini digunakan untuk subdomain"
-
-#~ msgid "The name of this organization"
-#~ msgstr "Nama organisasi ini"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "Logo yang akan dipakai di organisasi ini"
-
-#~ msgid "Administrators"
-#~ msgstr "Administrators"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "Administrator dalam organisasi Anda"
-
-#~ msgid "Viewers"
-#~ msgstr "Pembaca"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "Pembaca di organisasi ini"
-
-#~ msgid "Editors"
-#~ msgstr "Editor"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "Para editor di organisasi ini"
-
-#~ msgid "Language"
-#~ msgstr "Bahasa"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "Bahasa utama yang digunakan untuk organisasi ini"
-
-#~ msgid "Subdomain"
-#~ msgstr "Subdomain"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "Subdomain ini tidak ada"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "Subdomain untuk organisasi ini"
-
-#~ msgid "Domain"
-#~ msgstr "Domain"
-
-#~ msgid "This domain is not available"
-#~ msgstr "Domain ini tidak ada"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "Custom domain untuk organisasi ini"
-
-#~ msgid "Timezone"
-#~ msgstr "Zona waktu"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "Zona waktu di organisasi ini adalah"
-
-#~ msgid "The API token for the RapidPro account this dashboard is tied to"
-#~ msgstr "API tanda untuk akun RapidPro dashboard ini terkait dengan"
-
-#~ msgid ""
-#~ "JSON blob used to store configuration information associated with this "
-#~ "organization"
-#~ msgstr ""
-#~ "JSON yang digunakan untuk menyimpan informasi konfigurasi yang terkait "
-#~ "dengan organisasi ini"
-
-#~ msgid "Administrator"
-#~ msgstr "Administrator"
-
-#~ msgid "Editor"
-#~ msgstr "Editor"
-
-#~ msgid "Viewer"
-#~ msgstr "Pembaca"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "Organisasi yang pengguna diundang untuk melihatnya"
-
-#~ msgid "Email"
-#~ msgstr "Surel"
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "tujuan surel yang kami kirim undangan dari peninjau"
-
-#~ msgid "Secret"
-#~ msgstr "Rahasia"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "kode unik yang terkait dengan undangan ini"
-
-#~ msgid "User Role"
-#~ msgstr "Peran pengguna"
-
-#~ msgid "%s Invitation"
-#~ msgstr "%s Undangan"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "Organisasi di mana gambar akan digunakan"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "Nama untuk menggambarkan latar belakang ini"
-
-#~ msgid "Background type"
-#~ msgstr "Jenis latar belakang"
-
-#~ msgid ""
-#~ "\n"
-#~ "      You've been invited to join %(org_name)s.\n"
-#~ "      <br/>\n"
-#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click "
-#~ "here</a>.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "Anda telah diundang untuk bergabung %(org_name)s.\n"
-#~ "<br/>\n"
-#~ "Untuk menerima undangan, <a href='%(host)s%(join_url)s'>Klik disini</a>."
-
-#~ msgid "Accounts"
-#~ msgstr "Akun"
-
-#~ msgid "Admins"
-#~ msgstr "Admin"
-
-#~ msgid "Remove"
-#~ msgstr "Hapus"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "Kamu harus mempunyai setidaknya satu administrator"
-
-#~ msgid "Select your Organization"
-#~ msgstr "Pilih Organisasi"
-
-#~ msgid ""
-#~ "Your account is not associated to an organization. Please Contact the "
-#~ "adminstrator."
-#~ msgstr ""
-#~ "Akun Anda tidak terkait dengan organisasi. Silahkan Hubungi administrator."
-
-#~ msgid "Your Organization"
-#~ msgstr "Organisasi Anda"
-
-#~ msgid "Not Set"
-#~ msgstr "Belum di set"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "Undang orang ke organisasi"
-
-#~ msgid "User group"
-#~ msgstr "Kelompok Pengguna"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "Satu dari email yang dimasukkan tidak sesuai format"
-
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "Kelola %(name)s Pengguna"
-
-#~ msgid "Create"
-#~ msgstr "Buat"
-
-#~ msgid ""
-#~ "Your invitation link is invalid. Please contact your organization "
-#~ "administrator."
-#~ msgstr ""
-#~ "link undangan Anda tidak valid. Silahkan hubungi administrator organisasi "
-#~ "Anda."
-
-#~ msgid "Join %(name)s"
-#~ msgstr "Gabung %(name)s"
-
-#~ msgid "Join"
-#~ msgstr "Gabung"
-
-#~ msgid ""
-#~ "Your invitation link has expired. Please contact your organization "
-#~ "administrator."
-#~ msgstr ""
-#~ "link undangan Anda telah kedaluwarsa. Silahkan hubungi administrator "
-#~ "organisasi Anda."
-
-#~ msgid "Task"
-#~ msgstr "Tugas"
-
-#~ msgid "Tasks"
-#~ msgstr "Tugas-tugas"
-
-#~ msgid "The title for this story"
-#~ msgstr "Judul cerita"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "Cerita ini di tampilkan di halaman depan"
-
-#~ msgid "The summary for the story"
-#~ msgstr "Ringkasan cerita"
-
-#~ msgid "The body of text for the story"
-#~ msgstr "Isi cerita"
-
-#~ msgid "The writer of the story"
-#~ msgstr "Penulis cerita"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "Sebuah link ke file mp3 untuk menerbitkan cerita ini"
-
-#~ msgid ""
-#~ "The id of the YouTube video that should be linked to this story (this is "
-#~ "the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr ""
-#~ "Id dari video YouTube yang harus dikaitkan dengan cerita ini (ini adalah "
-#~ "teks yang muncul setelah v = dan sebelum & dalam URL YouTube)"
-
-#~ msgid ""
-#~ "Any tags for this story, separated by spaces, can be used to do more "
-#~ "advanced filtering, optional"
-#~ msgstr ""
-#~ "Tag untuk cerita ini, dipisahkan oleh spasi, dapat digunakan untuk "
-#~ "melakukan penyaringan lebih maju, opsional"
-
-#~ msgid "The category for this story"
-#~ msgstr "Kategori cerita"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "Organisasi yang memiliki cerita ini"
-
-#~ msgid "The story to associate to"
-#~ msgstr "cerita untuk mengaitkan"
-
-#~ msgid "Yes"
-#~ msgstr "Ya"
-
-#~ msgid "No"
-#~ msgstr "Tidak"
-
-#~ msgid "Story Images"
-#~ msgstr "Gambar cerita"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr ""
-#~ "Gambar untuk ditampilkan pada halaman cerita dan di preview. (pilihan)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "Image to display on story page and in previews (optional)"
 
 #~ msgid "Remove Item?"
 #~ msgstr "Hapus daftar?"

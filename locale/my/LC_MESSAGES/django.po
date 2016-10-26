@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-26 12:44+0000\n"
+"POT-Creation-Date: 2016-10-26 12:58+0000\n"
 "PO-Revision-Date: 2016-02-25 12:40+0000\n"
 "Last-Translator: stucampo <stuart.campo@gmail.com>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/"
@@ -18,6 +18,565 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: dash/categories/models.py:20
+msgid "The name of this category"
+msgstr "အမ်ိဳးအစား၏ အမည္"
+
+#: dash/categories/models.py:23
+msgid "An optional image that can describe this category"
+msgstr "ယခုအမ်ိဳးအမည္ကို ေဖာ္ျပႏိုင္ေသာ ျခြင္းခ်က္ဓါတ္ပံု "
+
+#: dash/categories/models.py:26 ureport/polls/models.py:64
+msgid "The organization this category applies to"
+msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
+
+#: dash/categories/models.py:47 templates/frame.haml:285
+#: templates/frame.haml.py:292
+msgid "Categories"
+msgstr "အမ်ိဳးအစား"
+
+#: dash/categories/models.py:53 dash/stories/models.py:129
+#: ureport/polls/models.py:604
+msgid "The name to describe this image"
+msgstr "ယခုဓါတ္ပံုကို ေဖာ္ျပရန္အမည္"
+
+#: dash/categories/models.py:56
+msgid "The category this image represents"
+msgstr "ယခုဓါတ္ပံုက ေဖာ္ျပေနေသာ အမ်ိဳးအစား"
+
+#: dash/categories/models.py:59 dash/stories/models.py:135
+#: ureport/polls/models.py:610
+msgid "The image file to use"
+msgstr "အသံုးျပဳရန္ ဓါတ္ပံုဖိုင္"
+
+#: dash/dashblocks/models.py:19
+msgid "The human readable name for this content type"
+msgstr "လူဖတ္ႏိုင္မည့္ ယခုအေၾကာင္းအရာ၏အမည္"
+
+#: dash/dashblocks/models.py:22
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "ယခုအေၾကာင္းအရာ အမ်ိဳးအစားကို သတ္မွန္ရန္ အမွန္အသား ပံုစံခ်ထားသည့္ tag မ်ားကိုအသံုးျပဳရန္"
+
+#: dash/dashblocks/models.py:26
+msgid ""
+"A description of where this content type is used on the site and how it will "
+"be dsiplayed"
+msgstr ""
+"သည္အေၾကာင္းအရာ အမ်ိဳးအစားကို site ၏မည္သည့္ေနရာတြင္ အသံုးျပဲၿပီး မည္ကဲ့သို႕ေဖာ္ျပထားသည္ကို ေဖာ္ျပခ်က္"
+
+#: dash/dashblocks/models.py:31
+msgid "Whether this content should include a title"
+msgstr "ယခုအေၾကာင္းအရာသည္ ေခါင္းစဥ္တပ္သင့္မသင့္"
+
+#: dash/dashblocks/models.py:34
+msgid "Whether this content should include an image"
+msgstr "ယခုအေၾကင္းအရာသည္ ဓါတ္ပံုထည့္သင့္မသင့္"
+
+#: dash/dashblocks/models.py:37
+msgid "Whether this content should use a rich HTML editor"
+msgstr "ယခုအေၾကာင္းအရာသည္ HTML editor ကိုသံုးသင့္မသင့္"
+
+#: dash/dashblocks/models.py:40
+msgid "Whether this content should include a summary field"
+msgstr "ယခုအေၾကာင္းအရာသည္ အက်ဥ္းခ်ဳပ္ထည့္သင့္မသင့္"
+
+#: dash/dashblocks/models.py:43
+msgid "Whether this content should include a link"
+msgstr "ယခုအေၾကာင္းအရာသည္ link တစ္ခုထည့္သင့္မသင့္"
+
+#: dash/dashblocks/models.py:46
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr "ယခုအေၾကာင္းအရာသည္ ဓါတ္ပံုမ်ား ေနာက္ထပ္တင္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
+
+#: dash/dashblocks/models.py:50
+msgid "Whether this content has a color field"
+msgstr "ယခုအေၾကာင္းအရာသည္ အေရာင္ ရွိမရွိ"
+
+#: dash/dashblocks/models.py:53
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "ယခုအေၾကာင္းအရာသည္ YouTube id လုပ္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
+
+#: dash/dashblocks/models.py:56
+msgid "Whether this content should allow tags"
+msgstr "ယခုအေၾကာင္းအရာသည္ tag မ်ားကိုခြင့္ျပဳသင့္မသင့္"
+
+#: dash/dashblocks/models.py:69
+msgid "Content Type"
+msgstr "အေၾကာင္းအရာ အမ်ိဳးအစား"
+
+#: dash/dashblocks/models.py:70
+msgid "The category, or type for this content block"
+msgstr "ယခုအေၾကာင္းအရာမ်ားအတြက္ အမ်ိဳးးအမည္"
+
+#: dash/dashblocks/models.py:74
+msgid "The title for this block of content, optional"
+msgstr "အေၾကာင္းအရာမ်ား၏ ေခါင္းစဥ္ ျခြင္းခ်က္သာ"
+
+#: dash/dashblocks/models.py:77
+msgid "The summary for this item, should be short"
+msgstr "ယခုအမ်ိဳးအစား၏ အႏွစ္ခ်ဳပ္သည္ တိုတိုႏွင့္လိုရင္းသာျဖစ္သင့္သည္"
+
+#: dash/dashblocks/models.py:80
+msgid "The body of text for this content block, optional"
+msgstr "ယခုအေၾကာင္းအရာမ်ား၏ ကိုယ္ထည္စာသား ၿခြင္းခ်က္သာ"
+
+#: dash/dashblocks/models.py:83
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "ယခုအေၾကာင္းအရာႏွင့္အတူ ေဖာ္ျပသင့္ေသာဓါတ္ပံု ျခြင္းခ်က္သာ"
+
+#: dash/dashblocks/models.py:87
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "ဓါတ္ပံုအတြက္ေနာက္ခံအေရာင္သည္ ပံုစံအားျဖင့္"
+
+#: dash/dashblocks/models.py:91
+msgid "Any link that should be associated with this content block, optional"
+msgstr "ယခုအေၾကာင္းအရာႏွင့္ပူးတြဲသင့္ေသာ မည္သည့္ link မဆို ၿခြင္းခ်က္သာ"
+
+#: dash/dashblocks/models.py:95 ureport/news/models.py:42
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "ယခုအမ်ိဳးအစားႏွင့္ ခ်ိတ္ဆက္သင့္ေသာ YouTube ဗီးီယို၏ အမွတ္အသား"
+
+#: dash/dashblocks/models.py:99
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"ယခုအေၾကာင္းအရာပိုင္းအတြက္ space ျခားထားသည့္ မည္သည့္ tag မဆို "
+"ထပ္မံအေသးစိတ္ရ်ာေဖြစစ္ထုတ္ျခင္းမ်ားအတြက္ အသံုးျပဳႏိုင္သည္ ျခြင္းခ်က္သာ"
+
+#: dash/dashblocks/models.py:103
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "ယခုအပိုင္း၏ဦးစားေပးမွာ အေရးႀကီးဆံုးအပိုင္းမ်ားကဦးစြာလာသည္"
+
+#: dash/dashblocks/models.py:108
+msgid "The organization this content block belongs to"
+msgstr "ယခုအေၾကာင္းအရာပိုင္းမ်ားကို ပိုင္ဆိုင္သည့္အဖြဲ႕အစည္းမွာ"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:8
+msgid "Gallery"
+msgstr "စုစည္းရာ"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:17
+msgid "Add Image"
+msgstr "ဓါတ္ပံုထည့္ရန္"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
+msgid "Search"
+msgstr "ရွာေဖြရန္"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
+#: templates/polls/poll_list.haml:6
+msgid "Add"
+msgstr "ထပ္ထည့္ရန္"
+
+#: dash/dashblocks/views.py:16 templates/frame.haml:235
+msgid "Content Types"
+msgstr "အေၾကာင္းအရာ အမ်ိဳးအစားမ်ား"
+
+#: dash/dashblocks/views.py:118
+msgid "Content Blocks"
+msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
+
+#: dash/dashblocks/views.py:120
+#, fuzzy, python-format
+#| msgid "Content Blocks"
+msgid "%s Blocks"
+msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
+
+#: dash/dashblocks/views.py:158
+#, fuzzy, python-format
+#| msgid "Edit"
+msgid "Edit %s"
+msgstr "တည္းျဖတ္"
+
+#: dash/dashblocks/views.py:182
+#, fuzzy, python-format
+#| msgid "Create"
+msgid "Create %s"
+msgstr "ဖန္တီးပါ"
+
+#: dash/dashblocks/views.py:184
+msgid "Create Content Block"
+msgstr "အေၾကာင္းအရာပိုင္းကိုဖန္တီးရန္"
+
+#: dash/orgs/forms.py:12
+msgid "Your first name"
+msgstr "သင့္နာမည္၏ပထမအပိုင္း"
+
+#: dash/orgs/forms.py:13
+msgid "Your last name"
+msgstr "သင့္နာမည္၏ဒုတိယအပိုင္း"
+
+#: dash/orgs/forms.py:14
+msgid "Your email address"
+msgstr "သင့္ email လိပ္စာ"
+
+#: dash/orgs/forms.py:17
+msgid "Your password, at least eight letters please"
+msgstr "သင့္လွိဳ႕၀ွက္နံပါတ္ အနည္းဆံုးစာလံုး ၈ လံုးျဖစ္ရန္"
+
+#: dash/orgs/forms.py:23
+msgid "That email address is already used"
+msgstr "ယခု email လိပ္စာသည္ အသံုးျပဳျပီးသားျဖစ္ေနသည္။"
+
+#: dash/orgs/forms.py:30
+msgid "Passwords must contain at least 8 letters."
+msgstr "လွိဳ႕၀ွက္နံပါတ္သည္ အနည္းဆံုးစာလံုးရွစ္လံုး ပါ၀င္ရမည္"
+
+#: dash/orgs/forms.py:49
+msgid "This domain is used for subdomains"
+msgstr "ယခု domain ကို subdomains မ်ားအတြက္အသံုးျပဳသည္"
+
+#: dash/orgs/models.py:36 dash/orgs/models.py:381 ureport/assets/models.py:19
+msgid "Name"
+msgstr "အမည္"
+
+#: dash/orgs/models.py:37
+msgid "The name of this organization"
+msgstr "အဖြဲ႕အစည္း၏အမည္"
+
+#: dash/orgs/models.py:41
+msgid "The logo that should be used for this organization"
+msgstr "ယခုအဖြဲ႕အစည္းအတြက္အသံုးျပဳသင့္ေသာ အမွတ္တံဆိပ္"
+
+#: dash/orgs/models.py:44 dash/orgs/views.py:297
+msgid "Administrators"
+msgstr "စီမံအုပ္ခ်ဳပ္သူမ်ား"
+
+#: dash/orgs/models.py:45
+msgid "The administrators in your organization"
+msgstr "သင့္အဖြဲ႕အစည္းအတြင္းရွိ စီမံအုပ္ခ်ဳပ္သူမ်ား"
+
+#: dash/orgs/models.py:48
+msgid "Viewers"
+msgstr "လာေရာက္ၾကည့္ရွဳသူမ်ား"
+
+#: dash/orgs/models.py:49
+msgid "The viewers in your organization"
+msgstr "သင့္အဖြဲ႕အစည္းရွိ လာေရာက္ၾကည့္ရွဳသူမ်ား"
+
+#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
+#: dash/orgs/views.py:298
+msgid "Editors"
+msgstr "တည္းျဖတ္သူမ်ား"
+
+#: dash/orgs/models.py:53
+msgid "The editors in your organization"
+msgstr "သင့္အဖြဲ႕အစည္းရွိ တည္းျဖတ္သူမ်ား"
+
+#: dash/orgs/models.py:56
+msgid "Language"
+msgstr "ဘာသာစကား"
+
+#: dash/orgs/models.py:57
+msgid "The main language used by this organization"
+msgstr "သည္အဖြဲ႕အစည္းကအသံုးျပဳေသာ အဓိကဘာသာစကား"
+
+#: dash/orgs/models.py:60
+msgid "Subdomain"
+msgstr ""
+
+#: dash/orgs/models.py:61
+msgid "This subdomain is not available"
+msgstr "subdomain မရႏိုင္ပါ"
+
+#: dash/orgs/models.py:62
+msgid "The subdomain for this organization"
+msgstr "သည္အဖြဲ႕အစည္း၏ subdomain"
+
+#: dash/orgs/models.py:65
+msgid "Domain"
+msgstr ""
+
+#: dash/orgs/models.py:66
+msgid "This domain is not available"
+msgstr "domain မရႏိုင္ပါ"
+
+#: dash/orgs/models.py:67
+msgid "The custom domain for this organization"
+msgstr "သည္အဖြဲ႕အစည္း၏ ပံုမွန္ domain"
+
+#: dash/orgs/models.py:70
+msgid "Timezone"
+msgstr "အခ်ိန္အပိုင္းအျခား"
+
+#: dash/orgs/models.py:71
+msgid "The timezone your organization is in."
+msgstr "သင့္အဖြဲ႕အစည္းရွိေနသည့္ အခ်ိန္အပိုင္းအျခား"
+
+#: dash/orgs/models.py:75
+msgid "The API token for the RapidPro account this dashboard is tied to"
+msgstr "RapidPro account အတြက္ API token ႏွင့္တြဲထားေသာ dashboard"
+
+#: dash/orgs/models.py:80
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr "ယခုအဖြဲ႕အစည္းႏွင့္ဆက္ႏႊယ္ေနေသာ သတင္းအခ်က္အလက္မ်ားကို  ထိန္းသိမ္းရန္ အသံုးျပဳထားေသာ JSON blob"
+
+#: dash/orgs/models.py:311
+msgid "Administrator"
+msgstr "စီမံအုပ္ခ်ဳပ္သူ"
+
+#: dash/orgs/models.py:312
+msgid "Editor"
+msgstr "တည္းျဖတ္သူ"
+
+#: dash/orgs/models.py:313
+msgid "Viewer"
+msgstr "ၾကည့္ရွဳေလ့လာသူ"
+
+#: dash/orgs/models.py:318 dash/orgs/models.py:377 ureport/assets/models.py:16
+#: ureport/contacts/models.py:44
+msgid "Org"
+msgstr "အဖြဲ႕အစည္း"
+
+#: dash/orgs/models.py:319
+msgid "The organization to which the account is invited to view"
+msgstr "လာေရာက္ၾကည့္ရွဳရန္ ဖိတ္ျခင္းခံရေသာ အဖြဲ႕အစည္း၏ account"
+
+#: dash/orgs/models.py:322
+msgid "Email"
+msgstr "အီးေမးလ္"
+
+#: dash/orgs/models.py:323
+msgid "The email to which we send the invitation of the viewer"
+msgstr "လာေရာက္ၾကည့္ရွဳသူကို ဖိတ္ရန္ပို႕ေသာ အီးေမးလ္"
+
+#: dash/orgs/models.py:326
+msgid "Secret"
+msgstr "လွ်ိဳ႕၀ွက္"
+
+#: dash/orgs/models.py:327
+msgid "a unique code associated with this invitation"
+msgstr "ယခုဖိတ္ၾကားျခင္းႏွင့္ ႏွီးႏြယ္ေနေသာ ထူးျခားထင္ရွားသည့္ code"
+
+#: dash/orgs/models.py:330
+msgid "User Role"
+msgstr "အသံုးျပဳသူ၏ အခန္းက႑"
+
+#: dash/orgs/models.py:361
+#, python-format
+msgid "%s Invitation"
+msgstr ""
+
+#: dash/orgs/models.py:373 ureport/assets/models.py:11
+msgid "Banner"
+msgstr "ေခါင္းစည္း"
+
+#: dash/orgs/models.py:374 ureport/assets/models.py:12
+msgid "Pattern"
+msgstr "ပံုစံ"
+
+#: dash/orgs/models.py:378
+msgid "The organization in which the image will be used"
+msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
+
+#: dash/orgs/models.py:382
+msgid "The name to describe this background"
+msgstr "ယခုေနာက္ခံကို ေဖာ္ျပရန္အမည္"
+
+#: dash/orgs/models.py:385
+msgid "Background type"
+msgstr "ေနာက္ခံအမ်ိဳးအစား"
+
+#: dash/orgs/models.py:387 ureport/assets/models.py:24
+msgid "The image file"
+msgstr "ဓါတ္ပံုဖိုင္"
+
+#: dash/orgs/templates/orgs/email/invitation_email.html:9
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
+"a>.\n"
+"  "
+msgstr ""
+
+#: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
+msgid "Edit"
+msgstr "တည္းျဖတ္"
+
+#: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
+msgid "Manage Users"
+msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:13
+msgid "Accounts"
+msgstr "account မ်ား"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:16
+msgid "Admins"
+msgstr "စီစဥ္သူ"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:22
+msgid "Remove"
+msgstr "ဖယ္ရွားလိုက္ပါ"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:29
+msgid "You must have at least one administator"
+msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
+
+#: dash/orgs/views.py:168
+msgid "Select your Organization"
+msgstr "သင့္အဖြဲ႕အစည္းကို ေရြးျခယ္ပါ"
+
+#: dash/orgs/views.py:179
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+"သင့္ account သည္အဖြဲ႕အစည္းတစ္ခုခုႏွင့္ ပတ္သတ္ျခင္းမရွိပါ။ ေက်းဖူးျပဳၿပီး administrator ကိုဆက္သြယ္ပါ"
+
+#: dash/orgs/views.py:219 dash/orgs/views.py:229
+msgid "Your Organization"
+msgstr "သင္၏အဖြဲ႕အစည္း"
+
+#: dash/orgs/views.py:226
+msgid "Not Set"
+msgstr "မသတ္မွတ္ရေသးပါ"
+
+#: dash/orgs/views.py:296
+msgid "Invite people to your organization"
+msgstr "သင့္အဖြဲ႕အစည္းသို႕ လူမ်ားကို ဖိတ္ေခၚပါ"
+
+#: dash/orgs/views.py:299
+msgid "User group"
+msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
+
+#: dash/orgs/views.py:310
+msgid "One of the emails you entered is invalid."
+msgstr "သင္ထည့္လိုက္ေသာ အီးေမးလ္မ်ားထဲမွတစ္ခုမွာ မွားယြင္းေနပါသည္"
+
+#: dash/orgs/views.py:323
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr ""
+
+#: dash/orgs/views.py:438
+msgid "Create"
+msgstr "ဖန္တီးပါ"
+
+#: dash/orgs/views.py:446
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+"သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator "
+"ကိုဆက္သြယ္ပါ"
+
+#: dash/orgs/views.py:502 dash/orgs/views.py:547
+#, fuzzy, python-format
+#| msgid "Join & Engage"
+msgid "Join %(name)s"
+msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
+
+#: dash/orgs/views.py:524
+msgid "Join"
+msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
+
+#: dash/orgs/views.py:533
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+"သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးျပဳၿပီး လူႀကီးမင္းအဖြဲ႕အစည္းရွိ "
+"administrator ကိုဆက္သြယ္ပါ"
+
+#: dash/orgs/views.py:640
+msgid "Task"
+msgstr ""
+
+#: dash/orgs/views.py:644
+msgid "Tasks"
+msgstr ""
+
+#: dash/stories/models.py:13
+msgid "The title for this story"
+msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
+
+#: dash/stories/models.py:17
+msgid "Whether this story is featured"
+msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပထားျခင္းရွိမရွိ"
+
+#: dash/stories/models.py:20
+msgid "The summary for the story"
+msgstr "သတင္းေဆာင္းပါး၏အႏွစ္ခ်ဳပ္"
+
+#: dash/stories/models.py:22
+msgid "The body of text for the story"
+msgstr "သတင္းေဆာင္းပါး၏စာကိုယ္"
+
+#: dash/stories/models.py:24
+msgid "The writer of the story"
+msgstr "သတင္းေဆာင္းပါးေရးသူ"
+
+#: dash/stories/models.py:27
+msgid "A link to an mp3 file to publish on this story"
+msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပရန္ mp3 file link "
+
+#: dash/stories/models.py:31
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"ယခုသတင္းေဆာင္းပါးျဖင့္ ခ်ိတ္ဆက္ထားသင့္သည့္ YouTube video ၏အမွတ္အသား (YouTube URL "
+"တြင္ထိုစာသားသည္ v= ၏ေနာက္တြင္ရွိၿပီး & ၏ေရွ႕တြင္ရွိလိမ့္မည္)"
+
+#: dash/stories/models.py:37
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"ယခုသတင္းေဆာင္းပါးတြင္ခ်ိတ္ဆက္လိုသည္မ်ားကို space ျခားထားသည့္ အခ်ိတ္အဆက္မ်ားျဖင့္ "
+"ယခုထက္ပိုျပီးတိတိက်က်ရွာေတြနိုင္ရန္အသ၊ံုးျပဳႏိုင္ပါသည္။(သင့္ေရြးျခယ္မႈသာျဖစ္သည္)"
+
+#: dash/stories/models.py:42
+msgid "The category for this story"
+msgstr "သတင္းေဆာင္းပါးအမ်ိဳးအစား"
+
+#: dash/stories/models.py:46
+msgid "The organization this story belongs to"
+msgstr "ယခုသတင္းေဆာင္းပါးကိုပိုင္သည့္အဖြဲ႕အစည္း"
+
+#: dash/stories/models.py:124 templates/frame.haml:329
+#: templates/frame.haml.py:481 templates/public/stories.haml:7
+msgid "Stories"
+msgstr "သတင္းေဆာင္းပါးမ်ား"
+
+#: dash/stories/models.py:132
+msgid "The story to associate to"
+msgstr "သတင္းေဆာင္းပါးႏွင့္ဆက္ႏြယ္ရန္"
+
+#: dash/stories/views.py:59
+msgid "Yes"
+msgstr "ဟုတ္ပါသည္"
+
+#: dash/stories/views.py:60
+msgid "No"
+msgstr "မဟုတ္ပါ"
+
+#: dash/stories/views.py:79
+msgid "Story Images"
+msgstr "သတင္းေဆာင္းပါးဓါတ္ပံုမ်ား"
+
+#: dash/stories/views.py:91 dash/stories/views.py:99 ureport/polls/views.py:164
+#: ureport/polls/views.py:171
+#, python-format
+msgid "Image %d"
+msgstr ""
+
+#: dash/stories/views.py:92
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
+
+#: dash/stories/views.py:100
+msgid "Image to display on story page and in previews (optional)"
+msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
 
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
@@ -39,10 +598,6 @@ msgstr "အဖြဲ႕အစည္းမ်ား"
 msgid "Users"
 msgstr "အသံုးျပဳသူမ်ား"
 
-#: templates/frame.haml:235
-msgid "Content Types"
-msgstr "အေၾကာင္းအရာ အမ်ိဳးအစားမ်ား"
-
 #: templates/frame.haml:242
 msgid "Images"
 msgstr "ဓါတ္ပံုမ်ား"
@@ -59,10 +614,6 @@ msgstr "တိုင္းျပည္ အျခားအမည္မ်ား"
 msgid "Polls"
 msgstr "ေမးခြန္းမ်ား"
 
-#: templates/frame.haml:285 templates/frame.haml.py:292
-msgid "Categories"
-msgstr "အမ်ိဳးအစား"
-
 #: templates/frame.haml:300
 msgid "Category Images"
 msgstr "အမ်ိဳးအစားအလိုက္ ဓါတ္ပံုမ်ား"
@@ -70,11 +621,6 @@ msgstr "အမ်ိဳးအစားအလိုက္ ဓါတ္ပံု�
 #: templates/frame.haml:320
 msgid "News Items"
 msgstr "အမ်ိဳးအမည္သစ္မ်ား"
-
-#: templates/frame.haml:329 templates/frame.haml.py:481
-#: templates/public/stories.haml:7
-msgid "Stories"
-msgstr "သတင္းေဆာင္းပါးမ်ား"
 
 #: templates/frame.haml:338
 msgid "Job Sources"
@@ -192,18 +738,6 @@ msgid ""
 "id from twitter.\n"
 "      "
 msgstr ""
-
-#: templates/orgs/org_home.haml:8
-msgid "Edit"
-msgstr "တည္းျဖတ္"
-
-#: templates/orgs/org_home.haml:13
-msgid "Manage Users"
-msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
-
-#: templates/polls/poll_list.haml:6
-msgid "Add"
-msgstr "ထပ္ထည့္ရန္"
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
 msgid "ABOUT U-REPORT"
@@ -723,29 +1257,13 @@ msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သ�
 msgid "Refreshed %s cache for this organization"
 msgstr ""
 
-#: ureport/assets/models.py:11
-msgid "Banner"
-msgstr "ေခါင္းစည္း"
-
-#: ureport/assets/models.py:12
-msgid "Pattern"
-msgstr "ပံုစံ"
-
 #: ureport/assets/models.py:13
 msgid "Flag"
 msgstr "အလံ"
 
-#: ureport/assets/models.py:16 ureport/contacts/models.py:44
-msgid "Org"
-msgstr "အဖြဲ႕အစည္း"
-
 #: ureport/assets/models.py:17
 msgid "The organization to which the image will be used"
 msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
-
-#: ureport/assets/models.py:19
-msgid "Name"
-msgstr "အမည္"
 
 #: ureport/assets/models.py:20
 msgid "A short descriptive name for this image"
@@ -754,10 +1272,6 @@ msgstr "ယခုဓါတ္ပံုအတြက္ နာမည္အတိ�
 #: ureport/assets/models.py:22
 msgid "Image type"
 msgstr "ဓါတ္ပံုအမ်ိဳးအစား"
-
-#: ureport/assets/models.py:24
-msgid "The image file"
-msgstr "ဓါတ္ပံုဖိုင္"
 
 #: ureport/contacts/models.py:46
 msgid "Label"
@@ -912,10 +1426,6 @@ msgstr "ယခုဗီဒီယို၏ေခါင္းစဥ္"
 msgid "A short summary description for this video"
 msgstr "ယခုဗီဒီယိုအတြက္ အက်ဥ္းခ်ံဳးေဖာ္ျပခ်က္"
 
-#: ureport/news/models.py:42
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "ယခုအမ်ိဳးအစားႏွင့္ ခ်ိတ္ဆက္သင့္ေသာ YouTube ဗီးီယို၏ အမွတ္အသား"
-
 #: ureport/news/models.py:48
 msgid "The organization this video belongs to"
 msgstr "ယခုဗီဒီယိုႏွင့္ သက္ဆိုင္ေသာအဖြဲ႕အစည္း"
@@ -923,10 +1433,6 @@ msgstr "ယခုဗီဒီယိုႏွင့္ သက္ဆိုင္�
 #: ureport/polls/models.py:62
 msgid "The name of this poll category"
 msgstr "ယခုေမးခြန္း အမ်ိဳးအစား"
-
-#: ureport/polls/models.py:64
-msgid "The organization this category applies to"
-msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
 
 #: ureport/polls/models.py:71
 msgid "Poll Categories"
@@ -977,17 +1483,9 @@ msgstr "ေမးခြန္းအတြက္ ေျဖာ္ျပရမည�
 msgid "The organization this poll is part of"
 msgstr "ယခုေမးခြန္ႏွင့္ ပတ္သတ္ေသာ အဖြဲ႕အစည္း"
 
-#: ureport/polls/models.py:604
-msgid "The name to describe this image"
-msgstr "ယခုဓါတ္ပံုကို ေဖာ္ျပရန္အမည္"
-
 #: ureport/polls/models.py:607
 msgid "The poll to associate to"
 msgstr "ယခုေမးခြန္းႏွင့္ ဆက္ႏြယ္ေသာ"
-
-#: ureport/polls/models.py:610
-msgid "The image file to use"
-msgstr "အသံုးျပဳရန္ ဓါတ္ပံုဖိုင္"
 
 #: ureport/polls/models.py:621
 msgid "The poll for this response"
@@ -1070,11 +1568,6 @@ msgstr "ေမးခြန္းမ်ားအတြက္ ဓါတ္ပံ�
 #: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "သင္ေဖာ္ျပလိုသည့္ မည္သည့္ တံု႕ျပန္ခ်က္ကိုမဆို ထည့္ပါ (ရွိလွ်င္)"
-
-#: ureport/polls/views.py:164 ureport/polls/views.py:171
-#, python-format
-msgid "Image %d"
-msgstr ""
 
 #: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
@@ -1333,335 +1826,6 @@ msgstr ""
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"
 msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္ေသာအရာ"
-
-#~ msgid "The name of this category"
-#~ msgstr "အမ်ိဳးအစား၏ အမည္"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "ယခုအမ်ိဳးအမည္ကို ေဖာ္ျပႏိုင္ေသာ ျခြင္းခ်က္ဓါတ္ပံု "
-
-#~ msgid "The category this image represents"
-#~ msgstr "ယခုဓါတ္ပံုက ေဖာ္ျပေနေသာ အမ်ိဳးအစား"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "လူဖတ္ႏိုင္မည့္ ယခုအေၾကာင္းအရာ၏အမည္"
-
-#~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr "ယခုအေၾကာင္းအရာ အမ်ိဳးအစားကို သတ္မွန္ရန္ အမွန္အသား ပံုစံခ်ထားသည့္ tag မ်ားကိုအသံုးျပဳရန္"
-
-#~ msgid ""
-#~ "A description of where this content type is used on the site and how it "
-#~ "will be dsiplayed"
-#~ msgstr ""
-#~ "သည္အေၾကာင္းအရာ အမ်ိဳးအစားကို site ၏မည္သည့္ေနရာတြင္ အသံုးျပဲၿပီး မည္ကဲ့သို႕ေဖာ္ျပထားသည္ကို ေဖာ္ျပခ်က္"
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ ေခါင္းစဥ္တပ္သင့္မသင့္"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "ယခုအေၾကင္းအရာသည္ ဓါတ္ပံုထည့္သင့္မသင့္"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ HTML editor ကိုသံုးသင့္မသင့္"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ အက်ဥ္းခ်ဳပ္ထည့္သင့္မသင့္"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ link တစ္ခုထည့္သင့္မသင့္"
-
-#~ msgid ""
-#~ "Whether this content should allow upload of additional images, ie a "
-#~ "gallery"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ ဓါတ္ပံုမ်ား ေနာက္ထပ္တင္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ အေရာင္ ရွိမရွိ"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ YouTube id လုပ္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ tag မ်ားကိုခြင့္ျပဳသင့္မသင့္"
-
-#~ msgid "Content Type"
-#~ msgstr "အေၾကာင္းအရာ အမ်ိဳးအစား"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "ယခုအေၾကာင္းအရာမ်ားအတြက္ အမ်ိဳးးအမည္"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "အေၾကာင္းအရာမ်ား၏ ေခါင္းစဥ္ ျခြင္းခ်က္သာ"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "ယခုအမ်ိဳးအစား၏ အႏွစ္ခ်ဳပ္သည္ တိုတိုႏွင့္လိုရင္းသာျဖစ္သင့္သည္"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "ယခုအေၾကာင္းအရာမ်ား၏ ကိုယ္ထည္စာသား ၿခြင္းခ်က္သာ"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "ယခုအေၾကာင္းအရာႏွင့္အတူ ေဖာ္ျပသင့္ေသာဓါတ္ပံု ျခြင္းခ်က္သာ"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "ဓါတ္ပံုအတြက္ေနာက္ခံအေရာင္သည္ ပံုစံအားျဖင့္"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "ယခုအေၾကာင္းအရာႏွင့္ပူးတြဲသင့္ေသာ မည္သည့္ link မဆို ၿခြင္းခ်က္သာ"
-
-#~ msgid ""
-#~ "Any tags for this content block, separated by spaces, can be used to do "
-#~ "more advanced filtering, optional"
-#~ msgstr ""
-#~ "ယခုအေၾကာင္းအရာပိုင္းအတြက္ space ျခားထားသည့္ မည္သည့္ tag မဆို "
-#~ "ထပ္မံအေသးစိတ္ရ်ာေဖြစစ္ထုတ္ျခင္းမ်ားအတြက္ အသံုးျပဳႏိုင္သည္ ျခြင္းခ်က္သာ"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "ယခုအပိုင္း၏ဦးစားေပးမွာ အေရးႀကီးဆံုးအပိုင္းမ်ားကဦးစြာလာသည္"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "ယခုအေၾကာင္းအရာပိုင္းမ်ားကို ပိုင္ဆိုင္သည့္အဖြဲ႕အစည္းမွာ"
-
-#~ msgid "Gallery"
-#~ msgstr "စုစည္းရာ"
-
-#~ msgid "Add Image"
-#~ msgstr "ဓါတ္ပံုထည့္ရန္"
-
-#~ msgid "Search"
-#~ msgstr "ရွာေဖြရန္"
-
-#~ msgid "Content Blocks"
-#~ msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
-
-#~ msgid "Create Content Block"
-#~ msgstr "အေၾကာင္းအရာပိုင္းကိုဖန္တီးရန္"
-
-#~ msgid "Your first name"
-#~ msgstr "သင့္နာမည္၏ပထမအပိုင္း"
-
-#~ msgid "Your last name"
-#~ msgstr "သင့္နာမည္၏ဒုတိယအပိုင္း"
-
-#~ msgid "Your email address"
-#~ msgstr "သင့္ email လိပ္စာ"
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "သင့္လွိဳ႕၀ွက္နံပါတ္ အနည္းဆံုးစာလံုး ၈ လံုးျဖစ္ရန္"
-
-#~ msgid "That email address is already used"
-#~ msgstr "ယခု email လိပ္စာသည္ အသံုးျပဳျပီးသားျဖစ္ေနသည္။"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "လွိဳ႕၀ွက္နံပါတ္သည္ အနည္းဆံုးစာလံုးရွစ္လံုး ပါ၀င္ရမည္"
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "ယခု domain ကို subdomains မ်ားအတြက္အသံုးျပဳသည္"
-
-#~ msgid "The name of this organization"
-#~ msgstr "အဖြဲ႕အစည္း၏အမည္"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "ယခုအဖြဲ႕အစည္းအတြက္အသံုးျပဳသင့္ေသာ အမွတ္တံဆိပ္"
-
-#~ msgid "Administrators"
-#~ msgstr "စီမံအုပ္ခ်ဳပ္သူမ်ား"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းအတြင္းရွိ စီမံအုပ္ခ်ဳပ္သူမ်ား"
-
-#~ msgid "Viewers"
-#~ msgstr "လာေရာက္ၾကည့္ရွဳသူမ်ား"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းရွိ လာေရာက္ၾကည့္ရွဳသူမ်ား"
-
-#~ msgid "Editors"
-#~ msgstr "တည္းျဖတ္သူမ်ား"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းရွိ တည္းျဖတ္သူမ်ား"
-
-#~ msgid "Language"
-#~ msgstr "ဘာသာစကား"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "သည္အဖြဲ႕အစည္းကအသံုးျပဳေသာ အဓိကဘာသာစကား"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "subdomain မရႏိုင္ပါ"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "သည္အဖြဲ႕အစည္း၏ subdomain"
-
-#~ msgid "This domain is not available"
-#~ msgstr "domain မရႏိုင္ပါ"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "သည္အဖြဲ႕အစည္း၏ ပံုမွန္ domain"
-
-#~ msgid "Timezone"
-#~ msgstr "အခ်ိန္အပိုင္းအျခား"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "သင့္အဖြဲ႕အစည္းရွိေနသည့္ အခ်ိန္အပိုင္းအျခား"
-
-#~ msgid "The API token for the RapidPro account this dashboard is tied to"
-#~ msgstr "RapidPro account အတြက္ API token ႏွင့္တြဲထားေသာ dashboard"
-
-#~ msgid ""
-#~ "JSON blob used to store configuration information associated with this "
-#~ "organization"
-#~ msgstr ""
-#~ "ယခုအဖြဲ႕အစည္းႏွင့္ဆက္ႏႊယ္ေနေသာ သတင္းအခ်က္အလက္မ်ားကို  ထိန္းသိမ္းရန္ အသံုးျပဳထားေသာ JSON blob"
-
-#~ msgid "Administrator"
-#~ msgstr "စီမံအုပ္ခ်ဳပ္သူ"
-
-#~ msgid "Editor"
-#~ msgstr "တည္းျဖတ္သူ"
-
-#~ msgid "Viewer"
-#~ msgstr "ၾကည့္ရွဳေလ့လာသူ"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "လာေရာက္ၾကည့္ရွဳရန္ ဖိတ္ျခင္းခံရေသာ အဖြဲ႕အစည္း၏ account"
-
-#~ msgid "Email"
-#~ msgstr "အီးေမးလ္"
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "လာေရာက္ၾကည့္ရွဳသူကို ဖိတ္ရန္ပို႕ေသာ အီးေမးလ္"
-
-#~ msgid "Secret"
-#~ msgstr "လွ်ိဳ႕၀ွက္"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "ယခုဖိတ္ၾကားျခင္းႏွင့္ ႏွီးႏြယ္ေနေသာ ထူးျခားထင္ရွားသည့္ code"
-
-#~ msgid "User Role"
-#~ msgstr "အသံုးျပဳသူ၏ အခန္းက႑"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "ယခုေနာက္ခံကို ေဖာ္ျပရန္အမည္"
-
-#~ msgid "Background type"
-#~ msgstr "ေနာက္ခံအမ်ိဳးအစား"
-
-#~ msgid "Accounts"
-#~ msgstr "account မ်ား"
-
-#~ msgid "Admins"
-#~ msgstr "စီစဥ္သူ"
-
-#~ msgid "Remove"
-#~ msgstr "ဖယ္ရွားလိုက္ပါ"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
-
-#~ msgid "Select your Organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းကို ေရြးျခယ္ပါ"
-
-#~ msgid ""
-#~ "Your account is not associated to an organization. Please Contact the "
-#~ "adminstrator."
-#~ msgstr ""
-#~ "သင့္ account သည္အဖြဲ႕အစည္းတစ္ခုခုႏွင့္ ပတ္သတ္ျခင္းမရွိပါ။ ေက်းဖူးျပဳၿပီး administrator "
-#~ "ကိုဆက္သြယ္ပါ"
-
-#~ msgid "Your Organization"
-#~ msgstr "သင္၏အဖြဲ႕အစည္း"
-
-#~ msgid "Not Set"
-#~ msgstr "မသတ္မွတ္ရေသးပါ"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းသို႕ လူမ်ားကို ဖိတ္ေခၚပါ"
-
-#~ msgid "User group"
-#~ msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "သင္ထည့္လိုက္ေသာ အီးေမးလ္မ်ားထဲမွတစ္ခုမွာ မွားယြင္းေနပါသည္"
-
-#~ msgid "Create"
-#~ msgstr "ဖန္တီးပါ"
-
-#~ msgid ""
-#~ "Your invitation link is invalid. Please contact your organization "
-#~ "administrator."
-#~ msgstr ""
-#~ "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator "
-#~ "ကိုဆက္သြယ္ပါ"
-
-#~ msgid "Join"
-#~ msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
-
-#~ msgid ""
-#~ "Your invitation link has expired. Please contact your organization "
-#~ "administrator."
-#~ msgstr ""
-#~ "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးျပဳၿပီး လူႀကီးမင္းအဖြဲ႕အစည္းရွိ "
-#~ "administrator ကိုဆက္သြယ္ပါ"
-
-#~ msgid "The title for this story"
-#~ msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပထားျခင္းရွိမရွိ"
-
-#~ msgid "The summary for the story"
-#~ msgstr "သတင္းေဆာင္းပါး၏အႏွစ္ခ်ဳပ္"
-
-#~ msgid "The body of text for the story"
-#~ msgstr "သတင္းေဆာင္းပါး၏စာကိုယ္"
-
-#~ msgid "The writer of the story"
-#~ msgstr "သတင္းေဆာင္းပါးေရးသူ"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပရန္ mp3 file link "
-
-#~ msgid ""
-#~ "The id of the YouTube video that should be linked to this story (this is "
-#~ "the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr ""
-#~ "ယခုသတင္းေဆာင္းပါးျဖင့္ ခ်ိတ္ဆက္ထားသင့္သည့္ YouTube video ၏အမွတ္အသား (YouTube URL "
-#~ "တြင္ထိုစာသားသည္ v= ၏ေနာက္တြင္ရွိၿပီး & ၏ေရွ႕တြင္ရွိလိမ့္မည္)"
-
-#~ msgid ""
-#~ "Any tags for this story, separated by spaces, can be used to do more "
-#~ "advanced filtering, optional"
-#~ msgstr ""
-#~ "ယခုသတင္းေဆာင္းပါးတြင္ခ်ိတ္ဆက္လိုသည္မ်ားကို space ျခားထားသည့္ အခ်ိတ္အဆက္မ်ားျဖင့္ "
-#~ "ယခုထက္ပိုျပီးတိတိက်က်ရွာေတြနိုင္ရန္အသ၊ံုးျပဳႏိုင္ပါသည္။(သင့္ေရြးျခယ္မႈသာျဖစ္သည္)"
-
-#~ msgid "The category for this story"
-#~ msgstr "သတင္းေဆာင္းပါးအမ်ိဳးအစား"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "ယခုသတင္းေဆာင္းပါးကိုပိုင္သည့္အဖြဲ႕အစည္း"
-
-#~ msgid "The story to associate to"
-#~ msgstr "သတင္းေဆာင္းပါးႏွင့္ဆက္ႏြယ္ရန္"
-
-#~ msgid "Yes"
-#~ msgstr "ဟုတ္ပါသည္"
-
-#~ msgid "No"
-#~ msgstr "မဟုတ္ပါ"
-
-#~ msgid "Story Images"
-#~ msgstr "သတင္းေဆာင္းပါးဓါတ္ပံုမ်ား"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
 
 #~ msgid "Remove Item?"
 #~ msgstr "ဖယ္ရွားလိုက္ပါ"

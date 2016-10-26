@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-26 12:44+0000\n"
+"POT-Creation-Date: 2016-10-26 12:58+0000\n"
 "PO-Revision-Date: 2015-05-22 07:03+0000\n"
 "Last-Translator: Kidus <kidus.asfaw@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/ureport/language/"
@@ -20,6 +20,627 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: dash/categories/models.py:20
+msgid "The name of this category"
+msgstr "El nombre de esta categoría"
+
+#: dash/categories/models.py:23
+msgid "An optional image that can describe this category"
+msgstr "Una imagen opcional que pueda describir esta categoría"
+
+#: dash/categories/models.py:26 ureport/polls/models.py:64
+msgid "The organization this category applies to"
+msgstr "La organización a la que se aplica esta categoría"
+
+#: dash/categories/models.py:47 templates/frame.haml:285
+#: templates/frame.haml.py:292
+msgid "Categories"
+msgstr "Categorías"
+
+#: dash/categories/models.py:53 dash/stories/models.py:129
+#: ureport/polls/models.py:604
+msgid "The name to describe this image"
+msgstr "El nombre para describir esta imagen"
+
+#: dash/categories/models.py:56
+msgid "The category this image represents"
+msgstr "La categoría que representa esta imagen"
+
+#: dash/categories/models.py:59 dash/stories/models.py:135
+#: ureport/polls/models.py:610
+msgid "The image file to use"
+msgstr "El archivo de la imagen que se va a utilizar"
+
+#: dash/dashblocks/models.py:19
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The human readable name for this content type"
+msgstr "La categoría para esta historia"
+
+#: dash/dashblocks/models.py:22
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+
+#: dash/dashblocks/models.py:26
+msgid ""
+"A description of where this content type is used on the site and how it will "
+"be dsiplayed"
+msgstr ""
+
+#: dash/dashblocks/models.py:31
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this content should include a title"
+msgstr "Si esta encuesta se debería exhibir en la página principal"
+
+#: dash/dashblocks/models.py:34
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this content should include an image"
+msgstr "Si esta encuesta se debería exhibir en la página principal"
+
+#: dash/dashblocks/models.py:37
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Si esta encuesta se debería exhibir en la página principal"
+
+#: dash/dashblocks/models.py:40
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this content should include a summary field"
+msgstr "Si esta encuesta se debería exhibir en la página principal"
+
+#: dash/dashblocks/models.py:43
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this content should include a link"
+msgstr "Si esta encuesta se debería exhibir en la página principal"
+
+#: dash/dashblocks/models.py:46
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Si esta encuesta se debería exhibir en la página principal"
+
+#: dash/dashblocks/models.py:50
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this content has a color field"
+msgstr "Si esta historia está destacada"
+
+#: dash/dashblocks/models.py:53
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Si esta encuesta se debería exhibir en la página principal"
+
+#: dash/dashblocks/models.py:56
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
+msgid "Whether this content should allow tags"
+msgstr "Si esta encuesta se debería exhibir en la página principal"
+
+#: dash/dashblocks/models.py:69
+msgid "Content Type"
+msgstr "Tipo de contenido"
+
+#: dash/dashblocks/models.py:70
+#, fuzzy
+#| msgid "The category for this story"
+msgid "The category, or type for this content block"
+msgstr "La categoría para esta historia"
+
+#: dash/dashblocks/models.py:74
+#, fuzzy
+#| msgid "The title of this question"
+msgid "The title for this block of content, optional"
+msgstr "El título de esta pregunta"
+
+#: dash/dashblocks/models.py:77
+#, fuzzy
+#| msgid "The summary for the story"
+msgid "The summary for this item, should be short"
+msgstr "El resumen de la historia"
+
+#: dash/dashblocks/models.py:80
+#, fuzzy
+#| msgid "The body of text for the story"
+msgid "The body of text for this content block, optional"
+msgstr "El cuerpo del texto para la historia"
+
+#: dash/dashblocks/models.py:83
+#, fuzzy
+#| msgid "A link that should be associated with this item"
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Un enlace que debe estar asociado con este ítem"
+
+#: dash/dashblocks/models.py:87
+#, fuzzy
+#| msgid "The background color for the site"
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "El color de fondo para el sitio"
+
+#: dash/dashblocks/models.py:91
+#, fuzzy
+#| msgid "A link that should be associated with this item"
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Un enlace que debe estar asociado con este ítem"
+
+#: dash/dashblocks/models.py:95 ureport/news/models.py:42
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "El ID del video YouTube que tiene que estar asociado a este ítem"
+
+#: dash/dashblocks/models.py:99
+#, fuzzy
+#| msgid ""
+#| "Any tags for this story, separated by spaces, can be used to do more "
+#| "advanced filtering, optional"
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Se puede usar cualquier etiqueta para esta historia, separada por espacios, "
+"para tener un filtro más avanzado, opcional"
+
+#: dash/dashblocks/models.py:103
+msgid "The priority for this block, higher priority blocks come first"
+msgstr ""
+
+#: dash/dashblocks/models.py:108
+#, fuzzy
+#| msgid "The organization this item belongs to"
+msgid "The organization this content block belongs to"
+msgstr "La organización a la que pertenece este ítem"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:8
+msgid "Gallery"
+msgstr "Galería"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:17
+msgid "Add Image"
+msgstr "Agregar imagen"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
+msgid "Search"
+msgstr "Buscar"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
+#: templates/polls/poll_list.haml:6
+msgid "Add"
+msgstr "Agregar"
+
+#: dash/dashblocks/views.py:16 templates/frame.haml:235
+msgid "Content Types"
+msgstr "Tipos de contenido"
+
+#: dash/dashblocks/views.py:118
+msgid "Content Blocks"
+msgstr "Bloques de contenido"
+
+#: dash/dashblocks/views.py:120
+#, python-format
+msgid "%s Blocks"
+msgstr "%s Bloques"
+
+#: dash/dashblocks/views.py:158
+#, python-format
+msgid "Edit %s"
+msgstr "Editar %s"
+
+#: dash/dashblocks/views.py:182
+#, python-format
+msgid "Create %s"
+msgstr "Crear %s"
+
+#: dash/dashblocks/views.py:184
+msgid "Create Content Block"
+msgstr "Crear Bloquear Contenido"
+
+#: dash/orgs/forms.py:12
+msgid "Your first name"
+msgstr "Su nombre"
+
+#: dash/orgs/forms.py:13
+msgid "Your last name"
+msgstr "Su apellido"
+
+#: dash/orgs/forms.py:14
+msgid "Your email address"
+msgstr "Su dirección de correo electrónico"
+
+#: dash/orgs/forms.py:17
+msgid "Your password, at least eight letters please"
+msgstr "Su contraseña, como mínimo ocho letras por favor"
+
+#: dash/orgs/forms.py:23
+msgid "That email address is already used"
+msgstr "La dirección de correo electrónico ya ha sido utilizada"
+
+#: dash/orgs/forms.py:30
+msgid "Passwords must contain at least 8 letters."
+msgstr "Las contraseñas deben contener como mínimo 8 letras."
+
+#: dash/orgs/forms.py:49
+#, fuzzy
+#| msgid "This subdomain is not available"
+msgid "This domain is used for subdomains"
+msgstr "Este subcampo no está disponible"
+
+#: dash/orgs/models.py:36 dash/orgs/models.py:381 ureport/assets/models.py:19
+msgid "Name"
+msgstr "Nombre"
+
+#: dash/orgs/models.py:37
+msgid "The name of this organization"
+msgstr "El nombre de esta organización"
+
+#: dash/orgs/models.py:41
+msgid "The logo that should be used for this organization"
+msgstr "El logotipo que se debe usar para esta organización"
+
+#: dash/orgs/models.py:44 dash/orgs/views.py:297
+msgid "Administrators"
+msgstr "Administradores"
+
+#: dash/orgs/models.py:45
+msgid "The administrators in your organization"
+msgstr "Los administradores en su organización"
+
+#: dash/orgs/models.py:48
+msgid "Viewers"
+msgstr "Visitantes"
+
+#: dash/orgs/models.py:49
+msgid "The viewers in your organization"
+msgstr "Los visitantes en su organización"
+
+#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
+#: dash/orgs/views.py:298
+msgid "Editors"
+msgstr "Editores"
+
+#: dash/orgs/models.py:53
+msgid "The editors in your organization"
+msgstr "Los editores en su organización"
+
+#: dash/orgs/models.py:56
+msgid "Language"
+msgstr "Idioma"
+
+#: dash/orgs/models.py:57
+msgid "The main language used by this organization"
+msgstr "El idioma principal usado por esta organización"
+
+#: dash/orgs/models.py:60
+msgid "Subdomain"
+msgstr "Subcampo"
+
+#: dash/orgs/models.py:61
+msgid "This subdomain is not available"
+msgstr "Este subcampo no está disponible"
+
+#: dash/orgs/models.py:62
+#, fuzzy
+#| msgid "The subdomain of this organization"
+msgid "The subdomain for this organization"
+msgstr "El subcampo de esta organización"
+
+#: dash/orgs/models.py:65
+#, fuzzy
+#| msgid "Subdomain"
+msgid "Domain"
+msgstr "Subcampo"
+
+#: dash/orgs/models.py:66
+#, fuzzy
+#| msgid "This subdomain is not available"
+msgid "This domain is not available"
+msgstr "Este subcampo no está disponible"
+
+#: dash/orgs/models.py:67
+#, fuzzy
+#| msgid "The subdomain of this organization"
+msgid "The custom domain for this organization"
+msgstr "El subcampo de esta organización"
+
+#: dash/orgs/models.py:70
+msgid "Timezone"
+msgstr "Zona de horario"
+
+#: dash/orgs/models.py:71
+#, fuzzy
+#| msgid "The timezone your organization is in"
+msgid "The timezone your organization is in."
+msgstr "La zona de horario en la que se encuentra tu organización"
+
+#: dash/orgs/models.py:75
+msgid "The API token for the RapidPro account this dashboard is tied to"
+msgstr ""
+"El token de la API para la cuenta RapidPro a la que está conectada este panel"
+
+#: dash/orgs/models.py:80
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+"El archivo JSON usado para almacenar la información sobre la configuración "
+"relacionada con esta organización"
+
+#: dash/orgs/models.py:311
+msgid "Administrator"
+msgstr "Administrador"
+
+#: dash/orgs/models.py:312
+msgid "Editor"
+msgstr "Editor"
+
+#: dash/orgs/models.py:313
+msgid "Viewer"
+msgstr "Visitante"
+
+#: dash/orgs/models.py:318 dash/orgs/models.py:377 ureport/assets/models.py:16
+#: ureport/contacts/models.py:44
+msgid "Org"
+msgstr "Organización"
+
+#: dash/orgs/models.py:319
+msgid "The organization to which the account is invited to view"
+msgstr "La organización a la que esta cuenta está invitada a visitar"
+
+#: dash/orgs/models.py:322
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: dash/orgs/models.py:323
+msgid "The email to which we send the invitation of the viewer"
+msgstr "El correo electrónico al que enviamos la invitación del visitante"
+
+#: dash/orgs/models.py:326
+msgid "Secret"
+msgstr "Código secreto"
+
+#: dash/orgs/models.py:327
+msgid "a unique code associated with this invitation"
+msgstr "un código único relacionado con esta invitación"
+
+#: dash/orgs/models.py:330
+msgid "User Role"
+msgstr "Función del usuario"
+
+#: dash/orgs/models.py:361
+#, python-format
+msgid "%s Invitation"
+msgstr "Invitación de %s "
+
+#: dash/orgs/models.py:373 ureport/assets/models.py:11
+msgid "Banner"
+msgstr "Banner"
+
+#: dash/orgs/models.py:374 ureport/assets/models.py:12
+msgid "Pattern"
+msgstr "Patrón"
+
+#: dash/orgs/models.py:378
+msgid "The organization in which the image will be used"
+msgstr "La organización en la que se utilizará la imagen"
+
+#: dash/orgs/models.py:382
+msgid "The name to describe this background"
+msgstr "El nombre para describir este fondo"
+
+#: dash/orgs/models.py:385
+msgid "Background type"
+msgstr "Tipo de fondo"
+
+#: dash/orgs/models.py:387 ureport/assets/models.py:24
+msgid "The image file"
+msgstr "El archivo de la imagen"
+
+#: dash/orgs/templates/orgs/email/invitation_email.html:9
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
+"a>.\n"
+"  "
+msgstr ""
+"\n"
+"Has sido invitado a unirte %(org_name)s.\n"
+"<br/>\n"
+"Para aceptar la invitación, <a href='%(host)s%(join_url)s'>haz clic aquí</a>."
+
+#: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
+msgid "Edit"
+msgstr "Editar"
+
+#: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
+msgid "Manage Users"
+msgstr "Manejar usuarios"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:13
+msgid "Accounts"
+msgstr "Cuentas"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:16
+msgid "Admins"
+msgstr "Administradores"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:22
+msgid "Remove"
+msgstr "Retirar"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:29
+msgid "You must have at least one administator"
+msgstr "Debe tener como mínimo un administrador "
+
+#: dash/orgs/views.py:168
+msgid "Select your Organization"
+msgstr "Elija su Organización"
+
+#: dash/orgs/views.py:179
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+"Su cuenta no está asociada a una organización. Por favor, contacte al "
+"administrador."
+
+#: dash/orgs/views.py:219 dash/orgs/views.py:229
+msgid "Your Organization"
+msgstr "Tu Organización"
+
+#: dash/orgs/views.py:226
+msgid "Not Set"
+msgstr "No establecida"
+
+#: dash/orgs/views.py:296
+msgid "Invite people to your organization"
+msgstr "Invitar a personas a su organización"
+
+#: dash/orgs/views.py:299
+msgid "User group"
+msgstr "Grupo de usuarios"
+
+#: dash/orgs/views.py:310
+msgid "One of the emails you entered is invalid."
+msgstr "Uno de los correos electrónicos que ingresó es inválido."
+
+#: dash/orgs/views.py:323
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Manejar las cuentas de %(name)s "
+
+#: dash/orgs/views.py:438
+msgid "Create"
+msgstr "Crear"
+
+#: dash/orgs/views.py:446
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+"El enlace de su invitación es inválido. Por favor, contacte al administrador "
+"de su organización."
+
+#: dash/orgs/views.py:502 dash/orgs/views.py:547
+#, python-format
+msgid "Join %(name)s"
+msgstr "Participar en %(name)s"
+
+#: dash/orgs/views.py:524
+msgid "Join"
+msgstr "Participar"
+
+#: dash/orgs/views.py:533
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+"El enlace de su invitación ha vencido. Por favor, contacte al administrador "
+"de su organización."
+
+#: dash/orgs/views.py:640
+msgid "Task"
+msgstr ""
+
+#: dash/orgs/views.py:644
+msgid "Tasks"
+msgstr ""
+
+#: dash/stories/models.py:13
+msgid "The title for this story"
+msgstr "El título para esta historia"
+
+#: dash/stories/models.py:17
+msgid "Whether this story is featured"
+msgstr "Si esta historia está destacada"
+
+#: dash/stories/models.py:20
+msgid "The summary for the story"
+msgstr "El resumen de la historia"
+
+#: dash/stories/models.py:22
+msgid "The body of text for the story"
+msgstr "El cuerpo del texto para la historia"
+
+#: dash/stories/models.py:24
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The writer of the story"
+msgstr "El título para esta historia"
+
+#: dash/stories/models.py:27
+msgid "A link to an mp3 file to publish on this story"
+msgstr ""
+
+#: dash/stories/models.py:31
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"El ID del video en YouTube que debe estar vinculado a esta historia (este es "
+"el texto que viene después de v= y antes de & en el URL de YouTube)"
+
+#: dash/stories/models.py:37
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Se puede usar cualquier etiqueta para esta historia, separada por espacios, "
+"para tener un filtro más avanzado, opcional"
+
+#: dash/stories/models.py:42
+msgid "The category for this story"
+msgstr "La categoría para esta historia"
+
+#: dash/stories/models.py:46
+msgid "The organization this story belongs to"
+msgstr "La organización a la pertenece esta historia"
+
+#: dash/stories/models.py:124 templates/frame.haml:329
+#: templates/frame.haml.py:481 templates/public/stories.haml:7
+msgid "Stories"
+msgstr "Historias"
+
+#: dash/stories/models.py:132
+msgid "The story to associate to"
+msgstr "La historia para relacionarla con"
+
+#: dash/stories/views.py:59
+msgid "Yes"
+msgstr "Sí"
+
+#: dash/stories/views.py:60
+msgid "No"
+msgstr "No"
+
+#: dash/stories/views.py:79
+msgid "Story Images"
+msgstr "Imágenes para la historia"
+
+#: dash/stories/views.py:91 dash/stories/views.py:99 ureport/polls/views.py:164
+#: ureport/polls/views.py:171
+#, fuzzy, python-format
+#| msgid "Image %d"
+msgid "Image %d"
+msgstr "%d de imagen "
+
+#: dash/stories/views.py:92
+msgid "Image to display on story page and in previews. (optional)"
+msgstr ""
+"Imagen para mostrar en la página de la historia y en las vistas previas. "
+"(opcional)"
+
+#: dash/stories/views.py:100
+msgid "Image to display on story page and in previews (optional)"
+msgstr ""
+"Imagen para mostrar en la página de la historia y en las vistas previas. "
+"(opcional)"
 
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
@@ -41,10 +662,6 @@ msgstr "Organizaciones"
 msgid "Users"
 msgstr "Usuarios"
 
-#: templates/frame.haml:235
-msgid "Content Types"
-msgstr "Tipos de contenido"
-
 #: templates/frame.haml:242
 #, fuzzy
 #| msgid "Image %d"
@@ -63,10 +680,6 @@ msgstr ""
 msgid "Polls"
 msgstr "Encuestas"
 
-#: templates/frame.haml:285 templates/frame.haml.py:292
-msgid "Categories"
-msgstr "Categorías"
-
 #: templates/frame.haml:300
 msgid "Category Images"
 msgstr "Categoría Imágenes"
@@ -74,11 +687,6 @@ msgstr "Categoría Imágenes"
 #: templates/frame.haml:320
 msgid "News Items"
 msgstr "Noticias"
-
-#: templates/frame.haml:329 templates/frame.haml.py:481
-#: templates/public/stories.haml:7
-msgid "Stories"
-msgstr "Historias"
 
 #: templates/frame.haml:338
 msgid "Job Sources"
@@ -198,18 +806,6 @@ msgid ""
 "id from twitter.\n"
 "      "
 msgstr ""
-
-#: templates/orgs/org_home.haml:8
-msgid "Edit"
-msgstr "Editar"
-
-#: templates/orgs/org_home.haml:13
-msgid "Manage Users"
-msgstr "Manejar usuarios"
-
-#: templates/polls/poll_list.haml:6
-msgid "Add"
-msgstr "Agregar"
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
 msgid "ABOUT U-REPORT"
@@ -758,31 +1354,15 @@ msgstr "¿Olvidó su clave?"
 msgid "Refreshed %s cache for this organization"
 msgstr "El nombre de esta organización"
 
-#: ureport/assets/models.py:11
-msgid "Banner"
-msgstr "Banner"
-
-#: ureport/assets/models.py:12
-msgid "Pattern"
-msgstr "Patrón"
-
 #: ureport/assets/models.py:13
 msgid "Flag"
 msgstr ""
-
-#: ureport/assets/models.py:16 ureport/contacts/models.py:44
-msgid "Org"
-msgstr "Organización"
 
 #: ureport/assets/models.py:17
 #, fuzzy
 #| msgid "The organization in which the image will be used"
 msgid "The organization to which the image will be used"
 msgstr "La organización en la que se utilizará la imagen"
-
-#: ureport/assets/models.py:19
-msgid "Name"
-msgstr "Nombre"
 
 #: ureport/assets/models.py:20
 #, fuzzy
@@ -795,10 +1375,6 @@ msgstr "Una breve descripción para este ítem"
 #| msgid "Image %d"
 msgid "Image type"
 msgstr "%d de imagen "
-
-#: ureport/assets/models.py:24
-msgid "The image file"
-msgstr "El archivo de la imagen"
 
 #: ureport/contacts/models.py:46
 msgid "Label"
@@ -959,10 +1535,6 @@ msgstr "El título para este video"
 msgid "A short summary description for this video"
 msgstr "Una breve descripción para este video"
 
-#: ureport/news/models.py:42
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "El ID del video YouTube que tiene que estar asociado a este ítem"
-
 #: ureport/news/models.py:48
 msgid "The organization this video belongs to"
 msgstr "La organización a la que pertenece este video"
@@ -970,10 +1542,6 @@ msgstr "La organización a la que pertenece este video"
 #: ureport/polls/models.py:62
 msgid "The name of this poll category"
 msgstr "El nombre de esta categoría de encuesta"
-
-#: ureport/polls/models.py:64
-msgid "The organization this category applies to"
-msgstr "La organización a la que se aplica esta categoría"
 
 #: ureport/polls/models.py:71
 msgid "Poll Categories"
@@ -1024,17 +1592,9 @@ msgstr "La imagen de categoría para ser exhibida en la encuesta (opcional)"
 msgid "The organization this poll is part of"
 msgstr "La organización a la que pertenece esta encuesta"
 
-#: ureport/polls/models.py:604
-msgid "The name to describe this image"
-msgstr "El nombre para describir esta imagen"
-
 #: ureport/polls/models.py:607
 msgid "The poll to associate to"
 msgstr "La encuesta está relacionada con"
-
-#: ureport/polls/models.py:610
-msgid "The image file to use"
-msgstr "El archivo de la imagen que se va a utilizar"
 
 #: ureport/polls/models.py:621
 msgid "The poll for this response"
@@ -1119,12 +1679,6 @@ msgstr "Imágenes de la encuesta"
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr ""
 "Ahora ingrese cualquier respuesta que quisiera mostrar. (si la hubiera)"
-
-#: ureport/polls/views.py:164 ureport/polls/views.py:171
-#, fuzzy, python-format
-#| msgid "Image %d"
-msgid "Image %d"
-msgstr "%d de imagen "
 
 #: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
@@ -1401,377 +1955,6 @@ msgstr ""
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
-
-#~ msgid "The name of this category"
-#~ msgstr "El nombre de esta categoría"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "Una imagen opcional que pueda describir esta categoría"
-
-#~ msgid "The category this image represents"
-#~ msgstr "La categoría que representa esta imagen"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this content should include an image"
-#~ msgstr "Si esta encuesta se debería exhibir en la página principal"
-
-#, fuzzy
-#~| msgid "Whether this story is featured"
-#~ msgid "Whether this content has a color field"
-#~ msgstr "Si esta historia está destacada"
-
-#, fuzzy
-#~| msgid "Whether this poll should be featured on the homepage"
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "Si esta encuesta se debería exhibir en la página principal"
-
-#~ msgid "Content Type"
-#~ msgstr "Tipo de contenido"
-
-#, fuzzy
-#~| msgid "The category for this story"
-#~ msgid "The category, or type for this content block"
-#~ msgstr "La categoría para esta historia"
-
-#, fuzzy
-#~| msgid "The title of this question"
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "El título de esta pregunta"
-
-#, fuzzy
-#~| msgid "The summary for the story"
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "El resumen de la historia"
-
-#, fuzzy
-#~| msgid "The body of text for the story"
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "El cuerpo del texto para la historia"
-
-#, fuzzy
-#~| msgid "A link that should be associated with this item"
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "Un enlace que debe estar asociado con este ítem"
-
-#, fuzzy
-#~| msgid "The background color for the site"
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "El color de fondo para el sitio"
-
-#, fuzzy
-#~| msgid "A link that should be associated with this item"
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "Un enlace que debe estar asociado con este ítem"
-
-#, fuzzy
-#~| msgid ""
-#~| "Any tags for this story, separated by spaces, can be used to do more "
-#~| "advanced filtering, optional"
-#~ msgid ""
-#~ "Any tags for this content block, separated by spaces, can be used to do "
-#~ "more advanced filtering, optional"
-#~ msgstr ""
-#~ "Se puede usar cualquier etiqueta para esta historia, separada por "
-#~ "espacios, para tener un filtro más avanzado, opcional"
-
-#, fuzzy
-#~| msgid "The organization this item belongs to"
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "La organización a la que pertenece este ítem"
-
-#~ msgid "Gallery"
-#~ msgstr "Galería"
-
-#~ msgid "Add Image"
-#~ msgstr "Agregar imagen"
-
-#~ msgid "Search"
-#~ msgstr "Buscar"
-
-#~ msgid "Content Blocks"
-#~ msgstr "Bloques de contenido"
-
-#~ msgid "%s Blocks"
-#~ msgstr "%s Bloques"
-
-#~ msgid "Edit %s"
-#~ msgstr "Editar %s"
-
-#~ msgid "Create %s"
-#~ msgstr "Crear %s"
-
-#~ msgid "Create Content Block"
-#~ msgstr "Crear Bloquear Contenido"
-
-#~ msgid "Your first name"
-#~ msgstr "Su nombre"
-
-#~ msgid "Your last name"
-#~ msgstr "Su apellido"
-
-#~ msgid "Your email address"
-#~ msgstr "Su dirección de correo electrónico"
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "Su contraseña, como mínimo ocho letras por favor"
-
-#~ msgid "That email address is already used"
-#~ msgstr "La dirección de correo electrónico ya ha sido utilizada"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "Las contraseñas deben contener como mínimo 8 letras."
-
-#~ msgid "The name of this organization"
-#~ msgstr "El nombre de esta organización"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "El logotipo que se debe usar para esta organización"
-
-#~ msgid "Administrators"
-#~ msgstr "Administradores"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "Los administradores en su organización"
-
-#~ msgid "Viewers"
-#~ msgstr "Visitantes"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "Los visitantes en su organización"
-
-#~ msgid "Editors"
-#~ msgstr "Editores"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "Los editores en su organización"
-
-#~ msgid "Language"
-#~ msgstr "Idioma"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "El idioma principal usado por esta organización"
-
-#~ msgid "Subdomain"
-#~ msgstr "Subcampo"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "Este subcampo no está disponible"
-
-#, fuzzy
-#~| msgid "The subdomain of this organization"
-#~ msgid "The subdomain for this organization"
-#~ msgstr "El subcampo de esta organización"
-
-#, fuzzy
-#~| msgid "Subdomain"
-#~ msgid "Domain"
-#~ msgstr "Subcampo"
-
-#, fuzzy
-#~| msgid "This subdomain is not available"
-#~ msgid "This domain is not available"
-#~ msgstr "Este subcampo no está disponible"
-
-#, fuzzy
-#~| msgid "The subdomain of this organization"
-#~ msgid "The custom domain for this organization"
-#~ msgstr "El subcampo de esta organización"
-
-#~ msgid "Timezone"
-#~ msgstr "Zona de horario"
-
-#, fuzzy
-#~| msgid "The timezone your organization is in"
-#~ msgid "The timezone your organization is in."
-#~ msgstr "La zona de horario en la que se encuentra tu organización"
-
-#~ msgid "The API token for the RapidPro account this dashboard is tied to"
-#~ msgstr ""
-#~ "El token de la API para la cuenta RapidPro a la que está conectada este "
-#~ "panel"
-
-#~ msgid ""
-#~ "JSON blob used to store configuration information associated with this "
-#~ "organization"
-#~ msgstr ""
-#~ "El archivo JSON usado para almacenar la información sobre la "
-#~ "configuración relacionada con esta organización"
-
-#~ msgid "Administrator"
-#~ msgstr "Administrador"
-
-#~ msgid "Editor"
-#~ msgstr "Editor"
-
-#~ msgid "Viewer"
-#~ msgstr "Visitante"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "La organización a la que esta cuenta está invitada a visitar"
-
-#~ msgid "Email"
-#~ msgstr "Correo electrónico"
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "El correo electrónico al que enviamos la invitación del visitante"
-
-#~ msgid "Secret"
-#~ msgstr "Código secreto"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "un código único relacionado con esta invitación"
-
-#~ msgid "User Role"
-#~ msgstr "Función del usuario"
-
-#~ msgid "%s Invitation"
-#~ msgstr "Invitación de %s "
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "La organización en la que se utilizará la imagen"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "El nombre para describir este fondo"
-
-#~ msgid "Background type"
-#~ msgstr "Tipo de fondo"
-
-#~ msgid ""
-#~ "\n"
-#~ "      You've been invited to join %(org_name)s.\n"
-#~ "      <br/>\n"
-#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click "
-#~ "here</a>.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "Has sido invitado a unirte %(org_name)s.\n"
-#~ "<br/>\n"
-#~ "Para aceptar la invitación, <a href='%(host)s%(join_url)s'>haz clic aquí</"
-#~ "a>."
-
-#~ msgid "Accounts"
-#~ msgstr "Cuentas"
-
-#~ msgid "Admins"
-#~ msgstr "Administradores"
-
-#~ msgid "Remove"
-#~ msgstr "Retirar"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "Debe tener como mínimo un administrador "
-
-#~ msgid "Select your Organization"
-#~ msgstr "Elija su Organización"
-
-#~ msgid ""
-#~ "Your account is not associated to an organization. Please Contact the "
-#~ "adminstrator."
-#~ msgstr ""
-#~ "Su cuenta no está asociada a una organización. Por favor, contacte al "
-#~ "administrador."
-
-#~ msgid "Your Organization"
-#~ msgstr "Tu Organización"
-
-#~ msgid "Not Set"
-#~ msgstr "No establecida"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "Invitar a personas a su organización"
-
-#~ msgid "User group"
-#~ msgstr "Grupo de usuarios"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "Uno de los correos electrónicos que ingresó es inválido."
-
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "Manejar las cuentas de %(name)s "
-
-#~ msgid "Create"
-#~ msgstr "Crear"
-
-#~ msgid ""
-#~ "Your invitation link is invalid. Please contact your organization "
-#~ "administrator."
-#~ msgstr ""
-#~ "El enlace de su invitación es inválido. Por favor, contacte al "
-#~ "administrador de su organización."
-
-#~ msgid "Join %(name)s"
-#~ msgstr "Participar en %(name)s"
-
-#~ msgid "Join"
-#~ msgstr "Participar"
-
-#~ msgid ""
-#~ "Your invitation link has expired. Please contact your organization "
-#~ "administrator."
-#~ msgstr ""
-#~ "El enlace de su invitación ha vencido. Por favor, contacte al "
-#~ "administrador de su organización."
-
-#~ msgid "The title for this story"
-#~ msgstr "El título para esta historia"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "Si esta historia está destacada"
-
-#~ msgid "The summary for the story"
-#~ msgstr "El resumen de la historia"
-
-#~ msgid "The body of text for the story"
-#~ msgstr "El cuerpo del texto para la historia"
-
-#, fuzzy
-#~| msgid "The title for this story"
-#~ msgid "The writer of the story"
-#~ msgstr "El título para esta historia"
-
-#~ msgid ""
-#~ "The id of the YouTube video that should be linked to this story (this is "
-#~ "the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr ""
-#~ "El ID del video en YouTube que debe estar vinculado a esta historia (este "
-#~ "es el texto que viene después de v= y antes de & en el URL de YouTube)"
-
-#~ msgid ""
-#~ "Any tags for this story, separated by spaces, can be used to do more "
-#~ "advanced filtering, optional"
-#~ msgstr ""
-#~ "Se puede usar cualquier etiqueta para esta historia, separada por "
-#~ "espacios, para tener un filtro más avanzado, opcional"
-
-#~ msgid "The category for this story"
-#~ msgstr "La categoría para esta historia"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "La organización a la pertenece esta historia"
-
-#~ msgid "The story to associate to"
-#~ msgstr "La historia para relacionarla con"
-
-#~ msgid "Yes"
-#~ msgstr "Sí"
-
-#~ msgid "No"
-#~ msgstr "No"
-
-#~ msgid "Story Images"
-#~ msgstr "Imágenes para la historia"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr ""
-#~ "Imagen para mostrar en la página de la historia y en las vistas previas. "
-#~ "(opcional)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr ""
-#~ "Imagen para mostrar en la página de la historia y en las vistas previas. "
-#~ "(opcional)"
 
 #~ msgid "Remove Item?"
 #~ msgstr "¿Remover contenido?"

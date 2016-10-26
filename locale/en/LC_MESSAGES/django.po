@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-26 12:44+0000\n"
+"POT-Creation-Date: 2016-10-26 12:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,549 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: dash/categories/models.py:20
+msgid "The name of this category"
+msgstr ""
+
+#: dash/categories/models.py:23
+msgid "An optional image that can describe this category"
+msgstr ""
+
+#: dash/categories/models.py:26 ureport/polls/models.py:64
+msgid "The organization this category applies to"
+msgstr ""
+
+#: dash/categories/models.py:47 templates/frame.haml:285
+#: templates/frame.haml.py:292
+msgid "Categories"
+msgstr ""
+
+#: dash/categories/models.py:53 dash/stories/models.py:129
+#: ureport/polls/models.py:604
+msgid "The name to describe this image"
+msgstr ""
+
+#: dash/categories/models.py:56
+msgid "The category this image represents"
+msgstr ""
+
+#: dash/categories/models.py:59 dash/stories/models.py:135
+#: ureport/polls/models.py:610
+msgid "The image file to use"
+msgstr ""
+
+#: dash/dashblocks/models.py:19
+msgid "The human readable name for this content type"
+msgstr ""
+
+#: dash/dashblocks/models.py:22
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+
+#: dash/dashblocks/models.py:26
+msgid ""
+"A description of where this content type is used on the site and how it will "
+"be dsiplayed"
+msgstr ""
+
+#: dash/dashblocks/models.py:31
+msgid "Whether this content should include a title"
+msgstr ""
+
+#: dash/dashblocks/models.py:34
+msgid "Whether this content should include an image"
+msgstr ""
+
+#: dash/dashblocks/models.py:37
+msgid "Whether this content should use a rich HTML editor"
+msgstr ""
+
+#: dash/dashblocks/models.py:40
+msgid "Whether this content should include a summary field"
+msgstr ""
+
+#: dash/dashblocks/models.py:43
+msgid "Whether this content should include a link"
+msgstr ""
+
+#: dash/dashblocks/models.py:46
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr ""
+
+#: dash/dashblocks/models.py:50
+msgid "Whether this content has a color field"
+msgstr ""
+
+#: dash/dashblocks/models.py:53
+msgid "Whether this content should allow setting a YouTube id"
+msgstr ""
+
+#: dash/dashblocks/models.py:56
+msgid "Whether this content should allow tags"
+msgstr ""
+
+#: dash/dashblocks/models.py:69
+msgid "Content Type"
+msgstr ""
+
+#: dash/dashblocks/models.py:70
+msgid "The category, or type for this content block"
+msgstr ""
+
+#: dash/dashblocks/models.py:74
+msgid "The title for this block of content, optional"
+msgstr ""
+
+#: dash/dashblocks/models.py:77
+msgid "The summary for this item, should be short"
+msgstr ""
+
+#: dash/dashblocks/models.py:80
+msgid "The body of text for this content block, optional"
+msgstr ""
+
+#: dash/dashblocks/models.py:83
+msgid "Any image that should be displayed with this content block, optional"
+msgstr ""
+
+#: dash/dashblocks/models.py:87
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr ""
+
+#: dash/dashblocks/models.py:91
+msgid "Any link that should be associated with this content block, optional"
+msgstr ""
+
+#: dash/dashblocks/models.py:95 ureport/news/models.py:42
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr ""
+
+#: dash/dashblocks/models.py:99
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+
+#: dash/dashblocks/models.py:103
+msgid "The priority for this block, higher priority blocks come first"
+msgstr ""
+
+#: dash/dashblocks/models.py:108
+msgid "The organization this content block belongs to"
+msgstr ""
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:8
+msgid "Gallery"
+msgstr ""
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:17
+msgid "Add Image"
+msgstr ""
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
+msgid "Search"
+msgstr ""
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
+#: templates/polls/poll_list.haml:6
+msgid "Add"
+msgstr ""
+
+#: dash/dashblocks/views.py:16 templates/frame.haml:235
+msgid "Content Types"
+msgstr ""
+
+#: dash/dashblocks/views.py:118
+msgid "Content Blocks"
+msgstr ""
+
+#: dash/dashblocks/views.py:120
+#, python-format
+msgid "%s Blocks"
+msgstr ""
+
+#: dash/dashblocks/views.py:158
+#, python-format
+msgid "Edit %s"
+msgstr ""
+
+#: dash/dashblocks/views.py:182
+#, python-format
+msgid "Create %s"
+msgstr ""
+
+#: dash/dashblocks/views.py:184
+msgid "Create Content Block"
+msgstr ""
+
+#: dash/orgs/forms.py:12
+msgid "Your first name"
+msgstr ""
+
+#: dash/orgs/forms.py:13
+msgid "Your last name"
+msgstr ""
+
+#: dash/orgs/forms.py:14
+msgid "Your email address"
+msgstr ""
+
+#: dash/orgs/forms.py:17
+msgid "Your password, at least eight letters please"
+msgstr ""
+
+#: dash/orgs/forms.py:23
+msgid "That email address is already used"
+msgstr ""
+
+#: dash/orgs/forms.py:30
+msgid "Passwords must contain at least 8 letters."
+msgstr ""
+
+#: dash/orgs/forms.py:49
+msgid "This domain is used for subdomains"
+msgstr ""
+
+#: dash/orgs/models.py:36 dash/orgs/models.py:381 ureport/assets/models.py:19
+msgid "Name"
+msgstr ""
+
+#: dash/orgs/models.py:37
+msgid "The name of this organization"
+msgstr ""
+
+#: dash/orgs/models.py:41
+msgid "The logo that should be used for this organization"
+msgstr ""
+
+#: dash/orgs/models.py:44 dash/orgs/views.py:297
+msgid "Administrators"
+msgstr ""
+
+#: dash/orgs/models.py:45
+msgid "The administrators in your organization"
+msgstr ""
+
+#: dash/orgs/models.py:48
+msgid "Viewers"
+msgstr ""
+
+#: dash/orgs/models.py:49
+msgid "The viewers in your organization"
+msgstr ""
+
+#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
+#: dash/orgs/views.py:298
+msgid "Editors"
+msgstr ""
+
+#: dash/orgs/models.py:53
+msgid "The editors in your organization"
+msgstr ""
+
+#: dash/orgs/models.py:56
+msgid "Language"
+msgstr ""
+
+#: dash/orgs/models.py:57
+msgid "The main language used by this organization"
+msgstr ""
+
+#: dash/orgs/models.py:60
+msgid "Subdomain"
+msgstr ""
+
+#: dash/orgs/models.py:61
+msgid "This subdomain is not available"
+msgstr ""
+
+#: dash/orgs/models.py:62
+msgid "The subdomain for this organization"
+msgstr ""
+
+#: dash/orgs/models.py:65
+msgid "Domain"
+msgstr ""
+
+#: dash/orgs/models.py:66
+msgid "This domain is not available"
+msgstr ""
+
+#: dash/orgs/models.py:67
+msgid "The custom domain for this organization"
+msgstr ""
+
+#: dash/orgs/models.py:70
+msgid "Timezone"
+msgstr ""
+
+#: dash/orgs/models.py:71
+msgid "The timezone your organization is in."
+msgstr ""
+
+#: dash/orgs/models.py:75
+msgid "The API token for the RapidPro account this dashboard is tied to"
+msgstr ""
+
+#: dash/orgs/models.py:80
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+
+#: dash/orgs/models.py:311
+msgid "Administrator"
+msgstr ""
+
+#: dash/orgs/models.py:312
+msgid "Editor"
+msgstr ""
+
+#: dash/orgs/models.py:313
+msgid "Viewer"
+msgstr ""
+
+#: dash/orgs/models.py:318 dash/orgs/models.py:377 ureport/assets/models.py:16
+#: ureport/contacts/models.py:44
+msgid "Org"
+msgstr ""
+
+#: dash/orgs/models.py:319
+msgid "The organization to which the account is invited to view"
+msgstr ""
+
+#: dash/orgs/models.py:322
+msgid "Email"
+msgstr ""
+
+#: dash/orgs/models.py:323
+msgid "The email to which we send the invitation of the viewer"
+msgstr ""
+
+#: dash/orgs/models.py:326
+msgid "Secret"
+msgstr ""
+
+#: dash/orgs/models.py:327
+msgid "a unique code associated with this invitation"
+msgstr ""
+
+#: dash/orgs/models.py:330
+msgid "User Role"
+msgstr ""
+
+#: dash/orgs/models.py:361
+#, python-format
+msgid "%s Invitation"
+msgstr ""
+
+#: dash/orgs/models.py:373 ureport/assets/models.py:11
+msgid "Banner"
+msgstr ""
+
+#: dash/orgs/models.py:374 ureport/assets/models.py:12
+msgid "Pattern"
+msgstr ""
+
+#: dash/orgs/models.py:378
+msgid "The organization in which the image will be used"
+msgstr ""
+
+#: dash/orgs/models.py:382
+msgid "The name to describe this background"
+msgstr ""
+
+#: dash/orgs/models.py:385
+msgid "Background type"
+msgstr ""
+
+#: dash/orgs/models.py:387 ureport/assets/models.py:24
+msgid "The image file"
+msgstr ""
+
+#: dash/orgs/templates/orgs/email/invitation_email.html:9
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
+"a>.\n"
+"  "
+msgstr ""
+
+#: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
+msgid "Edit"
+msgstr ""
+
+#: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
+msgid "Manage Users"
+msgstr ""
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:13
+msgid "Accounts"
+msgstr ""
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:16
+msgid "Admins"
+msgstr ""
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:22
+msgid "Remove"
+msgstr ""
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:29
+msgid "You must have at least one administator"
+msgstr ""
+
+#: dash/orgs/views.py:168
+msgid "Select your Organization"
+msgstr ""
+
+#: dash/orgs/views.py:179
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+
+#: dash/orgs/views.py:219 dash/orgs/views.py:229
+msgid "Your Organization"
+msgstr ""
+
+#: dash/orgs/views.py:226
+msgid "Not Set"
+msgstr ""
+
+#: dash/orgs/views.py:296
+msgid "Invite people to your organization"
+msgstr ""
+
+#: dash/orgs/views.py:299
+msgid "User group"
+msgstr ""
+
+#: dash/orgs/views.py:310
+msgid "One of the emails you entered is invalid."
+msgstr ""
+
+#: dash/orgs/views.py:323
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr ""
+
+#: dash/orgs/views.py:438
+msgid "Create"
+msgstr ""
+
+#: dash/orgs/views.py:446
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+
+#: dash/orgs/views.py:502 dash/orgs/views.py:547
+#, python-format
+msgid "Join %(name)s"
+msgstr ""
+
+#: dash/orgs/views.py:524
+msgid "Join"
+msgstr ""
+
+#: dash/orgs/views.py:533
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+
+#: dash/orgs/views.py:640
+msgid "Task"
+msgstr ""
+
+#: dash/orgs/views.py:644
+msgid "Tasks"
+msgstr ""
+
+#: dash/stories/models.py:13
+msgid "The title for this story"
+msgstr ""
+
+#: dash/stories/models.py:17
+msgid "Whether this story is featured"
+msgstr ""
+
+#: dash/stories/models.py:20
+msgid "The summary for the story"
+msgstr ""
+
+#: dash/stories/models.py:22
+msgid "The body of text for the story"
+msgstr ""
+
+#: dash/stories/models.py:24
+msgid "The writer of the story"
+msgstr ""
+
+#: dash/stories/models.py:27
+msgid "A link to an mp3 file to publish on this story"
+msgstr ""
+
+#: dash/stories/models.py:31
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+
+#: dash/stories/models.py:37
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+
+#: dash/stories/models.py:42
+msgid "The category for this story"
+msgstr ""
+
+#: dash/stories/models.py:46
+msgid "The organization this story belongs to"
+msgstr ""
+
+#: dash/stories/models.py:124 templates/frame.haml:329
+#: templates/frame.haml.py:481 templates/public/stories.haml:7
+msgid "Stories"
+msgstr ""
+
+#: dash/stories/models.py:132
+msgid "The story to associate to"
+msgstr ""
+
+#: dash/stories/views.py:59
+msgid "Yes"
+msgstr ""
+
+#: dash/stories/views.py:60
+msgid "No"
+msgstr ""
+
+#: dash/stories/views.py:79
+msgid "Story Images"
+msgstr ""
+
+#: dash/stories/views.py:91 dash/stories/views.py:99 ureport/polls/views.py:164
+#: ureport/polls/views.py:171
+#, python-format
+msgid "Image %d"
+msgstr ""
+
+#: dash/stories/views.py:92
+msgid "Image to display on story page and in previews. (optional)"
+msgstr ""
+
+#: dash/stories/views.py:100
+msgid "Image to display on story page and in previews (optional)"
+msgstr ""
 
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
@@ -37,10 +580,6 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: templates/frame.haml:235
-msgid "Content Types"
-msgstr ""
-
 #: templates/frame.haml:242
 msgid "Images"
 msgstr ""
@@ -57,21 +596,12 @@ msgstr ""
 msgid "Polls"
 msgstr ""
 
-#: templates/frame.haml:285 templates/frame.haml.py:292
-msgid "Categories"
-msgstr ""
-
 #: templates/frame.haml:300
 msgid "Category Images"
 msgstr ""
 
 #: templates/frame.haml:320
 msgid "News Items"
-msgstr ""
-
-#: templates/frame.haml:329 templates/frame.haml.py:481
-#: templates/public/stories.haml:7
-msgid "Stories"
 msgstr ""
 
 #: templates/frame.haml:338
@@ -187,18 +717,6 @@ msgid ""
 "        Remember for a Twitter job source you are required to get a widget "
 "id from twitter.\n"
 "      "
-msgstr ""
-
-#: templates/orgs/org_home.haml:8
-msgid "Edit"
-msgstr ""
-
-#: templates/orgs/org_home.haml:13
-msgid "Manage Users"
-msgstr ""
-
-#: templates/polls/poll_list.haml:6
-msgid "Add"
 msgstr ""
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
@@ -706,28 +1224,12 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr ""
 
-#: ureport/assets/models.py:11
-msgid "Banner"
-msgstr ""
-
-#: ureport/assets/models.py:12
-msgid "Pattern"
-msgstr ""
-
 #: ureport/assets/models.py:13
 msgid "Flag"
 msgstr ""
 
-#: ureport/assets/models.py:16 ureport/contacts/models.py:44
-msgid "Org"
-msgstr ""
-
 #: ureport/assets/models.py:17
 msgid "The organization to which the image will be used"
-msgstr ""
-
-#: ureport/assets/models.py:19
-msgid "Name"
 msgstr ""
 
 #: ureport/assets/models.py:20
@@ -736,10 +1238,6 @@ msgstr ""
 
 #: ureport/assets/models.py:22
 msgid "Image type"
-msgstr ""
-
-#: ureport/assets/models.py:24
-msgid "The image file"
 msgstr ""
 
 #: ureport/contacts/models.py:46
@@ -893,20 +1391,12 @@ msgstr ""
 msgid "A short summary description for this video"
 msgstr ""
 
-#: ureport/news/models.py:42
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr ""
-
 #: ureport/news/models.py:48
 msgid "The organization this video belongs to"
 msgstr ""
 
 #: ureport/polls/models.py:62
 msgid "The name of this poll category"
-msgstr ""
-
-#: ureport/polls/models.py:64
-msgid "The organization this category applies to"
 msgstr ""
 
 #: ureport/polls/models.py:71
@@ -958,16 +1448,8 @@ msgstr ""
 msgid "The organization this poll is part of"
 msgstr ""
 
-#: ureport/polls/models.py:604
-msgid "The name to describe this image"
-msgstr ""
-
 #: ureport/polls/models.py:607
 msgid "The poll to associate to"
-msgstr ""
-
-#: ureport/polls/models.py:610
-msgid "The image file to use"
 msgstr ""
 
 #: ureport/polls/models.py:621
@@ -1040,11 +1522,6 @@ msgstr ""
 
 #: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr ""
-
-#: ureport/polls/views.py:164 ureport/polls/views.py:171
-#, python-format
-msgid "Image %d"
 msgstr ""
 
 #: ureport/polls/views.py:165

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-26 12:44+0000\n"
+"POT-Creation-Date: 2016-10-26 12:58+0000\n"
 "PO-Revision-Date: 2016-05-23 17:11+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/"
@@ -20,6 +20,563 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: dash/categories/models.py:20
+msgid "The name of this category"
+msgstr "اسم الفئة "
+
+#: dash/categories/models.py:23
+msgid "An optional image that can describe this category"
+msgstr "صورة لوصف هذه الفئة \"إختياري\" "
+
+#: dash/categories/models.py:26 ureport/polls/models.py:64
+msgid "The organization this category applies to"
+msgstr "المنظمة أو الجمعية التابعة لهذه الفئة "
+
+#: dash/categories/models.py:47 templates/frame.haml:285
+#: templates/frame.haml.py:292
+msgid "Categories"
+msgstr "الفئات "
+
+#: dash/categories/models.py:53 dash/stories/models.py:129
+#: ureport/polls/models.py:604
+msgid "The name to describe this image"
+msgstr "وصف الصورة "
+
+#: dash/categories/models.py:56
+msgid "The category this image represents"
+msgstr "الفئة التي ترمز لها الصورة  "
+
+#: dash/categories/models.py:59 dash/stories/models.py:135
+#: ureport/polls/models.py:610
+msgid "The image file to use"
+msgstr "ملف الصورة التي تريد إستخدامها "
+
+#: dash/dashblocks/models.py:19
+msgid "The human readable name for this content type"
+msgstr "الاسم المقروء للإنسان لهذا النوع من المحتوى"
+
+#: dash/dashblocks/models.py:22
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+
+#: dash/dashblocks/models.py:26
+msgid ""
+"A description of where this content type is used on the site and how it will "
+"be dsiplayed"
+msgstr "وصف عن مكان استخدام نوع المحتوى هذا في الموقع وكيف سيتم عرضه"
+
+#: dash/dashblocks/models.py:31
+msgid "Whether this content should include a title"
+msgstr "بحال كان المحتوى يجب أن يحوى عنوان"
+
+#: dash/dashblocks/models.py:34
+msgid "Whether this content should include an image"
+msgstr "بحال كان المحتوى يجب أن يحوي صورة"
+
+#: dash/dashblocks/models.py:37
+msgid "Whether this content should use a rich HTML editor"
+msgstr "بحال كان المحتوى يجب أن يستعمل محرر لغة الترميز HTML"
+
+#: dash/dashblocks/models.py:40
+msgid "Whether this content should include a summary field"
+msgstr "بحال كان المحتوى يجب أن يحوي حقل ملخص"
+
+#: dash/dashblocks/models.py:43
+msgid "Whether this content should include a link"
+msgstr "بحال كان المحتوى يجب أن يحوي رابط"
+
+#: dash/dashblocks/models.py:46
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr "بحال كان المحتوى يسمح برفع صور إضافية، مثال: معرض صور"
+
+#: dash/dashblocks/models.py:50
+msgid "Whether this content has a color field"
+msgstr "بحال كان المحتوى يحوي حقل لون"
+
+#: dash/dashblocks/models.py:53
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "بحال كان المحتوى يجب أن يسمح بوضع مستخدم يو-تيوب"
+
+#: dash/dashblocks/models.py:56
+msgid "Whether this content should allow tags"
+msgstr "بحال كان المحتوى يجب أن يسمح بتنبيه الأشخاص"
+
+#: dash/dashblocks/models.py:69
+msgid "Content Type"
+msgstr "نوع المحتوى"
+
+#: dash/dashblocks/models.py:70
+msgid "The category, or type for this content block"
+msgstr "التصنيف أو الفئة لكتلة المحتوى"
+
+#: dash/dashblocks/models.py:74
+msgid "The title for this block of content, optional"
+msgstr "عنوان كتلة المحتوى، اختياري"
+
+#: dash/dashblocks/models.py:77
+msgid "The summary for this item, should be short"
+msgstr "ملخص هذا البند يجيب أن يكون قصير"
+
+#: dash/dashblocks/models.py:80
+msgid "The body of text for this content block, optional"
+msgstr "محتوى النص الخاص بكتلة المحتوى، اختياري"
+
+#: dash/dashblocks/models.py:83
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "أي صورة يجب عرضها مع كتلة المحتوى، اختياري"
+
+#: dash/dashblocks/models.py:87
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "لون خلفية للصورة، بصيغة: #rrggbb "
+
+#: dash/dashblocks/models.py:91
+msgid "Any link that should be associated with this content block, optional"
+msgstr "أي رابط يجب مرافقته مع كتلة المحتوى، اختياري"
+
+#: dash/dashblocks/models.py:95 ureport/news/models.py:42
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع هذا البند "
+
+#: dash/dashblocks/models.py:99
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"هل هناك أي وسوم تريد إضافتها، مفصولة بفراغات، ويمكن استعمالها من أجل تنقية "
+"بيانات متقدمة. اختياري"
+
+#: dash/dashblocks/models.py:103
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "الأفضلية لهذه الكتلة، الكتل ذات الأفضلية الكبرى تأتي أولا"
+
+#: dash/dashblocks/models.py:108
+msgid "The organization this content block belongs to"
+msgstr "المنظمة التي تعود لها كتلة المحتوى"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:8
+msgid "Gallery"
+msgstr "معرض الصور "
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:17
+msgid "Add Image"
+msgstr "إضافة صورة "
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
+msgid "Search"
+msgstr "بحث "
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
+#: templates/polls/poll_list.haml:6
+msgid "Add"
+msgstr "إضافة "
+
+#: dash/dashblocks/views.py:16 templates/frame.haml:235
+msgid "Content Types"
+msgstr "نوع المحتوى "
+
+#: dash/dashblocks/views.py:118
+msgid "Content Blocks"
+msgstr "مجموعات المحتوى الخاصة بالصفحة الإلكترونية "
+
+#: dash/dashblocks/views.py:120
+#, python-format
+msgid "%s Blocks"
+msgstr "مجموعات الصفحة الإلكترونية %s"
+
+#: dash/dashblocks/views.py:158
+#, python-format
+msgid "Edit %s"
+msgstr "تعديل %s"
+
+#: dash/dashblocks/views.py:182
+#, python-format
+msgid "Create %s"
+msgstr "خلق %s"
+
+#: dash/dashblocks/views.py:184
+msgid "Create Content Block"
+msgstr "إنشاء كتلة المحتوى"
+
+#: dash/orgs/forms.py:12
+msgid "Your first name"
+msgstr "الاسم الأول "
+
+#: dash/orgs/forms.py:13
+msgid "Your last name"
+msgstr "اسم العائلة "
+
+#: dash/orgs/forms.py:14
+msgid "Your email address"
+msgstr "عنوان البريد الإلكتروني الخاص بك "
+
+#: dash/orgs/forms.py:17
+msgid "Your password, at least eight letters please"
+msgstr "كلمة المرور  (8 أحرف على الأقل) "
+
+#: dash/orgs/forms.py:23
+msgid "That email address is already used"
+msgstr "البريد الإلكتروني المدخل تم إستخدامه سابقاً "
+
+#: dash/orgs/forms.py:30
+msgid "Passwords must contain at least 8 letters."
+msgstr "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل "
+
+#: dash/orgs/forms.py:49
+msgid "This domain is used for subdomains"
+msgstr "هذا النطاق مستخدم لنطاقات فرعية"
+
+#: dash/orgs/models.py:36 dash/orgs/models.py:381 ureport/assets/models.py:19
+msgid "Name"
+msgstr "الاسم "
+
+#: dash/orgs/models.py:37
+msgid "The name of this organization"
+msgstr "اسم الجمعية أو المنظمة "
+
+#: dash/orgs/models.py:41
+msgid "The logo that should be used for this organization"
+msgstr "الشعار المستخدم في هذه الجمعية أو المنظمة "
+
+#: dash/orgs/models.py:44 dash/orgs/views.py:297
+msgid "Administrators"
+msgstr "مشرفي الموقع "
+
+#: dash/orgs/models.py:45
+msgid "The administrators in your organization"
+msgstr "المشرفين في الجمعية أو المنظمة التي تتبع لها "
+
+#: dash/orgs/models.py:48
+msgid "Viewers"
+msgstr "المشاهدين "
+
+#: dash/orgs/models.py:49
+msgid "The viewers in your organization"
+msgstr "المشاهدين من زملائك في الجمعية أو المنظمة التي تنتمي لها "
+
+#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
+#: dash/orgs/views.py:298
+msgid "Editors"
+msgstr "المحررين "
+
+#: dash/orgs/models.py:53
+msgid "The editors in your organization"
+msgstr "المحررين في الجمعية أو المنظمة التابع لها أنت "
+
+#: dash/orgs/models.py:56
+msgid "Language"
+msgstr "اللغة "
+
+#: dash/orgs/models.py:57
+msgid "The main language used by this organization"
+msgstr "اللغة الرئيسية المستخدمة داخل هذه المنظمة "
+
+#: dash/orgs/models.py:60
+msgid "Subdomain"
+msgstr "إسم الموقع "
+
+#: dash/orgs/models.py:61
+msgid "This subdomain is not available"
+msgstr "هذا الاسم غير متوفر "
+
+#: dash/orgs/models.py:62
+msgid "The subdomain for this organization"
+msgstr "النطاق الفرعي لهذه المؤسسة"
+
+#: dash/orgs/models.py:65
+msgid "Domain"
+msgstr "نطاق"
+
+#: dash/orgs/models.py:66
+msgid "This domain is not available"
+msgstr "هذا النطاق ليس متاحاً"
+
+#: dash/orgs/models.py:67
+msgid "The custom domain for this organization"
+msgstr "النطاق الخاص بهذه المؤسسة"
+
+#: dash/orgs/models.py:70
+msgid "Timezone"
+msgstr "النطاق الزمني"
+
+#: dash/orgs/models.py:71
+msgid "The timezone your organization is in."
+msgstr "النطاق الزمني الذي تقع ضمنه مؤسستك"
+
+#: dash/orgs/models.py:75
+msgid "The API token for the RapidPro account this dashboard is tied to"
+msgstr "واجهة برمجة التطبيقات المأخوذة من الحساب الخاص في RapidPro مربوطة في "
+
+#: dash/orgs/models.py:80
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+"تم إستخدام لغة ترميز جافا \"جسون\" لتخزين النصوص و\"Blob\" لتخزين الصور، "
+"التسجيلات الصوتية والوسائط المتعددة، الخاصة بهذه المؤسسة "
+
+#: dash/orgs/models.py:311
+msgid "Administrator"
+msgstr "المشرف "
+
+#: dash/orgs/models.py:312
+msgid "Editor"
+msgstr "المحرر "
+
+#: dash/orgs/models.py:313
+msgid "Viewer"
+msgstr "المشاهد"
+
+#: dash/orgs/models.py:318 dash/orgs/models.py:377 ureport/assets/models.py:16
+#: ureport/contacts/models.py:44
+msgid "Org"
+msgstr "Org"
+
+#: dash/orgs/models.py:319
+msgid "The organization to which the account is invited to view"
+msgstr "المنظمة التي أرسلت الدعوة الى هذا الحساب "
+
+#: dash/orgs/models.py:322
+msgid "Email"
+msgstr "البريد الإلكتروني "
+
+#: dash/orgs/models.py:323
+msgid "The email to which we send the invitation of the viewer"
+msgstr "البريد الإلكتروني الذي تمت إرسال الدعوة له "
+
+#: dash/orgs/models.py:326
+msgid "Secret"
+msgstr "كلمة السر "
+
+#: dash/orgs/models.py:327
+msgid "a unique code associated with this invitation"
+msgstr "الرمز السري الخاص بالدعوة"
+
+#: dash/orgs/models.py:330
+msgid "User Role"
+msgstr "دور المستخدم "
+
+#: dash/orgs/models.py:361
+#, python-format
+msgid "%s Invitation"
+msgstr "دعوة %s"
+
+#: dash/orgs/models.py:373 ureport/assets/models.py:11
+msgid "Banner"
+msgstr "مساحة إعلانية "
+
+#: dash/orgs/models.py:374 ureport/assets/models.py:12
+msgid "Pattern"
+msgstr "النمط الخاص "
+
+#: dash/orgs/models.py:378
+msgid "The organization in which the image will be used"
+msgstr "المنظمة التي سوف يتم إعتماد الصورة منها "
+
+#: dash/orgs/models.py:382
+msgid "The name to describe this background"
+msgstr "إسم الخلفية ووصفها "
+
+#: dash/orgs/models.py:385
+msgid "Background type"
+msgstr "نوع الخلفية "
+
+#: dash/orgs/models.py:387 ureport/assets/models.py:24
+msgid "The image file"
+msgstr "ملف الصورة "
+
+#: dash/orgs/templates/orgs/email/invitation_email.html:9
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
+"a>.\n"
+"  "
+msgstr ""
+
+#: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
+msgid "Edit"
+msgstr "تعديل "
+
+#: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
+msgid "Manage Users"
+msgstr "إدارة حسابات المستخدمين "
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:13
+msgid "Accounts"
+msgstr "حسابات "
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:16
+msgid "Admins"
+msgstr "المشرف "
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:22
+msgid "Remove"
+msgstr "حذف "
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:29
+msgid "You must have at least one administator"
+msgstr "يجب أن يكون لديك مشرف واحد على الأقل"
+
+#: dash/orgs/views.py:168
+msgid "Select your Organization"
+msgstr "قم بإختيار المنظمة التي تتبع لها "
+
+#: dash/orgs/views.py:179
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+"حسابك غير مرتبط بالمنظمة التي قمت بإختيارها، الرجاء التواصل مع المشرف في "
+"منظمتك "
+
+#: dash/orgs/views.py:219 dash/orgs/views.py:229
+msgid "Your Organization"
+msgstr "مؤسستك"
+
+#: dash/orgs/views.py:226
+msgid "Not Set"
+msgstr "غير محدد "
+
+#: dash/orgs/views.py:296
+msgid "Invite people to your organization"
+msgstr "أرسل دعوة الى أحد أصدقائك للإنضمام الى منظمتك "
+
+#: dash/orgs/views.py:299
+msgid "User group"
+msgstr "مجموعة المستخدم "
+
+#: dash/orgs/views.py:310
+msgid "One of the emails you entered is invalid."
+msgstr "أحد عناوين البريد الإلكتروني المدخلة خاطئة "
+
+#: dash/orgs/views.py:323
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "لتحكم في حسابات %(name)s"
+
+#: dash/orgs/views.py:438
+msgid "Create"
+msgstr "إنشاء "
+
+#: dash/orgs/views.py:446
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr "رابط الدعوة الخاص بك لا يعمل، الرجاء التواصل مع المشرف في منظمتك"
+
+#: dash/orgs/views.py:502 dash/orgs/views.py:547
+#, python-format
+msgid "Join %(name)s"
+msgstr "إنضم الى %(name)s"
+
+#: dash/orgs/views.py:524
+msgid "Join"
+msgstr "شارك "
+
+#: dash/orgs/views.py:533
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+"لقد إنتهت الفترة المخصصة لرابط الدعوة الخاصة بك، الرجاء التوصل مع المشرف في "
+"منظمتك. "
+
+#: dash/orgs/views.py:640
+msgid "Task"
+msgstr ""
+
+#: dash/orgs/views.py:644
+msgid "Tasks"
+msgstr ""
+
+#: dash/stories/models.py:13
+msgid "The title for this story"
+msgstr "عنوان المقال"
+
+#: dash/stories/models.py:17
+msgid "Whether this story is featured"
+msgstr "هل هذه المقالة إستثنائية أو مميزة "
+
+#: dash/stories/models.py:20
+msgid "The summary for the story"
+msgstr "ملخص المقال "
+
+#: dash/stories/models.py:22
+msgid "The body of text for the story"
+msgstr "نص المقال"
+
+#: dash/stories/models.py:24
+msgid "The writer of the story"
+msgstr "كاتب المقالة"
+
+#: dash/stories/models.py:27
+msgid "A link to an mp3 file to publish on this story"
+msgstr "رابط ملف صوتي ليتم نشره عن القصة MP3"
+
+#: dash/stories/models.py:31
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع مقالك ( الرمز التعرفي هو النص "
+"الموجود في الرابط بعد \"v=\" وقبل \"in\")   "
+
+#: dash/stories/models.py:37
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"هل هناك أي وسوم تريد إضافتها؟ \n"
+"\n"
+"*سيساعدك إضافة الوسوم في عملية ترتيب مقالاتك حسب الفئة، لإضافة أكثر من الوسم "
+"الرجاء الفصل بين الوسم والأخر بمسافة. "
+
+#: dash/stories/models.py:42
+msgid "The category for this story"
+msgstr "فئة المقال"
+
+#: dash/stories/models.py:46
+msgid "The organization this story belongs to"
+msgstr "المنظمة التي تنتمي لها هذه المقالة"
+
+#: dash/stories/models.py:124 templates/frame.haml:329
+#: templates/frame.haml.py:481 templates/public/stories.haml:7
+msgid "Stories"
+msgstr "مقالات "
+
+#: dash/stories/models.py:132
+msgid "The story to associate to"
+msgstr "هذه المقالة مرتبطة في "
+
+#: dash/stories/views.py:59
+msgid "Yes"
+msgstr "نعم "
+
+#: dash/stories/views.py:60
+msgid "No"
+msgstr "لا"
+
+#: dash/stories/views.py:79
+msgid "Story Images"
+msgstr "صور المقال"
+
+#: dash/stories/views.py:91 dash/stories/views.py:99 ureport/polls/views.py:164
+#: ureport/polls/views.py:171
+#, python-format
+msgid "Image %d"
+msgstr "صورة %d"
+
+#: dash/stories/views.py:92
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
+
+#: dash/stories/views.py:100
+msgid "Image to display on story page and in previews (optional)"
+msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
 
 #: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
@@ -41,10 +598,6 @@ msgstr "المؤسسات"
 msgid "Users"
 msgstr "المستخدمين"
 
-#: templates/frame.haml:235
-msgid "Content Types"
-msgstr "نوع المحتوى "
-
 #: templates/frame.haml:242
 msgid "Images"
 msgstr "الصور"
@@ -61,10 +614,6 @@ msgstr "الأسماء المستعارة للمدن"
 msgid "Polls"
 msgstr "استطلاع الرأي"
 
-#: templates/frame.haml:285 templates/frame.haml.py:292
-msgid "Categories"
-msgstr "الفئات "
-
 #: templates/frame.haml:300
 msgid "Category Images"
 msgstr "صور الفئة"
@@ -72,11 +621,6 @@ msgstr "صور الفئة"
 #: templates/frame.haml:320
 msgid "News Items"
 msgstr "مواد الأخبار"
-
-#: templates/frame.haml:329 templates/frame.haml.py:481
-#: templates/public/stories.haml:7
-msgid "Stories"
-msgstr "مقالات "
 
 #: templates/frame.haml:338
 msgid "Job Sources"
@@ -198,18 +742,6 @@ msgid ""
 msgstr ""
 "\n"
 "لإضافة مصدر عمل لتويتر يجب عليك الحصول على رمز تقني من تويتر"
-
-#: templates/orgs/org_home.haml:8
-msgid "Edit"
-msgstr "تعديل "
-
-#: templates/orgs/org_home.haml:13
-msgid "Manage Users"
-msgstr "إدارة حسابات المستخدمين "
-
-#: templates/polls/poll_list.haml:6
-msgid "Add"
-msgstr "إضافة "
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
 msgid "ABOUT U-REPORT"
@@ -734,29 +1266,13 @@ msgstr "هل نسيت كلمة السر؟ "
 msgid "Refreshed %s cache for this organization"
 msgstr "تحديث ذاكرة التخزين المؤقت %s لهذه المؤسسة"
 
-#: ureport/assets/models.py:11
-msgid "Banner"
-msgstr "مساحة إعلانية "
-
-#: ureport/assets/models.py:12
-msgid "Pattern"
-msgstr "النمط الخاص "
-
 #: ureport/assets/models.py:13
 msgid "Flag"
 msgstr "علم"
 
-#: ureport/assets/models.py:16 ureport/contacts/models.py:44
-msgid "Org"
-msgstr "Org"
-
 #: ureport/assets/models.py:17
 msgid "The organization to which the image will be used"
 msgstr "المنظمة التي سوف يتم إعتماد الصورة منها "
-
-#: ureport/assets/models.py:19
-msgid "Name"
-msgstr "الاسم "
 
 #: ureport/assets/models.py:20
 msgid "A short descriptive name for this image"
@@ -765,10 +1281,6 @@ msgstr "وصف مختصر عن الصورة"
 #: ureport/assets/models.py:22
 msgid "Image type"
 msgstr "نوع الصورة "
-
-#: ureport/assets/models.py:24
-msgid "The image file"
-msgstr "ملف الصورة "
 
 #: ureport/contacts/models.py:46
 msgid "Label"
@@ -925,10 +1437,6 @@ msgstr "عنوان الفيديو "
 msgid "A short summary description for this video"
 msgstr "وصف مختصر عن الفيديو "
 
-#: ureport/news/models.py:42
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع هذا البند "
-
 #: ureport/news/models.py:48
 msgid "The organization this video belongs to"
 msgstr "المنظمة أو الجمعية التي يتبع لها هذا الفيديو "
@@ -936,10 +1444,6 @@ msgstr "المنظمة أو الجمعية التي يتبع لها هذا ال�
 #: ureport/polls/models.py:62
 msgid "The name of this poll category"
 msgstr "إسم الفئة الخاصة بهذه االإستطلاع"
-
-#: ureport/polls/models.py:64
-msgid "The organization this category applies to"
-msgstr "المنظمة أو الجمعية التابعة لهذه الفئة "
 
 #: ureport/polls/models.py:71
 msgid "Poll Categories"
@@ -990,17 +1494,9 @@ msgstr "صورة فئة البداية ليتم عرضها لاستطلاعات 
 msgid "The organization this poll is part of"
 msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
 
-#: ureport/polls/models.py:604
-msgid "The name to describe this image"
-msgstr "وصف الصورة "
-
 #: ureport/polls/models.py:607
 msgid "The poll to associate to"
 msgstr "يرتبط هذا الإستطلاع في "
-
-#: ureport/polls/models.py:610
-msgid "The image file to use"
-msgstr "ملف الصورة التي تريد إستخدامها "
 
 #: ureport/polls/models.py:621
 msgid "The poll for this response"
@@ -1083,11 +1579,6 @@ msgstr "الصور الخاصة بالإستطلاع"
 #: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "الرجاء إدخال أي ردود تود أن تميزها. (إن وجدت)"
-
-#: ureport/polls/views.py:164 ureport/polls/views.py:171
-#, python-format
-msgid "Image %d"
-msgstr "صورة %d"
 
 #: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
@@ -1351,357 +1842,6 @@ msgstr ""
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
-
-#~ msgid "The name of this category"
-#~ msgstr "اسم الفئة "
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "صورة لوصف هذه الفئة \"إختياري\" "
-
-#~ msgid "The category this image represents"
-#~ msgstr "الفئة التي ترمز لها الصورة  "
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "الاسم المقروء للإنسان لهذا النوع من المحتوى"
-
-#~ msgid ""
-#~ "A description of where this content type is used on the site and how it "
-#~ "will be dsiplayed"
-#~ msgstr "وصف عن مكان استخدام نوع المحتوى هذا في الموقع وكيف سيتم عرضه"
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "بحال كان المحتوى يجب أن يحوى عنوان"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "بحال كان المحتوى يجب أن يحوي صورة"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "بحال كان المحتوى يجب أن يستعمل محرر لغة الترميز HTML"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "بحال كان المحتوى يجب أن يحوي حقل ملخص"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "بحال كان المحتوى يجب أن يحوي رابط"
-
-#~ msgid ""
-#~ "Whether this content should allow upload of additional images, ie a "
-#~ "gallery"
-#~ msgstr "بحال كان المحتوى يسمح برفع صور إضافية، مثال: معرض صور"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "بحال كان المحتوى يحوي حقل لون"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "بحال كان المحتوى يجب أن يسمح بوضع مستخدم يو-تيوب"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "بحال كان المحتوى يجب أن يسمح بتنبيه الأشخاص"
-
-#~ msgid "Content Type"
-#~ msgstr "نوع المحتوى"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "التصنيف أو الفئة لكتلة المحتوى"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "عنوان كتلة المحتوى، اختياري"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "ملخص هذا البند يجيب أن يكون قصير"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "محتوى النص الخاص بكتلة المحتوى، اختياري"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "أي صورة يجب عرضها مع كتلة المحتوى، اختياري"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "لون خلفية للصورة، بصيغة: #rrggbb "
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "أي رابط يجب مرافقته مع كتلة المحتوى، اختياري"
-
-#~ msgid ""
-#~ "Any tags for this content block, separated by spaces, can be used to do "
-#~ "more advanced filtering, optional"
-#~ msgstr ""
-#~ "هل هناك أي وسوم تريد إضافتها، مفصولة بفراغات، ويمكن استعمالها من أجل "
-#~ "تنقية بيانات متقدمة. اختياري"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "الأفضلية لهذه الكتلة، الكتل ذات الأفضلية الكبرى تأتي أولا"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "المنظمة التي تعود لها كتلة المحتوى"
-
-#~ msgid "Gallery"
-#~ msgstr "معرض الصور "
-
-#~ msgid "Add Image"
-#~ msgstr "إضافة صورة "
-
-#~ msgid "Search"
-#~ msgstr "بحث "
-
-#~ msgid "Content Blocks"
-#~ msgstr "مجموعات المحتوى الخاصة بالصفحة الإلكترونية "
-
-#~ msgid "%s Blocks"
-#~ msgstr "مجموعات الصفحة الإلكترونية %s"
-
-#~ msgid "Edit %s"
-#~ msgstr "تعديل %s"
-
-#~ msgid "Create %s"
-#~ msgstr "خلق %s"
-
-#~ msgid "Create Content Block"
-#~ msgstr "إنشاء كتلة المحتوى"
-
-#~ msgid "Your first name"
-#~ msgstr "الاسم الأول "
-
-#~ msgid "Your last name"
-#~ msgstr "اسم العائلة "
-
-#~ msgid "Your email address"
-#~ msgstr "عنوان البريد الإلكتروني الخاص بك "
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "كلمة المرور  (8 أحرف على الأقل) "
-
-#~ msgid "That email address is already used"
-#~ msgstr "البريد الإلكتروني المدخل تم إستخدامه سابقاً "
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل "
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "هذا النطاق مستخدم لنطاقات فرعية"
-
-#~ msgid "The name of this organization"
-#~ msgstr "اسم الجمعية أو المنظمة "
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "الشعار المستخدم في هذه الجمعية أو المنظمة "
-
-#~ msgid "Administrators"
-#~ msgstr "مشرفي الموقع "
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "المشرفين في الجمعية أو المنظمة التي تتبع لها "
-
-#~ msgid "Viewers"
-#~ msgstr "المشاهدين "
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "المشاهدين من زملائك في الجمعية أو المنظمة التي تنتمي لها "
-
-#~ msgid "Editors"
-#~ msgstr "المحررين "
-
-#~ msgid "The editors in your organization"
-#~ msgstr "المحررين في الجمعية أو المنظمة التابع لها أنت "
-
-#~ msgid "Language"
-#~ msgstr "اللغة "
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "اللغة الرئيسية المستخدمة داخل هذه المنظمة "
-
-#~ msgid "Subdomain"
-#~ msgstr "إسم الموقع "
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "هذا الاسم غير متوفر "
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "النطاق الفرعي لهذه المؤسسة"
-
-#~ msgid "Domain"
-#~ msgstr "نطاق"
-
-#~ msgid "This domain is not available"
-#~ msgstr "هذا النطاق ليس متاحاً"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "النطاق الخاص بهذه المؤسسة"
-
-#~ msgid "Timezone"
-#~ msgstr "النطاق الزمني"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "النطاق الزمني الذي تقع ضمنه مؤسستك"
-
-#~ msgid "The API token for the RapidPro account this dashboard is tied to"
-#~ msgstr ""
-#~ "واجهة برمجة التطبيقات المأخوذة من الحساب الخاص في RapidPro مربوطة في "
-
-#~ msgid ""
-#~ "JSON blob used to store configuration information associated with this "
-#~ "organization"
-#~ msgstr ""
-#~ "تم إستخدام لغة ترميز جافا \"جسون\" لتخزين النصوص و\"Blob\" لتخزين الصور، "
-#~ "التسجيلات الصوتية والوسائط المتعددة، الخاصة بهذه المؤسسة "
-
-#~ msgid "Administrator"
-#~ msgstr "المشرف "
-
-#~ msgid "Editor"
-#~ msgstr "المحرر "
-
-#~ msgid "Viewer"
-#~ msgstr "المشاهد"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "المنظمة التي أرسلت الدعوة الى هذا الحساب "
-
-#~ msgid "Email"
-#~ msgstr "البريد الإلكتروني "
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "البريد الإلكتروني الذي تمت إرسال الدعوة له "
-
-#~ msgid "Secret"
-#~ msgstr "كلمة السر "
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "الرمز السري الخاص بالدعوة"
-
-#~ msgid "User Role"
-#~ msgstr "دور المستخدم "
-
-#~ msgid "%s Invitation"
-#~ msgstr "دعوة %s"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "المنظمة التي سوف يتم إعتماد الصورة منها "
-
-#~ msgid "The name to describe this background"
-#~ msgstr "إسم الخلفية ووصفها "
-
-#~ msgid "Background type"
-#~ msgstr "نوع الخلفية "
-
-#~ msgid "Accounts"
-#~ msgstr "حسابات "
-
-#~ msgid "Admins"
-#~ msgstr "المشرف "
-
-#~ msgid "Remove"
-#~ msgstr "حذف "
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "يجب أن يكون لديك مشرف واحد على الأقل"
-
-#~ msgid "Select your Organization"
-#~ msgstr "قم بإختيار المنظمة التي تتبع لها "
-
-#~ msgid ""
-#~ "Your account is not associated to an organization. Please Contact the "
-#~ "adminstrator."
-#~ msgstr ""
-#~ "حسابك غير مرتبط بالمنظمة التي قمت بإختيارها، الرجاء التواصل مع المشرف في "
-#~ "منظمتك "
-
-#~ msgid "Your Organization"
-#~ msgstr "مؤسستك"
-
-#~ msgid "Not Set"
-#~ msgstr "غير محدد "
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "أرسل دعوة الى أحد أصدقائك للإنضمام الى منظمتك "
-
-#~ msgid "User group"
-#~ msgstr "مجموعة المستخدم "
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "أحد عناوين البريد الإلكتروني المدخلة خاطئة "
-
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "لتحكم في حسابات %(name)s"
-
-#~ msgid "Create"
-#~ msgstr "إنشاء "
-
-#~ msgid ""
-#~ "Your invitation link is invalid. Please contact your organization "
-#~ "administrator."
-#~ msgstr "رابط الدعوة الخاص بك لا يعمل، الرجاء التواصل مع المشرف في منظمتك"
-
-#~ msgid "Join %(name)s"
-#~ msgstr "إنضم الى %(name)s"
-
-#~ msgid "Join"
-#~ msgstr "شارك "
-
-#~ msgid ""
-#~ "Your invitation link has expired. Please contact your organization "
-#~ "administrator."
-#~ msgstr ""
-#~ "لقد إنتهت الفترة المخصصة لرابط الدعوة الخاصة بك، الرجاء التوصل مع المشرف "
-#~ "في منظمتك. "
-
-#~ msgid "The title for this story"
-#~ msgstr "عنوان المقال"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "هل هذه المقالة إستثنائية أو مميزة "
-
-#~ msgid "The summary for the story"
-#~ msgstr "ملخص المقال "
-
-#~ msgid "The body of text for the story"
-#~ msgstr "نص المقال"
-
-#~ msgid "The writer of the story"
-#~ msgstr "كاتب المقالة"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "رابط ملف صوتي ليتم نشره عن القصة MP3"
-
-#~ msgid ""
-#~ "The id of the YouTube video that should be linked to this story (this is "
-#~ "the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr ""
-#~ "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع مقالك ( الرمز التعرفي هو "
-#~ "النص الموجود في الرابط بعد \"v=\" وقبل \"in\")   "
-
-#~ msgid ""
-#~ "Any tags for this story, separated by spaces, can be used to do more "
-#~ "advanced filtering, optional"
-#~ msgstr ""
-#~ "هل هناك أي وسوم تريد إضافتها؟ \n"
-#~ "\n"
-#~ "*سيساعدك إضافة الوسوم في عملية ترتيب مقالاتك حسب الفئة، لإضافة أكثر من "
-#~ "الوسم الرجاء الفصل بين الوسم والأخر بمسافة. "
-
-#~ msgid "The category for this story"
-#~ msgstr "فئة المقال"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "المنظمة التي تنتمي لها هذه المقالة"
-
-#~ msgid "The story to associate to"
-#~ msgstr "هذه المقالة مرتبطة في "
-
-#~ msgid "Yes"
-#~ msgstr "نعم "
-
-#~ msgid "No"
-#~ msgstr "لا"
-
-#~ msgid "Story Images"
-#~ msgstr "صور المقال"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
 
 #~ msgid "Remove Item?"
 #~ msgstr "حذف "
