@@ -1795,7 +1795,7 @@ class PollsTasksTest(DashTest):
         self.poll_same_flow = self.create_poll(self.nigeria, "Poll Same Flow", "uuid-1", self.education_nigeria, self.admin,
                                                has_synced=True)
 
-        self.polls_query = Poll.objects.filter(pk__in=[self.poll.pk, self.poll_same_flow.pk])
+        self.polls_query = Poll.objects.filter(pk__in=[self.poll.pk, self.poll_same_flow.pk]).order_by('-created_on')
 
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_main_poll')

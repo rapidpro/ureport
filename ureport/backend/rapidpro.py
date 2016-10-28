@@ -389,6 +389,8 @@ class RapidProBackend(BaseBackend):
                                 # if the reporter answered the step, check if this is a newer run
                                 if existing_poll_result.date is not None:
                                      update_required = update_required and (value_date > existing_poll_result.date)
+                                else:
+                                    update_required = True
 
                                 if update_required:
                                     # update the db object
@@ -462,7 +464,7 @@ class RapidProBackend(BaseBackend):
                                 poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
                                 if existing_poll_result is not None:
-                                    if value_date > existing_poll_result.date:
+                                    if existing_poll_result.date is None or value_date > existing_poll_result.date:
                                         # update the db object
                                         PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category,
                                                                                                      text=text,
