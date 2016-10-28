@@ -500,6 +500,12 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=[5, 25, 45]),
         'args': ('ureport.polls.tasks.pull_results_main_poll', 'sync')
     },
+    'results-pull-recent-other-polls': {
+        'task': 'dash.orgs.tasks.trigger_org_task',
+        "schedule": timedelta(hours=1),
+        "relative": True,
+        'args': ('ureport.polls.tasks.pull_results_recent_other_polls', 'sync')
+    },
     'results-pull-brick-polls':  {
         'task': 'dash.orgs.tasks.trigger_org_task',
         "schedule": timedelta(hours=48),

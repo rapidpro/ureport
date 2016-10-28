@@ -24,7 +24,8 @@ from dash.orgs.models import TaskState
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
 from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
-from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts
+from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts, \
+    pull_results_recent_other_polls
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender, update_or_create_questions
 from ureport.polls.templatetags.ureport import question_segmented_results
@@ -486,6 +487,30 @@ class PollTest(DashTest):
 
         self.assertTrue(Poll.get_other_polls(self.uganda))
         self.assertEqual(list(Poll.get_other_polls(self.uganda)), [polls[3], polls[2], polls[1], polls[0]])
+
+    @patch('django.core.cache.cache.get')
+    def test_get_recent_other_polls(self, mock_cache_get):
+        mock_cache_get.return_value = None
+
+        polls = []
+        for i in range(10):
+            poll = self.create_poll(self.uganda, "Poll %s" % i, "uuid-%s" % i, self.health_uganda,
+                                    self.admin, featured=True, has_synced=True)
+            PollQuestion.objects.create(poll=poll, title='question poll %s' % i, ruleset_uuid='uuid-10-%s' % i,
+                                        created_by=self.admin, modified_by=self.admin)
+
+            polls.append(poll)
+
+        self.assertTrue(Poll.get_recent_other_polls(self.uganda))
+        self.assertEqual(list(Poll.get_recent_other_polls(self.uganda)), [polls[3], polls[2], polls[1], polls[0]])
+
+        now = timezone.now()
+        a_month_ago = now - timedelta(days=30)
+
+        Poll.objects.filter(pk__in=[polls[0].pk, polls[1].pk]).update(created_on=a_month_ago)
+
+        self.assertTrue(Poll.get_recent_other_polls(self.uganda))
+        self.assertEqual(list(Poll.get_recent_other_polls(self.uganda)), [polls[3], polls[2]])
 
     def test_get_flow(self):
         with patch('dash.orgs.models.Org.get_flows') as mock:
@@ -1307,7 +1332,7 @@ class PollTest(DashTest):
 
     @patch('ureport.tests.TestBackend.pull_results')
     def test_poll_pull_results(self, mock_pull_results):
-        mock_pull_results.return_value = (1, 2, 3)
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
@@ -1767,45 +1792,72 @@ class PollsTasksTest(DashTest):
                                                          modified_by=self.admin)
         self.poll = self.create_poll(self.nigeria, "Poll 1", "uuid-1", self.education_nigeria, self.admin)
 
+        self.poll_same_flow = self.create_poll(self.nigeria, "Poll Same Flow", "uuid-1", self.education_nigeria, self.admin,
+                                               has_synced=True)
+
+        self.polls_query = Poll.objects.filter(pk__in=[self.poll.pk, self.poll_same_flow.pk])
+
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_main_poll')
     def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results):
         mock_get_main_poll.return_value = self.poll
-        mock_pull_results.return_value = (1, 2, 3)
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         pull_results_main_poll(self.nigeria.pk)
 
         task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-main-poll')
         self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
-                         {'created': 1, 'updated': 2, 'ignored': 3})
+                         {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
+                          "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
 
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_brick_polls')
     def test_pull_results_brick_polls(self, mock_get_brick_polls, mock_pull_results):
-        mock_get_brick_polls.return_value = [self.poll]
-        mock_pull_results.return_value = (1, 2, 3)
+        mock_get_brick_polls.return_value = self.polls_query
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         pull_results_brick_polls(self.nigeria.pk)
 
         task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-brick-polls')
         self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
-                         {'created': 1, 'updated': 2, 'ignored': 3})
+                         {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
+                          "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
+
+        mock_pull_results.assert_called_once()
 
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_other_polls')
     def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results):
-        mock_get_other_polls.return_value = [self.poll]
-        mock_pull_results.return_value = (1, 2, 3)
+        mock_get_other_polls.return_value = self.polls_query
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         pull_results_other_polls(self.nigeria.pk)
 
         task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-other-polls')
         self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
-                         {'created': 1, 'updated': 2, 'ignored': 3})
+                         {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
+                          "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
+
+        mock_pull_results.assert_called_once()
+
+    @patch('ureport.tests.TestBackend.pull_results')
+    @patch('ureport.polls.models.Poll.get_recent_other_polls')
+    def test_pull_results_other_polls(self, mock_get_recent_other_polls, mock_pull_results):
+        mock_get_recent_other_polls.return_value = self.polls_query
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+
+        pull_results_recent_other_polls(self.nigeria.pk)
+
+        task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-recent-other-polls')
+        self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
+                         {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
+                          "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
+
+        mock_pull_results.assert_called_once()
 
     @patch('ureport.tests.TestBackend.pull_results')
     def test_backfill_poll_results(self, mock_pull_results):
-        mock_pull_results.return_value = (1, 2, 3)
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         self.poll.has_synced = True
         self.poll.save()
@@ -1820,6 +1872,7 @@ class PollsTasksTest(DashTest):
 
         task_state = TaskState.objects.get(org=self.nigeria, task_key='backfill-poll-results')
         self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
-                         {'created': 1, 'updated': 2, 'ignored': 3})
+                         {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
+                          "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
 
         mock_pull_results.assert_called_once()
