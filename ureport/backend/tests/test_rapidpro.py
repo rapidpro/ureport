@@ -822,7 +822,7 @@ class RapidProBackendTest(DashTest):
 
         with self.assertNumQueries(4):
             (num_val_created, num_val_updated, num_val_ignored,
-            num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
                           num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 1, 0, 2))
@@ -835,6 +835,26 @@ class RapidProBackendTest(DashTest):
         self.assertEqual(poll_result.flow, 'flow-uuid')
         self.assertIsNone(poll_result.category)
         self.assertEqual(poll_result.text, "")
+
+        PollResult.objects.filter(ruleset='ruleset-uuid-2').update(date=None)
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
+
+        with self.assertNumQueries(4):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (0, 0, 1, 0, 1, 2))
+
+        PollResult.objects.filter(ruleset='ruleset-uuid').update(date=None)
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
+
+        with self.assertNumQueries(4):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (0, 1, 0, 0, 0, 3))
 
     @patch('dash.orgs.models.TembaClient2.get_runs')
     @patch('django.utils.timezone.now')
