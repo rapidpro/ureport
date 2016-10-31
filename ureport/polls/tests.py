@@ -1813,7 +1813,7 @@ class PollsTasksTest(DashTest):
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_brick_polls')
     def test_pull_results_brick_polls(self, mock_get_brick_polls, mock_pull_results):
-        mock_get_brick_polls.return_value = self.polls_query
+        mock_get_brick_polls.return_value = list(self.polls_query)
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         pull_results_brick_polls(self.nigeria.pk)
