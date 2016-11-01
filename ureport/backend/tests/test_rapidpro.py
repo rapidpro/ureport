@@ -22,14 +22,13 @@ from ureport.backend.rapidpro import FieldSyncer, BoundarySyncer, ContactSyncer,
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollResult, Poll, PollQuestion
-from ureport.tests import DashTest
+from ureport.tests import UreportTest
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 
-class FieldSyncerTest(DashTest):
+class FieldSyncerTest(UreportTest):
     def setUp(self):
         super(FieldSyncerTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.syncer = FieldSyncer()
 
     def test_local_kwargs(self):
@@ -55,11 +54,10 @@ class FieldSyncerTest(DashTest):
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         
 
-class BoundarySyncerTest(DashTest):
+class BoundarySyncerTest(UreportTest):
 
     def setUp(self):
         super(BoundarySyncerTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.syncer = BoundarySyncer()
 
     def test_local_kwargs(self):
@@ -121,10 +119,9 @@ class BoundarySyncerTest(DashTest):
         self.assertFalse(Boundary.objects.filter(pk=local.pk))
 
 
-class ContactSyncerTest(DashTest):
+class ContactSyncerTest(UreportTest):
     def setUp(self):
         super(ContactSyncerTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.syncer = ContactSyncer()
         self.nigeria.set_config('reporter_group', "Ureporters")
         self.nigeria.set_config('registration_label', "Registration Date")
@@ -270,11 +267,10 @@ class ContactSyncerTest(DashTest):
                           'ward': ''})
 
 
-class RapidProBackendTest(DashTest):
+class RapidProBackendTest(UreportTest):
     def setUp(self):
         super(RapidProBackendTest, self).setUp()
         self.backend = RapidProBackend()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",
                                                          created_by=self.admin,
@@ -898,14 +894,13 @@ class RapidProBackendTest(DashTest):
         self.assertEqual(poll_result.ward, 'R-IKEJA')
 
 
-class PerfTest(DashTest):
+class PerfTest(UreportTest):
 
     def setUp(self):
         super(PerfTest, self).setUp()
 
         self.backend = RapidProBackend()
 
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",
                                                          created_by=self.admin,

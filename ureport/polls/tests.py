@@ -3,6 +3,7 @@ import json
 from datetime import timedelta, datetime
 
 import pytz
+import six
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpRequest
@@ -29,16 +30,13 @@ from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pul
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender, update_or_create_questions
 from ureport.polls.templatetags.ureport import question_segmented_results
-from ureport.tests import DashTest, MockTembaClient
+from ureport.tests import UreportTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 
-class PollTest(DashTest):
+class PollTest(UreportTest):
     def setUp(self):
         super(PollTest, self).setUp()
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
-
         self.health_uganda = Category.objects.create(org=self.uganda,
                                                      name="Health",
                                                      created_by=self.admin,
@@ -186,7 +184,7 @@ class PollTest(DashTest):
 
         mock_poll_update_or_create_questions_task.side_effect = None
 
-        import_params = dict(org_id=self.uganda.id, timezone=self.uganda.timezone, original_filename="polls.csv")
+        import_params = dict(org_id=self.uganda.id, timezone=six.text_type(self.uganda.timezone), original_filename="polls.csv")
 
         task = ImportTask.objects.create(created_by=self.superuser, modified_by=self.superuser,
                                          csv_file='test_imports/polls.csv',
@@ -846,7 +844,8 @@ class PollTest(DashTest):
             poll = Poll.objects.get(flow_uuid='uuid-1')
             self.assertEquals(poll.org, self.uganda)
             self.assertEquals(poll.title, 'Poll 1')
-            self.assertEqual(poll.poll_date, yesterday.replace(microsecond=0))
+            self.assertEqual(poll.poll_date.astimezone(self.uganda.timezone).replace(tzinfo=pytz.UTC),
+                             yesterday.replace(microsecond=0))
 
             self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
 
@@ -1345,12 +1344,9 @@ class PollTest(DashTest):
         mock_pull_results.assert_called_once()
 
 
-class PollQuestionTest(DashTest):
+class PollQuestionTest(UreportTest):
     def setUp(self):
         super(PollQuestionTest, self).setUp()
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
-
         self.health_uganda = Category.objects.create(org=self.uganda,
                                                      name="Health",
                                                      created_by=self.admin,
@@ -1593,7 +1589,7 @@ class PollQuestionTest(DashTest):
                                            ])
 
     def test_tasks(self):
-        self.org = self.create_org("burundi", self.admin)
+        self.org = self.create_org("burundi", pytz.timezone('Africa/Bujumbura'), self.admin)
 
         self.education = Category.objects.create(org=self.org,
                                                  name="Education",
@@ -1655,10 +1651,9 @@ class PollQuestionTest(DashTest):
                 self.assertEqual(mock_rebuild_counts.call_count, Poll.objects.filter(org=self.nigeria).count())
 
 
-class PollResultsTest(DashTest):
+class PollResultsTest(UreportTest):
     def setUp(self):
         super(PollResultsTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.nigeria.set_config('reporter_group', "Ureporters")
 
         self.education_nigeria = Category.objects.create(org=self.nigeria,
@@ -1782,10 +1777,9 @@ class PollResultsTest(DashTest):
         self.assertTrue('ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward) in gen_counters.keys())
 
 
-class PollsTasksTest(DashTest):
+class PollsTasksTest(UreportTest):
     def setUp(self):
         super(PollsTasksTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",
                                                          created_by=self.admin,
