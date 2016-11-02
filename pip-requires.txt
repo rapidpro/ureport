@@ -9,7 +9,6 @@ django-debug-toolbar
 django-digest
 django-guardian
 django-nose
-django-reversion
 django-rosetta
 django-storages
 django-rest-swagger
