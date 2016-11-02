@@ -249,9 +249,6 @@ INSTALLED_APPS = (
     # smartmin users
     'smartmin.users',
 
-    # async tasks,
-    'djcelery',
-
     # dash apps
     'dash.orgs',
     'dash.dashblocks',
@@ -416,14 +413,11 @@ ANONYMOUS_USER_NAME = 'AnonymousUser'
 # Async tasks with django-celery
 #-----------------------------------------------------------------------------------
 
-import djcelery
-djcelery.setup_loader()
-
 # by default, celery doesn't have any timeout on our redis connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {'socket_timeout': 5}
 
 
-CELERY_RESULT_BACKEND = 'djcelery.backends.cache:CacheBackend'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/1'
 
 BROKER_BACKEND = 'redis'
 BROKER_HOST = 'localhost'

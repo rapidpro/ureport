@@ -162,3 +162,5 @@ CACHES = {
         }
     }
 }
+
+CELERY_RESULT_BACKEND = 'redis://%s:6379/1' % REDIS_HOST

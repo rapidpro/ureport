@@ -24,14 +24,6 @@ from django.conf import settings
 
 app = Celery('ureport')
 
-# use django-celery database backend
-app.conf.update(
-    CELERY_RESULT_BACKEND='djcelery.backends.cache:CacheBackend',
-    CELERY_ACCEPT_CONTENT=['json'],
-    CELERY_TASK_SERIALIZER='json',
-    CELERY_RESULT_SERIALIZER='json',
-)
-
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.

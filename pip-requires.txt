@@ -3,7 +3,6 @@ Django<1.9
 -e git+https://github.com/rapidpro/dash.git#egg=dash
 celery
 coverage
-django-celery
 django-compressor
 django-debug-toolbar
 django-digest
