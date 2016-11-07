@@ -1,6 +1,4 @@
-from dash.orgs.models import Org
 from enum import Enum
-from ureport.locations.models import Boundary
 from ureport.polls.tasks import refresh_org_flows
 
 

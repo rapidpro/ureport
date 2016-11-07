@@ -5,8 +5,9 @@ INSTALLED_APPS = INSTALLED_APPS + ('django_nose',)
 # INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar.apps.DebugToolbarConfig',)
 # MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',) + MIDDLEWARE_CLASSES
 
+ALLOWED_HOSTS = ['*']
+
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 # for dev, have everything time out after six hours so we don't hit the server so much
 API_BOUNDARY_CACHE_TIME = 60 * 60 * 6
