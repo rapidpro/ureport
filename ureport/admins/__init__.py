@@ -1,5 +1,4 @@
 from enum import Enum
-from ureport.polls.tasks import refresh_org_flows
 
 
 class OrgCache(Enum):
@@ -13,6 +12,6 @@ class OrgCache(Enum):
 
 
 def refresh_caches(org, caches):
-
+    from ureport.polls.tasks import refresh_org_flows
     if OrgCache.flows in caches:
         refresh_org_flows.delay(org.pk)
