@@ -149,14 +149,21 @@ COMPRESS_OFFLINE_CONTEXT = dict(STATIC_URL=STATIC_URL, base_template='frame.html
 
 REDIS_HOST = 'localhost'
 
+BROKER_BACKEND = 'redis'
+BROKER_HOST = REDIS_HOST
+BROKER_PORT = 6379
+BROKER_VHOST = '1'
+
+BROKER_URL = '%s://%s:%s/%s' % (BROKER_BACKEND, BROKER_HOST, BROKER_PORT, BROKER_VHOST)
+
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://%s:6379/1' % REDIS_HOST,
+        'LOCATION': BROKER_URL,
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
 
-CELERY_RESULT_BACKEND = 'redis://%s:6379/1' % REDIS_HOST
+CELERY_RESULT_BACKEND = BROKER_URL

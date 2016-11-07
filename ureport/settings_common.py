@@ -168,19 +168,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'ureport.urls'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
-
-if 'test' in sys.argv:
-    CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
-
 from django.forms import Textarea
 
 ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whether this org should be show on the landing page"), required=False), superuser_only=True),
@@ -410,19 +397,34 @@ AUTHENTICATION_BACKENDS = (
 ANONYMOUS_USER_NAME = 'AnonymousUser'
 
 #-----------------------------------------------------------------------------------
-# Async tasks with django-celery
+# Redis Configuration
 #-----------------------------------------------------------------------------------
 
 # by default, celery doesn't have any timeout on our redis connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {'socket_timeout': 5}
 
-
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/1'
-
 BROKER_BACKEND = 'redis'
 BROKER_HOST = 'localhost'
 BROKER_PORT = 6379
 BROKER_VHOST = '1'
+
+BROKER_URL = '%s://%s:%s/%s' % (BROKER_BACKEND, BROKER_HOST, BROKER_PORT, BROKER_VHOST)
+
+CELERY_RESULT_BACKEND = BROKER_URL
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': BROKER_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+if 'test' in sys.argv:
+    CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
 
 #-----------------------------------------------------------------------------------
 # Django-Nose config
