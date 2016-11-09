@@ -66,3 +66,15 @@ def set_story_widget_url(request):
     story_widget_url = getattr(settings, 'STORY_WIDGET_URL', None)
     story_widget_url = "%s/" % story_widget_url if story_widget_url and not story_widget_url.endswith('/') else story_widget_url
     return dict(story_widget_url=story_widget_url)
+
+
+def set_fb_button_language(request):
+    """
+    Context Processor that populates the 'fb_button_language' context variable with whether
+    the language for load facebook sdk file
+    """
+    org = request.org
+    language = request.org.language if org else settings.DEFAULT_LANGUAGE
+    fb_messenger_languages = getattr(settings, 'FACEBOOK_MESSENGER_LANGUAGES', {})
+    language = fb_messenger_languages.get(language) if language in fb_messenger_languages else language
+    return dict(fb_button_language=language)
