@@ -1,51 +1,52 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # I made suwancita <isuwancita@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-16 15:01+0000\n"
-"PO-Revision-Date: 2016-09-20 10:38+0000\n"
+"POT-Creation-Date: 2016-10-27 08:22+0000\n"
+"PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
-"Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
+"Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/"
+"language/id/)\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: dash/categories/models.py:17
+#: dash/categories/models.py:20
 msgid "The name of this category"
 msgstr "Nama kategori ini"
 
-#: dash/categories/models.py:20
+#: dash/categories/models.py:23
 msgid "An optional image that can describe this category"
 msgstr "Gambar opsional yang bisa menggambarkan kategori ini"
 
-#: dash/categories/models.py:23 ureport/polls/models.py:63
+#: dash/categories/models.py:26 ureport/polls/models.py:64
 msgid "The organization this category applies to"
 msgstr "Organisasi kategori ini berlaku untuk"
 
-#: dash/categories/models.py:35 templates/frame.haml:260
-#: templates/frame.haml.py:267
+#: dash/categories/models.py:47 templates/frame.haml:285
+#: templates/frame.haml.py:292
 msgid "Categories"
 msgstr "Kategori"
 
-#: dash/categories/models.py:41 dash/stories/models.py:129
-#: ureport/polls/models.py:540
+#: dash/categories/models.py:53 dash/stories/models.py:129
+#: ureport/polls/models.py:604
 msgid "The name to describe this image"
 msgstr "Nama untuk menjelaskan gambar ini"
 
-#: dash/categories/models.py:44
+#: dash/categories/models.py:56
 msgid "The category this image represents"
 msgstr "Kategori gambar ini mewakili"
 
-#: dash/categories/models.py:47 dash/stories/models.py:135
-#: ureport/polls/models.py:546
+#: dash/categories/models.py:59 dash/stories/models.py:135
+#: ureport/polls/models.py:610
 msgid "The image file to use"
 msgstr "File gambar yang akan digunakan"
 
@@ -59,9 +60,11 @@ msgstr "Untuk mengidentifikasi jenis konten ini, digunakan dengan tag template"
 
 #: dash/dashblocks/models.py:26
 msgid ""
-"A description of where this content type is used on the site and how it will"
-" be dsiplayed"
-msgstr "Sebuah deskripsi di mana jenis konten ini digunakan di dalam situs dan bagaimana hal itu akan ditampilkan"
+"A description of where this content type is used on the site and how it will "
+"be dsiplayed"
+msgstr ""
+"Sebuah deskripsi di mana jenis konten ini digunakan di dalam situs dan "
+"bagaimana hal itu akan ditampilkan"
 
 #: dash/dashblocks/models.py:31
 msgid "Whether this content should include a title"
@@ -86,7 +89,8 @@ msgstr "Apakah konten ini harus menyertakan link"
 #: dash/dashblocks/models.py:46
 msgid ""
 "Whether this content should allow upload of additional images, ie a gallery"
-msgstr "Apakah konten ini harus memungkinkan upload gambar tambahan, di sebuah galeri"
+msgstr ""
+"Apakah konten ini harus memungkinkan upload gambar tambahan, di sebuah galeri"
 
 #: dash/dashblocks/models.py:50
 msgid "Whether this content has a color field"
@@ -126,25 +130,29 @@ msgstr "Setiap gambar yang harus ditampilkan dengan blok konten ini, opsional"
 
 #: dash/dashblocks/models.py:87
 msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr "Sebuah warna latar belakang digunakan untuk gambar, dalam format: #rrggbb"
+msgstr ""
+"Sebuah warna latar belakang digunakan untuk gambar, dalam format: #rrggbb"
 
 #: dash/dashblocks/models.py:91
 msgid "Any link that should be associated with this content block, optional"
 msgstr "Link yang harus dikaitkan dengan blok konten ini, opsional"
 
-#: dash/dashblocks/models.py:95 ureport/news/models.py:40
+#: dash/dashblocks/models.py:95 ureport/news/models.py:42
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "Id dari video YouTube yang harus dikaitkan dengan item ini"
 
 #: dash/dashblocks/models.py:99
 msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more"
-" advanced filtering, optional"
-msgstr "Tag untuk memblokir konten ini, dipisahkan oleh spasi, dapat digunakan untuk melakukan penyaringan lebih maju, opsional"
+"Any tags for this content block, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Tag untuk memblokir konten ini, dipisahkan oleh spasi, dapat digunakan untuk "
+"melakukan penyaringan lebih maju, opsional"
 
 #: dash/dashblocks/models.py:103
 msgid "The priority for this block, higher priority blocks come first"
-msgstr "Prioritas untuk blok ini, blok prioritas yang lebih tinggi datang pertama"
+msgstr ""
+"Prioritas untuk blok ini, blok prioritas yang lebih tinggi datang pertama"
 
 #: dash/dashblocks/models.py:108
 msgid "The organization this content block belongs to"
@@ -168,7 +176,7 @@ msgstr "Cari"
 msgid "Add"
 msgstr "Tambah"
 
-#: dash/dashblocks/views.py:16 templates/frame.haml:210
+#: dash/dashblocks/views.py:16 templates/frame.haml:235
 msgid "Content Types"
 msgstr "Jenis Konten"
 
@@ -181,12 +189,12 @@ msgstr "Blok Konten"
 msgid "%s Blocks"
 msgstr "%s Blok"
 
-#: dash/dashblocks/views.py:158 smartmin/views.py:1099
+#: dash/dashblocks/views.py:158 smartmin/views.py:1110
 #, python-format
 msgid "Edit %s"
 msgstr "Rubah  %s"
 
-#: dash/dashblocks/views.py:182 smartmin/views.py:1289
+#: dash/dashblocks/views.py:182 smartmin/views.py:1300
 #, python-format
 msgid "Create %s"
 msgstr "Buat %s"
@@ -308,7 +316,9 @@ msgstr "API tanda untuk akun RapidPro dashboard ini terkait dengan"
 msgid ""
 "JSON blob used to store configuration information associated with this "
 "organization"
-msgstr "JSON yang digunakan untuk menyimpan informasi konfigurasi yang terkait dengan organisasi ini"
+msgstr ""
+"JSON yang digunakan untuk menyimpan informasi konfigurasi yang terkait "
+"dengan organisasi ini"
 
 #: dash/orgs/models.py:311
 msgid "Administrator"
@@ -386,9 +396,14 @@ msgid ""
 "\n"
 "      You've been invited to join %(org_name)s.\n"
 "      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
+"a>.\n"
 "  "
-msgstr "\nAnda telah diundang untuk bergabung %(org_name)s.\n<br/>\nUntuk menerima undangan, <a href='%(host)s%(join_url)s'>Klik disini</a>."
+msgstr ""
+"\n"
+"Anda telah diundang untuk bergabung %(org_name)s.\n"
+"<br/>\n"
+"Untuk menerima undangan, <a href='%(host)s%(join_url)s'>Klik disini</a>."
 
 #: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
 msgid "Edit"
@@ -424,7 +439,8 @@ msgstr "Pilih Organisasi"
 msgid ""
 "Your account is not associated to an organization. Please Contact the "
 "adminstrator."
-msgstr "Akun Anda tidak terkait dengan organisasi. Silahkan Hubungi administrator."
+msgstr ""
+"Akun Anda tidak terkait dengan organisasi. Silahkan Hubungi administrator."
 
 #: dash/orgs/views.py:219 dash/orgs/views.py:229
 msgid "Your Organization"
@@ -451,7 +467,7 @@ msgstr "Satu dari email yang dimasukkan tidak sesuai format"
 msgid "Manage %(name)s Accounts"
 msgstr "Kelola %(name)s Pengguna"
 
-#: dash/orgs/views.py:438 smartmin/views.py:1264
+#: dash/orgs/views.py:438 smartmin/views.py:1275
 msgid "Create"
 msgstr "Buat"
 
@@ -459,7 +475,9 @@ msgstr "Buat"
 msgid ""
 "Your invitation link is invalid. Please contact your organization "
 "administrator."
-msgstr "link undangan Anda tidak valid. Silahkan hubungi administrator organisasi Anda."
+msgstr ""
+"link undangan Anda tidak valid. Silahkan hubungi administrator organisasi "
+"Anda."
 
 #: dash/orgs/views.py:502 dash/orgs/views.py:547
 #, python-format
@@ -474,7 +492,9 @@ msgstr "Gabung"
 msgid ""
 "Your invitation link has expired. Please contact your organization "
 "administrator."
-msgstr "link undangan Anda telah kedaluwarsa. Silahkan hubungi administrator organisasi Anda."
+msgstr ""
+"link undangan Anda telah kedaluwarsa. Silahkan hubungi administrator "
+"organisasi Anda."
 
 #: dash/orgs/views.py:640
 msgid "Task"
@@ -510,15 +530,19 @@ msgstr "Sebuah link ke file mp3 untuk menerbitkan cerita ini"
 
 #: dash/stories/models.py:31
 msgid ""
-"The id of the YouTube video that should be linked to this story (this is the"
-" text that comes afer v= and before & in the YouTube URL)"
-msgstr "Id dari video YouTube yang harus dikaitkan dengan cerita ini (ini adalah teks yang muncul setelah v = dan sebelum & dalam URL YouTube)"
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"Id dari video YouTube yang harus dikaitkan dengan cerita ini (ini adalah "
+"teks yang muncul setelah v = dan sebelum & dalam URL YouTube)"
 
 #: dash/stories/models.py:37
 msgid ""
 "Any tags for this story, separated by spaces, can be used to do more "
 "advanced filtering, optional"
-msgstr "Tag untuk cerita ini, dipisahkan oleh spasi, dapat digunakan untuk melakukan penyaringan lebih maju, opsional"
+msgstr ""
+"Tag untuk cerita ini, dipisahkan oleh spasi, dapat digunakan untuk melakukan "
+"penyaringan lebih maju, opsional"
 
 #: dash/stories/models.py:42
 msgid "The category for this story"
@@ -528,8 +552,8 @@ msgstr "Kategori cerita"
 msgid "The organization this story belongs to"
 msgstr "Organisasi yang memiliki cerita ini"
 
-#: dash/stories/models.py:124 templates/frame.haml:304
-#: templates/frame.haml.py:456 templates/public/stories.haml:7
+#: dash/stories/models.py:124 templates/frame.haml:329
+#: templates/frame.haml.py:481 templates/public/stories.haml:7
 msgid "Stories"
 msgstr "Cerita"
 
@@ -537,29 +561,29 @@ msgstr "Cerita"
 msgid "The story to associate to"
 msgstr "cerita untuk mengaitkan"
 
-#: dash/stories/views.py:56
+#: dash/stories/views.py:59
 msgid "Yes"
 msgstr "Ya"
 
-#: dash/stories/views.py:57
+#: dash/stories/views.py:60
 msgid "No"
 msgstr "Tidak"
 
-#: dash/stories/views.py:76
+#: dash/stories/views.py:79
 msgid "Story Images"
 msgstr "Gambar cerita"
 
-#: dash/stories/views.py:88 dash/stories/views.py:96
-#: ureport/polls/views.py:151 ureport/polls/views.py:158
+#: dash/stories/views.py:91 dash/stories/views.py:99 ureport/polls/views.py:164
+#: ureport/polls/views.py:171
 #, python-format
 msgid "Image %d"
 msgstr "Gambar %d"
 
-#: dash/stories/views.py:89
+#: dash/stories/views.py:92
 msgid "Image to display on story page and in previews. (optional)"
 msgstr "Gambar untuk ditampilkan pada halaman cerita dan di preview. (pilihan)"
 
-#: dash/stories/views.py:97
+#: dash/stories/views.py:100
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Image to display on story page and in previews (optional)"
 
@@ -573,13 +597,17 @@ msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
-msgstr "\nApakah Anda yakin ingin menghapus <b>%(object)s</b>?"
+msgstr ""
+"\n"
+"Apakah Anda yakin ingin menghapus <b>%(object)s</b>?"
 
 #: smartmin/templates/smartmin/delete_confirm.html:17
 msgid ""
 "Once it is removed, it will be gone forever. There is no way to undo this "
 "operation."
-msgstr "Sekali dihapus, itu akan hilang selamanya. Tidak ada cara untuk membatalkan operasi ini."
+msgstr ""
+"Sekali dihapus, itu akan hilang selamanya. Tidak ada cara untuk membatalkan "
+"operasi ini."
 
 #: smartmin/templates/smartmin/delete_confirm.html:24
 #: smartmin/templates/smartmin/form.html:50
@@ -598,7 +626,9 @@ msgid_plural ""
 "\n"
 "         %(counter)s results\n"
 "        "
-msgstr[0] "\n%(counter)s hasil"
+msgstr[0] ""
+"\n"
+"%(counter)s hasil"
 
 #: smartmin/templates/smartmin/list.html:85
 #, python-format
@@ -606,7 +636,10 @@ msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
-msgstr "\n⇥Hasil %(start)s-%(end)s of %(count)s\n⇥"
+msgstr ""
+"\n"
+"⇥Hasil %(start)s-%(end)s of %(count)s\n"
+"⇥"
 
 #: smartmin/templates/smartmin/list.html:95
 #: smartmin/templates/smartmin/list.html:97
@@ -628,8 +661,8 @@ msgstr "Rubah"
 msgid "Sign in"
 msgstr "Masuk"
 
-#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:404
-#: templates/frame.haml.py:581 templates/smartmin/users/login.haml:49
+#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:429
+#: templates/frame.haml.py:606 templates/smartmin/users/login.haml:49
 msgid "Login"
 msgstr "Masuk"
 
@@ -650,9 +683,13 @@ msgstr "Kegagalan Masuk"
 #, python-format
 msgid ""
 "\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      Sorry, you cannot log in at this time because we received "
+"%(failed_login_limit)s incorrect login attempts.\n"
 "      "
-msgstr "\nMaaf, Anda tidak bisa login pada saat ini karena kami menerima %(failed_login_limit)s usaha login yang salah."
+msgstr ""
+"\n"
+"Maaf, Anda tidak bisa login pada saat ini karena kami menerima "
+"%(failed_login_limit)s usaha login yang salah."
 
 #: smartmin/templates/smartmin/users/user_failed.html:18
 #, python-format
@@ -660,13 +697,17 @@ msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
-msgstr "\nSilahkan tunggu %(lockout_timeout)s menit sebelum mencoba login kembali."
+msgstr ""
+"\n"
+"Silahkan tunggu %(lockout_timeout)s menit sebelum mencoba login kembali."
 
 #: smartmin/templates/smartmin/users/user_failed.html:25
 msgid ""
 "Alternatively, you can fill out the form below to have your password reset "
 "via e-mail."
-msgstr "Atau, Anda bisa mengisi form di bawah ini untuk memiliki password ulang via e-mail."
+msgstr ""
+"Atau, Anda bisa mengisi form di bawah ini untuk memiliki password ulang via "
+"e-mail."
 
 #: smartmin/templates/smartmin/users/user_failed.html:27
 msgid "Please contact the website administrator to have your password reset."
@@ -684,15 +725,24 @@ msgstr "Pemulihan"
 msgid ""
 "Please enter the email address you used to sign up and we will help you "
 "recover your password."
-msgstr "Masukkan alamat surel yang Anda gunakan untuk mendaftar dan kami akan membantu Anda mengembalikan kata kunci Anda."
+msgstr ""
+"Masukkan alamat surel yang Anda gunakan untuk mendaftar dan kami akan "
+"membantu Anda mengembalikan kata kunci Anda."
 
 #: smartmin/templates/smartmin/users/user_newpassword.html:7
 #, python-format
 msgid ""
 "\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  <strong>Your password has expired.</strong> Site policy states that you "
+"must pick a new password every %(expire_days)s days, and that passwords must "
+"not have been used within the previous %(window_days)s days.\n"
 "  "
-msgstr "\n<Strong> Kata sandi Anda telah kedaluwarsa. </ Strong> menyatakan kebijakan Site bahwa Anda harus memilih password baru setiap %(expire_days)s hari, dan bahwa password harus tidak telah digunakan dalam sebelumnya %(window_days)s hari"
+msgstr ""
+"\n"
+"<Strong> Kata sandi Anda telah kedaluwarsa. </ Strong> menyatakan kebijakan "
+"Site bahwa Anda harus memilih password baru setiap %(expire_days)s hari, dan "
+"bahwa password harus tidak telah digunakan dalam sebelumnya %(window_days)s "
+"hari"
 
 #: smartmin/users/views.py:28 smartmin/users/views.py:66
 #: smartmin/users/views.py:81 smartmin/users/views.py:126
@@ -705,14 +755,18 @@ msgstr "Kata kunci baru"
 msgid ""
 "Passwords must have at least 8 characters, including one uppercase, one "
 "lowercase and one number"
-msgstr "Kata kunci harus memiliki minimal 8 karakter, termasuk satu huruf besar, satu huruf kecil dan satu nomor"
+msgstr ""
+"Kata kunci harus memiliki minimal 8 karakter, termasuk satu huruf besar, "
+"satu huruf kecil dan satu nomor"
 
 #: smartmin/users/views.py:75 smartmin/users/views.py:107
 #: smartmin/users/views.py:153
 msgid ""
 "You have used this password before in the past year, please use a new "
 "password."
-msgstr "Anda telah menggunakan sandi ini sebelum pada tahun lalu, silakan gunakan sandi baru."
+msgstr ""
+"Anda telah menggunakan sandi ini sebelum pada tahun lalu, silakan gunakan "
+"sandi baru."
 
 #: smartmin/users/views.py:80 smartmin/users/views.py:206
 #: smartmin/users/views.py:254
@@ -743,7 +797,9 @@ msgstr "Surel anda"
 msgid ""
 "E-mail recovery is not supported, please contact the website administrator "
 "to reset your password manually."
-msgstr "E-mail pemulihan tidak didukung, silahkan hubungi pengelola situs untuk mereset password Anda secara manual."
+msgstr ""
+"E-mail pemulihan tidak didukung, silahkan hubungi pengelola situs untuk "
+"mereset password Anda secara manual."
 
 #: smartmin/users/views.py:124
 msgid "Current Password"
@@ -786,9 +842,10 @@ msgid "Groups"
 msgstr "Kelompok"
 
 #: smartmin/users/views.py:205
-msgid ""
-"Users will only get those permissions that are allowed for their group."
-msgstr "Pengguna hanya akan mendapatkan hak akses yang diperbolehkan untuk grup mereka."
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr ""
+"Pengguna hanya akan mendapatkan hak akses yang diperbolehkan untuk grup "
+"mereka."
 
 #: smartmin/users/views.py:206
 msgid "Set the user's initial password here."
@@ -808,11 +865,14 @@ msgstr "Apakah pengguna ini diperbolehkan untuk login ke situs"
 
 #: smartmin/users/views.py:227
 msgid "Users will only get those permissions that are allowed for their group"
-msgstr "Pengguna hanya akan mendapatkan hak akses yang diperbolehkan untuk kelompok mereka"
+msgstr ""
+"Pengguna hanya akan mendapatkan hak akses yang diperbolehkan untuk kelompok "
+"mereka"
 
 #: smartmin/users/views.py:228
 msgid "You can reset the user's password by entering a new password here"
-msgstr "Anda dapat me-reset password pengguna dengan memasukkan password baru di sini"
+msgstr ""
+"Anda dapat me-reset password pengguna dengan memasukkan password baru di sini"
 
 #: smartmin/users/views.py:253
 msgid "Username"
@@ -866,7 +926,9 @@ msgstr "Anda sekarang login sebagai %s"
 #: smartmin/users/views.py:356
 msgid ""
 "Password Updated Successfully. Now you can log in using your new password."
-msgstr "Sandi Updated Berhasil. Sekarang Anda dapat login menggunakan password baru Anda."
+msgstr ""
+"Sandi Updated Berhasil. Sekarang Anda dapat login menggunakan password baru "
+"Anda."
 
 #: smartmin/users/views.py:359
 msgid "Reset your Password"
@@ -874,28 +936,30 @@ msgstr "Mereset password Anda"
 
 #: smartmin/users/views.py:371
 msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by"
-" entering your email here."
-msgstr "Link Anda telah berakhir karena alasan keamanan. Silahkan memulai proses dengan memasukkan email Anda di sini."
+"Your link has expired for security reasons. Please reinitiate the process by "
+"entering your email here."
+msgstr ""
+"Link Anda telah berakhir karena alasan keamanan. Silahkan memulai proses "
+"dengan memasukkan email Anda di sini."
 
-#: smartmin/views.py:838
+#: smartmin/views.py:849
 msgid "Submit"
 msgstr "Proses"
 
-#: smartmin/views.py:845
+#: smartmin/views.py:856
 msgid "Form"
 msgstr "Form"
 
-#: smartmin/views.py:1167
+#: smartmin/views.py:1178
 msgid "Save Changes"
 msgstr "Simpan Perubahan"
 
-#: smartmin/views.py:1280
+#: smartmin/views.py:1291
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s baru anda sudah berhasil dibuat"
 
-#: smartmin/views.py:1300
+#: smartmin/views.py:1311
 #, python-format
 msgid "Import %s"
 msgstr "Impor %s"
@@ -904,120 +968,124 @@ msgstr "Impor %s"
 msgid "U-Report"
 msgstr "U-Report"
 
-#: templates/frame.haml:184
+#: templates/frame.haml:209
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/frame.haml:192
+#: templates/frame.haml:217
 msgid "Configuration"
 msgstr "Konfigurasi"
 
-#: templates/frame.haml:198
+#: templates/frame.haml:223
 msgid "Orgs"
 msgstr "Orgs"
 
-#: templates/frame.haml:204
+#: templates/frame.haml:229
 msgid "Users"
 msgstr "Nama Pengguna"
 
-#: templates/frame.haml:217
+#: templates/frame.haml:242
 msgid "Images"
 msgstr "Gambar"
 
-#: templates/frame.haml:226 templates/frame.haml.py:287
+#: templates/frame.haml:251 templates/frame.haml.py:312
 msgid "Content"
 msgstr "Konten"
 
-#: templates/frame.haml:235
+#: templates/frame.haml:260
 msgid "Country Aliases"
 msgstr "Negara Alias"
 
-#: templates/frame.haml:252 templates/frame.haml.py:450
+#: templates/frame.haml:277 templates/frame.haml.py:475
 msgid "Polls"
 msgstr "Polling"
 
-#: templates/frame.haml:275
+#: templates/frame.haml:300
 msgid "Category Images"
 msgstr "Gambar Kategori"
 
-#: templates/frame.haml:295
+#: templates/frame.haml:320
 msgid "News Items"
 msgstr "Berita"
 
-#: templates/frame.haml:313
+#: templates/frame.haml:338
 msgid "Job Sources"
 msgstr "Sumber Pekerjaan"
 
-#: templates/frame.haml:320
+#: templates/frame.haml:345
 msgid "Jobs Content"
 msgstr "Konten Pekerjaan"
 
-#: templates/frame.haml:330
+#: templates/frame.haml:355
 msgid "About Content"
 msgstr "Tentang Konten"
 
-#: templates/frame.haml:336
+#: templates/frame.haml:361
 msgid "Videos"
 msgstr "Video"
 
-#: templates/frame.haml:342
+#: templates/frame.haml:367
 msgid "Contact Us Content"
 msgstr "Konten Hubungi Kami"
 
-#: templates/frame.haml:348
+#: templates/frame.haml:373
 msgid "Missions Content"
 msgstr "Misi Konten"
 
-#: templates/frame.haml:354
+#: templates/frame.haml:379
 msgid "Terms & Conditions"
 msgstr "Syarat & Ketentuan"
 
-#: templates/frame.haml:361
+#: templates/frame.haml:386
 msgid "U-Reporters Content"
 msgstr "Konten U-Reporters"
 
-#: templates/frame.haml:368
+#: templates/frame.haml:393
 msgid "Join &amp; Engage Content"
 msgstr "Bergabung & amp; terlibat dengan Konten"
 
-#: templates/frame.haml:374
+#: templates/frame.haml:399
 msgid "Join Steps Content"
 msgstr "Bergabung dengan Langkah Konten"
 
-#: templates/frame.haml:381
+#: templates/frame.haml:406
 msgid "Additional Menu"
 msgstr "Menu Tambahan"
 
-#: templates/frame.haml:398
+#: templates/frame.haml:423
 msgid "Logout"
 msgstr "Keluar"
 
-#: templates/frame.haml:444
+#: templates/frame.haml:469
 msgid "About"
 msgstr "Tentang Kami"
 
-#: templates/frame.haml:462
+#: templates/frame.haml:487
 msgid "U-Reporters"
 msgstr "U-Reporters"
 
-#: templates/frame.haml:469 templates/public/jobs.haml:7
+#: templates/frame.haml:494 templates/public/jobs.haml:7
 msgid "Jobs"
 msgstr "Pekerjaan"
 
-#: templates/frame.haml:476
+#: templates/frame.haml:501
 msgid "Join & Engage"
 msgstr "Bergabung & Terlibat"
 
-#: templates/frame.haml:542
+#: templates/frame.haml:567
 msgid "FOLLOW US ON"
 msgstr "BERGABUNG DENGAN KAMI DI"
 
 #: templates/jobs/jobsource_create.haml:8
 msgid ""
 "\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"        To add a Twitter job source you are required to get a widget id from "
+"twitter.\n"
 "      "
-msgstr "\nUntuk menambahkan sumber pekerjaan Twitter Anda diminta untuk mendapatkan id widget dari twitter."
+msgstr ""
+"\n"
+"Untuk menambahkan sumber pekerjaan Twitter Anda diminta untuk mendapatkan id "
+"widget dari twitter."
 
 #: templates/jobs/jobsource_create.haml:12
 #: templates/jobs/jobsource_update.haml:12
@@ -1028,9 +1096,13 @@ msgstr "Ikuti panduan langkah demi langkah"
 #: templates/jobs/jobsource_update.haml:15
 msgid ""
 "\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"        <div>After you create the widget copy the widget id from the url as "
+"shown on</div>\n"
 "      "
-msgstr "\n<Div> Setelah Anda membuat widget menyalin widget id dari url seperti yang ditunjukkan pada </ div>"
+msgstr ""
+"\n"
+"<Div> Setelah Anda membuat widget menyalin widget id dari url seperti yang "
+"ditunjukkan pada </ div>"
 
 #: templates/jobs/jobsource_create.haml:40
 msgid "Back"
@@ -1039,9 +1111,13 @@ msgstr "Kembali"
 #: templates/jobs/jobsource_update.haml:8
 msgid ""
 "\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
+"        Remember for a Twitter job source you are required to get a widget "
+"id from twitter.\n"
 "      "
-msgstr "\nIngat untuk sumber pekerjaan Twitter Anda diminta untuk mendapatkan id widget dari twitter."
+msgstr ""
+"\n"
+"Ingat untuk sumber pekerjaan Twitter Anda diminta untuk mendapatkan id "
+"widget dari twitter."
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
 msgid "ABOUT U-REPORT"
@@ -1067,16 +1143,21 @@ msgstr "Berbicara tentang apa yang terjadi di komunitas Anda"
 msgid ""
 "Use Ureport results and information to update and increase citizen's "
 "awareness"
-msgstr "Gunakan hasil Laporan dan informasi untuk memperbarui dan meningkatkan kesadaran warga"
+msgstr ""
+"Gunakan hasil Laporan dan informasi untuk memperbarui dan meningkatkan "
+"kesadaran warga"
 
 #: templates/public/about.haml:130
 msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "Berpartisipasi dalam kampanye nasional untuk membantu berkembangnya negara Anda"
+msgstr ""
+"Berpartisipasi dalam kampanye nasional untuk membantu berkembangnya negara "
+"Anda"
 
 #: templates/public/about.haml:133
 #, python-format
 msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Bagi apa yang terjadi di sekitar %(country)s dengan U-Reporters lainnya"
+msgstr ""
+"Bagi apa yang terjadi di sekitar %(country)s dengan U-Reporters lainnya"
 
 #: templates/public/about.haml:139
 msgid "CLICK HERE TO JOIN"
@@ -1098,14 +1179,12 @@ msgstr "LIHAT INI DI YOUTUBE"
 msgid "MORE POLLS"
 msgstr "POLLING LAINNYA"
 
-#: templates/public/all_polls.haml:12
-#: templates/public/archived_stories.haml:12
+#: templates/public/all_polls.haml:12 templates/public/archived_stories.haml:12
 msgid "FILTER"
 msgstr "MENYARING"
 
-#: templates/public/all_polls.haml:19
-#: templates/public/archived_stories.haml:19 templates/public/stories.haml:69
-#: templates/public/strings_values.haml:5
+#: templates/public/all_polls.haml:19 templates/public/archived_stories.haml:19
+#: templates/public/stories.haml:69 templates/public/strings_values.haml:5
 msgid "All"
 msgstr "Semua"
 
@@ -1132,24 +1211,30 @@ msgstr "IKUTI"
 #: templates/public/index.haml:29
 msgid ""
 "\n"
-"                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
+"                  U-Report is a social messaging tool allowing anyone from "
+"any community, anywhere in the world to respond to polls, report issues, "
+"support child rights and work as positive agents of change on behalf of "
+"people in their country.\n"
 "                "
-msgstr "\nU-Report adalah alat pesan sosial yang memungkinkan siapapun, di manapun di dunia untuk tanggapan jajak pendapat, pelaporan masalah, dukungan hak anak dan bekerja sebagai agen positif perubahan atas nama orang di negara mereka."
+msgstr ""
+"\n"
+"U-Report adalah alat pesan sosial yang memungkinkan siapapun, di manapun di "
+"dunia untuk tanggapan jajak pendapat, pelaporan masalah, dukungan hak anak "
+"dan bekerja sebagai agen positif perubahan atas nama orang di negara mereka."
 
 #: templates/public/index.haml:36 templates/public/index.haml.py:74
 msgid "CURRENT POLL"
 msgstr "POLLING TERBARU"
 
-#: templates/public/index.haml:42 templates/public/index.haml.py:193
-#: templates/public/index.haml:563
-msgid "VIEW FULL RESULT"
-msgstr "LIHAT HASIL"
+#: templates/public/index.haml:42
+msgid "View Full Results"
+msgstr ""
 
 #: templates/public/index.haml:52
 msgid "All U-Report members"
 msgstr "Semua Anggota U-Report"
 
-#: templates/public/index.haml:91 templates/public/polls.haml:43
+#: templates/public/index.haml:91
 msgid "RESPONSE RATE"
 msgstr "RATING TANGGAPAN"
 
@@ -1165,86 +1250,106 @@ msgstr "RATING RESPONDER BERDASARKAN LOKASI"
 msgid "Most responded"
 msgstr "Respon paling banyak"
 
-#: templates/public/index.haml:115
-msgid "Least responded"
-msgstr "Respon paling sedikit"
+#: templates/public/index.haml:143
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"                                  %(responded)s of %(total)s\n"
+"                                  "
+msgstr ""
+"\n"
+"%(responded)s direspon dari %(polled)s jajak pendapat"
 
-#: templates/public/index.haml:157
+#: templates/public/index.haml:158
 msgid "TRENDING WORDS"
 msgstr "KATA POPULER"
 
-#: templates/public/index.haml:167
+#: templates/public/index.haml:168
 msgid "FEATURED RESPONSES"
 msgstr "FITUR TANGGAPAN"
 
-#: templates/public/index.haml:213 templates/public/ureporters.haml:16
+#: templates/public/index.haml:191 templates/public/index.haml.py:580
+msgid "View full results"
+msgstr ""
+
+#: templates/public/index.haml:211 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
 msgstr "U-REPORTERS DI"
 
-#: templates/public/index.haml:221
+#: templates/public/index.haml:219
 msgid "TOTAL # OF U-REPORTERS"
 msgstr "TOTAL # DARI U-REPORTERS"
 
-#: templates/public/index.haml:233
+#: templates/public/index.haml:231
 msgid "4 MOST ACTIVE REGIONS"
 msgstr "4 DAERAH TERAKTIF"
 
-#: templates/public/index.haml:244 templates/public/index.haml.py:265
+#: templates/public/index.haml:242 templates/public/index.haml.py:263
 msgid "RATE BY GENDER"
 msgstr "RATING DARI JENIS KELAMIN"
 
-#: templates/public/index.haml:253 templates/public/index.haml.py:306
+#: templates/public/index.haml:251 templates/public/index.haml.py:304
 msgid "RATE BY AGE"
 msgstr "RATING DARI UMUR"
 
-#: templates/public/index.haml:318
+#: templates/public/index.haml:316
 msgid "WHAT U-REPORTERS ARE SAYING"
 msgstr "APA YANG DIKATAKAN U-REPORTERS"
 
-#: templates/public/index.haml:327
+#: templates/public/index.haml:325
 msgid "FEATURED VIDEO"
 msgstr "FITUR VIDEO"
 
-#: templates/public/index.haml:333
-msgid "WATCH MORE VIDEOS"
-msgstr "LIHAT VIDEO LAIN"
+#: templates/public/index.haml:331
+msgid "Watch more videos"
+msgstr ""
 
-#: templates/public/index.haml:344
+#: templates/public/index.haml:342
 msgid "FEATURED REGION"
 msgstr "WILAYAH UNGGULAN"
 
-#: templates/public/index.haml:368 templates/public/join_engage.haml:99
-msgid "VIEW MORE STORIES ON FACEBOOK"
-msgstr "LIHAT CERITA LAIN DI FACEBOOK"
+#: templates/public/index.haml:366
+msgid "Check more stories in U-Report app"
+msgstr ""
 
-#: templates/public/index.haml:387
-msgid "VIEW MORE ON INSTAGRAM"
-msgstr "LIHAT LEBIH JAUH DI INSTAGRAM"
+#: templates/public/index.haml:385 templates/public/join_engage.haml:99
+msgid "View more stories on Facebook"
+msgstr ""
 
-#: templates/public/index.haml:407
-msgid "READ MORE TWEETS ON TWITTER"
-msgstr "LIHAT TWEET LAIN DI TWITTER"
+#: templates/public/index.haml:404
+msgid "View more on Instagram"
+msgstr ""
 
-#: templates/public/index.haml:418
+#: templates/public/index.haml:424
+msgid "Read more tweets on Twitter"
+msgstr ""
+
+#: templates/public/index.haml:435
 msgid "NEWS FEED"
 msgstr "BERITA"
 
-#: templates/public/index.haml:434 templates/public/index.haml.py:468
-#: templates/public/index.haml:499 templates/public/index.haml.py:577
+#: templates/public/index.haml:451 templates/public/index.haml.py:485
+#: templates/public/index.haml:516 templates/public/index.haml.py:594
 msgid "STORY"
 msgstr "CERITA"
 
-#: templates/public/index.haml:459 templates/public/index.haml.py:486
-#: templates/public/index.haml:517 templates/public/index.haml.py:602
+#: templates/public/index.haml:476 templates/public/index.haml.py:503
+#: templates/public/index.haml:534 templates/public/index.haml.py:619
 #: templates/public/stories.haml:36 templates/public/stories.haml.py:117
-msgid "READ FULL STORY"
-msgstr "BACA CERITA LENGKAP"
+#, fuzzy
+#| msgid "Read This Story"
+msgid "Read full story"
+msgstr "Baca cerita ini"
 
-#: templates/public/index.haml:540
+#: templates/public/index.haml:557
 msgid "Response Rate"
 msgstr "Rating Tanggapan"
 
-#: templates/public/index.haml:746
+#: templates/public/index.haml:760
 msgid "Read This Story"
 msgstr "Baca cerita ini"
 
@@ -1257,16 +1362,16 @@ msgid "Scroll to see job details"
 msgstr "Gulir untuk melihat detail pekerjaan"
 
 #: templates/public/jobs.haml:78 templates/public/join_engage.haml:119
-msgid "TWEET TO"
-msgstr "TWEET KE"
+msgid "Tweet to"
+msgstr ""
 
-#: templates/public/jobs.haml:99
+#: templates/public/jobs.haml:99 templates/public/polls.haml:379
 msgid "Read more"
 msgstr "Lanjut"
 
 #: templates/public/jobs.haml:108
-msgid "VISIT"
-msgstr "KUNJUNGAN"
+msgid "Visit"
+msgstr ""
 
 #: templates/public/join_engage.haml:17
 msgid "JOIN U-REPORT"
@@ -1280,42 +1385,67 @@ msgstr "CARA BERGABUNG"
 #, python-format
 msgid ""
 "\n"
-"              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+"              * U-Report is a free program sponsored by UNICEF with help of "
+"Network Providers in %(country)s. U-Report will not ask for any payments nor "
+"personal financial information, PLEASE disregard any messages which ask you "
+"for payment either on this number or on the Facebook and Twitter pages. All "
+"U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "            "
-msgstr "\n* U-Report adalah sebuah program gratis yang disponsori oleh UNICEF dengan bantuan Penyedia Jaringan di %(country)s. U-Report tidak akan meminta pembayaran atau informasi keuangan pribadi, SILAKAN mengabaikan pesan yang meminta Anda untuk pembayaran baik pada nomor ini atau pada halaman Facebook dan Twitter. Semua layanan U-Report (Semua pesan pada %(shortcode)s) adalah gratis."
+msgstr ""
+"\n"
+"* U-Report adalah sebuah program gratis yang disponsori oleh UNICEF dengan "
+"bantuan Penyedia Jaringan di %(country)s. U-Report tidak akan meminta "
+"pembayaran atau informasi keuangan pribadi, SILAKAN mengabaikan pesan yang "
+"meminta Anda untuk pembayaran baik pada nomor ini atau pada halaman Facebook "
+"dan Twitter. Semua layanan U-Report (Semua pesan pada %(shortcode)s) adalah "
+"gratis."
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
 msgstr "U-REPORT DI SOSIAL MEDIA"
 
 #: templates/public/join_engage.haml:140
-msgid "COMPOSE NEW TWEET"
-msgstr "KIRIM TWEET BARU"
+msgid "Compose new Tweet"
+msgstr ""
 
 #: templates/public/polls.haml:16
 msgid "CURRENT POLL IN"
 msgstr "POLLING TERBARU DI"
 
 #: templates/public/polls.haml:29
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
 msgid ""
 "\n"
-"                  %(questions)s QUESTION POLLED ON THIS TOPIC\n"
+"                  %(questions)s question polled on this topic\n"
 "                "
 msgid_plural ""
 "\n"
-"                  %(questions)s QUESTIONS POLLED ON THIS TOPIC\n"
+"                  %(questions)s questions polled on this topic\n"
 "                "
-msgstr[0] "\n%(questions)s PERTANYAAN DISURVEI DALAM TOPIK INI"
+msgstr[0] ""
+"\n"
+"%(responded)s direspon dari %(polled)s jajak pendapat"
+
+#: templates/public/polls.haml:43
+#, fuzzy
+#| msgid "Response Rate"
+msgid "response rate"
+msgstr "Rating Tanggapan"
 
 #: templates/public/polls.haml:49
-msgid "RESPONDED OUT OF"
-msgstr "DIRESPON DARI"
+#, fuzzy
+#| msgid "Responded out of"
+msgid "responded out of"
+msgstr "Direspon dari"
 
 #: templates/public/polls.haml:53
-msgid "POLLED"
-msgstr "DISURVEY"
+msgid "polled"
+msgstr ""
 
 #: templates/public/polls.haml:96
 msgid "POLL RESULTS"
@@ -1327,7 +1457,9 @@ msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr "\n%(responded)s direspon dari %(polled)s jajak pendapat"
+msgstr ""
+"\n"
+"%(responded)s direspon dari %(polled)s jajak pendapat"
 
 #: templates/public/polls.haml:121
 msgid "KEYWORDS"
@@ -1368,10 +1500,6 @@ msgstr "CERITA YANG BERHUBUNGAN"
 #: templates/public/polls.haml:356 templates/public/story_read.haml:131
 msgid "No related stories."
 msgstr "Tidak ada cerita berkaitan"
-
-#: templates/public/polls.haml:379 templates/public/story_read.haml:157
-msgid "READ MORE"
-msgstr "LANJUT"
 
 #: templates/public/polls.haml:391 templates/public/story_read.haml:99
 msgid "FEATURED IMAGES"
@@ -1420,6 +1548,10 @@ msgstr "Tidak ada yang terkait polling"
 #: templates/public/story_read.haml:104
 msgid "No featured images."
 msgstr "Belum ada gambar fitur"
+
+#: templates/public/story_read.haml:157
+msgid "READ MORE"
+msgstr "LANJUT"
 
 #: templates/public/strings_values.haml:6
 msgid "Even"
@@ -1506,11 +1638,11 @@ msgstr "RATING PENDAFTARAN: 6 BULAN TERAKHIR"
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
 msgstr "PEKERJAAN: 9 TERATAS YANG DISEBUTKAN"
 
-#: templates/public/ureporters.haml:358
+#: templates/public/ureporters.haml:377
 msgid "Registered"
 msgstr "Terdaftar"
 
-#: templates/public/ureporters.haml:371
+#: templates/public/ureporters.haml:392
 msgid "Week of"
 msgstr "Minggu dari"
 
@@ -1543,11 +1675,11 @@ msgstr "Label"
 msgid "Key"
 msgstr "Kunci"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:750
+#: ureport/contacts/models.py:86 ureport/polls/models.py:833
 msgid "Male"
 msgstr "Laki-Laki"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:750
+#: ureport/contacts/models.py:86 ureport/polls/models.py:833
 msgid "Female"
 msgstr "Perempuan"
 
@@ -1587,7 +1719,7 @@ msgstr "Kolom Kabupaten"
 msgid "Ward Field"
 msgstr "Kolom Ward"
 
-#: ureport/contacts/models.py:240 ureport/polls/models.py:975
+#: ureport/contacts/models.py:240 ureport/polls/models.py:1058
 msgid "Number of items with this counter"
 msgstr "Jumlah item dengan counter ini"
 
@@ -1615,7 +1747,10 @@ msgstr "URL lengkap untuk menavigasi ke sumber pekerjaan ini."
 msgid ""
 "For Twitter, a widget Id is required to embed tweets on the website. Read "
 "carefully the instructions above on how to get the right widget Id"
-msgstr "Untuk Twitter, Id widget diperlukan untuk menanamkan tweet di website. Membaca dengan seksama petunjuk di atas tentang cara untuk mendapatkan widget yang tepat Id"
+msgstr ""
+"Untuk Twitter, Id widget diperlukan untuk menanamkan tweet di website. "
+"Membaca dengan seksama petunjuk di atas tentang cara untuk mendapatkan "
+"widget yang tepat Id"
 
 #: ureport/jobs/models.py:30
 msgid "Featured job sources are shown first on the jobs page."
@@ -1658,240 +1793,274 @@ msgid ""
 "The json representing the geometry type and coordinates of the boundaries"
 msgstr "Json mewakili jenis geometri dan koordinat batas-batas"
 
-#: ureport/news/models.py:10
+#: ureport/news/models.py:11
 msgid "The title for this item"
 msgstr "Judul untuk item ini"
 
-#: ureport/news/models.py:13
+#: ureport/news/models.py:14
 msgid "A short summary description for this item"
 msgstr "Deskripsi ringkasan pendek untuk item ini"
 
-#: ureport/news/models.py:16
+#: ureport/news/models.py:17
 msgid "A link that should be associated with this item"
 msgstr "Sebuah link yang harus dikaitkan dengan item ini"
 
-#: ureport/news/models.py:19 ureport/news/models.py:43
+#: ureport/news/models.py:20 ureport/news/models.py:45
 msgid "The category this item belongs to"
 msgstr "Kategori dari item ini milik"
 
-#: ureport/news/models.py:22
+#: ureport/news/models.py:23
 msgid "The organization this item belongs to"
 msgstr "Organisasi dari item ini milik"
 
-#: ureport/news/models.py:34
+#: ureport/news/models.py:36
 msgid "The title for this Video"
 msgstr "Judul Video ini"
 
-#: ureport/news/models.py:37
+#: ureport/news/models.py:39
 msgid "A short summary description for this video"
 msgstr "Deskripsi ringkasan pendek untuk video ini"
 
-#: ureport/news/models.py:46
+#: ureport/news/models.py:48
 msgid "The organization this video belongs to"
 msgstr "Organisasi video ini milik"
 
-#: ureport/polls/models.py:61
+#: ureport/polls/models.py:62
 msgid "The name of this poll category"
 msgstr "Nama kategori jajak pendapat ini"
 
-#: ureport/polls/models.py:70
+#: ureport/polls/models.py:71
 msgid "Poll Categories"
 msgstr "Kategori Jajak Pendapat"
 
-#: ureport/polls/models.py:89
+#: ureport/polls/models.py:100
 msgid "The Flow this Poll is based on"
 msgstr "Arus Poll ini berdasarkan"
 
-#: ureport/polls/models.py:91
+#: ureport/polls/models.py:102
+#, fuzzy
+#| msgid ""
+#| "The date to display for this poll. Make it empty to use flow created_on."
 msgid ""
-"The date to display for this poll. Make it empty to use flow created_on."
-msgstr "Tanggal untuk menampilkan untuk jajak pendapat ini. Buatlah kosong untuk menggunakan aliran created_on."
+"The date to display for this poll. Leave empty to use flow creation date."
+msgstr ""
+"Tanggal untuk menampilkan untuk jajak pendapat ini. Buatlah kosong untuk "
+"menggunakan aliran created_on."
 
-#: ureport/polls/models.py:95
+#: ureport/polls/models.py:106
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr "Apakah aliran untuk jajak pendapat ini diarsipkan pada RapidPro"
 
-#: ureport/polls/models.py:97
+#: ureport/polls/models.py:108
 msgid "The base language of the flow to use"
 msgstr "Bahasa yang digunakan dari aliran flow"
 
-#: ureport/polls/models.py:100
+#: ureport/polls/models.py:111
 msgid "The number of polled reporters on this poll"
 msgstr "Jumlah UReporter yang disurvei pada jajak pendapat ini"
 
-#: ureport/polls/models.py:103
+#: ureport/polls/models.py:114
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Apakah jajak pendapat telah selesai hasil awal sync."
 
-#: ureport/polls/models.py:106
+#: ureport/polls/models.py:117
 msgid "The title for this Poll"
 msgstr "Judul dari jajak pendapat ini"
 
-#: ureport/polls/models.py:108
+#: ureport/polls/models.py:119
 msgid "The category this Poll belongs to"
 msgstr "Kategori Jajak Pendapat ini milik"
 
-#: ureport/polls/models.py:110
+#: ureport/polls/models.py:121
 msgid "Whether this poll should be featured on the homepage"
 msgstr "Apakah jajak pendapat ini harus tampil di homepage"
 
-#: ureport/polls/models.py:112
+#: ureport/polls/models.py:123
 msgid "The splash category image to display for the poll (optional)"
 msgstr "Kategori gambar untuk ditampilkan untuk jajak pendapat (opsional)"
 
-#: ureport/polls/models.py:114
+#: ureport/polls/models.py:125
 msgid "The organization this poll is part of"
 msgstr "organisasi jajak pendapat ini adalah bagian dari"
 
-#: ureport/polls/models.py:543
+#: ureport/polls/models.py:607
 msgid "The poll to associate to"
 msgstr "Jajak pendapat untuk mengaitkan ke"
 
-#: ureport/polls/models.py:557
+#: ureport/polls/models.py:621
 msgid "The poll for this response"
 msgstr "Jajak pendapat untuk tanggapan ini"
 
-#: ureport/polls/models.py:560
+#: ureport/polls/models.py:624
 msgid "The location for this response"
 msgstr "Lokasi dari tanggapan ini"
 
-#: ureport/polls/models.py:563
+#: ureport/polls/models.py:627
 msgid "The name of the sender of the message"
 msgstr "Nama pengirim pesan"
 
-#: ureport/polls/models.py:566
+#: ureport/polls/models.py:630
 msgid "The featured response message"
 msgstr "Pesan respon unggulan"
 
-#: ureport/polls/models.py:582
+#: ureport/polls/models.py:646
 msgid "The poll this question is part of"
 msgstr "Jajak pendapat pertanyaan ini adalah bagian dari"
 
-#: ureport/polls/models.py:584
+#: ureport/polls/models.py:648
 msgid "The title of this question"
 msgstr "Judul dari pertanyaan ini"
 
-#: ureport/polls/models.py:585
+#: ureport/polls/models.py:649
 msgid "The RuleSet this question is based on"
 msgstr "Ruleset pertanyaan ini didasarkan pada"
 
-#: ureport/polls/models.py:590
+#: ureport/polls/models.py:654
 msgid "The label of the ruleset on RapidPro"
 msgstr "Label aturan ditetapkan pada RapidPro"
 
-#: ureport/polls/models.py:593
+#: ureport/polls/models.py:657
 msgid "The priority number for this question on the poll"
 msgstr "Nomor prioritas untuk pertanyaan ini dalam polling"
 
-#: ureport/polls/models.py:843
+#: ureport/polls/models.py:926
 msgid "The Rule this response category is based on"
 msgstr "Aturan kategori respons ini didasarkan pada"
 
-#: ureport/polls/views.py:84
+#: ureport/polls/views.py:85
 msgid "You must include a title for every included question."
 msgstr "Anda harus menyertakan judul untuk setiap pertanyaan disertakan."
 
-#: ureport/polls/views.py:87
+#: ureport/polls/views.py:88
 msgid "Title too long. The max limit is 255 characters for each title"
-msgstr "Judul terlalu panjang. Batas max adalah 255 karakter untuk setiap judul"
+msgstr ""
+"Judul terlalu panjang. Batas max adalah 255 karakter untuk setiap judul"
 
-#: ureport/polls/views.py:92
+#: ureport/polls/views.py:93
 msgid "You must include at least one poll question."
 msgstr "Anda harus menyertakan setidaknya satu pertanyaan jajak pendapat."
 
-#: ureport/polls/views.py:109
-msgid "Your poll has been created, now pick which questions to include."
-msgstr "Jajak pendapat Anda telah dibuat, sekarang pilih mana pertanyaan untuk disertakan."
+#: ureport/polls/views.py:108
+msgid "Adjust poll date"
+msgstr ""
 
-#: ureport/polls/views.py:139
+#: ureport/polls/views.py:111
+#, fuzzy
+#| msgid "Your poll has been created, now pick which questions to include."
+msgid "Your poll has been updated, now pick which questions to include."
+msgstr ""
+"Jajak pendapat Anda telah dibuat, sekarang pilih mana pertanyaan untuk "
+"disertakan."
+
+#: ureport/polls/views.py:122
+#, fuzzy
+#| msgid "Your poll has been created, now pick which questions to include."
+msgid "Your poll has been created, now adjust the poll date."
+msgstr ""
+"Jajak pendapat Anda telah dibuat, sekarang pilih mana pertanyaan untuk "
+"disertakan."
+
+#: ureport/polls/views.py:152
 msgid "Poll Images"
 msgstr "Gambar jajak pendapat"
 
-#: ureport/polls/views.py:140
+#: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Sekarang masukkan tanggapan Anda yang ingin di fitur. (jika ada)"
 
-#: ureport/polls/views.py:152
+#: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr "Gambar untuk ditampilkan pada halaman jajak pendapat dan di lihat. (pilihan)"
+msgstr ""
+"Gambar untuk ditampilkan pada halaman jajak pendapat dan di lihat. (pilihan)"
 
-#: ureport/polls/views.py:159
+#: ureport/polls/views.py:172
 msgid "Image to display on poll page and in previews (optional)"
-msgstr "Gambar untuk ditampilkan pada halaman jajak pendapat dan di lihat. (pilihan)"
+msgstr ""
+"Gambar untuk ditampilkan pada halaman jajak pendapat dan di lihat. (pilihan)"
 
-#: ureport/polls/views.py:183
+#: ureport/polls/views.py:196
 msgid "Featured Poll Responses"
 msgstr "Fitur Tanggapan Jajak Pendapat"
 
-#: ureport/polls/views.py:184
+#: ureport/polls/views.py:197
 msgid "Your poll has been updated."
 msgstr "Polling anda sudah di rubah"
 
-#: ureport/polls/views.py:201
+#: ureport/polls/views.py:214
 #, python-format
 msgid "Response %d Reporter"
 msgstr "Tanggapan %d UReporter"
 
-#: ureport/polls/views.py:201
+#: ureport/polls/views.py:214
 msgid "The name or alias of the responder."
 msgstr "Nama atau alias dari responden tersebut."
 
-#: ureport/polls/views.py:206
+#: ureport/polls/views.py:219
 #, python-format
 msgid "Response %d Location"
 msgstr "Tanggapan %d Lokasi"
 
-#: ureport/polls/views.py:206
+#: ureport/polls/views.py:219
 msgid "The location of the responder."
 msgstr "Lokasi responden"
 
-#: ureport/polls/views.py:211
+#: ureport/polls/views.py:224
 #, python-format
 msgid "Response %d Message"
 msgstr "Tanggapan %d Pesan"
 
-#: ureport/polls/views.py:211
+#: ureport/polls/views.py:224
 msgid "The text of the featured response."
 msgstr "Respon unggulan"
 
-#: ureport/polls/views.py:237
+#: ureport/polls/views.py:250
 msgid "Poll Questions"
 msgstr "Pertanyaan polling"
 
-#: ureport/polls/views.py:239
+#: ureport/polls/views.py:252
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr "Pilih gambar yang akan di tampilkan didalam halaman polling. (Jika ada)"
+msgstr ""
+"Pilih gambar yang akan di tampilkan didalam halaman polling. (Jika ada)"
 
-#: ureport/polls/views.py:268
+#: ureport/polls/views.py:281
 msgid "Include"
 msgstr "Termasuk"
 
-#: ureport/polls/views.py:269
+#: ureport/polls/views.py:282
 msgid "Whether to include this question in your public results"
 msgstr "Centang jika ingin menyertakan pertanyaan ini dalam hasil umum anda"
 
-#: ureport/polls/views.py:273
+#: ureport/polls/views.py:286
 msgid "Priority"
 msgstr "Prioritas"
 
-#: ureport/polls/views.py:274
+#: ureport/polls/views.py:287
 msgid ""
 "The priority of this question on the poll page, higher priority comes first"
-msgstr "Prioritas pertanyaan ini pada halaman jajak pendapat, prioritas yang lebih tinggi yang lebih dulu"
+msgstr ""
+"Prioritas pertanyaan ini pada halaman jajak pendapat, prioritas yang lebih "
+"tinggi yang lebih dulu"
 
-#: ureport/polls/views.py:278
+#: ureport/polls/views.py:291
 msgid "Ruleset Label"
 msgstr "Label Ruleset"
 
-#: ureport/polls/views.py:279 ureport/polls/views.py:284
-msgid "The question posed to your audience, will be displayed publicly"
-msgstr "Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
+#: ureport/polls/views.py:292
+#, fuzzy
+#| msgid "The label of the ruleset on RapidPro"
+msgid "The label of the ruleset from RapidPro"
+msgstr "Label aturan ditetapkan pada RapidPro"
 
-#: ureport/polls/views.py:283
+#: ureport/polls/views.py:296
 msgid "Title"
 msgstr "Judul"
 
-#: ureport/polls/views.py:404
+#: ureport/polls/views.py:297
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr ""
+"Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
+
+#: ureport/polls/views.py:417
 #, python-format
 msgid "Scheduled a pull refresh for poll #%d on org #%d"
 msgstr "Dijadwalkan refresh untuk pemungutan suara #%d di org #%d"
@@ -1901,144 +2070,215 @@ msgstr "Dijadwalkan refresh untuk pemungutan suara #%d di org #%d"
 msgid "%s"
 msgstr "%s"
 
-#: ureport/settings_common.py:184
+#: ureport/settings_common.py:186
 msgid "Whether this org should be show on the landing page"
 msgstr "Centang jika ingin ditampilkan di halaman depan"
 
-#: ureport/settings_common.py:185
+#: ureport/settings_common.py:187
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 
-#: ureport/settings_common.py:186
+#: ureport/settings_common.py:188
 msgid "The short text used to direct visitors to join U-Report"
-msgstr "teks singkat yang digunakan untuk mengarahkan pengunjung untuk bergabung U-Report"
+msgstr ""
+"teks singkat yang digunakan untuk mengarahkan pengunjung untuk bergabung U-"
+"Report"
 
-#: ureport/settings_common.py:187
+#: ureport/settings_common.py:189
 msgid "The color used to draw the text on the join bar"
 msgstr "Warna yang digunakan untuk menggambar teks pada gambar bersama"
 
-#: ureport/settings_common.py:188
+#: ureport/settings_common.py:190
 msgid "The color used to draw the background on the join bar"
-msgstr "Warna yang digunakan untuk menggambar latar belakang pada gambar bersama"
+msgstr ""
+"Warna yang digunakan untuk menggambar latar belakang pada gambar bersama"
 
-#: ureport/settings_common.py:189
+#: ureport/settings_common.py:191
 msgid "The primary color for styling for this organization"
 msgstr "Warna utama untuk desain organisasi ini"
 
-#: ureport/settings_common.py:190
+#: ureport/settings_common.py:192
 msgid "The secondary color for styling for this organization"
 msgstr "Warna sekunder untuk desain organisasi ini"
 
-#: ureport/settings_common.py:191
+#: ureport/settings_common.py:193
 msgid "The background color for the site"
 msgstr "Warna latar belakang untuk situs"
 
-#: ureport/settings_common.py:192
+#: ureport/settings_common.py:194
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Sampai dengan 6 warna untuk styling grafik, Gunakan koma di antara warna pilihan"
+msgstr ""
+"Sampai dengan 6 warna untuk styling grafik, Gunakan koma di antara warna "
+"pilihan"
 
-#: ureport/settings_common.py:193
+#: ureport/settings_common.py:195
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Google Analytics Tracking ID untuk organisasi ini"
 
-#: ureport/settings_common.py:194
+#: ureport/settings_common.py:196
 msgid "The URL to the Youtube channel for this organization"
 msgstr "URL ke saluran Youtube untuk organisasi ini"
 
-#: ureport/settings_common.py:195
+#: ureport/settings_common.py:197
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL ke halaman Facebook untuk organisasi ini"
 
-#: ureport/settings_common.py:196
+#: ureport/settings_common.py:198
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr "Integer id ke halaman Facebook untuk organisasi ini (opsional)"
 
-#: ureport/settings_common.py:197
+#: ureport/settings_common.py:199
 msgid ""
 "The integer id to the Facebook app for this organization's chat app "
 "(optional)"
-msgstr "Id yang digunakan ke aplikasi Facebook untuk organisasi ini aplikasi chat (opsional)"
+msgstr ""
+"Id yang digunakan ke aplikasi Facebook untuk organisasi ini aplikasi chat "
+"(opsional)"
 
-#: ureport/settings_common.py:198
+#: ureport/settings_common.py:200
+#, fuzzy
+#| msgid "The integer id to the Facebook page for this organization (optional)"
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr "Integer id ke halaman Facebook untuk organisasi ini (opsional)"
+
+#: ureport/settings_common.py:201
 msgid "The Instagram username for this organization"
 msgstr "nama pengguna Instagram untuk organisasi ini"
 
-#: ureport/settings_common.py:199
+#: ureport/settings_common.py:202
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "The Instagram widget id dari lightwidget.com"
 
-#: ureport/settings_common.py:200
+#: ureport/settings_common.py:203
 msgid "The Twitter handle for this organization"
 msgstr "Pegangan Twitter untuk organisasi ini"
 
-#: ureport/settings_common.py:201
-msgid "The Twitter widget used for following new users"
-msgstr "Twitter widget yang digunakan untuk mengikuti pengguna baru"
-
-#: ureport/settings_common.py:202
+#: ureport/settings_common.py:204
 msgid "The Twitter widget used for searching"
 msgstr "Twitter widget yang digunakan untuk mencari"
 
-#: ureport/settings_common.py:203
+#: ureport/settings_common.py:205
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "Nama Kelompok Kontak yang berisi anggota U-Reporters"
 
-#: ureport/settings_common.py:204
+#: ureport/settings_common.py:206
 msgid ""
 "The label of the Contact Field that contains the birth date of reporters"
 msgstr "Label Kolom kontak yang berisi Tanggal Lahir dari U-Reporters"
 
-#: ureport/settings_common.py:205
+#: ureport/settings_common.py:207
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Label Kolom kontak yang berisi Jenis Kelamin dari U-Reporters"
 
-#: ureport/settings_common.py:206
+#: ureport/settings_common.py:208
 msgid ""
 "The label of the Contact Field that contains the occupation of reporters"
 msgstr "Label kolom kontak yang berisi pekerjaan dari U-Reporters"
 
-#: ureport/settings_common.py:207
+#: ureport/settings_common.py:209
 msgid ""
 "The label of the Contact Field that contains the registration date of "
 "reporters"
 msgstr "Label kolom kontak yang berisi tanggal pendaftaran dari U-Reporters"
 
-#: ureport/settings_common.py:208
+#: ureport/settings_common.py:210
 msgid "The label of the Contact Field that contains the State of reporters"
 msgstr "Label Kolom kontak yang berisi Provinsi dari U-Reporters"
 
-#: ureport/settings_common.py:209
+#: ureport/settings_common.py:211
 msgid "The label of the Contact Field that contains the District of reporters"
 msgstr "Label Kolom kontak yang berisi Kabupaten dari U-Reporters"
 
-#: ureport/settings_common.py:210
+#: ureport/settings_common.py:212
 msgid "The label of the Contact Field that contains the Ward of reporters"
 msgstr "Label Kolom kontak yang berisi Ward dari U-Reporters"
 
-#: ureport/settings_common.py:211
+#: ureport/settings_common.py:213
 msgid "The label assigned to U-Reporters that are Male."
 msgstr "Label untuk U-Reporters yang Laki-laki."
 
-#: ureport/settings_common.py:212
+#: ureport/settings_common.py:214
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Label untuk U-Reporters yang Perempuan."
 
-#: ureport/settings_common.py:213
+#: ureport/settings_common.py:215
 msgid "If there are jobs to be shown on the public site"
 msgstr "Jika ada pekerjaan yang akan ditampilkan pada situs umum"
 
-#: ureport/settings_common.py:214
+#: ureport/settings_common.py:216
 msgid ""
 "If this org if for global data. e.g: It shows a world map instead of a "
 "country map."
-msgstr "Jika org ini jika untuk data global. mis: Ini menunjukkan peta dunia bukan peta negara."
+msgstr ""
+"Jika org ini jika untuk data global. mis: Ini menunjukkan peta dunia bukan "
+"peta negara."
 
-#: ureport/settings_common.py:215
+#: ureport/settings_common.py:217
+msgid ""
+"The alpha-3 ISO code of the organization so that it appears the stories "
+"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
+"Global)."
+msgstr ""
+
+#: ureport/settings_common.py:218
 msgid ""
 "If you need to include some custom HTML codes in you org pages, like custom "
 "analytics code snippets"
-msgstr "Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, seperti modifikasi kode analytics"
+msgstr ""
+"Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, seperti "
+"modifikasi kode analytics"
 
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
+
+#~ msgid "VIEW FULL RESULT"
+#~ msgstr "LIHAT HASIL"
+
+#~ msgid "Least responded"
+#~ msgstr "Respon paling sedikit"
+
+#~ msgid "WATCH MORE VIDEOS"
+#~ msgstr "LIHAT VIDEO LAIN"
+
+#~ msgid "VIEW MORE STORIES ON FACEBOOK"
+#~ msgstr "LIHAT CERITA LAIN DI FACEBOOK"
+
+#~ msgid "VIEW MORE ON INSTAGRAM"
+#~ msgstr "LIHAT LEBIH JAUH DI INSTAGRAM"
+
+#~ msgid "READ MORE TWEETS ON TWITTER"
+#~ msgstr "LIHAT TWEET LAIN DI TWITTER"
+
+#~ msgid "READ FULL STORY"
+#~ msgstr "BACA CERITA LENGKAP"
+
+#~ msgid "TWEET TO"
+#~ msgstr "TWEET KE"
+
+#~ msgid "VISIT"
+#~ msgstr "KUNJUNGAN"
+
+#~ msgid "COMPOSE NEW TWEET"
+#~ msgstr "KIRIM TWEET BARU"
+
+#~ msgid ""
+#~ "\n"
+#~ "                  %(questions)s QUESTION POLLED ON THIS TOPIC\n"
+#~ "                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                  %(questions)s QUESTIONS POLLED ON THIS TOPIC\n"
+#~ "                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(questions)s PERTANYAAN DISURVEI DALAM TOPIK INI"
+
+#~ msgid "RESPONDED OUT OF"
+#~ msgstr "DIRESPON DARI"
+
+#~ msgid "POLLED"
+#~ msgstr "DISURVEY"
+
+#~ msgid "The Twitter widget used for following new users"
+#~ msgstr "Twitter widget yang digunakan untuk mengikuti pengguna baru"

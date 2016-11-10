@@ -1,6 +1,5 @@
 -e git+https://github.com/nyaruka/smartmin.git#egg=smartmin
 Django==1.8.4
--e git+https://github.com/rapidpro/rapidpro-python.git@master#egg=rapidpro-python-2.0
 -e git+https://github.com/rapidpro/dash.git#egg=dash
 celery
 coverage
@@ -34,3 +33,4 @@ django-countries
 GitPython
 regex
 -e git+https://github.com/norkans7/python-stop-words.git#egg=stop-words-master
+rapidpro-python

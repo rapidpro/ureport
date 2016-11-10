@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import logging
 import pytz
+from datetime import timedelta
 from django.contrib.auth.models import User
 from django.db import models, connection
 from django.db.models import Sum, Count
@@ -142,13 +143,14 @@ class Poll(SmartModel):
         backend = get_backend()
         poll = Poll.objects.get(pk=poll_id)
 
-        created, updated, ignored = backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
 
         poll.rebuild_poll_results_counts()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
-        return created, updated, ignored
+        return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
 
     def get_pull_cached_params(self):
 
@@ -276,6 +278,9 @@ class Poll(SmartModel):
 
                 print "Poll responses counts for poll #%d on org #%d are %s responded out of %s polled" % (poll_id, org_id, self.responded_runs(), self.runs())
 
+    def get_question_uuids(self):
+        return self.questions.values_list('ruleset_uuid', flat=True)
+
     @classmethod
     def get_public_polls(cls, org):
         return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True)
@@ -333,6 +338,15 @@ class Poll(SmartModel):
         other_polls = Poll.get_public_polls(org=org).exclude(pk__in=exclude_polls).order_by('-created_on')
 
         return other_polls
+
+    @classmethod
+    def get_recent_other_polls(cls, org):
+        now = timezone.now()
+        recent_window = now - timedelta(days=7)
+
+        recent_other_polls = Poll.get_other_polls(org).exclude(created_on__lte=recent_window).order_by('-created_on')
+
+        return recent_other_polls
 
     def get_flow(self):
         """
