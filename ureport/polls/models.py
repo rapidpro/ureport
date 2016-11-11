@@ -389,14 +389,14 @@ class Poll(SmartModel):
 
     def most_responded_regions(self):
         # get our first question
-        question = self.get_first_question()
-        if question:
+        top_question = self.get_questions().first()
+        if top_question:
             # do we already have a cached set
-            cached = cache.get(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % question.ruleset_uuid)
+            cached = cache.get(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % top_question.ruleset_uuid)
             if cached:
                 return cached
 
-            return question.get_most_responded_regions()
+            return top_question.get_most_responded_regions()
 
         return []
 
