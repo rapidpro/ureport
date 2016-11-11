@@ -4,7 +4,7 @@ from settings_common import *
 INSTALLED_APPS = INSTALLED_APPS + ('django_nose',)
 # INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar.apps.DebugToolbarConfig',)
 # MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',) + MIDDLEWARE_CLASSES
-
+ALLOWED_HOSTS = ['*']
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 

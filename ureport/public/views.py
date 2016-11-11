@@ -301,6 +301,7 @@ class UreportersView(SmartTemplateView):
         context['age_stats'] = org.get_age_stats()
         context['registration_stats'] = org.get_registration_stats()
         context['occupation_stats'] = org.get_occupation_stats()
+        context['reporters'] = org.get_reporters_count()
 
         return context
 

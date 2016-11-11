@@ -567,8 +567,8 @@ class PollTest(UreportTest):
             with patch('ureport.polls.models.PollQuestion.is_open_ended') as mock_open_ended:
                 mock_open_ended.return_value = True
 
-                self.assertEquals(poll1.most_responded_regions(), [])
-                self.assertFalse(mock.called)
+                self.assertEquals(poll1.most_responded_regions(), results)
+                mock.assert_called_once_with(segment=dict(location="State"))
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = None
