@@ -1,15 +1,13 @@
 from django.core.urlresolvers import reverse
 from mock import patch
 from ureport.admins import OrgCache, refresh_caches
-from ureport.tests import DashTest
+from ureport.tests import UreportTest
 from django.template import TemplateSyntaxError
 
 
-class PollTest(DashTest):
+class PollTest(UreportTest):
     def setUp(self):
         super(PollTest, self).setUp()
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
 
     def test_refresh_cache_view(self):
         refresh_cache_url = reverse('admins.org_refresh_cache', args=[self.uganda.pk])

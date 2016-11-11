@@ -9,9 +9,6 @@ class JobSourceTest(UreportJobsTest):
     def setUp(self):
         super(JobSourceTest, self).setUp()
 
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
-
         self.fb_source_nigeria = self.create_fb_job_source(self.nigeria, self.nigeria.name)
         self.fb_source_uganda = self.create_fb_job_source(self.uganda, self.uganda.name)
 

@@ -14,7 +14,7 @@ from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
 from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, \
     CACHE_ORG_FLOWS_KEY
-from ureport.tests import DashTest, MockTembaClient
+from ureport.tests import UreportTest, MockTembaClient
 from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
     get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
@@ -23,11 +23,11 @@ from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, GLOBAL_COUNT_CACHE_KEY
 
 
-class UtilsTest(DashTest):
+class UtilsTest(UreportTest):
 
     def setUp(self):
         super(UtilsTest, self).setUp()
-        self.org = self.create_org("burundi", self.admin)
+        self.org = self.create_org("burundi", pytz.timezone("Africa/Bujumbura"), self.admin)
 
         self.education = Category.objects.create(org=self.org,
                                                  name="Education",

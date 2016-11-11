@@ -3,7 +3,7 @@ import time
 from dash.orgs.models import Org
 from django.core.cache import cache
 from django_redis import get_redis_connection
-from djcelery.app import app
+from ureport.celery import app
 
 from dash.orgs.tasks import org_task
 from ureport.utils import fetch_flows, fetch_old_sites_count, update_poll_flow_data

@@ -130,8 +130,8 @@ SECRET_KEY = 'bangbangrootplaydeadn7#^+-u-#1wm=y3a$-#^jps5tihx5v_@-_(kxumq_$+$5r
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'hamlpy.template.loaders.HamlPyFilesystemLoader',
-    'hamlpy.template.loaders.HamlPyAppDirectoriesLoader',
+    'dash.utils.haml.HamlFilesystemLoader',
+    'dash.utils.haml.HamlAppDirectoriesLoader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
     
@@ -167,19 +167,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'ureport.urls'
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
-
-if 'test' in sys.argv:
-    CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
 
 from django.forms import Textarea
 
@@ -230,9 +217,6 @@ INSTALLED_APPS = (
     # mo-betta permission management
     'guardian',
 
-    # versioning of our data
-    'reversion',
-
     # the django admin
     'django.contrib.admin',
 
@@ -251,9 +235,6 @@ INSTALLED_APPS = (
 
     # smartmin users
     'smartmin.users',
-
-    # async tasks,
-    'djcelery',
 
     # dash apps
     'dash.orgs',
@@ -416,22 +397,34 @@ AUTHENTICATION_BACKENDS = (
 ANONYMOUS_USER_NAME = 'AnonymousUser'
 
 #-----------------------------------------------------------------------------------
-# Async tasks with django-celery
+# Redis Configuration
 #-----------------------------------------------------------------------------------
-
-import djcelery
-djcelery.setup_loader()
 
 # by default, celery doesn't have any timeout on our redis connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {'socket_timeout': 5}
-
-
-CELERY_RESULT_BACKEND = 'djcelery.backends.cache:CacheBackend'
 
 BROKER_BACKEND = 'redis'
 BROKER_HOST = 'localhost'
 BROKER_PORT = 6379
 BROKER_VHOST = '1'
+
+BROKER_URL = '%s://%s:%s/%s' % (BROKER_BACKEND, BROKER_HOST, BROKER_PORT, BROKER_VHOST)
+
+CELERY_RESULT_BACKEND = BROKER_URL
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': BROKER_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+if 'test' in sys.argv:
+    CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
 
 #-----------------------------------------------------------------------------------
 # Django-Nose config

@@ -3,16 +3,13 @@ from django.test import TestCase
 from dash.categories.models import Category
 from dash.categories.fields import CategoryChoiceField
 from ureport.news.models import NewsItem, Video
-from ureport.tests import DashTest
+from ureport.tests import UreportTest
 
 
-class NewsTest(DashTest):
+class NewsTest(UreportTest):
 
     def setUp(self):
         super(NewsTest, self).setUp()
-
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
 
         self.health_uganda = Category.objects.create(org=self.uganda,
                                                      name="Health",
@@ -203,12 +200,9 @@ class NewsTest(DashTest):
         self.assertEquals(updated_news.description,  'description updated')
         self.assertEquals(updated_news.link,  'http://updated.com')
 
-class VideoTest(DashTest):
+class VideoTest(UreportTest):
     def setUp(self):
         super(VideoTest, self).setUp()
-
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
 
         self.health_uganda = Category.objects.create(org=self.uganda,
                                                      name="Health",

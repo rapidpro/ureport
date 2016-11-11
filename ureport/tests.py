@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 
+import pytz
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.test import override_settings
@@ -9,6 +10,7 @@ from django.utils import timezone
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User
 from dash.orgs.middleware import SetOrgMiddleware
+from dash.test import DashTest
 from mock import Mock, patch
 from dash.orgs.models import Org
 from django.http.request import HttpRequest
@@ -94,18 +96,17 @@ class TestBackend(RapidProBackend):
 
 
 @override_settings(SITE_BACKEND='ureport.tests.TestBackend')
-class DashTest(SmartminTest):
+class UreportTest(SmartminTest, DashTest):
 
     def setUp(self):
         self.superuser = User.objects.create_superuser(username="super", email="super@user.com", password="super")
 
         self.admin = self.create_user("Administrator")
+        self.uganda = self.create_org('uganda', pytz.timezone('Africa/Kampala'), self.admin)
+        self.nigeria = self.create_org('nigeria', pytz.timezone('Africa/Lagos'), self.admin)
 
-    def create_org(self, subdomain, user):
+    def create_org(self, subdomain, timezone, user):
 
-        email = subdomain + "@user.com"
-        first_name = subdomain + "_First"
-        last_name = subdomain + "_Last"
         name = subdomain
 
         orgs = Org.objects.filter(subdomain=subdomain)
@@ -114,7 +115,7 @@ class DashTest(SmartminTest):
             org.name = name
             org.save()
         else:
-            org = Org.objects.create(subdomain=subdomain, name=name, created_by=user, modified_by=user)
+            org = super(UreportTest, self).create_org(name, timezone, subdomain)
 
         org.administrators.add(user)
 
@@ -136,7 +137,7 @@ class DashTest(SmartminTest):
         return poll
 
 
-class UreportJobsTest(DashTest):
+class UreportJobsTest(UreportTest):
     FB_SOURCE = 'http://www.facebook.com/%s'
     TW_SOURCE = 'http://twitter.com/%s'
     RSS_SOURCE = 'http://dummy.rss.com/%s.xml'
@@ -164,7 +165,7 @@ class UreportJobsTest(DashTest):
                                         modified_by=self.admin)
 
 
-class SetOrgMiddlewareTest(DashTest):
+class SetOrgMiddlewareTest(UreportTest):
 
     def setUp(self):
         super(SetOrgMiddlewareTest, self).setUp()
@@ -183,7 +184,7 @@ class SetOrgMiddlewareTest(DashTest):
 
     def test_process_request_with_org(self):
 
-        ug_org = self.create_org('uganda', self.admin)
+        ug_org = self.create_org('uganda', pytz.timezone('Africa/Kampala'), self.admin)
         ug_dash_url = ug_org.subdomain + ".ureport.io"
         self.request.get_host.return_value = ug_dash_url
 
@@ -210,7 +211,7 @@ class SetOrgMiddlewareTest(DashTest):
 
             self.request.resolver_match = resolver_mock
 
-            ug_org = self.create_org('uganda', self.admin)
+            ug_org = self.uganda
             ug_dash_url = ug_org.subdomain + ".ureport.io"
             self.request.get_host.return_value=ug_dash_url
 
@@ -224,7 +225,7 @@ class SetOrgMiddlewareTest(DashTest):
             self.assertEqual(self.request.org, None)
             self.assertEquals(self.request.user.get_org(), None)
 
-            rw_org = self.create_org('rwanda', self.admin)
+            rw_org = self.create_org('rwanda', pytz.timezone('Africa/Kigali'), self.admin)
             wrong_subdomain_url = "blabla.ureport.io"
             self.request.get_host.return_value=wrong_subdomain_url
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
