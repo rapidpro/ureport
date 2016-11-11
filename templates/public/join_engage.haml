@@ -84,7 +84,7 @@
 
                     %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
-                  %a.social-link.tweet-button{href:'https://twitter.com/intent/tweet?screen_name={{ org|config:"twitter_handle"}}'}
+                  %a.social-link.tweet-button{href:'https://twitter.com/intent/tweet?screen_name=#{ org|config:"twitter_handle"}'}
                     - trans "Tweet to"
                     @{{ org|config:"twitter_handle"}}
                     {{ org|org_arrow_link }}
