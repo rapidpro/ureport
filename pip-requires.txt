@@ -1,6 +1,6 @@
--e git+https://github.com/nyaruka/smartmin.git#egg=smartmin
+smartmin
 Django<1.9
--e git+https://github.com/rapidpro/dash.git#egg=dash
+rapidpro-dash
 celery
 coverage
 django-compressor

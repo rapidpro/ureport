@@ -7,7 +7,7 @@ from celery.utils.log import get_task_logger
 logger = get_task_logger(__name__)
 
 
-@org_task('contact-pull')
+@org_task('contact-pull', 1800)
 def pull_contacts(org, since, until):
     """
     Fetches updated contacts from RapidPro and updates local contacts accordingly
