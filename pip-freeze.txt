@@ -9,7 +9,7 @@ coverage==3.7.1
 rapidpro-dash==1.0.2
 dj-database-url==0.3.0
 Django==1.9.11
-django-appconf==1.0.1
+django-appconf==1.0.2
 django-compressor==2.1
 django-countries==3.3
 django-debug-toolbar==1.6
