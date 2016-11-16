@@ -790,10 +790,11 @@ class PollQuestion(SmartModel):
                         unset_count = question_results.get(unset_count_key, 0)
 
                         for categorie_label in categories_label:
-                            category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
-                            category_count = question_results.get(category_count_key, 0)
-                            set_count += category_count
-                            categories.append(dict(count=category_count, label=categorie_label))
+                            if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
+                                category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
+                                category_count = question_results.get(category_count_key, 0)
+                                set_count += category_count
+                                categories.append(dict(count=category_count, label=categorie_label))
 
                         results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
                                             boundary=osm_id, label=boundary.get('name'),
@@ -817,7 +818,7 @@ class PollQuestion(SmartModel):
 
                         categories_count = dict()
                         for categorie_label in categories_label:
-                            if categorie_label.lower() != 'other':
+                            if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 categories_count[categorie_label.lower()] = 0
 
                         for result_key, result_count in born_results.iteritems():
@@ -828,7 +829,7 @@ class PollQuestion(SmartModel):
                                     unset_count += result_count
 
                                 for categorie_label in categories_label:
-                                    if categorie_label.lower() != 'other':
+                                    if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                         if result_key.startswith('ruleset:%s:category:%s:' % (self.ruleset_uuid, categorie_label.lower())):
                                             categories_count[categorie_label.lower()] += result_count
 
@@ -854,7 +855,7 @@ class PollQuestion(SmartModel):
 
                         for categorie_label in categories_label:
                             category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), 'gender', gender)
-                            if categorie_label.lower() != 'other':
+                            if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = question_results.get(category_count_key, 0)
                                 set_count += category_count
                                 categories.append(dict(count=category_count, label=categorie_label))
@@ -866,7 +867,7 @@ class PollQuestion(SmartModel):
                 categories = []
                 for categorie_label in categories_label:
                     category_count_key = "ruleset:%s:category:%s" % (self.ruleset_uuid, categorie_label.lower())
-                    if categorie_label.lower() != 'other':
+                    if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                         category_count = question_results.get(category_count_key, 0)
                         categories.append(dict(count=category_count, label=categorie_label))
 
@@ -935,6 +936,8 @@ class PollQuestion(SmartModel):
 
 
 class PollResponseCategory(models.Model):
+    IGNORED_CATEGORY_RULES = ['other', 'no response']
+
     question = models.ForeignKey(PollQuestion, related_name='response_categories')
 
     rule_uuid = models.CharField(max_length=36, help_text=_("The Rule this response category is based on"))
