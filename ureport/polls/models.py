@@ -1002,6 +1002,10 @@ class PollResult(models.Model):
         ward = ''
         born = ''
         gender = ''
+        text = ''
+
+        if self.text and self.text != "None":
+            text = self.text
 
         if self.ruleset:
             ruleset = self.ruleset.lower()
@@ -1026,9 +1030,10 @@ class PollResult(models.Model):
 
         generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
 
-        if category:
+        if category or text:
             generated_counters['ruleset:%s:total-ruleset-responded' % ruleset] = 1
 
+        if category:
             generated_counters['ruleset:%s:category:%s' % (ruleset, category)] = 1
 
         if category and born:
