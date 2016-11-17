@@ -412,8 +412,8 @@ class Poll(SmartModel):
         return '---'
 
     def get_trending_words(self):
-        key = 'trending_words:%d' % self.pk
-        trending_words = cache.get(key)
+        cache_key = 'trending_words:%d' % self.pk
+        trending_words = cache.get(cache_key)
 
         if not trending_words:
             words = dict()
@@ -432,9 +432,9 @@ class Poll(SmartModel):
             tuples = [(k, v) for k, v in words.iteritems()]
             tuples.sort(key=lambda t: t[1])
 
-            trending_words =  [k for k, v in tuples]
+            trending_words = [k for k, v in tuples]
 
-            cache.set(key, trending_words, 3600)
+            cache.set(cache_key, trending_words, 3600)
 
         return trending_words
 
