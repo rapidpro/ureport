@@ -1801,18 +1801,18 @@ class PollResultsTest(UreportTest):
         self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
         self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
 
-        poll_result3 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+        poll_result4 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
                                                  ruleset='other-uuid',
                                                  contact='contact-uuid', category='No Response', text='Some text',
                                                  completed=False,
                                                  date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA')
 
-        gen_counters = poll_result3.generate_counters()
+        gen_counters = poll_result4.generate_counters()
 
-        ruleset = poll_result3.ruleset.lower()
-        state = poll_result3.state.upper()
-        district = poll_result3.district.upper()
-        ward = poll_result3.ward.upper()
+        ruleset = poll_result4.ruleset.lower()
+        state = poll_result4.state.upper()
+        district = poll_result4.district.upper()
+        ward = poll_result4.ward.upper()
 
         self.assertEqual(len(gen_counters.keys()), 5)
 
