@@ -907,7 +907,7 @@ class PollQuestion(SmartModel):
         return PollResultsCounter.get_question_results(self)
 
     def is_open_ended(self):
-        return self.response_categories.filter(is_active=True).count() == 1
+        return self.response_categories.filter(is_active=True).exclude(category__icontains='no response').count() == 1
 
     def get_responded(self):
         results = self.get_question_results()
@@ -1006,7 +1006,7 @@ class PollResult(models.Model):
         if self.ruleset:
             ruleset = self.ruleset.lower()
 
-        if self.category:
+        if self.category and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
             category = self.category.lower()
 
         if self.state:
