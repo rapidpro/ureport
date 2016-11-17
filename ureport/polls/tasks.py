@@ -13,7 +13,7 @@ from ureport.utils import populate_age_and_gender_poll_results
 logger = logging.getLogger(__name__)
 
 
-@org_task('backfill-poll-results')
+@org_task('backfill-poll-results', 60 * 60 * 3)
 def backfill_poll_results(org, since, until):
     from .models import Poll, PollResult
 
@@ -32,7 +32,7 @@ def backfill_poll_results(org, since, until):
     return results_log
 
 
-@org_task('results-pull-main-poll')
+@org_task('results-pull-main-poll', 60 * 30)
 def pull_results_main_poll(org, since, until):
     from .models import Poll
 
@@ -51,7 +51,7 @@ def pull_results_main_poll(org, since, until):
     return results_log
 
 
-@org_task('results-pull-brick-polls')
+@org_task('results-pull-brick-polls', 60 * 60 * 24)
 def pull_results_brick_polls(org, since, until):
     from .models import Poll
 
@@ -76,7 +76,7 @@ def pull_results_brick_polls(org, since, until):
     return results_log
 
 
-@org_task('results-pull-other-polls')
+@org_task('results-pull-other-polls', 60 * 60 * 24)
 def pull_results_other_polls(org, since, until):
     from .models import Poll
 
@@ -96,7 +96,7 @@ def pull_results_other_polls(org, since, until):
     return results_log
 
 
-@org_task('results-pull-recent-other-polls')
+@org_task('results-pull-recent-other-polls', 60 * 60 * 6)
 def pull_results_recent_other_polls(org, since, until):
     from .models import Poll
 
