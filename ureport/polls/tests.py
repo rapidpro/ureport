@@ -1379,6 +1379,9 @@ class PollQuestionTest(UreportTest):
         self.uganda.set_config("district_label", "District")
         self.uganda.set_config("ward_label", "Ward")
 
+        # no response category are ignored
+        PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-4', 'No Response')
+
         self.assertFalse(poll_question1.is_open_ended())
 
         PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-1', 'Yes')
@@ -1394,8 +1397,8 @@ class PollQuestionTest(UreportTest):
 
         self.assertFalse(poll_question1.is_open_ended())
 
+        # should be ignored in calculated results
         PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-3', 'Other')
-        PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-4', 'No Response')
 
         now = timezone.now()
 
@@ -1777,6 +1780,27 @@ class PollResultsTest(UreportTest):
         self.assertTrue('ruleset:%s:category:%s:district:%s' % (ruleset, category, district) in gen_counters.keys())
 
         self.assertTrue('ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward) in gen_counters.keys())
+
+        poll_result3 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                                 ruleset='other-uuid',
+                                                 contact='contact-uuid', category='No Response', text='Nah', completed=False,
+                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA')
+
+        gen_counters = poll_result3.generate_counters()
+
+        ruleset = poll_result3.ruleset.lower()
+        category = ''  # should have been ignored no response
+        state = poll_result3.state.upper()
+        district = poll_result3.district.upper()
+        ward = poll_result3.ward.upper()
+
+        self.assertEqual(len(gen_counters.keys()), 4)
+
+        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
+        self.assertFalse('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())  # no response ignored
+        self.assertTrue('ruleset:%s:nocategory:state:%s' % (ruleset, state) in gen_counters.keys())
+        self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
+        self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
 
 
 class PollsTasksTest(UreportTest):
