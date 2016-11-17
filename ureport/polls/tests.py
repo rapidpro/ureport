@@ -1394,6 +1394,9 @@ class PollQuestionTest(UreportTest):
 
         self.assertFalse(poll_question1.is_open_ended())
 
+        PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-3', 'Other')
+        PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-4', 'No Response')
+
         now = timezone.now()
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
@@ -1463,7 +1466,6 @@ class PollQuestionTest(UreportTest):
                 results = poll_question1.calculate_results(dict(location='State'))
                 # should not have used the path with custom sql
                 self.assertFalse(mock_get_dict_from_cursor.called)
-
 
         question_results = dict()
         question_results['ruleset:%s:total-ruleset-responded' % poll_question1.ruleset_uuid] = 3462
