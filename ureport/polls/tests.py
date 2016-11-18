@@ -1822,6 +1822,27 @@ class PollResultsTest(UreportTest):
         self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
         self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
 
+        poll_result5 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                                 ruleset='other-uuid',
+                                                 contact='contact-uuid', category='Other', text='Some suprise',
+                                                 completed=False,
+                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA')
+
+        gen_counters = poll_result5.generate_counters()
+
+        ruleset = poll_result5.ruleset.lower()
+        state = poll_result5.state.upper()
+        district = poll_result5.district.upper()
+        ward = poll_result5.ward.upper()
+
+        self.assertEqual(len(gen_counters.keys()), 4)
+
+        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
+        self.assertFalse('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())  # Other ignored
+        self.assertTrue('ruleset:%s:nocategory:state:%s' % (ruleset, state) in gen_counters.keys())
+        self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
+        self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
+
 
 class PollsTasksTest(UreportTest):
     def setUp(self):
