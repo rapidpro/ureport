@@ -1,16 +1,13 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from ureport.assets.models import Image
-from ureport.tests import DashTest
+from ureport.tests import UreportTest
 
 
-class ImageTest(DashTest):
+class ImageTest(UreportTest):
 
     def setUp(self):
         super(ImageTest, self).setUp()
-
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
 
     def clear_uploads(self):
         import os

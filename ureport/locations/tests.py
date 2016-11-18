@@ -1,14 +1,13 @@
 import json
-from ureport.tests import DashTest, MockTembaClient
+from ureport.tests import UreportTest, MockTembaClient
 from mock import patch, Mock
 from temba_client.v1.types import Boundary as TembaBoundary, Geometry as TembaGeometry
 from .models import Boundary
 
 
-class LocationTest(DashTest):
+class LocationTest(UreportTest):
     def setUp(self):
         super(LocationTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
 
     def test_kwargs_from_temba(self):
         geometry = TembaGeometry.create(type='MultiPolygon', coordinates=['COORDINATES'])

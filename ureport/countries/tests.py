@@ -1,13 +1,12 @@
 from django.core.urlresolvers import reverse
 
 from ureport.countries.models import CountryAlias
-from ureport.tests import DashTest
+from ureport.tests import UreportTest
 
 
-class CountriesTest(DashTest):
+class CountriesTest(UreportTest):
     def setUp(self):
         super(CountriesTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
 
     def test_country_alias_get_or_create(self):
         self.assertFalse(CountryAlias.objects.all())

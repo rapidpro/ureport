@@ -1,15 +1,13 @@
--e git+https://github.com/nyaruka/smartmin.git#egg=smartmin
-Django==1.8.4
--e git+https://github.com/rapidpro/dash.git#egg=dash
+smartmin
+Django<1.9
+rapidpro-dash
 celery
 coverage
-django-celery
 django-compressor
 django-debug-toolbar
 django-digest
 django-guardian
 django-nose
-django-reversion
 django-rosetta
 django-storages
 django-rest-swagger

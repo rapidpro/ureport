@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from collections import OrderedDict
 import json
 from random import randint
+
+import six
 from django.utils import timezone
 from dash.categories.models import Category
 from dash.orgs.models import Org
@@ -169,7 +171,7 @@ class UreportAPITests(APITestCase):
                                                  language=org.language,
                                                  subdomain=org.subdomain,
                                                  domain=org.domain,
-                                                 timezone=org.timezone))
+                                                 timezone=six.text_type(org.timezone)))
 
         self.assertEquals(gender_stats, dict(female_count=0, female_percentage="---",
                                              male_count=0, male_percentage="---"))

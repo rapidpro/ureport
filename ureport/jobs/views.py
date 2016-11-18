@@ -1,11 +1,7 @@
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
-from django.core.urlresolvers import reverse
-from django.forms import forms
-from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
-from smartmin.views import SmartTemplateView, SmartCRUDL, SmartCreateView, SmartUpdateView, SmartListView
+from smartmin.views import SmartCRUDL, SmartCreateView, SmartUpdateView, SmartListView
 from ureport.jobs.models import JobSource
-
 
 
 class JobSourceCRUDL(SmartCRUDL):
@@ -17,7 +13,7 @@ class JobSourceCRUDL(SmartCRUDL):
         success_message = _("Your job source has been added successfully")
 
         def derive_fields(self):
-            source_type = self.request.REQUEST.get('source_type', None)
+            source_type = self.request.GET.get('source_type', None)
             if source_type:
                 source_type = source_type.strip().upper()
 
@@ -29,12 +25,11 @@ class JobSourceCRUDL(SmartCRUDL):
 
             return ('source_type',)
 
-
         def pre_save(self, obj):
             obj = super(JobSourceCRUDL.Create, self).pre_save(obj)
             obj.org = self.request.org
 
-            source_type = self.request.REQUEST.get('source_type')
+            source_type = self.request.GET.get('source_type')
             obj.source_type = source_type.strip().upper()
 
             return obj

@@ -22,14 +22,13 @@ from ureport.backend.rapidpro import FieldSyncer, BoundarySyncer, ContactSyncer,
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollResult, Poll, PollQuestion
-from ureport.tests import DashTest
+from ureport.tests import UreportTest
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 
-class FieldSyncerTest(DashTest):
+class FieldSyncerTest(UreportTest):
     def setUp(self):
         super(FieldSyncerTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.syncer = FieldSyncer()
 
     def test_local_kwargs(self):
@@ -55,11 +54,10 @@ class FieldSyncerTest(DashTest):
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         
 
-class BoundarySyncerTest(DashTest):
+class BoundarySyncerTest(UreportTest):
 
     def setUp(self):
         super(BoundarySyncerTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.syncer = BoundarySyncer()
 
     def test_local_kwargs(self):
@@ -121,10 +119,9 @@ class BoundarySyncerTest(DashTest):
         self.assertFalse(Boundary.objects.filter(pk=local.pk))
 
 
-class ContactSyncerTest(DashTest):
+class ContactSyncerTest(UreportTest):
     def setUp(self):
         super(ContactSyncerTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.syncer = ContactSyncer()
         self.nigeria.set_config('reporter_group', "Ureporters")
         self.nigeria.set_config('registration_label', "Registration Date")
@@ -270,11 +267,10 @@ class ContactSyncerTest(DashTest):
                           'ward': ''})
 
 
-class RapidProBackendTest(DashTest):
+class RapidProBackendTest(UreportTest):
     def setUp(self):
         super(RapidProBackendTest, self).setUp()
         self.backend = RapidProBackend()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",
                                                          created_by=self.admin,
@@ -657,10 +653,11 @@ class RapidProBackendTest(DashTest):
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
 
+    @patch('redis.client.StrictRedis.lock')
     @patch('dash.orgs.models.TembaClient2.get_runs')
     @patch('django.utils.timezone.now')
     @patch('django.core.cache.cache.get')
-    def test_pull_results(self, mock_cache_get, mock_timezone_now, mock_get_runs):
+    def test_pull_results(self, mock_cache_get, mock_timezone_now, mock_get_runs, mock_redis_lock):
         mock_cache_get.return_value = None
 
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
@@ -694,6 +691,8 @@ class RapidProBackendTest(DashTest):
         self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
                           num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 0, 0, 1))
         mock_get_runs.assert_called_with(flow='flow-uuid', after=None, before=datetime_to_json_date(now))
+        mock_redis_lock.assert_called_once_with(Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid),
+                                                timeout=1800)
 
         poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
         self.assertEqual(poll_result.state, 'R-LAGOS')
@@ -898,14 +897,13 @@ class RapidProBackendTest(DashTest):
         self.assertEqual(poll_result.ward, 'R-IKEJA')
 
 
-class PerfTest(DashTest):
+class PerfTest(UreportTest):
 
     def setUp(self):
         super(PerfTest, self).setUp()
 
         self.backend = RapidProBackend()
 
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",
                                                          created_by=self.admin,

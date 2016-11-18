@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 import json
+
+import pytz
 from dash.dashblocks.models import DashBlock, DashBlockType
 import mock
 from urllib import urlencode, quote
@@ -22,14 +24,14 @@ from ureport.countries.models import CountryAlias
 from ureport.locations.models import Boundary
 from ureport.news.models import Video, NewsItem
 from ureport.polls.models import Poll, PollQuestion
-from ureport.tests import DashTest, UreportJobsTest, MockTembaClient
+from ureport.tests import UreportTest, UreportJobsTest, MockTembaClient
 
 
-class PublicTest(DashTest):
+class PublicTest(UreportTest):
     def setUp(self):
         super(PublicTest, self).setUp()
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
+        self.uganda = self.create_org('uganda', pytz.timezone('Africa/Kampala'),  self.admin)
+        self.nigeria = self.create_org('nigeria', pytz.timezone('Africa/Lagos'), self.admin)
 
         self.health_uganda = Category.objects.create(org=self.uganda,
                                                      name="Health",
@@ -76,8 +78,8 @@ class PublicTest(DashTest):
             self.assertFalse(org['name'].lower() == 'nigeria')
 
         # add two orgs nigeria and rwanda
-        self.nigeria = self.create_org('nigeria', self.admin)
-        self.rwanda = self.create_org('rwanda', self.admin)
+        self.nigeria = self.create_org('nigeria', pytz.timezone('Africa/Lagos'), self.admin)
+        self.rwanda = self.create_org('rwanda', pytz.timezone('Africa/Kampala'), self.admin)
 
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
@@ -1199,8 +1201,6 @@ class PublicTest(DashTest):
 class JobsTest(UreportJobsTest):
     def setUp(self):
         super(JobsTest, self).setUp()
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
 
     def test_jobs(self):
         fb_source_nigeria = self.create_fb_job_source(self.nigeria, self.nigeria.name)
@@ -1250,11 +1250,10 @@ class JobsTest(UreportJobsTest):
         self.assertFalse(response.context['job_sources'])
 
 
-class CountriesTest(DashTest):
+class CountriesTest(UreportTest):
 
     def setUp(self):
         super(CountriesTest, self).setUp()
-        self.uganda = self.create_org('uganda', self.admin)
 
     def test_countries(self):
         countries_url = reverse('public.countries')

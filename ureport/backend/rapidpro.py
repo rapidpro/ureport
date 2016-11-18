@@ -298,7 +298,7 @@ class RapidProBackend(BaseBackend):
         if r.get(key):
             print "Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk)
         else:
-            with r.lock(key):
+            with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
                 client = self._get_client(org, 2)
 
                 questions_uuids = poll.get_question_uuids()

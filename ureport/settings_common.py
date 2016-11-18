@@ -8,11 +8,7 @@ from hamlpy import templatize
 #-----------------------------------------------------------------------------------
 TESTING = sys.argv[1:2] == ['test']
 
-# Django settings for tns_glass project.
-THUMBNAIL_DEBUG = False
-
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Nyaruka', 'code@nyaruka.com'),
@@ -65,7 +61,7 @@ LANGUAGE_CODE = 'en'
 
 # Available languages for translation
 LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"),
-             ('uk', "Ukrainian"), ('my', "Burmese"), ('id', "Indonesian"))
+             ('pt-br', "Brazilian Portuguese"), ('uk', "Ukrainian"), ('my', "Burmese"), ('id', "Indonesian"))
 DEFAULT_LANGUAGE = "en"
 RTL_LANGUAGES = ['ar']
 
@@ -80,21 +76,6 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
-
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
-
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/sitestatic/'
@@ -104,13 +85,6 @@ COMPRESS_URL = '/sitestatic/'
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/sitestatic/admin/'
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -128,34 +102,6 @@ COMPRESS_PRECOMPILERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'bangbangrootplaydeadn7#^+-u-#1wm=y3a$-#^jps5tihx5v_@-_(kxumq_$+$5r)bxo'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'hamlpy.template.loaders.HamlPyFilesystemLoader',
-    'hamlpy.template.loaders.HamlPyAppDirectoriesLoader',
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    
-#     'django.template.loaders.eggs.Loader',
-)
-
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',    
-    'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.request',
-    'dash.orgs.context_processors.user_group_perms_processor',
-    'dash.orgs.context_processors.set_org_processor',
-    'ureport.assets.context_processors.set_assets_processor',
-    'ureport.public.context_processors.set_has_better_domain',
-    'ureport.public.context_processors.set_is_iorg',
-    'ureport.public.context_processors.set_is_rtl_org',
-    'ureport.public.context_processors.set_story_widget_url',
-)
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -167,19 +113,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'ureport.urls'
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        }
-    }
-}
-
-if 'test' in sys.argv:
-    CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
 
 from django.forms import Textarea
 
@@ -230,9 +163,6 @@ INSTALLED_APPS = (
     # mo-betta permission management
     'guardian',
 
-    # versioning of our data
-    'reversion',
-
     # the django admin
     'django.contrib.admin',
 
@@ -251,9 +181,6 @@ INSTALLED_APPS = (
 
     # smartmin users
     'smartmin.users',
-
-    # async tasks,
-    'djcelery',
 
     # dash apps
     'dash.orgs',
@@ -322,14 +249,52 @@ PROJECT_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)))
 RESOURCES_DIR = os.path.join(PROJECT_DIR, '../resources')
 
 LOCALE_PATHS = (os.path.join(PROJECT_DIR, '../locale'),)
-RESOURCES_DIR = os.path.join(PROJECT_DIR, '../resources')
 FIXTURE_DIRS = (os.path.join(PROJECT_DIR, '../fixtures'),)
 TESTFILES_DIR = os.path.join(PROJECT_DIR, '../testfiles')
-TEMPLATE_DIRS = (os.path.join(PROJECT_DIR, '../templates'),)
 STATICFILES_DIRS = (os.path.join(PROJECT_DIR, '../static'), os.path.join(PROJECT_DIR, '../media'), )
 STATIC_ROOT = os.path.join(PROJECT_DIR, '../sitestatic')
 MEDIA_ROOT = os.path.join(PROJECT_DIR, '../media')
 MEDIA_URL = "/media/"
+
+
+# -----------------------------------------------------------------------------------
+# Templates Configuration
+# -----------------------------------------------------------------------------------
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(PROJECT_DIR, '../templates')],
+
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.static',
+                'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
+                'dash.orgs.context_processors.user_group_perms_processor',
+                'dash.orgs.context_processors.set_org_processor',
+                'ureport.assets.context_processors.set_assets_processor',
+                'ureport.public.context_processors.set_has_better_domain',
+                'ureport.public.context_processors.set_is_iorg',
+                'ureport.public.context_processors.set_is_rtl_org',
+                'ureport.public.context_processors.set_story_widget_url',
+            ],
+            'loaders': [
+                'dash.utils.haml.HamlFilesystemLoader',
+                'dash.utils.haml.HamlAppDirectoriesLoader',
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+
+            ],
+            'debug': False if TESTING else DEBUG
+        }
+    }
+]
+
 
 #-----------------------------------------------------------------------------------
 # Permission Management
@@ -416,22 +381,34 @@ AUTHENTICATION_BACKENDS = (
 ANONYMOUS_USER_NAME = 'AnonymousUser'
 
 #-----------------------------------------------------------------------------------
-# Async tasks with django-celery
+# Redis Configuration
 #-----------------------------------------------------------------------------------
-
-import djcelery
-djcelery.setup_loader()
 
 # by default, celery doesn't have any timeout on our redis connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {'socket_timeout': 5}
-
-
-CELERY_RESULT_BACKEND = 'djcelery.backends.cache:CacheBackend'
 
 BROKER_BACKEND = 'redis'
 BROKER_HOST = 'localhost'
 BROKER_PORT = 6379
 BROKER_VHOST = '1'
+
+BROKER_URL = '%s://%s:%s/%s' % (BROKER_BACKEND, BROKER_HOST, BROKER_PORT, BROKER_VHOST)
+
+CELERY_RESULT_BACKEND = BROKER_URL
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': BROKER_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+if 'test' in sys.argv:
+    CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
 
 #-----------------------------------------------------------------------------------
 # Django-Nose config

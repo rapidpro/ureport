@@ -3,6 +3,7 @@ import json
 from datetime import timedelta, datetime
 
 import pytz
+import six
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpRequest
@@ -29,16 +30,13 @@ from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pul
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender, update_or_create_questions
 from ureport.polls.templatetags.ureport import question_segmented_results
-from ureport.tests import DashTest, MockTembaClient
+from ureport.tests import UreportTest, MockTembaClient
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 
-class PollTest(DashTest):
+class PollTest(UreportTest):
     def setUp(self):
         super(PollTest, self).setUp()
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
-
         self.health_uganda = Category.objects.create(org=self.uganda,
                                                      name="Health",
                                                      created_by=self.admin,
@@ -186,7 +184,7 @@ class PollTest(DashTest):
 
         mock_poll_update_or_create_questions_task.side_effect = None
 
-        import_params = dict(org_id=self.uganda.id, timezone=self.uganda.timezone, original_filename="polls.csv")
+        import_params = dict(org_id=self.uganda.id, timezone=six.text_type(self.uganda.timezone), original_filename="polls.csv")
 
         task = ImportTask.objects.create(created_by=self.superuser, modified_by=self.superuser,
                                          csv_file='test_imports/polls.csv',
@@ -569,8 +567,8 @@ class PollTest(DashTest):
             with patch('ureport.polls.models.PollQuestion.is_open_ended') as mock_open_ended:
                 mock_open_ended.return_value = True
 
-                self.assertEquals(poll1.most_responded_regions(), [])
-                self.assertFalse(mock.called)
+                self.assertEquals(poll1.most_responded_regions(), results)
+                mock.assert_called_once_with(segment=dict(location="State"))
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = None
@@ -846,7 +844,8 @@ class PollTest(DashTest):
             poll = Poll.objects.get(flow_uuid='uuid-1')
             self.assertEquals(poll.org, self.uganda)
             self.assertEquals(poll.title, 'Poll 1')
-            self.assertEqual(poll.poll_date, yesterday.replace(microsecond=0))
+            self.assertEqual(poll.poll_date.astimezone(self.uganda.timezone).replace(tzinfo=pytz.UTC),
+                             yesterday.replace(microsecond=0))
 
             self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
 
@@ -1345,12 +1344,9 @@ class PollTest(DashTest):
         mock_pull_results.assert_called_once()
 
 
-class PollQuestionTest(DashTest):
+class PollQuestionTest(UreportTest):
     def setUp(self):
         super(PollQuestionTest, self).setUp()
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
-
         self.health_uganda = Category.objects.create(org=self.uganda,
                                                      name="Health",
                                                      created_by=self.admin,
@@ -1383,6 +1379,9 @@ class PollQuestionTest(DashTest):
         self.uganda.set_config("district_label", "District")
         self.uganda.set_config("ward_label", "Ward")
 
+        # no response category are ignored
+        PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-4', 'No Response')
+
         self.assertFalse(poll_question1.is_open_ended())
 
         PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-1', 'Yes')
@@ -1397,6 +1396,9 @@ class PollQuestionTest(DashTest):
         PollResponseCategory.objects.filter(category='No').update(is_active=True)
 
         self.assertFalse(poll_question1.is_open_ended())
+
+        # should be ignored in calculated results
+        PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-3', 'Other')
 
         now = timezone.now()
 
@@ -1467,7 +1469,6 @@ class PollQuestionTest(DashTest):
                 results = poll_question1.calculate_results(dict(location='State'))
                 # should not have used the path with custom sql
                 self.assertFalse(mock_get_dict_from_cursor.called)
-
 
         question_results = dict()
         question_results['ruleset:%s:total-ruleset-responded' % poll_question1.ruleset_uuid] = 3462
@@ -1593,7 +1594,7 @@ class PollQuestionTest(DashTest):
                                            ])
 
     def test_tasks(self):
-        self.org = self.create_org("burundi", self.admin)
+        self.org = self.create_org("burundi", pytz.timezone('Africa/Bujumbura'), self.admin)
 
         self.education = Category.objects.create(org=self.org,
                                                  name="Education",
@@ -1655,10 +1656,9 @@ class PollQuestionTest(DashTest):
                 self.assertEqual(mock_rebuild_counts.call_count, Poll.objects.filter(org=self.nigeria).count())
 
 
-class PollResultsTest(DashTest):
+class PollResultsTest(UreportTest):
     def setUp(self):
         super(PollResultsTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.nigeria.set_config('reporter_group', "Ureporters")
 
         self.education_nigeria = Category.objects.create(org=self.nigeria,
@@ -1781,11 +1781,51 @@ class PollResultsTest(DashTest):
 
         self.assertTrue('ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward) in gen_counters.keys())
 
+        poll_result3 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                                 ruleset='other-uuid',
+                                                 contact='contact-uuid', category='No Response', text='None', completed=False,
+                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA')
 
-class PollsTasksTest(DashTest):
+        gen_counters = poll_result3.generate_counters()
+
+        ruleset = poll_result3.ruleset.lower()
+        state = poll_result3.state.upper()
+        district = poll_result3.district.upper()
+        ward = poll_result3.ward.upper()
+
+        self.assertEqual(len(gen_counters.keys()), 4)
+
+        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
+        self.assertFalse('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())  # no response ignored
+        self.assertTrue('ruleset:%s:nocategory:state:%s' % (ruleset, state) in gen_counters.keys())
+        self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
+        self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
+
+        poll_result4 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
+                                                 ruleset='other-uuid',
+                                                 contact='contact-uuid', category='No Response', text='Some text',
+                                                 completed=False,
+                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA')
+
+        gen_counters = poll_result4.generate_counters()
+
+        ruleset = poll_result4.ruleset.lower()
+        state = poll_result4.state.upper()
+        district = poll_result4.district.upper()
+        ward = poll_result4.ward.upper()
+
+        self.assertEqual(len(gen_counters.keys()), 5)
+
+        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
+        self.assertTrue('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())  # not ignored by text
+        self.assertTrue('ruleset:%s:nocategory:state:%s' % (ruleset, state) in gen_counters.keys())
+        self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
+        self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
+
+
+class PollsTasksTest(UreportTest):
     def setUp(self):
         super(PollsTasksTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",
                                                          created_by=self.admin,

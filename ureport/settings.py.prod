@@ -3,7 +3,6 @@ from settings_common import *
 import os
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
 COMPRESS_ENABLED = True
 
 
@@ -82,7 +81,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'reversion.middleware.RevisionMiddleware',
     'smartmin.middleware.AjaxRedirect',
     'django.middleware.locale.LocaleMiddleware',
     'dash.orgs.middleware.SetOrgMiddleware',
@@ -151,14 +149,22 @@ COMPRESS_OFFLINE = True
 COMPRESS_OFFLINE_CONTEXT = dict(STATIC_URL=STATIC_URL, base_template='frame.html', debug=False, testing=False)
 
 REDIS_HOST = 'redis-internal.ureport.in'
+
+BROKER_BACKEND = 'redis'
 BROKER_HOST = REDIS_HOST
+BROKER_PORT = 6379
+BROKER_VHOST = '1'
+
+BROKER_URL = '%s://%s:%s/%s' % (BROKER_BACKEND, BROKER_HOST, BROKER_PORT, BROKER_VHOST)
 
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://%s:6379/1' % REDIS_HOST,
+        'LOCATION': BROKER_URL,
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
+
+CELERY_RESULT_BACKEND = BROKER_URL

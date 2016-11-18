@@ -11,15 +11,14 @@ import pytz
 from ureport.contacts.models import ContactField, Contact, ReportersCounter
 from ureport.contacts.tasks import pull_contacts
 from ureport.locations.models import Boundary
-from ureport.tests import DashTest, TembaContactField, MockTembaClient, TembaContact
+from ureport.tests import UreportTest, TembaContactField, MockTembaClient, TembaContact
 from temba_client.v1.types import Group as TembaGroup
 from ureport.utils import json_date_to_datetime
 
 
-class ContactFieldTest(DashTest):
+class ContactFieldTest(UreportTest):
     def setUp(self):
         super(ContactFieldTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
 
     def test_kwargs_from_temba(self):
         temba_contact_field = TembaContactField.create(key='foo', label='Bar', value_type='T')
@@ -43,10 +42,9 @@ class ContactFieldTest(DashTest):
         self.assertEqual(field.pk, updated_field.pk)
 
 
-class ContactTest(DashTest):
+class ContactTest(UreportTest):
     def setUp(self):
         super(ContactTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
         self.nigeria.set_config('reporter_group', "Ureporters")
         self.nigeria.set_config('registration_label', "Registration Date")
         self.nigeria.set_config('state_label', "State")
@@ -261,10 +259,9 @@ class ContactTest(DashTest):
         self.assertTrue(counter_type_a.count, 5)
 
 
-class ContactsTasksTest(DashTest):
+class ContactsTasksTest(UreportTest):
     def setUp(self):
         super(ContactsTasksTest, self).setUp()
-        self.nigeria = self.create_org('nigeria', self.admin)
 
     @patch('ureport.contacts.models.ReportersCounter.squash_counts')
     @patch('ureport.tests.TestBackend.pull_fields')
