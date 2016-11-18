@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import logging
 import pytz
+from datetime import timedelta
 from django.contrib.auth.models import User
 from django.db import models, connection
 from django.db.models import Sum, Count
@@ -97,6 +98,8 @@ class Poll(SmartModel):
 
     POLL_MOST_RESPONDED_REGIONS_CACHE_KEY = 'most-responded-regions:%s'
 
+    POLL_SYNC_LOCK_TIMEOUT = 60 * 30
+
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
     poll_date = models.DateTimeField(help_text=_("The date to display for this poll. "
@@ -142,13 +145,14 @@ class Poll(SmartModel):
         backend = get_backend()
         poll = Poll.objects.get(pk=poll_id)
 
-        created, updated, ignored = backend.pull_results(poll, None, None)
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
 
         poll.rebuild_poll_results_counts()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
-        return created, updated, ignored
+        return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
 
     def get_pull_cached_params(self):
 
@@ -276,6 +280,9 @@ class Poll(SmartModel):
 
                 print "Poll responses counts for poll #%d on org #%d are %s responded out of %s polled" % (poll_id, org_id, self.responded_runs(), self.runs())
 
+    def get_question_uuids(self):
+        return self.questions.values_list('ruleset_uuid', flat=True)
+
     @classmethod
     def get_public_polls(cls, org):
         return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True)
@@ -334,6 +341,15 @@ class Poll(SmartModel):
 
         return other_polls
 
+    @classmethod
+    def get_recent_other_polls(cls, org):
+        now = timezone.now()
+        recent_window = now - timedelta(days=7)
+
+        recent_other_polls = Poll.get_other_polls(org).exclude(created_on__lte=recent_window).order_by('-created_on')
+
+        return recent_other_polls
+
     def get_flow(self):
         """
         Returns the underlying flow for this poll
@@ -375,14 +391,14 @@ class Poll(SmartModel):
 
     def most_responded_regions(self):
         # get our first question
-        question = self.get_first_question()
-        if question:
+        top_question = self.get_questions().first()
+        if top_question:
             # do we already have a cached set
-            cached = cache.get(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % question.ruleset_uuid)
+            cached = cache.get(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % top_question.ruleset_uuid)
             if cached:
                 return cached
 
-            return question.get_most_responded_regions()
+            return top_question.get_most_responded_regions()
 
         return []
 
@@ -396,8 +412,8 @@ class Poll(SmartModel):
         return '---'
 
     def get_trending_words(self):
-        key = 'trending_words:%d' % self.pk
-        trending_words = cache.get(key)
+        cache_key = 'trending_words:%d' % self.pk
+        trending_words = cache.get(cache_key)
 
         if not trending_words:
             words = dict()
@@ -416,9 +432,9 @@ class Poll(SmartModel):
             tuples = [(k, v) for k, v in words.iteritems()]
             tuples.sort(key=lambda t: t[1])
 
-            trending_words =  [k for k, v in tuples]
+            trending_words = [k for k, v in tuples]
 
-            cache.set(key, trending_words, 3600)
+            cache.set(cache_key, trending_words, 3600)
 
         return trending_words
 
@@ -776,10 +792,11 @@ class PollQuestion(SmartModel):
                         unset_count = question_results.get(unset_count_key, 0)
 
                         for categorie_label in categories_label:
-                            category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
-                            category_count = question_results.get(category_count_key, 0)
-                            set_count += category_count
-                            categories.append(dict(count=category_count, label=categorie_label))
+                            if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
+                                category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
+                                category_count = question_results.get(category_count_key, 0)
+                                set_count += category_count
+                                categories.append(dict(count=category_count, label=categorie_label))
 
                         results.append(dict(open_ended=open_ended, set=set_count, unset=unset_count,
                                             boundary=osm_id, label=boundary.get('name'),
@@ -803,7 +820,7 @@ class PollQuestion(SmartModel):
 
                         categories_count = dict()
                         for categorie_label in categories_label:
-                            if categorie_label.lower() != 'other':
+                            if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 categories_count[categorie_label.lower()] = 0
 
                         for result_key, result_count in born_results.iteritems():
@@ -814,7 +831,7 @@ class PollQuestion(SmartModel):
                                     unset_count += result_count
 
                                 for categorie_label in categories_label:
-                                    if categorie_label.lower() != 'other':
+                                    if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                         if result_key.startswith('ruleset:%s:category:%s:' % (self.ruleset_uuid, categorie_label.lower())):
                                             categories_count[categorie_label.lower()] += result_count
 
@@ -840,7 +857,7 @@ class PollQuestion(SmartModel):
 
                         for categorie_label in categories_label:
                             category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), 'gender', gender)
-                            if categorie_label.lower() != 'other':
+                            if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = question_results.get(category_count_key, 0)
                                 set_count += category_count
                                 categories.append(dict(count=category_count, label=categorie_label))
@@ -852,7 +869,7 @@ class PollQuestion(SmartModel):
                 categories = []
                 for categorie_label in categories_label:
                     category_count_key = "ruleset:%s:category:%s" % (self.ruleset_uuid, categorie_label.lower())
-                    if categorie_label.lower() != 'other':
+                    if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                         category_count = question_results.get(category_count_key, 0)
                         categories.append(dict(count=category_count, label=categorie_label))
 
@@ -890,7 +907,7 @@ class PollQuestion(SmartModel):
         return PollResultsCounter.get_question_results(self)
 
     def is_open_ended(self):
-        return self.response_categories.filter(is_active=True).count() == 1
+        return self.response_categories.filter(is_active=True).exclude(category__icontains='no response').count() == 1
 
     def get_responded(self):
         results = self.get_question_results()
@@ -921,6 +938,8 @@ class PollQuestion(SmartModel):
 
 
 class PollResponseCategory(models.Model):
+    IGNORED_CATEGORY_RULES = ['other', 'no response']
+
     question = models.ForeignKey(PollQuestion, related_name='response_categories')
 
     rule_uuid = models.CharField(max_length=36, help_text=_("The Rule this response category is based on"))
@@ -983,11 +1002,15 @@ class PollResult(models.Model):
         ward = ''
         born = ''
         gender = ''
+        text = ''
+
+        if self.text and self.text != "None":
+            text = self.text
 
         if self.ruleset:
             ruleset = self.ruleset.lower()
 
-        if self.category:
+        if self.category and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
             category = self.category.lower()
 
         if self.state:
@@ -1007,9 +1030,10 @@ class PollResult(models.Model):
 
         generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
 
-        if category:
+        if category or text:
             generated_counters['ruleset:%s:total-ruleset-responded' % ruleset] = 1
 
+        if category:
             generated_counters['ruleset:%s:category:%s' % (ruleset, category)] = 1
 
         if category and born:

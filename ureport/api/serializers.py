@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 import json
+
+import six
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from dash.stories.models import Story
@@ -41,6 +43,7 @@ class OrgReadSerializer(serializers.ModelSerializer):
     registration_stats = SerializerMethodField()
     occupation_stats = SerializerMethodField()
     reporters_count = SerializerMethodField()
+    timezone = SerializerMethodField()
 
     class Meta:
         model = Org
@@ -66,6 +69,9 @@ class OrgReadSerializer(serializers.ModelSerializer):
 
     def get_reporters_count(self, obj):
         return obj.get_reporters_count()
+
+    def get_timezone(self, obj):
+        return six.text_type(obj.timezone)
 
 
 class StoryReadSerializer(serializers.ModelSerializer):

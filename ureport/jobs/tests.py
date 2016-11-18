@@ -9,9 +9,6 @@ class JobSourceTest(UreportJobsTest):
     def setUp(self):
         super(JobSourceTest, self).setUp()
 
-        self.uganda = self.create_org('uganda', self.admin)
-        self.nigeria = self.create_org('nigeria', self.admin)
-
         self.fb_source_nigeria = self.create_fb_job_source(self.nigeria, self.nigeria.name)
         self.fb_source_uganda = self.create_fb_job_source(self.uganda, self.uganda.name)
 
@@ -156,3 +153,13 @@ class JobSourceTest(UreportJobsTest):
 
         job_source = JobSource.objects.filter(title='Uganda Jobs').first()
         self.assertEquals(job_source.source_url, 'http://facebook.com/ugandajobs')
+
+        update_url_tw_uganda = reverse('jobs.jobsource_update', args=[self.tw_source_uganda.pk])
+
+        response = self.client.get(update_url_tw_uganda, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue('form' in response.context)
+
+        self.assertEquals(len(response.context['form'].fields), 6)
+        self.assertEquals(set(['is_featured', 'title', 'source_url', 'widget_id', 'loc', 'is_active']),
+                          set(response.context['form'].fields))

@@ -3,7 +3,7 @@ import time
 from dash.orgs.models import Org
 from django.core.cache import cache
 from django_redis import get_redis_connection
-from djcelery.app import app
+from ureport.celery import app
 
 from dash.orgs.tasks import org_task
 from ureport.utils import fetch_flows, fetch_old_sites_count, update_poll_flow_data
@@ -13,55 +13,107 @@ from ureport.utils import populate_age_and_gender_poll_results
 logger = logging.getLogger(__name__)
 
 
-@org_task('backfill-poll-results')
+@org_task('backfill-poll-results', 60 * 60 * 3)
 def backfill_poll_results(org, since, until):
     from .models import Poll, PollResult
 
     results_log = dict()
 
     for poll in Poll.objects.filter(org=org, has_synced=False).distinct('flow_uuid'):
-        created, updated, ignored = Poll.pull_results(poll.id)
-        results_log['flow-%s' % poll.flow_uuid] = {"created": created, "updated": updated, "ignored": ignored}
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(poll.id)
+        results_log['flow-%s' % poll.flow_uuid] = {"num_val_created": num_val_created,
+                                                   "num_val_updated": num_val_updated,
+                                                   "num_val_ignored": num_val_ignored,
+                                                   "num_path_created": num_path_created,
+                                                   "num_path_updated": num_path_updated,
+                                                   "num_path_ignored": num_path_ignored}
 
     return results_log
 
 
-@org_task('results-pull-main-poll')
+@org_task('results-pull-main-poll', 60 * 30)
 def pull_results_main_poll(org, since, until):
     from .models import Poll
 
     results_log = dict()
     main_poll = Poll.get_main_poll(org)
     if main_poll:
-        created, updated, ignored = Poll.pull_results(main_poll.id)
-        results_log['flow-%s' % main_poll.flow_uuid] = {"created": created, "updated": updated, "ignored": ignored}
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(main_poll.id)
+        results_log['flow-%s' % main_poll.flow_uuid] = {"num_val_created": num_val_created,
+                                                        "num_val_updated": num_val_updated,
+                                                        "num_val_ignored": num_val_ignored,
+                                                        "num_path_created": num_path_created,
+                                                        "num_path_updated": num_path_updated,
+                                                        "num_path_ignored": num_path_ignored}
 
     return results_log
 
 
-@org_task('results-pull-brick-polls')
+@org_task('results-pull-brick-polls', 60 * 60 * 24)
 def pull_results_brick_polls(org, since, until):
     from .models import Poll
 
     results_log = dict()
 
-    brick_polls = Poll.get_brick_polls(org)[:5]
+    brick_polls_ids_list = Poll.get_brick_polls(org)
+    brick_polls_ids_list = [poll.pk for poll in brick_polls_ids_list]
+
+    brick_polls_ids = Poll.objects.filter(id__in=brick_polls_ids_list).order_by('flow_uuid').distinct('flow_uuid').values_list('id', flat=True)
+
+    brick_polls = list(Poll.objects.filter(id__in=brick_polls_ids).order_by('-created_on'))[:5]
     for poll in brick_polls:
-        created, updated, ignored = Poll.pull_results(poll.id)
-        results_log['flow-%s' % poll.flow_uuid] = {"created": created, "updated": updated, "ignored": ignored}
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(poll.id)
+        results_log['flow-%s' % poll.flow_uuid] = {"num_val_created": num_val_created,
+                                                   "num_val_updated": num_val_updated,
+                                                   "num_val_ignored": num_val_ignored,
+                                                   "num_path_created": num_path_created,
+                                                   "num_path_updated": num_path_updated,
+                                                   "num_path_ignored": num_path_ignored}
 
     return results_log
 
 
-@org_task('results-pull-other-polls')
+@org_task('results-pull-other-polls', 60 * 60 * 24)
 def pull_results_other_polls(org, since, until):
     from .models import Poll
 
     results_log = dict()
-    other_polls = Poll.get_other_polls(org)
+    other_polls_ids = Poll.get_other_polls(org).order_by('flow_uuid').distinct('flow_uuid').values_list('id', flat=True)
+    other_polls = Poll.objects.filter(id__in=other_polls_ids).order_by('-created_on')
     for poll in other_polls:
-        created, updated, ignored = Poll.pull_results(poll.id)
-        results_log['flow-%s' % poll.flow_uuid] = {"created": created, "updated": updated, "ignored": ignored}
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(poll.id)
+        results_log['flow-%s' % poll.flow_uuid] = {"num_val_created": num_val_created,
+                                                   "num_val_updated": num_val_updated,
+                                                   "num_val_ignored": num_val_ignored,
+                                                   "num_path_created": num_path_created,
+                                                   "num_path_updated": num_path_updated,
+                                                   "num_path_ignored": num_path_ignored}
+
+    return results_log
+
+
+@org_task('results-pull-recent-other-polls', 60 * 60 * 6)
+def pull_results_recent_other_polls(org, since, until):
+    from .models import Poll
+
+    results_log = dict()
+    recent_other_polls_ids = Poll.get_recent_other_polls(org).order_by('flow_uuid')
+    recent_other_polls_ids = recent_other_polls_ids.distinct('flow_uuid').values_list('id', flat=True)
+
+    recent_other_polls = Poll.objects.filter(id__in=recent_other_polls_ids).order_by('-created_on')
+    for poll in recent_other_polls:
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(poll.id)
+        results_log['flow-%s' % poll.flow_uuid] = {"num_val_created": num_val_created,
+                                                   "num_val_updated": num_val_updated,
+                                                   "num_val_ignored": num_val_ignored,
+                                                   "num_path_created": num_path_created,
+                                                   "num_path_updated": num_path_updated,
+                                                   "num_path_ignored": num_path_ignored}
 
     return results_log
 

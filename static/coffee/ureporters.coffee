@@ -1,4 +1,4 @@
-initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
+initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel, reportersCount) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
 
   STATE_LEVEL = 1
@@ -15,7 +15,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
 
   info = null
 
-  totalRegistered = 0
+  totalRegistered = reportersCount
   topPopulated = 0
 
   topBoundary = null
@@ -141,7 +141,6 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
         topPopulated = -1
 
         for boundary in data
-          totalRegistered += boundary.set
           boundary.population = boundary.set
           if boundary.population > topPopulated
             topPopulated = boundary.population
@@ -161,6 +160,9 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel) ->
           boundary.percentage = 0
         boundaryResults[boundary['boundary']] = boundary
         mainLabelRegistered += boundary.set
+        if not boundaryId
+          mainLabelRegistered = totalRegistered
+
         info.update()
         scale.update(boundaryLevel)
 
