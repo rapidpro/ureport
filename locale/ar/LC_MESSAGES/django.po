@@ -1170,7 +1170,7 @@ msgstr "نسبة الذين إستجابوا للإستطلاع حسب التو�
 msgid "Most responded"
 msgstr "الأكثر تجاوباً "
 
-#: templates/public/index.haml:143
+#: templates/public/index.haml:103
 #, python-format
 msgid ""
 "%(responded)s of %(total)s\n"
