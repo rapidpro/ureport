@@ -1170,12 +1170,13 @@ msgstr "نسبة الذين إستجابوا للإستطلاع حسب التو�
 msgid "Most responded"
 msgstr "الأكثر تجاوباً "
 
-#: templates/public/index.haml:103
+#: templates/public/index.haml:143
 #, python-format
 msgid ""
-"%(responded)s of %(total)s\n"
-msgstr ""
-"%(responded)s من أصل %(total)s\n"
+"\n"
+"                                  %(responded)s of %(total)s\n"
+"                                  "
+msgstr "\n%(responded)s من أصل %(total)s\n "
 
 #: templates/public/index.haml:158
 msgid "TRENDING WORDS"
@@ -1187,7 +1188,7 @@ msgstr "ردود إستثنائية "
 
 #: templates/public/index.haml:191 templates/public/index.haml.py:580
 msgid "View full results"
-msgstr ""
+msgstr "مشاهدة النتائج كاملة"
 
 #: templates/public/index.haml:211 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
@@ -1323,28 +1324,16 @@ msgid_plural ""
 "\n"
 "                  %(questions)s questions polled on this topic\n"
 "                "
-msgstr[0] 
-"\n"
-"سؤال تم طرحه بما يخص هذا الموضوع"
-msgstr[1] 
-"\n"
-"سؤال تم طرحه بما يخص هذا الموضوع"
-msgstr[2] 
-"\n"
-"سؤال تم طرحه بما يخص هذا الموضوع"
-msgstr[3] 
-"\n"
-"سؤال تم طرحه بما يخص هذا الموضوع"
-msgstr[4] 
-"\n"
-"سؤال تم طرحه بما يخص هذا الموضوع"
-msgstr[5] 
-"\n"
-"سؤال تم طرحه بما يخص هذا الموضوع"
+msgstr[0] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[1] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[2] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[3] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[4] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[5] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
 
 #: templates/public/polls.haml:43
 msgid "response rate"
-msgstr "معدل التجاوب"
+msgstr "نسبة التجاوب "
 
 #: templates/public/polls.haml:49
 msgid "responded out of"
