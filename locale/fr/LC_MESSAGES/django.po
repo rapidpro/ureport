@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Eskandar BENAICHA <ebenaicha@unicef.fr>, 2016
 # Ilhasoft <contato@ilhasoft.com.br>, 2016
 # Mbanje Jean Vernack <mbanjejvernack@gmail.com>, 2016
 # Nyaruka <info@textit.in>, 2015
@@ -14,8 +15,8 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-27 08:22+0000\n"
-"PO-Revision-Date: 2016-10-28 12:10+0000\n"
-"Last-Translator: Mbanje Jean Vernack <mbanjejvernack@gmail.com>\n"
+"PO-Revision-Date: 2016-11-29 11:27+0000\n"
+"Last-Translator: Eskandar BENAICHA <ebenaicha@unicef.fr>\n"
 "Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1324,8 +1325,8 @@ msgid_plural ""
 "\n"
 "                  %(questions)s questions polled on this topic\n"
 "                "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "\n                  \n%(questions)s posées sur ce sujet\n                "
+msgstr[1] "\n%(questions)s questions dans ce sondage"
 
 #: templates/public/polls.haml:43
 msgid "response rate"
@@ -1333,11 +1334,11 @@ msgstr "taux de réponse"
 
 #: templates/public/polls.haml:49
 msgid "responded out of"
-msgstr "Répondu sur"
+msgstr "répondants sur"
 
 #: templates/public/polls.haml:53
 msgid "polled"
-msgstr ""
+msgstr "interrogés"
 
 #: templates/public/polls.haml:96
 msgid "POLL RESULTS"
@@ -1462,7 +1463,7 @@ msgstr "National"
 
 #: templates/public/strings_values.haml:11
 msgid "District"
-msgstr "Regional"
+msgstr "Régional"
 
 #: templates/public/strings_values.haml:12
 msgid "Participation Level"
