@@ -59,7 +59,18 @@ class IndexView(SmartTemplateView):
         context['age_stats'] = org.get_age_stats()
         context['reporters'] = org.get_reporters_count()
 
+        return context
 
+
+class Count(SmartTemplateView):
+    template_name = 'public/count'
+
+    def get_context_data(self, **kwargs):
+        context = super(Count, self).get_context_data()
+
+        org = self.request.org
+        context['org'] = org
+        context['count'] = org.get_reporters_count()
         return context
 
 
