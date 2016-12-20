@@ -519,11 +519,14 @@ class UtilsTest(UreportTest):
 
     def test_fetch_old_sites_count(self):
         self.clear_cache()
+
+        settings_sites_count = len(list(getattr(settings, 'PREVIOUS_ORG_SITES', [])))
+
         with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
             mock_datetime_ms.return_value = 500
 
             with patch('requests.get') as mock_get:
-                mock_get.side_effect = [MockResponse(200, '300'), MockResponse(200, '50\n')]
+                mock_get.return_value = MockResponse(200, '300')
 
                 with patch('django.core.cache.cache.set') as cache_set_mock:
                     cache_set_mock.return_value = "Set"
@@ -532,11 +535,12 @@ class UtilsTest(UreportTest):
                         cache_delete_mock.return_value = "Deleted"
 
                         old_site_values = fetch_old_sites_count()
-                        self.assertEqual(old_site_values, [{'time': 500, 'results': dict(size=300)}])
+                        self.assertEqual(old_site_values,
+                                         [{'time': 500, 'results': dict(size=300)}] * settings_sites_count)
 
-                        mock_get.assert_called_once_with('http://www.zambiaureport.org/count.txt/')
+                        mock_get.assert_called_with('http://www.zambiaureport.org/count.txt/')
 
-                        cache_set_mock.assert_called_once_with('org:zambia:reporters:old-site',
+                        cache_set_mock.assert_called_with('org:zambia:reporters:old-site',
                                                        {'time': 500, 'results': dict(size=300)},
                                                        UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
