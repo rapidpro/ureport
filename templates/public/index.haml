@@ -218,7 +218,7 @@
                 - trans "FEATURED VIDEO"
               .brick-content{style:"padding: 0px; width: 100%; height:325px; bottom:40px;"}
                 %iframe{ width:"100%", height:"100%", src:"//www.youtube.com/embed/#{ vid.video_id }?rel=0&autohide=1&showinfo=0", frameborder:"0"}
-              %a.brick-link{ href:"http://www.youtube.com/watch?v=#{ vid.video_id }"}
+              %a.brick-link{ href:"https://www.youtube.com/watch?v=#{ vid.video_id }"}
                 - trans "Watch more videos"
                 {{ org|org_arrow_link }}
 
@@ -266,7 +266,7 @@
             .brick-content
               .brick-align{style:"padding: 0px"}
                 %iframe.lightwidget-widget{ src:'//lightwidget.com/widgets/{{org|config:"instagram_lightwidget_id"}}.html', id:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}', name:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}',  scrolling:'no', allowtransparency:'true',  style:'width: 100%; border: 0; overflow: hidden;'}
-          %a.instagram-bg-color.brick-link{ href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
+          %a.instagram-bg-color.brick-link{ href:'https://instagram.com/{{ org|config:"instagram_username"}}'}
             - trans "View more on Instagram"
             {{ org|org_arrow_link }}
         {% endif %}
