@@ -59,6 +59,23 @@ class PublicTest(UreportTest):
         self.assertTrue('form' in response.context)
         self.assertEquals(len(response.context['form'].fields), 35)
 
+    def test_count(self):
+        count_url = reverse('public.count')
+
+        response = self.client.get(count_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.context['org'], self.nigeria)
+        self.assertTrue('count' in response.context)
+        self.assertEquals(response.context['count'], self.nigeria.get_reporters_count())
+        self.assertEquals(response.context['view'].template_name, 'public/count')
+
+        response = self.client.get(count_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.context['org'], self.uganda)
+        self.assertTrue('count' in response.context)
+        self.assertEquals(response.context['count'], self.uganda.get_reporters_count())
+        self.assertEquals(response.context['view'].template_name, 'public/count')
+
     def test_chooser(self):
         chooser_url = reverse('public.home')
 
