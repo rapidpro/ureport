@@ -299,53 +299,28 @@
         {% endif %}
 
         - for story in stories
-          - if forloop.counter < 3 and not is_iorg
-            .brick.story-brick.size12{data-priority:"{% cycle '4' '3' '2' %}"}
-              .brick-inner
-                .brick-title.primary-bg-color.float-left
-                  - trans "STORY"
-                .brick-content
-                  .brick-long-story-image
-                    - if story.get_image
-                      {% thumbnail story.get_image "300" crop="top" as im %}
-                      <img width="100%" src="{{im.url}}" />
-                      {% endthumbnail %}
-                    - else
-                      %img{width:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
-                  .brick-align
-                    .brick-long-story-title
-                      {{ story.title }}
+          .brick.story-brick.size11{data-priority:"{% if forloop.counter <= forloop.revcounter %}4{% else %}3{% endif %}"}
+            .brick-inner
+              .brick-title.primary-bg-color.float-left
+                - trans "STORY"
+              .brick-content{style:"bottom:0;"}
+                .brick-short-story-image
+                  - if story.get_image
+                    {% thumbnail story.get_image "350x350" crop="top" as im %}
+                    <img width="100%" height="100%" src="{{im.url}}" />
+                    {% endthumbnail %}
+                  - else
+                    %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
 
-                    .half-border.primary-bg-color
-                    .brick-long-story-text
-                      {{ story.summary|linebreaksbr }}
-
-                %a.brick-link{ href:"{% url 'public.story_read' story.pk %}" }
-                  - trans "Read full story"
-                  {{ org|org_arrow_link }}
-          - else
-            .brick.story-brick.size11{data-priority:"{% cycle '4' '3' '2' %}"}
-              .brick-inner
-                .brick-title.primary-bg-color.float-left
-                  - trans "STORY"
-                .brick-content{style:"bottom:0;"}
-                  .brick-short-story-image
-                    - if story.get_image
-                      {% thumbnail story.get_image "350x350" crop="top" as im %}
-                      <img width="100%" height="100%" src="{{im.url}}" />
-                      {% endthumbnail %}
-                    - else
-                      %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
-
-                .brick-short-story-title
-                  {{ story.title }}
-                %a.brick-link{ href:"{% url 'public.story_read' story.pk %}" }
-                  - trans "Read full story"
-                  {{ org|org_arrow_link }}
+              .brick-short-story-title
+                {{ story.title }}
+              %a.brick-link{ href:"{% url 'public.story_read' story.pk %}" }
+                - trans "Read full story"
+                {{ org|org_arrow_link }}
 
         - if stories|length < 12
           - for ot_story in other_stories|slice:"5"
-            .brick.story-brick.size11{data-priority:"{% cycle '4' '3' '2' %}"}
+            .brick.story-brick.size11{data-priority:"{% if forloop.counter <= forloop.revcounter %}3{% else %}2{% endif %}"}
               .brick-inner
                 .brick-title.primary-bg-color.float-left
                   - trans "STORY"
@@ -547,7 +522,7 @@
              html += '</div><div class="news-item-link">';
              html += '<a href="';
              html += newsItem.link;
-             html += '">' + escape("{% trans 'Read This Story' %}") + ' &#8594;';
+             html += '">' + "{% trans 'Read this story' %}" + ' &#8594;';
              html += '</a></div></div><hr class="aaa">';
 
              $(".brick-news-list").append(html);

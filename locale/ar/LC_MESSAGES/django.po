@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Fadi Al-Halabi <falhalabi@unicef.org>, 2016
 # Tech Tribes <Khaled@techtribes.org>, 2015-2016
@@ -10,16 +10,14 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-27 08:22+0000\n"
-"PO-Revision-Date: 2016-10-26 13:08+0000\n"
-"Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
-"Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/"
-"ar/)\n"
-"Language: ar\n"
+"PO-Revision-Date: 2016-10-27 08:49+0000\n"
+"Last-Translator: Nyaruka <info@textit.in>\n"
+"Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: dash/categories/models.py:20
 msgid "The name of this category"
@@ -62,8 +60,8 @@ msgstr "Slug لتعريف هذا نوع من المحتوى، ويستخدم م�
 
 #: dash/dashblocks/models.py:26
 msgid ""
-"A description of where this content type is used on the site and how it will "
-"be dsiplayed"
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
 msgstr "وصف عن مكان استخدام نوع المحتوى هذا في الموقع وكيف سيتم عرضه"
 
 #: dash/dashblocks/models.py:31
@@ -141,11 +139,9 @@ msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ر
 
 #: dash/dashblocks/models.py:99
 msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more "
-"advanced filtering, optional"
-msgstr ""
-"هل هناك أي وسوم تريد إضافتها، مفصولة بفراغات، ويمكن استعمالها من أجل تنقية "
-"بيانات متقدمة. اختياري"
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
+msgstr "هل هناك أي وسوم تريد إضافتها، مفصولة بفراغات، ويمكن استعمالها من أجل تنقية بيانات متقدمة. اختياري"
 
 #: dash/dashblocks/models.py:103
 msgid "The priority for this block, higher priority blocks come first"
@@ -313,9 +309,7 @@ msgstr "واجهة برمجة التطبيقات المأخوذة من الحس�
 msgid ""
 "JSON blob used to store configuration information associated with this "
 "organization"
-msgstr ""
-"تم إستخدام لغة ترميز جافا \"جسون\" لتخزين النصوص و\"Blob\" لتخزين الصور، "
-"التسجيلات الصوتية والوسائط المتعددة، الخاصة بهذه المؤسسة "
+msgstr "تم إستخدام لغة ترميز جافا \"جسون\" لتخزين النصوص و\"Blob\" لتخزين الصور، التسجيلات الصوتية والوسائط المتعددة، الخاصة بهذه المؤسسة "
 
 #: dash/orgs/models.py:311
 msgid "Administrator"
@@ -393,14 +387,9 @@ msgid ""
 "\n"
 "      You've been invited to join %(org_name)s.\n"
 "      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
-"a>.\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
 "  "
-msgstr ""
-"\n"
-"لقد تمت دعوتك للمشاركة في%(org_name)s. \n"
-"\n"
-"لقبول الدعوة، <a href='%(host)s%(join_url)s'> اضغط هنا "
+msgstr "\nلقد تمت دعوتك للمشاركة في%(org_name)s. \n\nلقبول الدعوة، <a href='%(host)s%(join_url)s'> اضغط هنا "
 
 #: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
 msgid "Edit"
@@ -436,9 +425,7 @@ msgstr "قم بإختيار المنظمة التي تتبع لها "
 msgid ""
 "Your account is not associated to an organization. Please Contact the "
 "adminstrator."
-msgstr ""
-"حسابك غير مرتبط بالمنظمة التي قمت بإختيارها، الرجاء التواصل مع المشرف في "
-"منظمتك "
+msgstr "حسابك غير مرتبط بالمنظمة التي قمت بإختيارها، الرجاء التواصل مع المشرف في منظمتك "
 
 #: dash/orgs/views.py:219 dash/orgs/views.py:229
 msgid "Your Organization"
@@ -488,9 +475,7 @@ msgstr "شارك "
 msgid ""
 "Your invitation link has expired. Please contact your organization "
 "administrator."
-msgstr ""
-"لقد إنتهت الفترة المخصصة لرابط الدعوة الخاصة بك، الرجاء التوصل مع المشرف في "
-"منظمتك. "
+msgstr "لقد إنتهت الفترة المخصصة لرابط الدعوة الخاصة بك، الرجاء التوصل مع المشرف في منظمتك. "
 
 #: dash/orgs/views.py:640
 msgid "Task"
@@ -526,21 +511,15 @@ msgstr "رابط ملف صوتي ليتم نشره عن القصة MP3"
 
 #: dash/stories/models.py:31
 msgid ""
-"The id of the YouTube video that should be linked to this story (this is the "
-"text that comes afer v= and before & in the YouTube URL)"
-msgstr ""
-"الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع مقالك ( الرمز التعرفي هو النص "
-"الموجود في الرابط بعد \"v=\" وقبل \"in\")   "
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
+msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع مقالك ( الرمز التعرفي هو النص الموجود في الرابط بعد \"v=\" وقبل \"in\")   "
 
 #: dash/stories/models.py:37
 msgid ""
 "Any tags for this story, separated by spaces, can be used to do more "
 "advanced filtering, optional"
-msgstr ""
-"هل هناك أي وسوم تريد إضافتها؟ \n"
-"\n"
-"*سيساعدك إضافة الوسوم في عملية ترتيب مقالاتك حسب الفئة، لإضافة أكثر من الوسم "
-"الرجاء الفصل بين الوسم والأخر بمسافة. "
+msgstr "هل هناك أي وسوم تريد إضافتها؟ \n\n*سيساعدك إضافة الوسوم في عملية ترتيب مقالاتك حسب الفئة، لإضافة أكثر من الوسم الرجاء الفصل بين الوسم والأخر بمسافة. "
 
 #: dash/stories/models.py:42
 msgid "The category for this story"
@@ -571,8 +550,8 @@ msgstr "لا"
 msgid "Story Images"
 msgstr "صور المقال"
 
-#: dash/stories/views.py:91 dash/stories/views.py:99 ureport/polls/views.py:164
-#: ureport/polls/views.py:171
+#: dash/stories/views.py:91 dash/stories/views.py:99
+#: ureport/polls/views.py:164 ureport/polls/views.py:171
 #, python-format
 msgid "Image %d"
 msgstr "صورة %d"
@@ -595,9 +574,7 @@ msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
-msgstr ""
-"\n"
-"هل أنت متأكد من الحذف <b>%(object)s</b>?"
+msgstr "\nهل أنت متأكد من الحذف <b>%(object)s</b>?"
 
 #: smartmin/templates/smartmin/delete_confirm.html:17
 msgid ""
@@ -622,30 +599,12 @@ msgid_plural ""
 "\n"
 "         %(counter)s results\n"
 "        "
-msgstr[0] ""
-"\n"
-"         %(counter)s نتيجة\n"
-"        "
-msgstr[1] ""
-"\n"
-"\t\t%(counter)s نتيجة\n"
-"\t"
-msgstr[2] ""
-"\n"
-"         %(counter)s نتيجة\n"
-"        "
-msgstr[3] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
-msgstr[4] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
-msgstr[5] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
+msgstr[0] "\n         %(counter)s نتيجة\n        "
+msgstr[1] "\n\t\t%(counter)s نتيجة\n\t"
+msgstr[2] "\n         %(counter)s نتيجة\n        "
+msgstr[3] "\n         %(counter)s نتائج\n        "
+msgstr[4] "\n         %(counter)s نتائج\n        "
+msgstr[5] "\n         %(counter)s نتائج\n        "
 
 #: smartmin/templates/smartmin/list.html:85
 #, python-format
@@ -653,9 +612,7 @@ msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
-msgstr ""
-"\n"
-"نتائج%(start)s-%(end)s %(count)s"
+msgstr "\nنتائج%(start)s-%(end)s %(count)s"
 
 #: smartmin/templates/smartmin/list.html:95
 #: smartmin/templates/smartmin/list.html:97
@@ -699,13 +656,9 @@ msgstr "تسجيل دخول خاطئ"
 #, python-format
 msgid ""
 "\n"
-"      Sorry, you cannot log in at this time because we received "
-"%(failed_login_limit)s incorrect login attempts.\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
-msgstr ""
-"\n"
-"عذرا، لا يمكنك الدخول في الوقت الحالي لأننا تلقينا اشعار خطأ "
-"%(failed_login_limit)s محاولة دخول خاطئة."
+msgstr "\nعذرا، لا يمكنك الدخول في الوقت الحالي لأننا تلقينا اشعار خطأ %(failed_login_limit)s محاولة دخول خاطئة."
 
 #: smartmin/templates/smartmin/users/user_failed.html:18
 #, python-format
@@ -713,17 +666,13 @@ msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
-msgstr ""
-"\n"
-"يرجى الانتظار لمدة %(lockout_timeout)s قبل إعادة محاولة الدخول مجدداً"
+msgstr "\nيرجى الانتظار لمدة %(lockout_timeout)s قبل إعادة محاولة الدخول مجدداً"
 
 #: smartmin/templates/smartmin/users/user_failed.html:25
 msgid ""
 "Alternatively, you can fill out the form below to have your password reset "
 "via e-mail."
-msgstr ""
-"بشكل بديل، يمكنك تعبئة النموذج في الأسفل لتحصل على إعادة ضبط كلمة مرورك عن "
-"طريق البريد الالكتروني"
+msgstr "بشكل بديل، يمكنك تعبئة النموذج في الأسفل لتحصل على إعادة ضبط كلمة مرورك عن طريق البريد الالكتروني"
 
 #: smartmin/templates/smartmin/users/user_failed.html:27
 msgid "Please contact the website administrator to have your password reset."
@@ -741,24 +690,15 @@ msgstr "استعادة"
 msgid ""
 "Please enter the email address you used to sign up and we will help you "
 "recover your password."
-msgstr ""
-"الرجاء إدخال بريدك الالكتروني الذي قمت بالتسجيل عن طريقه أول مرة وسوف نساعدك "
-"لاستعادة كلمة المرور الخاصة بك"
+msgstr "الرجاء إدخال بريدك الالكتروني الذي قمت بالتسجيل عن طريقه أول مرة وسوف نساعدك لاستعادة كلمة المرور الخاصة بك"
 
 #: smartmin/templates/smartmin/users/user_newpassword.html:7
 #, python-format
 msgid ""
 "\n"
-"  <strong>Your password has expired.</strong> Site policy states that you "
-"must pick a new password every %(expire_days)s days, and that passwords must "
-"not have been used within the previous %(window_days)s days.\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
-msgstr ""
-"\n"
-"<strong> لقد انتهت فترة صلاحية كلمة المرور الخاصة بك </strong> تنص سياسة "
-"الموقع على وجوب اختيار كلمة مرور جديدة كل  %(expire_days)s أيام، وبأن كلمة "
-"المرور الجديدو يجب ألا تكون قد استخدمت في السابق %(window_days)s \n"
-"."
+msgstr "\n<strong> لقد انتهت فترة صلاحية كلمة المرور الخاصة بك </strong> تنص سياسة الموقع على وجوب اختيار كلمة مرور جديدة كل  %(expire_days)s أيام، وبأن كلمة المرور الجديدو يجب ألا تكون قد استخدمت في السابق %(window_days)s \n."
 
 #: smartmin/users/views.py:28 smartmin/users/views.py:66
 #: smartmin/users/views.py:81 smartmin/users/views.py:126
@@ -778,9 +718,7 @@ msgstr "كلمة المرور يجب أن تحوي 8 أحرف على الأقل�
 msgid ""
 "You have used this password before in the past year, please use a new "
 "password."
-msgstr ""
-"لقد قمت باستخدام كلمة المرور هذه خلال العام المنصرم، يرجى اختيار كلمة مرور "
-"جديدة"
+msgstr "لقد قمت باستخدام كلمة المرور هذه خلال العام المنصرم، يرجى اختيار كلمة مرور جديدة"
 
 #: smartmin/users/views.py:80 smartmin/users/views.py:206
 #: smartmin/users/views.py:254
@@ -811,9 +749,7 @@ msgstr "بريدك الالكتروني"
 msgid ""
 "E-mail recovery is not supported, please contact the website administrator "
 "to reset your password manually."
-msgstr ""
-"استعادة كلمة المرور عن طريق البريد الالكتروني غير مدعمة، يرجى التواصل مع "
-"مسؤول الموقع لضبط كلمة المرور بشكل يدوي"
+msgstr "استعادة كلمة المرور عن طريق البريد الالكتروني غير مدعمة، يرجى التواصل مع مسؤول الموقع لضبط كلمة المرور بشكل يدوي"
 
 #: smartmin/users/views.py:124
 msgid "Current Password"
@@ -845,8 +781,7 @@ msgstr "يرجى إدخال كلمة مرورك الجديدة هنا لتأكي
 
 #: smartmin/users/views.py:146
 msgid "Mismatch between your new password and confirmation, try again"
-msgstr ""
-"عدم توافق بين كلمة المرور الجديدة وكلمة التأكيد، يرجى المحاولة مرة أخرى"
+msgstr "عدم توافق بين كلمة المرور الجديدة وكلمة التأكيد، يرجى المحاولة مرة أخرى"
 
 #: smartmin/users/views.py:202
 msgid "New user created successfully."
@@ -857,7 +792,8 @@ msgid "Groups"
 msgstr "مجموعات"
 
 #: smartmin/users/views.py:205
-msgid "Users will only get those permissions that are allowed for their group."
+msgid ""
+"Users will only get those permissions that are allowed for their group."
 msgstr "يحصل المستخدمون فقط على الصلاحيات المسموحة لمجموعتهم"
 
 #: smartmin/users/views.py:206
@@ -936,8 +872,7 @@ msgstr "لقد قمت بتسجيل الدخول الآن باسم %s"
 #: smartmin/users/views.py:356
 msgid ""
 "Password Updated Successfully. Now you can log in using your new password."
-msgstr ""
-"تم تحديث كلمة المرور بنجاح، تستطيع الآن الدخول باستخدام كلمة مرورك الجديدة"
+msgstr "تم تحديث كلمة المرور بنجاح، تستطيع الآن الدخول باستخدام كلمة مرورك الجديدة"
 
 #: smartmin/users/views.py:359
 msgid "Reset your Password"
@@ -945,11 +880,9 @@ msgstr "إعادة ضبط كلمة المرور"
 
 #: smartmin/users/views.py:371
 msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by "
-"entering your email here."
-msgstr ""
-"الرابط منتهي الصلاحية لأسباب أمنية، الرجاء طلب رابط جديد عن طريق ادخال بريدك "
-"الالكتروني هنا"
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
+msgstr "الرابط منتهي الصلاحية لأسباب أمنية، الرجاء طلب رابط جديد عن طريق ادخال بريدك الالكتروني هنا"
 
 #: smartmin/views.py:849
 msgid "Submit"
@@ -1088,12 +1021,9 @@ msgstr "تابعنا على "
 #: templates/jobs/jobsource_create.haml:8
 msgid ""
 "\n"
-"        To add a Twitter job source you are required to get a widget id from "
-"twitter.\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
-msgstr ""
-"\n"
-"لإضافة مصدر عمل لتويتر يجب عليك الحصول على رمز تقني من تويتر"
+msgstr "\nلإضافة مصدر عمل لتويتر يجب عليك الحصول على رمز تقني من تويتر"
 
 #: templates/jobs/jobsource_create.haml:12
 #: templates/jobs/jobsource_update.haml:12
@@ -1104,14 +1034,9 @@ msgstr "تابع هذا الدليل خطوة بخطوة"
 #: templates/jobs/jobsource_update.haml:15
 msgid ""
 "\n"
-"        <div>After you create the widget copy the widget id from the url as "
-"shown on</div>\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
 "      "
-msgstr ""
-"\n"
-"        <div>بعد إنشاء التطبيق المصغر، قم بنسخ هويته من عنوان الموقع كما هو "
-"موضح في</div>\n"
-"      "
+msgstr "\n        <div>بعد إنشاء التطبيق المصغر، قم بنسخ هويته من عنوان الموقع كما هو موضح في</div>\n      "
 
 #: templates/jobs/jobsource_create.haml:40
 msgid "Back"
@@ -1120,12 +1045,9 @@ msgstr "العودة"
 #: templates/jobs/jobsource_update.haml:8
 msgid ""
 "\n"
-"        Remember for a Twitter job source you are required to get a widget "
-"id from twitter.\n"
+"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
-msgstr ""
-"\n"
-"لإضافة مصدر عمل لتويتر يجب عليك الحصول على رمز تقني من تويتر"
+msgstr "\nلإضافة مصدر عمل لتويتر يجب عليك الحصول على رمز تقني من تويتر"
 
 #: templates/public/about.haml:16 templates/public/about.haml.py:68
 msgid "ABOUT U-REPORT"
@@ -1151,9 +1073,7 @@ msgstr "حدثنا عن ما يجري من حولك في مجتمعك المحل
 msgid ""
 "Use Ureport results and information to update and increase citizen's "
 "awareness"
-msgstr ""
-"إستعمل النتائج والمعلومات المتوفرة من يوريبورت U-REPORT لنشر الوعي في مجتمعك "
-"المحلي "
+msgstr "إستعمل النتائج والمعلومات المتوفرة من يوريبورت U-REPORT لنشر الوعي في مجتمعك المحلي "
 
 #: templates/public/about.haml:130
 msgid "Participate in nationwide campaigns to help improve your country"
@@ -1184,12 +1104,14 @@ msgstr "لمشاهدة هذا الفيديو على اليوتيوب "
 msgid "MORE POLLS"
 msgstr "المزيد من إستطلاعات الرأي العام والمسوحات"
 
-#: templates/public/all_polls.haml:12 templates/public/archived_stories.haml:12
+#: templates/public/all_polls.haml:12
+#: templates/public/archived_stories.haml:12
 msgid "FILTER"
 msgstr "صنف "
 
-#: templates/public/all_polls.haml:19 templates/public/archived_stories.haml:19
-#: templates/public/stories.haml:69 templates/public/strings_values.haml:5
+#: templates/public/all_polls.haml:19
+#: templates/public/archived_stories.haml:19 templates/public/stories.haml:69
+#: templates/public/strings_values.haml:5
 msgid "All"
 msgstr "الجميع"
 
@@ -1216,16 +1138,9 @@ msgstr "تابع"
 #: templates/public/index.haml:29
 msgid ""
 "\n"
-"                  U-Report is a social messaging tool allowing anyone from "
-"any community, anywhere in the world to respond to polls, report issues, "
-"support child rights and work as positive agents of change on behalf of "
-"people in their country.\n"
+"                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
 "                "
-msgstr ""
-"\n"
-"يو-ريبورت هو أداة رسائل وتواصل اجتماعي تسمح لأي شخص من أي مجتمع من أي مكان "
-"حول العالم بالمشاركة في استطلاعات الرأي، التبليغ عن الحالات، دعم حقوق الطفل "
-"والعمل كوكيل تغيير إيجابي في المجتمع بالنيابة عن أهل بلدك"
+msgstr "\nيو-ريبورت هو أداة رسائل وتواصل اجتماعي تسمح لأي شخص من أي مجتمع من أي مكان حول العالم بالمشاركة في استطلاعات الرأي، التبليغ عن الحالات، دعم حقوق الطفل والعمل كوكيل تغيير إيجابي في المجتمع بالنيابة عن أهل بلدك"
 
 #: templates/public/index.haml:36 templates/public/index.haml.py:74
 msgid "CURRENT POLL"
@@ -1233,7 +1148,7 @@ msgstr "إستطلاعات الرأي الحالية "
 
 #: templates/public/index.haml:42
 msgid "View Full Results"
-msgstr ""
+msgstr "مشاهدة النتائج كاملة"
 
 #: templates/public/index.haml:52
 msgid "All U-Report members"
@@ -1256,18 +1171,12 @@ msgid "Most responded"
 msgstr "الأكثر تجاوباً "
 
 #: templates/public/index.haml:143
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
+#, python-format
 msgid ""
 "\n"
 "                                  %(responded)s of %(total)s\n"
 "                                  "
-msgstr ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
+msgstr "\n%(responded)s من أصل %(total)s\n "
 
 #: templates/public/index.haml:158
 msgid "TRENDING WORDS"
@@ -1279,7 +1188,7 @@ msgstr "ردود إستثنائية "
 
 #: templates/public/index.haml:191 templates/public/index.haml.py:580
 msgid "View full results"
-msgstr ""
+msgstr "مشاهدة النتائج كاملة"
 
 #: templates/public/index.haml:211 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
@@ -1345,10 +1254,8 @@ msgstr "قصة"
 #: templates/public/index.haml:476 templates/public/index.haml.py:503
 #: templates/public/index.haml:534 templates/public/index.haml.py:619
 #: templates/public/stories.haml:36 templates/public/stories.haml.py:117
-#, fuzzy
-#| msgid "Read This Story"
 msgid "Read full story"
-msgstr "قراءة هذه القصة"
+msgstr ""
 
 #: templates/public/index.haml:557
 msgid "Response Rate"
@@ -1390,19 +1297,10 @@ msgstr "كيفية المشاركة "
 #, python-format
 msgid ""
 "\n"
-"              * U-Report is a free program sponsored by UNICEF with help of "
-"Network Providers in %(country)s. U-Report will not ask for any payments nor "
-"personal financial information, PLEASE disregard any messages which ask you "
-"for payment either on this number or on the Facebook and Twitter pages. All "
-"U-Report services (all msg on %(shortcode)s) are free.\n"
+"              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "            "
-msgstr ""
-"\n"
-"* U-Report هو برنامج مجاني مدعوم من قبل يونيسف بمساعدة مقدمي الشبكة في "
-"%(country)s. لن يطلب منكم U-Report أي مبالغ مالية أو معلومات مالية شخصية، "
-"يرجى تجاهل أي رسائل تطلب منكم الدفع سواء كان ذلك على هذا الرقم أو على صفحات "
-"الفيسبوك تويتر. جميع خدمات U-Report (جميع الرسائل على %(shortcode)s) مجانية "
+msgstr "\n* U-Report هو برنامج مجاني مدعوم من قبل يونيسف بمساعدة مقدمي الشبكة في %(country)s. لن يطلب منكم U-Report أي مبالغ مالية أو معلومات مالية شخصية، يرجى تجاهل أي رسائل تطلب منكم الدفع سواء كان ذلك على هذا الرقم أو على صفحات الفيسبوك تويتر. جميع خدمات U-Report (جميع الرسائل على %(shortcode)s) مجانية "
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
@@ -1417,11 +1315,7 @@ msgid "CURRENT POLL IN"
 msgstr "إستطلاع الرأي الحالي في "
 
 #: templates/public/polls.haml:29
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
+#, python-format
 msgid ""
 "\n"
 "                  %(questions)s question polled on this topic\n"
@@ -1430,40 +1324,24 @@ msgid_plural ""
 "\n"
 "                  %(questions)s questions polled on this topic\n"
 "                "
-msgstr[0] ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
-msgstr[1] ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
-msgstr[2] ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
-msgstr[3] ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
-msgstr[4] ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
-msgstr[5] ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
+msgstr[0] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[1] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[2] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[3] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[4] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[5] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
 
 #: templates/public/polls.haml:43
-#, fuzzy
-#| msgid "Response Rate"
 msgid "response rate"
-msgstr "معدل الإستجابة "
+msgstr "نسبة التجاوب "
 
 #: templates/public/polls.haml:49
-#, fuzzy
-#| msgid "Responded out of"
 msgid "responded out of"
-msgstr "مجموع من تجاوب مع الإستطلاع مٍن "
+msgstr "أجابو على الاستطلاع من أصل "
 
 #: templates/public/polls.haml:53
 msgid "polled"
-msgstr ""
+msgstr " الذين شملهم الاستطلاع "
 
 #: templates/public/polls.haml:96
 msgid "POLL RESULTS"
@@ -1475,9 +1353,7 @@ msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
+msgstr "\nقام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
 
 #: templates/public/polls.haml:121
 msgid "KEYWORDS"
@@ -1765,9 +1641,7 @@ msgstr "العنوان الكامل للتصفح الخاص بمصدر هذا ا
 msgid ""
 "For Twitter, a widget Id is required to embed tweets on the website. Read "
 "carefully the instructions above on how to get the right widget Id"
-msgstr ""
-"بالنسبة لتويتر، يجب وجود رمز تعريفي خاص لإظهار التغريدات على الموقع، يرجى "
-"القراءة بتمعن لمعرفة كيفية الحصول على هذا الرمز التعريفي الخاص."
+msgstr "بالنسبة لتويتر، يجب وجود رمز تعريفي خاص لإظهار التغريدات على الموقع، يرجى القراءة بتمعن لمعرفة كيفية الحصول على هذا الرمز التعريفي الخاص."
 
 #: ureport/jobs/models.py:30
 msgid "Featured job sources are shown first on the jobs page."
@@ -1855,12 +1729,9 @@ msgid "The Flow this Poll is based on"
 msgstr "يستند تسلسل هذه الإستطلاعات على "
 
 #: ureport/polls/models.py:102
-#, fuzzy
-#| msgid ""
-#| "The date to display for this poll. Make it empty to use flow created_on."
 msgid ""
 "The date to display for this poll. Leave empty to use flow creation date."
-msgstr "تاريخ عرض هذا الاستطلاع. قم بتركها فارغة لاستخدام نتيجة created_on. "
+msgstr ""
 
 #: ureport/polls/models.py:106
 msgid "Whether the flow for this poll is archived on RapidPro"
@@ -1959,16 +1830,12 @@ msgid "Adjust poll date"
 msgstr ""
 
 #: ureport/polls/views.py:111
-#, fuzzy
-#| msgid "Your poll has been created, now pick which questions to include."
 msgid "Your poll has been updated, now pick which questions to include."
-msgstr "لقد تم إنشاء الإستطلاع الخاص بك. ما هي الأسئلة التي تود نشرها"
+msgstr ""
 
 #: ureport/polls/views.py:122
-#, fuzzy
-#| msgid "Your poll has been created, now pick which questions to include."
 msgid "Your poll has been created, now adjust the poll date."
-msgstr "لقد تم إنشاء الإستطلاع الخاص بك. ما هي الأسئلة التي تود نشرها"
+msgstr ""
 
 #: ureport/polls/views.py:152
 msgid "Poll Images"
@@ -1997,9 +1864,7 @@ msgstr "تم تحديث الإستطلاع الخاص بك "
 #: ureport/polls/views.py:214
 #, python-format
 msgid "Response %d Reporter"
-msgstr ""
-"رد من أحد المشاركين في يوريبورت U-Report \n"
-" %d"
+msgstr "رد من أحد المشاركين في يوريبورت U-Report \n %d"
 
 #: ureport/polls/views.py:214
 msgid "The name or alias of the responder."
@@ -2053,10 +1918,8 @@ msgid "Ruleset Label"
 msgstr "مسمى القاعدة"
 
 #: ureport/polls/views.py:292
-#, fuzzy
-#| msgid "The label of the ruleset on RapidPro"
 msgid "The label of the ruleset from RapidPro"
-msgstr "مسمى القاعدة على RapidPro"
+msgstr ""
 
 #: ureport/polls/views.py:296
 msgid "Title"
@@ -2114,9 +1977,7 @@ msgstr "إختر 6 ألوان لتنسيق الرسوم البيانية، ال�
 
 #: ureport/settings_common.py:195
 msgid "The Google Analytics Tracking ID for this organization"
-msgstr ""
-"الرجاء إدخال رمز التتبع الخاص بهذه الجمعية أو المنظمة من محلل جوجل  Google "
-"Analytics   "
+msgstr "الرجاء إدخال رمز التتبع الخاص بهذه الجمعية أو المنظمة من محلل جوجل  Google Analytics   "
 
 #: ureport/settings_common.py:196
 msgid "The URL to the Youtube channel for this organization"
@@ -2137,10 +1998,8 @@ msgid ""
 msgstr "عدد صحيح من معرّف تطبيق الفيسبوك لتطبيق محادثة هذه المنظمة (اختياري)"
 
 #: ureport/settings_common.py:200
-#, fuzzy
-#| msgid "The integer id to the Facebook page for this organization (optional)"
 msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr "عدد صحيح من معرّف صفحة الفيسبوك لهذه المنظمة (اختياري)"
+msgstr ""
 
 #: ureport/settings_common.py:201
 msgid "The Instagram username for this organization"
@@ -2210,9 +2069,7 @@ msgstr "بحال وجود أعمال ليتم إظهارها على الموقع
 msgid ""
 "If this org if for global data. e.g: It shows a world map instead of a "
 "country map."
-msgstr ""
-"إذا كانت هذه المنظمة للبيانات العالمية، مثال: إنها تظهر خريطة عالمية بدل "
-"الخريطة المحلية"
+msgstr "إذا كانت هذه المنظمة للبيانات العالمية، مثال: إنها تظهر خريطة عالمية بدل الخريطة المحلية"
 
 #: ureport/settings_common.py:217
 msgid ""
@@ -2225,82 +2082,8 @@ msgstr ""
 msgid ""
 "If you need to include some custom HTML codes in you org pages, like custom "
 "analytics code snippets"
-msgstr ""
-"إذا كنت تريد إدراج بعض رموز النطاقات الخاصة على صفحات منظمتك، مثل custom "
-"analytics code snippets "
+msgstr "إذا كنت تريد إدراج بعض رموز النطاقات الخاصة على صفحات منظمتك، مثل custom analytics code snippets "
 
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
-
-#~ msgid "VIEW FULL RESULT"
-#~ msgstr "لمشاهدة النتائج كاملة"
-
-#~ msgid "Least responded"
-#~ msgstr "الأقل تجاوباً "
-
-#~ msgid "WATCH MORE VIDEOS"
-#~ msgstr "لمشاهدة المزيد من الفيديوهات "
-
-#~ msgid "VIEW MORE STORIES ON FACEBOOK"
-#~ msgstr "لمشاهدة المزيد من المقالات والأخبار على الفيسبوك "
-
-#~ msgid "VIEW MORE ON INSTAGRAM"
-#~ msgstr "عرض المزيد على إنستغرام"
-
-#~ msgid "READ MORE TWEETS ON TWITTER"
-#~ msgstr "لمشاهدة المزيد من التغريدات على التويتر "
-
-#~ msgid "READ FULL STORY"
-#~ msgstr "لقرأة المقالة كاملة "
-
-#~ msgid "TWEET TO"
-#~ msgstr "غرِد لـِ "
-
-#~ msgid "VISIT"
-#~ msgstr "زيارة"
-
-#~ msgid "COMPOSE NEW TWEET"
-#~ msgstr " تغريدة جديدة "
-
-#~ msgid ""
-#~ "\n"
-#~ "                  %(questions)s QUESTION POLLED ON THIS TOPIC\n"
-#~ "                "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                  %(questions)s QUESTIONS POLLED ON THIS TOPIC\n"
-#~ "                "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "                  %(questions)s أسئلة شملها الاستطلاع حول هذا الموضوع\n"
-#~ "                "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "                  %(questions)s سؤال شمله الاستطلاع حول هذا الموضوع\n"
-#~ "                "
-#~ msgstr[2] ""
-#~ "\n"
-#~ "                  %(questions)s أسئلة شملها الاستطلاع حول هذا الموضوع\n"
-#~ "                "
-#~ msgstr[3] ""
-#~ "\n"
-#~ "                  %(questions)s أسئلة شملها الاستطلاع حول هذا الموضوع\n"
-#~ "                "
-#~ msgstr[4] ""
-#~ "\n"
-#~ "                  %(questions)s أسئلة شملها الاستطلاع حول هذا الموضوع\n"
-#~ "                "
-#~ msgstr[5] ""
-#~ "\n"
-#~ "                  %(questions)s أسئلة شملها الاستطلاع حول هذا الموضوع\n"
-#~ "                "
-
-#~ msgid "RESPONDED OUT OF"
-#~ msgstr "مجموع من تجاوب مع الإستطلاع مٍن "
-
-#~ msgid "POLLED"
-#~ msgstr "مشمولة في الإستطلاع "
-
-#~ msgid "The Twitter widget used for following new users"
-#~ msgstr "التطبيق المساند الخاص بمتابعة أعضائنا الجدد على تويتر "
