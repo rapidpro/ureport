@@ -209,12 +209,13 @@ class PublicTest(UreportTest):
         self.assertFalse("<meta content=\'noindex\' name=\'robots\' />" in response.content)
         self.assertFalse('nigeria.ureport.io/users/login/' in response.content)
 
-    def test_is_rtl_org_processors(self):
+    def test_org_lang_params_processors(self):
         home_url = reverse('public.index')
 
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertFalse(response.context['is_rtl_org'])
+        self.assertEquals(response.context['org_lang'], 'en_US')
 
         self.nigeria.language = 'ar'
         self.nigeria.save()
@@ -222,6 +223,7 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['is_rtl_org'])
+        self.assertEquals(response.context['org_lang'], 'ar_AR')
 
     def test_set_story_widget_url(self):
         home_url = reverse('public.index')

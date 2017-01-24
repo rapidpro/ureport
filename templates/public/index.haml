@@ -55,6 +55,10 @@
                   .hero-description
                     {{ latest_poll.title }}
 
+                  .hero-facebook-message-us-button
+                    -if not is_iorg and org|config:"facebook_page_id" and org|config:"facebook_app_id"
+                      <div class="fb-messengermessageus" messenger_app_id="{{ org|config:"facebook_app_id" }}" page_id="{{ org|config:"facebook_page_id" }}" color="blue" size="large" ></div>
+
         .hero-stats-container
           .container
             .row
