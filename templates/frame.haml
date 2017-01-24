@@ -450,11 +450,11 @@
                       %img.footer-social{ src:"{{ STATIC_URL }}img/facebook_footer_icon.png" }
 
                   - if org|config:"instagram_username"
-                    %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
+                    %a{href:'https://instagram.com/{{ org|config:"instagram_username"}}'}
                       %img.footer-social{ src:"{{ STATIC_URL }}img/instagram_footer_icon.png" }
 
                   - if org|config:"twitter_handle"
-                    %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
+                    %a{href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
                       %img.footer-social{ src:"{{ STATIC_URL }}img/twitter_footer_icon.png" }
 
                   - if org|config:"youtube_channel_url"
