@@ -45,17 +45,21 @@ def set_is_iorg(request):
     return dict(is_iorg=is_iorg)
 
 
-def set_is_rtl_org(request):
+def set_org_lang_params(request):
     """
     Context Processor that populates the 'is_rtl_org' context variable with whether
     the org language is a right to left language
     """
     is_rtl_org = False
+    org_lang = 'en_US'
     org = request.org
     if org and org.language in getattr(settings, 'RTL_LANGUAGES', []):
         is_rtl_org = True
 
-    return dict(is_rtl_org=is_rtl_org)
+        org_langs = getattr(settings, 'ORG_LANG_MAP', {})
+        org_lang = org_langs.get(org.language)
+
+    return dict(is_rtl_org=is_rtl_org, org_lang=org_lang)
 
 
 def set_story_widget_url(request):
