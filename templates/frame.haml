@@ -162,7 +162,7 @@
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
       n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-      document,'script','//connect.facebook.net/en_US/fbevents.js');
+      document,'script','//connect.facebook.net/{{ org_lang }}/fbevents.js');
       fbq('init', '{{ org|config:"facebook_pixel_id" }}');
       fbq('track', 'PageView');
     </script>
@@ -186,7 +186,7 @@
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+    js.src = "//connect.facebook.net/{{ org_lang }}/sdk.js#xfbml=1&version=v2.6";
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
