@@ -19,6 +19,8 @@
                   - trans "FEATURED STORY"
                 .story-hero-title
                   {{ main_story.title }}
+                .story-hero-date
+                  {{ main_story.created_on|date:"M j. Y"|upper }}
                 -if story.created_by.first_name
                   .hero-author
                     - trans "BY"
@@ -76,6 +78,8 @@
                 .white-card-content.white-card-padding
                   .featured-story-title
                     {{ featured_story.title }}
+                  .featured-story-date
+                    {{ featured_story.created_on|date:"M j. Y"|upper }}
                   .half-border.none-color
                   .featured-story-teaser
                     {{ featured_story.short_teaser|safe }}

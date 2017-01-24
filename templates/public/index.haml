@@ -314,6 +314,8 @@
 
               .brick-short-story-title
                 {{ story.title }}
+              .brick-short-story-date
+                {{ story.created_on|date:"M j. Y"|upper }}
               %a.brick-link{ href:"{% url 'public.story_read' story.pk %}" }
                 - trans "Read full story"
                 {{ org|org_arrow_link }}
@@ -335,6 +337,9 @@
 
                   .brick-short-story-title
                     {{ ot_story.title }}
+
+                  .brick-short-story-date
+                    {{ story.created_on|date:"M j. Y"|upper }}
 
                 %a.brick-link{href:"{% url 'public.story_read' ot_story.pk %}"}
                   - trans "Read full story"
