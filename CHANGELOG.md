@@ -1,3 +1,7 @@
+v1.0.325
+----------
+ * Tweak date styles
+
 v1.0.324
 ----------
  * Add Facebook message us button on home page
