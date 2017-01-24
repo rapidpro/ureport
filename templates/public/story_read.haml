@@ -16,7 +16,7 @@
             .story-hero-title
               {{ story.title }}
             .story-hero-date
-              {{ story.created_on|date:"M j. Y"|upper }}
+              {{ story.created_on|date }}
             -if story.get_written_by
               .hero-author
                 - trans "BY"
@@ -105,7 +105,7 @@
               .related-story-title.primary-color
                 {{ story.title|upper }}
               .related-story-date
-                {{ story.created_on|date:"M j. Y" }}
+                {{ story.created_on|date }}
               .related-story-teaser
                 {{ story.short_teaser|safe }}
               %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}

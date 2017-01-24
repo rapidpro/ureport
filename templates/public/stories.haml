@@ -20,7 +20,7 @@
                 .story-hero-title
                   {{ main_story.title }}
                 .story-hero-date
-                  {{ main_story.created_on|date:"M j. Y"|upper }}
+                  {{ main_story.created_on|date }}
                 -if story.created_by.first_name
                   .hero-author
                     - trans "BY"
@@ -79,7 +79,7 @@
                   .featured-story-title
                     {{ featured_story.title }}
                   .featured-story-date
-                    {{ featured_story.created_on|date:"M j. Y"|upper }}
+                    {{ featured_story.created_on|date }}
                   .half-border.none-color
                   .featured-story-teaser
                     {{ featured_story.short_teaser|safe }}
