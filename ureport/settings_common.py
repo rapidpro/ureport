@@ -65,6 +65,18 @@ LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Ara
 DEFAULT_LANGUAGE = "en"
 RTL_LANGUAGES = ['ar']
 
+ORG_LANG_MAP = {
+    'ar': 'ar_AR',
+    'en': 'en_US',
+    'es': 'es_ES',
+    'fr': 'fr_FR',
+    'id': 'id_ID',
+    'my': 'my_MM',
+    'pt': 'pt_PT',
+    'pt-br': 'pt_BR',
+    'uk': 'uk_UA'
+}
+
 
 SITE_ID = 1
 
@@ -280,7 +292,7 @@ TEMPLATES = [
                 'ureport.assets.context_processors.set_assets_processor',
                 'ureport.public.context_processors.set_has_better_domain',
                 'ureport.public.context_processors.set_is_iorg',
-                'ureport.public.context_processors.set_is_rtl_org',
+                'ureport.public.context_processors.set_org_lang_params',
                 'ureport.public.context_processors.set_story_widget_url',
             ],
             'loaders': [
@@ -591,15 +603,3 @@ SWAGGER_SETTINGS = {
 }
 
 STORY_WIDGET_URL = 'http://ureportapp.ilhasoft.mobi/widget/'
-
-FACEBOOK_MESSENGER_LANGUAGES = {
-    'en': 'en_US',
-    'fr': 'fr_FR',
-    'es': 'es_ES',
-    'ar': 'ar_AR',
-    'pt': 'pt_PT',
-    'pt-br': 'pt_BR',
-    'uk': 'uk_UA',
-    'my': 'my_MM',
-    'th': 'th_TH'
-}

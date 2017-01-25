@@ -42,16 +42,6 @@
     }
 
 
-    .public-nav-ul .level1 .fb-messengermessageus {
-      margin-top: 52px;
-    }
-
-    @media (max-width: 768px){
-      .public-nav-ul .level1 .fb-messengermessageus {
-        margin-top: 5px;
-      }
-    }
-
   -block styles
     - if is_rtl_org
       - compress css
@@ -172,7 +162,7 @@
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
       n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-      document,'script','//connect.facebook.net/en_US/fbevents.js');
+      document,'script','//connect.facebook.net/{{ org_lang }}/fbevents.js');
       fbq('init', '{{ org|config:"facebook_pixel_id" }}');
       fbq('track', 'PageView');
     </script>
@@ -196,7 +186,7 @@
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/{{ fb_button_language }}/sdk.js#xfbml=1&version=v2.6";
+    js.src = "//connect.facebook.net/{{ org_lang }}/sdk.js#xfbml=1&version=v2.6";
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
@@ -401,10 +391,6 @@
                   %a.primary-color{ href:"{% url 'public.join' %}"}
                     - trans "Join & Engage"
 
-                -if not is_iorg and not org|config:"is_global" and org|config:"facebook_page_id" and org|config:"facebook_app_id"
-                  %li.level1
-                    %div.fb-messengermessageus{ messenger_app_id:'{{ org|config:"facebook_app_id" }}', page_id:'{{ org|config:"facebook_page_id" }}', color:"blue", size:"large" }
-
                 -#%li.level1.dropdown
                 -#  %a.primary-color.dropdown-toggle{type:"button", data-toggle:"dropdown"}
                 -#    Language
@@ -464,11 +450,11 @@
                       %img.footer-social{ src:"{{ STATIC_URL }}img/facebook_footer_icon.png" }
 
                   - if org|config:"instagram_username"
-                    %a{href:'http://instagram.com/{{ org|config:"instagram_username"}}'}
+                    %a{href:'https://instagram.com/{{ org|config:"instagram_username"}}'}
                       %img.footer-social{ src:"{{ STATIC_URL }}img/instagram_footer_icon.png" }
 
                   - if org|config:"twitter_handle"
-                    %a{href:'http://twitter.com/{{ org|config:"twitter_handle" }}'}
+                    %a{href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
                       %img.footer-social{ src:"{{ STATIC_URL }}img/twitter_footer_icon.png" }
 
                   - if org|config:"youtube_channel_url"
