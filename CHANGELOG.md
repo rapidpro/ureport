@@ -1,3 +1,8 @@
+v1.0.326
+----------
+ * Add migrations to remove inactive objects not needed
+ * FIx typo in method name for syncers
+
 v1.0.325
 ----------
  * Tweak date styles

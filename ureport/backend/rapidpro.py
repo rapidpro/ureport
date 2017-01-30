@@ -38,7 +38,7 @@ class FieldSyncer(BaseSyncer):
     def update_required(self, local, remote, local_kwags):
         return local.label != remote.label or local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)
 
-    def delete_locale(self, local):
+    def delete_local(self, local):
         local.release()
 
 
@@ -80,7 +80,7 @@ class BoundarySyncer(BaseSyncer):
         return not is_dict_equal(json.loads(local.geometry),
                                  dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
 
-    def delete_locale(self, local):
+    def delete_local(self, local):
         local.release()
 
 

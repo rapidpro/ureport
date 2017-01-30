@@ -115,7 +115,7 @@ class BoundarySyncerTest(UreportTest):
                                         level=Boundary.COUNTRY_LEVEL,
                                         geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
 
-        self.syncer.delete_locale(local)
+        self.syncer.delete_local(local)
         self.assertFalse(Boundary.objects.filter(pk=local.pk))
 
 
@@ -591,7 +591,8 @@ class RapidProBackendTest(UreportTest):
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 1, 1, 0))
 
-        ContactField.objects.get(key="nick_name", label="Nickname", value_type="T", is_active=False)
+        self.assertFalse(ContactField.objects.filter(org=self.nigeria, key="nick_name", label="Nickname",
+                                                     value_type="T"))
         ContactField.objects.get(key="age", label="Age (Years)", value_type="N", is_active=True)
         ContactField.objects.get(key="homestate", label="Homestate", value_type="S", is_active=True)
 
@@ -652,6 +653,16 @@ class RapidProBackendTest(UreportTest):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
+
+        mock_get_boundaries.return_value = [
+            TembaBoundary.create(boundary='OLD123', name='CHANGED2', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                 geometry=geometry)
+        ]
+
+        with self.assertNumQueries(5):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 1))
 
     @patch('redis.client.StrictRedis.lock')
     @patch('dash.orgs.models.TembaClient2.get_runs')
