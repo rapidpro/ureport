@@ -1,3 +1,7 @@
+v1.0.327
+----------
+ * Change story widget URL to https
+
 v1.0.326
 ----------
  * Add migrations to remove inactive objects not needed
