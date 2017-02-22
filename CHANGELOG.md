@@ -1,3 +1,7 @@
+v1.0.328
+----------
+ * Update ukrainian translations
+
 v1.0.327
 ----------
  * Change story widget URL to https
