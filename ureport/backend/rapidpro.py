@@ -48,12 +48,14 @@ class BoundarySyncer(BaseSyncer):
     """
     model = Boundary
     local_id_attr = 'osm_id'
-    remote_id_attr = 'boundary'
+    remote_id_attr = 'osm_id'
 
     def local_kwargs(self, org, remote):
         geometry = json.dumps(dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
 
-        parent = Boundary.objects.filter(osm_id__iexact=remote.parent, org=org).first()
+        parent = None
+        if remote.parent:
+            parent = Boundary.objects.filter(osm_id__iexact=remote.parent.osm_id, org=org).first()
 
         return {
             'org': org,
@@ -61,7 +63,7 @@ class BoundarySyncer(BaseSyncer):
             'parent': parent,
             'level': remote.level,
             'name': remote.name,
-            'osm_id': remote.boundary
+            'osm_id': remote.osm_id
         }
 
     def update_required(self, local, remote, local_kwargs):
@@ -74,7 +76,7 @@ class BoundarySyncer(BaseSyncer):
         if remote.parent:
             if not local.parent:
                 return True
-            elif local.parent.osm_id != remote.parent:
+            elif local.parent.osm_id != remote.parent.osm_id:
                 return True
 
         return not is_dict_equal(json.loads(local.geometry),
@@ -262,8 +264,8 @@ class RapidProBackend(BaseBackend):
         if org.get_config('is_global'):
             incoming_objects = Boundary.build_global_boundaries()
         else:
-            client = self._get_client(org, 1)
-            incoming_objects = client.get_boundaries()
+            client = self._get_client(org, 2)
+            incoming_objects = client.get_boundaries().all()
 
         return sync_local_to_set(org, BoundarySyncer(), incoming_objects)
 
