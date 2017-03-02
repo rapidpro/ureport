@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-erals
+from __future__ import unicode_literals
+
 import json
 
 from datetime import timedelta, datetime
@@ -1416,7 +1419,7 @@ class PollQuestionTest(UreportTest):
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-4', date=now, category='All responses', state='', district='',
-                                  text='awesome than this encore', completed=False)
+                                  text="awesome than educación this encore", completed=False)
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-5', date=now, category='All responses', state='', district='',
@@ -1431,6 +1434,26 @@ class PollQuestionTest(UreportTest):
 
             results = poll_question1.calculate_results()
             result = results[0]
+            self.assertEquals(11, len(result['categories']))
+
+            self.assertTrue(result['open_ended'])
+            self.assertResult(result, 0, "awesome", 2)
+            self.assertResult(result, 1, "place", 2)
+            self.assertResult(result, 2, "better", 1)
+            self.assertResult(result, 3, "black", 1)
+            self.assertResult(result, 4, "coffee", 1)
+            self.assertResult(result, 5, "cup", 1)
+            self.assertResult(result, 6, "educación", 1)
+            self.assertResult(result, 7, "encore", 1)
+            self.assertResult(result, 8, "great", 1)
+            self.assertResult(result, 9, "kigali", 1)
+            self.assertResult(result, 10, "tea", 1)
+
+            self.uganda.language = 'fr'
+            self.uganda.save()
+
+            results = poll_question1.calculate_results()
+            result = results[0]
             self.assertEquals(10, len(result['categories']))
             self.assertTrue(result['open_ended'])
             self.assertResult(result, 0, "awesome", 2)
@@ -1439,27 +1462,10 @@ class PollQuestionTest(UreportTest):
             self.assertResult(result, 3, "black", 1)
             self.assertResult(result, 4, "coffee", 1)
             self.assertResult(result, 5, "cup", 1)
-            self.assertResult(result, 6, "encore", 1)
+            self.assertResult(result, 6, "educación", 1)
             self.assertResult(result, 7, "great", 1)
             self.assertResult(result, 8, "kigali", 1)
             self.assertResult(result, 9, "tea", 1)
-
-            self.uganda.language = 'fr'
-            self.uganda.save()
-
-            results = poll_question1.calculate_results()
-            result = results[0]
-            self.assertEquals(9, len(result['categories']))
-            self.assertTrue(result['open_ended'])
-            self.assertResult(result, 0, "awesome", 2)
-            self.assertResult(result, 1, "place", 2)
-            self.assertResult(result, 2, "better", 1)
-            self.assertResult(result, 3, "black", 1)
-            self.assertResult(result, 4, "coffee", 1)
-            self.assertResult(result, 5, "cup", 1)
-            self.assertResult(result, 6, "great", 1)
-            self.assertResult(result, 7, "kigali", 1)
-            self.assertResult(result, 8, "tea", 1)
 
             self.uganda.language = 'en'
             self.uganda.save()
