@@ -1,3 +1,7 @@
+v1.0.330
+----------
+ * Fix building global boundaries and boundary missing geometry
+
 v1.0.329
 ----------
  * Switch locations sync to use RapidPro API v2
