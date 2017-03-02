@@ -81,8 +81,11 @@ class BoundarySyncer(BaseSyncer):
             elif local.parent.osm_id != remote.parent.osm_id:
                 return True
 
-        return not is_dict_equal(json.loads(local.geometry),
-                                 dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
+        geometry_dict = dict()
+        if remote.geometry:
+            geometry_dict = dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates)
+
+        return not is_dict_equal(json.loads(local.geometry), geometry_dict)
 
     def delete_local(self, local):
         local.release()
