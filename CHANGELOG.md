@@ -1,3 +1,8 @@
+v1.0.332
+----------
+ * Fix get boundaries
+ * Update Arabic language
+
 v1.0.331
 ----------
  * More fix for remote missing geometry
