@@ -270,7 +270,7 @@ class RapidProBackend(BaseBackend):
             incoming_objects = Boundary.build_global_boundaries()
         else:
             client = self._get_client(org, 2)
-            incoming_objects = client.get_boundaries().all()
+            incoming_objects = client.get_boundaries(geometry=True).all()
 
         return sync_local_to_set(org, BoundarySyncer(), incoming_objects)
 
