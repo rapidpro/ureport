@@ -1,3 +1,8 @@
+v1.0.329
+----------
+ * Switch locations sync to use RapidPro API v2
+ * Ordering open ended words cloud responses first then limit the list to 100
+
 v1.0.328
 ----------
  * Update ukrainian translations
