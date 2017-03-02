@@ -634,6 +634,8 @@ class RapidProBackendTest(UreportTest):
         with self.assertNumQueries(4):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
+        mock_get_boundaries.assert_called_once_with(geometry=True)
+
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 0))
 
         Boundary.objects.all().delete()
