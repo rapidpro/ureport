@@ -762,12 +762,13 @@ class PollQuestion(SmartModel):
 
             categories = []
 
+            # sort by count, then alphabetically
+            unclean_categories = sorted(unclean_categories, key=lambda c: (-c['count'], c['label']))
+
             for category in unclean_categories:
                 if len(category['label']) > 1 and category['label'] not in ignore_words and len(categories) < 100:
                     categories.append(dict(label=category['label'], count=int(category['count'])))
 
-            # sort by count, then alphabetically
-            categories = sorted(categories, key=lambda c: (-c['count'], c['label']))
             results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
 
         else:

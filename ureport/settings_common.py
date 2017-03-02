@@ -602,4 +602,4 @@ SWAGGER_SETTINGS = {
     ],
 }
 
-STORY_WIDGET_URL = 'http://ureportapp.ilhasoft.mobi/widget/'
+STORY_WIDGET_URL = 'https://ureportapp.ilhasoft.mobi/widget/'

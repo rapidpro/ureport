@@ -105,13 +105,13 @@ class LocationTest(UreportTest):
             danemark = boundaries[0]
             faroe = boundaries[1]
 
-            self.assertEqual(danemark.boundary, "DK")
+            self.assertEqual(danemark.osm_id, "DK")
             self.assertEqual(danemark.name, "Denmark")
             self.assertEqual(danemark.level, 0)
             self.assertEqual(danemark.geometry.type, "MultiPolygon")
             self.assertEqual(danemark.geometry.coordinates, [[[[1, 2], [3, 4]]]])
 
-            self.assertEqual(faroe.boundary, "FO")
+            self.assertEqual(faroe.osm_id, "FO")
             self.assertEqual(faroe.name, "Faroe Islands")
             self.assertEqual(faroe.level, 0)
             self.assertEqual(faroe.geometry.type, "Polygon")
