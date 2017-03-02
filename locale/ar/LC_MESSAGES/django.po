@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Fadi Al-Halabi <falhalabi@unicef.org>, 2016
+# Fadi Al-Halabi <falhalabi@unicef.org>, 2016-2017
 # Tech Tribes <Khaled@techtribes.org>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-27 08:22+0000\n"
-"PO-Revision-Date: 2016-10-27 08:49+0000\n"
-"Last-Translator: Nyaruka <info@textit.in>\n"
+"PO-Revision-Date: 2017-02-22 13:15+0000\n"
+"Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1176,7 +1176,7 @@ msgid ""
 "\n"
 "                                  %(responded)s of %(total)s\n"
 "                                  "
-msgstr "\n%(responded)s من أصل %(total)s\n "
+msgstr "\n%(responded)s  من أصل  %(total)s "
 
 #: templates/public/index.haml:158
 msgid "TRENDING WORDS"
@@ -1188,7 +1188,7 @@ msgstr "ردود إستثنائية "
 
 #: templates/public/index.haml:191 templates/public/index.haml.py:580
 msgid "View full results"
-msgstr "مشاهدة النتائج كاملة"
+msgstr "إظهار النتائج كاملة"
 
 #: templates/public/index.haml:211 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
@@ -1220,7 +1220,7 @@ msgstr "الفيديو الأبرز "
 
 #: templates/public/index.haml:331
 msgid "Watch more videos"
-msgstr ""
+msgstr "مشاهدة المزيد من الفيديوهات"
 
 #: templates/public/index.haml:342
 msgid "FEATURED REGION"
@@ -1228,19 +1228,19 @@ msgstr "الإقليم الأبرز"
 
 #: templates/public/index.haml:366
 msgid "Check more stories in U-Report app"
-msgstr ""
+msgstr "يمكنك مشاهدة المزيد من القصص على تطبيق يوريبورت "
 
 #: templates/public/index.haml:385 templates/public/join_engage.haml:99
 msgid "View more stories on Facebook"
-msgstr ""
+msgstr "مشاهدة المزيد من القصص على فيس بوك "
 
 #: templates/public/index.haml:404
 msgid "View more on Instagram"
-msgstr ""
+msgstr "مشاهدة المزيد على انستغرام"
 
 #: templates/public/index.haml:424
 msgid "Read more tweets on Twitter"
-msgstr ""
+msgstr "قراءة المزيد من التغريدات على تويتر "
 
 #: templates/public/index.haml:435
 msgid "NEWS FEED"
@@ -1255,7 +1255,7 @@ msgstr "قصة"
 #: templates/public/index.haml:534 templates/public/index.haml.py:619
 #: templates/public/stories.haml:36 templates/public/stories.haml.py:117
 msgid "Read full story"
-msgstr ""
+msgstr "قراءة القصة الكاملة"
 
 #: templates/public/index.haml:557
 msgid "Response Rate"
@@ -1283,7 +1283,7 @@ msgstr "إقرأ المزيد"
 
 #: templates/public/jobs.haml:108
 msgid "Visit"
-msgstr ""
+msgstr "زيارة"
 
 #: templates/public/join_engage.haml:17
 msgid "JOIN U-REPORT"
@@ -1308,7 +1308,7 @@ msgstr "تابع يوريبورتU-REPORT على مواقع التوصل الإ�
 
 #: templates/public/join_engage.haml:140
 msgid "Compose new Tweet"
-msgstr ""
+msgstr "إنشاء تغريدة جديدة"
 
 #: templates/public/polls.haml:16
 msgid "CURRENT POLL IN"
@@ -1324,24 +1324,24 @@ msgid_plural ""
 "\n"
 "                  %(questions)s questions polled on this topic\n"
 "                "
-msgstr[0] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
-msgstr[1] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
-msgstr[2] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
-msgstr[3] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
-msgstr[4] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
-msgstr[5] "\nسؤال تم طرحه بما يخص هذا الموضوع %(questions)s"
+msgstr[0] "\n%(questions)s سؤال تم طرحه في هذا الموضوع"
+msgstr[1] "\n%(questions)s سؤال تم طرحه في هذا الموضوع"
+msgstr[2] "\n%(questions)s سؤال تم طرحه في هذا الموضوع"
+msgstr[3] "\n%(questions)s سؤال تم طرحه في هذا الموضوع"
+msgstr[4] "\n%(questions)s سؤال تم طرحه في هذا الموضوع"
+msgstr[5] "\n%(questions)s سؤال تم طرحه في هذا الموضوع"
 
 #: templates/public/polls.haml:43
 msgid "response rate"
-msgstr "نسبة التجاوب "
+msgstr "نسبة الإجابة"
 
 #: templates/public/polls.haml:49
 msgid "responded out of"
-msgstr "أجابو على الاستطلاع من أصل "
+msgstr "استجابوا من أصل "
 
 #: templates/public/polls.haml:53
 msgid "polled"
-msgstr " الذين شملهم الاستطلاع "
+msgstr "الذين شملهم الاستطلاع"
 
 #: templates/public/polls.haml:96
 msgid "POLL RESULTS"
@@ -1353,7 +1353,7 @@ msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr "\nقام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
+msgstr "\nقام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع..."
 
 #: templates/public/polls.haml:121
 msgid "KEYWORDS"
@@ -1827,7 +1827,7 @@ msgstr "الرجاء إدخال سؤال واحد على الأقل للإستط
 
 #: ureport/polls/views.py:108
 msgid "Adjust poll date"
-msgstr ""
+msgstr "ضبط تاريخ الإستطلاع"
 
 #: ureport/polls/views.py:111
 msgid "Your poll has been updated, now pick which questions to include."
