@@ -118,6 +118,15 @@ class BoundarySyncerTest(UreportTest):
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
+        local = Boundary.objects.create(org=self.nigeria, osm_id='SOME123', name='Location', parent=None,
+                                        level=Boundary.COUNTRY_LEVEL,
+                                        geometry='{}')
+
+        remote = TembaBoundary.create(osm_id='SOME123', name='Location', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                      geometry=None)
+
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+
     def test_delete_local(self):
 
         local = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None,
