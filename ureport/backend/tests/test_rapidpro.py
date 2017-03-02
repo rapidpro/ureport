@@ -61,6 +61,15 @@ class BoundarySyncerTest(UreportTest):
         self.syncer = BoundarySyncer()
 
     def test_local_kwargs(self):
+        country = TembaBoundary.create(osm_id='R12345', name='Nigeria', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                       geometry=None, aliases=None)
+
+        kwargs = self.syncer.local_kwargs(self.nigeria, country)
+        self.assertEqual(kwargs, {'org': self.nigeria,
+                                  'geometry': json.dumps(dict()),
+                                  'parent': None, 'level': 0,
+                                  'name': 'Nigeria', 'osm_id': 'R12345'})
+
         geometry = TembaBoundary.Geometry.create(type='MultiPolygon', coordinates=['COORDINATES'])
         country = TembaBoundary.create(osm_id='R12345', name='Nigeria', parent=None, level=Boundary.COUNTRY_LEVEL,
                                        geometry=geometry, aliases=None)

@@ -51,7 +51,9 @@ class BoundarySyncer(BaseSyncer):
     remote_id_attr = 'osm_id'
 
     def local_kwargs(self, org, remote):
-        geometry = json.dumps(dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
+        geometry = json.dumps(dict())
+        if remote.geometry:
+            geometry = json.dumps(dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
 
         parent = None
         if remote.parent:

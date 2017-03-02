@@ -71,7 +71,7 @@ class Boundary(models.Model):
     def build_global_boundaries(cls):
 
         from django.conf import settings
-        from temba_client.v1.types import Geometry as TembaGeometry, Boundary as TembaBoundary
+        from temba_client.v2.types import Boundary as TembaBoundary
         handle = open('%s/geojson/countries.json' % settings.MEDIA_ROOT, 'r+')
         contents = handle.read()
         handle.close()
@@ -80,11 +80,11 @@ class Boundary(models.Model):
 
         boundaries = []
         for elt in boundaries_json['features']:
-            temba_geometry = TembaGeometry.create(type=elt['geometry']['type'],
-                                                  coordinates=elt['geometry']['coordinates'])
+            temba_geometry = TembaBoundary.Geometry.create(type=elt['geometry']['type'],
+                                                           coordinates=elt['geometry']['coordinates'])
 
-            temba_boundary = TembaBoundary.create(level=0, name=elt['properties']['name'],
-                                                  boundary=elt['properties']['hc-a2'], geometry=temba_geometry)
+            temba_boundary = TembaBoundary.create(level=0, name=elt['properties']['name'], aliases=None,
+                                                  osm_id=elt['properties']['hc-a2'], geometry=temba_geometry)
 
             boundaries.append(temba_boundary)
 
