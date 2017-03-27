@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-27 08:22+0000\n"
-"PO-Revision-Date: 2017-01-03 13:15+0000\n"
+"PO-Revision-Date: 2017-02-22 13:15+0000\n"
 "Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -1148,7 +1148,7 @@ msgstr "إستطلاعات الرأي الحالية "
 
 #: templates/public/index.haml:42
 msgid "View Full Results"
-msgstr ""
+msgstr "مشاهدة النتائج كاملة"
 
 #: templates/public/index.haml:52
 msgid "All U-Report members"
@@ -1176,7 +1176,7 @@ msgid ""
 "\n"
 "                                  %(responded)s of %(total)s\n"
 "                                  "
-msgstr ""
+msgstr "\n%(responded)s  من أصل  %(total)s "
 
 #: templates/public/index.haml:158
 msgid "TRENDING WORDS"
@@ -1337,11 +1337,11 @@ msgstr "نسبة الإجابة"
 
 #: templates/public/polls.haml:49
 msgid "responded out of"
-msgstr ""
+msgstr "استجابوا من أصل "
 
 #: templates/public/polls.haml:53
 msgid "polled"
-msgstr ""
+msgstr "الذين شملهم الاستطلاع"
 
 #: templates/public/polls.haml:96
 msgid "POLL RESULTS"
@@ -1353,7 +1353,7 @@ msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr "\nقام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع."
+msgstr "\nقام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع..."
 
 #: templates/public/polls.haml:121
 msgid "KEYWORDS"
