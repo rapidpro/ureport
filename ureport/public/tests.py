@@ -864,6 +864,9 @@ class PublicTest(UreportTest):
                                                parent=self.mbarara,
                                                geometry='{"type":"MultiPolygon", "coordinates":[[8, 8]]}')
 
+        self.kabare = Boundary.objects.create(org=self.uganda, osm_id="R9989", name="Kabare", level=1,
+                                              parent=self.country, geometry='{}')
+
         response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
 

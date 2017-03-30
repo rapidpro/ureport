@@ -48,12 +48,16 @@ class BoundarySyncer(BaseSyncer):
     """
     model = Boundary
     local_id_attr = 'osm_id'
-    remote_id_attr = 'boundary'
+    remote_id_attr = 'osm_id'
 
     def local_kwargs(self, org, remote):
-        geometry = json.dumps(dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
+        geometry = json.dumps(dict())
+        if remote.geometry:
+            geometry = json.dumps(dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
 
-        parent = Boundary.objects.filter(osm_id__iexact=remote.parent, org=org).first()
+        parent = None
+        if remote.parent:
+            parent = Boundary.objects.filter(osm_id__iexact=remote.parent.osm_id, org=org).first()
 
         return {
             'org': org,
@@ -61,7 +65,7 @@ class BoundarySyncer(BaseSyncer):
             'parent': parent,
             'level': remote.level,
             'name': remote.name,
-            'osm_id': remote.boundary
+            'osm_id': remote.osm_id
         }
 
     def update_required(self, local, remote, local_kwargs):
@@ -74,11 +78,14 @@ class BoundarySyncer(BaseSyncer):
         if remote.parent:
             if not local.parent:
                 return True
-            elif local.parent.osm_id != remote.parent:
+            elif local.parent.osm_id != remote.parent.osm_id:
                 return True
 
-        return not is_dict_equal(json.loads(local.geometry),
-                                 dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
+        geometry_dict = dict()
+        if remote.geometry:
+            geometry_dict = dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates)
+
+        return not is_dict_equal(json.loads(local.geometry), geometry_dict)
 
     def delete_local(self, local):
         local.release()
@@ -262,8 +269,8 @@ class RapidProBackend(BaseBackend):
         if org.get_config('is_global'):
             incoming_objects = Boundary.build_global_boundaries()
         else:
-            client = self._get_client(org, 1)
-            incoming_objects = client.get_boundaries()
+            client = self._get_client(org, 2)
+            incoming_objects = client.get_boundaries(geometry=True).all()
 
         return sync_local_to_set(org, BoundarySyncer(), incoming_objects)
 
@@ -561,6 +568,9 @@ class RapidProBackend(BaseBackend):
                               "Before cursor %s" % (poll.pk, org.pk, time.time() - start, after, before, batches_latest,
                                                     latest_synced_obj_time, num_val_created, num_val_updated,
                                                     num_val_ignored, cursor)
+
+                        from ureport.polls.tasks import pull_refresh
+                        pull_refresh.apply_async((poll.pk,), countdown=300, queue='sync')
 
                         return (num_val_created, num_val_updated, num_val_ignored,
                                 num_path_created, num_path_updated, num_path_ignored)

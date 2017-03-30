@@ -1,3 +1,33 @@
+v1.0.333
+----------
+ * Reschedule poll pull task in 5 min if pull did not finish
+
+v1.0.332
+----------
+ * Fix get boundaries
+ * Update Arabic language
+
+v1.0.331
+----------
+ * More fix for remote missing geometry
+
+v1.0.330
+----------
+ * Fix building global boundaries and boundary missing geometry
+
+v1.0.329
+----------
+ * Switch locations sync to use RapidPro API v2
+ * Ordering open ended words cloud responses first then limit the list to 100
+
+v1.0.328
+----------
+ * Update ukrainian translations
+
+v1.0.327
+----------
+ * Change story widget URL to https
+
 v1.0.326
 ----------
  * Add migrations to remove inactive objects not needed

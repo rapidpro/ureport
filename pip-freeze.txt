@@ -44,7 +44,7 @@ Pygments==2.0.2
 python-dateutil==2.4.2
 pytz==2016.4
 PyYAML==3.11
-rapidpro-python==2.1.2
+rapidpro-python==2.1.6
 raven==5.23.0
 redis==2.10.5
 regex==2015.7.19

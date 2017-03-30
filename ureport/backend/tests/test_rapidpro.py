@@ -11,7 +11,7 @@ from django.test import override_settings
 from django.utils import timezone
 from mock import patch, PropertyMock
 
-from temba_client.v1.types import Boundary as TembaBoundary, Geometry as TembaGeometry
+from temba_client.v2.types import Boundary as TembaBoundary
 from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact
 from temba_client.v2.types import Run as TembaRun
 
@@ -61,9 +61,18 @@ class BoundarySyncerTest(UreportTest):
         self.syncer = BoundarySyncer()
 
     def test_local_kwargs(self):
-        geometry = TembaGeometry.create(type='MultiPolygon', coordinates=['COORDINATES'])
-        country = TembaBoundary.create(boundary='R12345', name='Nigeria', parent=None, level=Boundary.COUNTRY_LEVEL,
-                                       geometry=geometry)
+        country = TembaBoundary.create(osm_id='R12345', name='Nigeria', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                       geometry=None, aliases=None)
+
+        kwargs = self.syncer.local_kwargs(self.nigeria, country)
+        self.assertEqual(kwargs, {'org': self.nigeria,
+                                  'geometry': json.dumps(dict()),
+                                  'parent': None, 'level': 0,
+                                  'name': 'Nigeria', 'osm_id': 'R12345'})
+
+        geometry = TembaBoundary.Geometry.create(type='MultiPolygon', coordinates=['COORDINATES'])
+        country = TembaBoundary.create(osm_id='R12345', name='Nigeria', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                       geometry=geometry, aliases=None)
 
         kwargs = self.syncer.local_kwargs(self.nigeria, country)
         self.assertEqual(kwargs, {'org': self.nigeria,
@@ -73,41 +82,50 @@ class BoundarySyncerTest(UreportTest):
 
         # try creating an object from the kwargs
         country_boundary = Boundary.objects.create(**kwargs)
-
-        state = TembaBoundary.create(boundary='R23456', name='Lagos', parent="R12345", level=Boundary.STATE_LEVEL,
-                                     geometry=geometry)
+        parent = TembaBoundary.BoundaryRef.create(osm_id=country.osm_id, name=country.name)
+        state = TembaBoundary.create(osm_id='R23456', name='Lagos', parent=parent, level=Boundary.STATE_LEVEL,
+                                     geometry=geometry, aliases=None)
         kwargs = self.syncer.local_kwargs(self.nigeria, state)
         self.assertEqual(kwargs, {'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
                                   'level': Boundary.STATE_LEVEL, 'parent': country_boundary,
                                   'geometry':json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
 
     def test_update_required(self):
-        geometry = TembaGeometry.create(type='MultiPolygon', coordinates=[[1, 2]])
+        geometry = TembaBoundary.Geometry.create(type='MultiPolygon', coordinates=[[1, 2]])
 
         local = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None,
                                         level=Boundary.COUNTRY_LEVEL,
                                         geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
 
-        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
+        remote = TembaBoundary.create(osm_id='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
                                       geometry=geometry)
 
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
-        remote = TembaBoundary.create(boundary='OLD123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
+        remote = TembaBoundary.create(osm_id='OLD123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
                                       geometry=geometry)
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
-        remote = TembaBoundary.create(boundary='OLD123', name='NEW',parent=None, level=Boundary.STATE_LEVEL,
+        remote = TembaBoundary.create(osm_id='OLD123', name='NEW', parent=None, level=Boundary.STATE_LEVEL,
                                       geometry=geometry)
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
-        geometry = TembaGeometry.create(type='MultiPolygon', coordinates=[[1, 3]])
-        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
+        geometry = TembaBoundary.Geometry.create(type='MultiPolygon', coordinates=[[1, 3]])
+        remote = TembaBoundary.create(osm_id='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
                                       geometry=geometry)
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+
+        local = Boundary.objects.create(org=self.nigeria, osm_id='SOME123', name='Location', parent=None,
+                                        level=Boundary.COUNTRY_LEVEL,
+                                        geometry='{}')
+
+        remote = TembaBoundary.create(osm_id='SOME123', name='Location', parent=None, level=Boundary.COUNTRY_LEVEL,
+                                      geometry=None)
+
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
     def test_delete_local(self):
 
@@ -602,64 +620,67 @@ class RapidProBackendTest(UreportTest):
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 2))
 
-    @patch('dash.orgs.models.TembaClient1.get_boundaries')
+    @patch('dash.orgs.models.TembaClient2.get_boundaries')
     def test_pull_boundaries(self, mock_get_boundaries):
 
         Boundary.objects.all().delete()
-        geometry = TembaGeometry.create(type='MultiPolygon', coordinates=[[1, 2]])
-        remote = TembaBoundary.create(boundary='OLD123', name='OLD', parent=None,
+        geometry = TembaBoundary.Geometry.create(type='MultiPolygon', coordinates=[[1, 2]])
+        parent = TembaBoundary.BoundaryRef.create(osm_id="R123", name="Location")
+        remote = TembaBoundary.create(osm_id='OLD123', name='OLD', parent=parent,
                                       level=Boundary.COUNTRY_LEVEL, geometry=geometry)
 
-        mock_get_boundaries.return_value = [remote]
+        mock_get_boundaries.return_value = MockClientQuery([remote])
 
         with self.assertNumQueries(4):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
+        mock_get_boundaries.assert_called_once_with(geometry=True)
+
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 0))
 
         Boundary.objects.all().delete()
-        mock_get_boundaries.return_value = [
-            TembaBoundary.create(boundary='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
+        mock_get_boundaries.return_value = MockClientQuery([
+            TembaBoundary.create(osm_id='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
                                  geometry=geometry),
-            TembaBoundary.create(boundary='NEW123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
+            TembaBoundary.create(osm_id='NEW123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
                                  geometry=geometry)
-        ]
+        ])
 
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(5):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 0))
 
-        mock_get_boundaries.return_value = [
-            TembaBoundary.create(boundary='OLD123', name='CHANGED', parent=None, level=Boundary.COUNTRY_LEVEL,
+        mock_get_boundaries.return_value = MockClientQuery([
+            TembaBoundary.create(osm_id='OLD123', name='CHANGED', parent=None, level=Boundary.COUNTRY_LEVEL,
                                  geometry=geometry),
-            TembaBoundary.create(boundary='NEW123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
+            TembaBoundary.create(osm_id='NEW123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
                                  geometry=geometry)
-        ]
+        ])
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(4):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 1, 0, 1))
 
-        mock_get_boundaries.return_value = [
-            TembaBoundary.create(boundary='OLD123', name='CHANGED2', parent=None, level=Boundary.COUNTRY_LEVEL,
+        mock_get_boundaries.return_value = MockClientQuery([
+            TembaBoundary.create(osm_id='OLD123', name='CHANGED2', parent=None, level=Boundary.COUNTRY_LEVEL,
                                  geometry=geometry),
-            TembaBoundary.create(boundary='NEW123', name='NEW_CHANGE', parent=None, level=Boundary.COUNTRY_LEVEL,
+            TembaBoundary.create(osm_id='NEW123', name='NEW_CHANGE', parent=None, level=Boundary.COUNTRY_LEVEL,
                                  geometry=geometry)
-        ]
+        ])
 
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(5):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
 
-        mock_get_boundaries.return_value = [
-            TembaBoundary.create(boundary='OLD123', name='CHANGED2', parent=None, level=Boundary.COUNTRY_LEVEL,
+        mock_get_boundaries.return_value = MockClientQuery([
+            TembaBoundary.create(osm_id='OLD123', name='CHANGED2', parent=None, level=Boundary.COUNTRY_LEVEL,
                                  geometry=geometry)
-        ]
+        ])
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(4):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 1))
@@ -1341,6 +1362,7 @@ class PerfTest(UreportTest):
         return args_list
 
     @override_settings(DEBUG=True)
+    @patch('ureport.polls.tasks.pull_refresh.apply_async')
     @patch('django.core.cache.cache.delete')
     @patch('django.core.cache.cache.set')
     @patch('dash.orgs.models.TembaClient2.get_runs')
@@ -1349,7 +1371,8 @@ class PerfTest(UreportTest):
     @patch('ureport.polls.models.Poll.rebuild_poll_results_counts')
     @patch('ureport.polls.models.Poll.POLL_RESULTS_MAX_SYNC_RUNS', new_callable=PropertyMock)
     def test_pull_results_batching(self, mock_max_runs, mock_rebuild_counts, mock_get_pull_cached_params,
-                                   mock_timezone_now, mock_get_runs, mock_cache_set, mock_cache_delete):
+                                   mock_timezone_now, mock_get_runs, mock_cache_set, mock_cache_delete,
+                                   mock_pull_refresh):
 
         mock_max_runs.return_value = 300
         mock_rebuild_counts.return_value = 'REBUILT'
@@ -1421,6 +1444,7 @@ class PerfTest(UreportTest):
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
         self.assertFalse(mock_cache_delete.called)
+        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue='sync')
 
         mock_max_runs.return_value = 10000
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
