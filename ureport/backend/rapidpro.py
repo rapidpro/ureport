@@ -270,7 +270,7 @@ class RapidProBackend(BaseBackend):
             incoming_objects = Boundary.build_global_boundaries()
         else:
             client = self._get_client(org, 2)
-            incoming_objects = client.get_boundaries().all()
+            incoming_objects = client.get_boundaries(geometry=True).all()
 
         return sync_local_to_set(org, BoundarySyncer(), incoming_objects)
 
@@ -568,6 +568,9 @@ class RapidProBackend(BaseBackend):
                               "Before cursor %s" % (poll.pk, org.pk, time.time() - start, after, before, batches_latest,
                                                     latest_synced_obj_time, num_val_created, num_val_updated,
                                                     num_val_ignored, cursor)
+
+                        from ureport.polls.tasks import pull_refresh
+                        pull_refresh.apply_async((poll.pk,), countdown=300, queue='sync')
 
                         return (num_val_created, num_val_updated, num_val_ignored,
                                 num_path_created, num_path_updated, num_path_ignored)

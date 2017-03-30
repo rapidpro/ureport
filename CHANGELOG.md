@@ -1,3 +1,12 @@
+v1.0.333
+----------
+ * Reschedule poll pull task in 5 min if pull did not finish
+
+v1.0.332
+----------
+ * Fix get boundaries
+ * Update Arabic language
+
 v1.0.331
 ----------
  * More fix for remote missing geometry

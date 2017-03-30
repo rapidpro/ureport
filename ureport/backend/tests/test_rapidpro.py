@@ -634,6 +634,8 @@ class RapidProBackendTest(UreportTest):
         with self.assertNumQueries(4):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
+        mock_get_boundaries.assert_called_once_with(geometry=True)
+
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 0))
 
         Boundary.objects.all().delete()
@@ -1360,6 +1362,7 @@ class PerfTest(UreportTest):
         return args_list
 
     @override_settings(DEBUG=True)
+    @patch('ureport.polls.tasks.pull_refresh.apply_async')
     @patch('django.core.cache.cache.delete')
     @patch('django.core.cache.cache.set')
     @patch('dash.orgs.models.TembaClient2.get_runs')
@@ -1368,7 +1371,8 @@ class PerfTest(UreportTest):
     @patch('ureport.polls.models.Poll.rebuild_poll_results_counts')
     @patch('ureport.polls.models.Poll.POLL_RESULTS_MAX_SYNC_RUNS', new_callable=PropertyMock)
     def test_pull_results_batching(self, mock_max_runs, mock_rebuild_counts, mock_get_pull_cached_params,
-                                   mock_timezone_now, mock_get_runs, mock_cache_set, mock_cache_delete):
+                                   mock_timezone_now, mock_get_runs, mock_cache_set, mock_cache_delete,
+                                   mock_pull_refresh):
 
         mock_max_runs.return_value = 300
         mock_rebuild_counts.return_value = 'REBUILT'
@@ -1440,6 +1444,7 @@ class PerfTest(UreportTest):
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
         self.assertFalse(mock_cache_delete.called)
+        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue='sync')
 
         mock_max_runs.return_value = 10000
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]

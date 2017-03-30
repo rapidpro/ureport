@@ -223,7 +223,8 @@ class BoundaryView(SmartTemplateView):
             else:
                 location_boundaries = org.boundaries.filter(level=1)
 
-        boundaries = dict(type='FeatureCollection', features=[elt.as_geojson() for elt in location_boundaries])
+        boundaries = dict(type='FeatureCollection', features=[elt.as_geojson() for elt in location_boundaries
+                                                              if elt.geometry and json.loads(elt.geometry)])
 
         return HttpResponse(json.dumps(boundaries))
 
