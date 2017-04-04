@@ -6,7 +6,7 @@ celery==3.1.23
 celery-with-redis==3.0
 contextlib2==0.5.4
 coverage==3.7.1
-rapidpro-dash==1.0.3
+rapidpro-dash==1.1.1
 dj-database-url==0.3.0
 Django==1.9.11
 django-appconf==1.0.2
@@ -43,7 +43,7 @@ Pygments==2.0.2
 python-dateutil==2.4.2
 pytz==2016.4
 PyYAML==3.11
-rapidpro-python==2.1.6
+rapidpro-python==2.1.7
 raven==5.23.0
 redis==2.10.5
 regex==2015.7.19
