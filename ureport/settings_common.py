@@ -193,6 +193,8 @@ INSTALLED_APPS = (
     # smartmin users
     'smartmin.users',
 
+    "hamlpy",
+
     # dash apps
     'dash.orgs',
     'dash.dashblocks',
