@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 import sys
 from django.utils.translation import ugettext_lazy as _
-from hamlpy import templatize
 
 #-----------------------------------------------------------------------------------
 # Sets TESTING to True if this configuration is read during a unit test
@@ -193,6 +192,8 @@ INSTALLED_APPS = (
 
     # smartmin users
     'smartmin.users',
+
+    "hamlpy",
 
     # dash apps
     'dash.orgs',
