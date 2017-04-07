@@ -719,7 +719,7 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.get_category_image(), poll1.category_image.image)
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_create_poll(self):
         create_url = reverse('polls.poll_create')
 
@@ -728,8 +728,9 @@ class PollTest(UreportTest):
 
         with patch('dash.orgs.models.Org.get_flows') as mock_get_flows:
             flows_cached = dict()
-            flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25', participants=None,
-                                           labels="", archived=False, created_on="2015-04-08T08:30:40.000Z", date_hint="2015-04-08",
+            flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25',
+                                           participants=None, labels="", archived=False,
+                                           created_on="2015-04-08T08:30:40.000Z", date_hint="2015-04-08",
                                            rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
                                                           label='Does your community have power')])
 
@@ -860,7 +861,7 @@ class PollTest(UreportTest):
 
                 self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_update_poll(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
@@ -963,7 +964,7 @@ class PollTest(UreportTest):
         self.assertTrue(reverse('polls.poll_responses',args=[poll1.pk]) in response.content)
         self.assertTrue(reverse('polls.poll_images',args=[poll1.pk]) in response.content)
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_questions_poll(self):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -1157,7 +1158,7 @@ class PollTest(UreportTest):
         self.assertEquals(response.context['form'].fields['location_1'].initial, 'Youtube Stream')
         self.assertEquals(response.context['form'].fields['message_1'].initial, 'Just give me a reason')
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_templatetags(self):
         from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
         from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results

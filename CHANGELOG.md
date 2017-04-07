@@ -1,3 +1,7 @@
+v1.0.334
+----------
+ * Remove all use of API v1
+
 v1.0.333
 ----------
  * Reschedule poll pull task in 5 min if pull did not finish

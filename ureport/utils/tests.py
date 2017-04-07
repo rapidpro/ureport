@@ -1,6 +1,7 @@
 from datetime import datetime
 import json
 from dash.categories.models import Category
+from dash.test import MockClientQuery
 from dash_test_runner.tests import MockResponse
 from django.conf import settings
 from django.utils import timezone
@@ -9,6 +10,8 @@ import pycountry
 import pytz
 import redis
 from temba_client.v1.types import Group
+from temba_client.v2 import Flow
+
 from ureport.assets.models import FLAG, Image
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
@@ -427,8 +430,18 @@ class UtilsTest(UreportTest):
                                                 dict(label='Cameraman', count=5)
                                                 ])])
 
-    @patch('dash.orgs.models.TembaClient1', MockTembaClient)
-    def test_fetch_flows(self):
+    @patch('dash.orgs.models.TembaClient2.get_flows')
+    def test_fetch_flows(self, mock_get_flows):
+
+        mock_get_flows.side_effect = [
+            MockClientQuery([Flow.create(name='Flow 1',
+                                         uuid='uuid-25',
+                                         labels=[],
+                                         archived=False,
+                                         expires=720,
+                                         created_on=json_date_to_datetime("2015-04-08T12:48:44.320Z"),
+                                         runs=Flow.Runs.create(completed=120, active=50, expired=100, interrupted=30))
+                             ])]
 
         with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
             mock_datetime_ms.return_value = 500
@@ -438,9 +451,7 @@ class UtilsTest(UreportTest):
                 expected = dict()
                 expected['uuid-25'] = dict(uuid='uuid-25', date_hint="2015-04-08",
                                            created_on="2015-04-08T12:48:44.320Z",
-                                           name="Flow 1", runs=300, completed_runs=120, archived=False,
-                                           rulesets=[dict(uuid="uuid-8435", label='Does your community have power',
-                                                          response_type="C")])
+                                           name="Flow 1", runs=300, completed_runs=120, archived=False)
 
             self.assertEqual(flows, expected)
 
