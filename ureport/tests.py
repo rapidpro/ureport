@@ -54,24 +54,25 @@ class MockTembaClient(TembaClient):
                                                           label='Does your community have power')]
                                            )])
 
-
     def get_definitions(self, flows=(), campaigns=(), dependencies=None):
         return TembaExport.deserialize(dict(campaigns=[], triggers=[], version=10,
-                                                       flows=[dict(metadata=dict(),
-                                                                   version=8,
-                                                                   base_language='eng',
-                                                                   flow_type='F',
-                                                                   action_sets=[],
-                                                                   rule_sets=[dict(uuid='ruleset-1-uuid',
-                                                                                   label='ruleset1',
-                                                                                   ruleset_type='wait_message',
-                                                                                   rules=[dict(uuid='rule-1-uuid',
-                                                                                               category=dict(eng='Blue')
-                                                                                           )
-                                                                                          ]
-                                                                                   )
-                                                                              ],
-                                                                   entry='')]))
+                                            flows=[
+                                                dict(metadata=dict(uuid='abcdefg')),
+                                                dict(metadata=dict(uuid='uuid-1'),
+                                                     version=8,
+                                                     base_language='eng',
+                                                     flow_type='F',
+                                                     action_sets=[],
+                                                     rule_sets=[dict(uuid='ruleset-1-uuid',
+                                                        label='ruleset1',
+                                                        ruleset_type='wait_message',
+                                                        rules=[dict(uuid='rule-1-uuid',
+                                                                    category=dict(eng='Blue')
+                                                                )
+                                                                ]
+                                                                )
+                                                                ],
+                                                     entry='')]))
 
 
 class TestBackend(RapidProBackend):
