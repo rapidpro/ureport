@@ -365,7 +365,17 @@ class Poll(SmartModel):
         temba_client = org.get_temba_client(api_version=2)
         export_definition = temba_client.get_definitions(flows=(self.flow_uuid, ))
 
-        flow_definition = export_definition.flows[0]
+        flow_definition = None
+
+        for flow_def in export_definition.flows:
+            flow_uuid = flow_def.get('metadata', dict()).get('uuid', None)
+
+            if flow_uuid and flow_uuid == self.flow_uuid:
+                flow_definition = flow_def
+                break
+
+        if flow_definition is None:
+            return
 
         base_language = flow_definition['base_language']
 
