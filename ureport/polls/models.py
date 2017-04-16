@@ -372,6 +372,7 @@ class Poll(SmartModel):
 
             if flow_uuid and flow_uuid == self.flow_uuid:
                 flow_definition = flow_def
+                break
 
         if flow_definition is None:
             return
