@@ -1,3 +1,7 @@
+v1.0.335
+----------
+ * Fix flow definition lookup from flow definition endpoint using the right uuid
+
 v1.0.334
 ----------
  * Remove all use of API v1
