@@ -1,3 +1,7 @@
+v1.0.336
+----------
+ * Fix refetch poll on big orgs
+
 v1.0.335
 ----------
  * Fix flow definition lookup from flow definition endpoint using the right uuid
