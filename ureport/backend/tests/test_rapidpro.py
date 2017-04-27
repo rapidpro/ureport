@@ -1510,3 +1510,23 @@ class PerfTest(UreportTest):
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
         mock_cache_delete.assert_called_once_with(
             Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid))
+
+        mock_cache_delete.reset_mock()
+        mock_get_runs.reset_mock()
+        mock_get_pull_cached_params.side_effect = [('2015-04-03T12:48:44.320Z', '2015-04-04T12:48:44.320Z',
+                                                    '2015-04-05T12:48:44.320Z', None, 'cursor_string',
+                                                    '2015-04-07T12:48:44.320Z')]
+        mock_get_runs.side_effect = [MockClientQuery(*[])]
+
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+
+        expected_args = [(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (poll.org_id, poll.pk),),
+                         (Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (poll.org.pk, poll.flow_uuid),),
+                         (Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (poll.org.pk, poll.flow_uuid),),
+                         (Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (poll.org.pk, poll.flow_uuid),),
+                         (Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (poll.org.pk, poll.flow_uuid),),
+                         (Poll.POLL_RESULTS_LAST_PULL_CURSOR % (poll.org.pk, poll.flow_uuid),)]
+
+        self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_delete)))
+        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before="2015-04-08T12:48:44.320Z")

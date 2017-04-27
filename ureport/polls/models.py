@@ -198,6 +198,11 @@ class Poll(SmartModel):
         print "Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id)
 
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
+        cache.delete(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.org.pk, self.flow_uuid))
+        cache.delete(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (self.org.pk, self.flow_uuid))
+        cache.delete(Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (self.org.pk, self.flow_uuid))
+        cache.delete(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.org.pk, self.flow_uuid))
+        cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.org.pk, self.flow_uuid))
 
     def update_questions_results_cache(self):
         for question in self.questions.all():
