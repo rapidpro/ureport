@@ -316,7 +316,6 @@ class RapidProBackend(BaseBackend):
 
                 if pull_after_delete is not None:
                     after = None
-                    before = datetime_to_json_date(timezone.now())
                     latest_synced_obj_time = None
                     batches_latest = None
                     resume_cursor = None
