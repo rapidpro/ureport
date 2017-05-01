@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Eskandar BENAICHA <ebenaicha@unicef.fr>, 2016
+# Eskandar BENAICHA <ebenaicha@unicef.fr>, 2016-2017
 # Ilhasoft <contato@ilhasoft.com.br>, 2016
 # Mbanje Jean Vernack <mbanjejvernack@gmail.com>, 2016
 # Nyaruka <info@textit.in>, 2015
 # renaud gaudin <rgaudin@gmail.com>, 2014
 # stucampo <stuart.campo@gmail.com>, 2014-2015
-# Vincent Turmine <vincent.turmine@gmail.com>, 2014,2016
+# Vincent Turmine <vincent.turmine@gmail.com>, 2014,2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-27 08:22+0000\n"
-"PO-Revision-Date: 2016-11-29 11:27+0000\n"
-"Last-Translator: Eskandar BENAICHA <ebenaicha@unicef.fr>\n"
+"PO-Revision-Date: 2017-04-07 14:35+0000\n"
+"Last-Translator: Vincent Turmine <vincent.turmine@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1309,7 +1309,7 @@ msgstr "U-REPORT SUR LES MÉDIAS SOCIAUX"
 
 #: templates/public/join_engage.haml:140
 msgid "Compose new Tweet"
-msgstr ""
+msgstr "Ecrire un nouveau Tweet"
 
 #: templates/public/polls.haml:16
 msgid "CURRENT POLL IN"
@@ -1325,8 +1325,8 @@ msgid_plural ""
 "\n"
 "                  %(questions)s questions polled on this topic\n"
 "                "
-msgstr[0] "\n                  \n%(questions)s posées sur ce sujet\n                "
-msgstr[1] "\n%(questions)s questions dans ce sondage"
+msgstr[0] "\n%(questions)s question posée sur ce sujet\n                "
+msgstr[1] "\n%(questions)s questions posées sur ce sujet\n                "
 
 #: templates/public/polls.haml:43
 msgid "response rate"
@@ -1382,7 +1382,7 @@ msgstr "Aucune réponse sélectionnée"
 
 #: templates/public/polls.haml:339
 msgid "U-Reporter in"
-msgstr ""
+msgstr "U-Reporter dans"
 
 #: templates/public/polls.haml:351 templates/public/story_read.haml:126
 msgid "RELATED STORIES"
@@ -1475,7 +1475,7 @@ msgstr "Réponses"
 
 #: templates/public/strings_values.haml:14
 msgid "Reporters in"
-msgstr ""
+msgstr "U-Reporters dans"
 
 #: templates/public/strings_values.haml:15
 msgid "Results"
@@ -1658,11 +1658,11 @@ msgstr ""
 
 #: ureport/locations/models.py:29
 msgid "This is the OSM id for this administrative boundary"
-msgstr ""
+msgstr "Ceci est l'ID OSM de cette limite administrative"
 
 #: ureport/locations/models.py:32
 msgid "The name of our administrative boundary"
-msgstr ""
+msgstr "Le nom de votre limite administrative"
 
 #: ureport/locations/models.py:34
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
@@ -1674,7 +1674,7 @@ msgstr ""
 
 #: ureport/locations/models.py:39
 msgid "Geometry"
-msgstr ""
+msgstr "Geometrie"
 
 #: ureport/locations/models.py:40
 msgid ""
