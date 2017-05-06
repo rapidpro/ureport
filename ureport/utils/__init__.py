@@ -216,24 +216,21 @@ def fetch_flows(org):
     try:
         from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
-        temba_client = org.get_temba_client()
-        flows = temba_client.get_flows()
+        temba_client = org.get_temba_client(api_version=2)
+        flows = temba_client.get_flows().all()
 
         all_flows = dict()
         for flow in flows:
-            if flow.rulesets:
-                flow_json = dict()
-                flow_json['uuid'] = flow.uuid
-                flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
-                flow_json['created_on'] = datetime_to_json_date(flow.created_on)
-                flow_json['name'] = flow.name
-                flow_json['runs'] = flow.runs
-                flow_json['archived'] = flow.archived
-                flow_json['completed_runs'] = flow.completed_runs
-                flow_json['rulesets'] = [
-                    dict(uuid=elt.uuid, label=elt.label, response_type=elt.response_type) for elt in flow.rulesets]
+            flow_json = dict()
+            flow_json['uuid'] = flow.uuid
+            flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
+            flow_json['created_on'] = datetime_to_json_date(flow.created_on)
+            flow_json['name'] = flow.name
+            flow_json['archived'] = flow.archived
+            flow_json['runs'] = flow.runs.active + flow.runs.expired + flow.runs.completed + flow.runs.interrupted
+            flow_json['completed_runs'] = flow.runs.completed
 
-                all_flows[flow.uuid] = flow_json
+            all_flows[flow.uuid] = flow_json
 
         all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
         org_flows['results'] = all_flows

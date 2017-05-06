@@ -198,6 +198,11 @@ class Poll(SmartModel):
         print "Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id)
 
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
+        cache.delete(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.org.pk, self.flow_uuid))
+        cache.delete(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (self.org.pk, self.flow_uuid))
+        cache.delete(Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (self.org.pk, self.flow_uuid))
+        cache.delete(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.org.pk, self.flow_uuid))
+        cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.org.pk, self.flow_uuid))
 
     def update_questions_results_cache(self):
         for question in self.questions.all():
@@ -362,15 +367,29 @@ class Poll(SmartModel):
             user = User.objects.get(pk=-1)
 
         org = self.org
-        temba_client = org.get_temba_client()
-        flow_definition = temba_client.get_flow_definition(self.flow_uuid)
+        temba_client = org.get_temba_client(api_version=2)
+        export_definition = temba_client.get_definitions(flows=(self.flow_uuid, ))
 
-        base_language = flow_definition.base_language
+        flow_definition = None
+
+        for flow_def in export_definition.flows:
+            flow_uuid = flow_def.get('metadata', dict()).get('uuid', None)
+
+            if flow_uuid and flow_uuid == self.flow_uuid:
+                flow_definition = flow_def
+                break
+
+        if flow_definition is None:
+            return
+
+        base_language = flow_definition['base_language']
 
         self.base_language = base_language
         self.save()
 
-        for ruleset in flow_definition.rule_sets:
+        flow_rulesets = flow_definition['rule_sets']
+
+        for ruleset in flow_rulesets:
             label = ruleset['label']
             ruleset_uuid = ruleset['uuid']
             ruleset_type = ruleset['ruleset_type']

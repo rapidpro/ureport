@@ -1,3 +1,15 @@
+v1.0.336
+----------
+ * Fix refetch poll on big orgs
+
+v1.0.335
+----------
+ * Fix flow definition lookup from flow definition endpoint using the right uuid
+
+v1.0.334
+----------
+ * Remove all use of API v1
+
 v1.0.333
 ----------
  * Reschedule poll pull task in 5 min if pull did not finish

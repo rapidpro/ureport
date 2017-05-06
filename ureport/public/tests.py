@@ -200,13 +200,13 @@ class PublicTest(UreportTest):
         # using subdomain without domain on org, indexing is disallowed but login should be shown
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertTrue("<meta content=\'noindex\' name=\'robots\' />" in response.content)
+        self.assertTrue("<meta content='noindex' name='robots' />" in response.content)
         self.assertTrue('nigeria.ureport.io/users/login/' in response.content)
 
         # using custom domain, login is hidden  and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST='ureport.ng')
         self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertFalse("<meta content=\'noindex\' name=\'robots\' />" in response.content)
+        self.assertFalse("<meta content='noindex' name='robots' />" in response.content)
         self.assertFalse('nigeria.ureport.io/users/login/' in response.content)
 
     def test_org_lang_params_processors(self):
@@ -231,13 +231,13 @@ class PublicTest(UreportTest):
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['story_widget_url'])
 
+    @mock.patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_set_fb_button_language(self):
         home_url = reverse('public.index')
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['fb_button_language'])
-
-    @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
+        
     @mock.patch('django.core.cache.cache.get')
     def test_index(self, mock_cache_get):
         mock_cache_get.return_value = None
@@ -573,7 +573,7 @@ class PublicTest(UreportTest):
         self.assertEquals(response.request['PATH_INFO'], '/ureporters/')
         self.assertEquals(response.context['org'], self.uganda)
 
-    @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
+    @mock.patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_polls_list(self):
         polls_url = reverse('public.polls')
 
@@ -801,7 +801,7 @@ class PublicTest(UreportTest):
         response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
         self.assertFalse(response.context['polls'])
 
-    @mock.patch('dash.orgs.models.TembaClient1', MockTembaClient)
+    @mock.patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_polls_read(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 

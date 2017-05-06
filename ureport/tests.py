@@ -2,6 +2,8 @@
 
 from __future__ import unicode_literals
 
+import json
+
 import pytz
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -19,18 +21,12 @@ from ureport.backend.rapidpro import RapidProBackend
 from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll
 from ureport.public.views import IndexView
-from temba_client.v1 import TembaClient
-from temba_client.v1.types import Result, Flow, Group, Boundary as TembaBoundary, Field as TembaContactField
-from temba_client.v1.types import Contact as TembaContact, Group as TembaGroup
-from temba_client.v1.types import Geometry as TembaGeometry, FlowDefinition
+from temba_client.v2 import TembaClient
+from temba_client.v2.types import Flow, Group, Field as TembaContactField
+from temba_client.v2.types import Contact as TembaContact, Export as TembaExport
 
 
 class MockTembaClient(TembaClient):
-
-    def get_boundaries(self, pager=None):
-        geometry = TembaGeometry.create(type='MultiPolygon', coordinates=['COORDINATES'])
-        return [TembaBoundary.create(boundary='R12345', name='Nigeria', parent=None, level=0, geometry=geometry),
-                TembaBoundary.create(boundary='R23456', name='Lagos', parent="R12345", level=1, geometry=geometry)]
 
     def get_fields(self, pager=None):
         return [TembaContactField.create(key='occupation', label='Activité', value_type='T')]
@@ -43,14 +39,6 @@ class MockTembaClient(TembaClient):
 
     def get_groups(self, uuids=None, name=None, pager=None):
         return Group.deserialize_list([dict(uuid="uuid-8", name=name, size=120)])
-
-    def get_results(self, ruleset_id=None, contact_field=None, segment=None):
-        return Result.deserialize_list([dict(open_ended=False,
-                                                 set=3462,
-                                                 unset=3694,
-                                                 categories=[dict(count=2210, label='Yes'),
-                                                             dict(count=1252, label='No')],
-                                                 label='All')])
 
     def get_flows(self, uuids=None, archived=None, labels=None, before=None, after=None, pager=None):
         return Flow.deserialize_list([dict(runs=300,
@@ -66,26 +54,25 @@ class MockTembaClient(TembaClient):
                                                           label='Does your community have power')]
                                            )])
 
-    def get_flow(self, uuid):
-        return Flow.deserialize(dict(runs=300,
-                                     completed_runs=120,
-                                     name='Flow 1',
-                                     uuid='uuid-25',
-                                     participants=None,
-                                     labels="",
-                                     archived=False,
-                                     created_on="2015-04-08T12:48:44.320Z",
-                                     rulesets=[dict(node='uuid-8435', id="8435", response_type="C",
-                                                    label='Does your community have power')]
-                                     ))
-
-    def get_flow_definition(self, uuid):
-        return FlowDefinition.deserialize(dict(metadata=dict(), version=8, base_language='eng', flow_type='',
-                                               action_sets=[], rule_sets=[dict(uuid='ruleset-1-uuid', label='ruleset1',
-                                                                               ruleset_type='wait_message',
-                                                                               rules=[dict(uuid='rule-1-uuid',
-                                                                                           category=dict(eng='Blue')
-                                                                                           )])], entry=''))
+    def get_definitions(self, flows=(), campaigns=(), dependencies=None):
+        return TembaExport.deserialize(dict(campaigns=[], triggers=[], version=10,
+                                            flows=[
+                                                dict(metadata=dict(uuid='abcdefg')),
+                                                dict(metadata=dict(uuid='uuid-1'),
+                                                     version=8,
+                                                     base_language='eng',
+                                                     flow_type='F',
+                                                     action_sets=[],
+                                                     rule_sets=[dict(uuid='ruleset-1-uuid',
+                                                        label='ruleset1',
+                                                        ruleset_type='wait_message',
+                                                        rules=[dict(uuid='rule-1-uuid',
+                                                                    category=dict(eng='Blue')
+                                                                )
+                                                                ]
+                                                                )
+                                                                ],
+                                                     entry='')]))
 
 
 class TestBackend(RapidProBackend):
