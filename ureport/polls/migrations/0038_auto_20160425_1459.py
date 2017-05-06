@@ -7,15 +7,10 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0024_auto_20160118_0934'),
+        ('polls', '0037_install_poll_results_count_triggers'),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='poll',
-            name='flow_archived',
-            field=models.BooleanField(default=False, help_text='Whether the flow for this poll is archived on RapidPro'),
-        ),
         migrations.AlterField(
             model_name='poll',
             name='poll_date',

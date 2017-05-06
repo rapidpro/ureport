@@ -1,0 +1,2045 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# kafaak (นายกาฝาก) <kafaak@gmail.com>, 2016
+# kafaak (นายกาฝาก) <kafaak@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: UReport\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-16 15:01+0000\n"
+"PO-Revision-Date: 2016-07-19 04:48+0000\n"
+"Last-Translator: kafaak (นายกาฝาก) <kafaak@gmail.com>\n"
+"Language-Team: Thai (http://www.transifex.com/rapidpro/ureport/language/th/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: dash/categories/models.py:17
+msgid "The name of this category"
+msgstr "ชื่อหมวดหมู่"
+
+#: dash/categories/models.py:20
+msgid "An optional image that can describe this category"
+msgstr "รูปภาพที่ใช้อธิบายหมวดหมู่นี้ (ไม่จำเป็นต้องใส่ก็ได้)"
+
+#: dash/categories/models.py:23 ureport/polls/models.py:63
+msgid "The organization this category applies to"
+msgstr ""
+
+#: dash/categories/models.py:35 templates/frame.haml:260
+#: templates/frame.haml.py:267
+msgid "Categories"
+msgstr "หมวดหมู่"
+
+#: dash/categories/models.py:41 dash/stories/models.py:129
+#: ureport/polls/models.py:540
+msgid "The name to describe this image"
+msgstr "ชื่อที่ใช้อธิบายรูปภาพนี้"
+
+#: dash/categories/models.py:44
+msgid "The category this image represents"
+msgstr "หมวดหมู่ที่รูปภาพนี้เป็นตัวแทน"
+
+#: dash/categories/models.py:47 dash/stories/models.py:135
+#: ureport/polls/models.py:546
+msgid "The image file to use"
+msgstr "ไฟล์รูปภาพที่จะใช้"
+
+#: dash/dashblocks/models.py:19
+msgid "The human readable name for this content type"
+msgstr "ชื่อสำหรับประเภทเนื้อหานี้"
+
+#: dash/dashblocks/models.py:22
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "ชื่อ slug สำหรับประเภทเนื้อหานี้ เพื่อนำไปใช้ร่วมกับแท็กของเทมเพลต"
+
+#: dash/dashblocks/models.py:26
+msgid ""
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
+msgstr "คำอธิบายว่าประเภทเนื้อหานี้จะใช้ที่ใดบนเว็บไซต์ และจะแสดงผลให้เห็นอย่างไร"
+
+#: dash/dashblocks/models.py:31
+msgid "Whether this content should include a title"
+msgstr "เนื้อหานี้ควรมีชื่อหัวข้อหรือไม่"
+
+#: dash/dashblocks/models.py:34
+msgid "Whether this content should include an image"
+msgstr "เนื้อหานี้ควรมีรูปภาพประกอบหรือไม่"
+
+#: dash/dashblocks/models.py:37
+msgid "Whether this content should use a rich HTML editor"
+msgstr "เนื้อหานี้ควรใช้ rich HTML editor หรือไม่"
+
+#: dash/dashblocks/models.py:40
+msgid "Whether this content should include a summary field"
+msgstr "เนื้อหานี้ควรจะมีช่องสำหรับใส่ข้อมูลสรุปหรือไม่"
+
+#: dash/dashblocks/models.py:43
+msgid "Whether this content should include a link"
+msgstr "เนื้อหานี้ควรมีลิงก์หรือไม่"
+
+#: dash/dashblocks/models.py:46
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr "เนื้อหานี้ควรอนุญาตให้สามารถอัพโหลดรูปภาพเพิ่มเติมหรือไม่"
+
+#: dash/dashblocks/models.py:50
+msgid "Whether this content has a color field"
+msgstr "เนื้อหานี้มีช่องสำหรับใส่สีหรือไม่"
+
+#: dash/dashblocks/models.py:53
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "เนื้อหานี้ควรอนุญาตให้ตั้งค่า YouTube ID หรือไม่"
+
+#: dash/dashblocks/models.py:56
+msgid "Whether this content should allow tags"
+msgstr "เนื้อหานี้ควรอนุญาตให้ใช้แท็กได้หรือไม่"
+
+#: dash/dashblocks/models.py:69
+msgid "Content Type"
+msgstr "ประเภทเนื้อหา"
+
+#: dash/dashblocks/models.py:70
+msgid "The category, or type for this content block"
+msgstr "หมวดหมู่ หรือ ประเภท สำหรับกลุ่มเนื้อหานี้"
+
+#: dash/dashblocks/models.py:74
+msgid "The title for this block of content, optional"
+msgstr "ชื่อหัวข้อสำหรับกลุ่มเนื้อหานี้ (ไม่จำเป็นต้องใส่)"
+
+#: dash/dashblocks/models.py:77
+msgid "The summary for this item, should be short"
+msgstr "คำอธิบายสรุปแบบสั้นๆ สำหรับรายการนี้"
+
+#: dash/dashblocks/models.py:80
+msgid "The body of text for this content block, optional"
+msgstr "ข้อความเนื้อหาของกลุ่มเนื้อหานี้ (ไม่จำเป็นต้องใส่)"
+
+#: dash/dashblocks/models.py:83
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "รูปภาพที่ควรแสดงร่วมกับกลุ่มเนื้อหานี้ (ไม่จำเป็นต้องใส่)"
+
+#: dash/dashblocks/models.py:87
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "สีพื้นที่ใช้สำหรับรูปภาพ ในรูปแบบ #rrggbb"
+
+#: dash/dashblocks/models.py:91
+msgid "Any link that should be associated with this content block, optional"
+msgstr "ลิงก์ที่เกี่ยวข้องกับกลุ่มเนื้อหานี้ (ไม่จำเป็นต้องใส่)"
+
+#: dash/dashblocks/models.py:95 ureport/news/models.py:40
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "ID ของวิดีโอยูทูปที่เกี่ยวข้องกับรายการนี้"
+
+#: dash/dashblocks/models.py:99
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
+msgstr "แท็กสำหรับกลุ่มเนื้อหานี้ แยกแต่ละแท็กด้วยการเว้นวรรค สามารถนำไปใช้สำหรับการกรองข้อมูลขั้นสูงได้ (ไม่จำเป็นต้องใส่)"
+
+#: dash/dashblocks/models.py:103
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "ลำดับความสำคัญของกลุ่มเนื้อหานี้ (ลำดับความสำคัญสูงจะมาก่อน)"
+
+#: dash/dashblocks/models.py:108
+msgid "The organization this content block belongs to"
+msgstr "องค์กรที่เป็นเจ้าของกลุ่มเนื้อหานี้"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:8
+msgid "Gallery"
+msgstr "แกลเลอรี"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:17
+msgid "Add Image"
+msgstr "เพิ่มรูปภาพ"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
+#: smartmin/templates/smartmin/list.html:14
+msgid "Search"
+msgstr "ค้นหา"
+
+#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
+#: smartmin/templates/smartmin/list.html:25 templates/polls/poll_list.haml:6
+msgid "Add"
+msgstr "เพิ่ม"
+
+#: dash/dashblocks/views.py:16 templates/frame.haml:210
+msgid "Content Types"
+msgstr "ประเภทเนื้อหา"
+
+#: dash/dashblocks/views.py:118
+msgid "Content Blocks"
+msgstr "กลุ่มเนื้อหา"
+
+#: dash/dashblocks/views.py:120
+#, python-format
+msgid "%s Blocks"
+msgstr "%s กลุ่ม"
+
+#: dash/dashblocks/views.py:158 smartmin/views.py:1099
+#, python-format
+msgid "Edit %s"
+msgstr "แก้ไข %s"
+
+#: dash/dashblocks/views.py:182 smartmin/views.py:1289
+#, python-format
+msgid "Create %s"
+msgstr "สร้าง %s"
+
+#: dash/dashblocks/views.py:184
+msgid "Create Content Block"
+msgstr "สร้างกลุ่มเนื้อหา"
+
+#: dash/orgs/forms.py:12
+msgid "Your first name"
+msgstr "ชื่อของคุณ"
+
+#: dash/orgs/forms.py:13
+msgid "Your last name"
+msgstr "นามสกุลของคุณ"
+
+#: dash/orgs/forms.py:14
+msgid "Your email address"
+msgstr "ที่อยู่อีเมลของคุณ"
+
+#: dash/orgs/forms.py:17
+msgid "Your password, at least eight letters please"
+msgstr "รหัสผ่านของคุณ กรุณาระบุอย่างน้อย 8 ตัวอักษร"
+
+#: dash/orgs/forms.py:23
+msgid "That email address is already used"
+msgstr "ที่อยู่อีเมลนั้นถูกใช้ไปแล้ว"
+
+#: dash/orgs/forms.py:30
+msgid "Passwords must contain at least 8 letters."
+msgstr "รหัสผ่านจะต้องมีอย่างน้อย 8 ตัวอักษร"
+
+#: dash/orgs/forms.py:49
+msgid "This domain is used for subdomains"
+msgstr "ชื่อโดเมนนี้ถูกใช้สำหรับโดเมนย่อยแล้ว"
+
+#: dash/orgs/models.py:36 dash/orgs/models.py:381 ureport/assets/models.py:19
+msgid "Name"
+msgstr "ชื่อ"
+
+#: dash/orgs/models.py:37
+msgid "The name of this organization"
+msgstr "ชื่อขององค์กรนี้"
+
+#: dash/orgs/models.py:41
+msgid "The logo that should be used for this organization"
+msgstr "โลโก้ที่ควรใช้สำหรับองค์กรนี้"
+
+#: dash/orgs/models.py:44 dash/orgs/views.py:297
+msgid "Administrators"
+msgstr "ผู้ดูแลระบบ"
+
+#: dash/orgs/models.py:45
+msgid "The administrators in your organization"
+msgstr "ผู้ดูแลระบบในองค์กรของคุณ"
+
+#: dash/orgs/models.py:48
+msgid "Viewers"
+msgstr "ผู้ชม"
+
+#: dash/orgs/models.py:49
+msgid "The viewers in your organization"
+msgstr "ผู้ชมในองค์กรของคุณ"
+
+#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
+#: dash/orgs/views.py:298
+msgid "Editors"
+msgstr "บรรณาธิการ"
+
+#: dash/orgs/models.py:53
+msgid "The editors in your organization"
+msgstr "บรรณาธิการในองค์กรของคุณ"
+
+#: dash/orgs/models.py:56
+msgid "Language"
+msgstr "ภาษา"
+
+#: dash/orgs/models.py:57
+msgid "The main language used by this organization"
+msgstr "ภาษาหลักที่ใช้ในองค์กรของคุณ"
+
+#: dash/orgs/models.py:60
+msgid "Subdomain"
+msgstr "โดเมนย่อย"
+
+#: dash/orgs/models.py:61
+msgid "This subdomain is not available"
+msgstr "ชื่อโดเมนย่อยนี้ถูกใช้ไปแล้ว"
+
+#: dash/orgs/models.py:62
+msgid "The subdomain for this organization"
+msgstr "ชื่อโดเมนย่อยสำหรับองค์กรนี้"
+
+#: dash/orgs/models.py:65
+msgid "Domain"
+msgstr "ชื่อโดเมน"
+
+#: dash/orgs/models.py:66
+msgid "This domain is not available"
+msgstr "ชื่อโดเมนนี้ถูกใช้ไปแล้ว"
+
+#: dash/orgs/models.py:67
+msgid "The custom domain for this organization"
+msgstr "ชื่อโดเมนตั้งเองสำหรับองค์กรนี้"
+
+#: dash/orgs/models.py:70
+msgid "Timezone"
+msgstr "โซนเวลา"
+
+#: dash/orgs/models.py:71
+msgid "The timezone your organization is in."
+msgstr "ตำแหน่งโซนเวลาที่องค์กรตั้งอยู่"
+
+#: dash/orgs/models.py:75
+msgid "The API token for the RapidPro account this dashboard is tied to"
+msgstr "API token สำหรับบัญชี RapidPro ที่แดชบอร์ดนี้ผูกอยู่"
+
+#: dash/orgs/models.py:80
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr "JSON blob ที่ใช้ก็บข้อมูลการตั้งค่าต่างๆ ที่เกี่ยวข้องกับองค์กรนี้"
+
+#: dash/orgs/models.py:311
+msgid "Administrator"
+msgstr "ผู้ดูแลระบบ"
+
+#: dash/orgs/models.py:312
+msgid "Editor"
+msgstr "บรรณาธิการ"
+
+#: dash/orgs/models.py:313
+msgid "Viewer"
+msgstr "ผู้ชม"
+
+#: dash/orgs/models.py:318 dash/orgs/models.py:377 ureport/assets/models.py:16
+#: ureport/contacts/models.py:44
+msgid "Org"
+msgstr "องค์กร"
+
+#: dash/orgs/models.py:319
+msgid "The organization to which the account is invited to view"
+msgstr "องค์กรที่บัญชีถูกเชิญให้มาชม"
+
+#: dash/orgs/models.py:322
+msgid "Email"
+msgstr "อีเมล"
+
+#: dash/orgs/models.py:323
+msgid "The email to which we send the invitation of the viewer"
+msgstr "อีเมลของผู้ชมที่เราจะส่งจดหมายเชิญไป"
+
+#: dash/orgs/models.py:326
+msgid "Secret"
+msgstr "ความลับ"
+
+#: dash/orgs/models.py:327
+msgid "a unique code associated with this invitation"
+msgstr "รหัสผ่านอันเป็นเอกลักษณ์สำหรับการเชิญครั้งนี้"
+
+#: dash/orgs/models.py:330
+msgid "User Role"
+msgstr "บทบาทของผู้ใช้งาน"
+
+#: dash/orgs/models.py:361
+#, python-format
+msgid "%s Invitation"
+msgstr "%s การเชิญ"
+
+#: dash/orgs/models.py:373 ureport/assets/models.py:11
+msgid "Banner"
+msgstr "แบนเนอร์"
+
+#: dash/orgs/models.py:374 ureport/assets/models.py:12
+msgid "Pattern"
+msgstr "รูปแบบ"
+
+#: dash/orgs/models.py:378
+msgid "The organization in which the image will be used"
+msgstr "องค์กรที่รูปภาพนี้จะถูกใช้"
+
+#: dash/orgs/models.py:382
+msgid "The name to describe this background"
+msgstr "ชื่อสำหรับอธิบายภาพพื้นหลังนี้"
+
+#: dash/orgs/models.py:385
+msgid "Background type"
+msgstr "ประเภทของภาพพื้นหลัง"
+
+#: dash/orgs/models.py:387 ureport/assets/models.py:24
+msgid "The image file"
+msgstr "ไฟล์รูปภาพ"
+
+#: dash/orgs/templates/orgs/email/invitation_email.html:9
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr "\nคุณถูกเชิญให้เข้าร่วม %(org_name)s\n<br/>\nหากต้องการตอบรับคำเชิญ <a href='%(host)s%(join_url)s'>คลิกที่นี่</a>\n "
+
+#: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
+msgid "Edit"
+msgstr "แก้ไข"
+
+#: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
+msgid "Manage Users"
+msgstr "บริหารจัดการผู้ใช้งาน"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:13
+msgid "Accounts"
+msgstr "ชื่อบัญชี"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:16
+msgid "Admins"
+msgstr "ผู้ดูแลระบบ"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:22
+#: smartmin/templates/smartmin/delete_confirm.html:26
+#: smartmin/templates/smartmin/update.html:10
+msgid "Remove"
+msgstr "เอาออก"
+
+#: dash/orgs/templates/orgs/org_manage_accounts.haml:29
+msgid "You must have at least one administator"
+msgstr "คุณต้องมีผู้ดูแลระบบอย่างน้อย 1 คน"
+
+#: dash/orgs/views.py:168
+msgid "Select your Organization"
+msgstr "เลือกองค์กรของคุณ"
+
+#: dash/orgs/views.py:179
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr "บัญชีของคุณยังไม่ได้เชื่อมโยงกับองค์กร กรุณาติดต่อผู้ดูแลระบบ"
+
+#: dash/orgs/views.py:219 dash/orgs/views.py:229
+msgid "Your Organization"
+msgstr "องค์กรของคุณ"
+
+#: dash/orgs/views.py:226
+msgid "Not Set"
+msgstr "ยังไม่ได้กำหนดค่า"
+
+#: dash/orgs/views.py:296
+msgid "Invite people to your organization"
+msgstr "เชื่อผู้อื่นมาอยู่ในองค์กรของคุณ"
+
+#: dash/orgs/views.py:299
+msgid "User group"
+msgstr "กลุ่มผู้ใช้"
+
+#: dash/orgs/views.py:310
+msgid "One of the emails you entered is invalid."
+msgstr "หนึ่งในอีเมล์ที่คุณใส่ไม่ถูกต้อง"
+
+#: dash/orgs/views.py:323
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "บริหารจัดการบัญชีของ %(name)s"
+
+#: dash/orgs/views.py:438 smartmin/views.py:1264
+msgid "Create"
+msgstr "สร้าง"
+
+#: dash/orgs/views.py:446
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr "ลิงก์คำเชิญของคุณไม่ถูกต้อง กรุณาติดต่อผู้ดูแลระบบขององค์กรของคุณ"
+
+#: dash/orgs/views.py:502 dash/orgs/views.py:547
+#, python-format
+msgid "Join %(name)s"
+msgstr "เข้าร่วมกับ %(name)s"
+
+#: dash/orgs/views.py:524
+msgid "Join"
+msgstr "เข้าร่วม"
+
+#: dash/orgs/views.py:533
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr "ลิงก์คำเชิญของคุณหมดอายุแล้ว กรุณาติดต่อผู้ดูแลระบบขององค์กรของคุณ"
+
+#: dash/orgs/views.py:640
+msgid "Task"
+msgstr "งาน"
+
+#: dash/orgs/views.py:644
+msgid "Tasks"
+msgstr "งาน"
+
+#: dash/stories/models.py:13
+msgid "The title for this story"
+msgstr "ชื่อหัวข้อของเรื่องนี้"
+
+#: dash/stories/models.py:17
+msgid "Whether this story is featured"
+msgstr "เรื่องราวนี้เป็นเรื่องแนะนำหรือไม่"
+
+#: dash/stories/models.py:20
+msgid "The summary for the story"
+msgstr "ใจความสรุปของเรื่องราวนี้"
+
+#: dash/stories/models.py:22
+msgid "The body of text for the story"
+msgstr "เนื้อหาของเรื่องราว"
+
+#: dash/stories/models.py:24
+msgid "The writer of the story"
+msgstr "ผู้เขียนเรื่องราว"
+
+#: dash/stories/models.py:27
+msgid "A link to an mp3 file to publish on this story"
+msgstr "ลิงก์ไปยังไฟล์ MP3 สำหรับเรื่องราวนี้"
+
+#: dash/stories/models.py:31
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
+msgstr "ID ของวิดีโอยูทูปที่เกี่ยวข้องกับเรื่องราวนี้ (เป็นข้อความที่มาหลังจาก v= และก่อน & ใน URL ของยูทูป)"
+
+#: dash/stories/models.py:37
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr "แท็กสำหรับเรื่องราวนี้ แยกแต่ละแท็กด้วยการเว้นวรรค สามารถนำไปใช้สำหรับการกรองข้อมูลขั้นสูงได้ (ไม่จำเป็นต้องใส่)"
+
+#: dash/stories/models.py:42
+msgid "The category for this story"
+msgstr "หมวดหมู่ของเรื่องราวนี้"
+
+#: dash/stories/models.py:46
+msgid "The organization this story belongs to"
+msgstr "องค์กรที่เป็นเจ้าของเรื่องราวนี้"
+
+#: dash/stories/models.py:124 templates/frame.haml:304
+#: templates/frame.haml.py:456 templates/public/stories.haml:7
+msgid "Stories"
+msgstr "เรื่องราว"
+
+#: dash/stories/models.py:132
+msgid "The story to associate to"
+msgstr ""
+
+#: dash/stories/views.py:56
+msgid "Yes"
+msgstr "ใช่"
+
+#: dash/stories/views.py:57
+msgid "No"
+msgstr "ไม่ใช่"
+
+#: dash/stories/views.py:76
+msgid "Story Images"
+msgstr "รูปภาพประกอบเรื่องราว"
+
+#: dash/stories/views.py:88 dash/stories/views.py:96
+#: ureport/polls/views.py:151 ureport/polls/views.py:158
+#, python-format
+msgid "Image %d"
+msgstr "รูปภาพ %d"
+
+#: dash/stories/views.py:89
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "รูปภาพที่จะแสดงบนหน้าเว็บเรื่องราว และในพรีวิว (ไม่จำเป็นต้องใส่)"
+
+#: dash/stories/views.py:97
+msgid "Image to display on story page and in previews (optional)"
+msgstr "รูปภาพที่จะแสดงบนหน้าเว็บเรื่องราว และในพรีวิว (ไม่จำเป็นต้องใส่)"
+
+#: smartmin/templates/smartmin/delete_confirm.html:11
+msgid "Remove Item?"
+msgstr "เอารายการนี้ออก?"
+
+#: smartmin/templates/smartmin/delete_confirm.html:13
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr "\nคุณแน่ใจแล้วหรือ ว่าจะเอา <b>%(object)s</b> ออก?\n "
+
+#: smartmin/templates/smartmin/delete_confirm.html:17
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
+msgstr "เมื่อเอาออกแล้วมันจะสูญหายไปตลอดกาล ไม่สามารถยกเลิกการกระทำนี้ได้"
+
+#: smartmin/templates/smartmin/delete_confirm.html:24
+#: smartmin/templates/smartmin/form.html:50
+#: smartmin/templates/smartmin/update.html:8
+#: templates/jobs/jobsource_create.haml:33
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: smartmin/templates/smartmin/list.html:79
+#, python-format
+msgid ""
+"\n"
+"\t\t%(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] "\n%(counter)s ผลลัพธ์\n "
+
+#: smartmin/templates/smartmin/list.html:85
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr "\n\tผลลัพธ์ที่ %(start)s-%(end)s จากทั้งหมด %(count)s\n\t"
+
+#: smartmin/templates/smartmin/list.html:95
+#: smartmin/templates/smartmin/list.html:97
+msgid "Previous"
+msgstr "ก่อนหน้า"
+
+#: smartmin/templates/smartmin/list.html:128
+#: smartmin/templates/smartmin/list.html:130
+#: templates/jobs/jobsource_create.haml:30
+msgid "Next"
+msgstr "ถัดไป"
+
+#: smartmin/templates/smartmin/read.html:13
+msgid "edit"
+msgstr "แก้ไข"
+
+#: smartmin/templates/smartmin/users/login.html:10
+#: templates/smartmin/users/login.haml:14
+msgid "Sign in"
+msgstr "ลงชื่อเข้าใช้"
+
+#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:404
+#: templates/frame.haml.py:581 templates/smartmin/users/login.haml:49
+msgid "Login"
+msgstr "ลงชื่อเข้าใช้"
+
+#: smartmin/templates/smartmin/users/login.html:35
+#: templates/smartmin/users/login.haml:54
+msgid "Forgot Password?"
+msgstr "ลืมรหัสผ่าน?"
+
+#: smartmin/templates/smartmin/users/user_expired.html:7
+msgid "Token Expired"
+msgstr "Token หมดอายุ"
+
+#: smartmin/templates/smartmin/users/user_failed.html:9
+msgid "Login Failure"
+msgstr "ลงชื่อเข้าใช้ไม่สำเร็จ"
+
+#: smartmin/templates/smartmin/users/user_failed.html:11
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr "\n      ขออภัย คุณไม่สามารถลงชื่อเข้าใช้งานได้ เนื่องจากคุณลงชื่อเข้าใช้ไม่สำเร็จแล้ว %(failed_login_limit)s ครั้ง\n      "
+
+#: smartmin/templates/smartmin/users/user_failed.html:18
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr "\n      กรุณารอ %(lockout_timeout)s นาที ก่อนลองลงชื่อเข้าใช้ใหม่\n      "
+
+#: smartmin/templates/smartmin/users/user_failed.html:25
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
+msgstr "นอกจากนี้ คุณสามารถกรอกแบบฟอร์มด้านล่าง เพื่อรีเซ็ตรหัสผ่านของคุณทางอีเมล"
+
+#: smartmin/templates/smartmin/users/user_failed.html:27
+msgid "Please contact the website administrator to have your password reset."
+msgstr "กรุณาติดต่อผู้ดูแลเว็บไซต์เพื่อรีเซ็ตรหัสผ่านของคุณ"
+
+#: smartmin/templates/smartmin/users/user_failed.html:39
+msgid "Email Address"
+msgstr "ที่อยู่อีเมล"
+
+#: smartmin/templates/smartmin/users/user_failed.html:41
+msgid "Recover"
+msgstr "กู้คืน"
+
+#: smartmin/templates/smartmin/users/user_forget.html:6
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
+msgstr "กรุณาใส่ที่อยู่อีเมลที่คุณใช้ในการลงทะเบียน เราจะช่วยคุณกู้คืนรหัสผ่านของคุณ"
+
+#: smartmin/templates/smartmin/users/user_newpassword.html:7
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr "\n  <strong>รหัสผ่านของคุณหมดอายุแล้ว</strong> ตามนโยบายของระบบ คุณจะต้องเปลี่ยนรหัสผ่านใหม่ทุกๆ %(expire_days)s วัน และรหัสผ่านนั้นจะต้องไม่ถูกใช้ภายใน %(window_days)s วันก่อน\n  "
+
+#: smartmin/users/views.py:28 smartmin/users/views.py:66
+#: smartmin/users/views.py:81 smartmin/users/views.py:126
+#: smartmin/users/views.py:228 smartmin/users/views.py:255
+msgid "New Password"
+msgstr "รหัสผ่านใหม่"
+
+#: smartmin/users/views.py:36 smartmin/users/views.py:72
+#: smartmin/users/views.py:104 smartmin/users/views.py:150
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
+msgstr "รหัสผ่านจะต้องมีอย่างน้อย 8 ตัวอักษร มีตัวพิมพ์ใหญ่อย่างน้อย 1 ตัว ตัวพิมพ์เล็กอย่างน้อย 1 ตัว และมีตัวเลขอย่างน้อย 1 ตัว"
+
+#: smartmin/users/views.py:75 smartmin/users/views.py:107
+#: smartmin/users/views.py:153
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
+msgstr "คุณได้ใช้รหัสผ่านนี้มาแล้วในปีที่ผ่านมา กรุณาเลือกใช้รหัสผ่านใหม่"
+
+#: smartmin/users/views.py:80 smartmin/users/views.py:206
+#: smartmin/users/views.py:254
+msgid "Password"
+msgstr "รหัสผ่าน"
+
+#: smartmin/users/views.py:82
+msgid "Confirm Password"
+msgstr "ยืนยันรหัสผ่าน"
+
+#: smartmin/users/views.py:88
+msgid "Please enter your password to save changes."
+msgstr "กรุณาใส่รหัสผ่านของคุณเพื่อบันทึกการเปลี่ยนแปลง"
+
+#: smartmin/users/views.py:97
+msgid "Confirm the new password by filling the this field"
+msgstr "ยืนยันรหัสผ่านใหม่โดยการกรอกในช่องนี้"
+
+#: smartmin/users/views.py:100
+msgid "New password doesn't match with its confirmation"
+msgstr "รหัสผ่านใหม่ไม่ตรงกับรหัสที่ยืนยัน"
+
+#: smartmin/users/views.py:112
+msgid "Your Email"
+msgstr "อีเมลของคุณ"
+
+#: smartmin/users/views.py:119
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
+msgstr "ระบบไม่รองรับการกู้คืนอีเมล กรุณาติดต่อผู้ดูแลเว็บไซต์เพื่อรีเซ็ตรหัสผ่านของคูณ"
+
+#: smartmin/users/views.py:124
+msgid "Current Password"
+msgstr "รหัสผ่านปัจจุบัน"
+
+#: smartmin/users/views.py:125
+msgid "Your current password"
+msgstr "รหัสผ่านปัจจุบันของคุณ"
+
+#: smartmin/users/views.py:127
+msgid "Your new password."
+msgstr "รหัสผ่านใหม่ของคุณ"
+
+#: smartmin/users/views.py:128
+msgid "Confirm new Password"
+msgstr "ยืนยันรหัสผ่านใหม่"
+
+#: smartmin/users/views.py:129
+msgid "Confirm your new password."
+msgstr "ยืนยันรหัสผ่านใหม่ของคุณ"
+
+#: smartmin/users/views.py:134
+msgid "Please enter your password to save changes"
+msgstr "กรุณาใส่รหัสผ่านของคุณเพื่อบันทึกการเปลี่ยนแปลง"
+
+#: smartmin/users/views.py:143
+msgid "Confirm your new password by entering it here"
+msgstr "ยืนยันรหัสผ่านใหม่ของคุณด้วยการกรอกที่นี่"
+
+#: smartmin/users/views.py:146
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "รหัสผ่านใหม่และรหัสผ่านยืนยันไม่ตรงกัน กรุณาลองใหม่อีกครั้ง"
+
+#: smartmin/users/views.py:202
+msgid "New user created successfully."
+msgstr "สร้างผู้ใช้งานคนใหม่เรียบร้อย"
+
+#: smartmin/users/views.py:205 smartmin/users/views.py:227
+msgid "Groups"
+msgstr "กลุ่ม"
+
+#: smartmin/users/views.py:205
+msgid ""
+"Users will only get those permissions that are allowed for their group."
+msgstr "ผู้ใช้งานจะได้รับสิทธิ์ตามที่กำหนดในกลุ่มของพวกเขา"
+
+#: smartmin/users/views.py:206
+msgid "Set the user's initial password here."
+msgstr "กำหนดรหัสผ่านตั้งต้นของผู้ใช้งานที่นี่"
+
+#: smartmin/users/views.py:225
+msgid "Last Login"
+msgstr "ลงชื่อเข้าใช้ครั้งสุดท้าย"
+
+#: smartmin/users/views.py:226
+msgid "Is Active"
+msgstr "ใช้งานอยู่"
+
+#: smartmin/users/views.py:226
+msgid "Whether this user is allowed to log into the site"
+msgstr "ให้ผู้ใช้งานคนนี้ลงชื่อเข้าเว็บไซต์หรือไม่"
+
+#: smartmin/users/views.py:227
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "ผู้ใช้งานจะได้รับสิทธิ์ตามที่กำหนดในกลุ่มของพวกเขา"
+
+#: smartmin/users/views.py:228
+msgid "You can reset the user's password by entering a new password here"
+msgstr "คุณสามารถรีเซ็ตรหัสผ่านของผู้ใช้งานได้ด้วยการกรอกรหัสผ่านใหม่ที่นี่"
+
+#: smartmin/users/views.py:253
+msgid "Username"
+msgstr "ชื่อผู้ใช้งาน"
+
+#: smartmin/users/views.py:254
+msgid "Your password"
+msgstr "รหัสผ่านของคุณ"
+
+#: smartmin/users/views.py:255
+msgid "If you want to set a new password, enter it here"
+msgstr "ถ้าคุณต้องการตั้งรหัสผ่านใหม่ กรุณากรอกที่นี่"
+
+#: smartmin/users/views.py:256
+msgid "Confirm New Password"
+msgstr "ยืนยันรหัสผ่านใหม่"
+
+#: smartmin/users/views.py:256
+msgid "Confirm your new password"
+msgstr "ยืนยันรหัสผ่านใหม่ของคุณ"
+
+#: smartmin/users/views.py:271
+msgid "Edit your profile"
+msgstr "แก้ไขโปรไฟล์ของคุณ"
+
+#: smartmin/users/views.py:274
+msgid "Password Recovery"
+msgstr "กู้คืนรหัสผ่าน"
+
+#: smartmin/users/views.py:278
+msgid "An Email has been sent to your account with further instructions."
+msgstr "อีเมลขั้นตอนเพิ่มเติมได้ถูกส่งไปหาคุณแล้ว"
+
+#: smartmin/users/views.py:306
+msgid "Password Recovery Request"
+msgstr "ร้องขอให้กู้คืนรหัสผ่าน"
+
+#: smartmin/users/views.py:315
+msgid "Pick a new password"
+msgstr "เลือกรหัสผ่านใหม่"
+
+#: smartmin/users/views.py:317
+msgid "Your password has successfully been updated, thank you."
+msgstr "อัพเดตรหัสผ่านของคุณ ขอบคุณ"
+
+#: smartmin/users/views.py:343
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "คุณกำลังลงชื่อเข้าใช้เป็น %s"
+
+#: smartmin/users/views.py:356
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
+msgstr "อัพเดตรหัสผ่านเรียบร้อย คุณสามารถลงชื่อเข้าใช้ด้วยรหัสผ่านใหม่ได้แล้ว"
+
+#: smartmin/users/views.py:359
+msgid "Reset your Password"
+msgstr "รีเซ็ตรหัสผ่านของคุณ"
+
+#: smartmin/users/views.py:371
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
+msgstr "ลิงก์ของคุณหมดอายุแล้ว กรุณาเริ่มกระบวนการใหม่ด้วยการกรอกอีเมลของคุณที่นี่"
+
+#: smartmin/views.py:838
+msgid "Submit"
+msgstr "ส่ง"
+
+#: smartmin/views.py:845
+msgid "Form"
+msgstr "แบบฟอร์ม"
+
+#: smartmin/views.py:1167
+msgid "Save Changes"
+msgstr "บันทึกการเปลี่ยนแปลง"
+
+#: smartmin/views.py:1280
+#, python-format
+msgid "Your new %s has been created."
+msgstr "%s ใหม่ของคุณได้ถูกสร้างแล้ว"
+
+#: smartmin/views.py:1300
+#, python-format
+msgid "Import %s"
+msgstr "นำเข้า %s"
+
+#: templates/frame.haml:8 templates/public/org_chooser.haml:7
+msgid "U-Report"
+msgstr "ยูรีพอร์ต"
+
+#: templates/frame.haml:184
+msgid "Admin"
+msgstr "ผู้ดูแลระบบ"
+
+#: templates/frame.haml:192
+msgid "Configuration"
+msgstr "การกำหนดค่าระบบ"
+
+#: templates/frame.haml:198
+msgid "Orgs"
+msgstr "องค์กร"
+
+#: templates/frame.haml:204
+msgid "Users"
+msgstr "ผู้ใช้งาน"
+
+#: templates/frame.haml:217
+msgid "Images"
+msgstr "รูปภาพ"
+
+#: templates/frame.haml:226 templates/frame.haml.py:287
+msgid "Content"
+msgstr "เนื้อหา"
+
+#: templates/frame.haml:235
+msgid "Country Aliases"
+msgstr "นามแฝงของประเทศ"
+
+#: templates/frame.haml:252 templates/frame.haml.py:450
+msgid "Polls"
+msgstr "โพล"
+
+#: templates/frame.haml:275
+msgid "Category Images"
+msgstr "ภาพหมวดหมู่"
+
+#: templates/frame.haml:295
+msgid "News Items"
+msgstr "ข่าว"
+
+#: templates/frame.haml:313
+msgid "Job Sources"
+msgstr "แหล่งข้อมูลตำแหน่งงาน"
+
+#: templates/frame.haml:320
+msgid "Jobs Content"
+msgstr "เนื้อหาสำหรับตำแหน่งงาน"
+
+#: templates/frame.haml:330
+msgid "About Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"เกี่ยวกับ\""
+
+#: templates/frame.haml:336
+msgid "Videos"
+msgstr "วิดีโอ"
+
+#: templates/frame.haml:342
+msgid "Contact Us Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"ติดต่อเรา\""
+
+#: templates/frame.haml:348
+msgid "Missions Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"พันธกิจ\""
+
+#: templates/frame.haml:354
+msgid "Terms & Conditions"
+msgstr "ข้อตกลงและเงื่อนไข"
+
+#: templates/frame.haml:361
+msgid "U-Reporters Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"ยูรีพอร์ตเตอร์\""
+
+#: templates/frame.haml:368
+msgid "Join &amp; Engage Content"
+msgstr "เนื้อหาสำหรับหัวข้อ \"เข้าร่วมยูรีพอร์ต\""
+
+#: templates/frame.haml:374
+msgid "Join Steps Content"
+msgstr "เนื้อหาสำหรับขั้นตอนการเข้าร่วม"
+
+#: templates/frame.haml:381
+msgid "Additional Menu"
+msgstr "เมนูเพิ่มเติม"
+
+#: templates/frame.haml:398
+msgid "Logout"
+msgstr "ลงชื่อออก"
+
+#: templates/frame.haml:444
+msgid "About"
+msgstr "เกี่ยวกับ"
+
+#: templates/frame.haml:462
+msgid "U-Reporters"
+msgstr "เราคือใคร?"
+
+#: templates/frame.haml:469 templates/public/jobs.haml:7
+msgid "Jobs"
+msgstr "ตำแหน่งงาน"
+
+#: templates/frame.haml:476
+msgid "Join & Engage"
+msgstr "เข้าร่วมยูรีพอร์ต"
+
+#: templates/frame.haml:542
+msgid "FOLLOW US ON"
+msgstr "ติดตามเราได้ทาง"
+
+#: templates/jobs/jobsource_create.haml:8
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr "\n        การใส่แหล่งข้อมูลตำแหน่งงานจากทวิตเตอร์ คุณจะต้องมี Widget ID จากทวิตเตอร์เสียก่อน\n      "
+
+#: templates/jobs/jobsource_create.haml:12
+#: templates/jobs/jobsource_update.haml:12
+msgid "Follow this step by step guide"
+msgstr "ทำตามคำแนะนำนี้ทีละขั้น"
+
+#: templates/jobs/jobsource_create.haml:15
+#: templates/jobs/jobsource_update.haml:15
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr "\n        <div>หลังจากที่คุณสร้างวิดเจ็ตแล้ว ก็อปปี้ ID ของวิดเจ็ตจาก URL ตามที่แสดงให้ดูในรูปต่อไปนี้</div>\n      "
+
+#: templates/jobs/jobsource_create.haml:40
+msgid "Back"
+msgstr "ย้อนกลับ"
+
+#: templates/jobs/jobsource_update.haml:8
+msgid ""
+"\n"
+"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr "\n        โปรดจำไว้ว่าการใส่แหล่งข้อมูลตำแหน่งงานจากทวิตเตอร์ คุณจะต้องมี Widget ID จากทวิตเตอร์เสียก่อน\n      "
+
+#: templates/public/about.haml:16 templates/public/about.haml.py:68
+msgid "ABOUT U-REPORT"
+msgstr "เกี่ยวกับ ยูรีพอร์ต"
+
+#: templates/public/about.haml:22 templates/public/ureporters.haml:23
+msgid "Scroll to Learn more"
+msgstr "เลื่อนเพื่อดูข้อมูลเพิ่มเติม"
+
+#: templates/public/about.haml:80
+msgid "The mission of U-Report"
+msgstr "พันธกิจของยูรีพอร์ต"
+
+#: templates/public/about.haml:119
+msgid "Why Join U-Report?"
+msgstr "ทำไมจึงควรเข้าร่วมกับยูรีพอร์ต?"
+
+#: templates/public/about.haml:124
+msgid "Speak out on what's happening in your community"
+msgstr "เล่าให้ฟังว่ากำลังเกิดอะไรขึ้นในชุมชนของคุณ"
+
+#: templates/public/about.haml:127
+msgid ""
+"Use Ureport results and information to update and increase citizen's "
+"awareness"
+msgstr "ใช้ผลสำรวจและข้อมูลจากยูรีพอร์ตในการอัพเดตและสร้างความตระหนักให้กับผู้คน"
+
+#: templates/public/about.haml:130
+msgid "Participate in nationwide campaigns to help improve your country"
+msgstr "ร่วมกับแคมเปญระดับประเทศเพื่อพัฒนาประเทศของคุณ"
+
+#: templates/public/about.haml:133
+#, python-format
+msgid "Share what's happening around %(country)s with other U-Reporters"
+msgstr "แบ่งปันสิ่งที่เกิดขึ้นใน %(country)s ให้กับยูรีพอร์ตเตอร์คนอื่นๆ"
+
+#: templates/public/about.haml:139
+msgid "CLICK HERE TO JOIN"
+msgstr "คลิกที่นี่เพื่อเข้าร่วม"
+
+#: templates/public/about.haml:153
+msgid "U-REPORT VIDEOS"
+msgstr "วิดีโอยูรีพอร์ต"
+
+#: templates/public/about.haml:160
+msgid "No videos yet."
+msgstr "ยังไม่มีวิดีโอในขณะนี้"
+
+#: templates/public/about.haml:178
+msgid "WATCH IT ON YOUTUBE"
+msgstr "ดูวิดีโอนี้บนยูทูป"
+
+#: templates/public/all_polls.haml:5
+msgid "MORE POLLS"
+msgstr "โพลอื่นๆ"
+
+#: templates/public/all_polls.haml:12
+#: templates/public/archived_stories.haml:12
+msgid "FILTER"
+msgstr "ตัวกรอง"
+
+#: templates/public/all_polls.haml:19
+#: templates/public/archived_stories.haml:19 templates/public/stories.haml:69
+#: templates/public/strings_values.haml:5
+msgid "All"
+msgstr "ทั้งหมด"
+
+#: templates/public/all_polls.haml:33
+msgid "POLL LIST"
+msgstr "รายการโพล"
+
+#: templates/public/all_polls.haml:35
+msgid "All polls from most recent to oldest"
+msgstr "โพลทั้งหมดตั้งแต่ล่าสุดจนถึงเก่าสุด"
+
+#: templates/public/archived_stories.haml:5
+msgid "ARCHIVED STORIES"
+msgstr "เรื่องราวที่ถูกจัดเก็บ"
+
+#: templates/public/archived_stories.haml:33
+msgid "LIST"
+msgstr "รายการ"
+
+#: templates/public/index.haml:21
+msgid "Follow"
+msgstr "ติดตาม"
+
+#: templates/public/index.haml:29
+msgid ""
+"\n"
+"                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
+"                "
+msgstr "\n                  ยูรีพอร์ตเป็นเครื่องมือโซเชียลมีเดียที่ให้ใครๆ ก็สามารถตอบโพล รายงานปัญหา สนับสนุนสิทธิเด็ก และร่วมเป็นหนึ่งในพลังที่จะเปลี่ยนแปลงประเทศของตนได้ ไม่ว่าจะอยู่ ณ ที่ใดในโลกก็ตาม\n                "
+
+#: templates/public/index.haml:36 templates/public/index.haml.py:74
+msgid "CURRENT POLL"
+msgstr "โพลปัจจุบัน"
+
+#: templates/public/index.haml:42 templates/public/index.haml.py:193
+#: templates/public/index.haml:563
+msgid "VIEW FULL RESULT"
+msgstr "ดูผลลัพธ์ทั้งหมด"
+
+#: templates/public/index.haml:52
+msgid "All U-Report members"
+msgstr "สมาชิกยูรีพอร์ตทั้งหมด"
+
+#: templates/public/index.haml:91 templates/public/polls.haml:43
+msgid "RESPONSE RATE"
+msgstr "อัตราการตอบโพล"
+
+#: templates/public/index.haml:97
+msgid "Responded out of"
+msgstr "ตอบมาแล้ว จากทั้งหมด"
+
+#: templates/public/index.haml:105
+msgid "RESPONDER'S RATE BY LOCATION"
+msgstr "อัตราการตอบโพล แบ่งตามที่อยู่"
+
+#: templates/public/index.haml:111
+msgid "Most responded"
+msgstr "ได้รับการตอบมากที่สุด"
+
+#: templates/public/index.haml:115
+msgid "Least responded"
+msgstr "ได้รับการตอบล่าสุด"
+
+#: templates/public/index.haml:157
+msgid "TRENDING WORDS"
+msgstr "คำที่กำลังเป็นเทรนดห์"
+
+#: templates/public/index.haml:167
+msgid "FEATURED RESPONSES"
+msgstr "คำตอบโพลที่โดดเด่น"
+
+#: templates/public/index.haml:213 templates/public/ureporters.haml:16
+msgid "U-REPORTERS IN"
+msgstr "ยูรีพอร์ตเตอร์ ใน"
+
+#: templates/public/index.haml:221
+msgid "TOTAL # OF U-REPORTERS"
+msgstr "จำนวนยูรีพอร์ตเตอร์ทั้งหมด"
+
+#: templates/public/index.haml:233
+msgid "4 MOST ACTIVE REGIONS"
+msgstr "4 ภาคที่เคลื่อนไหวมากที่สุด"
+
+#: templates/public/index.haml:244 templates/public/index.haml.py:265
+msgid "RATE BY GENDER"
+msgstr "สัดส่วนตามเพศ"
+
+#: templates/public/index.haml:253 templates/public/index.haml.py:306
+msgid "RATE BY AGE"
+msgstr "สัดส่วนตามอายุ"
+
+#: templates/public/index.haml:318
+msgid "WHAT U-REPORTERS ARE SAYING"
+msgstr "ยูรีพอร์ตเตอร์กำลังบอกว่า"
+
+#: templates/public/index.haml:327
+msgid "FEATURED VIDEO"
+msgstr "วิดีโอแนะนำ"
+
+#: templates/public/index.haml:333
+msgid "WATCH MORE VIDEOS"
+msgstr "ดูวิดีโอเพิ่มเติม"
+
+#: templates/public/index.haml:344
+msgid "FEATURED REGION"
+msgstr "ภาคเด่น"
+
+#: templates/public/index.haml:368 templates/public/join_engage.haml:99
+msgid "VIEW MORE STORIES ON FACEBOOK"
+msgstr "อ่านเรื่องราวเพิ่มเติมบนเฟซบุ๊ก"
+
+#: templates/public/index.haml:387
+msgid "VIEW MORE ON INSTAGRAM"
+msgstr "อ่านเรื่องราวเพิ่มเติมบนไอจี"
+
+#: templates/public/index.haml:407
+msgid "READ MORE TWEETS ON TWITTER"
+msgstr "อ่านเรื่องราวเพิ่มเติมทางทวิตเตอร์"
+
+#: templates/public/index.haml:418
+msgid "NEWS FEED"
+msgstr "ฟีดข่าว"
+
+#: templates/public/index.haml:434 templates/public/index.haml.py:468
+#: templates/public/index.haml:499 templates/public/index.haml.py:577
+msgid "STORY"
+msgstr "เรื่องราว"
+
+#: templates/public/index.haml:459 templates/public/index.haml.py:486
+#: templates/public/index.haml:517 templates/public/index.haml.py:602
+#: templates/public/stories.haml:36 templates/public/stories.haml.py:117
+msgid "READ FULL STORY"
+msgstr "อ่านเรื่องราวฉบับเต็ม"
+
+#: templates/public/index.haml:540
+msgid "Response Rate"
+msgstr "อัตราการตอบ"
+
+#: templates/public/index.haml:746
+msgid "Read This Story"
+msgstr "อ่านเรื่องราวนี้"
+
+#: templates/public/jobs.haml:22
+msgid "JOBS"
+msgstr "ตำแหน่งงาน"
+
+#: templates/public/jobs.haml:28
+msgid "Scroll to see job details"
+msgstr "เลื่อนเพื่อดูรายละเอียดตำแหน่งงาน"
+
+#: templates/public/jobs.haml:78 templates/public/join_engage.haml:119
+msgid "TWEET TO"
+msgstr "ทวีตไปยัง"
+
+#: templates/public/jobs.haml:99
+msgid "Read more"
+msgstr "อ่านเพิ่มเติม"
+
+#: templates/public/jobs.haml:108
+msgid "VISIT"
+msgstr "เยี่ยมชม"
+
+#: templates/public/join_engage.haml:17
+msgid "JOIN U-REPORT"
+msgstr "เข้าร่วมยูรีพอร์ต"
+
+#: templates/public/join_engage.haml:44
+msgid "HOW TO JOIN"
+msgstr "จะเข้าร่วมได้อย่างไร"
+
+#: templates/public/join_engage.haml:73
+#, python-format
+msgid ""
+"\n"
+"              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+"\n"
+"            "
+msgstr "\n              * ยูรีพอร์ตเป็นโปรแกรมดาวน์โหลดฟรีที่ได้รับการสนับสนุนโดยองค์การยูนิเซฟ  %(country)s. ยูรีพอร์ตจะไม่ขอให้คุณชำระค่าบริการใดๆ และไม่ขอข้อมูลส่วนตัวด้านการเงิน กรุณาอย่าหลงเชื่อข้อความใดๆ ที่ขอให้คุณชำระค่าบริการหรือขอข้อมูลส่วนตัวใดๆ ของคุณ ไม่ว่าจะผ่านทางช่องทางใดๆ ก็ตาม\n\nอย่างไรก็ดี การใช้งานแอปพลิเคชั่นยูรีพอร์ต (U-Report) บนสมาร์ทโฟนของท่าน อาจมีค่าใช้บริการดาต้าตามแพ็กเกจที่ท่านได้สมัครไว้กับผู้ให้บริการโทรศัพท์เคลื่อนที่ %(shortcode)s\n\n            "
+
+#: templates/public/join_engage.haml:84
+msgid "U-REPORT ON SOCIAL MEDIA"
+msgstr "ยูรีพอร์ตบนโซเชียลมีเดีย"
+
+#: templates/public/join_engage.haml:140
+msgid "COMPOSE NEW TWEET"
+msgstr "เขียนทวีตใหม่"
+
+#: templates/public/polls.haml:16
+msgid "CURRENT POLL IN"
+msgstr "โพลปัจจุบันใน"
+
+#: templates/public/polls.haml:29
+#, python-format
+msgid ""
+"\n"
+"                  %(questions)s QUESTION POLLED ON THIS TOPIC\n"
+"                "
+msgid_plural ""
+"\n"
+"                  %(questions)s QUESTIONS POLLED ON THIS TOPIC\n"
+"                "
+msgstr[0] "\nมี %(questions)s คำถามโพลในหัวข้อนี้\n                "
+
+#: templates/public/polls.haml:49
+msgid "RESPONDED OUT OF"
+msgstr "ตอบ จาก"
+
+#: templates/public/polls.haml:53
+msgid "POLLED"
+msgstr "ที่ได้รับการสอบถาม"
+
+#: templates/public/polls.haml:96
+msgid "POLL RESULTS"
+msgstr "ผลโพล"
+
+#: templates/public/polls.haml:112
+#, python-format
+msgid ""
+"\n"
+"                    %(responded)s responded out of %(polled)s polled\n"
+"                  "
+msgstr "\nมีผู้ตอบจำนวน %(responded)s จากทั้งหมด %(polled)s ที่ทำการสำรวจ\n                  "
+
+#: templates/public/polls.haml:121
+msgid "KEYWORDS"
+msgstr "คีย์เวิร์ด"
+
+#: templates/public/polls.haml:126
+msgid "STATISTICS"
+msgstr "สถิติ"
+
+#: templates/public/polls.haml:131
+msgid "LOCATIONS"
+msgstr "ที่อยู่"
+
+#: templates/public/polls.haml:137 templates/public/ureporters.haml:83
+msgid "GENDER"
+msgstr "เพศ"
+
+#: templates/public/polls.haml:143 templates/public/ureporters.haml:63
+msgid "AGE"
+msgstr "อายุ"
+
+#: templates/public/polls.haml:313
+msgid "FEATURED ANSWERS"
+msgstr "คำตอบที่โดดเด่น"
+
+#: templates/public/polls.haml:320
+msgid "No featured answers."
+msgstr "ไม่มีคำตอบที่โดดเด่นในตอนนี้"
+
+#: templates/public/polls.haml:339
+msgid "U-Reporter in"
+msgstr "ยูรีพอร์ตเตอร์ ใน"
+
+#: templates/public/polls.haml:351 templates/public/story_read.haml:126
+msgid "RELATED STORIES"
+msgstr "เรื่องราวที่เกี่ยวข้อง"
+
+#: templates/public/polls.haml:356 templates/public/story_read.haml:131
+msgid "No related stories."
+msgstr "ไม่มีเรื่องราวที่เกี่ยวข้อง"
+
+#: templates/public/polls.haml:379 templates/public/story_read.haml:157
+msgid "READ MORE"
+msgstr "อ่านเพิ่มเติม"
+
+#: templates/public/polls.haml:391 templates/public/story_read.haml:99
+msgid "FEATURED IMAGES"
+msgstr "รูปภาพแนะนำ"
+
+#: templates/public/polls.haml:397
+msgid "No featured images yet."
+msgstr "ยังไม่มีรูปภาพแนะนำ"
+
+#: templates/public/stories.haml:20
+msgid "FEATURED STORY"
+msgstr "เรื่องราวแนะนำ"
+
+#: templates/public/stories.haml:27 templates/public/story_read.haml:23
+msgid "BY"
+msgstr "โดย"
+
+#: templates/public/stories.haml:56
+msgid "LATEST STORIES"
+msgstr "เรื่องราวล่าสุด"
+
+#: templates/public/stories.haml:61
+msgid "FILTERED BY"
+msgstr "เลือกแสดงเฉพาะ"
+
+#: templates/public/story_read.haml:28
+msgid "Scroll to read more"
+msgstr "เลื่อนเพื่ออ่านเพิ่มเติม"
+
+#: templates/public/story_read.haml:47
+msgid "STORY CONTINUES"
+msgstr "อ่านเรื่องราวต่อ"
+
+#: templates/public/story_read.haml:65
+msgid "AUDIO"
+msgstr ""
+
+#: templates/public/story_read.haml:78
+msgid "RELATED POLLS"
+msgstr "โพลที่เกี่ยวข้อง"
+
+#: templates/public/story_read.haml:83
+msgid "No related polls."
+msgstr "ไม่มีโพลที่เกี่ยวข้อง"
+
+#: templates/public/story_read.haml:104
+msgid "No featured images."
+msgstr "ไม่มีรูปภาพแนะนำ"
+
+#: templates/public/strings_values.haml:6
+msgid "Even"
+msgstr ""
+
+#: templates/public/strings_values.haml:7
+#: templates/public/strings_values.haml:10
+msgid "State"
+msgstr "ภาค"
+
+#: templates/public/strings_values.haml:8
+msgid "Other"
+msgstr "อื่นๆ"
+
+#: templates/public/strings_values.haml:9
+msgid "National"
+msgstr "ทั่วประเทศ"
+
+#: templates/public/strings_values.haml:11
+msgid "District"
+msgstr "จังหวัด"
+
+#: templates/public/strings_values.haml:12
+msgid "Participation Level"
+msgstr ""
+
+#: templates/public/strings_values.haml:13
+msgid "Responses"
+msgstr ""
+
+#: templates/public/strings_values.haml:14
+msgid "Reporters in"
+msgstr ""
+
+#: templates/public/strings_values.haml:15
+msgid "Results"
+msgstr "ผลลัพธ์"
+
+#: templates/public/strings_values.haml:16
+msgid "*Other answers include"
+msgstr "* รวมคำตอบอื่นๆ ด้วย"
+
+#: templates/public/strings_values.haml:17
+msgid "Population"
+msgstr "ประชากร"
+
+#: templates/public/strings_values.haml:18
+msgid "Registered in"
+msgstr "ลงทะเบียนใน"
+
+#: templates/public/strings_values.haml:19
+msgid "Density"
+msgstr "ความหนาแน่น"
+
+#: templates/public/strings_values.haml:20
+msgid "total"
+msgstr "ทั้งหมด"
+
+#: templates/public/strings_values.haml:21
+msgid "of"
+msgstr "จาก"
+
+#: templates/public/strings_values.haml:22
+msgid "the"
+msgstr " "
+
+#: templates/public/ureporters.haml:44
+msgid "WHO WE ARE"
+msgstr "พวกเราคือใคร"
+
+#: templates/public/ureporters.haml:55
+msgid "U-REPORTER STATISTICS"
+msgstr "สถิติยูรีพอร์ตเตอร์"
+
+#: templates/public/ureporters.haml:134
+msgid "WHERE ARE U-REPORTERS FROM?"
+msgstr "ยูรีพอร์ตเตอร์มาจากที่ใดกันบ้าง?"
+
+#: templates/public/ureporters.haml:154
+msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
+msgstr "อัตราการลงทะเบียน: 6 เดือนล่าสุด"
+
+#: templates/public/ureporters.haml:174
+msgid "OCCUPATION: TOP 9 MOST MENTIONED"
+msgstr "9 อาชีพที่ถูกพูดถึงมากที่สุด"
+
+#: templates/public/ureporters.haml:358
+msgid "Registered"
+msgstr "จำนวนที่ลงทะเบียน"
+
+#: templates/public/ureporters.haml:371
+msgid "Week of"
+msgstr "ช่วงสัปดาห์"
+
+#: ureport/admins/views.py:22
+#, python-format
+msgid "Refreshed %s cache for this organization"
+msgstr "รีเฟรช %s แคชสำหรับองค์กรนี้"
+
+#: ureport/assets/models.py:13
+msgid "Flag"
+msgstr ""
+
+#: ureport/assets/models.py:17
+msgid "The organization to which the image will be used"
+msgstr "องค์กรที่รูปจะถูกนำไปใช้"
+
+#: ureport/assets/models.py:20
+msgid "A short descriptive name for this image"
+msgstr "ชื่ออธิบายสั้นๆ สำหรับรูปภาพนี้"
+
+#: ureport/assets/models.py:22
+msgid "Image type"
+msgstr "ประเภทรูปภาพ"
+
+#: ureport/contacts/models.py:46
+msgid "Label"
+msgstr "ป้าย"
+
+#: ureport/contacts/models.py:48
+msgid "Key"
+msgstr ""
+
+#: ureport/contacts/models.py:86 ureport/polls/models.py:750
+msgid "Male"
+msgstr "ชาย"
+
+#: ureport/contacts/models.py:86 ureport/polls/models.py:750
+msgid "Female"
+msgstr "หญิง"
+
+#: ureport/contacts/models.py:92 ureport/locations/models.py:24
+msgid "Organization"
+msgstr "องค์กร"
+
+#: ureport/contacts/models.py:94
+msgid "Gender"
+msgstr "เพศ"
+
+#: ureport/contacts/models.py:95
+msgid "Gender of the contact"
+msgstr "เพศของผู้ติดต่อ"
+
+#: ureport/contacts/models.py:97
+msgid "Born Field"
+msgstr ""
+
+#: ureport/contacts/models.py:99
+msgid "Occupation Field"
+msgstr ""
+
+#: ureport/contacts/models.py:101
+msgid "Registration Date"
+msgstr "วันที่ลงทะเบียน"
+
+#: ureport/contacts/models.py:103
+msgid "State Field"
+msgstr ""
+
+#: ureport/contacts/models.py:105
+msgid "District Field"
+msgstr ""
+
+#: ureport/contacts/models.py:107
+msgid "Ward Field"
+msgstr ""
+
+#: ureport/contacts/models.py:240 ureport/polls/models.py:975
+msgid "Number of items with this counter"
+msgstr ""
+
+#: ureport/countries/management/commands/add_country_alias.py:55
+msgid "No root user found. Please create a root user"
+msgstr "ไม่มีผู้ใช้งานระดับ root กรุณาสร้างผู้ใช้งานระดับ root"
+
+#: ureport/countries/models.py:11
+msgid "The name for our alias"
+msgstr "ชื่อสำหรับนามแฝงของพวกเรา"
+
+#: ureport/jobs/models.py:22
+msgid "The title or name to reference this Job source."
+msgstr "ชื่อที่ใช้เรียกแหล่งข้อมูลตำแหน่งงานนี้"
+
+#: ureport/jobs/models.py:24
+msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
+msgstr "เลือกประเภทของแหล่งข้อมูลตำแหน่งงาน (ทวิตเตอร์, เฟซบุ๊ก หรือ RSS Feed)"
+
+#: ureport/jobs/models.py:25
+msgid "The full URL to navigate to this Job source."
+msgstr "ใส่ URL ของแหล่งข้อมูลตำแหน่งงาน"
+
+#: ureport/jobs/models.py:27
+msgid ""
+"For Twitter, a widget Id is required to embed tweets on the website. Read "
+"carefully the instructions above on how to get the right widget Id"
+msgstr "สำหรับทวิตเตอร์ จะต้องมี Widget ID เพื่อฝังทวีตลงในเว็บไซต์ กรุณาอ่านวิธีการหา Widget ID ที่ได้ระบุไว้ด้านบน"
+
+#: ureport/jobs/models.py:30
+msgid "Featured job sources are shown first on the jobs page."
+msgstr "ตำแหน่งงานที่ได้จากแหล่งข้อมูลตำแหน่งงานที่ได้รับการแนะนำ จะถูกแสดงเป็นอันดับแรกในหน้าตำแหน่งงาน"
+
+#: ureport/jobs/models.py:32
+msgid "The organization this job source is for"
+msgstr ""
+
+#: ureport/jobs/views.py:17
+msgid "Your job source has been added successfully"
+msgstr "เพิ่มแหล่งข้อมูลตำแหน่งของคุณเรียบร้อย"
+
+#: ureport/jobs/views.py:44
+msgid "Your job source has been updated successfully"
+msgstr "อัพเดตแหล่งข้อมูลตำแหน่งของคุณเรียบร้อย"
+
+#: ureport/locations/models.py:29
+msgid "This is the OSM id for this administrative boundary"
+msgstr "นี่คือ OSM ID (OpenStreetMap ID) สำหรับเขตการปกครองนี้"
+
+#: ureport/locations/models.py:32
+msgid "The name of our administrative boundary"
+msgstr "ชื่อของเขตการปกครองของเรา"
+
+#: ureport/locations/models.py:34
+msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
+msgstr "ระดับของเขตการปกครอง: 0 สำหรับ ประเทศ, 1 สำหรับ ภาค และ 2 สำหรับ จังหวัด"
+
+#: ureport/locations/models.py:37
+msgid "The parent to this political boundary if any"
+msgstr ""
+
+#: ureport/locations/models.py:39
+msgid "Geometry"
+msgstr ""
+
+#: ureport/locations/models.py:40
+msgid ""
+"The json representing the geometry type and coordinates of the boundaries"
+msgstr ""
+
+#: ureport/news/models.py:10
+msgid "The title for this item"
+msgstr "ชื่อของรายการนี้"
+
+#: ureport/news/models.py:13
+msgid "A short summary description for this item"
+msgstr "คำอธิบายสรุปสั้นๆ สำหรับรายการนี้"
+
+#: ureport/news/models.py:16
+msgid "A link that should be associated with this item"
+msgstr "ลิงก์ที่เกี่ยวข้องกับรายการนี้"
+
+#: ureport/news/models.py:19 ureport/news/models.py:43
+msgid "The category this item belongs to"
+msgstr "หมวดหมู่ของรายการนี้"
+
+#: ureport/news/models.py:22
+msgid "The organization this item belongs to"
+msgstr "องค์กรที่เป็นเจ้าของรายการนี้"
+
+#: ureport/news/models.py:34
+msgid "The title for this Video"
+msgstr "ชื่อของวิดีโอนี้"
+
+#: ureport/news/models.py:37
+msgid "A short summary description for this video"
+msgstr "คำอธิบายสรุปสั้นๆ สำหรับวิดีโอนี้"
+
+#: ureport/news/models.py:46
+msgid "The organization this video belongs to"
+msgstr "องค์กรที่เป็นเจ้าของวิดีโอนี้"
+
+#: ureport/polls/models.py:61
+msgid "The name of this poll category"
+msgstr "ชื่อของหมวดหมู่โพลนี้"
+
+#: ureport/polls/models.py:70
+msgid "Poll Categories"
+msgstr "หมวดหมู่โพล"
+
+#: ureport/polls/models.py:89
+msgid "The Flow this Poll is based on"
+msgstr "Flow ที่ใช้สำหรับหมวดหมู่นี้"
+
+#: ureport/polls/models.py:91
+msgid ""
+"The date to display for this poll. Make it empty to use flow created_on."
+msgstr "วันที่จะแสดงโพลนี้ หากต้องการใช้วันที่สร้าง Flow ให้ปล่อยว่าง"
+
+#: ureport/polls/models.py:95
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr "จะจัดเก็บ Flow สำหรับโพลนี้บน RapidPro หรือไม่"
+
+#: ureport/polls/models.py:97
+msgid "The base language of the flow to use"
+msgstr "ภาษาตั้งต้นที่ใช้สำหรับ Flow"
+
+#: ureport/polls/models.py:100
+msgid "The number of polled reporters on this poll"
+msgstr "จำนวนของยูรีพอร์ตเตอร์ที่ถูกสอบถามในโพลนี้"
+
+#: ureport/polls/models.py:103
+msgid "Whether the poll has finished the initial results sync."
+msgstr ""
+
+#: ureport/polls/models.py:106
+msgid "The title for this Poll"
+msgstr "ชื่อของโพลนี้"
+
+#: ureport/polls/models.py:108
+msgid "The category this Poll belongs to"
+msgstr "หมวดหมู่ของโพลนี้"
+
+#: ureport/polls/models.py:110
+msgid "Whether this poll should be featured on the homepage"
+msgstr "จะให้โพลนี้เป็นโพลแนะนำบนหน้าโฮมเพจหรือไม่"
+
+#: ureport/polls/models.py:112
+msgid "The splash category image to display for the poll (optional)"
+msgstr ""
+
+#: ureport/polls/models.py:114
+msgid "The organization this poll is part of"
+msgstr ""
+
+#: ureport/polls/models.py:543
+msgid "The poll to associate to"
+msgstr ""
+
+#: ureport/polls/models.py:557
+msgid "The poll for this response"
+msgstr ""
+
+#: ureport/polls/models.py:560
+msgid "The location for this response"
+msgstr ""
+
+#: ureport/polls/models.py:563
+msgid "The name of the sender of the message"
+msgstr ""
+
+#: ureport/polls/models.py:566
+msgid "The featured response message"
+msgstr ""
+
+#: ureport/polls/models.py:582
+msgid "The poll this question is part of"
+msgstr "โพลที่คำถามนี้เป็นส่วนหนึ่งของโพล"
+
+#: ureport/polls/models.py:584
+msgid "The title of this question"
+msgstr "ชื่อของคำถามนี้"
+
+#: ureport/polls/models.py:585
+msgid "The RuleSet this question is based on"
+msgstr ""
+
+#: ureport/polls/models.py:590
+msgid "The label of the ruleset on RapidPro"
+msgstr ""
+
+#: ureport/polls/models.py:593
+msgid "The priority number for this question on the poll"
+msgstr "เลขลำดับความสำคัญของคำถามนี้บนโพล"
+
+#: ureport/polls/models.py:843
+msgid "The Rule this response category is based on"
+msgstr ""
+
+#: ureport/polls/views.py:84
+msgid "You must include a title for every included question."
+msgstr "คุณต้องใส่ชื่อให้กับทุกคำถามที่นำมาใช้บนโพล"
+
+#: ureport/polls/views.py:87
+msgid "Title too long. The max limit is 255 characters for each title"
+msgstr "ชื่อยาวเกินไป ชื่อหัวข้อต้องมีความยาวไม่เกิน 255 ตัวอักษร"
+
+#: ureport/polls/views.py:92
+msgid "You must include at least one poll question."
+msgstr "คุณต้องมีคำถามสำหรับโพลอย่างน้อย 1 คำถาม"
+
+#: ureport/polls/views.py:109
+msgid "Your poll has been created, now pick which questions to include."
+msgstr "โพลของคุณถูกสร้างขึ้นมาแล้ว กรุณาเลือกคำถามที่จะใช้ในโพล"
+
+#: ureport/polls/views.py:139
+msgid "Poll Images"
+msgstr "รูปภาพประกอบโพล"
+
+#: ureport/polls/views.py:140
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr "กรุณาใส่คำตอบโพลที่ต้องการให้เป็นคำโพลเด่น (ถ้ามี)"
+
+#: ureport/polls/views.py:152
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr "รูปภาพที่จะแสดงบนหน้าเพจโพลและในพรีวิว (ไม่จำเป็นต้องใส่)"
+
+#: ureport/polls/views.py:159
+msgid "Image to display on poll page and in previews (optional)"
+msgstr "รูปภาพที่จะแสดงบนหน้าเว็บเรื่องราว และในพรีวิว (ไม่จำเป็นต้องใส่)"
+
+#: ureport/polls/views.py:183
+msgid "Featured Poll Responses"
+msgstr "คำตอบโพลเด่น"
+
+#: ureport/polls/views.py:184
+msgid "Your poll has been updated."
+msgstr "โพลของคุณถูกอัพเดตแล้ว"
+
+#: ureport/polls/views.py:201
+#, python-format
+msgid "Response %d Reporter"
+msgstr ""
+
+#: ureport/polls/views.py:201
+msgid "The name or alias of the responder."
+msgstr "ชื่อหรือนามแฝงของผู้ตอบโพล"
+
+#: ureport/polls/views.py:206
+#, python-format
+msgid "Response %d Location"
+msgstr ""
+
+#: ureport/polls/views.py:206
+msgid "The location of the responder."
+msgstr "ที่อยู่ของผู้ตอบโพล"
+
+#: ureport/polls/views.py:211
+#, python-format
+msgid "Response %d Message"
+msgstr ""
+
+#: ureport/polls/views.py:211
+msgid "The text of the featured response."
+msgstr "ข้อความของคำตอบโพลที่โดดเด่น"
+
+#: ureport/polls/views.py:237
+msgid "Poll Questions"
+msgstr "คำถามโพล"
+
+#: ureport/polls/views.py:239
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr "กรุณาเลือกรูปภาพที่คุณต้องการให้แสดงบนหน้าเพจโพล (ถ้ามี)"
+
+#: ureport/polls/views.py:268
+msgid "Include"
+msgstr ""
+
+#: ureport/polls/views.py:269
+msgid "Whether to include this question in your public results"
+msgstr "จะให้นำคำถามนี้ไปรวมในหน้าผลลัพธ์ที่เป็นสาธารณะของคุณหรือไม่"
+
+#: ureport/polls/views.py:273
+msgid "Priority"
+msgstr "ลำดับความสำคัญ"
+
+#: ureport/polls/views.py:274
+msgid ""
+"The priority of this question on the poll page, higher priority comes first"
+msgstr "ลำดับความสำคัญของคำถามนี้บนหน้าเพจโพล ลำดับความสำคัญที่สูงจะมาก่อน"
+
+#: ureport/polls/views.py:278
+msgid "Ruleset Label"
+msgstr "ป้าย RuleSet"
+
+#: ureport/polls/views.py:279 ureport/polls/views.py:284
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr "คำถามที่แสดงต่อผู้ชมของคุณจะถูกแสดงเป็นแบบสาธารณะ"
+
+#: ureport/polls/views.py:283
+msgid "Title"
+msgstr "ชื่อหัวข้อ"
+
+#: ureport/polls/views.py:404
+#, python-format
+msgid "Scheduled a pull refresh for poll #%d on org #%d"
+msgstr "ตั้งเวลาให้ดึงโพล #%d บนองค์กร #%d"
+
+#: ureport/public/views.py:298
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+#: ureport/settings_common.py:184
+msgid "Whether this org should be show on the landing page"
+msgstr "จะให้แสดงองค์กรนี้บนแลนด์ดิ้งเพจหรือไม่"
+
+#: ureport/settings_common.py:185
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr "หมายเลขที่ผู้ใช้งานสามารถใช้ติดต่อยูรีพอร์ตในประเทศได้"
+
+#: ureport/settings_common.py:186
+msgid "The short text used to direct visitors to join U-Report"
+msgstr "ข้อความสั้นๆ สำหรับชวนเชิญให้ผู้ชมมาเข้าร่วมยูรีพอร์ต"
+
+#: ureport/settings_common.py:187
+msgid "The color used to draw the text on the join bar"
+msgstr "สีตัวอักษรบนแถบ \"เข้าร่วม\""
+
+#: ureport/settings_common.py:188
+msgid "The color used to draw the background on the join bar"
+msgstr "สีพื้นหลังของแถบ \"เข้าร่วม\""
+
+#: ureport/settings_common.py:189
+msgid "The primary color for styling for this organization"
+msgstr "สีหลักสำหรับองค์กรนี้"
+
+#: ureport/settings_common.py:190
+msgid "The secondary color for styling for this organization"
+msgstr "สีรองสำหรับองค์กรนี้"
+
+#: ureport/settings_common.py:191
+msgid "The background color for the site"
+msgstr "สีพื้นหลังสำหรับเว็บไซต์นี้"
+
+#: ureport/settings_common.py:192
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr ""
+
+#: ureport/settings_common.py:193
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr "Google Analytics Tracking ID สำหรับองค์กรนี้"
+
+#: ureport/settings_common.py:194
+msgid "The URL to the Youtube channel for this organization"
+msgstr "URL สำหรับ YouTube Channel ขององค์กรนี้"
+
+#: ureport/settings_common.py:195
+msgid "The URL to the Facebook page for this organization"
+msgstr "URL สำหรับ Facebook Page ขององค์กรนี้"
+
+#: ureport/settings_common.py:196
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr "เลข ID ของ Facebook Page ขององค์กรนี้  (ไม่จำเป็นต้องใส่)"
+
+#: ureport/settings_common.py:197
+msgid ""
+"The integer id to the Facebook app for this organization's chat app "
+"(optional)"
+msgstr "เลข ID ของ Facebook app สำหรับโปรแกรมแชทขององค์กรนี้ (ไม่จำเป็นต้องใส่)"
+
+#: ureport/settings_common.py:198
+msgid "The Instagram username for this organization"
+msgstr "ชื่อผู้ใช้งานอินสตาแกรมขององค์กรนี้"
+
+#: ureport/settings_common.py:199
+msgid "The Instagram widget id from lightwidget.com"
+msgstr "Widget ID ของอินสตาแกรมจาก lightwidget.com"
+
+#: ureport/settings_common.py:200
+msgid "The Twitter handle for this organization"
+msgstr "ชื่อทวิตเตอร์ขององค์กรนี้"
+
+#: ureport/settings_common.py:201
+msgid "The Twitter widget used for following new users"
+msgstr ""
+
+#: ureport/settings_common.py:202
+msgid "The Twitter widget used for searching"
+msgstr "Widget ของทวิตเตอร์สำหรับใช้ในการค้นหา"
+
+#: ureport/settings_common.py:203
+msgid "The name of txbhe Contact Group that contains registered reporters"
+msgstr ""
+
+#: ureport/settings_common.py:204
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันเดือนปีเกิดของยูรีพอร์ตเตอร์"
+
+#: ureport/settings_common.py:205
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลเพศของยูรีพอร์ตเตอร์"
+
+#: ureport/settings_common.py:206
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลอาชีพของยูรีพอร์ตเตอร์"
+
+#: ureport/settings_common.py:207
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลวันที่ลงทะเบียนของยูรีพอร์ตเตอร์"
+
+#: ureport/settings_common.py:208
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลภาคที่อยู่ของยูรีพอร์ตเตอร์"
+
+#: ureport/settings_common.py:209
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr "ป้ายชื่อของ Contact Field ที่มีข้อมูลจังหวัดที่อยู่ของยูรีพอร์ตเตอร์"
+
+#: ureport/settings_common.py:210
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr ""
+
+#: ureport/settings_common.py:211
+msgid "The label assigned to U-Reporters that are Male."
+msgstr "ป้ายสำหรับมอบหมายให้ยูรีพอร์ตเตอร์เพศชาย"
+
+#: ureport/settings_common.py:212
+msgid "The label assigned to U-Reporters that are Female."
+msgstr "ป้ายสำหรับมอบหมายให้ยูรีพอร์ตเตอร์เพศหญิง"
+
+#: ureport/settings_common.py:213
+msgid "If there are jobs to be shown on the public site"
+msgstr "ถ้ามีตำแหน่งงานแสดงบนเว็บไซต์สาธารณะ"
+
+#: ureport/settings_common.py:214
+msgid ""
+"If this org if for global data. e.g: It shows a world map instead of a "
+"country map."
+msgstr ""
+
+#: ureport/settings_common.py:215
+msgid ""
+"If you need to include some custom HTML codes in you org pages, like custom "
+"analytics code snippets"
+msgstr "ถ้าคุณต้องการใส่โค้ด HTML ของคุณบนหน้าเพจขององค์กร เช่น โค้ดสำหรับ Analytics"
+
+#: ureport/translation.py:14
+msgid "Something to trigger localizations"
+msgstr ""

@@ -7,13 +7,9 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0023_populate_flow_date'),
+        ('polls', '0047_merge'),
+        ('polls', '0049_merge'),
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='poll',
-            name='poll_date',
-            field=models.DateTimeField(null=True),
-        ),
     ]

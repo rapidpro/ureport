@@ -209,7 +209,6 @@ def organize_categories_data(org, contact_field, api_data):
 
 def fetch_flows(org):
     start = time.time()
-    print "Fetching flows for %s" % org.name
 
     this_time = datetime.now()
     org_flows = dict(time=datetime_to_ms(this_time), results=dict())
@@ -241,8 +240,6 @@ def fetch_flows(org):
         client.captureException()
         import traceback
         traceback.print_exc()
-
-    print "Fetch %s flows took %ss" % (org.name, time.time() - start)
 
     return org_flows.get('results')
 

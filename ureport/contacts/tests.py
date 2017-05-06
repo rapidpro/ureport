@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 from datetime import datetime
+from django.db.models.aggregates import Sum
 from django.utils import timezone
 
 from dash.orgs.models import TaskState
