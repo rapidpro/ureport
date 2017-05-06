@@ -314,13 +314,16 @@ class RapidProBackend(BaseBackend):
                 (after, before, latest_synced_obj_time,
                  batches_latest, resume_cursor, pull_after_delete) = poll.get_pull_cached_params()
 
+                if pull_after_delete is not None:
+                    after = None
+                    latest_synced_obj_time = None
+                    batches_latest = None
+                    resume_cursor = None
+                    poll.delete_poll_results()
+
                 if resume_cursor is None:
                     before = datetime_to_json_date(timezone.now())
                     after = latest_synced_obj_time
-
-                if pull_after_delete is not None:
-                    after = None
-                    poll.delete_poll_results()
 
                 start = time.time()
                 print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
