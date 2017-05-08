@@ -1,3 +1,7 @@
+v1.0.339
+----------
+ * Add El Salvador
+
 v1.0.338
 ----------
  * Update translations
