@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-27 08:22+0000\n"
-"PO-Revision-Date: 2017-02-21 14:12+0000\n"
+"PO-Revision-Date: 2017-03-02 17:06+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -1177,7 +1177,7 @@ msgstr ""
 
 #: templates/public/index.haml:158
 msgid "TRENDING WORDS"
-msgstr "Слова у тренді"
+msgstr "Random"
 
 #: templates/public/index.haml:168
 msgid "FEATURED RESPONSES"
