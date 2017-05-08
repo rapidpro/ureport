@@ -1,3 +1,7 @@
+v1.0.338
+----------
+ * Update translations
+
 v1.0.336
 ----------
  * Fix refetch poll on big orgs
