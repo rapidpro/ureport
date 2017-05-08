@@ -535,6 +535,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://ureportbrasil.org.br/count/",
     ),
     dict(
+        name="El Salvador",
+        host="http://elsalvador.ureport.in/",
+        flag="flag_sv.png",
+        is_static=True,
+        count_link="http://elsalvador.ureport.in/count/",
+    ),
+    dict(
         name="Guatemala",
         host="http://guatemala.ureport.in/",
         flag="flag_gt.png",
