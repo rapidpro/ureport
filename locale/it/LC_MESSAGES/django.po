@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-27 08:22+0000\n"
-"PO-Revision-Date: 2017-05-08 09:29+0000\n"
+"PO-Revision-Date: 2017-05-09 06:57+0000\n"
 "Last-Translator: Sarah Martelli <smartelli@unicef.org>\n"
 "Language-Team: Italian (http://www.transifex.com/rapidpro/ureport/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,7 @@ msgstr "Se questo contenuto debba includere un'immagine"
 
 #: dash/dashblocks/models.py:37
 msgid "Whether this content should use a rich HTML editor"
-msgstr "Se questo contenuto deve utilizzare un editor di testo RTF"
+msgstr "Se questo contenuto deve utilizzare un editor HTML esteso"
 
 #: dash/dashblocks/models.py:40
 msgid "Whether this content should include a summary field"
@@ -114,7 +114,7 @@ msgstr "Il titolo per questo blocco di contenuti, opzionale"
 
 #: dash/dashblocks/models.py:77
 msgid "The summary for this item, should be short"
-msgstr "Il riassunto per questo articolo, deve essere breve"
+msgstr "Il riassunto per questo elemento, deve essere breve"
 
 #: dash/dashblocks/models.py:80
 msgid "The body of text for this content block, optional"
@@ -245,11 +245,11 @@ msgstr "Gli amministratori della tua organizzazione"
 
 #: dash/orgs/models.py:48
 msgid "Viewers"
-msgstr "Utenti"
+msgstr "Utenti in visione"
 
 #: dash/orgs/models.py:49
 msgid "The viewers in your organization"
-msgstr "Utenti nella tua organizzazione"
+msgstr "Utenti in visione nella tua organizzazione"
 
 #: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
 #: dash/orgs/views.py:298
@@ -270,27 +270,27 @@ msgstr "La lingua principale usata da questa organizzazione"
 
 #: dash/orgs/models.py:60
 msgid "Subdomain"
-msgstr "Sottocampo"
+msgstr "Sottodominio"
 
 #: dash/orgs/models.py:61
 msgid "This subdomain is not available"
-msgstr "Questo sottocampo non è disponibile"
+msgstr "Questo sottodominio non è disponibile"
 
 #: dash/orgs/models.py:62
 msgid "The subdomain for this organization"
-msgstr "Il sottocampo per questa organizzazione"
+msgstr "Il sottodominio per questa organizzazione"
 
 #: dash/orgs/models.py:65
 msgid "Domain"
-msgstr "Campo"
+msgstr "Dominio"
 
 #: dash/orgs/models.py:66
 msgid "This domain is not available"
-msgstr "Questo campo non è disponibile"
+msgstr "Questo dominio non è disponibile"
 
 #: dash/orgs/models.py:67
 msgid "The custom domain for this organization"
-msgstr "Il campo identificativo per questa organizzazione"
+msgstr "Il custom domain per questa organizzazione"
 
 #: dash/orgs/models.py:70
 msgid "Timezone"
@@ -320,7 +320,7 @@ msgstr "Editore"
 
 #: dash/orgs/models.py:313
 msgid "Viewer"
-msgstr "Utente"
+msgstr "Utente in visione"
 
 #: dash/orgs/models.py:318 dash/orgs/models.py:377 ureport/assets/models.py:16
 #: ureport/contacts/models.py:44
@@ -396,7 +396,7 @@ msgstr "Modifica"
 
 #: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
 msgid "Manage Users"
-msgstr "Gestisci utilizzatori"
+msgstr "Gestisci utenti"
 
 #: dash/orgs/templates/orgs/org_manage_accounts.haml:13
 msgid "Accounts"
@@ -506,7 +506,7 @@ msgstr "L'autore della storia "
 
 #: dash/stories/models.py:27
 msgid "A link to an mp3 file to publish on this story"
-msgstr "Il link al file mp3 per pubblicare su questa storia "
+msgstr "Il link al file mp3 da pubblicare su questa storia "
 
 #: dash/stories/models.py:31
 msgid ""
@@ -518,7 +518,7 @@ msgstr "L'id del video YouTube che dovrebbe essere collegato a questa storia (qu
 msgid ""
 "Any tags for this story, separated by spaces, can be used to do more "
 "advanced filtering, optional"
-msgstr "Tutte le etichette per questa storia, separate da spazi, possono essere usate per fare filtraggio avanzato, opzionale "
+msgstr "Tutti i tag per questa storia, separati da spazi, possono essere usati per fare filtraggio avanzato, opzionale "
 
 #: dash/stories/models.py:42
 msgid "The category for this story"
@@ -565,7 +565,7 @@ msgstr "L'immagine da visualizzare sulla pagina della storia e nelle anteprime (
 
 #: smartmin/templates/smartmin/delete_confirm.html:11
 msgid "Remove Item?"
-msgstr "Rimuovere l'immagine?"
+msgstr "Rimuovere l'elemento?"
 
 #: smartmin/templates/smartmin/delete_confirm.html:13
 #, python-format
@@ -693,7 +693,7 @@ msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
-msgstr "\n<strong> La tua password è scaduta. </strong> La politica del sito richiede che devi selezionare una nuova password ogni %(expire_days)s giorni, e che le password non devono essere già state utilizzate nei %(window_days)s giorni precedenti."
+msgstr "\n<strong> La tua password è scaduta. </strong> La politica del sito richiede che tu debba selezionare una nuova password ogni %(expire_days)s giorni, e che le password non devono essere già state utilizzate nei %(window_days)s giorni precedenti."
 
 #: smartmin/users/views.py:28 smartmin/users/views.py:66
 #: smartmin/users/views.py:81 smartmin/users/views.py:126
@@ -862,7 +862,7 @@ msgstr "La tua password è stata aggiornata con successo, grazie."
 #: smartmin/users/views.py:343
 #, python-format
 msgid "You are now logged in as %s"
-msgstr "Ti sei appena autenticata come %s"
+msgstr "Ti sei appena autenticato/a come %s"
 
 #: smartmin/users/views.py:356
 msgid ""
@@ -881,7 +881,7 @@ msgstr "Il tuo link è scaduto per motivi di sicurezza. Per favore ricomincia la
 
 #: smartmin/views.py:849
 msgid "Submit"
-msgstr "Sottoponi"
+msgstr "Invia"
 
 #: smartmin/views.py:856
 msgid "Form"
@@ -939,11 +939,11 @@ msgstr "Sondaggi"
 
 #: templates/frame.haml:300
 msgid "Category Images"
-msgstr "Immagini categorie"
+msgstr "Immagini Categoria"
 
 #: templates/frame.haml:320
 msgid "News Items"
-msgstr "Nuovi elementi"
+msgstr "Elementi della news"
 
 #: templates/frame.haml:338
 msgid "Job Sources"
@@ -955,7 +955,7 @@ msgstr "Contenuto Lavori"
 
 #: templates/frame.haml:355
 msgid "About Content"
-msgstr "Sul contenuto"
+msgstr "Contenuto Chi siamo"
 
 #: templates/frame.haml:361
 msgid "Videos"
@@ -967,7 +967,7 @@ msgstr "Contenuto Contattaci"
 
 #: templates/frame.haml:373
 msgid "Missions Content"
-msgstr "Contenuto Obiettivi"
+msgstr "Contenuto Mission"
 
 #: templates/frame.haml:379
 msgid "Terms & Conditions"
@@ -995,7 +995,7 @@ msgstr "Esci"
 
 #: templates/frame.haml:469
 msgid "About"
-msgstr "A proposito"
+msgstr "Chi siamo"
 
 #: templates/frame.haml:487
 msgid "U-Reporters"
@@ -1011,7 +1011,7 @@ msgstr "Aderisci e partecipa"
 
 #: templates/frame.haml:567
 msgid "FOLLOW US ON"
-msgstr "Seguici su"
+msgstr "SEGUICI SU"
 
 #: templates/jobs/jobsource_create.haml:8
 msgid ""
@@ -1035,7 +1035,7 @@ msgstr "\n<div> Dopo che hai creato il widget copia il widget id dall'url come m
 
 #: templates/jobs/jobsource_create.haml:40
 msgid "Back"
-msgstr "Ritorna"
+msgstr "Indietro"
 
 #: templates/jobs/jobsource_update.haml:8
 msgid ""
@@ -1050,7 +1050,7 @@ msgstr "Su U-REPORT"
 
 #: templates/public/about.haml:22 templates/public/ureporters.haml:23
 msgid "Scroll to Learn more"
-msgstr "Scorrere per saperne di piu"
+msgstr "Scorri per saperne di più"
 
 #: templates/public/about.haml:80
 msgid "The mission of U-Report"
@@ -1159,11 +1159,11 @@ msgstr "Risposto su "
 
 #: templates/public/index.haml:105
 msgid "RESPONDER'S RATE BY LOCATION"
-msgstr "Tasso di risposta per luogo"
+msgstr "TASSO DI RISPOSTA PER LUOGO"
 
 #: templates/public/index.haml:111
 msgid "Most responded"
-msgstr "Più risposto"
+msgstr "Risposta più frequente"
 
 #: templates/public/index.haml:143
 #, python-format
@@ -1191,7 +1191,7 @@ msgstr "U-REPORTERS IN "
 
 #: templates/public/index.haml:219
 msgid "TOTAL # OF U-REPORTERS"
-msgstr "# TOTALE DI U-REPORTER"
+msgstr "N. TOTALE DI U-REPORTER"
 
 #: templates/public/index.haml:231
 msgid "4 MOST ACTIVE REGIONS"
@@ -1215,7 +1215,7 @@ msgstr "VIDEO IN PRIMO PIANO"
 
 #: templates/public/index.haml:331
 msgid "Watch more videos"
-msgstr "Guarda più video"
+msgstr "Guarda altri video"
 
 #: templates/public/index.haml:342
 msgid "FEATURED REGION"
@@ -1266,7 +1266,7 @@ msgstr "OPPORTUNITÀ DI LAVORO"
 
 #: templates/public/jobs.haml:28
 msgid "Scroll to see job details"
-msgstr "Scorrere per vedere i dettagli del lavoro"
+msgstr "Scorri per vedere i dettagli del lavoro"
 
 #: templates/public/jobs.haml:78 templates/public/join_engage.haml:119
 msgid "Tweet to"
@@ -1295,7 +1295,7 @@ msgid ""
 "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "            "
-msgstr "\nU-Report è un programma gratuito sponsorizzato da UNICEF con l'aiuto di providers di rete in %(country)s. U-Report non chiederà né pagamenti né informazioni finanziarie personali. PER FAVORE ignorate qualsiasi messaggio che vi chiede un pagamento o su questo numero o sulle pagine Facebook e Twitter. Tutti i servizi U-Report (tutti i messaggi su %(shortcode)s) sono gratuiti"
+msgstr "\nU-Report è un programma gratuito sponsorizzato da UNICEF con l'aiuto di providers di rete in %(country)s. U-Report non chiederà né pagamenti né informazioni finanziarie personali. PER FAVORE ignora qualsiasi messaggio che ti chieda un pagamento o su questo numero o sulle pagine Facebook e Twitter. Tutti i servizi U-Report (tutti i messaggi su %(shortcode)s) sono gratuiti"
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
@@ -1303,7 +1303,7 @@ msgstr "U-REPORT SUI SOCIAL MEDIA"
 
 #: templates/public/join_engage.haml:140
 msgid "Compose new Tweet"
-msgstr "Digita nuovi Tweet"
+msgstr "Componi un nuovo Tweet"
 
 #: templates/public/polls.haml:16
 msgid "CURRENT POLL IN"
@@ -1332,7 +1332,7 @@ msgstr "risposta su"
 
 #: templates/public/polls.haml:53
 msgid "polled"
-msgstr "sondato"
+msgstr "sondati"
 
 #: templates/public/polls.haml:96
 msgid "POLL RESULTS"
@@ -1344,7 +1344,7 @@ msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr "\n%(responded)s risposta su %(polled)s sondata"
+msgstr "\n%(responded)s risposte su %(polled)s sondati"
 
 #: templates/public/polls.haml:121
 msgid "KEYWORDS"
@@ -1388,7 +1388,7 @@ msgstr "Nessuna storia collegata"
 
 #: templates/public/polls.haml:391 templates/public/story_read.haml:99
 msgid "FEATURED IMAGES"
-msgstr "IMMAGINI"
+msgstr "IMMAGINI IN PRIMO PIANO"
 
 #: templates/public/polls.haml:397
 msgid "No featured images yet."
@@ -1396,7 +1396,7 @@ msgstr "Ancora nessuna immagine."
 
 #: templates/public/stories.haml:20
 msgid "FEATURED STORY"
-msgstr "STORIA VISUALIZZATA"
+msgstr "STORIA IN PRIMO PIANO"
 
 #: templates/public/stories.haml:27 templates/public/story_read.haml:23
 msgid "BY"
@@ -1428,11 +1428,11 @@ msgstr "SONDAGGI COLLEGATI"
 
 #: templates/public/story_read.haml:83
 msgid "No related polls."
-msgstr "Nessun sondaggio collegato."
+msgstr "Nessun sondaggio correlato."
 
 #: templates/public/story_read.haml:104
 msgid "No featured images."
-msgstr "Nessuna immagine visualizzata."
+msgstr "Nessuna immagine in primo piano."
 
 #: templates/public/story_read.haml:157
 msgid "READ MORE"
@@ -1445,7 +1445,7 @@ msgstr "Anche"
 #: templates/public/strings_values.haml:7
 #: templates/public/strings_values.haml:10
 msgid "State"
-msgstr "Stato"
+msgstr "Regione"
 
 #: templates/public/strings_values.haml:8
 msgid "Other"
@@ -1457,7 +1457,7 @@ msgstr "Nazionale"
 
 #: templates/public/strings_values.haml:11
 msgid "District"
-msgstr "Distretto"
+msgstr "Provincia"
 
 #: templates/public/strings_values.haml:12
 msgid "Participation Level"
@@ -1485,7 +1485,7 @@ msgstr "Popolazione"
 
 #: templates/public/strings_values.haml:18
 msgid "Registered in"
-msgstr "Registrato in"
+msgstr "Registrato"
 
 #: templates/public/strings_values.haml:19
 msgid "Density"
@@ -1509,7 +1509,7 @@ msgstr "CHI SIAMO"
 
 #: templates/public/ureporters.haml:55
 msgid "U-REPORTER STATISTICS"
-msgstr "STATISTICHE U-REPORTER"
+msgstr "STATISTICHE DEGLI U-REPORTER"
 
 #: templates/public/ureporters.haml:134
 msgid "WHERE ARE U-REPORTERS FROM?"
@@ -1517,7 +1517,7 @@ msgstr "DA DOVE PROVENGONO GLI U-REPORTER?"
 
 #: templates/public/ureporters.haml:154
 msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr "TASSO DI REGISTRAZIONE: NEI 6 MESI SCORSI"
+msgstr "TASSO DI REGISTRAZIONE NEGLI ULTIMI 6 MESI"
 
 #: templates/public/ureporters.haml:174
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
@@ -1594,15 +1594,15 @@ msgstr "Data di registrazione"
 
 #: ureport/contacts/models.py:103
 msgid "State Field"
-msgstr "Campo Stato"
+msgstr "Campo Regione"
 
 #: ureport/contacts/models.py:105
 msgid "District Field"
-msgstr "Campo Distretto"
+msgstr "Campo Provincia"
 
 #: ureport/contacts/models.py:107
 msgid "Ward Field"
-msgstr "Campo Quartiere"
+msgstr "Campo Comune"
 
 #: ureport/contacts/models.py:240 ureport/polls/models.py:1058
 msgid "Number of items with this counter"
@@ -1626,7 +1626,7 @@ msgstr "Selezione il tipo per la fonte di lavoro. Twitter, Facebook o feed RSS"
 
 #: ureport/jobs/models.py:25
 msgid "The full URL to navigate to this Job source."
-msgstr "L'URL completo per raggiungere questa offerta di lavoro"
+msgstr "L'URL completa per raggiungere questa offerta di lavoro"
 
 #: ureport/jobs/models.py:27
 msgid ""
@@ -1660,11 +1660,11 @@ msgstr "Il nome della nostra divisione amministrativa"
 
 #: ureport/locations/models.py:34
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
-msgstr "Il livello della divisione, 0 per il Paese, 1 per lo Stato, 2 per il distretto"
+msgstr "Il livello della divisione, 0 per il Paese, 1 per la Regione, 2 per la provincia"
 
 #: ureport/locations/models.py:37
 msgid "The parent to this political boundary if any"
-msgstr "Il responsabile di questo confine politico se esistente"
+msgstr "Il livello superiore rispetto a questo confine politico se esistente"
 
 #: ureport/locations/models.py:39
 msgid "Geometry"
@@ -1722,7 +1722,7 @@ msgstr "Il flusso su cui questo sondaggio è basato"
 #: ureport/polls/models.py:102
 msgid ""
 "The date to display for this poll. Leave empty to use flow creation date."
-msgstr "Data da visualizzare per questo sondaggio. Lascia vuoto per usare la data di creazione."
+msgstr "Data da visualizzare per questo sondaggio. Lascia vuoto per usare la data di creazione del flusso."
 
 #: ureport/polls/models.py:106
 msgid "Whether the flow for this poll is archived on RapidPro"
@@ -1738,7 +1738,7 @@ msgstr "Il numero dei reporter sottoposti a questo sondaggio"
 
 #: ureport/polls/models.py:114
 msgid "Whether the poll has finished the initial results sync."
-msgstr "Se il sondaggio ha finitola sincronizzazione iniziale dei risultati."
+msgstr "Se il sondaggio ha finito la sincronizzazione iniziale dei risultati."
 
 #: ureport/polls/models.py:117
 msgid "The title for this Poll"
@@ -1806,7 +1806,7 @@ msgstr "La regola su cui è basata questa categoria di risposta"
 
 #: ureport/polls/views.py:85
 msgid "You must include a title for every included question."
-msgstr "Devi inserire un titolo per ogni questione inclusa"
+msgstr "Devi inserire un titolo per ogni domanda inclusa"
 
 #: ureport/polls/views.py:88
 msgid "Title too long. The max limit is 255 characters for each title"
@@ -1834,7 +1834,7 @@ msgstr "Immagini per il sondaggio"
 
 #: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr "Ora inserisci qualsiasi risposta vorresti inserire. (se esistenti)"
+msgstr "Ora inserisci tutte le risposte che prevedi. (se previste)"
 
 #: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
@@ -1846,7 +1846,7 @@ msgstr "Immagine da visualizzare nella pagine dei sondaggi e nelle anteprime. (o
 
 #: ureport/polls/views.py:196
 msgid "Featured Poll Responses"
-msgstr "Risposte sondaggio visualizzate"
+msgstr "Risposte sondaggio in primo piano"
 
 #: ureport/polls/views.py:197
 msgid "Your poll has been updated."
@@ -1877,7 +1877,7 @@ msgstr "Messaggio %d Risposta"
 
 #: ureport/polls/views.py:224
 msgid "The text of the featured response."
-msgstr "Il testo della risposta visualizzata"
+msgstr "Il testo della risposta in primo piano"
 
 #: ureport/polls/views.py:250
 msgid "Poll Questions"
@@ -1902,11 +1902,11 @@ msgstr "Priorità"
 #: ureport/polls/views.py:287
 msgid ""
 "The priority of this question on the poll page, higher priority comes first"
-msgstr "La priorità di questa questione nella pagina del sondaggio, le priorità più alte vengono prima"
+msgstr "La priorità di questa domanda nella pagina del sondaggio, le priorità più alte vengono prima"
 
 #: ureport/polls/views.py:291
 msgid "Ruleset Label"
-msgstr "Etichetta set regole"
+msgstr "Etichetta del set di regole"
 
 #: ureport/polls/views.py:292
 msgid "The label of the ruleset from RapidPro"
@@ -1932,7 +1932,7 @@ msgstr "%s"
 
 #: ureport/settings_common.py:186
 msgid "Whether this org should be show on the landing page"
-msgstr "Se questo org deve essere mostrato nella pagina di destinazione"
+msgstr "Se questa org deve essere mostrato nella pagina di destinazione"
 
 #: ureport/settings_common.py:187
 msgid "The shortcode that users will use to contact U-Report locally"
@@ -1990,7 +1990,7 @@ msgstr "Il completo ID all'app Facebook per la chat dell'app di questa organizza
 
 #: ureport/settings_common.py:200
 msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr "L'ID del pixel Facebook per questa organizzazione"
+msgstr "L'ID del pixel Facebook per questa organizzazione (opzionale)"
 
 #: ureport/settings_common.py:201
 msgid "The Instagram username for this organization"
@@ -2034,15 +2034,15 @@ msgstr "L'etichetta del Campo Contatto che contiene la data di registrazione dei
 
 #: ureport/settings_common.py:210
 msgid "The label of the Contact Field that contains the State of reporters"
-msgstr "L'etichetta del Campo Contatto che contiene lo Stato del reporter "
+msgstr "L'etichetta del Campo Contatto che contiene la Regione del reporter "
 
 #: ureport/settings_common.py:211
 msgid "The label of the Contact Field that contains the District of reporters"
-msgstr "L'etichetta del Campo Contatto che contiene il distretto del reporter "
+msgstr "L'etichetta del Campo Contatto che contiene la provincia del reporter "
 
 #: ureport/settings_common.py:212
 msgid "The label of the Contact Field that contains the Ward of reporters"
-msgstr "L'etichetta del Campo Contatto che contiene il quartiere del reporter "
+msgstr "L'etichetta del Campo Contatto che contiene il comune del reporter "
 
 #: ureport/settings_common.py:213
 msgid "The label assigned to U-Reporters that are Male."
