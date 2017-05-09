@@ -1,3 +1,7 @@
+v1.0.340
+----------
+ * Update Italian
+
 v1.0.339
 ----------
  * Add El Salvador
