@@ -216,6 +216,8 @@ INSTALLED_APPS = (
     'django_countries',
     'rest_framework',
     'rest_framework_swagger',
+
+    'hamlpy',
 )
 
 # A sample logging configuration. The only tangible logging
