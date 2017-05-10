@@ -1,3 +1,15 @@
+v1.0.340
+----------
+ * Update Italian
+
+v1.0.339
+----------
+ * Add El Salvador
+
+v1.0.338
+----------
+ * Update translations
+
 v1.0.336
 ----------
  * Fix refetch poll on big orgs
