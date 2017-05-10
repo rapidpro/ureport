@@ -60,7 +60,8 @@ LANGUAGE_CODE = 'en'
 
 # Available languages for translation
 LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"),
-             ('pt-br', "Brazilian Portuguese"), ('uk', "Ukrainian"), ('my', "Burmese"), ('id', "Indonesian"))
+             ('pt-br', "Brazilian Portuguese"), ('uk', "Ukrainian"), ('my', "Burmese"), ('id', "Indonesian"),
+             ('it', "Italian"))
 DEFAULT_LANGUAGE = "en"
 RTL_LANGUAGES = ['ar']
 
@@ -70,6 +71,7 @@ ORG_LANG_MAP = {
     'es': 'es_ES',
     'fr': 'fr_FR',
     'id': 'id_ID',
+    'it': 'it_IT',
     'my': 'my_MM',
     'pt': 'pt_PT',
     'pt-br': 'pt_BR',
@@ -214,6 +216,8 @@ INSTALLED_APPS = (
     'django_countries',
     'rest_framework',
     'rest_framework_swagger',
+
+    'hamlpy',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -531,6 +535,13 @@ PREVIOUS_ORG_SITES = [
         flag="flag_br.png",
         is_static=True,
         count_link="http://ureportbrasil.org.br/count/",
+    ),
+    dict(
+        name="El Salvador",
+        host="http://elsalvador.ureport.in/",
+        flag="flag_sv.png",
+        is_static=True,
+        count_link="http://elsalvador.ureport.in/count/",
     ),
     dict(
         name="Guatemala",
