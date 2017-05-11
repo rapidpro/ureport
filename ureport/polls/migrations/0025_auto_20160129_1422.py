@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='poll',
             name='poll_date',
-            field=models.DateTimeField(help_text='The date to display for this poll. Make it empty to use flow created_on.', null=True),
+            field=models.DateTimeField(help_text='The date to display for this poll. Make it empty to use flow created_on.'),
         ),
     ]

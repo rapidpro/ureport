@@ -230,7 +230,8 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['story_widget_url'])
-        
+
+    @mock.patch('dash.orgs.models.TembaClient2', MockTembaClient)
     @mock.patch('django.core.cache.cache.get')
     def test_index(self, mock_cache_get):
         mock_cache_get.return_value = None
