@@ -440,6 +440,12 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('<div>INCLUDE MY CUSTOM HTML</div>' in response.content)
 
+    def test_additional_menu(self):
+        additional_menu_url = reverse('public.added')
+        response = self.client.get(additional_menu_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/added/')
+        self.assertEquals(response.context['org'], self.nigeria)
+
     def test_about(self):
         about_url = reverse('public.about')
 
