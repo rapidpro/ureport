@@ -8,7 +8,6 @@ contextlib2==0.5.4
 coverage==3.7.1
 rapidpro-dash==1.0.3
 dj-database-url==0.3.0
-django-reversion==2.0.7
 Django==1.9.11
 django-appconf==1.0.2
 django-compressor==2.1
