@@ -230,13 +230,6 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['story_widget_url'])
-
-    @mock.patch('dash.orgs.models.TembaClient2', MockTembaClient)
-    def test_set_fb_button_language(self):
-        home_url = reverse('public.index')
-        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertTrue(response.context['fb_button_language'])
         
     @mock.patch('django.core.cache.cache.get')
     def test_index(self, mock_cache_get):
@@ -263,7 +256,6 @@ class PublicTest(UreportTest):
         self.assertFalse(response.context['recent_polls'])
 
         self.assertFalse(response.context['stories'])
-        self.assertFalse(response.context['other_stories'])
         self.assertFalse(response.context['videos'])
         self.assertFalse(response.context['news'])
 
@@ -341,12 +333,18 @@ class PublicTest(UreportTest):
 
         self.assertTrue(response.context['stories'])
         self.assertTrue(story1 in response.context['stories'])
-        self.assertFalse(response.context['other_stories'])
+
+        response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEquals(response.context['org'], self.uganda)
+
+        self.assertTrue(response.context['stories'])
+        self.assertTrue(story1 in response.context['stories'])
 
         story2 = Story.objects.create(title="story 2",
-                                      featured=True,
+                                      featured=False,
                                       content="body contents 2",
-                                      org=self.nigeria,
+                                      org=self.uganda,
                                       created_by=self.admin,
                                       modified_by=self.admin)
 
@@ -356,10 +354,10 @@ class PublicTest(UreportTest):
 
         self.assertTrue(response.context['stories'])
         self.assertTrue(story1 in response.context['stories'])
-        self.assertFalse(response.context['other_stories'])
+        self.assertFalse(story2 in response.context['stories'])
 
         story3 = Story.objects.create(title="story 3",
-                                      featured=False,
+                                      featured=True,
                                       content="body contents 3",
                                       org=self.uganda,
                                       created_by=self.admin,
@@ -370,35 +368,15 @@ class PublicTest(UreportTest):
         self.assertEquals(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['stories'])
-        self.assertTrue(story1 in response.context['stories'])
-        self.assertTrue(response.context['other_stories'])
-        self.assertTrue(story3 in response.context['other_stories'])
-
-        story4 = Story.objects.create(title="story 4",
-                                      featured=True,
-                                      content="body contents 4",
-                                      org=self.uganda,
-                                      created_by=self.admin,
-                                      modified_by=self.admin)
-
-        response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
-
-        self.assertTrue(response.context['stories'])
-        self.assertEqual(response.context['stories'][0].pk, story4.pk)
+        self.assertEqual(response.context['stories'][0].pk, story3.pk)
         self.assertEqual(response.context['stories'][1].pk, story1.pk)
 
-        story4.featured = False
-        story4.save()
+        story3.featured = False
+        story3.save()
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertEquals(response.context['org'], self.uganda)
-
-        self.assertTrue(response.context['other_stories'])
-        self.assertEqual(response.context['other_stories'][0].pk, story4.pk)
-        self.assertEqual(response.context['other_stories'][1].pk, story3.pk)
 
         video1 = Video.objects.create(title='video 1',
                                       video_id='video_1',
@@ -951,7 +929,7 @@ class PublicTest(UreportTest):
         self.assertEquals(response.context['categories'][0], self.education_nigeria)
         self.assertEquals(len(response.context['other_stories']), 1)
         self.assertEquals(response.context['other_stories'][0], story4)
-        self.assertFalse(response.context['featured'])
+        self.assertTrue(response.context['activated'])
 
         response = self.client.get(stories_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.context['org'], self.uganda)
@@ -962,8 +940,8 @@ class PublicTest(UreportTest):
         self.assertEquals(len(response.context['other_stories']), 2)
         self.assertEquals(response.context['other_stories'][0], story3)
         self.assertEquals(response.context['other_stories'][1], story2)
-        self.assertEquals(len(response.context['featured']), 1)
-        self.assertEquals(response.context['featured'][0], story1)
+        self.assertEquals(len(response.context['activated']), 3)
+        self.assertEquals(response.context['activated'][0], story3)
 
         story2.is_active = False
         story2.save()
