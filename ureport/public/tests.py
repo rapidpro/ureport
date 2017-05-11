@@ -930,7 +930,7 @@ class PublicTest(UreportTest):
         self.assertEquals(response.context['categories'][0], self.education_nigeria)
         self.assertEquals(len(response.context['other_stories']), 1)
         self.assertEquals(response.context['other_stories'][0], story4)
-        self.assertTrue(response.context['activated'])
+        self.assertFalse(response.context['featured'])
 
         response = self.client.get(stories_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.context['org'], self.uganda)
@@ -941,8 +941,8 @@ class PublicTest(UreportTest):
         self.assertEquals(len(response.context['other_stories']), 2)
         self.assertEquals(response.context['other_stories'][0], story3)
         self.assertEquals(response.context['other_stories'][1], story2)
-        self.assertEquals(len(response.context['activated']), 3)
-        self.assertEquals(response.context['activated'][0], story3)
+        self.assertEquals(len(response.context['featured']), 1)
+        self.assertEquals(response.context['featured'][0], story1)
 
         story2.is_active = False
         story2.save()

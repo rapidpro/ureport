@@ -253,7 +253,7 @@ class StoriesView(SmartTemplateView):
 
         context['org'] = org
         context['categories'] = Category.objects.filter(org=org, is_active=True).order_by('name')
-        context['activated'] = Story.objects.filter(org=org, is_active=True).order_by('-created_on')
+        context['featured'] = Story.objects.filter(org=org, featured=True, is_active=True).order_by('-created_on')
         context['other_stories'] = Story.objects.filter(org=org, featured=False, is_active=True).order_by('-created_on')
 
         return context
