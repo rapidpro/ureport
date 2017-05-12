@@ -39,10 +39,6 @@ class IndexView(SmartTemplateView):
 
         context['stories'] = Story.objects.filter(org=org, is_active=True, featured=True).order_by('-created_on')
 
-        other_stories = Story.objects.filter(org=org, is_active=True).exclude(pk__in=context['stories'])
-        other_stories = other_stories.order_by('-created_on')
-        context['other_stories'] = other_stories
-
         videos = Video.objects.filter(is_active=True, org=org).order_by('-created_on')
         context['videos'] = videos
 
