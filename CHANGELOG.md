@@ -1,3 +1,8 @@
+v1.0.341
+----------
+ * More italian
+ * Display only featured stories on home page
+
 v1.0.340
 ----------
  * Update Italian
