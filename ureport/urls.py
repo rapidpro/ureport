@@ -1,6 +1,6 @@
-from django.conf.urls import patterns, include, url
-from django.contrib.auth.decorators import permission_required, login_required
+from django.conf.urls import include, url
 from django.conf import settings
+from django.views import static
 from django.views.generic import RedirectView
 
 # Uncomment the next two lines to enable the admin:
@@ -12,7 +12,7 @@ js_info_dict = {
     'packages': (),  # this is empty due to the fact that all translation are in one folder
 }
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^', include('ureport.public.urls')),
     url(r'^manage/', include('ureport.admins.urls')),
     url(r'^manage/', include('dash.orgs.urls')),
@@ -30,13 +30,17 @@ urlpatterns = patterns('',
 
     url(r'^api/v1/', include('ureport.api.urls')),
     url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
-)
+]
 
 if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns = patterns('',
-    url(r'^__debug__/', include(debug_toolbar.urls)),
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
-    url(r'', include('django.contrib.staticfiles.urls')),
-) + urlpatterns
+
+    try:
+        import debug_toolbar
+        urlpatterns.append(url(r'^__debug__/', include(debug_toolbar.urls)))
+    except ImportError:
+        pass
+
+    urlpatterns = [
+        url(r'^media/(?P<path>.*)$', static.serve, {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+        url(r'', include('django.contrib.staticfiles.urls')),
+    ] + urlpatterns
