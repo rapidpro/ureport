@@ -996,7 +996,7 @@ class PollResult(models.Model):
 
     category = models.CharField(max_length=255, null=True)
 
-    text = models.CharField(max_length=640, null=True)
+    text = models.TextField(null=True)
 
     state = models.CharField(max_length=255, null=True)
 
