@@ -1,3 +1,7 @@
+v1.0.343
+----------
+ * Merge pull request #293 from rapidpro/result-text-field
+
 v1.0.341
 ----------
  * More italian

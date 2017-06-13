@@ -190,8 +190,13 @@ class PublicTest(UreportTest):
         # using subdomain wihout domain on org, login is shown and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
+<<<<<<< HEAD
         self.assertFalse("<meta name='robots' content='noindex'" in response.content)
         self.assertTrue('nigeria.ureport.io/users/login/' in response.content)
+=======
+        self.assertNotContains(response, "<meta name='robots' content='noindex'")
+        self.assertContains(response, 'nigeria.ureport.io/users/login/')
+>>>>>>> a0b1df1f4b3f5b673d17e8db958183c091359d9c
 
         self.nigeria.domain = "ureport.ng"
         self.nigeria.save()
@@ -199,14 +204,19 @@ class PublicTest(UreportTest):
         # using subdomain without domain on org, indexing is disallowed but login should be shown
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
+<<<<<<< HEAD
         self.assertTrue("<meta name='robots' content='noindex'" in response.content)
         self.assertTrue('nigeria.ureport.io/users/login/' in response.content)
+=======
+        self.assertContains(response, "<meta name='robots' content='noindex'")
+        self.assertContains(response, 'nigeria.ureport.io/users/login/')
+>>>>>>> a0b1df1f4b3f5b673d17e8db958183c091359d9c
 
         # using custom domain, login is hidden  and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST='ureport.ng')
         self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertFalse("<meta content='noindex' name='robots' />" in response.content)
-        self.assertFalse('nigeria.ureport.io/users/login/' in response.content)
+        self.assertNotContains(response, "<meta name='robots' content='noindex'")
+        self.assertNotContains(response, 'nigeria.ureport.io/users/login/')
 
     def test_org_lang_params_processors(self):
         home_url = reverse('public.index')

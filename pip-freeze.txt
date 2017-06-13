@@ -54,8 +54,8 @@ Pygments==2.0.2
 python-dateutil==2.6.0
 pytz==2017.2
 PyYAML==3.11
-rapidpro-dash==1.2
-rapidpro-python==2.1.7
+rapidpro-dash==1.1.1
+rapidpro-python==2.1.6
 raven==5.23.0
 rcssmin==1.0.6
 redis==2.10.5
