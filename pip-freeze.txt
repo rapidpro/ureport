@@ -14,7 +14,7 @@ django-countries==3.3
 django-debug-toolbar==1.6
 django-digest==1.13
 django-guardian==1.4.2
-django-hamlpy==1.0
+django-hamlpy==1.1.1
 django-nose==1.4.4
 django-redis==4.6.0
 django-rest-swagger==0.3.4
@@ -44,7 +44,7 @@ Pygments==2.0.2
 python-dateutil==2.4.2
 pytz==2016.4
 PyYAML==3.11
-rapidpro-dash==1.1
+rapidpro-dash==1.1.1
 rapidpro-python==2.1.6
 raven==5.23.0
 rcssmin==1.0.6
