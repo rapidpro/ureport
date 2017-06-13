@@ -6,7 +6,7 @@ import json
 
 import pytz
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import override_settings
 from django.utils import timezone
 from smartmin.tests import SmartminTest
@@ -193,7 +193,7 @@ class SetOrgMiddlewareTest(UreportTest):
         self.assertEqual(self.request.org, None)
 
     def test_process_view(self):
-        with patch('django.core.urlresolvers.ResolverMatch') as resolver_mock:
+        with patch('django.urls.ResolverMatch') as resolver_mock:
             resolver_mock.url_name.return_value = "public.index"
 
             self.request.resolver_match = resolver_mock

@@ -2,15 +2,14 @@ import json
 
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from django import forms
-from django.core.files.base import ContentFile
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from dash.categories.models import Category, CategoryImage
 from dash.categories.fields import CategoryChoiceField
 from django.utils import timezone
 from smartmin.csv_imports.models import ImportTask
 
 from ureport.utils import json_date_to_datetime
-from .models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_ORG_FLOWS_KEY
+from .models import Poll, PollQuestion, FeaturedResponse, PollImage
 from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView, SmartCSVImportView
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError

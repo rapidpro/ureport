@@ -5,26 +5,19 @@ from datetime import timedelta, datetime
 import pytz
 import six
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpRequest
 from django.template import TemplateSyntaxError
-from django.test import TestCase
 from django.utils import timezone
-from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
-
-import pycountry
 
 from mock import patch, Mock
 from dash.categories.models import Category, CategoryImage
 from dash.categories.fields import CategoryChoiceField
 from smartmin.csv_imports.models import ImportTask
-from temba_client.v1.types import Result, Flow, Group
 
 from dash.orgs.models import TaskState
-from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
+from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
 from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
-from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts, \
     pull_results_recent_other_polls
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh

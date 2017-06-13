@@ -6,13 +6,12 @@ import json
 import pytz
 from dash.dashblocks.models import DashBlock, DashBlockType
 import mock
-from urllib import urlencode, quote
+from urllib import urlencode
 
 from datetime import timedelta
 from django.core.files.images import ImageFile
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
-from django.utils.encoding import iri_to_uri
 from django.utils.http import urlquote
 
 from dash.categories.models import Category
@@ -23,7 +22,7 @@ from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.locations.models import Boundary
 from ureport.news.models import Video, NewsItem
-from ureport.polls.models import Poll, PollQuestion
+from ureport.polls.models import PollQuestion
 from ureport.tests import UreportTest, UreportJobsTest, MockTembaClient
 
 

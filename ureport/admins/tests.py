@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from mock import patch
 from ureport.admins import OrgCache, refresh_caches
 from ureport.tests import UreportTest

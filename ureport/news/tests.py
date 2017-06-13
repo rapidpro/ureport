@@ -1,5 +1,4 @@
-from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.urls import reverse
 from dash.categories.models import Category
 from dash.categories.fields import CategoryChoiceField
 from ureport.news.models import NewsItem, Video
