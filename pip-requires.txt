@@ -1,5 +1,5 @@
 smartmin
-Django<1.9
+Django<2.0
 rapidpro-dash
 celery
 coverage
@@ -24,7 +24,7 @@ django-redis
 psycopg2
 xlutils
 mock
-sorl-thumbnail==11.12.1b
+sorl-thumbnail==12.3
 hamlpy
 pycountry
 django-countries

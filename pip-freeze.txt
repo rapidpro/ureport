@@ -54,7 +54,7 @@ Pygments==2.0.2
 python-dateutil==2.6.0
 pytz==2017.2
 PyYAML==3.11
-rapidpro-dash==1.1.1
+rapidpro-dash==1.2.1
 rapidpro-python==2.1.6
 raven==5.23.0
 rcssmin==1.0.6
@@ -64,7 +64,7 @@ requests==2.17.3
 rjsmin==1.0.12
 simplejson==3.10.0
 six==1.10.0
-smartmin==1.11.1
+smartmin==1.11.2
 smmap==0.9.0
 sorl-thumbnail==12.3
 sqlparse==0.2.2
