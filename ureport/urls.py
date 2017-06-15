@@ -2,6 +2,8 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.views import static
 from django.views.generic import RedirectView
+from django.views.i18n import javascript_catalog
+
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -26,10 +28,10 @@ urlpatterns = [
     url(r'^manage/', include('ureport.assets.urls')),
     url(r'^users/', include('dash.users.urls')),
     url(r'^manage/', include('smartmin.csv_imports.urls')),
-    url(r'^api/$', RedirectView.as_view(pattern_name='django.swagger.base.view', permanent=False)),
+    url(r'^api/$', RedirectView.as_view(pattern_name='api.v1.docs', permanent=False), name='api'),
 
     url(r'^api/v1/', include('ureport.api.urls')),
-    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
+    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
 ]
 
 if settings.DEBUG:

@@ -284,12 +284,12 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
+                'django.template.context_processors.request',
                 'dash.orgs.context_processors.user_group_perms_processor',
                 'dash.orgs.context_processors.set_org_processor',
                 'ureport.assets.context_processors.set_assets_processor',
@@ -522,7 +522,24 @@ UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
 #-----------------------------------------------------------------------------------
 # non org urls
 #-----------------------------------------------------------------------------------
-SITE_ALLOW_NO_ORG = ('public.countries',)
+SITE_ALLOW_NO_ORG = ('public.countries',
+                     'api',
+                     'api.v1',
+                     'api.v1.docs',
+                     'api.v1.org_list',
+                     'api.v1.org_details',
+                     'api.v1.org_poll_list',
+                     'api.v1.org_poll_featured',
+                     'api.v1.poll_details',
+                     'api.v1.org_newsitem_list',
+                     'api.v1.newsitem_details',
+                     'api.v1.org_video_list',
+                     'api.v1.video_details',
+                     'api.v1.org_asset_list',
+                     'api.v1.asset_details',
+                     'api.v1.org_story_list',
+                     'api.v1.story_details',
+                     )
 
 
 #-----------------------------------------------------------------------------------
@@ -599,17 +616,18 @@ PREVIOUS_ORG_SITES = [
 # rest_framework config
 #-----------------------------------------------------------------------------------
 REST_FRAMEWORK = {
-    'PAGINATE_BY': 10,                 # Default to 10
+    'PAGE_SIZE': 10,                 # Default to 10
     'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
     'MAX_PAGINATE_BY': 100,
 }
 
+
 SWAGGER_SETTINGS = {
-    'api_version': '0.1',
-    'api_path': '/',
-    'enabled_methods': [
-        'get'
-    ],
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    }
 }
 
 STORY_WIDGET_URL = 'https://ureportapp.ilhasoft.mobi/widget/'
