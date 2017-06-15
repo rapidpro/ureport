@@ -1093,6 +1093,8 @@ class PollResult(models.Model):
 
 class PollResultsCounter(models.Model):
 
+    id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name='ID')
+
     org = models.ForeignKey(Org, related_name='results_counters')
 
     ruleset = models.CharField(max_length=36)
