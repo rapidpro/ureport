@@ -223,7 +223,6 @@ class PollTest(UreportTest):
         self.assertEqual(json.loads(task.import_params), dict(timezone="Africa/Kampala", org_id=self.uganda.pk,
                                                               original_filename="polls.csv"))
 
-
     @patch('ureport.polls.tasks.update_or_create_questions.delay')
     def test_poll_update_or_create_questions_task(self, mock_task_delay):
         poll1 = self.create_poll(self.uganda, "Poll 1", "flow-uuid-1", self.health_uganda, self.admin)
