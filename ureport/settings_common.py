@@ -173,9 +173,6 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
 
-    # mo-betta permission management
-    'guardian',
-
     # the django admin
     'django.contrib.admin',
 
@@ -385,12 +382,11 @@ LOGIN_REDIRECT_URL = "/manage/org/choose/"
 LOGOUT_REDIRECT_URL = "/"
 
 #-----------------------------------------------------------------------------------
-# Guardian Configuration
+# Auth Configuration
 #-----------------------------------------------------------------------------------
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'guardian.backends.ObjectPermissionBackend',
 )
 
 ANONYMOUS_USER_NAME = 'AnonymousUser'
