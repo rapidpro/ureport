@@ -1,3 +1,8 @@
+v1.0.344
+----------
+ * Use big int for poll results counter primary key, migrations
+ * Update dependencies
+
 v1.0.343
 ----------
  * Merge pull request #293 from rapidpro/result-text-field
