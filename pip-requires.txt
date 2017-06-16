@@ -7,7 +7,6 @@ django-compressor
 django-debug-toolbar
 django-digest
 django-guardian
-django-nose
 django-rosetta
 django-storages
 django-rest-swagger
