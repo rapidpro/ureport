@@ -89,6 +89,7 @@ class UreportTest(SmartminTest, DashTest):
         self.superuser = User.objects.create_superuser(username="super", email="super@user.com", password="super")
 
         self.admin = self.create_user("Administrator")
+        self.anon = self.create_user("Anon")
         self.uganda = self.create_org('uganda', pytz.timezone('Africa/Kampala'), self.admin)
         self.nigeria = self.create_org('nigeria', pytz.timezone('Africa/Lagos'), self.admin)
 
@@ -159,7 +160,7 @@ class SetOrgMiddlewareTest(UreportTest):
 
         self.middleware = SetOrgMiddleware()
         self.request = Mock(spec=HttpRequest)
-        self.request.user = User.objects.get(username='AnonymousUser')
+        self.request.user = self.anon
         self.request.path = '/'
         self.request.get_host.return_value="ureport.io"
         self.request.META = dict(HTTP_HOST=None)
