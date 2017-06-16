@@ -23,7 +23,7 @@ psycopg2
 xlutils
 mock
 sorl-thumbnail==12.3
-hamlpy
+django-hamlpy
 pycountry
 django-countries
 GitPython
