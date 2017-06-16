@@ -4,27 +4,21 @@ from datetime import timedelta, datetime
 
 import pytz
 import six
+from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpRequest
 from django.template import TemplateSyntaxError
-from django.test import TestCase
 from django.utils import timezone
-from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
-
-import pycountry
 
 from mock import patch, Mock
 from dash.categories.models import Category, CategoryImage
 from dash.categories.fields import CategoryChoiceField
 from smartmin.csv_imports.models import ImportTask
-from temba_client.v1.types import Result, Flow, Group
 
 from dash.orgs.models import TaskState
-from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage, CACHE_POLL_RESULTS_KEY
+from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
 from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
-from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts, \
     pull_results_recent_other_polls
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
@@ -218,6 +212,16 @@ class PollTest(UreportTest):
         self.assertEqual(response.status_code, 200)
 
         self.assertTrue('csv_file' in response.context['form'].fields)
+
+        csv_file = open('%s/test_imports/polls.csv' % settings.MEDIA_ROOT, 'rb')
+        post_data = dict(csv_file=csv_file)
+
+        response = self.client.post(import_url, post_data, follow=True,  SERVER_NAME='uganda.ureport.io')
+        self.assertEqual(200, response.status_code)
+
+        task = ImportTask.objects.get()
+        self.assertEqual(json.loads(task.import_params), dict(timezone="Africa/Kampala", org_id=self.uganda.pk,
+                                                              original_filename="polls.csv"))
 
     @patch('ureport.polls.tasks.update_or_create_questions.delay')
     def test_poll_update_or_create_questions_task(self, mock_task_delay):
@@ -960,9 +964,16 @@ class PollTest(UreportTest):
         self.assertFalse(poll2 in response.context['object_list'])
         self.assertTrue(poll1 in response.context['object_list'])
 
-        self.assertTrue(reverse('polls.poll_questions',args=[poll1.pk]) in response.content)
-        self.assertTrue(reverse('polls.poll_responses',args=[poll1.pk]) in response.content)
-        self.assertTrue(reverse('polls.poll_images',args=[poll1.pk]) in response.content)
+        self.assertTrue(reverse('polls.poll_questions', args=[poll1.pk]) in response.content)
+        self.assertTrue(reverse('polls.poll_responses', args=[poll1.pk]) in response.content)
+        self.assertTrue(reverse('polls.poll_images', args=[poll1.pk]) in response.content)
+
+        poll1.has_synced = True
+        poll1.save()
+
+        response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(len(response.context['object_list']), 1)
 
     @patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_questions_poll(self):

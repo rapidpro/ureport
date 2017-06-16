@@ -1,5 +1,4 @@
-from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.urls import reverse
 from dash.categories.models import Category
 from dash.categories.fields import CategoryChoiceField
 from ureport.news.models import NewsItem, Video
@@ -297,13 +296,13 @@ class VideoTest(UreportTest):
                                                  created_by=self.admin,
                                                  modified_by=self.admin)
 
-        self.nigeri_video = Video.objects.create(title='Football team',
-                                                 description='Nigerian national team',
-                                                 video_id='nigteam',
-                                                 category=self.education_nigeria,
-                                                 org=self.nigeria,
-                                                 created_by=self.admin,
-                                                 modified_by=self.admin)
+        self.nigeria_video = Video.objects.create(title='Football team',
+                                                  description='Nigerian national team',
+                                                  video_id='nigteam',
+                                                  category=self.education_nigeria,
+                                                  org=self.nigeria,
+                                                  created_by=self.admin,
+                                                  modified_by=self.admin)
 
         response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)
@@ -313,7 +312,7 @@ class VideoTest(UreportTest):
         response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(len(response.context['object_list']), 1)
         self.assertTrue(self.uganda_video in response.context['object_list'])
-        self.assertFalse(self.nigeri_video in response.context['object_list'])
+        self.assertFalse(self.nigeria_video in response.context['object_list'])
 
     def test_video_update(self):
         self.uganda_video = Video.objects.create(title='Visit Kampala',
@@ -324,16 +323,16 @@ class VideoTest(UreportTest):
                                                  created_by=self.admin,
                                                  modified_by=self.admin)
 
-        self.nigeri_video = Video.objects.create(title='Football team',
-                                                 description='Nigerian national team',
-                                                 video_id='nigteam',
-                                                 category=self.education_nigeria,
-                                                 org=self.nigeria,
-                                                 created_by=self.admin,
-                                                 modified_by=self.admin)
+        self.nigeria_video = Video.objects.create(title='Football team',
+                                                  description='Nigerian national team',
+                                                  video_id='nigteam',
+                                                  category=self.education_nigeria,
+                                                  org=self.nigeria,
+                                                  created_by=self.admin,
+                                                  modified_by=self.admin)
 
         uganda_update_url = reverse('news.video_update', args=[self.uganda_video.pk])
-        nigeria_update_url = reverse('news.video_update', args=[self.nigeri_video.pk])
+        nigeria_update_url = reverse('news.video_update', args=[self.nigeria_video.pk])
 
 
         response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')

@@ -1,13 +1,11 @@
 smartmin
-Django<1.9
+Django<2.0
 rapidpro-dash
 celery
 coverage
 django-compressor
 django-debug-toolbar
 django-digest
-django-guardian
-django-nose
 django-rosetta
 django-storages
 django-rest-swagger
@@ -24,8 +22,8 @@ django-redis
 psycopg2
 xlutils
 mock
-sorl-thumbnail==11.12.1b
-hamlpy
+sorl-thumbnail==12.3
+django-hamlpy
 pycountry
 django-countries
 GitPython
