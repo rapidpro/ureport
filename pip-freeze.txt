@@ -63,7 +63,7 @@ smartmin==1.11.2
 smmap2==2.0.3
 sorl-thumbnail==12.3
 sqlparse==0.2.3
-stop-words==2015.2.23.1
+-e git+https://github.com/Alir3z4/python-stop-words.git#egg=stop_words
 uritemplate==3.0.0
 urllib3==1.21.1
 vine==1.1.3

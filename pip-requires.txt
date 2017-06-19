@@ -27,7 +27,7 @@ pycountry
 django-countries
 GitPython
 regex
-stop-words
+-e git+https://github.com/Alir3z4/python-stop-words.git#egg=stop_words
 rapidpro-python
 feedparser
 Markdown
