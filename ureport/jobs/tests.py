@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from mock import patch
 from ureport.jobs.models import JobSource
 from ureport.tests import UreportJobsTest

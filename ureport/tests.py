@@ -6,7 +6,7 @@ import json
 
 import pytz
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import override_settings
 from django.utils import timezone
 from smartmin.tests import SmartminTest
@@ -89,6 +89,7 @@ class UreportTest(SmartminTest, DashTest):
         self.superuser = User.objects.create_superuser(username="super", email="super@user.com", password="super")
 
         self.admin = self.create_user("Administrator")
+        self.anon = self.create_user("Anon")
         self.uganda = self.create_org('uganda', pytz.timezone('Africa/Kampala'), self.admin)
         self.nigeria = self.create_org('nigeria', pytz.timezone('Africa/Lagos'), self.admin)
 
@@ -159,7 +160,7 @@ class SetOrgMiddlewareTest(UreportTest):
 
         self.middleware = SetOrgMiddleware()
         self.request = Mock(spec=HttpRequest)
-        self.request.user = User.objects.get(username='AnonymousUser')
+        self.request.user = self.anon
         self.request.path = '/'
         self.request.get_host.return_value="ureport.io"
         self.request.META = dict(HTTP_HOST=None)
@@ -193,7 +194,7 @@ class SetOrgMiddlewareTest(UreportTest):
         self.assertEqual(self.request.org, None)
 
     def test_process_view(self):
-        with patch('django.core.urlresolvers.ResolverMatch') as resolver_mock:
+        with patch('django.urls.ResolverMatch') as resolver_mock:
             resolver_mock.url_name.return_value = "public.index"
 
             self.request.resolver_match = resolver_mock

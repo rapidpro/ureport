@@ -996,7 +996,7 @@ class PollResult(models.Model):
 
     category = models.CharField(max_length=255, null=True)
 
-    text = models.CharField(max_length=640, null=True)
+    text = models.TextField(null=True)
 
     state = models.CharField(max_length=255, null=True)
 
@@ -1092,6 +1092,8 @@ class PollResult(models.Model):
 
 
 class PollResultsCounter(models.Model):
+
+    id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name='ID')
 
     org = models.ForeignKey(Org, related_name='results_counters')
 

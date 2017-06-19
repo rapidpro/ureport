@@ -6,13 +6,12 @@ import json
 import pytz
 from dash.dashblocks.models import DashBlock, DashBlockType
 import mock
-from urllib import urlencode, quote
+from urllib import urlencode
 
 from datetime import timedelta
 from django.core.files.images import ImageFile
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
-from django.utils.encoding import iri_to_uri
 from django.utils.http import urlquote
 
 from dash.categories.models import Category
@@ -23,7 +22,7 @@ from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.locations.models import Boundary
 from ureport.news.models import Video, NewsItem
-from ureport.polls.models import Poll, PollQuestion
+from ureport.polls.models import PollQuestion
 from ureport.tests import UreportTest, UreportJobsTest, MockTembaClient
 
 
@@ -191,8 +190,8 @@ class PublicTest(UreportTest):
         # using subdomain wihout domain on org, login is shown and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertFalse('<meta content="noindex" name="robots">' in response.content)
-        self.assertTrue('nigeria.ureport.io/users/login/' in response.content)
+        self.assertNotContains(response, "<meta name='robots' content='noindex'")
+        self.assertContains(response, 'nigeria.ureport.io/users/login/')
 
         self.nigeria.domain = "ureport.ng"
         self.nigeria.save()
@@ -200,14 +199,14 @@ class PublicTest(UreportTest):
         # using subdomain without domain on org, indexing is disallowed but login should be shown
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertTrue("<meta content='noindex' name='robots' />" in response.content)
-        self.assertTrue('nigeria.ureport.io/users/login/' in response.content)
+        self.assertContains(response, "<meta name='robots' content='noindex'")
+        self.assertContains(response, 'nigeria.ureport.io/users/login/')
 
         # using custom domain, login is hidden  and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST='ureport.ng')
         self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertFalse("<meta content='noindex' name='robots' />" in response.content)
-        self.assertFalse('nigeria.ureport.io/users/login/' in response.content)
+        self.assertNotContains(response, "<meta name='robots' content='noindex'")
+        self.assertNotContains(response, 'nigeria.ureport.io/users/login/')
 
     def test_org_lang_params_processors(self):
         home_url = reverse('public.index')
@@ -257,7 +256,6 @@ class PublicTest(UreportTest):
         self.assertFalse(response.context['recent_polls'])
 
         self.assertFalse(response.context['stories'])
-        self.assertFalse(response.context['other_stories'])
         self.assertFalse(response.context['videos'])
         self.assertFalse(response.context['news'])
 
@@ -335,7 +333,6 @@ class PublicTest(UreportTest):
 
         self.assertTrue(response.context['stories'])
         self.assertTrue(story1 in response.context['stories'])
-        self.assertFalse(response.context['other_stories'])
 
         story2 = Story.objects.create(title="story 2",
                                       featured=True,
@@ -350,7 +347,6 @@ class PublicTest(UreportTest):
 
         self.assertTrue(response.context['stories'])
         self.assertTrue(story1 in response.context['stories'])
-        self.assertFalse(response.context['other_stories'])
 
         story3 = Story.objects.create(title="story 3",
                                       featured=False,
@@ -365,8 +361,6 @@ class PublicTest(UreportTest):
 
         self.assertTrue(response.context['stories'])
         self.assertTrue(story1 in response.context['stories'])
-        self.assertTrue(response.context['other_stories'])
-        self.assertTrue(story3 in response.context['other_stories'])
 
         story4 = Story.objects.create(title="story 4",
                                       featured=True,
@@ -380,6 +374,8 @@ class PublicTest(UreportTest):
         self.assertEquals(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['stories'])
+        self.assertFalse(story2 in response.context['stories'])
+        self.assertFalse(story3 in response.context['stories'])
         self.assertEqual(response.context['stories'][0].pk, story4.pk)
         self.assertEqual(response.context['stories'][1].pk, story1.pk)
 
@@ -389,10 +385,6 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertEquals(response.context['org'], self.uganda)
-
-        self.assertTrue(response.context['other_stories'])
-        self.assertEqual(response.context['other_stories'][0].pk, story4.pk)
-        self.assertEqual(response.context['other_stories'][1].pk, story3.pk)
 
         video1 = Video.objects.create(title='video 1',
                                       video_id='video_1',
@@ -454,6 +446,12 @@ class PublicTest(UreportTest):
         self.nigeria.set_config('custom_html', '<div>INCLUDE MY CUSTOM HTML</div>')
         response = self.client.get(home_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('<div>INCLUDE MY CUSTOM HTML</div>' in response.content)
+
+    def test_additional_menu(self):
+        additional_menu_url = reverse('public.added')
+        response = self.client.get(additional_menu_url, SERVER_NAME='nigeria.ureport.io')
+        self.assertEquals(response.request['PATH_INFO'], '/added/')
+        self.assertEquals(response.context['org'], self.nigeria)
 
     def test_about(self):
         about_url = reverse('public.about')
