@@ -1,3 +1,7 @@
+v1.0.345
+----------
+ * Update django-storages
+
 v1.0.344
 ----------
  * Use big int for poll results counter primary key, migrations
