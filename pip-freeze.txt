@@ -57,7 +57,7 @@ redis==2.10.5
 regex==2017.6.7
 requests==2.18.1
 rjsmin==1.0.12
-simplejson==3.11.0
+simplejson==3.11.1
 six==1.10.0
 smartmin==1.11.2
 smmap2==2.0.3
