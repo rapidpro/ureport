@@ -1,3 +1,7 @@
+v1.0.347
+----------
+ * Update fix for pycountry update
+
 v1.0.346
 ----------
  * Update all deps to the latests
