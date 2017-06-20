@@ -15,7 +15,6 @@ boto
 Pillow
 celery-with-redis
 gunicorn
-nose
 pisa
 raven
 django-redis
@@ -28,5 +27,7 @@ pycountry
 django-countries
 GitPython
 regex
--e git+https://github.com/norkans7/python-stop-words.git#egg=stop-words-master
+-e git+https://github.com/Alir3z4/python-stop-words.git#egg=stop_words
 rapidpro-python
+feedparser
+Markdown

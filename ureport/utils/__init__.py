@@ -109,7 +109,7 @@ def substitute_segment(org, segment_in):
             if 'parent' in segment:
                 del segment["parent"]
             segment["contact_field"] = org.get_config('state_label')
-            segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+            segment["values"] = [elt.alpha_2 for elt in pycountry.countries.objects]
 
     return json.dumps(segment)
 
@@ -123,7 +123,7 @@ def clean_global_results_data(org, results, segment):
             elt['boundary'] = country_code
             country_name = ""
             try:
-                country = pycountry.countries.get(alpha2=country_code)
+                country = pycountry.countries.get(alpha_2=country_code)
                 if country:
                     country_name = country.name
             except KeyError:
