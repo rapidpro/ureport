@@ -109,7 +109,7 @@ def substitute_segment(org, segment_in):
             if 'parent' in segment:
                 del segment["parent"]
             segment["contact_field"] = org.get_config('state_label')
-            segment["values"] = [elt.alpha_2 for elt in pycountry.countries.objects]
+            segment["values"] = [elt.alpha_2 for elt in list(pycountry.countries)]
 
     return json.dumps(segment)
 
