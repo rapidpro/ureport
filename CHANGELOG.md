@@ -1,3 +1,7 @@
+v1.0.346
+----------
+ * Update all deps to the latests
+
 v1.0.345
 ----------
  * Update django-storages
