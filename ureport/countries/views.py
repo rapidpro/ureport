@@ -1,5 +1,4 @@
 from django import forms
-import pycountry
 from smartmin.views import SmartCRUDL, SmartListView, SmartCreateView, SmartUpdateView
 from .models import CountryAlias
 

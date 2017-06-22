@@ -355,13 +355,13 @@ class CountriesView(SmartTemplateView):
         country = None
         if text_length == 2:
             try:
-                country = pycountry.countries.get(alpha2=text.upper())
+                country = pycountry.countries.get(alpha_2=text.upper())
             except KeyError:
                 pass
 
         elif text_length == 3:
             try:
-                country = pycountry.countries.get(alpha3=text.upper())
+                country = pycountry.countries.get(alpha_3=text.upper())
             except KeyError:
                 pass
 
@@ -380,7 +380,7 @@ class CountriesView(SmartTemplateView):
         if country and country_code:
             json_dict = dict(exists='valid', country_code=country_code)
         elif country:
-            json_dict = dict(exists='valid', country_code=country.alpha2)
+            json_dict = dict(exists='valid', country_code=country.alpha_2)
         else:
             json_dict['text'] = whole_text
 
