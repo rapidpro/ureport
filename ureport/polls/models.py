@@ -168,6 +168,18 @@ class Poll(SmartModel):
 
         pull_after_delete = cache.get(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org.pk, self.pk), None)
 
+        if pull_after_delete is not None:
+            after = None
+            latest_synced_obj_time = None
+            batches_latest = None
+            resume_cursor = None
+            self.delete_poll_results()
+
+        if resume_cursor is None:
+            from ureport.utils import datetime_to_json_date
+            before = datetime_to_json_date(timezone.now())
+            after = latest_synced_obj_time
+
         return after, before, latest_synced_obj_time, batches_latest, resume_cursor, pull_after_delete
 
     def delete_poll_results_counter(self):
