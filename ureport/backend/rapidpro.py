@@ -307,6 +307,17 @@ class RapidProBackend(BaseBackend):
                 (after, before, latest_synced_obj_time,
                  batches_latest, resume_cursor, pull_after_delete) = poll.get_pull_cached_params()
 
+                if pull_after_delete is not None:
+                    after = None
+                    latest_synced_obj_time = None
+                    batches_latest = None
+                    resume_cursor = None
+                    poll.delete_poll_results()
+
+                if resume_cursor is None:
+                    before = datetime_to_json_date(timezone.now())
+                    after = latest_synced_obj_time
+
                 start = time.time()
                 print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
 
@@ -323,18 +334,8 @@ class RapidProBackend(BaseBackend):
                                                            stats_dict['num_synced'] + len(fetch),
                                                            time.time() - fetch_start)
 
-                    contact_uuids = [run.contact.uuid for run in fetch]
-                    contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
-                    contacts_map = {c.uuid: c for c in contacts}
-
-                    existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id,
-                                                                      contact__in=contact_uuids)
-
-                    poll_results_map = defaultdict(dict)
-                    for res in existing_poll_results:
-                        poll_results_map[res.contact][res.ruleset] = res
-
-                    poll_results_to_save_map = defaultdict(dict)
+                    contacts_map, poll_results_map, poll_results_to_save_map = self._initiate_lookup_maps(fetch, org,
+                                                                                                          poll)
 
                     for temba_run in fetch:
 
@@ -408,6 +409,19 @@ class RapidProBackend(BaseBackend):
                                                                        stats_dict['num_val_ignored'])
         return (stats_dict['num_val_created'], stats_dict['num_val_updated'], stats_dict['num_val_ignored'],
                 stats_dict['num_path_created'], stats_dict['num_path_updated'], stats_dict['num_path_ignored'])
+
+    def _initiate_lookup_maps(self, fetch, org, poll):
+        contact_uuids = [run.contact.uuid for run in fetch]
+        contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
+        contacts_map = {c.uuid: c for c in contacts}
+        existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id,
+                                                          contact__in=contact_uuids)
+        poll_results_map = defaultdict(dict)
+        for res in existing_poll_results:
+            poll_results_map[res.contact][res.ruleset] = res
+
+        poll_results_to_save_map = defaultdict(dict)
+        return contacts_map, poll_results_map, poll_results_to_save_map
 
     @staticmethod
     def _process_run_poll_results(org, questions_uuids, temba_run, contact_obj, existing_db_poll_results_map,
