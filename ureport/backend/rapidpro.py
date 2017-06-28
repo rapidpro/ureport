@@ -423,8 +423,7 @@ class RapidProBackend(BaseBackend):
         poll_results_to_save_map = defaultdict(dict)
         return contacts_map, poll_results_map, poll_results_to_save_map
 
-    @staticmethod
-    def _process_run_poll_results(org, questions_uuids, temba_run, contact_obj, existing_db_poll_results_map,
+    def _process_run_poll_results(self, org, questions_uuids, temba_run, contact_obj, existing_db_poll_results_map,
                                   poll_results_to_save_map, stats_dict):
         flow_uuid = temba_run.flow.uuid
         contact_uuid = temba_run.contact.uuid
@@ -456,19 +455,9 @@ class RapidProBackend(BaseBackend):
 
             if existing_poll_result is not None:
 
-                update_required = existing_poll_result.category != category or existing_poll_result.text != text
-                update_required = update_required or existing_poll_result.state != state
-                update_required = update_required or existing_poll_result.district != district
-                update_required = update_required or existing_poll_result.ward != ward
-                update_required = update_required or existing_poll_result.born != born
-                update_required = update_required or existing_poll_result.gender != gender
-                update_required = update_required or existing_poll_result.completed != completed
-
-                # if the reporter answered the step, check if this is a newer run
-                if existing_poll_result.date is not None:
-                    update_required = update_required and (value_date > existing_poll_result.date)
-                else:
-                    update_required = True
+                update_required = self._check_update_required(existing_poll_result, category, text, state,
+                                                                         district, ward, born, gender, completed,
+                                                                         value_date)
 
                 if update_required:
                     # update the db object
@@ -497,17 +486,9 @@ class RapidProBackend(BaseBackend):
 
             elif poll_result_to_save is not None:
 
-                replace_save_map = poll_result_to_save.category != category or poll_result_to_save.text != text
-                replace_save_map = replace_save_map or poll_result_to_save.state != state
-                replace_save_map = replace_save_map or poll_result_to_save.district != district
-                replace_save_map = replace_save_map or poll_result_to_save.ward != ward
-                replace_save_map = replace_save_map or poll_result_to_save.born != born
-                replace_save_map = replace_save_map or poll_result_to_save.gender != gender
-                replace_save_map = replace_save_map or poll_result_to_save.completed != completed
-
-                # replace if the step is newer
-                if poll_result_to_save.date is not None:
-                    replace_save_map = replace_save_map and (value_date > poll_result_to_save.date)
+                replace_save_map = self._check_update_required(poll_result_to_save, category, text, state,
+                                                                          district, ward, born, gender, completed,
+                                                                          value_date)
 
                 if replace_save_map:
                     result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
@@ -595,6 +576,22 @@ class RapidProBackend(BaseBackend):
 
             else:
                 stats_dict['num_path_ignored'] += 1
+
+    @staticmethod
+    def _check_update_required(poll_obj, category, text, state, district, ward, born, gender, completed, value_date):
+        update_required = poll_obj.category != category or poll_obj.text != text
+        update_required = update_required or poll_obj.state != state
+        update_required = update_required or poll_obj.district != district
+        update_required = update_required or poll_obj.ward != ward
+        update_required = update_required or poll_obj.born != born
+        update_required = update_required or poll_obj.gender != gender
+        update_required = update_required or poll_obj.completed != completed
+        # if the reporter answered the step, check if this is a newer run
+        if poll_obj.date is not None:
+            update_required = update_required and (value_date > poll_obj.date)
+        else:
+            update_required = True
+        return update_required
 
     @staticmethod
     def _save_new_poll_results_to_database(poll_results_to_save_map):
