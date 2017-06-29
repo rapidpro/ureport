@@ -1,3 +1,8 @@
+v1.0.348
+----------
+ * Update smartmin
+ * Refactor pull results to shorter size methods
+
 v1.0.347
 ----------
  * Update fix for pycountry update
