@@ -292,16 +292,9 @@ class RapidProBackend(BaseBackend):
         r = get_redis_connection()
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
 
-        num_val_created = 0
-        num_val_updated = 0
-        num_val_ignored = 0
-
-        num_path_created = 0
-        num_path_updated = 0
-        num_path_ignored = 0
-
-        num_synced = 0
-
+        stats_dict = dict(num_val_created=0, num_val_updated=0, num_val_ignored=0, num_path_created=0,
+                          num_path_updated=0, num_path_ignored=0, num_synced=0)
+        
         if r.get(key):
             print "Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk)
         else:
@@ -334,259 +327,70 @@ class RapidProBackend(BaseBackend):
                 fetch_start = time.time()
                 for fetch in fetches:
 
-                    print "RapidPro API fetch for poll #%d on org #%d %d - %d took %ds" % (poll.pk, org.pk, num_synced,
-                                                                                           num_synced + len(fetch),
-                                                                                           time.time() - fetch_start)
+                    print "RapidPro API fetch for poll #%d " \
+                          "on org #%d %d - %d took %ds" % (poll.pk,
+                                                           org.pk,
+                                                           stats_dict['num_synced'],
+                                                           stats_dict['num_synced'] + len(fetch),
+                                                           time.time() - fetch_start)
 
-                    contact_uuids = [run.contact.uuid for run in fetch]
-                    contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
-                    contacts_map = {c.uuid: c for c in contacts}
-
-                    existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id, contact__in=contact_uuids)
-
-                    poll_results_map = defaultdict(dict)
-                    for res in existing_poll_results:
-                        poll_results_map[res.contact][res.ruleset] = res
-
-                    poll_results_to_save_map = defaultdict(dict)
+                    contacts_map, poll_results_map, poll_results_to_save_map = self._initiate_lookup_maps(fetch, org,
+                                                                                                          poll)
 
                     for temba_run in fetch:
 
                         if batches_latest is None or temba_run.modified_on > json_date_to_datetime(batches_latest):
                             batches_latest = datetime_to_json_date(temba_run.modified_on.replace(tzinfo=pytz.utc))
 
-                        flow_uuid = temba_run.flow.uuid
-                        contact_uuid = temba_run.contact.uuid
-                        completed = temba_run.exit_type == 'completed'
+                        contact_obj = contacts_map.get(temba_run.contact.uuid, None)
+                        self._process_run_poll_results(org, questions_uuids, temba_run, contact_obj, poll_results_map,
+                                                       poll_results_to_save_map, stats_dict)
 
-                        contact_obj = contacts_map.get(contact_uuid, None)
-
-                        state = ''
-                        district = ''
-                        ward = ''
-                        born = None
-                        gender = None
-                        if contact_obj is not None:
-                            state = contact_obj.state
-                            district = contact_obj.district
-                            ward = contact_obj.ward
-                            born = contact_obj.born
-                            gender = contact_obj.gender
-
-                        temba_values = temba_run.values.values()
-                        temba_values.sort(key=lambda val: val.time)
-
-                        for temba_value in temba_values:
-                            ruleset_uuid = temba_value.node
-                            category = temba_value.category
-                            text = temba_value.value
-                            value_date = temba_value.time
-
-                            existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
-
-                            poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
-
-                            if existing_poll_result is not None:
-
-                                update_required = existing_poll_result.category != category or existing_poll_result.text != text
-                                update_required = update_required or existing_poll_result.state != state
-                                update_required = update_required or existing_poll_result.district != district
-                                update_required = update_required or existing_poll_result.ward != ward
-                                update_required = update_required or existing_poll_result.born != born
-                                update_required = update_required or existing_poll_result.gender != gender
-                                update_required = update_required or existing_poll_result.completed != completed
-
-                                # if the reporter answered the step, check if this is a newer run
-                                if existing_poll_result.date is not None:
-                                     update_required = update_required and (value_date > existing_poll_result.date)
-                                else:
-                                    update_required = True
-
-                                if update_required:
-                                    # update the db object
-                                    PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
-                                                                                                 state=state, district=district,
-                                                                                                 ward=ward, date=value_date,
-                                                                                                 born=born, gender=gender,
-                                                                                                 completed=completed)
-
-                                    # update the map object as well
-                                    existing_poll_result.category = category
-                                    existing_poll_result.text = text
-                                    existing_poll_result.state = state
-                                    existing_poll_result.district = district
-                                    existing_poll_result.ward = ward
-                                    existing_poll_result.date = value_date
-                                    existing_poll_result.born = born
-                                    existing_poll_result.gender = gender
-                                    existing_poll_result.completed = completed
-
-                                    poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
-
-                                    num_val_updated += 1
-                                else:
-                                    num_val_ignored += 1
-
-                            elif poll_result_to_save is not None:
-
-                                replace_save_map = poll_result_to_save.category != category or poll_result_to_save.text != text
-                                replace_save_map = replace_save_map or poll_result_to_save.state != state
-                                replace_save_map = replace_save_map or poll_result_to_save.district != district
-                                replace_save_map = replace_save_map or poll_result_to_save.ward != ward
-                                replace_save_map = replace_save_map or poll_result_to_save.born != born
-                                replace_save_map = replace_save_map or poll_result_to_save.gender != gender
-                                replace_save_map = replace_save_map or poll_result_to_save.completed != completed
-
-                                # replace if the step is newer
-                                if poll_result_to_save.date is not None:
-                                    replace_save_map = replace_save_map and (value_date > poll_result_to_save.date)
-
-                                if replace_save_map:
-                                    result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
-                                                            contact=contact_uuid, category=category, text=text,
-                                                            state=state, district=district, ward=ward,
-                                                            born=born, gender=gender,
-                                                            date=value_date, completed=completed)
-
-                                    poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
-
-                                num_val_ignored += 1
-                            else:
-
-                                result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
-                                                        contact=contact_uuid, category=category, text=text,
-                                                        state=state, district=district, ward=ward, born=born,
-                                                        gender=gender, date=value_date, completed=completed)
-
-                                poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
-
-                                num_val_created += 1
-
-                        for temba_path in temba_run.path:
-                            ruleset_uuid = temba_path.node
-                            category = None
-                            text = ""
-                            value_date = temba_path.time
-
-                            if ruleset_uuid in questions_uuids:
-                                existing_poll_result = poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
-
-                                poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
-
-                                if existing_poll_result is not None:
-                                    if existing_poll_result.date is None or value_date > existing_poll_result.date:
-                                        # update the db object
-                                        PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category,
-                                                                                                     text=text,
-                                                                                                     state=state,
-                                                                                                     district=district,
-                                                                                                     ward=ward,
-                                                                                                     date=value_date,
-                                                                                                     born=born,
-                                                                                                     gender=gender,
-                                                                                                     completed=completed)
-
-                                        # update the map object as well
-                                        existing_poll_result.category = category
-                                        existing_poll_result.text = text
-                                        existing_poll_result.state = state
-                                        existing_poll_result.district = district
-                                        existing_poll_result.ward = ward
-                                        existing_poll_result.date = value_date
-                                        existing_poll_result.born = born
-                                        existing_poll_result.gender = gender
-                                        existing_poll_result.completed = completed
-
-                                        poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
-
-                                        num_path_updated += 1
-                                    else:
-                                        num_path_ignored += 1
-
-                                elif poll_result_to_save is not None:
-                                    if value_date > poll_result_to_save.date:
-                                        result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
-                                                                contact=contact_uuid, category=category, text=text,
-                                                                state=state, district=district, ward=ward,
-                                                                born=born, gender=gender,
-                                                                date=value_date, completed=completed)
-
-                                        poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
-
-                                    num_path_ignored += 1
-
-                                else:
-
-                                    result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
-                                                            contact=contact_uuid, category=category, text=text,
-                                                            state=state, district=district, ward=ward, born=born,
-                                                            gender=gender, date=value_date, completed=completed)
-
-                                    poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
-
-                                    num_path_created += 1
-
-                            else:
-                                num_path_ignored += 1
-
-                    num_synced += len(fetch)
+                    stats_dict['num_synced'] += len(fetch)
                     if progress_callback:
-                        progress_callback(num_synced)
+                        progress_callback(stats_dict['num_synced'])
 
-                    new_poll_results = []
+                    self._save_new_poll_results_to_database(poll_results_to_save_map)
 
-                    for c_key in poll_results_to_save_map.keys():
-                        for r_key in poll_results_to_save_map.get(c_key, dict()):
-                            obj_to_create = poll_results_to_save_map.get(c_key, dict()).get(r_key, None)
-                            if obj_to_create is not None:
-                                new_poll_results.append(obj_to_create)
-
-                    PollResult.objects.bulk_create(new_poll_results)
-
-                    print "Processed fetch of %d - %d runs for poll #%d on org #%d" % (num_synced - len(fetch),
-                                                                                       num_synced,
-                                                                                       poll.pk,
-                                                                                       org.pk)
+                    print "Processed fetch of %d - %d " \
+                          "runs for poll #%d on org #%d" % (stats_dict['num_synced'] - len(fetch),
+                                                            stats_dict['num_synced'],
+                                                            poll.pk,
+                                                            org.pk)
                     fetch_start = time.time()
                     print "=" * 40
 
-                    if num_synced >= Poll.POLL_RESULTS_MAX_SYNC_RUNS:
+                    if stats_dict['num_synced'] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS:
                         poll.rebuild_poll_results_counts()
+
                         cursor = fetches.get_cursor()
-
-                        cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid), cursor, None)
-
-                        cache.set(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (org.pk, poll.flow_uuid),
-                                  after, None)
-
-                        cache.set(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (org.pk, poll.flow_uuid),
-                                  before, None)
-
-                        cache.set(Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (org.pk, poll.flow_uuid),
-                                  batches_latest, None)
+                        self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
 
                         print "Break pull results for poll #%d on org #%d in %ds, "\
                               " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"\
                               " Objects: created %d, updated %d, ignored %d. " \
-                              "Before cursor %s" % (poll.pk, org.pk, time.time() - start, after, before, batches_latest,
-                                                    latest_synced_obj_time, num_val_created, num_val_updated,
-                                                    num_val_ignored, cursor)
+                              "Before cursor %s" % (poll.pk, org.pk,
+                                                    time.time() - start,
+                                                    after,
+                                                    before,
+                                                    batches_latest,
+                                                    latest_synced_obj_time,
+                                                    stats_dict['num_val_created'],
+                                                    stats_dict['num_val_updated'],
+                                                    stats_dict['num_val_ignored'],
+                                                    cursor)
 
                         from ureport.polls.tasks import pull_refresh
                         pull_refresh.apply_async((poll.pk,), countdown=300, queue='sync')
 
-                        return (num_val_created, num_val_updated, num_val_ignored,
-                                num_path_created, num_path_updated, num_path_ignored)
+                        return (stats_dict['num_val_created'], stats_dict['num_val_updated'],
+                                stats_dict['num_val_ignored'], stats_dict['num_path_created'],
+                                stats_dict['num_path_updated'], stats_dict['num_path_ignored'])
 
                 if batches_latest is not None and (latest_synced_obj_time is None or json_date_to_datetime(latest_synced_obj_time) <= json_date_to_datetime(batches_latest)):
                     latest_synced_obj_time = batches_latest
 
-                # update the time for this poll from which we fetch next time
-                cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
-                          latest_synced_obj_time, None)
-
-                # clear the saved cursor
-                cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid))
+                self._mark_poll_results_sync_completed(poll, org, latest_synced_obj_time)
 
                 # from django.db import connection as db_connection, reset_queries
                 # slowest_queries = sorted(db_connection.queries, key=lambda q: q['time'], reverse=True)[:10]
@@ -600,6 +404,219 @@ class RapidProBackend(BaseBackend):
                       "Times: sync_latest= %s," \
                       "Objects: created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start,
                                                                        latest_synced_obj_time,
-                                                                       num_val_created, num_val_updated,
-                                                                       num_val_ignored)
-        return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
+                                                                       stats_dict['num_val_created'],
+                                                                       stats_dict['num_val_updated'],
+                                                                       stats_dict['num_val_ignored'])
+        return (stats_dict['num_val_created'], stats_dict['num_val_updated'], stats_dict['num_val_ignored'],
+                stats_dict['num_path_created'], stats_dict['num_path_updated'], stats_dict['num_path_ignored'])
+
+    def _initiate_lookup_maps(self, fetch, org, poll):
+        contact_uuids = [run.contact.uuid for run in fetch]
+        contacts = Contact.objects.filter(org=org, uuid__in=contact_uuids)
+        contacts_map = {c.uuid: c for c in contacts}
+        existing_poll_results = PollResult.objects.filter(flow=poll.flow_uuid, org=poll.org_id,
+                                                          contact__in=contact_uuids)
+        poll_results_map = defaultdict(dict)
+        for res in existing_poll_results:
+            poll_results_map[res.contact][res.ruleset] = res
+
+        poll_results_to_save_map = defaultdict(dict)
+        return contacts_map, poll_results_map, poll_results_to_save_map
+
+    def _process_run_poll_results(self, org, questions_uuids, temba_run, contact_obj, existing_db_poll_results_map,
+                                  poll_results_to_save_map, stats_dict):
+        flow_uuid = temba_run.flow.uuid
+        contact_uuid = temba_run.contact.uuid
+        completed = temba_run.exit_type == 'completed'
+
+        state = ''
+        district = ''
+        ward = ''
+        born = None
+        gender = None
+        if contact_obj is not None:
+            state = contact_obj.state
+            district = contact_obj.district
+            ward = contact_obj.ward
+            born = contact_obj.born
+            gender = contact_obj.gender
+
+        temba_values = temba_run.values.values()
+        temba_values.sort(key=lambda val: val.time)
+        for temba_value in temba_values:
+            ruleset_uuid = temba_value.node
+            category = temba_value.category
+            text = temba_value.value
+            value_date = temba_value.time
+
+            existing_poll_result = existing_db_poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
+
+            poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
+
+            if existing_poll_result is not None:
+
+                update_required = self._check_update_required(existing_poll_result, category, text, state,
+                                                                         district, ward, born, gender, completed,
+                                                                         value_date)
+
+                if update_required:
+                    # update the db object
+                    PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category, text=text,
+                                                                                 state=state, district=district,
+                                                                                 ward=ward, date=value_date,
+                                                                                 born=born, gender=gender,
+                                                                                 completed=completed)
+
+                    # update the map object as well
+                    existing_poll_result.category = category
+                    existing_poll_result.text = text
+                    existing_poll_result.state = state
+                    existing_poll_result.district = district
+                    existing_poll_result.ward = ward
+                    existing_poll_result.date = value_date
+                    existing_poll_result.born = born
+                    existing_poll_result.gender = gender
+                    existing_poll_result.completed = completed
+
+                    existing_db_poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
+
+                    stats_dict['num_val_updated'] += 1
+                else:
+                    stats_dict['num_val_ignored'] += 1
+
+            elif poll_result_to_save is not None:
+
+                replace_save_map = self._check_update_required(poll_result_to_save, category, text, state,
+                                                                          district, ward, born, gender, completed,
+                                                                          value_date)
+
+                if replace_save_map:
+                    result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                            contact=contact_uuid, category=category, text=text,
+                                            state=state, district=district, ward=ward,
+                                            born=born, gender=gender,
+                                            date=value_date, completed=completed)
+
+                    poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
+
+                stats_dict['num_val_ignored'] += 1
+            else:
+
+                result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                        contact=contact_uuid, category=category, text=text,
+                                        state=state, district=district, ward=ward, born=born,
+                                        gender=gender, date=value_date, completed=completed)
+
+                poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
+
+                stats_dict['num_val_created'] += 1
+        for temba_path in temba_run.path:
+            ruleset_uuid = temba_path.node
+            category = None
+            text = ""
+            value_date = temba_path.time
+
+            if ruleset_uuid in questions_uuids:
+                existing_poll_result = existing_db_poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
+
+                poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
+
+                if existing_poll_result is not None:
+                    if existing_poll_result.date is None or value_date > existing_poll_result.date:
+                        # update the db object
+                        PollResult.objects.filter(pk=existing_poll_result.pk).update(category=category,
+                                                                                     text=text,
+                                                                                     state=state,
+                                                                                     district=district,
+                                                                                     ward=ward,
+                                                                                     date=value_date,
+                                                                                     born=born,
+                                                                                     gender=gender,
+                                                                                     completed=completed)
+
+                        # update the map object as well
+                        existing_poll_result.category = category
+                        existing_poll_result.text = text
+                        existing_poll_result.state = state
+                        existing_poll_result.district = district
+                        existing_poll_result.ward = ward
+                        existing_poll_result.date = value_date
+                        existing_poll_result.born = born
+                        existing_poll_result.gender = gender
+                        existing_poll_result.completed = completed
+
+                        existing_db_poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
+
+                        stats_dict['num_path_updated'] += 1
+                    else:
+                        stats_dict['num_path_ignored'] += 1
+
+                elif poll_result_to_save is not None:
+                    if value_date > poll_result_to_save.date:
+                        result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                                contact=contact_uuid, category=category, text=text,
+                                                state=state, district=district, ward=ward,
+                                                born=born, gender=gender,
+                                                date=value_date, completed=completed)
+
+                        poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
+
+                    stats_dict['num_path_ignored'] += 1
+
+                else:
+
+                    result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,
+                                            contact=contact_uuid, category=category, text=text,
+                                            state=state, district=district, ward=ward, born=born,
+                                            gender=gender, date=value_date, completed=completed)
+
+                    poll_results_to_save_map[contact_uuid][ruleset_uuid] = result_obj
+
+                    stats_dict['num_path_created'] += 1
+
+            else:
+                stats_dict['num_path_ignored'] += 1
+
+    @staticmethod
+    def _check_update_required(poll_obj, category, text, state, district, ward, born, gender, completed, value_date):
+        update_required = poll_obj.category != category or poll_obj.text != text
+        update_required = update_required or poll_obj.state != state
+        update_required = update_required or poll_obj.district != district
+        update_required = update_required or poll_obj.ward != ward
+        update_required = update_required or poll_obj.born != born
+        update_required = update_required or poll_obj.gender != gender
+        update_required = update_required or poll_obj.completed != completed
+        # if the reporter answered the step, check if this is a newer run
+        if poll_obj.date is not None:
+            update_required = update_required and (value_date > poll_obj.date)
+        else:
+            update_required = True
+        return update_required
+
+    @staticmethod
+    def _save_new_poll_results_to_database(poll_results_to_save_map):
+        new_poll_results = []
+        for c_key in poll_results_to_save_map.keys():
+            for r_key in poll_results_to_save_map.get(c_key, dict()):
+                obj_to_create = poll_results_to_save_map.get(c_key, dict()).get(r_key, None)
+                if obj_to_create is not None:
+                    new_poll_results.append(obj_to_create)
+        PollResult.objects.bulk_create(new_poll_results)
+
+    @staticmethod
+    def _mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest):
+        cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid), cursor, None)
+        cache.set(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (org.pk, poll.flow_uuid),
+                  after, None)
+        cache.set(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (org.pk, poll.flow_uuid),
+                  before, None)
+        cache.set(Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (org.pk, poll.flow_uuid),
+                  batches_latest, None)
+
+    @staticmethod
+    def _mark_poll_results_sync_completed(poll, org, latest_synced_obj_time):
+        # update the time for this poll from which we fetch next time
+        cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
+                  latest_synced_obj_time, None)
+        # clear the saved cursor
+        cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid))
