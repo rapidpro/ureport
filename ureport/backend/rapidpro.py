@@ -91,6 +91,48 @@ class BoundarySyncer(BaseSyncer):
         local.release()
 
 
+class BoundarySyncerv1(BaseSyncer):
+    """
+    syncer for location boundaries from API v1
+    """
+    model = Boundary
+    local_id_attr = 'osm_id'
+    remote_id_attr = 'boundary'
+
+    def local_kwargs(self, org, remote):
+        geometry = json.dumps(dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
+
+        parent = Boundary.objects.filter(osm_id__iexact=remote.parent, org=org).first()
+
+        return {
+            'org': org,
+            'geometry': geometry,
+            'parent': parent,
+            'level': remote.level,
+            'name': remote.name,
+            'osm_id': remote.boundary
+        }
+
+    def update_required(self, local, remote, local_kwargs):
+        if local.name != remote.name:
+            return True
+
+        if local.level != remote.level:
+            return True
+
+        if remote.parent:
+            if not local.parent:
+                return True
+            elif local.parent.osm_id != remote.parent:
+                return True
+
+        return not is_dict_equal(json.loads(local.geometry),
+                                 dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
+
+    def delete_local(self, local):
+        local.release()
+
+
 class ContactSyncer(BaseSyncer):
     model = Contact
 
@@ -269,10 +311,10 @@ class RapidProBackend(BaseBackend):
         if org.get_config('is_global'):
             incoming_objects = Boundary.build_global_boundaries()
         else:
-            client = self._get_client(org, 2)
-            incoming_objects = client.get_boundaries(geometry=True).all()
+            client = self._get_client(org, 1)
+            incoming_objects = client.get_boundaries()
 
-        return sync_local_to_set(org, BoundarySyncer(), incoming_objects)
+        return sync_local_to_set(org, BoundarySyncerv1(), incoming_objects)
 
     def pull_contacts(self, org, modified_after, modified_before, progress_callback=None):
         client = self._get_client(org, 2)
