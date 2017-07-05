@@ -1,3 +1,46 @@
+v1.0.348
+----------
+ * Update smartmin
+ * Refactor pull results to shorter size methods
+
+v1.0.347
+----------
+ * Update fix for pycountry update
+
+v1.0.346
+----------
+ * Update all deps to the latests
+
+v1.0.345
+----------
+ * Update django-storages
+
+v1.0.344
+----------
+ * Use big int for poll results counter primary key, migrations
+ * Update dependencies
+
+v1.0.343
+----------
+ * Merge pull request #293 from rapidpro/result-text-field
+
+v1.0.341
+----------
+ * More italian
+ * Display only featured stories on home page
+
+v1.0.340
+----------
+ * Update Italian
+
+v1.0.339
+----------
+ * Add El Salvador
+
+v1.0.338
+----------
+ * Update translations
+
 v1.0.336
 ----------
  * Fix refetch poll on big orgs

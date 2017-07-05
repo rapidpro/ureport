@@ -109,7 +109,7 @@ def substitute_segment(org, segment_in):
             if 'parent' in segment:
                 del segment["parent"]
             segment["contact_field"] = org.get_config('state_label')
-            segment["values"] = [elt.alpha2 for elt in pycountry.countries.objects]
+            segment["values"] = [elt.alpha_2 for elt in list(pycountry.countries)]
 
     return json.dumps(segment)
 
@@ -123,7 +123,7 @@ def clean_global_results_data(org, results, segment):
             elt['boundary'] = country_code
             country_name = ""
             try:
-                country = pycountry.countries.get(alpha2=country_code)
+                country = pycountry.countries.get(alpha_2=country_code)
                 if country:
                     country_name = country.name
             except KeyError:
@@ -209,6 +209,7 @@ def organize_categories_data(org, contact_field, api_data):
 
 def fetch_flows(org):
     start = time.time()
+    print "Fetching flows for %s" % org.name
 
     this_time = datetime.now()
     org_flows = dict(time=datetime_to_ms(this_time), results=dict())
@@ -240,6 +241,8 @@ def fetch_flows(org):
         client.captureException()
         import traceback
         traceback.print_exc()
+
+    print "Fetch %s flows took %ss" % (org.name, time.time() - start)
 
     return org_flows.get('results')
 

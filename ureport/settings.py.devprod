@@ -1,7 +1,6 @@
 # import our default settings
 from settings_common import *
 
-INSTALLED_APPS = INSTALLED_APPS + ('django_nose',)
 INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar.apps.DebugToolbarConfig',)
 
 DEBUG = True

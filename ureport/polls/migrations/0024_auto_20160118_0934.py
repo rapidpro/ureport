@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='poll',
             name='poll_date',
-            field=models.DateTimeField(null=True),
+            field=models.DateTimeField(),
         ),
     ]

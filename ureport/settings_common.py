@@ -60,7 +60,8 @@ LANGUAGE_CODE = 'en'
 
 # Available languages for translation
 LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"),
-             ('pt-br', "Brazilian Portuguese"), ('uk', "Ukrainian"), ('my', "Burmese"), ('id', "Indonesian"))
+             ('pt-br', "Brazilian Portuguese"), ('uk', "Ukrainian"), ('my', "Burmese"), ('id', "Indonesian"),
+             ('it', "Italian"))
 DEFAULT_LANGUAGE = "en"
 RTL_LANGUAGES = ['ar']
 
@@ -70,6 +71,7 @@ ORG_LANG_MAP = {
     'es': 'es_ES',
     'fr': 'fr_FR',
     'id': 'id_ID',
+    'it': 'it_IT',
     'my': 'my_MM',
     'pt': 'pt_PT',
     'pt-br': 'pt_BR',
@@ -113,7 +115,7 @@ COMPRESS_PRECOMPILERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'bangbangrootplaydeadn7#^+-u-#1wm=y3a$-#^jps5tihx5v_@-_(kxumq_$+$5r)bxo'
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -143,7 +145,7 @@ ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whe
                      dict(name='facebook_app_id', field=dict(help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"), required=False)),
                      dict(name='facebook_pixel_id', field=dict(help_text=_("The id of the Facebook Pixel for this organization (optional)"), required=False)),
                      dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), required=False)),
-                     dict(name='instagram_widget', field=dict(help_text=_("The Instagram widget for this organization. Get it in https://widgets.websta.me."), required=False)),
+                     dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), required=False)),
                      dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
                      dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
                      dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True),
@@ -170,9 +172,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
-
-    # mo-betta permission management
-    'guardian',
 
     # the django admin
     'django.contrib.admin',
@@ -214,6 +213,8 @@ INSTALLED_APPS = (
     'django_countries',
     'rest_framework',
     'rest_framework_swagger',
+
+    'hamlpy',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -280,12 +281,12 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
+                'django.template.context_processors.request',
                 'dash.orgs.context_processors.user_group_perms_processor',
                 'dash.orgs.context_processors.set_org_processor',
                 'ureport.assets.context_processors.set_assets_processor',
@@ -381,12 +382,11 @@ LOGIN_REDIRECT_URL = "/manage/org/choose/"
 LOGOUT_REDIRECT_URL = "/"
 
 #-----------------------------------------------------------------------------------
-# Guardian Configuration
+# Auth Configuration
 #-----------------------------------------------------------------------------------
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'guardian.backends.ObjectPermissionBackend',
 )
 
 ANONYMOUS_USER_NAME = 'AnonymousUser'
@@ -420,13 +420,6 @@ CACHES = {
 
 if 'test' in sys.argv:
     CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
-
-#-----------------------------------------------------------------------------------
-# Django-Nose config
-#-----------------------------------------------------------------------------------
-
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-SOUTH_TESTS_MIGRATE = False
 
 #-----------------------------------------------------------------------------------
 # SMS Configs
@@ -518,7 +511,24 @@ UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
 #-----------------------------------------------------------------------------------
 # non org urls
 #-----------------------------------------------------------------------------------
-SITE_ALLOW_NO_ORG = ('public.countries',)
+SITE_ALLOW_NO_ORG = ('public.countries',
+                     'api',
+                     'api.v1',
+                     'api.v1.docs',
+                     'api.v1.org_list',
+                     'api.v1.org_details',
+                     'api.v1.org_poll_list',
+                     'api.v1.org_poll_featured',
+                     'api.v1.poll_details',
+                     'api.v1.org_newsitem_list',
+                     'api.v1.newsitem_details',
+                     'api.v1.org_video_list',
+                     'api.v1.video_details',
+                     'api.v1.org_asset_list',
+                     'api.v1.asset_details',
+                     'api.v1.org_story_list',
+                     'api.v1.story_details',
+                     )
 
 
 #-----------------------------------------------------------------------------------
@@ -531,6 +541,13 @@ PREVIOUS_ORG_SITES = [
         flag="flag_br.png",
         is_static=True,
         count_link="http://ureportbrasil.org.br/count/",
+    ),
+    dict(
+        name="El Salvador",
+        host="http://elsalvador.ureport.in/",
+        flag="flag_sv.png",
+        is_static=True,
+        count_link="http://elsalvador.ureport.in/count/",
     ),
     dict(
         name="Guatemala",
@@ -588,17 +605,18 @@ PREVIOUS_ORG_SITES = [
 # rest_framework config
 #-----------------------------------------------------------------------------------
 REST_FRAMEWORK = {
-    'PAGINATE_BY': 10,                 # Default to 10
+    'PAGE_SIZE': 10,                 # Default to 10
     'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
     'MAX_PAGINATE_BY': 100,
 }
 
+
 SWAGGER_SETTINGS = {
-    'api_version': '0.1',
-    'api_path': '/',
-    'enabled_methods': [
-        'get'
-    ],
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    }
 }
 
 STORY_WIDGET_URL = 'https://ureportapp.ilhasoft.mobi/widget/'

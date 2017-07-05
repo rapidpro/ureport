@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Ilhasoft <contato@ilhasoft.com.br>, 2016
 # JULIO DANTAS <julio@juliocdantas.net>, 2016
@@ -9,14 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-27 08:22+0000\n"
+"POT-Creation-Date: 2017-05-10 09:35+0000\n"
 "PO-Revision-Date: 2016-11-09 14:48+0000\n"
 "Last-Translator: JULIO DANTAS <julio@juliocdantas.net>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/rapidpro/ureport/language/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/rapidpro/"
+"ureport/language/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: dash/categories/models.py:20
@@ -27,17 +28,17 @@ msgstr "O nome desta categoria"
 msgid "An optional image that can describe this category"
 msgstr "Uma imagem opcional que pode descrever esta categoria"
 
-#: dash/categories/models.py:26 ureport/polls/models.py:64
+#: dash/categories/models.py:26 ureport/polls/models.py:65
 msgid "The organization this category applies to"
 msgstr "A organização a qual esta categoria pertence"
 
 #: dash/categories/models.py:47 templates/frame.haml:285
-#: templates/frame.haml.py:292
+#: templates/frame.haml:292
 msgid "Categories"
 msgstr "Categorias"
 
 #: dash/categories/models.py:53 dash/stories/models.py:129
-#: ureport/polls/models.py:604
+#: ureport/polls/models.py:639
 msgid "The name to describe this image"
 msgstr "O nome para descrever esta imagem"
 
@@ -46,7 +47,7 @@ msgid "The category this image represents"
 msgstr "A categoria que esta imagem representa"
 
 #: dash/categories/models.py:59 dash/stories/models.py:135
-#: ureport/polls/models.py:610
+#: ureport/polls/models.py:645
 msgid "The image file to use"
 msgstr "O arquivo da imagem a ser usada"
 
@@ -56,13 +57,17 @@ msgstr "Um nome legível para este tipo de conteúdo"
 
 #: dash/dashblocks/models.py:22
 msgid "The slug to idenfity this content type, used with the template tags"
-msgstr "O filtro para identificar esse tipo de conteúdo, usado com as tags de template"
+msgstr ""
+"O filtro para identificar esse tipo de conteúdo, usado com as tags de "
+"template"
 
 #: dash/dashblocks/models.py:26
 msgid ""
-"A description of where this content type is used on the site and how it will"
-" be dsiplayed"
-msgstr "Uma descrição de onde este tipo de conteúdo é usado no site e como será exibido"
+"A description of where this content type is used on the site and how it will "
+"be dsiplayed"
+msgstr ""
+"Uma descrição de onde este tipo de conteúdo é usado no site e como será "
+"exibido"
 
 #: dash/dashblocks/models.py:31
 msgid "Whether this content should include a title"
@@ -87,7 +92,9 @@ msgstr "Se este conteúdo deve incluir um link"
 #: dash/dashblocks/models.py:46
 msgid ""
 "Whether this content should allow upload of additional images, ie a gallery"
-msgstr "Se este conteúdo deve permitir o carregamento de imagens adicionais, ou seja, uma galeria"
+msgstr ""
+"Se este conteúdo deve permitir o carregamento de imagens adicionais, ou "
+"seja, uma galeria"
 
 #: dash/dashblocks/models.py:50
 msgid "Whether this content has a color field"
@@ -123,7 +130,8 @@ msgstr "O corpo de texto para este bloco de conteúdo. Opcional"
 
 #: dash/dashblocks/models.py:83
 msgid "Any image that should be displayed with this content block, optional"
-msgstr "Qualquer imagem que poderá ser exibida com este bloco de conteúdo. Opcional"
+msgstr ""
+"Qualquer imagem que poderá ser exibida com este bloco de conteúdo. Opcional"
 
 #: dash/dashblocks/models.py:87
 msgid "A background color to use for the image, in the format: #rrggbb"
@@ -131,7 +139,8 @@ msgstr "A cor do fundo a ser usada para a imagem no formato: #rrggb"
 
 #: dash/dashblocks/models.py:91
 msgid "Any link that should be associated with this content block, optional"
-msgstr "Qualquer link que poderá ser associado a este bloco de conteúdo. Opcional"
+msgstr ""
+"Qualquer link que poderá ser associado a este bloco de conteúdo. Opcional"
 
 #: dash/dashblocks/models.py:95 ureport/news/models.py:42
 msgid "The id of the YouTube video that should be linked to this item"
@@ -139,13 +148,16 @@ msgstr "O ID do vídeo do YouTube que deve ser ligada a este item"
 
 #: dash/dashblocks/models.py:99
 msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more"
-" advanced filtering, optional"
-msgstr "Qualquer etiqueta para este bloco de conteúdo, separada por espaços, pode ser usada para fazer uma filtragem mais avançada. É opcional"
+"Any tags for this content block, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Qualquer etiqueta para este bloco de conteúdo, separada por espaços, pode "
+"ser usada para fazer uma filtragem mais avançada. É opcional"
 
 #: dash/dashblocks/models.py:103
 msgid "The priority for this block, higher priority blocks come first"
-msgstr "Prioridade para este bloco, blocos com maior prioridade devem vir primeiro"
+msgstr ""
+"Prioridade para este bloco, blocos com maior prioridade devem vir primeiro"
 
 #: dash/dashblocks/models.py:108
 msgid "The organization this content block belongs to"
@@ -182,12 +194,12 @@ msgstr "Blocos de conteúdo"
 msgid "%s Blocks"
 msgstr "%s blocos"
 
-#: dash/dashblocks/views.py:158 smartmin/views.py:1110
+#: dash/dashblocks/views.py:158 smartmin/views.py:1105
 #, python-format
 msgid "Edit %s"
 msgstr "Editar %s"
 
-#: dash/dashblocks/views.py:182 smartmin/views.py:1300
+#: dash/dashblocks/views.py:182 smartmin/views.py:1328
 #, python-format
 msgid "Create %s"
 msgstr "Criar %s"
@@ -224,7 +236,7 @@ msgstr "Senhas devem conter pelo menos 8 letras."
 msgid "This domain is used for subdomains"
 msgstr "Este domínio é usado para subdomínios"
 
-#: dash/orgs/models.py:36 dash/orgs/models.py:381 ureport/assets/models.py:19
+#: dash/orgs/models.py:36 dash/orgs/models.py:365 ureport/assets/models.py:19
 msgid "Name"
 msgstr "Nome"
 
@@ -309,75 +321,77 @@ msgstr "O token de API para a conta RapidPro que este painel está ligado a"
 msgid ""
 "JSON blob used to store configuration information associated with this "
 "organization"
-msgstr "JSON blob costumava armazenar informações de configuração associado a esta organização"
+msgstr ""
+"JSON blob costumava armazenar informações de configuração associado a esta "
+"organização"
 
-#: dash/orgs/models.py:311
+#: dash/orgs/models.py:295
 msgid "Administrator"
 msgstr "Administrador"
 
-#: dash/orgs/models.py:312
+#: dash/orgs/models.py:296
 msgid "Editor"
 msgstr "Editor"
 
-#: dash/orgs/models.py:313
+#: dash/orgs/models.py:297
 msgid "Viewer"
 msgstr "Audiência"
 
-#: dash/orgs/models.py:318 dash/orgs/models.py:377 ureport/assets/models.py:16
+#: dash/orgs/models.py:302 dash/orgs/models.py:361 ureport/assets/models.py:16
 #: ureport/contacts/models.py:44
 msgid "Org"
 msgstr "Organização"
 
-#: dash/orgs/models.py:319
+#: dash/orgs/models.py:303
 msgid "The organization to which the account is invited to view"
 msgstr "A organização para a qual a conta é convidada para visualizar"
 
-#: dash/orgs/models.py:322
+#: dash/orgs/models.py:306
 msgid "Email"
 msgstr "Email"
 
-#: dash/orgs/models.py:323
+#: dash/orgs/models.py:307
 msgid "The email to which we send the invitation of the viewer"
 msgstr "O e-mail para o qual enviamos o convite da audiência"
 
-#: dash/orgs/models.py:326
+#: dash/orgs/models.py:310
 msgid "Secret"
 msgstr "Confidencial"
 
-#: dash/orgs/models.py:327
+#: dash/orgs/models.py:311
 msgid "a unique code associated with this invitation"
 msgstr "um código exclusivo associado a este convite"
 
-#: dash/orgs/models.py:330
+#: dash/orgs/models.py:314
 msgid "User Role"
 msgstr "Função de Usuário"
 
-#: dash/orgs/models.py:361
+#: dash/orgs/models.py:345
 #, python-format
 msgid "%s Invitation"
 msgstr "%s Convite"
 
-#: dash/orgs/models.py:373 ureport/assets/models.py:11
+#: dash/orgs/models.py:357 ureport/assets/models.py:11
 msgid "Banner"
 msgstr "Banner"
 
-#: dash/orgs/models.py:374 ureport/assets/models.py:12
+#: dash/orgs/models.py:358 ureport/assets/models.py:12
 msgid "Pattern"
 msgstr "Padrão"
 
-#: dash/orgs/models.py:378
+#: dash/orgs/models.py:362
 msgid "The organization in which the image will be used"
 msgstr "A organização em que a imagem será usada"
 
-#: dash/orgs/models.py:382
+#: dash/orgs/models.py:366
 msgid "The name to describe this background"
 msgstr "O nome para descrever este fundo"
 
-#: dash/orgs/models.py:385
+#: dash/orgs/models.py:369
 msgid "Background type"
 msgstr "Tipo de fundo"
 
-#: dash/orgs/models.py:387 ureport/assets/models.py:24
+#: dash/orgs/models.py:371 ureport/assets/models.py:24
 msgid "The image file"
 msgstr "O arquivo de imagem"
 
@@ -387,9 +401,14 @@ msgid ""
 "\n"
 "      You've been invited to join %(org_name)s.\n"
 "      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
+"a>.\n"
 "  "
-msgstr "\nVocê foi convidado para participar de %(org_name)s.\n<br/>\nPara aceitar o convite, <a href='%(host)s%(join_url)s'>clique aqui</a>."
+msgstr ""
+"\n"
+"Você foi convidado para participar de %(org_name)s.\n"
+"<br/>\n"
+"Para aceitar o convite, <a href='%(host)s%(join_url)s'>clique aqui</a>."
 
 #: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
 msgid "Edit"
@@ -425,7 +444,9 @@ msgstr "Escolha a sua Organização"
 msgid ""
 "Your account is not associated to an organization. Please Contact the "
 "adminstrator."
-msgstr "A sua conta não está associada a uma organização. Por favor contacte o administrador."
+msgstr ""
+"A sua conta não está associada a uma organização. Por favor contacte o "
+"administrador."
 
 #: dash/orgs/views.py:219 dash/orgs/views.py:229
 msgid "Your Organization"
@@ -452,36 +473,40 @@ msgstr "Um dos e-mails que você inseriu é inválido."
 msgid "Manage %(name)s Accounts"
 msgstr "Gerenciar %(name)s Contas"
 
-#: dash/orgs/views.py:438 smartmin/views.py:1275
+#: dash/orgs/views.py:437 smartmin/views.py:1299
 msgid "Create"
 msgstr "Criar"
 
-#: dash/orgs/views.py:446
+#: dash/orgs/views.py:445
 msgid ""
 "Your invitation link is invalid. Please contact your organization "
 "administrator."
-msgstr "Seu link de convite é inválido. Por favor, entre em contato com o administrador da organização."
+msgstr ""
+"Seu link de convite é inválido. Por favor, entre em contato com o "
+"administrador da organização."
 
-#: dash/orgs/views.py:502 dash/orgs/views.py:547
+#: dash/orgs/views.py:501 dash/orgs/views.py:546
 #, python-format
 msgid "Join %(name)s"
 msgstr "Junte-se %(name)s"
 
-#: dash/orgs/views.py:524
+#: dash/orgs/views.py:523
 msgid "Join"
 msgstr "Junte-se"
 
-#: dash/orgs/views.py:533
+#: dash/orgs/views.py:532
 msgid ""
 "Your invitation link has expired. Please contact your organization "
 "administrator."
-msgstr "Seu link de convite expirou. Entre em contato com o administrador da organização."
+msgstr ""
+"Seu link de convite expirou. Entre em contato com o administrador da "
+"organização."
 
-#: dash/orgs/views.py:640
+#: dash/orgs/views.py:639
 msgid "Task"
 msgstr ""
 
-#: dash/orgs/views.py:644
+#: dash/orgs/views.py:643
 msgid "Tasks"
 msgstr ""
 
@@ -511,15 +536,19 @@ msgstr "Um link para um arquivo de mp3 para publicar nesta história"
 
 #: dash/stories/models.py:31
 msgid ""
-"The id of the YouTube video that should be linked to this story (this is the"
-" text that comes afer v= and before & in the YouTube URL)"
-msgstr "O ID do vídeo do YouTube que deve ser ligado a esta história (este é o texto que vem depois de v = e antes e na URL do YouTube)"
+"The id of the YouTube video that should be linked to this story (this is the "
+"text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"O ID do vídeo do YouTube que deve ser ligado a esta história (este é o texto "
+"que vem depois de v = e antes e na URL do YouTube)"
 
 #: dash/stories/models.py:37
 msgid ""
 "Any tags for this story, separated by spaces, can be used to do more "
 "advanced filtering, optional"
-msgstr "Quaisquer tags para esta história, separadas por espaços, podem ser usadas para fazer uma filtragem mais avançada. É opcional"
+msgstr ""
+"Quaisquer tags para esta história, separadas por espaços, podem ser usadas "
+"para fazer uma filtragem mais avançada. É opcional"
 
 #: dash/stories/models.py:42
 msgid "The category for this story"
@@ -529,8 +558,8 @@ msgstr "A categoria para esta história"
 msgid "The organization this story belongs to"
 msgstr "A organização na qual esta história pertence a"
 
-#: dash/stories/models.py:124 templates/frame.haml:329
-#: templates/frame.haml.py:481 templates/public/stories.haml:7
+#: dash/stories/models.py:124 templates/frame.haml:329 templates/frame.haml:481
+#: templates/public/stories.haml:7
 msgid "Stories"
 msgstr "Histórias"
 
@@ -550,19 +579,21 @@ msgstr "Não"
 msgid "Story Images"
 msgstr "Imagens da História"
 
-#: dash/stories/views.py:91 dash/stories/views.py:99
-#: ureport/polls/views.py:164 ureport/polls/views.py:171
+#: dash/stories/views.py:91 dash/stories/views.py:99 ureport/polls/views.py:164
+#: ureport/polls/views.py:171
 #, python-format
 msgid "Image %d"
 msgstr "Imagem %d"
 
 #: dash/stories/views.py:92
 msgid "Image to display on story page and in previews. (optional)"
-msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional)"
+msgstr ""
+"Imagem a ser exibida na página de história e na visualização. (Opcional)"
 
 #: dash/stories/views.py:100
 msgid "Image to display on story page and in previews (optional)"
-msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional) "
+msgstr ""
+"Imagem a ser exibida na página de história e na visualização. (Opcional) "
 
 #: smartmin/templates/smartmin/delete_confirm.html:11
 msgid "Remove Item?"
@@ -574,13 +605,17 @@ msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
-msgstr "\nVocê tem certeza que deseja remover <b>%(object)s</b>?"
+msgstr ""
+"\n"
+"Você tem certeza que deseja remover <b>%(object)s</b>?"
 
 #: smartmin/templates/smartmin/delete_confirm.html:17
 msgid ""
 "Once it is removed, it will be gone forever. There is no way to undo this "
 "operation."
-msgstr "Uma vez removido, desaparecerá para sempre. Não há forma de desfazer esta operação."
+msgstr ""
+"Uma vez removido, desaparecerá para sempre. Não há forma de desfazer esta "
+"operação."
 
 #: smartmin/templates/smartmin/delete_confirm.html:24
 #: smartmin/templates/smartmin/form.html:50
@@ -599,8 +634,12 @@ msgid_plural ""
 "\n"
 "         %(counter)s results\n"
 "        "
-msgstr[0] "\n%(counter)s resultados"
-msgstr[1] "\n%(counter)s resultados"
+msgstr[0] ""
+"\n"
+"%(counter)s resultados"
+msgstr[1] ""
+"\n"
+"%(counter)s resultados"
 
 #: smartmin/templates/smartmin/list.html:85
 #, python-format
@@ -608,7 +647,9 @@ msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
-msgstr "\nResultados %(start)s-%(end)s de %(count)s"
+msgstr ""
+"\n"
+"Resultados %(start)s-%(end)s de %(count)s"
 
 #: smartmin/templates/smartmin/list.html:95
 #: smartmin/templates/smartmin/list.html:97
@@ -631,7 +672,7 @@ msgid "Sign in"
 msgstr "Iniciar sessão"
 
 #: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:429
-#: templates/frame.haml.py:606 templates/smartmin/users/login.haml:49
+#: templates/frame.haml:606 templates/smartmin/users/login.haml:49
 msgid "Login"
 msgstr "Conectar"
 
@@ -652,9 +693,13 @@ msgstr "Login Falhou"
 #, python-format
 msgid ""
 "\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      Sorry, you cannot log in at this time because we received "
+"%(failed_login_limit)s incorrect login attempts.\n"
 "      "
-msgstr "\nDesculpe, você não pode logar neste momento porque recebemos %(failed_login_limit)s tentativas de login incorretas"
+msgstr ""
+"\n"
+"Desculpe, você não pode logar neste momento porque recebemos "
+"%(failed_login_limit)s tentativas de login incorretas"
 
 #: smartmin/templates/smartmin/users/user_failed.html:18
 #, python-format
@@ -662,17 +707,23 @@ msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
-msgstr "\nPor favor aguarde %(lockout_timeout)s minutos antes de tentar conectar-se novamente."
+msgstr ""
+"\n"
+"Por favor aguarde %(lockout_timeout)s minutos antes de tentar conectar-se "
+"novamente."
 
 #: smartmin/templates/smartmin/users/user_failed.html:25
 msgid ""
 "Alternatively, you can fill out the form below to have your password reset "
 "via e-mail."
-msgstr "Eventualmente, você pode preencher o formulário abaixo para que a sua senha seja redefinida via e-mail."
+msgstr ""
+"Eventualmente, você pode preencher o formulário abaixo para que a sua senha "
+"seja redefinida via e-mail."
 
 #: smartmin/templates/smartmin/users/user_failed.html:27
 msgid "Please contact the website administrator to have your password reset."
-msgstr "Entre em contato com o administrador do site para ter a sua senha redefinida."
+msgstr ""
+"Entre em contato com o administrador do site para ter a sua senha redefinida."
 
 #: smartmin/templates/smartmin/users/user_failed.html:39
 msgid "Email Address"
@@ -686,218 +737,236 @@ msgstr "Recuperar"
 msgid ""
 "Please enter the email address you used to sign up and we will help you "
 "recover your password."
-msgstr "Por favor, insira o endereço de e-mail que usou para se inscrever e nós vamos ajudá-lo a recuperar sua senha."
+msgstr ""
+"Por favor, insira o endereço de e-mail que usou para se inscrever e nós "
+"vamos ajudá-lo a recuperar sua senha."
 
 #: smartmin/templates/smartmin/users/user_newpassword.html:7
 #, python-format
 msgid ""
 "\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  <strong>Your password has expired.</strong> Site policy states that you "
+"must pick a new password every %(expire_days)s days, and that passwords must "
+"not have been used within the previous %(window_days)s days.\n"
 "  "
-msgstr "\n<strong> Sua senha expirou. </ strong> A política do site diz que você deve escolher uma nova senha a cada %(expire_days)s dias, e que as senhas não devem ter sido utilizadas nos últimos %(window_days)s dias."
+msgstr ""
+"\n"
+"<strong> Sua senha expirou. </ strong> A política do site diz que você deve "
+"escolher uma nova senha a cada %(expire_days)s dias, e que as senhas não "
+"devem ter sido utilizadas nos últimos %(window_days)s dias."
 
-#: smartmin/users/views.py:28 smartmin/users/views.py:66
-#: smartmin/users/views.py:81 smartmin/users/views.py:126
-#: smartmin/users/views.py:228 smartmin/users/views.py:255
+#: smartmin/users/views.py:28 smartmin/users/views.py:69
+#: smartmin/users/views.py:87 smartmin/users/views.py:137
+#: smartmin/users/views.py:243 smartmin/users/views.py:271
 msgid "New Password"
 msgstr "Nova Senha"
 
-#: smartmin/users/views.py:36 smartmin/users/views.py:72
-#: smartmin/users/views.py:104 smartmin/users/views.py:150
+#: smartmin/users/views.py:37 smartmin/users/views.py:75
+#: smartmin/users/views.py:110 smartmin/users/views.py:161
 msgid ""
 "Passwords must have at least 8 characters, including one uppercase, one "
 "lowercase and one number"
-msgstr "As senhas devem ter pelo menos 8 caracteres, incluindo uma maiúscula, uma minúscula e um número"
+msgstr ""
+"As senhas devem ter pelo menos 8 caracteres, incluindo uma maiúscula, uma "
+"minúscula e um número"
 
-#: smartmin/users/views.py:75 smartmin/users/views.py:107
-#: smartmin/users/views.py:153
+#: smartmin/users/views.py:79 smartmin/users/views.py:114
+#: smartmin/users/views.py:165
 msgid ""
 "You have used this password before in the past year, please use a new "
 "password."
 msgstr "Você já utilizou esta senha, por favor escolha uma nova senha."
 
-#: smartmin/users/views.py:80 smartmin/users/views.py:206
-#: smartmin/users/views.py:254
+#: smartmin/users/views.py:86 smartmin/users/views.py:220
+#: smartmin/users/views.py:270
 msgid "Password"
 msgstr "Senha"
 
-#: smartmin/users/views.py:82
+#: smartmin/users/views.py:88
 msgid "Confirm Password"
 msgstr "Confirmar Senha"
 
-#: smartmin/users/views.py:88
+#: smartmin/users/views.py:94
 msgid "Please enter your password to save changes."
 msgstr "Por favor, insira sua senha para salvar as alterações."
 
-#: smartmin/users/views.py:97
+#: smartmin/users/views.py:103
 msgid "Confirm the new password by filling the this field"
 msgstr "Preencha este campo para confirmar a nova senha"
 
-#: smartmin/users/views.py:100
+#: smartmin/users/views.py:106
 msgid "New password doesn't match with its confirmation"
 msgstr "Nova senha não corresponde com a sua confirmação"
 
-#: smartmin/users/views.py:112
+#: smartmin/users/views.py:121
 msgid "Your Email"
 msgstr "Seu e-mail"
 
-#: smartmin/users/views.py:119
+#: smartmin/users/views.py:128
 msgid ""
 "E-mail recovery is not supported, please contact the website administrator "
 "to reset your password manually."
-msgstr "A recuperação do e-mail não é suportada, por favor, entre em contacto com o administrador do site para redefinir a senha manualmente."
+msgstr ""
+"A recuperação do e-mail não é suportada, por favor, entre em contacto com o "
+"administrador do site para redefinir a senha manualmente."
 
-#: smartmin/users/views.py:124
+#: smartmin/users/views.py:135
 msgid "Current Password"
 msgstr "Senha atual"
 
-#: smartmin/users/views.py:125
+#: smartmin/users/views.py:136
 msgid "Your current password"
 msgstr "Sua nova senha."
 
-#: smartmin/users/views.py:127
+#: smartmin/users/views.py:138
 msgid "Your new password."
 msgstr "Sua nova senha."
 
-#: smartmin/users/views.py:128
+#: smartmin/users/views.py:139
 msgid "Confirm new Password"
 msgstr "Confirme a nova senha."
 
-#: smartmin/users/views.py:129
+#: smartmin/users/views.py:140
 msgid "Confirm your new password."
 msgstr "Confirme sua nova senha."
 
-#: smartmin/users/views.py:134
+#: smartmin/users/views.py:145
 msgid "Please enter your password to save changes"
 msgstr "Por favor, insira a nova senha para salvar as alterações"
 
-#: smartmin/users/views.py:143
+#: smartmin/users/views.py:154
 msgid "Confirm your new password by entering it here"
 msgstr "Confirme a nova senha, inserindo-a aqui."
 
-#: smartmin/users/views.py:146
+#: smartmin/users/views.py:157
 msgid "Mismatch between your new password and confirmation, try again"
 msgstr "Incompatibilidade entre a nova senha e confirmação, tente novamente"
 
-#: smartmin/users/views.py:202
+#: smartmin/users/views.py:215
 msgid "New user created successfully."
 msgstr "Novo usuário criado com sucesso."
 
-#: smartmin/users/views.py:205 smartmin/users/views.py:227
+#: smartmin/users/views.py:218 smartmin/users/views.py:241
 msgid "Groups"
 msgstr "Grupos"
 
-#: smartmin/users/views.py:205
-msgid ""
-"Users will only get those permissions that are allowed for their group."
-msgstr "Os usuário receberão apenas permissões que forem autorizadas para o seu grupo."
+#: smartmin/users/views.py:219
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr ""
+"Os usuário receberão apenas permissões que forem autorizadas para o seu "
+"grupo."
 
-#: smartmin/users/views.py:206
+#: smartmin/users/views.py:220
 msgid "Set the user's initial password here."
 msgstr "Definir a senha inicial do usuário aqui"
 
-#: smartmin/users/views.py:225
+#: smartmin/users/views.py:239
 msgid "Last Login"
 msgstr "Última sessão"
 
-#: smartmin/users/views.py:226
+#: smartmin/users/views.py:240
 msgid "Is Active"
 msgstr "Está Ativo"
 
-#: smartmin/users/views.py:226
+#: smartmin/users/views.py:240
 msgid "Whether this user is allowed to log into the site"
 msgstr "Se o usuário tem permissão para entrar no site"
 
-#: smartmin/users/views.py:227
+#: smartmin/users/views.py:242
 msgid "Users will only get those permissions that are allowed for their group"
-msgstr "Os usuário receberão apenas permissões que forem autorizadas para o seu grupo."
+msgstr ""
+"Os usuário receberão apenas permissões que forem autorizadas para o seu "
+"grupo."
 
-#: smartmin/users/views.py:228
+#: smartmin/users/views.py:244
 msgid "You can reset the user's password by entering a new password here"
 msgstr "Você pode redefinir a senha do usuário inserindo uma nova senha aqui"
 
-#: smartmin/users/views.py:253
+#: smartmin/users/views.py:269
 msgid "Username"
 msgstr "Nome do Usuário"
 
-#: smartmin/users/views.py:254
+#: smartmin/users/views.py:270
 msgid "Your password"
 msgstr "Sua Senha"
 
-#: smartmin/users/views.py:255
+#: smartmin/users/views.py:271
 msgid "If you want to set a new password, enter it here"
 msgstr "Se deseja definir uma nova senha, insira-a aqui"
 
-#: smartmin/users/views.py:256
+#: smartmin/users/views.py:272
 msgid "Confirm New Password"
 msgstr "Confirmar Nova Senha"
 
-#: smartmin/users/views.py:256
+#: smartmin/users/views.py:272
 msgid "Confirm your new password"
 msgstr "Confirmar sua nova senha."
 
-#: smartmin/users/views.py:271
+#: smartmin/users/views.py:287
 msgid "Edit your profile"
 msgstr "Editar seu perfil"
 
-#: smartmin/users/views.py:274
+#: smartmin/users/views.py:290
 msgid "Password Recovery"
 msgstr "Recuperação de senha"
 
-#: smartmin/users/views.py:278
+#: smartmin/users/views.py:294
 msgid "An Email has been sent to your account with further instructions."
 msgstr "Um e-mail foi enviado com mais instruções."
 
-#: smartmin/users/views.py:306
+#: smartmin/users/views.py:323
 msgid "Password Recovery Request"
 msgstr "Solicitação de recuperação de senha"
 
-#: smartmin/users/views.py:315
+#: smartmin/users/views.py:332
 msgid "Pick a new password"
 msgstr "Escolha uma nova senha"
 
-#: smartmin/users/views.py:317
+#: smartmin/users/views.py:334
 msgid "Your password has successfully been updated, thank you."
 msgstr "Sua senha foi atualizada com sucesso, obrigado."
 
-#: smartmin/users/views.py:343
+#: smartmin/users/views.py:360
 #, python-format
 msgid "You are now logged in as %s"
 msgstr "Você agora está conectado como %s"
 
-#: smartmin/users/views.py:356
+#: smartmin/users/views.py:376
 msgid ""
 "Password Updated Successfully. Now you can log in using your new password."
-msgstr "Senha atualizada com sucesso. Agora você pode entrar usando a nova senha."
+msgstr ""
+"Senha atualizada com sucesso. Agora você pode entrar usando a nova senha."
 
-#: smartmin/users/views.py:359
+#: smartmin/users/views.py:379
 msgid "Reset your Password"
 msgstr "Redefinir sua senha"
 
-#: smartmin/users/views.py:371
+#: smartmin/users/views.py:391
 msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by"
-" entering your email here."
-msgstr "O seu link expirou por razões de segurança. Por favor, reinicie o processo, digitando o seu e-mail aqui."
+"Your link has expired for security reasons. Please reinitiate the process by "
+"entering your email here."
+msgstr ""
+"O seu link expirou por razões de segurança. Por favor, reinicie o processo, "
+"digitando o seu e-mail aqui."
 
-#: smartmin/views.py:849
+#: smartmin/views.py:848
 msgid "Submit"
 msgstr "Enviar"
 
-#: smartmin/views.py:856
+#: smartmin/views.py:855
 msgid "Form"
 msgstr "Formulário"
 
-#: smartmin/views.py:1178
+#: smartmin/views.py:1173
 msgid "Save Changes"
 msgstr "Salvar Alterações."
 
-#: smartmin/views.py:1291
+#: smartmin/views.py:1319
 #, python-format
 msgid "Your new %s has been created."
 msgstr "O seu novo %s foi criado."
 
-#: smartmin/views.py:1311
+#: smartmin/views.py:1339
 #, python-format
 msgid "Import %s"
 msgstr "Importar %s"
@@ -926,7 +995,7 @@ msgstr "Usuários"
 msgid "Images"
 msgstr "Imagens"
 
-#: templates/frame.haml:251 templates/frame.haml.py:312
+#: templates/frame.haml:251 templates/frame.haml:312
 msgid "Content"
 msgstr "Conteúdo"
 
@@ -934,7 +1003,7 @@ msgstr "Conteúdo"
 msgid "Country Aliases"
 msgstr "Sigla dos Países"
 
-#: templates/frame.haml:277 templates/frame.haml.py:475
+#: templates/frame.haml:277 templates/frame.haml:475
 msgid "Polls"
 msgstr "Enquetes"
 
@@ -1017,9 +1086,13 @@ msgstr ""
 #: templates/jobs/jobsource_create.haml:8
 msgid ""
 "\n"
-"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"        To add a Twitter job source you are required to get a widget id from "
+"twitter.\n"
 "      "
-msgstr "\nPara adicionar uma proposta de trabalho do Twitter, você precisa criar um widget id do twitter"
+msgstr ""
+"\n"
+"Para adicionar uma proposta de trabalho do Twitter, você precisa criar um "
+"widget id do twitter"
 
 #: templates/jobs/jobsource_create.haml:12
 #: templates/jobs/jobsource_update.haml:12
@@ -1030,9 +1103,12 @@ msgstr "Siga nosso guia passo-a-passo"
 #: templates/jobs/jobsource_update.haml:15
 msgid ""
 "\n"
-"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"        <div>After you create the widget copy the widget id from the url as "
+"shown on</div>\n"
 "      "
-msgstr "\n<div>Depois de criar o widget, copie o id da url como mostrado em</div>"
+msgstr ""
+"\n"
+"<div>Depois de criar o widget, copie o id da url como mostrado em</div>"
 
 #: templates/jobs/jobsource_create.haml:40
 msgid "Back"
@@ -1041,11 +1117,15 @@ msgstr "Voltar"
 #: templates/jobs/jobsource_update.haml:8
 msgid ""
 "\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
+"        Remember for a Twitter job source you are required to get a widget "
+"id from twitter.\n"
 "      "
-msgstr "\nLembre-se de que para adicionar uma proposta de trabalho do Twitter, você precisa criar um widget do twitter"
+msgstr ""
+"\n"
+"Lembre-se de que para adicionar uma proposta de trabalho do Twitter, você "
+"precisa criar um widget do twitter"
 
-#: templates/public/about.haml:16 templates/public/about.haml.py:68
+#: templates/public/about.haml:16 templates/public/about.haml:68
 msgid "ABOUT U-REPORT"
 msgstr "SOBRE O U-REPORT"
 
@@ -1066,19 +1146,28 @@ msgid "Speak out on what's happening in your community"
 msgstr "Fale sobre o que está acontecendo na sua comunidade"
 
 #: templates/public/about.haml:127
+#, fuzzy
+#| msgid ""
+#| "Use Ureport results and information to update and increase citizen's "
+#| "awareness"
 msgid ""
-"Use Ureport results and information to update and increase citizen's "
+"Use U-Report results and information to update and increase citizen's "
 "awareness"
-msgstr "Use os resultados e a informação do U-Report para atualizar e aumentar o conhecimento dos cidadãos."
+msgstr ""
+"Use os resultados e a informação do U-Report para atualizar e aumentar o "
+"conhecimento dos cidadãos."
 
 #: templates/public/about.haml:130
 msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "Participe das campanhas em nível nacional para ajudar a melhor o seu País."
+msgstr ""
+"Participe das campanhas em nível nacional para ajudar a melhor o seu País."
 
 #: templates/public/about.haml:133
 #, python-format
 msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Compartilhe o que está acontecendo ao redor %(country)s com outros U-Reporters"
+msgstr ""
+"Compartilhe o que está acontecendo ao redor %(country)s com outros U-"
+"Reporters"
 
 #: templates/public/about.haml:139
 msgid "CLICK HERE TO JOIN"
@@ -1100,14 +1189,12 @@ msgstr "ASSISTA NO YOUTUBE"
 msgid "MORE POLLS"
 msgstr "MAIS ENQUETES"
 
-#: templates/public/all_polls.haml:12
-#: templates/public/archived_stories.haml:12
+#: templates/public/all_polls.haml:12 templates/public/archived_stories.haml:12
 msgid "FILTER"
 msgstr "FILTRO"
 
-#: templates/public/all_polls.haml:19
-#: templates/public/archived_stories.haml:19 templates/public/stories.haml:69
-#: templates/public/strings_values.haml:5
+#: templates/public/all_polls.haml:19 templates/public/archived_stories.haml:19
+#: templates/public/stories.haml:72 templates/public/strings_values.haml:5
 msgid "All"
 msgstr "Todos"
 
@@ -1134,11 +1221,19 @@ msgstr "Seguir"
 #: templates/public/index.haml:29
 msgid ""
 "\n"
-"                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
+"                  U-Report is a social messaging tool allowing anyone from "
+"any community, anywhere in the world to respond to polls, report issues, "
+"support child rights and work as positive agents of change on behalf of "
+"people in their country.\n"
 "                "
-msgstr "\nU-Report é uma ferramenta de mensagens sociais permitindo que qualquer pessoa de qualquer comunidade, em qualquer lugar do mundo possa responder a enquetes, denunciar problemas, apoiar os direitos da criança e trabalhar como agentes positivos de mudança em nome do povo do seu país."
+msgstr ""
+"\n"
+"U-Report é uma ferramenta de mensagens sociais permitindo que qualquer "
+"pessoa de qualquer comunidade, em qualquer lugar do mundo possa responder a "
+"enquetes, denunciar problemas, apoiar os direitos da criança e trabalhar "
+"como agentes positivos de mudança em nome do povo do seu país."
 
-#: templates/public/index.haml:36 templates/public/index.haml.py:74
+#: templates/public/index.haml:36 templates/public/index.haml:74
 msgid "CURRENT POLL"
 msgstr "ÚLTIMA ENQUETE"
 
@@ -1150,23 +1245,23 @@ msgstr "Veja Todos os Resultados"
 msgid "All U-Report members"
 msgstr "Todos usuários do U-Report"
 
-#: templates/public/index.haml:91
+#: templates/public/index.haml:97
 msgid "RESPONSE RATE"
 msgstr "TAXA DE RESPOSTA"
 
-#: templates/public/index.haml:97
+#: templates/public/index.haml:103
 msgid "Responded out of"
 msgstr "Responderam de"
 
-#: templates/public/index.haml:105
+#: templates/public/index.haml:111
 msgid "RESPONDER'S RATE BY LOCATION"
 msgstr "RESPOSTAS POR ESTADO"
 
-#: templates/public/index.haml:111
+#: templates/public/index.haml:117
 msgid "Most responded"
 msgstr "A maioria respondeu"
 
-#: templates/public/index.haml:143
+#: templates/public/index.haml:149
 #, python-format
 msgid ""
 "\n"
@@ -1174,91 +1269,93 @@ msgid ""
 "                                  "
 msgstr ""
 
-#: templates/public/index.haml:158
+#: templates/public/index.haml:164
 msgid "TRENDING WORDS"
 msgstr "PALAVRAS MAIS USADAS"
 
-#: templates/public/index.haml:168
+#: templates/public/index.haml:174
 msgid "FEATURED RESPONSES"
 msgstr "RESPOSTAS EM DESTAQUE"
 
-#: templates/public/index.haml:191 templates/public/index.haml.py:580
+#: templates/public/index.haml:197 templates/public/index.haml:557
 msgid "View full results"
 msgstr "Veja Todos os Resultados"
 
-#: templates/public/index.haml:211 templates/public/ureporters.haml:16
+#: templates/public/index.haml:217 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
 msgstr "PARTICIPANTES DO U-REPORT NO "
 
-#: templates/public/index.haml:219
+#: templates/public/index.haml:225
 msgid "TOTAL # OF U-REPORTERS"
 msgstr "TOTAL DE # U-REPORTERS"
 
-#: templates/public/index.haml:231
+#: templates/public/index.haml:237
 msgid "4 MOST ACTIVE REGIONS"
 msgstr "4 REGIÕES MAIS ATIVAS"
 
-#: templates/public/index.haml:242 templates/public/index.haml.py:263
+#: templates/public/index.haml:248 templates/public/index.haml:269
 msgid "RATE BY GENDER"
 msgstr "TAXA POR GÊNERO"
 
-#: templates/public/index.haml:251 templates/public/index.haml.py:304
+#: templates/public/index.haml:257 templates/public/index.haml:310
 msgid "RATE BY AGE"
 msgstr "TAXA POR IDADE"
 
-#: templates/public/index.haml:316
+#: templates/public/index.haml:322
 msgid "WHAT U-REPORTERS ARE SAYING"
 msgstr "O QUE U-REPORTERS ESTÃO DIZENDO"
 
-#: templates/public/index.haml:325
+#: templates/public/index.haml:331
 msgid "FEATURED VIDEO"
 msgstr "VÍDEO EM DESTAQUE"
 
-#: templates/public/index.haml:331
+#: templates/public/index.haml:337
 msgid "Watch more videos"
 msgstr ""
 
-#: templates/public/index.haml:342
+#: templates/public/index.haml:348
 msgid "FEATURED REGION"
 msgstr "REGIÃO EM DESTAQUE"
 
-#: templates/public/index.haml:366
+#: templates/public/index.haml:372
 msgid "Check more stories in U-Report app"
 msgstr ""
 
-#: templates/public/index.haml:385 templates/public/join_engage.haml:99
+#: templates/public/index.haml:391 templates/public/join_engage.haml:99
 msgid "View more stories on Facebook"
 msgstr ""
 
-#: templates/public/index.haml:404
+#: templates/public/index.haml:410
 msgid "View more on Instagram"
 msgstr ""
 
-#: templates/public/index.haml:424
+#: templates/public/index.haml:430
 msgid "Read more tweets on Twitter"
 msgstr ""
 
-#: templates/public/index.haml:435
+#: templates/public/index.haml:441
 msgid "NEWS FEED"
 msgstr "NOTÍCIAS"
 
-#: templates/public/index.haml:451 templates/public/index.haml.py:485
-#: templates/public/index.haml:516 templates/public/index.haml.py:594
+#: templates/public/index.haml:456 templates/public/index.haml:489
+#: templates/public/index.haml:571
 msgid "STORY"
 msgstr "HISTÓRIA"
 
-#: templates/public/index.haml:476 templates/public/index.haml.py:503
-#: templates/public/index.haml:534 templates/public/index.haml.py:619
-#: templates/public/stories.haml:36 templates/public/stories.haml.py:117
+#: templates/public/index.haml:477 templates/public/index.haml:511
+#: templates/public/index.haml:596 templates/public/stories.haml:39
+#: templates/public/stories.haml:123
 msgid "Read full story"
 msgstr ""
 
-#: templates/public/index.haml:557
+#: templates/public/index.haml:534
 msgid "Response Rate"
 msgstr "Taxa de Respostas"
 
-#: templates/public/index.haml:760
-msgid "Read This Story"
+#: templates/public/index.haml:737
+#, fuzzy
+#| msgid "Read This Story"
+msgid "Read this story"
 msgstr "Ler esta história"
 
 #: templates/public/jobs.haml:22
@@ -1293,10 +1390,21 @@ msgstr "COMO PARTICIPAR"
 #, python-format
 msgid ""
 "\n"
-"              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+"              * U-Report is a free program sponsored by UNICEF with help of "
+"Network Providers in %(country)s. U-Report will not ask for any payments nor "
+"personal financial information, PLEASE disregard any messages which ask you "
+"for payment either on this number or on the Facebook and Twitter pages. All "
+"U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "            "
-msgstr "\nU-Report é um programa gratuito patrocinado pelo UNICEF, com o apoio das operadoras de telefonia %(country)s. O U-Report nunca vai cobrar pagamento ou pedir informações pessoais financeiras, POR FAVOR desconsidere qualquer mensagem de cobrança tanto no seu número pessoal quanto nas redes sociais Facebook e Twitter. Todos os serviços do U-Report (todas as mensagens em %(shortcode)s) são gratuitos."
+msgstr ""
+"\n"
+"U-Report é um programa gratuito patrocinado pelo UNICEF, com o apoio das "
+"operadoras de telefonia %(country)s. O U-Report nunca vai cobrar pagamento "
+"ou pedir informações pessoais financeiras, POR FAVOR desconsidere qualquer "
+"mensagem de cobrança tanto no seu número pessoal quanto nas redes sociais "
+"Facebook e Twitter. Todos os serviços do U-Report (todas as mensagens em "
+"%(shortcode)s) são gratuitos."
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
@@ -1345,7 +1453,9 @@ msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr "\n%(responded)s responderam de %(polled)s questionadas"
+msgstr ""
+"\n"
+"%(responded)s responderam de %(polled)s questionadas"
 
 #: templates/public/polls.haml:121
 msgid "KEYWORDS"
@@ -1379,15 +1489,15 @@ msgstr "Não há respostas em destaque."
 msgid "U-Reporter in"
 msgstr "U-Reporter em"
 
-#: templates/public/polls.haml:351 templates/public/story_read.haml:126
+#: templates/public/polls.haml:351 templates/public/story_read.haml:129
 msgid "RELATED STORIES"
 msgstr "HISTÓRIAS RELACIONADAS"
 
-#: templates/public/polls.haml:356 templates/public/story_read.haml:131
+#: templates/public/polls.haml:356 templates/public/story_read.haml:134
 msgid "No related stories."
 msgstr "Nenhuma história relacionada"
 
-#: templates/public/polls.haml:391 templates/public/story_read.haml:99
+#: templates/public/polls.haml:391 templates/public/story_read.haml:102
 msgid "FEATURED IMAGES"
 msgstr "IMAGENS EM DESTAQUE"
 
@@ -1399,43 +1509,43 @@ msgstr "Ainda não há imagens em destaque."
 msgid "FEATURED STORY"
 msgstr "HISTÓRIAS EM DESTAQUE"
 
-#: templates/public/stories.haml:27 templates/public/story_read.haml:23
+#: templates/public/stories.haml:30 templates/public/story_read.haml:26
 msgid "BY"
 msgstr "POR"
 
-#: templates/public/stories.haml:56
+#: templates/public/stories.haml:59
 msgid "LATEST STORIES"
 msgstr "ÚLTIMAS HISTÓRIAS"
 
-#: templates/public/stories.haml:61
+#: templates/public/stories.haml:64
 msgid "FILTERED BY"
 msgstr "FILTRADO POR"
 
-#: templates/public/story_read.haml:28
+#: templates/public/story_read.haml:31
 msgid "Scroll to read more"
 msgstr "Saiba mais abaixo"
 
-#: templates/public/story_read.haml:47
+#: templates/public/story_read.haml:50
 msgid "STORY CONTINUES"
 msgstr "A HISTÓRIA CONTINUA"
 
-#: templates/public/story_read.haml:65
+#: templates/public/story_read.haml:68
 msgid "AUDIO"
 msgstr "ÁUDIO"
 
-#: templates/public/story_read.haml:78
+#: templates/public/story_read.haml:81
 msgid "RELATED POLLS"
 msgstr "ENQUETES RELACIONADAS"
 
-#: templates/public/story_read.haml:83
+#: templates/public/story_read.haml:86
 msgid "No related polls."
 msgstr "Não há enquetes relacionadas."
 
-#: templates/public/story_read.haml:104
+#: templates/public/story_read.haml:107
 msgid "No featured images."
 msgstr "Não há imagens em destaque."
 
-#: templates/public/story_read.haml:157
+#: templates/public/story_read.haml:160
 msgid "READ MORE"
 msgstr "LEIA MAIS"
 
@@ -1561,11 +1671,11 @@ msgstr "Rótulo"
 msgid "Key"
 msgstr "Chave"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:833
+#: ureport/contacts/models.py:86 ureport/polls/models.py:870
 msgid "Male"
 msgstr "Masculino"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:833
+#: ureport/contacts/models.py:86 ureport/polls/models.py:870
 msgid "Female"
 msgstr "Feminino"
 
@@ -1605,13 +1715,14 @@ msgstr "Campo do Distrito"
 msgid "Ward Field"
 msgstr ""
 
-#: ureport/contacts/models.py:240 ureport/polls/models.py:1058
+#: ureport/contacts/models.py:240 ureport/polls/models.py:1102
 msgid "Number of items with this counter"
 msgstr "Número de itens com esse contador"
 
 #: ureport/countries/management/commands/add_country_alias.py:55
 msgid "No root user found. Please create a root user"
-msgstr "Nenhum administrador encontrado. Por favor, crie um usuário administrador"
+msgstr ""
+"Nenhum administrador encontrado. Por favor, crie um usuário administrador"
 
 #: ureport/countries/models.py:11
 msgid "The name for our alias"
@@ -1633,21 +1744,26 @@ msgstr "O URL completo para navegar para esta fonte de emprego."
 msgid ""
 "For Twitter, a widget Id is required to embed tweets on the website. Read "
 "carefully the instructions above on how to get the right widget Id"
-msgstr "Para o Twitter, um widget de Id é necessária para incorporar os tweets no site. Leia atentamente as instruções acima sobre como obter o widget Id correto"
+msgstr ""
+"Para o Twitter, um widget de Id é necessária para incorporar os tweets no "
+"site. Leia atentamente as instruções acima sobre como obter o widget Id "
+"correto"
 
 #: ureport/jobs/models.py:30
 msgid "Featured job sources are shown first on the jobs page."
-msgstr "As fontes de emprego selecionadas são mostradas em primeiro lugar na página de emprego."
+msgstr ""
+"As fontes de emprego selecionadas são mostradas em primeiro lugar na página "
+"de emprego."
 
 #: ureport/jobs/models.py:32
 msgid "The organization this job source is for"
 msgstr "A organização desta fonte de emprego é para"
 
-#: ureport/jobs/views.py:17
+#: ureport/jobs/views.py:13
 msgid "Your job source has been added successfully"
 msgstr "A fonte de emprego foi adicionada com sucesso"
 
-#: ureport/jobs/views.py:44
+#: ureport/jobs/views.py:39
 msgid "Your job source has been updated successfully"
 msgstr "A fonte de emprego foi atualizada com sucesso"
 
@@ -1708,100 +1824,100 @@ msgstr "Uma descrição curta e resumida para esse vídeo"
 msgid "The organization this video belongs to"
 msgstr "A organização a qual esse vídeo pertence"
 
-#: ureport/polls/models.py:62
+#: ureport/polls/models.py:63
 msgid "The name of this poll category"
 msgstr "O nome da categoria dessa enquete"
 
-#: ureport/polls/models.py:71
+#: ureport/polls/models.py:72
 msgid "Poll Categories"
 msgstr "Categorias das enquetes"
 
-#: ureport/polls/models.py:100
+#: ureport/polls/models.py:103
 msgid "The Flow this Poll is based on"
 msgstr "O fluxo dessa enquete é baseada em"
 
-#: ureport/polls/models.py:102
+#: ureport/polls/models.py:105
 msgid ""
 "The date to display for this poll. Leave empty to use flow creation date."
 msgstr ""
 
-#: ureport/polls/models.py:106
+#: ureport/polls/models.py:109
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr ""
 
-#: ureport/polls/models.py:108
+#: ureport/polls/models.py:111
 msgid "The base language of the flow to use"
 msgstr ""
 
-#: ureport/polls/models.py:111
+#: ureport/polls/models.py:114
 msgid "The number of polled reporters on this poll"
 msgstr ""
 
-#: ureport/polls/models.py:114
+#: ureport/polls/models.py:117
 msgid "Whether the poll has finished the initial results sync."
 msgstr ""
 
-#: ureport/polls/models.py:117
+#: ureport/polls/models.py:120
 msgid "The title for this Poll"
 msgstr "O título dessa enquete"
 
-#: ureport/polls/models.py:119
+#: ureport/polls/models.py:122
 msgid "The category this Poll belongs to"
 msgstr "A categoria a qual esta enquete pertence"
 
-#: ureport/polls/models.py:121
+#: ureport/polls/models.py:124
 msgid "Whether this poll should be featured on the homepage"
 msgstr "Se essa enquete deve ser destaque na página inicial"
 
-#: ureport/polls/models.py:123
+#: ureport/polls/models.py:126
 msgid "The splash category image to display for the poll (optional)"
 msgstr "A imagem da categoria inicial para exibir na enquete (opcional)"
 
-#: ureport/polls/models.py:125
+#: ureport/polls/models.py:128
 msgid "The organization this poll is part of"
 msgstr "A organização desta esquete é parte de"
 
-#: ureport/polls/models.py:607
+#: ureport/polls/models.py:642
 msgid "The poll to associate to"
 msgstr "Associar a enquete a"
 
-#: ureport/polls/models.py:621
+#: ureport/polls/models.py:656
 msgid "The poll for this response"
 msgstr "A enquete para esta resposta"
 
-#: ureport/polls/models.py:624
+#: ureport/polls/models.py:659
 msgid "The location for this response"
 msgstr "A localização para esta resposta"
 
-#: ureport/polls/models.py:627
+#: ureport/polls/models.py:662
 msgid "The name of the sender of the message"
 msgstr "O nome do remetente da mensagem"
 
-#: ureport/polls/models.py:630
+#: ureport/polls/models.py:665
 msgid "The featured response message"
 msgstr "A mensagem de resposta em destaque"
 
-#: ureport/polls/models.py:646
+#: ureport/polls/models.py:681
 msgid "The poll this question is part of"
 msgstr "A enquete na qual esta pergunta faz parte"
 
-#: ureport/polls/models.py:648
+#: ureport/polls/models.py:683
 msgid "The title of this question"
 msgstr "O título desta pergunta"
 
-#: ureport/polls/models.py:649
+#: ureport/polls/models.py:684
 msgid "The RuleSet this question is based on"
 msgstr "As regras dessa pergunta se baseiam em"
 
-#: ureport/polls/models.py:654
+#: ureport/polls/models.py:689
 msgid "The label of the ruleset on RapidPro"
 msgstr ""
 
-#: ureport/polls/models.py:657
+#: ureport/polls/models.py:692
 msgid "The priority number for this question on the poll"
 msgstr ""
 
-#: ureport/polls/models.py:926
+#: ureport/polls/models.py:965
 msgid "The Rule this response category is based on"
 msgstr ""
 
@@ -1835,15 +1951,19 @@ msgstr "Imagens da Enquete"
 
 #: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr "Agora, insira quaisquer respostas que você gostaria de destacar. (se houver alguma)"
+msgstr ""
+"Agora, insira quaisquer respostas que você gostaria de destacar. (se houver "
+"alguma)"
 
 #: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr "A imagem para mostrar na página de enquetes e nas visualizações. (Opcional)"
+msgstr ""
+"A imagem para mostrar na página de enquetes e nas visualizações. (Opcional)"
 
 #: ureport/polls/views.py:172
 msgid "Image to display on poll page and in previews (optional)"
-msgstr "A imagem para mostrar na página de enquetes e nas visualizações. (Opcional)"
+msgstr ""
+"A imagem para mostrar na página de enquetes e nas visualizações. (Opcional)"
 
 #: ureport/polls/views.py:196
 msgid "Featured Poll Responses"
@@ -1886,7 +2006,9 @@ msgstr "Questões da enquete"
 
 #: ureport/polls/views.py:252
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr "Agora, defina as imagens que você deseja mostrar na sua página de enquete. (Se houver alguma)"
+msgstr ""
+"Agora, defina as imagens que você deseja mostrar na sua página de enquete. "
+"(Se houver alguma)"
 
 #: ureport/polls/views.py:281
 msgid "Include"
@@ -1926,155 +2048,163 @@ msgstr "A pergunta realizada ao seu público alvo será mostrada publicamente"
 msgid "Scheduled a pull refresh for poll #%d on org #%d"
 msgstr ""
 
-#: ureport/public/views.py:298
+#: ureport/public/views.py:310
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-#: ureport/settings_common.py:186
+#: ureport/settings_common.py:132
 msgid "Whether this org should be show on the landing page"
 msgstr "Se esta organização deve aparecer na página de destino"
 
-#: ureport/settings_common.py:187
+#: ureport/settings_common.py:133
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr "O link que os utilizadores usarão para contactar o U-Report a nível local"
+msgstr ""
+"O link que os utilizadores usarão para contactar o U-Report a nível local"
 
-#: ureport/settings_common.py:188
+#: ureport/settings_common.py:134
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "O texto usado para direcionar os visitantes a se juntar ao UReport"
 
-#: ureport/settings_common.py:189
+#: ureport/settings_common.py:135
 msgid "The color used to draw the text on the join bar"
 msgstr "A cor usada no texto da barra de registro"
 
-#: ureport/settings_common.py:190
+#: ureport/settings_common.py:136
 msgid "The color used to draw the background on the join bar"
 msgstr "A cor usada no fundo na barra de registro"
 
-#: ureport/settings_common.py:191
+#: ureport/settings_common.py:137
 msgid "The primary color for styling for this organization"
 msgstr "A cor primária para definir o estilo desta organização"
 
-#: ureport/settings_common.py:192
+#: ureport/settings_common.py:138
 msgid "The secondary color for styling for this organization"
 msgstr "A cor secundária para definir o estilo desta organização"
 
-#: ureport/settings_common.py:193
+#: ureport/settings_common.py:139
 msgid "The background color for the site"
 msgstr "A cor de fundo para o site"
 
-#: ureport/settings_common.py:194
+#: ureport/settings_common.py:140
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Até 6 cores para definir o estilo dos gráficos, use vírgula entre as cores."
+msgstr ""
+"Até 6 cores para definir o estilo dos gráficos, use vírgula entre as cores."
 
-#: ureport/settings_common.py:195
+#: ureport/settings_common.py:141
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "O Rastreamento ID Google Analytics para esta organização"
 
-#: ureport/settings_common.py:196
+#: ureport/settings_common.py:142
 msgid "The URL to the Youtube channel for this organization"
 msgstr "O URL do canal do Youtube para esta organização"
 
-#: ureport/settings_common.py:197
+#: ureport/settings_common.py:143
 msgid "The URL to the Facebook page for this organization"
 msgstr "O URL da página do Facebook para esta organização"
 
-#: ureport/settings_common.py:198
+#: ureport/settings_common.py:144
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr ""
 
-#: ureport/settings_common.py:199
+#: ureport/settings_common.py:145
 msgid ""
 "The integer id to the Facebook app for this organization's chat app "
 "(optional)"
 msgstr ""
 
-#: ureport/settings_common.py:200
+#: ureport/settings_common.py:146
 msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr ""
 
-#: ureport/settings_common.py:201
+#: ureport/settings_common.py:147
 msgid "The Instagram username for this organization"
 msgstr "O nome de usuário do Instagram para esta organização"
 
-#: ureport/settings_common.py:202
+#: ureport/settings_common.py:148
 msgid "The Instagram widget id from lightwidget.com"
 msgstr ""
 
-#: ureport/settings_common.py:203
+#: ureport/settings_common.py:149
 msgid "The Twitter handle for this organization"
 msgstr "O Twitter handle para esta organização"
 
-#: ureport/settings_common.py:204
+#: ureport/settings_common.py:150
 msgid "The Twitter widget used for searching"
 msgstr "O Widget do Twitter usado para pesquisar"
 
-#: ureport/settings_common.py:205
+#: ureport/settings_common.py:151
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "O nome do txbhe Grupo de Contato que contém os registros de respostas"
 
-#: ureport/settings_common.py:206
+#: ureport/settings_common.py:152
 msgid ""
 "The label of the Contact Field that contains the birth date of reporters"
-msgstr "O título do campo de contato que contém a data de nascimento dos repórteres"
+msgstr ""
+"O título do campo de contato que contém a data de nascimento dos repórteres"
 
-#: ureport/settings_common.py:207
+#: ureport/settings_common.py:153
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "O título do campo de contato que contém o gênero dos repórteres"
 
-#: ureport/settings_common.py:208
+#: ureport/settings_common.py:154
 msgid ""
 "The label of the Contact Field that contains the occupation of reporters"
 msgstr "O título do campo de contato que contém a ocupação dos repórteres"
 
-#: ureport/settings_common.py:209
+#: ureport/settings_common.py:155
 msgid ""
 "The label of the Contact Field that contains the registration date of "
 "reporters"
-msgstr "O título do campo de contato que contém a data de registro dos repórters"
+msgstr ""
+"O título do campo de contato que contém a data de registro dos repórters"
 
-#: ureport/settings_common.py:210
+#: ureport/settings_common.py:156
 msgid "The label of the Contact Field that contains the State of reporters"
 msgstr "O título do campo de contato que contém o Estado dos repórteres"
 
-#: ureport/settings_common.py:211
+#: ureport/settings_common.py:157
 msgid "The label of the Contact Field that contains the District of reporters"
 msgstr "O título do campo de contato que contém o Distrito dos repórteres"
 
-#: ureport/settings_common.py:212
+#: ureport/settings_common.py:158
 msgid "The label of the Contact Field that contains the Ward of reporters"
 msgstr ""
 
-#: ureport/settings_common.py:213
+#: ureport/settings_common.py:159
 msgid "The label assigned to U-Reporters that are Male."
 msgstr "O título atribuído aos U-Reporters que são do sexo masculino."
 
-#: ureport/settings_common.py:214
+#: ureport/settings_common.py:160
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "O título atribuído às U-Reporters que são do sexo feminino."
 
-#: ureport/settings_common.py:215
+#: ureport/settings_common.py:161
 msgid "If there are jobs to be shown on the public site"
 msgstr "Se existirem empregos a serem mostrados no site público"
 
-#: ureport/settings_common.py:216
+#: ureport/settings_common.py:162
 msgid ""
 "If this org if for global data. e.g: It shows a world map instead of a "
 "country map."
-msgstr "Se esta organização é para dados globais. Por exemplo: Ela mostra um mapa do mundo em vez de um mapa do país."
+msgstr ""
+"Se esta organização é para dados globais. Por exemplo: Ela mostra um mapa do "
+"mundo em vez de um mapa do país."
 
-#: ureport/settings_common.py:217
+#: ureport/settings_common.py:163
 msgid ""
 "The alpha-3 ISO code of the organization so that it appears the stories "
 "widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
 "Global)."
 msgstr ""
 
-#: ureport/settings_common.py:218
+#: ureport/settings_common.py:164
 msgid ""
 "If you need to include some custom HTML codes in you org pages, like custom "
 "analytics code snippets"
-msgstr "Se você precisar incluir alguns códigos HTML personalizados nas suas páginas de organizações, como trechos de código analytics"
+msgstr ""
+"Se você precisar incluir alguns códigos HTML personalizados nas suas páginas "
+"de organizações, como trechos de código analytics"
 
 #: ureport/translation.py:14
 msgid "Something to trigger localizations"

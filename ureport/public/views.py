@@ -39,10 +39,6 @@ class IndexView(SmartTemplateView):
 
         context['stories'] = Story.objects.filter(org=org, is_active=True, featured=True).order_by('-created_on')
 
-        other_stories = Story.objects.filter(org=org, is_active=True).exclude(pk__in=context['stories'])
-        other_stories = other_stories.order_by('-created_on')
-        context['other_stories'] = other_stories
-
         videos = Video.objects.filter(is_active=True, org=org).order_by('-created_on')
         context['videos'] = videos
 
@@ -359,13 +355,13 @@ class CountriesView(SmartTemplateView):
         country = None
         if text_length == 2:
             try:
-                country = pycountry.countries.get(alpha2=text.upper())
+                country = pycountry.countries.get(alpha_2=text.upper())
             except KeyError:
                 pass
 
         elif text_length == 3:
             try:
-                country = pycountry.countries.get(alpha3=text.upper())
+                country = pycountry.countries.get(alpha_3=text.upper())
             except KeyError:
                 pass
 
@@ -384,7 +380,7 @@ class CountriesView(SmartTemplateView):
         if country and country_code:
             json_dict = dict(exists='valid', country_code=country_code)
         elif country:
-            json_dict = dict(exists='valid', country_code=country.alpha2)
+            json_dict = dict(exists='valid', country_code=country.alpha_2)
         else:
             json_dict['text'] = whole_text
 

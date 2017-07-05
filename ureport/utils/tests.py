@@ -180,7 +180,7 @@ class UtilsTest(UreportTest):
         self.assertEqual(input_segment, dict(location='District'))
 
         self.org.set_config("is_global", True)
-        expected = dict(contact_field="Province", values=[elt.alpha2 for elt in pycountry.countries.objects])
+        expected = dict(contact_field="Province", values=[elt.alpha_2 for elt in list(pycountry.countries)])
 
         global_segment = self.org.substitute_segment(dict(location='State'))
         self.assertEqual(global_segment, json.dumps(expected))
