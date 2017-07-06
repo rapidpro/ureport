@@ -1,3 +1,8 @@
+v1.0.349
+----------
+  * Mark sync poll result paused before the lock times out
+  * Increase lock timeout for poll pull results
+
 v1.0.348
 ----------
  * Update smartmin
