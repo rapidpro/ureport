@@ -61,7 +61,7 @@ LANGUAGE_CODE = 'en'
 # Available languages for translation
 LANGUAGES = (('en', "English"), ('fr', "French"), ('es', "Spanish"), ('ar', "Arabic"), ('pt', "Portuguese"),
              ('pt-br', "Brazilian Portuguese"), ('uk', "Ukrainian"), ('my', "Burmese"), ('id', "Indonesian"),
-             ('it', "Italian"))
+             ('it', "Italian"), ('ro', "Romanian"))
 DEFAULT_LANGUAGE = "en"
 RTL_LANGUAGES = ['ar']
 
