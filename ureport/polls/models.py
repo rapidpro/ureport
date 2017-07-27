@@ -98,7 +98,7 @@ class Poll(SmartModel):
 
     POLL_MOST_RESPONDED_REGIONS_CACHE_KEY = 'most-responded-regions:%s'
 
-    POLL_SYNC_LOCK_TIMEOUT = 60 * 30
+    POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
 
     flow_uuid = models.CharField(max_length=36, help_text=_("The Flow this Poll is based on"))
 
