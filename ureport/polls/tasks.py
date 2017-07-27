@@ -32,7 +32,7 @@ def backfill_poll_results(org, since, until):
     return results_log
 
 
-@org_task('results-pull-main-poll', 60 * 30)
+@org_task('results-pull-main-poll', 60 * 60 * 2)
 def pull_results_main_poll(org, since, until):
     from .models import Poll
 

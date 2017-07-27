@@ -341,6 +341,7 @@ class RapidProBackend(BaseBackend):
             print "Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk)
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
+                lock_expiration = time.time() + 0.8 * Poll.POLL_SYNC_LOCK_TIMEOUT
                 client = self._get_client(org, 2)
 
                 questions_uuids = poll.get_question_uuids()
@@ -402,7 +403,7 @@ class RapidProBackend(BaseBackend):
                     fetch_start = time.time()
                     print "=" * 40
 
-                    if stats_dict['num_synced'] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS:
+                    if stats_dict['num_synced'] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS or time.time() > lock_expiration:
                         poll.rebuild_poll_results_counts()
 
                         cursor = fetches.get_cursor()

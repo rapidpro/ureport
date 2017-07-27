@@ -733,7 +733,7 @@ class RapidProBackendTest(UreportTest):
                           num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 0, 0, 1))
         mock_get_runs.assert_called_with(flow='flow-uuid', after=None, before=datetime_to_json_date(now))
         mock_redis_lock.assert_called_once_with(Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid),
-                                                timeout=1800)
+                                                timeout=7200)
 
         poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
         self.assertEqual(poll_result.state, 'R-LAGOS')
