@@ -1,3 +1,8 @@
+v1.0.350
+----------
+ * Add New Zealand
+ * Add romanian language
+
 v1.0.349
 ----------
   * Mark sync poll result paused before the lock times out
