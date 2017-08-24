@@ -354,6 +354,9 @@
         $(this).addClass('active');
         $(this).children('a').removeClass('primary-color');
         $(this).children('a').addClass('primary-bg-color');
+
+        var currentId = $(this).context['hash'];
+        $(currentId).find('svg').css('height', '480px');
       });
 
       $(".poll-question-tab").on('shown.bs.tab', function(e) {
@@ -370,7 +373,7 @@
       $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
         $(".poll-map").each(function(){
           var question = $(this).attr("data-question");
-          map = window.initMap('map-' + question, boundaries, question, '{{ org|config:"district_label"}}', '{{ org|config:"ward_label"}}');
+          var map = window.initMap('map-' + question, boundaries, question, '{{ org|config:"district_label"}}', '{{ org|config:"ward_label"}}');
 
           $(this).data('map', map);
         });
