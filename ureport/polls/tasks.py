@@ -101,7 +101,7 @@ def pull_results_recent_other_polls(org, since, until):
     from .models import Poll
 
     results_log = dict()
-    recent_other_polls_ids = Poll.get_recent_other_polls(org).order_by('flow_uuid')
+    recent_other_polls_ids = Poll.get_recent_polls(org).order_by('flow_uuid')
     recent_other_polls_ids = recent_other_polls_ids.distinct('flow_uuid').values_list('id', flat=True)
 
     recent_other_polls = Poll.objects.filter(id__in=recent_other_polls_ids).order_by('-created_on')

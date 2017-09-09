@@ -491,7 +491,7 @@ class PollTest(UreportTest):
         self.assertEqual(list(Poll.get_other_polls(self.uganda)), [polls[3], polls[2], polls[1], polls[0]])
 
     @patch('django.core.cache.cache.get')
-    def test_get_recent_other_polls(self, mock_cache_get):
+    def test_get_recent_polls(self, mock_cache_get):
         mock_cache_get.return_value = None
 
         polls = []
@@ -503,16 +503,16 @@ class PollTest(UreportTest):
 
             polls.append(poll)
 
-        self.assertTrue(Poll.get_recent_other_polls(self.uganda))
-        self.assertEqual(list(Poll.get_recent_other_polls(self.uganda)), [polls[3], polls[2], polls[1], polls[0]])
+        self.assertTrue(Poll.get_recent_polls(self.uganda))
+        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls)))
 
         now = timezone.now()
         a_month_ago = now - timedelta(days=30)
 
         Poll.objects.filter(pk__in=[polls[0].pk, polls[1].pk]).update(created_on=a_month_ago)
 
-        self.assertTrue(Poll.get_recent_other_polls(self.uganda))
-        self.assertEqual(list(Poll.get_recent_other_polls(self.uganda)), [polls[3], polls[2]])
+        self.assertTrue(Poll.get_recent_polls(self.uganda))
+        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[2:])))
 
     def test_get_flow(self):
         with patch('dash.orgs.models.Org.get_flows') as mock:
