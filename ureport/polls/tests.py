@@ -1920,7 +1920,7 @@ class PollsTasksTest(UreportTest):
         mock_pull_results.assert_called_once()
 
     @patch('ureport.tests.TestBackend.pull_results')
-    @patch('ureport.polls.models.Poll.get_recent_other_polls')
+    @patch('ureport.polls.models.Poll.get_recent_polls')
     def test_pull_results_other_polls(self, mock_get_recent_other_polls, mock_pull_results):
         mock_get_recent_other_polls.return_value = self.polls_query
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
