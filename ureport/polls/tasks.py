@@ -96,16 +96,16 @@ def pull_results_other_polls(org, since, until):
     return results_log
 
 
-@org_task('results-pull-recent-other-polls', 60 * 60 * 6)
-def pull_results_recent_other_polls(org, since, until):
+@org_task('results-pull-recent-polls', 60 * 60 * 6)
+def pull_results_recent_polls(org, since, until):
     from .models import Poll
 
     results_log = dict()
-    recent_other_polls_ids = Poll.get_recent_other_polls(org).order_by('flow_uuid')
-    recent_other_polls_ids = recent_other_polls_ids.distinct('flow_uuid').values_list('id', flat=True)
+    recent_polls_ids = Poll.get_recent_polls(org).order_by('flow_uuid')
+    recent_polls_ids = recent_polls_ids.distinct('flow_uuid').values_list('id', flat=True)
 
-    recent_other_polls = Poll.objects.filter(id__in=recent_other_polls_ids).order_by('-created_on')
-    for poll in recent_other_polls:
+    recent_polls = Poll.objects.filter(id__in=recent_polls_ids).order_by('-created_on')
+    for poll in recent_polls:
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = Poll.pull_results(poll.id)
         results_log['flow-%s' % poll.flow_uuid] = {"num_val_created": num_val_created,
