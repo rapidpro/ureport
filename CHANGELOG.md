@@ -1,3 +1,8 @@
+v1.0.351
+----------
+ * Update to use better names
+ * Make all recent polls sync every hour
+
 v1.0.350
 ----------
  * Add New Zealand
