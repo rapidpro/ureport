@@ -1,3 +1,7 @@
+v1.0.352
+----------
+ * Update the rapidpro client to support flow minor versions
+
 v1.0.351
 ----------
  * Update to use better names
