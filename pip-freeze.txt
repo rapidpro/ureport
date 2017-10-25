@@ -57,13 +57,13 @@ redis==2.10.5
 regex==2017.6.7
 requests==2.18.4
 rjsmin==1.0.12
-simplejson==3.11.0
+simplejson==3.11.1
 six==1.11.0
-smartmin==1.11.2
+smartmin==1.11.3
 smmap2==2.0.3
 sorl-thumbnail==12.3
 sqlparse==0.2.3
--e git+https://github.com/Alir3z4/python-stop-words.git@2c49f7236993d3d9ace3bb0a15dfc40b55cdb25f#egg=stop_words
+-e git+https://github.com/Alir3z4/python-stop-words.git#egg=stop_words
 uritemplate==3.0.0
 urllib3==1.22
 vine==1.1.3
