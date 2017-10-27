@@ -9,19 +9,18 @@ from mock import patch
 import pycountry
 import pytz
 import redis
-from temba_client.v1.types import Group
 from temba_client.v2 import Flow
 
 from ureport.assets.models import FLAG, Image
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
-from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, \
-    CACHE_ORG_FLOWS_KEY
-from ureport.tests import UreportTest, MockTembaClient
-from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
-    get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
-    get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
-    fetch_flows, update_poll_flow_data
+from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
+from ureport.polls.models import CACHE_ORG_FLOWS_KEY, PollQuestion
+from ureport.tests import UreportTest
+from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count
+from ureport.utils import get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats
+from ureport.utils import get_reporters_count, get_occupation_stats, get_regions_stats, get_org_contacts_counts
+from ureport.utils import ORG_CONTACT_COUNT_KEY, get_flows, fetch_flows, update_poll_flow_data
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, GLOBAL_COUNT_CACHE_KEY
 
@@ -460,23 +459,38 @@ class UtilsTest(UreportTest):
 
     def test_update_poll_flow_data(self):
         poll = Poll.objects.filter(pk=self.poll.pk).first()
+        PollQuestion.objects.create(poll=poll,
+                                    title='question poll 1',
+                                    ruleset_uuid='ruleset-uuid-1',
+                                    created_by=self.admin,
+                                    modified_by=self.admin)
+        poll2 = self.create_poll(self.org, "Poll 2", "uuid-1", self.education, self.admin)
+
         self.assertFalse(poll.flow_archived)
         self.assertEqual(poll.runs_count, 0)
+        self.assertTrue(poll.is_active)
+        self.assertTrue(poll2.is_active)
 
         with patch("ureport.utils.get_flows") as mock_get_flows:
             mock_get_flows.return_value = dict()
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
+            poll2 = Poll.objects.filter(pk=poll2.pk).first()
             self.assertFalse(poll.flow_archived)
             self.assertEqual(poll.runs_count, 0)
+            self.assertTrue(poll.is_active)
+            self.assertTrue(poll2.is_active)
 
             mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True}}
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
+            poll2 = Poll.objects.filter(pk=poll2.pk).first()
             self.assertTrue(poll.flow_archived)
             self.assertEqual(poll.runs_count, 0)
+            self.assertTrue(poll.is_active)
+            self.assertFalse(poll2.is_active)
 
             mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True, 'runs': 0}}
 
