@@ -563,7 +563,7 @@ class UtilsTest(UreportTest):
                         self.assertEqual(old_site_values,
                                          [{'time': 500, 'results': dict(size=300)}] * settings_sites_count)
 
-                        mock_get.assert_called_with('http://www.zambiaureport.org/count.txt/')
+                        mock_get.assert_called_with('https://www.zambiaureport.com/count.txt/')
 
                         cache_set_mock.assert_called_with('org:zambia:reporters:old-site',
                                                        {'time': 500, 'results': dict(size=300)},
