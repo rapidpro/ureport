@@ -278,6 +278,10 @@ def update_poll_flow_data(org):
                 if runs_count > 0 and runs_count != poll.runs_count:
                     updated_fields['runs_count'] = runs_count
 
+                # make sure polls without questions are hidden to public
+                if not poll.get_questions().exists():
+                    updated_fields['is_active'] = False
+
                 if updated_fields:
                     Poll.objects.filter(pk=poll.pk).update(**updated_fields)
 
