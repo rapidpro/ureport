@@ -600,10 +600,10 @@ PREVIOUS_ORG_SITES = [
     ),
     dict(
         name="Zambia",
-        host="http://www.zambiaureport.org/home/",
+        host="https://www.zambiaureport.com/home/",
         flag="flag_zm.png",
         is_static=True,
-        count_link='http://www.zambiaureport.org/count.txt/',
+        count_link='https://www.zambiaureport.com/count.txt/',
     ),
 ]
 
