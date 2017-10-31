@@ -2,6 +2,7 @@ import json
 
 import six
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
+from datetime import timedelta
 from django import forms
 from django.urls import reverse
 from dash.categories.models import Category, CategoryImage
@@ -129,6 +130,15 @@ class PollCRUDL(SmartCRUDL):
         def pre_save(self, obj):
             obj = super(PollCRUDL.Create, self).pre_save(obj)
             obj.org = self.request.org
+
+            now = timezone.now()
+            five_minutes_ago = now - timedelta(minutes=5)
+
+            same_poll = Poll.objects.filter(org=obj.org, flow_uuid=obj.flow_uuid,
+                                            created_on__gte=five_minutes_ago).first()
+            if same_poll:
+                obj = same_poll
+
             flow = obj.get_flow()
 
             date = flow.get('created_on', None)
