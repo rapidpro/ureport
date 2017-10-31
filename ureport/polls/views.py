@@ -134,10 +134,10 @@ class PollCRUDL(SmartCRUDL):
             now = timezone.now()
             five_minutes_ago = now - timedelta(minutes=5)
 
-            same_poll = Poll.objects.filter(org=obj.org, flow_uuid=obj.flow_uuid,
-                                            created_on__gte=five_minutes_ago).first()
-            if same_poll:
-                obj = same_poll
+            similar_poll = Poll.objects.filter(org=obj.org, flow_uuid=obj.flow_uuid, is_active=True,
+                                               created_on__gte=five_minutes_ago).first()
+            if similar_poll:
+                obj = similar_poll
 
             flow = obj.get_flow()
 
