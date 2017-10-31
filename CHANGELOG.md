@@ -1,3 +1,9 @@
+v1.0.353
+----------
+ * Filter by is_active too to consider similar poll
+ * Limit the creation of polls to 1 per flow in 5 minutes
+ * Fix Zambia count link
+
 v1.0.352
 ----------
  * Update the rapidpro client to support flow minor versions
