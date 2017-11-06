@@ -1,3 +1,7 @@
+v1.0.354
+----------
+ * Update message on homepage
+
 v1.0.353
 ----------
  * Filter by is_active too to consider similar poll
