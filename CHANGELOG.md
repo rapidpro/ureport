@@ -1,3 +1,9 @@
+v1.0.355
+----------
+ * Fix height of map to prevent overflow
+ * Update Spanish
+ * Add Vietnamese
+
 v1.0.354
 ----------
  * Update message on homepage
