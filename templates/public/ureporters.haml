@@ -143,6 +143,7 @@
           });
 
           window.initMap('ureport-location-map-id', boundaries, ajaxUrl,  '{{ org|config:"district_label"}}', colorsList, '{{ org|config:"ward_label"}}', '{{reporters|intcomma}}');
+          $(this).find('svg').css('height', '480px');
         });
       });
     });
