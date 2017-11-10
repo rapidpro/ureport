@@ -25,7 +25,7 @@
   <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
   %link{ rel:"icon", type:"image/x-icon", href:"{{ STATIC_URL }}img/favicon.png"}
 
-  - if org and org|config:"has_exclude_fonts"
+  - if org and not org|config:"has_exclude_fonts"
     :css
       @font-face {
         font-family: MontserratBold;
