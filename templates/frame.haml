@@ -25,21 +25,22 @@
   <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
   %link{ rel:"icon", type:"image/x-icon", href:"{{ STATIC_URL }}img/favicon.png"}
 
-  :css
-    @font-face {
-      font-family: MontserratBold;
-      src: url('{{ STATIC_URL }}fonts/Montserrat-Bold.ttf');
-    }
+  - if org and org|config:"exclude_fonts"
+    :css
+      @font-face {
+        font-family: MontserratBold;
+        src: url('{{ STATIC_URL }}fonts/Montserrat-Bold.ttf');
+      }
 
-    @font-face {
-      font-family: RobotoSlab;
-      src: url('{{ STATIC_URL }}fonts/RobotoSlab-Regular.ttf');
-    }
+      @font-face {
+        font-family: RobotoSlab;
+        src: url('{{ STATIC_URL }}fonts/RobotoSlab-Regular.ttf');
+      }
 
-    @font-face {
-      font-family: DroidSerif;
-      src: url('{{ STATIC_URL }}fonts/DroidSerif.ttf');
-    }
+      @font-face {
+        font-family: DroidSerif;
+        src: url('{{ STATIC_URL }}fonts/DroidSerif.ttf');
+      }
 
 
   -block styles
