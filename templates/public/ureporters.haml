@@ -437,7 +437,7 @@
                     overflow: "none",
                     formatter: function() {
                       if (this.y > 0) {
-                      return '<div style="font-family: UreportHeadlineFont;text-align: center; width: 80px; line-height: 100%; font-size: 24px;color:{{ org|config:"primary_color"}};">'+ this.y + '%</div><div style="text-align:center; width: 80px; line-height: 120%; font-size: 14px; font-family:UreportTextFont; white-space: normal;">' + this.x + '</div><div style="height: 35px;width: 2px;margin-left: auto;margin-right: auto; border-left: 1px solid; border-color:{{ org|config:"primary_color"}};"></div>'
+                      return '<div style="font-family: UreportHeadlineFont;text-align: center; width: 80px; line-height: 100%; font-size: 24px;color:{{ org|config:"primary_color"}};">'+ this.y + '%</div><div style="text-align:center; width: 80px; line-height: 120%; font-size: 14px; font-family:UreportSmallTextFont; white-space: normal;">' + this.x + '</div><div style="height: 35px;width: 2px;margin-left: auto;margin-right: auto; border-left: 1px solid; border-color:{{ org|config:"primary_color"}};"></div>'
 
                       }
                       else return '';
