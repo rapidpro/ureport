@@ -1,3 +1,8 @@
+v1.0.356
+----------
+ * Fix small text fonts
+ * Allow configuring of custom fonts
+
 v1.0.355
 ----------
  * Fix height of map to prevent overflow
