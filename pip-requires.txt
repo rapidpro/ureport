@@ -31,3 +31,4 @@ regex
 rapidpro-python
 feedparser
 Markdown
+iso8601
