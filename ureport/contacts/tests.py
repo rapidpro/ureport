@@ -119,7 +119,7 @@ class ContactTest(UreportTest):
         temba_contact = TembaContact.create(uuid='C-007', name="Jan", urns=['tel:123'],
                                             groups=['G-001', 'G-007'],
                                             fields={'registration_date': '2014-01-02T03:04:05.000000Z',
-                                                    'state': 'Kigali', 'lga': 'Oyo', 'occupation': 'Student',
+                                                    'state': 'Rwanda > Kigali', 'lga': 'Rwanda > Kigali > Oyo', 'occupation': 'Student',
                                                     'born': '1990', 'gender': 'Male'},
                                             language='eng')
 
@@ -134,9 +134,10 @@ class ContactTest(UreportTest):
 
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=['G-001', 'G-007'],
-                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
-                                                    'lga': 'Oyo', 'ward': 'Ikeja', 'occupation': 'Student', 'born': '1990',
-                                                    'gender': 'Male'},
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z',
+                                                    'state': 'Nigeria > Lagos', 'lga': 'Nigeria > Lagos > Oyo',
+                                                    'ward': 'Nigeria > Lagos > Oyo > Ikeja', 'occupation': 'Student',
+                                                    'born': '1990', 'gender': 'Male'},
                                             language='eng')
 
         kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
@@ -168,16 +169,17 @@ class ContactTest(UreportTest):
 
         temba_contact = TembaContact.create(uuid='C-0011', name="Jan", urns=['tel:123'],
                                             groups=['G-001', 'G-007'],
-                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
-                                                    'lga': '', 'ward': 'Ikeja', 'occupation': 'Student', 'born': '1990',
-                                                    'gender': 'Male'},
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z',
+                                                    'state':'Nigeria > Lagos',
+                                                    'lga': '', 'ward': 'Nigeria > Lagos > Oyo > Ikeja',
+                                                    'occupation': 'Student', 'born': '1990', 'gender': 'Male'},
                                             language='eng')
 
         kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
-        # invalid parent boundary (district) will yield empty ward
+        # invalid parent boundary (district) will be ignored if we have a valid ward
         self.assertEqual(kwargs, dict(uuid='C-0011', org=self.nigeria, gender='M', born=1990, occupation='Student',
                                       registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='R-LAGOS',
-                                      district='', ward=''))
+                                      district='R-OYO', ward='R-IKEJA'))
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
         Contact.objects.create(uuid='C-007', org=self.nigeria, gender='M', born=1990, occupation='Student',

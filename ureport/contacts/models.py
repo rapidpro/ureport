@@ -141,28 +141,41 @@ class Contact(models.Model):
                     state = state_name
 
             else:
-                state_name = temba_contact.fields.get(cls.find_contact_field_key(org, state_field), None)
-                state_boundary = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL,
-                                                         name__iexact=state_name).first()
-                if state_boundary:
-                    state = state_boundary.osm_id
+                state_path = temba_contact.fields.get(cls.find_contact_field_key(org, state_field), None)
+                if state_path:
+                    state_boundary_names = state_path.split(' > ')
+                    state_boundary = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL,
+                                                             name__iexact=state_boundary_names[-1],
+                                                             parent__name__iexact=state_boundary_names[-2]).first()
+                    if state_boundary:
+                        state = state_boundary.osm_id
 
-                district_field = org.get_config('district_label')
-                if district_field:
-                    district_name = temba_contact.fields.get(cls.find_contact_field_key(org, district_field), None)
-                    district_boundary = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL,
-                                                                name__iexact=district_name,
-                                                                parent=state_boundary).first()
-                    if district_boundary:
-                        district = district_boundary.osm_id
+        district_field = org.get_config('district_label')
+        if district_field:
+            district_path = temba_contact.fields.get(cls.find_contact_field_key(org, district_field), None)
+            if district_path:
+                district_boundary_names = district_path.split(' > ')
 
-                ward_field = org.get_config('ward_label')
-                if ward_field:
-                    ward_name = temba_contact.fields.get(cls.find_contact_field_key(org, ward_field), None)
-                    ward_boundary = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, name__iexact=ward_name,
-                                                            parent=district_boundary).first()
-                    if ward_boundary:
-                        ward = ward_boundary.osm_id
+                district_boundary = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL,
+                                                            name__iexact=district_boundary_names[-1],
+                                                            parent__name__iexact=district_boundary_names[-2]).first()
+                if district_boundary:
+                    district = district_boundary.osm_id
+                    state = district_boundary.parent.osm_id
+
+        ward_field = org.get_config('ward_label')
+        if ward_field:
+            ward_path = temba_contact.fields.get(cls.find_contact_field_key(org, ward_field), None)
+            if ward_path:
+                ward_boundary_names = ward_path.split(' > ')
+                ward_boundary = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL,
+                                                        name__iexact=ward_boundary_names[-1],
+                                                        parent__name__iexact=ward_boundary_names[-2],
+                                                        parent__parent__name__iexact=ward_boundary_names[-3]).first()
+                if ward_boundary:
+                    ward = ward_boundary.osm_id
+                    district = ward_boundary.parent.osm_id
+                    state = ward_boundary.parent.parent.osm_id
 
         registered_on = None
         registration_field = org.get_config('registration_label')

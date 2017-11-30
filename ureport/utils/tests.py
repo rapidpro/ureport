@@ -47,14 +47,16 @@ class UtilsTest(UreportTest):
     def test_datetime_to_json_date(self):
         d1 = datetime(2014, 1, 2, 3, 4, 5, tzinfo=pytz.utc)
         self.assertEqual(datetime_to_json_date(d1), '2014-01-02T03:04:05.000Z')
+        self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05.000+00:00'), d1)
         self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05.000Z'), d1)
         self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05.000'), d1)
 
         tz = pytz.timezone("Africa/Kigali")
         d2 = tz.localize(datetime(2014, 1, 2, 3, 4, 5))
         self.assertEqual(datetime_to_json_date(d2), '2014-01-02T01:04:05.000Z')
-        self.assertEqual(json_date_to_datetime('2014-01-02T01:04:05.000Z'), d2.astimezone(pytz.utc))
-        self.assertEqual(json_date_to_datetime('2014-01-02T01:04:05.000'), d2.astimezone(pytz.utc))
+        self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05+02:00'), d2)
+        self.assertEqual(json_date_to_datetime('2014-01-02T01:04:05.000Z'), d2)
+        self.assertEqual(json_date_to_datetime('2014-01-02T01:04:05.000'), d2)
 
     def test_get_linked_orgs(self):
 
