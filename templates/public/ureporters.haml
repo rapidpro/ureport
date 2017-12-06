@@ -182,7 +182,7 @@
             labels : {
                 style : {
                   color:'{{ org|config:"primary_color" }}',
-                  fontFamily: "DroidSerif",
+                  fontFamily: "UreportSmallTextFont",
                   fontSize: 14
                 },
                 rotation: 0
@@ -201,7 +201,7 @@
               labels: {
                 style : {
                   color:'{{ org|config:"primary_color" }}',
-                  fontFamily: "DroidSerif",
+                  fontFamily: "UreportSmallTextFont",
                   fontSize: 14
                 }
               }
@@ -221,7 +221,7 @@
               dataLabels:  {
                 enabled: true,
                 style : {
-                      fontFamily: "MontserratBold",
+                      fontFamily: "UreportHeadlineFont",
                 },
                 format: '<b>{point.y:.0f}%</b>'
               }
@@ -280,7 +280,7 @@
             labels : {
                 style : {
                   color:'{{ org|config:"primary_color" }}',
-                  fontFamily: "DroidSerif",
+                  fontFamily: "UreportSmallTextFont",
                   fontSize: 14
                 },
                 step: 4,
@@ -297,7 +297,7 @@
               labels: {
                 style: {
                   color:'{{ org|config:"primary_color" }}',
-                  fontFamily: "DroidSerif",
+                  fontFamily: "UreportSmallTextFont",
                   fontSize: 14
                   }
               },
@@ -310,14 +310,14 @@
                   rotation: 0,
                   style: {
                      color:'{{ org|config:"primary_color" }}',
-                     fontFamily: "DroidSerif",
+                     fontFamily: "UreportSmallTextFont",
                      fontSize: 14
                   }
               }
           },
           tooltip: {
               formatter: function() {
-                   return '<table><tr><td style="padding:0; font-size: 24px; font-family:MontserratBold; "><b>'+ this.y + '</b></td></tr></table><span style="font-size:14px; font-family:DroidSerif">({% trans "Week of" %} ' + Highcharts.dateFormat('%e/%m', this.x) +')</span>';
+                   return '<table><tr><td style="padding:0; font-size: 24px; font-family:UreportHeadlineFont; "><b>'+ this.y + '</b></td></tr></table><span style="font-size:14px; font-family:UreportSmallTextFont">({% trans "Week of" %} ' + Highcharts.dateFormat('%e/%m', this.x) +')</span>';
               },
               shared: true,
               useHTML: true
@@ -437,7 +437,7 @@
                     overflow: "none",
                     formatter: function() {
                       if (this.y > 0) {
-                      return '<div style="font-family: MontserratBold;text-align: center; width: 80px; line-height: 100%; font-size: 24px;color:{{ org|config:"primary_color"}};">'+ this.y + '%</div><div style="text-align:center; width: 80px; line-height: 120%; font-size: 14px; font-family:DroidSerif; white-space: normal;">' + this.x + '</div><div style="height: 35px;width: 2px;margin-left: auto;margin-right: auto; border-left: 1px solid; border-color:{{ org|config:"primary_color"}};"></div>'
+                      return '<div style="font-family: UreportHeadlineFont;text-align: center; width: 80px; line-height: 100%; font-size: 24px;color:{{ org|config:"primary_color"}};">'+ this.y + '%</div><div style="text-align:center; width: 80px; line-height: 120%; font-size: 14px; font-family:UreportSmallTextFont; white-space: normal;">' + this.x + '</div><div style="height: 35px;width: 2px;margin-left: auto;margin-right: auto; border-left: 1px solid; border-color:{{ org|config:"primary_color"}};"></div>'
 
                       }
                       else return '';
@@ -467,6 +467,10 @@
     .ureport-location-map  {
       height: 500px;
       width: 100%;
+    }
+
+    .ureport-location-map svg {
+      height: 480px;
     }
 
     .leaflet-container {

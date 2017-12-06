@@ -783,6 +783,19 @@ class PollTest(UreportTest):
 
             self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_date', args=[poll.pk]))
 
+            self.assertEqual(Poll.objects.all().count(), 1)
+
+            # new submission should not create a new poll
+            response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+            self.assertEqual(Poll.objects.all().count(), 1)
+
+            ten_minutes_ago = timezone.now() - timedelta(minutes=10)
+
+            # a new submission after five minutes will create a new poll
+            Poll.objects.filter(org=poll.org, flow_uuid='uuid-25').update(created_on=ten_minutes_ago)
+            response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+            self.assertEqual(Poll.objects.all().count(), 2)
+
             tz = pytz.timezone('Africa/Kigali')
             with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
                 flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30',
@@ -794,7 +807,7 @@ class PollTest(UreportTest):
 
                 post_data = dict(title='Poll 2', category=self.health_uganda.pk, flow_uuid="uuid-30")
                 response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
-                self.assertEqual(Poll.objects.all().count(), 2)
+                self.assertEqual(Poll.objects.all().count(), 3)
 
                 poll = Poll.objects.get(flow_uuid='uuid-30')
                 self.assertEquals(poll.title, 'Poll 2')
