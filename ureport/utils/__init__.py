@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import copy
+import iso8601
 import json
 import math
 import time
@@ -42,10 +43,7 @@ def json_date_to_datetime(date_str):
     """
     Parses a datetime from a JSON string value
     """
-    iso_format = '%Y-%m-%dT%H:%M:%S.%f'
-    if date_str.endswith('Z'):
-        iso_format += 'Z'
-    return datetime.strptime(date_str, iso_format).replace(tzinfo=pytz.utc)
+    return iso8601.parse_date(date_str)
 
 
 def get_dict_from_cursor(cursor):

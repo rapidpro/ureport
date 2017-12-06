@@ -27,18 +27,30 @@
 
   :css
     @font-face {
-      font-family: MontserratBold;
-      src: url('{{ STATIC_URL }}fonts/Montserrat-Bold.ttf');
+      font-family: UreportHeadlineFont;
+      {% if org|config:"headline_font" %}
+        src: url('{{ org|config:"headline_font" }}');
+      {% else %}
+        src: url('{{ STATIC_URL }}fonts/Montserrat-Bold.ttf');
+      {% endif %}
     }
 
     @font-face {
-      font-family: RobotoSlab;
-      src: url('{{ STATIC_URL }}fonts/RobotoSlab-Regular.ttf');
+      font-family: UreportTextFont;
+      {% if org|config:"text_font" %}
+        src: url('{{ org|config:"text_font" }}');
+      {% else %}
+        src: url('{{ STATIC_URL }}fonts/RobotoSlab-Regular.ttf');
+      {% endif %}
     }
 
     @font-face {
-      font-family: DroidSerif;
-      src: url('{{ STATIC_URL }}fonts/DroidSerif.ttf');
+      font-family: UreportSmallTextFont;
+      {% if org|config:"text_small_font" %}
+        src: url('{{ org|config:"text_small_font" }}');
+      {% else %}
+        src: url('{{ STATIC_URL }}fonts/DroidSerif.ttf');
+      {% endif %}
     }
 
 
