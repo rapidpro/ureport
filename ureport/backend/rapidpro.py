@@ -156,24 +156,27 @@ class ContactSyncer(BaseSyncer):
                     state = state_name
 
             else:
-                state_name = remote.fields.get(contact_fields.get(state_field), None)
-                if state_name:
+                state_path = remote.fields.get(contact_fields.get(state_field), None)
+                if state_path:
+                    state_name = state_path.split(' > ')[-1]
                     state_name = state_name.lower()
                     state = org_state_boundaries_data.get(state_name, '')
 
                 district_field = org.get_config('district_label')
                 if district_field:
                     district_field = district_field.lower()
-                    district_name = remote.fields.get(contact_fields.get(district_field), None)
-                    if district_name:
+                    district_path = remote.fields.get(contact_fields.get(district_field), None)
+                    if district_path:
+                        district_name = district_path.split(' > ')[-1]
                         district_name = district_name.lower()
                         district = org_district_boundaries_data.get(state, dict()).get(district_name, '')
 
                 ward_field = org.get_config('ward_label')
                 if ward_field:
                     ward_field = ward_field.lower()
-                    ward_name = remote.fields.get(contact_fields.get(ward_field), None)
-                    if ward_name:
+                    ward_path = remote.fields.get(contact_fields.get(ward_field), None)
+                    if ward_path:
+                        ward_name = ward_path.split(' > ')[-1]
                         ward_name = ward_name.lower()
                         ward = org_ward_boundaries_data.get(district, dict()).get(ward_name, '')
 
