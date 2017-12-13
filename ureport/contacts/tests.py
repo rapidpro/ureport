@@ -1,45 +1,14 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import unicode_literals
-from datetime import datetime
-from django.utils import timezone
 
 from dash.orgs.models import TaskState
 
 from mock import patch
-import pytz
 from ureport.contacts.models import ContactField, Contact, ReportersCounter
 from ureport.contacts.tasks import pull_contacts
 from ureport.locations.models import Boundary
-from ureport.tests import UreportTest, TembaContactField, MockTembaClient, TembaContact
-from temba_client.v1.types import Group as TembaGroup
+from ureport.tests import UreportTest
 from ureport.utils import json_date_to_datetime
-
-
-class ContactFieldTest(UreportTest):
-    def setUp(self):
-        super(ContactFieldTest, self).setUp()
-
-    def test_kwargs_from_temba(self):
-        temba_contact_field = TembaContactField.create(key='foo', label='Bar', value_type='T')
-
-        kwargs = ContactField.kwargs_from_temba(self.nigeria, temba_contact_field)
-        self.assertEqual(kwargs, dict(org=self.nigeria, key='foo', label='Bar', value_type='T'))
-
-        # try creating contact from them
-        ContactField.objects.create(**kwargs)
-
-    def test_update_or_create_from_temba(self):
-        temba_contact_field = TembaContactField.create(key='foo', label='Bar', value_type='T')
-
-        field = ContactField.update_or_create_from_temba(self.nigeria, temba_contact_field)
-
-        self.assertEqual(field.key, 'foo')
-        self.assertEqual(field.label, 'Bar')
-
-        updated_field = ContactField.update_or_create_from_temba(self.nigeria, temba_contact_field)
-
-        self.assertEqual(field.pk, updated_field.pk)
 
 
 class ContactTest(UreportTest):
@@ -98,88 +67,7 @@ class ContactTest(UreportTest):
         self.assertEqual(created_contact.pk, existing_contact.pk)
         self.assertEqual(existing_contact.born, 2000)
 
-    def test_kwargs_from_temba(self):
-
-        temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
-                                            groups=['G-001', 'G-007'],
-                                            fields={'registration_date': None, 'state': None,
-                                                    'lga': None, 'occupation': None, 'born': None,
-                                                    'gender': None},
-                                            language='eng')
-
-        kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
-
-        self.assertEqual(kwargs, dict(uuid='C-006', org=self.nigeria, gender='', born=0, occupation='',
-                                      registered_on=None, state='', district='', ward=''))
-
-        # try creating contact from them
-        Contact.objects.create(**kwargs)
-
-        # Invalid boundaries become ''
-        temba_contact = TembaContact.create(uuid='C-007', name="Jan", urns=['tel:123'],
-                                            groups=['G-001', 'G-007'],
-                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z',
-                                                    'state': 'Rwanda > Kigali', 'lga': 'Rwanda > Kigali > Oyo',
-                                                    'occupation': 'Student', 'born': '1990', 'gender': 'Male'},
-                                            language='eng')
-
-        kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
-
-        self.assertEqual(kwargs, dict(uuid='C-007', org=self.nigeria, gender='M', born=1990, occupation='Student',
-                                      registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='',
-                                      district='', ward=''))
-
-        # try creating contact from them
-        Contact.objects.create(**kwargs)
-
-        temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
-                                            groups=['G-001', 'G-007'],
-                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z',
-                                                    'state': 'Nigeria > Lagos', 'lga': 'Nigeria > Lagos > Oyo',
-                                                    'ward': 'Nigeria > Lagos > Oyo > Ikeja', 'occupation': 'Student',
-                                                    'born': '1990', 'gender': 'Male'},
-                                            language='eng')
-
-        kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
-
-        self.assertEqual(kwargs, dict(uuid='C-008', org=self.nigeria, gender='M', born=1990, occupation='Student',
-                                      registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='R-LAGOS',
-                                      district='R-OYO', ward='R-IKEJA'))
-
-        # try creating contact from them
-        Contact.objects.create(**kwargs)
-
-    def test_update_or_create_from_temba(self):
-        temba_contact = TembaContact.create(uuid='C-006', name="Jan", urns=['tel:123'],
-                                            groups=['G-001', 'G-007'],
-                                            fields={'registration_date': None, 'state': None,
-                                                    'lga': None, 'occupation': None, 'born': None,
-                                                    'gender': None},
-                                            language='eng')
-
-        contact = Contact.update_or_create_from_temba(self.nigeria, temba_contact)
-
-        self.assertEqual(contact.uuid, 'C-006')
-
-        updated_contact = Contact.update_or_create_from_temba(self.nigeria, temba_contact)
-
-        self.assertEqual(contact.pk, updated_contact.pk)
-
     def test_contact_ward_field(self):
-
-        temba_contact = TembaContact.create(uuid='C-0011', name="Jan", urns=['tel:123'],
-                                            groups=['G-001', 'G-007'],
-                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z',
-                                                    'state': 'Nigeria > Lagos', 'lga': '',
-                                                    'ward': 'Nigeria > Lagos > Oyo > Ikeja', 'occupation': 'Student',
-                                                    'born': '1990', 'gender': 'Male'},
-                                            language='eng')
-
-        kwargs = Contact.kwargs_from_temba(self.nigeria, temba_contact)
-        # invalid parent boundary (district) will yield empty ward
-        self.assertEqual(kwargs, dict(uuid='C-0011', org=self.nigeria, gender='M', born=1990, occupation='Student',
-                                      registered_on=json_date_to_datetime('2014-01-02T03:04:05.000'), state='R-LAGOS',
-                                      district='', ward=''))
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
         Contact.objects.create(uuid='C-007', org=self.nigeria, gender='M', born=1990, occupation='Student',
