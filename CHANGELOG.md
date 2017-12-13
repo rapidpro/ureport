@@ -1,3 +1,12 @@
+v1.0.359
+----------
+ * Add Moldova flag to footer
+ * Remove unused codes
+
+v1.0.358
+----------
+ * Fix contacts sync
+
 v1.0.357
 ----------
  * Use the leaf to lookup location object in a simple way as usual
