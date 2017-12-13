@@ -1,3 +1,8 @@
+v1.0.359
+----------
+ * Add Moldova flag to footer
+ * Remove unused codes
+
 v1.0.358
 ----------
  * Fix contacts sync
