@@ -1,32 +1,13 @@
 import json
-from ureport.tests import UreportTest, MockTembaClient
+
+from ureport.tests import UreportTest
 from mock import patch, Mock
-from temba_client.v1.types import Boundary as TembaBoundary, Geometry as TembaGeometry
 from .models import Boundary
 
 
 class LocationTest(UreportTest):
     def setUp(self):
         super(LocationTest, self).setUp()
-
-    def test_kwargs_from_temba(self):
-        geometry = TembaGeometry.create(type='MultiPolygon', coordinates=['COORDINATES'])
-        country = TembaBoundary.create(boundary='R12345', name='Nigeria', parent=None, level=0, geometry=geometry)
-
-        kwargs = Boundary.kwargs_from_temba(self.nigeria, country)
-        self.assertEqual(kwargs, dict(org=self.nigeria, osm_id="R12345", name="Nigeria", level=0, parent=None,
-                                      geometry=json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))))
-
-        # try creating an object from the kwargs
-        country_boundary = Boundary.objects.create(**kwargs)
-
-        state = TembaBoundary.create(boundary='R23456', name='Lagos', parent="R12345", level=1, geometry=geometry)
-        kwargs = Boundary.kwargs_from_temba(self.nigeria, state)
-        self.assertEqual(kwargs, dict(org=self.nigeria, osm_id="R23456", name="Lagos", level=1, parent=country_boundary,
-                                      geometry=json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))))
-
-        # try creating an object from the kwargs
-        Boundary.objects.create(**kwargs)
 
     def test_get_org_top_level_boundaries_name(self):
 

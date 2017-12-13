@@ -47,27 +47,6 @@ class Boundary(models.Model):
         return get_redis_connection().lock(BOUNDARY_LOCK_KEY % (org.pk, osm_id), timeout=60)
 
     @classmethod
-    def kwargs_from_temba(cls, org, temba_boundary):
-
-        geometry = json.dumps(dict(type=temba_boundary.geometry.type, coordinates=temba_boundary.geometry.coordinates))
-
-        parent = cls.objects.filter(osm_id__iexact=temba_boundary.parent, org=org).first()
-
-        return dict(org=org, geometry=geometry, parent=parent, level=temba_boundary.level,
-                    name=temba_boundary.name, osm_id=temba_boundary.boundary)
-
-    @classmethod
-    def update_or_create_from_temba(cls, org, temba_boundary):
-        kwargs = cls.kwargs_from_temba(org, temba_boundary)
-
-        existing = cls.objects.filter(org=org, osm_id=kwargs['osm_id'])
-        if existing:
-            existing.update(**kwargs)
-            return existing.first()
-        else:
-            return cls.objects.create(**kwargs)
-
-    @classmethod
     def build_global_boundaries(cls):
 
         from django.conf import settings
