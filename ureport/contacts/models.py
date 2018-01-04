@@ -53,22 +53,6 @@ class ContactField(models.Model):
     def lock(cls, org, key):
         return get_redis_connection().lock(CONTACT_FIELD_LOCK_KEY % (org.pk, key), timeout=60)
 
-    @classmethod
-    def update_or_create_from_temba(cls, org, temba_contact_field):
-        kwargs = cls.kwargs_from_temba(org, temba_contact_field)
-
-        existing = cls.objects.filter(org=org, key=kwargs['key'])
-        if existing:
-            existing.update(**kwargs)
-            return existing.first()
-        else:
-            return cls.objects.create(**kwargs)
-
-    @classmethod
-    def kwargs_from_temba(cls, org, temba_contact_field):
-        return dict(org=org, label=temba_contact_field.label, key=temba_contact_field.key,
-                    value_type=temba_contact_field.value_type)
-
     def release(self):
         self.delete()
 
@@ -118,111 +102,6 @@ class Contact(models.Model):
     @classmethod
     def lock(cls, org, uuid):
         return get_redis_connection().lock(CONTACT_LOCK_KEY % (org.pk, uuid), timeout=60)
-
-    @classmethod
-    def find_contact_field_key(cls, org, label):
-        contact_field = ContactField.objects.filter(org=org, label__iexact=label).first()
-        if contact_field:
-            return contact_field.key
-
-    @classmethod
-    def kwargs_from_temba(cls, org, temba_contact):
-        from ureport.utils import json_date_to_datetime
-
-        state = ''
-        district = ''
-        ward = ''
-
-        state_field = org.get_config('state_label')
-        if state_field:
-            if org.get_config('is_global'):
-                state_name = temba_contact.fields.get(cls.find_contact_field_key(org, state_field), None)
-                if state_name:
-                    state = state_name
-
-            else:
-                state_name = temba_contact.fields.get(cls.find_contact_field_key(org, state_field), None)
-                state_boundary = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL,
-                                                         name__iexact=state_name).first()
-                if state_boundary:
-                    state = state_boundary.osm_id
-
-                district_field = org.get_config('district_label')
-                if district_field:
-                    district_name = temba_contact.fields.get(cls.find_contact_field_key(org, district_field), None)
-                    district_boundary = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL,
-                                                                name__iexact=district_name,
-                                                                parent=state_boundary).first()
-                    if district_boundary:
-                        district = district_boundary.osm_id
-
-                ward_field = org.get_config('ward_label')
-                if ward_field:
-                    ward_name = temba_contact.fields.get(cls.find_contact_field_key(org, ward_field), None)
-                    ward_boundary = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, name__iexact=ward_name,
-                                                            parent=district_boundary).first()
-                    if ward_boundary:
-                        ward = ward_boundary.osm_id
-
-        registered_on = None
-        registration_field = org.get_config('registration_label')
-        if registration_field:
-            registered_on = temba_contact.fields.get(cls.find_contact_field_key(org, registration_field), None)
-            if registered_on:
-                registered_on = json_date_to_datetime(registered_on)
-
-        occupation = ''
-        occupation_field = org.get_config('occupation_label')
-        if occupation_field:
-            occupation = temba_contact.fields.get(cls.find_contact_field_key(org, occupation_field), '')
-            if not occupation:
-                occupation = ''
-
-        born = 0
-        born_field = org.get_config('born_label')
-        if born_field:
-            try:
-                born = int(temba_contact.fields.get(cls.find_contact_field_key(org, born_field), 0))
-            except ValueError:
-                pass
-            except TypeError:
-                pass
-
-        gender = ''
-        gender_field = org.get_config('gender_label')
-        female_label = org.get_config('female_label')
-        male_label = org.get_config('male_label')
-
-        if gender_field:
-            gender = temba_contact.fields.get(cls.find_contact_field_key(org, gender_field), '')
-
-            if gender and gender.lower() == female_label.lower():
-                gender = cls.FEMALE
-            elif gender and gender.lower() == male_label.lower():
-                gender = cls.MALE
-            else:
-                gender = ''
-
-        return dict(org=org, uuid=temba_contact.uuid, gender=gender, born=born, occupation=occupation,
-                    registered_on=registered_on, ward=ward, district=district, state=state)
-
-    @classmethod
-    def update_or_create_from_temba(cls, org, temba_contact):
-        from raven.contrib.django.raven_compat.models import client
-
-        kwargs = cls.kwargs_from_temba(org, temba_contact)
-
-        try:
-            existing = cls.objects.filter(org=org, uuid=kwargs['uuid'])
-            if existing:
-                existing.update(**kwargs)
-                return existing.first()
-            else:
-                return cls.objects.create(**kwargs)
-        except DataError as e:  # pragma: no cover
-            client.captureException()
-            import traceback
-            traceback.print_exc()
 
     class Meta:
         unique_together = ('org', 'uuid')

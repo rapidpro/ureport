@@ -532,9 +532,9 @@ class RapidProBackendTest(UreportTest):
                     TembaContact.create(uuid='C-001', name="Jan", urns=['tel:123'],
                                         groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
                                                 ObjectRef.create(uuid='G-007', name='Actors')],
-                                        fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
-                                                'lga': 'Oyo', 'occupation': 'Student', 'born': '1990',
-                                                'gender': 'Male'},
+                                        fields={'registration_date': '2014-01-02T03:04:05.000000Z',
+                                                'state':'Nigeria > Lagos', 'lga': 'Nigeria > Lagos > Oyo',
+                                                'occupation': 'Student', 'born': '1990', 'gender': 'Male'},
                                         language='eng'),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],

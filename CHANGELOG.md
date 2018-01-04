@@ -1,3 +1,42 @@
+v1.0.359
+----------
+ * Add Moldova flag to footer
+ * Remove unused codes
+
+v1.0.358
+----------
+ * Fix contacts sync
+
+v1.0.357
+----------
+ * Use the leaf to lookup location object in a simple way as usual
+ * Support consuming datetimes in iso8601 format
+
+v1.0.356
+----------
+ * Fix small text fonts
+ * Allow configuring of custom fonts
+
+v1.0.355
+----------
+ * Fix height of map to prevent overflow
+ * Update Spanish
+ * Add Vietnamese
+
+v1.0.354
+----------
+ * Update message on homepage
+
+v1.0.353
+----------
+ * Filter by is_active too to consider similar poll
+ * Limit the creation of polls to 1 per flow in 5 minutes
+ * Fix Zambia count link
+
+v1.0.352
+----------
+ * Update the rapidpro client to support flow minor versions
+
 v1.0.351
 ----------
  * Update to use better names
