@@ -372,6 +372,9 @@ class PollCRUDL(SmartCRUDL):
                 if last_synced:
                     return "Last synced %s ago" % timesince(json_date_to_datetime(last_synced))
 
+                # we know we synced do not check the the progress since that is slow
+                return "Synced 100%"
+
             sync_progress = obj.get_sync_progress()
             return "Syncing... {0:.1f}%".format(sync_progress)
 
