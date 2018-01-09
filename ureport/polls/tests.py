@@ -6,6 +6,7 @@ import pytz
 import six
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.urls import reverse
 from django.http import HttpRequest
 from django.template import TemplateSyntaxError
@@ -984,9 +985,13 @@ class PollTest(UreportTest):
         poll1.has_synced = True
         poll1.save()
 
+        cache.set(Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.uganda.pk, poll1.flow_uuid),
+                  datetime_to_json_date(timezone.now() - timedelta(minutes=5)), None)
+
         response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(len(response.context['object_list']), 1)
+        self.assertRegexpMatches(response.content, "Last synced 5(.*)minutes ago")
 
     @patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_questions_poll(self):
