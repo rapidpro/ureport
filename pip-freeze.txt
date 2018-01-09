@@ -50,7 +50,7 @@ psycopg2==2.7.1
 pycountry==17.5.14
 python-dateutil==2.6.0
 pytz==2017.2
-rapidpro-dash==1.2.1
+rapidpro-dash==1.2.4
 rapidpro-python==2.1.9
 raven==6.1.0
 rcssmin==1.0.6

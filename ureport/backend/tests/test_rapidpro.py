@@ -1481,6 +1481,10 @@ class PerfTest(UreportTest):
 
                          (Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           '2015-04-07T12:48:44.320Z',
+                          None),
+
+                         (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
                           None)
                          ]
 
@@ -1498,7 +1502,11 @@ class PerfTest(UreportTest):
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           '2015-04-07T12:48:44.320Z',
-                          None)]
+                          None),
+                         (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          None)
+                         ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
         mock_cache_delete.assert_called_once_with(
@@ -1514,7 +1522,11 @@ class PerfTest(UreportTest):
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           '2015-04-05T12:48:44.320Z',
-                          None)]
+                          None),
+                         (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          None)
+                         ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
         mock_cache_delete.assert_called_once_with(
