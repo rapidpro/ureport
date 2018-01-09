@@ -367,9 +367,9 @@ class PollCRUDL(SmartCRUDL):
 
         def get_sync_status(self, obj):
             if obj.has_synced:
-                last_synced = cache.get(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (obj.org.pk, obj.flow_uuid), None)
+                last_synced = cache.get(Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (obj.org.pk, obj.flow_uuid), None)
                 if last_synced:
-                    return "Last synced on %s" % json_date_to_datetime(last_synced)
+                    return "Last synced on %s" % json_date_to_datetime(last_synced).strftime("%Y-%m-%d %H:%M")
 
             sync_progress = obj.get_sync_progress()
             return "Syncing... {0:.1f}%".format(sync_progress)

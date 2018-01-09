@@ -2,6 +2,15 @@
 
 - load i18n
 
+- block pre-content
+  -for task in org.task_states.all
+    -if task.task_key == 'contact-pull'
+      .alert.alert-info
+        Last reporters synced on:
+        %span.last-reporters-sync
+          {{ task.last_successfully_started_on }}
+
+
 - block read-buttons
   - if request.user.is_superuser or org_perms.orgs.org_edit
     %a.btn.btn-primary.pull-right{href:"{% url 'orgs.org_edit' %}", role:"button"}
@@ -11,13 +20,6 @@
       - trans "Manage Users"
 
 - block post-fields
-  %h3
-    Reporters syncs
-  .last-reporters-sync
-    -for task in org.task_states.all
-      -if task.task_key == 'contact-pull'
-        Last reporters synced on {{ task.last_successfully_started_on }}
-
   -if request.user.is_superuser or perms.orgs.org_refresh_cache
     %form.smartmin-form.form-horizontal{action:"{% url 'admins.org_refresh_cache' object.id %}", method:"post",  enctype:"multipart/form-data"}
       - csrf_token
@@ -47,4 +49,9 @@
 
     a.manage {
       margin-right: 10px;
+    }
+
+    .last-reporters-sync {
+      font-size: 16px;
+      font-weight: bold;
     }

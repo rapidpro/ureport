@@ -622,5 +622,8 @@ class RapidProBackend(BaseBackend):
         # update the time for this poll from which we fetch next time
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
                   latest_synced_obj_time, None)
+        # update the last time the sync happened
+        cache.set(Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (org.pk, poll.flow_uuid),
+                  datetime_to_json_date(timezone.now()), None)
         # clear the saved cursor
         cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid))

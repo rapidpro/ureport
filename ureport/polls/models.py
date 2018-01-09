@@ -84,6 +84,8 @@ class Poll(SmartModel):
 
     POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%s'
 
+    POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY = 'last:sync_time:org:%d:poll:%s'
+
     POLL_RESULTS_MAX_SYNC_RUNS = 100000
 
     POLL_RESULTS_LAST_PULL_CURSOR = 'last:poll_pull_results_cursor:org:%d:poll:%s'
