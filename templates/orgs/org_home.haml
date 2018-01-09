@@ -6,9 +6,9 @@
   -for task in org.task_states.all
     -if task.task_key == 'contact-pull'
       .alert.alert-info
-        Last reporters synced on:
+        Reporters last synced:
         %span.last-reporters-sync
-          {{ task.last_successfully_started_on }}
+          {{ task.last_successfully_started_on|timesince }} ago
 
 
 - block read-buttons
