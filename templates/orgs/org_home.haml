@@ -11,6 +11,13 @@
       - trans "Manage Users"
 
 - block post-fields
+  %h3
+    Reporters syncs
+  .last-reporters-sync
+    -for task in org.task_states.all
+      -if task.task_key == 'contact-pull'
+        Last reporters synced on {{ task.last_successfully_started_on }}
+
   -if request.user.is_superuser or perms.orgs.org_refresh_cache
     %form.smartmin-form.form-horizontal{action:"{% url 'admins.org_refresh_cache' object.id %}", method:"post",  enctype:"multipart/form-data"}
       - csrf_token
