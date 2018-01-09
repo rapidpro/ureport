@@ -1,3 +1,7 @@
+v1.0.364
+----------
+ * Prevent timeout trying to check the progress while we know we synced at least once
+
 v1.0.363
 ----------
  * Display read only org config fields
