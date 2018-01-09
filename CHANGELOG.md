@@ -1,3 +1,8 @@
+v1.0.363
+----------
+ * Display read only org config fields
+ * Display last sync times using timesince
+
 v1.0.359
 ----------
  * Add Moldova flag to footer
