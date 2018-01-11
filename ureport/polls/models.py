@@ -162,7 +162,8 @@ class Poll(SmartModel):
         except TembaRateExceededError:
             logger.error('Poll pull results exceeded rate error, rescheduling another pull results task',
                          extra={'stack': True, })
-            Poll.pull_poll_results_task(poll, countdown=900)
+            time.sleep(120)
+            Poll.pull_poll_results_task(poll, countdown=600)
 
             return 0, 0, 0, 0, 0, 0
 
