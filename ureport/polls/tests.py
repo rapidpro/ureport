@@ -1922,30 +1922,17 @@ class PollsTasksTest(UreportTest):
 
         mock_pull_results.assert_called_once()
 
+    @patch('django.core.cache.cache.get')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_other_polls')
-    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results):
+    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results, mock_cache_get):
         mock_get_other_polls.return_value = self.polls_query
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_cache_get.return_value = None
 
         pull_results_other_polls(self.nigeria.pk)
 
         task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-other-polls')
-        self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
-                         {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
-                          "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
-
-        mock_pull_results.assert_called_once()
-
-    @patch('ureport.tests.TestBackend.pull_results')
-    @patch('ureport.polls.models.Poll.get_recent_polls')
-    def test_pull_results_other_polls(self, mock_get_recent_polls, mock_pull_results):
-        mock_get_recent_polls.return_value = self.polls_query
-        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
-
-        pull_results_recent_polls(self.nigeria.pk)
-
-        task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-recent-polls')
         self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
                          {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
                           "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})

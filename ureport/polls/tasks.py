@@ -83,7 +83,6 @@ def pull_results_brick_polls(org, since, until):
 @org_task('results-pull-other-polls', 60 * 60 * 24)
 def pull_results_other_polls(org, since, until):
     from .models import Poll
-    r = get_redis_connection()
 
     results_log = dict()
     other_polls_ids = Poll.get_other_polls(org).order_by('flow_uuid').distinct('flow_uuid').values_list('id', flat=True)
