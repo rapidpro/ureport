@@ -503,13 +503,13 @@ CELERYBEAT_SCHEDULE = {
     },
     'results-pull-brick-polls':  {
         'task': 'dash.orgs.tasks.trigger_org_task',
-        "schedule": timedelta(hours=48),
+        "schedule": timedelta(hours=1),
         "relative": True,
         'args': ('ureport.polls.tasks.pull_results_brick_polls', 'sync')
     },
     'results-pull-other-polls':  {
         'task': 'dash.orgs.tasks.trigger_org_task',
-        "schedule": timedelta(hours=48),
+        "schedule": timedelta(hours=1),
         "relative": True,
         'args': ('ureport.polls.tasks.pull_results_other_polls', 'sync')
     },
