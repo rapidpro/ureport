@@ -90,6 +90,10 @@ class Poll(SmartModel):
 
     POLL_RESULTS_LAST_PULL_CURSOR = 'last:poll_pull_results_cursor:org:%d:poll:%s'
 
+    POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY = 'last:poll_last_other_polls_sync:org:%d:poll:%s'
+
+    POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_TIMEOUT = 60 * 60 * 24 * 2
+
     POLL_RESULTS_CURSOR_AFTER_CACHE_KEY = 'last:poll_pull_results_cursor_after:org:%d:poll:%s'
 
     POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY = 'last:poll_pull_results_cursor_before:org:%d:poll:%s'

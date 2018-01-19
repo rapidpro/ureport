@@ -1485,7 +1485,11 @@ class PerfTest(UreportTest):
 
                          (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           "2015-04-08T12:48:44.320Z",
-                          None)
+                          None),
+
+                         (Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          60 * 60 * 24 * 2)
                          ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
@@ -1505,7 +1509,12 @@ class PerfTest(UreportTest):
                           None),
                          (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           "2015-04-08T12:48:44.320Z",
-                          None)
+                          None),
+
+                         (Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          60 * 60 * 24 * 2)
+
                          ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
@@ -1525,7 +1534,10 @@ class PerfTest(UreportTest):
                           None),
                          (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           "2015-04-08T12:48:44.320Z",
-                          None)
+                          None),
+                         (Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          60 * 60 * 24 * 2)
                          ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))

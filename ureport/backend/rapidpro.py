@@ -627,3 +627,8 @@ class RapidProBackend(BaseBackend):
                   datetime_to_json_date(timezone.now()), None)
         # clear the saved cursor
         cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid))
+
+        # Use redis cache with expiring(in 48 hrs) key to allow other polls task
+        # to sync all polls without hitting the API rate limit
+        cache.set(Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid),
+                  datetime_to_json_date(timezone.now()), Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_TIMEOUT)
