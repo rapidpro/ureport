@@ -1,3 +1,9 @@
+v1.0.365
+----------
+ * More coverage and remove duplicate tests
+ * Use django cache methods and update tests
+ * Use redis to record the last time a poll synced for long running poll sync tasks
+
 v1.0.364
 ----------
  * Prevent timeout trying to check the progress while we know we synced at least once
