@@ -1,3 +1,8 @@
+v1.0.366
+----------
+ * Add tests
+ * Ignore Rate limit exception since we'll resume the next hour
+
 v1.0.365
 ----------
  * More coverage and remove duplicate tests
