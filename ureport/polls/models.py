@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import logging
 import pytz
+import time
 from datetime import timedelta
 from django.contrib.auth.models import User
 from django.db import models, connection
@@ -13,6 +14,8 @@ from django.utils import timezone
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.core.cache import cache
+from temba_client.exceptions import TembaRateExceededError
+
 from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
 from django.conf import settings
@@ -151,14 +154,22 @@ class Poll(SmartModel):
         backend = get_backend()
         poll = Poll.objects.get(pk=poll_id)
 
-        (num_val_created, num_val_updated, num_val_ignored,
-         num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
+        try:
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
 
-        poll.rebuild_poll_results_counts()
+            poll.rebuild_poll_results_counts()
 
-        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
+            Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
-        return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
+            return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
+        except TembaRateExceededError:
+            logger.error('Poll pull results exceeded rate error, rescheduling another pull results task',
+                         extra={'stack': True, })
+            time.sleep(120)
+            Poll.pull_poll_results_task(poll, countdown=600)
+
+            return 0, 0, 0, 0, 0, 0
 
     def get_pull_cached_params(self):
 
@@ -219,9 +230,9 @@ class Poll(SmartModel):
             question.get_most_responded_regions()
 
     @classmethod
-    def pull_poll_results_task(cls, poll):
+    def pull_poll_results_task(cls, poll, countdown=0):
         from ureport.polls.tasks import pull_refresh
-        pull_refresh.apply_async((poll.pk,), queue='sync')
+        pull_refresh.apply_async((poll.pk,), countdown=countdown, queue='sync')
 
     def pull_refresh_task(self):
         from ureport.utils import datetime_to_json_date
@@ -749,10 +760,10 @@ class PollQuestion(SmartModel):
             return cached_value["results"]
 
         if not segment:
-            logger.error('Question get results without segment cache missed', extra={'stack': True,})
+            logger.error('Question get results without segment cache missed', extra={'stack': True, })
 
         if segment and segment.get('location').lower() == 'state':
-            logger.error('Question get results with state segment cache missed', extra={'stack': True,})
+            logger.error('Question get results with state segment cache missed', extra={'stack': True, })
 
         return self.calculate_results(segment=segment)
 

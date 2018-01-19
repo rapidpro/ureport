@@ -13,6 +13,8 @@ from django.template import TemplateSyntaxError
 from django.utils import timezone
 
 from mock import patch, Mock
+from temba_client.exceptions import TembaRateExceededError
+
 from dash.categories.models import Category, CategoryImage
 from dash.categories.fields import CategoryChoiceField
 from smartmin.csv_imports.models import ImportTask
@@ -293,7 +295,7 @@ class PollTest(UreportTest):
                                                                                                    poll1.pk),
                                                    datetime_to_json_date(now.replace(tzinfo=pytz.utc)), None)
 
-            mock_pull_refresh.assert_called_once_with((poll1.pk,), queue='sync')
+            mock_pull_refresh.assert_called_once_with((poll1.pk,), countdown=0, queue='sync')
 
     def test_get_public_polls(self):
 
@@ -1359,19 +1361,28 @@ class PollTest(UreportTest):
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
 
+    @patch('ureport.polls.models.Poll.pull_poll_results_task')
     @patch('ureport.tests.TestBackend.pull_results')
-    def test_poll_pull_results(self, mock_pull_results):
-        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+    def test_poll_pull_results(self, mock_pull_results, mock_pull_results_task):
+        mock_pull_results.side_effect = [TembaRateExceededError(0), (1, 2, 3, 4, 5, 6)]
+        mock_pull_results_task.return_value = None
 
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
         self.assertFalse(poll.has_synced)
         Poll.pull_results(poll.pk)
+        mock_pull_results_task.assert_called_once()
+        mock_pull_results.assert_called_once()
+        self.assertFalse(poll.has_synced)
+
+        mock_pull_results_task.reset_mock()
+        Poll.pull_results(poll.pk)
 
         poll = Poll.objects.get(pk=poll.pk)
         self.assertTrue(poll.has_synced)
 
-        mock_pull_results.assert_called_once()
+        self.assertEquals(mock_pull_results.call_count, 2)
+        self.assertFalse(mock_pull_results_task.called)
 
 
 class PollQuestionTest(UreportTest):
