@@ -13,6 +13,8 @@ from django.template import TemplateSyntaxError
 from django.utils import timezone
 
 from mock import patch, Mock
+from temba_client.exceptions import TembaRateExceededError
+
 from dash.categories.models import Category, CategoryImage
 from dash.categories.fields import CategoryChoiceField
 from smartmin.csv_imports.models import ImportTask
@@ -1922,6 +1924,15 @@ class PollsTasksTest(UreportTest):
 
         mock_pull_results.assert_called_once()
 
+        mock_pull_results.reset_mock()
+        mock_pull_results.side_effect = [TembaRateExceededError(3)]
+
+        pull_results_brick_polls(self.nigeria.pk)
+
+        task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-brick-polls')
+        self.assertEqual(task_state.get_last_results(), {})
+        mock_pull_results.assert_called_once()
+
     @patch('django.core.cache.cache.get')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_other_polls')
@@ -1938,6 +1949,17 @@ class PollsTasksTest(UreportTest):
                           "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
 
         mock_pull_results.assert_called_once()
+
+        mock_pull_results.reset_mock()
+        mock_pull_results.side_effect = [TembaRateExceededError(3)]
+
+        pull_results_other_polls(self.nigeria.pk)
+
+        task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-other-polls')
+        self.assertEqual(task_state.get_last_results(), {})
+        mock_pull_results.assert_called_once()
+
+
 
     @patch('ureport.tests.TestBackend.pull_results')
     def test_backfill_poll_results(self, mock_pull_results):
