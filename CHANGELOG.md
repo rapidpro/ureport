@@ -1,3 +1,7 @@
+v1.0.367
+----------
+ * Make sure we handle properly the rate error in the batch syncs too
+
 v1.0.366
 ----------
  * Add tests
