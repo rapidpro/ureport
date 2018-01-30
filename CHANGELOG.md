@@ -1,3 +1,7 @@
+v1.0.369
+----------
+ * Rebuild poll results counts only when we have new or updated poll results
+
 v1.0.368
 ----------
  * Fix poll admin list styles
