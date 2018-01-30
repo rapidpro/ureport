@@ -154,7 +154,8 @@ class Poll(SmartModel):
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
 
-        poll.rebuild_poll_results_counts()
+        if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
+            poll.rebuild_poll_results_counts()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
