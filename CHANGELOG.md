@@ -1,3 +1,9 @@
+v1.0.370
+----------
+ * update gitignore
+ * Merge pull request #330 from rapidpro/fix-registration-map-month
+ * Better month lookup from date
+
 v1.0.369
 ----------
  * Rebuild poll results counts only when we have new or updated poll results
