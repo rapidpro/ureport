@@ -1,3 +1,7 @@
+v1.0.371
+----------
+ * Update deps
+
 v1.0.370
 ----------
  * update gitignore
