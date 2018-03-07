@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 TESTING = sys.argv[1:2] == ['test']
 
 DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Nyaruka', 'code@nyaruka.com'),
