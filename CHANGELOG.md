@@ -1,3 +1,7 @@
+v1.0.372
+----------
+ * Add TEMPLATE_DEBUG settings
+
 v1.0.371
 ----------
  * Update deps
