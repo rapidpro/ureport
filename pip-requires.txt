@@ -21,7 +21,7 @@ django-redis
 psycopg2
 xlutils
 mock
-sorl-thumbnail
+sorl-thumbnail==12.3
 django-hamlpy
 pycountry
 django-countries
