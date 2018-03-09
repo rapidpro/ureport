@@ -139,6 +139,11 @@ MIDDLEWARE = (
 
 ROOT_URLCONF = 'ureport.urls'
 
+
+DATA_API_BACKENDS_CONFIG = [
+    dict(name="Rapidpro", slug="rapidpro"),
+]
+
 from django.forms import Textarea
 
 ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whether this org should be show on the landing page"), required=False), superuser_only=True),

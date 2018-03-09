@@ -28,3 +28,9 @@ config = dict(
         dict(name='UReport SSL', arn='arn:aws:elasticloadbalancing:eu-west-1:363799401673:targetgroup/UReportSSL/bf470ad406b9700a'),
     ],
 )
+
+excludes = (
+    # these tables we just truncate completely
+    {"table": "contacts_contact", "truncate": True},
+    {"table": "polls_pollresult", "truncate": True},
+)
