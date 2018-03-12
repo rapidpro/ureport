@@ -1,3 +1,7 @@
+v1.0.377
+----------
+ * Fix inexistent key lookup, and Add DB slice config
+
 v1.0.372
 ----------
  * Add TEMPLATE_DEBUG settings
