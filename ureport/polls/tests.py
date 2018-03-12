@@ -6,12 +6,15 @@ import pytz
 import six
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.urls import reverse
 from django.http import HttpRequest
 from django.template import TemplateSyntaxError
 from django.utils import timezone
 
 from mock import patch, Mock
+from temba_client.exceptions import TembaRateExceededError
+
 from dash.categories.models import Category, CategoryImage
 from dash.categories.fields import CategoryChoiceField
 from smartmin.csv_imports.models import ImportTask
@@ -984,9 +987,13 @@ class PollTest(UreportTest):
         poll1.has_synced = True
         poll1.save()
 
+        cache.set(Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.uganda.pk, poll1.flow_uuid),
+                  datetime_to_json_date(timezone.now() - timedelta(minutes=5)), None)
+
         response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(len(response.context['object_list']), 1)
+        self.assertRegexpMatches(response.content, "Last synced 5(.*)minutes ago")
 
     @patch('dash.orgs.models.TembaClient2', MockTembaClient)
     def test_questions_poll(self):
@@ -1917,11 +1924,22 @@ class PollsTasksTest(UreportTest):
 
         mock_pull_results.assert_called_once()
 
+        mock_pull_results.reset_mock()
+        mock_pull_results.side_effect = [TembaRateExceededError(3)]
+
+        pull_results_brick_polls(self.nigeria.pk)
+
+        task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-brick-polls')
+        self.assertEqual(task_state.get_last_results(), {})
+        mock_pull_results.assert_called_once()
+
+    @patch('django.core.cache.cache.get')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_other_polls')
-    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results):
+    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results, mock_cache_get):
         mock_get_other_polls.return_value = self.polls_query
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_cache_get.return_value = None
 
         pull_results_other_polls(self.nigeria.pk)
 
@@ -1932,20 +1950,16 @@ class PollsTasksTest(UreportTest):
 
         mock_pull_results.assert_called_once()
 
-    @patch('ureport.tests.TestBackend.pull_results')
-    @patch('ureport.polls.models.Poll.get_recent_polls')
-    def test_pull_results_other_polls(self, mock_get_recent_polls, mock_pull_results):
-        mock_get_recent_polls.return_value = self.polls_query
-        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_pull_results.reset_mock()
+        mock_pull_results.side_effect = [TembaRateExceededError(3)]
 
-        pull_results_recent_polls(self.nigeria.pk)
+        pull_results_other_polls(self.nigeria.pk)
 
-        task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-recent-polls')
-        self.assertEqual(task_state.get_last_results()['flow-%s' % self.poll.flow_uuid],
-                         {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
-                          "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
-
+        task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-other-polls')
+        self.assertEqual(task_state.get_last_results(), {})
         mock_pull_results.assert_called_once()
+
+
 
     @patch('ureport.tests.TestBackend.pull_results')
     def test_backfill_poll_results(self, mock_pull_results):

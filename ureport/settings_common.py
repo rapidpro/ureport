@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 TESTING = sys.argv[1:2] == ['test']
 
 DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Nyaruka', 'code@nyaruka.com'),
@@ -138,6 +139,11 @@ MIDDLEWARE = (
 
 ROOT_URLCONF = 'ureport.urls'
 
+
+DATA_API_BACKENDS_CONFIG = [
+    dict(name="Rapidpro", slug="rapidpro"),
+]
+
 from django.forms import Textarea
 
 ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whether this org should be show on the landing page"), required=False), superuser_only=True),
@@ -159,16 +165,16 @@ ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whe
                      dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), required=False)),
                      dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
                      dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
-                     dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True),
-                     dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")), superuser_only=True),
-                     dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters")), superuser_only=True),
-                     dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters"), required=False), superuser_only=True),
-                     dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")), superuser_only=True),
-                     dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters"), required=False), superuser_only=True),
-                     dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters"), required=False), superuser_only=True),
-                     dict(name='ward_label', field=dict(help_text=_("The label of the Contact Field that contains the Ward of reporters"), required=False), superuser_only=True),
-                     dict(name='male_label', field=dict(help_text=_("The label assigned to U-Reporters that are Male.")), superuser_only=True),
-                     dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True),
+                     dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True, read_only=True),
+                     dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")), superuser_only=True, read_only=True),
+                     dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters")), superuser_only=True, read_only=True),
+                     dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters"), required=False), superuser_only=True, read_only=True),
+                     dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")), superuser_only=True, read_only=True),
+                     dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters"), required=False), superuser_only=True, read_only=True),
+                     dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters"), required=False), superuser_only=True, read_only=True),
+                     dict(name='ward_label', field=dict(help_text=_("The label of the Contact Field that contains the Ward of reporters"), required=False), superuser_only=True, read_only=True),
+                     dict(name='male_label', field=dict(help_text=_("The label assigned to U-Reporters that are Male.")), superuser_only=True, read_only=True),
+                     dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True, read_only=True),
                      dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), required=False)),
                      dict(name='is_global', field=dict(help_text=_("If this org if for global data. e.g: It shows a world map instead of a country map."), required=False), superuser_only=True),
                      dict(name='iso_code', field=dict(help_text=_("The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."), required=False)),
@@ -503,13 +509,13 @@ CELERYBEAT_SCHEDULE = {
     },
     'results-pull-brick-polls':  {
         'task': 'dash.orgs.tasks.trigger_org_task',
-        "schedule": timedelta(hours=48),
+        "schedule": timedelta(hours=1),
         "relative": True,
         'args': ('ureport.polls.tasks.pull_results_brick_polls', 'sync')
     },
     'results-pull-other-polls':  {
         'task': 'dash.orgs.tasks.trigger_org_task',
-        "schedule": timedelta(hours=48),
+        "schedule": timedelta(hours=1),
         "relative": True,
         'args': ('ureport.polls.tasks.pull_results_other_polls', 'sync')
     },

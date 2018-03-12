@@ -18,9 +18,19 @@ config = dict(
     processes=('celery', 'sync'),
 
     compress=True,
-    elb = dict(name='UReport',
-               region='eu-west-1',
-               primary='report1',
-               instances=[dict(name='report1', host='report1.ureport.in', id='i-67e938a7'),
-                          dict(name='report2', host='report2.ureport.in', id='i-6b7098fd')])
+    region='eu-west-1',
+    hosts=[
+        dict(name='report1', host='report1.ureport.in', ec2_id='i-05375dd10219ae352'),
+        dict(name='report2', host='report2.ureport.in', ec2_id='i-00a6e306e2139c753'),
+    ],
+    elb=[
+        dict(name='UReport', arn='arn:aws:elasticloadbalancing:eu-west-1:363799401673:targetgroup/UReport/975d358d8c5a205a'),
+        dict(name='UReport SSL', arn='arn:aws:elasticloadbalancing:eu-west-1:363799401673:targetgroup/UReportSSL/bf470ad406b9700a'),
+    ],
+)
+
+excludes = (
+    # these tables we just truncate completely
+    {"table": "contacts_contact", "truncate": True},
+    {"table": "polls_pollresult", "truncate": True},
 )

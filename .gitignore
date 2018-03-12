@@ -87,3 +87,6 @@ country-list/
 # celery
 celerybeat.pid
 celerybeat-schedule
+
+# VS code 
+.vscode

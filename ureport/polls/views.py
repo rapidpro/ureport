@@ -4,10 +4,12 @@ import six
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from datetime import timedelta
 from django import forms
+from django.core.cache import cache
 from django.urls import reverse
 from dash.categories.models import Category, CategoryImage
 from dash.categories.fields import CategoryChoiceField
 from django.utils import timezone
+from django.utils.timesince import timesince
 from smartmin.csv_imports.models import ImportTask
 
 from ureport.utils import json_date_to_datetime
@@ -366,6 +368,11 @@ class PollCRUDL(SmartCRUDL):
 
         def get_sync_status(self, obj):
             if obj.has_synced:
+                last_synced = cache.get(Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (obj.org.pk, obj.flow_uuid), None)
+                if last_synced:
+                    return "Last synced %s ago" % timesince(json_date_to_datetime(last_synced))
+
+                # we know we synced do not check the the progress since that is slow
                 return "Synced 100%"
 
             sync_progress = obj.get_sync_progress()

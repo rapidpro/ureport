@@ -10,6 +10,7 @@ from django.db import connection, reset_queries
 from django.test import override_settings
 from django.utils import timezone
 from mock import patch, PropertyMock
+from temba_client.exceptions import TembaRateExceededError
 
 from temba_client.v2.types import Boundary as TembaBoundary
 from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact
@@ -52,7 +53,7 @@ class FieldSyncerTest(UreportTest):
         remote = TembaField.create(key='foo', label='Baz', value_type='numeric')
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
-        
+
 
 class BoundarySyncerTest(UreportTest):
 
@@ -1481,7 +1482,15 @@ class PerfTest(UreportTest):
 
                          (Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           '2015-04-07T12:48:44.320Z',
-                          None)
+                          None),
+
+                         (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          None),
+
+                         (Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          60 * 60 * 24 * 2)
                          ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
@@ -1498,7 +1507,16 @@ class PerfTest(UreportTest):
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           '2015-04-07T12:48:44.320Z',
-                          None)]
+                          None),
+                         (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          None),
+
+                         (Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          60 * 60 * 24 * 2)
+
+                         ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
         mock_cache_delete.assert_called_once_with(
@@ -1514,7 +1532,14 @@ class PerfTest(UreportTest):
 
         expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                           '2015-04-05T12:48:44.320Z',
-                          None)]
+                          None),
+                         (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          None),
+                         (Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          "2015-04-08T12:48:44.320Z",
+                          60 * 60 * 24 * 2)
+                         ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
         mock_cache_delete.assert_called_once_with(
@@ -1539,3 +1564,46 @@ class PerfTest(UreportTest):
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_delete)))
         mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before="2015-04-08T12:48:44.320Z")
+
+    @override_settings(DEBUG=True)
+    @patch('temba_client.clients.BaseClient._request')
+    @patch('ureport.polls.tasks.pull_refresh.apply_async')
+    @patch('django.core.cache.cache.set')
+    @patch('django.utils.timezone.now')
+    @patch('ureport.polls.models.Poll.get_pull_cached_params')
+    def test_pull_results_batching_error(self, mock_get_pull_cached_params,
+                                         mock_timezone_now, mock_cache_set,
+                                         mock_pull_refresh, mock_base_client_request):
+
+        now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
+        mock_timezone_now.return_value = now_date
+
+        PollResult.objects.all().delete()
+
+        poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
+
+        mock_get_pull_cached_params.side_effect = [(None, None, None, None, None, None)]
+        mock_base_client_request.side_effect = [TembaRateExceededError(0)]
+
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+
+        expected_args = [(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (self.nigeria.pk, poll.flow_uuid),
+                          None,  # cursor is None since we are using the really client code not MockClientQuery
+                          None),
+
+                         (Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          None,
+                          None),
+
+                         (Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          '2015-04-08T12:48:44.320Z',
+                          None),
+
+                         (Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                          None,
+                          None)
+                         ]
+
+        self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
+        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue='sync')
