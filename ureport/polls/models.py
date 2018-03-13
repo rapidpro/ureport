@@ -84,9 +84,15 @@ class Poll(SmartModel):
 
     POLL_RESULTS_LAST_PULL_CACHE_KEY = 'last:pull_results:org:%d:poll:%s'
 
+    POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY = 'last:sync_time:org:%d:poll:%s'
+
     POLL_RESULTS_MAX_SYNC_RUNS = 100000
 
     POLL_RESULTS_LAST_PULL_CURSOR = 'last:poll_pull_results_cursor:org:%d:poll:%s'
+
+    POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY = 'last:poll_last_other_polls_sync:org:%d:poll:%s'
+
+    POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_TIMEOUT = 60 * 60 * 24 * 2
 
     POLL_RESULTS_CURSOR_AFTER_CACHE_KEY = 'last:poll_pull_results_cursor_after:org:%d:poll:%s'
 
@@ -148,7 +154,8 @@ class Poll(SmartModel):
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
 
-        poll.rebuild_poll_results_counts()
+        if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
+            poll.rebuild_poll_results_counts()
 
         Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
 
@@ -745,7 +752,7 @@ class PollQuestion(SmartModel):
         if not segment:
             logger.error('Question get results without segment cache missed', extra={'stack': True,})
 
-        if segment and segment.get('location').lower() == 'state':
+        if segment and 'location' in segment and segment.get('location').lower() == 'state':
             logger.error('Question get results with state segment cache missed', extra={'stack': True,})
 
         return self.calculate_results(segment=segment)

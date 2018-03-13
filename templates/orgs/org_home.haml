@@ -2,10 +2,22 @@
 
 - load i18n
 
+- block pre-content
+  -for task in org.task_states.all
+    -if task.task_key == 'contact-pull'
+      .alert.alert-info
+        Reporters last synced:
+        %span.last-reporters-sync
+          {{ task.last_successfully_started_on|timesince }} ago
+
+
 - block read-buttons
   - if request.user.is_superuser or org_perms.orgs.org_edit
     %a.btn.btn-primary.pull-right{href:"{% url 'orgs.org_edit' %}", role:"button"}
       - trans "Edit"
+  - if request.user.is_superuser or org_perms.orgs.org_tokens
+    %a.btn.btn-primary.pull-right.tokens{href:"{% url 'orgs.org_tokens' %}", role:"button"}
+      - trans "API Tokens"
   - if request.user.is_superuser or org_perms.orgs.org_manage_accounts
     %a.btn.btn-primary.pull-right.manage{href:"{% url 'orgs.org_manage_accounts' %}", role:"button"}
       - trans "Manage Users"
@@ -38,6 +50,11 @@
       width: 200px;
     }
 
-    a.manage {
+    a.manage, a.tokens {
       margin-right: 10px;
+    }
+
+    .last-reporters-sync {
+      font-size: 16px;
+      font-weight: bold;
     }

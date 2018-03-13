@@ -285,8 +285,8 @@
                 },
                 step: 4,
                 formatter: function () {
-
-                   return months[ new Date(this.value).getMonth()];
+                  // this.value is a Monday and Thursdays seems a better Month estimation day!!
+                  return months[ new Date(new Date(this.value).setDate(new Date(this.value).getDate() + 3)).getMonth()];
                 }
             }
           },

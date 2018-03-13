@@ -5,6 +5,9 @@ import json
 
 import pytz
 import time
+
+from temba_client.exceptions import TembaRateExceededError
+
 from dash.utils import is_dict_equal
 from dash.utils.sync import BaseSyncer, sync_local_to_set, sync_local_to_changes
 from django.core.cache import cache
@@ -339,7 +342,7 @@ class RapidProBackend(BaseBackend):
 
         stats_dict = dict(num_val_created=0, num_val_updated=0, num_val_ignored=0, num_path_created=0,
                           num_path_updated=0, num_path_ignored=0, num_synced=0)
-        
+
         if r.get(key):
             print "Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk)
         else:
@@ -370,68 +373,89 @@ class RapidProBackend(BaseBackend):
                 poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=before)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=resume_cursor)
 
-                fetch_start = time.time()
-                for fetch in fetches:
-
-                    print "RapidPro API fetch for poll #%d " \
-                          "on org #%d %d - %d took %ds" % (poll.pk,
-                                                           org.pk,
-                                                           stats_dict['num_synced'],
-                                                           stats_dict['num_synced'] + len(fetch),
-                                                           time.time() - fetch_start)
-
-                    contacts_map, poll_results_map, poll_results_to_save_map = self._initiate_lookup_maps(fetch, org,
-                                                                                                          poll)
-
-                    for temba_run in fetch:
-
-                        if batches_latest is None or temba_run.modified_on > json_date_to_datetime(batches_latest):
-                            batches_latest = datetime_to_json_date(temba_run.modified_on.replace(tzinfo=pytz.utc))
-
-                        contact_obj = contacts_map.get(temba_run.contact.uuid, None)
-                        self._process_run_poll_results(org, questions_uuids, temba_run, contact_obj, poll_results_map,
-                                                       poll_results_to_save_map, stats_dict)
-
-                    stats_dict['num_synced'] += len(fetch)
-                    if progress_callback:
-                        progress_callback(stats_dict['num_synced'])
-
-                    self._save_new_poll_results_to_database(poll_results_to_save_map)
-
-                    print "Processed fetch of %d - %d " \
-                          "runs for poll #%d on org #%d" % (stats_dict['num_synced'] - len(fetch),
-                                                            stats_dict['num_synced'],
-                                                            poll.pk,
-                                                            org.pk)
+                try:
                     fetch_start = time.time()
-                    print "=" * 40
+                    for fetch in fetches:
 
-                    if stats_dict['num_synced'] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS or time.time() > lock_expiration:
-                        poll.rebuild_poll_results_counts()
+                        print "RapidPro API fetch for poll #%d " \
+                              "on org #%d %d - %d took %ds" % (poll.pk,
+                                                               org.pk,
+                                                               stats_dict['num_synced'],
+                                                               stats_dict['num_synced'] + len(fetch),
+                                                               time.time() - fetch_start)
 
-                        cursor = fetches.get_cursor()
-                        self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
+                        contacts_map, poll_results_map, poll_results_to_save_map = self._initiate_lookup_maps(fetch, org,
+                                                                                                              poll)
 
-                        print "Break pull results for poll #%d on org #%d in %ds, "\
-                              " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"\
-                              " Objects: created %d, updated %d, ignored %d. " \
-                              "Before cursor %s" % (poll.pk, org.pk,
-                                                    time.time() - start,
-                                                    after,
-                                                    before,
-                                                    batches_latest,
-                                                    latest_synced_obj_time,
-                                                    stats_dict['num_val_created'],
-                                                    stats_dict['num_val_updated'],
-                                                    stats_dict['num_val_ignored'],
-                                                    cursor)
+                        for temba_run in fetch:
 
-                        from ureport.polls.tasks import pull_refresh
-                        pull_refresh.apply_async((poll.pk,), countdown=300, queue='sync')
+                            if batches_latest is None or temba_run.modified_on > json_date_to_datetime(batches_latest):
+                                batches_latest = datetime_to_json_date(temba_run.modified_on.replace(tzinfo=pytz.utc))
 
-                        return (stats_dict['num_val_created'], stats_dict['num_val_updated'],
-                                stats_dict['num_val_ignored'], stats_dict['num_path_created'],
-                                stats_dict['num_path_updated'], stats_dict['num_path_ignored'])
+                            contact_obj = contacts_map.get(temba_run.contact.uuid, None)
+                            self._process_run_poll_results(org, questions_uuids, temba_run, contact_obj, poll_results_map,
+                                                           poll_results_to_save_map, stats_dict)
+
+                        stats_dict['num_synced'] += len(fetch)
+                        if progress_callback:
+                            progress_callback(stats_dict['num_synced'])
+
+                        self._save_new_poll_results_to_database(poll_results_to_save_map)
+
+                        print "Processed fetch of %d - %d " \
+                              "runs for poll #%d on org #%d" % (stats_dict['num_synced'] - len(fetch),
+                                                                stats_dict['num_synced'],
+                                                                poll.pk,
+                                                                org.pk)
+                        fetch_start = time.time()
+                        print "=" * 40
+
+                        if stats_dict['num_synced'] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS or time.time() > lock_expiration:
+                            poll.rebuild_poll_results_counts()
+
+                            cursor = fetches.get_cursor()
+                            self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
+
+                            print "Break pull results for poll #%d on org #%d in %ds, "\
+                                  " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"\
+                                  " Objects: created %d, updated %d, ignored %d. " \
+                                  "Before cursor %s" % (poll.pk, org.pk,
+                                                        time.time() - start,
+                                                        after,
+                                                        before,
+                                                        batches_latest,
+                                                        latest_synced_obj_time,
+                                                        stats_dict['num_val_created'],
+                                                        stats_dict['num_val_updated'],
+                                                        stats_dict['num_val_ignored'],
+                                                        cursor)
+
+                            return (stats_dict['num_val_created'], stats_dict['num_val_updated'],
+                                    stats_dict['num_val_ignored'], stats_dict['num_path_created'],
+                                    stats_dict['num_path_updated'], stats_dict['num_path_ignored'])
+                except TembaRateExceededError:
+                    poll.rebuild_poll_results_counts()
+
+                    cursor = fetches.get_cursor()
+                    self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
+
+                    print "Break pull results for poll #%d on org #%d in %ds, " \
+                          " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s" \
+                          " Objects: created %d, updated %d, ignored %d. " \
+                          "Before cursor %s" % (poll.pk, org.pk,
+                                                time.time() - start,
+                                                after,
+                                                before,
+                                                batches_latest,
+                                                latest_synced_obj_time,
+                                                stats_dict['num_val_created'],
+                                                stats_dict['num_val_updated'],
+                                                stats_dict['num_val_ignored'],
+                                                cursor)
+
+                    return (stats_dict['num_val_created'], stats_dict['num_val_updated'],
+                            stats_dict['num_val_ignored'], stats_dict['num_path_created'],
+                            stats_dict['num_path_updated'], stats_dict['num_path_ignored'])
 
                 if batches_latest is not None and (latest_synced_obj_time is None or json_date_to_datetime(latest_synced_obj_time) <= json_date_to_datetime(batches_latest)):
                     latest_synced_obj_time = batches_latest
@@ -659,10 +683,21 @@ class RapidProBackend(BaseBackend):
         cache.set(Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (org.pk, poll.flow_uuid),
                   batches_latest, None)
 
+        from ureport.polls.tasks import pull_refresh
+        pull_refresh.apply_async((poll.pk,), countdown=300, queue='sync')
+
     @staticmethod
     def _mark_poll_results_sync_completed(poll, org, latest_synced_obj_time):
         # update the time for this poll from which we fetch next time
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid),
                   latest_synced_obj_time, None)
+        # update the last time the sync happened
+        cache.set(Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (org.pk, poll.flow_uuid),
+                  datetime_to_json_date(timezone.now()), None)
         # clear the saved cursor
         cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid))
+
+        # Use redis cache with expiring(in 48 hrs) key to allow other polls task
+        # to sync all polls without hitting the API rate limit
+        cache.set(Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid),
+                  datetime_to_json_date(timezone.now()), Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_TIMEOUT)
