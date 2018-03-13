@@ -339,7 +339,7 @@ class ContactSyncerTest(UreportTest):
 class RapidProBackendTest(UreportTest):
     def setUp(self):
         super(RapidProBackendTest, self).setUp()
-        self.backend = RapidProBackend()
+        self.backend = RapidProBackend(backend='rapidpro')
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",
                                                          created_by=self.admin,

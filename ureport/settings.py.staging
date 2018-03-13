@@ -3,7 +3,7 @@ from settings_common import *
 import os
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
 COMPRESS_ENABLED = True
 
 EMPTY_SUBDOMAIN_HOST = 'http://nigeria.ureport.staging.nyaruka.com'

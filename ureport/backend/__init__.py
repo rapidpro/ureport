@@ -21,6 +21,9 @@ def get_backend():
 class BaseBackend(object):
     __metaclass__ = ABCMeta
 
+    def __init__(self, backend='rapidpro'):
+        self.backend = backend
+
     @abstractmethod
     def pull_fields(self, org):
         """
