@@ -32,13 +32,16 @@ class FieldSyncer(BaseSyncer):
 
     def local_kwargs(self, org, remote):
         return {
+            'backend': self.backend,
             'org': org,
             'key': remote.key,
             'label': remote.label,
             'value_type': self.model.TEMBA_TYPES.get(remote.value_type, self.model.TYPE_TEXT)
         }
 
-    def update_required(self, local, remote, local_kwags):
+    def update_required(self, local, remote, local_kwargs):
+        if local_kwargs and local_kwargs['backend'] != local.backend:
+            return False
         return local.label != remote.label or local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)
 
     def delete_local(self, local):
@@ -63,6 +66,7 @@ class BoundarySyncer(BaseSyncer):
             parent = Boundary.objects.filter(osm_id__iexact=remote.parent.osm_id, org=org).first()
 
         return {
+            'backend': self.backend,
             'org': org,
             'geometry': geometry,
             'parent': parent,
@@ -72,6 +76,9 @@ class BoundarySyncer(BaseSyncer):
         }
 
     def update_required(self, local, remote, local_kwargs):
+        if local_kwargs and local_kwargs['backend'] != local.backend:
+            return False
+
         if local.name != remote.name:
             return True
 
@@ -106,15 +113,15 @@ class ContactSyncer(BaseSyncer):
         org_state_boundaries_data = dict()
         org_district_boundaries_data = dict()
         org_ward_boundaries_data = dict()
-        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL)
+        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL, backend=self.backend)
         for state in state_boundaries:
             org_state_boundaries_data[state.name.lower()] = state.osm_id
             state_district_data = dict()
-            district_boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, parent=state)
+            district_boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, parent=state, backend=self.backend)
             for district in district_boundaries:
                 state_district_data[district.name.lower()] = district.osm_id
                 district_ward_data = dict()
-                ward_boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent=district)
+                ward_boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent=district, backend=self.backend)
                 for ward in ward_boundaries:
                     district_ward_data[ward.name.lower()] = ward.osm_id
                 org_ward_boundaries_data[district.osm_id] = district_ward_data
@@ -128,7 +135,7 @@ class ContactSyncer(BaseSyncer):
         cache_attr = '__contact_fields__%d' % org.pk
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
-        contact_fields = ContactField.objects.filter(org=org)
+        contact_fields = ContactField.objects.filter(org=org, backend=self.backend)
         contact_fields_data = {elt.label.lower(): elt.key for elt in contact_fields}
 
         setattr(self, cache_attr, contact_fields_data)
@@ -232,6 +239,7 @@ class ContactSyncer(BaseSyncer):
                 gender = ''
 
         return {
+            'backend': self.backend,
             'org': org,
             'uuid': remote.uuid,
             'gender': gender,
@@ -244,6 +252,9 @@ class ContactSyncer(BaseSyncer):
         }
 
     def update_required(self, local, remote, local_kwargs):
+        if local_kwargs and local_kwargs['backend'] != local.backend:
+            return False
+
         if not local_kwargs:
             return True
 

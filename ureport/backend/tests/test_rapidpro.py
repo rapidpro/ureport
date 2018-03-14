@@ -30,43 +30,53 @@ from ureport.utils import json_date_to_datetime, datetime_to_json_date
 class FieldSyncerTest(UreportTest):
     def setUp(self):
         super(FieldSyncerTest, self).setUp()
-        self.syncer = FieldSyncer()
+        self.syncer = FieldSyncer(backend='rapidpro')
+        self.syncer2 = FieldSyncer(backend='floip')
 
     def test_local_kwargs(self):
         kwargs = self.syncer.local_kwargs(self.nigeria, TembaField.create(key='foo', label='Bar', value_type='text'))
 
-        self.assertEqual(kwargs, {'org': self.nigeria, 'key': 'foo', 'label': 'Bar', 'value_type': 'T'})
+        self.assertEqual(kwargs, {'backend': 'rapidpro', 'org': self.nigeria, 'key': 'foo', 'label': 'Bar', 'value_type': 'T'})
+
+        kwargs = self.syncer2.local_kwargs(self.nigeria, TembaField.create(key='foo', label='Bar', value_type='text'))
+
+        self.assertEqual(kwargs, {'backend': 'floip', 'org': self.nigeria, 'key': 'foo', 'label': 'Bar', 'value_type': 'T'})
 
     def test_update_required(self):
-        local = ContactField.objects.create(org=self.nigeria, key='foo', label='Bar', value_type='T')
+        local = ContactField.objects.create(org=self.nigeria, key='foo', label='Bar', value_type='T', backend='rapidpro')
 
         remote = TembaField.create(key='foo', label='Bar', value_type='text')
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
         remote = TembaField.create(key='foo', label='Baz', value_type='text')
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
         remote = TembaField.create(key='foo', label='Bar', value_type='numeric')
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
         remote = TembaField.create(key='foo', label='Baz', value_type='numeric')
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
-
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
 class BoundarySyncerTest(UreportTest):
 
     def setUp(self):
         super(BoundarySyncerTest, self).setUp()
-        self.syncer = BoundarySyncer()
+        self.syncer = BoundarySyncer('rapidpro')
+        self.syncer2 = BoundarySyncer('floip')
 
     def test_local_kwargs(self):
         country = TembaBoundary.create(osm_id='R12345', name='Nigeria', parent=None, level=Boundary.COUNTRY_LEVEL,
                                        geometry=None, aliases=None)
 
         kwargs = self.syncer.local_kwargs(self.nigeria, country)
-        self.assertEqual(kwargs, {'org': self.nigeria,
+        self.assertEqual(kwargs, {'backend': 'rapidpro',
+                                  'org': self.nigeria,
                                   'geometry': json.dumps(dict()),
                                   'parent': None, 'level': 0,
                                   'name': 'Nigeria', 'osm_id': 'R12345'})
@@ -76,7 +86,8 @@ class BoundarySyncerTest(UreportTest):
                                        geometry=geometry, aliases=None)
 
         kwargs = self.syncer.local_kwargs(self.nigeria, country)
-        self.assertEqual(kwargs, {'org': self.nigeria,
+        self.assertEqual(kwargs, {'backend': 'rapidpro',
+                                  'org': self.nigeria,
                                   'geometry': json.dumps(dict(type=geometry.type, coordinates=geometry.coordinates)),
                                   'parent': None, 'level': 0,
                                   'name': 'Nigeria', 'osm_id': 'R12345'})
@@ -87,7 +98,12 @@ class BoundarySyncerTest(UreportTest):
         state = TembaBoundary.create(osm_id='R23456', name='Lagos', parent=parent, level=Boundary.STATE_LEVEL,
                                      geometry=geometry, aliases=None)
         kwargs = self.syncer.local_kwargs(self.nigeria, state)
-        self.assertEqual(kwargs, {'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
+        self.assertEqual(kwargs, {'backend': 'rapidpro', 'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
+                                  'level': Boundary.STATE_LEVEL, 'parent': country_boundary,
+                                  'geometry':json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
+
+        kwargs = self.syncer2.local_kwargs(self.nigeria, state)
+        self.assertEqual(kwargs, {'backend': 'floip', 'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
                                   'level': Boundary.STATE_LEVEL, 'parent': country_boundary,
                                   'geometry':json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
 
@@ -102,6 +118,7 @@ class BoundarySyncerTest(UreportTest):
                                       geometry=geometry)
 
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
         remote = TembaBoundary.create(osm_id='OLD123', name='NEW', parent=None, level=Boundary.COUNTRY_LEVEL,
                                       geometry=geometry)
@@ -136,6 +153,7 @@ class BoundarySyncerTest(UreportTest):
                                       geometry=None)
 
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
+        self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
     def test_delete_local(self):
 
@@ -150,7 +168,7 @@ class BoundarySyncerTest(UreportTest):
 class ContactSyncerTest(UreportTest):
     def setUp(self):
         super(ContactSyncerTest, self).setUp()
-        self.syncer = ContactSyncer()
+        self.syncer = ContactSyncer('rapidpro')
         self.nigeria.set_config('reporter_group', "Ureporters")
         self.nigeria.set_config('registration_label', "Registration Date")
         self.nigeria.set_config('state_label', "State")
@@ -208,7 +226,8 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'org': self.nigeria,
+                         {'backend': 'rapidpro',
+                          'org': self.nigeria,
                           'uuid': 'C-006',
                           'gender': '',
                           'born': 0,
@@ -227,7 +246,8 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'org': self.nigeria,
+                         {'backend': 'rapidpro',
+                          'org': self.nigeria,
                           'uuid': 'C-007',
                           'gender': 'M',
                           'born': 1990,
@@ -246,7 +266,8 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'org': self.nigeria,
+                         {'backend': 'rapidpro',
+                          'org': self.nigeria,
                           'uuid': 'C-008',
                           'gender': 'M',
                           'born': 1990,
@@ -265,7 +286,8 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'org': self.nigeria,
+                         {'backend': 'rapidpro',
+                          'org': self.nigeria,
                           'uuid': 'C-008',
                           'gender': 'M',
                           'born': 0,
@@ -284,7 +306,8 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'org': self.nigeria,
+                         {'backend': 'rapidpro',
+                          'org': self.nigeria,
                           'uuid': 'C-008',
                           'gender': 'M',
                           'born': 0,
