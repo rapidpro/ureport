@@ -13,7 +13,7 @@ dj-database-url==0.5.0
 Django==1.11.11
 django-appconf==1.0.2
 django-compressor==2.2
-django-countries==5.1.1
+django-countries==5.2
 django-debug-toolbar==1.9.1
 django-digest==1.13
 django-hamlpy==1.1.1
@@ -47,7 +47,7 @@ pisa==3.0.33
 polib==1.1.0
 psycopg2==2.7.1
 pycountry==18.2.23
-python-dateutil==2.6.1
+python-dateutil==2.7.0
 pytz==2018.3
 rapidpro-dash==1.2.7
 rapidpro-python==2.2
@@ -61,7 +61,7 @@ simplejson==3.13.2
 six==1.11.0
 smartmin==1.11.7
 smmap2==2.0.3
-sorl-thumbnail==12.3
+sorl-thumbnail==12.4.1
 sqlparse==0.2.4
 -e git+https://github.com/Alir3z4/python-stop-words.git#egg=stop_words
 uritemplate==3.0.0
