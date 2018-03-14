@@ -726,7 +726,7 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.get_category_image(), poll1.category_image.image)
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_create_poll(self):
         create_url = reverse('polls.poll_create')
 
@@ -881,7 +881,7 @@ class PollTest(UreportTest):
 
                 self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_update_poll(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
@@ -995,7 +995,7 @@ class PollTest(UreportTest):
         self.assertEquals(len(response.context['object_list']), 1)
         self.assertRegexpMatches(response.content, "Last synced 5(.*)minutes ago")
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_questions_poll(self):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -1189,7 +1189,7 @@ class PollTest(UreportTest):
         self.assertEquals(response.context['form'].fields['location_1'].initial, 'Youtube Stream')
         self.assertEquals(response.context['form'].fields['message_1'].initial, 'Just give me a reason')
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_templatetags(self):
         from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
         from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results

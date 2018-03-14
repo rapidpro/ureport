@@ -41,6 +41,8 @@ class ContactField(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    backend = models.CharField(max_length=16, default='rapidpro')
+
     org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="contactfields")
 
     label = models.CharField(verbose_name=_("Label"), max_length=36)
@@ -71,7 +73,9 @@ class Contact(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    uuid = models.CharField(max_length=36, unique=True)
+    backend = models.CharField(max_length=16, default='rapidpro')
+
+    uuid = models.CharField(max_length=36)
 
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="contacts")
 

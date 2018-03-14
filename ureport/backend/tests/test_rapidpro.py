@@ -341,7 +341,7 @@ class RapidProBackendTest(UreportTest):
         self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
         self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
 
-    @patch('dash.orgs.models.TembaClient2.get_contacts')
+    @patch('dash.orgs.models.TembaClient.get_contacts')
     def test_pull_contacts(self, mock_get_contacts):
 
         Contact.objects.all().delete()
@@ -591,7 +591,7 @@ class RapidProBackendTest(UreportTest):
 
         self.assertFalse(Contact.objects.filter(uuid='C-002', is_active=True))
 
-    @patch('dash.orgs.models.TembaClient2.get_fields')
+    @patch('dash.orgs.models.TembaClient.get_fields')
     def test_pull_fields(self, mock_get_fields):
 
         ContactField.objects.all().delete()
@@ -630,7 +630,7 @@ class RapidProBackendTest(UreportTest):
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 2))
 
-    @patch('dash.orgs.models.TembaClient2.get_boundaries')
+    @patch('dash.orgs.models.TembaClient.get_boundaries')
     def test_pull_boundaries(self, mock_get_boundaries):
 
         Boundary.objects.all().delete()
@@ -696,7 +696,7 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 1))
 
     @patch('redis.client.StrictRedis.lock')
-    @patch('dash.orgs.models.TembaClient2.get_runs')
+    @patch('dash.orgs.models.TembaClient.get_runs')
     @patch('django.utils.timezone.now')
     @patch('django.core.cache.cache.get')
     def test_pull_results(self, mock_cache_get, mock_timezone_now, mock_get_runs, mock_redis_lock):
@@ -897,7 +897,7 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
                           num_path_created, num_path_updated, num_path_ignored), (0, 1, 0, 0, 0, 3))
 
-    @patch('dash.orgs.models.TembaClient2.get_runs')
+    @patch('dash.orgs.models.TembaClient.get_runs')
     @patch('django.utils.timezone.now')
     @patch('django.core.cache.cache.get')
     def test_poll_ward_field(self, mock_cache_get, mock_timezone_now, mock_get_runs):
@@ -988,7 +988,7 @@ class PerfTest(UreportTest):
         self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
 
     @override_settings(DEBUG=True)
-    @patch('dash.orgs.models.TembaClient2.get_runs')
+    @patch('dash.orgs.models.TembaClient.get_runs')
     @patch('django.utils.timezone.now')
     @patch('ureport.polls.models.Poll.get_pull_cached_params')
     def test_pull_results(self, mock_get_pull_cached_params, mock_timezone_now, mock_get_runs):
@@ -1375,7 +1375,7 @@ class PerfTest(UreportTest):
     @patch('ureport.polls.tasks.pull_refresh.apply_async')
     @patch('django.core.cache.cache.delete')
     @patch('django.core.cache.cache.set')
-    @patch('dash.orgs.models.TembaClient2.get_runs')
+    @patch('dash.orgs.models.TembaClient.get_runs')
     @patch('django.utils.timezone.now')
     @patch('ureport.polls.models.Poll.get_pull_cached_params')
     @patch('ureport.polls.models.Poll.rebuild_poll_results_counts')

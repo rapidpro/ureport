@@ -140,9 +140,13 @@ MIDDLEWARE = (
 ROOT_URLCONF = 'ureport.urls'
 
 
-DATA_API_BACKENDS_CONFIG = [
-    dict(name="Rapidpro", slug="rapidpro"),
-]
+DATA_API_BACKENDS_CONFIG = {
+    'rapidpro': {
+        'name': 'RapidPro',
+        'slug': 'rapidpro',
+        'class_type': 'ureport.backend.rapidpro.RapidProBackend'
+    }
+}
 
 from django.forms import Textarea
 
@@ -182,7 +186,7 @@ ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whe
                      dict(name='text_font', field=dict(help_text=_("The font used for normal text"), required=False), superuser_only=True),
                      dict(name='text_small_font', field=dict(help_text=_("The font used for small text"), required=False), superuser_only=True),
                      dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), required=False, widget=Textarea))]
-#                     dict(name='featured_state', field=dict(help_text=_("Choose the featured State of reporters shown on the home page")))]
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
