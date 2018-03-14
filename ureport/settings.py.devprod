@@ -4,7 +4,7 @@ from settings_common import *
 INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar.apps.DebugToolbarConfig',)
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
 
 # for dev, have everything time out after six hours so we don't hit the server so much
 API_BOUNDARY_CACHE_TIME = 60 * 60 * 6

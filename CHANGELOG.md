@@ -1,3 +1,7 @@
+v1.0.379
+----------
+ * Update sorl-thumbnail and more deps
+
 v1.0.377
 ----------
  * Fix inexistent key lookup, and Add DB slice config
