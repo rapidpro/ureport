@@ -7,6 +7,7 @@ from settings_common import *
 ALLOWED_HOSTS = ['*']
 
 DEBUG = True
+THUMBNAIL_DEBUG = DEBUG
 
 # for dev, have everything time out after six hours so we don't hit the server so much
 API_BOUNDARY_CACHE_TIME = 60 * 60 * 6

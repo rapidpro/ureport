@@ -1,3 +1,57 @@
+v1.0.379
+----------
+ * Update sorl-thumbnail and more deps
+
+v1.0.377
+----------
+ * Fix inexistent key lookup, and Add DB slice config
+
+v1.0.372
+----------
+ * Add TEMPLATE_DEBUG settings
+
+v1.0.371
+----------
+ * Update deps
+
+v1.0.370
+----------
+ * update gitignore
+ * Merge pull request #330 from rapidpro/fix-registration-map-month
+ * Better month lookup from date
+
+v1.0.369
+----------
+ * Rebuild poll results counts only when we have new or updated poll results
+
+v1.0.368
+----------
+ * Fix poll admin list styles
+
+v1.0.367
+----------
+ * Make sure we handle properly the rate error in the batch syncs too
+
+v1.0.366
+----------
+ * Add tests
+ * Ignore Rate limit exception since we'll resume the next hour
+
+v1.0.365
+----------
+ * More coverage and remove duplicate tests
+ * Use django cache methods and update tests
+ * Use redis to record the last time a poll synced for long running poll sync tasks
+
+v1.0.364
+----------
+ * Prevent timeout trying to check the progress while we know we synced at least once
+
+v1.0.363
+----------
+ * Display read only org config fields
+ * Display last sync times using timesince
+
 v1.0.359
 ----------
  * Add Moldova flag to footer

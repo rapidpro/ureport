@@ -3,6 +3,7 @@ from settings_common import *
 import os
 
 DEBUG = False
+THUMBNAIL_DEBUG = DEBUG
 COMPRESS_ENABLED = True
 
 
