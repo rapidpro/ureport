@@ -32,16 +32,13 @@ class FieldSyncer(BaseSyncer):
 
     def local_kwargs(self, org, remote):
         return {
-            'backend': self.backend,
             'org': org,
             'key': remote.key,
             'label': remote.label,
             'value_type': self.model.TEMBA_TYPES.get(remote.value_type, self.model.TYPE_TEXT)
         }
 
-    def update_required(self, local, remote, local_kwargs):
-        if local_kwargs and local.backend != local_kwargs['backend']:
-            return False
+    def update_required(self, local, remote, local_kwags):
         return local.label != remote.label or local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)
 
     def delete_local(self, local):
@@ -66,7 +63,6 @@ class BoundarySyncer(BaseSyncer):
             parent = Boundary.objects.filter(osm_id__iexact=remote.parent.osm_id, org=org).first()
 
         return {
-            'backend': self.backend,
             'org': org,
             'geometry': geometry,
             'parent': parent,
@@ -76,9 +72,6 @@ class BoundarySyncer(BaseSyncer):
         }
 
     def update_required(self, local, remote, local_kwargs):
-        if local_kwargs and local.backend != local_kwargs['backend']:
-            return False
-
         if local.name != remote.name:
             return True
 
@@ -239,7 +232,6 @@ class ContactSyncer(BaseSyncer):
                 gender = ''
 
         return {
-            'backend': self.backend,
             'org': org,
             'uuid': remote.uuid,
             'gender': gender,
@@ -254,9 +246,6 @@ class ContactSyncer(BaseSyncer):
     def update_required(self, local, remote, local_kwargs):
         if not local_kwargs:
             return True
-
-        if local.backend != local_kwargs['backend']:
-            return False
 
         update = local.gender != local_kwargs['gender'] or local.born != local_kwargs['born']
         update = update or local.occupation != local_kwargs['occupation']
@@ -279,7 +268,7 @@ class RapidProBackend(BaseBackend):
         client = self._get_client(org, 2)
         incoming_objects = client.get_fields().all(retry_on_rate_exceed=True)
 
-        return sync_local_to_set(org, FieldSyncer(backend=self.backend), incoming_objects)
+        return sync_local_to_set(org, FieldSyncer(), incoming_objects)
 
     def pull_boundaries(self, org):
 
@@ -289,7 +278,7 @@ class RapidProBackend(BaseBackend):
             client = self._get_client(org, 2)
             incoming_objects = client.get_boundaries(geometry=True).all()
 
-        return sync_local_to_set(org, BoundarySyncer(backend=self.backend), incoming_objects)
+        return sync_local_to_set(org, BoundarySyncer(), incoming_objects)
 
     def pull_contacts(self, org, modified_after, modified_before, progress_callback=None):
         client = self._get_client(org, 2)
@@ -302,7 +291,7 @@ class RapidProBackend(BaseBackend):
         deleted_query = client.get_contacts(deleted=True, after=modified_after, before=modified_before)
         deleted_fetches = deleted_query.iterfetches(retry_on_rate_exceed=True)
 
-        return sync_local_to_changes(org, ContactSyncer(backend=self.backend), fetches, deleted_fetches, progress_callback)
+        return sync_local_to_changes(org, ContactSyncer(), fetches, deleted_fetches, progress_callback)
 
     def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
         org = poll.org

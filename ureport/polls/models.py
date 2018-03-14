@@ -133,8 +133,6 @@ class Poll(SmartModel):
     org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
 
-    backend = models.CharField(max_length=16, default='rapidpro')
-
     def get_sync_progress(self):
         if not self.runs_count:
             return float(0)
@@ -762,7 +760,6 @@ class PollQuestion(SmartModel):
     def calculate_results(self, segment=None):
 
         org = self.poll.org
-        backend = self.poll.backend
         open_ended = self.is_open_ended()
         responded = self.get_responded()
         polled = self.get_polled()
@@ -818,12 +815,12 @@ class PollQuestion(SmartModel):
                         categories = []
                         osm_id = boundary.get('osm_id').upper()
                         set_count = 0
-                        unset_count_key = "backend:%s:ruleset:%s:nocategory:%s:%s" % (backend, self.ruleset_uuid, location_part, osm_id)
+                        unset_count_key = "ruleset:%s:nocategory:%s:%s" % (self.ruleset_uuid, location_part, osm_id)
                         unset_count = question_results.get(unset_count_key, 0)
 
                         for categorie_label in categories_label:
                             if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
-                                category_count_key = "backend:%s:ruleset:%s:category:%s:%s:%s" % (backend, self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
+                                category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), location_part, osm_id)
                                 category_count = question_results.get(category_count_key, 0)
                                 set_count += category_count
                                 categories.append(dict(count=category_count, label=categorie_label))
@@ -862,7 +859,7 @@ class PollQuestion(SmartModel):
 
                                 for categorie_label in categories_label:
                                     if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
-                                        if result_key.startswith('backend:%s:ruleset:%s:category:%s:' % (backend, self.ruleset_uuid, categorie_label.lower())):
+                                        if result_key.startswith('ruleset:%s:category:%s:' % (self.ruleset_uuid, categorie_label.lower())):
                                             categories_count[categorie_label.lower()] += result_count
 
                         categories = [dict(count=v, label=k) for k, v in categories_count.iteritems()]
@@ -882,11 +879,11 @@ class PollQuestion(SmartModel):
                     for gender in genders:
                         categories = []
                         set_count = 0
-                        unset_count_key = "backend:%s:ruleset:%s:nocategory:%s:%s"% (backend, self.ruleset_uuid, 'gender', gender)
+                        unset_count_key = "ruleset:%s:nocategory:%s:%s"% (self.ruleset_uuid, 'gender', gender)
                         unset_count = question_results.get(unset_count_key, 0)
 
                         for categorie_label in categories_label:
-                            category_count_key = "backend:%s:ruleset:%s:category:%s:%s:%s" % (backend, self.ruleset_uuid, categorie_label.lower(), 'gender', gender)
+                            category_count_key = "ruleset:%s:category:%s:%s:%s" % (self.ruleset_uuid, categorie_label.lower(), 'gender', gender)
                             if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = question_results.get(category_count_key, 0)
                                 set_count += category_count
@@ -898,7 +895,7 @@ class PollQuestion(SmartModel):
             else:
                 categories = []
                 for categorie_label in categories_label:
-                    category_count_key = "backend:%s:ruleset:%s:category:%s" % (backend, self.ruleset_uuid, categorie_label.lower())
+                    category_count_key = "ruleset:%s:category:%s" % (self.ruleset_uuid, categorie_label.lower())
                     if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                         category_count = question_results.get(category_count_key, 0)
                         categories.append(dict(count=category_count, label=categorie_label))
@@ -941,12 +938,12 @@ class PollQuestion(SmartModel):
 
     def get_responded(self):
         results = self.get_question_results()
-        key = 'backend:%s:ruleset:%s:total-ruleset-responded' % (self.poll.backend, self.ruleset_uuid)
+        key = 'ruleset:%s:total-ruleset-responded' % self.ruleset_uuid
         return results.get(key, 0)
 
     def get_polled(self):
         results = self.get_question_results()
-        key = 'backend:%s:ruleset:%s:total-ruleset-polled' % (self.poll.backend, self.ruleset_uuid)
+        key = 'ruleset:%s:total-ruleset-polled' % self.ruleset_uuid
         return results.get(key, 0)
 
     def get_response_percentage(self):
@@ -994,8 +991,6 @@ class PollResult(models.Model):
 
     org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
 
-    backend = models.CharField(max_length=16, default='rapidpro')
-
     flow = models.CharField(max_length=36)
 
     ruleset = models.CharField(max_length=36)
@@ -1027,7 +1022,6 @@ class PollResult(models.Model):
             return generated_counters
 
         org_id = self.org_id
-        backend = self.backend
         ruleset = ''
         category = ''
         state = ''
@@ -1061,42 +1055,42 @@ class PollResult(models.Model):
         if self.gender:
             gender = self.gender.lower()
 
-        generated_counters['backend:%s:ruleset:%s:total-ruleset-polled' % (backend, ruleset)] = 1
+        generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
 
         if category or (self.category is not None and self.category.lower() == 'no response' and text):
-            generated_counters['backend:%s:ruleset:%s:total-ruleset-responded' % (backend, ruleset)] = 1
+            generated_counters['ruleset:%s:total-ruleset-responded' % ruleset] = 1
 
         if category:
-            generated_counters['backend:%s:ruleset:%s:category:%s' % (backend, ruleset, category)] = 1
+            generated_counters['ruleset:%s:category:%s' % (ruleset, category)] = 1
 
         if category and born:
-            generated_counters['backend:%s:ruleset:%s:category:%s:born:%s' % (backend, ruleset, category, born)] = 1
+            generated_counters['ruleset:%s:category:%s:born:%s' % (ruleset, category, born)] = 1
         elif born:
-            generated_counters['backend:%s:ruleset:%s:nocategory:born:%s' % (backend, ruleset, born)] = 1
+            generated_counters['ruleset:%s:nocategory:born:%s' % (ruleset, born)] = 1
 
         if category and gender:
-            generated_counters['backend:%s:ruleset:%s:category:%s:gender:%s' % (backend, ruleset, category, gender)] = 1
+            generated_counters['ruleset:%s:category:%s:gender:%s' % (ruleset, category, gender)] = 1
         elif gender:
-            generated_counters['backend:%s:ruleset:%s:nocategory:gender:%s' % (backend, ruleset, gender)] = 1
+            generated_counters['ruleset:%s:nocategory:gender:%s' % (ruleset, gender)] = 1
 
         if state and category:
-            generated_counters['backend:%s:ruleset:%s:category:%s:state:%s' % (backend, ruleset, category, state)] = 1
+            generated_counters['ruleset:%s:category:%s:state:%s' % (ruleset, category, state)] = 1
 
         elif state:
 
-            generated_counters['backend:%s:ruleset:%s:nocategory:state:%s' % (backend, ruleset, state)] = 1
+            generated_counters['ruleset:%s:nocategory:state:%s' % (ruleset, state)] = 1
 
         if district and category:
-            generated_counters['backend:%s:ruleset:%s:category:%s:district:%s' % (backend, ruleset, category, district)] = 1
+            generated_counters['ruleset:%s:category:%s:district:%s' % (ruleset, category, district)] = 1
 
         elif district:
-            generated_counters['backend:%s:ruleset:%s:nocategory:district:%s' % (backend, ruleset, district)] = 1
+            generated_counters['ruleset:%s:nocategory:district:%s' % (ruleset, district)] = 1
 
         if ward and category:
-            generated_counters['backend:%s:ruleset:%s:category:%s:ward:%s' % (backend, ruleset, category, ward)] = 1
+            generated_counters['ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward)] = 1
 
         elif ward:
-            generated_counters['backend:%s:ruleset:%s:nocategory:ward:%s' % (backend, ruleset, ward)] = 1
+            generated_counters['ruleset:%s:nocategory:ward:%s' % (ruleset, ward)] = 1
 
         return generated_counters
 
