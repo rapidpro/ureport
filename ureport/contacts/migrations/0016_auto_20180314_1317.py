@@ -22,9 +22,4 @@ class Migration(migrations.Migration):
             name='backend',
             field=models.CharField(default=b'rapidpro', max_length=16),
         ),
-        migrations.AlterField(
-            model_name='contact',
-            name='uuid',
-            field=models.CharField(max_length=36),
-        ),
     ]

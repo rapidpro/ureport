@@ -75,7 +75,7 @@ class Contact(models.Model):
 
     backend = models.CharField(max_length=16, default='rapidpro')
 
-    uuid = models.CharField(max_length=36)
+    uuid = models.CharField(max_length=36, unique=True)
 
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="contacts")
 

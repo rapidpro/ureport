@@ -49,7 +49,7 @@ psycopg2==2.7.1
 pycountry==18.2.23
 python-dateutil==2.7.0
 pytz==2018.3
--e git+https://github.com/rapidpro/dash.git@437050fc60137deeabfc37f60bd9a52b5369b782#egg=rapidpro_dash
+-e git+https://github.com/rapidpro/dash.git#egg=rapidpro_dash
 rapidpro-python==2.2
 raven==6.6.0
 rcssmin==1.0.6
@@ -63,7 +63,7 @@ smartmin==1.11.7
 smmap2==2.0.3
 sorl-thumbnail==12.4.1
 sqlparse==0.2.4
--e git+https://github.com/Alir3z4/python-stop-words.git@2c49f7236993d3d9ace3bb0a15dfc40b55cdb25f#egg=stop_words
+-e git+https://github.com/Alir3z4/python-stop-words.git#egg=stop_words
 uritemplate==3.0.0
 urllib3==1.22
 vine==1.1.4
