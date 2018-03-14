@@ -110,7 +110,7 @@ class UreportTest(SmartminTest, DashTest):
         self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
         return Org.objects.get(subdomain=subdomain)
 
-    def create_poll(self, org, title, flow_uuid, category, user, featured=False, has_synced=False):
+    def create_poll(self, org, title, flow_uuid, category, user, featured=False, has_synced=False, backend='rapidpro'):
         now = timezone.now()
         poll = Poll.objects.create(flow_uuid=flow_uuid,
                                    title=title,
@@ -119,6 +119,7 @@ class UreportTest(SmartminTest, DashTest):
                                    has_synced=has_synced,
                                    org=org,
                                    poll_date=now,
+                                   backend=backend,
                                    created_by=user,
                                    modified_by=user)
 

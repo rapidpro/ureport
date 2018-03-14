@@ -726,7 +726,7 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.get_category_image(), poll1.category_image.image)
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_create_poll(self):
         create_url = reverse('polls.poll_create')
 
@@ -881,7 +881,7 @@ class PollTest(UreportTest):
 
                 self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_update_poll(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
@@ -995,7 +995,7 @@ class PollTest(UreportTest):
         self.assertEquals(len(response.context['object_list']), 1)
         self.assertRegexpMatches(response.content, "Last synced 5(.*)minutes ago")
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_questions_poll(self):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -1189,7 +1189,7 @@ class PollTest(UreportTest):
         self.assertEquals(response.context['form'].fields['location_1'].initial, 'Youtube Stream')
         self.assertEquals(response.context['form'].fields['message_1'].initial, 'Just give me a reason')
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_templatetags(self):
         from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
         from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results
@@ -1394,7 +1394,8 @@ class PollQuestionTest(UreportTest):
         self.assertEquals(category, result['categories'][index]['label'])
 
     def test_poll_question_model(self):
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
+        backend = 'rapidpro'
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True, backend=backend)
 
         poll_question1 = PollQuestion.objects.create(poll=poll1,
                                                      title="question 1",
@@ -1436,31 +1437,31 @@ class PollQuestionTest(UreportTest):
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-1', date=now, category='All responses', state='', district='',
-                                  text='1 better place', completed=False)
+                                  text='1 better place', completed=False, backend=backend)
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-2', date=now, category='All responses', state='', district='',
-                                  text='the great coffee', completed=False)
+                                  text='the great coffee', completed=False, backend=backend)
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-3', date=now, category='All responses', state='', district='',
-                                  text='1 cup of black tea', completed=False)
+                                  text='1 cup of black tea', completed=False, backend=backend)
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-3', date=now, category='All responses', state='', district='',
-                                  text='1 cup of green tea', completed=False)
+                                  text='1 cup of green tea', completed=False, backend=backend)
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-4', date=now, category='All responses', state='', district='',
-                                  text='awesome than this encore', completed=False)
+                                  text='awesome than this encore', completed=False, backend=backend)
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-5', date=now, category='All responses', state='', district='',
-                                  text='from an awesome place in kigali', completed=False)
+                                  text='from an awesome place in kigali', completed=False, backend=backend)
 
         PollResult.objects.create(org=self.uganda, flow=poll1.flow_uuid, ruleset=poll_question1.ruleset_uuid,
                                   contact='contact-5', date=now, category='All responses', state='', district='',
-                                  text='HtTp://kigali.coffee.fbcdn.com/like_image.png', completed=False)
+                                  text='HtTp://kigali.coffee.fbcdn.com/like_image.png', completed=False, backend=backend)
 
         with patch('ureport.polls.models.PollQuestion.is_open_ended') as mock_open:
             mock_open.return_value = True
@@ -1509,10 +1510,10 @@ class PollQuestionTest(UreportTest):
                 self.assertFalse(mock_get_dict_from_cursor.called)
 
         question_results = dict()
-        question_results['ruleset:%s:total-ruleset-responded' % poll_question1.ruleset_uuid] = 3462
-        question_results['ruleset:%s:total-ruleset-polled' % poll_question1.ruleset_uuid] = 7156
-        question_results['ruleset:%s:category:yes' % poll_question1.ruleset_uuid] = 2210
-        question_results['ruleset:%s:category:no' % poll_question1.ruleset_uuid] = 1252
+        question_results['backend:%s:ruleset:%s:total-ruleset-responded' % (backend, poll_question1.ruleset_uuid)] = 3462
+        question_results['backend:%s:ruleset:%s:total-ruleset-polled' % (backend, poll_question1.ruleset_uuid)] = 7156
+        question_results['backend:%s:ruleset:%s:category:yes' % (backend, poll_question1.ruleset_uuid)] = 2210
+        question_results['backend:%s:ruleset:%s:category:no' % (backend, poll_question1.ruleset_uuid)] = 1252
 
         with patch('ureport.polls.models.PollQuestion.get_question_results') as mock:
             mock.return_value = dict()
@@ -1557,10 +1558,10 @@ class PollQuestionTest(UreportTest):
 
             self.assertEquals(poll_question1.get_response_percentage(), "48%")
 
-            question_results['ruleset:%s:category:yes:state:R-KGL' % poll_question1.ruleset_uuid] = 10
-            question_results['ruleset:%s:category:yes:state:R-LAGOS' % poll_question1.ruleset_uuid] = 20
-            question_results['ruleset:%s:category:no:state:R-LAGOS' % poll_question1.ruleset_uuid] = 30
-            question_results['ruleset:%s:nocategory:state:R-LAGOS' % poll_question1.ruleset_uuid] = 33
+            question_results['backend:%s:ruleset:%s:category:yes:state:R-KGL' % (backend, poll_question1.ruleset_uuid)] = 10
+            question_results['backend:%s:ruleset:%s:category:yes:state:R-LAGOS' % (backend, poll_question1.ruleset_uuid)] = 20
+            question_results['backend:%s:ruleset:%s:category:no:state:R-LAGOS' % (backend, poll_question1.ruleset_uuid)] = 30
+            question_results['backend:%s:ruleset:%s:nocategory:state:R-LAGOS' % (backend, poll_question1.ruleset_uuid)] = 33
 
             mock.return_value = question_results
 
@@ -1574,10 +1575,10 @@ class PollQuestionTest(UreportTest):
                                   dict(open_ended=False, set=50, unset=33, boundary='R-LAGOS', label='Lagos',
                                        categories=[dict(count=20, label='Yes'), dict(count=30, label='No')])])
 
-            question_results['ruleset:%s:category:yes:gender:m' % poll_question1.ruleset_uuid] = 5
-            question_results['ruleset:%s:category:yes:gender:f' % poll_question1.ruleset_uuid] = 10
-            question_results['ruleset:%s:category:no:gender:m' % poll_question1.ruleset_uuid] = 12
-            question_results['ruleset:%s:nocategory:gender:f' % poll_question1.ruleset_uuid] = 8
+            question_results['backend:%s:ruleset:%s:category:yes:gender:m' % (backend, poll_question1.ruleset_uuid)] = 5
+            question_results['backend:%s:ruleset:%s:category:yes:gender:f' % (backend, poll_question1.ruleset_uuid)] = 10
+            question_results['backend:%s:ruleset:%s:category:no:gender:m' % (backend, poll_question1.ruleset_uuid)] = 12
+            question_results['backend:%s:ruleset:%s:nocategory:gender:f' % (backend, poll_question1.ruleset_uuid)] = 8
 
             mock.return_value = question_results
 
@@ -1602,12 +1603,12 @@ class PollQuestionTest(UreportTest):
             poll1.poll_date = datetime.now().replace(year=2015)
             poll1.save()
 
-            question_results['ruleset:%s:category:yes:born:3' % poll_question1.ruleset_uuid] = 5
-            question_results['ruleset:%s:category:yes:born:2000' % poll_question1.ruleset_uuid] = 10
-            question_results['ruleset:%s:category:yes:born:2010' % poll_question1.ruleset_uuid] = 25
-            question_results['ruleset:%s:category:no:born:1990' % poll_question1.ruleset_uuid] = 12
-            question_results['ruleset:%s:nocategory:born:28990' % poll_question1.ruleset_uuid] = 8
-            question_results['ruleset:%s:nocategory:born:1995' % poll_question1.ruleset_uuid] = 100
+            question_results['backend:%s:ruleset:%s:category:yes:born:3' % (backend, poll_question1.ruleset_uuid)] = 5
+            question_results['backend:%s:ruleset:%s:category:yes:born:2000' % (backend, poll_question1.ruleset_uuid)] = 10
+            question_results['backend:%s:ruleset:%s:category:yes:born:2010' % (backend, poll_question1.ruleset_uuid)] = 25
+            question_results['backend:%s:ruleset:%s:category:no:born:1990' % (backend, poll_question1.ruleset_uuid)] = 12
+            question_results['backend:%s:ruleset:%s:nocategory:born:28990' % (backend, poll_question1.ruleset_uuid)] = 8
+            question_results['backend:%s:ruleset:%s:nocategory:born:1995' % (backend, poll_question1.ruleset_uuid)] = 100
 
             age_results = poll_question1.calculate_results(segment=dict(age='Age'))
 
@@ -1714,16 +1715,17 @@ class PollResultsTest(UreportTest):
         self.last_month = self.now - timedelta(days=30)
 
     def test_poll_results_counters(self):
+        backend = 'rapidpro'
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), dict())
 
         poll_result = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
                                                 ruleset=self.poll_question.ruleset_uuid, date=self.now,
-                                                contact='contact-uuid', completed=False)
+                                                contact='contact-uuid', completed=False, backend=backend)
 
         self.poll.rebuild_poll_results_counts()
 
         expected = dict()
-        expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 1
+        expected["backend:%s:ruleset:%s:total-ruleset-polled" % (backend, self.poll_question.ruleset_uuid)] = 1
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
@@ -1731,7 +1733,7 @@ class PollResultsTest(UreportTest):
         poll_result.save()
         self.poll.rebuild_poll_results_counts()
 
-        expected['ruleset:%s:nocategory:state:R-LAGOS' % self.poll_question.ruleset_uuid] = 1
+        expected['backend:%s:ruleset:%s:nocategory:state:R-LAGOS' % (backend, self.poll_question.ruleset_uuid)] = 1
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
         poll_result.category = 'Yes'
@@ -1739,10 +1741,10 @@ class PollResultsTest(UreportTest):
         self.poll.rebuild_poll_results_counts()
 
         expected = dict()
-        expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 1
-        expected['ruleset:%s:category:yes:state:R-LAGOS' % self.poll_question.ruleset_uuid] = 1
-        expected["ruleset:%s:category:yes" % self.poll_question.ruleset_uuid] = 1
-        expected["ruleset:%s:total-ruleset-responded" % self.poll_question.ruleset_uuid] = 1
+        expected["backend:%s:ruleset:%s:total-ruleset-polled" % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected['backend:%s:ruleset:%s:category:yes:state:R-LAGOS' % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected["backend:%s:ruleset:%s:category:yes" % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected["backend:%s:ruleset:%s:total-ruleset-responded" % (backend, self.poll_question.ruleset_uuid)] = 1
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
@@ -1753,18 +1755,19 @@ class PollResultsTest(UreportTest):
         self.poll.rebuild_poll_results_counts()
 
         expected = dict()
-        expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 2
-        expected["ruleset:%s:total-ruleset-responded" % self.poll_question.ruleset_uuid] = 2
-        expected["ruleset:%s:category:yes" % self.poll_question.ruleset_uuid] = 1
-        expected["ruleset:%s:category:no" % self.poll_question.ruleset_uuid] = 1
-        expected['ruleset:%s:category:yes:state:R-LAGOS' % self.poll_question.ruleset_uuid] = 1
-        expected['ruleset:%s:category:no:state:R-LAGOS' % self.poll_question.ruleset_uuid] = 1
-        expected['ruleset:%s:category:no:district:R-OYO' % self.poll_question.ruleset_uuid] = 1
-        expected['ruleset:%s:category:no:ward:R-IKEJA' % self.poll_question.ruleset_uuid] = 1
+        expected["backend:%s:ruleset:%s:total-ruleset-polled" % (backend, self.poll_question.ruleset_uuid)] = 2
+        expected["backend:%s:ruleset:%s:total-ruleset-responded" % (backend, self.poll_question.ruleset_uuid)] = 2
+        expected["backend:%s:ruleset:%s:category:yes" % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected["backend:%s:ruleset:%s:category:no" % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected['backend:%s:ruleset:%s:category:yes:state:R-LAGOS' % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected['backend:%s:ruleset:%s:category:no:state:R-LAGOS' % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected['backend:%s:ruleset:%s:category:no:district:R-OYO' % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected['backend:%s:ruleset:%s:category:no:ward:R-IKEJA' % (backend, self.poll_question.ruleset_uuid)] = 1
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
     def test_poll_results_without_category(self):
+        backend = 'rapidpro'
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), dict())
 
@@ -1776,26 +1779,28 @@ class PollResultsTest(UreportTest):
         self.poll.rebuild_poll_results_counts()
 
         expected = dict()
-        expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 1
-        expected['ruleset:%s:nocategory:state:R-LAGOS' % self.poll_question.ruleset_uuid] = 1
-        expected['ruleset:%s:nocategory:district:R-OYO' % self.poll_question.ruleset_uuid] = 1
-        expected['ruleset:%s:nocategory:ward:R-IKEJA' % self.poll_question.ruleset_uuid] = 1
+        expected["backend:%s:ruleset:%s:total-ruleset-polled" % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected['backend:%s:ruleset:%s:nocategory:state:R-LAGOS' % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected['backend:%s:ruleset:%s:nocategory:district:R-OYO' % (backend, self.poll_question.ruleset_uuid)] = 1
+        expected['backend:%s:ruleset:%s:nocategory:ward:R-IKEJA' % (backend, self.poll_question.ruleset_uuid)] = 1
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
     def test_poll_result_generate_counters(self):
+        backend = 'rapidpro'
+
         poll_result1 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
                                                  ruleset=self.poll_question.ruleset_uuid, date=self.now,
-                                                 contact='contact-uuid', completed=False)
+                                                 contact='contact-uuid', completed=False, backend=backend)
 
         gen_counters = poll_result1.generate_counters()
         self.assertEqual(len(gen_counters.keys()), 1)
-        self.assertTrue('ruleset:%s:total-ruleset-polled' % self.poll_question.ruleset_uuid in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:total-ruleset-polled' % (backend, self.poll_question.ruleset_uuid) in gen_counters.keys())
 
         poll_result2 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
                                                  ruleset='other-uuid',
                                                  contact='contact-uuid', category='No', text='Nah', completed=False,
-                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA')
+                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA', backend=backend)
 
         gen_counters = poll_result2.generate_counters()
 
@@ -1807,22 +1812,22 @@ class PollResultsTest(UreportTest):
 
         self.assertEqual(len(gen_counters.keys()), 6)
 
-        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:total-ruleset-polled' % (backend, ruleset) in gen_counters.keys())
 
-        self.assertTrue('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:total-ruleset-responded' % (backend, ruleset) in gen_counters.keys())
 
-        self.assertTrue('ruleset:%s:category:%s' % (ruleset, category) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:category:%s' % (backend, ruleset, category) in gen_counters.keys())
 
-        self.assertTrue('ruleset:%s:category:%s:state:%s' % (ruleset, category, state) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:category:%s:state:%s' % (backend, ruleset, category, state) in gen_counters.keys())
 
-        self.assertTrue('ruleset:%s:category:%s:district:%s' % (ruleset, category, district) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:category:%s:district:%s' % (backend, ruleset, category, district) in gen_counters.keys())
 
-        self.assertTrue('ruleset:%s:category:%s:ward:%s' % (ruleset, category, ward) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:category:%s:ward:%s' % (backend, ruleset, category, ward) in gen_counters.keys())
 
         poll_result3 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
                                                  ruleset='other-uuid',
                                                  contact='contact-uuid', category='No Response', text='None', completed=False,
-                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA')
+                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA', backend=backend)
 
         gen_counters = poll_result3.generate_counters()
 
@@ -1833,17 +1838,17 @@ class PollResultsTest(UreportTest):
 
         self.assertEqual(len(gen_counters.keys()), 4)
 
-        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
-        self.assertFalse('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())  # no response ignored
-        self.assertTrue('ruleset:%s:nocategory:state:%s' % (ruleset, state) in gen_counters.keys())
-        self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
-        self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:total-ruleset-polled' % (backend, ruleset) in gen_counters.keys())
+        self.assertFalse('backend:%s:ruleset:%s:total-ruleset-responded' % (backend, ruleset) in gen_counters.keys())  # no response ignored
+        self.assertTrue('backend:%s:ruleset:%s:nocategory:state:%s' % (backend, ruleset, state) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:nocategory:district:%s' % (backend, ruleset, district) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:nocategory:ward:%s' % (backend, ruleset, ward) in gen_counters.keys())
 
         poll_result4 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
                                                  ruleset='other-uuid',
                                                  contact='contact-uuid', category='No Response', text='Some text',
                                                  completed=False,
-                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA')
+                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA', backend=backend)
 
         gen_counters = poll_result4.generate_counters()
 
@@ -1854,17 +1859,17 @@ class PollResultsTest(UreportTest):
 
         self.assertEqual(len(gen_counters.keys()), 5)
 
-        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
-        self.assertTrue('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())  # not ignored by text
-        self.assertTrue('ruleset:%s:nocategory:state:%s' % (ruleset, state) in gen_counters.keys())
-        self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
-        self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:total-ruleset-polled' % (backend, ruleset) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:total-ruleset-responded' % (backend, ruleset) in gen_counters.keys())  # not ignored by text
+        self.assertTrue('backend:%s:ruleset:%s:nocategory:state:%s' % (backend, ruleset, state) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:nocategory:district:%s' % (backend, ruleset, district) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:nocategory:ward:%s' % (backend, ruleset, ward) in gen_counters.keys())
 
         poll_result5 = PollResult.objects.create(org=self.nigeria, flow=self.poll.flow_uuid,
                                                  ruleset='other-uuid',
                                                  contact='contact-uuid', category='Other', text='Some suprise',
                                                  completed=False,
-                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA')
+                                                 date=self.now, state='R-LAGOS', district='R-oyo', ward='R-IKEJA', backend=backend)
 
         gen_counters = poll_result5.generate_counters()
 
@@ -1875,11 +1880,11 @@ class PollResultsTest(UreportTest):
 
         self.assertEqual(len(gen_counters.keys()), 4)
 
-        self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
-        self.assertFalse('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())  # Other ignored
-        self.assertTrue('ruleset:%s:nocategory:state:%s' % (ruleset, state) in gen_counters.keys())
-        self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
-        self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:total-ruleset-polled' % (backend, ruleset) in gen_counters.keys())
+        self.assertFalse('backend:%s:ruleset:%s:total-ruleset-responded' % (backend, ruleset) in gen_counters.keys())  # Other ignored
+        self.assertTrue('backend:%s:ruleset:%s:nocategory:state:%s' % (backend, ruleset, state) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:nocategory:district:%s' % (backend, ruleset, district) in gen_counters.keys())
+        self.assertTrue('backend:%s:ruleset:%s:nocategory:ward:%s' % (backend, ruleset, ward) in gen_counters.keys())
 
 
 class PollsTasksTest(UreportTest):

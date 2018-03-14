@@ -23,6 +23,8 @@ class Boundary(models.Model):
 
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="boundaries")
 
+    backend = models.CharField(max_length=16, default='rapidpro')
+
     is_active = models.BooleanField(default=True)
 
     osm_id = models.CharField(max_length=15,

@@ -49,6 +49,8 @@ class ContactField(models.Model):
 
     value_type = models.CharField(max_length=1, verbose_name="Field Type")
 
+    backend = models.CharField(max_length=16, default='rapidpro')
+
     @classmethod
     def lock(cls, org, key):
         return get_redis_connection().lock(CONTACT_FIELD_LOCK_KEY % (org.pk, key), timeout=60)
@@ -71,7 +73,9 @@ class Contact(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    uuid = models.CharField(max_length=36, unique=True)
+    uuid = models.CharField(max_length=36)
+
+    backend = models.CharField(max_length=16, default='rapidpro')
 
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="contacts")
 
