@@ -432,7 +432,7 @@ class UtilsTest(UreportTest):
                                                 dict(label='Cameraman', count=5)
                                                 ])])
 
-    @patch('dash.orgs.models.TembaClient.get_flows')
+    @patch('dash.orgs.models.TembaClient2.get_flows')
     def test_fetch_flows(self, mock_get_flows):
 
         mock_get_flows.side_effect = [
