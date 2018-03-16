@@ -524,7 +524,7 @@ class PollTest(UreportTest):
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
             self.assertEquals(poll1.get_flow(), 'Flow')
-            mock.assert_called_once_with()
+            mock.assert_called_once_with(backend_slug='rapidpro')
 
     @patch('django.core.cache.cache.get')
     def test_most_responded_regions(self, mock_cache_get):

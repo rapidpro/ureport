@@ -449,7 +449,7 @@ class UtilsTest(UreportTest):
             mock_datetime_ms.return_value = 500
 
             with patch('django.core.cache.cache.set') as cache_set_mock:
-                flows = fetch_flows(self.org)
+                flows = fetch_flows(self.org, 'rapidpro')
                 expected = dict()
                 expected['uuid-25'] = dict(uuid='uuid-25', date_hint="2015-04-08",
                                            created_on="2015-04-08T12:48:44.320Z",
@@ -457,7 +457,7 @@ class UtilsTest(UreportTest):
 
             self.assertEqual(flows, expected)
 
-            cache_set_mock.assert_called_once_with('org:%d:flows' % self.org.pk, dict(time=500, results=expected),
+            cache_set_mock.assert_called_once_with('org:%d:flows' % self.org.pk, dict(time=500, rapidpro=expected),
                                                    UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
     def test_update_poll_flow_data(self):
@@ -739,15 +739,15 @@ class UtilsTest(UreportTest):
         with patch('ureport.utils.fetch_flows') as mock_fetch_flows:
             mock_fetch_flows.return_value = "Fetched"
             with patch('django.core.cache.cache.get') as mock_cache_get:
-                mock_cache_get.return_value = dict(results="Cached")
+                mock_cache_get.return_value = dict(rapidpro="Cached")
 
-                self.assertEqual(get_flows(self.org), "Cached")
+                self.assertEqual(get_flows(self.org, 'rapidpro'), "Cached")
                 mock_cache_get.assert_called_once_with(CACHE_ORG_FLOWS_KEY % self.org.pk, None)
                 self.assertFalse(mock_fetch_flows.called)
 
                 mock_cache_get.return_value = None
-                self.assertEqual(get_flows(self.org), "Fetched")
-                mock_fetch_flows.assert_called_once_with(self.org)
+                self.assertEqual(get_flows(self.org, 'rapidpro'), "Fetched")
+                mock_fetch_flows.assert_called_once_with(self.org, 'rapidpro')
 
     @patch('django.core.cache.cache.get')
     def test_get_reporters_count(self, mock_cache_get):

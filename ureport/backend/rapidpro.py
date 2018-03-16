@@ -275,6 +275,39 @@ class RapidProBackend(BaseBackend):
     def _get_client(org, api_version):
         return org.get_temba_client(api_version=api_version)
 
+    def fetch_flows(self, org):
+        client = self._get_client(org, 2)
+        flows = client.get_flows().all()
+
+        all_flows = dict()
+        for flow in flows:
+            flow_json = dict()
+            flow_json['uuid'] = flow.uuid
+            flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
+            flow_json['created_on'] = datetime_to_json_date(flow.created_on)
+            flow_json['name'] = flow.name
+            flow_json['archived'] = flow.archived
+            flow_json['runs'] = flow.runs.active + flow.runs.expired + flow.runs.completed + flow.runs.interrupted
+            flow_json['completed_runs'] = flow.runs.completed
+
+            all_flows[flow.uuid] = flow_json
+        return all_flows
+
+
+    def get_definition(self, org, flow_uuid):
+        client = self._get_client(org, 2)
+        export_definition = client.get_definitions(flows=(flow_uuid, ))
+
+        flow_definition = None
+
+        for flow_def in export_definition.flows:
+            def_flow_uuid = flow_def.get('metadata', dict()).get('uuid', None)
+
+            if def_flow_uuid and def_flow_uuid == flow_uuid:
+                flow_definition = flow_def
+                break
+        return flow_definition
+
     def pull_fields(self, org):
         client = self._get_client(org, 2)
         incoming_objects = client.get_fields().all(retry_on_rate_exceed=True)

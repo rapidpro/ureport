@@ -133,6 +133,8 @@ class Poll(SmartModel):
     org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
 
+    backend = models.CharField(max_length=16, default='rapidpro')
+
     def get_sync_progress(self):
         if not self.runs_count:
             return float(0)
@@ -148,8 +150,9 @@ class Poll(SmartModel):
     @classmethod
     def pull_results(cls, poll_id):
         from ureport.backend import get_backend
-        backend = get_backend()
         poll = Poll.objects.get(pk=poll_id)
+
+        backend = get_backend(backend=poll.backend)
 
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
@@ -366,25 +369,18 @@ class Poll(SmartModel):
         """
         Returns the underlying flow for this poll
         """
-        flows_dict = self.org.get_flows()
+        flows_dict = self.org.get_flows(backend_slug=self.backend)
         return flows_dict.get(self.flow_uuid, None)
 
     def update_or_create_questions(self, user=None):
+        from ureport.backend import get_backend
         if not user:
             user = User.objects.get(pk=-1)
 
         org = self.org
-        temba_client = org.get_temba_client(api_version=2)
-        export_definition = temba_client.get_definitions(flows=(self.flow_uuid, ))
+        backend = get_backend(backend_slug=self.backend)
 
-        flow_definition = None
-
-        for flow_def in export_definition.flows:
-            flow_uuid = flow_def.get('metadata', dict()).get('uuid', None)
-
-            if flow_uuid and flow_uuid == self.flow_uuid:
-                flow_definition = flow_def
-                break
+        flow_definition = backend.get_definition(org, self.flow_uuid)
 
         if flow_definition is None:
             return
@@ -990,6 +986,8 @@ class PollResponseCategory(models.Model):
 class PollResult(models.Model):
 
     org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
+
+    backend = models.CharField(max_length=16, default='rapidpro')
 
     flow = models.CharField(max_length=36)
 
