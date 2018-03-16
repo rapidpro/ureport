@@ -5,21 +5,25 @@ from django.conf import settings
 from pydoc import locate
 
 
-_ACTIVE_BACKEND = None
-
-
-def get_backend():
+def get_backend(backend_slug='rapidpro'):
     """
     Gets the active backend for this casepro instance
     """
-    global _ACTIVE_BACKEND
-    if not _ACTIVE_BACKEND:
-        _ACTIVE_BACKEND = locate(settings.SITE_BACKEND)()
-    return _ACTIVE_BACKEND
+    backends_config_dict = getattr(settings, 'DATA_API_BACKENDS_CONFIG', {})
+    backend_config = backends_config_dict.get(backend_slug, None)
 
+    if backend_config:
+        backend = locate(backend_config['class_type'])(backend=backend_slug)
+    else:
+        backend = locate(settings.SITE_BACKEND)()
+
+    return backend
 
 class BaseBackend(object):
     __metaclass__ = ABCMeta
+
+    def __init__(self, backend='rapidpro'):
+        self.backend = backend
 
     @abstractmethod
     def pull_fields(self, org):

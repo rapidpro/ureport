@@ -59,7 +59,7 @@ requests==2.18.4
 rjsmin==1.0.12
 simplejson==3.13.2
 six==1.11.0
-smartmin==1.11.7
+smartmin==1.11.8
 smmap2==2.0.3
 sorl-thumbnail==12.4.1
 sqlparse==0.2.4

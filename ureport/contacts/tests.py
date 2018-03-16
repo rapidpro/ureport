@@ -7,7 +7,7 @@ from mock import patch
 from ureport.contacts.models import ContactField, Contact, ReportersCounter
 from ureport.contacts.tasks import pull_contacts
 from ureport.locations.models import Boundary
-from ureport.tests import UreportTest
+from ureport.tests import UreportTest, MockTembaClient, TestBackend
 from ureport.utils import json_date_to_datetime
 
 
@@ -153,11 +153,13 @@ class ContactsTasksTest(UreportTest):
     def setUp(self):
         super(ContactsTasksTest, self).setUp()
 
+    @patch('ureport.backend.get_backend')
     @patch('ureport.contacts.models.ReportersCounter.squash_counts')
     @patch('ureport.tests.TestBackend.pull_fields')
     @patch('ureport.tests.TestBackend.pull_boundaries')
     @patch('ureport.tests.TestBackend.pull_contacts')
-    def test_pull_contacts(self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields, mock_squash_counts):
+    def test_pull_contacts(self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields, mock_squash_counts, mock_get_backend):
+        mock_get_backend.return_value = TestBackend()
         mock_pull_fields.return_value = (1, 2, 3, 4)
         mock_pull_boundaries.return_value = (5, 6, 7, 8)
         mock_pull_contacts.return_value = (9, 10, 11, 12)

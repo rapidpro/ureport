@@ -27,7 +27,7 @@ from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pul
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender, update_or_create_questions
 from ureport.polls.templatetags.ureport import question_segmented_results
-from ureport.tests import UreportTest, MockTembaClient
+from ureport.tests import UreportTest, MockTembaClient, TestBackend
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 
@@ -1361,8 +1361,10 @@ class PollTest(UreportTest):
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
 
+    @patch('ureport.backend.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
-    def test_poll_pull_results(self, mock_pull_results):
+    def test_poll_pull_results(self, mock_pull_results, mock_get_backend):
+        mock_get_backend.return_value = TestBackend()
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
@@ -1896,9 +1898,11 @@ class PollsTasksTest(UreportTest):
 
         self.polls_query = Poll.objects.filter(pk__in=[self.poll.pk, self.poll_same_flow.pk]).order_by('-created_on')
 
+    @patch('ureport.backend.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_main_poll')
-    def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results):
+    def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results, mock_get_backend):
+        mock_get_backend.return_value = TestBackend()
         mock_get_main_poll.return_value = self.poll
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
@@ -1909,9 +1913,11 @@ class PollsTasksTest(UreportTest):
                          {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
                           "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
 
+    @patch('ureport.backend.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_brick_polls')
-    def test_pull_results_brick_polls(self, mock_get_brick_polls, mock_pull_results):
+    def test_pull_results_brick_polls(self, mock_get_brick_polls, mock_pull_results, mock_get_backend):
+        mock_get_backend.return_value = TestBackend()
         mock_get_brick_polls.return_value = list(self.polls_query)
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
@@ -1933,10 +1939,12 @@ class PollsTasksTest(UreportTest):
         self.assertEqual(task_state.get_last_results(), {})
         mock_pull_results.assert_called_once()
 
+    @patch('ureport.backend.get_backend')
     @patch('django.core.cache.cache.get')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_other_polls')
-    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results, mock_cache_get):
+    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results, mock_cache_get, mock_get_backend):
+        mock_get_backend.return_value = TestBackend()
         mock_get_other_polls.return_value = self.polls_query
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
         mock_cache_get.return_value = None
@@ -1960,9 +1968,10 @@ class PollsTasksTest(UreportTest):
         mock_pull_results.assert_called_once()
 
 
-
+    @patch('ureport.backend.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
-    def test_backfill_poll_results(self, mock_pull_results):
+    def test_backfill_poll_results(self, mock_pull_results, mock_get_backend):
+        mock_get_backend.return_value = TestBackend()
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         self.poll.has_synced = True
