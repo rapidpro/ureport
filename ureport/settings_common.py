@@ -9,6 +9,7 @@ TESTING = sys.argv[1:2] == ['test']
 
 DEBUG = True
 THUMBNAIL_DEBUG = DEBUG
+THUMBNAIL_DUMMY = True
 
 ADMINS = (
     ('Nyaruka', 'code@nyaruka.com'),
