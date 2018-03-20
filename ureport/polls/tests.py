@@ -741,16 +741,13 @@ class PollTest(UreportTest):
                                            rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
                                                           label='Does your community have power')])
 
-            mock_get_flows.return_value = flows_cached
-
             self.login(self.admin)
             response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
             self.assertTrue('form' in response.context)
 
-            self.assertEquals(len(response.context['form'].fields), 6)
+            self.assertEquals(len(response.context['form'].fields), 5)
             self.assertTrue('is_featured' in response.context['form'].fields)
-            self.assertTrue('flow_uuid' in response.context['form'].fields)
             self.assertTrue('title' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
             self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
@@ -760,31 +757,25 @@ class PollTest(UreportTest):
             self.assertTrue('category_image' in response.context['form'].fields)
             self.assertTrue('loc' in response.context['form'].fields)
 
-            self.assertEquals(len(response.context['form'].fields['flow_uuid'].choices), 1)
-            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][0], 'uuid-25')
-            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][1], 'Flow 1 (2015-04-08)')
-
             response = self.client.post(create_url, dict(), SERVER_NAME='uganda.ureport.io')
             self.assertTrue(response.context['form'].errors)
 
-            self.assertEquals(len(response.context['form'].errors), 3)
+            self.assertEquals(len(response.context['form'].errors), 2)
             self.assertTrue('title' in response.context['form'].errors)
             self.assertTrue('category' in response.context['form'].errors)
-            self.assertTrue('flow_uuid' in response.context['form'].errors)
             self.assertFalse(Poll.objects.all())
 
-            post_data = dict(title='Poll 1', category=self.health_uganda.pk, flow_uuid="uuid-25")
+            post_data = dict(title='Poll 1', category=self.health_uganda.pk)
 
             response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertTrue(Poll.objects.all())
 
             poll = Poll.objects.get()
             self.assertEquals(poll.title, 'Poll 1')
-            self.assertEquals(poll.flow_uuid, "uuid-25")
+            self.assertEquals(poll.backend, "rapidpro")
             self.assertEquals(poll.org, self.uganda)
-            self.assertEqual(poll.poll_date, json_date_to_datetime("2015-04-08T08:30:40.000Z"))
 
-            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_date', args=[poll.pk]))
+            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_flow', args=[poll.pk]))
 
             self.assertEqual(Poll.objects.all().count(), 1)
 
@@ -795,10 +786,11 @@ class PollTest(UreportTest):
             ten_minutes_ago = timezone.now() - timedelta(minutes=10)
 
             # a new submission after five minutes will create a new poll
-            Poll.objects.filter(org=poll.org, flow_uuid='uuid-25').update(created_on=ten_minutes_ago)
+            Poll.objects.filter(org=poll.org, backend='rapidpro').update(created_on=ten_minutes_ago, flow_uuid='uuid-25')
             response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertEqual(Poll.objects.all().count(), 2)
 
+            Poll.objects.filter(org=poll.org, backend='rapidpro').update(flow_uuid='uuid-25')
             tz = pytz.timezone('Africa/Kigali')
             with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
                 flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30',
@@ -808,14 +800,96 @@ class PollTest(UreportTest):
 
                 mock_get_flows.return_value = flows_cached
 
-                post_data = dict(title='Poll 2', category=self.health_uganda.pk, flow_uuid="uuid-30")
+                post_data = dict(title='Poll 2', category=self.health_uganda.pk)
                 response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
                 self.assertEqual(Poll.objects.all().count(), 3)
 
-                poll = Poll.objects.get(flow_uuid='uuid-30')
-                self.assertEquals(poll.title, 'Poll 2')
+                poll = Poll.objects.get(title='Poll 2')
                 self.assertEquals(poll.org, self.uganda)
                 self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))
+
+            with self.settings(DATA_API_BACKENDS_CONFIG=dict(rapidpro=dict(name='RapidPro'), floip=dict(name='Floip'))):
+                Poll.objects.filter(org=poll.org, backend='rapidpro').update(flow_uuid='uuid-25')
+
+                response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
+                self.assertEquals(response.status_code, 200)
+                self.assertTrue('form' in response.context)
+
+                self.assertEquals(len(response.context['form'].fields), 5)
+                self.assertFalse('backend' in response.context['form'].fields)
+
+                # add the config for a second backend
+                self.uganda.set_config('api_token', "floip_token", top_key='floip')
+
+                response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
+                self.assertEquals(response.status_code, 200)
+                self.assertTrue('form' in response.context)
+
+                self.assertEquals(len(response.context['form'].fields), 6)
+                self.assertTrue('is_featured' in response.context['form'].fields)
+                self.assertTrue('title' in response.context['form'].fields)
+                self.assertTrue('category' in response.context['form'].fields)
+                self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+                self.assertEquals(list(response.context['form'].fields['category'].choices),
+                                  [('', '---------'),
+                                  (self.health_uganda.pk, 'uganda - Health')])
+                self.assertTrue('category_image' in response.context['form'].fields)
+                self.assertTrue('loc' in response.context['form'].fields)
+
+                self.assertTrue('backend' in response.context['form'].fields)
+                self.assertEquals(len(response.context['form'].fields['backend'].choices), 2)
+                self.assertEquals(list(response.context['form'].fields['backend'].choices),
+                                  [('rapidpro', 'RapidPro'),
+                                   ('floip', 'Floip')])
+    
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    def test_poll_poll_flow_view(self):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "", self.health_uganda, self.admin, featured=True)
+
+        uganda_poll_flow_url = reverse('polls.poll_poll_flow', args=[poll1.pk])
+
+        response = self.client.get(uganda_poll_flow_url, SERVER_NAME='uganda.ureport.io')
+        self.assertLoginRedirect(response)
+
+        with patch('dash.orgs.models.Org.get_flows') as mock_get_flows:
+            flows_cached = dict()
+            flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25',
+                                           participants=None, labels="", archived=False,
+                                           created_on="2015-04-08T08:30:40.000Z", date_hint="2015-04-08",
+                                           rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
+                                                          label='Does your community have power')])
+
+            mock_get_flows.return_value = flows_cached
+
+            self.login(self.admin)
+            self.assertFalse(poll1.flow_uuid)
+            response = self.client.get(uganda_poll_flow_url, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+            self.assertTrue('form' in response.context)
+
+            self.assertEquals(len(response.context['form'].fields), 2)
+            self.assertTrue('loc' in response.context['form'].fields)
+            self.assertTrue('flow_uuid' in response.context['form'].fields)
+            self.assertEquals(len(response.context['form'].fields['flow_uuid'].choices), 1)
+            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][0], 'uuid-25')
+            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][1], 'Flow 1 (2015-04-08)')
+
+            post_data = dict(flow_uuid='uuid-25')
+            response = self.client.post(uganda_poll_flow_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+
+            poll = Poll.objects.get(pk=poll1.pk)
+            self.assertEquals(poll.flow_uuid, 'uuid-25')
+
+            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_date', args=[poll.pk]))
+
+            response = self.client.get(uganda_poll_flow_url, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 302)
+
+            response = self.client.get(uganda_poll_flow_url, follow=True, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_date', args=[poll.pk]))
+
 
     def test_poll_poll_date_view(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -918,11 +992,10 @@ class PollTest(UreportTest):
             self.assertEquals(response.status_code, 200)
             self.assertTrue('form' in response.context)
 
-            self.assertEquals(len(response.context['form'].fields), 7)
+            self.assertEquals(len(response.context['form'].fields), 6)
             self.assertTrue('is_active' in response.context['form'].fields)
             self.assertTrue('is_featured' in response.context['form'].fields)
             self.assertTrue('title' in response.context['form'].fields)
-            self.assertTrue('poll_date' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
             self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
             self.assertEquals(list(response.context['form'].fields['category'].choices),
@@ -939,7 +1012,7 @@ class PollTest(UreportTest):
             self.assertTrue('category' in response.context['form'].errors)
 
             post_data = dict(title='title updated', category=self.health_uganda.pk,
-                             is_featured=False, poll_date=yesterday.strftime('%Y-%m-%d %H:%M:%S'))
+                             is_featured=False)
             response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertFalse('form' in response.context)
             updated_poll = Poll.objects.get(pk=poll1.pk)
@@ -947,21 +1020,6 @@ class PollTest(UreportTest):
             self.assertFalse(updated_poll.is_featured)
 
             self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_list'))
-
-            tz = pytz.timezone('Africa/Kigali')
-            with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
-                response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
-                self.assertContains(response, "Edit Poll for flow [Flow 1 (2015-04-08)]")
-
-                post_data = dict(title='Poll 2', category=self.health_uganda.pk,
-                                 is_featured=False, poll_date="")
-                response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
-                self.assertEqual(Poll.objects.all().count(), 2)
-
-                poll = Poll.objects.get(flow_uuid='uuid-1')
-                self.assertEquals(poll.title, 'Poll 2')
-                self.assertEquals(poll.org, self.uganda)
-                self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))
 
     def test_list_poll(self):
         list_url = reverse('polls.poll_list')
