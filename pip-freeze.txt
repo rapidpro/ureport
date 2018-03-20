@@ -59,9 +59,9 @@ requests==2.18.4
 rjsmin==1.0.12
 simplejson==3.13.2
 six==1.11.0
-smartmin==1.11.7
+smartmin==1.11.8
 smmap2==2.0.3
-sorl-thumbnail==12.4.1
+-e git+https://github.com/jazzband/sorl-thumbnail.git@b6358d234d7de3927a2666a2a5ab3d7870c0e1d3#egg=sorl_thumbnail
 sqlparse==0.2.4
 -e git+https://github.com/Alir3z4/python-stop-words.git#egg=stop_words
 uritemplate==3.0.0
