@@ -11,7 +11,7 @@ from django.db.models import Sum, Count
 from django.utils.text import slugify
 from django.utils import timezone
 from smartmin.models import SmartModel
-from django.utils.translation import ugettext_lazy as _, ugettext
+from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
 from dash.orgs.models import Org
 from dash.categories.models import Category, CategoryImage
@@ -147,9 +147,8 @@ class Poll(SmartModel):
 
     @classmethod
     def pull_results(cls, poll_id):
-        from ureport.backend import get_backend
-        backend = get_backend()
         poll = Poll.objects.get(pk=poll_id)
+        backend = poll.org.get_backend()
 
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
@@ -449,7 +448,7 @@ class Poll(SmartModel):
                 for category in question.get_words():
                     key = category['label'].lower()
 
-                    if not key in words:
+                    if key not in words:
                         words[key] = int(category['count'])
 
                     else:
@@ -587,7 +586,6 @@ class Poll(SmartModel):
         if record_ids:
             update_or_create_questions.delay(record_ids)
 
-
     @classmethod
     def import_csv(cls, task, log=None):
         csv_file = task.csv_file
@@ -621,7 +619,7 @@ class Poll(SmartModel):
         if task.import_params:
             try:
                 import_params = json.loads(task.import_params)
-            except:
+            except Exception:
                 pass
 
         try:
@@ -750,10 +748,10 @@ class PollQuestion(SmartModel):
             return cached_value["results"]
 
         if not segment:
-            logger.error('Question get results without segment cache missed', extra={'stack': True,})
+            logger.error('Question get results without segment cache missed', extra={'stack': True, })
 
         if segment and 'location' in segment and segment.get('location').lower() == 'state':
-            logger.error('Question get results with state segment cache missed', extra={'stack': True,})
+            logger.error('Question get results with state segment cache missed', extra={'stack': True, })
 
         return self.calculate_results(segment=segment)
 
@@ -795,7 +793,7 @@ class PollQuestion(SmartModel):
                 if len(category['label']) > 1 and category['label'] not in ignore_words and len(categories) < 100:
                     categories.append(dict(label=category['label'], count=int(category['count'])))
 
-            results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+            results.append(dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories))
 
         else:
             categories_label = self.response_categories.filter(is_active=True).values_list('category', flat=True)
@@ -869,7 +867,7 @@ class PollQuestion(SmartModel):
                         results.append(dict(set=set_count, unset=unset_count, label=age_group,
                                             categories=categories))
 
-                    results = sorted(results, key=lambda i:i['label'])
+                    results = sorted(results, key=lambda i: i['label'])
 
                 elif gender_part:
 
@@ -879,7 +877,7 @@ class PollQuestion(SmartModel):
                     for gender in genders:
                         categories = []
                         set_count = 0
-                        unset_count_key = "ruleset:%s:nocategory:%s:%s"% (self.ruleset_uuid, 'gender', gender)
+                        unset_count_key = "ruleset:%s:nocategory:%s:%s" % (self.ruleset_uuid, 'gender', gender)
                         unset_count = question_results.get(unset_count_key, 0)
 
                         for categorie_label in categories_label:
@@ -900,7 +898,7 @@ class PollQuestion(SmartModel):
                         category_count = question_results.get(category_count_key, 0)
                         categories.append(dict(count=category_count, label=categorie_label))
 
-                results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+                results.append(dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories))
 
         cache_time = PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT
         if not segment:
@@ -1021,7 +1019,6 @@ class PollResult(models.Model):
         if not self.org_id or not self.flow or not self.ruleset:
             return generated_counters
 
-        org_id = self.org_id
         ruleset = ''
         category = ''
         state = ''

@@ -7,7 +7,7 @@ from mock import patch
 from ureport.contacts.models import ContactField, Contact, ReportersCounter
 from ureport.contacts.tasks import pull_contacts
 from ureport.locations.models import Boundary
-from ureport.tests import UreportTest, MockTembaClient, TestBackend
+from ureport.tests import UreportTest, TestBackend
 from ureport.utils import json_date_to_datetime
 
 
@@ -36,8 +36,8 @@ class ContactTest(UreportTest):
                                                 level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
         self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja",
-                                                level=Boundary.WARD_LEVEL,
-                                                parent=self.district, geometry='{"foo":"bar-ward"}')
+                                            level=Boundary.WARD_LEVEL,
+                                            parent=self.district, geometry='{"foo":"bar-ward"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
                                                              label='Registration Date', value_type='T')
@@ -153,7 +153,7 @@ class ContactsTasksTest(UreportTest):
     def setUp(self):
         super(ContactsTasksTest, self).setUp()
 
-    @patch('ureport.backend.get_backend')
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.contacts.models.ReportersCounter.squash_counts')
     @patch('ureport.tests.TestBackend.pull_fields')
     @patch('ureport.tests.TestBackend.pull_boundaries')
