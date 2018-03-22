@@ -3,8 +3,6 @@ from __future__ import unicode_literals
 
 import json
 
-import time
-
 from datetime import timedelta
 from django.db import connection, reset_queries
 from django.test import override_settings
@@ -63,6 +61,7 @@ class FieldSyncerTest(UreportTest):
         self.assertTrue(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer2.local_kwargs(self.nigeria, remote)))
 
+
 class BoundarySyncerTest(UreportTest):
 
     def setUp(self):
@@ -100,12 +99,12 @@ class BoundarySyncerTest(UreportTest):
         kwargs = self.syncer.local_kwargs(self.nigeria, state)
         self.assertEqual(kwargs, {'backend': 'rapidpro', 'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
                                   'level': Boundary.STATE_LEVEL, 'parent': country_boundary,
-                                  'geometry':json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
+                                  'geometry': json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
 
         kwargs = self.syncer2.local_kwargs(self.nigeria, state)
         self.assertEqual(kwargs, {'backend': 'floip', 'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
                                   'level': Boundary.STATE_LEVEL, 'parent': country_boundary,
-                                  'geometry':json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
+                                  'geometry': json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
 
     def test_update_required(self):
         geometry = TembaBoundary.Geometry.create(type='MultiPolygon', coordinates=[[1, 2]])
@@ -260,7 +259,7 @@ class ContactSyncerTest(UreportTest):
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
                                                     ObjectRef.create(uuid='G-007', name='Actors')],
-                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state': 'Lagos',
                                                     'lga': 'Oyo', 'ward': 'Ikeja', 'occupation': 'Student', 'born': '1990',
                                                     'gender': 'Male'},
                                             language='eng')
@@ -280,7 +279,7 @@ class ContactSyncerTest(UreportTest):
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
                                                     ObjectRef.create(uuid='G-007', name='Actors')],
-                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state': 'Lagos',
                                                     'lga': 'Oyo', 'occupation': 'Student', 'born': '-1',
                                                     'gender': 'Male'},
                                             language='eng')
@@ -300,7 +299,7 @@ class ContactSyncerTest(UreportTest):
         temba_contact = TembaContact.create(uuid='C-008', name="Jan", urns=['tel:123'],
                                             groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
                                                     ObjectRef.create(uuid='G-007', name='Actors')],
-                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state':'Lagos',
+                                            fields={'registration_date': '2014-01-02T03:04:05.000000Z', 'state': 'Lagos',
                                                     'lga': 'Oyo', 'occupation': 'Student', 'born': '2147483648',
                                                     'gender': 'Male'},
                                             language='eng')
@@ -378,7 +377,7 @@ class RapidProBackendTest(UreportTest):
             MockClientQuery([])
         ]
 
-        with self.assertNumQueries(0):
+        with self.assertNumQueries(1):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 0))
@@ -418,7 +417,7 @@ class RapidProBackendTest(UreportTest):
             )
         ]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 3))
@@ -457,7 +456,7 @@ class RapidProBackendTest(UreportTest):
             )
         ]
 
-        with self.assertNumQueries(9):
+        with self.assertNumQueries(10):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 2))
@@ -498,7 +497,7 @@ class RapidProBackendTest(UreportTest):
             )
         ]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(11):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 1))
@@ -540,7 +539,7 @@ class RapidProBackendTest(UreportTest):
             )
         ]
 
-        with self.assertNumQueries(11):
+        with self.assertNumQueries(12):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (3, 0, 0, 0))
@@ -557,7 +556,7 @@ class RapidProBackendTest(UreportTest):
                                         groups=[ObjectRef.create(uuid='G-001', name='ureporters'),
                                                 ObjectRef.create(uuid='G-007', name='Actors')],
                                         fields={'registration_date': '2014-01-02T03:04:05.000000Z',
-                                                'state':'Nigeria > Lagos', 'lga': 'Nigeria > Lagos > Oyo',
+                                                'state': 'Nigeria > Lagos', 'lga': 'Nigeria > Lagos > Oyo',
                                                 'occupation': 'Student', 'born': '1990', 'gender': 'Male'},
                                         language='eng'),
                     TembaContact.create(
@@ -578,7 +577,7 @@ class RapidProBackendTest(UreportTest):
             )
         ]
 
-        with self.assertNumQueries(9):
+        with self.assertNumQueries(10):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
@@ -594,8 +593,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_contacts.side_effect = [
             # first call to get active contacts
-            MockClientQuery([]
-            ),
+            MockClientQuery([]),
             # second call to get deleted contacts
             MockClientQuery(
                 [
@@ -607,7 +605,7 @@ class RapidProBackendTest(UreportTest):
             )
         ]
 
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(3):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 0))
@@ -624,7 +622,7 @@ class RapidProBackendTest(UreportTest):
             TembaField.create(key="age", label="Age", value_type="numeric"),
         ])
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 0))
@@ -637,7 +635,7 @@ class RapidProBackendTest(UreportTest):
             TembaField.create(key="homestate", label="Homestate", value_type="state"),
         ])
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(7):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 1, 1, 0))
@@ -648,7 +646,7 @@ class RapidProBackendTest(UreportTest):
         ContactField.objects.get(key="homestate", label="Homestate", value_type="S", is_active=True)
 
         # check that no changes means no updates
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(4):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 2))
@@ -664,7 +662,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_boundaries.return_value = MockClientQuery([remote])
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         mock_get_boundaries.assert_called_once_with(geometry=True)
@@ -679,7 +677,7 @@ class RapidProBackendTest(UreportTest):
                                  geometry=geometry)
         ])
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 0))
@@ -691,7 +689,7 @@ class RapidProBackendTest(UreportTest):
                                  geometry=geometry)
         ])
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 1, 0, 1))
@@ -703,7 +701,7 @@ class RapidProBackendTest(UreportTest):
                                  geometry=geometry)
         ])
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
@@ -713,7 +711,7 @@ class RapidProBackendTest(UreportTest):
                                  geometry=geometry)
         ])
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 1))
@@ -749,7 +747,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (num_val_created, num_val_updated, num_val_ignored,
              num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
@@ -786,7 +784,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (num_val_created, num_val_updated, num_val_ignored,
              num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
@@ -811,7 +809,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (num_val_created, num_val_updated, num_val_ignored,
              num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
@@ -828,7 +826,7 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.text, "We'll celebrate today")
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(4):
             (num_val_created, num_val_updated, num_val_ignored,
              num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
@@ -837,12 +835,12 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(4):
             (num_val_created, num_val_updated, num_val_ignored,
              num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
-        self.assertEqual( (num_val_created, num_val_updated, num_val_ignored,
-                           num_path_created, num_path_updated, num_path_ignored), (0, 0, 2, 0, 0, 2))
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (0, 0, 2, 0, 0, 2))
 
         PollResult.objects.all().delete()
 
@@ -860,9 +858,9 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (num_val_created, num_val_updated, num_val_ignored,
-            num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
                           num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 0, 0, 2))
@@ -878,13 +876,13 @@ class RapidProBackendTest(UreportTest):
                                                                              time=now)},
                                       path=[TembaRun.Step.create(node='ruleset-uuid', time=now),
                                             TembaRun.Step.create(node='actionset-uuid', time=now),
-                                            TembaRun.Step.create(node='ruleset-uuid-2', time=now),],
+                                            TembaRun.Step.create(node='ruleset-uuid-2', time=now), ],
                                       created_on=now, modified_on=now, exited_on=now,
                                       exit_type='completed')
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (num_val_created, num_val_updated, num_val_ignored,
              num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
@@ -903,7 +901,7 @@ class RapidProBackendTest(UreportTest):
         PollResult.objects.filter(ruleset='ruleset-uuid-2').update(date=None)
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (num_val_created, num_val_updated, num_val_ignored,
              num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
@@ -913,7 +911,7 @@ class RapidProBackendTest(UreportTest):
         PollResult.objects.filter(ruleset='ruleset-uuid').update(date=None)
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (num_val_created, num_val_updated, num_val_ignored,
              num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
@@ -929,10 +927,9 @@ class RapidProBackendTest(UreportTest):
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
 
-
         PollResult.objects.all().delete()
-        contact = Contact.objects.create(org=self.nigeria, uuid='C-021', gender='M', born=1971, state='R-LAGOS',
-                                         district='R-OYO', ward='R-IKEJA')
+        Contact.objects.create(org=self.nigeria, uuid='C-021', gender='M', born=1971, state='R-LAGOS',
+                               district='R-OYO', ward='R-IKEJA')
 
         poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid-3', self.education_nigeria, self.admin)
 
@@ -950,7 +947,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (num_val_created, num_val_updated, num_val_ignored,
              num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
@@ -1063,8 +1060,6 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        start = time.time()
-
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
@@ -1084,7 +1079,6 @@ class PerfTest(UreportTest):
 
         # simulate a subsequent sync with no changes
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
-        start = time.time()
 
         redis_client.delete(key)
         (num_val_created, num_val_updated, num_val_ignored,
@@ -1108,8 +1102,6 @@ class PerfTest(UreportTest):
                                                                node='ruleset-uuid-0',
                                                                time=now - timedelta(minutes=1))
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
-
-        start = time.time()
 
         redis_client.delete(key)
         (num_val_created, num_val_updated, num_val_ignored,
@@ -1136,8 +1128,6 @@ class PerfTest(UreportTest):
                                                                time=now + timedelta(minutes=1))
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
-
-        start = time.time()
 
         redis_client.delete(key)
         (num_val_created, num_val_updated, num_val_ignored,
@@ -1171,11 +1161,9 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        start = time.time()
-
         redis_client.delete(key)
         (num_val_created, num_val_updated, num_val_ignored,
-        num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
 
         self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
                           num_path_created, num_path_updated, num_path_ignored),
@@ -1204,8 +1192,6 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        start = time.time()
-
         redis_client.delete(key)
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
@@ -1229,8 +1215,6 @@ class PerfTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
-        start = time.time()
-
         redis_client.delete(key)
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
@@ -1253,15 +1237,13 @@ class PerfTest(UreportTest):
             for r in batch:
                 r.path = []
                 r.values = {key: val for key, val in [('category %s' % s,
-                                                        TembaRun.Value.create(value="T %s" % s,
-                                                                              category='C %s' % s,
-                                                                              node='ruleset-uuid-0',
-                                                                              time=now + timedelta(minutes=int("%d" % (s + 1)))))
-                                                        for s in range(0, num_steps)]}
+                                                       TembaRun.Value.create(value="T %s" % s,
+                                                                             category='C %s' % s,
+                                                                             node='ruleset-uuid-0',
+                                                                             time=now + timedelta(minutes=int("%d" % (s + 1)))))
+                                                      for s in range(0, num_steps)]}
 
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
-
-        start = time.time()
 
         redis_client.delete(key)
         (num_val_created, num_val_updated, num_val_ignored,
@@ -1292,8 +1274,6 @@ class PerfTest(UreportTest):
         redis_client.delete(key)
 
         PollResult.objects.all().delete()
-
-        start = time.time()
 
         # same contact, same ruleset, same or previous time should all be ignored, only insert one, ignore others
         active_fetches = []

@@ -1,23 +1,7 @@
 from __future__ import unicode_literals
 
 from abc import ABCMeta, abstractmethod
-from django.conf import settings
-from pydoc import locate
 
-
-def get_backend(backend_slug='rapidpro'):
-    """
-    Gets the active backend for this casepro instance
-    """
-    backends_config_dict = getattr(settings, 'DATA_API_BACKENDS_CONFIG', {})
-    backend_config = backends_config_dict.get(backend_slug, None)
-
-    if backend_config:
-        backend = locate(backend_config['class_type'])(backend=backend_slug)
-    else:
-        backend = locate(settings.SITE_BACKEND)()
-
-    return backend
 
 class BaseBackend(object):
     __metaclass__ = ABCMeta

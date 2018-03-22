@@ -22,8 +22,7 @@ from smartmin.csv_imports.models import ImportTask
 from dash.orgs.models import TaskState
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
 from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
-from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts, \
-    pull_results_recent_polls
+from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender, update_or_create_questions
 from ureport.polls.templatetags.ureport import question_segmented_results
@@ -219,7 +218,7 @@ class PollTest(UreportTest):
         csv_file = open('%s/test_imports/polls.csv' % settings.MEDIA_ROOT, 'rb')
         post_data = dict(csv_file=csv_file)
 
-        response = self.client.post(import_url, post_data, follow=True,  SERVER_NAME='uganda.ureport.io')
+        response = self.client.post(import_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
         self.assertEqual(200, response.status_code)
 
         task = ImportTask.objects.get()
@@ -299,10 +298,10 @@ class PollTest(UreportTest):
 
     def test_get_public_polls(self):
 
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
-        poll3 = self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin, has_synced=True)
+        self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin, has_synced=True)
 
         self.assertTrue(Poll.get_public_polls(self.uganda))
         self.assertEqual(Poll.get_public_polls(self.uganda).count(), 1)
@@ -332,33 +331,24 @@ class PollTest(UreportTest):
         self.assertIsNone(Poll.get_main_poll(self.uganda))
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid='uuid-101',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid='uuid-101',
+                                    created_by=self.admin, modified_by=self.admin)
 
         self.assertEquals(Poll.get_main_poll(self.uganda), poll1)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
-        poll2_question = PollQuestion.objects.create(poll=poll2,
-                                                     title='question poll 2',
-                                                     ruleset_uuid='uuid-202',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll2, title='question poll 2', ruleset_uuid='uuid-202',
+                                    created_by=self.admin, modified_by=self.admin)
 
         self.assertEquals(Poll.get_main_poll(self.uganda), poll2)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
-        poll3_question = PollQuestion.objects.create(poll=poll3,
-                                                     title='question poll 3',
-                                                     ruleset_uuid='uuid-303',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll3, title='question poll 3', ruleset_uuid='uuid-303',
+                                    created_by=self.admin, modified_by=self.admin)
 
         self.assertEquals(Poll.get_main_poll(self.uganda), poll3)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
@@ -392,11 +382,8 @@ class PollTest(UreportTest):
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid='uuid-101',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid='uuid-101',
+                                    created_by=self.admin, modified_by=self.admin)
 
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
@@ -406,11 +393,8 @@ class PollTest(UreportTest):
         self.assertFalse(Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
-        poll2_question = PollQuestion.objects.create(poll=poll2,
-                                                     title='question poll 2',
-                                                     ruleset_uuid='uuid-202',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll2, title='question poll 2', ruleset_uuid='uuid-202',
+                                    created_by=self.admin, modified_by=self.admin)
 
         self.assertTrue(Poll.get_brick_polls(self.uganda))
         self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
@@ -440,11 +424,8 @@ class PollTest(UreportTest):
         self.assertTrue(poll3 not in Poll.get_brick_polls(self.uganda))
         self.assertFalse(Poll.get_brick_polls(self.nigeria))
 
-        poll3_question = PollQuestion.objects.create(poll=poll3,
-                                                     title='question poll 3',
-                                                     ruleset_uuid='uuid-303',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll3, title='question poll 3', ruleset_uuid='uuid-303',
+                                    created_by=self.admin, modified_by=self.admin)
 
         self.assertTrue(Poll.get_brick_polls(self.uganda))
         self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
@@ -532,11 +513,8 @@ class PollTest(UreportTest):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101", created_by=self.admin,
+                                    modified_by=self.admin)
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = [{u'open_ended': False, u'label': u'Abia', u'set': 338, u'unset': 36, u'boundary': u'R3713501', u'categories': [{u'count': 80, u'label': u'Yes'}, {u'count': 258, u'label': u'No'}]},
@@ -626,11 +604,8 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.runs(), "----")
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101",
+                                    created_by=self.admin, modified_by=self.admin)
 
         with patch('ureport.polls.models.PollQuestion.get_polled') as mock:
             mock.return_value = 100
@@ -643,11 +618,8 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.responded_runs(), "---")
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101",
+                                    created_by=self.admin, modified_by=self.admin)
 
         with patch('ureport.polls.models.PollQuestion.get_responded') as mock:
             mock.return_value = 40
@@ -660,11 +632,8 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.response_percentage(), "---")
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101",
+                                    created_by=self.admin, modified_by=self.admin)
 
         with patch('ureport.polls.models.PollQuestion.get_response_percentage') as mock_response_percentage:
             mock_response_percentage.return_value = "40%"
@@ -841,7 +810,7 @@ class PollTest(UreportTest):
                 self.assertEquals(list(response.context['form'].fields['backend'].choices),
                                   [('rapidpro', 'RapidPro'),
                                    ('floip', 'Floip')])
-    
+
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_poll_poll_flow_view(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "", self.health_uganda, self.admin, featured=True)
@@ -890,12 +859,10 @@ class PollTest(UreportTest):
             self.assertEquals(response.status_code, 200)
             self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_date', args=[poll.pk]))
 
-
     def test_poll_poll_date_view(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin,
-                                     featured=True)
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, featured=True)
 
         uganda_poll_date_url = reverse('polls.poll_poll_date', args=[poll1.pk])
         nigeria_poll_date_url = reverse('polls.poll_poll_date', args=[poll2.pk])
@@ -984,9 +951,6 @@ class PollTest(UreportTest):
                                                          label='Does your community have power')])
 
             mock_get_flows.return_value = flows_cached
-
-            now = timezone.now()
-            yesterday = now - timedelta(days=1)
 
             response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
@@ -1079,12 +1043,8 @@ class PollTest(UreportTest):
         self.assertTrue('form' in response.context)
         self.assertEquals(len(response.context['form'].fields), 0)
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_label='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_label='question poll 1',
+                                    ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
@@ -1419,7 +1379,7 @@ class PollTest(UreportTest):
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
 
-    @patch('ureport.backend.get_backend')
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
     def test_poll_pull_results(self, mock_pull_results, mock_get_backend):
         mock_get_backend.return_value = TestBackend()
@@ -1463,9 +1423,6 @@ class PollQuestionTest(UreportTest):
                                                      modified_by=self.admin)
 
         self.assertEquals(unicode(poll_question1), 'question 1')
-        fetched_results = [dict(open_ended=False, set=3462, unset=3694, categories=[dict(count=2210, label='Yes'),
-                                                                                    dict(count=1252, label='No')],
-                                label='All')]
 
         self.uganda.set_config("state_label", "LGA")
         self.uganda.set_config("district_label", "District")
@@ -1956,7 +1913,7 @@ class PollsTasksTest(UreportTest):
 
         self.polls_query = Poll.objects.filter(pk__in=[self.poll.pk, self.poll_same_flow.pk]).order_by('-created_on')
 
-    @patch('ureport.backend.get_backend')
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_main_poll')
     def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results, mock_get_backend):
@@ -1971,7 +1928,7 @@ class PollsTasksTest(UreportTest):
                          {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
                           "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
 
-    @patch('ureport.backend.get_backend')
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_brick_polls')
     def test_pull_results_brick_polls(self, mock_get_brick_polls, mock_pull_results, mock_get_backend):
@@ -1997,7 +1954,7 @@ class PollsTasksTest(UreportTest):
         self.assertEqual(task_state.get_last_results(), {})
         mock_pull_results.assert_called_once()
 
-    @patch('ureport.backend.get_backend')
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('django.core.cache.cache.get')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_other_polls')
@@ -2025,8 +1982,7 @@ class PollsTasksTest(UreportTest):
         self.assertEqual(task_state.get_last_results(), {})
         mock_pull_results.assert_called_once()
 
-
-    @patch('ureport.backend.get_backend')
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
     def test_backfill_poll_results(self, mock_pull_results, mock_get_backend):
         mock_get_backend.return_value = TestBackend()
