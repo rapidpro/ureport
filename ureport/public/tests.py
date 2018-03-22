@@ -45,6 +45,9 @@ class PublicTest(UreportTest):
     def test_org_config_fields(self):
         edit_url = reverse('orgs.org_edit')
 
+        self.nigeria.backends.create(api_token="token", slug='rapidpro',
+                                     created_by=self.admin, modified_by=self.admin)
+
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertLoginRedirect(response)
 

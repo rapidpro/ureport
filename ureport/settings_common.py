@@ -1,10 +1,17 @@
 from __future__ import absolute_import
-import sys
-from django.utils.translation import ugettext_lazy as _
 
-#-----------------------------------------------------------------------------------
+import sys
+import os
+
+from celery.schedules import crontab
+from datetime import timedelta
+from django.utils.translation import ugettext_lazy as _
+from django.forms import Textarea
+
+
+# -----------------------------------------------------------------------------------
 # Sets TESTING to True if this configuration is read during a unit test
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 TESTING = sys.argv[1:2] == ['test']
 
 DEBUG = True
@@ -18,7 +25,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'dash.sqlite',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
@@ -148,7 +155,10 @@ DATA_API_BACKENDS_CONFIG = {
     }
 }
 
-from django.forms import Textarea
+DATA_API_BACKEND_TYPES = (
+    ('ureport.backend.rapidpro.RapidProBackend', "RapidPro Backend Type"),
+)
+
 
 BACKENDS_ORG_CONFIG_FIELDS = [
     dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True, read_only=True),
@@ -163,7 +173,7 @@ BACKENDS_ORG_CONFIG_FIELDS = [
     dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True, read_only=True),
 ]
 
-ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whether this org should be show on the landing page"), required=False), superuser_only=True),
+ORG_CONFIG_FIELDS = [dict(name='is_on_landing_page', field=dict(help_text=_("Whether this org should be show on the landing page"), required=False), superuser_only=True),
                      dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-Report locally"), label="Shortcode", required=True)),
                      dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-Report"), label="Join Text", required=False)),
                      dict(name='join_fg_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False), superuser_only=True),
@@ -263,7 +273,7 @@ LOGGING = {
     'handlers': {
         'console': {
             'level': 'INFO',
-            'class':'logging.StreamHandler',
+            'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         }
     },
@@ -279,10 +289,9 @@ LOGGING = {
     }
 }
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Directory Configuration
-#-----------------------------------------------------------------------------------
-import os
+# -----------------------------------------------------------------------------------
 
 PROJECT_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)))
 RESOURCES_DIR = os.path.join(PROJECT_DIR, '../resources')
@@ -335,17 +344,17 @@ TEMPLATES = [
 ]
 
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Permission Management
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 # this lets us easily create new permissions across our objects
 PERMISSIONS = {
-    '*': ('create', # can create an object
-          'read',   # can read an object, viewing it's details
-          'update', # can update an object
-          'delete', # can delete an object,
-          'list'),  # can view a list of the objects
+    '*': ('create',  # can create an object
+          'read',    # can read an object, viewing it's details
+          'update',  # can update an object
+          'delete',  # can delete an object,
+          'list'),   # can view a list of the objects
 
     'dashblocks.dashblock': ('html', ),
     'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
@@ -400,17 +409,17 @@ GROUP_PERMISSIONS = {
     )
 }
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Login / Logout
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 LOGIN_URL = "/users/login/"
 LOGOUT_URL = "/users/logout/"
 LOGIN_REDIRECT_URL = "/manage/org/choose/"
 LOGOUT_REDIRECT_URL = "/"
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Auth Configuration
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -418,9 +427,9 @@ AUTHENTICATION_BACKENDS = (
 
 ANONYMOUS_USER_NAME = 'AnonymousUser'
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Redis Configuration
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 # by default, celery doesn't have any timeout on our redis connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {'socket_timeout': 5}
@@ -448,12 +457,12 @@ CACHES = {
 if 'test' in sys.argv:
     CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # SMS Configs
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 RAPIDSMS_TABS = []
-SMS_APPS = [ 'mileage' ]
+SMS_APPS = ['mileage']
 
 # change this to your specific backend for your install
 DEFAULT_BACKEND = "console"
@@ -461,18 +470,16 @@ DEFAULT_BACKEND = "console"
 # change this to the country code for your install
 DEFAULT_COUNTRY_CODE = "250"
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Debug Toolbar
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Crontab Settings
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
-from datetime import timedelta
-from celery.schedules import crontab
 
 CELERY_TIMEZONE = 'UTC'
 
@@ -503,7 +510,7 @@ CELERYBEAT_SCHEDULE = {
         'relative': True,
         'args': ('ureport.polls.tasks.backfill_poll_results', 'sync')
     },
-    'results-pull-main-poll':  {
+    'results-pull-main-poll': {
         'task': 'dash.orgs.tasks.trigger_org_task',
         'schedule': crontab(minute=[5, 25, 45]),
         'args': ('ureport.polls.tasks.pull_results_main_poll', 'sync')
@@ -514,13 +521,13 @@ CELERYBEAT_SCHEDULE = {
         "relative": True,
         'args': ('ureport.polls.tasks.pull_results_recent_polls', 'sync')
     },
-    'results-pull-brick-polls':  {
+    'results-pull-brick-polls': {
         'task': 'dash.orgs.tasks.trigger_org_task',
         "schedule": timedelta(hours=1),
         "relative": True,
         'args': ('ureport.polls.tasks.pull_results_brick_polls', 'sync')
     },
-    'results-pull-other-polls':  {
+    'results-pull-other-polls': {
         'task': 'dash.orgs.tasks.trigger_org_task',
         "schedule": timedelta(hours=1),
         "relative": True,
@@ -528,16 +535,16 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # U-Report Defaults
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 UREPORT_DEFAULT_PRIMARY_COLOR = '#FFD100'
 UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
 
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # non org urls
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 SITE_ALLOW_NO_ORG = ('public.countries',
                      'api',
                      'api.v1',
@@ -558,9 +565,9 @@ SITE_ALLOW_NO_ORG = ('public.countries',
                      )
 
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Old country sites
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 PREVIOUS_ORG_SITES = [
     dict(
         name="Brazil",
@@ -642,9 +649,9 @@ PREVIOUS_ORG_SITES = [
 ]
 
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # rest_framework config
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,                 # Default to 10
     'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
