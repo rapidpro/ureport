@@ -788,7 +788,10 @@ class PollTest(UreportTest):
                 self.assertFalse('backend' in response.context['form'].fields)
 
                 # add the config for a second backend
-                self.uganda.set_config('api_token', "floip_token", top_key='floip')
+                self.uganda.backends.create(slug='floip', api_token='floip_token',
+                                            backend_type='ureport.backend.rapidpro.RapidProBackend',
+                                            host='http://localhost:8001', created_by=self.admin,
+                                            modified_by=self.admin)
 
                 response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
                 self.assertEquals(response.status_code, 200)
@@ -807,9 +810,8 @@ class PollTest(UreportTest):
 
                 self.assertTrue('backend' in response.context['form'].fields)
                 self.assertEquals(len(response.context['form'].fields['backend'].choices), 2)
-                self.assertEquals(list(response.context['form'].fields['backend'].choices),
-                                  [('rapidpro', 'RapidPro'),
-                                   ('floip', 'Floip')])
+                self.assertEquals(set(response.context['form'].fields['backend'].choices),
+                                  set([('rapidpro', 'rapidpro'), ('floip', 'floip')]))
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_poll_poll_flow_view(self):

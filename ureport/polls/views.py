@@ -5,7 +5,6 @@ from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from datetime import timedelta
 from django import forms
 from django.core.cache import cache
-from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from dash.categories.models import Category, CategoryImage
@@ -37,8 +36,8 @@ class PollForm(forms.ModelForm):
         super(PollForm, self).__init__(*args, **kwargs)
         self.fields['category'].queryset = Category.objects.filter(org=self.org)
 
-        backends_config_dict = getattr(settings, 'DATA_API_BACKENDS_CONFIG', {})
-        self.fields['backend'].choices = [(backend_slug, backend_config['name']) for (backend_slug, backend_config) in backends_config_dict.items() if self.org.has_backend_config(backend_slug)]
+        backend_options = self.org.backends.filter(is_active=True).values_list('slug', flat=True)
+        self.fields['backend'].choices = [(backend, backend) for backend in backend_options]
 
         # only display category images for this org which are active
         self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')
@@ -47,13 +46,11 @@ class PollForm(forms.ModelForm):
 
         cleaned_data = self.cleaned_data
 
-        backends_config_dict = getattr(settings, 'DATA_API_BACKENDS_CONFIG', {})
-        backend_options = [backend_slug for backend_slug in backends_config_dict.keys() if self.org.has_backend_config(backend_slug)]
+        backend_options = self.org.backends.filter(is_active=True).values_list('slug', flat=True)
         if not backend_options:
             raise ValidationError(_("Your org does not have any API token configuration."))
 
         return cleaned_data
-
 
     class Meta:
         model = Poll
@@ -164,7 +161,6 @@ class PollCRUDL(SmartCRUDL):
             kwargs['backend'] = self.object.backend
             return kwargs
 
-
         def pre_process(self, request, *args, **kwargs):
             obj = self.get_object()
             if obj.flow_uuid:
@@ -209,8 +205,8 @@ class PollCRUDL(SmartCRUDL):
 
         def derive_fields(self):
             org = self.request.org
-            backends_config_dict = getattr(settings, 'DATA_API_BACKENDS_CONFIG', {})
-            backend_options = [backend_slug for backend_slug in backends_config_dict.keys() if org.has_backend_config(backend_slug)]
+
+            backend_options = org.backends.filter(is_active=True).values_list('slug', flat=True)
             if len(backend_options) <= 1:
                 return ('is_featured', 'title', 'category', 'category_image')
             return ('is_featured', 'backend', 'title', 'category', 'category_image')
@@ -225,8 +221,7 @@ class PollCRUDL(SmartCRUDL):
             org = self.request.org
             obj.org = org
 
-            backends_config_dict = getattr(settings, 'DATA_API_BACKENDS_CONFIG', {})
-            backend_options = [backend_slug for backend_slug in backends_config_dict.keys() if org.has_backend_config(backend_slug)]
+            backend_options = org.backends.filter(is_active=True).values_list('slug', flat=True)
             if len(backend_options) == 1:
                 obj.backend = backend_options[0]
 
@@ -306,17 +301,20 @@ class PollCRUDL(SmartCRUDL):
                 # reporter, location, response
                 reporter_args = dict(max_length=64, required=False,
                                      label=_("Response %d Reporter") % idx, help_text=_("The name or alias of the responder."))
-                if response: reporter_args['initial'] = response.reporter
+                if response:
+                    reporter_args['initial'] = response.reporter
                 self.form.fields['reporter_%d' % idx] = forms.CharField(**reporter_args)
 
                 location_args = dict(max_length=64, required=False,
                                      label=_("Response %d Location") % idx, help_text=_("The location of the responder."))
-                if response: location_args['initial'] = response.location
+                if response:
+                    location_args['initial'] = response.location
                 self.form.fields['location_%d' % idx] = forms.CharField(**location_args)
 
                 message_args = dict(max_length=255, required=False, widget=forms.Textarea,
                                     label=_("Response %d Message") % idx, help_text=_("The text of the featured response."))
-                if response: message_args['initial'] = response.message
+                if response:
+                    message_args['initial'] = response.message
                 self.form.fields['message_%d' % idx] = forms.CharField(**message_args)
 
             return form
@@ -382,7 +380,8 @@ class PollCRUDL(SmartCRUDL):
 
                 label_field_name = 'ruleset_%s_label' % question.ruleset_uuid
                 label_field_initial = initial.get(label_field_name, "")
-                label_field = forms.CharField(label=_("Ruleset Label"), widget=forms.TextInput(attrs={'readonly':'readonly'}), required=False, initial=label_field_initial,
+                label_field = forms.CharField(label=_("Ruleset Label"), widget=forms.TextInput(attrs={'readonly': 'readonly'}),
+                                              required=False, initial=label_field_initial,
                                               help_text=_("The label of the ruleset from RapidPro"))
 
                 title_field_name = 'ruleset_%s_title' % question.ruleset_uuid
@@ -549,4 +548,3 @@ class PollCRUDL(SmartCRUDL):
             kwargs = super(PollCRUDL.Import, self).get_form_kwargs()
             kwargs['org'] = self.request.org
             return kwargs
-

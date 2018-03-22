@@ -47,8 +47,11 @@ class PublicTest(UreportTest):
 
         org_backend = self.nigeria.backends.filter(slug='rapidpro').first()
         if not org_backend:
-            self.nigeria.backends.create(api_token="token", slug='rapidpro',
-                                         created_by=self.admin, modified_by=self.admin)
+            self.nigeria.backends.create(slug='floip', api_token='rapidpro',
+                                         backend_type='ureport.backend.rapidpro.RapidProBackend',
+                                         host='http://localhost:8001',
+                                         created_by=self.admin,
+                                         modified_by=self.admin)
 
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertLoginRedirect(response)

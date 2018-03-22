@@ -373,12 +373,11 @@ class Poll(SmartModel):
         return flows_dict.get(self.flow_uuid, None)
 
     def update_or_create_questions(self, user=None):
-        from ureport.backend import get_backend
         if not user:
             user = User.objects.get(pk=-1)
 
         org = self.org
-        backend = get_backend(backend_slug=self.backend)
+        backend = org.get_backend(backend_slug=self.backend)
 
         flow_definition = backend.get_definition(org, self.flow_uuid)
 

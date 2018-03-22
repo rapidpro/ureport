@@ -8,14 +8,11 @@ import time
 from datetime import timedelta, datetime
 from itertools import islice, chain
 
-import six
 from dash.orgs.models import Org
-from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
+from dash.utils import datetime_to_ms
 from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
-from django.utils.text import slugify
-from django_redis import get_redis_connection
 import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
@@ -145,7 +142,7 @@ def organize_categories_data(org, contact_field, api_data):
             try:
                 if len(year_label) == 4 and int(float(year_label)) > 1900:
                     decade = int(math.floor((current_year - int(elt['label'])) / 10)) * 10
-                    key = "%s-%s" % (decade, decade+10)
+                    key = "%s-%s" % (decade, decade + 10)
                     if interval_dict.get(key, None):
                         interval_dict[key] += elt['count']
                     else:
@@ -154,7 +151,7 @@ def organize_categories_data(org, contact_field, api_data):
                 pass
 
         for obj_key in interval_dict.keys():
-            cleaned_categories.append(dict(label=obj_key, count=interval_dict[obj_key] ))
+            cleaned_categories.append(dict(label=obj_key, count=interval_dict[obj_key]))
 
         api_data[0]['categories'] = sorted(cleaned_categories, key=lambda k: int(k['label'].split('-')[0]))
 
@@ -206,7 +203,6 @@ def organize_categories_data(org, contact_field, api_data):
 
 
 def fetch_flows(org, backend_slug=None):
-    from ureport.backend import get_backend
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     start = time.time()
     print "Fetching flows for %s" % org.name
@@ -214,19 +210,17 @@ def fetch_flows(org, backend_slug=None):
     this_time = datetime.now()
     org_flows = dict(time=datetime_to_ms(this_time))
 
-
-    backends_config_dict = getattr(settings, 'DATA_API_BACKENDS_CONFIG', {})
-
-    for backend_str in backends_config_dict:
-        backend = get_backend(backend_slug=backend_str)
+    backends = org.backends.filter(is_active=True)
+    for backend_obj in backends:
+        backend = org.get_backend(backend_slug=backend_obj.slug)
         try:
             all_flows = backend.fetch_flows(org)
-            org_flows[backend_str] = all_flows
+            org_flows[backend_obj.slug] = all_flows
 
             all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
             cache.set(all_flows_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
-        except:
+        except Exception:
             client.captureException()
             import traceback
             traceback.print_exc()
@@ -243,6 +237,7 @@ def get_flows(org, backend_slug='rapidro'):
         return cache_value[backend_slug]
 
     return fetch_flows(org, backend_slug)
+
 
 def update_poll_flow_data(org):
     flows = get_flows(org)
@@ -271,7 +266,8 @@ def update_poll_flow_data(org):
 
 
 def fetch_old_sites_count():
-    import requests, re
+    import requests
+    import re
     from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
     start = time.time()
@@ -292,7 +288,7 @@ def fetch_old_sites_count():
                 value = {'time': datetime_to_ms(this_time), 'results': dict(size=count)}
                 old_site_values.append(value)
                 cache.set(key, value, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-            except:
+            except Exception:
                 import traceback
                 traceback.print_exc()
 
@@ -402,7 +398,7 @@ def get_age_stats(org):
 
     age_stats = age_counts_interval
     if total > 0:
-        age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
+        age_stats = {k: int(round(v * 100 / float(total))) for k, v in age_counts_interval.iteritems()}
 
     return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems()], key=lambda i: i))
 
@@ -419,7 +415,7 @@ def get_registration_stats(org):
 
     interval_dict = dict()
 
-    for date_key, date_count  in registered_on_counts.iteritems():
+    for date_key, date_count in registered_on_counts.iteritems():
         parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
 
         # this is in the range we care about
