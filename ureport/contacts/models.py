@@ -1,17 +1,11 @@
 import time
 from dash.orgs.models import Org
-from django.core.cache import cache
-from django.db import models, DataError, connection
+from django.db import models, connection
 from django.db.models import Sum, Count
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from django_redis import get_redis_connection
 
-# Create your models here.
-import pytz
-from ureport.locations.models import Boundary
-from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 CONTACT_LOCK_KEY = 'lock:contact:%d:%s'
 CONTACT_FIELD_LOCK_KEY = 'lock:contact-field:%d:%s'
@@ -128,7 +122,7 @@ class ReportersCounter(models.Model):
         r = get_redis_connection()
         key = ReportersCounter.COUNTS_SQUASH_LOCK
         if r.get(key):
-            print "Squash reporters counts already running."
+            print("Squash reporters counts already running.")
         else:
             with r.lock(key):
 
@@ -157,14 +151,14 @@ class ReportersCounter(models.Model):
                     squash_count += 1
 
                     if squash_count % 100 == 0:
-                        print "Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100 / total_counters, time.time() - start)
+                        print("Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100 / total_counters, time.time() - start))
 
                 # insert our new top squashed id
                 max_id = ReportersCounter.objects.all().order_by('-id').first()
                 if max_id:
                     r.set(ReportersCounter.LAST_SQUASHED_ID_KEY, max_id.id)
 
-                print "Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start)
+                print("Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start))
 
     @classmethod
     def get_counts(cls, org, types=None):

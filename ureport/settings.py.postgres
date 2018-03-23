@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
+
 # import our default settings
-from settings_common import *
+from ureport.settings_common import *
 
 # INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar.apps.DebugToolbarConfig',)
 # MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',) + MIDDLEWARE_CLASSES

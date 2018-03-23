@@ -12,8 +12,7 @@ class Migration(migrations.Migration):
 
         deleted, inactive = Boundary.objects.filter(is_active=False).delete()
 
-        print "Deleted %d inactive boundaries" % deleted
-
+        print("Deleted %d inactive boundaries" % deleted)
 
     dependencies = [
         ('locations', '0002_boundary_is_active'),

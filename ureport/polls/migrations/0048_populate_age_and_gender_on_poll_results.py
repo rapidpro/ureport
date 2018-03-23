@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations
 import time
 from ureport.utils import chunk_list
 
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 results_ids = PollResult.objects.filter(contact=contact.uuid).values_list('id', flat=True)
                 PollResult.objects.filter(id__in=results_ids).update(born=contact.born, gender=contact.gender)
 
-            print "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
+            print("Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start))
 
     def noop(apps, schema_editor):
         pass

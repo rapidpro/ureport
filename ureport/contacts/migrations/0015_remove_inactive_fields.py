@@ -12,8 +12,7 @@ class Migration(migrations.Migration):
 
         deleted, inactive = ContactField.objects.filter(is_active=False).delete()
 
-        print "Deleted %d inactive fields" % deleted
-
+        print("Deleted %d inactive fields" % deleted)
 
     dependencies = [
         ('contacts', '0014_install_triggers'),

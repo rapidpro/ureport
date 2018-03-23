@@ -4,10 +4,10 @@ from __future__ import unicode_literals
 import requests
 import time
 from django.conf import settings
-from django.db import models, migrations
+from django.db import migrations
 
 
-def fetch_flows(filter=None):
+def fetch_flows(org, filter=None):
     start = time.time()
 
     next = '%s/api/v1/flows.json' % settings.SITE_API_HOST
@@ -17,9 +17,9 @@ def fetch_flows(filter=None):
     flows = []
     while next:
         response = requests.get(next,
-                                    headers={'Content-type': 'application/json',
-                                             'Accept': 'application/json',
-                                             'Authorization': 'Token %s' % self.org.api_token})
+                                headers={'Content-type': 'application/json',
+                                         'Accept': 'application/json',
+                                         'Authorization': 'Token %s' % org.api_token})
 
         response.raise_for_status()
         result = response.json()
@@ -35,7 +35,7 @@ def fetch_flows(filter=None):
             next = None
 
     if flows:
-        print "- got flows in %f" % (time.time() - start)
+        print("- got flows in %f" % (time.time() - start))
 
     return flows
 
@@ -47,7 +47,7 @@ def populate_uuid_fields(apps, schema_editor):
 
     for org in Org.objects.all():
         flow_ids = org.polls.values_list('flow_id', flat=True)
-        flows = fetch_flows("flows=%s" % ",".join([str(elt) for elt in flow_ids]))
+        flows = fetch_flows(org, "flows=%s" % ",".join([str(elt) for elt in flow_ids]))
         for flow in flows:
             for ruleset in flow['rulesets']:
                 PollQuestion.objects.filter(ruleset_id=ruleset['id']).update(ruleset_uuid=ruleset['node'])

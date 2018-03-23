@@ -1071,9 +1071,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
-            print "=" * 60
-            print "\n\n\n"
-            print "%s -- %s" % (q['time'], q['sql'])
+            print("=" * 60)
+            print("\n\n\n")
+            print("%s -- %s" % (q['time'], q['sql']))
 
         reset_queries()
 
@@ -1090,7 +1090,7 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
-            print "%s -- %s" % (q['time'], q['sql'])
+            print("%s -- %s" % (q['time'], q['sql']))
 
         reset_queries()
 
@@ -1113,9 +1113,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
-            print "=" * 60
-            print "\n\n\n"
-            print "%s -- %s" % (q['time'], q['sql'])
+            print("=" * 60)
+            print("\n\n\n")
+            print("%s -- %s" % (q['time'], q['sql']))
 
         reset_queries()
 
@@ -1139,9 +1139,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
-            print "=" * 60
-            print "\n\n\n"
-            print "%s -- %s" % (q['time'], q['sql'])
+            print("=" * 60)
+            print("\n\n\n")
+            print("%s -- %s" % (q['time'], q['sql']))
 
         PollResult.objects.all().update(date=now)
         reset_queries()
@@ -1171,9 +1171,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
-            print "=" * 60
-            print "\n\n\n"
-            print "%s -- %s" % (q['time'], q['sql'])
+            print("=" * 60)
+            print("\n\n\n")
+            print("%s -- %s" % (q['time'], q['sql']))
 
         PollResult.objects.all().update(date=now)
         reset_queries()
@@ -1202,9 +1202,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
-            print "=" * 60
-            print "\n\n\n"
-            print "%s -- %s" % (q['time'], q['sql'])
+            print("=" * 60)
+            print("\n\n\n")
+            print("%s -- %s" % (q['time'], q['sql']))
 
         reset_queries()
 
@@ -1225,9 +1225,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
-            print "=" * 60
-            print "\n\n\n"
-            print "%s -- %s" % (q['time'], q['sql'])
+            print("=" * 60)
+            print("\n\n\n")
+            print("%s -- %s" % (q['time'], q['sql']))
 
         PollResult.objects.all().update(date=now)
         reset_queries()
@@ -1255,9 +1255,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q['time'], reverse=True)[:10]
         for q in slowest_queries:
-            print "=" * 60
-            print "\n\n\n"
-            print "%s -- %s" % (q['time'], q['sql'])
+            print("=" * 60)
+            print("\n\n\n")
+            print("%s -- %s" % (q['time'], q['sql']))
 
         reset_queries()
 

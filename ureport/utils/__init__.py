@@ -205,7 +205,7 @@ def organize_categories_data(org, contact_field, api_data):
 def fetch_flows(org, backend_slug=None):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     start = time.time()
-    print "Fetching flows for %s" % org.name
+    print("Fetching flows for %s" % org.name)
 
     this_time = datetime.now()
     org_flows = dict(time=datetime_to_ms(this_time))
@@ -225,7 +225,7 @@ def fetch_flows(org, backend_slug=None):
             import traceback
             traceback.print_exc()
 
-    print "Fetch %s flows took %ss" % (org.name, time.time() - start)
+    print("Fetch %s flows took %ss" % (org.name, time.time() - start))
 
     return org_flows.get(backend_slug) if backend_slug else dict()
 
@@ -295,7 +295,7 @@ def fetch_old_sites_count():
     # delete the global count cache to force a recalculate at the end
     cache.delete(GLOBAL_COUNT_CACHE_KEY)
 
-    print "Fetch old sites counts took %ss" % (time.time() - start)
+    print("Fetch old sites counts took %ss" % (time.time() - start))
     return old_site_values
 
 
@@ -566,7 +566,7 @@ def populate_age_and_gender_poll_results(org=None):
             if org is None:
                 cache.set(LAST_POPULATED_CONTACT, contact.pk, None)
 
-        print "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
+        print("Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start))
 
 
 Org.get_occupation_stats = get_occupation_stats
