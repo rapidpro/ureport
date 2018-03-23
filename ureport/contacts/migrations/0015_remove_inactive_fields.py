@@ -14,7 +14,6 @@ class Migration(migrations.Migration):
 
         print "Deleted %d inactive fields" % deleted
 
-
     dependencies = [
         ('contacts', '0014_install_triggers'),
     ]

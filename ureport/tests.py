@@ -2,8 +2,6 @@
 
 from __future__ import unicode_literals
 
-import json
-
 import pytz
 from django.conf import settings
 from django.urls import reverse
@@ -64,14 +62,10 @@ class MockTembaClient(TembaClient):
                                                      flow_type='F',
                                                      action_sets=[],
                                                      rule_sets=[dict(uuid='ruleset-1-uuid',
-                                                        label='ruleset1',
-                                                        ruleset_type='wait_message',
-                                                        rules=[dict(uuid='rule-1-uuid',
-                                                                    category=dict(eng='Blue')
-                                                                )
-                                                                ]
-                                                                )
-                                                                ],
+                                                                     label='ruleset1',
+                                                                     ruleset_type='wait_message',
+                                                                     rules=[dict(uuid='rule-1-uuid',
+                                                                                 category=dict(eng='Blue'))])],
                                                      entry='')]))
 
 
@@ -99,7 +93,7 @@ class UreportTest(SmartminTest, DashTest):
 
         orgs = Org.objects.filter(subdomain=subdomain)
         if orgs:
-            org =orgs[0]
+            org = orgs[0]
             org.name = name
             org.save()
         else:
@@ -162,7 +156,7 @@ class SetOrgMiddlewareTest(UreportTest):
         self.request = Mock(spec=HttpRequest)
         self.request.user = self.anon
         self.request.path = '/'
-        self.request.get_host.return_value="ureport.io"
+        self.request.get_host.return_value = "ureport.io"
         self.request.META = dict(HTTP_HOST=None)
 
     def test_process_request_without_org(self):
@@ -188,7 +182,7 @@ class SetOrgMiddlewareTest(UreportTest):
 
         # test invalid subdomain
         wrong_subdomain_url = "blabla.ureport.io"
-        self.request.get_host.return_value=wrong_subdomain_url
+        self.request.get_host.return_value = wrong_subdomain_url
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
         self.assertEqual(self.request.org, None)
@@ -201,11 +195,11 @@ class SetOrgMiddlewareTest(UreportTest):
 
             ug_org = self.uganda
             ug_dash_url = ug_org.subdomain + ".ureport.io"
-            self.request.get_host.return_value=ug_dash_url
+            self.request.get_host.return_value = ug_dash_url
 
             # test invalid subdomain
             wrong_subdomain_url = "blabla.ureport.io"
-            self.request.get_host.return_value=wrong_subdomain_url
+            self.request.get_host.return_value = wrong_subdomain_url
             self.request.org = None
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
             self.assertEquals(response.status_code, 302)
@@ -213,9 +207,9 @@ class SetOrgMiddlewareTest(UreportTest):
             self.assertEqual(self.request.org, None)
             self.assertEquals(self.request.user.get_org(), None)
 
-            rw_org = self.create_org('rwanda', pytz.timezone('Africa/Kigali'), self.admin)
+            self.create_org('rwanda', pytz.timezone('Africa/Kigali'), self.admin)
             wrong_subdomain_url = "blabla.ureport.io"
-            self.request.get_host.return_value=wrong_subdomain_url
+            self.request.get_host.return_value = wrong_subdomain_url
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
             self.assertEquals(response.status_code, 302)
             self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))

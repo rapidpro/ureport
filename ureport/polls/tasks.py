@@ -5,12 +5,11 @@ from temba_client.exceptions import TembaRateExceededError
 
 from dash.orgs.models import Org
 from django.core.cache import cache
-from django.utils import timezone
 from django_redis import get_redis_connection
 from ureport.celery import app
 
 from dash.orgs.tasks import org_task
-from ureport.utils import fetch_flows, fetch_old_sites_count, update_poll_flow_data
+from ureport.utils import fetch_flows, fetch_old_sites_count as fetch_old_sites_counts, update_poll_flow_data
 from ureport.utils import populate_age_and_gender_poll_results
 
 
@@ -19,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 @org_task('backfill-poll-results', 60 * 60 * 3)
 def backfill_poll_results(org, since, until):
-    from .models import Poll, PollResult
+    from .models import Poll
 
     results_log = dict()
 
@@ -206,7 +205,7 @@ def fetch_old_sites_count():
 
     if not r.get(key):
         with r.lock(key, timeout=lock_timeout):
-            fetch_old_sites_count()
+            fetch_old_sites_counts()
             print "Task: fetch_old_sites_count took %ss" % (time.time() - start)
 
 

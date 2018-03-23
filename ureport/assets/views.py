@@ -48,4 +48,3 @@ class ImageCRUDL(SmartCRUDL):
                     obj.org = org
 
             return obj
-

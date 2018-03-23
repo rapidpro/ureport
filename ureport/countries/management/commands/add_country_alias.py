@@ -1,11 +1,13 @@
 import json
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
+from django.utils.translation import ugettext_lazy as _
 
 from django_countries import countries
 import git
 import os
 from ureport.countries.models import CountryAlias
+
 
 class Command(BaseCommand):
     help = 'Add countries alias from the json files at https://github.com/umpirsky/country-list/tree/master/country'

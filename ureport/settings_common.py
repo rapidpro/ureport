@@ -1,10 +1,17 @@
 from __future__ import absolute_import
 import sys
-from django.utils.translation import ugettext_lazy as _
+import os
 
-#-----------------------------------------------------------------------------------
+from datetime import timedelta
+from celery.schedules import crontab
+
+from django.utils.translation import ugettext_lazy as _
+from django.forms import Textarea
+
+
+# -----------------------------------------------------------------------------------
 # Sets TESTING to True if this configuration is read during a unit test
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 TESTING = sys.argv[1:2] == ['test']
 
 DEBUG = True
@@ -18,7 +25,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'dash.sqlite',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
@@ -144,45 +151,47 @@ DATA_API_BACKENDS_CONFIG = [
     dict(name="Rapidpro", slug="rapidpro"),
 ]
 
-from django.forms import Textarea
 
-ORG_CONFIG_FIELDS =[ dict(name='is_on_landing_page', field=dict(help_text=_("Whether this org should be show on the landing page"), required=False), superuser_only=True),
-                     dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-Report locally"), required=True)),
-                     dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-Report"), required=False)),
-                     dict(name='join_fg_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False), superuser_only=True),
-                     dict(name='join_bg_color', field=dict(help_text=_("The color used to draw the background on the join bar"), required=False), superuser_only=True),
-                     dict(name='primary_color', field=dict(help_text=_("The primary color for styling for this organization"), required=False), superuser_only=True),
-                     dict(name='secondary_color', field=dict(help_text=_("The secondary color for styling for this organization"), required=False), superuser_only=True),
-                     dict(name='bg_color', field=dict(help_text=_("The background color for the site"), required=False), superuser_only=True),
-                     dict(name='colors', field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False), superuser_only=True),
-                     dict(name='google_tracking_id', field=dict(help_text=_("The Google Analytics Tracking ID for this organization"), required=False)),
-                     dict(name='youtube_channel_url', field=dict(help_text=_("The URL to the Youtube channel for this organization"), required=False)),
-                     dict(name='facebook_page_url', field=dict(help_text=_("The URL to the Facebook page for this organization"), required=False)),
-                     dict(name='facebook_page_id', field=dict(help_text=_("The integer id to the Facebook page for this organization (optional)"), required=False)),
-                     dict(name='facebook_app_id', field=dict(help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"), required=False)),
-                     dict(name='facebook_pixel_id', field=dict(help_text=_("The id of the Facebook Pixel for this organization (optional)"), required=False)),
-                     dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), required=False)),
-                     dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), required=False)),
-                     dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
-                     dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
-                     dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True, read_only=True),
-                     dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")), superuser_only=True, read_only=True),
-                     dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters")), superuser_only=True, read_only=True),
-                     dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters"), required=False), superuser_only=True, read_only=True),
-                     dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")), superuser_only=True, read_only=True),
-                     dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters"), required=False), superuser_only=True, read_only=True),
-                     dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters"), required=False), superuser_only=True, read_only=True),
-                     dict(name='ward_label', field=dict(help_text=_("The label of the Contact Field that contains the Ward of reporters"), required=False), superuser_only=True, read_only=True),
-                     dict(name='male_label', field=dict(help_text=_("The label assigned to U-Reporters that are Male.")), superuser_only=True, read_only=True),
-                     dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True, read_only=True),
-                     dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), required=False)),
-                     dict(name='is_global', field=dict(help_text=_("If this org if for global data. e.g: It shows a world map instead of a country map."), required=False), superuser_only=True),
-                     dict(name='iso_code', field=dict(help_text=_("The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."), required=False)),
-                     dict(name='headline_font', field=dict(help_text=_("The font used for headline texts"), required=False), superuser_only=True),
-                     dict(name='text_font', field=dict(help_text=_("The font used for normal text"), required=False), superuser_only=True),
-                     dict(name='text_small_font', field=dict(help_text=_("The font used for small text"), required=False), superuser_only=True),
-                     dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), required=False, widget=Textarea))]
-#                     dict(name='featured_state', field=dict(help_text=_("Choose the featured State of reporters shown on the home page")))]
+ORG_CONFIG_FIELDS = [
+    dict(name='is_on_landing_page', field=dict(help_text=_("Whether this org should be show on the landing page"), required=False), superuser_only=True),
+    dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-Report locally"), required=True)),
+    dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-Report"), required=False)),
+    dict(name='join_fg_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False), superuser_only=True),
+    dict(name='join_bg_color', field=dict(help_text=_("The color used to draw the background on the join bar"), required=False), superuser_only=True),
+    dict(name='primary_color', field=dict(help_text=_("The primary color for styling for this organization"), required=False), superuser_only=True),
+    dict(name='secondary_color', field=dict(help_text=_("The secondary color for styling for this organization"), required=False), superuser_only=True),
+    dict(name='bg_color', field=dict(help_text=_("The background color for the site"), required=False), superuser_only=True),
+    dict(name='colors', field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False), superuser_only=True),
+    dict(name='google_tracking_id', field=dict(help_text=_("The Google Analytics Tracking ID for this organization"), required=False)),
+    dict(name='youtube_channel_url', field=dict(help_text=_("The URL to the Youtube channel for this organization"), required=False)),
+    dict(name='facebook_page_url', field=dict(help_text=_("The URL to the Facebook page for this organization"), required=False)),
+    dict(name='facebook_page_id', field=dict(help_text=_("The integer id to the Facebook page for this organization (optional)"), required=False)),
+    dict(name='facebook_app_id', field=dict(help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"), required=False)),
+    dict(name='facebook_pixel_id', field=dict(help_text=_("The id of the Facebook Pixel for this organization (optional)"), required=False)),
+    dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), required=False)),
+    dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), required=False)),
+    dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
+    dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
+    dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True, read_only=True),
+    dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")), superuser_only=True, read_only=True),
+    dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters")), superuser_only=True, read_only=True),
+    dict(name='occupation_label', field=dict(help_text=_("The label of the Contact Field that contains the occupation of reporters"), required=False), superuser_only=True, read_only=True),
+    dict(name='registration_label', field=dict(help_text=_("The label of the Contact Field that contains the registration date of reporters")), superuser_only=True, read_only=True),
+    dict(name='state_label', field=dict(help_text=_("The label of the Contact Field that contains the State of reporters"), required=False), superuser_only=True, read_only=True),
+    dict(name='district_label', field=dict(help_text=_("The label of the Contact Field that contains the District of reporters"), required=False), superuser_only=True, read_only=True),
+    dict(name='ward_label', field=dict(help_text=_("The label of the Contact Field that contains the Ward of reporters"), required=False), superuser_only=True, read_only=True),
+    dict(name='male_label', field=dict(help_text=_("The label assigned to U-Reporters that are Male.")), superuser_only=True, read_only=True),
+    dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True, read_only=True),
+    dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), required=False)),
+    dict(name='is_global', field=dict(help_text=_("If this org if for global data. e.g: It shows a world map instead of a country map."), required=False), superuser_only=True),
+    dict(name='iso_code', field=dict(help_text=_("The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."), required=False)),
+    dict(name='headline_font', field=dict(help_text=_("The font used for headline texts"), required=False), superuser_only=True),
+    dict(name='text_font', field=dict(help_text=_("The font used for normal text"), required=False), superuser_only=True),
+    dict(name='text_small_font', field=dict(help_text=_("The font used for small text"), required=False), superuser_only=True),
+    dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), required=False, widget=Textarea))
+]
+
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -256,7 +265,7 @@ LOGGING = {
     'handlers': {
         'console': {
             'level': 'INFO',
-            'class':'logging.StreamHandler',
+            'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         }
     },
@@ -272,10 +281,9 @@ LOGGING = {
     }
 }
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Directory Configuration
-#-----------------------------------------------------------------------------------
-import os
+# -----------------------------------------------------------------------------------
 
 PROJECT_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)))
 RESOURCES_DIR = os.path.join(PROJECT_DIR, '../resources')
@@ -328,17 +336,17 @@ TEMPLATES = [
 ]
 
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Permission Management
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 # this lets us easily create new permissions across our objects
 PERMISSIONS = {
-    '*': ('create', # can create an object
-          'read',   # can read an object, viewing it's details
-          'update', # can update an object
-          'delete', # can delete an object,
-          'list'),  # can view a list of the objects
+    '*': ('create',  # can create an object
+          'read',    # can read an object, viewing it's details
+          'update',  # can update an object
+          'delete',  # can delete an object,
+          'list'),   # can view a list of the objects
 
     'dashblocks.dashblock': ('html', ),
     'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
@@ -393,17 +401,17 @@ GROUP_PERMISSIONS = {
     )
 }
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Login / Logout
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 LOGIN_URL = "/users/login/"
 LOGOUT_URL = "/users/logout/"
 LOGIN_REDIRECT_URL = "/manage/org/choose/"
 LOGOUT_REDIRECT_URL = "/"
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Auth Configuration
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -411,9 +419,9 @@ AUTHENTICATION_BACKENDS = (
 
 ANONYMOUS_USER_NAME = 'AnonymousUser'
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Redis Configuration
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 # by default, celery doesn't have any timeout on our redis connections, this fixes that
 BROKER_TRANSPORT_OPTIONS = {'socket_timeout': 5}
@@ -441,12 +449,12 @@ CACHES = {
 if 'test' in sys.argv:
     CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/15'
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # SMS Configs
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 RAPIDSMS_TABS = []
-SMS_APPS = [ 'mileage' ]
+SMS_APPS = ['mileage']
 
 # change this to your specific backend for your install
 DEFAULT_BACKEND = "console"
@@ -454,18 +462,15 @@ DEFAULT_BACKEND = "console"
 # change this to the country code for your install
 DEFAULT_COUNTRY_CODE = "250"
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Debug Toolbar
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Crontab Settings
-#-----------------------------------------------------------------------------------
-
-from datetime import timedelta
-from celery.schedules import crontab
+# -----------------------------------------------------------------------------------
 
 CELERY_TIMEZONE = 'UTC'
 
@@ -496,7 +501,7 @@ CELERYBEAT_SCHEDULE = {
         'relative': True,
         'args': ('ureport.polls.tasks.backfill_poll_results', 'sync')
     },
-    'results-pull-main-poll':  {
+    'results-pull-main-poll': {
         'task': 'dash.orgs.tasks.trigger_org_task',
         'schedule': crontab(minute=[5, 25, 45]),
         'args': ('ureport.polls.tasks.pull_results_main_poll', 'sync')
@@ -507,13 +512,13 @@ CELERYBEAT_SCHEDULE = {
         "relative": True,
         'args': ('ureport.polls.tasks.pull_results_recent_polls', 'sync')
     },
-    'results-pull-brick-polls':  {
+    'results-pull-brick-polls': {
         'task': 'dash.orgs.tasks.trigger_org_task',
         "schedule": timedelta(hours=1),
         "relative": True,
         'args': ('ureport.polls.tasks.pull_results_brick_polls', 'sync')
     },
-    'results-pull-other-polls':  {
+    'results-pull-other-polls': {
         'task': 'dash.orgs.tasks.trigger_org_task',
         "schedule": timedelta(hours=1),
         "relative": True,
@@ -521,16 +526,16 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # U-Report Defaults
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 UREPORT_DEFAULT_PRIMARY_COLOR = '#FFD100'
 UREPORT_DEFAULT_SECONDARY_COLOR = '#1F49BF'
 
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # non org urls
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 SITE_ALLOW_NO_ORG = ('public.countries',
                      'api',
                      'api.v1',
@@ -551,9 +556,9 @@ SITE_ALLOW_NO_ORG = ('public.countries',
                      )
 
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # Old country sites
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 PREVIOUS_ORG_SITES = [
     dict(
         name="Brazil",
@@ -635,9 +640,9 @@ PREVIOUS_ORG_SITES = [
 ]
 
 
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 # rest_framework config
-#-----------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,                 # Default to 10
     'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.

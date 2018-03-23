@@ -224,17 +224,20 @@ class PollCRUDL(SmartCRUDL):
                 # reporter, location, response
                 reporter_args = dict(max_length=64, required=False,
                                      label=_("Response %d Reporter") % idx, help_text=_("The name or alias of the responder."))
-                if response: reporter_args['initial'] = response.reporter
+                if response:
+                    reporter_args['initial'] = response.reporter
                 self.form.fields['reporter_%d' % idx] = forms.CharField(**reporter_args)
 
                 location_args = dict(max_length=64, required=False,
                                      label=_("Response %d Location") % idx, help_text=_("The location of the responder."))
-                if response: location_args['initial'] = response.location
+                if response:
+                    location_args['initial'] = response.location
                 self.form.fields['location_%d' % idx] = forms.CharField(**location_args)
 
                 message_args = dict(max_length=255, required=False, widget=forms.Textarea,
                                     label=_("Response %d Message") % idx, help_text=_("The text of the featured response."))
-                if response: message_args['initial'] = response.message
+                if response:
+                    message_args['initial'] = response.message
                 self.form.fields['message_%d' % idx] = forms.CharField(**message_args)
 
             return form
@@ -300,7 +303,7 @@ class PollCRUDL(SmartCRUDL):
 
                 label_field_name = 'ruleset_%s_label' % question.ruleset_uuid
                 label_field_initial = initial.get(label_field_name, "")
-                label_field = forms.CharField(label=_("Ruleset Label"), widget=forms.TextInput(attrs={'readonly':'readonly'}), required=False, initial=label_field_initial,
+                label_field = forms.CharField(label=_("Ruleset Label"), widget=forms.TextInput(attrs={'readonly': 'readonly'}), required=False, initial=label_field_initial,
                                               help_text=_("The label of the ruleset from RapidPro"))
 
                 title_field_name = 'ruleset_%s_title' % question.ruleset_uuid
@@ -465,4 +468,3 @@ class PollCRUDL(SmartCRUDL):
             kwargs = super(PollCRUDL.Import, self).get_form_kwargs()
             kwargs['org'] = self.request.org
             return kwargs
-

@@ -36,8 +36,8 @@ class ContactTest(UreportTest):
                                                 level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
         self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja",
-                                                level=Boundary.WARD_LEVEL,
-                                                parent=self.district, geometry='{"foo":"bar-ward"}')
+                                            level=Boundary.WARD_LEVEL,
+                                            parent=self.district, geometry='{"foo":"bar-ward"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
                                                              label='Registration Date', value_type='T')
