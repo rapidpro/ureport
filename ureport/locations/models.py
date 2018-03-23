@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import *
+
 import json
 from django.core.cache import cache
 from django.db import models

@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import *
+
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
 from smartmin.views import SmartCRUDL, SmartUpdateView, SmartListView, SmartCreateView
 from ureport.assets.models import Image

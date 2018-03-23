@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import *
+
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from django.utils.translation import ugettext_lazy as _
 from smartmin.views import SmartCRUDL, SmartCreateView, SmartUpdateView, SmartListView

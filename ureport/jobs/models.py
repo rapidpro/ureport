@@ -1,7 +1,11 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import *
+
 from django.conf import settings
 from django.core.cache import cache
 import feedparser
-import HTMLParser
+from html.parser import HTMLParser
 
 from dash.orgs.models import Org
 from django.db import models
@@ -31,7 +35,7 @@ class JobSource(SmartModel):
     org = models.ForeignKey(Org,
                             help_text=_("The organization this job source is for"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def get_feed(self, reload=False):

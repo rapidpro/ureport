@@ -1,4 +1,6 @@
-from __future__ import unicode_literals
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import *
 
 from builtins import str
 import json
@@ -66,7 +68,7 @@ class PollCategory(SmartModel):
     org = models.ForeignKey(Org,
                             help_text=_("The organization this category applies to"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -633,7 +635,7 @@ class Poll(SmartModel):
 
         return records
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -647,7 +649,7 @@ class PollImage(SmartModel):
     image = models.ImageField(upload_to='polls',
                               help_text=_("The image file to use"))
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s - %s" % (self.poll, self.name)
 
 
@@ -667,7 +669,7 @@ class FeaturedResponse(SmartModel):
     message = models.CharField(max_length=255,
                                help_text=_("The featured response message"))
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s - %s - %s" % (self.poll, self.location, self.message)
 
 
@@ -953,7 +955,7 @@ class PollQuestion(SmartModel):
     def get_words(self):
         return self.get_total_summary_data().get('categories', [])
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:

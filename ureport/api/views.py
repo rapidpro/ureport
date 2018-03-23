@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import *
+
 from dash.orgs.models import Org
 from dash.stories.models import Story
 from rest_framework.generics import ListAPIView, RetrieveAPIView
@@ -6,8 +10,6 @@ from ureport.api.serializers import OrgReadSerializer, StoryReadSerializer
 from ureport.assets.models import Image
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
-
-__author__ = 'kenneth'
 
 
 class OrgList(ListAPIView):

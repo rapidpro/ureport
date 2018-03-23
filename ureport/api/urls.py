@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import *
+
 from django.conf.urls import url, include
 from django.views.generic import RedirectView
 from ureport.api.views import PollList, PollDetails, FeaturedPollList, NewsItemList, NewsItemDetails, VideoList

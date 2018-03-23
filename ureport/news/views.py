@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import *
+
+
+
 from dash.categories.models import Category
 from dash.categories.fields import CategoryChoiceField
 from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin

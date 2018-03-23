@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+from builtins import *
+
 from django import forms
 from smartmin.views import SmartCRUDL, SmartListView, SmartCreateView, SmartUpdateView
 from .models import CountryAlias
