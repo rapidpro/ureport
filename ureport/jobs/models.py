@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import *
+
 
 from django.conf import settings
 from django.core.cache import cache
 import feedparser
-from html.parser import HTMLParser
+import HTMLParser
 
 from dash.orgs.models import Org
 from django.db import models

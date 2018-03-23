@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import *
+from builtins import str
 
 # -*- coding: utf-8 -*-
 
@@ -360,7 +360,7 @@ def get_gender_stats(org):
 
     total = female_count + male_count
 
-    female_percentage = female_count * 100 / total
+    female_percentage = int(female_count * 100 / total)
     male_percentage = 100 - female_percentage
 
     return dict(female_count=female_count, female_percentage=str(female_percentage) + "%",

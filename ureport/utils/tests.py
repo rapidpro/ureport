@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+
 from datetime import datetime
 import json
 from dash.categories.models import Category
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import *
 
 from dash.test import MockClientQuery
 from dash_test_runner.tests import MockResponse

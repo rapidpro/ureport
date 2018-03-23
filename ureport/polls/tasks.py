@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import *
+
 
 import logging
 import time
@@ -210,7 +210,7 @@ def fetch_old_sites_count():
     if not r.get(key):
         with r.lock(key, timeout=lock_timeout):
             do_fetch_old_sites_count()
-            print "Task: fetch_old_sites_count took %ss" % (time.time() - start)
+            print("Task: fetch_old_sites_count took %ss" % (time.time() - start))
 
 
 @app.task(track_started=True, name='polls.recheck_poll_flow_data')
