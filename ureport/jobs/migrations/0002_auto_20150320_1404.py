@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations
+
 
 def generate_job_block_types(apps, schema_editor):
     User = apps.get_model("auth", "User")
@@ -26,7 +27,6 @@ def generate_job_block_types(apps, schema_editor):
                                         has_tags=False,
                                         created_by_id=root.id,
                                         modified_by_id=root.id)
-
 
 
 class Migration(migrations.Migration):

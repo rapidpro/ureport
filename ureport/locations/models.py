@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import *
 
 import json
-from django.core.cache import cache
 from django.db import models
 from dash.orgs.models import Org
 from django.utils.translation import ugettext_lazy as _

@@ -2,7 +2,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 import urllib
 
-from django.db import models, migrations
+from django.db import migrations
 from django.core.files.images import ImageFile
 
 

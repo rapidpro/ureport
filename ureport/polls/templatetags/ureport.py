@@ -22,10 +22,11 @@ def question_results(question):
         results = question.get_results()
         if results:
             return results[0]
-    except:
+    except Exception:
         import traceback
         traceback.print_exc()
         return None
+
 
 @register.filter
 def question_segmented_results(question, field):
@@ -38,12 +39,11 @@ def question_segmented_results(question, field):
     elif field == 'gender':
         segment = dict(gender='Gender')
 
-
     try:
         results = question.get_results(segment=segment)
         if results:
             return results
-    except:
+    except Exception:
         import traceback
         traceback.print_exc()
         return None
@@ -81,7 +81,7 @@ def org_color(org, index):
     org_colors = org.get_config('colors')
 
     if org_colors:
-       org_colors = org_colors.split(',')
+        org_colors = org_colors.split(',')
     else:
         if org.get_config('primary_color') and org.get_config('secondary_color'):
             org_colors = [org.get_config('primary_color').strip(), org.get_config('secondary_color').strip()]
@@ -127,6 +127,7 @@ class LessBlockNode(template.Node):
         style_output = '<style type="text/less" media="all">%s</style>' % output
         return style_output
 
+
 # register our tag
 lessblock = register.tag(lessblock)
 
@@ -135,7 +136,7 @@ lessblock = register.tag(lessblock)
 def show_org_flags(context):
     request = context['request']
     linked_orgs = get_linked_orgs(request.user.is_authenticated())
-    return dict(linked_orgs=linked_orgs, break_pos=min(len(linked_orgs)/2, 9), STATIC_URL=settings.STATIC_URL,
+    return dict(linked_orgs=linked_orgs, break_pos=min(len(linked_orgs) / 2, 9), STATIC_URL=settings.STATIC_URL,
                 is_iorg=context['is_iorg'])
 
 
@@ -145,6 +146,5 @@ def org_host_link(context):
     try:
         org = request.org
         return org.build_host_link(True)
-    except Exception as e:
+    except Exception:
         return "https://%s" % getattr(settings, 'HOSTNAME', 'localhost')
-

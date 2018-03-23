@@ -9,7 +9,7 @@ from ureport.api.serializers import PollReadSerializer, NewsItemReadSerializer, 
 from ureport.api.serializers import OrgReadSerializer, StoryReadSerializer
 from ureport.assets.models import Image
 from ureport.news.models import NewsItem, Video
-from ureport.polls.models import Poll, PollQuestion
+from ureport.polls.models import Poll
 
 
 class OrgList(ListAPIView):

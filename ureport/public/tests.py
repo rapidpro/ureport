@@ -868,9 +868,8 @@ class PublicTest(UreportTest):
 
         response = self.client.get(state_boundary_url, SERVER_NAME='uganda.ureport.io')
 
-        output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R34567",
-                                                                                               level=2,
-                                                                                               name='Lugogo'),
+        output = dict(type="FeatureCollection", features=[dict(type='Feature',
+                                                               properties=dict(id="R34567", level=2, name='Lugogo'),
                                                                geometry=dict(type='MultiPolygon',
                                                                              coordinates=[[5, 6]]))])
 

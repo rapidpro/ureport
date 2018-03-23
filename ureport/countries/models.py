@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from builtins import *
 
 import regex
-from django.contrib.auth.models import User
 from django.db import models
 from smartmin.models import SmartModel
 from django_countries.fields import CountryField

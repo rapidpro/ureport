@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations
+
 
 def populate_categories(apps, schema_editor):
     Poll = apps.get_model('polls', "Poll")
@@ -12,7 +13,7 @@ def populate_categories(apps, schema_editor):
         category = Category.objects.get(name=poll_category.name, org=poll_category.org)
         poll.category = category
         poll.save()
-        
+
 
 class Migration(migrations.Migration):
 

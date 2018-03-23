@@ -517,8 +517,8 @@ class PollTest(UreportTest):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101", created_by=self.admin,
-                                    modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101",
+                                    created_by=self.admin, modified_by=self.admin)
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = [{u'open_ended': False, u'label': u'Abia', u'set': 338, u'unset': 36, u'boundary': u'R3713501', u'categories': [{u'count': 80, u'label': u'Yes'}, {u'count': 258, u'label': u'No'}]},
@@ -1670,7 +1670,7 @@ class PollQuestionTest(UreportTest):
             refresh_org_flows(self.org.pk)
             mock_fetch_flows.assert_called_once_with(self.org)
 
-        with patch('ureport.polls.tasks.fetch_old_sites_count') as mock_fetch_old_sites_count:
+        with patch('ureport.polls.tasks.do_fetch_old_sites_count') as mock_fetch_old_sites_count:
             mock_fetch_old_sites_count.return_value = 'FETCHED'
 
             fetch_old_sites_count()

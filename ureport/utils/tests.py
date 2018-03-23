@@ -13,16 +13,14 @@ from mock import patch
 import pycountry
 import pytz
 import redis
-from temba_client.v1.types import Group
 from temba_client.v2 import Flow
 
 from ureport.assets.models import FLAG, Image
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
-from ureport.polls.models import CACHE_ORG_REPORTER_GROUP_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, \
-    CACHE_ORG_FLOWS_KEY
-from ureport.tests import UreportTest, MockTembaClient
-from ureport.utils import get_linked_orgs,  clean_global_results_data, fetch_old_sites_count, \
+from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, CACHE_ORG_FLOWS_KEY
+from ureport.tests import UreportTest
+from ureport.utils import get_linked_orgs, clean_global_results_data, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
     get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
     fetch_flows, update_poll_flow_data
@@ -94,7 +92,7 @@ class UtilsTest(UreportTest):
 
         # rwanda should be included and the third in the list alphabetically by subdomain
         self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
-        self.assertEqual(get_linked_orgs()[settings_sites_count-4]['name'].lower(), 'rwanda')
+        self.assertEqual(get_linked_orgs()[settings_sites_count - 4]['name'].lower(), 'rwanda')
 
         # revert subdomain to burundi
         self.org.subdomain = 'aaaburundi'
@@ -352,7 +350,7 @@ class UtilsTest(UreportTest):
             self.assertEquals(self.org.organize_categories_data('registration',
                                                                 [dict(categories=[dict(label='2014-03-31T21:30:00Z',
                                                                                        count=20),
-                                                                 dict(label='2014-04-03T20:54:00Z',  count=15),
+                                                                 dict(label='2014-04-03T20:54:00Z', count=15),
                                                                  dict(label='2014-04-08T18:43:00Z', count=10),
                                                                  dict(label='2014-10-10T12:54:00Z', count=100)])]),
                               [dict(categories=[{'count': 0, 'label': '03/24/14'}, {'count': 35, 'label': '03/31/14'},
@@ -558,8 +556,8 @@ class UtilsTest(UreportTest):
                         mock_get.assert_called_with('https://www.zambiaureport.com/count.txt/')
 
                         cache_set_mock.assert_called_with('org:zambia:reporters:old-site',
-                                                       {'time': 500, 'results': dict(size=300)},
-                                                       UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                                                          {'time': 500, 'results': dict(size=300)},
+                                                          UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
 
@@ -764,12 +762,10 @@ class UtilsTest(UreportTest):
         self.assertEqual(get_reporters_count(self.org), 5)
 
     def test_get_global_count(self):
-        with self.settings(CACHES = {'default': {'BACKEND': 'django_redis.cache.RedisCache',
-                                                 'LOCATION': '127.0.0.1:6379:1',
-                                                 'OPTIONS': {
-                                                     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-                                                 }
-                                                 }}):
+        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
+                                               'LOCATION': '127.0.0.1:6379:1',
+                                               'OPTIONS': {
+                                                   'CLIENT_CLASS': 'django_redis.client.DefaultClient', }}}):
 
             with patch('ureport.utils.fetch_old_sites_count') as mock_old_sites_count:
                 mock_old_sites_count.return_value = []

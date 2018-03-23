@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations
 
-#language=SQL
+# language=SQL
 INDEX_SQL = """
 CREATE INDEX polls_pollresult_org_flow_contact
 ON polls_pollresult (org_id, flow, contact);
