@@ -100,7 +100,7 @@ def transparency(color, alpha):
     if len(color) != 6:
         raise TemplateSyntaxError("add_transparency expect a long hexadecimal color, got: [%s]" % color)
 
-    rgb_color = [ord(c) for c in color.decode('hex')]
+    rgb_color = [int(c) for c in bytearray.fromhex(color)]
     rgb_color.append(alpha)
 
     return "rgba(%s, %s, %s, %s)" % tuple(rgb_color)

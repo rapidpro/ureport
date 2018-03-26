@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('uuid', models.CharField(unique=True, max_length=36)),
-                ('gender', models.CharField(choices=[(b'M', 'Male'), (b'F', 'Female')], max_length=1, blank=True, help_text='Gender of the contact', null=True, verbose_name='Gender')),
+                ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=1, blank=True, help_text='Gender of the contact', null=True, verbose_name='Gender')),
                 ('born', models.IntegerField(null=True, verbose_name='Born Field', blank=True)),
                 ('occupation', models.CharField(max_length=255, null=True, verbose_name='Occupation Field', blank=True)),
                 ('registered_on', models.DateTimeField(null=True, verbose_name='Registration Date', blank=True)),

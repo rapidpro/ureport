@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-
+from future.utils import listvalues
 
 from collections import defaultdict
 import json
@@ -514,7 +514,7 @@ class RapidProBackend(BaseBackend):
             born = contact_obj.born
             gender = contact_obj.gender
 
-        temba_values = temba_run.values.values()
+        temba_values = listvalues(temba_run.values)
         temba_values.sort(key=lambda val: val.time)
         for temba_value in temba_values:
             ruleset_uuid = temba_value.node

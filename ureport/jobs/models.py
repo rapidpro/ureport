@@ -5,7 +5,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from django.conf import settings
 from django.core.cache import cache
 import feedparser
-import HTMLParser
+
+from html.parser import HTMLParser
 
 from dash.orgs.models import Org
 from django.db import models
@@ -69,7 +70,7 @@ class JobSource(SmartModel):
             cache.delete(key)
             pass
 
-        html_parser = HTMLParser.HTMLParser()
+        html_parser = HTMLParser()
         for entry in entries:
             summary = entry['summary']
             entry['summary'] = strip_tags(html_parser.unescape(html_parser.unescape(summary)))

@@ -3,11 +3,11 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 
 import json
-
-import pytz
-from dash.dashblocks.models import DashBlock, DashBlockType
 import mock
-from urllib import urlencode
+import pytz
+
+from dash.dashblocks.models import DashBlock, DashBlockType
+from six.moves.urllib.parse import urlencode
 
 from datetime import timedelta
 from django.core.files.images import ImageFile
@@ -130,7 +130,7 @@ class PublicTest(UreportTest):
             self.assertFalse(org['name'].lower() == 'nigeria')
 
         # add flag for nigeria
-        test_image = open("%s/image.jpg" % settings.TESTFILES_DIR, "r")
+        test_image = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
         django_image_file = ImageFile(test_image)
 
         uganda_flag = Image()
@@ -162,7 +162,7 @@ class PublicTest(UreportTest):
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
         self.assertTrue('orgs' in response.context)
-        self.assertTrue('welcome-flags' in response.content)
+        self.assertContains(response, 'welcome-flags')
 
         # if we have empty subdomain org we should show its index
         self.global_org = Org.objects.create(subdomain='', name='global', created_by=self.admin, modified_by=self.admin)
@@ -171,7 +171,7 @@ class PublicTest(UreportTest):
         response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
-        self.assertTrue('welcome-flags' in response.content)  # we now show the flags for all orgs
+        self.assertContains(response, 'welcome-flags')
 
         self.global_org.set_config('is_global', True)
 
@@ -181,7 +181,7 @@ class PublicTest(UreportTest):
         response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
-        self.assertTrue('welcome-flags' in response.content)
+        self.assertContains(response, 'welcome-flags')
 
         self.assertEqual(response.request['SERVER_NAME'], 'ureport.io')
         self.assertEqual(response.request['wsgi.url_scheme'], 'http')
@@ -445,7 +445,7 @@ class PublicTest(UreportTest):
 
         self.nigeria.set_config('custom_html', '<div>INCLUDE MY CUSTOM HTML</div>')
         response = self.client.get(home_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertTrue('<div>INCLUDE MY CUSTOM HTML</div>' in response.content)
+        self.assertContains(response, '<div>INCLUDE MY CUSTOM HTML</div>')
 
     def test_additional_menu(self):
         additional_menu_url = reverse('public.added')
@@ -544,7 +544,7 @@ class PublicTest(UreportTest):
         response = self.client.get(join_engage_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/join/')
         self.assertEquals(response.context['org'], self.uganda)
-        self.assertTrue('All U-Report services (all msg on 3000) are free.' in response.content)
+        self.assertContains(response, 'All U-Report services (all msg on 3000) are free.')
 
     def test_ureporters(self):
         ureporters_url = reverse('public.ureporters')
@@ -820,6 +820,7 @@ class PublicTest(UreportTest):
         self.assertEquals(response.status_code, 404)
 
     def test_boundary_view(self):
+        self.maxDiff = None
         country_boundary_url = reverse('public.boundaries')
         state_boundary_url = reverse('public.boundaries', args=['R23456'])
 
@@ -861,7 +862,7 @@ class PublicTest(UreportTest):
 
                                                           ])
 
-        self.assertEquals(json.dumps(output), response.content)
+        self.assertContains(response, json.dumps(output))
 
         response = self.client.get(state_boundary_url, SERVER_NAME='uganda.ureport.io')
 
@@ -870,7 +871,7 @@ class PublicTest(UreportTest):
                                                                geometry=dict(type='MultiPolygon',
                                                                              coordinates=[[5, 6]]))])
 
-        self.assertEquals(json.dumps(output), response.content)
+        self.assertContains(response, json.dumps(output))
 
         self.uganda.set_config("is_global", True)
 
@@ -883,7 +884,7 @@ class PublicTest(UreportTest):
                                                                geometry=dict(type='MultiPolygon',
                                                                              coordinates=[[1, 2]]))])
 
-        self.assertEquals(json.dumps(output), response.content)
+        self.assertContains(response, json.dumps(output))
 
     def test_stories_list(self):
         stories_url = reverse('public.stories')
@@ -1115,7 +1116,7 @@ class PublicTest(UreportTest):
         response = self.client.get(reporters_results, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
 
-        self.assertEquals(response.content, "[]")
+        self.assertContains(response, "[]")
 
         self.uganda.set_config('state_label', 'State')
 
@@ -1127,7 +1128,7 @@ class PublicTest(UreportTest):
                 SERVER_NAME='uganda.ureport.io')
 
             self.assertEquals(response.status_code, 200)
-            self.assertEquals(response.content, json.dumps("LOCATIONS_STATS"))
+            self.assertContains(response, json.dumps("LOCATIONS_STATS"))
             mock_ureporters_locations_stats.assert_called_with(dict(location='State'))
 
     def test_news(self):

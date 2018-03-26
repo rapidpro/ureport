@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='poll',
             name='image',
-            field=models.ImageField(help_text='An image that should be displayed with this poll on the homepage', null=True, upload_to=b'polls', blank=True),
+            field=models.ImageField(help_text='An image that should be displayed with this poll on the homepage', null=True, upload_to='polls', blank=True),
             preserve_default=True,
         ),
         migrations.AddField(

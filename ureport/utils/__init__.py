@@ -66,7 +66,7 @@ def chunk_list(iterable, size):
     source_iter = iter(iterable)
     while True:
         chunk_iter = islice(source_iter, size)
-        yield chain([chunk_iter.next()], chunk_iter)
+        yield chain([next(chunk_iter)], chunk_iter)
 
 
 def get_linked_orgs(authenticated=False):
@@ -373,7 +373,7 @@ def get_age_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    year_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
+    year_counts = {k[-4:]: v for k, v in org_contacts_counts.items() if k.startswith("born:") and len(k) == 9}
 
     age_counts_interval = dict()
     age_counts_interval['0-14'] = 0
@@ -384,7 +384,7 @@ def get_age_stats(org):
     age_counts_interval['35+'] = 0
 
     total = 0
-    for year_key, age_count in year_counts.iteritems():
+    for year_key, age_count in year_counts.items():
         total += age_count
         age = current_year - int(year_key)
         if age > 34:
@@ -402,9 +402,9 @@ def get_age_stats(org):
 
     age_stats = age_counts_interval
     if total > 0:
-        age_stats = {k: int(round(v * 100 / float(total))) for k, v in age_counts_interval.iteritems()}
+        age_stats = {k: int(round(v * 100 / float(total))) for k, v in age_counts_interval.items()}
 
-    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems()], key=lambda i: i))
+    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.items()], key=lambda i: i['name']))
 
 
 def get_registration_stats(org):
@@ -415,11 +415,11 @@ def get_registration_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_on")}
 
     interval_dict = dict()
 
-    for date_key, date_count in registered_on_counts.iteritems():
+    for date_key, date_count in registered_on_counts.items():
         parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
 
         # this is in the range we care about
@@ -462,15 +462,15 @@ def get_ureporters_locations_stats(org, segment):
         boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('is_global') else Boundary.STATE_LEVEL
         boundaries = Boundary.objects.filter(org=org, level=boundary_top_level, is_active=True).values('osm_id', 'name')\
             .order_by('osm_id')
-        location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
+        location_counts = {k[6:]: v for k, v in org_contacts_counts.items() if k.startswith('state')}
 
     elif field_type == 'ward':
         boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
-        location_counts = {k[5:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('ward')}
+        location_counts = {k[5:]: v for k, v in org_contacts_counts.items() if k.startswith('ward')}
     else:
         boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, is_active=True,
                                              parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
-        location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
+        location_counts = {k[9:]: v for k, v in org_contacts_counts.items() if k.startswith('district')}
 
     return [dict(boundary=elt['osm_id'], label=elt['name'], set=location_counts.get(elt['osm_id'], 0))
             for elt in boundaries]
@@ -486,10 +486,10 @@ def get_occupation_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    occupation_counts = {k[11:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("occupation")}
+    occupation_counts = {k[11:]: v for k, v in org_contacts_counts.items() if k.startswith("occupation")}
 
     return json.dumps(sorted([dict(label=k, count=v)
-                              for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()],
+                              for k, v in occupation_counts.items() if k and k.lower() != "All Responses".lower()],
                              key=lambda i: i['count'], reverse=True)[:9])
 
 
@@ -498,9 +498,9 @@ def get_regions_stats(org):
     org_contacts_counts = get_org_contacts_counts(org)
     boundaries_name = Boundary.get_org_top_level_boundaries_name(org)
 
-    boundaries_stats = {k[6:]: v for k, v in org_contacts_counts.iteritems() if len(k) > 7 and k.startswith('state')}
+    boundaries_stats = {k[6:]: v for k, v in org_contacts_counts.items() if len(k) > 7 and k.startswith('state')}
 
-    regions_stats = sorted([dict(name=boundaries_name[k], count=v) for k, v in boundaries_stats.iteritems()
+    regions_stats = sorted([dict(name=boundaries_name[k], count=v) for k, v in boundaries_stats.items()
                             if k and k in boundaries_name], key=lambda i: i['count'], reverse=True)
 
     return regions_stats

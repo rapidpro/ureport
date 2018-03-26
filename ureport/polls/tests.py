@@ -279,7 +279,7 @@ class PollTest(UreportTest):
 
             self.assertEqual(response.context['org'], self.uganda)
             self.assertEqual(response.request['PATH_INFO'], reverse('polls.poll_list'))
-            self.assertTrue("Scheduled a pull refresh for poll #%d on org #%d" % (poll1.pk, poll1.org_id) in response.content)
+            self.assertContains(response, "Scheduled a pull refresh for poll #%d on org #%d" % (poll1.pk, poll1.org_id))
 
             mock_pull_refresh.assert_called_once_with()
 
@@ -1008,9 +1008,9 @@ class PollTest(UreportTest):
         self.assertFalse(poll2 in response.context['object_list'])
         self.assertTrue(poll1 in response.context['object_list'])
 
-        self.assertTrue(reverse('polls.poll_questions', args=[poll1.pk]) in response.content)
-        self.assertTrue(reverse('polls.poll_responses', args=[poll1.pk]) in response.content)
-        self.assertTrue(reverse('polls.poll_images', args=[poll1.pk]) in response.content)
+        self.assertContains(response, reverse('polls.poll_questions', args=[poll1.pk]))
+        self.assertContains(response, reverse('polls.poll_responses', args=[poll1.pk]))
+        self.assertContains(response, reverse('polls.poll_images', args=[poll1.pk]))
 
         poll1.has_synced = True
         poll1.save()
@@ -1021,7 +1021,7 @@ class PollTest(UreportTest):
         response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(len(response.context['object_list']), 1)
-        self.assertRegexpMatches(response.content, "Last synced 5(.*)minutes ago")
+        self.assertRegexpMatches(response.content.decode('utf-8'), "Last synced 5(.*)minutes ago")
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_questions_poll(self):
@@ -1147,7 +1147,7 @@ class PollTest(UreportTest):
 
         self.assertFalse(PollImage.objects.filter(poll=poll1))
 
-        upload = open("test-data/image.jpg", "r")
+        upload = open("test-data/image.jpg", "rb")
         post_data = dict(image_1=upload)
         response = self.client.post(uganda_poll_images_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
         self.assertTrue(PollImage.objects.filter(poll=poll1))
@@ -1157,7 +1157,7 @@ class PollTest(UreportTest):
         self.assertEquals(len(response.context['form'].fields), 3)
         self.assertTrue(response.context['form'].fields['image_1'].initial)
 
-        upload = open("test-data/image.jpg", "r")
+        upload = open("test-data/image.jpg", "rb")
         post_data = dict(image_1=upload)
         response = self.client.post(uganda_poll_images_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
         self.assertTrue(PollImage.objects.filter(poll=poll1))

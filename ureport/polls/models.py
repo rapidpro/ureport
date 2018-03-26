@@ -453,7 +453,7 @@ class Poll(SmartModel):
                     else:
                         words[key] += int(category['count'])
 
-            tuples = [(k, v) for k, v in words.iteritems()]
+            tuples = [(k, v) for k, v in words.items()]
             tuples.sort(key=lambda t: t[1])
 
             trending_words = [k for k, v in tuples]
@@ -828,7 +828,7 @@ class PollQuestion(SmartModel):
                 elif age_part:
                     poll_year = self.poll.poll_date.year
 
-                    born_results = {k: v for k, v in question_results.iteritems() if k[-9:-5] == 'born'}
+                    born_results = {k: v for k, v in question_results.items() if k[-9:-5] == 'born'}
 
                     age_intervals = dict()
                     age_intervals['35+'] = (35, 2000)
@@ -847,7 +847,7 @@ class PollQuestion(SmartModel):
                             if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 categories_count[categorie_label.lower()] = 0
 
-                        for result_key, result_count in born_results.iteritems():
+                        for result_key, result_count in born_results.items():
                             age = poll_year - int(result_key[-4:])
 
                             if lower_bound <= age < upper_bound:
@@ -859,7 +859,7 @@ class PollQuestion(SmartModel):
                                         if result_key.startswith('ruleset:%s:category:%s:' % (self.ruleset_uuid, categorie_label.lower())):
                                             categories_count[categorie_label.lower()] += result_count
 
-                        categories = [dict(count=v, label=k) for k, v in categories_count.iteritems()]
+                        categories = [dict(count=v, label=k) for k, v in categories_count.items()]
 
                         set_count = sum([elt['count'] for elt in categories])
 

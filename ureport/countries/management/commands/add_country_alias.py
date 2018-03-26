@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
+import git
 import json
+import os
+
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from django.utils.translation import ugettext_lazy as _
 
 from django_countries import countries
-import git
-import os
 from ureport.countries.models import CountryAlias
 
 
@@ -63,7 +63,7 @@ class Command(BaseCommand):
         print("Parsing files...")
         for filename in filenames:
             print("Parsing file %s" % filename)
-            with open(filename) as json_file:
+            with open(filename, encoding='utf-8') as json_file:
                 self.import_file(json_file, user)
 
         print("All files parsed.")

@@ -51,6 +51,6 @@ class PollTest(UreportTest):
             response = self.client.post(refresh_cache_url, post_data, SERVER_NAME='uganda.ureport.io', follow=True)
             self.assertEqual(response.context['org'], self.uganda)
             self.assertEqual(response.request['PATH_INFO'], reverse('orgs.org_home'))
-            self.assertTrue("Refreshed boundaries cache for this organization" in response.content)
+            self.assertContains(response, "Refreshed boundaries cache for this organization")
 
             mock_refresh_caches.assert_called_once_with(self.uganda, [OrgCache.boundaries])

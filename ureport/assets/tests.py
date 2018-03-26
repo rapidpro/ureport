@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
 from django.conf import settings
 from django.urls import reverse
 from ureport.assets.models import Image
@@ -30,7 +29,7 @@ class ImageTest(UreportTest):
         self.assertEquals(len(response.context['form'].fields), 4)
         self.assertTrue('org' not in response.context['form'].fields)
 
-        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "r")
+        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
 
         post_data = dict(name="Orange Pattern", image_type="P", image=upload)
         response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
@@ -44,7 +43,7 @@ class ImageTest(UreportTest):
         self.assertEquals(len(response.context['form'].fields), 4)
         self.assertTrue('org' not in response.context['form'].fields)
 
-        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "r")
+        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
 
         post_data = dict(name="Orange Pattern", image_type="P", image=upload)
         response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='nigeria.ureport.io')
@@ -77,7 +76,7 @@ class ImageTest(UreportTest):
         self.assertEquals(len(response.context['form'].fields), 5)
         self.assertTrue('org' not in response.context['form'].fields)
 
-        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "r")
+        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
         post_data = dict(name="Orange Pattern Updated", image_type="P", image=upload)
         response = self.client.post(uganda_bg_update_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], list_url)
@@ -90,14 +89,14 @@ class ImageTest(UreportTest):
         self.assertEquals(len(response.context['form'].fields), 5)
         self.assertTrue('org' in response.context['form'].fields)
 
-        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "r")
+        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
 
         post_data = dict(name="Blue Pattern", image_type="P", image=upload)
         response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
         self.assertTrue('form' in response.context)
         self.assertTrue('org' in response.context['form'].errors)
 
-        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "r")
+        upload = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
 
         post_data = dict(name="Blue Pattern", image_type="P", image=upload, org=self.uganda.pk)
 

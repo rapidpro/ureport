@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='boundary',
             name='backend',
-            field=models.CharField(default=b'rapidpro', max_length=16),
+            field=models.CharField(default='rapidpro', max_length=16),
         ),
     ]
