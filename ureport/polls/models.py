@@ -150,8 +150,6 @@ class Poll(SmartModel):
     @classmethod
     def pull_results(cls, poll_id):
         poll = Poll.objects.get(pk=poll_id)
-        backend = poll.org.get_backend()
-
         backend = poll.org.get_backend(backend_slug=poll.backend)
 
         (num_val_created, num_val_updated, num_val_ignored,
