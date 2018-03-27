@@ -49,7 +49,7 @@ psycopg2==2.7.1
 pycountry==18.2.23
 python-dateutil==2.7.0
 pytz==2018.3
-rapidpro-dash==1.2.7
+-e git+https://github.com/rapidpro/dash.git@4f213ab6f5dc8c2ceddaf45dd402734dc7a409ae#egg=rapidpro_dash
 rapidpro-python==2.2
 raven==6.6.0
 rcssmin==1.0.6

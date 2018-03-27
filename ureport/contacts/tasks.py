@@ -12,9 +12,8 @@ def pull_contacts(org, since, until):
     """
     Fetches updated contacts from RapidPro and updates local contacts accordingly
     """
-    from ureport.backend import get_backend
     from ureport.contacts.models import ReportersCounter
-    backend = get_backend()
+    backend = org.get_backend()
 
     if not since:
         logger.warn("First time run for org #%d. Will sync all contacts" % org.pk)

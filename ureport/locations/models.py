@@ -25,6 +25,8 @@ class Boundary(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    backend = models.CharField(max_length=16, default='rapidpro')
+
     osm_id = models.CharField(max_length=15,
                               help_text=_("This is the OSM id for this administrative boundary"))
 
