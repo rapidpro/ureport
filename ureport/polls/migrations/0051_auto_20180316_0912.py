@@ -11,6 +11,10 @@ class Migration(migrations.Migration):
         ('polls', '0050_auto_20170615_1455'),
     ]
 
+    def populate_default_backend(apps, schema_editor):
+        PollResult = apps.get_model("polls", "PollResult")
+        PollResult.objects.all().update(backend='rapidpro')
+
     operations = [
         migrations.AddField(
             model_name='poll',
@@ -20,6 +24,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pollresult',
             name='backend',
-            field=models.CharField(default='rapidpro', max_length=16),
+            field=models.CharField(null=True, max_length=16),
         ),
+        migrations.RunPython(populate_default_backend),
     ]
