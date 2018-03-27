@@ -35,6 +35,8 @@ class ContactField(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    backend = models.CharField(max_length=16, default='rapidpro')
+
     org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="contactfields")
 
     label = models.CharField(verbose_name=_("Label"), max_length=36)
@@ -64,6 +66,8 @@ class Contact(models.Model):
     GENDER_CHOICES = ((MALE, _("Male")), (FEMALE, _("Female")))
 
     is_active = models.BooleanField(default=True)
+
+    backend = models.CharField(max_length=16, default='rapidpro')
 
     uuid = models.CharField(max_length=36, unique=True)
 

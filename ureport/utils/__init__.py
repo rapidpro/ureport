@@ -202,53 +202,41 @@ def organize_categories_data(org, contact_field, api_data):
     return api_data
 
 
-def fetch_flows(org):
+def fetch_flows(org, backend_slug=None):
+    from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     start = time.time()
     print "Fetching flows for %s" % org.name
 
     this_time = datetime.now()
-    org_flows = dict(time=datetime_to_ms(this_time), results=dict())
+    org_flows = dict(time=datetime_to_ms(this_time))
 
-    try:
-        from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
+    backends = org.backends.filter(is_active=True)
+    for backend_obj in backends:
+        backend = org.get_backend(backend_slug=backend_obj.slug)
+        try:
+            all_flows = backend.fetch_flows(org)
+            org_flows[backend_obj.slug] = all_flows
 
-        temba_client = org.get_temba_client(api_version=2)
-        flows = temba_client.get_flows().all()
+            all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
+            cache.set(all_flows_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
-        all_flows = dict()
-        for flow in flows:
-            flow_json = dict()
-            flow_json['uuid'] = flow.uuid
-            flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
-            flow_json['created_on'] = datetime_to_json_date(flow.created_on)
-            flow_json['name'] = flow.name
-            flow_json['archived'] = flow.archived
-            flow_json['runs'] = flow.runs.active + flow.runs.expired + flow.runs.completed + flow.runs.interrupted
-            flow_json['completed_runs'] = flow.runs.completed
-
-            all_flows[flow.uuid] = flow_json
-
-        all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
-        org_flows['results'] = all_flows
-        cache.set(all_flows_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-
-    except Exception:
-        client.captureException()
-        import traceback
-        traceback.print_exc()
+        except Exception:
+            client.captureException()
+            import traceback
+            traceback.print_exc()
 
     print "Fetch %s flows took %ss" % (org.name, time.time() - start)
 
-    return org_flows.get('results')
+    return org_flows.get(backend_slug) if backend_slug else dict()
 
 
-def get_flows(org):
+def get_flows(org, backend_slug='rapidro'):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY
     cache_value = cache.get(CACHE_ORG_FLOWS_KEY % org.pk, None)
-    if cache_value:
-        return cache_value['results']
+    if cache_value and backend_slug in cache_value:
+        return cache_value[backend_slug]
 
-    return fetch_flows(org)
+    return fetch_flows(org, backend_slug)
 
 
 def update_poll_flow_data(org):

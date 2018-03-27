@@ -15,9 +15,9 @@
   - if request.user.is_superuser or org_perms.orgs.org_edit
     %a.btn.btn-primary.pull-right{href:"{% url 'orgs.org_edit' %}", role:"button"}
       - trans "Edit"
-  - if request.user.is_superuser or org_perms.orgs.org_tokens
-    %a.btn.btn-primary.pull-right.tokens{href:"{% url 'orgs.org_tokens' %}", role:"button"}
-      - trans "API Tokens"
+  - if request.user.is_superuser or org_perms.orgs.orgbackend_list
+    %a.btn.btn-primary.pull-right.backends{href:"{% url 'orgs.orgbackend_list' %}", role:"button"}
+      - trans "Manage Backends"
   - if request.user.is_superuser or org_perms.orgs.org_manage_accounts
     %a.btn.btn-primary.pull-right.manage{href:"{% url 'orgs.org_manage_accounts' %}", role:"button"}
       - trans "Manage Users"
@@ -50,7 +50,7 @@
       width: 200px;
     }
 
-    a.manage, a.tokens {
+    a.manage, a.backends {
       margin-right: 10px;
     }
 

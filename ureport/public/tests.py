@@ -45,6 +45,14 @@ class PublicTest(UreportTest):
     def test_org_config_fields(self):
         edit_url = reverse('orgs.org_edit')
 
+        org_backend = self.nigeria.backends.filter(slug='rapidpro').first()
+        if not org_backend:
+            self.nigeria.backends.create(slug='floip', api_token='rapidpro',
+                                         backend_type='ureport.backend.rapidpro.RapidProBackend',
+                                         host='http://localhost:8001',
+                                         created_by=self.admin,
+                                         modified_by=self.admin)
+
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertLoginRedirect(response)
 
@@ -230,7 +238,7 @@ class PublicTest(UreportTest):
         self.assertEquals(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['story_widget_url'])
 
-    @mock.patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
     @mock.patch('django.core.cache.cache.get')
     def test_index(self, mock_cache_get):
         mock_cache_get.return_value = None
@@ -555,7 +563,7 @@ class PublicTest(UreportTest):
         self.assertEquals(response.request['PATH_INFO'], '/ureporters/')
         self.assertEquals(response.context['org'], self.uganda)
 
-    @mock.patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_polls_list(self):
         polls_url = reverse('public.polls')
 
@@ -770,7 +778,7 @@ class PublicTest(UreportTest):
         response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
         self.assertFalse(response.context['polls'])
 
-    @mock.patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_polls_read(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 

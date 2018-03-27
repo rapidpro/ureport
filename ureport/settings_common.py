@@ -1,10 +1,10 @@
 from __future__ import absolute_import
+
 import sys
 import os
 
-from datetime import timedelta
 from celery.schedules import crontab
-
+from datetime import timedelta
 from django.utils.translation import ugettext_lazy as _
 from django.forms import Textarea
 
@@ -147,31 +147,20 @@ MIDDLEWARE = (
 ROOT_URLCONF = 'ureport.urls'
 
 
-DATA_API_BACKENDS_CONFIG = [
-    dict(name="Rapidpro", slug="rapidpro"),
-]
+DATA_API_BACKENDS_CONFIG = {
+    'rapidpro': {
+        'name': 'RapidPro',
+        'slug': 'rapidpro',
+        'class_type': 'ureport.backend.rapidpro.RapidProBackend'
+    }
+}
+
+DATA_API_BACKEND_TYPES = (
+    ('ureport.backend.rapidpro.RapidProBackend', "RapidPro Backend Type"),
+)
 
 
-ORG_CONFIG_FIELDS = [
-    dict(name='is_on_landing_page', field=dict(help_text=_("Whether this org should be show on the landing page"), required=False), superuser_only=True),
-    dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-Report locally"), required=True)),
-    dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-Report"), required=False)),
-    dict(name='join_fg_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False), superuser_only=True),
-    dict(name='join_bg_color', field=dict(help_text=_("The color used to draw the background on the join bar"), required=False), superuser_only=True),
-    dict(name='primary_color', field=dict(help_text=_("The primary color for styling for this organization"), required=False), superuser_only=True),
-    dict(name='secondary_color', field=dict(help_text=_("The secondary color for styling for this organization"), required=False), superuser_only=True),
-    dict(name='bg_color', field=dict(help_text=_("The background color for the site"), required=False), superuser_only=True),
-    dict(name='colors', field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False), superuser_only=True),
-    dict(name='google_tracking_id', field=dict(help_text=_("The Google Analytics Tracking ID for this organization"), required=False)),
-    dict(name='youtube_channel_url', field=dict(help_text=_("The URL to the Youtube channel for this organization"), required=False)),
-    dict(name='facebook_page_url', field=dict(help_text=_("The URL to the Facebook page for this organization"), required=False)),
-    dict(name='facebook_page_id', field=dict(help_text=_("The integer id to the Facebook page for this organization (optional)"), required=False)),
-    dict(name='facebook_app_id', field=dict(help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"), required=False)),
-    dict(name='facebook_pixel_id', field=dict(help_text=_("The id of the Facebook Pixel for this organization (optional)"), required=False)),
-    dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), required=False)),
-    dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), required=False)),
-    dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), required=False)),
-    dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), required=False)),
+BACKENDS_ORG_CONFIG_FIELDS = [
     dict(name='reporter_group', field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")), superuser_only=True, read_only=True),
     dict(name='born_label', field=dict(help_text=_("The label of the Contact Field that contains the birth date of reporters")), superuser_only=True, read_only=True),
     dict(name='gender_label', field=dict(help_text=_("The label of the Contact Field that contains the gender of reporters")), superuser_only=True, read_only=True),
@@ -182,13 +171,35 @@ ORG_CONFIG_FIELDS = [
     dict(name='ward_label', field=dict(help_text=_("The label of the Contact Field that contains the Ward of reporters"), required=False), superuser_only=True, read_only=True),
     dict(name='male_label', field=dict(help_text=_("The label assigned to U-Reporters that are Male.")), superuser_only=True, read_only=True),
     dict(name='female_label', field=dict(help_text=_("The label assigned to U-Reporters that are Female.")), superuser_only=True, read_only=True),
-    dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), required=False)),
+]
+
+ORG_CONFIG_FIELDS = [
+    dict(name='is_on_landing_page', field=dict(help_text=_("Whether this org should be show on the landing page"), required=False), superuser_only=True),
+    dict(name='shortcode', field=dict(help_text=_("The shortcode that users will use to contact U-Report locally"), label="Shortcode", required=True)),
+    dict(name='join_text', field=dict(help_text=_("The short text used to direct visitors to join U-Report"), label="Join Text", required=False)),
+    dict(name='join_fg_color', field=dict(help_text=_("The color used to draw the text on the join bar"), required=False), superuser_only=True),
+    dict(name='join_bg_color', field=dict(help_text=_("The color used to draw the background on the join bar"), required=False), superuser_only=True),
+    dict(name='primary_color', field=dict(help_text=_("The primary color for styling for this organization"), required=False), superuser_only=True),
+    dict(name='secondary_color', field=dict(help_text=_("The secondary color for styling for this organization"), required=False), superuser_only=True),
+    dict(name='bg_color', field=dict(help_text=_("The background color for the site"), required=False), superuser_only=True),
+    dict(name='colors', field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False), superuser_only=True),
+    dict(name='google_tracking_id', field=dict(help_text=_("The Google Analytics Tracking ID for this organization"), label="Google Tracking ID", required=False)),
+    dict(name='youtube_channel_url', field=dict(help_text=_("The URL to the Youtube channel for this organization"), label="Youtube Channel URL", required=False)),
+    dict(name='facebook_page_url', field=dict(help_text=_("The URL to the Facebook page for this organization"), label="Facebook Page URL", required=False)),
+    dict(name='facebook_page_id', field=dict(help_text=_("The integer id to the Facebook page for this organization (optional)"), label="Facebook Page ID", required=False)),
+    dict(name='facebook_app_id', field=dict(help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"), label="Facebook App ID", required=False)),
+    dict(name='facebook_pixel_id', field=dict(help_text=_("The id of the Facebook Pixel for this organization (optional)"), label="Facebook Pixel ID", required=False)),
+    dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), label="Instagram Username", required=False)),
+    dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), label="Instagram LightWidget ID", required=False)),
+    dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), label="Twitter Handle", required=False)),
+    dict(name='twitter_search_widget', field=dict(help_text=_("The Twitter widget used for searching"), label="Twitter Search Widget ID", required=False)),
+    dict(name='has_jobs', field=dict(help_text=_("If there are jobs to be shown on the public site"), label="Display Jobs Tab", required=False)),
     dict(name='is_global', field=dict(help_text=_("If this org if for global data. e.g: It shows a world map instead of a country map."), required=False), superuser_only=True),
-    dict(name='iso_code', field=dict(help_text=_("The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."), required=False)),
+    dict(name='iso_code', field=dict(help_text=_("The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."), label="Country ISO code", required=False)),
     dict(name='headline_font', field=dict(help_text=_("The font used for headline texts"), required=False), superuser_only=True),
     dict(name='text_font', field=dict(help_text=_("The font used for normal text"), required=False), superuser_only=True),
     dict(name='text_small_font', field=dict(help_text=_("The font used for small text"), required=False), superuser_only=True),
-    dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), required=False, widget=Textarea))
+    dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), label="Custom HTML", required=False, widget=Textarea))
 ]
 
 
@@ -350,7 +361,7 @@ PERMISSIONS = {
 
     'dashblocks.dashblock': ('html', ),
     'orgs.org': ('choose', 'edit', 'home', 'manage_accounts', 'create_login', 'join', 'refresh_cache'),
-    'polls.poll': ('questions', 'responses', 'images', 'pull_refresh', 'poll_date'),
+    'polls.poll': ('questions', 'responses', 'images', 'pull_refresh', 'poll_date', 'poll_flow'),
     'stories.story': ('html', 'images'),
 
 }

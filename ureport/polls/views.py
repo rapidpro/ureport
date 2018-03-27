@@ -5,6 +5,7 @@ from dash.orgs.views import OrgPermsMixin, OrgObjPermsMixin
 from datetime import timedelta
 from django import forms
 from django.core.cache import cache
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from dash.categories.models import Category, CategoryImage
 from dash.categories.fields import CategoryChoiceField
@@ -23,8 +24,7 @@ import re
 
 class PollForm(forms.ModelForm):
     is_active = forms.BooleanField(required=False)
-    flow_uuid = forms.ChoiceField(choices=[])
-    poll_date = forms.DateTimeField(required=False)
+    backend = forms.ChoiceField(choices=[])
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = CategoryChoiceField(Category.objects.none())
     category_image = forms.ModelChoiceField(CategoryImage.objects.none(), required=False)
@@ -36,20 +36,49 @@ class PollForm(forms.ModelForm):
         super(PollForm, self).__init__(*args, **kwargs)
         self.fields['category'].queryset = Category.objects.filter(org=self.org)
 
-        # find all the flows on this org, create choices for those
-        flows = self.org.get_flows()
-
-        self.fields['flow_uuid'].choices = [(f['uuid'], f['name'] + " (" + f.get('date_hint', "--") + ")") for f in sorted(flows.values(), key=lambda k:k['name'].lower().strip())]
+        backend_options = self.org.backends.filter(is_active=True).values_list('slug', flat=True)
+        self.fields['backend'].choices = [(backend, backend) for backend in backend_options]
 
         # only display category images for this org which are active
         self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')
+
+    def clean(self):
+
+        cleaned_data = self.cleaned_data
+
+        backend_options = self.org.backends.filter(is_active=True).values_list('slug', flat=True)
+        if not backend_options:
+            raise ValidationError(_("Your org does not have any API token configuration."))
+
+        return cleaned_data
+
+    class Meta:
+        model = Poll
+        fields = ('is_active', 'is_featured', 'backend', 'title', 'category', 'category_image')
+
+
+class PollFlowForm(forms.ModelForm):
+    flow_uuid = forms.ChoiceField(choices=[])
+    poll_date = forms.DateTimeField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.org = kwargs['org']
+        del kwargs['org']
+        self.backend = kwargs['backend']
+        del kwargs['backend']
+
+        super(PollFlowForm, self).__init__(*args, **kwargs)
+
+        # find all the flows on this org, create choices for those
+        flows = self.org.get_flows(self.backend)
+        self.fields['flow_uuid'].choices = [(f['uuid'], f['name'] + " (" + f.get('date_hint', "--") + ")") for f in sorted(flows.values(), key=lambda k:k['name'].lower().strip())]
 
     def clean(self):
         cleaned_data = self.cleaned_data
         poll_date = cleaned_data.get('poll_date')
         flow_uuid = cleaned_data.get('flow_uuid')
 
-        flows = self.org.get_flows()
+        flows = self.org.get_flows(self.backend)
         flow = flows.get(flow_uuid)
 
         if not poll_date and flow:
@@ -65,7 +94,7 @@ class PollForm(forms.ModelForm):
 
     class Meta:
         model = Poll
-        fields = ('is_active', 'is_featured', 'flow_uuid', 'title', 'poll_date', 'category', 'category_image')
+        fields = ('flow_uuid', 'poll_date')
 
 
 class QuestionForm(ModelForm):
@@ -104,10 +133,10 @@ class QuestionForm(ModelForm):
 
 class PollCRUDL(SmartCRUDL):
     model = Poll
-    actions = ('create', 'list', 'update', 'questions', 'images', 'responses', 'pull_refresh', 'import', 'poll_date')
+    actions = ('create', 'list', 'update', 'questions', 'images', 'responses', 'pull_refresh', 'import', 'poll_date', 'poll_flow')
 
     class PollDate(OrgObjPermsMixin, SmartUpdateView):
-        form_class = PollForm
+        form_class = PollFlowForm
         title = _("Adjust poll date")
         success_url = 'id@polls.poll_questions'
         fields = ('poll_date',)
@@ -116,27 +145,36 @@ class PollCRUDL(SmartCRUDL):
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.PollDate, self).get_form_kwargs()
             kwargs['org'] = self.request.org
+            kwargs['backend'] = self.object.backend
             return kwargs
 
-    class Create(OrgPermsMixin, SmartCreateView):
-        form_class = PollForm
+    class PollFlow(OrgObjPermsMixin, SmartUpdateView):
+        form_class = PollFlowForm
+        title = _("Configure flow")
         success_url = 'id@polls.poll_poll_date'
-        fields = ('is_featured', 'flow_uuid', 'title', 'category', 'category_image')
-        success_message = _("Your poll has been created, now adjust the poll date.")
+        fields = ('flow_uuid',)
+        success_message = _("Your poll has been configured, now adjust the poll date.")
 
         def get_form_kwargs(self):
-            kwargs = super(PollCRUDL.Create, self).get_form_kwargs()
+            kwargs = super(PollCRUDL.PollFlow, self).get_form_kwargs()
             kwargs['org'] = self.request.org
+            kwargs['backend'] = self.object.backend
             return kwargs
 
+        def pre_process(self, request, *args, **kwargs):
+            obj = self.get_object()
+            if obj.flow_uuid:
+                return HttpResponseRedirect(reverse('polls.poll_poll_date', args=[obj.pk]))
+            return None
+
         def pre_save(self, obj):
-            obj = super(PollCRUDL.Create, self).pre_save(obj)
+            obj = super(PollCRUDL.PollFlow, self).pre_save(obj)
             obj.org = self.request.org
 
             now = timezone.now()
             five_minutes_ago = now - timedelta(minutes=5)
 
-            similar_poll = Poll.objects.filter(org=obj.org, flow_uuid=obj.flow_uuid, is_active=True,
+            similar_poll = Poll.objects.filter(org=obj.org, flow_uuid=obj.flow_uuid, backend=obj.backend, is_active=True,
                                                created_on__gte=five_minutes_ago).first()
             if similar_poll:
                 obj = similar_poll
@@ -153,10 +191,49 @@ class PollCRUDL(SmartCRUDL):
             return obj
 
         def post_save(self, obj):
-            obj = super(PollCRUDL.Create, self).post_save(obj)
+            obj = super(PollCRUDL.PollFlow, self).post_save(obj)
             obj.update_or_create_questions(user=self.request.user)
 
             Poll.pull_poll_results_task(obj)
+            return obj
+
+    class Create(OrgPermsMixin, SmartCreateView):
+        form_class = PollForm
+        success_url = 'id@polls.poll_poll_flow'
+        fields = ('is_featured', 'backend', 'title', 'category', 'category_image')
+        success_message = _("Your poll has been created, now configure its flow.")
+
+        def derive_fields(self):
+            org = self.request.org
+
+            backend_options = org.backends.filter(is_active=True).values_list('slug', flat=True)
+            if len(backend_options) <= 1:
+                return ('is_featured', 'title', 'category', 'category_image')
+            return ('is_featured', 'backend', 'title', 'category', 'category_image')
+
+        def get_form_kwargs(self):
+            kwargs = super(PollCRUDL.Create, self).get_form_kwargs()
+            kwargs['org'] = self.request.org
+            return kwargs
+
+        def pre_save(self, obj):
+            obj = super(PollCRUDL.Create, self).pre_save(obj)
+            org = self.request.org
+            obj.org = org
+
+            backend_options = org.backends.filter(is_active=True).values_list('slug', flat=True)
+            if len(backend_options) == 1:
+                obj.backend = backend_options[0]
+
+            now = timezone.now()
+            five_minutes_ago = now - timedelta(minutes=5)
+
+            similar_poll = Poll.objects.filter(org=obj.org, flow_uuid='', backend=obj.backend, is_active=True,
+                                               created_on__gte=five_minutes_ago).first()
+            if similar_poll:
+                obj = similar_poll
+
+            obj.poll_date = timezone.now()
             return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
@@ -303,7 +380,8 @@ class PollCRUDL(SmartCRUDL):
 
                 label_field_name = 'ruleset_%s_label' % question.ruleset_uuid
                 label_field_initial = initial.get(label_field_name, "")
-                label_field = forms.CharField(label=_("Ruleset Label"), widget=forms.TextInput(attrs={'readonly': 'readonly'}), required=False, initial=label_field_initial,
+                label_field = forms.CharField(label=_("Ruleset Label"), widget=forms.TextInput(attrs={'readonly': 'readonly'}),
+                                              required=False, initial=label_field_initial,
                                               help_text=_("The label of the ruleset from RapidPro"))
 
                 title_field_name = 'ruleset_%s_title' % question.ruleset_uuid
@@ -361,8 +439,8 @@ class PollCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         search_fields = ('title__icontains',)
-        fields = ('title', 'category', 'questions', 'featured_responses', 'images', 'sync_status', 'created_on')
-        link_fields = ('title', 'questions', 'featured_responses', 'images')
+        fields = ('title', 'poll_date', 'category', 'questions', 'featured_responses', 'images', 'sync_status', 'created_on')
+        link_fields = ('title', 'poll_date', 'questions', 'featured_responses', 'images')
         default_order = ('-created_on', 'id')
 
         def get_queryset(self):
@@ -393,6 +471,8 @@ class PollCRUDL(SmartCRUDL):
         def lookup_field_link(self, context, field, obj):
             if field == 'questions':
                 return reverse('polls.poll_questions', args=[obj.pk])
+            elif field == 'poll_date':
+                return reverse('polls.poll_poll_date', args=[obj.pk])
             elif field == 'images':
                 return reverse('polls.poll_images', args=[obj.pk])
             elif field == 'featured_responses':
@@ -402,11 +482,11 @@ class PollCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
-        fields = ('is_active', 'is_featured', 'title', 'poll_date', 'category', 'category_image')
+        fields = ('is_active', 'is_featured', 'title', 'category', 'category_image')
 
         def derive_title(self):
             obj = self.get_object()
-            flows = obj.org.get_flows()
+            flows = obj.org.get_flows(obj.backend)
 
             flow = flows.get(obj.flow_uuid, dict())
 

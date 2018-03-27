@@ -102,6 +102,17 @@ class UreportTest(SmartminTest, DashTest):
         org.administrators.add(user)
 
         self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
+
+        backend = org.backends.filter(slug='rapidpro', is_active=True).first()
+        if not backend:
+            backend = org.backends.create(slug='rapidpro', backend_type='ureport.backend.rapidpro.RapidProBackend', api_token='token',
+                                          host='http://localhost:8001')
+
+        backend.backend_type = 'ureport.backend.rapidpro.RapidProBackend'
+        backend.api_token = 'token'
+        backend.host = 'http://localhost:8001'
+        backend.save()
+
         return Org.objects.get(subdomain=subdomain)
 
     def create_poll(self, org, title, flow_uuid, category, user, featured=False, has_synced=False):

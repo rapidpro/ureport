@@ -32,13 +32,16 @@ class FieldSyncer(BaseSyncer):
 
     def local_kwargs(self, org, remote):
         return {
+            'backend': self.backend,
             'org': org,
             'key': remote.key,
             'label': remote.label,
             'value_type': self.model.TEMBA_TYPES.get(remote.value_type, self.model.TYPE_TEXT)
         }
 
-    def update_required(self, local, remote, local_kwags):
+    def update_required(self, local, remote, local_kwargs):
+        if local_kwargs and local_kwargs['backend'] != local.backend:
+            return False
         return local.label != remote.label or local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)
 
     def delete_local(self, local):
@@ -63,6 +66,7 @@ class BoundarySyncer(BaseSyncer):
             parent = Boundary.objects.filter(osm_id__iexact=remote.parent.osm_id, org=org).first()
 
         return {
+            'backend': self.backend,
             'org': org,
             'geometry': geometry,
             'parent': parent,
@@ -72,6 +76,9 @@ class BoundarySyncer(BaseSyncer):
         }
 
     def update_required(self, local, remote, local_kwargs):
+        if local_kwargs and local_kwargs['backend'] != local.backend:
+            return False
+
         if local.name != remote.name:
             return True
 
@@ -106,15 +113,15 @@ class ContactSyncer(BaseSyncer):
         org_state_boundaries_data = dict()
         org_district_boundaries_data = dict()
         org_ward_boundaries_data = dict()
-        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL)
+        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL, backend=self.backend)
         for state in state_boundaries:
             org_state_boundaries_data[state.name.lower()] = state.osm_id
             state_district_data = dict()
-            district_boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, parent=state)
+            district_boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, parent=state, backend=self.backend)
             for district in district_boundaries:
                 state_district_data[district.name.lower()] = district.osm_id
                 district_ward_data = dict()
-                ward_boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent=district)
+                ward_boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent=district, backend=self.backend)
                 for ward in ward_boundaries:
                     district_ward_data[ward.name.lower()] = ward.osm_id
                 org_ward_boundaries_data[district.osm_id] = district_ward_data
@@ -128,7 +135,7 @@ class ContactSyncer(BaseSyncer):
         cache_attr = '__contact_fields__%d' % org.pk
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
-        contact_fields = ContactField.objects.filter(org=org)
+        contact_fields = ContactField.objects.filter(org=org, backend=self.backend)
         contact_fields_data = {elt.label.lower(): elt.key for elt in contact_fields}
 
         setattr(self, cache_attr, contact_fields_data)
@@ -232,6 +239,7 @@ class ContactSyncer(BaseSyncer):
                 gender = ''
 
         return {
+            'backend': self.backend,
             'org': org,
             'uuid': remote.uuid,
             'gender': gender,
@@ -244,6 +252,9 @@ class ContactSyncer(BaseSyncer):
         }
 
     def update_required(self, local, remote, local_kwargs):
+        if local_kwargs and local_kwargs['backend'] != local.backend:
+            return False
+
         if not local_kwargs:
             return True
 
@@ -264,11 +275,44 @@ class RapidProBackend(BaseBackend):
     def _get_client(org, api_version):
         return org.get_temba_client(api_version=api_version)
 
+    def fetch_flows(self, org):
+        client = self._get_client(org, 2)
+        flows = client.get_flows().all()
+
+        all_flows = dict()
+        for flow in flows:
+            flow_json = dict()
+            flow_json['uuid'] = flow.uuid
+            flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
+            flow_json['created_on'] = datetime_to_json_date(flow.created_on)
+            flow_json['name'] = flow.name
+            flow_json['archived'] = flow.archived
+            flow_json['runs'] = flow.runs.active + flow.runs.expired + flow.runs.completed + flow.runs.interrupted
+            flow_json['completed_runs'] = flow.runs.completed
+
+            all_flows[flow.uuid] = flow_json
+        return all_flows
+
+
+    def get_definition(self, org, flow_uuid):
+        client = self._get_client(org, 2)
+        export_definition = client.get_definitions(flows=(flow_uuid, ))
+
+        flow_definition = None
+
+        for flow_def in export_definition.flows:
+            def_flow_uuid = flow_def.get('metadata', dict()).get('uuid', None)
+
+            if def_flow_uuid and def_flow_uuid == flow_uuid:
+                flow_definition = flow_def
+                break
+        return flow_definition
+
     def pull_fields(self, org):
         client = self._get_client(org, 2)
         incoming_objects = client.get_fields().all(retry_on_rate_exceed=True)
 
-        return sync_local_to_set(org, FieldSyncer(), incoming_objects)
+        return sync_local_to_set(org, FieldSyncer(backend=self.backend), incoming_objects)
 
     def pull_boundaries(self, org):
 
@@ -278,7 +322,7 @@ class RapidProBackend(BaseBackend):
             client = self._get_client(org, 2)
             incoming_objects = client.get_boundaries(geometry=True).all()
 
-        return sync_local_to_set(org, BoundarySyncer(), incoming_objects)
+        return sync_local_to_set(org, BoundarySyncer(backend=self.backend), incoming_objects)
 
     def pull_contacts(self, org, modified_after, modified_before, progress_callback=None):
         client = self._get_client(org, 2)
@@ -291,7 +335,7 @@ class RapidProBackend(BaseBackend):
         deleted_query = client.get_contacts(deleted=True, after=modified_after, before=modified_before)
         deleted_fetches = deleted_query.iterfetches(retry_on_rate_exceed=True)
 
-        return sync_local_to_changes(org, ContactSyncer(), fetches, deleted_fetches, progress_callback)
+        return sync_local_to_changes(org, ContactSyncer(backend=self.backend), fetches, deleted_fetches, progress_callback)
 
     def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
         org = poll.org
