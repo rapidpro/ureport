@@ -982,9 +982,7 @@ class PollResponseCategory(models.Model):
 class PollResult(models.Model):
 
     org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
-
-    backend = models.CharField(max_length=16, default='rapidpro')
-
+    
     flow = models.CharField(max_length=36)
 
     ruleset = models.CharField(max_length=36)
