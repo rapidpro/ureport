@@ -1,3 +1,10 @@
+v1.0.385
+----------
+ * Add backend field
+ * Update dash to 1.3.1
+ * Fix test
+ * Contacts pull should loop on all configured backends
+
 v1.0.383
 ----------
  * Add argentina flag to settings
