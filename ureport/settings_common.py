@@ -556,6 +556,13 @@ SITE_ALLOW_NO_ORG = ('public.countries',
 #-----------------------------------------------------------------------------------
 PREVIOUS_ORG_SITES = [
     dict(
+        name="Argentina",
+        host="http://argentina.ureport.in/",
+        flag="flag_ar.png",
+        is_static=True,
+        count_link="http://argentina.ureport.in/count/",
+    ),
+    dict(
         name="Brazil",
         host="http://ureportbrasil.org.br/",
         flag="flag_br.png",
