@@ -152,7 +152,7 @@ class Poll(SmartModel):
         poll = Poll.objects.get(pk=poll_id)
         backend = poll.org.get_backend()
 
-        backend = poll.org.get_backend(backend=poll.backend)
+        backend = poll.org.get_backend(backend_slug=poll.backend)
 
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
