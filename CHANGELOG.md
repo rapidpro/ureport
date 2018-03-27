@@ -1,3 +1,8 @@
+v1.0.386
+----------
+ * Add default value and constraints migrations
+ * Faster migrations
+
 v1.0.385
 ----------
  * Add backend field
