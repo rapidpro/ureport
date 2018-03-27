@@ -21,7 +21,7 @@ django-redis
 psycopg2
 xlutils
 mock
-sorl-thumbnail
+-e git+https://github.com/jazzband/sorl-thumbnail.git@b6358d234d7de3927a2666a2a5ab3d7870c0e1d3#egg=sorl-thumbnail
 django-hamlpy
 pycountry
 django-countries

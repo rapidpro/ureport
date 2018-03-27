@@ -1,3 +1,7 @@
+v1.0.382
+----------
+ * Update sorl-thumbnail to mute unecessary logs 
+
 v1.0.379
 ----------
  * Update sorl-thumbnail and more deps
