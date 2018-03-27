@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import time
 from django.conf import settings
 
-from django.db import models, migrations
+from django.db import migrations
 from temba_client.exceptions import TembaBadRequestError
 from temba_client.v1 import TembaClient
 
@@ -87,7 +87,6 @@ class Migration(migrations.Migration):
         print "Finished populating %d polls in %ss" % (successes, time.time() - start)
         print "Deactivated %d polls" % deactivated
         print "Deactivated ids are %s" % ",".join([str(elt) for elt in deactivated_ids])
-
 
     dependencies = [
         ('polls', '0028_auto_20160202_1026'),

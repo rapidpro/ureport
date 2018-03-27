@@ -29,7 +29,7 @@ from ureport.tests import UreportTest, UreportJobsTest, MockTembaClient
 class PublicTest(UreportTest):
     def setUp(self):
         super(PublicTest, self).setUp()
-        self.uganda = self.create_org('uganda', pytz.timezone('Africa/Kampala'),  self.admin)
+        self.uganda = self.create_org('uganda', pytz.timezone('Africa/Kampala'), self.admin)
         self.nigeria = self.create_org('nigeria', pytz.timezone('Africa/Lagos'), self.admin)
 
         self.health_uganda = Category.objects.create(org=self.uganda,
@@ -162,7 +162,7 @@ class PublicTest(UreportTest):
         response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
         self.assertEquals(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
-        self.assertTrue('welcome-flags' in response.content) # we now show the flags for all orgs
+        self.assertTrue('welcome-flags' in response.content)  # we now show the flags for all orgs
 
         self.global_org.set_config('is_global', True)
 
@@ -270,11 +270,8 @@ class PublicTest(UreportTest):
         self.assertTrue('recent_polls' in response.context)
         self.assertFalse(response.context['recent_polls'])
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid='uuid-101',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid='uuid-101',
+                                    created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
@@ -287,11 +284,8 @@ class PublicTest(UreportTest):
 
         poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, has_synced=True)
 
-        poll2_question = PollQuestion.objects.create(poll=poll2,
-                                                     title='question poll 2',
-                                                     ruleset_uuid='uuid-202',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll2, title='question poll 2', ruleset_uuid='uuid-202',
+                                    created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
@@ -304,11 +298,8 @@ class PublicTest(UreportTest):
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
-        poll3_question = PollQuestion.objects.create(poll=poll3,
-                                                     title='question poll 3',
-                                                     ruleset_uuid='uuid-303',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll3, title='question poll 3', ruleset_uuid='uuid-303',
+                                    created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/')
@@ -472,7 +463,6 @@ class PublicTest(UreportTest):
                                       created_by=self.admin,
                                       modified_by=self.admin)
 
-
         response = self.client.get(about_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/about/')
         self.assertEquals(response.context['org'], self.uganda)
@@ -582,7 +572,6 @@ class PublicTest(UreportTest):
         self.assertTrue(self.education_nigeria in response.context['categories'])
         self.assertTrue(self.health_uganda not in response.context['categories'])
 
-
         education_uganda = Category.objects.create(org=self.uganda,
                                                    name="Education",
                                                    created_by=self.admin,
@@ -590,35 +579,23 @@ class PublicTest(UreportTest):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid='uuid-101',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid='uuid-101',
+                                    created_by=self.admin, modified_by=self.admin)
 
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", education_uganda, self.admin, has_synced=True)
 
-        poll2_question = PollQuestion.objects.create(poll=poll2,
-                                                     title='question poll 2',
-                                                     ruleset_uuid='uuid-102',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll2, title='question poll 2', ruleset_uuid='uuid-102',
+                                    created_by=self.admin, modified_by=self.admin)
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
-        poll3_question = PollQuestion.objects.create(poll=poll3,
-                                                     title='question poll 3',
-                                                     ruleset_uuid='uuid-103',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll3, title='question poll 3', ruleset_uuid='uuid-103',
+                                    created_by=self.admin, modified_by=self.admin)
 
         poll4 = self.create_poll(self.nigeria, "Poll 4", "uuid-4", self.education_nigeria, self.admin, has_synced=True)
 
-        poll4_question = PollQuestion.objects.create(poll=poll4,
-                                                     title='question poll 4',
-                                                     ruleset_uuid='uuid-104',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll4, title='question poll 4', ruleset_uuid='uuid-104',
+                                    created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(polls_url, SERVER_NAME='nigeria.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/polls/')
@@ -879,11 +856,10 @@ class PublicTest(UreportTest):
 
         response = self.client.get(state_boundary_url, SERVER_NAME='uganda.ureport.io')
 
-        output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R34567",
-                                                                                               level=2,
-                                                                                               name='Lugogo'),
+        output = dict(type="FeatureCollection", features=[dict(type='Feature',
+                                                               properties=dict(id="R34567", level=2, name='Lugogo'),
                                                                geometry=dict(type='MultiPolygon',
-                                                                             coordinates=[[5,6]]))])
+                                                                             coordinates=[[5, 6]]))])
 
         self.assertEquals(json.dumps(output), response.content)
 
@@ -1012,7 +988,7 @@ class PublicTest(UreportTest):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
-        poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", education_uganda, self.admin)
+        self.create_poll(self.uganda, "Poll 2", "uuid-2", education_uganda, self.admin)
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin)
 
@@ -1059,18 +1035,18 @@ class PublicTest(UreportTest):
         self.assertEquals(len(response.context['story_featured_images']), 2)
         self.assertEquals(response.context['story_featured_images'][0], story_image2)
         self.assertEquals(response.context['story_featured_images'][1], story_image1)
-        
+
         story_image2.is_active = False
         story_image2.save()
-        
+
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
 
         self.assertEquals(len(response.context['story_featured_images']), 1)
         self.assertEquals(response.context['story_featured_images'][0], story_image1)
-        
+
         story_image1.image = ''
         story_image1.save()
-        
+
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
         self.assertFalse(response.context['story_featured_images'])
 
@@ -1138,8 +1114,8 @@ class PublicTest(UreportTest):
             mock_ureporters_locations_stats.return_value = 'LOCATIONS_STATS'
 
             response = self.client.get(
-                    reporters_results + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
-                    SERVER_NAME='uganda.ureport.io')
+                reporters_results + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
+                SERVER_NAME='uganda.ureport.io')
 
             self.assertEquals(response.status_code, 200)
             self.assertEquals(response.content, json.dumps("LOCATIONS_STATS"))
@@ -1409,7 +1385,6 @@ class CountriesTest(UreportTest):
         self.assertTrue('country_code' in response_json)
         self.assertEquals(response_json['exists'], "valid")
         self.assertEquals(response_json['country_code'], "AD")
-
 
         # unicode aliases
         CountryAlias.objects.create(name="Madžarska",

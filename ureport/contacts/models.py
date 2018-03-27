@@ -1,17 +1,11 @@
 import time
 from dash.orgs.models import Org
-from django.core.cache import cache
-from django.db import models, DataError, connection
+from django.db import models, connection
 from django.db.models import Sum, Count
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from django_redis import get_redis_connection
 
-# Create your models here.
-import pytz
-from ureport.locations.models import Boundary
-from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 CONTACT_LOCK_KEY = 'lock:contact:%d:%s'
 CONTACT_FIELD_LOCK_KEY = 'lock:contact-field:%d:%s'

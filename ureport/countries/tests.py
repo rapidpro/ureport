@@ -22,7 +22,7 @@ class CountriesTest(UreportTest):
         self.assertEqual(CountryAlias.objects.all().first(), alias1)
         self.assertEqual(alias1, alias2)
 
-        alias3 = CountryAlias.get_or_create('RW', '1kHills', self.admin)
+        CountryAlias.get_or_create('RW', '1kHills', self.admin)
         self.assertEqual(CountryAlias.objects.all().count(), 2)
 
     def test_list(self):

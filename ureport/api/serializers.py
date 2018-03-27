@@ -9,9 +9,7 @@ from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 from ureport.assets.models import Image
 from ureport.news.models import NewsItem, Video
-from ureport.polls.models import Poll, PollQuestion
-
-__author__ = 'kenneth'
+from ureport.polls.models import Poll
 
 
 def generate_absolute_url_from_file(request, file):
