@@ -14,7 +14,6 @@ class Migration(migrations.Migration):
 
         print "Deleted %d inactive boundaries" % deleted
 
-
     dependencies = [
         ('locations', '0002_boundary_is_active'),
     ]

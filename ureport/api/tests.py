@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 from collections import OrderedDict
-import json
 from random import randint
 
 import six
@@ -53,9 +52,6 @@ class UreportAPITests(APITestCase):
         self.create_story("Test Story")
 
     def create_org(self, subdomain, user):
-        email = subdomain + "@user.com"
-        first_name = subdomain + "_First"
-        last_name = subdomain + "_Last"
         name = subdomain
 
         orgs = Org.objects.filter(subdomain=subdomain)
@@ -210,7 +206,6 @@ class UreportAPITests(APITestCase):
 
         response = self.client.get(url)
 
-
         gender_stats = response.data.pop('gender_stats')
         self.assertEqual(gender_stats, dict(female_count=2, female_percentage="40%",
                                             male_count=3, male_percentage="60%"))
@@ -251,7 +246,6 @@ class UreportAPITests(APITestCase):
                 if entry['count'] != 0:
                     self.assertTrue(entry['label'] in non_zero_keys.keys())
                     self.assertEqual(entry['count'], non_zero_keys[entry['label']])
-
 
     def test_polls_by_org_list(self):
         url = '/api/v1/polls/org/%d/' % self.uganda.pk

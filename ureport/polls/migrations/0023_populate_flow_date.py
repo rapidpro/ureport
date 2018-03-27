@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
-from django.db import models, migrations
+from django.db import migrations
 from temba_client.v1 import TembaClient
 
 from ureport.utils import datetime_to_json_date, json_date_to_datetime

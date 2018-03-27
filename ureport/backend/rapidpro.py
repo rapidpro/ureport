@@ -17,7 +17,7 @@ from django_redis import get_redis_connection
 
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll, PollResultsCounter
+from ureport.polls.models import PollResult, Poll
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from . import BaseBackend
 
@@ -528,8 +528,8 @@ class RapidProBackend(BaseBackend):
             if existing_poll_result is not None:
 
                 update_required = self._check_update_required(existing_poll_result, category, text, state,
-                                                                         district, ward, born, gender, completed,
-                                                                         value_date)
+                                                              district, ward, born, gender, completed,
+                                                              value_date)
 
                 if update_required:
                     # update the db object
@@ -559,8 +559,8 @@ class RapidProBackend(BaseBackend):
             elif poll_result_to_save is not None:
 
                 replace_save_map = self._check_update_required(poll_result_to_save, category, text, state,
-                                                                          district, ward, born, gender, completed,
-                                                                          value_date)
+                                                               district, ward, born, gender, completed,
+                                                               value_date)
 
                 if replace_save_map:
                     result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,

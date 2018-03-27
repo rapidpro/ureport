@@ -1666,7 +1666,7 @@ class PollQuestionTest(UreportTest):
             refresh_org_flows(self.org.pk)
             mock_fetch_flows.assert_called_once_with(self.org)
 
-        with patch('ureport.polls.tasks.fetch_old_sites_count') as mock_fetch_old_sites_count:
+        with patch('ureport.polls.tasks.do_fetch_old_sites_count') as mock_fetch_old_sites_count:
             mock_fetch_old_sites_count.return_value = 'FETCHED'
 
             fetch_old_sites_count()

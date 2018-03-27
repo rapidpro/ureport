@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import calendar
+import json
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponsePermanentRedirect
+from django.conf import settings
+from django.http import HttpResponsePermanentRedirect, HttpResponse
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
-from smartmin.views import *
+from smartmin.views import SmartReadView, SmartTemplateView
 
 from dash.stories.models import Story
 from ureport.countries.models import CountryAlias

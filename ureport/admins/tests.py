@@ -1,6 +1,6 @@
 from django.urls import reverse
 from mock import patch
-from ureport.admins import OrgCache, refresh_caches
+from ureport.admins import OrgCache
 from ureport.tests import UreportTest
 from django.template import TemplateSyntaxError
 
