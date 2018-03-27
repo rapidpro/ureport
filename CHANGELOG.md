@@ -1,3 +1,9 @@
+v1.0.387
+----------
+* Fix import
+ * Better log
+ * Update pull results default value in batches
+
 v1.0.386
 ----------
  * Add default value and constraints migrations
