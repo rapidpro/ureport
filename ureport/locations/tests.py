@@ -43,7 +43,7 @@ class LocationTest(UreportTest):
         self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), expected)
 
     def test_build_global_boundaries(self):
-        with patch('builtins.open') as my_mock:
+        with patch('ureport.locations.models.open') as my_mock:
             my_mock.return_value.__enter__ = lambda s: s
             my_mock.return_value.__exit__ = Mock()
             my_mock.return_value.read.return_value = json.dumps(dict(features=[
