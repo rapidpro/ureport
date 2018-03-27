@@ -3,6 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+from ureport.utils import chunk_list
+import time
 
 
 class Migration(migrations.Migration):
@@ -13,7 +15,17 @@ class Migration(migrations.Migration):
 
     def populate_default_backend(apps, schema_editor):
         PollResult = apps.get_model("polls", "PollResult")
-        PollResult.objects.all().update(backend='rapidpro')
+        result_ids = PollResult.objects.all().values_list('id', flat=True)
+
+        start = time.time()
+        i = 0
+
+        for res_id_batch in chunk_list(result_ids, 1000):
+            PollResult.objects.filter(id__in=res_id_batch).update(backend='rapidpro')
+
+            i += len(res_id_batch)
+
+            print "Processed update %d / %d poll results in %ds" % (i, len(result_ids), time.time() - start)
 
     operations = [
         migrations.AddField(
