@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
 
             i += len(res_id_batch)
 
-            print "Processed poll results update %d in %ds" % (i, time.time() - start)
+            print "Processed update %d / %d poll results in %ds" % (i, len(result_ids), time.time() - start)
 
     operations = [
         migrations.AddField(
