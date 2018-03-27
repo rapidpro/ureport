@@ -1,3 +1,7 @@
+v1.0.388
+----------
+ * Do not add backend field on poll results
+
 v1.0.387
 ----------
 * Fix import
