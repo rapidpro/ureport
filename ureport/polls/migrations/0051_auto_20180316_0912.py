@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 from ureport.utils import chunk_list
+import time
 
 
 class Migration(migrations.Migration):
