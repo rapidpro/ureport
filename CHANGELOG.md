@@ -1,3 +1,9 @@
+v1.0.383
+----------
+ * Add argentina flag to settings
+ * Fix tests
+ * Fix PEP8 errors
+
 v1.0.382
 ----------
  * Update sorl-thumbnail to mute unecessary logs 
