@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 
 import json
-
 from ureport.tests import UreportTest
 from mock import patch, Mock
 from .models import Boundary
@@ -44,7 +43,7 @@ class LocationTest(UreportTest):
         self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), expected)
 
     def test_build_global_boundaries(self):
-        with patch('__builtin__.open') as my_mock:
+        with patch('builtins.open') as my_mock:
             my_mock.return_value.__enter__ = lambda s: s
             my_mock.return_value.__exit__ = Mock()
             my_mock.return_value.read.return_value = json.dumps(dict(features=[

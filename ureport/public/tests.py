@@ -820,7 +820,6 @@ class PublicTest(UreportTest):
         self.assertEquals(response.status_code, 404)
 
     def test_boundary_view(self):
-        self.maxDiff = None
         country_boundary_url = reverse('public.boundaries')
         state_boundary_url = reverse('public.boundaries', args=['R23456'])
 
@@ -861,8 +860,7 @@ class PublicTest(UreportTest):
                                                                              coordinates=[[3, 4]]))
 
                                                           ])
-
-        self.assertContains(response, json.dumps(output))
+        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
 
         response = self.client.get(state_boundary_url, SERVER_NAME='uganda.ureport.io')
 
@@ -871,7 +869,7 @@ class PublicTest(UreportTest):
                                                                geometry=dict(type='MultiPolygon',
                                                                              coordinates=[[5, 6]]))])
 
-        self.assertContains(response, json.dumps(output))
+        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
 
         self.uganda.set_config("is_global", True)
 
@@ -884,7 +882,7 @@ class PublicTest(UreportTest):
                                                                geometry=dict(type='MultiPolygon',
                                                                              coordinates=[[1, 2]]))])
 
-        self.assertContains(response, json.dumps(output))
+        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
 
     def test_stories_list(self):
         stories_url = reverse('public.stories')

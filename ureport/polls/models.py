@@ -721,7 +721,7 @@ class PollQuestion(SmartModel):
             responded = boundary['set']
             boundary_responses[boundary['label']] = dict(responded=responded, total=total)
 
-        for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:5]:
+        for boundary in sorted(boundary_responses, key=lambda x: (boundary_responses[x]['responded'], -boundary_responses[x]['total']), reverse=True)[:5]:
             responded = boundary_responses[boundary]
             percent = int(round((100 * responded['responded'])) / responded['total']) if responded['total'] > 0 else 0
             top_regions.append(
