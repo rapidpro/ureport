@@ -514,9 +514,7 @@ class RapidProBackend(BaseBackend):
             born = contact_obj.born
             gender = contact_obj.gender
 
-        temba_values = listvalues(temba_run.values)
-        temba_values.sort(key=lambda val: val.time)
-        for temba_value in temba_values:
+        for temba_value in sorted(temba_run.values.values(), key=lambda val: val.time):
             ruleset_uuid = temba_value.node
             category = temba_value.category
             text = temba_value.value
