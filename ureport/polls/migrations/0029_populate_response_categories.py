@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import str
 
 import time
+import six
 from django.conf import settings
 
 from django.db import migrations
@@ -88,7 +88,7 @@ class Migration(migrations.Migration):
 
         print("Finished populating %d polls in %ss" % (successes, time.time() - start))
         print("Deactivated %d polls" % deactivated)
-        print("Deactivated ids are %s" % ",".join([str(elt) for elt in deactivated_ids]))
+        print("Deactivated ids are %s" % ",".join([six.text_type(elt) for elt in deactivated_ids]))
 
     dependencies = [
         ('polls', '0028_auto_20160202_1026'),

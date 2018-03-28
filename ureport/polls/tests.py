@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import str
 
 import json
 
@@ -330,7 +329,7 @@ class PollTest(UreportTest):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
-        self.assertEqual(str(poll1), 'Poll 1')
+        self.assertEqual(six.text_type(poll1), 'Poll 1')
 
         self.assertIsNone(Poll.get_main_poll(self.uganda))
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
@@ -579,7 +578,7 @@ class PollTest(UreportTest):
                                                              created_by=self.admin,
                                                              modified_by=self.admin)
 
-        self.assertEqual(str(featured_response1), 'Poll 1 - Kampala - Awesome')
+        self.assertEqual(six.text_type(featured_response1), 'Poll 1 - Kampala - Awesome')
 
         featured_response1.is_active = False
         featured_response1.save()
@@ -655,7 +654,7 @@ class PollTest(UreportTest):
                                                created_by=self.admin,
                                                modified_by=self.admin)
 
-        self.assertEqual(str(poll_image1), 'Poll 1 - image 1')
+        self.assertEqual(six.text_type(poll_image1), 'Poll 1 - image 1')
 
         self.assertFalse(poll1.get_featured_images())
 
@@ -1429,7 +1428,7 @@ class PollQuestionTest(UreportTest):
                                                      created_by=self.admin,
                                                      modified_by=self.admin)
 
-        self.assertEqual(str(poll_question1), 'question 1')
+        self.assertEqual(six.text_type(poll_question1), 'question 1')
 
         self.uganda.set_config("state_label", "LGA")
         self.uganda.set_config("district_label", "District")

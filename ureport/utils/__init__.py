@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import str
-
-# -*- coding: utf-8 -*-
 
 import copy
 import iso8601
 import json
 import math
+import six
 import time
 from datetime import timedelta, datetime
 from itertools import islice, chain
@@ -363,8 +361,8 @@ def get_gender_stats(org):
     female_percentage = int(female_count * 100 / total)
     male_percentage = 100 - female_percentage
 
-    return dict(female_count=female_count, female_percentage=str(female_percentage) + "%",
-                male_count=male_count, male_percentage=str(male_percentage) + "%")
+    return dict(female_count=female_count, female_percentage=six.text_type(female_percentage) + "%",
+                male_count=male_count, male_percentage=six.text_type(male_percentage) + "%")
 
 
 def get_age_stats(org):

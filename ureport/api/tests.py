@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import str
 
 from collections import OrderedDict
 from random import randint
@@ -72,7 +71,7 @@ class UreportAPITests(APITestCase):
 
     def create_poll(self, title, is_featured=False):
         now = timezone.now()
-        return Poll.objects.create(flow_uuid=str(randint(1000, 9999)),
+        return Poll.objects.create(flow_uuid=six.text_type(randint(1000, 9999)),
                                    title=title,
                                    category=self.health_uganda,
                                    poll_date=now,

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import str
 
 import requests
+import six
 import time
 from django.conf import settings
 from django.db import migrations
@@ -48,7 +48,7 @@ def populate_uuid_fields(apps, schema_editor):
 
     for org in Org.objects.all():
         flow_ids = org.polls.values_list('flow_id', flat=True)
-        flows = fetch_flows(org, "flows=%s" % ",".join([str(elt) for elt in flow_ids]))
+        flows = fetch_flows(org, "flows=%s" % ",".join([six.text_type(elt) for elt in flow_ids]))
         for flow in flows:
             for ruleset in flow['rulesets']:
                 PollQuestion.objects.filter(ruleset_id=ruleset['id']).update(ruleset_uuid=ruleset['node'])

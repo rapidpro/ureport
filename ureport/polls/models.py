@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
-from builtins import str
 
 import json
 from collections import defaultdict
@@ -603,7 +602,7 @@ class Poll(SmartModel):
             pass
 
         # write our file out
-        tmp_file = os.path.join(settings.MEDIA_ROOT, 'tmp/%s' % str(uuid4()))
+        tmp_file = os.path.join(settings.MEDIA_ROOT, 'tmp/%s' % six.text_type(uuid4()))
 
         out_file = open(tmp_file, 'wb')
         out_file.write(csv_file.read())
@@ -744,7 +743,7 @@ class PollQuestion(SmartModel):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
             substituted_segment = self.poll.org.substitute_segment(segment)
-            key += ":" + slugify(str(json.dumps(substituted_segment)))
+            key += ":" + slugify(six.text_type(json.dumps(substituted_segment)))
 
         cached_value = cache.get(key, None)
         if cached_value:
@@ -919,7 +918,7 @@ class PollQuestion(SmartModel):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
             substituted_segment = self.poll.org.substitute_segment(segment)
-            key += ":" + slugify(str(json.dumps(substituted_segment)))
+            key += ":" + slugify(six.text_type(json.dumps(substituted_segment)))
 
         cache.set(key, {"results": results}, cache_time)
 
@@ -952,7 +951,7 @@ class PollQuestion(SmartModel):
         responded = self.get_responded()
         if polled and responded:
             percentage = int(round((float(responded) * 100.0) / float(polled)))
-            return "%s" % str(percentage) + "%"
+            return "%s" % six.text_type(percentage) + "%"
         return "___"
 
     def get_words(self):
