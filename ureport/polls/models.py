@@ -985,7 +985,7 @@ class PollResponseCategory(models.Model):
 class PollResult(models.Model):
 
     org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
-    
+
     flow = models.CharField(max_length=36)
 
     ruleset = models.CharField(max_length=36)

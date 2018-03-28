@@ -30,7 +30,7 @@ def pull_contacts(org, since, until):
 
         logger.warn("Fetched contact fields for org #%d. "
                     "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, fields_created, fields_updated,
-                                                                    fields_deleted, ignored))
+                                                                        fields_deleted, ignored))
         logger.warn("Fetch fields for org #%d took %ss" % (org.pk, time.time() - start))
 
         start_boundaries = time.time()
@@ -39,7 +39,7 @@ def pull_contacts(org, since, until):
 
         logger.warn("Fetched boundaries for org #%d. "
                     "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, boundaries_created, boundaries_updated,
-                                                                    boundaries_deleted, ignored))
+                                                                        boundaries_deleted, ignored))
 
         logger.warn("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
         start_contacts = time.time()
@@ -48,7 +48,7 @@ def pull_contacts(org, since, until):
 
         logger.warn("Fetched contacts for org #%d. "
                     "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, contacts_created, contacts_updated,
-                                                                    contacts_deleted, ignored))
+                                                                        contacts_deleted, ignored))
 
         logger.warn("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
 
