@@ -79,7 +79,7 @@ DATABASES['default'] = dj_database_url.config()
 DATABASES['default']['CONN_MAX_AGE'] = 60
 
 # no debug toolbar in prod
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

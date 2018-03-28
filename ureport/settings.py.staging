@@ -85,7 +85,7 @@ DATABASES = {
 }
 
 # no debug toolbar in prod
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

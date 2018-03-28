@@ -6,7 +6,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from ureport.settings_common import *
 
 # INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar.apps.DebugToolbarConfig',)
-# MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',) + MIDDLEWARE_CLASSES
+# MIDDLEWARE = ('debug_toolbar.middleware.DebugToolbarMiddleware',) + MIDDLEWARE
 
 ALLOWED_HOSTS = ['*']
 
