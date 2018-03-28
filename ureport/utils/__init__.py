@@ -143,7 +143,7 @@ def organize_categories_data(org, contact_field, api_data):
             year_label = elt['label']
             try:
                 if len(year_label) == 4 and int(float(year_label)) > 1900:
-                    decade = int(math.floor((current_year - int(elt['label'])) / 10)) * 10
+                    decade = ((current_year - int(elt['label'])) // 10) * 10
                     key = "%s-%s" % (decade, decade + 10)
                     if interval_dict.get(key, None):
                         interval_dict[key] += elt['count']
