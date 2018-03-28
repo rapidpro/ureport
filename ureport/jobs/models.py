@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import six
 
 from django.conf import settings
 from django.core.cache import cache
@@ -20,6 +21,7 @@ RSS_JOBS_FEED_CACHE_TIME = getattr(settings, 'RSS_JOBS_FEED_CACHE_TIME', 60 * 60
 RSS_JOBS_KEY = 'jobsource:%d:%d'
 
 
+@six.python_2_unicode_compatible
 class JobSource(SmartModel):
     TWITTER = 'T'
     FACEBOOK = 'F'

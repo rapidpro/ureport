@@ -7,6 +7,7 @@ from collections import defaultdict
 
 import logging
 import pytz
+import six
 from datetime import timedelta
 from django.contrib.auth.models import User
 from django.db import models, connection
@@ -58,6 +59,7 @@ CACHE_ORG_REGISTRATION_DATA_KEY = "org:%d:registration:%s"
 CACHE_ORG_OCCUPATION_DATA_KEY = "org:%d:occupation:%s"
 
 
+@six.python_2_unicode_compatible
 class PollCategory(SmartModel):
     """
     This is a dead class but here so we can perform our migration.
@@ -75,6 +77,7 @@ class PollCategory(SmartModel):
         verbose_name_plural = _("Poll Categories")
 
 
+@six.python_2_unicode_compatible
 class Poll(SmartModel):
     """
     A poll represents a single Flow that has been brought in for
@@ -636,6 +639,7 @@ class Poll(SmartModel):
         return self.title
 
 
+@six.python_2_unicode_compatible
 class PollImage(SmartModel):
     name = models.CharField(max_length=64,
                             help_text=_("The name to describe this image"))
@@ -650,6 +654,7 @@ class PollImage(SmartModel):
         return "%s - %s" % (self.poll, self.name)
 
 
+@six.python_2_unicode_compatible
 class FeaturedResponse(SmartModel):
     """
     A highlighted response for a poll and location.
@@ -670,6 +675,7 @@ class FeaturedResponse(SmartModel):
         return "%s - %s - %s" % (self.poll, self.location, self.message)
 
 
+@six.python_2_unicode_compatible
 class PollQuestion(SmartModel):
     """
     Represents a single question that was asked in a poll, these questions tie 1-1 to
