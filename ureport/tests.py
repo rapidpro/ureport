@@ -100,7 +100,7 @@ class UreportTest(SmartminTest, DashTest):
 
         org.administrators.add(user)
 
-        self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
+        self.assertEqual(Org.objects.filter(subdomain=subdomain).count(), 1)
 
         backend = org.backends.filter(slug='rapidpro', is_active=True).first()
         if not backend:
@@ -188,7 +188,7 @@ class SetOrgMiddlewareTest(UreportTest):
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
         self.assertEqual(self.request.org, ug_org)
-        self.assertEquals(self.request.user.get_org(), ug_org)
+        self.assertEqual(self.request.user.get_org(), ug_org)
 
         # test invalid subdomain
         wrong_subdomain_url = "blabla.ureport.io"
@@ -212,14 +212,14 @@ class SetOrgMiddlewareTest(UreportTest):
             self.request.get_host.return_value = wrong_subdomain_url
             self.request.org = None
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
-            self.assertEquals(response.status_code, 302)
-            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
             self.assertEqual(self.request.org, None)
-            self.assertEquals(self.request.user.get_org(), None)
+            self.assertEqual(self.request.user.get_org(), None)
 
             self.create_org('rwanda', pytz.timezone('Africa/Kigali'), self.admin)
             wrong_subdomain_url = "blabla.ureport.io"
             self.request.get_host.return_value = wrong_subdomain_url
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
-            self.assertEquals(response.status_code, 302)
-            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))

@@ -60,29 +60,29 @@ class PublicTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 27)
+        self.assertEqual(len(response.context['form'].fields), 27)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 38)
+        self.assertEqual(len(response.context['form'].fields), 38)
 
     def test_count(self):
         count_url = reverse('public.count')
 
         response = self.client.get(count_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.context['org'], self.nigeria)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['org'], self.nigeria)
         self.assertTrue('count' in response.context)
-        self.assertEquals(response.context['count'], self.nigeria.get_reporters_count())
-        self.assertEquals(response.context['view'].template_name, 'public/count')
+        self.assertEqual(response.context['count'], self.nigeria.get_reporters_count())
+        self.assertEqual(response.context['view'].template_name, 'public/count')
 
         response = self.client.get(count_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['org'], self.uganda)
         self.assertTrue('count' in response.context)
-        self.assertEquals(response.context['count'], self.uganda.get_reporters_count())
-        self.assertEquals(response.context['view'].template_name, 'public/count')
+        self.assertEqual(response.context['count'], self.uganda.get_reporters_count())
+        self.assertEqual(response.context['view'].template_name, 'public/count')
 
     def test_chooser(self):
         chooser_url = reverse('public.home')
@@ -93,8 +93,8 @@ class PublicTest(UreportTest):
         Org.objects.all().delete()
 
         response = self.client.get(chooser_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), settings_sites_count)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['orgs']), settings_sites_count)
 
         # neither uganda nor nigeria should be on the landing page without flag
         chooser_orgs = response.context['orgs']
@@ -107,8 +107,8 @@ class PublicTest(UreportTest):
         self.rwanda = self.create_org('rwanda', pytz.timezone('Africa/Kampala'), self.admin)
 
         response = self.client.get(chooser_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), settings_sites_count)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['orgs']), settings_sites_count)
 
         # no org is configure to be on landing page
         chooser_orgs = response.context['orgs']
@@ -120,8 +120,8 @@ class PublicTest(UreportTest):
         self.nigeria.set_config('is_on_landing_page', True)
 
         response = self.client.get(chooser_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), settings_sites_count)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['orgs']), settings_sites_count)
 
         # nigeria missing flag so not included
         chooser_orgs = response.context['orgs']
@@ -143,8 +143,8 @@ class PublicTest(UreportTest):
 
         # now nigeria should be included on landing page
         response = self.client.get(chooser_url)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(len(response.context['orgs']), settings_sites_count + 1)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['orgs']), settings_sites_count + 1)
 
         chooser_orgs = response.context['orgs']
         has_rwanda = False
@@ -160,16 +160,16 @@ class PublicTest(UreportTest):
 
         # if no empty subdomain org give a tempate response
         response = self.client.get(chooser_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue('orgs' in response.context)
         self.assertContains(response, 'welcome-flags')
 
         # if we have empty subdomain org we should show its index
         self.global_org = Org.objects.create(subdomain='', name='global', created_by=self.admin, modified_by=self.admin)
         response = self.client.get(chooser_url, SERVER_NAME='blabla.ureport.io')
-        self.assertEquals(response.status_code, 301)
+        self.assertEqual(response.status_code, 301)
         response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
         self.assertContains(response, 'welcome-flags')
 
@@ -177,9 +177,9 @@ class PublicTest(UreportTest):
 
         # if the empty org in global the template tag should show the flags
         response = self.client.get(chooser_url, SERVER_NAME='blabla.ureport.io')
-        self.assertEquals(response.status_code, 301)
+        self.assertEqual(response.status_code, 301)
         response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertFalse('orgs' in response.context)
         self.assertContains(response, 'welcome-flags')
 
@@ -188,7 +188,7 @@ class PublicTest(UreportTest):
 
         with self.settings(SESSION_COOKIE_SECURE=True):
             response = self.client.get(chooser_url, follow=True, SERVER_NAME='blabla.ureport.io')
-            self.assertEquals(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
 
             self.assertEqual(response.request['SERVER_NAME'], 'ureport.io')
             self.assertEqual(response.request['wsgi.url_scheme'], 'http')
@@ -198,7 +198,7 @@ class PublicTest(UreportTest):
 
         # using subdomain wihout domain on org, login is shown and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.request['PATH_INFO'], '/')
         self.assertNotContains(response, "<meta name='robots' content='noindex'")
         self.assertContains(response, 'nigeria.ureport.io/users/login/')
 
@@ -207,13 +207,13 @@ class PublicTest(UreportTest):
 
         # using subdomain without domain on org, indexing is disallowed but login should be shown
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.request['PATH_INFO'], '/')
         self.assertContains(response, "<meta name='robots' content='noindex'")
         self.assertContains(response, 'nigeria.ureport.io/users/login/')
 
         # using custom domain, login is hidden  and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST='ureport.ng')
-        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.request['PATH_INFO'], '/')
         self.assertNotContains(response, "<meta name='robots' content='noindex'")
         self.assertNotContains(response, 'nigeria.ureport.io/users/login/')
 
@@ -221,22 +221,22 @@ class PublicTest(UreportTest):
         home_url = reverse('public.index')
 
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.request['PATH_INFO'], '/')
         self.assertFalse(response.context['is_rtl_org'])
-        self.assertEquals(response.context['org_lang'], 'en_US')
+        self.assertEqual(response.context['org_lang'], 'en_US')
 
         self.nigeria.language = 'ar'
         self.nigeria.save()
 
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['is_rtl_org'])
-        self.assertEquals(response.context['org_lang'], 'ar_AR')
+        self.assertEqual(response.context['org_lang'], 'ar_AR')
 
     def test_set_story_widget_url(self):
         home_url = reverse('public.index')
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['story_widget_url'])
 
     @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
@@ -246,13 +246,13 @@ class PublicTest(UreportTest):
         home_url = reverse('public.index')
 
         response = self.client.get(home_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.nigeria)
-        self.assertEquals(response.context['view'].template_name, 'public/index.html')
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.nigeria)
+        self.assertEqual(response.context['view'].template_name, 'public/index.html')
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertIsNone(response.context['latest_poll'])
         self.assertFalse('trending_words' in response.context)
@@ -271,8 +271,8 @@ class PublicTest(UreportTest):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertIsNone(response.context['latest_poll'])
         self.assertFalse('trending_words' in response.context)
@@ -283,10 +283,10 @@ class PublicTest(UreportTest):
                                     created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
-        self.assertEquals(poll1, response.context['latest_poll'])
+        self.assertEqual(poll1, response.context['latest_poll'])
         self.assertTrue('trending_words' in response.context)
         self.assertTrue('recent_polls' in response.context)
         self.assertFalse(response.context['recent_polls'])
@@ -297,10 +297,10 @@ class PublicTest(UreportTest):
                                     created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
-        self.assertEquals(poll1, response.context['latest_poll'])
+        self.assertEqual(poll1, response.context['latest_poll'])
         self.assertTrue('trending_words' in response.context)
         self.assertTrue('recent_polls' in response.context)
         self.assertFalse(response.context['recent_polls'])
@@ -311,10 +311,10 @@ class PublicTest(UreportTest):
                                     created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
-        self.assertEquals(poll3, response.context['latest_poll'])
+        self.assertEqual(poll3, response.context['latest_poll'])
         self.assertTrue('trending_words' in response.context)
         self.assertTrue('recent_polls' in response.context)
         self.assertTrue(response.context['recent_polls'])
@@ -328,8 +328,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['stories'])
         self.assertTrue(story1 in response.context['stories'])
@@ -342,8 +342,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['stories'])
         self.assertTrue(story1 in response.context['stories'])
@@ -356,8 +356,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['stories'])
         self.assertTrue(story1 in response.context['stories'])
@@ -370,8 +370,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['stories'])
         self.assertFalse(story2 in response.context['stories'])
@@ -383,8 +383,8 @@ class PublicTest(UreportTest):
         story4.save()
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         video1 = Video.objects.create(title='video 1',
                                       video_id='video_1',
@@ -394,8 +394,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['videos'])
         self.assertTrue(video1 in response.context['videos'])
@@ -408,8 +408,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['videos'])
         self.assertTrue(video1 in response.context['videos'])
@@ -423,8 +423,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['videos'])
         self.assertTrue(video1 in response.context['videos'])
@@ -435,8 +435,8 @@ class PublicTest(UreportTest):
         video1.save()
 
         response = self.client.get(home_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['videos'])
         self.assertTrue(video1 not in response.context['videos'])
@@ -450,20 +450,20 @@ class PublicTest(UreportTest):
     def test_additional_menu(self):
         additional_menu_url = reverse('public.added')
         response = self.client.get(additional_menu_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/added/')
-        self.assertEquals(response.context['org'], self.nigeria)
+        self.assertEqual(response.request['PATH_INFO'], '/added/')
+        self.assertEqual(response.context['org'], self.nigeria)
 
     def test_about(self):
         about_url = reverse('public.about')
 
         response = self.client.get(about_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/about/')
-        self.assertEquals(response.context['org'], self.nigeria)
-        self.assertEquals(response.context['view'].template_name, 'public/about.html')
+        self.assertEqual(response.request['PATH_INFO'], '/about/')
+        self.assertEqual(response.context['org'], self.nigeria)
+        self.assertEqual(response.context['view'].template_name, 'public/about.html')
 
         response = self.client.get(about_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/about/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/about/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         video1 = Video.objects.create(title='video 1',
                                       video_id='video_1',
@@ -473,8 +473,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(about_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/about/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/about/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['videos'])
         self.assertTrue(video1 in response.context['videos'])
@@ -487,8 +487,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(about_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/about/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/about/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['videos'])
         self.assertTrue(video1 in response.context['videos'])
@@ -502,8 +502,8 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(about_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/about/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/about/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['videos'])
         self.assertTrue(video1 in response.context['videos'])
@@ -514,8 +514,8 @@ class PublicTest(UreportTest):
         video1.save()
 
         response = self.client.get(about_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/about/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/about/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         self.assertTrue(response.context['videos'])
         self.assertTrue(video1 not in response.context['videos'])
@@ -526,13 +526,13 @@ class PublicTest(UreportTest):
         join_engage_url = reverse('public.join')
 
         response = self.client.get(join_engage_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/join/')
-        self.assertEquals(response.context['org'], self.nigeria)
-        self.assertEquals(response.context['view'].template_name, 'public/join_engage.html')
+        self.assertEqual(response.request['PATH_INFO'], '/join/')
+        self.assertEqual(response.context['org'], self.nigeria)
+        self.assertEqual(response.context['view'].template_name, 'public/join_engage.html')
 
         response = self.client.get(join_engage_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/join/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/join/')
+        self.assertEqual(response.context['org'], self.uganda)
 
         # add shortcode and a join dashblock
         self.uganda.set_config("shortcode", "3000")
@@ -542,17 +542,17 @@ class PublicTest(UreportTest):
                                  created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(join_engage_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/join/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/join/')
+        self.assertEqual(response.context['org'], self.uganda)
         self.assertContains(response, 'All U-Report services (all msg on 3000) are free.')
 
     def test_ureporters(self):
         ureporters_url = reverse('public.ureporters')
 
         response = self.client.get(ureporters_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/ureporters/')
-        self.assertEquals(response.context['org'], self.nigeria)
-        self.assertEquals(response.context['view'].template_name, 'public/ureporters.html')
+        self.assertEqual(response.request['PATH_INFO'], '/ureporters/')
+        self.assertEqual(response.context['org'], self.nigeria)
+        self.assertEqual(response.context['view'].template_name, 'public/ureporters.html')
 
         self.assertTrue('months' in response.context)
         self.assertTrue('gender_stats' in response.context)
@@ -561,23 +561,23 @@ class PublicTest(UreportTest):
         self.assertTrue('occupation_stats' in response.context)
 
         response = self.client.get(ureporters_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/ureporters/')
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.request['PATH_INFO'], '/ureporters/')
+        self.assertEqual(response.context['org'], self.uganda)
 
     @mock.patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_polls_list(self):
         polls_url = reverse('public.polls')
 
         response = self.client.get(polls_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/polls/')
-        self.assertEquals(response.context['org'], self.nigeria)
-        self.assertEquals(response.context['tab'], 'list')
-        self.assertEquals(response.context['view'].template_name, 'public/polls.html')
+        self.assertEqual(response.request['PATH_INFO'], '/polls/')
+        self.assertEqual(response.context['org'], self.nigeria)
+        self.assertEqual(response.context['tab'], 'list')
+        self.assertEqual(response.context['view'].template_name, 'public/polls.html')
         self.assertFalse(response.context['latest_poll'])
         self.assertFalse(response.context['polls'])
         self.assertFalse(response.context['related_stories'])
 
-        self.assertEquals(len(response.context['categories']), 1)
+        self.assertEqual(len(response.context['categories']), 1)
         self.assertTrue(self.education_nigeria in response.context['categories'])
         self.assertTrue(self.health_uganda not in response.context['categories'])
 
@@ -607,18 +607,18 @@ class PublicTest(UreportTest):
                                     created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(polls_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/polls/')
-        self.assertEquals(response.context['org'], self.nigeria)
-        self.assertEquals(response.context['tab'], 'list')
-        self.assertEquals(response.context['view'].template_name, 'public/polls.html')
-        self.assertEquals(response.context['latest_poll'], poll4)
+        self.assertEqual(response.request['PATH_INFO'], '/polls/')
+        self.assertEqual(response.context['org'], self.nigeria)
+        self.assertEqual(response.context['tab'], 'list')
+        self.assertEqual(response.context['view'].template_name, 'public/polls.html')
+        self.assertEqual(response.context['latest_poll'], poll4)
 
-        self.assertEquals(len(response.context['categories']), 1)
+        self.assertEqual(len(response.context['categories']), 1)
         self.assertTrue(self.education_nigeria in response.context['categories'])
         self.assertTrue(self.health_uganda not in response.context['categories'])
         self.assertTrue(education_uganda not in response.context['categories'])
 
-        self.assertEquals(len(response.context['polls']), 1)
+        self.assertEqual(len(response.context['polls']), 1)
         self.assertTrue(poll4 in response.context['polls'])
         self.assertTrue(poll1 not in response.context['polls'])
         self.assertTrue(poll2 not in response.context['polls'])
@@ -655,93 +655,93 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(polls_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(len(response.context['related_stories']), 1)
+        self.assertEqual(len(response.context['related_stories']), 1)
         self.assertTrue(story4 in response.context['related_stories'])
         self.assertTrue(story1 not in response.context['related_stories'])
         self.assertTrue(story2 not in response.context['related_stories'])
         self.assertTrue(story3 not in response.context['related_stories'])
 
         response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.request['PATH_INFO'], '/polls/')
-        self.assertEquals(response.context['org'], self.uganda)
-        self.assertEquals(response.context['latest_poll'], poll3)
+        self.assertEqual(response.request['PATH_INFO'], '/polls/')
+        self.assertEqual(response.context['org'], self.uganda)
+        self.assertEqual(response.context['latest_poll'], poll3)
 
-        self.assertEquals(len(response.context['categories']), 2)
+        self.assertEqual(len(response.context['categories']), 2)
         self.assertTrue(self.education_nigeria not in response.context['categories'])
         self.assertTrue(self.health_uganda in response.context['categories'])
         self.assertTrue(education_uganda in response.context['categories'])
-        self.assertEquals(response.context['categories'][0], education_uganda)
-        self.assertEquals(response.context['categories'][1], self.health_uganda)
+        self.assertEqual(response.context['categories'][0], education_uganda)
+        self.assertEqual(response.context['categories'][1], self.health_uganda)
 
-        self.assertEquals(len(response.context['polls']), 3)
+        self.assertEqual(len(response.context['polls']), 3)
         self.assertTrue(poll4 not in response.context['polls'])
         self.assertTrue(poll1 in response.context['polls'])
         self.assertTrue(poll2 in response.context['polls'])
         self.assertTrue(poll3 in response.context['polls'])
-        self.assertEquals(response.context['polls'][0], poll3)
-        self.assertEquals(response.context['polls'][1], poll2)
-        self.assertEquals(response.context['polls'][2], poll1)
+        self.assertEqual(response.context['polls'][0], poll3)
+        self.assertEqual(response.context['polls'][1], poll2)
+        self.assertEqual(response.context['polls'][2], poll1)
 
-        self.assertEquals(len(response.context['related_stories']), 2)
+        self.assertEqual(len(response.context['related_stories']), 2)
         self.assertTrue(story4 not in response.context['related_stories'])
         self.assertTrue(story1 in response.context['related_stories'])
         self.assertTrue(story2 not in response.context['related_stories'])
         self.assertTrue(story3 in response.context['related_stories'])
-        self.assertEquals(response.context['related_stories'][0], story3)
-        self.assertEquals(response.context['related_stories'][1], story1)
+        self.assertEqual(response.context['related_stories'][0], story3)
+        self.assertEqual(response.context['related_stories'][1], story1)
 
         story1.featured = True
         story1.save()
 
         response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(len(response.context['related_stories']), 2)
+        self.assertEqual(len(response.context['related_stories']), 2)
         self.assertTrue(story4 not in response.context['related_stories'])
         self.assertTrue(story1 in response.context['related_stories'])
         self.assertTrue(story2 not in response.context['related_stories'])
         self.assertTrue(story3 in response.context['related_stories'])
-        self.assertEquals(response.context['related_stories'][0], story1)
-        self.assertEquals(response.context['related_stories'][1], story3)
+        self.assertEqual(response.context['related_stories'][0], story1)
+        self.assertEqual(response.context['related_stories'][1], story3)
 
         story1.is_active = False
         story1.save()
 
         response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(len(response.context['related_stories']), 1)
+        self.assertEqual(len(response.context['related_stories']), 1)
         self.assertTrue(story4 not in response.context['related_stories'])
         self.assertTrue(story1 not in response.context['related_stories'])
         self.assertTrue(story2 not in response.context['related_stories'])
         self.assertTrue(story3 in response.context['related_stories'])
-        self.assertEquals(response.context['related_stories'][0], story3)
+        self.assertEqual(response.context['related_stories'][0], story3)
 
         poll1.is_featured = True
         poll1.save()
 
         response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.context['latest_poll'], poll1)
+        self.assertEqual(response.context['latest_poll'], poll1)
 
-        self.assertEquals(len(response.context['categories']), 2)
+        self.assertEqual(len(response.context['categories']), 2)
         self.assertTrue(self.education_nigeria not in response.context['categories'])
         self.assertTrue(self.health_uganda in response.context['categories'])
         self.assertTrue(education_uganda in response.context['categories'])
-        self.assertEquals(response.context['categories'][0], education_uganda)
-        self.assertEquals(response.context['categories'][1], self.health_uganda)
+        self.assertEqual(response.context['categories'][0], education_uganda)
+        self.assertEqual(response.context['categories'][1], self.health_uganda)
 
-        self.assertEquals(len(response.context['polls']), 3)
+        self.assertEqual(len(response.context['polls']), 3)
         self.assertTrue(poll4 not in response.context['polls'])
         self.assertTrue(poll1 in response.context['polls'])
         self.assertTrue(poll2 in response.context['polls'])
         self.assertTrue(poll3 in response.context['polls'])
-        self.assertEquals(response.context['polls'][0], poll3)
-        self.assertEquals(response.context['polls'][1], poll2)
-        self.assertEquals(response.context['polls'][2], poll1)
+        self.assertEqual(response.context['polls'][0], poll3)
+        self.assertEqual(response.context['polls'][1], poll2)
+        self.assertEqual(response.context['polls'][2], poll1)
 
         poll1.poll_date = poll3.poll_date + timedelta(days=1)
         poll1.save()
 
         response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.context['polls'][0], poll1)
-        self.assertEquals(response.context['polls'][1], poll3)
-        self.assertEquals(response.context['polls'][2], poll2)
+        self.assertEqual(response.context['polls'][0], poll1)
+        self.assertEqual(response.context['polls'][1], poll3)
+        self.assertEqual(response.context['polls'][2], poll2)
 
         poll1.poll_date = poll1.created_on
         poll1.save()
@@ -750,28 +750,28 @@ class PublicTest(UreportTest):
         poll3.save()
 
         response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.context['latest_poll'], poll1)
+        self.assertEqual(response.context['latest_poll'], poll1)
 
-        self.assertEquals(len(response.context['polls']), 2)
+        self.assertEqual(len(response.context['polls']), 2)
         self.assertTrue(poll4 not in response.context['polls'])
         self.assertTrue(poll1 in response.context['polls'])
         self.assertTrue(poll2 in response.context['polls'])
         self.assertTrue(poll3 not in response.context['polls'])
-        self.assertEquals(response.context['polls'][0], poll2)
-        self.assertEquals(response.context['polls'][1], poll1)
+        self.assertEqual(response.context['polls'][0], poll2)
+        self.assertEqual(response.context['polls'][1], poll1)
 
         education_uganda.is_active = False
         education_uganda.save()
 
         response = self.client.get(polls_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.context['latest_poll'], poll1)
+        self.assertEqual(response.context['latest_poll'], poll1)
 
-        self.assertEquals(len(response.context['polls']), 1)
+        self.assertEqual(len(response.context['polls']), 1)
         self.assertTrue(poll4 not in response.context['polls'])
         self.assertTrue(poll1 in response.context['polls'])
         self.assertTrue(poll2 not in response.context['polls'])
         self.assertTrue(poll3 not in response.context['polls'])
-        self.assertEquals(response.context['polls'][0], poll1)
+        self.assertEqual(response.context['polls'][0], poll1)
 
         poll1.has_synced = False
         poll1.save()
@@ -789,35 +789,35 @@ class PublicTest(UreportTest):
         nigeria_poll_read_url = reverse('public.poll_read', args=[poll2.pk])
 
         response = self.client.get(uganda_poll_read_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
         poll1.has_synced = True
         poll1.save()
 
         response = self.client.get(uganda_poll_read_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.context['object'], poll1)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['object'], poll1)
 
         response = self.client.get(nigeria_poll_read_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
         poll2.has_synced = True
         poll2.save()
 
         response = self.client.get(nigeria_poll_read_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
         poll1.is_active = False
         poll1.save()
 
         response = self.client.get(uganda_poll_read_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
         poll1.is_active = False
         poll1.save()
 
         response = self.client.get(uganda_poll_read_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
     def test_boundary_view(self):
         country_boundary_url = reverse('public.boundaries')
@@ -846,7 +846,7 @@ class PublicTest(UreportTest):
                                               parent=self.country, geometry='{}')
 
         response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R987",
                                                                                                level=1,
@@ -874,7 +874,7 @@ class PublicTest(UreportTest):
         self.uganda.set_config("is_global", True)
 
         response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         output = dict(type="FeatureCollection", features=[dict(type='Feature', properties=dict(id="R12345",
                                                                                                level=0,
@@ -922,40 +922,40 @@ class PublicTest(UreportTest):
                                       modified_by=self.admin)
 
         response = self.client.get(stories_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.context['org'], self.nigeria)
-        self.assertEquals(len(response.context['categories']), 1)
-        self.assertEquals(response.context['categories'][0], self.education_nigeria)
-        self.assertEquals(len(response.context['other_stories']), 1)
-        self.assertEquals(response.context['other_stories'][0], story4)
+        self.assertEqual(response.context['org'], self.nigeria)
+        self.assertEqual(len(response.context['categories']), 1)
+        self.assertEqual(response.context['categories'][0], self.education_nigeria)
+        self.assertEqual(len(response.context['other_stories']), 1)
+        self.assertEqual(response.context['other_stories'][0], story4)
         self.assertFalse(response.context['featured'])
 
         response = self.client.get(stories_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.context['org'], self.uganda)
-        self.assertEquals(len(response.context['categories']), 2)
-        self.assertEquals(response.context['categories'][0], education_uganda)
-        self.assertEquals(response.context['categories'][1], self.health_uganda)
+        self.assertEqual(response.context['org'], self.uganda)
+        self.assertEqual(len(response.context['categories']), 2)
+        self.assertEqual(response.context['categories'][0], education_uganda)
+        self.assertEqual(response.context['categories'][1], self.health_uganda)
 
-        self.assertEquals(len(response.context['other_stories']), 2)
-        self.assertEquals(response.context['other_stories'][0], story3)
-        self.assertEquals(response.context['other_stories'][1], story2)
-        self.assertEquals(len(response.context['featured']), 1)
-        self.assertEquals(response.context['featured'][0], story1)
+        self.assertEqual(len(response.context['other_stories']), 2)
+        self.assertEqual(response.context['other_stories'][0], story3)
+        self.assertEqual(response.context['other_stories'][1], story2)
+        self.assertEqual(len(response.context['featured']), 1)
+        self.assertEqual(response.context['featured'][0], story1)
 
         story2.is_active = False
         story2.save()
 
         response = self.client.get(stories_url, SERVER_NAME='uganda.ureport.io')
 
-        self.assertEquals(len(response.context['other_stories']), 1)
-        self.assertEquals(response.context['other_stories'][0], story3)
+        self.assertEqual(len(response.context['other_stories']), 1)
+        self.assertEqual(response.context['other_stories'][0], story3)
 
         story2.is_active = True
         story2.save()
         education_uganda.is_active = False
         education_uganda.save()
 
-        self.assertEquals(len(response.context['other_stories']), 1)
-        self.assertEquals(response.context['other_stories'][0], story3)
+        self.assertEqual(len(response.context['other_stories']), 1)
+        self.assertEqual(response.context['other_stories'][0], story3)
 
     def test_story_read(self):
 
@@ -1004,26 +1004,26 @@ class PublicTest(UreportTest):
         nigeria_story_read_url = reverse('public.story_read', args=[story4.pk])
 
         response = self.client.get(nigeria_story_read_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.context['org'], self.uganda)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['org'], self.uganda)
 
-        self.assertEquals(response.context['object'], story1)
-        self.assertEquals(len(response.context['categories']), 2)
-        self.assertEquals(response.context['categories'][0], education_uganda)
-        self.assertEquals(response.context['categories'][1], self.health_uganda)
+        self.assertEqual(response.context['object'], story1)
+        self.assertEqual(len(response.context['categories']), 2)
+        self.assertEqual(response.context['categories'][0], education_uganda)
+        self.assertEqual(response.context['categories'][1], self.health_uganda)
 
-        self.assertEquals(len(response.context['other_stories']), 1)
-        self.assertEquals(response.context['other_stories'][0], story2)
+        self.assertEqual(len(response.context['other_stories']), 1)
+        self.assertEqual(response.context['other_stories'][0], story2)
 
-        self.assertEquals(len(response.context['related_polls']), 1)
-        self.assertEquals(response.context['related_polls'][0], poll1)
+        self.assertEqual(len(response.context['related_polls']), 1)
+        self.assertEqual(response.context['related_polls'][0], poll1)
         self.assertFalse(poll3 in response.context['related_polls'])
 
-        self.assertEquals(len(response.context['related_stories']), 1)
-        self.assertEquals(response.context['related_stories'][0], story3)
+        self.assertEqual(len(response.context['related_stories']), 1)
+        self.assertEqual(response.context['related_stories'][0], story3)
 
         self.assertFalse(response.context['story_featured_images'])
 
@@ -1032,25 +1032,25 @@ class PublicTest(UreportTest):
 
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
 
-        self.assertEquals(len(response.context['story_featured_images']), 1)
-        self.assertEquals(response.context['story_featured_images'][0], story_image1)
+        self.assertEqual(len(response.context['story_featured_images']), 1)
+        self.assertEqual(response.context['story_featured_images'][0], story_image1)
 
         story_image2 = StoryImage.objects.create(story=story1, image='stories/someimage.jpg', name='image 2',
                                                  created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
 
-        self.assertEquals(len(response.context['story_featured_images']), 2)
-        self.assertEquals(response.context['story_featured_images'][0], story_image2)
-        self.assertEquals(response.context['story_featured_images'][1], story_image1)
+        self.assertEqual(len(response.context['story_featured_images']), 2)
+        self.assertEqual(response.context['story_featured_images'][0], story_image2)
+        self.assertEqual(response.context['story_featured_images'][1], story_image1)
 
         story_image2.is_active = False
         story_image2.save()
 
         response = self.client.get(uganda_story_read_url, SERVER_NAME='uganda.ureport.io')
 
-        self.assertEquals(len(response.context['story_featured_images']), 1)
-        self.assertEquals(response.context['story_featured_images'][0], story_image1)
+        self.assertEqual(len(response.context['story_featured_images']), 1)
+        self.assertEqual(response.context['story_featured_images'][0], story_image1)
 
         story_image1.image = ''
         story_image1.save()
@@ -1091,16 +1091,16 @@ class PublicTest(UreportTest):
                                               label='All')]
 
             response = self.client.get(nigeria_results_url, SERVER_NAME='uganda.ureport.io')
-            self.assertEquals(response.status_code, 404)
+            self.assertEqual(response.status_code, 404)
 
             response = self.client.get(uganda_results_url, SERVER_NAME='uganda.ureport.io')
-            self.assertEquals(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
             mock_results.assert_called_with(segment=None)
 
             response = self.client.get(
                 uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
                 SERVER_NAME='uganda.ureport.io')
-            self.assertEquals(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
             mock_results.assert_called_with(segment=dict(location='State'))
 
             self.uganda.set_config("is_global", True)
@@ -1112,7 +1112,7 @@ class PublicTest(UreportTest):
         reporters_results = reverse('public.contact_field_results')
 
         response = self.client.get(reporters_results, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self.assertContains(response, "[]")
 
@@ -1125,7 +1125,7 @@ class PublicTest(UreportTest):
                 reporters_results + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))),
                 SERVER_NAME='uganda.ureport.io')
 
-            self.assertEquals(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
             self.assertContains(response, json.dumps("LOCATIONS_STATS"))
             mock_ureporters_locations_stats.assert_called_with(dict(location='State'))
 
@@ -1141,14 +1141,14 @@ class PublicTest(UreportTest):
                                                     modified_by=self.admin)
 
         response = self.client.get(news_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
-        self.assertEquals(json.loads(response.content), dict(next=False, news=[self.uganda_news1.as_brick_json()]))
+        self.assertEqual(json.loads(response.content), dict(next=False, news=[self.uganda_news1.as_brick_json()]))
 
         response = self.client.get(news_url + "?page=1", SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
-        self.assertEquals(json.loads(response.content), dict(next=False, news=[self.uganda_news1.as_brick_json()]))
+        self.assertEqual(json.loads(response.content), dict(next=False, news=[self.uganda_news1.as_brick_json()]))
 
         self.uganda_news2 = NewsItem.objects.create(title='uganda news 2',
                                                     description='uganda description 2',
@@ -1183,23 +1183,23 @@ class PublicTest(UreportTest):
                                                     modified_by=self.admin)
 
         response = self.client.get(news_url + "?page=1", SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
-        self.assertEquals(json.loads(response.content), dict(next=True, news=[self.uganda_news5.as_brick_json(),
-                                                                              self.uganda_news4.as_brick_json(),
-                                                                              self.uganda_news3.as_brick_json(),
-                                                                              ]))
+        self.assertEqual(json.loads(response.content), dict(next=True, news=[self.uganda_news5.as_brick_json(),
+                                                                             self.uganda_news4.as_brick_json(),
+                                                                             self.uganda_news3.as_brick_json(),
+                                                                             ]))
 
         response = self.client.get(news_url + "?page=2", SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
-        self.assertEquals(json.loads(response.content), dict(next=False, news=[self.uganda_news2.as_brick_json(),
-                                                                               self.uganda_news1.as_brick_json()]))
+        self.assertEqual(json.loads(response.content), dict(next=False, news=[self.uganda_news2.as_brick_json(),
+                                                                              self.uganda_news1.as_brick_json()]))
 
         response = self.client.get(news_url + "?page=3", SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
-        self.assertEquals(json.loads(response.content), dict(next=False, news=[]))
+        self.assertEqual(json.loads(response.content), dict(next=False, news=[]))
 
 
 class JobsTest(UreportJobsTest):
@@ -1216,41 +1216,41 @@ class JobsTest(UreportJobsTest):
         jobs_url = reverse('public.jobs')
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['job_sources'])
-        self.assertEquals(2, len(response.context['job_sources']))
-        self.assertEquals(set(response.context['job_sources']), set([fb_source_nigeria, tw_source_nigeria]))
+        self.assertEqual(2, len(response.context['job_sources']))
+        self.assertEqual(set(response.context['job_sources']), set([fb_source_nigeria, tw_source_nigeria]))
 
         response = self.client.get(jobs_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['job_sources'])
-        self.assertEquals(2, len(response.context['job_sources']))
-        self.assertEquals(set(response.context['job_sources']), set([fb_source_uganda, tw_source_uganda]))
+        self.assertEqual(2, len(response.context['job_sources']))
+        self.assertEqual(set(response.context['job_sources']), set([fb_source_uganda, tw_source_uganda]))
 
         fb_source_nigeria.is_featured = True
         fb_source_nigeria.save()
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['job_sources'])
-        self.assertEquals(2, len(response.context['job_sources']))
-        self.assertEquals(fb_source_nigeria, response.context['job_sources'][0])
-        self.assertEquals(tw_source_nigeria, response.context['job_sources'][1])
+        self.assertEqual(2, len(response.context['job_sources']))
+        self.assertEqual(fb_source_nigeria, response.context['job_sources'][0])
+        self.assertEqual(tw_source_nigeria, response.context['job_sources'][1])
 
         fb_source_nigeria.is_active = False
         fb_source_nigeria.save()
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['job_sources'])
-        self.assertEquals(1, len(response.context['job_sources']))
+        self.assertEqual(1, len(response.context['job_sources']))
         self.assertTrue(tw_source_nigeria in response.context['job_sources'])
 
         tw_source_nigeria.is_active = False
         tw_source_nigeria.save()
 
         response = self.client.get(jobs_url, SERVER_NAME='nigeria.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertFalse(response.context['job_sources'])
 
 
@@ -1263,112 +1263,112 @@ class CountriesTest(UreportTest):
         countries_url = reverse('public.countries')
 
         response = self.client.post(countries_url, dict())
-        self.assertEquals(response.status_code, 405)
+        self.assertEqual(response.status_code, 405)
 
         response = self.client.post(countries_url, dict())
-        self.assertEquals(response.status_code, 405)
+        self.assertEqual(response.status_code, 405)
 
         response = self.client.get(countries_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('text' in response_json)
-        self.assertEquals(response_json['exists'], "invalid")
-        self.assertEquals(response_json['text'], "")
+        self.assertEqual(response_json['exists'], "invalid")
+        self.assertEqual(response_json['text'], "")
         self.assertFalse('country_code' in response_json)
 
         response = self.client.get(countries_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
-        self.assertEquals(response_json['exists'], "invalid")
-        self.assertEquals(response_json['text'], "")
+        self.assertEqual(response_json['exists'], "invalid")
+        self.assertEqual(response_json['text'], "")
         self.assertFalse('country_code' in response_json)
 
         response = self.client.get(countries_url + '?text=OK')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
-        self.assertEquals(response_json['exists'], "invalid")
-        self.assertEquals(response_json['text'], "OK")
+        self.assertEqual(response_json['exists'], "invalid")
+        self.assertEqual(response_json['text'], "OK")
         self.assertFalse('country_code' in response_json)
 
         response = self.client.get(countries_url + '?text=OK', SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
-        self.assertEquals(response_json['exists'], "invalid")
-        self.assertEquals(response_json['text'], "OK")
+        self.assertEqual(response_json['exists'], "invalid")
+        self.assertEqual(response_json['text'], "OK")
         self.assertFalse('country_code' in response_json)
 
         response = self.client.get(countries_url + '?text=RW')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "RW")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "RW")
 
         response = self.client.get(countries_url + '?text=RW', SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "RW")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "RW")
 
         response = self.client.get(countries_url + '?text=USA')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "US")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "US")
 
         response = self.client.get(countries_url + '?text=rw')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "RW")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "RW")
 
         response = self.client.get(countries_url + '?text=usa')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "US")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "US")
 
         CountryAlias.objects.create(name='Etats unies', country='US', created_by=self.admin,
                                     modified_by=self.admin)
 
         response = self.client.get(countries_url + '?text=Etats+Unies')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "US")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "US")
 
         # country text has quotes
         response = self.client.get(countries_url + '?text="Etats+Unies"')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "US")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "US")
 
         # country text has quotes an spaces
         response = self.client.get(countries_url + '?text="    Etats+Unies  "')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "US")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "US")
 
         # unicode aliases
         CountryAlias.objects.create(name=u"এ্যান্ডোরা",
@@ -1378,21 +1378,21 @@ class CountriesTest(UreportTest):
 
         response = self.client.get(countries_url + '?text=%s' % urlquote(u'এ্যান্ডোরা'))
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "AD")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "AD")
 
         response = self.client.get(countries_url + '?text="   %s   "' % urlquote(u"এ্যান্ডোরা"))
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "AD")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "AD")
 
         # unicode aliases
         CountryAlias.objects.create(name="Madžarska",
@@ -1402,18 +1402,18 @@ class CountriesTest(UreportTest):
 
         response = self.client.get(countries_url + '?text=%s' % urlquote("Madžarska"))
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "MD")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "MD")
 
         response = self.client.get(countries_url + '?text="   %s   "' % urlquote("Madžarska"))
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response_json = json.loads(response.content)
         self.assertTrue('exists' in response_json)
         self.assertTrue('country_code' in response_json)
-        self.assertEquals(response_json['exists'], "valid")
-        self.assertEquals(response_json['country_code'], "MD")
+        self.assertEqual(response_json['exists'], "valid")
+        self.assertEqual(response_json['country_code'], "MD")

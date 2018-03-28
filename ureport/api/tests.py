@@ -67,7 +67,7 @@ class UreportAPITests(APITestCase):
 
         org.administrators.add(user)
 
-        self.assertEquals(Org.objects.filter(domain=subdomain).count(), 1)
+        self.assertEqual(Org.objects.filter(domain=subdomain).count(), 1)
         return Org.objects.get(domain=subdomain)
 
     def create_poll(self, title, is_featured=False):
@@ -172,13 +172,13 @@ class UreportAPITests(APITestCase):
                                                  domain=org.domain,
                                                  timezone=six.text_type(org.timezone)))
 
-        self.assertEquals(gender_stats, dict(female_count=0, female_percentage="---",
-                                             male_count=0, male_percentage="---"))
+        self.assertEqual(gender_stats, dict(female_count=0, female_percentage="---",
+                                            male_count=0, male_percentage="---"))
 
         self.assertEqual(age_stats, [dict(name='0-14', y=0), dict(name='15-19', y=0), dict(name='20-24', y=0),
                                      dict(name='25-30', y=0), dict(name='31-34', y=0), dict(name='35+', y=0)])
-        self.assertEquals(reporters_count, 0)
-        self.assertEquals(occupation_stats, [])
+        self.assertEqual(reporters_count, 0)
+        self.assertEqual(occupation_stats, [])
 
         ReportersCounter.objects.create(org=org, type='gender:f', count=2)
         ReportersCounter.objects.create(org=org, type='gender:m', count=2)
