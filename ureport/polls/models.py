@@ -153,9 +153,7 @@ class Poll(SmartModel):
     @classmethod
     def pull_results(cls, poll_id):
         poll = Poll.objects.get(pk=poll_id)
-        backend = poll.org.get_backend()
-
-        backend = poll.org.get_backend(backend=poll.backend)
+        backend = poll.org.get_backend(backend_slug=poll.backend)
 
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
@@ -987,9 +985,7 @@ class PollResponseCategory(models.Model):
 class PollResult(models.Model):
 
     org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
-
-    backend = models.CharField(max_length=16, default='rapidpro')
-
+    
     flow = models.CharField(max_length=36)
 
     ruleset = models.CharField(max_length=36)

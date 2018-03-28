@@ -1,3 +1,31 @@
+v1.0.388
+----------
+ * Do not add backend field on poll results
+
+v1.0.387
+----------
+* Fix import
+ * Better log
+ * Update pull results default value in batches
+
+v1.0.386
+----------
+ * Add default value and constraints migrations
+ * Faster migrations
+
+v1.0.385
+----------
+ * Add backend field
+ * Update dash to 1.3.1
+ * Fix test
+ * Contacts pull should loop on all configured backends
+
+v1.0.383
+----------
+ * Add argentina flag to settings
+ * Fix tests
+ * Fix PEP8 errors
+
 v1.0.382
 ----------
  * Update sorl-thumbnail to mute unecessary logs 

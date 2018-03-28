@@ -169,10 +169,11 @@ class ContactsTasksTest(UreportTest):
         pull_contacts(self.nigeria.pk)
 
         task_state = TaskState.objects.get(org=self.nigeria, task_key='contact-pull')
-        self.assertEqual(task_state.get_last_results(), {
-            'fields': {'created': 1, 'updated': 2, 'deleted': 3},
-            'boundaries': {'created': 5, 'updated': 6, 'deleted': 7},
-            'contacts': {'created': 9, 'updated': 10, 'deleted': 11}
-        })
+        self.assertEqual(task_state.get_last_results(),
+                         {'rapidpro': {
+                             'fields': {'created': 1, 'updated': 2, 'deleted': 3},
+                             'boundaries': {'created': 5, 'updated': 6, 'deleted': 7},
+                             'contacts': {'created': 9, 'updated': 10, 'deleted': 11}
+                        }})
 
         mock_squash_counts.assert_called_once_with()

@@ -1399,6 +1399,7 @@ class PollTest(UreportTest):
         poll = Poll.objects.get(pk=poll.pk)
         self.assertTrue(poll.has_synced)
 
+        self.assertEqual(mock_get_backend.call_args[1], {'backend_slug': 'rapidpro'})
         mock_pull_results.assert_called_once()
 
 
