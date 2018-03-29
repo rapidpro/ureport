@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
-
 # import our default settings
-from settings_common import *
+from ureport.settings_common import *
 import os
 
 DEBUG = False
@@ -19,7 +17,7 @@ SESSION_COOKIE_SECURE = False
 
 # these guys will get email from sentry
 ADMINS = (
-   ('Nyaruka Ops', 'ops@nyaruka.com'),
+    ('Nyaruka Ops', 'ops@nyaruka.com'),
 )
 
 # set the mail settings, we send through gmail
@@ -46,17 +44,17 @@ COMPRESS_URL = '/sitestatic/'
 MEDIA_URL = 'http://dl-ureport.s3.amazonaws.com/'
 
 # we store files on S3 on prod boxes
-AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME='dl-ureport'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # these two settings will cause our aws files to never expire
 # see http://developer.yahoo.com/performance/rules.html#expires
 AWS_QUERYSTRING_AUTH = False
 AWS_HEADERS = {
-'Expires': 'Wed, 1 Jan 2020 20:00:00 GMT',
-'Cache-Control': 'max-age=86400',
+    'Expires': 'Wed, 1 Jan 2020 20:00:00 GMT',
+    'Cache-Control': 'max-age=86400',
 }
 
 # List of finder classes that know how to find static files in
@@ -77,10 +75,10 @@ DATABASES = {
         'USER': 'ureport',
         'PASSWORD': 'nyarukaglue',
         'HOST': 'localhost',
-        'PORT': '5432', 
+        'PORT': '5432',
         'CONN_MAX_AGE': 60,
         'OPTIONS': {
-        }  
+        }
     }
 }
 

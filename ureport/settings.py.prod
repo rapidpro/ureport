@@ -3,8 +3,10 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 
 # import our default settings
-from settings_common import *
+from ureport.settings_common import *
 import os
+import dj_database_url
+
 
 DEBUG = False
 THUMBNAIL_DEBUG = DEBUG
@@ -19,7 +21,7 @@ SESSION_COOKIE_SECURE = True
 
 # these guys will get email from sentry
 ADMINS = (
-   ('Nyaruka Ops', 'ops@nyaruka.com'),
+    ('Nyaruka Ops', 'ops@nyaruka.com'),
 )
 
 # set the mail settings, we send through gmail
@@ -40,9 +42,9 @@ RAVEN_CONFIG = {
 }
 
 # we store files on S3 on prod boxes
-AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME='dl-ureport'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
 AWS_S3_SECURE_URLS = True
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
@@ -50,8 +52,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 # see http://developer.yahoo.com/performance/rules.html#expires
 AWS_QUERYSTRING_AUTH = False
 AWS_HEADERS = {
-'Expires': 'Wed, 1 Jan 2020 20:00:00 GMT',
-'Cache-Control': 'max-age=86400',
+    'Expires': 'Wed, 1 Jan 2020 20:00:00 GMT',
+    'Cache-Control': 'max-age=86400',
 }
 
 # static dir is different for prod
@@ -72,7 +74,6 @@ STATICFILES_FINDERS = (
 SITE_API_HOST = 'https://api.rapidpro.io'
 
 
-import dj_database_url
 DATABASES['default'] = dj_database_url.config()
 
 # reuse our connections for up to 60 seconds
