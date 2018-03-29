@@ -319,7 +319,7 @@ class Poll(SmartModel):
         return main_poll
 
     @classmethod
-    def get_brick_polls(cls, org):
+    def get_brick_polls_ids(cls, org):
         cache_key = 'brick_polls:%d' % org.id
         brick_polls = cache.get(cache_key, None)
 
@@ -336,7 +336,7 @@ class Poll(SmartModel):
 
             for poll in polls:
                 if poll.get_first_question():
-                    brick_polls.append(poll)
+                    brick_polls.append(poll.pk)
             cache.set(cache_key, brick_polls, BRICK_POLLS_CACHE_TIME)
 
         return brick_polls
@@ -349,9 +349,9 @@ class Poll(SmartModel):
     @classmethod
     def get_other_polls(cls, org):
         main_poll = Poll.get_main_poll(org)
-        brick_polls = Poll.get_brick_polls(org)[:5]
+        brick_polls = Poll.get_brick_polls_ids(org)[:5]
 
-        exclude_polls = [poll.pk for poll in brick_polls]
+        exclude_polls = [poll_id for poll_id in brick_polls]
         if main_poll:
             exclude_polls.append(main_poll.pk)
 

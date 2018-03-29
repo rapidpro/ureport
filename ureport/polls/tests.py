@@ -377,89 +377,89 @@ class PollTest(UreportTest):
     @patch('django.core.cache.cache.get')
     def test_brick_polls(self, mock_cache_get):
         mock_cache_get.return_value = None
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True, has_synced=True)
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid='uuid-101',
                                     created_by=self.admin, modified_by=self.admin)
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         PollQuestion.objects.create(poll=poll2, title='question poll 2', ruleset_uuid='uuid-202',
                                     created_by=self.admin, modified_by=self.admin)
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll2.is_active = False
         poll2.save()
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll2.is_active = True
         poll2.save()
         self.health_uganda.is_active = False
         self.health_uganda.save()
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         self.health_uganda.is_active = True
         self.health_uganda.save()
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll3 not in Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll3.pk not in Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         PollQuestion.objects.create(poll=poll3, title='question poll 3', ruleset_uuid='uuid-303',
                                     created_by=self.admin, modified_by=self.admin)
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll3 in Poll.get_brick_polls(self.uganda))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll3.pk in Poll.get_brick_polls_ids(self.uganda))
 
         with patch('ureport.polls.models.Poll.get_first_question') as mock_first_question:
             mock_first_question.return_value = None
 
-            self.assertFalse(Poll.get_brick_polls(self.uganda))
+            self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
 
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll3.is_featured = True
         poll3.save()
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll1 in Poll.get_brick_polls(self.uganda))
-        self.assertEqual(Poll.get_brick_polls(self.uganda)[0], poll1)
-        self.assertEqual(Poll.get_brick_polls(self.uganda)[1], poll2)
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll1.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertEqual(Poll.get_brick_polls_ids(self.uganda)[0], poll1.pk)
+        self.assertEqual(Poll.get_brick_polls_ids(self.uganda)[1], poll2.pk)
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll1.is_featured = False
         poll1.save()
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll1 in Poll.get_brick_polls(self.uganda))
-        self.assertEqual(Poll.get_brick_polls(self.uganda)[0], poll2)
-        self.assertEqual(Poll.get_brick_polls(self.uganda)[1], poll1)
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll1.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertEqual(Poll.get_brick_polls_ids(self.uganda)[0], poll2.pk)
+        self.assertEqual(Poll.get_brick_polls_ids(self.uganda)[1], poll1.pk)
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
     @patch('django.core.cache.cache.get')
     def test_get_other_polls(self, mock_cache_get):
@@ -1936,10 +1936,10 @@ class PollsTasksTest(UreportTest):
 
     @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
-    @patch('ureport.polls.models.Poll.get_brick_polls')
-    def test_pull_results_brick_polls(self, mock_get_brick_polls, mock_pull_results, mock_get_backend):
+    @patch('ureport.polls.models.Poll.get_brick_polls_ids')
+    def test_pull_results_brick_polls(self, mock_get_brick_polls_ids, mock_pull_results, mock_get_backend):
         mock_get_backend.return_value = TestBackend()
-        mock_get_brick_polls.return_value = list(self.polls_query)
+        mock_get_brick_polls_ids.return_value = [poll.pk for poll in self.polls_query]
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         pull_results_brick_polls(self.nigeria.pk)
