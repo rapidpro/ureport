@@ -320,7 +320,7 @@ class Poll(SmartModel):
 
     @classmethod
     def get_brick_polls_ids(cls, org):
-        cache_key = 'brick_polls:%d' % org.id
+        cache_key = 'brick_polls_ids:%d' % org.id
         brick_polls = cache.get(cache_key, None)
 
         if brick_polls is None:
