@@ -29,7 +29,7 @@ enum34==1.1.6
 feedparser==5.2.1
 funcsigs==1.0.2
 future==0.16.0
-futures==3.2.0
+futures==3.2.0; python_version < "3.0"
 gitdb2==2.0.3
 GitPython==2.1.8
 gunicorn==19.7.1
