@@ -134,6 +134,8 @@ class ReportersCounter(models.Model):
                 if not last_squash:
                     last_squash = 0
 
+                last_squash = int(last_squash)
+
                 start = time.time()
                 squash_count = 0
 
