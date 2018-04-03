@@ -11,7 +11,7 @@ django-storages
 django-rest-swagger
 djangorestframework
 dj-database-url
-boto
+boto3
 Pillow
 celery-with-redis
 gunicorn
