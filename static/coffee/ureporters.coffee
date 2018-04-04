@@ -1,11 +1,9 @@
-initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel, reportersCount) ->
+initMap = (id, geojson, ajaxUrl, districtZoom, colorsList=[], wardZoom, reportersCount) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
 
   STATE_LEVEL = 1
   DISTRICT_LEVEL = 2
   WARD_LEVEL = 3
-  allowDistrictZoom = districtLabel.trim() != ''
-  allowWardZoom = wardLabel.trim() != ''
 
   boundaries = null
   boundaryResults = null
@@ -107,11 +105,11 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel, report
     info.update()
 
   clickFeature = (e) ->
-    if (allowDistrictZoom and e.target.feature.properties.level == STATE_LEVEL)
+    if (districtZoom and e.target.feature.properties.level == STATE_LEVEL)
       mainLabelName = e.target.feature.properties.name + " (" + window.string_State + ")"
       loadBoundary(e.target.feature.properties, e.target)
       scale.update(e.target.feature.properties.level)
-    else if (allowWardZoom and e.target.feature.properties.level == DISTRICT_LEVEL)
+    else if (wardZoom and e.target.feature.properties.level == DISTRICT_LEVEL)
       map.removeLayer(boundaries)
       mainLabelName = e.target.feature.properties.name + " (" + window.string_District + ")"
       loadBoundary(e.target.feature.properties, e.target)
@@ -134,7 +132,7 @@ initMap = (id, geojson, ajaxUrl, districtLabel, colorsList=[], wardLabel, report
     else
       segment = {location:"District", parent:boundaryId}
 
-    $.ajax({url: ajaxUrl + '&segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (data) ->
+    $.ajax({url: ajaxUrl + '?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (data) ->
       # calculate the most common category if we haven't already
       if not topBoundary
         boundaryCounts = {}

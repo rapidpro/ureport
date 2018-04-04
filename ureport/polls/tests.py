@@ -1219,7 +1219,7 @@ class PollTest(UreportTest):
 
             self.assertIsNone(config(None, 'field_name'))
             self.assertEquals(config(self.uganda, 'field_name'), 'Done')
-            mock.assert_called_with('field_name')
+            mock.assert_called_with('field_name', top_key="common")
 
         self.assertIsNone(org_color(None, 1))
         self.assertEquals(org_color(self.uganda, 0), '#FFD100')
@@ -1426,10 +1426,6 @@ class PollQuestionTest(UreportTest):
                                                      modified_by=self.admin)
 
         self.assertEquals(unicode(poll_question1), 'question 1')
-
-        self.uganda.set_config("state_label", "LGA")
-        self.uganda.set_config("district_label", "District")
-        self.uganda.set_config("ward_label", "Ward")
 
         # no response category are ignored
         PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-4', 'No Response')
@@ -1717,7 +1713,6 @@ class PollQuestionTest(UreportTest):
 class PollResultsTest(UreportTest):
     def setUp(self):
         super(PollResultsTest, self).setUp()
-        self.nigeria.set_config('reporter_group', "Ureporters")
 
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",

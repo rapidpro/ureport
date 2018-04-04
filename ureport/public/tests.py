@@ -559,6 +559,13 @@ class PublicTest(UreportTest):
         self.assertTrue('registration_stats' in response.context)
         self.assertTrue('occupation_stats' in response.context)
 
+        self.assertTrue('show_maps' in response.context)
+        self.assertTrue('district_zoom' in response.context)
+        self.assertTrue('ward_zoom' in response.context)
+        self.assertTrue('show_age_stats' in response.context)
+        self.assertTrue('show_gender_stats' in response.context)
+        self.assertTrue('show_occupation_stats' in response.context)
+
         response = self.client.get(ureporters_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/ureporters/')
         self.assertEquals(response.context['org'], self.uganda)
@@ -1081,8 +1088,6 @@ class PublicTest(UreportTest):
         uganda_results_url = reverse('public.pollquestion_results', args=[poll1_question.pk])
         nigeria_results_url = reverse('public.pollquestion_results', args=[poll2_question.pk])
 
-        self.uganda.set_config('state_label', "State")
-
         with mock.patch('ureport.polls.models.PollQuestion.get_results') as mock_results:
             mock_results.return_value = [dict(open_ended=False,
                                               set=3462,
@@ -1104,7 +1109,6 @@ class PublicTest(UreportTest):
             mock_results.assert_called_with(segment=dict(location='State'))
 
             self.uganda.set_config("is_global", True)
-            self.uganda.set_config("state_label", "Country Code")
             response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
             mock_results.assert_called_with(segment=dict(location='State'))
 
@@ -1115,8 +1119,6 @@ class PublicTest(UreportTest):
         self.assertEquals(response.status_code, 200)
 
         self.assertEquals(response.content, "[]")
-
-        self.uganda.set_config('state_label', 'State')
 
         with mock.patch('dash.orgs.models.Org.get_ureporters_locations_stats') as mock_ureporters_locations_stats:
             mock_ureporters_locations_stats.return_value = 'LOCATIONS_STATS'

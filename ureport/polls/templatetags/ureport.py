@@ -55,7 +55,7 @@ def config(org, name):
     if not org:
         return None
 
-    return org.get_config(name)
+    return org.get_config(name, top_key="common")
 
 
 @register.filter
@@ -74,13 +74,13 @@ def org_color(org, index):
     if not org:
         return None
 
-    org_colors = org.get_config('colors')
+    org_colors = org.get_config('colors', top_key="common")
 
     if org_colors:
         org_colors = org_colors.split(',')
     else:
-        if org.get_config('primary_color') and org.get_config('secondary_color'):
-            org_colors = [org.get_config('primary_color').strip(), org.get_config('secondary_color').strip()]
+        if org.get_config('primary_color', top_key="common") and org.get_config('secondary_color', top_key="common"):
+            org_colors = [org.get_config('primary_color', top_key="common").strip(), org.get_config('secondary_color', top_key="common").strip()]
         else:
             org_colors = [getattr(settings, 'UREPORT_DEFAULT_PRIMARY_COLOR'), getattr(settings, 'UREPORT_DEFAULT_SECONDARY_COLOR')]
 
