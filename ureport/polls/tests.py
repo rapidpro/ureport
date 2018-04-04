@@ -1219,7 +1219,7 @@ class PollTest(UreportTest):
 
             self.assertIsNone(config(None, 'field_name'))
             self.assertEquals(config(self.uganda, 'field_name'), 'Done')
-            mock.assert_called_with('field_name')
+            mock.assert_called_with('field_name', top_key="common")
 
         self.assertIsNone(org_color(None, 1))
         self.assertEquals(org_color(self.uganda, 0), '#FFD100')

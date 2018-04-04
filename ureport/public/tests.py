@@ -559,6 +559,13 @@ class PublicTest(UreportTest):
         self.assertTrue('registration_stats' in response.context)
         self.assertTrue('occupation_stats' in response.context)
 
+        self.assertTrue('show_maps' in response.context)
+        self.assertTrue('district_zoom' in response.context)
+        self.assertTrue('ward_zoom' in response.context)
+        self.assertTrue('show_age_stats' in response.context)
+        self.assertTrue('show_gender_stats' in response.context)
+        self.assertTrue('show_occupation_stats' in response.context)
+
         response = self.client.get(ureporters_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.request['PATH_INFO'], '/ureporters/')
         self.assertEquals(response.context['org'], self.uganda)

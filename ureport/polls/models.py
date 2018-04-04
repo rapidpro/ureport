@@ -734,8 +734,7 @@ class PollQuestion(SmartModel):
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
-            substituted_segment = self.poll.org.substitute_segment(segment)
-            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+            key += ":" + slugify(unicode(json.dumps(segment)))
 
         cached_value = cache.get(key, None)
         if cached_value:
@@ -909,8 +908,7 @@ class PollQuestion(SmartModel):
 
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
-            substituted_segment = self.poll.org.substitute_segment(segment)
-            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+            key += ":" + slugify(unicode(json.dumps(segment)))
 
         cache.set(key, {"results": results}, cache_time)
 
@@ -982,7 +980,7 @@ class PollResponseCategory(models.Model):
 class PollResult(models.Model):
 
     org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
-    
+
     flow = models.CharField(max_length=36)
 
     ruleset = models.CharField(max_length=36)
