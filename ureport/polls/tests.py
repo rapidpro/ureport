@@ -1931,7 +1931,7 @@ class PollsTasksTest(UreportTest):
     @patch('ureport.polls.models.Poll.get_brick_polls_ids')
     def test_pull_results_brick_polls(self, mock_get_brick_polls_ids, mock_pull_results, mock_get_backend):
         mock_get_backend.return_value = TestBackend()
-        mock_get_brick_polls_ids.return_value = list(self.polls_query)
+        mock_get_brick_polls_ids.return_value = [poll.pk for poll in self.polls_query]
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         pull_results_brick_polls(self.nigeria.pk)
