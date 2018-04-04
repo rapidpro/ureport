@@ -16,6 +16,9 @@ config = dict(
     sqldump=False,
     celery=True,
     processes=('celery', 'sync'),
+    error_file='config/error.html',
+    error_logo='config/logo.png',
+
 
     compress=True,
     region='eu-west-1',
