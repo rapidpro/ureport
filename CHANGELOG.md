@@ -1,3 +1,7 @@
+v1.0.393
+----------
+ * Update test
+
 v1.0.392
 ----------
  * Fix poll brick ids
