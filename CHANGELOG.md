@@ -1,3 +1,10 @@
+v1.0.389
+----------
+ * Remove unused function
+ * Remove unecessary configs
+ * Switch to use rapidpro config
+ * Update to use latest pillow and boto3
+
 v1.0.388
 ----------
  * Do not add backend field on poll results
