@@ -15,7 +15,7 @@ from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, CACHE_ORG_FLOWS_KEY
 from ureport.tests import UreportTest
-from ureport.utils import get_linked_orgs, clean_global_results_data, fetch_old_sites_count, \
+from ureport.utils import get_linked_orgs, fetch_old_sites_count, \
     get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
     get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
     fetch_flows, update_poll_flow_data
@@ -106,60 +106,6 @@ class UtilsTest(UreportTest):
             with self.settings(SESSION_COOKIE_SECURE=True):
                 self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://ureport.bi')
                 self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'https://aaaburundi.localhost:8000')
-
-    def test_clean_global_results_data(self):
-        results = [{"open_ended": False,
-                    "set": 0,
-                    "unset": 0,
-                    "categories": [{"count": 0, "label": "Yes"},
-                                   {"count": 0, "label": "No"}],
-                    "label": "UG"},
-                   {"open_ended": False,
-                    "set": 0,
-                    "unset": 0,
-                    "categories": [{"count": 0, "label": "Yes"},
-                                   {"count": 0, "label": "No"}],
-                    "label": "RW"},
-                   {"open_ended": False,
-                    "set": 0,
-                    "unset": 0,
-                    "categories": [{"count": 0, "label": "Yes"},
-                                   {"count": 0, "label": "No"}],
-                    "label": "MX"}]
-
-        # no segment
-        self.assertEqual(clean_global_results_data(self.org, results, None), results)
-
-        # no location in segment
-        self.assertEqual(clean_global_results_data(self.org, results, dict(allo='State')), results)
-
-        # org not global
-        self.assertEqual(clean_global_results_data(self.org, results, dict(location='State')), results)
-
-        self.org.set_config('is_global', True)
-        cleaned_results = [{"open_ended": False,
-                            "set": 0,
-                            "unset": 0,
-                            "categories": [{"count": 0, "label": "Yes"},
-                                           {"count": 0, "label": "No"}],
-                            "boundary": "UG",
-                            "label": "Uganda"},
-                           {"open_ended": False,
-                            "set": 0,
-                            "unset": 0,
-                            "categories": [{"count": 0, "label": "Yes"},
-                                           {"count": 0, "label": "No"}],
-                            "boundary": "RW",
-                            "label": "Rwanda"},
-                           {"open_ended": False,
-                            "set": 0,
-                            "unset": 0,
-                            "categories": [{"count": 0, "label": "Yes"},
-                                           {"count": 0, "label": "No"}],
-                            "boundary": "MX",
-                            "label": "Mexico"}]
-
-        self.assertEqual(clean_global_results_data(self.org, results, dict(location='State')), cleaned_results)
 
     @patch('dash.orgs.models.TembaClient.get_flows')
     def test_fetch_flows(self, mock_get_flows):

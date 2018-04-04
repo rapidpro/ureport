@@ -11,7 +11,6 @@ from dash.utils import datetime_to_ms
 from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
-import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
@@ -80,25 +79,6 @@ def get_linked_orgs(authenticated=False):
     linked_sites_sorted = sorted(linked_sites, key=lambda k: k['name'].lower())
 
     return linked_sites_sorted
-
-
-def clean_global_results_data(org, results, segment):
-
-    # for the global page clean the data translating country code to country name
-    if org.get_config('is_global', top_key="common") and results and segment and 'location' in segment:
-        for elt in results:
-            country_code = elt['label']
-            elt['boundary'] = country_code
-            country_name = ""
-            try:
-                country = pycountry.countries.get(alpha_2=country_code)
-                if country:
-                    country_name = country.name
-            except KeyError:
-                country_name = country_code
-            elt['label'] = country_name
-
-    return results
 
 
 def fetch_flows(org, backend_slug=None):
