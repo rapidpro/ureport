@@ -165,6 +165,9 @@ class ContactsTasksTest(UreportTest):
         mock_pull_contacts.return_value = (9, 10, 11, 12)
         mock_squash_counts.return_value = "Called"
 
+        # keep only on backend config
+        self.nigeria.backends.exclude(slug='rapidpro').delete()
+
         pull_contacts(self.nigeria.pk)
 
         task_state = TaskState.objects.get(org=self.nigeria, task_key='contact-pull')
