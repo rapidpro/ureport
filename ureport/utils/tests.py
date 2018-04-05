@@ -68,7 +68,7 @@ class UtilsTest(UreportTest):
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
-        self.org.set_config('is_on_landing_page', True)
+        self.org.set_config('common.is_on_landing_page', True)
 
         # missing flag
         self.assertEqual(len(get_linked_orgs()), settings_sites_count)
@@ -387,7 +387,7 @@ class UtilsTest(UreportTest):
 
         self.assertEqual(get_regions_stats(self.org), [dict(name='OYO', count=15), dict(name='Lagos', count=5)])
 
-        self.org.set_config('is_global', True)
+        self.org.set_config('common.is_global', True)
 
         self.assertEqual(get_regions_stats(self.org), [])
 
@@ -451,7 +451,7 @@ class UtilsTest(UreportTest):
                 self.assertEqual(get_global_count(), 0)
 
                 # add the org to the homepage
-                self.org.set_config('is_on_landing_page', True)
+                self.org.set_config('common.is_on_landing_page', True)
                 self.assertEqual(get_global_count(), 5)
 
                 mock_old_sites_count.return_value = [{'time': 500, 'results': dict(size=300)},
@@ -461,7 +461,7 @@ class UtilsTest(UreportTest):
                 self.assertEqual(get_global_count(), 355)
 
                 cache.delete(GLOBAL_COUNT_CACHE_KEY)
-                self.org.set_config('is_on_landing_page', False)
+                self.org.set_config('common.is_on_landing_page', False)
                 self.assertEqual(get_global_count(), 350)
 
             with patch('django.core.cache.cache.get') as cache_get_mock:
