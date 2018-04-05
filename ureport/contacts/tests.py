@@ -15,16 +15,16 @@ from ureport.utils import json_date_to_datetime
 class ContactTest(UreportTest):
     def setUp(self):
         super(ContactTest, self).setUp()
-        self.nigeria.set_config('reporter_group', "Ureporters")
-        self.nigeria.set_config('registration_label', "Registration Date")
-        self.nigeria.set_config('state_label', "State")
-        self.nigeria.set_config('district_label', "LGA")
-        self.nigeria.set_config('ward_label', "Ward")
-        self.nigeria.set_config('occupation_label', "Activité")
-        self.nigeria.set_config('born_label', "Born")
-        self.nigeria.set_config('gender_label', 'Gender')
-        self.nigeria.set_config('female_label', "Female")
-        self.nigeria.set_config('male_label', 'Male')
+        self.nigeria.set_config('reporter_group', "Ureporters", top_key="rapidpro")
+        self.nigeria.set_config('registration_label', "Registration Date", top_key="rapidpro")
+        self.nigeria.set_config('state_label', "State", top_key="rapidpro")
+        self.nigeria.set_config('district_label', "LGA", top_key="rapidpro")
+        self.nigeria.set_config('ward_label', "Ward", top_key="rapidpro")
+        self.nigeria.set_config('occupation_label', "Activité", top_key="rapidpro")
+        self.nigeria.set_config('born_label', "Born", top_key="rapidpro")
+        self.nigeria.set_config('gender_label', 'Gender', top_key="rapidpro")
+        self.nigeria.set_config('female_label', "Female", top_key="rapidpro")
+        self.nigeria.set_config('male_label', 'Male', top_key="rapidpro")
 
         # boundaries fetched
         self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria",

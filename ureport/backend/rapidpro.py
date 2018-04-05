@@ -145,7 +145,7 @@ class ContactSyncer(BaseSyncer):
     def local_kwargs(self, org, remote):
         from ureport.utils import json_date_to_datetime
 
-        reporter_group = org.get_config('reporter_group')
+        reporter_group = org.get_config('reporter_group', default='', top_key="rapidpro")
         contact_groups_names = [group.name.lower() for group in remote.groups]
 
         if not reporter_group.lower() in contact_groups_names:
@@ -158,10 +158,10 @@ class ContactSyncer(BaseSyncer):
         district = ''
         ward = ''
 
-        state_field = org.get_config('state_label')
+        state_field = org.get_config('state_label', default='', top_key="rapidpro")
         if state_field:
             state_field = state_field.lower()
-            if org.get_config('is_global'):
+            if org.get_config('is_global', top_key="common"):
                 state_name = remote.fields.get(contact_fields.get(state_field), None)
                 if state_name:
                     state = state_name
@@ -173,7 +173,7 @@ class ContactSyncer(BaseSyncer):
                     state_name = state_name.lower()
                     state = org_state_boundaries_data.get(state_name, '')
 
-                district_field = org.get_config('district_label')
+                district_field = org.get_config('district_label', default='', top_key="rapidpro")
                 if district_field:
                     district_field = district_field.lower()
                     district_path = remote.fields.get(contact_fields.get(district_field), None)
@@ -182,7 +182,7 @@ class ContactSyncer(BaseSyncer):
                         district_name = district_name.lower()
                         district = org_district_boundaries_data.get(state, dict()).get(district_name, '')
 
-                ward_field = org.get_config('ward_label')
+                ward_field = org.get_config('ward_label', default='', top_key="rapidpro")
                 if ward_field:
                     ward_field = ward_field.lower()
                     ward_path = remote.fields.get(contact_fields.get(ward_field), None)
@@ -192,7 +192,7 @@ class ContactSyncer(BaseSyncer):
                         ward = org_ward_boundaries_data.get(district, dict()).get(ward_name, '')
 
         registered_on = None
-        registration_field = org.get_config('registration_label')
+        registration_field = org.get_config('registration_label', default='', top_key="rapidpro")
         if registration_field:
             registration_field = registration_field.lower()
             registered_on = remote.fields.get(contact_fields.get(registration_field), None)
@@ -200,7 +200,7 @@ class ContactSyncer(BaseSyncer):
                 registered_on = json_date_to_datetime(registered_on)
 
         occupation = ''
-        occupation_field = org.get_config('occupation_label')
+        occupation_field = org.get_config('occupation_label', default='', top_key="rapidpro")
         if occupation_field:
             occupation_field = occupation_field.lower()
             occupation = remote.fields.get(contact_fields.get(occupation_field), '')
@@ -208,7 +208,7 @@ class ContactSyncer(BaseSyncer):
                 occupation = ''
 
         born = 0
-        born_field = org.get_config('born_label')
+        born_field = org.get_config('born_label', default='', top_key="rapidpro")
         if born_field:
             born_field = born_field.lower()
             try:
@@ -224,9 +224,9 @@ class ContactSyncer(BaseSyncer):
                 pass
 
         gender = ''
-        gender_field = org.get_config('gender_label')
-        female_label = org.get_config('female_label')
-        male_label = org.get_config('male_label')
+        gender_field = org.get_config('gender_label', default='', top_key="rapidpro")
+        female_label = org.get_config('female_label', default='', top_key="rapidpro")
+        male_label = org.get_config('male_label', default='', top_key="rapidpro")
 
         if gender_field:
             gender_field = gender_field.lower()
@@ -316,7 +316,7 @@ class RapidProBackend(BaseBackend):
 
     def pull_boundaries(self, org):
 
-        if org.get_config('is_global'):
+        if org.get_config('is_global', top_key="common"):
             incoming_objects = Boundary.build_global_boundaries()
         else:
             client = self._get_client(org, 2)

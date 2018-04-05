@@ -65,6 +65,7 @@ def pull_results_brick_polls(org, since, until):
     results_log = dict()
 
     brick_polls_ids_list = Poll.get_brick_polls_ids(org)
+    brick_polls_ids_list = [poll_id for poll_id in brick_polls_ids_list]
 
     brick_polls_ids = Poll.objects.filter(id__in=brick_polls_ids_list).order_by('flow_uuid').distinct('flow_uuid').values_list('id', flat=True)
 

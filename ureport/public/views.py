@@ -53,7 +53,7 @@ class IndexView(SmartTemplateView):
         context['most_active_regions'] = org.get_regions_stats()
 
         # global counter
-        if org.get_config('is_global'):
+        if org.get_config('is_global', top_key="common"):
             context['global_counter'] = get_global_count()
 
         context['gender_stats'] = org.get_gender_stats()
@@ -214,7 +214,7 @@ class BoundaryView(SmartTemplateView):
     def render_to_response(self, context, **kwargs):
         org = self.request.org
 
-        if org.get_config('is_global'):
+        if org.get_config('is_global', top_key="common"):
             location_boundaries = org.boundaries.filter(level=0)
         else:
             osm_id = self.kwargs.get('osm_id', None)

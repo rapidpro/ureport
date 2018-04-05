@@ -2,6 +2,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 
+import operator
 from django.conf import settings
 
 
@@ -47,6 +48,22 @@ def set_is_iorg(request):
         is_iorg = True
 
     return dict(is_iorg=is_iorg)
+
+
+def set_config_display_flags(request):
+    org = request.org
+    context = dict()
+    if org:
+        backend_options = org.backends.filter(is_active=True).values_list('slug', flat=True)
+
+        context['district_zoom'] = reduce(operator.or_, [bool(org.get_config('district_label', top_key=option)) for option in backend_options], False)
+        context['ward_zoom'] = reduce(operator.or_, [bool(org.get_config('ward_label', top_key=option)) for option in backend_options], False)
+        context['show_maps'] = reduce(operator.or_, [bool(org.get_config('state_label', top_key=option)) for option in backend_options], False)
+        context['show_age_stats'] = reduce(operator.or_, [bool(org.get_config('age_label', top_key=option)) for option in backend_options], False)
+        context['show_gender_stats'] = reduce(operator.or_, [bool(org.get_config('gender_label', top_key=option)) for option in backend_options], False)
+        context['show_occupation_stats'] = reduce(operator.or_, [bool(org.get_config('occupation_label', top_key=option)) for option in backend_options], False)
+
+    return context
 
 
 def set_org_lang_params(request):
