@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 
 import operator
+from functools import reduce
 from django.conf import settings
 
 
