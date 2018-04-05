@@ -596,7 +596,7 @@ class RapidProBackendTest(UreportTest):
             )
         ]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(12):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
@@ -624,7 +624,7 @@ class RapidProBackendTest(UreportTest):
             )
         ]
 
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(4):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 0))
@@ -654,7 +654,7 @@ class RapidProBackendTest(UreportTest):
             TembaField.create(key="homestate", label="Homestate", value_type="state"),
         ])
 
-        with self.assertNumQueries(7):
+        with self.assertNumQueries(8):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 1, 1, 0))
@@ -665,7 +665,7 @@ class RapidProBackendTest(UreportTest):
         ContactField.objects.get(key="homestate", label="Homestate", value_type="S", is_active=True)
 
         # check that no changes means no updates
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(6):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 2))
@@ -708,7 +708,7 @@ class RapidProBackendTest(UreportTest):
                                  geometry=geometry)
         ])
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(7):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 1, 0, 1))
@@ -720,7 +720,7 @@ class RapidProBackendTest(UreportTest):
                                  geometry=geometry)
         ])
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(8):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
@@ -730,7 +730,7 @@ class RapidProBackendTest(UreportTest):
                                  geometry=geometry)
         ])
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 1))
