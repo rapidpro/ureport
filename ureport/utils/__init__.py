@@ -71,7 +71,7 @@ def get_linked_orgs(authenticated=False):
     for org in all_orgs:
         host = org.build_host_link(authenticated)
         org.host = host
-        if org.get_config('is_on_landing_page', top_key="common"):
+        if org.get_config('common.is_on_landing_page'):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
             if flag:
                 linked_sites.append(dict(name=org.subdomain, host=host, flag=flag.image.url, is_static=False))
@@ -196,7 +196,7 @@ def get_global_count():
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
 
         for org in Org.objects.filter(is_active=True):
-            if org.get_config('is_on_landing_page', top_key="common"):
+            if org.get_config('common.is_on_landing_page'):
                 count += get_reporters_count(org)
 
         # cached for 10 min
@@ -334,7 +334,7 @@ def get_ureporters_locations_stats(org, segment):
     org_contacts_counts = get_org_contacts_counts(org)
 
     if field_type == 'state':
-        boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('is_global', top_key="common") else Boundary.STATE_LEVEL
+        boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('common.is_global') else Boundary.STATE_LEVEL
         boundaries = Boundary.objects.filter(org=org, level=boundary_top_level, is_active=True).values('osm_id', 'name')\
             .order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
@@ -401,7 +401,7 @@ def get_segment_org_boundaries(org, segment):
                                                         parent__osm_id=district_id).values('osm_id', 'name').order_by('osm_id')
 
     else:
-        if org.get_config('is_global', top_key='common'):
+        if org.get_config('common.is_global'):
             location_boundaries = org.boundaries.filter(level=Boundary.COUNTRY_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
         else:
             location_boundaries = org.boundaries.filter(level=Boundary.STATE_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')

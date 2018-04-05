@@ -116,7 +116,7 @@ class PublicTest(UreportTest):
             self.assertFalse(org['name'].lower() == 'nigeria')
 
         # change nigeria to be  shown on landing page
-        self.nigeria.set_config('is_on_landing_page', True)
+        self.nigeria.set_config('common.is_on_landing_page', True)
 
         response = self.client.get(chooser_url)
         self.assertEquals(response.status_code, 200)
@@ -172,7 +172,7 @@ class PublicTest(UreportTest):
         self.assertFalse('orgs' in response.context)
         self.assertTrue('welcome-flags' in response.content)  # we now show the flags for all orgs
 
-        self.global_org.set_config('is_global', True)
+        self.global_org.set_config('common.is_global', True)
 
         # if the empty org in global the template tag should show the flags
         response = self.client.get(chooser_url, SERVER_NAME='blabla.ureport.io')
@@ -442,7 +442,7 @@ class PublicTest(UreportTest):
         self.assertTrue(video2 not in response.context['videos'])
         self.assertTrue(video3 in response.context['videos'])
 
-        self.nigeria.set_config('custom_html', '<div>INCLUDE MY CUSTOM HTML</div>')
+        self.nigeria.set_config('common.custom_html', '<div>INCLUDE MY CUSTOM HTML</div>')
         response = self.client.get(home_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('<div>INCLUDE MY CUSTOM HTML</div>' in response.content)
 
@@ -534,7 +534,7 @@ class PublicTest(UreportTest):
         self.assertEquals(response.context['org'], self.uganda)
 
         # add shortcode and a join dashblock
-        self.uganda.set_config("shortcode", "3000")
+        self.uganda.set_config("common.shortcode", "3000")
         join_dashblock_type = DashBlockType.objects.filter(slug='join_engage').first()
 
         DashBlock.objects.create(title="Join", content="Join", dashblock_type=join_dashblock_type, org=self.uganda,
@@ -878,7 +878,7 @@ class PublicTest(UreportTest):
 
         self.assertEquals(json.dumps(output), response.content)
 
-        self.uganda.set_config("is_global", True)
+        self.uganda.set_config("common.is_global", True)
 
         response = self.client.get(country_boundary_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
@@ -1108,7 +1108,7 @@ class PublicTest(UreportTest):
             self.assertEquals(response.status_code, 200)
             mock_results.assert_called_with(segment=dict(location='State'))
 
-            self.uganda.set_config("is_global", True)
+            self.uganda.set_config("common.is_global", True)
             response = self.client.get(uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location='State')))), SERVER_NAME='uganda.ureport.io')
             mock_results.assert_called_with(segment=dict(location='State'))
 
