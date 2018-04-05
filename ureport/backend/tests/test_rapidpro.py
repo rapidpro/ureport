@@ -28,20 +28,21 @@ from ureport.utils import json_date_to_datetime, datetime_to_json_date
 class FieldSyncerTest(UreportTest):
     def setUp(self):
         super(FieldSyncerTest, self).setUp()
-        self.syncer = FieldSyncer(backend='rapidpro')
-        self.syncer2 = FieldSyncer(backend='floip')
+        self.syncer = FieldSyncer(backend=self.rapidpro_backend)
+        self.syncer2 = FieldSyncer(backend=self.floip_backend)
 
     def test_local_kwargs(self):
         kwargs = self.syncer.local_kwargs(self.nigeria, TembaField.create(key='foo', label='Bar', value_type='text'))
 
-        self.assertEqual(kwargs, {'backend': 'rapidpro', 'org': self.nigeria, 'key': 'foo', 'label': 'Bar', 'value_type': 'T'})
+        self.assertEqual(kwargs, {'backend': self.rapidpro_backend, 'org': self.nigeria, 'key': 'foo', 'label': 'Bar', 'value_type': 'T'})
 
         kwargs = self.syncer2.local_kwargs(self.nigeria, TembaField.create(key='foo', label='Bar', value_type='text'))
 
-        self.assertEqual(kwargs, {'backend': 'floip', 'org': self.nigeria, 'key': 'foo', 'label': 'Bar', 'value_type': 'T'})
+        self.assertEqual(kwargs, {'backend': self.floip_backend, 'org': self.nigeria, 'key': 'foo', 'label': 'Bar', 'value_type': 'T'})
 
     def test_update_required(self):
-        local = ContactField.objects.create(org=self.nigeria, key='foo', label='Bar', value_type='T', backend='rapidpro')
+        local = ContactField.objects.create(org=self.nigeria, key='foo', label='Bar', value_type='T',
+                                            backend=self.rapidpro_backend)
 
         remote = TembaField.create(key='foo', label='Bar', value_type='text')
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
@@ -66,15 +67,15 @@ class BoundarySyncerTest(UreportTest):
 
     def setUp(self):
         super(BoundarySyncerTest, self).setUp()
-        self.syncer = BoundarySyncer('rapidpro')
-        self.syncer2 = BoundarySyncer('floip')
+        self.syncer = BoundarySyncer(self.rapidpro_backend)
+        self.syncer2 = BoundarySyncer(self.floip_backend)
 
     def test_local_kwargs(self):
         country = TembaBoundary.create(osm_id='R12345', name='Nigeria', parent=None, level=Boundary.COUNTRY_LEVEL,
                                        geometry=None, aliases=None)
 
         kwargs = self.syncer.local_kwargs(self.nigeria, country)
-        self.assertEqual(kwargs, {'backend': 'rapidpro',
+        self.assertEqual(kwargs, {'backend': self.rapidpro_backend,
                                   'org': self.nigeria,
                                   'geometry': json.dumps(dict()),
                                   'parent': None, 'level': 0,
@@ -85,7 +86,7 @@ class BoundarySyncerTest(UreportTest):
                                        geometry=geometry, aliases=None)
 
         kwargs = self.syncer.local_kwargs(self.nigeria, country)
-        self.assertEqual(kwargs, {'backend': 'rapidpro',
+        self.assertEqual(kwargs, {'backend': self.rapidpro_backend,
                                   'org': self.nigeria,
                                   'geometry': json.dumps(dict(type=geometry.type, coordinates=geometry.coordinates)),
                                   'parent': None, 'level': 0,
@@ -97,12 +98,12 @@ class BoundarySyncerTest(UreportTest):
         state = TembaBoundary.create(osm_id='R23456', name='Lagos', parent=parent, level=Boundary.STATE_LEVEL,
                                      geometry=geometry, aliases=None)
         kwargs = self.syncer.local_kwargs(self.nigeria, state)
-        self.assertEqual(kwargs, {'backend': 'rapidpro', 'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
+        self.assertEqual(kwargs, {'backend': self.rapidpro_backend, 'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
                                   'level': Boundary.STATE_LEVEL, 'parent': country_boundary,
                                   'geometry': json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
 
         kwargs = self.syncer2.local_kwargs(self.nigeria, state)
-        self.assertEqual(kwargs, {'backend': 'floip', 'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
+        self.assertEqual(kwargs, {'backend': self.floip_backend, 'org': self.nigeria, 'osm_id': "R23456", 'name': "Lagos",
                                   'level': Boundary.STATE_LEVEL, 'parent': country_boundary,
                                   'geometry': json.dumps(dict(type='MultiPolygon', coordinates=['COORDINATES']))})
 
@@ -111,6 +112,7 @@ class BoundarySyncerTest(UreportTest):
 
         local = Boundary.objects.create(org=self.nigeria, osm_id='OLD123', name='OLD', parent=None,
                                         level=Boundary.COUNTRY_LEVEL,
+                                        backend=self.rapidpro_backend,
                                         geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
 
         remote = TembaBoundary.create(osm_id='OLD123', name='OLD', parent=None, level=Boundary.COUNTRY_LEVEL,
@@ -145,6 +147,7 @@ class BoundarySyncerTest(UreportTest):
         self.assertFalse(self.syncer.update_required(local, remote, self.syncer.local_kwargs(self.nigeria, remote)))
 
         local = Boundary.objects.create(org=self.nigeria, osm_id='SOME124', name='Location', parent=None,
+                                        backend=self.rapidpro_backend,
                                         level=Boundary.STATE_LEVEL,
                                         geometry='{}')
 
@@ -167,7 +170,7 @@ class BoundarySyncerTest(UreportTest):
 class ContactSyncerTest(UreportTest):
     def setUp(self):
         super(ContactSyncerTest, self).setUp()
-        self.syncer = ContactSyncer('rapidpro')
+        self.syncer = ContactSyncer(self.rapidpro_backend)
         self.nigeria.set_config('rapidpro.reporter_group', "Ureporters")
         self.nigeria.set_config('rapidpro.registration_label', "Registration Date")
         self.nigeria.set_config('rapidpro.state_label', "State")
@@ -181,28 +184,34 @@ class ContactSyncerTest(UreportTest):
 
         # boundaries fetched
         self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria",
-                                               level=Boundary.COUNTRY_LEVEL, parent=None,
+                                               level=Boundary.COUNTRY_LEVEL, parent=None, backend=self.rapidpro_backend,
                                                geometry='{"foo":"bar-country"}')
         self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos",
-                                             level=Boundary.STATE_LEVEL,
+                                             level=Boundary.STATE_LEVEL, backend=self.rapidpro_backend,
                                              parent=self.country, geometry='{"foo":"bar-state"}')
         self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo",
-                                                level=Boundary.DISTRICT_LEVEL,
+                                                level=Boundary.DISTRICT_LEVEL, backend=self.rapidpro_backend,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
         self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja", level=Boundary.WARD_LEVEL,
-                                            parent=self.district, geometry='{"foo":"bar-ward"}')
+                                            parent=self.district, geometry='{"foo":"bar-ward"}', backend=self.rapidpro_backend,)
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
+                                                             backend=self.rapidpro_backend,
                                                              label='Registration Date', value_type='T')
 
-        self.state_field = ContactField.objects.create(org=self.nigeria, key='state', label='State', value_type='S')
-        self.district_field = ContactField.objects.create(org=self.nigeria, key='lga', label='LGA', value_type='D')
-        self.ward_field = ContactField.objects.create(org=self.nigeria, key='ward', label='Ward', value_type='T')
+        self.state_field = ContactField.objects.create(org=self.nigeria, key='state', label='State', value_type='S',
+                                                       backend=self.rapidpro_backend)
+        self.district_field = ContactField.objects.create(org=self.nigeria, key='lga', label='LGA', value_type='D',
+                                                          backend=self.rapidpro_backend)
+        self.ward_field = ContactField.objects.create(org=self.nigeria, key='ward', label='Ward', value_type='T',
+                                                      backend=self.rapidpro_backend)
         self.occupation_field = ContactField.objects.create(org=self.nigeria, key='occupation', label='Activité',
-                                                            value_type='T')
+                                                            value_type='T', backend=self.rapidpro_backend)
 
-        self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
-        self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
+        self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T',
+                                                      backend=self.rapidpro_backend)
+        self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T',
+                                                        backend=self.rapidpro_backend)
 
     def test_local_kwargs(self):
 
@@ -225,7 +234,7 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'backend': 'rapidpro',
+                         {'backend': self.rapidpro_backend,
                           'org': self.nigeria,
                           'uuid': 'C-006',
                           'gender': '',
@@ -245,7 +254,7 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'backend': 'rapidpro',
+                         {'backend': self.rapidpro_backend,
                           'org': self.nigeria,
                           'uuid': 'C-007',
                           'gender': 'M',
@@ -265,7 +274,7 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'backend': 'rapidpro',
+                         {'backend': self.rapidpro_backend,
                           'org': self.nigeria,
                           'uuid': 'C-008',
                           'gender': 'M',
@@ -285,7 +294,7 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'backend': 'rapidpro',
+                         {'backend': self.rapidpro_backend,
                           'org': self.nigeria,
                           'uuid': 'C-008',
                           'gender': 'M',
@@ -305,7 +314,7 @@ class ContactSyncerTest(UreportTest):
                                             language='eng')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
-                         {'backend': 'rapidpro',
+                         {'backend': self.rapidpro_backend,
                           'org': self.nigeria,
                           'uuid': 'C-008',
                           'gender': 'M',
@@ -320,7 +329,7 @@ class ContactSyncerTest(UreportTest):
 class RapidProBackendTest(UreportTest):
     def setUp(self):
         super(RapidProBackendTest, self).setUp()
-        self.backend = RapidProBackend()
+        self.backend = RapidProBackend(self.rapidpro_backend)
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",
                                                          created_by=self.admin,
@@ -339,29 +348,39 @@ class RapidProBackendTest(UreportTest):
 
         # boundaries fetched
         self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria",
+                                               backend=self.rapidpro_backend,
                                                level=Boundary.COUNTRY_LEVEL, parent=None,
                                                geometry='{"foo":"bar-country"}')
         self.state = Boundary.objects.create(org=self.nigeria, osm_id="R-LAGOS", name="Lagos",
+                                             backend=self.rapidpro_backend,
                                              level=Boundary.STATE_LEVEL,
                                              parent=self.country, geometry='{"foo":"bar-state"}')
         self.district = Boundary.objects.create(org=self.nigeria, osm_id="R-OYO", name="Oyo",
+                                                backend=self.rapidpro_backend,
                                                 level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
         self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja",
+                                            backend=self.rapidpro_backend,
                                             level=Boundary.WARD_LEVEL,
                                             parent=self.district, geometry='{"foo":"bar-state"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
+                                                             backend=self.rapidpro_backend,
                                                              label='Registration Date', value_type='T')
 
-        self.state_field = ContactField.objects.create(org=self.nigeria, key='state', label='State', value_type='S')
-        self.district_field = ContactField.objects.create(org=self.nigeria, key='lga', label='LGA', value_type='D')
-        self.ward_field = ContactField.objects.create(org=self.nigeria, key='ward', label='Ward', value_type='W')
+        self.state_field = ContactField.objects.create(org=self.nigeria, key='state', label='State', value_type='S',
+                                                       backend=self.rapidpro_backend)
+        self.district_field = ContactField.objects.create(org=self.nigeria, key='lga', label='LGA', value_type='D',
+                                                          backend=self.rapidpro_backend)
+        self.ward_field = ContactField.objects.create(org=self.nigeria, key='ward', label='Ward', value_type='W',
+                                                      backend=self.rapidpro_backend)
         self.occupation_field = ContactField.objects.create(org=self.nigeria, key='occupation', label='Activité',
-                                                            value_type='T')
+                                                            value_type='T', backend=self.rapidpro_backend)
 
-        self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T')
-        self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T')
+        self.born_field = ContactField.objects.create(org=self.nigeria, key='born', label='Born', value_type='T',
+                                                      backend=self.rapidpro_backend)
+        self.gender_field = ContactField.objects.create(org=self.nigeria, key='gender', label='Gender', value_type='T',
+                                                        backend=self.rapidpro_backend)
 
     @patch('dash.orgs.models.TembaClient.get_contacts')
     def test_pull_contacts(self, mock_get_contacts):
@@ -964,7 +983,7 @@ class PerfTest(UreportTest):
     def setUp(self):
         super(PerfTest, self).setUp()
 
-        self.backend = RapidProBackend()
+        self.backend = RapidProBackend(self.rapidpro_backend)
 
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",

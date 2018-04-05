@@ -159,7 +159,7 @@ class ContactsTasksTest(UreportTest):
     @patch('ureport.tests.TestBackend.pull_boundaries')
     @patch('ureport.tests.TestBackend.pull_contacts')
     def test_pull_contacts(self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields, mock_squash_counts, mock_get_backend):
-        mock_get_backend.return_value = TestBackend()
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_pull_fields.return_value = (1, 2, 3, 4)
         mock_pull_boundaries.return_value = (5, 6, 7, 8)
         mock_pull_contacts.return_value = (9, 10, 11, 12)
