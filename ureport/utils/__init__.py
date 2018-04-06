@@ -81,23 +81,27 @@ def get_linked_orgs(authenticated=False):
     return linked_sites_sorted
 
 
-def fetch_flows(org, backend_slug=None):
+def fetch_flows(org, backend=None):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     start = time.time()
     print "Fetching flows for %s" % org.name
 
-    this_time = datetime.now()
-    org_flows = dict(time=datetime_to_ms(this_time))
+    if backend:
+        backends = [backend]
+    else:
+        backends = org.backends.filter(is_active=True)
 
-    backends = org.backends.filter(is_active=True)
+    this_time = datetime.now()
+    org_flows = dict(time=datetime_to_ms(this_time), results=[])
+
     for backend_obj in backends:
         backend = org.get_backend(backend_slug=backend_obj.slug)
         try:
             all_flows = backend.fetch_flows(org)
-            org_flows[backend_obj.slug] = all_flows
+            org_flows['results'] = all_flows
 
-            all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
-            cache.set(all_flows_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+            cache_key = CACHE_ORG_FLOWS_KEY % (org.pk, backend_obj.slug)
+            cache.set(cache_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
         except Exception:
             client.captureException()
@@ -106,16 +110,17 @@ def fetch_flows(org, backend_slug=None):
 
     print "Fetch %s flows took %ss" % (org.name, time.time() - start)
 
-    return org_flows.get(backend_slug) if backend_slug else dict()
+    if len(backends):
+        return org_flows.get("results", [])
 
 
-def get_flows(org, backend_slug='rapidro'):
+def get_flows(org, backend):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY
-    cache_value = cache.get(CACHE_ORG_FLOWS_KEY % org.pk, None)
-    if cache_value and backend_slug in cache_value:
-        return cache_value[backend_slug]
+    cache_value = cache.get(CACHE_ORG_FLOWS_KEY % (org.pk, backend.slug), None)
+    if cache_value:
+        return cache_value['results']
 
-    return fetch_flows(org, backend_slug)
+    return fetch_flows(org, backend)
 
 
 def update_poll_flow_data(org):

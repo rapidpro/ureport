@@ -40,7 +40,7 @@ UREPORT_RUN_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_RUN_FETCHED_DAT
 
 CACHE_POLL_RESULTS_KEY = 'org:%d:poll:%d:results:%d'
 
-CACHE_ORG_FLOWS_KEY = "org:%d:flows"
+CACHE_ORG_FLOWS_KEY = "org:%d:backend:%s:flows"
 
 CACHE_ORG_REPORTER_GROUP_KEY = "org:%d:reporters:%s"
 
