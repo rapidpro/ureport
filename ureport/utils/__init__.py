@@ -124,29 +124,32 @@ def get_flows(org, backend):
 
 
 def update_poll_flow_data(org):
-    flows = get_flows(org)
 
-    if flows:
-        org_polls = Poll.objects.filter(org=org)
-        for poll in org_polls:
-            flow = flows.get(poll.flow_uuid, dict())
+    backends = org.backends.filter(is_active=True)
+    for backend_obj in backends:
+        flows = get_flows(org, backend_obj)
 
-            if flow:
-                archived = flow.get('archived', False)
-                runs_count = flow.get('runs', 0)
-                if not runs_count:
-                    runs_count = 0
+        if flows:
+            org_polls = Poll.objects.filter(org=org, backend=backend_obj)
+            for poll in org_polls:
+                flow = flows.get(poll.flow_uuid, dict())
 
-                updated_fields = dict()
+                if flow:
+                    archived = flow.get('archived', False)
+                    runs_count = flow.get('runs', 0)
+                    if not runs_count:
+                        runs_count = 0
 
-                if archived != poll.flow_archived:
-                    updated_fields['flow_archived'] = archived
+                    updated_fields = dict()
 
-                if runs_count > 0 and runs_count != poll.runs_count:
-                    updated_fields['runs_count'] = runs_count
+                    if archived != poll.flow_archived:
+                        updated_fields['flow_archived'] = archived
 
-                if updated_fields:
-                    Poll.objects.filter(pk=poll.pk).update(**updated_fields)
+                    if runs_count > 0 and runs_count != poll.runs_count:
+                        updated_fields['runs_count'] = runs_count
+
+                    if updated_fields:
+                        Poll.objects.filter(pk=poll.pk).update(**updated_fields)
 
 
 def fetch_old_sites_count():
