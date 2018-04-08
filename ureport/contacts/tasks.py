@@ -2,18 +2,18 @@ from __future__ import unicode_literals
 
 import time
 from django.core.cache import cache
-from django.utils import timezone
+# from django.utils import timezone
 from dash.orgs.tasks import org_task
 from celery.utils.log import get_task_logger
 
-from ureport.utils import datetime_to_json_date
+# from ureport.utils import datetime_to_json_date
 from ureport.contacts.models import Contact
 
 logger = get_task_logger(__name__)
 
 
 @org_task('contact-pull', 60 * 60 * 3)
-def pull_contacts(org, ignored_since, ignored_until):
+def pull_contacts(org, since, until):
     """
     Fetches updated contacts from RapidPro and updates local contacts accordingly
     """
@@ -26,8 +26,9 @@ def pull_contacts(org, ignored_since, ignored_until):
 
         last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.pk, backend_obj.slug)
 
-        until = datetime_to_json_date(timezone.now())
-        since = cache.get(last_fetch_date_key, None)
+        # HOLD ON TO US THESE UNTIL WE HAVE THEM SET TO AVOID A FULL CONTACTS RESYNC
+        # until = datetime_to_json_date(timezone.now())
+        # since = cache.get(last_fetch_date_key, None)
 
         if not since:
             logger.warn("First time run for org #%d. Will sync all contacts" % org.pk)
