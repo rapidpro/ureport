@@ -1,5 +1,5 @@
 import time
-from dash.orgs.models import Org
+from dash.orgs.models import Org, OrgBackend
 from django.db import models, connection
 from django.db.models import Sum, Count
 from django.utils.translation import ugettext_lazy as _
@@ -35,7 +35,7 @@ class ContactField(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    backend = models.CharField(max_length=16, default='rapidpro')
+    backend = models.ForeignKey(OrgBackend, null=True)
 
     org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="contactfields")
 
@@ -58,7 +58,7 @@ class Contact(models.Model):
     Corresponds to a RapidPro contact
     """
 
-    CONTACT_LAST_FETCHED_CACHE_KEY = 'last:fetch_contacts:%d'
+    CONTACT_LAST_FETCHED_CACHE_KEY = 'last:fetch_contacts:%d:backend:%s'
     CONTACT_LAST_FETCHED_CACHE_TIMEOUT = 60 * 60 * 24 * 30
 
     MALE = 'M'
@@ -67,7 +67,7 @@ class Contact(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    backend = models.CharField(max_length=16, default='rapidpro')
+    backend = models.ForeignKey(OrgBackend, null=True)
 
     uuid = models.CharField(max_length=36, unique=True)
 

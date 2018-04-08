@@ -68,7 +68,7 @@ class UtilsTest(UreportTest):
         for old_site in get_linked_orgs():
             self.assertFalse(old_site['name'].lower() == 'aaaburundi')
 
-        self.org.set_config('is_on_landing_page', True)
+        self.org.set_config('common.is_on_landing_page', True)
 
         # missing flag
         self.assertEqual(len(get_linked_orgs()), settings_sites_count)
@@ -124,7 +124,7 @@ class UtilsTest(UreportTest):
             mock_datetime_ms.return_value = 500
 
             with patch('django.core.cache.cache.set') as cache_set_mock:
-                flows = fetch_flows(self.org, 'rapidpro')
+                flows = fetch_flows(self.org, self.rapidpro_backend)
                 expected = dict()
                 expected['uuid-25'] = dict(uuid='uuid-25', date_hint="2015-04-08",
                                            created_on="2015-04-08T12:48:44.320Z",
@@ -132,7 +132,8 @@ class UtilsTest(UreportTest):
 
             self.assertEqual(flows, expected)
 
-            cache_set_mock.assert_called_once_with('org:%d:flows' % self.org.pk, dict(time=500, rapidpro=expected),
+            cache_set_mock.assert_called_once_with('org:%d:backend:%s:flows' % (self.org.pk, self.rapidpro_backend.slug),
+                                                   dict(time=500, results=expected),
                                                    UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
     def test_update_poll_flow_data(self):
@@ -387,7 +388,7 @@ class UtilsTest(UreportTest):
 
         self.assertEqual(get_regions_stats(self.org), [dict(name='OYO', count=15), dict(name='Lagos', count=5)])
 
-        self.org.set_config('is_global', True)
+        self.org.set_config('common.is_global', True)
 
         self.assertEqual(get_regions_stats(self.org), [])
 
@@ -414,15 +415,15 @@ class UtilsTest(UreportTest):
         with patch('ureport.utils.fetch_flows') as mock_fetch_flows:
             mock_fetch_flows.return_value = "Fetched"
             with patch('django.core.cache.cache.get') as mock_cache_get:
-                mock_cache_get.return_value = dict(rapidpro="Cached")
+                mock_cache_get.return_value = dict(results="Cached")
 
-                self.assertEqual(get_flows(self.org, 'rapidpro'), "Cached")
-                mock_cache_get.assert_called_once_with(CACHE_ORG_FLOWS_KEY % self.org.pk, None)
+                self.assertEqual(get_flows(self.org, self.rapidpro_backend), "Cached")
+                mock_cache_get.assert_called_once_with(CACHE_ORG_FLOWS_KEY % (self.org.pk, self.rapidpro_backend.slug), None)
                 self.assertFalse(mock_fetch_flows.called)
 
                 mock_cache_get.return_value = None
-                self.assertEqual(get_flows(self.org, 'rapidpro'), "Fetched")
-                mock_fetch_flows.assert_called_once_with(self.org, 'rapidpro')
+                self.assertEqual(get_flows(self.org, self.rapidpro_backend), "Fetched")
+                mock_fetch_flows.assert_called_once_with(self.org, self.rapidpro_backend)
 
     @patch('django.core.cache.cache.get')
     def test_get_reporters_count(self, mock_cache_get):
@@ -451,7 +452,7 @@ class UtilsTest(UreportTest):
                 self.assertEqual(get_global_count(), 0)
 
                 # add the org to the homepage
-                self.org.set_config('is_on_landing_page', True)
+                self.org.set_config('common.is_on_landing_page', True)
                 self.assertEqual(get_global_count(), 5)
 
                 mock_old_sites_count.return_value = [{'time': 500, 'results': dict(size=300)},
@@ -461,7 +462,7 @@ class UtilsTest(UreportTest):
                 self.assertEqual(get_global_count(), 355)
 
                 cache.delete(GLOBAL_COUNT_CACHE_KEY)
-                self.org.set_config('is_on_landing_page', False)
+                self.org.set_config('common.is_on_landing_page', False)
                 self.assertEqual(get_global_count(), 350)
 
             with patch('django.core.cache.cache.get') as cache_get_mock:

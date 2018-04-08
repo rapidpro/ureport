@@ -6,7 +6,7 @@ from abc import ABCMeta, abstractmethod
 class BaseBackend(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self, backend='rapidpro'):
+    def __init__(self, backend):
         self.backend = backend
 
     @abstractmethod

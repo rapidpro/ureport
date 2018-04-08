@@ -1,6 +1,6 @@
 import json
 from django.db import models
-from dash.orgs.models import Org
+from dash.orgs.models import Org, OrgBackend
 from django.utils.translation import ugettext_lazy as _
 
 from django_redis import get_redis_connection
@@ -24,7 +24,7 @@ class Boundary(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    backend = models.CharField(max_length=16, default='rapidpro')
+    backend = models.ForeignKey(OrgBackend, null=True)
 
     osm_id = models.CharField(max_length=15,
                               help_text=_("This is the OSM id for this administrative boundary"))
@@ -76,7 +76,7 @@ class Boundary(models.Model):
 
     @classmethod
     def get_org_top_level_boundaries_name(cls, org):
-        if org.get_config('is_global', top_key="common"):
+        if org.get_config('common.is_global'):
             top_boundaries = cls.objects.filter(org=org, level=cls.COUNTRY_LEVEL)
         else:
             top_boundaries = cls.objects.filter(org=org, level=cls.STATE_LEVEL)

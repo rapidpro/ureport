@@ -1,8 +1,13 @@
 from __future__ import unicode_literals
 
 import time
+from django.core.cache import cache
+# from django.utils import timezone
 from dash.orgs.tasks import org_task
 from celery.utils.log import get_task_logger
+
+# from ureport.utils import datetime_to_json_date
+from ureport.contacts.models import Contact
 
 logger = get_task_logger(__name__)
 
@@ -19,6 +24,12 @@ def pull_contacts(org, since, until):
     for backend_obj in backends:
         backend = org.get_backend(backend_slug=backend_obj.slug)
 
+        last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.pk, backend_obj.slug)
+
+        # HOLD ON TO US THESE UNTIL WE HAVE THEM SET TO AVOID A FULL CONTACTS RESYNC
+        # until = datetime_to_json_date(timezone.now())
+        # since = cache.get(last_fetch_date_key, None)
+
         if not since:
             logger.warn("First time run for org #%d. Will sync all contacts" % org.pk)
 
@@ -28,7 +39,7 @@ def pull_contacts(org, since, until):
 
         logger.warn("Fetched contact fields for org #%d. "
                     "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, fields_created, fields_updated,
-                                                                    fields_deleted, ignored))
+                                                                        fields_deleted, ignored))
         logger.warn("Fetch fields for org #%d took %ss" % (org.pk, time.time() - start))
 
         start_boundaries = time.time()
@@ -37,16 +48,18 @@ def pull_contacts(org, since, until):
 
         logger.warn("Fetched boundaries for org #%d. "
                     "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, boundaries_created, boundaries_updated,
-                                                                    boundaries_deleted, ignored))
+                                                                        boundaries_deleted, ignored))
 
         logger.warn("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
         start_contacts = time.time()
 
         contacts_created, contacts_updated, contacts_deleted, ignored = backend.pull_contacts(org, since, until)
 
+        cache.set(last_fetch_date_key, until, None)
+
         logger.warn("Fetched contacts for org #%d. "
                     "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, contacts_created, contacts_updated,
-                                                                    contacts_deleted, ignored))
+                                                                        contacts_deleted, ignored))
 
         logger.warn("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
 

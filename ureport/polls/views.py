@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from dash.categories.models import Category, CategoryImage
 from dash.categories.fields import CategoryChoiceField
+from dash.orgs.models import OrgBackend
 from django.utils import timezone
 from django.utils.timesince import timesince
 from smartmin.csv_imports.models import ImportTask
@@ -24,7 +25,7 @@ import re
 
 class PollForm(forms.ModelForm):
     is_active = forms.BooleanField(required=False)
-    backend = forms.ChoiceField(choices=[])
+    backend = forms.ModelChoiceField(OrgBackend.objects.none(), required=False)
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = CategoryChoiceField(Category.objects.none())
     category_image = forms.ModelChoiceField(CategoryImage.objects.none(), required=False)
@@ -36,8 +37,7 @@ class PollForm(forms.ModelForm):
         super(PollForm, self).__init__(*args, **kwargs)
         self.fields['category'].queryset = Category.objects.filter(org=self.org)
 
-        backend_options = self.org.backends.filter(is_active=True).values_list('slug', flat=True)
-        self.fields['backend'].choices = [(backend, backend) for backend in backend_options]
+        self.fields['backend'].queryset = OrgBackend.objects.filter(org=self.org, is_active=True).order_by('slug')
 
         # only display category images for this org which are active
         self.fields['category_image'].queryset = CategoryImage.objects.filter(category__org=self.org, is_active=True).order_by('category__name', 'name')
@@ -46,8 +46,7 @@ class PollForm(forms.ModelForm):
 
         cleaned_data = self.cleaned_data
 
-        backend_options = self.org.backends.filter(is_active=True).values_list('slug', flat=True)
-        if not backend_options:
+        if not self.org.backends.filter(is_active=True).exists():
             raise ValidationError(_("Your org does not have any API token configuration."))
 
         return cleaned_data
@@ -221,7 +220,7 @@ class PollCRUDL(SmartCRUDL):
             org = self.request.org
             obj.org = org
 
-            backend_options = org.backends.filter(is_active=True).values_list('slug', flat=True)
+            backend_options = org.backends.filter(is_active=True)
             if len(backend_options) == 1:
                 obj.backend = backend_options[0]
 

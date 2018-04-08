@@ -71,7 +71,7 @@ def get_linked_orgs(authenticated=False):
     for org in all_orgs:
         host = org.build_host_link(authenticated)
         org.host = host
-        if org.get_config('is_on_landing_page', top_key="common"):
+        if org.get_config('common.is_on_landing_page'):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
             if flag:
                 linked_sites.append(dict(name=org.subdomain, host=host, flag=flag.image.url, is_static=False))
@@ -81,23 +81,27 @@ def get_linked_orgs(authenticated=False):
     return linked_sites_sorted
 
 
-def fetch_flows(org, backend_slug=None):
+def fetch_flows(org, backend=None):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     start = time.time()
     print "Fetching flows for %s" % org.name
 
-    this_time = datetime.now()
-    org_flows = dict(time=datetime_to_ms(this_time))
+    if backend:
+        backends = [backend]
+    else:
+        backends = org.backends.filter(is_active=True)
 
-    backends = org.backends.filter(is_active=True)
+    this_time = datetime.now()
+    org_flows = dict(time=datetime_to_ms(this_time), results=[])
+
     for backend_obj in backends:
         backend = org.get_backend(backend_slug=backend_obj.slug)
         try:
             all_flows = backend.fetch_flows(org)
-            org_flows[backend_obj.slug] = all_flows
+            org_flows['results'] = all_flows
 
-            all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
-            cache.set(all_flows_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+            cache_key = CACHE_ORG_FLOWS_KEY % (org.pk, backend_obj.slug)
+            cache.set(cache_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
         except Exception:
             client.captureException()
@@ -106,42 +110,46 @@ def fetch_flows(org, backend_slug=None):
 
     print "Fetch %s flows took %ss" % (org.name, time.time() - start)
 
-    return org_flows.get(backend_slug) if backend_slug else dict()
+    if len(backends):
+        return org_flows.get("results", [])
 
 
-def get_flows(org, backend_slug='rapidro'):
+def get_flows(org, backend):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY
-    cache_value = cache.get(CACHE_ORG_FLOWS_KEY % org.pk, None)
-    if cache_value and backend_slug in cache_value:
-        return cache_value[backend_slug]
+    cache_value = cache.get(CACHE_ORG_FLOWS_KEY % (org.pk, backend.slug), None)
+    if cache_value:
+        return cache_value['results']
 
-    return fetch_flows(org, backend_slug)
+    return fetch_flows(org, backend)
 
 
 def update_poll_flow_data(org):
-    flows = get_flows(org)
 
-    if flows:
-        org_polls = Poll.objects.filter(org=org)
-        for poll in org_polls:
-            flow = flows.get(poll.flow_uuid, dict())
+    backends = org.backends.filter(is_active=True)
+    for backend_obj in backends:
+        flows = get_flows(org, backend_obj)
 
-            if flow:
-                archived = flow.get('archived', False)
-                runs_count = flow.get('runs', 0)
-                if not runs_count:
-                    runs_count = 0
+        if flows:
+            org_polls = Poll.objects.filter(org=org, backend=backend_obj)
+            for poll in org_polls:
+                flow = flows.get(poll.flow_uuid, dict())
 
-                updated_fields = dict()
+                if flow:
+                    archived = flow.get('archived', False)
+                    runs_count = flow.get('runs', 0)
+                    if not runs_count:
+                        runs_count = 0
 
-                if archived != poll.flow_archived:
-                    updated_fields['flow_archived'] = archived
+                    updated_fields = dict()
 
-                if runs_count > 0 and runs_count != poll.runs_count:
-                    updated_fields['runs_count'] = runs_count
+                    if archived != poll.flow_archived:
+                        updated_fields['flow_archived'] = archived
 
-                if updated_fields:
-                    Poll.objects.filter(pk=poll.pk).update(**updated_fields)
+                    if runs_count > 0 and runs_count != poll.runs_count:
+                        updated_fields['runs_count'] = runs_count
+
+                    if updated_fields:
+                        Poll.objects.filter(pk=poll.pk).update(**updated_fields)
 
 
 def fetch_old_sites_count():
@@ -196,7 +204,7 @@ def get_global_count():
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
 
         for org in Org.objects.filter(is_active=True):
-            if org.get_config('is_on_landing_page', top_key="common"):
+            if org.get_config('common.is_on_landing_page'):
                 count += get_reporters_count(org)
 
         # cached for 10 min
@@ -334,7 +342,7 @@ def get_ureporters_locations_stats(org, segment):
     org_contacts_counts = get_org_contacts_counts(org)
 
     if field_type == 'state':
-        boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('is_global', top_key="common") else Boundary.STATE_LEVEL
+        boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('common.is_global') else Boundary.STATE_LEVEL
         boundaries = Boundary.objects.filter(org=org, level=boundary_top_level, is_active=True).values('osm_id', 'name')\
             .order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
@@ -401,7 +409,7 @@ def get_segment_org_boundaries(org, segment):
                                                         parent__osm_id=district_id).values('osm_id', 'name').order_by('osm_id')
 
     else:
-        if org.get_config('is_global', top_key='common'):
+        if org.get_config('common.is_global'):
             location_boundaries = org.boundaries.filter(level=Boundary.COUNTRY_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
         else:
             location_boundaries = org.boundaries.filter(level=Boundary.STATE_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')

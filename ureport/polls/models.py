@@ -13,7 +13,7 @@ from django.utils import timezone
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
-from dash.orgs.models import Org
+from dash.orgs.models import Org, OrgBackend
 from dash.categories.models import Category, CategoryImage
 from django.conf import settings
 from stop_words import safe_get_stop_words
@@ -40,7 +40,7 @@ UREPORT_RUN_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_RUN_FETCHED_DAT
 
 CACHE_POLL_RESULTS_KEY = 'org:%d:poll:%d:results:%d'
 
-CACHE_ORG_FLOWS_KEY = "org:%d:flows"
+CACHE_ORG_FLOWS_KEY = "org:%d:backend:%s:flows"
 
 CACHE_ORG_REPORTER_GROUP_KEY = "org:%d:reporters:%s"
 
@@ -133,7 +133,7 @@ class Poll(SmartModel):
     org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
 
-    backend = models.CharField(max_length=16, default='rapidpro')
+    backend = models.ForeignKey(OrgBackend, null=True)
 
     def get_sync_progress(self):
         if not self.runs_count:
@@ -150,7 +150,7 @@ class Poll(SmartModel):
     @classmethod
     def pull_results(cls, poll_id):
         poll = Poll.objects.get(pk=poll_id)
-        backend = poll.org.get_backend(backend_slug=poll.backend)
+        backend = poll.org.get_backend(backend_slug=poll.backend.slug)
 
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
@@ -367,7 +367,7 @@ class Poll(SmartModel):
         """
         Returns the underlying flow for this poll
         """
-        flows_dict = self.org.get_flows(backend_slug=self.backend)
+        flows_dict = self.org.get_flows(backend_slug=self.backend.slug)
         return flows_dict.get(self.flow_uuid, None)
 
     def update_or_create_questions(self, user=None):
@@ -375,7 +375,7 @@ class Poll(SmartModel):
             user = User.objects.get(pk=-1)
 
         org = self.org
-        backend = org.get_backend(backend_slug=self.backend)
+        backend = org.get_backend(backend_slug=self.backend.slug)
 
         flow_definition = backend.get_definition(org, self.flow_uuid)
 
