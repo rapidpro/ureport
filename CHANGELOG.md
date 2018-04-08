@@ -1,3 +1,9 @@
+v1.0.396
+----------
+ * Hold on to use redis cache times for contacts sycn until we have some values set
+ * Add backend fields as Foreign keys
+ * Use .paths to set and retrieve Org config values 
+
 v1.0.393
 ----------
  * Update test
