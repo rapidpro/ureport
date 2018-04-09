@@ -367,7 +367,7 @@ class Poll(SmartModel):
         """
         Returns the underlying flow for this poll
         """
-        flows_dict = self.org.get_flows(self.backend)
+        flows_dict = self.org.get_flows(backend=self.backend)
         return flows_dict.get(self.flow_uuid, None)
 
     def update_or_create_questions(self, user=None):
