@@ -367,7 +367,7 @@ class Poll(SmartModel):
         """
         Returns the underlying flow for this poll
         """
-        flows_dict = self.org.get_flows(backend_slug=self.backend.slug)
+        flows_dict = self.org.get_flows(self.backend)
         return flows_dict.get(self.flow_uuid, None)
 
     def update_or_create_questions(self, user=None):
@@ -377,36 +377,7 @@ class Poll(SmartModel):
         org = self.org
         backend = org.get_backend(backend_slug=self.backend.slug)
 
-        flow_definition = backend.get_definition(org, self.flow_uuid)
-
-        if flow_definition is None:
-            return
-
-        base_language = flow_definition['base_language']
-
-        self.base_language = base_language
-        self.save()
-
-        flow_rulesets = flow_definition['rule_sets']
-
-        for ruleset in flow_rulesets:
-            label = ruleset['label']
-            ruleset_uuid = ruleset['uuid']
-            ruleset_type = ruleset['ruleset_type']
-
-            question = PollQuestion.update_or_create(user, self, label, ruleset_uuid, ruleset_type)
-
-            rapidpro_rules = []
-            for rule in ruleset['rules']:
-                category = rule['category'][base_language]
-                rule_uuid = rule['uuid']
-                rapidpro_rules.append(rule_uuid)
-
-                PollResponseCategory.update_or_create(question, rule_uuid, category)
-
-            # deactivate if corresponding rules are removed
-            PollResponseCategory.objects.filter(
-                question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
+        backend.update_poll_questions(org, self, user)
 
     def most_responded_regions(self):
         # get our first question

@@ -17,7 +17,7 @@ from django_redis import get_redis_connection
 
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll
+from ureport.polls.models import PollResult, Poll, PollQuestion, PollResponseCategory
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from . import BaseBackend
 
@@ -309,6 +309,38 @@ class RapidProBackend(BaseBackend):
                 flow_definition = flow_def
                 break
         return flow_definition
+
+    def update_poll_questions(self, org, poll, user):
+        flow_definition = self.get_definition(org, poll.flow_uuid)
+
+        if flow_definition is None:
+            return
+
+        base_language = flow_definition['base_language']
+
+        poll.base_language = base_language
+        poll.save()
+
+        flow_rulesets = flow_definition['rule_sets']
+
+        for ruleset in flow_rulesets:
+            label = ruleset['label']
+            ruleset_uuid = ruleset['uuid']
+            ruleset_type = ruleset['ruleset_type']
+
+            question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
+
+            rapidpro_rules = []
+            for rule in ruleset['rules']:
+                category = rule['category'][base_language]
+                rule_uuid = rule['uuid']
+                rapidpro_rules.append(rule_uuid)
+
+                PollResponseCategory.update_or_create(question, rule_uuid, category)
+
+            # deactivate if corresponding rules are removed
+            PollResponseCategory.objects.filter(
+                question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
 
     def pull_fields(self, org):
         client = self._get_client(org, 2)
