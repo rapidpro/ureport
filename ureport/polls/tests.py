@@ -488,7 +488,7 @@ class PollTest(UreportTest):
             polls.append(poll)
 
         self.assertTrue(Poll.get_recent_polls(self.uganda))
-        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls)))
+        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[:9])))
 
         now = timezone.now()
         a_month_ago = now - timedelta(days=30)
@@ -496,7 +496,7 @@ class PollTest(UreportTest):
         Poll.objects.filter(pk__in=[polls[0].pk, polls[1].pk]).update(created_on=a_month_ago)
 
         self.assertTrue(Poll.get_recent_polls(self.uganda))
-        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[2:])))
+        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[2:9])))
 
     def test_get_flow(self):
         with patch('dash.orgs.models.Org.get_flows') as mock:
@@ -1962,6 +1962,9 @@ class PollsTasksTest(UreportTest):
         mock_get_other_polls.return_value = self.polls_query
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
         mock_cache_get.return_value = None
+
+        self.poll.created_on = timezone.now() - timedelta(days=8)
+        self.poll.save()
 
         pull_results_other_polls(self.nigeria.pk)
 
