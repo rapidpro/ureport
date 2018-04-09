@@ -1,3 +1,7 @@
+v1.0.397
+----------
+ * Fix get_flow and enable the cached times in contacts pull
+
 v1.0.396
 ----------
  * Hold on to use redis cache times for contacts sycn until we have some values set
