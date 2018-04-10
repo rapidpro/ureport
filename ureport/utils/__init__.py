@@ -111,7 +111,7 @@ def fetch_flows(org, backend=None):
     print "Fetch %s flows took %ss" % (org.name, time.time() - start)
 
     if len(backends):
-        return org_flows.get("results", [])
+        return org_flows.get("results", dict())
 
 
 def get_flows(org, backend):
