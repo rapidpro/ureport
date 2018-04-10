@@ -358,8 +358,12 @@ class Poll(SmartModel):
     def get_recent_polls(cls, org):
         now = timezone.now()
         recent_window = now - timedelta(days=7)
+        main_poll = Poll.get_main_poll(org)
 
-        recent_other_polls = Poll.get_public_polls(org).exclude(created_on__lte=recent_window).order_by('-created_on')
+        recent_other_polls = Poll.get_public_polls(org)
+        if main_poll:
+            recent_other_polls = recent_other_polls.exclude(pk=main_poll.pk)
+        recent_other_polls = recent_other_polls.exclude(created_on__lte=recent_window).order_by('-created_on')
 
         return recent_other_polls
 

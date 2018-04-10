@@ -1,3 +1,7 @@
+v1.0.398
+----------
+ * Make sure tasks do no sync polls synced by other tasks that run more often
+
 v1.0.397
 ----------
  * Fix get_flow and enable the cached times in contacts pull
