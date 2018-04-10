@@ -1,3 +1,7 @@
+v1.0.400
+----------
+ * Default value for fetch_flows for the cache miss should be an empty dict
+
 v1.0.399
 ----------
  * Only exclude the main poll if we have one
