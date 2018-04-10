@@ -1,3 +1,7 @@
+v1.0.399
+----------
+ * Only exclude the main poll if we have one
+
 v1.0.398
 ----------
  * Make sure tasks do no sync polls synced by other tasks that run more often
