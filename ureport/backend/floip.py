@@ -33,10 +33,14 @@ class FLOIPBackend(BaseBackend):
             'Authorization': 'Token %s' % "9b3100024df07f8ed126af2d0"
         }
 
-        response = requests.request('GET', flow_url, headers=headers)
-        response_json = response.json()
+        flows = []
 
-        flows = response_json['data']
+        while flow_url:
+            response = requests.request('GET', flow_url, headers=headers)
+            response_json = response.json()
+
+            flows += response_json['data']
+            flow_url = response_json['links']['next']
 
         all_flows = dict()
         for flow in flows:
