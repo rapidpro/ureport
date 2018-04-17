@@ -109,7 +109,7 @@ class ContactSyncer(BaseSyncer):
 
     def get_boundaries_data(self, org):
 
-        cache_attr = '__boundaries__%d' % org.pk
+        cache_attr = '__boundaries__%d:%s' % (org.pk, self.backend.slug)
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
 
@@ -135,7 +135,7 @@ class ContactSyncer(BaseSyncer):
         return org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data
 
     def get_contact_fields(self, org):
-        cache_attr = '__contact_fields__%d' % org.pk
+        cache_attr = '__contact_fields__%d:%s' % (org.pk, self.backend.slug)
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
         contact_fields = ContactField.objects.filter(org=org, backend=self.backend)
