@@ -3,12 +3,14 @@
 from __future__ import unicode_literals
 
 import pytz
+import json
 from django.conf import settings
 from django.urls import reverse
 from django.test import override_settings
 from django.utils import timezone
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User
+from django.utils.encoding import force_text
 from dash.orgs.middleware import SetOrgMiddleware
 from dash.test import DashTest
 from dash.utils import random_string
@@ -75,6 +77,20 @@ class TestBackend(RapidProBackend):
     TODO once all backend functionality actually goes through get_backend() this can become a stub
     """
     pass
+
+
+class MockResponse(object):
+
+    def __init__(self, status_code, content=''):
+        self.content = content
+        self.status_code = status_code
+
+    def raise_for_status(self):
+        if self.status_code != 200:
+            raise Exception("Server returned %s" % force_text(self.status_code))
+
+    def json(self, **kwargs):
+        return json.loads(self.content)
 
 
 @override_settings(SITE_BACKEND='ureport.tests.TestBackend')

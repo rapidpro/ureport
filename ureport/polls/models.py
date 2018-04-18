@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import json
 from collections import defaultdict
 
+import uuid
 import logging
 import pytz
 from datetime import timedelta
@@ -942,7 +943,13 @@ class PollResponseCategory(models.Model):
 
     @classmethod
     def update_or_create(cls, question, rule_uuid, category):
-        existing = cls.objects.filter(question=question, rule_uuid=rule_uuid)
+        existing = cls.objects.filter(question=question)
+        if rule_uuid is not None:
+            existing = existing.filter(rule_uuid=rule_uuid)
+        else:
+            existing = existing.filter(category=category)
+            rule_uuid = uuid.uuid4()
+
         if existing:
             existing.update(category=category, is_active=True)
         else:

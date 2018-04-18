@@ -4,7 +4,6 @@ import requests
 
 import time
 
-from uuid import uuid4
 from collections import defaultdict
 
 from dash.utils.sync import BaseSyncer, sync_local_to_changes
@@ -210,7 +209,7 @@ class FLOIPBackend(BaseBackend):
         headers = {
             'Content-type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Token %s' % "9b3100024df07f8ed126af2d0"
+            'Authorization': 'Token %s' % self.backend.api_token
         }
 
         flows = []
@@ -230,7 +229,7 @@ class FLOIPBackend(BaseBackend):
             flow_json['uuid'] = flow['id']
             flow_json['date_hint'] = flow_attributes['created']
             flow_json['created_on'] = flow_attributes['created']
-            flow_json['name'] = flow_attributes['name']
+            flow_json['name'] = flow_attributes['title']
             flow_json['archived'] = False
             flow_json['runs'] = 0
             flow_json['completed_runs'] = 0
@@ -245,7 +244,7 @@ class FLOIPBackend(BaseBackend):
         headers = {
             'Content-type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Token %s' % "9b3100024df07f8ed126af2d0"
+            'Authorization': 'Token %s' % self.backend.api_token
         }
 
         response = requests.request('GET', flow_url, headers=headers)
@@ -280,8 +279,9 @@ class FLOIPBackend(BaseBackend):
 
             question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
 
-            for category in val.get('type_options', dict()).get('choices', []):
-                PollResponseCategory.update_or_create(question, uuid4(), category)
+            choices = val.get('type_options', dict()).get('choices', [])
+            for category in choices:
+                PollResponseCategory.update_or_create(question, None, category)
 
     def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
         org = poll.org
@@ -302,7 +302,7 @@ class FLOIPBackend(BaseBackend):
                 headers = {
                     'Content-type': 'application/json',
                     'Accept': 'application/json',
-                    'Authorization': 'Token %s' % "9b3100024df07f8ed126af2d0"
+                    'Authorization': 'Token %s' % self.backend.api_token
                 }
 
                 results = []
@@ -437,7 +437,7 @@ class FLOIPBackend(BaseBackend):
             born = contact_obj.born
             gender = contact_obj.gender
 
-        value_date = result[0]
+        value_date = json_date_to_datetime(result[0])
         ruleset_uuid = result[4]
         category = result[5]
         text = result[5]
@@ -515,7 +515,7 @@ class FLOIPBackend(BaseBackend):
         update_required = update_required or poll_obj.completed != completed
         # if the reporter answered the step, check if this is a newer run
         if poll_obj.date is not None:
-            update_required = update_required and (json_date_to_datetime(value_date) > poll_obj.date)
+            update_required = update_required and (value_date > poll_obj.date)
         else:
             update_required = True
         return update_required
