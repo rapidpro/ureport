@@ -491,7 +491,7 @@ class PollTest(UreportTest):
             polls.append(poll)
 
         self.assertTrue(Poll.get_recent_polls(self.uganda))
-        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls)))
+        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[:9])))
 
         now = timezone.now()
         a_month_ago = now - timedelta(days=30)
@@ -499,7 +499,7 @@ class PollTest(UreportTest):
         Poll.objects.filter(pk__in=[polls[0].pk, polls[1].pk]).update(created_on=a_month_ago)
 
         self.assertTrue(Poll.get_recent_polls(self.uganda))
-        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[2:])))
+        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[2:9])))
 
     def test_get_flow(self):
         with patch('dash.orgs.models.Org.get_flows') as mock:
@@ -507,8 +507,8 @@ class PollTest(UreportTest):
 
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-            self.assertEqual(poll1.get_flow(), 'Flow')
-            mock.assert_called_once_with(backend_slug='rapidpro')
+            self.assertEquals(poll1.get_flow(), 'Flow')
+            mock.assert_called_once_with(backend=poll1.backend)
 
     @patch('django.core.cache.cache.get')
     def test_most_responded_regions(self, mock_cache_get):
@@ -743,9 +743,9 @@ class PollTest(UreportTest):
             self.assertTrue(Poll.objects.all())
 
             poll = Poll.objects.get()
-            self.assertEqual(poll.title, 'Poll 1')
-            self.assertEqual(poll.backend, "rapidpro")
-            self.assertEqual(poll.org, self.uganda)
+            self.assertEquals(poll.title, 'Poll 1')
+            self.assertEquals(poll.backend.slug, "rapidpro")
+            self.assertEquals(poll.org, self.uganda)
 
             self.assertEqual(response.request['PATH_INFO'], reverse('polls.poll_poll_flow', args=[poll.pk]))
 
@@ -758,11 +758,11 @@ class PollTest(UreportTest):
             ten_minutes_ago = timezone.now() - timedelta(minutes=10)
 
             # a new submission after five minutes will create a new poll
-            Poll.objects.filter(org=poll.org, backend='rapidpro').update(created_on=ten_minutes_ago, flow_uuid='uuid-25')
+            Poll.objects.filter(org=poll.org, backend__slug='rapidpro').update(created_on=ten_minutes_ago, flow_uuid='uuid-25')
             response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertEqual(Poll.objects.all().count(), 2)
 
-            Poll.objects.filter(org=poll.org, backend='rapidpro').update(flow_uuid='uuid-25')
+            Poll.objects.filter(org=poll.org, backend__slug='rapidpro').update(flow_uuid='uuid-25')
             tz = pytz.timezone('Africa/Kigali')
             with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
                 flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30',
@@ -780,8 +780,7 @@ class PollTest(UreportTest):
                 self.assertEqual(poll.org, self.uganda)
                 self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))
 
-            with self.settings(DATA_API_BACKENDS_CONFIG=dict(rapidpro=dict(name='RapidPro'), floip=dict(name='Floip'))):
-                Poll.objects.filter(org=poll.org, backend='rapidpro').update(flow_uuid='uuid-25')
+                Poll.objects.filter(org=poll.org, backend__slug='rapidpro').update(flow_uuid='uuid-25')
 
                 response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
                 self.assertEqual(response.status_code, 200)
@@ -791,10 +790,10 @@ class PollTest(UreportTest):
                 self.assertFalse('backend' in response.context['form'].fields)
 
                 # add the config for a second backend
-                self.uganda.backends.create(slug='floip', api_token='floip_token',
-                                            backend_type='ureport.backend.rapidpro.RapidProBackend',
-                                            host='http://localhost:8001', created_by=self.admin,
-                                            modified_by=self.admin)
+                floip_backend = self.uganda.backends.create(
+                    slug='floip', api_token='floip_token', backend_type='ureport.backend.rapidpro.RapidProBackend',
+                    host='http://localhost:8001', created_by=self.admin,
+                    modified_by=self.admin)
 
                 response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
                 self.assertEqual(response.status_code, 200)
@@ -812,9 +811,11 @@ class PollTest(UreportTest):
                 self.assertTrue('loc' in response.context['form'].fields)
 
                 self.assertTrue('backend' in response.context['form'].fields)
-                self.assertEqual(len(response.context['form'].fields['backend'].choices), 2)
-                self.assertEqual(set(response.context['form'].fields['backend'].choices),
-                                 set([('rapidpro', 'rapidpro'), ('floip', 'floip')]))
+                self.assertEquals(len(response.context['form'].fields['backend'].choices), 3)
+                self.assertEquals(set(response.context['form'].fields['backend'].choices),
+                                  set([('', '---------'),
+                                       (poll.backend.pk, 'rapidpro'),
+                                       (floip_backend.pk, 'floip')]))
 
     @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_poll_poll_flow_view(self):
@@ -1221,8 +1222,8 @@ class PollTest(UreportTest):
             mock.return_value = 'Done'
 
             self.assertIsNone(config(None, 'field_name'))
-            self.assertEqual(config(self.uganda, 'field_name'), 'Done')
-            mock.assert_called_with('field_name', top_key="common")
+            self.assertEquals(config(self.uganda, 'field_name'), 'Done')
+            mock.assert_called_with('field_name')
 
         self.assertIsNone(org_color(None, 1))
         self.assertEqual(org_color(self.uganda, 0), '#FFD100')
@@ -1230,21 +1231,21 @@ class PollTest(UreportTest):
         self.assertEqual(org_color(self.uganda, 2), '#FFD100')
         self.assertEqual(org_color(self.uganda, 3), '#1F49BF')
 
-        self.uganda.set_config('primary_color', '#aaaaaa')
+        self.uganda.set_config('common.primary_color', '#aaaaaa')
 
         self.assertEqual(org_color(self.uganda, 0), '#FFD100')
         self.assertEqual(org_color(self.uganda, 1), '#1F49BF')
         self.assertEqual(org_color(self.uganda, 2), '#FFD100')
         self.assertEqual(org_color(self.uganda, 3), '#1F49BF')
 
-        self.uganda.set_config('secondary_color', '#bbbbbb')
+        self.uganda.set_config('common.secondary_color', '#bbbbbb')
 
         self.assertEqual(org_color(self.uganda, 0), '#aaaaaa')
         self.assertEqual(org_color(self.uganda, 1), '#bbbbbb')
         self.assertEqual(org_color(self.uganda, 2), '#aaaaaa')
         self.assertEqual(org_color(self.uganda, 3), '#bbbbbb')
 
-        self.uganda.set_config('colors', '#cccccc, #dddddd, #eeeeee, #111111, #222222, #333333, #444444')
+        self.uganda.set_config('common.colors', '#cccccc, #dddddd, #eeeeee, #111111, #222222, #333333, #444444')
 
         self.assertEqual(org_color(self.uganda, 0), '#cccccc')
         self.assertEqual(org_color(self.uganda, 1), '#dddddd')
@@ -1387,7 +1388,7 @@ class PollTest(UreportTest):
     @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
     def test_poll_pull_results(self, mock_pull_results, mock_get_backend):
-        mock_get_backend.return_value = TestBackend()
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
@@ -1918,7 +1919,7 @@ class PollsTasksTest(UreportTest):
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_main_poll')
     def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results, mock_get_backend):
-        mock_get_backend.return_value = TestBackend()
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_get_main_poll.return_value = self.poll
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
@@ -1933,7 +1934,7 @@ class PollsTasksTest(UreportTest):
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_brick_polls_ids')
     def test_pull_results_brick_polls(self, mock_get_brick_polls_ids, mock_pull_results, mock_get_backend):
-        mock_get_backend.return_value = TestBackend()
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_get_brick_polls_ids.return_value = [poll.pk for poll in self.polls_query]
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
@@ -1960,10 +1961,13 @@ class PollsTasksTest(UreportTest):
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_other_polls')
     def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results, mock_cache_get, mock_get_backend):
-        mock_get_backend.return_value = TestBackend()
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_get_other_polls.return_value = self.polls_query
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
         mock_cache_get.return_value = None
+
+        self.poll.created_on = timezone.now() - timedelta(days=8)
+        self.poll.save()
 
         pull_results_other_polls(self.nigeria.pk)
 
@@ -1986,7 +1990,7 @@ class PollsTasksTest(UreportTest):
     @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
     def test_backfill_poll_results(self, mock_pull_results, mock_get_backend):
-        mock_get_backend.return_value = TestBackend()
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         self.poll.has_synced = True

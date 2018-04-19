@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import json
 from collections import defaultdict
 
+import uuid
 import logging
 import pytz
 import six
@@ -16,7 +17,7 @@ from django.utils import timezone
 from smartmin.models import SmartModel
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
-from dash.orgs.models import Org
+from dash.orgs.models import Org, OrgBackend
 from dash.categories.models import Category, CategoryImage
 from django.conf import settings
 from stop_words import safe_get_stop_words
@@ -43,7 +44,7 @@ UREPORT_RUN_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_RUN_FETCHED_DAT
 
 CACHE_POLL_RESULTS_KEY = 'org:%d:poll:%d:results:%d'
 
-CACHE_ORG_FLOWS_KEY = "org:%d:flows"
+CACHE_ORG_FLOWS_KEY = "org:%d:backend:%s:flows"
 
 CACHE_ORG_REPORTER_GROUP_KEY = "org:%d:reporters:%s"
 
@@ -138,7 +139,7 @@ class Poll(SmartModel):
     org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
 
-    backend = models.CharField(max_length=16, default='rapidpro')
+    backend = models.ForeignKey(OrgBackend, null=True)
 
     def get_sync_progress(self):
         if not self.runs_count:
@@ -155,7 +156,7 @@ class Poll(SmartModel):
     @classmethod
     def pull_results(cls, poll_id):
         poll = Poll.objects.get(pk=poll_id)
-        backend = poll.org.get_backend(backend_slug=poll.backend)
+        backend = poll.org.get_backend(backend_slug=poll.backend.slug)
 
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
@@ -363,8 +364,12 @@ class Poll(SmartModel):
     def get_recent_polls(cls, org):
         now = timezone.now()
         recent_window = now - timedelta(days=7)
+        main_poll = Poll.get_main_poll(org)
 
-        recent_other_polls = Poll.get_public_polls(org).exclude(created_on__lte=recent_window).order_by('-created_on')
+        recent_other_polls = Poll.get_public_polls(org)
+        if main_poll:
+            recent_other_polls = recent_other_polls.exclude(pk=main_poll.pk)
+        recent_other_polls = recent_other_polls.exclude(created_on__lte=recent_window).order_by('-created_on')
 
         return recent_other_polls
 
@@ -372,7 +377,7 @@ class Poll(SmartModel):
         """
         Returns the underlying flow for this poll
         """
-        flows_dict = self.org.get_flows(backend_slug=self.backend)
+        flows_dict = self.org.get_flows(backend=self.backend)
         return flows_dict.get(self.flow_uuid, None)
 
     def update_or_create_questions(self, user=None):
@@ -380,38 +385,9 @@ class Poll(SmartModel):
             user = User.objects.get(pk=-1)
 
         org = self.org
-        backend = org.get_backend(backend_slug=self.backend)
+        backend = org.get_backend(backend_slug=self.backend.slug)
 
-        flow_definition = backend.get_definition(org, self.flow_uuid)
-
-        if flow_definition is None:
-            return
-
-        base_language = flow_definition['base_language']
-
-        self.base_language = base_language
-        self.save()
-
-        flow_rulesets = flow_definition['rule_sets']
-
-        for ruleset in flow_rulesets:
-            label = ruleset['label']
-            ruleset_uuid = ruleset['uuid']
-            ruleset_type = ruleset['ruleset_type']
-
-            question = PollQuestion.update_or_create(user, self, label, ruleset_uuid, ruleset_type)
-
-            rapidpro_rules = []
-            for rule in ruleset['rules']:
-                category = rule['category'][base_language]
-                rule_uuid = rule['uuid']
-                rapidpro_rules.append(rule_uuid)
-
-                PollResponseCategory.update_or_create(question, rule_uuid, category)
-
-            # deactivate if corresponding rules are removed
-            PollResponseCategory.objects.filter(
-                question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
+        backend.update_poll_questions(org, self, user)
 
     def most_responded_regions(self):
         # get our first question
@@ -975,7 +951,13 @@ class PollResponseCategory(models.Model):
 
     @classmethod
     def update_or_create(cls, question, rule_uuid, category):
-        existing = cls.objects.filter(question=question, rule_uuid=rule_uuid)
+        existing = cls.objects.filter(question=question)
+        if rule_uuid is not None:
+            existing = existing.filter(rule_uuid=rule_uuid)
+        else:
+            existing = existing.filter(category=category)
+            rule_uuid = uuid.uuid4()
+
         if existing:
             existing.update(category=category, is_active=True)
         else:

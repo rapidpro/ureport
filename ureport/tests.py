@@ -2,14 +2,17 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import pytz
+import json
 from django.conf import settings
 from django.urls import reverse
 from django.test import override_settings
 from django.utils import timezone
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User
+from django.utils.encoding import force_text
 from dash.orgs.middleware import SetOrgMiddleware
 from dash.test import DashTest
+from dash.utils import random_string
 from mock import Mock, patch
 from dash.orgs.models import Org
 from django.http.request import HttpRequest
@@ -75,6 +78,20 @@ class TestBackend(RapidProBackend):
     pass
 
 
+class MockResponse(object):
+
+    def __init__(self, status_code, content=''):
+        self.content = content
+        self.status_code = status_code
+
+    def raise_for_status(self):
+        if self.status_code != 200:
+            raise Exception("Server returned %s" % force_text(self.status_code))
+
+    def json(self, **kwargs):
+        return json.loads(self.content)
+
+
 @override_settings(SITE_BACKEND='ureport.tests.TestBackend')
 class UreportTest(SmartminTest, DashTest):
 
@@ -85,6 +102,23 @@ class UreportTest(SmartminTest, DashTest):
         self.anon = self.create_user("Anon")
         self.uganda = self.create_org('uganda', pytz.timezone('Africa/Kampala'), self.admin)
         self.nigeria = self.create_org('nigeria', pytz.timezone('Africa/Lagos'), self.admin)
+
+        rapidpro_backend = self.nigeria.backends.filter(slug='rapidpro').first()
+        if not rapidpro_backend:
+            rapidpro_backend, created = self.nigeria.backends.get_or_create(api_token=random_string(32),
+                                                                            slug='rapidpro',
+                                                                            created_by=self.admin,
+                                                                            modified_by=self.admin)
+        self.rapidpro_backend = rapidpro_backend
+
+        floip_backend = self.nigeria.backends.filter(slug='floip').first()
+        if not floip_backend:
+            floip_backend, created = self.nigeria.backends.get_or_create(api_token=random_string(32),
+                                                                         slug='floip',
+                                                                         created_by=self.admin,
+                                                                         modified_by=self.admin)
+
+        self.floip_backend = floip_backend
 
     def create_org(self, subdomain, timezone, user):
 
@@ -116,11 +150,13 @@ class UreportTest(SmartminTest, DashTest):
 
     def create_poll(self, org, title, flow_uuid, category, user, featured=False, has_synced=False):
         now = timezone.now()
+        backend = org.backends.filter(slug='rapidpro', is_active=True).first()
         poll = Poll.objects.create(flow_uuid=flow_uuid,
                                    title=title,
                                    category=category,
                                    is_featured=featured,
                                    has_synced=has_synced,
+                                   backend=backend,
                                    org=org,
                                    poll_date=now,
                                    created_by=user,

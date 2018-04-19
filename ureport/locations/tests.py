@@ -35,7 +35,7 @@ class LocationTest(UreportTest):
 
         self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), expected)
 
-        self.nigeria.set_config('is_global', True)
+        self.nigeria.set_config('common.is_global', True)
 
         expected = dict()
         expected['R-NIGERIA'] = "Nigeria"

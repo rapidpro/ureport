@@ -7,8 +7,11 @@ import time
 
 from temba_client.exceptions import TembaRateExceededError
 
+from datetime import timedelta
+
 from dash.orgs.models import Org
 from django.core.cache import cache
+from django.utils import timezone
 from django_redis import get_redis_connection
 from ureport.celery import app
 
@@ -93,8 +96,12 @@ def pull_results_brick_polls(org, since, until):
 def pull_results_other_polls(org, since, until):
     from .models import Poll
 
+    now = timezone.now()
+    recent_window = now - timedelta(days=7)
+
     results_log = dict()
-    other_polls_ids = Poll.get_other_polls(org).order_by('flow_uuid').distinct('flow_uuid').values_list('id', flat=True)
+    other_polls_ids = Poll.get_other_polls(org).exclude(created_on__gt=recent_window)
+    other_polls_ids = other_polls_ids.order_by('flow_uuid').distinct('flow_uuid').values_list('id', flat=True)
     other_polls = Poll.objects.filter(id__in=other_polls_ids).order_by('-created_on')
     for poll in other_polls:
 

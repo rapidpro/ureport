@@ -159,6 +159,7 @@ DATA_API_BACKENDS_CONFIG = {
 
 DATA_API_BACKEND_TYPES = (
     ('ureport.backend.rapidpro.RapidProBackend', "RapidPro Backend Type"),
+    ('ureport.backend.floip.FLOIPBackend', "FLOIP Backend Type"),
 )
 
 
