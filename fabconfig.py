@@ -16,6 +16,8 @@ config = dict(
     sqldump=False,
     celery=True,
     processes=('celery', 'sync'),
+    python_cmd='python3.6',
+
     error_file='config/error.html',
     error_logo='config/logo.png',
 
