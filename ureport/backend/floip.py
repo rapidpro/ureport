@@ -280,6 +280,10 @@ class FLOIPBackend(BaseBackend):
             question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
 
             choices = val.get('type_options', dict()).get('choices', [])
+            if choices == []:
+                # create an ignored category for open ended questions
+                PollResponseCategory.update_or_create(question, None, "other")
+
             for category in choices:
                 PollResponseCategory.update_or_create(question, None, category)
 
