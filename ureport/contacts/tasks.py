@@ -1,57 +1,74 @@
 from __future__ import unicode_literals
 
 import time
+from django.core.cache import cache
+from django.utils import timezone
 from dash.orgs.tasks import org_task
 from celery.utils.log import get_task_logger
+
+from ureport.utils import datetime_to_json_date
+from ureport.contacts.models import Contact
 
 logger = get_task_logger(__name__)
 
 
 @org_task('contact-pull', 60 * 60 * 3)
-def pull_contacts(org, since, until):
+def pull_contacts(org, ignored_since, ignored_until):
     """
     Fetches updated contacts from RapidPro and updates local contacts accordingly
     """
-    from ureport.backend import get_backend
     from ureport.contacts.models import ReportersCounter
-    backend = get_backend()
+    results = dict()
 
-    if not since:
-        logger.warn("First time run for org #%d. Will sync all contacts" % org.pk)
+    backends = org.backends.filter(is_active=True)
+    for backend_obj in backends:
+        backend = org.get_backend(backend_slug=backend_obj.slug)
 
-    start = time.time()
+        last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.pk, backend_obj.slug)
 
-    fields_created, fields_updated, fields_deleted, ignored = backend.pull_fields(org)
+        until = datetime_to_json_date(timezone.now())
+        since = cache.get(last_fetch_date_key, None)
 
-    logger.warn("Fetched contact fields for org #%d. "
-                "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, fields_created, fields_updated,
-                                                                    fields_deleted, ignored))
-    logger.warn("Fetch fields for org #%d took %ss" % (org.pk, time.time() - start))
+        if not since:
+            logger.warn("First time run for org #%d. Will sync all contacts" % org.pk)
 
-    start_boundaries = time.time()
+        start = time.time()
 
-    boundaries_created, boundaries_updated, boundaries_deleted, ignored = backend.pull_boundaries(org)
+        fields_created, fields_updated, fields_deleted, ignored = backend.pull_fields(org)
 
-    logger.warn("Fetched boundaries for org #%d. "
-                "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, boundaries_created, boundaries_updated,
-                                                                    boundaries_deleted, ignored))
+        logger.warn("Fetched contact fields for org #%d. "
+                    "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, fields_created, fields_updated,
+                                                                        fields_deleted, ignored))
+        logger.warn("Fetch fields for org #%d took %ss" % (org.pk, time.time() - start))
 
-    logger.warn("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
-    start_contacts = time.time()
+        start_boundaries = time.time()
 
-    contacts_created, contacts_updated, contacts_deleted, ignored = backend.pull_contacts(org, since, until)
+        boundaries_created, boundaries_updated, boundaries_deleted, ignored = backend.pull_boundaries(org)
 
-    logger.warn("Fetched contacts for org #%d. "
-                "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, contacts_created, contacts_updated,
-                                                                    contacts_deleted, ignored))
+        logger.warn("Fetched boundaries for org #%d. "
+                    "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, boundaries_created, boundaries_updated,
+                                                                        boundaries_deleted, ignored))
 
-    logger.warn("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
+        logger.warn("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
+        start_contacts = time.time()
 
-    # Squash reporters counts
-    ReportersCounter.squash_counts()
+        contacts_created, contacts_updated, contacts_deleted, ignored = backend.pull_contacts(org, since, until)
 
-    return {
-        'fields': {'created': fields_created, 'updated': fields_updated, 'deleted': fields_deleted},
-        'boundaries': {'created': boundaries_created, 'updated': boundaries_updated, 'deleted': boundaries_deleted},
-        'contacts': {'created': contacts_created, 'updated': contacts_updated, 'deleted': contacts_deleted}
-    }
+        cache.set(last_fetch_date_key, until, None)
+
+        logger.warn("Fetched contacts for org #%d. "
+                    "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, contacts_created, contacts_updated,
+                                                                        contacts_deleted, ignored))
+
+        logger.warn("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
+
+        # Squash reporters counts
+        ReportersCounter.squash_counts()
+
+        results[backend_obj.slug] = {
+            'fields': {'created': fields_created, 'updated': fields_updated, 'deleted': fields_deleted},
+            'boundaries': {'created': boundaries_created, 'updated': boundaries_updated, 'deleted': boundaries_deleted},
+            'contacts': {'created': contacts_created, 'updated': contacts_updated, 'deleted': contacts_deleted}
+        }
+
+    return results

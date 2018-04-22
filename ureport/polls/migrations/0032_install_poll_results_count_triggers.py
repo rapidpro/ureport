@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations
 
 
 # language=SQL
@@ -107,7 +107,6 @@ CREATE TRIGGER ureport_when_poll_results_truncate_then_update_results_counters
   AFTER TRUNCATE ON polls_pollresult
   EXECUTE PROCEDURE ureport_update_results_counters();
 """
-
 
 
 class Migration(migrations.Migration):

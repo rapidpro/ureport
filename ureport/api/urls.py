@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.views.generic import RedirectView
 from ureport.api.views import PollList, PollDetails, FeaturedPollList, NewsItemList, NewsItemDetails, VideoList
 from ureport.api.views import VideoDetails, ImageList, ImageDetails, OrgList, OrgDetails, StoryList, StoryDetails
@@ -9,7 +9,7 @@ schema_view = get_swagger_view(title='API')
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(pattern_name='api.v1.docs', permanent=False), name='api.v1'),
-    url(r'^docs/',  schema_view, name="api.v1.docs"),
+    url(r'^docs/', schema_view, name="api.v1.docs"),
 
     url(r'^orgs/$', OrgList.as_view(), name="api.v1.org_list"),
     url(r'^orgs/(?P<pk>[\w]+)/$', OrgDetails.as_view(), name="api.v1.org_details"),

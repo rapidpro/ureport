@@ -1,17 +1,11 @@
 import time
-from dash.orgs.models import Org
-from django.core.cache import cache
-from django.db import models, DataError, connection
+from dash.orgs.models import Org, OrgBackend
+from django.db import models, connection
 from django.db.models import Sum, Count
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from django_redis import get_redis_connection
 
-# Create your models here.
-import pytz
-from ureport.locations.models import Boundary
-from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 CONTACT_LOCK_KEY = 'lock:contact:%d:%s'
 CONTACT_FIELD_LOCK_KEY = 'lock:contact-field:%d:%s'
@@ -41,6 +35,8 @@ class ContactField(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    backend = models.ForeignKey(OrgBackend, null=True)
+
     org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="contactfields")
 
     label = models.CharField(verbose_name=_("Label"), max_length=36)
@@ -62,7 +58,7 @@ class Contact(models.Model):
     Corresponds to a RapidPro contact
     """
 
-    CONTACT_LAST_FETCHED_CACHE_KEY = 'last:fetch_contacts:%d'
+    CONTACT_LAST_FETCHED_CACHE_KEY = 'last:fetch_contacts:%d:backend:%s'
     CONTACT_LAST_FETCHED_CACHE_TIMEOUT = 60 * 60 * 24 * 30
 
     MALE = 'M'
@@ -70,6 +66,8 @@ class Contact(models.Model):
     GENDER_CHOICES = ((MALE, _("Male")), (FEMALE, _("Female")))
 
     is_active = models.BooleanField(default=True)
+
+    backend = models.ForeignKey(OrgBackend, null=True)
 
     uuid = models.CharField(max_length=36, unique=True)
 

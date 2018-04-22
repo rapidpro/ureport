@@ -34,7 +34,6 @@ class NewsTest(UreportTest):
         self.uganda_news1.description = "a b" * 120
         self.assertTrue(self.uganda_news1.short_description(), "a b" * 100 + "...")
 
-
         self.assertEquals(self.uganda_news1.as_brick_json(), dict(title='uganda news 1',
                                                                   description='a b' * 100 + '...',
                                                                   link='http://uganda.ug',
@@ -159,7 +158,6 @@ class NewsTest(UreportTest):
         uganda_update_url = reverse('news.newsitem_update', args=[self.uganda_news1.pk])
         nigeria_update_url = reverse('news.newsitem_update', args=[self.nigeria_news1.pk])
 
-
         response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)
 
@@ -196,8 +194,9 @@ class NewsTest(UreportTest):
         updated_news = NewsItem.objects.get(pk=self.uganda_news1.pk)
         self.assertFalse(updated_news.is_active)
         self.assertEquals(updated_news.title, 'title updated')
-        self.assertEquals(updated_news.description,  'description updated')
-        self.assertEquals(updated_news.link,  'http://updated.com')
+        self.assertEquals(updated_news.description, 'description updated')
+        self.assertEquals(updated_news.link, 'http://updated.com')
+
 
 class VideoTest(UreportTest):
     def setUp(self):
@@ -333,7 +332,6 @@ class VideoTest(UreportTest):
 
         uganda_update_url = reverse('news.video_update', args=[self.uganda_video.pk])
         nigeria_update_url = reverse('news.video_update', args=[self.nigeria_video.pk])
-
 
         response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
         self.assertLoginRedirect(response)

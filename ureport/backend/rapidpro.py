@@ -17,7 +17,7 @@ from django_redis import get_redis_connection
 
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll, PollResultsCounter
+from ureport.polls.models import PollResult, Poll
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from . import BaseBackend
 
@@ -29,16 +29,20 @@ class FieldSyncer(BaseSyncer):
     model = ContactField
     local_id_attr = 'key'
     remote_id_attr = 'key'
+    prefetch_related = ('backend', )
 
     def local_kwargs(self, org, remote):
         return {
+            'backend': self.backend,
             'org': org,
             'key': remote.key,
             'label': remote.label,
             'value_type': self.model.TEMBA_TYPES.get(remote.value_type, self.model.TYPE_TEXT)
         }
 
-    def update_required(self, local, remote, local_kwags):
+    def update_required(self, local, remote, local_kwargs):
+        if local_kwargs and local_kwargs['backend'] != local.backend:
+            return False
         return local.label != remote.label or local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)
 
     def delete_local(self, local):
@@ -52,6 +56,7 @@ class BoundarySyncer(BaseSyncer):
     model = Boundary
     local_id_attr = 'osm_id'
     remote_id_attr = 'osm_id'
+    prefetch_related = ('backend', )
 
     def local_kwargs(self, org, remote):
         geometry = json.dumps(dict())
@@ -63,6 +68,7 @@ class BoundarySyncer(BaseSyncer):
             parent = Boundary.objects.filter(osm_id__iexact=remote.parent.osm_id, org=org).first()
 
         return {
+            'backend': self.backend,
             'org': org,
             'geometry': geometry,
             'parent': parent,
@@ -72,6 +78,9 @@ class BoundarySyncer(BaseSyncer):
         }
 
     def update_required(self, local, remote, local_kwargs):
+        if local_kwargs and local_kwargs['backend'] != local.backend:
+            return False
+
         if local.name != remote.name:
             return True
 
@@ -94,50 +103,9 @@ class BoundarySyncer(BaseSyncer):
         local.release()
 
 
-class BoundarySyncerv1(BaseSyncer):
-    """
-    syncer for location boundaries from API v1
-    """
-    model = Boundary
-    local_id_attr = 'osm_id'
-    remote_id_attr = 'boundary'
-
-    def local_kwargs(self, org, remote):
-        geometry = json.dumps(dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
-
-        parent = Boundary.objects.filter(osm_id__iexact=remote.parent, org=org).first()
-
-        return {
-            'org': org,
-            'geometry': geometry,
-            'parent': parent,
-            'level': remote.level,
-            'name': remote.name,
-            'osm_id': remote.boundary
-        }
-
-    def update_required(self, local, remote, local_kwargs):
-        if local.name != remote.name:
-            return True
-
-        if local.level != remote.level:
-            return True
-
-        if remote.parent:
-            if not local.parent:
-                return True
-            elif local.parent.osm_id != remote.parent:
-                return True
-
-        return not is_dict_equal(json.loads(local.geometry),
-                                 dict(type=remote.geometry.type, coordinates=remote.geometry.coordinates))
-
-    def delete_local(self, local):
-        local.release()
-
-
 class ContactSyncer(BaseSyncer):
     model = Contact
+    prefetch_related = ('backend', )
 
     def get_boundaries_data(self, org):
 
@@ -148,15 +116,15 @@ class ContactSyncer(BaseSyncer):
         org_state_boundaries_data = dict()
         org_district_boundaries_data = dict()
         org_ward_boundaries_data = dict()
-        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL)
+        state_boundaries = Boundary.objects.filter(org=org, level=Boundary.STATE_LEVEL, backend=self.backend)
         for state in state_boundaries:
             org_state_boundaries_data[state.name.lower()] = state.osm_id
             state_district_data = dict()
-            district_boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, parent=state)
+            district_boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, parent=state, backend=self.backend)
             for district in district_boundaries:
                 state_district_data[district.name.lower()] = district.osm_id
                 district_ward_data = dict()
-                ward_boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent=district)
+                ward_boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent=district, backend=self.backend)
                 for ward in ward_boundaries:
                     district_ward_data[ward.name.lower()] = ward.osm_id
                 org_ward_boundaries_data[district.osm_id] = district_ward_data
@@ -170,7 +138,7 @@ class ContactSyncer(BaseSyncer):
         cache_attr = '__contact_fields__%d' % org.pk
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
-        contact_fields = ContactField.objects.filter(org=org)
+        contact_fields = ContactField.objects.filter(org=org, backend=self.backend)
         contact_fields_data = {elt.label.lower(): elt.key for elt in contact_fields}
 
         setattr(self, cache_attr, contact_fields_data)
@@ -179,7 +147,7 @@ class ContactSyncer(BaseSyncer):
     def local_kwargs(self, org, remote):
         from ureport.utils import json_date_to_datetime
 
-        reporter_group = org.get_config('reporter_group')
+        reporter_group = org.get_config('%s.reporter_group' % self.backend.slug, default='')
         contact_groups_names = [group.name.lower() for group in remote.groups]
 
         if not reporter_group.lower() in contact_groups_names:
@@ -192,10 +160,10 @@ class ContactSyncer(BaseSyncer):
         district = ''
         ward = ''
 
-        state_field = org.get_config('state_label')
+        state_field = org.get_config('%s.state_label' % self.backend.slug, default='')
         if state_field:
             state_field = state_field.lower()
-            if org.get_config('is_global'):
+            if org.get_config('common.is_global'):
                 state_name = remote.fields.get(contact_fields.get(state_field), None)
                 if state_name:
                     state = state_name
@@ -207,7 +175,7 @@ class ContactSyncer(BaseSyncer):
                     state_name = state_name.lower()
                     state = org_state_boundaries_data.get(state_name, '')
 
-                district_field = org.get_config('district_label')
+                district_field = org.get_config('%s.district_label' % self.backend.slug, default='')
                 if district_field:
                     district_field = district_field.lower()
                     district_path = remote.fields.get(contact_fields.get(district_field), None)
@@ -216,7 +184,7 @@ class ContactSyncer(BaseSyncer):
                         district_name = district_name.lower()
                         district = org_district_boundaries_data.get(state, dict()).get(district_name, '')
 
-                ward_field = org.get_config('ward_label')
+                ward_field = org.get_config('%s.ward_label' % self.backend.slug, default='')
                 if ward_field:
                     ward_field = ward_field.lower()
                     ward_path = remote.fields.get(contact_fields.get(ward_field), None)
@@ -226,7 +194,7 @@ class ContactSyncer(BaseSyncer):
                         ward = org_ward_boundaries_data.get(district, dict()).get(ward_name, '')
 
         registered_on = None
-        registration_field = org.get_config('registration_label')
+        registration_field = org.get_config('%s.registration_label' % self.backend.slug, default='')
         if registration_field:
             registration_field = registration_field.lower()
             registered_on = remote.fields.get(contact_fields.get(registration_field), None)
@@ -234,7 +202,7 @@ class ContactSyncer(BaseSyncer):
                 registered_on = json_date_to_datetime(registered_on)
 
         occupation = ''
-        occupation_field = org.get_config('occupation_label')
+        occupation_field = org.get_config('%s.occupation_label' % self.backend.slug, default='')
         if occupation_field:
             occupation_field = occupation_field.lower()
             occupation = remote.fields.get(contact_fields.get(occupation_field), '')
@@ -242,7 +210,7 @@ class ContactSyncer(BaseSyncer):
                 occupation = ''
 
         born = 0
-        born_field = org.get_config('born_label')
+        born_field = org.get_config('%s.born_label' % self.backend.slug, default='')
         if born_field:
             born_field = born_field.lower()
             try:
@@ -258,9 +226,9 @@ class ContactSyncer(BaseSyncer):
                 pass
 
         gender = ''
-        gender_field = org.get_config('gender_label')
-        female_label = org.get_config('female_label')
-        male_label = org.get_config('male_label')
+        gender_field = org.get_config('%s.gender_label' % self.backend.slug, default='')
+        female_label = org.get_config('%s.female_label' % self.backend.slug, default='')
+        male_label = org.get_config('%s.male_label' % self.backend.slug, default='')
 
         if gender_field:
             gender_field = gender_field.lower()
@@ -274,6 +242,7 @@ class ContactSyncer(BaseSyncer):
                 gender = ''
 
         return {
+            'backend': self.backend,
             'org': org,
             'uuid': remote.uuid,
             'gender': gender,
@@ -286,6 +255,9 @@ class ContactSyncer(BaseSyncer):
         }
 
     def update_required(self, local, remote, local_kwargs):
+        if local_kwargs and local_kwargs['backend'] != local.backend:
+            return False
+
         if not local_kwargs:
             return True
 
@@ -306,21 +278,53 @@ class RapidProBackend(BaseBackend):
     def _get_client(org, api_version):
         return org.get_temba_client(api_version=api_version)
 
+    def fetch_flows(self, org):
+        client = self._get_client(org, 2)
+        flows = client.get_flows().all()
+
+        all_flows = dict()
+        for flow in flows:
+            flow_json = dict()
+            flow_json['uuid'] = flow.uuid
+            flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
+            flow_json['created_on'] = datetime_to_json_date(flow.created_on)
+            flow_json['name'] = flow.name
+            flow_json['archived'] = flow.archived
+            flow_json['runs'] = flow.runs.active + flow.runs.expired + flow.runs.completed + flow.runs.interrupted
+            flow_json['completed_runs'] = flow.runs.completed
+
+            all_flows[flow.uuid] = flow_json
+        return all_flows
+
+    def get_definition(self, org, flow_uuid):
+        client = self._get_client(org, 2)
+        export_definition = client.get_definitions(flows=(flow_uuid, ))
+
+        flow_definition = None
+
+        for flow_def in export_definition.flows:
+            def_flow_uuid = flow_def.get('metadata', dict()).get('uuid', None)
+
+            if def_flow_uuid and def_flow_uuid == flow_uuid:
+                flow_definition = flow_def
+                break
+        return flow_definition
+
     def pull_fields(self, org):
         client = self._get_client(org, 2)
         incoming_objects = client.get_fields().all(retry_on_rate_exceed=True)
 
-        return sync_local_to_set(org, FieldSyncer(), incoming_objects)
+        return sync_local_to_set(org, FieldSyncer(backend=self.backend), incoming_objects)
 
     def pull_boundaries(self, org):
 
-        if org.get_config('is_global'):
+        if org.get_config('common.is_global'):
             incoming_objects = Boundary.build_global_boundaries()
         else:
-            client = self._get_client(org, 1)
-            incoming_objects = client.get_boundaries()
+            client = self._get_client(org, 2)
+            incoming_objects = client.get_boundaries(geometry=True).all()
 
-        return sync_local_to_set(org, BoundarySyncerv1(), incoming_objects)
+        return sync_local_to_set(org, BoundarySyncer(backend=self.backend), incoming_objects)
 
     def pull_contacts(self, org, modified_after, modified_before, progress_callback=None):
         client = self._get_client(org, 2)
@@ -333,7 +337,7 @@ class RapidProBackend(BaseBackend):
         deleted_query = client.get_contacts(deleted=True, after=modified_after, before=modified_before)
         deleted_fetches = deleted_query.iterfetches(retry_on_rate_exceed=True)
 
-        return sync_local_to_changes(org, ContactSyncer(), fetches, deleted_fetches, progress_callback)
+        return sync_local_to_changes(org, ContactSyncer(backend=self.backend), fetches, deleted_fetches, progress_callback)
 
     def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
         org = poll.org
@@ -526,8 +530,8 @@ class RapidProBackend(BaseBackend):
             if existing_poll_result is not None:
 
                 update_required = self._check_update_required(existing_poll_result, category, text, state,
-                                                                         district, ward, born, gender, completed,
-                                                                         value_date)
+                                                              district, ward, born, gender, completed,
+                                                              value_date)
 
                 if update_required:
                     # update the db object
@@ -557,8 +561,8 @@ class RapidProBackend(BaseBackend):
             elif poll_result_to_save is not None:
 
                 replace_save_map = self._check_update_required(poll_result_to_save, category, text, state,
-                                                                          district, ward, born, gender, completed,
-                                                                          value_date)
+                                                               district, ward, born, gender, completed,
+                                                               value_date)
 
                 if replace_save_map:
                     result_obj = PollResult(org=org, flow=flow_uuid, ruleset=ruleset_uuid,

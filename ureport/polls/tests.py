@@ -22,12 +22,11 @@ from smartmin.csv_imports.models import ImportTask
 from dash.orgs.models import TaskState
 from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
 from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
-from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts, \
-    pull_results_recent_polls
+from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts
 from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
 from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender, update_or_create_questions
 from ureport.polls.templatetags.ureport import question_segmented_results
-from ureport.tests import UreportTest, MockTembaClient
+from ureport.tests import UreportTest, MockTembaClient, TestBackend
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 
 
@@ -219,7 +218,7 @@ class PollTest(UreportTest):
         csv_file = open('%s/test_imports/polls.csv' % settings.MEDIA_ROOT, 'rb')
         post_data = dict(csv_file=csv_file)
 
-        response = self.client.post(import_url, post_data, follow=True,  SERVER_NAME='uganda.ureport.io')
+        response = self.client.post(import_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
         self.assertEqual(200, response.status_code)
 
         task = ImportTask.objects.get()
@@ -299,10 +298,10 @@ class PollTest(UreportTest):
 
     def test_get_public_polls(self):
 
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
+        self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
-        poll3 = self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin, has_synced=True)
+        self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin, has_synced=True)
 
         self.assertTrue(Poll.get_public_polls(self.uganda))
         self.assertEqual(Poll.get_public_polls(self.uganda).count(), 1)
@@ -332,33 +331,24 @@ class PollTest(UreportTest):
         self.assertIsNone(Poll.get_main_poll(self.uganda))
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid='uuid-101',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid='uuid-101',
+                                    created_by=self.admin, modified_by=self.admin)
 
         self.assertEquals(Poll.get_main_poll(self.uganda), poll1)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
-        poll2_question = PollQuestion.objects.create(poll=poll2,
-                                                     title='question poll 2',
-                                                     ruleset_uuid='uuid-202',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll2, title='question poll 2', ruleset_uuid='uuid-202',
+                                    created_by=self.admin, modified_by=self.admin)
 
         self.assertEquals(Poll.get_main_poll(self.uganda), poll2)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
-        poll3_question = PollQuestion.objects.create(poll=poll3,
-                                                     title='question poll 3',
-                                                     ruleset_uuid='uuid-303',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll3, title='question poll 3', ruleset_uuid='uuid-303',
+                                    created_by=self.admin, modified_by=self.admin)
 
         self.assertEquals(Poll.get_main_poll(self.uganda), poll3)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
@@ -384,98 +374,89 @@ class PollTest(UreportTest):
     @patch('django.core.cache.cache.get')
     def test_brick_polls(self, mock_cache_get):
         mock_cache_get.return_value = None
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True, has_synced=True)
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid='uuid-101',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid='uuid-101',
+                                    created_by=self.admin, modified_by=self.admin)
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
-        poll2_question = PollQuestion.objects.create(poll=poll2,
-                                                     title='question poll 2',
-                                                     ruleset_uuid='uuid-202',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll2, title='question poll 2', ruleset_uuid='uuid-202',
+                                    created_by=self.admin, modified_by=self.admin)
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll2.is_active = False
         poll2.save()
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll2.is_active = True
         poll2.save()
         self.health_uganda.is_active = False
         self.health_uganda.save()
 
-        self.assertFalse(Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         self.health_uganda.is_active = True
         self.health_uganda.save()
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll3 not in Poll.get_brick_polls(self.uganda))
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll3.pk not in Poll.get_brick_polls_ids(self.uganda))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
-        poll3_question = PollQuestion.objects.create(poll=poll3,
-                                                     title='question poll 3',
-                                                     ruleset_uuid='uuid-303',
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll3, title='question poll 3', ruleset_uuid='uuid-303',
+                                    created_by=self.admin, modified_by=self.admin)
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll3 in Poll.get_brick_polls(self.uganda))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll3.pk in Poll.get_brick_polls_ids(self.uganda))
 
         with patch('ureport.polls.models.Poll.get_first_question') as mock_first_question:
             mock_first_question.return_value = None
 
-            self.assertFalse(Poll.get_brick_polls(self.uganda))
+            self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
 
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll3.is_featured = True
         poll3.save()
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll1 in Poll.get_brick_polls(self.uganda))
-        self.assertEquals(Poll.get_brick_polls(self.uganda)[0], poll1)
-        self.assertEquals(Poll.get_brick_polls(self.uganda)[1], poll2)
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll1.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertEquals(Poll.get_brick_polls_ids(self.uganda)[0], poll1.pk)
+        self.assertEquals(Poll.get_brick_polls_ids(self.uganda)[1], poll2.pk)
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
         poll1.is_featured = False
         poll1.save()
 
-        self.assertTrue(Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll2 in Poll.get_brick_polls(self.uganda))
-        self.assertTrue(poll1 in Poll.get_brick_polls(self.uganda))
-        self.assertEquals(Poll.get_brick_polls(self.uganda)[0], poll2)
-        self.assertEquals(Poll.get_brick_polls(self.uganda)[1], poll1)
-        self.assertFalse(Poll.get_brick_polls(self.nigeria))
+        self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertTrue(poll1.pk in Poll.get_brick_polls_ids(self.uganda))
+        self.assertEquals(Poll.get_brick_polls_ids(self.uganda)[0], poll2.pk)
+        self.assertEquals(Poll.get_brick_polls_ids(self.uganda)[1], poll1.pk)
+        self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
     @patch('django.core.cache.cache.get')
     def test_get_other_polls(self, mock_cache_get):
@@ -507,7 +488,7 @@ class PollTest(UreportTest):
             polls.append(poll)
 
         self.assertTrue(Poll.get_recent_polls(self.uganda))
-        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls)))
+        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[:9])))
 
         now = timezone.now()
         a_month_ago = now - timedelta(days=30)
@@ -515,7 +496,7 @@ class PollTest(UreportTest):
         Poll.objects.filter(pk__in=[polls[0].pk, polls[1].pk]).update(created_on=a_month_ago)
 
         self.assertTrue(Poll.get_recent_polls(self.uganda))
-        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[2:])))
+        self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[2:9])))
 
     def test_get_flow(self):
         with patch('dash.orgs.models.Org.get_flows') as mock:
@@ -524,7 +505,7 @@ class PollTest(UreportTest):
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
             self.assertEquals(poll1.get_flow(), 'Flow')
-            mock.assert_called_once_with()
+            mock.assert_called_once_with(backend=poll1.backend)
 
     @patch('django.core.cache.cache.get')
     def test_most_responded_regions(self, mock_cache_get):
@@ -532,11 +513,8 @@ class PollTest(UreportTest):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101", created_by=self.admin,
+                                    modified_by=self.admin)
 
         with patch('ureport.polls.models.PollQuestion.get_results') as mock:
             mock.return_value = [{u'open_ended': False, u'label': u'Abia', u'set': 338, u'unset': 36, u'boundary': u'R3713501', u'categories': [{u'count': 80, u'label': u'Yes'}, {u'count': 258, u'label': u'No'}]},
@@ -626,11 +604,8 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.runs(), "----")
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101",
+                                    created_by=self.admin, modified_by=self.admin)
 
         with patch('ureport.polls.models.PollQuestion.get_polled') as mock:
             mock.return_value = 100
@@ -643,11 +618,8 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.responded_runs(), "---")
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101",
+                                    created_by=self.admin, modified_by=self.admin)
 
         with patch('ureport.polls.models.PollQuestion.get_responded') as mock:
             mock.return_value = 40
@@ -660,11 +632,8 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.response_percentage(), "---")
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_uuid="uuid-101",
+                                    created_by=self.admin, modified_by=self.admin)
 
         with patch('ureport.polls.models.PollQuestion.get_response_percentage') as mock_response_percentage:
             mock_response_percentage.return_value = "40%"
@@ -726,7 +695,7 @@ class PollTest(UreportTest):
 
         self.assertEquals(poll1.get_category_image(), poll1.category_image.image)
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_create_poll(self):
         create_url = reverse('polls.poll_create')
 
@@ -741,16 +710,13 @@ class PollTest(UreportTest):
                                            rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
                                                           label='Does your community have power')])
 
-            mock_get_flows.return_value = flows_cached
-
             self.login(self.admin)
             response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
             self.assertTrue('form' in response.context)
 
-            self.assertEquals(len(response.context['form'].fields), 6)
+            self.assertEquals(len(response.context['form'].fields), 5)
             self.assertTrue('is_featured' in response.context['form'].fields)
-            self.assertTrue('flow_uuid' in response.context['form'].fields)
             self.assertTrue('title' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
             self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
@@ -760,31 +726,25 @@ class PollTest(UreportTest):
             self.assertTrue('category_image' in response.context['form'].fields)
             self.assertTrue('loc' in response.context['form'].fields)
 
-            self.assertEquals(len(response.context['form'].fields['flow_uuid'].choices), 1)
-            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][0], 'uuid-25')
-            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][1], 'Flow 1 (2015-04-08)')
-
             response = self.client.post(create_url, dict(), SERVER_NAME='uganda.ureport.io')
             self.assertTrue(response.context['form'].errors)
 
-            self.assertEquals(len(response.context['form'].errors), 3)
+            self.assertEquals(len(response.context['form'].errors), 2)
             self.assertTrue('title' in response.context['form'].errors)
             self.assertTrue('category' in response.context['form'].errors)
-            self.assertTrue('flow_uuid' in response.context['form'].errors)
             self.assertFalse(Poll.objects.all())
 
-            post_data = dict(title='Poll 1', category=self.health_uganda.pk, flow_uuid="uuid-25")
+            post_data = dict(title='Poll 1', category=self.health_uganda.pk)
 
             response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertTrue(Poll.objects.all())
 
             poll = Poll.objects.get()
             self.assertEquals(poll.title, 'Poll 1')
-            self.assertEquals(poll.flow_uuid, "uuid-25")
+            self.assertEquals(poll.backend.slug, "rapidpro")
             self.assertEquals(poll.org, self.uganda)
-            self.assertEqual(poll.poll_date, json_date_to_datetime("2015-04-08T08:30:40.000Z"))
 
-            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_date', args=[poll.pk]))
+            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_flow', args=[poll.pk]))
 
             self.assertEqual(Poll.objects.all().count(), 1)
 
@@ -795,10 +755,11 @@ class PollTest(UreportTest):
             ten_minutes_ago = timezone.now() - timedelta(minutes=10)
 
             # a new submission after five minutes will create a new poll
-            Poll.objects.filter(org=poll.org, flow_uuid='uuid-25').update(created_on=ten_minutes_ago)
+            Poll.objects.filter(org=poll.org, backend__slug='rapidpro').update(created_on=ten_minutes_ago, flow_uuid='uuid-25')
             response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertEqual(Poll.objects.all().count(), 2)
 
+            Poll.objects.filter(org=poll.org, backend__slug='rapidpro').update(flow_uuid='uuid-25')
             tz = pytz.timezone('Africa/Kigali')
             with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
                 flows_cached['uuid-30'] = dict(runs=300, completed_runs=120, name='Flow 2', uuid='uuid-30',
@@ -808,20 +769,103 @@ class PollTest(UreportTest):
 
                 mock_get_flows.return_value = flows_cached
 
-                post_data = dict(title='Poll 2', category=self.health_uganda.pk, flow_uuid="uuid-30")
+                post_data = dict(title='Poll 2', category=self.health_uganda.pk)
                 response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
                 self.assertEqual(Poll.objects.all().count(), 3)
 
-                poll = Poll.objects.get(flow_uuid='uuid-30')
-                self.assertEquals(poll.title, 'Poll 2')
+                poll = Poll.objects.get(title='Poll 2')
                 self.assertEquals(poll.org, self.uganda)
                 self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))
+
+                Poll.objects.filter(org=poll.org, backend__slug='rapidpro').update(flow_uuid='uuid-25')
+
+                response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
+                self.assertEquals(response.status_code, 200)
+                self.assertTrue('form' in response.context)
+
+                self.assertEquals(len(response.context['form'].fields), 5)
+                self.assertFalse('backend' in response.context['form'].fields)
+
+                # add the config for a second backend
+                floip_backend = self.uganda.backends.create(
+                    slug='floip', api_token='floip_token', backend_type='ureport.backend.rapidpro.RapidProBackend',
+                    host='http://localhost:8001', created_by=self.admin,
+                    modified_by=self.admin)
+
+                response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
+                self.assertEquals(response.status_code, 200)
+                self.assertTrue('form' in response.context)
+
+                self.assertEquals(len(response.context['form'].fields), 6)
+                self.assertTrue('is_featured' in response.context['form'].fields)
+                self.assertTrue('title' in response.context['form'].fields)
+                self.assertTrue('category' in response.context['form'].fields)
+                self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
+                self.assertEquals(list(response.context['form'].fields['category'].choices),
+                                  [('', '---------'),
+                                  (self.health_uganda.pk, 'uganda - Health')])
+                self.assertTrue('category_image' in response.context['form'].fields)
+                self.assertTrue('loc' in response.context['form'].fields)
+
+                self.assertTrue('backend' in response.context['form'].fields)
+                self.assertEquals(len(response.context['form'].fields['backend'].choices), 3)
+                self.assertEquals(set(response.context['form'].fields['backend'].choices),
+                                  set([('', '---------'),
+                                       (poll.backend.pk, 'rapidpro'),
+                                       (floip_backend.pk, 'floip')]))
+
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
+    def test_poll_poll_flow_view(self):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "", self.health_uganda, self.admin, featured=True)
+
+        uganda_poll_flow_url = reverse('polls.poll_poll_flow', args=[poll1.pk])
+
+        response = self.client.get(uganda_poll_flow_url, SERVER_NAME='uganda.ureport.io')
+        self.assertLoginRedirect(response)
+
+        with patch('dash.orgs.models.Org.get_flows') as mock_get_flows:
+            flows_cached = dict()
+            flows_cached['uuid-25'] = dict(runs=300, completed_runs=120, name='Flow 1', uuid='uuid-25',
+                                           participants=None, labels="", archived=False,
+                                           created_on="2015-04-08T08:30:40.000Z", date_hint="2015-04-08",
+                                           rulesets=[dict(uuid='uuid-8435', id=8435, response_type="C",
+                                                          label='Does your community have power')])
+
+            mock_get_flows.return_value = flows_cached
+
+            self.login(self.admin)
+            self.assertFalse(poll1.flow_uuid)
+            response = self.client.get(uganda_poll_flow_url, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+            self.assertTrue('form' in response.context)
+
+            self.assertEquals(len(response.context['form'].fields), 2)
+            self.assertTrue('loc' in response.context['form'].fields)
+            self.assertTrue('flow_uuid' in response.context['form'].fields)
+            self.assertEquals(len(response.context['form'].fields['flow_uuid'].choices), 1)
+            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][0], 'uuid-25')
+            self.assertEquals(response.context['form'].fields['flow_uuid'].choices[0][1], 'Flow 1 (2015-04-08)')
+
+            post_data = dict(flow_uuid='uuid-25')
+            response = self.client.post(uganda_poll_flow_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+
+            poll = Poll.objects.get(pk=poll1.pk)
+            self.assertEquals(poll.flow_uuid, 'uuid-25')
+
+            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_date', args=[poll.pk]))
+
+            response = self.client.get(uganda_poll_flow_url, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 302)
+
+            response = self.client.get(uganda_poll_flow_url, follow=True, SERVER_NAME='uganda.ureport.io')
+            self.assertEquals(response.status_code, 200)
+            self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_poll_date', args=[poll.pk]))
 
     def test_poll_poll_date_view(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin,
-                                     featured=True)
+        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, featured=True)
 
         uganda_poll_date_url = reverse('polls.poll_poll_date', args=[poll1.pk])
         nigeria_poll_date_url = reverse('polls.poll_poll_date', args=[poll2.pk])
@@ -881,7 +925,7 @@ class PollTest(UreportTest):
 
                 self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_questions', args=[poll.pk]))
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_update_poll(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
@@ -911,18 +955,14 @@ class PollTest(UreportTest):
 
             mock_get_flows.return_value = flows_cached
 
-            now = timezone.now()
-            yesterday = now - timedelta(days=1)
-
             response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
             self.assertEquals(response.status_code, 200)
             self.assertTrue('form' in response.context)
 
-            self.assertEquals(len(response.context['form'].fields), 7)
+            self.assertEquals(len(response.context['form'].fields), 6)
             self.assertTrue('is_active' in response.context['form'].fields)
             self.assertTrue('is_featured' in response.context['form'].fields)
             self.assertTrue('title' in response.context['form'].fields)
-            self.assertTrue('poll_date' in response.context['form'].fields)
             self.assertTrue('category' in response.context['form'].fields)
             self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
             self.assertEquals(list(response.context['form'].fields['category'].choices),
@@ -939,7 +979,7 @@ class PollTest(UreportTest):
             self.assertTrue('category' in response.context['form'].errors)
 
             post_data = dict(title='title updated', category=self.health_uganda.pk,
-                             is_featured=False, poll_date=yesterday.strftime('%Y-%m-%d %H:%M:%S'))
+                             is_featured=False)
             response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
             self.assertFalse('form' in response.context)
             updated_poll = Poll.objects.get(pk=poll1.pk)
@@ -947,21 +987,6 @@ class PollTest(UreportTest):
             self.assertFalse(updated_poll.is_featured)
 
             self.assertEquals(response.request['PATH_INFO'], reverse('polls.poll_list'))
-
-            tz = pytz.timezone('Africa/Kigali')
-            with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 0))):
-                response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
-                self.assertContains(response, "Edit Poll for flow [Flow 1 (2015-04-08)]")
-
-                post_data = dict(title='Poll 2', category=self.health_uganda.pk,
-                                 is_featured=False, poll_date="")
-                response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
-                self.assertEqual(Poll.objects.all().count(), 2)
-
-                poll = Poll.objects.get(flow_uuid='uuid-1')
-                self.assertEquals(poll.title, 'Poll 2')
-                self.assertEquals(poll.org, self.uganda)
-                self.assertEqual(poll.poll_date, json_date_to_datetime("2015-09-04T01:04:05.000Z"))
 
     def test_list_poll(self):
         list_url = reverse('polls.poll_list')
@@ -995,7 +1020,7 @@ class PollTest(UreportTest):
         self.assertEquals(len(response.context['object_list']), 1)
         self.assertRegexpMatches(response.content, "Last synced 5(.*)minutes ago")
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_questions_poll(self):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -1021,12 +1046,8 @@ class PollTest(UreportTest):
         self.assertTrue('form' in response.context)
         self.assertEquals(len(response.context['form'].fields), 0)
 
-        poll1_question = PollQuestion.objects.create(poll=poll1,
-                                                     title='question poll 1',
-                                                     ruleset_label='question poll 1',
-                                                     ruleset_uuid="uuid-101",
-                                                     created_by=self.admin,
-                                                     modified_by=self.admin)
+        PollQuestion.objects.create(poll=poll1, title='question poll 1', ruleset_label='question poll 1',
+                                    ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin)
 
         response = self.client.get(uganda_questions_url, SERVER_NAME='uganda.ureport.io')
         self.assertEquals(response.status_code, 200)
@@ -1189,7 +1210,7 @@ class PollTest(UreportTest):
         self.assertEquals(response.context['form'].fields['location_1'].initial, 'Youtube Stream')
         self.assertEquals(response.context['form'].fields['message_1'].initial, 'Just give me a reason')
 
-    @patch('dash.orgs.models.TembaClient2', MockTembaClient)
+    @patch('dash.orgs.models.TembaClient', MockTembaClient)
     def test_templatetags(self):
         from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
         from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results
@@ -1207,21 +1228,21 @@ class PollTest(UreportTest):
         self.assertEquals(org_color(self.uganda, 2), '#FFD100')
         self.assertEquals(org_color(self.uganda, 3), '#1F49BF')
 
-        self.uganda.set_config('primary_color', '#aaaaaa')
+        self.uganda.set_config('common.primary_color', '#aaaaaa')
 
         self.assertEquals(org_color(self.uganda, 0), '#FFD100')
         self.assertEquals(org_color(self.uganda, 1), '#1F49BF')
         self.assertEquals(org_color(self.uganda, 2), '#FFD100')
         self.assertEquals(org_color(self.uganda, 3), '#1F49BF')
 
-        self.uganda.set_config('secondary_color', '#bbbbbb')
+        self.uganda.set_config('common.secondary_color', '#bbbbbb')
 
         self.assertEquals(org_color(self.uganda, 0), '#aaaaaa')
         self.assertEquals(org_color(self.uganda, 1), '#bbbbbb')
         self.assertEquals(org_color(self.uganda, 2), '#aaaaaa')
         self.assertEquals(org_color(self.uganda, 3), '#bbbbbb')
 
-        self.uganda.set_config('colors', '#cccccc, #dddddd, #eeeeee, #111111, #222222, #333333, #444444')
+        self.uganda.set_config('common.colors', '#cccccc, #dddddd, #eeeeee, #111111, #222222, #333333, #444444')
 
         self.assertEquals(org_color(self.uganda, 0), '#cccccc')
         self.assertEquals(org_color(self.uganda, 1), '#dddddd')
@@ -1361,8 +1382,10 @@ class PollTest(UreportTest):
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
 
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
-    def test_poll_pull_results(self, mock_pull_results):
+    def test_poll_pull_results(self, mock_pull_results, mock_get_backend):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
@@ -1373,6 +1396,7 @@ class PollTest(UreportTest):
         poll = Poll.objects.get(pk=poll.pk)
         self.assertTrue(poll.has_synced)
 
+        self.assertEqual(mock_get_backend.call_args[1], {'backend_slug': 'rapidpro'})
         mock_pull_results.assert_called_once()
 
 
@@ -1403,13 +1427,6 @@ class PollQuestionTest(UreportTest):
                                                      modified_by=self.admin)
 
         self.assertEquals(unicode(poll_question1), 'question 1')
-        fetched_results = [dict(open_ended=False, set=3462, unset=3694, categories=[dict(count=2210, label='Yes'),
-                                                                                    dict(count=1252, label='No')],
-                                label='All')]
-
-        self.uganda.set_config("state_label", "LGA")
-        self.uganda.set_config("district_label", "District")
-        self.uganda.set_config("ward_label", "Ward")
 
         # no response category are ignored
         PollResponseCategory.update_or_create(poll_question1, 'rule-uuid-4', 'No Response')
@@ -1647,7 +1664,7 @@ class PollQuestionTest(UreportTest):
             refresh_org_flows(self.org.pk)
             mock_fetch_flows.assert_called_once_with(self.org)
 
-        with patch('ureport.polls.tasks.fetch_old_sites_count') as mock_fetch_old_sites_count:
+        with patch('ureport.polls.tasks.do_fetch_old_sites_count') as mock_fetch_old_sites_count:
             mock_fetch_old_sites_count.return_value = 'FETCHED'
 
             fetch_old_sites_count()
@@ -1697,7 +1714,6 @@ class PollQuestionTest(UreportTest):
 class PollResultsTest(UreportTest):
     def setUp(self):
         super(PollResultsTest, self).setUp()
-        self.nigeria.set_config('reporter_group', "Ureporters")
 
         self.education_nigeria = Category.objects.create(org=self.nigeria,
                                                          name="Education",
@@ -1896,9 +1912,11 @@ class PollsTasksTest(UreportTest):
 
         self.polls_query = Poll.objects.filter(pk__in=[self.poll.pk, self.poll_same_flow.pk]).order_by('-created_on')
 
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_main_poll')
-    def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results):
+    def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results, mock_get_backend):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_get_main_poll.return_value = self.poll
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
@@ -1909,10 +1927,12 @@ class PollsTasksTest(UreportTest):
                          {"num_val_created": 1, "num_val_updated": 2, "num_val_ignored": 3,
                           "num_path_created": 4, "num_path_updated": 5, "num_path_ignored": 6})
 
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
-    @patch('ureport.polls.models.Poll.get_brick_polls')
-    def test_pull_results_brick_polls(self, mock_get_brick_polls, mock_pull_results):
-        mock_get_brick_polls.return_value = list(self.polls_query)
+    @patch('ureport.polls.models.Poll.get_brick_polls_ids')
+    def test_pull_results_brick_polls(self, mock_get_brick_polls_ids, mock_pull_results, mock_get_backend):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+        mock_get_brick_polls_ids.return_value = [poll.pk for poll in self.polls_query]
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         pull_results_brick_polls(self.nigeria.pk)
@@ -1933,14 +1953,19 @@ class PollsTasksTest(UreportTest):
         self.assertEqual(task_state.get_last_results(), {})
         mock_pull_results.assert_called_once()
 
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('django.core.cache.cache.get')
     @patch('ureport.tests.TestBackend.pull_results')
     @patch('ureport.polls.models.Poll.get_other_polls')
-    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results, mock_cache_get):
+    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results, mock_cache_get, mock_get_backend):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_get_other_polls.return_value = self.polls_query
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
         mock_cache_get.return_value = None
 
+        self.poll.created_on = timezone.now() - timedelta(days=8)
+        self.poll.save()
+
         pull_results_other_polls(self.nigeria.pk)
 
         task_state = TaskState.objects.get(org=self.nigeria, task_key='results-pull-other-polls')
@@ -1959,10 +1984,10 @@ class PollsTasksTest(UreportTest):
         self.assertEqual(task_state.get_last_results(), {})
         mock_pull_results.assert_called_once()
 
-
-
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.tests.TestBackend.pull_results')
-    def test_backfill_poll_results(self, mock_pull_results):
+    def test_backfill_poll_results(self, mock_pull_results, mock_get_backend):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
         self.poll.has_synced = True

@@ -1,3 +1,81 @@
+v1.0.401
+----------
+ * Fix to display age charts
+ * Default value for fetch_flows for the cache miss should be an empty dict
+
+v1.0.400
+----------
+ * Default value for fetch_flows for the cache miss should be an empty dict
+
+v1.0.399
+----------
+ * Only exclude the main poll if we have one
+
+v1.0.398
+----------
+ * Make sure tasks do no sync polls synced by other tasks that run more often
+
+v1.0.397
+----------
+ * Fix get_flow and enable the cached times in contacts pull
+
+v1.0.396
+----------
+ * Hold on to use redis cache times for contacts sycn until we have some values set
+ * Add backend fields as Foreign keys
+ * Use .paths to set and retrieve Org config values 
+
+v1.0.393
+----------
+ * Update test
+
+v1.0.392
+----------
+ * Fix poll brick ids
+
+v1.0.391
+----------
+
+
+v1.0.389
+----------
+ * Remove unused function
+ * Remove unecessary configs
+ * Switch to use rapidpro config
+ * Update to use latest pillow and boto3
+
+v1.0.388
+----------
+ * Do not add backend field on poll results
+
+v1.0.387
+----------
+* Fix import
+ * Better log
+ * Update pull results default value in batches
+
+v1.0.386
+----------
+ * Add default value and constraints migrations
+ * Faster migrations
+
+v1.0.385
+----------
+ * Add backend field
+ * Update dash to 1.3.1
+ * Fix test
+ * Contacts pull should loop on all configured backends
+
+v1.0.383
+----------
+ * Add argentina flag to settings
+ * Fix tests
+ * Fix PEP8 errors
+
+v1.0.382
+----------
+ * Update sorl-thumbnail to mute unecessary logs 
+
 v1.0.379
 ----------
  * Update sorl-thumbnail and more deps

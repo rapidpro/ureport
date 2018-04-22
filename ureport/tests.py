@@ -2,8 +2,6 @@
 
 from __future__ import unicode_literals
 
-import json
-
 import pytz
 from django.conf import settings
 from django.urls import reverse
@@ -13,6 +11,7 @@ from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User
 from dash.orgs.middleware import SetOrgMiddleware
 from dash.test import DashTest
+from dash.utils import random_string
 from mock import Mock, patch
 from dash.orgs.models import Org
 from django.http.request import HttpRequest
@@ -64,14 +63,10 @@ class MockTembaClient(TembaClient):
                                                      flow_type='F',
                                                      action_sets=[],
                                                      rule_sets=[dict(uuid='ruleset-1-uuid',
-                                                        label='ruleset1',
-                                                        ruleset_type='wait_message',
-                                                        rules=[dict(uuid='rule-1-uuid',
-                                                                    category=dict(eng='Blue')
-                                                                )
-                                                                ]
-                                                                )
-                                                                ],
+                                                                     label='ruleset1',
+                                                                     ruleset_type='wait_message',
+                                                                     rules=[dict(uuid='rule-1-uuid',
+                                                                                 category=dict(eng='Blue'))])],
                                                      entry='')]))
 
 
@@ -93,13 +88,30 @@ class UreportTest(SmartminTest, DashTest):
         self.uganda = self.create_org('uganda', pytz.timezone('Africa/Kampala'), self.admin)
         self.nigeria = self.create_org('nigeria', pytz.timezone('Africa/Lagos'), self.admin)
 
+        rapidpro_backend = self.nigeria.backends.filter(slug='rapidpro').first()
+        if not rapidpro_backend:
+            rapidpro_backend, created = self.nigeria.backends.get_or_create(api_token=random_string(32),
+                                                                            slug='rapidpro',
+                                                                            created_by=self.admin,
+                                                                            modified_by=self.admin)
+        self.rapidpro_backend = rapidpro_backend
+
+        floip_backend = self.nigeria.backends.filter(slug='floip').first()
+        if not floip_backend:
+            floip_backend, created = self.nigeria.backends.get_or_create(api_token=random_string(32),
+                                                                         slug='floip',
+                                                                         created_by=self.admin,
+                                                                         modified_by=self.admin)
+
+        self.floip_backend = floip_backend
+
     def create_org(self, subdomain, timezone, user):
 
         name = subdomain
 
         orgs = Org.objects.filter(subdomain=subdomain)
         if orgs:
-            org =orgs[0]
+            org = orgs[0]
             org.name = name
             org.save()
         else:
@@ -108,15 +120,28 @@ class UreportTest(SmartminTest, DashTest):
         org.administrators.add(user)
 
         self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
+
+        backend = org.backends.filter(slug='rapidpro', is_active=True).first()
+        if not backend:
+            backend = org.backends.create(slug='rapidpro', backend_type='ureport.backend.rapidpro.RapidProBackend', api_token='token',
+                                          host='http://localhost:8001')
+
+        backend.backend_type = 'ureport.backend.rapidpro.RapidProBackend'
+        backend.api_token = 'token'
+        backend.host = 'http://localhost:8001'
+        backend.save()
+
         return Org.objects.get(subdomain=subdomain)
 
     def create_poll(self, org, title, flow_uuid, category, user, featured=False, has_synced=False):
         now = timezone.now()
+        backend = org.backends.filter(slug='rapidpro', is_active=True).first()
         poll = Poll.objects.create(flow_uuid=flow_uuid,
                                    title=title,
                                    category=category,
                                    is_featured=featured,
                                    has_synced=has_synced,
+                                   backend=backend,
                                    org=org,
                                    poll_date=now,
                                    created_by=user,
@@ -162,7 +187,7 @@ class SetOrgMiddlewareTest(UreportTest):
         self.request = Mock(spec=HttpRequest)
         self.request.user = self.anon
         self.request.path = '/'
-        self.request.get_host.return_value="ureport.io"
+        self.request.get_host.return_value = "ureport.io"
         self.request.META = dict(HTTP_HOST=None)
 
     def test_process_request_without_org(self):
@@ -188,7 +213,7 @@ class SetOrgMiddlewareTest(UreportTest):
 
         # test invalid subdomain
         wrong_subdomain_url = "blabla.ureport.io"
-        self.request.get_host.return_value=wrong_subdomain_url
+        self.request.get_host.return_value = wrong_subdomain_url
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
         self.assertEqual(self.request.org, None)
@@ -201,11 +226,11 @@ class SetOrgMiddlewareTest(UreportTest):
 
             ug_org = self.uganda
             ug_dash_url = ug_org.subdomain + ".ureport.io"
-            self.request.get_host.return_value=ug_dash_url
+            self.request.get_host.return_value = ug_dash_url
 
             # test invalid subdomain
             wrong_subdomain_url = "blabla.ureport.io"
-            self.request.get_host.return_value=wrong_subdomain_url
+            self.request.get_host.return_value = wrong_subdomain_url
             self.request.org = None
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
             self.assertEquals(response.status_code, 302)
@@ -213,9 +238,9 @@ class SetOrgMiddlewareTest(UreportTest):
             self.assertEqual(self.request.org, None)
             self.assertEquals(self.request.user.get_org(), None)
 
-            rw_org = self.create_org('rwanda', pytz.timezone('Africa/Kigali'), self.admin)
+            self.create_org('rwanda', pytz.timezone('Africa/Kigali'), self.admin)
             wrong_subdomain_url = "blabla.ureport.io"
-            self.request.get_host.return_value=wrong_subdomain_url
+            self.request.get_host.return_value = wrong_subdomain_url
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
             self.assertEquals(response.status_code, 302)
             self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))

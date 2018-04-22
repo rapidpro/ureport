@@ -1,22 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import copy
 import iso8601
 import json
-import math
 import time
 from datetime import timedelta, datetime
 from itertools import islice, chain
 
-import six
 from dash.orgs.models import Org
-from dash.utils import temba_client_flow_results_serializer, datetime_to_ms
+from dash.utils import datetime_to_ms
 from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
-from django.utils.text import slugify
-from django_redis import get_redis_connection
-import pycountry
 import pytz
 from ureport.assets.models import Image, FLAG
 from raven.contrib.django.raven_compat.models import client
@@ -77,7 +71,7 @@ def get_linked_orgs(authenticated=False):
     for org in all_orgs:
         host = org.build_host_link(authenticated)
         org.host = host
-        if org.get_config('is_on_landing_page'):
+        if org.get_config('common.is_on_landing_page'):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
             if flag:
                 linked_sites.append(dict(name=org.subdomain, host=host, flag=flag.image.url, is_static=False))
@@ -87,201 +81,80 @@ def get_linked_orgs(authenticated=False):
     return linked_sites_sorted
 
 
-def substitute_segment(org, segment_in):
-    if not segment_in:
-        return segment_in
-
-    segment = copy.deepcopy(segment_in)
-
-    location = segment.get('location', None)
-    if location == 'State':
-        segment['location'] = org.get_config('state_label')
-    elif location == 'District':
-        segment['location'] = org.get_config('district_label')
-    elif location == 'Ward':
-        segment['location'] = org.get_config('ward_label')
-
-    if org.get_config('is_global'):
-        if "location" in segment:
-            del segment["location"]
-            if 'parent' in segment:
-                del segment["parent"]
-            segment["contact_field"] = org.get_config('state_label')
-            segment["values"] = [elt.alpha_2 for elt in list(pycountry.countries)]
-
-    return json.dumps(segment)
-
-
-def clean_global_results_data(org, results, segment):
-
-    # for the global page clean the data translating country code to country name
-    if org.get_config('is_global') and results and segment and 'location' in segment:
-        for elt in results:
-            country_code = elt['label']
-            elt['boundary'] = country_code
-            country_name = ""
-            try:
-                country = pycountry.countries.get(alpha_2=country_code)
-                if country:
-                    country_name = country.name
-            except KeyError:
-                country_name = country_code
-            elt['label'] = country_name
-
-    return results
-
-
-def organize_categories_data(org, contact_field, api_data):
-
-    cleaned_categories = []
-    interval_dict = dict()
-    now = timezone.now()
-    # if we have the age_label; Ignore invalid years and make intervals
-    if api_data and contact_field.lower() == org.get_config('born_label').lower():
-        current_year = now.year
-
-        for elt in api_data[0]['categories']:
-            year_label = elt['label']
-            try:
-                if len(year_label) == 4 and int(float(year_label)) > 1900:
-                    decade = int(math.floor((current_year - int(elt['label'])) / 10)) * 10
-                    key = "%s-%s" % (decade, decade+10)
-                    if interval_dict.get(key, None):
-                        interval_dict[key] += elt['count']
-                    else:
-                        interval_dict[key] = elt['count']
-            except ValueError:
-                pass
-
-        for obj_key in interval_dict.keys():
-            cleaned_categories.append(dict(label=obj_key, count=interval_dict[obj_key] ))
-
-        api_data[0]['categories'] = sorted(cleaned_categories, key=lambda k: int(k['label'].split('-')[0]))
-
-    elif api_data and contact_field.lower() == org.get_config('registration_label').lower():
-        six_months_ago = now - timedelta(days=180)
-        six_months_ago = six_months_ago - timedelta(six_months_ago.weekday())
-        tz = pytz.timezone('UTC')
-
-        for elt in api_data[0]['categories']:
-            time_str = elt['label']
-
-            # ignore anything like None as label
-            if not time_str:
-                continue
-
-            parsed_time = tz.localize(datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ'))
-
-            # this is in the range we care about
-            if parsed_time > six_months_ago:
-                # get the week of the year
-                dict_key = parsed_time.strftime("%W")
-
-                if interval_dict.get(dict_key, None):
-                    interval_dict[dict_key] += elt['count']
-                else:
-                    interval_dict[dict_key] = elt['count']
-
-        # build our final dict using week numbers
-        categories = []
-        start = six_months_ago
-        while start < timezone.now():
-            week_dict = start.strftime("%W")
-            count = interval_dict.get(week_dict, 0)
-            categories.append(dict(label=start.strftime("%m/%d/%y"), count=count))
-
-            start = start + timedelta(days=7)
-
-        api_data[0]['categories'] = categories
-
-    elif api_data and contact_field.lower() == org.get_config('occupation_label').lower():
-
-        for elt in api_data[0]['categories']:
-            if len(cleaned_categories) < 9 and elt['label'] != "All Responses":
-                cleaned_categories.append(elt)
-
-        api_data[0]['categories'] = cleaned_categories
-
-    return api_data
-
-
-def fetch_flows(org):
+def fetch_flows(org, backend=None):
+    from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     start = time.time()
     print "Fetching flows for %s" % org.name
+
+    if backend:
+        backends = [backend]
+    else:
+        backends = org.backends.filter(is_active=True)
 
     this_time = datetime.now()
     org_flows = dict(time=datetime_to_ms(this_time), results=dict())
 
-    try:
-        from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
+    for backend_obj in backends:
+        backend = org.get_backend(backend_slug=backend_obj.slug)
+        try:
+            all_flows = backend.fetch_flows(org)
+            org_flows['results'] = all_flows
 
-        temba_client = org.get_temba_client(api_version=2)
-        flows = temba_client.get_flows().all()
+            cache_key = CACHE_ORG_FLOWS_KEY % (org.pk, backend_obj.slug)
+            cache.set(cache_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
-        all_flows = dict()
-        for flow in flows:
-            flow_json = dict()
-            flow_json['uuid'] = flow.uuid
-            flow_json['date_hint'] = flow.created_on.strftime('%Y-%m-%d')
-            flow_json['created_on'] = datetime_to_json_date(flow.created_on)
-            flow_json['name'] = flow.name
-            flow_json['archived'] = flow.archived
-            flow_json['runs'] = flow.runs.active + flow.runs.expired + flow.runs.completed + flow.runs.interrupted
-            flow_json['completed_runs'] = flow.runs.completed
-
-            all_flows[flow.uuid] = flow_json
-
-        all_flows_key = CACHE_ORG_FLOWS_KEY % org.pk
-        org_flows['results'] = all_flows
-        cache.set(all_flows_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-
-    except:
-        client.captureException()
-        import traceback
-        traceback.print_exc()
+        except Exception:
+            client.captureException()
+            import traceback
+            traceback.print_exc()
 
     print "Fetch %s flows took %ss" % (org.name, time.time() - start)
 
-    return org_flows.get('results')
+    if len(backends):
+        return org_flows.get("results", dict())
 
 
-def get_flows(org):
+def get_flows(org, backend):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY
-    cache_value = cache.get(CACHE_ORG_FLOWS_KEY % org.pk, None)
+    cache_value = cache.get(CACHE_ORG_FLOWS_KEY % (org.pk, backend.slug), None)
     if cache_value:
         return cache_value['results']
 
-    return fetch_flows(org)
+    return fetch_flows(org, backend)
 
 
 def update_poll_flow_data(org):
-    flows = get_flows(org)
 
-    if flows:
-        org_polls = Poll.objects.filter(org=org)
-        for poll in org_polls:
-            flow = flows.get(poll.flow_uuid, dict())
+    backends = org.backends.filter(is_active=True)
+    for backend_obj in backends:
+        flows = get_flows(org, backend_obj)
 
-            if flow:
-                archived = flow.get('archived', False)
-                runs_count = flow.get('runs', 0)
-                if not runs_count:
-                    runs_count = 0
+        if flows:
+            org_polls = Poll.objects.filter(org=org, backend=backend_obj)
+            for poll in org_polls:
+                flow = flows.get(poll.flow_uuid, dict())
 
-                updated_fields = dict()
+                if flow:
+                    archived = flow.get('archived', False)
+                    runs_count = flow.get('runs', 0)
+                    if not runs_count:
+                        runs_count = 0
 
-                if archived != poll.flow_archived:
-                    updated_fields['flow_archived'] = archived
+                    updated_fields = dict()
 
-                if runs_count > 0 and runs_count != poll.runs_count:
-                    updated_fields['runs_count'] = runs_count
+                    if archived != poll.flow_archived:
+                        updated_fields['flow_archived'] = archived
 
-                if updated_fields:
-                    Poll.objects.filter(pk=poll.pk).update(**updated_fields)
+                    if runs_count > 0 and runs_count != poll.runs_count:
+                        updated_fields['runs_count'] = runs_count
+
+                    if updated_fields:
+                        Poll.objects.filter(pk=poll.pk).update(**updated_fields)
 
 
 def fetch_old_sites_count():
-    import requests, re
+    import requests
+    import re
     from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
 
     start = time.time()
@@ -302,7 +175,7 @@ def fetch_old_sites_count():
                 value = {'time': datetime_to_ms(this_time), 'results': dict(size=count)}
                 old_site_values.append(value)
                 cache.set(key, value, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
-            except:
+            except Exception:
                 import traceback
                 traceback.print_exc()
 
@@ -331,7 +204,7 @@ def get_global_count():
         count = sum([elt['results'].get('size', 0) for elt in cached_values if elt.get('results', None)])
 
         for org in Org.objects.filter(is_active=True):
-            if org.get_config('is_on_landing_page'):
+            if org.get_config('common.is_on_landing_page'):
                 count += get_reporters_count(org)
 
         # cached for 10 min
@@ -412,7 +285,7 @@ def get_age_stats(org):
 
     age_stats = age_counts_interval
     if total > 0:
-        age_stats = {k:int(round(v * 100 / float(total))) for k,v in age_counts_interval.iteritems()}
+        age_stats = {k: int(round(v * 100 / float(total))) for k, v in age_counts_interval.iteritems()}
 
     return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems()], key=lambda i: i))
 
@@ -429,7 +302,7 @@ def get_registration_stats(org):
 
     interval_dict = dict()
 
-    for date_key, date_count  in registered_on_counts.iteritems():
+    for date_key, date_count in registered_on_counts.iteritems():
         parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
 
         # this is in the range we care about
@@ -469,7 +342,7 @@ def get_ureporters_locations_stats(org, segment):
     org_contacts_counts = get_org_contacts_counts(org)
 
     if field_type == 'state':
-        boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('is_global') else Boundary.STATE_LEVEL
+        boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('common.is_global') else Boundary.STATE_LEVEL
         boundaries = Boundary.objects.filter(org=org, level=boundary_top_level, is_active=True).values('osm_id', 'name')\
             .order_by('osm_id')
         location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
@@ -536,7 +409,7 @@ def get_segment_org_boundaries(org, segment):
                                                         parent__osm_id=district_id).values('osm_id', 'name').order_by('osm_id')
 
     else:
-        if org.get_config('is_global'):
+        if org.get_config('common.is_global'):
             location_boundaries = org.boundaries.filter(level=Boundary.COUNTRY_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
         else:
             location_boundaries = org.boundaries.filter(level=Boundary.STATE_LEVEL, is_active=True).values('osm_id', 'name').order_by('osm_id')
@@ -590,7 +463,5 @@ Org.get_registration_stats = get_registration_stats
 Org.get_age_stats = get_age_stats
 Org.get_gender_stats = get_gender_stats
 Org.get_regions_stats = get_regions_stats
-Org.organize_categories_data = organize_categories_data
 Org.get_flows = get_flows
-Org.substitute_segment = substitute_segment
 Org.get_segment_org_boundaries = get_segment_org_boundaries

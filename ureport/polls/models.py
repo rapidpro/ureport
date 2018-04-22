@@ -11,9 +11,9 @@ from django.db.models import Sum, Count
 from django.utils.text import slugify
 from django.utils import timezone
 from smartmin.models import SmartModel
-from django.utils.translation import ugettext_lazy as _, ugettext
+from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
-from dash.orgs.models import Org
+from dash.orgs.models import Org, OrgBackend
 from dash.categories.models import Category, CategoryImage
 from django.conf import settings
 from stop_words import safe_get_stop_words
@@ -40,7 +40,7 @@ UREPORT_RUN_FETCHED_DATA_CACHE_TIME = getattr(settings, 'UREPORT_RUN_FETCHED_DAT
 
 CACHE_POLL_RESULTS_KEY = 'org:%d:poll:%d:results:%d'
 
-CACHE_ORG_FLOWS_KEY = "org:%d:flows"
+CACHE_ORG_FLOWS_KEY = "org:%d:backend:%s:flows"
 
 CACHE_ORG_REPORTER_GROUP_KEY = "org:%d:reporters:%s"
 
@@ -133,6 +133,8 @@ class Poll(SmartModel):
     org = models.ForeignKey(Org, related_name="polls",
                             help_text=_("The organization this poll is part of"))
 
+    backend = models.ForeignKey(OrgBackend, null=True)
+
     def get_sync_progress(self):
         if not self.runs_count:
             return float(0)
@@ -147,9 +149,8 @@ class Poll(SmartModel):
 
     @classmethod
     def pull_results(cls, poll_id):
-        from ureport.backend import get_backend
-        backend = get_backend()
         poll = Poll.objects.get(pk=poll_id)
+        backend = poll.org.get_backend(backend_slug=poll.backend.slug)
 
         (num_val_created, num_val_updated, num_val_ignored,
          num_path_created, num_path_updated, num_path_ignored) = backend.pull_results(poll, None, None)
@@ -313,8 +314,8 @@ class Poll(SmartModel):
         return main_poll
 
     @classmethod
-    def get_brick_polls(cls, org):
-        cache_key = 'brick_polls:%d' % org.id
+    def get_brick_polls_ids(cls, org):
+        cache_key = 'brick_polls_ids:%d' % org.id
         brick_polls = cache.get(cache_key, None)
 
         if brick_polls is None:
@@ -330,7 +331,7 @@ class Poll(SmartModel):
 
             for poll in polls:
                 if poll.get_first_question():
-                    brick_polls.append(poll)
+                    brick_polls.append(poll.pk)
             cache.set(cache_key, brick_polls, BRICK_POLLS_CACHE_TIME)
 
         return brick_polls
@@ -343,9 +344,9 @@ class Poll(SmartModel):
     @classmethod
     def get_other_polls(cls, org):
         main_poll = Poll.get_main_poll(org)
-        brick_polls = Poll.get_brick_polls(org)[:5]
+        brick_polls = Poll.get_brick_polls_ids(org)[:5]
 
-        exclude_polls = [poll.pk for poll in brick_polls]
+        exclude_polls = [poll_id for poll_id in brick_polls]
         if main_poll:
             exclude_polls.append(main_poll.pk)
 
@@ -357,8 +358,12 @@ class Poll(SmartModel):
     def get_recent_polls(cls, org):
         now = timezone.now()
         recent_window = now - timedelta(days=7)
+        main_poll = Poll.get_main_poll(org)
 
-        recent_other_polls = Poll.get_public_polls(org).exclude(created_on__lte=recent_window).order_by('-created_on')
+        recent_other_polls = Poll.get_public_polls(org)
+        if main_poll:
+            recent_other_polls = recent_other_polls.exclude(pk=main_poll.pk)
+        recent_other_polls = recent_other_polls.exclude(created_on__lte=recent_window).order_by('-created_on')
 
         return recent_other_polls
 
@@ -366,7 +371,7 @@ class Poll(SmartModel):
         """
         Returns the underlying flow for this poll
         """
-        flows_dict = self.org.get_flows()
+        flows_dict = self.org.get_flows(backend=self.backend)
         return flows_dict.get(self.flow_uuid, None)
 
     def update_or_create_questions(self, user=None):
@@ -374,17 +379,9 @@ class Poll(SmartModel):
             user = User.objects.get(pk=-1)
 
         org = self.org
-        temba_client = org.get_temba_client(api_version=2)
-        export_definition = temba_client.get_definitions(flows=(self.flow_uuid, ))
+        backend = org.get_backend(backend_slug=self.backend.slug)
 
-        flow_definition = None
-
-        for flow_def in export_definition.flows:
-            flow_uuid = flow_def.get('metadata', dict()).get('uuid', None)
-
-            if flow_uuid and flow_uuid == self.flow_uuid:
-                flow_definition = flow_def
-                break
+        flow_definition = backend.get_definition(org, self.flow_uuid)
 
         if flow_definition is None:
             return
@@ -449,7 +446,7 @@ class Poll(SmartModel):
                 for category in question.get_words():
                     key = category['label'].lower()
 
-                    if not key in words:
+                    if key not in words:
                         words[key] = int(category['count'])
 
                     else:
@@ -587,7 +584,6 @@ class Poll(SmartModel):
         if record_ids:
             update_or_create_questions.delay(record_ids)
 
-
     @classmethod
     def import_csv(cls, task, log=None):
         csv_file = task.csv_file
@@ -621,7 +617,7 @@ class Poll(SmartModel):
         if task.import_params:
             try:
                 import_params = json.loads(task.import_params)
-            except:
+            except Exception:
                 pass
 
         try:
@@ -742,18 +738,17 @@ class PollQuestion(SmartModel):
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
-            substituted_segment = self.poll.org.substitute_segment(segment)
-            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+            key += ":" + slugify(unicode(json.dumps(segment)))
 
         cached_value = cache.get(key, None)
         if cached_value:
             return cached_value["results"]
 
         if not segment:
-            logger.error('Question get results without segment cache missed', extra={'stack': True,})
+            logger.error('Question get results without segment cache missed', extra={'stack': True, })
 
         if segment and 'location' in segment and segment.get('location').lower() == 'state':
-            logger.error('Question get results with state segment cache missed', extra={'stack': True,})
+            logger.error('Question get results with state segment cache missed', extra={'stack': True, })
 
         return self.calculate_results(segment=segment)
 
@@ -795,7 +790,7 @@ class PollQuestion(SmartModel):
                 if len(category['label']) > 1 and category['label'] not in ignore_words and len(categories) < 100:
                     categories.append(dict(label=category['label'], count=int(category['count'])))
 
-            results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+            results.append(dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories))
 
         else:
             categories_label = self.response_categories.filter(is_active=True).values_list('category', flat=True)
@@ -869,7 +864,7 @@ class PollQuestion(SmartModel):
                         results.append(dict(set=set_count, unset=unset_count, label=age_group,
                                             categories=categories))
 
-                    results = sorted(results, key=lambda i:i['label'])
+                    results = sorted(results, key=lambda i: i['label'])
 
                 elif gender_part:
 
@@ -879,7 +874,7 @@ class PollQuestion(SmartModel):
                     for gender in genders:
                         categories = []
                         set_count = 0
-                        unset_count_key = "ruleset:%s:nocategory:%s:%s"% (self.ruleset_uuid, 'gender', gender)
+                        unset_count_key = "ruleset:%s:nocategory:%s:%s" % (self.ruleset_uuid, 'gender', gender)
                         unset_count = question_results.get(unset_count_key, 0)
 
                         for categorie_label in categories_label:
@@ -900,7 +895,7 @@ class PollQuestion(SmartModel):
                         category_count = question_results.get(category_count_key, 0)
                         categories.append(dict(count=category_count, label=categorie_label))
 
-                results.append(dict(open_ended=open_ended, set=responded, unset=polled-responded, categories=categories))
+                results.append(dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories))
 
         cache_time = PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT
         if not segment:
@@ -917,8 +912,7 @@ class PollQuestion(SmartModel):
 
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
-            substituted_segment = self.poll.org.substitute_segment(segment)
-            key += ":" + slugify(unicode(json.dumps(substituted_segment)))
+            key += ":" + slugify(unicode(json.dumps(segment)))
 
         cache.set(key, {"results": results}, cache_time)
 
@@ -1021,7 +1015,6 @@ class PollResult(models.Model):
         if not self.org_id or not self.flow or not self.ruleset:
             return generated_counters
 
-        org_id = self.org_id
         ruleset = ''
         category = ''
         state = ''

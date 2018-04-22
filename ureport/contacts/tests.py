@@ -7,23 +7,23 @@ from mock import patch
 from ureport.contacts.models import ContactField, Contact, ReportersCounter
 from ureport.contacts.tasks import pull_contacts
 from ureport.locations.models import Boundary
-from ureport.tests import UreportTest
+from ureport.tests import UreportTest, TestBackend
 from ureport.utils import json_date_to_datetime
 
 
 class ContactTest(UreportTest):
     def setUp(self):
         super(ContactTest, self).setUp()
-        self.nigeria.set_config('reporter_group', "Ureporters")
-        self.nigeria.set_config('registration_label', "Registration Date")
-        self.nigeria.set_config('state_label', "State")
-        self.nigeria.set_config('district_label', "LGA")
-        self.nigeria.set_config('ward_label', "Ward")
-        self.nigeria.set_config('occupation_label', "Activité")
-        self.nigeria.set_config('born_label', "Born")
-        self.nigeria.set_config('gender_label', 'Gender')
-        self.nigeria.set_config('female_label', "Female")
-        self.nigeria.set_config('male_label', 'Male')
+        self.nigeria.set_config('rapidpro.reporter_group', "Ureporters")
+        self.nigeria.set_config('rapidpro.registration_label', "Registration Date")
+        self.nigeria.set_config('rapidpro.state_label', "State")
+        self.nigeria.set_config('rapidpro.district_label', "LGA")
+        self.nigeria.set_config('rapidpro.ward_label', "Ward")
+        self.nigeria.set_config('rapidpro.occupation_label', "Activité")
+        self.nigeria.set_config('rapidpro.born_label', "Born")
+        self.nigeria.set_config('rapidpro.gender_label', 'Gender')
+        self.nigeria.set_config('rapidpro.female_label', "Female")
+        self.nigeria.set_config('rapidpro.male_label', 'Male')
 
         # boundaries fetched
         self.country = Boundary.objects.create(org=self.nigeria, osm_id="R-NIGERIA", name="Nigeria",
@@ -36,8 +36,8 @@ class ContactTest(UreportTest):
                                                 level=Boundary.DISTRICT_LEVEL,
                                                 parent=self.state, geometry='{"foo":"bar-state"}')
         self.ward = Boundary.objects.create(org=self.nigeria, osm_id="R-IKEJA", name="Ikeja",
-                                                level=Boundary.WARD_LEVEL,
-                                                parent=self.district, geometry='{"foo":"bar-ward"}')
+                                            level=Boundary.WARD_LEVEL,
+                                            parent=self.district, geometry='{"foo":"bar-ward"}')
 
         self.registration_date = ContactField.objects.create(org=self.nigeria, key='registration_date',
                                                              label='Registration Date', value_type='T')
@@ -153,23 +153,29 @@ class ContactsTasksTest(UreportTest):
     def setUp(self):
         super(ContactsTasksTest, self).setUp()
 
+    @patch('dash.orgs.models.Org.get_backend')
     @patch('ureport.contacts.models.ReportersCounter.squash_counts')
     @patch('ureport.tests.TestBackend.pull_fields')
     @patch('ureport.tests.TestBackend.pull_boundaries')
     @patch('ureport.tests.TestBackend.pull_contacts')
-    def test_pull_contacts(self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields, mock_squash_counts):
+    def test_pull_contacts(self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields, mock_squash_counts, mock_get_backend):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_pull_fields.return_value = (1, 2, 3, 4)
         mock_pull_boundaries.return_value = (5, 6, 7, 8)
         mock_pull_contacts.return_value = (9, 10, 11, 12)
         mock_squash_counts.return_value = "Called"
 
+        # keep only on backend config
+        self.nigeria.backends.exclude(slug='rapidpro').delete()
+
         pull_contacts(self.nigeria.pk)
 
         task_state = TaskState.objects.get(org=self.nigeria, task_key='contact-pull')
-        self.assertEqual(task_state.get_last_results(), {
-            'fields': {'created': 1, 'updated': 2, 'deleted': 3},
-            'boundaries': {'created': 5, 'updated': 6, 'deleted': 7},
-            'contacts': {'created': 9, 'updated': 10, 'deleted': 11}
-        })
+        self.assertEqual(task_state.get_last_results(),
+                         {'rapidpro': {
+                             'fields': {'created': 1, 'updated': 2, 'deleted': 3},
+                             'boundaries': {'created': 5, 'updated': 6, 'deleted': 7},
+                             'contacts': {'created': 9, 'updated': 10, 'deleted': 11}
+                         }})
 
         mock_squash_counts.assert_called_once_with()

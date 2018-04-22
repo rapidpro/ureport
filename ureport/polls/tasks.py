@@ -3,6 +3,8 @@ import time
 
 from temba_client.exceptions import TembaRateExceededError
 
+from datetime import timedelta
+
 from dash.orgs.models import Org
 from django.core.cache import cache
 from django.utils import timezone
@@ -10,7 +12,7 @@ from django_redis import get_redis_connection
 from ureport.celery import app
 
 from dash.orgs.tasks import org_task
-from ureport.utils import fetch_flows, fetch_old_sites_count, update_poll_flow_data
+from ureport.utils import fetch_flows, fetch_old_sites_count as do_fetch_old_sites_count, update_poll_flow_data
 from ureport.utils import populate_age_and_gender_poll_results
 
 
@@ -19,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 @org_task('backfill-poll-results', 60 * 60 * 3)
 def backfill_poll_results(org, since, until):
-    from .models import Poll, PollResult
+    from .models import Poll
 
     results_log = dict()
 
@@ -61,8 +63,8 @@ def pull_results_brick_polls(org, since, until):
 
     results_log = dict()
 
-    brick_polls_ids_list = Poll.get_brick_polls(org)
-    brick_polls_ids_list = [poll.pk for poll in brick_polls_ids_list]
+    brick_polls_ids_list = Poll.get_brick_polls_ids(org)
+    brick_polls_ids_list = [poll_id for poll_id in brick_polls_ids_list]
 
     brick_polls_ids = Poll.objects.filter(id__in=brick_polls_ids_list).order_by('flow_uuid').distinct('flow_uuid').values_list('id', flat=True)
 
@@ -90,8 +92,12 @@ def pull_results_brick_polls(org, since, until):
 def pull_results_other_polls(org, since, until):
     from .models import Poll
 
+    now = timezone.now()
+    recent_window = now - timedelta(days=7)
+
     results_log = dict()
-    other_polls_ids = Poll.get_other_polls(org).order_by('flow_uuid').distinct('flow_uuid').values_list('id', flat=True)
+    other_polls_ids = Poll.get_other_polls(org).exclude(created_on__gt=recent_window)
+    other_polls_ids = other_polls_ids.order_by('flow_uuid').distinct('flow_uuid').values_list('id', flat=True)
     other_polls = Poll.objects.filter(id__in=other_polls_ids).order_by('-created_on')
     for poll in other_polls:
 
@@ -206,7 +212,7 @@ def fetch_old_sites_count():
 
     if not r.get(key):
         with r.lock(key, timeout=lock_timeout):
-            fetch_old_sites_count()
+            do_fetch_old_sites_count()
             print "Task: fetch_old_sites_count took %ss" % (time.time() - start)
 
 

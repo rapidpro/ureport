@@ -93,15 +93,15 @@
                         %a.poll-question-tab.active.primary-color.primary-bg-color{href:"#statistics-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                           - trans "STATISTICS"
 
-                        - if not is_iorg and org|config:"state_label"
+                        - if not is_iorg and show_maps
                           %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                             - trans "LOCATIONS"
 
-                        - if not is_iorg and org|config:"gender_label"
+                        - if not is_iorg and show_gender_stats
                           %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#gender-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                             - trans "GENDER"
 
-                        - if not is_iorg and org|config:"born_label"
+                        - if not is_iorg and show_age_stats
                           %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#age-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
                             - trans "AGE"
 
@@ -117,13 +117,13 @@
                                   {{ category.label }}
 
                     - else
-                      -if not is_iorg and org|config:"state_label"
+                      -if not is_iorg and show_maps
                         .tab-pane{id:"locations-tab-{{ question.id }}"}
                           .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
                             .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
                               %img{src:"{{ STATIC_URL }}img/loading.gif"}
 
-                      -if not is_iorg and org|config:"gender_label"
+                      -if not is_iorg and show_gender_stats
                         .tab-pane{id:"gender-tab-{{ question.id }}"}
                           -with seg_results=question|question_segmented_results:"gender"
                             -for results in seg_results
@@ -152,7 +152,7 @@
                               -if not forloop.last
                                 %hr
 
-                      -if not is_iorg and org|config:"born_label"
+                      -if not is_iorg and show_age_stats
                         .tab-pane{id:"age-tab-{{ question.id }}"}
                           -with seg_results=question|question_segmented_results:"age"
                             -for results in seg_results
@@ -372,7 +372,7 @@
       $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
         $(".poll-map").each(function(){
           var question = $(this).attr("data-question");
-          var map = window.initMap('map-' + question, boundaries, question, '{{ org|config:"district_label"}}', '{{ org|config:"ward_label"}}');
+          var map = window.initMap('map-' + question, boundaries, question, '{{ district_zoom|lower }}' === 'true', '{{ ward_zoom|lower }}' === 'true');
 
           $(this).data('map', map);
         });
