@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import calendar
+import json
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponsePermanentRedirect
+from django.conf import settings
+from django.http import HttpResponsePermanentRedirect, HttpResponse
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
-from smartmin.views import *
+from smartmin.views import SmartReadView, SmartTemplateView
 
 from dash.stories.models import Story
 from ureport.countries.models import CountryAlias
@@ -35,7 +37,8 @@ class IndexView(SmartTemplateView):
         if context['latest_poll']:
             context['trending_words'] = latest_poll.get_trending_words()
 
-        context['recent_polls'] = Poll.get_brick_polls(org)
+        brick_poll_ids = Poll.get_brick_polls_ids(org)
+        context['recent_polls'] = Poll.objects.filter(id__in=brick_poll_ids)
 
         context['stories'] = Story.objects.filter(org=org, is_active=True, featured=True).order_by('-created_on')
 
@@ -48,7 +51,7 @@ class IndexView(SmartTemplateView):
         context['most_active_regions'] = org.get_regions_stats()
 
         # global counter
-        if org.get_config('is_global'):
+        if org.get_config('common.is_global'):
             context['global_counter'] = get_global_count()
 
         context['gender_stats'] = org.get_gender_stats()
@@ -209,7 +212,7 @@ class BoundaryView(SmartTemplateView):
     def render_to_response(self, context, **kwargs):
         org = self.request.org
 
-        if org.get_config('is_global'):
+        if org.get_config('common.is_global'):
             location_boundaries = org.boundaries.filter(level=0)
         else:
             osm_id = self.kwargs.get('osm_id', None)

@@ -44,11 +44,14 @@ MEDIA_URL = 'http://dl-ureport.s3.amazonaws.com/'
 AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME='dl-ureport'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # these two settings will cause our aws files to never expire
 # see http://developer.yahoo.com/performance/rules.html#expires
 AWS_QUERYSTRING_AUTH = False
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
 AWS_HEADERS = {
 'Expires': 'Wed, 1 Jan 2020 20:00:00 GMT',
 'Cache-Control': 'max-age=86400',
