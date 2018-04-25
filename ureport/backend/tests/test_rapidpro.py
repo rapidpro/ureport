@@ -240,7 +240,7 @@ class ContactSyncerTest(UreportTest):
                           'gender': '',
                           'born': 0,
                           'occupation': '',
-                          'registered_on': None,
+                          'registered_on': json_date_to_datetime('2000-01-01T00:00:00.000'),
                           'state': '',
                           'district': '',
                           'ward': ''})
