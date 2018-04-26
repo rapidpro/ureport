@@ -939,6 +939,24 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
                           num_path_created, num_path_updated, num_path_ignored), (0, 1, 0, 0, 0, 3))
 
+        long_text = "Long Text moree " * 100000
+        temba_run_long_text = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                              contact=ObjectRef.create(uuid='C-007', name='Lebron James'), responded=True,
+                                              values={"party": TembaRun.Value.create(value=long_text,
+                                                                                     category="Party",
+                                                                                     node='ruleset-uuid',
+                                                                                     time=now + timedelta(minutes=1))},
+                                              path=[TembaRun.Step.create(node='ruleset-uuid', time=now)],
+                                              created_on=now, modified_on=now, exited_on=now,
+                                              exit_type='completed')
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_long_text])]
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 0, 0, 1))
+
     @patch('dash.orgs.models.TembaClient.get_runs')
     @patch('django.utils.timezone.now')
     @patch('django.core.cache.cache.get')
