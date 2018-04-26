@@ -201,6 +201,10 @@ class ContactSyncer(BaseSyncer):
             if registered_on:
                 registered_on = json_date_to_datetime(registered_on)
 
+        if not registered_on:
+            # default to created_on to avoid null in the PG triggers
+            registered_on = json_date_to_datetime(remote.created_on)
+
         occupation = ''
         occupation_field = org.get_config('%s.occupation_label' % self.backend.slug, default='')
         if occupation_field:

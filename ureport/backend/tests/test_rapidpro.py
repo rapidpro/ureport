@@ -231,7 +231,8 @@ class ContactSyncerTest(UreportTest):
                                             fields={'registration_date': None, 'state': None,
                                                     'lga': None, 'occupation': None, 'born': None,
                                                     'gender': None},
-                                            language='eng')
+                                            language='eng',
+                                            created_on='2013-01-02T03:04:05.000000Z')
 
         self.assertEqual(self.syncer.local_kwargs(self.nigeria, temba_contact),
                          {'backend': self.rapidpro_backend,
@@ -240,7 +241,7 @@ class ContactSyncerTest(UreportTest):
                           'gender': '',
                           'born': 0,
                           'occupation': '',
-                          'registered_on': None,
+                          'registered_on': json_date_to_datetime('2013-01-02T03:04:05.000'),
                           'state': '',
                           'district': '',
                           'ward': ''})
@@ -448,19 +449,19 @@ class RapidProBackendTest(UreportTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "34"}, stopped=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False, created_on='2013-01-02T03:04:05.000000Z',
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-002", name="Spammers")],
-                        fields={'age': "67"}, stopped=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False, created_on='2013-01-02T03:04:05.000000Z',
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[],
-                        fields={'age': "35"}, stopped=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False, created_on='2013-01-02T03:04:05.000000Z',
                     ),
                 ]
             ),
@@ -469,7 +470,7 @@ class RapidProBackendTest(UreportTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, stopped=True, blocked=False
+                        fields=None, stopped=True, blocked=False, created_on='2013-01-02T03:04:05.000000Z',
                     ),
                 ]
             )
@@ -489,19 +490,19 @@ class RapidProBackendTest(UreportTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "34"}, stopped=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "67"}, stopped=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[],
-                        fields={'age': "35"}, stopped=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                 ]
             ),
@@ -510,7 +511,7 @@ class RapidProBackendTest(UreportTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, stopped=True, blocked=False
+                        fields=None, stopped=True, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                 ]
             )
@@ -531,19 +532,19 @@ class RapidProBackendTest(UreportTest):
                     TembaContact.create(
                         uuid="C-001", name="Bob McFlow", language="eng", urns=["twitter:bobflow"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "34"}, stopped=False, blocked=False
+                        fields={'age': "34"}, stopped=False, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "67"}, stopped=False, blocked=False
+                        fields={'age': "67"}, stopped=False, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                 ],
                 [
                     TembaContact.create(
                         uuid="C-003", name="Ann McPoll", language="eng", urns=["tel:+250783835664"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "35"}, stopped=True, blocked=False
+                        fields={'age': "35"}, stopped=True, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                 ]
             ),
@@ -552,7 +553,7 @@ class RapidProBackendTest(UreportTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, stopped=True, blocked=False
+                        fields=None, stopped=True, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                 ]
             )
@@ -577,11 +578,12 @@ class RapidProBackendTest(UreportTest):
                                         fields={'registration_date': '2014-01-02T03:04:05.000000Z',
                                                 'state': 'Nigeria > Lagos', 'lga': 'Nigeria > Lagos > Oyo',
                                                 'occupation': 'Student', 'born': '1990', 'gender': 'Male'},
-                                        language='eng'),
+                                        language='eng', created_on='2013-01-02T03:04:05.000000Z'),
                     TembaContact.create(
                         uuid="C-002", name="Jim McMsg", language="fre", urns=["tel:+250783835665"],
                         groups=[ObjectRef.create(uuid="G-001", name="ureporters")],
-                        fields={'age': "67", "born": "1992"}, stopped=False, blocked=False
+                        fields={'age': "67", "born": "1992"}, stopped=False, blocked=False,
+                        created_on='2013-01-02T03:04:05.000000Z'
                     ),
                 ]
             ),
@@ -590,7 +592,7 @@ class RapidProBackendTest(UreportTest):
                 [
                     TembaContact.create(
                         uuid="C-004", name=None, language=None, urns=[], groups=[],
-                        fields=None, stopped=True, blocked=False
+                        fields=None, stopped=True, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                 ]
             )
@@ -618,7 +620,7 @@ class RapidProBackendTest(UreportTest):
                 [
                     TembaContact.create(
                         uuid="C-002", name=None, language=None, urns=[], groups=[],
-                        fields=None, stopped=True, blocked=False
+                        fields=None, stopped=True, blocked=False, created_on='2013-01-02T03:04:05.000000Z'
                     ),
                 ]
             )
