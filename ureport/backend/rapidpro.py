@@ -30,6 +30,7 @@ class FieldSyncer(BaseSyncer):
     local_id_attr = 'key'
     remote_id_attr = 'key'
     prefetch_related = ('backend', )
+    local_backend_attr = 'backend'
 
     def local_kwargs(self, org, remote):
         return {
@@ -57,6 +58,7 @@ class BoundarySyncer(BaseSyncer):
     local_id_attr = 'osm_id'
     remote_id_attr = 'osm_id'
     prefetch_related = ('backend', )
+    local_backend_attr = 'backend'
 
     def local_kwargs(self, org, remote):
         geometry = json.dumps(dict())
@@ -106,6 +108,7 @@ class BoundarySyncer(BaseSyncer):
 class ContactSyncer(BaseSyncer):
     model = Contact
     prefetch_related = ('backend', )
+    local_backend_attr = 'backend'
 
     def get_boundaries_data(self, org):
 
