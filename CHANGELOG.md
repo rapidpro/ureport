@@ -1,3 +1,10 @@
+v1.0.402
+----------
+ * Update rapidpro-dash
+ * Trim poll results long text values
+ * Specify the backend attr on the syncers
+ * Use remote contact created on if the registered on value in None
+
 v1.0.401
 ----------
  * Fix to display age charts
