@@ -1,3 +1,7 @@
+v1.0.403
+----------
+ * Fix for None values and datetime type in the recent changes
+
 v1.0.402
 ----------
  * Update rapidpro-dash
