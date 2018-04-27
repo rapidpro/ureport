@@ -1,3 +1,23 @@
+v1.0.403
+----------
+ * Fix for None values and datetime type in the recent changes
+
+v1.0.402
+----------
+ * Update rapidpro-dash
+ * Trim poll results long text values
+ * Specify the backend attr on the syncers
+ * Use remote contact created on if the registered on value in None
+
+v1.0.401
+----------
+ * Fix to display age charts
+ * Default value for fetch_flows for the cache miss should be an empty dict
+
+v1.0.400
+----------
+ * Default value for fetch_flows for the cache miss should be an empty dict
+
 v1.0.399
 ----------
  * Only exclude the main poll if we have one

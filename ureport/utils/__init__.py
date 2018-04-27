@@ -94,7 +94,7 @@ def fetch_flows(org, backend=None):
         backends = org.backends.filter(is_active=True)
 
     this_time = datetime.now()
-    org_flows = dict(time=datetime_to_ms(this_time), results=[])
+    org_flows = dict(time=datetime_to_ms(this_time), results=dict())
 
     for backend_obj in backends:
         backend = org.get_backend(backend_slug=backend_obj.slug)
