@@ -206,7 +206,7 @@ class ContactSyncer(BaseSyncer):
 
         if not registered_on:
             # default to created_on to avoid null in the PG triggers
-            registered_on = json_date_to_datetime(remote.created_on)
+            registered_on = remote.created_on
 
         occupation = ''
         occupation_field = org.get_config('%s.occupation_label' % self.backend.slug, default='')
@@ -527,7 +527,7 @@ class RapidProBackend(BaseBackend):
         for temba_value in temba_values:
             ruleset_uuid = temba_value.node
             category = temba_value.category
-            text = temba_value.value[:2560]
+            text = temba_value.value[:2560] if temba_value.value is not None else temba_value.value
             value_date = temba_value.time
 
             existing_poll_result = existing_db_poll_results_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
