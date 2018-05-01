@@ -3,6 +3,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from django.db import migrations
+from ureport.utils import prod_print
 
 
 class Migration(migrations.Migration):
@@ -12,7 +13,7 @@ class Migration(migrations.Migration):
 
         deleted, inactive = Boundary.objects.filter(is_active=False).delete()
 
-        print("Deleted %d inactive boundaries" % deleted)
+        prod_print("Deleted %d inactive boundaries" % deleted)
 
     dependencies = [
         ('locations', '0002_boundary_is_active'),

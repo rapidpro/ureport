@@ -6,6 +6,7 @@ import six
 import time
 from django.conf import settings
 from django.db import migrations
+from ureport.utils import prod_print
 
 
 def fetch_flows(org, filter=None):
@@ -36,7 +37,7 @@ def fetch_flows(org, filter=None):
             next = None
 
     if flows:
-        print("- got flows in %f" % (time.time() - start))
+        prod_print("- got flows in %f" % (time.time() - start))
 
     return flows
 

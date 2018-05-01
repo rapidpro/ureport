@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
+import logging
 from django import template
 from django.template import TemplateSyntaxError
 from django.conf import settings
@@ -9,6 +9,7 @@ from django.utils.safestring import mark_safe
 from ureport.utils import get_linked_orgs
 
 register = template.Library()
+logger = logging.getLogger(__name__)
 
 
 @register.filter
@@ -21,8 +22,7 @@ def question_results(question):
         if results:
             return results[0]
     except Exception:
-        import traceback
-        traceback.print_exc()
+        logger.error('Question get results without segment in template tag raised exception', extra={'stack': True, })
         return None
 
 
@@ -42,8 +42,7 @@ def question_segmented_results(question, field):
         if results:
             return results
     except Exception:
-        import traceback
-        traceback.print_exc()
+        logger.error('Question get results with segment in template tag raised exception', extra={'stack': True, })
         return None
 
 

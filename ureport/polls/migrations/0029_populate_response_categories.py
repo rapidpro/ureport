@@ -8,6 +8,7 @@ from django.conf import settings
 from django.db import migrations
 from temba_client.exceptions import TembaBadRequestError
 from temba_client.v1 import TembaClient
+from ureport.utils import prod_print
 
 
 class Migration(migrations.Migration):
@@ -50,12 +51,12 @@ class Migration(migrations.Migration):
                     if existing_questions:
                         existing_questions.update(ruleset_type=ruleset_type)
                         poll_question = existing_questions.first()
-                        print("Updated ruleset - %s" % ruleset_uuid)
+                        prod_print("Updated ruleset - %s" % ruleset_uuid)
                     else:
                         poll_question = PollQuestion.objects.create(poll=poll, ruleset_uuid=ruleset_uuid, title=label,
                                                                     ruleset_type=ruleset_type, is_active=False,
                                                                     created_by=user, modified_by=user)
-                        print("Created ruleset - %s" % ruleset_uuid)
+                        prod_print("Created ruleset - %s" % ruleset_uuid)
 
                     for rule in ruleset['rules']:
                         category = rule['category'][base_language]
@@ -63,16 +64,16 @@ class Migration(migrations.Migration):
                                                                                          rule_uuid=rule['uuid'])
                         if existing_response_category:
                             existing_response_category.update(category=category)
-                            print("Updated rule - %s" % rule['uuid'])
+                            prod_print("Updated rule - %s" % rule['uuid'])
                         else:
                             PollResponseCategory.objects.create(question=poll_question, rule_uuid=rule['uuid'],
                                                                 category=category)
 
-                            print("Created rule - %s" % rule['uuid'])
+                            prod_print("Created rule - %s" % rule['uuid'])
 
-                    print("Done ruleset - %s" % ruleset_uuid)
+                    prod_print("Done ruleset - %s" % ruleset_uuid)
 
-                print("Done poll - %d on org %d" % (poll.pk, org.pk))
+                prod_print("Done poll - %d on org %d" % (poll.pk, org.pk))
                 successes += 1
 
             except TembaBadRequestError:
@@ -81,14 +82,14 @@ class Migration(migrations.Migration):
 
                 deactivated_ids.append(poll.pk)
                 deactivated += 1
-                print("Hidden poll - %d on org %d" % (poll.pk, org.pk))
+                prod_print("Hidden poll - %d on org %d" % (poll.pk, org.pk))
 
             except Exception as e:
                 raise e
 
-        print("Finished populating %d polls in %ss" % (successes, time.time() - start))
-        print("Deactivated %d polls" % deactivated)
-        print("Deactivated ids are %s" % ",".join([six.text_type(elt) for elt in deactivated_ids]))
+        prod_print("Finished populating %d polls in %ss" % (successes, time.time() - start))
+        prod_print("Deactivated %d polls" % deactivated)
+        prod_print("Deactivated ids are %s" % ",".join([six.text_type(elt) for elt in deactivated_ids]))
 
     dependencies = [
         ('polls', '0028_auto_20160202_1026'),

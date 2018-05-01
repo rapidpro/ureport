@@ -6,7 +6,6 @@ from django.urls import reverse
 from mock import patch
 from ureport.admins import OrgCache
 from ureport.tests import UreportTest
-from django.template import TemplateSyntaxError
 
 
 class PollTest(UreportTest):
@@ -36,12 +35,6 @@ class PollTest(UreportTest):
             self.assertLoginRedirect(response)
 
             self.login(self.superuser)
-
-            with self.assertRaises(TemplateSyntaxError):
-                self.client.get(refresh_cache_url, SERVER_NAME='uganda.ureport.io')
-
-            with self.assertRaises(KeyError):
-                self.client.post(refresh_cache_url, dict(), SERVER_NAME='uganda.ureport.io')
 
             response = self.client.post(refresh_cache_url, post_data, SERVER_NAME='uganda.ureport.io')
             self.assertEqual(response.status_code, 302)

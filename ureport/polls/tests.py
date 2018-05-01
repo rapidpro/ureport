@@ -263,12 +263,6 @@ class PollTest(UreportTest):
 
             self.login(self.superuser)
 
-            with self.assertRaises(TemplateSyntaxError):
-                self.client.get(pull_refresh_url, SERVER_NAME='uganda.ureport.io')
-
-            with self.assertRaises(KeyError):
-                self.client.post(pull_refresh_url, dict(), SERVER_NAME='uganda.ureport.io')
-
             response = self.client.post(pull_refresh_url, post_data, SERVER_NAME='uganda.ureport.io')
             self.assertEqual(response.status_code, 302)
             mock_pull_refresh.assert_called_once_with()
@@ -1619,7 +1613,7 @@ class PollQuestionTest(UreportTest):
             self.assertEqual(gender_results[1]['categories'][1]['count'], 12)
             self.assertEqual(gender_results[1]['categories'][1]['label'], 'No')
 
-            poll1.poll_date = datetime.now().replace(year=2015)
+            poll1.poll_date = timezone.now().replace(year=2015)
             poll1.save()
 
             question_results['ruleset:%s:category:yes:born:3' % poll_question1.ruleset_uuid] = 5

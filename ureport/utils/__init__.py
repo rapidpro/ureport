@@ -26,6 +26,11 @@ ORG_CONTACT_COUNT_KEY = 'org:%d:contacts-counts'
 ORG_CONTACT_COUNT_TIMEOUT = 300
 
 
+def prod_print(msg):
+    if getattr(settings, 'PROD', False):
+        print(msg)
+
+
 def datetime_to_json_date(dt):
     """
     Formats a datetime as a string for inclusion in JSON
@@ -86,7 +91,7 @@ def get_linked_orgs(authenticated=False):
 def fetch_flows(org, backend=None):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     start = time.time()
-    print("Fetching flows for %s" % org.name)
+    prod_print("Fetching flows for %s" % org.name)
 
     if backend:
         backends = [backend]
@@ -110,7 +115,7 @@ def fetch_flows(org, backend=None):
             import traceback
             traceback.print_exc()
 
-    print("Fetch %s flows took %ss" % (org.name, time.time() - start))
+    prod_print("Fetch %s flows took %ss" % (org.name, time.time() - start))
 
     if len(backends):
         return org_flows.get("results", dict())
@@ -184,7 +189,7 @@ def fetch_old_sites_count():
     # delete the global count cache to force a recalculate at the end
     cache.delete(GLOBAL_COUNT_CACHE_KEY)
 
-    print("Fetch old sites counts took %ss" % (time.time() - start))
+    prod_print("Fetch old sites counts took %ss" % (time.time() - start))
     return old_site_values
 
 
@@ -455,7 +460,7 @@ def populate_age_and_gender_poll_results(org=None):
             if org is None:
                 cache.set(LAST_POPULATED_CONTACT, contact.pk, None)
 
-        print("Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start))
+        prod_print("Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start))
 
 
 Org.get_occupation_stats = get_occupation_stats

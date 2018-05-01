@@ -6,6 +6,7 @@ from django.db import migrations
 from temba_client.v1 import TembaClient
 
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
+from ureport.utils import prod_print
 
 
 class Migration(migrations.Migration):
@@ -29,7 +30,7 @@ class Migration(migrations.Migration):
                 if json_date:
                     date = json_date_to_datetime(json_date)
                 else:
-                    print("using created_on for flow_date on poll with id %s" % poll.pk)
+                    prod_print("using created_on for flow_date on poll with id %s" % poll.pk)
                     date = poll.created_on
 
                 poll.poll_date = date

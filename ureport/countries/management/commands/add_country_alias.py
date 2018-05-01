@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django_countries import countries
 from ureport.countries.models import CountryAlias
+from ureport.utils import prod_print
 
 
 class Command(BaseCommand):
@@ -29,19 +30,19 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         if os.path.exists('./country-list/') and os.path.isdir('./country-list'):
-            print("Fetching country-list...")
+            prod_print("Fetching country-list...")
             os.chdir('./country-list')
             repo = git.Repo('.')
             o = repo.remotes.origin
             o.pull()
             os.chdir('..')
-            print("Finished fetching country-list.")
+            prod_print("Finished fetching country-list.")
         else:
-            print("Cloning country-list...")
+            prod_print("Cloning country-list...")
             git.Git().clone('https://github.com/umpirsky/country-list.git', 'country-list')
-            print("Finished cloning country-list.")
+            prod_print("Finished cloning country-list.")
 
-        print("Looking up json files...")
+        prod_print("Looking up json files...")
 
         filenames = []
 
@@ -50,20 +51,20 @@ class Command(BaseCommand):
             for name in files:
                 if name.endswith('.json'):
                     filenames.append(os.path.join(path, name))
-                    print("Found %s" % os.path.join(path, name))
+                    prod_print("Found %s" % os.path.join(path, name))
                     i += 1
 
-        print("Found %d json files to parse")
+        prod_print("Found %d json files to parse")
 
         user = User.objects.filter(username="root").first()
 
         if not user:
             raise Exception(_("No root user found. Please create a root user"))
 
-        print("Parsing files...")
+        prod_print("Parsing files...")
         for filename in filenames:
-            print("Parsing file %s" % filename)
+            prod_print("Parsing file %s" % filename)
             with open(filename, encoding='utf-8') as json_file:
                 self.import_file(json_file, user)
 
-        print("All files parsed.")
+        prod_print("All files parsed.")

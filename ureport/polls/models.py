@@ -185,7 +185,7 @@ class Poll(SmartModel):
         return after, before, latest_synced_obj_time, batches_latest, resume_cursor, pull_after_delete
 
     def delete_poll_results_counter(self):
-        from ureport.utils import chunk_list
+        from ureport.utils import chunk_list, prod_print
 
         rulesets = self.questions.all().values_list('ruleset_uuid', flat=True)
 
@@ -197,10 +197,10 @@ class Poll(SmartModel):
         for batch in chunk_list(counters_ids, 1000):
             PollResultsCounter.objects.filter(pk__in=batch).delete()
 
-        print("Deleted %d poll results counters for poll #%d on org #%d" % (counters_ids_count, self.pk, self.org_id))
+        prod_print("Deleted %d poll results counters for poll #%d on org #%d" % (counters_ids_count, self.pk, self.org_id))
 
     def delete_poll_results(self):
-        from ureport.utils import chunk_list
+        from ureport.utils import chunk_list, prod_print
 
         results_ids = PollResult.objects.filter(org_id=self.org_id, flow=self.flow_uuid).values_list('pk', flat=True)
 
@@ -209,7 +209,7 @@ class Poll(SmartModel):
         for batch in chunk_list(results_ids, 1000):
             PollResult.objects.filter(pk__in=batch).delete()
 
-        print("Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id))
+        prod_print("Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id))
 
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
         cache.delete(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.org.pk, self.flow_uuid))
@@ -241,7 +241,7 @@ class Poll(SmartModel):
         Poll.pull_poll_results_task(self)
 
     def rebuild_poll_results_counts(self):
-        from ureport.utils import chunk_list
+        from ureport.utils import chunk_list, prod_print
         import time
 
         start = time.time()
@@ -255,7 +255,7 @@ class Poll(SmartModel):
         key = Poll.POLL_REBUILD_COUNTS_LOCK % (org_id, flow)
 
         if r.get(key):
-            print("Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id))
+            prod_print("Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id))
 
         else:
             with r.lock(key):
@@ -263,7 +263,7 @@ class Poll(SmartModel):
 
                 poll_results_ids_count = len(poll_results_ids)
 
-                print("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
+                prod_print("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
 
                 processed_results = 0
                 counters_dict = defaultdict(int)
@@ -278,7 +278,7 @@ class Poll(SmartModel):
 
                         processed_results += 1
 
-                print("Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start))
+                prod_print("Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start))
 
                 counters_to_insert = []
                 for counter_tuple in counters_dict.keys():
@@ -291,13 +291,13 @@ class Poll(SmartModel):
                 self.delete_poll_results_counter()
 
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
-                print("Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count))
+                prod_print("Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count))
 
                 start_update_cache = time.time()
                 self.update_questions_results_cache()
-                print("Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache))
+                prod_print("Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache))
 
-                print("Poll responses counts for poll #%d on org #%d are %s responded out of %s polled" % (poll_id, org_id, self.responded_runs(), self.runs()))
+                prod_print("Poll responses counts for poll #%d on org #%d are %s responded out of %s polled" % (poll_id, org_id, self.responded_runs(), self.runs()))
 
     def get_question_uuids(self):
         return self.questions.values_list('ruleset_uuid', flat=True)
