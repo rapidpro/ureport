@@ -188,17 +188,24 @@
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '{{ org|config:"facebook_app_id" }}',
+          autoLogAppEvents: true,
           xfbml      : true,
-          version    : 'v2.6'
+          version    : 'v2.12'
         });
       };
     </script>
+
+    <div class="fb-customerchat"
+      page_id="{{ org|config:"facebook_page_id" }}"
+      logged_in_greeting="Hi! Welcome to U-Report, chat to register and start speaking out today!"
+      logged_out_greeting="Hi! Welcome to U-Report, chat to register and start speaking out today!">
+    </div>
 
   <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/{{ org_lang }}/sdk.js#xfbml=1&version=v2.6";
+    js.src = "//connect.facebook.net/{{ org_lang }}/sdk.js#xfbml=1&version=v2.12";
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
