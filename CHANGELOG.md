@@ -1,3 +1,7 @@
+v1.0.404
+----------
+ * Add FB messenger customer chat plugin
+
 v1.0.403
 ----------
  * Fix for None values and datetime type in the recent changes
