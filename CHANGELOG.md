@@ -1,3 +1,7 @@
+v1.0.405
+----------
+ * More HTTPS use
+
 v1.0.404
 ----------
  * Add FB messenger customer chat plugin
