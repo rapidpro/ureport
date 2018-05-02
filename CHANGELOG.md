@@ -1,3 +1,7 @@
+v1.0.408
+----------
+ * Remove attribution attribute
+
 v1.0.407
 ----------
  * Fix syntax
