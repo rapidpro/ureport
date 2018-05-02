@@ -1,3 +1,7 @@
+v1.0.406
+----------
+ * Use latest FB SDK version
+
 v1.0.405
 ----------
  * More HTTPS use
