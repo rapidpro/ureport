@@ -38,7 +38,7 @@ STATIC_URL = '/sitestatic/'
 COMPRESS_URL = '/sitestatic/'
 
 # our media is all on S3
-MEDIA_URL = 'http://dl-ureport.s3.amazonaws.com/'
+MEDIA_URL = 'https://dl-ureport.s3.amazonaws.com/'
 
 # we store files on S3 on prod boxes
 AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
