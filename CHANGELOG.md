@@ -1,3 +1,7 @@
+v1.0.407
+----------
+ * Fix syntax
+
 v1.0.406
 ----------
  * Use latest FB SDK version
