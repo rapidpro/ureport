@@ -55,7 +55,7 @@ STATIC_URL = '/sitestatic/'
 COMPRESS_URL = '/sitestatic/'
 
 # our media is all on S3
-MEDIA_URL = 'http://dl-ureport.s3.amazonaws.com/'
+MEDIA_URL = 'https://dl-ureport.s3.amazonaws.com/'
 
 # List of finder classes that know how to find static files in
 # various locations.

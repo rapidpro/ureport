@@ -1,3 +1,23 @@
+v1.0.408
+----------
+ * Remove attribution attribute
+
+v1.0.407
+----------
+ * Fix syntax
+
+v1.0.406
+----------
+ * Use latest FB SDK version
+
+v1.0.405
+----------
+ * More HTTPS use
+
+v1.0.404
+----------
+ * Add FB messenger customer chat plugin
+
 v1.0.403
 ----------
  * Fix for None values and datetime type in the recent changes
