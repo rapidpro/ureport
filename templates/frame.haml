@@ -16,7 +16,7 @@
   
   <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
   <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
@@ -188,17 +188,24 @@
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '{{ org|config:"facebook_app_id" }}',
+          autoLogAppEvents: true,
           xfbml      : true,
-          version    : 'v2.6'
+          version    : 'v3.0'
         });
       };
     </script>
+
+    <div class="fb-customerchat"
+      page_id="{{ org|config:"facebook_page_id" }}"
+      logged_in_greeting="Hi! Welcome to U-Report, chat to register and start speaking out today!"
+      logged_out_greeting="Hi! Welcome to U-Report, chat to register and start speaking out today!">
+    </div>
 
   <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/{{ org_lang }}/sdk.js#xfbml=1&version=v2.6";
+    js.src = "//connect.facebook.net/{{ org_lang }}/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
@@ -483,7 +490,7 @@
                   %a.primary-color{href:"{% org_host_link %}/users/login/"}
                     - trans "Login"
 
-  <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>
