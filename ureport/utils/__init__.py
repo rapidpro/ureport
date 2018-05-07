@@ -250,7 +250,7 @@ def get_gender_stats(org):
 
     total = female_count + male_count
 
-    female_percentage = int(female_count * 100 / total)
+    female_percentage = female_count * 100 // total
     male_percentage = 100 - female_percentage
 
     return dict(female_count=female_count, female_percentage=six.text_type(female_percentage) + "%",
