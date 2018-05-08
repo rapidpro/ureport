@@ -1,3 +1,8 @@
+v1.0.410
+----------
+ * Support FLOIP backend type
+ * Switch to Python3
+
 v1.0.408
 ----------
  * Remove attribution attribute
