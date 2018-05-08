@@ -1,4 +1,6 @@
-from __future__ import absolute_import
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
 
 import sys
 import os
@@ -157,6 +159,7 @@ DATA_API_BACKENDS_CONFIG = {
 
 DATA_API_BACKEND_TYPES = (
     ('ureport.backend.rapidpro.RapidProBackend', "RapidPro Backend Type"),
+    ('ureport.backend.floip.FLOIPBackend', "FLOIP Backend Type"),
 )
 
 

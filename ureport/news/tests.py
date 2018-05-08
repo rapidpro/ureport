@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
 from django.urls import reverse
 from dash.categories.models import Category
 from dash.categories.fields import CategoryChoiceField
@@ -34,10 +37,10 @@ class NewsTest(UreportTest):
         self.uganda_news1.description = "a b" * 120
         self.assertTrue(self.uganda_news1.short_description(), "a b" * 100 + "...")
 
-        self.assertEquals(self.uganda_news1.as_brick_json(), dict(title='uganda news 1',
-                                                                  description='a b' * 100 + '...',
-                                                                  link='http://uganda.ug',
-                                                                  created_on=self.uganda_news1.created_on.strftime('%b %d, %Y')))
+        self.assertEqual(self.uganda_news1.as_brick_json(), dict(title='uganda news 1',
+                                                                 description='a b' * 100 + '...',
+                                                                 link='http://uganda.ug',
+                                                                 created_on=self.uganda_news1.created_on.strftime('%b %d, %Y')))
 
     def test_create_newsItem(self):
         create_url = reverse('news.newsitem_create')
@@ -48,56 +51,56 @@ class NewsTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(len(response.context['form'].fields), 5)
+        self.assertEqual(len(response.context['form'].fields), 5)
         self.assertTrue('org' not in response.context['form'].fields)
         self.assertTrue('title' in response.context['form'].fields)
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('link' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
         self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
-        self.assertEquals(list(response.context['form'].fields['category'].choices),
-                          [('', '---------'),
-                           (self.health_uganda.pk, 'uganda - Health')])
+        self.assertEqual(list(response.context['form'].fields['category'].choices),
+                         [('', '---------'),
+                          (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
-        self.assertEquals(NewsItem.objects.count(), 0)
+        self.assertEqual(NewsItem.objects.count(), 0)
 
         response = self.client.post(create_url, dict(), SERVER_NAME='uganda.ureport.io')
         self.assertTrue('form' in response.context)
         self.assertTrue(response.context['form'].errors)
-        self.assertEquals(len(response.context['form'].errors.keys()), 3)
+        self.assertEqual(len(response.context['form'].errors.keys()), 3)
         self.assertTrue('title' in response.context['form'].errors.keys())
         self.assertTrue('link' in response.context['form'].errors.keys())
         self.assertTrue('category' in response.context['form'].errors.keys())
 
         post_data = dict(title='news 1', link='http://google.com', follow=True, category=self.health_uganda.pk)
         response = self.client.post(create_url, post_data, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(NewsItem.objects.count(), 1)
+        self.assertEqual(NewsItem.objects.count(), 1)
         newsItem = NewsItem.objects.get()
 
-        self.assertEquals(newsItem.title, 'news 1')
-        self.assertEquals(newsItem.category, self.health_uganda)
-        self.assertEquals(newsItem.link, 'http://google.com')
+        self.assertEqual(newsItem.title, 'news 1')
+        self.assertEqual(newsItem.category, self.health_uganda)
+        self.assertEqual(newsItem.link, 'http://google.com')
 
         self.login(self.superuser)
 
         response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(len(response.context['form'].fields), 6)
+        self.assertEqual(len(response.context['form'].fields), 6)
         self.assertTrue('org' in response.context['form'].fields)
         self.assertTrue('title' in response.context['form'].fields)
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('link' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
         self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
-        self.assertEquals(list(response.context['form'].fields['category'].choices),
-                          [('', '---------'),
-                           (self.health_uganda.pk, 'uganda - Health')])
+        self.assertEqual(list(response.context['form'].fields['category'].choices),
+                         [('', '---------'),
+                          (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
         response = self.client.post(create_url, dict(), SERVER_NAME='uganda.ureport.io')
         self.assertTrue('form' in response.context)
         self.assertTrue(response.context['form'].errors)
-        self.assertEquals(len(response.context['form'].errors.keys()), 4)
+        self.assertEqual(len(response.context['form'].errors.keys()), 4)
         self.assertTrue('org' in response.context['form'].errors.keys())
         self.assertTrue('title' in response.context['form'].errors.keys())
         self.assertTrue('link' in response.context['form'].errors.keys())
@@ -106,7 +109,7 @@ class NewsTest(UreportTest):
         post_data = dict(title='news 1', link='http://google.com', follow=True, category=self.health_uganda.pk, org=self.uganda.pk)
         response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
         self.assertFalse('form' in response.context)
-        self.assertEquals(NewsItem.objects.count(), 2)
+        self.assertEqual(NewsItem.objects.count(), 2)
 
     def test_list_newsItem(self):
         list_url = reverse('news.newsitem_list')
@@ -133,7 +136,7 @@ class NewsTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(len(response.context['object_list']), 1)
+        self.assertEqual(len(response.context['object_list']), 1)
         self.assertTrue(self.uganda_news1 in response.context['object_list'])
         self.assertFalse(self.nigeria_news1 in response.context['object_list'])
 
@@ -170,18 +173,18 @@ class NewsTest(UreportTest):
         self.assertLoginRedirect(response)
 
         response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 6)
+        self.assertEqual(len(response.context['form'].fields), 6)
         self.assertTrue('is_active' in response.context['form'].fields)
         self.assertTrue('title' in response.context['form'].fields)
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('link' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
         self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
-        self.assertEquals(list(response.context['form'].fields['category'].choices),
-                          [('', '---------'),
-                           (self.health_uganda.pk, 'uganda - Health')])
+        self.assertEqual(list(response.context['form'].fields['category'].choices),
+                         [('', '---------'),
+                          (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
         post_data = dict(title='title updated', description='description updated',
@@ -193,9 +196,9 @@ class NewsTest(UreportTest):
 
         updated_news = NewsItem.objects.get(pk=self.uganda_news1.pk)
         self.assertFalse(updated_news.is_active)
-        self.assertEquals(updated_news.title, 'title updated')
-        self.assertEquals(updated_news.description, 'description updated')
-        self.assertEquals(updated_news.link, 'http://updated.com')
+        self.assertEqual(updated_news.title, 'title updated')
+        self.assertEqual(updated_news.description, 'description updated')
+        self.assertEqual(updated_news.link, 'http://updated.com')
 
 
 class VideoTest(UreportTest):
@@ -221,24 +224,24 @@ class VideoTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(len(response.context['form'].fields), 5)
+        self.assertEqual(len(response.context['form'].fields), 5)
         self.assertTrue('org' not in response.context['form'].fields)
         self.assertTrue('title' in response.context['form'].fields)
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('video_id' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
         self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
-        self.assertEquals(list(response.context['form'].fields['category'].choices),
-                          [('', '---------'),
-                           (self.health_uganda.pk, 'uganda - Health')])
+        self.assertEqual(list(response.context['form'].fields['category'].choices),
+                         [('', '---------'),
+                          (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
-        self.assertEquals(Video.objects.count(), 0)
+        self.assertEqual(Video.objects.count(), 0)
 
         response = self.client.post(create_url, dict(), SERVER_NAME='uganda.ureport.io')
         self.assertTrue('form' in response.context)
         self.assertTrue(response.context['form'].errors)
-        self.assertEquals(len(response.context['form'].errors.keys()), 3)
+        self.assertEqual(len(response.context['form'].errors.keys()), 3)
         self.assertTrue('title' in response.context['form'].errors.keys())
         self.assertTrue('video_id' in response.context['form'].errors.keys())
         self.assertTrue('category' in response.context['form'].errors.keys())
@@ -247,19 +250,19 @@ class VideoTest(UreportTest):
                          video_id='YoutubeID', category=self.health_uganda.pk)
 
         response = self.client.post(create_url, post_data, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(Video.objects.count(), 1)
+        self.assertEqual(Video.objects.count(), 1)
         video = Video.objects.get()
 
-        self.assertEquals(video.title, 'video 1')
-        self.assertEquals(video.description, 'awesome video')
-        self.assertEquals(video.video_id, 'YoutubeID')
-        self.assertEquals(video.category, self.health_uganda)
-        self.assertEquals(video.org, self.uganda)
+        self.assertEqual(video.title, 'video 1')
+        self.assertEqual(video.description, 'awesome video')
+        self.assertEqual(video.video_id, 'YoutubeID')
+        self.assertEqual(video.category, self.health_uganda)
+        self.assertEqual(video.org, self.uganda)
 
         self.login(self.superuser)
 
         response = self.client.get(create_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(len(response.context['form'].fields), 6)
+        self.assertEqual(len(response.context['form'].fields), 6)
         self.assertTrue('org' in response.context['form'].fields)
         self.assertTrue('title' in response.context['form'].fields)
         self.assertTrue('description' in response.context['form'].fields)
@@ -270,7 +273,7 @@ class VideoTest(UreportTest):
         response = self.client.post(create_url, dict(), SERVER_NAME='uganda.ureport.io')
         self.assertTrue('form' in response.context)
         self.assertTrue(response.context['form'].errors)
-        self.assertEquals(len(response.context['form'].errors.keys()), 4)
+        self.assertEqual(len(response.context['form'].errors.keys()), 4)
         self.assertTrue('org' in response.context['form'].errors.keys())
         self.assertTrue('title' in response.context['form'].errors.keys())
         self.assertTrue('video_id' in response.context['form'].errors.keys())
@@ -282,7 +285,7 @@ class VideoTest(UreportTest):
 
         response = self.client.post(create_url, post_data, follow=True, SERVER_NAME='uganda.ureport.io')
         self.assertFalse('form' in response.context)
-        self.assertEquals(Video.objects.count(), 2)
+        self.assertEqual(Video.objects.count(), 2)
 
     def test_video_list(self):
         list_url = reverse('news.video_list')
@@ -309,7 +312,7 @@ class VideoTest(UreportTest):
         self.login(self.admin)
 
         response = self.client.get(list_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(len(response.context['object_list']), 1)
+        self.assertEqual(len(response.context['object_list']), 1)
         self.assertTrue(self.uganda_video in response.context['object_list'])
         self.assertFalse(self.nigeria_video in response.context['object_list'])
 
@@ -345,18 +348,18 @@ class VideoTest(UreportTest):
         self.assertLoginRedirect(response)
 
         response = self.client.get(uganda_update_url, SERVER_NAME='uganda.ureport.io')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue('form' in response.context)
-        self.assertEquals(len(response.context['form'].fields), 6)
+        self.assertEqual(len(response.context['form'].fields), 6)
         self.assertTrue('is_active' in response.context['form'].fields)
         self.assertTrue('title' in response.context['form'].fields)
         self.assertTrue('description' in response.context['form'].fields)
         self.assertTrue('video_id' in response.context['form'].fields)
         self.assertTrue('category' in response.context['form'].fields)
         self.assertIsInstance(response.context['form'].fields['category'].choices.field, CategoryChoiceField)
-        self.assertEquals(list(response.context['form'].fields['category'].choices),
-                          [('', '---------'),
-                           (self.health_uganda.pk, 'uganda - Health')])
+        self.assertEqual(list(response.context['form'].fields['category'].choices),
+                         [('', '---------'),
+                          (self.health_uganda.pk, 'uganda - Health')])
         self.assertTrue('loc' in response.context['form'].fields)
 
         post_data = dict(title='title updated', description='description updated',
@@ -367,7 +370,7 @@ class VideoTest(UreportTest):
         self.assertFalse('form' in response.context)
 
         updated_video = Video.objects.get(pk=self.uganda_video.pk)
-        self.assertEquals(updated_video.title, 'title updated')
-        self.assertEquals(updated_video.description, 'description updated')
-        self.assertEquals(updated_video.video_id, 'newID')
+        self.assertEqual(updated_video.title, 'title updated')
+        self.assertEqual(updated_video.description, 'description updated')
+        self.assertEqual(updated_video.video_id, 'newID')
         self.assertFalse(updated_video.is_active)

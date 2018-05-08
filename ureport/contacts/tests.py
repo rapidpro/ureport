@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import absolute_import, division, print_function, unicode_literals
+
 
 from dash.orgs.models import TaskState
 
@@ -175,7 +176,6 @@ class ContactsTasksTest(UreportTest):
                          {'rapidpro': {
                              'fields': {'created': 1, 'updated': 2, 'deleted': 3},
                              'boundaries': {'created': 5, 'updated': 6, 'deleted': 7},
-                             'contacts': {'created': 9, 'updated': 10, 'deleted': 11}
-                         }})
+                             'contacts': {'created': 9, 'updated': 10, 'deleted': 11}}})
 
         mock_squash_counts.assert_called_once_with()

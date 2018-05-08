@@ -1,7 +1,13 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+import six
+
 from django.conf import settings
 from django.core.cache import cache
 import feedparser
-import HTMLParser
+
+from html.parser import HTMLParser
 
 from dash.orgs.models import Org
 from django.db import models
@@ -15,6 +21,7 @@ RSS_JOBS_FEED_CACHE_TIME = getattr(settings, 'RSS_JOBS_FEED_CACHE_TIME', 60 * 60
 RSS_JOBS_KEY = 'jobsource:%d:%d'
 
 
+@six.python_2_unicode_compatible
 class JobSource(SmartModel):
     TWITTER = 'T'
     FACEBOOK = 'F'
@@ -33,7 +40,7 @@ class JobSource(SmartModel):
     org = models.ForeignKey(Org,
                             help_text=_("The organization this job source is for"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def get_feed(self, reload=False):
@@ -65,7 +72,7 @@ class JobSource(SmartModel):
             cache.delete(key)
             pass
 
-        html_parser = HTMLParser.HTMLParser()
+        html_parser = HTMLParser()
         for entry in entries:
             summary = entry['summary']
             entry['summary'] = strip_tags(html_parser.unescape(html_parser.unescape(summary)))

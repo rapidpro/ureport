@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
 import json
 
 import six
@@ -510,8 +513,7 @@ class PollCRUDL(SmartCRUDL):
         success_message = None
 
         def post_save(self, obj):
-            poll_id = int(self.request.POST['poll'])
-            poll = Poll.objects.get(pk=poll_id)
+            poll = self.get_object()
             poll.pull_refresh_task()
             self.success_message = _("Scheduled a pull refresh for poll #%d on org #%d") % (poll.pk, poll.org_id)
 

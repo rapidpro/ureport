@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import pytz
+import json
 from django.conf import settings
 from django.urls import reverse
 from django.test import override_settings
 from django.utils import timezone
 from smartmin.tests import SmartminTest
 from django.contrib.auth.models import User
+from django.utils.encoding import force_text
 from dash.orgs.middleware import SetOrgMiddleware
 from dash.test import DashTest
 from dash.utils import random_string
@@ -77,6 +78,20 @@ class TestBackend(RapidProBackend):
     pass
 
 
+class MockResponse(object):
+
+    def __init__(self, status_code, content=''):
+        self.content = content
+        self.status_code = status_code
+
+    def raise_for_status(self):
+        if self.status_code != 200:
+            raise Exception("Server returned %s" % force_text(self.status_code))
+
+    def json(self, **kwargs):
+        return json.loads(self.content)
+
+
 @override_settings(SITE_BACKEND='ureport.tests.TestBackend')
 class UreportTest(SmartminTest, DashTest):
 
@@ -119,7 +134,7 @@ class UreportTest(SmartminTest, DashTest):
 
         org.administrators.add(user)
 
-        self.assertEquals(Org.objects.filter(subdomain=subdomain).count(), 1)
+        self.assertEqual(Org.objects.filter(subdomain=subdomain).count(), 1)
 
         backend = org.backends.filter(slug='rapidpro', is_active=True).first()
         if not backend:
@@ -209,7 +224,7 @@ class SetOrgMiddlewareTest(UreportTest):
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
         self.assertEqual(self.request.org, ug_org)
-        self.assertEquals(self.request.user.get_org(), ug_org)
+        self.assertEqual(self.request.user.get_org(), ug_org)
 
         # test invalid subdomain
         wrong_subdomain_url = "blabla.ureport.io"
@@ -233,14 +248,14 @@ class SetOrgMiddlewareTest(UreportTest):
             self.request.get_host.return_value = wrong_subdomain_url
             self.request.org = None
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
-            self.assertEquals(response.status_code, 302)
-            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
             self.assertEqual(self.request.org, None)
-            self.assertEquals(self.request.user.get_org(), None)
+            self.assertEqual(self.request.user.get_org(), None)
 
             self.create_org('rwanda', pytz.timezone('Africa/Kigali'), self.admin)
             wrong_subdomain_url = "blabla.ureport.io"
             self.request.get_host.return_value = wrong_subdomain_url
             response = self.middleware.process_view(self.request, IndexView.as_view(), [], dict())
-            self.assertEquals(response.status_code, 302)
-            self.assertEquals(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.url, reverse(settings.SITE_CHOOSER_URL_NAME))
