@@ -509,13 +509,10 @@ class FLOIPBackend(BaseBackend):
 
     @staticmethod
     def _check_update_required(poll_obj, category, text, state, district, ward, born, gender, completed, value_date):
-        update_required = poll_obj.category != category or poll_obj.text != text
-        update_required = update_required or poll_obj.state != state
-        update_required = update_required or poll_obj.district != district
-        update_required = update_required or poll_obj.ward != ward
-        update_required = update_required or poll_obj.born != born
-        update_required = update_required or poll_obj.gender != gender
-        update_required = update_required or poll_obj.completed != completed
+        update_required = any([poll_obj.category != category, poll_obj.text != text, poll_obj.state != state,
+                               poll_obj.district != district, poll_obj.ward != ward, poll_obj.born != born,
+                               poll_obj.gender != gender, poll_obj.completed != completed])
+
         # if the reporter answered the step, check if this is a newer run
         if poll_obj.date is not None:
             update_required = update_required and (value_date > poll_obj.date)
