@@ -46,7 +46,7 @@ class FieldSyncer(BaseSyncer):
     def update_required(self, local, remote, local_kwargs):
         if local_kwargs and local_kwargs['backend'] != local.backend:
             return False
-        return local.label != remote.label or local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)
+        return any([local.label != remote.label, local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)])
 
     def delete_local(self, local):
         local.release()
@@ -270,13 +270,10 @@ class ContactSyncer(BaseSyncer):
         if not local_kwargs:
             return True
 
-        update = local.gender != local_kwargs['gender'] or local.born != local_kwargs['born']
-        update = update or local.occupation != local_kwargs['occupation']
-        update = update or local.registered_on != local_kwargs['registered_on']
-        update = update or local.state != local_kwargs['state'] or local.district != local_kwargs['district']
-        update = update or local.ward != local_kwargs['ward']
-
-        return update
+        return any([local.gender != local_kwargs['gender'], local.born != local_kwargs['born'],
+                    local.occupation != local_kwargs['occupation'], local.registered_on != local_kwargs['registered_on'],
+                    local.state != local_kwargs['state'], local.district != local_kwargs['district'],
+                    local.ward != local_kwargs['ward']])
 
 
 class RapidProBackend(BaseBackend):

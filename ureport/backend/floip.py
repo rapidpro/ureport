@@ -1,4 +1,5 @@
-from __future__ import unicode_literals
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import requests
 
@@ -164,13 +165,10 @@ class ContactSyncer(BaseSyncer):
         if not local_kwargs:
             return True
 
-        update = local.gender != local_kwargs['gender'] or local.born != local_kwargs['born']
-        update = update or local.occupation != local_kwargs['occupation']
-        update = update or local.registered_on != local_kwargs['registered_on']
-        update = update or local.state != local_kwargs['state'] or local.district != local_kwargs['district']
-        update = update or local.ward != local_kwargs['ward']
-
-        return update
+        return any([local.gender != local_kwargs['gender'], local.born != local_kwargs['born'],
+                    local.occupation != local_kwargs['occupation'], local.registered_on != local_kwargs['registered_on'],
+                    local.state != local_kwargs['state'], local.district != local_kwargs['district'],
+                    local.ward != local_kwargs['ward']])
 
 
 class FLOIPBackend(BaseBackend):
