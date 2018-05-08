@@ -177,7 +177,7 @@ def fetch_old_sites_count():
                 response = requests.get(count_link)
                 response.raise_for_status()
 
-                count = int(re.search(r'\d+', response.content).group())
+                count = int(re.search(r'\d+', response.content.decode('utf-8')).group())
                 key = "org:%s:reporters:%s" % (site.get('name').lower(), 'old-site')
                 value = {'time': datetime_to_ms(this_time), 'results': dict(size=count)}
                 old_site_values.append(value)
