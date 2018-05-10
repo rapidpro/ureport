@@ -1,4 +1,7 @@
-from __future__ import unicode_literals
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+
 from django.db import models
 from smartmin.models import SmartModel
 from dash.orgs.models import Org
