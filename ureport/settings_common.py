@@ -653,6 +653,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://uk.ureport.in/count/",
     ),
     dict(
+        name='Western Balkans',
+        host="//westernbalkans.ureport.in",
+        flag="flag_wb.png",
+        is_static=True,
+        count_link="http://westernbalkans.ureport.in/count/",
+    ),
+    dict(
         name="Zambia",
         host="//www.zambiaureport.com/home/",
         flag="flag_zm.png",
