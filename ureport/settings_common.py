@@ -192,6 +192,7 @@ ORG_CONFIG_FIELDS = [
     dict(name='facebook_page_id', field=dict(help_text=_("The integer id to the Facebook page for this organization (optional)"), label="Facebook Page ID", required=False)),
     dict(name='facebook_app_id', field=dict(help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"), label="Facebook App ID", required=False)),
     dict(name='facebook_pixel_id', field=dict(help_text=_("The id of the Facebook Pixel for this organization (optional)"), label="Facebook Pixel ID", required=False)),
+    dict(name='facebook_chat_message', field=dict(help_text=_("The Message to show on the Facebook customer chat plugin (optional)"), label="Facebook Messenger Customer Chat Message", required=False)),
     dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), label="Instagram Username", required=False)),
     dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), label="Instagram LightWidget ID", required=False)),
     dict(name='twitter_handle', field=dict(help_text=_("The Twitter handle for this organization"), label="Twitter Handle", required=False)),
