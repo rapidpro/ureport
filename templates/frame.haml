@@ -197,8 +197,8 @@
 
     <div class="fb-customerchat"
       page_id="{{ org|config:"facebook_page_id" }}"
-      logged_in_greeting="Hi! Welcome to U-Report, chat to register and start speaking out today!"
-      logged_out_greeting="Hi! Welcome to U-Report, chat to register and start speaking out today!">
+      logged_in_greeting="{{ org|config:"facebook_chat_message }}"
+      logged_out_greeting="{{ org|config:"facebook_chat_message" }}">
     </div>
 
   <script>(function(d, s, id) {
