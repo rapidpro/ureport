@@ -202,6 +202,7 @@ ORG_CONFIG_FIELDS = [
     dict(name='iso_code', field=dict(help_text=_("The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."), label="Country ISO code", required=False)),
     dict(name='headline_font', field=dict(help_text=_("The font used for headline texts"), required=False), superuser_only=True),
     dict(name='text_font', field=dict(help_text=_("The font used for normal text"), required=False), superuser_only=True),
+    dict(name='is_participation_hidden', field=dict(help_text=_("Hide participation stats"), required=False), superuser_only=True),
     dict(name='text_small_font', field=dict(help_text=_("The font used for small text"), required=False), superuser_only=True),
     dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), label="Custom HTML", required=False, widget=Textarea))
 ]

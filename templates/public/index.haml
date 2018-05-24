@@ -63,7 +63,7 @@
           .container
             .row
               .col-sm-offset-7.col-sm-5
-                .index-current-poll-stats.card.card-padding
+                .index-current-poll-stats.card.card-padding{ class: '{% if org|config:"is_participation_hidden" %}invisible{% endif %}' }
                   .hr-header.primary-color
                     - trans "RESPONSE RATE"
                   .stats
