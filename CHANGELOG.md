@@ -1,3 +1,8 @@
+v1.0.412
+----------
+ * Merge pull request #361 from rapidpro/hide-participations
+ * Add config to hide participations stats
+
 v1.0.411
 ----------
  * Merge pull request #359 from Ilhasoft/balkans-flag
