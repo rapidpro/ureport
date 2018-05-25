@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+
 from django.urls import reverse
 from mock import patch
 from ureport.admins import OrgCache
 from ureport.tests import UreportTest
-from django.template import TemplateSyntaxError
 
 
 class PollTest(UreportTest):
@@ -33,12 +36,6 @@ class PollTest(UreportTest):
 
             self.login(self.superuser)
 
-            with self.assertRaises(TemplateSyntaxError):
-                self.client.get(refresh_cache_url, SERVER_NAME='uganda.ureport.io')
-
-            with self.assertRaises(KeyError):
-                self.client.post(refresh_cache_url, dict(), SERVER_NAME='uganda.ureport.io')
-
             response = self.client.post(refresh_cache_url, post_data, SERVER_NAME='uganda.ureport.io')
             self.assertEqual(response.status_code, 302)
             mock_refresh_caches.assert_called_once_with(self.uganda, [OrgCache.boundaries])
@@ -47,6 +44,6 @@ class PollTest(UreportTest):
             response = self.client.post(refresh_cache_url, post_data, SERVER_NAME='uganda.ureport.io', follow=True)
             self.assertEqual(response.context['org'], self.uganda)
             self.assertEqual(response.request['PATH_INFO'], reverse('orgs.org_home'))
-            self.assertTrue("Refreshed boundaries cache for this organization" in response.content)
+            self.assertContains(response, "Refreshed boundaries cache for this organization")
 
             mock_refresh_caches.assert_called_once_with(self.uganda, [OrgCache.boundaries])

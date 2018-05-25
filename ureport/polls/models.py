@@ -1,9 +1,13 @@
-from __future__ import unicode_literals
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
 import json
 from collections import defaultdict
 
+import uuid
 import logging
 import pytz
+import six
 from datetime import timedelta
 from django.contrib.auth.models import User
 from django.db import models, connection
@@ -55,6 +59,7 @@ CACHE_ORG_REGISTRATION_DATA_KEY = "org:%d:registration:%s"
 CACHE_ORG_OCCUPATION_DATA_KEY = "org:%d:occupation:%s"
 
 
+@six.python_2_unicode_compatible
 class PollCategory(SmartModel):
     """
     This is a dead class but here so we can perform our migration.
@@ -64,7 +69,7 @@ class PollCategory(SmartModel):
     org = models.ForeignKey(Org,
                             help_text=_("The organization this category applies to"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -72,6 +77,7 @@ class PollCategory(SmartModel):
         verbose_name_plural = _("Poll Categories")
 
 
+@six.python_2_unicode_compatible
 class Poll(SmartModel):
     """
     A poll represents a single Flow that has been brought in for
@@ -179,7 +185,7 @@ class Poll(SmartModel):
         return after, before, latest_synced_obj_time, batches_latest, resume_cursor, pull_after_delete
 
     def delete_poll_results_counter(self):
-        from ureport.utils import chunk_list
+        from ureport.utils import chunk_list, prod_print
 
         rulesets = self.questions.all().values_list('ruleset_uuid', flat=True)
 
@@ -191,10 +197,10 @@ class Poll(SmartModel):
         for batch in chunk_list(counters_ids, 1000):
             PollResultsCounter.objects.filter(pk__in=batch).delete()
 
-        print "Deleted %d poll results counters for poll #%d on org #%d" % (counters_ids_count, self.pk, self.org_id)
+        prod_print("Deleted %d poll results counters for poll #%d on org #%d" % (counters_ids_count, self.pk, self.org_id))
 
     def delete_poll_results(self):
-        from ureport.utils import chunk_list
+        from ureport.utils import chunk_list, prod_print
 
         results_ids = PollResult.objects.filter(org_id=self.org_id, flow=self.flow_uuid).values_list('pk', flat=True)
 
@@ -203,7 +209,7 @@ class Poll(SmartModel):
         for batch in chunk_list(results_ids, 1000):
             PollResult.objects.filter(pk__in=batch).delete()
 
-        print "Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id)
+        prod_print("Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id))
 
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
         cache.delete(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.org.pk, self.flow_uuid))
@@ -235,7 +241,7 @@ class Poll(SmartModel):
         Poll.pull_poll_results_task(self)
 
     def rebuild_poll_results_counts(self):
-        from ureport.utils import chunk_list
+        from ureport.utils import chunk_list, prod_print
         import time
 
         start = time.time()
@@ -249,7 +255,7 @@ class Poll(SmartModel):
         key = Poll.POLL_REBUILD_COUNTS_LOCK % (org_id, flow)
 
         if r.get(key):
-            print "Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id)
+            prod_print("Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id))
 
         else:
             with r.lock(key):
@@ -257,7 +263,7 @@ class Poll(SmartModel):
 
                 poll_results_ids_count = len(poll_results_ids)
 
-                print "Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start)
+                prod_print("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
 
                 processed_results = 0
                 counters_dict = defaultdict(int)
@@ -272,7 +278,7 @@ class Poll(SmartModel):
 
                         processed_results += 1
 
-                print "Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
+                prod_print("Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds" % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start))
 
                 counters_to_insert = []
                 for counter_tuple in counters_dict.keys():
@@ -285,13 +291,13 @@ class Poll(SmartModel):
                 self.delete_poll_results_counter()
 
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
-                print "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
+                prod_print("Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results" % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count))
 
                 start_update_cache = time.time()
                 self.update_questions_results_cache()
-                print "Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache)
+                prod_print("Calculated questions results and updated the cache for poll #%d on org #%d in %ds" % (poll_id, org_id, time.time() - start_update_cache))
 
-                print "Poll responses counts for poll #%d on org #%d are %s responded out of %s polled" % (poll_id, org_id, self.responded_runs(), self.runs())
+                prod_print("Poll responses counts for poll #%d on org #%d are %s responded out of %s polled" % (poll_id, org_id, self.responded_runs(), self.runs()))
 
     def get_question_uuids(self):
         return self.questions.values_list('ruleset_uuid', flat=True)
@@ -381,36 +387,7 @@ class Poll(SmartModel):
         org = self.org
         backend = org.get_backend(backend_slug=self.backend.slug)
 
-        flow_definition = backend.get_definition(org, self.flow_uuid)
-
-        if flow_definition is None:
-            return
-
-        base_language = flow_definition['base_language']
-
-        self.base_language = base_language
-        self.save()
-
-        flow_rulesets = flow_definition['rule_sets']
-
-        for ruleset in flow_rulesets:
-            label = ruleset['label']
-            ruleset_uuid = ruleset['uuid']
-            ruleset_type = ruleset['ruleset_type']
-
-            question = PollQuestion.update_or_create(user, self, label, ruleset_uuid, ruleset_type)
-
-            rapidpro_rules = []
-            for rule in ruleset['rules']:
-                category = rule['category'][base_language]
-                rule_uuid = rule['uuid']
-                rapidpro_rules.append(rule_uuid)
-
-                PollResponseCategory.update_or_create(question, rule_uuid, category)
-
-            # deactivate if corresponding rules are removed
-            PollResponseCategory.objects.filter(
-                question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
+        backend.update_poll_questions(org, self, user)
 
     def most_responded_regions(self):
         # get our first question
@@ -452,7 +429,7 @@ class Poll(SmartModel):
                     else:
                         words[key] += int(category['count'])
 
-            tuples = [(k, v) for k, v in words.iteritems()]
+            tuples = [(k, v) for k, v in words.items()]
             tuples.sort(key=lambda t: t[1])
 
             trending_words = [k for k, v in tuples]
@@ -601,7 +578,7 @@ class Poll(SmartModel):
             pass
 
         # write our file out
-        tmp_file = os.path.join(settings.MEDIA_ROOT, 'tmp/%s' % str(uuid4()))
+        tmp_file = os.path.join(settings.MEDIA_ROOT, 'tmp/%s' % six.text_type(uuid4()))
 
         out_file = open(tmp_file, 'wb')
         out_file.write(csv_file.read())
@@ -633,10 +610,11 @@ class Poll(SmartModel):
 
         return records
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
+@six.python_2_unicode_compatible
 class PollImage(SmartModel):
     name = models.CharField(max_length=64,
                             help_text=_("The name to describe this image"))
@@ -647,10 +625,11 @@ class PollImage(SmartModel):
     image = models.ImageField(upload_to='polls',
                               help_text=_("The image file to use"))
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s - %s" % (self.poll, self.name)
 
 
+@six.python_2_unicode_compatible
 class FeaturedResponse(SmartModel):
     """
     A highlighted response for a poll and location.
@@ -667,10 +646,11 @@ class FeaturedResponse(SmartModel):
     message = models.CharField(max_length=255,
                                help_text=_("The featured response message"))
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s - %s - %s" % (self.poll, self.location, self.message)
 
 
+@six.python_2_unicode_compatible
 class PollQuestion(SmartModel):
     """
     Represents a single question that was asked in a poll, these questions tie 1-1 to
@@ -720,9 +700,9 @@ class PollQuestion(SmartModel):
             responded = boundary['set']
             boundary_responses[boundary['label']] = dict(responded=responded, total=total)
 
-        for boundary in sorted(boundary_responses, key=lambda x: boundary_responses[x]['responded'], reverse=True)[:5]:
+        for boundary in sorted(boundary_responses, key=lambda x: (boundary_responses[x]['responded'], -boundary_responses[x]['total']), reverse=True)[:5]:
             responded = boundary_responses[boundary]
-            percent = int(round((100 * responded['responded'])) / responded['total']) if responded['total'] > 0 else 0
+            percent = round((100 * responded['responded'])) // responded['total'] if responded['total'] > 0 else 0
             top_regions.append(
                 dict(boundary=boundary, responded=responded['responded'], total=responded['total'], type='best',
                      percent=percent))
@@ -738,17 +718,18 @@ class PollQuestion(SmartModel):
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
-            key += ":" + slugify(unicode(json.dumps(segment)))
+            key += ":" + slugify(six.text_type(json.dumps(segment)))
 
         cached_value = cache.get(key, None)
         if cached_value:
             return cached_value["results"]
 
-        if not segment:
-            logger.error('Question get results without segment cache missed', extra={'stack': True, })
+        if getattr(settings, 'PROD', False):
+            if not segment:
+                logger.error('Question get results without segment cache missed', extra={'stack': True, })
 
-        if segment and 'location' in segment and segment.get('location').lower() == 'state':
-            logger.error('Question get results with state segment cache missed', extra={'stack': True, })
+            if segment and 'location' in segment and segment.get('location').lower() == 'state':
+                logger.error('Question get results with state segment cache missed', extra={'stack': True, })
 
         return self.calculate_results(segment=segment)
 
@@ -826,7 +807,7 @@ class PollQuestion(SmartModel):
                 elif age_part:
                     poll_year = self.poll.poll_date.year
 
-                    born_results = {k: v for k, v in question_results.iteritems() if k[-9:-5] == 'born'}
+                    born_results = {k: v for k, v in question_results.items() if k[-9:-5] == 'born'}
 
                     age_intervals = dict()
                     age_intervals['35+'] = (35, 2000)
@@ -845,7 +826,7 @@ class PollQuestion(SmartModel):
                             if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 categories_count[categorie_label.lower()] = 0
 
-                        for result_key, result_count in born_results.iteritems():
+                        for result_key, result_count in born_results.items():
                             age = poll_year - int(result_key[-4:])
 
                             if lower_bound <= age < upper_bound:
@@ -857,7 +838,7 @@ class PollQuestion(SmartModel):
                                         if result_key.startswith('ruleset:%s:category:%s:' % (self.ruleset_uuid, categorie_label.lower())):
                                             categories_count[categorie_label.lower()] += result_count
 
-                        categories = [dict(count=v, label=k) for k, v in categories_count.iteritems()]
+                        categories = [dict(count=v, label=k) for k, v in categories_count.items()]
 
                         set_count = sum([elt['count'] for elt in categories])
 
@@ -912,7 +893,7 @@ class PollQuestion(SmartModel):
 
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
-            key += ":" + slugify(unicode(json.dumps(segment)))
+            key += ":" + slugify(six.text_type(json.dumps(segment)))
 
         cache.set(key, {"results": results}, cache_time)
 
@@ -945,13 +926,13 @@ class PollQuestion(SmartModel):
         responded = self.get_responded()
         if polled and responded:
             percentage = int(round((float(responded) * 100.0) / float(polled)))
-            return "%s" % str(percentage) + "%"
+            return "%s" % six.text_type(percentage) + "%"
         return "___"
 
     def get_words(self):
         return self.get_total_summary_data().get('categories', [])
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -971,7 +952,13 @@ class PollResponseCategory(models.Model):
 
     @classmethod
     def update_or_create(cls, question, rule_uuid, category):
-        existing = cls.objects.filter(question=question, rule_uuid=rule_uuid)
+        existing = cls.objects.filter(question=question)
+        if rule_uuid is not None:
+            existing = existing.filter(rule_uuid=rule_uuid)
+        else:
+            existing = existing.filter(category=category)
+            rule_uuid = uuid.uuid4()
+
         if existing:
             existing.update(category=category, is_active=True)
         else:

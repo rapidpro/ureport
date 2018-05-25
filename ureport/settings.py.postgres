@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+
 # import our default settings
 from ureport.settings_common import *
 
 # INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar.apps.DebugToolbarConfig',)
-# MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',) + MIDDLEWARE_CLASSES
+# MIDDLEWARE = ('debug_toolbar.middleware.DebugToolbarMiddleware',) + MIDDLEWARE
 
 ALLOWED_HOSTS = ['*']
 
@@ -30,6 +34,7 @@ HOSTNAME = 'ureport.io' if TESTING else 'ureport.io:8000'
 # AWS_QUERYSTRING_AUTH = False
 # AWS_S3_OBJECT_PARAMETERS = {
 #     'CacheControl': 'max-age=86400',
+# 
 # }
 # List of finder classes that know how to find static files in
 # various locations.

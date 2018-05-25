@@ -1,6 +1,11 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+
 from datetime import datetime
 import json
 from dash.categories.models import Category
+
 from dash.test import MockClientQuery
 from dash_test_runner.tests import MockResponse
 from django.conf import settings
@@ -87,7 +92,7 @@ class UtilsTest(UreportTest):
 
         # rwanda should be included and the third in the list alphabetically by subdomain
         self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
-        self.assertEqual(get_linked_orgs()[settings_sites_count - 4]['name'].lower(), 'rwanda')
+        self.assertEqual(get_linked_orgs()[settings_sites_count - 4]['name'].lower(), 'syria')
 
         # revert subdomain to burundi
         self.org.subdomain = 'aaaburundi'
@@ -215,7 +220,7 @@ class UtilsTest(UreportTest):
             mock_datetime_ms.return_value = 500
 
             with patch('requests.get') as mock_get:
-                mock_get.return_value = MockResponse(200, '300')
+                mock_get.return_value = MockResponse(200, b'300')
 
                 with patch('django.core.cache.cache.set') as cache_set_mock:
                     cache_set_mock.return_value = "Set"
