@@ -1,3 +1,8 @@
+v1.0.413
+----------
+ * Merge pull request #362 from rapidpro/ignore-words
+ * Add config for ignore words to filter out on the public page
+
 v1.0.412
 ----------
  * Merge pull request #361 from rapidpro/hide-participations
