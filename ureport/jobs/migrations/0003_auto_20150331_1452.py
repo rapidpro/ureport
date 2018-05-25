@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from django.db import models, migrations
 
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='jobsource',
             name='source_type',
-            field=models.CharField(help_text='Choose the type for the Job source. Twitter, Facebook or RSS feed', max_length=1, choices=[(b'T', b'Twitter'), (b'F', b'Facebook'), (b'R', b'RSS')]),
+            field=models.CharField(help_text='Choose the type for the Job source. Twitter, Facebook or RSS feed', max_length=1, choices=[('T', 'Twitter'), ('F', 'Facebook'), ('R', 'RSS')]),
             preserve_default=True,
         ),
         migrations.AlterField(

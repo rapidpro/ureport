@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import iso8601
 import json
+import six
 import time
 from datetime import timedelta, datetime
 from itertools import islice, chain
@@ -22,6 +24,11 @@ GLOBAL_COUNT_CACHE_KEY = 'global_count'
 
 ORG_CONTACT_COUNT_KEY = 'org:%d:contacts-counts'
 ORG_CONTACT_COUNT_TIMEOUT = 300
+
+
+def prod_print(msg):
+    if getattr(settings, 'PROD', False):
+        print(msg)
 
 
 def datetime_to_json_date(dt):
@@ -59,7 +66,7 @@ def chunk_list(iterable, size):
     source_iter = iter(iterable)
     while True:
         chunk_iter = islice(source_iter, size)
-        yield chain([chunk_iter.next()], chunk_iter)
+        yield chain([next(chunk_iter)], chunk_iter)
 
 
 def get_linked_orgs(authenticated=False):
@@ -84,7 +91,7 @@ def get_linked_orgs(authenticated=False):
 def fetch_flows(org, backend=None):
     from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME
     start = time.time()
-    print "Fetching flows for %s" % org.name
+    prod_print("Fetching flows for %s" % org.name)
 
     if backend:
         backends = [backend]
@@ -108,7 +115,7 @@ def fetch_flows(org, backend=None):
             import traceback
             traceback.print_exc()
 
-    print "Fetch %s flows took %ss" % (org.name, time.time() - start)
+    prod_print("Fetch %s flows took %ss" % (org.name, time.time() - start))
 
     if len(backends):
         return org_flows.get("results", dict())
@@ -170,7 +177,7 @@ def fetch_old_sites_count():
                 response = requests.get(count_link)
                 response.raise_for_status()
 
-                count = int(re.search(r'\d+', response.content).group())
+                count = int(re.search(r'\d+', response.content.decode('utf-8')).group())
                 key = "org:%s:reporters:%s" % (site.get('name').lower(), 'old-site')
                 value = {'time': datetime_to_ms(this_time), 'results': dict(size=count)}
                 old_site_values.append(value)
@@ -182,7 +189,7 @@ def fetch_old_sites_count():
     # delete the global count cache to force a recalculate at the end
     cache.delete(GLOBAL_COUNT_CACHE_KEY)
 
-    print "Fetch old sites counts took %ss" % (time.time() - start)
+    prod_print("Fetch old sites counts took %ss" % (time.time() - start))
     return old_site_values
 
 
@@ -243,11 +250,11 @@ def get_gender_stats(org):
 
     total = female_count + male_count
 
-    female_percentage = female_count * 100 / total
+    female_percentage = female_count * 100 // total
     male_percentage = 100 - female_percentage
 
-    return dict(female_count=female_count, female_percentage=str(female_percentage) + "%",
-                male_count=male_count, male_percentage=str(male_percentage) + "%")
+    return dict(female_count=female_count, female_percentage=six.text_type(female_percentage) + "%",
+                male_count=male_count, male_percentage=six.text_type(male_percentage) + "%")
 
 
 def get_age_stats(org):
@@ -256,7 +263,7 @@ def get_age_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    year_counts = {k[-4:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("born:") and len(k) == 9}
+    year_counts = {k[-4:]: v for k, v in org_contacts_counts.items() if k.startswith("born:") and len(k) == 9}
 
     age_counts_interval = dict()
     age_counts_interval['0-14'] = 0
@@ -267,7 +274,7 @@ def get_age_stats(org):
     age_counts_interval['35+'] = 0
 
     total = 0
-    for year_key, age_count in year_counts.iteritems():
+    for year_key, age_count in year_counts.items():
         total += age_count
         age = current_year - int(year_key)
         if age > 34:
@@ -285,9 +292,9 @@ def get_age_stats(org):
 
     age_stats = age_counts_interval
     if total > 0:
-        age_stats = {k: int(round(v * 100 / float(total))) for k, v in age_counts_interval.iteritems()}
+        age_stats = {k: int(round(v * 100 / float(total))) for k, v in age_counts_interval.items()}
 
-    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.iteritems()], key=lambda i: i))
+    return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.items()], key=lambda i: i['name']))
 
 
 def get_registration_stats(org):
@@ -298,11 +305,11 @@ def get_registration_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("registered_on")}
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_on")}
 
     interval_dict = dict()
 
-    for date_key, date_count in registered_on_counts.iteritems():
+    for date_key, date_count in registered_on_counts.items():
         parsed_time = tz.localize(datetime.strptime(date_key, '%Y-%m-%d'))
 
         # this is in the range we care about
@@ -345,15 +352,15 @@ def get_ureporters_locations_stats(org, segment):
         boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config('common.is_global') else Boundary.STATE_LEVEL
         boundaries = Boundary.objects.filter(org=org, level=boundary_top_level, is_active=True).values('osm_id', 'name')\
             .order_by('osm_id')
-        location_counts = {k[6:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('state')}
+        location_counts = {k[6:]: v for k, v in org_contacts_counts.items() if k.startswith('state')}
 
     elif field_type == 'ward':
         boundaries = Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
-        location_counts = {k[5:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('ward')}
+        location_counts = {k[5:]: v for k, v in org_contacts_counts.items() if k.startswith('ward')}
     else:
         boundaries = Boundary.objects.filter(org=org, level=Boundary.DISTRICT_LEVEL, is_active=True,
                                              parent__osm_id__iexact=parent).values('osm_id', 'name').order_by('osm_id')
-        location_counts = {k[9:]: v for k, v in org_contacts_counts.iteritems() if k.startswith('district')}
+        location_counts = {k[9:]: v for k, v in org_contacts_counts.items() if k.startswith('district')}
 
     return [dict(boundary=elt['osm_id'], label=elt['name'], set=location_counts.get(elt['osm_id'], 0))
             for elt in boundaries]
@@ -369,10 +376,10 @@ def get_occupation_stats(org):
 
     org_contacts_counts = get_org_contacts_counts(org)
 
-    occupation_counts = {k[11:]: v for k, v in org_contacts_counts.iteritems() if k.startswith("occupation")}
+    occupation_counts = {k[11:]: v for k, v in org_contacts_counts.items() if k.startswith("occupation")}
 
     return json.dumps(sorted([dict(label=k, count=v)
-                              for k, v in occupation_counts.iteritems() if k and k.lower() != "All Responses".lower()],
+                              for k, v in occupation_counts.items() if k and k.lower() != "All Responses".lower()],
                              key=lambda i: i['count'], reverse=True)[:9])
 
 
@@ -381,9 +388,9 @@ def get_regions_stats(org):
     org_contacts_counts = get_org_contacts_counts(org)
     boundaries_name = Boundary.get_org_top_level_boundaries_name(org)
 
-    boundaries_stats = {k[6:]: v for k, v in org_contacts_counts.iteritems() if len(k) > 7 and k.startswith('state')}
+    boundaries_stats = {k[6:]: v for k, v in org_contacts_counts.items() if len(k) > 7 and k.startswith('state')}
 
-    regions_stats = sorted([dict(name=boundaries_name[k], count=v) for k, v in boundaries_stats.iteritems()
+    regions_stats = sorted([dict(name=boundaries_name[k], count=v) for k, v in boundaries_stats.items()
                             if k and k in boundaries_name], key=lambda i: i['count'], reverse=True)
 
     return regions_stats
@@ -453,7 +460,7 @@ def populate_age_and_gender_poll_results(org=None):
             if org is None:
                 cache.set(LAST_POPULATED_CONTACT, contact.pk, None)
 
-        print "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
+        prod_print("Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start))
 
 
 Org.get_occupation_stats = get_occupation_stats

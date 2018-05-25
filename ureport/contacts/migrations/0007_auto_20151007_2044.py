@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import absolute_import, division, print_function, unicode_literals
 from django.core.cache import cache
 
 from django.db import migrations
+from ureport.utils import prod_print
 
 
 # language=SQL
@@ -19,10 +20,10 @@ def remove_cache_and_lock_keys(apps, schema_editor):
         cache.delete_pattern('fetch_contacts')
         cache.delete_pattern('fetch_contacts*')
 
-        print "Removed all cache and lock keys for fetch contacts"
+        prod_print("Removed all cache and lock keys for fetch contacts")
 
     except AttributeError as e:
-        print e
+        prod_print(e)
 
 
 class Migration(migrations.Migration):

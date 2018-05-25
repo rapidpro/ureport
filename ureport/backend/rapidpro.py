@@ -1,4 +1,5 @@
-from __future__ import unicode_literals
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from collections import defaultdict
 import json
@@ -17,8 +18,9 @@ from django_redis import get_redis_connection
 
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll
+from ureport.polls.models import PollResult, Poll, PollQuestion, PollResponseCategory
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
+from ureport.utils import prod_print
 from . import BaseBackend
 
 
@@ -44,7 +46,7 @@ class FieldSyncer(BaseSyncer):
     def update_required(self, local, remote, local_kwargs):
         if local_kwargs and local_kwargs['backend'] != local.backend:
             return False
-        return local.label != remote.label or local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)
+        return any([local.label != remote.label, local.value_type != self.model.TEMBA_TYPES.get(remote.value_type)])
 
     def delete_local(self, local):
         local.release()
@@ -112,7 +114,7 @@ class ContactSyncer(BaseSyncer):
 
     def get_boundaries_data(self, org):
 
-        cache_attr = '__boundaries__%d' % org.pk
+        cache_attr = '__boundaries__%d:%s' % (org.pk, self.backend.slug)
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
 
@@ -138,7 +140,7 @@ class ContactSyncer(BaseSyncer):
         return org_state_boundaries_data, org_district_boundaries_data, org_ward_boundaries_data
 
     def get_contact_fields(self, org):
-        cache_attr = '__contact_fields__%d' % org.pk
+        cache_attr = '__contact_fields__%d:%s' % (org.pk, self.backend.slug)
         if hasattr(self, cache_attr):
             return getattr(self, cache_attr)
         contact_fields = ContactField.objects.filter(org=org, backend=self.backend)
@@ -268,13 +270,10 @@ class ContactSyncer(BaseSyncer):
         if not local_kwargs:
             return True
 
-        update = local.gender != local_kwargs['gender'] or local.born != local_kwargs['born']
-        update = update or local.occupation != local_kwargs['occupation']
-        update = update or local.registered_on != local_kwargs['registered_on']
-        update = update or local.state != local_kwargs['state'] or local.district != local_kwargs['district']
-        update = update or local.ward != local_kwargs['ward']
-
-        return update
+        return any([local.gender != local_kwargs['gender'], local.born != local_kwargs['born'],
+                    local.occupation != local_kwargs['occupation'], local.registered_on != local_kwargs['registered_on'],
+                    local.state != local_kwargs['state'], local.district != local_kwargs['district'],
+                    local.ward != local_kwargs['ward']])
 
 
 class RapidProBackend(BaseBackend):
@@ -317,6 +316,38 @@ class RapidProBackend(BaseBackend):
                 break
         return flow_definition
 
+    def update_poll_questions(self, org, poll, user):
+        flow_definition = self.get_definition(org, poll.flow_uuid)
+
+        if flow_definition is None:
+            return
+
+        base_language = flow_definition['base_language']
+
+        poll.base_language = base_language
+        poll.save()
+
+        flow_rulesets = flow_definition['rule_sets']
+
+        for ruleset in flow_rulesets:
+            label = ruleset['label']
+            ruleset_uuid = ruleset['uuid']
+            ruleset_type = ruleset['ruleset_type']
+
+            question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
+
+            rapidpro_rules = []
+            for rule in ruleset['rules']:
+                category = rule['category'][base_language]
+                rule_uuid = rule['uuid']
+                rapidpro_rules.append(rule_uuid)
+
+                PollResponseCategory.update_or_create(question, rule_uuid, category)
+
+            # deactivate if corresponding rules are removed
+            PollResponseCategory.objects.filter(
+                question=question).exclude(rule_uuid__in=rapidpro_rules).update(is_active=False)
+
     def pull_fields(self, org):
         client = self._get_client(org, 2)
         incoming_objects = client.get_fields().all(retry_on_rate_exceed=True)
@@ -355,7 +386,7 @@ class RapidProBackend(BaseBackend):
                           num_path_updated=0, num_path_ignored=0, num_synced=0)
 
         if r.get(key):
-            print "Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk)
+            prod_print("Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk))
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
                 lock_expiration = time.time() + 0.8 * Poll.POLL_SYNC_LOCK_TIMEOUT
@@ -379,7 +410,7 @@ class RapidProBackend(BaseBackend):
                     after = latest_synced_obj_time
 
                 start = time.time()
-                print "Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk)
+                prod_print("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))
 
                 poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=before)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=resume_cursor)
@@ -388,12 +419,12 @@ class RapidProBackend(BaseBackend):
                     fetch_start = time.time()
                     for fetch in fetches:
 
-                        print "RapidPro API fetch for poll #%d " \
-                              "on org #%d %d - %d took %ds" % (poll.pk,
-                                                               org.pk,
-                                                               stats_dict['num_synced'],
-                                                               stats_dict['num_synced'] + len(fetch),
-                                                               time.time() - fetch_start)
+                        prod_print("RapidPro API fetch for poll #%d "
+                                   "on org #%d %d - %d took %ds" % (poll.pk,
+                                                                    org.pk,
+                                                                    stats_dict['num_synced'],
+                                                                    stats_dict['num_synced'] + len(fetch),
+                                                                    time.time() - fetch_start))
 
                         contacts_map, poll_results_map, poll_results_to_save_map = self._initiate_lookup_maps(fetch, org,
                                                                                                               poll)
@@ -413,13 +444,13 @@ class RapidProBackend(BaseBackend):
 
                         self._save_new_poll_results_to_database(poll_results_to_save_map)
 
-                        print "Processed fetch of %d - %d " \
-                              "runs for poll #%d on org #%d" % (stats_dict['num_synced'] - len(fetch),
-                                                                stats_dict['num_synced'],
-                                                                poll.pk,
-                                                                org.pk)
+                        prod_print("Processed fetch of %d - %d "
+                                   "runs for poll #%d on org #%d" % (stats_dict['num_synced'] - len(fetch),
+                                                                     stats_dict['num_synced'],
+                                                                     poll.pk,
+                                                                     org.pk))
                         fetch_start = time.time()
-                        print "=" * 40
+                        prod_print("=" * 40)
 
                         if stats_dict['num_synced'] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS or time.time() > lock_expiration:
                             poll.rebuild_poll_results_counts()
@@ -427,19 +458,19 @@ class RapidProBackend(BaseBackend):
                             cursor = fetches.get_cursor()
                             self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
 
-                            print "Break pull results for poll #%d on org #%d in %ds, "\
-                                  " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"\
-                                  " Objects: created %d, updated %d, ignored %d. " \
-                                  "Before cursor %s" % (poll.pk, org.pk,
-                                                        time.time() - start,
-                                                        after,
-                                                        before,
-                                                        batches_latest,
-                                                        latest_synced_obj_time,
-                                                        stats_dict['num_val_created'],
-                                                        stats_dict['num_val_updated'],
-                                                        stats_dict['num_val_ignored'],
-                                                        cursor)
+                            prod_print("Break pull results for poll #%d on org #%d in %ds, "
+                                       " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"
+                                       " Objects: created %d, updated %d, ignored %d. "
+                                       "Before cursor %s" % (poll.pk, org.pk,
+                                                             time.time() - start,
+                                                             after,
+                                                             before,
+                                                             batches_latest,
+                                                             latest_synced_obj_time,
+                                                             stats_dict['num_val_created'],
+                                                             stats_dict['num_val_updated'],
+                                                             stats_dict['num_val_ignored'],
+                                                             cursor))
 
                             return (stats_dict['num_val_created'], stats_dict['num_val_updated'],
                                     stats_dict['num_val_ignored'], stats_dict['num_path_created'],
@@ -450,19 +481,19 @@ class RapidProBackend(BaseBackend):
                     cursor = fetches.get_cursor()
                     self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
 
-                    print "Break pull results for poll #%d on org #%d in %ds, " \
-                          " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s" \
-                          " Objects: created %d, updated %d, ignored %d. " \
-                          "Before cursor %s" % (poll.pk, org.pk,
-                                                time.time() - start,
-                                                after,
-                                                before,
-                                                batches_latest,
-                                                latest_synced_obj_time,
-                                                stats_dict['num_val_created'],
-                                                stats_dict['num_val_updated'],
-                                                stats_dict['num_val_ignored'],
-                                                cursor)
+                    prod_print("Break pull results for poll #%d on org #%d in %ds, "
+                               " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"
+                               " Objects: created %d, updated %d, ignored %d. "
+                               "Before cursor %s" % (poll.pk, org.pk,
+                                                     time.time() - start,
+                                                     after,
+                                                     before,
+                                                     batches_latest,
+                                                     latest_synced_obj_time,
+                                                     stats_dict['num_val_created'],
+                                                     stats_dict['num_val_updated'],
+                                                     stats_dict['num_val_ignored'],
+                                                     cursor))
 
                     return (stats_dict['num_val_created'], stats_dict['num_val_updated'],
                             stats_dict['num_val_ignored'], stats_dict['num_path_created'],
@@ -481,13 +512,13 @@ class RapidProBackend(BaseBackend):
                 #     print "%s -- %s" % (q['time'], q['sql'])
                 # reset_queries()
 
-                print "Finished pulling results for poll #%d on org #%d runs in %ds, " \
-                      "Times: sync_latest= %s," \
-                      "Objects: created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start,
-                                                                       latest_synced_obj_time,
-                                                                       stats_dict['num_val_created'],
-                                                                       stats_dict['num_val_updated'],
-                                                                       stats_dict['num_val_ignored'])
+                prod_print("Finished pulling results for poll #%d on org #%d runs in %ds, "
+                           "Times: sync_latest= %s,"
+                           "Objects: created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start,
+                                                                            latest_synced_obj_time,
+                                                                            stats_dict['num_val_created'],
+                                                                            stats_dict['num_val_updated'],
+                                                                            stats_dict['num_val_ignored']))
         return (stats_dict['num_val_created'], stats_dict['num_val_updated'], stats_dict['num_val_ignored'],
                 stats_dict['num_path_created'], stats_dict['num_path_updated'], stats_dict['num_path_ignored'])
 
@@ -522,9 +553,7 @@ class RapidProBackend(BaseBackend):
             born = contact_obj.born
             gender = contact_obj.gender
 
-        temba_values = temba_run.values.values()
-        temba_values.sort(key=lambda val: val.time)
-        for temba_value in temba_values:
+        for temba_value in sorted(temba_run.values.values(), key=lambda val: val.time):
             ruleset_uuid = temba_value.node
             category = temba_value.category
             text = temba_value.value[:2560] if temba_value.value is not None else temba_value.value
