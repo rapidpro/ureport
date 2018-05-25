@@ -1,3 +1,23 @@
+v1.0.412
+----------
+ * Merge pull request #361 from rapidpro/hide-participations
+ * Add config to hide participations stats
+
+v1.0.411
+----------
+ * Merge pull request #359 from Ilhasoft/balkans-flag
+ * Merge pull request #358 from Ilhasoft/feature/facebook-welcome-message
+ * Fix org config fields by incrementing fields on superuser test
+ * Fix linked orgs tests because of new flag included on the bottom
+ * Fix org config fields tests by incrementing the new field created
+ * Add western balkans on the bottom of the page
+ * Add welcome text to the template when it does exist
+ * Add new config field for welcome message on Facebook plugin
+ * Merge pull request #52 from rapidpro/master
+ * Merge pull request #51 from rapidpro/master
+ * Merge pull request #50 from rapidpro/master
+ * Merge pull request #49 from rapidpro/master
+
 v1.0.410
 ----------
  * Support FLOIP backend type

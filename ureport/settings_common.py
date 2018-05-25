@@ -191,6 +191,7 @@ ORG_CONFIG_FIELDS = [
     dict(name='facebook_page_url', field=dict(help_text=_("The URL to the Facebook page for this organization"), label="Facebook Page URL", required=False)),
     dict(name='facebook_page_id', field=dict(help_text=_("The integer id to the Facebook page for this organization (optional)"), label="Facebook Page ID", required=False)),
     dict(name='facebook_app_id', field=dict(help_text=_("The integer id to the Facebook app for this organization's chat app (optional)"), label="Facebook App ID", required=False)),
+    dict(name='facebook_welcome_text', field=dict(help_text=_("The short text used to greet users on Facebook Messenger Plugin"), label="Facebook Welcome Text", required=False)),
     dict(name='facebook_pixel_id', field=dict(help_text=_("The id of the Facebook Pixel for this organization (optional)"), label="Facebook Pixel ID", required=False)),
     dict(name='instagram_username', field=dict(help_text=_("The Instagram username for this organization"), label="Instagram Username", required=False)),
     dict(name='instagram_lightwidget_id', field=dict(help_text=_("The Instagram widget id from lightwidget.com"), label="Instagram LightWidget ID", required=False)),
@@ -201,6 +202,7 @@ ORG_CONFIG_FIELDS = [
     dict(name='iso_code', field=dict(help_text=_("The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."), label="Country ISO code", required=False)),
     dict(name='headline_font', field=dict(help_text=_("The font used for headline texts"), required=False), superuser_only=True),
     dict(name='text_font', field=dict(help_text=_("The font used for normal text"), required=False), superuser_only=True),
+    dict(name='is_participation_hidden', field=dict(help_text=_("Hide participation stats"), required=False), superuser_only=True),
     dict(name='text_small_font', field=dict(help_text=_("The font used for small text"), required=False), superuser_only=True),
     dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), label="Custom HTML", required=False, widget=Textarea))
 ]
@@ -651,6 +653,13 @@ PREVIOUS_ORG_SITES = [
         flag="flag_uk.png",
         is_static=True,
         count_link="http://uk.ureport.in/count/",
+    ),
+    dict(
+        name='Western Balkans',
+        host="//westernbalkans.ureport.in",
+        flag="flag_wb.png",
+        is_static=True,
+        count_link="http://westernbalkans.ureport.in/count/",
     ),
     dict(
         name="Zambia",
