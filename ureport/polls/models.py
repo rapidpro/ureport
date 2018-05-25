@@ -930,7 +930,11 @@ class PollQuestion(SmartModel):
         return "___"
 
     def get_words(self):
-        return self.get_total_summary_data().get('categories', [])
+        words = self.get_total_summary_data().get('categories', [])
+        org = self.poll.org
+        ignore_words = [elt.lower() for elt in org.get_config("common.ignore_words", "").split(",")]
+
+        return [elt for elt in words if elt['label'].lower() not in ignore_words]
 
     def __str__(self):
         return self.title
