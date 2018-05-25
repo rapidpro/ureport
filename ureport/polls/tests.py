@@ -1569,6 +1569,10 @@ class PollQuestionTest(UreportTest):
                 self.assertEqual(poll_question1.get_words(), [dict(count=2210, label='Yes'), dict(count=1252, label='No')])
                 mock.assert_called_with()
 
+                self.uganda.set_config("common.ignore_words", "Yes,Allo")
+                self.assertEqual(poll_question1.get_words(), [dict(count=1252, label='No')])
+                mock.assert_called_with()
+
             self.assertEqual(poll_question1.get_response_percentage(), "48%")
 
             question_results['ruleset:%s:category:yes:state:R-KGL' % poll_question1.ruleset_uuid] = 10
