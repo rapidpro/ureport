@@ -1,3 +1,7 @@
+v1.0.416
+----------
+ * Switch to use Summernote JS library for text editor
+
 v1.0.413
 ----------
  * Merge pull request #362 from rapidpro/ignore-words
