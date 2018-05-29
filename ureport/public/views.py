@@ -308,7 +308,7 @@ class UreportersView(SmartTemplateView):
         context['org'] = org
 
         # remove the first option '' from calender.month_abbr
-        context['months'] = [six.text_type(_('%s')) % m for m in calendar.month_abbr][1:]
+        context['months'] = [str(_('%s')) % m for m in calendar.month_abbr][1:]
 
         context['gender_stats'] = org.get_gender_stats()
         context['age_stats'] = org.get_age_stats()
