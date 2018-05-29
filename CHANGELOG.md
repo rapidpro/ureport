@@ -1,3 +1,7 @@
+v1.0.417
+----------
+ * Strip trailing spaces on ignore words
+
 v1.0.416
 ----------
  * Switch to use Summernote JS library for text editor
