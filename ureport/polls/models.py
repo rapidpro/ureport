@@ -932,7 +932,7 @@ class PollQuestion(SmartModel):
     def get_words(self):
         words = self.get_total_summary_data().get('categories', [])
         org = self.poll.org
-        ignore_words = [elt.lower() for elt in org.get_config("common.ignore_words", "").split(",")]
+        ignore_words = [elt.strip().lower() for elt in org.get_config("common.ignore_words", "").split(",")]
 
         return [elt for elt in words if elt['label'].lower() not in ignore_words]
 

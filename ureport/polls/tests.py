@@ -1569,7 +1569,7 @@ class PollQuestionTest(UreportTest):
                 self.assertEqual(poll_question1.get_words(), [dict(count=2210, label='Yes'), dict(count=1252, label='No')])
                 mock.assert_called_with()
 
-                self.uganda.set_config("common.ignore_words", "Yes,Allo")
+                self.uganda.set_config("common.ignore_words", " Yes, Allo ")
                 self.assertEqual(poll_question1.get_words(), [dict(count=1252, label='No')])
                 mock.assert_called_with()
 
