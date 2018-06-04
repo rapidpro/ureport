@@ -1869,10 +1869,10 @@ class PollResultsTest(UreportTest):
         district = poll_result4.district.upper()
         ward = poll_result4.ward.upper()
 
-        self.assertEqual(len(gen_counters.keys()), 5)
+        self.assertEqual(len(gen_counters.keys()), 4)
 
         self.assertTrue('ruleset:%s:total-ruleset-polled' % ruleset in gen_counters.keys())
-        self.assertTrue('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())  # not ignored by text
+        self.assertFalse('ruleset:%s:total-ruleset-responded' % ruleset in gen_counters.keys())  # no response should be ignored
         self.assertTrue('ruleset:%s:nocategory:state:%s' % (ruleset, state) in gen_counters.keys())
         self.assertTrue('ruleset:%s:nocategory:district:%s' % (ruleset, district) in gen_counters.keys())
         self.assertTrue('ruleset:%s:nocategory:ward:%s' % (ruleset, ward) in gen_counters.keys())
