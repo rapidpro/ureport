@@ -1041,7 +1041,7 @@ class PollResult(models.Model):
 
         generated_counters['ruleset:%s:total-ruleset-polled' % ruleset] = 1
 
-        if category or (self.category is not None and self.category.lower() == 'no response' and text):
+        if category or (self.category is not None and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES and text):
             generated_counters['ruleset:%s:total-ruleset-responded' % ruleset] = 1
 
         if category:
