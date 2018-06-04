@@ -1,3 +1,7 @@
+v1.0.418
+----------
+ * Fix bug, no response should not be considered as responded
+
 v1.0.417
 ----------
  * Strip trailing spaces on ignore words
