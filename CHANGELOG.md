@@ -1,3 +1,7 @@
+v1.0.419
+----------
+ * Add config for announcement
+
 v1.0.418
 ----------
  * Fix bug, no response should not be considered as responded
