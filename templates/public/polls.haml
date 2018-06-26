@@ -372,7 +372,8 @@
       $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
         $(".poll-map").each(function(){
           var question = $(this).attr("data-question");
-          var map = window.initMap('map-' + question, boundaries, question, '{{ district_zoom|lower }}' === 'true', '{{ ward_zoom|lower }}' === 'true');
+          var colorList = {{ colors_map|safe }};
+          var map = window.initMap('map-' + question, boundaries, question, '{{ district_zoom|lower }}' === 'true', '{{ ward_zoom|lower }}' === 'true', colorList=colorList);
 
           $(this).data('map', map);
         });
