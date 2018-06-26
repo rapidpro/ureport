@@ -1,3 +1,8 @@
+v1.0.420
+----------
+ * Merge pull request #369 from rapidpro/map-colors
+ * Add config for custom maps colors
+
 v1.0.419
 ----------
  * Add config for announcement
