@@ -40,7 +40,7 @@ class IndexView(SmartTemplateView):
             context['trending_words'] = latest_poll.get_trending_words()
 
         brick_poll_ids = Poll.get_brick_polls_ids(org)
-        context['recent_polls'] = Poll.objects.filter(id__in=brick_poll_ids)
+        context['recent_polls'] = Poll.objects.filter(id__in=brick_poll_ids).order_by('-created_on')
 
         context['stories'] = Story.objects.filter(org=org, is_active=True, featured=True).order_by('-created_on')
 
