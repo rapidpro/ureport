@@ -186,6 +186,7 @@ ORG_CONFIG_FIELDS = [
     dict(name='secondary_color', field=dict(help_text=_("The secondary color for styling for this organization"), required=False), superuser_only=True),
     dict(name='bg_color', field=dict(help_text=_("The background color for the site"), required=False), superuser_only=True),
     dict(name='colors', field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False), superuser_only=True),
+    dict(name='colors_map', field=dict(help_text=_("11 colors for styling maps, use comma between colors, not used if not 11 colors"), required=False), superuser_only=True),
     dict(name='google_tracking_id', field=dict(help_text=_("The Google Analytics Tracking ID for this organization"), label="Google Tracking ID", required=False)),
     dict(name='youtube_channel_url', field=dict(help_text=_("The URL to the Youtube channel for this organization"), label="Youtube Channel URL", required=False)),
     dict(name='facebook_page_url', field=dict(help_text=_("The URL to the Facebook page for this organization"), label="Facebook Page URL", required=False)),
@@ -204,6 +205,7 @@ ORG_CONFIG_FIELDS = [
     dict(name='headline_font', field=dict(help_text=_("The font used for headline texts"), required=False), superuser_only=True),
     dict(name='text_font', field=dict(help_text=_("The font used for normal text"), required=False), superuser_only=True),
     dict(name='is_participation_hidden', field=dict(help_text=_("Hide participation stats"), required=False), superuser_only=True),
+    dict(name='ureport_announcement', field=dict(help_text=_("The text to describe the sponsors of free messages"), label="Announcement", required=False), superuser_only=True),
     dict(name='text_small_font', field=dict(help_text=_("The font used for small text"), required=False), superuser_only=True),
     dict(name='custom_html', field=dict(help_text=_("If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"), label="Custom HTML", required=False, widget=Textarea))
 ]

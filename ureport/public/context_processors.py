@@ -63,6 +63,7 @@ def set_config_display_flags(request):
         context['show_age_stats'] = reduce(operator.or_, [bool(org.get_config('%s.born_label' % option)) for option in backend_options], False)
         context['show_gender_stats'] = reduce(operator.or_, [bool(org.get_config('%s.gender_label' % option)) for option in backend_options], False)
         context['show_occupation_stats'] = reduce(operator.or_, [bool(org.get_config('%s.occupation_label' % option)) for option in backend_options], False)
+        context['colors_map'] = [str(color.strip()) for color in org.get_config("colors_map", "").split(',')]
 
     return context
 
@@ -75,8 +76,9 @@ def set_org_lang_params(request):
     is_rtl_org = False
     org_lang = 'en_US'
     org = request.org
-    if org and org.language in getattr(settings, 'RTL_LANGUAGES', []):
-        is_rtl_org = True
+    if org and org.language:
+        if org.language in getattr(settings, 'RTL_LANGUAGES', []):
+            is_rtl_org = True
 
         org_langs = getattr(settings, 'ORG_LANG_MAP', {})
         org_lang = org_langs.get(org.language)

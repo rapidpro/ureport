@@ -1,3 +1,16 @@
+v1.0.420
+----------
+ * Merge pull request #369 from rapidpro/map-colors
+ * Add config for custom maps colors
+
+v1.0.419
+----------
+ * Add config for announcement
+
+v1.0.418
+----------
+ * Fix bug, no response should not be considered as responded
+
 v1.0.417
 ----------
  * Strip trailing spaces on ignore words

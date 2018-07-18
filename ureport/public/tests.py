@@ -60,7 +60,7 @@ class PublicTest(UreportTest):
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME='nigeria.ureport.io')
         self.assertTrue('form' in response.context)
-        self.assertEqual(len(response.context['form'].fields), 41)
+        self.assertEqual(len(response.context['form'].fields), 43)
 
     def test_count(self):
         count_url = reverse('public.count')
@@ -227,6 +227,14 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request['PATH_INFO'], '/')
         self.assertTrue(response.context['is_rtl_org'])
         self.assertEqual(response.context['org_lang'], 'ar_AR')
+
+        self.nigeria.language = 'es'
+        self.nigeria.save()
+
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertFalse(response.context['is_rtl_org'])
+        self.assertEqual(response.context['org_lang'], 'es_ES')
 
     def test_set_story_widget_url(self):
         home_url = reverse('public.index')
