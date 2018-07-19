@@ -588,6 +588,20 @@ PREVIOUS_ORG_SITES = [
         count_link="http://argentina.ureport.in/count/",
     ),
     dict(
+        name="Bangladesh",
+        host="//bangladesh.ureport.in/",
+        flag="flag_bd.png",
+        is_static=True,
+        count_link="http://bangladesh.ureport.in/count/",
+    ),
+    dict(
+        name="Belize",
+        host="//belize.ureport.in/",
+        flag="flag_bz.png",
+        is_static=True,
+        count_link="http://belize.ureport.in/count/",
+    ),
+    dict(
         name="Brazil",
         host="//ureportbrasil.org.br/",
         flag="flag_br.png",
@@ -623,6 +637,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://ireland.ureport.in/count/",
     ),
     dict(
+        name="Jamaica",
+        host="//jamaica.ureport.in/",
+        flag="flag_jm.png",
+        is_static=True,
+        count_link="http://jamaica.ureport.in/count/",
+    ),
+    dict(
         name="Moldova",
         host="//moldova.ureport.in",
         flag="flag_md.png",
@@ -649,6 +670,13 @@ PREVIOUS_ORG_SITES = [
         flag="flag_th.png",
         is_static=True,
         count_link="http://thailand.ureport.in/count/",
+    ),
+    dict(
+        name="Trinidad and Tobago",
+        host="//tt.ureport.in/",
+        flag="flag_tt.png",
+        is_static=True,
+        count_link="http://tt.ureport.in/count/",
     ),
     dict(
         name='United Kingdom',
