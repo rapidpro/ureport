@@ -92,7 +92,7 @@ class UtilsTest(UreportTest):
 
         # rwanda should be included and the third in the list alphabetically by subdomain
         self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
-        self.assertEqual(get_linked_orgs()[settings_sites_count - 4]['name'].lower(), 'syria')
+        self.assertEqual(get_linked_orgs()[settings_sites_count - 4]['name'].lower(), 'thailand')
 
         # revert subdomain to burundi
         self.org.subdomain = 'aaaburundi'
