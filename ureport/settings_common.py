@@ -606,7 +606,7 @@ PREVIOUS_ORG_SITES = [
         host="//ureportbrasil.org.br/",
         flag="flag_br.png",
         is_static=True,
-        count_link="http://ureportbrasil.org.br/count/",
+        count_link="http://brasil.ureport.in/count/",
     ),
     dict(
         name="El Salvador",
