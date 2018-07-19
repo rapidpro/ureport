@@ -588,6 +588,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://argentina.ureport.in/count/",
     ),
     dict(
+        name="Bangladesh",
+        host="//bangladesh.ureport.in/",
+        flag="flag_bd.png",
+        is_static=True,
+        count_link="http://bangladesh.ureport.in/count/",
+    ),
+    dict(
         name="Belize",
         host="//belize.ureport.in/",
         flag="flag_bz.png",
