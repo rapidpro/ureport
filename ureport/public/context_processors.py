@@ -76,8 +76,9 @@ def set_org_lang_params(request):
     is_rtl_org = False
     org_lang = 'en_US'
     org = request.org
-    if org and org.language in getattr(settings, 'RTL_LANGUAGES', []):
-        is_rtl_org = True
+    if org and org.language:
+        if org.language in getattr(settings, 'RTL_LANGUAGES', []):
+            is_rtl_org = True
 
         org_langs = getattr(settings, 'ORG_LANG_MAP', {})
         org_lang = org_langs.get(org.language)

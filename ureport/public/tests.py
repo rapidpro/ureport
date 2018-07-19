@@ -228,6 +228,14 @@ class PublicTest(UreportTest):
         self.assertTrue(response.context['is_rtl_org'])
         self.assertEqual(response.context['org_lang'], 'ar_AR')
 
+        self.nigeria.language = 'es'
+        self.nigeria.save()
+
+        response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
+        self.assertEqual(response.request['PATH_INFO'], '/')
+        self.assertFalse(response.context['is_rtl_org'])
+        self.assertEqual(response.context['org_lang'], 'es_ES')
+
     def test_set_story_widget_url(self):
         home_url = reverse('public.index')
         response = self.client.get(home_url, HTTP_HOST='nigeria.ureport.io')
