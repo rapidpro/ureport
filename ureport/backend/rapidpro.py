@@ -385,7 +385,7 @@ class RapidProBackend(BaseBackend):
 
         return sync_local_to_changes(org, ContactSyncer(backend=self.backend), fetches, deleted_fetches, progress_callback)
 
-    def _iter_archive_records(self, archive):
+    def _iter_archive_records(self, archive, flow_uuid):
         r = requests.get(archive.download_url, stream=True)
         stream = gzip.GzipFile(fileobj=io.BytesIO(r.content))
 
@@ -393,12 +393,13 @@ class RapidProBackend(BaseBackend):
             line = stream.readline()
             if not line:
                 break
-
-            yield json.loads(line.decode("utf-8"))
+            line_decoded = line.decode("utf-8")
+            if line_decoded.find(flow_uuid) > 0:
+                yield json.loads(line_decoded)
 
     def _iter_poll_record_runs(self, archive, poll_flow_uuid):
 
-        for record_batch in chunk_list(self._iter_archive_records(archive), 1000):
+        for record_batch in chunk_list(self._iter_archive_records(archive, poll_flow_uuid), 1000):
             matching = []
             for record in record_batch:
                 if record["flow"]["uuid"] == poll_flow_uuid:
