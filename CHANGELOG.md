@@ -1,3 +1,18 @@
+v1.0.421
+----------
+ * Merge pull request #371 from Ilhasoft/feature/new-flags
+ * Fix flags ordering
+ * Add Bangladesh logo
+ * Add new country flags
+ * Merge pull request #57 from rapidpro/master
+ * Merge pull request #368 from Ilhasoft/feature/charts-ordering
+ * Merge pull request #366 from Ilhasoft/hotfix/org-lang
+ * Add new entry to test org lang
+ * Add order by created on desc on recent polls
+ * Fix org lang context variable setting
+ * Merge pull request #55 from rapidpro/master
+ * Merge pull request #54 from rapidpro/master
+
 v1.0.420
 ----------
  * Merge pull request #369 from rapidpro/map-colors
