@@ -9,10 +9,6 @@ import time
 import requests
 import gzip
 import io
-import uuid
-import os
-
-from datetime import timedelta
 
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import Run
@@ -27,6 +23,7 @@ from django_redis import get_redis_connection
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollResult, Poll, PollQuestion, PollResponseCategory
+from ureport.polls.tasks import pull_refresh_from_archives
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import prod_print, chunk_list
 from . import BaseBackend
@@ -420,23 +417,20 @@ class RapidProBackend(BaseBackend):
 
             client = self._get_client(org, 2)
 
-            start = time.time()
-
             questions_uuids = poll.get_question_uuids()
             archives_query = client.get_archives(archive_type="run", after=first)
             archives_fetches = archives_query.iterfetches(retry_on_rate_exceed=True)
 
+            i = 0
             for archives in archives_fetches:
-                print(f'{"=" * 20}')
 
-                i  = -1
                 for archive in archives:
                     i += 1
-                    print(f"Archive {i} with {archive.record_count} records, size {archive.size}")
+                    prod_print("Archive %d with %d records, size %d" % (i, archive.record_count, archive.size))
 
                     try:
                         start_archive = time.time()
-                        print(f"Archive {i} has {archive.record_count} records")
+                        prod_print("Archive %d has %d records" % (i, archive.record_count))
 
                         if archive.record_count <= 0:
                             continue
@@ -459,10 +453,11 @@ class RapidProBackend(BaseBackend):
 
                             self._save_new_poll_results_to_database(poll_results_to_save_map)
 
-                            print(f"Processing archive {i} took {(time.time() - fetch_start):.1f}s for fetch of {len(fetch)}")
+                            prod_print("Processing archive %d took %ds for fetch of %d" % (i, time.time() - fetch_start, len(fetch)))
 
-                        print(f"Full poll process archive {(time.time() - start):.1f}s")
+                        prod_print("Full poll process archive in %ds" % (time.time() - start_archive))
                     except Exception as e:
+                        prod_print(e)
                         import traceback
                         traceback.print_exc()
 
@@ -496,6 +491,7 @@ class RapidProBackend(BaseBackend):
                     batches_latest = None
                     resume_cursor = None
                     poll.delete_poll_results()
+                    pull_refresh_from_archives.apply_async((poll.pk,), queue='sync')
 
                 if resume_cursor is None:
                     before = datetime_to_json_date(timezone.now())

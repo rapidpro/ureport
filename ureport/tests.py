@@ -91,6 +91,9 @@ class MockResponse(object):
     def json(self, **kwargs):
         return json.loads(self.content)
 
+    def __next__(self):
+        return self
+
 
 @override_settings(SITE_BACKEND='ureport.tests.TestBackend')
 class UreportTest(SmartminTest, DashTest):

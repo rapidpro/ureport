@@ -159,6 +159,12 @@ def pull_refresh(poll_id):
     Poll.pull_results(poll_id)
 
 
+@app.task(name='polls.pull_refresh_from_archives')
+def pull_refresh_from_archives(poll_id):
+    from .models import Poll
+    Poll.pull_results_from_archives(poll_id)
+
+
 @app.task(name='polls.rebuild_counts')
 def rebuild_counts():
     from .models import Poll

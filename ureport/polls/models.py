@@ -154,6 +154,21 @@ class Poll(SmartModel):
         return pulled_runs * 100 / float(self.runs_count)
 
     @classmethod
+    def pull_results_from_archives(cls, poll_id):
+        poll = Poll.objects.get(pk=poll_id)
+        backend = poll.org.get_backend(backend_slug=poll.backend.slug)
+
+        (num_val_created, num_val_updated, num_val_ignored,
+         num_path_created, num_path_updated, num_path_ignored) = backend.pull_results_from_archives(poll)
+
+        if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
+            poll.rebuild_poll_results_counts()
+
+        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
+
+        return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
+
+    @classmethod
     def pull_results(cls, poll_id):
         poll = Poll.objects.get(pk=poll_id)
         backend = poll.org.get_backend(backend_slug=poll.backend.slug)
