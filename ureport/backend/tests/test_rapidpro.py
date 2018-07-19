@@ -2,7 +2,6 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
-import requests
 import gzip
 import io
 
@@ -1013,8 +1012,7 @@ class RapidProBackendTest(UreportTest):
         mock_timezone_now.return_value = now_date
 
         PollResult.objects.all().delete()
-        contact = Contact.objects.create(org=self.nigeria, uuid='C-001', gender='M', born=1990, state='R-LAGOS',
-                                         district='R-OYO')
+        Contact.objects.create(org=self.nigeria, uuid='C-001', gender='M', born=1990, state='R-LAGOS', district='R-OYO')
         poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
         poll.poll_date = now_date
         poll.save()
@@ -1083,7 +1081,6 @@ class RapidProBackendTest(UreportTest):
                           num_path_created, num_path_updated, num_path_ignored), (2, 0, 0, 0, 0, 2))
         self.assertEqual(3, PollResult.objects.all().count())
         self.assertEqual(1, Contact.objects.all().count())
-
 
     @patch('dash.orgs.models.TembaClient.get_runs')
     @patch('django.utils.timezone.now')
