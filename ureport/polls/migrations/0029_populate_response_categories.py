@@ -10,7 +10,9 @@ from django.db import migrations
 from temba_client.exceptions import TembaBadRequestError
 from temba_client.v1 import TembaClient
 
+
 logger = logging.getLogger(__name__)
+
 
 class Migration(migrations.Migration):
 

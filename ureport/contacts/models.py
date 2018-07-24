@@ -12,11 +12,12 @@ from django.utils.translation import ugettext_lazy as _
 from django_redis import get_redis_connection
 
 
-
 CONTACT_LOCK_KEY = 'lock:contact:%d:%s'
 CONTACT_FIELD_LOCK_KEY = 'lock:contact-field:%d:%s'
 
+
 logger = logging.getLogger(__name__)
+
 
 class ContactField(models.Model):
     """

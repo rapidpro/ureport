@@ -12,6 +12,7 @@ from ureport.utils import chunk_list
 
 logger = logging.getLogger(__name__)
 
+
 def populate_boundary_backend(apps, schema_editor):
     Boundary = apps.get_model('locations', 'Boundary')
     Org = apps.get_model('orgs', 'Org')

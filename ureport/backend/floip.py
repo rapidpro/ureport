@@ -23,6 +23,7 @@ from . import BaseBackend
 
 from temba_client.v2 import TembaClient
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -358,10 +359,10 @@ class FLOIPBackend(BaseBackend):
                     self._save_new_poll_results_to_database(poll_results_to_save_map)
 
                     logger.info("Processed fetch of %d - %d "
-                               "runs for poll #%d on org #%d" % (stats_dict['num_synced'] - len(results),
-                                                                 stats_dict['num_synced'],
-                                                                 poll.pk,
-                                                                 org.pk))
+                                "runs for poll #%d on org #%d" % (stats_dict['num_synced'] - len(results),
+                                                                  stats_dict['num_synced'],
+                                                                  poll.pk,
+                                                                  org.pk))
                     # fetch_start = time.time()
                     logger.info("=" * 40)
 
@@ -372,18 +373,18 @@ class FLOIPBackend(BaseBackend):
                         self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
 
                         logger.info("Break pull results for poll #%d on org #%d in %ds, "
-                                   " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"
-                                   " Objects: created %d, updated %d, ignored %d. "
-                                   "Before cursor %s" % (poll.pk, org.pk,
-                                                         time.time() - start,
-                                                         after,
-                                                         before,
-                                                         batches_latest,
-                                                         latest_synced_obj_time,
-                                                         stats_dict['num_val_created'],
-                                                         stats_dict['num_val_updated'],
-                                                         stats_dict['num_val_ignored'],
-                                                         cursor))
+                                    " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"
+                                    " Objects: created %d, updated %d, ignored %d. "
+                                    "Before cursor %s" % (poll.pk, org.pk,
+                                                          time.time() - start,
+                                                          after,
+                                                          before,
+                                                          batches_latest,
+                                                          latest_synced_obj_time,
+                                                          stats_dict['num_val_created'],
+                                                          stats_dict['num_val_updated'],
+                                                          stats_dict['num_val_ignored'],
+                                                          cursor))
 
                         return (stats_dict['num_val_created'], stats_dict['num_val_updated'],
                                 stats_dict['num_val_ignored'], stats_dict['num_path_created'],
@@ -403,12 +404,12 @@ class FLOIPBackend(BaseBackend):
                 # reset_queries()
 
                 logger.info("Finished pulling results for poll #%d on org #%d runs in %ds, "
-                           "Times: sync_latest= %s,"
-                           "Objects: created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start,
-                                                                            latest_synced_obj_time,
-                                                                            stats_dict['num_val_created'],
-                                                                            stats_dict['num_val_updated'],
-                                                                            stats_dict['num_val_ignored']))
+                            "Times: sync_latest= %s,"
+                            "Objects: created %d, updated %d, ignored %d" % (poll.pk, org.pk, time.time() - start,
+                                                                             latest_synced_obj_time,
+                                                                             stats_dict['num_val_created'],
+                                                                             stats_dict['num_val_updated'],
+                                                                             stats_dict['num_val_ignored']))
         return (stats_dict['num_val_created'], stats_dict['num_val_updated'], stats_dict['num_val_ignored'],
                 stats_dict['num_path_created'], stats_dict['num_path_updated'], stats_dict['num_path_ignored'])
 

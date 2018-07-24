@@ -6,7 +6,9 @@ import time
 import logging
 from ureport.utils import chunk_list
 
+
 logger = logging.getLogger(__name__)
+
 
 class Migration(migrations.Migration):
 
