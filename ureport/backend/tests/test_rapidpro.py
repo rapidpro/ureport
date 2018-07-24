@@ -2,6 +2,8 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
+import gzip
+import io
 
 from datetime import timedelta
 from django.db import connection, reset_queries
@@ -12,7 +14,7 @@ from temba_client.exceptions import TembaRateExceededError
 
 from temba_client.v2.types import Boundary as TembaBoundary
 from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact
-from temba_client.v2.types import Run as TembaRun
+from temba_client.v2.types import Run as TembaRun, Archive as TembaArchive
 
 from dash.test import MockClientQuery
 
@@ -21,7 +23,7 @@ from ureport.backend.rapidpro import FieldSyncer, BoundarySyncer, ContactSyncer,
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollResult, Poll, PollQuestion
-from ureport.tests import UreportTest
+from ureport.tests import UreportTest, MockResponse
 from ureport.utils import json_date_to_datetime, datetime_to_json_date
 from ureport.utils import prod_print
 
@@ -988,6 +990,97 @@ class RapidProBackendTest(UreportTest):
 
         self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
                           num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 0, 0, 1))
+
+    @patch('redis.client.StrictRedis.lock')
+    @patch('dash.orgs.models.TembaClient.get_archives')
+    @patch('django.utils.timezone.now')
+    @patch('requests.get')
+    def test_pull_results_from_archives(self, mock_request_get, mock_timezone_now, mock_get_archives, mock_redis_lock):
+
+        def gzipped_records(records):
+            stream = io.BytesIO()
+            gz = gzip.GzipFile(fileobj=stream, mode="wb")
+
+            for record in records:
+                gz.write(json.dumps(record).encode("utf-8"))
+                gz.write(b"\n")
+            gz.close()
+            stream.seek(0)
+            return MockResponse(200, stream.read())
+
+        now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
+        mock_timezone_now.return_value = now_date
+
+        PollResult.objects.all().delete()
+        Contact.objects.create(org=self.nigeria, uuid='C-001', gender='M', born=1990, state='R-LAGOS', district='R-OYO')
+        poll = self.create_poll(self.nigeria, "Flow 1", 'flow-uuid', self.education_nigeria, self.admin)
+        poll.poll_date = now_date
+        poll.save()
+
+        PollQuestion.objects.create(poll=poll, title='question 1', ruleset_uuid='ruleset-uuid',
+                                    created_by=self.admin, modified_by=self.admin)
+
+        PollQuestion.objects.create(poll=poll, title='question 2', ruleset_uuid='ruleset-uuid-2',
+                                    created_by=self.admin, modified_by=self.admin)
+
+        now = timezone.now()
+        temba_run = TembaRun.create(id=1234, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                    contact=ObjectRef.create(uuid='C-001', name='Wiz Kid'), responded=True,
+                                    values={"win": TembaRun.Value.create(value="We'll win today", category="Win",
+                                                                         node='ruleset-uuid', time=now)},
+                                    path=[TembaRun.Step.create(node='ruleset-uuid', time=now)],
+                                    created_on=now, modified_on=now, exited_on=now,
+                                    exit_type='completed')
+
+        mock_request_get.side_effect = gzipped_records([temba_run.serialize()])
+        mock_get_archives.side_effect = [MockClientQuery(*[[TembaArchive.create(archive_type="run", start_date=poll.created_on, period="daily", record_count=12, size=23, hash="f0d79988b7772c003d04a28bd7417a62", download_url="http://s3-bucket.aws.com/my/archive.jsonl.gz")]])]
+
+        with self.assertNumQueries(5):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results_from_archives(poll)
+
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (1, 0, 0, 0, 0, 1))
+
+        mock_get_archives.assert_called_with(archive_type='run', after=now_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0))
+        mock_redis_lock.assert_called_once_with(Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid))
+
+        poll_result = PollResult.objects.filter(flow='flow-uuid', ruleset='ruleset-uuid', contact='C-001').first()
+        self.assertEqual(poll_result.state, 'R-LAGOS')
+        self.assertEqual(poll_result.district, 'R-OYO')
+        self.assertEqual(poll_result.contact, 'C-001')
+        self.assertEqual(poll_result.ruleset, 'ruleset-uuid')
+        self.assertEqual(poll_result.flow, 'flow-uuid')
+        self.assertEqual(poll_result.category, 'Win')
+        self.assertEqual(poll_result.text, "We'll win today")
+
+        temba_run_1 = TembaRun.create(id=1235, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                      contact=ObjectRef.create(uuid='C-002', name='Davido'), responded=True,
+                                      values={"sing": TembaRun.Value.create(value="I sing", category="Sing",
+                                                                            node='ruleset-uuid', time=now)},
+                                      path=[TembaRun.Step.create(node='ruleset-uuid', time=now)],
+                                      created_on=now, modified_on=now, exited_on=now,
+                                      exit_type='completed')
+
+        temba_run_2 = TembaRun.create(id=1236, flow=ObjectRef.create(uuid='flow-uuid', name="Flow 1"),
+                                      contact=ObjectRef.create(uuid='C-003', name='Lebron'), responded=True,
+                                      values={"play": TembaRun.Value.create(value="I play basketball", category="Play",
+                                                                            node='ruleset-uuid', time=now)},
+                                      path=[TembaRun.Step.create(node='ruleset-uuid', time=now)],
+                                      created_on=now, modified_on=now, exited_on=now,
+                                      exit_type='completed')
+
+        mock_request_get.side_effect = gzipped_records([temba_run_1.serialize(), temba_run_2.serialize()])
+        mock_get_archives.side_effect = [MockClientQuery(*[[TembaArchive.create(archive_type="run", start_date=poll.created_on, period="daily", record_count=12, size=23, hash="f0d79988b7772c003d04a28bd7417a62", download_url="http://s3-bucket.aws.com/my/archive.jsonl.gz")]])]
+
+        with self.assertNumQueries(5):
+            (num_val_created, num_val_updated, num_val_ignored,
+             num_path_created, num_path_updated, num_path_ignored) = self.backend.pull_results_from_archives(poll)
+
+        self.assertEqual((num_val_created, num_val_updated, num_val_ignored,
+                          num_path_created, num_path_updated, num_path_ignored), (2, 0, 0, 0, 0, 2))
+        self.assertEqual(3, PollResult.objects.all().count())
+        self.assertEqual(1, Contact.objects.all().count())
 
     @patch('dash.orgs.models.TembaClient.get_runs')
     @patch('django.utils.timezone.now')

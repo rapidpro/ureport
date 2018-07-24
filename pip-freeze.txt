@@ -54,7 +54,7 @@ pycountry==18.2.23
 python-dateutil==2.7.2
 pytz==2018.3
 rapidpro-dash==1.3.7
-rapidpro-python==2.2
+rapidpro-python==2.3
 raven==6.6.0
 rcssmin==1.0.6
 redis==2.10.6

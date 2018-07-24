@@ -6,8 +6,12 @@ import json
 
 import pytz
 import time
+import requests
+import gzip
+import io
 
 from temba_client.exceptions import TembaRateExceededError
+from temba_client.v2.types import Run
 
 from dash.utils import is_dict_equal
 from dash.utils.sync import BaseSyncer, sync_local_to_set, sync_local_to_changes
@@ -19,8 +23,9 @@ from django_redis import get_redis_connection
 from ureport.contacts.models import ContactField, Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollResult, Poll, PollQuestion, PollResponseCategory
+from ureport.polls.tasks import pull_refresh_from_archives
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
-from ureport.utils import prod_print
+from ureport.utils import prod_print, chunk_list
 from . import BaseBackend
 
 
@@ -377,6 +382,88 @@ class RapidProBackend(BaseBackend):
 
         return sync_local_to_changes(org, ContactSyncer(backend=self.backend), fetches, deleted_fetches, progress_callback)
 
+    def _iter_archive_records(self, archive, flow_uuid):
+        r = requests.get(archive.download_url, stream=True)
+        stream = gzip.GzipFile(fileobj=io.BytesIO(r.content))
+
+        while True:
+            line = stream.readline()
+            if not line:
+                break
+            line_decoded = line.decode("utf-8")
+            if line_decoded.find(flow_uuid) > 0:
+                yield json.loads(line_decoded)
+
+    def _iter_poll_record_runs(self, archive, poll_flow_uuid):
+
+        for record_batch in chunk_list(self._iter_archive_records(archive, poll_flow_uuid), 1000):
+            matching = []
+            for record in record_batch:
+                if record["flow"]["uuid"] == poll_flow_uuid:
+                    record.update(start=None)
+                    matching.append(record)
+            yield Run.deserialize_list(matching)
+
+    def pull_results_from_archives(self, poll):
+        org = poll.org
+        r = get_redis_connection()
+        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
+
+        stats_dict = dict(num_val_created=0, num_val_updated=0, num_val_ignored=0, num_path_created=0,
+                          num_path_updated=0, num_path_ignored=0, num_synced=0)
+
+        with r.lock(key):
+            first = poll.poll_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+
+            client = self._get_client(org, 2)
+
+            questions_uuids = poll.get_question_uuids()
+            archives_query = client.get_archives(archive_type="run", after=first)
+            archives_fetches = archives_query.iterfetches(retry_on_rate_exceed=True)
+
+            i = 0
+            for archives in archives_fetches:
+
+                for archive in archives:
+                    i += 1
+                    prod_print("Archive %d with %d records, size %d" % (i, archive.record_count, archive.size))
+
+                    try:
+                        start_archive = time.time()
+                        prod_print("Archive %d has %d records" % (i, archive.record_count))
+
+                        if archive.record_count <= 0:
+                            continue
+
+                        flow_uuid = poll.flow_uuid
+
+                        for fetch in self._iter_poll_record_runs(archive, flow_uuid):
+
+                            fetch_start = time.time()
+
+                            contacts_map, poll_results_map, poll_results_to_save_map = self._initiate_lookup_maps(fetch, org, poll)
+
+                            for temba_run in fetch:
+
+                                contact_obj = contacts_map.get(temba_run.contact.uuid, None)
+                                self._process_run_poll_results(org, questions_uuids, temba_run, contact_obj, poll_results_map,
+                                                               poll_results_to_save_map, stats_dict)
+
+                            stats_dict['num_synced'] += len(fetch)
+
+                            self._save_new_poll_results_to_database(poll_results_to_save_map)
+
+                            prod_print("Processing archive %d took %ds for fetch of %d" % (i, time.time() - fetch_start, len(fetch)))
+
+                        prod_print("Full poll process archive in %ds" % (time.time() - start_archive))
+                    except Exception as e:
+                        prod_print(e)
+                        import traceback
+                        traceback.print_exc()
+
+        return (stats_dict['num_val_created'], stats_dict['num_val_updated'], stats_dict['num_val_ignored'],
+                stats_dict['num_path_created'], stats_dict['num_path_updated'], stats_dict['num_path_ignored'])
+
     def pull_results(self, poll, modified_after, modified_before, progress_callback=None):
         org = poll.org
         r = get_redis_connection()
@@ -404,6 +491,7 @@ class RapidProBackend(BaseBackend):
                     batches_latest = None
                     resume_cursor = None
                     poll.delete_poll_results()
+                    pull_refresh_from_archives.apply_async((poll.pk,), queue='sync')
 
                 if resume_cursor is None:
                     before = datetime_to_json_date(timezone.now())
