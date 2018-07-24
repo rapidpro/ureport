@@ -255,11 +255,6 @@ class Poll(SmartModel):
 
         Poll.pull_poll_results_task(self)
 
-    @classmethod
-    def test_logger(cls, message):
-        logger.info(message)
-        logger.error(message)
-
     def rebuild_poll_results_counts(self):
         from ureport.utils import chunk_list
         import time
