@@ -1,3 +1,9 @@
+v1.0.424
+----------
+ * Merge pull request #372 from rapidpro/use-archives
+ * Merge pull request #373 from rapidpro/brasil-count
+ * upadate link for Brasil count
+
 v1.0.421
 ----------
  * Merge pull request #371 from Ilhasoft/feature/new-flags
