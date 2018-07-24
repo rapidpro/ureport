@@ -6,8 +6,11 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 import time
-from ureport.utils import chunk_list, prod_print
+import logging
+from ureport.utils import chunk_list
 
+
+logger = logging.getLogger(__name__)
 
 def populate_boundary_backend(apps, schema_editor):
     Boundary = apps.get_model('locations', 'Boundary')
@@ -25,9 +28,9 @@ def populate_boundary_backend(apps, schema_editor):
             updated = Boundary.objects.filter(id__in=batch).update(backend=backend)
 
             i += updated
-            prod_print("Processed %d / %d boundaires in %ds" % (i, len(boundaries_ids), time.time() - start))
+            logger.info("Processed %d / %d boundaires in %ds" % (i, len(boundaries_ids), time.time() - start))
 
-        prod_print("Finished setting boundaries backend for org %s" % org.name)
+        logger.info("Finished setting boundaries backend for org %s" % org.name)
 
 
 class Migration(migrations.Migration):

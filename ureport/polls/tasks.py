@@ -17,7 +17,7 @@ from ureport.celery import app
 
 from dash.orgs.tasks import org_task
 from ureport.utils import fetch_flows, fetch_old_sites_count as do_fetch_old_sites_count, update_poll_flow_data
-from ureport.utils import populate_age_and_gender_poll_results, prod_print
+from ureport.utils import populate_age_and_gender_poll_results
 
 
 logger = logging.getLogger(__name__)
@@ -209,7 +209,7 @@ def refresh_org_flows(org_id=None):
             for org in active_orgs:
                 fetch_flows(org)
 
-        prod_print("Task: refresh_flows took %ss" % (time.time() - start))
+        logger.info("Task: refresh_flows took %ss" % (time.time() - start))
 
 
 @app.task(name='polls.fetch_old_sites_count')
@@ -223,7 +223,7 @@ def fetch_old_sites_count():
     if not r.get(key):
         with r.lock(key, timeout=lock_timeout):
             do_fetch_old_sites_count()
-            prod_print("Task: fetch_old_sites_count took %ss" % (time.time() - start))
+            logger.info("Task: fetch_old_sites_count took %ss" % (time.time() - start))
 
 
 @app.task(track_started=True, name='polls.recheck_poll_flow_data')
@@ -236,4 +236,4 @@ def recheck_poll_flow_data(org_id=None):
     for org in active_orgs:
         update_poll_flow_data(org)
 
-    prod_print("Task: recheck_poll_flow_data done")
+    logger.info("Task: recheck_poll_flow_data done")

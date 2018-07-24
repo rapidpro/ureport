@@ -3,7 +3,9 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from django.db import migrations
-from ureport.utils import prod_print
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Migration(migrations.Migration):
@@ -13,7 +15,7 @@ class Migration(migrations.Migration):
 
         deleted, inactive = Boundary.objects.filter(is_active=False).delete()
 
-        prod_print("Deleted %d inactive boundaries" % deleted)
+        logger.info("Deleted %d inactive boundaries" % deleted)
 
     dependencies = [
         ('locations', '0002_boundary_is_active'),
