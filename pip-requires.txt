@@ -33,3 +33,4 @@ feedparser
 Markdown
 iso8601
 pip-tools
+futures==3.2.0; python_version < "3.0"
