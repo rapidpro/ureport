@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import git
 import json
 import os
+import logging
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
@@ -11,7 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from django_countries import countries
 from ureport.countries.models import CountryAlias
-from ureport.utils import prod_print
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -30,19 +32,19 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         if os.path.exists('./country-list/') and os.path.isdir('./country-list'):
-            prod_print("Fetching country-list...")
+            logger.info("Fetching country-list...")
             os.chdir('./country-list')
             repo = git.Repo('.')
             o = repo.remotes.origin
             o.pull()
             os.chdir('..')
-            prod_print("Finished fetching country-list.")
+            logger.info("Finished fetching country-list.")
         else:
-            prod_print("Cloning country-list...")
+            logger.info("Cloning country-list...")
             git.Git().clone('https://github.com/umpirsky/country-list.git', 'country-list')
-            prod_print("Finished cloning country-list.")
+            logger.info("Finished cloning country-list.")
 
-        prod_print("Looking up json files...")
+        logger.info("Looking up json files...")
 
         filenames = []
 
@@ -51,20 +53,20 @@ class Command(BaseCommand):
             for name in files:
                 if name.endswith('.json'):
                     filenames.append(os.path.join(path, name))
-                    prod_print("Found %s" % os.path.join(path, name))
+                    logger.info("Found %s" % os.path.join(path, name))
                     i += 1
 
-        prod_print("Found %d json files to parse")
+        logger.info("Found %d json files to parse")
 
         user = User.objects.filter(username="root").first()
 
         if not user:
             raise Exception(_("No root user found. Please create a root user"))
 
-        prod_print("Parsing files...")
+        logger.info("Parsing files...")
         for filename in filenames:
-            prod_print("Parsing file %s" % filename)
+            logger.info("Parsing file %s" % filename)
             with open(filename, encoding='utf-8') as json_file:
                 self.import_file(json_file, user)
 
-        prod_print("All files parsed.")
+        logger.info("All files parsed.")

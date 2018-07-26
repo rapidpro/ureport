@@ -3,7 +3,9 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from django.db import migrations
-from ureport.utils import prod_print
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Migration(migrations.Migration):
@@ -13,7 +15,7 @@ class Migration(migrations.Migration):
 
         deleted, inactive = ContactField.objects.filter(is_active=False).delete()
 
-        prod_print("Deleted %d inactive fields" % deleted)
+        logger.info("Deleted %d inactive fields" % deleted)
 
     dependencies = [
         ('contacts', '0014_install_triggers'),

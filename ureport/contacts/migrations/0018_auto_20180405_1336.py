@@ -6,7 +6,10 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 import time
-from ureport.utils import chunk_list, prod_print
+import logging
+from ureport.utils import chunk_list
+
+logger = logging.getLogger(__name__)
 
 
 def populate_contacts_backend(apps, schema_editor):
@@ -19,7 +22,7 @@ def populate_contacts_backend(apps, schema_editor):
     for org in Org.objects.all():
         backend = org.backends.filter(slug="rapidpro").first()
         ContactField.objects.filter(org=org).update(backend=backend)
-        prod_print("Processed fields")
+        logger.info("Processed fields")
 
         i = 0
         contact_ids = Contact.objects.filter(org_id=org.id).values_list('id', flat=True)
@@ -27,9 +30,9 @@ def populate_contacts_backend(apps, schema_editor):
         for batch in chunk_list(contact_ids, 1000):
             updated = Contact.objects.filter(id__in=batch, org_id=org.id).update(backend_id=backend.id)
             i += updated
-            prod_print("Processed %d / %d contacts in %ds" % (i, len(contact_ids), time.time() - start))
+            logger.info("Processed %d / %d contacts in %ds" % (i, len(contact_ids), time.time() - start))
 
-        prod_print("Finished setting contacts and fields backend for org %s" % org.name)
+        logger.info("Finished setting contacts and fields backend for org %s" % org.name)
 
 
 class Migration(migrations.Migration):

@@ -721,3 +721,20 @@ SWAGGER_SETTINGS = {
 }
 
 STORY_WIDGET_URL = 'https://ureportapp.ilhasoft.mobi/widget/'
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "root": {"level": "WARNING", "handlers": ["console"]},
+    "formatters": {"verbose": {"format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"}},
+    "handlers": {
+        "console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "verbose"},
+        "null": {"class": "logging.NullHandler"},
+    },
+    "loggers": {
+        "pycountry": {"level": "ERROR", "handlers": ["console"], "propagate": False},
+        "django.security.DisallowedHost": {"handlers": ["null"], "propagate": False},
+        "django.db.backends": {"level": "ERROR", "handlers": ["console"], "propagate": False},
+    },
+}

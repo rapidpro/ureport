@@ -2,9 +2,11 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 from django.core.cache import cache
 
-from django.db import migrations
-from ureport.utils import prod_print
+import logging
 
+from django.db import migrations
+
+logger = logging.getLogger(__name__)
 
 # language=SQL
 CLEAR_CONTACT_SQL = """
@@ -20,10 +22,10 @@ def remove_cache_and_lock_keys(apps, schema_editor):
         cache.delete_pattern('fetch_contacts')
         cache.delete_pattern('fetch_contacts*')
 
-        prod_print("Removed all cache and lock keys for fetch contacts")
+        logger.info("Removed all cache and lock keys for fetch contacts")
 
     except AttributeError as e:
-        prod_print(e)
+        logger.info(e)
 
 
 class Migration(migrations.Migration):
