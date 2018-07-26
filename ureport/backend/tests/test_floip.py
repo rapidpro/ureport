@@ -2,18 +2,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from mock import patch
-
-from temba_client.v2.types import ObjectRef, Contact as TembaContact
-
-from dash.test import MockClientQuery
-
 from dash.categories.models import Category
+from dash.test import MockClientQuery
+from mock import patch
+from temba_client.v2.types import Contact as TembaContact, ObjectRef
+
 from ureport.backend.floip import ContactSyncer, FLOIPBackend
 from ureport.contacts.models import Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll, PollQuestion, PollResponseCategory
-from ureport.tests import UreportTest, MockResponse
+from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
+from ureport.tests import MockResponse, UreportTest
 from ureport.utils import json_date_to_datetime
 
 

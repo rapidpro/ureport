@@ -1,43 +1,45 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
-from datetime import datetime
 import json
-from dash.categories.models import Category
+from datetime import datetime
 
-from dash.test import MockClientQuery
-from dash_test_runner.tests import MockResponse
-from django.conf import settings
-from django.utils import timezone
-from mock import patch
 import pytz
 import redis
+from dash.categories.models import Category
+from dash.test import MockClientQuery
+from dash_test_runner.tests import MockResponse
+from mock import patch
 from temba_client.v2 import Flow
+
+from django.conf import settings
+from django.utils import timezone
 
 from ureport.assets.models import FLAG, Image
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
-from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, CACHE_ORG_FLOWS_KEY
+from ureport.polls.models import CACHE_ORG_FLOWS_KEY, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll
 from ureport.tests import UreportTest
 from ureport.utils import (
-    get_linked_orgs,
-    fetch_old_sites_count,
-    get_gender_stats,
-    get_age_stats,
-    get_registration_stats,
-    get_ureporters_locations_stats,
-    get_reporters_count,
-    get_occupation_stats,
-    get_regions_stats,
-    get_org_contacts_counts,
+    GLOBAL_COUNT_CACHE_KEY,
     ORG_CONTACT_COUNT_KEY,
-    get_flows,
+    datetime_to_json_date,
     fetch_flows,
+    fetch_old_sites_count,
+    get_age_stats,
+    get_flows,
+    get_gender_stats,
+    get_global_count,
+    get_linked_orgs,
+    get_occupation_stats,
+    get_org_contacts_counts,
+    get_regions_stats,
+    get_registration_stats,
+    get_reporters_count,
+    get_ureporters_locations_stats,
+    json_date_to_datetime,
     update_poll_flow_data,
 )
-from ureport.utils import datetime_to_json_date, json_date_to_datetime
-from ureport.utils import get_global_count, GLOBAL_COUNT_CACHE_KEY
 
 
 class UtilsTest(UreportTest):

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
 import json
+
+from mock import Mock, patch
+
 from ureport.tests import UreportTest
-from mock import patch, Mock
+
 from .models import Boundary
 
 

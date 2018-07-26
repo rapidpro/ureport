@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
 import time
-from dash.orgs.models import Org, OrgBackend
-from django.db import models, connection
-from django.db.models import Sum, Count
-from django.utils.translation import ugettext_lazy as _
 
+from dash.orgs.models import Org, OrgBackend
 from django_redis import get_redis_connection
 
-from ureport.utils import prod_print
+from django.db import connection, models
+from django.db.models import Count, Sum
+from django.utils.translation import ugettext_lazy as _
 
+from ureport.utils import prod_print
 
 CONTACT_LOCK_KEY = "lock:contact:%d:%s"
 CONTACT_FIELD_LOCK_KEY = "lock:contact-field:%d:%s"

@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
-import sys
 import os
+import sys
+from datetime import timedelta
+
+from django.forms import Textarea
+from django.utils.translation import ugettext_lazy as _
 
 from celery.schedules import crontab
-from datetime import timedelta
-from django.utils.translation import ugettext_lazy as _
-from django.forms import Textarea
-
 
 # -----------------------------------------------------------------------------------
 # Sets TESTING to True if this configuration is read during a unit test

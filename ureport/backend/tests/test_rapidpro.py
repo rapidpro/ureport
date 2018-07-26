@@ -1,31 +1,34 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import json
 import gzip
 import io
-
+import json
 from datetime import timedelta
+
+from dash.categories.models import Category
+from dash.test import MockClientQuery
+from mock import PropertyMock, patch
+from temba_client.exceptions import TembaRateExceededError
+from temba_client.v2.types import (
+    Archive as TembaArchive,
+    Boundary as TembaBoundary,
+    Contact as TembaContact,
+    Field as TembaField,
+    ObjectRef,
+    Run as TembaRun,
+)
+
 from django.db import connection, reset_queries
 from django.test import override_settings
 from django.utils import timezone
-from mock import patch, PropertyMock
-from temba_client.exceptions import TembaRateExceededError
 
-from temba_client.v2.types import Boundary as TembaBoundary
-from temba_client.v2.types import Field as TembaField, ObjectRef, Contact as TembaContact
-from temba_client.v2.types import Run as TembaRun, Archive as TembaArchive
-
-from dash.test import MockClientQuery
-
-from dash.categories.models import Category
-from ureport.backend.rapidpro import FieldSyncer, BoundarySyncer, ContactSyncer, RapidProBackend
-from ureport.contacts.models import ContactField, Contact
+from ureport.backend.rapidpro import BoundarySyncer, ContactSyncer, FieldSyncer, RapidProBackend
+from ureport.contacts.models import Contact, ContactField
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll, PollQuestion
-from ureport.tests import UreportTest, MockResponse
-from ureport.utils import json_date_to_datetime, datetime_to_json_date
-from ureport.utils import prod_print
+from ureport.polls.models import Poll, PollQuestion, PollResult
+from ureport.tests import MockResponse, UreportTest
+from ureport.utils import datetime_to_json_date, json_date_to_datetime, prod_print
 
 
 class FieldSyncerTest(UreportTest):

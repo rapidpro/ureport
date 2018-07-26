@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
 import os
-import celery
 
 from raven import Client
 from raven.contrib.celery import register_signal
 
 from django.conf import settings
+
+import celery
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ureport.settings")

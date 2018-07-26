@@ -2,12 +2,14 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import time
-import six
-from django.conf import settings
 
-from django.db import migrations
+import six
 from temba_client.exceptions import TembaBadRequestError
 from temba_client.v1 import TembaClient
+
+from django.conf import settings
+from django.db import migrations
+
 from ureport.utils import prod_print
 
 

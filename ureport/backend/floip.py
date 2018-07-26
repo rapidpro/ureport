@@ -1,27 +1,24 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import requests
-
 import time
-
 from collections import defaultdict
 
+import requests
 from dash.utils.sync import BaseSyncer, sync_local_to_changes
+from django_redis import get_redis_connection
+from temba_client.v2 import TembaClient
+
+from django.conf import settings
 from django.core.cache import cache
 from django.utils import timezone
 
-from django.conf import settings
-from django_redis import get_redis_connection
-
 from ureport.contacts.models import Contact
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll, PollQuestion, PollResponseCategory
-from ureport.utils import datetime_to_json_date, json_date_to_datetime
-from ureport.utils import prod_print
-from . import BaseBackend
+from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
+from ureport.utils import datetime_to_json_date, json_date_to_datetime, prod_print
 
-from temba_client.v2 import TembaClient
+from . import BaseBackend
 
 
 class ContactSyncer(BaseSyncer):

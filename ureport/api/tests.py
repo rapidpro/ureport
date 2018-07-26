@@ -2,20 +2,22 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from collections import OrderedDict
+from datetime import datetime
 from random import randint
 
+import pytz
 import six
-from django.utils import timezone
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from dash.stories.models import Story
-from datetime import datetime
-from django.contrib.auth.models import User
 from mock import patch
-import pytz
 from rest_framework import status
 from rest_framework.test import APITestCase
-from ureport.api.serializers import generate_absolute_url_from_file, CategoryReadSerializer, StoryReadSerializer
+
+from django.contrib.auth.models import User
+from django.utils import timezone
+
+from ureport.api.serializers import CategoryReadSerializer, StoryReadSerializer, generate_absolute_url_from_file
 from ureport.contacts.models import ReportersCounter
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion

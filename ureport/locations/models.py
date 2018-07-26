@@ -2,11 +2,12 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
-from django.db import models
-from dash.orgs.models import Org, OrgBackend
-from django.utils.translation import ugettext_lazy as _
 
+from dash.orgs.models import Org, OrgBackend
 from django_redis import get_redis_connection
+
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 BOUNDARY_LOCK_KEY = "lock:boundary:%d:%s"
 

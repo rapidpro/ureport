@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from django.db import migrations
 from django.core.cache import cache
-from ureport.utils import prod_print
+from django.db import migrations
 
+from ureport.utils import prod_print
 
 # language=SQL
 CLEAR_CONTACT_SQL = """

@@ -2,28 +2,28 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
-from collections import defaultdict
-
-import uuid
 import logging
+import uuid
+from collections import defaultdict
+from datetime import timedelta
+
 import pytz
 import six
-from datetime import timedelta
-from django.contrib.auth.models import User
-from django.db import models, connection
-from django.db.models import Sum, Count
-from django.utils.text import slugify
-from django.utils import timezone
-from smartmin.models import SmartModel
-from django.utils.translation import ugettext_lazy as _
-from django.core.cache import cache
-from dash.orgs.models import Org, OrgBackend
 from dash.categories.models import Category, CategoryImage
-from django.conf import settings
-from stop_words import safe_get_stop_words
-
+from dash.orgs.models import Org, OrgBackend
 from django_redis import get_redis_connection
+from smartmin.models import SmartModel
+from stop_words import safe_get_stop_words
 from xlrd import XLRDError
+
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.core.cache import cache
+from django.db import connection, models
+from django.db.models import Count, Sum
+from django.utils import timezone
+from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
 
 logger = logging.getLogger(__name__)
 

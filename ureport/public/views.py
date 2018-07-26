@@ -3,26 +3,27 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import calendar
 import json
-import six
 
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+import pycountry
+import six
+from dash.categories.models import Category
+from dash.orgs.models import Org
+from dash.stories.models import Story
+from smartmin.views import SmartReadView, SmartTemplateView
+
 from django.conf import settings
-from django.http import HttpResponsePermanentRedirect, HttpResponse
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
-from smartmin.views import SmartReadView, SmartTemplateView
 
-from dash.stories.models import Story
 from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
+from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
-from dash.categories.models import Category
-from dash.orgs.models import Org
-from ureport.news.models import Video, NewsItem
-import pycountry
-from ureport.utils import get_linked_orgs, get_global_count
+from ureport.utils import get_global_count, get_linked_orgs
 
 
 class IndexView(SmartTemplateView):

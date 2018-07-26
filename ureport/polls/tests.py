@@ -2,35 +2,50 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
-
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
 import pytz
 import six
+from dash.categories.fields import CategoryChoiceField
+from dash.categories.models import Category, CategoryImage
+from dash.orgs.models import TaskState
+from mock import Mock, patch
+from smartmin.csv_imports.models import ImportTask
+from temba_client.exceptions import TembaRateExceededError
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.urls import reverse
 from django.http import HttpRequest
 from django.template import TemplateSyntaxError
+from django.urls import reverse
 from django.utils import timezone
 
-from mock import patch, Mock
-from temba_client.exceptions import TembaRateExceededError
-
-from dash.categories.models import Category, CategoryImage
-from dash.categories.fields import CategoryChoiceField
-from smartmin.csv_imports.models import ImportTask
-
-from dash.orgs.models import TaskState
-from ureport.polls.models import Poll, PollQuestion, FeaturedResponse, PollImage
-from ureport.polls.models import PollResultsCounter, PollResult, PollResponseCategory
-from ureport.polls.tasks import refresh_org_flows, pull_results_brick_polls, pull_results_other_polls, rebuild_counts
-from ureport.polls.tasks import recheck_poll_flow_data, pull_results_main_poll, backfill_poll_results, pull_refresh
-from ureport.polls.tasks import fetch_old_sites_count, update_results_age_gender, update_or_create_questions
+from ureport.polls.models import (
+    FeaturedResponse,
+    Poll,
+    PollImage,
+    PollQuestion,
+    PollResponseCategory,
+    PollResult,
+    PollResultsCounter,
+)
+from ureport.polls.tasks import (
+    backfill_poll_results,
+    fetch_old_sites_count,
+    pull_refresh,
+    pull_results_brick_polls,
+    pull_results_main_poll,
+    pull_results_other_polls,
+    rebuild_counts,
+    recheck_poll_flow_data,
+    refresh_org_flows,
+    update_or_create_questions,
+    update_results_age_gender,
+)
 from ureport.polls.templatetags.ureport import question_segmented_results
-from ureport.tests import UreportTest, MockTembaClient, TestBackend
-from ureport.utils import json_date_to_datetime, datetime_to_json_date
+from ureport.tests import MockTembaClient, TestBackend, UreportTest
+from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
 
 class PollTest(UreportTest):

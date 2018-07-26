@@ -1,11 +1,26 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from rest_framework_swagger.views import get_swagger_view
+
 from django.conf.urls import url
 from django.views.generic import RedirectView
-from ureport.api.views import PollList, PollDetails, FeaturedPollList, NewsItemList, NewsItemDetails, VideoList
-from ureport.api.views import VideoDetails, ImageList, ImageDetails, OrgList, OrgDetails, StoryList, StoryDetails
-from rest_framework_swagger.views import get_swagger_view
+
+from ureport.api.views import (
+    FeaturedPollList,
+    ImageDetails,
+    ImageList,
+    NewsItemDetails,
+    NewsItemList,
+    OrgDetails,
+    OrgList,
+    PollDetails,
+    PollList,
+    StoryDetails,
+    StoryList,
+    VideoDetails,
+    VideoList,
+)
 
 schema_view = get_swagger_view(title="API")
 

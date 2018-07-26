@@ -2,9 +2,26 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from django.conf.urls import url
-from .views import IndexView, NewsView, AboutView, PollsView, PollReadView, PollQuestionResultsView, JobsView
-from .views import BoundaryView, UreportersView, StoriesView, StoryReadView, JoinEngageView, ReportersResultsView
-from .views import CountriesView, Chooser, AdditionalMenu, Count
+
+from .views import (
+    AboutView,
+    AdditionalMenu,
+    BoundaryView,
+    Chooser,
+    Count,
+    CountriesView,
+    IndexView,
+    JobsView,
+    JoinEngageView,
+    NewsView,
+    PollQuestionResultsView,
+    PollReadView,
+    PollsView,
+    ReportersResultsView,
+    StoriesView,
+    StoryReadView,
+    UreportersView,
+)
 
 urlpatterns = [
     url(r"^home/$", Chooser.as_view(), {}, "public.home"),

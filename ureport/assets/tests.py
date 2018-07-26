@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from django.conf import settings
 from django.urls import reverse
+
 from ureport.assets.models import Image
 from ureport.tests import UreportTest
 

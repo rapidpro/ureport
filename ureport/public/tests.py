@@ -1,30 +1,28 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
 import json
+from datetime import timedelta
+
 import mock
 import pytz
-
+from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import Org
+from dash.stories.models import Story, StoryImage
 from six.moves.urllib.parse import urlencode
 
-from datetime import timedelta
+from django.conf import settings
 from django.core.files.images import ImageFile
 from django.urls import reverse
-from django.conf import settings
 from django.utils.http import urlquote
-
-from dash.categories.models import Category
-from dash.stories.models import Story, StoryImage
-from dash.orgs.models import Org
 
 from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.locations.models import Boundary
-from ureport.news.models import Video, NewsItem
+from ureport.news.models import NewsItem, Video
 from ureport.polls.models import PollQuestion
-from ureport.tests import UreportTest, UreportJobsTest, MockTembaClient
+from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
 
 
 class PublicTest(UreportTest):

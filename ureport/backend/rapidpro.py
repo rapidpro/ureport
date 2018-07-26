@@ -1,31 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from collections import defaultdict
-import json
-
-import pytz
-import time
-import requests
 import gzip
 import io
+import json
+import time
+from collections import defaultdict
 
+import pytz
+import requests
+from dash.utils import is_dict_equal
+from dash.utils.sync import BaseSyncer, sync_local_to_changes, sync_local_to_set
+from django_redis import get_redis_connection
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import Run
 
-from dash.utils import is_dict_equal
-from dash.utils.sync import BaseSyncer, sync_local_to_set, sync_local_to_changes
 from django.core.cache import cache
 from django.utils import timezone
 
-from django_redis import get_redis_connection
-
-from ureport.contacts.models import ContactField, Contact
+from ureport.contacts.models import Contact, ContactField
 from ureport.locations.models import Boundary
-from ureport.polls.models import PollResult, Poll, PollQuestion, PollResponseCategory
+from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
-from ureport.utils import datetime_to_json_date, json_date_to_datetime
-from ureport.utils import prod_print, chunk_list
+from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime, prod_print
+
 from . import BaseBackend
 
 

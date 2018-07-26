@@ -1,29 +1,36 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import pytz
 import json
-from django.conf import settings
-from django.urls import reverse
-from django.test import override_settings
-from django.utils import timezone
-from smartmin.tests import SmartminTest
-from django.contrib.auth.models import User
-from django.utils.encoding import force_text
+
+import pytz
 from dash.orgs.middleware import SetOrgMiddleware
+from dash.orgs.models import Org
 from dash.test import DashTest
 from dash.utils import random_string
 from mock import Mock, patch
-from dash.orgs.models import Org
+from smartmin.tests import SmartminTest
+from temba_client.v2 import TembaClient
+from temba_client.v2.types import (
+    Contact as TembaContact,
+    Export as TembaExport,
+    Field as TembaContactField,
+    Flow,
+    Group,
+)
+
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.http.request import HttpRequest
+from django.test import override_settings
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.encoding import force_text
 
 from ureport.backend.rapidpro import RapidProBackend
 from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll
 from ureport.public.views import IndexView
-from temba_client.v2 import TembaClient
-from temba_client.v2.types import Flow, Group, Field as TembaContactField
-from temba_client.v2.types import Contact as TembaContact, Export as TembaExport
 
 
 class MockTembaClient(TembaClient):

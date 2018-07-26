@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from html.parser import HTMLParser
+
+import feedparser
 import six
+from dash.orgs.models import Org
+from smartmin.models import SmartModel
 
 from django.conf import settings
 from django.core.cache import cache
-import feedparser
-
-from html.parser import HTMLParser
-
-from dash.orgs.models import Org
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
-
-from smartmin.models import SmartModel
-
+from django.utils.translation import ugettext_lazy as _
 
 RSS_JOBS_FEED_CACHE_TIME = getattr(settings, "RSS_JOBS_FEED_CACHE_TIME", 60 * 60 * 6)
 RSS_JOBS_KEY = "jobsource:%d:%d"

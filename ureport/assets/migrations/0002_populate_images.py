@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
+
 import urllib
 
-from django.db import migrations
 from django.core.files.images import ImageFile
+from django.db import migrations
 
 
 def populate_images(apps, schema_editor):

@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
 from dash.orgs.models import TaskState
-
 from mock import patch
-from ureport.contacts.models import ContactField, Contact, ReportersCounter
+
+from ureport.contacts.models import Contact, ContactField, ReportersCounter
 from ureport.contacts.tasks import pull_contacts
 from ureport.locations.models import Boundary
-from ureport.tests import UreportTest, TestBackend
+from ureport.tests import TestBackend, UreportTest
 from ureport.utils import json_date_to_datetime
 
 
