@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import logging
 import time
 
 from django.db import migrations
 
-from ureport.utils import chunk_list, prod_print
+from ureport.utils import chunk_list
+
+logger = logging.getLogger(__name__)
 
 
 class Migration(migrations.Migration):
@@ -24,7 +27,7 @@ class Migration(migrations.Migration):
                 results_ids = PollResult.objects.filter(contact=contact.uuid).values_list("id", flat=True)
                 PollResult.objects.filter(id__in=results_ids).update(born=contact.born, gender=contact.gender)
 
-            prod_print(
+            logger.info(
                 "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
             )
 

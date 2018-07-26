@@ -212,7 +212,7 @@ class Poll(SmartModel):
         return after, before, latest_synced_obj_time, batches_latest, resume_cursor, pull_after_delete
 
     def delete_poll_results_counter(self):
-        from ureport.utils import chunk_list, prod_print
+        from ureport.utils import chunk_list
 
         rulesets = self.questions.all().values_list("ruleset_uuid", flat=True)
 
@@ -224,12 +224,12 @@ class Poll(SmartModel):
         for batch in chunk_list(counters_ids, 1000):
             PollResultsCounter.objects.filter(pk__in=batch).delete()
 
-        prod_print(
+        logger.info(
             "Deleted %d poll results counters for poll #%d on org #%d" % (counters_ids_count, self.pk, self.org_id)
         )
 
     def delete_poll_results(self):
-        from ureport.utils import chunk_list, prod_print
+        from ureport.utils import chunk_list
 
         results_ids = PollResult.objects.filter(org_id=self.org_id, flow=self.flow_uuid).values_list("pk", flat=True)
 
@@ -238,7 +238,7 @@ class Poll(SmartModel):
         for batch in chunk_list(results_ids, 1000):
             PollResult.objects.filter(pk__in=batch).delete()
 
-        prod_print("Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id))
+        logger.info("Deleted %d poll results for poll #%d on org #%d" % (results_ids_count, self.pk, self.org_id))
 
         cache.delete(Poll.POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG % (self.org_id, self.pk))
         cache.delete(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (self.org.pk, self.flow_uuid))
@@ -274,7 +274,7 @@ class Poll(SmartModel):
         Poll.pull_poll_results_task(self)
 
     def rebuild_poll_results_counts(self):
-        from ureport.utils import chunk_list, prod_print
+        from ureport.utils import chunk_list
         import time
 
         start = time.time()
@@ -288,7 +288,7 @@ class Poll(SmartModel):
         key = Poll.POLL_REBUILD_COUNTS_LOCK % (org_id, flow)
 
         if r.get(key):
-            prod_print("Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id))
+            logger.info("Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id))
 
         else:
             with r.lock(key):
@@ -296,7 +296,7 @@ class Poll(SmartModel):
 
                 poll_results_ids_count = len(poll_results_ids)
 
-                prod_print("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
+                logger.info("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
 
                 processed_results = 0
                 counters_dict = defaultdict(int)
@@ -311,7 +311,7 @@ class Poll(SmartModel):
 
                         processed_results += 1
 
-                prod_print(
+                logger.info(
                     "Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds"
                     % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
                 )
@@ -328,19 +328,19 @@ class Poll(SmartModel):
                 self.delete_poll_results_counter()
 
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
-                prod_print(
+                logger.info(
                     "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results"
                     % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
                 )
 
                 start_update_cache = time.time()
                 self.update_questions_results_cache()
-                prod_print(
+                logger.info(
                     "Calculated questions results and updated the cache for poll #%d on org #%d in %ds"
                     % (poll_id, org_id, time.time() - start_update_cache)
                 )
 
-                prod_print(
+                logger.info(
                     "Poll responses counts for poll #%d on org #%d are %s responded out of %s polled"
                     % (poll_id, org_id, self.responded_runs(), self.runs())
                 )

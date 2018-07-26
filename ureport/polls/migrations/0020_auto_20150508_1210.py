@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import logging
 import time
 
 import requests
@@ -9,7 +10,7 @@ import six
 from django.conf import settings
 from django.db import migrations
 
-from ureport.utils import prod_print
+logger = logging.getLogger(__name__)
 
 
 def fetch_flows(org, filter=None):
@@ -44,7 +45,7 @@ def fetch_flows(org, filter=None):
             next = None
 
     if flows:
-        prod_print("- got flows in %f" % (time.time() - start))
+        logger.info("- got flows in %f" % (time.time() - start))
 
     return flows
 

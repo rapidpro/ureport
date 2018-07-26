@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import gzip
 import io
 import json
+import logging
 from datetime import timedelta
 
 from dash.categories.models import Category
@@ -28,7 +29,9 @@ from ureport.contacts.models import Contact, ContactField
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResult
 from ureport.tests import MockResponse, UreportTest
-from ureport.utils import datetime_to_json_date, json_date_to_datetime, prod_print
+from ureport.utils import datetime_to_json_date, json_date_to_datetime
+
+logger = logging.getLogger(__name__)
 
 
 class FieldSyncerTest(UreportTest):
@@ -1857,9 +1860,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q["time"], reverse=True)[:10]
         for q in slowest_queries:
-            prod_print("=" * 60)
-            prod_print("\n\n\n")
-            prod_print("%s -- %s" % (q["time"], q["sql"]))
+            logger.info("=" * 60)
+            logger.info("\n\n\n")
+            logger.info("%s -- %s" % (q["time"], q["sql"]))
 
         reset_queries()
 
@@ -1883,7 +1886,7 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q["time"], reverse=True)[:10]
         for q in slowest_queries:
-            prod_print("%s -- %s" % (q["time"], q["sql"]))
+            logger.info("%s -- %s" % (q["time"], q["sql"]))
 
         reset_queries()
 
@@ -1912,9 +1915,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q["time"], reverse=True)[:10]
         for q in slowest_queries:
-            prod_print("=" * 60)
-            prod_print("\n\n\n")
-            prod_print("%s -- %s" % (q["time"], q["sql"]))
+            logger.info("=" * 60)
+            logger.info("\n\n\n")
+            logger.info("%s -- %s" % (q["time"], q["sql"]))
 
         reset_queries()
 
@@ -1944,9 +1947,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q["time"], reverse=True)[:10]
         for q in slowest_queries:
-            prod_print("=" * 60)
-            prod_print("\n\n\n")
-            prod_print("%s -- %s" % (q["time"], q["sql"]))
+            logger.info("=" * 60)
+            logger.info("\n\n\n")
+            logger.info("%s -- %s" % (q["time"], q["sql"]))
 
         PollResult.objects.all().update(date=now)
         reset_queries()
@@ -1981,9 +1984,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q["time"], reverse=True)[:10]
         for q in slowest_queries:
-            prod_print("=" * 60)
-            prod_print("\n\n\n")
-            prod_print("%s -- %s" % (q["time"], q["sql"]))
+            logger.info("=" * 60)
+            logger.info("\n\n\n")
+            logger.info("%s -- %s" % (q["time"], q["sql"]))
 
         PollResult.objects.all().update(date=now)
         reset_queries()
@@ -2017,9 +2020,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q["time"], reverse=True)[:10]
         for q in slowest_queries:
-            prod_print("=" * 60)
-            prod_print("\n\n\n")
-            prod_print("%s -- %s" % (q["time"], q["sql"]))
+            logger.info("=" * 60)
+            logger.info("\n\n\n")
+            logger.info("%s -- %s" % (q["time"], q["sql"]))
 
         reset_queries()
 
@@ -2047,9 +2050,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q["time"], reverse=True)[:10]
         for q in slowest_queries:
-            prod_print("=" * 60)
-            prod_print("\n\n\n")
-            prod_print("%s -- %s" % (q["time"], q["sql"]))
+            logger.info("=" * 60)
+            logger.info("\n\n\n")
+            logger.info("%s -- %s" % (q["time"], q["sql"]))
 
         PollResult.objects.all().update(date=now)
         reset_queries()
@@ -2093,9 +2096,9 @@ class PerfTest(UreportTest):
 
         slowest_queries = sorted(connection.queries, key=lambda q: q["time"], reverse=True)[:10]
         for q in slowest_queries:
-            prod_print("=" * 60)
-            prod_print("\n\n\n")
-            prod_print("%s -- %s" % (q["time"], q["sql"]))
+            logger.info("=" * 60)
+            logger.info("\n\n\n")
+            logger.info("%s -- %s" % (q["time"], q["sql"]))
 
         reset_queries()
 

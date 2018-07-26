@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import logging
 import time
 from collections import defaultdict
 
@@ -16,9 +17,11 @@ from django.utils import timezone
 from ureport.contacts.models import Contact
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
-from ureport.utils import datetime_to_json_date, json_date_to_datetime, prod_print
+from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
 from . import BaseBackend
+
+logger = logging.getLogger(__name__)
 
 
 class ContactSyncer(BaseSyncer):
@@ -310,7 +313,7 @@ class FLOIPBackend(BaseBackend):
         )
 
         if r.get(key):
-            prod_print("Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk))
+            logger.info("Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk))
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
                 lock_expiration = time.time() + 0.8 * Poll.POLL_SYNC_LOCK_TIMEOUT
@@ -349,7 +352,7 @@ class FLOIPBackend(BaseBackend):
                     after = latest_synced_obj_time
 
                 start = time.time()
-                prod_print("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))
+                logger.info("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))
 
                 params = dict(
                     filter={"end-timestamp": before, "start-timestamp": after}, page={"beforeCursor": resume_cursor}
@@ -390,13 +393,13 @@ class FLOIPBackend(BaseBackend):
 
                     self._save_new_poll_results_to_database(poll_results_to_save_map)
 
-                    prod_print(
+                    logger.info(
                         "Processed fetch of %d - %d "
                         "runs for poll #%d on org #%d"
                         % (stats_dict["num_synced"] - len(results), stats_dict["num_synced"], poll.pk, org.pk)
                     )
                     # fetch_start = time.time()
-                    prod_print("=" * 40)
+                    logger.info("=" * 40)
 
                     if stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS or time.time() > lock_expiration:
                         poll.rebuild_poll_results_counts()
@@ -404,7 +407,7 @@ class FLOIPBackend(BaseBackend):
                         cursor = result[1]
                         self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
 
-                        prod_print(
+                        logger.info(
                             "Break pull results for poll #%d on org #%d in %ds, "
                             " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"
                             " Objects: created %d, updated %d, ignored %d. "
@@ -449,7 +452,7 @@ class FLOIPBackend(BaseBackend):
                 #     print "%s -- %s" % (q['time'], q['sql'])
                 # reset_queries()
 
-                prod_print(
+                logger.info(
                     "Finished pulling results for poll #%d on org #%d runs in %ds, "
                     "Times: sync_latest= %s,"
                     "Objects: created %d, updated %d, ignored %d"

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import logging
 import time
 
 from dash.orgs.models import Org, OrgBackend
@@ -10,10 +11,11 @@ from django.db import connection, models
 from django.db.models import Count, Sum
 from django.utils.translation import ugettext_lazy as _
 
-from ureport.utils import prod_print
-
 CONTACT_LOCK_KEY = "lock:contact:%d:%s"
 CONTACT_FIELD_LOCK_KEY = "lock:contact-field:%d:%s"
+
+
+logger = logging.getLogger(__name__)
 
 
 class ContactField(models.Model):
@@ -135,7 +137,7 @@ class ReportersCounter(models.Model):
         r = get_redis_connection()
         key = ReportersCounter.COUNTS_SQUASH_LOCK
         if r.get(key):
-            prod_print("Squash reporters counts already running.")
+            logger.info("Squash reporters counts already running.")
         else:
             with r.lock(key):
 
@@ -178,7 +180,7 @@ class ReportersCounter(models.Model):
                     squash_count += 1
 
                     if squash_count % 100 == 0:
-                        prod_print(
+                        logger.info(
                             "Squashing progress ... %0.2f/100 in in %0.3fs"
                             % (squash_count * 100 / total_counters, time.time() - start)
                         )
@@ -188,7 +190,9 @@ class ReportersCounter(models.Model):
                 if max_id:
                     r.set(ReportersCounter.LAST_SQUASHED_ID_KEY, max_id.id)
 
-                prod_print("Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start))
+                logger.info(
+                    "Squashed poll results counts for %d types in %0.3fs" % (squash_count, time.time() - start)
+                )
 
     @classmethod
     def get_counts(cls, org, types=None):

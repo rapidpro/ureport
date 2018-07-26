@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import gzip
 import io
 import json
+import logging
 import time
 from collections import defaultdict
 
@@ -22,9 +23,11 @@ from ureport.contacts.models import Contact, ContactField
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
-from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime, prod_print
+from ureport.utils import chunk_list, datetime_to_json_date, json_date_to_datetime
 
 from . import BaseBackend
+
+logger = logging.getLogger(__name__)
 
 
 class FieldSyncer(BaseSyncer):
@@ -450,11 +453,11 @@ class RapidProBackend(BaseBackend):
 
                 for archive in archives:
                     i += 1
-                    prod_print("Archive %d with %d records, size %d" % (i, archive.record_count, archive.size))
+                    logger.info("Archive %d with %d records, size %d" % (i, archive.record_count, archive.size))
 
                     try:
                         start_archive = time.time()
-                        prod_print("Archive %d has %d records" % (i, archive.record_count))
+                        logger.info("Archive %d has %d records" % (i, archive.record_count))
 
                         if archive.record_count <= 0:
                             continue
@@ -486,14 +489,14 @@ class RapidProBackend(BaseBackend):
 
                             self._save_new_poll_results_to_database(poll_results_to_save_map)
 
-                            prod_print(
+                            logger.info(
                                 "Processing archive %d took %ds for fetch of %d"
                                 % (i, time.time() - fetch_start, len(fetch))
                             )
 
-                        prod_print("Full poll process archive in %ds" % (time.time() - start_archive))
+                        logger.info("Full poll process archive in %ds" % (time.time() - start_archive))
                     except Exception as e:
-                        prod_print(e)
+                        logger.info(e)
                         import traceback
 
                         traceback.print_exc()
@@ -523,7 +526,7 @@ class RapidProBackend(BaseBackend):
         )
 
         if r.get(key):
-            prod_print("Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk))
+            logger.info("Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk))
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
                 lock_expiration = time.time() + 0.8 * Poll.POLL_SYNC_LOCK_TIMEOUT
@@ -554,7 +557,7 @@ class RapidProBackend(BaseBackend):
                     after = latest_synced_obj_time
 
                 start = time.time()
-                prod_print("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))
+                logger.info("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))
 
                 poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=before)
                 fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=resume_cursor)
@@ -563,7 +566,7 @@ class RapidProBackend(BaseBackend):
                     fetch_start = time.time()
                     for fetch in fetches:
 
-                        prod_print(
+                        logger.info(
                             "RapidPro API fetch for poll #%d "
                             "on org #%d %d - %d took %ds"
                             % (
@@ -601,13 +604,13 @@ class RapidProBackend(BaseBackend):
 
                         self._save_new_poll_results_to_database(poll_results_to_save_map)
 
-                        prod_print(
+                        logger.info(
                             "Processed fetch of %d - %d "
                             "runs for poll #%d on org #%d"
                             % (stats_dict["num_synced"] - len(fetch), stats_dict["num_synced"], poll.pk, org.pk)
                         )
                         fetch_start = time.time()
-                        prod_print("=" * 40)
+                        logger.info("=" * 40)
 
                         if (
                             stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS
@@ -618,7 +621,7 @@ class RapidProBackend(BaseBackend):
                             cursor = fetches.get_cursor()
                             self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
 
-                            prod_print(
+                            logger.info(
                                 "Break pull results for poll #%d on org #%d in %ds, "
                                 " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"
                                 " Objects: created %d, updated %d, ignored %d. "
@@ -652,7 +655,7 @@ class RapidProBackend(BaseBackend):
                     cursor = fetches.get_cursor()
                     self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
 
-                    prod_print(
+                    logger.info(
                         "Break pull results for poll #%d on org #%d in %ds, "
                         " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"
                         " Objects: created %d, updated %d, ignored %d. "
@@ -697,7 +700,7 @@ class RapidProBackend(BaseBackend):
                 #     print "%s -- %s" % (q['time'], q['sql'])
                 # reset_queries()
 
-                prod_print(
+                logger.info(
                     "Finished pulling results for poll #%d on org #%d runs in %ds, "
                     "Times: sync_latest= %s,"
                     "Objects: created %d, updated %d, ignored %d"
