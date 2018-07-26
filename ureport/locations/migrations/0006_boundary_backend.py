@@ -10,14 +10,14 @@ from ureport.utils import chunk_list, prod_print
 
 
 def populate_boundary_backend(apps, schema_editor):
-    Boundary = apps.get_model('locations', 'Boundary')
-    Org = apps.get_model('orgs', 'Org')
+    Boundary = apps.get_model("locations", "Boundary")
+    Org = apps.get_model("orgs", "Org")
 
     start = time.time()
 
     for org in Org.objects.all():
         backend = org.backends.filter(slug="rapidpro").first()
-        boundaries_ids = Boundary.objects.filter(org=org).values_list('id', flat=True)
+        boundaries_ids = Boundary.objects.filter(org=org).values_list("id", flat=True)
 
         i = 0
 
@@ -32,16 +32,13 @@ def populate_boundary_backend(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('orgs', '0025_auto_20180322_1415'),
-        ('locations', '0005_remove_boundary_backend'),
-    ]
+    dependencies = [("orgs", "0025_auto_20180322_1415"), ("locations", "0005_remove_boundary_backend")]
 
     operations = [
         migrations.AddField(
-            model_name='boundary',
-            name='backend',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='orgs.OrgBackend'),
+            model_name="boundary",
+            name="backend",
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to="orgs.OrgBackend"),
         ),
-        migrations.RunPython(populate_boundary_backend)
+        migrations.RunPython(populate_boundary_backend),
     ]

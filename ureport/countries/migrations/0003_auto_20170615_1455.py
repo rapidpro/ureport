@@ -8,19 +8,27 @@ import django.utils.timezone
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('countries', '0002_auto_20150722_1524'),
-    ]
+    dependencies = [("countries", "0002_auto_20150722_1524")]
 
     operations = [
         migrations.AlterField(
-            model_name='countryalias',
-            name='created_on',
-            field=models.DateTimeField(blank=True, default=django.utils.timezone.now, editable=False, help_text='When this item was originally created'),
+            model_name="countryalias",
+            name="created_on",
+            field=models.DateTimeField(
+                blank=True,
+                default=django.utils.timezone.now,
+                editable=False,
+                help_text="When this item was originally created",
+            ),
         ),
         migrations.AlterField(
-            model_name='countryalias',
-            name='modified_on',
-            field=models.DateTimeField(blank=True, default=django.utils.timezone.now, editable=False, help_text='When this item was last modified'),
+            model_name="countryalias",
+            name="modified_on",
+            field=models.DateTimeField(
+                blank=True,
+                default=django.utils.timezone.now,
+                editable=False,
+                help_text="When this item was last modified",
+            ),
         ),
     ]

@@ -7,14 +7,10 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0050_auto_20170615_1455'),
-    ]
+    dependencies = [("polls", "0050_auto_20170615_1455")]
 
     operations = [
         migrations.AddField(
-            model_name='poll',
-            name='backend',
-            field=models.CharField(default='rapidpro', max_length=16),
-        ),
+            model_name="poll", name="backend", field=models.CharField(default="rapidpro", max_length=16)
+        )
     ]

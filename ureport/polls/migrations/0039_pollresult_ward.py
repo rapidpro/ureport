@@ -6,14 +6,8 @@ from django.db import models, migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0038_remove_poll_db_triggers'),
-    ]
+    dependencies = [("polls", "0038_remove_poll_db_triggers")]
 
     operations = [
-        migrations.AddField(
-            model_name='pollresult',
-            name='ward',
-            field=models.CharField(max_length=255, null=True),
-        ),
+        migrations.AddField(model_name="pollresult", name="ward", field=models.CharField(max_length=255, null=True))
     ]

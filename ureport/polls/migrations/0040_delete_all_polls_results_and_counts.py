@@ -11,10 +11,6 @@ TRUNCATE polls_pollresult, polls_pollresultscounter;
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0039_pollresult_ward'),
-    ]
+    dependencies = [("polls", "0039_pollresult_ward")]
 
-    operations = [
-        migrations.RunSQL(CUSTOM_SQL)
-    ]
+    operations = [migrations.RunSQL(CUSTOM_SQL)]

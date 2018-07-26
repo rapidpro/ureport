@@ -7,10 +7,6 @@ from ureport.sql import InstallSQL
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('contacts', '0013_contact_ward'),
-    ]
+    dependencies = [("contacts", "0013_contact_ward")]
 
-    operations = [
-        InstallSQL('contacts_0014')
-    ]
+    operations = [InstallSQL("contacts_0014")]

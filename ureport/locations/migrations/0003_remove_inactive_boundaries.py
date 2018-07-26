@@ -7,18 +7,13 @@ from ureport.utils import prod_print
 
 
 class Migration(migrations.Migration):
-
     def remove_inactive_boundaries(apps, schema_editor):
-        Boundary = apps.get_model('locations', 'Boundary')
+        Boundary = apps.get_model("locations", "Boundary")
 
         deleted, inactive = Boundary.objects.filter(is_active=False).delete()
 
         prod_print("Deleted %d inactive boundaries" % deleted)
 
-    dependencies = [
-        ('locations', '0002_boundary_is_active'),
-    ]
+    dependencies = [("locations", "0002_boundary_is_active")]
 
-    operations = [
-        migrations.RunPython(remove_inactive_boundaries),
-    ]
+    operations = [migrations.RunPython(remove_inactive_boundaries)]

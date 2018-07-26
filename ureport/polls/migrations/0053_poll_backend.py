@@ -7,8 +7,8 @@ import django.db.models.deletion
 
 
 def populate_poll_backend(apps, schema_editor):
-    Poll = apps.get_model('polls', 'Poll')
-    Org = apps.get_model('orgs', 'Org')
+    Poll = apps.get_model("polls", "Poll")
+    Org = apps.get_model("orgs", "Org")
 
     for org in Org.objects.all():
         backend = org.backends.filter(slug="rapidpro").first()
@@ -17,16 +17,13 @@ def populate_poll_backend(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('orgs', '0025_auto_20180322_1415'),
-        ('polls', '0052_remove_poll_backend'),
-    ]
+    dependencies = [("orgs", "0025_auto_20180322_1415"), ("polls", "0052_remove_poll_backend")]
 
     operations = [
         migrations.AddField(
-            model_name='poll',
-            name='backend',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='orgs.OrgBackend'),
+            model_name="poll",
+            name="backend",
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to="orgs.OrgBackend"),
         ),
         migrations.RunPython(populate_poll_backend),
     ]

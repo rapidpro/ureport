@@ -16,20 +16,20 @@ class RefreshCacheForm(forms.ModelForm):
 
     class Meta:
         model = Org
-        fields = ('cache',)
+        fields = ("cache",)
 
 
 class AdminCRUDL(SmartCRUDL):
-    actions = ('refresh_cache',)
+    actions = ("refresh_cache",)
     model = Org
 
     class RefreshCache(OrgPermsMixin, SmartUpdateView):
-        fields = ('id',)
+        fields = ("id",)
         success_message = None
-        success_url = '@orgs.org_home'
+        success_url = "@orgs.org_home"
         form_class = RefreshCacheForm
 
         def post_save(self, obj):
-            cache = OrgCache(int(self.request.POST['cache']))
+            cache = OrgCache(int(self.request.POST["cache"]))
             refresh_caches(self.get_object(), [cache])
             self.success_message = _("Refreshed %s cache for this organization") % cache.name

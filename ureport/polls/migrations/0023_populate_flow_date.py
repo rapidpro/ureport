@@ -10,12 +10,11 @@ from ureport.utils import prod_print
 
 
 class Migration(migrations.Migration):
-
     def populate_poll_poll_date(apps, schema_editor):
-        Poll = apps.get_model('polls', "Poll")
-        Org = apps.get_model('orgs', "Org")
+        Poll = apps.get_model("polls", "Poll")
+        Org = apps.get_model("orgs", "Org")
 
-        agent = getattr(settings, 'SITE_API_USER_AGENT', None)
+        agent = getattr(settings, "SITE_API_USER_AGENT", None)
         host = settings.SITE_API_HOST
 
         for org in Org.objects.all():
@@ -36,10 +35,6 @@ class Migration(migrations.Migration):
                 poll.poll_date = date
                 poll.save()
 
-    dependencies = [
-        ('polls', '0022_poll_flow_date'),
-    ]
+    dependencies = [("polls", "0022_poll_flow_date")]
 
-    operations = [
-        migrations.RunPython(populate_poll_poll_date),
-    ]
+    operations = [migrations.RunPython(populate_poll_poll_date)]

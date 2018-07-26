@@ -7,10 +7,6 @@ from ureport.sql import InstallSQL
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0036_auto_20160331_1527'),
-    ]
+    dependencies = [("polls", "0036_auto_20160331_1527")]
 
-    operations = [
-        InstallSQL('polls_0037')
-    ]
+    operations = [InstallSQL("polls_0037")]

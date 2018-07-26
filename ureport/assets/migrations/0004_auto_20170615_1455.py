@@ -8,19 +8,27 @@ import django.utils.timezone
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('assets', '0003_auto_20150602_1247'),
-    ]
+    dependencies = [("assets", "0003_auto_20150602_1247")]
 
     operations = [
         migrations.AlterField(
-            model_name='image',
-            name='created_on',
-            field=models.DateTimeField(blank=True, default=django.utils.timezone.now, editable=False, help_text='When this item was originally created'),
+            model_name="image",
+            name="created_on",
+            field=models.DateTimeField(
+                blank=True,
+                default=django.utils.timezone.now,
+                editable=False,
+                help_text="When this item was originally created",
+            ),
         ),
         migrations.AlterField(
-            model_name='image',
-            name='modified_on',
-            field=models.DateTimeField(blank=True, default=django.utils.timezone.now, editable=False, help_text='When this item was last modified'),
+            model_name="image",
+            name="modified_on",
+            field=models.DateTimeField(
+                blank=True,
+                default=django.utils.timezone.now,
+                editable=False,
+                help_text="When this item was last modified",
+            ),
         ),
     ]

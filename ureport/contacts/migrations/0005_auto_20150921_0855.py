@@ -151,10 +151,6 @@ CREATE TRIGGER ureport_when_contacts_truncate_then_update_counters
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('contacts', '0004_auto_20150918_0915'),
-    ]
+    dependencies = [("contacts", "0004_auto_20150918_0915")]
 
-    operations = [
-        migrations.RunSQL(TRIGGER_SQL)
-    ]
+    operations = [migrations.RunSQL(TRIGGER_SQL)]

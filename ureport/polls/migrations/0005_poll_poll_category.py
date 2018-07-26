@@ -6,15 +6,15 @@ from django.db import models, migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0004_auto_20140804_0005'),
-    ]
+    dependencies = [("polls", "0004_auto_20140804_0005")]
 
     operations = [
         migrations.AddField(
-            model_name='poll',
-            name='poll_category',
-            field=models.ForeignKey(blank=True, to='polls.PollCategory', help_text='The category this Poll belongs to', null=True),
+            model_name="poll",
+            name="poll_category",
+            field=models.ForeignKey(
+                blank=True, to="polls.PollCategory", help_text="The category this Poll belongs to", null=True
+            ),
             preserve_default=True,
-        ),
+        )
     ]

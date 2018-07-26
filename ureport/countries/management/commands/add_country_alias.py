@@ -15,7 +15,7 @@ from ureport.utils import prod_print
 
 
 class Command(BaseCommand):
-    help = 'Add countries alias from the json files at https://github.com/umpirsky/country-list/tree/master/country'
+    help = "Add countries alias from the json files at https://github.com/umpirsky/country-list/tree/master/country"
 
     def import_file(self, json_file, user):
         countries_json = json.loads(json_file.read())
@@ -29,17 +29,17 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        if os.path.exists('./country-list/') and os.path.isdir('./country-list'):
+        if os.path.exists("./country-list/") and os.path.isdir("./country-list"):
             prod_print("Fetching country-list...")
-            os.chdir('./country-list')
-            repo = git.Repo('.')
+            os.chdir("./country-list")
+            repo = git.Repo(".")
             o = repo.remotes.origin
             o.pull()
-            os.chdir('..')
+            os.chdir("..")
             prod_print("Finished fetching country-list.")
         else:
             prod_print("Cloning country-list...")
-            git.Git().clone('https://github.com/umpirsky/country-list.git', 'country-list')
+            git.Git().clone("https://github.com/umpirsky/country-list.git", "country-list")
             prod_print("Finished cloning country-list.")
 
         prod_print("Looking up json files...")
@@ -47,9 +47,9 @@ class Command(BaseCommand):
         filenames = []
 
         i = 0
-        for path, subdirs, files in os.walk('./country-list/country/'):
+        for path, subdirs, files in os.walk("./country-list/country/"):
             for name in files:
-                if name.endswith('.json'):
+                if name.endswith(".json"):
                     filenames.append(os.path.join(path, name))
                     prod_print("Found %s" % os.path.join(path, name))
                     i += 1
@@ -64,7 +64,7 @@ class Command(BaseCommand):
         prod_print("Parsing files...")
         for filename in filenames:
             prod_print("Parsing file %s" % filename)
-            with open(filename, encoding='utf-8') as json_file:
+            with open(filename, encoding="utf-8") as json_file:
                 self.import_file(json_file, user)
 
         prod_print("All files parsed.")

@@ -7,18 +7,13 @@ from ureport.utils import prod_print
 
 
 class Migration(migrations.Migration):
-
     def remove_inactive_fields(apps, schema_editor):
-        ContactField = apps.get_model('contacts', "ContactField")
+        ContactField = apps.get_model("contacts", "ContactField")
 
         deleted, inactive = ContactField.objects.filter(is_active=False).delete()
 
         prod_print("Deleted %d inactive fields" % deleted)
 
-    dependencies = [
-        ('contacts', '0014_install_triggers'),
-    ]
+    dependencies = [("contacts", "0014_install_triggers")]
 
-    operations = [
-        migrations.RunPython(remove_inactive_fields)
-    ]
+    operations = [migrations.RunPython(remove_inactive_fields)]

@@ -7,19 +7,19 @@ from django.core.files.images import ImageFile
 
 
 def populate_images(apps, schema_editor):
-    OrgBackground = apps.get_model('orgs', "OrgBackground")
-    Image = apps.get_model('assets', "Image")
+    OrgBackground = apps.get_model("orgs", "OrgBackground")
+    Image = apps.get_model("assets", "Image")
 
     for org_bg in OrgBackground.objects.all():
         image_file = None
         image_filename = None
         try:
-            image_file = open(org_bg.image.path, 'rb')
-            image_filename = org_bg.image.path.split('/')[-1]
+            image_file = open(org_bg.image.path, "rb")
+            image_filename = org_bg.image.path.split("/")[-1]
         except NotImplementedError:
             retrived_image = urllib.urlretrieve(org_bg.image.url)
             image_file = open(retrived_image[0])
-            image_filename = org_bg.image.url.split('/')[-1]
+            image_filename = org_bg.image.url.split("/")[-1]
         except IOError:
             pass
 
@@ -38,10 +38,6 @@ def populate_images(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('assets', '0001_initial'),
-    ]
+    dependencies = [("assets", "0001_initial")]
 
-    operations = [
-        migrations.RunPython(populate_images),
-    ]
+    operations = [migrations.RunPython(populate_images)]

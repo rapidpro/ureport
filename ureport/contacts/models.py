@@ -13,8 +13,8 @@ from django_redis import get_redis_connection
 from ureport.utils import prod_print
 
 
-CONTACT_LOCK_KEY = 'lock:contact:%d:%s'
-CONTACT_FIELD_LOCK_KEY = 'lock:contact-field:%d:%s'
+CONTACT_LOCK_KEY = "lock:contact:%d:%s"
+CONTACT_FIELD_LOCK_KEY = "lock:contact-field:%d:%s"
 
 
 class ContactField(models.Model):
@@ -22,22 +22,24 @@ class ContactField(models.Model):
     Corresponds to a RapidPro contact field
     """
 
-    TYPE_TEXT = 'T'
-    TYPE_DECIMAL = 'N'
-    TYPE_DATETIME = 'D'
-    TYPE_STATE = 'S'
-    TYPE_DISTRICT = 'I'
-    TYPE_WARD = 'W'
+    TYPE_TEXT = "T"
+    TYPE_DECIMAL = "N"
+    TYPE_DATETIME = "D"
+    TYPE_STATE = "S"
+    TYPE_DISTRICT = "I"
+    TYPE_WARD = "W"
 
-    TEMBA_TYPES = {'text': TYPE_TEXT,
-                   'numeric': TYPE_DECIMAL,
-                   'datetime': TYPE_DATETIME,
-                   'state': TYPE_STATE,
-                   'district': TYPE_DISTRICT,
-                   'ward': TYPE_WARD}
+    TEMBA_TYPES = {
+        "text": TYPE_TEXT,
+        "numeric": TYPE_DECIMAL,
+        "datetime": TYPE_DATETIME,
+        "state": TYPE_STATE,
+        "district": TYPE_DISTRICT,
+        "ward": TYPE_WARD,
+    }
 
     CONTACT_FIELDS_CACHE_TIMEOUT = 60 * 60 * 24 * 15
-    CONTACT_FIELDS_CACHE_KEY = 'org:%d:contact_fields'
+    CONTACT_FIELDS_CACHE_KEY = "org:%d:contact_fields"
 
     is_active = models.BooleanField(default=True)
 
@@ -64,11 +66,11 @@ class Contact(models.Model):
     Corresponds to a RapidPro contact
     """
 
-    CONTACT_LAST_FETCHED_CACHE_KEY = 'last:fetch_contacts:%d:backend:%s'
+    CONTACT_LAST_FETCHED_CACHE_KEY = "last:fetch_contacts:%d:backend:%s"
     CONTACT_LAST_FETCHED_CACHE_TIMEOUT = 60 * 60 * 24 * 30
 
-    MALE = 'M'
-    FEMALE = 'F'
+    MALE = "M"
+    FEMALE = "F"
     GENDER_CHOICES = ((MALE, _("Male")), (FEMALE, _("Female")))
 
     is_active = models.BooleanField(default=True)
@@ -79,8 +81,14 @@ class Contact(models.Model):
 
     org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="contacts")
 
-    gender = models.CharField(max_length=1, verbose_name=_("Gender"), choices=GENDER_CHOICES, null=True, blank=True,
-                              help_text=_("Gender of the contact"))
+    gender = models.CharField(
+        max_length=1,
+        verbose_name=_("Gender"),
+        choices=GENDER_CHOICES,
+        null=True,
+        blank=True,
+        help_text=_("Gender of the contact"),
+    )
 
     born = models.IntegerField(verbose_name=_("Born Field"), null=True, blank=True)
 
@@ -108,15 +116,15 @@ class Contact(models.Model):
         return get_redis_connection().lock(CONTACT_LOCK_KEY % (org.pk, uuid), timeout=60)
 
     class Meta:
-        unique_together = ('org', 'uuid')
+        unique_together = ("org", "uuid")
 
 
 class ReportersCounter(models.Model):
 
-    COUNTS_SQUASH_LOCK = 'org-reporters-counts-squash-lock'
-    LAST_SQUASHED_ID_KEY = 'org-reporters-last-squashed-id'
+    COUNTS_SQUASH_LOCK = "org-reporters-counts-squash-lock"
+    LAST_SQUASHED_ID_KEY = "org-reporters-last-squashed-id"
 
-    org = models.ForeignKey(Org, related_name='reporters_counters')
+    org = models.ForeignKey(Org, related_name="reporters_counters")
 
     type = models.CharField(max_length=255)
 
@@ -142,10 +150,20 @@ class ReportersCounter(models.Model):
                 squash_count = 0
 
                 if last_squash < 1:
-                    counters = ReportersCounter.objects.values('org_id', 'type').annotate(Count('id')).filter(id__count__gt=1).order_by('org_id', 'type')
+                    counters = (
+                        ReportersCounter.objects.values("org_id", "type")
+                        .annotate(Count("id"))
+                        .filter(id__count__gt=1)
+                        .order_by("org_id", "type")
+                    )
 
                 else:
-                    counters = ReportersCounter.objects.filter(id__gt=last_squash).values('org_id', 'type').order_by('org_id', 'type').distinct('org_id', 'type')
+                    counters = (
+                        ReportersCounter.objects.filter(id__gt=last_squash)
+                        .values("org_id", "type")
+                        .order_by("org_id", "type")
+                        .distinct("org_id", "type")
+                    )
 
                 total_counters = len(counters)
 
@@ -154,15 +172,20 @@ class ReportersCounter(models.Model):
 
                     # perform our atomic squash in SQL by calling our squash method
                     with connection.cursor() as c:
-                        c.execute("SELECT ureport_squash_reporterscounters(%s, %s);", (counter['org_id'], counter['type']))
+                        c.execute(
+                            "SELECT ureport_squash_reporterscounters(%s, %s);", (counter["org_id"], counter["type"])
+                        )
 
                     squash_count += 1
 
                     if squash_count % 100 == 0:
-                        prod_print("Squashing progress ... %0.2f/100 in in %0.3fs" % (squash_count * 100 / total_counters, time.time() - start))
+                        prod_print(
+                            "Squashing progress ... %0.2f/100 in in %0.3fs"
+                            % (squash_count * 100 / total_counters, time.time() - start)
+                        )
 
                 # insert our new top squashed id
-                max_id = ReportersCounter.objects.all().order_by('-id').first()
+                max_id = ReportersCounter.objects.all().order_by("-id").first()
                 if max_id:
                     r.set(ReportersCounter.LAST_SQUASHED_ID_KEY, max_id.id)
 
@@ -176,9 +199,9 @@ class ReportersCounter(models.Model):
         counters = cls.objects.filter(org=org)
         if types:
             counters = counters.filter(type__in=types)
-        counter_counts = counters.values('type').order_by('type').annotate(count_sum=Sum('count'))
+        counter_counts = counters.values("type").order_by("type").annotate(count_sum=Sum("count"))
 
-        return {c['type']: c['count_sum'] for c in counter_counts}
+        return {c["type"]: c["count_sum"] for c in counter_counts}
 
     class Meta:
-        index_together = ('org', 'type')
+        index_together = ("org", "type")

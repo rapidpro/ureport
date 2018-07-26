@@ -11,7 +11,7 @@ from modeltranslation import utils
 
 
 class TextTranslationOptions(TranslationOptions):
-    fields = ('text',)
+    fields = ("text",)
 
 
 translator.register(Text, TextTranslationOptions)

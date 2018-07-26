@@ -10,9 +10,9 @@ from ureport.utils import chunk_list, prod_print
 
 
 def populate_contacts_backend(apps, schema_editor):
-    Contact = apps.get_model('contacts', 'Contact')
-    ContactField = apps.get_model('contacts', 'ContactField')
-    Org = apps.get_model('orgs', 'Org')
+    Contact = apps.get_model("contacts", "Contact")
+    ContactField = apps.get_model("contacts", "ContactField")
+    Org = apps.get_model("orgs", "Org")
 
     start = time.time()
 
@@ -22,7 +22,7 @@ def populate_contacts_backend(apps, schema_editor):
         prod_print("Processed fields")
 
         i = 0
-        contact_ids = Contact.objects.filter(org_id=org.id).values_list('id', flat=True)
+        contact_ids = Contact.objects.filter(org_id=org.id).values_list("id", flat=True)
 
         for batch in chunk_list(contact_ids, 1000):
             updated = Contact.objects.filter(id__in=batch, org_id=org.id).update(backend_id=backend.id)
@@ -34,21 +34,18 @@ def populate_contacts_backend(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('orgs', '0025_auto_20180322_1415'),
-        ('contacts', '0017_auto_20180405_1330'),
-    ]
+    dependencies = [("orgs", "0025_auto_20180322_1415"), ("contacts", "0017_auto_20180405_1330")]
 
     operations = [
         migrations.AddField(
-            model_name='contact',
-            name='backend',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='orgs.OrgBackend'),
+            model_name="contact",
+            name="backend",
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to="orgs.OrgBackend"),
         ),
         migrations.AddField(
-            model_name='contactfield',
-            name='backend',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='orgs.OrgBackend'),
+            model_name="contactfield",
+            name="backend",
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to="orgs.OrgBackend"),
         ),
         migrations.RunPython(populate_contacts_backend),
     ]

@@ -20,126 +20,156 @@ from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
 from ureport.polls.models import UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME, Poll, CACHE_ORG_FLOWS_KEY
 from ureport.tests import UreportTest
-from ureport.utils import get_linked_orgs, fetch_old_sites_count, \
-    get_gender_stats, get_age_stats, get_registration_stats, get_ureporters_locations_stats, get_reporters_count, \
-    get_occupation_stats, get_regions_stats, get_org_contacts_counts, ORG_CONTACT_COUNT_KEY, get_flows, \
-    fetch_flows, update_poll_flow_data
+from ureport.utils import (
+    get_linked_orgs,
+    fetch_old_sites_count,
+    get_gender_stats,
+    get_age_stats,
+    get_registration_stats,
+    get_ureporters_locations_stats,
+    get_reporters_count,
+    get_occupation_stats,
+    get_regions_stats,
+    get_org_contacts_counts,
+    ORG_CONTACT_COUNT_KEY,
+    get_flows,
+    fetch_flows,
+    update_poll_flow_data,
+)
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 from ureport.utils import get_global_count, GLOBAL_COUNT_CACHE_KEY
 
 
 class UtilsTest(UreportTest):
-
     def setUp(self):
         super(UtilsTest, self).setUp()
         self.org = self.create_org("burundi", pytz.timezone("Africa/Bujumbura"), self.admin)
 
-        self.education = Category.objects.create(org=self.org,
-                                                 name="Education",
-                                                 created_by=self.admin,
-                                                 modified_by=self.admin)
+        self.education = Category.objects.create(
+            org=self.org, name="Education", created_by=self.admin, modified_by=self.admin
+        )
 
         self.poll = self.create_poll(self.org, "Poll 1", "uuid-1", self.education, self.admin)
 
     def clear_cache(self):
         # hardcoded to localhost
-        r = redis.StrictRedis(host='localhost', db=1)
+        r = redis.StrictRedis(host="localhost", db=1)
         r.flushdb()
 
     def test_datetime_to_json_date(self):
         d1 = datetime(2014, 1, 2, 3, 4, 5, tzinfo=pytz.utc)
-        self.assertEqual(datetime_to_json_date(d1), '2014-01-02T03:04:05.000Z')
-        self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05.000+00:00'), d1)
-        self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05.000Z'), d1)
-        self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05.000'), d1)
+        self.assertEqual(datetime_to_json_date(d1), "2014-01-02T03:04:05.000Z")
+        self.assertEqual(json_date_to_datetime("2014-01-02T03:04:05.000+00:00"), d1)
+        self.assertEqual(json_date_to_datetime("2014-01-02T03:04:05.000Z"), d1)
+        self.assertEqual(json_date_to_datetime("2014-01-02T03:04:05.000"), d1)
 
         tz = pytz.timezone("Africa/Kigali")
         d2 = tz.localize(datetime(2014, 1, 2, 3, 4, 5))
-        self.assertEqual(datetime_to_json_date(d2), '2014-01-02T01:04:05.000Z')
-        self.assertEqual(json_date_to_datetime('2014-01-02T03:04:05+02:00'), d2)
-        self.assertEqual(json_date_to_datetime('2014-01-02T01:04:05.000Z'), d2)
-        self.assertEqual(json_date_to_datetime('2014-01-02T01:04:05.000'), d2)
+        self.assertEqual(datetime_to_json_date(d2), "2014-01-02T01:04:05.000Z")
+        self.assertEqual(json_date_to_datetime("2014-01-02T03:04:05+02:00"), d2)
+        self.assertEqual(json_date_to_datetime("2014-01-02T01:04:05.000Z"), d2)
+        self.assertEqual(json_date_to_datetime("2014-01-02T01:04:05.000"), d2)
 
     def test_get_linked_orgs(self):
 
         # use aaaburundi to force the to be alphabetically first
-        self.org.subdomain = 'aaaburundi'
+        self.org.subdomain = "aaaburundi"
         self.org.save()
 
-        settings_sites_count = len(list(getattr(settings, 'PREVIOUS_ORG_SITES', [])))
+        settings_sites_count = len(list(getattr(settings, "PREVIOUS_ORG_SITES", [])))
 
         # we have 3 old org in the settings
         self.assertEqual(len(get_linked_orgs()), settings_sites_count)
         for old_site in get_linked_orgs():
-            self.assertFalse(old_site['name'].lower() == 'aaaburundi')
+            self.assertFalse(old_site["name"].lower() == "aaaburundi")
 
-        self.org.set_config('common.is_on_landing_page', True)
+        self.org.set_config("common.is_on_landing_page", True)
 
         # missing flag
         self.assertEqual(len(get_linked_orgs()), settings_sites_count)
         for old_site in get_linked_orgs():
-            self.assertFalse(old_site['name'].lower() == 'aaaburundi')
+            self.assertFalse(old_site["name"].lower() == "aaaburundi")
 
-        Image.objects.create(org=self.org, image_type=FLAG, name='burundi_flag',
-                             image="media/image.jpg", created_by=self.admin, modified_by=self.admin)
+        Image.objects.create(
+            org=self.org,
+            image_type=FLAG,
+            name="burundi_flag",
+            image="media/image.jpg",
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
 
         # burundi should be included and be the first; by alphabetical order by subdomain
         self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
-        self.assertEqual(get_linked_orgs()[0]['name'].lower(), 'aaaburundi')
+        self.assertEqual(get_linked_orgs()[0]["name"].lower(), "aaaburundi")
 
-        self.org.subdomain = 'rwanda'
+        self.org.subdomain = "rwanda"
         self.org.save()
 
         # rwanda should be included and the third in the list alphabetically by subdomain
         self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
-        self.assertEqual(get_linked_orgs()[settings_sites_count - 4]['name'].lower(), 'thailand')
+        self.assertEqual(get_linked_orgs()[settings_sites_count - 4]["name"].lower(), "thailand")
 
         # revert subdomain to burundi
-        self.org.subdomain = 'aaaburundi'
+        self.org.subdomain = "aaaburundi"
         self.org.save()
 
-        with self.settings(HOSTNAME='localhost:8000'):
-            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
-            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
+        with self.settings(HOSTNAME="localhost:8000"):
+            self.assertEqual(get_linked_orgs()[0]["host"].lower(), "http://aaaburundi.localhost:8000")
+            self.assertEqual(get_linked_orgs(True)[0]["host"].lower(), "http://aaaburundi.localhost:8000")
 
-            self.org.domain = 'ureport.bi'
+            self.org.domain = "ureport.bi"
             self.org.save()
 
-            self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
-            self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'http://aaaburundi.localhost:8000')
+            self.assertEqual(get_linked_orgs()[0]["host"].lower(), "http://aaaburundi.localhost:8000")
+            self.assertEqual(get_linked_orgs(True)[0]["host"].lower(), "http://aaaburundi.localhost:8000")
 
             with self.settings(SESSION_COOKIE_SECURE=True):
-                self.assertEqual(get_linked_orgs()[0]['host'].lower(), 'http://ureport.bi')
-                self.assertEqual(get_linked_orgs(True)[0]['host'].lower(), 'https://aaaburundi.localhost:8000')
+                self.assertEqual(get_linked_orgs()[0]["host"].lower(), "http://ureport.bi")
+                self.assertEqual(get_linked_orgs(True)[0]["host"].lower(), "https://aaaburundi.localhost:8000")
 
-    @patch('dash.orgs.models.TembaClient.get_flows')
+    @patch("dash.orgs.models.TembaClient.get_flows")
     def test_fetch_flows(self, mock_get_flows):
 
         mock_get_flows.side_effect = [
-            MockClientQuery([Flow.create(name='Flow 1',
-                                         uuid='uuid-25',
-                                         labels=[],
-                                         archived=False,
-                                         expires=720,
-                                         created_on=json_date_to_datetime("2015-04-08T12:48:44.320Z"),
-                                         runs=Flow.Runs.create(completed=120, active=50, expired=100, interrupted=30))
-                             ])]
+            MockClientQuery(
+                [
+                    Flow.create(
+                        name="Flow 1",
+                        uuid="uuid-25",
+                        labels=[],
+                        archived=False,
+                        expires=720,
+                        created_on=json_date_to_datetime("2015-04-08T12:48:44.320Z"),
+                        runs=Flow.Runs.create(completed=120, active=50, expired=100, interrupted=30),
+                    )
+                ]
+            )
+        ]
 
         with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
             mock_datetime_ms.return_value = 500
 
-            with patch('django.core.cache.cache.set') as cache_set_mock:
+            with patch("django.core.cache.cache.set") as cache_set_mock:
                 flows = fetch_flows(self.org, self.rapidpro_backend)
                 expected = dict()
-                expected['uuid-25'] = dict(uuid='uuid-25', date_hint="2015-04-08",
-                                           created_on="2015-04-08T12:48:44.320Z",
-                                           name="Flow 1", runs=300, completed_runs=120, archived=False)
+                expected["uuid-25"] = dict(
+                    uuid="uuid-25",
+                    date_hint="2015-04-08",
+                    created_on="2015-04-08T12:48:44.320Z",
+                    name="Flow 1",
+                    runs=300,
+                    completed_runs=120,
+                    archived=False,
+                )
 
             self.assertEqual(flows, expected)
 
-            cache_set_mock.assert_called_once_with('org:%d:backend:%s:flows' % (self.org.pk, self.rapidpro_backend.slug),
-                                                   dict(time=500, results=expected),
-                                                   UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+            cache_set_mock.assert_called_once_with(
+                "org:%d:backend:%s:flows" % (self.org.pk, self.rapidpro_backend.slug),
+                dict(time=500, results=expected),
+                UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME,
+            )
 
     def test_update_poll_flow_data(self):
         poll = Poll.objects.filter(pk=self.poll.pk).first()
@@ -154,57 +184,57 @@ class UtilsTest(UreportTest):
             self.assertFalse(poll.flow_archived)
             self.assertEqual(poll.runs_count, 0)
 
-            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True}}
+            mock_get_flows.return_value = {"uuid-1": {"uuid": "uuid-1", "archived": True}}
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertTrue(poll.flow_archived)
             self.assertEqual(poll.runs_count, 0)
 
-            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True, 'runs': 0}}
+            mock_get_flows.return_value = {"uuid-1": {"uuid": "uuid-1", "archived": True, "runs": 0}}
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertTrue(poll.flow_archived)
             self.assertEqual(poll.runs_count, 0)
 
-            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True, 'runs': 5}}
+            mock_get_flows.return_value = {"uuid-1": {"uuid": "uuid-1", "archived": True, "runs": 5}}
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertTrue(poll.flow_archived)
-            self.assertEqual(poll.flow_uuid, 'uuid-1')
+            self.assertEqual(poll.flow_uuid, "uuid-1")
             self.assertEqual(poll.runs_count, 5)
 
-            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True, 'runs': 0}}
+            mock_get_flows.return_value = {"uuid-1": {"uuid": "uuid-1", "archived": True, "runs": 0}}
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertTrue(poll.flow_archived)
             self.assertEqual(poll.runs_count, 5)
 
-            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': False, 'runs': 0}}
+            mock_get_flows.return_value = {"uuid-1": {"uuid": "uuid-1", "archived": False, "runs": 0}}
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertFalse(poll.flow_archived)
             self.assertEqual(poll.runs_count, 5)
 
-            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': False, 'runs': 3}}
+            mock_get_flows.return_value = {"uuid-1": {"uuid": "uuid-1", "archived": False, "runs": 3}}
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertFalse(poll.flow_archived)
             self.assertEqual(poll.runs_count, 3)
 
-            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1', 'archived': True, 'runs': 2}}
+            mock_get_flows.return_value = {"uuid-1": {"uuid": "uuid-1", "archived": True, "runs": 2}}
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
             self.assertTrue(poll.flow_archived)
             self.assertEqual(poll.runs_count, 2)
 
-            mock_get_flows.return_value = {'uuid-1': {'uuid': 'uuid-1'}}
+            mock_get_flows.return_value = {"uuid-1": {"uuid": "uuid-1"}}
 
             update_poll_flow_data(self.org)
             poll = Poll.objects.filter(pk=self.poll.pk).first()
@@ -214,52 +244,65 @@ class UtilsTest(UreportTest):
     def test_fetch_old_sites_count(self):
         self.clear_cache()
 
-        settings_sites_count = len(list(getattr(settings, 'PREVIOUS_ORG_SITES', [])))
+        settings_sites_count = len(list(getattr(settings, "PREVIOUS_ORG_SITES", [])))
 
         with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
             mock_datetime_ms.return_value = 500
 
-            with patch('requests.get') as mock_get:
-                mock_get.return_value = MockResponse(200, b'300')
+            with patch("requests.get") as mock_get:
+                mock_get.return_value = MockResponse(200, b"300")
 
-                with patch('django.core.cache.cache.set') as cache_set_mock:
+                with patch("django.core.cache.cache.set") as cache_set_mock:
                     cache_set_mock.return_value = "Set"
 
-                    with patch('django.core.cache.cache.delete') as cache_delete_mock:
+                    with patch("django.core.cache.cache.delete") as cache_delete_mock:
                         cache_delete_mock.return_value = "Deleted"
 
                         old_site_values = fetch_old_sites_count()
-                        self.assertEqual(old_site_values,
-                                         [{'time': 500, 'results': dict(size=300)}] * settings_sites_count)
+                        self.assertEqual(
+                            old_site_values, [{"time": 500, "results": dict(size=300)}] * settings_sites_count
+                        )
 
-                        mock_get.assert_called_with('https://www.zambiaureport.com/count.txt/')
+                        mock_get.assert_called_with("https://www.zambiaureport.com/count.txt/")
 
-                        cache_set_mock.assert_called_with('org:zambia:reporters:old-site',
-                                                          {'time': 500, 'results': dict(size=300)},
-                                                          UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
+                        cache_set_mock.assert_called_with(
+                            "org:zambia:reporters:old-site",
+                            {"time": 500, "results": dict(size=300)},
+                            UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME,
+                        )
 
                         cache_delete_mock.assert_called_once_with(GLOBAL_COUNT_CACHE_KEY)
 
-    @patch('django.core.cache.cache.get')
+    @patch("django.core.cache.cache.get")
     def test_get_gender_stats(self, mock_cache_get):
         mock_cache_get.return_value = None
 
-        self.assertEqual(get_gender_stats(self.org), dict(female_count=0, female_percentage="---",
-                                                          male_count=0, male_percentage="---"))
+        self.assertEqual(
+            get_gender_stats(self.org),
+            dict(female_count=0, female_percentage="---", male_count=0, male_percentage="---"),
+        )
 
-        ReportersCounter.objects.create(org=self.org, type='gender:f', count=2)
-        ReportersCounter.objects.create(org=self.org, type='gender:m', count=2)
-        ReportersCounter.objects.create(org=self.org, type='gender:m', count=1)
+        ReportersCounter.objects.create(org=self.org, type="gender:f", count=2)
+        ReportersCounter.objects.create(org=self.org, type="gender:m", count=2)
+        ReportersCounter.objects.create(org=self.org, type="gender:m", count=1)
 
-        self.assertEqual(get_gender_stats(self.org), dict(female_count=2, female_percentage="40%",
-                                                          male_count=3, male_percentage="60%"))
+        self.assertEqual(
+            get_gender_stats(self.org),
+            dict(female_count=2, female_percentage="40%", male_count=3, male_percentage="60%"),
+        )
 
-    @patch('django.core.cache.cache.get')
+    @patch("django.core.cache.cache.get")
     def test_get_age_stats(self, mock_cache_get):
         mock_cache_get.return_value = None
 
-        expected = [dict(name='0-14', y=0), dict(name='15-19', y=0), dict(name='20-24', y=0),
-                    dict(name='25-30', y=0), dict(name='31-34', y=0), dict(name='35+', y=0)]
+        expected = [
+            dict(name="0-14", y=0),
+            dict(name="15-19", y=0),
+            dict(name="20-24", y=0),
+            dict(name="25-30", y=0),
+            dict(name="31-34", y=0),
+            dict(name="35+", y=0),
+        ]
 
         self.assertEqual(get_age_stats(self.org), json.dumps(expected))
 
@@ -277,134 +320,183 @@ class UtilsTest(UreportTest):
         thirty_one_years_ago = now_year - 31
         forthy_five_years_ago = now_year - 45
 
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % two_years_ago, count=2)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % five_years_ago, count=1)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=3)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % twelve_years_ago, count=2)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % fifteen_years_ago, count=25)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % seventeen_years_ago, count=40)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % nineteen_years_ago, count=110)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % twenty_years_ago, count=2)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % thirty_years_ago, count=12)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % thirty_one_years_ago, count=2)
-        ReportersCounter.objects.create(org=self.org, type='born:%s' % forthy_five_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % two_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % five_years_ago, count=1)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % twelve_years_ago, count=3)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % twelve_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % fifteen_years_ago, count=25)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % seventeen_years_ago, count=40)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % nineteen_years_ago, count=110)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % twenty_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % thirty_years_ago, count=12)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % thirty_one_years_ago, count=2)
+        ReportersCounter.objects.create(org=self.org, type="born:%s" % forthy_five_years_ago, count=2)
 
-        ReportersCounter.objects.create(org=self.org, type='born:10', count=10)
-        ReportersCounter.objects.create(org=self.org, type='born:732837', count=20)
+        ReportersCounter.objects.create(org=self.org, type="born:10", count=10)
+        ReportersCounter.objects.create(org=self.org, type="born:732837", count=20)
 
         # y is the percentage of count over the total count
-        expected = [dict(name='0-14', y=4), dict(name='15-19', y=87), dict(name='20-24', y=1),
-                    dict(name='25-30', y=6), dict(name='31-34', y=1), dict(name='35+', y=1)]
+        expected = [
+            dict(name="0-14", y=4),
+            dict(name="15-19", y=87),
+            dict(name="20-24", y=1),
+            dict(name="25-30", y=6),
+            dict(name="31-34", y=1),
+            dict(name="35+", y=1),
+        ]
 
         self.assertEqual(get_age_stats(self.org), json.dumps(expected))
 
-    @patch('django.core.cache.cache.get')
+    @patch("django.core.cache.cache.get")
     def test_get_registration_stats(self, mock_cache_get):
         mock_cache_get.return_value = None
 
-        tz = pytz.timezone('UTC')
-        with patch.object(timezone, 'now', return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 6))):
+        tz = pytz.timezone("UTC")
+        with patch.object(timezone, "now", return_value=tz.localize(datetime(2015, 9, 4, 3, 4, 5, 6))):
 
             stats = json.loads(get_registration_stats(self.org))
 
             for entry in stats:
-                self.assertEqual(entry['count'], 0)
+                self.assertEqual(entry["count"], 0)
 
-            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-27', count=3)
-            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-25', count=2)
-            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-25', count=3)
-            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-08-25', count=1)
-            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-06-30', count=2)
-            ReportersCounter.objects.create(org=self.org, type='registered_on:2015-06-30', count=2)
-            ReportersCounter.objects.create(org=self.org, type='registered_on:2014-11-25', count=6)
+            ReportersCounter.objects.create(org=self.org, type="registered_on:2015-08-27", count=3)
+            ReportersCounter.objects.create(org=self.org, type="registered_on:2015-08-25", count=2)
+            ReportersCounter.objects.create(org=self.org, type="registered_on:2015-08-25", count=3)
+            ReportersCounter.objects.create(org=self.org, type="registered_on:2015-08-25", count=1)
+            ReportersCounter.objects.create(org=self.org, type="registered_on:2015-06-30", count=2)
+            ReportersCounter.objects.create(org=self.org, type="registered_on:2015-06-30", count=2)
+            ReportersCounter.objects.create(org=self.org, type="registered_on:2014-11-25", count=6)
 
             stats = json.loads(get_registration_stats(self.org))
 
-            non_zero_keys = {'08/24/15': 9, '06/29/15': 4}
+            non_zero_keys = {"08/24/15": 9, "06/29/15": 4}
 
             for entry in stats:
-                self.assertFalse(entry['label'].endswith('14'))
-                if entry['count'] != 0:
-                    self.assertTrue(entry['label'] in non_zero_keys.keys())
-                    self.assertEqual(entry['count'], non_zero_keys[entry['label']])
+                self.assertFalse(entry["label"].endswith("14"))
+                if entry["count"] != 0:
+                    self.assertTrue(entry["label"] in non_zero_keys.keys())
+                    self.assertEqual(entry["count"], non_zero_keys[entry["label"]])
 
     def test_get_ureporters_locations_stats(self):
 
         self.assertEqual(get_ureporters_locations_stats(self.org, dict()), [])
-        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='map')), [])
-        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='state')), [])
-        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district')), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location="map")), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location="state")), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location="district")), [])
 
-        self.country = Boundary.objects.create(org=self.org, osm_id="R-COUNTRY", name="Country", level=0, parent=None,
-                                               geometry='{"foo":"bar-country"}')
-        self.state = Boundary.objects.create(org=self.org, osm_id="R-STATE", name="State", level=1,
-                                             parent=self.country, geometry='{"foo":"bar-state"}')
-        self.city = Boundary.objects.create(org=self.org, osm_id="R-CITY", name="City", level=1,
-                                            parent=self.country, geometry='{"foo":"bar-city"}')
-        self.district = Boundary.objects.create(org=self.org, osm_id="R-DISTRICT", name="District", level=2,
-                                                parent=self.state, geometry='{"foo":"bar-district"}')
+        self.country = Boundary.objects.create(
+            org=self.org, osm_id="R-COUNTRY", name="Country", level=0, parent=None, geometry='{"foo":"bar-country"}'
+        )
+        self.state = Boundary.objects.create(
+            org=self.org, osm_id="R-STATE", name="State", level=1, parent=self.country, geometry='{"foo":"bar-state"}'
+        )
+        self.city = Boundary.objects.create(
+            org=self.org, osm_id="R-CITY", name="City", level=1, parent=self.country, geometry='{"foo":"bar-city"}'
+        )
+        self.district = Boundary.objects.create(
+            org=self.org,
+            osm_id="R-DISTRICT",
+            name="District",
+            level=2,
+            parent=self.state,
+            geometry='{"foo":"bar-district"}',
+        )
 
-        inactive_district = Boundary.objects.create(org=self.org, osm_id="R-DISTRICT2", name="District", level=2,
-                                                    parent=self.state, geometry='{"foo":"bar-district"}')
+        inactive_district = Boundary.objects.create(
+            org=self.org,
+            osm_id="R-DISTRICT2",
+            name="District",
+            level=2,
+            parent=self.state,
+            geometry='{"foo":"bar-district"}',
+        )
         inactive_district.is_active = False
         inactive_district.save()
 
-        ReportersCounter.objects.create(org=self.org, type='state:R-STATE', count=5)
-        ReportersCounter.objects.create(org=self.org, type='district:R-DISTRICT', count=3)
+        ReportersCounter.objects.create(org=self.org, type="state:R-STATE", count=5)
+        ReportersCounter.objects.create(org=self.org, type="district:R-DISTRICT", count=3)
 
         self.assertEqual(get_ureporters_locations_stats(self.org, dict()), [])
-        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='map')), [])
-        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='state')),
-                         [dict(boundary='R-CITY', label='City', set=0), dict(boundary='R-STATE', label='State', set=5)])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location="map")), [])
+        self.assertEqual(
+            get_ureporters_locations_stats(self.org, dict(location="state")),
+            [dict(boundary="R-CITY", label="City", set=0), dict(boundary="R-STATE", label="State", set=5)],
+        )
 
         # district without parent
-        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district')), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location="district")), [])
 
         # district with wrong parent
-        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district', parent='BLABLA')), [])
+        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location="district", parent="BLABLA")), [])
 
-        self.assertEqual(get_ureporters_locations_stats(self.org, dict(location='district', parent='R-STATE')),
-                         [dict(boundary='R-DISTRICT', label='District', set=3)])
+        self.assertEqual(
+            get_ureporters_locations_stats(self.org, dict(location="district", parent="R-STATE")),
+            [dict(boundary="R-DISTRICT", label="District", set=3)],
+        )
 
-    @patch('django.core.cache.cache.get')
+    @patch("django.core.cache.cache.get")
     def test_get_regions_stats(self, mock_cache_get):
         mock_cache_get.return_value = None
         self.assertEqual(get_regions_stats(self.org), [])
 
-        Boundary.objects.create(org=self.org, osm_id='R-NIGERIA', name='Nigeria', parent=None, level=0,
-                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        Boundary.objects.create(
+            org=self.org,
+            osm_id="R-NIGERIA",
+            name="Nigeria",
+            parent=None,
+            level=0,
+            geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
+        )
 
-        Boundary.objects.create(org=self.org, osm_id='R-LAGOS', name='Lagos', parent=None, level=1,
-                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        Boundary.objects.create(
+            org=self.org,
+            osm_id="R-LAGOS",
+            name="Lagos",
+            parent=None,
+            level=1,
+            geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
+        )
 
-        Boundary.objects.create(org=self.org, osm_id='R-OYO', name='OYO', parent=None, level=1,
-                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        Boundary.objects.create(
+            org=self.org,
+            osm_id="R-OYO",
+            name="OYO",
+            parent=None,
+            level=1,
+            geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
+        )
 
-        Boundary.objects.create(org=self.org, osm_id='R-ABUJA', name='Abuja', parent=None, level=1,
-                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        Boundary.objects.create(
+            org=self.org,
+            osm_id="R-ABUJA",
+            name="Abuja",
+            parent=None,
+            level=1,
+            geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
+        )
 
         self.assertEqual(get_regions_stats(self.org), [])
 
-        ReportersCounter.objects.create(org=self.org, type='state:R-LAGOS', count=5)
+        ReportersCounter.objects.create(org=self.org, type="state:R-LAGOS", count=5)
 
-        self.assertEqual(get_regions_stats(self.org), [dict(name='Lagos', count=5)])
+        self.assertEqual(get_regions_stats(self.org), [dict(name="Lagos", count=5)])
 
-        ReportersCounter.objects.create(org=self.org, type='state:R-OYO', count=15)
+        ReportersCounter.objects.create(org=self.org, type="state:R-OYO", count=15)
 
-        self.assertEqual(get_regions_stats(self.org), [dict(name='OYO', count=15), dict(name='Lagos', count=5)])
+        self.assertEqual(get_regions_stats(self.org), [dict(name="OYO", count=15), dict(name="Lagos", count=5)])
 
-        self.org.set_config('common.is_global', True)
+        self.org.set_config("common.is_global", True)
 
         self.assertEqual(get_regions_stats(self.org), [])
 
-        ReportersCounter.objects.create(org=self.org, type='state:R-NIGERIA', count=30)
-        self.assertEqual(get_regions_stats(self.org), [dict(name='Nigeria', count=30)])
+        ReportersCounter.objects.create(org=self.org, type="state:R-NIGERIA", count=30)
+        self.assertEqual(get_regions_stats(self.org), [dict(name="Nigeria", count=30)])
 
     def test_get_org_contacts_counts(self):
 
-        with patch('ureport.contacts.models.ReportersCounter.get_counts') as mock_get_counts:
+        with patch("ureport.contacts.models.ReportersCounter.get_counts") as mock_get_counts:
             mock_get_counts.return_value = "Counts"
-            with patch('django.core.cache.cache.get') as mock_cache_get:
+            with patch("django.core.cache.cache.get") as mock_cache_get:
                 mock_cache_get.return_value = "Cached"
 
                 self.assertEqual(get_org_contacts_counts(self.org), "Cached")
@@ -417,98 +509,116 @@ class UtilsTest(UreportTest):
                 mock_get_counts.assert_called_once_with(self.org)
 
     def test_get_flows(self):
-        with patch('ureport.utils.fetch_flows') as mock_fetch_flows:
+        with patch("ureport.utils.fetch_flows") as mock_fetch_flows:
             mock_fetch_flows.return_value = "Fetched"
-            with patch('django.core.cache.cache.get') as mock_cache_get:
+            with patch("django.core.cache.cache.get") as mock_cache_get:
                 mock_cache_get.return_value = dict(results="Cached")
 
                 self.assertEqual(get_flows(self.org, self.rapidpro_backend), "Cached")
-                mock_cache_get.assert_called_once_with(CACHE_ORG_FLOWS_KEY % (self.org.pk, self.rapidpro_backend.slug), None)
+                mock_cache_get.assert_called_once_with(
+                    CACHE_ORG_FLOWS_KEY % (self.org.pk, self.rapidpro_backend.slug), None
+                )
                 self.assertFalse(mock_fetch_flows.called)
 
                 mock_cache_get.return_value = None
                 self.assertEqual(get_flows(self.org, self.rapidpro_backend), "Fetched")
                 mock_fetch_flows.assert_called_once_with(self.org, self.rapidpro_backend)
 
-    @patch('django.core.cache.cache.get')
+    @patch("django.core.cache.cache.get")
     def test_get_reporters_count(self, mock_cache_get):
         mock_cache_get.return_value = None
 
         self.assertEqual(get_reporters_count(self.org), 0)
 
-        ReportersCounter.objects.create(org=self.org, type='total-reporters', count=5)
+        ReportersCounter.objects.create(org=self.org, type="total-reporters", count=5)
 
         self.assertEqual(get_reporters_count(self.org), 5)
 
     def test_get_global_count(self):
-        with self.settings(CACHES={'default': {'BACKEND': 'django_redis.cache.RedisCache',
-                                               'LOCATION': '127.0.0.1:6379:1',
-                                               'OPTIONS': {
-                                                   'CLIENT_CLASS': 'django_redis.client.DefaultClient', }}}):
+        with self.settings(
+            CACHES={
+                "default": {
+                    "BACKEND": "django_redis.cache.RedisCache",
+                    "LOCATION": "127.0.0.1:6379:1",
+                    "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+                }
+            }
+        ):
 
-            with patch('ureport.utils.fetch_old_sites_count') as mock_old_sites_count:
+            with patch("ureport.utils.fetch_old_sites_count") as mock_old_sites_count:
                 mock_old_sites_count.return_value = []
 
                 self.assertEqual(get_global_count(), 0)
 
-                ReportersCounter.objects.create(org=self.org, type='total-reporters', count=5)
+                ReportersCounter.objects.create(org=self.org, type="total-reporters", count=5)
 
                 # ignored if not on the global homepage
                 self.assertEqual(get_global_count(), 0)
 
                 # add the org to the homepage
-                self.org.set_config('common.is_on_landing_page', True)
+                self.org.set_config("common.is_on_landing_page", True)
                 self.assertEqual(get_global_count(), 5)
 
-                mock_old_sites_count.return_value = [{'time': 500, 'results': dict(size=300)},
-                                                     {'time': 500, 'results': dict(size=50)}]
+                mock_old_sites_count.return_value = [
+                    {"time": 500, "results": dict(size=300)},
+                    {"time": 500, "results": dict(size=50)},
+                ]
                 from django.core.cache import cache
+
                 cache.delete(GLOBAL_COUNT_CACHE_KEY)
                 self.assertEqual(get_global_count(), 355)
 
                 cache.delete(GLOBAL_COUNT_CACHE_KEY)
-                self.org.set_config('common.is_on_landing_page', False)
+                self.org.set_config("common.is_on_landing_page", False)
                 self.assertEqual(get_global_count(), 350)
 
-            with patch('django.core.cache.cache.get') as cache_get_mock:
+            with patch("django.core.cache.cache.get") as cache_get_mock:
                 cache_get_mock.return_value = 20
 
                 self.assertEqual(get_global_count(), 20)
-                cache_get_mock.assert_called_once_with('global_count', None)
+                cache_get_mock.assert_called_once_with("global_count", None)
 
-    @patch('django.core.cache.cache.get')
+    @patch("django.core.cache.cache.get")
     def test_get_occupation_stats(self, mock_cache_get):
         mock_cache_get.return_value = None
 
-        self.assertEqual(get_occupation_stats(self.org), '[]')
+        self.assertEqual(get_occupation_stats(self.org), "[]")
 
-        ReportersCounter.objects.create(org=self.org, type='occupation:student', count=5)
-        ReportersCounter.objects.create(org=self.org, type='occupation:writer', count=2)
-        ReportersCounter.objects.create(org=self.org, type='occupation:all responses', count=13)
+        ReportersCounter.objects.create(org=self.org, type="occupation:student", count=5)
+        ReportersCounter.objects.create(org=self.org, type="occupation:writer", count=2)
+        ReportersCounter.objects.create(org=self.org, type="occupation:all responses", count=13)
 
-        self.assertEqual(get_occupation_stats(self.org), json.dumps([dict(label='student', count=5),
-                                                                     dict(label='writer', count=2)]))
+        self.assertEqual(
+            get_occupation_stats(self.org), json.dumps([dict(label="student", count=5), dict(label="writer", count=2)])
+        )
 
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooAAA', count=1)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooBBB', count=1)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooCCC', count=10)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooDDD', count=11)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooEEE', count=12)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooFFF', count=13)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooGGG', count=8)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooGGG', count=6)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooHHH', count=15)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooIII', count=16)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooJJJ', count=2)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooJJJ', count=15)
-        ReportersCounter.objects.create(org=self.org, type='occupation:fooKKK', count=18)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooAAA", count=1)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooBBB", count=1)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooCCC", count=10)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooDDD", count=11)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooEEE", count=12)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooFFF", count=13)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooGGG", count=8)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooGGG", count=6)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooHHH", count=15)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooIII", count=16)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooJJJ", count=2)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooJJJ", count=15)
+        ReportersCounter.objects.create(org=self.org, type="occupation:fooKKK", count=18)
 
-        self.assertEqual(get_occupation_stats(self.org), json.dumps([dict(label='fooKKK', count=18),
-                                                                     dict(label='fooJJJ', count=17),
-                                                                     dict(label='fooIII', count=16),
-                                                                     dict(label='fooHHH', count=15),
-                                                                     dict(label='fooGGG', count=14),
-                                                                     dict(label='fooFFF', count=13),
-                                                                     dict(label='fooEEE', count=12),
-                                                                     dict(label='fooDDD', count=11),
-                                                                     dict(label='fooCCC', count=10)]))
+        self.assertEqual(
+            get_occupation_stats(self.org),
+            json.dumps(
+                [
+                    dict(label="fooKKK", count=18),
+                    dict(label="fooJJJ", count=17),
+                    dict(label="fooIII", count=16),
+                    dict(label="fooHHH", count=15),
+                    dict(label="fooGGG", count=14),
+                    dict(label="fooFFF", count=13),
+                    dict(label="fooEEE", count=12),
+                    dict(label="fooDDD", count=11),
+                    dict(label="fooCCC", count=10),
+                ]
+            ),
+        )
