@@ -1,3 +1,8 @@
+v1.0.425
+----------
+ * Merge pull request #375 from rapidpro/fix-RSS-jobs
+ * Fix RSS feed jobs summary look up
+
 v1.0.424
 ----------
  * Merge pull request #372 from rapidpro/use-archives
