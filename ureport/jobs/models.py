@@ -74,7 +74,7 @@ class JobSource(SmartModel):
 
         html_parser = HTMLParser()
         for entry in entries:
-            summary = entry['summary']
+            summary = entry.get('summary', '')
             entry['summary'] = strip_tags(html_parser.unescape(html_parser.unescape(summary)))
         return entries
 
