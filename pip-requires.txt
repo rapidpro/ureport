@@ -1,7 +1,7 @@
 smartmin
 Django<2.0
 rapidpro-dash
-celery[redis]
+celery[redis]==4.2.1
 coverage
 django-compressor
 django-debug-toolbar
