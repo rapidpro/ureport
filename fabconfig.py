@@ -16,13 +16,14 @@ config = dict(
     sqldump=False,
     celery=True,
     processes=("celery", "sync"),
+    celery_beat_process=True,
     python_cmd="python3.6",
     error_file="config/error.html",
     error_logo="config/logo.png",
     compress=True,
     region="eu-west-1",
     hosts=[
-        dict(name="report1", host="report1.ureport.in", ec2_id="i-05375dd10219ae352"),
+        dict(name="report1", host="report1.ureport.in", ec2_id="i-05375dd10219ae352", beat=True),
         dict(name="report2", host="report2.ureport.in", ec2_id="i-00a6e306e2139c753"),
     ],
     elb=[
