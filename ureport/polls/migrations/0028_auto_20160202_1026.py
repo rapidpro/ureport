@@ -19,7 +19,12 @@ class Migration(migrations.Migration):
                 ),
                 ("category", models.TextField(null=True)),
                 ("is_active", models.BooleanField(default=True)),
-                ("question", models.ForeignKey(related_name="response_categories", to="polls.PollQuestion")),
+                (
+                    "question",
+                    models.ForeignKey(
+                        related_name="response_categories", on_delete=models.PROTECT, to="polls.PollQuestion"
+                    ),
+                ),
             ],
         ),
         migrations.AlterUniqueTogether(name="pollresponsecategory", unique_together=set([("question", "rule_uuid")])),

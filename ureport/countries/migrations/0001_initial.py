@@ -33,6 +33,7 @@ class Migration(migrations.Migration):
                     "created_by",
                     models.ForeignKey(
                         related_name="countries_countryalias_creations",
+                        on_delete=models.PROTECT,
                         to=settings.AUTH_USER_MODEL,
                         help_text="The user which originally created this item",
                     ),
@@ -41,6 +42,7 @@ class Migration(migrations.Migration):
                     "modified_by",
                     models.ForeignKey(
                         related_name="countries_countryalias_modifications",
+                        on_delete=models.PROTECT,
                         to=settings.AUTH_USER_MODEL,
                         help_text="The user which last modified this item",
                     ),

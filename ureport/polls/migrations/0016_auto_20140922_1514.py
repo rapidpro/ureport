@@ -14,7 +14,10 @@ class Migration(migrations.Migration):
             model_name="poll",
             name="category_image",
             field=models.ForeignKey(
-                to="categories.CategoryImage", help_text="The splash category image to display for the poll", null=True
+                to="categories.CategoryImage",
+                on_delete=models.PROTECT,
+                help_text="The splash category image to display for the poll",
+                null=True,
             ),
             preserve_default=True,
         ),
@@ -23,6 +26,7 @@ class Migration(migrations.Migration):
             name="created_by",
             field=models.ForeignKey(
                 related_name="polls_featuredresponse_creations",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which originally created this item",
             ),
@@ -32,6 +36,7 @@ class Migration(migrations.Migration):
             name="modified_by",
             field=models.ForeignKey(
                 related_name="polls_featuredresponse_modifications",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which last modified this item",
             ),
@@ -40,14 +45,20 @@ class Migration(migrations.Migration):
             model_name="featuredresponse",
             name="poll",
             field=models.ForeignKey(
-                related_name="featured_responses", to="polls.Poll", help_text="The poll for this response"
+                related_name="featured_responses",
+                on_delete=models.PROTECT,
+                to="polls.Poll",
+                help_text="The poll for this response",
             ),
         ),
         migrations.AlterField(
             model_name="poll",
             name="category",
             field=models.ForeignKey(
-                related_name="polls", to="categories.Category", help_text="The category this Poll belongs to"
+                related_name="polls",
+                on_delete=models.PROTECT,
+                to="categories.Category",
+                help_text="The category this Poll belongs to",
             ),
         ),
         migrations.AlterField(
@@ -55,6 +66,7 @@ class Migration(migrations.Migration):
             name="created_by",
             field=models.ForeignKey(
                 related_name="polls_poll_creations",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which originally created this item",
             ),
@@ -64,6 +76,7 @@ class Migration(migrations.Migration):
             name="modified_by",
             field=models.ForeignKey(
                 related_name="polls_poll_modifications",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which last modified this item",
             ),
@@ -73,6 +86,7 @@ class Migration(migrations.Migration):
             name="created_by",
             field=models.ForeignKey(
                 related_name="polls_pollcategory_creations",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which originally created this item",
             ),
@@ -82,6 +96,7 @@ class Migration(migrations.Migration):
             name="modified_by",
             field=models.ForeignKey(
                 related_name="polls_pollcategory_modifications",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which last modified this item",
             ),
@@ -91,6 +106,7 @@ class Migration(migrations.Migration):
             name="created_by",
             field=models.ForeignKey(
                 related_name="polls_pollimage_creations",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which originally created this item",
             ),
@@ -100,6 +116,7 @@ class Migration(migrations.Migration):
             name="modified_by",
             field=models.ForeignKey(
                 related_name="polls_pollimage_modifications",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which last modified this item",
             ),
@@ -107,13 +124,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="pollimage",
             name="poll",
-            field=models.ForeignKey(related_name="images", to="polls.Poll", help_text="The poll to associate to"),
+            field=models.ForeignKey(
+                related_name="images", on_delete=models.PROTECT, to="polls.Poll", help_text="The poll to associate to"
+            ),
         ),
         migrations.AlterField(
             model_name="pollquestion",
             name="created_by",
             field=models.ForeignKey(
                 related_name="polls_pollquestion_creations",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which originally created this item",
             ),
@@ -123,6 +143,7 @@ class Migration(migrations.Migration):
             name="modified_by",
             field=models.ForeignKey(
                 related_name="polls_pollquestion_modifications",
+                on_delete=models.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 help_text="The user which last modified this item",
             ),
@@ -131,7 +152,10 @@ class Migration(migrations.Migration):
             model_name="pollquestion",
             name="poll",
             field=models.ForeignKey(
-                related_name="questions", to="polls.Poll", help_text="The poll this question is part of"
+                related_name="questions",
+                on_delete=models.PROTECT,
+                to="polls.Poll",
+                help_text="The poll this question is part of",
             ),
         ),
     ]

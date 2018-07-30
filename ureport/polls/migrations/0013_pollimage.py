@@ -33,14 +33,23 @@ class Migration(migrations.Migration):
                 (
                     "created_by",
                     models.ForeignKey(
-                        help_text="The user which originally created this item", to=settings.AUTH_USER_MODEL
+                        help_text="The user which originally created this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
                     ),
                 ),
                 (
                     "modified_by",
-                    models.ForeignKey(help_text="The user which last modified this item", to=settings.AUTH_USER_MODEL),
+                    models.ForeignKey(
+                        help_text="The user which last modified this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
                 ),
-                ("poll", models.ForeignKey(help_text="The poll to associate to", to="polls.Poll")),
+                (
+                    "poll",
+                    models.ForeignKey(help_text="The poll to associate to", on_delete=models.PROTECT, to="polls.Poll"),
+                ),
             ],
             options={"abstract": False},
             bases=(models.Model,),

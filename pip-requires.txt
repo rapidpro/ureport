@@ -1,6 +1,6 @@
 smartmin
-Django<2.0
-rapidpro-dash
+Django==2.0.7
+-e git+https://github.com/rapidpro/dash.git@Django2#egg=rapidpro-dash
 celery[redis]==4.2.1
 coverage
 django-compressor

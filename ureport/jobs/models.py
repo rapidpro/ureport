@@ -44,7 +44,7 @@ class JobSource(SmartModel):
     is_featured = models.BooleanField(
         default=False, help_text=_("Featured job sources are shown first on the jobs page.")
     )
-    org = models.ForeignKey(Org, help_text=_("The organization this job source is for"))
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, help_text=_("The organization this job source is for"))
 
     def __str__(self):
         return self.title

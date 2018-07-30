@@ -12,6 +12,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="pollresult",
             name="org",
-            field=models.ForeignKey(related_name="poll_results", to="orgs.Org", db_index=False),
+            field=models.ForeignKey(
+                related_name="poll_results", on_delete=models.PROTECT, to="orgs.Org", db_index=False
+            ),
         )
     ]

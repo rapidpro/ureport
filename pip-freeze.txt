@@ -64,7 +64,6 @@ psycopg2==2.7.1
 pycountry==18.2.23
 python-dateutil==2.6.1    # via botocore, rapidpro-dash
 pytz==2018.3              # via celery, django, django-timezone-field, rapidpro-python, smartmin
-rapidpro-dash==1.3.7
 rapidpro-python==2.3
 raven==6.6.0
 rcssmin==1.0.6            # via django-compressor

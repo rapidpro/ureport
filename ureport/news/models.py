@@ -16,9 +16,11 @@ class NewsItem(SmartModel):
 
     link = models.CharField(max_length=255, help_text=_("A link that should be associated with this item"))
 
-    category = models.ForeignKey(Category, related_name="news", help_text=_("The category this item belongs to"))
+    category = models.ForeignKey(
+        Category, on_delete=models.PROTECT, related_name="news", help_text=_("The category this item belongs to")
+    )
 
-    org = models.ForeignKey(Org, help_text=_("The organization this item belongs to"))
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, help_text=_("The organization this item belongs to"))
 
     def short_description(self):
         if len(self.description) > 300:
@@ -43,6 +45,8 @@ class Video(SmartModel):
         max_length=255, help_text=_("The id of the YouTube video that should be linked to this item")
     )
 
-    category = models.ForeignKey(Category, related_name="videos", help_text=_("The category this item belongs to"))
+    category = models.ForeignKey(
+        Category, on_delete=models.PROTECT, related_name="videos", help_text=_("The category this item belongs to")
+    )
 
-    org = models.ForeignKey(Org, help_text=_("The organization this video belongs to"))
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, help_text=_("The organization this video belongs to"))
