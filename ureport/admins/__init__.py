@@ -17,5 +17,6 @@ class OrgCache(Enum):
 
 def refresh_caches(org, caches):
     from ureport.polls.tasks import refresh_org_flows
+
     if OrgCache.flows in caches:
         refresh_org_flows.delay(org.pk)

@@ -6,13 +6,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('contacts', '0007_auto_20151007_2044'),
-    ]
+    dependencies = [("contacts", "0007_auto_20151007_2044")]
 
-    operations = [
-        migrations.AlterUniqueTogether(
-            name='contact',
-            unique_together=set([('org', 'uuid')]),
-        ),
-    ]
+    operations = [migrations.AlterUniqueTogether(name="contact", unique_together=set([("org", "uuid")]))]

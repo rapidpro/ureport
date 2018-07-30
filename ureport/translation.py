@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from django.utils.translation import get_language as _get_language, ugettext as _
 
-from modeltranslation.translator import translator, TranslationOptions
-
-from nsms.text.models import Text
-from django.utils.translation import ugettext as _
-from django.utils.translation import get_language as _get_language
 from modeltranslation import utils
+from modeltranslation.translator import TranslationOptions, translator
+from nsms.text.models import Text
 
 
 class TextTranslationOptions(TranslationOptions):
-    fields = ('text',)
+    fields = ("text",)
 
 
 translator.register(Text, TextTranslationOptions)

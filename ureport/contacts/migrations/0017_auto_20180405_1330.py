@@ -7,17 +7,9 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('contacts', '0016_auto_20180314_1317'),
-    ]
+    dependencies = [("contacts", "0016_auto_20180314_1317")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='contact',
-            name='backend',
-        ),
-        migrations.RemoveField(
-            model_name='contactfield',
-            name='backend',
-        ),
+        migrations.RemoveField(model_name="contact", name="backend"),
+        migrations.RemoveField(model_name="contactfield", name="backend"),
     ]
