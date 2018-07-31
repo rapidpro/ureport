@@ -8,7 +8,7 @@ import mock
 import pytz
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import Org
+from dash.orgs.models import Org, OrgBackend
 from dash.stories.models import Story, StoryImage
 from six.moves.urllib.parse import urlencode
 
@@ -81,6 +81,8 @@ class PublicTest(UreportTest):
         settings_sites_count = len(list(getattr(settings, "PREVIOUS_ORG_SITES", [])))
 
         # remove all orgs
+        Category.objects.all().delete()
+        OrgBackend.objects.all().delete()
         Org.objects.all().delete()
 
         response = self.client.get(chooser_url)
