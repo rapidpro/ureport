@@ -865,7 +865,9 @@ class PollQuestion(SmartModel):
             results.append(dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories))
 
         else:
-            categories_label = self.response_categories.filter(is_active=True).values_list("category", flat=True)
+            categories_label = (
+                self.response_categories.filter(is_active=True).order_by("pk").values_list("category", flat=True)
+            )
             question_results = self.get_question_results()
 
             if segment:

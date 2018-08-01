@@ -1627,17 +1627,14 @@ class PollTest(UreportTest):
             mock_get_linked_orgs.return_value = ["linked_org"]
 
             request = Mock(spec=HttpRequest)
-            request.user = User.objects.get(pk=1)
+            request.user = Mock(spec=User, is_authenticated=True)
 
-            with patch("django.contrib.auth.models.User.is_authenticated") as mock_authenticated:
-                mock_authenticated.return_value = True
+            show_org_flags(dict(is_iorg=True, request=request))
+            mock_get_linked_orgs.assert_called_with(True)
 
-                show_org_flags(dict(is_iorg=True, request=request))
-                mock_get_linked_orgs.assert_called_with(True)
-
-                mock_authenticated.return_value = False
-                show_org_flags(dict(is_iorg=True, request=request))
-                mock_get_linked_orgs.assert_called_with(False)
+            request.user = Mock(spec=User, is_authenticated=False)
+            show_org_flags(dict(is_iorg=True, request=request))
+            mock_get_linked_orgs.assert_called_with(False)
 
         request = Mock(spec=HttpRequest)
         request.user = User.objects.get(pk=1)
@@ -1795,6 +1792,46 @@ class PollQuestionTest(UreportTest):
     def assertResult(self, result, index, category, count):
         self.assertEqual(count, result["categories"][index]["count"])
         self.assertEqual(category, result["categories"][index]["label"])
+
+    def test_poll_question_category_order(self):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
+
+        poll_question1 = PollQuestion.objects.create(
+            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
+        )
+
+        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
+        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
+
+        with patch("ureport.polls.models.PollQuestion.get_question_results") as mock:
+            mock.return_value = dict()
+
+            calculated_results = [
+                dict(
+                    open_ended=False,
+                    set=0,
+                    unset=0,
+                    categories=[dict(count=0, label="Yes"), dict(count=0, label="No")],
+                )
+            ]
+
+            self.assertEqual(poll_question1.calculate_results(), calculated_results)
+
+            PollResponseCategory.objects.all().delete()
+
+            PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
+            PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
+
+            calculated_results = [
+                dict(
+                    open_ended=False,
+                    set=0,
+                    unset=0,
+                    categories=[dict(count=0, label="No"), dict(count=0, label="Yes")],
+                )
+            ]
+
+            self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
     def test_poll_question_model(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)

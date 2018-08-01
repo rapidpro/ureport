@@ -1,3 +1,11 @@
+v1.0.432
+----------
+ * Merge pull request #377 from rapidpro/specific-category-order
+ * Fix Facebook page embed without facebook appId
+ * Fix Facebook page embed without facebook appId
+ * Fix poll questions category order
+ * Merge pull request #376 from rapidpro/pip-tools
+
 v1.0.425
 ----------
  * Merge pull request #375 from rapidpro/fix-RSS-jobs
