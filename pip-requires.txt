@@ -35,3 +35,4 @@ pip-tools
 futures==3.2.0; python_version < "3.0"
 black; python_version >= "3.0"
 isort
+flake8
