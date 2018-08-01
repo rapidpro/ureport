@@ -18,6 +18,8 @@ class ImageCRUDL(SmartCRUDL):
             return ("is_active", "name", "image_type", "image")
 
     class List(OrgPermsMixin, SmartListView):
+        ordering = ("name",)
+
         def derive_fields(self):
             if self.request.user.is_superuser:
                 return ("org", "name", "image_type")

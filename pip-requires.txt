@@ -1,7 +1,7 @@
-smartmin==2.0.0
-Django==2.0.7
+smartmin
+Django
 -e git+https://github.com/rapidpro/dash.git@Django2#egg=rapidpro-dash
-celery[redis]==4.2.1
+celery[redis]
 coverage
 django-compressor
 django-debug-toolbar
@@ -9,7 +9,7 @@ django-digest
 django-rosetta
 django-storages
 django-rest-swagger
-djangorestframework==3.8.2
+djangorestframework
 dj-database-url
 boto3
 Pillow
@@ -17,7 +17,7 @@ gunicorn
 pisa
 raven
 django-redis
-psycopg2
+psycopg2-binary
 xlutils
 mock
 -e git+https://github.com/jazzband/sorl-thumbnail.git@b6358d234d7de3927a2666a2a5ab3d7870c0e1d3#egg=sorl-thumbnail
@@ -32,7 +32,6 @@ feedparser
 Markdown
 iso8601
 pip-tools
-futures==3.2.0; python_version < "3.0"
-black; python_version >= "3.0"
+black
 isort
 flake8
