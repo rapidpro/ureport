@@ -4,45 +4,46 @@
 #
 #    pip-compile --output-file pip-freeze.txt pip-requires.txt
 #
+-e git+https://github.com/rapidpro/dash.git@Django2#egg=rapidpro-dash
 -e git+https://github.com/jazzband/sorl-thumbnail.git@b6358d234d7de3927a2666a2a5ab3d7870c0e1d3#egg=sorl-thumbnail
 -e git+https://github.com/Alir3z4/python-stop-words.git#egg=stop_words
 amqp==2.3.2               # via kombu
+appdirs==1.4.3            # via black
+attrs==18.1.0             # via black
 billiard==3.5.0.4         # via celery
-boto3==1.6.22
-botocore==1.9.22          # via boto3, s3transfer
+black==18.6b4 ; python_version >= "3.0"
+boto3==1.7.67
+botocore==1.10.67         # via boto3, s3transfer
 celery[redis]==4.2.1
-certifi==2018.1.18        # via requests
+certifi==2018.4.16        # via requests
 chardet==3.0.4            # via requests
-click==6.7                # via pip-tools
-contextlib2==0.5.5        # via raven
+click==6.7                # via black, pip-tools
 coreapi==2.3.3            # via django-rest-swagger, openapi-codec
 coreschema==0.0.4         # via coreapi
 coverage==4.5.1
 dj-database-url==0.5.0
 django-appconf==1.0.2     # via django-compressor
 django-compressor==2.2
-django-countries==5.2
+django-countries==5.3.1
 django-debug-toolbar==1.9.1
 django-digest==1.13
 django-hamlpy==1.1.1
 django-redis==4.9.0
-django-rest-swagger==2.1.2
+django-rest-swagger==2.2.0
 django-rosetta==0.8.1
 django-storages==1.6.6
-django-timezone-field==2.1  # via rapidpro-dash
-django==1.11.12
-djangorestframework==3.6.4
+django-timezone-field==2.1
+django==2.0.7
+djangorestframework==3.8.2
 docutils==0.14            # via botocore
-enum34==1.1.6             # via django-hamlpy, rapidpro-dash
+enum34==1.1.6             # via django-hamlpy
 feedparser==5.2.1
 first==2.0.1              # via pip-tools
-funcsigs==1.0.2           # via mock
 future==0.16.0            # via django-hamlpy
-futures==3.2.0 ; python_version < "3.0"
-gitdb2==2.0.3             # via gitpython
-gitpython==2.1.9
-gunicorn==19.7.1
-idna==2.6                 # via requests
+gitdb2==2.0.4             # via gitpython
+gitpython==2.1.11
+gunicorn==19.9.0
+idna==2.7                 # via requests
 iso8601==0.1.12
 isort==4.3.4
 itypes==1.1.0             # via coreapi
@@ -54,32 +55,34 @@ markupsafe==1.0           # via jinja2
 microsofttranslator==0.8  # via django-rosetta
 mock==2.0.0
 openapi-codec==1.3.2      # via django-rest-swagger
-pbr==4.0.1                # via mock
-phonenumbers==8.9.2       # via rapidpro-dash
-pillow==5.1.0
+pbr==4.2.0                # via mock
+phonenumbers==8.9.10
+pillow==5.2.0
 pip-tools==2.0.2
 pisa==3.0.33
 polib==1.1.0              # via django-rosetta
-psycopg2==2.7.1
-pycountry==18.2.23
-python-dateutil==2.6.1    # via botocore, rapidpro-dash
-pytz==2018.3              # via celery, django, django-timezone-field, rapidpro-python, smartmin
-rapidpro-python==2.3
-raven==6.6.0
+psycopg2-binary==2.7.5
+psycopg2==2.7.5
+pycountry==18.5.26
+python-dateutil==2.7.3    # via botocore
+pytz==2018.5              # via celery, django, django-timezone-field, rapidpro-python, smartmin
+rapidpro-python==2.4
+raven==6.9.0
 rcssmin==1.0.6            # via django-compressor
-redis==2.10.6             # via celery, django-redis, rapidpro-dash, smartmin
-regex==2018.2.21
-requests==2.18.4          # via coreapi, django-rosetta, microsofttranslator, rapidpro-dash, rapidpro-python
+redis==2.10.6             # via celery, django-redis, smartmin
+regex==2018.7.11
+requests==2.19.1          # via coreapi, django-rosetta, microsofttranslator, rapidpro-python
 rjsmin==1.0.12            # via django-compressor
 s3transfer==0.1.13        # via boto3
-simplejson==3.13.2        # via django-rest-swagger
-six==1.11.0               # via django-hamlpy, django-rosetta, microsofttranslator, mock, pip-tools, python-dateutil, rapidpro-dash, rapidpro-python, smartmin
-smartmin==1.11.8
-smmap2==2.0.3             # via gitdb2
+simplejson==3.16.0        # via django-rest-swagger
+six==1.11.0               # via django-hamlpy, django-rosetta, microsofttranslator, mock, pip-tools, python-dateutil, rapidpro-python
+smartmin==2.0.0
+smmap2==2.0.4             # via gitdb2
 sqlparse==0.2.4           # via django-debug-toolbar, smartmin
+toml==0.9.4               # via black
 uritemplate==3.0.0        # via coreapi
-urllib3==1.22             # via requests
+urllib3==1.23             # via requests
 vine==1.1.4               # via amqp
-xlrd==1.1.0               # via rapidpro-dash, smartmin, xlutils
+xlrd==1.1.0               # via smartmin, xlutils
 xlutils==2.0.0
-xlwt==1.3.0               # via rapidpro-dash, smartmin, xlutils
+xlwt==1.3.0               # via smartmin, xlutils

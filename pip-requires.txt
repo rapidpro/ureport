@@ -1,4 +1,4 @@
-smartmin
+smartmin==2.0.0
 Django==2.0.7
 -e git+https://github.com/rapidpro/dash.git@Django2#egg=rapidpro-dash
 celery[redis]==4.2.1
@@ -9,7 +9,7 @@ django-digest
 django-rosetta
 django-storages
 django-rest-swagger
-djangorestframework
+djangorestframework==3.8.2
 dj-database-url
 boto3
 Pillow
