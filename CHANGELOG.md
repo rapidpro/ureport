@@ -1,3 +1,50 @@
+v1.0.432
+----------
+ * Merge pull request #377 from rapidpro/specific-category-order
+ * Fix Facebook page embed without facebook appId
+ * Fix Facebook page embed without facebook appId
+ * Fix poll questions category order
+ * Merge pull request #376 from rapidpro/pip-tools
+
+v1.0.425
+----------
+ * Merge pull request #375 from rapidpro/fix-RSS-jobs
+ * Fix RSS feed jobs summary look up
+
+v1.0.424
+----------
+ * Merge pull request #372 from rapidpro/use-archives
+ * Merge pull request #373 from rapidpro/brasil-count
+ * upadate link for Brasil count
+
+v1.0.421
+----------
+ * Merge pull request #371 from Ilhasoft/feature/new-flags
+ * Fix flags ordering
+ * Add Bangladesh logo
+ * Add new country flags
+ * Merge pull request #57 from rapidpro/master
+ * Merge pull request #368 from Ilhasoft/feature/charts-ordering
+ * Merge pull request #366 from Ilhasoft/hotfix/org-lang
+ * Add new entry to test org lang
+ * Add order by created on desc on recent polls
+ * Fix org lang context variable setting
+ * Merge pull request #55 from rapidpro/master
+ * Merge pull request #54 from rapidpro/master
+
+v1.0.420
+----------
+ * Merge pull request #369 from rapidpro/map-colors
+ * Add config for custom maps colors
+
+v1.0.419
+----------
+ * Add config for announcement
+
+v1.0.418
+----------
+ * Fix bug, no response should not be considered as responded
+
 v1.0.417
 ----------
  * Strip trailing spaces on ignore words

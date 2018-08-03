@@ -5,8 +5,8 @@ from django.db import migrations
 
 
 def populate_categories(apps, schema_editor):
-    Poll = apps.get_model('polls', "Poll")
-    Category = apps.get_model('categories', "Category")
+    Poll = apps.get_model("polls", "Poll")
+    Category = apps.get_model("categories", "Category")
 
     for poll in Poll.objects.all():
         poll_category = poll.poll_category
@@ -17,10 +17,6 @@ def populate_categories(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0008_poll_category'),
-    ]
+    dependencies = [("polls", "0008_poll_category")]
 
-    operations = [
-        migrations.RunPython(populate_categories),
-    ]
+    operations = [migrations.RunPython(populate_categories)]

@@ -1,7 +1,7 @@
 smartmin
 Django<2.0
 rapidpro-dash
-celery
+celery[redis]==4.2.1
 coverage
 django-compressor
 django-debug-toolbar
@@ -13,7 +13,6 @@ djangorestframework
 dj-database-url
 boto3
 Pillow
-celery-with-redis
 gunicorn
 pisa
 raven
@@ -32,3 +31,7 @@ rapidpro-python
 feedparser
 Markdown
 iso8601
+pip-tools
+futures==3.2.0; python_version < "3.0"
+black; python_version >= "3.0"
+isort

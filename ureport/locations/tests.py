@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
 import json
+
+from mock import Mock, patch
+
 from ureport.tests import UreportTest
-from mock import patch, Mock
+
 from .models import Boundary
 
 
@@ -16,40 +18,68 @@ class LocationTest(UreportTest):
 
         self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), dict())
 
-        Boundary.objects.create(org=self.nigeria, osm_id='R-NIGERIA', name='Nigeria', parent=None, level=0,
-                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        Boundary.objects.create(
+            org=self.nigeria,
+            osm_id="R-NIGERIA",
+            name="Nigeria",
+            parent=None,
+            level=0,
+            geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
+        )
 
-        Boundary.objects.create(org=self.nigeria, osm_id='R-LAGOS', name='Lagos', parent=None, level=1,
-                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        Boundary.objects.create(
+            org=self.nigeria,
+            osm_id="R-LAGOS",
+            name="Lagos",
+            parent=None,
+            level=1,
+            geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
+        )
 
-        Boundary.objects.create(org=self.nigeria, osm_id='R-OYO', name='OYO', parent=None, level=1,
-                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        Boundary.objects.create(
+            org=self.nigeria,
+            osm_id="R-OYO",
+            name="OYO",
+            parent=None,
+            level=1,
+            geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
+        )
 
-        Boundary.objects.create(org=self.nigeria, osm_id='R-ABUJA', name='Abuja', parent=None, level=1,
-                                geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}')
+        Boundary.objects.create(
+            org=self.nigeria,
+            osm_id="R-ABUJA",
+            name="Abuja",
+            parent=None,
+            level=1,
+            geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
+        )
 
         expected = dict()
-        expected['R-LAGOS'] = "Lagos"
-        expected['R-ABUJA'] = "Abuja"
-        expected['R-OYO'] = "OYO"
+        expected["R-LAGOS"] = "Lagos"
+        expected["R-ABUJA"] = "Abuja"
+        expected["R-OYO"] = "OYO"
 
         self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), expected)
 
-        self.nigeria.set_config('common.is_global', True)
+        self.nigeria.set_config("common.is_global", True)
 
         expected = dict()
-        expected['R-NIGERIA'] = "Nigeria"
+        expected["R-NIGERIA"] = "Nigeria"
 
         self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), expected)
 
     def test_build_global_boundaries(self):
-        with patch('ureport.locations.models.open') as my_mock:
+        with patch("ureport.locations.models.open") as my_mock:
             my_mock.return_value.__enter__ = lambda s: s
             my_mock.return_value.__exit__ = Mock()
-            my_mock.return_value.read.return_value = json.dumps(dict(features=[
-                {"type": "Feature",
-                 "id": "DK",
-                 "properties": {"hc-group": "admin0",
+            my_mock.return_value.read.return_value = json.dumps(
+                dict(
+                    features=[
+                        {
+                            "type": "Feature",
+                            "id": "DK",
+                            "properties": {
+                                "hc-group": "admin0",
                                 "hc-middle-x": 0.28,
                                 "hc-middle-y": 0.52,
                                 "hc-key": "dk",
@@ -63,12 +93,15 @@ class LocationTest(UreportTest):
                                 "iso-a3": "DNK",
                                 "iso-a2": "DK",
                                 "region-un": "Europe",
-                                "continent": "Europe"},
-                 "geometry": {"type": "MultiPolygon",
-                              "coordinates": [[[[1, 2], [3, 4]]]]}},
-                {"type": "Feature",
-                 "id": "FO",
-                 "properties": {"hc-group": "admin0",
+                                "continent": "Europe",
+                            },
+                            "geometry": {"type": "MultiPolygon", "coordinates": [[[[1, 2], [3, 4]]]]},
+                        },
+                        {
+                            "type": "Feature",
+                            "id": "FO",
+                            "properties": {
+                                "hc-group": "admin0",
                                 "hc-middle-x": 0.5,
                                 "hc-middle-y": 0.41,
                                 "hc-key": "fo",
@@ -82,9 +115,13 @@ class LocationTest(UreportTest):
                                 "iso-a3": "FRO",
                                 "iso-a2": "FO",
                                 "region-un": "Europe",
-                                "continent": "Europe"},
-                 "geometry": {"type": "Polygon",
-                              "coordinates": [[[5, 6], [7, 8]]]}}]))
+                                "continent": "Europe",
+                            },
+                            "geometry": {"type": "Polygon", "coordinates": [[[5, 6], [7, 8]]]},
+                        },
+                    ]
+                )
+            )
 
             boundaries = Boundary.build_global_boundaries()
             danemark = boundaries[0]

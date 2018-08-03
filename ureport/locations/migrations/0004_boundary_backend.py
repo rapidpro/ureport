@@ -7,14 +7,10 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('locations', '0003_remove_inactive_boundaries'),
-    ]
+    dependencies = [("locations", "0003_remove_inactive_boundaries")]
 
     operations = [
         migrations.AddField(
-            model_name='boundary',
-            name='backend',
-            field=models.CharField(default='rapidpro', max_length=16),
-        ),
+            model_name="boundary", name="backend", field=models.CharField(default="rapidpro", max_length=16)
+        )
     ]

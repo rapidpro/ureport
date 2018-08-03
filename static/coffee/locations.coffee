@@ -1,4 +1,4 @@
-initMap = (id, geojson, question, districtZoom, wardZoom) ->
+initMap = (id, geojson, question, districtZoom, wardZoom, colorsList=[]) ->
   map = L.map(id, {scrollWheelZoom: false, zoomControl: false, touchZoom: false, trackResize: true,  dragging: false}).setView([0, 0], 8)
   STATE_LEVEL = 1
   DISTRICT_LEVEL = 2
@@ -21,7 +21,10 @@ initMap = (id, geojson, question, districtZoom, wardZoom) ->
 
   mainLabelName = window.string_All
 
-  colors = ['rgb(165,0,38)','rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,139)','rgb(255,255,191)','rgb(217,239,139)','rgb(166,217,106)','rgb(102,189,99)','rgb(26,152,80)','rgb(0,104,55)']
+  colors = colorsList
+
+  if not colors or colors.length != 11
+    colors = ['rgb(165,0,38)','rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,139)','rgb(255,255,191)','rgb(217,239,139)','rgb(166,217,106)','rgb(102,189,99)','rgb(26,152,80)','rgb(0,104,55)']
 
   breaks = [20, 30, 35, 40, 45, 55, 60, 65, 70, 80, 100]
 

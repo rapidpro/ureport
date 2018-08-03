@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from django.db import migrations
 
-
 # language=SQL
 TRIGGER_SQL = """
 --------------------------------------------------------------------------------------
@@ -111,10 +110,6 @@ CREATE TRIGGER ureport_when_poll_results_truncate_then_update_results_counters
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0031_pollresult_pollresultscounter'),
-    ]
+    dependencies = [("polls", "0031_pollresult_pollresultscounter")]
 
-    operations = [
-        migrations.RunSQL(TRIGGER_SQL)
-    ]
+    operations = [migrations.RunSQL(TRIGGER_SQL)]
