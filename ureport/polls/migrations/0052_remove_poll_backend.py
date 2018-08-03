@@ -7,13 +7,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0051_poll_backend'),
-    ]
+    dependencies = [("polls", "0051_poll_backend")]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='poll',
-            name='backend',
-        ),
-    ]
+    operations = [migrations.RemoveField(model_name="poll", name="backend")]

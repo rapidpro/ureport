@@ -5,7 +5,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     def fix_populate_poll_has_synced(apps, schema_editor):
         Poll = apps.get_model("polls", "Poll")
         PollQuestion = apps.get_model("polls", "PollQuestion")
@@ -19,10 +18,6 @@ class Migration(migrations.Migration):
 
         Poll.objects.filter(flow_uuid__in=synced_flows).update(has_synced=True)
 
-    dependencies = [
-        ('polls', '0044_populate_poll_has_synced'),
-    ]
+    dependencies = [("polls", "0044_populate_poll_has_synced")]
 
-    operations = [
-        migrations.RunPython(fix_populate_poll_has_synced)
-    ]
+    operations = [migrations.RunPython(fix_populate_poll_has_synced)]

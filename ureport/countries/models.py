@@ -3,9 +3,10 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import regex
 import six
-from django.db import models
-from smartmin.models import SmartModel
 from django_countries.fields import CountryField
+from smartmin.models import SmartModel
+
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 

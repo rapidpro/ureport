@@ -7,19 +7,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('contacts', '0015_remove_inactive_fields'),
-    ]
+    dependencies = [("contacts", "0015_remove_inactive_fields")]
 
     operations = [
         migrations.AddField(
-            model_name='contact',
-            name='backend',
-            field=models.CharField(default='rapidpro', max_length=16),
+            model_name="contact", name="backend", field=models.CharField(default="rapidpro", max_length=16)
         ),
         migrations.AddField(
-            model_name='contactfield',
-            name='backend',
-            field=models.CharField(default='rapidpro', max_length=16),
+            model_name="contactfield", name="backend", field=models.CharField(default="rapidpro", max_length=16)
         ),
     ]

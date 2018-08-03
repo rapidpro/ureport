@@ -6,13 +6,8 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('polls', '0001_initial'),
-    ]
+    dependencies = [("polls", "0001_initial")]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='pollcategory',
-            options={'verbose_name_plural': 'Poll Categories'},
-        ),
+        migrations.AlterModelOptions(name="pollcategory", options={"verbose_name_plural": "Poll Categories"})
     ]
