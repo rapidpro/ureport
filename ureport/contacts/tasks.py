@@ -1,25 +1,28 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
 import time
+
+from dash.orgs.tasks import org_task
+
 from django.core.cache import cache
 from django.utils import timezone
-from dash.orgs.tasks import org_task
+
 from celery.utils.log import get_task_logger
 
-from ureport.utils import datetime_to_json_date
 from ureport.contacts.models import Contact
+from ureport.utils import datetime_to_json_date
 
 logger = get_task_logger(__name__)
 
 
-@org_task('contact-pull', 60 * 60 * 3)
+@org_task("contact-pull", 60 * 60 * 3)
 def pull_contacts(org, ignored_since, ignored_until):
     """
     Fetches updated contacts from RapidPro and updates local contacts accordingly
     """
     from ureport.contacts.models import ReportersCounter
+
     results = dict()
 
     backends = org.backends.filter(is_active=True)
@@ -38,18 +41,22 @@ def pull_contacts(org, ignored_since, ignored_until):
 
         fields_created, fields_updated, fields_deleted, ignored = backend.pull_fields(org)
 
-        logger.warn("Fetched contact fields for org #%d. "
-                    "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, fields_created, fields_updated,
-                                                                        fields_deleted, ignored))
+        logger.warn(
+            "Fetched contact fields for org #%d. "
+            "Created %s, Updated %s, Deleted %d, Ignored %d"
+            % (org.pk, fields_created, fields_updated, fields_deleted, ignored)
+        )
         logger.warn("Fetch fields for org #%d took %ss" % (org.pk, time.time() - start))
 
         start_boundaries = time.time()
 
         boundaries_created, boundaries_updated, boundaries_deleted, ignored = backend.pull_boundaries(org)
 
-        logger.warn("Fetched boundaries for org #%d. "
-                    "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, boundaries_created, boundaries_updated,
-                                                                        boundaries_deleted, ignored))
+        logger.warn(
+            "Fetched boundaries for org #%d. "
+            "Created %s, Updated %s, Deleted %d, Ignored %d"
+            % (org.pk, boundaries_created, boundaries_updated, boundaries_deleted, ignored)
+        )
 
         logger.warn("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
         start_contacts = time.time()
@@ -58,9 +65,11 @@ def pull_contacts(org, ignored_since, ignored_until):
 
         cache.set(last_fetch_date_key, until, None)
 
-        logger.warn("Fetched contacts for org #%d. "
-                    "Created %s, Updated %s, Deleted %d, Ignored %d" % (org.pk, contacts_created, contacts_updated,
-                                                                        contacts_deleted, ignored))
+        logger.warn(
+            "Fetched contacts for org #%d. "
+            "Created %s, Updated %s, Deleted %d, Ignored %d"
+            % (org.pk, contacts_created, contacts_updated, contacts_deleted, ignored)
+        )
 
         logger.warn("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
 
@@ -68,9 +77,13 @@ def pull_contacts(org, ignored_since, ignored_until):
         ReportersCounter.squash_counts()
 
         results[backend_obj.slug] = {
-            'fields': {'created': fields_created, 'updated': fields_updated, 'deleted': fields_deleted},
-            'boundaries': {'created': boundaries_created, 'updated': boundaries_updated, 'deleted': boundaries_deleted},
-            'contacts': {'created': contacts_created, 'updated': contacts_updated, 'deleted': contacts_deleted}
+            "fields": {"created": fields_created, "updated": fields_updated, "deleted": fields_deleted},
+            "boundaries": {
+                "created": boundaries_created,
+                "updated": boundaries_updated,
+                "deleted": boundaries_deleted,
+            },
+            "contacts": {"created": contacts_created, "updated": contacts_updated, "deleted": contacts_deleted},
         }
 
     return results
