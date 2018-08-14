@@ -1,3 +1,7 @@
+v1.0.434
+----------
+ * Support Django 2.0
+
 v1.0.432
 ----------
  * Merge pull request #377 from rapidpro/specific-category-order
