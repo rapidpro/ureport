@@ -12,6 +12,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="poll",
             name="category",
-            field=models.ForeignKey(help_text="The category this Poll belongs to", to="categories.Category"),
+            field=models.ForeignKey(
+                help_text="The category this Poll belongs to", on_delete=models.PROTECT, to="categories.Category"
+            ),
         )
     ]

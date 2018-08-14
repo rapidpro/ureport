@@ -1627,17 +1627,14 @@ class PollTest(UreportTest):
             mock_get_linked_orgs.return_value = ["linked_org"]
 
             request = Mock(spec=HttpRequest)
-            request.user = User.objects.get(pk=1)
+            request.user = Mock(spec=User, is_authenticated=True)
 
-            with patch("django.contrib.auth.models.User.is_authenticated") as mock_authenticated:
-                mock_authenticated.return_value = True
+            show_org_flags(dict(is_iorg=True, request=request))
+            mock_get_linked_orgs.assert_called_with(True)
 
-                show_org_flags(dict(is_iorg=True, request=request))
-                mock_get_linked_orgs.assert_called_with(True)
-
-                mock_authenticated.return_value = False
-                show_org_flags(dict(is_iorg=True, request=request))
-                mock_get_linked_orgs.assert_called_with(False)
+            request.user = Mock(spec=User, is_authenticated=False)
+            show_org_flags(dict(is_iorg=True, request=request))
+            mock_get_linked_orgs.assert_called_with(False)
 
         request = Mock(spec=HttpRequest)
         request.user = User.objects.get(pk=1)

@@ -40,19 +40,34 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "category",
-                    models.ForeignKey(help_text="The category this item belongs to", to="categories.Category"),
+                    models.ForeignKey(
+                        help_text="The category this item belongs to",
+                        on_delete=models.PROTECT,
+                        to="categories.Category",
+                    ),
                 ),
                 (
                     "created_by",
                     models.ForeignKey(
-                        help_text="The user which originally created this item", to=settings.AUTH_USER_MODEL
+                        help_text="The user which originally created this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
                     ),
                 ),
                 (
                     "modified_by",
-                    models.ForeignKey(help_text="The user which last modified this item", to=settings.AUTH_USER_MODEL),
+                    models.ForeignKey(
+                        help_text="The user which last modified this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
                 ),
-                ("org", models.ForeignKey(help_text="The organization this item belongs to", to="orgs.Org")),
+                (
+                    "org",
+                    models.ForeignKey(
+                        help_text="The organization this item belongs to", on_delete=models.PROTECT, to="orgs.Org"
+                    ),
+                ),
             ],
             options={"abstract": False},
             bases=(models.Model,),
@@ -85,19 +100,34 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "category",
-                    models.ForeignKey(help_text="The category this item belongs to", to="categories.Category"),
+                    models.ForeignKey(
+                        help_text="The category this item belongs to",
+                        on_delete=models.PROTECT,
+                        to="categories.Category",
+                    ),
                 ),
                 (
                     "created_by",
                     models.ForeignKey(
-                        help_text="The user which originally created this item", to=settings.AUTH_USER_MODEL
+                        help_text="The user which originally created this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
                     ),
                 ),
                 (
                     "modified_by",
-                    models.ForeignKey(help_text="The user which last modified this item", to=settings.AUTH_USER_MODEL),
+                    models.ForeignKey(
+                        help_text="The user which last modified this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
                 ),
-                ("org", models.ForeignKey(help_text="The organization this video belongs to", to="orgs.Org")),
+                (
+                    "org",
+                    models.ForeignKey(
+                        help_text="The organization this video belongs to", on_delete=models.PROTECT, to="orgs.Org"
+                    ),
+                ),
             ],
             options={"abstract": False},
             bases=(models.Model,),

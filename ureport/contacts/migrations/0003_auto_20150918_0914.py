@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
                 ("id", models.AutoField(verbose_name="ID", serialize=False, auto_created=True, primary_key=True)),
                 ("type", models.CharField(max_length=255)),
                 ("count", models.IntegerField(default=0, help_text="Number of items with this counter")),
-                ("org", models.ForeignKey(related_name="reporters_counters", to="orgs.Org")),
+                ("org", models.ForeignKey(related_name="reporters_counters", on_delete=models.PROTECT, to="orgs.Org")),
             ],
         ),
         migrations.AlterIndexTogether(name="reporterscounter", index_together=set([("org", "type")])),

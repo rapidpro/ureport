@@ -1,7 +1,7 @@
 smartmin
-Django<2.0
+Django<2.1
 rapidpro-dash
-celery[redis]==4.2.1
+celery[redis]
 coverage
 django-compressor
 django-debug-toolbar
@@ -17,7 +17,7 @@ gunicorn
 pisa
 raven
 django-redis
-psycopg2
+psycopg2-binary
 xlutils
 mock
 -e git+https://github.com/jazzband/sorl-thumbnail.git@b6358d234d7de3927a2666a2a5ab3d7870c0e1d3#egg=sorl-thumbnail
@@ -32,6 +32,6 @@ feedparser
 Markdown
 iso8601
 pip-tools
-futures==3.2.0; python_version < "3.0"
-black; python_version >= "3.0"
+black
 isort
+flake8

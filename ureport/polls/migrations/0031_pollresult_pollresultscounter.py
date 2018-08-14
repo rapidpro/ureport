@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ("text", models.CharField(max_length=640, null=True)),
                 ("state", models.CharField(max_length=255, null=True)),
                 ("district", models.CharField(max_length=255, null=True)),
-                ("org", models.ForeignKey(related_name="poll_results", to="orgs.Org")),
+                ("org", models.ForeignKey(related_name="poll_results", on_delete=models.PROTECT, to="orgs.Org")),
             ],
         ),
         migrations.CreateModel(
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ("ruleset", models.CharField(max_length=36)),
                 ("type", models.CharField(max_length=255)),
                 ("count", models.IntegerField(default=0, help_text="Number of items with this counter")),
-                ("org", models.ForeignKey(related_name="results_counters", to="orgs.Org")),
+                ("org", models.ForeignKey(related_name="results_counters", on_delete=models.PROTECT, to="orgs.Org")),
             ],
         ),
     ]

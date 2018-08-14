@@ -1014,8 +1014,15 @@ class RapidProBackendTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient.get_boundaries")
     def test_pull_boundaries(self, mock_get_boundaries):
+        def release_boundary(boundary):
+            for child in boundary.children.all():
+                release_boundary(child)
 
-        Boundary.objects.all().delete()
+            boundary.delete()
+
+        for boundary in Boundary.objects.all():
+            release_boundary(boundary)
+
         geometry = TembaBoundary.Geometry.create(type="MultiPolygon", coordinates=[[1, 2]])
         parent = TembaBoundary.BoundaryRef.create(osm_id="R123", name="Location")
         remote = TembaBoundary.create(
@@ -1031,7 +1038,8 @@ class RapidProBackendTest(UreportTest):
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 0))
 
-        Boundary.objects.all().delete()
+        for boundary in Boundary.objects.all():
+            release_boundary(boundary)
         mock_get_boundaries.return_value = MockClientQuery(
             [
                 TembaBoundary.create(

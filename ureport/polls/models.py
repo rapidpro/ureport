@@ -66,7 +66,7 @@ class PollCategory(SmartModel):
     """
 
     name = models.CharField(max_length=64, help_text=_("The name of this poll category"))
-    org = models.ForeignKey(Org, help_text=_("The organization this category applies to"))
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, help_text=_("The organization this category applies to"))
 
     def __str__(self):
         return self.name
@@ -130,16 +130,23 @@ class Poll(SmartModel):
     )
 
     title = models.CharField(max_length=255, help_text=_("The title for this Poll"))
-    category = models.ForeignKey(Category, related_name="polls", help_text=_("The category this Poll belongs to"))
+    category = models.ForeignKey(
+        Category, on_delete=models.PROTECT, related_name="polls", help_text=_("The category this Poll belongs to")
+    )
     is_featured = models.BooleanField(
         default=False, help_text=_("Whether this poll should be featured on the homepage")
     )
     category_image = models.ForeignKey(
-        CategoryImage, null=True, help_text=_("The splash category image to display for the poll (optional)")
+        CategoryImage,
+        on_delete=models.PROTECT,
+        null=True,
+        help_text=_("The splash category image to display for the poll (optional)"),
     )
-    org = models.ForeignKey(Org, related_name="polls", help_text=_("The organization this poll is part of"))
+    org = models.ForeignKey(
+        Org, on_delete=models.PROTECT, related_name="polls", help_text=_("The organization this poll is part of")
+    )
 
-    backend = models.ForeignKey(OrgBackend, null=True)
+    backend = models.ForeignKey(OrgBackend, on_delete=models.PROTECT, null=True)
 
     def get_sync_progress(self):
         if not self.runs_count:
@@ -677,7 +684,9 @@ class Poll(SmartModel):
 class PollImage(SmartModel):
     name = models.CharField(max_length=64, help_text=_("The name to describe this image"))
 
-    poll = models.ForeignKey(Poll, related_name="images", help_text=_("The poll to associate to"))
+    poll = models.ForeignKey(
+        Poll, on_delete=models.PROTECT, related_name="images", help_text=_("The poll to associate to")
+    )
 
     image = models.ImageField(upload_to="polls", help_text=_("The image file to use"))
 
@@ -691,7 +700,9 @@ class FeaturedResponse(SmartModel):
     A highlighted response for a poll and location.
     """
 
-    poll = models.ForeignKey(Poll, related_name="featured_responses", help_text=_("The poll for this response"))
+    poll = models.ForeignKey(
+        Poll, on_delete=models.PROTECT, related_name="featured_responses", help_text=_("The poll for this response")
+    )
 
     location = models.CharField(max_length=255, help_text=_("The location for this response"))
 
@@ -715,7 +726,9 @@ class PollQuestion(SmartModel):
     POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
     POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 12
 
-    poll = models.ForeignKey(Poll, related_name="questions", help_text=_("The poll this question is part of"))
+    poll = models.ForeignKey(
+        Poll, on_delete=models.PROTECT, related_name="questions", help_text=_("The poll this question is part of")
+    )
     title = models.CharField(max_length=255, help_text=_("The title of this question"))
     ruleset_uuid = models.CharField(max_length=36, help_text=_("The RuleSet this question is based on"))
 
@@ -1052,7 +1065,7 @@ class PollQuestion(SmartModel):
 class PollResponseCategory(models.Model):
     IGNORED_CATEGORY_RULES = ["other", "no response"]
 
-    question = models.ForeignKey(PollQuestion, related_name="response_categories")
+    question = models.ForeignKey(PollQuestion, on_delete=models.PROTECT, related_name="response_categories")
 
     rule_uuid = models.CharField(max_length=36, help_text=_("The Rule this response category is based on"))
 
@@ -1080,7 +1093,7 @@ class PollResponseCategory(models.Model):
 
 class PollResult(models.Model):
 
-    org = models.ForeignKey(Org, related_name="poll_results", db_index=False)
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_results", db_index=False)
 
     flow = models.CharField(max_length=36)
 
@@ -1196,7 +1209,7 @@ class PollResultsCounter(models.Model):
 
     id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name="ID")
 
-    org = models.ForeignKey(Org, related_name="results_counters")
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="results_counters")
 
     ruleset = models.CharField(max_length=36)
 
