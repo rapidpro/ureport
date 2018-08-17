@@ -1,3 +1,7 @@
+v1.0.435
+----------
+ * Do not show ignored words on word clouds
+
 v1.0.434
 ----------
  * Support Django 2.0
