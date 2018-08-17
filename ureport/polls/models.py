@@ -849,7 +849,7 @@ class PollQuestion(SmartModel):
             if "english" not in org_languages:
                 org_languages.append("english")
 
-            ignore_words = []
+            ignore_words = [elt.strip().lower() for elt in org.get_config("common.ignore_words", "").split(",")]
             for lang in org_languages:
                 ignore_words += safe_get_stop_words(lang)
 
