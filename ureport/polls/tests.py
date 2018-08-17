@@ -1993,6 +1993,21 @@ class PollQuestionTest(UreportTest):
             self.assertResult(result, 8, "green", 1)
             self.assertResult(result, 9, "kigali", 1)
 
+            self.uganda.set_config("common.ignore_words", " Black, Green ")
+
+            results = poll_question1.calculate_results()
+            result = results[0]
+            self.assertEqual(8, len(result["categories"]))
+            self.assertTrue(result["open_ended"])
+            self.assertResult(result, 0, "awesome", 2)
+            self.assertResult(result, 1, "cup", 2)
+            self.assertResult(result, 2, "place", 2)
+            self.assertResult(result, 3, "tea", 2)
+            self.assertResult(result, 4, "better", 1)
+            self.assertResult(result, 5, "coffee", 1)
+            self.assertResult(result, 6, "great", 1)
+            self.assertResult(result, 7, "kigali", 1)
+
             self.uganda.language = "en"
             self.uganda.save()
 
