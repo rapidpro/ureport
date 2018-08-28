@@ -74,6 +74,7 @@ LANGUAGES = (
     ("pt", "Portuguese"),
     ("pt-br", "Brazilian Portuguese"),
     ("uk", "Ukrainian"),
+    ("uz", "Uzbek"),
     ("my", "Burmese"),
     ("id", "Indonesian"),
     ("it", "Italian"),
