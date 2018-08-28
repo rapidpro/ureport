@@ -33,7 +33,12 @@ class Migration(migrations.Migration):
                 ("registered_on", models.DateTimeField(null=True, verbose_name="Registration Date", blank=True)),
                 ("state", models.CharField(max_length=255, null=True, verbose_name="State Field")),
                 ("district", models.CharField(max_length=255, null=True, verbose_name="District Field")),
-                ("org", models.ForeignKey(related_name="contacts", verbose_name="Organization", to="orgs.Org")),
+                (
+                    "org",
+                    models.ForeignKey(
+                        related_name="contacts", on_delete=models.PROTECT, verbose_name="Organization", to="orgs.Org"
+                    ),
+                ),
             ],
         )
     ]

@@ -31,11 +31,17 @@ class Migration(migrations.Migration):
                         verbose_name="Geometry",
                     ),
                 ),
-                ("org", models.ForeignKey(related_name="boundaries", verbose_name="Organization", to="orgs.Org")),
+                (
+                    "org",
+                    models.ForeignKey(
+                        related_name="boundaries", on_delete=models.PROTECT, verbose_name="Organization", to="orgs.Org"
+                    ),
+                ),
                 (
                     "parent",
                     models.ForeignKey(
                         related_name="children",
+                        on_delete=models.PROTECT,
                         to="locations.Boundary",
                         help_text="The parent to this political boundary if any",
                         null=True,

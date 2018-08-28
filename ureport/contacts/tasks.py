@@ -35,43 +35,43 @@ def pull_contacts(org, ignored_since, ignored_until):
         since = cache.get(last_fetch_date_key, None)
 
         if not since:
-            logger.warn("First time run for org #%d. Will sync all contacts" % org.pk)
+            logger.info("First time run for org #%d. Will sync all contacts" % org.pk)
 
         start = time.time()
 
         fields_created, fields_updated, fields_deleted, ignored = backend.pull_fields(org)
 
-        logger.warn(
+        logger.info(
             "Fetched contact fields for org #%d. "
             "Created %s, Updated %s, Deleted %d, Ignored %d"
             % (org.pk, fields_created, fields_updated, fields_deleted, ignored)
         )
-        logger.warn("Fetch fields for org #%d took %ss" % (org.pk, time.time() - start))
+        logger.info("Fetch fields for org #%d took %ss" % (org.pk, time.time() - start))
 
         start_boundaries = time.time()
 
         boundaries_created, boundaries_updated, boundaries_deleted, ignored = backend.pull_boundaries(org)
 
-        logger.warn(
+        logger.info(
             "Fetched boundaries for org #%d. "
             "Created %s, Updated %s, Deleted %d, Ignored %d"
             % (org.pk, boundaries_created, boundaries_updated, boundaries_deleted, ignored)
         )
 
-        logger.warn("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
+        logger.info("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
         start_contacts = time.time()
 
         contacts_created, contacts_updated, contacts_deleted, ignored = backend.pull_contacts(org, since, until)
 
         cache.set(last_fetch_date_key, until, None)
 
-        logger.warn(
+        logger.info(
             "Fetched contacts for org #%d. "
             "Created %s, Updated %s, Deleted %d, Ignored %d"
             % (org.pk, contacts_created, contacts_updated, contacts_deleted, ignored)
         )
 
-        logger.warn("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
+        logger.info("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
 
         # Squash reporters counts
         ReportersCounter.squash_counts()

@@ -25,7 +25,10 @@ class Migration(migrations.Migration):
             model_name="poll",
             name="org",
             field=models.ForeignKey(
-                related_name="polls", to="orgs.Org", help_text="The organization this poll is part of"
+                related_name="polls",
+                on_delete=models.PROTECT,
+                to="orgs.Org",
+                help_text="The organization this poll is part of",
             ),
             preserve_default=True,
         ),

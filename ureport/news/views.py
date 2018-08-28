@@ -56,6 +56,7 @@ class NewsItemCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         fields = ("title", "link", "category")
+        ordering = ("-pk",)
 
         def get_queryset(self, **kwargs):
             queryset = super(NewsItemCRUDL.List, self).get_queryset(**kwargs)
@@ -102,6 +103,7 @@ class VideoCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         fields = ("title", "video_id", "category")
+        ordering = ("-pk",)
 
         def get_queryset(self, **kwargs):
             queryset = super(VideoCRUDL.List, self).get_queryset(**kwargs)

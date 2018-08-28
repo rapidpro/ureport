@@ -29,14 +29,25 @@ class Migration(migrations.Migration):
                 (
                     "created_by",
                     models.ForeignKey(
-                        help_text="The user which originally created this item", to=settings.AUTH_USER_MODEL
+                        help_text="The user which originally created this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
                     ),
                 ),
                 (
                     "modified_by",
-                    models.ForeignKey(help_text="The user which last modified this item", to=settings.AUTH_USER_MODEL),
+                    models.ForeignKey(
+                        help_text="The user which last modified this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
                 ),
-                ("org", models.ForeignKey(help_text="The organization this category applies to", to="orgs.Org")),
+                (
+                    "org",
+                    models.ForeignKey(
+                        help_text="The organization this category applies to", on_delete=models.PROTECT, to="orgs.Org"
+                    ),
+                ),
             ],
             options={},
             bases=(models.Model,),
@@ -61,12 +72,18 @@ class Migration(migrations.Migration):
                 (
                     "created_by",
                     models.ForeignKey(
-                        help_text="The user which originally created this item", to=settings.AUTH_USER_MODEL
+                        help_text="The user which originally created this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
                     ),
                 ),
                 (
                     "modified_by",
-                    models.ForeignKey(help_text="The user which last modified this item", to=settings.AUTH_USER_MODEL),
+                    models.ForeignKey(
+                        help_text="The user which last modified this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
                 ),
             ],
             options={"abstract": False},
@@ -93,14 +110,25 @@ class Migration(migrations.Migration):
                 (
                     "created_by",
                     models.ForeignKey(
-                        help_text="The user which originally created this item", to=settings.AUTH_USER_MODEL
+                        help_text="The user which originally created this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
                     ),
                 ),
                 (
                     "modified_by",
-                    models.ForeignKey(help_text="The user which last modified this item", to=settings.AUTH_USER_MODEL),
+                    models.ForeignKey(
+                        help_text="The user which last modified this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
                 ),
-                ("org", models.ForeignKey(help_text="The organization this poll is part of", to="orgs.Org")),
+                (
+                    "org",
+                    models.ForeignKey(
+                        help_text="The organization this poll is part of", on_delete=models.PROTECT, to="orgs.Org"
+                    ),
+                ),
             ],
             options={"abstract": False},
             bases=(models.Model,),
@@ -108,13 +136,15 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="featuredresponse",
             name="poll",
-            field=models.ForeignKey(help_text="The poll for this response", to="polls.Poll"),
+            field=models.ForeignKey(help_text="The poll for this response", on_delete=models.PROTECT, to="polls.Poll"),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name="poll",
             name="category",
-            field=models.ForeignKey(help_text="The category this Poll belongs to", to="polls.PollCategory"),
+            field=models.ForeignKey(
+                help_text="The category this Poll belongs to", on_delete=models.PROTECT, to="polls.PollCategory"
+            ),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(name="pollcategory", unique_together=set([("name", "org")])),
@@ -139,14 +169,25 @@ class Migration(migrations.Migration):
                 (
                     "created_by",
                     models.ForeignKey(
-                        help_text="The user which originally created this item", to=settings.AUTH_USER_MODEL
+                        help_text="The user which originally created this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
                     ),
                 ),
                 (
                     "modified_by",
-                    models.ForeignKey(help_text="The user which last modified this item", to=settings.AUTH_USER_MODEL),
+                    models.ForeignKey(
+                        help_text="The user which last modified this item",
+                        on_delete=models.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
                 ),
-                ("poll", models.ForeignKey(help_text="The poll this question is part of", to="polls.Poll")),
+                (
+                    "poll",
+                    models.ForeignKey(
+                        help_text="The poll this question is part of", on_delete=models.PROTECT, to="polls.Poll"
+                    ),
+                ),
             ],
             options={"abstract": False},
             bases=(models.Model,),

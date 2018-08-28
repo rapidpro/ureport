@@ -33,7 +33,8 @@ MANAGERS = ADMINS
 INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat',)
 
 RAVEN_CONFIG = {
-    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN')
+    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
+    'release': '${version}'
 }
 
 # static dir is different for staging

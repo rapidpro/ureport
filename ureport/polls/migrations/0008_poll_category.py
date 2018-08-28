@@ -13,7 +13,11 @@ class Migration(migrations.Migration):
             model_name="poll",
             name="category",
             field=models.ForeignKey(
-                blank=True, to="categories.Category", help_text="The category this Poll belongs to", null=True
+                blank=True,
+                to="categories.Category",
+                on_delete=models.PROTECT,
+                help_text="The category this Poll belongs to",
+                null=True,
             ),
             preserve_default=True,
         )

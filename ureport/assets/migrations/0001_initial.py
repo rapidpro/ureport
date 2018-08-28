@@ -45,6 +45,7 @@ class Migration(migrations.Migration):
                     "created_by",
                     models.ForeignKey(
                         related_name="assets_image_creations",
+                        on_delete=models.PROTECT,
                         to=settings.AUTH_USER_MODEL,
                         help_text="The user which originally created this item",
                     ),
@@ -53,6 +54,7 @@ class Migration(migrations.Migration):
                     "modified_by",
                     models.ForeignKey(
                         related_name="assets_image_modifications",
+                        on_delete=models.PROTECT,
                         to=settings.AUTH_USER_MODEL,
                         help_text="The user which last modified this item",
                     ),
@@ -61,6 +63,7 @@ class Migration(migrations.Migration):
                     "org",
                     models.ForeignKey(
                         related_name="images",
+                        on_delete=models.PROTECT,
                         verbose_name="Org",
                         to="orgs.Org",
                         help_text="The organization in which the image will be used",

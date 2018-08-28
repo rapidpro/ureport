@@ -38,7 +38,9 @@ INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compa
 
 # Set your DSN value
 RAVEN_CONFIG = {
-    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN')
+    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
+    'release': '${version}'
+
 }
 
 # we store files on S3 on prod boxes
