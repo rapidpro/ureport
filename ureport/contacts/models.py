@@ -44,9 +44,9 @@ class ContactField(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    backend = models.ForeignKey(OrgBackend, null=True)
+    backend = models.ForeignKey(OrgBackend, on_delete=models.PROTECT, null=True)
 
-    org = models.ForeignKey(Org, verbose_name=_("Org"), related_name="contactfields")
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, verbose_name=_("Org"), related_name="contactfields")
 
     label = models.CharField(verbose_name=_("Label"), max_length=36)
 
@@ -76,11 +76,11 @@ class Contact(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    backend = models.ForeignKey(OrgBackend, null=True)
+    backend = models.ForeignKey(OrgBackend, on_delete=models.PROTECT, null=True)
 
     uuid = models.CharField(max_length=36, unique=True)
 
-    org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="contacts")
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, verbose_name=_("Organization"), related_name="contacts")
 
     gender = models.CharField(
         max_length=1,
@@ -125,7 +125,7 @@ class ReportersCounter(models.Model):
     COUNTS_SQUASH_LOCK = "org-reporters-counts-squash-lock"
     LAST_SQUASHED_ID_KEY = "org-reporters-last-squashed-id"
 
-    org = models.ForeignKey(Org, related_name="reporters_counters")
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="reporters_counters")
 
     type = models.CharField(max_length=255)
 

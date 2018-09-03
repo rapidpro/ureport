@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
             name="category_image",
             field=models.ForeignKey(
                 to="categories.CategoryImage",
+                on_delete=models.PROTECT,
                 help_text="The splash category image to display for the poll (optional)",
                 null=True,
             ),

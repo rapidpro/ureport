@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 import logging
 import time
 
-import django.db.models.deletion
 from django.db import migrations, models
 
 from ureport.utils import chunk_list
@@ -42,7 +41,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="boundary",
             name="backend",
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to="orgs.OrgBackend"),
+            field=models.ForeignKey(null=True, on_delete=models.PROTECT, to="orgs.OrgBackend"),
         ),
         migrations.RunPython(populate_boundary_backend),
     ]

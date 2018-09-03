@@ -81,8 +81,8 @@ class PublicTest(UreportTest):
         settings_sites_count = len(list(getattr(settings, "PREVIOUS_ORG_SITES", [])))
 
         # remove all orgs
-        Category.objects.all().delete()
         OrgBackend.objects.all().delete()
+        Category.objects.all().delete()
         Org.objects.all().delete()
 
         response = self.client.get(chooser_url)

@@ -25,11 +25,11 @@ class Boundary(models.Model):
     BOUNDARIES_CACHE_TIMEOUT = 60 * 60 * 24 * 15
     BOUNDARIES_CACHE_KEY = "org:%d:boundaries-osm-ids"
 
-    org = models.ForeignKey(Org, verbose_name=_("Organization"), related_name="boundaries")
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, verbose_name=_("Organization"), related_name="boundaries")
 
     is_active = models.BooleanField(default=True)
 
-    backend = models.ForeignKey(OrgBackend, null=True)
+    backend = models.ForeignKey(OrgBackend, on_delete=models.PROTECT, null=True)
 
     osm_id = models.CharField(max_length=15, help_text=_("This is the OSM id for this administrative boundary"))
 
@@ -40,6 +40,7 @@ class Boundary(models.Model):
     parent = models.ForeignKey(
         "locations.Boundary",
         null=True,
+        on_delete=models.PROTECT,
         related_name="children",
         help_text=_("The parent to this political boundary if any"),
     )
