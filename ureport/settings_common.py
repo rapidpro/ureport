@@ -67,6 +67,7 @@ LANGUAGE_CODE = "en"
 
 # Available languages for translation
 LANGUAGES = (
+    ("bs", "Bosnian"),
     ("en", "English"),
     ("fr", "French"),
     ("es", "Spanish"),
@@ -74,6 +75,7 @@ LANGUAGES = (
     ("pt", "Portuguese"),
     ("pt-br", "Brazilian Portuguese"),
     ("uk", "Ukrainian"),
+    ("uz", "Uzbek"),
     ("my", "Burmese"),
     ("id", "Indonesian"),
     ("it", "Italian"),
@@ -869,6 +871,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://uk.ureport.in/count/",
     ),
     dict(
+        name="Uzbekistan",
+        host="//uzbekistan.ureport.in",
+        flag="flag_uz.png",
+        is_static=True,
+        count_link="http://uzbekistan.ureport.in/count/",
+    ),
+    dict(
         name="Western Balkans",
         host="//westernbalkans.ureport.in",
         flag="flag_wb.png",
@@ -892,6 +901,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,  # Default to 10
     "PAGINATE_BY_PARAM": "page_size",  # Allow client to override, using `?page_size=xxx`.
     "MAX_PAGINATE_BY": 100,
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
 }
 
 

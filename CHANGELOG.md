@@ -1,3 +1,15 @@
+v1.0.436
+----------
+ * No response case has a datetime in value, we should not consider that as text if we did not have an input
+
+v1.0.435
+----------
+ * Do not show ignored words on word clouds
+
+v1.0.434
+----------
+ * Support Django 2.0
+
 v1.0.432
 ----------
  * Merge pull request #377 from rapidpro/specific-category-order

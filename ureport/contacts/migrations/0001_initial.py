@@ -16,7 +16,12 @@ class Migration(migrations.Migration):
                 ("label", models.CharField(max_length=36, verbose_name="Label")),
                 ("key", models.CharField(max_length=36, verbose_name="Key")),
                 ("value_type", models.CharField(max_length=1, verbose_name="Field Type")),
-                ("org", models.ForeignKey(related_name="contactfields", verbose_name="Org", to="orgs.Org")),
+                (
+                    "org",
+                    models.ForeignKey(
+                        related_name="contactfields", on_delete=models.PROTECT, verbose_name="Org", to="orgs.Org"
+                    ),
+                ),
             ],
         )
     ]

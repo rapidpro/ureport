@@ -33,6 +33,7 @@ class Migration(migrations.Migration):
             name="org",
             field=models.ForeignKey(
                 related_name="images",
+                on_delete=models.PROTECT,
                 verbose_name="Org",
                 to="orgs.Org",
                 help_text="The organization to which the image will be used",

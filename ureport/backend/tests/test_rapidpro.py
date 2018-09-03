@@ -1014,8 +1014,15 @@ class RapidProBackendTest(UreportTest):
 
     @patch("dash.orgs.models.TembaClient.get_boundaries")
     def test_pull_boundaries(self, mock_get_boundaries):
+        def release_boundary(boundary):
+            for child in boundary.children.all():
+                release_boundary(child)
 
-        Boundary.objects.all().delete()
+            boundary.delete()
+
+        for boundary in Boundary.objects.all():
+            release_boundary(boundary)
+
         geometry = TembaBoundary.Geometry.create(type="MultiPolygon", coordinates=[[1, 2]])
         parent = TembaBoundary.BoundaryRef.create(osm_id="R123", name="Location")
         remote = TembaBoundary.create(
@@ -1031,7 +1038,8 @@ class RapidProBackendTest(UreportTest):
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 0))
 
-        Boundary.objects.all().delete()
+        for boundary in Boundary.objects.all():
+            release_boundary(boundary)
         mock_get_boundaries.return_value = MockClientQuery(
             [
                 TembaBoundary.create(
@@ -1123,7 +1131,9 @@ class RapidProBackendTest(UreportTest):
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
             values={
-                "win": TembaRun.Value.create(value="We'll win today", category="Win", node="ruleset-uuid", time=now)
+                "win": TembaRun.Value.create(
+                    value="We'll win today", input="We'll win today", category="Win", node="ruleset-uuid", time=now
+                )
             },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
             created_on=now,
@@ -1167,7 +1177,11 @@ class RapidProBackendTest(UreportTest):
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-002", name="Davido"),
             responded=True,
-            values={"sing": TembaRun.Value.create(value="I sing", category="Sing", node="ruleset-uuid", time=now)},
+            values={
+                "sing": TembaRun.Value.create(
+                    value="I sing", input="I sing", category="Sing", node="ruleset-uuid", time=now
+                )
+            },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
             created_on=now,
             modified_on=now,
@@ -1182,7 +1196,11 @@ class RapidProBackendTest(UreportTest):
             responded=True,
             values={
                 "play": TembaRun.Value.create(
-                    value="I play basketball", category="Play", node="ruleset-uuid", time=now
+                    value="I play basketball",
+                    input="I play basketball",
+                    category="Play",
+                    node="ruleset-uuid",
+                    time=now,
                 )
             },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
@@ -1223,6 +1241,7 @@ class RapidProBackendTest(UreportTest):
             values={
                 "party": TembaRun.Value.create(
                     value="We'll celebrate today",
+                    input="We'll celebrate today",
                     category="Party",
                     node="ruleset-uuid",
                     time=now + timedelta(minutes=1),
@@ -1304,7 +1323,11 @@ class RapidProBackendTest(UreportTest):
             responded=True,
             values={
                 "dance": TembaRun.Value.create(
-                    value="We'll dance today", category="Dance", node="ruleset-uuid", time=now
+                    value="We'll dance today",
+                    input="We'll dance today",
+                    category="Dance",
+                    node="ruleset-uuid",
+                    time=now,
                 )
             },
             path=[
@@ -1344,7 +1367,11 @@ class RapidProBackendTest(UreportTest):
             responded=True,
             values={
                 "dance": TembaRun.Value.create(
-                    value="We'll dance today", category="Dance", node="ruleset-uuid", time=now
+                    value="We'll dance today",
+                    input="We'll dance today",
+                    category="Dance",
+                    node="ruleset-uuid",
+                    time=now,
                 )
             },
             path=[
@@ -1428,7 +1455,11 @@ class RapidProBackendTest(UreportTest):
             responded=True,
             values={
                 "party": TembaRun.Value.create(
-                    value=long_text, category="Party", node="ruleset-uuid", time=now + timedelta(minutes=1)
+                    value=long_text,
+                    input=long_text,
+                    category="Party",
+                    node="ruleset-uuid",
+                    time=now + timedelta(minutes=1),
                 )
             },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
@@ -1460,7 +1491,7 @@ class RapidProBackendTest(UreportTest):
             responded=True,
             values={
                 "party": TembaRun.Value.create(
-                    value=None, category="Party", node="ruleset-uuid", time=now + timedelta(minutes=1)
+                    value=None, input="Party", category="Party", node="ruleset-uuid", time=now + timedelta(minutes=1)
                 )
             },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
@@ -1484,6 +1515,49 @@ class RapidProBackendTest(UreportTest):
             (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
             (1, 0, 0, 0, 0, 1),
         )
+
+        PollResult.objects.all().delete()
+
+        # no response
+        temba_run_no_response = TembaRun.create(
+            id=1234,
+            flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
+            contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
+            responded=True,
+            values={
+                "dance": TembaRun.Value.create(
+                    value="Whatever", input=None, category="No Response", node="ruleset-uuid", time=now
+                )
+            },
+            path=[
+                TembaRun.Step.create(node="ruleset-uuid", time=now),
+                TembaRun.Step.create(node="actionset-uuid", time=now),
+            ],
+            created_on=now,
+            modified_on=now,
+            exited_on=now,
+            exit_type="completed",
+        )
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run_no_response])]
+
+        with self.assertNumQueries(5):
+            (
+                num_val_created,
+                num_val_updated,
+                num_val_ignored,
+                num_path_created,
+                num_path_updated,
+                num_path_ignored,
+            ) = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual(
+            (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
+            (1, 0, 0, 0, 0, 2),
+        )
+
+        poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
+        self.assertEqual(poll_result.text, "")
 
     @patch("redis.client.StrictRedis.lock")
     @patch("dash.orgs.models.TembaClient.get_archives")
@@ -1527,7 +1601,9 @@ class RapidProBackendTest(UreportTest):
             contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
             responded=True,
             values={
-                "win": TembaRun.Value.create(value="We'll win today", category="Win", node="ruleset-uuid", time=now)
+                "win": TembaRun.Value.create(
+                    value="We'll win today", input="We'll win today", category="Win", node="ruleset-uuid", time=now
+                )
             },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
             created_on=now,
@@ -1589,7 +1665,11 @@ class RapidProBackendTest(UreportTest):
             flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
             contact=ObjectRef.create(uuid="C-002", name="Davido"),
             responded=True,
-            values={"sing": TembaRun.Value.create(value="I sing", category="Sing", node="ruleset-uuid", time=now)},
+            values={
+                "sing": TembaRun.Value.create(
+                    value="I sing", input="I sing", category="Sing", node="ruleset-uuid", time=now
+                )
+            },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],
             created_on=now,
             modified_on=now,
@@ -1604,7 +1684,11 @@ class RapidProBackendTest(UreportTest):
             responded=True,
             values={
                 "play": TembaRun.Value.create(
-                    value="I play basketball", category="Play", node="ruleset-uuid", time=now
+                    value="I play basketball",
+                    input="I play basketball",
+                    category="Play",
+                    node="ruleset-uuid",
+                    time=now,
                 )
             },
             path=[TembaRun.Step.create(node="ruleset-uuid", time=now)],

@@ -17,6 +17,7 @@ IMAGE_TYPES = ((BANNER, _("Banner")), (PATTERN, _("Pattern")), (FLAG, _("Flag"))
 class Image(SmartModel):
     org = models.ForeignKey(
         Org,
+        on_delete=models.PROTECT,
         verbose_name=_("Org"),
         related_name="images",
         help_text=_("The organization to which the image will be used"),
