@@ -67,6 +67,7 @@ LANGUAGE_CODE = "en"
 
 # Available languages for translation
 LANGUAGES = (
+    ("bs", "Bosnian"),
     ("en", "English"),
     ("fr", "French"),
     ("es", "Spanish"),
@@ -74,6 +75,7 @@ LANGUAGES = (
     ("pt", "Portuguese"),
     ("pt-br", "Brazilian Portuguese"),
     ("uk", "Ukrainian"),
+    ("uz", "Uzbek"),
     ("my", "Burmese"),
     ("id", "Indonesian"),
     ("it", "Italian"),
@@ -867,6 +869,13 @@ PREVIOUS_ORG_SITES = [
         flag="flag_uk.png",
         is_static=True,
         count_link="http://uk.ureport.in/count/",
+    ),
+    dict(
+        name="Uzbekistan",
+        host="//uzbekistan.ureport.in",
+        flag="flag_uz.png",
+        is_static=True,
+        count_link="http://uzbekistan.ureport.in/count/",
     ),
     dict(
         name="Western Balkans",
