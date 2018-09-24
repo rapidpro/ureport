@@ -1,3 +1,11 @@
+v1.0.437
+----------
+ * Add bosnian language option
+ * Fix assertion for the country order
+ * Add uzbekistan logo
+ * Update Trinidad and Tobago flag
+ * Add uzbek language
+
 v1.0.436
 ----------
  * No response case has a datetime in value, we should not consider that as text if we did not have an input
