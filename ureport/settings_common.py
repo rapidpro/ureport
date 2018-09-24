@@ -787,6 +787,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://belize.ureport.in/count/",
     ),
     dict(
+        name="Bosnia and Herzegovina",
+        host="//bih.ureport.in/",
+        flag="flag_bs.png",
+        is_static=True,
+        count_link="http://bih.ureport.in/count/",
+    ),
+    dict(
         name="Brazil",
         host="//ureportbrasil.org.br/",
         flag="flag_br.png",

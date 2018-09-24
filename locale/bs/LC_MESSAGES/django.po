@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-10 09:35+0000\n"
-"PO-Revision-Date: 2018-08-29 08:35+0000\n"
+"PO-Revision-Date: 2018-09-14 11:15+0000\n"
 "Last-Translator: Nineta Popovic <npopovic@unicef.org>\n"
 "Language-Team: Bosnian (http://www.transifex.com/rapidpro/ureport/language/bs/)\n"
 "MIME-Version: 1.0\n"
@@ -1455,11 +1455,11 @@ msgstr "Drugo"
 
 #: templates/public/strings_values.haml:9
 msgid "National"
-msgstr "Državni"
+msgstr "Entitet"
 
 #: templates/public/strings_values.haml:11
 msgid "District"
-msgstr "Distrikt"
+msgstr "Opština/Općina"
 
 #: templates/public/strings_values.haml:12
 msgid "Participation Level"
