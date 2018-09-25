@@ -178,17 +178,17 @@ msgstr "Kontent to'plami"
 #: dash/dashblocks/views.py:120
 #, python-format
 msgid "%s Blocks"
-msgstr "%lar to'plami"
+msgstr "%s lar to'plami"
 
 #: dash/dashblocks/views.py:158 smartmin/views.py:1105
 #, python-format
 msgid "Edit %s"
-msgstr "%larni tahrir etish"
+msgstr "%s larni tahrir etish"
 
 #: dash/dashblocks/views.py:182 smartmin/views.py:1328
 #, python-format
 msgid "Create %s"
-msgstr "%larni yaratish"
+msgstr "%s larni yaratish"
 
 #: dash/dashblocks/views.py:184
 msgid "Create Content Block"
@@ -448,7 +448,7 @@ msgstr "Siz kiritgan elektron pochtalardan biri noto'g'ri"
 #: dash/orgs/views.py:323
 #, python-format
 msgid "Manage %(name)s Accounts"
-msgstr "%(ism)lar akkauntlarini boshqarish"
+msgstr "%(name)s lar akkauntlarini boshqarish"
 
 #: dash/orgs/views.py:437 smartmin/views.py:1299
 msgid "Create"
@@ -463,7 +463,7 @@ msgstr "Sizning taklifnoma linkingiz noto'g'ri. Iltimos tashkilotingiz administr
 #: dash/orgs/views.py:501 dash/orgs/views.py:546
 #, python-format
 msgid "Join %(name)s"
-msgstr "%(ism)ga qo'shiling"
+msgstr "%(name)s ga qo'shiling"
 
 #: dash/orgs/views.py:523
 msgid "Join"
@@ -552,7 +552,7 @@ msgstr "Hikoya suratlari"
 #: ureport/polls/views.py:164 ureport/polls/views.py:171
 #, python-format
 msgid "Image %d"
-msgstr "% surati"
+msgstr "%d urati"
 
 #: dash/stories/views.py:92
 msgid "Image to display on story page and in previews. (optional)"
@@ -572,7 +572,7 @@ msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
-msgstr "<b>%(object)s</b>\n ni olib tashlashga ishonchingiz komilmi?"
+msgstr "\n<b>%(object)s</b>\n ni olib tashlashga ishonchingiz komilmi?"
 
 #: smartmin/templates/smartmin/delete_confirm.html:17
 msgid ""
@@ -597,7 +597,10 @@ msgid_plural ""
 "\n"
 "         %(counter)s results\n"
 "        "
-msgstr[0] "%(hisoblagich) natijalari\n"
+msgstr[0] ""
+"\n"
+"         %(counter)s natijalari\n"
+"        "
 
 #: smartmin/templates/smartmin/list.html:85
 #, python-format
@@ -651,7 +654,7 @@ msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
-msgstr "Kechirasiz, siz hozir kira olmaysiz, chunki bizga %(uddaisdan chiqmadi_kirish_vaqt chegarasi)s noto'g'ri kirish harakatlari.\n kelib tushdi"
+msgstr "\n Kechirasiz, siz hozir kira olmaysiz, chunki bizga %(failed_login_limit)s noto'g'ri kirish harakatlari.\n kelib tushdi"
 
 #: smartmin/templates/smartmin/users/user_failed.html:18
 #, python-format
@@ -659,7 +662,10 @@ msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
-msgstr "Iltimos, yana bir bor kirishga harakat qilishdan avval %(to'siq_intervali tugashi)s daqiqalarini kuting.\n"
+msgstr ""
+"\n"
+"      Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqalarini kuting.\n"
+"      "
 
 #: smartmin/templates/smartmin/users/user_failed.html:25
 msgid ""
@@ -691,7 +697,10 @@ msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
-msgstr "<kuchli>Parolingiz muddati tugadi.</kuchli> Sahifa qoidasiga muvofiq, har %(muddati tugagan-kun)s da siz yangi parol tanlashingiz kerak, hamda ushbu parollar avvalgi %(window_kunlar)s da ishlatilmagan bo'lishi lozim.\n"
+msgstr ""
+"\n"
+" <strong>Parolingiz muddati tugadi.</strong> Sahifa qoidasiga muvofiq, har %(expire_days)s da siz yangi parol tanlashingiz kerak, hamda ushbu parollar avvalgi %(window_days)s da ishlatilmagan bo'lishi lozim.\n"
+"  "
 
 #: smartmin/users/views.py:28 smartmin/users/views.py:69
 #: smartmin/users/views.py:87 smartmin/users/views.py:137
@@ -1016,7 +1025,10 @@ msgid ""
 "\n"
 "        To add a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
-msgstr "Twitter ish o'rinlari manbaini qo'shmoqchi bo'lsangiz, siz twitterdan vidjet-ilova identifikatorini olishingiz kerak.\n"
+msgstr ""
+"\n" 
+"       Twitter ish o'rinlari manbaini qo'shmoqchi bo'lsangiz, siz twitterdan vidjet-ilova identifikatorini olishingiz kerak.\n"
+"      "
 
 #: templates/jobs/jobsource_create.haml:12
 #: templates/jobs/jobsource_update.haml:12
@@ -1029,7 +1041,10 @@ msgid ""
 "\n"
 "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
 "      "
-msgstr "<div>Vidjetni yaratganingizdan so'ng, vidjet identifikatori </div>\\da ko'rsatilganidek, url dan nusxa ko'chiring\n"
+msgstr ""
+"\n" 
+"        <div>Vidjetni yaratganingizdan so'ng, vidjet identifikatori </div>\\da ko'rsatilganidek, url dan nusxa ko'chiring\n"
+"      "
 
 #: templates/jobs/jobsource_create.haml:40
 msgid "Back"
@@ -1075,7 +1090,7 @@ msgstr "Mamlakatingizni yaxshilashga yordam berish uchun butun mamlakat bo'yicha
 #: templates/public/about.haml:133
 #, python-format
 msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Boshqa U-Reportyorlar bilan %(mamlakatida) sodir bo'layotgan hodisalar bilan o'rtoqlashing"
+msgstr "Boshqa U-Reportyorlar bilan %(country) sodir bo'layotgan hodisalar bilan o'rtoqlashing"
 
 #: templates/public/about.haml:139
 msgid "CLICK HERE TO JOIN"
@@ -1133,7 +1148,10 @@ msgid ""
 "\n"
 "                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
 "                "
-msgstr "U-Report ijtimoiy xabar berish vositasi bo'lib, u barchaga har qanday jamiyat, dunyoning qaysi burchagidan bo'lmasin, so'rovnomaga javob berish, masalalar haqida axborot berish, bola huquqlarini qo'llab-quvvatlash hamda o'z mamlakatlari aholisi nomidan o'zgarishlarning ijobiy vositachisi sifatida harakatlanishga imkon beradi.\n"
+msgstr "" 
+"\n"
+"                  U-Report ijtimoiy xabar berish vositasi bo'lib, u barchaga har qanday jamiyat, dunyoning qaysi burchagidan bo'lmasin, so'rovnomaga javob berish, masalalar haqida axborot berish, bola huquqlarini qo'llab-quvvatlash hamda o'z mamlakatlari aholisi nomidan o'zgarishlarning ijobiy vositachisi sifatida harakatlanishga imkon beradi.\n"
+"                "
 
 #: templates/public/index.haml:36 templates/public/index.haml:74
 msgid "CURRENT POLL"
@@ -1169,7 +1187,10 @@ msgid ""
 "\n"
 "                                  %(responded)s of %(total)s\n"
 "                                  "
-msgstr "%(umumiy)dan %(javob beruvchilar)\n"
+msgstr ""
+"\n"
+"                                  %(responded)s of %(total)s\n"
+"                                  "
 
 #: templates/public/index.haml:164
 msgid "TRENDING WORDS"
@@ -1293,7 +1314,11 @@ msgid ""
 "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "            "
-msgstr "U-Report %(mamlakat)da Tarmoq Provayderlari yordamida UNICEF homiylik qiladigan bepul dastur hisoblanadi. U-Report hech qanday to'lovlar yoki shaxsiy moliyaviy ma'lumotlarni so'ramaydi. ILTIMOS, sizga shu raqam, yoki Facebook va Twitter sahifalaridan yuborilib, pul to'lovini so'raydigan har qanday xabarlarni e'tiborga olmang. U-Reportning barcha xizmatlari (%(qisqa raqamlar)dagi barcha xabarlar) bepul hisoblanadi.\n"
+msgstr ""
+"\n" 
+"              * U-Report %(country)s Tarmoq Provayderlari yordamida UNICEF homiylik qiladigan bepul dastur hisoblanadi. U-Report hech qanday to'lovlar yoki shaxsiy moliyaviy ma'lumotlarni so'ramaydi. ILTIMOS, sizga shu raqam, yoki Facebook va Twitter sahifalaridan yuborilib, pul to'lovini so'raydigan har qanday xabarlarni e'tiborga olmang. U-Reportning barcha xizmatlari (%(shortcode)s barcha xabarlar) bepul hisoblanadi.\n"
+"\n"
+"            "
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
@@ -1317,7 +1342,10 @@ msgid_plural ""
 "\n"
 "                  %(questions)s questions polled on this topic\n"
 "                "
-msgstr[0] "Shu mavzu bo'yicha so'ralgan %(savollar) savollar\n"
+msgstr[0] ""
+"\n"
+"                  Shu mavzu bo'yicha so'ralgan %(questions)s savollar\n"
+"                "
 
 #: templates/public/polls.haml:43
 msgid "response rate"
@@ -1341,7 +1369,10 @@ msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr "%(javob berganlar) berilgan savollardan %(savollar)ga javob berdilar\n"
+msgstr ""
+"\n" 
+"                    %(responded)s berilgan savollardan %(polled)s javob berdilar\n"
+"                  "
 
 #: templates/public/polls.haml:121
 msgid "KEYWORDS"
@@ -1474,7 +1505,7 @@ msgstr "Natijalar"
 
 #: templates/public/strings_values.haml:16
 msgid "*Other answers include"
-msgstr "Boshqa javoblar o'zida mujassam etadi"
+msgstr "Boshqa javoblar o′zida mujassam etadi"
 
 #: templates/public/strings_values.haml:17
 msgid "Population"
@@ -1482,7 +1513,7 @@ msgstr "Aholi"
 
 #: templates/public/strings_values.haml:18
 msgid "Registered in"
-msgstr "Ro'yxatdan o'tganlar"
+msgstr "Ro′yxatdan o′tganlar"
 
 #: templates/public/strings_values.haml:19
 msgid "Density"
@@ -1522,7 +1553,7 @@ msgstr "KIM BO'LIB ISHLASHI: ENG KO'P AYTILGANLARNING YUQORI 9 TASI"
 
 #: templates/public/ureporters.haml:377
 msgid "Registered"
-msgstr "Ro'yxatdan o'tganlar"
+msgstr "Ro′yxatdan o′tganlar"
 
 #: templates/public/ureporters.haml:392
 msgid "Week of"
@@ -1531,7 +1562,7 @@ msgstr "Haftasi"
 #: ureport/admins/views.py:22
 #, python-format
 msgid "Refreshed %s cache for this organization"
-msgstr "%ning keshi bu tashkilot uchun yangilandi"
+msgstr "%s keshi bu tashkilot uchun yangilandi"
 
 #: ureport/assets/models.py:13
 msgid "Flag"
@@ -1852,7 +1883,7 @@ msgstr "Sizning so'rovnomangiz yangilandi"
 #: ureport/polls/views.py:214
 #, python-format
 msgid "Response %d Reporter"
-msgstr "% Reportoyrning javobi"
+msgstr "%d Reportoyrning javobi"
 
 #: ureport/polls/views.py:214
 msgid "The name or alias of the responder."
@@ -1861,7 +1892,7 @@ msgstr "Javob beruvchining ismi yoki taxallusi."
 #: ureport/polls/views.py:219
 #, python-format
 msgid "Response %d Location"
-msgstr "% javob berilgan yer"
+msgstr "%d javob berilgan yer"
 
 #: ureport/polls/views.py:219
 msgid "The location of the responder."
@@ -1870,7 +1901,7 @@ msgstr "Javob beruvchining joylashuv yeri"
 #: ureport/polls/views.py:224
 #, python-format
 msgid "Response %d Message"
-msgstr "% javoblar xabarlarda"
+msgstr "%d javoblar xabarlarda"
 
 #: ureport/polls/views.py:224
 msgid "The text of the featured response."
@@ -1925,7 +1956,7 @@ msgstr "#%d so'rovni yangilash #%d tashkilotda rejalashtirildi"
 #: ureport/public/views.py:310
 #, python-format
 msgid "%s"
-msgstr "%ning"
+msgstr "%s"
 
 #: ureport/settings_common.py:132
 msgid "Whether this org should be show on the landing page"
