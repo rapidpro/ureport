@@ -1,3 +1,8 @@
+v1.0.438
+----------
+ * Refactor strings on bosnian files
+ * Add bosnia country flag
+
 v1.0.437
 ----------
  * Add bosnian language option
