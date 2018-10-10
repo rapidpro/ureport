@@ -283,6 +283,11 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
+        name="limit_states",
+        field=dict(help_text=_("The states to show on maps only"), required=False),
+        superuser_only=True,
+    ),
+    dict(
         name="google_tracking_id",
         field=dict(
             help_text=_("The Google Analytics Tracking ID for this organization"),
