@@ -1000,8 +1000,8 @@ class PublicTest(UreportTest):
             features=[
                 dict(
                     type="Feature",
-                    properties=dict(id="R34567", level=2, name="Lugogo"),
-                    geometry=dict(type="MultiPolygon", coordinates=[[5, 6]]),
+                    properties=dict(id="R23456", level=1, name="Kampala"),
+                    geometry=dict(type="MultiPolygon", coordinates=[[3, 4]]),
                 )
             ],
         )
