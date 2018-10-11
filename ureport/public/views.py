@@ -219,7 +219,6 @@ class BoundaryView(SmartTemplateView):
             osm_id = self.kwargs.get("osm_id", None)
 
             org_boundaries = org.boundaries.all()
-            top_level = 1
 
             limit_states = org.get_config("common.limit_states")
             if limit_states:
@@ -229,13 +228,11 @@ class BoundaryView(SmartTemplateView):
                     | Q(parent__name__in=limit_states, level=2)
                     | Q(parent__parent__name__in=limit_states, level=3)
                 )
-                if len(limit_states) == 1:
-                    top_level = 2
 
             if osm_id:
                 location_boundaries = org_boundaries.filter(parent__osm_id=osm_id)
             else:
-                location_boundaries = org_boundaries.filter(level=top_level)
+                location_boundaries = org_boundaries.filter(level=1)
 
         boundaries = dict(
             type="FeatureCollection",
