@@ -1,3 +1,12 @@
+v1.0.439
+----------
+ * Pin django to 2.0.9
+ * Update tests
+ * Change scale label to use ALL instead of National
+ * Update django
+ * Add config to control the states we render on the maps
+ * Add results grouped by gender and by age to the API
+
 v1.0.438
 ----------
  * Refactor strings on bosnian files
