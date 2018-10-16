@@ -56,7 +56,7 @@ class PublicTest(UreportTest):
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 43)
+        self.assertEqual(len(response.context["form"].fields), 44)
 
     def test_count(self):
         count_url = reverse("public.count")
@@ -909,6 +909,15 @@ class PublicTest(UreportTest):
             geometry='{"type":"MultiPolygon", "coordinates":[[9, 9]]}',
         )
 
+        self.kasese = Boundary.objects.create(
+            org=self.uganda,
+            osm_id="R999",
+            name="Kasese",
+            level=1,
+            parent=self.country,
+            geometry='{"type":"MultiPolygon", "coordinates":[[10, 10]]}',
+        )
+
         self.falcons = Boundary.objects.create(
             org=self.uganda,
             osm_id="R9988",
@@ -928,6 +937,11 @@ class PublicTest(UreportTest):
         output = dict(
             type="FeatureCollection",
             features=[
+                dict(
+                    type="Feature",
+                    properties=dict(id="R999", level=1, name="Kasese"),
+                    geometry=dict(type="MultiPolygon", coordinates=[[10, 10]]),
+                ),
                 dict(
                     type="Feature",
                     properties=dict(id="R987", level=1, name="Mbarara"),
@@ -973,6 +987,46 @@ class PublicTest(UreportTest):
             ],
         )
 
+        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
+
+        self.uganda.set_config("common.limit_states", "Kampala")
+        self.uganda.set_config("common.is_global", False)
+
+        response = self.client.get(country_boundary_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+
+        output = dict(
+            type="FeatureCollection",
+            features=[
+                dict(
+                    type="Feature",
+                    properties=dict(id="R23456", level=1, name="Kampala"),
+                    geometry=dict(type="MultiPolygon", coordinates=[[3, 4]]),
+                )
+            ],
+        )
+        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
+
+        self.uganda.set_config("common.limit_states", "Kampala, Kasese")
+
+        response = self.client.get(country_boundary_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+
+        output = dict(
+            type="FeatureCollection",
+            features=[
+                dict(
+                    type="Feature",
+                    properties=dict(id="R999", level=1, name="Kasese"),
+                    geometry=dict(type="MultiPolygon", coordinates=[[10, 10]]),
+                ),
+                dict(
+                    type="Feature",
+                    properties=dict(id="R23456", level=1, name="Kampala"),
+                    geometry=dict(type="MultiPolygon", coordinates=[[3, 4]]),
+                ),
+            ],
+        )
         self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
 
     def test_stories_list(self):
