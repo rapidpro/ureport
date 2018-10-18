@@ -129,12 +129,16 @@ class PollReadSerializer(serializers.ModelSerializer):
             results = question.get_results()
             if results:
                 results_dict = results[0]
+            results_by_age = question.get_results(segment=dict(age="Age"))
+            results_by_gender = question.get_results(segment=dict(gender="Gender"))
             questions.append(
                 {
                     "id": question.pk,
                     "ruleset_uuid": question.ruleset_uuid,
                     "title": question.title,
                     "results": results_dict,
+                    "results_by_age": results_by_age,
+                    "results_by_gender": results_by_gender,
                 }
             )
 
