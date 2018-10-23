@@ -929,7 +929,7 @@ class PollQuestion(SmartModel):
                         categories_count = dict()
                         for categorie_label in categories_label:
                             if categorie_label.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
-                                categories_count[categorie_label.lower()] = 0
+                                categories_count[categorie_label] = 0
 
                         for result_key, result_count in born_results.items():
                             age = poll_year - int(result_key[-4:])
@@ -943,7 +943,7 @@ class PollQuestion(SmartModel):
                                         if result_key.startswith(
                                             "ruleset:%s:category:%s:" % (self.ruleset_uuid, categorie_label.lower())
                                         ):
-                                            categories_count[categorie_label.lower()] += result_count
+                                            categories_count[categorie_label] += result_count
 
                         categories = [dict(count=v, label=k) for k, v in categories_count.items()]
 

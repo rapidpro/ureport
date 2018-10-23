@@ -2161,35 +2161,35 @@ class PollQuestionTest(UreportTest):
                     dict(
                         set=25,
                         unset=0,
-                        categories=[dict(count=25, label="yes"), dict(count=0, label="no")],
+                        categories=[dict(count=25, label="Yes"), dict(count=0, label="No")],
                         label="0-14",
                     ),
                     dict(
                         set=10,
                         unset=0,
-                        categories=[dict(count=10, label="yes"), dict(count=0, label="no")],
+                        categories=[dict(count=10, label="Yes"), dict(count=0, label="No")],
                         label="15-19",
                     ),
                     dict(
                         set=0,
                         unset=100,
-                        categories=[dict(count=0, label="yes"), dict(count=0, label="no")],
+                        categories=[dict(count=0, label="Yes"), dict(count=0, label="No")],
                         label="20-24",
                     ),
                     dict(
                         set=12,
                         unset=0,
-                        categories=[dict(count=0, label="yes"), dict(count=12, label="no")],
+                        categories=[dict(count=0, label="Yes"), dict(count=12, label="No")],
                         label="25-30",
                     ),
                     dict(
                         set=0,
                         unset=0,
-                        categories=[dict(count=0, label="yes"), dict(count=0, label="no")],
+                        categories=[dict(count=0, label="Yes"), dict(count=0, label="No")],
                         label="31-34",
                     ),
                     dict(
-                        set=0, unset=0, categories=[dict(count=0, label="yes"), dict(count=0, label="no")], label="35+"
+                        set=0, unset=0, categories=[dict(count=0, label="Yes"), dict(count=0, label="No")], label="35+"
                     ),
                 ],
             )

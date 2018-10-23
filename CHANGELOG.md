@@ -1,3 +1,8 @@
+v1.0.440
+----------
+ * Merge pull request #385 from rapidpro/age-category-case
+ * Keep category case for age  seggments
+
 v1.0.439
 ----------
  * Pin django to 2.0.9
