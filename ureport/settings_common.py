@@ -81,6 +81,7 @@ LANGUAGES = (
     ("it", "Italian"),
     ("ro", "Romanian"),
     ("vi", "Vietnamese"),
+    ("sr", "Serbian"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -853,6 +854,13 @@ PREVIOUS_ORG_SITES = [
         flag="flag_nz.png",
         is_static=True,
         count_link="http://newzealand.ureport.in/count/",
+    ),
+    dict(
+        name="Serbia",
+        host="//serbia.ureport.in/",
+        flag="flag_sr.png",
+        is_static=True,
+        count_link="http://serbia.ureport.in/count/",
     ),
     dict(
         name="Syria",
