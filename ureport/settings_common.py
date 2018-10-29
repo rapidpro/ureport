@@ -81,6 +81,7 @@ LANGUAGES = (
     ("it", "Italian"),
     ("ro", "Romanian"),
     ("vi", "Vietnamese"),
+    ("sr", "Serbian"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -280,6 +281,11 @@ ORG_CONFIG_FIELDS = [
             help_text=_("11 colors for styling maps, use comma between colors, not used if not 11 colors"),
             required=False,
         ),
+        superuser_only=True,
+    ),
+    dict(
+        name="limit_states",
+        field=dict(help_text=_("The states to show on maps only"), required=False),
         superuser_only=True,
     ),
     dict(
@@ -848,6 +854,13 @@ PREVIOUS_ORG_SITES = [
         flag="flag_nz.png",
         is_static=True,
         count_link="http://newzealand.ureport.in/count/",
+    ),
+    dict(
+        name="Serbia",
+        host="//serbia.ureport.in/",
+        flag="flag_sr.png",
+        is_static=True,
+        count_link="http://serbia.ureport.in/count/",
     ),
     dict(
         name="Syria",

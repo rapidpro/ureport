@@ -234,7 +234,7 @@ initMap = (id, geojson, ajaxUrl, districtZoom, colorsList=[], wardZoom, reporter
     html += "<div class='scale-map-hline primary-border-color'></div>"
     html += "<div class='scale-map-vline primary-border-color'></div>"
     html += "<div class='scale-map-vline-extended primary-border-color'></div>"
-    html += "<div class='national-level primary-color'>" + window.string_National.toUpperCase() + "</div>"
+    html += "<div class='national-level primary-color'>" + window.string_All.toUpperCase() + "</div>"
     html += "<div class='state-level primary-color'>" + window.string_State.toUpperCase() + "</div>"
     html += "<div class='district-level primary-color'>" + window.string_District.toUpperCase() + "</div>"
 

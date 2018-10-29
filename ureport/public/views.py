@@ -13,6 +13,7 @@ from smartmin.views import SmartReadView, SmartTemplateView
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
@@ -217,10 +218,21 @@ class BoundaryView(SmartTemplateView):
         else:
             osm_id = self.kwargs.get("osm_id", None)
 
+            org_boundaries = org.boundaries.all()
+
+            limit_states = org.get_config("common.limit_states")
+            if limit_states:
+                limit_states = [elt.strip() for elt in limit_states.split(",")]
+                org_boundaries = org_boundaries.filter(
+                    Q(level=1, name__in=limit_states)
+                    | Q(parent__name__in=limit_states, level=2)
+                    | Q(parent__parent__name__in=limit_states, level=3)
+                )
+
             if osm_id:
-                location_boundaries = org.boundaries.filter(parent__osm_id=osm_id)
+                location_boundaries = org_boundaries.filter(parent__osm_id=osm_id)
             else:
-                location_boundaries = org.boundaries.filter(level=1)
+                location_boundaries = org_boundaries.filter(level=1)
 
         boundaries = dict(
             type="FeatureCollection",
