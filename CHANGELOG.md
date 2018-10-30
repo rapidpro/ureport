@@ -1,3 +1,8 @@
+v1.0.442
+----------
+ * Add locations stats to poll API endpoint
+ * Update pt_br strings translations
+
 v1.0.441
 ----------
  * Add Serbia flag, update settings
