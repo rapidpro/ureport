@@ -375,6 +375,9 @@ class UreportAPITests(APITestCase):
                             results=dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT"),
                             results_by_age=[dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")],
                             results_by_gender=[dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")],
+                            results_by_location=[
+                                dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")
+                            ],
                         )
                     ],
                 ),
