@@ -367,6 +367,19 @@
 
   - block navbar
     - if org
+      %div#ureport-policies-bar{ style: 'border-color: {{ org|config:"primary_color" }}' }
+        %div.content
+          - trans "This website uses cookies to give you an incredible experience. By using this website you agree to the "
+          %a{ href:""}
+            - trans "terms"
+          - trans "and"
+          %a{ href:""}
+            - trans "terms 2"
+        %div.policies-close
+          %div.policies-close-click
+            %a.primary-color{ href:"javascript:closePoliciesBar()" }
+              X
+
       %header#ureport-public-navbar.ureport-header-navbar.ureport-public-navbar.navbar.navbar-static-top{ role:"banner"}
         .container
           .navbar-header
@@ -526,6 +539,19 @@
   <script type="text/javascript" src="{{ STATIC_URL }}js/gradientfactory.js"></script>
 
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  <script>
+    function closePoliciesBar() {
+      $('#ureport-policies-bar').removeClass('policies-show-bar');
+      localStorage.setItem('ureport-policies-bar', 1);
+    }
+
+    $(document).ready(function() {
+      if (!localStorage.getItem('ureport-policies-bar')) {
+        $('#ureport-policies-bar').addClass('policies-show-bar');
+      }
+    });
+  </script>
 
   -#-#
   -#-#  To stick the menu to the top of window
