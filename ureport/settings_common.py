@@ -572,7 +572,6 @@ PERMISSIONS = {
     ),  # can view a list of the objects
     "dashblocks.dashblock": ("html",),
     "orgs.org": ("choose", "edit", "home", "manage_accounts", "create_login", "join", "refresh_cache"),
-    "policies.policy": ("admin",),
     "polls.poll": ("questions", "responses", "images", "pull_refresh", "poll_date", "poll_flow"),
     "stories.story": ("html", "images"),
 }
@@ -618,10 +617,7 @@ GROUP_PERMISSIONS = {
         "stories.storyimage.*",
         "users.user_profile",
     ),
-    "Global": (
-        "countries.countryalias.*",
-        # "policies.*",
-    ),
+    "Global": ("countries.countryalias.*",),
 }
 
 # -----------------------------------------------------------------------------------

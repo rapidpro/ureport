@@ -24,7 +24,7 @@ class PoliciesCRUDL(SmartCRUDL):
     model = Policy
     actions = ("create", "update", "read", "admin", "history")
 
-    class Admin(SmartListView):
+    class Admin(OrgPermsMixin, SmartListView):
         ordering = ("-created_on",)
         link_fields = ("policy_type",)
         title = _("Policies")
@@ -68,7 +68,7 @@ class PoliciesCRUDL(SmartCRUDL):
             )
             return obj
 
-    class History(SmartReadView):
+    class History(OrgPermsMixin, SmartReadView):
         def derive_title(self):
             return self.get_object().get_policy_type_display()
 
