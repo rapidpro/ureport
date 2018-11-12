@@ -28,7 +28,6 @@ class PolicyTest(UreportTest):
         self.assertTrue("summary" in response.context["form"].fields)
         self.assertTrue("policy_type" in response.context["form"].fields)
         self.assertTrue("language" in response.context["form"].fields)
-        self.assertIsInstance(response.context["form"].fields["policy_type"].choices.field, Policy.TYPE_CHOICES)
         self.assertEqual(
             list(response.context["form"].fields["policy_type"].choices),
             [("", "---------"), ("privacy", "Privacy Policy")],
