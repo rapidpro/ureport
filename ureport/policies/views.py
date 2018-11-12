@@ -12,9 +12,6 @@ from .models import Policy
 
 
 class PoliciesForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(PoliciesForm, self).__init__(*args, **kwargs)
-
     class Meta:
         model = Policy
         fields = ("is_active", "policy_type", "language", "body", "summary")
@@ -43,13 +40,6 @@ class PoliciesCRUDL(SmartCRUDL):
         form_class = PoliciesForm
         success_url = "@policies.policy_admin"
         fields = ("is_active", "body", "summary", "policy_type", "language")
-
-        def derive_title(self):
-            return _("Edit %s") % self.get_object().get_policy_type_display()
-
-        def get_form_kwargs(self):
-            kwargs = super(PoliciesCRUDL.Update, self).get_form_kwargs()
-            return kwargs
 
     class Create(OrgPermsMixin, SmartCreateView):
         form_class = PoliciesForm

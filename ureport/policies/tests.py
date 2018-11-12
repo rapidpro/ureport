@@ -131,6 +131,6 @@ class PolicyTest(UreportTest):
     def test_policy(self):
         self.login(self.superuser)
         policy = Policy.objects.get(policy_type="privacy")
-        self.assertEqual("Privacy matters", policy.get_rendered_body())
-        self.assertEqual("Summary", policy.get_rendered_summary())
+        self.assertEqual("<p>Privacy matters</p>", policy.get_rendered_body())
+        self.assertEqual("<p>Summary</p>", policy.get_rendered_summary())
         self.assertEqual("English", policy.get_policy_language())
