@@ -59,7 +59,7 @@ class PolicyTest(UreportTest):
              ("tos", "Terms of Service"),
              ("cookie", "Cookie Policy")],
         )
-        self.assertEqual(Policy.objects.count(), 0)
+        self.assertEqual(Policy.objects.count(), 3)
 
         response = self.client.post(create_url, dict(), SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
@@ -92,7 +92,7 @@ class PolicyTest(UreportTest):
         self.login(self.superuser)
 
         response = self.client.get(list_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(len(response.context["active_policies"]), 2)
+        self.assertEqual(len(response.context["active_policies"]), 3)
         self.assertTrue(self.privacy in response.context["active_policies"])
         self.assertFalse(self.tos in response.context["active_policies"])
 
@@ -103,5 +103,5 @@ class PolicyTest(UreportTest):
 
         self.login(self.superuser)
 
-        response = self.client.get(read_url)
+        response = self.client.get(read_url, SERVER_NAME="nigeria.ureport.io")
         self.assertContains(response, "Privacy matters")
