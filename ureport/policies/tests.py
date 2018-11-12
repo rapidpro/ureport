@@ -116,7 +116,7 @@ class PolicyTest(UreportTest):
 
     def test_admin(self):
         self.login(self.superuser)
-        response = self.client.get(reverse("policies.policy_admin"))
+        response = self.client.get(reverse("policies.policy_admin"), SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(3, response.context["active_policies"].count())
 
         post_data = dict(
