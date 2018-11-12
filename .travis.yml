@@ -23,6 +23,6 @@ before_script:
 - ln -s $TRAVIS_BUILD_DIR/ureport/settings.py.postgres $TRAVIS_BUILD_DIR/ureport/settings.py
 script:
 - flake8
-- coverage run --source="." manage.py test ureport/policies --verbosity=2 --noinput
+- coverage run --source="." manage.py test ureport ureport/admins ureport/assets ureport/contacts ureport/countries ureport/jobs ureport/locations ureport/news ureport/policies ureport/polls ureport/public ureport/utils --verbosity=2 --noinput
 after_success:
 - coveralls
