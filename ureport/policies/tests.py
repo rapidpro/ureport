@@ -13,12 +13,16 @@ class PolicyTest(UreportTest):
         self.nigeria.language = "en"
 
     def test_create_policy(self):
-        self.login(self.superuser)
-
         create_url = reverse("policies.policy_create")
         response = self.client.get(create_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertLoginRedirect(response)
 
-        self.assertEqual(len(response.context["form"].fields), 4)
+        self.login(self.superuser)
+
+        response = self.client.get(create_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(len(response.context["form"].fields), 5)
         self.assertTrue("org" not in response.context["form"].fields)
         self.assertTrue("body" in response.context["form"].fields)
         self.assertTrue("summary" in response.context["form"].fields)
