@@ -30,7 +30,10 @@ class PolicyTest(UreportTest):
         self.assertTrue("language" in response.context["form"].fields)
         self.assertEqual(
             list(response.context["form"].fields["policy_type"].choices),
-            [("", "---------"), ("privacy", "Privacy Policy")],
+            [("", "---------"),
+             ("privacy", "Privacy Policy"),
+             ("tos", "Terms of Service"),
+             ("cookie", "Cookie Policy")],
         )
         self.assertEqual(Policy.objects.count(), 0)
 
