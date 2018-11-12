@@ -116,17 +116,12 @@ class PolicyTest(UreportTest):
 
     def test_admin(self):
         self.login(self.superuser)
-        # response = self.client.get(reverse("policies.policy_admin"), SERVER_NAME="nigeria.ureport.io")
-        # print(response)
-        # self.assertEqual(3, response.context["active_policies"].count())
-
         post_data = dict(
             policy_type="privacy", body="My privacy policy update", summary="the summary"
         )
         self.client.post(reverse("policies.policy_create"), post_data, SERVER_NAME="nigeria.ureport.io")
         response = self.client.get(reverse("policies.policy_admin"), SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(3, response.context["active_policies"].count())
-        self.assertEqual(1, response.context["object_list"].count())
 
     def test_policy(self):
         policy = Policy.objects.get(policy_type="privacy")
