@@ -61,8 +61,3 @@ class PolicyTest(UreportTest):
         self.assertEqual("<p>Privacy matters</p>", policy.get_rendered_body())
         self.assertEqual("<p>Summary</p>", policy.get_rendered_summary())
         self.assertEqual("English", policy.get_policy_language())
-
-    def test_history(self):
-        self.login(self.superuser)
-        response = self.client.get(reverse("policies.policy_history", args=[1]), SERVER_NAME="nigeria.ureport.io")
-        self.assertContains(response, "Privacy")
