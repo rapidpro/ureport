@@ -12,6 +12,30 @@ class PolicyTest(UreportTest):
 
         self.nigeria.language = "en"
 
+        self.privacy = Policy.objects.create(
+            policy_type=Policy.TYPE_PRIVACY,
+            body="Privacy matters",
+            summary="Summary",
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
+        self.tos = Policy.objects.create(
+            policy_type=Policy.TYPE_TOS,
+            body="These are the terms",
+            summary="You need to accept these",
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
+        self.cookie = Policy.objects.create(
+            policy_type=Policy.TYPE_COOKIE,
+            body="C is for Cookie",
+            summary="That's good enough for me!",
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
     def test_create_policy(self):
         create_url = reverse("policies.policy_create")
         response = self.client.get(create_url, SERVER_NAME="nigeria.ureport.io")
@@ -60,25 +84,7 @@ class PolicyTest(UreportTest):
         self.assertEqual(policy.language, self.nigeria.language)
 
     def test_list_policies(self):
-        list_url = reverse("policies.admin")
-
-        self.privacy = Policy.objects.create(
-            body="First Privacy Policy",
-            summary="U-Report Policy",
-            policy_type="privacy",
-            language=self.nigeria.language,
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        self.tos = Policy.objects.create(
-            body="First ToS Policy",
-            summary="U-Report Terms of Service",
-            policy_type="tos",
-            language=self.nigeria.language,
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
+        list_url = reverse("policies.policy_admin")
 
         response = self.client.get(list_url, SERVER_NAME="nigeria.ureport.io")
         self.assertLoginRedirect(response)
@@ -89,3 +95,13 @@ class PolicyTest(UreportTest):
         self.assertEqual(len(response.context["active_policies"]), 2)
         self.assertTrue(self.privacy in response.context["active_policies"])
         self.assertFalse(self.tos in response.context["active_policies"])
+
+    def test_read_policy(self):
+        read_url = reverse("policies.policy_read", args=["privacy"])
+        response = self.client.get(read_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertLoginRedirect(response)
+
+        self.login(self.superuser)
+
+        response = self.client.get(read_url)
+        self.assertContains(response, "Privacy matters")
