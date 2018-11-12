@@ -117,7 +117,6 @@ class PolicyTest(UreportTest):
     def test_admin(self):
         self.login(self.superuser)
         response = self.client.get(reverse("policies.policy_admin"))
-        self.assertEqual(200, response.status_code)
         self.assertEqual(3, response.context["active_policies"].count())
 
         post_data = dict(
@@ -129,7 +128,6 @@ class PolicyTest(UreportTest):
         self.assertEqual(1, response.context["object_list"].count())
 
     def test_policy(self):
-        self.login(self.superuser)
         policy = Policy.objects.get(policy_type="privacy")
         self.assertEqual("<p>Privacy matters</p>", policy.get_rendered_body())
         self.assertEqual("<p>Summary</p>", policy.get_rendered_summary())
