@@ -94,7 +94,7 @@ class PolicyTest(UreportTest):
         response = self.client.get(list_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(len(response.context["active_policies"]), 4)
         self.assertTrue(self.privacy in response.context["active_policies"])
-        self.assertFalse(self.tos in response.context["active_policies"])
+        self.assertTrue(self.tos in response.context["active_policies"])
 
     def test_read_policy(self):
         read_url = reverse("policies.policy_read", args=["privacy"])
