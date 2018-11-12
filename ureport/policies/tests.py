@@ -12,30 +12,6 @@ class PolicyTest(UreportTest):
 
         self.nigeria.language = "en"
 
-        self.privacy = Policy.objects.create(
-            policy_type=Policy.TYPE_PRIVACY,
-            body="Privacy matters",
-            summary="Summary",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        self.tos = Policy.objects.create(
-            policy_type=Policy.TYPE_TOS,
-            body="These are the terms",
-            summary="You need to accept these",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        self.cookie = Policy.objects.create(
-            policy_type=Policy.TYPE_COOKIE,
-            body="C is for Cookie",
-            summary="That's good enough for me!",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
     def test_create_policy(self):
         create_url = reverse("policies.policy_create")
         response = self.client.get(create_url, SERVER_NAME="nigeria.ureport.io")
@@ -59,7 +35,7 @@ class PolicyTest(UreportTest):
              ("tos", "Terms of Service"),
              ("cookie", "Cookie Policy")],
         )
-        self.assertEqual(Policy.objects.count(), 3)
+        self.assertEqual(Policy.objects.count(), 0)
 
         response = self.client.post(create_url, dict(), SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
@@ -71,14 +47,19 @@ class PolicyTest(UreportTest):
         self.assertTrue("language" in response.context["form"].errors.keys())
 
         post_data = dict(
-            body="Second Privacy Policy", summary="U-Report Policy", policy_type="privacy", language=self.nigeria.language
+            body="Privacy matters",
+            summary="U-Report Policy",
+            policy_type="privacy",
+            language=self.nigeria.language,
+            created_by=self.admin,
+            modified_by=self.admin
         )
 
         response = self.client.post(create_url, post_data, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(Policy.objects.count(), 4)
+        self.assertEqual(Policy.objects.count(), 1)
         policy = Policy.objects.get()
 
-        self.assertEqual(policy.body, "First Privacy Policy")
+        self.assertEqual(policy.body, "Privacy matters")
         self.assertEqual(policy.summary, "U-Report Policy")
         self.assertEqual(policy.policy_type, "privacy")
         self.assertEqual(policy.language, self.nigeria.language)
@@ -92,7 +73,7 @@ class PolicyTest(UreportTest):
         self.login(self.superuser)
 
         response = self.client.get(list_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(len(response.context["active_policies"]), 4)
+        self.assertEqual(len(response.context["active_policies"]), 1)
         self.assertTrue(self.privacy in response.context["active_policies"])
         self.assertTrue(self.tos in response.context["active_policies"])
 
@@ -104,4 +85,4 @@ class PolicyTest(UreportTest):
         self.login(self.superuser)
 
         response = self.client.get(read_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertContains(response, "Second Privacy Policy")
+        self.assertContains(response, "Privacy matters")
