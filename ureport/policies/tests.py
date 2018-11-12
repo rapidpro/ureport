@@ -42,7 +42,7 @@ class PolicyTest(UreportTest):
         self.assertTrue(response.context["form"].errors)
         self.assertEqual(len(response.context["form"].errors.keys()), 3)
         self.assertTrue("body" in response.context["form"].errors.keys())
-        self.assertTrue("summary" in response.context["form"].errors.keys())
+        self.assertFalse("summary" in response.context["form"].errors.keys())
         self.assertTrue("policy_type" in response.context["form"].errors.keys())
         self.assertTrue("language" in response.context["form"].errors.keys())
 
