@@ -115,9 +115,6 @@ class PolicyTest(UreportTest):
         self.assertContains(response, "Privacy matters")
 
     def test_admin(self):
-        response = self.client.get(reverse("policies.policy_admin"))
-        self.assertRedirect(response, reverse("users.user_login"))
-
         self.login(self.superuser)
         response = self.client.get(reverse("policies.policy_admin"))
         self.assertEqual(200, response.status_code)
@@ -130,3 +127,10 @@ class PolicyTest(UreportTest):
         response = self.client.get(reverse("policies.policy_admin"))
         self.assertEqual(3, response.context["active_policies"].count())
         self.assertEqual(1, response.context["object_list"].count())
+
+    def test_policy(self):
+        self.login(self.superuser)
+        policy = Policy.objects.get(policy_type="privacy")
+        self.assertEqual("Privacy matters", policy.get_rendered_body())
+        self.assertEqual("Summary", policy.get_rendered_summary())
+        self.assertEqual("English", policy.get_policy_language())
