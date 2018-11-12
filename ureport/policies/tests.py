@@ -124,7 +124,7 @@ class PolicyTest(UreportTest):
             policy_type="privacy", body="My privacy policy update", summary="the summary"
         )
         self.client.post(reverse("policies.policy_create"), post_data, SERVER_NAME="nigeria.ureport.io")
-        response = self.client.get(reverse("policies.policy_admin"))
+        response = self.client.get(reverse("policies.policy_admin"), SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(3, response.context["active_policies"].count())
         self.assertEqual(1, response.context["object_list"].count())
 
