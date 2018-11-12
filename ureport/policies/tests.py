@@ -65,5 +65,4 @@ class PolicyTest(UreportTest):
     def test_history(self):
         self.login(self.superuser)
         response = self.client.get(reverse("policies.policy_history", args=[1]), SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(1, response.context["object_list"].count())
         self.assertContains("Privacy", response)
