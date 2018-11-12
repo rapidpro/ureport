@@ -15,13 +15,13 @@ class PolicyTest(UreportTest):
     def test_create_policy(self):
         create_url = reverse("policies.policy_create")
         response = self.client.get(create_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertLoginRedirect(response)
 
+        self.assertLoginRedirect(response)
         self.login(self.superuser)
 
         response = self.client.get(create_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.status_code, 200)
 
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["form"].fields), 5)
         self.assertTrue("org" not in response.context["form"].fields)
         self.assertTrue("body" in response.context["form"].fields)
@@ -40,7 +40,7 @@ class PolicyTest(UreportTest):
         response = self.client.post(create_url, dict(), SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
         self.assertTrue(response.context["form"].errors)
-        self.assertEqual(len(response.context["form"].errors.keys()), 4)
+        self.assertEqual(len(response.context["form"].errors.keys()), 3)
         self.assertTrue("body" in response.context["form"].errors.keys())
         self.assertTrue("summary" in response.context["form"].errors.keys())
         self.assertTrue("policy_type" in response.context["form"].errors.keys())

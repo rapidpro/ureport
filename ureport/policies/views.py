@@ -55,10 +55,6 @@ class PoliciesCRUDL(SmartCRUDL):
         form_class = PoliciesForm
         success_url = "@policies.policy_admin"
 
-        def get_form_kwargs(self):
-            kwargs = super(PoliciesCRUDL.Create, self).get_form_kwargs()
-            return kwargs
-
         def derive_fields(self):
             return ("body", "summary", "policy_type", "language")
 
