@@ -113,3 +113,20 @@ class PolicyTest(UreportTest):
         self.login(self.superuser)
         response = self.client.get(reverse("policies.policy_read", args=["privacy"]), SERVER_NAME="nigeria.ureport.io")
         self.assertContains(response, "Privacy matters")
+
+    def test_admin(self):
+        response = self.client.get(reverse("policies.policy_admin"))
+        self.assertRedirect(response, reverse("users.user_login"))
+
+        self.login(self.superuser)
+        response = self.client.get(reverse("policies.policy_admin"))
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(3, response.context["active_policies"].count())
+
+        post_data = dict(
+            policy_type="privacy", body="My privacy policy update", summary="the summary"
+        )
+        self.client.post(reverse("policies.policy_create"), post_data)
+        response = self.client.get(reverse("policies.policy_admin"))
+        self.assertEqual(3, response.context["active_policies"].count())
+        self.assertEqual(1, response.context["object_list"].count())
