@@ -19,29 +19,40 @@
         %a{href:"{% url 'policies.policy_update' policy.id%}"}
           -trans "edit"
 
-
-  -if object_list
-    %hr
+  %div.row
+    %div.col-md-12
       %h4
         -trans "Previous Policies"
-      %table
+      %table.list-table.list_assets_image.table.table-bordered.table-striped
         %thead
           %th
           %th
             -trans "Language"
           %th
             -trans "Created"
-        -for policy in object_list
-          %tr
-            %td
-              {{policy.get_policy_type_display}}
-            %td
-              {{policy.get_policy_language}}
-            %td.date
-              {{policy.created_on}}
-            %td.link
-              %a{href:"{% url 'policies.policy_history' policy.id%}"}
-                -trans "view"
+        %tbody
+          -for policy in object_list
+            %tr
+              %td
+                {{policy.get_policy_type_display}}
+              %td
+                {{policy.get_policy_language}}
+              %td.date
+                {{policy.created_on}}
+              %td.link
+                %a{href:"{% url 'policies.policy_history' policy.id%}"}
+                  -trans "view"
+            - empty
+              %tr
+                %td.empty_list{ colspan:"4" }
+
+  %div.row
+    %div.col-md-3
+      %div.pagination-text
+	      -blocktrans count counter=object_list|length
+	        {{ counter }} result
+          -plural
+            {{ counter }} results
 
 - block extra-script
   :javascript
@@ -53,18 +64,6 @@
 - block extra-style
 
   :css
-
-    th {
-      font-weight: 300;
-      font-size: 10px;
-      color: #999;
-    }
-
-
-    table {
-      width: 600px;
-    }
-
     .link {
       width: 20px;
     }
