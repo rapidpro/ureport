@@ -1718,7 +1718,7 @@ class PollTest(UreportTest):
             modified_by=self.admin,
         )
 
-        self.assertEqual(check_policy("privacy"), 1)
+        self.assertEqual(check_policy(policy_type="privacy"), 1)
 
     def test_delete_poll_results_counter(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)

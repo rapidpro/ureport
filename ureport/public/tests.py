@@ -1592,7 +1592,7 @@ class CountriesTest(UreportTest):
         self.assertEqual(response_json["country_code"], "MD")
 
     def test_policy(self):
-        policy_url = reverse("public.policy", args=['privacy'])
+        policy_url = reverse("public.policies", args=['privacy'])
 
         response = self.client.get(policy_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/policies/policy/")
