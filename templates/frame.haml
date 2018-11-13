@@ -377,12 +377,16 @@
             -if org|check_policy:"cookie"
               %a{ href:"{% url 'public.policies' 'cookie' %}" }
                 - trans "Cookie Policy"
-              ,
+
             -if org|check_policy:"privacy"
+              -if org|check_policy:"cookie"
+                ,
               %a{ href:"{% url 'public.policies' 'privacy' %}" }
                 - trans "Privacy Policy"
-              ,
+
             -if org|check_policy:"tos"
+              -if org|check_policy:"cookie" or org|check_policy:"privacy"
+                ,
               %a{ href:"{% url 'public.policies' 'tos' %}" }
                 - trans "Terms of Service."
           %div.policies-close
