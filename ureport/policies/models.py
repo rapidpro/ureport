@@ -28,9 +28,6 @@ class Policy(SmartModel):
     def get_rendered_body(self):
         return mark_safe(markdown.markdown(self.body))
 
-    def get_rendered_summary(self):
-        return mark_safe(markdown.markdown(self.summary))
-
     def get_policy_language(self):
         return [lang[1] for lang in settings.LANGUAGES if lang[0] == self.language][0]
 

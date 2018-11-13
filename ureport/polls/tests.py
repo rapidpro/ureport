@@ -1718,6 +1718,7 @@ class PollTest(UreportTest):
             modified_by=self.admin,
         )
 
+        self.assertIsNone(check_policy(None, "privacy"))
         self.assertEqual(check_policy(self.uganda, "privacy"), 1)
 
     def test_delete_poll_results_counter(self):
