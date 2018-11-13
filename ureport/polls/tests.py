@@ -1706,19 +1706,19 @@ class PollTest(UreportTest):
 
             self.assertFalse(question_segmented_results(poll1_question, "gender"))
 
-        self.assertEqual(check_policy("privacy"), 0)
+        self.assertEqual(check_policy(self.uganda, "privacy"), 0)
 
         from ureport.policies.models import Policy
 
         Policy.objects.create(
             policy_type=Policy.TYPE_PRIVACY,
             body="Privacy matters",
-            language="en",
+            language="ar",
             created_by=self.admin,
             modified_by=self.admin,
         )
 
-        self.assertEqual(check_policy(policy_type="privacy"), 1)
+        self.assertEqual(check_policy(self.uganda, "privacy"), 1)
 
     def test_delete_poll_results_counter(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)

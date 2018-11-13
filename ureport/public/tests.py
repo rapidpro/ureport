@@ -1595,7 +1595,7 @@ class CountriesTest(UreportTest):
         policy_url = reverse("public.policies", args=['privacy'])
 
         response = self.client.get(policy_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/policies/policy/")
+        self.assertEqual(response.request["PATH_INFO"], "/policies/privacy/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["view"].template_name, "public/policies.html")
 
