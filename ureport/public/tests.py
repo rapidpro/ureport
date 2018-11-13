@@ -1592,13 +1592,6 @@ class CountriesTest(UreportTest):
         self.assertEqual(response_json["country_code"], "MD")
 
     def test_policy(self):
-        policy_url = reverse("public.policies", args=['privacy'])
-
-        response = self.client.get(policy_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/policies/privacy/")
-        self.assertEqual(response.context["org"], self.nigeria)
-        self.assertEqual(response.context["view"].template_name, "public/policies.html")
-
         policy = Policy.objects.create(
             policy_type=Policy.TYPE_PRIVACY,
             body="Privacy matters",
@@ -1607,5 +1600,11 @@ class CountriesTest(UreportTest):
             modified_by=self.admin,
         )
 
+        policy_url = reverse("public.policies", args=['privacy'])
+        response = self.client.get(policy_url, SERVER_NAME="nigeria.ureport.io")
+
+        self.assertEqual(response.request["PATH_INFO"], "/policies/privacy/")
+        self.assertEqual(response.context["org"], self.nigeria)
+        self.assertEqual(response.context["view"].template_name, "public/policies.html")
         self.assertTrue(response.context["policy"])
         self.assertTrue(policy in response.context["policy"])
