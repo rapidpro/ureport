@@ -1609,5 +1609,3 @@ class CountriesTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/policies/privacy/")
         self.assertEqual(response.context["org"], self.uganda)
         self.assertEqual(response.context["view"].template_name, "public/policies.html")
-        self.assertTrue(response.context["policy"])
-        self.assertTrue(policy in response.context["policy"])
