@@ -1600,12 +1600,14 @@ class CountriesTest(UreportTest):
             modified_by=self.admin,
         )
 
-        policy_url = reverse("public.policies", args=['privacy'])
-        response = self.client.get(policy_url, SERVER_NAME="uganda.ureport.io")
-
         self.uganda.language = "ar"
         self.uganda.save()
+
+        policy_url = reverse("public.policies", args=['privacy'])
+        response = self.client.get(policy_url, SERVER_NAME="uganda.ureport.io")
 
         self.assertEqual(response.request["PATH_INFO"], "/policies/privacy/")
         self.assertEqual(response.context["org"], self.uganda)
         self.assertEqual(response.context["view"].template_name, "public/policies.html")
+        self.assertTrue(response.context["policy"])
+        self.assertEqual(policy, response.context["policy"])
