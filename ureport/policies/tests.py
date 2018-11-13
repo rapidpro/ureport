@@ -13,7 +13,6 @@ class PolicyTest(UreportTest):
         Policy.objects.create(
             policy_type=Policy.TYPE_PRIVACY,
             body="Privacy matters",
-            summary="Summary",
             language="en",
             created_by=self.admin,
             modified_by=self.admin,
@@ -22,7 +21,6 @@ class PolicyTest(UreportTest):
         Policy.objects.create(
             policy_type=Policy.TYPE_TOS,
             body="These are the terms",
-            summary="You need to accept these",
             language="en",
             created_by=self.admin,
             modified_by=self.admin,
@@ -31,7 +29,6 @@ class PolicyTest(UreportTest):
         Policy.objects.create(
             policy_type=Policy.TYPE_COOKIE,
             body="C is for Cookie",
-            summary="That's good enough for me!",
             language="en",
             created_by=self.admin,
             modified_by=self.admin,
@@ -59,5 +56,4 @@ class PolicyTest(UreportTest):
     def test_policy(self):
         policy = Policy.objects.get(policy_type="privacy")
         self.assertEqual("<p>Privacy matters</p>", policy.get_rendered_body())
-        self.assertEqual("<p>Summary</p>", policy.get_rendered_summary())
         self.assertEqual("English", policy.get_policy_language())

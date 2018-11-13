@@ -370,18 +370,25 @@
 
   - block navbar
     - if org
-      %div#ureport-policies-bar{ style: 'border-color: {{ org|config:"primary_color" }}' }
-        %div.content
-          - trans "This website uses cookies to give you an incredible experience. By using this website you agree to the "
-          %a{ href:""}
-            - trans "terms"
-          - trans "and"
-          %a{ href:""}
-            - trans "terms 2"
-        %div.policies-close
-          %div.policies-close-click
-            %a.primary-color{ href:"javascript:closePoliciesBar()" }
-              X
+      -if org|check_policy:"cookie" or org|check_policy:"privacy" or org|check_policy:"tos"
+        %div#ureport-policies-bar{ style: 'border-color: {{ org|config:"primary_color" }}' }
+          %div.content
+            - trans "This website uses cookies to give you an incredible experience. By using this website you agree to the"
+            -if org|check_policy:"cookie"
+              %a{ href:"{% url 'public.policies' 'cookie' %}" }
+                - trans "Cookie Policy"
+              ,
+            -if org|check_policy:"privacy"
+              %a{ href:"{% url 'public.policies' 'privacy' %}" }
+                - trans "Privacy Policy"
+              ,
+            -if org|check_policy:"tos"
+              %a{ href:"{% url 'public.policies' 'tos' %}" }
+                - trans "Terms of Service."
+          %div.policies-close
+            %div.policies-close-click
+              %a.primary-color{ href:"javascript:closePoliciesBar()" }
+                X
 
       %header#ureport-public-navbar.ureport-header-navbar.ureport-public-navbar.navbar.navbar-static-top{ role:"banner"}
         .container
@@ -476,6 +483,21 @@
               - show_org_flags
 
             .{class:'col-sm-3'}
+              -if org|check_policy:"cookie" or org|check_policy:"privacy" or org|check_policy:"tos"
+                %ul.footer-policies
+                  -if org|check_policy:"cookie"
+                    %li
+                      %a{ href:"{% url 'public.policies' 'cookie' %}" }
+                        - trans "Cookies Policy"
+                  -if org|check_policy:"privacy"
+                    %li
+                      %a{ href:"{% url 'public.policies' 'privacy' %}" }
+                        - trans "Privacy Policy"
+                  -if org|check_policy:"tos"
+                    %li
+                      %a{ href:"{% url 'public.policies' 'tos' %}" }
+                        - trans "Terms of Service"
+
               .follow-us
                 -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
                   .follow-us-text

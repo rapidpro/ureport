@@ -24,6 +24,7 @@ from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
+from ureport.policies.models import Policy
 from ureport.utils import get_global_count, get_linked_orgs
 
 
@@ -410,3 +411,17 @@ class CountriesView(SmartTemplateView):
             json_dict["text"] = whole_text
 
         return HttpResponse(json.dumps(json_dict), status=200, content_type="application/json")
+
+
+class PolicyView(SmartTemplateView):
+    template_name = "public/policies.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(PolicyView, self).get_context_data(**kwargs)
+
+        org = self.request.org
+        policy_type = self.kwargs.get("policy_type", None)
+
+        context["org"] = self.request.org
+        context["policy"] = Policy.objects.filter(policy_type=policy_type, language=org.language, is_active=True).order_by("-created_on").first()
+        return context

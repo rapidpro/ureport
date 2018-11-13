@@ -25,8 +25,6 @@ class Policy(SmartModel):
 
     body = models.TextField(help_text=_("Enter the content of the policy (Markdown permitted)"))
 
-    summary = models.TextField(null=True, blank=True, help_text=_("Summary of policy changes (Markdown permitted)"))
-
     def get_rendered_body(self):
         return mark_safe(markdown.markdown(self.body))
 

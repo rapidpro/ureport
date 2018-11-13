@@ -22,6 +22,7 @@ from ureport.countries.models import CountryAlias
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import PollQuestion
+from ureport.policies.models import Policy
 from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
 
 
@@ -1589,3 +1590,22 @@ class CountriesTest(UreportTest):
         self.assertTrue("country_code" in response_json)
         self.assertEqual(response_json["exists"], "valid")
         self.assertEqual(response_json["country_code"], "MD")
+
+    def test_policy(self):
+        policy_url = reverse("public.policy", args=['privacy'])
+
+        response = self.client.get(policy_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(response.request["PATH_INFO"], "/policies/policy/")
+        self.assertEqual(response.context["org"], self.nigeria)
+        self.assertEqual(response.context["view"].template_name, "public/policies.html")
+
+        policy = Policy.objects.create(
+            policy_type=Policy.TYPE_PRIVACY,
+            body="Privacy matters",
+            language="en",
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
+        self.assertTrue(response.context["policy"])
+        self.assertTrue(policy in response.context["policy"])

@@ -14,7 +14,7 @@ from .models import Policy
 class PoliciesForm(forms.ModelForm):
     class Meta:
         model = Policy
-        fields = ("is_active", "policy_type", "language", "body", "summary")
+        fields = ("is_active", "policy_type", "language", "body")
 
 
 class PoliciesCRUDL(SmartCRUDL):
@@ -39,14 +39,14 @@ class PoliciesCRUDL(SmartCRUDL):
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PoliciesForm
         success_url = "@policies.policy_admin"
-        fields = ("is_active", "body", "summary", "policy_type", "language")
+        fields = ("is_active", "body", "policy_type", "language")
 
     class Create(OrgPermsMixin, SmartCreateView):
         form_class = PoliciesForm
         success_url = "@policies.policy_admin"
 
         def derive_fields(self):
-            return ("body", "summary", "policy_type", "language")
+            return ("body", "policy_type", "language")
 
         def post_save(self, obj):
             Policy.objects.filter(policy_type=obj.policy_type, language=obj.language, is_active=True).exclude(id=obj.id).update(
