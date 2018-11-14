@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-13 17:47+0000\n"
+"POT-Creation-Date: 2018-11-14 11:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Country Aliases"
 msgstr ""
 
-#: templates/frame.haml:304 templates/frame.haml:534
+#: templates/frame.haml:304 templates/frame.haml:540
 msgid "Polls"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr ""
 msgid "News Items"
 msgstr ""
 
-#: templates/frame.haml:356 templates/frame.haml:540
+#: templates/frame.haml:356 templates/frame.haml:546
 #: templates/public/stories.haml:7
 msgid "Stories"
 msgstr ""
@@ -126,54 +126,50 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: templates/frame.haml:456 templates/frame.haml:691
+#: templates/frame.haml:456 templates/frame.haml:697
 #: templates/smartmin/users/login.haml:49
 msgid "Login"
 msgstr ""
 
 #: templates/frame.haml:473
 msgid ""
-"This website uses cookies to give you an incredible experience. By using "
-"this website you agree to the"
+"This website uses cookies. By continuing to browse this site you are "
+"agreeing to our"
 msgstr ""
 
 #: templates/frame.haml:476
 msgid "Cookie Policy"
 msgstr ""
 
-#: templates/frame.haml:482 templates/frame.haml:635
+#: templates/frame.haml:485 templates/frame.haml:641
 msgid "Privacy Policy"
 msgstr ""
 
-#: templates/frame.haml:488
-msgid "Terms of Service."
-msgstr ""
-
-#: templates/frame.haml:528
-msgid "About"
-msgstr ""
-
-#: templates/frame.haml:546
-msgid "U-Reporters"
-msgstr ""
-
-#: templates/frame.haml:553 templates/public/jobs.haml:7
-msgid "Jobs"
-msgstr ""
-
-#: templates/frame.haml:560
-msgid "Join & Engage"
-msgstr ""
-
-#: templates/frame.haml:628
-msgid "Cookies Policy"
-msgstr ""
-
-#: templates/frame.haml:642
+#: templates/frame.haml:494 templates/frame.haml:648
 msgid "Terms of Service"
 msgstr ""
 
-#: templates/frame.haml:652
+#: templates/frame.haml:534
+msgid "About"
+msgstr ""
+
+#: templates/frame.haml:552
+msgid "U-Reporters"
+msgstr ""
+
+#: templates/frame.haml:559 templates/public/jobs.haml:7
+msgid "Jobs"
+msgstr ""
+
+#: templates/frame.haml:566
+msgid "Join & Engage"
+msgstr ""
+
+#: templates/frame.haml:634
+msgid "Cookies Policy"
+msgstr ""
+
+#: templates/frame.haml:658
 msgid "FOLLOW US ON"
 msgstr ""
 
@@ -255,9 +251,23 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: templates/policies/policy_admin.haml:60
+#: templates/policies/policy_admin.haml:61
 msgid "view"
 msgstr ""
+
+#: templates/policies/policy_admin.haml:77
+#, python-format
+msgid ""
+"\n"
+"\t\t\t\t\t\t\t\t\t%(counter)s result\n"
+"          "
+msgid_plural ""
+"\n"
+"            %(counter)s results\n"
+"\n"
+"\t\t\t\t\t\t\t"
+msgstr[0] ""
+msgstr[1] ""
 
 #: templates/polls/poll_list.haml:6
 #: venv/lib/python3.6/site-packages/dash/dashblocks/templates/dashblocks/dashblock_list.haml:61

@@ -373,7 +373,7 @@
       -if org|check_policy:"cookie" or org|check_policy:"privacy" or org|check_policy:"tos"
         %div#ureport-policies-bar{ style: 'border-color: {{ org|config:"primary_color" }}' }
           %div.content
-            - trans "This website uses cookies to give you an incredible experience. By using this website you agree to the"
+            - trans "This website uses cookies. By continuing to browse this site you are agreeing to our"
             -if org|check_policy:"cookie"
               %a{ href:"{% url 'public.policies' 'cookie' %}" }
                 - trans "Cookie Policy"
@@ -388,7 +388,7 @@
               -if org|check_policy:"cookie" or org|check_policy:"privacy"
                 ,
               %a{ href:"{% url 'public.policies' 'tos' %}" }
-                - trans "Terms of Service."
+                - trans "Terms of Service"
           %div.policies-close
             %div.policies-close-click
               %a.primary-color{ href:"javascript:closePoliciesBar()" }
