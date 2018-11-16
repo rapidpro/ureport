@@ -25,6 +25,7 @@ urlpatterns = [
     url(r"^manage/", include("ureport.jobs.urls")),
     url(r"^manage/", include("ureport.countries.urls")),
     url(r"^manage/", include("ureport.assets.urls")),
+    url(r"^manage/", include("ureport.policies.urls")),
     url(r"^users/", include("dash.users.urls")),
     url(r"^manage/", include("smartmin.csv_imports.urls")),
     url(r"^api/$", RedirectView.as_view(pattern_name="api.v1.docs", permanent=False), name="api"),

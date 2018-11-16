@@ -476,6 +476,7 @@ INSTALLED_APPS = (
     "ureport.jobs",
     "ureport.locations",
     "ureport.news",
+    "ureport.policies",
     "ureport.polls",
     "django_countries",
     "rest_framework",
