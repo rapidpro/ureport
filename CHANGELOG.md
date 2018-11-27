@@ -1,3 +1,8 @@
+v1.0.443
+----------
+ * Add Romania flag
+ * Remove opacity on map legend
+
 v1.0.442
 ----------
  * Add locations stats to poll API endpoint
