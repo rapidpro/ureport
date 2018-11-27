@@ -1,0 +1,90 @@
+- extends 'smartmin/list.html'
+- load i18n
+
+- block content
+
+  - block table-controls
+    .buttons.pull-right
+      %a.btn.btn-primary{href:"{% url 'policies.policy_create'%}"}
+        -trans "New Policy"
+
+  - for policy in active_policies
+
+    .policy{ onclick:'javascript:view("{{policy.policy_type}}");'}
+      .type
+        {{policy.get_policy_type_display}}
+      .created_on
+        {{policy.created_on|date:"M d, Y"}}
+      .edit
+        %a{href:"{% url 'policies.policy_update' policy.id%}"}
+          -trans "edit"
+
+  %div.row
+    %div.col-md-12
+      %h4
+        -trans "Previous Policies"
+      %table.list-table.list_assets_image.table.table-bordered.table-striped
+        %thead
+          %th
+          %th
+            -trans "Language"
+          %th
+            -trans "Created"
+        %tbody
+          -for policy in object_list
+            %tr
+              %td
+                {{policy.get_policy_type_display}}
+              %td
+                {{policy.get_policy_language}}
+              %td.date
+                {{policy.created_on}}
+              %td.link
+                %a{href:"{% url 'policies.policy_history' policy.id%}"}
+                  -trans "view"
+            - empty
+              %tr
+                %td.empty_list{ colspan:"4" }
+
+  %div.row
+    %div.col-md-3
+      %div.pagination-text
+	      -blocktrans count counter=object_list|length
+	        {{ counter }} result
+          -plural
+            {{ counter }} results
+
+- block extra-script
+  :javascript
+
+    function view(policy_type) {
+      document.location.href = '/manage/policy/' + policy_type
+    }
+
+- block extra-style
+
+  :css
+    .link {
+      width: 20px;
+    }
+
+    .policy {
+      display: inline-block;
+      padding: 10px;
+      border: 1px solid #e6e6e6;
+      border-radius: 5px;
+      width: 250px;
+      margin-right: 10px;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+
+    .policy:hover {
+      background: #f3f3f3;
+      cursor: pointer;
+    }
+
+    .edit {
+      font-size: 11px;
+      line-height: 11px;
+    }

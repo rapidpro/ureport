@@ -161,3 +161,16 @@ def org_host_link(context):
         return org.build_host_link(True)
     except Exception:
         return "https://%s" % getattr(settings, "HOSTNAME", "localhost")
+
+
+@register.filter
+def check_policy(org, policy_type):
+    if not org:
+        return None
+
+    from ureport.policies.models import Policy
+
+    return Policy.objects.filter(
+        policy_type=policy_type,
+        language=org.language,
+        is_active=True).order_by("-created_on").count()

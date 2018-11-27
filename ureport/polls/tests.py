@@ -1573,7 +1573,7 @@ class PollTest(UreportTest):
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_templatetags(self):
         from ureport.polls.templatetags.ureport import config, org_color, transparency, show_org_flags
-        from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results
+        from ureport.polls.templatetags.ureport import org_host_link, org_arrow_link, question_results, check_policy
 
         with patch("dash.orgs.models.Org.get_config") as mock:
             mock.return_value = "Done"
@@ -1705,6 +1705,21 @@ class PollTest(UreportTest):
             mock_results.side_effect = KeyError
 
             self.assertFalse(question_segmented_results(poll1_question, "gender"))
+
+        self.assertEqual(check_policy(self.uganda, "privacy"), 0)
+
+        from ureport.policies.models import Policy
+
+        Policy.objects.create(
+            policy_type=Policy.TYPE_PRIVACY,
+            body="Privacy matters",
+            language="ar",
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
+        self.assertIsNone(check_policy(None, "privacy"))
+        self.assertEqual(check_policy(self.uganda, "privacy"), 1)
 
     def test_delete_poll_results_counter(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)

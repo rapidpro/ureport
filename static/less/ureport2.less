@@ -89,6 +89,56 @@ body {
   }
 }
 
+#ureport-policies-bar {
+  width: 100%;
+  height: 36px;
+  background-color: #ffffff;
+  border-bottom: 1px solid;
+  box-shadow: 0px 10px;
+  display: none;
+
+  .content {
+    text-align: center;
+    font-size: 10pt;
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    a:focus {
+      text-decoration: none;
+    }
+  }
+
+  .policies-close {
+    margin-right: 5px;
+    width: 35px;
+    border-radius: 5px;
+    margin: 3px;
+    border-color: unset !important;
+    text-align: center;
+
+    .policies-close-click {
+      margin-top: 3px;
+      font-size: 15px;
+      color: #fff;
+      font-weight: bold;
+
+      a {
+        display: block;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.policies-show-bar {
+  display: flex !important;
+}
+
 .ureport-header-navbar {
   margin-bottom: 0px;
 
@@ -1411,6 +1461,11 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
   font-size: .8em;
 }
 
+.policy-details {
+  line-height: 150%;
+  font-size: .8em;
+}
+
 .story-teaser {
   
 }
@@ -2645,6 +2700,16 @@ ul.poll-filters, .featured-stories-filters, ul.stories-filters {
 
   img.footer-logo {
     float: right;
+  }
+}
+
+.footer-policies {
+  margin-top: 21px;
+  text-align: right;
+  list-style: none;
+
+  li {
+    line-height: 30px;
   }
 }
 

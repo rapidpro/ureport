@@ -21,6 +21,7 @@ from .views import (
     StoriesView,
     StoryReadView,
     UreportersView,
+    PolicyView,
 )
 
 urlpatterns = [
@@ -42,4 +43,5 @@ urlpatterns = [
     url(r"^countries/$", CountriesView.as_view(), {}, "public.countries"),
     url(r"^added/$", AdditionalMenu.as_view(), {}, "public.added"),
     url(r"^count/$", Count.as_view(), {}, "public.count"),
+    url(r"^policies/(?P<policy_type>[a-zA-Z]+)/$", PolicyView.as_view(), {}, "public.policies"),
 ]
