@@ -856,6 +856,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://newzealand.ureport.in/count/",
     ),
     dict(
+        name="România",
+        host="//romania.ureport.in/",
+        flag="flag_ro.png",
+        is_static=True,
+        count_link="http://romania.ureport.in/count/",
+    ),
+    dict(
         name="Serbia",
         host="//serbia.ureport.in/",
         flag="flag_sr.png",
