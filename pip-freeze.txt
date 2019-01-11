@@ -10,7 +10,7 @@ amqp==2.3.2               # via kombu
 appdirs==1.4.3            # via black
 attrs==18.1.0             # via black
 billiard==3.5.0.4         # via celery
-black==18.6b4
+black==18.9b0
 boto3==1.7.67
 botocore==1.10.67         # via boto3, s3transfer
 celery[redis]==4.2.1
@@ -68,7 +68,7 @@ pycountry==18.5.26
 pyflakes==1.6.0           # via flake8
 python-dateutil==2.7.3    # via botocore, rapidpro-dash
 pytz==2018.5              # via celery, django, django-timezone-field, rapidpro-python, smartmin
-rapidpro-dash==1.4
+rapidpro-dash==1.4.2
 rapidpro-python==2.4
 raven==6.9.0
 rcssmin==1.0.6            # via django-compressor
@@ -79,7 +79,7 @@ rjsmin==1.0.12            # via django-compressor
 s3transfer==0.1.13        # via boto3
 simplejson==3.16.0        # via django-rest-swagger
 six==1.11.0               # via django-hamlpy, django-rosetta, microsofttranslator, mock, pip-tools, python-dateutil, rapidpro-python
-smartmin==2.0.0
+smartmin==2.1.2
 smmap2==2.0.4             # via gitdb2
 sqlparse==0.2.4           # via django-debug-toolbar, smartmin
 toml==0.9.4               # via black
