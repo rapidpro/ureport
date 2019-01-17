@@ -1,3 +1,8 @@
+v1.0.444
+----------
+ * Update Django
+ * Update deps
+
 v1.0.443
 ----------
  * Add Romania flag
