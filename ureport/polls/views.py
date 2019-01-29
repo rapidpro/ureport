@@ -117,7 +117,7 @@ class QuestionForm(ModelForm):
 
         # look at all our included polls
         for key in cleaned.keys():
-            match = re.match("ruleset_([\w\-]+)_include", key)
+            match = re.match(r"ruleset_([\w\-]+)_include", key)
 
             # this field is being included
             if match and cleaned[key]:
@@ -563,6 +563,7 @@ class PollCRUDL(SmartCRUDL):
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
         fields = ("is_active", "is_featured", "title", "category", "category_image")
+        success_url = "id@polls.poll_poll_flow"
 
         def derive_title(self):
             obj = self.get_object()
