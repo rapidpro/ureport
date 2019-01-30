@@ -30,7 +30,12 @@ def backfill_poll_results(org, since, until):
 
     results_log = dict()
 
-    for poll in Poll.objects.filter(org=org, has_synced=False).distinct("flow_uuid"):
+    for poll in (
+        Poll.objects.filter(org=org, has_synced=False)
+        .exclude(is_active=False)
+        .exclude(flow_uuid="")
+        .distinct("flow_uuid")
+    ):
         (
             num_val_created,
             num_val_updated,
