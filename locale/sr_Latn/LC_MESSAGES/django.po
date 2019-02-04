@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Milos Cikota <mcikota@unicef.org>, 2018-2019
-# Tales Souza <tales@ilhasoft.com.br>, 2018
+# Tales Souza <tales@ilhasoft.com.br>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-10 09:35+0000\n"
-"PO-Revision-Date: 2019-01-29 15:41+0000\n"
-"Last-Translator: Milos Cikota <mcikota@unicef.org>\n"
+"PO-Revision-Date: 2019-02-04 17:54+0000\n"
+"Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1297,7 +1297,7 @@ msgid ""
 "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "            "
-msgstr "\n* U-Report je besplatan program pod okriljem UNICEF-a. U-Report neće od vas tražiti nikakve uplate, niti informacije o vašim računima, MOLIMO vas zanemarite bilo kakav potencijalni upit o finansijskim informacijama ili plaćanju, kako ovde, tako na Facebook-u i Viber-u. Sve usluge U-Reporta (sve poruke na %(shortcode)s) su besplatne."
+msgstr "\n              * U-Report je besplatan program pod okriljem UNICEF-a u %(country)s. U-Report neće od vas tražiti nikakve uplate, niti informacije o vašim računima, MOLIMO vas zanemarite svaki upit o finansijskim informacijama ili plaćanju, kako ovdje, tako na Facebook-u i Viber-u. Sve usluge U-Reporta (sve poruke na %(shortcode)s) su besplatne.\n\n            "
 
 #: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
@@ -1321,9 +1321,9 @@ msgid_plural ""
 "\n"
 "                  %(questions)s questions polled on this topic\n"
 "                "
-msgstr[0] "% pitanje postavljeno na ovu temu"
-msgstr[1] "% - broj pitanja postavljenih na ovu temu"
-msgstr[2] "% pitanja postavljenih na ovu temu"
+msgstr[0] "\n                  %(questions)s pitanje postavljeno na ovu temu\n                "
+msgstr[1] "\n                  %(questions)s broj pitanja postavljenih na ovu temu\n                "
+msgstr[2] "\n                  %(questions)s pitanja postavljenih na ovu temu\n                "
 
 #: templates/public/polls.haml:43
 msgid "response rate"
