@@ -357,7 +357,9 @@ class Poll(SmartModel):
 
     @classmethod
     def get_public_polls(cls, org):
-        return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True)
+        return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True).exclude(
+            flow_uuid=""
+        )
 
     @classmethod
     def get_main_poll(cls, org):
@@ -415,7 +417,13 @@ class Poll(SmartModel):
         if main_poll:
             exclude_polls.append(main_poll.pk)
 
-        other_polls = Poll.get_public_polls(org=org).exclude(pk__in=exclude_polls).order_by("-created_on")
+        other_polls = (
+            Poll.get_public_polls(org=org)
+            .exclude(pk__in=exclude_polls)
+            .exclude(is_active=False)
+            .exclude(flow_uuid="")
+            .order_by("-created_on")
+        )
 
         return other_polls
 
