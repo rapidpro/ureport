@@ -1,3 +1,13 @@
+v1.0.445
+----------
+ * Polls without flow uuid should not sync
+ * Run tests on Postgresql9.6 and Postgresql10
+
+v1.0.444
+----------
+ * Update Django
+ * Update deps
+
 v1.0.443
 ----------
  * Add Romania flag

@@ -2328,6 +2328,7 @@ class PerfTest(UreportTest):
                 )
                 mock_rebuild_counts.assert_called_with()
 
+        now_date = datetime_to_json_date(now_date)
         mock_get_pull_cached_params.side_effect = [
             (now_date, None, None, None, None, None),
             (now_date, None, None, None, None, now_date),

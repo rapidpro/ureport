@@ -81,7 +81,6 @@ LANGUAGES = (
     ("it", "Italian"),
     ("ro", "Romanian"),
     ("vi", "Vietnamese"),
-    ("sr", "Serbian"),
     ("sr-latn", "Latin Serbian"),
 )
 

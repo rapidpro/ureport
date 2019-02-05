@@ -4,13 +4,15 @@
 # 
 # Translators:
 # Alex Petrov <alexandrupetrov@gmail.com>, 2017
+# Ana Rizescu <arizescu@unicef.org>, 2019
+# Tales Souza <tales@ilhasoft.com.br>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-10 09:35+0000\n"
-"PO-Revision-Date: 2017-06-30 05:53+0000\n"
-"Last-Translator: Alex Petrov <alexandrupetrov@gmail.com>\n"
+"PO-Revision-Date: 2019-01-28 17:20+0000\n"
+"Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Romanian (http://www.transifex.com/rapidpro/ureport/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -598,9 +600,9 @@ msgid_plural ""
 "\n"
 "         %(counter)s results\n"
 "        "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "\n\t\t%(counter)s rezultate\n\t"
+msgstr[1] "\n         %(counter)s rezultate\n        "
+msgstr[2] "\n         %(counter)s rezultate\n        "
 
 #: smartmin/templates/smartmin/list.html:85
 #, python-format
@@ -1051,7 +1053,7 @@ msgstr "DESPRE U-REPORT"
 
 #: templates/public/about.haml:22 templates/public/ureporters.haml:23
 msgid "Scroll to Learn more"
-msgstr "Derulează în jos pentru a afla mai multe"
+msgstr "Află detalii mai jos"
 
 #: templates/public/about.haml:80
 msgid "The mission of U-Report"
@@ -1059,7 +1061,7 @@ msgstr "Misiunea U-Report"
 
 #: templates/public/about.haml:119
 msgid "Why Join U-Report?"
-msgstr "De ce să te alături la U-Report?"
+msgstr "De ce să te alături U-Report?"
 
 #: templates/public/about.haml:124
 msgid "Speak out on what's happening in your community"
@@ -1069,7 +1071,7 @@ msgstr "Spune ce se întâmplă în comunitatea ta"
 msgid ""
 "Use U-Report results and information to update and increase citizen's "
 "awareness"
-msgstr "Utilizează rezultatele și informaţiile Ureport pentru a actualiza și a crește gradul de conştientizare a cetăţenilor"
+msgstr "Utilizează rezultatele și informaţiile U-Report pentru a actualiza și a crește gradul de conştientizare a cetăţenilor"
 
 #: templates/public/about.haml:130
 msgid "Participate in nationwide campaigns to help improve your country"
@@ -1078,7 +1080,7 @@ msgstr "Participă la campanii naţionale pentru a ajuta la îmbunătăţirea si
 #: templates/public/about.haml:133
 #, python-format
 msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Distribuiți ce se întâmplă în jurul %(country)s cu alți U-Reporteri"
+msgstr "Împărtășeste ce se întâmplă în %(country)s cu alți U-Reporteri"
 
 #: templates/public/about.haml:139
 msgid "CLICK HERE TO JOIN"
@@ -1267,7 +1269,7 @@ msgstr "OFERTE DE MUNCĂ"
 
 #: templates/public/jobs.haml:28
 msgid "Scroll to see job details"
-msgstr "Derulează în jos pentru a vedea detaliile ofertei de muncă"
+msgstr "Află detalii mai jos "
 
 #: templates/public/jobs.haml:78 templates/public/join_engage.haml:119
 msgid "Tweet to"
@@ -1283,7 +1285,7 @@ msgstr "Vizitează"
 
 #: templates/public/join_engage.haml:17
 msgid "JOIN U-REPORT"
-msgstr "ALĂTURĂ-TE LA U-REPORT"
+msgstr "ALĂTURĂ-TE U-REPORT"
 
 #: templates/public/join_engage.haml:44
 msgid "HOW TO JOIN"
@@ -1346,7 +1348,7 @@ msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr "\n%(responded)s a răspuns din %(polled)s chestionați"
+msgstr "\n%(responded)s au răspuns din %(polled)s chestionați"
 
 #: templates/public/polls.haml:121
 msgid "KEYWORDS"
@@ -1414,7 +1416,7 @@ msgstr "FILTREAZĂ DUPĂ"
 
 #: templates/public/story_read.haml:31
 msgid "Scroll to read more"
-msgstr "Derulează în jos pentru a citi mai multe"
+msgstr "Află detalii mai jos"
 
 #: templates/public/story_read.haml:50
 msgid "STORY CONTINUES"

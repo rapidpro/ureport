@@ -404,6 +404,8 @@ class PollTest(UreportTest):
 
         self.create_poll(self.nigeria, "Poll 3", "uuid-3", self.education_nigeria, self.admin, has_synced=True)
 
+        self.create_poll(self.nigeria, "Poll 4", "", self.education_nigeria, self.admin, has_synced=True)
+
         self.assertTrue(Poll.get_public_polls(self.uganda))
         self.assertEqual(Poll.get_public_polls(self.uganda).count(), 1)
         self.assertTrue(poll2 in Poll.get_public_polls(self.uganda))
@@ -1327,12 +1329,11 @@ class PollTest(UreportTest):
 
             post_data = dict(title="title updated", category=self.health_uganda.pk, is_featured=False)
             response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
-            self.assertFalse("form" in response.context)
             updated_poll = Poll.objects.get(pk=poll1.pk)
             self.assertEqual(updated_poll.title, "title updated")
             self.assertFalse(updated_poll.is_featured)
 
-            self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_list"))
+            self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_poll_date", args=[updated_poll.pk]))
 
     def test_list_poll(self):
         list_url = reverse("polls.poll_list")
@@ -2519,6 +2520,10 @@ class PollsTasksTest(UreportTest):
         )
 
         self.polls_query = Poll.objects.filter(pk__in=[self.poll.pk, self.poll_same_flow.pk]).order_by("-created_on")
+
+        # polls without flow_uuid
+        self.create_poll(self.nigeria, "Poll 4", "", self.education_nigeria, self.admin, has_synced=False)
+        self.create_poll(self.nigeria, "Poll 5", "", self.education_nigeria, self.admin, has_synced=True)
 
     @patch("dash.orgs.models.Org.get_backend")
     @patch("ureport.tests.TestBackend.pull_results")
