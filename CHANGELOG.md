@@ -1,3 +1,11 @@
+v1.0.446
+----------
+ * Update FB customerchat plugin SDK
+ * Refactor Serbian Latin translation files
+ * Add romanian translation files updates
+ * Refactor serbian to serbian latin language config
+ * Fix unordered list
+
 v1.0.445
 ----------
  * Polls without flow uuid should not sync

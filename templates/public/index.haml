@@ -565,8 +565,6 @@
               }
             }
 
-            console.log(data);
-
             $('#graph-' + question).highcharts({
               chart: {
                 plotBackgroundColor: null,
@@ -628,8 +626,6 @@
         var containerWidth = $('#brick-container').width();
         var gutter = 15;
         var columnWidth = (containerWidth >= 1000) ? 320 : 285;
-
-        console.log("Container: " + containerWidth + " Column: " + columnWidth);
 
         $('#brick-container').isotope({
           itemSelector: '.brick',
