@@ -17,6 +17,7 @@ RUN npm install
 RUN npm install -g less coffeescript
 
 COPY . .
+RUN ln -s $WORKDIR/ureport/settings.py.prod $WORKDIR/ureport/settings.py
 
 EXPOSE 8000
 EXPOSE 8080
