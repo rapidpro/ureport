@@ -1,19 +1,26 @@
-FROM python:3.6-alpine
+FROM python:3.6
 
 ENV WORKDIR /ureport
 WORKDIR $WORKDIR
 
-RUN apk add --no-cache varnish wget gettext git
-RUN apk add --no-cache jpeg-dev zlib-dev
-RUN apk add --no-cache postgresql-dev nodejs nodejs-npm
-RUN apk add --no-cache supervisor
+RUN apt update
+RUN apt upgrade -y
+RUN apt install -y \
+    varnish \
+    gettext \
+    supervisor \
+    curl \
+    software-properties-common
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt update
+RUN apt install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY varnish.default.vcl /etc/varnish/default.vcl
 COPY pip-freeze.txt .
-COPY package.json .
 
 RUN pip install -r pip-freeze.txt
-RUN npm install
 RUN npm install -g less coffeescript
 
 COPY . .

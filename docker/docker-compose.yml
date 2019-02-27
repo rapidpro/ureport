@@ -1,0 +1,52 @@
+version: '3.6'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+  database:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-ureport}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ureport}
+      - POSTGRES_DB=${POSTGRES_DB:-ureport}
+  ureport:
+    image: ${DOCKER_IMAGE_NAME:-ilhasoft/ureport}:${DOCKER_IMAGE_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - 8000:8000
+      - 8080:8080
+    environment:
+      - DEBUG=${DEBUG:-false}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-*}
+      - HOSTNAME = ${HOSTNAME:-ureport.in}
+      - EMPTY_SUBDOMAIN_HOST = ${EMPTY_SUBDOMAIN_HOST:-https://ureport.in}
+      - SESSION_COOKIE_DOMAIN = ${SESSION_COOKIE_DOMAIN:-ureport.in}
+      - ADMINS=${ADMINS:-Ilhasoft|contato@ilhasoft.com.br}
+      - TIME_ZONE=${TIME_ZONE:-America/Sao_Paulo}
+      - USER_TIME_ZONE=${USER_TIME_ZONE:-America/Sao_Paulo}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT:-587}      
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - EMAIL_USE_TLS=${EMAIL_USE_TLS}
+      - RAVEN_CONFIG=${RAVEN_CONFIG}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
+      - MEDIA_URL = ${MEDIA_URL}
+      - SITE_API_HOST = ${SITE_API_HOST}
+      - API_ENDPOINT = ${API_ENDPOINT}
+      - DEFAULT_DATABASE=${DEFAULT_DATABASE:-postgres://ureport:ureport@database:5432/ureport}
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_DATABASE=${REDIS_DATABASE:-1}
+      - COMPRESS_ENABLED=${COMPRESS_ENABLED:-true}
+      - COMPRESS_OFFLINE=${COMPRESS_OFFLINE:-true}
+    depends_on:
+      - database
+      - redis
