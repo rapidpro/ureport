@@ -514,11 +514,17 @@
   </script>
 
   {% endif %}
-  
-  {% compress js %}
   <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.pjax.js"></script>
+
+  {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureport.coffee" />
+  {% endcompress %}
+
+  {% compress js %}
   <script type="text/javascript" src="{{ STATIC_URL }}js/scripts.js"></script>
+  {% endcompress %}
+
+  {% compress js %}
   <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/lightbox.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/gradientfactory.js"></script>
