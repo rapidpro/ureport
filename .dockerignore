@@ -6,6 +6,5 @@ staticfiles/
 *.py[cod]
 settings.ini
 db.sqlite3
-sitestatic/
 node_modules/
 .pyenv-*/
