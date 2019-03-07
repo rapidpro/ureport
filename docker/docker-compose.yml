@@ -23,7 +23,6 @@ services:
       - 8080:8080
     environment:
       - DEBUG=${DEBUG:-false}
-      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-*}
       - APP_HOSTNAME=${APP_HOSTNAME:-localhost}
       - EMPTY_SUBDOMAIN_HOST=${EMPTY_SUBDOMAIN_HOST:-http://localhost}
       - SESSION_COOKIE_DOMAIN=${SESSION_COOKIE_DOMAIN:-localhost}

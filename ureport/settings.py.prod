@@ -22,7 +22,7 @@ API_FLOWS_CACHE_TIME = 30
 EMPTY_SUBDOMAIN_HOST = config('EMPTY_SUBDOMAIN_HOST', 'https://ureport.in')
 HOSTNAME = config('APP_HOSTNAME', 'ureport.in')
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=lambda v: [
                        s.strip() for s in v.split(',')])
 
 SESSION_COOKIE_DOMAIN = config('SESSION_COOKIE_DOMAIN', 'ureport.in')
