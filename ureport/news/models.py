@@ -7,6 +7,7 @@ from smartmin.models import SmartModel
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils import formats
 
 
 class NewsItem(SmartModel):
@@ -32,7 +33,7 @@ class NewsItem(SmartModel):
             title=self.title,
             description=self.short_description(),
             link=self.link,
-            created_on=self.created_on.strftime("%b %d, %Y"),
+            created_on=formats.date_format(self.created_on, format="b d, Y", use_l10n=True),
         )
 
 
