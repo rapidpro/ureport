@@ -90,7 +90,7 @@
 
 - block extra-script
   {{ block.super }}
-  <script src="{{ STATIC_URL }}/js/leaflet.js"></script>
+  <script src="{{ STATIC_URL }}js/leaflet.js"></script>
   {% if org and org|config:"custom_html" %}
     {% autoescape off %}
       {{ org|config:"custom_html" }}

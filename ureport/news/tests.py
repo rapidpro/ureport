@@ -8,6 +8,7 @@ from django.urls import reverse
 
 from ureport.news.models import NewsItem, Video
 from ureport.tests import UreportTest
+from django.utils import formats
 
 
 class NewsTest(UreportTest):
@@ -44,7 +45,7 @@ class NewsTest(UreportTest):
                 title="uganda news 1",
                 description="a b" * 100 + "...",
                 link="http://uganda.ug",
-                created_on=self.uganda_news1.created_on.strftime("%b %d, %Y"),
+                created_on=formats.date_format(self.uganda_news1.created_on, format="b d, Y", use_l10n=True),
             ),
         )
 

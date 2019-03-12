@@ -35,3 +35,6 @@ pip-tools
 black
 isort
 flake8
+python-decouple
+sentry-sdk
+whitenoise

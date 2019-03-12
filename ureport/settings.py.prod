@@ -1,168 +1,84 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
-# import our default settings
-from ureport.settings_common import *
-import os
 import dj_database_url
+import sentry_sdk
+
+from decouple import config
+from sentry_sdk.integrations.django import DjangoIntegration
+from ureport.settings_common import *  # noqa
 
 
-DEBUG = False
-THUMBNAIL_DEBUG = DEBUG
-COMPRESS_ENABLED = True
+DEBUG = config('DEBUG', default=False, cast=bool)
+TEMPLATE_DEBUG = DEBUG
 
+API_BOUNDARY_CACHE_TIME = 30
+API_GROUP_CACHE_TIME = 30
+API_RESULT_CACHE_TIME = 30
+API_CONTACT_RESULT_CACHE_TIME = 30
+API_CONTACTS_CACHE_TIME = 30
+API_FLOWS_CACHE_TIME = 30
 
-EMPTY_SUBDOMAIN_HOST = 'http://ureport.in'
-HOSTNAME = 'ureport.in'
-ALLOWED_HOSTS = ['*']
-SESSION_COOKIE_DOMAIN = 'ureport.in'
-SESSION_COOKIE_SECURE = True
+EMPTY_SUBDOMAIN_HOST = config('EMPTY_SUBDOMAIN_HOST', 'https://ureport.in')
+HOSTNAME = config('APP_HOSTNAME', 'ureport.in')
 
-# these guys will get email from sentry
-ADMINS = (
-    ('Nyaruka Ops', 'ops@nyaruka.com'),
-)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=lambda v: [
+                       s.strip() for s in v.split(',')])
 
-# set the mail settings, we send through gmail
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '${gmail_user}'
-DEFAULT_FROM_EMAIL = '${gmail_user}'
-EMAIL_HOST_PASSWORD = '${gmail_password}'
-EMAIL_USE_TLS = True
+SESSION_COOKIE_DOMAIN = config('SESSION_COOKIE_DOMAIN', 'ureport.in')
+SESSION_COOKIE_SECURE = False
 
+ANONYMOUS_USER_ID = -1
+
+ADMINS = config('ADMINS',
+                default='Ilhasoft|contato@ilhasoft.com.br',
+                cast=lambda v: [
+                    (
+                        s.strip().split('|')[0],
+                        s.strip().split('|')[1],
+                    ) for s in v.split(',')] if v else [])
 MANAGERS = ADMINS
 
-# add gunicorn
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat', 'storages')
+TIME_ZONE = config('TIME_ZONE', default='America/Sao_Paulo')
+USER_TIME_ZONE = config('USER_TIME_ZONE', default='America/Sao_Paulo')
 
-# Set your DSN value
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
-    'release': '${version}'
+EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', 'no-reply@ilhasoft.com.br')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='no-reply@ilhasoft.com.br')
 
-}
-
-# we store files on S3 on prod boxes
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
-AWS_S3_SECURE_URLS = True
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# these two settings will cause our aws files to never expire
-# see http://developer.yahoo.com/performance/rules.html#expires
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
+
+AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
+AWS_S3_FILE_OVERWRITE = False
 
-}
+MEDIA_URL = config('MEDIA_URL', default='https://ureport.ilhasoft.mobi/media/')
+SITE_API_HOST = config(
+    'SITE_API_HOST', default='https://rapidpro.ilhasoft.mobi')
+API_ENDPOINT = config(
+    'SITE_API_HOST', default='https://rapidpro.ilhasoft.mobi')
 
-# static dir is different for prod
-STATIC_URL = '/sitestatic/'
-COMPRESS_URL = '/sitestatic/'
-
-# our media is all on S3
-MEDIA_URL = 'https://dl-ureport.s3.amazonaws.com/'
-
-# List of finder classes that know how to find static files in
-# various locations.
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-)
-
-SITE_API_HOST = 'https://api.rapidpro.io'
-
-
-DATABASES['default'] = dj_database_url.config()
-
-# reuse our connections for up to 60 seconds
+DATABASES = {}
+DATABASES['default'] = dj_database_url.parse(config('DEFAULT_DATABASE'))
 DATABASES['default']['CONN_MAX_AGE'] = 60
 
-# no debug toolbar in prod
-MIDDLEWARE = (
-    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'smartmin.middleware.AjaxRedirect',
-    'django.middleware.locale.LocaleMiddleware',
-    'dash.orgs.middleware.SetOrgMiddleware',
-)
+MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        },
-        'null': {
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler',
-        },
-    },
-    'loggers': {
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'django.security.DisallowedHost': {
-            'handlers': ['null'],
-            'propagate': False,
-        },
-    },
-}
-
-# use our cache backend for sessions
-SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
-SESSION_CACHE_ALIAS = "default"
-
-# trust connections that are coming in on this protocol
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
 
-# compress arguments
-COMPRESS_CSS_HASHING_METHOD = 'content'
-COMPRESS_OFFLINE = True
-COMPRESS_OFFLINE_CONTEXT = dict(STATIC_URL=STATIC_URL, base_template='frame.html', debug=False, testing=False)
+REDIS_HOST = config('REDIS_HOST')
+REDIS_DATABASE = config('REDIS_DATABASE', default='1')
 
-REDIS_HOST = 'redis-internal.ureport.in'
-
-REDIS_HOST = REDIS_HOST
-REDIS_PORT = 6379
-REDIS_DB = '1'
-
-BROKER_URL = 'redis://%s:%s/%s' % (REDIS_HOST, REDIS_PORT, REDIS_DB)
+BROKER_URL = 'redis://{}:6379/{}'.format(REDIS_HOST, REDIS_DATABASE)
 
 CACHES = {
     'default': {
@@ -174,4 +90,28 @@ CACHES = {
     }
 }
 
-CELERY_RESULT_BACKEND = BROKER_URL
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=BROKER_URL)
+CELERY_ALWAYS_EAGER = config('CELERY_ALWAYS_EAGER', default=False, cast=bool)
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = config(
+    'CELERY_EAGER_PROPAGATES_EXCEPTIONS', default=True, cast=bool)
+
+COMPRESS_ENABLED = config('COMPRESS_ENABLED', default=True, cast=bool)
+COMPRESS_OFFLINE = config('COMPRESS_OFFLINE', default=True, cast=bool)
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
+COMPRESS_OFFLINE_CONTEXT = dict(
+    STATIC_URL=STATIC_URL, base_template='frame.html', debug=False, testing=False)
+
+PREVIOUS_ORG_SITES = [
+    {
+        'name': s.strip().split(',')[0],
+        'host': 'https://{}'.format(s.strip().split(',')[1]),
+        'flag': 'https://{}'.format(s.strip().split(',')[2]),
+        'is_static': False,
+    } for s in config('PREVIOUS_ORG_SITES').split('|')] if config('PREVIOUS_ORG_SITES') else []
+
+sentry_sdk.init(
+    dsn=config('RAVEN_CONFIG', default=''),
+    integrations=[DjangoIntegration()]
+)
