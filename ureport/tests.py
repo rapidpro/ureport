@@ -79,7 +79,7 @@ class MockTembaClient(TembaClient):
             dict(
                 campaigns=[],
                 triggers=[],
-                version=10,
+                version="10.0",
                 flows=[
                     dict(metadata=dict(uuid="abcdefg")),
                     dict(
