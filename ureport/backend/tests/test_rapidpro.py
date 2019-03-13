@@ -27,7 +27,7 @@ from django.utils import timezone
 from ureport.backend.rapidpro import BoundarySyncer, ContactSyncer, FieldSyncer, RapidProBackend
 from ureport.contacts.models import Contact, ContactField
 from ureport.locations.models import Boundary
-from ureport.polls.models import Poll, PollQuestion, PollResult
+from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.tests import MockResponse, UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
@@ -1790,6 +1790,53 @@ class RapidProBackendTest(UreportTest):
 
         poll_result = PollResult.objects.filter(flow="flow-uuid-3", ruleset="ruleset-uuid", contact="C-021").first()
         self.assertEqual(poll_result.ward, "R-IKEJA")
+
+    @patch("requests.request")
+    def test_get_definition_pre_12_0(self, mock_get):
+        response_contents = self.read_json("poll_11_12")
+        mock_get.return_value = MockResponse(200, response_contents)
+
+        flow_definition_json = self.read_json("poll_11_12", extract_flow=True)
+
+        self.assertEqual(
+            self.backend.get_definition(self.nigeria, "18f2dfba-4a53-4cae-bd4e-2ce6877793a6"),
+            (json.loads(flow_definition_json), "11.12"),
+        )
+
+        poll = self.create_poll(
+            self.nigeria, "Flow 1", "18f2dfba-4a53-4cae-bd4e-2ce6877793a6", self.education_nigeria, self.admin
+        )
+        self.assertEqual(PollQuestion.objects.all().count(), 0)
+        self.assertEqual(PollResponseCategory.objects.all().count(), 0)
+
+        self.backend.update_poll_questions(self.nigeria, poll, self.admin)
+
+        self.assertEqual(PollQuestion.objects.all().count(), 3)
+        self.assertEqual(PollResponseCategory.objects.all().count(), 9)
+        self.assertEqual(PollResponseCategory.objects.filter(category__icontains="other").count(), 2)
+
+    @patch("requests.request")
+    def test_get_definition_12_0(self, mock_get):
+        response_contents = self.read_json("poll_12_0_0")
+        mock_get.return_value = MockResponse(200, response_contents)
+
+        flow_definition_json = self.read_json("poll_12_0_0", extract_flow=True)
+        self.assertEqual(
+            self.backend.get_definition(self.nigeria, "18f2dfba-4a53-4cae-bd4e-2ce6877793a6"),
+            (json.loads(flow_definition_json), "12.0.0"),
+        )
+
+        poll = self.create_poll(
+            self.nigeria, "Flow 1", "18f2dfba-4a53-4cae-bd4e-2ce6877793a6", self.education_nigeria, self.admin
+        )
+        self.assertEqual(PollQuestion.objects.all().count(), 0)
+        self.assertEqual(PollResponseCategory.objects.all().count(), 0)
+
+        self.backend.update_poll_questions(self.nigeria, poll, self.admin)
+
+        self.assertEqual(PollQuestion.objects.all().count(), 3)
+        self.assertEqual(PollResponseCategory.objects.all().count(), 9)
+        self.assertEqual(PollResponseCategory.objects.filter(category__icontains="other").count(), 2)
 
 
 class PerfTest(UreportTest):

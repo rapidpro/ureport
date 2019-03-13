@@ -1,0 +1,271 @@
+{
+    "version": "11.12",
+    "site": "https://app.rapidpro.io",
+    "flows": [
+        {
+            "entry": "765cd944-9219-4ba0-98d1-03e1106c47e6",
+            "action_sets": [
+                {
+                    "uuid": "765cd944-9219-4ba0-98d1-03e1106c47e6",
+                    "x": 100,
+                    "y": 0,
+                    "destination": "54e79d02-5de2-4456-bd24-b2a2dcaa08bb",
+                    "actions": [
+                        {
+                            "type": "reply",
+                            "uuid": "75811a26-6f3e-48fa-b7bf-54fd937b6a5f",
+                            "msg": {
+                                "eng": "Hey, what is your favorite color? Red, Green or Blue",
+                                "fra": "Quel est ta couleur favori? Rouge, Vert ou Bleu"
+                            },
+                            "media": {},
+                            "quick_replies": [],
+                            "send_all": false
+                        }
+                    ],
+                    "exit_uuid": "28ee504a-671d-427e-b6ae-3c83a3e284c0"
+                },
+                {
+                    "uuid": "f6c0e1d3-bac4-46b9-a2ee-a001139308f9",
+                    "x": 358,
+                    "y": 316,
+                    "destination": "38ec546d-2ce4-4df2-a2da-8861f6d6d983",
+                    "actions": [
+                        {
+                            "type": "reply",
+                            "uuid": "08f22b36-babb-4667-b4d2-8b5630617df6",
+                            "msg": {
+                                "eng": "Great, Why is is your favorite?",
+                                "fra": "Merci, Pourquoi?"
+                            },
+                            "media": {},
+                            "quick_replies": [],
+                            "send_all": false
+                        }
+                    ],
+                    "exit_uuid": "3634515b-c79c-4cc7-ad83-02bb16d3bb22"
+                },
+                {
+                    "uuid": "537c2f7d-8c99-4ba7-a3fd-94b1042e0742",
+                    "x": 769,
+                    "y": 128,
+                    "destination": "54e79d02-5de2-4456-bd24-b2a2dcaa08bb",
+                    "actions": [
+                        {
+                            "type": "reply",
+                            "uuid": "c6f69670-b441-46c7-8cf5-5c3dc6db04f7",
+                            "msg": {
+                                "eng": "What? Color please Red, Green or Blue",
+                                "fra": "Quoi, couleur SVP, Rouge, Vert ou Bleu"
+                            },
+                            "media": {},
+                            "quick_replies": [],
+                            "send_all": false
+                        }
+                    ],
+                    "exit_uuid": "e42350c7-18b4-4b96-a1ca-2bbb0f56370d"
+                },
+                {
+                    "uuid": "8916af7e-7443-43a8-8130-a269bb3ed8ef",
+                    "x": 369,
+                    "y": 628,
+                    "destination": "c9f70768-02bc-4d6a-84f2-9dc3933424c5",
+                    "actions": [
+                        {
+                            "type": "reply",
+                            "uuid": "0f49637b-b37c-48cc-adb5-abd5ce9eb684",
+                            "msg": {
+                                "eng": "Do you still prefer it?",
+                                "fra": "Tu le preferes toujours?"
+                            },
+                            "media": {},
+                            "quick_replies": [],
+                            "send_all": false
+                        }
+                    ],
+                    "exit_uuid": "1296d6f8-82ca-48b6-8dc1-ca9490485627"
+                }
+            ],
+            "rule_sets": [
+                {
+                    "uuid": "54e79d02-5de2-4456-bd24-b2a2dcaa08bb",
+                    "x": 330,
+                    "y": 139,
+                    "label": "Response 1",
+                    "rules": [
+                        {
+                            "uuid": "01761ba5-b151-4ab7-9f10-f308813633fa",
+                            "category": {
+                                "eng": "Red"
+                            },
+                            "destination": "f6c0e1d3-bac4-46b9-a2ee-a001139308f9",
+                            "destination_type": "A",
+                            "test": {
+                                "type": "contains_any",
+                                "test": {
+                                    "eng": "Red",
+                                    "fra": "Rouge"
+                                }
+                            },
+                            "label": null
+                        },
+                        {
+                            "uuid": "4357b9e9-4eb2-492d-a39d-27e3da964b5e",
+                            "category": {
+                                "eng": "Blue"
+                            },
+                            "destination": "f6c0e1d3-bac4-46b9-a2ee-a001139308f9",
+                            "destination_type": "A",
+                            "test": {
+                                "type": "contains_any",
+                                "test": {
+                                    "eng": "Blue",
+                                    "fra": "Bleu"
+                                }
+                            },
+                            "label": null
+                        },
+                        {
+                            "uuid": "5edcab7a-5796-4950-88cc-fbbbb3509586",
+                            "category": {
+                                "eng": "Green"
+                            },
+                            "destination": "f6c0e1d3-bac4-46b9-a2ee-a001139308f9",
+                            "destination_type": "A",
+                            "test": {
+                                "type": "contains_any",
+                                "test": {
+                                    "eng": "Green",
+                                    "fra": "Vert"
+                                }
+                            },
+                            "label": null
+                        },
+                        {
+                            "uuid": "5f8dd2f0-68d5-41c3-8239-70c44c5fe6da",
+                            "category": {
+                                "eng": "Other"
+                            },
+                            "destination": "537c2f7d-8c99-4ba7-a3fd-94b1042e0742",
+                            "destination_type": "A",
+                            "test": {
+                                "type": "true"
+                            },
+                            "label": null
+                        }
+                    ],
+                    "finished_key": null,
+                    "ruleset_type": "wait_message",
+                    "response_type": "",
+                    "operand": "@step.value",
+                    "config": {}
+                },
+                {
+                    "uuid": "38ec546d-2ce4-4df2-a2da-8861f6d6d983",
+                    "x": 339,
+                    "y": 470,
+                    "label": "Response 2",
+                    "rules": [
+                        {
+                            "uuid": "995eff7d-4f6c-468f-9fbd-feac1f85a8ef",
+                            "category": {
+                                "eng": "All Responses"
+                            },
+                            "destination": "8916af7e-7443-43a8-8130-a269bb3ed8ef",
+                            "destination_type": "A",
+                            "test": {
+                                "type": "true"
+                            },
+                            "label": null
+                        },
+                        {
+                            "uuid": "e7a48f04-ca0a-4238-be3f-4a121b49406e",
+                            "category": {
+                                "eng": "No Response"
+                            },
+                            "destination": "8916af7e-7443-43a8-8130-a269bb3ed8ef",
+                            "destination_type": "A",
+                            "test": {
+                                "type": "timeout",
+                                "minutes": 5
+                            },
+                            "label": null
+                        }
+                    ],
+                    "finished_key": null,
+                    "ruleset_type": "wait_message",
+                    "response_type": "",
+                    "operand": "@step.value",
+                    "config": {}
+                },
+                {
+                    "uuid": "c9f70768-02bc-4d6a-84f2-9dc3933424c5",
+                    "x": 409,
+                    "y": 747,
+                    "label": "Response 3",
+                    "rules": [
+                        {
+                            "uuid": "ffbab969-8d58-434b-a911-3c0698aa6bd5",
+                            "category": {
+                                "eng": "Yes"
+                            },
+                            "destination": null,
+                            "destination_type": null,
+                            "test": {
+                                "type": "contains_any",
+                                "test": {
+                                    "eng": "Yes"
+                                }
+                            },
+                            "label": null
+                        },
+                        {
+                            "uuid": "08704cee-aeb1-437f-b55e-eaa306a4b46f",
+                            "category": {
+                                "eng": "No"
+                            },
+                            "destination": null,
+                            "destination_type": null,
+                            "test": {
+                                "type": "contains_any",
+                                "test": {
+                                    "eng": "No"
+                                }
+                            },
+                            "label": null
+                        },
+                        {
+                            "uuid": "b9f9574b-0620-49f7-87c7-2d606e17a585",
+                            "category": {
+                                "eng": "Other"
+                            },
+                            "destination": null,
+                            "destination_type": null,
+                            "test": {
+                                "type": "true"
+                            },
+                            "label": null
+                        }
+                    ],
+                    "finished_key": null,
+                    "ruleset_type": "wait_message",
+                    "response_type": "",
+                    "operand": "@step.value",
+                    "config": {}
+                }
+            ],
+            "base_language": "eng",
+            "flow_type": "M",
+            "version": "11.12",
+            "metadata": {
+                "name": "Poll",
+                "saved_on": "2019-03-13T13:15:16.351005Z",
+                "revision": 33,
+                "uuid": "18f2dfba-4a53-4cae-bd4e-2ce6877793a6",
+                "expires": 10080
+            }
+        }
+    ],
+    "campaigns": [],
+    "triggers": []
+    }

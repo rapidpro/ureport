@@ -7,6 +7,7 @@ import json
 import logging
 import time
 from collections import defaultdict
+from distutils.version import StrictVersion
 
 import pytz
 import requests
@@ -329,47 +330,77 @@ class RapidProBackend(BaseBackend):
         export_definition = client.get_definitions(flows=(flow_uuid,))
 
         flow_definition = None
+        version = export_definition.version
+        if StrictVersion(version) < StrictVersion("12.0"):
+            for flow_def in export_definition.flows:
+                def_flow_uuid = flow_def.get("metadata", dict()).get("uuid", None)
 
-        for flow_def in export_definition.flows:
-            def_flow_uuid = flow_def.get("metadata", dict()).get("uuid", None)
+                if def_flow_uuid and def_flow_uuid == flow_uuid:
+                    flow_definition = flow_def
+                    break
+        else:
+            for flow_def in export_definition.flows:
+                def_flow_uuid = flow_def.get("uuid", None)
 
-            if def_flow_uuid and def_flow_uuid == flow_uuid:
-                flow_definition = flow_def
-                break
-        return flow_definition
+                if def_flow_uuid and def_flow_uuid == flow_uuid:
+                    flow_definition = flow_def
+                    break
+
+        return flow_definition, version
 
     def update_poll_questions(self, org, poll, user):
-        flow_definition = self.get_definition(org, poll.flow_uuid)
+        flow_definition, version = self.get_definition(org, poll.flow_uuid)
 
         if flow_definition is None:
             return
 
-        base_language = flow_definition["base_language"]
+        if StrictVersion(version) < StrictVersion("12.0"):
+            base_language = flow_definition["base_language"]
 
-        poll.base_language = base_language
-        poll.save()
+            poll.base_language = base_language
+            poll.save()
 
-        flow_rulesets = flow_definition["rule_sets"]
+            flow_rulesets = flow_definition["rule_sets"]
 
-        for ruleset in flow_rulesets:
-            label = ruleset["label"]
-            ruleset_uuid = ruleset["uuid"]
-            ruleset_type = ruleset["ruleset_type"]
+            for ruleset in flow_rulesets:
+                question = PollQuestion.update_or_create(
+                    user, poll, ruleset["label"], ruleset["uuid"], ruleset["ruleset_type"]
+                )
 
-            question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
+                rapidpro_rules = []
+                for rule in ruleset["rules"]:
+                    rapidpro_rules.append(rule["uuid"])
+                    PollResponseCategory.update_or_create(question, rule["uuid"], rule["category"][base_language])
 
-            rapidpro_rules = []
-            for rule in ruleset["rules"]:
-                category = rule["category"][base_language]
-                rule_uuid = rule["uuid"]
-                rapidpro_rules.append(rule_uuid)
+                # deactivate if corresponding rules are removed
+                PollResponseCategory.objects.filter(question=question).exclude(rule_uuid__in=rapidpro_rules).update(
+                    is_active=False
+                )
+        else:
+            base_language = flow_definition["language"]
 
-                PollResponseCategory.update_or_create(question, rule_uuid, category)
+            poll.base_language = base_language
+            poll.save()
 
-            # deactivate if corresponding rules are removed
-            PollResponseCategory.objects.filter(question=question).exclude(rule_uuid__in=rapidpro_rules).update(
-                is_active=False
-            )
+            flow_nodes = flow_definition["nodes"]
+
+            for node in flow_nodes:
+                if "router" not in node:
+                    continue
+
+                question = PollQuestion.update_or_create(
+                    user, poll, node["router"].get("result_name", ""), node["uuid"], node["router"]["type"]
+                )
+
+                rapidpro_exits = []
+                for rp_exit in node["exits"]:
+                    rapidpro_exits.append(rp_exit["uuid"])
+                    PollResponseCategory.update_or_create(question, rp_exit["uuid"], rp_exit["name"])
+
+                # deactivate if corresponding exits are removed
+                PollResponseCategory.objects.filter(question=question).exclude(rule_uuid__in=rapidpro_exits).update(
+                    is_active=False
+                )
 
     def pull_fields(self, org):
         client = self._get_client(org, 2)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import codecs
 import json
 
 import pytz
@@ -200,6 +201,19 @@ class UreportTest(SmartminTest, DashTest):
         )
 
         return poll
+
+    def read_json(self, filename, extract_flow=False):
+        """
+        Loads JSON from the given test file
+        """
+        handle = codecs.open(f"testfiles/{filename}.json", "r", "utf-8")
+        contents = str(handle.read())
+        handle.close()
+
+        if extract_flow:
+            contents = json.dumps(json.loads(contents)["flows"][0])
+
+        return contents
 
 
 class UreportJobsTest(UreportTest):

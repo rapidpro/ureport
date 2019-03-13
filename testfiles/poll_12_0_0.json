@@ -1,0 +1,319 @@
+{
+    "version": "12.0.0",
+    "site": "https://app.rapidpro.io",
+    "flows": [
+        {
+            "uuid": "18f2dfba-4a53-4cae-bd4e-2ce6877793a6",
+            "name": "Poll",
+            "spec_version": "12.0.0",
+            "language": "eng",
+            "type": "messaging",
+            "revision": 33,
+            "expire_after_minutes": 10080,
+            "localization": {
+              "fra": {
+                "08f22b36-babb-4667-b4d2-8b5630617df6": {
+                  "text": [
+                    "Merci, Pourquoi?"
+                  ]
+                },
+                "0f49637b-b37c-48cc-adb5-abd5ce9eb684": {
+                  "text": [
+                    "Tu le preferes toujours?"
+                  ]
+                },
+                "21697ce6-fe46-4951-a483-3f21924eb872": {
+                  "arguments": [
+                    "Rouge"
+                  ]
+                },
+                "75811a26-6f3e-48fa-b7bf-54fd937b6a5f": {
+                  "text": [
+                    "Quel est ta couleur favori? Rouge, Vert ou Bleu"
+                  ]
+                },
+                "89ba6924-23af-4f37-aca2-6d6170ad87f7": {
+                  "arguments": [
+                    "Bleu"
+                  ]
+                },
+                "c6f69670-b441-46c7-8cf5-5c3dc6db04f7": {
+                  "text": [
+                    "Quoi, couleur SVP, Rouge, Vert ou Bleu"
+                  ]
+                },
+                "f831982b-d202-4a56-809d-52247e97a248": {
+                  "arguments": [
+                    "Vert"
+                  ]
+                }
+              }
+            },
+            "nodes": [
+              {
+                "uuid": "765cd944-9219-4ba0-98d1-03e1106c47e6",
+                "actions": [
+                  {
+                    "type": "send_msg",
+                    "uuid": "75811a26-6f3e-48fa-b7bf-54fd937b6a5f",
+                    "text": "Hey, what is your favorite color? Red, Green or Blue"
+                  }
+                ],
+                "exits": [
+                  {
+                    "uuid": "28ee504a-671d-427e-b6ae-3c83a3e284c0",
+                    "destination_node_uuid": "54e79d02-5de2-4456-bd24-b2a2dcaa08bb"
+                  }
+                ]
+              },
+              {
+                "uuid": "537c2f7d-8c99-4ba7-a3fd-94b1042e0742",
+                "actions": [
+                  {
+                    "type": "send_msg",
+                    "uuid": "c6f69670-b441-46c7-8cf5-5c3dc6db04f7",
+                    "text": "What? Color please Red, Green or Blue"
+                  }
+                ],
+                "exits": [
+                  {
+                    "uuid": "e42350c7-18b4-4b96-a1ca-2bbb0f56370d",
+                    "destination_node_uuid": "54e79d02-5de2-4456-bd24-b2a2dcaa08bb"
+                  }
+                ]
+              },
+              {
+                "uuid": "54e79d02-5de2-4456-bd24-b2a2dcaa08bb",
+                "wait": {
+                  "type": "msg"
+                },
+                "router": {
+                  "type": "switch",
+                  "result_name": "Response 1",
+                  "default_exit_uuid": "5f8dd2f0-68d5-41c3-8239-70c44c5fe6da",
+                  "operand": "@input",
+                  "cases": [
+                    {
+                      "uuid": "21697ce6-fe46-4951-a483-3f21924eb872",
+                      "type": "has_any_word",
+                      "arguments": [
+                        "Red"
+                      ],
+                      "exit_uuid": "01761ba5-b151-4ab7-9f10-f308813633fa"
+                    },
+                    {
+                      "uuid": "89ba6924-23af-4f37-aca2-6d6170ad87f7",
+                      "type": "has_any_word",
+                      "arguments": [
+                        "Blue"
+                      ],
+                      "exit_uuid": "4357b9e9-4eb2-492d-a39d-27e3da964b5e"
+                    },
+                    {
+                      "uuid": "f831982b-d202-4a56-809d-52247e97a248",
+                      "type": "has_any_word",
+                      "arguments": [
+                        "Green"
+                      ],
+                      "exit_uuid": "5edcab7a-5796-4950-88cc-fbbbb3509586"
+                    }
+                  ]
+                },
+                "exits": [
+                  {
+                    "uuid": "01761ba5-b151-4ab7-9f10-f308813633fa",
+                    "destination_node_uuid": "f6c0e1d3-bac4-46b9-a2ee-a001139308f9",
+                    "name": "Red"
+                  },
+                  {
+                    "uuid": "4357b9e9-4eb2-492d-a39d-27e3da964b5e",
+                    "destination_node_uuid": "f6c0e1d3-bac4-46b9-a2ee-a001139308f9",
+                    "name": "Blue"
+                  },
+                  {
+                    "uuid": "5edcab7a-5796-4950-88cc-fbbbb3509586",
+                    "destination_node_uuid": "f6c0e1d3-bac4-46b9-a2ee-a001139308f9",
+                    "name": "Green"
+                  },
+                  {
+                    "uuid": "5f8dd2f0-68d5-41c3-8239-70c44c5fe6da",
+                    "destination_node_uuid": "537c2f7d-8c99-4ba7-a3fd-94b1042e0742",
+                    "name": "Other"
+                  }
+                ]
+              },
+              {
+                "uuid": "f6c0e1d3-bac4-46b9-a2ee-a001139308f9",
+                "actions": [
+                  {
+                    "type": "send_msg",
+                    "uuid": "08f22b36-babb-4667-b4d2-8b5630617df6",
+                    "text": "Great, Why is is your favorite?"
+                  }
+                ],
+                "exits": [
+                  {
+                    "uuid": "3634515b-c79c-4cc7-ad83-02bb16d3bb22",
+                    "destination_node_uuid": "38ec546d-2ce4-4df2-a2da-8861f6d6d983"
+                  }
+                ]
+              },
+              {
+                "uuid": "38ec546d-2ce4-4df2-a2da-8861f6d6d983",
+                "wait": {
+                  "type": "msg",
+                  "timeout": 300
+                },
+                "router": {
+                  "type": "switch",
+                  "result_name": "Response 2",
+                  "default_exit_uuid": "995eff7d-4f6c-468f-9fbd-feac1f85a8ef",
+                  "operand": "@input",
+                  "cases": [
+                    {
+                      "uuid": "16a17d53-b6e8-41d1-b5bf-e6b11f8ae0c2",
+                      "type": "has_wait_timed_out",
+                      "arguments": [
+                        "@run"
+                      ],
+                      "omit_operand": true,
+                      "exit_uuid": "e7a48f04-ca0a-4238-be3f-4a121b49406e"
+                    }
+                  ]
+                },
+                "exits": [
+                  {
+                    "uuid": "995eff7d-4f6c-468f-9fbd-feac1f85a8ef",
+                    "destination_node_uuid": "8916af7e-7443-43a8-8130-a269bb3ed8ef",
+                    "name": "All Responses"
+                  },
+                  {
+                    "uuid": "e7a48f04-ca0a-4238-be3f-4a121b49406e",
+                    "destination_node_uuid": "8916af7e-7443-43a8-8130-a269bb3ed8ef",
+                    "name": "No Response"
+                  }
+                ]
+              },
+              {
+                "uuid": "8916af7e-7443-43a8-8130-a269bb3ed8ef",
+                "actions": [
+                  {
+                    "type": "send_msg",
+                    "uuid": "0f49637b-b37c-48cc-adb5-abd5ce9eb684",
+                    "text": "Do you still prefer it?"
+                  }
+                ],
+                "exits": [
+                  {
+                    "uuid": "1296d6f8-82ca-48b6-8dc1-ca9490485627",
+                    "destination_node_uuid": "c9f70768-02bc-4d6a-84f2-9dc3933424c5"
+                  }
+                ]
+              },
+              {
+                "uuid": "c9f70768-02bc-4d6a-84f2-9dc3933424c5",
+                "wait": {
+                  "type": "msg"
+                },
+                "router": {
+                  "type": "switch",
+                  "result_name": "Response 3",
+                  "default_exit_uuid": "b9f9574b-0620-49f7-87c7-2d606e17a585",
+                  "operand": "@input",
+                  "cases": [
+                    {
+                      "uuid": "8d422ae5-d5cd-410b-9c54-47f66c016d35",
+                      "type": "has_any_word",
+                      "arguments": [
+                        "Yes"
+                      ],
+                      "exit_uuid": "ffbab969-8d58-434b-a911-3c0698aa6bd5"
+                    },
+                    {
+                      "uuid": "0314e37a-1625-496c-8474-6b77492489a5",
+                      "type": "has_any_word",
+                      "arguments": [
+                        "No"
+                      ],
+                      "exit_uuid": "08704cee-aeb1-437f-b55e-eaa306a4b46f"
+                    }
+                  ]
+                },
+                "exits": [
+                  {
+                    "uuid": "ffbab969-8d58-434b-a911-3c0698aa6bd5",
+                    "name": "Yes"
+                  },
+                  {
+                    "uuid": "08704cee-aeb1-437f-b55e-eaa306a4b46f",
+                    "name": "No"
+                  },
+                  {
+                    "uuid": "b9f9574b-0620-49f7-87c7-2d606e17a585",
+                    "name": "Other"
+                  }
+                ]
+              }
+            ],
+            "_ui": {
+              "nodes": {
+                "38ec546d-2ce4-4df2-a2da-8861f6d6d983": {
+                  "type": "wait_for_response",
+                  "position": {
+                    "left": 339,
+                    "top": 470
+                  }
+                },
+                "537c2f7d-8c99-4ba7-a3fd-94b1042e0742": {
+                  "type": "execute_actions",
+                  "position": {
+                    "left": 769,
+                    "top": 128
+                  }
+                },
+                "54e79d02-5de2-4456-bd24-b2a2dcaa08bb": {
+                  "type": "wait_for_response",
+                  "position": {
+                    "left": 330,
+                    "top": 139
+                  }
+                },
+                "765cd944-9219-4ba0-98d1-03e1106c47e6": {
+                  "type": "execute_actions",
+                  "position": {
+                    "left": 100,
+                    "top": 0
+                  }
+                },
+                "8916af7e-7443-43a8-8130-a269bb3ed8ef": {
+                  "type": "execute_actions",
+                  "position": {
+                    "left": 369,
+                    "top": 628
+                  }
+                },
+                "c9f70768-02bc-4d6a-84f2-9dc3933424c5": {
+                  "type": "wait_for_response",
+                  "position": {
+                    "left": 409,
+                    "top": 747
+                  }
+                },
+                "f6c0e1d3-bac4-46b9-a2ee-a001139308f9": {
+                  "type": "execute_actions",
+                  "position": {
+                    "left": 358,
+                    "top": 316
+                  }
+                }
+              },
+              "stickies": {
+                
+              }
+            }
+          }
+
+    ],
+    "campaigns": [],
+    "triggers": []
+}
