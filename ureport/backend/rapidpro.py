@@ -327,24 +327,20 @@ class RapidProBackend(BaseBackend):
 
     def get_definition(self, org, flow_uuid):
         client = self._get_client(org, 2)
-        export_definition = client.get_definitions(flows=(flow_uuid,))
+        export_definition = client.get_definitions(flows=(flow_uuid,), dependencies="none")
 
         flow_definition = None
         version = export_definition.version
+        flow_def = export_definition.flows[0]
+
         if StrictVersion(version) < StrictVersion("12.0"):
-            for flow_def in export_definition.flows:
-                def_flow_uuid = flow_def.get("metadata", dict()).get("uuid", None)
-
-                if def_flow_uuid and def_flow_uuid == flow_uuid:
-                    flow_definition = flow_def
-                    break
+            def_flow_uuid = flow_def.get("metadata", dict()).get("uuid", None)
+            if def_flow_uuid and def_flow_uuid == flow_uuid:
+                flow_definition = flow_def
         else:
-            for flow_def in export_definition.flows:
-                def_flow_uuid = flow_def.get("uuid", None)
-
-                if def_flow_uuid and def_flow_uuid == flow_uuid:
-                    flow_definition = flow_def
-                    break
+            def_flow_uuid = flow_def.get("uuid", None)
+            if def_flow_uuid and def_flow_uuid == flow_uuid:
+                flow_definition = flow_def
 
         return flow_definition, version
 
