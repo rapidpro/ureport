@@ -22,28 +22,6 @@
     %a.btn.btn-primary.pull-right.manage{href:"{% url 'orgs.org_manage_accounts' %}", role:"button"}
       - trans "Manage Users"
 
-- block post-fields
-  -if request.user.is_superuser or perms.orgs.org_refresh_cache
-    %form.smartmin-form.form-horizontal{action:"{% url 'admins.org_refresh_cache' object.id %}", method:"post",  enctype:"multipart/form-data"}
-      - csrf_token
-      .control-group
-        %label.control-label
-          Cache
-        .controls
-          .row
-            .col-md-3
-              %button.btn.btn-primary.btn-block{type:"submit", name:"cache", value:"1"}
-                Refresh Boundaries
-              %button.btn.btn-primary.btn-block{type:"submit", name:"cache", value:"2"}
-                Refresh Main Poll results
-              %button.btn.btn-primary.btn-block{type:"submit", name:"cache", value:"3"}
-                Refresh Brick Polls results
-              %button.btn.btn-primary.btn-block{type:"submit", name:"cache", value:"4"}
-                Refresh Other Polls results
-              %button.btn.btn-primary.btn-block{type:"submit", name:"cache", value:"5"}
-                Refresh Flows
-
-
 - block extra-style
   :css
     td.read-label {
