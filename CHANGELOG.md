@@ -1,3 +1,19 @@
+v1.0.447
+----------
+ * Merge pull request #405 from rapidpro/ureport-v2-1
+ * Add missing file
+ * Disable some tests temporaly
+ * Add /v2 urls for public site, site under construction page
+ * Merge pull request #403 from Ilhasoft/fix/error-pages
+ * Change U-Report Logo
+ * Merge pull request #79 from rapidpro/master
+ * Merge pull request #402 from Ilhasoft/hotfix/news-date
+ * Fix tests to support new date format localized
+ * Fix spacing between imports and code
+ * Refactor created date for News by using the localization to format it
+ * Merge pull request #78 from rapidpro/master
+ * Merge pull request #76 from rapidpro/master
+
 v1.0.446
 ----------
  * Update FB customerchat plugin SDK
