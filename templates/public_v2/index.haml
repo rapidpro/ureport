@@ -1,0 +1,735 @@
+- extends "public_base_v2.html"
+
+- load thumbnail humanize ureport compress i18n
+
+- block hero
+  -if org|config:"is_global"
+    .hero-container.global
+      .hero-dark-container
+        .container
+          .row
+            .col-sm-7
+              .global-org-follow-button
+                -if not is_iorg and org|config:"facebook_page_id" and org|config:"facebook_app_id"
+                  <div class="fb-messengermessageus" messenger_app_id="{{ org|config:"facebook_app_id" }}" page_id="{{ org|config:"facebook_page_id" }}" color="blue" size="large" ></div>
+
+                -if not is_iorg
+                  %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"false", data-size:"large",  data-lang:"en"}
+                -else
+                  %a.primary-color{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
+                    -trans "Follow"
+                    @{{ org|config:"twitter_handle" }}
+                    {{ org|org_arrow_link }}
+
+              .global-welcome-text
+                -blocktrans
+                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities
+              -if latest_poll
+                .hero-dark-content
+                  .hero-title.primary-bg-color
+                    -trans "CURRENT POLL"
+                  .hero-description
+                    {{ latest_poll.title }}
+                  %a.hero-link.global-hero-link.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
+                    - trans "View Full Results"
+                    {{ org|org_arrow_link }}
+
+            .col-sm-5
+              .index-global-counter.card.card-padding
+                .hr-header.primary-color
+                  -trans "All U-Report members"
+                .global-count
+                  {{ global_counter|intcomma }}
+
+  -else
+    - if latest_poll
+      .hero-container
+        .hero-dark-container{style:"height: auto;"}
+          .container
+            .hero-small-background
+            .row
+              .col-sm-7
+                .hero-dark-content
+                  .hero-title.hero-top-title.primary-bg-color
+                    -trans "CURRENT POLL"
+                  .hero-description
+                    {{ latest_poll.title }}
+
+                  .hero-facebook-message-us-button
+                    -if not is_iorg and org|config:"facebook_page_id" and org|config:"facebook_app_id"
+                      <div class="fb-messengermessageus" messenger_app_id="{{ org|config:"facebook_app_id" }}" page_id="{{ org|config:"facebook_page_id" }}" color="blue" size="large" ></div>
+
+        .hero-stats-container
+          .container
+            .row
+              .col-sm-offset-7.col-sm-5
+                .index-current-poll-stats.card.card-padding{ class: '{% if org|config:"is_participation_hidden" %}invisible{% endif %}' }
+                  .hr-header.primary-color
+                    - trans "RESPONSE RATE"
+                  .stats
+                    {{ latest_poll.response_percentage }}
+                    %span.stats-small
+                      ({{ latest_poll.responded_runs|intcomma }}
+                      - trans "Responded out of"
+                      {{ latest_poll.runs|intcomma }})
+
+                  - with regions=latest_poll.most_responded_regions
+                    - if regions
+                      .hr-header.primary-color
+                        - trans "RESPONDER'S RATE BY LOCATION"
+                      .stats
+                        %table.regions
+                          %tr
+                            %td.region-key{ colspan: "5" }
+                              - trans "Most responded"
+
+                          %tr{ style:"postion: relative" }
+                            -for region in regions
+                              %td.region-bar-cell
+                                .region-bar-container{ class: "{% if forloop.last %}last-region{% endif %}" }
+                                  .region-percentage
+                                    {{ region.percent }}%
+
+                                  -if forloop.counter > 3
+                                    .region-bar-light{style:"height:{{ region.percent }}%;"}
+                                  .region-bar.primary-bg-color{style:"height:{{ region.percent }}%;"}
+
+                          %tr
+                            -for region in regions
+                              %td.region-name{ class: "{% if forloop.last %}last-region{% endif %}" }
+                                {{ region.boundary }}
+
+                          %tr
+                            -for region in regions
+                              %td.region-registered{ class: "{% if forloop.last %}last-region{% endif %}" }
+                                %div
+                                  {% blocktrans with responded=region.responded|intcomma total=region.total|intcomma %}
+                                  {{ responded }} of {{ total }}
+                                  {% endblocktrans %}
+
+
+                  - if trending_words
+                    .hr-header.primary-color
+                      - trans "TRENDING WORDS"
+                    .stats
+                      {% for word in trending_words|slice:"5"%}{{ word.strip }}{% if not forloop.last %}, {% endif %}{% endfor %}
+
+                  - with f_responses=latest_poll.get_featured_responses|slice:":4"
+                    - if f_responses
+                      .hr-header.primary-color
+                        - trans "FEATURED RESPONSES"
+                      .stats
+                        #current-poll-featured-response-carousel.carousel.slide{data-ride:"carousel"}
+                          %ol.carousel-indicators
+                            - for response in f_responses
+                              %li{data-target:"#current-poll-featured-response-carousel", data-slide-to:"{{forloop.counter}}", class:"{% if forloop.first %}active{% endif %}"}
+
+                          .carousel-inner
+                            - for response in f_responses
+                              .item{ class:"{% if forloop.first %}active{% endif %}"}
+                                {{ response.message }}
+
+                %a.hero-link.primary-bg-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
+                  - trans "View full results"
+                  {{ org|org_arrow_link }}
+
+  - block banner
+    {{ block.super }}
+
+- block content
+  -if not org|config:"is_global"
+    .section
+      %h1.level-1-title
+        - trans "U-REPORTERS IN"
+        {{ org.name|upper }}
+      .level-1-title-description.secondary-color
+      .card.card-padding
+        .row
+          .col-md-4
+            .hr-header.primary-color
+              - trans "TOTAL # OF U-REPORTERS"
+            .reporters-count
+              - if reporters
+                {{ reporters|intcomma }}
+              - else
+                000,000
+
+            - if most_active_regions
+              .hr-header.primary-color
+                - trans "4 MOST ACTIVE REGIONS"
+              .most-active-regions
+                {% for region in most_active_regions|slice:"4" %}{{ region.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+
+          -if is_iorg
+            .col-md-4
+              .hr-header.primary-color{ style:"margin-top:10px;" }
+                - trans "RATE BY GENDER"
+              .gender-stats
+                -include "public/mobile_gender_include.html"
+
+            .col-md-4
+              .hr-header.primary-color
+                -trans "RATE BY AGE"
+
+              .age-stats
+                -include "public/mobile_age_include.html"
+
+          -if not is_iorg
+            .col-md-4
+              .hr-header.primary-color
+                - trans "RATE BY GENDER"
+              .gender-stats
+                %table.gender
+                  %tbody
+                    %tr
+                      %td
+                        .icon-gender.primary-color
+                          .glyph.icon-Icon-02
+
+                      %td
+                        #male-percentage.primary-border-color.percentage-gender
+                          %span {{ gender_stats.male_percentage }}
+                        #male-summary.summary-gender
+                          {{ gender_stats.male_count|intcomma }}
+
+                      %td.female-gender
+                        .icon-gender.primary-color
+                          .glyph.icon-Icon-01
+
+                      %td
+                        #female-percentage.primary-border-color.percentage-gender
+                          %span {{ gender_stats.female_percentage }}
+                        #female-summary.summary-gender
+                          {{ gender_stats.female_count|intcomma }}
+
+            .col-md-4
+              .hr-header.primary-color
+                - trans "RATE BY AGE"
+              .age-stats{ id: "age-chart"}
+
+  %hr.aaa
+  .section
+    %h1.level-1-title
+      - trans "WHAT U-REPORTERS ARE SAYING"
+    .level-1-title-description.secondary-color
+
+    -if not is_iorg
+      #brick-container
+        - for vid in videos|slice:"5"
+          .brick.hide-on-small.video-brick.size11{data-priority:"{% if forloop.counter == 1 %}4{% else %}{% cycle '3' '2' %}{% endif %}"}
+            .brick-inner
+              .brick-title.primary-bg-color
+                - trans "FEATURED VIDEO"
+              .brick-content{style:"padding: 0px; width: 100%; height:325px; bottom:40px;"}
+                %iframe{ width:"100%", height:"100%", src:"//www.youtube.com/embed/#{ vid.video_id }?rel=0&autohide=1&showinfo=0", frameborder:"0"}
+              %a.brick-link{ href:"https://www.youtube.com/watch?v=#{ vid.video_id }"}
+                - trans "Watch more videos"
+                {{ org|org_arrow_link }}
+
+        {% if org|config:"featured_state" and False %}
+        .brick.hide-on-small.state-brick.size21{data-priority:"5"}
+          .brick-inner
+            .brick-title.primary-bg-color
+              - trans "FEATURED REGION"
+            .brick-content{style:"bottom:0;"}
+              .brick-align{style:"padding: 40px 10px;"}
+                - include "public/featured_region.html"
+        {% endif %}
+
+        {% if org|config:"iso_code" and story_widget_url %}
+        .brick.hide-on-small.ureportapp-brick.size12{data-priority:"3"}
+          .brick-inner
+            .brick-title.ureportapp-bg-color
+              U-REPORT
+            .brick-content
+              .brick-align{style:"padding: 30px 0;"}
+                %iframe{ src:'{{ story_widget_url }}{{ org|config:"iso_code"}}', allowtransparency:"true", frameborder:"0", scrolling:"yes", style:"border:none;overflow:scroll;height:600px;width: 100%;"}
+          %a.ureportapp-bg-color.brick-link
+            - trans "Check more stories in U-Report app"
+            {{ org|org_arrow_link }}
+        {% endif %}
+
+        {% if org|config:"facebook_page_url" %}
+        .brick.hide-on-small.facebook-brick.size12{data-priority:"3"}
+          .brick-inner
+            .brick-title.facebook-bg-color
+              FACEBOOK
+            .brick-content
+              .brick-align{style:"padding: 40px 0px 10px 0px; max-width:98%; overflow:hidden;"}
+                .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+          %a.facebook-bg-color.brick-link{ href:'{{ org|config:"facebook_page_url" }}' }
+            - trans "View more stories on Facebook"
+            {{ org|org_arrow_link }}
+        {% endif %}
+
+        {% if org|config:"instagram_username" and org|config:"instagram_lightwidget_id" %}
+        .brick.hide-on-small.instagram-brick.size12{data-priority:"3"}
+          .brick-inner
+            .brick-title.instagram-bg-color
+              INSTAGRAM
+            .brick-content
+              .brick-align{style:"padding: 0px"}
+                %iframe.lightwidget-widget{ src:'//lightwidget.com/widgets/{{org|config:"instagram_lightwidget_id"}}.html', id:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}', name:'lightwidget_{{org|config:"instagram_lightwidget_id"|slice:"10"}}',  scrolling:'no', allowtransparency:'true',  style:'width: 100%; border: 0; overflow: hidden;'}
+          %a.instagram-bg-color.brick-link{ href:'https://instagram.com/{{ org|config:"instagram_username"}}'}
+            - trans "View more on Instagram"
+            {{ org|org_arrow_link }}
+        {% endif %}
+
+        {% if org|config:"twitter_handle" %}
+        .brick.hide-on-small.twitter-brick.size12{data-priority:"3"}
+          .brick-inner
+            .brick-title.twitter-bg-color
+              TWITTER
+
+            .brick-content
+              .brick-align{style:"padding: 50px 10px;"}
+                %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
+
+                %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"340px", height:"600px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+
+            %a.brick-link{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
+              - trans "Read more tweets on Twitter"
+              {{ org|org_arrow_link }}
+        {% endif %}
+
+        {% if news %}
+        .brick.hide-on-small.news-brick.size12{data-priority:"4"}
+          .brick-inner
+            .brick-title.primary-bg-color
+              - trans "NEWS FEED"
+            .brick-content
+              .brick-align.news-list-align
+                .brick-news-list
+        {% endif %}
+
+        - for story in stories
+          .brick.story-brick.size11{data-priority:"{% if forloop.counter <= forloop.revcounter %}4{% else %}3{% endif %}"}
+            .brick-inner
+              .brick-title.primary-bg-color.float-left
+                - trans "STORY"
+              .brick-content{style:"bottom:0;"}
+                .brick-short-story-image
+                  - if story.get_image
+                    {% thumbnail story.get_image "350x350" crop="top" as im %}
+                    <img width="100%" height="100%" src="{{im.url}}" />
+                    {% endthumbnail %}
+                  - else
+                    %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+
+              .brick-short-story-title
+                {{ story.title }}
+              .brick-short-story-date
+                {{ story.created_on|date }}
+              %a.brick-link{ href:"{% url 'public.story_read' story.pk %}" }
+                - trans "Read full story"
+                {{ org|org_arrow_link }}
+
+        - for poll in recent_polls|slice:"3"
+          .brick.hide-on-small.poll-brick.size21{data-priority:"{% cycle '4' '3' '2' %}"}
+            .brick-inner
+              .brick-title.primary-bg-color
+                {{ poll.category.name|upper }}
+
+              .brick-block-half-width
+                .brick-block-vcenter-container
+                  .brick-block-vcenter-content
+                    .brick-poll-title
+                      {{ poll.get_first_question.title }}
+                    .brick-poll-response-percentage
+                      {{ poll.response_percentage }}
+                      - trans "Response Rate"
+                      | {{ poll.created_on|date }}
+
+              .brick-block-half-width
+                - if poll.get_featured_responses
+                  .brick-poll-details.half-border.primary-bg-color
+                    - for response in poll.get_featured_responses
+                      .brick-poll-featured-response.primary-color
+                        {{ response.message }}
+                - else
+                  .brick-poll-pie-chart
+                    .brick-poll-chart{ data-question: "{{ poll.get_first_question.id }}", id: "graph-{{ poll.get_first_question.id }}" }
+
+
+              %a.brick-link{ href: "{% url 'public.poll_read' poll.id %}" }
+                - trans "View full results"
+                {{ org|org_arrow_link }}
+    -else
+      #iorg-brick-container
+        - for story in stories
+          - if forloop.counter < 6
+            .brick.story-brick.size12
+              .brick-inner
+                .brick-title.primary-bg-color.float-left
+                  - trans "STORY"
+                .brick-content
+                  .brick-long-story-image
+                    - if story.get_image
+                      {% thumbnail story.get_image "300" crop="top" as im %}
+                      <img width="100%" src="{{im.url}}" />
+                      {% endthumbnail %}
+                    - else
+                      %img{width:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+                  .brick-align
+                    .brick-long-story-title
+                      {{ story.title }}
+
+                    .half-border.primary-bg-color
+                    .brick-long-story-text
+                      {{ story.summary|linebreaksbr }}
+
+                %a.brick-link{ href:"{% url 'public.story_read' story.pk %}" }
+                  - trans "Read full story"
+                  {{ org|org_arrow_link }}
+
+- block extra-style
+  {{ block.super }}
+  :css
+    .fb-messengermessageus {
+      line-height: 16px;
+      margin-bottom: 5px;
+    }
+
+    .poll-map {
+      height: 300px;
+      width: 100%;
+    }
+
+    .admin-name {
+      font-size: 18px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-family: UreportHeadlineFont;
+    }
+
+    .leaflet-container {
+      background: #fff;
+    }
+
+    .leaflet-container .legend {
+      line-height: 13px;
+      color: #555;
+      font-size:10px;
+    }
+
+    .leaflet-container .legend i {
+      width: 13px;
+      height: 13px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+
+    .leaflet-container .info {
+      color: #000;
+    }
+
+    .top-border {
+      border-top: 1px solid #000;
+      margin-top: 5px;
+    }
+
+    .info-count {
+      font-size: 18px;
+      padding-right: 10px;
+      line-height: 100%;
+    }
+
+    .info-tiny {
+      font-size: 9px;
+      padding-right: 10px;
+      line-height: 80%;
+    }
+
+    .info-percentage {
+      font-size: 22px;
+      line-height: 100%;
+    }
+
+    .top-color {
+      color: rgb(0,104,55);
+    }
+
+    .other-color {
+      color: rgb(165,0,38);
+    }
+
+    .leaflet-container .info {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+
+   .hero-container {
+      {% if latest_poll %}
+      {% thumbnail latest_poll.get_category_image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image:url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endif%}
+    }
+
+   .hero-small-background {
+      {% if latest_poll %}
+      {% thumbnail latest_poll.get_category_image "768x508" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image:url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endif%}
+    }
+
+
+- block extra-script
+  {{ block.super }}
+  -if not is_iorg
+    <script src="{{ STATIC_URL }}js/highcharts.js"></script>
+    <script src="{{ STATIC_URL }}js/isotope.pkgd.min.js"></script>
+    {% compress js %}
+    <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/featured_region.coffee" />
+    {% endcompress %}
+    :javascript
+
+      var newsPage = 1;
+      function loadNews(page) {
+        $.ajax({url:'/news/?page=' + page, dataType:'json'}).done(function(data){
+           for (i=0; i<data.news.length; i++) {
+             newsItem = data.news[i];
+
+             html = '<div class="news-item">';
+             html += '<div class="news-item-title primary-color">';
+             html += newsItem.title;
+             html += '<div class="news-item-date pull-right">';
+             html += newsItem.created_on;
+             html += '</div></div><div class="news-item-description">';
+             html += newsItem.description;
+             html += '</div><div class="news-item-link">';
+             html += '<a href="';
+             html += newsItem.link;
+             html += '">' + "{% trans 'Read this story' %}" + ' &#8594;';
+             html += '</a></div></div><hr class="aaa">';
+
+             $(".brick-news-list").append(html);
+
+        }
+        newsPage += 1;
+      });
+      }
+
+      $(document).ready(function() {
+        loadNews(newsPage);
+      });
+
+      jQuery(
+        function($) {
+          $('.brick-news-list').bind('scroll', function() {
+            if($(this).scrollTop() + $(this).innerHeight()>=$(this)[0].scrollHeight){
+              loadNews(newsPage);
+            }
+         })
+       }
+     );
+
+
+      $(function(){
+        $(".brick-poll-chart").each(function(){
+          var question = $(this).attr("data-question");
+
+          $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
+
+            if(!result){
+              return;
+            }
+            var results = result[0];
+            var categories = [];
+            var data = [];
+
+            var total = 0;
+            for (i=0; i<results.categories.length; i++){
+              category = results.categories[i];
+              total += category.count;
+            }
+
+            var percentage_lookup = {};
+
+            for (i=0; i<results.categories.length; i++){
+              category = results.categories[i];
+              label = category.label.trim().toUpperCase();
+              categories.push(label);
+
+              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+              percentage_lookup[label] = Math.round(percentage);
+
+              if (parseInt(percentage_lookup[label])) {
+                data.push({ name:label,  y: percentage });
+              }
+            }
+
+            $('#graph-' + question).highcharts({
+              chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+              },
+              colors: ['{{ org|org_color:"0" }}', '{{ org|org_color:"1" }}', '{{ org|org_color:"2" }}', '{{ org|org_color:"3" }}', '{{ org|org_color:"4" }}', '{{ org|org_color:"5" }}'],
+              credits: {
+                enabled: false
+              },
+              title: {
+                text: null
+              },
+              tooltip: {
+                pointFormat: '<b>{point.percentage:.1f}%</b>',
+                style: {
+                  fontFamily: "UreportHeadlineFont",
+                  direction: "ltr",
+                }
+              },
+              plotOptions: {
+                pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  size: 200,
+                  dataLabels: {
+                    enabled: false,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                        fontFamily: "UreportHeadlineFont"
+                    }
+                  }
+                }
+              },
+              series: [{
+                type: 'pie',
+                data: data
+              }]
+            });
+          });
+        });
+      });
+
+      {% if org|config:"featured_state" %}
+      $(function(){
+        $.ajax({url:'/boundaries/{{ org|config:"featured_state"}}/', dataType: "json"}).done(function(boundaries){
+          $(".poll-map").each(function(){
+            var question = $(this).attr("data-question");
+            var region = $(this).attr("data-region");
+
+            window.initMap('map-' + question, boundaries, question, region);
+          });
+        });
+      });
+      {% endif %}
+
+      function layoutBricks(){
+        var containerWidth = $('#brick-container').width();
+        var gutter = 15;
+        var columnWidth = (containerWidth >= 1000) ? 320 : 285;
+
+        $('#brick-container').isotope({
+          itemSelector: '.brick',
+          getSortData: {
+            priority: '[data-priority] parseInt'
+          },
+          sortBy: 'priority',
+          sortAscending: false,
+          masonry: {
+           columnWidth: columnWidth,
+           gutter: gutter
+          }
+        });
+      }
+
+      $(function() {
+        layoutBricks();
+
+        $(window).on('debouncedresize', function(){
+          layoutBricks();
+        });
+      });
+
+
+      $(function(){
+        $("#age-chart").each(function(){
+
+           var data = {{ age_stats|safe }};
+
+           {% if is_rtl_org %}
+           data.reverse();
+           {% endif %}
+
+           var categories = [];
+
+           for (i=0; i<data.length; i++) {
+             categories.push(data[i].name)
+           }
+
+           $('#age-chart').highcharts({
+             chart: {
+               type: 'column',
+               spacing: [ 3, 5, 3, 5]
+             },
+             credits: {
+               enabled: false
+             },
+             legend: {
+               enabled: false
+             },
+             title: {
+                 text: null
+             },
+             subtitle: {
+                 text: null
+             },
+             xAxis: {
+               categories: categories,
+               labels : {
+                   rotation: 0,
+                   style: {
+                     fontSize: 10,
+                     fontFamily: "UreportSmallTextFont"
+                 }
+               },
+               minorTickLength: 0,
+               tickLength: 0
+             },
+             yAxis: {
+               min: 0,
+               labels: {
+                 enabled: false
+               },
+               gridLineWidth: 0,
+               title: {
+                 text: null
+               }
+             },
+             tooltip: {
+               enabled: false
+             },
+             plotOptions: {
+                 column: {
+                     color: '{{ org|config:"primary_color"}}',
+                     pointPadding: 0.2,
+                     pointWidth: 30,
+                     borderWidth: 0,
+                     dataLabels:  {
+                       enabled: true,
+                       style: {
+                         fontFamily: "UreportHeadlineFont"
+                       },
+                       verticalAlign:"bottom",
+                       format: '<b>{point.y:.0f}%</b>'
+                     }
+                 }
+             },
+             series: [ {name: 'Age' , data: data } ]
+           });
+         });
+       });
+
+    -if org|config:"instagram_lightwidget_id"
+      <script src="//lightwidget.com/widgets/lightwidget.js"></script>
+
+    -if org|config:"twitter_handle"
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>

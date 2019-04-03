@@ -15,6 +15,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r"^", include("ureport.public.urls")),
+    url(r"^v2/", include("ureport.public_v2.urls")),
     url(r"^manage/", include("ureport.admins.urls")),
     url(r"^manage/", include("dash.orgs.urls")),
     url(r"^manage/", include("dash.dashblocks.urls")),
