@@ -83,13 +83,91 @@
     }(document, 'script', 'facebook-jssdk'));
   </script>
 
-  %section.section
-    .container.has-text-centered
-      - block brand
-        {% thumbnail org.logo "230x86" format="PNG" as im %}
-        %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
-        {% endthumbnail %}
-      
+  - block navbar
+      .container
+        .level.is-marginless{style:"background:#000;height:15px"}
+
+        %nav{role: "navigation", aria-label:"main navigation", style:"margin:0px 10px; padding: 30px 100px 30px 100px;"}
+          .navbar-brand.is-hidden-tablet
+            .navbar-item
+              {% thumbnail org.logo "230x86" format="PNG" as im %}
+              %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
+              {% endthumbnail %}
+
+            %a.navbar-burger{role: "button", aria-label:"menu", aria-expanded:"false", data-target:"mobileNavbar"}
+              %span{aria-hidden:"true"}
+              %span{aria-hidden:"true"}
+              %span{aria-hidden:"true"}
+
+          #mobileNavbar.level.navbar-menu
+            .level-left
+              .level-item.is-hidden-mobile
+                All Countries
+              .level-item.is-hidden-tablet.has-text-weight-semibold.is-size-5
+                Polls
+              .level-item.is-hidden-tablet.has-text-weight-semibold.is-size-5
+                Stories
+              .level-item.is-hidden-tablet
+              .level-item.is-hidden-tablet
+
+            .level-right
+              .level-item
+                About
+              .level-item.is-hidden-tablet
+                Engage
+              .level-item
+                U-Reporters
+              .level-item
+                FAQ
+              .level-item.is-hidden-tablet
+              .level-item.is-hidden-tablet
+
+              .level-item.is-hidden-mobile
+                .is-small
+                  %span.icon
+                    %i.fas.fa-search
+                  Search
+              .level-item.is-hidden-tablet
+                .field.is-grouped
+                  .is-small
+                    %span.icon
+                      %i.fab.fa-facebook-f
+                  .is-small
+                    %span.icon
+                      %i.fab.fa-twitter
+
+              .level-item.is-hidden-mobile
+                .is-small
+                  %span.icon
+                    %i.fab.fa-facebook-f
+              .level-item.is-hidden-mobile
+                .is-small
+                  %span.icon
+                    %i.fab.fa-twitter
+              .level-item.is-hidden-tablet
+                .is-small
+                  %span.icon
+                    %i.fas.fa-search
+                  Search
+              .level-item.is-hidden-mobile
+                Join Now
+              .level-item.is-hidden-mobile
+                Languages
+
+        %nav.level.is-hidden-mobile{role: "navigation", aria-label:"main navigation", style:"border-bottom: 1px solid black; margin: 0px 100px; padding: 30px 0px;"}
+          .level-item.has-text-centered
+            Polls
+
+          .level-item.has-text-centered
+            {% thumbnail org.logo "230x86" format="PNG" as im %}
+            %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
+            {% endthumbnail %}
+
+          .level-item.has-text-centered
+            Stories
+
+  %section.section.is-large
+
     .container.has-text-centered.is-size-1
       %h1
         Site page under construction
@@ -118,6 +196,20 @@
     ga('create', '{{ org|config:"google_tracking_id" }}', 'auto');
     ga('send', 'pageview');
 
+  </script>
+
+  <script>
+  $(document).ready(function() {
+
+  // Check for click events on the navbar burger icon
+  $(".navbar-burger").click(function() {
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      $(".navbar-burger").toggleClass("is-active");
+      $("#mobileNavbar").toggleClass("is-active");
+
+  });
+});
   </script>
 
   {% endif %}
