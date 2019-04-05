@@ -33,10 +33,12 @@
       - compress css
         %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bulma0.7.1.css"}
         %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bulma-rtl0.7.1.css"}
+        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/smartmin_styles.css"}
 
     -else
       -compress css
         %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bulma.css"}
+        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/smartmin_styles.css"}
 
   - block extra-less
   - block extra-style

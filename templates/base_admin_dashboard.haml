@@ -37,8 +37,9 @@
   %section.section.is-paddingless.is-marginless
     .container
       -block content-div
-        .container.has-background-grey          
-          -block content
+        .container.has-background-grey
+          .container{style: "padding: 10rem 80px;"}
+            -block content
    
   %section.section.is-paddingless.is-marginless
     %footer.footer.is-paddingless
