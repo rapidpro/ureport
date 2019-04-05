@@ -1,39 +1,39 @@
-- extends "base.html"
+- extends "base_admin_dashboard.html"
 
 - load smartmin i18n
 
 - block login
 
 - block content
-  .row.login-form
-    .col-md-7.col-md-offset-2
-      .page-header
-        %h2
+  .container{style: "padding: 10rem 80px 10rem 80px;"}
+    .columns.login-form
+      .column.is-6
+        .page-header.is-size-4.has-text-white.has-text-weight-bold
           - trans "Sign in"
+        %div{style:"height: 50px;"}
+        - if allow_email_recovery
+          %span.is-size-5{ style:"padding-top:7px;padding-right:150px;"}
+            %a.has-text-info{ href:"{% url 'users.user_forget' %}"}
+              - trans "Forgot Password?"
 
-      %form#login-form.form-stacked{method:"post"}
-        - for field, errors in form.errors.items
-          - if field == '__all__'
-            .alert.alert-danger.form-errors
-              %h3
-                Error
-              {{ errors }}
-      
-        %fieldset
-          - for field in form
-            .form-group{class:"{% if field.error %}has-error{% endif %}"}
-              %label{ for:"={ field.name }"}
-                {{ field.label }}
-              .input
-                {{ field|add_css:"form-control" }}
+      .column.is-6
+        %form#login-form{method:"post"}
+          - for field, errors in form.errors.items
+            - if field == '__all__'
+              .alert.alert-danger.form-errors
+                %h3
+                  Error
+                {{ errors }}
+          %fieldset
+            - for field in form
+              .field{class:"{% if field.error %}is-danger{% endif %}"}
+                %label.label{ for:"={ field.name }"}
+                  {{ field.label }}
+                {{ field|add_css:"input" }}
 
-              - if field.error
-                %span.help-block
-                  {{ field.error }}
-          - csrf_token
-          %button.btn.btn-primary.login-btn{ type:"submit"}
-            - trans "Login"
-          - if allow_email_recovery
-            %span.pull-right{ style:"padding-top:7px;padding-right:150px;"}
-              %a{ href:"{% url 'users.user_forget' %}"}
-                - trans "Forgot Password?"
+                - if field.error
+                  %span.help-block
+                    {{ field.error }}
+            - csrf_token
+            %button.button.is-info.is-large.login-btn.is-pulled-right{ type:"submit"}
+              - trans "Enter Dashboard"
