@@ -5,22 +5,22 @@
 -block body-content
   %section.section.is-paddingless.is-marginless
     .container
-      .level.is-marginless.has-background-black{style:"height:15px"}
+      .level.is-marginless.has-background-black(style="height:15px")
 
     -block navbar
-      .container{style: "padding: 20px 80px 20px 80px;"}
+      .container(style="padding: 20px 80px 20px 80px;")
         .level
           .level-left
             .level-item
               .icon
                 %i.fas.fa-arrow-circle-left
               Back to Full Site
-      .container.has-background-dark.has-text-white{style: "padding: 40px 80px 0px 80px;"}
-        .level.is-large{style:"border-bottom: 1px solid white; padding-bottom: 40px;"}
+      .container.has-background-dark.has-text-white(style="padding: 40px 80px 0px 80px;")
+        .level.is-large(style="border-bottom: 1px solid white; padding-bottom: 40px;")
           .level-left
             .level-item
               {% thumbnail org.logo "230x86" format="PNG" as im %}
-              %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}", style:"border: 1px solid green;"}
+              %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
               {% endthumbnail %}
             .level-item
               %div
@@ -38,17 +38,17 @@
     .container
       -block content-div
         .container.has-background-grey
-          .container{style: "padding: 10rem 80px;"}
+          .container(style="padding: 10rem 80px;")
             -block content
    
   %section.section.is-paddingless.is-marginless
     %footer.footer.is-paddingless
       -block footer
-        .container.has-background-black.has-text-white{style: "padding: 80px;"}
-          .level.is-large{style:"border-bottom: 1px solid white; padding-bottom: 40px;"}
+        .container.has-background-black.has-text-white(style="padding: 80px;")
+          .level.is-large(style="border-bottom: 1px solid white; padding-bottom: 40px;")
             .level-left
               {% thumbnail org.logo "230x86" format="PNG" as im %}
-              %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}", style:"border: 1px solid green;"}
+              %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
               {% endthumbnail %}
             .level-right
               .level-item.has-text-weight-bold.is-size-2

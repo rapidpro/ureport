@@ -2,17 +2,17 @@
 - load compress dashblocks thumbnail ureport smartmin i18n
 
 %head
-  %meta{ charset:"utf-8"}
+  %meta(charset="utf-8")
   %title
     - block title
       - trans "U-Report"
     - block subtitle
       &nbsp;
-  %meta{ name:"description", content:""}
-  %meta{ name:"author", content:""}
+  %meta(name="description" content="")
+  %meta(name="author" content="")
 
   - if has_better_domain
-    %meta{name:"robots", content:"noindex"}
+    %meta(name="robots" content="noindex")
   
   <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
   <!--[if lt IE 9]>
@@ -20,10 +20,10 @@
     <![endif]-->
   
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  %meta{ name:"viewport", content:"width=device-width, initial-scale=1.0"}
+  %meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
   <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-  %link{ rel:"icon", type:"image/x-icon", href:"{{ STATIC_URL }}img/favicon.png"}
+  %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png")
   
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>    
 
@@ -31,14 +31,14 @@
   -block styles
     - if is_rtl_org
       - compress css
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bulma0.7.1.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bulma-rtl0.7.1.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/smartmin_styles.css"}
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/smartmin_styles.css")
 
     -else
       -compress css
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bulma.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/smartmin_styles.css"}
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/smartmin_styles.css")
 
   - block extra-less
   - block extra-style
@@ -90,7 +90,7 @@
       .container.has-text-centered
         - block brand
           {% thumbnail org.logo "230x86" format="PNG" as im %}
-          %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
+          %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
           {% endthumbnail %}
 
       .container.has-text-centered.is-size-1
@@ -98,7 +98,7 @@
           Site page under construction
 
       .container.has-text-centered.is-text-1
-        %a{ href:"/" }
+        %a(href="/")
           Go back to main public site
 
 

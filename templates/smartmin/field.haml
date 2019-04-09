@@ -7,9 +7,9 @@
     {{ form_field }}
   - else
     - if form_field != None
-      .field.is-horizontal{class:"{% if form_field.errors %}is-danger{% endif %}"}
+      .field.is-horizontal(class="{% if form_field.errors %}is-danger{% endif %}")
         .field-label.is-normal
-          %label.label{ for:"{{ field.name }}"}>
+          %label.label(for="{{ field.name }}")>
             - get_label field
         .field-body
           .field.is-expanded
@@ -24,7 +24,7 @@
       - else
         .field.is-horizontal
           .field-label.is-normal
-            %label.label{ for:"{{ field.name }}"}>
+            %label.label(for="{{ field.name }}")>
               - get_label field
           .field-body
             .field.is-expanded

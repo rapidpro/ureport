@@ -8,7 +8,7 @@
       .column.is-12
         - block pre-form
 
-        %form.smartmin-form{method: "post", enctype:"multipart/form-data", role:"form"}
+        %form.smartmin-form(method="post" enctype="multipart/form-data" role="form")
           - block pre-form-errors
 
           - if form.non_field_errors
@@ -39,10 +39,10 @@
               .field-body
                 .field.is-grouped
                   .control
-                  	%button.button.is-primary{type:"submit"}
+                  	%button.button.is-primary(type="submit")
                       {{ submit_button_name }}
                   .control
-                    %a.button{ onclick:"javascript:history.go(-1)"}
+                    %a.button(onclick="javascript:history.go(-1)")
                       - trans "Cancel"
 
         - block post-form            
