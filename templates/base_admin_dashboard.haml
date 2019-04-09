@@ -11,28 +11,34 @@
       .container(style="padding: 20px 80px 20px 80px;")
         .level
           .level-left
-            .level-item
+            %a.level-item.has-text-black(href="/")
               .icon
                 %i.fas.fa-arrow-circle-left
               Back to Full Site
       .container.has-background-dark.has-text-white(style="padding: 40px 80px 0px 80px;")
         .level.is-large(style="border-bottom: 1px solid white; padding-bottom: 40px;")
           .level-left
-            .level-item
+            %a.level-item(href="{% url 'orgs.org_home' %}")
               {% thumbnail org.logo "230x86" format="PNG" as im %}
               %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
               {% endthumbnail %}
             .level-item
               %div
                 %p.is-size-5
-                  Welcome Sophie
+                  - if request.user and request.user.is_authenticated
+                    Welcome {{ request.user.name }}
                 %p.has-text-weight-bold.is-size-2.has-text-centered
                   Dashboard
           .level-right
-            .level-item.is-size-5
-              Email
-            .level-item.is-size-5.button.is-outlined.has-text-white.has-background-dark
-              Logout
+            - block login
+              - if request.user and request.user.is_authenticated
+                .level-item.is-size-5
+                  {{ request.user.username }}
+                %a.level-item.is-size-5.button.is-outlined.has-text-white.has-background-dark(href="{% url 'users.user_logout' %}?go=/")
+                  - trans "Logout"
+              - else
+                %a.level-item.is-size-5.button.is-outlined.has-text-white.has-background-dark(href="{% url 'users.user_login' %}")
+                    - trans "Login"
 
   %section.section.is-paddingless.is-marginless
     .container
@@ -44,32 +50,32 @@
                   %aside.menu
                     %ul.menu-list
                       %li
-                        %a
+                        %a(href="{% url 'polls.poll_list' %}")
                           %span.icon
                             .fas.fa-comments
                           Polls
                       %li
-                        %a
+                        %a(href="{% url 'stories.story_list' %}")
                           %span.icon
                             .fas.fa-edit
                           Stories
                       %li
-                        %a
+                        %a(href="{% url 'orgs.org_manage_accounts' %}")
                           %span.icon
                             .fas.fa-user
                           Users
                       %li
-                        %a
+                        %a(href="{% url 'orgs.org_edit' %}")
                           %span.icon
                             .fas.fa-cog
                           Settings
                       %li
-                        %a
+                        %a(href="{% url 'dashblocks.dashblock_list' %}")
                           %span.icon
                             .fas.fa-file-alt
                           Pages
                       %li
-                        %a
+                        %a(href="https://app.rapidpro.io/")
                           %span.icon
                             .fas.fa-code-branch
                           RapidPro
