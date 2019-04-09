@@ -13,7 +13,7 @@
             - get_label field
         .field-body
           .field.is-expanded
-            {{ form_field|add_css:"input" }}
+            {{ form_field }}
             - with view|field_help:field as help
               -if help
                 %p.help

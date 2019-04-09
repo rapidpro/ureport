@@ -3,38 +3,39 @@
 - load smartmin i18n
 
 - block login
+-block content-section
+  .container.has-background-grey(style="padding: 10rem 80px;")
+    - block content
+      .columns.login-form
+        .column.is-6
+          .page-header.is-size-4.has-text-white.has-text-weight-bold
+            - trans "Sign in"
+          %div(style="height: 50px;")
+          - if allow_email_recovery
+            %span.is-size-5(style="padding-top:7px;padding-right:150px;")
+              %a.has-text-info(href="{% url 'users.user_forget' %}")
+                - trans "Forgot Password?"
 
-- block content
-  .columns.login-form
-    .column.is-6
-      .page-header.is-size-4.has-text-white.has-text-weight-bold
-        - trans "Sign in"
-      %div(style="height: 50px;")
-      - if allow_email_recovery
-        %span.is-size-5(style="padding-top:7px;padding-right:150px;")
-          %a.has-text-info(href="{% url 'users.user_forget' %}")
-            - trans "Forgot Password?"
+        .column.is-6
+          %form#login-form(method="post")
+            - for field, errors in form.errors.items
+              - if field == '__all__'
+                .alert.alert-danger.form-errors
+                  %h3
+                    Error
+                  {{ errors }}
 
-    .column.is-6
-      %form#login-form(method="post")
-        - for field, errors in form.errors.items
-          - if field == '__all__'
-            .alert.alert-danger.form-errors
-              %h3
-                Error
-              {{ errors }}
+            %fieldset
+              - for field in form
+                .field(class="{% if field.error %}is-danger{% endif %}")
+                  %label.label(for="={ field.name }")
+                    {{ field.label }}
+                  {{ field|add_css:"input" }}
+                  - if field.error
+                    %span.help-block
+                      {{ field.error }}
 
-        %fieldset
-          - for field in form
-            .field(class="{% if field.error %}is-danger{% endif %}")
-              %label.label(for="={ field.name }")
-                {{ field.label }}
-              {{ field|add_css:"input" }}
-              - if field.error
-                %span.help-block
-                  {{ field.error }}
+              - csrf_token
 
-          - csrf_token
-
-          %button.button.is-info.is-large.login-btn.is-pulled-right(type="submit")
-            - trans "Enter Dashboard"
+              %button.button.is-info.is-large.login-btn.is-pulled-right(type="submit")
+                - trans "Enter Dashboard"
