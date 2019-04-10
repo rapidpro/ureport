@@ -2,25 +2,100 @@
 
 - load i18n
 
-- block pre-content
-  -for task in org.task_states.all
-    -if task.task_key == 'contact-pull'
-      .alert.alert-info
-        Reporters last synced:
-        %span.last-reporters-sync
-          {{ task.last_successfully_started_on|timesince }} ago
+-block content-section
+  .container.has-background-grey(style="padding: 3rem 80px;")
+    - block content
+      .columns
+        .column.is-4
+          .is-size-5.has-text-white.has-text-weight-bold
+            - trans "Latest Notifications"
 
+          -for task in org.task_states.all
+            -if task.task_key == 'contact-pull'
+              .notification.is-size-7
+                Reporters last synced:
+                %strong
+                  {{ task.last_successfully_started_on|timesince }} ago
 
-- block read-buttons
-  - if request.user.is_superuser or org_perms.orgs.org_edit
-    %a.btn.btn-primary.pull-right{href:"{% url 'orgs.org_edit' %}", role:"button"}
-      - trans "Edit"
-  - if request.user.is_superuser or org_perms.orgs.orgbackend_list
-    %a.btn.btn-primary.pull-right.backends{href:"{% url 'orgs.orgbackend_list' %}", role:"button"}
-      - trans "Manage Backends"
-  - if request.user.is_superuser or org_perms.orgs.org_manage_accounts
-    %a.btn.btn-primary.pull-right.manage{href:"{% url 'orgs.org_manage_accounts' %}", role:"button"}
-      - trans "Manage Users"
+        .column.is-8
+          .tile.is-ancestor
+            .tile.is-parent
+              %a.tile.is-child.box.has-text-centered.has-background-white-bis(href="{% url 'polls.poll_list' %}")
+                .tile.is-parent.is-vertical(style="padding: 50px")
+                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
+                    .icon.is-size-1
+                      .fas.fa-comments
+                  .tile.is-child.is-size-3
+                    Polls
+
+            .tile.is-parent
+              %a.tile.is-child.box.has-text-centered(href="{% url 'stories.story_list' %}")
+                .tile.is-parent.is-vertical(style="padding: 50px")
+                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
+                    .icon.is-size-1
+                      .fas.fa-edit
+                  .tile.is-child.is-size-3
+                    Stories
+
+          .has-background-white(style="margin: 20px 0px 30px 0px; height: 2px")
+          .tile.is-ancestor
+            - if request.user.is_superuser or org_perms.orgs.org_manage_accounts
+              .tile.is-parent
+                %a.tile.is-child.box.has-text-centered(href="{% url 'orgs.org_manage_accounts' %}")
+                  .tile.is-parent.is-vertical(style="padding: 30px")
+                    .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
+                      .icon.is-size-1
+                        .fas.fa-user
+                    .tile.is-child.is-size-4
+                      - trans "Users"
+            - if request.user.is_superuser or org_perms.orgs.org_edit
+              .tile.is-parent
+                %a.tile.is-child.box.has-text-centered(href="{% url 'orgs.org_edit' %}")
+                  .tile.is-parent.is-vertical(style="padding: 30px")
+                    .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
+                      .icon.is-size-1
+                        .fas.fa-cog
+                    .tile.is-child.is-size-4
+                      - trans "Settings"
+
+            .tile.is-parent
+              %a.tile.is-child.box.has-text-centered(href="{% url 'dashblocks.dashblock_list' %}")
+                .tile.is-parent.is-vertical(style="padding: 30px")
+                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
+                    .icon.is-size-1
+                      .fas.fa-file-alt
+                  .tile.is-child.is-size-4
+                    Pages
+
+          .tile.is-ancestor
+            - if request.user.is_superuser or org_perms.orgs.orgbackend_list
+              .tile.is-parent
+                %a.tile.is-child.box.has-text-centered(href="{% url 'orgs.orgbackend_list' %}")
+                  .tile.is-parent.is-vertical(style="padding: 30px")
+                    .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
+                      .icon.is-size-1
+                        .fas.fa-cog
+                    .tile.is-child.is-size-4
+                      - trans "Backends"
+
+            .tile.is-parent
+              %a.tile.is-child.box.has-text-centered(href="https://app.rapidpro.io/")
+                .tile.is-parent.is-vertical(style="padding: 30px")
+                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
+                    .icon.is-size-1
+                      .fas.fa-code-branch
+                  .tile.is-child.is-size-4
+                    RapidPro
+
+            .tile.is-parent
+              %a.tile.is-child.box.has-text-centered(href="#")
+                .tile.is-parent.is-vertical(style="padding: 30px")
+                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
+                    .icon.is-size-1
+                      .fas.fa-chart-area
+                  .tile.is-child.is-size-4
+                    - trans "Analytics"
+
 
 - block extra-style
   :css
