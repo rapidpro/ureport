@@ -510,16 +510,7 @@ class PollCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         search_fields = ("title__icontains",)
-        fields = (
-            "title",
-            "poll_date",
-            "category",
-            "questions",
-            "featured_responses",
-            "images",
-            "sync_status",
-            "created_on",
-        )
+        fields = ("title", "poll_date", "category", "questions", "sync_status", "created_on")
         link_fields = ("title", "poll_date", "questions", "featured_responses", "images")
         default_order = ("-created_on", "id")
 
@@ -547,6 +538,9 @@ class PollCRUDL(SmartCRUDL):
 
         def get_featured_responses(self, obj):
             return obj.get_featured_responses().count()
+
+        def get_category(self, obj):
+            return obj.category.name
 
         def lookup_field_link(self, context, field, obj):
             if field == "questions":

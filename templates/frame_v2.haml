@@ -34,11 +34,13 @@
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/smartmin_styles.css")
+        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
 
     -else
       -compress css
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/smartmin_styles.css")
+        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
 
   - block extra-less
   - block extra-style

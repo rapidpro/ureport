@@ -3,9 +3,11 @@
 
 -block table-buttons
   -if view.add_button
-    <a class="btn btn-primary pull-right" href="./create/">{% trans "Add" %}</a>
+    %a.button.is-primary.is-pulled-right(href="./create/")
+      - trans "Add"
 
 -block extra-style
+  {{block.super}}
   :css
       td.field_created_on, td.field_poll_date {
         white-space: nowrap;

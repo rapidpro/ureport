@@ -4,7 +4,7 @@
 
 - block pre-content
     .page-header
-      %h2
+      %h2.is-size-2.has-text-weight-bold
         {{ title }}
 
 - block extra-script
@@ -14,127 +14,113 @@
 
   <script type="text/javascript" src="{{ STATIC_URL }}js/libs/jquery.url.js"></script>
 
-  <script>
-      $("td.clickable").hover(function(){
-        this.style.cursor='pointer'
-      },
-      function(){});
-      
+  :javascript
+    $("td.clickable").hover(function(){
+      this.style.cursor='pointer'
+    }, function(){});
+
+    $("td.clickable").click(function(){
+      document.location = $(this).children("a").attr("href");
+    });
     
+    $("a.posterize").click(function(event){
+      event.preventDefault();
+      event.stopPropagation();
     
-      $("td.clickable").click(function(){
-        document.location = $(this).children("a").attr("href");
-      });
+      var href = $(this).attr("href");
+      var url = $.url(href);
+     
+      $("#posterizer").attr("action", url.attr("path"));
     
-      $("a.posterize").click(function(event){
-        event.preventDefault();
-        event.stopPropagation();
+      for (var key in url.param()){
+        $("#posterizer").append("<input type='hidden' name='" + key + "' value='" + url.param(key) + "'></input>");
+      }
     
-        var href = $(this).attr("href");
-        var url = $.url(href);
+      $("#posterizer").submit();
+    });
     
-        $("#posterizer").attr("action", url.attr("path"));
+    function fetchPJAXContent(url, container, options) {
     
-        for (var key in url.param()){
-          $("#posterizer").append("<input type='hidden' name='" + key + "' value='" + url.param(key) + "'></input>");
+      var type = 'GET';
+      var data = undefined;
+      if (options) {
+        if ('postData' in options) {
+          type = 'POST';
+          data = options['postData'];
         }
+      }
     
-        $("#posterizer").submit();
-      });
+      var headers = { 'X-PJAX': true };
+      if (options && 'headers' in options) {
+        for (key in options['headers']) {
+          headers[key] = options['headers'][key];
+        }
+      }
     
-      function fetchPJAXContent(url, container, options) {
-    
-          var type = 'GET';
-          var data = undefined;
-          if (options) {
-              if ('postData' in options) {
-                  type = 'POST';
-                  data = options['postData'];
+      $.ajax({
+        headers: headers,
+        type: type,
+        url: url,
+        data: data,
+        success: function(data, status, jqXHR) {
+          if ('followRedirects' in options && options['followRedirects'] == true) {
+            var redirect = jqXHR.getResponseHeader('REDIRECT');
+              if (redirect) {
+                window.document.location.href = redirect;
+                  return;
+                }
               }
-          }
-    
-          var headers = { 'X-PJAX': true };
-          if (options && 'headers' in options) {
-              for (key in options['headers']) {
-                  headers[key] = options['headers'][key];
-              }
-          }
-    
-          $.ajax({
-              headers: headers,
-              type: type,
-              url: url,
-              data: data,
-              success: function(data, status, jqXHR) {
-    
-                  if ('followRedirects' in options && options['followRedirects'] == true) {
-                      var redirect = jqXHR.getResponseHeader('REDIRECT');
-                      if (redirect) {
-                          window.document.location.href = redirect;
-                          return;
+              
+              var noPJAX = $(container).data('no-pjax');
+                if (options) {
+                  if(!('forceReload' in options) || ('forceReload' in options && !options['forceReload'])) {
+                    if (noPJAX || ('shouldIgnore' in options && options['shouldIgnore'](data))) {
+                      if ('onIgnore' in options) {
+                        options['onIgnore'](jqXHR);
                       }
+                       return;
+                    }
                   }
+                }
+                $(container).html(data);
     
-                  var noPJAX = $(container).data('no-pjax');
-                  if (options) {
-                      if(!('forceReload' in options) || ('forceReload' in options && !options['forceReload'])) {
-    
-                          if (noPJAX || ('shouldIgnore' in options && options['shouldIgnore'](data))) {
-                              if ('onIgnore' in options) {
-                                 options['onIgnore'](jqXHR);
-                              }
-                              return;
-                          }
-                      }
+                if (options) {
+                  if ('onSuccess' in options && options['onSuccess']) {
+                    options['onSuccess']();
                   }
-                  $(container).html(data);
-    
-                  if (options) {
-                      if ('onSuccess' in options && options['onSuccess']) {
-                          options['onSuccess']();
-                      }
-                  }
+                }
               }
           });
       }
-    
-    
-  </script>
 
   {# embed refresh script if refresh is active #}
   - if refresh
-    <script>
-    function refresh(onSuccess, forceReload){
+    :javascript
+      function refresh(onSuccess, forceReload){
+        var url = "{{url_params|safe}}"
+        {% if page_obj %}
+          url += "page={{page_obj.number}}";
+        {% endif %}
     
-      var url = "{{url_params|safe}}"
-      {% if page_obj %}
-        url += "page={{page_obj.number}}";
-      {% endif %}
-    
-      if (url == '') {
+        if (url == '') {
           url = '?';
-      }
+        }
     
-      url += '&ts=' + new Date().getTime();
+        url += '&ts=' + new Date().getTime();
     
-      fetchPJAXContent(url, '#pjax', {
+        fetchPJAXContent(url, '#pjax', {
           forceReload: forceReload,
           onSuccess: onSuccess,
           onIgnore: function() {
               scheduleRefresh();
           }
-      });
-    }
+        });
+      }
     
-    function scheduleRefresh() {
+      function scheduleRefresh() {
         window.setTimeout(refresh, {{ refresh }});
-    }
+      }
     
-    $(document).ready(function(){
+      $(document).ready(function(){
         scheduleRefresh();
-    });
-    
-    </script>
-
-
-
+      });

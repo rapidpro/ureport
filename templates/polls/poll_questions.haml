@@ -15,15 +15,14 @@
 
 - block post-form
   -if request.user.is_superuser or perms.polls.poll_pull_refresh
-    %form.smartmin-form.form-horizontal{action:"{% url 'polls.poll_pull_refresh' object.id %}", method:"post",  enctype:"multipart/form-data"}
+    %form.smartmin-form(action="{% url 'polls.poll_pull_refresh' object.id %}" method="post"  enctype="multipart/form-data")
       - csrf_token
-      .control-group
-        %label.control-label
+      .field
+        %label.label
           Poll Results Data
-        .controls
-          .row
+        .control
             .col-md-3
-              %button.btn.btn-primary.btn-block{type:"submit", name:"poll", value:"{{object.id}}"}
+              %button.button.is-primary(type="submit" name="poll" value="{{object.id}}")
                 Refresh Results
 
 
