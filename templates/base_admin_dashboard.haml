@@ -88,6 +88,11 @@
               .column.is-four-fifths.is-offset-one-.block
                 -block content-div
                   .content-div(style="padding: 3rem 40px;")
+                    - block messages
+                      - if messages
+                        - for message in messages
+                          .notification(class="is-{{ message.tags }}")
+                            {{ message }}
 
                     - block pre-content
 

@@ -1353,8 +1353,6 @@ class PollTest(UreportTest):
         self.assertTrue(poll1 in response.context["object_list"])
 
         self.assertContains(response, reverse("polls.poll_questions", args=[poll1.pk]))
-        self.assertContains(response, reverse("polls.poll_responses", args=[poll1.pk]))
-        self.assertContains(response, reverse("polls.poll_images", args=[poll1.pk]))
 
         poll1.has_synced = True
         poll1.save()

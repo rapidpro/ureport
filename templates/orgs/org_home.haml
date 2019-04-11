@@ -10,6 +10,12 @@
           .is-size-5.has-text-white.has-text-weight-bold
             - trans "Latest Notifications"
 
+          - block messages
+            - if messages
+              - for message in messages
+                .notification(class="is-{{ message.tags }}")
+                  {{ message }}
+
           -for task in org.task_states.all
             -if task.task_key == 'contact-pull'
               .notification.is-size-7
