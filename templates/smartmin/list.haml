@@ -2,14 +2,24 @@
 
 - load smartmin i18n
 
+- block pre-content
+
 - block content
   - block table-controls
     .columns
-      .column.is-8
+      .column
+        - block content-title
+          %h2.is-size-2.has-text-weight-bold
+            .icon
+              {{ icon }}
+            .is-inline-block.content-title-text
+              {{ title }}
+
+      .column
         - if view.search_fields
           - block search-form
             %form(role="form")
-              .field.is-grouped
+              .field.has-addons
                 %p.control.is-expanded
                   %input.input.search-query(type="text" name="search" value="{{ search }}")
                 %p.control
@@ -17,7 +27,7 @@
                     - trans "Search"
         - else
           &nbsp;
-      .column.is-4.buttons
+      .column.is-pulled-right.is-2
         - block table-buttons
           - if view.add_button
             %a.button.is-primary.is-pulled-right(href="./create/")
@@ -29,7 +39,7 @@
           -block pre-table
 
           -block table
-            %table.table.is-striped.is-bordered.list-table(class="{% get_list_class object_list %}")
+            %table.table.is-striped.is-fullwidth.list-table(class="{% get_list_class object_list %}")
               %thead
                 %tr
                   - for field in fields
