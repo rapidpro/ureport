@@ -53,8 +53,7 @@
   {{ block.super }}
   :javascript
     $(document).ready(function() {
-      $('input[type="checkbox"]').removeClass('form-control');
-      $('input[type="radio"]').removeClass('form-control');
+      $('input[readonly]').prop('disabled', true);
     });
 
   - if javascript_submit
