@@ -1,0 +1,54 @@
+- extends "smartmin/form.html"
+- load thumbnail i18n
+
+- block extra-fields
+  - if object and type.has_gallery
+    .form-group
+      %label.col-sm-2.control-label{for:""}
+        - trans "Gallery"
+      .col-sm-10
+        - for img in object.sorted_images
+          {% thumbnail img.image "100x100" crop="center" as im %}
+          <a href="{% url 'dashblocks.dashblockimage_update' img.id %}"><img class="thumb" src="{{ im.url }}" width="{{ img.x }}" height="{{ img.y }}" /></a>
+          {% endthumbnail %}
+        
+          %a.btn.btn-default.btn-small{href:"{% url 'dashblocks.dashblockimage_create' %}?dashblock=#{ object.id }"}
+            - trans "Add Image"
+
+- block extra-style
+  %link{rel:"stylesheet", type:"text/css", href:"{{ STATIC_URL }}css/prettify.css"}
+  %link{rel:"stylesheet", type:"text/css", href:"{{ STATIC_URL }}css/summernote.css"}
+
+  - if type.has_rich_text
+    :css
+      #id_content {
+        width: 93%;
+        height: 250px;
+        margin-right: 20px;
+      }
+      #id_summary {
+        width: 93%;
+        height: 150px;
+        margin-right: 20px;
+      }
+
+      label.checkbox {
+        padding-left: 20px;
+      }    
+
+  :css
+    img.thumb {
+      margin: 5px;
+      border: 1px solid #ccc;
+    }
+
+- block extra-script
+  <script src="{{ STATIC_URL }}js/prettify.js"></script>
+  <script src="{{ STATIC_URL }}js/summernote.min.js"></script>
+
+  - if type.has_rich_text
+    :javascript
+      $(function(){
+        $("#id_content").summernote()
+        $("#id_summary").summernote()
+      });

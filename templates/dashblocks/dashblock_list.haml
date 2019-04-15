@@ -1,0 +1,17 @@
+- extends "smartmin/list.html"
+
+- load i18n
+
+- block content-title
+  %h2.is-size-2.has-text-weight-bold
+    .icon
+      .fas.fa-file-alt
+    .is-inline-block.content-title-text
+      -trans "Pages"
+
+- block search-form
+
+- block table-buttons
+  - if view.add_button
+    %a.button.is-primary.is-pulled-right(href="./create/")
+      - trans "+ New Page"

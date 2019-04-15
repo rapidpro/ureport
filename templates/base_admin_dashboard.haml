@@ -76,6 +76,48 @@
                             .fas.fa-file-alt
                           Pages
                       %li
+                        %a(href="{% url 'categories.category_list' %}")
+                          %span.icon
+                            .fas.fa-layer-group
+                          Categories
+
+                      %li
+                        %a(href="{% url 'categories.categoryimage_list' %}")
+                          %span.icon
+                            .fas.fa-images
+                          Categories Images
+
+                      %li
+                        %a(href="{% url 'news.newsitem_list' %}")
+                          %span.icon
+                            .fas.fa-newspaper
+                          News Items
+                      - if request.user.is_superuser
+                        %li
+                          %a{href:"{% url 'orgs.org_list' %}"}
+                            %span.icon
+                              
+                            - trans "Orgs"
+
+                        %li
+                          %a{ href:"/users/user/"}
+                            %span.icon
+                              
+                            - trans "Users"
+
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblocktype_list' %}"}
+                            %span.icon
+                              
+                            - trans "Content Types"
+
+                        %li
+                          %a{ href:"{% url 'assets.image_list' %}"}
+                            %span.icon
+                              
+                            - trans "Images"
+
+                      %li
                         %a(href="https://app.rapidpro.io/")
                           %span.icon
                             .fas.fa-code-branch
