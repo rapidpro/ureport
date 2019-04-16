@@ -17,7 +17,7 @@
 
 - block extra-style
   %link{rel:"stylesheet", type:"text/css", href:"{{ STATIC_URL }}css/prettify.css"}
-  %link{rel:"stylesheet", type:"text/css", href:"{{ STATIC_URL }}css/summernote.css"}
+  %link{rel:"stylesheet", type:"text/css", href:"{{ STATIC_URL }}css/summernote-lite.css"}
 
   - if type.has_rich_text
     :css
@@ -44,7 +44,7 @@
 
 - block extra-script
   <script src="{{ STATIC_URL }}js/prettify.js"></script>
-  <script src="{{ STATIC_URL }}js/summernote.min.js"></script>
+  <script src="{{ STATIC_URL }}js/summernote-lite.min.js"></script>
 
   - if type.has_rich_text
     :javascript
