@@ -2,6 +2,8 @@
 - load smartmin i18n
 
 - block pre-content
+
+- block post-form-errors
     .columns
       .column
         - block content-title
@@ -95,58 +97,8 @@
               %option(value="E" selected)
                 Editors
 
-- block firaelds
-  %table.traable.is-stripped{ style:'margin-bottom:0px;'}
-    %thead
-      %tr
-        %th
-          - trans "Accounts"
-        %th.permission
-          - trans "Admins"
-        %th.permission
-          - trans "Editors"
-        %th.permission
-          - trans "Remove"
 
-    %tbody
-
-      - for user in org_users
-        %tr
-          %td
-            {{user.email}}
-            - if user.first_name or user.last_name
-              ({{user.first_name}} {{ user.last_name}})
-
-          - with group_fields|get:user as row_fields
-            - for check_name in row_fields
-              %td.check.permission
-                {{form|field:check_name}}
-          %td.check.permission
-            %input{type:'checkbox'}
-      // pending invites
-      - for invite in invites
-        %tr.invite
-          %td
-            {{invite.email}} (Invite Sent)
-          %td.permission
-            - if invite.user_group == 'A'
-              %input{ type:'checkbox', disabled: None, checked: None}
-            - else
-              %input{ type:'checkbox', disabled: None}
-          %td.permission
-            - if invite.user_group == 'E'
-              %input{ type:'checkbox', disabled: None, checked: None}
-            - else
-              %input{ type:'checkbox', disabled: None}
-          %td{ height: '3px' }
-
-      %tr
-        %td.form{colspan:'1'}
-          - render_field 'emails'
-        %td.form{colspan:'3'}
-          - render_field 'user_group'
-
-- block exastra-style
+- block extra-style
   :css
     input[type="checkbox"] {
       width: 50px;
