@@ -19,11 +19,11 @@
       - csrf_token
       .field
         %label.label
-          Poll Results Data
+          - trans "Poll Results Data"
         .control
             .col-md-3
               %button.button.is-primary(type="submit" name="poll" value="{{object.id}}")
-                Refresh Results
+                - trans "Refresh Results"
 
 
 -block extra-style
