@@ -28,17 +28,6 @@
                 %span.select(class="{% if form_field|is_multiple_select %} is-multiple{% endif %}")
                   {{ form_field }}
 
-              - elif form_field|is_file
-                .file
-                  %label.file-label
-                    {{ form_field|add_css:"file-input" }}
-                    %span.file-cta
-                      %span.file-icon
-                        %i.fa.fa-upload
-                      %span.file-label
-                        - trans "Choose a file..."
-                    .file-name
-
               - else
                 {{ form_field }}
 
