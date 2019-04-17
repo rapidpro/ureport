@@ -87,100 +87,153 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+    %section.section.is-paddingless.is-marginless(style="background:#000;height:15px")
 
-  - block navbar
-      .container
-        .level.is-marginless{style:"background:#000;height:15px"}
-
-        %nav{role: "navigation", aria-label:"main navigation", style:"margin:0px 10px; padding: 30px 100px 30px 100px;"}
-          .navbar-brand.is-hidden-tablet
-            .navbar-item
-              {% thumbnail org.logo "230x86" format="PNG" as im %}
-              %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
-              {% endthumbnail %}
-
-            %a.navbar-burger{role: "button", aria-label:"menu", aria-expanded:"false", data-target:"mobileNavbar"}
-              %span{aria-hidden:"true"}
-              %span{aria-hidden:"true"}
-              %span{aria-hidden:"true"}
-
-          #mobileNavbar.level.navbar-menu
-            .level-left
-              .level-item.is-hidden-mobile
-                - trans "All Countries"
-              .level-item.is-hidden-tablet.has-text-weight-semibold.is-size-5
-                - trans "Polls"
-              .level-item.is-hidden-tablet.has-text-weight-semibold.is-size-5
-                - trans "Stories"
-              .level-item.is-hidden-tablet
-              .level-item.is-hidden-tablet
-
-            .level-right
-              .level-item
-                - trans "About"
-              .level-item.is-hidden-tablet
-                - trans "Engage"
-              .level-item
-                - trans "U-Reporters"
-              .level-item
-                - trans "FAQ"
-              .level-item.is-hidden-tablet
-              .level-item.is-hidden-tablet
-
-              .level-item.is-hidden-mobile
-                .is-small
-                  %span.icon
-                    %i.fas.fa-search
-                  - trans "Search"
-              .level-item.is-hidden-tablet
-                .field.is-grouped
+    %section.section.is-paddingless.is-marginless
+      - block navbar
+        .container
+          %nav(role="navigation"  aria-label="main navigation" style="padding: 30px 0px;")
+            .navbar-brand.is-hidden-tablet
+              .navbar-item
+                {% thumbnail org.logo "230x86" format="PNG" as im %}
+                %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+                {% endthumbnail %}
+  
+              %a.navbar-burger(role="button" aria-label="menu" aria-expanded="false" data-target="mobileNavbar")
+                %span(aria-hidden="true")
+                %span(aria-hidden="true")
+                %span(aria-hidden="true")
+  
+            #mobileNavbar.level.navbar-menu
+              .level-left
+                .level-item.is-hidden-mobile
+                  .icon.is-large.is-size-2
+                    %i.fas.fa-globe-africa
+                  .icon.is-large.is-size-3
+                    %i.fas.fa-chevron-circle-up
+                  - trans "All Countries"
+                .level-item.is-hidden-tablet.has-text-weight-semibold.is-size-5
+                  - trans "Polls"
+                .level-item.is-hidden-tablet.has-text-weight-semibold.is-size-5
+                  - trans "Stories"
+                .level-item.is-hidden-tablet
+                .level-item.is-hidden-tablet
+  
+              .level-right
+                .level-item
+                  - trans "About"
+                .level-item.is-hidden-tablet
+                  - trans "Engage"
+                .level-item
+                  - trans "U-Reporters"
+                .level-item
+                  - trans "FAQ"
+                .level-item.is-hidden-tablet
+                .level-item.is-hidden-tablet
+  
+                .level-item.is-hidden-mobile
+                  .is-small
+                    %span.icon
+                      %i.fas.fa-search
+                    - trans "Search"
+                .level-item.is-hidden-tablet
+                  .field.is-grouped
+                    .is-small
+                      %span.icon
+                        %i.fab.fa-facebook-f
+                    .is-small
+                      %span.icon
+                        %i.fab.fa-twitter
+  
+                .level-item.is-hidden-mobile
                   .is-small
                     %span.icon
                       %i.fab.fa-facebook-f
+                .level-item.is-hidden-mobile
                   .is-small
                     %span.icon
                       %i.fab.fa-twitter
+                .level-item.is-hidden-tablet
+                  .is-small
+                    %span.icon
+                      %i.fas.fa-search
+                    - trans "Search"
+                .level-item.is-hidden-mobile
+                  - trans "Join Now"
+                .level-item.is-hidden-mobile
+                  - trans "Languages"
+  
+          %nav.level.is-hidden-mobile(role="navigation" aria-label="main navigation" style="border-bottom: 1px solid black; padding: 30px 0px;")
+            .level-item.has-text-centered
+              - trans "Polls"
+  
+            .level-item.has-text-centered
+              {% thumbnail org.logo "230x86" format="PNG" as im %}
+              %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
+              {% endthumbnail %}
+  
+            .level-item.has-text-centered
+              - trans "Stories"
+  
+    %section.section.is-large
+  
+      .container.has-text-centered.is-size-1
+        %h1
+          - trans "Site page under construction"
+  
+        .container.has-text-centered.is-text-1
+          %a(href="/")
+            - trans "Go back to main public site"
+    
+    %section.section.is-paddingless.is-marginless
+      %footer.footer.is-paddingless
+        -block footer
+          .container
+            .columns.is-mobile.is-vcentered
+              .column
+                  .columns.is-multiline
+                    .column.is-full
+                      {% thumbnail org.logo "230x86" format="PNG" as im %}
+                      %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+                      {% endthumbnail %}
+                    .column
+                      - trans "About"
+                    .column
+                      - trans "Engage"
+                    .column
+                      - trans "Reporters"
+                    .column
+                      - trans "FAQ"
+  
+              .column
+                
+                  .columns.is-multiline.is-mobile.is-pulled-right
+                    .column.is-half
+                      - trans "Polls"
+                    .column.is-half
+                      - trans "Stories"
+                    .column.is-full
+                      .is-pulled-right
+                        .icon.is-size-3
+                          %i.fas.fa-globe-africa
+                        .icon.is-size-4
+                          %i.fas.fa-chevron-circle-up
+                        -trans "All countries"
+  
+                    .column.is-one-third
+                      .is-pulled-right
+                        - trans "Search"
+                      .icon.is-pulled-right
+                        %i.fas.fa-search
+                    .column.is-one-third
+                      %span.icon.is-pulled-right
+                        %i.fab.fa-facebook-f
+                    .column.is-one-third
+                      %span.icon.is-pulled-right
+                        %i.fab.fa-twitter
+  
 
-              .level-item.is-hidden-mobile
-                .is-small
-                  %span.icon
-                    %i.fab.fa-facebook-f
-              .level-item.is-hidden-mobile
-                .is-small
-                  %span.icon
-                    %i.fab.fa-twitter
-              .level-item.is-hidden-tablet
-                .is-small
-                  %span.icon
-                    %i.fas.fa-search
-                  - trans "Search"
-              .level-item.is-hidden-mobile
-                - trans "Join Now"
-              .level-item.is-hidden-mobile
-                - trans "Languages"
-
-        %nav.level.is-hidden-mobile{role: "navigation", aria-label:"main navigation", style:"border-bottom: 1px solid black; margin: 0px 100px; padding: 30px 0px;"}
-          .level-item.has-text-centered
-            - trans "Polls"
-
-          .level-item.has-text-centered
-            {% thumbnail org.logo "230x86" format="PNG" as im %}
-            %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
-            {% endthumbnail %}
-
-          .level-item.has-text-centered
-            - trans "Stories"
-
-  %section.section.is-large
-
-    .container.has-text-centered.is-size-1
-      %h1
-        - trans "Site page under construction"
-
-      .container.has-text-centered.is-text-1
-        %a(href="/")
-          - trans "Go back to main public site"
-
+    %section.section.is-paddingless.is-marginless(style="background:#ff0;height:15px")
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>
@@ -205,16 +258,15 @@
 
   <script>
   $(document).ready(function() {
-
-  // Check for click events on the navbar burger icon
-  $(".navbar-burger").click(function() {
+    // Check for click events on the navbar burger icon
+    $(".navbar-burger").click(function() {
 
       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
       $(".navbar-burger").toggleClass("is-active");
       $("#mobileNavbar").toggleClass("is-active");
 
+    });
   });
-});
   </script>
 
   {% endif %}
