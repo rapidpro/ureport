@@ -87,7 +87,7 @@
     </script>
     %section.section.is-paddingless.is-marginless(style="background:#000;height:15px")
 
-    %section.section.is-paddingless.is-marginless
+    %section#ureport-public-header.section.is-paddingless.is-marginless
       - block navbar
         .container
           %nav(role="navigation"  aria-label="main navigation")
@@ -173,7 +173,7 @@
             .level-item.has-text-centered
               - trans "Stories"
   
-    %section.section.is-large
+    %section#ureport-public-content.section.is-large
   
       .container.has-text-centered.is-size-1
         %h1
@@ -183,52 +183,97 @@
           %a(href="/")
             - trans "Go back to main public site"
     
-    %section.section.is-paddingless.is-marginless
+    %section#ureport-public-footer.section.is-paddingless.is-marginless
       %footer.footer.is-paddingless
         -block footer
           .container
-            .columns.is-mobile.is-vcentered
-              .column
-                  .columns.is-multiline
-                    .column.is-full
-                      {% thumbnail org.logo "230x86" format="PNG" as im %}
-                      %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
-                      {% endthumbnail %}
-                    .column
-                      - trans "About"
-                    .column
-                      - trans "Engage"
-                    .column
-                      - trans "Reporters"
-                    .column
-                      - trans "FAQ"
-  
-              .column
-                
-                  .columns.is-multiline.is-mobile.is-pulled-right
-                    .column.is-half
-                      - trans "Polls"
-                    .column.is-half
-                      - trans "Stories"
-                    .column.is-full
-                      .is-pulled-right
-                        .icon.is-size-3
-                          %i.fas.fa-globe-africa
-                        .icon.is-size-4
-                          %i.fas.fa-chevron-circle-up
-                        -trans "All countries"
-  
-                    .column.is-one-third
-                      .is-pulled-right
-                        - trans "Search"
-                      .icon.is-pulled-right
-                        %i.fas.fa-search
-                    .column.is-one-third
-                      %span.icon.is-pulled-right
-                        %i.fab.fa-facebook-f
-                    .column.is-one-third
-                      %span.icon.is-pulled-right
-                        %i.fab.fa-twitter
+            .columns.is-hidden-tablet#ureport-footer-mobile
+              .column.is-full
+                .footer-mobile-logo
+                  {% thumbnail org.logo "230x86" format="PNG" as im %}
+                  %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+                  {% endthumbnail %}
+              .column.is-full
+                .columns.is-mobile
+                  .column.is-two-fifths.footer-small-nav
+                    .columns
+                      .column
+                        - trans "About"
+                      .column
+                        - trans "Engage"
+                      .column
+                        - trans "Reporters"
+                      .column
+                        - trans "FAQ"
+
+                  .column.is-three-fifths
+                    .columns
+                      .column
+                        .columns.is-mobile.footer-big-nav
+                          .column.is-half
+                            .link
+                              - trans "Polls"
+                          .column.is-half
+                            .link
+                              - trans "Stories"
+                      .column
+                        .columns.is-mobile.footer-extra-nav
+                          .column.is-half
+                            %span.icon
+                              %i.fas.fa-search
+                            - trans "Search"
+
+                          .column.footer-social-media
+                            %span.icon
+                              %i.fab.fa-facebook-f
+                          .column.footer-social-media
+                            %span.icon
+                              %i.fab.fa-twitter
+
+
+            .columns.is-hidden-mobile#ureport-footer-desktop
+              .column.is-three-fifths
+                .columns
+                  .column.is-full
+                    {% thumbnail org.logo "230x86" format="PNG" as im %}
+                    %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+                    {% endthumbnail %}
+                .columns.footer-small-nav
+                  .column
+                    - trans "About"
+                  .column
+                    - trans "Engage"
+                  .column
+                    - trans "Reporters"
+                  .column
+                    - trans "FAQ"
+
+              .column.is-two-fifths
+                .columns.footer-big-nav
+                  .column.is-half
+                    - trans "Polls"
+                  .column.is-half
+                    - trans "Stories"
+                .columns
+                  .column.is-full
+                    .is-pulled-right
+                      .icon.is-size-3
+                        %i.fas.fa-globe-africa
+                      .icon.is-size-4
+                        %i.fas.fa-chevron-circle-up
+                      -trans "All countries"
+                .columns.footer-extra-nav
+                  .column.is-one-third
+                    .is-pulled-right
+                      - trans "Search"
+                    .icon.is-pulled-right
+                      %i.fas.fa-search
+                  .column.is-one-third.footer-social-media
+                    %span.icon.is-pulled-right
+                      %i.fab.fa-facebook-f
+                  .column.is-one-third.footer-social-media
+                    %span.icon.is-pulled-right
+                      %i.fab.fa-twitter
   
 
     %section.section.is-paddingless.is-marginless(style="background:#ff0;height:15px")
