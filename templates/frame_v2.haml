@@ -33,13 +33,11 @@
       - compress css
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css")
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/smartmin_styles.css")
         %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
 
     -else
       -compress css
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/smartmin_styles.css")
         %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
 
   - block extra-less
@@ -92,7 +90,7 @@
     %section.section.is-paddingless.is-marginless
       - block navbar
         .container
-          %nav(role="navigation"  aria-label="main navigation" style="padding: 30px 0px;")
+          %nav(role="navigation"  aria-label="main navigation")
             .navbar-brand.is-hidden-tablet
               .navbar-item
                 {% thumbnail org.logo "230x86" format="PNG" as im %}
@@ -163,7 +161,7 @@
                 .level-item.is-hidden-mobile
                   - trans "Languages"
   
-          %nav.level.is-hidden-mobile(role="navigation" aria-label="main navigation" style="border-bottom: 1px solid black; padding: 30px 0px;")
+          %nav.level.is-hidden-mobile(role="navigation" aria-label="main navigation" style="border-bottom: 1px solid black;")
             .level-item.has-text-centered
               - trans "Polls"
   
