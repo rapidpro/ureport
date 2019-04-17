@@ -235,9 +235,10 @@
               .column.is-three-fifths
                 .columns
                   .column.is-full
-                    {% thumbnail org.logo "230x86" format="PNG" as im %}
-                    %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
-                    {% endthumbnail %}
+                    .footer-mobile-logo
+                      {% thumbnail org.logo "230x86" format="PNG" as im %}
+                      %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+                      {% endthumbnail %}
                 .columns.footer-small-nav
                   .column
                     - trans "About"
@@ -250,28 +251,29 @@
 
               .column.is-two-fifths
                 .columns.footer-big-nav
-                  .column.is-half
-                    - trans "Polls"
-                  .column.is-half
-                    - trans "Stories"
-                .columns
-                  .column.is-full
-                    .is-pulled-right
-                      .icon.is-size-3
-                        %i.fas.fa-globe-africa
-                      .icon.is-size-4
-                        %i.fas.fa-chevron-circle-up
-                      -trans "All countries"
+                  .column.is-two-fifths.is-offset-2
+                    .link.is-pulled-right
+                      - trans "Polls"
+                  .column.is-two-fifths
+                    .link.is-pulled-right
+                      - trans "Stories"
+                .columns.footer-countries-nav
+                  .column.is-pulled-right
+                    .icon.is-size-3
+                      %i.fas.fa-globe-africa
+                    .icon.is-size-4
+                      %i.fas.fa-chevron-circle-up
+                    -trans "All countries"
                 .columns.footer-extra-nav
-                  .column.is-one-third
+                  .column
                     .is-pulled-right
                       - trans "Search"
                     .icon.is-pulled-right
                       %i.fas.fa-search
-                  .column.is-one-third.footer-social-media
+                  .column.is-2.is-pulled-right.footer-social-media
                     %span.icon.is-pulled-right
                       %i.fab.fa-facebook-f
-                  .column.is-one-third.footer-social-media
+                  .column.is-2.is-pulled-right.footer-social-media
                     %span.icon.is-pulled-right
                       %i.fab.fa-twitter
   
