@@ -189,15 +189,17 @@
               .link
                 - trans "Stories"
   
-    %section#ureport-public-content.section.is-large
+    %section#ureport-public-content.section
+      - block content-section
+        .container
+          - block content
+            .container.has-text-centered.is-size-1
+              %h1
+                - trans "Site page under construction"
   
-      .container.has-text-centered.is-size-1
-        %h1
-          - trans "Site page under construction"
-  
-        .container.has-text-centered.is-text-1
-          %a(href="/")
-            - trans "Go back to main public site"
+            .container.has-text-centered.is-text-1
+              %a(href="/")
+                - trans "Go back to main public site"
     
     %section#ureport-public-footer.section.is-paddingless.is-marginless
       %footer.footer.is-paddingless

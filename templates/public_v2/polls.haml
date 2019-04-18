@@ -2,6 +2,147 @@
 
 -load compress thumbnail humanize ureport i18n
 
+
+- block content
+  .columns
+    .column.is-size-1.has-text-weight-bold
+      Polls
+    .column.is-size-3.has-text-right
+      .dropdown
+        .dropdown-trigger
+          .button.has-background-black.has-text-white
+            %span
+              BROWSE CATEGORIES
+            %span.icon.is-small
+              %i.fas.fa-angle-down(aria-hidden="true")
+               
+
+  .columns
+    .column.is-half
+      .columns.is-multiline
+        .column.is-full.is-size-5
+          Recent Results
+        .column.is-full.is-size-4.has-text-weight-semibold
+          {{ latest_poll.title }}
+        .column.is-full
+          .icon
+            %i.fab.fa-facebook-f
+          .icon
+            %i.fab.fa-twitter
+          .icon
+            %i.fas.fa-external-link-alt
+    
+    .column.is-half
+      .columns.is-multiline
+        .column
+          - if latest_poll
+            {% thumbnail latest_poll.get_category_image "1280x678" crop="top" as im %}
+            %img(src="{{ im.url }}")
+            {% endthumbnail %}
+
+  .columns
+    .column.has-text-right
+      .has-background-grey.is-inline-block
+        {{ latest_poll.responded_runs|intcomma }}
+        %span
+          - trans "responded out of"
+        {{ latest_poll.runs|intcomma }}
+        %span
+          - trans "polled"
+
+    .column
+      .has-background-grey.is-inline-block
+        {{ latest_poll.response_percentage }}
+        %span
+          - trans "response rate"
+  
+  .columns.is-multiline
+    - for question in latest_poll.get_questions
+      .column.is-half
+        .columns.is-multiline
+          .column.is-full.is-size-5.has-text-weight-semibold
+            {{ question.title }}
+          .column.is-full.is-size-7.has-text-weight-semibold
+            {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
+              {{ responded }} responded out of {{ polled }} polled
+            {% endblocktrans %}
+        .columns.is-multiline.is-vcentered
+          .column.is-half
+            .is-small.is-size-7
+              -trans "FILTER BY:"
+            .tabs.is-small.is-boxed.is-size-7
+              %ul
+                %li.is-active
+                  %a
+                    -trans "ALL"
+                %li
+                  %a
+                    -trans "AGE"
+                %li
+                   %a
+                    -trans "GENDER"
+                %li
+                  %a
+                    -trans "LOCATION"
+            
+          .column.is-half.has-text-right
+            .icon
+              %i.fab.fa-facebook-f
+            .icon
+              %i.fab.fa-twitter
+            .icon
+              %i.fas.fa-external-link-alt
+    
+    .columns.is-multiline
+      - for story in related_stories|slice:"1"
+        .column.is-full.is-size-4.has-text-weight-semibold
+          {{ story.title }}
+        .column.is-full
+          {{ story.created_on|date:"M j. Y" }}
+        -if story.get_written_by
+          .column.is-full
+            - trans "BY"
+            {{ story.get_written_by|upper }}
+          
+        .column.is-full
+          {{ story.content|safe }}  
+    
+    .columns.is-multiline
+      .column.is-full
+        .columns.is-multiline
+          - for story in related_stories|slice:"4"
+            - if not forloop.first
+              .column.is-one-third
+                .columns.is-multiline
+                  .column.is-full
+                    - if story.get_image
+                      {% thumbnail story.get_image "400x300" crop="center" as im %}
+                      <img width="100%" src="{{im.url}}" />
+                      {% endthumbnail %}
+                    - else
+                      <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+                  .column.is-full.is-size-6.has-text-weight-semibold
+                    {{ story.title }}
+                  .column.is-full
+                    %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
+                      - trans "Read more"
+                      &#8594;
+      .column.is-full
+        .columns.is-vcentered
+          .column.is-half
+            {% thumbnail org.logo "230x86" format="PNG" as im %}
+            %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+            {% endthumbnail %}
+          .column.is-half
+            .is-large.is-size-1.has-text-weight-bold
+              This Section is a call to action to wrap up the content nad get involved
+
+            .
+              .button.is-primary.is-large
+                ACTION
+
+            
+
 - block hero
   - if latest_poll
     .hero-container
@@ -63,7 +204,7 @@
     {{ block.super }}
 
 
-- block content
+- block contentar
   .section
     %h1.level-1-title
       - trans "POLL RESULTS"
