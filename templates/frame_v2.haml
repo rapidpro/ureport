@@ -102,76 +102,92 @@
                 %span(aria-hidden="true")
                 %span(aria-hidden="true")
   
-            #mobileNavbar.level.navbar-menu
-              .level-left
-                .level-item.is-hidden-mobile
-                  .icon.is-large.is-size-2
+            #mobileNavbar.navbar-menu.is-hidden-tablet
+              .navbar-start
+                .navbar-item.has-text-weight-semibold.is-size-3
+                  .link
+                    - trans "Polls"
+                .navbar-item.has-text-weight-semibold.is-size-3
+                  .link
+                    - trans "Stories"
+              .navbar-end
+                .navbar-item.header-small-nav
+                  - trans "About"
+
+                .navbar-item.header-small-nav
+                  - trans "Engage"                
+
+                .navbar-item.header-small-nav
+                  - trans "U-Reporters"
+
+                .navbar-item.header-small-nav
+                  - trans "FAQ"  
+
+                .navbar-item.header-social-media-mobile
+                  .icon
+                    %i.fab.fa-facebook-f
+
+                  .icon
+                    %i.fab.fa-twitter
+                .navbar-item.header-search-mobile
+                  .icon
+                    %i.fas.fa-search
+                  - trans "Search"
+
+            .navbar-menu.is-hidden-mobile
+              .navbar-start
+                .navbar-item.header-countries-nav
+                  .icon.is-large.is-size-3
                     %i.fas.fa-globe-africa
                   .icon.is-large.is-size-3
                     %i.fas.fa-chevron-circle-up
                   - trans "All Countries"
-                .level-item.is-hidden-tablet.has-text-weight-semibold.is-size-5
-                  - trans "Polls"
-                .level-item.is-hidden-tablet.has-text-weight-semibold.is-size-5
-                  - trans "Stories"
-                .level-item.is-hidden-tablet
-                .level-item.is-hidden-tablet
+
   
-              .level-right
-                .level-item
+              .navbar-end
+                .navbar-item.header-small-nav
                   - trans "About"
-                .level-item.is-hidden-tablet
-                  - trans "Engage"
-                .level-item
+
+                .navbar-item.header-small-nav
                   - trans "U-Reporters"
-                .level-item
-                  - trans "FAQ"
-                .level-item.is-hidden-tablet
-                .level-item.is-hidden-tablet
+
+                .navbar-item.header-small-nav
+                  - trans "FAQ"  
+
+                .navbar-item.header-small-nav
+                  %span.icon
+                    %i.fas.fa-search
+                  - trans "Search"
+
+                .navbar-item.header-small-nav.header-social-media
+                  %span.icon
+                    %i.fab.fa-facebook-f
+                .navbar-item.header-small-nav.header-social-media
+                  %span.icon
+                    %i.fab.fa-twitter
+
+                .navbar-item.header-small-nav
+                  .engage-call-to-action.button.is-outlined.is-primary
+                    - trans "Join Now"
+
+                .navbar-item.header-small-nav
+                  .icon.is-large.is-size-3.is-marginless
+                    %i.fas.fa-language
+
   
-                .level-item.is-hidden-mobile
-                  .is-small
-                    %span.icon
-                      %i.fas.fa-search
-                    - trans "Search"
-                .level-item.is-hidden-tablet
-                  .field.is-grouped
-                    .is-small
-                      %span.icon
-                        %i.fab.fa-facebook-f
-                    .is-small
-                      %span.icon
-                        %i.fab.fa-twitter
+          %nav.header-big-nav.columns.is-hidden-mobile(role="navigation" aria-label="main navigation" style="border-bottom: 1px solid black;")
+            .column.has-text-centered
+              .link
+                - trans "Polls"
   
-                .level-item.is-hidden-mobile
-                  .is-small
-                    %span.icon
-                      %i.fab.fa-facebook-f
-                .level-item.is-hidden-mobile
-                  .is-small
-                    %span.icon
-                      %i.fab.fa-twitter
-                .level-item.is-hidden-tablet
-                  .is-small
-                    %span.icon
-                      %i.fas.fa-search
-                    - trans "Search"
-                .level-item.is-hidden-mobile
-                  - trans "Join Now"
-                .level-item.is-hidden-mobile
-                  - trans "Languages"
-  
-          %nav.level.is-hidden-mobile(role="navigation" aria-label="main navigation" style="border-bottom: 1px solid black;")
-            .level-item.has-text-centered
-              - trans "Polls"
-  
-            .level-item.has-text-centered
+            .column.has-text-centered
               {% thumbnail org.logo "230x86" format="PNG" as im %}
               %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
               {% endthumbnail %}
   
-            .level-item.has-text-centered
-              - trans "Stories"
+            .column.has-text-centered
+              .link
+                - trans "Stories"
   
     %section#ureport-public-content.section.is-large
   
