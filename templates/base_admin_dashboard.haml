@@ -48,33 +48,33 @@
       -block content-section
         .container
             .columns.is-marginless
-              .column.is-one-fifth.block.has-background-info.is-marginless(style="padding: 3rem 10px;")
+              .column.is-one-fifth.block.is-marginless.left-menu(style="padding: 3rem 10px;")
                 -block menu
                   %aside.menu
                     %ul.menu-list
                       %li
                         %a(href="{% url 'polls.poll_list' %}")
-                          %span.icon
+                          %span.icon(style="color: rgb(156, 202, 42)")
                             .fas.fa-comments
                           - trans "Polls"
                       %li
                         %a(href="{% url 'stories.story_list' %}")
-                          %span.icon
+                          %span.icon(style="color: rgb(252, 109, 7)")
                             .fas.fa-edit
                           - trans "Stories"
                       %li
                         %a(href="{% url 'orgs.org_manage_accounts' %}")
-                          %span.icon
+                          %span.icon(style="color: rgb(18, 129, 18)")
                             .fas.fa-user
                           - trans "Users"
                       %li
                         %a(href="{% url 'orgs.org_edit' %}")
-                          %span.icon
+                          %span.icon(style="color: rgb(114, 57, 142)")
                             .fas.fa-cog
                           - trans "Settings"
                       %li
                         %a(href="{% url 'dashblocks.dashblock_list' %}")
-                          %span.icon
+                          %span.icon(style="color: rgb(21, 169, 149)")
                             .fas.fa-file-alt
                           - trans "Pages"
                       %li
@@ -126,12 +126,12 @@
 
                       %li
                         %a(href="https://app.rapidpro.io/")
-                          %span.icon
+                          %span.icon(style="color: rgb(4, 54, 160)")
                             .fas.fa-code-branch
                           RapidPro
                       %li
                         %a
-                          %span.icon
+                          %span.icon(style="color: rgb(233, 65, 105)")
                             .fas.fa-chart-area
                           - trans "Analytics"
 
