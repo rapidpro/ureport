@@ -151,28 +151,29 @@
   %section.section.is-paddingless.is-marginless
     %footer.footer.is-paddingless
       -block footer
-        .container.has-background-black.has-text-white(style="padding: 80px;")
-          .level.is-large(style="border-bottom: 1px solid white; padding-bottom: 40px;")
+        .container
+          .level.big-footer-nav
             .level-left
-              {% thumbnail org.logo "230x86" format="PNG" as im %}
-              %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
-              {% endthumbnail %}
+              %a.level-item.footer-logo(href="{% url 'v2.public.index' %}")
+                {% thumbnail org.logo "230x86" format="PNG" as im %}
+                %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+                {% endthumbnail %}
             .level-right
-              .level-item.has-text-weight-bold.is-size-2
+              %a.level-item.big-footer-link(href="{% url 'v2.public.polls' %}")
                 - trans "Polls"
-              .level-item.has-text-weight-bold.is-size-2
+              %a.level-item.big-footer-link(href="{% url 'v2.public.stories' %}")
                 - trans "Stories"
 
-          .level
+          .level.small-footer-nav
             .level-left
-              .level-item.is-size-6
+              %a.level-item.small-footer-link(href="{% url 'v2.public.about' %}")
                 - trans "About"
-              .level-item.is-size-6
+              %a.level-item.small-footer-link(href="{% url 'v2.public.join' %}")
                 - trans "Engage"
-              .level-item.is-size-6
+              %a.level-item.small-footer-link(href="{% url 'v2.public.ureporters' %}")
                 - trans "U-Reporters"
-              .level-item.is-size-6
+              %a.level-item.small-footer-link(href="{% url 'v2.public.added' %}")
                 - trans "FAQ"
-              .level-item.button.is-size-6.is-outlined.has-background-black.has-text-white.is-primary
+              %a.level-item.button.is-outlined.small-footer-link(href="{% url 'v2.public.join' %}")
                 - trans "Join Now"
 
