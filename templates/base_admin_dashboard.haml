@@ -155,7 +155,7 @@
           .level.big-footer-nav
             .level-left
               %a.level-item.footer-logo(href="{% url 'v2.public.index' %}")
-                {% thumbnail org.logo "230x86" format="PNG" as im %}
+                {% thumbnail org.logo "400x100" format="PNG" as im %}
                 %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
                 {% endthumbnail %}
             .level-right
