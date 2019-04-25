@@ -15,31 +15,32 @@
               .icon
                 %i.fas.fa-arrow-circle-left
               - trans "Back to Full Site"
-      .container.has-background-dark.has-text-white(style="padding: 40px 80px 0px 80px;")
-        .level.is-large(style="border-bottom: 1px solid white; padding-bottom: 40px;")
+      .container.admin-header
+        .level
           .level-left
-            %a.level-item(href="{% url 'orgs.org_home' %}")
-              {% thumbnail org.logo "230x86" format="PNG" as im %}
-              %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+            %a.level-item.square-logo(href="{% url 'orgs.org_home' %}")
+              {% thumbnail org.logo "150x150" format="PNG" as im %}
+              %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
               {% endthumbnail %}
             .level-item
-              %div
-                %p.is-size-5
+              .is-block.title-block
+                .welcome-message
                   - block welcome-text
                     - if request.user and request.user.is_authenticated
-                      - trans "Welcome" 
+                      - trans "Welcome, "
                       {{ request.user.first_name }} {{ request.user.last_name }}
-                %p.has-text-weight-bold.is-size-2.has-text-centered
+                .page-title-text
                   - trans "Dashboard"
+
           .level-right
             - block login
               - if request.user and request.user.is_authenticated
-                .level-item.is-size-5
+                .level-item.logged-in-account
                   {{ request.user.username }}
-                %a.level-item.is-size-5.button.is-outlined.has-text-white.has-background-dark(href="{% url 'users.user_logout' %}?go=/")
+                %a.level-item.button.is-outlined.logout-button(href="{% url 'users.user_logout' %}?go=/")
                   - trans "Logout"
               - else
-                %a.level-item.is-size-5.button.is-outlined.has-text-white.has-background-dark(href="{% url 'users.user_login' %}")
+                %a.level-item.button.is-outlined(href="{% url 'users.user_login' %}")
                     - trans "Login"
 
   %section.section.is-paddingless.is-marginless

@@ -14,6 +14,12 @@ register = template.Library()
 logger = logging.getLogger(__name__)
 
 
+@register.filter(name='add_placeholder')
+def add_placeholder(field):
+    field.field.widget.attrs['placeholder'] = field.label
+    return field
+
+
 @register.filter
 def question_results(question):
     if not question:

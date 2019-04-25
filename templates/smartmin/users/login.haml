@@ -1,22 +1,29 @@
 - extends "base_admin_dashboard.html"
 
-- load smartmin i18n
+- load smartmin i18n ureport
 
 - block login
--block content-section
-  .container.has-background-grey(style="padding: 10rem 80px;")
+- block welcome-text
+
+- block content-section
+  .container
     - block content
-      .columns.login-form
-        .column.is-6
-          .is-size-4.has-text-white.has-text-weight-bold
-            - trans "Sign in"
-          %div(style="height: 50px;")
+      .columns.login-form.is-marginless
+        .column.is-5.left-block
+          .page-title
+            - trans "SIGN IN"
+          .grey-block(style="width:70%;")
+          .grey-block(style="width:45%;")
+          .grey-block(style="width:70%;")
+          .grey-block(style="width:55%;")
+          .grey-block
           - if allow_email_recovery
-            %span.is-size-5(style="padding-top:7px;padding-right:150px;")
+            %span.forgot-password-link
               %a.has-text-info(href="{% url 'users.user_forget' %}")
                 - trans "Forgot Password?"
 
-        .column.is-6
+
+        .column.is-6.is-offset-1
           %form#login-form(method="post")
             - for field, errors in form.errors.items
               - if field == '__all__'
@@ -27,15 +34,13 @@
 
             %fieldset
               - for field in form
-                .field(class="{% if field.error %}is-danger{% endif %}")
-                  %label.label(for="={ field.name }")
-                    {{ field.label }}
-                  {{ field|add_css:"input" }}
+                .field.login-input(class="{% if field.error %}is-danger{% endif %}")
+                  {{ field|add_placeholder|add_css:"input" }}
                   - if field.error
                     %span.help-block
                       {{ field.error }}
 
               - csrf_token
 
-              %button.button.is-info.is-large.login-btn.is-pulled-right(type="submit")
+              %button.button.is-info.login-button.is-pulled-right(type="submit")
                 - trans "Enter Dashboard"
