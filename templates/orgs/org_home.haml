@@ -3,12 +3,12 @@
 - load i18n
 
 -block content-section
-  .container.has-background-grey(style="padding: 3rem 80px;")
+  .container.admin-home-bg(style="padding: 3rem 80px;")
     - block content
       .columns
-        .column.is-4
-          .is-size-5.has-text-white.has-text-weight-bold
-            - trans "Latest Notifications"
+        .column.is-4.left-block(style="border: none;")
+          .page-title
+            - trans "LATEST NOTIFICATIONS"
 
           - block messages
             - if messages
@@ -23,22 +23,22 @@
                 %strong
                   {{ task.last_successfully_started_on|timesince }} ago
 
-        .column.is-8
+        .column.is-8.right-block
           .tile.is-ancestor
             .tile.is-parent
-              %a.tile.is-child.box.has-text-centered.has-background-white-bis(href="{% url 'polls.poll_list' %}")
-                .tile.is-parent.is-vertical(style="padding: 50px")
-                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
-                    .icon.is-size-1
+              %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'polls.poll_list' %}")
+                .tile.is-parent.is-vertical.big-button-link(style="padding: 50px")
+                  .tile.is-child
+                    .icon.is-size-1(style="color: rgb(156, 202, 42)")
                       .fas.fa-comments
                   .tile.is-child.is-size-3
                     -trans "Polls"
 
             .tile.is-parent
-              %a.tile.is-child.box.has-text-centered(href="{% url 'stories.story_list' %}")
-                .tile.is-parent.is-vertical(style="padding: 50px")
-                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
-                    .icon.is-size-1
+              %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'stories.story_list' %}")
+                .tile.is-parent.is-vertical.big-button-link
+                  .tile.is-child
+                    .icon.is-size-1(style="color: rgb(252, 109, 7)")
                       .fas.fa-edit
                   .tile.is-child.is-size-3
                     -trans "Stories"
@@ -47,28 +47,28 @@
           .tile.is-ancestor
             - if request.user.is_superuser or org_perms.orgs.org_manage_accounts
               .tile.is-parent
-                %a.tile.is-child.box.has-text-centered(href="{% url 'orgs.org_manage_accounts' %}")
-                  .tile.is-parent.is-vertical(style="padding: 30px")
-                    .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
-                      .icon.is-size-1
+                %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'orgs.org_manage_accounts' %}")
+                  .tile.is-parent.is-vertical.small-button-link
+                    .tile.is-child
+                      .icon.is-size-1(style="color: rgb(18, 129, 18)")
                         .fas.fa-user
                     .tile.is-child.is-size-4
                       - trans "Users"
             - if request.user.is_superuser or org_perms.orgs.org_edit
               .tile.is-parent
-                %a.tile.is-child.box.has-text-centered(href="{% url 'orgs.org_edit' %}")
-                  .tile.is-parent.is-vertical(style="padding: 30px")
-                    .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
-                      .icon.is-size-1
+                %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'orgs.org_edit' %}")
+                  .tile.is-parent.is-vertical.small-button-link
+                    .tile.is-child
+                      .icon.is-size-1(style="color: rgb(114, 57, 142)")
                         .fas.fa-cog
                     .tile.is-child.is-size-4
                       - trans "Settings"
 
             .tile.is-parent
-              %a.tile.is-child.box.has-text-centered(href="{% url 'dashblocks.dashblock_list' %}")
-                .tile.is-parent.is-vertical(style="padding: 30px")
-                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
-                    .icon.is-size-1
+              %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'dashblocks.dashblock_list' %}")
+                .tile.is-parent.is-vertical.small-button-link
+                  .tile.is-child
+                    .icon.is-size-1(style="color: rgb(21, 169, 149)")
                       .fas.fa-file-alt
                   .tile.is-child.is-size-4
                     - trans "Pages"
@@ -76,28 +76,28 @@
           .tile.is-ancestor
             - if request.user.is_superuser or org_perms.orgs.orgbackend_list
               .tile.is-parent
-                %a.tile.is-child.box.has-text-centered(href="{% url 'orgs.orgbackend_list' %}")
-                  .tile.is-parent.is-vertical(style="padding: 30px")
-                    .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
-                      .icon.is-size-1
+                %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'orgs.orgbackend_list' %}")
+                  .tile.is-parent.is-vertical.small-button-link
+                    .tile.is-child
+                      .icon.is-size-1(style="color: rgb(114, 57, 142)")
                         .fas.fa-cog
                     .tile.is-child.is-size-4
                       - trans "Backends"
 
             .tile.is-parent
-              %a.tile.is-child.box.has-text-centered(href="https://app.rapidpro.io/")
-                .tile.is-parent.is-vertical(style="padding: 30px")
-                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
-                    .icon.is-size-1
+              %a.tile.is-child.box.has-text-centered.link-button(href="https://app.rapidpro.io/")
+                .tile.is-parent.is-vertical.small-button-link
+                  .tile.is-child
+                    .icon.is-size-1(style="color: rgb(4, 54, 160)")
                       .fas.fa-code-branch
                   .tile.is-child.is-size-4
                     RapidPro
 
             .tile.is-parent
-              %a.tile.is-child.box.has-text-centered(href="#")
-                .tile.is-parent.is-vertical(style="padding: 30px")
-                  .tile.is-child(style="border-bottom: 1px solid; padding-bottom: 20px;")
-                    .icon.is-size-1
+              %a.tile.is-child.box.has-text-centered.link-button(href="#")
+                .tile.is-parent.is-vertical.small-button-link
+                  .tile.is-child
+                    .icon.is-size-1(style="color: rgb(233, 65, 105)")
                       .fas.fa-chart-area
                   .tile.is-child.is-size-4
                     - trans "Analytics"

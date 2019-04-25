@@ -283,10 +283,37 @@
   }
 }
 
-.login-form {
+.login-form, .admin-home-bg {
   padding: 5rem 5rem 35rem 5rem;
   background-color: #060E26; // image bg
   
+  .right-block {
+    .link-button {
+      background: none;
+      border: 1px solid #FFFFFF;
+      color: #FFFFFF;
+
+      .big-button-link {
+        padding: 50px;
+
+        .tile.is-child:not(:last-of-type) {
+          border-bottom: 1px solid; 
+          padding-bottom: 20px;
+        }
+      }
+
+      .small-button-link {
+        padding: 30px;
+        
+        .tile.is-child:not(:last-of-type) {
+          border-bottom: 1px solid; 
+          padding-bottom: 20px;
+        }
+      }
+
+    }
+  }
+
   .left-block {
     border-right: 2px solid #FFFFFF;
     
