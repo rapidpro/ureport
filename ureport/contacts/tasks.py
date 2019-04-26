@@ -16,7 +16,7 @@ from ureport.utils import datetime_to_json_date
 logger = get_task_logger(__name__)
 
 
-@org_task("contact-pull", 60 * 60 * 3)
+@org_task("contact-pull", 60 * 60 * 12)
 def pull_contacts(org, ignored_since, ignored_until):
     """
     Fetches updated contacts from RapidPro and updates local contacts accordingly
