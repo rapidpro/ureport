@@ -1,3 +1,7 @@
+v1.0.448
+----------
+ * Increase contact pull lock timeout to 12 hours
+
 v1.0.447
 ----------
  * Merge pull request #405 from rapidpro/ureport-v2-1
