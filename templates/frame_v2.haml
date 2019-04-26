@@ -24,7 +24,35 @@
 
   <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
   %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png")
+
+  %link(href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet")
   
+  :css
+    @font-face {
+      font-family: SharpSansDisplayBold;
+      src: url('{{ STATIC_URL }}fonts/SharpSansDispNo1-Bold.woff2') format("woff2"),
+           url('{{ STATIC_URL }}fonts/SharpSansDispNo1-Bold.woff') format("woff");
+    }
+
+    @font-face {
+      font-family: SharpSansDisplayBoldItalic;
+      src: url('{{ STATIC_URL }}fonts/SharpSansDispNo1-BoldIt.woff2') format("woff2"),
+           url('{{ STATIC_URL }}fonts/SharpSansDispNo1-BoldIt.woff') format("woff");
+    }
+
+    @font-face {
+      font-family: SharpSansDisplayMedium;
+      src: url('{{ STATIC_URL }}fonts/SharpSansDispNo1-Medium.woff2') format("woff2"),
+           url('{{ STATIC_URL }}fonts/SharpSansDispNo1-Medium.woff') format("woff");
+    }
+
+    @font-face {
+      font-family: SharpSansDisplayMediumItalic;
+      src: url('{{ STATIC_URL }}fonts/SharpSansDispNo1-MediumIt.woff2') format("woff2"),
+           url('{{ STATIC_URL }}fonts/SharpSansDispNo1-MediumIt.woff') format("woff");
+
+    }
+
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>    
 
 
@@ -89,7 +117,6 @@
 
     %section#ureport-public-header.section.is-paddingless.is-marginless
       - block navbar
-        .container
           %nav(role="navigation"  aria-label="main navigation")
             .navbar-brand.is-hidden-tablet
               .navbar-item
@@ -191,7 +218,6 @@
   
     %section#ureport-public-content.section
       - block content-section
-        .container
           - block content
             .container.has-text-centered.is-size-1
               %h1

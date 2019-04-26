@@ -1,5 +1,15 @@
+@headline-font: SharpSansDisplayBold, sans-serif;
+@subheadlines-font: SharpSansDisplayMedium, sans-serif;
+@text-font: 'Roboto', sans-serif;
+@small-text-font: 'Montserrat', sans-serif;
+
+body {
+  font-family: @text-font;
+}
+
 .content-title-text {
   margin: 0px 20px;
+  font-family: @headline-font;
 }
 
 .smartmin-form-buttons {
@@ -163,6 +173,7 @@
     font-size: 3rem;
     line-height: 5rem;
     font-weight: bold;
+    font-family: @subheadlines-font;
 
     .link {
       display: inline-block;
@@ -251,12 +262,14 @@
       .welcome-message {
         font-size: 1.5rem;
         line-height: 1rem;
+        font-family: @subheadlines-font;
       }
 
       .page-title-text {
         font-weight: bold;
         font-size: 3rem;
         line-height: 4rem;
+        font-family: @headline-font;
       }
     }
 
@@ -264,11 +277,14 @@
       color: #FFFFFF;
       font-size: 1.2rem;
       margin-right: 4rem;
+      font-family: @subheadlines-font;
     }
 
     .logout-button {
       color: #FFFFFF;
       background-color: inherit;
+      font-family: @subheadlines-font;
+
     }
   }
 }
@@ -285,6 +301,7 @@
 
       .big-button-link {
         padding: 50px;
+        font-family: @subheadlines-font;
 
         .tile.is-child:not(:last-of-type) {
           border-bottom: 1px solid; 
@@ -311,6 +328,7 @@
       color: #FFFFFF;
       font-size: 1.6rem;
       font-weight: bolder;
+      font-family: @headline-font;
     }
 
     .grey-block {
@@ -352,7 +370,7 @@
 }
 
 .footer {
-  .container {
+  .footer-content {
     padding: 80px;
     background-color: #000000;
     color: #FFFFFF;
@@ -376,6 +394,7 @@
         border-bottom: 1px solid #FFF;
         font-weight: bold;
         display: block;
+        font-family: @headline-font;
         
         &:not(:last-of-type) {
           margin-right: 4rem;
@@ -391,6 +410,8 @@
         color: #FFFFFF;
         display: block;
         font-weight: bold;
+        font-family: @subheadlines-font;
+
 
         &:not(.button) {
           padding: 0.75rem .75rem 0.75rem 0;
@@ -414,6 +435,8 @@
 
 .left-menu {
   background-color: rgb(10, 17, 44);
+  font-family: @headline-font;
+
 
   a {
     color: #FFFFFF;
@@ -429,4 +452,36 @@
       margin-right: 10px;
     }
   }
+}
+
+.icon.colored {
+  .fa-cog {
+      color: rgb(114, 57, 142);
+  }
+
+  .fa-file-alt {
+    color: rgb(21, 169, 149);
+  }
+
+  .fa-code-branch {
+    color: rgb(4, 54, 160);
+  }
+
+  .fa-chart-area {
+    color: rgb(233, 65, 105);
+  }
+
+  .fa-user {
+    color: rgb(18, 129, 18);
+  }
+
+  .fa-edit {
+    color: rgb(252, 109, 7);
+  }
+
+  .fa-comments {
+    color: rgb(156, 202, 42);
+  }
+
+
 }
