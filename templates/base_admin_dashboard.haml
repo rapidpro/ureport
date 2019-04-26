@@ -4,18 +4,18 @@
 
 -block body-content
   %section.section.is-paddingless.is-marginless
-    .container.is-fluid
+    .
       .level.is-marginless.has-background-black(style="height:15px")
 
     -block navbar
-      .container.is-fluid(style="padding: 20px 80px 20px 80px;")
+      .top-nav-container(style="padding: 20px 80px 20px 80px;")
         .level
           .level-left
             %a.level-item.has-text-black(href="/")
               .icon
                 %i.fas.fa-arrow-circle-left
               - trans "Back to Full Site"
-      .container.is-fluid.admin-header
+      .admin-header
         .level
           .level-left
             %a.level-item.square-logo(href="{% url 'orgs.org_home' %}")
@@ -44,7 +44,7 @@
                     - trans "Login"
 
   %section.section.is-paddingless.is-marginless
-    .container.is-fluid
+    .content-section-container
       -block content-section
         .content-section
             .columns.is-marginless
@@ -151,7 +151,7 @@
   %section.section.is-paddingless.is-marginless
     %footer.footer.is-paddingless
       -block footer
-        .container.is-fluid.footer-content
+        .footer-content
           .level.big-footer-nav
             .level-left
               %a.level-item.footer-logo(href="{% url 'v2.public.index' %}")
