@@ -46,9 +46,8 @@
   %section.section.is-paddingless.is-marginless
     .content-section-container
       -block content-section
-        .content-section
-            .columns.is-marginless
-              .column.is-one-fifth.block.is-marginless.left-menu(style="padding: 3rem 10px;")
+            .columns
+              .column.is-one-fifth.block.left-menu(style="margin-bottom: 0.75rem")
                 -block menu
                   %aside.menu
                     %ul.menu-list
@@ -135,7 +134,7 @@
                             .fas.fa-chart-area
                           - trans "Analytics"
 
-              .column.is-four-fifths.is-offset-one-.block
+              .column.is-four-fifths.is-offset-one.block
                 -block content-div
                   .content-div(style="padding: 3rem 40px;")
                     - block messages
