@@ -29,6 +29,12 @@ body {
 
 }
 
+h2 {
+  .icon {
+    padding-left: 1.3rem;
+  }
+}
+
 .smartmin-form-buttons {
   padding: 17px 20px 18px 0px;
   margin-top: 18px;
@@ -445,11 +451,12 @@ body {
   }
 }
 
-.left-menu {
+#left-menu {
   background-color: rgb(10, 17, 44);
   font-family: @headline-font;
 
   padding: 3rem 10px;
+  margin: 0.75rem 0;  
 
   a {
     color: #FFFFFF;
@@ -459,10 +466,15 @@ body {
     margin: 0px 10px;
     padding: 10px 20px 10px 5px;
 
+    &:hover {
+      color: inherit;
+    }
+
     .icon {
       font-size: 1.5rem;
       line-height: 1.5rem;
       margin-right: 10px;
+      display: inline-block;
     }
   }
 }
