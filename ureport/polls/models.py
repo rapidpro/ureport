@@ -813,9 +813,9 @@ class PollQuestion(SmartModel):
         if segment:
             key += ":" + slugify(six.text_type(json.dumps(segment)))
 
-        cached_value = cache.get(key, None)
-        if cached_value:
-            return cached_value["results"]
+        # cached_value = cache.get(key, None)
+        # if cached_value:
+        #    return cached_value["results"]
 
         if getattr(settings, "PROD", False):
             if not segment:
