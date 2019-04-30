@@ -3,13 +3,16 @@
 @text-font: 'Roboto', sans-serif;
 @small-text-font: 'Montserrat', sans-serif;
 
+@bg-dark-blue: #050E28;
+
 body {
   font-family: @text-font;
 }
 
+
 .content-section {
   padding: 5rem;
-  background-color: #060e26;
+  background-color: @bg-dark-blue;
 }
 
 .content-title-text {
@@ -52,6 +55,8 @@ h2 {
 
 }
 
+
+
 #ureport-public-footer {
   
 }
@@ -91,22 +96,82 @@ h2 {
 
 }
 
-#ureport-footer-desktop {
-  margin-bottom: 0; 
-  
-  .footer-mobile-logo {
-    margin: 0.75rem 0rem;
+#pre-footer {
+  background-color: @bg-dark-blue;
+  margin: 0;
+  padding: 5rem 7.5rem;
+  font-family: @headline-font;
+
+  .main-story-title {
+    color: #FFF;
+    font-size: 1.5rem;
+    height: 8rem;
+    max-width: 80%;
+
   }
 
+  .main-story-button {
+    margin: 3rem 0;
+    a {
+      background-color: #000;
+    color: #FFF;
+    border: none;
+    padding: 1rem 1.5rem;
+    }
+  }
+
+  .pre-footer-call-to-action {
+    border-right: 1px solid #FFF;
+    padding-right: 4rem;
+    color: #FFF;
+
+    .call-to-action-text {
+      text-align: end;
+      font-size: 3rem;
+    }
+
+    .call-to-action-button {
+      margin: 4rem 0;
+      .button {
+        font-size: 1.5rem;
+        padding-left: 3rem;
+        padding-right: 3rem; 
+      } 
+    }
+  }
+
+}
+
+a {
+    color: inherit;
+}
+
+#ureport-footer-desktop {
+  margin: 0;
+  padding: 4rem 7.5rem 4rem 7.5rem;;
+  font-family: @headline-font;
+  background-color: #FFF;
+  color: #000;  
+
+
+  .column {
+    padding: 0; 
+
+    .columns {
+      margin: 0
+    }
+  }
+  
   .footer-big-nav {
     font-weight: bold;
     font-size: 2rem;
-    margin: 0.75rem 0rem 0.75rem 0.75rem;
+    height: 5rem;
 
     .link {
+      line-height: 3rem;
       text-align: center;
       padding: 5px;
-      line-height: 3rem;
+
       display: inline;
       border-bottom: 1px solid gray;
     }
@@ -116,44 +181,48 @@ h2 {
   .footer-countries-nav {
     margin: 0.75rem 0rem 0.75rem 0.75rem;
     text-align: end;
-    line-height: 3rem;
-    vertical-align: middle;
+    line-height: 5rem;
     font-weight: bold;
-    font-size: 1.5rem;
-    font-variant-caps: all-small-caps;
+    font-size: 1rem;
 
     .icon {
-      margin: 0px 10px;
-      line-height: 3rem;
-      display: inline;
+      vertical-align: middle;
+      font-size: 2rem;
+      margin-right: 1rem;
     }
   }
 
   .footer-small-nav {
     margin: 0.75rem 0rem 0.75rem 0.75rem;
-    line-height: 3rem;
+    line-height: 5rem;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .footer-extra-nav {
     margin: 0.75rem 0rem 0.75rem 0.75rem;
-    line-height: 3rem;
+    font-family: @subheadlines-font;
+    padding-top: 1rem;
     
     .column {
       line-height: 2rem;
       text-align: center;
       display: inline;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
 
       .icon {
         display: inline;
         margin-right: 10px;
+        font-size: 1rem;
       }
     }
 
     .footer-social-media {
-      font-size: 2rem;
+      .icon {
+        font-size: 1.8rem;
+      }
+      
+
     }
 
   }
@@ -162,18 +231,22 @@ h2 {
  
 
 #ureport-public-header {
+  padding: 0 7.5rem;
+  font-family: @headline-font;
+
   
   .header-countries-nav {
     padding: 0.75rem 0;
     line-height: 5rem;
     vertical-align: middle;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-variant-caps: titling-caps;
+    color: #000;
 
     .icon {
-      line-height: 3rem;
-      display: inline;
+      font-size: 1.8rem;
+      margin-right: 1rem;
     }
   }
 
@@ -182,9 +255,18 @@ h2 {
     vertical-align: middle;
     font-weight: bold;
     padding: 1.2rem;
+    font-family: @subheadlines-font;
+
+    &:last-of-type {
+      padding-right: 0;
+    }
+
+    .engage-call-to-action {
+      font-family: @headline-font;
+    }
     
     .icon {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       line-height: 3rem;
       margin-right: 0.5rem;
       padding-right: 0;
@@ -193,16 +275,16 @@ h2 {
   }
 
   .header-big-nav {
-    font-size: 3rem;
-    line-height: 5rem;
+    font-size: 2rem;
+    line-height: 4rem;
     font-weight: bold;
-    font-family: @subheadlines-font;
 
     .link {
       display: inline-block;
       padding: 0.5rem;
       line-height: 3rem;
-      border-bottom: 1px solid grey;
+      border-bottom: 1px solid #000;
+      color: #000;
     }
   }
 

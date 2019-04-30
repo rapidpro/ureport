@@ -113,9 +113,9 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
-    %section.section.is-paddingless.is-marginless(style="background:#000;height:15px")
+    %section.section.is-paddingless(style="background:#000;height:15px")
 
-    %section#ureport-public-header.section.is-paddingless.is-marginless
+    %section#ureport-public-header.section
       - block navbar
           %nav(role="navigation"  aria-label="main navigation")
             .navbar-brand.is-hidden-tablet
@@ -133,7 +133,7 @@
               .navbar-start
                 .navbar-item.has-text-weight-semibold.is-size-3
                   .link
-                    - trans "Polls"
+                    - trans "Opinions"
                 .navbar-item.has-text-weight-semibold.is-size-3
                   .link
                     - trans "Stories"
@@ -164,22 +164,26 @@
             .navbar-menu.is-hidden-mobile
               .navbar-start
                 .navbar-item.header-countries-nav
-                  .icon.is-large.is-size-3
+                  .icon
                     %i.fas.fa-globe-africa
-                  .icon.is-large.is-size-3
+                  .icon
                     %i.fas.fa-chevron-circle-up
-                  - trans "All Countries"
+                  .
+                    - trans "SELECT YOUR COUNTRY"
 
   
               .navbar-end
                 .navbar-item.header-small-nav
-                  - trans "About"
+                  %a(href="{% url 'v2.public.about' %}") 
+                    - trans "About"
 
                 .navbar-item.header-small-nav
-                  - trans "U-Reporters"
+                  %a(href="{% url 'v2.public.ureporters' %}") 
+                    - trans "U-Reporters"
 
                 .navbar-item.header-small-nav
-                  - trans "FAQ"  
+                  %a(href="{% url 'v2.public.added' %}") 
+                    - trans "FAQ"  
 
                 .navbar-item.header-small-nav
                   %span.icon
@@ -194,27 +198,31 @@
                     %i.fab.fa-twitter
 
                 .navbar-item.header-small-nav
-                  .engage-call-to-action.button.is-outlined.is-primary
-                    - trans "Join Now"
-
-                .navbar-item.header-small-nav
                   .icon.is-large.is-size-3.is-marginless
                     %i.fas.fa-language
 
+                .navbar-item.header-small-nav
+                  .engage-call-to-action.button.is-outlined.is-primary
+                    %a(href="{% url 'v2.public.join' %}") 
+                      - trans "Join Now"
+
   
-          %nav.header-big-nav.columns.is-hidden-mobile(role="navigation" aria-label="main navigation" style="border-bottom: 1px solid black;")
+          %nav.header-big-nav.columns.is-hidden-mobile.is-marginless(role="navigation" aria-label="main navigation" style="border-bottom: 1px solid black;")
             .column.has-text-centered
               .link
-                - trans "Polls"
+                %a(href="{% url 'v2.public.opinions' %}")
+                  - trans "Opinions"
   
             .column.has-text-centered
-              {% thumbnail org.logo "230x86" format="PNG" as im %}
-              %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
-              {% endthumbnail %}
+              %a(href="{% url 'v2.public.index' %}") 
+                {% thumbnail org.logo "230x86" format="PNG" as im %}
+                %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
+                {% endthumbnail %}
   
             .column.has-text-centered
               .link
-                - trans "Stories"
+                %a(href="{% url 'v2.public.stories' %}")
+                  - trans "Stories"
   
     %section#ureport-public-content.section
       - block content-section
@@ -228,9 +236,36 @@
                 - trans "Go back to main public site"
     
     %section#ureport-public-footer.section.is-paddingless.is-marginless
+        -block pre-footer
+          .columns.is-multiline#pre-footer.is-hidden-touch
+            .column.is-full
+              .columns.is-multiline.is-centered.is-8.is-variable
+                - for story in main_stories|slice:"4"
+                  - if not forloop.first
+                    .column
+                      .columns.is-multiline
+                        .column.is-full
+                          <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+                        .column.is-full.main-story-title.is-clipped
+                          {{ story.title }}
+                        .column.is-full.main-story-button
+                          %a.is-inline.button.is-radiusless(href="{% url 'public.story_read' story.pk %}")
+                            - trans "READ MORE"
+                            //&#8594;
+            .column.is-full
+              .columns.is-vcentered
+                .column.is-half
+                  <img width="50%" src="{{ STATIC_URL }}img/big_u.png" />
+                .column.is-half.pre-footer-call-to-action
+                  .call-to-action-text
+                    This Section is a call to action to wrap up the content nad get involved
+      
+                  .call-to-action-button
+                    .button.is-radiusless.is-primary.is-pulled-right
+                      ACTION
+
       %footer.footer.is-paddingless
         -block footer
-          .container
             .columns.is-hidden-tablet#ureport-footer-mobile
               .column.is-full
                 .footer-mobile-logo
@@ -256,7 +291,7 @@
                         .columns.is-mobile.footer-big-nav
                           .column.is-half
                             .link
-                              - trans "Polls"
+                              - trans "Opinions"
                           .column.is-half
                             .link
                               - trans "Stories"
@@ -279,45 +314,53 @@
               .column.is-three-fifths
                 .columns
                   .column.is-full
-                    .footer-mobile-logo
-                      {% thumbnail org.logo "230x86" format="PNG" as im %}
-                      %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
-                      {% endthumbnail %}
+                    .footer-logo
+                      %a(href="{% url 'v2.public.index' %}") 
+                        {% thumbnail org.logo "230x86" format="PNG" as im %}
+                        %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+                        {% endthumbnail %}
                 .columns.footer-small-nav
                   .column
-                    - trans "About"
+                    %a(href="{% url 'v2.public.about' %}")
+                      - trans "About"
                   .column
-                    - trans "Engage"
+                    %a(href="{% url 'v2.public.join' %}")
+                      - trans "Engage"
                   .column
-                    - trans "Reporters"
+                    %a(href="{% url 'v2.public.ureporters' %}")
+                      - trans "U-Reporters"
                   .column
-                    - trans "FAQ"
+                    %a(href="{% url 'v2.public.added' %}")
+                      - trans "FAQ"
 
               .column.is-two-fifths
                 .columns.footer-big-nav
                   .column.is-two-fifths.is-offset-2
                     .link.is-pulled-right
-                      - trans "Polls"
+                      %a(href="{% url 'v2.public.opinions' %}")
+                        - trans "Opinions"
                   .column.is-two-fifths
                     .link.is-pulled-right
-                      - trans "Stories"
+                      %a(href="{% url 'v2.public.stories' %}")
+                        - trans "Stories"
                 .columns.footer-countries-nav
                   .column.is-pulled-right
-                    .icon.is-size-3
+                    .icon
                       %i.fas.fa-globe-africa
-                    .icon.is-size-4
+                    .icon
                       %i.fas.fa-chevron-circle-up
-                    -trans "All countries"
+                    .is-inline
+                      -trans "SELECT YOUR COUNTRY"
                 .columns.footer-extra-nav
                   .column
                     .is-pulled-right
                       - trans "Search"
                     .icon.is-pulled-right
                       %i.fas.fa-search
-                  .column.is-2.is-pulled-right.footer-social-media
+                  .column.is-1.is-offset-1.is-pulled-right.footer-social-media
                     %span.icon.is-pulled-right
                       %i.fab.fa-facebook-f
-                  .column.is-2.is-pulled-right.footer-social-media
+                  .column.is-1.is-pulled-right.footer-social-media
                     %span.icon.is-pulled-right
                       %i.fab.fa-twitter
   

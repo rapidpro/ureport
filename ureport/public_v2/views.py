@@ -54,6 +54,8 @@ class IndexView(SmartTemplateView):
         context["age_stats"] = org.get_age_stats()
         context["reporters"] = org.get_reporters_count()
 
+        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
+
         return context
 
 
@@ -119,6 +121,7 @@ class AboutView(SmartTemplateView):
         videos = Video.objects.filter(is_active=True, org=org).order_by("-created_on")
         context["videos"] = videos
 
+        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
 
 
@@ -153,9 +156,10 @@ class PollsView(PollContextMixin, SmartTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PollsView, self).get_context_data(**kwargs)
+        org = self.request.org
 
         context["tab"] = "list"
-
+        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
 
 
@@ -186,6 +190,7 @@ class StoriesView(SmartTemplateView):
         context["other_stories"] = Story.objects.filter(org=org, featured=False, is_active=True).order_by(
             "-created_on"
         )
+        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
 
         return context
 
@@ -225,7 +230,7 @@ class StoryReadView(SmartReadView):
         context["related_stories"] = related_stories
 
         context["story_featured_images"] = story.get_featured_images()
-
+        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
 
 
@@ -246,6 +251,7 @@ class UreportersView(SmartTemplateView):
         context["registration_stats"] = org.get_registration_stats()
         context["occupation_stats"] = org.get_occupation_stats()
         context["reporters"] = org.get_reporters_count()
+        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
 
         return context
 
@@ -255,8 +261,9 @@ class JoinEngageView(SmartTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(JoinEngageView, self).get_context_data(**kwargs)
-
-        context["org"] = self.request.org
+        org = self.request.org
+        context["org"] = org
+        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
 
 
