@@ -2,99 +2,107 @@
 
 -load compress thumbnail humanize ureport i18n
 
+
 - block content
-  .columns
-    .column.is-size-1.has-text-weight-bold
-      Opinions
-    .column.is-size-3.has-text-right
-      .dropdown
-        .dropdown-trigger
-          .button.has-background-black.has-text-white
-            %span
-              BROWSE CATEGORIES
-            %span.icon.is-small
-              %i.fas.fa-angle-down(aria-hidden="true")
-               
+  %section.section.page-title-block.block-content.booklet-bg
+    .columns
+      .column.page-title
+        Opinions
+      .column.categories-dropdown
+        .dropdown
+          .dropdown-trigger
+            .button
+              .dropdown-text
+                %span
+                  BROWSE CATEGORIES
+                %span.icon.is-small
+                  %i.fas.fa-angle-down(aria-hidden="true")
+  %section.section.poll-title-block.block-content
+    .columns
+      .column.is-half.questions-count
+        {% blocktrans count questions=latest_poll.get_questions.count %}
+          {{ questions }} question
+        {% plural %}
+          {{ questions }} questions
+        {% endblocktrans %}
+      .column.is-half.has-text-right
+        .recent-results.is-inline-block
+          Recent Poll Results
+        .poll-category.is-inline-block
+          {{ latest_poll.category.name|upper }}
+    .columns
+      .column.is-half.poll-title
+        {{ latest_poll.title }}
+      .column.is-half.has-text-right
+        .poll-stats
+          .responses-count.is-inline-block.has-text-centered
+            .number-figure
+              {{ latest_poll.responded_runs|intcomma }}
+            .number-label
+              - trans "RESPONSES"
+          .responses-percentage.is-inline-block.has-text-centered
+            .number-figure
+              {{ latest_poll.response_percentage }}
+            .number-label
+              - trans "RESPONSE RATE"
+  - for question in latest_poll.get_questions
+    %section.section.columns.is-paddingless.is-marginless.poll-question-block
+        - if not forloop.counter|divisibleby:2
+          .column.is-half.block-content(class="for{{ forloop.counter0}}")
+            .columns.is-multiline
+              .column.is-full.is-size-5.has-text-weight-semibold
+                {{ question.title }}
+              .column.is-full.is-size-7.has-text-weight-semibold
+                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
+                  {{ responded }} responded out of {{ polled }} polled
+                {% endblocktrans %}
 
-  .columns
-    .column.is-half
-      .columns.is-multiline
-        .column.is-full.is-size-5
-          Recent Results
-        .column.is-full.is-size-4.has-text-weight-semibold
-          {{ latest_poll.title }}
-        .column.is-full
-          .icon
-            %i.fab.fa-facebook-f
-          .icon
-            %i.fab.fa-twitter
-          .icon
-            %i.fas.fa-external-link-alt
-    
-    .column.is-half
-      .columns.is-multiline
-        .column
-          - if latest_poll
-            {% thumbnail latest_poll.get_category_image "1280x678" crop="top" as im %}
-            %img(src="{{ im.url }}")
-            {% endthumbnail %}
+        .column.is-half.block-content
+          .columns
+            .column
+              .is-small
+                -trans "FILTER BY:"
+              .tabs.is-boxed
+                %ul
+                  %li.is-active(data-tab='all-chart-{{question.id}}')
+                    %a
+                      -trans "ALL"
+                  %li(data-tab='age-chart-{{question.id}}')
+                    %a
+                      -trans "AGE"
+                  %li(data-tab='gender-chart-{{question.id}}')
+                    %a
+                      -trans "GENDER"
+                  %li(data-tab='map-chart-{{question.id}}')
+                    %a
+                      -trans "LOCATION"
+              .tabs-content
+                .tab-content.is-active(data-content='all-chart-{{question.id}}')
+                  %canvas.poll-question-graph-all(id="graph-all-question-{{question.id}}" data-question="{{question.id}}")
+                .tab-content(data-content='age-chart-{{question.id}}')
+                  %canvas.poll-question-graph-age(id="graph-age-question-{{question.id}}" data-question="{{question.id}}")
+                .tab-content(data-content='gender-chart-{{question.id}}')
+                  %canvas.poll-question-graph-gender(id="graph-gender-question-{{question.id}}" data-question="{{question.id}}")
+                .tab-content(data-content='map-chart-{{question.id}}')
+                  .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
+                    .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
+                        %img{src:"{{ STATIC_URL }}img/loading.gif"}
+        
+        - if forloop.counter|divisibleby:2
+          .column.is-half.block-content(class="for{{ forloop.counter0}}")
+            .columns.is-multiline
+              .column.is-full.is-size-5.has-text-weight-semibold
+                {{ question.title }}
+              .column.is-full.is-size-7.has-text-weight-semibold
+                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
+                  {{ responded }} responded out of {{ polled }} polled
+                {% endblocktrans %}
 
-  .columns
-    .column.has-text-right
-      .has-background-grey.is-inline-block
-        {{ latest_poll.responded_runs|intcomma }}
-        %span
-          - trans "responded out of"
-        {{ latest_poll.runs|intcomma }}
-        %span
-          - trans "polled"
-
-    .column
-      .has-background-grey.is-inline-block
-        {{ latest_poll.response_percentage }}
-        %span
-          - trans "response rate"
-  
-  .columns.is-multiline
-    - for question in latest_poll.get_questions
-      .column.is-half
-        .columns.is-multiline
-          .column.is-full.is-size-5.has-text-weight-semibold
-            {{ question.title }}
-          .column.is-full.is-size-7.has-text-weight-semibold
-            {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
-              {{ responded }} responded out of {{ polled }} polled
-            {% endblocktrans %}
-        .columns.is-multiline.is-vcentered
-          .column.is-half
-            .is-small.is-size-7
-              -trans "FILTER BY:"
-            .tabs.is-small.is-boxed.is-size-7
-              %ul
-                %li.is-active
-                  %a
-                    -trans "ALL"
-                %li
-                  %a
-                    -trans "AGE"
-                %li
-                   %a
-                    -trans "GENDER"
-                %li
-                  %a
-                    -trans "LOCATION"
-            
-          .column.is-half.has-text-right
-            .icon
-              %i.fab.fa-facebook-f
-            .icon
-              %i.fab.fa-twitter
-            .icon
-              %i.fas.fa-external-link-alt
-    
+- block rsrs
+  %section.section.poll-story-title-block.block-content
     .columns.is-multiline
       - for story in related_stories|slice:"1"
-        .column.is-full.is-size-4.has-text-weight-semibold
+        .column.is-full.is-size-4.has-text-weight-semibold.booklet-bg
           {{ story.title }}
         .column.is-full
           {{ story.created_on|date:"M j. Y" }}
@@ -106,282 +114,11 @@
         .column.is-full
           {{ story.content|safe }}  
 
-- block hero
   - if latest_poll
-    .hero-container
-      .hero-dark-container
-      .poll-hero
-        .container
-          .hero-small-background
-          .row
-            .col-sm-12
-              .hero-title.hero-top-title.primary-bg-color
-                - if tab == 'list'
-                  - trans "CURRENT POLL IN"
-                {{ latest_poll.category.name|upper }}
-
-          .row
-            .col-sm-6
-              .hero-description.poll-hero-title
-                {{ latest_poll.title }}
-              .hero-description.poll-hero-questions
-                {% blocktrans count questions=latest_poll.get_questions.count %}
-                  {{ questions }} question polled on this topic
-                {% plural %}
-                  {{ questions }} questions polled on this topic
-                {% endblocktrans %}
-
-                .poll-hero-circle-outer
-                .poll-hero-circle-inner.primary-border-color
-
-            .col-sm-6.left-col-border{style:"border-color:#FFF"}
-              .hero-description.small-text
-                {{ latest_poll.response_percentage }}
-                %span
-                  - trans "response rate"
-              .hero-description.small-text
-                {{ latest_poll.responded_runs|intcomma }}
-                %span
-                  - trans "responded out of"
-                {{ latest_poll.runs|intcomma }}
-                %span
-                  - trans "polled"
-
-          .latest-poll-questions.hide-on-small
-            - with latest_poll.get_questions as questions
-              .row-no-padding
-                - for question in questions
-                  {% if forloop.counter0 == 4 %}</div><div class="row-no-padding">{% endif %}
-                  .col-sm-3
-                    .top-poll-question
-                      {% if forloop.counter0 <= 3 %}
-                      .question-hline{ class: "{% if forloop.first %}hline-first{% endif %} {% if forloop.counter0 == 3 or forloop.last %}hline-last{% endif %}" }
-                      .question-vline{ class: "{% if forloop.last or forloop.counter0 == 3 %}vline-last{% endif %}" }
-                      {% endif %}
-                      .question-date.primary-bg-color{ style: "{% if forloop.counter0 > 3 %}margin-top: 20px{% endif %}" }
-                        {{ latest_poll.poll_date|date:"M j. Y" }}
-                      .question-title
-                        {{ question.title }}
-
-  - block banner
-    {{ block.super }}
-
-
-- block contentar
-  .section
-    %h1.level-1-title
-      - trans "POLL RESULTS"
-
-    .poll-questions
-      {% for question in latest_poll.get_questions %}
-        .poll-question
-          .white-card-container
-            .white-card-inner
-              .white-card-title.primary-bg-color
-                {{ latest_poll.poll_date|date:"M j. Y"|upper }}
-              .white-card-content.white-card-padding
-                .poll-question-title
-                  {{ question.title }}
-                .poll-question-response-rate
-                  {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
-                    {{ responded }} responded out of {{ polled }} polled
-                  {% endblocktrans %}
-                .poll-question-visualization
-                  .poll-question-tabs-border.primary-border-color{role:"tablist"}
-                    .poll-question-tabs.primary-bg-color
-                      - if question.is_open_ended
-                        %a.poll-question-tab.active.primary-color.primary-bg-color{ href:"#keywords-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                          - trans "KEYWORDS"
-                      - else
-
-                        %a.poll-question-tab.active.primary-color.primary-bg-color{href:"#statistics-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                          - trans "STATISTICS"
-
-                        - if not is_iorg and show_maps
-                          %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                            - trans "LOCATIONS"
-
-                        - if not is_iorg and show_gender_stats
-                          %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#gender-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                            - trans "GENDER"
-
-                        - if not is_iorg and show_age_stats
-                          %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#age-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                            - trans "AGE"
-
-
-                  .tab-content
-                    - if question.is_open_ended
-                      .tab-pane.active{id:"keywords-tab-{{ question.id }}"}
-                        .poll-word-cloud{data-question:"{{ question.id }}", id:"word-cloud-{{ question.id }}" }
-                          .keyword-placeholder{id:"word-cloud-{{ question.id }}-placeholder"}
-                            -with results=question|question_results
-                              -for category in results.categories|slice:":50"
-                                .keyword.primary-bg-color
-                                  {{ category.label }}
-
-                    - else
-                      -if not is_iorg and show_maps
-                        .tab-pane{id:"locations-tab-{{ question.id }}"}
-                          .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
-                            .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
-                              %img{src:"{{ STATIC_URL }}img/loading.gif"}
-
-                      -if not is_iorg and show_gender_stats
-                        .tab-pane{id:"gender-tab-{{ question.id }}"}
-                          -with seg_results=question|question_segmented_results:"gender"
-                            -for results in seg_results
-                              .graph-title
-                                {{results.label}}
-
-                              .poll-graph
-
-                                -with categories=results.categories
-                                  -for category in categories
-                                    .poll-category
-                                      .category-container{ class:"poll-category-{% cycle '1' '2' '3' '4' '5' '6' %}" }
-                                        .category-dash
-
-                                        .category-percent
-                                          {% widthratio category.count results.set 100 %}%
-
-                                        .category-label-below
-                                          {{ category.label }}
-
-                                        .category-bar{ style:"width:{% widthratio category.count results.set 90 %}%" }
-                                          &nbsp;
-
-                                        .category-label-above
-                                          {{ category.label }}
-                              -if not forloop.last
-                                %hr
-
-                      -if not is_iorg and show_age_stats
-                        .tab-pane{id:"age-tab-{{ question.id }}"}
-                          -with seg_results=question|question_segmented_results:"age"
-                            -for results in seg_results
-                              .graph-title
-                                {{results.label}}
-
-                              .poll-graph
-
-                                -with categories=results.categories
-                                  -for category in categories
-                                    .poll-category
-                                      .category-container{ class:"poll-category-{% cycle '1' '2' '3' '4' '5' '6' %}" }
-                                        .category-dash
-
-                                        .category-percent
-                                          {% widthratio category.count results.set 100 %}%
-
-                                        .category-label-below
-                                          {{ category.label }}
-
-                                        .category-bar{ style:"width:{% widthratio category.count results.set 90 %}%" }
-                                          &nbsp;
-
-                                        .category-label-above
-                                          {{ category.label }}
-                              -if not forloop.last
-                                %hr
-
-                      .tab-pane.active{id:"statistics-tab-{{ question.id }}"}
-                        .poll-graph
-                          -with results=question|question_results
-                            -with categories=results.categories
-                              -for category in categories
-                                .poll-category
-                                  .category-container{ class:"poll-category-{% cycle '1' '2' '3' '4' '5' '6' %}" }
-                                    .category-dash
-
-                                    .category-percent
-                                      {% widthratio category.count results.set 100 %}%
-
-                                    .category-label-below
-                                      {{ category.label }}
-
-                                    .category-bar{ style:"width:{% widthratio category.count results.set 90 %}%" }
-                                      &nbsp;
-
-                                    .category-label-above
-                                      {{ category.label }}
-
-
-      {% endfor %}
-
-
-  %hr.aaa
-  .row
-    .col-md-8
-      .section
-        %h1.level-1-title
-          - trans "FEATURED ANSWERS"
-        .level-1-title-description.secondary-color
-        - if not latest_poll.get_featured_responses
-          .current-poll-featured-response{style:"width: 100%"}
-            .card.card-padding
-              .featured-response-text.no-answers
-                - trans "No featured answers."
-
-        - for response in latest_poll.get_featured_responses|slice:"4"
-          .current-poll-featured-response{class:"{% cycle 'right-part' 'left-part' %} for{{ forloop.counter}} len{{latest_poll.get_featured_responses|length}}"}
-            .card.card-padding
-              .featured-response-text
-                {{ response.message }}
-              .half-border.none-color
-              .featured-response-reporter
-                - if response.reporter
-                  {{ response.reporter|title }}
-              .featured-response-region
-                - trans "U-Reporter in"
-                {{ response.location }}
-
-    .col-md-4.left-col-border
-      .section
-        %h1.level-1-title
-          - trans "RELATED STORIES"
-        .level-1-title-description.secondary-color
-        .card.card-padding
-          - if not related_stories
-            -trans "No related stories."
-
-          - for story in related_stories|slice:"1"
-            .related-story-image
-              - if story.get_image
-                {% thumbnail story.get_image "400x300" crop="center" as im %}
-                <img width="100%" src="{{im.url}}" />
-                {% endthumbnail %}
-              - else
-                <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
-            .related-story-title.primary-color
-              {{ story.title }}
-            .related-story-date
-              {{ story.created_on|date:"M j. Y" }}
-            .related-story-teaser
-              {{ story.short_teaser|safe }}
-            %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
-              - trans "Read more"
-              &#8594;
-
-  %hr.aaa
-  .section
-    %h1.level-1-title
-      - trans "FEATURED IMAGES"
-    .card.card-padding
-      .row
-        - if not latest_poll.get_featured_images
-          .col-md-12.no-content
-            - trans "No featured images yet."
-        - for poll_image in latest_poll.get_featured_images|slice:"3"
-          .col-md-4{class:"{% cycle 'small-pad-right' 'small-pad-middle' 'small-pad-left' %}"}
-            {% thumbnail poll_image.image "1200x800" as im %}
-            <a href="{{ im.url}}" data-lightbox="poll-image-garelly-{{ latest_poll.id }}">
-            <img width="100%" height="100%" src="{{im.url}}" />
-            </a>
-            {% endthumbnail %}
-
-  %hr.aaa
-  -include "public/all_polls.html"
+    %section.section.block-content
+      .columns
+        .column.is-full
+          .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")
 
 
 - block extra-style
@@ -450,6 +187,232 @@
 
   {% include "public/strings_values.html" %}
   :javascript
+
+    $(function(){
+      $(".poll-question-graph-all").each(function(){
+        var question = $(this).attr("data-question");
+        $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
+
+          if(!result){
+            return;
+          }
+
+          var results = result[0];
+
+          var categories = [];
+          var data = [];
+
+          var total = 0;
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            total += category.count;
+          }
+          var percentage_lookup = {};
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            label = category.label.trim().toUpperCase();
+            categories.push(label);
+            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+            percentage_lookup[label] = Math.round(percentage);
+            if (parseInt(percentage_lookup[label])) {
+              data.push({ name:label,  y: percentage });
+            }
+          }
+
+          var ctx= $('#graph-all-question-' + question);
+          var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: '# of Votes',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+          });
+
+        })
+
+      $(".poll-question-graph-gender").each(function(){
+        var question = $(this).attr("data-question");
+        var segment = {"gender": "Gender"}
+        $.ajax({url:'/pollquestion/' + question + '/results/?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done(function(result){
+
+          if(!result){
+            return;
+          }
+
+          console.log(result);
+
+          var results = result[0];
+          console.log(result);
+
+          var categories = [];
+          var data = [];
+
+          var total = 0;
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            total += category.count;
+          }
+          var percentage_lookup = {};
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            label = category.label.trim().toUpperCase();
+            categories.push(label);
+            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+            percentage_lookup[label] = Math.round(percentage);
+            if (parseInt(percentage_lookup[label])) {
+              data.push({ name:label,  y: percentage });
+            }
+          }
+
+          var ctx= $('#graph-gender-question-' + question);
+          var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: '# of Votes',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+          });
+
+        })
+
+      $(".poll-question-graph-age").each(function(){
+        var question = $(this).attr("data-question");
+        var segment = {"age": "Age"}
+        $.ajax({url:'/pollquestion/' + question + '/results/?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done(function(result){
+
+          if(!result){
+            return;
+          }
+
+          console.log(result);
+
+          var results = result[0];
+          console.log(result);
+
+          var categories = [];
+          var data = [];
+
+          var total = 0;
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            total += category.count;
+          }
+          var percentage_lookup = {};
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            label = category.label.trim().toUpperCase();
+            categories.push(label);
+            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+            percentage_lookup[label] = Math.round(percentage);
+            if (parseInt(percentage_lookup[label])) {
+              data.push({ name:label,  y: percentage });
+            }
+          }
+
+          var ctx= $('#graph-age-question-' + question);
+          var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: '# of Votes',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+          });
+
+        })                
+
+    });
+    
+    
     $(function(){
 
       $(".poll-question-tab").on('click', function (){

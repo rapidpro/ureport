@@ -26,6 +26,8 @@
   %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png")
 
   %link(href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet")
+  %link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css")
+
   
   :css
     @font-face {
@@ -66,6 +68,7 @@
     -else
       -compress css
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css")
         %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
 
   - block extra-less
@@ -224,16 +227,16 @@
                 %a(href="{% url 'v2.public.stories' %}")
                   - trans "Stories"
   
-    %section#ureport-public-content.section
-      - block content-section
-          - block content
-            .container.has-text-centered.is-size-1
-              %h1
-                - trans "Site page under construction"
+
+    - block content
+      %section#ureport-public-content.section
+        .container.has-text-centered.is-size-1
+          %h1
+            - trans "Site page under construction"
   
-            .container.has-text-centered.is-text-1
-              %a(href="/")
-                - trans "Go back to main public site"
+        .container.has-text-centered.is-text-1
+          %a(href="/")
+              - trans "Go back to main public site"
     
     %section#ureport-public-footer.section.is-paddingless.is-marginless
         -block pre-footer
@@ -387,6 +390,7 @@
     ga('send', 'pageview');
 
   </script>
+  <script src="{{ STATIC_URL }}/js/leaflet.js"></script>
 
   <script>
   $(document).ready(function() {
@@ -399,11 +403,29 @@
 
     });
   });
+
+    $(document).ready(function() {
+      $(".tabs ul li").on('click', function() {
+        var tab = $(this).data('tab');
+        $(this).parent().parent('.tabs').children().children('li').removeClass('is-active');
+
+        $(this).addClass('is-active');
+         $(this).parent().parent('.tabs').siblings(".tabs-content").children(".tab-content").removeClass('is-active');
+        $('div[data-content="' + tab + '"]').addClass('is-active');
+
+      });
+    });
+
+
   </script>
 
   {% endif %}
   <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.pjax.js"></script>
-
+  <script type="text/javascript" src="{{ STATIC_URL }}js/Chart.bundle.min.js"></script>
+  
+  {% compress js %}
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureport.coffee" />
+  {% endcompress %}
   
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 

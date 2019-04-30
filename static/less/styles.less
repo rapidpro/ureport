@@ -4,9 +4,21 @@
 @small-text-font: 'Montserrat', sans-serif;
 
 @bg-dark-blue: #050E28;
+@qsn-colors-list: #8750A1, #FED100, #3FB5E5;
+
+
 
 body {
   font-family: @text-font;
+  color: #000;
+}
+
+.tab-content {
+  display: none;
+
+  &.is-active {
+    display: block
+  }
 }
 
 
@@ -591,4 +603,106 @@ a {
   }
 
 
+}
+
+.block-content {
+  padding: 3rem 7.5rem;
+}
+
+.booklet-bg {
+  background-image:
+    linear-gradient(rgba(128,128,128,.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(128,128,128,.28) 1px, transparent 1px);
+  background-size: 100px 60px, 45px 200px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  min-height: 15rem;
+}
+
+.page-title-block {
+  .page-title {
+    font-family: @headline-font;
+    font-size: 6rem;
+  }
+
+  .categories-dropdown {
+    text-align: end;  
+    vertical-align: middle;
+
+    .dropdown {
+      margin: 3rem 0;
+    }
+
+    .button {
+      background-color: #000;
+      color: #FFF;
+      font-family: @headline-font;
+      font-size: 1.5rem;
+      padding: 1.8rem 1rem;
+
+      .dropdown-text {
+        border-bottom: 2px solid #FFF;
+      }
+
+    }
+
+  }
+}
+
+.poll-title-block {
+  background-color: @bg-dark-blue;
+  color: #FFF;
+
+  .poll-stats {
+    background-color: rgba(255, 255, 255, .25);
+    display: inline-block;
+    margin: 2rem 0rem;
+    padding: 2rem;
+    
+    .number-figure {
+      font-size: 3rem;
+      padding: 0rem 3rem;
+    }
+    .number-label {
+      padding: 0rem 3rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+  }
+
+  .poll-category {
+    background-color: #FF8200;
+    padding: .75rem;
+    font-family: @headline-font;
+    margin-left: .75rem;
+  }
+
+  .recent-results {
+    background-color: #FFF;
+    color: #000;
+    border-left:25px solid yellow;
+    padding: .75rem;
+  }
+
+  .questions-count {
+    font-size: 1.5rem;
+    font-family: @subheadlines-font;
+  }
+
+  .poll-title {
+    font-size: 3rem;
+    font-family: @headline-font;
+  }
+}
+
+.poll-question-block {
+  .for0 {
+    background-color: extract(@qsn-colors-list, 1);
+  }
+
+each(range(15), {
+  .for@{value} {
+    background-color: extract(@qsn-colors-list, mod(@value, length(@qsn-colors-list)) + 1);
+  }  
+});
 }

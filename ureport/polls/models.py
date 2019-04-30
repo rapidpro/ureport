@@ -964,7 +964,7 @@ class PollQuestion(SmartModel):
                 elif gender_part:
 
                     genders = ["f", "m"]
-                    gender_labels = dict(f=_("Female"), m=_("Male"))
+                    gender_labels = dict(f=str(_("Female")), m=str(_("Male")))
 
                     for gender in genders:
                         categories = []
