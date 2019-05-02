@@ -484,10 +484,10 @@ class PublicTest(UreportTest):
 
     @mock.patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_polls_list(self):
-        polls_url = reverse("v2.public.polls")
+        polls_url = reverse("v2.public.opinions")
 
         response = self.client.get(polls_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/polls/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/opinions/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["tab"], "list")
         self.assertEqual(response.context["view"].template_name, "public_v2/polls.html")
@@ -528,7 +528,7 @@ class PublicTest(UreportTest):
         )
 
         response = self.client.get(polls_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/polls/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/opinions/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["tab"], "list")
         self.assertEqual(response.context["view"].template_name, "public_v2/polls.html")
@@ -591,7 +591,7 @@ class PublicTest(UreportTest):
         self.assertTrue(story3 not in response.context["related_stories"])
 
         response = self.client.get(polls_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/polls/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/opinions/")
         self.assertEqual(response.context["org"], self.uganda)
         self.assertEqual(response.context["latest_poll"], poll3)
 

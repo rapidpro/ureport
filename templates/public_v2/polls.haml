@@ -20,7 +20,7 @@
   %section.section.poll-title-block.block-content
     .columns
       .column.is-half.questions-count
-        {% blocktrans count questions=latest_poll.get_questions.count %}
+        {% blocktrans count questions=latest_poll.get_questions|length %}
           {{ questions }} question
         {% plural %}
           {{ questions }} questions
