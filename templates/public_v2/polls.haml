@@ -89,9 +89,9 @@
                 -else
                   .tab-content.is-active(data-content='all-chart-{{question.id}}')
                     .poll-question-graph-all(id="graph-all-question-{{question.id}}" data-question="{{question.id}}")
-                  .tab-content(data-content='age-chart-{{question.id}}')
+                  .tab-content.is-active(data-content='age-chart-{{question.id}}')
                     .poll-question-graph-age(id="graph-age-question-{{question.id}}" data-question="{{question.id}}")
-                  .tab-content(data-content='gender-chart-{{question.id}}')
+                  .tab-content.is-active(data-content='gender-chart-{{question.id}}')
                     .poll-question-graph-gender(id="graph-gender-question-{{question.id}}" data-question="{{question.id}}")
                   .tab-content(data-content='map-chart-{{question.id}}')
                     .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
@@ -366,11 +366,11 @@
             };
 
             var chart = new google.visualization.ColumnChart(document.getElementById('graph-gender-question-' + question));
-
+            google.visualization.events.addListener(chart, 'ready', function() {
+              $('#graph-gender-question-' + question).parent('.tab-content').removeClass('is-active')
+            });
             chart.draw(chdata, google.charts.Bar.convertOptions(options));
           }
-
-
         });
       });
 
@@ -459,6 +459,9 @@
             };
 
             var chart = new google.visualization.ColumnChart(document.getElementById('graph-age-question-' + question));
+            google.visualization.events.addListener(chart, 'ready', function() {
+              $('#graph-age-question-' + question).parent('.tab-content').removeClass('is-active')
+            });
 
             chart.draw(chdata, google.charts.Bar.convertOptions(options));
           }
