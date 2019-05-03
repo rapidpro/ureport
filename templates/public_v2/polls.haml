@@ -4,20 +4,40 @@
 
 
 - block content
-  %section.section.page-title-block.block-content.booklet-bg
-    .columns
-      .column.page-title
-        Opinions
-      .column.categories-dropdown
-        .dropdown
-          .dropdown-trigger
-            .button
-              .dropdown-text
-                %span
-                  BROWSE CATEGORIES
-                %span.icon.is-small
-                  %i.fas.fa-angle-down(aria-hidden="true")
-  %section.section.poll-title-block.block-content
+  .booklet-bg
+    .page-title-block.block-content
+      .columns
+        .column.page-title
+          Opinions
+        .column.categories-dropdown
+          .dropdown.is-right
+            .dropdown-trigger
+              .button
+                .dropdown-text
+                  %span
+                    BROWSE CATEGORIES
+                  %span.icon.is-small
+                    %i.fas.fa-angle-down(aria-hidden="true")
+            
+            .dropdown-menu.poll-overlay
+              .dropdown-content
+                .dropdown-item
+                  .menu
+                    %ul.menu-list
+                      - for category in categories
+                        %li.polls-category
+                          %a
+                            {{ category.name }} ({{category.polls.all|length}} polls)
+                          %ul.menu-list.menu-list-polls
+                            - if not category.polls.all|length
+                              %li.has-background-warning
+                                -trans "No polls yet for this category"
+                            - for poll in category.polls.all
+                              %li
+                                %a(href="{% url 'v2.public.opinion_read' poll.id %}")
+                                  {{poll.title }} 
+
+  .poll-title-block.block-content
     .columns
       .column.is-half.questions-count
         {% blocktrans count questions=latest_poll.get_questions|length %}
@@ -46,7 +66,7 @@
             .number-label
               - trans "RESPONSE RATE"
   - for question in latest_poll.get_questions
-    %section.section.columns.is-paddingless.is-marginless.poll-question-block
+    .columns.is-paddingless.is-marginless.poll-question-block
         - if not forloop.counter|divisibleby:2
           .column.is-half.block-content(class="for{{ forloop.counter0}}")
             .columns.is-multiline
@@ -122,25 +142,32 @@
                 {% endblocktrans %}
 
 - block rsrs
-  %section.section.poll-story-title-block.block-content
-    .columns.is-multiline
-        .column.is-full.is-size-4.has-text-weight-semibold
+  - for story in main_stories|slice:"1"
+    .poll-story-title-block
+      .columns.is-multiline.booklet-bg.block-content
+        .column.is-10
+          .recent-results.is-inline-block
+            Recent Poll Results
+        .column.is-2
+          <img width="50%" src="{{ STATIC_URL }}img/medium-u-white.png" />
+        .column.is-full.poll-story-title-text
           {{ story.title }}
-        .column.is-full
+        .column.is-full.poll-story-date
           {{ story.created_on|date:"M j. Y" }}
         -if story.get_written_by
-          .column.is-full
+          .column.is-full.poll-story-author
             - trans "BY"
             {{ story.get_written_by|upper }}
-   %section.section.poll-story-content-block.block-content
-      .columns.is-multiline        
-        .column.is-full
-          {{ story.content|safe }}  
+      
+      .block-content
+        .columns.is-multiline.poll-story-block
+          .column.is-full
+            {{ story.content|safe }}  
 
-    - if latest_poll
-      .columns
-        .column.is-full
-          .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")
+        - if latest_poll
+          .columns.is-multiline.poll-story-block
+            .column.is-full
+              .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")
 
 
 - block extra-style
@@ -209,6 +236,16 @@
 
   {% include "public/strings_values.html" %}
   :javascript
+    $(".polls-category").on('click', function() {
+      $(this).siblings().removeClass('is-active');
+      $(this).addClass('is-active');
+    });
+
+    $(".dropdown-trigger").on('click', function() {
+      $('.polls-category').removeClass('is-active');
+      $(this).siblings('.dropdown-menu').toggleClass('is-active');
+    });
+
 
     $(function(){
       $(".poll-question-graph-all").each(function(){

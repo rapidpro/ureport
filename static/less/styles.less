@@ -21,6 +21,39 @@ body {
   }
 }
 
+.dropdown-menu {
+  &.is-active {
+    display: block;
+  }
+}
+
+.poll-overlay {
+  width: 40rem;
+  padding: 1rem;
+  background-color: #FFF;
+
+  .dropdown-content {
+    border-radius: 0;
+    padding: 2.5rem;
+    text-align: start;
+  
+    .menu-list-polls {
+      display: none;
+    }
+
+    .polls-category {
+      &.is-active {
+        .menu-list-polls{
+          display: block;
+        }
+      }
+    }
+
+  }
+
+
+}
+
 
 .content-section {
   padding: 5rem;
@@ -245,6 +278,7 @@ a {
 #ureport-public-header {
   padding: 0 7.5rem;
   font-family: @headline-font;
+  margin-bottom: 5rem;
 
   
   .header-countries-nav {
@@ -603,6 +637,10 @@ a {
   }
 
 
+}
+
+.poll-story-block {
+  padding: 1rem 0rem 1rem 0rem;
 }
 
 .block-content {

@@ -229,14 +229,16 @@
                   - trans "Stories"
   
 
-    - block content
-      %section#ureport-public-content.section
-        .container.has-text-centered.is-size-1
-          %h1
-            - trans "Site page under construction"
+    
+    %section.section.is-paddingless.is-marginless
+      - block content
+        #ureport-public-content
+          .container.has-text-centered.is-size-1
+            %h1
+              - trans "Site page under construction"
   
-        .container.has-text-centered.is-text-1
-          %a(href="/")
+          .container.has-text-centered.is-text-1(style="margin: 5rem;")
+            %a.button(href="/")
               - trans "Go back to main public site"
     
     %section#ureport-public-footer.section.is-paddingless.is-marginless

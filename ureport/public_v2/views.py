@@ -10,6 +10,7 @@ from dash.stories.models import Story
 from smartmin.views import SmartReadView, SmartTemplateView
 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Prefetch
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 
@@ -139,7 +140,11 @@ class PollContextMixin(object):
         main_poll = self.derive_main_poll()
         context["latest_poll"] = main_poll
 
-        context["categories"] = Category.objects.filter(org=org, is_active=True).order_by("name")
+        context["categories"] = (
+            Category.objects.filter(org=org, is_active=True)
+            .prefetch_related(Prefetch("polls", queryset=Poll.objects.filter(is_active=True)))
+            .order_by("name")
+        )
         context["polls"] = Poll.get_public_polls(org=org).order_by("-poll_date")
 
         context["related_stories"] = []
