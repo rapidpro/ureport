@@ -50,9 +50,13 @@
         - if not forloop.counter|divisibleby:2
           .column.is-half.block-content(class="for{{ forloop.counter0}}")
             .columns.is-multiline
-              .column.is-full.is-size-5.has-text-weight-semibold
+              .column.is-1.question-number
+                {{ forloop.counter }}
+              .column
+                .question-line
+              .column.is-full.question-title
                 {{ question.title }}
-              .column.is-full.is-size-7.has-text-weight-semibold
+              .column.is-full.left-zone
                 {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
                   {{ responded }} responded out of {{ polled }} polled
                 {% endblocktrans %}
@@ -84,8 +88,13 @@
               .tabs-content
                 - if question.is_open_ended
                   .tab-content.is-active(data-content='keywords-chart-{{question.id}}')
-                    .poll-question-keywords(id="graph-keywords-question-{{question.id}}" data-question="{{question.id}}")                
-                      WIP
+                    .poll-word-cloud{data-question:"{{ question.id }}", id:"word-cloud-{{ question.id }}" }
+                      .keyword-placeholder{id:"word-cloud-{{ question.id }}-placeholder"}
+                        -with results=question|question_results
+                          -for category in results.categories|slice:":50"
+                            .keyword.primary-bg-color
+                              {{ category.label }}
+        
                 -else
                   .tab-content.is-active(data-content='all-chart-{{question.id}}')
                     .poll-question-graph-all(id="graph-all-question-{{question.id}}" data-question="{{question.id}}")
@@ -101,9 +110,13 @@
         - if forloop.counter|divisibleby:2
           .column.is-half.block-content(class="for{{ forloop.counter0}}")
             .columns.is-multiline
-              .column.is-full.is-size-5.has-text-weight-semibold
+              .column
+                .question-line
+              .column.is-1.question-number
+                {{ forloop.counter }}
+              .column.is-full.question-title
                 {{ question.title }}
-              .column.is-full.is-size-7.has-text-weight-semibold
+              .column.is-full.right-zone
                 {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
                   {{ responded }} responded out of {{ polled }} polled
                 {% endblocktrans %}
@@ -111,8 +124,7 @@
 - block rsrs
   %section.section.poll-story-title-block.block-content
     .columns.is-multiline
-      - for story in related_stories|slice:"1"
-        .column.is-full.is-size-4.has-text-weight-semibold.booklet-bg
+        .column.is-full.is-size-4.has-text-weight-semibold
           {{ story.title }}
         .column.is-full
           {{ story.created_on|date:"M j. Y" }}
@@ -120,12 +132,12 @@
           .column.is-full
             - trans "BY"
             {{ story.get_written_by|upper }}
-          
+   %section.section.poll-story-content-block.block-content
+      .columns.is-multiline        
         .column.is-full
           {{ story.content|safe }}  
 
-  - if latest_poll
-    %section.section.block-content
+    - if latest_poll
       .columns
         .column.is-full
           .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")
@@ -248,12 +260,6 @@
               },
               vAxis: {
                 minValue: 0,
-                slantedTextAngle: 45,
-                slantedText: true,
-              },
-              hAxis: {
-                slantedTextAngle: 45,
-                slantedText: true,
               },
               chartArea: {
                 left: 0,
@@ -330,10 +336,6 @@
 
           }
 
-          console.log(data);
-
-
-
           google.charts.load('current', {'packages':['corechart', 'bar']});
           google.charts.setOnLoadCallback(drawChart);
 
@@ -343,22 +345,17 @@
             var options = {
               chartArea: {
                 left: 0,
-                top: 0,
+                top: 30,
                 width: "100%",
               },
               vAxis: {
                 minValue: 0,
               },
-
               bar: {
-                groupWidth: 20,
+                groupWidth: 40,
               },
               legend: {
-                position: "bottom",
-              },
-              series: {
-                0: {visibleInLegend: true, annotations: "FOo", axis: "Foo"},
-                1: {visibleInLegend: true, axis: "Bar"},
+                position: "top",
               },
               width: 500,
               height: 600,
@@ -384,7 +381,6 @@
           }
 
           var results = result;
-          console.log(results);
 
           var genders = [];
 
@@ -408,7 +404,6 @@
           }
 
           var data = [];
-          console.log(genders);
           headers = genders.slice();
           headers.unshift("Category");
           data.push(Array.from(headers));
@@ -429,9 +424,6 @@
             data.push(key_row);
 
           }
-
-          console.log(data);
-
 
           google.charts.load('current', {'packages':['corechart', 'bar']});
           google.charts.setOnLoadCallback(drawChart);
