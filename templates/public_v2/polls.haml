@@ -5,7 +5,8 @@
 
 - block content
   .booklet-bg
-    .page-title-block.block-content
+  .booklet-bg-content
+    .page-title-block
       .columns
         .column.page-title
           Opinions
@@ -136,34 +137,37 @@
                   {{ responded }} responded out of {{ polled }} polled
                 {% endblocktrans %}
 
-- block rsrs
-  - for story in main_stories|slice:"1"
-    .poll-story-title-block
-      .columns.is-multiline.booklet-bg.block-content
-        .column.is-10
-          .recent-results.is-inline-block
-            Recent Poll Results
-        .column.is-2
-          <img width="50%" src="{{ STATIC_URL }}img/medium-u-white.png" />
-        .column.is-full.poll-story-title-text
-          {{ story.title }}
-        .column.is-full.poll-story-date
-          {{ story.created_on|date:"M j. Y" }}
-        -if story.get_written_by
-          .column.is-full.poll-story-author
-            - trans "BY"
-            {{ story.get_written_by|upper }}
-      
-      .block-content
-        .columns.is-multiline.poll-story-block
-          .column.is-full
+  - for story in main_stories|slice:"1"  
+    .booklet-bg
+    .booklet-bg-content
+      .content-color-bg
+      .content-container-block
+        .poll-story-block
+          .columns.is-multiline
+            .column.is-10
+              .recent-results.is-inline-block
+                Recent Poll Results
+            .column.is-2
+              <img width="50%" src="{{ STATIC_URL }}img/medium-u-white.png" />
+            .column.is-full.poll-story-title-text
+              {{ story.title }}
+            .column.is-full.poll-story-date
+              {{ story.created_on|date:"M j. Y" }}
+            -if story.get_written_by
+              .column.is-full.poll-story-author
+                - trans "BY"
+                {{ story.get_written_by|upper }}
+
+            .column.is-full.poll-story-text
+              {{ story.content|safe }}  
             {{ story.content|safe }}  
+              {{ story.content|safe }}  
 
-        - if latest_poll
-          .columns.is-multiline.poll-story-block
-            .column.is-full
-              .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")
 
+          - if latest_poll
+            .columns
+              .column(style="margin: 5rem 0 1rem 0;")
+                .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")
 
 - block extra-style
   {{ block.super }}

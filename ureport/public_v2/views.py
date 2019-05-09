@@ -153,6 +153,7 @@ class PollContextMixin(object):
             related_stories = related_stories.order_by("-featured", "-created_on")
             context["related_stories"] = related_stories
 
+        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
 
 
@@ -161,10 +162,7 @@ class PollsView(PollContextMixin, SmartTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PollsView, self).get_context_data(**kwargs)
-        org = self.request.org
-
         context["tab"] = "list"
-        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
 
 
