@@ -112,11 +112,11 @@
         
                 -else
                   .tab-content.is-active(data-content='all-chart-{{question.id}}')
-                    .poll-question-graph-all(id="graph-all-question-{{question.id}}" data-question="{{question.id}}")
+                    .poll-question-graph-all.has-highcharts(id="graph-all-question-{{question.id}}" data-question="{{question.id}}")
                   .tab-content(data-content='age-chart-{{question.id}}')
-                    .poll-question-graph-age(id="graph-age-question-{{question.id}}" data-question="{{question.id}}")
+                    .poll-question-graph-age.has-highcharts(id="graph-age-question-{{question.id}}" data-question="{{question.id}}")
                   .tab-content(data-content='gender-chart-{{question.id}}')
-                    .poll-question-graph-gender(id="graph-gender-question-{{question.id}}" data-question="{{question.id}}")
+                    .poll-question-graph-gender.has-highcharts(id="graph-gender-question-{{question.id}}" data-question="{{question.id}}")
                   .tab-content(data-content='map-chart-{{question.id}}')
                     .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
                       .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
@@ -241,6 +241,29 @@
       $(this).siblings('.dropdown-menu').toggleClass('is-active');
     });
 
+    $(document).ready(function() {
+      $(".tabs ul li").on('click', function() {
+        var tab = $(this).data('tab');
+        $(this).parent().parent('.tabs').children().children('li').removeClass('is-active');
+
+        $(this).addClass('is-active');
+        $(this).parent().parent('.tabs').siblings(".tabs-content").children(".tab-content").removeClass('is-active');
+        $('div[data-content="' + tab + '"]').addClass('is-active');
+
+        var oldChart = $('div[data-content="' + tab + '"]').children('.has-highcharts').highcharts();
+        if(oldChart) {
+          var options = Object.assign(oldChart.options)
+          var id = oldChart.renderTo.id;
+          oldChart.destroy();
+          Highcharts.chart(id, options);
+
+        }
+
+      });
+    });
+
+    
+
 
     $(function(){
       $(".poll-question-graph-all").each(function(){
@@ -276,6 +299,67 @@
             }
           }
           } 
+
+          (function (H) {
+
+          var pendingRenders = [];
+      
+          // https://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/7557433#7557433
+          function isElementInViewport(el) {
+          
+              var rect = el.getBoundingClientRect();
+      
+              return (
+                  rect.top >= 0 &&
+                  rect.left >= 0 &&
+                  rect.bottom <= (
+                      window.innerHeight ||
+                      document.documentElement.clientHeight
+                  ) &&
+                  rect.right <= (
+                      window.innerWidth ||
+                      document.documentElement.clientWidth
+                  )
+              );
+          }
+      
+          H.wrap(H.Series.prototype, 'render', function deferRender(proceed) {
+              var series = this,
+                  renderTo = this.chart.container.parentNode;
+      
+              // It is appeared, render it
+              console.log(series);
+              if (isElementInViewport(renderTo) || !series.options.animation || series.chart.userOptions.chart.type == 'packedbubble') {
+                  proceed.call(series);
+      
+              // It is not appeared, halt renering until appear
+              } else  {
+                  pendingRenders.push({
+                      element: renderTo,
+                      appear: function () {
+                          proceed.call(series);
+                      }
+                  });
+              }
+          });
+      
+          function recalculate() {
+              pendingRenders.forEach(function (item) {
+                  if (isElementInViewport(item.element)) {
+                      item.appear();
+                      H.erase(pendingRenders, item);
+                  }
+              });
+          }
+      
+          if (window.addEventListener) {
+              ['DOMContentLoaded', 'load', 'scroll', 'resize']
+                  .forEach(function (eventType) {
+                      addEventListener(eventType, recalculate, false);
+                  });
+          }
+      
+          }(Highcharts));
 
           Highcharts.chart('graph-all-question-' + question, {
             chart: {
@@ -320,15 +404,6 @@
             },
             legend: {
               enabled: false,
-              layout: 'vertical',
-              align: 'right',
-              verticalAlign: 'top',
-              x: -40,
-              y: 80,
-              floating: true,
-              borderWidth: 1,
-              backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-              shadow: true
             },
             credits: {
               enabled: false
@@ -568,12 +643,10 @@
               percentage = (category.count == 0) ? 0 : category.count * 100 / total;
               percentage_lookup[label] = Math.round(percentage);
               if (parseInt(percentage_lookup[label])) {
-                console.log(percentage);
                 data.push({name: label, value: percentage, color: colors[Math.min(9, Math.floor(percentage/1.5))]})
               } 
             }
           }
-          console.log(data);
 
 
 
@@ -652,28 +725,4 @@
         });
       });
 
-      $(".poll-word-cloud").each(function(){
-        var question = $(this).attr("data-question");
-        $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
-
-          if(!result){
-            return;
-          }
-
-          var results = result[0];
-          var cloudData = [];
-
-          for (i=0; i<=25 && i<=results.categories.length; i++){
-            word = results.categories[i];
-            if (word){
-              label = word.label.trim().toUpperCase();
-              cloudData.push({ text: label, weight: Math.sqrt(word.count)})
-            }
-          }
-
-          $('#word-cloud-' + question + '-placeholder').hide();
-          $('#word-cloud-' + question).jQCloud(cloudData);
-
-        });
-      });
     });
