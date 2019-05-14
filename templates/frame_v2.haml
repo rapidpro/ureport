@@ -27,7 +27,8 @@
 
   %link(href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet")
   %link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css")
-  %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/jqcloud.css" }
+  %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/jqcloud.css")
+  %link(href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet")
 
   
   :css
@@ -398,6 +399,7 @@
   <script src="{{ STATIC_URL }}js/highcharts-more.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/gradientfactory.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 
   <script>
   $(document).ready(function() {

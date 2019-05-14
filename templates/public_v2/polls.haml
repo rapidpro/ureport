@@ -11,32 +11,20 @@
         .column.page-title
           Opinions
         .column.categories-dropdown
-          .dropdown.is-right
-            .dropdown-trigger
-              .button
-                .dropdown-text
-                  %span
-                    BROWSE CATEGORIES
-                  %span.icon.is-small
-                    %i.fas.fa-angle-down(aria-hidden="true")
-            
-            .dropdown-menu.poll-overlay
-              .dropdown-content
-                .dropdown-item
-                  .menu
-                    %ul.menu-list
-                      - for category in categories
-                        %li.polls-category
-                          %a
-                            {{ category.name }} ({{category.polls.all|length}} polls)
-                          %ul.menu-list.menu-list-polls
-                            - if not category.polls.all|length
-                              %li.has-background-warning
-                                -trans "No polls yet for this category"
-                            - for poll in category.polls.all
-                              %li
-                                %a(href="{% url 'v2.public.opinion_read' poll.id %}")
-                                  {{poll.title }} 
+            %select.browse-polls(style="width: 600px")
+              %option
+              %optgroup.polls-category(label="All")
+                - for poll in polls
+                  %option.menu-list-polls(data-poll-link="{% url 'v2.public.opinion_read' poll.id %}" value="{{poll.id}}")
+                    {{ poll.title }} ({{poll.poll_date|date}})
+                  
+
+              - for category in categories
+                - if category.polls.all|length
+                  %optgroup.polls-category(label="{{ category.name }}")
+                    - for poll in category.polls.all
+                      %option.menu-list-polls(data-poll-link="{% url 'v2.public.opinion_read' poll.id %}" value="{{poll.id}}")
+                        {{ poll.title }} ({{poll.poll_date|date}})
 
   .poll-title-block.block-content
     .columns
@@ -232,10 +220,12 @@
 
   {% include "public/strings_values.html" %}
   :javascript
-    $(".polls-category").on('click', function() {
-      $(this).siblings().removeClass('is-active');
-      $(this).addClass('is-active');
-    });
+    $("body").on('click', '.select2-results__group', function() {
+      $(this).parent().siblings('.select2-results__option').children('ul').hide();
+      $(this).parent().parent().scrollTop(36 * $(this).parent().parent().children().index($(this).parent()));
+      $(this).siblings().toggle();
+    })
+
 
     $(".dropdown-trigger").on('click', function() {
       $('.polls-category').removeClass('is-active');
@@ -243,6 +233,27 @@
     });
 
     $(document).ready(function() {
+      $('.browse-polls').select2({
+        placeholder: "BROWSE ALL OPINIONS",
+        closeOnSelect: false,
+      });
+
+      $(".browse-polls").on("select2:select", function(e) {
+        window.location.href = e.params.data.element.dataset.pollLink;
+      })
+
+      $(".browse-polls").on("select2:open", function() {
+        $(".select2-search--dropdown .select2-search__field").attr("placeholder", "Search...");
+        $(".select2-search--dropdown .select2-search__field").on("input", function(evt) {
+          var term = evt.target.value;
+          if (term != "") {
+            $('.select2-results__group').siblings('ul:not(:first)').show()
+          } else {
+            $('.select2-results__group').siblings('ul').hide()
+          }
+        });
+      });
+
       $(".tabs ul li").on('click', function() {
         var tab = $(this).data('tab');
         $(this).parent().parent('.tabs').children().children('li').removeClass('is-active');
@@ -329,7 +340,6 @@
                   renderTo = this.chart.container.parentNode;
       
               // It is appeared, render it
-              console.log(series);
               if (isElementInViewport(renderTo) || !series.options.animation || series.chart.userOptions.chart.type == 'packedbubble') {
                   proceed.call(series);
       
