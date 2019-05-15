@@ -594,7 +594,7 @@ class PollCRUDL(SmartCRUDL):
         def post_save(self, obj):
             poll = self.get_object()
             poll.pull_refresh_task()
-            self.success_message = _("Scheduled a pull refresh for poll #%d on org #%d") % (poll.pk, poll.org_id)
+            self.success_message = _("Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d") % dict(poll_id=poll.pk, org_id=poll.org_id)
 
     class Import(SmartCSVImportView):
         class ImportForm(forms.ModelForm):
