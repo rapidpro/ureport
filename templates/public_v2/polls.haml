@@ -220,12 +220,10 @@
 
   {% include "public/strings_values.html" %}
   :javascript
-    $("body").on('click', '.select2-results__group', function() {
-      $(this).parent().siblings('.select2-results__option').children('ul').hide();
-      $(this).parent().parent().scrollTop(36 * $(this).parent().parent().children().index($(this).parent()));
-      $(this).siblings().toggle();
-    })
-
+    $("body").on('click', '.select2-results__option[role="group"]:not(ul)', function() {
+      $(this).children('ul').toggle(300, 'swing');
+      $(this).toggleClass('rotation')
+    });
 
     $(".dropdown-trigger").on('click', function() {
       $('.polls-category').removeClass('is-active');
@@ -236,6 +234,12 @@
       $('.browse-polls').select2({
         placeholder: "BROWSE ALL OPINIONS",
         closeOnSelect: false,
+        templateSelection: function(choice) {
+          if (!choice.id) {
+            return choice.text;
+          }
+          return "Redirecting...";
+        }
       });
 
       $(".browse-polls").on("select2:select", function(e) {
@@ -252,7 +256,14 @@
             $('.select2-results__group').siblings('ul').hide()
           }
         });
+
+        setTimeout(function() {
+          $('.select2-results__group').parent().prepend('<i class="fas fa-angle-right"></i>');
+
+        }, 0.1);
+
       });
+
 
       $(".tabs ul li").on('click', function() {
         var tab = $(this).data('tab');
