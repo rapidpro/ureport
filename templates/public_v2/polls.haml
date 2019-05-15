@@ -253,8 +253,10 @@
           $('.select2-results__group').parent().prepend('<i class="fas fa-angle-right"></i>');
           if (term != "") {
             $('.select2-results__group').siblings('ul:not(:first)').show()
+            $('.select2-results__group').parent('li:not(:first)').addClass('rotation')
           } else {
             $('.select2-results__group').siblings('ul').hide()
+            $('.select2-results__group').parent().removeClass('rotation')
           }
         });
 
