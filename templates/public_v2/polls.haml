@@ -250,6 +250,7 @@
         $(".select2-search--dropdown .select2-search__field").attr("placeholder", "Search...");
         $(".select2-search--dropdown .select2-search__field").on("input", function(evt) {
           var term = evt.target.value;
+          $('.select2-results__group').parent().prepend('<i class="fas fa-angle-right"></i>');
           if (term != "") {
             $('.select2-results__group').siblings('ul:not(:first)').show()
           } else {
