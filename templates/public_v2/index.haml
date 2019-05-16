@@ -2,6 +2,68 @@
 
 - load thumbnail humanize ureport compress i18n
 
+- block content
+  - if latest_poll
+    .homepage-latest-poll
+      .columns.is-paddingless.is-marginless
+        .homepage-color-bg-main
+        .column.block-content.is-half.homepage-color-bg-content
+          .recent-results-label
+            Recent Poll Results
+          .poll-title
+            {{ latest_poll.title }}
+          .poll-question-title
+            - for question in latest_poll.get_questions|slice:"1" 
+              {{ question.title }}
+            
+        .column.block-content.is-half.booklet-bg-no-margin
+    
+  .homepage-reporters-stats
+    .columns.is-paddingless.is-marginless
+      .column
+        .is-inline-block
+        .is-inline-block
+          - trans "U-REPORTERS IN"
+          {{ org.name|upper }}
+        .is-block
+          {{ reporters|intcomma }}
+        .is-block
+          - trans "U-REPORTERS WORLDWIDE"
+          {{ reporters|intcomma }}
+      .column
+        - trans "AGE"
+        .age-stats{ id: "age-chart"}
+  
+  .homepage-join
+    .columns.is-paddingless.is-marginless
+      .column.block-content.homepage-color-bg-1
+        .homepage-block-content
+          .join-video
+            %img(height="100%" src="{{ STATIC_URL }}img/homepage_video_placeholder.png" style="border: 2px solid red;") 
+          .join-description
+            This Section is a video describing ways to join  and sign up as a U-reporter.
+          .join-button.button
+            JOIN NOW
+
+      .column.block-content
+        .social-media-block
+          .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+  
+  .homepage-story
+    .columns.is-paddingless.is-marginless
+      .column.block-content
+        Title
+      .column.block-content.homepage-color-bg-2
+        Picture side
+  
+  .homepage-tiles
+    .columns.is-paddingless.is-marginless
+      .column.block-content.homepage-color-bg-3
+        Photos
+      .column.block-content
+        Tiles photo
+
+
 - block hero
   -if org|config:"is_global"
     .hero-container.global

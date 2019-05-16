@@ -4,6 +4,10 @@
 @small-text-font: 'Montserrat', sans-serif;
 
 @bg-dark-blue: #050E28;
+@gold-yellow: #FED100;
+@green: #009A16;
+@light-blue: #40B5E5;
+
 @qsn-colors-list: #8750A1, #FED100, #3FB5E5;
 
 
@@ -796,6 +800,14 @@ a {
 
 }
 
+.booklet-bg-no-margin {
+  background-image:
+    linear-gradient(rgba(128,128,128,.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(128,128,128,.28) 1px, transparent 1px);
+  background-size: 100px 60px, 45px 200px;
+  background-position: -2px -10px, -2px -2px, -1px -1px, -1px -1px;
+}
+
 .booklet-bg {
   background-image:
     linear-gradient(rgba(128,128,128,.28) 1px, transparent 1px),
@@ -968,4 +980,92 @@ each(range(15), {
     background-color: extract(@qsn-colors-list, mod(@value, length(@qsn-colors-list)) + 1);
   }  
 });
+}
+
+
+.homepage-reporters-stats {
+  background-color: #000;
+  color: #FFF;
+  padding: 3rem 8rem;
+
+  .columns {
+    border-top: 1px solid #FFFFFF;
+  }
+}
+
+.homepage-color-bg-content {
+  color: #FFF;
+  padding: 10rem 7.5rem;
+
+  .recent-results-label {
+    background-color: #FFF;
+    color: #000;
+    border-left: 25px solid yellow;
+    padding: 0.75rem;
+    display: inline;
+    padding-right: 2rem;
+
+  }
+
+  .poll-title {
+    font-size: 3rem;
+    font-family: @headline-font;
+    margin: 2rem 0;
+  }
+
+  .poll-question-title {
+    font-size: 1.75rem;
+    font-family: @headline-font;
+    padding: 0 2rem;
+    border-left: 1px solid #FFFFFF;
+    margin: 3rem 0;
+
+  }
+
+}
+.homepage-color-bg-main {
+  z-index: -1;
+  width: 55%;
+  position: absolute;
+  border-top: 80rem solid green;
+  border-right: 10rem solid transparent;
+
+}
+
+.homepage-color-bg-1 {
+  background-color: @gold-yellow;
+}
+
+.homepage-color-bg-2 {
+  background-color: @green;
+}
+
+.homepage-color-bg-3 {
+  background-color: @light-blue;
+}
+
+.social-media-block {
+    text-align: center;
+}
+
+.homepage-block-content {
+  text-align: center;
+
+  .join-button {
+    background-color: #000;
+    color: #FFF;
+    border: none;
+    border-radius: 0;
+    padding: 2rem 4rem;
+    font-size: 1.5rem;
+    font-family: @headline-font;
+    margin-bottom: 4rem;
+  }
+
+  .join-description {
+    font-size: 3rem;
+    margin: 4rem 0;
+    font-family: @headline-font;
+
+  }
 }
