@@ -11,20 +11,47 @@
         .column.page-title
           Opinions
         .column.categories-dropdown
-            %select.browse-polls(style="width: 600px")
-              %option
-              %optgroup.polls-category(label="All")
-                - for poll in polls
-                  %option.menu-list-polls(data-poll-link="{% url 'v2.public.opinion_read' poll.id %}" value="{{poll.id}}")
-                    {{ poll.title }} ({{poll.poll_date|date}})
-                  
-
-              - for category in categories
-                - if category.polls.all|length
-                  %optgroup.polls-category(label="{{ category.name }}")
-                    - for poll in category.polls.all
-                      %option.menu-list-polls(data-poll-link="{% url 'v2.public.opinion_read' poll.id %}" value="{{poll.id}}")
-                        {{ poll.title }} ({{poll.poll_date|date}})
+          .dropdown
+            .dropdown-trigger
+              %button.button(aria-haspopup="true" aria-controls="dropdown-menu")
+                %span
+                  -trans "SEARCH"
+                %span.icon.is-small
+                  %i.fas.fa-caret-down(aria-hidden="true")
+            #dropdown-menu.dropdown-menu.polls-overlay(role="menu")
+              .dropdown-content
+                .dropdown-item.search-polls
+                  .field.has-addons
+                    .control#search-input
+                      %input.input(type="text" placeholder="Search")
+                    .control#search-clear
+                      %span.icon
+                        %i.fas.fa-times
+                .dropdown-item.no-results.is-hidden
+                  No results...
+                .dropdown-item.polls-category(role="all-polls")
+                  .polls-category-label
+                    %span
+                      %i.fas.fa-chevron-right
+                    -trans "All"
+                  %ul.polls-category-list
+                    - for poll in polls
+                      %li.poll-list-item
+                        %a(href="{% url 'v2.public.opinion_read' poll.id %}")
+                          {{ poll.title }} ({{poll.poll_date|date}})
+                
+                - for category in categories
+                  - if category.polls.all|length
+                    .dropdown-item.polls-category
+                      .polls-category-label
+                        %span
+                          %i.fas.fa-chevron-right
+                        {{ category.name }}
+                      %ul.polls-category-list
+                        - for poll in category.polls.all
+                          %li.poll-list-item
+                            %a(href="{% url 'v2.public.opinion_read' poll.id %}")
+                              {{ poll.title }} ({{poll.poll_date|date}})
 
   .poll-title-block.block-content
     .columns
@@ -220,56 +247,15 @@
 
   {% include "public/strings_values.html" %}
   :javascript
-    $("body").on('click', '.select2-results__option[role="group"]:not(ul)', function() {
-      $(this).children('ul').toggle(300, 'swing');
-      $(this).toggleClass('rotation')
-    });
-
     $(".dropdown-trigger").on('click', function() {
-      $('.polls-category').removeClass('is-active');
       $(this).siblings('.dropdown-menu').toggleClass('is-active');
+      $(this).toggleClass('rotation');
+      $(".polls-category-list").addClass("is-hidden");
+      $("#search-input input").focus();
+
     });
 
     $(document).ready(function() {
-      $('.browse-polls').select2({
-        placeholder: "BROWSE ALL OPINIONS",
-        closeOnSelect: false,
-        templateSelection: function(choice) {
-          if (!choice.id) {
-            return choice.text;
-          }
-          return "Redirecting...";
-        }
-      });
-
-      $(".browse-polls").on("select2:select", function(e) {
-        window.location.href = e.params.data.element.dataset.pollLink;
-      })
-
-      $(".browse-polls").on("select2:open", function() {
-        $(".select2-search--dropdown .select2-search__field").attr("placeholder", "Search...");
-        $(".select2-search--dropdown .select2-search__field").on("input", function(evt) {
-          var term = evt.target.value;
-          if($('.select2-results__option[role="group"]').children('svg, i').length == 0) {
-            $('.select2-results__group').parent().prepend('<i class="fas fa-angle-right"></i>');
-          }
-          if (term != "") {
-            $('.select2-results__group').siblings('ul:not(:first)').show()
-            $('.select2-results__group').parent('li:not(:first)').addClass('rotation')
-          } else {
-            $('.select2-results__group').siblings('ul').hide()
-            $('.select2-results__group').parent().removeClass('rotation')
-          }
-        });
-
-        setTimeout(function() {
-          $('.select2-results__group').parent().prepend('<i class="fas fa-angle-right"></i>');
-
-        }, 0.1);
-
-      });
-
-
       $(".tabs ul li").on('click', function() {
         var tab = $(this).data('tab');
         $(this).parent().parent('.tabs').children().children('li').removeClass('is-active');
@@ -290,7 +276,51 @@
       });
     });
 
-    
+    $(".polls-category-label").on('click', function() {
+      $(this).siblings('ul').toggleClass('is-hidden');
+      $(this).toggleClass('rotation')
+      $(this).toggleClass('is-active')
+    });
+
+    function resetPolls() {
+      $(".poll-list-item").removeClass("is-hidden");
+      $('.polls-category-label').removeClass('rotation');
+      $(".polls-category").removeClass("is-hidden");
+      $(".polls-category").children('ul').addClass("is-hidden");
+      $(".no-results").addClass('is-hidden');
+    }
+
+    $("#search-clear").on("click", function() {
+      $(this).parent().children('#search-input').children('input').val("");
+      resetPolls();
+    });
+
+    $("#search-input input").on('keyup', function() {
+      var term = $(this).val().toLowerCase().trim();
+      $(".polls-category").addClass("is-hidden");
+      $(".no-results").addClass('is-hidden');
+      if(!term) {
+        $(".poll-list-item").removeClass("is-hidden");
+        resetPolls();
+        return;
+      } else {
+        $(".poll-list-item").each( function() {
+
+          if (!$(this).text().trim().toLowerCase().includes(term)) {
+            $(this).addClass("is-hidden");
+          } else {
+            $(this).removeClass("is-hidden");
+          }
+        })
+      }
+      $(".poll-list-item:not(.is-hidden)").parent().parent(".polls-category").removeClass("is-hidden");
+      $(".polls-category:not(.is-hidden):not([role='all-polls'])").children('.polls-category-label').addClass('rotation');
+      $(".polls-category:not(.is-hidden):not([role='all-polls'])").children('ul').removeClass("is-hidden");
+
+      if ($(".polls-category:not(.is-hidden)").length == 0) {
+        $(".no-results").removeClass('is-hidden');
+      }
+    })
 
 
     $(function(){

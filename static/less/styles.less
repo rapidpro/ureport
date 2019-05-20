@@ -31,45 +31,6 @@ body {
   }
 }
 
-.select2-results__option {
-  ul.select2-results__options.select2-results__options--nested {
-    display: none;
-    margin-left: 1rem;
-    border-left: 1px solid #000;
-    padding: 1rem;
-
-  }
-}
-
-.select2-dropdown {
-  padding: 3rem;
-  border: none;
-}
-
-.select2-results, .select2-results__options[role=tree] {
-  min-height: 400px;
-
-}
-
-.select2-search {
-  margin-bottom: 3rem;
-
-  .select2-search__field {
-  }
-}
-
-
-.select2-container--default .select2-search--dropdown .select2-search__field {
-    border: 0px;
-    border-bottom: 1px solid #000000;
-    font-size: 1.2rem;
-    line-height: 1.5rem;
-
-    &:focus {
-      outline: none;
-    }
-}
-
 .selection {
   float: right;
 
@@ -77,100 +38,10 @@ body {
     outline: none;
   }
 }
-  .select2-container--default {
-    .select2-selection--single {
-      height: 3.25rem;
-      width: 15rem;
-      float: right;
-      border: none;
-
-  &:focus {
-    outline: none;
-  }
-
-  }
-
-  }
 
 .browse-polls {
   display: none;
 }
-
-.select2-container {
-  float: right;
-}
-
-.select2-container--default .select2-selection--single .select2-selection__arrow {
-  height: 25px;
-    position: absolute;
-    top: 12px;
-    right: 1px;
-    width: 40px;
-    color: #FFF;
-
-}
-
-.select2-container--default .select2-results__group {
-  display: inline-block;
-}
-
-.select2-results__option {
-  svg {
-    transform: rotate(0deg);
-    transition: all 0.3s linear;  
-  }  
-
-  &.rotation {
-    svg {
-      transform: rotate(90deg)
-    }
-  }
-}
-
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-  color: #FFF;
-    background-color: #000;
-    font-size: 1rem;
-    text-align: center;
-    line-height: 3.25rem;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 0;
-
-    .select2-selection__placeholder {
-      color: #FFF;
-      padding: 0.25rem 0;
-      border-bottom: 3px solid #fff;
-    }
-}
-
-.poll-overlay {
-  width: 40rem;
-  padding: 1rem;
-  background-color: #FFF;
-
-  .dropdown-content {
-    border-radius: 0;
-    padding: 2.5rem;
-    text-align: start;
-  
-    .menu-list-polls {
-      display: none;
-    }
-
-    .polls-category {
-      &.is-active {
-        .menu-list-polls{
-          display: block;
-        }
-      }
-    }
-
-  }
-
-
-}
-
 
 .content-section {
   padding: 5rem;
@@ -897,30 +768,6 @@ a {
     font-size: 6rem;
   }
 
-  .categories-dropdown {
-    text-align: end;  
-    vertical-align: middle;
-    margin: auto 0;
-    padding-top: 2.5rem;
-
-    .dropdown {
-      margin: 3rem 0;
-    }
-
-    .button {
-      background-color: #000;
-      color: #FFF;
-      font-family: @headline-font;
-      font-size: 1.5rem;
-      padding: 1.8rem 1rem;
-
-      .dropdown-text {
-        border-bottom: 2px solid #FFF;
-      }
-
-    }
-
-  }
 }
 
 .poll-title-block {
@@ -943,13 +790,6 @@ a {
       font-weight: bold;
     }
 
-  }
-
-  .poll-category {
-    background-color: #FF8200;
-    padding: .75rem;
-    font-family: @headline-font;
-    margin-left: .75rem;
   }
 
   .recent-results {
@@ -1068,4 +908,135 @@ each(range(15), {
     font-family: @headline-font;
 
   }
+}
+
+
+.polls-category {
+  padding: 0 1rem;
+
+  .polls-category-label {
+    padding: 1rem 1rem 1rem 0;
+    
+    span {
+      margin-right: 0.5rem; 
+    }
+
+    &.rotation {
+      span {
+        svg {
+          transform: rotate(90deg)
+        }
+      }
+    }
+  }
+
+  .polls-category-list {
+    margin-left: 0.25rem;
+    border-left: 1px solid #000;
+    padding: 1rem;
+
+    li {
+      a {
+        padding: 1rem 0;
+        cursor: pointer;
+        display: block;
+
+        &:hover {
+          background-color: #000000;
+          color: #fff;
+        }
+      }
+    }
+
+  }
+}
+
+
+
+.categories-dropdown {
+  text-align: end;
+  margin: auto 0;
+
+  .dropdown {
+
+    .dropdown-trigger {
+      width: 16rem;
+
+      &.rotation {
+        span.icon {
+          svg {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+
+      button {
+        background-color: #000;
+        color: #fff;
+        width: 100%;
+        height: 3.25rem;
+        font-size: 1rem;
+        font-family: @headline-font;
+
+        span {
+          height: 1.5rem;
+          margin-left: 0 !important;
+          border-bottom: 2px solid #fff;
+        }
+      }
+    }
+
+  }
+}
+
+.polls-overlay {
+  width: 40rem;
+  left: unset;
+  right:0;
+  padding: 1rem;
+  background-color: #fff;
+  text-align: start;
+
+  .dropdown-content {
+    border-radius: 0;
+    border: none;
+    min-height: 200px;
+
+    #poll-browse-search {
+      span.icon {
+        cursor: pointer;
+        z-index: 20;
+      }
+    }
+
+  }
+
+}
+
+#search-input {
+  width: 100%;
+
+  input {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid;
+  }
+
+}
+
+#search-clear {
+  margin: auto 0rem auto -2rem;
+  z-index: 10;
+
+  &:hover {
+    color: #888;
+  }
+
+  &:active {
+    color: #000;
+  }
+
+
 }
