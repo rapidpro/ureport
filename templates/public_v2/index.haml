@@ -47,21 +47,53 @@
 
       .column.block-content
         .social-media-block
-          .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+          .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"850", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
   
-  .homepage-story
-    .columns.is-paddingless.is-marginless
-      .column.block-content
-        Title
-      .column.block-content.homepage-color-bg-2
-        Picture side
+  - for story in stories|slice:"1"
+    .homepage-story
+      .columns.is-paddingless.is-marginless
+        .column.block-content.homegage-dotted-bg
+          .pre-story-block
+          .featured-story-label
+            -trans "FEATURED STORY"
+          .story-title
+            {{ story.title }}
+          .story-teaser
+            {{ story.summary|linebreaksbr }}
+          %a.read-more-button.button(href="{% url 'v2.public.story_read' story.pk %}")
+            -trans "READ MORE"
+
+        .column.block-content.homepage-color-bg-2
+          .pre-u-border
+          .u-bg
+            %img{height:"100%", src:"{{ STATIC_URL }}img/u-green.png"}
+          .story-image-bg
+            .story-image
+              %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+            -# - if story.get_image
+            -#   {% thumbnail story.get_image "350x350" crop="top" as im %}
+            -#   <img width="100%" height="100%" src="{{im.url}}" />
+            -#   {% endthumbnail %}
+            -# - else
+            -#   %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}  
+
   
-  .homepage-tiles
-    .columns.is-paddingless.is-marginless
-      .column.block-content.homepage-color-bg-3
-        Photos
-      .column.block-content
-        Tiles photo
+  - if feat_images
+    .homepage-tiles
+      .columns.is-paddingless.is-marginless
+        .column.block-content.homepage-color-bg-3
+          .photo-tiles-title
+            Photos Tiles
+          .photo-tiles-description
+            The area can be edited when the poll is over to focus additionally on review and learnings, this second area can also be edited in the same way. It is important to give context  to all our polls. This will be character limited to hold the space correctly and encourage simplicity.  
+          %a.read-more-button.button(href="#")
+            -trans "READ MORE"
+        .column.block-content
+          .columns.is-multiline
+            -for image in feat_images
+              - if forloop.counter0 < 6
+                .column.is-half
+                  %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
 
 
 - block hero
