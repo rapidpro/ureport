@@ -823,15 +823,7 @@ each(range(15), {
 }
 
 
-.homepage-reporters-stats {
-  background-color: #000;
-  color: #FFF;
-  padding: 3rem 8rem;
 
-  .columns {
-    border-top: 1px solid #FFFFFF;
-  }
-}
 
 .homepage-color-bg-content {
   color: #FFF;
@@ -1184,5 +1176,56 @@ each(range(15), {
     font-size: 1.5rem;
     font-family: @headline-font;
     margin: 3rem 0;
+  }
+}
+
+.homepage-reporters-stats {
+    background-color: #000;
+    color: #FFF;
+    padding: 3rem 8rem;
+  
+    .columns:not(.has-graph) {
+      border-top: 1px solid #FFFFFF;
+    }
+
+  .local-count-label {
+    color: @gold-yellow;
+    font-size: 1.5rem; 
+    font-family: @headline-font;
+    margin-top: 3rem;
+  }
+  .graph-title {
+    color: @gold-yellow;
+    font-size: 1.5rem; 
+    font-family: @headline-font;
+    margin-top: 3rem;
+    display: inline-block;  
+  }
+
+  .graph-chart {
+    display: inline-block;  
+    margin-top: 5rem;
+  }
+
+  .local-count {
+    color:#fff;
+    font-size: 4rem;
+    font-family: @subheadlines-font;
+    margin: 1rem 0;
+  }
+
+  .worldwide-count-label {
+    color: @gold-yellow;
+    font-size: 1.5rem; 
+    font-family: @headline-font;
+    display: inline-block;
+
+  }
+  .worldwide-count {
+    color: #fff;
+    font-size: 1.5rem; 
+    font-family: @headline-font;
+    display: inline-block;
+    margin-left: 1rem;
   }
 }

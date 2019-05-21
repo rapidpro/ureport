@@ -21,18 +21,21 @@
   .homepage-reporters-stats
     .columns.is-paddingless.is-marginless
       .column
-        .is-inline-block
-        .is-inline-block
+        .local-count-label
           - trans "U-REPORTERS IN"
           {{ org.name|upper }}
-        .is-block
+        .local-count
           {{ reporters|intcomma }}
-        .is-block
-          - trans "U-REPORTERS WORLDWIDE"
-          {{ reporters|intcomma }}
+        .worldwide-count-label
+          - trans "U-REPORTERS WORLDWIDE:"
+        .worldwide-count
+          {{ global_counter|intcomma }}
       .column
-        - trans "AGE"
-        .age-stats{ id: "age-chart"}
+        .columns.has-graph
+          .column.is-1.graph-title
+            - trans "AGES"
+          .column.graph-chart
+            .age-stats{ id: "age-chart"}
   
   .homepage-join
     .columns.is-paddingless.is-marginless
@@ -762,7 +765,9 @@
            $('#age-chart').highcharts({
              chart: {
                type: 'column',
-               spacing: [ 3, 5, 3, 5]
+               backgroundColor: "#000",
+               spacing: [ 3, 5, 3, 5],
+               height: "30%",
              },
              credits: {
                enabled: false
@@ -781,8 +786,9 @@
                labels : {
                    rotation: 0,
                    style: {
-                     fontSize: 10,
-                     fontFamily: "UreportSmallTextFont"
+                     fontSize: 20,
+                     fontFamily: "SharpSansDisplayBold",
+                     color: "#FED200",
                  }
                },
                minorTickLength: 0,
@@ -803,15 +809,16 @@
              },
              plotOptions: {
                  column: {
-                     color: '{{ org|config:"primary_color"}}',
+                     color: '#FFF',
                      pointPadding: 0.2,
                      pointWidth: 30,
                      borderWidth: 0,
                      dataLabels:  {
                        enabled: true,
                        style: {
-                         fontFamily: "UreportHeadlineFont"
+                         fontFamily: "SharpSansDisplayBold",
                        },
+                       color: "#FFF",
                        verticalAlign:"bottom",
                        format: '<b>{point.y:.0f}%</b>'
                      }

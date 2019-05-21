@@ -48,13 +48,12 @@ class IndexView(SmartTemplateView):
         context["most_active_regions"] = org.get_regions_stats()
 
         # global counter
-        if org.get_config("common.is_global"):
-            context["global_counter"] = get_global_count()
+        context["global_counter"] = get_global_count()
 
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = org.get_age_stats()
         context["reporters"] = org.get_reporters_count()
-        context['feat_images'] = range(10)
+        context["feat_images"] = range(10)
 
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
 
