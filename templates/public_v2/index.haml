@@ -13,11 +13,19 @@
           .poll-title
             {{ latest_poll.title }}
           .poll-question-title
-            - for question in latest_poll.get_questions|slice:"1" 
-              {{ question.title }}
+            -if latest_poll.get_first_question
+              {{ latest_poll.get_first_question.title }}
             
         .column.block-content.is-half.booklet-bg-no-margin
-    
+          -if latest_poll.get_first_question
+            .top-question-graph
+              .poll-question-graph-all.has-highcharts(id="graph-all-question-{{latest_poll.get_first_question.id}}" data-question="{{latest_poll.get_first_question.id}}")
+          .view-results.columns
+            .column
+              %a.button.view-full-results.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
+                - trans "VIEW FULL RESULTS"
+              
+
   .homepage-reporters-stats
     .columns.is-paddingless.is-marginless
       .column
@@ -482,6 +490,10 @@
 - block extra-style
   {{ block.super }}
   :css
+    .highcharts-background {
+      fill: transparent;
+    }
+
     .fb-messengermessageus {
       line-height: 16px;
       margin-bottom: 5px;
@@ -580,7 +592,6 @@
 - block extra-script
   {{ block.super }}
   -if not is_iorg
-    <script src="{{ STATIC_URL }}js/highcharts.js"></script>
     <script src="{{ STATIC_URL }}js/isotope.pkgd.min.js"></script>
     {% compress js %}
     <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/featured_region.coffee" />
@@ -748,6 +759,115 @@
 
 
       $(function(){
+
+      $(".poll-question-graph-all").each(function(){
+        var question = $(this).attr("data-question");
+        $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
+
+          if(!result){
+            return;
+          }
+
+          var results = result[0];
+
+          var categories = [];
+          var data = [];
+          var colors = ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1"];
+
+
+          if (results.categories.length > 0) {
+          var total = 0;
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            total += category.count;
+          }
+          var percentage_lookup = {};
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            label = category.label.trim().toUpperCase();
+            categories.push(label);
+            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+            percentage_lookup[label] = Math.round(percentage);
+            if (parseInt(percentage_lookup[label])) {
+              data.push({y: percentage, color: colors[i%colors.length], dataLabels: [{
+                  enabled: true,
+                  inside: true,
+                  align: "left",
+                  formatter: function() {
+                    return this.x
+                  }
+
+                }, 
+                {
+                  enabled: true,
+                  inside: false,
+                  align: "left",
+                  className: "big-label",
+                  style: {
+                    fontWeight: 'bold',
+                    fontSize: '2rem',
+                    color: "#000",
+                    textAlign: "right",
+                  },
+                  formatter: function() {
+                    return Math.round(this.y * 100) / 100 + "%"
+                  }
+                }, 
+                ]});
+            }
+          }
+          }
+
+          Highcharts.chart('graph-all-question-' + question, {
+            chart: {
+              type: 'bar',
+              backgroundColor: 'transparent',
+              styledMode: false,
+            },
+            title: {
+              text: null,
+            },
+            xAxis: {
+              categories: categories,
+              title: {
+                text: null
+              },
+              visible: false,
+              labels: {
+                enabled: false,
+              }
+            },
+            yAxis: {
+              min: 0,
+              visible: false,
+              title: {
+                text: null,
+              },
+              labels: {
+                enabled: false,
+              }
+            },
+            tooltip: {
+            },
+            plotOptions: {
+              bar: {
+                
+              }
+            },
+            legend: {
+              enabled: false,
+            },
+            credits: {
+              enabled: false
+            },
+            series: [{
+              data: data,
+            }]
+          });
+          
+        });
+      });
+
         $("#age-chart").each(function(){
 
            var data = {{ age_stats|safe }};
@@ -799,6 +919,7 @@
                labels: {
                  enabled: false
                },
+               visible: false,
                gridLineWidth: 0,
                title: {
                  text: null
