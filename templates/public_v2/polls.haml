@@ -256,6 +256,14 @@
     });
 
     $(document).ready(function() {
+      $(document).mouseup(function (e){
+        var container = $(".dropdown-menu, .dropdown-trigger");
+        if (!container.is(e.target) && container.has(e.target).length === 0){
+          container.removeClass('is-active');
+          container.removeClass('rotation');
+        }
+      });
+
       $(".tabs ul li").on('click', function() {
         var tab = $(this).data('tab');
         $(this).parent().parent('.tabs').children().children('li').removeClass('is-active');

@@ -931,6 +931,7 @@ each(range(15), {
 
   .polls-category-label {
     padding: 1rem 1rem 1rem 0;
+    cursor: pointer;
     
     span {
       margin-right: 0.5rem; 
@@ -950,12 +951,12 @@ each(range(15), {
     border-left: 1px solid #000;
     padding: 1rem;
     transform: scale(1);
-    animation: anim .15s linear;
+    animation: anim .5s linear;
 
     &.is-hidden {
       display: none;
       transform: scale(0);
-      transition: transform .15s ease-in-out, opacity .15s ease-in-out;
+      transition: transform .5s linear, opacity .5s linear;
     }
 
     li {
