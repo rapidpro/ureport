@@ -121,6 +121,38 @@
     </script>
     %section.section.is-paddingless(style="background:#000;height:15px")
 
+
+    %section.section.countries-overlay
+      .container.is-fluid
+        .columns
+          .column
+            .close.button
+              x
+
+        .columns
+          .column.is-4
+            .main-logo
+              {% thumbnail org.logo "400x100" format="PNG" as im %}
+              %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+              {% endthumbnail %}
+          .column
+            .columns.is-multiline
+              - if is_iorg
+                - for site in linked_orgs
+                  .column.is-1
+                    %a.footer-orgs-name{ href:"{{ site.host }}" }
+                      {{ site.name }}
+              -else
+                - for site in linked_orgs
+                  .column.is-1
+                    %a.flag{ href:"{{ site.host }}" }
+                      - if site.is_static
+                        %img{ src:"{{ STATIC_URL }}img/flags/{{ site.flag }}" }
+  
+                      - else
+                        %img{ src:"{{ site.flag }}" }
+
+
     %section#ureport-public-header.section
       - block navbar
           %nav(role="navigation"  aria-label="main navigation")
@@ -423,6 +455,14 @@
          $(this).parent().parent('.tabs').siblings(".tabs-content").children(".tab-content").removeClass('is-active');
         $('div[data-content="' + tab + '"]').addClass('is-active');
 
+      });
+
+      $(".header-countries-nav").on('click', function() {
+        $(".countries-overlay").toggleClass('is-active');
+      });
+
+      $('.countries-overlay .close').on('click', function() {
+        $(".countries-overlay").removeClass('is-active');
       });
     });
 

@@ -540,6 +540,7 @@ TEMPLATES = [
                 "ureport.assets.context_processors.set_assets_processor",
                 "ureport.public.context_processors.set_has_better_domain",
                 "ureport.public.context_processors.set_is_iorg",
+                "ureport.public.context_processors.set_linked_sites",
                 "ureport.public.context_processors.set_config_display_flags",
                 "ureport.public.context_processors.set_org_lang_params",
                 "ureport.public.context_processors.set_story_widget_url",

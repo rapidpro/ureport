@@ -1243,3 +1243,40 @@ each(range(15), {
   }
 
 }
+
+.countries-overlay {
+  background-color: #000;
+  display: none;
+  position: absolute;
+  top: 120px;
+  z-index:20;
+  padding:0 0 4rem 0;
+
+  &.is-active {
+    display: block;
+  }
+
+  .main-logo {
+    img {
+    background-color: #FFF;
+    }
+  }
+  
+  .close {
+    display: block;
+    float: right;
+    font-size: 3rem;
+    font-family: @headline-font;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    color: #FFF;
+    line-height: 4rem;
+    width: 5rem;
+    height: 5rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-right: -2.5rem;
+    padding: 0;
+    background-color: transparent;
+  }
+}
