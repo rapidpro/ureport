@@ -1281,7 +1281,7 @@ each(range(15), {
   }
 }
 
-.about-bg-1 {
+.content-bg-1 {
   width: 50%;
   border-top: 30rem solid #040F28;
   position: relative;
@@ -1293,7 +1293,7 @@ each(range(15), {
   
 }
 
-.about-bg-2 {
+.content-bg-2 {
   width: 50%;
   border-top: 30rem solid#009B18;
   display: inline-block;
@@ -1306,7 +1306,7 @@ each(range(15), {
   margin-bottom: -30rem;
 }
 
-.about-content {
+.content-block-content {
   background-color: #FFF;
   min-height: 50rem;
   margin: 5rem 7.5rem;
@@ -1314,11 +1314,25 @@ each(range(15), {
   z-index: 1;
   padding: 1rem;
 
-  .about-title-block {
-    min-height: 30rem;
-    .about-title-picture {
+  .about-title-block, .story-title-block {
+    min-height: 20rem;
+    .about-title-picture, .story-title-picture {
       width: 50%;
       float: right;
+    }
+
+    .page-label {
+      display: inline-block;
+      margin: 5rem 5rem 0 5rem;
+      font-size: 1.2rem;
+      font-family: @headline-font;
+    }
+
+    .story-title {
+      width: 50%;
+      margin: 3rem 5rem 5rem 5rem;
+      font-size: 4rem;
+      font-family: @headline-font;
     }
 
     .about-title {
