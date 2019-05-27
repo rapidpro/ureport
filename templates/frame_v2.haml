@@ -122,7 +122,7 @@
     %section.section.is-paddingless(style="background:#000;height:15px")
 
 
-    %section.section.countries-overlay
+    %section.section.countries-overlay.closed
       .container.is-fluid
         .columns
           .column
@@ -458,11 +458,11 @@
       });
 
       $(".header-countries-nav").on('click', function() {
-        $(".countries-overlay").toggleClass('is-active');
+        $(".countries-overlay").toggleClass('closed');
       });
 
       $('.countries-overlay .close').on('click', function() {
-        $(".countries-overlay").removeClass('is-active');
+        $(".countries-overlay").addClass('closed');
       });
     });
 

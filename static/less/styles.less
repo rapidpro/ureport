@@ -1246,14 +1246,21 @@ each(range(15), {
 
 .countries-overlay {
   background-color: #000;
-  display: none;
   position: absolute;
   top: 120px;
   z-index:20;
   padding:0 0 4rem 0;
 
-  &.is-active {
-    display: block;
+  overflow-y: hidden;
+	max-height: 500px;
+
+	transition-property: all;
+	transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  
+  &.closed {
+    max-height: 0;
+    padding: 0;
   }
 
   .main-logo {
