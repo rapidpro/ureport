@@ -1015,6 +1015,14 @@ class PollTest(UreportTest):
                 archived=False,
                 created_on="2015-04-08T08:30:40.000Z",
                 date_hint="2015-04-08",
+                results=[
+                    dict(
+                        key="color",
+                        name="Color",
+                        categories=["Orange", "Blue", "Other", "Nothing"],
+                        node_uuids=["42a8e177-9e88-429b-b70a-7d4854423092"],
+                    )
+                ],
                 rulesets=[dict(uuid="uuid-8435", id=8435, response_type="C", label="Does your community have power")],
             )
 
@@ -1082,6 +1090,14 @@ class PollTest(UreportTest):
                     archived=False,
                     date_hint="2015-04-08",
                     participants=None,
+                    results=[
+                        dict(
+                            key="color",
+                            name="Color",
+                            categories=["Orange", "Blue", "Other", "Nothing"],
+                            node_uuids=["42a8e177-9e88-429b-b70a-7d4854423092"],
+                        )
+                    ],
                     rulesets=[
                         dict(uuid="uuid-8435", id=8436, response_type="C", label="Does your community have power")
                     ],
@@ -1160,6 +1176,14 @@ class PollTest(UreportTest):
                 archived=False,
                 created_on="2015-04-08T08:30:40.000Z",
                 date_hint="2015-04-08",
+                results=[
+                    dict(
+                        key="color",
+                        name="Color",
+                        categories=["Orange", "Blue", "Other", "Nothing"],
+                        node_uuids=["42a8e177-9e88-429b-b70a-7d4854423092"],
+                    )
+                ],
                 rulesets=[dict(uuid="uuid-8435", id=8435, response_type="C", label="Does your community have power")],
             )
 
@@ -1225,6 +1249,14 @@ class PollTest(UreportTest):
                 created_on="2015-04-08T12:48:44.320Z",
                 date_hint="2015-04-08",
                 participants=None,
+                results=[
+                    dict(
+                        key="color",
+                        name="Color",
+                        categories=["Orange", "Blue", "Other", "Nothing"],
+                        node_uuids=["42a8e177-9e88-429b-b70a-7d4854423092"],
+                    )
+                ],
                 rulesets=[dict(uuid="uuid-8435", id=8435, response_type="C", label="Does your community have power")],
             )
 
@@ -1298,6 +1330,14 @@ class PollTest(UreportTest):
                 created_on="2015-04-08T12:48:44.320Z",
                 date_hint="2015-04-08",
                 participants=None,
+                results=[
+                    dict(
+                        key="color",
+                        name="Color",
+                        categories=["Orange", "Blue", "Other", "Nothing"],
+                        node_uuids=["42a8e177-9e88-429b-b70a-7d4854423092"],
+                    )
+                ],
                 rulesets=[dict(uuid="uuid-8435", id=8435, response_type="C", label="Does your community have power")],
             )
 
