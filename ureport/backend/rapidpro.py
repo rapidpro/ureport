@@ -343,19 +343,54 @@ class RapidProBackend(BaseBackend):
         return flow_definition
 
     def update_poll_questions(self, org, poll, user):
-        api_flow = poll.get_flow()
+        flow_definition = self.get_definition(org, poll.flow_uuid)
 
-        flow_results = api_flow["results"]
+        if flow_definition is None:
+            return
 
-        for result in flow_results:
-            label = result["name"]
-            ruleset_uuid = result["node_uuids"][-1]
-            ruleset_type = "wait_message"
+        base_language = flow_definition["base_language"]
 
-            question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
+        poll.base_language = base_language
+        poll.save()
 
-            for category in result["categories"]:
-                PollResponseCategory.update_or_create(question, None, category)
+        flow_rulesets = flow_definition["rule_sets"]
+        old_style = len(flow_rulesets) > 0
+
+        if old_style:
+
+            for ruleset in flow_rulesets:
+                label = ruleset["label"]
+                ruleset_uuid = ruleset["uuid"]
+                ruleset_type = ruleset["ruleset_type"]
+
+                question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
+
+                rapidpro_rules = []
+                for rule in ruleset["rules"]:
+                    category = rule["category"][base_language]
+                    rule_uuid = rule["uuid"]
+                    rapidpro_rules.append(rule_uuid)
+
+                    PollResponseCategory.update_or_create(question, rule_uuid, category)
+
+                # deactivate if corresponding rules are removed
+                PollResponseCategory.objects.filter(question=question).exclude(rule_uuid__in=rapidpro_rules).update(
+                    is_active=False
+                )
+        else:
+            api_flow = poll.get_flow()
+
+            flow_results = api_flow["results"]
+
+            for result in flow_results:
+                label = result["name"]
+                ruleset_uuid = result["node_uuids"][-1]
+                ruleset_type = "wait_message"
+
+                question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
+
+                for category in result["categories"]:
+                    PollResponseCategory.update_or_create(question, None, category)
 
     def pull_fields(self, org):
         client = self._get_client(org, 2)
