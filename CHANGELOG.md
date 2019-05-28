@@ -1,3 +1,7 @@
+v1.0.450
+----------
+ * Make flow metadate node uuids optional
+
 v1.0.449
 ----------
  * Merge pull request #408 from rapidpro/use-flow-metadata
