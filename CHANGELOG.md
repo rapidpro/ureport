@@ -1,3 +1,15 @@
+v1.0.449
+----------
+ * Merge pull request #408 from rapidpro/use-flow-metadata
+ * Update the rapidpro client
+ * Use the metadata only for flows that do not have rulesets on the definition
+ * Use flow results metadata to create questions and their categories
+ * Merge pull request #407 from rapidpro/verify-locales
+ * update uz locale file
+ * fix warnings, update locale files, set up travis to catch errors / missing rebuilds
+ * Update CHANGELOG.md for v1.0.448
+ * Increase contact pull lock timeout to 12 hours
+
 v1.0.448
 ----------
  * Increase contact pull lock timeout to 12 hours
