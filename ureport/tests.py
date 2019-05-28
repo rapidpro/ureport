@@ -66,6 +66,14 @@ class MockTembaClient(TembaClient):
                     archived=False,
                     expires=720,
                     created_on="2015-04-08T12:48:44.320Z",
+                    results=[
+                        dict(
+                            key="color",
+                            name="Color",
+                            categories=["Orange", "Blue", "Other", "Nothing"],
+                            node_uuids=["b16fe2a9-8960-47e7-982a-8d6935888b39"],
+                        )
+                    ],
                     rulesets=[
                         dict(node="uuid-8435", id="8435", response_type="C", label="Does your community have power")
                     ],

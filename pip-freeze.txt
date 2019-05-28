@@ -6,6 +6,7 @@
 #
 -e git+https://github.com/jazzband/sorl-thumbnail.git@b6358d234d7de3927a2666a2a5ab3d7870c0e1d3#egg=sorl-thumbnail
 -e git+https://github.com/Alir3z4/python-stop-words.git#egg=stop_words
+-e git+https://github.com/rapidpro/rapidpro-python.git@54af66e541b52bdde2c9299404cecefed3daa4ce#egg=rapidpro-python
 amqp==2.3.2               # via kombu
 appdirs==1.4.3            # via black
 attrs==18.1.0             # via black
@@ -69,7 +70,6 @@ pyflakes==1.6.0           # via flake8
 python-dateutil==2.7.3    # via botocore, rapidpro-dash
 pytz==2018.5              # via celery, django, django-timezone-field, rapidpro-python, smartmin
 rapidpro-dash==1.4.5
-rapidpro-python==2.4
 raven==6.9.0
 rcssmin==1.0.6            # via django-compressor
 redis==2.10.6             # via celery, django-redis, rapidpro-dash, smartmin
