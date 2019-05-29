@@ -8,580 +8,420 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-10 09:35+0000\n"
+"POT-Creation-Date: 2019-05-15 19:34+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
-"Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/"
-"my/)\n"
+"Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
 "Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: dash/categories/models.py:20
 msgid "The name of this category"
 msgstr "အမ်ိဳးအစား၏ အမည္"
 
-#: dash/categories/models.py:23
 msgid "An optional image that can describe this category"
 msgstr "ယခုအမ်ိဳးအမည္ကို ေဖာ္ျပႏိုင္ေသာ ျခြင္းခ်က္ဓါတ္ပံု "
 
-#: dash/categories/models.py:26 ureport/polls/models.py:65
 msgid "The organization this category applies to"
 msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
 
-#: dash/categories/models.py:47 templates/frame.haml:285
-#: templates/frame.haml:292
 msgid "Categories"
 msgstr "အမ်ိဳးအစား"
 
-#: dash/categories/models.py:53 dash/stories/models.py:129
-#: ureport/polls/models.py:639
 msgid "The name to describe this image"
 msgstr "ယခုဓါတ္ပံုကို ေဖာ္ျပရန္အမည္"
 
-#: dash/categories/models.py:56
 msgid "The category this image represents"
 msgstr "ယခုဓါတ္ပံုက ေဖာ္ျပေနေသာ အမ်ိဳးအစား"
 
-#: dash/categories/models.py:59 dash/stories/models.py:135
-#: ureport/polls/models.py:645
 msgid "The image file to use"
 msgstr "အသံုးျပဳရန္ ဓါတ္ပံုဖိုင္"
 
-#: dash/dashblocks/models.py:19
 msgid "The human readable name for this content type"
 msgstr "လူဖတ္ႏိုင္မည့္ ယခုအေၾကာင္းအရာ၏အမည္"
 
-#: dash/dashblocks/models.py:22
 msgid "The slug to idenfity this content type, used with the template tags"
 msgstr "ယခုအေၾကာင္းအရာ အမ်ိဳးအစားကို သတ္မွန္ရန္ အမွန္အသား ပံုစံခ်ထားသည့္ tag မ်ားကိုအသံုးျပဳရန္"
 
-#: dash/dashblocks/models.py:26
-msgid ""
-"A description of where this content type is used on the site and how it will "
-"be dsiplayed"
-msgstr ""
-"သည္အေၾကာင္းအရာ အမ်ိဳးအစားကို site ၏မည္သည့္ေနရာတြင္ အသံုးျပဲၿပီး မည္ကဲ့သို႕ေဖာ္ျပထားသည္ကို ေဖာ္ျပခ်က္"
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "သည္အေၾကာင္းအရာ အမ်ိဳးအစားကို site ၏မည္သည့္ေနရာတြင္ အသံုးျပဲၿပီး မည္ကဲ့သို႕ေဖာ္ျပထားသည္ကို ေဖာ္ျပခ်က္"
 
-#: dash/dashblocks/models.py:31
 msgid "Whether this content should include a title"
 msgstr "Whether this content should include a title"
 
-#: dash/dashblocks/models.py:34
 msgid "Whether this content should include an image"
 msgstr "ယခုအေၾကင္းအရာသည္ ဓါတ္ပံုထည့္သင့္မသင့္"
 
-#: dash/dashblocks/models.py:37
 msgid "Whether this content should use a rich HTML editor"
 msgstr "ယခုအေၾကာင္းအရာသည္ HTML editor ကိုသံုးသင့္မသင့္"
 
-#: dash/dashblocks/models.py:40
 msgid "Whether this content should include a summary field"
 msgstr "ယခုအေၾကာင္းအရာသည္ အက်ဥ္းခ်ဳပ္ထည့္သင့္မသင့္"
 
-#: dash/dashblocks/models.py:43
 msgid "Whether this content should include a link"
 msgstr "ယခုအေၾကာင္းအရာသည္ link တစ္ခုထည့္သင့္မသင့္"
 
-#: dash/dashblocks/models.py:46
-msgid ""
-"Whether this content should allow upload of additional images, ie a gallery"
+msgid "Whether this content should allow upload of additional images, ie a gallery"
 msgstr "ယခုအေၾကာင္းအရာသည္ ဓါတ္ပံုမ်ား ေနာက္ထပ္တင္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
 
-#: dash/dashblocks/models.py:50
 msgid "Whether this content has a color field"
 msgstr "ယခုအေၾကာင္းအရာသည္ အေရာင္ ရွိမရွိ"
 
-#: dash/dashblocks/models.py:53
 msgid "Whether this content should allow setting a YouTube id"
 msgstr "ယခုအေၾကာင္းအရာသည္ YouTube id လုပ္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
 
-#: dash/dashblocks/models.py:56
 msgid "Whether this content should allow tags"
 msgstr "ယခုအေၾကာင္းအရာသည္ tag မ်ားကိုခြင့္ျပဳသင့္မသင့္"
 
-#: dash/dashblocks/models.py:69
 msgid "Content Type"
 msgstr "အေၾကာင္းအရာ အမ်ိဳးအစား"
 
-#: dash/dashblocks/models.py:70
 msgid "The category, or type for this content block"
 msgstr "ယခုအေၾကာင္းအရာမ်ားအတြက္ အမ်ိဳးးအမည္"
 
-#: dash/dashblocks/models.py:74
 msgid "The title for this block of content, optional"
 msgstr "အေၾကာင္းအရာမ်ား၏ ေခါင္းစဥ္ ျခြင္းခ်က္သာ"
 
-#: dash/dashblocks/models.py:77
 msgid "The summary for this item, should be short"
 msgstr "ယခုအမ်ိဳးအစား၏ အႏွစ္ခ်ဳပ္သည္ တိုတိုႏွင့္လိုရင္းသာျဖစ္သင့္သည္"
 
-#: dash/dashblocks/models.py:80
 msgid "The body of text for this content block, optional"
 msgstr "ယခုအေၾကာင္းအရာမ်ား၏ ကိုယ္ထည္စာသား ၿခြင္းခ်က္သာ"
 
-#: dash/dashblocks/models.py:83
 msgid "Any image that should be displayed with this content block, optional"
 msgstr "ယခုအေၾကာင္းအရာႏွင့္အတူ ေဖာ္ျပသင့္ေသာဓါတ္ပံု ျခြင္းခ်က္သာ"
 
-#: dash/dashblocks/models.py:87
 msgid "A background color to use for the image, in the format: #rrggbb"
 msgstr "ဓါတ္ပံုအတြက္ေနာက္ခံအေရာင္သည္ ပံုစံအားျဖင့္"
 
-#: dash/dashblocks/models.py:91
 msgid "Any link that should be associated with this content block, optional"
 msgstr "ယခုအေၾကာင္းအရာႏွင့္ပူးတြဲသင့္ေသာ မည္သည့္ link မဆို ၿခြင္းခ်က္သာ"
 
-#: dash/dashblocks/models.py:95 ureport/news/models.py:42
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "ယခုအမ်ိဳးအစားႏွင့္ ခ်ိတ္ဆက္သင့္ေသာ YouTube ဗီးီယို၏ အမွတ္အသား"
 
-#: dash/dashblocks/models.py:99
-msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more "
-"advanced filtering, optional"
-msgstr ""
-"ယခုအေၾကာင္းအရာပိုင္းအတြက္ space ျခားထားသည့္ မည္သည့္ tag မဆို "
-"ထပ္မံအေသးစိတ္ရ်ာေဖြစစ္ထုတ္ျခင္းမ်ားအတြက္ အသံုးျပဳႏိုင္သည္ ျခြင္းခ်က္သာ"
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "ယခုအေၾကာင္းအရာပိုင္းအတြက္ space ျခားထားသည့္ မည္သည့္ tag မဆို ထပ္မံအေသးစိတ္ရ်ာေဖြစစ္ထုတ္ျခင္းမ်ားအတြက္ အသံုးျပဳႏိုင္သည္ ျခြင္းခ်က္သာ"
 
-#: dash/dashblocks/models.py:103
 msgid "The priority for this block, higher priority blocks come first"
 msgstr "ယခုအပိုင္း၏ဦးစားေပးမွာ အေရးႀကီးဆံုးအပိုင္းမ်ားကဦးစြာလာသည္"
 
-#: dash/dashblocks/models.py:108
 msgid "The organization this content block belongs to"
 msgstr "ယခုအေၾကာင္းအရာပိုင္းမ်ားကို ပိုင္ဆိုင္သည့္အဖြဲ႕အစည္းမွာ"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:8
 msgid "Gallery"
 msgstr "စုစည္းရာ"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:17
 msgid "Add Image"
 msgstr "ဓါတ္ပံုထည့္ရန္"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
-#: smartmin/templates/smartmin/list.html:14
 msgid "Search"
 msgstr "ရွာေဖြရန္"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
-#: smartmin/templates/smartmin/list.html:25 templates/polls/poll_list.haml:6
 msgid "Add"
 msgstr "ထပ္ထည့္ရန္"
 
-#: dash/dashblocks/views.py:16 templates/frame.haml:235
 msgid "Content Types"
 msgstr "အေၾကာင္းအရာ အမ်ိဳးအစားမ်ား"
 
-#: dash/dashblocks/views.py:118
 msgid "Content Blocks"
 msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
 
-#: dash/dashblocks/views.py:120
 #, python-format
 msgid "%s Blocks"
 msgstr ""
 
-#: dash/dashblocks/views.py:158 smartmin/views.py:1105
 #, python-format
 msgid "Edit %s"
 msgstr ""
 
-#: dash/dashblocks/views.py:182 smartmin/views.py:1328
 #, python-format
 msgid "Create %s"
 msgstr ""
 
-#: dash/dashblocks/views.py:184
 msgid "Create Content Block"
 msgstr "အေၾကာင္းအရာပိုင္းကိုဖန္တီးရန္"
 
-#: dash/orgs/forms.py:12
 msgid "Your first name"
 msgstr "သင့္နာမည္၏ပထမအပိုင္း"
 
-#: dash/orgs/forms.py:13
 msgid "Your last name"
 msgstr "သင့္နာမည္၏ဒုတိယအပိုင္း"
 
-#: dash/orgs/forms.py:14
 msgid "Your email address"
 msgstr "သင့္ email လိပ္စာ"
 
-#: dash/orgs/forms.py:17
 msgid "Your password, at least eight letters please"
 msgstr "သင့္လွိဳ႕၀ွက္နံပါတ္ အနည္းဆံုးစာလံုး ၈ လံုးျဖစ္ရန္"
 
-#: dash/orgs/forms.py:23
 msgid "That email address is already used"
 msgstr "ယခု email လိပ္စာသည္ အသံုးျပဳျပီးသားျဖစ္ေနသည္။"
 
-#: dash/orgs/forms.py:30
 msgid "Passwords must contain at least 8 letters."
 msgstr "လွိဳ႕၀ွက္နံပါတ္သည္ အနည္းဆံုးစာလံုးရွစ္လံုး ပါ၀င္ရမည္"
 
-#: dash/orgs/forms.py:49
 msgid "This domain is used for subdomains"
 msgstr "ယခု domain ကို subdomains မ်ားအတြက္အသံုးျပဳသည္"
 
-#: dash/orgs/models.py:36 dash/orgs/models.py:365 ureport/assets/models.py:19
 msgid "Name"
 msgstr "အမည္"
 
-#: dash/orgs/models.py:37
 msgid "The name of this organization"
 msgstr "အဖြဲ႕အစည္း၏အမည္"
 
-#: dash/orgs/models.py:41
 msgid "The logo that should be used for this organization"
 msgstr "ယခုအဖြဲ႕အစည္းအတြက္အသံုးျပဳသင့္ေသာ အမွတ္တံဆိပ္"
 
-#: dash/orgs/models.py:44 dash/orgs/views.py:297
 msgid "Administrators"
 msgstr "စီမံအုပ္ခ်ဳပ္သူမ်ား"
 
-#: dash/orgs/models.py:45
 msgid "The administrators in your organization"
 msgstr "သင့္အဖြဲ႕အစည္းအတြင္းရွိ စီမံအုပ္ခ်ဳပ္သူမ်ား"
 
-#: dash/orgs/models.py:48
 msgid "Viewers"
 msgstr "လာေရာက္ၾကည့္ရွဳသူမ်ား"
 
-#: dash/orgs/models.py:49
 msgid "The viewers in your organization"
 msgstr "သင့္အဖြဲ႕အစည္းရွိ လာေရာက္ၾကည့္ရွဳသူမ်ား"
 
-#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
-#: dash/orgs/views.py:298
 msgid "Editors"
 msgstr "တည္းျဖတ္သူမ်ား"
 
-#: dash/orgs/models.py:53
 msgid "The editors in your organization"
 msgstr "သင့္အဖြဲ႕အစည္းရွိ တည္းျဖတ္သူမ်ား"
 
-#: dash/orgs/models.py:56
 msgid "Language"
 msgstr "ဘာသာစကား"
 
-#: dash/orgs/models.py:57
 msgid "The main language used by this organization"
 msgstr "သည္အဖြဲ႕အစည္းကအသံုးျပဳေသာ အဓိကဘာသာစကား"
 
-#: dash/orgs/models.py:60
 msgid "Subdomain"
 msgstr ""
 
-#: dash/orgs/models.py:61
 msgid "This subdomain is not available"
 msgstr "subdomain မရႏိုင္ပါ"
 
-#: dash/orgs/models.py:62
 msgid "The subdomain for this organization"
 msgstr "သည္အဖြဲ႕အစည္း၏ subdomain"
 
-#: dash/orgs/models.py:65
 msgid "Domain"
 msgstr ""
 
-#: dash/orgs/models.py:66
 msgid "This domain is not available"
 msgstr "domain မရႏိုင္ပါ"
 
-#: dash/orgs/models.py:67
 msgid "The custom domain for this organization"
 msgstr "သည္အဖြဲ႕အစည္း၏ ပံုမွန္ domain"
 
-#: dash/orgs/models.py:70
 msgid "Timezone"
 msgstr "အခ်ိန္အပိုင္းအျခား"
 
-#: dash/orgs/models.py:71
 msgid "The timezone your organization is in."
 msgstr "သင့္အဖြဲ႕အစည္းရွိေနသည့္ အခ်ိန္အပိုင္းအျခား"
 
-#: dash/orgs/models.py:75
-msgid "The API token for the RapidPro account this dashboard is tied to"
-msgstr "RapidPro account အတြက္ API token ႏွင့္တြဲထားေသာ dashboard"
-
-#: dash/orgs/models.py:80
-msgid ""
-"JSON blob used to store configuration information associated with this "
-"organization"
+msgid "JSON blob used to store configuration information associated with this organization"
 msgstr "ယခုအဖြဲ႕အစည္းႏွင့္ဆက္ႏႊယ္ေနေသာ သတင္းအခ်က္အလက္မ်ားကို  ထိန္းသိမ္းရန္ အသံုးျပဳထားေသာ JSON blob"
 
-#: dash/orgs/models.py:295
 msgid "Administrator"
 msgstr "စီမံအုပ္ခ်ဳပ္သူ"
 
-#: dash/orgs/models.py:296
 msgid "Editor"
 msgstr "တည္းျဖတ္သူ"
 
-#: dash/orgs/models.py:297
 msgid "Viewer"
 msgstr "ၾကည့္ရွဳေလ့လာသူ"
 
-#: dash/orgs/models.py:302 dash/orgs/models.py:361 ureport/assets/models.py:16
-#: ureport/contacts/models.py:44
 msgid "Org"
 msgstr "အဖြဲ႕အစည္း"
 
-#: dash/orgs/models.py:303
 msgid "The organization to which the account is invited to view"
 msgstr "လာေရာက္ၾကည့္ရွဳရန္ ဖိတ္ျခင္းခံရေသာ အဖြဲ႕အစည္း၏ account"
 
-#: dash/orgs/models.py:306
 msgid "Email"
 msgstr "အီးေမးလ္"
 
-#: dash/orgs/models.py:307
 msgid "The email to which we send the invitation of the viewer"
 msgstr "လာေရာက္ၾကည့္ရွဳသူကို ဖိတ္ရန္ပို႕ေသာ အီးေမးလ္"
 
-#: dash/orgs/models.py:310
 msgid "Secret"
 msgstr "လွ်ိဳ႕၀ွက္"
 
-#: dash/orgs/models.py:311
 msgid "a unique code associated with this invitation"
 msgstr "ယခုဖိတ္ၾကားျခင္းႏွင့္ ႏွီးႏြယ္ေနေသာ ထူးျခားထင္ရွားသည့္ code"
 
-#: dash/orgs/models.py:314
 msgid "User Role"
 msgstr "အသံုးျပဳသူ၏ အခန္းက႑"
 
-#: dash/orgs/models.py:345
 #, python-format
 msgid "%s Invitation"
 msgstr ""
 
-#: dash/orgs/models.py:357 ureport/assets/models.py:11
 msgid "Banner"
 msgstr "ေခါင္းစည္း"
 
-#: dash/orgs/models.py:358 ureport/assets/models.py:12
 msgid "Pattern"
 msgstr "ပံုစံ"
 
-#: dash/orgs/models.py:362
 msgid "The organization in which the image will be used"
 msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
 
-#: dash/orgs/models.py:366
 msgid "The name to describe this background"
 msgstr "ယခုေနာက္ခံကို ေဖာ္ျပရန္အမည္"
 
-#: dash/orgs/models.py:369
 msgid "Background type"
 msgstr "ေနာက္ခံအမ်ိဳးအစား"
 
-#: dash/orgs/models.py:371 ureport/assets/models.py:24
 msgid "The image file"
 msgstr "ဓါတ္ပံုဖိုင္"
 
-#: dash/orgs/templates/orgs/email/invitation_email.html:9
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The API token for this backend"
+msgstr "ယခုအမ်ိဳးအစား၏ေခါင္းစဥ္"
+
 #, python-format
 msgid ""
 "\n"
 "      You've been invited to join %(org_name)s.\n"
 "      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</"
-"a>.\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
 "  "
 msgstr ""
 
-#: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
 msgid "Edit"
 msgstr "တည္းျဖတ္"
 
-#: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+
 msgid "Manage Users"
 msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:13
 msgid "Accounts"
 msgstr "account မ်ား"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:16
 msgid "Admins"
 msgstr "စီစဥ္သူ"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:22
-#: smartmin/templates/smartmin/delete_confirm.html:26
-#: smartmin/templates/smartmin/update.html:10
 msgid "Remove"
 msgstr "ဖယ္ရွားလိုက္ပါ"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:29
 msgid "You must have at least one administator"
 msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
 
-#: dash/orgs/views.py:168
 msgid "Select your Organization"
 msgstr "သင့္အဖြဲ႕အစည္းကို ေရြးျခယ္ပါ"
 
-#: dash/orgs/views.py:179
-msgid ""
-"Your account is not associated to an organization. Please Contact the "
-"adminstrator."
-msgstr ""
-"သင့္ account သည္အဖြဲ႕အစည္းတစ္ခုခုႏွင့္ ပတ္သတ္ျခင္းမရွိပါ။ ေက်းဖူးျပဳၿပီး administrator ကိုဆက္သြယ္ပါ"
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "သင့္ account သည္အဖြဲ႕အစည္းတစ္ခုခုႏွင့္ ပတ္သတ္ျခင္းမရွိပါ။ ေက်းဖူးျပဳၿပီး administrator ကိုဆက္သြယ္ပါ"
 
-#: dash/orgs/views.py:219 dash/orgs/views.py:229
 msgid "Your Organization"
 msgstr "သင္၏အဖြဲ႕အစည္း"
 
-#: dash/orgs/views.py:226
-msgid "Not Set"
-msgstr "မသတ္မွတ္ရေသးပါ"
-
-#: dash/orgs/views.py:296
 msgid "Invite people to your organization"
 msgstr "သင့္အဖြဲ႕အစည္းသို႕ လူမ်ားကို ဖိတ္ေခၚပါ"
 
-#: dash/orgs/views.py:299
 msgid "User group"
 msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
 
-#: dash/orgs/views.py:310
 msgid "One of the emails you entered is invalid."
 msgstr "သင္ထည့္လိုက္ေသာ အီးေမးလ္မ်ားထဲမွတစ္ခုမွာ မွားယြင္းေနပါသည္"
 
-#: dash/orgs/views.py:323
 #, python-format
 msgid "Manage %(name)s Accounts"
 msgstr ""
 
-#: dash/orgs/views.py:437 smartmin/views.py:1299
 msgid "Create"
 msgstr "ဖန္တီးပါ"
 
-#: dash/orgs/views.py:445
-msgid ""
-"Your invitation link is invalid. Please contact your organization "
-"administrator."
-msgstr ""
-"သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator "
-"ကိုဆက္သြယ္ပါ"
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator ကိုဆက္သြယ္ပါ"
 
-#: dash/orgs/views.py:501 dash/orgs/views.py:546
 #, python-format
 msgid "Join %(name)s"
 msgstr ""
 
-#: dash/orgs/views.py:523
 msgid "Join"
 msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
 
-#: dash/orgs/views.py:532
-msgid ""
-"Your invitation link has expired. Please contact your organization "
-"administrator."
-msgstr ""
-"သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးျပဳၿပီး လူႀကီးမင္းအဖြဲ႕အစည္းရွိ "
-"administrator ကိုဆက္သြယ္ပါ"
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးျပဳၿပီး လူႀကီးမင္းအဖြဲ႕အစည္းရွိ administrator ကိုဆက္သြယ္ပါ"
 
-#: dash/orgs/views.py:639
 msgid "Task"
 msgstr ""
 
-#: dash/orgs/views.py:643
 msgid "Tasks"
 msgstr ""
 
-#: dash/stories/models.py:13
 msgid "The title for this story"
 msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
 
-#: dash/stories/models.py:17
 msgid "Whether this story is featured"
 msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပထားျခင္းရွိမရွိ"
 
-#: dash/stories/models.py:20
 msgid "The summary for the story"
 msgstr "သတင္းေဆာင္းပါး၏အႏွစ္ခ်ဳပ္"
 
-#: dash/stories/models.py:22
 msgid "The body of text for the story"
 msgstr "သတင္းေဆာင္းပါး၏စာကိုယ္"
 
-#: dash/stories/models.py:24
 msgid "The writer of the story"
 msgstr "သတင္းေဆာင္းပါးေရးသူ"
 
-#: dash/stories/models.py:27
 msgid "A link to an mp3 file to publish on this story"
 msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပရန္ mp3 file link "
 
-#: dash/stories/models.py:31
-msgid ""
-"The id of the YouTube video that should be linked to this story (this is the "
-"text that comes afer v= and before & in the YouTube URL)"
-msgstr ""
-"ယခုသတင္းေဆာင္းပါးျဖင့္ ခ်ိတ္ဆက္ထားသင့္သည့္ YouTube video ၏အမွတ္အသား (YouTube URL "
-"တြင္ထိုစာသားသည္ v= ၏ေနာက္တြင္ရွိၿပီး & ၏ေရွ႕တြင္ရွိလိမ့္မည္)"
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "ယခုသတင္းေဆာင္းပါးျဖင့္ ခ်ိတ္ဆက္ထားသင့္သည့္ YouTube video ၏အမွတ္အသား (YouTube URL တြင္ထိုစာသားသည္ v= ၏ေနာက္တြင္ရွိၿပီး & ၏ေရွ႕တြင္ရွိလိမ့္မည္)"
 
-#: dash/stories/models.py:37
-msgid ""
-"Any tags for this story, separated by spaces, can be used to do more "
-"advanced filtering, optional"
-msgstr ""
-"ယခုသတင္းေဆာင္းပါးတြင္ခ်ိတ္ဆက္လိုသည္မ်ားကို space ျခားထားသည့္ အခ်ိတ္အဆက္မ်ားျဖင့္ "
-"ယခုထက္ပိုျပီးတိတိက်က်ရွာေတြနိုင္ရန္အသ၊ံုးျပဳႏိုင္ပါသည္။(သင့္ေရြးျခယ္မႈသာျဖစ္သည္)"
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "ယခုသတင္းေဆာင္းပါးတြင္ခ်ိတ္ဆက္လိုသည္မ်ားကို space ျခားထားသည့္ အခ်ိတ္အဆက္မ်ားျဖင့္ ယခုထက္ပိုျပီးတိတိက်က်ရွာေတြနိုင္ရန္အသ၊ံုးျပဳႏိုင္ပါသည္။(သင့္ေရြးျခယ္မႈသာျဖစ္သည္)"
 
-#: dash/stories/models.py:42
 msgid "The category for this story"
 msgstr "သတင္းေဆာင္းပါးအမ်ိဳးအစား"
 
-#: dash/stories/models.py:46
 msgid "The organization this story belongs to"
 msgstr "ယခုသတင္းေဆာင္းပါးကိုပိုင္သည့္အဖြဲ႕အစည္း"
 
-#: dash/stories/models.py:124 templates/frame.haml:329 templates/frame.haml:481
-#: templates/public/stories.haml:7
 msgid "Stories"
 msgstr "သတင္းေဆာင္းပါးမ်ား"
 
-#: dash/stories/models.py:132
 msgid "The story to associate to"
 msgstr "သတင္းေဆာင္းပါးႏွင့္ဆက္ႏြယ္ရန္"
 
-#: dash/stories/views.py:59
 msgid "Yes"
 msgstr "ဟုတ္ပါသည္"
 
-#: dash/stories/views.py:60
 msgid "No"
 msgstr "မဟုတ္ပါ"
 
-#: dash/stories/views.py:79
 msgid "Story Images"
 msgstr "သတင္းေဆာင္းပါးဓါတ္ပံုမ်ား"
 
-#: dash/stories/views.py:91 dash/stories/views.py:99 ureport/polls/views.py:164
-#: ureport/polls/views.py:171
 #, python-format
 msgid "Image %d"
 msgstr ""
 
-#: dash/stories/views.py:92
 msgid "Image to display on story page and in previews. (optional)"
 msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
 
-#: dash/stories/views.py:100
 msgid "Image to display on story page and in previews (optional)"
 msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
 
-#: smartmin/templates/smartmin/delete_confirm.html:11
 msgid "Remove Item?"
 msgstr "ဖယ္ရွားလိုက္ပါ"
 
-#: smartmin/templates/smartmin/delete_confirm.html:13
 #, python-format
 msgid ""
 "\n"
@@ -589,24 +429,16 @@ msgid ""
 "    "
 msgstr ""
 
-#: smartmin/templates/smartmin/delete_confirm.html:17
-msgid ""
-"Once it is removed, it will be gone forever. There is no way to undo this "
-"operation."
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "ဖယ္ရွားလိုက္သည္ႏွင့္ အၿပီးပ်က္သြားမည္ျဖစ္ပါသည္ ဖယ္ရွားျခင္းကိုျပန္လည္ျပင္ဆင္ႏိုင္သည့္ နည္းလမ္းလံုး၀မရွိပါ"
 
-#: smartmin/templates/smartmin/delete_confirm.html:24
-#: smartmin/templates/smartmin/form.html:50
-#: smartmin/templates/smartmin/update.html:8
-#: templates/jobs/jobsource_create.haml:33
 msgid "Cancel"
 msgstr "မလုပ္လိုပါ"
 
-#: smartmin/templates/smartmin/list.html:79
 #, python-format
 msgid ""
 "\n"
-"\t\t%(counter)s result\n"
+"\t %(counter)s result\n"
 "\t"
 msgid_plural ""
 "\n"
@@ -614,7 +446,6 @@ msgid_plural ""
 "        "
 msgstr[0] ""
 
-#: smartmin/templates/smartmin/list.html:85
 #, python-format
 msgid ""
 "\n"
@@ -622,54 +453,37 @@ msgid ""
 "\t"
 msgstr ""
 
-#: smartmin/templates/smartmin/list.html:95
-#: smartmin/templates/smartmin/list.html:97
 msgid "Previous"
 msgstr "ယခင္"
 
-#: smartmin/templates/smartmin/list.html:128
-#: smartmin/templates/smartmin/list.html:130
-#: templates/jobs/jobsource_create.haml:30
 msgid "Next"
 msgstr "ေရွ႕သို႕"
 
-#: smartmin/templates/smartmin/read.html:13
 msgid "edit"
 msgstr "တည္းျဖတ္"
 
-#: smartmin/templates/smartmin/users/login.html:10
-#: templates/smartmin/users/login.haml:14
 msgid "Sign in"
 msgstr "၀င္ေရာက္ရန္"
 
-#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:429
-#: templates/frame.haml:606 templates/smartmin/users/login.haml:49
 msgid "Login"
 msgstr "၀င္ေရာက္ရန္"
 
-#: smartmin/templates/smartmin/users/login.html:35
-#: templates/smartmin/users/login.haml:54
 msgid "Forgot Password?"
 msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သြားပါသလား"
 
-#: smartmin/templates/smartmin/users/user_expired.html:7
 msgid "Token Expired"
 msgstr "ေပးထားသည္မွာ သက္တမ္းကုန္ဆံုးသြားပါၿပီ"
 
-#: smartmin/templates/smartmin/users/user_failed.html:9
 msgid "Login Failure"
 msgstr "မ၀င္ေရာက္ႏိုင္ပါ"
 
-#: smartmin/templates/smartmin/users/user_failed.html:11
 #, python-format
 msgid ""
 "\n"
-"      Sorry, you cannot log in at this time because we received "
-"%(failed_login_limit)s incorrect login attempts.\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
 msgstr ""
 
-#: smartmin/templates/smartmin/users/user_failed.html:18
 #, python-format
 msgid ""
 "\n"
@@ -677,534 +491,380 @@ msgid ""
 "      "
 msgstr ""
 
-#: smartmin/templates/smartmin/users/user_failed.html:25
-msgid ""
-"Alternatively, you can fill out the form below to have your password reset "
-"via e-mail."
-msgstr ""
-"အျခားနည္းလမ္းတစ္ခုမွာ ေအာက္တြင္ ေဖာ္ျပထားေသာ ပံုစံကိုျဖည့္ျခင္းအားျဖင့္ အီးေမးလ္မွတဆင့္ သင့္ password "
-"ကိုေျပာင္းႏိုင္ပါသည္ "
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "အျခားနည္းလမ္းတစ္ခုမွာ ေအာက္တြင္ ေဖာ္ျပထားေသာ ပံုစံကိုျဖည့္ျခင္းအားျဖင့္ အီးေမးလ္မွတဆင့္ သင့္ password ကိုေျပာင္းႏိုင္ပါသည္ "
 
-#: smartmin/templates/smartmin/users/user_failed.html:27
 msgid "Please contact the website administrator to have your password reset."
 msgstr "သင့္ password အသစ္ျပဳလုပ္ရန္ website administrator ကိုဆက္သြယ္ပါ"
 
-#: smartmin/templates/smartmin/users/user_failed.html:39
 msgid "Email Address"
 msgstr "အီးေမးလ္လိပ္စာ"
 
-#: smartmin/templates/smartmin/users/user_failed.html:41
 msgid "Recover"
 msgstr "ျပန္လည္ရယူရန္"
 
-#: smartmin/templates/smartmin/users/user_forget.html:6
-msgid ""
-"Please enter the email address you used to sign up and we will help you "
-"recover your password."
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "sign up လုပ္စဥ္ကအသံုးျပဳခဲ့ေသာ အီးေမးလ္ကိုထည့္လိုက္ပါ။ လူၾကီးမင္း password ျပန္ရေအာင္ ကူညီပါမယ္"
 
-#: smartmin/templates/smartmin/users/user_newpassword.html:7
 #, python-format
 msgid ""
 "\n"
-"  <strong>Your password has expired.</strong> Site policy states that you "
-"must pick a new password every %(expire_days)s days, and that passwords must "
-"not have been used within the previous %(window_days)s days.\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
 msgstr ""
 
-#: smartmin/users/views.py:28 smartmin/users/views.py:69
-#: smartmin/users/views.py:87 smartmin/users/views.py:137
-#: smartmin/users/views.py:243 smartmin/users/views.py:271
 msgid "New Password"
 msgstr "Password အသစ္"
 
-#: smartmin/users/views.py:37 smartmin/users/views.py:75
-#: smartmin/users/views.py:110 smartmin/users/views.py:161
-msgid ""
-"Passwords must have at least 8 characters, including one uppercase, one "
-"lowercase and one number"
-msgstr ""
-"Password မ်ားသည္ အနည္းဆံုး၈လံုးရွိရပါမည္  uppercase တစ္လံုး၊ lowercase တစ္လံုးႏွင့္ နံပါတ္တစ္ခု"
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Password မ်ားသည္ အနည္းဆံုး၈လံုးရွိရပါမည္  uppercase တစ္လံုး၊ lowercase တစ္လံုးႏွင့္ နံပါတ္တစ္ခု"
 
-#: smartmin/users/views.py:79 smartmin/users/views.py:114
-#: smartmin/users/views.py:165
-msgid ""
-"You have used this password before in the past year, please use a new "
-"password."
+msgid "You have used this password before in the past year, please use a new password."
 msgstr "ေက်းဇူးျပဳၿပီး password အသစ္သံုးေပးပါ ယခု password မွာ မႏွစ္ကသံုးၿပီးသားျဖစ္ပါသည္"
 
-#: smartmin/users/views.py:86 smartmin/users/views.py:220
-#: smartmin/users/views.py:270
 #, fuzzy
 #| msgid "New Password"
 msgid "Password"
 msgstr "Password အသစ္"
 
-#: smartmin/users/views.py:88
 msgid "Confirm Password"
 msgstr "Password အတည္ျပဳေပးပါ"
 
-#: smartmin/users/views.py:94
 msgid "Please enter your password to save changes."
 msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
 
-#: smartmin/users/views.py:103
 msgid "Confirm the new password by filling the this field"
 msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
 
-#: smartmin/users/views.py:106
 msgid "New password doesn't match with its confirmation"
 msgstr "password အသစ္မွာ ယခုအတည္ျပဳသည့္ password ႏွင့္မတူပါ"
 
-#: smartmin/users/views.py:121
 msgid "Your Email"
 msgstr "သင့္အီးေမးလ္"
 
-#: smartmin/users/views.py:128
-msgid ""
-"E-mail recovery is not supported, please contact the website administrator "
-"to reset your password manually."
-msgstr ""
-"အီးေမးလ္ရေအာင္ျပန္လည္လုပ္လို႕မရပါ။ password အသစ္လုပ္ရန္ website administrator "
-"ကိုေက်းဇူးျပဳၿပီးဆက္သြယ္ေပးပါ"
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "အီးေမးလ္ရေအာင္ျပန္လည္လုပ္လို႕မရပါ။ password အသစ္လုပ္ရန္ website administrator ကိုေက်းဇူးျပဳၿပီးဆက္သြယ္ေပးပါ"
 
-#: smartmin/users/views.py:135
 msgid "Current Password"
 msgstr "လက္ရွိ password"
 
-#: smartmin/users/views.py:136
 msgid "Your current password"
 msgstr "သင္၏လက္ရွိ password"
 
-#: smartmin/users/views.py:138
 msgid "Your new password."
 msgstr "သင္၏ password အသစ္"
 
-#: smartmin/users/views.py:139
 msgid "Confirm new Password"
 msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
 
-#: smartmin/users/views.py:140
 msgid "Confirm your new password."
 msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
 
-#: smartmin/users/views.py:145
 msgid "Please enter your password to save changes"
 msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
 
-#: smartmin/users/views.py:154
 msgid "Confirm your new password by entering it here"
 msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
 
-#: smartmin/users/views.py:157
 msgid "Mismatch between your new password and confirmation, try again"
 msgstr "password အသစ္ႏွင့္ အတည္ျပဳထားေသာ password တို႕ကိုက္ညီမႈမရွိပါ ထပ္မံၾကိဳးစားၾကည့္ပါ"
 
-#: smartmin/users/views.py:215
 msgid "New user created successfully."
 msgstr "user အသစ္ေအာင္ျမင္စြာ ဖန္တီးၿပီးပါၿပီ"
 
-#: smartmin/users/views.py:218 smartmin/users/views.py:241
 msgid "Groups"
 msgstr "အုပ္စုမ်ား"
 
-#: smartmin/users/views.py:219
 msgid "Users will only get those permissions that are allowed for their group."
 msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
 
-#: smartmin/users/views.py:220
 msgid "Set the user's initial password here."
 msgstr "user ၏ကနဦး password ကိုသည္ေနရာတြင္ထည့္ပါ"
 
-#: smartmin/users/views.py:239
 msgid "Last Login"
 msgstr "ေနာက္ဆံုး login"
 
-#: smartmin/users/views.py:240
 msgid "Is Active"
 msgstr "Active ျဖစ္ေနသည္"
 
-#: smartmin/users/views.py:240
 msgid "Whether this user is allowed to log into the site"
 msgstr "ယခုအသံုးျပဳသူကို သည္ site တြင္ login လုပ္ခြင့္ျပဳ မျပဳ"
 
-#: smartmin/users/views.py:242
 msgid "Users will only get those permissions that are allowed for their group"
 msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
 
-#: smartmin/users/views.py:244
 msgid "You can reset the user's password by entering a new password here"
 msgstr "password အသစ္ရိုက္ထည့္ျခင္းျဖင့္ password ေျပာင္းလို႕ရပါတယ္"
 
-#: smartmin/users/views.py:269
 msgid "Username"
 msgstr "အသံုးျပဳသူ၏အမည္"
 
-#: smartmin/users/views.py:270
 msgid "Your password"
 msgstr "သင့္ password"
 
-#: smartmin/users/views.py:271
 msgid "If you want to set a new password, enter it here"
 msgstr "password အသစ္လုပ္လိုလွ်င္ သည္ေနရာတြင္ထည့္ပါ"
 
-#: smartmin/users/views.py:272
 msgid "Confirm New Password"
 msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
 
-#: smartmin/users/views.py:272
 msgid "Confirm your new password"
 msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
 
-#: smartmin/users/views.py:287
 msgid "Edit your profile"
 msgstr "သင့္ profile ကိုထပ္မံျပင္ဆင္ေပးပါ"
 
-#: smartmin/users/views.py:290
 msgid "Password Recovery"
 msgstr "password ျပန္ရရန္"
 
-#: smartmin/users/views.py:294
 msgid "An Email has been sent to your account with further instructions."
 msgstr "အၾကံျပဳညႊန္ၾကားခ်က္မ်ားကို သင့္အီးေမးလ္ထံပို႕လိုက္ပါၿပီ"
 
-#: smartmin/users/views.py:323
 msgid "Password Recovery Request"
 msgstr "Password ျပန္ရရန္ ေတာင္းခံျခင္း"
 
-#: smartmin/users/views.py:332
 msgid "Pick a new password"
 msgstr "Password အသစ္ထပ္ေရြးပါ"
 
-#: smartmin/users/views.py:334
 msgid "Your password has successfully been updated, thank you."
 msgstr "ေက်းဇူးတင္ပါတယ္ သင့္ passwordကို ေအာင္ျမင္စြာေျပာင္းလိုက္ပါၿပီ"
 
-#: smartmin/users/views.py:360
 #, python-format
 msgid "You are now logged in as %s"
 msgstr "သင္သည္ %s အျဖစ္ login ၀င္ထားသည္"
 
-#: smartmin/users/views.py:376
-msgid ""
-"Password Updated Successfully. Now you can log in using your new password."
+msgid "Password Updated Successfully. Now you can log in using your new password."
 msgstr "password ကိုေအာင္ျမင္စြာ ေျပာင္းလဲၿပီးပါၿပီ။ password အသစ္ကိုသံုးၿပီး login လုပ္ႏိုင္ပါၿပီ"
 
-#: smartmin/users/views.py:379
 msgid "Reset your Password"
 msgstr "password ေျပာင္းပါ"
 
-#: smartmin/users/views.py:391
-msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by "
-"entering your email here."
-msgstr ""
-"လံုျခံဳစိတ္ခ်ရျခင္းမရွိေသာေၾကာင့္ သင္၏ link သည္မရေတာ့ပါ။ သည္ေနရာတြင္သင့္ အီးေမးလ္ရိုက္ထည့္ျခင္းျဖင့္ "
-"အစမွျပန္လုပ္ပါ"
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "လံုျခံဳစိတ္ခ်ရျခင္းမရွိေသာေၾကာင့္ သင္၏ link သည္မရေတာ့ပါ။ သည္ေနရာတြင္သင့္ အီးေမးလ္ရိုက္ထည့္ျခင္းျဖင့္ အစမွျပန္လုပ္ပါ"
 
-#: smartmin/views.py:848
 msgid "Submit"
 msgstr "တင္သြင္းပါ"
 
-#: smartmin/views.py:855
 msgid "Form"
 msgstr "ပံုစံ"
 
-#: smartmin/views.py:1173
 msgid "Save Changes"
 msgstr "ေျပာင္းထားသည္မ်ားကို saveလုပ္ပါ"
 
-#: smartmin/views.py:1319
 #, fuzzy, python-format
 #| msgid "Your poll has been updated."
 msgid "Your new %s has been created."
 msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံုးအဆင့္ျပဳလုပ္ထားသည္"
 
-#: smartmin/views.py:1339
 #, python-format
 msgid "Import %s"
 msgstr ""
 
-#: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
 msgstr "U-Report"
 
-#: templates/frame.haml:209
 msgid "Admin"
 msgstr "ထိန္းခ်ဳပ္သူ"
 
-#: templates/frame.haml:217
 msgid "Configuration"
 msgstr "အစီအစဥ္"
 
-#: templates/frame.haml:223
 msgid "Orgs"
 msgstr "အဖြဲ႕အစည္းမ်ား"
 
-#: templates/frame.haml:229
 msgid "Users"
 msgstr "အသံုးျပဳသူမ်ား"
 
-#: templates/frame.haml:242
 msgid "Images"
 msgstr "ဓါတ္ပံုမ်ား"
 
-#: templates/frame.haml:251 templates/frame.haml:312
 msgid "Content"
 msgstr "အေၾကာင္းအရာ"
 
-#: templates/frame.haml:260
 msgid "Country Aliases"
 msgstr "တိုင္းျပည္ အျခားအမည္မ်ား"
 
-#: templates/frame.haml:277 templates/frame.haml:475
 msgid "Polls"
 msgstr "ေမးခြန္းမ်ား"
 
-#: templates/frame.haml:300
 msgid "Category Images"
 msgstr "အမ်ိဳးအစားအလိုက္ ဓါတ္ပံုမ်ား"
 
-#: templates/frame.haml:320
 msgid "News Items"
 msgstr "အမ်ိဳးအမည္သစ္မ်ား"
 
-#: templates/frame.haml:338
 msgid "Job Sources"
 msgstr "အလုပ္ေနရာမ်ား"
 
-#: templates/frame.haml:345
 msgid "Jobs Content"
 msgstr "အလုပ္အေၾကာင္းအရာ"
 
-#: templates/frame.haml:355
 msgid "About Content"
 msgstr "အေၾကာင္းအရာ"
 
-#: templates/frame.haml:361
 msgid "Videos"
 msgstr "ဗြီဒီယိုမ်ား"
 
-#: templates/frame.haml:367
 msgid "Contact Us Content"
 msgstr "ဆက္သြယ္ရန္ အေၾကာင္းအရာ"
 
-#: templates/frame.haml:373
 msgid "Missions Content"
 msgstr "လုပ္ငန္းပိုင္း အေၾကာင္းအရာမ်ား"
 
-#: templates/frame.haml:379
 msgid "Terms & Conditions"
 msgstr "လိုက္နာရမည့္ အေၾကာင္းအရာ အခ်က္အလက္မ်ား"
 
-#: templates/frame.haml:386
 msgid "U-Reporters Content"
 msgstr "အခ်က္အလက္ေပးပိုးသူ လူငယ္မ်ားႏွင့္ပတ္သတ္ေသာ အေၾကာင္းအရာ"
 
-#: templates/frame.haml:393
 msgid "Join &amp; Engage Content"
 msgstr "ပူးေပါင္းပါ၀င္ရန္"
 
-#: templates/frame.haml:399
 msgid "Join Steps Content"
 msgstr "ပူးေပါင္းရန္ အဆင့္မ်ား"
 
-#: templates/frame.haml:406
 msgid "Additional Menu"
 msgstr "ထပ္တိုး မီႏူး"
 
-#: templates/frame.haml:423
 msgid "Logout"
 msgstr "ယခုစာမ်က္ႏွာမွထြက္မည္"
 
-#: templates/frame.haml:469
 msgid "About"
 msgstr "U-Report အေၾကာင္း"
 
-#: templates/frame.haml:487
 msgid "U-Reporters"
 msgstr "အခ်က္အလက္ေပးပို႕သူ လူငယ္မ်ား"
 
-#: templates/frame.haml:494 templates/public/jobs.haml:7
 msgid "Jobs"
 msgstr "အလုပ္အကိုင္မ်ား"
 
-#: templates/frame.haml:501
 msgid "Join & Engage"
 msgstr "U-Report တြင္ပါ၀င္ရန္"
 
-#: templates/frame.haml:567
 msgid "FOLLOW US ON"
 msgstr ""
 
-#: templates/jobs/jobsource_create.haml:8
 msgid ""
 "\n"
-"        To add a Twitter job source you are required to get a widget id from "
-"twitter.\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
 msgstr ""
 
-#: templates/jobs/jobsource_create.haml:12
-#: templates/jobs/jobsource_update.haml:12
 msgid "Follow this step by step guide"
 msgstr ""
 
-#: templates/jobs/jobsource_create.haml:15
-#: templates/jobs/jobsource_update.haml:15
 msgid ""
 "\n"
-"        <div>After you create the widget copy the widget id from the url as "
-"shown on</div>\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
 "      "
 msgstr ""
 
-#: templates/jobs/jobsource_create.haml:40
 msgid "Back"
 msgstr ""
 
-#: templates/jobs/jobsource_update.haml:8
 msgid ""
 "\n"
-"        Remember for a Twitter job source you are required to get a widget "
-"id from twitter.\n"
+"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
 msgstr ""
 
-#: templates/public/about.haml:16 templates/public/about.haml:68
 msgid "ABOUT U-REPORT"
 msgstr "U-Report အေၾကာင္းသိေကာင္းစရာ"
 
-#: templates/public/about.haml:22 templates/public/ureporters.haml:23
 msgid "Scroll to Learn more"
 msgstr "ပိုမိုသိရွိရန္ ေအာက္ကိုဆက္ဖတ္ၾကည့္ပါ"
 
-#: templates/public/about.haml:80
 msgid "The mission of U-Report"
 msgstr "U-Report၏ လုပ္ငန္းတာ၀န္"
 
-#: templates/public/about.haml:119
 msgid "Why Join U-Report?"
 msgstr "U-Reportအစီအစဥ္တြင္ ဘာေၾကာင့္ပါ၀င္သင့္သလဲဆိုေတာ့"
 
-#: templates/public/about.haml:124
 msgid "Speak out on what's happening in your community"
 msgstr "သင္ေနထိုင္ရာ ရပ္၇ြာတြင္ ဘာေတြျဖစ္ေနသလဲဆိုတာကို လြတ္လပ္စြာ ေျပာၾကားျခင္း"
 
-#: templates/public/about.haml:127
 #, fuzzy
-#| msgid ""
-#| "Use Ureport results and information to update and increase citizen's "
-#| "awareness"
-msgid ""
-"Use U-Report results and information to update and increase citizen's "
-"awareness"
-msgstr ""
-"လူငယ့္အသံအစီအစဥ္မွရရွိလာေသာ အခ်က္အလက္မ်ားကို အသံုးျပဳၿပီး ႏိုင္ငံသားတို႕၏အသိအျမင္ဗဟုသုတကို ျမွင့္တင္ေပးျခင္း"
+#| msgid "Use Ureport results and information to update and increase citizen's awareness"
+msgid "Use U-Report results and information to update and increase citizen's awareness"
+msgstr "လူငယ့္အသံအစီအစဥ္မွရရွိလာေသာ အခ်က္အလက္မ်ားကို အသံုးျပဳၿပီး ႏိုင္ငံသားတို႕၏အသိအျမင္ဗဟုသုတကို ျမွင့္တင္ေပးျခင္း"
 
-#: templates/public/about.haml:130
 msgid "Participate in nationwide campaigns to help improve your country"
-msgstr ""
-"ႏိုင္ငံႏွင့္အ၀ွမ္းက်င္းပေသာ လွဳပ္ရွားမႈမ်ားတြင္ ပါ၀င္ျခင္းအားျဖင့္ သင့္တိုင္းျပည္ တိုးတက္ေအာင္ ကူညီေပးႏိုင္ျခင္း"
+msgstr "ႏိုင္ငံႏွင့္အ၀ွမ္းက်င္းပေသာ လွဳပ္ရွားမႈမ်ားတြင္ ပါ၀င္ျခင္းအားျဖင့္ သင့္တိုင္းျပည္ တိုးတက္ေအာင္ ကူညီေပးႏိုင္ျခင္း"
 
-#: templates/public/about.haml:133
 #, python-format
 msgid "Share what's happening around %(country)s with other U-Reporters"
 msgstr ""
 
-#: templates/public/about.haml:139
 msgid "CLICK HERE TO JOIN"
 msgstr "ပူးေပါင္းပါ၀င္ရန္ သည္ေနရာတြင္ႏွိပ္ပါ"
 
-#: templates/public/about.haml:153
 msgid "U-REPORT VIDEOS"
 msgstr "လူငယ့္အသံႏွင့္ပတ္သတ္ေသာ ဗီဒီယိုမ်ား"
 
-#: templates/public/about.haml:160
 msgid "No videos yet."
 msgstr "ဗီဒီယိုမ်ားမရွိေသးပါ"
 
-#: templates/public/about.haml:178
 msgid "WATCH IT ON YOUTUBE"
 msgstr "YOUTUBE တြင္ျကည့္ပါ"
 
-#: templates/public/all_polls.haml:5
 msgid "MORE POLLS"
 msgstr "ေနာက္ထပ္ေမးခြန္းမ်ား"
 
-#: templates/public/all_polls.haml:12 templates/public/archived_stories.haml:12
 msgid "FILTER"
 msgstr "စစ္ထုတ္ေပးျခင္း"
 
-#: templates/public/all_polls.haml:19 templates/public/archived_stories.haml:19
-#: templates/public/stories.haml:72 templates/public/strings_values.haml:5
 msgid "All"
 msgstr "အားလံုး"
 
-#: templates/public/all_polls.haml:33
 msgid "POLL LIST"
 msgstr "ေမးခြန္းစာရင္း"
 
-#: templates/public/all_polls.haml:35
 msgid "All polls from most recent to oldest"
 msgstr "ေနာက္ဆံုးေမးခြန္းမ်ားမွ ျပီးခဲ့ေသာေမးခြန္းမ်ားအထိ"
 
-#: templates/public/archived_stories.haml:5
 msgid "ARCHIVED STORIES"
 msgstr "သိမ္းထားေသာ သတင္းေဆာင္းပါးမ်ား"
 
-#: templates/public/archived_stories.haml:33
 msgid "LIST"
 msgstr "စာရင္း"
 
-#: templates/public/index.haml:21
 msgid "Follow"
 msgstr "လိုက္လံၾကည့္သည္"
 
-#: templates/public/index.haml:29
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
+#| "                "
 msgid ""
 "\n"
-"                  U-Report is a social messaging tool allowing anyone from "
-"any community, anywhere in the world to respond to polls, report issues, "
-"support child rights and work as positive agents of change on behalf of "
-"people in their country.\n"
+"                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
 "                "
 msgstr ""
 "\n"
-"U-Report သည္ message ကိုအသံုးျပဳသည့္ လူမွႈမီဒီယာျဖစ္ၿပီး မည္သည့္ေနရာတြင္ရွိေစ "
-"ကေလးသူငယ္အခြင့္အေရးမ်ား၊ မိမိတို႕ရပ္ရြာတြင္ျဖစ္ေပၚလ်က္ရွိသည့္ အေၾကာင္းအရာမ်းကိုသတင္းေပးပို႕ႏိုင္ၿပီး "
-"မိမိႏိုင္ငံႏွင့္ လူမ်ိဳးကိုယ္စားျပဳကာ ေကာင္းမြန္ေသာေျပာင္းလဲမႈမ်ားကိုေဆာင္ရြက္ႏိုင္ပါသည္။ "
+"U-Report သည္ message ကိုအသံုးျပဳသည့္ လူမွႈမီဒီယာျဖစ္ၿပီး မည္သည့္ေနရာတြင္ရွိေစ ကေလးသူငယ္အခြင့္အေရးမ်ား၊ မိမိတို႕ရပ္ရြာတြင္ျဖစ္ေပၚလ်က္ရွိသည့္ အေၾကာင္းအရာမ်းကိုသတင္းေပးပို႕ႏိုင္ၿပီး မိမိႏိုင္ငံႏွင့္ လူမ်ိဳးကိုယ္စားျပဳကာ ေကာင္းမြန္ေသာေျပာင္းလဲမႈမ်ားကိုေဆာင္ရြက္ႏိုင္ပါသည္။ "
 
-#: templates/public/index.haml:36 templates/public/index.haml:74
 msgid "CURRENT POLL"
 msgstr "လက္ရွိေမးခြန္း"
 
-#: templates/public/index.haml:42
 msgid "View Full Results"
 msgstr ""
 
-#: templates/public/index.haml:52
 msgid "All U-Report members"
 msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္ၾကသူအားလံုး"
 
-#: templates/public/index.haml:97
 msgid "RESPONSE RATE"
 msgstr "တုံ႕ံျပန္မႈႏွဳန္း"
 
-#: templates/public/index.haml:103
 msgid "Responded out of"
 msgstr "Responded out of"
 
-#: templates/public/index.haml:111
 msgid "RESPONDER'S RATE BY LOCATION"
 msgstr "ျပန္လည္ေျဖၾကားသူတို႕၏ တည္ေနရာ"
 
-#: templates/public/index.haml:117
 msgid "Most responded"
 msgstr "ျပန္လည္ေျဖၾကားမႈအမ်ားဆံုး"
 
-#: templates/public/index.haml:149
 #, python-format
 msgid ""
 "\n"
@@ -1212,151 +872,111 @@ msgid ""
 "                                  "
 msgstr ""
 
-#: templates/public/index.haml:164
 msgid "TRENDING WORDS"
 msgstr "အသံုးမ်ားေသာစကားလံုးမ်ား"
 
-#: templates/public/index.haml:174
 msgid "FEATURED RESPONSES"
 msgstr "ေဖာ္ျပထားေသာေျဖၾကားမႈမ်ား"
 
-#: templates/public/index.haml:197 templates/public/index.haml:557
 msgid "View full results"
 msgstr ""
 
-#: templates/public/index.haml:217 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
 msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္သူမ်ား ၀င္ေရာက္ရန္"
 
-#: templates/public/index.haml:225
 msgid "TOTAL # OF U-REPORTERS"
 msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္သူစုစုေပါင္း"
 
-#: templates/public/index.haml:237
 msgid "4 MOST ACTIVE REGIONS"
 msgstr "တက္ၾကြမႈအရွိဆံုး နယ္ေျမေလးခု"
 
-#: templates/public/index.haml:248 templates/public/index.haml:269
 msgid "RATE BY GENDER"
 msgstr "က်ား မအလိုက္ ႏွဳန္း"
 
-#: templates/public/index.haml:257 templates/public/index.haml:310
 msgid "RATE BY AGE"
 msgstr "အသက္အရြယ္အလိုက္ႏွဳန္း"
 
-#: templates/public/index.haml:322
 msgid "WHAT U-REPORTERS ARE SAYING"
 msgstr "ယခုအစီအစဥ္တြင္ပါ၀င္သူမ်ား ေျပာဆိုေဆြးေႏြးေနသည္မွာ"
 
-#: templates/public/index.haml:331
 msgid "FEATURED VIDEO"
 msgstr "ေဖာ္ျပထားေသာဗီဒီယို"
 
-#: templates/public/index.haml:337
 msgid "Watch more videos"
 msgstr ""
 
-#: templates/public/index.haml:348
 msgid "FEATURED REGION"
 msgstr "ေဖာ္ျပထားေသာနယ္ေျမ"
 
-#: templates/public/index.haml:372
 msgid "Check more stories in U-Report app"
 msgstr ""
 
-#: templates/public/index.haml:391 templates/public/join_engage.haml:99
 msgid "View more stories on Facebook"
 msgstr ""
 
-#: templates/public/index.haml:410
 msgid "View more on Instagram"
 msgstr ""
 
-#: templates/public/index.haml:430
 msgid "Read more tweets on Twitter"
 msgstr ""
 
-#: templates/public/index.haml:441
 msgid "NEWS FEED"
 msgstr "သတင္းမ်ား"
 
-#: templates/public/index.haml:456 templates/public/index.haml:489
-#: templates/public/index.haml:571
 msgid "STORY"
 msgstr "သတင္းေဆာင္းပါး"
 
-#: templates/public/index.haml:477 templates/public/index.haml:511
-#: templates/public/index.haml:596 templates/public/stories.haml:39
-#: templates/public/stories.haml:123
 #, fuzzy
 #| msgid "Read This Story"
 msgid "Read full story"
 msgstr "သည္သတင္းကိုဖတ္ပါ"
 
-#: templates/public/index.haml:534
 msgid "Response Rate"
 msgstr "ျပန္လည္ေျဖၾကားႏွဳန္း"
 
-#: templates/public/index.haml:737
 #, fuzzy
 #| msgid "Read This Story"
 msgid "Read this story"
 msgstr "သည္သတင္းကိုဖတ္ပါ"
 
-#: templates/public/jobs.haml:22
 msgid "JOBS"
 msgstr "အလုပ္အကိုင္မ်ား"
 
-#: templates/public/jobs.haml:28
 msgid "Scroll to see job details"
 msgstr "အလုပ္ႏွင့္ပတ္သတ္ၿပီး အေသးစိတ္သိရွိရန္ ေအာက္သို႕ဆက္သြားၾကည့္ပါ"
 
-#: templates/public/jobs.haml:78 templates/public/join_engage.haml:119
 msgid "Tweet to"
 msgstr ""
 
-#: templates/public/jobs.haml:99 templates/public/polls.haml:379
 msgid "Read more"
 msgstr "ဆက္လက္ဖတ္ရွဳရန္"
 
-#: templates/public/jobs.haml:108
 msgid "Visit"
 msgstr ""
 
-#: templates/public/join_engage.haml:17
 msgid "JOIN U-REPORT"
 msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္လိုသည္"
 
-#: templates/public/join_engage.haml:44
 msgid "HOW TO JOIN"
 msgstr "ဘယ္လိုပါ၀င္ရမလဲ"
 
-#: templates/public/join_engage.haml:73
 #, python-format
 msgid ""
 "\n"
-"              * U-Report is a free program sponsored by UNICEF with help of "
-"Network Providers in %(country)s. U-Report will not ask for any payments nor "
-"personal financial information, PLEASE disregard any messages which ask you "
-"for payment either on this number or on the Facebook and Twitter pages. All "
-"U-Report services (all msg on %(shortcode)s) are free.\n"
+"                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
-"            "
+"              "
 msgstr ""
 
-#: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
 msgstr "လူမႈကြန္ယက္မ်ားရွိ လူငယ့္အသံအစီအစဥ္"
 
-#: templates/public/join_engage.haml:140
 msgid "Compose new Tweet"
 msgstr ""
 
-#: templates/public/polls.haml:16
 msgid "CURRENT POLL IN"
 msgstr "လက္ရွိ ေမးခြန္း ထည့္ရန္"
 
-#: templates/public/polls.haml:29
 #, python-format
 msgid ""
 "\n"
@@ -1368,27 +988,22 @@ msgid_plural ""
 "                "
 msgstr[0] ""
 
-#: templates/public/polls.haml:43
 #, fuzzy
 #| msgid "Response Rate"
 msgid "response rate"
 msgstr "ျပန္လည္ေျဖၾကားႏွဳန္း"
 
-#: templates/public/polls.haml:49
 #, fuzzy
 #| msgid "Responded out of"
 msgid "responded out of"
 msgstr "Responded out of"
 
-#: templates/public/polls.haml:53
 msgid "polled"
 msgstr ""
 
-#: templates/public/polls.haml:96
 msgid "POLL RESULTS"
 msgstr "မိမိသေဘာအေလ်ာက္ ျပန္လည္ေျဖၾကားမႈရလဒ္မ်ား"
 
-#: templates/public/polls.haml:112
 #, python-format
 msgid ""
 "\n"
@@ -1396,747 +1011,604 @@ msgid ""
 "                  "
 msgstr ""
 
-#: templates/public/polls.haml:121
 msgid "KEYWORDS"
 msgstr "အဓိကစကားလံုး"
 
-#: templates/public/polls.haml:126
 msgid "STATISTICS"
 msgstr "စာရင္းဇယား"
 
-#: templates/public/polls.haml:131
 msgid "LOCATIONS"
 msgstr "တည္ေနရာမ်ား"
 
-#: templates/public/polls.haml:137 templates/public/ureporters.haml:83
 msgid "GENDER"
 msgstr "က်ား မ"
 
-#: templates/public/polls.haml:143 templates/public/ureporters.haml:63
 msgid "AGE"
 msgstr "အသက္"
 
-#: templates/public/polls.haml:313
 msgid "FEATURED ANSWERS"
 msgstr "ေဖာ္ျပထားေသာအေျဖမ်ား"
 
-#: templates/public/polls.haml:320
 msgid "No featured answers."
 msgstr "မေဖာ္ျပထားေသာအေျဖမ်ား"
 
-#: templates/public/polls.haml:339
 msgid "U-Reporter in"
 msgstr "အစီအစဥ္တြင္ စာရင္းသြင္းထားသူမ်ား၀င္ေရာက္ရန္"
 
-#: templates/public/polls.haml:351 templates/public/story_read.haml:129
 msgid "RELATED STORIES"
 msgstr "ပတ္သတ္ေနေသာ သတင္းေဆာင္းပါးမ်ား"
 
-#: templates/public/polls.haml:356 templates/public/story_read.haml:134
 msgid "No related stories."
 msgstr "ဆက္စပ္ျခင္းမရွိေသာ သတင္းမ်ား"
 
-#: templates/public/polls.haml:391 templates/public/story_read.haml:102
 msgid "FEATURED IMAGES"
 msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပံုမ်ား"
 
-#: templates/public/polls.haml:397
 msgid "No featured images yet."
 msgstr "မေဖာ္ျပရေသးေသာ ဓါတ္ပံုမ်ား"
 
-#: templates/public/stories.haml:20
 msgid "FEATURED STORY"
 msgstr "ေဖာ္ျပထားေသာ သတင္းေဆာင္းပါး"
 
-#: templates/public/stories.haml:30 templates/public/story_read.haml:26
 msgid "BY"
 msgstr "အားျဖင့္"
 
-#: templates/public/stories.haml:59
 msgid "LATEST STORIES"
 msgstr "ေနာက္ဆံုးရ သတင္းေဆာင္းပါးမ်ား"
 
-#: templates/public/stories.haml:64
 msgid "FILTERED BY"
 msgstr "စစ္ထုတ္ေပးထားသည္"
 
-#: templates/public/story_read.haml:31
 msgid "Scroll to read more"
 msgstr "ထပ္မံဖတ္ရွဳရန္ "
 
-#: templates/public/story_read.haml:50
 msgid "STORY CONTINUES"
 msgstr "သတင္းေနာက္ဆက္တြဲ"
 
-#: templates/public/story_read.haml:68
 msgid "AUDIO"
 msgstr "အသံ"
 
-#: templates/public/story_read.haml:81
 msgid "RELATED POLLS"
 msgstr "ဆက္စပ္ေနေသာ ေမးခြန္းမ်ား"
 
-#: templates/public/story_read.haml:86
 msgid "No related polls."
 msgstr "မဆက္စပ္ေသာ ေမးခြန္းမ်ား"
 
-#: templates/public/story_read.haml:107
 msgid "No featured images."
 msgstr "မေဖာ္ျပထားေသာ ဓါတ္ပံုမ်ား"
 
-#: templates/public/story_read.haml:160
 msgid "READ MORE"
 msgstr "ထပ္မံဖတ္ရွဳရန္"
 
-#: templates/public/strings_values.haml:6
 msgid "Even"
 msgstr "အညီအမွ်"
 
-#: templates/public/strings_values.haml:7
-#: templates/public/strings_values.haml:10
 msgid "State"
 msgstr "ျပည္နယ္"
 
-#: templates/public/strings_values.haml:8
 msgid "Other"
 msgstr "အျခား"
 
-#: templates/public/strings_values.haml:9
-msgid "National"
-msgstr "အမ်ိဳးသားအဆင့္"
-
-#: templates/public/strings_values.haml:11
 msgid "District"
 msgstr ""
 
-#: templates/public/strings_values.haml:12
 msgid "Participation Level"
 msgstr "ပါ၀င္သည့္ အေနအထား"
 
-#: templates/public/strings_values.haml:13
 msgid "Responses"
 msgstr "ျပန္လည္ေျဖၾကားမႈမ်ား"
 
-#: templates/public/strings_values.haml:14
 msgid "Reporters in"
 msgstr "လူငယ့္အသံအစီအစဥ္တြင္ စာရင္းသြင္းထားသူမ်ား ၀င္ေရာက္ရန္"
 
-#: templates/public/strings_values.haml:15
 msgid "Results"
 msgstr "ရလဒ္မ်ား"
 
-#: templates/public/strings_values.haml:16
 msgid "*Other answers include"
 msgstr "အျခားအေျဖမ်ားမွာ"
 
-#: templates/public/strings_values.haml:17
 msgid "Population"
 msgstr "လူဦးေရ"
 
-#: templates/public/strings_values.haml:18
 msgid "Registered in"
 msgstr "စာရင္းသြင္းထားသူမ်ား ၀င္ေရာက္ရန္"
 
-#: templates/public/strings_values.haml:19
 msgid "Density"
 msgstr "သိပ္သည္းမႈ"
 
-#: templates/public/strings_values.haml:20
 msgid "total"
 msgstr "စုစုေပါင္း"
 
-#: templates/public/strings_values.haml:21
 msgid "of"
 msgstr ""
 
-#: templates/public/strings_values.haml:22
 msgid "the"
 msgstr ""
 
-#: templates/public/ureporters.haml:44
 msgid "WHO WE ARE"
 msgstr ""
 
-#: templates/public/ureporters.haml:55
 msgid "U-REPORTER STATISTICS"
 msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္သူမ်ား၏ စာရင္းဇယား"
 
-#: templates/public/ureporters.haml:134
 msgid "WHERE ARE U-REPORTERS FROM?"
 msgstr "ပါ၀င္သည့္ လူငယ္မ်ားသည္ မည္သည့္ေနရာမ်ားကျဖစ္သလဲ"
 
-#: templates/public/ureporters.haml:154
 msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
 msgstr "လြန္ခဲ့ေသာေျခာက္လေက်ာ္က စာရင္းသြင္းမႈႏွဳန္း"
 
-#: templates/public/ureporters.haml:174
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
 msgstr "အလုပ္အကိုင္ အမ်ားဆံုးေဖာ္ျပထားသည့္"
 
-#: templates/public/ureporters.haml:377
 msgid "Registered"
 msgstr "စာရင္းသြင္းထားၿပီး"
 
-#: templates/public/ureporters.haml:392
 msgid "Week of"
 msgstr "အပတ္၏"
 
-#: ureport/admins/views.py:22
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr ""
 
-#: ureport/assets/models.py:13
 msgid "Flag"
 msgstr "အလံ"
 
-#: ureport/assets/models.py:17
 msgid "The organization to which the image will be used"
 msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
 
-#: ureport/assets/models.py:20
 msgid "A short descriptive name for this image"
 msgstr "ယခုဓါတ္ပံုအတြက္ နာမည္အတိုေကာက္"
 
-#: ureport/assets/models.py:22
 msgid "Image type"
 msgstr "ဓါတ္ပံုအမ်ိဳးအစား"
 
-#: ureport/contacts/models.py:46
 msgid "Label"
 msgstr "အညႊန္း"
 
-#: ureport/contacts/models.py:48
 msgid "Key"
 msgstr "ေသာ့ခ်က္"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:870
 msgid "Male"
 msgstr "အမ်ိဳးသား"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:870
 msgid "Female"
 msgstr "အမ်ိဳးသမီး"
 
-#: ureport/contacts/models.py:92 ureport/locations/models.py:24
 msgid "Organization"
 msgstr "အဖြဲ႕အစည္း"
 
-#: ureport/contacts/models.py:94
 msgid "Gender"
 msgstr "က်ား မ"
 
-#: ureport/contacts/models.py:95
 msgid "Gender of the contact"
 msgstr "ဆက္သြယ္လာသူ၏ က်ားမ"
 
-#: ureport/contacts/models.py:97
 msgid "Born Field"
 msgstr "ေမြးေန႕"
 
-#: ureport/contacts/models.py:99
 msgid "Occupation Field"
 msgstr "အလုပ္အကိုင္"
 
-#: ureport/contacts/models.py:101
 msgid "Registration Date"
 msgstr "စာရင္းသြင္းသည့္ေန႕"
 
-#: ureport/contacts/models.py:103
 msgid "State Field"
 msgstr "ျပည္နယ္"
 
-#: ureport/contacts/models.py:105
 msgid "District Field"
 msgstr "ခရိုင္"
 
-#: ureport/contacts/models.py:107
 msgid "Ward Field"
 msgstr ""
 
-#: ureport/contacts/models.py:240 ureport/polls/models.py:1102
 msgid "Number of items with this counter"
 msgstr "ယခု counter ၏အမ်ိဳးအစား အေရအတြက္"
 
-#: ureport/countries/management/commands/add_country_alias.py:55
 msgid "No root user found. Please create a root user"
 msgstr "root user မေတြ႕ပါ root user တခုထပ္မံျပဳလုပ္ေပးပါ"
 
-#: ureport/countries/models.py:11
 msgid "The name for our alias"
 msgstr "အျခားေခၚဆိုသည့္အမည္"
 
-#: ureport/jobs/models.py:22
 msgid "The title or name to reference this Job source."
 msgstr "သည္အလုပ္အကိုင္အရင္းအျမစ္ကို ကိုးကားရန္ ေခါင္းစဥ္ သို႕မဟုတ္ အမည္"
 
-#: ureport/jobs/models.py:24
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
 msgstr "အလုပ္အကိုင္အရင္းအျမစ္အတြက္ အမ်ိဳးအစားေရြးပါ။ Twitter, ေဖ့ဘြခ္ သို႕မဟုတ္ RSS feed"
 
-#: ureport/jobs/models.py:25
 msgid "The full URL to navigate to this Job source."
 msgstr "ယခု အလုပ္အကိုင္အရင္းအျမစ္ကို လမ္းညႊန္ရန္ URL အျပည့္အစံု"
 
-#: ureport/jobs/models.py:27
-msgid ""
-"For Twitter, a widget Id is required to embed tweets on the website. Read "
-"carefully the instructions above on how to get the right widget Id"
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
 msgstr "Twitter အတြက္ ၀က္လ္ဆိုက္ေပၚတြင္ tweetမ်ားကို ထည့္သြင္းရန္ widget ID လိုအပ္ပါသည္"
 
-#: ureport/jobs/models.py:30
 msgid "Featured job sources are shown first on the jobs page."
 msgstr "အလုပ္အကိုင္အရင္းအျမစ္မ်ားကို အလုပ္အကိုင္စာမ်က္ႏွာတြင္ ပထမဦးစြာေဖာ္ျပထားပါသည္"
 
-#: ureport/jobs/models.py:32
 msgid "The organization this job source is for"
 msgstr "ယခုအလုပ္အကိုင္အရင္းအျမစ္သည္ သည္အဖြဲ႕အစည္းအတြက္"
 
-#: ureport/jobs/views.py:13
 msgid "Your job source has been added successfully"
 msgstr "သင္၏အလုပ္အကိုင္အရင္းအျမစ္ကို ထည့္ၿပီးပါၿပီ"
 
-#: ureport/jobs/views.py:39
 msgid "Your job source has been updated successfully"
 msgstr "သင္၏အလုပ္အကိုင္အရင္းအျမစ္ကို အသစ္ျပန္လည္ျပင္ဆင္ၿပီးပါၿပီ"
 
-#: ureport/locations/models.py:29
 msgid "This is the OSM id for this administrative boundary"
 msgstr "ယခု administrative boundary အတြက္ OSM id"
 
-#: ureport/locations/models.py:32
 msgid "The name of our administrative boundary"
 msgstr "ကၽြႏူပ္တို႕ administrative boundary ၏အမည္"
 
-#: ureport/locations/models.py:34
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
 msgstr "boundary အဆင့္ 0 သည္တိုင္းျပည္အတြက္ 1 သည္ျပန္နယ္အတြက္  2 သည္ခရိုင္အတြက္"
 
-#: ureport/locations/models.py:37
 msgid "The parent to this political boundary if any"
 msgstr ""
 
-#: ureport/locations/models.py:39
 msgid "Geometry"
 msgstr "ဂ်ီၾသေမၾတီ"
 
-#: ureport/locations/models.py:40
-msgid ""
-"The json representing the geometry type and coordinates of the boundaries"
+msgid "The json representing the geometry type and coordinates of the boundaries"
 msgstr ""
 
-#: ureport/news/models.py:11
 msgid "The title for this item"
 msgstr "ယခုအမ်ိဳးအစား၏ေခါင္းစဥ္"
 
-#: ureport/news/models.py:14
 msgid "A short summary description for this item"
 msgstr "ယခုအမ်ိဳးအစားအတြက္ အက်ဥ္းခ်ဳပ္ေဖာ္ျပခ်က္"
 
-#: ureport/news/models.py:17
 msgid "A link that should be associated with this item"
 msgstr "ယခု အမ်ိဳးအစားႏွင့္ ဆက္ႏြယ္သင့္ေသာ link "
 
-#: ureport/news/models.py:20 ureport/news/models.py:45
 msgid "The category this item belongs to"
 msgstr "ယခုအမ်ိဳးအမည္ႏွင့္ သက္ဆိုင္ေသာ အုပ္စု"
 
-#: ureport/news/models.py:23
 msgid "The organization this item belongs to"
 msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
 
-#: ureport/news/models.py:36
 msgid "The title for this Video"
 msgstr "ယခုဗီဒီယို၏ေခါင္းစဥ္"
 
-#: ureport/news/models.py:39
 msgid "A short summary description for this video"
 msgstr "ယခုဗီဒီယိုအတြက္ အက်ဥ္းခ်ံဳးေဖာ္ျပခ်က္"
 
-#: ureport/news/models.py:48
 msgid "The organization this video belongs to"
 msgstr "ယခုဗီဒီယိုႏွင့္ သက္ဆိုင္ေသာအဖြဲ႕အစည္း"
 
-#: ureport/polls/models.py:63
 msgid "The name of this poll category"
 msgstr "ယခုေမးခြန္း အမ်ိဳးအစား"
 
-#: ureport/polls/models.py:72
 msgid "Poll Categories"
 msgstr "ေမးခြန္းအမ်ိဳးအစားမ်ား"
 
-#: ureport/polls/models.py:103
 msgid "The Flow this Poll is based on"
 msgstr "ယခုေမးခြန္း အေျခခံထားသည္မွာ"
 
-#: ureport/polls/models.py:105
-msgid ""
-"The date to display for this poll. Leave empty to use flow creation date."
+msgid "The date to display for this poll. Leave empty to use flow creation date."
 msgstr ""
 
-#: ureport/polls/models.py:109
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr ""
 
-#: ureport/polls/models.py:111
 msgid "The base language of the flow to use"
 msgstr ""
 
-#: ureport/polls/models.py:114
 msgid "The number of polled reporters on this poll"
 msgstr ""
 
-#: ureport/polls/models.py:117
 msgid "Whether the poll has finished the initial results sync."
 msgstr ""
 
-#: ureport/polls/models.py:120
 msgid "The title for this Poll"
 msgstr "ယခုေမးခြန္းေခါင္းစဥ္"
 
-#: ureport/polls/models.py:122
 msgid "The category this Poll belongs to"
 msgstr "ယခုေမးခြန္း အမ်ိဳးအစား"
 
-#: ureport/polls/models.py:124
 msgid "Whether this poll should be featured on the homepage"
 msgstr "ယခုေမးခြန္းကို ပင္မစာမ်က္ႏွာေပၚတြင္ ေဖာ္ျပသင့္မသင့္"
 
-#: ureport/polls/models.py:126
 msgid "The splash category image to display for the poll (optional)"
 msgstr "ေမးခြန္းအတြက္ ေျဖာ္ျပရမည့္ဓါတ္ပံုအမ်ိဳးအစား (ျခြင္းခ်က္)"
 
-#: ureport/polls/models.py:128
 msgid "The organization this poll is part of"
 msgstr "ယခုေမးခြန္ႏွင့္ ပတ္သတ္ေသာ အဖြဲ႕အစည္း"
 
-#: ureport/polls/models.py:642
 msgid "The poll to associate to"
 msgstr "ယခုေမးခြန္းႏွင့္ ဆက္ႏြယ္ေသာ"
 
-#: ureport/polls/models.py:656
 msgid "The poll for this response"
 msgstr "ယခုတံု႕ျပန္မႈအတြက္ ေမးခြန္း"
 
-#: ureport/polls/models.py:659
 msgid "The location for this response"
 msgstr "ေျဖၾကားသူမ်ား၏တည္ေနရာ"
 
-#: ureport/polls/models.py:662
 msgid "The name of the sender of the message"
 msgstr "ယခုသတင္းစကားကိုေပးပို႕သူ၏အမည္"
 
-#: ureport/polls/models.py:665
 msgid "The featured response message"
 msgstr "ေဖာ္ျပထားေသာ အေျဖ"
 
-#: ureport/polls/models.py:681
 msgid "The poll this question is part of"
 msgstr "ယခုေမးခြန္းသည္ "
 
-#: ureport/polls/models.py:683
 msgid "The title of this question"
 msgstr "သည္ေမးခြန္း၏ေခါင္းစဥ္"
 
-#: ureport/polls/models.py:684
 msgid "The RuleSet this question is based on"
 msgstr "ယခုေမးခြန္းအေျခခံထားသည္မွာ"
 
-#: ureport/polls/models.py:689
 msgid "The label of the ruleset on RapidPro"
 msgstr ""
 
-#: ureport/polls/models.py:692
 msgid "The priority number for this question on the poll"
 msgstr ""
 
-#: ureport/polls/models.py:965
 msgid "The Rule this response category is based on"
 msgstr ""
 
-#: ureport/polls/views.py:85
+msgid "Your org does not have any API token configuration."
+msgstr ""
+
 msgid "You must include a title for every included question."
 msgstr "ပါ၀င္ေသာေမးခြန္းတိုင္းအတြက္ ေခါင္းစဥ္တစ္ခုထည့္ရမည္"
 
-#: ureport/polls/views.py:88
 msgid "Title too long. The max limit is 255 characters for each title"
 msgstr "ေခါင္းစဥ္ရွည္လြန္းေနသည္။ ေခါင္းစဥ္တိုင္းအတြက္ အမ်ားဆံုးခြင့္ျပဳထားသည့္ စာလံုးေရမွာ ၂၅၅လံုးသာ"
 
-#: ureport/polls/views.py:93
 msgid "You must include at least one poll question."
 msgstr "အနည္းဆံုးေမးခြန္းတစ္ခုထည့္ရမည္"
 
-#: ureport/polls/views.py:108
 msgid "Adjust poll date"
 msgstr ""
 
-#: ureport/polls/views.py:111
 #, fuzzy
 #| msgid "Your poll has been created, now pick which questions to include."
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr "သင္ေမးလိုသည့္ ေမးခြန္းကိုေရြးပါ"
 
-#: ureport/polls/views.py:122
+#, fuzzy
+#| msgid "Configuration"
+msgid "Configure flow"
+msgstr "အစီအစဥ္"
+
 #, fuzzy
 #| msgid "Your poll has been created, now pick which questions to include."
-msgid "Your poll has been created, now adjust the poll date."
+msgid "Your poll has been configured, now adjust the poll date."
 msgstr "သင္ေမးလိုသည့္ ေမးခြန္းကိုေရြးပါ"
 
-#: ureport/polls/views.py:152
+#, fuzzy
+#| msgid "Your poll has been created, now pick which questions to include."
+msgid "Your poll has been created, now configure its flow."
+msgstr "သင္ေမးလိုသည့္ ေမးခြန္းကိုေရြးပါ"
+
 msgid "Poll Images"
 msgstr "ေမးခြန္းမ်ားအတြက္ ဓါတ္ပံုမ်ား"
 
-#: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "သင္ေဖာ္ျပလိုသည့္ မည္သည့္ တံု႕ျပန္ခ်က္ကိုမဆို ထည့္ပါ (ရွိလွ်င္)"
 
-#: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "ေမးခြန္းစာမ်က္ႏွာႏွင့္ preview မ်ားတြင္ေဖာ္ျပရန္ ဓါတ္ပံု(ျခြင္းခ်က္)"
 
-#: ureport/polls/views.py:172
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "ေမးခြန္းစာမ်က္ႏွာႏွင့္ preview မ်ားတြင္ေဖာ္ျပရန္ ဓါတ္ပံု(ျခြင္းခ်က္)"
 
-#: ureport/polls/views.py:196
 msgid "Featured Poll Responses"
 msgstr "ေဖာ္ျပထားေသာ ေမးခြန္းအေျဖမ်ား"
 
-#: ureport/polls/views.py:197
 msgid "Your poll has been updated."
 msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံုးအဆင့္ျပဳလုပ္ထားသည္"
 
-#: ureport/polls/views.py:214
 #, python-format
 msgid "Response %d Reporter"
 msgstr ""
 
-#: ureport/polls/views.py:214
 msgid "The name or alias of the responder."
 msgstr "ျပန္လည္ေျဖၾကားသူ၏အမည္"
 
-#: ureport/polls/views.py:219
 #, python-format
 msgid "Response %d Location"
 msgstr ""
 
-#: ureport/polls/views.py:219
 msgid "The location of the responder."
 msgstr "ျပန္လည္ေျဖၾကားသူ၏တည္ေနရာ"
 
-#: ureport/polls/views.py:224
 #, python-format
 msgid "Response %d Message"
 msgstr ""
 
-#: ureport/polls/views.py:224
 msgid "The text of the featured response."
 msgstr "ေဖာ္ျပထားေသာ အေျဖစာသား"
 
-#: ureport/polls/views.py:250
 msgid "Poll Questions"
 msgstr "ေမးခြန္းမ်ား"
 
-#: ureport/polls/views.py:252
 msgid "Now set what images you want displayed on your poll page. (if any)"
 msgstr "သင့္ေမးခြန္းႏွင့္အတူ မည္သည့္ဓါတ္ပံုမ်ားကို ထည့္မည္ဆိုသည္ကို စဥ္းစားရန္ (ရွိလွ်င္)"
 
-#: ureport/polls/views.py:281
 msgid "Include"
 msgstr "ပါ၀င္သည္"
 
-#: ureport/polls/views.py:282
 msgid "Whether to include this question in your public results"
 msgstr "အမ်ားျပည္သူ၏ရလဒ္မ်ားတြင္ ယခုေမးခြႏ္းကို ထည့္သင့္မသင့္"
 
-#: ureport/polls/views.py:286
 msgid "Priority"
 msgstr ""
 
-#: ureport/polls/views.py:287
-msgid ""
-"The priority of this question on the poll page, higher priority comes first"
+msgid "The priority of this question on the poll page, higher priority comes first"
 msgstr ""
 
-#: ureport/polls/views.py:291
 msgid "Ruleset Label"
 msgstr ""
 
-#: ureport/polls/views.py:292
 msgid "The label of the ruleset from RapidPro"
 msgstr ""
 
-#: ureport/polls/views.py:296
 msgid "Title"
 msgstr "ေခါင္းစဥ္"
 
-#: ureport/polls/views.py:297
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "သင္ေမးလိုက္ေသာေမးခြန္းကို အမ်ားျမင္ႏိုင္ရန္ ေဖာ္ျပထားမည္ျဖစ္သည္။"
 
-#: ureport/polls/views.py:417
 #, python-format
-msgid "Scheduled a pull refresh for poll #%d on org #%d"
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr ""
 
-#: ureport/public/views.py:310
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: ureport/settings_common.py:132
+msgid "The name of txbhe Contact Group that contains registered reporters"
+msgstr "စာရင္းသြင္းထားျပီးေသာ အသံုးျပဳသူမ်ားပါ၀င္သည့္ txbhe contact အုပ္စုအမည္"
+
+msgid "The label of the Contact Field that contains the birth date of reporters"
+msgstr " အသံုးျပဳသူမ်ား၏ေမြးေန႕ပါ၀င္သည့္ Contact field အမွတ္အသား"
+
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr "အသံုးျပဳသူမ်ား၏ က်ား၊မ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+
+msgid "The label of the Contact Field that contains the occupation of reporters"
+msgstr "အသံုးျပဳသူမ်ား၏ အလုပ္အကိုင္ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+
+msgid "The label of the Contact Field that contains the registration date of reporters"
+msgstr "အသံုးျပဳသူမ်ား၏ စတင္အသံုးျပဳသည့္ေန႕စြဲ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr "အသံုးျပဳသူမ်ား၏ ျပည္နယ္ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr "အသံုးျပဳသူမ်ား၏ ခရိုင္ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr ""
+
+msgid "The label assigned to U-Reporters that are Male."
+msgstr "U-Report အသံုးျပဳသူ ေယာ္က်ားေလးမ်ားအတြက္ သတ္မွတ္ထားေသာ အမွတ္အသား"
+
+msgid "The label assigned to U-Reporters that are Female."
+msgstr "U-Report အသံုးျပဳသူ မိန္းကေလးမ်ားအတြက္ သတ္မွတ္ထားေသာ အမွတ္အသား"
+
 msgid "Whether this org should be show on the landing page"
 msgstr "ယခုအဖြဲ႕အစည္းကို landing စာမ်က္ႏွာတြင္ျပသင့္မသင့္"
 
-#: ureport/settings_common.py:133
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "U-Report ကိုဆက္သြယ္ရန္ အသံုးျပဳသူမ်ားသံုးမည့္ နံပါတ္အတို"
 
-#: ureport/settings_common.py:134
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "U-Report တြင္ပါ၀င္မည့္သူမ်ားကို လမ္းညႊန္ရန္ စာသားအတို"
 
-#: ureport/settings_common.py:135
 msgid "The color used to draw the text on the join bar"
 msgstr "join စာသားတြင္ အသံုးျပဳမည့္အေရာင္"
 
-#: ureport/settings_common.py:136
 msgid "The color used to draw the background on the join bar"
 msgstr "join bar တြင္အသံုးျပဳမည့္ေနာက္ခံအေရာင္"
 
-#: ureport/settings_common.py:137
 msgid "The primary color for styling for this organization"
 msgstr "သည္အဖြဲ႕အစည္းအားျခယ္မွဳန္းထားေသာ မူလအေရာင္"
 
-#: ureport/settings_common.py:138
 msgid "The secondary color for styling for this organization"
 msgstr "သည္အဖြဲ႕အစည္းအား ျခယ္သထားေသာ ဒုတိယအေရာင္"
 
-#: ureport/settings_common.py:139
 msgid "The background color for the site"
 msgstr "ယခု site ၏ေနာက္ခံအေရာင္"
 
-#: ureport/settings_common.py:140
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "styling chartမ်ားအတြက္ အေရာင္ ၆မ်ိဳး၊ အေရာင္မ်ားၾကားတြင္ comma သံုးေပးရန္"
 
-#: ureport/settings_common.py:141
+#, fuzzy
+#| msgid "Up to 6 colors for styling charts, use comma between colors"
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgstr "styling chartမ်ားအတြက္ အေရာင္ ၆မ်ိဳး၊ အေရာင္မ်ားၾကားတြင္ comma သံုးေပးရန္"
+
+msgid "The states to show on maps only"
+msgstr ""
+
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "ယခုအဖြဲ႕အစည္းအတြက္ Google Analytics Tracking ID"
 
-#: ureport/settings_common.py:142
 msgid "The URL to the Youtube channel for this organization"
 msgstr "သည္အဖြဲ႕အစည္းအတြက္ Youtube channel ၏ URL"
 
-#: ureport/settings_common.py:143
 msgid "The URL to the Facebook page for this organization"
 msgstr "သည္အဖြဲ႕အစည္းအတြက္ Facebook စာမ်က္ႏွာဆီသြားႏိုင္မည့္ URL"
 
-#: ureport/settings_common.py:144
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr ""
 
-#: ureport/settings_common.py:145
-msgid ""
-"The integer id to the Facebook app for this organization's chat app "
-"(optional)"
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
 msgstr ""
 
-#: ureport/settings_common.py:146
+#, fuzzy
+#| msgid "The short text used to direct visitors to join U-Report"
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr "U-Report တြင္ပါ၀င္မည့္သူမ်ားကို လမ္းညႊန္ရန္ စာသားအတို"
+
 #, fuzzy
 #| msgid "The URL to the Facebook page for this organization"
 msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "သည္အဖြဲ႕အစည္းအတြက္ Facebook စာမ်က္ႏွာဆီသြားႏိုင္မည့္ URL"
 
-#: ureport/settings_common.py:147
 msgid "The Instagram username for this organization"
 msgstr "သည္အဖြဲ႕အစည္းအတြက္ Instagram username"
 
-#: ureport/settings_common.py:148
 msgid "The Instagram widget id from lightwidget.com"
 msgstr ""
 
-#: ureport/settings_common.py:149
 msgid "The Twitter handle for this organization"
 msgstr "သည္အဖြဲ႕အစည္းအတြက္ Twitter handle"
 
-#: ureport/settings_common.py:150
 msgid "The Twitter widget used for searching"
 msgstr "ရွာေဖြျခင္းမ်ားအတြက္ အသံုးျပဳေသာ Twitter widget"
 
-#: ureport/settings_common.py:151
-msgid "The name of txbhe Contact Group that contains registered reporters"
-msgstr "စာရင္းသြင္းထားျပီးေသာ အသံုးျပဳသူမ်ားပါ၀င္သည့္ txbhe contact အုပ္စုအမည္"
-
-#: ureport/settings_common.py:152
-msgid ""
-"The label of the Contact Field that contains the birth date of reporters"
-msgstr " အသံုးျပဳသူမ်ား၏ေမြးေန႕ပါ၀င္သည့္ Contact field အမွတ္အသား"
-
-#: ureport/settings_common.py:153
-msgid "The label of the Contact Field that contains the gender of reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ က်ား၊မ ပါ၀င္သည့္ Contact field အမွတ္အသား"
-
-#: ureport/settings_common.py:154
-msgid ""
-"The label of the Contact Field that contains the occupation of reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ အလုပ္အကိုင္ ပါ၀င္သည့္ Contact field အမွတ္အသား"
-
-#: ureport/settings_common.py:155
-msgid ""
-"The label of the Contact Field that contains the registration date of "
-"reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ စတင္အသံုးျပဳသည့္ေန႕စြဲ ပါ၀င္သည့္ Contact field အမွတ္အသား"
-
-#: ureport/settings_common.py:156
-msgid "The label of the Contact Field that contains the State of reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ ျပည္နယ္ ပါ၀င္သည့္ Contact field အမွတ္အသား"
-
-#: ureport/settings_common.py:157
-msgid "The label of the Contact Field that contains the District of reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ ခရိုင္ ပါ၀င္သည့္ Contact field အမွတ္အသား"
-
-#: ureport/settings_common.py:158
-msgid "The label of the Contact Field that contains the Ward of reporters"
+msgid "The words to filter out from the results on public site"
 msgstr ""
 
-#: ureport/settings_common.py:159
-msgid "The label assigned to U-Reporters that are Male."
-msgstr "U-Report အသံုးျပဳသူ ေယာ္က်ားေလးမ်ားအတြက္ သတ္မွတ္ထားေသာ အမွတ္အသား"
-
-#: ureport/settings_common.py:160
-msgid "The label assigned to U-Reporters that are Female."
-msgstr "U-Report အသံုးျပဳသူ မိန္းကေလးမ်ားအတြက္ သတ္မွတ္ထားေသာ အမွတ္အသား"
-
-#: ureport/settings_common.py:161
-msgid "If there are jobs to be shown on the public site"
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site"
+msgid "If there are jobs to be shown on the public site. (Separated by comma)"
 msgstr "အမ်ားျပည္သူျမင္သာေသာ site တြင္သည္အလုပ္မ်ားကို ျပရန္ မျပရန္"
 
-#: ureport/settings_common.py:162
-msgid ""
-"If this org if for global data. e.g: It shows a world map instead of a "
-"country map."
-msgstr ""
-"သည္အဖြဲ႕အစည္းသည္ ႏိုင္ငံတကာအခ်က္အလက္မ်ားကို ေဖာ္ျပလွ်င္ ႏိုင္ငံတစ္ႏိုင္ငံ၏ေျမပံုအစား ႏိုင္ငံတကာေျမပံုသာ ျပလိမ့္မည္"
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgstr "သည္အဖြဲ႕အစည္းသည္ ႏိုင္ငံတကာအခ်က္အလက္မ်ားကို ေဖာ္ျပလွ်င္ ႏိုင္ငံတစ္ႏိုင္ငံ၏ေျမပံုအစား ႏိုင္ငံတကာေျမပံုသာ ျပလိမ့္မည္"
 
-#: ureport/settings_common.py:163
-msgid ""
-"The alpha-3 ISO code of the organization so that it appears the stories "
-"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
-"Global)."
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
-#: ureport/settings_common.py:164
-msgid ""
-"If you need to include some custom HTML codes in you org pages, like custom "
-"analytics code snippets"
+msgid "The font used for headline texts"
 msgstr ""
-"သင့္အဖြဲ႕အစည္း၏စာမ်က္ႏွာမ်ားေပၚတြင္ သံုးေနၾက custom analytics code snippets မ်ားကဲ့သို႕ HTML "
-"code မ်ားကိုထည့္သြင္းေဖာ္ျပရန္လိုအပ္လာပါက "
 
-#: ureport/translation.py:14
+msgid "The font used for normal text"
+msgstr ""
+
+#, fuzzy
+#| msgid "Participation Level"
+msgid "Hide participation stats"
+msgstr "ပါ၀င္သည့္ အေနအထား"
+
+#, fuzzy
+#| msgid "The name of the sender of the message"
+msgid "The text to describe the sponsors of free messages"
+msgstr "ယခုသတင္းစကားကိုေပးပို႕သူ၏အမည္"
+
+msgid "The font used for small text"
+msgstr ""
+
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
+msgstr "သင့္အဖြဲ႕အစည္း၏စာမ်က္ႏွာမ်ားေပၚတြင္ သံုးေနၾက custom analytics code snippets မ်ားကဲ့သို႕ HTML code မ်ားကိုထည့္သြင္းေဖာ္ျပရန္လိုအပ္လာပါက "
+
 msgid "Something to trigger localizations"
 msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္ေသာအရာ"
+
+#~ msgid "The API token for the RapidPro account this dashboard is tied to"
+#~ msgstr "RapidPro account အတြက္ API token ႏွင့္တြဲထားေသာ dashboard"
+
+#~ msgid "Not Set"
+#~ msgstr "မသတ္မွတ္ရေသးပါ"
+
+#~ msgid "National"
+#~ msgstr "အမ်ိဳးသားအဆင့္"
 
 #~ msgid "VIEW FULL RESULT"
 #~ msgstr "ရလဒ္အျပည့္အစံုကို ၾကည့္ရန္"

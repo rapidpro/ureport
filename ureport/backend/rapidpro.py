@@ -320,6 +320,10 @@ class RapidProBackend(BaseBackend):
             flow_json["archived"] = flow.archived
             flow_json["runs"] = flow.runs.active + flow.runs.expired + flow.runs.completed + flow.runs.interrupted
             flow_json["completed_runs"] = flow.runs.completed
+            flow_json["results"] = [
+                {"key": elt.key, "name": elt.name, "categories": elt.categories, "node_uuids": elt.node_uuids}
+                for elt in flow.results
+            ]
 
             all_flows[flow.uuid] = flow_json
         return all_flows
@@ -350,26 +354,43 @@ class RapidProBackend(BaseBackend):
         poll.save()
 
         flow_rulesets = flow_definition["rule_sets"]
+        old_style = len(flow_rulesets) > 0
 
-        for ruleset in flow_rulesets:
-            label = ruleset["label"]
-            ruleset_uuid = ruleset["uuid"]
-            ruleset_type = ruleset["ruleset_type"]
+        if old_style:
 
-            question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
+            for ruleset in flow_rulesets:
+                label = ruleset["label"]
+                ruleset_uuid = ruleset["uuid"]
+                ruleset_type = ruleset["ruleset_type"]
 
-            rapidpro_rules = []
-            for rule in ruleset["rules"]:
-                category = rule["category"][base_language]
-                rule_uuid = rule["uuid"]
-                rapidpro_rules.append(rule_uuid)
+                question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
 
-                PollResponseCategory.update_or_create(question, rule_uuid, category)
+                rapidpro_rules = []
+                for rule in ruleset["rules"]:
+                    category = rule["category"][base_language]
+                    rule_uuid = rule["uuid"]
+                    rapidpro_rules.append(rule_uuid)
 
-            # deactivate if corresponding rules are removed
-            PollResponseCategory.objects.filter(question=question).exclude(rule_uuid__in=rapidpro_rules).update(
-                is_active=False
-            )
+                    PollResponseCategory.update_or_create(question, rule_uuid, category)
+
+                # deactivate if corresponding rules are removed
+                PollResponseCategory.objects.filter(question=question).exclude(rule_uuid__in=rapidpro_rules).update(
+                    is_active=False
+                )
+        else:
+            api_flow = poll.get_flow()
+
+            flow_results = api_flow["results"]
+
+            for result in flow_results:
+                label = result["name"]
+                ruleset_uuid = result["node_uuids"][-1]
+                ruleset_type = "wait_message"
+
+                question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
+
+                for category in result["categories"]:
+                    PollResponseCategory.update_or_create(question, None, category)
 
     def pull_fields(self, org):
         client = self._get_client(org, 2)
