@@ -2,6 +2,93 @@
 
 - load thumbnail ureport i18n compress
 
+-block content
+  .booklet-bg.for-stories
+  .booklet-bg-content
+    .page-title-block
+      .columns
+        .column.page-title
+          Stories
+        .column.categories-dropdown
+          .dropdown
+            .dropdown-trigger
+              %button.button(aria-haspopup="true" aria-controls="dropdown-menu")
+                %span
+                  -trans "SEARCH"
+                %span.icon.is-small
+                  %i.fas.fa-caret-down(aria-hidden="true")
+            #dropdown-menu.dropdown-menu.polls-overlay(role="menu")
+              .dropdown-content
+                .dropdown-item.search-polls
+                  .field.has-addons
+                    .control#search-input
+                      %input.input(type="text" placeholder="Search")
+                    .control#search-clear
+                      %span.icon
+                        %i.fas.fa-times
+                .dropdown-item.no-results.is-hidden
+                  No results...
+                .dropdown-item.polls-category(role="all-polls")
+                  .polls-category-label
+                    %span
+                      %i.fas.fa-chevron-right
+                    -trans "All"
+                  %ul.polls-category-list
+                    - for story in stories
+                      %li.poll-list-item
+                        %a(href="{% url 'v2.public.story_read' story.id %}")
+                          {{ story.title }} ({{story.created_on|date}})          
+                
+                - for category in categories
+                  - if category.story_set.all|length
+                    .dropdown-item.polls-category
+                      .polls-category-label
+                        %span
+                          %i.fas.fa-chevron-right
+                        {{ category.name }}
+                      %ul.polls-category-list
+                        - for story in category.story_set.all
+                          %li.poll-list-item
+                            %a(href="{% url 'v2.public.story_read' story.id %}")
+                              {{ story.title }} ({{story.created_on|date}})          
+
+  - for story in featured|slice:"2"
+    .booklet-bg(class="story-bg-{{forloop.counter}}")
+    .booklet-bg-content
+      .featured-story(class="story-{{forloop.counter}}")
+        .columns
+          - if not forloop.counter|divisibleby:2
+            .column
+              .featured-story-label
+                -trans "FEATURED STORY"
+              .story-title
+                {{ story.title }}
+              .story-teaser
+                {{ story.summary|linebreaksbr }}
+              %a.read-more-button.button(href="{% url 'v2.public.story_read' story.pk %}")
+                -trans "READ MORE"
+          .column
+            .story-image-bg
+              .story-image
+                %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+              -# - if story.get_image
+              -#   {% thumbnail story.get_image "350x350" crop="top" as im %}
+              -#   <img width="100%" height="100%" src="{{im.url}}" />
+              -#   {% endthumbnail %}
+              -# - else
+              -#   %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}  
+          
+          - if forloop.counter|divisibleby:2
+            .column
+              .featured-story-label
+                -trans "FEATURED STORY"
+              .story-title
+                {{ story.title }}
+              .story-teaser
+                {{ story.summary|linebreaksbr }}
+              %a.read-more-button.button(href="{% url 'v2.public.story_read' story.pk %}")
+                -trans "READ MORE"
+
 -block subtitle
   &nbsp;-
   -trans "Stories"
@@ -35,7 +122,7 @@
   - block banner
     {{ block.super }}
 
-- block content
+- block conrsatent
   .section.hide-on-small
     %h1.level-1-title
       - trans "LATEST STORIES"
@@ -97,6 +184,71 @@
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/archived_stories.coffee" />
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/featured_stories.coffee" />
   {% endcompress %}
+  :javascript
+    $(".dropdown-trigger").on('click', function() {
+      $(this).siblings('.dropdown-menu').toggleClass('is-active');
+      $(this).toggleClass('rotation');
+      $(".polls-category-list").addClass("is-hidden");
+      $("#search-input input").focus();
+
+    });
+    
+    $(document).ready(function() {
+      $(document).mouseup(function (e){
+        var container = $(".dropdown-menu, .dropdown-trigger");
+        if (!container.is(e.target) && container.has(e.target).length === 0){
+          container.removeClass('is-active');
+          container.removeClass('rotation');
+        }
+      });
+    });
+
+    $(".polls-category-label").on('click', function() {
+      $(this).siblings('ul').toggleClass('is-hidden');
+      $(this).toggleClass('rotation')
+      $(this).toggleClass('is-active')
+    });
+
+    function resetPolls() {
+      $(".poll-list-item").removeClass("is-hidden");
+      $('.polls-category-label').removeClass('rotation');
+      $(".polls-category").removeClass("is-hidden");
+      $(".polls-category").children('ul').addClass("is-hidden");
+      $(".no-results").addClass('is-hidden');
+    }
+
+    $("#search-clear").on("click", function() {
+      $(this).parent().children('#search-input').children('input').val("");
+      resetPolls();
+    });
+
+    $("#search-input input").on('keyup', function() {
+      var term = $(this).val().toLowerCase().trim();
+      $(".polls-category").addClass("is-hidden");
+      $(".no-results").addClass('is-hidden');
+      if(!term) {
+        $(".poll-list-item").removeClass("is-hidden");
+        resetPolls();
+        return;
+      } else {
+        $(".poll-list-item").each( function() {
+
+          if (!$(this).text().trim().toLowerCase().includes(term)) {
+            $(this).addClass("is-hidden");
+          } else {
+            $(this).removeClass("is-hidden");
+          }
+        })
+      }
+      $(".poll-list-item:not(.is-hidden)").parent().parent(".polls-category").removeClass("is-hidden");
+      $(".polls-category:not(.is-hidden):not([role='all-polls'])").children('.polls-category-label').addClass('rotation');
+      $(".polls-category:not(.is-hidden):not([role='all-polls'])").children('ul').removeClass("is-hidden");
+
+      if ($(".polls-category:not(.is-hidden)").length == 0) {
+        $(".no-results").removeClass('is-hidden');
+      }
+    })
+
 
 
 - block extra-style

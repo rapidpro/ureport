@@ -188,7 +188,13 @@ class StoriesView(SmartTemplateView):
         org = self.request.org
 
         context["org"] = org
-        context["categories"] = Category.objects.filter(org=org, is_active=True).order_by("name")
+        context["categories"] = (
+            Category.objects.filter(org=org, is_active=True)
+            .prefetch_related(Prefetch("story_set", queryset=Story.objects.filter(is_active=True)))
+            .order_by("name")
+        )
+        context["stories"] = Story.objects.filter(org=org, is_active=True).order_by("title")
+
         context["featured"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         context["other_stories"] = Story.objects.filter(org=org, featured=False, is_active=True).order_by(
             "-created_on"
