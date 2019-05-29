@@ -1,3 +1,7 @@
+v1.0.451
+----------
+ * Update rapidpro-python to 2.6.1
+
 v1.0.450
 ----------
  * Make flow metadate node uuids optional
