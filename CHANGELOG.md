@@ -1,3 +1,8 @@
+v1.0.452
+----------
+ * Merge pull request #409 from rapidpro/no-flow-def-use
+ * Use flow results metada for all poll flows
+
 v1.0.451
 ----------
  * Update rapidpro-python to 2.6.1
