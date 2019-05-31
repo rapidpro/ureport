@@ -2,128 +2,43 @@
 
 -load compress ureport dashblocks thumbnail i18n humanize
 
-- block hero
-  - load_qbs request.org 'ureporters'
-
-  - for d_block in ureporters|slice:":1"
-    .hero-container
-      .hero-dark-container
-        .container
-          .row
-            .col-md-7
-              .hero-dark-content
-                .hero-title.primary-bg-color
-                  - trans "U-REPORTERS IN"
-                  {{org.name|upper}}
-                .hero-description
-                  {{ d_block.summary|safe }}
-                .hero-info
-                  - trans "Scroll to Learn more"
-
-
-  - block banner
-    {{ block.super }}
-
 - block content
-  - load_qbs request.org 'ureporters'
-  - for d_block in ureporters|slice:":1"
-    .section
-      %h1.level-1-title
-        - trans "WHO WE ARE"
-      .level-1-title-description.secondary-color
-      .ureporters-text
-        {{d_block.content|safe}}
+  .booklet-bg
+  .booklet-bg-content
+    .page-title-block
+      .columns
+        .column.page-title
+          Engagement
+  
+  .top-graph(style="background-color: #EEE;")
+    .columns.is-paddingless.is-marginless
+      .column
+          Movement
+      .column
+        .engagement-graph
+          #resp-graph
 
-    %hr.aaa
-    .section
-      %h1.level-1-title
-        - trans "U-REPORTER STATISTICS"
-      .level-1-title-description.secondary-color
-      .row
-        .col-md-7
-          .white-card-container
-            .white-card-inner
-              .white-card-title.primary-bg-color
-                - trans "AGE"
-              .white-card-content.white-card-padding
-                -if is_iorg
-                  -include "public/mobile_age_include.haml"
-                -else
-                  .contact-field-graph-age{ id: "graph-contact-field-age"}
-                    #graph-contact-field-age-placeholder.loading-placeholder
-                      %img{src:"{{ STATIC_URL }}img/loading.gif"}
-        .col-md-5
-          .white-card-container
-            .white-card-inner
-              .white-card-title.primary-bg-color
-                - trans "GENDER"
-              .white-card-content.white-card-padding
-                -if is_iorg
-                  -include "public/mobile_gender_include.haml"
-                -else
-                  .contact-field-graph-gender
-                    %table.ureporter-gender{style:"width:100%"}
-                      %tbody
-                        %tr
-                          %td.male-gender
-                            .icon-gender.primary-color
-                              .glyph.icon-Icon-02
-
-                            #male-percentage.primary-border-color.percentage-gender
-                              %span {{ gender_stats.male_percentage }}
-                            #male-summary.summary-gender
-                              {{ gender_stats.male_count|intcomma }}
-
-                          %td.female-gender
-                            .icon-gender.primary-color
-                              .glyph.icon-Icon-01
-
-                            #female-percentage.primary-border-color.percentage-gender
-                              %span {{ gender_stats.female_percentage }}
-                            #female-summary.summary-gender
-                              {{ gender_stats.female_count|intcomma }}
-
-      -if not is_iorg
-        -if show_maps
-          .row.ureporter-states.hide-on-small
-            .col-md-12
-              .white-card-container
-                .white-card-inner
-                  .white-card-title.primary-bg-color
-                    - trans "WHERE ARE U-REPORTERS FROM?"
-                  .white-card-content.white-card-padding
-                    .ureport-location-map{id: "ureport-location-map-id"}
-                      #ureport-location-map-id-placeholder.loading-placeholder
-                        %img{src:"{{ STATIC_URL }}img/loading.gif"}
-
-        .row.ureporter-registrations.hide-on-small
-          .col-md-12
-            .white-card-container
-              .white-card-inner
-                .white-card-title.primary-bg-color
-                  - trans "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-                .white-card-content.white-card-padding
-                  .contact-field-graph-registration{id: "graph-contact-field-registration"}
-                    #graph-contact-field-registration-placeholder.loading-placeholder
-                      %img{src:"{{ STATIC_URL }}img/loading.gif"}
-
-        -if show_occupation_stats
-          .row.ureporter-occupations.hide-on-small
-            .col-md-12
-              .white-card-container
-                .white-card-inner
-                  .white-card-title.primary-bg-color
-                    - trans "OCCUPATION: TOP 9 MOST MENTIONED"
-                  .white-card-content.white-card-padding
-                    .contact-field-graph-occupation{id: "graph-contact-field-occupation"}
-                      #graph-contact-field-occupation-placeholder.loading-placeholder
-                        %img{src:"{{ STATIC_URL }}img/loading.gif"}
-
-
+  .homepage-reporters-stats
+    .columns.is-paddingless.is-marginless
+      .column
+        .local-count-label
+          - trans "U-REPORTERS IN"
+          {{ org.name|upper }}
+        .local-count
+          {{ reporters|intcomma }}
+        .worldwide-count-label
+          - trans "U-REPORTERS WORLDWIDE:"
+        .worldwide-count
+          {{ global_counter|intcomma }}
+      .column
+        .columns.has-graph
+          .column.is-1.graph-title
+            - trans "AGES"
+          .column.graph-chart
+            .age-stats{ id: "age-chart"}
 
 -block extra-script
   {{ block.super }}
-  <script src="{{ STATIC_URL }}js/highcharts.js"></script>
   {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureporters.coffee" />
   {% endcompress %}
@@ -145,6 +60,156 @@
         });
       });
     });
+
+    $("#resp-graph").each(function() {
+        var polled = {{ polled|safe}};
+        console.log(polled);
+
+        var polledData = [];
+        Object.keys(polled).forEach(function(key){
+          polledData.push([Date.parse(key), polled[key]]);
+        })
+
+        console.log(polledData);
+        
+        var responded = {{ responded|safe}};
+
+        var respondedData = []
+        Object.keys(responded).forEach(function(key){
+          respondedData.push([Date.parse(key), responded[key]]);
+        })
+
+         $('#resp-graph').highcharts({
+              chart: {
+                  type: 'spline'
+              },
+              title: {
+                  text: null
+              },
+              xAxis: {
+                  type: 'datetime',
+                  dateTimeLabelFormats: { // don't display the dummy year
+                    month: '%b',
+                    year: '%b'
+                  },
+                  title: {
+                      text: 'Date'
+                  }
+              },
+              yAxis: {
+                  title: {
+                      text: null
+                  },
+                  min: 0
+              },
+              tooltip: {
+                  headerFormat: '<b>{series.name}</b><br>',
+                  pointFormat: '{point.x: %b}: {point.y:.2f} m'
+              },
+          
+              plotOptions: {
+                  spline: {
+                      marker: {
+                          enabled: true
+                      }
+                  }
+              },
+          
+              colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+              series :[
+                {
+                  name: "Polled",
+                  data: polledData
+                },
+                {
+                  name: "Responded",
+                  data: respondedData
+                }
+              ]
+         });
+    });
+
+    $("#age-chart").each(function(){
+
+           var data = {{ age_stats|safe }};
+
+           {% if is_rtl_org %}
+           data.reverse();
+           {% endif %}
+
+           var categories = [];
+
+           for (i=0; i<data.length; i++) {
+             categories.push(data[i].name)
+           }
+
+           $('#age-chart').highcharts({
+             chart: {
+               type: 'column',
+               backgroundColor: "#000",
+               spacing: [ 3, 5, 3, 5],
+               height: "30%",
+             },
+             credits: {
+               enabled: false
+             },
+             legend: {
+               enabled: false
+             },
+             title: {
+                 text: null
+             },
+             subtitle: {
+                 text: null
+             },
+             xAxis: {
+               categories: categories,
+               labels : {
+                   rotation: 0,
+                   style: {
+                     fontSize: 20,
+                     fontFamily: "SharpSansDisplayBold",
+                     color: "#FED200",
+                 }
+               },
+               minorTickLength: 0,
+               tickLength: 0
+             },
+             yAxis: {
+               min: 0,
+               labels: {
+                 enabled: false
+               },
+               visible: false,
+               gridLineWidth: 0,
+               title: {
+                 text: null
+               }
+             },
+             tooltip: {
+               enabled: false
+             },
+             plotOptions: {
+                 column: {
+                     color: '#FFF',
+                     pointPadding: 0.2,
+                     pointWidth: 30,
+                     borderWidth: 0,
+                     dataLabels:  {
+                       enabled: true,
+                       style: {
+                         fontFamily: "SharpSansDisplayBold",
+                       },
+                       color: "#FFF",
+                       verticalAlign:"bottom",
+                       format: '<b>{point.y:.0f}%</b>'
+                     }
+                 }
+             },
+             series: [ {name: 'Age' , data: data } ]
+           });
+         });
+
 
     $(function(){
       $(".contact-field-graph-age").each(function(){
@@ -454,6 +519,10 @@
   - load_qbs request.org 'ureporters'
   {{ block.super }}
   :css
+    .highcharts-background {
+      fill: transparent;
+    }
+   
    .hero-container {
       {% for d_block in ureporters|slice:":1" %}
       {% thumbnail d_block.image "1280x678" crop="top" as im %}

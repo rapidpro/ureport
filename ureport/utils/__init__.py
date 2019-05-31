@@ -13,6 +13,7 @@ from dash.orgs.models import Org
 from dash.utils import datetime_to_ms
 from django.conf import settings
 from django.core.cache import cache
+from django.db.models import Sum
 from django.utils import timezone
 import pytz
 from ureport.assets.models import Image, FLAG
@@ -222,6 +223,30 @@ def get_global_count():
         count = "__"
 
     return count
+
+
+def get_engagement_counts(org):
+    from ureport.polls.models import PollResultsCounter
+
+    counters = PollResultsCounter.objects.filter(org=org, type__icontains="engagement")
+
+    results = counters.values("type").order_by("type").annotate(count_sum=Sum("count"))
+
+    return {c["type"]: c["count_sum"] for c in results}
+
+
+def get_engagement_polled_counts(org):
+    engagement_counts = get_engagement_counts(org)
+
+    return {key[-10:]: val for key, val in engagement_counts.items() if "total-ruleset-polled:engagement:date" in key}
+
+
+def get_engagement_responded_counts(org):
+    engagement_counts = get_engagement_counts(org)
+
+    return {
+        key[-10:]: val for key, val in engagement_counts.items() if "total-ruleset-responded:engagement:date" in key
+    }
 
 
 def get_org_contacts_counts(org):
@@ -515,3 +540,5 @@ Org.get_gender_stats = get_gender_stats
 Org.get_regions_stats = get_regions_stats
 Org.get_flows = get_flows
 Org.get_segment_org_boundaries = get_segment_org_boundaries
+Org.get_engagement_polled_counts = get_engagement_polled_counts
+Org.get_engagement_responded_counts = get_engagement_responded_counts
