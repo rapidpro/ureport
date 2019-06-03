@@ -5,8 +5,8 @@ from django.conf.urls import url
 
 from .views import (
     AboutView,
-    AdditionalMenu,
     Count,
+    CustomPage,
     IndexView,
     JobsView,
     JoinEngageView,
@@ -29,6 +29,6 @@ urlpatterns = [
     url(r"^story/(?P<pk>\d+)/$", StoryReadView.as_view(), {}, "v2.public.story_read"),
     url(r"^join/$", JoinEngageView.as_view(), {}, "v2.public.join"),
     url(r"^jobs/$", JobsView.as_view(), {}, "v2.public.jobs"),
-    url(r"^added/$", AdditionalMenu.as_view(), {}, "v2.public.added"),
+    url(r"^page/(?P<link>\w+)/$", CustomPage.as_view(), {}, "v2.public.custom_page"),
     url(r"^count/$", Count.as_view(), {}, "v2.public.count"),
 ]
