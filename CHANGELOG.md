@@ -1,3 +1,7 @@
+v1.0.453
+----------
+ * Add India flag on the footer
+
 v1.0.452
 ----------
  * Merge pull request #409 from rapidpro/no-flow-def-use
