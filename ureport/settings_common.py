@@ -828,6 +828,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://france.ureport.in/count/",
     ),
     dict(
+        name="India",
+        host="//india.ureport.in",
+        flag="flag_in.png",
+        is_static=True,
+        count_link="http://india.ureport.in/count/",
+    ),
+    dict(
         name="Ireland",
         host="//ireland.ureport.in",
         flag="flag_ir.png",
