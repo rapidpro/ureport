@@ -347,9 +347,35 @@ class PublicTest(UreportTest):
         # self.assertContains(response, "<div>INCLUDE MY CUSTOM HTML</div>")
 
     def test_additional_menu(self):
-        additional_menu_url = reverse("v2.public.added")
+        additional_menu_url = reverse("v2.public.custom_page", args=["faq"])
+        custom_page_dashblock_type = DashBlockType.objects.get_or_create(
+            name="Custom pages",
+            slug="additional_menu",
+            description="U-Report custom pages",
+            has_title=True,
+            has_image=True,
+            has_rich_text=False,
+            has_summary=False,
+            has_link=True,
+            has_gallery=False,
+            has_color=False,
+            has_video=False,
+            has_tags=False,
+            created_by=self.admin,
+            modified_by=self.admin,
+        )[0]
+
+        DashBlock.objects.create(
+            title="Custom page",
+            content="Content...",
+            dashblock_type=custom_page_dashblock_type,
+            org=self.uganda,
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
         response = self.client.get(additional_menu_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/added/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/page/faq/")
         self.assertEqual(response.context["org"], self.nigeria)
 
     def test_about(self):

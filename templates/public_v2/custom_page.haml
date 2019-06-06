@@ -1,0 +1,17 @@
+- extends "public_base_v2.html"
+
+- load dashblocks thumbnail i18n
+
+-block content
+  .booklet-bg
+  .booklet-bg-content
+    .content-bg-1
+    .content-bg-2
+    .content-block-content 
+      .about-title-block
+        .about-title
+          {{ object.title }}
+
+
+        .about-text-block
+          {{object.content|safe}}

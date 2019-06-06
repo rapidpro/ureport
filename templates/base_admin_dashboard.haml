@@ -1,6 +1,6 @@
 - extends "frame_v2.html"
 
-- load smartmin i18n thumbnail
+- load smartmin i18n thumbnail ureport
 
 -block body-content
   %section.section.is-paddingless.is-marginless
@@ -167,12 +167,16 @@
             .level-left
               %a.level-item.small-footer-link(href="{% url 'v2.public.about' %}")
                 - trans "About"
-              %a.level-item.small-footer-link(href="{% url 'v2.public.join' %}")
-                - trans "Engage"
               %a.level-item.small-footer-link(href="{% url 'v2.public.ureporters' %}")
-                - trans "U-Reporters"
-              %a.level-item.small-footer-link(href="{% url 'v2.public.added' %}")
-                - trans "FAQ"
+                - trans "Engagement"
+              - if org|config:"has_jobs"
+                %a.level-item.small-footer-link(href="{% url 'v2.public.jobs' %}")
+                  - trans "Jobs"
+
+              - for custom_page in additional_menu|slice:":3"
+                %a.level-item.small-footer-link(href="{% url 'v2.public.custom_page' custom_page.link %}")
+                  {{custom_page.title}}
+
               %a.level-item.button.is-outlined.small-footer-link(href="{% url 'v2.public.join' %}")
                 - trans "Join Now"
 

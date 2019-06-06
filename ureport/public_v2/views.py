@@ -6,6 +6,7 @@ import json
 
 import six
 from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.stories.models import Story
 from smartmin.views import SmartReadView, SmartTemplateView
 
@@ -99,15 +100,22 @@ class NewsView(SmartTemplateView):
         return HttpResponse(json.dumps(output_json))
 
 
-class AdditionalMenu(SmartTemplateView):
-    template_name = "public_v2/additional_menu.haml"
+class CustomPage(SmartReadView):
+    template_name = "public_v2/custom_page.html"
+    model = DashBlock
+    slug_url_kwarg = "link"
 
-    def get_context_data(self, **kwargs):
-        context = super(AdditionalMenu, self).get_context_data(**kwargs)
+    def derive_queryset(self):
         org = self.request.org
+        try:
+            dashblock_type = DashBlockType.objects.get(slug="additional_menu")
+        except DashBlockType.DoesNotExist:
+            return DashBlock.objects.none()
 
-        context["org"] = org
-        return context
+        queryset = DashBlock.objects.filter(dashblock_type=dashblock_type, org=org, is_active=True)
+        queryset = queryset.order_by("-priority")
+
+        return queryset
 
 
 class AboutView(SmartTemplateView):
