@@ -793,6 +793,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://belize.ureport.in/count/",
     ),
     dict(
+		name = "Bolivia",
+		host = "//bolivia.ureport.in/",
+		flag = "flag_bo.png",
+		is_static = True,
+		count_link = "http://bolivia.ureport.in/count/",
+	),
+    dict(
         name="Bosnia and Herzegovina",
         host="//bih.ureport.in/",
         flag="flag_bs.png",
@@ -806,6 +813,13 @@ PREVIOUS_ORG_SITES = [
         is_static=True,
         count_link="http://brasil.ureport.in/count/",
     ),
+    dict(
+		name = "Ecuador",
+		host = "//ecuador.ureport.in/",
+		flag = "flag_ec.png",
+		is_static = True,
+		count_link = "http://ecuador.ureport.in/count/",
+	),
     dict(
         name="El Salvador",
         host="//elsalvador.ureport.in/",
