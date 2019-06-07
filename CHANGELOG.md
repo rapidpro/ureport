@@ -1,3 +1,52 @@
+v1.0.453
+----------
+ * Add India flag on the footer
+
+v1.0.452
+----------
+ * Merge pull request #409 from rapidpro/no-flow-def-use
+ * Use flow results metada for all poll flows
+
+v1.0.451
+----------
+ * Update rapidpro-python to 2.6.1
+
+v1.0.450
+----------
+ * Make flow metadate node uuids optional
+
+v1.0.449
+----------
+ * Merge pull request #408 from rapidpro/use-flow-metadata
+ * Update the rapidpro client
+ * Use the metadata only for flows that do not have rulesets on the definition
+ * Use flow results metadata to create questions and their categories
+ * Merge pull request #407 from rapidpro/verify-locales
+ * update uz locale file
+ * fix warnings, update locale files, set up travis to catch errors / missing rebuilds
+ * Update CHANGELOG.md for v1.0.448
+ * Increase contact pull lock timeout to 12 hours
+
+v1.0.448
+----------
+ * Increase contact pull lock timeout to 12 hours
+
+v1.0.447
+----------
+ * Merge pull request #405 from rapidpro/ureport-v2-1
+ * Add missing file
+ * Disable some tests temporaly
+ * Add /v2 urls for public site, site under construction page
+ * Merge pull request #403 from Ilhasoft/fix/error-pages
+ * Change U-Report Logo
+ * Merge pull request #79 from rapidpro/master
+ * Merge pull request #402 from Ilhasoft/hotfix/news-date
+ * Fix tests to support new date format localized
+ * Fix spacing between imports and code
+ * Refactor created date for News by using the localization to format it
+ * Merge pull request #78 from rapidpro/master
+ * Merge pull request #76 from rapidpro/master
+
 v1.0.446
 ----------
  * Update FB customerchat plugin SDK

@@ -1,0 +1,41 @@
+- extends "public_base_v2.html"
+
+- load dashblocks thumbnail i18n
+- block hero
+  - load_qbs request.org 'additional_menu'
+
+  - for d_block in additional_menu|slice:":1"
+    .hero-container
+      .hero-dark-container
+        .container
+          .hero-small-background
+          .row
+            .col-md-7
+              .hero-dark-content
+
+  - block banner
+    {{ block.super }}
+
+- block content
+  - load_qbs request.org 'additional_menu'
+  - for d_block in additional_menu|slice:":5"
+    .section
+      %h1.level-1-title
+        {{d_block.title}}
+      .level-1-title-description.secondary-color
+      .ureporters-text
+        {{d_block.content|safe}}
+
+- block extra-style
+  - load_qbs request.org 'additional_menu'
+  {{ block.super }}
+  :css
+   .hero-container {
+      {% for d_block in additional_menu|slice:":1" %}
+      {% thumbnail d_block.image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }

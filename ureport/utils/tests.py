@@ -143,6 +143,14 @@ class UtilsTest(UreportTest):
                         archived=False,
                         expires=720,
                         created_on=json_date_to_datetime("2015-04-08T12:48:44.320Z"),
+                        results=[
+                            Flow.FlowResult.create(
+                                key="color",
+                                name="Color",
+                                categories=["Orange", "Blue", "Other", "Nothing"],
+                                node_uuids=["42a8e177-9e88-429b-b70a-7d4854423092"],
+                            )
+                        ],
                         runs=Flow.Runs.create(completed=120, active=50, expired=100, interrupted=30),
                     )
                 ]
@@ -163,6 +171,14 @@ class UtilsTest(UreportTest):
                     runs=300,
                     completed_runs=120,
                     archived=False,
+                    results=[
+                        dict(
+                            key="color",
+                            name="Color",
+                            categories=["Orange", "Blue", "Other", "Nothing"],
+                            node_uuids=["42a8e177-9e88-429b-b70a-7d4854423092"],
+                        )
+                    ],
                 )
 
             self.assertEqual(flows, expected)

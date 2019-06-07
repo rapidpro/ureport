@@ -1,0 +1,127 @@
+- extends "public_base_v2.html"
+
+- load dashblocks thumbnail ureport i18n compress
+
+-block subtitle
+  &nbsp;-
+  -trans "Jobs"
+
+- block hero
+  #fb-root
+  - load_qbs request.org 'jobs'
+    - for d_block in jobs|slice:":1"
+      .hero-container
+        .hero-dark-container
+          .container
+            .hero-small-background
+            .row
+              .col-md-7
+                .hero-dark-content
+                  .hero-title.hero-top-title.primary-bg-color
+                    - trans "JOBS"
+                  .hero-description
+                    {{ d_block.content }}
+                  .hero-info
+                    - trans "Scroll to see job details"
+
+    - block banner
+      {{ block.super }}
+
+- block content
+  -if not job_sources
+    No job sources
+
+  -if job_sources
+    .row
+      - for source in job_sources
+        -if is_iorg
+          .col-md-4
+            %a{href:"{{ source.source_url }}"}
+              {{ source.title }}
+
+        -else
+          .col-md-4{class:"{% cycle 'small-pad-right' 'small-pad-middle' 'small-pad-left' %}"}
+            .social-container
+              .social-inner
+                -if source.source_type == 'F'
+                  .social-title.facebook-bg-color
+                    {{ source.title|upper }}
+                  .social-content{style:"padding-left:0px"}
+                    .fb-like-box{data-href:'{{ source.source_url }}', data-width:"315", data-height:"570", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+
+                -elif source.source_type == 'T'
+                  .social-title.twitter-bg-color
+                    {{ source.title|upper }}
+                  .social-content
+                    %a.twitter-follow-button{ href:'{{ source.source_url }}', data-show-count:"true", data-lang:"en"}
+
+                    %a.twitter-timeline{ href:'{{ source.source_url }}', data-widget-id:'{{ source.widget_id }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+
+                  %a.social-link.tweet-button{href:'https://twitter.com/intent/tweet?screen_name=#{ source.get_username }'}
+                    - trans "Tweet to"
+                    @{{ source.get_username }}
+                    {{ org|org_arrow_link }}
+
+                -elif source.source_type == 'R'
+                  .social-title.rss-bg-color
+                    {{ source.title|upper }}
+                  .social-content
+                    %div{style:"height:530px; overflow:auto"}
+                      - for entry in source.get_entries
+                        .rss-card-content
+                          .rss-entry-title
+                            {{ entry.title }}
+                          .rss-entry-teaser
+                            {{ entry.summary|safe }}
+                          .rss-entry-link
+                            %a{href:"{{ entry.link }}"}
+                              -trans "Read more"
+
+                  %a.social-link{href:"{{ source.get_return_page }}"}
+                    - trans "Visit"
+                    {{ source.title|title }}
+                    {{ org|org_arrow_link }}
+
+- block extra-style
+  {{ block.super }}
+  - load_qbs request.org 'jobs'
+  :css
+    .hero-container {
+      {% for d_block in jobs|slice:":1"%}
+      {% thumbnail d_block.image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }
+
+    .hero-small-background {
+      {% for d_block in jobs|slice:":1"%}
+      {% thumbnail d_block.image "768x508" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }
+
+    .summary {
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    span.link {
+      padding:10px;
+    }
+
+    span.link > a {
+      color: #fff;
+
+    }
+
+    .social-container {
+      background-color: #FFFFFF;
+      max-width: 360px;
+      margin-bottom: 10px;
+    }

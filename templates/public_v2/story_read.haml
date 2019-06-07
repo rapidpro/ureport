@@ -1,0 +1,174 @@
+- extends "public_base_v2.html"
+- load thumbnail compress i18n ureport
+
+-block subtitle
+  &nbsp;- {{ story.title }}
+
+- block hero
+  .hero-container
+    .hero-dark-container
+      .container
+        .hero-small-background
+        .col-md-6
+          .story-hero
+            .hero-title.hero-top-title.primary-bg-color
+              {{ story.category.name|upper }}
+            .story-hero-title
+              {{ story.title }}
+            .story-hero-date
+              {{ story.created_on|date }}
+            -if story.get_written_by
+              .hero-author
+                - trans "BY"
+                {{ story.get_written_by|upper }}
+            .hero-info
+              - trans "Scroll to read more"
+
+  - block banner
+    {{ block.super }}
+
+
+- block content
+  .row
+    .col-md-8.right-col-border
+      .section
+        %h1.level-1-title
+          - trans "STORY CONTINUES"
+        .level-1-title-description.secondary-color
+
+        .card.card-padding
+          .story-details
+            - if story.video_id
+              .block-video.pull-right
+                %iframe{ width:"360", height:"270", src:"//www.youtube.com/embed/{{story.video_id}}", frameborder:"0"}
+            {{ story.content|safe }}
+
+      - if not is_iorg and story.audio_link
+        .section
+          %h1.level-1-title
+            -trans "AUDIO"
+          .card.card-padding
+            <audio src="{{ story.audio_link}}" preload="auto" />
+
+
+    .col-md-4
+      .section
+        %h1.level-1-title
+          - trans "RELATED POLLS"
+        .level-1-title-description.secondary-color
+        - if not related_polls
+          .card.card-padding.no-content
+            - trans "No related polls."
+        .card.card-padding
+          - for related_poll in related_polls|slice:"5"
+            .related-poll
+              %a{ href: "{% url 'public.poll_read' related_poll.id %}" }
+                {{ related_poll.title }}
+      %hr.aaa
+      .section
+        %h1.level-1-title
+          - trans "FEATURED IMAGES"
+
+        - if not story_featured_images
+          .card.card-padding.no-content
+            - trans "No featured images."
+        - else
+          .card.card-padding
+            .story-featured-images-list
+              - for featured_image in story_featured_images
+                .story-featured-image{style:"{% if not forloop.last %}margin-bottom: 10px;{% endif %}"}
+                  {% thumbnail featured_image.image "1200x800" as im %}
+                  <a href="{{ im.url}}" data-lightbox="story-featured-image-garelly-{{ story.id }}">
+                  <img width="100%" src="{{im.url}}" />
+                  </a>
+                  {% endthumbnail %}
+
+      %hr.aaa
+      .section
+        %h1.level-1-title
+          - trans "RELATED STORIES"
+        .level-1-title-description.secondary-color
+        - if not related_stories
+          .card.card-padding.no-content
+            - trans "No related stories."
+
+        - for story in related_stories|slice:"3"
+          .card.card-padding{ style: "margin-bottom: 15px" }
+            .related-story
+              .related-story-image
+                - if story.get_image
+                  {% thumbnail story.get_image "400x300" crop="center" as im %}
+                  <img width="100%" src="{{im.url}}" />
+                  {% endthumbnail %}
+                - else
+                  <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+              .related-story-title.primary-color
+                {{ story.title|upper }}
+              .related-story-date
+                {{ story.created_on|date }}
+              .related-story-teaser
+                {{ story.short_teaser|safe }}
+              %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
+                - trans "READ MORE"
+                {{ org|org_arrow_link }}
+
+  %hr.aaa
+  - include "public/archived_stories.html"
+
+- block extra-style
+  {{ block.super }}
+  :css
+    .hero-container {
+      {% thumbnail story.get_category_image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+    }
+
+    .hero-small-background {
+      {% thumbnail story.get_category_image "678x508" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+    }
+
+    .block-video {
+    margin-left: 10px;
+    }
+
+    .audiojs {
+      width: 100%;
+    }
+
+    .audiojs .play-pause {
+      min-width: 40px;
+    }
+
+    .audiojs .scrubber {
+      min-width: calc(100% - 170px);
+      width: initial;
+    }
+
+    .audiojs .time {
+      float: right;
+    }
+
+    .story-details img {
+      max-width: 100%;
+    }
+
+-block extra-script
+  {{ block.super }}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/audiojs/audio.min.js"></script>
+  <script>
+    audiojs.events.ready(function() {
+    var as = audiojs.createAll();
+    as
+    });
+  </script>
+
+  {% compress js %}
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/archived_stories.coffee" />
+  {% endcompress %}

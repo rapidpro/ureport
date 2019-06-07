@@ -320,6 +320,10 @@ class RapidProBackend(BaseBackend):
             flow_json["archived"] = flow.archived
             flow_json["runs"] = flow.runs.active + flow.runs.expired + flow.runs.completed + flow.runs.interrupted
             flow_json["completed_runs"] = flow.runs.completed
+            flow_json["results"] = [
+                {"key": elt.key, "name": elt.name, "categories": elt.categories, "node_uuids": elt.node_uuids}
+                for elt in flow.results
+            ]
 
             all_flows[flow.uuid] = flow_json
         return all_flows
@@ -339,37 +343,19 @@ class RapidProBackend(BaseBackend):
         return flow_definition
 
     def update_poll_questions(self, org, poll, user):
-        flow_definition = self.get_definition(org, poll.flow_uuid)
+        api_flow = poll.get_flow()
 
-        if flow_definition is None:
-            return
+        flow_results = api_flow["results"]
 
-        base_language = flow_definition["base_language"]
-
-        poll.base_language = base_language
-        poll.save()
-
-        flow_rulesets = flow_definition["rule_sets"]
-
-        for ruleset in flow_rulesets:
-            label = ruleset["label"]
-            ruleset_uuid = ruleset["uuid"]
-            ruleset_type = ruleset["ruleset_type"]
+        for result in flow_results:
+            label = result["name"]
+            ruleset_uuid = result["node_uuids"][-1]
+            ruleset_type = "wait_message"
 
             question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
 
-            rapidpro_rules = []
-            for rule in ruleset["rules"]:
-                category = rule["category"][base_language]
-                rule_uuid = rule["uuid"]
-                rapidpro_rules.append(rule_uuid)
-
-                PollResponseCategory.update_or_create(question, rule_uuid, category)
-
-            # deactivate if corresponding rules are removed
-            PollResponseCategory.objects.filter(question=question).exclude(rule_uuid__in=rapidpro_rules).update(
-                is_active=False
-            )
+            for category in result["categories"]:
+                PollResponseCategory.update_or_create(question, None, category)
 
     def pull_fields(self, org):
         client = self._get_client(org, 2)

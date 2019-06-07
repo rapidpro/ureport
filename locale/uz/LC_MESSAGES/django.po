@@ -1,385 +1,286 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-10 09:35+0000\n"
+"POT-Creation-Date: 2019-05-15 19:34+0000\n"
 "PO-Revision-Date: 2018-08-22 11:40+0000\n"
 "Last-Translator: Jahongir Abdurahmonov <jabdurahmonov@unicef.org>\n"
 "Language-Team: Uzbek (http://www.transifex.com/rapidpro/ureport/language/uz/)\n"
+"Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uz\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: dash/categories/models.py:20
 msgid "The name of this category"
 msgstr "Ushbu toifaning nomi"
 
-#: dash/categories/models.py:23
 msgid "An optional image that can describe this category"
 msgstr "Ushbu toifani tasvirlay oladigan ixtiyoriy surat"
 
-#: dash/categories/models.py:26 ureport/polls/models.py:65
 msgid "The organization this category applies to"
 msgstr "Ushbu toifa taalluqli bo'lgan tashkilot"
 
-#: dash/categories/models.py:47 templates/frame.haml:285
-#: templates/frame.haml:292
 msgid "Categories"
 msgstr "Toifalar"
 
-#: dash/categories/models.py:53 dash/stories/models.py:129
-#: ureport/polls/models.py:639
 msgid "The name to describe this image"
 msgstr "Ushbu suratni tasvirlash uchun nom"
 
-#: dash/categories/models.py:56
 msgid "The category this image represents"
 msgstr "Mazkur surat ifodalovchi toifa"
 
-#: dash/categories/models.py:59 dash/stories/models.py:135
-#: ureport/polls/models.py:645
 msgid "The image file to use"
 msgstr "Ishlatiladigan surat-fayli"
 
-#: dash/dashblocks/models.py:19
 msgid "The human readable name for this content type"
 msgstr "Mazkur kontent turi uchun kishi tushunishi qulay bo'lgan nom"
 
-#: dash/dashblocks/models.py:22
 msgid "The slug to idenfity this content type, used with the template tags"
 msgstr "Mazkur kontent turini aniqlash uchun, andozaviy teglar bilan birga ishlatiladigan, url-manzilini tasvirlovchi qism"
 
-#: dash/dashblocks/models.py:26
-msgid ""
-"A description of where this content type is used on the site and how it will"
-" be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgstr "Sahifaning qayerida mazkur kontent turi qo'llanilishi va u qay tarzda namoyish etilishining ta'rifi"
 
-#: dash/dashblocks/models.py:31
 msgid "Whether this content should include a title"
 msgstr "Mazkur kontentda sarlavha bo'lishi kerakmi"
 
-#: dash/dashblocks/models.py:34
 msgid "Whether this content should include an image"
 msgstr "Mazkur kontentda surat bo'lishi kerakmi"
 
-#: dash/dashblocks/models.py:37
 msgid "Whether this content should use a rich HTML editor"
 msgstr "Mazkur kontenda keng imkoniyatli HTML muharriridan foydalanish kerakmi"
 
-#: dash/dashblocks/models.py:40
 msgid "Whether this content should include a summary field"
 msgstr "Mazkur kontentda hulosa qatori bo'lishi kerakmi"
 
-#: dash/dashblocks/models.py:43
 msgid "Whether this content should include a link"
 msgstr "Mazkur kontentda link bo'lishi kerakmi"
 
-#: dash/dashblocks/models.py:46
-msgid ""
-"Whether this content should allow upload of additional images, ie a gallery"
+msgid "Whether this content should allow upload of additional images, ie a gallery"
 msgstr "Mazkur kontent qo'shimcha suratlarni, ya'ni galereyani, yuklash imkonini berishi kerakmi"
 
-#: dash/dashblocks/models.py:50
 msgid "Whether this content has a color field"
 msgstr "Mazkur kontenda rang qatori bormi"
 
-#: dash/dashblocks/models.py:53
 msgid "Whether this content should allow setting a YouTube id"
 msgstr "Mazkur kontent YouTube identifikatorini sozlash imkonini berishi kerakmi"
 
-#: dash/dashblocks/models.py:56
 msgid "Whether this content should allow tags"
 msgstr "Mazkur kontentda teglar bo'lishi kerakmi"
 
-#: dash/dashblocks/models.py:69
 msgid "Content Type"
 msgstr "Kontent turi"
 
-#: dash/dashblocks/models.py:70
 msgid "The category, or type for this content block"
 msgstr "Ushbu kontent to'plami uchun toifa yoki tur"
 
-#: dash/dashblocks/models.py:74
 msgid "The title for this block of content, optional"
 msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
 
-#: dash/dashblocks/models.py:77
 msgid "The summary for this item, should be short"
 msgstr "Ushbu elementning qisqacha ta'rifi, qisqa bo'lishi kerak"
 
-#: dash/dashblocks/models.py:80
 msgid "The body of text for this content block, optional"
 msgstr "Ushbu kontent to'plami uchun matnning asosiy qismi, ixtiyoriy"
 
-#: dash/dashblocks/models.py:83
 msgid "Any image that should be displayed with this content block, optional"
 msgstr "Mazkur kontent to'plami bilan birga namoyish etiladigan har qanday surat, ixtiyoriy"
 
-#: dash/dashblocks/models.py:87
 msgid "A background color to use for the image, in the format: #rrggbb"
 msgstr "Ushbu surat uchun qo'llaniladigan orqa fon rangi, #rrggbb formatida"
 
-#: dash/dashblocks/models.py:91
 msgid "Any link that should be associated with this content block, optional"
 msgstr "Ushbu kontent to'plamiga ulanishi kerak bo'lgan har qanday link, ixtiyoriy"
 
-#: dash/dashblocks/models.py:95 ureport/news/models.py:42
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "Mazkur elementga bog'lanishi zarur bo'lgan YouTube videolavhasining identifikatori"
 
-#: dash/dashblocks/models.py:99
-msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more"
-" advanced filtering, optional"
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
 msgstr "Ushbu kontent to'plami uchun, oraliq bilan ajratilgan har qanday teglar yanada chuqur filtrlash uchun ishlatilishi mumkin, ixtiyoriy"
 
-#: dash/dashblocks/models.py:103
 msgid "The priority for this block, higher priority blocks come first"
 msgstr "Ushbu to'plam uchun ustivorlik, ustivorligi yuqori bo'lgan to'plamlar avval keladi"
 
-#: dash/dashblocks/models.py:108
 msgid "The organization this content block belongs to"
 msgstr "Mazkur kontent to'plami qarashli bo'lgan tashkilot"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:8
 msgid "Gallery"
 msgstr "Galereya"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:17
 msgid "Add Image"
 msgstr "Surat qo'shish"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
-#: smartmin/templates/smartmin/list.html:14
 msgid "Search"
 msgstr "Izlash"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
-#: smartmin/templates/smartmin/list.html:25 templates/polls/poll_list.haml:6
 msgid "Add"
 msgstr "Qo'shish"
 
-#: dash/dashblocks/views.py:16 templates/frame.haml:235
 msgid "Content Types"
 msgstr "Kontent turlari"
 
-#: dash/dashblocks/views.py:118
 msgid "Content Blocks"
 msgstr "Kontent to'plami"
 
-#: dash/dashblocks/views.py:120
 #, python-format
 msgid "%s Blocks"
-msgstr "%lar to'plami"
+msgstr "%s to'plami"
 
-#: dash/dashblocks/views.py:158 smartmin/views.py:1105
 #, python-format
 msgid "Edit %s"
-msgstr "%larni tahrir etish"
+msgstr "%s larni tahrir etish"
 
-#: dash/dashblocks/views.py:182 smartmin/views.py:1328
 #, python-format
 msgid "Create %s"
-msgstr "%larni yaratish"
+msgstr "%s larni yaratish"
 
-#: dash/dashblocks/views.py:184
 msgid "Create Content Block"
 msgstr "Kontent to'plamini yaratish"
 
-#: dash/orgs/forms.py:12
 msgid "Your first name"
 msgstr "Ismingiz"
 
-#: dash/orgs/forms.py:13
 msgid "Your last name"
 msgstr "Familiyangiz"
 
-#: dash/orgs/forms.py:14
 msgid "Your email address"
 msgstr "Elektron pochta manzilingiz"
 
-#: dash/orgs/forms.py:17
 msgid "Your password, at least eight letters please"
 msgstr "Parolingiz, iltimos, kamida sakkizta harfdan iborat bo'lsin"
 
-#: dash/orgs/forms.py:23
 msgid "That email address is already used"
 msgstr "Bu elektron pochta manzili avval ishlatilgan"
 
-#: dash/orgs/forms.py:30
 msgid "Passwords must contain at least 8 letters."
 msgstr "Parol kamida 8 harfdan tarkib topgan bo'lishi shart"
 
-#: dash/orgs/forms.py:49
 msgid "This domain is used for subdomains"
 msgstr "Bu domen kichik domenlar uchun qo'llaniladi"
 
-#: dash/orgs/models.py:36 dash/orgs/models.py:365 ureport/assets/models.py:19
 msgid "Name"
 msgstr "Nomi"
 
-#: dash/orgs/models.py:37
 msgid "The name of this organization"
 msgstr "Ushbu tashkilot nomi"
 
-#: dash/orgs/models.py:41
 msgid "The logo that should be used for this organization"
 msgstr "Ushbu tashkilot uchun qo'llaniladigan logo"
 
-#: dash/orgs/models.py:44 dash/orgs/views.py:297
 msgid "Administrators"
 msgstr "Administratorlar"
 
-#: dash/orgs/models.py:45
 msgid "The administrators in your organization"
 msgstr "Tashkilotingizdagi administratorlar"
 
-#: dash/orgs/models.py:48
 msgid "Viewers"
 msgstr "Kuzatib boruvchilar"
 
-#: dash/orgs/models.py:49
 msgid "The viewers in your organization"
 msgstr "Tashkilotingizdagi kuzatib boruvchilar"
 
-#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
-#: dash/orgs/views.py:298
 msgid "Editors"
 msgstr "Muharrirlar"
 
-#: dash/orgs/models.py:53
 msgid "The editors in your organization"
 msgstr "Tashkilotingizdagi muharrirlar"
 
-#: dash/orgs/models.py:56
 msgid "Language"
 msgstr "Til"
 
-#: dash/orgs/models.py:57
 msgid "The main language used by this organization"
 msgstr "Mazkur tashkilotda ishlatiladigan asosiy til"
 
-#: dash/orgs/models.py:60
 msgid "Subdomain"
 msgstr "Kichik domen"
 
-#: dash/orgs/models.py:61
 msgid "This subdomain is not available"
 msgstr "Ushbu kichik domen mavjud emas"
 
-#: dash/orgs/models.py:62
 msgid "The subdomain for this organization"
 msgstr "Ushbu tashkilot uchun kichik domen"
 
-#: dash/orgs/models.py:65
 msgid "Domain"
 msgstr "Domen"
 
-#: dash/orgs/models.py:66
 msgid "This domain is not available"
 msgstr "Ushbu domen mavjud emas"
 
-#: dash/orgs/models.py:67
 msgid "The custom domain for this organization"
 msgstr "Ushbu tashkilotning xususiy domeni"
 
-#: dash/orgs/models.py:70
 msgid "Timezone"
 msgstr "Vaqt zonasi"
 
-#: dash/orgs/models.py:71
 msgid "The timezone your organization is in."
 msgstr "Tashkilotingiz turgan vaqt zonasi"
 
-#: dash/orgs/models.py:75
-msgid "The API token for the RapidPro account this dashboard is tied to"
-msgstr "Ushbu qayd yo'zuvlarini kuzatish paneli bog'langan RapidPro akkaunti uchun amaliy dasturlash interfeysi tokeni"
-
-#: dash/orgs/models.py:80
-msgid ""
-"JSON blob used to store configuration information associated with this "
-"organization"
+msgid "JSON blob used to store configuration information associated with this organization"
 msgstr "Mazkur tashkilot bilan bog'liq bo'lgan konfiguratsiya ma'lumotlarini saqlash uchun qo'llaniladigan JSON blob"
 
-#: dash/orgs/models.py:295
 msgid "Administrator"
 msgstr "Administrator"
 
-#: dash/orgs/models.py:296
 msgid "Editor"
 msgstr "Muharrir"
 
-#: dash/orgs/models.py:297
 msgid "Viewer"
 msgstr "Kuzatib boruvchi"
 
-#: dash/orgs/models.py:302 dash/orgs/models.py:361 ureport/assets/models.py:16
-#: ureport/contacts/models.py:44
 msgid "Org"
 msgstr "Tashk"
 
-#: dash/orgs/models.py:303
 msgid "The organization to which the account is invited to view"
 msgstr "Kuzatib borish uchun akkaunt taklif etilgan tashkilot"
 
-#: dash/orgs/models.py:306
 msgid "Email"
 msgstr "Elektron pochta"
 
-#: dash/orgs/models.py:307
 msgid "The email to which we send the invitation of the viewer"
 msgstr "Kuzatib boruvchi taklifnomasini yuboradigan elektron pochta"
 
-#: dash/orgs/models.py:310
 msgid "Secret"
 msgstr "Maxfiy"
 
-#: dash/orgs/models.py:311
 msgid "a unique code associated with this invitation"
 msgstr "ushbu taklifnomaga taalluqli noyob kod"
 
-#: dash/orgs/models.py:314
 msgid "User Role"
 msgstr "Foydalanuvchi Roli"
 
-#: dash/orgs/models.py:345
 #, python-format
 msgid "%s Invitation"
 msgstr "%s Taklifnoma"
 
-#: dash/orgs/models.py:357 ureport/assets/models.py:11
 msgid "Banner"
 msgstr "Banner"
 
-#: dash/orgs/models.py:358 ureport/assets/models.py:12
 msgid "Pattern"
 msgstr "Namuna"
 
-#: dash/orgs/models.py:362
 msgid "The organization in which the image will be used"
 msgstr "Surat qo'llaniladigan tashkilot"
 
-#: dash/orgs/models.py:366
 msgid "The name to describe this background"
 msgstr "Ushbu fonni tasvirlovchi nom"
 
-#: dash/orgs/models.py:369
 msgid "Background type"
 msgstr "Fon turi"
 
-#: dash/orgs/models.py:371 ureport/assets/models.py:24
 msgid "The image file"
 msgstr "Surat fayli"
 
-#: dash/orgs/templates/orgs/email/invitation_email.html:9
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The API token for this backend"
+msgstr "Ushbu element uchun sarlavha"
+
 #, python-format
 msgid ""
 "\n"
@@ -389,209 +290,165 @@ msgid ""
 "  "
 msgstr ""
 
-#: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
 msgid "Edit"
 msgstr "Tahrir qilish"
 
-#: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "Foydalanuvchilarni boshqarish"
+
 msgid "Manage Users"
 msgstr "Foydalanuvchilarni boshqarish"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:13
 msgid "Accounts"
 msgstr "Akkauntlar"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:16
 msgid "Admins"
 msgstr "Administratorlar"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:22
-#: smartmin/templates/smartmin/delete_confirm.html:26
-#: smartmin/templates/smartmin/update.html:10
 msgid "Remove"
 msgstr "Olib tashlash"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:29
 msgid "You must have at least one administator"
 msgstr "Sizda eng kamida bitta administrator bo'lishi lozim"
 
-#: dash/orgs/views.py:168
 msgid "Select your Organization"
 msgstr "O'z tashkilotingizni tanlang"
 
-#: dash/orgs/views.py:179
-msgid ""
-"Your account is not associated to an organization. Please Contact the "
-"adminstrator."
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgstr "Sizning akkauntingizngig tashkilotga bog'liqlik yeri yo'q. Iltimos administrator bilan bog'laning"
 
-#: dash/orgs/views.py:219 dash/orgs/views.py:229
 msgid "Your Organization"
 msgstr "Sizning Tashkilotingiz"
 
-#: dash/orgs/views.py:226
-msgid "Not Set"
-msgstr "Sozlanmagan"
-
-#: dash/orgs/views.py:296
 msgid "Invite people to your organization"
 msgstr "Tashkilotingizga odamlarni taklif eting"
 
-#: dash/orgs/views.py:299
 msgid "User group"
 msgstr "Foydalanuvchi guruhi"
 
-#: dash/orgs/views.py:310
 msgid "One of the emails you entered is invalid."
 msgstr "Siz kiritgan elektron pochtalardan biri noto'g'ri"
 
-#: dash/orgs/views.py:323
 #, python-format
 msgid "Manage %(name)s Accounts"
-msgstr "%(ism)lar akkauntlarini boshqarish"
+msgstr "%(name)s lar akkauntlarini boshqarish"
 
-#: dash/orgs/views.py:437 smartmin/views.py:1299
 msgid "Create"
 msgstr "Yaratish"
 
-#: dash/orgs/views.py:445
-msgid ""
-"Your invitation link is invalid. Please contact your organization "
-"administrator."
+msgid "Your invitation link is invalid. Please contact your organization administrator."
 msgstr "Sizning taklifnoma linkingiz noto'g'ri. Iltimos tashkilotingiz administratori bilan bog'laning"
 
-#: dash/orgs/views.py:501 dash/orgs/views.py:546
 #, python-format
 msgid "Join %(name)s"
-msgstr "%(ism)ga qo'shiling"
+msgstr "%(name)s ga qo'shiling"
 
-#: dash/orgs/views.py:523
 msgid "Join"
 msgstr "Qo'shiling"
 
-#: dash/orgs/views.py:532
-msgid ""
-"Your invitation link has expired. Please contact your organization "
-"administrator."
+msgid "Your invitation link has expired. Please contact your organization administrator."
 msgstr "Sizning taklifnoma linkingiz muddati tugadi. Iltimos tashkilotingiz administratori bilan bog'laning"
 
-#: dash/orgs/views.py:639
 msgid "Task"
 msgstr "Topshiriq"
 
-#: dash/orgs/views.py:643
 msgid "Tasks"
 msgstr "Topshiriqlar"
 
-#: dash/stories/models.py:13
 msgid "The title for this story"
 msgstr "Ushbu hikoya uchun sarlavha"
 
-#: dash/stories/models.py:17
 msgid "Whether this story is featured"
 msgstr "Mazkur hikoya bayoniymi"
 
-#: dash/stories/models.py:20
 msgid "The summary for the story"
 msgstr "Hikoyaning qisqacha bayoni"
 
-#: dash/stories/models.py:22
 msgid "The body of text for the story"
 msgstr "Hikoya uchun asosiy matn"
 
-#: dash/stories/models.py:24
 msgid "The writer of the story"
 msgstr "Hikoya muallifi"
 
-#: dash/stories/models.py:27
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Mazkur hikoyani chop etish uchun mp3 fayliga link"
 
-#: dash/stories/models.py:31
-msgid ""
-"The id of the YouTube video that should be linked to this story (this is the"
-" text that comes afer v= and before & in the YouTube URL)"
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "Ushbu hikoyaga ulanishi zarur bo'lgan YouTube videolavhasining identifikatori (bu v= dan keyin va YouTube URL dan avval va ichida keladigan matn)"
 
-#: dash/stories/models.py:37
-msgid ""
-"Any tags for this story, separated by spaces, can be used to do more "
-"advanced filtering, optional"
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
 msgstr "Mazkur hikoya uchun, oraliq bilan ajratilgan har qanday teglar yanada chuqur filtrlash uchun ishlatilishi mumkin, ixtiyoriy"
 
-#: dash/stories/models.py:42
 msgid "The category for this story"
 msgstr "Ushbu hikoya uchun toifa"
 
-#: dash/stories/models.py:46
 msgid "The organization this story belongs to"
 msgstr "Ushbu hikoya qarashli bo'lgan tashkilot"
 
-#: dash/stories/models.py:124 templates/frame.haml:329
-#: templates/frame.haml:481 templates/public/stories.haml:7
 msgid "Stories"
 msgstr "Hikoyalar"
 
-#: dash/stories/models.py:132
 msgid "The story to associate to"
 msgstr "Bog'lash uchun hikoya"
 
-#: dash/stories/views.py:59
 msgid "Yes"
 msgstr "Ha"
 
-#: dash/stories/views.py:60
 msgid "No"
 msgstr "Yo'q"
 
-#: dash/stories/views.py:79
 msgid "Story Images"
 msgstr "Hikoya suratlari"
 
-#: dash/stories/views.py:91 dash/stories/views.py:99
-#: ureport/polls/views.py:164 ureport/polls/views.py:171
 #, python-format
 msgid "Image %d"
-msgstr "% surati"
+msgstr "%d surati"
 
-#: dash/stories/views.py:92
 msgid "Image to display on story page and in previews. (optional)"
 msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan surat. (ixtiyoriy)"
 
-#: dash/stories/views.py:100
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan surat. (ixtiyoriy)"
 
-#: smartmin/templates/smartmin/delete_confirm.html:11
 msgid "Remove Item?"
 msgstr "Element olib tashlansinmi?"
 
-#: smartmin/templates/smartmin/delete_confirm.html:13
 #, python-format
 msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
-msgstr "<b>%(object)s</b>\n ni olib tashlashga ishonchingiz komilmi?"
+msgstr ""
+"\n"
+"<b>%(object)s</b>\n"
+" ni olib tashlashga ishonchingiz komilmi?"
 
-#: smartmin/templates/smartmin/delete_confirm.html:17
-msgid ""
-"Once it is removed, it will be gone forever. There is no way to undo this "
-"operation."
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Olib tashlasangiz, uni keyin tiklab bo'lmaydi. Ushbu amaliyotni ortga qaytarish imkoni umuman bo'lmaydi."
 
-#: smartmin/templates/smartmin/delete_confirm.html:24
-#: smartmin/templates/smartmin/form.html:50
-#: smartmin/templates/smartmin/update.html:8
-#: templates/jobs/jobsource_create.haml:33
 msgid "Cancel"
 msgstr "Bekor qilish"
 
-#: smartmin/templates/smartmin/list.html:79
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
 msgid ""
 "\n"
-"\t\t%(counter)s result\n"
+"\t %(counter)s result\n"
 "\t"
 msgid_plural ""
 "\n"
@@ -599,7 +456,6 @@ msgid_plural ""
 "        "
 msgstr[0] "%(hisoblagich) natijalari\n"
 
-#: smartmin/templates/smartmin/list.html:85
 #, python-format
 msgid ""
 "\n"
@@ -607,707 +463,541 @@ msgid ""
 "\t"
 msgstr ""
 
-#: smartmin/templates/smartmin/list.html:95
-#: smartmin/templates/smartmin/list.html:97
 msgid "Previous"
 msgstr "Avvalgisi"
 
-#: smartmin/templates/smartmin/list.html:128
-#: smartmin/templates/smartmin/list.html:130
-#: templates/jobs/jobsource_create.haml:30
 msgid "Next"
 msgstr "Navbatdagisi"
 
-#: smartmin/templates/smartmin/read.html:13
 msgid "edit"
 msgstr "tahrir qilish"
 
-#: smartmin/templates/smartmin/users/login.html:10
-#: templates/smartmin/users/login.haml:14
 msgid "Sign in"
 msgstr "Ro'yxatdan o'tish"
 
-#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:429
-#: templates/frame.haml:606 templates/smartmin/users/login.haml:49
 msgid "Login"
 msgstr "Kirish"
 
-#: smartmin/templates/smartmin/users/login.html:35
-#: templates/smartmin/users/login.haml:54
 msgid "Forgot Password?"
 msgstr "Parol yoddan ko'tarildimi?"
 
-#: smartmin/templates/smartmin/users/user_expired.html:7
 msgid "Token Expired"
 msgstr "Token muddati tugadi"
 
-#: smartmin/templates/smartmin/users/user_failed.html:9
 msgid "Login Failure"
 msgstr "Kirish uddasidan chiqmadi"
 
-#: smartmin/templates/smartmin/users/user_failed.html:11
 #, python-format
 msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
-msgstr "Kechirasiz, siz hozir kira olmaysiz, chunki bizga %(uddaisdan chiqmadi_kirish_vaqt chegarasi)s noto'g'ri kirish harakatlari.\n kelib tushdi"
+msgstr ""
+"\n"
+"Kechirasiz, siz hozir kira olmaysiz, chunki bizga %(failed_login_limit)s noto'g'ri kirish harakatlari.\n"
+" kelib tushdi"
 
-#: smartmin/templates/smartmin/users/user_failed.html:18
 #, python-format
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
-msgstr "Iltimos, yana bir bor kirishga harakat qilishdan avval %(to'siq_intervali tugashi)s daqiqalarini kuting.\n"
+msgstr ""
+"\n"
+"Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqalarini kuting."
 
-#: smartmin/templates/smartmin/users/user_failed.html:25
-msgid ""
-"Alternatively, you can fill out the form below to have your password reset "
-"via e-mail."
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "Muqobil ravishda, elektron pochta orqali parolingizni qayta tiklash uchun, quyidagi shaklni to'ldirishingiz mumkin."
 
-#: smartmin/templates/smartmin/users/user_failed.html:27
 msgid "Please contact the website administrator to have your password reset."
 msgstr "Iltimos, parolingizni tiklash uchun, websahifa administratori bilan bog'laning"
 
-#: smartmin/templates/smartmin/users/user_failed.html:39
 msgid "Email Address"
 msgstr "Elektron pochta manzili"
 
-#: smartmin/templates/smartmin/users/user_failed.html:41
 msgid "Recover"
 msgstr "Tiklash"
 
-#: smartmin/templates/smartmin/users/user_forget.html:6
-msgid ""
-"Please enter the email address you used to sign up and we will help you "
-"recover your password."
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Iltimos, ro'yxatdan o'tish vaqtida ko'rsatgan elektron pochta manzilini kiriting va biz sizga parolingizni tiklashga yordam beramiz."
 
-#: smartmin/templates/smartmin/users/user_newpassword.html:7
 #, python-format
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
-msgstr "<kuchli>Parolingiz muddati tugadi.</kuchli> Sahifa qoidasiga muvofiq, har %(muddati tugagan-kun)s da siz yangi parol tanlashingiz kerak, hamda ushbu parollar avvalgi %(window_kunlar)s da ishlatilmagan bo'lishi lozim.\n"
+msgstr ""
+"\n"
+"<strong>Parolingiz muddati tugadi.</strong> Sahifa qoidasiga muvofiq, har %(expire_days)s da siz yangi parol tanlashingiz kerak, hamda ushbu parollar avvalgi %(window_days)s da ishlatilmagan bo'lishi lozim.\n"
+" "
 
-#: smartmin/users/views.py:28 smartmin/users/views.py:69
-#: smartmin/users/views.py:87 smartmin/users/views.py:137
-#: smartmin/users/views.py:243 smartmin/users/views.py:271
 msgid "New Password"
 msgstr "Yangi parol"
 
-#: smartmin/users/views.py:37 smartmin/users/views.py:75
-#: smartmin/users/views.py:110 smartmin/users/views.py:161
-msgid ""
-"Passwords must have at least 8 characters, including one uppercase, one "
-"lowercase and one number"
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
 msgstr "Parollar eng kamida 8 ta belgidan, jumladan bir katta, bir kichik va bir raqamdan, tarkib topgan bo'lishi shart"
 
-#: smartmin/users/views.py:79 smartmin/users/views.py:114
-#: smartmin/users/views.py:165
-msgid ""
-"You have used this password before in the past year, please use a new "
-"password."
+msgid "You have used this password before in the past year, please use a new password."
 msgstr "Siz bu parolni avvalroq, o'tgan yillarda qo'llagansiz, iltimos yangi paroldan foydalaning"
 
-#: smartmin/users/views.py:86 smartmin/users/views.py:220
-#: smartmin/users/views.py:270
 msgid "Password"
 msgstr "Parol"
 
-#: smartmin/users/views.py:88
 msgid "Confirm Password"
 msgstr "Parolni tasdiqlang"
 
-#: smartmin/users/views.py:94
 msgid "Please enter your password to save changes."
 msgstr "O'zgarishlarni saqlash uchun, iltimos parolingizni kiriting"
 
-#: smartmin/users/views.py:103
 msgid "Confirm the new password by filling the this field"
 msgstr "Ushbu yerni to'ldirish orqali yangi parolni tasdiqlang"
 
-#: smartmin/users/views.py:106
 msgid "New password doesn't match with its confirmation"
 msgstr "Yangi parol uni tasdiqlashingizga mos kelmayapti"
 
-#: smartmin/users/views.py:121
 msgid "Your Email"
 msgstr "Elektron pochtangiz"
 
-#: smartmin/users/views.py:128
-msgid ""
-"E-mail recovery is not supported, please contact the website administrator "
-"to reset your password manually."
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
 msgstr "Elektron pochtani tiklash iloji yo'q, parolingizni qo'l bilan qayta tiklash uchun, iltimos websahifa administratori bilan bog'laning"
 
-#: smartmin/users/views.py:135
 msgid "Current Password"
 msgstr "Joriy parol"
 
-#: smartmin/users/views.py:136
 msgid "Your current password"
 msgstr "Sizning joriy parolingiz"
 
-#: smartmin/users/views.py:138
 msgid "Your new password."
 msgstr "Sizning yangi parolingiz."
 
-#: smartmin/users/views.py:139
 msgid "Confirm new Password"
 msgstr "Yangi parolni tasdiglash"
 
-#: smartmin/users/views.py:140
 msgid "Confirm your new password."
 msgstr "Yangi parolingizni tasdiqlang."
 
-#: smartmin/users/views.py:145
 msgid "Please enter your password to save changes"
 msgstr "O'zgarishlarni saqlash uchun, iltimos parolingizni kiriting"
 
-#: smartmin/users/views.py:154
 msgid "Confirm your new password by entering it here"
 msgstr "Yangi parolingizni, uni shu yerga kiritish orqali, tasdiqlang"
 
-#: smartmin/users/views.py:157
 msgid "Mismatch between your new password and confirmation, try again"
 msgstr "Yangi parolingiz va uni tasdig'i mos kelmayaptimi, yana urinib ko'ring"
 
-#: smartmin/users/views.py:215
 msgid "New user created successfully."
 msgstr "Yangi foydalanuvchini yaratish muvaffaqiyatli amalga oshdi"
 
-#: smartmin/users/views.py:218 smartmin/users/views.py:241
 msgid "Groups"
 msgstr "Guruhlar"
 
-#: smartmin/users/views.py:219
-msgid ""
-"Users will only get those permissions that are allowed for their group."
+msgid "Users will only get those permissions that are allowed for their group."
 msgstr "Foydalanuvchilar ularning guruhlariga ruhsat etilgan ruhsatnomalarnigina qabul qila oladilar."
 
-#: smartmin/users/views.py:220
 msgid "Set the user's initial password here."
 msgstr "Foydalanuvchining dastlabki parolini shu yerda yarating"
 
-#: smartmin/users/views.py:239
 msgid "Last Login"
 msgstr "So'ngi kirish"
 
-#: smartmin/users/views.py:240
 msgid "Is Active"
 msgstr "Faol"
 
-#: smartmin/users/views.py:240
 msgid "Whether this user is allowed to log into the site"
 msgstr "Mazkur foydalanuvchining sahifaga kirishi uchun ruhsat bormi"
 
-#: smartmin/users/views.py:242
 msgid "Users will only get those permissions that are allowed for their group"
 msgstr "Foydalanuvchilar ularning guruhlariga ruhsat etilgan ruhsatnomalarnigina qabul qila oladilar"
 
-#: smartmin/users/views.py:244
 msgid "You can reset the user's password by entering a new password here"
 msgstr "Foydalanuvchi parolini, shu yerga yangi parolni kiritish orqali, qayta joriy etishingiz mumkin"
 
-#: smartmin/users/views.py:269
 msgid "Username"
 msgstr "Foydalanuvchining ismi"
 
-#: smartmin/users/views.py:270
 msgid "Your password"
 msgstr "Parolingiz"
 
-#: smartmin/users/views.py:271
 msgid "If you want to set a new password, enter it here"
 msgstr "Yangi parol joriy etmoqchi bo'lsangiz, uni shu yerga kiriting"
 
-#: smartmin/users/views.py:272
 msgid "Confirm New Password"
 msgstr "Yangi parolni tasdiqlash"
 
-#: smartmin/users/views.py:272
 msgid "Confirm your new password"
 msgstr "Yangi parolingizni tasdiqlang"
 
-#: smartmin/users/views.py:287
 msgid "Edit your profile"
 msgstr "O'z profilingizni tahrir qiling"
 
-#: smartmin/users/views.py:290
 msgid "Password Recovery"
 msgstr "Parolni tiklash"
 
-#: smartmin/users/views.py:294
 msgid "An Email has been sent to your account with further instructions."
 msgstr "Tegishli ko'rsatmalar bitilgan elektron xat sizning akkauntingizga yuborildi"
 
-#: smartmin/users/views.py:323
 msgid "Password Recovery Request"
 msgstr "Parolni tiklashga oid talabnoma"
 
-#: smartmin/users/views.py:332
 msgid "Pick a new password"
 msgstr "Yangi parol tanlang"
 
-#: smartmin/users/views.py:334
 msgid "Your password has successfully been updated, thank you."
 msgstr "Parolingizni yangilash muvaffaqiyatli amalga oshirildi, raxmat."
 
-#: smartmin/users/views.py:360
 #, python-format
 msgid "You are now logged in as %s"
 msgstr "Endi siz %s bo'lib kirdingiz"
 
-#: smartmin/users/views.py:376
-msgid ""
-"Password Updated Successfully. Now you can log in using your new password."
+msgid "Password Updated Successfully. Now you can log in using your new password."
 msgstr "Parol muvaffaqiaytli yangilandi. Endi siz yangi parolingiz bilan kirishingiz mumkin."
 
-#: smartmin/users/views.py:379
 msgid "Reset your Password"
 msgstr "Parolingizni qayta joriy eting"
 
-#: smartmin/users/views.py:391
-msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by"
-" entering your email here."
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
 msgstr "Sizning linkingiz muddati xavfsizlik nuqtai-nazaridan tugatildi. Iltimos, jarayonni elektron pochtangizni quyida kiritish orqali, yangittan boshlang."
 
-#: smartmin/views.py:848
 msgid "Submit"
 msgstr "Topshirish"
 
-#: smartmin/views.py:855
 msgid "Form"
 msgstr "Shakl"
 
-#: smartmin/views.py:1173
 msgid "Save Changes"
 msgstr "O'zgarishlarni saqlash"
 
-#: smartmin/views.py:1319
 #, python-format
 msgid "Your new %s has been created."
 msgstr "Sizning yangi %s giz yaratildi"
 
-#: smartmin/views.py:1339
 #, python-format
 msgid "Import %s"
 msgstr "%s ni import qilish"
 
-#: templates/frame.haml:8 templates/public/org_chooser.haml:7
 msgid "U-Report"
 msgstr "U-Report"
 
-#: templates/frame.haml:209
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/frame.haml:217
 msgid "Configuration"
 msgstr "Configurasiya"
 
-#: templates/frame.haml:223
 msgid "Orgs"
 msgstr "Tashkr"
 
-#: templates/frame.haml:229
 msgid "Users"
 msgstr "Foydalanuvchilar"
 
-#: templates/frame.haml:242
 msgid "Images"
 msgstr "Suratlar"
 
-#: templates/frame.haml:251 templates/frame.haml:312
 msgid "Content"
 msgstr "Kontent"
 
-#: templates/frame.haml:260
 msgid "Country Aliases"
 msgstr "Mamlakatning shartli nomi"
 
-#: templates/frame.haml:277 templates/frame.haml:475
 msgid "Polls"
 msgstr "So'rovlar"
 
-#: templates/frame.haml:300
 msgid "Category Images"
 msgstr "Toifa suratlari"
 
-#: templates/frame.haml:320
 msgid "News Items"
 msgstr "Yangiliklar"
 
-#: templates/frame.haml:338
 msgid "Job Sources"
 msgstr "Ish o'rni manbalari"
 
-#: templates/frame.haml:345
 msgid "Jobs Content"
 msgstr "Ish o'rni kontenti"
 
-#: templates/frame.haml:355
 msgid "About Content"
 msgstr "Kontent to'g'risida"
 
-#: templates/frame.haml:361
 msgid "Videos"
 msgstr "Videolavhalar"
 
-#: templates/frame.haml:367
 msgid "Contact Us Content"
 msgstr "Biz bilan bog'laning kontenti"
 
-#: templates/frame.haml:373
 msgid "Missions Content"
 msgstr "Vazifalar kontenti"
 
-#: templates/frame.haml:379
 msgid "Terms & Conditions"
 msgstr "Shart-sharoitlar"
 
-#: templates/frame.haml:386
 msgid "U-Reporters Content"
 msgstr "U-Reportyorlar kontenti"
 
-#: templates/frame.haml:393
 msgid "Join &amp; Engage Content"
 msgstr "Join &amp; Jalb bo'lish kontenti"
 
-#: templates/frame.haml:399
 msgid "Join Steps Content"
 msgstr "Qo'shilish bosqichlari kontenti"
 
-#: templates/frame.haml:406
 msgid "Additional Menu"
 msgstr "Qo'shimcha menyu"
 
-#: templates/frame.haml:423
 msgid "Logout"
 msgstr "Chiqish"
 
-#: templates/frame.haml:469
 msgid "About"
 msgstr "Haqida"
 
-#: templates/frame.haml:487
 msgid "U-Reporters"
 msgstr "U-Reportyorlar"
 
-#: templates/frame.haml:494 templates/public/jobs.haml:7
 msgid "Jobs"
 msgstr "Ish o'rinlari"
 
-#: templates/frame.haml:501
 msgid "Join & Engage"
 msgstr "Qo'shiling va Jalb bo'ling"
 
-#: templates/frame.haml:567
 msgid "FOLLOW US ON"
 msgstr "BIZNI KUZATIB BORING"
 
-#: templates/jobs/jobsource_create.haml:8
 msgid ""
 "\n"
 "        To add a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
-msgstr "Twitter ish o'rinlari manbaini qo'shmoqchi bo'lsangiz, siz twitterdan vidjet-ilova identifikatorini olishingiz kerak.\n"
+msgstr ""
+"\n"
+"Twitter ish o'rinlari manbaini qo'shmoqchi bo'lsangiz, siz twitterdan vidjet-ilova identifikatorini olishingiz kerak.\n"
+" "
 
-#: templates/jobs/jobsource_create.haml:12
-#: templates/jobs/jobsource_update.haml:12
 msgid "Follow this step by step guide"
 msgstr "Ushbu qadamma-qadam yo'rig'ga rioya eting"
 
-#: templates/jobs/jobsource_create.haml:15
-#: templates/jobs/jobsource_update.haml:15
 msgid ""
 "\n"
 "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
 "      "
-msgstr "<div>Vidjetni yaratganingizdan so'ng, vidjet identifikatori </div>\\da ko'rsatilganidek, url dan nusxa ko'chiring\n"
+msgstr ""
+"\n"
+"<div>Vidjetni yaratganingizdan so'ng, vidjet identifikatori </div>\\da ko'rsatilganidek, url dan nusxa ko'chiring\n"
+" "
 
-#: templates/jobs/jobsource_create.haml:40
 msgid "Back"
 msgstr "Ortga"
 
-#: templates/jobs/jobsource_update.haml:8
 msgid ""
 "\n"
 "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
 msgstr ""
 
-#: templates/public/about.haml:16 templates/public/about.haml:68
 msgid "ABOUT U-REPORT"
 msgstr "U-REPORT TO'G'RISIDA"
 
-#: templates/public/about.haml:22 templates/public/ureporters.haml:23
 msgid "Scroll to Learn more"
 msgstr "Ko'proq ma'lumot olish uchun sahifani tepa-pastga yurgizing"
 
-#: templates/public/about.haml:80
 msgid "The mission of U-Report"
 msgstr "U-Report vazifasi"
 
-#: templates/public/about.haml:119
 msgid "Why Join U-Report?"
 msgstr "Nima uchun U-Reportga qo'shilish kerak?"
 
-#: templates/public/about.haml:124
 msgid "Speak out on what's happening in your community"
 msgstr "Mamlakatingizda nimalar sodir bo'layotgani haqida baralla ayting"
 
-#: templates/public/about.haml:127
-msgid ""
-"Use U-Report results and information to update and increase citizen's "
-"awareness"
+msgid "Use U-Report results and information to update and increase citizen's awareness"
 msgstr "Fuqarolar ogohligini takomillashtirish va oshirish uchun U-Report natijalari va axborotidan foydalaning"
 
-#: templates/public/about.haml:130
 msgid "Participate in nationwide campaigns to help improve your country"
 msgstr "Mamlakatingizni yaxshilashga yordam berish uchun butun mamlakat bo'yicha o'tkazilayotgan tadbirlarda qatnashing"
 
-#: templates/public/about.haml:133
 #, python-format
 msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Boshqa U-Reportyorlar bilan %(mamlakatida) sodir bo'layotgan hodisalar bilan o'rtoqlashing"
+msgstr "Boshqa U-Reportyorlar bilan %(country)s sodir bo'layotgan hodisalar bilan o'rtoqlashing"
 
-#: templates/public/about.haml:139
 msgid "CLICK HERE TO JOIN"
 msgstr "QO'SHILISH UCHUN BU YERNI BOSING"
 
-#: templates/public/about.haml:153
 msgid "U-REPORT VIDEOS"
 msgstr "U-REPORT VIDEOLAVHALARI"
 
-#: templates/public/about.haml:160
 msgid "No videos yet."
 msgstr "Videolavhalar hali joylashtirilmagan."
 
-#: templates/public/about.haml:178
 msgid "WATCH IT ON YOUTUBE"
 msgstr "BUNI YOUTUBE da TOMOSHA QILING"
 
-#: templates/public/all_polls.haml:5
 msgid "MORE POLLS"
 msgstr "YANADA KO'PROQ SO'ROVLAR"
 
-#: templates/public/all_polls.haml:12
-#: templates/public/archived_stories.haml:12
 msgid "FILTER"
 msgstr "FILTER"
 
-#: templates/public/all_polls.haml:19
-#: templates/public/archived_stories.haml:19 templates/public/stories.haml:72
-#: templates/public/strings_values.haml:5
 msgid "All"
 msgstr "Barchasi"
 
-#: templates/public/all_polls.haml:33
 msgid "POLL LIST"
 msgstr "SO'ROVNOMA RO'YXATI"
 
-#: templates/public/all_polls.haml:35
 msgid "All polls from most recent to oldest"
 msgstr "Eng yangisidan to eng dastlabkisigacha bo'lgan barcha so'rovnomalar"
 
-#: templates/public/archived_stories.haml:5
 msgid "ARCHIVED STORIES"
 msgstr "ARXIVDAGI HIKOYALAR"
 
-#: templates/public/archived_stories.haml:33
 msgid "LIST"
 msgstr "RO'YXAT"
 
-#: templates/public/index.haml:21
 msgid "Follow"
 msgstr "KUZATIB BORING"
 
-#: templates/public/index.haml:29
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
+#| "                "
 msgid ""
 "\n"
-"                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
+"                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
 "                "
 msgstr "U-Report ijtimoiy xabar berish vositasi bo'lib, u barchaga har qanday jamiyat, dunyoning qaysi burchagidan bo'lmasin, so'rovnomaga javob berish, masalalar haqida axborot berish, bola huquqlarini qo'llab-quvvatlash hamda o'z mamlakatlari aholisi nomidan o'zgarishlarning ijobiy vositachisi sifatida harakatlanishga imkon beradi.\n"
 
-#: templates/public/index.haml:36 templates/public/index.haml:74
 msgid "CURRENT POLL"
 msgstr "JORIY SO'ROVNOMA"
 
-#: templates/public/index.haml:42
 msgid "View Full Results"
 msgstr "To'liq natijalarni ko'rish"
 
-#: templates/public/index.haml:52
 msgid "All U-Report members"
 msgstr "U-Reportning barcha a'zolari"
 
-#: templates/public/index.haml:97
 msgid "RESPONSE RATE"
 msgstr "JAVOB BERGANLAR ULUSHI"
 
-#: templates/public/index.haml:103
 msgid "Responded out of"
 msgstr "Berilgan savollardan ayrimlariga javoblar"
 
-#: templates/public/index.haml:111
 msgid "RESPONDER'S RATE BY LOCATION"
 msgstr "JAVOB BERUVCHILAR ULUSHI JOYLASHUV YERIGA NISBATAN"
 
-#: templates/public/index.haml:117
 msgid "Most responded"
 msgstr "Eng ko'p javob berilgan"
 
-#: templates/public/index.haml:149
 #, python-format
 msgid ""
 "\n"
 "                                  %(responded)s of %(total)s\n"
 "                                  "
-msgstr "%(umumiy)dan %(javob beruvchilar)\n"
+msgstr ""
+"\n"
+"%(responded)s dan %(total)s\n"
+" "
 
-#: templates/public/index.haml:164
 msgid "TRENDING WORDS"
 msgstr "KENG TARQALGAN SO'ZLAR"
 
-#: templates/public/index.haml:174
 msgid "FEATURED RESPONSES"
 msgstr "ALOHIDA AJRAB TURADIGAN JAVOBLAR"
 
-#: templates/public/index.haml:197 templates/public/index.haml:557
 msgid "View full results"
 msgstr "Barcha natijalarni ko'rish"
 
-#: templates/public/index.haml:217 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
 msgstr "U-Reportyorlar"
 
-#: templates/public/index.haml:225
 msgid "TOTAL # OF U-REPORTERS"
 msgstr "U-REPORTYORLARNING UMUMIY SONI"
 
-#: templates/public/index.haml:237
 msgid "4 MOST ACTIVE REGIONS"
 msgstr "4 ENG FAOL VILOYAT"
 
-#: templates/public/index.haml:248 templates/public/index.haml:269
 msgid "RATE BY GENDER"
 msgstr "GENDER BO'YICHA ULUSH"
 
-#: templates/public/index.haml:257 templates/public/index.haml:310
 msgid "RATE BY AGE"
 msgstr "YOSH BO'YICHA ULUSH"
 
-#: templates/public/index.haml:322
 msgid "WHAT U-REPORTERS ARE SAYING"
 msgstr "U-REPORTYORLAR NIMA DEMOQDALAR"
 
-#: templates/public/index.haml:331
 msgid "FEATURED VIDEO"
 msgstr "TAVSIYA ETILGAN VIDEOLAVHA"
 
-#: templates/public/index.haml:337
 msgid "Watch more videos"
 msgstr "Ko'proq videolavhalar ko'rish"
 
-#: templates/public/index.haml:348
 msgid "FEATURED REGION"
 msgstr "ALOHIDA AJRAB TURGAN VILOYAT"
 
-#: templates/public/index.haml:372
 msgid "Check more stories in U-Report app"
 msgstr "U-Report ilovasida ko'proq hikoyalarni o'qing"
 
-#: templates/public/index.haml:391 templates/public/join_engage.haml:99
 msgid "View more stories on Facebook"
 msgstr "Facebookda ko'proq hikoyalarni ko'ring"
 
-#: templates/public/index.haml:410
 msgid "View more on Instagram"
 msgstr "Instagramda ko'prog'ini ko'ring"
 
-#: templates/public/index.haml:430
 msgid "Read more tweets on Twitter"
 msgstr "Twitterda ko'proq twitlarni o'qing"
 
-#: templates/public/index.haml:441
 msgid "NEWS FEED"
 msgstr "AXBOROTLAR TASMASI"
 
-#: templates/public/index.haml:456 templates/public/index.haml:489
-#: templates/public/index.haml:571
 msgid "STORY"
 msgstr "HIKOYA"
 
-#: templates/public/index.haml:477 templates/public/index.haml:511
-#: templates/public/index.haml:596 templates/public/stories.haml:39
-#: templates/public/stories.haml:123
 msgid "Read full story"
 msgstr "To'liq hikoyani o'qing"
 
-#: templates/public/index.haml:534
 msgid "Response Rate"
 msgstr "Javoblar ulushi"
 
-#: templates/public/index.haml:737
 msgid "Read this story"
 msgstr "Ushbu hikoyani o'qing"
 
-#: templates/public/jobs.haml:22
 msgid "JOBS"
 msgstr "ISH O'RINLARI"
 
-#: templates/public/jobs.haml:28
 msgid "Scroll to see job details"
 msgstr "Ish o'rinlari haqida tafsilotlarni bilish uchun, sahifani tepa-pastga yurgizing"
 
-#: templates/public/jobs.haml:78 templates/public/join_engage.haml:119
 msgid "Tweet to"
 msgstr "Biron nimani Twit qilish"
 
-#: templates/public/jobs.haml:99 templates/public/polls.haml:379
 msgid "Read more"
 msgstr "Ko'proq o'qish"
 
-#: templates/public/jobs.haml:108
 msgid "Visit"
 msgstr "Tashrif buyurish"
 
-#: templates/public/join_engage.haml:17
 msgid "JOIN U-REPORT"
 msgstr "U-REPORTGA QO'SHILISH"
 
-#: templates/public/join_engage.haml:44
 msgid "HOW TO JOIN"
 msgstr "QANDAY QILIB QO'SHILISH MUMKIN"
 
-#: templates/public/join_engage.haml:73
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+#| "\n"
+#| "            "
 msgid ""
 "\n"
-"              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+"                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
-"            "
+"              "
 msgstr "U-Report %(mamlakat)da Tarmoq Provayderlari yordamida UNICEF homiylik qiladigan bepul dastur hisoblanadi. U-Report hech qanday to'lovlar yoki shaxsiy moliyaviy ma'lumotlarni so'ramaydi. ILTIMOS, sizga shu raqam, yoki Facebook va Twitter sahifalaridan yuborilib, pul to'lovini so'raydigan har qanday xabarlarni e'tiborga olmang. U-Reportning barcha xizmatlari (%(qisqa raqamlar)dagi barcha xabarlar) bepul hisoblanadi.\n"
 
-#: templates/public/join_engage.haml:84
 msgid "U-REPORT ON SOCIAL MEDIA"
 msgstr "U-REPORT IJTIMOIY TARMOQLARDA"
 
-#: templates/public/join_engage.haml:140
 msgid "Compose new Tweet"
 msgstr "Yangi Twit tuzish"
 
-#: templates/public/polls.haml:16
 msgid "CURRENT POLL IN"
 msgstr "JORIY SO'ROVNOMA"
 
-#: templates/public/polls.haml:29
 #, python-format
 msgid ""
 "\n"
@@ -1317,761 +1007,625 @@ msgid_plural ""
 "\n"
 "                  %(questions)s questions polled on this topic\n"
 "                "
-msgstr[0] "Shu mavzu bo'yicha so'ralgan %(savollar) savollar\n"
+msgstr[0] ""
+"\n"
+"Shu mavzu bo'yicha so'ralgan %(questions)s savollar\n"
+" "
 
-#: templates/public/polls.haml:43
 msgid "response rate"
 msgstr "javoblar ulushi"
 
-#: templates/public/polls.haml:49
 msgid "responded out of"
 msgstr "berilgan savollardan ayrimlariga javoblar"
 
-#: templates/public/polls.haml:53
 msgid "polled"
 msgstr "so'raldi"
 
-#: templates/public/polls.haml:96
 msgid "POLL RESULTS"
 msgstr "SO'ROVNOMA NATIJALARI"
 
-#: templates/public/polls.haml:112
 #, python-format
 msgid ""
 "\n"
 "                    %(responded)s responded out of %(polled)s polled\n"
 "                  "
-msgstr "%(javob berganlar) berilgan savollardan %(savollar)ga javob berdilar\n"
+msgstr ""
+"\n"
+"%(responded)s berilgan savollardan %(polled)s ga javob berdilar\n"
+" "
 
-#: templates/public/polls.haml:121
 msgid "KEYWORDS"
 msgstr "KALIT SO'ZLAR"
 
-#: templates/public/polls.haml:126
 msgid "STATISTICS"
 msgstr "STATISTIKA"
 
-#: templates/public/polls.haml:131
 msgid "LOCATIONS"
 msgstr "JOYLASHUV YERLARI"
 
-#: templates/public/polls.haml:137 templates/public/ureporters.haml:83
 msgid "GENDER"
 msgstr "GENDER"
 
-#: templates/public/polls.haml:143 templates/public/ureporters.haml:63
 msgid "AGE"
 msgstr "YOSH"
 
-#: templates/public/polls.haml:313
 msgid "FEATURED ANSWERS"
 msgstr "ALOHIDA AJRAB TURADIGAN JAVOBLAR"
 
-#: templates/public/polls.haml:320
 msgid "No featured answers."
 msgstr "Alohida ajrab turadigan javoblar yo'q."
 
-#: templates/public/polls.haml:339
 msgid "U-Reporter in"
 msgstr "U-Reportyor"
 
-#: templates/public/polls.haml:351 templates/public/story_read.haml:129
 msgid "RELATED STORIES"
 msgstr "O'XSHASH HIKOYALAR"
 
-#: templates/public/polls.haml:356 templates/public/story_read.haml:134
 msgid "No related stories."
 msgstr "O'xshash hikoyalar yo'q."
 
-#: templates/public/polls.haml:391 templates/public/story_read.haml:102
 msgid "FEATURED IMAGES"
 msgstr "ALOHIDA AJRAB TURADIGAN SURATLAR"
 
-#: templates/public/polls.haml:397
 msgid "No featured images yet."
 msgstr "Alohida ajrab turadigan suratlar hozircha yo'q."
 
-#: templates/public/stories.haml:20
 msgid "FEATURED STORY"
 msgstr "ALOHIDA AJRAB TURADIGAN HIKOYA"
 
-#: templates/public/stories.haml:30 templates/public/story_read.haml:26
 msgid "BY"
 msgstr "TOMONIDAN"
 
-#: templates/public/stories.haml:59
 msgid "LATEST STORIES"
 msgstr "ENG SO'NGGI HIKOYALAR"
 
-#: templates/public/stories.haml:64
 msgid "FILTERED BY"
 msgstr "TOMONIDAN SARALANGAN"
 
-#: templates/public/story_read.haml:31
 msgid "Scroll to read more"
 msgstr "Ko'proq o'qish uchun sahifani tepa-pastga yurgizing"
 
-#: templates/public/story_read.haml:50
 msgid "STORY CONTINUES"
 msgstr "HIKOYA DAVOM ETADI"
 
-#: templates/public/story_read.haml:68
 msgid "AUDIO"
 msgstr "AUDIO"
 
-#: templates/public/story_read.haml:81
 msgid "RELATED POLLS"
 msgstr "O'XSHASH SO'ROVNOMALAR"
 
-#: templates/public/story_read.haml:86
 msgid "No related polls."
 msgstr "O'xshash so'rovlnomalar yo'q."
 
-#: templates/public/story_read.haml:107
 msgid "No featured images."
 msgstr "Alohida ajrab turadigan suratlar yo'q."
 
-#: templates/public/story_read.haml:160
 msgid "READ MORE"
 msgstr "KO'PROQ O'QISH"
 
-#: templates/public/strings_values.haml:6
 msgid "Even"
 msgstr "Hatto"
 
-#: templates/public/strings_values.haml:7
-#: templates/public/strings_values.haml:10
 msgid "State"
 msgstr "Davlat"
 
-#: templates/public/strings_values.haml:8
 msgid "Other"
 msgstr "Boshqa"
 
-#: templates/public/strings_values.haml:9
-msgid "National"
-msgstr "Milliy"
-
-#: templates/public/strings_values.haml:11
 msgid "District"
 msgstr "Tuman"
 
-#: templates/public/strings_values.haml:12
 msgid "Participation Level"
 msgstr "Ishtirok etish darajasi"
 
-#: templates/public/strings_values.haml:13
 msgid "Responses"
 msgstr "Javoblar"
 
-#: templates/public/strings_values.haml:14
 msgid "Reporters in"
 msgstr "Reportyorlar"
 
-#: templates/public/strings_values.haml:15
 msgid "Results"
 msgstr "Natijalar"
 
-#: templates/public/strings_values.haml:16
 msgid "*Other answers include"
 msgstr "Boshqa javoblar o'zida mujassam etadi"
 
-#: templates/public/strings_values.haml:17
 msgid "Population"
 msgstr "Aholi"
 
-#: templates/public/strings_values.haml:18
 msgid "Registered in"
 msgstr "Ro'yxatdan o'tganlar"
 
-#: templates/public/strings_values.haml:19
 msgid "Density"
 msgstr "Zichlik"
 
-#: templates/public/strings_values.haml:20
 msgid "total"
 msgstr "Umumiy"
 
-#: templates/public/strings_values.haml:21
 msgid "of"
 msgstr "ning"
 
-#: templates/public/strings_values.haml:22
 msgid "the"
 msgstr "aniq artikl"
 
-#: templates/public/ureporters.haml:44
 msgid "WHO WE ARE"
 msgstr "BIZ KIMMIZ"
 
-#: templates/public/ureporters.haml:55
 msgid "U-REPORTER STATISTICS"
 msgstr "U-REPORYOR STATISTIKASI"
 
-#: templates/public/ureporters.haml:134
 msgid "WHERE ARE U-REPORTERS FROM?"
 msgstr "U-REPORTYORLAR QAYERDAN KELISHGAN?"
 
-#: templates/public/ureporters.haml:154
 msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
 msgstr "RO'YXATDAN O'TGANLIK DARAJASI: OXIRGI 6 OY DAVOMIDA"
 
-#: templates/public/ureporters.haml:174
 msgid "OCCUPATION: TOP 9 MOST MENTIONED"
 msgstr "KIM BO'LIB ISHLASHI: ENG KO'P AYTILGANLARNING YUQORI 9 TASI"
 
-#: templates/public/ureporters.haml:377
 msgid "Registered"
 msgstr "Ro'yxatdan o'tganlar"
 
-#: templates/public/ureporters.haml:392
 msgid "Week of"
 msgstr "Haftasi"
 
-#: ureport/admins/views.py:22
 #, python-format
 msgid "Refreshed %s cache for this organization"
-msgstr "%ning keshi bu tashkilot uchun yangilandi"
+msgstr "%s ning keshi bu tashkilot uchun yangilandi"
 
-#: ureport/assets/models.py:13
 msgid "Flag"
 msgstr "Bayroq"
 
-#: ureport/assets/models.py:17
 msgid "The organization to which the image will be used"
 msgstr "Surat uning uchun ishlatiladigan tashkilot"
 
-#: ureport/assets/models.py:20
 msgid "A short descriptive name for this image"
 msgstr "Ushbu suratga qisqacha ta'riflovchi nom"
 
-#: ureport/assets/models.py:22
 msgid "Image type"
 msgstr "Surat turi"
 
-#: ureport/contacts/models.py:46
 msgid "Label"
 msgstr "Tamg'a"
 
-#: ureport/contacts/models.py:48
 msgid "Key"
 msgstr "Kalit"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:870
 msgid "Male"
 msgstr "Erkak"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:870
 msgid "Female"
 msgstr "Ayol"
 
-#: ureport/contacts/models.py:92 ureport/locations/models.py:24
 msgid "Organization"
 msgstr "Tashkilot"
 
-#: ureport/contacts/models.py:94
 msgid "Gender"
 msgstr "Gender"
 
-#: ureport/contacts/models.py:95
 msgid "Gender of the contact"
 msgstr "Kontaktning genderi"
 
-#: ureport/contacts/models.py:97
 msgid "Born Field"
 msgstr "Tug'ilganlik to'g'risidagi qator"
 
-#: ureport/contacts/models.py:99
 msgid "Occupation Field"
 msgstr "Kim bo'lib ishlashi to'g'risidagi qator"
 
-#: ureport/contacts/models.py:101
 msgid "Registration Date"
 msgstr "Ro'yxatdan o'tgan sanasi"
 
-#: ureport/contacts/models.py:103
 msgid "State Field"
 msgstr "Davlat uchun qator"
 
-#: ureport/contacts/models.py:105
 msgid "District Field"
 msgstr "Tuman uchun qator"
 
-#: ureport/contacts/models.py:107
 msgid "Ward Field"
 msgstr "Ma'muriy hudud uchun qator"
 
-#: ureport/contacts/models.py:240 ureport/polls/models.py:1102
 msgid "Number of items with this counter"
 msgstr "Ushbu hisoblagich uchun elementlar soni"
 
-#: ureport/countries/management/commands/add_country_alias.py:55
 msgid "No root user found. Please create a root user"
 msgstr "Hech qanday imtiyozli foydalanuvchi topilmadi. Iltimos imtiyozli foydalanuvchini yarating"
 
-#: ureport/countries/models.py:11
 msgid "The name for our alias"
 msgstr "Taxallusimiz uchun nom"
 
-#: ureport/jobs/models.py:22
 msgid "The title or name to reference this Job source."
 msgstr "Ushbu ish o'rni manbasiga murojaat etish uchun sarlavha yoki nom"
 
-#: ureport/jobs/models.py:24
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
 msgstr "Ish o'rni manbasi turini tanlang. Twitter, Facebook yoki RSS kanali"
 
-#: ureport/jobs/models.py:25
 msgid "The full URL to navigate to this Job source."
 msgstr "Mazkur ish o'rni manbasiga eltuvchi to'liq URL"
 
-#: ureport/jobs/models.py:27
-msgid ""
-"For Twitter, a widget Id is required to embed tweets on the website. Read "
-"carefully the instructions above on how to get the right widget Id"
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
 msgstr "Twitter uchun, twitlarni websahifaga kiritish uchun widjet identifikatori lozim bo'ladi. Qanday qilib munosib widjet identifikatorini olish uchun, yuqoridagi ko'rsatmalarni diqqat bilan o'qing."
 
-#: ureport/jobs/models.py:30
 msgid "Featured job sources are shown first on the jobs page."
 msgstr "Alohida ajrab turadigan ish o'rinlari manbasi ish o'rinlari sahifasida dastlabki o'rinlarda ko'rsatiladi."
 
-#: ureport/jobs/models.py:32
 msgid "The organization this job source is for"
 msgstr "Ushbu ish o'rinlari manbasi u uchun mo'ljallangan tashkilot"
 
-#: ureport/jobs/views.py:13
 msgid "Your job source has been added successfully"
 msgstr "Sizning ish o'rinlari bo'yicha manbaingiz muvaffaqiyatli tarzda qo'shib qo'yildi"
 
-#: ureport/jobs/views.py:39
 msgid "Your job source has been updated successfully"
 msgstr "Sizning ish o'rinlari bo'yicha manbaingiz muvaffaqiyatli tarzda yangilandi"
 
-#: ureport/locations/models.py:29
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Bu mazkur ma'muriy chegara uchun OSM - Operasion Tizim Darajasining identifikatori."
 
-#: ureport/locations/models.py:32
 msgid "The name of our administrative boundary"
 msgstr "Bizning ma'muriy chegara nomi"
 
-#: ureport/locations/models.py:34
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
 msgstr "Chegara darajasi, mamlakat uchun 0, viloyat uchun 1, tuman uchun 2"
 
-#: ureport/locations/models.py:37
 msgid "The parent to this political boundary if any"
 msgstr "Ushbu siyosiy chegaraning egasi, agar bo'lsa"
 
-#: ureport/locations/models.py:39
 msgid "Geometry"
 msgstr "Geometriya"
 
-#: ureport/locations/models.py:40
-msgid ""
-"The json representing the geometry type and coordinates of the boundaries"
+msgid "The json representing the geometry type and coordinates of the boundaries"
 msgstr "Chegaralarning geometrik turi va koordinatalarini ifoda etuvchi json"
 
-#: ureport/news/models.py:11
 msgid "The title for this item"
 msgstr "Ushbu element uchun sarlavha"
 
-#: ureport/news/models.py:14
 msgid "A short summary description for this item"
 msgstr "Ushbu elementning qisqacha ta'rifi"
 
-#: ureport/news/models.py:17
 msgid "A link that should be associated with this item"
 msgstr "Ushbu elementga bog'lashi kerak bo'ladigan link"
 
-#: ureport/news/models.py:20 ureport/news/models.py:45
 msgid "The category this item belongs to"
 msgstr "Ushbu element tegishli bo'lgan toifa"
 
-#: ureport/news/models.py:23
 msgid "The organization this item belongs to"
 msgstr "Ushbu element tegishli bo'lgan tashkilot"
 
-#: ureport/news/models.py:36
 msgid "The title for this Video"
 msgstr "Mazkur videolavha uchun sarlavha"
 
-#: ureport/news/models.py:39
 msgid "A short summary description for this video"
 msgstr "Mazkur videolavhaning qisqacha ta'rifi"
 
-#: ureport/news/models.py:48
 msgid "The organization this video belongs to"
 msgstr "Mazkur videolavha tegishli bo'lgan tashkilot"
 
-#: ureport/polls/models.py:63
 msgid "The name of this poll category"
 msgstr "Ushbu so'rov toifasining nomi"
 
-#: ureport/polls/models.py:72
 msgid "Poll Categories"
 msgstr "So'rov toifalari"
 
-#: ureport/polls/models.py:103
 msgid "The Flow this Poll is based on"
 msgstr "Usbu so'rov asoslangan Oqim"
 
-#: ureport/polls/models.py:105
-msgid ""
-"The date to display for this poll. Leave empty to use flow creation date."
+msgid "The date to display for this poll. Leave empty to use flow creation date."
 msgstr "Ushu so'rov uchun namoyish bo'ladigan sana. Oqimni yaratish sanasidan foydalanish uchun, bo'sh qoldiring"
 
-#: ureport/polls/models.py:109
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr "Ushbu so'rov uchun oqim RapidPro da arxiv qilinadimi"
 
-#: ureport/polls/models.py:111
 msgid "The base language of the flow to use"
 msgstr "Qo'llaniladigan oqimning asosiy tili"
 
-#: ureport/polls/models.py:114
 msgid "The number of polled reporters on this poll"
 msgstr "Ushbu so'rovda savolga tutilgan muxbirlar soni"
 
-#: ureport/polls/models.py:117
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Ushbu so'rov dastlabki natijalar sinxronizasiyasini tamomladimi"
 
-#: ureport/polls/models.py:120
 msgid "The title for this Poll"
 msgstr "Ushbu so'rov uchun sarlavha"
 
-#: ureport/polls/models.py:122
 msgid "The category this Poll belongs to"
 msgstr "Ushbu So'rov tegishli bo'lgan toifa"
 
-#: ureport/polls/models.py:124
 msgid "Whether this poll should be featured on the homepage"
 msgstr "Mazkur so'rov uy sahifasida alohida ajralib turishi kerakmi"
 
-#: ureport/polls/models.py:126
 msgid "The splash category image to display for the poll (optional)"
 msgstr "Grafik toifadagi surat so'rovni namoyish etadi (ixtiyoriy)"
 
-#: ureport/polls/models.py:128
 msgid "The organization this poll is part of"
 msgstr "Mazkur so'rov uning qismi bo'lgan tashkilot"
 
-#: ureport/polls/models.py:642
 msgid "The poll to associate to"
 msgstr "... bilan bog'liq bo'lgan so'rov"
 
-#: ureport/polls/models.py:656
 msgid "The poll for this response"
 msgstr "Ushbu javob uchun so'rov"
 
-#: ureport/polls/models.py:659
 msgid "The location for this response"
 msgstr "Ushbu javob berilgan yer"
 
-#: ureport/polls/models.py:662
 msgid "The name of the sender of the message"
 msgstr "Xabar yuboruvchining ismi"
 
-#: ureport/polls/models.py:665
 msgid "The featured response message"
 msgstr "Tavsiya etiladigan javob"
 
-#: ureport/polls/models.py:681
 msgid "The poll this question is part of"
 msgstr "Ushbu savol uning qismi bo'lgan so'rov"
 
-#: ureport/polls/models.py:683
 msgid "The title of this question"
 msgstr "Ushbu savolning sarlavhasi"
 
-#: ureport/polls/models.py:684
 msgid "The RuleSet this question is based on"
 msgstr "Ushbu savol asoslangan Qoidalar majmuasi"
 
-#: ureport/polls/models.py:689
 msgid "The label of the ruleset on RapidPro"
 msgstr "RapidPro dagi qoidalar majmuasi tamg'asi"
 
-#: ureport/polls/models.py:692
 msgid "The priority number for this question on the poll"
 msgstr "So'rovdagi mazkur savol uchun ustivor raqam"
 
-#: ureport/polls/models.py:965
 msgid "The Rule this response category is based on"
 msgstr "Ushbu javob toifasi asoslanadigan Qoida"
 
-#: ureport/polls/views.py:85
+msgid "Your org does not have any API token configuration."
+msgstr ""
+
 msgid "You must include a title for every included question."
 msgstr "Sizda har bir qo'shilgan savol uchun sarlavha mujassam bo'lishi shart"
 
-#: ureport/polls/views.py:88
 msgid "Title too long. The max limit is 255 characters for each title"
 msgstr "Haddan ziyod uzun sarlavha. Har bir sarlavha uchun eng ko'pi bilan 255 ta belgi ishlatiladi"
 
-#: ureport/polls/views.py:93
 msgid "You must include at least one poll question."
 msgstr "So'rov uchun Siz eng kamida bitta savolni kiritishingiz lozim"
 
-#: ureport/polls/views.py:108
 msgid "Adjust poll date"
 msgstr "So'rov sanasini kelishib olish"
 
-#: ureport/polls/views.py:111
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr "Sizning so'rovnomangiz yangilandi, endi unga kiritish uchun savollarni tanlang."
 
-#: ureport/polls/views.py:122
-msgid "Your poll has been created, now adjust the poll date."
+#, fuzzy
+#| msgid "Configuration"
+msgid "Configure flow"
+msgstr "Configurasiya"
+
+#, fuzzy
+#| msgid "Your poll has been created, now adjust the poll date."
+msgid "Your poll has been configured, now adjust the poll date."
 msgstr "Sizning so'rovnomangiz yaratildi, endi so'rov sanasini kelishib oling"
 
-#: ureport/polls/views.py:152
+#, fuzzy
+#| msgid "Your poll has been created, now adjust the poll date."
+msgid "Your poll has been created, now configure its flow."
+msgstr "Sizning so'rovnomangiz yaratildi, endi so'rov sanasini kelishib oling"
+
 msgid "Poll Images"
 msgstr "So'rovnoma Suratlari"
 
-#: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Endi, siz alohida ajratib ko'rsatmoqchi bo'lgan har qanday javobni kiriting. (agar bo'lsa)"
 
-#: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "So'rovnoma sahifasida va prevyularda namoyish bo'ladigan surat. (ixtiyoriy)"
 
-#: ureport/polls/views.py:172
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "So'rovnoma sahifasida va prevyularda namoyish bo'ladigan surat. (ixtiyoriy)"
 
-#: ureport/polls/views.py:196
 msgid "Featured Poll Responses"
 msgstr "So'rovnomada alohida ajrab turadigan javoblar"
 
-#: ureport/polls/views.py:197
 msgid "Your poll has been updated."
 msgstr "Sizning so'rovnomangiz yangilandi"
 
-#: ureport/polls/views.py:214
 #, python-format
 msgid "Response %d Reporter"
-msgstr "% Reportoyrning javobi"
+msgstr "%d Reportoyrning javobi"
 
-#: ureport/polls/views.py:214
 msgid "The name or alias of the responder."
 msgstr "Javob beruvchining ismi yoki taxallusi."
 
-#: ureport/polls/views.py:219
 #, python-format
 msgid "Response %d Location"
-msgstr "% javob berilgan yer"
+msgstr "%d javob berilgan yer"
 
-#: ureport/polls/views.py:219
 msgid "The location of the responder."
 msgstr "Javob beruvchining joylashuv yeri"
 
-#: ureport/polls/views.py:224
 #, python-format
 msgid "Response %d Message"
-msgstr "% javoblar xabarlarda"
+msgstr "%d javoblar xabarlarda"
 
-#: ureport/polls/views.py:224
 msgid "The text of the featured response."
 msgstr "Tavsiya etilgan javobning matni"
 
-#: ureport/polls/views.py:250
 msgid "Poll Questions"
 msgstr "So'rovnoma savollari"
 
-#: ureport/polls/views.py:252
 msgid "Now set what images you want displayed on your poll page. (if any)"
 msgstr "Endi, o'z so'rovnoma sahifangizda namoyish bo'lishini xohlayotgan suratni joylashtiring. (agar bo'lsa)"
 
-#: ureport/polls/views.py:281
 msgid "Include"
 msgstr "Qo'shish"
 
-#: ureport/polls/views.py:282
 msgid "Whether to include this question in your public results"
 msgstr "Ushbu savolni o'z ommaviy natijalaringiz qatoriga qo'shasizmi"
 
-#: ureport/polls/views.py:286
 msgid "Priority"
 msgstr "Ustivorlik"
 
-#: ureport/polls/views.py:287
-msgid ""
-"The priority of this question on the poll page, higher priority comes first"
+msgid "The priority of this question on the poll page, higher priority comes first"
 msgstr "Mazkur savolning so'rovnoma sahifasidagi ustivorligi, ustivorligi yoqori bo'lgani avval keladi"
 
-#: ureport/polls/views.py:291
 msgid "Ruleset Label"
 msgstr "Qoidalar majmuasi tamg'asi"
 
-#: ureport/polls/views.py:292
 msgid "The label of the ruleset from RapidPro"
 msgstr "RapidPro dan qoidalar majmuasining tamg'asi"
 
-#: ureport/polls/views.py:296
 msgid "Title"
 msgstr "Sarlavha"
 
-#: ureport/polls/views.py:297
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "O'z auditoriyangizga berilgan savol, ochiq ommaga namoyish etiladi"
 
-#: ureport/polls/views.py:417
-#, python-format
-msgid "Scheduled a pull refresh for poll #%d on org #%d"
+#, fuzzy, python-format
+#| msgid "Scheduled a pull refresh for poll #%d on org #%d"
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "#%d so'rovni yangilash #%d tashkilotda rejalashtirildi"
 
-#: ureport/public/views.py:310
 #, python-format
 msgid "%s"
-msgstr "%ning"
+msgstr "%s"
 
-#: ureport/settings_common.py:132
-msgid "Whether this org should be show on the landing page"
-msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
-
-#: ureport/settings_common.py:133
-msgid "The shortcode that users will use to contact U-Report locally"
-msgstr "Foydalanuvchilar mahalliy darajada U-Report bilan bog'lanish uchun ishlatadigan qisqa kod"
-
-#: ureport/settings_common.py:134
-msgid "The short text used to direct visitors to join U-Report"
-msgstr "Tashrif buyuruvchilarni U-Reportga qo'shilishga yo'naltiradigan qisqa matn"
-
-#: ureport/settings_common.py:135
-msgid "The color used to draw the text on the join bar"
-msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
-
-#: ureport/settings_common.py:136
-msgid "The color used to draw the background on the join bar"
-msgstr "Qo'shilish satridagi orqa fonni bo'yash uchun ishlatiladigan rang"
-
-#: ureport/settings_common.py:137
-msgid "The primary color for styling for this organization"
-msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
-
-#: ureport/settings_common.py:138
-msgid "The secondary color for styling for this organization"
-msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
-
-#: ureport/settings_common.py:139
-msgid "The background color for the site"
-msgstr "Sahifa uchun orqa fon rangi"
-
-#: ureport/settings_common.py:140
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Bezash rejasida 6 ta ranggacha ishlatish mumkin, ranglar orasini vergul bilan ajrating"
-
-#: ureport/settings_common.py:141
-msgid "The Google Analytics Tracking ID for this organization"
-msgstr "Mazkur tashkilot uchun Google Analytics Kuzatib borish identifikatori"
-
-#: ureport/settings_common.py:142
-msgid "The URL to the Youtube channel for this organization"
-msgstr "Mazkur tashkilot uchun Youtube kanaliga URL"
-
-#: ureport/settings_common.py:143
-msgid "The URL to the Facebook page for this organization"
-msgstr "Mazkur tashkilot uchun Facebook sahifasiga URL"
-
-#: ureport/settings_common.py:144
-msgid "The integer id to the Facebook page for this organization (optional)"
-msgstr "Mazkur tashkilot uchun Facebook sahifasiga butun sonli identifikator (ixtiyoriy)"
-
-#: ureport/settings_common.py:145
-msgid ""
-"The integer id to the Facebook app for this organization's chat app "
-"(optional)"
-msgstr "Mazkur tashkilotning suhbat ilovasi uchun Facebook ilovasiga butun sonli identifikator (ixtiyoriy"
-
-#: ureport/settings_common.py:146
-msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr "Mazkur tashkilot uchun Facebook Pixel ning identifikatori (ixtiyoriy)"
-
-#: ureport/settings_common.py:147
-msgid "The Instagram username for this organization"
-msgstr "Mazkur tashkilot uchun Instagram foydalanuvchisi nomi"
-
-#: ureport/settings_common.py:148
-msgid "The Instagram widget id from lightwidget.com"
-msgstr "Lightwidget.com dan Instagram widjet identifikatori"
-
-#: ureport/settings_common.py:149
-msgid "The Twitter handle for this organization"
-msgstr "Mazkur tashkilot uchun Twitterdagi qayd yozuvi"
-
-#: ureport/settings_common.py:150
-msgid "The Twitter widget used for searching"
-msgstr "Izlash uchun ishlatiladigan Twitter widjeti"
-
-#: ureport/settings_common.py:151
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "O'zida ro'yxatdan o'tgan reportyorlarni mujassam etgan txbhe Kontakt Guruhi nomi"
 
-#: ureport/settings_common.py:152
-msgid ""
-"The label of the Contact Field that contains the birth date of reporters"
+msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr "Reportyorlarning tavallud topgan sanasini mujassam etadigan Kontakt Qatorining tamg'asi"
 
-#: ureport/settings_common.py:153
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Reportyorlarning genderini mujassam etadigan Kontakt Qatorining tamg'asi"
 
-#: ureport/settings_common.py:154
-msgid ""
-"The label of the Contact Field that contains the occupation of reporters"
+msgid "The label of the Contact Field that contains the occupation of reporters"
 msgstr "Reportyorlarning kasbini mujassam etadigan Kontakt Qatorining tamg'asi"
 
-#: ureport/settings_common.py:155
-msgid ""
-"The label of the Contact Field that contains the registration date of "
-"reporters"
+msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Reportyorlarning ro'yxatdan o'tgan sanasini mujassam etadigan Kontakt Qatorining tamg'asi"
 
-#: ureport/settings_common.py:156
 msgid "The label of the Contact Field that contains the State of reporters"
 msgstr "Reportyorlarning qaysi davlatdan ekanini mujassam etadigan Kontakt Qatorining tamg'asi"
 
-#: ureport/settings_common.py:157
 msgid "The label of the Contact Field that contains the District of reporters"
 msgstr "Reportyorlarning qaysi Viloyatdan ekanini mujassam etadigan Kontakt Qatorining tamg'asi"
 
-#: ureport/settings_common.py:158
 msgid "The label of the Contact Field that contains the Ward of reporters"
 msgstr "Reportyorlarning qaysi Tumandan ekanini mujassam etadigan Kontakt Qatorining tamg'asi"
 
-#: ureport/settings_common.py:159
 msgid "The label assigned to U-Reporters that are Male."
 msgstr "Erkak U-Reportyorlarga berilgan tamg'a"
 
-#: ureport/settings_common.py:160
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Ayol U-Reportyorlarga berilgan tamg'a"
 
-#: ureport/settings_common.py:161
-msgid "If there are jobs to be shown on the public site"
+msgid "Whether this org should be show on the landing page"
+msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr "Foydalanuvchilar mahalliy darajada U-Report bilan bog'lanish uchun ishlatadigan qisqa kod"
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr "Tashrif buyuruvchilarni U-Reportga qo'shilishga yo'naltiradigan qisqa matn"
+
+msgid "The color used to draw the text on the join bar"
+msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
+
+msgid "The color used to draw the background on the join bar"
+msgstr "Qo'shilish satridagi orqa fonni bo'yash uchun ishlatiladigan rang"
+
+msgid "The primary color for styling for this organization"
+msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
+
+msgid "The secondary color for styling for this organization"
+msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
+
+msgid "The background color for the site"
+msgstr "Sahifa uchun orqa fon rangi"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "Bezash rejasida 6 ta ranggacha ishlatish mumkin, ranglar orasini vergul bilan ajrating"
+
+#, fuzzy
+#| msgid "Up to 6 colors for styling charts, use comma between colors"
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgstr "Bezash rejasida 6 ta ranggacha ishlatish mumkin, ranglar orasini vergul bilan ajrating"
+
+msgid "The states to show on maps only"
+msgstr ""
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr "Mazkur tashkilot uchun Google Analytics Kuzatib borish identifikatori"
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr "Mazkur tashkilot uchun Youtube kanaliga URL"
+
+msgid "The URL to the Facebook page for this organization"
+msgstr "Mazkur tashkilot uchun Facebook sahifasiga URL"
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr "Mazkur tashkilot uchun Facebook sahifasiga butun sonli identifikator (ixtiyoriy)"
+
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
+msgstr "Mazkur tashkilotning suhbat ilovasi uchun Facebook ilovasiga butun sonli identifikator (ixtiyoriy"
+
+#, fuzzy
+#| msgid "The short text used to direct visitors to join U-Report"
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr "Tashrif buyuruvchilarni U-Reportga qo'shilishga yo'naltiradigan qisqa matn"
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr "Mazkur tashkilot uchun Facebook Pixel ning identifikatori (ixtiyoriy)"
+
+msgid "The Instagram username for this organization"
+msgstr "Mazkur tashkilot uchun Instagram foydalanuvchisi nomi"
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr "Lightwidget.com dan Instagram widjet identifikatori"
+
+msgid "The Twitter handle for this organization"
+msgstr "Mazkur tashkilot uchun Twitterdagi qayd yozuvi"
+
+msgid "The Twitter widget used for searching"
+msgstr "Izlash uchun ishlatiladigan Twitter widjeti"
+
+msgid "The words to filter out from the results on public site"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site"
+msgid "If there are jobs to be shown on the public site. (Separated by comma)"
 msgstr "Ommaviy sahifada ko'rsatilishi kerak bo'lgan ish o'rinlari bormi"
 
-#: ureport/settings_common.py:162
-msgid ""
-"If this org if for global data. e.g: It shows a world map instead of a "
-"country map."
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Ushbu tashkilot umumjahon ma'lumotlari uchunmi. Misol: U mamlakat xaritasi o'rniga, dunyo xaritasini namoyish etadi."
 
-#: ureport/settings_common.py:163
-msgid ""
-"The alpha-3 ISO code of the organization so that it appears the stories "
-"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
-"Global)."
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Tashkilotning alpha-3 ISO kodi, maqsad shuki, unda U-Report ilovasining hikoyalar widjeti namoyish etilsin. Misol: BRA, NIG, CMR (GLOBAL ni ishlating, agar U-Report umumjahon bo'lsa)"
 
-#: ureport/settings_common.py:164
-msgid ""
-"If you need to include some custom HTML codes in you org pages, like custom "
-"analytics code snippets"
+msgid "The font used for headline texts"
+msgstr ""
+
+msgid "The font used for normal text"
+msgstr ""
+
+#, fuzzy
+#| msgid "Participation Level"
+msgid "Hide participation stats"
+msgstr "Ishtirok etish darajasi"
+
+#, fuzzy
+#| msgid "The name of the sender of the message"
+msgid "The text to describe the sponsors of free messages"
+msgstr "Xabar yuboruvchining ismi"
+
+msgid "The font used for small text"
+msgstr ""
+
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Siz o'z tashkilotingiz sahifalariga ayrim xususiy HTML kodlarini kiritmoqchimisiz, xususiy tahlil dasturi bo'lagi, kabi"
 
-#: ureport/translation.py:14
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#~ msgid "The API token for the RapidPro account this dashboard is tied to"
+#~ msgstr "Ushbu qayd yo'zuvlarini kuzatish paneli bog'langan RapidPro akkaunti uchun amaliy dasturlash interfeysi tokeni"
+
+#~ msgid "Not Set"
+#~ msgstr "Sozlanmagan"
+
+#~ msgid "National"
+#~ msgstr "Milliy"
