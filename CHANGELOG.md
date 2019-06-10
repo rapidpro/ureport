@@ -1,3 +1,7 @@
+v1.0.454
+----------
+ * Add Bolivia and Ecuador flags on the footer
+
 v1.0.453
 ----------
  * Add India flag on the footer
