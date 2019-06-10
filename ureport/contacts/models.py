@@ -208,3 +208,15 @@ class ReportersCounter(models.Model):
 
     class Meta:
         index_together = ("org", "type")
+
+
+class ContactActivity(models.Model):
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="contact_activities")
+
+    backend = models.ForeignKey(OrgBackend, on_delete=models.PROTECT, null=True)
+
+    contact = models.CharField(max_length=36)
+
+    type = models.CharField(max_length=255)
+
+    date = models.DateField(help_text="The starting date for for the month")
