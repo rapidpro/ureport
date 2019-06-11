@@ -13,10 +13,10 @@
   .top-graph(style="background-color: #EEE;")
     .columns.is-paddingless.is-marginless
       .column
-          Movement
+          Poll Responses
       .column
         .engagement-graph
-          #resp-graph
+          #poll-responses-graph
 
   .homepage-reporters-stats
     .columns.is-paddingless.is-marginless
@@ -39,6 +39,7 @@
 
 -block extra-script
   {{ block.super }}
+  <script src="{{ STATIC_URL }}js/highcharts.js"></script>
   {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureporters.coffee" />
   {% endcompress %}
@@ -61,6 +62,73 @@
       });
     });
 
+    $("#poll-responses-graph").each(function() {
+    
+      var maleServerData = {{ responded_male|safe}};
+      var maleRespondedData = [];
+      Object.keys(maleServerData).forEach(function(key){
+        maleRespondedData.push([Date.parse(key), maleServerData[key]]);
+      })
+      maleRespondedData.sort(function(a,b){return a[0] - b[0];});
+
+      var femaleServerData = {{ responded_female|safe}};
+      var femaleRespondedData = [];
+      Object.keys(femaleServerData).forEach(function(key){
+        femaleRespondedData.push([Date.parse(key), femaleServerData[key]]);
+      })
+      femaleRespondedData.sort(function(a,b){return a[0] - b[0];});
+
+      $('#poll-responses-graph').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+              month: '%b',
+              year: '%b'
+            },
+            title: {
+                text: 'Date'
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x: %b}: {point.y:.2f} m'
+        },
+    
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+    
+        colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+        series :[
+          {
+            name: "Male",
+            data: maleRespondedData
+          },
+          {
+            name: "Female",
+            data: femaleRespondedData
+          }
+        ]
+     });
+    });
+    
+    
     $("#resp-graph").each(function() {
         var polled = {{ polled|safe}};
         console.log(polled);

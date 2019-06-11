@@ -46,6 +46,18 @@ def json_date_to_datetime(date_str):
     return iso8601.parse_date(date_str)
 
 
+def get_last_months(n=12):
+    start = datetime.now().date().replace(day=1)
+    months = [str(start)]
+    i = 1
+    while i < 12:
+        start = (start - timedelta(days=1)).replace(day=1)
+        months.insert(0, str(start))
+        i += 1
+
+    return months
+
+
 def get_dict_from_cursor(cursor):
     """
     Returns all rows from a cursor as a dict
@@ -235,18 +247,14 @@ def get_engagement_counts(org):
     return {c["type"]: c["count_sum"] for c in results}
 
 
-def get_engagement_polled_counts(org):
+def get_filtered_engagement_counts(org, filter_part=""):
     engagement_counts = get_engagement_counts(org)
 
-    return {key[-10:]: val for key, val in engagement_counts.items() if "total-ruleset-polled:engagement:date" in key}
+    months = get_last_months()
 
+    filtered = {key[-10:]: val for key, val in engagement_counts.items() if filter_part in key}
 
-def get_engagement_responded_counts(org):
-    engagement_counts = get_engagement_counts(org)
-
-    return {
-        key[-10:]: val for key, val in engagement_counts.items() if "total-ruleset-responded:engagement:date" in key
-    }
+    return {key: filtered.get(key, 0) for key in months}
 
 
 def get_org_contacts_counts(org):
@@ -540,5 +548,4 @@ Org.get_gender_stats = get_gender_stats
 Org.get_regions_stats = get_regions_stats
 Org.get_flows = get_flows
 Org.get_segment_org_boundaries = get_segment_org_boundaries
-Org.get_engagement_polled_counts = get_engagement_polled_counts
-Org.get_engagement_responded_counts = get_engagement_responded_counts
+Org.get_filtered_engagement_counts = get_filtered_engagement_counts
