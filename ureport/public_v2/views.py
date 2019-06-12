@@ -270,8 +270,20 @@ class UreportersView(SmartTemplateView):
         context["reporters"] = org.get_reporters_count()
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
 
-        context["polled"] = org.get_filtered_engagement_counts("total-ruleset-polled:engagement:date")
-        context["responded"] = org.get_filtered_engagement_counts("total-ruleset-responded:engagement:date")
+        # global counter
+        context["global_counter"] = get_global_count()
+
+        polled = org.get_filtered_engagement_counts("total-ruleset-polled:engagement:date")
+        responded = org.get_filtered_engagement_counts("total-ruleset-responded:engagement:date")
+        response_rate = {}
+        for key, val in responded.items():
+            polled_count = polled.get(key, 0)
+            if polled_count == 0:
+                response_rate[key] = 0
+            else:
+                response_rate[key] = val * 100 / polled_count
+
+        context["response_rate"] = response_rate
 
         context["responded_male"] = org.get_filtered_engagement_counts(
             "total-ruleset-responded:engagement:gender:m:date"

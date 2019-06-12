@@ -10,11 +10,14 @@
         .column.page-title
           Engagement
   
-  .top-graph(style="background-color: #EEE;")
+  .block-row.engagemment-top-graph-block
     .columns.is-paddingless.is-marginless
-      .column
+      .column.is-one-third.block-content
+        .block-title
           Poll Responses
-      .column
+        .block-description
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      .column.block-content
         .engagement-graph
           #poll-responses-graph
 
@@ -36,6 +39,45 @@
             - trans "AGES"
           .column.graph-chart
             .age-stats{ id: "age-chart"}
+
+  .block-row
+    .columns.is-paddingless.is-marginless
+      .column.block-content
+        .block-title
+          Poll Responses
+        .block-description
+          A sentence here that describes the graph
+        .block-box
+          .engagement-graph
+            #poll-response-rate-graph
+
+      .column.block-content.block-colored-bg-light-blue
+        .block-title
+          Is there any text on this page to explain any of this?
+        .block-text
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .block-button
+          %a.read-more-button.button(href="#")
+            -trans "ACTION BUTTON"
+
+  .block-row
+    .columns.is-paddingless.is-marginless
+      .column.block-content.block-colored-bg-gold-yellow
+        .block-title
+          Is there any text on this page to explain any of this?
+        .block-text
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .block-button
+          %a.read-more-button.button(href="#")
+            -trans "ACTION BUTTON"
+      .column.block-content
+        .block-title
+          Users who responded - 12 months
+        .block-description
+          A sentence here that describes how what these options mean to the work we are wanting to do together
+        .block-box
+          .engagement-graph
+            #contact-activity-graph
 
 -block extra-script
   {{ block.super }}
@@ -129,25 +171,15 @@
     });
     
     
-    $("#resp-graph").each(function() {
-        var polled = {{ polled|safe}};
-        console.log(polled);
+    $("#poll-response-rate-graph").each(function() {
+        var response_rates = {{ response_rate|safe}};
 
-        var polledData = [];
-        Object.keys(polled).forEach(function(key){
-          polledData.push([Date.parse(key), polled[key]]);
+        var graphData = [];
+        Object.keys(response_rates).forEach(function(key){
+          graphData.push([Date.parse(key), response_rates[key]]);
         })
 
-        console.log(polledData);
-        
-        var responded = {{ responded|safe}};
-
-        var respondedData = []
-        Object.keys(responded).forEach(function(key){
-          respondedData.push([Date.parse(key), responded[key]]);
-        })
-
-         $('#resp-graph').highcharts({
+         $('#poll-response-rate-graph').highcharts({
               chart: {
                   type: 'spline'
               },
@@ -186,12 +218,8 @@
               colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
               series :[
                 {
-                  name: "Polled",
-                  data: polledData
-                },
-                {
-                  name: "Responded",
-                  data: respondedData
+                  name: "Poll Response",
+                  data: graphData
                 }
               ]
          });

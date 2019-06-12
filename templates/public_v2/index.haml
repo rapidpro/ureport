@@ -45,7 +45,7 @@
           .column.graph-chart
             .age-stats{ id: "age-chart"}
   
-  .homepage-join
+  .block-row
     .columns.is-paddingless.is-marginless
       .column.block-content.homepage-color-bg-1
         .homepage-block-content
@@ -61,7 +61,7 @@
           .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"850", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
   
   - for story in stories|slice:"1"
-    .homepage-story
+    .block-row.homepage-story
       .columns.is-paddingless.is-marginless
         .column.block-content.homegage-dotted-bg
           .pre-story-block
