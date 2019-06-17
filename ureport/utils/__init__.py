@@ -46,8 +46,12 @@ def json_date_to_datetime(date_str):
     return iso8601.parse_date(date_str)
 
 
-def get_last_months(n=12):
-    start = datetime.now().date().replace(day=1)
+def get_last_months(n=12, start_time=None):
+    if start_time is None:
+        start_time = datetime.now()
+
+    start = start_time.date().replace(day=1)
+
     months = [str(start)]
     i = 1
     while i < 12:
