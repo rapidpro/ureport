@@ -2329,6 +2329,13 @@ class PollResultsTest(UreportTest):
 
         expected = dict()
         expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 1
+        expected[
+            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
+            % (
+                self.poll_question.ruleset_uuid,
+                poll_result.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+        ] = 1
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
@@ -2345,13 +2352,27 @@ class PollResultsTest(UreportTest):
 
         expected = dict()
         expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 1
+        expected[
+            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
+            % (
+                self.poll_question.ruleset_uuid,
+                poll_result.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+        ] = 1
         expected["ruleset:%s:category:yes:state:R-LAGOS" % self.poll_question.ruleset_uuid] = 1
         expected["ruleset:%s:category:yes" % self.poll_question.ruleset_uuid] = 1
         expected["ruleset:%s:total-ruleset-responded" % self.poll_question.ruleset_uuid] = 1
+        expected[
+            "ruleset:%s:total-ruleset-responded:engagement:date:%s"
+            % (
+                self.poll_question.ruleset_uuid,
+                poll_result.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+        ] = 1
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
 
-        PollResult.objects.create(
+        poll_result2 = PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
             ruleset=self.poll_question.ruleset_uuid,
@@ -2369,7 +2390,21 @@ class PollResultsTest(UreportTest):
 
         expected = dict()
         expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 2
+        expected[
+            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
+            % (
+                self.poll_question.ruleset_uuid,
+                poll_result2.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+        ] = 2
         expected["ruleset:%s:total-ruleset-responded" % self.poll_question.ruleset_uuid] = 2
+        expected[
+            "ruleset:%s:total-ruleset-responded:engagement:date:%s"
+            % (
+                self.poll_question.ruleset_uuid,
+                poll_result2.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+        ] = 2
         expected["ruleset:%s:category:yes" % self.poll_question.ruleset_uuid] = 1
         expected["ruleset:%s:category:no" % self.poll_question.ruleset_uuid] = 1
         expected["ruleset:%s:category:yes:state:R-LAGOS" % self.poll_question.ruleset_uuid] = 1
@@ -2383,7 +2418,7 @@ class PollResultsTest(UreportTest):
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), dict())
 
-        PollResult.objects.create(
+        poll_result = PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
             ruleset=self.poll_question.ruleset_uuid,
@@ -2399,6 +2434,13 @@ class PollResultsTest(UreportTest):
 
         expected = dict()
         expected["ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid] = 1
+        expected[
+            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
+            % (
+                self.poll_question.ruleset_uuid,
+                poll_result.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+        ] = 1
         expected["ruleset:%s:nocategory:state:R-LAGOS" % self.poll_question.ruleset_uuid] = 1
         expected["ruleset:%s:nocategory:district:R-OYO" % self.poll_question.ruleset_uuid] = 1
         expected["ruleset:%s:nocategory:ward:R-IKEJA" % self.poll_question.ruleset_uuid] = 1
@@ -2416,8 +2458,16 @@ class PollResultsTest(UreportTest):
         )
 
         gen_counters = poll_result1.generate_counters()
-        self.assertEqual(len(gen_counters.keys()), 1)
+        self.assertEqual(len(gen_counters.keys()), 2)
         self.assertTrue("ruleset:%s:total-ruleset-polled" % self.poll_question.ruleset_uuid in gen_counters.keys())
+        self.assertTrue(
+            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
+            % (
+                self.poll_question.ruleset_uuid,
+                poll_result1.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+            in gen_counters.keys()
+        )
 
         poll_result2 = PollResult.objects.create(
             org=self.nigeria,
@@ -2441,11 +2491,27 @@ class PollResultsTest(UreportTest):
         district = poll_result2.district.upper()
         ward = poll_result2.ward.upper()
 
-        self.assertEqual(len(gen_counters.keys()), 6)
+        self.assertEqual(len(gen_counters.keys()), 8)
 
         self.assertTrue("ruleset:%s:total-ruleset-polled" % ruleset in gen_counters.keys())
+        self.assertTrue(
+            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
+            % (
+                poll_result2.ruleset,
+                poll_result2.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+            in gen_counters.keys()
+        )
 
         self.assertTrue("ruleset:%s:total-ruleset-responded" % ruleset in gen_counters.keys())
+        self.assertTrue(
+            "ruleset:%s:total-ruleset-responded:engagement:date:%s"
+            % (
+                poll_result2.ruleset,
+                poll_result2.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+            in gen_counters.keys()
+        )
 
         self.assertTrue("ruleset:%s:category:%s" % (ruleset, category) in gen_counters.keys())
 
@@ -2476,9 +2542,17 @@ class PollResultsTest(UreportTest):
         district = poll_result3.district.upper()
         ward = poll_result3.ward.upper()
 
-        self.assertEqual(len(gen_counters.keys()), 4)
+        self.assertEqual(len(gen_counters.keys()), 5)
 
         self.assertTrue("ruleset:%s:total-ruleset-polled" % ruleset in gen_counters.keys())
+        self.assertTrue(
+            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
+            % (
+                poll_result3.ruleset,
+                poll_result3.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+            in gen_counters.keys()
+        )
         self.assertFalse("ruleset:%s:total-ruleset-responded" % ruleset in gen_counters.keys())  # no response ignored
         self.assertTrue("ruleset:%s:nocategory:state:%s" % (ruleset, state) in gen_counters.keys())
         self.assertTrue("ruleset:%s:nocategory:district:%s" % (ruleset, district) in gen_counters.keys())
@@ -2505,9 +2579,17 @@ class PollResultsTest(UreportTest):
         district = poll_result4.district.upper()
         ward = poll_result4.ward.upper()
 
-        self.assertEqual(len(gen_counters.keys()), 4)
+        self.assertEqual(len(gen_counters.keys()), 5)
 
         self.assertTrue("ruleset:%s:total-ruleset-polled" % ruleset in gen_counters.keys())
+        self.assertTrue(
+            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
+            % (
+                poll_result4.ruleset,
+                poll_result4.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+            in gen_counters.keys()
+        )
         self.assertFalse(
             "ruleset:%s:total-ruleset-responded" % ruleset in gen_counters.keys()
         )  # no response should be ignored
@@ -2536,9 +2618,17 @@ class PollResultsTest(UreportTest):
         district = poll_result5.district.upper()
         ward = poll_result5.ward.upper()
 
-        self.assertEqual(len(gen_counters.keys()), 4)
+        self.assertEqual(len(gen_counters.keys()), 5)
 
         self.assertTrue("ruleset:%s:total-ruleset-polled" % ruleset in gen_counters.keys())
+        self.assertTrue(
+            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
+            % (
+                poll_result5.ruleset,
+                poll_result5.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date(),
+            )
+            in gen_counters.keys()
+        )
         self.assertFalse("ruleset:%s:total-ruleset-responded" % ruleset in gen_counters.keys())  # Other ignored
         self.assertTrue("ruleset:%s:nocategory:state:%s" % (ruleset, state) in gen_counters.keys())
         self.assertTrue("ruleset:%s:nocategory:district:%s" % (ruleset, district) in gen_counters.keys())
