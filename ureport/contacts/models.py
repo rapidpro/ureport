@@ -220,4 +220,4 @@ class ContactActivity(models.Model):
     date = models.DateField(help_text="The starting date for for the month")
 
     class Meta:
-        index_together = ("org", "contact")
+        index_together = (("org", "contact"), ("org", "date"))
