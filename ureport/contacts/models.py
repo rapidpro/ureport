@@ -218,3 +218,6 @@ class ContactActivity(models.Model):
     type = models.CharField(max_length=255)
 
     date = models.DateField(help_text="The starting date for for the month")
+
+    class Meta:
+        index_together = ("org", "contact")
