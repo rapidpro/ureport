@@ -357,6 +357,11 @@ class RapidProBackend(BaseBackend):
             for category in result["categories"]:
                 PollResponseCategory.update_or_create(question, None, category)
 
+            # deactivate if corresponding rules are removed
+            PollResponseCategory.objects.filter(question=question).exclude(category__in=result["categories"]).update(
+                is_active=False
+            )
+
     def pull_fields(self, org):
         client = self._get_client(org, 2)
         incoming_objects = client.get_fields().all(retry_on_rate_exceed=True)
