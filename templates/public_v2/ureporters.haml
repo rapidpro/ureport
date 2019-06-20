@@ -238,6 +238,7 @@
         Object.keys(response_rates).forEach(function(key){
           graphData.push([Date.parse(key), response_rates[key]]);
         })
+        graphData.sort(function(a,b){return a[0] - b[0];});
 
          $('#poll-response-rate-graph').highcharts({
               chart: {

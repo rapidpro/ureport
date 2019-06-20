@@ -347,7 +347,6 @@ class Poll(SmartModel):
                             WHERE contacts_contactactivity.date IS NULL;
                     """
                     with connection.cursor() as cursor:
-                        print(custom_sql)
                         cursor.execute(custom_sql)
 
                 # Delete existing counters and then create new counters
