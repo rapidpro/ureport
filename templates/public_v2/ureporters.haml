@@ -294,6 +294,7 @@
         Object.keys(contact_activities).forEach(function(key){
           graphData.push([Date.parse(key), contact_activities[key]]);
         })
+        graphData.sort(function(a,b){return a[0] - b[0];});
 
          $('#contact-activity-graph').highcharts({
               chart: {
