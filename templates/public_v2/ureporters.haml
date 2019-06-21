@@ -189,13 +189,10 @@
         },
         xAxis: {
             type: 'datetime',
-            dateTimeLabelFormats: { // don't display the dummy year
-              month: '%b',
-              year: '%b'
+            dateTimeLabelFormats: {
+              month: '%b %Y',
+              year: '%Y'
             },
-            title: {
-                text: 'Date'
-            }
         },
         yAxis: {
             title: {
@@ -205,7 +202,7 @@
         },
         tooltip: {
             headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x: %b}: {point.y:.2f} m'
+            pointFormat: '{point.x: %b %Y}: {point.y}'
         },
     
         plotOptions: {
@@ -214,6 +211,9 @@
                     enabled: true
                 }
             }
+        },
+        credits: {
+          enabled: false
         },
     
         colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
@@ -249,13 +249,10 @@
               },
               xAxis: {
                   type: 'datetime',
-                  dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%b',
-                    year: '%b'
+                  dateTimeLabelFormats: {
+                    month: '%b %Y',
+                    year: '%Y'
                   },
-                  title: {
-                      text: 'Date'
-                  }
               },
               yAxis: {
                   title: {
@@ -265,7 +262,7 @@
               },
               tooltip: {
                   headerFormat: '<b>{series.name}</b><br>',
-                  pointFormat: '{point.x: %b}: {point.y:.2f} m'
+                  pointFormat: '{point.x: %b %Y}: {point.y:.1f}%'
               },
           
               plotOptions: {
@@ -275,7 +272,9 @@
                       }
                   }
               },
-          
+              credits: {
+                enabled: false
+              },
               colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
               series :[
                 {
@@ -305,13 +304,10 @@
               },
               xAxis: {
                   type: 'datetime',
-                  dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%b',
-                    year: '%b'
+                  dateTimeLabelFormats: {
+                    month: '%b %Y',
+                    year: '%Y'
                   },
-                  title: {
-                      text: 'Date'
-                  }
               },
               yAxis: {
                   title: {
@@ -321,7 +317,7 @@
               },
               tooltip: {
                   headerFormat: '<b>{series.name}</b><br>',
-                  pointFormat: '{point.x: %b}: {point.y:.2f} m'
+                  pointFormat: '{point.x: %b %Y}: {point.y}'
               },
           
               plotOptions: {
@@ -331,11 +327,13 @@
                       }
                   }
               },
-          
+              credits: {
+                enabled: false
+              },
               colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
               series :[
                 {
-                  name: "Contacts activity",
+                  name: "Active contacts",
                   data: graphData
                 }
               ]
