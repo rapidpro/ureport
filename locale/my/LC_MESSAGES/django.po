@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-20 10:49+0000\n"
+"POT-Creation-Date: 2019-06-21 10:49+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -17,6 +17,652 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The name of this category"
+msgstr "အမ်ိဳးအစား၏ အမည္"
+
+msgid "An optional image that can describe this category"
+msgstr "ယခုအမ်ိဳးအမည္ကို ေဖာ္ျပႏိုင္ေသာ ျခြင္းခ်က္ဓါတ္ပံု "
+
+msgid "The organization this category applies to"
+msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
+
+msgid "Categories"
+msgstr "အမ်ိဳးအစား"
+
+msgid "The name to describe this image"
+msgstr "ယခုဓါတ္ပံုကို ေဖာ္ျပရန္အမည္"
+
+msgid "The category this image represents"
+msgstr "ယခုဓါတ္ပံုက ေဖာ္ျပေနေသာ အမ်ိဳးအစား"
+
+msgid "The image file to use"
+msgstr "အသံုးျပဳရန္ ဓါတ္ပံုဖိုင္"
+
+msgid "The human readable name for this content type"
+msgstr "လူဖတ္ႏိုင္မည့္ ယခုအေၾကာင္းအရာ၏အမည္"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "ယခုအေၾကာင္းအရာ အမ်ိဳးအစားကို သတ္မွန္ရန္ အမွန္အသား ပံုစံခ်ထားသည့္ tag မ်ားကိုအသံုးျပဳရန္"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "သည္အေၾကာင္းအရာ အမ်ိဳးအစားကို site ၏မည္သည့္ေနရာတြင္ အသံုးျပဲၿပီး မည္ကဲ့သို႕ေဖာ္ျပထားသည္ကို ေဖာ္ျပခ်က္"
+
+msgid "Whether this content should include a title"
+msgstr "Whether this content should include a title"
+
+msgid "Whether this content should include an image"
+msgstr "ယခုအေၾကင္းအရာသည္ ဓါတ္ပံုထည့္သင့္မသင့္"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "ယခုအေၾကာင္းအရာသည္ HTML editor ကိုသံုးသင့္မသင့္"
+
+msgid "Whether this content should include a summary field"
+msgstr "ယခုအေၾကာင္းအရာသည္ အက်ဥ္းခ်ဳပ္ထည့္သင့္မသင့္"
+
+msgid "Whether this content should include a link"
+msgstr "ယခုအေၾကာင္းအရာသည္ link တစ္ခုထည့္သင့္မသင့္"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "ယခုအေၾကာင္းအရာသည္ ဓါတ္ပံုမ်ား ေနာက္ထပ္တင္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
+
+msgid "Whether this content has a color field"
+msgstr "ယခုအေၾကာင္းအရာသည္ အေရာင္ ရွိမရွိ"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "ယခုအေၾကာင္းအရာသည္ YouTube id လုပ္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
+
+msgid "Whether this content should allow tags"
+msgstr "ယခုအေၾကာင္းအရာသည္ tag မ်ားကိုခြင့္ျပဳသင့္မသင့္"
+
+msgid "Content Type"
+msgstr "အေၾကာင္းအရာ အမ်ိဳးအစား"
+
+msgid "The category, or type for this content block"
+msgstr "ယခုအေၾကာင္းအရာမ်ားအတြက္ အမ်ိဳးးအမည္"
+
+msgid "The title for this block of content, optional"
+msgstr "အေၾကာင္းအရာမ်ား၏ ေခါင္းစဥ္ ျခြင္းခ်က္သာ"
+
+msgid "The summary for this item, should be short"
+msgstr "ယခုအမ်ိဳးအစား၏ အႏွစ္ခ်ဳပ္သည္ တိုတိုႏွင့္လိုရင္းသာျဖစ္သင့္သည္"
+
+msgid "The body of text for this content block, optional"
+msgstr "ယခုအေၾကာင္းအရာမ်ား၏ ကိုယ္ထည္စာသား ၿခြင္းခ်က္သာ"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "ယခုအေၾကာင္းအရာႏွင့္အတူ ေဖာ္ျပသင့္ေသာဓါတ္ပံု ျခြင္းခ်က္သာ"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "ဓါတ္ပံုအတြက္ေနာက္ခံအေရာင္သည္ ပံုစံအားျဖင့္"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "ယခုအေၾကာင္းအရာႏွင့္ပူးတြဲသင့္ေသာ မည္သည့္ link မဆို ၿခြင္းခ်က္သာ"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "ယခုအမ်ိဳးအစားႏွင့္ ခ်ိတ္ဆက္သင့္ေသာ YouTube ဗီးီယို၏ အမွတ္အသား"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "ယခုအေၾကာင္းအရာပိုင္းအတြက္ space ျခားထားသည့္ မည္သည့္ tag မဆို ထပ္မံအေသးစိတ္ရ်ာေဖြစစ္ထုတ္ျခင္းမ်ားအတြက္ အသံုးျပဳႏိုင္သည္ ျခြင္းခ်က္သာ"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "ယခုအပိုင္း၏ဦးစားေပးမွာ အေရးႀကီးဆံုးအပိုင္းမ်ားကဦးစြာလာသည္"
+
+msgid "The organization this content block belongs to"
+msgstr "ယခုအေၾကာင္းအရာပိုင္းမ်ားကို ပိုင္ဆိုင္သည့္အဖြဲ႕အစည္းမွာ"
+
+msgid "Gallery"
+msgstr "စုစည္းရာ"
+
+msgid "Add Image"
+msgstr "ဓါတ္ပံုထည့္ရန္"
+
+msgid "Search"
+msgstr "ရွာေဖြရန္"
+
+msgid "Add"
+msgstr "ထပ္ထည့္ရန္"
+
+msgid "Content Types"
+msgstr "အေၾကာင္းအရာ အမ်ိဳးအစားမ်ား"
+
+msgid "Content Blocks"
+msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
+
+#, fuzzy, python-format
+#| msgid "Content Blocks"
+msgid "%s Blocks"
+msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
+
+#, fuzzy, python-format
+#| msgid "Edit"
+msgid "Edit %s"
+msgstr "တည္းျဖတ္"
+
+#, fuzzy, python-format
+#| msgid "Create"
+msgid "Create %s"
+msgstr "ဖန္တီးပါ"
+
+msgid "Create Content Block"
+msgstr "အေၾကာင္းအရာပိုင္းကိုဖန္တီးရန္"
+
+msgid "Your first name"
+msgstr "သင့္နာမည္၏ပထမအပိုင္း"
+
+msgid "Your last name"
+msgstr "သင့္နာမည္၏ဒုတိယအပိုင္း"
+
+msgid "Your email address"
+msgstr "သင့္ email လိပ္စာ"
+
+msgid "Your password, at least eight letters please"
+msgstr "သင့္လွိဳ႕၀ွက္နံပါတ္ အနည္းဆံုးစာလံုး ၈ လံုးျဖစ္ရန္"
+
+msgid "That email address is already used"
+msgstr "ယခု email လိပ္စာသည္ အသံုးျပဳျပီးသားျဖစ္ေနသည္။"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "လွိဳ႕၀ွက္နံပါတ္သည္ အနည္းဆံုးစာလံုးရွစ္လံုး ပါ၀င္ရမည္"
+
+msgid "This domain is used for subdomains"
+msgstr "ယခု domain ကို subdomains မ်ားအတြက္အသံုးျပဳသည္"
+
+msgid "Name"
+msgstr "အမည္"
+
+msgid "The name of this organization"
+msgstr "အဖြဲ႕အစည္း၏အမည္"
+
+msgid "The logo that should be used for this organization"
+msgstr "ယခုအဖြဲ႕အစည္းအတြက္အသံုးျပဳသင့္ေသာ အမွတ္တံဆိပ္"
+
+msgid "Administrators"
+msgstr "စီမံအုပ္ခ်ဳပ္သူမ်ား"
+
+msgid "The administrators in your organization"
+msgstr "သင့္အဖြဲ႕အစည္းအတြင္းရွိ စီမံအုပ္ခ်ဳပ္သူမ်ား"
+
+msgid "Viewers"
+msgstr "လာေရာက္ၾကည့္ရွဳသူမ်ား"
+
+msgid "The viewers in your organization"
+msgstr "သင့္အဖြဲ႕အစည္းရွိ လာေရာက္ၾကည့္ရွဳသူမ်ား"
+
+msgid "Editors"
+msgstr "တည္းျဖတ္သူမ်ား"
+
+msgid "The editors in your organization"
+msgstr "သင့္အဖြဲ႕အစည္းရွိ တည္းျဖတ္သူမ်ား"
+
+msgid "Language"
+msgstr "ဘာသာစကား"
+
+msgid "The main language used by this organization"
+msgstr "သည္အဖြဲ႕အစည္းကအသံုးျပဳေသာ အဓိကဘာသာစကား"
+
+msgid "Subdomain"
+msgstr ""
+
+msgid "This subdomain is not available"
+msgstr "subdomain မရႏိုင္ပါ"
+
+msgid "The subdomain for this organization"
+msgstr "သည္အဖြဲ႕အစည္း၏ subdomain"
+
+msgid "Domain"
+msgstr ""
+
+msgid "This domain is not available"
+msgstr "domain မရႏိုင္ပါ"
+
+msgid "The custom domain for this organization"
+msgstr "သည္အဖြဲ႕အစည္း၏ ပံုမွန္ domain"
+
+msgid "Timezone"
+msgstr "အခ်ိန္အပိုင္းအျခား"
+
+msgid "The timezone your organization is in."
+msgstr "သင့္အဖြဲ႕အစည္းရွိေနသည့္ အခ်ိန္အပိုင္းအျခား"
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "ယခုအဖြဲ႕အစည္းႏွင့္ဆက္ႏႊယ္ေနေသာ သတင္းအခ်က္အလက္မ်ားကို  ထိန္းသိမ္းရန္ အသံုးျပဳထားေသာ JSON blob"
+
+msgid "Administrator"
+msgstr "စီမံအုပ္ခ်ဳပ္သူ"
+
+msgid "Editor"
+msgstr "တည္းျဖတ္သူ"
+
+msgid "Viewer"
+msgstr "ၾကည့္ရွဳေလ့လာသူ"
+
+msgid "Org"
+msgstr "အဖြဲ႕အစည္း"
+
+msgid "The organization to which the account is invited to view"
+msgstr "လာေရာက္ၾကည့္ရွဳရန္ ဖိတ္ျခင္းခံရေသာ အဖြဲ႕အစည္း၏ account"
+
+msgid "Email"
+msgstr "အီးေမးလ္"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "လာေရာက္ၾကည့္ရွဳသူကို ဖိတ္ရန္ပို႕ေသာ အီးေမးလ္"
+
+msgid "Secret"
+msgstr "လွ်ိဳ႕၀ွက္"
+
+msgid "a unique code associated with this invitation"
+msgstr "ယခုဖိတ္ၾကားျခင္းႏွင့္ ႏွီးႏြယ္ေနေသာ ထူးျခားထင္ရွားသည့္ code"
+
+msgid "User Role"
+msgstr "အသံုးျပဳသူ၏ အခန္းက႑"
+
+#, python-format
+msgid "%s Invitation"
+msgstr ""
+
+msgid "Banner"
+msgstr "ေခါင္းစည္း"
+
+msgid "Pattern"
+msgstr "ပံုစံ"
+
+msgid "The organization in which the image will be used"
+msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
+
+msgid "The name to describe this background"
+msgstr "ယခုေနာက္ခံကို ေဖာ္ျပရန္အမည္"
+
+msgid "Background type"
+msgstr "ေနာက္ခံအမ်ိဳးအစား"
+
+msgid "The image file"
+msgstr "ဓါတ္ပံုဖိုင္"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The API token for this backend"
+msgstr "ယခုအမ်ိဳးအစား၏ေခါင္းစဥ္"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
+msgid "Edit"
+msgstr "တည္းျဖတ္"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+
+msgid "Manage Users"
+msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+
+msgid "Accounts"
+msgstr "account မ်ား"
+
+msgid "Admins"
+msgstr "စီစဥ္သူ"
+
+msgid "Remove"
+msgstr "ဖယ္ရွားလိုက္ပါ"
+
+msgid "You must have at least one administator"
+msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
+
+msgid "Select your Organization"
+msgstr "သင့္အဖြဲ႕အစည္းကို ေရြးျခယ္ပါ"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "သင့္ account သည္အဖြဲ႕အစည္းတစ္ခုခုႏွင့္ ပတ္သတ္ျခင္းမရွိပါ။ ေက်းဖူးျပဳၿပီး administrator ကိုဆက္သြယ္ပါ"
+
+msgid "Your Organization"
+msgstr "သင္၏အဖြဲ႕အစည္း"
+
+msgid "Invite people to your organization"
+msgstr "သင့္အဖြဲ႕အစည္းသို႕ လူမ်ားကို ဖိတ္ေခၚပါ"
+
+msgid "User group"
+msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
+
+msgid "One of the emails you entered is invalid."
+msgstr "သင္ထည့္လိုက္ေသာ အီးေမးလ္မ်ားထဲမွတစ္ခုမွာ မွားယြင္းေနပါသည္"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr ""
+
+msgid "Create"
+msgstr "ဖန္တီးပါ"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator ကိုဆက္သြယ္ပါ"
+
+#, fuzzy, python-format
+#| msgid "Join & Engage"
+msgid "Join %(name)s"
+msgstr "U-Report တြင္ပါ၀င္ရန္"
+
+msgid "Join"
+msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးျပဳၿပီး လူႀကီးမင္းအဖြဲ႕အစည္းရွိ administrator ကိုဆက္သြယ္ပါ"
+
+msgid "Task"
+msgstr ""
+
+msgid "Tasks"
+msgstr ""
+
+msgid "The title for this story"
+msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
+
+msgid "Whether this story is featured"
+msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပထားျခင္းရွိမရွိ"
+
+msgid "The summary for the story"
+msgstr "သတင္းေဆာင္းပါး၏အႏွစ္ခ်ဳပ္"
+
+msgid "The body of text for the story"
+msgstr "သတင္းေဆာင္းပါး၏စာကိုယ္"
+
+msgid "The writer of the story"
+msgstr "သတင္းေဆာင္းပါးေရးသူ"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပရန္ mp3 file link "
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "ယခုသတင္းေဆာင္းပါးျဖင့္ ခ်ိတ္ဆက္ထားသင့္သည့္ YouTube video ၏အမွတ္အသား (YouTube URL တြင္ထိုစာသားသည္ v= ၏ေနာက္တြင္ရွိၿပီး & ၏ေရွ႕တြင္ရွိလိမ့္မည္)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "ယခုသတင္းေဆာင္းပါးတြင္ခ်ိတ္ဆက္လိုသည္မ်ားကို space ျခားထားသည့္ အခ်ိတ္အဆက္မ်ားျဖင့္ ယခုထက္ပိုျပီးတိတိက်က်ရွာေတြနိုင္ရန္အသ၊ံုးျပဳႏိုင္ပါသည္။(သင့္ေရြးျခယ္မႈသာျဖစ္သည္)"
+
+msgid "The category for this story"
+msgstr "သတင္းေဆာင္းပါးအမ်ိဳးအစား"
+
+msgid "The organization this story belongs to"
+msgstr "ယခုသတင္းေဆာင္းပါးကိုပိုင္သည့္အဖြဲ႕အစည္း"
+
+msgid "Stories"
+msgstr "သတင္းေဆာင္းပါးမ်ား"
+
+msgid "The story to associate to"
+msgstr "သတင္းေဆာင္းပါးႏွင့္ဆက္ႏြယ္ရန္"
+
+msgid "Yes"
+msgstr "ဟုတ္ပါသည္"
+
+msgid "No"
+msgstr "မဟုတ္ပါ"
+
+msgid "Story Images"
+msgstr "သတင္းေဆာင္းပါးဓါတ္ပံုမ်ား"
+
+#, python-format
+msgid "Image %d"
+msgstr ""
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
+
+msgid "Remove Item?"
+msgstr "ဖယ္ရွားလိုက္ပါ"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "ဖယ္ရွားလိုက္သည္ႏွင့္ အၿပီးပ်က္သြားမည္ျဖစ္ပါသည္ ဖယ္ရွားျခင္းကိုျပန္လည္ျပင္ဆင္ႏိုင္သည့္ နည္းလမ္းလံုး၀မရွိပါ"
+
+msgid "Cancel"
+msgstr "မလုပ္လိုပါ"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+
+msgid "Previous"
+msgstr "ယခင္"
+
+msgid "Next"
+msgstr "ေရွ႕သို႕"
+
+msgid "edit"
+msgstr "တည္းျဖတ္"
+
+msgid "Sign in"
+msgstr "၀င္ေရာက္ရန္"
+
+msgid "Login"
+msgstr "၀င္ေရာက္ရန္"
+
+msgid "Forgot Password?"
+msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သြားပါသလား"
+
+msgid "Token Expired"
+msgstr "ေပးထားသည္မွာ သက္တမ္းကုန္ဆံုးသြားပါၿပီ"
+
+msgid "Login Failure"
+msgstr "မ၀င္ေရာက္ႏိုင္ပါ"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "အျခားနည္းလမ္းတစ္ခုမွာ ေအာက္တြင္ ေဖာ္ျပထားေသာ ပံုစံကိုျဖည့္ျခင္းအားျဖင့္ အီးေမးလ္မွတဆင့္ သင့္ password ကိုေျပာင္းႏိုင္ပါသည္ "
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "သင့္ password အသစ္ျပဳလုပ္ရန္ website administrator ကိုဆက္သြယ္ပါ"
+
+msgid "Email Address"
+msgstr "အီးေမးလ္လိပ္စာ"
+
+msgid "Recover"
+msgstr "ျပန္လည္ရယူရန္"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "sign up လုပ္စဥ္ကအသံုးျပဳခဲ့ေသာ အီးေမးလ္ကိုထည့္လိုက္ပါ။ လူၾကီးမင္း password ျပန္ရေအာင္ ကူညီပါမယ္"
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+
+msgid "New Password"
+msgstr "Password အသစ္"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Password မ်ားသည္ အနည္းဆံုး၈လံုးရွိရပါမည္  uppercase တစ္လံုး၊ lowercase တစ္လံုးႏွင့္ နံပါတ္တစ္ခု"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "ေက်းဇူးျပဳၿပီး password အသစ္သံုးေပးပါ ယခု password မွာ မႏွစ္ကသံုးၿပီးသားျဖစ္ပါသည္"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Password"
+msgstr "Password အသစ္"
+
+msgid "Confirm Password"
+msgstr "Password အတည္ျပဳေပးပါ"
+
+msgid "Please enter your password to save changes."
+msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
+
+msgid "Confirm the new password by filling the this field"
+msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "password အသစ္မွာ ယခုအတည္ျပဳသည့္ password ႏွင့္မတူပါ"
+
+msgid "Your Email"
+msgstr "သင့္အီးေမးလ္"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "အီးေမးလ္ရေအာင္ျပန္လည္လုပ္လို႕မရပါ။ password အသစ္လုပ္ရန္ website administrator ကိုေက်းဇူးျပဳၿပီးဆက္သြယ္ေပးပါ"
+
+msgid "Current Password"
+msgstr "လက္ရွိ password"
+
+msgid "Your current password"
+msgstr "သင္၏လက္ရွိ password"
+
+msgid "Your new password."
+msgstr "သင္၏ password အသစ္"
+
+msgid "Confirm new Password"
+msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
+
+msgid "Confirm your new password."
+msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
+
+msgid "Please enter your password to save changes"
+msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
+
+msgid "Confirm your new password by entering it here"
+msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "password အသစ္ႏွင့္ အတည္ျပဳထားေသာ password တို႕ကိုက္ညီမႈမရွိပါ ထပ္မံၾကိဳးစားၾကည့္ပါ"
+
+msgid "New user created successfully."
+msgstr "user အသစ္ေအာင္ျမင္စြာ ဖန္တီးၿပီးပါၿပီ"
+
+msgid "Groups"
+msgstr "အုပ္စုမ်ား"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
+
+msgid "Set the user's initial password here."
+msgstr "user ၏ကနဦး password ကိုသည္ေနရာတြင္ထည့္ပါ"
+
+msgid "Last Login"
+msgstr "ေနာက္ဆံုး login"
+
+msgid "Is Active"
+msgstr "Active ျဖစ္ေနသည္"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "ယခုအသံုးျပဳသူကို သည္ site တြင္ login လုပ္ခြင့္ျပဳ မျပဳ"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "password အသစ္ရိုက္ထည့္ျခင္းျဖင့္ password ေျပာင္းလို႕ရပါတယ္"
+
+msgid "Username"
+msgstr "အသံုးျပဳသူ၏အမည္"
+
+msgid "Your password"
+msgstr "သင့္ password"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "password အသစ္လုပ္လိုလွ်င္ သည္ေနရာတြင္ထည့္ပါ"
+
+msgid "Confirm New Password"
+msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
+
+msgid "Confirm your new password"
+msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
+
+msgid "Edit your profile"
+msgstr "သင့္ profile ကိုထပ္မံျပင္ဆင္ေပးပါ"
+
+msgid "Password Recovery"
+msgstr "password ျပန္ရရန္"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "အၾကံျပဳညႊန္ၾကားခ်က္မ်ားကို သင့္အီးေမးလ္ထံပို႕လိုက္ပါၿပီ"
+
+msgid "Password Recovery Request"
+msgstr "Password ျပန္ရရန္ ေတာင္းခံျခင္း"
+
+msgid "Pick a new password"
+msgstr "Password အသစ္ထပ္ေရြးပါ"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "ေက်းဇူးတင္ပါတယ္ သင့္ passwordကို ေအာင္ျမင္စြာေျပာင္းလိုက္ပါၿပီ"
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "သင္သည္ %s အျဖစ္ login ၀င္ထားသည္"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "password ကိုေအာင္ျမင္စြာ ေျပာင္းလဲၿပီးပါၿပီ။ password အသစ္ကိုသံုးၿပီး login လုပ္ႏိုင္ပါၿပီ"
+
+msgid "Reset your Password"
+msgstr "password ေျပာင္းပါ"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "လံုျခံဳစိတ္ခ်ရျခင္းမရွိေသာေၾကာင့္ သင္၏ link သည္မရေတာ့ပါ။ သည္ေနရာတြင္သင့္ အီးေမးလ္ရိုက္ထည့္ျခင္းျဖင့္ အစမွျပန္လုပ္ပါ"
+
+msgid "Submit"
+msgstr "တင္သြင္းပါ"
+
+msgid "Form"
+msgstr "ပံုစံ"
+
+msgid "Save Changes"
+msgstr "ေျပာင္းထားသည္မ်ားကို saveလုပ္ပါ"
+
+#, fuzzy, python-format
+#| msgid "Your poll has been updated."
+msgid "Your new %s has been created."
+msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံုးအဆင့္ျပဳလုပ္ထားသည္"
+
+#, python-format
+msgid "Import %s"
+msgstr ""
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -33,9 +679,6 @@ msgstr "အဖြဲ႕အစည္းမ်ား"
 msgid "Users"
 msgstr "အသံုးျပဳသူမ်ား"
 
-msgid "Content Types"
-msgstr "အေၾကာင္းအရာ အမ်ိဳးအစားမ်ား"
-
 msgid "Images"
 msgstr "ဓါတ္ပံုမ်ား"
 
@@ -48,17 +691,11 @@ msgstr "တိုင္းျပည္ အျခားအမည္မ်ား"
 msgid "Polls"
 msgstr "ေမးခြန္းမ်ား"
 
-msgid "Categories"
-msgstr "အမ်ိဳးအစား"
-
 msgid "Category Images"
 msgstr "အမ်ိဳးအစားအလိုက္ ဓါတ္ပံုမ်ား"
 
 msgid "News Items"
 msgstr "အမ်ိဳးအမည္သစ္မ်ား"
-
-msgid "Stories"
-msgstr "သတင္းေဆာင္းပါးမ်ား"
 
 msgid "Job Sources"
 msgstr "အလုပ္ေနရာမ်ား"
@@ -96,9 +733,6 @@ msgstr "ထပ္တိုး မီႏူး"
 msgid "Logout"
 msgstr "ယခုစာမ်က္ႏွာမွထြက္မည္"
 
-msgid "Login"
-msgstr "၀င္ေရာက္ရန္"
-
 msgid "About"
 msgstr "U-Report အေၾကာင္း"
 
@@ -129,12 +763,6 @@ msgid ""
 "      "
 msgstr ""
 
-msgid "Next"
-msgstr "ေရွ႕သို႕"
-
-msgid "Cancel"
-msgstr "မလုပ္လိုပါ"
-
 msgid "Back"
 msgstr ""
 
@@ -143,20 +771,6 @@ msgid ""
 "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
 msgstr ""
-
-msgid "Edit"
-msgstr "တည္းျဖတ္"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
-
-msgid "Manage Users"
-msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
-
-msgid "Add"
-msgstr "ထပ္ထည့္ရန္"
 
 msgid "ABOUT U-REPORT"
 msgstr "U-Report အေၾကာင္းသိေကာင္းစရာ"
@@ -536,42 +1150,21 @@ msgstr "စာရင္းသြင္းထားၿပီး"
 msgid "Week of"
 msgstr "အပတ္၏"
 
-msgid "Sign in"
-msgstr "၀င္ေရာက္ရန္"
-
-msgid "Forgot Password?"
-msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သြားပါသလား"
-
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr ""
 
-msgid "Banner"
-msgstr "ေခါင္းစည္း"
-
-msgid "Pattern"
-msgstr "ပံုစံ"
-
 msgid "Flag"
 msgstr "အလံ"
 
-msgid "Org"
-msgstr "အဖြဲ႕အစည္း"
-
 msgid "The organization to which the image will be used"
 msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
-
-msgid "Name"
-msgstr "အမည္"
 
 msgid "A short descriptive name for this image"
 msgstr "ယခုဓါတ္ပံုအတြက္ နာမည္အတိုေကာက္"
 
 msgid "Image type"
 msgstr "ဓါတ္ပံုအမ်ိဳးအစား"
-
-msgid "The image file"
-msgstr "ဓါတ္ပံုဖိုင္"
 
 msgid "Label"
 msgstr "အညႊန္း"
@@ -684,17 +1277,11 @@ msgstr "ယခုဗီဒီယို၏ေခါင္းစဥ္"
 msgid "A short summary description for this video"
 msgstr "ယခုဗီဒီယိုအတြက္ အက်ဥ္းခ်ံဳးေဖာ္ျပခ်က္"
 
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "ယခုအမ်ိဳးအစားႏွင့္ ခ်ိတ္ဆက္သင့္ေသာ YouTube ဗီးီယို၏ အမွတ္အသား"
-
 msgid "The organization this video belongs to"
 msgstr "ယခုဗီဒီယိုႏွင့္ သက္ဆိုင္ေသာအဖြဲ႕အစည္း"
 
 msgid "The name of this poll category"
 msgstr "ယခုေမးခြန္း အမ်ိဳးအစား"
-
-msgid "The organization this category applies to"
-msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
 
 msgid "Poll Categories"
 msgstr "ေမးခြန္းအမ်ိဳးအစားမ်ား"
@@ -732,14 +1319,8 @@ msgstr "ေမးခြန္းအတြက္ ေျဖာ္ျပရမည�
 msgid "The organization this poll is part of"
 msgstr "ယခုေမးခြန္ႏွင့္ ပတ္သတ္ေသာ အဖြဲ႕အစည္း"
 
-msgid "The name to describe this image"
-msgstr "ယခုဓါတ္ပံုကို ေဖာ္ျပရန္အမည္"
-
 msgid "The poll to associate to"
 msgstr "ယခုေမးခြန္းႏွင့္ ဆက္ႏြယ္ေသာ"
-
-msgid "The image file to use"
-msgstr "အသံုးျပဳရန္ ဓါတ္ပံုဖိုင္"
 
 msgid "The poll for this response"
 msgstr "ယခုတံု႕ျပန္မႈအတြက္ ေမးခြန္း"
@@ -811,10 +1392,6 @@ msgstr "ေမးခြန္းမ်ားအတြက္ ဓါတ္ပံ�
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "သင္ေဖာ္ျပလိုသည့္ မည္သည့္ တံု႕ျပန္ခ်က္ကိုမဆို ထည့္ပါ (ရွိလွ်င္)"
-
-#, python-format
-msgid "Image %d"
-msgstr ""
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "ေမးခြန္းစာမ်က္ႏွာႏွင့္ preview မ်ားတြင္ေဖာ္ျပရန္ ဓါတ္ပံု(ျခြင္းခ်က္)"
@@ -1027,477 +1604,6 @@ msgstr "သင့္အဖြဲ႕အစည္း၏စာမ်က္ႏွာ
 
 msgid "Something to trigger localizations"
 msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္ေသာအရာ"
-
-#~ msgid "The name of this category"
-#~ msgstr "အမ်ိဳးအစား၏ အမည္"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "ယခုအမ်ိဳးအမည္ကို ေဖာ္ျပႏိုင္ေသာ ျခြင္းခ်က္ဓါတ္ပံု "
-
-#~ msgid "The category this image represents"
-#~ msgstr "ယခုဓါတ္ပံုက ေဖာ္ျပေနေသာ အမ်ိဳးအစား"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "လူဖတ္ႏိုင္မည့္ ယခုအေၾကာင္းအရာ၏အမည္"
-
-#~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr "ယခုအေၾကာင္းအရာ အမ်ိဳးအစားကို သတ္မွန္ရန္ အမွန္အသား ပံုစံခ်ထားသည့္ tag မ်ားကိုအသံုးျပဳရန္"
-
-#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-#~ msgstr "သည္အေၾကာင္းအရာ အမ်ိဳးအစားကို site ၏မည္သည့္ေနရာတြင္ အသံုးျပဲၿပီး မည္ကဲ့သို႕ေဖာ္ျပထားသည္ကို ေဖာ္ျပခ်က္"
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "Whether this content should include a title"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "ယခုအေၾကင္းအရာသည္ ဓါတ္ပံုထည့္သင့္မသင့္"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ HTML editor ကိုသံုးသင့္မသင့္"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ အက်ဥ္းခ်ဳပ္ထည့္သင့္မသင့္"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ link တစ္ခုထည့္သင့္မသင့္"
-
-#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ ဓါတ္ပံုမ်ား ေနာက္ထပ္တင္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ အေရာင္ ရွိမရွိ"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ YouTube id လုပ္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "ယခုအေၾကာင္းအရာသည္ tag မ်ားကိုခြင့္ျပဳသင့္မသင့္"
-
-#~ msgid "Content Type"
-#~ msgstr "အေၾကာင္းအရာ အမ်ိဳးအစား"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "ယခုအေၾကာင္းအရာမ်ားအတြက္ အမ်ိဳးးအမည္"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "အေၾကာင္းအရာမ်ား၏ ေခါင္းစဥ္ ျခြင္းခ်က္သာ"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "ယခုအမ်ိဳးအစား၏ အႏွစ္ခ်ဳပ္သည္ တိုတိုႏွင့္လိုရင္းသာျဖစ္သင့္သည္"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "ယခုအေၾကာင္းအရာမ်ား၏ ကိုယ္ထည္စာသား ၿခြင္းခ်က္သာ"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "ယခုအေၾကာင္းအရာႏွင့္အတူ ေဖာ္ျပသင့္ေသာဓါတ္ပံု ျခြင္းခ်က္သာ"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "ဓါတ္ပံုအတြက္ေနာက္ခံအေရာင္သည္ ပံုစံအားျဖင့္"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "ယခုအေၾကာင္းအရာႏွင့္ပူးတြဲသင့္ေသာ မည္သည့္ link မဆို ၿခြင္းခ်က္သာ"
-
-#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "ယခုအေၾကာင္းအရာပိုင္းအတြက္ space ျခားထားသည့္ မည္သည့္ tag မဆို ထပ္မံအေသးစိတ္ရ်ာေဖြစစ္ထုတ္ျခင္းမ်ားအတြက္ အသံုးျပဳႏိုင္သည္ ျခြင္းခ်က္သာ"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "ယခုအပိုင္း၏ဦးစားေပးမွာ အေရးႀကီးဆံုးအပိုင္းမ်ားကဦးစြာလာသည္"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "ယခုအေၾကာင္းအရာပိုင္းမ်ားကို ပိုင္ဆိုင္သည့္အဖြဲ႕အစည္းမွာ"
-
-#~ msgid "Gallery"
-#~ msgstr "စုစည္းရာ"
-
-#~ msgid "Add Image"
-#~ msgstr "ဓါတ္ပံုထည့္ရန္"
-
-#~ msgid "Search"
-#~ msgstr "ရွာေဖြရန္"
-
-#~ msgid "Content Blocks"
-#~ msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
-
-#~ msgid "Create Content Block"
-#~ msgstr "အေၾကာင္းအရာပိုင္းကိုဖန္တီးရန္"
-
-#~ msgid "Your first name"
-#~ msgstr "သင့္နာမည္၏ပထမအပိုင္း"
-
-#~ msgid "Your last name"
-#~ msgstr "သင့္နာမည္၏ဒုတိယအပိုင္း"
-
-#~ msgid "Your email address"
-#~ msgstr "သင့္ email လိပ္စာ"
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "သင့္လွိဳ႕၀ွက္နံပါတ္ အနည္းဆံုးစာလံုး ၈ လံုးျဖစ္ရန္"
-
-#~ msgid "That email address is already used"
-#~ msgstr "ယခု email လိပ္စာသည္ အသံုးျပဳျပီးသားျဖစ္ေနသည္။"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "လွိဳ႕၀ွက္နံပါတ္သည္ အနည္းဆံုးစာလံုးရွစ္လံုး ပါ၀င္ရမည္"
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "ယခု domain ကို subdomains မ်ားအတြက္အသံုးျပဳသည္"
-
-#~ msgid "The name of this organization"
-#~ msgstr "အဖြဲ႕အစည္း၏အမည္"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "ယခုအဖြဲ႕အစည္းအတြက္အသံုးျပဳသင့္ေသာ အမွတ္တံဆိပ္"
-
-#~ msgid "Administrators"
-#~ msgstr "စီမံအုပ္ခ်ဳပ္သူမ်ား"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းအတြင္းရွိ စီမံအုပ္ခ်ဳပ္သူမ်ား"
-
-#~ msgid "Viewers"
-#~ msgstr "လာေရာက္ၾကည့္ရွဳသူမ်ား"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းရွိ လာေရာက္ၾကည့္ရွဳသူမ်ား"
-
-#~ msgid "Editors"
-#~ msgstr "တည္းျဖတ္သူမ်ား"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းရွိ တည္းျဖတ္သူမ်ား"
-
-#~ msgid "Language"
-#~ msgstr "ဘာသာစကား"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "သည္အဖြဲ႕အစည္းကအသံုးျပဳေသာ အဓိကဘာသာစကား"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "subdomain မရႏိုင္ပါ"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "သည္အဖြဲ႕အစည္း၏ subdomain"
-
-#~ msgid "This domain is not available"
-#~ msgstr "domain မရႏိုင္ပါ"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "သည္အဖြဲ႕အစည္း၏ ပံုမွန္ domain"
-
-#~ msgid "Timezone"
-#~ msgstr "အခ်ိန္အပိုင္းအျခား"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "သင့္အဖြဲ႕အစည္းရွိေနသည့္ အခ်ိန္အပိုင္းအျခား"
-
-#~ msgid "JSON blob used to store configuration information associated with this organization"
-#~ msgstr "ယခုအဖြဲ႕အစည္းႏွင့္ဆက္ႏႊယ္ေနေသာ သတင္းအခ်က္အလက္မ်ားကို  ထိန္းသိမ္းရန္ အသံုးျပဳထားေသာ JSON blob"
-
-#~ msgid "Administrator"
-#~ msgstr "စီမံအုပ္ခ်ဳပ္သူ"
-
-#~ msgid "Editor"
-#~ msgstr "တည္းျဖတ္သူ"
-
-#~ msgid "Viewer"
-#~ msgstr "ၾကည့္ရွဳေလ့လာသူ"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "လာေရာက္ၾကည့္ရွဳရန္ ဖိတ္ျခင္းခံရေသာ အဖြဲ႕အစည္း၏ account"
-
-#~ msgid "Email"
-#~ msgstr "အီးေမးလ္"
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "လာေရာက္ၾကည့္ရွဳသူကို ဖိတ္ရန္ပို႕ေသာ အီးေမးလ္"
-
-#~ msgid "Secret"
-#~ msgstr "လွ်ိဳ႕၀ွက္"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "ယခုဖိတ္ၾကားျခင္းႏွင့္ ႏွီးႏြယ္ေနေသာ ထူးျခားထင္ရွားသည့္ code"
-
-#~ msgid "User Role"
-#~ msgstr "အသံုးျပဳသူ၏ အခန္းက႑"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "ယခုေနာက္ခံကို ေဖာ္ျပရန္အမည္"
-
-#~ msgid "Background type"
-#~ msgstr "ေနာက္ခံအမ်ိဳးအစား"
-
-#, fuzzy
-#~| msgid "The title for this item"
-#~ msgid "The API token for this backend"
-#~ msgstr "ယခုအမ်ိဳးအစား၏ေခါင္းစဥ္"
-
-#~ msgid "Accounts"
-#~ msgstr "account မ်ား"
-
-#~ msgid "Admins"
-#~ msgstr "စီစဥ္သူ"
-
-#~ msgid "Remove"
-#~ msgstr "ဖယ္ရွားလိုက္ပါ"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
-
-#~ msgid "Select your Organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းကို ေရြးျခယ္ပါ"
-
-#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-#~ msgstr "သင့္ account သည္အဖြဲ႕အစည္းတစ္ခုခုႏွင့္ ပတ္သတ္ျခင္းမရွိပါ။ ေက်းဖူးျပဳၿပီး administrator ကိုဆက္သြယ္ပါ"
-
-#~ msgid "Your Organization"
-#~ msgstr "သင္၏အဖြဲ႕အစည္း"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "သင့္အဖြဲ႕အစည္းသို႕ လူမ်ားကို ဖိတ္ေခၚပါ"
-
-#~ msgid "User group"
-#~ msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "သင္ထည့္လိုက္ေသာ အီးေမးလ္မ်ားထဲမွတစ္ခုမွာ မွားယြင္းေနပါသည္"
-
-#~ msgid "Create"
-#~ msgstr "ဖန္တီးပါ"
-
-#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
-#~ msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator ကိုဆက္သြယ္ပါ"
-
-#~ msgid "Join"
-#~ msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
-
-#~ msgid "Your invitation link has expired. Please contact your organization administrator."
-#~ msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးျပဳၿပီး လူႀကီးမင္းအဖြဲ႕အစည္းရွိ administrator ကိုဆက္သြယ္ပါ"
-
-#~ msgid "The title for this story"
-#~ msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပထားျခင္းရွိမရွိ"
-
-#~ msgid "The summary for the story"
-#~ msgstr "သတင္းေဆာင္းပါး၏အႏွစ္ခ်ဳပ္"
-
-#~ msgid "The body of text for the story"
-#~ msgstr "သတင္းေဆာင္းပါး၏စာကိုယ္"
-
-#~ msgid "The writer of the story"
-#~ msgstr "သတင္းေဆာင္းပါးေရးသူ"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပရန္ mp3 file link "
-
-#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr "ယခုသတင္းေဆာင္းပါးျဖင့္ ခ်ိတ္ဆက္ထားသင့္သည့္ YouTube video ၏အမွတ္အသား (YouTube URL တြင္ထိုစာသားသည္ v= ၏ေနာက္တြင္ရွိၿပီး & ၏ေရွ႕တြင္ရွိလိမ့္မည္)"
-
-#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "ယခုသတင္းေဆာင္းပါးတြင္ခ်ိတ္ဆက္လိုသည္မ်ားကို space ျခားထားသည့္ အခ်ိတ္အဆက္မ်ားျဖင့္ ယခုထက္ပိုျပီးတိတိက်က်ရွာေတြနိုင္ရန္အသ၊ံုးျပဳႏိုင္ပါသည္။(သင့္ေရြးျခယ္မႈသာျဖစ္သည္)"
-
-#~ msgid "The category for this story"
-#~ msgstr "သတင္းေဆာင္းပါးအမ်ိဳးအစား"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "ယခုသတင္းေဆာင္းပါးကိုပိုင္သည့္အဖြဲ႕အစည္း"
-
-#~ msgid "The story to associate to"
-#~ msgstr "သတင္းေဆာင္းပါးႏွင့္ဆက္ႏြယ္ရန္"
-
-#~ msgid "Yes"
-#~ msgstr "ဟုတ္ပါသည္"
-
-#~ msgid "No"
-#~ msgstr "မဟုတ္ပါ"
-
-#~ msgid "Story Images"
-#~ msgstr "သတင္းေဆာင္းပါးဓါတ္ပံုမ်ား"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
-
-#~ msgid "Remove Item?"
-#~ msgstr "ဖယ္ရွားလိုက္ပါ"
-
-#~ msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-#~ msgstr "ဖယ္ရွားလိုက္သည္ႏွင့္ အၿပီးပ်က္သြားမည္ျဖစ္ပါသည္ ဖယ္ရွားျခင္းကိုျပန္လည္ျပင္ဆင္ႏိုင္သည့္ နည္းလမ္းလံုး၀မရွိပါ"
-
-#~ msgid "Previous"
-#~ msgstr "ယခင္"
-
-#~ msgid "edit"
-#~ msgstr "တည္းျဖတ္"
-
-#~ msgid "Token Expired"
-#~ msgstr "ေပးထားသည္မွာ သက္တမ္းကုန္ဆံုးသြားပါၿပီ"
-
-#~ msgid "Login Failure"
-#~ msgstr "မ၀င္ေရာက္ႏိုင္ပါ"
-
-#~ msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-#~ msgstr "အျခားနည္းလမ္းတစ္ခုမွာ ေအာက္တြင္ ေဖာ္ျပထားေသာ ပံုစံကိုျဖည့္ျခင္းအားျဖင့္ အီးေမးလ္မွတဆင့္ သင့္ password ကိုေျပာင္းႏိုင္ပါသည္ "
-
-#~ msgid "Please contact the website administrator to have your password reset."
-#~ msgstr "သင့္ password အသစ္ျပဳလုပ္ရန္ website administrator ကိုဆက္သြယ္ပါ"
-
-#~ msgid "Email Address"
-#~ msgstr "အီးေမးလ္လိပ္စာ"
-
-#~ msgid "Recover"
-#~ msgstr "ျပန္လည္ရယူရန္"
-
-#~ msgid "Please enter the email address you used to sign up and we will help you recover your password."
-#~ msgstr "sign up လုပ္စဥ္ကအသံုးျပဳခဲ့ေသာ အီးေမးလ္ကိုထည့္လိုက္ပါ။ လူၾကီးမင္း password ျပန္ရေအာင္ ကူညီပါမယ္"
-
-#~ msgid "New Password"
-#~ msgstr "Password အသစ္"
-
-#~ msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-#~ msgstr "Password မ်ားသည္ အနည္းဆံုး၈လံုးရွိရပါမည္  uppercase တစ္လံုး၊ lowercase တစ္လံုးႏွင့္ နံပါတ္တစ္ခု"
-
-#~ msgid "You have used this password before in the past year, please use a new password."
-#~ msgstr "ေက်းဇူးျပဳၿပီး password အသစ္သံုးေပးပါ ယခု password မွာ မႏွစ္ကသံုးၿပီးသားျဖစ္ပါသည္"
-
-#, fuzzy
-#~| msgid "New Password"
-#~ msgid "Password"
-#~ msgstr "Password အသစ္"
-
-#~ msgid "Confirm Password"
-#~ msgstr "Password အတည္ျပဳေပးပါ"
-
-#~ msgid "Please enter your password to save changes."
-#~ msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
-
-#~ msgid "Confirm the new password by filling the this field"
-#~ msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
-
-#~ msgid "New password doesn't match with its confirmation"
-#~ msgstr "password အသစ္မွာ ယခုအတည္ျပဳသည့္ password ႏွင့္မတူပါ"
-
-#~ msgid "Your Email"
-#~ msgstr "သင့္အီးေမးလ္"
-
-#~ msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-#~ msgstr "အီးေမးလ္ရေအာင္ျပန္လည္လုပ္လို႕မရပါ။ password အသစ္လုပ္ရန္ website administrator ကိုေက်းဇူးျပဳၿပီးဆက္သြယ္ေပးပါ"
-
-#~ msgid "Current Password"
-#~ msgstr "လက္ရွိ password"
-
-#~ msgid "Your current password"
-#~ msgstr "သင္၏လက္ရွိ password"
-
-#~ msgid "Your new password."
-#~ msgstr "သင္၏ password အသစ္"
-
-#~ msgid "Confirm new Password"
-#~ msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
-
-#~ msgid "Confirm your new password."
-#~ msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
-
-#~ msgid "Please enter your password to save changes"
-#~ msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
-
-#~ msgid "Confirm your new password by entering it here"
-#~ msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
-
-#~ msgid "Mismatch between your new password and confirmation, try again"
-#~ msgstr "password အသစ္ႏွင့္ အတည္ျပဳထားေသာ password တို႕ကိုက္ညီမႈမရွိပါ ထပ္မံၾကိဳးစားၾကည့္ပါ"
-
-#~ msgid "New user created successfully."
-#~ msgstr "user အသစ္ေအာင္ျမင္စြာ ဖန္တီးၿပီးပါၿပီ"
-
-#~ msgid "Groups"
-#~ msgstr "အုပ္စုမ်ား"
-
-#~ msgid "Users will only get those permissions that are allowed for their group."
-#~ msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
-
-#~ msgid "Set the user's initial password here."
-#~ msgstr "user ၏ကနဦး password ကိုသည္ေနရာတြင္ထည့္ပါ"
-
-#~ msgid "Last Login"
-#~ msgstr "ေနာက္ဆံုး login"
-
-#~ msgid "Is Active"
-#~ msgstr "Active ျဖစ္ေနသည္"
-
-#~ msgid "Whether this user is allowed to log into the site"
-#~ msgstr "ယခုအသံုးျပဳသူကို သည္ site တြင္ login လုပ္ခြင့္ျပဳ မျပဳ"
-
-#~ msgid "Users will only get those permissions that are allowed for their group"
-#~ msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
-
-#~ msgid "You can reset the user's password by entering a new password here"
-#~ msgstr "password အသစ္ရိုက္ထည့္ျခင္းျဖင့္ password ေျပာင္းလို႕ရပါတယ္"
-
-#~ msgid "Username"
-#~ msgstr "အသံုးျပဳသူ၏အမည္"
-
-#~ msgid "Your password"
-#~ msgstr "သင့္ password"
-
-#~ msgid "If you want to set a new password, enter it here"
-#~ msgstr "password အသစ္လုပ္လိုလွ်င္ သည္ေနရာတြင္ထည့္ပါ"
-
-#~ msgid "Confirm New Password"
-#~ msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
-
-#~ msgid "Confirm your new password"
-#~ msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
-
-#~ msgid "Edit your profile"
-#~ msgstr "သင့္ profile ကိုထပ္မံျပင္ဆင္ေပးပါ"
-
-#~ msgid "Password Recovery"
-#~ msgstr "password ျပန္ရရန္"
-
-#~ msgid "An Email has been sent to your account with further instructions."
-#~ msgstr "အၾကံျပဳညႊန္ၾကားခ်က္မ်ားကို သင့္အီးေမးလ္ထံပို႕လိုက္ပါၿပီ"
-
-#~ msgid "Password Recovery Request"
-#~ msgstr "Password ျပန္ရရန္ ေတာင္းခံျခင္း"
-
-#~ msgid "Pick a new password"
-#~ msgstr "Password အသစ္ထပ္ေရြးပါ"
-
-#~ msgid "Your password has successfully been updated, thank you."
-#~ msgstr "ေက်းဇူးတင္ပါတယ္ သင့္ passwordကို ေအာင္ျမင္စြာေျပာင္းလိုက္ပါၿပီ"
-
-#~ msgid "You are now logged in as %s"
-#~ msgstr "သင္သည္ %s အျဖစ္ login ၀င္ထားသည္"
-
-#~ msgid "Password Updated Successfully. Now you can log in using your new password."
-#~ msgstr "password ကိုေအာင္ျမင္စြာ ေျပာင္းလဲၿပီးပါၿပီ။ password အသစ္ကိုသံုးၿပီး login လုပ္ႏိုင္ပါၿပီ"
-
-#~ msgid "Reset your Password"
-#~ msgstr "password ေျပာင္းပါ"
-
-#~ msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-#~ msgstr "လံုျခံဳစိတ္ခ်ရျခင္းမရွိေသာေၾကာင့္ သင္၏ link သည္မရေတာ့ပါ။ သည္ေနရာတြင္သင့္ အီးေမးလ္ရိုက္ထည့္ျခင္းျဖင့္ အစမွျပန္လုပ္ပါ"
-
-#~ msgid "Submit"
-#~ msgstr "တင္သြင္းပါ"
-
-#~ msgid "Form"
-#~ msgstr "ပံုစံ"
-
-#~ msgid "Save Changes"
-#~ msgstr "ေျပာင္းထားသည္မ်ားကို saveလုပ္ပါ"
-
-#, fuzzy
-#~| msgid "Your poll has been updated."
-#~ msgid "Your new %s has been created."
-#~ msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံုးအဆင့္ျပဳလုပ္ထားသည္"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "RapidPro account အတြက္ API token ႏွင့္တြဲထားေသာ dashboard"

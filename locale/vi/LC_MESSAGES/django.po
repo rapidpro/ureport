@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-20 10:49+0000\n"
+"POT-Creation-Date: 2019-06-21 10:49+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -18,6 +18,669 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The name of this category"
+msgstr "Tên của danh mục này"
+
+msgid "An optional image that can describe this category"
+msgstr "Một hình ảnh tùy chọn có thể mô tả danh mục này"
+
+msgid "The organization this category applies to"
+msgstr "Tổ chức mà danh mục này áp dụng"
+
+msgid "Categories"
+msgstr "Danh mục"
+
+msgid "The name to describe this image"
+msgstr "Tên để mô tả hình ảnh này"
+
+msgid "The category this image represents"
+msgstr "Danh mục hình ảnh này đại diện"
+
+msgid "The image file to use"
+msgstr "Tệp hình ảnh để sử dụng"
+
+msgid "The human readable name for this content type"
+msgstr "Tên dễ gọi cho nội dung này"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "Slug để nhận dạng loại nội dung này, được sử dụng với các thẻ khuôn mẫu"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "Mô tả vị trí nội dung này và cách thức nó được bố trí trên trang web"
+
+msgid "Whether this content should include a title"
+msgstr "Liệu có cần thiết đặt tiêu đề cho nội dung này không"
+
+msgid "Whether this content should include an image"
+msgstr "Liệu có cần thiết đặt gắn hình ảnh cho nội dung này không"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Liệu có cần thiết phải sử dụng tệp HTML cho nội dung này không"
+
+msgid "Whether this content should include a summary field"
+msgstr "Nội dung này có nên bao gồm một trường tóm tắt hay không"
+
+msgid "Whether this content should include a link"
+msgstr "Nội dung này có nên bao gồm liên kết hay không"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Nội dung này có cho phép tải lên các hình ảnh bổ sung, tức là một thư viện hay không"
+
+msgid "Whether this content has a color field"
+msgstr "Nội dung này có một trường màu sắc hay không"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Nội dung này có nên cho phép thiết lập id YouTube hay không"
+
+msgid "Whether this content should allow tags"
+msgstr "Nội dung này có nên cho phép các thẻ hay không"
+
+msgid "Content Type"
+msgstr "Loại nội dung"
+
+msgid "The category, or type for this content block"
+msgstr "Danh mục hoặc loại cho khối nội dung này"
+
+msgid "The title for this block of content, optional"
+msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+
+msgid "The summary for this item, should be short"
+msgstr "Bản tóm tắt cho mục này, nên ngắn gọn"
+
+msgid "The body of text for this content block, optional"
+msgstr "Phần văn bản cho khối nội dung này, tùy chọn"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Bất kỳ hình ảnh nào cần được hiển thị cùng khối nội dung này, tùy chọn"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Màu nền sử dụng cho hình ảnh, theo định dạng: #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Bất kỳ liên kết nào cần được liên kết với khối nội dung này, tùy chọn"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Id của video YouTube cần được liên kết với mục này"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Bất kỳ thẻ nào cho khối nội dung này, cách nhau bởi dấu cách, có thể được sử dụng để thực hiện lọc nâng cao hơn, tùy chọn"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "Mức độ ưu tiên của khối này, các khối ưu tiên hơn sẽ xuất hiện trước tiên"
+
+msgid "The organization this content block belongs to"
+msgstr "Khối nội dung này thuộc về tổ chức"
+
+msgid "Gallery"
+msgstr "Thư viện ảnh"
+
+msgid "Add Image"
+msgstr "Thêm hình ảnh"
+
+msgid "Search"
+msgstr "Tìm kiếm"
+
+msgid "Add"
+msgstr "Thêm "
+
+msgid "Content Types"
+msgstr "Các loại nội dung"
+
+msgid "Content Blocks"
+msgstr "Khối nội dung"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%skhối"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Chỉnh sửa %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Tạo %s"
+
+msgid "Create Content Block"
+msgstr "Tạo khối nội dung"
+
+msgid "Your first name"
+msgstr "Tên của bạn"
+
+msgid "Your last name"
+msgstr "Họ của bạn"
+
+msgid "Your email address"
+msgstr "Địa chỉ email của bạn"
+
+msgid "Your password, at least eight letters please"
+msgstr "Mật khẩu của bạn, vui lòng sử dụng ít nhất 8 ký tự"
+
+msgid "That email address is already used"
+msgstr "Địa chỉ email này đã được sử dụng"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Mật khẩu phải chứa ít nhất 8 ký tự."
+
+msgid "This domain is used for subdomains"
+msgstr "Tên miền này được sử dụng cho tên miền phụ"
+
+msgid "Name"
+msgstr "Tên"
+
+msgid "The name of this organization"
+msgstr "Tên của tổ chức này"
+
+msgid "The logo that should be used for this organization"
+msgstr "Logo nên được sử dụng cho tổ chức này"
+
+msgid "Administrators"
+msgstr "Quản trị viên"
+
+msgid "The administrators in your organization"
+msgstr "Quản trị viên trong tổ chức của bạn"
+
+msgid "Viewers"
+msgstr "Người xem"
+
+msgid "The viewers in your organization"
+msgstr "Người xem trong tổ chức của bạn"
+
+msgid "Editors"
+msgstr "Biên tập viên"
+
+msgid "The editors in your organization"
+msgstr "Các biên tập viên trong tổ chức của bạn"
+
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+msgid "The main language used by this organization"
+msgstr "Ngôn ngữ chính được tổ chức này sử dụng"
+
+msgid "Subdomain"
+msgstr "Tên miền phụ"
+
+msgid "This subdomain is not available"
+msgstr "Tên miền phụ này không có sẵn"
+
+msgid "The subdomain for this organization"
+msgstr "Tên miền phụ của tổ chức này"
+
+msgid "Domain"
+msgstr "Tên miền"
+
+msgid "This domain is not available"
+msgstr "Tên miền này không có sẵn"
+
+msgid "The custom domain for this organization"
+msgstr "Miền tùy chỉnh cho tổ chức này"
+
+msgid "Timezone"
+msgstr "Múi giờ"
+
+msgid "The timezone your organization is in."
+msgstr "Múi giờ mà tổ chức bạn nằm trong."
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "JSON blob sử dụng để lưu trữ thông tin cấu hình liên quan đến tổ chức này"
+
+msgid "Administrator"
+msgstr "Quản trị viên"
+
+msgid "Editor"
+msgstr "Biên tập viên"
+
+msgid "Viewer"
+msgstr "Người xem"
+
+msgid "Org"
+msgstr "Tổ chức"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Tổ chức mà tài khoản được mời xem"
+
+msgid "Email"
+msgstr "Email "
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "Email mà chúng tôi gửi lời mời của người xem"
+
+msgid "Secret"
+msgstr "Bí mật"
+
+msgid "a unique code associated with this invitation"
+msgstr "một mã duy nhất liên kết với lời mời này"
+
+msgid "User Role"
+msgstr "Vai trò người dùng"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%s Lời mời"
+
+msgid "Banner"
+msgstr "Băng rôn"
+
+msgid "Pattern"
+msgstr "Họa tiết"
+
+msgid "The organization in which the image will be used"
+msgstr "Hình ảnh sẽ được sử dụng cho tổ chức"
+
+msgid "The name to describe this background"
+msgstr "Tên để miêu tả nền này"
+
+msgid "Background type"
+msgstr "Loại nền"
+
+msgid "The image file"
+msgstr "Tệp hình ảnh"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The API token for this backend"
+msgstr "Tiêu đề cho mục này"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"Bạn được mời tham gia %(org_name)s.\n"
+"<br/>\n"
+"Để chấp nhận lời mời, <a href='%(host)s%(join_url)s'>bấm vào đây</a>."
+
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
+msgid "Edit"
+msgstr "Chỉnh sửa"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "Quản lý người dùng"
+
+msgid "Manage Users"
+msgstr "Quản lý người dùng"
+
+msgid "Accounts"
+msgstr "Các tài khoản"
+
+msgid "Admins"
+msgstr "Quản trị viên"
+
+msgid "Remove"
+msgstr "Xóa"
+
+msgid "You must have at least one administator"
+msgstr "Bạn phải có ít nhất một quản trị viên"
+
+msgid "Select your Organization"
+msgstr "Lựa chọn tổ chức của bạn"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "Tài khoản của bạn không được liên kết với một tổ chức. Vui lòng liên hệ với quản trị viên."
+
+msgid "Your Organization"
+msgstr "Tổ chức của bạn"
+
+msgid "Invite people to your organization"
+msgstr "Mời mọi người vào tổ chức của bạn"
+
+msgid "User group"
+msgstr "Nhóm người dùng"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Một trong các email mà bạn nhập không hợp lệ"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Quản lý %(name)sTài khoản"
+
+msgid "Create"
+msgstr "Tạo"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "Liên kết lời mời của bạn không hợp lệ. Vui lòng liên hệ với quản trị viên tổ chức của bạn."
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Tham gia %(name)s"
+
+msgid "Join"
+msgstr "Tham gia"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "Liên kết lời mời của bạn đã hết hạn. Vui lòng liên hệ với quản trị viên tổ chức của bạn."
+
+msgid "Task"
+msgstr "Nhiệm vụ"
+
+msgid "Tasks"
+msgstr "Các nhiệm vụ"
+
+msgid "The title for this story"
+msgstr "Tiêu đề cho câu chuyện này"
+
+msgid "Whether this story is featured"
+msgstr "Câu chuyện này có nổi bật hay không"
+
+msgid "The summary for the story"
+msgstr "Tóm tắt câu chuyện"
+
+msgid "The body of text for the story"
+msgstr "Phần nội dung của câu chuyện"
+
+msgid "The writer of the story"
+msgstr "Người viết câu chuyện"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Liên kết đến tệp mp3 để đăng trên câu chuyện này"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "Id của video YouTube được dẫn đến câu hcuyeejn này (đây là đoạn văn bản theo sau v= và trước & in URL YouTube)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Bất kỳ thẻ nào cho câu chuyện này, được phân cách bằng dấu cách, có thể được sử dụng để thực hiện lọc nâng cao hơn, tùy chọn"
+
+msgid "The category for this story"
+msgstr "Danh mục của câu chuyện này"
+
+msgid "The organization this story belongs to"
+msgstr "Câu chuyện này thuộc về tổ chức"
+
+msgid "Stories"
+msgstr "Câu chuyện"
+
+msgid "The story to associate to"
+msgstr "Câu chuyện để kết hợp với"
+
+msgid "Yes"
+msgstr "Có"
+
+msgid "No"
+msgstr "Không"
+
+msgid "Story Images"
+msgstr "Hình ảnh cho câu chuyện"
+
+#, python-format
+msgid "Image %d"
+msgstr "Hình ảnh %d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước. (tùy chọn)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước (tùy chọn)"
+
+msgid "Remove Item?"
+msgstr "Xóa Mục?"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Không có cách nào để hoàn tác thao tác này."
+
+msgid "Cancel"
+msgstr "Đóng"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"%(counter)s kết quả"
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\t Kết quả %(start)s-%(end)s trong số %(count)s"
+
+msgid "Previous"
+msgstr "Trước"
+
+msgid "Next"
+msgstr "Sau"
+
+msgid "edit"
+msgstr "chỉnh sửa"
+
+msgid "Sign in"
+msgstr "Đăng ký"
+
+msgid "Login"
+msgstr "Đăng nhập"
+
+msgid "Forgot Password?"
+msgstr "Quên mật khẩu?"
+
+msgid "Token Expired"
+msgstr "Mã hết hạn"
+
+msgid "Login Failure"
+msgstr "Đăng nhập thất bại"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Ngoài ra, bạn có thể điền vào mẫu dưới đây để đặt lại mật khẩu của bạn qua e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Vui lòng liên hệ với quản trị viên trang web để đặt lại mật khẩu của bạn."
+
+msgid "Email Address"
+msgstr "Địa chỉ email"
+
+msgid "Recover"
+msgstr "Khôi phục"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Vui lòng nhập địa chỉ email bạn đã sử dụng để đăng ký và chúng tôi sẽ giúp bạn khôi phục lại mật khẩu."
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Mật khẩu của bạn đã hết hạn.</strong>Chính sách của trang web yêu cầu bạn phải chọn một mật khẩu mới cứ %(expire_days)s ngày một lần và mật khẩu đó phải không được sử dụng trong %(window_days)s ngày trước đó."
+
+msgid "New Password"
+msgstr "Mật khẩu mới"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Mật khẩu phải có ít nhất 8 ký tự, gồm một in hoa, một in thường và một con số"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Bạn đã sử dụng mật khẩu này trước đây, vui lòng sử dụng một mật khẩu mới."
+
+msgid "Password"
+msgstr "Mật khẩu"
+
+msgid "Confirm Password"
+msgstr "Xác nhận mật khẩu"
+
+msgid "Please enter your password to save changes."
+msgstr "Vui lòng nhập mật khẩu để lưu thay đổi."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Xác nhận mật khẩu mới của bạn bằng cách điền vào đây"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Mật khẩu mới không khớp với xác nhận của nó"
+
+msgid "Your Email"
+msgstr "Email của bạn"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "Khôi phục e-mail không được hỗ trợ, vui lòng liên hệ với quản trị viên trang web để đặt lại mật khẩu theo cách thủ công."
+
+msgid "Current Password"
+msgstr "Mật khẩu hiện tại"
+
+msgid "Your current password"
+msgstr "Mật khẩu hiện tại của bạn"
+
+msgid "Your new password."
+msgstr "Mật khẩu mới của bạn."
+
+msgid "Confirm new Password"
+msgstr "Xác nhận mật khẩu mới"
+
+msgid "Confirm your new password."
+msgstr "Xác nhận mật khẩu mới của bạn."
+
+msgid "Please enter your password to save changes"
+msgstr "Vui lòng nhập mật khẩu để lưu thay đổi"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Xác nhận mật khẩu mới của bạn bằng cách nhập vào đây"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Không khớp giữa mật khẩu và xác nhận mới của bạn, hãy thử lại"
+
+msgid "New user created successfully."
+msgstr "Người dùng mới được tạo thành công"
+
+msgid "Groups"
+msgstr "Nhóm"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Người dùng sẽ chỉ nhận được các quyền được phép cho nhóm của họ."
+
+msgid "Set the user's initial password here."
+msgstr "Đặt mật khẩu ban đầu của người dùng ở đây."
+
+msgid "Last Login"
+msgstr "Lân đăng nhập cuôi"
+
+msgid "Is Active"
+msgstr "Đang hoạt động"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Người dung được đăng nhập vào trang hay không"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Người dùng sẽ chỉ nhận được các quyền được phép cho nhóm của họ"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Bạn có thể đặt lại mật khẩu đăng nhập bằng cách nhập mật khẩu mới vào đây"
+
+msgid "Username"
+msgstr "Tên đăng nhập"
+
+msgid "Your password"
+msgstr "Mật khẩu"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Nếu bạn muốn đặt mật khẩu mới, nhập nó tại đây"
+
+msgid "Confirm New Password"
+msgstr "Xác nhận mật khẩu mới"
+
+msgid "Confirm your new password"
+msgstr "Xác nhận mật khẩu mới của bạn"
+
+msgid "Edit your profile"
+msgstr "Chỉnh sửa hồ sơ của bạn"
+
+msgid "Password Recovery"
+msgstr "Khôi phục mật khẩu"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Email đã được gửi đến tài khoản của bạn kèm theo các hướng dẫn thêm."
+
+msgid "Password Recovery Request"
+msgstr "Yêu cầu khôi phục mật khẩu"
+
+msgid "Pick a new password"
+msgstr "Chọn một mật khẩu mới"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Mật khẩu của bạn đã được cập nhật thành công, xin cảm ơn."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Bạn đã đăng nhập với tư cách %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Cập nhật mật khẩu thành công. Bây giờ bạn có thể đăng nhập với mật khẩu mới"
+
+msgid "Reset your Password"
+msgstr "Cài lại mật khẩu"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Liên kết của bạn đã hết hạn vì lý do bảo mật. Vui lòng khởi tạo lại quy trình bằng cách nhập email của bạn ở đây."
+
+msgid "Submit"
+msgstr "Gửi đi"
+
+msgid "Form"
+msgstr "Mẫu đơn"
+
+msgid "Save Changes"
+msgstr "Lưu thay đổi"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "%s mới của bạn đã được tạo."
+
+#, python-format
+msgid "Import %s"
+msgstr "Nhập %s"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -34,9 +697,6 @@ msgstr "Tổ chức"
 msgid "Users"
 msgstr "Người dùng"
 
-msgid "Content Types"
-msgstr "Các loại nội dung"
-
 msgid "Images"
 msgstr "Hình ảnh"
 
@@ -49,17 +709,11 @@ msgstr "Biệt hiệu Quốc gia"
 msgid "Polls"
 msgstr "Khảo sát"
 
-msgid "Categories"
-msgstr "Danh mục"
-
 msgid "Category Images"
 msgstr "Các hình ảnh cho danh mục"
 
 msgid "News Items"
 msgstr "Các mục mới"
-
-msgid "Stories"
-msgstr "Câu chuyện"
 
 msgid "Job Sources"
 msgstr "Nguồn công việc"
@@ -97,9 +751,6 @@ msgstr "Menu bổ sung"
 msgid "Logout"
 msgstr "Đăng xuất"
 
-msgid "Login"
-msgstr "Đăng nhập"
-
 msgid "About"
 msgstr "Thông tin"
 
@@ -134,12 +785,6 @@ msgstr ""
 "\n"
 "<div>Sau khi bạn tạo tiện ích, hãy sao chép id tiện ích từ url như được hiển thị trên</div>"
 
-msgid "Next"
-msgstr "Sau"
-
-msgid "Cancel"
-msgstr "Đóng"
-
 msgid "Back"
 msgstr "Quay lại"
 
@@ -150,20 +795,6 @@ msgid ""
 msgstr ""
 "\n"
 "Hãy ghi nhớ nguồn công việc Twitter mà bạn cần có một id tiện ích từ Twitter."
-
-msgid "Edit"
-msgstr "Chỉnh sửa"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "Quản lý người dùng"
-
-msgid "Manage Users"
-msgstr "Quản lý người dùng"
-
-msgid "Add"
-msgstr "Thêm "
 
 msgid "ABOUT U-REPORT"
 msgstr "THÔNG TIN VỀ U-REPORT"
@@ -546,42 +1177,21 @@ msgstr "Đã đăng ký"
 msgid "Week of"
 msgstr "Tuần"
 
-msgid "Sign in"
-msgstr "Đăng ký"
-
-msgid "Forgot Password?"
-msgstr "Quên mật khẩu?"
-
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Đã làm mới %s bộ nhớ cache cho tổ chức này"
 
-msgid "Banner"
-msgstr "Băng rôn"
-
-msgid "Pattern"
-msgstr "Họa tiết"
-
 msgid "Flag"
 msgstr "Cờ"
 
-msgid "Org"
-msgstr "Tổ chức"
-
 msgid "The organization to which the image will be used"
 msgstr "Hình ảnh sẽ được sử dụng cho tổ chức"
-
-msgid "Name"
-msgstr "Tên"
 
 msgid "A short descriptive name for this image"
 msgstr "Tên mô tả ngắn cho hình ảnh này"
 
 msgid "Image type"
 msgstr "Loại hình ảnh"
-
-msgid "The image file"
-msgstr "Tệp hình ảnh"
 
 msgid "Label"
 msgstr "Nhãn"
@@ -694,17 +1304,11 @@ msgstr "Tiêu đề cho video này"
 msgid "A short summary description for this video"
 msgstr "Mô tả ngắn cho video này"
 
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "Id của video YouTube cần được liên kết với mục này"
-
 msgid "The organization this video belongs to"
 msgstr "Video này thuộc về tổ chức"
 
 msgid "The name of this poll category"
 msgstr "Tên của danh mục khảo sát này"
-
-msgid "The organization this category applies to"
-msgstr "Tổ chức mà danh mục này áp dụng"
 
 msgid "Poll Categories"
 msgstr "Danh mục khảo sát"
@@ -742,14 +1346,8 @@ msgstr "Ảnh gây chú ý để hiển thị cho cuộc khảo sát (tùy chọ
 msgid "The organization this poll is part of"
 msgstr "Khảo sát này nằm trong tổ chức"
 
-msgid "The name to describe this image"
-msgstr "Tên để mô tả hình ảnh này"
-
 msgid "The poll to associate to"
 msgstr "Khảo sát để kết hợp với"
-
-msgid "The image file to use"
-msgstr "Tệp hình ảnh để sử dụng"
 
 msgid "The poll for this response"
 msgstr "Khảo sát cho phản hồi này"
@@ -819,10 +1417,6 @@ msgstr "HÌnh ảnh cho khảo sát"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Bây giờ hãy nhập bất kỳ phản hồi nào bạn muốn hiện. (nếu có)"
-
-#, python-format
-msgid "Image %d"
-msgstr "Hình ảnh %d"
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "Hình ảnh để hiển thị trên trang khảo sát và trong phần xem trước. (không bắt buộc)"
@@ -1034,579 +1628,6 @@ msgstr "Nếu bạn cần bao gồm một số mã HTML tùy chỉnh trong trang
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
-
-#~ msgid "The name of this category"
-#~ msgstr "Tên của danh mục này"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "Một hình ảnh tùy chọn có thể mô tả danh mục này"
-
-#~ msgid "The category this image represents"
-#~ msgstr "Danh mục hình ảnh này đại diện"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "Tên dễ gọi cho nội dung này"
-
-#~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr "Slug để nhận dạng loại nội dung này, được sử dụng với các thẻ khuôn mẫu"
-
-#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-#~ msgstr "Mô tả vị trí nội dung này và cách thức nó được bố trí trên trang web"
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "Liệu có cần thiết đặt tiêu đề cho nội dung này không"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "Liệu có cần thiết đặt gắn hình ảnh cho nội dung này không"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "Liệu có cần thiết phải sử dụng tệp HTML cho nội dung này không"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "Nội dung này có nên bao gồm một trường tóm tắt hay không"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "Nội dung này có nên bao gồm liên kết hay không"
-
-#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
-#~ msgstr "Nội dung này có cho phép tải lên các hình ảnh bổ sung, tức là một thư viện hay không"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "Nội dung này có một trường màu sắc hay không"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "Nội dung này có nên cho phép thiết lập id YouTube hay không"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "Nội dung này có nên cho phép các thẻ hay không"
-
-#~ msgid "Content Type"
-#~ msgstr "Loại nội dung"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "Danh mục hoặc loại cho khối nội dung này"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "Bản tóm tắt cho mục này, nên ngắn gọn"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "Phần văn bản cho khối nội dung này, tùy chọn"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "Bất kỳ hình ảnh nào cần được hiển thị cùng khối nội dung này, tùy chọn"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "Màu nền sử dụng cho hình ảnh, theo định dạng: #rrggbb"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "Bất kỳ liên kết nào cần được liên kết với khối nội dung này, tùy chọn"
-
-#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Bất kỳ thẻ nào cho khối nội dung này, cách nhau bởi dấu cách, có thể được sử dụng để thực hiện lọc nâng cao hơn, tùy chọn"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "Mức độ ưu tiên của khối này, các khối ưu tiên hơn sẽ xuất hiện trước tiên"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "Khối nội dung này thuộc về tổ chức"
-
-#~ msgid "Gallery"
-#~ msgstr "Thư viện ảnh"
-
-#~ msgid "Add Image"
-#~ msgstr "Thêm hình ảnh"
-
-#~ msgid "Search"
-#~ msgstr "Tìm kiếm"
-
-#~ msgid "Content Blocks"
-#~ msgstr "Khối nội dung"
-
-#~ msgid "%s Blocks"
-#~ msgstr "%skhối"
-
-#~ msgid "Edit %s"
-#~ msgstr "Chỉnh sửa %s"
-
-#~ msgid "Create %s"
-#~ msgstr "Tạo %s"
-
-#~ msgid "Create Content Block"
-#~ msgstr "Tạo khối nội dung"
-
-#~ msgid "Your first name"
-#~ msgstr "Tên của bạn"
-
-#~ msgid "Your last name"
-#~ msgstr "Họ của bạn"
-
-#~ msgid "Your email address"
-#~ msgstr "Địa chỉ email của bạn"
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "Mật khẩu của bạn, vui lòng sử dụng ít nhất 8 ký tự"
-
-#~ msgid "That email address is already used"
-#~ msgstr "Địa chỉ email này đã được sử dụng"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "Mật khẩu phải chứa ít nhất 8 ký tự."
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "Tên miền này được sử dụng cho tên miền phụ"
-
-#~ msgid "The name of this organization"
-#~ msgstr "Tên của tổ chức này"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "Logo nên được sử dụng cho tổ chức này"
-
-#~ msgid "Administrators"
-#~ msgstr "Quản trị viên"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "Quản trị viên trong tổ chức của bạn"
-
-#~ msgid "Viewers"
-#~ msgstr "Người xem"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "Người xem trong tổ chức của bạn"
-
-#~ msgid "Editors"
-#~ msgstr "Biên tập viên"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "Các biên tập viên trong tổ chức của bạn"
-
-#~ msgid "Language"
-#~ msgstr "Ngôn ngữ"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "Ngôn ngữ chính được tổ chức này sử dụng"
-
-#~ msgid "Subdomain"
-#~ msgstr "Tên miền phụ"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "Tên miền phụ này không có sẵn"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "Tên miền phụ của tổ chức này"
-
-#~ msgid "Domain"
-#~ msgstr "Tên miền"
-
-#~ msgid "This domain is not available"
-#~ msgstr "Tên miền này không có sẵn"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "Miền tùy chỉnh cho tổ chức này"
-
-#~ msgid "Timezone"
-#~ msgstr "Múi giờ"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "Múi giờ mà tổ chức bạn nằm trong."
-
-#~ msgid "JSON blob used to store configuration information associated with this organization"
-#~ msgstr "JSON blob sử dụng để lưu trữ thông tin cấu hình liên quan đến tổ chức này"
-
-#~ msgid "Administrator"
-#~ msgstr "Quản trị viên"
-
-#~ msgid "Editor"
-#~ msgstr "Biên tập viên"
-
-#~ msgid "Viewer"
-#~ msgstr "Người xem"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "Tổ chức mà tài khoản được mời xem"
-
-#~ msgid "Email"
-#~ msgstr "Email "
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "Email mà chúng tôi gửi lời mời của người xem"
-
-#~ msgid "Secret"
-#~ msgstr "Bí mật"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "một mã duy nhất liên kết với lời mời này"
-
-#~ msgid "User Role"
-#~ msgstr "Vai trò người dùng"
-
-#~ msgid "%s Invitation"
-#~ msgstr "%s Lời mời"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "Hình ảnh sẽ được sử dụng cho tổ chức"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "Tên để miêu tả nền này"
-
-#~ msgid "Background type"
-#~ msgstr "Loại nền"
-
-#, fuzzy
-#~| msgid "The title for this item"
-#~ msgid "The API token for this backend"
-#~ msgstr "Tiêu đề cho mục này"
-
-#~ msgid ""
-#~ "\n"
-#~ "      You've been invited to join %(org_name)s.\n"
-#~ "      <br/>\n"
-#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "Bạn được mời tham gia %(org_name)s.\n"
-#~ "<br/>\n"
-#~ "Để chấp nhận lời mời, <a href='%(host)s%(join_url)s'>bấm vào đây</a>."
-
-#~ msgid "Accounts"
-#~ msgstr "Các tài khoản"
-
-#~ msgid "Admins"
-#~ msgstr "Quản trị viên"
-
-#~ msgid "Remove"
-#~ msgstr "Xóa"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "Bạn phải có ít nhất một quản trị viên"
-
-#~ msgid "Select your Organization"
-#~ msgstr "Lựa chọn tổ chức của bạn"
-
-#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-#~ msgstr "Tài khoản của bạn không được liên kết với một tổ chức. Vui lòng liên hệ với quản trị viên."
-
-#~ msgid "Your Organization"
-#~ msgstr "Tổ chức của bạn"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "Mời mọi người vào tổ chức của bạn"
-
-#~ msgid "User group"
-#~ msgstr "Nhóm người dùng"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "Một trong các email mà bạn nhập không hợp lệ"
-
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "Quản lý %(name)sTài khoản"
-
-#~ msgid "Create"
-#~ msgstr "Tạo"
-
-#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
-#~ msgstr "Liên kết lời mời của bạn không hợp lệ. Vui lòng liên hệ với quản trị viên tổ chức của bạn."
-
-#~ msgid "Join %(name)s"
-#~ msgstr "Tham gia %(name)s"
-
-#~ msgid "Join"
-#~ msgstr "Tham gia"
-
-#~ msgid "Your invitation link has expired. Please contact your organization administrator."
-#~ msgstr "Liên kết lời mời của bạn đã hết hạn. Vui lòng liên hệ với quản trị viên tổ chức của bạn."
-
-#~ msgid "Task"
-#~ msgstr "Nhiệm vụ"
-
-#~ msgid "Tasks"
-#~ msgstr "Các nhiệm vụ"
-
-#~ msgid "The title for this story"
-#~ msgstr "Tiêu đề cho câu chuyện này"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "Câu chuyện này có nổi bật hay không"
-
-#~ msgid "The summary for the story"
-#~ msgstr "Tóm tắt câu chuyện"
-
-#~ msgid "The body of text for the story"
-#~ msgstr "Phần nội dung của câu chuyện"
-
-#~ msgid "The writer of the story"
-#~ msgstr "Người viết câu chuyện"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "Liên kết đến tệp mp3 để đăng trên câu chuyện này"
-
-#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr "Id của video YouTube được dẫn đến câu hcuyeejn này (đây là đoạn văn bản theo sau v= và trước & in URL YouTube)"
-
-#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Bất kỳ thẻ nào cho câu chuyện này, được phân cách bằng dấu cách, có thể được sử dụng để thực hiện lọc nâng cao hơn, tùy chọn"
-
-#~ msgid "The category for this story"
-#~ msgstr "Danh mục của câu chuyện này"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "Câu chuyện này thuộc về tổ chức"
-
-#~ msgid "The story to associate to"
-#~ msgstr "Câu chuyện để kết hợp với"
-
-#~ msgid "Yes"
-#~ msgstr "Có"
-
-#~ msgid "No"
-#~ msgstr "Không"
-
-#~ msgid "Story Images"
-#~ msgstr "Hình ảnh cho câu chuyện"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước. (tùy chọn)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước (tùy chọn)"
-
-#~ msgid "Remove Item?"
-#~ msgstr "Xóa Mục?"
-
-#~ msgid ""
-#~ "\n"
-#~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
-
-#~ msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-#~ msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Không có cách nào để hoàn tác thao tác này."
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "\t\t%(counter)s result\n"
-#~| "\t"
-#~| msgid_plural ""
-#~| "\n"
-#~| "         %(counter)s results\n"
-#~| "        "
-#~ msgid ""
-#~ "\n"
-#~ "\t %(counter)s result\n"
-#~ "\t"
-#~ msgid_plural ""
-#~ "\n"
-#~ "         %(counter)s results\n"
-#~ "        "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(counter)s kết quả"
-
-#~ msgid ""
-#~ "\n"
-#~ "\tResults %(start)s-%(end)s of %(count)s\n"
-#~ "\t"
-#~ msgstr ""
-#~ "\n"
-#~ "\t Kết quả %(start)s-%(end)s trong số %(count)s"
-
-#~ msgid "Previous"
-#~ msgstr "Trước"
-
-#~ msgid "edit"
-#~ msgstr "chỉnh sửa"
-
-#~ msgid "Token Expired"
-#~ msgstr "Mã hết hạn"
-
-#~ msgid "Login Failure"
-#~ msgstr "Đăng nhập thất bại"
-
-#~ msgid ""
-#~ "\n"
-#~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
-
-#~ msgid ""
-#~ "\n"
-#~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
-
-#~ msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-#~ msgstr "Ngoài ra, bạn có thể điền vào mẫu dưới đây để đặt lại mật khẩu của bạn qua e-mail."
-
-#~ msgid "Please contact the website administrator to have your password reset."
-#~ msgstr "Vui lòng liên hệ với quản trị viên trang web để đặt lại mật khẩu của bạn."
-
-#~ msgid "Email Address"
-#~ msgstr "Địa chỉ email"
-
-#~ msgid "Recover"
-#~ msgstr "Khôi phục"
-
-#~ msgid "Please enter the email address you used to sign up and we will help you recover your password."
-#~ msgstr "Vui lòng nhập địa chỉ email bạn đã sử dụng để đăng ký và chúng tôi sẽ giúp bạn khôi phục lại mật khẩu."
-
-#~ msgid ""
-#~ "\n"
-#~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "<strong>Mật khẩu của bạn đã hết hạn.</strong>Chính sách của trang web yêu cầu bạn phải chọn một mật khẩu mới cứ %(expire_days)s ngày một lần và mật khẩu đó phải không được sử dụng trong %(window_days)s ngày trước đó."
-
-#~ msgid "New Password"
-#~ msgstr "Mật khẩu mới"
-
-#~ msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-#~ msgstr "Mật khẩu phải có ít nhất 8 ký tự, gồm một in hoa, một in thường và một con số"
-
-#~ msgid "You have used this password before in the past year, please use a new password."
-#~ msgstr "Bạn đã sử dụng mật khẩu này trước đây, vui lòng sử dụng một mật khẩu mới."
-
-#~ msgid "Password"
-#~ msgstr "Mật khẩu"
-
-#~ msgid "Confirm Password"
-#~ msgstr "Xác nhận mật khẩu"
-
-#~ msgid "Please enter your password to save changes."
-#~ msgstr "Vui lòng nhập mật khẩu để lưu thay đổi."
-
-#~ msgid "Confirm the new password by filling the this field"
-#~ msgstr "Xác nhận mật khẩu mới của bạn bằng cách điền vào đây"
-
-#~ msgid "New password doesn't match with its confirmation"
-#~ msgstr "Mật khẩu mới không khớp với xác nhận của nó"
-
-#~ msgid "Your Email"
-#~ msgstr "Email của bạn"
-
-#~ msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-#~ msgstr "Khôi phục e-mail không được hỗ trợ, vui lòng liên hệ với quản trị viên trang web để đặt lại mật khẩu theo cách thủ công."
-
-#~ msgid "Current Password"
-#~ msgstr "Mật khẩu hiện tại"
-
-#~ msgid "Your current password"
-#~ msgstr "Mật khẩu hiện tại của bạn"
-
-#~ msgid "Your new password."
-#~ msgstr "Mật khẩu mới của bạn."
-
-#~ msgid "Confirm new Password"
-#~ msgstr "Xác nhận mật khẩu mới"
-
-#~ msgid "Confirm your new password."
-#~ msgstr "Xác nhận mật khẩu mới của bạn."
-
-#~ msgid "Please enter your password to save changes"
-#~ msgstr "Vui lòng nhập mật khẩu để lưu thay đổi"
-
-#~ msgid "Confirm your new password by entering it here"
-#~ msgstr "Xác nhận mật khẩu mới của bạn bằng cách nhập vào đây"
-
-#~ msgid "Mismatch between your new password and confirmation, try again"
-#~ msgstr "Không khớp giữa mật khẩu và xác nhận mới của bạn, hãy thử lại"
-
-#~ msgid "New user created successfully."
-#~ msgstr "Người dùng mới được tạo thành công"
-
-#~ msgid "Groups"
-#~ msgstr "Nhóm"
-
-#~ msgid "Users will only get those permissions that are allowed for their group."
-#~ msgstr "Người dùng sẽ chỉ nhận được các quyền được phép cho nhóm của họ."
-
-#~ msgid "Set the user's initial password here."
-#~ msgstr "Đặt mật khẩu ban đầu của người dùng ở đây."
-
-#~ msgid "Last Login"
-#~ msgstr "Lân đăng nhập cuôi"
-
-#~ msgid "Is Active"
-#~ msgstr "Đang hoạt động"
-
-#~ msgid "Whether this user is allowed to log into the site"
-#~ msgstr "Người dung được đăng nhập vào trang hay không"
-
-#~ msgid "Users will only get those permissions that are allowed for their group"
-#~ msgstr "Người dùng sẽ chỉ nhận được các quyền được phép cho nhóm của họ"
-
-#~ msgid "You can reset the user's password by entering a new password here"
-#~ msgstr "Bạn có thể đặt lại mật khẩu đăng nhập bằng cách nhập mật khẩu mới vào đây"
-
-#~ msgid "Username"
-#~ msgstr "Tên đăng nhập"
-
-#~ msgid "Your password"
-#~ msgstr "Mật khẩu"
-
-#~ msgid "If you want to set a new password, enter it here"
-#~ msgstr "Nếu bạn muốn đặt mật khẩu mới, nhập nó tại đây"
-
-#~ msgid "Confirm New Password"
-#~ msgstr "Xác nhận mật khẩu mới"
-
-#~ msgid "Confirm your new password"
-#~ msgstr "Xác nhận mật khẩu mới của bạn"
-
-#~ msgid "Edit your profile"
-#~ msgstr "Chỉnh sửa hồ sơ của bạn"
-
-#~ msgid "Password Recovery"
-#~ msgstr "Khôi phục mật khẩu"
-
-#~ msgid "An Email has been sent to your account with further instructions."
-#~ msgstr "Email đã được gửi đến tài khoản của bạn kèm theo các hướng dẫn thêm."
-
-#~ msgid "Password Recovery Request"
-#~ msgstr "Yêu cầu khôi phục mật khẩu"
-
-#~ msgid "Pick a new password"
-#~ msgstr "Chọn một mật khẩu mới"
-
-#~ msgid "Your password has successfully been updated, thank you."
-#~ msgstr "Mật khẩu của bạn đã được cập nhật thành công, xin cảm ơn."
-
-#~ msgid "You are now logged in as %s"
-#~ msgstr "Bạn đã đăng nhập với tư cách %s"
-
-#~ msgid "Password Updated Successfully. Now you can log in using your new password."
-#~ msgstr "Cập nhật mật khẩu thành công. Bây giờ bạn có thể đăng nhập với mật khẩu mới"
-
-#~ msgid "Reset your Password"
-#~ msgstr "Cài lại mật khẩu"
-
-#~ msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-#~ msgstr "Liên kết của bạn đã hết hạn vì lý do bảo mật. Vui lòng khởi tạo lại quy trình bằng cách nhập email của bạn ở đây."
-
-#~ msgid "Submit"
-#~ msgstr "Gửi đi"
-
-#~ msgid "Form"
-#~ msgstr "Mẫu đơn"
-
-#~ msgid "Save Changes"
-#~ msgstr "Lưu thay đổi"
-
-#~ msgid "Your new %s has been created."
-#~ msgstr "%s mới của bạn đã được tạo."
-
-#~ msgid "Import %s"
-#~ msgstr "Nhập %s"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "Mã thông báo API cho tài khoản RapidPro được gắn với bảng điều khiển này "

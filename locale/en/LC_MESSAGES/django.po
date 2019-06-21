@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-20 10:49+0000\n"
+"POT-Creation-Date: 2019-06-21 10:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,642 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "The name of this category"
+msgstr ""
+
+msgid "An optional image that can describe this category"
+msgstr ""
+
+msgid "The organization this category applies to"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "The name to describe this image"
+msgstr ""
+
+msgid "The category this image represents"
+msgstr ""
+
+msgid "The image file to use"
+msgstr ""
+
+msgid "The human readable name for this content type"
+msgstr ""
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr ""
+
+msgid "Whether this content should include a title"
+msgstr ""
+
+msgid "Whether this content should include an image"
+msgstr ""
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr ""
+
+msgid "Whether this content should include a summary field"
+msgstr ""
+
+msgid "Whether this content should include a link"
+msgstr ""
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr ""
+
+msgid "Whether this content has a color field"
+msgstr ""
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr ""
+
+msgid "Whether this content should allow tags"
+msgstr ""
+
+msgid "Content Type"
+msgstr ""
+
+msgid "The category, or type for this content block"
+msgstr ""
+
+msgid "The title for this block of content, optional"
+msgstr ""
+
+msgid "The summary for this item, should be short"
+msgstr ""
+
+msgid "The body of text for this content block, optional"
+msgstr ""
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr ""
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr ""
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr ""
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr ""
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr ""
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr ""
+
+msgid "The organization this content block belongs to"
+msgstr ""
+
+msgid "Gallery"
+msgstr ""
+
+msgid "Add Image"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Content Types"
+msgstr ""
+
+msgid "Content Blocks"
+msgstr ""
+
+#, python-format
+msgid "%s Blocks"
+msgstr ""
+
+#, python-format
+msgid "Edit %s"
+msgstr ""
+
+#, python-format
+msgid "Create %s"
+msgstr ""
+
+msgid "Create Content Block"
+msgstr ""
+
+msgid "Your first name"
+msgstr ""
+
+msgid "Your last name"
+msgstr ""
+
+msgid "Your email address"
+msgstr ""
+
+msgid "Your password, at least eight letters please"
+msgstr ""
+
+msgid "That email address is already used"
+msgstr ""
+
+msgid "Passwords must contain at least 8 letters."
+msgstr ""
+
+msgid "This domain is used for subdomains"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "The name of this organization"
+msgstr ""
+
+msgid "The logo that should be used for this organization"
+msgstr ""
+
+msgid "Administrators"
+msgstr ""
+
+msgid "The administrators in your organization"
+msgstr ""
+
+msgid "Viewers"
+msgstr ""
+
+msgid "The viewers in your organization"
+msgstr ""
+
+msgid "Editors"
+msgstr ""
+
+msgid "The editors in your organization"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "The main language used by this organization"
+msgstr ""
+
+msgid "Subdomain"
+msgstr ""
+
+msgid "This subdomain is not available"
+msgstr ""
+
+msgid "The subdomain for this organization"
+msgstr ""
+
+msgid "Domain"
+msgstr ""
+
+msgid "This domain is not available"
+msgstr ""
+
+msgid "The custom domain for this organization"
+msgstr ""
+
+msgid "Timezone"
+msgstr ""
+
+msgid "The timezone your organization is in."
+msgstr ""
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr ""
+
+msgid "Administrator"
+msgstr ""
+
+msgid "Editor"
+msgstr ""
+
+msgid "Viewer"
+msgstr ""
+
+msgid "Org"
+msgstr ""
+
+msgid "The organization to which the account is invited to view"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr ""
+
+msgid "Secret"
+msgstr ""
+
+msgid "a unique code associated with this invitation"
+msgstr ""
+
+msgid "User Role"
+msgstr ""
+
+#, python-format
+msgid "%s Invitation"
+msgstr ""
+
+msgid "Banner"
+msgstr ""
+
+msgid "Pattern"
+msgstr ""
+
+msgid "The organization in which the image will be used"
+msgstr ""
+
+msgid "The name to describe this background"
+msgstr ""
+
+msgid "Background type"
+msgstr ""
+
+msgid "The image file"
+msgstr ""
+
+msgid "The API token for this backend"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Manage Backends"
+msgstr ""
+
+msgid "Manage Users"
+msgstr ""
+
+msgid "Accounts"
+msgstr ""
+
+msgid "Admins"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "You must have at least one administator"
+msgstr ""
+
+msgid "Select your Organization"
+msgstr ""
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr ""
+
+msgid "Your Organization"
+msgstr ""
+
+msgid "Invite people to your organization"
+msgstr ""
+
+msgid "User group"
+msgstr ""
+
+msgid "One of the emails you entered is invalid."
+msgstr ""
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr ""
+
+#, python-format
+msgid "Join %(name)s"
+msgstr ""
+
+msgid "Join"
+msgstr ""
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr ""
+
+msgid "Task"
+msgstr ""
+
+msgid "Tasks"
+msgstr ""
+
+msgid "The title for this story"
+msgstr ""
+
+msgid "Whether this story is featured"
+msgstr ""
+
+msgid "The summary for the story"
+msgstr ""
+
+msgid "The body of text for the story"
+msgstr ""
+
+msgid "The writer of the story"
+msgstr ""
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr ""
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr ""
+
+msgid "The category for this story"
+msgstr ""
+
+msgid "The organization this story belongs to"
+msgstr ""
+
+msgid "Stories"
+msgstr ""
+
+msgid "The story to associate to"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Story Images"
+msgstr ""
+
+#, python-format
+msgid "Image %d"
+msgstr ""
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr ""
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr ""
+
+msgid "Remove Item?"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "edit"
+msgstr ""
+
+msgid "Sign in"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Forgot Password?"
+msgstr ""
+
+msgid "Token Expired"
+msgstr ""
+
+msgid "Login Failure"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr ""
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr ""
+
+msgid "Email Address"
+msgstr ""
+
+msgid "Recover"
+msgstr ""
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+
+msgid "New Password"
+msgstr ""
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr ""
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Confirm Password"
+msgstr ""
+
+msgid "Please enter your password to save changes."
+msgstr ""
+
+msgid "Confirm the new password by filling the this field"
+msgstr ""
+
+msgid "New password doesn't match with its confirmation"
+msgstr ""
+
+msgid "Your Email"
+msgstr ""
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr ""
+
+msgid "Current Password"
+msgstr ""
+
+msgid "Your current password"
+msgstr ""
+
+msgid "Your new password."
+msgstr ""
+
+msgid "Confirm new Password"
+msgstr ""
+
+msgid "Confirm your new password."
+msgstr ""
+
+msgid "Please enter your password to save changes"
+msgstr ""
+
+msgid "Confirm your new password by entering it here"
+msgstr ""
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr ""
+
+msgid "New user created successfully."
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr ""
+
+msgid "Set the user's initial password here."
+msgstr ""
+
+msgid "Last Login"
+msgstr ""
+
+msgid "Is Active"
+msgstr ""
+
+msgid "Whether this user is allowed to log into the site"
+msgstr ""
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr ""
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Your password"
+msgstr ""
+
+msgid "If you want to set a new password, enter it here"
+msgstr ""
+
+msgid "Confirm New Password"
+msgstr ""
+
+msgid "Confirm your new password"
+msgstr ""
+
+msgid "Edit your profile"
+msgstr ""
+
+msgid "Password Recovery"
+msgstr ""
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr ""
+
+msgid "Password Recovery Request"
+msgstr ""
+
+msgid "Pick a new password"
+msgstr ""
+
+msgid "Your password has successfully been updated, thank you."
+msgstr ""
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr ""
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr ""
+
+msgid "Reset your Password"
+msgstr ""
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Form"
+msgstr ""
+
+msgid "Save Changes"
+msgstr ""
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr ""
+
+#, python-format
+msgid "Import %s"
+msgstr ""
 
 msgid "U-Report"
 msgstr ""
@@ -32,9 +668,6 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-msgid "Content Types"
-msgstr ""
-
 msgid "Images"
 msgstr ""
 
@@ -47,16 +680,10 @@ msgstr ""
 msgid "Polls"
 msgstr ""
 
-msgid "Categories"
-msgstr ""
-
 msgid "Category Images"
 msgstr ""
 
 msgid "News Items"
-msgstr ""
-
-msgid "Stories"
 msgstr ""
 
 msgid "Job Sources"
@@ -95,9 +722,6 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-msgid "Login"
-msgstr ""
-
 msgid "About"
 msgstr ""
 
@@ -128,12 +752,6 @@ msgid ""
 "      "
 msgstr ""
 
-msgid "Next"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
 msgid "Back"
 msgstr ""
 
@@ -141,18 +759,6 @@ msgid ""
 "\n"
 "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Manage Backends"
-msgstr ""
-
-msgid "Manage Users"
-msgstr ""
-
-msgid "Add"
 msgstr ""
 
 msgid "ABOUT U-REPORT"
@@ -517,41 +1123,20 @@ msgstr ""
 msgid "Week of"
 msgstr ""
 
-msgid "Sign in"
-msgstr ""
-
-msgid "Forgot Password?"
-msgstr ""
-
 #, python-format
 msgid "Refreshed %s cache for this organization"
-msgstr ""
-
-msgid "Banner"
-msgstr ""
-
-msgid "Pattern"
 msgstr ""
 
 msgid "Flag"
 msgstr ""
 
-msgid "Org"
-msgstr ""
-
 msgid "The organization to which the image will be used"
-msgstr ""
-
-msgid "Name"
 msgstr ""
 
 msgid "A short descriptive name for this image"
 msgstr ""
 
 msgid "Image type"
-msgstr ""
-
-msgid "The image file"
 msgstr ""
 
 msgid "Label"
@@ -665,16 +1250,10 @@ msgstr ""
 msgid "A short summary description for this video"
 msgstr ""
 
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr ""
-
 msgid "The organization this video belongs to"
 msgstr ""
 
 msgid "The name of this poll category"
-msgstr ""
-
-msgid "The organization this category applies to"
 msgstr ""
 
 msgid "Poll Categories"
@@ -713,13 +1292,7 @@ msgstr ""
 msgid "The organization this poll is part of"
 msgstr ""
 
-msgid "The name to describe this image"
-msgstr ""
-
 msgid "The poll to associate to"
-msgstr ""
-
-msgid "The image file to use"
 msgstr ""
 
 msgid "The poll for this response"
@@ -783,10 +1356,6 @@ msgid "Poll Images"
 msgstr ""
 
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr ""
-
-#, python-format
-msgid "Image %d"
 msgstr ""
 
 msgid "Image to display on poll page and in previews. (optional)"

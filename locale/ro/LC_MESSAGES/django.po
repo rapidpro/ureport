@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-20 10:49+0000\n"
+"POT-Creation-Date: 2019-06-21 10:49+0000\n"
 "PO-Revision-Date: 2019-01-28 17:20+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Romanian (http://www.transifex.com/rapidpro/ureport/language/ro/)\n"
@@ -19,6 +19,679 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+msgid "The name of this category"
+msgstr "Denumirea acestei categorii"
+
+msgid "An optional image that can describe this category"
+msgstr "O imagine opţională care poate să descrie această categorie"
+
+msgid "The organization this category applies to"
+msgstr "Organizația la care se aplică această categorie"
+
+msgid "Categories"
+msgstr "Categorii"
+
+msgid "The name to describe this image"
+msgstr "Denumirea pentru a descrie această imagine"
+
+msgid "The category this image represents"
+msgstr "Categoria pe care această imagine o reprezintă"
+
+msgid "The image file to use"
+msgstr "Fișierul imagine pentru utilizare"
+
+msgid "The human readable name for this content type"
+msgstr "Denumirea lizibilă de către om pentru acest tip de conținut"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "Câmpul pentru identificarea acestui tip de conținut, utilizat cu tag-uri șablon"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "O descriere a locului unde acest tip de conținut este folosit pe site și modul în care va fi afișat"
+
+msgid "Whether this content should include a title"
+msgstr "Dacă acest conținut ar trebui să includă un titlu"
+
+msgid "Whether this content should include an image"
+msgstr "Dacă acest conținut ar trebui să includă o imagine"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Dacă acest conținut ar trebui să utilizeze un editor HTML bogat"
+
+msgid "Whether this content should include a summary field"
+msgstr "Dacă acest conținut ar trebui să includă un câmp rezumat"
+
+msgid "Whether this content should include a link"
+msgstr "Dacă acest conținut ar trebui să includă un link"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Dacă acest conținut ar trebui să permită încărcarea de imagini suplimentare, adică o galerie"
+
+msgid "Whether this content has a color field"
+msgstr "Dacă acest conținut are un câmp de culoare"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Dacă acest conținut ar trebui să permită stabilirea unui ID YouTube"
+
+msgid "Whether this content should allow tags"
+msgstr "Dacă acest conținut ar trebui să permită tag-uri"
+
+msgid "Content Type"
+msgstr "Tipul de conținut"
+
+msgid "The category, or type for this content block"
+msgstr "Categoria sau tipul pentru acest bloc de conținut"
+
+msgid "The title for this block of content, optional"
+msgstr "Titlul pentru acest bloc de conținut, opțional"
+
+msgid "The summary for this item, should be short"
+msgstr "Rezumatul pentru acest element, trebuie să fie scurt"
+
+msgid "The body of text for this content block, optional"
+msgstr "Corpul de text pentru acest bloc de conținut, opțional"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Orice imagine care ar trebui să fie afişată cu acest bloc de conţinut, opţional"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "O culoare fundal pentru imagine, în formatul: #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Orice link care ar trebui să fie asociat cu acest bloc de conținut, opțional"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "ID-ul videoului de pe YouTube care ar trebui să fie legat de acest element"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Orice tag-uri pentru acest bloc de conținut, separate prin spații, pot fi folosite pentru o filtrare mai avansată, opțional"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "Prioritatea pentru acest bloc, blocurile cu prioritate mai mare sunt poziționate în partea de sus a paginii"
+
+msgid "The organization this content block belongs to"
+msgstr "Organizația la care aparţine acest bloc de conţinut"
+
+msgid "Gallery"
+msgstr "Galerie"
+
+msgid "Add Image"
+msgstr "Adăugare imagine"
+
+msgid "Search"
+msgstr "Caută"
+
+msgid "Add"
+msgstr "Adăugare"
+
+msgid "Content Types"
+msgstr "Tipuri de conținut"
+
+msgid "Content Blocks"
+msgstr "Blocuri de conţinut"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%s Blocuri"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Revizuire %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Crează %s"
+
+msgid "Create Content Block"
+msgstr "Creează bloc de conținut"
+
+msgid "Your first name"
+msgstr "Prenumele"
+
+msgid "Your last name"
+msgstr "Numele"
+
+msgid "Your email address"
+msgstr "E-mail"
+
+msgid "Your password, at least eight letters please"
+msgstr "Parola, trebuie să conțină cel puțin opt litere"
+
+msgid "That email address is already used"
+msgstr "Acest e-mail este deja utilizat"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Parolele trebuie să conțină cel puțin 8 litere."
+
+msgid "This domain is used for subdomains"
+msgstr "Acest domeniu este utilizat pentru subdomenii"
+
+msgid "Name"
+msgstr "Denumirea"
+
+msgid "The name of this organization"
+msgstr "Denumirea acestei organizații"
+
+msgid "The logo that should be used for this organization"
+msgstr "Logoul care ar trebui să fie utilizat pentru această organizație"
+
+msgid "Administrators"
+msgstr "Administratori"
+
+msgid "The administrators in your organization"
+msgstr "Administratorii din cadrul organizației voastre"
+
+msgid "Viewers"
+msgstr "Vizualizatori"
+
+msgid "The viewers in your organization"
+msgstr "Vizualizatorii din cadrul organizației voastre"
+
+msgid "Editors"
+msgstr "Editori"
+
+msgid "The editors in your organization"
+msgstr "Editorii din cadrul organizației voastre"
+
+msgid "Language"
+msgstr "Limba"
+
+msgid "The main language used by this organization"
+msgstr "Limba principală utilizată de această organizație"
+
+msgid "Subdomain"
+msgstr "Subdomeniul"
+
+msgid "This subdomain is not available"
+msgstr "Acest subdomeniu nu este disponibil"
+
+msgid "The subdomain for this organization"
+msgstr "Subdomeniul pentru această organizație"
+
+msgid "Domain"
+msgstr "Domeniul"
+
+msgid "This domain is not available"
+msgstr "Acest domeniu nu este disponibil"
+
+msgid "The custom domain for this organization"
+msgstr "Domeniul personalizat pentru această organizaţie"
+
+msgid "Timezone"
+msgstr "Fus orar"
+
+msgid "The timezone your organization is in."
+msgstr "Fusul orar al organizației voastre"
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "Fișierele JSON utilizate pentru a stoca informațiile de configurare asociate cu această organizație"
+
+msgid "Administrator"
+msgstr "Administrator"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Viewer"
+msgstr "Vizualizator"
+
+msgid "Org"
+msgstr "Organizație"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Organizaţia al cărei profil a fost invitat pentru vizualizare"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "E-mailul la care trimitem invitația vizualizatorului"
+
+msgid "Secret"
+msgstr "Secret"
+
+msgid "a unique code associated with this invitation"
+msgstr "un cod unic asociat cu această invitație"
+
+msgid "User Role"
+msgstr "Rol utilizator"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%s invitație"
+
+msgid "Banner"
+msgstr "Banner"
+
+msgid "Pattern"
+msgstr "Model"
+
+msgid "The organization in which the image will be used"
+msgstr "Organizația în care imaginea va fi utilizată"
+
+msgid "The name to describe this background"
+msgstr "Denumirea pentru a descrie acest fundal"
+
+msgid "Background type"
+msgstr "Tipul fundalului"
+
+msgid "The image file"
+msgstr "Fișierul imagine"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The API token for this backend"
+msgstr "Titlul pentru acest element"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"Ai fost invitat să te alături %(org_name)s.\n"
+"<br/>\n"
+"Pentru a accepta invitația, <a href='%(host)s%(join_url)s'>clic aici</a>."
+
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
+msgid "Edit"
+msgstr "Editează"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "Gestionează utilizatori"
+
+msgid "Manage Users"
+msgstr "Gestionează utilizatori"
+
+msgid "Accounts"
+msgstr "Conturi"
+
+msgid "Admins"
+msgstr "Administratori"
+
+msgid "Remove"
+msgstr "Elimină"
+
+msgid "You must have at least one administator"
+msgstr "Trebuie să aveți cel puțin un administrator"
+
+msgid "Select your Organization"
+msgstr "Selectați organizația voastră"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "Contul dat nu este asociat unei organizații. Vă rugăm să contactați administratorul."
+
+msgid "Your Organization"
+msgstr "Organizația voastră"
+
+msgid "Invite people to your organization"
+msgstr "Invitaţi oameni în organizaţia voastră"
+
+msgid "User group"
+msgstr "Grupul utilizatorilor"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Una dintre adresele de e-mail pe care le-ai introdus nu este validă."
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Administrează %(name)s Aconturi"
+
+msgid "Create"
+msgstr "Creează"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "Link-ul invitației tale nu este valid. Vă rugăm să contactați administratorul organizației voastre."
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Alăturăte %(name)s"
+
+msgid "Join"
+msgstr "Alătură-te"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "Link-ul invitației tale a expirat. Vă rugăm să contactați administratorul organizației voastre."
+
+msgid "Task"
+msgstr "Sarcină"
+
+msgid "Tasks"
+msgstr "Sarcini"
+
+msgid "The title for this story"
+msgstr "Titlul pentru acest articol"
+
+msgid "Whether this story is featured"
+msgstr "Dacă acest articol este recomandat"
+
+msgid "The summary for the story"
+msgstr "Rezumatul pentru articol"
+
+msgid "The body of text for the story"
+msgstr "Corpul de text pentru articol"
+
+msgid "The writer of the story"
+msgstr "Autorul articolului"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Un link către un fişier MP3 care să fie publicat în acest articol"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "ID-ul videoului de pe YouTube care trebuie să fie ataşat la acest articol (acesta este textul care urmează după v= și înainte de & în adresa URL a canalului YouTube)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Orice tag-uri pentru acest articol, separate prin spații, pot fi folosite pentru o filtrare mai avansată, opțional"
+
+msgid "The category for this story"
+msgstr "Categoria pentru acest articol"
+
+msgid "The organization this story belongs to"
+msgstr "Organizația căreia îi aparține acest articol"
+
+msgid "Stories"
+msgstr "Articole"
+
+msgid "The story to associate to"
+msgstr "Articolul cu care trebuie asociat"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "No"
+msgstr "Nu"
+
+msgid "Story Images"
+msgstr "Imagini articol"
+
+#, python-format
+msgid "Image %d"
+msgstr "Imagine %d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și în previzualizări. (opțional)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și în previzualizări (opțional)"
+
+msgid "Remove Item?"
+msgstr "Elimină element?"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Ești sigur că vrei să ștergi<b>%(object)s</b>?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Odată eliminat, nu va mai putea fi restabilit. Nu există niciun mod de a anula această operație."
+
+msgid "Cancel"
+msgstr "Anulare"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t\t%(counter)s rezultate\n"
+"\t"
+msgstr[1] ""
+"\n"
+"         %(counter)s rezultate\n"
+"        "
+msgstr[2] ""
+"\n"
+"         %(counter)s rezultate\n"
+"        "
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"⇥Rezultate %(start)s-%(end)s a %(count)s\n"
+"⇥"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Următor"
+
+msgid "edit"
+msgstr "editează"
+
+msgid "Sign in"
+msgstr "Conectează-te"
+
+msgid "Login"
+msgstr "Loghează-te"
+
+msgid "Forgot Password?"
+msgstr "Ai uitat parola?"
+
+msgid "Token Expired"
+msgstr "Token expirat"
+
+msgid "Login Failure"
+msgstr "Logare eșuată"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Ne pare rău, nu vă puteți conecta în acest moment, deoarece am primit %(failed_login_limit)s Încercări greșite de conectare."
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Te rog așteaptă %(lockout_timeout)s minute înainte ca să încercați să vă autentificați din nou."
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "În caz contrar, poți completa formularul de mai jos pentru a-ți reseta parola prin e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Te rugăm să contactezi administratorul site-ului pentru a-ți reseta parola."
+
+msgid "Email Address"
+msgstr "E-mail"
+
+msgid "Recover"
+msgstr "Restabilire"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Te rugăm să introduci adresa de e-mail, pe care ai utilizat-o la conectare, iar noi te vom ajuta să îți restabilești parola."
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Parola a expirat</strong> Politica site-ului afirmă că trebuie să alegeți o parolă nouă la fiecare %(expire_days)s zile, și că parolele nu trebuie să fi fost folosite anterior %(window_days)s zile."
+
+msgid "New Password"
+msgstr "Parola nouă"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Parolele trebuie să conțină cel puțin 8 caractere, inclusiv o majusculă, o minusculă și un număr"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Ai folosit această parolă pe parcursul ultimului an, alege o parolă nouă."
+
+msgid "Password"
+msgstr "Parolă"
+
+msgid "Confirm Password"
+msgstr "Confirmare parolă"
+
+msgid "Please enter your password to save changes."
+msgstr "Introdu parola pentru a salva modificările."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Confirmă parola nouă prin completarea acestui câmp"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Parola nouă nu se potrivește cu cea confirmată"
+
+msgid "Your Email"
+msgstr "E-mail"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "E-mailul pentru recuperarea parolei nu este confirmat, contactează administratorul site-ului pentru a-ți reseta parola manual."
+
+msgid "Current Password"
+msgstr "Parola curentă"
+
+msgid "Your current password"
+msgstr "Parola ta curentă"
+
+msgid "Your new password."
+msgstr "Parola ta nouă"
+
+msgid "Confirm new Password"
+msgstr "Confirmare parolă nouă"
+
+msgid "Confirm your new password."
+msgstr "Confirmaţi parola nouă."
+
+msgid "Please enter your password to save changes"
+msgstr "Introdu parola pentru a salva modificările"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Confirmă parola noua introducând-o aici"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Parola nouă și cea confirmată nu corespund, încearcă din nou"
+
+msgid "New user created successfully."
+msgstr "Contul nou a fost creat cu succes."
+
+msgid "Groups"
+msgstr "Grupuri"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
+
+msgid "Set the user's initial password here."
+msgstr "Introdu aici parola inițială a utilizatorului."
+
+msgid "Last Login"
+msgstr "Ultima logare"
+
+msgid "Is Active"
+msgstr "Este activ"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Dacă acestui utilizator îi este permis să se logheze pe site"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Poți reseta parola utilizatorului prin introducerea unei noi parole aici"
+
+msgid "Username"
+msgstr "Nume utilizator"
+
+msgid "Your password"
+msgstr "Parola"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Dacă dorești să setezi o parolă nouă, introdu-o aici"
+
+msgid "Confirm New Password"
+msgstr "Confirmare parola nouă"
+
+msgid "Confirm your new password"
+msgstr "Confirmă parola nouă."
+
+msgid "Edit your profile"
+msgstr "Editează profilul"
+
+msgid "Password Recovery"
+msgstr "Recuperează parola"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Un e-mail cu instrucțiuni suplimentare ți-a fost expediat în cont"
+
+msgid "Password Recovery Request"
+msgstr "Solicitare recuperare parolă"
+
+msgid "Pick a new password"
+msgstr "Alege o parolă nouă"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Parola a fost actualizată cu succes, îți mulțumim."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Acum tu ești conectat ca %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Parola a fost actualizată cu succes. Acum poți să te loghezi cu parola nouă."
+
+msgid "Reset your Password"
+msgstr "Resetează parola"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Link-ul tău a expirat din motive de securitate. Te rugăm să începi din nou prin introducerea e-mailului aici."
+
+msgid "Submit"
+msgstr "Trimite"
+
+msgid "Form"
+msgstr "Formular"
+
+msgid "Save Changes"
+msgstr "Salvează modificările"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "%s tau nou a fost creat."
+
+#, python-format
+msgid "Import %s"
+msgstr "Importă %s"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -35,9 +708,6 @@ msgstr "Organizații"
 msgid "Users"
 msgstr "Utilizatori"
 
-msgid "Content Types"
-msgstr "Tipuri de conținut"
-
 msgid "Images"
 msgstr "Imagini"
 
@@ -50,17 +720,11 @@ msgstr "Identificatoarele țării"
 msgid "Polls"
 msgstr "Sondaje"
 
-msgid "Categories"
-msgstr "Categorii"
-
 msgid "Category Images"
 msgstr "Categorie imagini"
 
 msgid "News Items"
 msgstr "Știri"
-
-msgid "Stories"
-msgstr "Articole"
 
 msgid "Job Sources"
 msgstr "Sursele ofertelor de muncă"
@@ -98,9 +762,6 @@ msgstr "Meniu suplimentar"
 msgid "Logout"
 msgstr "Deconectare"
 
-msgid "Login"
-msgstr "Loghează-te"
-
 msgid "About"
 msgstr "Despre noi"
 
@@ -135,12 +796,6 @@ msgstr ""
 "\n"
 "<Div> După ce creați widget-ul, copiați id-ul widget-ului din url, așa cum este prezentat în </ div> "
 
-msgid "Next"
-msgstr "Următor"
-
-msgid "Cancel"
-msgstr "Anulare"
-
 msgid "Back"
 msgstr "Înapoi"
 
@@ -151,20 +806,6 @@ msgid ""
 msgstr ""
 "\n"
 "Rețineți, pentru a indica locul de muncă de pe Twitter, este necesar a obține un ID al widget-ului din twitter."
-
-msgid "Edit"
-msgstr "Editează"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "Gestionează utilizatori"
-
-msgid "Manage Users"
-msgstr "Gestionează utilizatori"
-
-msgid "Add"
-msgstr "Adăugare"
 
 msgid "ABOUT U-REPORT"
 msgstr "DESPRE U-REPORT"
@@ -547,42 +1188,21 @@ msgstr "Înregistrați"
 msgid "Week of"
 msgstr "Săptămâna din"
 
-msgid "Sign in"
-msgstr "Conectează-te"
-
-msgid "Forgot Password?"
-msgstr "Ai uitat parola?"
-
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Actualizat %s pentru această organizație"
 
-msgid "Banner"
-msgstr "Banner"
-
-msgid "Pattern"
-msgstr "Model"
-
 msgid "Flag"
 msgstr "Steag"
 
-msgid "Org"
-msgstr "Organizație"
-
 msgid "The organization to which the image will be used"
 msgstr "Organizația pentru care imaginea va fi utilizată"
-
-msgid "Name"
-msgstr "Denumirea"
 
 msgid "A short descriptive name for this image"
 msgstr "O scurtă denumire descriptivă pentru această imagine"
 
 msgid "Image type"
 msgstr "Tipul imaginii"
-
-msgid "The image file"
-msgstr "Fișierul imagine"
 
 msgid "Label"
 msgstr "Etichetă"
@@ -695,17 +1315,11 @@ msgstr "Titlul pentru acest video"
 msgid "A short summary description for this video"
 msgstr "O descriere pe scurt pentru acest video"
 
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "ID-ul videoului de pe YouTube care ar trebui să fie legat de acest element"
-
 msgid "The organization this video belongs to"
 msgstr "Organizația la care aparține acest video"
 
 msgid "The name of this poll category"
 msgstr "Denumirea acestei categorii de sondaje"
-
-msgid "The organization this category applies to"
-msgstr "Organizația la care se aplică această categorie"
 
 msgid "Poll Categories"
 msgstr "Categorii de sondaje"
@@ -743,14 +1357,8 @@ msgstr "Categoria culorii pe care o va avea imaginea afișată pentru sondaj (op
 msgid "The organization this poll is part of"
 msgstr "Organizația la care face parte acest sondaj"
 
-msgid "The name to describe this image"
-msgstr "Denumirea pentru a descrie această imagine"
-
 msgid "The poll to associate to"
 msgstr "Sondajul cu care trebuie asociat"
-
-msgid "The image file to use"
-msgstr "Fișierul imagine pentru utilizare"
 
 msgid "The poll for this response"
 msgstr "Sondajul la care aparţine acest răspuns"
@@ -820,10 +1428,6 @@ msgstr "Imagini sondaj"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Acum, introdu orice răspuns care ai dori să fie afișat. (dacă există)"
-
-#, python-format
-msgid "Image %d"
-msgstr "Imagine %d"
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "Imaginea care să fie afişată pe pagina unde este plasat sondajul și în previzualizări. (opțional)"
@@ -1035,589 +1639,6 @@ msgstr "Dacă ai nevoie să incluzi unele coduri HTML personalizate în paginile
 
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
-
-#~ msgid "The name of this category"
-#~ msgstr "Denumirea acestei categorii"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "O imagine opţională care poate să descrie această categorie"
-
-#~ msgid "The category this image represents"
-#~ msgstr "Categoria pe care această imagine o reprezintă"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "Denumirea lizibilă de către om pentru acest tip de conținut"
-
-#~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr "Câmpul pentru identificarea acestui tip de conținut, utilizat cu tag-uri șablon"
-
-#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-#~ msgstr "O descriere a locului unde acest tip de conținut este folosit pe site și modul în care va fi afișat"
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "Dacă acest conținut ar trebui să includă un titlu"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "Dacă acest conținut ar trebui să includă o imagine"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "Dacă acest conținut ar trebui să utilizeze un editor HTML bogat"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "Dacă acest conținut ar trebui să includă un câmp rezumat"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "Dacă acest conținut ar trebui să includă un link"
-
-#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
-#~ msgstr "Dacă acest conținut ar trebui să permită încărcarea de imagini suplimentare, adică o galerie"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "Dacă acest conținut are un câmp de culoare"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "Dacă acest conținut ar trebui să permită stabilirea unui ID YouTube"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "Dacă acest conținut ar trebui să permită tag-uri"
-
-#~ msgid "Content Type"
-#~ msgstr "Tipul de conținut"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "Categoria sau tipul pentru acest bloc de conținut"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "Titlul pentru acest bloc de conținut, opțional"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "Rezumatul pentru acest element, trebuie să fie scurt"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "Corpul de text pentru acest bloc de conținut, opțional"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "Orice imagine care ar trebui să fie afişată cu acest bloc de conţinut, opţional"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "O culoare fundal pentru imagine, în formatul: #rrggbb"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "Orice link care ar trebui să fie asociat cu acest bloc de conținut, opțional"
-
-#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Orice tag-uri pentru acest bloc de conținut, separate prin spații, pot fi folosite pentru o filtrare mai avansată, opțional"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "Prioritatea pentru acest bloc, blocurile cu prioritate mai mare sunt poziționate în partea de sus a paginii"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "Organizația la care aparţine acest bloc de conţinut"
-
-#~ msgid "Gallery"
-#~ msgstr "Galerie"
-
-#~ msgid "Add Image"
-#~ msgstr "Adăugare imagine"
-
-#~ msgid "Search"
-#~ msgstr "Caută"
-
-#~ msgid "Content Blocks"
-#~ msgstr "Blocuri de conţinut"
-
-#~ msgid "%s Blocks"
-#~ msgstr "%s Blocuri"
-
-#~ msgid "Edit %s"
-#~ msgstr "Revizuire %s"
-
-#~ msgid "Create %s"
-#~ msgstr "Crează %s"
-
-#~ msgid "Create Content Block"
-#~ msgstr "Creează bloc de conținut"
-
-#~ msgid "Your first name"
-#~ msgstr "Prenumele"
-
-#~ msgid "Your last name"
-#~ msgstr "Numele"
-
-#~ msgid "Your email address"
-#~ msgstr "E-mail"
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "Parola, trebuie să conțină cel puțin opt litere"
-
-#~ msgid "That email address is already used"
-#~ msgstr "Acest e-mail este deja utilizat"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "Parolele trebuie să conțină cel puțin 8 litere."
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "Acest domeniu este utilizat pentru subdomenii"
-
-#~ msgid "The name of this organization"
-#~ msgstr "Denumirea acestei organizații"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "Logoul care ar trebui să fie utilizat pentru această organizație"
-
-#~ msgid "Administrators"
-#~ msgstr "Administratori"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "Administratorii din cadrul organizației voastre"
-
-#~ msgid "Viewers"
-#~ msgstr "Vizualizatori"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "Vizualizatorii din cadrul organizației voastre"
-
-#~ msgid "Editors"
-#~ msgstr "Editori"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "Editorii din cadrul organizației voastre"
-
-#~ msgid "Language"
-#~ msgstr "Limba"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "Limba principală utilizată de această organizație"
-
-#~ msgid "Subdomain"
-#~ msgstr "Subdomeniul"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "Acest subdomeniu nu este disponibil"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "Subdomeniul pentru această organizație"
-
-#~ msgid "Domain"
-#~ msgstr "Domeniul"
-
-#~ msgid "This domain is not available"
-#~ msgstr "Acest domeniu nu este disponibil"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "Domeniul personalizat pentru această organizaţie"
-
-#~ msgid "Timezone"
-#~ msgstr "Fus orar"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "Fusul orar al organizației voastre"
-
-#~ msgid "JSON blob used to store configuration information associated with this organization"
-#~ msgstr "Fișierele JSON utilizate pentru a stoca informațiile de configurare asociate cu această organizație"
-
-#~ msgid "Administrator"
-#~ msgstr "Administrator"
-
-#~ msgid "Editor"
-#~ msgstr "Editor"
-
-#~ msgid "Viewer"
-#~ msgstr "Vizualizator"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "Organizaţia al cărei profil a fost invitat pentru vizualizare"
-
-#~ msgid "Email"
-#~ msgstr "E-mail"
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "E-mailul la care trimitem invitația vizualizatorului"
-
-#~ msgid "Secret"
-#~ msgstr "Secret"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "un cod unic asociat cu această invitație"
-
-#~ msgid "User Role"
-#~ msgstr "Rol utilizator"
-
-#~ msgid "%s Invitation"
-#~ msgstr "%s invitație"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "Organizația în care imaginea va fi utilizată"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "Denumirea pentru a descrie acest fundal"
-
-#~ msgid "Background type"
-#~ msgstr "Tipul fundalului"
-
-#, fuzzy
-#~| msgid "The title for this item"
-#~ msgid "The API token for this backend"
-#~ msgstr "Titlul pentru acest element"
-
-#~ msgid ""
-#~ "\n"
-#~ "      You've been invited to join %(org_name)s.\n"
-#~ "      <br/>\n"
-#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "Ai fost invitat să te alături %(org_name)s.\n"
-#~ "<br/>\n"
-#~ "Pentru a accepta invitația, <a href='%(host)s%(join_url)s'>clic aici</a>."
-
-#~ msgid "Accounts"
-#~ msgstr "Conturi"
-
-#~ msgid "Admins"
-#~ msgstr "Administratori"
-
-#~ msgid "Remove"
-#~ msgstr "Elimină"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "Trebuie să aveți cel puțin un administrator"
-
-#~ msgid "Select your Organization"
-#~ msgstr "Selectați organizația voastră"
-
-#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-#~ msgstr "Contul dat nu este asociat unei organizații. Vă rugăm să contactați administratorul."
-
-#~ msgid "Your Organization"
-#~ msgstr "Organizația voastră"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "Invitaţi oameni în organizaţia voastră"
-
-#~ msgid "User group"
-#~ msgstr "Grupul utilizatorilor"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "Una dintre adresele de e-mail pe care le-ai introdus nu este validă."
-
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "Administrează %(name)s Aconturi"
-
-#~ msgid "Create"
-#~ msgstr "Creează"
-
-#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
-#~ msgstr "Link-ul invitației tale nu este valid. Vă rugăm să contactați administratorul organizației voastre."
-
-#~ msgid "Join %(name)s"
-#~ msgstr "Alăturăte %(name)s"
-
-#~ msgid "Join"
-#~ msgstr "Alătură-te"
-
-#~ msgid "Your invitation link has expired. Please contact your organization administrator."
-#~ msgstr "Link-ul invitației tale a expirat. Vă rugăm să contactați administratorul organizației voastre."
-
-#~ msgid "Task"
-#~ msgstr "Sarcină"
-
-#~ msgid "Tasks"
-#~ msgstr "Sarcini"
-
-#~ msgid "The title for this story"
-#~ msgstr "Titlul pentru acest articol"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "Dacă acest articol este recomandat"
-
-#~ msgid "The summary for the story"
-#~ msgstr "Rezumatul pentru articol"
-
-#~ msgid "The body of text for the story"
-#~ msgstr "Corpul de text pentru articol"
-
-#~ msgid "The writer of the story"
-#~ msgstr "Autorul articolului"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "Un link către un fişier MP3 care să fie publicat în acest articol"
-
-#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr "ID-ul videoului de pe YouTube care trebuie să fie ataşat la acest articol (acesta este textul care urmează după v= și înainte de & în adresa URL a canalului YouTube)"
-
-#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Orice tag-uri pentru acest articol, separate prin spații, pot fi folosite pentru o filtrare mai avansată, opțional"
-
-#~ msgid "The category for this story"
-#~ msgstr "Categoria pentru acest articol"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "Organizația căreia îi aparține acest articol"
-
-#~ msgid "The story to associate to"
-#~ msgstr "Articolul cu care trebuie asociat"
-
-#~ msgid "Yes"
-#~ msgstr "Da"
-
-#~ msgid "No"
-#~ msgstr "Nu"
-
-#~ msgid "Story Images"
-#~ msgstr "Imagini articol"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și în previzualizări. (opțional)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și în previzualizări (opțional)"
-
-#~ msgid "Remove Item?"
-#~ msgstr "Elimină element?"
-
-#~ msgid ""
-#~ "\n"
-#~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "Ești sigur că vrei să ștergi<b>%(object)s</b>?"
-
-#~ msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-#~ msgstr "Odată eliminat, nu va mai putea fi restabilit. Nu există niciun mod de a anula această operație."
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "\t\t%(counter)s result\n"
-#~| "\t"
-#~| msgid_plural ""
-#~| "\n"
-#~| "         %(counter)s results\n"
-#~| "        "
-#~ msgid ""
-#~ "\n"
-#~ "\t %(counter)s result\n"
-#~ "\t"
-#~ msgid_plural ""
-#~ "\n"
-#~ "         %(counter)s results\n"
-#~ "        "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "\t\t%(counter)s rezultate\n"
-#~ "\t"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "         %(counter)s rezultate\n"
-#~ "        "
-#~ msgstr[2] ""
-#~ "\n"
-#~ "         %(counter)s rezultate\n"
-#~ "        "
-
-#~ msgid ""
-#~ "\n"
-#~ "\tResults %(start)s-%(end)s of %(count)s\n"
-#~ "\t"
-#~ msgstr ""
-#~ "\n"
-#~ "⇥Rezultate %(start)s-%(end)s a %(count)s\n"
-#~ "⇥"
-
-#~ msgid "Previous"
-#~ msgstr "Anterior"
-
-#~ msgid "edit"
-#~ msgstr "editează"
-
-#~ msgid "Token Expired"
-#~ msgstr "Token expirat"
-
-#~ msgid "Login Failure"
-#~ msgstr "Logare eșuată"
-
-#~ msgid ""
-#~ "\n"
-#~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Ne pare rău, nu vă puteți conecta în acest moment, deoarece am primit %(failed_login_limit)s Încercări greșite de conectare."
-
-#~ msgid ""
-#~ "\n"
-#~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Te rog așteaptă %(lockout_timeout)s minute înainte ca să încercați să vă autentificați din nou."
-
-#~ msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-#~ msgstr "În caz contrar, poți completa formularul de mai jos pentru a-ți reseta parola prin e-mail."
-
-#~ msgid "Please contact the website administrator to have your password reset."
-#~ msgstr "Te rugăm să contactezi administratorul site-ului pentru a-ți reseta parola."
-
-#~ msgid "Email Address"
-#~ msgstr "E-mail"
-
-#~ msgid "Recover"
-#~ msgstr "Restabilire"
-
-#~ msgid "Please enter the email address you used to sign up and we will help you recover your password."
-#~ msgstr "Te rugăm să introduci adresa de e-mail, pe care ai utilizat-o la conectare, iar noi te vom ajuta să îți restabilești parola."
-
-#~ msgid ""
-#~ "\n"
-#~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "<strong>Parola a expirat</strong> Politica site-ului afirmă că trebuie să alegeți o parolă nouă la fiecare %(expire_days)s zile, și că parolele nu trebuie să fi fost folosite anterior %(window_days)s zile."
-
-#~ msgid "New Password"
-#~ msgstr "Parola nouă"
-
-#~ msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-#~ msgstr "Parolele trebuie să conțină cel puțin 8 caractere, inclusiv o majusculă, o minusculă și un număr"
-
-#~ msgid "You have used this password before in the past year, please use a new password."
-#~ msgstr "Ai folosit această parolă pe parcursul ultimului an, alege o parolă nouă."
-
-#~ msgid "Password"
-#~ msgstr "Parolă"
-
-#~ msgid "Confirm Password"
-#~ msgstr "Confirmare parolă"
-
-#~ msgid "Please enter your password to save changes."
-#~ msgstr "Introdu parola pentru a salva modificările."
-
-#~ msgid "Confirm the new password by filling the this field"
-#~ msgstr "Confirmă parola nouă prin completarea acestui câmp"
-
-#~ msgid "New password doesn't match with its confirmation"
-#~ msgstr "Parola nouă nu se potrivește cu cea confirmată"
-
-#~ msgid "Your Email"
-#~ msgstr "E-mail"
-
-#~ msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-#~ msgstr "E-mailul pentru recuperarea parolei nu este confirmat, contactează administratorul site-ului pentru a-ți reseta parola manual."
-
-#~ msgid "Current Password"
-#~ msgstr "Parola curentă"
-
-#~ msgid "Your current password"
-#~ msgstr "Parola ta curentă"
-
-#~ msgid "Your new password."
-#~ msgstr "Parola ta nouă"
-
-#~ msgid "Confirm new Password"
-#~ msgstr "Confirmare parolă nouă"
-
-#~ msgid "Confirm your new password."
-#~ msgstr "Confirmaţi parola nouă."
-
-#~ msgid "Please enter your password to save changes"
-#~ msgstr "Introdu parola pentru a salva modificările"
-
-#~ msgid "Confirm your new password by entering it here"
-#~ msgstr "Confirmă parola noua introducând-o aici"
-
-#~ msgid "Mismatch between your new password and confirmation, try again"
-#~ msgstr "Parola nouă și cea confirmată nu corespund, încearcă din nou"
-
-#~ msgid "New user created successfully."
-#~ msgstr "Contul nou a fost creat cu succes."
-
-#~ msgid "Groups"
-#~ msgstr "Grupuri"
-
-#~ msgid "Users will only get those permissions that are allowed for their group."
-#~ msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
-
-#~ msgid "Set the user's initial password here."
-#~ msgstr "Introdu aici parola inițială a utilizatorului."
-
-#~ msgid "Last Login"
-#~ msgstr "Ultima logare"
-
-#~ msgid "Is Active"
-#~ msgstr "Este activ"
-
-#~ msgid "Whether this user is allowed to log into the site"
-#~ msgstr "Dacă acestui utilizator îi este permis să se logheze pe site"
-
-#~ msgid "Users will only get those permissions that are allowed for their group"
-#~ msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
-
-#~ msgid "You can reset the user's password by entering a new password here"
-#~ msgstr "Poți reseta parola utilizatorului prin introducerea unei noi parole aici"
-
-#~ msgid "Username"
-#~ msgstr "Nume utilizator"
-
-#~ msgid "Your password"
-#~ msgstr "Parola"
-
-#~ msgid "If you want to set a new password, enter it here"
-#~ msgstr "Dacă dorești să setezi o parolă nouă, introdu-o aici"
-
-#~ msgid "Confirm New Password"
-#~ msgstr "Confirmare parola nouă"
-
-#~ msgid "Confirm your new password"
-#~ msgstr "Confirmă parola nouă."
-
-#~ msgid "Edit your profile"
-#~ msgstr "Editează profilul"
-
-#~ msgid "Password Recovery"
-#~ msgstr "Recuperează parola"
-
-#~ msgid "An Email has been sent to your account with further instructions."
-#~ msgstr "Un e-mail cu instrucțiuni suplimentare ți-a fost expediat în cont"
-
-#~ msgid "Password Recovery Request"
-#~ msgstr "Solicitare recuperare parolă"
-
-#~ msgid "Pick a new password"
-#~ msgstr "Alege o parolă nouă"
-
-#~ msgid "Your password has successfully been updated, thank you."
-#~ msgstr "Parola a fost actualizată cu succes, îți mulțumim."
-
-#~ msgid "You are now logged in as %s"
-#~ msgstr "Acum tu ești conectat ca %s"
-
-#~ msgid "Password Updated Successfully. Now you can log in using your new password."
-#~ msgstr "Parola a fost actualizată cu succes. Acum poți să te loghezi cu parola nouă."
-
-#~ msgid "Reset your Password"
-#~ msgstr "Resetează parola"
-
-#~ msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-#~ msgstr "Link-ul tău a expirat din motive de securitate. Te rugăm să începi din nou prin introducerea e-mailului aici."
-
-#~ msgid "Submit"
-#~ msgstr "Trimite"
-
-#~ msgid "Form"
-#~ msgstr "Formular"
-
-#~ msgid "Save Changes"
-#~ msgstr "Salvează modificările"
-
-#~ msgid "Your new %s has been created."
-#~ msgstr "%s tau nou a fost creat."
-
-#~ msgid "Import %s"
-#~ msgstr "Importă %s"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "Cheia secretă API pentru contul RapidPro cu care are legătură acest tablou de bord"
