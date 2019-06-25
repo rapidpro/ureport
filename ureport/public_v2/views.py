@@ -291,6 +291,8 @@ class UreportersView(SmartTemplateView):
         context["responded_female"] = org.get_filtered_engagement_counts(
             "total-ruleset-responded:engagement:gender:f:date"
         )
+
+        context["contact_activities"] = org.get_contacts_activity()
         return context
 
 

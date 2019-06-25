@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-15 19:34+0000\n"
+"POT-Creation-Date: 2019-06-21 10:49+0000\n"
 "PO-Revision-Date: 2018-08-22 11:40+0000\n"
 "Last-Translator: Jahongir Abdurahmonov <jabdurahmonov@unicef.org>\n"
 "Language-Team: Uzbek (http://www.transifex.com/rapidpro/ureport/language/uz/)\n"
@@ -351,6 +351,8 @@ msgstr "Sizning taklifnoma linkingiz noto'g'ri. Iltimos tashkilotingiz administr
 msgid "Join %(name)s"
 msgstr "%(name)s ga qo'shiling"
 
+#, fuzzy
+#| msgid "Join"
 msgid "Join"
 msgstr "Qo'shiling"
 
@@ -421,7 +423,11 @@ msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan surat. (ixtiyoriy)"
 msgid "Remove Item?"
 msgstr "Element olib tashlansinmi?"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
 msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -487,7 +493,11 @@ msgstr "Token muddati tugadi"
 msgid "Login Failure"
 msgstr "Kirish uddasidan chiqmadi"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
 msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -497,7 +507,11 @@ msgstr ""
 "Kechirasiz, siz hozir kira olmaysiz, chunki bizga %(failed_login_limit)s noto'g'ri kirish harakatlari.\n"
 " kelib tushdi"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -521,7 +535,11 @@ msgstr "Tiklash"
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Iltimos, ro'yxatdan o'tish vaqtida ko'rsatgan elektron pochta manzilini kiriting va biz sizga parolingizni tiklashga yordam beramiz."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -675,6 +693,66 @@ msgstr "Sizning yangi %s giz yaratildi"
 msgid "Import %s"
 msgstr "%s ni import qilish"
 
+msgid "Back to Full Site"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Logout"
+msgstr "Chiqish"
+
+msgid "Polls"
+msgstr "So'rovlar"
+
+msgid "Users"
+msgstr "Foydalanuvchilar"
+
+msgid "Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Images"
+msgid "Pages"
+msgstr "Suratlar"
+
+msgid "Jobs"
+msgstr "Ish o'rinlari"
+
+#, fuzzy
+#| msgid "Category Images"
+msgid "Categories Images"
+msgstr "Toifa suratlari"
+
+msgid "News Items"
+msgstr "Yangiliklar"
+
+msgid "Orgs"
+msgstr "Tashkr"
+
+msgid "Images"
+msgstr "Suratlar"
+
+msgid "Analytics"
+msgstr ""
+
+msgid "About"
+msgstr "Haqida"
+
+msgid "Engagement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Qo'shiling"
+
+msgid "+ New Page"
+msgstr ""
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -684,29 +762,14 @@ msgstr "Admin"
 msgid "Configuration"
 msgstr "Configurasiya"
 
-msgid "Orgs"
-msgstr "Tashkr"
-
-msgid "Users"
-msgstr "Foydalanuvchilar"
-
-msgid "Images"
-msgstr "Suratlar"
-
 msgid "Content"
 msgstr "Kontent"
 
 msgid "Country Aliases"
 msgstr "Mamlakatning shartli nomi"
 
-msgid "Polls"
-msgstr "So'rovlar"
-
 msgid "Category Images"
 msgstr "Toifa suratlari"
-
-msgid "News Items"
-msgstr "Yangiliklar"
 
 msgid "Job Sources"
 msgstr "Ish o'rni manbalari"
@@ -741,23 +804,37 @@ msgstr "Qo'shilish bosqichlari kontenti"
 msgid "Additional Menu"
 msgstr "Qo'shimcha menyu"
 
-msgid "Logout"
-msgstr "Chiqish"
-
-msgid "About"
-msgstr "Haqida"
-
 msgid "U-Reporters"
 msgstr "U-Reportyorlar"
-
-msgid "Jobs"
-msgstr "Ish o'rinlari"
 
 msgid "Join & Engage"
 msgstr "Qo'shiling va Jalb bo'ling"
 
 msgid "FOLLOW US ON"
 msgstr "BIZNI KUZATIB BORING"
+
+msgid "Opinions"
+msgstr ""
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Site page under construction"
+msgstr ""
+
+msgid "Go back to main public site"
+msgstr ""
+
+msgid "READ MORE"
+msgstr "KO'PROQ O'QISH"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join & Engage"
+msgid "Engage"
+msgstr "Qo'shiling va Jalb bo'ling"
 
 msgid ""
 "\n"
@@ -788,6 +865,27 @@ msgid ""
 "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
 msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "JOYLASHUV YERLARI"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Foydalanuvchilarni boshqarish"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Natijalar"
 
 msgid "ABOUT U-REPORT"
 msgstr "U-REPORT TO'G'RISIDA"
@@ -1100,9 +1198,6 @@ msgstr "O'xshash so'rovlnomalar yo'q."
 msgid "No featured images."
 msgstr "Alohida ajrab turadigan suratlar yo'q."
 
-msgid "READ MORE"
-msgstr "KO'PROQ O'QISH"
-
 msgid "Even"
 msgstr "Hatto"
 
@@ -1168,6 +1263,175 @@ msgstr "Ro'yxatdan o'tganlar"
 
 msgid "Week of"
 msgstr "Haftasi"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "SO'ROVNOMA NATIJALARI"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS WORLDWIDE:"
+msgstr "U-Reportyorlar"
+
+msgid "AGES"
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                  %(questions)s question polled on this topic\n"
+#| "                "
+#| msgid_plural ""
+#| "\n"
+#| "                  %(questions)s questions polled on this topic\n"
+#| "                "
+msgid ""
+"\n"
+"          %(questions)s question\n"
+"        "
+msgid_plural ""
+"\n"
+"          %(questions)s questions\n"
+"        "
+msgstr[0] ""
+"\n"
+"Shu mavzu bo'yicha so'ralgan %(questions)s savollar\n"
+" "
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONSES"
+msgstr "JAVOB BERGANLAR ULUSHI"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"                  %(responded)s responded out of %(polled)s polled\n"
+"                "
+msgstr ""
+"\n"
+"%(responded)s berilgan savollardan %(polled)s ga javob berdilar\n"
+" "
+
+#, fuzzy
+#| msgid "FILTERED BY"
+msgid "FILTER BY:"
+msgstr "TOMONIDAN SARALANGAN"
+
+msgid "Keywords"
+msgstr ""
+
+msgid "ALL"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "JOYLASHUV YERLARI"
+
+msgid "ACTION BUTTON"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"<b>%(object)s</b>\n"
+" ni olib tashlashga ishonchingiz komilmi?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] "%(hisoblagich) natijalari\n"
+
+#, python-format
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+
+msgid "SIGN IN"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Kechirasiz, siz hozir kira olmaysiz, chunki bizga %(failed_login_limit)s noto'g'ri kirish harakatlari.\n"
+" kelib tushdi"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqalarini kuting."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong>Parolingiz muddati tugadi.</strong> Sahifa qoidasiga muvofiq, har %(expire_days)s da siz yangi parol tanlashingiz kerak, hamda ushbu parollar avvalgi %(window_days)s da ishlatilmagan bo'lishi lozim.\n"
+" "
+
+msgid "+ New Story"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"

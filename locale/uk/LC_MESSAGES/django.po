@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-15 19:34+0000\n"
+"POT-Creation-Date: 2019-06-21 10:49+0000\n"
 "PO-Revision-Date: 2017-03-02 17:06+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/uk/)\n"
@@ -353,6 +353,8 @@ msgstr "Ваше посилання не працює. Зв'яжіться з а
 msgid "Join %(name)s"
 msgstr "Приєднатись до %(name)s "
 
+#, fuzzy
+#| msgid "Join"
 msgid "Join"
 msgstr "приєднатись"
 
@@ -423,7 +425,11 @@ msgstr "Зображення для історії та прев'ю (на виб
 msgid "Remove Item?"
 msgstr "Видалити?"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
 msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -468,7 +474,11 @@ msgstr[2] ""
 "  Результати - %(counter)s\n"
 " "
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
 msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -502,7 +512,11 @@ msgstr "Код застарілий"
 msgid "Login Failure"
 msgstr "Не вдалось увійти"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
 msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -511,7 +525,11 @@ msgstr ""
 "\n"
 "Вибачайте, Ви не можете увійти в свій обліковий запис -  %(failed_login_limit)s невдалих спроб."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -535,7 +553,11 @@ msgstr "Відновити"
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Напишіть адресу, за якою ви реєструвались, і ми щось спробуємо зробити, щоб відновити пароль"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -688,6 +710,66 @@ msgstr "Ваш новий %s створено"
 msgid "Import %s"
 msgstr "Імпортувати %s"
 
+msgid "Back to Full Site"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Logout"
+msgstr "Вийти"
+
+msgid "Polls"
+msgstr "Опитування"
+
+msgid "Users"
+msgstr "Користувачі"
+
+msgid "Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Images"
+msgid "Pages"
+msgstr "Фото"
+
+msgid "Jobs"
+msgstr "Цікаві вакансії"
+
+#, fuzzy
+#| msgid "Category Images"
+msgid "Categories Images"
+msgstr "Зображення категорії"
+
+msgid "News Items"
+msgstr "Новини"
+
+msgid "Orgs"
+msgstr "Орг"
+
+msgid "Images"
+msgstr "Фото"
+
+msgid "Analytics"
+msgstr ""
+
+msgid "About"
+msgstr "Про нас"
+
+msgid "Engagement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "приєднатись"
+
+msgid "+ New Page"
+msgstr ""
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -697,29 +779,14 @@ msgstr "Адмін"
 msgid "Configuration"
 msgstr "Конфігурація"
 
-msgid "Orgs"
-msgstr "Орг"
-
-msgid "Users"
-msgstr "Користувачі"
-
-msgid "Images"
-msgstr "Фото"
-
 msgid "Content"
 msgstr "Контент"
 
 msgid "Country Aliases"
 msgstr "Назви регіонів"
 
-msgid "Polls"
-msgstr "Опитування"
-
 msgid "Category Images"
 msgstr "Зображення категорії"
-
-msgid "News Items"
-msgstr "Новини"
 
 msgid "Job Sources"
 msgstr "Джерела вакансій"
@@ -754,23 +821,37 @@ msgstr "Приєднуйся, кроки - контент"
 msgid "Additional Menu"
 msgstr "Додаткове меню"
 
-msgid "Logout"
-msgstr "Вийти"
-
-msgid "About"
-msgstr "Про нас"
-
 msgid "U-Reporters"
 msgstr "U-репортери"
-
-msgid "Jobs"
-msgstr "Цікаві вакансії"
 
 msgid "Join & Engage"
 msgstr "Приєднуйся!"
 
 msgid "FOLLOW US ON"
 msgstr ""
+
+msgid "Opinions"
+msgstr ""
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Site page under construction"
+msgstr ""
+
+msgid "Go back to main public site"
+msgstr ""
+
+msgid "READ MORE"
+msgstr "Читати"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join & Engage"
+msgid "Engage"
+msgstr "Приєднуйся!"
 
 msgid ""
 "\n"
@@ -801,6 +882,27 @@ msgid ""
 msgstr ""
 "\n"
 "Пам'ятайте: для джерела вакансій у Твіттер, отримайте ID віджета з Твіттеру."
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "Географія"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Керувати користувачами"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Результати"
 
 msgid "ABOUT U-REPORT"
 msgstr "Про UReport"
@@ -1118,9 +1220,6 @@ msgstr "Поки що немає опитувань на цю тему."
 msgid "No featured images."
 msgstr "Поки що немає зображень на цю тему."
 
-msgid "READ MORE"
-msgstr "Читати"
-
 msgid "Even"
 msgstr ""
 
@@ -1186,6 +1285,180 @@ msgstr "Зареєстровані"
 
 msgid "Week of"
 msgstr "Тиждень"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "Результати"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS WORLDWIDE:"
+msgstr "U-репортери в"
+
+msgid "AGES"
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"          %(questions)s question\n"
+"        "
+msgid_plural ""
+"\n"
+"          %(questions)s questions\n"
+"        "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONSES"
+msgstr "Рівень активності"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"                  %(responded)s responded out of %(polled)s polled\n"
+"                "
+msgstr ""
+"\n"
+"%(responded)s відповіли із %(polled)s"
+
+#, fuzzy
+#| msgid "FILTERED BY"
+msgid "FILTER BY:"
+msgstr "Фільтрувати"
+
+msgid "Keywords"
+msgstr ""
+
+msgid "ALL"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "Географія"
+
+msgid "ACTION BUTTON"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Ви впевнені, що цього хочете - видалити  <b>%(object)s</b>?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+"\n"
+"  Результати - %(counter)s\n"
+" "
+msgstr[1] ""
+"\n"
+"  Результати - %(counter)s\n"
+" "
+msgstr[2] ""
+"\n"
+"  Результати - %(counter)s\n"
+" "
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+"\n"
+" Результати: %(start)s-%(end)s з %(count)s\n"
+" "
+
+msgid "SIGN IN"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Вибачайте, Ви не можете увійти в свій обліковий запис -  %(failed_login_limit)s невдалих спроб."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Почекайте %(lockout_timeout)s хв. і зайдіть знову"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong> Пароль більше не дійсний.</strong> Мусите обирати новий пароль кожні %(expire_days)s днів, і не використовувати цей пароль за %(window_days)s днів до цього."
+
+msgid "+ New Story"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"

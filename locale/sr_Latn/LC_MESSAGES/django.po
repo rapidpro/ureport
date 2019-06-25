@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-15 19:34+0000\n"
+"POT-Creation-Date: 2019-06-21 10:49+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -357,6 +357,8 @@ msgstr "Vaš pozivni link nije ispravan. Molimo obratite se administratoru vaše
 msgid "Join %(name)s"
 msgstr "Pridruži se%(name)s"
 
+#, fuzzy
+#| msgid "Join"
 msgid "Join"
 msgstr "Pridruži se"
 
@@ -427,7 +429,11 @@ msgstr "slike koje će se prikazati uz priču i pregled. (opciono)"
 msgid "Remove Item?"
 msgstr "Ukloni stavku?"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
 msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -472,7 +478,11 @@ msgstr[2] ""
 "         %(counter)s Rezultati\n"
 "        "
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
 msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -505,7 +515,11 @@ msgstr "Token je istekao"
 msgid "Login Failure"
 msgstr "Greška u prijavi"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
 msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -514,7 +528,11 @@ msgstr ""
 "\n"
 "Žao nam je, ne možete se prijaviti zbog %(failed_login_limit)spogrešnih pokušaja prijave."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -538,7 +556,11 @@ msgstr "Obnovi"
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Molimo upišite e-mail adresu koju koristite za pristup i mi ćemo vam pomoći da obnovite lozinku"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -691,6 +713,66 @@ msgstr "Vaš novi %s je kreiran"
 msgid "Import %s"
 msgstr "Uvezi %s"
 
+msgid "Back to Full Site"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Logout"
+msgstr "Odjava"
+
+msgid "Polls"
+msgstr "Ankete"
+
+msgid "Users"
+msgstr "Korisnici"
+
+msgid "Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Images"
+msgid "Pages"
+msgstr "Slike"
+
+msgid "Jobs"
+msgstr "Poslovi"
+
+#, fuzzy
+#| msgid "Category Images"
+msgid "Categories Images"
+msgstr "Slike kategorija"
+
+msgid "News Items"
+msgstr "Stavke novosti"
+
+msgid "Orgs"
+msgstr "Orgs"
+
+msgid "Images"
+msgstr "Slike"
+
+msgid "Analytics"
+msgstr ""
+
+msgid "About"
+msgstr "O nama"
+
+msgid "Engagement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Pridruži se"
+
+msgid "+ New Page"
+msgstr ""
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -700,29 +782,14 @@ msgstr "Administrator"
 msgid "Configuration"
 msgstr "Konfiguracija"
 
-msgid "Orgs"
-msgstr "Orgs"
-
-msgid "Users"
-msgstr "Korisnici"
-
-msgid "Images"
-msgstr "Slike"
-
 msgid "Content"
 msgstr "Sadržaj"
 
 msgid "Country Aliases"
 msgstr "Sinonimi za državu"
 
-msgid "Polls"
-msgstr "Ankete"
-
 msgid "Category Images"
 msgstr "Slike kategorija"
-
-msgid "News Items"
-msgstr "Stavke novosti"
 
 msgid "Job Sources"
 msgstr "Izvori zadataka"
@@ -757,23 +824,37 @@ msgstr "Koraci za pridruživanje, sadržaj"
 msgid "Additional Menu"
 msgstr "Dodatni meni"
 
-msgid "Logout"
-msgstr "Odjava"
-
-msgid "About"
-msgstr "O nama"
-
 msgid "U-Reporters"
 msgstr "U-Reporteri"
-
-msgid "Jobs"
-msgstr "Poslovi"
 
 msgid "Join & Engage"
 msgstr "Pridruži se i angažuj"
 
 msgid "FOLLOW US ON"
 msgstr "PRATITE NAS NA"
+
+msgid "Opinions"
+msgstr ""
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Site page under construction"
+msgstr ""
+
+msgid "Go back to main public site"
+msgstr ""
+
+msgid "READ MORE"
+msgstr "PROČITAJ VIŠE"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join & Engage"
+msgid "Engage"
+msgstr "Pridruži se i angažuj"
 
 msgid ""
 "\n"
@@ -804,6 +885,27 @@ msgid ""
 msgstr ""
 "\n"
 "Ne zaboravite da za Twitter zadatke morate imati widget id Twittera."
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "LOKACIJE"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Upravljanje korisnicima"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Rezultati"
 
 msgid "ABOUT U-REPORT"
 msgstr "O U-REPORTU"
@@ -1128,9 +1230,6 @@ msgstr "NEVEZANE ANKETE"
 msgid "No featured images."
 msgstr "Nema karakterističnih slika"
 
-msgid "READ MORE"
-msgstr "PROČITAJ VIŠE"
-
 msgid "Even"
 msgstr "Jednako"
 
@@ -1196,6 +1295,196 @@ msgstr "Registrovani"
 
 msgid "Week of"
 msgstr "Nedelja"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "REZULTATI ANKETE"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS WORLDWIDE:"
+msgstr "U-REPORTERI U"
+
+msgid "AGES"
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                  %(questions)s question polled on this topic\n"
+#| "                "
+#| msgid_plural ""
+#| "\n"
+#| "                  %(questions)s questions polled on this topic\n"
+#| "                "
+msgid ""
+"\n"
+"          %(questions)s question\n"
+"        "
+msgid_plural ""
+"\n"
+"          %(questions)s questions\n"
+"        "
+msgstr[0] ""
+"\n"
+"                  %(questions)s pitanje postavljeno na ovu temu\n"
+"                "
+msgstr[1] ""
+"\n"
+"                  %(questions)s broj pitanja postavljenih na ovu temu\n"
+"                "
+msgstr[2] ""
+"\n"
+"                  %(questions)s pitanja postavljenih na ovu temu\n"
+"                "
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONSES"
+msgstr "STOPA ODGOVORA"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"                  %(responded)s responded out of %(polled)s polled\n"
+"                "
+msgstr ""
+"\n"
+"%(responded)sodgovorilo od %(polled)sispitanih"
+
+#, fuzzy
+#| msgid "FILTERED BY"
+msgid "FILTER BY:"
+msgstr "FILTRIRANO PO"
+
+msgid "Keywords"
+msgstr ""
+
+msgid "ALL"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "LOKACIJE"
+
+msgid "ACTION BUTTON"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Jeste li sigurni da želite ukloniti <b>%(object)s</b>?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+"\n"
+"\t\t%(counter)s Rezultati\n"
+"\t"
+msgstr[1] ""
+"\n"
+"         %(counter)s Rezultati\n"
+"        "
+msgstr[2] ""
+"\n"
+"         %(counter)s Rezultati\n"
+"        "
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+"\n"
+"\tRezultati %(start)s-%(end)sod %(count)s"
+
+msgid "SIGN IN"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Žao nam je, ne možete se prijaviti zbog %(failed_login_limit)spogrešnih pokušaja prijave."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Molimo sačekajte %(lockout_timeout)s minuta pre ponovnog pokušaja prijave."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong>Lozinka vam je istekla. </strong> Morate da obnovite lozinku svakih %(expire_days)sdana, a lozinka ne sme biti ista kao ona koju ste koristili u poslednjih %(window_days)s dana."
+
+msgid "+ New Story"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"

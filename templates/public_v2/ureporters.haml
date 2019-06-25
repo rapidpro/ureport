@@ -120,6 +120,66 @@
       })
       femaleRespondedData.sort(function(a,b){return a[0] - b[0];});
 
+      (function (H) {
+
+          var pendingRenders = [];
+      
+          // https://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/7557433#7557433
+          function isElementInViewport(el) {
+          
+              var rect = el.getBoundingClientRect();
+      
+              return (
+                  rect.top >= 0 &&
+                  rect.left >= 0 &&
+                  rect.bottom <= (
+                      window.innerHeight ||
+                      document.documentElement.clientHeight
+                  ) &&
+                  rect.right <= (
+                      window.innerWidth ||
+                      document.documentElement.clientWidth
+                  )
+              );
+          }
+      
+          H.wrap(H.Series.prototype, 'render', function deferRender(proceed) {
+              var series = this,
+                  renderTo = this.chart.container.parentNode;
+      
+              // It is appeared, render it
+              if (isElementInViewport(renderTo) || !series.options.animation || series.chart.userOptions.chart.type == 'packedbubble') {
+                  proceed.call(series);
+      
+              // It is not appeared, halt renering until appear
+              } else  {
+                  pendingRenders.push({
+                      element: renderTo,
+                      appear: function () {
+                          proceed.call(series);
+                      }
+                  });
+              }
+          });
+      
+          function recalculate() {
+              pendingRenders.forEach(function (item) {
+                  if (isElementInViewport(item.element)) {
+                      item.appear();
+                      H.erase(pendingRenders, item);
+                  }
+              });
+          }
+      
+          if (window.addEventListener) {
+              ['DOMContentLoaded', 'load', 'scroll', 'resize']
+                  .forEach(function (eventType) {
+                      addEventListener(eventType, recalculate, false);
+                  });
+          }
+      
+          }(Highcharts));
+
       $('#poll-responses-graph').highcharts({
         chart: {
             type: 'spline'
@@ -129,13 +189,10 @@
         },
         xAxis: {
             type: 'datetime',
-            dateTimeLabelFormats: { // don't display the dummy year
-              month: '%b',
-              year: '%b'
+            dateTimeLabelFormats: {
+              month: '%b %Y',
+              year: '%Y'
             },
-            title: {
-                text: 'Date'
-            }
         },
         yAxis: {
             title: {
@@ -145,7 +202,7 @@
         },
         tooltip: {
             headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x: %b}: {point.y:.2f} m'
+            pointFormat: '{point.x: %b %Y}: {point.y}'
         },
     
         plotOptions: {
@@ -154,6 +211,9 @@
                     enabled: true
                 }
             }
+        },
+        credits: {
+          enabled: false
         },
     
         colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
@@ -178,6 +238,7 @@
         Object.keys(response_rates).forEach(function(key){
           graphData.push([Date.parse(key), response_rates[key]]);
         })
+        graphData.sort(function(a,b){return a[0] - b[0];});
 
          $('#poll-response-rate-graph').highcharts({
               chart: {
@@ -188,13 +249,10 @@
               },
               xAxis: {
                   type: 'datetime',
-                  dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%b',
-                    year: '%b'
+                  dateTimeLabelFormats: {
+                    month: '%b %Y',
+                    year: '%Y'
                   },
-                  title: {
-                      text: 'Date'
-                  }
               },
               yAxis: {
                   title: {
@@ -204,7 +262,7 @@
               },
               tooltip: {
                   headerFormat: '<b>{series.name}</b><br>',
-                  pointFormat: '{point.x: %b}: {point.y:.2f} m'
+                  pointFormat: '{point.x: %b %Y}: {point.y:.1f}%'
               },
           
               plotOptions: {
@@ -214,11 +272,68 @@
                       }
                   }
               },
-          
+              credits: {
+                enabled: false
+              },
               colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
               series :[
                 {
                   name: "Response Rate",
+                  data: graphData
+                }
+              ]
+         });
+    });
+
+
+    $("#contact-activity-graph").each(function() {
+        var contact_activities = {{ contact_activities|safe}};
+
+        var graphData = [];
+        Object.keys(contact_activities).forEach(function(key){
+          graphData.push([Date.parse(key), contact_activities[key]]);
+        })
+        graphData.sort(function(a,b){return a[0] - b[0];});
+
+         $('#contact-activity-graph').highcharts({
+              chart: {
+                  type: 'spline'
+              },
+              title: {
+                  text: null
+              },
+              xAxis: {
+                  type: 'datetime',
+                  dateTimeLabelFormats: {
+                    month: '%b %Y',
+                    year: '%Y'
+                  },
+              },
+              yAxis: {
+                  title: {
+                      text: null
+                  },
+                  min: 0
+              },
+              tooltip: {
+                  headerFormat: '<b>{series.name}</b><br>',
+                  pointFormat: '{point.x: %b %Y}: {point.y}'
+              },
+          
+              plotOptions: {
+                  spline: {
+                      marker: {
+                          enabled: true
+                      }
+                  }
+              },
+              credits: {
+                enabled: false
+              },
+              colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+              series :[
+                {
+                  name: "Active contacts",
                   data: graphData
                 }
               ]

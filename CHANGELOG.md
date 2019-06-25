@@ -1,3 +1,8 @@
+v1.0.456
+----------
+ * Rerun compilemessages and makemessages
+ * Fix poll response categories to be deactivated if they are replaced
+
 v1.0.455
 ----------
  * Merge pull request #411 from rapidpro/dependabot/pip/django-2.1.9
