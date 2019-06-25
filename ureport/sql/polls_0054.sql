@@ -7,10 +7,10 @@ CREATE OR REPLACE FUNCTION
 RETURNS VOID AS $$
 BEGIN
     INSERT INTO contacts_contactactivity(contact, type, date, org_id) WITH month_days(missing_month) AS (
-        select generate_series(date_trunc('month', _poll_result.date)::timestamp,(date_trunc('month', _poll_result.date)+ interval '11 months')::timestamp,interval '1 month')::date
+        SELECT generate_series(date_trunc('month', _poll_result.date)::timestamp,(date_trunc('month', _poll_result.date)::timestamp+ interval '11 months')::date,interval '1 month')::date
     ), curr_activity AS (
     SELECT * FROM contacts_contactactivity WHERE org_id = _poll_result.org_id and contact = _poll_result.contact
-    ) SELECT _poll_result.contact, 'engagement', missing_month::date, _poll_result.org_id  FROM month_days LEFT JOIN contacts_contactactivity ON contacts_contactactivity.date = month_days.missing_month
+    ) SELECT _poll_result.contact, 'engagement', missing_month::date, _poll_result.org_id  FROM month_days LEFT JOIN contacts_contactactivity ON contacts_contactactivity.date = month_days.missing_month AND contacts_contactactivity.contact = _poll_result.contact AND org_id = _poll_result.org_id
     WHERE contacts_contactactivity.date IS NULL;
 END;
 $$ LANGUAGE plpgsql;
