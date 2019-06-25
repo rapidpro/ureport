@@ -307,7 +307,6 @@ class Poll(SmartModel):
 
                 processed_results = 0
                 counters_dict = defaultdict(int)
-                result_activity = dict()
 
                 for batch in chunk_list(poll_results_ids, 1000):
                     poll_results = list(PollResult.objects.filter(pk__in=batch))
@@ -318,11 +317,6 @@ class Poll(SmartModel):
                             counters_dict[(result.org_id, result.ruleset, dict_key)] += gen_counters[dict_key]
 
                         processed_results += 1
-
-                        contact_activity = result.get_contact_activity()
-                        if contact_activity:
-                            for key in contact_activity.keys():
-                                result_activity[key] = contact_activity[key]
 
                 logger.info(
                     "Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds"
@@ -336,18 +330,6 @@ class Poll(SmartModel):
                     counters_to_insert.append(
                         PollResultsCounter(org_id=org_id, ruleset=ruleset, type=counter_type, count=count)
                     )
-
-                for c_uuid, date in result_activity.items():
-                    custom_sql = f"""
-                            INSERT INTO contacts_contactactivity(contact, type, date, org_id) WITH month_days(missing_month) AS (
-                            SELECT generate_series(date_trunc('month', to_date('{date.date()}','YYYY-MM-DD'))::timestamp,(date_trunc('month', to_date('{date.date()}','YYYY-MM-DD'))::timestamp+ interval '11 months')::date,interval '1 month')::date
-                            ), curr_activity AS (
-                            SELECT * FROM contacts_contactactivity WHERE org_id = {org_id} and contact = '{c_uuid}'
-                            ) SELECT '{c_uuid}', 'engagement', missing_month::date, {org_id}  FROM month_days LEFT JOIN contacts_contactactivity ON contacts_contactactivity.date = month_days.missing_month AND contacts_contactactivity.contact = '{c_uuid}' AND org_id = {org_id}
-                            WHERE contacts_contactactivity.date IS NULL;
-                    """
-                    with connection.cursor() as cursor:
-                        cursor.execute(custom_sql)
 
                 # Delete existing counters and then create new counters
                 self.delete_poll_results_counter()
@@ -1144,30 +1126,6 @@ class PollResult(models.Model):
     gender = models.CharField(max_length=1, null=True)
 
     born = models.IntegerField(null=True)
-
-    def get_contact_activity(self):
-        contact_activity = dict()
-
-        if not self.org_id or not self.flow or not self.ruleset:
-            return contact_activity
-
-        category = ""
-        text = ""
-
-        if self.text and self.text != "None":
-            text = self.text
-
-        if self.category and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
-            category = self.category.lower()
-
-        if category or (
-            self.category is not None
-            and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES
-            and text
-        ):
-            contact_activity[self.contact] = self.date
-
-        return contact_activity
 
     def generate_counters(self):
         generated_counters = dict()
