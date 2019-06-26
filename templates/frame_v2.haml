@@ -429,6 +429,28 @@
   
 
     %section.section.is-paddingless.is-marginless(style="background:#ff0;height:15px")
+    %section.section.is-paddingless.is-marginless(style="height:0px")
+      .modal.export-modal
+        .modal-background
+        .modal-content
+          .columns.export-modal-header
+            .column
+              Export and Share
+            .column
+              .button.close.is-pulled-right.export-modal-close
+                x
+          .columns.export-modal-progress
+            .column
+              %progress.progress.is-small(max="100")
+                15%
+          .columns.is-multiline.export-modal-content
+            .column.is-three-quarters
+              Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!
+            .column.is-one-quarter
+              %button.button.is-black.is-pulled-right
+                Download
+            .column
+              %img.screenshot-rendered(src="https://bulma.io/images/placeholders/200x960.png" alt="")
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>
@@ -478,6 +500,10 @@
          $(this).parent().parent('.tabs').siblings(".tabs-content").children(".tab-content").removeClass('is-active');
         $('div[data-content="' + tab + '"]').addClass('is-active');
 
+      });
+
+      $(".export-modal-close").on('click', function() {
+        $(".export-modal").removeClass('is-active');
       });
 
       $(".header-countries-nav").on('click', function() {

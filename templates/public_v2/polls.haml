@@ -82,7 +82,7 @@
             .number-label
               - trans "RESPONSE RATE"
   - for question in latest_poll.get_questions
-    .columns.is-paddingless.is-marginless.poll-question-block
+    .columns.is-paddingless.is-marginless.poll-question-block(id="question-id-{{question.id}}")
         - if not forloop.counter|divisibleby:2
           .column.is-half.block-content(class="for{{ forloop.counter0}}")
             .columns.is-multiline
@@ -102,6 +102,16 @@
             .column
               .is-small
                 -trans "FILTER BY:"
+                .share-buttons(data-html2canvas-ignore=true)
+                  .share-button.screenshot-capture.is-pulled-right(data-question="{{question.id}}")
+                    %i.fas.fa-share-square
+                  .share-button.twitter-share.is-pulled-right(data-question="{{question.id}}")
+                    %i.fab.fa-twitter-square
+                  .share-button.facebook-share.is-pulled-right(data-question="{{question.id}}")
+                    .fb-share-button(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}" data-layout="button" data-size="small")
+                      %a(target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore")
+                        %i.fab.fa-facebook-square
+
               .tabs.is-boxed
                 %ul
                   - if question.is_open_ended
@@ -137,7 +147,7 @@
                     .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
                       .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
                           %img{src:"{{ STATIC_URL }}img/loading.gif"}
-        
+
         - if forloop.counter|divisibleby:2
           .column.is-half.block-content(class="for{{ forloop.counter0}}")
             .columns.is-multiline
@@ -240,6 +250,7 @@
 -block extra-script
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/jqcloud.min.js"></script>
+  <script src="{{ STATIC_URL }}js/html2canvas.min.js"></script>
   {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/locations.coffee" />
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/all_polls.coffee" />
@@ -254,6 +265,26 @@
       $("#search-input input").focus();
 
     });
+
+
+    $(".screenshot-capture").on("click", function() {
+        var question = $(this).attr("data-question");
+        $(".export-modal-progress").show();
+        $(".export-modal-content").hide();
+
+        $('.modal').toggleClass('is-active');
+        var region = document.body.querySelector("#question-id-" + question);
+        console.log(region);
+
+        html2canvas(region).then(canvas => {
+          //document.body.appendChild(canvas);
+          //$(this).siblings('.modal').children(".modal-content").append(region);
+          $("img.screenshot-rendered").attr("src",canvas.toDataURL("image/png"));
+          $(".export-modal-progress").hide();
+          $(".export-modal-content").show();
+        });
+    });
+
 
     $(document).ready(function() {
       $(document).mouseup(function (e){
