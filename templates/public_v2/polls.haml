@@ -108,9 +108,7 @@
                   .share-button.twitter-share.is-pulled-right(data-question="{{question.id}}")
                     %i.fab.fa-twitter-square
                   .share-button.facebook-share.is-pulled-right(data-question="{{question.id}}")
-                    .fb-share-button(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}" data-layout="button" data-size="small")
-                      %a(target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore")
-                        %i.fab.fa-facebook-square
+                    %i.fab.fa-facebook-square
 
               .tabs.is-boxed
                 %ul
@@ -264,6 +262,20 @@
       $(".polls-category-list").addClass("is-hidden");
       $("#search-input input").focus();
 
+    });
+
+    $(".facebook-share").on("click", function() {
+      var question = $(this).attr("data-question");
+      var url = "https://www.facebook.com/sharer/sharer.php?u=http://ureport.in/{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-" + question;
+      FB.ui(
+        {
+          method: "share",
+          href: url
+        }, 
+        function(response) {
+          console.log(response);
+        }
+      )
     });
 
 
