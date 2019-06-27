@@ -1,3 +1,17 @@
+v1.0.456
+----------
+ * Rerun compilemessages and makemessages
+ * Fix poll response categories to be deactivated if they are replaced
+
+v1.0.455
+----------
+ * Merge pull request #411 from rapidpro/dependabot/pip/django-2.1.9
+ * Bump django from 2.1.5 to 2.1.9
+
+v1.0.454
+----------
+ * Add Bolivia and Ecuador flags on the footer
+
 v1.0.453
 ----------
  * Add India flag on the footer

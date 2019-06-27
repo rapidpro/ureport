@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-15 19:34+0000\n"
+"POT-Creation-Date: 2019-06-21 10:49+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -129,17 +129,20 @@ msgstr "အေၾကာင္းအရာ အမ်ိဳးအစားမ်�
 msgid "Content Blocks"
 msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "Content Blocks"
 msgid "%s Blocks"
-msgstr ""
+msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "Edit"
 msgid "Edit %s"
-msgstr ""
+msgstr "တည္းျဖတ္"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "Create"
 msgid "Create %s"
-msgstr ""
+msgstr "ဖန္တီးပါ"
 
 msgid "Create Content Block"
 msgstr "အေၾကာင္းအရာပိုင္းကိုဖန္တီးရန္"
@@ -348,9 +351,10 @@ msgstr "ဖန္တီးပါ"
 msgid "Your invitation link is invalid. Please contact your organization administrator."
 msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator ကိုဆက္သြယ္ပါ"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "Join & Engage"
 msgid "Join %(name)s"
-msgstr ""
+msgstr "U-Report တြင္ပါ၀င္ရန္"
 
 msgid "Join"
 msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"

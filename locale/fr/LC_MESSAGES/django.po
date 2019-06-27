@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-15 19:34+0000\n"
+"POT-Creation-Date: 2019-06-21 10:49+0000\n"
 "PO-Revision-Date: 2017-04-07 14:40+0000\n"
 "Last-Translator: Vincent Turmine <vincent.turmine@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
@@ -57,8 +57,10 @@ msgstr ""
 msgid "Whether this content should include a title"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should include an image"
-msgstr ""
+msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
 
 msgid "Whether this content should use a rich HTML editor"
 msgstr ""
@@ -72,50 +74,74 @@ msgstr ""
 msgid "Whether this content should allow upload of additional images, ie a gallery"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this story is featured"
 msgid "Whether this content has a color field"
-msgstr ""
+msgstr "Si cet article est mis en avant "
 
 msgid "Whether this content should allow setting a YouTube id"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should allow tags"
-msgstr ""
+msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
 
+#, fuzzy
+#| msgid "Content Types"
 msgid "Content Type"
-msgstr ""
+msgstr "Types de contenu"
 
+#, fuzzy
+#| msgid "The category for this story"
 msgid "The category, or type for this content block"
-msgstr ""
+msgstr "La rubrique pour cet article"
 
+#, fuzzy
+#| msgid "The title of this question"
 msgid "The title for this block of content, optional"
-msgstr ""
+msgstr "Le titre de cette question"
 
+#, fuzzy
+#| msgid "The summary for the story"
 msgid "The summary for this item, should be short"
-msgstr ""
+msgstr "Le résumé de l'article"
 
+#, fuzzy
+#| msgid "The body of text for the story"
 msgid "The body of text for this content block, optional"
-msgstr ""
+msgstr "Le texte principal de l'article"
 
+#, fuzzy
+#| msgid "A link that should be associated with this item"
 msgid "Any image that should be displayed with this content block, optional"
-msgstr ""
+msgstr "Un lien à associé à ce sujet"
 
+#, fuzzy
+#| msgid "The background color for the site"
 msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr ""
+msgstr "La couleur de fond du site"
 
+#, fuzzy
+#| msgid "A link that should be associated with this item"
 msgid "Any link that should be associated with this content block, optional"
-msgstr ""
+msgstr "Un lien à associé à ce sujet"
 
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "L'ID de la vidéo Youtube à associé à ce sujet"
 
+#, fuzzy
+#| msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
 msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr ""
+msgstr "Chaque mot-clé de l'article séparé par des espaces peut être utiliser pour des filtres (optionnel)"
 
 msgid "The priority for this block, higher priority blocks come first"
 msgstr ""
 
+#, fuzzy
+#| msgid "The organization this item belongs to"
 msgid "The organization this content block belongs to"
-msgstr ""
+msgstr "L'organisation à laquelle ce sujet appartient"
 
 msgid "Gallery"
 msgstr "Galerie Photos"
@@ -139,16 +165,20 @@ msgstr "Blocs"
 msgid "%s Blocks"
 msgstr "%s Blocs"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "Edit"
 msgid "Edit %s"
-msgstr ""
+msgstr "Éditer"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid "Create"
 msgid "Create %s"
-msgstr ""
+msgstr "Créer"
 
+#, fuzzy
+#| msgid "Content Blocks"
 msgid "Create Content Block"
-msgstr ""
+msgstr "Blocs"
 
 msgid "Your first name"
 msgstr "Votre prénom"
@@ -168,8 +198,10 @@ msgstr "Cet email est déjà utilisé"
 msgid "Passwords must contain at least 8 letters."
 msgstr "Les mots de passe doivent contenir au moins 8 lettres"
 
+#, fuzzy
+#| msgid "This domain is not available"
 msgid "This domain is used for subdomains"
-msgstr ""
+msgstr "Ce domaine n'est pas disponible"
 
 msgid "Name"
 msgstr "Nom"
@@ -219,8 +251,10 @@ msgstr "Domaine"
 msgid "This domain is not available"
 msgstr "Ce domaine n'est pas disponible"
 
+#, fuzzy
+#| msgid "The subdomain for this organization"
 msgid "The custom domain for this organization"
-msgstr ""
+msgstr "Le sous-domaine pour cette organisation"
 
 msgid "Timezone"
 msgstr "Fuseau horaire"
@@ -571,26 +605,40 @@ msgstr "Votre email"
 msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
 msgstr ""
 
+#, fuzzy
+#| msgid "New Password"
 msgid "Current Password"
-msgstr ""
+msgstr "Nouveau mot de passe"
 
+#, fuzzy
+#| msgid "Your password"
 msgid "Your current password"
-msgstr ""
+msgstr "Votre mot de passe"
 
+#, fuzzy
+#| msgid "Your password"
 msgid "Your new password."
-msgstr ""
+msgstr "Votre mot de passe"
 
+#, fuzzy
+#| msgid "Confirm New Password"
 msgid "Confirm new Password"
-msgstr ""
+msgstr "Confirmer le nouveau mot de passe"
 
+#, fuzzy
+#| msgid "Confirm your new password"
 msgid "Confirm your new password."
-msgstr ""
+msgstr "Confirmer votre nouveau mot de passe"
 
+#, fuzzy
+#| msgid "Please enter your password to save changes."
 msgid "Please enter your password to save changes"
-msgstr ""
+msgstr "Entrer votre mot de passe pour sauvegarder les modifications."
 
+#, fuzzy
+#| msgid "Confirm your new password"
 msgid "Confirm your new password by entering it here"
-msgstr ""
+msgstr "Confirmer votre nouveau mot de passe"
 
 msgid "Mismatch between your new password and confirmation, try again"
 msgstr ""
@@ -652,8 +700,10 @@ msgstr "Demander une restauration du mot de passe"
 msgid "Pick a new password"
 msgstr "Choisir un nouveau mot de passe"
 
+#, fuzzy
+#| msgid "Your poll has been updated."
 msgid "Your password has successfully been updated, thank you."
-msgstr ""
+msgstr "Votre sondage a été mis a jour."
 
 #, python-format
 msgid "You are now logged in as %s"
