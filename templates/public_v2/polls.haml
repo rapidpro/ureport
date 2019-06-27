@@ -108,7 +108,7 @@
                   .share-button.twitter-share.is-pulled-right(data-question="{{question.id}}")
                     %a(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                       %i.fab.fa-twitter-square
-                  .share-button.facebook-share.is-pulled-right(data-question="{{question.id}}")
+                  .share-button.facebook-share.is-pulled-right(data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                     %i.fab.fa-facebook-square
 
               .tabs.is-boxed
@@ -267,7 +267,8 @@
 
     $(".facebook-share").on("click", function() {
       var question = $(this).attr("data-question");
-      var url = "https://www.facebook.com/sharer/sharer.php?u=http://ureport.in/{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-" + question;
+      var questionURL = $(this).attr("data-question-url");
+      var url = "https://www.facebook.com/sharer/sharer.php?u=" + questionURL;
       FB.ui(
         {
           method: "share",
