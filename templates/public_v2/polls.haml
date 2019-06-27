@@ -106,7 +106,8 @@
                   .share-button.screenshot-capture.is-pulled-right(data-question="{{question.id}}")
                     %i.fas.fa-share-square
                   .share-button.twitter-share.is-pulled-right(data-question="{{question.id}}")
-                    %i.fab.fa-twitter-square
+                    %a(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                      %i.fab.fa-twitter-square
                   .share-button.facebook-share.is-pulled-right(data-question="{{question.id}}")
                     %i.fab.fa-facebook-square
 
@@ -289,9 +290,10 @@
         console.log(region);
 
         html2canvas(region).then(canvas => {
-          //document.body.appendChild(canvas);
-          //$(this).siblings('.modal').children(".modal-content").append(region);
-          $("img.screenshot-rendered").attr("src",canvas.toDataURL("image/png"));
+          var imgFile = canvas.toDataURL("image/png");
+          $("img.screenshot-rendered").attr("src", imgFile);
+          $("a.screenshot-link").attr("href", imgFile);
+          $("a.screenshot-link").attr("download", "share-export-screenshot.png");
           $(".export-modal-progress").hide();
           $(".export-modal-content").show();
         });
