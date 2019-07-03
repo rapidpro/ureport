@@ -2,6 +2,50 @@
 
 - load dashblocks thumbnail ureport i18n
 
+-block content
+  .block-row
+    .columns.is-paddingless.is-marginless
+      .column.block-content.dotted-bg.join-content
+        .page-title
+          Join Now
+        .join-call-to-action
+          .join-step-text
+            How would you like to join?
+          .join-step
+             1
+        .join-links
+          .columns
+            .column
+              %a.join-facebook(href="https://developers.facebook.com/docs/messenger-platform/discovery/m-me-links")
+                .join-btn
+                  %i.fab.fa-facebook-f
+                .join-bnt-text
+                  Facebook
+            .column
+              %a.join-Whatsapp(href="https://faq.whatsapp.com/en/android/26000030/")
+                .join-btn
+                  %i.fab.fa-whatsapp
+                .join-bnt-text
+                  Whatsapp
+            .column
+              %a.join-twitter(href="https://developer.twitter.com/en/docs/twitter-for-websites/direct-messages/overview.html")
+                .join-btn
+                  %i.fab.fa-twitter
+                .join-bnt-text
+                  Twitter
+        .join-call-to-action
+          .join-step-text
+            Send KEYWORD to short code 2020 using SMS
+          .join-step
+             2
+
+      .column.block-content.join-bg-color
+        .over-social-media-join-text
+           Do we need any sort of explanation text in this area or is it just redudant or distacting?
+        .over-social-media
+        .social-media-block-join
+          .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"600", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+
 
 - block hero
   - load_qbs request.org 'join_engage'
@@ -23,7 +67,7 @@
     {{ block.super }}
 
 
-- block content
+- block contraent
   - load_qbs request.org 'join_engage'
   - load_qbs request.org 'join_steps'
 
