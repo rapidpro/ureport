@@ -1392,10 +1392,34 @@ each(range(15), {
     }
   }
 
+
   .about-text-block, .story-text-block {
-    padding: 2rem 7.5rem;
+    padding: 2rem 5rem;
     font-family: @text-font;
     font-size: 1.2rem;
+
+    .story-social-sharing {
+      float: left;
+      width: 10%;
+
+      .share-button {
+        font-size: 2rem;
+        border-radius: 50%;
+        border: 1px solid black;
+        text-align: center;
+        width: 3rem;
+        margin-bottom: 1rem;
+
+        &:hover {
+          background-color: #eee;
+        }
+      }
+    }
+
+    .story-text-content {
+      width: 90%;
+      float: right;
+    }
     
     .about-text-picture, .story-text-picture {
       text-align: center;
