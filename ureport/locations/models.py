@@ -74,9 +74,6 @@ class Boundary(models.Model):
                 type=elt["geometry"]["type"], coordinates=elt["geometry"]["coordinates"]
             )
 
-            if not elt.get("properties", {}).get("ISO_A2", None):
-                continue
-
             temba_boundary = TembaBoundary.create(
                 level=0,
                 name=elt["properties"]["NAME"],
