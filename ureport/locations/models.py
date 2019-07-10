@@ -68,18 +68,20 @@ class Boundary(models.Model):
         handle.close()
 
         boundaries_json = json.loads(contents)
-
         boundaries = []
         for elt in boundaries_json["features"]:
             temba_geometry = TembaBoundary.Geometry.create(
                 type=elt["geometry"]["type"], coordinates=elt["geometry"]["coordinates"]
             )
 
+            if not elt.get("properties", {}).get("ISO_A2", None):
+                continue
+
             temba_boundary = TembaBoundary.create(
                 level=0,
-                name=elt["properties"]["name"],
+                name=elt["properties"]["NAME"],
                 aliases=None,
-                osm_id=elt["properties"]["hc-a2"],
+                osm_id=elt["properties"]["ISO_A2"],
                 geometry=temba_geometry,
             )
 
