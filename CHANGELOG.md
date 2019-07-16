@@ -1,3 +1,13 @@
+v1.0.457
+----------
+ * Merge pull request #415 from rapidpro/fix-global-locations-data
+ * Fix coverage
+ * Change World geojson data
+ * Merge pull request #414 from Ilhasoft/feature/flagsupdate
+ * Fix "test_get_linked_orgs".
+ * Added Honduras, Iraq and removed U.K. flags.
+ * Merge pull request #83 from rapidpro/master
+
 v1.0.456
 ----------
  * Rerun compilemessages and makemessages
