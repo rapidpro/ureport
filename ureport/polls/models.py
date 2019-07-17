@@ -235,6 +235,22 @@ class Poll(SmartModel):
             "Deleted %d poll results counters for poll #%d on org #%d" % (counters_ids_count, self.pk, self.org_id)
         )
 
+    def delete_poll_stats(self):
+        from ureport.utils import chunk_list
+        from ureport.stats.models import PollStats
+
+        question_ids = self.questions.all().values_list("id", flat=True)
+
+        poll_stats_ids = PollStats.objects.filter(org_id=self.org_id, question_id__in=question_ids)
+        poll_stats_ids = poll_stats_ids.values_list("pk", flat=True)
+
+        poll_stats_ids_count = len(poll_stats_ids)
+
+        for batch in chunk_list(poll_stats_ids, 1000):
+            PollStats.objects.filter(pk__in=batch).delete()
+
+        logger.info("Deleted %d poll stats for poll #%d on org #%d" % (poll_stats_ids_count, self.pk, self.org_id))
+
     def delete_poll_results(self):
         from ureport.utils import chunk_list
 
@@ -282,6 +298,9 @@ class Poll(SmartModel):
 
     def rebuild_poll_results_counts(self):
         from ureport.utils import chunk_list
+        from ureport.stats.models import PollStats, GenderSegment, AgeSegment
+        from ureport.locations.models import Boundary
+
         import time
 
         start = time.time()
@@ -289,6 +308,7 @@ class Poll(SmartModel):
         poll_id = self.pk
         org_id = self.org_id
         flow = self.flow_uuid
+        poll_year = self.poll_date.year
 
         r = get_redis_connection()
 
@@ -303,10 +323,25 @@ class Poll(SmartModel):
 
                 poll_results_ids_count = len(poll_results_ids)
 
+                questions = self.questions.all().prefetch_related("response_categories")
+                questions_dict = dict()
+
+                for qsn in questions:
+                    categories = qsn.response_categories.all()
+                    categoryies_dict = {elt.category.lower(): elt.id for elt in categories}
+                    questions_dict[qsn.ruleset_uuid] = dict(id=qsn.id, categories=categoryies_dict)
+
+                gender_dict = {elt.gender.lower(): elt.id for elt in GenderSegment.objects.all()}
+                age_dict = {elt.min_age: elt.id for elt in AgeSegment.objects.all()}
+
+                states = Boundary.objects.filter(org_id=org_id, level=1)
+                location_dict = {elt.osm_id.upper(): elt.id for elt in states}
+
                 logger.info("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
 
                 processed_results = 0
                 counters_dict = defaultdict(int)
+                stats_dict = defaultdict(int)
 
                 for batch in chunk_list(poll_results_ids, 1000):
                     poll_results = list(PollResult.objects.filter(pk__in=batch))
@@ -315,6 +350,10 @@ class Poll(SmartModel):
                         gen_counters = result.generate_counters()
                         for dict_key in gen_counters.keys():
                             counters_dict[(result.org_id, result.ruleset, dict_key)] += gen_counters[dict_key]
+
+                        gen_stats = result.generate_poll_stats()
+                        for dict_key in gen_stats.keys():
+                            stats_dict[dict_key] += gen_stats[dict_key]
 
                         processed_results += 1
 
@@ -331,10 +370,36 @@ class Poll(SmartModel):
                         PollResultsCounter(org_id=org_id, ruleset=ruleset, type=counter_type, count=count)
                     )
 
+                poll_stats_obj_to_insert = []
+                for stat_tuple in stats_dict.keys():
+                    org_id, ruleset, category, born, gender, state, district, ward = stat_tuple
+                    question_id = questions_dict[ruleset].get("id")
+                    category_id = questions_dict[ruleset].get(categories, dict()).get(category)
+                    gender_id = gender_dict.get(gender)
+                    age_id = None
+                    if born is not None:
+                        age_id = age_dict.get(AgeSegment.get_age_segment_min_age(min(poll_year - born, 0)))
+                    state_id = location_dict.get(state)
+                    count = stats_dict.get(stat_tuple)
+                    poll_stats_obj_to_insert.append(
+                        PollStats(
+                            org_id=org_id,
+                            question_id=question_id,
+                            category_id=category_id,
+                            age_segment_id=age_id,
+                            gender_segment_id=gender_id,
+                            state_id=state_id,
+                            count=count,
+                        )
+                    )
+
                 # Delete existing counters and then create new counters
                 self.delete_poll_results_counter()
+                self.delete_poll_stats()
 
+                PollStats.objects.bulk_create(poll_stats_obj_to_insert)
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
+
                 logger.info(
                     "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results"
                     % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
@@ -1126,6 +1191,117 @@ class PollResult(models.Model):
     gender = models.CharField(max_length=1, null=True)
 
     born = models.IntegerField(null=True)
+
+    def generate_poll_stats(self):
+        generated_counters = dict()
+
+        if not self.org_id or not self.flow or not self.ruleset:
+            return generated_counters
+
+        ruleset = ""
+        category = ""
+        state = ""
+        district = ""
+        ward = ""
+        born = ""
+        gender = ""
+        text = ""
+
+        if self.text and self.text != "None":
+            text = self.text
+
+        if self.ruleset:
+            ruleset = self.ruleset.lower()
+
+        if self.category and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
+            category = self.category.lower()
+
+        if self.state:
+            state = self.state.upper()
+
+        if self.district:
+            district = self.district.upper()
+
+        if self.ward:
+            ward = self.ward.upper()
+
+        if self.born:
+            born = self.born
+
+        if self.gender:
+            gender = self.gender.lower()
+
+        generated_counters[(self.org_id, ruleset, None, None, None, None, None, None)] = 1
+        if category or (
+            self.category is not None
+            and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES
+            and text
+        ):
+            generated_counters[(self.org_id, ruleset, category, None, None, None, None, None)] = 1
+
+        if category:
+            if born:
+                generated_counters[(self.org_id, ruleset, category, born, None, None, None, None)] = 1
+            if gender:
+                generated_counters[(self.org_id, ruleset, category, None, gender, None, None, None)] = 1
+
+            if state:
+                generated_counters[(self.org_id, ruleset, category, None, None, state, None, None)] = 1
+                if born:
+                    generated_counters[(self.org_id, ruleset, category, born, None, state, None, None)] = 1
+                if gender:
+                    generated_counters[(self.org_id, ruleset, category, None, gender, state, None, None)] = 1
+                if gender and born:
+                    generated_counters[(self.org_id, ruleset, category, born, gender, state, None, None)] = 1
+
+            if district:
+                generated_counters[(self.org_id, ruleset, category, None, None, None, district, None)] = 1
+                if born:
+                    generated_counters[(self.org_id, ruleset, category, born, None, None, district, None)] = 1
+                if gender:
+                    generated_counters[(self.org_id, ruleset, category, None, gender, None, district, None)] = 1
+                if gender and born:
+                    generated_counters[(self.org_id, ruleset, category, born, gender, None, district, None)] = 1
+
+            if ward:
+                generated_counters[(self.org_id, ruleset, category, None, None, None, None, ward)] = 1
+                if born:
+                    generated_counters[(self.org_id, ruleset, category, born, None, None, None, ward)] = 1
+                if gender:
+                    generated_counters[(self.org_id, ruleset, category, None, gender, None, None, ward)] = 1
+                if gender and born:
+                    generated_counters[(self.org_id, ruleset, category, born, gender, None, None, ward)] = 1
+        else:
+            if born:
+                generated_counters[(self.org_id, ruleset, None, born, None, None, None, None)] = 1
+            if gender:
+                generated_counters[(self.org_id, ruleset, None, None, gender, None, None, None)] = 1
+
+            if state:
+                generated_counters[(self.org_id, ruleset, None, None, None, state, None, None)] = 1
+                if born:
+                    generated_counters[(self.org_id, ruleset, None, born, None, state, None, None)] = 1
+                if gender:
+                    generated_counters[(self.org_id, ruleset, None, None, gender, state, None, None)] = 1
+                if gender and born:
+                    generated_counters[(self.org_id, ruleset, None, born, gender, state, None, None)] = 1
+            if district:
+                generated_counters[(self.org_id, ruleset, None, None, None, None, district, None)] = 1
+                if born:
+                    generated_counters[(self.org_id, ruleset, None, born, None, None, district, None)] = 1
+                if gender:
+                    generated_counters[(self.org_id, ruleset, None, None, gender, None, district, None)] = 1
+                if gender and born:
+                    generated_counters[(self.org_id, ruleset, None, born, gender, None, district, None)] = 1
+            if ward:
+                generated_counters[(self.org_id, ruleset, None, None, None, None, None, ward)] = 1
+                if born:
+                    generated_counters[(self.org_id, ruleset, None, born, None, None, None, ward)] = 1
+                if gender:
+                    generated_counters[(self.org_id, ruleset, None, None, gender, None, None, ward)] = 1
+                if gender and born:
+                    generated_counters[(self.org_id, ruleset, None, born, gender, None, None, ward)] = 1
+        return generated_counters
 
     def generate_counters(self):
         generated_counters = dict()
