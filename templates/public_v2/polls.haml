@@ -103,8 +103,12 @@
               .is-small
                 -trans "FILTER BY:"
                 .share-buttons(data-html2canvas-ignore=true)
-                  .share-button.screenshot-capture.is-pulled-right(data-question="{{question.id}}")
-                    %i.fas.fa-share-square
+                  .share-button.email-share.is-pulled-right(data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                    %a(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                      %i.fas.fa-envelope-square
+                  .share-button.whatsapp-share.is-pulled-right(data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                    %a(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                      %i.fab.fa-whatsapp-square
                   .share-button.twitter-share.is-pulled-right(data-question="{{question.id}}")
                     %a(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                       %i.fab.fa-twitter-square
