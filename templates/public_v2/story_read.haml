@@ -22,11 +22,17 @@
             {{ story.content|safe }}
 
           .story-social-sharing
+            .share-button.facebook-share(data-share-url="{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
+              %i.fab.fa-facebook-f
             .share-button.twitter-share
               %a(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
                 %i.fab.fa-twitter
-            .share-button.facebook-share(data-share-url="{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-              %i.fab.fa-facebook-f
+            .share-button.email-share
+              %a(href="mailto:?subject=Check out {{ story.title|urlencode:\"\" }} results&amp;body=Check out {% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
+                %i.fas.fa-envelope-square
+            .share-button.whatsapp-share
+              %a(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
+                %i.fab.fa-whatsapp-square
 
 
           .story-text-picture
