@@ -374,7 +374,7 @@ class Poll(SmartModel):
                 for stat_tuple in stats_dict.keys():
                     org_id, ruleset, category, born, gender, state, district, ward = stat_tuple
                     question_id = questions_dict[ruleset].get("id")
-                    category_id = questions_dict[ruleset].get(categories, dict()).get(category)
+                    category_id = questions_dict[ruleset].get("categories", dict()).get(category)
                     gender_id = gender_dict.get(gender)
                     age_id = None
                     if born is not None:

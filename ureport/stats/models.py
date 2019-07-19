@@ -16,7 +16,7 @@ class AgeSegment(models.Model):
     max_age = models.IntegerField(null=True)
 
     @classmethod
-    def get_age_segment_min_age(age):
+    def get_age_segment_min_age(cls, age):
         min_ages = [0, 15, 20, 25, 31, 35]
         return [elt for elt in min_ages if age >= elt][-1]
 
