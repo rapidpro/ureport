@@ -29,10 +29,10 @@
                 %i.fab.fa-twitter
             .share-button.email-share
               %a(href="mailto:?subject=Check out {{ story.title|urlencode:\"\" }} results&amp;body=Check out {% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-                %i.fas.fa-envelope-square
+                %i.fas.fa-envelope
             .share-button.whatsapp-share
               %a(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-                %i.fab.fa-whatsapp-square
+                %i.fab.fa-whatsapp
 
 
           .story-text-picture
