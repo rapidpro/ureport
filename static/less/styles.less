@@ -698,15 +698,16 @@ a {
     font-size: 1rem;
     font-weight: bold; 
     background: black;
-    border-radius: 30px;
+    border-radius: 50%;
     text-align: center;
     font-family: @subheadlines-font;
+    line-height: 1rem;
+    padding: 1rem;
 
   }
 
   .question-line {
     border-bottom: 2px solid #FFF;
-    padding: 6px;
   }
 
 
@@ -1001,6 +1002,7 @@ each(range(15), {
     }
 
     li {
+      list-style-type: none;
       a {
         padding: 1rem 0;
         cursor: pointer;
@@ -1043,6 +1045,7 @@ each(range(15), {
         height: 3.25rem;
         font-size: 1rem;
         font-family: @headline-font;
+        border-radius: 10px;
 
         span {
           height: 1.5rem;

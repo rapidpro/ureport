@@ -10,54 +10,48 @@
       .uk-grid-match(uk-grid)
         .uk-width-1-2.page-title
           Opinions
-        .uk-width-1-2
-          .uk-inline
-            %button.uk-button.uk-button-secondary.uk-position-center-right(type="button" aria-expanded="false")
-              -trans "SEARCH"
-            .polls-overlay(uk-dropdown="mode: click; pos: bottom-right")
-              %ul(uk-accordion)
+        
+        .uk-width-1-2.categories-dropdown
+          .dropdown
+            .dropdown-trigger
+              %button.uk-button(aria-haspopup="true" aria-controls="dropdown-menu")
+                %span
+                  -trans "SEARCH"
+                %span.icon.is-small
+                  %i.fas.fa-caret-down(aria-hidden="true")
+            #dropdown-menu.dropdown-menu.polls-overlay(role="menu" uk-dropdown="mode: click")
+              .dropdown-content
+                .dropdown-item.search-polls
+                  .uk-margin
+                    .uk-inline#search-input(style="width:100%")
+                      %input.uk-input(type="text" placeholder="Search")
+                      %a#search-clear.uk-form-icon.uk-form-icon-flip(href="#" uk-icon="icon: close")
+                
+                .dropdown-item.no-results.uk-hidden
+                  No results...
+                .dropdown-item.polls-category(role="all-polls")
+                  .polls-category-label
+                    %span
+                      %i.fas.fa-chevron-right
+                    -trans "All"
+                  %ul.polls-category-list
+                    - for poll in polls
+                      %li.poll-list-item
+                        %a(href="{% url 'v2.public.opinion_read' poll.id %}")
+                          {{ poll.title }} ({{poll.poll_date|date}})
+
                 - for category in categories
                   - if category.polls.all|length
-                    %li
-                      %a.uk-accordion-title
+                    .dropdown-item.polls-category
+                      .polls-category-label
+                        %span
+                          %i.fas.fa-chevron-right
                         {{ category.name }}
-                      .uk-accordion-content
-                        %ul.polls-category-list
-                          - for poll in category.polls.all
-                            %li.poll-list-item
-                              %a(href="{% url 'v2.public.opinion_read' poll.id %}")
-                                {{ poll.title }} ({{poll.poll_date|date}})
-
-
-        -# .column.categories-dropdown
-        -#   .dropdown
-        -#     .dropdown-trigger
-        -#       %button.button(aria-haspopup="true" aria-controls="dropdown-menu")
-        -#         %span
-        -#           -trans "SEARCH"
-        -#         %span.icon.is-small
-        -#           %i.fas.fa-caret-down(aria-hidden="true")
-        -#     #dropdown-menu.dropdown-menu.polls-overlay(role="menu")
-        -#       .dropdown-content
-        -#         .dropdown-item.search-polls
-        -#           .field.has-addons
-        -#             .control#search-input
-        -#               %input.input(type="text" placeholder="Search")
-        -#             .control#search-clear
-        -#               %span.icon
-        -#                 %i.fas.fa-times
-        -#         .dropdown-item.no-results.is-hidden
-        -#           No results...
-        -#         .dropdown-item.polls-category(role="all-polls")
-        -#           .polls-category-label
-        -#             %span
-        -#               %i.fas.fa-chevron-right
-        -#             -trans "All"
-        -#           %ul.polls-category-list
-        -#             - for poll in polls
-        -#               %li.poll-list-item
-        -#                 %a(href="{% url 'v2.public.opinion_read' poll.id %}")
-        -#                   {{ poll.title }} ({{poll.poll_date|date}})
+                      %ul.polls-category-list
+                        - for poll in category.polls.all
+                          %li.poll-list-item
+                            %a(href="{% url 'v2.public.opinion_read' poll.id %}")
+                              {{ poll.title }} ({{poll.poll_date|date}})
 
   .poll-stats-top.uk-margin-remove(uk-grid)
     .uk-width-1-2.right-border-content-block
@@ -167,7 +161,6 @@
                   
                 %li
                   STATE segments
-
 
           .uk-width-1-3
             %ul.uk-iconnav
@@ -294,7 +287,7 @@
     $(".dropdown-trigger").on('click', function() {
       $(this).siblings('.dropdown-menu').toggleClass('is-active');
       $(this).toggleClass('rotation');
-      $(".polls-category-list").addClass("is-hidden");
+      $(".polls-category-list").addClass("uk-hidden");
       $("#search-input input").focus();
 
     });
@@ -446,48 +439,48 @@
     });
 
     $(".polls-category-label").on('click', function() {
-      $(this).siblings('ul').toggleClass('is-hidden');
+      $(this).siblings('ul').toggleClass('uk-hidden');
       $(this).toggleClass('rotation')
       $(this).toggleClass('is-active')
     });
 
     function resetPolls() {
-      $(".poll-list-item").removeClass("is-hidden");
+      $(".poll-list-item").removeClass("uk-hidden");
       $('.polls-category-label').removeClass('rotation');
-      $(".polls-category").removeClass("is-hidden");
-      $(".polls-category").children('ul').addClass("is-hidden");
-      $(".no-results").addClass('is-hidden');
+      $(".polls-category").removeClass("uk-hidden");
+      $(".polls-category").children('ul').addClass("uk-hidden");
+      $(".no-results").addClass('uk-hidden');
     }
 
     $("#search-clear").on("click", function() {
-      $(this).parent().children('#search-input').children('input').val("");
+      $(this).parent('#search-input').children('input').val("");
       resetPolls();
     });
 
     $("#search-input input").on('keyup', function() {
       var term = $(this).val().toLowerCase().trim();
-      $(".polls-category").addClass("is-hidden");
-      $(".no-results").addClass('is-hidden');
+      $(".polls-category").addClass("uk-hidden");
+      $(".no-results").addClass('uk-hidden');
       if(!term) {
-        $(".poll-list-item").removeClass("is-hidden");
+        $(".poll-list-item").removeClass("uk-hidden");
         resetPolls();
         return;
       } else {
         $(".poll-list-item").each( function() {
 
           if (!$(this).text().trim().toLowerCase().includes(term)) {
-            $(this).addClass("is-hidden");
+            $(this).addClass("uk-hidden");
           } else {
-            $(this).removeClass("is-hidden");
+            $(this).removeClass("uk-hidden");
           }
         })
       }
-      $(".poll-list-item:not(.is-hidden)").parent().parent(".polls-category").removeClass("is-hidden");
-      $(".polls-category:not(.is-hidden):not([role='all-polls'])").children('.polls-category-label').addClass('rotation');
-      $(".polls-category:not(.is-hidden):not([role='all-polls'])").children('ul').removeClass("is-hidden");
+      $(".poll-list-item:not(.uk-hidden)").parent().parent(".polls-category").removeClass("uk-hidden");
+      $(".polls-category:not(.uk-hidden):not([role='all-polls'])").children('.polls-category-label').addClass('rotation');
+      $(".polls-category:not(.uk-hidden):not([role='all-polls'])").children('ul').removeClass("uk-hidden");
 
-      if ($(".polls-category:not(.is-hidden)").length == 0) {
-        $(".no-results").removeClass('is-hidden');
+      if ($(".polls-category:not(.uk-hidden)").length == 0) {
+        $(".no-results").removeClass('uk-hidden');
       }
     })
 
