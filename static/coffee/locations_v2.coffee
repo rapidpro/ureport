@@ -24,9 +24,9 @@ initMap = (id, geojson, question, districtZoom, wardZoom, colorsList=[]) ->
   colors = colorsList
 
   if not colors or colors.length != 11
-    colors = ['rgb(165,0,38)','rgb(215,48,39)','rgb(244,109,67)','rgb(253,174,97)','rgb(254,224,139)','rgb(255,255,191)','rgb(217,239,139)','rgb(166,217,106)','rgb(102,189,99)','rgb(26,152,80)','rgb(0,104,55)']
+    colors = ['rgb(221, 221, 221)','rgb(200, 214, 203)','rgb(179, 207, 185)','rgb(158, 201, 167)','rgb(137, 194, 149)','rgb(117, 188, 132)','rgb(96, 181, 114)','rgb(75, 174, 96)','rgb(54, 168, 78)','rgb(33, 161, 60)','rgb(13, 155, 43)']
 
-  breaks = [20, 30, 35, 40, 45, 55, 60, 65, 70, 80, 100]
+  breaks = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
   visibleStyle = (feature) ->
     return {

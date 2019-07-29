@@ -80,16 +80,16 @@
               .gender-stat-icon
                 %i.fas.fa-male
               .gender-stat-percentage
-                {{gender_stats.female.percentage}}
+                {{gender_stats.female.percentage|default:"0"}}%
               .gender-stat-count
-                {{gender_stats.female.count}}
+                {{gender_stats.female.count|default:"0"}}
             .gender-stats
               .gender-stat-icon
                 %i.fas.fa-female
               .gender-stat-percentage
-                {{gender_stats.male.percentage}}
+                {{gender_stats.male.percentage|default:"0"}}%
               .gender-stat-count
-                {{gender_stats.male.count}}
+                {{gender_stats.male.count|default:"0"}}
           .poll-age-graph
             .age-stats{ id: "age-chart"}
 
@@ -372,7 +372,7 @@
            $('#age-chart').highcharts({
              chart: {
                type: 'column',
-               backgroundColor: "#000",
+               backgroundColor: '{{ org|config:"primary_color" }}',
                spacing: [ 3, 5, 3, 5],
                height: "30%",
              },
@@ -393,7 +393,7 @@
                labels : {
                    rotation: 0,
                    style: {
-                     fontSize: 20,
+                     fontSize: '0.85rem',
                      fontFamily: "SharpSansDisplayBold",
                      color: "#000",
                  }
@@ -417,7 +417,7 @@
              },
              plotOptions: {
                  column: {
-                     color: '#000',
+                     color: '{{ org|config:"primary_color" }}',
                      pointPadding: 0.2,
                      pointWidth: 30,
                      borderWidth: 0,
@@ -426,7 +426,7 @@
                        style: {
                          fontFamily: "SharpSansDisplayBold",
                        },
-                       color: "#000",
+                       color: '{{ org|config:"primary_color" }}',
                        verticalAlign:"bottom",
                        format: '<b>{point.y:.0f}%</b>'
                      }

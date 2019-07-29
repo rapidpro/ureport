@@ -167,6 +167,7 @@ class PollContextMixin(object):
                     count=elt["set"], percentage=int(round(elt["set"] * 100 / float(total_gender)))
                 )
                 for elt in gender_stats
+                if total_gender
             }
 
             context["gender_stats"] = gender_stats_dict
@@ -177,7 +178,9 @@ class PollContextMixin(object):
                 total_age += elt["set"]
 
             context["age_stats"] = [
-                dict(name=elt["label"], y=int(round(elt["set"] * 100 / float(total_age)))) for elt in age_stats
+                dict(name=elt["label"], y=int(round(elt["set"] * 100 / float(total_age))))
+                for elt in age_stats
+                if total_age
             ]
             context["locations_stats"] = top_question.get_location_stats()
 
