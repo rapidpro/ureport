@@ -80,24 +80,26 @@
               .gender-stat-icon
                 %i.fas.fa-male
               .gender-stat-percentage
-                60%
+                {{gender_stats.female.percentage}}
               .gender-stat-count
-                12,416
+                {{gender_stats.female.count}}
             .gender-stats
               .gender-stat-icon
                 %i.fas.fa-female
               .gender-stat-percentage
-                40%
+                {{gender_stats.male.percentage}}
               .gender-stat-count
-                8353
+                {{gender_stats.male.count}}
           .poll-age-graph
             .age-stats{ id: "age-chart"}
 
     .uk-width-1-2.bottom-border-content-block
+      .map-title
+        TOTAL RESPONSES
       .inside-content-block.poll-map-block
-        .poll-map{ data-question: "{{ latest_poll.id }}", id: "map-{{ latest_poll.id }}" }
-          .loading-placeholder{id:"map-{{ latest_poll.id }}-placeholder"}
-            -# %img{src:"{{ STATIC_URL }}img/loading.gif"}     
+        .poll-map{ data-question: "{{ top_question.id }}", id: "map-{{ top_question.id }}" }
+          .loading-placeholder{id:"map-{{ top_question.id }}-placeholder"}
+             %img{src:"{{ STATIC_URL }}img/loading.gif"}     
 
   - for question in latest_poll.get_questions
    .poll-question-block.uk-margin-remove(id="question-id-{{question.id}}" uk-grid)
@@ -128,14 +130,14 @@
                   Age
                 %button.uk-button.uk-button-default
                   Gender
-                %button.uk-button.uk-button-default
-                  State
-                .(uk-dropdown="mode:click;")
-                    %ul.uk-list.uk-height-medium.uk-overflow-auto
-                      - for state in states
-                        %li
-                          %input.uk-checkbox(type="checkbox")
-                          {{state}}
+                -# %button.uk-button.uk-button-default
+                -#   State
+                -# .(uk-dropdown="mode:click;")
+                -#     %ul.uk-list.uk-height-medium.uk-overflow-auto
+                -#       - for state in states
+                -#         %li
+                -#           %input.uk-checkbox(type="checkbox")
+                -#           {{state}}
                         
                   -# 
                   -# %form.uk-form-horizontal
@@ -242,12 +244,12 @@
     }
 
     .poll-map {
-      height: 500px;
+      height: 600px;
       width: 100%;
     }
 
     .poll-map svg {
-      height: 480px;
+      height: 600px;
     }
 
     .leaflet-container {
@@ -272,13 +274,60 @@
       display: none;
       {% endif %}
     }
+    
+    .map-title {
+      font-size: 1.2rem;
+      text-align: center;
+      font-family: SharpSansDisplayBold, sans-serif;
+      padding-top: 0.2rem
+    }
+
+    .leaflet-popup-content {
+      margin: 0.5rem;
+    }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: 0;
+    }
+
+    .leaflet-popup-content-wrapper .popup-region-name {
+      color: #FFF;
+      font-size: 1.2rem;
+      line-height: 1rem;
+      font-variant-caps: all-small-caps;
+    }
+
+    .leaflet-popup-content-wrapper .popup-responses-number {
+      color: #FF0;
+      font-size: 1rem;
+      line-height: 0.75rem;
+      font-variant-caps: all-small-caps;
+    }
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+      background-color: #000;
+    }
+    .leaflet-container a.leaflet-popup-close-button {
+      display:none;
+    }
+
+    .legend {
+      line-height: 12px;
+      color: #555;
+    }
+    .legend i {
+      width: 12px;
+      height: 12px;
+      float: left;
+      margin-right: 5px;
+      opacity: 0.7;
+    }
 
 -block extra-script
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/jqcloud.min.js"></script>
   <script src="{{ STATIC_URL }}js/html2canvas.min.js"></script>
   {% compress js %}
-  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/locations.coffee" />
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/locations_v2.coffee" />
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/all_polls.coffee" />
   {% endcompress %}
 
@@ -831,7 +880,7 @@
         });
       });
     });
-    
+
     $(".poll-question-graph-keywords").each(function(){
       var question = $(this).attr("data-question");
 
@@ -940,6 +989,8 @@
           var colorList = {{ colors_map|safe }};
           var map = window.initMap('map-' + question, boundaries, question, '{{ district_zoom|lower }}' === 'true', '{{ ward_zoom|lower }}' === 'true', colorList=colorList);
 
+
+          console.log(map);
           $(this).data('map', map);
         });
       });

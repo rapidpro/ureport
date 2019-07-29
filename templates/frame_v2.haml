@@ -27,7 +27,7 @@
   %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png")
 
   %link(href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet")
-  %link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css")
+  %link(rel="stylesheet" href="{{ STATIC_URL }}css/leaflet.css")
   %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/jqcloud.css")
   %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/highcharts.css")
   %link(href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet")
@@ -57,12 +57,6 @@
       src: url('{{ STATIC_URL }}fonts/SharpSansDispNo1-MediumIt.woff2') format("woff2"),
            url('{{ STATIC_URL }}fonts/SharpSansDispNo1-MediumIt.woff') format("woff");
 
-    }
-
-    @font-face {
-      font-family: FontAwesome;
-      src: url('{{ STATIC_URL }}fonts/fa-regular-400.woff2') format("woff2"),
-           url('{{ STATIC_URL }}fonts/fa-regular-400.woff') format("woff");
     }
 
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>    

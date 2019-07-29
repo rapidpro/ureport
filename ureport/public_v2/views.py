@@ -16,8 +16,8 @@ from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 
 from ureport.jobs.models import JobSource
-from ureport.news.models import NewsItem, Video
 from ureport.locations.models import Boundary
+from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
 from ureport.utils import get_global_count
 
@@ -149,10 +149,37 @@ class PollContextMixin(object):
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = org.get_age_stats()
 
-        context['states'] = Boundary.get_org_top_level_boundaries_name(org).values()
+        context["states"] = Boundary.get_org_top_level_boundaries_name(org).values()
 
         main_poll = self.derive_main_poll()
         context["latest_poll"] = main_poll
+
+        top_question = main_poll.get_questions().first()
+        context["top_question"] = top_question
+
+        if top_question:
+            gender_stats = top_question.get_gender_stats()
+            total_gender = 0
+            for elt in gender_stats:
+                total_gender += elt["set"]
+            gender_stats_dict = {
+                elt["label"].lower(): dict(
+                    count=elt["set"], percentage=int(round(elt["set"] * 100 / float(total_gender)))
+                )
+                for elt in gender_stats
+            }
+
+            context["gender_stats"] = gender_stats_dict
+
+            age_stats = top_question.get_age_stats()
+            total_age = 0
+            for elt in age_stats:
+                total_age += elt["set"]
+
+            context["age_stats"] = [
+                dict(name=elt["label"], y=int(round(elt["set"] * 100 / float(total_age)))) for elt in age_stats
+            ]
+            context["locations_stats"] = top_question.get_location_stats()
 
         context["categories"] = (
             Category.objects.filter(org=org, is_active=True)

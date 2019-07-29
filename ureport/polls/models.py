@@ -964,7 +964,7 @@ class PollQuestion(SmartModel):
                 elif gender_part:
 
                     genders = ["f", "m"]
-                    gender_labels = dict(f=str(_("Female")), m=str(_("Male")))
+                    gender_labels = dict(f="Female", m="Male")
 
                     for gender in genders:
                         categories = []
@@ -1055,6 +1055,15 @@ class PollQuestion(SmartModel):
             percentage = int(round((float(responded) * 100.0) / float(polled)))
             return "%s" % six.text_type(percentage) + "%"
         return "___"
+
+    def get_gender_stats(self):
+        return self.get_results(segment=dict(gender="gender"))
+
+    def get_age_stats(self):
+        return self.get_results(segment=dict(age="age"))
+
+    def get_location_stats(self):
+        return self.get_results(segment=dict(location="state"))
 
     def get_words(self):
         words = self.get_total_summary_data().get("categories", [])
