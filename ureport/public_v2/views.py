@@ -17,6 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ureport.jobs.models import JobSource
 from ureport.news.models import NewsItem, Video
+from ureport.locations.models import Boundary
 from ureport.polls.models import Poll
 from ureport.utils import get_global_count
 
@@ -144,6 +145,11 @@ class PollContextMixin(object):
 
         org = self.request.org
         context["org"] = org
+
+        context["gender_stats"] = org.get_gender_stats()
+        context["age_stats"] = org.get_age_stats()
+
+        context['states'] = Boundary.get_org_top_level_boundaries_name(org).values()
 
         main_poll = self.derive_main_poll()
         context["latest_poll"] = main_poll

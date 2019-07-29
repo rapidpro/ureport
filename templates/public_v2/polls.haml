@@ -7,163 +7,192 @@
   .booklet-bg
   .booklet-bg-content
     .page-title-block
-      .columns
-        .column.page-title
+      .uk-grid-match(uk-grid)
+        .uk-width-1-2.page-title
           Opinions
-        .column.categories-dropdown
-          .dropdown
-            .dropdown-trigger
-              %button.button(aria-haspopup="true" aria-controls="dropdown-menu")
-                %span
-                  -trans "SEARCH"
-                %span.icon.is-small
-                  %i.fas.fa-caret-down(aria-hidden="true")
-            #dropdown-menu.dropdown-menu.polls-overlay(role="menu")
-              .dropdown-content
-                .dropdown-item.search-polls
-                  .field.has-addons
-                    .control#search-input
-                      %input.input(type="text" placeholder="Search")
-                    .control#search-clear
-                      %span.icon
-                        %i.fas.fa-times
-                .dropdown-item.no-results.is-hidden
-                  No results...
-                .dropdown-item.polls-category(role="all-polls")
-                  .polls-category-label
-                    %span
-                      %i.fas.fa-chevron-right
-                    -trans "All"
-                  %ul.polls-category-list
-                    - for poll in polls
-                      %li.poll-list-item
-                        %a(href="{% url 'v2.public.opinion_read' poll.id %}")
-                          {{ poll.title }} ({{poll.poll_date|date}})
-                
+        .uk-width-1-2
+          .uk-inline
+            %button.uk-button.uk-button-secondary.uk-position-center-right(type="button" aria-expanded="false")
+              -trans "SEARCH"
+            .polls-overlay(uk-dropdown="mode: click; pos: bottom-right")
+              %ul(uk-accordion)
                 - for category in categories
                   - if category.polls.all|length
-                    .dropdown-item.polls-category
-                      .polls-category-label
-                        %span
-                          %i.fas.fa-chevron-right
+                    %li
+                      %a.uk-accordion-title
                         {{ category.name }}
-                      %ul.polls-category-list
-                        - for poll in category.polls.all
-                          %li.poll-list-item
-                            %a(href="{% url 'v2.public.opinion_read' poll.id %}")
-                              {{ poll.title }} ({{poll.poll_date|date}})
+                      .uk-accordion-content
+                        %ul.polls-category-list
+                          - for poll in category.polls.all
+                            %li.poll-list-item
+                              %a(href="{% url 'v2.public.opinion_read' poll.id %}")
+                                {{ poll.title }} ({{poll.poll_date|date}})
 
-  .poll-title-block.block-content
-    .columns
-      .column.is-half.questions-count
-        {% blocktrans count questions=latest_poll.get_questions|length %}
-          {{ questions }} question
-        {% plural %}
-          {{ questions }} questions
-        {% endblocktrans %}
-      .column.is-half.has-text-right
-        .recent-results.is-inline-block
-          Recent Poll Results
-        .poll-category.is-inline-block
+
+        -# .column.categories-dropdown
+        -#   .dropdown
+        -#     .dropdown-trigger
+        -#       %button.button(aria-haspopup="true" aria-controls="dropdown-menu")
+        -#         %span
+        -#           -trans "SEARCH"
+        -#         %span.icon.is-small
+        -#           %i.fas.fa-caret-down(aria-hidden="true")
+        -#     #dropdown-menu.dropdown-menu.polls-overlay(role="menu")
+        -#       .dropdown-content
+        -#         .dropdown-item.search-polls
+        -#           .field.has-addons
+        -#             .control#search-input
+        -#               %input.input(type="text" placeholder="Search")
+        -#             .control#search-clear
+        -#               %span.icon
+        -#                 %i.fas.fa-times
+        -#         .dropdown-item.no-results.is-hidden
+        -#           No results...
+        -#         .dropdown-item.polls-category(role="all-polls")
+        -#           .polls-category-label
+        -#             %span
+        -#               %i.fas.fa-chevron-right
+        -#             -trans "All"
+        -#           %ul.polls-category-list
+        -#             - for poll in polls
+        -#               %li.poll-list-item
+        -#                 %a(href="{% url 'v2.public.opinion_read' poll.id %}")
+        -#                   {{ poll.title }} ({{poll.poll_date|date}})
+
+  .poll-stats-top.uk-margin-remove(uk-grid)
+    .uk-width-1-2.right-border-content-block
+      .inside-content-block
+        .poll-category-label
           {{ latest_poll.category.name|upper }}
-    .columns
-      .column.is-half.poll-title
-        {{ latest_poll.title }}
-      .column.is-half.has-text-right
-        .poll-stats
-          .responses-count.is-inline-block.has-text-centered
+        .poll-title
+          {{ latest_poll.title }}
+        .poll-date
+          {{ latest_poll.poll_date }}
+        .poll-response-stats
+          .responses-count
             .number-figure
               {{ latest_poll.responded_runs|intcomma }}
             .number-label
               - trans "RESPONSES"
-          .responses-percentage.is-inline-block.has-text-centered
-            .number-figure
-              {{ latest_poll.response_percentage }}
-            .number-label
-              - trans "RESPONSE RATE"
+          .responses-percentage
+              .number-figure
+                {{ latest_poll.response_percentage }}
+              .number-label
+                - trans "RESPONSE RATE"
+  
+        .poll-stats-graph.uk-height-match
+          .poll-gender-graph
+            .gender-stats
+              .gender-stat-icon
+                %i.fas.fa-male
+              .gender-stat-percentage
+                60%
+              .gender-stat-count
+                12,416
+            .gender-stats
+              .gender-stat-icon
+                %i.fas.fa-female
+              .gender-stat-percentage
+                40%
+              .gender-stat-count
+                8353
+          .poll-age-graph
+            .age-stats{ id: "age-chart"}
+
+    .uk-width-1-2.bottom-border-content-block
+      .inside-content-block.poll-map-block
+        .poll-map{ data-question: "{{ latest_poll.id }}", id: "map-{{ latest_poll.id }}" }
+          .loading-placeholder{id:"map-{{ latest_poll.id }}-placeholder"}
+            -# %img{src:"{{ STATIC_URL }}img/loading.gif"}     
+
   - for question in latest_poll.get_questions
-    .columns.is-paddingless.is-marginless.poll-question-block(id="question-id-{{question.id}}")
-        - if not forloop.counter|divisibleby:2
-          .column.is-half.block-content(class="for{{ forloop.counter0}}")
-            .columns.is-multiline
-              .column.is-1.question-number
-                {{ forloop.counter }}
-              .column
-                .question-line
-              .column.is-full.question-title
-                {{ question.title }}
-              .column.is-full.left-zone
-                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
-                  {{ responded }} responded out of {{ polled }} polled
-                {% endblocktrans %}
-
-        .column.is-half.block-content
-          .columns
-            .column
-              .is-small
-                -trans "FILTER BY:"
-                .share-buttons(data-html2canvas-ignore=true)
-                  .share-button.email-share.is-pulled-right(data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                    %a(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                      %i.fas.fa-envelope-square
-                  .share-button.whatsapp-share.is-pulled-right(data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                    %a(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                      %i.fab.fa-whatsapp-square
-                  .share-button.twitter-share.is-pulled-right(data-question="{{question.id}}")
-                    %a(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                      %i.fab.fa-twitter-square
-                  .share-button.facebook-share.is-pulled-right(data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                    %i.fab.fa-facebook-square
-
-              .tabs.is-boxed
-                %ul
-                  - if question.is_open_ended
-                    %li.is-active(data-tab='keywords-chart-{{question.id}}')
-                      %a
-                        -trans "Keywords"
-                  - else
-                    %li.is-active(data-tab='all-chart-{{question.id}}')
-                      %a
-                        -trans "ALL"
-                    %li(data-tab='age-chart-{{question.id}}')
-                      %a
-                        -trans "AGE"
-                    %li(data-tab='gender-chart-{{question.id}}')
-                      %a
-                        -trans "GENDER"
-                    %li(data-tab='map-chart-{{question.id}}')
-                      %a
-                        -trans "LOCATION"
-              .tabs-content
-                - if question.is_open_ended
+   .poll-question-block.uk-margin-remove(id="question-id-{{question.id}}" uk-grid)
+       - if not forloop.counter|divisibleby:2
+         .uk-width-1-2.block-content(class="for{{ forloop.counter0}}")
+           .(uk-grid)
+             .uk-width-auto.question-number
+               {{ forloop.counter }}
+             .uk-width-expand
+               .question-line
+             .uk-width-1-1.question-title
+               {{ question.title }}
+             .uk-width-1-1.left-zone
+               {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
+                 {{ responded }} responded out of {{ polled }} polled
+               {% endblocktrans %}     
+       .uk-width-1-2.block-content
+         .(uk-grid)
+          .uk-width-2-3
+            .uk-button-group(uk-switcher="animation: uk-animation-fade; toggle: > *")
+              - if question.is_open_ended
+                %button.uk-button.uk-button-default
+                  -trans "Keywords"
+              -else
+                %button.uk-button.uk-button-default
+                  All
+                %button.uk-button.uk-button-default
+                  Age
+                %button.uk-button.uk-button-default
+                  Gender
+                %button.uk-button.uk-button-default
+                  State
+                .(uk-dropdown="mode:click;")
+                    %ul.uk-list.uk-height-medium.uk-overflow-auto
+                      - for state in states
+                        %li
+                          %input.uk-checkbox(type="checkbox")
+                          {{state}}
+                        
+                  -# 
+                  -# %form.uk-form-horizontal
+                  -#   - for state in states
+                  -#     %label
+                  -#       %input.uk-checkbox(type="checkbox")
+                  -#         {{state}}
+            %ul.uk-switcher
+              - if question.is_open_ended
+                %li
                   .tab-content.is-active(data-content='keywords-chart-{{question.id}}')
                     .poll-question-graph-keywords(id="graph-keywords-question-{{question.id}}" data-question="{{question.id}}")
-        
-                -else
+              -else
+                %li
                   .tab-content.is-active(data-content='all-chart-{{question.id}}')
                     .poll-question-graph-all.has-highcharts(id="graph-all-question-{{question.id}}" data-question="{{question.id}}")
+                %li
                   .tab-content(data-content='age-chart-{{question.id}}')
                     .poll-question-graph-age.has-highcharts(id="graph-age-question-{{question.id}}" data-question="{{question.id}}")
+                %li
                   .tab-content(data-content='gender-chart-{{question.id}}')
                     .poll-question-graph-gender.has-highcharts(id="graph-gender-question-{{question.id}}" data-question="{{question.id}}")
-                  .tab-content(data-content='map-chart-{{question.id}}')
-                    .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
-                      .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
-                          %img{src:"{{ STATIC_URL }}img/loading.gif"}
+                  
+                %li
+                  STATE segments
 
-        - if forloop.counter|divisibleby:2
-          .column.is-half.block-content(class="for{{ forloop.counter0}}")
-            .columns.is-multiline
-              .column
-                .question-line
-              .column.is-1.question-number
-                {{ forloop.counter }}
-              .column.is-full.question-title
-                {{ question.title }}
-              .column.is-full.right-zone
-                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
-                  {{ responded }} responded out of {{ polled }} polled
-                {% endblocktrans %}
+
+          .uk-width-1-3
+            %ul.uk-iconnav
+              %li
+                %a(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}" uk-icon="icon: mail; ratio: 1.5")
+              %li
+                %a(uk-icon="icon: whatsapp; ratio: 1.5" href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+              %li
+                %a(uk-icon="icon: twitter; ratio: 1.5" href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+              %li
+                %a(uk-icon="icon: facebook; ratio: 1.5" href="" data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+
+       - if forloop.counter|divisibleby:2
+         .uk-width-1-2.block-content(class="for{{ forloop.counter0}}")
+           .(uk-grid)
+             .uk-width-expand
+               .question-line
+             .uk-width-auto.question-number
+               {{ forloop.counter }}
+             .uk-width-1-1.question-title
+               {{ question.title }}
+             .uk-width-1-1.right-zone
+               {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
+                 {{ responded }} responded out of {{ polled }} polled
+               {% endblocktrans %}
 
   - for story in main_stories|slice:"1"  
     .booklet-bg
@@ -171,27 +200,28 @@
       .content-color-bg
       .content-container-block
         .poll-story-block
-          .columns.is-multiline
-            .column.is-10
-              .recent-results.is-inline-block
-                Recent Poll Results
-            .column.is-2
+          .(uk-grid)
+            .uk-width-5-6
+            .uk-width-1-6
               <img width="50%" src="{{ STATIC_URL }}img/medium-u-white.png" />
-            .column.is-full.poll-story-title-text
+          .(uk-grid)
+            .uk-width-1-1.poll-story-title-text
               {{ story.title }}
-            .column.is-full.poll-story-date
-              {{ story.created_on|date:"M j. Y" }}
-            -if story.get_written_by
-              .column.is-full.poll-story-author
-                - trans "BY"
-                {{ story.get_written_by|upper }}
 
-            .column.is-full.poll-story-text
-              {{ story.content|safe }}  
+          .(uk-grid)
+             .uk-width-1-1.poll-story-date
+               {{ story.created_on|date:"M j. Y" }}
+             -if story.get_written_by
+               .uk-width-1-1.poll-story-author
+                 - trans "BY"
+                 {{ story.get_written_by|upper }}
+
+             .uk-width-1-1.poll-story-text
+               {{ story.content|safe }}
 
           - if latest_poll
-            .columns
-              .column(style="margin: 5rem 0 1rem 0;")
+            .(uk-grid)
+              .uk-width-1-1(style="margin: 5rem 0 1rem 0;")
                 .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")
 
 - block extra-style
@@ -283,6 +313,87 @@
         }
       )
     });
+
+    $("#age-chart").each(function(){
+           var data = {{ age_stats|safe }};
+
+           {% if is_rtl_org %}
+           data.reverse();
+           {% endif %}
+
+           var categories = [];
+
+           for (i=0; i<data.length; i++) {
+             categories.push(data[i].name)
+           }
+
+           $('#age-chart').highcharts({
+             chart: {
+               type: 'column',
+               backgroundColor: "#000",
+               spacing: [ 3, 5, 3, 5],
+               height: "30%",
+             },
+             credits: {
+               enabled: false
+             },
+             legend: {
+               enabled: false
+             },
+             title: {
+                 text: null
+             },
+             subtitle: {
+                 text: null
+             },
+             xAxis: {
+               categories: categories,
+               labels : {
+                   rotation: 0,
+                   style: {
+                     fontSize: 20,
+                     fontFamily: "SharpSansDisplayBold",
+                     color: "#000",
+                 }
+               },
+               minorTickLength: 0,
+               tickLength: 0
+             },
+             yAxis: {
+               min: 0,
+               labels: {
+                 enabled: false
+               },
+               visible: false,
+               gridLineWidth: 0,
+               title: {
+                 text: null
+               }
+             },
+             tooltip: {
+               enabled: false
+             },
+             plotOptions: {
+                 column: {
+                     color: '#000',
+                     pointPadding: 0.2,
+                     pointWidth: 30,
+                     borderWidth: 0,
+                     dataLabels:  {
+                       enabled: true,
+                       style: {
+                         fontFamily: "SharpSansDisplayBold",
+                       },
+                       color: "#000",
+                       verticalAlign:"bottom",
+                       format: '<b>{point.y:.0f}%</b>'
+                     }
+                 }
+             },
+             series: [ {name: 'Age' , data: data } ]
+           });
+         });
+
 
 
     $(".screenshot-capture").on("click", function() {

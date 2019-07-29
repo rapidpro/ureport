@@ -59,21 +59,29 @@
 
     }
 
+    @font-face {
+      font-family: FontAwesome;
+      src: url('{{ STATIC_URL }}fonts/fa-regular-400.woff2') format("woff2"),
+           url('{{ STATIC_URL }}fonts/fa-regular-400.woff') format("woff");
+    }
+
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>    
 
 
   -block styles
     - if is_rtl_org
       - compress css
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css")
-        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit-rtl.css")
+        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_uk.less")
 
     -else
       -compress css
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
         %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_uk.less")
 
   - block extra-less
   - block extra-style
@@ -120,317 +128,184 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
-    %section.section.is-paddingless(style="background:#000;height:15px")
-
-
-    %section.section.countries-overlay.closed
-      .container.is-fluid
-        .columns
-          .column
-            .close.button
-              x
-
-        .columns
-          .column.is-4
-            .main-logo
-              {% thumbnail org.logo "400x100" format="PNG" as im %}
-              %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
-              {% endthumbnail %}
-          .column
-            .columns.is-multiline
+    %section.uk-section.uk-padding-remove#ureport-top-black(style="background:#000;height:15px")
+    .uk-width-auto.uk-margin-bottom.countries-overlay(uk-drop="mode: click; toggle:#select-country  pos:bottom-justify; boundary: #ureport-top-black; boundary-align:true; animation: uk-animation-slide-top-medium; duration: 500")
+      .uk-card.uk-card-body.uk-card-default
+        .(uk-grid)
+          .uk-width-1-1.uk-display-block
+            %button.uk-float-right.uk-drop-close(type="button" uk-close)
+        .(uk-grid)
+          .main-logo.uk-width-1-4
+            {% thumbnail org.logo "250x100" format="PNG" as im %}
+            %img.logo(src="{{ STATIC_URL }}img/place_countries_logo.png" alt="{{ org.name }}" style="border: 1px solid green;")
+            {% endthumbnail %}
+          .uk-width-3-4
+            .uk-flex(uk-grid)
               - if is_iorg
                 - for site in linked_orgs
-                  .column.is-1
+                  .
                     %a.footer-orgs-name{ href:"{{ site.host }}" }
                       {{ site.name }}
               -else
                 - for site in linked_orgs
-                  .column.is-1
+                  .
                     %a.flag{ href:"{{ site.host }}" }
                       - if site.is_static
-                        %img{ src:"{{ STATIC_URL }}img/flags/{{ site.flag }}" }
-  
-                      - else
-                        %img{ src:"{{ site.flag }}" }
+                         %img{ src:"{{ STATIC_URL }}img/flags/{{ site.flag }}" }
+                       - else
+                          %img{ src:"{{ STATIC_URL }}img/flags/flag_ar.png" }
+                      -#   %img{ src:"{{ site.flag }}" }
+    %section#ureport-public-navbar-top.uk-section.uk-padding-remove-vertical
+      -block navbar
+        %nav#public-other-header-navbar.uk-navbar-container(uk-navbar)
+          .uk-navbar-left
+            .uk-navbar-item.header-countries-nav#select-country
+              .
+                %span(uk-icon="icon: world")
+                %span(uk-icon="icon: chevron-up")
+                %span
+                  - trans "SELECT YOUR COUNTRY"
 
-
-    %section#ureport-public-header.section
-      - block navbar
-          %nav(role="navigation"  aria-label="main navigation")
-            .navbar-brand.is-hidden-tablet
-              .navbar-item
-                {% thumbnail org.logo "230x86" format="PNG" as im %}
-                %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
-                {% endthumbnail %}
-  
-              %a.navbar-burger(role="button" aria-label="menu" aria-expanded="false" data-target="mobileNavbar")
-                %span(aria-hidden="true")
-                %span(aria-hidden="true")
-                %span(aria-hidden="true")
-  
-            #mobileNavbar.navbar-menu.is-hidden-tablet
-              .navbar-start
-                .navbar-item.has-text-weight-semibold.is-size-3
-                  .link
-                    - trans "Opinions"
-                .navbar-item.has-text-weight-semibold.is-size-3
-                  .link
-                    - trans "Stories"
-              .navbar-end
-                .navbar-item.header-small-nav
-                  - trans "About"
-
-                .navbar-item.header-small-nav
+          .uk-navbar-right
+            %ul.uk-navbar-nav.pages-navbar
+              %li
+                %a(href="{% url 'v2.public.ureporters' %}") 
                   - trans "Engagement"
+              %li
+                %a(href="{% url 'v2.public.about' %}") 
+                  - trans "About"
+            
+              - if org|config:"has_jobs"
+                %li
+                  %a(href="{% url 'v2.public.jobs' %}")
+                    - trans "Jobs"
+              - for custom_page in additional_menu|slice:":3"
+                %li
+                  %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
+                    {{custom_page.title}}
+              %li
+                %a(href="" uk-icon="icon: facebook")
+              %li
+                %a(href="" uk-icon="icon: twitter")
+              %li
+                %a(href="{% url 'v2.public.join' %}") 
+                  .uk-button.uk-button-secondary
+                    - trans "Join Now"
 
-                - if org|config:"has_jobs"
-                  .navbar-item.header-small-nav
-                    %a(href="{% url 'v2.public.jobs' %}")
-                      - trans "Jobs"
 
-                - for custom_page in additional_menu|slice:":3"
-                  .navbar-item.header-small-nav
-                    %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
-                      {{custom_page.title}}
-
-                .navbar-item.header-social-media-mobile
-                  .icon
-                    %i.fab.fa-facebook-f
-
-                  .icon
-                    %i.fab.fa-twitter
-                .navbar-item.header-search-mobile
-                  .icon
-                    %i.fas.fa-search
-                  - trans "Search"
-
-            .navbar-menu.is-hidden-mobile
-              .navbar-start
-                .navbar-item.header-countries-nav
-                  .icon
-                    %i.fas.fa-globe-africa
-                  .icon
-                    %i.fas.fa-chevron-circle-up
-                  .
-                    - trans "SELECT YOUR COUNTRY"
-
-  
-              .navbar-end
-                .navbar-item.header-small-nav
-                  %a(href="{% url 'v2.public.about' %}") 
-                    - trans "About"
-
-                .navbar-item.header-small-nav
-                  %a(href="{% url 'v2.public.ureporters' %}") 
-                    - trans "Engagement"
-
-                - if org|config:"has_jobs"
-                  .navbar-item.header-small-nav
-                    %a(href="{% url 'v2.public.jobs' %}")
-                      - trans "Jobs"
-
-                - for custom_page in additional_menu|slice:":3"
-                  .navbar-item.header-small-nav
-                    %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
-                      {{custom_page.title}}
-
-                .navbar-item.header-small-nav
-                  %span.icon
-                    %i.fas.fa-search
-                  - trans "Search"
-
-                .navbar-item.header-small-nav.header-social-media
-                  %span.icon
-                    %i.fab.fa-facebook-f
-                .navbar-item.header-small-nav.header-social-media
-                  %span.icon
-                    %i.fab.fa-twitter
-
-                .navbar-item.header-small-nav
-                  .icon.is-large.is-size-3.is-marginless
-                    %i.fas.fa-language
-
-                .navbar-item.header-small-nav
-                  .engage-call-to-action.button.is-outlined.is-primary
-                    %a(href="{% url 'v2.public.join' %}") 
-                      - trans "Join Now"
-
-  
-          %nav.header-big-nav.columns.is-hidden-mobile.is-marginless(role="navigation" aria-label="main navigation" style="border-bottom: 1px solid black;")
-            .column.has-text-centered
-              .link
+        %nav#public-main-header-navbar.uk-navbar-container(uk-navbar style="border-bottom: 1px solid black;")
+          .uk-navbar-center
+            .uk-navbar-center-left.uk-margin-xlarge-right
+              .uk-navbar-item.main-link
                 %a(href="{% url 'v2.public.opinions' %}")
                   - trans "Opinions"
-  
-            .column.has-text-centered
-              %a(href="{% url 'v2.public.index' %}") 
-                {% thumbnail org.logo "230x86" format="PNG" as im %}
-                %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
-                {% endthumbnail %}
-  
-            .column.has-text-centered
-              .link
+
+            %a.uk-navbar-item.uk-logo(href="{% url 'v2.public.index' %}") 
+              {% thumbnail org.logo "230x86" format="PNG" as im %}
+              %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
+              {% endthumbnail %}
+            .uk-navbar-center-right.uk-margin-xlarge-left
+              .uk-navbar-item.main-link
                 %a(href="{% url 'v2.public.stories' %}")
                   - trans "Stories"
-  
 
-    
     %section.section.is-paddingless.is-marginless
       - block content
         #ureport-public-content
           .container.has-text-centered.is-size-1
             %h1
               - trans "Site page under construction"
-  
+
           .container.has-text-centered.is-text-1(style="margin: 5rem;")
             %a.button(href="/")
               - trans "Go back to main public site"
-    
-    %section#ureport-public-footer.section.is-paddingless.is-marginless
+
+    %section#ureport-public-footer.uk-section.uk-padding-remove
         -block pre-footer
-          .columns.is-multiline#pre-footer.is-hidden-touch
-            .column.is-full
-              .columns.is-multiline.is-centered.is-8.is-variable
-                - for story in main_stories|slice:"4"
-                  - if not forloop.first
-                    .column
-                      .columns.is-multiline
-                        .column.is-full
-                          <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
-                        .column.is-full.main-story-title.is-clipped
-                          {{ story.title }}
-                        .column.is-full.main-story-button
-                          %a.is-inline.button.is-radiusless(href="{% url 'v2.public.story_read' story.pk %}")
-                            - trans "READ MORE"
-                            //&#8594;
-            .column.is-full
-              .columns.is-vcentered
-                .column.is-half
-                  <img width="50%" src="{{ STATIC_URL }}img/big_u.png" />
-                .column.is-half.pre-footer-call-to-action
+          #pre-footer
+            .(uk-grid)
+              - for story in main_stories|slice:"4"
+                - if not forloop.first
+                  .(class="uk-width-1-3@s")
+                    .(uk-grid)
+                      .uk-width-1-1
+                        <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+                      .uk-width-1-1.main-story-title.is-clipped
+                        {{ story.title }}
+                      .uk-width-1-1.main-story-button
+                        %a.uk-button(href="{% url 'v2.public.story_read' story.pk %}")
+                          - trans "READ MORE"
+                          //&#8594;
+              .(class="uk-visible@s uk-width-1-3@s")
+                <img width="50%" src="{{ STATIC_URL }}img/big_u.png" />
+              .(class="uk-width-2-3@s")
+                .pre-footer-call-to-action
                   .call-to-action-text
                     This Section is a call to action to wrap up the content nad get involved
-      
+
                   .call-to-action-button
-                    %a.button.is-radiusless.is-primary.is-pulled-right(href="{% url 'v2.public.ureporters' %}")
+                    %a.uk-button.uk-button-primary.uk-float-right(href="{% url 'v2.public.ureporters' %}")
                       -trans "EXPLORE ENGAGEMENT"
 
-      %footer.footer.is-paddingless
+      %footer.footer.uk-padding-remove
         -block footer
-            .columns.is-hidden-tablet#ureport-footer-mobile
-              .column.is-full
-                .footer-mobile-logo
+          #ureport-footer-desktop(uk-grid)
+
+            .uk-width-1-3.uk-child-width-expand(uk-grid)
+              .footer-logo
+                %a(href="{% url 'v2.public.index' %}") 
                   {% thumbnail org.logo "230x86" format="PNG" as im %}
                   %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
                   {% endthumbnail %}
-              .column.is-full
-                .columns.is-mobile
-                  .column.is-two-fifths.footer-small-nav
-                    .columns
-                      .column
-                        - trans "About"
-                      .column
-                        - trans "Engage"
-                      .column
-                        - trans "Engagement"
+            .uk-width-1-3
+            .uk-width-1-3.uk-float-right(uk-grid)
+              .uk-width-1-6
+              .uk-width-1-6
+              .uk-width-1-6
+              .uk-width-1-6
+              .uk-width-1-6.uk-float-right
+                %a(href="{% url 'v2.public.opinions' %}")
+                  - trans "Opinions"
+              .uk-width-1-6.uk-float-right
+                %a(href="{% url 'v2.public.stories' %}")
+                  - trans "Stories"
+              .uk-width-1-6
+              .uk-width-1-6
+              .uk-width-1-6
+              .uk-width-1-6
+              .uk-width-1-6.uk-float-right
+                %a(href="" uk-icon="icon: facebook")
 
-                      - if org|config:"has_jobs"
-                        .column
-                          %a(href="{% url 'v2.public.jobs' %}")
-                            - trans "Jobs"
+              .uk-width-1-6.uk-float-left
+                %a(href="" uk-icon="icon: twitter")                                    
+            .uk-width-1-1.uk-child-width-auto(uk-grid)
+                .
+                  %a(href="{% url 'v2.public.about' %}")
+                    - trans "About"
+                .
+                  %a(href="{% url 'v2.public.ureporters' %}")
+                    - trans "Engagement"
 
-                      - for custom_page in additional_menu|slice:":3"
-                        .column
-                          %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
-                            {{custom_page.title}}
+                - if org|config:"has_jobs"
+                  .
+                    %a(href="{% url 'v2.public.jobs' %}")
+                      - trans "Jobs"
 
-                  .column.is-three-fifths
-                    .columns
-                      .column
-                        .columns.is-mobile.footer-big-nav
-                          .column.is-half
-                            .link
-                              - trans "Opinions"
-                          .column.is-half
-                            .link
-                              - trans "Stories"
-                      .column
-                        .columns.is-mobile.footer-extra-nav
-                          .column.is-half
-                            %span.icon
-                              %i.fas.fa-search
-                            - trans "Search"
+                - for custom_page in additional_menu|slice:":3"
+                  .
+                    %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
+                      {{custom_page.title}}
 
-                          .column.footer-social-media
-                            %span.icon
-                              %i.fab.fa-facebook-f
-                          .column.footer-social-media
-                            %span.icon
-                              %i.fab.fa-twitter
+                .uk-width-1-3(uk-grid)
+                  .uk-width-1-6
+                  .uk-width-1-6
+                  .uk-width-1-6
+                  .uk-width-1-6
 
 
-            .columns.is-hidden-mobile#ureport-footer-desktop
-              .column.is-three-fifths
-                .columns
-                  .column.is-full
-                    .footer-logo
-                      %a(href="{% url 'v2.public.index' %}") 
-                        {% thumbnail org.logo "230x86" format="PNG" as im %}
-                        %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
-                        {% endthumbnail %}
-                .columns.footer-small-nav
-                  .column
-                    %a(href="{% url 'v2.public.about' %}")
-                      - trans "About"
-                  .column
-                    %a(href="{% url 'v2.public.ureporters' %}")
-                      - trans "Engagement"
-
-                  - if org|config:"has_jobs"
-                    .column
-                      %a(href="{% url 'v2.public.jobs' %}")
-                        - trans "Jobs"
-
-                  - for custom_page in additional_menu|slice:":3"
-                    .column
-                      %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
-                        {{custom_page.title}}
-
-              .column.is-two-fifths
-                .columns.footer-big-nav
-                  .column.is-two-fifths.is-offset-2
-                    .link.is-pulled-right
-                      %a(href="{% url 'v2.public.opinions' %}")
-                        - trans "Opinions"
-                  .column.is-two-fifths
-                    .link.is-pulled-right
-                      %a(href="{% url 'v2.public.stories' %}")
-                        - trans "Stories"
-                .columns.footer-countries-nav
-                  .column.is-pulled-right
-                    .icon
-                      %i.fas.fa-globe-africa
-                    .icon
-                      %i.fas.fa-chevron-circle-up
-                    .is-inline
-                      -trans "SELECT YOUR COUNTRY"
-                .columns.footer-extra-nav
-                  .column
-                    .is-pulled-right
-                      - trans "Search"
-                    .icon.is-pulled-right
-                      %i.fas.fa-search
-                  .column.is-1.is-offset-1.is-pulled-right.footer-social-media
-                    %span.icon.is-pulled-right
-                      %i.fab.fa-facebook-f
-                  .column.is-1.is-pulled-right.footer-social-media
-                    %span.icon.is-pulled-right
-                      %i.fab.fa-twitter
-  
-
-    %section.section.is-paddingless.is-marginless(style="background:#ff0;height:15px")
-    %section.section.is-paddingless.is-marginless(style="height:0px")
-      .modal.export-modal
+    %section.uk-section.uk-padding-remove(style="background:#ff0;height:15px")
+    %section.uk-section.uk-padding-remove(style="height:0px")
+      .modal.export-modal(uk-modal)
         .modal-background
         .modal-content
           .columns.export-modal-header
@@ -473,6 +348,8 @@
     ga('send', 'pageview');
 
   </script>
+  <script src="{{ STATIC_URL }}js/uikit.js"></script>
+  <script src="{{ STATIC_URL }}js/uikit-icons.js"></script>
   <script src="{{ STATIC_URL }}/js/leaflet.js"></script>
   <script src="{{ STATIC_URL }}js/highcharts.js"></script>
   <script src="{{ STATIC_URL }}js/highcharts-more.js"></script>

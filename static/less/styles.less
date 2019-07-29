@@ -181,7 +181,7 @@ a {
 
 #ureport-footer-desktop {
   margin: 0;
-  padding: 4rem 7.5rem 4rem 7.5rem;;
+  padding: 4rem 7.5rem 4rem 7.5rem;
   font-family: @headline-font;
   background-color: #FFF;
   color: #000;  
@@ -1285,49 +1285,7 @@ each(range(15), {
 
 }
 
-.countries-overlay {
-  background-color: #000;
-  position: absolute;
-  top: 120px;
-  z-index:20;
-  padding:0 0 4rem 0;
 
-  overflow-y: hidden;
-	max-height: 750px;
-
-	transition-property: all;
-	transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-  
-  &.closed {
-    max-height: 0;
-    padding: 0;
-  }
-
-  .main-logo {
-    img {
-    background-color: #FFF;
-    }
-  }
-  
-  .close {
-    display: block;
-    float: right;
-    font-size: 3rem;
-    font-family: @headline-font;
-    border-radius: 50%;
-    border: 5px solid #fff;
-    color: #FFF;
-    line-height: 4rem;
-    width: 5rem;
-    height: 5rem;
-    text-align: center;
-    margin-top: 1rem;
-    margin-right: -2.5rem;
-    padding: 0;
-    background-color: transparent;
-  }
-}
 
 .content-bg-1 {
   width: 50%;
