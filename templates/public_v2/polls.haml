@@ -162,13 +162,13 @@
           .uk-width-1-3
             %ul.uk-iconnav
               %li
-                %a(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}" uk-icon="icon: mail; ratio: 1.5")
-              %li
-                %a(uk-icon="icon: whatsapp; ratio: 1.5" href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                %a(uk-icon="icon: facebook; ratio: 1.5" href="" data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
               %li
                 %a(uk-icon="icon: twitter; ratio: 1.5" href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
               %li
-                %a(uk-icon="icon: facebook; ratio: 1.5" href="" data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                %a(uk-icon="icon: whatsapp; ratio: 1.5" href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+              %li
+                %a(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}" uk-icon="icon: mail; ratio: 1.5")
 
        - if forloop.counter|divisibleby:2
          .uk-width-1-2.block-content(class="for{{ forloop.counter0}}")
