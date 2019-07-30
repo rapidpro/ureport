@@ -15,6 +15,8 @@ initMap = (id, geojson, question, districtZoom, wardZoom, colorsList=[]) ->
   overallResults = null
   countryResults = null
 
+  topBoundary = null
+  
   topCategory = null
   otherCategory = null
   displayOthers = false
