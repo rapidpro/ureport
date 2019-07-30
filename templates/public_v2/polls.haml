@@ -98,8 +98,8 @@
         TOTAL RESPONSES
       .inside-content-block.poll-map-block
         .poll-map{ data-question: "{{ top_question.id }}", id: "map-{{ top_question.id }}" }
-          .loading-placeholder{id:"map-{{ top_question.id }}-placeholder"}
-             %img{src:"{{ STATIC_URL }}img/loading.gif"}     
+          .uk-position-center.loading-placeholder{id:"map-{{ top_question.id }}-placeholder"}
+            .(uk-spinner="ratio: 4.5")
 
   - for question in latest_poll.get_questions
    .poll-question-block.uk-margin-remove(id="question-id-{{question.id}}" uk-grid)
@@ -119,18 +119,18 @@
        .uk-width-1-2.block-content
          .(uk-grid)
           .uk-width-2-3
-            .uk-button-group(uk-switcher="animation: uk-animation-fade; toggle: > *")
+            #polls-tab-buttons.uk-button-group(uk-switcher="animation: uk-animation-fade; toggle: > *")
               - if question.is_open_ended
-                %button.uk-button.uk-button-default
+                %button.uk-button.uk-button-default.left-most.right-most
                   -trans "Keywords"
               -else
-                %button.uk-button.uk-button-default
+                %button.uk-button.uk-button-default.left-most
                   All
                 %button.uk-button.uk-button-default
                   Age
                 %button.uk-button.uk-button-default
                   Gender
-                %button.uk-button.uk-button-default
+                %button.uk-button.uk-button-default.right-most
                   State
                 .uk-padding-remove(uk-dropdown="mode:click;" data-question="{{question.id}}")
                     %ul#states-selector.uk-list.uk-list-striped.uk-height-medium.uk-overflow-auto
@@ -160,7 +160,7 @@
                     .poll-question-graph-locations.has-highcharts(id="graph-locations-question-{{question.id}}" data-question="{{question.id}}")
 
           .uk-width-1-3
-            %ul.uk-iconnav
+            %ul.uk-iconnav.social-sharing
               %li
                 %a(uk-icon="icon: facebook; ratio: 1.5" href="" data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
               %li
