@@ -26,9 +26,30 @@ initMap = (id, geojson, question, districtZoom, wardZoom, colorsList=[]) ->
   colors = colorsList
 
   if not colors or colors.length != 11
-    colors = ['rgb(221, 221, 221)','rgb(200, 214, 203)','rgb(179, 207, 185)','rgb(158, 201, 167)','rgb(137, 194, 149)','rgb(117, 188, 132)','rgb(96, 181, 114)','rgb(75, 174, 96)','rgb(54, 168, 78)','rgb(33, 161, 60)','rgb(13, 155, 43)']
+    colors = ['rgb(221, 221, 221)',
+              #'rgb(200, 214, 203)',
+              'rgb(179, 207, 185)',
+              #'rgb(158, 201, 167)',
+              'rgb(137, 194, 149)',
+              #'rgb(117, 188, 132)',
+              'rgb(96, 181, 114)',
+              #'rgb(75, 174, 96)',
+              'rgb(54, 168, 78)',
+              #'rgb(33, 161, 60)',
+              'rgb(13, 155, 43)']
 
-  breaks = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+  breaks = [0, 
+            #10, 
+            20, 
+            #30, 
+            40, 
+            #50, 
+            60, 
+            
+            #70, 
+            80, 
+            #90, 
+            100]
 
   visibleStyle = (feature) ->
     return {
@@ -66,7 +87,7 @@ initMap = (id, geojson, question, districtZoom, wardZoom, colorsList=[]) ->
       upper = breaks[idx]
 
       if topBoundary
-        div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i> " + upper + "% " +  window.string_of + " " + window.string_the + " " + topBoundary.label + " " + window.string_total + "<br/>"
+        div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i><br/>" ## + upper + "<b>%</> <br/>" ##+  window.string_of + " " + window.string_the + " " + topBoundary.label + " " + window.string_total + "<br/>"
       i++
 
     return div

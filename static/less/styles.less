@@ -9,6 +9,7 @@
 @light-blue: #40B5E5;
 
 @qsn-colors-list: #8750A1, #FED100, #3FB5E5;
+@font-colors-list: #FFF, #000, #FFF;
 
 
 
@@ -870,7 +871,14 @@ a {
 each(range(15), {
   .for@{value} {
     background-color: extract(@qsn-colors-list, mod(@value, length(@qsn-colors-list)) + 1);
-  }  
+    .right-zone, .left-zone, .question-title {
+      color: extract(@font-colors-list, mod(@value, length(@font-colors-list)) + 1);
+    }  
+
+    .question-line {
+      border-color: extract(@font-colors-list, mod(@value, length(@font-colors-list)) + 1);
+    }
+  }
 });
 }
 
