@@ -119,7 +119,7 @@
        .uk-width-1-2.block-content
          .(uk-grid)
           .uk-width-2-3
-            #polls-tab-buttons.uk-button-group(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#graph-tabs")
+            #polls-tab-buttons.uk-button-group(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#graph-tabs-{{question.id}}")
               - if question.is_open_ended
                 %button.uk-button.uk-button-default.left-most.right-most
                   -trans "Keywords"
@@ -130,7 +130,7 @@
                   Age
                 %button.uk-button.uk-button-default
                   Gender
-                %button.uk-button.uk-button-default.right-most(id="#states-dropdown-{{question.id}}" type="button")
+                %button.uk-button.uk-button-default.right-most(id="states-dropdown-{{question.id}}" type="button")
                   State
                 .uk-padding-remove(uk-dropdown="mode:click;" data-question="{{question.id}}")
                     %ul#states-selector.uk-list.uk-list-striped.uk-height-medium.uk-overflow-auto
@@ -149,25 +149,25 @@
                 %a(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}" uk-icon="icon: mail; ratio: 1.5")
 
           .uk-width-1-1
-            %ul#graph-tabs.uk-switcher
+            %ul.uk-switcher.graph-tabs(id="graph-tabs-{{question.id}}")
               - if question.is_open_ended
-                %li
+                %li.keywords-graph(id="keywords-tab-{{question.id}}")
                   .tab-content.is-active(data-content='keywords-chart-{{question.id}}')
                     .poll-question-graph-keywords(id="graph-keywords-question-{{question.id}}" data-question="{{question.id}}")
               -else
-                %li
+                %li.all-graph(id="all-tab-{{question.id}}")
                   .tab-content.is-active(data-content='all-chart-{{question.id}}')
-                    .poll-question-graph-all.has-highcharts(id="graph-all-question-{{question.id}}" data-question="{{question.id}}")
-                %li
+                    .poll-question-graph-all.has-graph(id="graph-all-question-{{question.id}}" data-question="{{question.id}}")
+                %li.age-graph(id="age-tab-{{question.id}}")
                   .tab-content.is-active(data-content='age-chart-{{question.id}}')
-                    .poll-question-graph-age.has-highcharts(id="graph-age-question-{{question.id}}" data-question="{{question.id}}")
-                %li
+                    .poll-question-graph-age.has-graph(id="graph-age-question-{{question.id}}" data-question="{{question.id}}")
+                %li.gender-graph(id="gender-tab-{{question.id}}")
                   .tab-content.is-active(data-content='gender-chart-{{question.id}}')
-                    .poll-question-graph-gender.has-highcharts(id="graph-gender-question-{{question.id}}" data-question="{{question.id}}")
+                    .poll-question-graph-gender.has-graph(id="graph-gender-question-{{question.id}}" data-question="{{question.id}}")
                   
-                %li(id="locations-tab-{{question.id}}")
+                %li.locations-graph(id="locations-tab-{{question.id}}")
                   .tab-content.is-active(data-content='locations-chart-{{question.id}}')
-                    .poll-question-graph-locations.has-highcharts(id="graph-locations-question-{{question.id}}" data-question="{{question.id}}")
+                    .poll-question-graph-locations.has-graph(id="graph-locations-question-{{question.id}}" data-question="{{question.id}}")
 
 
        - if forloop.counter|divisibleby:2
@@ -340,12 +340,12 @@
       $(this).toggleClass('rotation');
       $(".polls-category-list").addClass("uk-hidden");
       $("#search-input input").focus();
-
     });
 
     $(".state-selector").on('click', function(event) {
       event.stopPropagation();
       var locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+      
       if(locationIds.length < 5) {
         $(this).toggleClass('is-selected');
       } else if ($(this).hasClass('is-selected')) {
@@ -353,30 +353,29 @@
       } else {
         return
       }
-        locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+      locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
 
-        var question = $(this).parent().parent().attr("data-question");
-        var results = Window.locations_stats[question];
+      var question = $(this).parent().parent().attr("data-question");
+      var results = Window.UreportStats["locations-" + question];
 
-        var segments = [];
-        var colors = ["#E3002B", "#050E28", "#FED100", "#3FB5E5", "#FF8200", "#009316"];
-        var categories_by_segment = {};
+      var segments = [];
+      var colors = ["#E3002B", "#050E28", "#FED100", "#3FB5E5", "#FF8200", "#009316"];
+      var categories_by_segment = {};
 
-
-        var locationsResults = [];
-        for (i=0; i<results.length; i++){
-          result = results[i];
-          if(locationIds.includes(result.boundary)) {
-            locationsResults.push(result);
-          }
+      var locationsResults = [];
+      for (i=0; i<results.length; i++){
+        result = results[i];
+        if(locationIds.includes(result.boundary)) {
+          locationsResults.push(result);
         }
+      }
 
-        for (i=0; i<locationsResults.length; i++){
-          result = locationsResults[i];
-          segment = result.label;
-          if(locationIds.includes(result.boundary)) {
+      for (i=0; i<locationsResults.length; i++) {
+        result = locationsResults[i];
+        segment = result.label;
+        if(locationIds.includes(result.boundary)) {
           segments.push(segment);
-          for (j=0; j<result.categories.length; j++){
+          for (j=0; j<result.categories.length; j++) {
             category = result.categories[j];
             label = category.label.trim().toUpperCase();
             if(!(label in categories_by_segment)) {
@@ -384,75 +383,73 @@
             }
             categories_by_segment[label][segment] = (result.set == 0) ? 0 : category.count * 100 / result.set;
           }
-          }
         }
-
-
-        var data_by_segment = {};
+      }
+      
+      var data_by_segment = {};
+      for (i=0; i<segments.length; i++){
+        segment = segments[i];
+        data_by_segment[segment] = [];
+      }
+      var percentage_lookup = {};
+      for (key in categories_by_segment) {
+        percentage_lookup[key] = {}
         for (i=0; i<segments.length; i++){
           segment = segments[i];
-          data_by_segment[segment] = [];
+          count = categories_by_segment[key][segment];
+          percentage = (count == 0) ? 0 : count; 
+          data_by_segment[segment].push(percentage);
         }
-        var percentage_lookup = {};
-        for (key in categories_by_segment) {
-          percentage_lookup[key] = {}
-          for (i=0; i<segments.length; i++){
-            segment = segments[i];
-            count = categories_by_segment[key][segment];
-            percentage = (count == 0) ? 0 : count; 
-            data_by_segment[segment].push(percentage);
-          }
-        }
-        series = [];
-        for (key in data_by_segment) {
-          series.push({name: key, data: data_by_segment[key]})
-        }
-        Highcharts.chart('graph-locations-question-' + question, {
-          chart: {
-            type: 'column'
-          },
+      }
+      series = [];
+      for (key in data_by_segment) {
+        series.push({name: key, data: data_by_segment[key]})
+      }
+      
+      Highcharts.chart('graph-locations-question-' + question, {
+        chart: {
+          type: 'column'
+        },
+        title: {
+          text: null,
+        },
+        xAxis: {
+          categories: Object.keys(categories_by_segment),
+          crosshair: true
+        },
+        yAxis: {
+          min: 0,
+          max: 100,
           title: {
             text: null,
-          },
-          xAxis: {
-            categories: Object.keys(categories_by_segment),
-            crosshair: true
-          },
-          yAxis: {
-            min: 0,
-            max: 100,
-            title: {
-              text: null,
-            }
-          },
-          tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-              '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-          },
-          plotOptions: {
-            column: {
-              pointPadding: 0.2,
-              borderWidth: 0
-            }
-          },
-          credits: {
-            enabled: false
-          },            
-          series: series,
-        });
+          }
+        },
+        tooltip: {
+          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
+          footerFormat: '</table>',
+          shared: true,
+          useHTML: true
+        },
+        plotOptions: {
+          column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+          }
+        },
+        credits: {
+          enabled: false
+        },            
+        series: series,
+      });
 
-        if($("#states-dropdown-" + question).hasClass('uk-open')) {
-          $("#states-dropdown-" + question).addClass('uk-active')
-        }
-        $('#locations-tab-' + question).addClass('uk-active');
-
-      
-      
-    })
+      if($("#states-dropdown-" + question).hasClass('uk-open')) {
+        $("#states-dropdown-" + question).addClass('uk-active')
+      }
+      $('#locations-tab-' + question).addClass('uk-active');
+    
+    });
 
     $(".facebook-share").on("click", function() {
       var question = $(this).attr("data-question");
@@ -470,108 +467,115 @@
     });
 
     $("#age-chart").each(function(){
-           var data = {{ age_stats|safe }};
+      var data = {{ age_stats|safe }};
 
-           {% if is_rtl_org %}
-           data.reverse();
-           {% endif %}
+      {% if is_rtl_org %}
+      data.reverse();
+      {% endif %}
 
-           var categories = [];
+      var categories = [];
 
-           for (i=0; i<data.length; i++) {
-             categories.push(data[i].name)
-           }
+      for (i=0; i<data.length; i++) {
+        categories.push(data[i].name)
+      }
 
-           $('#age-chart').highcharts({
-             chart: {
-               type: 'column',
-               backgroundColor: '{{ org|config:"primary_color" }}',
-               spacing: [ 3, 5, 3, 5],
-               height: "30%",
-             },
-             credits: {
-               enabled: false
-             },
-             legend: {
-               enabled: false
-             },
-             title: {
-                 text: null
-             },
-             subtitle: {
-                 text: null
-             },
-             xAxis: {
-               categories: categories,
-               labels : {
-                   rotation: 0,
-                   style: {
-                     fontSize: '0.85rem',
-                     fontFamily: "SharpSansDisplayBold",
-                     color: "#000",
-                 }
-               },
-               minorTickLength: 0,
-               tickLength: 0
-             },
-             yAxis: {
-               min: 0,
-               max: 100,
-               labels: {
-                 enabled: false
-               },
-               visible: false,
-               gridLineWidth: 0,
-               title: {
-                 text: null
-               }
-             },
-             tooltip: {
-               enabled: false
-             },
-             plotOptions: {
-                 column: {
-                     color: '{{ org|config:"primary_color" }}',
-                     pointPadding: 0.2,
-                     pointWidth: 30,
-                     borderWidth: 0,
-                     dataLabels:  {
-                       enabled: true,
-                       style: {
-                         fontFamily: "SharpSansDisplayBold",
-                       },
-                       color: '{{ org|config:"primary_color" }}',
-                       verticalAlign:"bottom",
-                       format: '<b>{point.y:.0f}%</b>'
-                     }
-                 }
-             },
-             series: [ {name: 'Age' , data: data } ]
-           });
-         });
+      $('#age-chart').highcharts({
+        chart: {
+          type: 'column',
+          backgroundColor: '{{ org|config:"primary_color" }}',
+          spacing: [ 3, 5, 3, 5],
+          height: "30%",
+        },
+        credits: {
+          enabled: false
+        },
+        legend: {
+          enabled: false
+        },
+        title: {
+          text: null
+        },
+        subtitle: {
+          text: null
+        },
+        xAxis: {
+          categories: categories,
+          labels : {
+            rotation: 0,
+            style: {
+              fontSize: '0.85rem',
+              fontFamily: "SharpSansDisplayBold",
+              color: "#000",
+            }
+          },
+          minorTickLength: 0,
+          tickLength: 0
+        },
+        yAxis: {
+          min: 0,
+          max: 100,
+          labels: {
+            enabled: false
+          },
+          visible: false,
+          gridLineWidth: 0,
+          title: {
+            text: null
+          }
+        },
+        tooltip: {
+          enabled: false
+        },
+        plotOptions: {
+          column: {
+            color: '{{ org|config:"primary_color" }}',
+            pointPadding: 0.2,
+            pointWidth: 30,
+            borderWidth: 0,
+            dataLabels:  {
+              enabled: true,
+              style: {
+                fontFamily: "SharpSansDisplayBold",
+              },
+              color: '{{ org|config:"primary_color" }}',
+              verticalAlign:"bottom",
+              format: '<b>{point.y:.0f}%</b>'
+            }
+          }
+        },
+        series: [ {name: 'Age' , data: data } ]
+      });
+    });
 
 
 
     $(".screenshot-capture").on("click", function() {
-        var question = $(this).attr("data-question");
-        $(".export-modal-progress").show();
-        $(".export-modal-content").hide();
-
-        $('.modal').toggleClass('is-active');
-        var region = document.body.querySelector("#question-id-" + question);
-
-        html2canvas(region).then(canvas => {
-          var imgFile = canvas.toDataURL("image/png");
-          $("img.screenshot-rendered").attr("src", imgFile);
-          $("a.screenshot-link").attr("href", imgFile);
-          $("a.screenshot-link").attr("download", "share-export-screenshot.png");
-          $(".export-modal-progress").hide();
-          $(".export-modal-content").show();
-        });
+      var question = $(this).attr("data-question");
+      $(".export-modal-progress").show();
+      $(".export-modal-content").hide();
+      $('.modal').toggleClass('is-active');
+      var region = document.body.querySelector("#question-id-" + question);
+      html2canvas(region).then(canvas => {
+        var imgFile = canvas.toDataURL("image/png");
+        $("img.screenshot-rendered").attr("src", imgFile);
+        $("a.screenshot-link").attr("href", imgFile);
+        $("a.screenshot-link").attr("download", "share-export-screenshot.png");
+        $(".export-modal-progress").hide();
+        $(".export-modal-content").show();
+      });
     });
 
 
     $(document).ready(function() {
+
+      $(".uk-switcher").each(function(k, element){
+        console.log(k);
+        console.log(element);
+
+        UIkit.switcher(element).show(1);
+        UIkit.switcher(element).show(0);
+      });
+
       $(document).mouseup(function (e){
         var container = $(".dropdown-menu, .dropdown-trigger");
         if (!container.is(e.target) && container.has(e.target).length === 0){
@@ -648,22 +652,17 @@
 
 
     $(function(){
-      $(".poll-question-graph-all").each(function(){
-        var question = $(this).attr("data-question");
-        $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
+      $(".graph-tabs li.all-graph").on('beforeshow', function(event) {
+        var graphDiv = $("#" + event.target.id).children().children('.has-graph');
+        var question = graphDiv.attr("data-question");
+        var result = Window.UreportStats['all-' + question];
+        var results = result[0];
 
-          if(!result){
-            return;
-          }
+        var categories = [];
+        var data = [];
+        var colors = ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1"];
 
-          var results = result[0];
-
-          var categories = [];
-          var data = [];
-          var colors = ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1"];
-
-
-          if (results.categories.length > 0) {
+        if (results.categories.length > 0) {
           var total = 0;
           for (i=0; i<results.categories.length; i++){
             category = results.categories[i];
@@ -680,68 +679,278 @@
               data.push({y: percentage, color: colors[i%colors.length]});
             }
           }
-          } 
+        }
 
-          (function (H) {
-
-          var pendingRenders = [];
-      
-          // https://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/7557433#7557433
-          function isElementInViewport(el) {
-          
-              var rect = el.getBoundingClientRect();
-      
-              return (
-                  rect.top >= 0 &&
-                  rect.left >= 0 &&
-                  rect.bottom <= (
-                      window.innerHeight ||
-                      document.documentElement.clientHeight
-                  ) &&
-                  rect.right <= (
-                      window.innerWidth ||
-                      document.documentElement.clientWidth
-                  )
-              );
-          }
-      
-          H.wrap(H.Series.prototype, 'render', function deferRender(proceed) {
-              var series = this,
-                  renderTo = this.chart.container.parentNode;
-      
-              // It is appeared, render it
-              if (isElementInViewport(renderTo) || !series.options.animation || series.chart.userOptions.chart.type == 'packedbubble') {
-                  proceed.call(series);
-      
-              // It is not appeared, halt renering until appear
-              } else  {
-                  pendingRenders.push({
-                      element: renderTo,
-                      appear: function () {
-                          proceed.call(series);
-                      }
-                  });
+        Highcharts.chart('graph-all-question-' + question, {
+          chart: {
+            type: 'bar'
+          },
+          title: {
+            text: null,
+          },
+          xAxis: {
+            categories: categories,
+            title: {
+              text: null
+            },
+            labels: {
+              enabled: false,
+            }
+          },
+          yAxis: {
+            min: 0,
+            max: 100,
+            visible: false,
+            title: {
+              text: null,
+            },
+            labels: {
+              enabled: false,
+            }
+          },
+          tooltip: {
+          },
+          plotOptions: {
+            bar: {
+              dataLabels: {
+                enabled: true,
+                inside: true,
+                align: "left",
+                formatter: function() {
+                  return this.x
+                }
               }
-          });
-      
-          function recalculate() {
-              pendingRenders.forEach(function (item) {
-                  if (isElementInViewport(item.element)) {
-                      item.appear();
-                      H.erase(pendingRenders, item);
-                  }
-              });
-          }
-      
-          if (window.addEventListener) {
-              ['DOMContentLoaded', 'load', 'scroll', 'resize']
-                  .forEach(function (eventType) {
-                      addEventListener(eventType, recalculate, false);
-                  });
-          }
-      
-          }(Highcharts));
+            }
+          },
+          legend: {
+            enabled: false,
+          },
+          credits: {
+            enabled: false
+          },
+          series: [{
+            data: data,
+          }]
+        });
+        
+      });
 
+      $(".graph-tabs li.age-graph").on('beforeshow', function(event) {
+        var graphDiv = $("#" + event.target.id).children().children('.has-graph');
+        var question = graphDiv.attr("data-question");
+        var results = Window.UreportStats['age-' + question];
+
+        var genders = [];
+        var colors = ["#E3002B", "#050E28", "#FED100", "#3FB5E5", "#FF8200", "#009316"];
+        var categories_by_gender = {}
+        var total_by_catedory = {};
+        
+        for (i=0; i<results.length; i++){
+          result = results[i];
+          gender = result.label;
+          genders.push(gender);
+          for (j=0; j<result.categories.length; j++){
+            category = result.categories[j];
+            label = category.label.trim().toUpperCase();
+            if(!(label in categories_by_gender)) {
+              categories_by_gender[label] = {};
+              total_by_catedory[label] = 0;
+            }
+            categories_by_gender[label][gender] = category.count;
+            total_by_catedory[label] += category.count;
+          }
+        }
+
+        var data_by_gender = {};
+        for (i=0; i<genders.length; i++){
+          gender = genders[i];
+          data_by_gender[gender] = [];
+        }
+        var percentage_lookup = {};
+
+        for (key in categories_by_gender) {
+          percentage_lookup[key] = {}
+          total_key = total_by_catedory[key];
+          for (i=0; i<genders.length; i++){
+            gender = genders[i];
+            count = categories_by_gender[key][gender];
+
+            percentage = (count == 0) ? 0 : count * 100 / total_key; 
+            data_by_gender[gender].push(percentage);
+          }
+        }
+
+        series = [];
+        for (key in data_by_gender) {
+          series.push({name: key, data: data_by_gender[key]})
+        }
+
+        Highcharts.chart('graph-age-question-' + question, {
+          chart: {
+            type: 'column'
+          },
+          title: {
+            text: null,
+          },
+          xAxis: {
+            categories: Object.keys(categories_by_gender),
+            crosshair: true
+          },
+          yAxis: {
+            min: 0,
+            max: 100,
+            title: {
+              text: null,
+            }
+          },
+          tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+              '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+          },
+          plotOptions: {
+            column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+            }
+          },
+          credits: {
+            enabled: false
+          },            
+          series: series,
+        });
+
+      });
+
+      $(".graph-tabs li.gender-graph").on('beforeshow', function(event) {
+        var graphDiv = $("#" + event.target.id).children().children('.has-graph');
+        var question = graphDiv.attr("data-question");
+        var results = Window.UreportStats['gender-' + question];
+        var genders = [];
+        var colors = ["#3FB5E5", "#FF8200"];
+
+        var categories_by_gender = {}
+        var total_by_catedory = {};
+        
+        for (i=0; i<results.length; i++){
+          result = results[i];
+          gender = result.label;
+          genders.push(gender);
+          for (j=0; j<result.categories.length; j++){
+            category = result.categories[j];
+            label = category.label.trim().toUpperCase();
+            if(!(label in categories_by_gender)) {
+              categories_by_gender[label] = {};
+              total_by_catedory[label] = 0;
+            }
+            categories_by_gender[label][gender] = category.count;
+            total_by_catedory[label] += category.count;
+          }
+        }
+
+        var data_by_gender = {};
+        for (i=0; i<genders.length; i++){
+          gender = genders[i];
+          data_by_gender[gender] = [];
+        }
+        var percentage_lookup = {};
+
+        for (key in categories_by_gender) {
+          percentage_lookup[key] = {}
+          total_key = total_by_catedory[key];
+          for (i=0; i<genders.length; i++){
+            gender = genders[i];
+            count = categories_by_gender[key][gender];
+            percentage = (count == 0) ? 0 : count * 100 / total_key; 
+            data_by_gender[gender].push(percentage);
+          }
+        }
+
+        series = [];
+        for (key in data_by_gender) {
+          series.push({name: key, data: data_by_gender[key]})
+        }
+
+        Highcharts.chart('graph-gender-question-' + question, {
+          chart: {
+            type: 'column'
+          },
+          title: {
+            text: null,
+          },
+          xAxis: {
+            categories: Object.keys(categories_by_gender),
+            crosshair: true
+          },
+          yAxis: {
+            min: 0,
+            max: 100,
+            title: {
+              text: null,
+            }
+          },
+          tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+              '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+          },
+          plotOptions: {
+            column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+            }
+          },
+          credits: {
+            enabled: false
+          },            
+          series: series,
+        });
+
+      });
+
+
+      $(".poll-question-graph-all").each(function(){
+        var question = $(this).attr("data-question");
+        $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
+
+          if(!result){
+            return;
+          }
+          if(!Window.UreportStats) {
+            Window.UreportStats = {}
+          }
+          Window.UreportStats["all-" + question] = result
+          var results = result[0];  
+
+          var categories = [];
+          var data = [];
+          var colors = ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1"];
+  
+          if (results.categories.length > 0) {
+            var total = 0;
+            for (i=0; i<results.categories.length; i++){
+              category = results.categories[i];
+              total += category.count;
+            }
+            var percentage_lookup = {};
+            for (i=0; i<results.categories.length; i++){
+              category = results.categories[i];
+              label = category.label.trim().toUpperCase();
+              categories.push(label);
+              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+              percentage_lookup[label] = Math.round(percentage);
+              if (parseInt(percentage_lookup[label])) {
+                data.push({y: percentage, color: colors[i%colors.length]});
+              }
+            }
+          }
+  
           Highcharts.chart('graph-all-question-' + question, {
             chart: {
               type: 'bar'
@@ -780,7 +989,6 @@
                   formatter: function() {
                     return this.x
                   }
-
                 }
               }
             },
@@ -794,7 +1002,7 @@
               data: data,
             }]
           });
-          
+
         });
       });
   
@@ -807,91 +1015,10 @@
             return;
           }
 
-          var results = result;
-          var genders = [];
-          var colors = ["#3FB5E5", "#FF8200", "#009316"];
-
-          var categories_by_gender = {}
-          var total_by_catedory = {};
-          
-          for (i=0; i<results.length; i++){
-            result = results[i];
-            gender = result.label;
-            genders.push(gender);
-            for (j=0; j<result.categories.length; j++){
-              category = result.categories[j];
-              label = category.label.trim().toUpperCase();
-              if(!(label in categories_by_gender)) {
-                categories_by_gender[label] = {};
-                total_by_catedory[label] = 0;
-              }
-              categories_by_gender[label][gender] = category.count;
-              total_by_catedory[label] += category.count;
-            }
+          if(!Window.UreportStats) {
+            Window.UreportStats = {}
           }
-
-          var data_by_gender = {};
-          for (i=0; i<genders.length; i++){
-            gender = genders[i];
-            data_by_gender[gender] = [];
-          }
-          var percentage_lookup = {};
-
-          for (key in categories_by_gender) {
-            percentage_lookup[key] = {}
-            total_key = total_by_catedory[key];
-            for (i=0; i<genders.length; i++){
-              gender = genders[i];
-              count = categories_by_gender[key][gender];
-
-              percentage = (count == 0) ? 0 : count * 100 / total_key; 
-              data_by_gender[gender].push(percentage);
-            }
-          }
-
-          series = [];
-          for (key in data_by_gender) {
-            series.push({name: key, data: data_by_gender[key]})
-          }
-
-          Highcharts.chart('graph-gender-question-' + question, {
-            chart: {
-              type: 'column'
-            },
-            title: {
-              text: null,
-            },
-            xAxis: {
-              categories: Object.keys(categories_by_gender),
-              crosshair: true
-            },
-            yAxis: {
-              min: 0,
-              max: 100,
-              title: {
-                text: null,
-              }
-            },
-            tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-            },
-            colors: colors,
-            plotOptions: {
-              column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-              }
-            },
-            credits: {
-              enabled: false
-            },            
-            series: series,
-          });
+          Window.UreportStats["gender-" + question] = result
 
         });
       });
@@ -900,176 +1027,87 @@
         var question = $(this).attr("data-question");
         var segment = {"age": "Age"}
         $.ajax({url:'/pollquestion/' + question + '/results/?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done(function(result){
-
           if(!result){
             return;
           }
-
-          var results = result;
-          var genders = [];
-          var colors = ["#E3002B", "#050E28", "#FED100", "#3FB5E5", "#FF8200", "#009316"];
-
-          var categories_by_gender = {}
-          var total_by_catedory = {};
-          
-          for (i=0; i<results.length; i++){
-            result = results[i];
-            gender = result.label;
-            genders.push(gender);
-            for (j=0; j<result.categories.length; j++){
-              category = result.categories[j];
-              label = category.label.trim().toUpperCase();
-              if(!(label in categories_by_gender)) {
-                categories_by_gender[label] = {};
-                total_by_catedory[label] = 0;
-              }
-              categories_by_gender[label][gender] = category.count;
-              total_by_catedory[label] += category.count;
-            }
+          if(!Window.UreportStats) {
+            Window.UreportStats = {}
           }
-
-          var data_by_gender = {};
-          for (i=0; i<genders.length; i++){
-            gender = genders[i];
-            data_by_gender[gender] = [];
-          }
-          var percentage_lookup = {};
-
-          for (key in categories_by_gender) {
-            percentage_lookup[key] = {}
-            total_key = total_by_catedory[key];
-            for (i=0; i<genders.length; i++){
-              gender = genders[i];
-              count = categories_by_gender[key][gender];
-
-              percentage = (count == 0) ? 0 : count * 100 / total_key; 
-              data_by_gender[gender].push(percentage);
-            }
-          }
-
-          series = [];
-          for (key in data_by_gender) {
-            series.push({name: key, data: data_by_gender[key]})
-          }
-
-          Highcharts.chart('graph-age-question-' + question, {
-            chart: {
-              type: 'column'
-            },
-            title: {
-              text: null,
-            },
-            xAxis: {
-              categories: Object.keys(categories_by_gender),
-              crosshair: true
-            },
-            yAxis: {
-              min: 0,
-              max: 100,
-              title: {
-                text: null,
-              }
-            },
-            tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f}%</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-            },
-            colors: colors,
-            plotOptions: {
-              column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-              }
-            },
-            credits: {
-              enabled: false
-            },            
-            series: series,
-          });
-          
+          Window.UreportStats["age-" + question] = result
         });
       });
     });
 
     $(".poll-question-graph-keywords").each(function(){
       var question = $(this).attr("data-question");
-
-      var question = $(this).attr("data-question");
       $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){      
-          if(!result){
-            return;
+        if(!result){
+          return;
+        }
+
+        var results = result[0];
+        var total = 0;
+        var data = [];
+        var colors = gradientFactory.generate({
+          from: '#DDDDDD',
+          to: '{{ org|config:"primary_color"}}',
+          stops: 10
+        });
+        
+        if (results.categories.length > 0) {
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            total += category.count;
           }
-
-          var results = result[0];
-          var total = 0;
-          var data = [];
-          var colors = gradientFactory.generate({
-            from: '#DDDDDD',
-            to: '{{ org|config:"primary_color"}}',
-            stops: 10
-          });
-          
-          if (results.categories.length > 0) {
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              total += category.count;
-            }
-            var percentage_lookup = {};
-            for (i=0; i<results.categories.length; i++){
-              category = results.categories[i];
-              label = category.label.trim().toUpperCase();
-              percentage = (category.count == 0) ? 0 : category.count * 100 / total;
-              percentage_lookup[label] = Math.round(percentage);
-              if (parseInt(percentage_lookup[label])) {
-                data.push({name: label, value: percentage, color: colors[Math.min(9, Math.floor(percentage/1.5))]})
-              } 
-            }
+          var percentage_lookup = {};
+          for (i=0; i<results.categories.length; i++){
+            category = results.categories[i];
+            label = category.label.trim().toUpperCase();
+            percentage = (category.count == 0) ? 0 : category.count * 100 / total;
+            percentage_lookup[label] = Math.round(percentage);
+            if (parseInt(percentage_lookup[label])) {
+              data.push({name: label, value: percentage, color: colors[Math.min(9, Math.floor(percentage/1.5))]})
+            } 
           }
-
-
-
-          Highcharts.chart('graph-keywords-question-' + question, {
-            chart: {
-              type: 'packedbubble',
-              height: '100%'
-            },
-            title: {
-              text: null,
-            },
-            tooltip: {
-              useHTML: true,
-              pointFormat: '<b>{point.name}:</b> {point.y}m CO<sub>2</sub>'
-            },
-            legend: {
-              enabled: false,
-            },
-            plotOptions: {
-              packedbubble: {
-                minSize: '20',
-                maxSize: '400',
-                zMin: 0,
-                zMax: 100,
-                dataLabels: {
-                  enabled: true,
-                  format: '{point.name}',
-                  style: {
-                    color: 'black',
-                    textOutline: 'none',
-                    fontWeight: 'normal'
-                  }
+        }
+        Highcharts.chart('graph-keywords-question-' + question, {
+          chart: {
+            type: 'packedbubble',
+            height: '100%'
+          },
+          title: {
+            text: null,
+          },
+          tooltip: {
+            useHTML: true,
+            pointFormat: '<b>{point.name}:</b> {point.y}m CO<sub>2</sub>'
+          },
+          legend: {
+            enabled: false,
+          },
+          plotOptions: {
+            packedbubble: {
+              minSize: '20',
+              maxSize: '400',
+              zMin: 0,
+              zMax: 100,
+              dataLabels: {
+                enabled: true,
+                format: '{point.name}',
+                style: {
+                  color: 'black',
+                  textOutline: 'none',
+                  fontWeight: 'normal'
                 }
               }
-            },
-            credits: {
-              enabled: false
-            },
-            series: [{
-              data: data
-            }]
+            }
+          },
+          credits: {
+            enabled: false
+          },
+          series: [{
+            data: data
+          }]
         });
       });
     });
@@ -1077,12 +1115,12 @@
     $(".poll-question-graph-locations").each(function(){
       var question = $(this).attr("data-question");
       var segment = {"location": "State"}
-        $.ajax({url:'/pollquestion/' + question + '/results/?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done(function(result){
-          if(!Window.locations_stats) {
-            Window.locations_stats = {}
-          }
-          Window.locations_stats[question] = result
-        });
+      $.ajax({url:'/pollquestion/' + question + '/results/?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done(function(result){
+        if(!Window.UreportStats) {
+          Window.UreportStats = {}
+        }
+        Window.UreportStats["locations-" + question] = result
+      });
     });
 
     $(function(){
