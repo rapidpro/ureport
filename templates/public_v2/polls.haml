@@ -104,7 +104,7 @@
   - for question in latest_poll.get_questions
    .poll-question-block.uk-margin-remove(id="question-id-{{question.id}}" uk-grid)
        - if not forloop.counter|divisibleby:2
-         .uk-width-1-2.block-content(class="for{{ forloop.counter0}}")
+         .uk-width-1-2.block-content(class="for{{ forloop.counter0}}" uk-scrollspy="cls:uk-animation-fade; delay:500")
            .(uk-grid)
              .uk-width-auto.question-number
                {{ forloop.counter }}
@@ -116,7 +116,7 @@
                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
                  {{ responded }} responded out of {{ polled }} polled
                {% endblocktrans %}     
-       .uk-width-1-2.block-content
+       .uk-width-1-2.block-content(uk-scrollspy="cls:uk-animation-fade; delay:500")
          .(uk-grid)
           .uk-width-2-3
             #polls-tab-buttons.uk-button-group(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#graph-tabs-{{question.id}}")
@@ -171,7 +171,7 @@
 
 
        - if forloop.counter|divisibleby:2
-         .uk-width-1-2.block-content(class="for{{ forloop.counter0}}")
+         .uk-width-1-2.block-content(class="for{{ forloop.counter0}}" uk-scrollspy="cls:uk-animation-fade; delay:500;")
            .(uk-grid)
              .uk-width-expand
                .question-line
