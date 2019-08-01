@@ -836,6 +836,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://guatemala.ureport.in/count/",
     ),
     dict(
+        name="Honduras",
+        host="//honduras.ureport.in",
+        flag="flag_hn.png",
+        is_static=True,
+        count_link="http://honduras.ureport.in/count/",
+    ),
+    dict(
         name="France",
         host="//france.ureport.in",
         flag="flag_fr.png",
@@ -848,6 +855,13 @@ PREVIOUS_ORG_SITES = [
         flag="flag_in.png",
         is_static=True,
         count_link="http://india.ureport.in/count/",
+    ),
+    dict(
+        name="Iraq",
+        host="//iraq.ureport.in",
+        flag="flag_iq.png",
+        is_static=True,
+        count_link="http://iraq.ureport.in/count/",
     ),
     dict(
         name="Ireland",
@@ -911,13 +925,6 @@ PREVIOUS_ORG_SITES = [
         flag="flag_tt.png",
         is_static=True,
         count_link="http://tt.ureport.in/count/",
-    ),
-    dict(
-        name="United Kingdom",
-        host="//uk.ureport.in",
-        flag="flag_uk.png",
-        is_static=True,
-        count_link="http://uk.ureport.in/count/",
     ),
     dict(
         name="Uzbekistan",
