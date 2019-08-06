@@ -1,6 +1,19 @@
 - extends "frame_v2.html"
 
-- load smartmin i18n thumbnail ureport
+- load smartmin i18n thumbnail ureport compress
+
+-block styles
+    - if is_rtl_org
+      - compress css
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css")
+        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+
+    -else
+      -compress css
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css")
+        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
 
 -block body-content
   %section.section.is-paddingless.is-marginless
