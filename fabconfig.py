@@ -23,8 +23,8 @@ config = dict(
     compress=True,
     region="eu-west-1",
     hosts=[
-        dict(name="report1", host="report1.ureport.in", ec2_id="i-05375dd10219ae352", beat=True),
-        dict(name="report2", host="report2.ureport.in", ec2_id="i-00a6e306e2139c753"),
+        dict(name="report1", host="report1.ureport.in", ec2_id="i-097e4a4877e9e4bd3", beat=True),
+        dict(name="report2", host="report2.ureport.in", ec2_id="i-03ad184efe5ede6f2"),
     ],
     elb=[
         dict(
