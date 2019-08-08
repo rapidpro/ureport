@@ -3,6 +3,12 @@
 @text-font: 'Roboto', sans-serif;
 @small-text-font: 'Montserrat', sans-serif;
 
+@SharpSansBold: SharpSansDisplayBold, sans-serif;
+@SharpSansMedium: SharpSansDisplayMedium, sans-serif;
+@Roboto: 'Roboto', sans-serif;
+@RobotoCondensed: 'Roboto Condensed', sans-serif;
+@MontSerrat: 'Montserrat', sans-serif;
+
 @bg-dark-blue: #050E28;
 @gold-yellow: #FED100;
 @green: #009A16;
@@ -34,9 +40,9 @@
     .pages-navbar {
         line-height: 5rem;
         vertical-align: middle;
+        font-family: @small-text-font;
         font-weight: bold;
-        font-size: 0.85rem;
-        font-variant-caps: titling-caps;
+        font-size: 0.75rem;
         color: #000;
     }
 
@@ -562,5 +568,13 @@
           font-size: 0.75rem;
           font-family: @small-text-font;
           padding: 0.5rem 1.5rem;
+      }
+  }
+
+  .locations-stats {
+      background-color: @bg-dark-blue;
+
+      .leaflet-container {
+          background-color: @bg-dark-blue;
       }
   }
