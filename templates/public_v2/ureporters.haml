@@ -6,82 +6,128 @@
   .booklet-bg
   .booklet-bg-content
     .page-title-block
-      .columns
-        .column.page-title
+      .uk-grid-match(uk-grid)
+        .uk-width-1-2.page-title
           Engagement
+
+  .engagemment-top-graph-block
+    .(uk-grid)
+      .uk-width-1-2.block-content(style="background:#000; color:#FFF;")
+        .engagement-page-yellow-text.registration-stats-labels
+          At a glance
+        .registration-stats-numbers.uk-flex-inline
+          .signup-part
+            .part-count
+              1,893
+            .part-label
+              SIGN-UPS
+          .response-rate-part
+            .part-count
+              21%
+            .part-label
+              AVG RESPONSE RATE
+        .registration-stats-counts.uk-flex-inline
+          .part-count.engagement-page-yellow-text
+            68,392
+          .part-label
+            - trans "TOTAL U-REPORTERS IN" 
+            {{ org.name|upper }}
+          -#
+            .uk-width-1-1
+              .local-count-label
+                
+                {{ org.name|upper }}
+              .local-count.engagement-page-yellow-text
+                {{ reporters|intcomma }}
+            .uk-width-1-1
+              .worldwide-count-label
+                - trans "U-REPORTERS WORLDWIDE:"
+              .worldwide-count.engagement-page-yellow-text
+                {{ global_counter|intcomma }}
+        .registration-stats-graphs(uk-grid)
+          .uk-width-1-3.uk-flex-inline
+            .gender-stats
+              .gender-stat-icon
+                %i.fas.fa-male
+              .gender-stat-percentage
+                60%
+              .gender-stat-count.engagement-page-yellow-text
+                12,461
+            .gender-stats
+              .gender-stat-icon
+                %i.fas.fa-female
+              .gender-stat-percentage
+                40%
+              .gender-stat-count.engagement-page-yellow-text
+                8,358
+          .uk-width-2-3.poll-age-graph
+            .age-stats{ id: "age-chart"}
+            
+      .uk-width-1-2.locations-stats.block-content
+        .ureport-location-map(id="ureport-location-map-id")
+          #ureport-location-map-id-placeholder.loading-placeholder
+            %img(src="{{ STATIC_URL }}img/loading.gif")
   
-  .block-row.engagemment-top-graph-block
-    .columns.is-paddingless.is-marginless
-      .column.is-one-third.block-content
+  .filters-block(style="background:#999; padding: 2rem 0;")
+    .uk-grid-match(uk-grid)
+      .uk-width-2-3
+        .filter-results-label
+          FILTER RESULTS:
+      .uk-width-1-3
+        .uk-button-group.time-filters-button
+          %button.uk-button.uk-button-secondary
+            90 Days
+          %button.uk-button.uk-button-secondary
+            6 Months
+          %button.uk-button.uk-button-secondary
+            12 Months
+
+  .engagemment-graphs-block
+    .uk-grid-match(uk-grid)
+      .uk-width-1-3.block-content
         .block-title
-          Poll Responses
+          Opinion Responses
         .block-description
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      .column.block-content
+
+      .uk-width-2-3.block-content
         .engagement-graph
           #poll-responses-graph
 
-  .homepage-reporters-stats
-    .columns.is-paddingless.is-marginless
-      .column
-        .local-count-label
-          - trans "U-REPORTERS IN"
-          {{ org.name|upper }}
-        .local-count
-          {{ reporters|intcomma }}
-        .worldwide-count-label
-          - trans "U-REPORTERS WORLDWIDE:"
-        .worldwide-count
-          {{ global_counter|intcomma }}
-      .column
-        .columns.has-graph
-          .column.is-1.graph-title
-            - trans "AGES"
-          .column.graph-chart
-            .age-stats{ id: "age-chart"}
 
-  .block-row
-    .columns.is-paddingless.is-marginless
-      .column.block-content
+    .uk-grid-match(uk-grid)
+      .uk-width-1-3.block-content
+        .block-title
+          Sign-Up Rate
+        .block-description
+
+      .uk-width-2-3.block-content
+        .engagement-graph
+          .contact-field-graph-registration{id: "graph-contact-field-registration"}
+            #graph-contact-field-registration-placeholder.loading-placeholder
+              %img{src:"{{ STATIC_URL }}img/loading.gif"}
+
+    .uk-grid-match(uk-grid)
+      .uk-width-1-3.block-content
         .block-title
           Response Rate
         .block-description
-          A sentence here that describes the graph
-        .block-box
-          .engagement-graph
-            #poll-response-rate-graph
 
-      .column.block-content.block-colored-bg-light-blue
-        .block-title
-          Is there any text on this page to explain any of this?
-        .block-text
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        .block-button
-          %a.read-more-button.button(href="#")
-            -trans "ACTION BUTTON"
+      .uk-width-2-3.block-content
+        .engagement-graph
+          #poll-response-rate-graph
 
-  .block-row
-    .columns.is-paddingless.is-marginless
-      .column.block-content.block-colored-bg-gold-yellow
+    .uk-grid-match(uk-grid)
+      .uk-width-1-3.block-content
         .block-title
-          Is there any text on this page to explain any of this?
-        .block-text
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        .block-button
-          %a.read-more-button.button(href="#")
-            -trans "ACTION BUTTON"
-      .column.block-content
-        .block-title
-          Users who responded - 12 months
+          Active users
         .block-description
-          A sentence here that describes how what these options mean to the work we are wanting to do together
-        .block-box
-          .engagement-graph
-            #contact-activity-graph
+
+      .uk-width-2-3.block-content
+        .engagement-graph
+          #contact-activity-graph
 
 -block extra-script
   {{ block.super }}
-  <script src="{{ STATIC_URL }}js/highcharts.js"></script>
   {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureporters.coffee" />
   {% endcompress %}

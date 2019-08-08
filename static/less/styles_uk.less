@@ -7,20 +7,24 @@
 @gold-yellow: #FED100;
 @green: #009A16;
 @light-blue: #40B5E5;
+@white: #FFF;
 
 @qsn-colors-list: #8750A1, #FED100, #3FB5E5;
+
+
+@content-padding-size: 8.75rem;
+
 
 
 .has-highcharts {
     width: 100%
 }
 
-#ureport-public-navbar-top {
-    padding: 0rem 7.5rem;
+#ureport-public-navbar-top-section {
+    padding: 0 @content-padding-size;
 
     nav {
-        background-color: #FFF;
-        padding: 1rem 0;
+        background-color: @white;
     }
 }
 
@@ -173,7 +177,6 @@
 .social-sharing {
     
     width: fit-content;
-    float: right;
 
     li {
         border: 1px solid #ddd;
@@ -417,3 +420,147 @@
     }
 
 }
+
+.leaflet-popup-content {
+    margin: 0.5rem;
+  }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 0;
+  }
+
+  .leaflet-popup-content-wrapper .popup-region-name {
+    color: #FFF;
+    font-size: 1.2rem;
+    line-height: 1rem;
+    font-variant-caps: all-small-caps;
+  }
+
+  .leaflet-popup-content-wrapper .popup-responses-number {
+    color: #FF0;
+    font-size: 1rem;
+    line-height: 0.75rem;
+    font-variant-caps: all-small-caps;
+  }
+  .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background-color: #000;
+  }
+  .leaflet-container a.leaflet-popup-close-button {
+    display:none;
+  }
+
+  .legend {
+    line-height: 12px;
+    color: #555;
+  }
+  .legend i {
+    width: 12px;
+    height: 12px;
+    float: left;
+    margin-right: 5px;
+    opacity: 0.7;
+  }
+
+  .engagemment-graphs-block {
+      background-color: @bg-dark-blue;
+      color: @white;
+      border: 1px solid @white;
+      border-left: 0px;
+
+     
+  }
+
+  .engagement-page-yellow-text {
+      color: @gold-yellow;
+
+  }
+
+  .engagemment-top-graph-block {
+    background-color: #fff;
+    
+    .registration-stats-labels {
+        font-size: 1.25rem;
+        font-family: @subheadlines-font;
+        font-weight: bold;
+        line-height: 1.5625rem;
+        font-style: italic;
+    }
+
+    .registration-stats-numbers {
+        margin: 1rem 0;
+        .signup-part {
+            border-right: 1px solid @white;
+            padding-right: 3rem;
+            margin-right: 3rem;
+
+        }
+        
+        .signup-part, .response-rate-part {
+            .part-count {
+                font-size: 3.25rem;
+                color: #FFFFFF;	
+                font-family: @subheadlines-font
+            }
+
+            .part-label {
+
+            }
+        }
+    }
+
+    .registration-stats-counts {
+        margin: 2rem 0;
+        font-size: 1.125rem;
+        font-family: @subheadlines-font;
+        .part-label {
+            margin: 0 1rem;
+        }
+    }
+
+    .registration-stats-graphs {
+        padding: 1rem 0;
+
+        .poll-age-graph {
+            margin-top: auto;
+        }
+
+        div .gender-stats {
+            margin-right: 2rem;
+            text-align: center;
+            &:first-child {
+                border-right: 1px solid @white;
+
+                padding-right: 2rem;
+            }
+            .gender-stat-icon {
+                font-size: 3rem;
+            }
+
+            .gender-stat-percentage {
+                font-size: 1.5rem;
+            }
+            .gender-stat-count {
+                font-size: 1rem
+            }
+        }
+    }
+  }
+
+  .engagement-gender-graph {
+      display: flex;
+  }
+
+  .filter-results-label {
+      padding-left: 8.75rem; 
+      font-size: 1.25rem;
+      font-family: @headline-font;
+      margin: auto 0;
+  }
+
+  .time-filters-button {
+      button {
+          font-size: 0.75rem;
+          font-family: @small-text-font;
+          padding: 0.5rem 1.5rem;
+      }
+  }

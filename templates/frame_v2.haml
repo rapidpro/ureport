@@ -27,6 +27,7 @@
   %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png")
 
   %link(href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet")
+  %link(href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Condensed|Roboto:500&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet")
   %link(rel="stylesheet" href="{{ STATIC_URL }}css/leaflet.css")
   %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/jqcloud.css")
   %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/highcharts.css")
@@ -122,7 +123,8 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
-    %section.uk-section.uk-padding-remove#ureport-top-black(style="background:#000;height:15px")
+    %section.uk-section.uk-padding-remove#ureport-top-black(style="background:#000;height:14px")
+  
     .uk-width-auto.uk-margin-bottom.countries-overlay(uk-drop="mode: click; toggle:#select-country; offset: 100; pos:bottom-justify; boundary: #ureport-top-black; boundary-align:true; animation: uk-animation-slide-top-medium; duration: 500" style="display: none;")
       .uk-card.uk-card-body.uk-card-default
         .(uk-grid)
@@ -149,7 +151,7 @@
                        - else
                           %img{ src:"{{ STATIC_URL }}img/flags/flag_ar.png" }
                       -#   %img{ src:"{{ site.flag }}" }
-    %section#ureport-public-navbar-top.uk-section.uk-padding-remove-vertical
+    %section#ureport-public-navbar-top-section.uk-section.uk-padding-remove-vertical
       -block navbar
         %nav#public-other-header-navbar.uk-navbar-container(uk-navbar)
           .uk-navbar-left
@@ -297,26 +299,28 @@
                   .uk-width-1-6
 
 
-    %section.uk-section.uk-padding-remove(style="background:#ff0;height:15px")
+    
+    %section.uk-section.uk-padding-remove(style="background:#ff0;height:14px")
     %section.uk-section.uk-padding-remove(style="height:0px")
       .modal.export-modal(uk-modal)
         .modal-background
         .modal-content
-          .columns.export-modal-header
+         .uk-modal-dialog.uk-modal-body
+          .export-modal-header(uk-grid)
             .column
               Export and Share
             .column
               .button.close.is-pulled-right.export-modal-close
                 x
-          .columns.export-modal-progress
+          .export-modal-progress(uk-grid)
             .column
               %progress.progress.is-small(max="100")
                 15%
-          .columns.is-multiline.export-modal-content
+          .is-multiline.export-modal-content(uk-grid)
             .column.is-three-quarters
               Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!
             .column.is-one-quarter
-              %button.button.is-black.is-pulled-right
+              %button.uk-button.is-black.is-pulled-right
                 %a.screenshot-link(href="")
                   Download
             .column
