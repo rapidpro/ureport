@@ -1187,6 +1187,24 @@ class PollResult(models.Model):
                 % (ruleset, gender, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
             ] = 1
 
+        if state:
+            generated_counters[
+                "ruleset:%s:total-ruleset-polled:engagement:state:%s:date:%s"
+                % (ruleset, state, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
+            ] = 1
+
+        if district:
+            generated_counters[
+                "ruleset:%s:total-ruleset-polled:engagement:district:%s:date:%s"
+                % (ruleset, district, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
+            ] = 1
+
+        if ward:
+            generated_counters[
+                "ruleset:%s:total-ruleset-polled:engagement:ward:%s:date:%s"
+                % (ruleset, ward, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
+            ] = 1
+
         if category or (
             self.category is not None
             and self.category.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES
@@ -1206,6 +1224,28 @@ class PollResult(models.Model):
                         gender,
                         str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()),
                     )
+                ] = 1
+
+            if state:
+                generated_counters[
+                    "ruleset:%s:total-ruleset-responded:engagement:state:%s:date:%s"
+                    % (ruleset, state, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
+                ] = 1
+
+            if district:
+                generated_counters[
+                    "ruleset:%s:total-ruleset-responded:engagement:district:%s:date:%s"
+                    % (
+                        ruleset,
+                        district,
+                        str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()),
+                    )
+                ] = 1
+
+            if ward:
+                generated_counters[
+                    "ruleset:%s:total-ruleset-responded:engagement:ward:%s:date:%s"
+                    % (ruleset, ward, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
                 ] = 1
 
         if category:
