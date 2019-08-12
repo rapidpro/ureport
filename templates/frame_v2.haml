@@ -250,7 +250,7 @@
               .footer-logo
                 %a(href="{% url 'v2.public.index' %}") 
                   {% thumbnail org.logo "350x65" format="PNG" as im %}
-                  %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+                  %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
                   {% endthumbnail %}
             .uk-width-1-3
             .uk-width-1-3.uk-float-right(uk-grid)
