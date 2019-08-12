@@ -188,7 +188,7 @@
                     - trans "Join Now"
 
 
-        %nav#public-main-header-navbar.uk-navbar-container(uk-navbar style="border-bottom: 1px solid black;")
+        %nav#public-main-header-navbar.uk-navbar-container(uk-navbar style="border-bottom: 1px solid black; padding-bottom: 2rem;")
           .uk-navbar-center
             .uk-navbar-center-left.uk-margin-xlarge-right
               .uk-navbar-item.main-link
@@ -196,7 +196,7 @@
                   - trans "Opinions"
 
             %a.uk-navbar-item.uk-logo(href="{% url 'v2.public.index' %}") 
-              {% thumbnail org.logo "230x86" format="PNG" as im %}
+              {% thumbnail org.logo "350x65" format="PNG" as im %}
               %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
               {% endthumbnail %}
             .uk-navbar-center-right.uk-margin-xlarge-left
@@ -249,7 +249,7 @@
             .uk-width-1-3.uk-child-width-expand(uk-grid)
               .footer-logo
                 %a(href="{% url 'v2.public.index' %}") 
-                  {% thumbnail org.logo "230x86" format="PNG" as im %}
+                  {% thumbnail org.logo "350x65" format="PNG" as im %}
                   %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
                   {% endthumbnail %}
             .uk-width-1-3
