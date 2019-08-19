@@ -386,7 +386,7 @@ class Poll(SmartModel):
 
                     age_id = None
                     if born:
-                        age_id = age_dict.get(AgeSegment.get_age_segment_min_age(min(poll_year - int(born), 0)))
+                        age_id = age_dict.get(AgeSegment.get_age_segment_min_age(max(poll_year - int(born), 0)))
 
                     location_id = None
                     if ward:
@@ -403,7 +403,7 @@ class Poll(SmartModel):
                     if age_id:
                         stat_kwargs["age_segment_id"] = age_id
                     if gender_id:
-                        stat_kwargs["gender"] = gender_id
+                        stat_kwargs["gender_segment_id"] = gender_id
                     if location_id:
                         stat_kwargs["location_id"] = location_id
 
