@@ -340,6 +340,54 @@ def get_registration_stats(org):
     return json.dumps(categories)
 
 
+def get_reporter_registration_dates(org):
+    now = timezone.now()
+    one_year_ago = now - timedelta(days=365)
+    one_year_ago = one_year_ago - timedelta(one_year_ago.weekday())
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_on")}
+
+    interval_dict = dict()
+
+    for date_key, date_count in registered_on_counts.items():
+        parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d"))
+
+        # this is in the range we care about
+        if parsed_time > one_year_ago:
+            # get the week of the year
+            dict_key = parsed_time.strftime("%W")
+
+            if interval_dict.get(dict_key, None):
+                interval_dict[dict_key] += date_count
+            else:
+                interval_dict[dict_key] = date_count
+
+    # build our final dict using week numbers
+    categories = []
+    start = one_year_ago
+    while start < timezone.now():
+        week_dict = start.strftime("%W")
+        count = interval_dict.get(week_dict, 0)
+        categories.append(dict(label=start.strftime("%m/%d/%y"), count=count))
+
+        start = start + timedelta(days=7)
+    return categories
+
+
+def get_signups(org):
+    registrations = get_reporter_registration_dates(org)
+    return sum([elt.get("count", 0) for elt in registrations])
+
+
+def get_signup_rate(org):
+    new_signups = get_signups(org)
+    total = get_reporters_count(org)
+    return new_signups * 100 / total
+
+
 def get_ureporters_locations_stats(org, segment):
     parent = segment.get("parent", None)
     field_type = segment.get("location", None)
@@ -383,6 +431,24 @@ def get_ureporters_locations_stats(org, segment):
         dict(boundary=elt["osm_id"], label=elt["name"], set=location_counts.get(elt["osm_id"], 0))
         for elt in boundaries
     ]
+
+
+def get_average_response_rate(org):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    polled_stats = PollStats.objects.filter(org=org, date__gte=year_ago).aggregate(Sum("count"))
+    responded_stats = (
+        PollStats.objects.filter(org=org, date__gte=year_ago).exclude(category=None).aggregate(Sum("count"))
+    )
+
+    responded = responded_stats.get("count__sum", 0)
+    if responded is None:
+        responded = 0
+    polled = polled_stats.get("count__sum")
+    if polled is None or polled == 0:
+        return 0
+
+    return responded / polled
 
 
 def get_ureporters_locations_response_rates(org, segment):
