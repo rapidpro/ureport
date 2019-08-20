@@ -1,3 +1,8 @@
+v1.0.458
+----------
+ * Merge pull request #420 from rapidpro/contact-activity
+ * Merge pull request #419 from rapidpro/poll-stats
+
 v1.0.457
 ----------
  * Merge pull request #415 from rapidpro/fix-global-locations-data
