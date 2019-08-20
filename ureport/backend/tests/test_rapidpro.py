@@ -1096,7 +1096,7 @@ class RapidProBackendTest(UreportTest):
             ]
         )
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(7):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 1))
