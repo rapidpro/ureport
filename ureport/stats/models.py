@@ -1,6 +1,8 @@
 from dash.orgs.models import Org
 
 from django.db import models
+from django.db.models import Count, Sum
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from ureport.locations.models import Boundary
@@ -40,6 +42,11 @@ class PollStats(models.Model):
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
 
+    @classmethod
+    def get_engagement_opinion_responses(cls, org):
+        responses = PollStats.objects.filter(org=org).exclude(category=None).values("date").annotate(Sum("count"))
+        return {str(elt["date"].date()): elt["sum__count"] for elt in responses}
+
 
 class ContactActivity(models.Model):
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="contact_activities")
@@ -61,3 +68,11 @@ class ContactActivity(models.Model):
     class Meta:
         index_together = (("org", "contact"), ("org", "date"))
         unique_together = ("org", "contact", "date")
+
+    @classmethod
+    def get_activity(cls, org):
+        today = timezone.now().date()
+
+        activities = ContactActivity.objects.filter(org=org, date__lte=today).values("date").annotate(Count("id"))
+
+        return {str(elt["date"]): elt["id__count"] for elt in activities}

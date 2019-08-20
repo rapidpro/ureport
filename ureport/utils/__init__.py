@@ -13,7 +13,7 @@ from dash.orgs.models import Org
 from dash.utils import datetime_to_ms
 from django.conf import settings
 from django.core.cache import cache
-from django.db.models import Sum, Count
+from django.db.models import Sum
 from django.utils import timezone
 import pytz
 from ureport.assets.models import Image, FLAG
@@ -259,16 +259,6 @@ def get_filtered_engagement_counts(org, filter_part=""):
     filtered = {key[-10:]: val for key, val in engagement_counts.items() if filter_part in key}
 
     return {key: filtered.get(key, 0) for key in months}
-
-
-def get_contacts_activity(org):
-    from ureport.stats.models import ContactActivity
-
-    today = timezone.now().date()
-
-    activities = ContactActivity.objects.filter(org=org, date__lte=today).values("date").annotate(Count("id"))
-
-    return {str(elt["date"]): elt["id__count"] for elt in activities}
 
 
 def get_org_contacts_counts(org):
@@ -563,4 +553,3 @@ Org.get_regions_stats = get_regions_stats
 Org.get_flows = get_flows
 Org.get_segment_org_boundaries = get_segment_org_boundaries
 Org.get_filtered_engagement_counts = get_filtered_engagement_counts
-Org.get_contacts_activity = get_contacts_activity

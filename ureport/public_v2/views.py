@@ -19,6 +19,7 @@ from ureport.jobs.models import JobSource
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
+from ureport.stats.models import ContactActivity
 from ureport.utils import get_global_count
 
 
@@ -329,7 +330,7 @@ class UreportersView(SmartTemplateView):
             "total-ruleset-responded:engagement:gender:f:date"
         )
 
-        context["contact_activities"] = org.get_contacts_activity()
+        context["contact_activities"] = ContactActivity.get_activity(org)
         return context
 
 
