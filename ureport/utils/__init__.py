@@ -262,7 +262,7 @@ def get_filtered_engagement_counts(org, filter_part=""):
 
 
 def get_contacts_activity(org):
-    from ureport.contacts.models import ContactActivity
+    from ureport.stats.models import ContactActivity
 
     today = timezone.now().date()
 
