@@ -46,7 +46,7 @@ from ureport.polls.tasks import (
     update_results_age_gender,
 )
 from ureport.polls.templatetags.ureport import question_segmented_results
-from ureport.stats.models import AgeSegment, GenderSegment, PollStats
+from ureport.stats.models import AgeSegment, ContactActivity, GenderSegment, PollStats
 from ureport.tests import MockTembaClient, TestBackend, UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
@@ -2409,6 +2409,132 @@ class PollResultsTest(UreportTest):
         expected["ruleset:%s:nocategory:ward:R-IKEJA" % self.poll_question.ruleset_uuid] = 1
 
         self.assertEqual(PollResultsCounter.get_poll_results(self.poll), expected)
+
+    def test_contact_activity(self):
+        self.assertFalse(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid"))
+
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow=self.poll.flow_uuid,
+            ruleset=self.poll_question.ruleset_uuid,
+            date=self.now,
+            contact="contact-uuid",
+            completed=False,
+        )
+
+        self.assertFalse(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid"))
+
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow=self.poll.flow_uuid,
+            ruleset=self.poll_question.ruleset_uuid,
+            category="No",
+            date=self.now,
+            contact="contact-uuid",
+            completed=False,
+        )
+
+        self.assertTrue(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid"))
+        self.assertEqual(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid").count(), 12)
+        self.assertFalse(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid").exclude(born=None))
+        self.assertFalse(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
+            .exclude(gender="")
+            .exclude(gender=None)
+        )
+        self.assertFalse(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
+            .exclude(state="")
+            .exclude(state=None)
+        )
+        self.assertFalse(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
+            .exclude(district="")
+            .exclude(district=None)
+        )
+        self.assertFalse(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
+            .exclude(ward="")
+            .exclude(ward=None)
+        )
+
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow=self.poll.flow_uuid,
+            ruleset="other-uuid",
+            contact="contact-uuid",
+            category="No",
+            text="Nah",
+            completed=False,
+            date=self.now,
+            state="R-LAGOS",
+            district="R-oyo",
+            ward="R-IKEJA",
+        )
+
+        self.assertTrue(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid"))
+        self.assertEqual(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid").count(), 12)
+        self.assertFalse(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid").exclude(born=None))
+        self.assertFalse(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
+            .exclude(gender="")
+            .exclude(gender=None)
+        )
+        self.assertTrue(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
+            .exclude(state="")
+            .exclude(state=None)
+        )
+        self.assertTrue(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
+            .exclude(district="")
+            .exclude(district=None)
+        )
+        self.assertTrue(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid")
+            .exclude(ward="")
+            .exclude(ward=None)
+        )
+
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow=self.poll.flow_uuid,
+            ruleset="other-uuid",
+            contact="contact-uuid2",
+            category="Yes",
+            text="Yeah",
+            completed=False,
+            born=2015,
+            gender="M",
+            date=self.now,
+            state="R-LAGOS",
+            district="R-oyo",
+            ward="R-IKEJA",
+        )
+
+        self.assertTrue(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2"))
+        self.assertEqual(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2").count(), 12)
+        self.assertTrue(ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2").exclude(born=None))
+        self.assertTrue(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2")
+            .exclude(gender="")
+            .exclude(gender=None)
+        )
+        self.assertTrue(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2")
+            .exclude(state="")
+            .exclude(state=None)
+        )
+        self.assertTrue(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2")
+            .exclude(district="")
+            .exclude(district=None)
+        )
+        self.assertTrue(
+            ContactActivity.objects.filter(org=self.nigeria, contact="contact-uuid2")
+            .exclude(ward="")
+            .exclude(ward=None)
+        )
 
     def test_poll_result_generate_stats(self):
         poll_result1 = PollResult.objects.create(

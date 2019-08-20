@@ -39,3 +39,25 @@ class PollStats(models.Model):
     date = models.DateTimeField(null=True)
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
+
+
+class ContactActivity(models.Model):
+    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="contact_activities")
+
+    contact = models.CharField(max_length=36)
+
+    born = models.IntegerField(null=True)
+
+    gender = models.CharField(max_length=1, null=True)
+
+    state = models.CharField(max_length=255, null=True)
+
+    district = models.CharField(max_length=255, null=True)
+
+    ward = models.CharField(max_length=255, null=True)
+
+    date = models.DateField(help_text="The starting date for for the month")
+
+    class Meta:
+        index_together = (("org", "contact"), ("org", "date"))
+        unique_together = ("org", "contact", "date")
