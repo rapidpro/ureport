@@ -1,3 +1,7 @@
+v1.0.459
+----------
+ * Fix staging DATABASES config
+
 v1.0.458
 ----------
  * Merge pull request #420 from rapidpro/contact-activity
