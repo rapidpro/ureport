@@ -86,7 +86,7 @@ initMap = (id, geojson, ajaxUrl, districtZoom, colorsList=[], wardZoom, reporter
     layer = e.target
     if not layer.feature.properties.level or layer.feature.properties.level == STATE_LEVEL and boundaries is states or layer.feature.properties.level in [DISTRICT_LEVEL, WARD_LEVEL] and boundaries isnt states
       layer.setStyle(HIGHLIGHT_STYLE)
-      html = "<div class='popup-region-name'>" + layer.feature.properties.name + "</div>"+"<div class='popup-responses-number'>"+layer.feature.properties.responses+" Registered</div>"
+      html = "<div class='popup-region-name'>" + layer.feature.properties.name + "</div>"+"<div class='popup-responses-number'>"+layer.feature.properties.responses+"% RESPONSE RATE</div>"
       L.popup().setLatLng(e.latlng).setContent(html).openOn(map)
 
       if (!L.Browser.ie && !L.Browser.opera)

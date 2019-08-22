@@ -18,48 +18,39 @@
         .registration-stats-numbers.uk-flex-inline
           .signup-part
             .part-count
-              1,893
+              {{org.get_signups}}
             .part-label
               SIGN-UPS
           .response-rate-part
             .part-count
-              21%
+              {{average_response_rate|floatformat}} %
             .part-label
               AVG RESPONSE RATE
         .registration-stats-counts.uk-flex-inline
           .part-count.engagement-page-yellow-text
-            68,392
+            {{org.get_reporters_count}}
           .part-label
             - trans "TOTAL U-REPORTERS IN" 
             {{ org.name|upper }}
-          -#
-            .uk-width-1-1
-              .local-count-label
-                
-                {{ org.name|upper }}
-              .local-count.engagement-page-yellow-text
-                {{ reporters|intcomma }}
-            .uk-width-1-1
-              .worldwide-count-label
-                - trans "U-REPORTERS WORLDWIDE:"
-              .worldwide-count.engagement-page-yellow-text
-                {{ global_counter|intcomma }}
+          .part-signu-rate.engagement-page-yellow-text
+            +{{org.get_signup_rate|floatformat}} %
+
         .registration-stats-graphs(uk-grid)
           .uk-width-1-3.uk-flex-inline
             .gender-stats
               .gender-stat-icon
                 %i.fas.fa-male
               .gender-stat-percentage
-                60%
+                {{gender_stats.male_percentage}}
               .gender-stat-count.engagement-page-yellow-text
-                12,461
+                {{gender_stats.male_count}}
             .gender-stats
               .gender-stat-icon
                 %i.fas.fa-female
               .gender-stat-percentage
-                40%
+                {{gender_stats.female_percentage}}
               .gender-stat-count.engagement-page-yellow-text
-                8,358
+                {{gender_stats.female_count}}
           .uk-width-2-3.poll-age-graph
             .age-stats{ id: "age-chart"}
             
@@ -82,49 +73,148 @@
           %button.uk-button.uk-button-secondary
             12 Months
 
-  .engagemment-graphs-block
-    .uk-grid-match(uk-grid)
-      .uk-width-1-3.block-content
-        .block-title
-          Opinion Responses
-        .block-description
+  .engagemment-content
+    .engagement-graph-block
+      .(uk-grid)
+        .uk-width-1-3.block-content
+          .block-border
+            .yellow-bg
+          .block-title
+            Opinion Responses
+          .block-graph-tab-buttons
+            .uk-button-group.ureport-graph-tabs-button(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#graph-tabs-opinion-responses")
+              %button.uk-button.uk-button-default.left-most
+                All
+              %button.uk-button.uk-button-default
+                Age
+              %button.uk-button.uk-button-default.right-most
+                Gender
+              -# %button.uk-button.uk-button-default.right-most(type="button")
+              -#   State
+              -# .uk-padding-remove(uk-dropdown="mode:click;")
+              -#   %ul#states-selector.uk-list.uk-list-striped.uk-height-medium.uk-overflow-auto
+              -#     - for state in states
+              -#       %li.state-selector(data-location-id='{{state.id}}')
+              -#         {{state.name}}
 
-      .uk-width-2-3.block-content
-        .engagement-graph
-          #poll-responses-graph
+        .uk-width-2-3.block-content
+          %ul.uk-switcher.engagement-graph-tabs(id="graph-tabs-opinion-responses")
+            %li.engagement-graph.all-poll-responses
+              #poll-responses-graph
+            %li.engagement-graph.age-poll-responses
+              #poll-responses-graph-age
+            %li.engagement-graph.gender-poll-responses
+              #poll-responses-graph-gender
+            -# %li.engagement-graph.location-poll-responses
+            -#   Locations              
+
+    .engagement-graph-block
+      .(uk-grid)
+        .uk-width-1-3.block-content
+          .block-border
+            .yellow-bg
+          .block-title
+            Sign-Up Rate
+          .block-graph-tab-buttons
+            .uk-button-group.ureport-graph-tabs-button(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#graph-tabs-signups")
+              %button.uk-button.uk-button-default.left-most
+                All
+              %button.uk-button.uk-button-default
+                Age
+              %button.uk-button.uk-button-default.right-most
+                Gender
+              -# %button.uk-button.uk-button-default.right-most(type="button")
+              -#   State
+              -# .uk-padding-remove(uk-dropdown="mode:click;")
+              -#   %ul#states-selector.uk-list.uk-list-striped.uk-height-medium.uk-overflow-auto
+              -#     - for state in states
+              -#       %li.state-selector(data-location-id='{{state.id}}')
+              -#         {{state.name}}
+  
+        .uk-width-2-3.block-content
+          %ul.uk-switcher.engagement-graph-tabs(id="graph-tabs-signups")
+            %li.engagement-graph.all-signups
+              .contact-field-graph-registration{id: "graph-contact-field-registration"}
+                #graph-contact-field-registration-placeholder.loading-placeholder
+                  %img{src:"{{ STATIC_URL }}img/loading.gif"}               
+            %li.engagement-graph.age-signups
+              Age
+            %li.engagement-graph.gender-signups
+              Gender
+            -# %li.engagement-graph.location-signups
+            -#   Locations
 
 
-    .uk-grid-match(uk-grid)
-      .uk-width-1-3.block-content
-        .block-title
-          Sign-Up Rate
-        .block-description
+  
+    .engagement-graph-block
+      .(uk-grid)
+        .uk-width-1-3.block-content
+          .block-border
+            .yellow-bg
+          .block-title
+            Response Rate
+          .block-graph-tab-buttons
+            .uk-button-group.ureport-graph-tabs-button(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#graph-tabs-response-rate")
+              %button.uk-button.uk-button-default.left-most
+                All
+              %button.uk-button.uk-button-default
+                Age
+              %button.uk-button.uk-button-default.right-most
+                Gender
+              -# %button.uk-button.uk-button-default.right-most(type="button")
+              -#   State
+              -# .uk-padding-remove(uk-dropdown="mode:click;")
+              -#   %ul#states-selector.uk-list.uk-list-striped.uk-height-medium.uk-overflow-auto
+              -#     - for state in states
+              -#       %li.state-selector(data-location-id='{{state.id}}')
+              -#         {{state.name}}
 
-      .uk-width-2-3.block-content
-        .engagement-graph
-          .contact-field-graph-registration{id: "graph-contact-field-registration"}
-            #graph-contact-field-registration-placeholder.loading-placeholder
-              %img{src:"{{ STATIC_URL }}img/loading.gif"}
+        .uk-width-2-3.block-content
+          %ul.uk-switcher.engagement-graph-tabs(id="graph-tabs-response-rate")
+            %li.engagement-graph.all-response-rate
+              #poll-response-rate-graph
+            %li.engagement-graph.age-response-rate
+              #poll-response-rate-graph-age
+            %li.engagement-graph.gender-response-rate
+              #poll-response-rate-graph-gender
+            -# %li.engagement-graph.location-response-rate
+            -#   Locations
+            
+  
+    .engagement-graph-block
+      .(uk-grid)
+        .uk-width-1-3.block-content
+          .block-border
+            .yellow-bg
+          .block-title
+            Active users
+          .block-graph-tab-buttons
+            .uk-button-group.ureport-graph-tabs-button(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#graph-tabs-contact-activity")
+              %button.uk-button.uk-button-default.left-most
+                All
+              %button.uk-button.uk-button-default
+                Age
+              %button.uk-button.uk-button-default.right-most
+                Gender
+              -# %button.uk-button.uk-button-default.right-most(type="button")
+              -#   State
+              -# .uk-padding-remove(uk-dropdown="mode:click;")
+              -#   %ul#states-selector.uk-list.uk-list-striped.uk-height-medium.uk-overflow-auto
+              -#     - for state in states
+              -#       %li.state-selector(data-location-id='{{state.id}}')
+              -#         {{state.name}}
+  
+        .uk-width-2-3.block-content
+          %ul.uk-switcher.engagement-graph-tabs(id="graph-tabs-contact-activity")
+            %li.engagement-graph.all-contact-activity
+              #contact-activity-graph
+            %li.engagement-graph.age-contact-activity
+              #contact-activity-graph-age
+            %li.engagement-graph.gender-contact-activity
+              #contact-activity-graph-gender
+            -# %li.engagement-graph.location-contact-activity
+            -#   Locations
 
-    .uk-grid-match(uk-grid)
-      .uk-width-1-3.block-content
-        .block-title
-          Response Rate
-        .block-description
-
-      .uk-width-2-3.block-content
-        .engagement-graph
-          #poll-response-rate-graph
-
-    .uk-grid-match(uk-grid)
-      .uk-width-1-3.block-content
-        .block-title
-          Active users
-        .block-description
-
-      .uk-width-2-3.block-content
-        .engagement-graph
-          #contact-activity-graph
 
 -block extra-script
   {{ block.super }}
@@ -138,7 +228,7 @@
     $(function(){
       $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
         $(".ureport-location-map").each(function(){
-          var ajaxUrl = '/contact_field_results/'
+          var ajaxUrl = '/v2/contact_field_results/'
           var colorsList = gradientFactory.generate({
             from: '#DDDDDD',
             to: '{{ org|config:"primary_color"}}',
@@ -152,79 +242,12 @@
 
     $("#poll-responses-graph").each(function() {
     
-      var maleServerData = {{ responded_male|safe}};
-      var maleRespondedData = [];
-      Object.keys(maleServerData).forEach(function(key){
-        maleRespondedData.push([Date.parse(key), maleServerData[key]]);
+      var serverData = {{ opinion_responses|safe}};
+      var respondedData = [];
+      Object.keys(serverData).forEach(function(key){
+        respondedData.push([Date.parse(key), serverData[key]]);
       })
-      maleRespondedData.sort(function(a,b){return a[0] - b[0];});
-
-      var femaleServerData = {{ responded_female|safe}};
-      var femaleRespondedData = [];
-      Object.keys(femaleServerData).forEach(function(key){
-        femaleRespondedData.push([Date.parse(key), femaleServerData[key]]);
-      })
-      femaleRespondedData.sort(function(a,b){return a[0] - b[0];});
-
-      (function (H) {
-
-          var pendingRenders = [];
-      
-          // https://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport/7557433#7557433
-          function isElementInViewport(el) {
-          
-              var rect = el.getBoundingClientRect();
-      
-              return (
-                  rect.top >= 0 &&
-                  rect.left >= 0 &&
-                  rect.bottom <= (
-                      window.innerHeight ||
-                      document.documentElement.clientHeight
-                  ) &&
-                  rect.right <= (
-                      window.innerWidth ||
-                      document.documentElement.clientWidth
-                  )
-              );
-          }
-      
-          H.wrap(H.Series.prototype, 'render', function deferRender(proceed) {
-              var series = this,
-                  renderTo = this.chart.container.parentNode;
-      
-              // It is appeared, render it
-              if (isElementInViewport(renderTo) || !series.options.animation || series.chart.userOptions.chart.type == 'packedbubble') {
-                  proceed.call(series);
-      
-              // It is not appeared, halt renering until appear
-              } else  {
-                  pendingRenders.push({
-                      element: renderTo,
-                      appear: function () {
-                          proceed.call(series);
-                      }
-                  });
-              }
-          });
-      
-          function recalculate() {
-              pendingRenders.forEach(function (item) {
-                  if (isElementInViewport(item.element)) {
-                      item.appear();
-                      H.erase(pendingRenders, item);
-                  }
-              });
-          }
-      
-          if (window.addEventListener) {
-              ['DOMContentLoaded', 'load', 'scroll', 'resize']
-                  .forEach(function (eventType) {
-                      addEventListener(eventType, recalculate, false);
-                  });
-          }
-      
-          }(Highcharts));
+      respondedData.sort(function(a,b){return a[0] - b[0];});
 
       $('#poll-responses-graph').highcharts({
         chart: {
@@ -262,21 +285,239 @@
           enabled: false
         },
     
-        colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+        colors: ['#FFF'],
         series :[
           {
-            name: "Male",
-            data: maleRespondedData
-          },
-          {
-            name: "Female",
-            data: femaleRespondedData
+            name: "Opinion Responses",
+            data: respondedData
           }
         ]
      });
     });
     
+
     
+    
+    $("#poll-responses-graph-gender").each(function() {
+    
+      var serverData = {{ opinion_responses_gender|safe}};
+      var series = [];
+      for (i=0; i<serverData.length; i++) {
+        data = serverData[i]['data']
+        cleanedData = []
+        Object.keys(data).forEach(function(key){
+          cleanedData.push([Date.parse(key), data[key]]);
+        })
+        cleanedData.sort(function(a,b){return a[0] - b[0];});
+        series.push({name: serverData[i]['name'], data: cleanedData})
+      }
+
+      $('#poll-responses-graph-gender').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+              month: '%b %Y',
+              year: '%Y'
+            },
+        },
+        yAxis: {
+            title: {
+                text: null
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x: %b %Y}: {point.y}'
+        },
+    
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+          enabled: false
+        },
+    
+        colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+        series : series
+     });
+    });
+
+    $("#poll-responses-graph-age").each(function() {
+    
+      var colors = ['#E3002B', '#050E28', '#FFD100', '#40B5E5', '#FF8200', '#009917'];
+      var serverData = {{ opinion_responses_age|safe}};
+      var series = [];
+      for (i=0; i<serverData.length; i++) {
+        data = serverData[i]['data']
+        cleanedData = []
+        Object.keys(data).forEach(function(key){
+          cleanedData.push([Date.parse(key), data[key]]);
+        })
+        cleanedData.sort(function(a,b){return a[0] - b[0];});
+        series.push({name: serverData[i]['name'], data: cleanedData, color: colors[i]})
+      }
+      $('#poll-responses-graph-age').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+              month: '%b %Y',
+              year: '%Y'
+            },
+        },
+        yAxis: {
+            title: {
+                text: null
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x: %b %Y}: {point.y}'
+        },
+    
+        plotOptions: {
+            
+
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+          enabled: false
+        },
+    
+        colors: ['#E3002B', '#050E28', '#FFD100', '#40B5E5', '#FF8200', '#009917'],
+        series :series
+     });
+    });
+
+    $("#poll-response-rate-graph-age").each(function() {
+    
+      var serverData = {{ response_rate_age|safe}};
+      var series = [];
+      for (i=0; i<serverData.length; i++) {
+        data = serverData[i]['data']
+        cleanedData = []
+        Object.keys(data).forEach(function(key){
+          cleanedData.push([Date.parse(key), data[key]]);
+        })
+        cleanedData.sort(function(a,b){return a[0] - b[0];});
+        series.push({name: serverData[i]['name'], data: cleanedData})
+      }
+      $('#poll-response-rate-graph-age').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+              month: '%b %Y',
+              year: '%Y'
+            },
+        },
+        yAxis: {
+            title: {
+                text: null
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x: %b %Y}: {point.y}'
+        },
+    
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+          enabled: false
+        },
+    
+        colors: ['#E3002B', '#050E28', '#FFD100', '#40B5E5', '#FF8200', '#009917'],
+        series :series
+     });
+    });
+    
+    $("#poll-response-rate-graph-gender").each(function() {
+    
+      var serverData = {{ response_rate_gender|safe}};
+      var series = [];
+      for (i=0; i<serverData.length; i++) {
+        data = serverData[i]['data']
+        cleanedData = []
+        Object.keys(data).forEach(function(key){
+          cleanedData.push([Date.parse(key), data[key]]);
+        })
+        cleanedData.sort(function(a,b){return a[0] - b[0];});
+        series.push({name: serverData[i]['name'], data: cleanedData})
+      }
+      $('#poll-response-rate-graph-gender').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+              month: '%b %Y',
+              year: '%Y'
+            },
+        },
+        yAxis: {
+            title: {
+                text: null
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x: %b %Y}: {point.y}'
+        },
+    
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+          enabled: false
+        },
+    
+        colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+        series :series
+     });
+    });
+
     $("#poll-response-rate-graph").each(function() {
         var response_rates = {{ response_rate|safe}};
 
@@ -383,6 +624,110 @@
                   data: graphData
                 }
               ]
+         });
+    });
+
+    $("#contact-activity-graph-gender").each(function() {
+        var serverData = {{ contact_activities_gender|safe}};
+        var series = [];
+      for (i=0; i<serverData.length; i++) {
+        data = serverData[i]['data']
+        cleanedData = []
+        Object.keys(data).forEach(function(key){
+          cleanedData.push([Date.parse(key), data[key]]);
+        })
+        cleanedData.sort(function(a,b){return a[0] - b[0];});
+        series.push({name: serverData[i]['name'], data: cleanedData})
+      }
+         $('#contact-activity-graph-gender').highcharts({
+              chart: {
+                  type: 'column'
+              },
+              title: {
+                  text: null
+              },
+              xAxis: {
+                  type: 'datetime',
+                  dateTimeLabelFormats: {
+                    month: '%b %Y',
+                    year: '%Y'
+                  },
+              },
+              yAxis: {
+                  title: {
+                      text: null
+                  },
+                  min: 0
+              },
+              tooltip: {
+                  headerFormat: '<b>{series.name}</b><br>',
+                  pointFormat: '{point.x: %b %Y}: {point.y}'
+              },
+          
+              plotOptions: {
+                  spline: {
+                      marker: {
+                          enabled: true
+                      }
+                  }
+              },
+              credits: {
+                enabled: false
+              },
+              colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+              series : series
+         });
+    });
+
+    $("#contact-activity-graph-age").each(function() {
+        var serverData = {{ contact_activities_age|safe}};
+        var series = [];
+      for (i=0; i<serverData.length; i++) {
+        data = serverData[i]['data']
+        cleanedData = []
+        Object.keys(data).forEach(function(key){
+          cleanedData.push([Date.parse(key), data[key]]);
+        })
+        cleanedData.sort(function(a,b){return a[0] - b[0];});
+        series.push({name: serverData[i]['name'], data: cleanedData})
+      }
+         $('#contact-activity-graph-age').highcharts({
+              chart: {
+                  type: 'column'
+              },
+              title: {
+                  text: null
+              },
+              xAxis: {
+                  type: 'datetime',
+                  dateTimeLabelFormats: {
+                    month: '%b %Y',
+                    year: '%Y'
+                  },
+              },
+              yAxis: {
+                  title: {
+                      text: null
+                  },
+                  min: 0
+              },
+              tooltip: {
+                  headerFormat: '<b>{series.name}</b><br>',
+                  pointFormat: '{point.x: %b %Y}: {point.y}'
+              },
+          
+              plotOptions: {
+                  spline: {
+                      marker: {
+                          enabled: true
+                      }
+                  }
+              },
+              credits: {
+                enabled: false
+              },
+              colors: ['#E3002B', '#050E28', '#FFD100', '#40B5E5', '#FF8200', '#009917'],
+              series : series
          });
     });
 

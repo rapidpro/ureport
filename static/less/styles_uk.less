@@ -166,8 +166,49 @@
     }
 
 }
+.engagement-graph-block {
 
-#polls-tab-buttons {
+    .engagement-graph-tabs {
+        min-height: 400px;
+    }
+
+    .block-content {
+        .block-title {
+            margin: 3rem 0;
+        }
+
+        .block-border {
+            height: fit-content;
+
+            .yellow-bg {
+                height: 5px;
+                width: 45px;
+                background-color: #FFD102;
+            }
+        }
+    }
+}
+
+#polls-tab-buttons,
+.ureport-graph-tabs-button {
+    button {
+        background-color: #FFFFFF;
+        font-family: Montserrat;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 0.02px;
+        line-height: 15px;
+        text-align: center;
+        height: 36px;
+
+
+        &:hover,
+        &.uk-active {
+            background-color: #000000;
+            color: #FFF;
+        }
+    }
+
     .left-most {
         border-top-left-radius: 1rem;
         border-bottom-left-radius: 1rem;
@@ -178,8 +219,10 @@
         border-bottom-right-radius: 1rem;
     }
 
-    .uk-button.uk-open, .uk-button.uk-active {
-        background-color: #aaa;
+    .uk-button.uk-open,
+    .uk-button.uk-active {
+        background-color: #000000;
+        color: #FFF;
     }
 }
 
@@ -470,7 +513,7 @@
     opacity: 0.7;
   }
 
-  .engagemment-graphs-block {
+  .engagemment-content {
       background-color: @bg-dark-blue;
       color: @white;
       border: 1px solid @white;

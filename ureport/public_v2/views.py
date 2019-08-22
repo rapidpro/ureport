@@ -7,6 +7,7 @@ import json
 import six
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import Org
 from dash.stories.models import Story
 from smartmin.views import SmartReadView, SmartTemplateView
 
@@ -19,7 +20,7 @@ from ureport.jobs.models import JobSource
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
-from ureport.stats.models import ContactActivity
+from ureport.stats.models import ContactActivity, PollStats
 from ureport.utils import get_global_count
 
 
@@ -289,6 +290,24 @@ class StoryReadView(SmartReadView):
         return context
 
 
+class ReportersResultsView(SmartReadView):
+    model = Org
+
+    def get_object(self):
+        return self.request.org
+
+    def render_to_response(self, context, **kwargs):
+        output_data = []
+
+        segment = self.request.GET.get("segment", None)
+        if segment:
+            segment = json.loads(segment)
+
+            output_data = self.get_object().get_ureporters_locations_response_rates(segment)
+
+        return HttpResponse(json.dumps(output_data))
+
+
 class UreportersView(SmartTemplateView):
     template_name = "public_v2/ureporters.html"
 
@@ -301,6 +320,8 @@ class UreportersView(SmartTemplateView):
         # remove the first option '' from calender.month_abbr
         context["months"] = [six.text_type(_("%s")) % m for m in calendar.month_abbr][1:]
 
+        context["states"] = [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()]
+
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = org.get_age_stats()
         context["registration_stats"] = org.get_registration_stats()
@@ -310,27 +331,19 @@ class UreportersView(SmartTemplateView):
 
         # global counter
         context["global_counter"] = get_global_count()
+        context["average_response_rate"] = PollStats.get_average_response_rate(org)
 
-        polled = org.get_filtered_engagement_counts("total-ruleset-polled:engagement:date")
-        responded = org.get_filtered_engagement_counts("total-ruleset-responded:engagement:date")
-        response_rate = {}
-        for key, val in responded.items():
-            polled_count = polled.get(key, 0)
-            if polled_count == 0:
-                response_rate[key] = 0
-            else:
-                response_rate[key] = val * 100 / polled_count
+        context["opinion_responses"] = PollStats.get_all_opinion_responses(org)
+        context["opinion_responses_age"] = PollStats.get_age_opinion_responses(org)
+        context["opinion_responses_gender"] = PollStats.get_gender_opinion_responses(org)
 
-        context["response_rate"] = response_rate
-
-        context["responded_male"] = org.get_filtered_engagement_counts(
-            "total-ruleset-responded:engagement:gender:m:date"
-        )
-        context["responded_female"] = org.get_filtered_engagement_counts(
-            "total-ruleset-responded:engagement:gender:f:date"
-        )
+        context["response_rate"] = PollStats.get_all_response_rate_series(org)
+        context["response_rate_age"] = PollStats.get_age_response_rate_series(org)
+        context["response_rate_gender"] = PollStats.get_gender_response_rate_series(org)
 
         context["contact_activities"] = ContactActivity.get_activity(org)
+        context["contact_activities_age"] = ContactActivity.get_activity_age(org)
+        context["contact_activities_gender"] = ContactActivity.get_activity_gender(org)
         return context
 
 

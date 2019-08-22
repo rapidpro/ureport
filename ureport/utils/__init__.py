@@ -469,24 +469,6 @@ def get_ureporters_locations_stats(org, segment):
     ]
 
 
-def get_average_response_rate(org):
-    now = timezone.now()
-    year_ago = now - timedelta(days=365)
-    polled_stats = PollStats.objects.filter(org=org, date__gte=year_ago).aggregate(Sum("count"))
-    responded_stats = (
-        PollStats.objects.filter(org=org, date__gte=year_ago).exclude(category=None).aggregate(Sum("count"))
-    )
-
-    responded = responded_stats.get("count__sum", 0)
-    if responded is None:
-        responded = 0
-    polled = polled_stats.get("count__sum")
-    if polled is None or polled == 0:
-        return 0
-
-    return responded / polled
-
-
 def get_ureporters_locations_response_rates(org, segment):
     parent = segment.get("parent", None)
     field_type = segment.get("location", None)
@@ -538,7 +520,9 @@ def get_ureporters_locations_response_rates(org, segment):
     )
     responded_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in responded_stats}
 
-    response_rates = {key: responded_stats_dict.get(key, 0) / val for key, val in polled_stats_dict.items()}
+    response_rates = {
+        key: round(responded_stats_dict.get(key, 0) * 100 / val, 1) for key, val in polled_stats_dict.items()
+    }
 
     return [
         dict(boundary=elt["osm_id"], label=elt["name"], set=response_rates.get(elt["osm_id"], 0)) for elt in boundaries
@@ -678,3 +662,6 @@ Org.get_regions_stats = get_regions_stats
 Org.get_flows = get_flows
 Org.get_segment_org_boundaries = get_segment_org_boundaries
 Org.get_filtered_engagement_counts = get_filtered_engagement_counts
+Org.get_signups = get_signups
+Org.get_signup_rate = get_signup_rate
+Org.get_ureporters_locations_response_rates = get_ureporters_locations_response_rates
