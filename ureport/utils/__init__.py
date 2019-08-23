@@ -421,6 +421,8 @@ def get_signups(org):
 def get_signup_rate(org):
     new_signups = get_signups(org)
     total = get_reporters_count(org)
+    if not total:
+        return 0
     return new_signups * 100 / total
 
 
