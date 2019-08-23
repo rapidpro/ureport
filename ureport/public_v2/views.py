@@ -20,7 +20,7 @@ from ureport.jobs.models import JobSource
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
-from ureport.stats.models import ContactActivity, PollStats
+from ureport.stats.models import PollStats
 from ureport.utils import get_global_count
 
 
@@ -308,6 +308,27 @@ class ReportersResultsView(SmartReadView):
         return HttpResponse(json.dumps(output_data))
 
 
+class EngagementDataView(SmartReadView):
+    model = Org
+
+    def get_object(self):
+        return self.request.org
+
+    def render_to_response(self, context, **kwargs):
+        output_data = []
+
+        results_params = self.request.GET.get("results_params", None)
+        if results_params:
+            results_params = json.loads(results_params)
+            metric = results_params.get("metric")
+            segment_slug = results_params.get("segment")
+            time_filter = int(results_params.get("filter", "12"))
+
+            output_data = PollStats.get_engagement_data(self.get_object(), metric, segment_slug, time_filter)
+
+        return HttpResponse(json.dumps(output_data))
+
+
 class UreportersView(SmartTemplateView):
     template_name = "public_v2/ureporters.html"
 
@@ -333,17 +354,36 @@ class UreportersView(SmartTemplateView):
         context["global_counter"] = get_global_count()
         context["average_response_rate"] = PollStats.get_average_response_rate(org)
 
-        context["opinion_responses"] = PollStats.get_all_opinion_responses(org)
-        context["opinion_responses_age"] = PollStats.get_age_opinion_responses(org)
-        context["opinion_responses_gender"] = PollStats.get_gender_opinion_responses(org)
+        context["data_time_filters"] = [
+            dict(time_filter_number=3, label="90 Days"),
+            dict(time_filter_number=6, label="6 Months"),
+            dict(time_filter_number=12, label="12 Months"),
+        ]
 
-        context["response_rate"] = PollStats.get_all_response_rate_series(org)
-        context["response_rate_age"] = PollStats.get_age_response_rate_series(org)
-        context["response_rate_gender"] = PollStats.get_gender_response_rate_series(org)
+        context["data_segments"] = [
+            dict(segment_type="all", label="All"),
+            dict(segment_type="age", label="Age"),
+            dict(segment_type="gender", label="Gender"),
+            # dict(segment_type='location', label="Location"),
+        ]
+        context["data_metrics"] = [
+            dict(slug="opinion-responses", title="Opinion Responses"),
+            dict(slug="sign-up-rate", title="Sign Up Rate"),
+            dict(slug="response-rate", title="Response Rate"),
+            dict(slug="active-users", title="Active Users"),
+        ]
 
-        context["contact_activities"] = ContactActivity.get_activity(org)
-        context["contact_activities_age"] = ContactActivity.get_activity_age(org)
-        context["contact_activities_gender"] = ContactActivity.get_activity_gender(org)
+        context["opinion_responses"] = []
+        context["opinion_responses_age"] = []  # PollStats.get_age_opinion_responses(org)
+        context["opinion_responses_gender"] = []  # PollStats.get_gender_opinion_responses(org)
+
+        context["response_rate"] = []  # PollStats.get_all_response_rate_series(org)
+        context["response_rate_age"] = []  # PollStats.get_age_response_rate_series(org)
+        context["response_rate_gender"] = []  # PollStats.get_gender_response_rate_series(org)
+
+        context["contact_activities"] = []  # ContactActivity.get_activity(org)
+        context["contact_activities_age"] = []  # ContactActivity.get_activity_age(org)
+        context["contact_activities_gender"] = []  # ContactActivity.get_activity_gender(org)
         return context
 
 

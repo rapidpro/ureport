@@ -47,12 +47,50 @@ class PollStats(models.Model):
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
 
     @classmethod
-    def get_all_opinion_responses(cls, org):
-        responses = PollStats.objects.filter(org=org).exclude(category=None).values("date").annotate(Sum("count"))
-        return PollStats.get_counts_data(responses)
+    def get_engagement_data(cls, org, metric, segment_slug, time_filter):
+        if segment_slug == "location":
+            return []
+
+        if metric == "opinion-responses":
+            if segment_slug == "all":
+                return PollStats.get_all_opinion_responses(org, time_filter)
+            if segment_slug == "age":
+                return PollStats.get_age_opinion_responses(org, time_filter)
+            if segment_slug == "gender":
+                return PollStats.get_gender_opinion_responses(org, time_filter)
+
+        if metric == "sign-up-rate":
+            if segment_slug == "all":
+                return org.get_sign_up_rate(time_filter)
+            if segment_slug == "age":
+                return []
+            if segment_slug == "gender":
+                return []
+
+        if metric == "response-rate":
+            if segment_slug == "all":
+                return PollStats.get_all_response_rate_series(org, time_filter)
+            if segment_slug == "age":
+                return PollStats.get_age_response_rate_series(org, time_filter)
+            if segment_slug == "gender":
+                return PollStats.get_gender_response_rate_series(org, time_filter)
+
+        if metric == "active-users":
+            if segment_slug == "all":
+                return ContactActivity.get_activity(org, time_filter)
+            if segment_slug == "age":
+                return ContactActivity.get_activity_age(org, time_filter)
+            if segment_slug == "gender":
+                return ContactActivity.get_activity_gender(org, time_filter)
+        return []
 
     @classmethod
-    def get_gender_opinion_responses(cls, org):
+    def get_all_opinion_responses(cls, org, time_filter):
+        responses = PollStats.objects.filter(org=org).exclude(category=None).values("date").annotate(Sum("count"))
+        return [dict(name="Opinion Responses", data=PollStats.get_counts_data(responses, time_filter))]
+
+    @classmethod
+    def get_gender_opinion_responses(cls, org, time_filter):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
@@ -71,12 +109,12 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
-            series = PollStats.get_counts_data(responses)
+            series = PollStats.get_counts_data(responses, time_filter)
             output_data.append(dict(name=gender["gender"], data=series))
         return output_data
 
     @classmethod
-    def get_age_opinion_responses(cls, org):
+    def get_age_opinion_responses(cls, org, time_filter):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
@@ -90,15 +128,15 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
-            series = PollStats.get_counts_data(responses)
+            series = PollStats.get_counts_data(responses, time_filter)
             output_data.append(dict(name=f"{age['min_age']}-{age['max_age']}", data=series))
         return output_data
 
     @classmethod
-    def get_counts_data(cls, stats_qs):
+    def get_counts_data(cls, stats_qs, time_filter):
         from ureport.utils import get_last_months
 
-        keys = get_last_months()
+        keys = get_last_months(months_num=time_filter)
 
         responses_data_dict = defaultdict(int)
         for elt in stats_qs:
@@ -112,7 +150,7 @@ class PollStats(models.Model):
         return data
 
     @classmethod
-    def get_all_response_rate_series(cls, org):
+    def get_all_response_rate_series(cls, org, time_filter):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
@@ -125,10 +163,14 @@ class PollStats(models.Model):
             .annotate(Sum("count"))
         )
 
-        return PollStats.get_response_rate_data(polled_stats, responded_stats)
+        return [
+            dict(
+                name="Response Rate", data=PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
+            )
+        ]
 
     @classmethod
-    def get_gender_response_rate_series(cls, org):
+    def get_gender_response_rate_series(cls, org, time_filter):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
@@ -152,13 +194,13 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
-            gender_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats)
+            gender_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
             output_data.append(dict(name=gender["gender"], data=gender_rate_series))
 
         return output_data
 
     @classmethod
-    def get_age_response_rate_series(cls, org):
+    def get_age_response_rate_series(cls, org, time_filter):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
@@ -177,15 +219,15 @@ class PollStats(models.Model):
                 .values("date")
                 .annotate(Sum("count"))
             )
-            age_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats)
+            age_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
             output_data.append(dict(name=f"{age['min_age']}-{age['max_age']}", data=age_rate_series))
         return output_data
 
     @classmethod
-    def get_response_rate_data(cls, polled_qs, responded_qs):
+    def get_response_rate_data(cls, polled_qs, responded_qs, time_filter):
         from ureport.utils import get_last_months
 
-        keys = get_last_months()
+        keys = get_last_months(months_num=time_filter)
 
         polled_data_dict = defaultdict(int)
         for elt in polled_qs:
@@ -252,10 +294,10 @@ class ContactActivity(models.Model):
         unique_together = ("org", "contact", "date")
 
     @classmethod
-    def get_activity_data(cls, activities_qs):
+    def get_activity_data(cls, activities_qs, time_filter):
         from ureport.utils import get_last_months
 
-        keys = get_last_months()
+        keys = get_last_months(months_num=time_filter)
 
         activity_data = defaultdict(int)
         for elt in activities_qs:
@@ -269,7 +311,7 @@ class ContactActivity(models.Model):
         return dict(data)
 
     @classmethod
-    def get_activity(cls, org):
+    def get_activity(cls, org, time_filter):
         now = timezone.now()
         today = now.date()
         year_ago = now - timedelta(days=365)
@@ -280,10 +322,10 @@ class ContactActivity(models.Model):
             .values("date")
             .annotate(Count("id"))
         )
-        return ContactActivity.get_activity_data(activities)
+        return [dict(name="Active Users", data=ContactActivity.get_activity_data(activities, time_filter))]
 
     @classmethod
-    def get_activity_age(cls, org):
+    def get_activity_age(cls, org, time_filter):
         now = timezone.now()
         today = now.date()
         year_ago = now - timedelta(days=365)
@@ -302,12 +344,12 @@ class ContactActivity(models.Model):
                 .values("date")
                 .annotate(Count("id"))
             )
-            series = ContactActivity.get_activity_data(activities)
+            series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=f"{age['min_age']}-{age['max_age']}", data=series))
         return output_data
 
     @classmethod
-    def get_activity_gender(cls, org):
+    def get_activity_gender(cls, org, time_filter):
         now = timezone.now()
         today = now.date()
         year_ago = now - timedelta(days=365)
@@ -326,7 +368,7 @@ class ContactActivity(models.Model):
                 .values("date")
                 .annotate(Count("id"))
             )
-            series = ContactActivity.get_activity_data(activities)
+            series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=gender["gender"], data=series))
 
         return output_data
