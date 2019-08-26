@@ -66,86 +66,101 @@
                     %ul.menu-list
                       %li
                         %a(href="{% url 'polls.poll_list' %}")
-                          %span.icon(style="color: rgb(156, 202, 42)")
-                            .fas.fa-comments
-                          - trans "Polls"
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/polls_icon.png")
+                          %span.menu-link-title
+                            - trans "Polls"
                       %li
                         %a(href="{% url 'stories.story_list' %}")
-                          %span.icon(style="color: rgb(252, 109, 7)")
-                            .fas.fa-edit
-                          - trans "Stories"
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/stories_icon.png")
+                          %span.menu-link-title
+                            - trans "Stories"
                       %li
                         %a(href="{% url 'orgs.org_manage_accounts' %}")
-                          %span.icon(style="color: rgb(18, 129, 18)")
-                            .fas.fa-user
-                          - trans "Users"
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/users_icon.png")
+                          %span.menu-link-title
+                            - trans "Users"
                       %li
                         %a(href="{% url 'orgs.org_edit' %}")
-                          %span.icon(style="color: rgb(114, 57, 142)")
-                            .fas.fa-cog
-                          - trans "Settings"
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                          %span.menu-link-title
+                            - trans "Settings"
                       %li
                         %a(href="{% url 'dashblocks.dashblock_list' %}")
-                          %span.icon(style="color: rgb(21, 169, 149)")
-                            .fas.fa-file-alt
-                          - trans "Pages"
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                          %span.menu-link-title
+                            - trans "Pages"
                       %li
                         %a(href="{% url 'jobs.jobsource_list' %}")
                           %span.icon
-                            .fas.fa-briefcase
-                          - trans "Jobs"
+                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                          %span.menu-link-title
+                            - trans "Jobs"
                       %li
                         %a(href="{% url 'categories.category_list' %}")
                           %span.icon
-                            .fas.fa-layer-group
-                          - trans "Categories"
+                            %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                          %span.menu-link-title
+                            - trans "Categories"
 
                       %li
                         %a(href="{% url 'categories.categoryimage_list' %}")
                           %span.icon
-                            .fas.fa-images
-                          - trans "Categories Images"
+                            %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                          %span.menu-link-title
+                            - trans "Categories Images"
 
                       %li
                         %a(href="{% url 'news.newsitem_list' %}")
                           %span.icon
-                            .fas.fa-newspaper
-                          - trans "News Items"
+                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                          %span.menu-link-title
+                            - trans "News Items"
                       - if request.user.is_superuser
                         %li
                           %a{href:"{% url 'orgs.org_list' %}"}
                             %span.icon
-                              
-                            - trans "Orgs"
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Orgs"
 
                         %li
                           %a{ href:"/users/user/"}
                             %span.icon
-                              
-                            - trans "Users"
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Users"
 
                         %li
                           %a{ href:"{% url 'dashblocks.dashblocktype_list' %}"}
                             %span.icon
-                              
-                            - trans "Content Types"
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Content Types"
 
                         %li
                           %a{ href:"{% url 'assets.image_list' %}"}
                             %span.icon
-                              
-                            - trans "Images"
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Images"
 
                       %li
                         %a(href="https://app.rapidpro.io/")
-                          %span.icon(style="color: rgb(4, 54, 160)")
-                            .fas.fa-code-branch
-                          RapidPro
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/rapidpro_icon.png")
+                          %span.menu-link-title
+                            RapidPro
                       %li
                         %a
-                          %span.icon(style="color: rgb(233, 65, 105)")
-                            .fas.fa-chart-area
-                          - trans "Analytics"
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/analytics_icon.png")
+                          %span.menu-link-title
+                            - trans "Analytics"
 
               .column.is-four-fifths.is-offset-one.block
                 -block content-div
