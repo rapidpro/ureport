@@ -29,8 +29,7 @@
               %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'polls.poll_list' %}")
                 .tile.is-parent.is-vertical.big-button-link(style="padding: 50px")
                   .tile.is-child
-                    .icon.is-size-1.colored
-                      .fas.fa-comments
+                     %img(src="{{ STATIC_URL }}img/polls_icon.png")
                   .tile.is-child.is-size-3
                     -trans "Polls"
 
@@ -38,8 +37,7 @@
               %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'stories.story_list' %}")
                 .tile.is-parent.is-vertical.big-button-link
                   .tile.is-child
-                    .icon.is-size-1.colored
-                      .fas.fa-edit
+                    %img(src="{{ STATIC_URL }}img/stories_icon.png")
                   .tile.is-child.is-size-3
                     -trans "Stories"
 
@@ -50,8 +48,7 @@
                 %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'orgs.org_manage_accounts' %}")
                   .tile.is-parent.is-vertical.small-button-link
                     .tile.is-child
-                      .icon.is-size-1.colored
-                        .fas.fa-user
+                      %img(src="{{ STATIC_URL }}img/users_icon.png")
                     .tile.is-child.is-size-4
                       - trans "Users"
             - if request.user.is_superuser or org_perms.orgs.org_edit
@@ -59,8 +56,7 @@
                 %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'orgs.org_edit' %}")
                   .tile.is-parent.is-vertical.small-button-link
                     .tile.is-child
-                      .icon.is-size-1.colored
-                        .fas.fa-cog
+                      %img(src="{{ STATIC_URL }}img/settings_icon.png")
                     .tile.is-child.is-size-4
                       - trans "Settings"
 
@@ -68,19 +64,17 @@
               %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'dashblocks.dashblock_list' %}")
                 .tile.is-parent.is-vertical.small-button-link
                   .tile.is-child
-                    .icon.is-size-1.colored
-                      .fas.fa-file-alt
+                    %img(src="{{ STATIC_URL }}img/pages_icon.png")
                   .tile.is-child.is-size-4
                     - trans "Pages"
 
           .tile.is-ancestor
-            - if request.user.is_superuser or org_perms.orgs.orgbackend_list
-              .tile.is-parent
+            .tile.is-parent
+              - if request.user.is_superuser or org_perms.orgs.orgbackend_list
                 %a.tile.is-child.box.has-text-centered.link-button(href="{% url 'orgs.orgbackend_list' %}")
                   .tile.is-parent.is-vertical.small-button-link
                     .tile.is-child
-                      .icon.is-size-1.colored
-                        .fas.fa-cog
+                      %img(src="{{ STATIC_URL }}img/settings_icon.png")
                     .tile.is-child.is-size-4
                       - trans "Backends"
 
@@ -88,8 +82,7 @@
               %a.tile.is-child.box.has-text-centered.link-button(href="https://app.rapidpro.io/")
                 .tile.is-parent.is-vertical.small-button-link
                   .tile.is-child
-                    .icon.is-size-1.colored
-                      .fas.fa-code-branch
+                    %img(src="{{ STATIC_URL }}img/rapidpro_icon.png")
                   .tile.is-child.is-size-4
                     RapidPro
 
@@ -97,8 +90,7 @@
               %a.tile.is-child.box.has-text-centered.link-button(href="#")
                 .tile.is-parent.is-vertical.small-button-link
                   .tile.is-child
-                    .icon.is-size-1.colored
-                      .fas.fa-chart-area
+                    %img(src="{{ STATIC_URL }}img/analytics_icon.png")
                   .tile.is-child.is-size-4
                     - trans "Analytics"
 
