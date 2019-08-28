@@ -44,3 +44,12 @@
 
               %button.button.is-info.login-button.is-pulled-right(type="submit")
                 - trans "Enter Dashboard"
+
+- block extra-style
+  :css
+    .login-form {
+      background-image: url("{{ STATIC_URL }}img/homemap_bg.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-blend-mode: soft-light;
+    }
