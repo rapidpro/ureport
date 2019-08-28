@@ -32,7 +32,7 @@
         .level
           .level-left
             %a.level-item.square-logo(href="{% url 'orgs.org_home' %}")
-              {% thumbnail org.logo "150x150" format="PNG" as im %}
+              {% thumbnail org.get_logo "350x65" format="PNG" as im %}
               %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
               {% endthumbnail %}
             .level-item
@@ -182,8 +182,8 @@
           .level.big-footer-nav
             .level-left
               %a.level-item.footer-logo(href="{% url 'v2.public.index' %}")
-                {% thumbnail org.logo "400x100" format="PNG" as im %}
-                %img.logo(src="{{ im.url }}" alt="{{ org.name }}" style="border: 1px solid green;")
+                {% thumbnail org.get_logo "350x65" format="PNG" as im %}
+                %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
                 {% endthumbnail %}
             .level-right
               %a.level-item.big-footer-link(href="{% url 'v2.public.opinions' %}")

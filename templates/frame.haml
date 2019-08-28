@@ -372,7 +372,7 @@
           .navbar-header
             %a#brand.navbar-brand{ href:"/"}
               - block brand
-                {% thumbnail org.logo "230x86" format="PNG" as im %}
+                {% thumbnail org.get_logo "350x65" format="PNG" as im %}
                 %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
                 {% endthumbnail %}
 
