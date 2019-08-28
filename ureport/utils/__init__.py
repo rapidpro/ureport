@@ -17,7 +17,7 @@ from django.core.cache import cache
 from django.db.models import Sum
 from django.utils import timezone
 import pytz
-from ureport.assets.models import Image, FLAG
+from ureport.assets.models import Image, FLAG, LOGO
 from raven.contrib.django.raven_compat.models import client
 
 from ureport.locations.models import Boundary
@@ -100,6 +100,14 @@ def get_linked_orgs(authenticated=False):
     linked_sites_sorted = sorted(linked_sites, key=lambda k: k["name"].lower())
 
     return linked_sites_sorted
+
+
+def get_logo(org):
+    logo_field = org.logo
+    logo = Image.objects.filter(org=org, is_active=True, image_type=LOGO).first()
+    if logo:
+        logo_field = logo.image
+    return logo_field
 
 
 def fetch_flows(org, backend=None):
@@ -830,3 +838,4 @@ Org.get_ureporters_locations_response_rates = get_ureporters_locations_response_
 Org.get_sign_up_rate = get_sign_up_rate
 Org.get_sign_up_rate_gender = get_sign_up_rate_gender
 Org.get_sign_up_rate_age = get_sign_up_rate_age
+Org.get_logo = get_logo
