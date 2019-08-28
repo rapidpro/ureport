@@ -72,7 +72,8 @@ class Contact(models.Model):
 
     MALE = "M"
     FEMALE = "F"
-    GENDER_CHOICES = ((MALE, _("Male")), (FEMALE, _("Female")))
+    OTHER = "O"
+    GENDER_CHOICES = ((MALE, _("Male")), (FEMALE, _("Female")), (OTHER, _("Other")))
 
     is_active = models.BooleanField(default=True)
 

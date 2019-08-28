@@ -393,6 +393,12 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
+        name="has_extra_gender",
+        field=dict(help_text=_("Whether to activate an extra gender.")),
+        superuser_only=True,
+        read_only=True,
+    ),
+    dict(
         name="iso_code",
         field=dict(
             help_text=_(
