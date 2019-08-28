@@ -63,9 +63,9 @@ class PollStats(models.Model):
             if segment_slug == "all":
                 return org.get_sign_up_rate(time_filter)
             if segment_slug == "age":
-                return []
+                return org.get_sign_up_rate_age(time_filter)
             if segment_slug == "gender":
-                return []
+                return org.get_sign_up_rate_gender(time_filter)
 
         if metric == "response-rate":
             if segment_slug == "all":
@@ -122,6 +122,19 @@ class PollStats(models.Model):
         ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
         output_data = []
         for age in ages:
+            if age["min_age"] == 0:
+                data_key = "0-14"
+            elif age["min_age"] == 15:
+                data_key = "15-19"
+            elif age["min_age"] == 20:
+                data_key = "20-24"
+            elif age["min_age"] == 25:
+                data_key = "25-30"
+            elif age["min_age"] == 31:
+                data_key = "31-34"
+            elif age["min_age"] == 35:
+                data_key = "35+"
+
             responses = (
                 PollStats.objects.filter(org=org, date__gte=start, age_segment_id=age["id"])
                 .exclude(category=None)
@@ -129,7 +142,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
             series = PollStats.get_counts_data(responses, time_filter)
-            output_data.append(dict(name=f"{age['min_age']}-{age['max_age']}", data=series))
+            output_data.append(dict(name=data_key, data=series))
         return output_data
 
     @classmethod
@@ -208,6 +221,19 @@ class PollStats(models.Model):
         ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
         output_data = []
         for age in ages:
+            if age["min_age"] == 0:
+                data_key = "0-14"
+            elif age["min_age"] == 15:
+                data_key = "15-19"
+            elif age["min_age"] == 20:
+                data_key = "20-24"
+            elif age["min_age"] == 25:
+                data_key = "25-30"
+            elif age["min_age"] == 31:
+                data_key = "31-34"
+            elif age["min_age"] == 35:
+                data_key = "35+"
+
             polled_stats = (
                 PollStats.objects.filter(org=org, date__gte=start, age_segment_id=age["id"])
                 .values("date")
@@ -220,7 +246,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
             age_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
-            output_data.append(dict(name=f"{age['min_age']}-{age['max_age']}", data=age_rate_series))
+            output_data.append(dict(name=data_key, data=age_rate_series))
         return output_data
 
     @classmethod
@@ -334,6 +360,19 @@ class ContactActivity(models.Model):
         ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
         output_data = []
         for age in ages:
+            if age["min_age"] == 0:
+                data_key = "0-14"
+            elif age["min_age"] == 15:
+                data_key = "15-19"
+            elif age["min_age"] == 20:
+                data_key = "20-24"
+            elif age["min_age"] == 25:
+                data_key = "25-30"
+            elif age["min_age"] == 31:
+                data_key = "31-34"
+            elif age["min_age"] == 35:
+                data_key = "35+"
+
             activities = (
                 ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start)
                 .exclude(born=None)
@@ -345,7 +384,7 @@ class ContactActivity(models.Model):
                 .annotate(Count("id"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
-            output_data.append(dict(name=f"{age['min_age']}-{age['max_age']}", data=series))
+            output_data.append(dict(name=data_key, data=series))
         return output_data
 
     @classmethod

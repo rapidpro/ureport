@@ -22,7 +22,7 @@ from raven.contrib.django.raven_compat.models import client
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
-from ureport.stats.models import PollStats
+from ureport.stats.models import PollStats, GenderSegment, AgeSegment
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
@@ -357,6 +357,7 @@ def get_sign_up_rate(org, time_filter):
         )
 
         if parsed_time > start:
+
             interval_dict[str(parsed_time.date())] += date_count
 
     keys = get_last_months(months_num=time_filter)
@@ -365,6 +366,116 @@ def get_sign_up_rate(org, time_filter):
         data[key] = interval_dict[key]
 
     return [dict(name="Sign-Up Rate", data=data)]
+
+
+def get_sign_up_rate_gender(org, time_filter):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[18:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_gender")}
+
+    genders = GenderSegment.objects.all()
+    if not org.get_config("common.has_extra_gender"):
+        genders = genders.exclude(gender="O")
+
+    genders = genders.values("gender", "id")
+
+    keys = get_last_months(months_num=time_filter)
+    output_data = []
+
+    for gender in genders:
+        interval_dict = defaultdict(int)
+        for date_key, date_count in registered_on_counts.items():
+            if date_key.endswith(f":{gender['gender'].lower()}"):
+                date_key = date_key[:-2]
+            else:
+                continue
+
+            parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
+                day=1, hour=0, minute=0, second=0, microsecond=0
+            )
+
+            if parsed_time > start:
+                interval_dict[str(parsed_time.date())] += date_count
+
+        data = dict()
+        for key in keys:
+            data[key] = interval_dict[key]
+        output_data.append(dict(name=gender["gender"], data=data))
+    return output_data
+
+
+def get_sign_up_rate_age(org, time_filter):
+    now = timezone.now()
+    current_year = now.year
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[16:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_born")}
+    registered_on_counts_by_age = {
+        "0-14": defaultdict(int),
+        "15-19": defaultdict(int),
+        "20-24": defaultdict(int),
+        "25-30": defaultdict(int),
+        "31-34": defaultdict(int),
+        "35+": defaultdict(int),
+    }
+    for date_key, date_count in registered_on_counts.items():
+        date_key_date, date_key_year = date_key.split(":")
+        parsed_time = tz.localize(datetime.strptime(date_key_date, "%Y-%m-%d")).replace(
+            day=1, hour=0, minute=0, second=0, microsecond=0
+        )
+        if parsed_time < start:
+            continue
+
+        date_key_date = str(parsed_time.date())
+
+        age = current_year - int(date_key_year)
+        if age > 34:
+            registered_on_counts_by_age["35+"][date_key_date] += date_count
+        elif age > 30:
+            registered_on_counts_by_age["31-34"][date_key_date] += date_count
+        elif age > 24:
+            registered_on_counts_by_age["25-30"][date_key_date] += date_count
+        elif age > 19:
+            registered_on_counts_by_age["20-24"][date_key_date] += date_count
+        elif age > 14:
+            registered_on_counts_by_age["15-19"][date_key_date] += date_count
+        else:
+            registered_on_counts_by_age["0-14"][date_key_date] += date_count
+
+    ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
+    keys = get_last_months(months_num=time_filter)
+    output_data = []
+    for age in ages:
+        if age["min_age"] == 0:
+            data_key = "0-14"
+        elif age["min_age"] == 15:
+            data_key = "15-19"
+        elif age["min_age"] == 20:
+            data_key = "20-24"
+        elif age["min_age"] == 25:
+            data_key = "25-30"
+        elif age["min_age"] == 31:
+            data_key = "31-34"
+        elif age["min_age"] == 35:
+            data_key = "35+"
+
+        age_data = registered_on_counts_by_age[data_key]
+        data = dict()
+        for key in keys:
+            data[key] = age_data[key]
+
+        output_data.append(dict(name=data_key, data=data))
+
+    return output_data
 
 
 def get_registration_stats(org):
@@ -697,3 +808,5 @@ Org.get_signups = get_signups
 Org.get_signup_rate = get_signup_rate
 Org.get_ureporters_locations_response_rates = get_ureporters_locations_response_rates
 Org.get_sign_up_rate = get_sign_up_rate
+Org.get_sign_up_rate_gender = get_sign_up_rate_gender
+Org.get_sign_up_rate_age = get_sign_up_rate_age
