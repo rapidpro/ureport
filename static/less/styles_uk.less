@@ -603,15 +603,19 @@
         }
 
         div .gender-stats {
-            margin-right: 2rem;
+            margin-right: 1rem;
             text-align: center;
-            &:first-child {
+            &:not(last-child) {
                 border-right: 1px solid @white;
-
-                padding-right: 2rem;
+                padding-right: 1rem;
             }
+
+            &:last-child {
+                border-right: none;
+            }
+
             .gender-stat-icon {
-                font-size: 3rem;
+                width: 2.5rem;
             }
 
             .gender-stat-percentage {

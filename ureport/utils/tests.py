@@ -309,6 +309,21 @@ class UtilsTest(UreportTest):
             dict(female_count=2, female_percentage="40%", male_count=3, male_percentage="60%"),
         )
 
+        self.org.set_config("common.has_extra_gender", True)
+
+        ReportersCounter.objects.create(org=self.org, type="gender:o", count=5)
+        self.assertEqual(
+            get_gender_stats(self.org),
+            dict(
+                female_count=2,
+                female_percentage="20%",
+                male_count=3,
+                male_percentage="30%",
+                other_count=5,
+                other_percentage="50%",
+            ),
+        )
+
     @patch("django.core.cache.cache.get")
     def test_get_age_stats(self, mock_cache_get):
         mock_cache_get.return_value = None

@@ -394,7 +394,7 @@ ORG_CONFIG_FIELDS = [
     ),
     dict(
         name="has_extra_gender",
-        field=dict(help_text=_("Whether to activate an extra gender.")),
+        field=dict(help_text=_("Whether to activate an extra gender."), required=False),
         superuser_only=True,
         read_only=True,
     ),

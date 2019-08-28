@@ -280,23 +280,43 @@ def get_org_contacts_counts(org):
 def get_gender_stats(org):
     org_contacts_counts = get_org_contacts_counts(org)
 
+    has_extra_gender = org.get_config("common.has_extra_gender")
+
     female_count = org_contacts_counts.get("gender:f", 0)
     male_count = org_contacts_counts.get("gender:m", 0)
+    other_count = org_contacts_counts.get("gender:o", 0)
 
     if not female_count and not male_count:
-        return dict(female_count=female_count, female_percentage="---", male_count=male_count, male_percentage="---")
+        output = dict(female_count=female_count, female_percentage="---", male_count=male_count, male_percentage="---")
+        if has_extra_gender:
+            output["other_count"] = 0
+            output["other_percentage"] = "---"
+
+        return output
 
     total = female_count + male_count
+    if has_extra_gender:
+        total += other_count
 
     female_percentage = female_count * 100 // total
-    male_percentage = 100 - female_percentage
 
-    return dict(
+    other_percentage = 0
+    if has_extra_gender:
+        other_percentage = other_count * 100 // total
+
+    male_percentage = 100 - female_percentage - other_percentage
+
+    output = dict(
         female_count=female_count,
         female_percentage=six.text_type(female_percentage) + "%",
         male_count=male_count,
         male_percentage=six.text_type(male_percentage) + "%",
     )
+    if has_extra_gender:
+        output["other_count"] = other_count
+        output["other_percentage"] = six.text_type(other_percentage) + "%"
+
+    return output
 
 
 def get_age_stats(org):
