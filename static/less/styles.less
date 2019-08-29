@@ -1421,6 +1421,11 @@ each(range(15), {
 
 }
 
+
+.story-block {
+  min-height: 40rem;
+}
+
 .featured-story {
   padding: 2rem 7.5rem;
 
@@ -1433,6 +1438,9 @@ each(range(15), {
   .story-teaser {
     font-size: 1.5rem;
     font-family: @subheadlines-font;
+    max-height: 7rem;
+    margin-bottom: 2rem;
+    overflow-y: hidden;
   }
 
   .featured-story-label {
@@ -1442,15 +1450,18 @@ each(range(15), {
     margin: 1rem 0;
   }
 
+  .story-title, .story-teaser, .featured-story-label {
+    max-width: 80%;
+  }
+
   .story-image-bg {
     background-color: @gold-yellow;
     padding: 4rem;
     width: 35%;
-    margin-left: 10%;
     position: absolute;
     
     .story-image {
-      width: 150%;
+      width: 115%;
       float: right;
       padding: 3rem;
       background-color: #FFF;
@@ -1465,15 +1476,19 @@ each(range(15), {
 
   .story-title {
     text-align: right;
+    float: right;
   }
 
   .story-teaser {
-    text-align: right
+    text-align: right;
+    float:right;
+    
   }
   .featured-story-label {
     border-right: .3rem solid purple;
     border-left: none;
     text-align: right;
+    float:right;
   }    
 
   .read-more-button {
@@ -1487,7 +1502,7 @@ each(range(15), {
 
     
     .story-image {
-      width: 150%;
+      width: 115%;
       float: left;
       padding: 3rem;
       background-color: #FFF;
@@ -1501,7 +1516,7 @@ each(range(15), {
     color: #FFF;
     border: none;
     border-radius: 0;
-    padding: 2rem 3rem;
+    padding: 1rem 2rem;
     font-size: 1.5rem;
     font-family: @headline-font;
     margin: 3rem 0;

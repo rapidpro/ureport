@@ -6,27 +6,26 @@
   .booklet-bg.for-stories
   .booklet-bg-content
     .page-title-block
-      .columns
-        .column.page-title
+      .uk-grid-match(uk-grid)
+        .uk-width-1-2.page-title
           Stories
-        .column.categories-dropdown
+        .uk-width-1-2.categories-dropdown
           .dropdown
             .dropdown-trigger
-              %button.button(aria-haspopup="true" aria-controls="dropdown-menu")
+              %button.uk-button(aria-haspopup="true" aria-controls="dropdown-menu")
                 %span
                   -trans "SEARCH"
                 %span.icon.is-small
                   %i.fas.fa-caret-down(aria-hidden="true")
-            #dropdown-menu.dropdown-menu.polls-overlay(role="menu")
+            #dropdown-menu.dropdown-menu.polls-overlay(role="menu" uk-dropdown="mode: click" style="display: none;")
               .dropdown-content
                 .dropdown-item.search-polls
-                  .field.has-addons
-                    .control#search-input
-                      %input.input(type="text" placeholder="Search")
-                    .control#search-clear
-                      %span.icon
-                        %i.fas.fa-times
-                .dropdown-item.no-results.is-hidden
+                  .uk-margin
+                    .uk-inline#search-input(style="width:100%")
+                      %input.uk-input(type="text" placeholder="Search")
+                      %a#search-clear.uk-form-icon.uk-form-icon-flip(href="#" uk-icon="icon: close")
+
+                .dropdown-item.no-results.uk-hidden
                   No results...
                 .dropdown-item.polls-category(role="all-polls")
                   .polls-category-label
@@ -53,12 +52,11 @@
                               {{ story.title }} ({{story.created_on|date}})          
 
   - for story in featured|slice:"2"
-    .booklet-bg(class="story-bg-{{forloop.counter}}")
-    .booklet-bg-content
+    .story-block(class="story-bg-{{forloop.counter}}")
       .featured-story(class="story-{{forloop.counter}}")
-        .columns
+        .(uk-grid)
           - if not forloop.counter|divisibleby:2
-            .column
+            .uk-width-1-2
               .featured-story-label
                 -trans "FEATURED STORY"
               .story-title
@@ -67,7 +65,7 @@
                 {{ story.summary|linebreaksbr }}
               %a.read-more-button.button(href="{% url 'v2.public.story_read' story.pk %}")
                 -trans "READ MORE"
-          .column
+          .uk-width-1-2
             .story-image-bg
               .story-image
                 %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
@@ -79,7 +77,7 @@
               -#   %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}  
           
           - if forloop.counter|divisibleby:2
-            .column
+            .uk-width-1-2
               .featured-story-label
                 -trans "FEATURED STORY"
               .story-title
@@ -99,7 +97,7 @@
     $(".dropdown-trigger").on('click', function() {
       $(this).siblings('.dropdown-menu').toggleClass('is-active');
       $(this).toggleClass('rotation');
-      $(".polls-category-list").addClass("is-hidden");
+      $(".polls-category-list").addClass("uk-hidden");
       $("#search-input input").focus();
 
     });
@@ -115,47 +113,48 @@
     });
 
     $(".polls-category-label").on('click', function() {
-      $(this).siblings('ul').toggleClass('is-hidden');
+      $(this).siblings('ul').toggleClass('uk-hidden');
       $(this).toggleClass('rotation')
       $(this).toggleClass('is-active')
     });
 
+
     function resetPolls() {
-      $(".poll-list-item").removeClass("is-hidden");
+      $(".poll-list-item").removeClass("uk-hidden");
       $('.polls-category-label').removeClass('rotation');
-      $(".polls-category").removeClass("is-hidden");
-      $(".polls-category").children('ul').addClass("is-hidden");
-      $(".no-results").addClass('is-hidden');
+      $(".polls-category").removeClass("uk-hidden");
+      $(".polls-category").children('ul').addClass("uk-hidden");
+      $(".no-results").addClass('uk-hidden');
     }
 
     $("#search-clear").on("click", function() {
-      $(this).parent().children('#search-input').children('input').val("");
+      $(this).parent('#search-input').children('input').val("");
       resetPolls();
     });
 
     $("#search-input input").on('keyup', function() {
       var term = $(this).val().toLowerCase().trim();
-      $(".polls-category").addClass("is-hidden");
-      $(".no-results").addClass('is-hidden');
+      $(".polls-category").addClass("uk-hidden");
+      $(".no-results").addClass('uk-hidden');
       if(!term) {
-        $(".poll-list-item").removeClass("is-hidden");
+        $(".poll-list-item").removeClass("uk-hidden");
         resetPolls();
         return;
       } else {
         $(".poll-list-item").each( function() {
 
           if (!$(this).text().trim().toLowerCase().includes(term)) {
-            $(this).addClass("is-hidden");
+            $(this).addClass("uk-hidden");
           } else {
-            $(this).removeClass("is-hidden");
+            $(this).removeClass("uk-hidden");
           }
         })
       }
-      $(".poll-list-item:not(.is-hidden)").parent().parent(".polls-category").removeClass("is-hidden");
-      $(".polls-category:not(.is-hidden):not([role='all-polls'])").children('.polls-category-label').addClass('rotation');
-      $(".polls-category:not(.is-hidden):not([role='all-polls'])").children('ul').removeClass("is-hidden");
+      $(".poll-list-item:not(.uk-hidden)").parent().parent(".polls-category").removeClass("uk-hidden");
+      $(".polls-category:not(.uk-hidden):not([role='all-polls'])").children('.polls-category-label').addClass('rotation');
+      $(".polls-category:not(.uk-hidden):not([role='all-polls'])").children('ul').removeClass("uk-hidden");
 
-      if ($(".polls-category:not(.is-hidden)").length == 0) {
-        $(".no-results").removeClass('is-hidden');
+      if ($(".polls-category:not(.uk-hidden)").length == 0) {
+        $(".no-results").removeClass('uk-hidden');
       }
     })
