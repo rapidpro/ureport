@@ -243,59 +243,48 @@
       %footer.footer.uk-padding-remove
         -block footer
           #ureport-footer-desktop(uk-grid)
+            .uk-width-1-1(uk-grid)
+              .uk-width-2-3.uk-width-expand
+                .footer-logo
+                  %a(href="{% url 'v2.public.index' %}")
+                    {% thumbnail org.get_logo "350x65" format="PNG" as im %}
+                    %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+                    {% endthumbnail %}
+              .uk-width-1-3.uk-child-width-auto(uk-grid)
+                .uk-width-1-2.uk-float-right.uk-text-right.footer-nav-big-link
+                  %a(href="{% url 'v2.public.opinions' %}")
+                    - trans "Opinions"
+                .uk-width-1-2.uk-float-right.uk-text-right.footer-nav-big-link
+                  %a(href="{% url 'v2.public.stories' %}")
+                    - trans "Stories"
 
-            .uk-width-1-3.uk-child-width-expand(uk-grid)
-              .footer-logo
-                %a(href="{% url 'v2.public.index' %}") 
-                  {% thumbnail org.get_logo "350x65" format="PNG" as im %}
-                  %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
-                  {% endthumbnail %}
-            .uk-width-1-3
-            .uk-width-1-3.uk-float-right(uk-grid)
-              .uk-width-1-6
-              .uk-width-1-6
-              .uk-width-1-6
-              .uk-width-1-6
-              .uk-width-1-6.uk-float-right
-                %a(href="{% url 'v2.public.opinions' %}")
-                  - trans "Opinions"
-              .uk-width-1-6.uk-float-right
-                %a(href="{% url 'v2.public.stories' %}")
-                  - trans "Stories"
-              .uk-width-1-6
-              .uk-width-1-6
-              .uk-width-1-6
-              .uk-width-1-6
-              .uk-width-1-6.uk-float-right
-                %a(href="" uk-icon="icon: facebook")
-
-              .uk-width-1-6.uk-float-left
-                %a(href="" uk-icon="icon: twitter")                                    
-            .uk-width-1-1.uk-child-width-auto(uk-grid)
-                .
+            .uk-width-1-1(uk-grid)
+              .uk-width-2-3.uk-child-width-auto.uk-width-expand(uk-grid)
+                .footer-nav-small-link
                   %a(href="{% url 'v2.public.about' %}")
                     - trans "About"
-                .
+                .footer-nav-small-link
                   %a(href="{% url 'v2.public.ureporters' %}")
                     - trans "Engagement"
 
                 - if org|config:"has_jobs"
-                  .
+                  .footer-nav-small-link
                     %a(href="{% url 'v2.public.jobs' %}")
                       - trans "Jobs"
 
                 - for custom_page in additional_menu|slice:":3"
-                  .
+                  .footer-nav-small-link
                     %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
                       {{custom_page.title}}
 
-                .uk-width-1-3(uk-grid)
-                  .uk-width-1-6
-                  .uk-width-1-6
-                  .uk-width-1-6
-                  .uk-width-1-6
-
-
+              .uk-width-1-6.uk-float-right.uk-child-width-auto.uk-margin-remove(uk-grid)
+                .uk-width-1-3
+                .uk-width-1-3.uk-text-right.uk-float-right
+                  .footer-nav-small-link.social-media-link
+                    %a(href="" uk-icon="icon: facebook;ratio: 3")
+                .uk-width-1-3.uk-text-right.uk-float-right
+                  .footer-nav-small-link.social-media-link
+                    %a(href="" uk-icon="icon: twitter;ratio: 3")
     
     %section.uk-section.uk-padding-remove(style="background:#ff0;height:14px")
     %section.uk-section.uk-padding-remove(style="height:0px")
