@@ -178,7 +178,6 @@
       });
   
       $(".uk-switcher li.engagement-graph").on('beforeshow', function(event) {
-        console.log(event);
         var graphDiv = $("#" + event.target.id).children(".has-graph");
         var metricSlug = graphDiv.attr("data-metric-slug");
         var segmentType = graphDiv.attr("data-segment-type");
@@ -356,6 +355,7 @@
         for (i=0; i<results.length; i++){
           result = results[i];
           if(locationIds.includes(result.name)) {
+            result.color = colors[locationsResults.length % colors.length]
             locationsResults.push(result);
           }
         }
