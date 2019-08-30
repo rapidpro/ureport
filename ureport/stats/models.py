@@ -4,7 +4,7 @@ from datetime import timedelta
 from dash.orgs.models import Org
 
 from django.db import models
-from django.db.models import Count, ExpressionWrapper, F, IntegerField, Sum
+from django.db.models import Count, ExpressionWrapper, F, IntegerField, Q, Sum
 from django.db.models.functions import ExtractYear
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -48,8 +48,6 @@ class PollStats(models.Model):
 
     @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):
-        if segment_slug == "location":
-            return []
 
         if metric == "opinion-responses":
             if segment_slug == "all":
@@ -58,6 +56,8 @@ class PollStats(models.Model):
                 return PollStats.get_age_opinion_responses(org, time_filter)
             if segment_slug == "gender":
                 return PollStats.get_gender_opinion_responses(org, time_filter)
+            if segment_slug == "location":
+                return PollStats.get_location_opinion_responses(org, time_filter)
 
         if metric == "sign-up-rate":
             if segment_slug == "all":
@@ -66,6 +66,8 @@ class PollStats(models.Model):
                 return org.get_sign_up_rate_age(time_filter)
             if segment_slug == "gender":
                 return org.get_sign_up_rate_gender(time_filter)
+            if segment_slug == "location":
+                return org.get_sign_up_rate_location(time_filter)
 
         if metric == "response-rate":
             if segment_slug == "all":
@@ -74,6 +76,8 @@ class PollStats(models.Model):
                 return PollStats.get_age_response_rate_series(org, time_filter)
             if segment_slug == "gender":
                 return PollStats.get_gender_response_rate_series(org, time_filter)
+            if segment_slug == "location":
+                return PollStats.get_location_response_rate_series(org, time_filter)
 
         if metric == "active-users":
             if segment_slug == "all":
@@ -82,6 +86,8 @@ class PollStats(models.Model):
                 return ContactActivity.get_activity_age(org, time_filter)
             if segment_slug == "gender":
                 return ContactActivity.get_activity_gender(org, time_filter)
+            if segment_slug == "location":
+                return ContactActivity.get_contact_activity_location(org, time_filter)
         return []
 
     @classmethod
@@ -111,6 +117,30 @@ class PollStats(models.Model):
             )
             series = PollStats.get_counts_data(responses, time_filter)
             output_data.append(dict(name=gender["gender"], data=series))
+        return output_data
+
+    @classmethod
+    def get_location_opinion_responses(cls, org, time_filter):
+        now = timezone.now()
+        year_ago = now - timedelta(days=365)
+        start = year_ago.replace(day=1)
+
+        top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
+        output_data = []
+        for osm_id, name in top_boundaries.items():
+            boundary_ids = list(
+                Boundary.objects.filter(org=org)
+                .filter(Q(osm_id=osm_id) | Q(parent__osm_id=osm_id) | Q(parent__parent__osm_id=osm_id))
+                .values_list("pk", flat=True)
+            )
+            responses = (
+                PollStats.objects.filter(org=org, date__gte=start, location_id__in=boundary_ids)
+                .exclude(category=None)
+                .values("date")
+                .annotate(Sum("count"))
+            )
+            series = PollStats.get_counts_data(responses, time_filter)
+            output_data.append(dict(name=name, osm_id=osm_id, data=series))
         return output_data
 
     @classmethod
@@ -181,6 +211,35 @@ class PollStats(models.Model):
                 name="Response Rate", data=PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
             )
         ]
+
+    @classmethod
+    def get_location_response_rate_series(cls, org, time_filter):
+        now = timezone.now()
+        year_ago = now - timedelta(days=365)
+        start = year_ago.replace(day=1)
+
+        top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
+        output_data = []
+        for osm_id, name in top_boundaries.items():
+            boundary_ids = list(
+                Boundary.objects.filter(org=org)
+                .filter(Q(osm_id=osm_id) | Q(parent__osm_id=osm_id) | Q(parent__parent__osm_id=osm_id))
+                .values_list("pk", flat=True)
+            )
+            polled_stats = (
+                PollStats.objects.filter(org=org, date__gte=start, location_id__in=boundary_ids)
+                .values("date")
+                .annotate(Sum("count"))
+            )
+            responded_stats = (
+                PollStats.objects.filter(org=org, date__gte=start, location_id__in=boundary_ids)
+                .exclude(category=None)
+                .values("date")
+                .annotate(Sum("count"))
+            )
+            series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
+            output_data.append(dict(name=name, osm_id=osm_id, data=series))
+        return output_data
 
     @classmethod
     def get_gender_response_rate_series(cls, org, time_filter):
@@ -410,4 +469,23 @@ class ContactActivity(models.Model):
             series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=gender["gender"], data=series))
 
+        return output_data
+
+    @classmethod
+    def get_contact_activity_location(cls, org, time_filter):
+        now = timezone.now()
+        today = now.date()
+        year_ago = now - timedelta(days=365)
+        start = year_ago.replace(day=1).date()
+
+        top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
+        output_data = []
+        for osm_id, name in top_boundaries.items():
+            activities = (
+                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, state=osm_id)
+                .values("date")
+                .annotate(Count("id"))
+            )
+            series = ContactActivity.get_activity_data(activities, time_filter)
+            output_data.append(dict(name=name, osm_id=osm_id, data=series))
         return output_data

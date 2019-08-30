@@ -364,7 +364,7 @@ class UreportersView(SmartTemplateView):
             dict(segment_type="all", label="All"),
             dict(segment_type="age", label="Age"),
             dict(segment_type="gender", label="Gender"),
-            # dict(segment_type='location', label="Location"),
+            dict(segment_type="location", label="Location"),
         ]
         context["data_metrics"] = [
             dict(slug="opinion-responses", title="Opinion Responses"),

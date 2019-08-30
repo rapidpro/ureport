@@ -92,8 +92,17 @@
                 .block-graph-tab-buttons
                   .uk-button-group.ureport-graph-tabs-button(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
                     - for segment in data_segments
-                      %button.uk-button.uk-button-default(class="{% if forloop.first %}left-most{% endif %}{% if forloop.last %}right-most{% endif %}")
-                        {{segment.label}}
+                      -if segment.segment_type == 'location'
+                        %button.uk-button.uk-button-default(class="right-most" id="states-dropdown-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
+                          {{segment.label}}
+                        .uk-padding-remove(uk-dropdown="mode:click;" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                          %ul#states-selector.uk-list.uk-list-striped.uk-height-medium.uk-overflow-auto
+                            - for state in states
+                              %li.state-selector(data-location-id='{{state.name}}')
+                                {{state.name}}
+                      -else
+                        %button.uk-button.uk-button-default(class="{% if forloop.first %}left-most{% endif %}")
+                          {{segment.label}}
               .uk-width-2-3.block-content.animate-graph(uk-scrollspy="cls:uk-animation-fade; delay:200; repeat:true;")
                 %ul.uk-switcher.engagement-graph-tabs(id="graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
                   - for segment in data_segments
@@ -179,10 +188,12 @@
         if (segmentType == 'all') {
           chartType = "spline";
         }
-  
-  
+
+        if(segmentType == "location") {
+          return
+        }
+
         var series = Window.UreportEngagementStats[metricSlug + "-" + segmentType + "-" + timeFilter];
-  
         $('#engagement-graph-' + metricSlug + "-" + segmentType + "-" + timeFilter).highcharts({
           chart: {
               type: chartType
@@ -248,10 +259,14 @@
         var metricSlug = graphDiv.attr("data-metric-slug");
         var segmentType = graphDiv.attr("data-segment-type");
         var timeFilter = graphDiv.attr("data-time-filter");
-  
+
         var chartType = "column";
         if (segmentType == 'all') {
           chartType = "spline";
+        }
+
+        if(segmentType == "location") {
+          return
         }
         var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
         var series = Window.UreportEngagementStats[dataSlug];
@@ -297,8 +312,90 @@
           series : series
           });
       });
-    });
 
+      $(".state-selector").on('click', function(event) {
+        event.stopPropagation();
+        var locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+
+        if(locationIds.length < 5) {
+          $(this).toggleClass('is-selected');
+        } else if ($(this).hasClass('is-selected')) {
+          $(this).removeClass('is-selected');
+        } else {
+          return
+        }
+        locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+
+        var dataDiv = $(this).parent().parent();
+
+        var metricSlug = dataDiv.attr("data-metric-slug");
+        var segmentType = dataDiv.attr("data-segment-type");
+        var timeFilter = dataDiv.attr("data-time-filter");
+
+        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
+        var results = Window.UreportEngagementStats[dataSlug];
+
+        var colors = ["#E3002B", "#050E28", "#FED100", "#3FB5E5", "#FF8200", "#009316"];
+
+        var locationsResults = [];
+        for (i=0; i<results.length; i++){
+          result = results[i];
+          if(locationIds.includes(result.name)) {
+            locationsResults.push(result);
+          }
+        }
+
+        var chartType = "column";
+
+        $('#engagement-graph-' + dataSlug).highcharts({
+          chart: {
+              type: chartType
+          },
+          title: {
+              text: null
+          },
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: {
+                month: '%b %Y',
+                year: '%Y'
+              },
+          },
+          yAxis: {
+              title: {
+                  text: null
+              },
+              min: 0
+          },
+          tooltip: {
+              headerFormat: '<b>{series.name}</b><br>',
+              pointFormat: '{point.x: %b %Y}: {point.y}'
+          },
+
+          plotOptions: {
+              spline: {
+                  marker: {
+                      enabled: true
+                  }
+              }
+          },
+
+          credits: {
+            enabled: false
+          },
+
+          colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+          series : locationsResults
+          });
+
+        if($("#states-dropdown-" + question).hasClass('uk-open')) {
+          $("#states-dropdown-" + question).addClass('uk-active')
+        }
+        $('#locations-tab-' + question).addClass('uk-active');
+
+      });
+
+    });
 
     $("#age-chart").each(function(){
 
@@ -433,4 +530,11 @@
       {% if org|config:"is_global" %}
       display: none;
       {% endif %}
+    }
+
+    #states-selector .state-selector.is-selected {
+      font-weight: bold;
+      background-color: #333;
+      color: #EEE;
+
     }

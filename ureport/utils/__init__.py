@@ -396,6 +396,43 @@ def get_sign_up_rate(org, time_filter):
     return [dict(name="Sign-Up Rate", data=data)]
 
 
+def get_sign_up_rate_location(org, time_filter):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[17:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_state")}
+
+    top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
+
+    keys = get_last_months(months_num=time_filter)
+    output_data = []
+
+    for osm_id, name in top_boundaries.items():
+        interval_dict = defaultdict(int)
+        for date_key, date_count in registered_on_counts.items():
+            if date_key.endswith(f":{osm_id.upper()}"):
+                date_key = date_key[:10]
+            else:
+                continue
+
+            parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
+                day=1, hour=0, minute=0, second=0, microsecond=0
+            )
+
+            if parsed_time > start:
+                interval_dict[str(parsed_time.date())] += date_count
+
+        data = dict()
+        for key in keys:
+            data[key] = interval_dict[key]
+        output_data.append(dict(name=name, osm_id=osm_id, data=data))
+    return output_data
+
+
 def get_sign_up_rate_gender(org, time_filter):
     now = timezone.now()
     year_ago = now - timedelta(days=365)
@@ -839,3 +876,4 @@ Org.get_sign_up_rate = get_sign_up_rate
 Org.get_sign_up_rate_gender = get_sign_up_rate_gender
 Org.get_sign_up_rate_age = get_sign_up_rate_age
 Org.get_logo = get_logo
+Org.get_sign_up_rate_location = get_sign_up_rate_location
