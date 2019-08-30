@@ -341,7 +341,10 @@ class UreportersView(SmartTemplateView):
         # remove the first option '' from calender.month_abbr
         context["months"] = [six.text_type(_("%s")) % m for m in calendar.month_abbr][1:]
 
-        context["states"] = [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()]
+        context["states"] = sorted(
+            [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()],
+            key=lambda c: c["name"],
+        )
 
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = org.get_age_stats()
