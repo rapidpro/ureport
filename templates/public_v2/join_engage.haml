@@ -3,6 +3,93 @@
 - load dashblocks thumbnail ureport i18n
 
 -block content
+  .booklet-bg
+  .booklet-bg-content
+    .page-title-block
+      .uk-grid-match(uk-grid)
+        .uk-width-1-2.page-title
+          Join Now
+        .uk-width-1-2
+
+
+  .join-steps-block(uk-grid)
+    .uk-width-1-1.uk-margin-remove.join-block.block-colored-bg-gold-yellow(uk-grid style='color: #000;')
+      .uk-width-1-2
+        .join-block-content.has-bottom-border(style="border-color: #000;")
+          .step-number
+            1
+          .step-title
+            How would you like to join? 
+
+      .uk-width-1-2
+        .join-block-content
+          .step-description.social-media-buttons
+            .(uk-grid)
+              .
+                %a.join-facebook(href='http://m.me/{{ org|config:"facebook_page_id" }}')
+                  .join-btn
+                    %i.fab.fa-facebook-f
+                  .join-bnt-text
+                    Facebook
+              .
+                %a.join-Whatsapp(href="https://wa.me/66800249442")
+                  .join-btn
+                    %i.fab.fa-whatsapp
+                  .join-bnt-text
+                    Whatsapp
+              
+
+    .uk-width-1-1.uk-margin-remove.join-block(uk-grid style='background-color: {{ org|config:"primary_color" }};')
+      .uk-width-1-2
+        .join-block-content.has-bottom-border
+          .step-number
+            2
+          .step-title
+            Text
+      
+      .uk-width-1-2
+        .join-block-content
+          .step-description
+            Text the word join to 24453 - All U-Report SMSs are free
+
+    .uk-width-1-1.uk-margin-remove.join-block.block-colored-bg-light-blue(uk-grid)
+      .uk-width-1-2
+        .join-block-content.has-bottom-border
+          .step-number
+            3
+          .step-title
+            Sign up
+      
+      .uk-width-1-2
+        .join-block-content
+          .step-description
+            We will send you a few questions via SMS to complete sign up so we can learn a little about you to better listen to your voice.
+            Once you are done, we'll send you a confirmation.
+
+    .uk-width-1-1.uk-margin-remove.join-block(uk-grid style='background-color: {{ org|config:"secondary_color" }}')
+      .uk-width-1-2
+        .join-block-content.has-bottom-border
+          .step-number
+            4
+          .step-title
+            Get Involved
+      
+      .uk-width-1-2
+        .join-block-content
+          .step-description
+            You will now get to receive messages asking  your opinion on meaningful %issues!
+            To exit U-Report just send youreportexit to 24453
+
+  .join-notice-block.join-block.uk-margin-remove(uk-grid)
+    .uk-width-1-3
+        If you want to unsubscribe,
+        %a(href="")
+          follow this link
+    .uk-width-2-3
+      * U-Report is a free program sponsored by UNICEF with help of Network Providers in Nigeria. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on 24453) are free.
+
+
+- block srs
   .block-row
     .columns.is-paddingless.is-marginless
       .column.block-content.dotted-bg.join-content
