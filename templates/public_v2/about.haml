@@ -7,13 +7,12 @@
   - load_qbs request.org 'about'
   .booklet-bg
   .booklet-bg-content
-    .content-bg-1
-    .content-bg-2
+
     .content-block-content 
       - for d_block in about|slice:":1"
         .about-title-block
           .about-title-picture
-            %img{width:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+            %img{src:"{{ STATIC_URL }}img/u-icon-small.png"}
           -# {% thumbnail d_block.image "400x300" crop="top" as im %}
           -#   <img width="100%" height="100%" src="{{im.url}}" />
           -# {% empty %}
@@ -29,7 +28,9 @@
           {{d_block.content|safe}}
 
           .about-text-picture
-            %img{width:"70%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+            {% thumbnail d_block.image "400x300" crop="top" as im %}
+             <img width="100%" height="100%" src="{{im.url}}" />
+            {% empty %}
+              %img{width:"70%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}  
+            {% endthumbnail %}
 
-          .about-comments
-            .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.about' %}" data-width="100%" data-numposts="5")
