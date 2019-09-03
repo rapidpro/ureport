@@ -5,9 +5,9 @@
 - block content
   - if latest_poll
     .homepage-latest-poll
-      .columns.is-paddingless.is-marginless
+      .uk-margin-remove(uk-grid)
         .homepage-color-bg-main
-        .column.block-content.is-half.homepage-color-bg-content
+        .uk-width-1-2.block-content.is-half.homepage-color-bg-content
           .recent-results-label
             Recent Poll Results
           .poll-title
@@ -16,19 +16,19 @@
             -if latest_poll.get_first_question
               {{ latest_poll.get_first_question.title }}
             
-        .column.block-content.is-half.booklet-bg-no-margin
+        .uk-width-1-2.block-content.is-half.booklet-bg-no-margin
           -if latest_poll.get_first_question
             .top-question-graph
               .poll-question-graph-all.has-highcharts(id="graph-all-question-{{latest_poll.get_first_question.id}}" data-question="{{latest_poll.get_first_question.id}}")
-          .view-results.columns
-            .column
+          .view-results.uk-child-width-1-1(uk-grid)
+            .
               %a.button.view-full-results.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
                 - trans "VIEW FULL RESULTS"
               
 
   .homepage-reporters-stats
-    .columns.is-paddingless.is-marginless
-      .column
+    .uk-margin-remove(uk-grid)
+      .uk-width-1-2
         .local-count-label
           - trans "U-REPORTERS IN"
           {{ org.name|upper }}
@@ -38,16 +38,16 @@
           - trans "U-REPORTERS WORLDWIDE:"
         .worldwide-count
           {{ global_counter|intcomma }}
-      .column
-        .columns.has-graph
-          .column.is-1.graph-title
+      .uk-width-1-2
+        .has-graph.uk-child-width-1-1(uk-grid)
+          .graph-title
             - trans "AGES"
-          .column.graph-chart
+          .graph-chart
             .age-stats{ id: "age-chart"}
   
   .block-row
-    .columns.is-paddingless.is-marginless
-      .column.block-content.homepage-color-bg-1
+    .uk-margin-remove(uk-grid)
+      .uk-width-1-2.block-content.homepage-color-bg-1
         .homepage-block-content
           .join-video
             %img(height="100%" src="{{ STATIC_URL }}img/homepage_video_placeholder.png" style="border: 2px solid red;") 
@@ -56,14 +56,14 @@
           .join-button.button
             JOIN NOW
 
-      .column.block-content
+      .uk-width-1-2.block-content
         .social-media-block
           .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"850", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
   
   - for story in stories|slice:"1"
     .block-row.homepage-story
-      .columns.is-paddingless.is-marginless
-        .column.block-content.homegage-dotted-bg
+      .uk-margin-remove(uk-grid)
+        .uk-width-1-2.block-content.homegage-dotted-bg
           .pre-story-block
           .featured-story-label
             -trans "FEATURED STORY"
@@ -74,7 +74,7 @@
           %a.read-more-button.button(href="{% url 'v2.public.story_read' story.pk %}")
             -trans "READ MORE"
 
-        .column.block-content.homepage-color-bg-2
+        .uk-width-1-2.block-content.homepage-color-bg-2
           .pre-u-border
           .u-bg
             %img{height:"100%", src:"{{ STATIC_URL }}img/u-green.png"}
@@ -91,19 +91,19 @@
   
   - if feat_images
     .homepage-tiles
-      .columns.is-paddingless.is-marginless
-        .column.block-content.homepage-color-bg-3
+      .uk-margin-remove(uk-grid)
+        .uk-width-1-2.block-content.homepage-color-bg-3
           .photo-tiles-title
             Photos Tiles
           .photo-tiles-description
             The area can be edited when the poll is over to focus additionally on review and learnings, this second area can also be edited in the same way. It is important to give context  to all our polls. This will be character limited to hold the space correctly and encourage simplicity.  
           %a.read-more-button.button(href="#")
             -trans "READ MORE"
-        .column.block-content
-          .columns.is-multiline
+        .uk-width-1-2.block-content
+          .uk-child-width-1-2(uk-grid)
             -for image in feat_images
               - if forloop.counter0 < 6
-                .column.is-half
+                .
                   %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
 
 
