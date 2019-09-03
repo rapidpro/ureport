@@ -148,6 +148,158 @@
                        - else
                           %img{ src:"{{ STATIC_URL }}img/flags/flag_ar.png" }
                       -#   %img{ src:"{{ site.flag }}" }
+    - if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
+      %section#ureport-admin-navbar-top-section.uk-section.uk-padding-remove-vertical
+        %nav.uk-navbar-container.ureport-admin-navbar(uk-navbar)
+          .uk-navbar-center
+            %ul.uk-navbar-nav
+              %li
+                %a(href="{% url 'orgs.org_home' %}")
+                  {{ org.name }} - 
+                  - trans "Admin"
+              - if request.user.is_superuser
+                %li
+                  %a(href="#")
+                    - trans "Configuration"
+                  .uk-navbar-dropdown
+                    %ul.uk-nav.uk-navbar-dropdown-nav
+                      %li
+                        %a{href:"{% url 'orgs.org_list' %}"}
+                          - trans "Orgs"
+
+                      %li
+                        %a{ href:"/users/user/"}
+                          - trans "Users"
+
+                      %li
+                        %a{ href:"{% url 'dashblocks.dashblocktype_list' %}"}
+                          - trans "Content Types"
+
+                      - if request.user.is_superuser or org_perms.assets.image_list
+                        %li
+                          %a{ href:"{% url 'assets.image_list' %}"}
+                            - trans "Images"
+                  %li
+                    %a{ href:"{% url 'dashblocks.dashblock_list' %}"}
+                      - trans "Content"
+
+              -if org|config:"is_global"
+                -if request.user.is_superuser or perms.countries.countryalias_list
+                  %li
+                    %a{ href:"{% url 'countries.countryalias_list' %}"}
+                      - trans "Country Aliases"
+
+              - if request.user.is_superuser or org_perms.polls.poll_list
+                %li
+                  %a{ href:"{% url 'polls.poll_list' %}"}
+                    - trans "Polls"
+
+              - if request.user.is_superuser or org_perms.categories.category_list
+                %li
+                  %a(href="#")
+                    - trans "Categories"
+                  .uk-navbar-dropdown
+                    %ul.uk-nav.uk-navbar-dropdown-nav
+                      - if perms.categories.category_list or org_perms.categories.category_list
+                        %li
+                          %a{ href:"{% url 'categories.category_list' %}"}
+                            - trans "Categories"
+
+                      - if perms.categories.categoryimage_list or org_perms.categories.categoryimage_list
+                        %li
+                          %a{ href:"{% url 'categories.categoryimage_list' %}"}
+                            - trans "Category Images"
+
+              - if request.user.is_superuser or org_perms.dashblocks.dashblock_list
+                %li
+                  %a(href="#")
+                    - trans "Content"
+                  .uk-navbar-dropdown
+                    %ul.uk-nav.uk-navbar-dropdown-nav
+                      - if request.user.is_superuser or org_perms.news.newsitem_list
+                        %li
+                          %a{ href:"{% url 'news.newsitem_list' %}"}
+                            - trans "News Items"
+
+                        %li.uk-nav-divider
+
+                      - if request.user.is_superuser or org_perms.stories.story_list
+                        %li
+                          %a{ href:"{% url 'stories.story_list' %}"}
+                            - trans "Stories"
+
+                        %li.uk-nav-divider
+
+                      - if request.user.is_superuser or org_perms.jobs.jobsource_list
+                        %li
+                          %a{ href:"{% url 'jobs.jobsource_list' %}"}
+                            - trans "Job Sources"
+
+                        -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
+
+                         %li
+                            %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=jobs"}
+                              - trans "Jobs Content"
+
+                        %li.uk-nav-divider
+
+                      -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=about"}
+                            - trans "About Content"
+
+                        %li
+                          %a{ href:"{% url 'news.video_list' %}"}
+                            - trans "Videos"
+
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=contact_us"}
+                            - trans "Contact Us Content"
+
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=missions"}
+                            - trans "Missions Content"
+
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=terms_conditions"}
+                            - trans "Terms & Conditions"
+
+                        %li.uk-nav-divider
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=ureporters"}
+                            - trans "U-Reporters Content"
+
+                        %li.uk-nav-divider
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=join_engage"}
+                            - trans "Join &amp; Engage Content"
+
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=join_steps"}
+                            - trans "Join Steps Content"
+
+                        %li.uk-nav-divider
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=additional_menu"}
+                            - trans "Additional Menu"
+
+
+          .uk-navbar-right
+
+           %ul.uk-navbar-nav
+              - block login
+                - if request.user and request.user.is_authenticated
+                  %li
+                    %a.pull-left{ href:"{% url 'users.user_profile' request.user.pk %}"}
+                      {{ request.user.username }}
+                  %li
+                    %a.pull-right{ href:"{% url 'users.user_logout' %}?go=/"}
+                      - trans "Logout"
+                - else
+                  %li
+                    %a{ href:"{% url 'users.user_login' %}"}
+                      - trans "Login"
+
     %section#ureport-public-navbar-top-section.uk-section.uk-padding-remove-vertical
       -block navbar
         %nav#public-other-header-navbar.uk-navbar-container(uk-navbar)
