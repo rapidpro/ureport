@@ -143,6 +143,7 @@ MIDDLEWARE = (
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "dash.orgs.middleware.SetOrgMiddleware",
+    "ureport.utils.middleware.CheckVersionMiddleware",
 )
 
 ROOT_URLCONF = "ureport.urls"

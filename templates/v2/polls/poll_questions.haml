@@ -1,5 +1,5 @@
 -extends "smartmin/update.html"
--load smartmin
+-load smartmin i18n
 
 -block fields
   <fieldset>
@@ -15,16 +15,15 @@
 
 - block post-form
   -if request.user.is_superuser or perms.polls.poll_pull_refresh
-    %form.smartmin-form.form-horizontal{action:"{% url 'polls.poll_pull_refresh' object.id %}", method:"post",  enctype:"multipart/form-data"}
+    %form.smartmin-form(action="{% url 'polls.poll_pull_refresh' object.id %}" method="post"  enctype="multipart/form-data")
       - csrf_token
-      .control-group
-        %label.control-label
-          Poll Results Data
-        .controls
-          .row
+      .field
+        %label.label
+          - trans "Poll Results Data"
+        .control
             .col-md-3
-              %button.btn.btn-primary.btn-block{type:"submit", name:"poll", value:"{{object.id}}"}
-                Refresh Results
+              %button.button.is-primary(type="submit" name="poll" value="{{object.id}}")
+                - trans "Refresh Results"
 
 
 -block extra-style
@@ -34,3 +33,5 @@
       margin-bottom: 10px;
       padding: 10px;
     }
+
+

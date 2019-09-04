@@ -14,8 +14,20 @@ admin.autodiscover()
 
 
 urlpatterns = [
-    url(r"^", include("ureport.public.urls")),
     url(r"^v2/", include("ureport.public_v2.urls")),
+    url(r"^v2/manage/", include("ureport.admins.urls")),
+    url(r"^v2/manage/", include("dash.orgs.urls")),
+    url(r"^v2/manage/", include("dash.dashblocks.urls")),
+    url(r"^v2/manage/", include("dash.stories.urls")),
+    url(r"^v2/manage/", include("ureport.polls.urls")),
+    url(r"^v2/manage/", include("dash.categories.urls")),
+    url(r"^v2/manage/", include("ureport.news.urls")),
+    url(r"^v2/manage/", include("ureport.jobs.urls")),
+    url(r"^v2/manage/", include("ureport.countries.urls")),
+    url(r"^v2/manage/", include("ureport.assets.urls")),
+    url(r"^v2/users/", include("dash.users.urls")),
+    url(r"^v2/manage/", include("smartmin.csv_imports.urls")),
+    url(r"^", include("ureport.public.urls")),
     url(r"^manage/", include("ureport.admins.urls")),
     url(r"^manage/", include("dash.orgs.urls")),
     url(r"^manage/", include("dash.dashblocks.urls")),
