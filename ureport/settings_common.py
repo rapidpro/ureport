@@ -400,6 +400,12 @@ ORG_CONFIG_FIELDS = [
         read_only=True,
     ),
     dict(
+        name="has_new_design",
+        field=dict(help_text=_("Whether to activate the new design."), required=False),
+        superuser_only=True,
+        read_only=True,
+    ),
+    dict(
         name="iso_code",
         field=dict(
             help_text=_(
