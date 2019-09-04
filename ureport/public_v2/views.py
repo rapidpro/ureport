@@ -20,7 +20,7 @@ from ureport.utils import get_global_count
 
 
 class IndexView(SmartTemplateView):
-    template_name = "public_v2/index.html"
+    template_name = "v2/public/index.html"
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -60,7 +60,7 @@ class IndexView(SmartTemplateView):
 
 
 class Count(SmartTemplateView):
-    template_name = "public_v2/count"
+    template_name = "v2/public/count"
 
     def get_context_data(self, **kwargs):
         context = super(Count, self).get_context_data()
@@ -99,7 +99,7 @@ class NewsView(SmartTemplateView):
 
 
 class AdditionalMenu(SmartTemplateView):
-    template_name = "public_v2/additional_menu.haml"
+    template_name = "v2/public/additional_menu.haml"
 
     def get_context_data(self, **kwargs):
         context = super(AdditionalMenu, self).get_context_data(**kwargs)
@@ -110,7 +110,7 @@ class AdditionalMenu(SmartTemplateView):
 
 
 class AboutView(SmartTemplateView):
-    template_name = "public_v2/about.html"
+    template_name = "v2/public/about.html"
 
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)
@@ -152,7 +152,7 @@ class PollContextMixin(object):
 
 
 class PollsView(PollContextMixin, SmartTemplateView):
-    template_name = "public_v2/polls.html"
+    template_name = "v2/public/polls.html"
 
     def get_context_data(self, **kwargs):
         context = super(PollsView, self).get_context_data(**kwargs)
@@ -164,7 +164,7 @@ class PollsView(PollContextMixin, SmartTemplateView):
 
 
 class PollReadView(PollContextMixin, SmartReadView):
-    template_name = "public_v2/polls.html"
+    template_name = "v2/public/polls.html"
     model = Poll
 
     def derive_queryset(self):
@@ -177,7 +177,7 @@ class PollReadView(PollContextMixin, SmartReadView):
 
 
 class StoriesView(SmartTemplateView):
-    template_name = "public_v2/stories.html"
+    template_name = "v2/public/stories.html"
 
     def get_context_data(self, **kwargs):
         context = super(StoriesView, self).get_context_data(**kwargs)
@@ -196,7 +196,7 @@ class StoriesView(SmartTemplateView):
 
 
 class StoryReadView(SmartReadView):
-    template_name = "public_v2/story_read.html"
+    template_name = "v2/public/story_read.html"
     model = Story
 
     def derive_queryset(self):
@@ -235,7 +235,7 @@ class StoryReadView(SmartReadView):
 
 
 class UreportersView(SmartTemplateView):
-    template_name = "public_v2/ureporters.html"
+    template_name = "v2/public/ureporters.html"
 
     def get_context_data(self, **kwargs):
         context = super(UreportersView, self).get_context_data(**kwargs)
@@ -257,7 +257,7 @@ class UreportersView(SmartTemplateView):
 
 
 class JoinEngageView(SmartTemplateView):
-    template_name = "public_v2/join_engage.html"
+    template_name = "v2/public/join_engage.html"
 
     def get_context_data(self, **kwargs):
         context = super(JoinEngageView, self).get_context_data(**kwargs)
@@ -268,7 +268,7 @@ class JoinEngageView(SmartTemplateView):
 
 
 class JobsView(SmartTemplateView):
-    template_name = "public_v2/jobs.html"
+    template_name = "v2/public/jobs.html"
 
     def get_context_data(self, **kwargs):
         context = super(JobsView, self).get_context_data(**kwargs)

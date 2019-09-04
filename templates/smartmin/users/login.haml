@@ -1,46 +1,38 @@
-- extends "base_admin_dashboard.html"
+- extends "base.html"
 
-- load smartmin i18n ureport
+- load smartmin i18n
 
 - block login
-- block welcome-text
 
-- block content-section
-  .content-section
-    - block content
-      .columns.login-form
-        .column.is-5.left-block
-          .page-title
-            - trans "SIGN IN"
-          .grey-block(style="width:70%;")
-          .grey-block(style="width:45%;")
-          .grey-block(style="width:70%;")
-          .grey-block(style="width:55%;")
-          .grey-block
+- block content
+  .row.login-form
+    .col-md-7.col-md-offset-2
+      .page-header
+        %h2
+          - trans "Sign in"
+
+      %form#login-form.form-stacked{method:"post"}
+        - for field, errors in form.errors.items
+          - if field == '__all__'
+            .alert.alert-danger.form-errors
+              %h3
+                Error
+              {{ errors }}
+      
+        %fieldset
+          - for field in form
+            .form-group{class:"{% if field.error %}has-error{% endif %}"}
+              %label{ for:"={ field.name }"}
+                {{ field.label }}
+              .input
+                {{ field|add_css:"form-control" }}
+              - if field.error
+                %span.help-block
+                  {{ field.error }}
+          - csrf_token
+          %button.btn.btn-primary.login-btn{ type:"submit"}
+            - trans "Login"
           - if allow_email_recovery
-            %span.forgot-password-link
-              %a.has-text-info(href="{% url 'users.user_forget' %}")
+            %span.pull-right{ style:"padding-top:7px;padding-right:150px;"}
+              %a{ href:"{% url 'users.user_forget' %}"}
                 - trans "Forgot Password?"
-
-
-        .column.is-6.is-offset-1
-          %form#login-form(method="post")
-            - for field, errors in form.errors.items
-              - if field == '__all__'
-                .alert.alert-danger.form-errors
-                  %h3
-                    - trans "Error"
-                  {{ errors }}
-
-            %fieldset
-              - for field in form
-                .field.login-input(class="{% if field.error %}is-danger{% endif %}")
-                  {{ field|add_placeholder|add_css:"input" }}
-                  - if field.error
-                    %span.help-block
-                      {{ field.error }}
-
-              - csrf_token
-
-              %button.button.is-info.login-button.is-pulled-right(type="submit")
-                - trans "Enter Dashboard"
