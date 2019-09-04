@@ -13,6 +13,7 @@ from mock import patch
 from temba_client.v2 import Flow
 
 from django.conf import settings
+from django.urls import reverse
 from django.utils import timezone
 
 from ureport.assets.models import FLAG, Image
@@ -624,3 +625,18 @@ class UtilsTest(UreportTest):
                 ]
             ),
         )
+
+
+class CheckVersionMiddlewareTest(UreportTest):
+    def setUp(self):
+        super(CheckVersionMiddlewareTest, self).setUp()
+
+    def test_process_template_response(self):
+        self.login(self.admin)
+
+        list_url = reverse("polls.poll_list")
+        response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual("polls/poll_list.html", response.template_name[0])
+
+        response = self.client.get(f"/v2{list_url}", SERVER_NAME="uganda.ureport.io")
+        self.assertEqual("v2/polls/poll_list.html", response.template_name[0])
