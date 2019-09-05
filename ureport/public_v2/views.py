@@ -14,7 +14,9 @@ from smartmin.views import SmartReadView, SmartTemplateView
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch
 from django.http import HttpResponse
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic.base import RedirectView
 
 from ureport.jobs.models import JobSource
 from ureport.locations.models import Boundary
@@ -224,6 +226,11 @@ class PollReadView(PollContextMixin, SmartReadView):
 
     def derive_main_poll(self):
         return self.get_object()
+
+
+class PollRedirectView(RedirectView):
+    def get_redirect_url(*args, **kwargs):
+        return reverse("v2.public.opinion_read", args=[kwargs["pk"]])
 
 
 class StoriesView(SmartTemplateView):
