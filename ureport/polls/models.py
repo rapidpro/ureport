@@ -1046,6 +1046,10 @@ class PollQuestion(SmartModel):
                     genders = ["f", "m"]
                     gender_labels = dict(f="Female", m="Male")
 
+                    if org.get_config("common.has_extra_gender"):
+                        genders.append("o")
+                        gender_labels["o"] = "Other"
+
                     for gender in genders:
                         categories = []
                         set_count = 0
@@ -1318,34 +1322,6 @@ class PollResult(models.Model):
             gender = self.gender.lower()
 
         generated_counters["ruleset:%s:total-ruleset-polled" % ruleset] = 1
-        generated_counters[
-            "ruleset:%s:total-ruleset-polled:engagement:date:%s"
-            % (ruleset, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
-        ] = 1
-
-        if gender:
-            generated_counters[
-                "ruleset:%s:total-ruleset-polled:engagement:gender:%s:date:%s"
-                % (ruleset, gender, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
-            ] = 1
-
-        if state:
-            generated_counters[
-                "ruleset:%s:total-ruleset-polled:engagement:state:%s:date:%s"
-                % (ruleset, state, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
-            ] = 1
-
-        if district:
-            generated_counters[
-                "ruleset:%s:total-ruleset-polled:engagement:district:%s:date:%s"
-                % (ruleset, district, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
-            ] = 1
-
-        if ward:
-            generated_counters[
-                "ruleset:%s:total-ruleset-polled:engagement:ward:%s:date:%s"
-                % (ruleset, ward, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
-            ] = 1
 
         if category or (
             self.category is not None
@@ -1353,42 +1329,6 @@ class PollResult(models.Model):
             and text
         ):
             generated_counters["ruleset:%s:total-ruleset-responded" % ruleset] = 1
-            generated_counters[
-                "ruleset:%s:total-ruleset-responded:engagement:date:%s"
-                % (ruleset, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
-            ] = 1
-
-            if gender:
-                generated_counters[
-                    "ruleset:%s:total-ruleset-responded:engagement:gender:%s:date:%s"
-                    % (
-                        ruleset,
-                        gender,
-                        str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()),
-                    )
-                ] = 1
-
-            if state:
-                generated_counters[
-                    "ruleset:%s:total-ruleset-responded:engagement:state:%s:date:%s"
-                    % (ruleset, state, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
-                ] = 1
-
-            if district:
-                generated_counters[
-                    "ruleset:%s:total-ruleset-responded:engagement:district:%s:date:%s"
-                    % (
-                        ruleset,
-                        district,
-                        str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()),
-                    )
-                ] = 1
-
-            if ward:
-                generated_counters[
-                    "ruleset:%s:total-ruleset-responded:engagement:ward:%s:date:%s"
-                    % (ruleset, ward, str(self.date.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()))
-                ] = 1
 
         if category:
             generated_counters["ruleset:%s:category:%s" % (ruleset, category)] = 1
