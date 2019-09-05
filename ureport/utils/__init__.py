@@ -251,26 +251,6 @@ def get_global_count():
     return count
 
 
-def get_engagement_counts(org):
-    from ureport.polls.models import PollResultsCounter
-
-    counters = PollResultsCounter.objects.filter(org=org, type__icontains="engagement")
-
-    results = counters.values("type").order_by("type").annotate(count_sum=Sum("count"))
-
-    return {c["type"]: c["count_sum"] for c in results}
-
-
-def get_filtered_engagement_counts(org, filter_part=""):
-    engagement_counts = get_engagement_counts(org)
-
-    months = get_last_months()
-
-    filtered = {key[-10:]: val for key, val in engagement_counts.items() if filter_part in key}
-
-    return {key: filtered.get(key, 0) for key in months}
-
-
 def get_org_contacts_counts(org):
 
     from ureport.contacts.models import ReportersCounter
@@ -868,7 +848,6 @@ Org.get_gender_stats = get_gender_stats
 Org.get_regions_stats = get_regions_stats
 Org.get_flows = get_flows
 Org.get_segment_org_boundaries = get_segment_org_boundaries
-Org.get_filtered_engagement_counts = get_filtered_engagement_counts
 Org.get_signups = get_signups
 Org.get_signup_rate = get_signup_rate
 Org.get_ureporters_locations_response_rates = get_ureporters_locations_response_rates
