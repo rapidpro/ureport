@@ -11,7 +11,7 @@ BEGIN
     SELECT * FROM stats_contactactivity WHERE org_id = _poll_result.org_id and contact = _poll_result.contact
     ) SELECT _poll_result.contact, missing_month::date, _poll_result.org_id  FROM month_days LEFT JOIN stats_contactactivity ON stats_contactactivity.date = month_days.missing_month AND stats_contactactivity.contact = _poll_result.contact AND org_id = _poll_result.org_id
     WHERE stats_contactactivity.date IS NULL;
-    UPDATE stats_contactactivity SET born = _poll_result.born, gender = _poll_result.gender, state = _poll_result.state, district = _poll_result.district, ward = _poll_result.ward WHERE org_id = _poll_result.org_id and contact = _poll_result.contact and date > CURRENT_DATE; 
+     UPDATE stats_contactactivity SET born = _poll_result.born, gender = _poll_result.gender, state = _poll_result.state, district = _poll_result.district, ward = _poll_result.ward WHERE org_id = _poll_result.org_id and contact = _poll_result.contact and date > date_trunc('month', CURRENT_DATE) - INTERVAL '1 year';
 END;
 $$ LANGUAGE plpgsql;
 
