@@ -33,6 +33,8 @@ DATABASES = {
     }
 }
 
+DASHBLOCK_STRING_IF_INVALID = "<span>"
+
 # set the mail settings, we send throught gmail
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "server@nyaruka.com"
@@ -710,7 +712,7 @@ CELERYBEAT_SCHEDULE = {
     },
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
+        "schedule": crontab(minute=[0, 5, 10, 20, 30, 40,44,50,54,55]),
         "args": ("ureport.contacts.tasks.pull_contacts",),
     },
     "backfill-poll-results": {

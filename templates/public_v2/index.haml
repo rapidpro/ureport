@@ -3,48 +3,53 @@
 - load thumbnail humanize ureport compress i18n
 
 - block content
-  - if latest_poll
-    .homepage-latest-poll
-      .uk-margin-remove(uk-grid)
-        .homepage-color-bg-main
-        .uk-width-1-2.block-content.is-half.homepage-color-bg-content
-          .recent-results-label
-            Recent Poll Results
-          .poll-title
-            {{ latest_poll.title }}
-          .poll-question-title
-            -if latest_poll.get_first_question
-              {{ latest_poll.get_first_question.title }}
-            
-        .uk-width-1-2.block-content.is-half.booklet-bg-no-margin
-          -if latest_poll.get_first_question
-            .top-question-graph
-              .poll-question-graph-all.has-highcharts(id="graph-all-question-{{latest_poll.get_first_question.id}}" data-question="{{latest_poll.get_first_question.id}}")
-          .view-results.uk-child-width-1-1(uk-grid)
-            .
-              %a.button.view-full-results.primary-color{ href: "{% url 'public.poll_read' latest_poll.id %}"}
-                - trans "VIEW FULL RESULTS"
-              
 
-  .homepage-reporters-stats
-    .uk-margin-remove(uk-grid)
-      .uk-width-1-2
-        .local-count-label
-          - trans "U-REPORTERS IN"
-          {{ org.name|upper }}
-        .local-count
-          {{ reporters|intcomma }}
-        .worldwide-count-label
-          - trans "U-REPORTERS WORLDWIDE:"
-        .worldwide-count
-          {{ global_counter|intcomma }}
-      .uk-width-1-2
-        .has-graph.uk-child-width-1-1(uk-grid)
-          .graph-title
-            - trans "AGES"
-          .graph-chart
-            .age-stats{ id: "age-chart"}
-  
+  // show latest poll section if we have one and at least one question
+  - if latest_poll and latest_poll.get_first_question
+    #homepage-latest-poll.uk-grid.grid-bg
+      .poll.primary-background{class: "uk-width-1-2@m"}
+        .latest-opinion.subheading
+          -trans "LATEST OPINION"
+
+        .title
+          {{ latest_poll.title }}
+
+        .question
+          {{ latest_poll.get_first_question.title }}
+
+      .results{class: "uk-width-1-2@m"}
+        .top-question-graph
+          .poll-question-graph-all.has-highcharts(id="graph-all-question-{{latest_poll.get_first_question.id}}" data-question="{{latest_poll.get_first_question.id}}")
+
+          %a.button.big.highlight-background{ href: "{% url 'public.poll_read' latest_poll.id %}"}
+            - trans "VIEW FULL RESULTS"
+
+  // ureporter stats, including graph of their age
+  #homepage-reporter-stats.uk-grid.uk-margin-remove-top.highlight-color
+    .summary{class: "uk-width-1-2@m"}
+      .subheading
+        - trans "U-REPORTERS IN"
+        {{ org.name|upper }}
+
+      .local-count.bignumber
+        {{ reporters|intcomma }}
+
+      .subheading.multiline
+        -trans "PARTNERING WITH"
+        %span.white {{global_counter|intcomma}}
+        -trans "U-REPORTERS"
+
+      .subheading.multiline
+        -trans "IN"
+        %span.white !!!!
+        -trans "COUNTRIES WORLDWIDE"
+
+    .graph{class: "uk-width-1-2@m"}
+      .graph-title
+        - trans "AGES"
+      .graph-chart(style="background:black")
+        .age-stats{ id: "age-chart"}
+
   .block-row
     .uk-margin-remove(uk-grid)
       .uk-width-1-2.block-content.homepage-color-bg-1
@@ -88,20 +93,21 @@
             -# - else
             -#   %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}  
   
-  .block-row.homepage-platform
-    .uk-margin-remove(uk-grid)
-      .uk-width-2-3.block-content
-        .platform-block-image
-          %img{height:"100%", src:"{{ STATIC_URL }}img/homemap_bg.png"}
-      .uk-width-1-3
-        .platform-block-title
-          We are all apart of a global platform changing the lives of young people worldwide.
-        .platform-block-description
-          We are all aparrt of a global platform changing the lives of young people worldwide. We are all aparrt of a global platform changing the lives of young people worldwide.
-        .platform-block-button
-          %a.read-more-button.uk-button(href="{% url 'v2.public.about' %}")
-            -trans "LEARN MORE"
+  #homepage-platform.uk-grid.uk-margin-remove-top
 
+    .platform-image{class: "uk-width-2-3@m"}
+      %img{height:"100%", src:"{{ STATIC_URL }}img/homemap_bg.png"}
+
+    .platform-text{class: "uk-width-1-3@m"}
+      .platform-title
+        We are all a part of a global platform changing the lives of young people worldwide.
+
+      .platform-description
+        We are all a part of a global platform changing the lives of young people worldwide. We are all a part of a global platform changing the lives of young people worldwide.
+
+      .platform-button
+        %a.button.big.highlight-background(href="{% url 'v2.public.about' %}")
+          -trans "LEARN MORE"
 
   - if feat_images
     .homepage-tiles
@@ -503,7 +509,6 @@
       });
 
         $("#age-chart").each(function(){
-
            var data = {{ age_stats|safe }};
 
            {% if is_rtl_org %}
@@ -519,9 +524,7 @@
            $('#age-chart').highcharts({
              chart: {
                type: 'column',
-               backgroundColor: "#000",
-               spacing: [ 3, 5, 3, 5],
-               height: "30%",
+               height: "40%"
              },
              credits: {
                enabled: false
@@ -532,54 +535,46 @@
              title: {
                  text: null
              },
-             subtitle: {
-                 text: null
-             },
              xAxis: {
+               opposite: true,
                categories: categories,
+               lineColor: 'transparent',
                labels : {
-                   rotation: 0,
-                   style: {
-                     fontSize: 20,
-                     fontFamily: "SharpSansDisplayBold",
-                     color: "#FED200",
-                 }
+                 rotation: 0,
+                 style: {
+                   fontSize: 16,
+                   fontFamily: "SharpSansDisplayBold",
+                   color: "#AAA"
+                 },
                },
-               minorTickLength: 0,
-               tickLength: 0
              },
              yAxis: {
-               min: 0,
-               labels: {
-                 enabled: false
-               },
                visible: false,
-               gridLineWidth: 0,
-               title: {
-                 text: null
-               }
              },
              tooltip: {
                enabled: false
              },
              plotOptions: {
+                 series: {
+                   borderWidth: 0
+                 },
                  column: {
-                     color: '#FFF',
-                     pointPadding: 0.2,
-                     pointWidth: 30,
-                     borderWidth: 0,
+                     color: "#FFD100",
+                     pointWidth: 40,
+
                      dataLabels:  {
                        enabled: true,
                        style: {
                          fontFamily: "SharpSansDisplayBold",
+                         fontSize: "14px",
                        },
-                       color: "#FFF",
+                       color: "#FFD100",
                        verticalAlign:"bottom",
                        format: '<b>{point.y:.0f}%</b>'
                      }
                  }
              },
-             series: [ {name: 'Age' , data: data } ]
+             series: [{name: 'Age', data: data}]
            });
          });
        });

@@ -29,7 +29,6 @@
   %link(href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Condensed|Roboto:500&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet")
   %link(rel="stylesheet" href="{{ STATIC_URL }}css/leaflet.css")
   %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/jqcloud.css")
-  %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/highcharts.css")
   %link(href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet")
 
   
@@ -59,7 +58,25 @@
 
     }
 
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>    
+
+    <!-- color overloads for countries -->
+    .primary-border {
+       border-color: {{ org|config:"primary_color"}} !important;
+    }
+
+    .primary-background {
+       background: {{ org|config:"primary_color"}} !important;
+    }
+
+    .highlight-background {
+       background: #FFD100;
+    }
+
+    .highlight-color {
+       color: #FFD100;
+    }
+
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 
   -block styles
@@ -93,7 +110,7 @@
     <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=#{ org|config:"facebook_pixel_id" }&amp;ev=PageView&amp;noscript=1"/></noscript>
 
-%body.pattern-bg
+%body
   -block body-content
     #fb-root
     -if org|config:"facebook_page_id" and org|config:"facebook_app_id"
@@ -144,10 +161,9 @@
                   .
                     %a.flag{ href:"{{ site.host }}" }
                       - if site.is_static
-                         %img{ src:"{{ STATIC_URL }}img/flags/{{ site.flag }}" }
-                       - else
-                          %img{ src:"{{ STATIC_URL }}img/flags/flag_ar.png" }
-                      -#   %img{ src:"{{ site.flag }}" }
+                        %img{ src:"{{ STATIC_URL }}img/flags/{{ site.flag }}" }
+                      - else
+                        %img{ src:"{{ STATIC_URL }}img/flags/flag_ar.png" }
     - if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
       %section#ureport-admin-navbar-top-section.uk-section.uk-padding-remove-vertical
         %nav.uk-navbar-container.ureport-admin-navbar(uk-navbar)
@@ -235,9 +251,8 @@
                           %a{ href:"{% url 'jobs.jobsource_list' %}"}
                             - trans "Job Sources"
 
-                        -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
-
-                         %li
+                        - if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
+                          %li
                             %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=jobs"}
                               - trans "Jobs Content"
 
@@ -286,104 +301,107 @@
 
           .uk-navbar-right
 
-           %ul.uk-navbar-nav
-              - block login
-                - if request.user and request.user.is_authenticated
-                  %li
-                    %a.pull-left{ href:"{% url 'users.user_profile' request.user.pk %}"}
-                      {{ request.user.username }}
-                  %li
-                    %a.pull-right{ href:"{% url 'users.user_logout' %}?go=/"}
-                      - trans "Logout"
-                - else
-                  %li
-                    %a{ href:"{% url 'users.user_login' %}"}
-                      - trans "Login"
-
-    %section#ureport-public-navbar-top-section.uk-section.uk-padding-remove-vertical
-      -block navbar
-        %nav#public-other-header-navbar.uk-navbar-container(uk-navbar)
-          .uk-navbar-left
-            .uk-navbar-item.header-countries-nav#select-country
-              .
-                %span(uk-icon="icon: world")
-                %span(uk-icon="icon: chevron-up")
-                %span
-                  - trans "SELECT YOUR COUNTRY"
-
-          .uk-navbar-right
-            %ul.uk-navbar-nav.pages-navbar
-              %li
-                %a(href="{% url 'v2.public.ureporters' %}") 
-                  - trans "Engagement"
-              %li
-                %a(href="{% url 'v2.public.about' %}") 
-                  - trans "About"
-            
-              - if org|config:"has_jobs"
+          %ul.uk-navbar-nav
+            - block login
+              - if request.user and request.user.is_authenticated
                 %li
-                  %a(href="{% url 'v2.public.jobs' %}")
-                    - trans "Jobs"
-              - for custom_page in additional_menu|slice:":3"
+                  %a.pull-left{ href:"{% url 'users.user_profile' request.user.pk %}"}
+                    {{ request.user.username }}
                 %li
-                  %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
-                    {{custom_page.title}}
-              %li
-                %a(href="" uk-icon="icon: facebook")
-              %li
-                %a(href="" uk-icon="icon: twitter")
-              %li
-                %a(href="{% url 'v2.public.join' %}") 
-                  .uk-button.uk-button-secondary
+                  %a.pull-right{ href:"{% url 'users.user_logout' %}?go=/"}
+                    - trans "Logout"
+              - else
+                %li
+                  %a{ href:"{% url 'users.user_login' %}"}
+                    - trans "Login"
+
+    .uk-container
+      #public-navbar.uk-section
+        -block navbar
+          %nav.uk-navbar.uk-navbar-container.uk-navbar-transparent
+            .uk-navbar-left
+              #select-country.uk-navbar-item
+                .
+                  %span(uk-icon="icon: world")
+                  %span(uk-icon="icon: chevron-up")
+                  %span
+                    - trans "SELECT YOUR COUNTRY"
+
+            .uk-navbar-right
+              %ul.uk-navbar-nav
+                %li
+                  %a(href="{% url 'v2.public.ureporters' %}")
+                    - trans "Engagement"
+                %li
+                  %a(href="{% url 'v2.public.about' %}")
+                    - trans "About"
+
+                - if org|config:"has_jobs"
+                  %li
+                    %a(href="{% url 'v2.public.jobs' %}")
+                      - trans "Jobs"
+                - for custom_page in additional_menu|slice:":3"
+                  %li
+                    %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
+                      {{custom_page.title}}
+                %li
+                  %a(href="" uk-icon="icon: facebook")
+                %li
+                  %a(href="" uk-icon="icon: twitter")
+
+                %li
+                  %a.join-button.button(href="{% url 'v2.public.join' %}")
                     - trans "Join Now"
 
-
-        %nav#public-main-header-navbar.uk-navbar-container(uk-navbar style="border-bottom: 1px solid black; padding-bottom: 2rem;")
+    .uk-container
+      #public-header.uk-section
+        %nav.uk-navbar.uk-navbar-container.uk-navbar-transparent
           .uk-navbar-center
-            .uk-navbar-center-left.uk-margin-xlarge-right
-              .uk-navbar-item.main-link
-                %a(href="{% url 'v2.public.opinions' %}")
+            .uk-navbar-center-left
+              .uk-navbar-item
+                %a.main-link(href="{% url 'v2.public.opinions' %}")
                   - trans "Opinions"
 
-            %a.uk-navbar-item.uk-logo(href="{% url 'v2.public.index' %}") 
+            %a.uk-navbar-item.uk-logo(href="{% url 'v2.public.index' %}")
               {% thumbnail org.get_logo "350x65" format="PNG" as im %}
               %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
               {% endthumbnail %}
             .uk-navbar-center-right.uk-margin-xlarge-left
-              .uk-navbar-item.main-link
-                %a(href="{% url 'v2.public.stories' %}")
+              .uk-navbar-item
+                %a.main-link(href="{% url 'v2.public.stories' %}")
                   - trans "Stories"
 
-    %section.uk-section.uk-padding-remove.uk-margin-remove 
-      - block content
+    .uk-container
+      #public-content.uk-section
+        - block content
 
     %section#ureport-public-footer.uk-section.uk-padding-remove
-        -block pre-footer
-          #pre-footer
-            .(uk-grid)
-              - for story in main_stories|slice:"4"
-                - if not forloop.first
-                  .(class="uk-width-1-3@s")
-                    .(uk-grid)
-                      .uk-width-1-1
-                        <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
-                      .uk-width-1-1.main-story-title.is-clipped
-                        {{ story.title }}
-                      .uk-width-1-1.main-story-button
-                        %a.uk-button(href="{% url 'v2.public.story_read' story.pk %}")
-                          - trans "READ MORE"
-                          //&#8594;
-            .(uk-grid)
-              .(class="uk-visible@s uk-width-1-3@s")
-                <img width="50%" src="{{ STATIC_URL }}img/u-icon-large.png" />
-              .(class="uk-width-2-3@s")
-                .pre-footer-call-to-action
-                  .call-to-action-text
-                    This Section is a call to action to wrap up the content nad get involved
+      -block pre-footer
+        #pre-footer
+          .(uk-grid)
+            - for story in main_stories|slice:"4"
+              - if not forloop.first
+                .(class="uk-width-1-3@s")
+                  .(uk-grid)
+                    .uk-width-1-1
+                      <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+                    .uk-width-1-1.main-story-title.is-clipped
+                      {{ story.title }}
+                    .uk-width-1-1.main-story-button
+                      %a.uk-button(href="{% url 'v2.public.story_read' story.pk %}")
+                        - trans "READ MORE"
+                        //&#8594;
+          .(uk-grid)
+            .(class="uk-visible@s uk-width-1-3@s")
+              <img width="50%" src="{{ STATIC_URL }}img/u-icon-large.png" />
+            .(class="uk-width-2-3@s")
+              .pre-footer-call-to-action
+                .call-to-action-text
+                  This Section is a call to action to wrap up the content and get involved
 
-                  .call-to-action-button
-                    %a.uk-button.uk-button-primary.uk-float-right(href="{% url 'v2.public.ureporters' %}")
-                      -trans "EXPLORE ENGAGEMENT"
+                .call-to-action-button
+                  %a.uk-button.uk-button-primary.uk-float-right(href="{% url 'v2.public.ureporters' %}")
+                    -trans "EXPLORE ENGAGEMENT"
 
       %footer.footer.uk-padding-remove
         -block footer
@@ -466,6 +484,7 @@
     }
 
   </script>
+
   {% if org and org|config:"google_tracking_id" %}
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -475,13 +494,13 @@
 
     ga('create', '{{ org|config:"google_tracking_id" }}', 'auto');
     ga('send', 'pageview');
-
   </script>
+  {% endif %}
+
   <script src="{{ STATIC_URL }}js/uikit.js"></script>
   <script src="{{ STATIC_URL }}js/uikit-icons.js"></script>
   <script src="{{ STATIC_URL }}/js/leaflet.js"></script>
-  <script src="{{ STATIC_URL }}js/highcharts.js"></script>
-  <script src="{{ STATIC_URL }}js/highcharts-more.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/gradientfactory.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
@@ -525,7 +544,6 @@
 
   </script>
 
-  {% endif %}
   <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.pjax.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/Chart.bundle.min.js"></script>
   
