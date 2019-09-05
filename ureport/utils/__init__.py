@@ -13,6 +13,7 @@ from dash.orgs.models import Org
 from dash.utils import datetime_to_ms
 from django.conf import settings
 from django.core.cache import cache
+from django.db.models import Sum
 from django.utils import timezone
 import pytz
 from ureport.assets.models import Image, FLAG
@@ -20,6 +21,7 @@ from raven.contrib.django.raven_compat.models import client
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
+from ureport.stats.models import PollStats
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
@@ -338,6 +340,54 @@ def get_registration_stats(org):
     return json.dumps(categories)
 
 
+def get_reporter_registration_dates(org):
+    now = timezone.now()
+    one_year_ago = now - timedelta(days=365)
+    one_year_ago = one_year_ago - timedelta(one_year_ago.weekday())
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_on")}
+
+    interval_dict = dict()
+
+    for date_key, date_count in registered_on_counts.items():
+        parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d"))
+
+        # this is in the range we care about
+        if parsed_time > one_year_ago:
+            # get the week of the year
+            dict_key = parsed_time.strftime("%W")
+
+            if interval_dict.get(dict_key, None):
+                interval_dict[dict_key] += date_count
+            else:
+                interval_dict[dict_key] = date_count
+
+    # build our final dict using week numbers
+    categories = []
+    start = one_year_ago
+    while start < timezone.now():
+        week_dict = start.strftime("%W")
+        count = interval_dict.get(week_dict, 0)
+        categories.append(dict(label=start.strftime("%m/%d/%y"), count=count))
+
+        start = start + timedelta(days=7)
+    return categories
+
+
+def get_signups(org):
+    registrations = get_reporter_registration_dates(org)
+    return sum([elt.get("count", 0) for elt in registrations])
+
+
+def get_signup_rate(org):
+    new_signups = get_signups(org)
+    total = get_reporters_count(org)
+    return new_signups * 100 / total
+
+
 def get_ureporters_locations_stats(org, segment):
     parent = segment.get("parent", None)
     field_type = segment.get("location", None)
@@ -380,6 +430,82 @@ def get_ureporters_locations_stats(org, segment):
     return [
         dict(boundary=elt["osm_id"], label=elt["name"], set=location_counts.get(elt["osm_id"], 0))
         for elt in boundaries
+    ]
+
+
+def get_average_response_rate(org):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    polled_stats = PollStats.objects.filter(org=org, date__gte=year_ago).aggregate(Sum("count"))
+    responded_stats = (
+        PollStats.objects.filter(org=org, date__gte=year_ago).exclude(category=None).aggregate(Sum("count"))
+    )
+
+    responded = responded_stats.get("count__sum", 0)
+    if responded is None:
+        responded = 0
+    polled = polled_stats.get("count__sum")
+    if polled is None or polled == 0:
+        return 0
+
+    return responded / polled
+
+
+def get_ureporters_locations_response_rates(org, segment):
+    parent = segment.get("parent", None)
+    field_type = segment.get("location", None)
+
+    location_stats = []
+
+    if not field_type or field_type.lower() not in ["state", "district", "ward"]:
+        return location_stats
+
+    field_type = field_type.lower()
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+
+    if field_type == "state":
+        boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config("common.is_global") else Boundary.STATE_LEVEL
+        boundaries = (
+            Boundary.objects.filter(org=org, level=boundary_top_level, is_active=True)
+            .values("osm_id", "name", "id")
+            .order_by("osm_id")
+        )
+
+    elif field_type == "ward":
+        boundaries = (
+            Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent__osm_id__iexact=parent)
+            .values("osm_id", "name", "id")
+            .order_by("osm_id")
+        )
+    else:
+        boundaries = (
+            Boundary.objects.filter(
+                org=org, level=Boundary.DISTRICT_LEVEL, is_active=True, parent__osm_id__iexact=parent
+            )
+            .values("osm_id", "name", "id")
+            .order_by("osm_id")
+        )
+
+    boundaries_ids = [elt["id"] for elt in boundaries]
+    polled_stats = (
+        PollStats.objects.filter(org=org, date__gte=year_ago, location_id__in=boundaries_ids)
+        .values("location__osm_id")
+        .annotate(Sum("count"))
+    )
+    polled_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in polled_stats}
+    responded_stats = (
+        PollStats.objects.filter(org=org, date__gte=year_ago, location_id__in=boundaries_ids)
+        .exclude(category=None)
+        .values("location__osm_id")
+        .annotate(Sum("count"))
+    )
+    responded_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in responded_stats}
+
+    response_rates = {key: responded_stats_dict.get(key, 0) / val for key, val in polled_stats_dict.items()}
+
+    return [
+        dict(boundary=elt["osm_id"], label=elt["name"], set=response_rates.get(elt["osm_id"], 0)) for elt in boundaries
     ]
 
 
