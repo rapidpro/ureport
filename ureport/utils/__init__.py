@@ -870,12 +870,13 @@ def populate_contact_activity(org):
             oldest_seen = now
             newest_seen = start_date
             for result in results:
-                if result.date > newest_seen:
-                    newest_seen = result.date
-                    newest_id = result.id
-                if result.date < oldest_seen:
-                    oldest_seen = result.date
-                    oldest_id = result.id
+                if result.date:
+                    if result.date > newest_seen:
+                        newest_seen = result.date
+                        newest_id = result.id
+                    if result.date < oldest_seen:
+                        oldest_seen = result.date
+                        oldest_id = result.id
 
             ids_to_update = []
             if oldest_id:
