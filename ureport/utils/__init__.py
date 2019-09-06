@@ -843,10 +843,12 @@ def populate_contact_activity(org):
     from ureport.contacts.models import Contact
 
     now = timezone.now()
-    start = now - timedelta(days=500)
+    start_date = now - timedelta(days=500)
 
     flows = list(
-        Poll.objects.filter(org_id=org.id, poll_date__gte=start).only("flow_uuid").values_list("flow_uuid", flat=True)
+        Poll.objects.filter(org_id=org.id, poll_date__gte=start_date)
+        .only("flow_uuid")
+        .values_list("flow_uuid", flat=True)
     )
 
     all_contacts = Contact.objects.filter(org=org).values_list("id", flat=True).order_by("id")
@@ -866,7 +868,7 @@ def populate_contact_activity(org):
             oldest_id = None
             newest_id = None
             oldest_seen = now
-            newest_seen = start
+            newest_seen = start_date
             for result in results:
                 if result.date > newest_seen:
                     newest_seen = result.date
