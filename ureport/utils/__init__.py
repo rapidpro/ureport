@@ -839,6 +839,55 @@ def populate_age_and_gender_poll_results(org=None):
         )
 
 
+def populate_contact_activity(org_id):
+    org = Org.objects.get(id=org_id)
+    now = timezone.now()
+    start_date = now - timedelta(days=365)
+
+    flows = list(
+        Poll.objects.filter(poll_date__gte=start_date, org_id=org.pk)
+        .only("flow_uuid")
+        .values_list("flow_uuid", flat=True)
+    )
+
+    org_start = time.time()
+
+    for flow in flows:
+        start = time.time()
+        completed_ids = list(
+            PollResult.objects.filter(org_id=org.id, flow=flow, completed=True)
+            .exclude(category=None)
+            .exclude(category="")
+            .only("id")
+        )
+        completed_ids_count = len(completed_ids)
+
+        non_completed_ids = list(
+            PollResult.objects.filter(org_id=org.id, flow=flow, completed=False)
+            .exclude(category=None)
+            .exclude(category="")
+            .only("id")
+        )
+        non_completed_ids_count = len(non_completed_ids)
+
+        for c_result_batch in chunk_list(completed_ids, 1000):
+            id_batch = list(c_result_batch)
+            updated = PollResult.objects.filter(id__in=id_batch).update(completed=True)
+            print(
+                f"Updated completed True for org #{org_id}, flow {flow}, {updated} of {completed_ids_count} in {time.time() - start}s"
+            )
+
+        for nc_result_batch in chunk_list(non_completed_ids, 1000):
+            id_batch = list(nc_result_batch)
+            updated = PollResult.objects.filter(id__in=id_batch).update(completed=False)
+            print(
+                f"Updated completed False for org #{org_id}, flow {flow}, {updated} of {non_completed_ids_count} in {time.time() - start}s"
+            )
+
+        print(f"Finished updating results for org #{org_id}, flow {flow} in {time.time() - start}s")
+    print(f"Finished updating results for entire org #{org_id} in {time.time() - org_start}s")
+
+
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
