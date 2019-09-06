@@ -380,7 +380,13 @@ class Poll(SmartModel):
                     count = stats_dict.get(stat_tuple)
                     stat_kwargs = dict(org_id=org_id, count=count, date=date)
 
+                    if ruleset not in questions_dict:
+                        continue
+
                     question_id = questions_dict[ruleset].get("id")
+                    if not question_id:
+                        continue
+
                     category_id = questions_dict[ruleset].get("categories", dict()).get(category)
 
                     gender_id = None
