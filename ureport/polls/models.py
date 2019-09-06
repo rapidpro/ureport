@@ -325,6 +325,9 @@ class Poll(SmartModel):
                 questions = self.questions.all().prefetch_related("response_categories")
                 questions_dict = dict()
 
+                if not questions.exists():
+                    return
+
                 for qsn in questions:
                     categories = qsn.response_categories.all()
                     categoryies_dict = {elt.category.lower(): elt.id for elt in categories}
