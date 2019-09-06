@@ -1,17 +1,215 @@
-- extends "frame_v2.html"
+<!DOCTYPE html>
+- load static compress dashblocks dashorgs thumbnail ureport smartmin i18n
+%html(lang="en")
 
-- load compress
+  %head
+    %meta(charset="UTF-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    %title
+      -trans "U-Report"
+    %meta(name="description" content="")
+    %meta(name="keywords" content="")
+    %meta(name="author" content="")
 
-- block styles
-  - if is_rtl_org
-    - compress css
-      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
-      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
-      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit-rtl.css")
-      %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_public.less")
+    %link(href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
+    %link(href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:300,400,700|Montserrat:300,400,700&display=swap" rel="stylesheet")
+    %link(rel="stylesheet" href="{% static 'css/tailwind.css' %}")
 
-  - else
-    - compress css
-      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
-      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
-      %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_public.less")
+    :css
+      .bg-primary {
+        background: #439932;
+      }
+
+      .border-primary {
+        border-color: #439932;
+      }
+
+      .bg-secondary {
+        background: #1751af;
+      }
+
+      .border-secondary {
+        border-color: #1751af;
+      }
+
+      .bg-tertiary {
+        background: #FFD100;
+      }
+
+      .text-tertiary {
+        color: #FFD100;
+      }
+
+      .bg-dark-blue {
+        background: #060e26;
+      }
+
+      .countries {
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        overflow:hidden;
+        max-height: 0;
+        opacity: 0;
+
+        background-image: url("{{STATIC_URL}}img/homemap_bg.png");
+        background-repeat: no-repeat;
+        background-size: auto;
+
+        -webkit-transition:opacity .25s ease-in-out, max-height .25s ease-in-out;
+        -moz-transition:opacity .25s ease-in-out, max-height .25s ease-in-out;
+        transition:opacity .25s ease-in-out, max-height .25s ease-in-out;
+      }
+
+      .flag {
+        width: 80px;
+        height: 75px;
+        vertical-align: top;
+        display: inline-block;
+      }
+
+      .flag img {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .open {
+        max-height: 1000px;
+        opacity: 1;
+      }
+
+  %body.font-sans.relative
+    // countries
+    .countries.bg-black.text-white
+      %a#countries-closer.float-right.p-4(href="javascript:void(0)")
+        %i.fa.fa-close.text-3xl
+
+      .flex.p-home
+        .flex-center-y(class="md:w-1/3")
+          %img(src="{{STATIC_URL}}img/place_countries_logo.png")
+
+        .flex-center-y(class="md:w-2/3")
+          %div
+            - show_org_flags
+
+    // top black bar
+    .block.bg-black.h-2
+
+    // header nav
+    %ul.my-5.p-xhome.text-sm.font-bold(class="md:flex")
+      .li.flex-none.mr-4.py-menu
+        %a#countries-toggler(href="javascript:void(0)")
+          %i.fa.fa-chevron-circle-down
+          SELECT YOUR COUNTRY
+
+      .li.flex-grow.flex(class="md:justify-end")
+        %a.flex-initial.py-menu(href="arst" class="md:ml-4")
+          Engagement
+        %a.flex-initial.ml-4.py-menu(href="arst")
+          About
+
+        %a.flex-initial.ml-4.py-menu(href="arst")
+          %i.fa.fa-facebook
+
+        %a.flex-initial.ml-4.py-menu(href="arst")
+          %i.fa.fa-twitter
+
+        %a.flex-initial.btn.bg-black.text-white.ml-4.py-menu(href="arst")
+          Join Now
+
+    // header menu
+    .justify-around.mt-5.mb-6.p-xhome(class="md:flex")
+      .flex-1.text-center.font-bold.text-2xl.flex-center-y
+        %div
+          %a.pb-2.border-b-2.border-black(href="arst")
+            Opinions
+
+      .flex-initial.text-center
+        %img(src="{{STATIC_URL}}img/placeholder_country_logo.png")
+
+      .flex-1.text-center.font-bold.text-2xl.flex-center-y
+        %div
+          %a.pb-2.border-b-2.border-black(href="arst")
+            Stories
+
+    -block content
+
+    // footer
+    .bg-dark-blue.text-white.p-home(class="md:flex")
+      .flex-1.mt-4(class="md:mr-4")
+        .block
+          %img(src="{{STATIC_URL}}img/story_placeholder.png")
+        .font-bold.text-l.mt-4
+          Indonesia Scouts to Speak Out Through U-Report
+
+      .flex-1.mt-4(class="md:mx-4")
+        .block
+          %img(src="{{STATIC_URL}}img/story_placeholder.png")
+        .font-bold.text-l.mt-4
+          Indonesia Scouts to Speak Out Through U-Report
+
+      .flex-1.mt-4(class="md:ml-4")
+        .block
+          %img(src="{{STATIC_URL}}img/story_placeholder.png")
+        .font-bold.text-l.mt-4
+          Indonesia Scouts to Speak Out Through U-Report
+
+    // footer engage callout
+    .bg-dark-blue.text-white.px-home(class="md:flex")
+      .div.bg-blue-u(class="md:w-1/3")
+        .div
+
+      .div.text-right(class="md:w-2/3 md:pr-10 md:border-r md:border-gray-500 md:py-10")
+        .font-bold.text-3xl.leading-tight.mb-8
+          See by the numbers how we are engaging youth voices for positive social change.
+
+        %a.btn.bg-secondary.text-white.text-xl
+          EXPLORE ENGAGEMENT
+
+    // footer navbar
+    .justify-around.mt-5.mb-3.p-xhome(class="md:flex")
+      .flex-1.text-center.mb-2
+        %img(src="{{STATIC_URL}}img/placeholder_country_logo.png")
+
+      .flex-1.flex(class="md:justify-end")
+        .font-bold.text-2xl.ml-2.flex-center-y
+          %div
+            %a.pb-2.border-b-2.border-black(href="arst")
+              Opinions
+
+        .font-bold.text-2xl.ml-2.flex-center-y
+          %div
+            %a.pb-2.border-b-2.border-black(href="arst")
+              Stories
+
+    // footer menu
+    %ul.my-5.p-xhome.text-sm.font-bold(class="md:flex")
+      .li.flex-initial.mr-4.py-menu
+        %a.flex-initial.py-menu(href="arst")
+          About
+
+        %a.flex-initial.py-menu(href="arst" class="md:ml-4")
+          Engagement
+
+      .li.flex-grow.flex(class="md:justify-end")
+        %a.flex-initial.ml-4.py-menu(href="arst")
+          %i.fa.fa-facebook
+
+        %a.flex-initial.ml-4.py-menu(href="arst")
+          %i.fa.fa-twitter
+
+    // bottom yellow bar
+    .bg-tertiary.h-2
+
+  %script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous")
+  %script(src="https://code.highcharts.com/highcharts.js")
+
+  -block script
+    :javascript
+      $("#countries-toggler").click(function(){
+        $(".countries").toggleClass("open");
+      })
+      $("#countries-closer").click(function(){
+        $(".countries").removeClass("open");
+      })

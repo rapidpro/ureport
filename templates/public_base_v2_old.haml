@@ -1,0 +1,17 @@
+- extends "frame_v2.html"
+
+- load compress
+
+- block styles
+  - if is_rtl_org
+    - compress css
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit-rtl.css")
+      %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_public.less")
+
+  - else
+    - compress css
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
+      %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_public.less")
