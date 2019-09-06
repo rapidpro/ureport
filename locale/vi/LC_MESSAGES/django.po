@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-12 11:02+0000\n"
+"POT-Creation-Date: 2019-09-06 15:30+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -88,15 +88,6 @@ msgstr ""
 msgid "Join Now"
 msgstr "Tham gia"
 
-msgid "Gallery"
-msgstr "Thư viện ảnh"
-
-msgid "Add Image"
-msgstr "Thêm hình ảnh"
-
-msgid "+ New Page"
-msgstr ""
-
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -163,12 +154,6 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
-msgid "Site page under construction"
-msgstr ""
-
-msgid "Go back to main public site"
-msgstr ""
-
 msgid "READ MORE"
 msgstr "XEM THÊM"
 
@@ -211,44 +196,19 @@ msgstr ""
 "\n"
 "Hãy ghi nhớ nguồn công việc Twitter mà bạn cần có một id tiện ích từ Twitter."
 
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST NOTIFICATIONS"
-msgstr "ĐỊA ĐIỂM"
+msgid "Edit"
+msgstr "Chỉnh sửa"
 
 #, fuzzy
 #| msgid "Manage Users"
-msgid "Backends"
+msgid "Manage Backends"
 msgstr "Quản lý người dùng"
 
-msgid "You must have at least one administator"
-msgstr "Bạn phải có ít nhất một quản trị viên"
+msgid "Manage Users"
+msgstr "Quản lý người dùng"
 
-msgid "Accounts"
-msgstr "Các tài khoản"
-
-msgid "Admins"
-msgstr "Quản trị viên"
-
-msgid "Editors"
-msgstr "Biên tập viên"
-
-msgid "Remove"
-msgstr "Xóa"
-
-msgid "User group"
-msgstr "Nhóm người dùng"
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Poll Results Data"
-msgstr ""
-
-#, fuzzy
-#| msgid "Results"
-msgid "Refresh Results"
-msgstr "Kết quả"
+msgid "Add"
+msgstr "Thêm "
 
 msgid "ABOUT U-REPORT"
 msgstr "THÔNG TIN VỀ U-REPORT"
@@ -628,6 +588,60 @@ msgstr "Đã đăng ký"
 msgid "Week of"
 msgstr "Tuần"
 
+msgid "Sign in"
+msgstr "Đăng ký"
+
+msgid "Forgot Password?"
+msgstr "Quên mật khẩu?"
+
+msgid "Gallery"
+msgstr "Thư viện ảnh"
+
+msgid "Add Image"
+msgstr "Thêm hình ảnh"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "ĐỊA ĐIỂM"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Quản lý người dùng"
+
+msgid "You must have at least one administator"
+msgstr "Bạn phải có ít nhất một quản trị viên"
+
+msgid "Accounts"
+msgstr "Các tài khoản"
+
+msgid "Admins"
+msgstr "Quản trị viên"
+
+msgid "Editors"
+msgstr "Biên tập viên"
+
+msgid "Remove"
+msgstr "Xóa"
+
+msgid "User group"
+msgstr "Nhóm người dùng"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Kết quả"
+
 #, fuzzy
 #| msgid "POLL RESULTS"
 msgid "VIEW FULL RESULTS"
@@ -640,6 +654,11 @@ msgstr "U-REPORTERS TẠI"
 
 msgid "AGES"
 msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "XEM THÊM"
 
 msgid "SEARCH"
 msgstr ""
@@ -692,9 +711,6 @@ msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Khôn
 msgid "Search"
 msgstr "Tìm kiếm"
 
-msgid "Add"
-msgstr "Thêm "
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -737,9 +753,6 @@ msgstr "chỉnh sửa"
 
 msgid "SIGN IN"
 msgstr ""
-
-msgid "Forgot Password?"
-msgstr "Quên mật khẩu?"
 
 msgid "Error"
 msgstr ""
@@ -1262,6 +1275,12 @@ msgstr "Nếu có công việc để được hiển thị trên trang web công
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Liệu tổ chức này có áp dụng đối với thông tin toàn cầu, ví dụ: đưa ra bản đồ thế giới thay vì bản đồ quốc gia"
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Mã alpha-3 ISO của tổ chức để hiển thị các câu chuyện ứng dụng Ureport tiện ích, ví dụ BRA, NIG, CMR (dùng GLOBAL nếu là U-Report toàn cầu)."
 
@@ -1514,17 +1533,6 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~ "<br/>\n"
 #~ "Để chấp nhận lời mời, <a href='%(host)s%(join_url)s'>bấm vào đây</a>."
 
-#~ msgid "Edit"
-#~ msgstr "Chỉnh sửa"
-
-#, fuzzy
-#~| msgid "Manage Users"
-#~ msgid "Manage Backends"
-#~ msgstr "Quản lý người dùng"
-
-#~ msgid "Manage Users"
-#~ msgstr "Quản lý người dùng"
-
 #~ msgid "Select your Organization"
 #~ msgstr "Lựa chọn tổ chức của bạn"
 
@@ -1660,9 +1668,6 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~ msgstr ""
 #~ "\n"
 #~ "\t Kết quả %(start)s-%(end)s trong số %(count)s"
-
-#~ msgid "Sign in"
-#~ msgstr "Đăng ký"
 
 #~ msgid "Token Expired"
 #~ msgstr "Mã hết hạn"

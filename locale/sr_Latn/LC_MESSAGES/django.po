@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-12 11:02+0000\n"
+"POT-Creation-Date: 2019-09-06 15:30+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -88,15 +88,6 @@ msgstr ""
 msgid "Join Now"
 msgstr "Pridruži se"
 
-msgid "Gallery"
-msgstr "Galerija"
-
-msgid "Add Image"
-msgstr "Dodaj sliku"
-
-msgid "+ New Page"
-msgstr ""
-
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -163,12 +154,6 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
-msgid "Site page under construction"
-msgstr ""
-
-msgid "Go back to main public site"
-msgstr ""
-
 msgid "READ MORE"
 msgstr "PROČITAJ VIŠE"
 
@@ -211,44 +196,19 @@ msgstr ""
 "\n"
 "Ne zaboravite da za Twitter zadatke morate imati widget id Twittera."
 
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST NOTIFICATIONS"
-msgstr "LOKACIJE"
+msgid "Edit"
+msgstr "Uredi"
 
 #, fuzzy
 #| msgid "Manage Users"
-msgid "Backends"
+msgid "Manage Backends"
 msgstr "Upravljanje korisnicima"
 
-msgid "You must have at least one administator"
-msgstr "Morate imati najmanje jednog administratora"
+msgid "Manage Users"
+msgstr "Upravljanje korisnicima"
 
-msgid "Accounts"
-msgstr "Nalozi"
-
-msgid "Admins"
-msgstr "Administratori"
-
-msgid "Editors"
-msgstr "Urednici"
-
-msgid "Remove"
-msgstr "Ukloni"
-
-msgid "User group"
-msgstr "Korisnička grupa"
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Poll Results Data"
-msgstr ""
-
-#, fuzzy
-#| msgid "Results"
-msgid "Refresh Results"
-msgstr "Rezultati"
+msgid "Add"
+msgstr "Dodaj"
 
 msgid "ABOUT U-REPORT"
 msgstr "O U-REPORTU"
@@ -639,6 +599,60 @@ msgstr "Registrovani"
 msgid "Week of"
 msgstr "Nedelja"
 
+msgid "Sign in"
+msgstr "Upiši se"
+
+msgid "Forgot Password?"
+msgstr "Zaboravili ste lozinku?"
+
+msgid "Gallery"
+msgstr "Galerija"
+
+msgid "Add Image"
+msgstr "Dodaj sliku"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "LOKACIJE"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Upravljanje korisnicima"
+
+msgid "You must have at least one administator"
+msgstr "Morate imati najmanje jednog administratora"
+
+msgid "Accounts"
+msgstr "Nalozi"
+
+msgid "Admins"
+msgstr "Administratori"
+
+msgid "Editors"
+msgstr "Urednici"
+
+msgid "Remove"
+msgstr "Ukloni"
+
+msgid "User group"
+msgstr "Korisnička grupa"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Rezultati"
+
 #, fuzzy
 #| msgid "POLL RESULTS"
 msgid "VIEW FULL RESULTS"
@@ -651,6 +665,11 @@ msgstr "U-REPORTERI U"
 
 msgid "AGES"
 msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "PROČITAJ VIŠE"
 
 msgid "SEARCH"
 msgstr ""
@@ -703,9 +722,6 @@ msgstr "Kada uklonite, nema načina da vratite sadržaj."
 msgid "Search"
 msgstr "Traži"
 
-msgid "Add"
-msgstr "Dodaj"
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -757,9 +773,6 @@ msgstr "uredi"
 
 msgid "SIGN IN"
 msgstr ""
-
-msgid "Forgot Password?"
-msgstr "Zaboravili ste lozinku?"
 
 msgid "Error"
 msgstr ""
@@ -1282,6 +1295,12 @@ msgstr "Ako postoje zadaci koje treba prikazati na javnoj stranici"
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Da li ova postavka uključuje globalne podatke, npr. mapu sveta umesto mape države."
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Alpha-3 ISO kod organizacije koji će inicirati widget priče U-Report aplikacije. Primer: BRA, NIG, CMR (Koristite GLOBAL ako je U-Report globalan)."
 
@@ -1534,17 +1553,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "<br/>\n"
 #~ " Da prihvatite poziv,<a href='%(host)s%(join_url)s'>kliknite ovde </a>."
 
-#~ msgid "Edit"
-#~ msgstr "Uredi"
-
-#, fuzzy
-#~| msgid "Manage Users"
-#~ msgid "Manage Backends"
-#~ msgstr "Upravljanje korisnicima"
-
-#~ msgid "Manage Users"
-#~ msgstr "Upravljanje korisnicima"
-
 #~ msgid "Select your Organization"
 #~ msgstr "Odaberite vašu organizaciju"
 
@@ -1689,9 +1697,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgstr ""
 #~ "\n"
 #~ "\tRezultati %(start)s-%(end)sod %(count)s"
-
-#~ msgid "Sign in"
-#~ msgstr "Upiši se"
 
 #~ msgid "Token Expired"
 #~ msgstr "Token je istekao"

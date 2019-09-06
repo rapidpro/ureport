@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-12 11:02+0000\n"
+"POT-Creation-Date: 2019-09-06 15:30+0000\n"
 "PO-Revision-Date: 2019-01-28 17:20+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Romanian (http://www.transifex.com/rapidpro/ureport/language/ro/)\n"
@@ -89,15 +89,6 @@ msgstr ""
 msgid "Join Now"
 msgstr "Alătură-te"
 
-msgid "Gallery"
-msgstr "Galerie"
-
-msgid "Add Image"
-msgstr "Adăugare imagine"
-
-msgid "+ New Page"
-msgstr ""
-
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -164,12 +155,6 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
-msgid "Site page under construction"
-msgstr ""
-
-msgid "Go back to main public site"
-msgstr ""
-
 msgid "READ MORE"
 msgstr "CITEȘTE MAI MULTE"
 
@@ -212,44 +197,19 @@ msgstr ""
 "\n"
 "Rețineți, pentru a indica locul de muncă de pe Twitter, este necesar a obține un ID al widget-ului din twitter."
 
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST NOTIFICATIONS"
-msgstr "REGIUNI"
+msgid "Edit"
+msgstr "Editează"
 
 #, fuzzy
 #| msgid "Manage Users"
-msgid "Backends"
+msgid "Manage Backends"
 msgstr "Gestionează utilizatori"
 
-msgid "You must have at least one administator"
-msgstr "Trebuie să aveți cel puțin un administrator"
+msgid "Manage Users"
+msgstr "Gestionează utilizatori"
 
-msgid "Accounts"
-msgstr "Conturi"
-
-msgid "Admins"
-msgstr "Administratori"
-
-msgid "Editors"
-msgstr "Editori"
-
-msgid "Remove"
-msgstr "Elimină"
-
-msgid "User group"
-msgstr "Grupul utilizatorilor"
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Poll Results Data"
-msgstr ""
-
-#, fuzzy
-#| msgid "Results"
-msgid "Refresh Results"
-msgstr "Rezultate"
+msgid "Add"
+msgstr "Adăugare"
 
 msgid "ABOUT U-REPORT"
 msgstr "DESPRE U-REPORT"
@@ -629,6 +589,60 @@ msgstr "Înregistrați"
 msgid "Week of"
 msgstr "Săptămâna din"
 
+msgid "Sign in"
+msgstr "Conectează-te"
+
+msgid "Forgot Password?"
+msgstr "Ai uitat parola?"
+
+msgid "Gallery"
+msgstr "Galerie"
+
+msgid "Add Image"
+msgstr "Adăugare imagine"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "REGIUNI"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Gestionează utilizatori"
+
+msgid "You must have at least one administator"
+msgstr "Trebuie să aveți cel puțin un administrator"
+
+msgid "Accounts"
+msgstr "Conturi"
+
+msgid "Admins"
+msgstr "Administratori"
+
+msgid "Editors"
+msgstr "Editori"
+
+msgid "Remove"
+msgstr "Elimină"
+
+msgid "User group"
+msgstr "Grupul utilizatorilor"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Rezultate"
+
 #, fuzzy
 #| msgid "POLL RESULTS"
 msgid "VIEW FULL RESULTS"
@@ -641,6 +655,11 @@ msgstr "U-REPORTERI ÎN"
 
 msgid "AGES"
 msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "CITEȘTE MAI MULTE"
 
 msgid "SEARCH"
 msgstr ""
@@ -692,9 +711,6 @@ msgstr "Odată eliminat, nu va mai putea fi restabilit. Nu există niciun mod de
 
 msgid "Search"
 msgstr "Caută"
-
-msgid "Add"
-msgstr "Adăugare"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -748,9 +764,6 @@ msgstr "editează"
 
 msgid "SIGN IN"
 msgstr ""
-
-msgid "Forgot Password?"
-msgstr "Ai uitat parola?"
 
 msgid "Error"
 msgstr ""
@@ -1273,6 +1286,12 @@ msgstr "Dacă există oferte de muncă care să fie afișate pe site-ul public"
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Dacă această organizație este destinată pentru date globale, de ex.: Aceasta afișează o hartă globală în locul unei hărți a unei țări."
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Codul ISO alpha-3 pentru organizaţie care va apărea în widget-ul de istorii U-Report App. De exemplu: BRA, NIG, CMR (a se utiliza GLOBAL dacă U-Reporterul este Global)."
 
@@ -1525,17 +1544,6 @@ msgstr "Ceva care să seteze localizările"
 #~ "<br/>\n"
 #~ "Pentru a accepta invitația, <a href='%(host)s%(join_url)s'>clic aici</a>."
 
-#~ msgid "Edit"
-#~ msgstr "Editează"
-
-#, fuzzy
-#~| msgid "Manage Users"
-#~ msgid "Manage Backends"
-#~ msgstr "Gestionează utilizatori"
-
-#~ msgid "Manage Users"
-#~ msgstr "Gestionează utilizatori"
-
 #~ msgid "Select your Organization"
 #~ msgstr "Selectați organizația voastră"
 
@@ -1681,9 +1689,6 @@ msgstr "Ceva care să seteze localizările"
 #~ "\n"
 #~ "⇥Rezultate %(start)s-%(end)s a %(count)s\n"
 #~ "⇥"
-
-#~ msgid "Sign in"
-#~ msgstr "Conectează-te"
 
 #~ msgid "Token Expired"
 #~ msgstr "Token expirat"

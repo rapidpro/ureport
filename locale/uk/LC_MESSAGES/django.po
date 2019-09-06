@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-12 11:02+0000\n"
+"POT-Creation-Date: 2019-09-06 15:30+0000\n"
 "PO-Revision-Date: 2017-03-02 17:06+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/uk/)\n"
@@ -88,15 +88,6 @@ msgstr ""
 msgid "Join Now"
 msgstr "приєднатись"
 
-msgid "Gallery"
-msgstr "Галерея"
-
-msgid "Add Image"
-msgstr "Додати зображення"
-
-msgid "+ New Page"
-msgstr ""
-
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -163,12 +154,6 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
-msgid "Site page under construction"
-msgstr ""
-
-msgid "Go back to main public site"
-msgstr ""
-
 msgid "READ MORE"
 msgstr "Читати"
 
@@ -211,44 +196,19 @@ msgstr ""
 "\n"
 "Пам'ятайте: для джерела вакансій у Твіттер, отримайте ID віджета з Твіттеру."
 
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST NOTIFICATIONS"
-msgstr "Географія"
+msgid "Edit"
+msgstr "Редагувати"
 
 #, fuzzy
 #| msgid "Manage Users"
-msgid "Backends"
+msgid "Manage Backends"
 msgstr "Керувати користувачами"
 
-msgid "You must have at least one administator"
-msgstr "Вам потрібен хоч один адміністратор"
+msgid "Manage Users"
+msgstr "Керувати користувачами"
 
-msgid "Accounts"
-msgstr "Облікові записи"
-
-msgid "Admins"
-msgstr "Адміни"
-
-msgid "Editors"
-msgstr "Редактори"
-
-msgid "Remove"
-msgstr "Видалити"
-
-msgid "User group"
-msgstr "Група користувачів"
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Poll Results Data"
-msgstr ""
-
-#, fuzzy
-#| msgid "Results"
-msgid "Refresh Results"
-msgstr "Результати"
+msgid "Add"
+msgstr "Додати"
 
 msgid "ABOUT U-REPORT"
 msgstr "Про UReport"
@@ -632,6 +592,60 @@ msgstr "Зареєстровані"
 msgid "Week of"
 msgstr "Тиждень"
 
+msgid "Sign in"
+msgstr "Зареєструватись"
+
+msgid "Forgot Password?"
+msgstr "Забули пароль?"
+
+msgid "Gallery"
+msgstr "Галерея"
+
+msgid "Add Image"
+msgstr "Додати зображення"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "Географія"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Керувати користувачами"
+
+msgid "You must have at least one administator"
+msgstr "Вам потрібен хоч один адміністратор"
+
+msgid "Accounts"
+msgstr "Облікові записи"
+
+msgid "Admins"
+msgstr "Адміни"
+
+msgid "Editors"
+msgstr "Редактори"
+
+msgid "Remove"
+msgstr "Видалити"
+
+msgid "User group"
+msgstr "Група користувачів"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Результати"
+
 #, fuzzy
 #| msgid "POLL RESULTS"
 msgid "VIEW FULL RESULTS"
@@ -644,6 +658,11 @@ msgstr "U-репортери в"
 
 msgid "AGES"
 msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "Читати"
 
 msgid "SEARCH"
 msgstr ""
@@ -695,9 +714,6 @@ msgstr "Якщо його видалити, воно зникне назавжд
 
 msgid "Search"
 msgstr "Пошук"
-
-msgid "Add"
-msgstr "Додати"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -751,9 +767,6 @@ msgstr "редагувати"
 
 msgid "SIGN IN"
 msgstr ""
-
-msgid "Forgot Password?"
-msgstr "Забули пароль?"
 
 msgid "Error"
 msgstr ""
@@ -1275,6 +1288,12 @@ msgstr "Чи показувати вакансії на сайті?"
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "чи це глобальний акаунт? показувати всю карту"
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
@@ -1512,17 +1531,6 @@ msgstr "Щось щоб виявити місце знаходження"
 #~ msgid "The API token for this backend"
 #~ msgstr "Назва"
 
-#~ msgid "Edit"
-#~ msgstr "Редагувати"
-
-#, fuzzy
-#~| msgid "Manage Users"
-#~ msgid "Manage Backends"
-#~ msgstr "Керувати користувачами"
-
-#~ msgid "Manage Users"
-#~ msgstr "Керувати користувачами"
-
 #~ msgid "Select your Organization"
 #~ msgstr "Оберіть організацію"
 
@@ -1662,9 +1670,6 @@ msgstr "Щось щоб виявити місце знаходження"
 #~ "\n"
 #~ " Результати: %(start)s-%(end)s з %(count)s\n"
 #~ " "
-
-#~ msgid "Sign in"
-#~ msgstr "Зареєструватись"
 
 #~ msgid "Token Expired"
 #~ msgstr "Код застарілий"

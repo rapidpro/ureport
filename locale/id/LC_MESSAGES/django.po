@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-12 11:02+0000\n"
+"POT-Creation-Date: 2019-09-06 15:30+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -87,15 +87,6 @@ msgstr ""
 msgid "Join Now"
 msgstr "Gabung"
 
-msgid "Gallery"
-msgstr "Galeri"
-
-msgid "Add Image"
-msgstr "Tambah Gambar"
-
-msgid "+ New Page"
-msgstr ""
-
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -162,12 +153,6 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
-msgid "Site page under construction"
-msgstr ""
-
-msgid "Go back to main public site"
-msgstr ""
-
 msgid "READ MORE"
 msgstr "LANJUT"
 
@@ -210,44 +195,19 @@ msgstr ""
 "\n"
 "Ingat untuk sumber pekerjaan Twitter Anda diminta untuk mendapatkan id widget dari twitter."
 
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST NOTIFICATIONS"
-msgstr "LOKASI"
+msgid "Edit"
+msgstr "Rubah"
 
 #, fuzzy
 #| msgid "Manage Users"
-msgid "Backends"
+msgid "Manage Backends"
 msgstr "Kelola Pengguna"
 
-msgid "You must have at least one administator"
-msgstr "Kamu harus mempunyai setidaknya satu administrator"
+msgid "Manage Users"
+msgstr "Kelola Pengguna"
 
-msgid "Accounts"
-msgstr "Akun"
-
-msgid "Admins"
-msgstr "Admin"
-
-msgid "Editors"
-msgstr "Editor"
-
-msgid "Remove"
-msgstr "Hapus"
-
-msgid "User group"
-msgstr "Kelompok Pengguna"
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Poll Results Data"
-msgstr ""
-
-#, fuzzy
-#| msgid "Results"
-msgid "Refresh Results"
-msgstr "Hasil"
+msgid "Add"
+msgstr "Tambah"
 
 msgid "ABOUT U-REPORT"
 msgstr "Tentang U-REPORT"
@@ -645,6 +605,60 @@ msgstr "Terdaftar"
 msgid "Week of"
 msgstr "Minggu dari"
 
+msgid "Sign in"
+msgstr "Masuk"
+
+msgid "Forgot Password?"
+msgstr "Lupa Password"
+
+msgid "Gallery"
+msgstr "Galeri"
+
+msgid "Add Image"
+msgstr "Tambah Gambar"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "LOKASI"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Kelola Pengguna"
+
+msgid "You must have at least one administator"
+msgstr "Kamu harus mempunyai setidaknya satu administrator"
+
+msgid "Accounts"
+msgstr "Akun"
+
+msgid "Admins"
+msgstr "Admin"
+
+msgid "Editors"
+msgstr "Editor"
+
+msgid "Remove"
+msgstr "Hapus"
+
+msgid "User group"
+msgstr "Kelompok Pengguna"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Hasil"
+
 #, fuzzy
 #| msgid "VIEW FULL RESULT"
 msgid "VIEW FULL RESULTS"
@@ -657,6 +671,11 @@ msgstr "U-REPORTERS DI"
 
 msgid "AGES"
 msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "LANJUT"
 
 msgid "SEARCH"
 msgstr ""
@@ -709,9 +728,6 @@ msgstr "Sekali dihapus, itu akan hilang selamanya. Tidak ada cara untuk membatal
 msgid "Search"
 msgstr "Cari"
 
-msgid "Add"
-msgstr "Tambah"
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -755,9 +771,6 @@ msgstr "Rubah"
 
 msgid "SIGN IN"
 msgstr ""
-
-msgid "Forgot Password?"
-msgstr "Lupa Password"
 
 msgid "Error"
 msgstr ""
@@ -1288,6 +1301,12 @@ msgstr "Jika ada pekerjaan yang akan ditampilkan pada situs umum"
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Jika org ini jika untuk data global. mis: Ini menunjukkan peta dunia bukan peta negara."
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
@@ -1540,17 +1559,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ "<br/>\n"
 #~ "Untuk menerima undangan, <a href='%(host)s%(join_url)s'>Klik disini</a>."
 
-#~ msgid "Edit"
-#~ msgstr "Rubah"
-
-#, fuzzy
-#~| msgid "Manage Users"
-#~ msgid "Manage Backends"
-#~ msgstr "Kelola Pengguna"
-
-#~ msgid "Manage Users"
-#~ msgstr "Kelola Pengguna"
-
 #~ msgid "Select your Organization"
 #~ msgstr "Pilih Organisasi"
 
@@ -1687,9 +1695,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ "\n"
 #~ "⇥Hasil %(start)s-%(end)s of %(count)s\n"
 #~ "⇥"
-
-#~ msgid "Sign in"
-#~ msgstr "Masuk"
 
 #~ msgid "Token Expired"
 #~ msgstr "Token Kadaluarsa"

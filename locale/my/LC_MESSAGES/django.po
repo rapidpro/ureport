@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-12 11:02+0000\n"
+"POT-Creation-Date: 2019-09-06 15:30+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -87,15 +87,6 @@ msgstr ""
 msgid "Join Now"
 msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
 
-msgid "Gallery"
-msgstr "စုစည္းရာ"
-
-msgid "Add Image"
-msgstr "ဓါတ္ပံုထည့္ရန္"
-
-msgid "+ New Page"
-msgstr ""
-
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -162,12 +153,6 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
-msgid "Site page under construction"
-msgstr ""
-
-msgid "Go back to main public site"
-msgstr ""
-
 msgid "READ MORE"
 msgstr "ထပ္မံဖတ္ရွဳရန္"
 
@@ -204,44 +189,19 @@ msgid ""
 "      "
 msgstr ""
 
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST NOTIFICATIONS"
-msgstr "တည္ေနရာမ်ား"
+msgid "Edit"
+msgstr "တည္းျဖတ္"
 
 #, fuzzy
 #| msgid "Manage Users"
-msgid "Backends"
+msgid "Manage Backends"
 msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
 
-msgid "You must have at least one administator"
-msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
+msgid "Manage Users"
+msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
 
-msgid "Accounts"
-msgstr "account မ်ား"
-
-msgid "Admins"
-msgstr "စီစဥ္သူ"
-
-msgid "Editors"
-msgstr "တည္းျဖတ္သူမ်ား"
-
-msgid "Remove"
-msgstr "ဖယ္ရွားလိုက္ပါ"
-
-msgid "User group"
-msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Poll Results Data"
-msgstr ""
-
-#, fuzzy
-#| msgid "Results"
-msgid "Refresh Results"
-msgstr "ရလဒ္မ်ား"
+msgid "Add"
+msgstr "ထပ္ထည့္ရန္"
 
 msgid "ABOUT U-REPORT"
 msgstr "U-Report အေၾကာင္းသိေကာင္းစရာ"
@@ -618,6 +578,60 @@ msgstr "စာရင္းသြင္းထားၿပီး"
 msgid "Week of"
 msgstr "အပတ္၏"
 
+msgid "Sign in"
+msgstr "၀င္ေရာက္ရန္"
+
+msgid "Forgot Password?"
+msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သြားပါသလား"
+
+msgid "Gallery"
+msgstr "စုစည္းရာ"
+
+msgid "Add Image"
+msgstr "ဓါတ္ပံုထည့္ရန္"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "တည္ေနရာမ်ား"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+
+msgid "You must have at least one administator"
+msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
+
+msgid "Accounts"
+msgstr "account မ်ား"
+
+msgid "Admins"
+msgstr "စီစဥ္သူ"
+
+msgid "Editors"
+msgstr "တည္းျဖတ္သူမ်ား"
+
+msgid "Remove"
+msgstr "ဖယ္ရွားလိုက္ပါ"
+
+msgid "User group"
+msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "ရလဒ္မ်ား"
+
 #, fuzzy
 #| msgid "VIEW FULL RESULT"
 msgid "VIEW FULL RESULTS"
@@ -630,6 +644,11 @@ msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္
 
 msgid "AGES"
 msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "ထပ္မံဖတ္ရွဳရန္"
 
 msgid "SEARCH"
 msgstr ""
@@ -670,9 +689,6 @@ msgstr "ဖယ္ရွားလိုက္သည္ႏွင့္ အၿပ�
 msgid "Search"
 msgstr "ရွာေဖြရန္"
 
-msgid "Add"
-msgstr "ထပ္ထည့္ရန္"
-
 #, python-format
 msgid ""
 "\n"
@@ -699,9 +715,6 @@ msgstr "တည္းျဖတ္"
 
 msgid "SIGN IN"
 msgstr ""
-
-msgid "Forgot Password?"
-msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သြားပါသလား"
 
 msgid "Error"
 msgstr ""
@@ -1209,6 +1222,12 @@ msgstr "အမ်ားျပည္သူျမင္သာေသာ site တြ
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "သည္အဖြဲ႕အစည္းသည္ ႏိုင္ငံတကာအခ်က္အလက္မ်ားကို ေဖာ္ျပလွ်င္ ႏိုင္ငံတစ္ႏိုင္ငံ၏ေျမပံုအစား ႏိုင္ငံတကာေျမပံုသာ ျပလိမ့္မည္"
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
@@ -1446,17 +1465,6 @@ msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္�
 #~ msgid "The API token for this backend"
 #~ msgstr "ယခုအမ်ိဳးအစား၏ေခါင္းစဥ္"
 
-#~ msgid "Edit"
-#~ msgstr "တည္းျဖတ္"
-
-#, fuzzy
-#~| msgid "Manage Users"
-#~ msgid "Manage Backends"
-#~ msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
-
-#~ msgid "Manage Users"
-#~ msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
-
 #~ msgid "Select your Organization"
 #~ msgstr "သင့္အဖြဲ႕အစည္းကို ေရြးျခယ္ပါ"
 
@@ -1538,9 +1546,6 @@ msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္�
 
 #~ msgid "Image to display on story page and in previews (optional)"
 #~ msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
-
-#~ msgid "Sign in"
-#~ msgstr "၀င္ေရာက္ရန္"
 
 #~ msgid "Token Expired"
 #~ msgstr "ေပးထားသည္မွာ သက္တမ္းကုန္ဆံုးသြားပါၿပီ"

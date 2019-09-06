@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-12 11:02+0000\n"
+"POT-Creation-Date: 2019-09-06 15:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,15 +80,6 @@ msgstr ""
 msgid "Join Now"
 msgstr ""
 
-msgid "Gallery"
-msgstr ""
-
-msgid "Add Image"
-msgstr ""
-
-msgid "+ New Page"
-msgstr ""
-
 msgid "U-Report"
 msgstr ""
 
@@ -155,12 +146,6 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
-msgid "Site page under construction"
-msgstr ""
-
-msgid "Go back to main public site"
-msgstr ""
-
 msgid "READ MORE"
 msgstr ""
 
@@ -197,37 +182,16 @@ msgid ""
 "      "
 msgstr ""
 
-msgid "LATEST NOTIFICATIONS"
+msgid "Edit"
 msgstr ""
 
-msgid "Backends"
+msgid "Manage Backends"
 msgstr ""
 
-msgid "You must have at least one administator"
+msgid "Manage Users"
 msgstr ""
 
-msgid "Accounts"
-msgstr ""
-
-msgid "Admins"
-msgstr ""
-
-msgid "Editors"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
-
-msgid "User group"
-msgstr ""
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Poll Results Data"
-msgstr ""
-
-msgid "Refresh Results"
+msgid "Add"
 msgstr ""
 
 msgid "ABOUT U-REPORT"
@@ -589,6 +553,54 @@ msgstr ""
 msgid "Week of"
 msgstr ""
 
+msgid "Sign in"
+msgstr ""
+
+msgid "Forgot Password?"
+msgstr ""
+
+msgid "Gallery"
+msgstr ""
+
+msgid "Add Image"
+msgstr ""
+
+msgid "+ New Page"
+msgstr ""
+
+msgid "LATEST NOTIFICATIONS"
+msgstr ""
+
+msgid "Backends"
+msgstr ""
+
+msgid "You must have at least one administator"
+msgstr ""
+
+msgid "Accounts"
+msgstr ""
+
+msgid "Admins"
+msgstr ""
+
+msgid "Editors"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "User group"
+msgstr ""
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+msgid "Refresh Results"
+msgstr ""
+
 msgid "VIEW FULL RESULTS"
 msgstr ""
 
@@ -596,6 +608,9 @@ msgid "U-REPORTERS WORLDWIDE:"
 msgstr ""
 
 msgid "AGES"
+msgstr ""
+
+msgid "LEARN MORE"
 msgstr ""
 
 msgid "SEARCH"
@@ -633,9 +648,6 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-msgid "Add"
-msgstr ""
-
 #, python-format
 msgid ""
 "\n"
@@ -662,9 +674,6 @@ msgid "edit"
 msgstr ""
 
 msgid "SIGN IN"
-msgstr ""
-
-msgid "Forgot Password?"
 msgstr ""
 
 msgid "Error"
@@ -1155,6 +1164,12 @@ msgid "If there are jobs to be shown on the public site. (Separated by comma)"
 msgstr ""
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgstr ""
+
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."

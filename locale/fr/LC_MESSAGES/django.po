@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-12 11:02+0000\n"
+"POT-Creation-Date: 2019-09-06 15:30+0000\n"
 "PO-Revision-Date: 2017-04-07 14:40+0000\n"
 "Last-Translator: Vincent Turmine <vincent.turmine@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
@@ -93,15 +93,6 @@ msgstr ""
 msgid "Join Now"
 msgstr "Rejoindre"
 
-msgid "Gallery"
-msgstr "Galerie Photos"
-
-msgid "Add Image"
-msgstr "Ajouter une image"
-
-msgid "+ New Page"
-msgstr ""
-
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -168,12 +159,6 @@ msgstr ""
 msgid "Opinions"
 msgstr ""
 
-msgid "Site page under construction"
-msgstr ""
-
-msgid "Go back to main public site"
-msgstr ""
-
 msgid "READ MORE"
 msgstr "EN SAVOIR PLUS"
 
@@ -213,44 +198,19 @@ msgid ""
 "      "
 msgstr ""
 
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST NOTIFICATIONS"
-msgstr "CARTOGRAPHIE"
+msgid "Edit"
+msgstr "Éditer"
 
 #, fuzzy
 #| msgid "Manage Users"
-msgid "Backends"
+msgid "Manage Backends"
 msgstr "Gérer les utilisateurs"
 
-msgid "You must have at least one administator"
-msgstr "Vous devez avoir au moins un administrateur"
+msgid "Manage Users"
+msgstr "Gérer les utilisateurs"
 
-msgid "Accounts"
-msgstr "Comptes"
-
-msgid "Admins"
-msgstr "Administrateurs"
-
-msgid "Editors"
-msgstr "Éditeurs"
-
-msgid "Remove"
-msgstr "Retirer"
-
-msgid "User group"
-msgstr "Groupe utilisateur"
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Poll Results Data"
-msgstr ""
-
-#, fuzzy
-#| msgid "Results"
-msgid "Refresh Results"
-msgstr "Résultats"
+msgid "Add"
+msgstr "Ajouter"
 
 msgid "ABOUT U-REPORT"
 msgstr "À PROPOS DE U-REPORT"
@@ -635,6 +595,60 @@ msgstr "Enregistré"
 msgid "Week of"
 msgstr "Semaine du"
 
+msgid "Sign in"
+msgstr "Se connecter"
+
+msgid "Forgot Password?"
+msgstr "Mot de passe oublié ?"
+
+msgid "Gallery"
+msgstr "Galerie Photos"
+
+msgid "Add Image"
+msgstr "Ajouter une image"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "CARTOGRAPHIE"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Gérer les utilisateurs"
+
+msgid "You must have at least one administator"
+msgstr "Vous devez avoir au moins un administrateur"
+
+msgid "Accounts"
+msgstr "Comptes"
+
+msgid "Admins"
+msgstr "Administrateurs"
+
+msgid "Editors"
+msgstr "Éditeurs"
+
+msgid "Remove"
+msgstr "Retirer"
+
+msgid "User group"
+msgstr "Groupe utilisateur"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Résultats"
+
 #, fuzzy
 #| msgid "POLL RESULTS"
 msgid "VIEW FULL RESULTS"
@@ -647,6 +661,11 @@ msgstr "U-REPORTERS  - "
 
 msgid "AGES"
 msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "EN SAVOIR PLUS"
 
 msgid "SEARCH"
 msgstr ""
@@ -694,9 +713,6 @@ msgstr ""
 msgid "Search"
 msgstr "Rechercher"
 
-msgid "Add"
-msgstr "Ajouter"
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -737,9 +753,6 @@ msgstr "éditer"
 
 msgid "SIGN IN"
 msgstr ""
-
-msgid "Forgot Password?"
-msgstr "Mot de passe oublié ?"
 
 msgid "Error"
 msgstr ""
@@ -1259,6 +1272,12 @@ msgstr ""
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr ""
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
@@ -1297,14 +1316,49 @@ msgstr "Quelque chose pour déclencher les localisations"
 #~ msgstr "La rubrique que cette image représente"
 
 #, fuzzy
+#~| msgid "The category for this story"
+#~ msgid "The human readable name for this content type"
+#~ msgstr "La rubrique pour cet article"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this content should include a title"
+#~ msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+
+#, fuzzy
 #~| msgid "Whether this poll should be featured on the homepage"
 #~ msgid "Whether this content should include an image"
+#~ msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this content should use a rich HTML editor"
+#~ msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this content should include a summary field"
+#~ msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this content should include a link"
+#~ msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
 #~ msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
 
 #, fuzzy
 #~| msgid "Whether this story is featured"
 #~ msgid "Whether this content has a color field"
 #~ msgstr "Si cet article est mis en avant "
+
+#, fuzzy
+#~| msgid "Whether this poll should be featured on the homepage"
+#~ msgid "Whether this content should allow setting a YouTube id"
+#~ msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
 
 #, fuzzy
 #~| msgid "Whether this poll should be featured on the homepage"
@@ -1518,17 +1572,6 @@ msgstr "Quelque chose pour déclencher les localisations"
 #~ "      Pour accepter l'invitation, <a href='%(host)s%(join_url)s'>cliquez ici</a>.\n"
 #~ "  "
 
-#~ msgid "Edit"
-#~ msgstr "Éditer"
-
-#, fuzzy
-#~| msgid "Manage Users"
-#~ msgid "Manage Backends"
-#~ msgstr "Gérer les utilisateurs"
-
-#~ msgid "Manage Users"
-#~ msgstr "Gérer les utilisateurs"
-
 #~ msgid "Select your Organization"
 #~ msgstr "Choisir votre organisation"
 
@@ -1637,9 +1680,6 @@ msgstr "Quelque chose pour déclencher les localisations"
 #~ "\n"
 #~ "         %(counter)s résultats        "
 
-#~ msgid "Sign in"
-#~ msgstr "Se connecter"
-
 #~ msgid "Token Expired"
 #~ msgstr "Token expiré"
 
@@ -1693,6 +1733,11 @@ msgstr "Quelque chose pour déclencher les localisations"
 #~ msgid "Please enter your password to save changes."
 #~ msgstr "Entrer votre mot de passe pour sauvegarder les modifications."
 
+#, fuzzy
+#~| msgid "Confirm your new password"
+#~ msgid "Confirm the new password by filling the this field"
+#~ msgstr "Confirmer votre nouveau mot de passe"
+
 #~ msgid "Your Email"
 #~ msgstr "Votre email"
 
@@ -1742,6 +1787,11 @@ msgstr "Quelque chose pour déclencher les localisations"
 
 #~ msgid "Is Active"
 #~ msgstr "Actif"
+
+#, fuzzy
+#~| msgid "Confirm your new password"
+#~ msgid "You can reset the user's password by entering a new password here"
+#~ msgstr "Confirmer votre nouveau mot de passe"
 
 #~ msgid "Username"
 #~ msgstr "Nom Utilisateur"
