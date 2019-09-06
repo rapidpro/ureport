@@ -843,6 +843,7 @@ def populate_contact_activity(org):
     from ureport.contacts.models import Contact
 
     now = timezone.now()
+    now_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()
     start_date = now - timedelta(days=500)
 
     flows = list(
@@ -877,6 +878,9 @@ def populate_contact_activity(org):
                     if result.date < oldest_seen:
                         oldest_seen = result.date
                         oldest_id = result.id
+
+                if oldest_seen <= start and newest_seen >= now_month:
+                    break
 
             ids_to_update = []
             if oldest_id:
