@@ -843,7 +843,7 @@ def populate_contact_activity(org):
     from ureport.contacts.models import Contact
 
     now = timezone.now()
-    now_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()
+    now_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     start_date = now - timedelta(days=500)
 
     flows = list(
