@@ -484,10 +484,10 @@ class PublicTest(UreportTest):
         # self.assertContains(response, "All U-Report services (all msg on 3000) are free.")
 
     def test_ureporters(self):
-        ureporters_url = reverse("v2.public.ureporters")
+        ureporters_url = reverse("v2.public.engagement")
 
         response = self.client.get(ureporters_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/ureporters/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/engagement/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["view"].template_name, "v2/public/ureporters.html")
 
@@ -505,7 +505,7 @@ class PublicTest(UreportTest):
         self.assertTrue("show_occupation_stats" in response.context)
 
         response = self.client.get(ureporters_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/ureporters/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/engagement/")
         self.assertEqual(response.context["org"], self.uganda)
 
     @mock.patch("dash.orgs.models.TembaClient", MockTembaClient)
