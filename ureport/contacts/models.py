@@ -151,7 +151,7 @@ class Contact(models.Model):
 
         logger.info(
             "Finished Rebuilding the contacts reporters counters for org #%d in %ds, inserted %d counters objects for %s contacts"
-            % (org_id, time.time() - start, len(counters_to_insert), all_contacts_count)
+            % (org.id, time.time() - start, len(counters_to_insert), all_contacts_count)
         )
 
         return counters_dict
