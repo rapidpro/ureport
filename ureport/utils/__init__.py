@@ -879,7 +879,7 @@ def populate_contact_activity(org):
                         oldest_seen = result.date
                         oldest_id = result.id
 
-                if oldest_seen <= start and newest_seen >= now_month:
+                if oldest_seen <= start_date and newest_seen >= now_month:
                     break
 
             ids_to_update = []
