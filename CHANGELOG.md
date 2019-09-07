@@ -1,3 +1,7 @@
+v1.1.0
+----------
+ * Merge pull request #432 from rapidpro/uikit
+
 v1.0.459
 ----------
  * Fix staging DATABASES config
