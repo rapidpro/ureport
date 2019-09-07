@@ -844,7 +844,7 @@ def populate_contact_activity(org):
 
     now = timezone.now()
     now_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    start_date = now - timedelta(days=500)
+    start_date = now - timedelta(days=365)
 
     flows = list(
         Poll.objects.filter(org_id=org.id, poll_date__gte=start_date)
@@ -864,20 +864,19 @@ def populate_contact_activity(org):
         contacts = Contact.objects.filter(id__in=contact_batch)
         for contact in contacts:
             i += 1
-            results = PollResult.objects.filter(contact=contact.uuid, org_id=org.id, flow__in=flows).order_by("-id")
+            results = PollResult.objects.filter(contact=contact.uuid, org_id=org.id, flow__in=flows).exclude(date=None)
 
             oldest_id = None
             newest_id = None
             oldest_seen = now
             newest_seen = start_date
             for result in results:
-                if result.date:
-                    if result.date > newest_seen:
-                        newest_seen = result.date
-                        newest_id = result.id
-                    if result.date < oldest_seen:
-                        oldest_seen = result.date
-                        oldest_id = result.id
+                if result.date > newest_seen:
+                    newest_seen = result.date
+                    newest_id = result.id
+                if result.date < oldest_seen:
+                    oldest_seen = result.date
+                    oldest_id = result.id
 
                 if oldest_seen <= start_date and newest_seen >= now_month:
                     break
