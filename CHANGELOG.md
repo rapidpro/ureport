@@ -1,3 +1,9 @@
+v1.1.1
+----------
+ * Merge pull request #433 from rapidpro/post-deploy-fixes
+ * More adjustements
+ * Remove placeholders and adjust logos
+
 v1.1.0
 ----------
  * Merge pull request #432 from rapidpro/uikit
