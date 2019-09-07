@@ -6,6 +6,8 @@ from functools import reduce
 
 from django.conf import settings
 
+from ureport.utils import get_linked_orgs
+
 
 def set_has_better_domain(request):
     """
@@ -37,6 +39,11 @@ def set_has_better_domain(request):
             has_better_domain = False
 
     return dict(has_better_domain=has_better_domain, show_login=show_login)
+
+
+def set_linked_sites(request):
+    linked_orgs = get_linked_orgs(request.user.is_authenticated)
+    return dict(linked_orgs=linked_orgs)
 
 
 def set_is_iorg(request):

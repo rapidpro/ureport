@@ -16,9 +16,11 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.template.response import TemplateResponse
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.base import RedirectView
 
 from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
@@ -191,6 +193,11 @@ class PollReadView(PollContextMixin, SmartReadView):
         return self.get_object()
 
 
+class PollRedirectView(RedirectView):
+    def get_redirect_url(*args, **kwargs):
+        return reverse("v2.public.poll_read", args=[kwargs["pk"]])
+
+
 class PollQuestionResultsView(SmartReadView):
     model = PollQuestion
 
@@ -205,6 +212,7 @@ class PollQuestionResultsView(SmartReadView):
             segment = json.loads(segment)
 
         results = self.object.get_results(segment=segment)
+        results = self.object.calculate_results(segment=segment)
 
         return HttpResponse(json.dumps(results))
 

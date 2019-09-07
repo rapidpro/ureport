@@ -252,6 +252,7 @@ class ContactSyncer(BaseSyncer):
         gender_field = org.get_config("%s.gender_label" % self.backend.slug, default="")
         female_label = org.get_config("%s.female_label" % self.backend.slug, default="")
         male_label = org.get_config("%s.male_label" % self.backend.slug, default="")
+        extra_gender = org.get_config("common.has_extra_gender", default=False)
 
         if gender_field:
             gender_field = gender_field.lower()
@@ -261,6 +262,8 @@ class ContactSyncer(BaseSyncer):
                 gender = self.model.FEMALE
             elif gender and gender.lower() == male_label.lower():
                 gender = self.model.MALE
+            elif gender and extra_gender:
+                gender = self.model.OTHER
             else:
                 gender = ""
 

@@ -223,7 +223,12 @@ def pull_refresh_from_archives(poll_id):
 def rebuild_counts():
     from .models import Poll
 
-    for poll in Poll.objects.all():
+    now = timezone.now()
+    start = now - timedelta(days=365)
+
+    polls = Poll.objects.filter(poll_date__gte=start)
+
+    for poll in polls:
         poll.rebuild_poll_results_counts()
 
 

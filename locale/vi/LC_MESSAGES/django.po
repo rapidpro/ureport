@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-21 10:49+0000\n"
+"POT-Creation-Date: 2019-09-06 15:44+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -357,6 +357,8 @@ msgstr "Liên kết lời mời của bạn không hợp lệ. Vui lòng liên h
 msgid "Join %(name)s"
 msgstr "Tham gia %(name)s"
 
+#, fuzzy
+#| msgid "Join"
 msgid "Join"
 msgstr "Tham gia"
 
@@ -427,7 +429,11 @@ msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản
 msgid "Remove Item?"
 msgstr "Xóa Mục?"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
 msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -463,7 +469,11 @@ msgstr[0] ""
 "\n"
 "%(counter)s kết quả"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
 msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -496,7 +506,11 @@ msgstr "Mã hết hạn"
 msgid "Login Failure"
 msgstr "Đăng nhập thất bại"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
 msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -505,7 +519,11 @@ msgstr ""
 "\n"
 "Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -529,7 +547,11 @@ msgstr "Khôi phục"
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Vui lòng nhập địa chỉ email bạn đã sử dụng để đăng ký và chúng tôi sẽ giúp bạn khôi phục lại mật khẩu."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -682,6 +704,63 @@ msgstr "%s mới của bạn đã được tạo."
 msgid "Import %s"
 msgstr "Nhập %s"
 
+msgid "Back to Full Site"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Logout"
+msgstr "Đăng xuất"
+
+msgid "Polls"
+msgstr "Khảo sát"
+
+msgid "Users"
+msgstr "Người dùng"
+
+msgid "Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Images"
+msgid "Pages"
+msgstr "Hình ảnh"
+
+msgid "Jobs"
+msgstr "Công việc"
+
+#, fuzzy
+#| msgid "Category Images"
+msgid "Categories Images"
+msgstr "Các hình ảnh cho danh mục"
+
+msgid "News Items"
+msgstr "Các mục mới"
+
+msgid "Orgs"
+msgstr "Tổ chức"
+
+msgid "Images"
+msgstr "Hình ảnh"
+
+msgid "Analytics"
+msgstr ""
+
+msgid "About"
+msgstr "Thông tin"
+
+msgid "Engagement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Tham gia"
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -691,29 +770,14 @@ msgstr "Quản trị viên"
 msgid "Configuration"
 msgstr "Cấu hình"
 
-msgid "Orgs"
-msgstr "Tổ chức"
-
-msgid "Users"
-msgstr "Người dùng"
-
-msgid "Images"
-msgstr "Hình ảnh"
-
 msgid "Content"
 msgstr "Nội dung"
 
 msgid "Country Aliases"
 msgstr "Biệt hiệu Quốc gia"
 
-msgid "Polls"
-msgstr "Khảo sát"
-
 msgid "Category Images"
 msgstr "Các hình ảnh cho danh mục"
-
-msgid "News Items"
-msgstr "Các mục mới"
 
 msgid "Job Sources"
 msgstr "Nguồn công việc"
@@ -748,23 +812,26 @@ msgstr "Nội dung các Bước Tham gia "
 msgid "Additional Menu"
 msgstr "Menu bổ sung"
 
-msgid "Logout"
-msgstr "Đăng xuất"
-
-msgid "About"
-msgstr "Thông tin"
-
 msgid "U-Reporters"
 msgstr "U-Reporters"
-
-msgid "Jobs"
-msgstr "Công việc"
 
 msgid "Join & Engage"
 msgstr "Tham gia & Kết nối"
 
 msgid "FOLLOW US ON"
 msgstr "THEO DÕI CHÚNG TÔI TẠI"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Opinions"
+msgstr ""
+
+msgid "READ MORE"
+msgstr "XEM THÊM"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
 
 msgid ""
 "\n"
@@ -1108,9 +1175,6 @@ msgstr "Không có khảo sát liên quan."
 msgid "No featured images."
 msgstr "Không có hình ảnh đặc trưng."
 
-msgid "READ MORE"
-msgstr "XEM THÊM"
-
 msgid "Even"
 msgstr "Thậm chí"
 
@@ -1176,6 +1240,175 @@ msgstr "Đã đăng ký"
 
 msgid "Week of"
 msgstr "Tuần"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "ĐỊA ĐIỂM"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Quản lý người dùng"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Kết quả"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "KẾT QUẢ KHẢO SÁT"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS WORLDWIDE:"
+msgstr "U-REPORTERS TẠI"
+
+msgid "AGES"
+msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "XEM THÊM"
+
+msgid "SEARCH"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONSES"
+msgstr "TỶ LỆ PHẢN HỒI"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"                 %(responded)s responded out of %(polled)s polled\n"
+"               "
+msgstr ""
+"\n"
+"%(responded)sđã phản hồi trong số %(polled)sđã khảo sát"
+
+msgid "Keywords"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "TOTAL U-REPORTERS IN"
+msgstr "U-REPORTERS TẠI"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+"\n"
+"%(counter)s kết quả"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+"\n"
+"\t Kết quả %(start)s-%(end)s trong số %(count)s"
+
+msgid "SIGN IN"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong>Mật khẩu của bạn đã hết hạn.</strong>Chính sách của trang web yêu cầu bạn phải chọn một mật khẩu mới cứ %(expire_days)s ngày một lần và mật khẩu đó phải không được sử dụng trong %(window_days)s ngày trước đó."
+
+msgid "+ New Story"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1601,6 +1834,12 @@ msgstr "Nếu có công việc để được hiển thị trên trang web công
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Liệu tổ chức này có áp dụng đối với thông tin toàn cầu, ví dụ: đưa ra bản đồ thế giới thay vì bản đồ quốc gia"
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Mã alpha-3 ISO của tổ chức để hiển thị các câu chuyện ứng dụng Ureport tiện ích, ví dụ BRA, NIG, CMR (dùng GLOBAL nếu là U-Report toàn cầu)."
 
@@ -1628,6 +1867,42 @@ msgstr "Nếu bạn cần bao gồm một số mã HTML tùy chỉnh trong trang
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
+
+#, fuzzy
+#~| msgid "Join & Engage"
+#~ msgid "Engage"
+#~ msgstr "Tham gia & Kết nối"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(questions)s question polled on this topic\n"
+#~| "                "
+#~| msgid_plural ""
+#~| "\n"
+#~| "                  %(questions)s questions polled on this topic\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "          %(questions)s question\n"
+#~ "        "
+#~ msgid_plural ""
+#~ "\n"
+#~ "          %(questions)s questions\n"
+#~ "        "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(questions)s câu hỏi đã khảo sát trong chủ đề này"
+
+#, fuzzy
+#~| msgid "FILTERED BY"
+#~ msgid "FILTER BY:"
+#~ msgstr "ĐƯỢC LỌC BỞI"
+
+#, fuzzy
+#~| msgid "LOCATIONS"
+#~ msgid "LOCATION"
+#~ msgstr "ĐỊA ĐIỂM"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "Mã thông báo API cho tài khoản RapidPro được gắn với bảng điều khiển này "

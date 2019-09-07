@@ -13,6 +13,7 @@ from mock import patch
 from temba_client.v2 import Flow
 
 from django.conf import settings
+from django.urls import reverse
 from django.utils import timezone
 
 from ureport.assets.models import FLAG, Image
@@ -307,6 +308,21 @@ class UtilsTest(UreportTest):
         self.assertEqual(
             get_gender_stats(self.org),
             dict(female_count=2, female_percentage="40%", male_count=3, male_percentage="60%"),
+        )
+
+        self.org.set_config("common.has_extra_gender", True)
+
+        ReportersCounter.objects.create(org=self.org, type="gender:o", count=5)
+        self.assertEqual(
+            get_gender_stats(self.org),
+            dict(
+                female_count=2,
+                female_percentage="20%",
+                male_count=3,
+                male_percentage="30%",
+                other_count=5,
+                other_percentage="50%",
+            ),
         )
 
     @patch("django.core.cache.cache.get")
@@ -640,3 +656,18 @@ class UtilsTest(UreportTest):
                 ]
             ),
         )
+
+
+class CheckVersionMiddlewareTest(UreportTest):
+    def setUp(self):
+        super(CheckVersionMiddlewareTest, self).setUp()
+
+    def test_process_template_response(self):
+        self.login(self.admin)
+
+        list_url = reverse("polls.poll_list")
+        response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual("polls/poll_list.html", response.template_name[0])
+
+        response = self.client.get(f"/v2{list_url}", SERVER_NAME="uganda.ureport.io")
+        self.assertEqual("v2/polls/poll_list.html", response.template_name[0])

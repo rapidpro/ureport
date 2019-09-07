@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-21 10:49+0000\n"
+"POT-Creation-Date: 2019-09-06 15:44+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -356,6 +356,8 @@ msgstr "link undangan Anda tidak valid. Silahkan hubungi administrator organisas
 msgid "Join %(name)s"
 msgstr "Gabung %(name)s"
 
+#, fuzzy
+#| msgid "Join"
 msgid "Join"
 msgstr "Gabung"
 
@@ -426,7 +428,11 @@ msgstr "Image to display on story page and in previews (optional)"
 msgid "Remove Item?"
 msgstr "Hapus daftar?"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
 msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -462,7 +468,11 @@ msgstr[0] ""
 "\n"
 "%(counter)s hasil"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
 msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -496,7 +506,11 @@ msgstr "Token Kadaluarsa"
 msgid "Login Failure"
 msgstr "Kegagalan Masuk"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
 msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -505,7 +519,11 @@ msgstr ""
 "\n"
 "Maaf, Anda tidak bisa login pada saat ini karena kami menerima %(failed_login_limit)s usaha login yang salah."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -529,7 +547,11 @@ msgstr "Pemulihan"
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Masukkan alamat surel yang Anda gunakan untuk mendaftar dan kami akan membantu Anda mengembalikan kata kunci Anda."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -682,6 +704,63 @@ msgstr "%s baru anda sudah berhasil dibuat"
 msgid "Import %s"
 msgstr "Impor %s"
 
+msgid "Back to Full Site"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Logout"
+msgstr "Keluar"
+
+msgid "Polls"
+msgstr "Polling"
+
+msgid "Users"
+msgstr "Nama Pengguna"
+
+msgid "Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Images"
+msgid "Pages"
+msgstr "Gambar"
+
+msgid "Jobs"
+msgstr "Pekerjaan"
+
+#, fuzzy
+#| msgid "Category Images"
+msgid "Categories Images"
+msgstr "Gambar Kategori"
+
+msgid "News Items"
+msgstr "Berita"
+
+msgid "Orgs"
+msgstr "Orgs"
+
+msgid "Images"
+msgstr "Gambar"
+
+msgid "Analytics"
+msgstr ""
+
+msgid "About"
+msgstr "Tentang Kami"
+
+msgid "Engagement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Gabung"
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -691,29 +770,14 @@ msgstr "Admin"
 msgid "Configuration"
 msgstr "Konfigurasi"
 
-msgid "Orgs"
-msgstr "Orgs"
-
-msgid "Users"
-msgstr "Nama Pengguna"
-
-msgid "Images"
-msgstr "Gambar"
-
 msgid "Content"
 msgstr "Konten"
 
 msgid "Country Aliases"
 msgstr "Negara Alias"
 
-msgid "Polls"
-msgstr "Polling"
-
 msgid "Category Images"
 msgstr "Gambar Kategori"
-
-msgid "News Items"
-msgstr "Berita"
 
 msgid "Job Sources"
 msgstr "Sumber Pekerjaan"
@@ -748,23 +812,26 @@ msgstr "Bergabung dengan Langkah Konten"
 msgid "Additional Menu"
 msgstr "Menu Tambahan"
 
-msgid "Logout"
-msgstr "Keluar"
-
-msgid "About"
-msgstr "Tentang Kami"
-
 msgid "U-Reporters"
 msgstr "U-Reporters"
-
-msgid "Jobs"
-msgstr "Pekerjaan"
 
 msgid "Join & Engage"
 msgstr "Bergabung & Terlibat"
 
 msgid "FOLLOW US ON"
 msgstr "BERGABUNG DENGAN KAMI DI"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Opinions"
+msgstr ""
+
+msgid "READ MORE"
+msgstr "LANJUT"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
 
 msgid ""
 "\n"
@@ -1126,9 +1193,6 @@ msgstr "Tidak ada yang terkait polling"
 msgid "No featured images."
 msgstr "Belum ada gambar fitur"
 
-msgid "READ MORE"
-msgstr "LANJUT"
-
 msgid "Even"
 msgstr "Genap"
 
@@ -1194,6 +1258,176 @@ msgstr "Terdaftar"
 
 msgid "Week of"
 msgstr "Minggu dari"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "LOKASI"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Kelola Pengguna"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Hasil"
+
+#, fuzzy
+#| msgid "VIEW FULL RESULT"
+msgid "VIEW FULL RESULTS"
+msgstr "LIHAT HASIL"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS WORLDWIDE:"
+msgstr "U-REPORTERS DI"
+
+msgid "AGES"
+msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "LANJUT"
+
+msgid "SEARCH"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONSES"
+msgstr "RATING TANGGAPAN"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"                 %(responded)s responded out of %(polled)s polled\n"
+"               "
+msgstr ""
+"\n"
+"%(responded)s direspon dari %(polled)s jajak pendapat"
+
+msgid "Keywords"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "TOTAL U-REPORTERS IN"
+msgstr "U-REPORTERS DI"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Apakah Anda yakin ingin menghapus <b>%(object)s</b>?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+"\n"
+"%(counter)s hasil"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+"\n"
+"⇥Hasil %(start)s-%(end)s of %(count)s\n"
+"⇥"
+
+msgid "SIGN IN"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Maaf, Anda tidak bisa login pada saat ini karena kami menerima %(failed_login_limit)s usaha login yang salah."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Silahkan tunggu %(lockout_timeout)s menit sebelum mencoba login kembali."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<Strong> Kata sandi Anda telah kedaluwarsa. </ Strong> menyatakan kebijakan Site bahwa Anda harus memilih password baru setiap %(expire_days)s hari, dan bahwa password harus tidak telah digunakan dalam sebelumnya %(window_days)s hari"
+
+msgid "+ New Story"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1627,6 +1861,12 @@ msgstr "Jika ada pekerjaan yang akan ditampilkan pada situs umum"
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Jika org ini jika untuk data global. mis: Ini menunjukkan peta dunia bukan peta negara."
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
@@ -1655,6 +1895,38 @@ msgstr "Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, sep
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
 
+#, fuzzy
+#~| msgid "Join & Engage"
+#~ msgid "Engage"
+#~ msgstr "Bergabung & Terlibat"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    %(responded)s responded out of %(polled)s polled\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "          %(questions)s question\n"
+#~ "        "
+#~ msgid_plural ""
+#~ "\n"
+#~ "          %(questions)s questions\n"
+#~ "        "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(responded)s direspon dari %(polled)s jajak pendapat"
+
+#, fuzzy
+#~| msgid "FILTERED BY"
+#~ msgid "FILTER BY:"
+#~ msgstr "Kata Pencarian"
+
+#, fuzzy
+#~| msgid "LOCATIONS"
+#~ msgid "LOCATION"
+#~ msgstr "LOKASI"
+
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "API tanda untuk akun RapidPro dashboard ini terkait dengan"
 
@@ -1663,9 +1935,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 
 #~ msgid "National"
 #~ msgstr "Nasional"
-
-#~ msgid "VIEW FULL RESULT"
-#~ msgstr "LIHAT HASIL"
 
 #~ msgid "Least responded"
 #~ msgstr "Respon paling sedikit"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-21 10:49+0000\n"
+"POT-Creation-Date: 2019-09-06 15:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -653,6 +653,57 @@ msgstr ""
 msgid "Import %s"
 msgstr ""
 
+msgid "Back to Full Site"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Polls"
+msgstr ""
+
+msgid "Users"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Jobs"
+msgstr ""
+
+msgid "Categories Images"
+msgstr ""
+
+msgid "News Items"
+msgstr ""
+
+msgid "Orgs"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Analytics"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Engagement"
+msgstr ""
+
+msgid "Join Now"
+msgstr ""
+
 msgid "U-Report"
 msgstr ""
 
@@ -662,28 +713,13 @@ msgstr ""
 msgid "Configuration"
 msgstr ""
 
-msgid "Orgs"
-msgstr ""
-
-msgid "Users"
-msgstr ""
-
-msgid "Images"
-msgstr ""
-
 msgid "Content"
 msgstr ""
 
 msgid "Country Aliases"
 msgstr ""
 
-msgid "Polls"
-msgstr ""
-
 msgid "Category Images"
-msgstr ""
-
-msgid "News Items"
 msgstr ""
 
 msgid "Job Sources"
@@ -719,22 +755,25 @@ msgstr ""
 msgid "Additional Menu"
 msgstr ""
 
-msgid "Logout"
-msgstr ""
-
-msgid "About"
-msgstr ""
-
 msgid "U-Reporters"
-msgstr ""
-
-msgid "Jobs"
 msgstr ""
 
 msgid "Join & Engage"
 msgstr ""
 
 msgid "FOLLOW US ON"
+msgstr ""
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Opinions"
+msgstr ""
+
+msgid "READ MORE"
+msgstr ""
+
+msgid "EXPLORE ENGAGEMENT"
 msgstr ""
 
 msgid ""
@@ -1054,9 +1093,6 @@ msgstr ""
 msgid "No featured images."
 msgstr ""
 
-msgid "READ MORE"
-msgstr ""
-
 msgid "Even"
 msgstr ""
 
@@ -1121,6 +1157,114 @@ msgid "Registered"
 msgstr ""
 
 msgid "Week of"
+msgstr ""
+
+msgid "+ New Page"
+msgstr ""
+
+msgid "LATEST NOTIFICATIONS"
+msgstr ""
+
+msgid "Backends"
+msgstr ""
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+msgid "Refresh Results"
+msgstr ""
+
+msgid "VIEW FULL RESULTS"
+msgstr ""
+
+msgid "U-REPORTERS WORLDWIDE:"
+msgstr ""
+
+msgid "AGES"
+msgstr ""
+
+msgid "LEARN MORE"
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+msgid "RESPONSES"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                 %(responded)s responded out of %(polled)s polled\n"
+"               "
+msgstr ""
+
+msgid "Keywords"
+msgstr ""
+
+msgid "TOTAL U-REPORTERS IN"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+
+msgid "SIGN IN"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+
+msgid "+ New Story"
 msgstr ""
 
 #, python-format
@@ -1532,6 +1676,12 @@ msgid "If there are jobs to be shown on the public site. (Separated by comma)"
 msgstr ""
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgstr ""
+
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
 msgstr ""
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."

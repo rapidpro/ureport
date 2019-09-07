@@ -1,0 +1,210 @@
+- extends "frame_v2.html"
+
+- load smartmin i18n thumbnail ureport compress
+
+-block styles
+    - if is_rtl_org
+      - compress css
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css")
+        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+
+    -else
+      -compress css
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css")
+        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+
+-block body-content
+  %section.section.is-paddingless.is-marginless
+    .
+      .level.is-marginless.has-background-black(style="height:15px")
+
+    -block navbar
+      .top-nav-container(style="padding: 20px 80px 20px 80px;")
+        .level
+          .level-left
+            %a.level-item.has-text-black(href="/")
+              .icon
+                %i.fas.fa-arrow-circle-left
+              - trans "Back to Full Site"
+      .admin-header
+        .level
+          .level-left
+            %a.level-item.square-logo(href="{% url 'orgs.org_home' %}")
+              {% thumbnail org.get_logo "350x65" format="PNG" as im %}
+              %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+              {% endthumbnail %}
+            .level-item
+              .is-block.title-block
+                .welcome-message
+                  - block welcome-text
+                    - if request.user and request.user.is_authenticated
+                      - trans "Welcome, "
+                      {{ request.user.first_name }} {{ request.user.last_name }}
+                .page-title-text
+                  - trans "Dashboard"
+
+          .level-right
+            - block login
+              - if request.user and request.user.is_authenticated
+                .level-item.logged-in-account
+                  {{ request.user.username }}
+                %a.level-item.button.is-outlined.logout-button(href="{% url 'users.user_logout' %}?go=/")
+                  - trans "Logout"
+              - else
+                %a.level-item.button.is-outlined(href="{% url 'users.user_login' %}")
+                    - trans "Login"
+
+  %section.section.is-paddingless.is-marginless
+    .content-section-container
+      -block content-section
+            .columns
+              .column.is-one-fifth.block#left-menu
+                -block menu
+                  %aside.menu
+                    %ul.menu-list
+                      %li
+                        %a(href="{% url 'polls.poll_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/polls_icon.png")
+                          %span.menu-link-title
+                            - trans "Polls"
+                      %li
+                        %a(href="{% url 'stories.story_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/stories_icon.png")
+                          %span.menu-link-title
+                            - trans "Stories"
+                      %li
+                        %a(href="{% url 'orgs.org_manage_accounts' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/users_icon.png")
+                          %span.menu-link-title
+                            - trans "Users"
+                      %li
+                        %a(href="{% url 'orgs.org_edit' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                          %span.menu-link-title
+                            - trans "Settings"
+                      %li
+                        %a(href="{% url 'dashblocks.dashblock_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                          %span.menu-link-title
+                            - trans "Pages"
+                      %li
+                        %a(href="{% url 'jobs.jobsource_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                          %span.menu-link-title
+                            - trans "Jobs"
+                      %li
+                        %a(href="{% url 'categories.category_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                          %span.menu-link-title
+                            - trans "Categories"
+
+                      %li
+                        %a(href="{% url 'categories.categoryimage_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                          %span.menu-link-title
+                            - trans "Categories Images"
+
+                      %li
+                        %a(href="{% url 'news.newsitem_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                          %span.menu-link-title
+                            - trans "News Items"
+                      - if request.user.is_superuser
+                        %li
+                          %a{href:"{% url 'orgs.org_list' %}"}
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Orgs"
+
+                        %li
+                          %a{ href:"/users/user/"}
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Users"
+
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblocktype_list' %}"}
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Content Types"
+
+                        %li
+                          %a{ href:"{% url 'assets.image_list' %}"}
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Images"
+
+                      %li
+                        %a(href="https://app.rapidpro.io/")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/rapidpro_icon.png")
+                          %span.menu-link-title
+                            RapidPro
+                      %li
+                        %a
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/analytics_icon.png")
+                          %span.menu-link-title
+                            - trans "Analytics"
+
+              .column.is-four-fifths.is-offset-one.block
+                -block content-div
+                  .content-div(style="padding: 3rem 40px;")
+                    - block messages
+                      - if messages
+                        - for message in messages
+                          .notification(class="is-{{ message.tags }}")
+                            {{ message }}
+
+                    - block pre-content
+
+                    - block content
+   
+  %section.section.is-paddingless.is-marginless
+    %footer.footer.is-paddingless
+      -block footer
+        .footer-content
+          .level.big-footer-nav
+            .level-left
+              %a.level-item.footer-logo(href="{% url 'v2.public.index' %}")
+                {% thumbnail org.get_logo "350x65" format="PNG" as im %}
+                %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+                {% endthumbnail %}
+            .level-right
+              %a.level-item.big-footer-link(href="{% url 'v2.public.opinions' %}")
+                - trans "Polls"
+              %a.level-item.big-footer-link(href="{% url 'v2.public.stories' %}")
+                - trans "Stories"
+
+          .level.small-footer-nav
+            .level-left
+              %a.level-item.small-footer-link(href="{% url 'v2.public.about' %}")
+                - trans "About"
+              %a.level-item.small-footer-link(href="{% url 'v2.public.ureporters' %}")
+                - trans "Engagement"
+              - if org|config:"has_jobs"
+                %a.level-item.small-footer-link(href="{% url 'v2.public.jobs' %}")
+                  - trans "Jobs"
+
+              - for custom_page in additional_menu|slice:":3"
+                %a.level-item.small-footer-link(href="{% url 'v2.public.custom_page' custom_page.link %}")
+                  {{custom_page.title}}
+
+              %a.level-item.button.is-outlined.small-footer-link(href="{% url 'v2.public.join' %}")
+                - trans "Join Now"
+

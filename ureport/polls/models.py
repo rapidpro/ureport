@@ -91,7 +91,7 @@ class Poll(SmartModel):
 
     POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY = "last:sync_time:org:%d:poll:%s"
 
-    POLL_RESULTS_MAX_SYNC_RUNS = 100000
+    POLL_RESULTS_MAX_SYNC_RUNS = 100_000
 
     POLL_RESULTS_LAST_PULL_CURSOR = "last:poll_pull_results_cursor:org:%d:poll:%s"
 
@@ -325,6 +325,9 @@ class Poll(SmartModel):
                 questions = self.questions.all().prefetch_related("response_categories")
                 questions_dict = dict()
 
+                if not questions.exists():
+                    return
+
                 for qsn in questions:
                     categories = qsn.response_categories.all()
                     categoryies_dict = {elt.category.lower(): elt.id for elt in categories}
@@ -377,7 +380,13 @@ class Poll(SmartModel):
                     count = stats_dict.get(stat_tuple)
                     stat_kwargs = dict(org_id=org_id, count=count, date=date)
 
+                    if ruleset not in questions_dict:
+                        continue
+
                     question_id = questions_dict[ruleset].get("id")
+                    if not question_id:
+                        continue
+
                     category_id = questions_dict[ruleset].get("categories", dict()).get(category)
 
                     gender_id = None
@@ -1044,7 +1053,11 @@ class PollQuestion(SmartModel):
                 elif gender_part:
 
                     genders = ["f", "m"]
-                    gender_labels = dict(f=_("Female"), m=_("Male"))
+                    gender_labels = dict(f="Female", m="Male")
+
+                    if org.get_config("common.has_extra_gender"):
+                        genders.append("o")
+                        gender_labels["o"] = "Other"
 
                     for gender in genders:
                         categories = []
@@ -1135,6 +1148,15 @@ class PollQuestion(SmartModel):
             percentage = int(round((float(responded) * 100.0) / float(polled)))
             return "%s" % six.text_type(percentage) + "%"
         return "___"
+
+    def get_gender_stats(self):
+        return self.get_results(segment=dict(gender="gender"))
+
+    def get_age_stats(self):
+        return self.get_results(segment=dict(age="age"))
+
+    def get_location_stats(self):
+        return self.get_results(segment=dict(location="state"))
 
     def get_words(self):
         words = self.get_total_summary_data().get("categories", [])

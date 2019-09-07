@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-21 10:49+0000\n"
+"POT-Creation-Date: 2019-09-06 15:44+0000\n"
 "PO-Revision-Date: 2017-05-10 15:46+0000\n"
 "Last-Translator: Sarah Martelli <smartelli@unicef.org>\n"
 "Language-Team: Italian (http://www.transifex.com/rapidpro/ureport/language/it/)\n"
@@ -356,6 +356,8 @@ msgstr "Il tuo link all'invito non è valido. Per favore contatta l'amministrato
 msgid "Join %(name)s"
 msgstr "Aderisci a %(name)s"
 
+#, fuzzy
+#| msgid "Join"
 msgid "Join"
 msgstr "Aderisci"
 
@@ -426,7 +428,11 @@ msgstr "L'immagine da visualizzare sulla pagina della storia e nelle anteprime (
 msgid "Remove Item?"
 msgstr "Rimuovere l'elemento?"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
 msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -467,7 +473,11 @@ msgstr[1] ""
 "\n"
 "%(counter)s risultati"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
 msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -501,7 +511,11 @@ msgstr "Token scaduto"
 msgid "Login Failure"
 msgstr "Accesso fallito"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
 msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -510,7 +524,11 @@ msgstr ""
 "\n"
 "Spiacenti, in questo momento non puoi accedere perché abbiamo registrato %(failed_login_limit)s tentativi di accesso sbagliati."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -534,7 +552,11 @@ msgstr "Recupera"
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Per favore inserisci l'indirizzo email che hai usato per iscriverti e ti aiuteremo a recuperare la tua password."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -687,6 +709,63 @@ msgstr "la tua nuova %s è stata creata"
 msgid "Import %s"
 msgstr "Importa %s"
 
+msgid "Back to Full Site"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Logout"
+msgstr "Esci"
+
+msgid "Polls"
+msgstr "Sondaggi"
+
+msgid "Users"
+msgstr "Utenti"
+
+msgid "Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Images"
+msgid "Pages"
+msgstr "Immagini"
+
+msgid "Jobs"
+msgstr "Opportunità di lavoro"
+
+#, fuzzy
+#| msgid "Category Images"
+msgid "Categories Images"
+msgstr "Immagini Categoria"
+
+msgid "News Items"
+msgstr "Elementi della news"
+
+msgid "Orgs"
+msgstr "Organizzazioni"
+
+msgid "Images"
+msgstr "Immagini"
+
+msgid "Analytics"
+msgstr ""
+
+msgid "About"
+msgstr "Chi siamo"
+
+msgid "Engagement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Aderisci"
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -696,29 +775,14 @@ msgstr "Amministratore"
 msgid "Configuration"
 msgstr "Configurazione"
 
-msgid "Orgs"
-msgstr "Organizzazioni"
-
-msgid "Users"
-msgstr "Utenti"
-
-msgid "Images"
-msgstr "Immagini"
-
 msgid "Content"
 msgstr "Contenuto"
 
 msgid "Country Aliases"
 msgstr "Alias paese"
 
-msgid "Polls"
-msgstr "Sondaggi"
-
 msgid "Category Images"
 msgstr "Immagini Categoria"
-
-msgid "News Items"
-msgstr "Elementi della news"
 
 msgid "Job Sources"
 msgstr "Risorse di lavoro"
@@ -753,23 +817,26 @@ msgstr "Contenuto Passaggi adesione"
 msgid "Additional Menu"
 msgstr "Menu addizionale"
 
-msgid "Logout"
-msgstr "Esci"
-
-msgid "About"
-msgstr "Chi siamo"
-
 msgid "U-Reporters"
 msgstr "U-Reporter"
-
-msgid "Jobs"
-msgstr "Opportunità di lavoro"
 
 msgid "Join & Engage"
 msgstr "Aderisci e partecipa"
 
 msgid "FOLLOW US ON"
 msgstr "SEGUICI SU"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Opinions"
+msgstr ""
+
+msgid "READ MORE"
+msgstr "LEGGI DI PIÙ"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
 
 msgid ""
 "\n"
@@ -1116,9 +1183,6 @@ msgstr "Nessun sondaggio correlato."
 msgid "No featured images."
 msgstr "Nessuna immagine in primo piano."
 
-msgid "READ MORE"
-msgstr "LEGGI DI PIÙ"
-
 msgid "Even"
 msgstr "Anche"
 
@@ -1184,6 +1248,181 @@ msgstr "Registrato"
 
 msgid "Week of"
 msgstr "Settimana del"
+
+msgid "+ New Page"
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "LUOGHI"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Gestisci utenti"
+
+msgid "+ New Poll"
+msgstr ""
+
+msgid "Poll Results Data"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Risultati"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "RISULTATI DEL SONDAGGIO"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS WORLDWIDE:"
+msgstr "U-REPORTERS IN "
+
+msgid "AGES"
+msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "LEGGI DI PIÙ"
+
+msgid "SEARCH"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONSES"
+msgstr "TASSO DI RISPOSTA"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"                 %(responded)s responded out of %(polled)s polled\n"
+"               "
+msgstr ""
+"\n"
+"%(responded)s risposte su %(polled)s sondati"
+
+msgid "Keywords"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "TOTAL U-REPORTERS IN"
+msgstr "U-REPORTERS IN "
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Sei sicuro di voler rimuovere <b>%(object)s</b>?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+"\n"
+"⇥⇥%(counter)s risultato\n"
+"\n"
+"⇥"
+msgstr[1] ""
+"\n"
+"%(counter)s risultati"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+"\n"
+"⇥Risultati %(start)s-%(end)s di %(count)s\n"
+"⇥"
+
+msgid "SIGN IN"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Spiacenti, in questo momento non puoi accedere perché abbiamo registrato %(failed_login_limit)s tentativi di accesso sbagliati."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Per favore attendi %(lockout_timeout)s minuti prima di tentare di accedere di nuovo."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong> La tua password è scaduta. </strong> La politica del sito richiede che tu debba selezionare una nuova password ogni %(expire_days)s giorni, e che le password non devono essere già state utilizzate nei %(window_days)s giorni precedenti."
+
+msgid "+ New Story"
+msgstr ""
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1609,6 +1848,12 @@ msgstr "Se ci sono lavori  da mostrare nel sito pubblico"
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Se questo org è per dati globali. es. Mostra una mappa mondiale invece di una mappa Paese"
 
+msgid "Whether to activate an extra gender."
+msgstr ""
+
+msgid "Whether to activate the new design."
+msgstr ""
+
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "il Codice ISO alpha-3 dell'organizzazione così che appaia il widget storie U-Report App. Esempio: BRA, NIG, CMR (Usa GLOBAL se U-Report è Globale)"
 
@@ -1636,6 +1881,45 @@ msgstr "Se hai bisogno di inserire alcuni codici personalizzati HTML nelle tue p
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
+
+#, fuzzy
+#~| msgid "Join & Engage"
+#~ msgid "Engage"
+#~ msgstr "Aderisci e partecipa"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(questions)s question polled on this topic\n"
+#~| "                "
+#~| msgid_plural ""
+#~| "\n"
+#~| "                  %(questions)s questions polled on this topic\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "          %(questions)s question\n"
+#~ "        "
+#~ msgid_plural ""
+#~ "\n"
+#~ "          %(questions)s questions\n"
+#~ "        "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(questions)s domanda sondata su questo argomento"
+#~ msgstr[1] ""
+#~ "\n"
+#~ "%(questions)s domande sondate su questo argomento"
+
+#, fuzzy
+#~| msgid "FILTERED BY"
+#~ msgid "FILTER BY:"
+#~ msgstr "Filtrato per"
+
+#, fuzzy
+#~| msgid "LOCATIONS"
+#~ msgid "LOCATION"
+#~ msgstr "LUOGHI"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "Il token API dell'account RapidPro a cui questo dashboard è collegato"

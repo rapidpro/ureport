@@ -1,0 +1,265 @@
+- extends "public_base_v2.html"
+
+- load dashblocks thumbnail ureport i18n
+
+-block content
+  .booklet-bg
+  .booklet-bg-content
+    .page-title-block
+      .uk-grid-match(uk-grid)
+        .uk-width-1-2.page-title
+          Join Now
+        .uk-width-1-2
+
+
+  .join-steps-block(uk-grid)
+    .uk-width-1-1.uk-margin-remove.join-block.block-colored-bg-gold-yellow(uk-grid style='color: #000;')
+      .uk-width-1-2
+        .join-block-content.has-bottom-border(style="border-color: #000;")
+          .step-number
+            1
+          .step-title
+            How would you like to join? 
+
+      .uk-width-1-2
+        .join-block-content
+          .step-description.social-media-buttons
+            .(uk-grid)
+              .
+                %a.join-facebook(href='http://m.me/{{ org|config:"facebook_page_id" }}')
+                  .join-btn
+                    %i.fab.fa-facebook-f
+                  .join-bnt-text
+                    Facebook
+              .
+                %a.join-Whatsapp(href="https://wa.me/66800249442")
+                  .join-btn
+                    %i.fab.fa-whatsapp
+                  .join-bnt-text
+                    Whatsapp
+              
+
+    .uk-width-1-1.uk-margin-remove.join-block(uk-grid style='background-color: {{ org|config:"primary_color" }};')
+      .uk-width-1-2
+        .join-block-content.has-bottom-border
+          .step-number
+            2
+          .step-title
+            Text
+      
+      .uk-width-1-2
+        .join-block-content
+          .step-description
+            Text the word join to 24453 - All U-Report SMSs are free
+
+    .uk-width-1-1.uk-margin-remove.join-block.block-colored-bg-light-blue(uk-grid)
+      .uk-width-1-2
+        .join-block-content.has-bottom-border
+          .step-number
+            3
+          .step-title
+            Sign up
+      
+      .uk-width-1-2
+        .join-block-content
+          .step-description
+            We will send you a few questions via SMS to complete sign up so we can learn a little about you to better listen to your voice.
+            Once you are done, we'll send you a confirmation.
+
+    .uk-width-1-1.uk-margin-remove.join-block(uk-grid style='background-color: {{ org|config:"secondary_color" }}')
+      .uk-width-1-2
+        .join-block-content.has-bottom-border
+          .step-number
+            4
+          .step-title
+            Get Involved
+      
+      .uk-width-1-2
+        .join-block-content
+          .step-description
+            You will now get to receive messages asking  your opinion on meaningful %issues!
+            To exit U-Report just send youreportexit to 24453
+
+  .join-notice-block.join-block.uk-margin-remove(uk-grid)
+    .uk-width-1-3
+        If you want to unsubscribe,
+        %a(href="")
+          follow this link
+    .uk-width-2-3
+      * U-Report is a free program sponsored by UNICEF with help of Network Providers in Nigeria. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on 24453) are free.
+
+
+- block srs
+  .block-row
+    .columns.is-paddingless.is-marginless
+      .column.block-content.dotted-bg.join-content
+        .page-title
+          Join Now
+        .join-call-to-action
+          .join-step-text
+            How would you like to join?
+          .join-step
+             1
+        .join-links
+          .columns
+            .column
+              %a.join-facebook(href='http://m.me/{{ org|config:"facebook_page_id" }}')
+                .join-btn
+                  %i.fab.fa-facebook-f
+                .join-bnt-text
+                  Facebook
+            .column
+              %a.join-Whatsapp(href="https://wa.me/66800249442")
+                .join-btn
+                  %i.fab.fa-whatsapp
+                .join-bnt-text
+                  Whatsapp
+        .join-call-to-action
+          .join-step-text
+            Send KEYWORD to short code 2020 using SMS
+          .join-step
+             2
+
+      .column.block-content.join-bg-color
+        .over-social-media-join-text
+           Do we need any sort of explanation text in this area or is it just redudant or distacting?
+        .over-social-media
+        .social-media-block-join
+          .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"600", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+
+
+- block hero
+  - load_qbs request.org 'join_engage'
+  - for d_block in join_engage|slice:":1"
+    .hero-container
+      .hero-dark-container
+        .container
+          .hero-small-background
+          .row
+            .col-md-7
+              .hero-dark-content
+                .hero-title.hero-top-title.primary-bg-color
+                  - trans "JOIN U-REPORT"
+                .hero-description
+                  {{ d_block.short_content_teaser|safe }}
+
+
+  - block banner
+    {{ block.super }}
+
+
+- block contraent
+  - load_qbs request.org 'join_engage'
+  - load_qbs request.org 'join_steps'
+
+    - for d_block in join_engage|slice:":1"
+      .section
+        %h1.level-1-title
+          - trans "HOW TO JOIN"
+        .level-1-title-description.secondary-color
+
+      .row
+        - for join_step in join_steps
+          .col-sm-6
+            .join-container
+              .join-inner
+                .join-title.primary-bg-color
+                  {{ join_step.title|upper }}
+                .join-image
+                  {% thumbnail join_step.image "485" crop="top" as im %}
+                  %img{src:"{{ im.url }}", width:"100%"}
+                  {% endthumbnail %}
+                .join-text
+                  {{ join_step.content }}
+
+      .row
+        .col-md-12
+          #ureport-announcement
+            - if org|config:"ureport_announcement"
+              {{org|config:"ureport_announcement"}}
+            -else
+              - blocktrans with country=org.name shortcode=org|config:"shortcode"
+                * U-Report is a free program sponsored by UNICEF with help of Network Providers in {{ country }}. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on {{ shortcode}}) are free.
+
+      -if not is_iorg
+        %hr.aaa
+        .section
+          %h1.level-1-title
+            - trans "U-REPORT ON SOCIAL MEDIA"
+          .level-1-title-description.secondary-color
+          .row
+            {% if org|config:"facebook_page_url" %}
+              .col-md-4.small-pad-right
+                .social-container
+                  .social-inner
+                    .social-title.facebook-bg-color
+                      FACEBOOK
+                    .social-content{style:"padding-left:0px"}
+                      .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"315", data-height:"570", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+                    %a.social-link{ href:'{{ org|config:"facebook_page_url" }}' }
+                      - trans "View more stories on Facebook"
+                      {{ org|org_arrow_link }}
+            {% endif %}
+
+            {% if org|config:"twitter_handle" %}
+            .col-md-4.small-pad-middle
+              .social-container
+                .social-inner
+                  .social-title.twitter-bg-color
+                    TWITTER
+                  .social-content
+                    %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
+
+                    %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+
+                  %a.social-link.tweet-button{href:'https://twitter.com/intent/tweet?screen_name=#{ org|config:"twitter_handle"}'}
+                    - trans "Tweet to"
+                    @{{ org|config:"twitter_handle"}}
+                    {{ org|org_arrow_link }}
+
+            {% endif %}
+
+            {% if org|config:"twitter_search_widget" %}
+            .col-md-4.small-pad-left
+              .social-container
+                .social-inner
+                  .social-title.primary-bg-color
+                    {{org.name|upper}} &num;HASHTAGS
+                  .social-content
+                    %a.twitter-timeline{href:'https://twitter.com/{{ org|config:"twitter_user_widget" }}', data-widget-id:'{{ org|config:"twitter_search_widget" }}', width:"340px", height:"525px", data-chrome:"noheader nofooter", data-link-color:'{{org|config:"primary_color"}}'}
+                  %a.social-link.tweet-button{href:"https://twitter.com/intent/tweet?hashtags=ureport{{org.name}}%2Cureport%2C{{org.name}}"}
+                    - trans "Compose new Tweet"
+                    {{ org|org_arrow_link }}
+
+            {% endif %}
+
+
+- block extra-style
+  {{ block.super }}
+  - load_qbs request.org 'join_engage'
+  :css
+   .hero-container {
+      {% for d_block in join_engage|slice:":1"%}
+      {% thumbnail d_block.image "1280x678" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }
+
+   .hero-small-background {
+      {% for d_block in join_engage|slice:":1"%}
+      {% thumbnail d_block.image "768x508" crop="top" as im %}
+        background-image:url('{{im.url}}');
+      {% empty %}
+        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
+      {% endthumbnail %}
+      {% endfor %}
+    }
+
+    
+- block extra-script
+  {{ block.super }}
+  -if not is_iorg and org|config:"twitter_handle"
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>

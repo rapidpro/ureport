@@ -9,13 +9,9 @@
         To add a Twitter job source you are required to get a widget id from twitter.
       %a{href:"https://support.twitter.com/articles/20170071-how-to-embed-a-timeline"}
         - trans "Follow this step by step guide"
-
       - blocktrans
         . After you create the widget copy the widget id from the url as shown on
       %img.widget-id-example{src:"{{STATIC_URL}}img/widget_id_example.jpg", style:""}
-
-
-
 - block form-buttons
   .form-group.smartmin-form-buttons
     .col-sm-offset-2.col-sm-10
@@ -29,8 +25,6 @@
           {{ submit_button_name }}
         %a.btn.btn-default{href:"{% url 'jobs.jobsource_create' %}"}
           - trans "Back"
-
-
 - block extra-script
   {{ block.super }}
   :javascript
@@ -39,10 +33,8 @@
         event.preventDefault();
         selectedSourceType = $('select#id_source_type').val();
         window.location.href = "{% url 'jobs.jobsource_create'%}?source_type=" + selectedSourceType;
-
       });
     });
-
 - block extra-style
   :css
     .widget-id-example{

@@ -1,0 +1,36 @@
+- extends "public_base_v2.html"
+
+- load dashblocks thumbnail i18n ureport
+
+
+-block content
+  - load_qbs request.org 'about'
+  .booklet-bg
+  .booklet-bg-content
+
+    .content-block-content 
+      - for d_block in about|slice:":1"
+        .about-title-block
+          .about-title-picture
+            %img{src:"{{ STATIC_URL }}img/u-icon-small.png"}
+          -# {% thumbnail d_block.image "400x300" crop="top" as im %}
+          -#   <img width="100%" height="100%" src="{{im.url}}" />
+          -# {% empty %}
+            
+
+          -# {% endthumbnail %}
+          
+          .about-title
+            {{ d_block.title }}
+
+
+        .about-text-block
+          {{d_block.content|safe}}
+
+          .about-text-picture
+            {% thumbnail d_block.image "400x300" crop="top" as im %}
+             <img width="100%" height="100%" src="{{im.url}}" />
+            {% empty %}
+              %img{width:"70%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}  
+            {% endthumbnail %}
+

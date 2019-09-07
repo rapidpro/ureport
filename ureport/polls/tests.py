@@ -1396,8 +1396,6 @@ class PollTest(UreportTest):
         self.assertTrue(poll1 in response.context["object_list"])
 
         self.assertContains(response, reverse("polls.poll_questions", args=[poll1.pk]))
-        self.assertContains(response, reverse("polls.poll_responses", args=[poll1.pk]))
-        self.assertContains(response, reverse("polls.poll_images", args=[poll1.pk]))
 
         poll1.has_synced = True
         poll1.save()
@@ -2809,15 +2807,10 @@ class PollResultsTest(UreportTest):
         self.assertEqual(len(gen_counters.keys()), 6)
 
         self.assertTrue("ruleset:%s:total-ruleset-polled" % ruleset in gen_counters.keys())
-
         self.assertTrue("ruleset:%s:total-ruleset-responded" % ruleset in gen_counters.keys())
-
         self.assertTrue("ruleset:%s:category:%s" % (ruleset, category) in gen_counters.keys())
-
         self.assertTrue("ruleset:%s:category:%s:state:%s" % (ruleset, category, state) in gen_counters.keys())
-
         self.assertTrue("ruleset:%s:category:%s:district:%s" % (ruleset, category, district) in gen_counters.keys())
-
         self.assertTrue("ruleset:%s:category:%s:ward:%s" % (ruleset, category, ward) in gen_counters.keys())
 
         poll_result3 = PollResult.objects.create(

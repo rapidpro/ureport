@@ -8,6 +8,7 @@ import time
 import logging
 from datetime import timedelta, datetime
 from itertools import islice, chain
+from collections import defaultdict
 
 from dash.orgs.models import Org
 from dash.utils import datetime_to_ms
@@ -21,7 +22,7 @@ from raven.contrib.django.raven_compat.models import client
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
-from ureport.stats.models import PollStats
+from ureport.stats.models import PollStats, GenderSegment, AgeSegment
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
@@ -45,6 +46,22 @@ def json_date_to_datetime(date_str):
     Parses a datetime from a JSON string value
     """
     return iso8601.parse_date(date_str)
+
+
+def get_last_months(months_num=12, start_time=None):
+    if start_time is None:
+        start_time = datetime.now()
+
+    start = start_time.date().replace(day=1)
+
+    months = [str(start)]
+    i = 1
+    while i < months_num:
+        start = (start - timedelta(days=1)).replace(day=1)
+        months.insert(0, str(start))
+        i += 1
+
+    return months
 
 
 def get_dict_from_cursor(cursor):
@@ -251,23 +268,43 @@ def get_org_contacts_counts(org):
 def get_gender_stats(org):
     org_contacts_counts = get_org_contacts_counts(org)
 
+    has_extra_gender = org.get_config("common.has_extra_gender")
+
     female_count = org_contacts_counts.get("gender:f", 0)
     male_count = org_contacts_counts.get("gender:m", 0)
+    other_count = org_contacts_counts.get("gender:o", 0)
 
     if not female_count and not male_count:
-        return dict(female_count=female_count, female_percentage="---", male_count=male_count, male_percentage="---")
+        output = dict(female_count=female_count, female_percentage="---", male_count=male_count, male_percentage="---")
+        if has_extra_gender:
+            output["other_count"] = 0
+            output["other_percentage"] = "---"
+
+        return output
 
     total = female_count + male_count
+    if has_extra_gender:
+        total += other_count
 
     female_percentage = female_count * 100 // total
-    male_percentage = 100 - female_percentage
 
-    return dict(
+    other_percentage = 0
+    if has_extra_gender:
+        other_percentage = other_count * 100 // total
+
+    male_percentage = 100 - female_percentage - other_percentage
+
+    output = dict(
         female_count=female_count,
         female_percentage=six.text_type(female_percentage) + "%",
         male_count=male_count,
         male_percentage=six.text_type(male_percentage) + "%",
     )
+    if has_extra_gender:
+        output["other_count"] = other_count
+        output["other_percentage"] = six.text_type(other_percentage) + "%"
+
+    return output
 
 
 def get_age_stats(org):
@@ -308,6 +345,182 @@ def get_age_stats(org):
         age_stats = {k: int(round(v * 100 / float(total))) for k, v in age_counts_interval.items()}
 
     return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.items()], key=lambda i: i["name"]))
+
+
+def get_sign_up_rate(org, time_filter):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_on")}
+
+    interval_dict = defaultdict(int)
+
+    for date_key, date_count in registered_on_counts.items():
+        parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
+            day=1, hour=0, minute=0, second=0, microsecond=0
+        )
+
+        if parsed_time > start:
+
+            interval_dict[str(parsed_time.date())] += date_count
+
+    keys = get_last_months(months_num=time_filter)
+    data = dict()
+    for key in keys:
+        data[key] = interval_dict[key]
+
+    return [dict(name="Sign-Up Rate", data=data)]
+
+
+def get_sign_up_rate_location(org, time_filter):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[17:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_state")}
+
+    top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
+
+    keys = get_last_months(months_num=time_filter)
+    output_data = []
+
+    for osm_id, name in top_boundaries.items():
+        interval_dict = defaultdict(int)
+        for date_key, date_count in registered_on_counts.items():
+            if date_key.endswith(f":{osm_id.upper()}"):
+                date_key = date_key[:10]
+            else:
+                continue
+
+            parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
+                day=1, hour=0, minute=0, second=0, microsecond=0
+            )
+
+            if parsed_time > start:
+                interval_dict[str(parsed_time.date())] += date_count
+
+        data = dict()
+        for key in keys:
+            data[key] = interval_dict[key]
+        output_data.append(dict(name=name, osm_id=osm_id, data=data))
+    return output_data
+
+
+def get_sign_up_rate_gender(org, time_filter):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[18:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_gender")}
+
+    genders = GenderSegment.objects.all()
+    if not org.get_config("common.has_extra_gender"):
+        genders = genders.exclude(gender="O")
+
+    genders = genders.values("gender", "id")
+
+    keys = get_last_months(months_num=time_filter)
+    output_data = []
+
+    for gender in genders:
+        interval_dict = defaultdict(int)
+        for date_key, date_count in registered_on_counts.items():
+            if date_key.endswith(f":{gender['gender'].lower()}"):
+                date_key = date_key[:-2]
+            else:
+                continue
+
+            parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
+                day=1, hour=0, minute=0, second=0, microsecond=0
+            )
+
+            if parsed_time > start:
+                interval_dict[str(parsed_time.date())] += date_count
+
+        data = dict()
+        for key in keys:
+            data[key] = interval_dict[key]
+        output_data.append(dict(name=gender["gender"], data=data))
+    return output_data
+
+
+def get_sign_up_rate_age(org, time_filter):
+    now = timezone.now()
+    current_year = now.year
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[16:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_born")}
+    registered_on_counts_by_age = {
+        "0-14": defaultdict(int),
+        "15-19": defaultdict(int),
+        "20-24": defaultdict(int),
+        "25-30": defaultdict(int),
+        "31-34": defaultdict(int),
+        "35+": defaultdict(int),
+    }
+    for date_key, date_count in registered_on_counts.items():
+        date_key_date, date_key_year = date_key.split(":")
+        parsed_time = tz.localize(datetime.strptime(date_key_date, "%Y-%m-%d")).replace(
+            day=1, hour=0, minute=0, second=0, microsecond=0
+        )
+        if parsed_time < start:
+            continue
+
+        date_key_date = str(parsed_time.date())
+
+        age = current_year - int(date_key_year)
+        if age > 34:
+            registered_on_counts_by_age["35+"][date_key_date] += date_count
+        elif age > 30:
+            registered_on_counts_by_age["31-34"][date_key_date] += date_count
+        elif age > 24:
+            registered_on_counts_by_age["25-30"][date_key_date] += date_count
+        elif age > 19:
+            registered_on_counts_by_age["20-24"][date_key_date] += date_count
+        elif age > 14:
+            registered_on_counts_by_age["15-19"][date_key_date] += date_count
+        else:
+            registered_on_counts_by_age["0-14"][date_key_date] += date_count
+
+    ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
+    keys = get_last_months(months_num=time_filter)
+    output_data = []
+    for age in ages:
+        if age["min_age"] == 0:
+            data_key = "0-14"
+        elif age["min_age"] == 15:
+            data_key = "15-19"
+        elif age["min_age"] == 20:
+            data_key = "20-24"
+        elif age["min_age"] == 25:
+            data_key = "25-30"
+        elif age["min_age"] == 31:
+            data_key = "31-34"
+        elif age["min_age"] == 35:
+            data_key = "35+"
+
+        age_data = registered_on_counts_by_age[data_key]
+        data = dict()
+        for key in keys:
+            data[key] = age_data[key]
+
+        output_data.append(dict(name=data_key, data=data))
+
+    return output_data
 
 
 def get_registration_stats(org):
@@ -393,6 +606,8 @@ def get_signups(org):
 def get_signup_rate(org):
     new_signups = get_signups(org)
     total = get_reporters_count(org)
+    if not total:
+        return 0
     return new_signups * 100 / total
 
 
@@ -439,24 +654,6 @@ def get_ureporters_locations_stats(org, segment):
         dict(boundary=elt["osm_id"], label=elt["name"], set=location_counts.get(elt["osm_id"], 0))
         for elt in boundaries
     ]
-
-
-def get_average_response_rate(org):
-    now = timezone.now()
-    year_ago = now - timedelta(days=365)
-    polled_stats = PollStats.objects.filter(org=org, date__gte=year_ago).aggregate(Sum("count"))
-    responded_stats = (
-        PollStats.objects.filter(org=org, date__gte=year_ago).exclude(category=None).aggregate(Sum("count"))
-    )
-
-    responded = responded_stats.get("count__sum", 0)
-    if responded is None:
-        responded = 0
-    polled = polled_stats.get("count__sum")
-    if polled is None or polled == 0:
-        return 0
-
-    return responded / polled
 
 
 def get_ureporters_locations_response_rates(org, segment):
@@ -510,7 +707,9 @@ def get_ureporters_locations_response_rates(org, segment):
     )
     responded_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in responded_stats}
 
-    response_rates = {key: responded_stats_dict.get(key, 0) / val for key, val in polled_stats_dict.items()}
+    response_rates = {
+        key: round(responded_stats_dict.get(key, 0) * 100 / val, 1) for key, val in polled_stats_dict.items()
+    }
 
     return [
         dict(boundary=elt["osm_id"], label=elt["name"], set=response_rates.get(elt["osm_id"], 0)) for elt in boundaries
@@ -640,6 +839,61 @@ def populate_age_and_gender_poll_results(org=None):
         )
 
 
+def populate_contact_activity(org):
+    from ureport.contacts.models import Contact
+
+    now = timezone.now()
+    now_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    start_date = now - timedelta(days=365)
+
+    flows = list(
+        Poll.objects.filter(org_id=org.id, poll_date__gte=start_date)
+        .only("flow_uuid")
+        .values_list("flow_uuid", flat=True)
+    )
+
+    all_contacts = Contact.objects.filter(org=org).values_list("id", flat=True).order_by("id")
+
+    start = time.time()
+    i = 0
+
+    all_contacts = list(all_contacts)
+
+    for contact_id_batch in chunk_list(all_contacts, 1000):
+        contact_batch = list(contact_id_batch)
+        contacts = Contact.objects.filter(id__in=contact_batch)
+        for contact in contacts:
+            i += 1
+            results = PollResult.objects.filter(contact=contact.uuid, org_id=org.id, flow__in=flows).exclude(date=None)
+
+            oldest_id = None
+            newest_id = None
+            oldest_seen = now
+            newest_seen = start_date
+            for result in results:
+                if result.date > newest_seen:
+                    newest_seen = result.date
+                    newest_id = result.id
+                if result.date < oldest_seen:
+                    oldest_seen = result.date
+                    oldest_id = result.id
+
+                if oldest_seen <= start_date and newest_seen >= now_month:
+                    break
+
+            ids_to_update = []
+            if oldest_id:
+                ids_to_update.append(oldest_id)
+            if newest_id:
+                ids_to_update.append(newest_id)
+
+            PollResult.objects.filter(id__in=ids_to_update).update(contact=contact.uuid)
+
+        logger.info(
+            "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
+        )
+
+
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
@@ -649,4 +903,11 @@ Org.get_gender_stats = get_gender_stats
 Org.get_regions_stats = get_regions_stats
 Org.get_flows = get_flows
 Org.get_segment_org_boundaries = get_segment_org_boundaries
+Org.get_signups = get_signups
+Org.get_signup_rate = get_signup_rate
+Org.get_ureporters_locations_response_rates = get_ureporters_locations_response_rates
+Org.get_sign_up_rate = get_sign_up_rate
+Org.get_sign_up_rate_gender = get_sign_up_rate_gender
+Org.get_sign_up_rate_age = get_sign_up_rate_age
 Org.get_logo = get_logo
+Org.get_sign_up_rate_location = get_sign_up_rate_location

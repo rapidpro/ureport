@@ -143,6 +143,7 @@ MIDDLEWARE = (
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "dash.orgs.middleware.SetOrgMiddleware",
+    "ureport.utils.middleware.CheckVersionMiddleware",
 )
 
 ROOT_URLCONF = "ureport.urls"
@@ -393,6 +394,18 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
+        name="has_extra_gender",
+        field=dict(help_text=_("Whether to activate an extra gender."), required=False),
+        superuser_only=True,
+        read_only=True,
+    ),
+    dict(
+        name="has_new_design",
+        field=dict(help_text=_("Whether to activate the new design."), required=False),
+        superuser_only=True,
+        read_only=True,
+    ),
+    dict(
         name="iso_code",
         field=dict(
             help_text=_(
@@ -541,6 +554,7 @@ TEMPLATES = [
                 "ureport.assets.context_processors.set_assets_processor",
                 "ureport.public.context_processors.set_has_better_domain",
                 "ureport.public.context_processors.set_is_iorg",
+                "ureport.public.context_processors.set_linked_sites",
                 "ureport.public.context_processors.set_config_display_flags",
                 "ureport.public.context_processors.set_org_lang_params",
                 "ureport.public.context_processors.set_story_widget_url",

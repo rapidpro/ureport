@@ -43,12 +43,12 @@ class PublicTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 29)
+        self.assertEqual(len(response.context["form"].fields), 31)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 44)
+        self.assertEqual(len(response.context["form"].fields), 46)
 
     def test_count(self):
         count_url = reverse("v2.public.count")
@@ -58,14 +58,14 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertTrue("count" in response.context)
         self.assertEqual(response.context["count"], self.nigeria.get_reporters_count())
-        self.assertEqual(response.context["view"].template_name, "public_v2/count")
+        self.assertEqual(response.context["view"].template_name, "v2/public/count")
 
         response = self.client.get(count_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["org"], self.uganda)
         self.assertTrue("count" in response.context)
         self.assertEqual(response.context["count"], self.uganda.get_reporters_count())
-        self.assertEqual(response.context["view"].template_name, "public_v2/count")
+        self.assertEqual(response.context["view"].template_name, "v2/public/count")
 
     def test_has_better_domain_processors(self):
         home_url = reverse("v2.public.index")
@@ -130,7 +130,7 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/")
         self.assertEqual(response.context["org"], self.nigeria)
-        self.assertEqual(response.context["view"].template_name, "public_v2/index.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/index.html")
 
         response = self.client.get(home_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/")
@@ -347,9 +347,35 @@ class PublicTest(UreportTest):
         # self.assertContains(response, "<div>INCLUDE MY CUSTOM HTML</div>")
 
     def test_additional_menu(self):
-        additional_menu_url = reverse("v2.public.added")
+        additional_menu_url = reverse("v2.public.custom_page", args=["faq"])
+        custom_page_dashblock_type = DashBlockType.objects.get_or_create(
+            name="Custom pages",
+            slug="additional_menu",
+            description="U-Report custom pages",
+            has_title=True,
+            has_image=True,
+            has_rich_text=False,
+            has_summary=False,
+            has_link=True,
+            has_gallery=False,
+            has_color=False,
+            has_video=False,
+            has_tags=False,
+            created_by=self.admin,
+            modified_by=self.admin,
+        )[0]
+
+        DashBlock.objects.create(
+            title="Custom page",
+            content="Content...",
+            dashblock_type=custom_page_dashblock_type,
+            org=self.uganda,
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
         response = self.client.get(additional_menu_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/added/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/page/faq/")
         self.assertEqual(response.context["org"], self.nigeria)
 
     def test_about(self):
@@ -358,7 +384,7 @@ class PublicTest(UreportTest):
         response = self.client.get(about_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/about/")
         self.assertEqual(response.context["org"], self.nigeria)
-        self.assertEqual(response.context["view"].template_name, "public_v2/about.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/about.html")
 
         response = self.client.get(about_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/about/")
@@ -433,7 +459,7 @@ class PublicTest(UreportTest):
         response = self.client.get(join_engage_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/join/")
         self.assertEqual(response.context["org"], self.nigeria)
-        self.assertEqual(response.context["view"].template_name, "public_v2/join_engage.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/join_engage.html")
 
         response = self.client.get(join_engage_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/join/")
@@ -458,12 +484,12 @@ class PublicTest(UreportTest):
         # self.assertContains(response, "All U-Report services (all msg on 3000) are free.")
 
     def test_ureporters(self):
-        ureporters_url = reverse("v2.public.ureporters")
+        ureporters_url = reverse("v2.public.engagement")
 
         response = self.client.get(ureporters_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/ureporters/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/engagement/")
         self.assertEqual(response.context["org"], self.nigeria)
-        self.assertEqual(response.context["view"].template_name, "public_v2/ureporters.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/ureporters.html")
 
         self.assertTrue("months" in response.context)
         self.assertTrue("gender_stats" in response.context)
@@ -479,18 +505,18 @@ class PublicTest(UreportTest):
         self.assertTrue("show_occupation_stats" in response.context)
 
         response = self.client.get(ureporters_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/ureporters/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/engagement/")
         self.assertEqual(response.context["org"], self.uganda)
 
     @mock.patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_polls_list(self):
-        polls_url = reverse("v2.public.polls")
+        polls_url = reverse("v2.public.opinions")
 
         response = self.client.get(polls_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/polls/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/opinions/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["tab"], "list")
-        self.assertEqual(response.context["view"].template_name, "public_v2/polls.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/polls.html")
         self.assertFalse(response.context["latest_poll"])
         self.assertFalse(response.context["polls"])
         self.assertFalse(response.context["related_stories"])
@@ -528,10 +554,10 @@ class PublicTest(UreportTest):
         )
 
         response = self.client.get(polls_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/polls/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/opinions/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["tab"], "list")
-        self.assertEqual(response.context["view"].template_name, "public_v2/polls.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/polls.html")
         self.assertEqual(response.context["latest_poll"], poll4)
 
         self.assertEqual(len(response.context["categories"]), 1)
@@ -591,7 +617,7 @@ class PublicTest(UreportTest):
         self.assertTrue(story3 not in response.context["related_stories"])
 
         response = self.client.get(polls_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/polls/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/opinions/")
         self.assertEqual(response.context["org"], self.uganda)
         self.assertEqual(response.context["latest_poll"], poll3)
 
