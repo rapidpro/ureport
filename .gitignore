@@ -80,7 +80,7 @@ db/
 
 # symlink to dash and smartmin for dev
 dash
-#smartmin
+smartmin
 temba_client
 
 # country-list repo

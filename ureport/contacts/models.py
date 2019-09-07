@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import logging
 import time
+from collections import defaultdict
 
 from dash.orgs.models import Org, OrgBackend
 from django_redis import get_redis_connection
@@ -10,6 +11,8 @@ from django_redis import get_redis_connection
 from django.db import connection, models
 from django.db.models import Count, Sum
 from django.utils.translation import ugettext_lazy as _
+
+from ureport.utils import chunk_list
 
 CONTACT_LOCK_KEY = "lock:contact:%d:%s"
 CONTACT_FIELD_LOCK_KEY = "lock:contact-field:%d:%s"
@@ -116,6 +119,106 @@ class Contact(models.Model):
     @classmethod
     def lock(cls, org, uuid):
         return get_redis_connection().lock(CONTACT_LOCK_KEY % (org.pk, uuid), timeout=60)
+
+    @classmethod
+    def recalculate_reporters_stats(cls, org):
+        ReportersCounter.objects.filter(org_id=org.id).delete()
+
+        all_contacts = Contact.objects.filter(org=org).values_list("id", flat=True).order_by("id")
+        start = time.time()
+        i = 0
+
+        all_contacts = list(all_contacts)
+        all_contacts_count = len(all_contacts)
+
+        counters_dict = defaultdict(int)
+
+        for contact_id_batch in chunk_list(all_contacts, 1000):
+            contact_batch = list(contact_id_batch)
+            contacts = Contact.objects.filter(id__in=contact_batch)
+            for contact in contacts:
+                i += 1
+                gen_counters = contact.generate_counters()
+                for dict_key in gen_counters.keys():
+                    counters_dict[(org.id, dict_key)] += gen_counters[dict_key]
+
+        counters_to_insert = []
+        for counter_tuple in counters_dict.keys():
+            org_id, counter_type = counter_tuple
+            count = counters_dict[counter_tuple]
+            counters_to_insert.append(ReportersCounter(org_id=org_id, type=counter_type, count=count))
+        ReportersCounter.objects.bulk_create(counters_to_insert)
+
+        logger.info(
+            "Finished Rebuilding the contacts reporters counters for org #%d in %ds, inserted %d counters objects for %s contacts"
+            % (org.id, time.time() - start, len(counters_to_insert), all_contacts_count)
+        )
+
+        return counters_dict
+
+    def generate_counters(self):
+        generated_counters = dict()
+        if not self.org_id:
+            return generated_counters
+
+        gender = ""
+        born = ""
+        occupation = ""
+        registered_on = ""
+
+        state = ""
+        district = ""
+        ward = ""
+
+        if self.gender:
+            gender = self.gender.lower()
+
+        if self.state:
+            state = self.state.upper()
+
+        if self.district:
+            district = self.district.upper()
+
+        if self.ward:
+            ward = self.ward.upper()
+
+        if self.born:
+            born = self.born
+
+        if self.occupation:
+            occupation = self.occupation.lower()
+
+        if self.registered_on:
+            registered_on = self.registered_on.date()
+            registered_month = self.registered_on.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()
+
+        generated_counters["total-reporters"] = 1
+        if gender:
+            generated_counters[f"gender:{gender}"] = 1
+
+        if born:
+            generated_counters[f"born:{born}"] = 1
+
+        if occupation:
+            generated_counters[f"occupation:{occupation}"] = 1
+
+        if registered_on:
+            generated_counters[f"registered_on:{str(registered_on)}"] = 1
+            if gender:
+                generated_counters[f"registered_gender:{str(registered_month)}:{gender}"] = 1
+            if born:
+                generated_counters[f"registered_born:{str(registered_month)}:{born}"] = 1
+            if state:
+                generated_counters[f"registered_state:{str(registered_month)}:{state}"] = 1
+
+        if state:
+            generated_counters[f"state:{state}"] = 1
+        if district:
+            generated_counters[f"district:{district}"] = 1
+        if ward:
+            generated_counters[f"ward:{ward}"] = 1
+
+        return generated_counters
 
     class Meta:
         unique_together = ("org", "uuid")

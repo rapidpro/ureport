@@ -1,0 +1,37 @@
+-extends "v2/smartmin/update.html"
+-load smartmin i18n
+
+-block fields
+  <fieldset>
+    -for field in fields
+      -if 'include' in field
+        <div class="question">
+
+      {% render_field field %}
+
+      -if 'title' in field
+        </div>
+  </fieldset>
+
+- block post-form
+  -if request.user.is_superuser or perms.polls.poll_pull_refresh
+    %form.smartmin-form(action="{% url 'polls.poll_pull_refresh' object.id %}" method="post"  enctype="multipart/form-data")
+      - csrf_token
+      .field
+        %label.label
+          - trans "Poll Results Data"
+        .control
+            .col-md-3
+              %button.button.is-primary(type="submit" name="poll" value="{{object.id}}")
+                - trans "Refresh Results"
+
+
+-block extra-style
+  :css
+    .question {
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+
+

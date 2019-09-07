@@ -43,12 +43,12 @@ class PublicTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 30)
+        self.assertEqual(len(response.context["form"].fields), 31)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 45)
+        self.assertEqual(len(response.context["form"].fields), 46)
 
     def test_count(self):
         count_url = reverse("v2.public.count")
@@ -58,14 +58,14 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertTrue("count" in response.context)
         self.assertEqual(response.context["count"], self.nigeria.get_reporters_count())
-        self.assertEqual(response.context["view"].template_name, "public_v2/count")
+        self.assertEqual(response.context["view"].template_name, "v2/public/count")
 
         response = self.client.get(count_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["org"], self.uganda)
         self.assertTrue("count" in response.context)
         self.assertEqual(response.context["count"], self.uganda.get_reporters_count())
-        self.assertEqual(response.context["view"].template_name, "public_v2/count")
+        self.assertEqual(response.context["view"].template_name, "v2/public/count")
 
     def test_has_better_domain_processors(self):
         home_url = reverse("v2.public.index")
@@ -130,7 +130,7 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/")
         self.assertEqual(response.context["org"], self.nigeria)
-        self.assertEqual(response.context["view"].template_name, "public_v2/index.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/index.html")
 
         response = self.client.get(home_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/")
@@ -384,7 +384,7 @@ class PublicTest(UreportTest):
         response = self.client.get(about_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/about/")
         self.assertEqual(response.context["org"], self.nigeria)
-        self.assertEqual(response.context["view"].template_name, "public_v2/about.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/about.html")
 
         response = self.client.get(about_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/about/")
@@ -459,7 +459,7 @@ class PublicTest(UreportTest):
         response = self.client.get(join_engage_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/join/")
         self.assertEqual(response.context["org"], self.nigeria)
-        self.assertEqual(response.context["view"].template_name, "public_v2/join_engage.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/join_engage.html")
 
         response = self.client.get(join_engage_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/v2/join/")
@@ -484,12 +484,12 @@ class PublicTest(UreportTest):
         # self.assertContains(response, "All U-Report services (all msg on 3000) are free.")
 
     def test_ureporters(self):
-        ureporters_url = reverse("v2.public.ureporters")
+        ureporters_url = reverse("v2.public.engagement")
 
         response = self.client.get(ureporters_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/ureporters/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/engagement/")
         self.assertEqual(response.context["org"], self.nigeria)
-        self.assertEqual(response.context["view"].template_name, "public_v2/ureporters.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/ureporters.html")
 
         self.assertTrue("months" in response.context)
         self.assertTrue("gender_stats" in response.context)
@@ -505,7 +505,7 @@ class PublicTest(UreportTest):
         self.assertTrue("show_occupation_stats" in response.context)
 
         response = self.client.get(ureporters_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/v2/ureporters/")
+        self.assertEqual(response.request["PATH_INFO"], "/v2/engagement/")
         self.assertEqual(response.context["org"], self.uganda)
 
     @mock.patch("dash.orgs.models.TembaClient", MockTembaClient)
@@ -516,7 +516,7 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/v2/opinions/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["tab"], "list")
-        self.assertEqual(response.context["view"].template_name, "public_v2/polls.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/polls.html")
         self.assertFalse(response.context["latest_poll"])
         self.assertFalse(response.context["polls"])
         self.assertFalse(response.context["related_stories"])
@@ -557,7 +557,7 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/v2/opinions/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["tab"], "list")
-        self.assertEqual(response.context["view"].template_name, "public_v2/polls.html")
+        self.assertEqual(response.context["view"].template_name, "v2/public/polls.html")
         self.assertEqual(response.context["latest_poll"], poll4)
 
         self.assertEqual(len(response.context["categories"]), 1)

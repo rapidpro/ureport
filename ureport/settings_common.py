@@ -143,6 +143,7 @@ MIDDLEWARE = (
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "dash.orgs.middleware.SetOrgMiddleware",
+    "ureport.utils.middleware.CheckVersionMiddleware",
 )
 
 ROOT_URLCONF = "ureport.urls"
@@ -395,6 +396,12 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="has_extra_gender",
         field=dict(help_text=_("Whether to activate an extra gender."), required=False),
+        superuser_only=True,
+        read_only=True,
+    ),
+    dict(
+        name="has_new_design",
+        field=dict(help_text=_("Whether to activate the new design."), required=False),
         superuser_only=True,
         read_only=True,
     ),

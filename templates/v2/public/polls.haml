@@ -201,18 +201,27 @@
           .poll-gender-graph
             .gender-stats
               .gender-stat-icon
-                %i.fas.fa-male
-              .gender-stat-percentage
-                {{gender_stats.female.percentage|default:"0"}}%
-              .gender-stat-count
-                {{gender_stats.female.count|default:"0"}}
-            .gender-stats
-              .gender-stat-icon
-                %i.fas.fa-female
+                %img(src="{{ STATIC_URL }}img/gender-male.png")
               .gender-stat-percentage
                 {{gender_stats.male.percentage|default:"0"}}%
               .gender-stat-count
-                {{gender_stats.male.count|default:"0"}}
+                {{gender_stats.male.count|default:"0"|intcomma}}
+            .gender-stats
+              .gender-stat-icon
+                %img(src="{{ STATIC_URL }}img/gender-female.png")
+              .gender-stat-percentage
+                {{gender_stats.female.percentage|default:"0"}}%
+              .gender-stat-count
+                {{gender_stats.female.count|default:"0"|intcomma}}
+            -if org|config:"has_extra_gender"
+              .gender-stats
+                .gender-stat-icon
+                  %img(src="{{ STATIC_URL }}img/gender-other.png")
+                .gender-stat-percentage
+                  {{gender_stats.other.percentage|default:"0"}}%
+                .gender-stat-count
+                  {{gender_stats.other.count|default:"0"|intcomma}}
+
           .poll-age-graph
             .age-stats{ id: "age-chart"}
 

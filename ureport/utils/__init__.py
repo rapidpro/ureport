@@ -251,26 +251,6 @@ def get_global_count():
     return count
 
 
-def get_engagement_counts(org):
-    from ureport.polls.models import PollResultsCounter
-
-    counters = PollResultsCounter.objects.filter(org=org, type__icontains="engagement")
-
-    results = counters.values("type").order_by("type").annotate(count_sum=Sum("count"))
-
-    return {c["type"]: c["count_sum"] for c in results}
-
-
-def get_filtered_engagement_counts(org, filter_part=""):
-    engagement_counts = get_engagement_counts(org)
-
-    months = get_last_months()
-
-    filtered = {key[-10:]: val for key, val in engagement_counts.items() if filter_part in key}
-
-    return {key: filtered.get(key, 0) for key in months}
-
-
 def get_org_contacts_counts(org):
 
     from ureport.contacts.models import ReportersCounter
@@ -859,6 +839,61 @@ def populate_age_and_gender_poll_results(org=None):
         )
 
 
+def populate_contact_activity(org):
+    from ureport.contacts.models import Contact
+
+    now = timezone.now()
+    now_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    start_date = now - timedelta(days=365)
+
+    flows = list(
+        Poll.objects.filter(org_id=org.id, poll_date__gte=start_date)
+        .only("flow_uuid")
+        .values_list("flow_uuid", flat=True)
+    )
+
+    all_contacts = Contact.objects.filter(org=org).values_list("id", flat=True).order_by("id")
+
+    start = time.time()
+    i = 0
+
+    all_contacts = list(all_contacts)
+
+    for contact_id_batch in chunk_list(all_contacts, 1000):
+        contact_batch = list(contact_id_batch)
+        contacts = Contact.objects.filter(id__in=contact_batch)
+        for contact in contacts:
+            i += 1
+            results = PollResult.objects.filter(contact=contact.uuid, org_id=org.id, flow__in=flows).exclude(date=None)
+
+            oldest_id = None
+            newest_id = None
+            oldest_seen = now
+            newest_seen = start_date
+            for result in results:
+                if result.date > newest_seen:
+                    newest_seen = result.date
+                    newest_id = result.id
+                if result.date < oldest_seen:
+                    oldest_seen = result.date
+                    oldest_id = result.id
+
+                if oldest_seen <= start_date and newest_seen >= now_month:
+                    break
+
+            ids_to_update = []
+            if oldest_id:
+                ids_to_update.append(oldest_id)
+            if newest_id:
+                ids_to_update.append(newest_id)
+
+            PollResult.objects.filter(id__in=ids_to_update).update(contact=contact.uuid)
+
+        logger.info(
+            "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
+        )
+
+
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
@@ -868,7 +903,6 @@ Org.get_gender_stats = get_gender_stats
 Org.get_regions_stats = get_regions_stats
 Org.get_flows = get_flows
 Org.get_segment_org_boundaries = get_segment_org_boundaries
-Org.get_filtered_engagement_counts = get_filtered_engagement_counts
 Org.get_signups = get_signups
 Org.get_signup_rate = get_signup_rate
 Org.get_ureporters_locations_response_rates = get_ureporters_locations_response_rates
