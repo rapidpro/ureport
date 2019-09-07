@@ -12,7 +12,7 @@
     %meta(name="keywords" content="")
     %meta(name="author" content="")
 
-    // Our fonts
+    // Google fonts we use
     %link(href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:300,400,700|Montserrat:300,400,700&display=swap" rel="stylesheet")
 
     // Font awesome icons
@@ -131,17 +131,17 @@
     // mobile header
     .block(class="md:hidden")
       .flex.justify-between
-        .p-2
+        .p-home
           %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
             %img(src="{{STATIC_URL}}img/placeholder_country_logo.png")
 
-        .flex-center-y
+        .flex-center-y.p-home
           .block.text-3xl.mr-4
             %a#mobile-menu-toggler(href="javascript:void(0)")
               %i.fa.fa-bars
 
     // mobile menu
-    #mobile-menu.absolute.right-0.bg-black.text-white.py-8.pl-8.pr-16(class="md:hidden")
+    #mobile-menu.absolute.right-0.bg-black.text-white.py-home.pl-home.pr-16(class="md:hidden")
       .border-b.pb-4
         %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
           -trans "Opinions"
