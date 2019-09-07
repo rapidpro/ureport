@@ -8,22 +8,124 @@
 
 @tailwind base;
 
+html {
+  font-display: fallback;
+}
+
+// countries menu
+#countries {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  overflow:hidden;
+  opacity: 0;
+
+  background-image: url("{{STATIC_URL}}img/homemap_bg.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  transition: .5s;
+  transform: translateY(-100%);
+
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+
+  &.open {
+    transition: .5s;
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// flags in our menu
+.flag {
+  width: 80px;
+  height: 75px;
+  vertical-align: top;
+  display: inline-block;
+
+  img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// mobile menu
+#mobile-menu {
+  z-index: 1;
+  transition: 1s;
+  transform: translate(100%);
+
+  &.open {
+    transform: translate(0px);
+    transition: 1s;
+  }
+}
+
+// button style
 .btn {
   @apply font-bold py-2 px-4 rounded mb-1;
 }
 
+// pills for (90 days, 60 months, 12 months)
+.pill {
+  @apply inline-block px-4 text-center border-t border-b py-2 border-l;
+}
+
+.pill-first {
+  @apply inline-block pl-6 pr-6 text-center border-t border-b py-2 border-l rounded-l-full;
+}
+
+.pill-last {
+  @apply inline-block pl-4 pr-6 text-center border-t border-b py-2 border-l rounded-r-full border-r;
+}
+
+// leaflet styles
+.leaflet-container {
+  background-color:rgba(255,0,0,0.0);
+}
+
+// circle around number, single digit only
+.bg-circle {
+  display: inline-block;
+  width: 64px;
+  line-height: 64px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1.875rem;
+}
+
+// light grid background
 .bg-grid {
   background-size: 43px 57px;
   background-position: 0px 10px;
   background-image: linear-gradient(to right, #eee 1px, transparent 1px), linear-gradient(to bottom, #eee 1px, transparent 1px);
 }
 
+// light squares background
 .bg-squares {
   background-size: 43px 57px;
   background-position: 0px 10px;
   background-image: linear-gradient(to right, #eee 1px, transparent 1px), linear-gradient(to bottom, #eee 1px, transparent 1px);
 }
 
+// dark gray background
+.bg-dark-gray {
+  background: #1d1d1d;
+}
+
+// dark blue border
+.border-dark-blue {
+  border-color: #060e26;
+}
+
+// dark blue background
+.bg-dark-blue {
+    background: #060e26;
+}
+
+// blue u background
 .bg-blue-u {
   background-image: url("/sitestatic/img/blue_u.png");
   background-position-x: 6rem;
@@ -31,6 +133,7 @@
   background-size: auto;
 }
 
+// white u background
 .bg-white-u {
   background-image: url("/sitestatic/img/white_u.png");
   background-position-x: -1rem;
@@ -38,21 +141,28 @@
   background-size: 250px 250px;
 }
 
+// 5 rem border on right
 .border-r-5rem {
   border-right-width: 5rem;
 }
 
+// 2.5 rem border on right
 .border-r-25rem {
   border-right-width: 2.5rem;
 }
 
+// 2.5 rem border on left
+.border-l-25rem {
+  border-left-width: 2.5rem;
+}
+
+// video container that fills to width
 .video {
   position: relative;
   padding-bottom: 56.25%; /* 16:9 */
   padding-top: 25px;
   height: 0;
 }
-
 .video iframe {
   position: absolute;
   top: 0;
@@ -62,17 +172,90 @@
 }
 
 .py-menu {
-  @apply py-2
+  @apply py-2;
 }
 
-.p-home {
-  @apply p-12
+// desktop styles
+@media only screen and (min-width: 768px) {
+  .vertical-angle {
+    -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+  }
+
+  .p-home {
+    @apply p-12;
+  }
+
+  .m-home {
+    @apply m-12;
+  }
+
+  .my-home {
+    @apply my-12;
+  }
+
+  .mx-home {
+    @apply mx-12;
+  }
+
+  .px-home {
+    @apply px-12;
+  }
+
+  .py-home {
+    @apply py-12;
+  }
+
+  .pl-home {
+    @apply pl-12;
+  }
+
+  .pr-home {
+    @apply pr-12;
+  }
 }
 
-.p-xhome {
-  @apply px-12
+// mobile styles
+@media only screen and (max-width: 768px) {
+  .vertical-angle {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 90%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 90%);
+  }
+
+  .p-home {
+    @apply p-6;
+  }
+
+  .m-home {
+    @apply m-6;
+  }
+
+  .my-home {
+    @apply my-6;
+  }
+
+  .mx-home {
+    @apply mx-6;
+  }
+
+  .px-home {
+    @apply px-6;
+  }
+
+  .py-home {
+    @apply py-6;
+  }
+
+  .pl-home {
+    @apply pl-6;
+  }
+
+  .pr-home {
+    @apply pr-6;
+  }
 }
 
+// applied to a div will center children vertically
 .flex-center-y {
   @apply flex flex-col justify-center
 }
@@ -80,20 +263,6 @@
 .left-border {
   border-left: 1px solid white;
   padding: .5em 1.25em;
-}
-
-@media only screen and (min-width: 768px) {
-  .vertical-angle {
-    -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .vertical-angle {
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 90%);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 90%);
-  }
 }
 
 @tailwind components;

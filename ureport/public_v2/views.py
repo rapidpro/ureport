@@ -21,7 +21,7 @@ from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
 from ureport.stats.models import PollStats
-from ureport.utils import get_global_count
+from ureport.utils import get_global_count, get_ureporters_locations_stats
 
 
 class IndexView(SmartTemplateView):
@@ -298,13 +298,8 @@ class ReportersResultsView(SmartReadView):
 
     def render_to_response(self, context, **kwargs):
         output_data = []
-
-        segment = self.request.GET.get("segment", None)
-        if segment:
-            segment = json.loads(segment)
-
-            output_data = self.get_object().get_ureporters_locations_response_rates(segment)
-
+        location = self.request.GET.get("location", "state")
+        output_data = get_ureporters_locations_stats(self.get_object(), dict(location=location))
         return HttpResponse(json.dumps(output_data))
 
 

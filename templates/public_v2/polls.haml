@@ -1,9 +1,132 @@
 - extends "public_base_v2.html"
 
--load compress thumbnail humanize ureport i18n
-
+- load compress thumbnail humanize ureport i18n
 
 - block content
+  .bg-grid.border-t.p-home(class="md:flex")
+    .flex-1.flex-center-y
+      .text-5xl.font-bold
+        -trans "Opinions"
+      .text-xl.max-w-lg
+        -trans "A sentence that describes what this page is all about and who it is for"
+
+
+  .bg-white.border-t(class="md:flex")
+    .flex-1
+      .my-home.px-home.border-r
+        .text-5xl.font-bold.leading-tight
+          International Children's Day 2019
+
+        .block
+          20 May 2019
+
+        .font-light.mt-4
+          .inline-block.pr-8.border-r.border-black
+            .text-5xl.leading-none
+              1,893
+            .text-xs.font-bold
+              -trans "RESPONSES"
+
+          .inline-block.pl-8
+            .text-5xl.leading-none
+              21%
+            .text-xs.font-bold
+              -trans "RESPONSE RATE"
+
+        .mt-4.flex
+          .flex-none.mr-8
+            .text-center.inline-block.pr-4.border-r.border-black
+              %img(src="{{ STATIC_URL }}img/gender-male.png" width="40")
+              .font-bold.text-xl.leading-none.mt-2
+                58%
+              .text-sm.leading-none
+                12,461
+
+            .text-center.inline-block.pl-4
+              %img(src="{{ STATIC_URL }}img/gender-female.png" width="40")
+              .font-bold.text-xl.leading-none.mt-2
+                39%
+              .text-sm.leading-none
+                8,358
+
+          .flex-1.inline-block(style="min-width:220px;max-width:350px")
+            .relative.w-full(style="height:105px")
+              #age-bars.w-full.h-full.absolute
+
+    .flex-1.text-white
+      .pl-6.pr-home.py-home.text-center
+        .text-sm.font-bold.mb-2
+          -trans "U-REPORTERS BY REGION"
+        #ureporter-map.h-full.w-full
+          .block(style="min-height:300px;min-width:300px;")
+
+  // question1
+  .block(class="md:flex" style="min-height:30rem;" data-aos="fade")
+    .flex-1.bg-dark1.text-white
+      .p-home
+        .flex
+          .flex-none.bg-circle.bg-black.text-white.font-bold
+            1
+          .flex-1.flex-center-y
+            .ml-4.h-1.border-t.border-white
+
+        .mt-8
+          .font-alt.text-3xl.font-bold.leading-tight.italic
+            What are the biggest issues concerning young people?
+
+          .font-alt.mt-4
+            3,586 responded out of 17,453 polled
+
+    .flex-1.bg-white.text-black
+      .mx-home(class="md:border-t")
+        .py-home
+          right
+
+  // question2
+  .block(class="md:flex md:flex-row-reverse" style="min-height:30rem;" data-aos="fade")
+    .flex-1.bg-light1.text-black
+      .p-home
+        .flex
+          .flex-1.flex-center-y
+            .mr-4.h-1.border-t.border-black
+          .flex-none.bg-circle.bg-black.text-white.font-bold
+            2
+
+        .mt-8
+          .font-alt.text-3xl.font-bold.leading-tight.italic
+            What are the biggest issues concerning young people?
+
+          .font-alt.mt-4
+            3,586 responded out of 17,453 polled
+
+    .flex-1.bg-white.text-black
+      .mx-home
+        .py-home
+          left
+
+  // question3
+  .block(class="md:flex" style="min-height:30rem;" data-aos="fade")
+    .flex-1.bg-dark2.text-white
+      .p-home
+        .flex
+          .flex-none.bg-circle.bg-black.text-white.font-bold
+            3
+          .flex-1.flex-center-y
+            .ml-4.h-1.border-t.border-white
+
+        .mt-8
+          .font-alt.text-3xl.font-bold.leading-tight.italic
+            What are the biggest issues concerning young people?
+
+          .font-alt.mt-4
+            3,586 responded out of 17,453 polled
+
+    .flex-1.bg-white.text-black
+      .mx-home
+        .py-home
+          right
+
+- block old-content
   .booklet-bg
   .booklet-bg-content
     .page-title-block

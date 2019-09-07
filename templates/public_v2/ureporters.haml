@@ -3,6 +3,245 @@
 -load compress ureport dashblocks thumbnail i18n humanize
 
 - block content
+  .bg-grid.border-t.p-home(class="md:flex")
+    .flex-1.flex-center-y
+      .text-5xl.font-bold
+        -trans "Engagement"
+
+    .flex-1.flex-center-y
+      .text-xl.text-right.max-w-lg(class="md:pl-12")
+        -trans "A sentence that describes what this page is all about and who it is for"
+
+  .bg-dark-blue(class="md:flex")
+    .flex-1.bg-black.p-home.vertical-angle
+      .font-alt.text-light1.italic.mb-4.font-bold
+        -trans "Year at a Glance"
+
+      .text-white.font-light
+        .inline-block.pr-8.border-r.border-white
+          .text-5xl.leading-none
+            {{org.get_signups|intcomma}}
+          .text-xs.font-bold
+            -trans "SIGN-UPS"
+
+        .inline-block.pl-8
+          .text-5xl.leading-none
+            {{average_response_rate|floatformat}} %
+          .text-xs.font-bold
+            -trans "AVG RESPONSE RATE"
+
+      .text-white.mt-4.font-bold
+        .inline.text-light1
+          {{org.get_reporters_count|intcomma}}
+        .inline.text-white
+          -trans "TOTAL U-REPORTERS IN"
+          {{ org.name|upper }}
+        .inline.text-light1
+          +{{org.get_signup_rate|floatformat}}%
+
+      .mt-4.flex
+        .flex-none.mr-8
+          .text-white.text-center.inline-block.pr-4.border-r.border-white
+            %img(src="{{ STATIC_URL }}img/gender-male-w.png" width="40")
+            .font-bold.text-xl.leading-none.mt-2
+              {{gender_stats.male_percentage}}
+            .text-light1.text-sm.leading-none
+              {{gender_stats.male_count|intcomma}}
+
+          .text-white.text-center.inline-block.pl-4
+            %img(src="{{ STATIC_URL }}img/gender-female-w.png" width="40")
+            .font-bold.text-xl.leading-none.mt-2
+              {{gender_stats.female_percentage}}
+            .text-light1.text-sm.leading-none
+              {{gender_stats.female_count|intcomma}}
+
+        .flex-1.inline-block(style="min-width:220px;max-width:350px")
+          .relative.w-full(style="height:105px")
+            #age-bars.w-full.h-full.absolute
+
+    .flex-1.text-white
+      .pl-6.pr-home.py-home.text-center
+        .text-sm.font-bold.mb-2
+          -trans "U-REPORTERS BY REGION"
+        #ureporter-map.h-full.w-full
+          .block(style="min-height:300px;min-width:300px;")
+
+  .border-t.border-b.bg-dark-gray.px-home.py-4.border-gray-800.sticky(class="md:flex md:justify-between")
+    .text-white.font-bold.flex-center-y
+      -trans "FILTER RESULTS"
+
+    .flex-center-y
+      .text-white.text-xs
+        .pill-first.bg-black.border-white>
+          -trans "90 DAYS"
+        .pill.bg-black.border-white>
+          -trans "6 MONTHS"
+        .pill-last.bg-black.border-white>
+          -trans "12 MONTHS"
+
+  .bg-dark-blue.p-home.text-white.font-bold(class="md:flex")
+    .flex-center-y(class="md:w-2/5")
+      .bg-light1.h-1.w-16.mb-4
+      .text-3xl.mb-4
+        -trans "Opinion Responses"
+
+      .text-black.text-2xs
+        .pill-first.bg-white.border-dark-blue>
+          -trans "ALL"
+        .pill.bg-white.border-dark-blue>
+          -trans "AGE"
+        .pill.bg-white.border-dark-blue>
+          -trans "GENDER"
+        .pill-last.bg-white.border-dark-blue>
+          -trans "STATE"
+
+    .block(class="md:w-3/5")
+      .text-3xl
+        chart
+
+
+- block script
+  {{ block.super }}
+
+  :javascript
+    $(function(){
+      console.log("doing things");
+      $.ajax({url:'/boundaries/', dataType: "json"}).done(function(states){
+        $.ajax({url:'/v2/contact_field_results/', data: {location: "state"}, dataType: "json"}).done(function(counts){
+          var colors = gradientFactory.generate({
+            from: '#DDDDDD',
+            to: '{{ org|config:"primary_color"}}',
+            stops: 7
+          });
+          var breaks = [0, 5, 10, 25, 45, 65, 85];
+
+          var countMap = {};
+          var max = 0;
+          for(i=0; i<counts.length; i++){
+            countMap[counts[i].boundary] = counts[i];
+            if (counts[i].set > max) {
+              max = counts[i].set;
+            }
+          }
+
+          var colorSteps = [];
+          for(i=0; i<colors.length; i++){
+            colorSteps[i] = {
+              threshold: max * (breaks[i]/100),
+              color: colors[i]
+            }
+          }
+
+          console.log(max);
+          console.log(counts);
+          console.log(colorSteps);
+
+          var map = L.map('ureporter-map',
+            {
+              zoomControl:false,
+              attributionControl: false,
+              zoomSnap: 0,
+              dragging: false,
+              doubleClickZoom: false,
+              boxZoom: false
+            }
+          );
+
+          var getColor = function(id) {
+            var c = countMap[id].set;
+            for (i=0; i<colorSteps.length; i++){
+              if (c <= colorSteps[i].threshold) {
+                return colorSteps[i].color;
+              }
+            }
+            return colorSteps[colorSteps.length-1];
+          }
+
+          var style = function(feature) {
+            return {
+                fillColor: getColor(feature.properties.id),
+                weight: 1,
+                opacity: 1,
+                color: 'white',
+                fillOpacity: 0.7
+            };
+          }
+
+          var boundaries = L.geoJSON(states, { style: style })
+          boundaries.addTo(map);
+          map.fitBounds(boundaries.getBounds());
+
+          //window.initMap('ureporter-map', boundaries, ajaxUrl,  '{{ district_zoom|lower }}' === 'true', colorsList, '{{ ward_zoom|lower }}' === 'true', '{{reporters|intcomma}}');
+        });
+      })
+    });
+
+    $(function(){
+      var data = {{ age_stats|safe }};
+
+      {% if is_rtl_org %}
+      data.reverse();
+      {% endif %}
+
+      var categories = [];
+      for (i=0; i<data.length; i++) {
+        categories.push(data[i].name)
+      }
+
+      $('#age-bars').highcharts({
+       chart: {
+         type: 'column',
+         backgroundColor: 'transparent',
+         marginTop: 0,
+         marginBottom: 28
+       },
+       credits: {
+         enabled: false
+       },
+       legend: {
+         enabled: false
+       },
+       title: {
+           text: null
+       },
+       xAxis: {
+         categories: categories,
+         lineColor: 'transparent',
+         labels : {
+           rotation: 0,
+           style: {
+             fontSize: ".75rem",
+             fontFamily: "Montserrat",
+             fontWeight: 400,
+             color: "white"
+           },
+         },
+       },
+       yAxis: {
+         visible: false,
+       },
+       tooltip: {
+         enabled: false
+       },
+       plotOptions: {
+           series: {
+             pointPadding: 0,
+             groupPadding: 0.1,
+             borderWidth: 0
+           },
+           column: {
+               color: "#FFD100",
+               pointPadding: 0,
+               dataLabels:  {
+                 enabled: false
+               }
+           }
+       },
+       series: [{name: 'Age', data: data}]
+      });
+    });
+
+- block old-content
   .booklet-bg
   .booklet-bg-content
     .page-title-block
@@ -507,64 +746,3 @@
              series: [ {name: 'Age' , data: data } ]
            });
          });
-
-
-- block extra-style
-  - load_qbs request.org 'ureporters'
-  {{ block.super }}
-  :css
-    .highcharts-background {
-      fill: transparent;
-    }
-   
-   .hero-container {
-      {% for d_block in ureporters|slice:":1" %}
-      {% thumbnail d_block.image "1280x678" crop="top" as im %}
-        background-image:url('{{im.url}}');
-      {% empty %}
-        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
-      {% endthumbnail %}
-      {% endfor %}
-    }
-    .ureport-location-map  {
-      height: 500px;
-      width: 100%;
-    }
-
-    .ureport-location-map svg {
-      height: 480px;
-    }
-
-    .leaflet-container {
-      background: #fff;
-    }
-
-    .top-color {
-      color: {{ org|config:"primary_color"}};
-    }
-
-    #graph-contact-field-age {
-      height: 200px;
-    }
-
-    #graph-contact-field-gender {
-      height: 200px;
-    }
-
-    #graph-contact-field-age-placeholder {
-      min-height: 200px;
-      padding-top: 50px;
-    }
-
-    .scale {
-      {% if org|config:"is_global" %}
-      display: none;
-      {% endif %}
-    }
-
-    #states-selector .state-selector.is-selected {
-      font-weight: bold;
-      background-color: #333;
-      color: #EEE;
-
-    }

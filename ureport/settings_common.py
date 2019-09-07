@@ -33,8 +33,6 @@ DATABASES = {
     }
 }
 
-DASHBLOCK_STRING_IF_INVALID = "<span>"
-
 # set the mail settings, we send throught gmail
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "server@nyaruka.com"
