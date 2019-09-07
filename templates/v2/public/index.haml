@@ -51,7 +51,7 @@
         .homepage-block-content
           .join-video
             - for vid in videos|slice:"1"
-              %iframe{ width:"100%", height:"100%", src:"//www.youtube.com/embed/#{ vid.video_id }?rel=0&autohide=1&showinfo=0", frameborder:"0"}
+              %iframe{ width:"100%", height:"400px", src:"//www.youtube.com/embed/#{ vid.video_id }?rel=0&autohide=1&showinfo=0", frameborder:"0"}
           .join-description
             // This Section is a video describing ways to join  and sign up as a U-reporter.
           %a.join-button.button(href="{% url 'v2.public.join' %}")
