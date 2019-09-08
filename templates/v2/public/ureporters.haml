@@ -93,8 +93,13 @@
                     .pill-first.border-gray-400.tab-active.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
                   - elif forloop.last
-                    .pill-last.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
-                      {{segment.label}}
+                    .pill-last.border-gray-400.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
+                      .dropdown-button
+                        {{segment.label}}
+                      .dropdonw-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2
+                        - for state in states
+                          .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white")
+                            {{state.name}}
                   - else
                     .pill.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
@@ -261,6 +266,116 @@
       });
     });
 
+    $(function() {
+      $(".location-dropdown").on("click", function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        var graphId = $(this).attr("data-graph-id");
+        if($(this).children(".dropdonw-content").hasClass("hidden")) {
+          $(".dropdonw-content").addClass("hidden");
+          $(this).children(".dropdonw-content").removeClass("hidden");
+        } else {
+          $(this).children(".dropdonw-content").addClass("hidden");
+        }
+      })
+    })
+
+    $(function() {
+      $(".state-selector").on('click', function(event) {
+        event.stopPropagation();
+        var locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+
+        if(locationIds.length < 5) {
+          $(this).toggleClass('is-selected bg-gray-800 text-white');
+        } else if ($(this).hasClass('is-selected')) {
+          $(this).removeClass('is-selected bg-gray-800 text-white');
+        } else {
+          return
+        }
+        locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+
+        var dataDiv = $(this).parent().parent();
+
+        var metricSlug = dataDiv.attr("data-metric-slug");
+        var segmentType = dataDiv.attr("data-segment-type");
+        var timeFilter = dataDiv.attr("data-time-filter");
+
+        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
+        var results = Window.UreportEngagementStats[dataSlug];
+
+        var colors = ["#E3002B", "#009316", "#FED100", "#3FB5E5", "#FF8200", "#000000"];
+
+        var locationsResults = [];
+        for (i=0; i<results.length; i++){
+          result = results[i];
+          if(locationIds.includes(result.name)) {
+            result.color = colors[locationsResults.length % colors.length]
+            locationsResults.push(result);
+          }
+        }
+
+        var chartType = "column";
+
+        $('#engagement-graph-' + dataSlug).highcharts({
+          chart: {
+              type: chartType
+          },
+          title: {
+              text: null
+          },
+          legend: {
+              itemStyle: {
+                color: "#DDD"
+              }
+          },
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: {
+                month: '%b %Y',
+                year: '%Y'
+              },
+              labels: {
+                style: {
+                  color: "#DDD"
+                }
+              },
+          },
+          yAxis: {
+              title: {
+                  text: null
+              },
+              min: 0,
+              labels: {
+                style: {
+                  color: "#DDD"
+                }
+              }
+          },
+          tooltip: {
+              headerFormat: '<b>{series.name}</b><br>',
+              pointFormat: '{point.x: %b %Y}: {point.y}'
+          },
+
+          plotOptions: {
+              spline: {
+                  marker: {
+                      enabled: true
+                  }
+              }
+          },
+
+          credits: {
+            enabled: false
+          },
+
+          colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+          series : locationsResults
+          });
+
+      });
+
+    });
+
     $(function(){
       $(".engagement-graph").each(function() {
         //console.log($(this));
@@ -302,6 +417,10 @@
 
           Window.UreportEngagementStats[dataSlug] = series
           if (segmentType != 'all') {
+            return
+          }
+
+          if(segmentType == "location") {
             return
           }
 
@@ -370,6 +489,7 @@
         console.log(event);
 
         $(this).siblings().removeClass("tab-active")
+        $(this).siblings().children(".dropdonw-content").addClass("hidden")
         $(this).addClass("tab-active");
         var metricSlug = $(this).attr("data-metric-slug");
         var segmentType = $(this).attr("data-segment-type");
@@ -381,6 +501,10 @@
         var chartType = "column";
         if (segmentType == 'all') {
           chartType = "spline";
+        }
+
+        if(segmentType == "location") {
+            return
         }
 
         var series = Window.UreportEngagementStats[dataSlug];
