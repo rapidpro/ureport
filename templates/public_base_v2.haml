@@ -263,6 +263,9 @@
 
   -block script
     :javascript
+      // global primary color
+      var primaryColor = '{{ org|config:"primary_color"}}';
+
       // country menu toggling
       $("#countries-toggler").click(function(){
         $("#countries").toggleClass("open");

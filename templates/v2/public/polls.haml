@@ -12,53 +12,65 @@
 
 
   .bg-white.border-t(class="md:flex")
-    .flex-1
-      .my-home.px-home.border-r
+    .flex-1.my-home.border-r
+      .px-home
         .text-5xl.font-bold.leading-tight
-          International Children's Day 2019
+          {{ latest_poll.title }}
 
         .block
-          20 May 2019
+          {{ latest_poll.poll_date|date:"F jS, Y" }}
 
         .font-light.mt-4
           .inline-block.pr-8.border-r.border-black
             .text-5xl.leading-none
-              1,893
+              {{ latest_poll.responded_runs|intcomma }}
             .text-xs.font-bold
               -trans "RESPONSES"
 
           .inline-block.pl-8
             .text-5xl.leading-none
-              21%
+              {{ latest_poll.response_percentage }}
             .text-xs.font-bold
               -trans "RESPONSE RATE"
 
         .mt-4.flex
           .flex-none.mr-8
-            .text-center.inline-block.pr-4.border-r.border-black
+            .text-center.inline-block.pr-4
               %img(src="{{ STATIC_URL }}img/gender-male.png" width="40")
               .font-bold.text-xl.leading-none.mt-2
-                58%
+                {{gender_stats.male.percentage|default:"0"}}%
               .text-sm.leading-none
-                12,461
+                {{gender_stats.male.count|default:"0"|intcomma}}
 
-            .text-center.inline-block.pl-4
+            .text-center.inline-block.pl-4.border-l.border-black
               %img(src="{{ STATIC_URL }}img/gender-female.png" width="40")
               .font-bold.text-xl.leading-none.mt-2
-                39%
+                {{gender_stats.female.percentage|default:"0"}}%
               .text-sm.leading-none
-                8,358
+                {{gender_stats.female.count|default:"0"|intcomma}}
+
+            {% if org|config:"has_extra_gender" %}
+            .text-center.inline-block.pl-4.border-l.border-black
+              %img(src="{{ STATIC_URL }}img/gender-other.png" width="40")
+              .font-bold.text-xl.leading-none.mt-2
+                {{gender_stats.other.percentage|default:"0"}}%
+              .text-sm.leading-none
+                {{gender_stats.other.count|default:"0"|intcomma}}
+            {% endif %}
 
           .flex-1.inline-block(style="min-width:220px;max-width:350px")
             .relative.w-full(style="height:105px")
               #age-bars.w-full.h-full.absolute
 
-    .flex-1.text-white
+    .flex-1.text-black
       .pl-6.pr-home.py-home.text-center
         .text-sm.font-bold.mb-2
-          -trans "U-REPORTERS BY REGION"
-        #ureporter-map.h-full.w-full
+          -trans "TOTAL RESPONSES"
+        {% with map_segment='{"location":"state"}' %}
+        #poll-map.h-full.w-full.map(data-map-url="/pollquestion/{{ top_question.id }}/results/?segment={{ map_segment|urlencode }}")
           .block(style="min-height:300px;min-width:300px;")
+        {% endwith %}
+
 
   // question1
   .block(class="md:flex" style="min-height:30rem;" data-aos="fade")
@@ -125,6 +137,80 @@
       .mx-home
         .py-home
           right
+
+- block script
+  {{ block.super }}
+
+  {% compress js %}
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_locations.coffee")
+  {% endcompress %}
+
+  :javascript
+    $(function(){
+      var data = {{ age_stats|safe }};
+
+      {% if is_rtl_org %}
+      data.reverse();
+      {% endif %}
+
+      var categories = [];
+      for (i=0; i<data.length; i++) {
+        categories.push(data[i].name)
+      }
+
+      $('#age-bars').highcharts({
+       chart: {
+         type: 'column',
+         backgroundColor: 'transparent',
+         marginTop: 0,
+         marginBottom: 28
+       },
+       credits: {
+         enabled: false
+       },
+       legend: {
+         enabled: false
+       },
+       title: {
+           text: null
+       },
+       xAxis: {
+         categories: categories,
+         lineColor: 'transparent',
+         labels : {
+           rotation: 0,
+           style: {
+             fontSize: ".75rem",
+             fontFamily: "Montserrat",
+             fontWeight: 400,
+             color: "black"
+           },
+         },
+       },
+       yAxis: {
+         visible: false,
+       },
+       tooltip: {
+         enabled: false
+       },
+       plotOptions: {
+           series: {
+             pointPadding: 0,
+             groupPadding: 0.1,
+             borderWidth: 0
+           },
+           column: {
+               color: "{{ org|config:"primary_color" }}",
+               pointPadding: 0,
+               dataLabels:  {
+                 enabled: false
+               }
+           }
+       },
+       series: [{name: 'Age', data: data}]
+      });
+    });
+
 
 - block old-content
   .booklet-bg
@@ -637,7 +723,7 @@
             style: {
               fontSize: '0.85rem',
               fontFamily: "SharpSansDisplayBold",
-              color: "#000",
+              color: "#fff",
             }
           },
           minorTickLength: 0,
@@ -669,7 +755,7 @@
               style: {
                 fontFamily: "SharpSansDisplayBold",
               },
-              color: '{{ org|config:"primary_color" }}',
+              color: '#000000',
               verticalAlign:"bottom",
               format: '<b>{point.y:.0f}%</b>'
             }

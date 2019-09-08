@@ -87,6 +87,20 @@ html {
   background-color:rgba(255,0,0,0.0);
 }
 
+// leaflet info container in top right
+.leaflet-info {
+  text-align: right;
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 1.25rem;
+
+  .count {
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
+
 // circle around number, single digit only
 .bg-circle {
   display: inline-block;
