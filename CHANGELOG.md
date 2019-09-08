@@ -1,3 +1,8 @@
+v1.1.2
+----------
+ * Ignore node_mudules
+ * Fix endif tag place
+
 v1.1.1
 ----------
  * Merge pull request #433 from rapidpro/post-deploy-fixes
