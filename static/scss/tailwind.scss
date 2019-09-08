@@ -82,6 +82,26 @@ html {
   @apply inline-block pl-4 pr-6 text-center border-t border-b py-2 border-l rounded-r-full border-r;
 }
 
+.tab-button-time-filter {
+  @apply bg-black text-white;
+}
+
+.tab-button-time-filter.tab-active {
+  @apply bg-gray-800 text-white;
+}
+
+.tab-button-graph-switch {
+  @apply bg-white;
+}
+
+.tab-active.tab-button-graph-switch {
+  @apply bg-dark-blue text-white;
+}
+
+.highcharts-background {
+  fill: none;
+}
+
 // leaflet styles
 .leaflet-container {
   background-color:rgba(255,0,0,0.0);

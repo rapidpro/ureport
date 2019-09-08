@@ -71,33 +71,39 @@
       -trans "FILTER RESULTS"
 
     .flex-center-y
-      .text-white.text-xs
-        .pill-first.bg-black.border-white>
-          -trans "90 DAYS"
-        .pill.bg-black.border-white>
-          -trans "6 MONTHS"
-        .pill-last.bg-black.border-white>
-          -trans "12 MONTHS"
+      .text-white.text-xs.flex
+        - for time_filter in data_time_filters
+          .border-white.tab-button-time-filter(class="{% if forloop.first %}pill-first{% elif forloop.last %}tab-active pill-last{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
+            {{time_filter.label}}
 
-  .bg-dark-blue.p-home.text-white.font-bold(class="md:flex")
-    .flex-center-y(class="md:w-2/5")
-      .bg-light1.h-1.w-16.mb-4
-      .text-3xl.mb-4
-        -trans "Opinion Responses"
 
-      .text-black.text-2xs
-        .pill-first.bg-white.border-dark-blue>
-          -trans "ALL"
-        .pill.bg-white.border-dark-blue>
-          -trans "AGE"
-        .pill.bg-white.border-dark-blue>
-          -trans "GENDER"
-        .pill-last.bg-white.border-dark-blue>
-          -trans "STATE"
+  .bg-dark-blue.p-home.text-white.font-bold.border-b.border-white
+    - for time_filter in data_time_filters
+      .engagemment-content(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
+        - for metric in data_metrics
+          .engagement-graph-block.block.mt-16(class="md:flex" style="min-height:30rem; max-height:45rem;" data-aos="fade")
+            .(class="md:w-2/5")
+              .bg-light1.h-1.w-16.mb-4
+              .text-3xl.mb-4
+                {{ metric.title }}
 
-    .block(class="md:w-3/5")
-      .text-3xl
-        chart
+              .text-black.text-2xs.flex.mb-6
+                - for segment in data_segments
+                  - if forloop.first
+                    .pill-first.border-gray-400.tab-active.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                      {{segment.label}}
+                  - elif forloop.last
+                    .pill-last.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                      {{segment.label}}
+                  - else
+                    .pill.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                      {{segment.label}}
+
+            .block(class="md:w-3/5")
+              .engagement-graph-tabs(id="graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
+                - for segment in data_segments
+                  .engagement-graph(id="graph-tabs-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
+                    .has-graph(id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
 
 
 - block script
@@ -240,6 +246,202 @@
        series: [{name: 'Age', data: data}]
       });
     });
+
+    $(function(){
+      $(".tab-button-time-filter").on("click", function(event) {
+        event.stopPropagation();
+        $(this).siblings().removeClass("tab-active")
+        $(this).addClass("tab-active");
+        var timeFilter = $(this).attr("data-time-filter");
+        $(".engagemment-content").addClass("hidden");
+        $("#tab-content-block-" + timeFilter).removeClass("hidden");
+        $("#tab-content-block-" + timeFilter).children().children().children().children(".tab-active.tab-button-graph-switch").each(function() {
+          $(this).click();
+        });
+      });
+    });
+
+    $(function(){
+      $(".engagement-graph").each(function() {
+        //console.log($(this));
+        var graphDiv = $(this).children(".has-graph");
+        var metricSlug = graphDiv.attr("data-metric-slug");
+        var segmentType = graphDiv.attr("data-segment-type");
+        var timeFilter = graphDiv.attr("data-time-filter");
+        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
+
+        var params = {"metric": metricSlug, "segment": segmentType, "filter": timeFilter};
+        $.ajax({url:'/v2/engagement_data/?results_params=' + encodeURIComponent(JSON.stringify(params)), dataType: "json"}).done(function(result){
+          if(!result){
+            return;
+          }
+          if(!Window.UreportEngagementStats) {
+            Window.UreportEngagementStats = {}
+          }
+
+          var colors = ['#E3002B', '#000000', '#FFD100', '#40B5E5', '#FF8200', '#009917'];
+          if(segmentType=="all"){
+            colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
+          }
+
+          if(segmentType=="gender"){
+            colors = ['#40B5E5', '#FF8200', '#019B17'];
+          }
+
+          var serverData = result;
+          var series = [];
+          for (i=0; i<serverData.length; i++) {
+            data = serverData[i]['data']
+            cleanedData = []
+            Object.keys(data).forEach(function(key){
+              cleanedData.push([Date.parse(key), data[key]]);
+            })
+            cleanedData.sort(function(a,b){return a[0] - b[0];});
+            series.push({name: serverData[i]['name'], data: cleanedData, color: colors[i % colors.length]})
+          }
+
+          Window.UreportEngagementStats[dataSlug] = series
+          if (segmentType != 'all') {
+            return
+          }
+
+          $('#engagement-graph-' + dataSlug).highcharts({
+            chart: {
+                type: "spline"
+            },
+            title: {
+                text: null
+            },
+            legend: {
+                itemStyle: {
+                  color: "#DDD"
+                }
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                  month: '%b %Y',
+                  year: '%Y'
+                },
+                labels: {
+                  style: {
+                    color: "#DDD"
+                  }
+                },
+            },
+            yAxis: {
+                title: {
+                    text: null,
+                    style: {
+                      color: "#DDD"
+                    }
+                },
+                min: 0,
+                labels: {
+                  style: {
+                    color: "#DDD"
+                  }
+                }
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x: %b %Y}: {point.y}'
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enabled: true
+                    }
+                }
+            },
+            credits: {
+              enabled: false
+            },
+            colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+              series : series
+          });
+        });
+      });
+    });
+
+    $(function(){
+      $(".tab-button-graph-switch").on("click", function(event) {
+        event.stopPropagation();
+        console.log(event);
+
+        $(this).siblings().removeClass("tab-active")
+        $(this).addClass("tab-active");
+        var metricSlug = $(this).attr("data-metric-slug");
+        var segmentType = $(this).attr("data-segment-type");
+        var timeFilter = $(this)  .attr("data-time-filter");
+        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
+        $(".engagement-graph-tabs #graph-tabs-" + dataSlug).siblings().addClass("hidden");
+        $("#graph-tabs-" + dataSlug).removeClass("hidden");
+
+        var chartType = "column";
+        if (segmentType == 'all') {
+          chartType = "spline";
+        }
+
+        var series = Window.UreportEngagementStats[dataSlug];
+        $('#engagement-graph-' + dataSlug).highcharts({
+          chart: {
+              type: chartType
+          },
+          title: {
+              text: null
+          },
+          legend: {
+              itemStyle: {
+                color: "#DDD"
+              }
+          },
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: {
+                month: '%b %Y',
+                year: '%Y'
+              },
+              labels: {
+                style: {
+                  color: "#DDD"
+                }
+              },
+          },
+          yAxis: {
+              title: {
+                  text: null,
+                  style: {
+                    color: "#DDD"
+                  }
+              },
+              min: 0,
+              labels: {
+                style: {
+                  color: "#DDD"
+                }
+              }
+          },
+          tooltip: {
+              headerFormat: '<b>{series.name}</b><br>',
+              pointFormat: '{point.x: %b %Y}: {point.y}'
+          },
+          plotOptions: {
+              spline: {
+                  marker: {
+                      enabled: true
+                  }
+              }
+          },
+          credits: {
+            enabled: false
+          },
+          colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+          series : series
+        });
+      });
+    });
+
 
 - block old-content
   .booklet-bg
