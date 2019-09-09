@@ -1,3 +1,8 @@
+v1.1.3
+----------
+ * Revert leaflet library
+ * Revert maps change to keep supporting properly the old version
+
 v1.1.2
 ----------
  * Ignore node_mudules
