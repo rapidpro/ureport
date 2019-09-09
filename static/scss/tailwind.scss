@@ -82,6 +82,7 @@ html {
   @apply inline-block pl-4 pr-6 text-center border-t border-b py-2 border-l rounded-r-full border-r;
 }
 
+
 .pill-white {
   @apply bg-white border-gray-800 text-black;
 
@@ -91,6 +92,42 @@ html {
 
   &.selected {
     @apply bg-gray-800 text-white;
+  }
+}
+
+.pill-black {
+  @apply bg-black text-white border-white;
+
+  &:hover {
+    @apply bg-gray-600;
+  }
+
+  &.selected {
+    @apply bg-gray-200 text-gray-800;
+  }
+}
+
+.pill-dark-blue {
+  @apply border-gray-400 bg-dark-blue text-white;
+  
+  &:hover {
+    @apply bg-gray-200;
+  }
+
+  &.selected {
+    @apply bg-white;
+  }
+}
+
+.pill-dark-blue-inverted {
+  @apply border-gray-400 bg-white;
+
+  &:hover {
+    @apply bg-gray-200;
+  }
+
+  &.selected {
+    @apply bg-dark-blue text-white;
   }
 }
 
@@ -121,6 +158,11 @@ html {
   -webkit-transition:opacity .5s ease-in-out;
   -moz-transition:opacity .5s ease-in-out;
   transition:opacity .5s ease-in-out;
+}
+
+
+.highcharts-background {
+  fill: none;
 }
 
 // leaflet styles
