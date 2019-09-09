@@ -82,21 +82,84 @@ html {
   @apply inline-block pl-4 pr-6 text-center border-t border-b py-2 border-l rounded-r-full border-r;
 }
 
-.tab-button-time-filter {
-  @apply bg-black text-white;
+
+.pill-white {
+  @apply bg-white border-gray-800 text-black;
+
+  &:hover {
+    @apply bg-gray-200;
+  }
+
+  &.selected {
+    @apply bg-gray-800 text-white;
+  }
 }
 
-.tab-button-time-filter.tab-active {
-  @apply bg-gray-800 text-white;
+.pill-black {
+  @apply bg-black text-white border-white;
+
+  &:hover {
+    @apply bg-gray-600;
+  }
+
+  &.selected {
+    @apply bg-gray-200 text-gray-800;
+  }
 }
 
-.tab-button-graph-switch {
-  @apply bg-white;
+.pill-dark-blue {
+  @apply border-gray-400 bg-dark-blue text-white;
+  
+  &:hover {
+    @apply bg-gray-200;
+  }
+
+  &.selected {
+    @apply bg-white;
+  }
 }
 
-.tab-active.tab-button-graph-switch {
-  @apply bg-dark-blue text-white;
+.pill-dark-blue-inverted {
+  @apply border-gray-400 bg-white;
+
+  &:hover {
+    @apply bg-gray-200;
+  }
+
+  &.selected {
+    @apply bg-dark-blue text-white;
+  }
 }
+
+// allows an element to fade in when a parent element hovers, supports up to three levels below
+.hover-show {
+  opacity: 0;
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+}
+
+.hover-parent:hover > .hover-show {
+  opacity: 1;
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+}
+
+.hover-parent:hover > .hover-parent > .hover-show {
+  opacity: 1;
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+}
+
+.hover-parent:hover > .hover-parent > .hover-parent > .hover-show {
+  opacity: 1;
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+}
+
 
 .highcharts-background {
   fill: none;
@@ -129,6 +192,20 @@ html {
   border-radius: 50%;
   text-align: center;
   font-size: 1.875rem;
+}
+
+// small circle around font awesome icon, used for sharing
+.bg-circle-xs {
+  display: inline-block;
+  width: 32px;
+  line-height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: .875rem;
+
+  &:hover {
+    @apply bg-gray-200;
+  }
 }
 
 // light grid background

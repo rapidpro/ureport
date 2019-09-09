@@ -18,8 +18,11 @@
     // Font awesome icons
     %link(href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
 
+    // Highcharts for charts
+    %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.2.0/css/highcharts.csst")
+
     // Leaflet for maps
-    %link(rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="anonymous")
+    %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css")
 
     // AOS, animation library
     %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css")
@@ -67,6 +70,9 @@
       .border-light1 {
         border-color: #1751af;
       }
+
+    :javascript
+      orgColors = ["#439932", "#1751af", "#5eb3e0"];
 
   %body.font-sans.relative
     // countries (off screen to start)
@@ -242,13 +248,13 @@
     // bottom yellow bar
     .bg-color3.h-2
 
-  %script(src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous")
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js")
 
   // Highcharts for charts
-  %script(src="https://code.highcharts.com/highcharts.js")
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.2.0/highcharts.js")
 
   // Leaflet for maps
-  %script(src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin="anonymous")
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js")
 
   // AOS for fade in animations on scroll
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js")

@@ -1,9 +1,9 @@
 $(->
   # generate our gradient
   colors = gradientFactory.generate({
-    from: '#DDDDDD',
-    to: primaryColor,
-    stops: 7,
+    from: '#DDDDDD'
+    to: primaryColor
+    stops: 7
   })
 
   # breaks for each gradient
@@ -12,34 +12,34 @@ $(->
   # default empty style
   emptyStyle = (feature) ->
     return {
-      fillColor: colors[1],
-      weight: 1,
-      opacity: 1,
-      color: 'white',
+      fillColor: colors[1]
+      weight: 1
+      opacity: 1
+      color: 'white'
       fillOpacity: 0.7
     }
 
   highlightStyle = {
-    weight: 3,
-    fillOpacity: 1,
+    weight: 3
+    fillOpacity: 1
   }
 
   # our leaflet options
   options = {
       # no user controlled zooming
-      zoomControl:false,
-      scrollWheelZoom: false,
-      doubleClickZoom: false,
-      boxZoom: false,
+      zoomControl:false
+      scrollWheelZoom: false
+      doubleClickZoom: false
+      boxZoom: false
 
-      # allow arbitrary zooms
-      zoomSnap: 0,
+      # allow arbitrary scaling
+      zoomSnap: 0
 
       # remove leaflet attribution
-      attributionControl: false,
+      attributionControl: false
 
       # don't allow dragging
-      dragging: false,
+      dragging: false
   }
 
   # fetch our top level states
@@ -78,7 +78,7 @@ $(->
         colorSteps = []
         for color, i in colors
           colorSteps[i] = {
-            threshold: max * (breaks[i] / 100),
+            threshold: max * (breaks[i] / 100)
             color: colors[i]
           }
 
@@ -102,10 +102,10 @@ $(->
         # looks up the color for the passed in feature
         countStyle = (feature) ->
           return {
-              fillColor: feature.properties.color,
-              weight: 1,
-              opacity: 1,
-              color: 'white',
+              fillColor: feature.properties.color
+              weight: 1
+              opacity: 1
+              color: 'white'
               fillOpacity: 0.7
           }
 
@@ -146,8 +146,8 @@ $(->
           style: countStyle,
           onEachFeature: (feature, layer) ->
             layer.on({
-              mouseover: highlight,
-              mouseout: reset,
+              mouseover: highlight
+              mouseout: reset
             });
         })
         boundaries.addTo(map);
