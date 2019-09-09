@@ -64,14 +64,17 @@
 
         .flex-1.inline-block(style="min-width:220px;max-width:350px")
           .relative.w-full(style="height:105px")
-            #age-bars.w-full.h-full.absolute
+            {{ age_stats|json_script:"age_stats" }}
+            #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
 
     .flex-1.text-white
       .pl-6.pr-home.py-home.text-center
         .text-sm.font-bold.mb-2
           -trans "U-REPORTERS BY REGION"
-        #ureporter-map.h-full.w-full
+        {% with map_segment='{"location":"state"}' %}
+        #ureporter-map.h-full.w-full.map(data-map-url="/v2/contact_field_results/?segment={{ map_segment|urlencode }}")
           .block(style="min-height:300px;min-width:300px;")
+        {% endwith %}
 
   .border-t.border-b.bg-dark-gray.px-home.py-4.border-gray-800.sticky(class="md:flex md:justify-between")
     .text-white.font-bold.flex-center-y
@@ -122,143 +125,6 @@
   {{ block.super }}
 
   :javascript
-    $(function(){
-      console.log("doing things");
-      $.ajax({url:'/boundaries/', dataType: "json"}).done(function(states){
-        $.ajax({url:'/v2/contact_field_results/', data: {location: "state"}, dataType: "json"}).done(function(counts){
-          var colors = gradientFactory.generate({
-            from: '#DDDDDD',
-            to: '{{ org|config:"primary_color"}}',
-            stops: 7
-          });
-          var breaks = [0, 5, 10, 25, 45, 65, 85];
-
-          var countMap = {};
-          var max = 0;
-          for(i=0; i<counts.length; i++){
-            countMap[counts[i].boundary] = counts[i];
-            if (counts[i].set > max) {
-              max = counts[i].set;
-            }
-          }
-
-          var colorSteps = [];
-          for(i=0; i<colors.length; i++){
-            colorSteps[i] = {
-              threshold: max * (breaks[i]/100),
-              color: colors[i]
-            }
-          }
-
-          console.log(max);
-          console.log(counts);
-          console.log(colorSteps);
-
-          var map = L.map('ureporter-map',
-            {
-              zoomControl:false,
-              attributionControl: false,
-              zoomSnap: 0,
-              dragging: false,
-              doubleClickZoom: false,
-              boxZoom: false
-            }
-          );
-
-          var getColor = function(id) {
-            var c = countMap[id].set;
-            for (i=0; i<colorSteps.length; i++){
-              if (c <= colorSteps[i].threshold) {
-                return colorSteps[i].color;
-              }
-            }
-            return colorSteps[colorSteps.length-1];
-          }
-
-          var style = function(feature) {
-            return {
-                fillColor: getColor(feature.properties.id),
-                weight: 1,
-                opacity: 1,
-                color: 'white',
-                fillOpacity: 0.7
-            };
-          }
-
-          var boundaries = L.geoJSON(states, { style: style })
-          boundaries.addTo(map);
-          map.fitBounds(boundaries.getBounds());
-
-          //window.initMap('ureporter-map', boundaries, ajaxUrl,  '{{ district_zoom|lower }}' === 'true', colorsList, '{{ ward_zoom|lower }}' === 'true', '{{reporters|intcomma}}');
-        });
-      })
-    });
-
-    $(function(){
-      var data = {{ age_stats|safe }};
-
-      {% if is_rtl_org %}
-      data.reverse();
-      {% endif %}
-
-      var categories = [];
-      for (i=0; i<data.length; i++) {
-        categories.push(data[i].name)
-      }
-
-      $('#age-bars').highcharts({
-       chart: {
-         type: 'column',
-         backgroundColor: 'transparent',
-         marginTop: 0,
-         marginBottom: 28
-       },
-       credits: {
-         enabled: false
-       },
-       legend: {
-         enabled: false
-       },
-       title: {
-           text: null
-       },
-       xAxis: {
-         categories: categories,
-         lineColor: 'transparent',
-         labels : {
-           rotation: 0,
-           style: {
-             fontSize: ".75rem",
-             fontFamily: "Montserrat",
-             fontWeight: 400,
-             color: "white"
-           },
-         },
-       },
-       yAxis: {
-         visible: false,
-       },
-       tooltip: {
-         enabled: false
-       },
-       plotOptions: {
-           series: {
-             pointPadding: 0,
-             groupPadding: 0.1,
-             borderWidth: 0
-           },
-           column: {
-               color: "#FFD100",
-               pointPadding: 0,
-               dataLabels:  {
-                 enabled: false
-               }
-           }
-       },
-       series: [{name: 'Age', data: data}]
-      });
-    });
-
     $(function(){
       $(".tab-button-time-filter").on("click", function(event) {
         event.stopPropagation();

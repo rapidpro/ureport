@@ -1,58 +1,36 @@
 - extends "public_base_v2.html"
 - load thumbnail compress i18n ureport
 
-
 -block content
-  .booklet-bg
-  .booklet-bg-content
-    .content-bg-1
-    .content-bg-2
-    .content-block-content 
-      .story-title-block
-        .story-title-picture
-          %img{width:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
-        .page-label
-          Stories
-        .story-title
-          {{ story.title }}
+  .block(class="md:flex")
+    .block.bg-dark-blue.vertical-angle
+      .p-home.text-white.flex-center-y
+        .block
+          .text-light1.font-bold
+            STORY
+          .font-alt.font-bold.text-4xl.leading-tight.italic
+            {{ story.title }}
 
+    .block(class="md:-ml-8")
+      %img(src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" width="100%" style="object-fit:cover;")
 
-        .story-text-block
-          .story-text-content
-            {{ story.content|safe }}
+  .block.justify-between.bg-white.m-12(class="md:flex")
+    .block
+      .share
+        %a.mb-2.bg-circle-xs.border.border-black.facebook-share(href="#" data-url="{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
+          %i.fa.fa-facebook
+        %a.mb-2.block.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
+          %i.fa.fa-twitter
+        %a.mb-2.block.bg-circle-xs.border.border-black(href="https://api.whatsapp.com/send?text={% org_host_link %}{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
+          %i.fa.fa-whatsapp
+        %a.mb-2.block.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ story.title|urlencode:\"\" }} results&amp;body={% url 'v2.public.story_read' story.pk %}" uk-icon="icon: mail; ratio: 1.5")
+          %i.fa.fa-envelope
 
-          .story-social-sharing
-            .share-button.facebook-share(data-share-url="{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-              %i.fab.fa-facebook-f
-            .share-button.twitter-share
-              %a(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-                %i.fab.fa-twitter
-            .share-button.email-share
-              %a(href="mailto:?subject=Check out {{ story.title|urlencode:\"\" }} results&amp;body=Check out {% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-                %i.fas.fa-envelope
-            .share-button.whatsapp-share
-              %a(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-                %i.fab.fa-whatsapp
+    .block.flex-grow.px-home
+      {{ story.content|safe }}
 
+    .block
+      %img(src="{{STATIC_URL}}img/u-icon-small.png")
 
-          .story-text-picture
-            %img{width:"70%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
-
-          .story-comments
-            .fb-comments(data-href="{% org_host_link %}{% url 'public.story_read' story.pk %}" data-width="100%" data-numposts="5")
-
--block extra-script
-  :javascript
-    $(".facebook-share").on("click", function() {
-      var shareURL = $(this).attr("data-share-url");
-      var url = "https://www.facebook.com/sharer/sharer.php?u=" + shareURL;
-      FB.ui(
-        {
-          method: "share",
-          href: url
-        }, 
-        function(response) {
-          console.log(response);
-        }
-      )
-    });
+  .story-comments
+    .fb-comments(data-href="{% org_host_link %}{% url 'public.story_read' story.pk %}" data-width="100%" data-numposts="5")

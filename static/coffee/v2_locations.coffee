@@ -121,9 +121,15 @@ $(->
 
         info.update = (props) ->
           if props
-            total = props.count.set + props.count.unset
-            this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
-              "<div class='count'>" + props.count.set + " of " + total + "</div>"
+            if props.count.unset?
+              total = props.count.set + props.count.unset
+              this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
+                "<div class='count'>" + props.count.set + " of " + total + "</div>"
+            else if props.count.set?
+              this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
+                "<div class='count'>" + props.count.set + "</div>"
+            else
+              this._div.innerHTML = "<div class='name'>" + props.name + "</div>"
           else
             this._div.innerHTML = ""
 

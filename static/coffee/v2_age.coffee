@@ -2,6 +2,15 @@ $(->
   $(".age-chart").each(->
     barColor = $(this).data("bar-color")
     labelColor = $(this).data("label-color")
+    labelPosition = $(this).data("label-position")
+    labelSize = $(this).data("label-size")
+
+    if not labelPosition?
+      labelPosition = "bottom"
+
+    if not labelSize?
+      labelSize = 14
+
     id = $(this).attr("id")
     data = JSON.parse(document.getElementById($(this).data("stats")).textContent);
 
@@ -15,8 +24,8 @@ $(->
       chart: {
         type: 'column'
         backgroundColor: 'transparent'
-        marginTop: 0
-        marginBottom: 28
+        marginTop: if labelPosition == "top" then labelSize*2.2 else 0
+        marginBottom: if labelPosition == "bottom" then labelSize*2.2 else 0
         style: {
             fontFamily: "Montserrat"
         }
@@ -26,12 +35,13 @@ $(->
       title: { text: null }
       xAxis: {
         categories: categories
+        opposite: if labelPosition == "top" then true else false
         lineColor: 'transparent'
         labels: {
           rotation: 0
           style: {
-            fontSize: '.75rem'
-            fontWeight: 400
+            fontSize: labelSize
+            fontWeight: 700
             color: labelColor
           }
         }

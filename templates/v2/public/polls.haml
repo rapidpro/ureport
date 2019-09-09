@@ -104,7 +104,7 @@
 
           .share.float-right.flex-none.mb-4.flex-center-y.hover-show
             .block
-              %a.bg-circle-xs.border.border-black(href="" data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+              %a.bg-circle-xs.border.border-black.facebook-share(href="" data-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                 %i.fa.fa-facebook
               %a.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                 %i.fa.fa-twitter
@@ -118,15 +118,6 @@
           .w-full.h-full.absolute.poll-chart.block(id="chart-{{ question.id }}" data-question="{{ question.id }}" data-segment="all")
 
   {% endfor %}
-
-- block script
-  {{ block.super }}
-
-  {% compress js %}
-  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_age.coffee")
-  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_locations.coffee")
-  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_polls.coffee")
-  {% endcompress %}
 
 - block old-content
 

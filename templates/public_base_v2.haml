@@ -27,8 +27,10 @@
     // AOS, animation library
     %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css")
 
-    // U-Report styles
+    // U-Report styles, compress so they cache bust
+    {% compress css %}
     %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
+    {% endcompress %}
 
     :css
       .bg-dark1 {
@@ -263,8 +265,17 @@
   // Gradients making util
   %script(src="{{STATIC_URL}}js/gradientfactory.js")
 
-  // U-Report map related utilities
-  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/locations.coffee")
+  // Age charts
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_age.coffee")
+
+  // FB Shares
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_fb_share.coffee")
+
+  // Locations
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_locations.coffee")
+
+  // Polls
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_polls.coffee")
   {% endcompress %}
 
   -block script
