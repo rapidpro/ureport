@@ -9,6 +9,7 @@
     %meta(http-equiv="X-UA-Compatible" content="ie=edge")
     %title
       -trans "U-Report"
+      {{ org.name }}
     %meta(name="description" content="")
     %meta(name="keywords" content="")
     %meta(name="author" content="")
@@ -165,7 +166,9 @@
               -trans "Opinions"
 
         %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-          %img(src="{{STATIC_URL}}img/placeholder_country_logo.png")
+          {% thumbnail org.get_logo "1400x260" format="PNG" as im %}
+          %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
+          {% endthumbnail %}
 
         .flex-1.text-center.font-bold.text-2xl.flex-center-y
           %div
@@ -202,7 +205,7 @@
         
         - if org|config:"has_jobs"
           %a.block(href="{% url 'v2.public.jobs' %}")
-              - trans "Jobs"
+            - trans "Jobs"
         
         - for custom_page in additional_menu|slice:":3"
           %a.block(href="{% url 'v2.public.custom_page' custom_page.link %}")
