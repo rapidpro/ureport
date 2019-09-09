@@ -112,7 +112,7 @@
 -block extra-script
   {{ block.super }}
   {% compress js %}
-  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureporters.coffee" />
+  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureporters_v2.coffee" />
   {% endcompress %}
 
   {% include "public/strings_values.html" %}
