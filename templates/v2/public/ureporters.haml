@@ -191,7 +191,10 @@
 
         $('#engagement-graph-' + dataSlug).highcharts({
           chart: {
-              type: chartType
+              type: chartType,
+              style: {
+                fontFamily: "Montserrat"
+              }
           },
           title: {
               text: null
@@ -299,7 +302,10 @@
 
           $('#engagement-graph-' + dataSlug).highcharts({
             chart: {
-                type: "spline"
+                type: "spline",
+                style: {
+                  fontFamily: "Montserrat"
+                }
             },
             title: {
                 text: null
@@ -383,7 +389,10 @@
         var series = Window.UreportEngagementStats[dataSlug];
         $('#engagement-graph-' + dataSlug).highcharts({
           chart: {
-              type: chartType
+              type: chartType,
+              style: {
+                fontFamily: "Montserrat"
+              }
           },
           title: {
               text: null
