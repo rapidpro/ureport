@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 - load static compress dashblocks dashorgs thumbnail ureport smartmin i18n
+- load_qbs request.org 'additional_menu'
 %html(lang="en")
 
   %head
@@ -77,6 +78,35 @@
       orgColors = ["#439932", "#1751af", "#5eb3e0"];
 
   %body.font-sans.relative
+    #fb-root
+    -if org|config:"facebook_page_id" and org|config:"facebook_app_id"
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '{{ org|config:"facebook_app_id" }}',
+            autoLogAppEvents: true,
+            xfbml      : true,
+            version    : 'v3.2'
+          });
+        };
+      </script>
+
+      <div class="fb-customerchat"
+        page_id="{{ org|config:"facebook_page_id" }}"
+        logged_in_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}"
+        logged_out_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}">
+      </div>
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&autoLogAppEvents=1&version=v3.2{% endif %}";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
     // countries (off screen to start)
     #countries.bg-black.text-white
       %a#countries-closer.float-right.p-4(href="javascript:void(0)")
@@ -108,15 +138,21 @@
           %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.about' %}")
             -trans "About"
 
-          {% if org|config:"facebook_page_url" %}
-          %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
-            %i.fa.fa-facebook
-          {% endif %}
+          - if org|config:"has_jobs"
+            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.jobs' %}")
+              - trans "Jobs"
+        
+          - for custom_page in additional_menu|slice:":3"
+            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.custom_page' custom_page.link %}")
+              {{custom_page.title}}
 
-          {% if org|config:"twitter_handle" %}
-          %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
-            %i.fa.fa-twitter
-          {% endif %}
+          - if org|config:"facebook_page_url"
+            %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
+              %i.fa.fa-facebook
+
+          - if org|config:"twitter_handle"
+            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
+              %i.fa.fa-twitter
 
           %a.flex-initial.btn.bg-black.text-white.ml-4.py-menu(href="{% url 'v2.public.join' %}")
             -trans "Join Now"
@@ -161,19 +197,25 @@
           %a.block.mt-4(href="{% url 'v2.public.about' %}")
             -trans "About"
 
-          %a.block(href="{% url 'v2.public.ureporters' %}")
-            -trans "Engagement"
+        %a.block(href="{% url 'v2.public.ureporters' %}")
+          -trans "Engagement"
+        
+        - if org|config:"has_jobs"
+          %a.block(href="{% url 'v2.public.jobs' %}")
+              - trans "Jobs"
+        
+        - for custom_page in additional_menu|slice:":3"
+          %a.block(href="{% url 'v2.public.custom_page' custom_page.link %}")
+            {{custom_page.title}}
 
-          .block
-            {% if org|config:"facebook_page_url" %}
+        .block
+          - if org|config:"facebook_page_url"
             %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
               %i.fa.fa-facebook
-            {% endif %}
-
-            {% if org|config:"twitter_handle" %}
+    
+          - if org|config:"twitter_handle"
             %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
               %i.fa.fa-twitter
-            {% endif %}
 
           %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}")
             -trans "Join Now"
@@ -276,6 +318,8 @@
   // Search
   %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_search.coffee")
   {% endcompress %}
+
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
   -block script
     :javascript
