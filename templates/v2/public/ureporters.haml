@@ -48,12 +48,19 @@
             .text-light1.text-sm.leading-none
               {{gender_stats.male_count|intcomma}}
 
-          .text-white.text-center.inline-block.pl-4
+          .text-white.text-center.inline-block.px-4
             %img(src="{{ STATIC_URL }}img/gender-female-w.png" width="40")
             .font-bold.text-xl.leading-none.mt-2
               {{gender_stats.female_percentage}}
             .text-light1.text-sm.leading-none
               {{gender_stats.female_count|intcomma}}
+          - if org|config:"has_extra_gender"
+            .text-white.text-center.inline-block.px-4.border-l.border-white
+              %img(src="{{ STATIC_URL }}img/gender-other-w.png" width="40")
+              .font-bold.text-xl.leading-none.mt-2
+                {{gender_stats.other_percentage}}
+              .text-light1.text-sm.leading-none
+                {{gender_stats.other_count|intcomma}}
 
         .flex-1.inline-block(style="min-width:220px;max-width:350px")
           .relative.w-full(style="height:105px")
