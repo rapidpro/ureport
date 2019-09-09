@@ -118,6 +118,7 @@
     .flex-1.bg-white.text-black.hover-parent
       .mx-home.py-home.hover-parent(class="md:border-t")
         .block.justify-between.flex.flex-wrap.hover-parent
+          {% if not question.is_open_ended %}
           .text-xs.flex-none.mb-4
             %a.pill-first.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all")>
               -trans "ALL"
@@ -127,6 +128,9 @@
               -trans "GENDER"
             // %a.pill-last.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="state")>
             //  -trans "STATE"
+          {% else %}
+          .block
+          {% endif %}
 
           .share.float-right.flex-none.mb-4.flex-center-y.hover-show
             .block

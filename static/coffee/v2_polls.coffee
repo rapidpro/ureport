@@ -20,10 +20,6 @@ showChart = (questionID, segmentName) ->
     query = "?segment=" + encodeURI(JSON.stringify({age: "Age"}))
 
   $.getJSON(url + query, (results) ->
-    if results[0].open_ended
-      console.log("cannot graph open ended question for " + questionID)
-      return
-
     total = 0
     for segment in results
       for category in segment.categories
@@ -38,6 +34,7 @@ showChart = (questionID, segmentName) ->
         data.push({
           name: category.label
           y: category.count
+          weight: category.count
           percent: if total > 0 then Math.round(category.count / total * 100) else 0
         })
       series.push({
@@ -47,8 +44,28 @@ showChart = (questionID, segmentName) ->
         data: data
       })
 
+    # open ended, use a cloud
+    if results[0].open_ended
+      $("#chart-" + questionID).highcharts({
+        series: [{
+          type: 'wordcloud',
+          data: data,
+          name: 'Occurrences'
+        }],
+        plotOptions: {
+          wordcloud: {
+            colors: orgColors
+          }
+        }
+        credits: { enabled: false }
+        legend: { enabled: false }
+        title: { text: null }
+        yAxis: { visible: false }
+        tooltip: { enabled: false }
+      })
+
     # no segments, bar chart
-    if segmentName == "all"
+    else if segmentName == "all"
       $("#chart-" + questionID).highcharts({
         chart: {
           type: "bar"

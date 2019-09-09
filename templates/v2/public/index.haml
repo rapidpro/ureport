@@ -21,7 +21,7 @@
           .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
         .mt-12.text-center
-          %button.btn.bg-light1.text-xl
+          %a.btn.bg-light1.text-xl(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
             -trans "VIEW FULL RESULTS"
 
   // ureporters graph

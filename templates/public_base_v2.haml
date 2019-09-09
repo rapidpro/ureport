@@ -222,6 +222,7 @@
 
     -block content
 
+    {% if main_stories %}
     // footer
     .bg-dark-blue.text-white.p-home(class="md:flex")
       - for story in main_stories|slice:"4"
@@ -236,13 +237,14 @@
 
             %a.inline-block.mt-4.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
               -trans "READ MORE"
+    {% endif %}
 
     // footer engage callout
-    .bg-dark-blue.text-white.px-home(class="md:flex")
+    .bg-dark-blue.text-white.p-home(class="md:flex")
       .div.bg-blue-u(class="md:w-1/3")
         .div
 
-      .div.text-right(class="md:w-2/3 md:pr-10 md:border-r md:border-gray-500 md:py-10")
+      .div.text-right(class="md:w-2/3 md:pr-10 md:border-r md:border-gray-500")
         .font-bold.text-3xl.leading-tight.mb-8
           -trans "See by the numbers how we are engaging youth voices for positive social change."
 
@@ -288,10 +290,14 @@
     // bottom yellow bar
     .bg-color3.h-2
 
+  // JQuery
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js")
 
   // Highcharts for charts
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.2.0/highcharts.js")
+
+  // WordCloud for HighCharts
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.2.0/modules/wordcloud.js")
 
   // Leaflet for maps
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js")
