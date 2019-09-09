@@ -89,22 +89,28 @@
           &nbsp;
 
     %div
-      .border-r-25rem.border-solid.border-dark1
-        .border-r-25rem.border-solid.border-light1.flex
-          .pl-10.flex.flex-col.justify-center(class="w-1/3")
-            .block
-              .font-bold.mb-4
-                FEATURED STORY
-              .font-bold.text-3xl.leading-tight.mb-4
-                Tanzania Scouts to Speak out Through U-Report
-              .block.mb-6
-                Intro sentence that will tease the post and draw your interest to keep reading more about it.
+      - for story in stories|slice:"1"
+        .border-r-25rem.border-solid.border-dark1
+          .border-r-25rem.border-solid.border-light1.flex
+            .pl-10.flex.flex-col.justify-center(class="w-1/3")
+              .block
+                .font-bold.mb-4
+                  -trans "FEATURED STORY"
+                .font-bold.text-3xl.leading-tight.mb-4
+                  {{ story.title }}
+                .block.mb-6
+                  {{ story.summary|linebreaksbr }}
 
-              %a.btn.bg-black.text-white
-                READ MORE
+                %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
+                  -trans "READ MORE"
 
-          .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
-            %img(src="{{ STATIC_URL }}img/missing_image_placeholder.jpg")
+            .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
+              - if story.get_image
+                {% thumbnail story.get_image "350x350" crop="top" as im %}
+                <img width="100%" height="100%" src="{{im.url}}" />
+                {% endthumbnail %}
+              - else
+                %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
 
     .flex
       .flex-1.h-10
@@ -118,17 +124,23 @@
 
   // featured-story-mobile
   %div(class="md:hidden")
-    %img(src="{{ STATIC_URL }}img/missing_image_placeholder.jpg")
-    .p-home
-      .font-bold.mb-4
-        FEATURED STORY
-      .font-bold.text-3xl.leading-tight.mb-4
-        Tanzania Scouts to Speak out Through U-Report
-      .block.mb-6
-        Intro sentence that will tease the post and draw your interest to keep reading more about it.
+    - for story in stories|slice:"1"
+      - if story.get_image
+        {% thumbnail story.get_image "350x350" crop="top" as im %}
+        <img width="100%" height="100%" src="{{im.url}}" />
+        {% endthumbnail %}
+      - else
+        %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+      .p-home
+        .font-bold.mb-4
+          -trans "FEATURED STORY"
+        .font-bold.text-3xl.leading-tight.mb-4
+          {{ story.title }}
+        .block.mb-6
+          {{ story.summary|linebreaksbr }}
 
-      %a.btn.bg-black.text-white
-        READ MORE
+        %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
+          -trans "READ MORE"
 
   // world-map
   %div.text-white.pr-10.bg-black.p-home(class="md:flex")
@@ -138,23 +150,24 @@
     .flex.flex-center-y(class="md:w-2/5")
       %div.pl-10
         .font-bold.mb-4.text-3xl.leading-tight
-          We are all a part of a global platform changing the lives of young people worldwide.
+          -trans "We are all a part of a global platform changing the lives of young people worldwide."
 
         .mb-6
-          We are all a part of a global platform changing the lives of young people worldwide.
-          We are all a part of a global platform changing the lives of young people worldwide.
+          - blocktrans
+            We are all a part of a global platform changing the lives of young people worldwide.
+            We are all a part of a global platform changing the lives of young people worldwide.
 
-        %a.btn.bg-light1.text-black(href="arst")
-          LEARN MORE
+        %a.btn.bg-light1.text-black(href="{% url 'v2.public.about' %}")
+          -trans "LEARN MORE"
 
   // photos
   %div.text-white(class="md:flex")
     .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
       %div
         .font-bold.text-3xl
-          Photos Title
+          -trans "Photos Title"
 
-        This area can be edited when the poll is over to focus additionally on review and learnings.
+        -trans "This area can be edited when the poll is over to focus additionally on review and learnings."
 
     .flex-1.p-home.text-black.flex.flex-col.justify-center
       %div
