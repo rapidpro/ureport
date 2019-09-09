@@ -5,7 +5,7 @@ $(->
     $("#" + results).show().addClass("shown")
   )
 
-  $(".search-box").focusout(->
+  $(".search-box").on('blur', ->
     $(this).val("")
     results = $(this).data("results-id")
     $("#" + results).hide().removeClass("shown")

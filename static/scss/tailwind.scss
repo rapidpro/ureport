@@ -54,13 +54,16 @@ html {
 
 // mobile menu
 #mobile-menu {
+  height: 0;
+  overflow: hidden;
   z-index: 1;
-  transition: 1s;
   transform: translate(100%);
+  transition: height 0s ease 1s, transform 1s;
 
   &.open {
+    height: 100%;
     transform: translate(0px);
-    transition: 1s;
+    transition: height 0s, transform 1s;
   }
 }
 

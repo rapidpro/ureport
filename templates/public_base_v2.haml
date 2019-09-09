@@ -149,33 +149,34 @@
               %i.fa.fa-bars
 
     // mobile menu
-    #mobile-menu.absolute.right-0.bg-black.text-white.py-home.pl-home.pr-16(class="md:hidden")
-      .border-b.pb-4
-        %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
-          -trans "Opinions"
+    #mobile-menu.absolute.right-0(class="md:hidden")
+      .bg-black.text-white.py-home.pl-home.pr-16
+        .border-b.pb-4
+          %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
+            -trans "Opinions"
 
-        %a.block.font-bold(href="{% url 'v2.public.stories' %}")
-          -trans "Stories"
+          %a.block.font-bold(href="{% url 'v2.public.stories' %}")
+            -trans "Stories"
 
-        %a.block.mt-4(href="{% url 'v2.public.about' %}")
-          -trans "About"
+          %a.block.mt-4(href="{% url 'v2.public.about' %}")
+            -trans "About"
 
-        %a.block(href="{% url 'v2.public.ureporters' %}")
-          -trans "Engagement"
+          %a.block(href="{% url 'v2.public.ureporters' %}")
+            -trans "Engagement"
 
-        .block
-          {% if org|config:"facebook_page_url" %}
-          %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
-            %i.fa.fa-facebook
-          {% endif %}
+          .block
+            {% if org|config:"facebook_page_url" %}
+            %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
+              %i.fa.fa-facebook
+            {% endif %}
 
-          {% if org|config:"twitter_handle" %}
-          %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
-            %i.fa.fa-twitter
-          {% endif %}
+            {% if org|config:"twitter_handle" %}
+            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
+              %i.fa.fa-twitter
+            {% endif %}
 
-        %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}")
-          -trans "Join Now"
+          %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}")
+            -trans "Join Now"
 
     -block content
 
