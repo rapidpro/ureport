@@ -12,7 +12,25 @@
         -trans "A sentence that describes how we feel about stories and the human side of things."
 
     .flex-1.flex-center-y
-      search
+      .block.text-right
+        .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded
+          .inline-block.bg-black.border-b.border-white
+            %input.bg-black.search-box(type="text" data-results-id="story-search-results" placeholder="SEARCH" size=14)
+            %i.fa.fa-caret-down
+
+      .block.relative.search-results(id="story-search-results")
+        .absolute.right-0.bg-white.border.text-right(class="max-h-screen" style="width:400px")
+          {% for category in categories %}
+          .block.py-4
+            .font-bold
+              .block.px-4
+                {{ category.name }}
+            .block
+              {% for story in category.stories.all %}
+              %a.block.px-4.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.story_read' story.pk %}" data-search-value="{{ story.title|addslashes }}")
+                {{ story.title }}
+              {% endfor %}
+          {% endfor %}
 
   // first and second stories
   .border-t

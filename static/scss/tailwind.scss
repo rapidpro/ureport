@@ -287,6 +287,33 @@ html {
   @apply py-2;
 }
 
+// search box input field
+.search-box {
+  &:focus {
+    outline: none;
+  }
+}
+.search-box::placeholder {
+  color: white;
+}
+
+.search-results {
+  opacity: 0;
+  position: absolute;
+
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+
+  &.shown {
+    opacity: 1;
+
+    -webkit-transition:opacity .5s ease-in-out;
+    -moz-transition:opacity .5s ease-in-out;
+    transition:opacity .5s ease-in-out;
+  }
+}
+
 // desktop styles
 @media only screen and (min-width: 768px) {
   .vertical-angle {
