@@ -1,3 +1,8 @@
+v1.1.4
+----------
+ * Fix contacts triggers to not consider contacts with is_active False
+ * Fix recalculate to ignore contact not active
+
 v1.1.3
 ----------
  * Revert leaflet library
