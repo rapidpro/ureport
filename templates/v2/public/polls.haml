@@ -41,21 +41,20 @@
               .text-sm.leading-none
                 {{gender_stats.male.count|default:"0"|intcomma}}
 
-            .text-center.inline-block.pl-4.border-l.border-black
+            .text-center.inline-block.px-4.border-l.border-black
               %img(src="{{ STATIC_URL }}img/gender-female.png" width="40")
               .font-bold.text-xl.leading-none.mt-2
                 {{gender_stats.female.percentage|default:"0"}}%
               .text-sm.leading-none
                 {{gender_stats.female.count|default:"0"|intcomma}}
 
-            {% if org|config:"has_extra_gender" %}
-            .text-center.inline-block.pl-4.border-l.border-black
-              %img(src="{{ STATIC_URL }}img/gender-other.png" width="40")
-              .font-bold.text-xl.leading-none.mt-2
-                {{gender_stats.other.percentage|default:"0"}}%
-              .text-sm.leading-none
-                {{gender_stats.other.count|default:"0"|intcomma}}
-            {% endif %}
+            - if org|config:"has_extra_gender"
+              .text-center.inline-block.px-4.border-l.border-black
+                %img(src="{{ STATIC_URL }}img/gender-other.png" width="40")
+                .font-bold.text-xl.leading-none.mt-2
+                  {{gender_stats.other.percentage|default:"0"}}%
+                .text-sm.leading-none
+                  {{gender_stats.other.count|default:"0"|intcomma}}
 
           .flex-1.inline-block(style="min-width:220px;max-width:350px")
             .relative.w-full(style="height:105px")

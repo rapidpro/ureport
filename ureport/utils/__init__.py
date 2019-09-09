@@ -450,7 +450,7 @@ def get_sign_up_rate_gender(org, time_filter):
         data = dict()
         for key in keys:
             data[key] = interval_dict[key]
-        output_data.append(dict(name=gender["gender"], data=data))
+        output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=data))
     return output_data
 
 
