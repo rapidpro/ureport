@@ -179,23 +179,18 @@
 
     // footer
     .bg-dark-blue.text-white.p-home(class="md:flex")
-      .flex-1.mt-4(class="md:mr-4")
-        .block
-          %img(src="{{STATIC_URL}}img/story_placeholder.png")
-        .font-bold.text-l.mt-4
-          Indonesia Scouts to Speak Out Through U-Report
+      - for story in main_stories|slice:"4"
+        - if not forloop.first
+          .flex-1.mt-4(class="md:mr-4")
+            .block
+              {% thumbnail story.get_image "450x240" crop="top" as im %}
+              <img width="100%" src="{{im.url}}" />
+              {% endthumbnail %}
+            .font-bold.text-l.mt-4
+              {{ story.title }}
 
-      .flex-1.mt-4(class="md:mx-4")
-        .block
-          %img(src="{{STATIC_URL}}img/story_placeholder.png")
-        .font-bold.text-l.mt-4
-          Indonesia Scouts to Speak Out Through U-Report
-
-      .flex-1.mt-4(class="md:ml-4")
-        .block
-          %img(src="{{STATIC_URL}}img/story_placeholder.png")
-        .font-bold.text-l.mt-4
-          Indonesia Scouts to Speak Out Through U-Report
+            %a.inline-block.mt-4.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
+              -trans "READ MORE"
 
     // footer engage callout
     .bg-dark-blue.text-white.px-home(class="md:flex")
@@ -204,10 +199,10 @@
 
       .div.text-right(class="md:w-2/3 md:pr-10 md:border-r md:border-gray-500 md:py-10")
         .font-bold.text-3xl.leading-tight.mb-8
-          See by the numbers how we are engaging youth voices for positive social change.
+          -trans "See by the numbers how we are engaging youth voices for positive social change."
 
-        %a.btn.bg-dark3.text-white.text-xl
-          EXPLORE ENGAGEMENT
+        %a.btn.bg-dark3.text-white.text-xl.inline-block.mb-8(href="{% url 'v2.public.ureporters' %}")
+          -trans "EXPLORE ENGAGEMENT"
 
     // footer navbar
     .justify-around.mt-5.mb-3.px-home(class="md:flex")
@@ -218,21 +213,21 @@
         .font-bold.text-2xl.ml-2.flex-center-y
           %div
             %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}")
-              Opinions
+              -trans "Opinions"
 
         .font-bold.text-2xl.ml-2.flex-center-y
           %div
             %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}")
-              Stories
+              -trans "Stories"
 
     // footer menu
     %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
       .li.flex-initial.mr-4.py-menu
         %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}")
-          About
+          -trans "About"
 
         %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4")
-          Engagement
+          -trans "Engagement"
 
       .li.flex-grow.flex(class="md:justify-end")
         {% if org|config:"facebook_page_url" %}
