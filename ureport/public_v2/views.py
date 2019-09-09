@@ -11,6 +11,7 @@ from dash.orgs.models import Org
 from dash.stories.models import Story
 from smartmin.views import SmartReadView, SmartTemplateView
 
+from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch
 from django.http import HttpResponse
@@ -55,7 +56,7 @@ class IndexView(SmartTemplateView):
 
         # global counters
         context["global_contact_count"] = get_global_count()
-        context["global_org_count"] = Org.objects.filter(is_active=True).count()
+        context["global_org_count"] = Org.objects.filter(is_active=True).count() + len(settings.PREVIOUS_ORG_SITES)
 
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = json.loads(org.get_age_stats())
