@@ -123,6 +123,83 @@ class ContactTest(UreportTest):
         self.assertEqual(field_count["ward:R-IKEJA"], 2)
         Contact.objects.all().delete()
 
+    def test_recalculate_reporters_stats(self):
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
+        Contact.objects.create(
+            uuid="C-007",
+            org=self.nigeria,
+            gender="M",
+            born=1990,
+            occupation="Student",
+            registered_on=json_date_to_datetime("2014-01-02T03:04:05.000"),
+            state="R-LAGOS",
+            district="R-OYO",
+        )
+
+        expected = dict()
+        expected["total-reporters"] = 1
+        expected["gender:m"] = 1
+        expected["occupation:student"] = 1
+        expected["born:1990"] = 1
+        expected["registered_on:2014-01-02"] = 1
+        expected["registered_gender:2014-01-01:m"] = 1
+        expected["registered_born:2014-01-01:1990"] = 1
+        expected["registered_state:2014-01-01:R-LAGOS"] = 1
+        expected["state:R-LAGOS"] = 1
+        expected["district:R-OYO"] = 1
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+        Contact.recalculate_reporters_stats(self.nigeria)
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+
+        Contact.objects.create(
+            uuid="C-008",
+            org=self.nigeria,
+            gender="M",
+            born=1980,
+            occupation="Teacher",
+            registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
+            state="R-LAGOS",
+            district="R-OYO",
+        )
+
+        expected = dict()
+        expected["total-reporters"] = 2
+        expected["gender:m"] = 2
+        expected["occupation:student"] = 1
+        expected["occupation:teacher"] = 1
+        expected["born:1990"] = 1
+        expected["born:1980"] = 1
+        expected["registered_on:2014-01-02"] = 2
+        expected["registered_gender:2014-01-01:m"] = 2
+        expected["registered_born:2014-01-01:1990"] = 1
+        expected["registered_born:2014-01-01:1980"] = 1
+        expected["registered_state:2014-01-01:R-LAGOS"] = 2
+        expected["state:R-LAGOS"] = 2
+        expected["district:R-OYO"] = 2
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+        Contact.recalculate_reporters_stats(self.nigeria)
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+
+        Contact.objects.create(
+            is_active=False,
+            uuid="C-009",
+            org=self.nigeria,
+            gender="M",
+            born=1980,
+            occupation="Teacher",
+            registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
+            state="R-LAGOS",
+            district="R-OYO",
+        )
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+        Contact.recalculate_reporters_stats(self.nigeria)
+
+        self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
+
     def test_reporters_counter(self):
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
         Contact.objects.create(
