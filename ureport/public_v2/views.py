@@ -414,4 +414,5 @@ class JobsView(SmartTemplateView):
         context["job_sources"] = JobSource.objects.filter(org=org, is_active=True).order_by(
             "-is_featured", "-created_on"
         )
+        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
