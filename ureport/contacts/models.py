@@ -158,7 +158,7 @@ class Contact(models.Model):
 
     def generate_counters(self):
         generated_counters = dict()
-        if not self.org_id:
+        if not self.org_id or not self.is_active:
             return generated_counters
 
         gender = ""
