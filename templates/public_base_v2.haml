@@ -28,8 +28,10 @@
     // AOS, animation library
     %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css")
 
-    // U-Report styles
+    // U-Report styles, compress so they cache bust
+    {% compress css %}
     %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
+    {% endcompress %}
 
     :css
       .bg-dark1 {
@@ -183,16 +185,17 @@
               %i.fa.fa-bars
 
     // mobile menu
-    #mobile-menu.absolute.right-0.bg-black.text-white.py-home.pl-home.pr-16(class="md:hidden")
-      .border-b.pb-4
-        %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
-          -trans "Opinions"
+    #mobile-menu.absolute.right-0(class="md:hidden")
+      .bg-black.text-white.py-home.pl-home.pr-16
+        .border-b.pb-4
+          %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
+            -trans "Opinions"
 
-        %a.block.font-bold(href="{% url 'v2.public.stories' %}")
-          -trans "Stories"
+          %a.block.font-bold(href="{% url 'v2.public.stories' %}")
+            -trans "Stories"
 
-        %a.block.mt-4(href="{% url 'v2.public.about' %}")
-          -trans "About"
+          %a.block.mt-4(href="{% url 'v2.public.about' %}")
+            -trans "About"
 
         %a.block(href="{% url 'v2.public.ureporters' %}")
           -trans "Engagement"
@@ -205,7 +208,6 @@
           %a.block(href="{% url 'v2.public.custom_page' custom_page.link %}")
             {{custom_page.title}}
 
-
         .block
           - if org|config:"facebook_page_url"
             %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
@@ -215,8 +217,8 @@
             %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
               %i.fa.fa-twitter
 
-        %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}")
-          -trans "Join Now"
+          %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}")
+            -trans "Join Now"
 
     -block content
 
@@ -301,8 +303,20 @@
   // Gradients making util
   %script(src="{{STATIC_URL}}js/gradientfactory.js")
 
-  // U-Report map related utilities
-  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/locations.coffee")
+  // Age charts
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_age.coffee")
+
+  // FB Shares
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_fb_share.coffee")
+
+  // Locations
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_locations.coffee")
+
+  // Polls
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_polls.coffee")
+
+  // Search
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_search.coffee")
   {% endcompress %}
 
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

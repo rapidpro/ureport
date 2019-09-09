@@ -10,9 +10,35 @@
       .text-xl.max-w-lg
         -trans "A sentence that describes what this page is all about and who it is for"
 
+    .flex-center-y
+      .block.text-right.mt-4
+        .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded
+          .inline-block.bg-black.border-b.border-white
+            %input.bg-black.search-box(type="text" data-results-id="poll-search-results" placeholder="SEARCH" size=14)
+            %a(href="#")
+              %i.fa.fa-caret-down
+
+      .block.relative.search-results(id="poll-search-results")
+        .absolute.right-0.bg-white.border.text-right(class="max-h-screen" style="width:400px")
+          {% for category in categories %}
+          .block.py-4
+            .font-bold
+              .block.px-4
+                {{ category.name }}
+            .block
+              {% for poll in category.polls.all %}
+              %a.block.px-4.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }}")
+                {{ poll.title }}
+              {% endfor %}
+          {% endfor %}
+
+
   .bg-white.border-t(class="md:flex")
     .flex-1.my-home.border-r
       .px-home
+        .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white
+          {{ latest_poll.category.name }}
+
         .text-5xl.font-bold.leading-tight
           {{ latest_poll.title }}
 
@@ -104,7 +130,7 @@
 
           .share.float-right.flex-none.mb-4.flex-center-y.hover-show
             .block
-              %a.bg-circle-xs.border.border-black(href="" data-question="{{question.id}}" data-question-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+              %a.bg-circle-xs.border.border-black.facebook-share(href="" data-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                 %i.fa.fa-facebook
               %a.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                 %i.fa.fa-twitter
@@ -118,15 +144,6 @@
           .w-full.h-full.absolute.poll-chart.block(id="chart-{{ question.id }}" data-question="{{ question.id }}" data-segment="all")
 
   {% endfor %}
-
-- block script
-  {{ block.super }}
-
-  {% compress js %}
-  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_age.coffee")
-  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_locations.coffee")
-  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_polls.coffee")
-  {% endcompress %}
 
 - block old-content
 

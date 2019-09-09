@@ -17,15 +17,16 @@
           {{ latest_poll.get_first_question.title }}
 
       .flex-1.p-home(class="md:border-t")
-        %button.btn.bg-light1
-          -trans "VIEW FULL RESULTS"
+        .relative.w-full(style="min-height:20rem;")
+          .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
-        %button.btn.bg-black.text-white
-          -trans "ANSWER THE POLL"
+        .mt-12.text-center
+          %button.btn.bg-light1.text-xl
+            -trans "VIEW FULL RESULTS"
 
   // ureporters graph
   .bg-black.text-light1.p-home.bg-white-u(class="md:flex")
-    .flex-1.flex-center-y
+    .flex-center-y(class="md:w-2/5")
       .font-bold.text-l
         -trans "U-REPORTERS IN"
         {{ org.name|upper }}
@@ -33,22 +34,27 @@
       .font-light.text-white.text-6xl
         {{ reporters|intcomma }}
 
-      .font-bold.text-l
+      .font-bold.text-l.min-w-sm
         %div
-          -trans "PARTNERING WITH"
-          %span.text-white {{global_counter|intcomma}}
-          -trans "U-REPORTERS"
+          .whitespace-no-wrap
+            -trans "PARTNERING WITH"
+            %span.text-white {{global_counter|intcomma}}
+            -trans "U-REPORTERS"
 
-        %div
-          -trans "IN"
-          %span.text-white ??
-          -trans "COUNTRIES WORLDWIDE"
+          .whitespace-no-wrap
+            -trans "IN"
+            %span.text-white ??
+            -trans "COUNTRIES WORLDWIDE"
 
-    .flex-1.ml-4
+    .ml-4(class="md:w-3/5")
       .flex
-        .block.w-12.font-bold.mt-1
+        .block.w-12.font-bold
           -trans "AGES"
-        #age-chart.flex-1.inline-block.h-64
+
+        .flex-1.inline-block(style="min-width:220px;max-width:750px")
+          .relative.w-full.h-64
+            {{ age_stats|json_script:"age_stats" }}
+            #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats" data-label-size="18")
 
   // join video and social
   %div(class="md:flex")
@@ -69,6 +75,7 @@
       .bg-white.p-home
         social stuff
 
+  {% if stories %}
   // featured-story-full
   %div.hidden.bg-squares(class="md:block")
     .flex
@@ -136,6 +143,10 @@
         %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
           -trans "READ MORE"
 
+  {% else %}
+  %div.bg-dark1.h-20
+  {% endif %}
+
   // world-map
   %div.text-white.pr-10.bg-black.p-home(class="md:flex")
     .flex.flex-center-y.my-4(class="md:w-3/5")
@@ -151,7 +162,7 @@
             We are all a part of a global platform changing the lives of young people worldwide.
             We are all a part of a global platform changing the lives of young people worldwide.
 
-        %a.btn.bg-light1.text-black(href="{% url 'v2.public.about' %}")
+        %a.btn.bg-light1.text-black.text-xl(href="{% url 'v2.public.about' %}")
           -trans "LEARN MORE"
 
   // photos
@@ -171,79 +182,3 @@
           photo-2
         .inline-block.w-40.h-40.bg-gray-500.m-2
           photo-3
-
-- block script
-  {{ block.super }}
-
-  :javascript
-    $("#age-chart").each(function(){
-       var data = {{ age_stats|safe }};
-
-       {% if is_rtl_org %}
-       data.reverse();
-       {% endif %}
-
-       var categories = [];
-
-       for (i=0; i<data.length; i++) {
-         categories.push(data[i].name)
-       }
-
-       $('#age-chart').highcharts({
-         chart: {
-           type: 'column',
-           backgroundColor: 'transparent'
-         },
-         credits: {
-           enabled: false
-         },
-         legend: {
-           enabled: false
-         },
-         title: {
-             text: null
-         },
-         xAxis: {
-           opposite: true,
-           categories: categories,
-           lineColor: 'transparent',
-           labels : {
-             rotation: 0,
-             style: {
-               fontSize: 16,
-               fontFamily: "Montserrat",
-               fontWeight: 700,
-               color: "#AAA"
-             },
-           },
-         },
-         yAxis: {
-           visible: false,
-         },
-         tooltip: {
-           enabled: false
-         },
-         plotOptions: {
-             series: {
-               borderWidth: 0
-             },
-             column: {
-                 color: "#FFD100",
-                 pointWidth: 40,
-
-                 dataLabels:  {
-                   enabled: true,
-                   style: {
-                     fontFamily: "Montserrat",
-                     fontWeight: 700,
-                     fontSize: "14px",
-                   },
-                   color: "#FFD100",
-                   verticalAlign:"bottom",
-                   format: '<b>{point.y:.0f}%</b>'
-                 }
-             }
-         },
-         series: [{name: 'Age', data: data}]
-       });
-     });
