@@ -47,14 +47,24 @@ showChart = (questionID, segmentName) ->
     # open ended, use a cloud
     if results[0].open_ended
       $("#chart-" + questionID).highcharts({
+        chart: {
+          marginTop: 0
+          marginBottom: 0
+          style: {
+            fontFamily: "Montserrat"
+          }
+        }
         series: [{
-          type: 'wordcloud',
-          data: data,
+          type: 'wordcloud'
+          data: data
           name: 'Occurrences'
-        }],
+        }]
         plotOptions: {
           wordcloud: {
             colors: orgColors
+            rotation: {
+              orientations: 1
+            }
           }
         }
         credits: { enabled: false }
