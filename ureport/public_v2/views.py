@@ -360,22 +360,22 @@ class UreportersView(SmartTemplateView):
         context["average_response_rate"] = PollStats.get_average_response_rate(org)
 
         context["data_time_filters"] = [
-            dict(time_filter_number=3, label="90 Days"),
-            dict(time_filter_number=6, label="6 Months"),
-            dict(time_filter_number=12, label="12 Months"),
+            dict(time_filter_number=3, label=str(_("90 Days"))),
+            dict(time_filter_number=6, label=str(_("6 Months"))),
+            dict(time_filter_number=12, label=str(_("12 Months"))),
         ]
 
         context["data_segments"] = [
-            dict(segment_type="all", label="All"),
-            dict(segment_type="age", label="Age"),
-            dict(segment_type="gender", label="Gender"),
-            dict(segment_type="location", label="Location"),
+            dict(segment_type="all", label=str(_("All"))),
+            dict(segment_type="age", label=str(_("Age"))),
+            dict(segment_type="gender", label=str(_("Gender"))),
+            dict(segment_type="location", label=str(_("Location"))),
         ]
         context["data_metrics"] = [
-            dict(slug="opinion-responses", title="Opinion Responses"),
-            dict(slug="sign-up-rate", title="Sign Up Rate"),
-            dict(slug="response-rate", title="Response Rate"),
-            dict(slug="active-users", title="Active Users"),
+            dict(slug="opinion-responses", title=str(_("Opinion Responses"))),
+            dict(slug="sign-up-rate", title=str(_("Sign Up Rate"))),
+            dict(slug="response-rate", title=str(_("Response Rate"))),
+            dict(slug="active-users", title=str(_("Active Users"))),
         ]
 
         context["opinion_responses"] = []
