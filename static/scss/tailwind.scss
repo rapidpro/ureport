@@ -82,6 +82,47 @@ html {
   @apply inline-block pl-4 pr-6 text-center border-t border-b py-2 border-l rounded-r-full border-r;
 }
 
+.pill-white {
+  @apply bg-white border-gray-800 text-black;
+
+  &:hover {
+    @apply bg-gray-200;
+  }
+
+  &.selected {
+    @apply bg-gray-800 text-white;
+  }
+}
+
+// allows an element to fade in when a parent element hovers, supports up to three levels below
+.hover-show {
+  opacity: 0;
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+}
+
+.hover-parent:hover > .hover-show {
+  opacity: 1;
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+}
+
+.hover-parent:hover > .hover-parent > .hover-show {
+  opacity: 1;
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+}
+
+.hover-parent:hover > .hover-parent > .hover-parent > .hover-show {
+  opacity: 1;
+  -webkit-transition:opacity .5s ease-in-out;
+  -moz-transition:opacity .5s ease-in-out;
+  transition:opacity .5s ease-in-out;
+}
+
 // leaflet styles
 .leaflet-container {
   background-color:rgba(255,0,0,0.0);
@@ -109,6 +150,20 @@ html {
   border-radius: 50%;
   text-align: center;
   font-size: 1.875rem;
+}
+
+// small circle around font awesome icon, used for sharing
+.bg-circle-xs {
+  display: inline-block;
+  width: 32px;
+  line-height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: .875rem;
+
+  &:hover {
+    @apply bg-gray-200;
+  }
 }
 
 // light grid background
