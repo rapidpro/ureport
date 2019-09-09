@@ -50,6 +50,8 @@ showChart = (questionID, segmentName) ->
         chart: {
           marginTop: 0
           marginBottom: 0
+          paddingTop: 0
+          paddingBottom: 0
           style: {
             fontFamily: "Montserrat"
           }
@@ -62,6 +64,7 @@ showChart = (questionID, segmentName) ->
         plotOptions: {
           wordcloud: {
             colors: orgColors
+            minFontSize: 6
             rotation: {
               orientations: 1
             }
