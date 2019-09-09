@@ -38,12 +38,12 @@
         %div
           .whitespace-no-wrap
             -trans "PARTNERING WITH"
-            %span.text-white {{global_counter|intcomma}}
+            %span.text-white {{global_contact_count|intcomma}}
             -trans "U-REPORTERS"
 
           .whitespace-no-wrap
             -trans "IN"
-            %span.text-white ??
+            %span.text-white {{global_org_count|intcomma}}
             -trans "COUNTRIES WORLDWIDE"
 
     .ml-4(class="md:w-3/5")

@@ -53,8 +53,9 @@ class IndexView(SmartTemplateView):
 
         context["most_active_regions"] = org.get_regions_stats()
 
-        # global counter
-        context["global_counter"] = get_global_count()
+        # global counters
+        context["global_contact_count"] = get_global_count()
+        context["global_org_count"] = Org.objects.filter(is_active=True).count()
 
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = json.loads(org.get_age_stats())
