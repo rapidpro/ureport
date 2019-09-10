@@ -3,6 +3,7 @@ from datetime import timedelta
 
 from dash.orgs.models import Org
 
+from django.core.cache import cache
 from django.db import models
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, Q, Sum
 from django.db.models.functions import ExtractYear
@@ -31,6 +32,17 @@ class AgeSegment(models.Model):
 
 
 class PollStats(models.Model):
+    DATA_TIME_FILTERS = {3: _("90 Days"), 6: _("6 Months"), 12: _("12 Months")}
+
+    DATA_SEGMENTS = {"all": _("All"), "gender": _("Gender"), "age": _("Age"), "location": _("Location")}
+
+    DATA_METRICS = {
+        "opinion-responses": _("Opinion Responses"),
+        "sign-up-rate": _("Sign Up Rate"),
+        "response-rate": _("Response Rate"),
+        "active-users": _("Active Users"),
+    }
+
     id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name="ID")
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_stats")
@@ -52,46 +64,62 @@ class PollStats(models.Model):
     @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):
 
+        key = f"org:{org.id}:metric:{metric}:segment:{segment_slug}:filter:{time_filter}"
+        output_data = cache.get(key, None)
+        if output_data:
+            return output_data["results"]
+
+        return PollStats.refresh_engagement_data(org, metric, segment_slug, time_filter)
+
+    @classmethod
+    def refresh_engagement_data(cls, org, metric, segment_slug, time_filter):
+
+        key = f"org:{org.id}:metric:{metric}:segment:{segment_slug}:filter:{time_filter}"
+
+        output_data = []
         if metric == "opinion-responses":
             if segment_slug == "all":
-                return PollStats.get_all_opinion_responses(org, time_filter)
+                output_data = PollStats.get_all_opinion_responses(org, time_filter)
             if segment_slug == "age":
-                return PollStats.get_age_opinion_responses(org, time_filter)
+                output_data = PollStats.get_age_opinion_responses(org, time_filter)
             if segment_slug == "gender":
-                return PollStats.get_gender_opinion_responses(org, time_filter)
+                output_data = PollStats.get_gender_opinion_responses(org, time_filter)
             if segment_slug == "location":
-                return PollStats.get_location_opinion_responses(org, time_filter)
+                output_data = PollStats.get_location_opinion_responses(org, time_filter)
 
         if metric == "sign-up-rate":
             if segment_slug == "all":
-                return org.get_sign_up_rate(time_filter)
+                output_data = org.get_sign_up_rate(time_filter)
             if segment_slug == "age":
-                return org.get_sign_up_rate_age(time_filter)
+                output_data = org.get_sign_up_rate_age(time_filter)
             if segment_slug == "gender":
-                return org.get_sign_up_rate_gender(time_filter)
+                output_data = org.get_sign_up_rate_gender(time_filter)
             if segment_slug == "location":
-                return org.get_sign_up_rate_location(time_filter)
+                output_data = org.get_sign_up_rate_location(time_filter)
 
         if metric == "response-rate":
             if segment_slug == "all":
-                return PollStats.get_all_response_rate_series(org, time_filter)
+                output_data = PollStats.get_all_response_rate_series(org, time_filter)
             if segment_slug == "age":
-                return PollStats.get_age_response_rate_series(org, time_filter)
+                output_data = PollStats.get_age_response_rate_series(org, time_filter)
             if segment_slug == "gender":
-                return PollStats.get_gender_response_rate_series(org, time_filter)
+                output_data = PollStats.get_gender_response_rate_series(org, time_filter)
             if segment_slug == "location":
-                return PollStats.get_location_response_rate_series(org, time_filter)
+                output_data = PollStats.get_location_response_rate_series(org, time_filter)
 
         if metric == "active-users":
             if segment_slug == "all":
-                return ContactActivity.get_activity(org, time_filter)
+                output_data = ContactActivity.get_activity(org, time_filter)
             if segment_slug == "age":
-                return ContactActivity.get_activity_age(org, time_filter)
+                output_data = ContactActivity.get_activity_age(org, time_filter)
             if segment_slug == "gender":
-                return ContactActivity.get_activity_gender(org, time_filter)
+                output_data = ContactActivity.get_activity_gender(org, time_filter)
             if segment_slug == "location":
-                return ContactActivity.get_contact_activity_location(org, time_filter)
-        return []
+                output_data = ContactActivity.get_contact_activity_location(org, time_filter)
+
+        if output_data:
+            cache.set(key, {"results": output_data}, None)
+        return output_data
 
     @classmethod
     def get_all_opinion_responses(cls, org, time_filter):
