@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 09:57+0000\n"
+"POT-Creation-Date: 2019-09-10 13:30+0000\n"
 "PO-Revision-Date: 2018-10-25 18:23+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/rapidpro/ureport/language/pt_BR/)\n"
@@ -1250,6 +1250,9 @@ msgstr "Registrado"
 
 msgid "Week of"
 msgstr "Semana de"
+
+msgid "Custom pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""

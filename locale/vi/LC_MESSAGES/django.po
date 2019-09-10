@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 09:57+0000\n"
+"POT-Creation-Date: 2019-09-10 13:30+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -1240,6 +1240,9 @@ msgstr "Đã đăng ký"
 
 msgid "Week of"
 msgstr "Tuần"
+
+msgid "Custom pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""

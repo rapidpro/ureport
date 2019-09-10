@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 09:57+0000\n"
+"POT-Creation-Date: 2019-09-10 13:30+0000\n"
 "PO-Revision-Date: 2017-04-07 14:40+0000\n"
 "Last-Translator: Vincent Turmine <vincent.turmine@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
@@ -1310,6 +1310,9 @@ msgstr "Enregistré"
 
 msgid "Week of"
 msgstr "Semaine du"
+
+msgid "Custom pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
