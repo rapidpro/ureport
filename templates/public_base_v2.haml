@@ -157,7 +157,7 @@
             %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
               %i.fa.fa-twitter
 
-          %a.flex-initial.btn.bg-black.text-white.ml-4.py-menu(href="{% url 'v2.public.join' %}")
+          %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}")
             -trans "Join Now"
 
       // header menu
@@ -242,7 +242,7 @@
             {{ story.title }}
 
           .text-center.mt-4
-            %button.btn.text-xl.bg-black.text-white
+            %button.btn.bg-black.text-white
               -trans "READ MORE"
     {% endif %}
 
@@ -255,7 +255,7 @@
         .font-bold.text-3xl.leading-tight.mb-8
           -trans "See by the numbers how we are engaging youth voices for positive social change."
 
-        %a.btn.bg-dark3.text-white.text-xl.inline-block.mb-8(href="{% url 'v2.public.ureporters' %}")
+        %a.btn.bg-dark3.text-white.inline-block(href="{% url 'v2.public.ureporters' %}")
           -trans "EXPLORE ENGAGEMENT"
 
     // footer navbar
