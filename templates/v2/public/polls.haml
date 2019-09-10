@@ -19,9 +19,9 @@
               %i.fa.fa-caret-down
 
       .relative
-        .absolute.right-0.bg-white.search-results.h-64.text-right.border.z-10(id="poll-search-results" width="400px")
+        .absolute.right-0.bg-white.search-results.h-64.text-right.border(id="poll-search-results" style="z-index:100000")
           {% for category in categories %}
-          .block.py-4
+          .block.py-4.bg-white(style="width:600px")
             .font-bold
               .block.px-4
                 {{ category.name }}
