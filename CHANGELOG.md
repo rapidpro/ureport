@@ -1,3 +1,45 @@
+v1.1.5
+----------
+ * Merge pull request #444 from rapidpro/admin-nav-public-site
+ * labels for age charts
+ * Extra utility classes for the admin menu links
+ * better segmented labeling
+ * fix top logo
+ * rebuild locales
+ * Add admin navbar on top on public site
+ * Merge branch 'master' of github.com:rapidpro/ureport into admin-nav-public-site
+ * Merge pull request #443 from rapidpro/locale-fix
+ * Makemessages and compile messages
+ * WIP admin navbar for public site
+ * Merge branch 'master' of github.com:rapidpro/ureport into locale-fix
+ * Makemessages and compile messages
+ * Merge pull request #442 from rapidpro/uikit
+ * Rebuild locale
+ * Merge pull request #428 from rapidpro/css-tweaks
+ * Merge pull request #441 from rapidpro/tailwind-design
+ * Fix SASS countries background
+ * Only allow search engines on the rigth domains
+ * Merge master
+ * Update CHANGELOG.md for v1.1.4
+ * Merge pull request #440 from rapidpro/fix-org-counts
+ * Fix contacts triggers to not consider contacts with is_active False
+ * Fix recalculate to ignore contact not active
+ * Update CHANGELOG.md for v1.1.3
+ * Merge pull request #436 from rapidpro/revert-maps-file
+ * Fix script name
+ * Revert leaflet library
+ * Revert maps change to keep supporting properly the old version
+ * Update CHANGELOG.md for v1.1.2
+ * Ignore node_mudules
+ * Merge pull request #434 from rapidpro/fix-design
+ * Fix endif tag place
+ * Update CHANGELOG.md for v1.1.1
+ * Merge pull request #433 from rapidpro/post-deploy-fixes
+ * More adjustements
+ * Remove placeholders and adjust logos
+ * Update CHANGELOG.md for v1.1.0
+ * Merge pull request #432 from rapidpro/uikit
+
 v1.1.4
 ----------
  * Fix contacts triggers to not consider contacts with is_active False
