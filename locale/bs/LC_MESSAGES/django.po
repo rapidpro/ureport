@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-06 15:44+0000\n"
+"POT-Creation-Date: 2019-09-10 09:57+0000\n"
 "PO-Revision-Date: 2018-09-14 11:15+0000\n"
 "Last-Translator: Nineta Popovic <npopovic@unicef.org>\n"
 "Language-Team: Bosnian (http://www.transifex.com/rapidpro/ureport/language/bs/)\n"
@@ -1232,6 +1232,43 @@ msgstr "Registrovani"
 msgid "Week of"
 msgstr "Sedmica"
 
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST OPINION"
+msgstr "LOKACIJE"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "REZULTATI ANKETE"
+
+msgid "PARTNERING WITH"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS"
+msgstr "U-REPORTERI U"
+
+msgid "IN"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "U-REPORTERI U"
+
+msgid "AGES"
+msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "PROČITAJ VIŠE"
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1256,31 +1293,78 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Rezultati"
 
-#, fuzzy
-#| msgid "POLL RESULTS"
-msgid "VIEW FULL RESULTS"
-msgstr "REZULTATI ANKETE"
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "U-REPORTERS WORLDWIDE:"
-msgstr "U-REPORTERI U"
-
-msgid "AGES"
+msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
-#, fuzzy
-#| msgid "READ MORE"
-msgid "LEARN MORE"
-msgstr "PROČITAJ VIŠE"
+msgid ""
+"\n"
+"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"\n"
+"          "
+msgstr ""
 
-msgid "SEARCH"
+msgid "Photos Title"
+msgstr ""
+
+msgid "This area can be edited when the poll is over to focus additionally on review and learnings."
+msgstr ""
+
+msgid "In just a few easy steps, start here to join other young people and have your voice heard!"
+msgstr ""
+
+msgid "How would you like to join?"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Text the word Join to 24453 - all U-Report SMSs are free!"
+msgstr ""
+
+msgid "Sign-Up"
+msgstr ""
+
+msgid "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
+msgstr ""
+
+msgid "Get Involved!"
+msgstr ""
+
+msgid "You will now receive messages asking your opinion on meaningful issues!"
+msgstr ""
+
+msgid "To exit U-Report just send stop to 24453"
+msgstr ""
+
+msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
 msgid "RESPONSES"
 msgstr "STOPA ODGOVORA"
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "TOTAL RESPONSES"
+msgstr "STOPA ODGOVORA"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"              %(responded)s responded out of %(polled)s polled\n"
+"            "
+msgstr ""
+"\n"
+"%(responded)sodgovorilo od %(polled)sispitanih"
+
+msgid "ALL"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1298,10 +1382,37 @@ msgstr ""
 msgid "Keywords"
 msgstr ""
 
+msgid "A sentence that describes how we feel about stories and the human side of things."
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+msgid "Year at a Glance"
+msgstr ""
+
+msgid "SIGN-UPS"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "AVG RESPONSE RATE"
+msgstr "STOPA ODGOVORA"
+
 #, fuzzy
 #| msgid "U-REPORTERS IN"
 msgid "TOTAL U-REPORTERS IN"
 msgstr "U-REPORTERI U"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERI U"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "FILTER RESULTS"
+msgstr "REZULTATI ANKETE"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1705,6 +1816,34 @@ msgstr "Zakazan ažuriranje za anketu #%d na org #%d"
 #, python-format
 msgid "%s"
 msgstr "1 %s"
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+#, fuzzy
+#| msgid "Population"
+msgid "Location"
+msgstr "Populacija"
+
+#, fuzzy
+#| msgid "Responses"
+msgid "Opinion Responses"
+msgstr "Odgovori"
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Active Users"
+msgstr ""
 
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "Ime kontakt grupe koji sadrži registrirane reportere"

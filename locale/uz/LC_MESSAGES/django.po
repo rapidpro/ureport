@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-06 15:44+0000\n"
+"POT-Creation-Date: 2019-09-10 09:57+0000\n"
 "PO-Revision-Date: 2018-08-22 11:40+0000\n"
 "Last-Translator: Jahongir Abdurahmonov <jabdurahmonov@unicef.org>\n"
 "Language-Team: Uzbek (http://www.transifex.com/rapidpro/ureport/language/uz/)\n"
@@ -1229,6 +1229,43 @@ msgstr "Ro'yxatdan o'tganlar"
 msgid "Week of"
 msgstr "Haftasi"
 
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST OPINION"
+msgstr "JOYLASHUV YERLARI"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "SO'ROVNOMA NATIJALARI"
+
+msgid "PARTNERING WITH"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS"
+msgstr "U-Reportyorlar"
+
+msgid "IN"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "U-Reportyorlar"
+
+msgid "AGES"
+msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "KO'PROQ O'QISH"
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1253,31 +1290,79 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Natijalar"
 
-#, fuzzy
-#| msgid "POLL RESULTS"
-msgid "VIEW FULL RESULTS"
-msgstr "SO'ROVNOMA NATIJALARI"
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "U-REPORTERS WORLDWIDE:"
-msgstr "U-Reportyorlar"
-
-msgid "AGES"
+msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
-#, fuzzy
-#| msgid "READ MORE"
-msgid "LEARN MORE"
-msgstr "KO'PROQ O'QISH"
+msgid ""
+"\n"
+"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"\n"
+"          "
+msgstr ""
 
-msgid "SEARCH"
+msgid "Photos Title"
+msgstr ""
+
+msgid "This area can be edited when the poll is over to focus additionally on review and learnings."
+msgstr ""
+
+msgid "In just a few easy steps, start here to join other young people and have your voice heard!"
+msgstr ""
+
+msgid "How would you like to join?"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Text the word Join to 24453 - all U-Report SMSs are free!"
+msgstr ""
+
+msgid "Sign-Up"
+msgstr ""
+
+msgid "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
+msgstr ""
+
+msgid "Get Involved!"
+msgstr ""
+
+msgid "You will now receive messages asking your opinion on meaningful issues!"
+msgstr ""
+
+msgid "To exit U-Report just send stop to 24453"
+msgstr ""
+
+msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
 msgid "RESPONSES"
 msgstr "JAVOB BERGANLAR ULUSHI"
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "TOTAL RESPONSES"
+msgstr "JAVOB BERGANLAR ULUSHI"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"              %(responded)s responded out of %(polled)s polled\n"
+"            "
+msgstr ""
+"\n"
+"%(responded)s berilgan savollardan %(polled)s ga javob berdilar\n"
+" "
+
+msgid "ALL"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1296,10 +1381,37 @@ msgstr ""
 msgid "Keywords"
 msgstr ""
 
+msgid "A sentence that describes how we feel about stories and the human side of things."
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+msgid "Year at a Glance"
+msgstr ""
+
+msgid "SIGN-UPS"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "AVG RESPONSE RATE"
+msgstr "JAVOB BERGANLAR ULUSHI"
+
 #, fuzzy
 #| msgid "U-REPORTERS IN"
 msgid "TOTAL U-REPORTERS IN"
 msgstr "U-Reportyorlar"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS BY REGION"
+msgstr "U-Reportyorlar"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "FILTER RESULTS"
+msgstr "SO'ROVNOMA NATIJALARI"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1706,6 +1818,34 @@ msgstr "#%d so'rovni yangilash #%d tashkilotda rejalashtirildi"
 #, python-format
 msgid "%s"
 msgstr "%s"
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+#, fuzzy
+#| msgid "Population"
+msgid "Location"
+msgstr "Aholi"
+
+#, fuzzy
+#| msgid "Responses"
+msgid "Opinion Responses"
+msgstr "Javoblar"
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Active Users"
+msgstr ""
 
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "O'zida ro'yxatdan o'tgan reportyorlarni mujassam etgan txbhe Kontakt Guruhi nomi"
