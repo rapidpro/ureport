@@ -163,7 +163,7 @@ html {
   transition:opacity .5s ease-in-out;
 }
 
-
+// no background on our charts
 .highcharts-background {
   fill: none;
 }
@@ -302,7 +302,9 @@ html {
 
 .search-results {
   opacity: 0;
-  position: absolute;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   -webkit-transition:opacity .5s ease-in-out;
   -moz-transition:opacity .5s ease-in-out;
@@ -352,6 +354,10 @@ html {
     @apply pl-12;
   }
 
+  .pt-home {
+    @apply pt-12;
+  }
+
   .pr-home {
     @apply pr-12;
   }
@@ -390,6 +396,10 @@ html {
 
   .pl-home {
     @apply pl-6;
+  }
+
+  .pt-home {
+    @apply pt-6;
   }
 
   .pr-home {

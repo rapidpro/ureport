@@ -16,11 +16,11 @@
         .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded
           .inline-block.bg-black.border-b.border-white
             %input.bg-black.search-box(type="text" data-results-id="story-search-results" placeholder="SEARCH" size=14)
-            %a(href="#")
+            %a.search-close(href="#")
               %i.fa.fa-caret-down
 
-      .block.relative.search-results(id="story-search-results")
-        .absolute.right-0.bg-white.border.text-right(class="max-h-screen" style="width:400px")
+      .relative
+        .absolute.right-0.bg-white.search-results.h-64.text-right.border.z-10(id="story-search-results" width="400px")
           {% for category in categories %}
           .block.py-4
             .font-bold
@@ -52,7 +52,7 @@
             - if not forloop.first
               .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
                 - if story.get_image
-                  {% thumbnail story.get_image "350x350" crop="top" as im %}
+                  {% thumbnail story.get_image "800x600" crop="center" as im %}
                   <img width="100%" height="100%" src="{{im.url}}" />
                   {% endthumbnail %}
                 - else
@@ -65,7 +65,7 @@
                 .font-bold.text-3xl.leading-tight.mb-4
                   {{ story.title }}
                 .block.mb-6
-                   {{ story.summary|linebreaksbr }}
+                  {{ story.summary|linebreaksbr }}
   
                 %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
                   -trans "READ MORE"
@@ -73,7 +73,7 @@
             - if forloop.first
               .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
                 - if story.get_image
-                  {% thumbnail story.get_image "350x350" crop="top" as im %}
+                  {% thumbnail story.get_image "800x600" crop="center" as im %}
                   <img width="100%" height="100%" src="{{im.url}}" />
                   {% endthumbnail %}
                 - else
@@ -91,7 +91,7 @@
       // first-story-mobile
       %div(class="md:hidden")
         - if story.get_image
-          {% thumbnail story.get_image "350x350" crop="top" as im %}
+          {% thumbnail story.get_image "800x600" crop="center" as im %}
           <img width="100%" height="100%" src="{{im.url}}" />
           {% endthumbnail %}
         - else

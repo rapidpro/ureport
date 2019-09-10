@@ -20,9 +20,6 @@
     // Font awesome icons
     %link(href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
 
-    // Highcharts for charts
-    %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.2.0/css/highcharts.csst")
-
     // Leaflet for maps
     %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css")
 
@@ -172,7 +169,7 @@
               -trans "Opinions"
 
         %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-          .(style="width:350px; height:65px;")
+          .(style="width:430px; height:80px;")
             {% thumbnail org.get_logo "1400x260" format="PNG" as im %}
             %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
             {% endthumbnail %}
@@ -187,7 +184,9 @@
       .flex.justify-between
         .p-home
           %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-            %img(src="{{STATIC_URL}}img/placeholder_country_logo.png")
+            {% thumbnail org.get_logo "x80" format="PNG" as im %}
+            %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+            {% endthumbnail %}
 
         .flex-center-y.p-home
           .block.text-3xl.mr-4
@@ -232,20 +231,20 @@
 
     -block content
 
-    {% if main_stories %}
-    // footer
-    .bg-dark-blue.text-white.p-home(class="md:flex")
-      - for story in main_stories|slice:"4"
-        - if not forloop.first
-          .flex-1.mt-4(class="md:mr-4")
-            .block
-              {% thumbnail story.get_image "450x240" crop="top" as im %}
-              <img width="100%" src="{{im.url}}" />
-              {% endthumbnail %}
-            .font-bold.text-l.mt-4
-              {{ story.title }}
+    {% if main_stories|slice:"1:" %}
+    // footer stories
+    .bg-dark-blue.text-white.px-home.pt-home(class="md:flex")
+      - for story in main_stories|slice:"1:4"
+        %a.block(class="md:mr-4 w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
+          .block
+            {% thumbnail story.get_image "400x250" crop="top" as im %}
+            %img(width="100%" src="{{im.url}}")
+            {% endthumbnail %}
+          .font-bold.text-l.mt-4
+            {{ story.title }}
 
-            %a.inline-block.mt-4.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
+          .text-center.mt-4
+            %button.btn.text-xl.bg-black.text-white
               -trans "READ MORE"
     {% endif %}
 
@@ -264,7 +263,9 @@
     // footer navbar
     .justify-around.mt-5.mb-3.px-home(class="md:flex")
       %a.flex-1.text-center.mb-2(href="{% url 'v2.public.index' %}")
-        %img(src="{{STATIC_URL}}img/placeholder_country_logo.png")
+        {% thumbnail org.get_logo "x80" format="PNG" as im %}
+        %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+        {% endthumbnail %}
 
       .flex-1.flex(class="md:justify-end")
         .font-bold.text-2xl.ml-2.flex-center-y
