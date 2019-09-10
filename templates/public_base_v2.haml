@@ -168,10 +168,9 @@
               -trans "Opinions"
 
         %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-          .(style="width:430px; height:80px;")
-            {% thumbnail org.get_logo "1400x260" format="PNG" as im %}
-            %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
-            {% endthumbnail %}
+          {% thumbnail org.get_logo "x80" format="PNG" as im %}
+          %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
+          {% endthumbnail %}
 
         .flex-1.text-center.font-bold.text-2xl.flex-center-y
           %div
