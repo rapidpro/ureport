@@ -57,7 +57,17 @@ $(->
         column: {
           color: barColor,
           pointPadding: 0
-          dataLabels: {enabled: false}
+          dataLabels: {
+            enabled: true
+            verticalAlign: "top"
+            style: {
+              fontSize: ".75rem"
+              textOutline: false
+              color: "black"
+            }
+            formatter: ->
+              this.y + "%"
+          }
         }
       }
       series: [{
