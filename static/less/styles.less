@@ -11,8 +11,6 @@
 @qsn-colors-list: #8750A1, #FED100, #3FB5E5;
 @font-colors-list: #FFF, #000, #FFF;
 
-
-
 body {
   font-family: @text-font;
   color: #000;
@@ -783,12 +781,8 @@ a {
     width: 100% !important;
   }
 
-  .recent-results {
-    background-color: #FFF;
-    color: #000;
-    border: #000 1px solid;
-    border-left: 25px solid yellow;
-    padding: 0.75rem;
+  .latest-opinion {
+    font-size: 2rem;
   }
 
   .poll-story-title-text {
@@ -851,13 +845,6 @@ a {
 
   }
 
-  .recent-results {
-    background-color: #FFF;
-    color: #000;
-    border-left:25px solid yellow;
-    padding: .75rem;
-  }
-
   .questions-count {
     font-size: 1.5rem;
     font-family: @subheadlines-font;
@@ -895,16 +882,6 @@ each(range(15), {
   color: #FFF;
   padding: 10rem 7.5rem;
 
-  .recent-results-label {
-    background-color: #FFF;
-    color: #000;
-    border-left: 25px solid yellow;
-    padding: 0.75rem;
-    display: inline;
-    padding-right: 2rem;
-
-  }
-
   .poll-title {
     font-size: 3rem;
     font-family: @headline-font;
@@ -917,10 +894,9 @@ each(range(15), {
     padding: 0 2rem;
     border-left: 1px solid #FFFFFF;
     margin: 3rem 0;
-
   }
-
 }
+
 .homepage-color-bg-main {
   z-index: -1;
   width: 45%;
@@ -1304,11 +1280,7 @@ each(range(15), {
   .view-full-results {
     background-color: @gold-yellow;
     color: #000;
-    font-family: @headline-font;
-    font-size: 1.25rem;
-    padding: 2rem;
   }
-
 }
 
 
@@ -1520,6 +1492,13 @@ each(range(15), {
     font-family: @headline-font;
     margin: 3rem 0;
   }
+}
+
+a.button {
+  border-radius: .25em;
+  font-family: @headline-font;
+  font-size: 1.1rem;
+  padding: .85em 1.6em .85em 1.6em;
 }
 
 .for-stories {

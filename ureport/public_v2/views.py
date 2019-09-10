@@ -11,6 +11,7 @@ from dash.orgs.models import Org
 from dash.stories.models import Story
 from smartmin.views import SmartReadView, SmartTemplateView
 
+from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch
 from django.http import HttpResponse
@@ -53,13 +54,21 @@ class IndexView(SmartTemplateView):
 
         context["most_active_regions"] = org.get_regions_stats()
 
-        # global counter
-        context["global_counter"] = get_global_count()
+        # global counters
+        context["global_contact_count"] = get_global_count()
+        context["global_org_count"] = Org.objects.filter(is_active=True).count() + len(settings.PREVIOUS_ORG_SITES)
 
         context["gender_stats"] = org.get_gender_stats()
-        context["age_stats"] = org.get_age_stats()
+        context["age_stats"] = json.loads(org.get_age_stats())
         context["reporters"] = org.get_reporters_count()
         context["feat_images"] = range(10)
+
+        # fake photos, generated from stories that are featured and have a photo
+        context["photos"] = (
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .exclude(images=None)
+            .order_by("-created_on")[4:]
+        )
 
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
 
@@ -305,11 +314,9 @@ class ReportersResultsView(SmartReadView):
 
     def render_to_response(self, context, **kwargs):
         output_data = []
-
         segment = self.request.GET.get("segment", None)
         if segment:
             segment = json.loads(segment)
-
             output_data = self.get_object().get_ureporters_locations_response_rates(segment)
 
         return HttpResponse(json.dumps(output_data))
@@ -354,7 +361,7 @@ class UreportersView(SmartTemplateView):
         )
 
         context["gender_stats"] = org.get_gender_stats()
-        context["age_stats"] = org.get_age_stats()
+        context["age_stats"] = json.loads(org.get_age_stats())
         context["registration_stats"] = org.get_registration_stats()
         context["occupation_stats"] = org.get_occupation_stats()
         context["reporters"] = org.get_reporters_count()
@@ -365,22 +372,22 @@ class UreportersView(SmartTemplateView):
         context["average_response_rate"] = PollStats.get_average_response_rate(org)
 
         context["data_time_filters"] = [
-            dict(time_filter_number=3, label="90 Days"),
-            dict(time_filter_number=6, label="6 Months"),
-            dict(time_filter_number=12, label="12 Months"),
+            dict(time_filter_number=3, label=str(_("90 Days"))),
+            dict(time_filter_number=6, label=str(_("6 Months"))),
+            dict(time_filter_number=12, label=str(_("12 Months"))),
         ]
 
         context["data_segments"] = [
-            dict(segment_type="all", label="All"),
-            dict(segment_type="age", label="Age"),
-            dict(segment_type="gender", label="Gender"),
-            dict(segment_type="location", label="Location"),
+            dict(segment_type="all", label=str(_("All"))),
+            dict(segment_type="age", label=str(_("Age"))),
+            dict(segment_type="gender", label=str(_("Gender"))),
+            dict(segment_type="location", label=str(_("Location"))),
         ]
         context["data_metrics"] = [
-            dict(slug="opinion-responses", title="Opinion Responses"),
-            dict(slug="sign-up-rate", title="Sign Up Rate"),
-            dict(slug="response-rate", title="Response Rate"),
-            dict(slug="active-users", title="Active Users"),
+            dict(slug="opinion-responses", title=str(_("Opinion Responses"))),
+            dict(slug="sign-up-rate", title=str(_("Sign Up Rate"))),
+            dict(slug="response-rate", title=str(_("Response Rate"))),
+            dict(slug="active-users", title=str(_("Active Users"))),
         ]
 
         context["opinion_responses"] = []

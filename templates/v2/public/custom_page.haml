@@ -3,15 +3,10 @@
 - load dashblocks thumbnail i18n
 
 -block content
-  .booklet-bg
-  .booklet-bg-content
-    .content-bg-1
-    .content-bg-2
-    .content-block-content 
-      .about-title-block
-        .about-title
-          {{ object.title }}
+  .border-t.bg-grid.p-home
+    .border.p-home.bg-white
+      .block.mt-4.font-bold.text-5xl
+        {{ object.title|safe }}
 
-
-        .about-text-block
-          {{object.content|safe}}
+      .block.mt-4
+        {{ object.content|safe }}
