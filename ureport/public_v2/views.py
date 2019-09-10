@@ -63,6 +63,9 @@ class IndexView(SmartTemplateView):
         context["reporters"] = org.get_reporters_count()
         context["feat_images"] = range(10)
 
+        # fake photos, generated from stories that are featured and have a photo
+        context["photos"] = Story.objects.filter(org=org, featured=True, is_active=True).exclude(images=None).order_by("-created_on")[4:]
+
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
 
         return context

@@ -3,15 +3,16 @@
 
 -block content
   .block(class="md:flex")
-    .block.bg-dark-blue.vertical-angle.py-12
-      .px-home.text-white.flex-center-y
-        .block
-          .text-light1.font-bold
-            STORY
-          .font-alt.font-bold.text-4xl.leading-tight.italic
-            {{ story.title }}
+    .block.bg-dark-blue.vertical-angle(class="md:w-1/2")
+      .py-12
+        .px-home.text-white.flex-center-y
+          .block
+            .text-light1.font-bold
+              STORY
+            .font-alt.font-bold.text-4xl.leading-tight.italic
+              {{ story.title }}
 
-    .block(class="-mt-8 md:mt-0 md:-ml-8")
+    .block(class="-mt-8 md:mt-0 md:-ml-8 md:w-1/2")
       {% thumbnail story.get_image "900" crop="top" as im %}
       %img(src="{{im.url}}" width="100%" style="object-fit:cover;")
       {% endthumbnail %}
