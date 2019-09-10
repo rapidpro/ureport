@@ -125,6 +125,117 @@
 
     // top black bar
     .block.bg-black.h-2
+    
+    // admin nav
+    - if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
+      .block.hidden(class="md:block")
+        %ul.flex.justify-between.bg-gray-800.text-white
+          %li.mr-6
+            %a.inline-block.px-6.py-4(href="{% url 'orgs.org_home' %}" class="hover:text-gray-800 hover:bg-gray-300")
+              {{ org.name }} - 
+                - trans "Admin"
+          - if request.user.is_superuser
+            %li.mr-6
+              %a.inline-block.px-6.py-4(href="#")
+                - trans "Configuration"
+              .hidden
+                %a.inline-block.px-6.py-4(href="{% url 'orgs.org_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Orgs"
+  
+                %a.inline-block.px-6.py-4(href="/users/user/" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Users"
+                
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblocktype_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Content Types"
+  
+                - if request.user.is_superuser or org_perms.assets.image_list
+                  %a.inline-block.px-6.py-4(href="{% url 'assets.image_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                    - trans "Images"
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Content"
+
+          -if org|config:"is_global"
+            -if request.user.is_superuser or perms.countries.countryalias_list
+              %li.mr-6
+                %a.inline-block.px-6.py-4(href="{% url 'countries.countryalias_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Country Aliases"
+
+          - if request.user.is_superuser or org_perms.polls.poll_list
+            %li.mr-6
+              %a.inline-block.px-6.py-4(href="{% url 'polls.poll_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                - trans "Polls"
+
+          - if perms.categories.category_list or org_perms.categories.category_list
+            %li.mr-6
+              %a.inline-block.px-6.py-4(href="{% url 'categories.category_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                - trans "Categories"
+
+          - if perms.categories.categoryimage_list or org_perms.categories.categoryimage_list
+            %li.mr-6                  
+              %a.inline-block.px-6.py-4(href="{% url 'categories.categoryimage_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                - trans "Category Images"
+
+          %li.mr-6
+            %a.inline-block.px-6.py-4(href="#")
+              - trans "Content"
+            .hidden
+              - if request.user.is_superuser or org_perms.news.newsitem_list
+                %a.inline-block.px-6.py-4(href="{% url 'news.newsitem_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "News Items"
+  
+              - if request.user.is_superuser or org_perms.stories.story_list
+                %a.inline-block.px-6.py-4(href="{% url 'stories.story_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Stories"
+              
+              - if request.user.is_superuser or org_perms.jobs.jobsource_list
+                %a.inline-block.px-6.py-4(href="{% url 'jobs.jobsource_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Job Sources"
+  
+              - if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}?slug=jobs" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Jobs Content"
+  
+              -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}?slug=about" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "About Content"
+  
+                %a.inline-block.px-6.py-4(href="{% url 'news.video_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Videos"
+  
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}?slug=contact_us" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Contact Us Content"
+  
+  
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}?slug=missions" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Missions Content"
+  
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}?slug=terms_conditions" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Terms & Conditions"
+  
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}?slug=ureporters" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "U-Reporters Content"
+  
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}?slug=join_engage" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Join &amp; Engage Content"
+  
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}?slug=join_steps" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Join Steps Content"
+  
+                %a.inline-block.px-6.py-4(href="{% url 'dashblocks.dashblock_list' %}?slug=additional_menu" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Additional Menu"
+
+          - block login
+            %li.mr-6
+              - if request.user and request.user.is_authenticated
+                %a.inline-block.px-6.py-4(href="{% url 'users.user_profile' request.user.pk %}"  class="hover:text-gray-800 hover:bg-gray-300")
+                  {{ request.user.username }}
+
+                %a.inline-block.px-6.py-4(href="{% url 'users.user_logout' %}?go=/" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Logout"
+              - else
+                %a.inline-block.px-6.py-4(href="{% url 'users.user_login' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  - trans "Login"
+
 
     // desktop header
     .block.hidden(class="md:block")
