@@ -21,9 +21,10 @@ html {
   overflow:hidden;
   opacity: 0;
 
-  background-image: url("{{STATIC_URL}}img/homemap_bg.png");
+  background-image: url("/sitestatic/img/dropdown-bkg.png");
   background-repeat: no-repeat;
   background-size: auto;
+  background-position: left;
 
   transition: .5s;
   transform: translateY(-100%);
