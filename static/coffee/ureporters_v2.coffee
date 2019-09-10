@@ -64,7 +64,8 @@ initMap = (id, geojson, ajaxUrl, districtZoom, colorsList=[], wardZoom, reporter
       upper = breaks[idx]
 
       if topBoundary
-        div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i> " + upper + "% " +  window.string_of + " " + window.string_the + " " + topBoundary.label + " " + window.string_total + "<br/>"
+        div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i><br/>" ## + upper + "<b>%</> <br/>" ##+  window.string_of + " " + window.string_the + " " + topBoundary.label + " " + window.string_total + "<br/>"
+        #div.innerHTML += "<i style=\"background:" + colors[idx] + "\"></i> " + upper + "% " +  window.string_of + " " + window.string_the + " " + topBoundary.label + " " + window.string_total + "<br/>"
       i++
 
     return div
@@ -85,6 +86,8 @@ initMap = (id, geojson, ajaxUrl, districtZoom, colorsList=[], wardZoom, reporter
     layer = e.target
     if not layer.feature.properties.level or layer.feature.properties.level == STATE_LEVEL and boundaries is states or layer.feature.properties.level in [DISTRICT_LEVEL, WARD_LEVEL] and boundaries isnt states
       layer.setStyle(HIGHLIGHT_STYLE)
+      html = "<div class='popup-region-name'>" + layer.feature.properties.name + "</div>"+"<div class='popup-responses-number'>"+layer.feature.properties.responses+"% RESPONSE RATE</div>"
+      L.popup().setLatLng(e.latlng).setContent(html).openOn(map)
 
       if (!L.Browser.ie && !L.Browser.opera)
         layer.bringToFront()
@@ -181,8 +184,10 @@ initMap = (id, geojson, ajaxUrl, districtZoom, colorsList=[], wardZoom, reporter
           if result
             feature.properties.scores = result.percentage
             feature.properties.color = calculateColor(result.percentage)
+            feature.properties.responses = result.set
           else
             feature.properties.scores = 0
+            feature.properties.responses = 0
             feature.properties.color = calculateColor(0)
 
           feature.properties.borderColor = 'white'
@@ -238,7 +243,7 @@ initMap = (id, geojson, ajaxUrl, districtZoom, colorsList=[], wardZoom, reporter
     html += "<div class='state-level primary-color'>" + window.string_State.toUpperCase() + "</div>"
     html += "<div class='district-level primary-color'>" + window.string_District.toUpperCase() + "</div>"
 
-    @_div.innerHTML = html
+    @_div.innerHTML = ''
 
 
   # this is our info box floating off in the upper right
@@ -286,7 +291,7 @@ initMap = (id, geojson, ajaxUrl, districtZoom, colorsList=[], wardZoom, reporter
 
       html += "</div>"
 
-    @_div.innerHTML = html
+    @_div.innerHTML = ''
 
 
   info.addTo(map)

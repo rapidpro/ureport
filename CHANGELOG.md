@@ -1,3 +1,28 @@
+v1.1.4
+----------
+ * Fix contacts triggers to not consider contacts with is_active False
+ * Fix recalculate to ignore contact not active
+
+v1.1.3
+----------
+ * Revert leaflet library
+ * Revert maps change to keep supporting properly the old version
+
+v1.1.2
+----------
+ * Ignore node_mudules
+ * Fix endif tag place
+
+v1.1.1
+----------
+ * Merge pull request #433 from rapidpro/post-deploy-fixes
+ * More adjustements
+ * Remove placeholders and adjust logos
+
+v1.1.0
+----------
+ * Merge pull request #432 from rapidpro/uikit
+
 v1.0.459
 ----------
  * Fix staging DATABASES config

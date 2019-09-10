@@ -24,7 +24,7 @@ from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
 from ureport.stats.models import PollStats
-from ureport.utils import get_global_count, get_ureporters_locations_stats
+from ureport.utils import get_global_count
 
 
 class IndexView(SmartTemplateView):
@@ -64,7 +64,11 @@ class IndexView(SmartTemplateView):
         context["feat_images"] = range(10)
 
         # fake photos, generated from stories that are featured and have a photo
-        context["photos"] = Story.objects.filter(org=org, featured=True, is_active=True).exclude(images=None).order_by("-created_on")[4:]
+        context["photos"] = (
+            Story.objects.filter(org=org, featured=True, is_active=True)
+            .exclude(images=None)
+            .order_by("-created_on")[4:]
+        )
 
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
 
