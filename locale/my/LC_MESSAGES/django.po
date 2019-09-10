@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 09:57+0000\n"
+"POT-Creation-Date: 2019-09-10 13:30+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -1193,6 +1193,9 @@ msgstr "စာရင္းသြင္းထားၿပီး"
 
 msgid "Week of"
 msgstr "အပတ္၏"
+
+msgid "Custom pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""

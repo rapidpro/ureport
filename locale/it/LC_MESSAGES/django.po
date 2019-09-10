@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 09:57+0000\n"
+"POT-Creation-Date: 2019-09-10 13:30+0000\n"
 "PO-Revision-Date: 2017-05-10 15:46+0000\n"
 "Last-Translator: Sarah Martelli <smartelli@unicef.org>\n"
 "Language-Team: Italian (http://www.transifex.com/rapidpro/ureport/language/it/)\n"
@@ -1248,6 +1248,9 @@ msgstr "Registrato"
 
 msgid "Week of"
 msgstr "Settimana del"
+
+msgid "Custom pages"
+msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""

@@ -136,6 +136,19 @@ html {
   }
 }
 
+
+.admin-menu {
+  @apply  inline-block px-6 py-4;
+
+  &:hover {
+    @apply text-gray-800 bg-gray-300;
+  }
+}
+
+.small-link-no-wrap {
+  @apply w-full text-sm whitespace-no-wrap;
+}
+
 // allows an element to fade in when a parent element hovers, supports up to three levels below
 .hover-show {
   opacity: 0;
