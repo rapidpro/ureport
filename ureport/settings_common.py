@@ -717,7 +717,7 @@ CELERYBEAT_SCHEDULE = {
     },
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(minute=[0, 5, 10, 20, 30, 40,44,50,54,55]),
+        "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
         "args": ("ureport.contacts.tasks.pull_contacts",),
     },
     "backfill-poll-results": {

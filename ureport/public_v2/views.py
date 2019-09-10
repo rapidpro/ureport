@@ -310,8 +310,11 @@ class ReportersResultsView(SmartReadView):
 
     def render_to_response(self, context, **kwargs):
         output_data = []
-        location = self.request.GET.get("location", "state")
-        output_data = get_ureporters_locations_stats(self.get_object(), dict(location=location))
+        segment = self.request.GET.get("segment", None)
+        if segment:
+            segment = json.loads(segment)
+            output_data = self.get_object().get_ureporters_locations_response_rates(segment)
+
         return HttpResponse(json.dumps(output_data))
 
 
