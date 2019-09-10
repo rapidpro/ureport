@@ -1,1 +1,363 @@
-- extends "frame_v2.html"
+<!DOCTYPE html>
+- load static compress dashblocks dashorgs thumbnail ureport smartmin i18n
+- load_qbs request.org 'additional_menu'
+%html(lang="en")
+
+  %head
+    %meta(charset="UTF-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    %title
+      -trans "U-Report"
+      {{ org.name }}
+    %meta(name="description" content="")
+    %meta(name="keywords" content="")
+    %meta(name="author" content="")
+
+    - if has_better_domain
+      %meta(name="robots" content="noindex")
+
+    // Google fonts we use
+    %link(href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:300,400,700|Montserrat:300,400,700&display=swap" rel="stylesheet")
+
+    // Font awesome icons
+    %link(href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
+
+    // Leaflet for maps
+    %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css")
+
+    // AOS, animation library
+    %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css")
+
+    // U-Report styles, compress so they cache bust
+    {% compress css %}
+    %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
+    {% endcompress %}
+
+    :css
+      .bg-dark1 {
+        background: #439932;
+      }
+
+      .border-dark1 {
+        border-color: #439932;
+      }
+
+      .bg-dark2 {
+        background: #1751af;
+      }
+
+      .border-dark2 {
+        border-color: #1751af;
+      }
+
+      .bg-dark3 {
+        background: #5eb3e0;
+      }
+
+      .border-dark3 {
+        border-color: #5eb3e0;
+      }
+
+      .border-light1 {
+        border-color: #FFD100;
+      }
+
+      .bg-light1 {
+        background: #FFD100;
+      }
+
+      .text-light1 {
+        color: #FFD100;
+      }
+
+      .border-light1 {
+        border-color: #1751af;
+      }
+
+
+    :javascript
+      orgColors = ["#439932", "#1751af", "#5eb3e0"];
+
+  %body.font-sans.relative
+    #fb-root
+    -if org|config:"facebook_page_id" and org|config:"facebook_app_id"
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '{{ org|config:"facebook_app_id" }}',
+            autoLogAppEvents: true,
+            xfbml      : true,
+            version    : 'v3.2'
+          });
+        };
+      </script>
+
+      <div class="fb-customerchat"
+        page_id="{{ org|config:"facebook_page_id" }}"
+        logged_in_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}"
+        logged_out_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}">
+      </div>
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&autoLogAppEvents=1&version=v3.2{% endif %}";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+    // countries (off screen to start)
+    #countries.bg-black.text-white
+      %a#countries-closer.float-right.p-4(href="javascript:void(0)")
+        %i.fa.fa-close.text-3xl
+
+      .flex.p-home
+        .flex-center-y(class="md:w-1/3")
+          .p-8
+            %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
+
+        .flex-center-y(class="md:w-2/3")
+          %div
+            - show_org_flags
+
+    // top black bar
+    .block.bg-black.h-2
+
+    // desktop header
+    .block.hidden(class="md:block")
+      // desktop header nav
+      %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
+        .li.flex-none.mr-4.py-menu
+          %a#countries-toggler(href="javascript:void(0)")
+            %i.fa.fa-chevron-circle-down
+            -trans "SELECT YOUR COUNTRY"
+
+        .li.flex-grow.flex(class="md:justify-end")
+          %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4")
+            -trans "Engagement"
+          %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.about' %}")
+            -trans "About"
+
+          - if org|config:"has_jobs"
+            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.jobs' %}")
+              - trans "Jobs"
+        
+          - for custom_page in additional_menu|slice:":3"
+            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.custom_page' custom_page.link %}")
+              {{custom_page.title}}
+
+          - if org|config:"facebook_page_url"
+            %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
+              %i.fa.fa-facebook
+
+          - if org|config:"twitter_handle"
+            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
+              %i.fa.fa-twitter
+
+          %a.flex-initial.btn.bg-black.text-white.ml-4.py-menu(href="{% url 'v2.public.join' %}")
+            -trans "Join Now"
+
+      // header menu
+      .justify-around.mt-5.mb-6.px-home.hidden(class="md:flex")
+        .flex-1.text-center.font-bold.text-2xl.flex-center-y
+          %div
+            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}")
+              -trans "Opinions"
+
+        %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
+          .(style="width:430px; height:80px;")
+            {% thumbnail org.get_logo "1400x260" format="PNG" as im %}
+            %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
+            {% endthumbnail %}
+
+        .flex-1.text-center.font-bold.text-2xl.flex-center-y
+          %div
+            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}")
+              -trans "Stories"
+
+    // mobile header
+    .block(class="md:hidden")
+      .flex.justify-between
+        .p-home
+          %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
+            {% thumbnail org.get_logo "x80" format="PNG" as im %}
+            %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+            {% endthumbnail %}
+
+        .flex-center-y.p-home
+          .block.text-3xl.mr-4
+            %a#mobile-menu-toggler(href="javascript:void(0)")
+              %i.fa.fa-bars
+
+    // mobile menu
+    #mobile-menu.absolute.right-0(class="md:hidden")
+      .bg-black.text-white.py-home.pl-home.pr-16
+        .border-b.pb-4
+          %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
+            -trans "Opinions"
+
+          %a.block.font-bold(href="{% url 'v2.public.stories' %}")
+            -trans "Stories"
+
+          %a.block.mt-4(href="{% url 'v2.public.about' %}")
+            -trans "About"
+
+        %a.block(href="{% url 'v2.public.ureporters' %}")
+          -trans "Engagement"
+        
+        - if org|config:"has_jobs"
+          %a.block(href="{% url 'v2.public.jobs' %}")
+            - trans "Jobs"
+        
+        - for custom_page in additional_menu|slice:":3"
+          %a.block(href="{% url 'v2.public.custom_page' custom_page.link %}")
+            {{custom_page.title}}
+
+        .block
+          - if org|config:"facebook_page_url"
+            %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
+              %i.fa.fa-facebook
+    
+          - if org|config:"twitter_handle"
+            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
+              %i.fa.fa-twitter
+
+          %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}")
+            -trans "Join Now"
+
+    -block content
+
+    {% if main_stories|slice:"1:" %}
+    // footer stories
+    .bg-dark-blue.text-white.px-home.pt-home(class="md:flex")
+      - for story in main_stories|slice:"1:4"
+        %a.block(class="md:mr-4 w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
+          .block
+            {% thumbnail story.get_image "400x250" crop="top" as im %}
+            %img(width="100%" src="{{im.url}}")
+            {% endthumbnail %}
+          .font-bold.text-l.mt-4
+            {{ story.title }}
+
+          .text-center.mt-4
+            %button.btn.text-xl.bg-black.text-white
+              -trans "READ MORE"
+    {% endif %}
+
+    // footer engage callout
+    .bg-dark-blue.text-white.p-home(class="md:flex")
+      .div.bg-blue-u(class="md:w-1/3")
+        .div
+
+      .div.text-right(class="md:w-2/3 md:pr-10 md:border-r md:border-gray-500")
+        .font-bold.text-3xl.leading-tight.mb-8
+          -trans "See by the numbers how we are engaging youth voices for positive social change."
+
+        %a.btn.bg-dark3.text-white.text-xl.inline-block.mb-8(href="{% url 'v2.public.ureporters' %}")
+          -trans "EXPLORE ENGAGEMENT"
+
+    // footer navbar
+    .justify-around.mt-5.mb-3.px-home(class="md:flex")
+      %a.flex-1.text-center.mb-2(href="{% url 'v2.public.index' %}")
+        {% thumbnail org.get_logo "x80" format="PNG" as im %}
+        %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+        {% endthumbnail %}
+
+      .flex-1.flex(class="md:justify-end")
+        .font-bold.text-2xl.ml-2.flex-center-y
+          %div
+            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}")
+              -trans "Opinions"
+
+        .font-bold.text-2xl.ml-2.flex-center-y
+          %div
+            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}")
+              -trans "Stories"
+
+    // footer menu
+    %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
+      .li.flex-initial.mr-4.py-menu
+        %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}")
+          -trans "About"
+
+        %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4")
+          -trans "Engagement"
+
+      .li.flex-grow.flex(class="md:justify-end")
+        {% if org|config:"facebook_page_url" %}
+        %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
+          %i.fa.fa-facebook
+        {% endif %}
+
+        {% if org|config:"twitter_handle" %}
+        %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
+          %i.fa.fa-twitter
+        {% endif %}
+
+    // bottom yellow bar
+    .bg-color3.h-2
+
+  // JQuery
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+
+  // Highcharts for charts
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.2.0/highcharts.js")
+
+  // WordCloud for HighCharts
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.2.0/modules/wordcloud.js")
+
+  // Leaflet for maps
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js")
+
+  // AOS for fade in animations on scroll
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js")
+
+  {% compress js %}
+  // Gradients making util
+  %script(src="{{STATIC_URL}}js/gradientfactory.js")
+
+  // Age charts
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_age.coffee")
+
+  // FB Shares
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_fb_share.coffee")
+
+  // Locations
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_locations.coffee")
+
+  // Polls
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_polls.coffee")
+
+  // Search
+  %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_search.coffee")
+  {% endcompress %}
+
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  -block script
+    :javascript
+      // global primary color
+      var primaryColor = '{{ org|config:"primary_color"}}';
+
+      // country menu toggling
+      $("#countries-toggler").click(function(){
+        $("#countries").toggleClass("open");
+      });
+      $("#countries-closer").click(function(){
+        $("#countries").removeClass("open");
+      });
+
+      // mobile menu toggling
+      $("#mobile-menu-toggler").click(function(){
+        $("#mobile-menu").toggleClass("open");
+      });
+
+      // initialize our animations
+      AOS.init({
+        "duration": 1200,
+        "disable": 'mobile',
+        "offset": 0
+      })

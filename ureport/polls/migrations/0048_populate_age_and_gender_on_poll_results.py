@@ -17,6 +17,9 @@ class Migration(migrations.Migration):
         PollResult = apps.get_model("polls", "PollResult")
 
         all_contacts = Contact.objects.all().values_list("id", flat=True)
+        if len(all_contacts) == 0:
+            return
+
         start = time.time()
         i = 0
 

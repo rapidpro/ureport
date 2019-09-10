@@ -1,3 +1,6 @@
+smartmin
+node_modules/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -21,6 +24,7 @@ dist/
 eggs/
 lib/
 lib64/
+node_modules/
 parts/
 sdist/
 var/

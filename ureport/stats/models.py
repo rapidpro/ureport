@@ -14,6 +14,9 @@ from ureport.polls.models import PollQuestion, PollResponseCategory
 
 
 class GenderSegment(models.Model):
+
+    GENDERS = {"M": _("Male"), "F": _("Female"), "O": _("Other")}
+
     gender = models.CharField(max_length=1)
 
 
@@ -116,7 +119,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
             series = PollStats.get_counts_data(responses, time_filter)
-            output_data.append(dict(name=gender["gender"], data=series))
+            output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=series))
         return output_data
 
     @classmethod
@@ -267,7 +270,7 @@ class PollStats(models.Model):
                 .annotate(Sum("count"))
             )
             gender_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
-            output_data.append(dict(name=gender["gender"], data=gender_rate_series))
+            output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=gender_rate_series))
 
         return output_data
 
@@ -467,7 +470,7 @@ class ContactActivity(models.Model):
                 .annotate(Count("id"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
-            output_data.append(dict(name=gender["gender"], data=series))
+            output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=series))
 
         return output_data
 
