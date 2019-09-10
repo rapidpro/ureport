@@ -405,7 +405,10 @@
     // footer menu
     %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
       .li.flex-initial.mr-4.py-menu
-        %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}")
+        %a.flex-initial.py-menu(href="{% url 'users.user_login' %}")
+          - trans "Login"
+
+        %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}" class="md:ml-4")
           -trans "About"
 
         %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4")
