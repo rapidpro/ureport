@@ -100,15 +100,15 @@
               .text-black.text-2xs.flex.mb-6
                 - for segment in data_segments
                   - if forloop.first
-                    .pill-first.pill-dark-blue-inverted.selected.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                    .pill-first.pill-dark-blue-inverted.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
                   - elif forloop.last
-                    .pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
+                    .pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
                       .dropdown-button
                         {{segment.label}}
                       .dropdonw-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2
                         - for state in states
-                          .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white")
+                          .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white {% if forloop.counter < 4 %}is-selected bg-gray-800 text-white{% endif %}")
                             {{state.name}}
                   - else
                     .pill.pill-dark-blue-inverted.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
@@ -117,7 +117,7 @@
             .block(class="md:w-3/5")
               .engagement-graph-tabs(id="graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
                 - for segment in data_segments
-                  .engagement-graph(id="graph-tabs-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
+                  .engagement-graph.hidden(id="graph-tabs-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
                     .has-graph(id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
 
 
@@ -150,6 +150,91 @@
         } else {
           $(this).children(".dropdonw-content").addClass("hidden");
         }
+        
+        locationIds = $(this).children().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+
+        var dataDiv = $(this);
+        console.log(dataDiv);
+
+        var metricSlug = dataDiv.attr("data-metric-slug");
+        var segmentType = dataDiv.attr("data-segment-type");
+        var timeFilter = dataDiv.attr("data-time-filter");
+
+        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
+        var results = Window.UreportEngagementStats[dataSlug];
+
+        var colors = ["#E3002B", "#009316", "#FED100", "#3FB5E5", "#FF8200", "#000000"];
+
+        var locationsResults = [];
+        for (i=0; i<results.length; i++){
+          result = results[i];
+          if(locationIds.includes(result.name)) {
+            result.color = colors[locationsResults.length % colors.length]
+            locationsResults.push(result);
+          }
+        }
+
+        var chartType = "column";
+
+        $('#engagement-graph-' + dataSlug).highcharts({
+          chart: {
+              type: chartType,
+              style: {
+                fontFamily: "Montserrat"
+              }
+          },
+          title: {
+              text: null
+          },
+          legend: {
+              itemStyle: {
+                color: "#DDD"
+              }
+          },
+          xAxis: {
+              type: 'datetime',
+              dateTimeLabelFormats: {
+                month: '%b %Y',
+                year: '%Y'
+              },
+              labels: {
+                style: {
+                  color: "#DDD"
+                }
+              },
+          },
+          yAxis: {
+              title: {
+                  text: null
+              },
+              min: 0,
+              labels: {
+                style: {
+                  color: "#DDD"
+                }
+              }
+          },
+          tooltip: {
+              headerFormat: '<b>{series.name}</b><br>',
+              pointFormat: '{point.x: %b %Y}: {point.y}'
+          },
+
+          plotOptions: {
+              spline: {
+                  marker: {
+                      enabled: true
+                  }
+              }
+          },
+
+          credits: {
+            enabled: false
+          },
+
+          colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+          series : locationsResults
+          });
+
       })
     })
 
@@ -253,6 +338,14 @@
     });
 
     $(function(){
+
+      $(".pill-dark-blue-inverted").parent().each(function() {
+        var chosen = $($(this).children()[Math.floor(Math.random() * 3)])
+        chosen.addClass("selected");
+        setTimeout(function(){ chosen.click(); chosen.click(); }, 1000);
+        
+      });
+
       $(".engagement-graph").each(function() {
         //console.log($(this));
         var graphDiv = $(this).children(".has-graph");
@@ -297,7 +390,20 @@
           }
 
           if(segmentType == "location") {
-            return
+            console.log($(this).parent());
+            locationIds = $("#location-pill-" + dataSlug).children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+            var results = Window.UreportEngagementStats[dataSlug];
+
+            var colors = ["#E3002B", "#009316", "#FED100", "#3FB5E5", "#FF8200", "#000000"];
+
+            var series = [];
+            for (i=0; i<results.length; i++){
+              result = results[i];
+              if(locationIds.includes(result.name)) {
+                result.color = colors[series.length % colors.length]
+                series.push(result);
+              }
+            }
           }
 
           $('#engagement-graph-' + dataSlug).highcharts({
