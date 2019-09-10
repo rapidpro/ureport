@@ -19,17 +19,25 @@
               %i.fa.fa-caret-down
 
       .relative
-        .absolute.right-0.bg-white.search-results.h-64.text-right.border(id="poll-search-results" style="z-index:100000")
+        .absolute.right-0.bg-white.search-results.h-64.border(id="poll-search-results" style="z-index:100000")
+          .no-results.p-4.italic.hidden
+            -trans "No results found"
+
           {% for category in categories %}
-          .block.py-4.bg-white(style="width:600px")
-            .font-bold
-              .block.px-4
+          {% if category.polls.all %}
+          .block.py-4.bg-white.search-category
+            %a.font-bold.px-4.block(href="#")
+              %i.fa.fa-caret-right.closed.float-left(style="padding-top:2px")
+              %i.fa.fa-caret-down.hidden.open.float-left(style="padding-top:4px")
+              .pl-3
                 {{ category.name }}
-            .block
+            .category-results
               {% for poll in category.polls.all %}
               %a.block.px-4.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }}")
-                {{ poll.title }}
+                .ml-4
+                  {{ poll.title }}
               {% endfor %}
+          {% endif %}
           {% endfor %}
 
 

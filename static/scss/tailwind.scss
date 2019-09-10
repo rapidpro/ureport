@@ -325,6 +325,51 @@ html {
   -moz-transition:opacity .5s ease-in-out;
   transition:opacity .5s ease-in-out;
 
+  .no-results {
+    @media only screen and (min-width: 768px) {
+      width: 700px;
+    }
+  }
+
+  .search-category {
+    @media only screen and (min-width: 768px) {
+      width: 700px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      width: 600px;
+    }
+
+    .category-results {
+      display: none;
+    }
+
+    &.open {
+      a i {
+        height: 1rem;
+
+        &.closed {
+          display: none;
+        }
+        &.open {
+          display: inline;
+        }
+      }
+
+      .category-results {
+        display: block;
+
+        .searchable {
+          display: block;
+
+          &.hide {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
   &.shown {
     opacity: 1;
 
