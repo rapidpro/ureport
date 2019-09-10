@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-06 15:44+0000\n"
+"POT-Creation-Date: 2019-09-10 09:57+0000\n"
 "PO-Revision-Date: 2017-02-22 13:15+0000\n"
 "Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
@@ -1286,6 +1286,43 @@ msgstr "مسجل"
 msgid "Week of"
 msgstr "أسبوع من"
 
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr ""
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST OPINION"
+msgstr "مواقع "
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "نتائج الإستطلاع "
+
+msgid "PARTNERING WITH"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS"
+msgstr "المشاركين في يو-ريبورت في"
+
+msgid "IN"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "المشاركين في يو-ريبورت في"
+
+msgid "AGES"
+msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "إقرأ المزيد "
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1310,31 +1347,78 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "النتائج"
 
-#, fuzzy
-#| msgid "POLL RESULTS"
-msgid "VIEW FULL RESULTS"
-msgstr "نتائج الإستطلاع "
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "U-REPORTERS WORLDWIDE:"
-msgstr "المشاركين في يو-ريبورت في"
-
-msgid "AGES"
+msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
-#, fuzzy
-#| msgid "READ MORE"
-msgid "LEARN MORE"
-msgstr "إقرأ المزيد "
+msgid ""
+"\n"
+"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"\n"
+"          "
+msgstr ""
 
-msgid "SEARCH"
+msgid "Photos Title"
+msgstr ""
+
+msgid "This area can be edited when the poll is over to focus additionally on review and learnings."
+msgstr ""
+
+msgid "In just a few easy steps, start here to join other young people and have your voice heard!"
+msgstr ""
+
+msgid "How would you like to join?"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Text the word Join to 24453 - all U-Report SMSs are free!"
+msgstr ""
+
+msgid "Sign-Up"
+msgstr ""
+
+msgid "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
+msgstr ""
+
+msgid "Get Involved!"
+msgstr ""
+
+msgid "You will now receive messages asking your opinion on meaningful issues!"
+msgstr ""
+
+msgid "To exit U-Report just send stop to 24453"
+msgstr ""
+
+msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
 msgid "RESPONSES"
 msgstr "نسبة التجاوب "
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "TOTAL RESPONSES"
+msgstr "نسبة التجاوب "
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid ""
+"\n"
+"              %(responded)s responded out of %(polled)s polled\n"
+"            "
+msgstr ""
+"\n"
+"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع..."
+
+msgid "ALL"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1352,10 +1436,37 @@ msgstr ""
 msgid "Keywords"
 msgstr ""
 
+msgid "A sentence that describes how we feel about stories and the human side of things."
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+msgid "Year at a Glance"
+msgstr ""
+
+msgid "SIGN-UPS"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "AVG RESPONSE RATE"
+msgstr "نسبة التجاوب "
+
 #, fuzzy
 #| msgid "U-REPORTERS IN"
 msgid "TOTAL U-REPORTERS IN"
 msgstr "المشاركين في يو-ريبورت في"
+
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS BY REGION"
+msgstr "المشاركين في يو-ريبورت في"
+
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "FILTER RESULTS"
+msgstr "نتائج الإستطلاع "
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1791,6 +1902,34 @@ msgstr "من المقرر تحديث سحب للاستطلاع  #%d على من�
 #, python-format
 msgid "%s"
 msgstr "%s"
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+#, fuzzy
+#| msgid "Population"
+msgid "Location"
+msgstr "السكان"
+
+#, fuzzy
+#| msgid "Responses"
+msgid "Opinion Responses"
+msgstr "الاستجابات"
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Active Users"
+msgstr ""
 
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "اسم Txbhe الذي يحتوي على تفاصيل المسجلين في يوريبورت U-Report "

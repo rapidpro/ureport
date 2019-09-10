@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-06 15:44+0000\n"
+"POT-Creation-Date: 2019-09-10 09:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1159,6 +1159,33 @@ msgstr ""
 msgid "Week of"
 msgstr ""
 
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr ""
+
+msgid "LATEST OPINION"
+msgstr ""
+
+msgid "VIEW FULL RESULTS"
+msgstr ""
+
+msgid "PARTNERING WITH"
+msgstr ""
+
+msgid "U-REPORTERS"
+msgstr ""
+
+msgid "IN"
+msgstr ""
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr ""
+
+msgid "AGES"
+msgstr ""
+
+msgid "LEARN MORE"
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1177,22 +1204,67 @@ msgstr ""
 msgid "Refresh Results"
 msgstr ""
 
-msgid "VIEW FULL RESULTS"
+msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
-msgid "U-REPORTERS WORLDWIDE:"
+msgid ""
+"\n"
+"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"\n"
+"          "
 msgstr ""
 
-msgid "AGES"
+msgid "Photos Title"
 msgstr ""
 
-msgid "LEARN MORE"
+msgid "This area can be edited when the poll is over to focus additionally on review and learnings."
 msgstr ""
 
-msgid "SEARCH"
+msgid "In just a few easy steps, start here to join other young people and have your voice heard!"
+msgstr ""
+
+msgid "How would you like to join?"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Text the word Join to 24453 - all U-Report SMSs are free!"
+msgstr ""
+
+msgid "Sign-Up"
+msgstr ""
+
+msgid "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
+msgstr ""
+
+msgid "Get Involved!"
+msgstr ""
+
+msgid "You will now receive messages asking your opinion on meaningful issues!"
+msgstr ""
+
+msgid "To exit U-Report just send stop to 24453"
+msgstr ""
+
+msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
 msgid "RESPONSES"
+msgstr ""
+
+msgid "TOTAL RESPONSES"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"              %(responded)s responded out of %(polled)s polled\n"
+"            "
+msgstr ""
+
+msgid "ALL"
 msgstr ""
 
 #, python-format
@@ -1205,7 +1277,28 @@ msgstr ""
 msgid "Keywords"
 msgstr ""
 
+msgid "A sentence that describes how we feel about stories and the human side of things."
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+msgid "Year at a Glance"
+msgstr ""
+
+msgid "SIGN-UPS"
+msgstr ""
+
+msgid "AVG RESPONSE RATE"
+msgstr ""
+
 msgid "TOTAL U-REPORTERS IN"
+msgstr ""
+
+msgid "U-REPORTERS BY REGION"
+msgstr ""
+
+msgid "FILTER RESULTS"
 msgstr ""
 
 #, python-format
@@ -1571,6 +1664,30 @@ msgstr ""
 
 #, python-format
 msgid "%s"
+msgstr ""
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Opinion Responses"
+msgstr ""
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Active Users"
 msgstr ""
 
 msgid "The name of txbhe Contact Group that contains registered reporters"
