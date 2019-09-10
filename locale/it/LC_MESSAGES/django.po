@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 13:30+0000\n"
+"POT-Creation-Date: 2019-09-10 18:59+0000\n"
 "PO-Revision-Date: 2017-05-10 15:46+0000\n"
 "Last-Translator: Sarah Martelli <smartelli@unicef.org>\n"
 "Language-Team: Italian (http://www.transifex.com/rapidpro/ureport/language/it/)\n"
@@ -1851,34 +1851,6 @@ msgstr "Programmato un aggiornamento per il sondaggio #%d su org #%d"
 msgid "%s"
 msgstr "%s"
 
-msgid "90 Days"
-msgstr ""
-
-msgid "6 Months"
-msgstr ""
-
-msgid "12 Months"
-msgstr ""
-
-msgid "Age"
-msgstr ""
-
-#, fuzzy
-#| msgid "Population"
-msgid "Location"
-msgstr "Popolazione"
-
-#, fuzzy
-#| msgid "Responses"
-msgid "Opinion Responses"
-msgstr "Risposte"
-
-msgid "Sign Up Rate"
-msgstr ""
-
-msgid "Active Users"
-msgstr ""
-
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "Il nome del Gruppo Contatto txbhe che contiene i reporter registrati"
 
@@ -2020,6 +1992,34 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Se hai bisogno di inserire alcuni codici personalizzati HTML nelle tue pagine org, come  frammenti di codici analitici personalizzati"
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+#, fuzzy
+#| msgid "Population"
+msgid "Location"
+msgstr "Popolazione"
+
+#, fuzzy
+#| msgid "Responses"
+msgid "Opinion Responses"
+msgstr "Risposte"
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Active Users"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"

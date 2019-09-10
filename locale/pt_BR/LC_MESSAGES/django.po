@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 13:30+0000\n"
+"POT-Creation-Date: 2019-09-10 18:59+0000\n"
 "PO-Revision-Date: 2018-10-25 18:23+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/rapidpro/ureport/language/pt_BR/)\n"
@@ -1850,34 +1850,6 @@ msgstr "Agendado uma pull refresh para enquete #%d na org #%d"
 msgid "%s"
 msgstr "%s"
 
-msgid "90 Days"
-msgstr ""
-
-msgid "6 Months"
-msgstr ""
-
-msgid "12 Months"
-msgstr ""
-
-msgid "Age"
-msgstr ""
-
-#, fuzzy
-#| msgid "Population"
-msgid "Location"
-msgstr "População"
-
-#, fuzzy
-#| msgid "Responses"
-msgid "Opinion Responses"
-msgstr "Respostas"
-
-msgid "Sign Up Rate"
-msgstr ""
-
-msgid "Active Users"
-msgstr ""
-
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "O nome do txbhe Grupo de Contato que contém os registros de respostas"
 
@@ -2019,6 +1991,34 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Se você precisar incluir alguns códigos HTML personalizados nas suas páginas de organizações, como trechos de código analytics"
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+#, fuzzy
+#| msgid "Population"
+msgid "Location"
+msgstr "População"
+
+#, fuzzy
+#| msgid "Responses"
+msgid "Opinion Responses"
+msgstr "Respostas"
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Active Users"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 13:30+0000\n"
+"POT-Creation-Date: 2019-09-10 18:59+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -1837,34 +1837,6 @@ msgstr "Đã lên lịch làm mới cho cuộc thăm dò dư luận #%d trong t�
 msgid "%s"
 msgstr "%s"
 
-msgid "90 Days"
-msgstr ""
-
-msgid "6 Months"
-msgstr ""
-
-msgid "12 Months"
-msgstr ""
-
-msgid "Age"
-msgstr ""
-
-#, fuzzy
-#| msgid "Population"
-msgid "Location"
-msgstr "Dân số"
-
-#, fuzzy
-#| msgid "Responses"
-msgid "Opinion Responses"
-msgstr "Phản hồi"
-
-msgid "Sign Up Rate"
-msgstr ""
-
-msgid "Active Users"
-msgstr ""
-
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "Tên của Nhóm Liên lạc chứa các phóng viên đã đăng ký"
 
@@ -2006,6 +1978,34 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Nếu bạn cần bao gồm một số mã HTML tùy chỉnh trong trang tổ chức của mình, như đoạn mã phân tích tùy chỉnh"
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+#, fuzzy
+#| msgid "Population"
+msgid "Location"
+msgstr "Dân số"
+
+#, fuzzy
+#| msgid "Responses"
+msgid "Opinion Responses"
+msgstr "Phản hồi"
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Active Users"
+msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
