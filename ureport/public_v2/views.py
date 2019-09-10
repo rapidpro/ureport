@@ -372,35 +372,15 @@ class UreportersView(SmartTemplateView):
         context["average_response_rate"] = PollStats.get_average_response_rate(org)
 
         context["data_time_filters"] = [
-            dict(time_filter_number=3, label=str(_("90 Days"))),
-            dict(time_filter_number=6, label=str(_("6 Months"))),
-            dict(time_filter_number=12, label=str(_("12 Months"))),
+            dict(time_filter_number=key, label=str(val)) for key, val in PollStats.DATA_TIME_FILTERS.items()
         ]
 
         context["data_segments"] = [
-            dict(segment_type="all", label=str(_("All"))),
-            dict(segment_type="age", label=str(_("Age"))),
-            dict(segment_type="gender", label=str(_("Gender"))),
-            dict(segment_type="location", label=str(_("Location"))),
-        ]
-        context["data_metrics"] = [
-            dict(slug="opinion-responses", title=str(_("Opinion Responses"))),
-            dict(slug="sign-up-rate", title=str(_("Sign Up Rate"))),
-            dict(slug="response-rate", title=str(_("Response Rate"))),
-            dict(slug="active-users", title=str(_("Active Users"))),
+            dict(segment_type=key, label=str(val)) for key, val in PollStats.DATA_SEGMENTS.items()
         ]
 
-        context["opinion_responses"] = []
-        context["opinion_responses_age"] = []  # PollStats.get_age_opinion_responses(org)
-        context["opinion_responses_gender"] = []  # PollStats.get_gender_opinion_responses(org)
+        context["data_metrics"] = [dict(slug=key, title=str(val)) for key, val in PollStats.DATA_METRICS.items()]
 
-        context["response_rate"] = []  # PollStats.get_all_response_rate_series(org)
-        context["response_rate_age"] = []  # PollStats.get_age_response_rate_series(org)
-        context["response_rate_gender"] = []  # PollStats.get_gender_response_rate_series(org)
-
-        context["contact_activities"] = []  # ContactActivity.get_activity(org)
-        context["contact_activities_age"] = []  # ContactActivity.get_activity_age(org)
-        context["contact_activities_gender"] = []  # ContactActivity.get_activity_gender(org)
         return context
 
 
