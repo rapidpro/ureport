@@ -5,10 +5,11 @@ $(->
     $("#" + results).show().addClass("shown")
   )
 
-  $(".search-box").on('blur', ->
-    $(this).val("")
-    results = $(this).data("results-id")
-    $("#" + results).hide().removeClass("shown")
+  $(".search-box").on('blur', (e)->
+    if not e.relatedTarget or $(e.relatedTarget).hasClass("search-close")
+      $(this).val("")
+      results = $(this).data("results-id")
+      $("#" + results).hide().removeClass("shown")
   )
 
   $(".search-box").keyup(->

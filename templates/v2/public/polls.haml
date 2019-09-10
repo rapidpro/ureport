@@ -15,11 +15,11 @@
         .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded
           .inline-block.bg-black.border-b.border-white
             %input.bg-black.search-box(type="text" data-results-id="poll-search-results" placeholder="SEARCH" size=14)
-            %a(href="#")
+            %a.search-close(href="#")
               %i.fa.fa-caret-down
 
-      .block.relative.search-results(id="poll-search-results")
-        .absolute.right-0.bg-white.border.text-right(class="max-h-screen" style="width:400px")
+      .relative
+        .absolute.right-0.bg-white.search-results.h-64.text-right.border.z-10(id="poll-search-results" width="400px")
           {% for category in categories %}
           .block.py-4
             .font-bold

@@ -302,7 +302,9 @@ html {
 
 .search-results {
   opacity: 0;
-  position: absolute;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   -webkit-transition:opacity .5s ease-in-out;
   -moz-transition:opacity .5s ease-in-out;

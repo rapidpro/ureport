@@ -21,7 +21,7 @@
     %link(href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
 
     // Highcharts for charts
-    %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.2.0/css/highcharts.csst")
+    %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.2.0/css/highcharts.css")
 
     // Leaflet for maps
     %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css")
@@ -186,7 +186,9 @@
       .flex.justify-between
         .p-home
           %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-            %img(src="{{STATIC_URL}}img/placeholder_country_logo.png")
+            {% thumbnail org.get_logo "1400x260" format="PNG" as im %}
+            %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
+            {% endthumbnail %}
 
         .flex-center-y.p-home
           .block.text-3xl.mr-4

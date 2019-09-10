@@ -3,16 +3,18 @@
 
 -block content
   .block(class="md:flex")
-    .block.bg-dark-blue.vertical-angle
-      .p-home.text-white.flex-center-y
+    .block.bg-dark-blue.vertical-angle.py-12
+      .px-home.text-white.flex-center-y
         .block
           .text-light1.font-bold
             STORY
           .font-alt.font-bold.text-4xl.leading-tight.italic
             {{ story.title }}
 
-    .block(class="md:-ml-8")
-      %img(src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" width="100%" style="object-fit:cover;")
+    .block(class="-mt-8 md:mt-0 md:-ml-8")
+      {% thumbnail story.get_image "900" crop="top" as im %}
+      %img(src="{{im.url}}" width="100%" style="object-fit:cover;")
+      {% endthumbnail %}
 
   .block.justify-between.bg-white.m-12(class="md:flex")
     .block
@@ -32,5 +34,5 @@
     .block
       %img(src="{{STATIC_URL}}img/u-icon-small.png")
 
-  .story-comments
+  .block.p-home
     .fb-comments(data-href="{% org_host_link %}{% url 'public.story_read' story.pk %}" data-width="100%" data-numposts="5")
