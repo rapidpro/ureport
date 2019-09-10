@@ -65,7 +65,7 @@
                 .font-bold.text-3xl.leading-tight.mb-4
                   {{ story.title }}
                 .block.mb-6
-                  {{ story.summary|linebreaksbr }}
+                  {{ story.summary|truncatewords:50|linebreaksbr }}
   
                 %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
                   -trans "READ MORE"
@@ -102,7 +102,7 @@
           .font-bold.text-3xl.leading-tight.mb-4
             {{ story.title }}
           .block.mb-6
-            {{ story.summary|linebreaksbr }}
+            {{ story.summary|truncatewords:50|linebreaksbr }}
   
           %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
             -trans "READ MORE"

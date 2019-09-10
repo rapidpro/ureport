@@ -21,7 +21,7 @@
           .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
         .mt-12.text-center
-          %a.btn.bg-light1.text-xl(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
+          %a.btn.bg-light1(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
             -trans "VIEW FULL RESULTS"
 
   // ureporters graph
@@ -63,8 +63,8 @@
         .text-3xl.font-bold.leading-tight.text-center
           Join U-Report by texting "JOIN" to 24453. You can make a difference today.
 
-        .mt-4.text-center
-          %a.btn.bg-black.text-white.text-xl(href="arst")
+        .mt-8.text-center
+          %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}")
             JOIN NOW
 
       .bg-black.p-home.text-white
@@ -102,9 +102,9 @@
                 .font-bold.text-3xl.leading-tight.mb-4
                   {{ story.title }}
                 .block.mb-6
-                  {{ story.summary|linebreaksbr }}
+                  {{ story.summary|truncatewords:50|linebreaksbr }}
 
-                %a.btn.bg-black.text-white.text-xl(href="{% url 'v2.public.story_read' story.pk %}")
+                %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
                   -trans "READ MORE"
 
             .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
@@ -140,7 +140,7 @@
         .font-bold.text-3xl.leading-tight.mb-4
           {{ story.title }}
         .block.mb-6
-          {{ story.summary|linebreaksbr }}
+          {{ story.summary|truncatewords:50|linebreaksbr }}
 
         %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
           -trans "READ MORE"
@@ -164,7 +164,7 @@
             We are all a part of a global platform changing the lives of young people worldwide.
             We are all a part of a global platform changing the lives of young people worldwide.
 
-        %a.btn.bg-light1.text-black.text-xl(href="{% url 'v2.public.about' %}")
+        %a.btn.bg-light1.text-black(href="{% url 'v2.public.about' %}")
           -trans "LEARN MORE"
 
   {% if photos %}
