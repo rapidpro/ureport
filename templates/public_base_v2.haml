@@ -318,15 +318,14 @@
     // mobile menu
     #mobile-menu.absolute.right-0(class="md:hidden")
       .bg-black.text-white.py-home.pl-home.pr-16
-        .border-b.pb-4
-          %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
-            -trans "Opinions"
+        %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
+          -trans "Opinions"
 
-          %a.block.font-bold(href="{% url 'v2.public.stories' %}")
-            -trans "Stories"
+        %a.block.font-bold(href="{% url 'v2.public.stories' %}")
+          -trans "Stories"
 
-          %a.block.mt-4(href="{% url 'v2.public.about' %}")
-            -trans "About"
+        %a.block.mt-4(href="{% url 'v2.public.about' %}")
+          -trans "About"
 
         %a.block(href="{% url 'v2.public.ureporters' %}")
           -trans "Engagement"
