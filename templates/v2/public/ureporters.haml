@@ -106,7 +106,7 @@
                     .pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
                       .dropdown-button
                         {{segment.label}}
-                      .dropdonw-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2
+                      dropdown-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2
                         - for state in states
                           .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white")
                             {{state.name}}
@@ -144,11 +144,11 @@
         event.stopPropagation();
         event.preventDefault();
         var graphId = $(this).attr("data-graph-id");
-        if($(this).children(".dropdonw-content").hasClass("hidden")) {
-          $(".dropdonw-content").addClass("hidden");
-          $(this).children(".dropdonw-content").removeClass("hidden");
+        if($(this).children("dropdown-content").hasClass("hidden")) {
+          $("dropdown-content").addClass("hidden");
+          $(this).children("dropdown-content").removeClass("hidden");
         } else {
-          $(this).children(".dropdonw-content").addClass("hidden");
+          $(this).children("dropdown-content").addClass("hidden");
         }
       })
     })
@@ -368,7 +368,7 @@
         console.log(event);
 
         $(this).siblings().removeClass("selected")
-        $(this).siblings().children(".dropdonw-content").addClass("hidden")
+        $(this).siblings().children("dropdown-content").addClass("hidden")
         $(this).addClass("selected");
         var metricSlug = $(this).attr("data-metric-slug");
         var segmentType = $(this).attr("data-segment-type");
