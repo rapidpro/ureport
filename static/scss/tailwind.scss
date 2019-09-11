@@ -19,22 +19,24 @@ html {
   width: 100%;
   z-index: 450;
   overflow:hidden;
-  opacity: 0;
+  opacity: 1;
 
   background-image: url("/sitestatic/img/dropdown-bkg.png");
   background-repeat: no-repeat;
   background-size: auto;
   background-position: left;
 
-  transition: .5s;
   transform: translateY(-100%);
+  transition: 1s;
 
-  -webkit-transition:opacity .5s ease-in-out;
-  -moz-transition:opacity .5s ease-in-out;
-  transition:opacity .5s ease-in-out;
+  -webkit-transition:transform .5s ease-in-out;
+  -moz-transition:transform .5s ease-in-out;
+  transition:transform .5s ease-in-out;
 
   &.open {
-    transition: .5s;
+    -webkit-transition:transform .5s ease-in-out;
+    -moz-transition:transform .5s ease-in-out;
+    transition:transform .5s ease-in-out;
     transform: translateY(0);
     opacity: 1;
   }
