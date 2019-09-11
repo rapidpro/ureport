@@ -89,10 +89,10 @@
 
   .bg-dark-blue.p-home.text-white.font-bold.border-b.border-white
     - for time_filter in data_time_filters
-      .engagemment-content(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
+      .engagemment-content.hover-parent(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
         - for metric in data_metrics
-          .engagement-graph-block.block.mt-16(class="md:flex" style="min-height:30rem; max-height:45rem;" data-aos="fade")
-            .(class="md:w-2/5")
+          .engagement-graph-block.hover-parent.block.mt-16(class="md:flex" style="min-height:30rem; max-height:45rem;" data-aos="fade" id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
+            .hover-parent(class="md:w-2/5")
               .bg-light1.h-1.w-16.mb-4
               .text-3xl.mb-4
                 {{ metric.title }}
@@ -113,6 +113,17 @@
                   - else
                     .pill.pill-dark-blue-inverted.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
+
+              .share.flex-none.mb-4.flex-center-y.hover-show
+                .block
+                  %a.bg-circle-xs.border.border-white.text-white.facebook-share(href="" data-url="{% org_host_link %}{% url 'v2.public.engagement' %}")
+                    %i.fa.fa-facebook
+                  %a.bg-circle-xs.border.border-white.text-white(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.engagement' %}")
+                    %i.fa.fa-twitter
+                  %a.bg-circle-xs.border.border-white.text-white(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.engagement' %}")
+                    %i.fa.fa-whatsapp
+                  %a.bg-circle-xs.border.border-white.text-white(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.engagement'  %}" uk-icon="icon: mail; ratio: 1.5")
+                    %i.fa.fa-envelope
 
             .block(class="md:w-3/5")
               .engagement-graph-tabs(id="graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
@@ -251,7 +262,6 @@
         var segmentType = chosen.attr("data-segment-type");
         var timeFilter = chosen.attr("data-time-filter");
         var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
-        console.log(chosen);
         setTimeout(function(){ 
           drawGraph(metricSlug, segmentType, timeFilter);
           $("#graph-tabs-" + dataSlug).removeClass("hidden");
@@ -259,7 +269,6 @@
       });
 
       $(".engagement-graph").each(function() {
-        //console.log($(this));
         var graphDiv = $(this).children(".has-graph");
         var metricSlug = graphDiv.attr("data-metric-slug");
         var segmentType = graphDiv.attr("data-segment-type");

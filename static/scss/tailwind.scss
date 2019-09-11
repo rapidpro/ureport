@@ -237,6 +237,10 @@ html {
 
   &:hover {
     @apply bg-gray-200;
+
+    &.text-white {
+      @apply bg-gray-600;
+    }
   }
 }
 
