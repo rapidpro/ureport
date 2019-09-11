@@ -428,6 +428,24 @@
     // bottom yellow bar
     .bg-color3.h-2
 
+    .modal.fixed.hidden.z-1.top-0.left-0.w-full.h-full.overwlow-auto.bg-gray-900.export-modal.shadow(style="z-index:500;")
+      .modal-content.mx-auto.my-40.p-6.border.border-black.bg-white(class="w-3/5")
+        .font-bold.text-xl.mb-2.inline-block
+          -trans "Export and Share"
+        %i.fa.fa-close.text-xl.float-right.export-modal-close
+    
+        .export-modal-progress
+          %progress.progress.is-small(max="100")
+        .export-modal-content
+          .inline-block.mb-4(class="md:w-3/4")
+            -trans "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"            
+          .inline-block.float-right.text-right.mb-4(class="md:w-1/4")
+            %a.btn.bg-light1.text-black.inline-block.download-screenshot(href="#")
+              Download
+          .mt-4.shadow
+            %img.screenshot-rendered(src="#" alt="")
+
+
   // JQuery
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js")
 
@@ -446,6 +464,9 @@
   {% compress js %}
   // Gradients making util
   %script(src="{{STATIC_URL}}js/gradientfactory.js")
+
+  // Screenshots
+  %script(src="{{ STATIC_URL }}js/html2canvas.min.js")
 
   // Age charts
   %script(type="text/coffeescript" src="{{ STATIC_URL }}coffee/v2_age.coffee")
@@ -476,6 +497,30 @@
       });
       $("#countries-closer").click(function(){
         $("#countries").removeClass("open");
+      });
+
+      $(".export-modal-close").on('click', function() {
+        $(".export-modal").addClass('hidden');
+      });
+
+
+      $(".screenshot-share").on("click", function() {
+        var eltID= $(this).attr("data-screen-id");
+        $(".export-modal-progress").show();
+        $(".export-modal-content").hide();
+
+        $('.export-modal').toggleClass('hidden');
+        var region = document.body.querySelector("#" + eltID);
+
+        html2canvas(region).then(canvas => {
+          var imageData = canvas.toDataURL("image/png");
+          $("img.screenshot-rendered").attr("src", imageData);
+          $("a.download-screenshot").attr("download", "ureport-screenshare-" + eltID + Date.now() + ".png")
+          $("a.download-screenshot").attr("href", imageData);
+
+          $(".export-modal-progress").hide();
+          $(".export-modal-content").show();
+        });
       });
 
       $(".dropdown-button").on('click', function(event){

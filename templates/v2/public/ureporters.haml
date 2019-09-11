@@ -91,7 +91,7 @@
     - for time_filter in data_time_filters
       .engagemment-content.hover-parent(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
         - for metric in data_metrics
-          .engagement-graph-block.hover-parent.block.mt-16(class="md:flex" style="min-height:30rem; max-height:45rem;" data-aos="fade" id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
+          .engagement-graph-block.hover-parent.block.mt-16.p-2.bg-dark-blue(class="md:flex" style="min-height:30rem; max-height:45rem;" data-aos="fade" id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
             .hover-parent(class="md:w-2/5")
               .bg-light1.h-1.w-16.mb-4
               .text-3xl.mb-4
@@ -106,7 +106,7 @@
                     .pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
                       .dropdown-butto
                         {{segment.label}}
-                      .dropdown-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2
+                      .dropdown-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2(data-html2canvas-ignore=true)
                         - for state in states
                           .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white {% if forloop.counter < 4 %}is-selected bg-gray-800 text-white{% endif %}")
                             {{state.name}}
@@ -124,6 +124,8 @@
                     %i.fa.fa-whatsapp
                   %a.bg-circle-xs.border.border-white.text-white(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.engagement'  %}" uk-icon="icon: mail; ratio: 1.5")
                     %i.fa.fa-envelope
+                  %a.bg-circle-xs.border.border-white.text-white.screenshot-share(data-screen-id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
+                    %i.fa.fa-file-image-o
 
             .block(class="md:w-3/5")
               .engagement-graph-tabs(id="graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
