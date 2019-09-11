@@ -42,6 +42,20 @@ html {
   }
 }
 
+.social-media-block {
+  transition: 2s;
+  opacity: 0;
+
+  -webkit-transition:opacity 2s ease-in-out;
+  -moz-transition:opacity 2s ease-in-out;
+  transition:opacity 2s ease-in-out;
+
+  &.open {
+    transition: 2s;
+    opacity: 1;
+  }
+}
+
 // flags in our menu
 .flag {
   width: 80px;
@@ -148,6 +162,32 @@ html {
   }
 }
 
+.state-pill {
+  .state-dropdown {
+    display: none;
+  }
+
+  &.selected {
+    .state-dropdown {
+      &.shown {
+        display: block;
+      }
+    }
+  }
+}
+
+.state-segment {
+  .checkbox {
+    display: none;
+  }
+
+  &.selected {
+    .checkbox {
+      display: block;
+    }
+  }
+}
+
 
 .admin-menu {
   @apply  inline-block px-6 py-4;
@@ -195,6 +235,10 @@ html {
   fill: none;
 }
 
+.highcharts-container {
+  background-color: transparent;
+}
+
 // leaflet styles
 .leaflet-container {
   background-color:rgba(255,0,0,0.0);
@@ -235,6 +279,10 @@ html {
 
   &:hover {
     @apply bg-gray-200;
+
+    &.text-white {
+      @apply bg-gray-600;
+    }
   }
 }
 

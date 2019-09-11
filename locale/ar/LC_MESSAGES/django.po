@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 18:59+0000\n"
+"POT-Creation-Date: 2019-09-11 18:27+0000\n"
 "PO-Revision-Date: 2017-02-22 13:15+0000\n"
 "Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
@@ -1292,6 +1292,12 @@ msgstr ""
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
+msgid "Export and Share"
+msgstr ""
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -1397,6 +1403,9 @@ msgstr ""
 msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
+msgid "No results found"
+msgstr ""
+
 #, fuzzy
 #| msgid "RESPONSE RATE"
 msgid "RESPONSES"
@@ -1423,26 +1432,10 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
-msgid ""
-"\n"
-"                 %(responded)s responded out of %(polled)s polled\n"
-"               "
-msgstr ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع..."
-
-msgid "Keywords"
+msgid "STATE"
 msgstr ""
 
 msgid "A sentence that describes how we feel about stories and the human side of things."
-msgstr ""
-
-msgid "SEARCH"
 msgstr ""
 
 msgid "Year at a Glance"
@@ -2078,6 +2071,19 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    %(responded)s responded out of %(polled)s polled\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                 %(responded)s responded out of %(polled)s polled\n"
+#~ "               "
+#~ msgstr ""
+#~ "\n"
+#~ "قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع..."
 
 #, fuzzy
 #~| msgid "Join & Engage"
