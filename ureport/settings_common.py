@@ -749,6 +749,12 @@ CELERYBEAT_SCHEDULE = {
         "relative": True,
         "args": ("ureport.polls.tasks.pull_results_other_polls", "sync"),
     },
+    "refresh-engagement-data": {
+        "task": "dash.orgs.tasks.trigger_org_task",
+        "schedule": timedelta(hours=6),
+        "relative": True,
+        "args": ("ureport.stats.tasks.refresh_engagement_data", "sync"),
+    },
 }
 
 # -----------------------------------------------------------------------------------

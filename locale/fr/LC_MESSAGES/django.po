@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 13:30+0000\n"
+"POT-Creation-Date: 2019-09-10 18:59+0000\n"
 "PO-Revision-Date: 2017-04-07 14:40+0000\n"
 "Last-Translator: Vincent Turmine <vincent.turmine@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
@@ -1900,34 +1900,6 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-msgid "90 Days"
-msgstr ""
-
-msgid "6 Months"
-msgstr ""
-
-msgid "12 Months"
-msgstr ""
-
-msgid "Age"
-msgstr ""
-
-#, fuzzy
-#| msgid "Population"
-msgid "Location"
-msgstr "Population"
-
-#, fuzzy
-#| msgid "Responses"
-msgid "Opinion Responses"
-msgstr "Réponses"
-
-msgid "Sign Up Rate"
-msgstr ""
-
-msgid "Active Users"
-msgstr ""
-
 msgid "The name of txbhe Contact Group that contains registered reporters"
 msgstr "Nom du groupe contenant les U-Reporters inscrits"
 
@@ -2066,6 +2038,34 @@ msgid "The font used for small text"
 msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
+msgstr ""
+
+msgid "90 Days"
+msgstr ""
+
+msgid "6 Months"
+msgstr ""
+
+msgid "12 Months"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+#, fuzzy
+#| msgid "Population"
+msgid "Location"
+msgstr "Population"
+
+#, fuzzy
+#| msgid "Responses"
+msgid "Opinion Responses"
+msgstr "Réponses"
+
+msgid "Sign Up Rate"
+msgstr ""
+
+msgid "Active Users"
 msgstr ""
 
 msgid "Something to trigger localizations"
