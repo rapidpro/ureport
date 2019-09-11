@@ -78,15 +78,15 @@
             .block(style="min-height:300px;min-width:300px;")
           {% endwith %}
 
-  .border-t.border-b.bg-dark-gray
-    .max-w-page.mx-auto.px-home.py-4.border-gray-800.sticky.top-0.z-50(class="md:flex md:justify-between")
+  .border-t.border-b.bg-dark-gray.sticky.top-0.z-50
+    .max-w-page.mx-auto.px-home.py-4.border-gray-800(class="md:flex md:justify-between")
       .text-white.font-bold.flex-center-y
         -trans "FILTER RESULTS"
 
       .flex-center-y
         .text-white.text-xs.flex
           - for time_filter in data_time_filters
-            .border-white.pill-black.tab-button-time-filter(class="{% if forloop.first %}pill-first{% elif forloop.last %}selected pill-last{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
+            .cursor-pointer.border-white.pill-black.tab-button-time-filter(class="{% if forloop.first %}pill-first{% elif forloop.last %}selected pill-last{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
               {{time_filter.label}}
 
   .max-w-page.mx-auto.bg-dark-blue.p-home.text-white.font-bold.border-b.border-white
@@ -102,10 +102,10 @@
               .text-black.text-2xs.flex.mb-6
                 - for segment in data_segments
                   - if forloop.first
-                    .pill-first.pill-dark-blue-inverted.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                    .cursor-pointer.pill-first.pill-dark-blue-inverted.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
                   - elif forloop.last
-                    .pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
+                    .cursor-pointer.pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
                       .dropdown-butto
                         {{segment.label}}
                       .dropdown-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2(data-html2canvas-ignore=true)
@@ -113,12 +113,12 @@
                           .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white {% if forloop.counter < 4 %}is-selected bg-gray-800 text-white{% endif %}")
                             {{state.name}}
                   - else
-                    .pill.pill-dark-blue-inverted.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                    .cursor-pointer.pill.pill-dark-blue-inverted.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
 
               .share.flex-none.mb-4.flex-center-y.hover-show
                 .block
-                  %a.bg-circle-xs.border.border-white.text-white.facebook-share(href="" data-url="{% org_host_link %}{% url 'v2.public.engagement' %}")
+                  %a.cursor-pointer.bg-circle-xs.border.border-white.text-white.facebook-share(data-url="{% org_host_link %}{% url 'v2.public.engagement' %}")
                     %i.fa.fa-facebook
                   %a.bg-circle-xs.border.border-white.text-white(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.engagement' %}")
                     %i.fa.fa-twitter
@@ -126,7 +126,7 @@
                     %i.fa.fa-whatsapp
                   %a.bg-circle-xs.border.border-white.text-white(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.engagement'  %}" uk-icon="icon: mail; ratio: 1.5")
                     %i.fa.fa-envelope
-                  %a.bg-circle-xs.border.border-white.text-white.screenshot-share(data-screen-id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
+                  %a.cursor-pointer.bg-circle-xs.border.border-white.text-white.screenshot-share(data-screen-id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
                     %i.fa.fa-file-image-o
 
             .block(class="md:w-3/5")
