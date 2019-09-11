@@ -150,6 +150,32 @@ html {
   }
 }
 
+.state-pill {
+  .state-dropdown {
+    display: none;
+  }
+
+  &.selected {
+    .state-dropdown {
+      &.shown {
+        display: block;
+      }
+    }
+  }
+}
+
+.state-segment {
+  .checkbox {
+    display: none;
+  }
+
+  &.selected {
+    .checkbox {
+      display: block;
+    }
+  }
+}
+
 
 .admin-menu {
   @apply  inline-block px-6 py-4;
