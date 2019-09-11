@@ -20,17 +20,25 @@
               %i.fa.fa-caret-down
 
       .relative
-        .absolute.right-0.bg-white.search-results.h-64.text-right.border.z-10(id="story-search-results" style="z-index:100000")
+        .absolute.right-0.bg-white.search-results.h-64.border(id="story-search-results" style="z-index:100000")
+          .no-results.p-4.italic.hidden
+            -trans "No results found"
+
           {% for category in categories %}
-          .block.py-4(style="width:600px")
-            .font-bold
-              .block.px-4
+          {% if category.story_set.all %}
+          .block.py-4.bg-white.search-category
+            %a.font-bold.px-4.block(href="#")
+              %i.fa.fa-caret-right.closed.float-left(style="padding-top:2px")
+              %i.fa.fa-caret-down.hidden.open.float-left(style="padding-top:4px")
+              .pl-3
                 {{ category.name }}
-            .block
-              {% for story in category.stories.all %}
+            .category-results
+              {% for story in category.story_set.all %}
               %a.block.px-4.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.story_read' story.pk %}" data-search-value="{{ story.title|addslashes }}")
-                {{ story.title }}
+                .ml-4
+                  {{ story.title }}
               {% endfor %}
+          {% endif %}
           {% endfor %}
 
   // first and second stories
