@@ -132,10 +132,21 @@
               -trans "ALL"
             %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="age")>
               -trans "AGE"
-            %a.pill.pill-last.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="gender")>
+            %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="gender")>
               -trans "GENDER"
-            // %a.pill-last.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="state")>
-            //  -trans "STATE"
+            %a.pill-last.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state")>
+              -trans "STATE"
+              %i.fa.fa-caret-down
+              .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px")
+                .border.border-gray-400.text-left.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;")
+                  .pt-1.text-black
+                    - for state in states
+                      .pl-2.pr-4.py-1.state-segment(data-state='{{state.id}}' data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}")
+                        .checkbox.float-left
+                          %i.fa.fa-check
+                        .ml-4.whitespace-no-wrap
+                          {{ state.name }}
+
           {% else %}
           .block
           {% endif %}
@@ -205,7 +216,7 @@
                 .uk-padding-remove(uk-dropdown="mode:click;" data-question="{{question.id}}")
                     %ul#states-selector.uk-list.uk-list-striped.uk-height-medium.uk-overflow-auto
                       - for state in states
-                        %li.state-selector(data-location-id='{{state.id}}')
+                        %block.state-selector(data-location-id='{{state.id}}')
                           {{state.name}}
           .uk-width-1-1
             %ul.uk-switcher.graph-tabs(id="graph-tabs-{{question.id}}")
