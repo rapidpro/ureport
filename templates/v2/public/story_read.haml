@@ -2,8 +2,8 @@
 - load thumbnail compress i18n ureport
 
 -block content
-  .block(class="md:flex")
-    .block.bg-dark-blue.vertical-angle(class="md:w-1/2")
+  .max-w-page.mx-auto.bg-dark-blue(class="md:flex")
+    .block.bg-dark-blue.outside-vertical-angle(class="md:w-1/2")
       .py-12
         .px-home.text-white.flex-center-y
           .block
@@ -12,28 +12,31 @@
             .font-alt.font-bold.text-4xl.leading-tight.italic
               {{ story.title }}
 
-    .block(class="-mt-8 md:mt-0 md:-ml-8 md:w-1/2")
+    .block.vertical-angle(class="md:w-1/2")
       {% thumbnail story.get_image "900" crop="top" as im %}
       %img(src="{{im.url}}" width="100%" style="object-fit:cover;")
       {% endthumbnail %}
+      //.block-vertical-angle.w-4
+      //  &nbsp;
 
-  .block.justify-between.bg-white.m-12(class="md:flex")
-    .flex-none
-      .share
-        %a.mb-2.bg-circle-xs.border.border-black.facebook-share(href="#" data-url="{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-          %i.fa.fa-facebook
-        %a.mb-2.block.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-          %i.fa.fa-twitter
-        %a.mb-2.block.bg-circle-xs.border.border-black(href="https://api.whatsapp.com/send?text={% org_host_link %}{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
-          %i.fa.fa-whatsapp
-        %a.mb-2.block.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ story.title|urlencode:\"\" }} results&amp;body={% url 'v2.public.story_read' story.pk %}" uk-icon="icon: mail; ratio: 1.5")
-          %i.fa.fa-envelope
+  .max-w-page.mx-auto
+    .block.justify-between.bg-white.m-12(class="md:flex")
+      .flex-none
+        .share
+          %a.mb-2.bg-circle-xs.border.border-black.facebook-share(href="#" data-url="{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
+            %i.fa.fa-facebook
+          %a.mb-2.block.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
+            %i.fa.fa-twitter
+          %a.mb-2.block.bg-circle-xs.border.border-black(href="https://api.whatsapp.com/send?text={% org_host_link %}{% org_host_link %}{% url 'v2.public.story_read' story.pk %}")
+            %i.fa.fa-whatsapp
+          %a.mb-2.block.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ story.title|urlencode:\"\" }} results&amp;body={% url 'v2.public.story_read' story.pk %}" uk-icon="icon: mail; ratio: 1.5")
+            %i.fa.fa-envelope
 
-    .flex-auto.px-home.story-content
-      {{ story.content|safe }}
+      .flex-auto.px-home.story-content
+        {{ story.content|safe }}
 
-    .flex-none
-      %img(src="{{STATIC_URL}}img/u-icon-small.png")
+      .flex-none
+        %img(src="{{STATIC_URL}}img/u-icon-small.png")
 
-  .block.p-home
-    .fb-comments(data-href="{% org_host_link %}{% url 'public.story_read' story.pk %}" data-width="100%" data-numposts="5")
+    .block.p-home
+      .fb-comments(data-href="{% org_host_link %}{% url 'public.story_read' story.pk %}" data-width="100%" data-numposts="5")

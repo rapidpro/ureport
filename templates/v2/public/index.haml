@@ -3,186 +3,187 @@
 - load thumbnail humanize ureport compress i18n
 
 - block content
-  // latest poll
+  // latest poll if we have it
   - if latest_poll and latest_poll.get_first_question
-    .bg-grid(class="md:flex")
-      .flex-1.bg-dark1.text-white.p-home.vertical-angle
-        .font-bold.text-l
-          -trans "LATEST OPINION"
+    .max-w-page.mx-auto.bg-dark1
+      .border-r(class="md:flex")
+        .flex-1.bg-dark1.text-white.p-home
+          .font-bold.text-l
+            - trans "LATEST OPINION"
 
-        .font-bold.text-4xl
-          {{ latest_poll.title }}
+          .font-bold.text-4xl
+            {{ latest_poll.title }}
 
-        .font-alt.font-bold.italic.left-border
-          {{ latest_poll.get_first_question.title }}
+          .font-alt.font-bold.italic.left-border
+            {{ latest_poll.get_first_question.title }}
 
-      .flex-1.p-home(class="md:border-t")
-        .relative.w-full(style="min-height:20rem;")
-          .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
+        .flex-1.p-home.vertical-angle.bg-grid(class="md:border-t")
+          .relative.w-full(style="min-height:20rem;")
+            .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
-        .mt-12.text-center
-          %a.btn.bg-light1(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
-            -trans "VIEW FULL RESULTS"
+          .mt-12.text-center
+            %a.btn.bg-light1(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
+              - trans "VIEW FULL RESULTS"
 
   // ureporters graph
-  .bg-black.text-light1.p-home.bg-white-u(class="md:flex")
-    .flex-center-y(class="md:w-2/5")
-      .font-bold.text-l
-        -trans "U-REPORTERS IN"
-        {{ org.name|upper }}
+  .bg-black.text-light1.bg-white-u
+    .max-w-page.mx-auto.p-home(class="md:flex")
+      .flex-center-y(class="md:w-2/5")
+        .font-bold.text-l
+          - trans "U-REPORTERS IN"
+          {{ org.name|upper }}
 
-      .font-light.text-white.text-6xl
-        {{ reporters|intcomma }}
+        .font-light.text-white.text-6xl
+          {{ reporters|intcomma }}
 
-      .font-bold.text-l.min-w-sm
-        %div
-          .whitespace-no-wrap
-            -trans "PARTNERING WITH"
-            %span.text-white {{global_contact_count|intcomma}}
-            -trans "U-REPORTERS"
+        .font-bold.text-l.min-w-sm
+          %div
+            .whitespace-no-wrap
+              - trans "PARTNERING WITH"
+              %span.text-white {{global_contact_count|intcomma}}
+              - trans "U-REPORTERS"
 
-          .whitespace-no-wrap
-            -trans "IN"
-            %span.text-white {{global_org_count|intcomma}}
-            -trans "COUNTRIES WORLDWIDE"
+            .whitespace-no-wrap
+              - trans "IN"
+              %span.text-white {{global_org_count|intcomma}}
+              - trans "COUNTRIES WORLDWIDE"
 
-    .ml-4(class="md:w-3/5")
-      .flex
-        .block.w-12.font-bold
-          -trans "AGES"
+      .ml-4(class="md:w-3/5")
+        .flex
+          .block.w-12.font-bold
+            - trans "AGES"
 
-        .flex-1.inline-block(style="min-width:220px;max-width:750px")
-          .relative.w-full.h-64
-            {{ age_stats|json_script:"age_stats" }}
-            #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats" data-label-size="18")
+          .flex-1.inline-block(style="min-width:220px;max-width:750px")
+            .relative.w-full.h-64
+              {{ age_stats|json_script:"age_stats" }}
+              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats" data-label-size="18")
 
   // join video and social
-  %div(class="md:flex")
-    .flex-1
-      .bg-light1.p-home
-        .text-3xl.font-bold.leading-tight.text-center
-          Join U-Report by texting "JOIN" to 24453. You can make a difference today.
+  .max-w-page.mx-auto
+    %div(class="md:flex")
+      .flex-1
+        .bg-light1.p-home
+          .text-3xl.font-bold.leading-tight.text-center
+            Join U-Report by texting "JOIN" to 24453. You can make a difference today.
 
-        .mt-8.text-center
-          %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}")
-            JOIN NOW
+          .mt-8.text-center
+            %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}")
+              -trans "JOIN NOW"
 
-      .bg-black.p-home.text-white
-        .video
-          <iframe width="560" height="349" src="https://www.youtube.com/embed/KdydDDitMHA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        .bg-black.p-home.text-white
+          .video
+            <iframe width="560" height="349" src="https://www.youtube.com/embed/KdydDDitMHA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-    .flex-1
-      .bg-white.p-home
-        .flex.justify-center
-          .block.fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+      .flex-1
+        .bg-white.p-home
+          .flex.justify-center
+            .block.fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
 
+  - if stories
+    // featured-story-full
+    .max-w-page.mx-auto.hidden.bg-squares(class="md:block")
+      .flex
+        .flex-1.h-20
+        .flex-1.bg-dark1.h-20
 
-  {% if stories %}
-  // featured-story-full
-  %div.hidden.bg-squares(class="md:block")
-    .flex
-      .flex-1.h-20
-      .flex-1.bg-dark1.h-20
+      .flex
+        .flex-1.h-10
 
-    .flex
-      .flex-1.h-10
+        .flex-1.bg-dark1
+          .bg-dark2.ml-20.mr-10.h-10
+            &nbsp;
 
-      .flex-1.bg-dark1
-        .bg-dark2.ml-20.mr-10.h-10
-          &nbsp;
+      %div
+        - for story in stories|slice:"1"
+          .border-r-25rem.border-solid.border-dark1
+            .border-r-25rem.border-solid.border-light1.flex
+              .pl-10.flex.flex-col.justify-center(class="w-1/3")
+                .block
+                  .font-bold.mb-4
+                    {% trans "FEATURED STORY" %}
+                  .font-bold.text-3xl.leading-tight.mb-4
+                    {{ story.title }}
+                  .block.mb-6
+                    {{ story.summary|truncatewords:50|linebreaksbr }}
 
-    %div
+                  %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
+                    {% trans "READ MORE" %}
+
+              .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
+                - if story.get_image
+                  {% thumbnail story.get_image "800x500" crop="center" as im %}
+                  %img(width="100%" src="{{im.url}}")
+                  {% endthumbnail %}
+                - else
+                  %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+
+      .flex
+        .flex-1.h-10
+
+        .flex-1.bg-dark1
+          .bg-dark2.ml-20.mr-10.h-10
+
+      .flex
+        .flex-1.h-20
+        .flex-1.bg-dark1.h-20
+
+    // featured-story-mobile
+    %div(class="md:hidden")
       - for story in stories|slice:"1"
-        .border-r-25rem.border-solid.border-dark1
-          .border-r-25rem.border-solid.border-light1.flex
-            .pl-10.flex.flex-col.justify-center(class="w-1/3")
-              .block
-                .font-bold.mb-4
-                  -trans "FEATURED STORY"
-                .font-bold.text-3xl.leading-tight.mb-4
-                  {{ story.title }}
-                .block.mb-6
-                  {{ story.summary|truncatewords:50|linebreaksbr }}
+        - if story.get_image
+          {% thumbnail story.get_image "800x500" crop="top" as im %}
+          %img(width="100%" src="{{im.url}}")
+          {% endthumbnail %}
+        -else
+          %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+        .p-home
+          .font-bold.mb-4
+            - trans "FEATURED STORY"
+          .font-bold.text-3xl.leading-tight.mb-4
+            {{ story.title }}
+          .block.mb-6
+            {{ story.summary|truncatewords:50|linebreaksbr }}
 
-                %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
-                  -trans "READ MORE"
+          %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
+            - trans "READ MORE"
 
-            .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
-              - if story.get_image
-                {% thumbnail story.get_image "800x500" crop="center" as im %}
-                %img(width="100%" src="{{im.url}}")
-                {% endthumbnail %}
-              - else
-                %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
-
-    .flex
-      .flex-1.h-10
-
-      .flex-1.bg-dark1
-        .bg-dark2.ml-20.mr-10.h-10
-
-    .flex
-      .flex-1.h-20
-      .flex-1.bg-dark1.h-20
-
-  // featured-story-mobile
-  %div(class="md:hidden")
-    - for story in stories|slice:"1"
-      - if story.get_image
-        {% thumbnail story.get_image "800x500" crop="top" as im %}
-        <img width="100%" src="{{im.url}}" />
-        {% endthumbnail %}
-      - else
-        %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
-      .p-home
-        .font-bold.mb-4
-          -trans "FEATURED STORY"
-        .font-bold.text-3xl.leading-tight.mb-4
-          {{ story.title }}
-        .block.mb-6
-          {{ story.summary|truncatewords:50|linebreaksbr }}
-
-        %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
-          -trans "READ MORE"
-
-  {% else %}
-  %div.bg-dark1.h-20
-  {% endif %}
+  - else
+    %div.bg-dark1.h-20
 
   // world-map
-  %div.text-white.pr-10.bg-black.p-home(class="md:flex")
-    .flex.flex-center-y.my-4(class="md:w-3/5")
-      %img(src="{{ STATIC_URL }}img/homemap_bg.png")
+  .bg-black.text-white
+    .max-w-page.mx-auto.pr-10.bg-black.p-home(class="md:flex")
+      .flex.flex-center-y.my-4(class="md:w-3/5")
+        %img(src="{{ STATIC_URL }}img/homemap_bg.png")
 
-    .flex.flex-center-y(class="md:w-2/5")
-      %div.pl-10
-        .font-bold.mb-4.text-3xl.leading-tight
-          -trans "We are all a part of a global platform changing the lives of young people worldwide."
+      .flex.flex-center-y(class="md:w-2/5")
+        .pl-10
+          .font-bold.mb-4.text-3xl.leading-tight
+            -trans "We are all a part of a global platform changing the lives of young people worldwide."
 
-        .mb-6
-          - blocktrans
-            We are all a part of a global platform changing the lives of young people worldwide.
-            We are all a part of a global platform changing the lives of young people worldwide.
+          .mb-6
+            - blocktrans
+              We are all a part of a global platform changing the lives of young people worldwide.
+              We are all a part of a global platform changing the lives of young people worldwide.
 
-        %a.btn.bg-light1.text-black(href="{% url 'v2.public.about' %}")
-          -trans "LEARN MORE"
+          %a.btn.bg-light1.text-black(href="{% url 'v2.public.about' %}")
+            -trans "LEARN MORE"
 
-  {% if photos %}
-  // photos
-  %div.text-white(class="md:flex")
-    .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
-      %div
-        .font-bold.text-3xl
-          -trans "Photos Title"
+  - if photos
+    // photos
+    .max-w-page.mx-auto
+      %div.text-white(class="md:flex")
+        .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
+          %div
+            .font-bold.text-3xl
+              -trans "Photos Title"
 
-        -trans "This area can be edited when the poll is over to focus additionally on review and learnings."
+            -trans "This area can be edited when the poll is over to focus additionally on review and learnings."
 
-    .flex-1.p-home.text-black.flex.flex-col.justify-center
-      %div
-        {% for photo in photos|slice:":8" %}
-        {% thumbnail photo.get_image "200x200" crop="center" as im %}
-        .inline-block.w-40.h-40.bg-gray-500.m-2
-          %img(src="{{im.url}}")
-        {% endthumbnail %}
-        {% endfor %}
-  {% endif %}
+        .flex-1.p-home.text-black.flex.flex-col.justify-center
+          %div
+            - for photo in photos|slice:":8"
+              {% thumbnail photo.get_image "200x200" crop="center" as im %}
+              .inline-block.w-40.h-40.bg-gray-500.m-2
+                %img(src="{{im.url}}")
+              {% endthumbnail %}

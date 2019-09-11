@@ -70,6 +70,16 @@ html {
   }
 }
 
+// full width
+.max-w-page {
+  max-width: 1200px;
+}
+
+// half width
+.max-w-half-page {
+  max-width: 600px;
+}
+
 // button style
 .btn {
   @apply text-base leading-none font-bold rounded-lg inline-block;
@@ -230,6 +240,7 @@ html {
 
 // light grid background
 .bg-grid {
+  background: white;
   background-size: 43px 57px;
   background-position: 0px 10px;
   background-image: linear-gradient(to right, #eee 1px, transparent 1px), linear-gradient(to bottom, #eee 1px, transparent 1px);
@@ -237,6 +248,7 @@ html {
 
 // light squares background
 .bg-squares {
+  background: white;
   background-size: 43px 57px;
   background-position: 0px 10px;
   background-image: linear-gradient(to right, #eee 1px, transparent 1px), linear-gradient(to bottom, #eee 1px, transparent 1px);
@@ -261,6 +273,7 @@ html {
 .bg-blue-u {
   background-image: url("/sitestatic/img/blue_u.png");
   background-position-x: 6rem;
+  background-position-y: -2rem;
   background-repeat: no-repeat;
   background-size: auto;
 }
@@ -385,7 +398,7 @@ html {
 @media only screen and (min-width: 768px) {
   .vertical-angle {
     -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+    clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
   }
 
   .p-home {

@@ -5,19 +5,20 @@
 -block content
   - load_qbs request.org 'about'
 
-  .border-t.bg-grid.p-home
-    .border.p-home.bg-white
-      - for d_block in about|slice:":1"
-        .block.mt-4.font-bold.text-5xl
-          {{ d_block.title|safe }}
+  .bg-grid.border-t
+    .max-w-page.mx-auto.p-home
+      .border.p-home.bg-white
+        - for d_block in about|slice:":1"
+          .block.mt-4.font-bold.text-5xl
+            {{ d_block.title|safe }}
 
-        .block.mt-4
-          {{ d_block.content|safe }}
+          .block.mt-4
+            {{ d_block.content|safe }}
 
-        .block.mt-4.flex
-          .block.mx-auto.my-8.justify-content
-            {% thumbnail d_block.image "400x300" crop="top" as im %}
-            <img width="100%" height="100%" src="{{im.url}}" />
-            {% empty %}
-            %img{src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
-            {% endthumbnail %}
+          .block.mt-4.flex
+            .block.mx-auto.my-8.justify-content
+              {% thumbnail d_block.image "400x300" crop="top" as im %}
+              <img width="100%" height="100%" src="{{im.url}}" />
+              {% empty %}
+              %img{src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+              {% endthumbnail %}
