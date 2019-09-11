@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-11 14:45+0000\n"
+"POT-Creation-Date: 2019-09-11 18:27+0000\n"
 "PO-Revision-Date: 2018-09-14 11:15+0000\n"
 "Last-Translator: Nineta Popovic <npopovic@unicef.org>\n"
 "Language-Team: Bosnian (http://www.transifex.com/rapidpro/ureport/language/bs/)\n"
@@ -1238,6 +1238,12 @@ msgstr ""
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
+msgid "Export and Share"
+msgstr ""
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -1372,26 +1378,10 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
-msgid ""
-"\n"
-"                 %(responded)s responded out of %(polled)s polled\n"
-"               "
-msgstr ""
-"\n"
-"%(responded)sodgovorilo od %(polled)sispitanih"
-
-msgid "Keywords"
+msgid "STATE"
 msgstr ""
 
 msgid "A sentence that describes how we feel about stories and the human side of things."
-msgstr ""
-
-msgid "SEARCH"
 msgstr ""
 
 msgid "Year at a Glance"
@@ -1995,6 +1985,19 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    %(responded)s responded out of %(polled)s polled\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                 %(responded)s responded out of %(polled)s polled\n"
+#~ "               "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)sodgovorilo od %(polled)sispitanih"
 
 #, fuzzy
 #~| msgid "Join & Engage"

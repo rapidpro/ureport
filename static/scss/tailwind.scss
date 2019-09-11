@@ -223,6 +223,10 @@ html {
   fill: none;
 }
 
+.highcharts-container {
+  background-color: transparent;
+}
+
 // leaflet styles
 .leaflet-container {
   background-color:rgba(255,0,0,0.0);
