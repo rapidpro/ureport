@@ -478,7 +478,8 @@
         $("#countries").removeClass("open");
       });
 
-      $(".dropdown-button").on('click', function(){
+      $(".dropdown-button").on('click', function(event){
+        event.stopPropagation();
         console.log($(this).siblings(".dropdown-content"));
         console.log($(this).parent().children(".dropdown-content"));
 
