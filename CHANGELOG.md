@@ -1,3 +1,7 @@
+v1.1.6
+----------
+
+
 v1.1.5
 ----------
  * Merge pull request #444 from rapidpro/admin-nav-public-site
