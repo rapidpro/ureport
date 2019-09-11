@@ -247,7 +247,15 @@
       $(".pill-dark-blue-inverted").parent().each(function() {
         var chosen = $($(this).children()[Math.floor(Math.random() * 4)])
         chosen.addClass("selected");
-        setTimeout(function(){ chosen.click(); chosen.click(); }, 1000);
+        var metricSlug = chosen.attr("data-metric-slug");
+        var segmentType = chosen.attr("data-segment-type");
+        var timeFilter = chosen.attr("data-time-filter");
+        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
+        console.log(chosen);
+        setTimeout(function(){ 
+          drawGraph(metricSlug, segmentType, timeFilter);
+          $("#graph-tabs-" + dataSlug).removeClass("hidden");
+         }, 1000);
       });
 
       $(".engagement-graph").each(function() {
@@ -300,11 +308,9 @@
         var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
         event.stopPropagation();
 
-
         $(this).siblings().removeClass("selected")
         $(this).addClass("selected");
 
-        console.log($(this));
         if($(this).hasClass("location-dropdown")) {
 
           if($(this).children(".dropdown-content").hasClass("hidden")) {
@@ -317,12 +323,10 @@
           $(this).siblings().children(".dropdown-content").addClass("hidden")
         }
 
-
         $(".engagement-graph-tabs #graph-tabs-" + dataSlug).siblings().addClass("hidden");
         $("#graph-tabs-" + dataSlug).removeClass("hidden");
 
         drawGraph(metricSlug, segmentType, timeFilter);
-
       });
     });
 
