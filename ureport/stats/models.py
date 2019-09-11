@@ -71,6 +71,7 @@ class PollStats(models.Model):
 
         return PollStats.refresh_engagement_data(org, metric, segment_slug, time_filter)
 
+    @classmethod
     def refresh_engagement_data(cls, org, metric, segment_slug, time_filter):
 
         key = f"org:{org.id}:metric:{metric}:segment:{segment_slug}:filter:{time_filter}"

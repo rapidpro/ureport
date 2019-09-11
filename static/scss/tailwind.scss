@@ -17,7 +17,7 @@ html {
 #countries {
   position: absolute;
   width: 100%;
-  z-index: 1;
+  z-index: 450;
   overflow:hidden;
   opacity: 0;
 
@@ -70,7 +70,8 @@ html {
 
 // button style
 .btn {
-  @apply font-bold py-2 px-4 rounded mb-1;
+  @apply text-base leading-none font-bold rounded-lg inline-block;
+  padding: 1em 2em;
 }
 
 // pills for (90 days, 60 months, 12 months)
