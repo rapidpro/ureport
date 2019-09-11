@@ -52,7 +52,7 @@ module.exports = {
         "sans-serif",
       ],
       alt: [
-        "Montserrat",
+        "Livvic",
         "Roboto",
         "sans-serif"
       ],
