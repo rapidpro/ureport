@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 18:59+0000\n"
+"POT-Creation-Date: 2019-09-11 14:45+0000\n"
 "PO-Revision-Date: 2017-02-22 13:15+0000\n"
 "Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
@@ -1395,6 +1395,9 @@ msgid "To exit U-Report just send stop to 24453"
 msgstr ""
 
 msgid "A sentence that describes what this page is all about and who it is for"
+msgstr ""
+
+msgid "No results found"
 msgstr ""
 
 #, fuzzy
