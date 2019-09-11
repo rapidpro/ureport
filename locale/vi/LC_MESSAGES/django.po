@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-11 14:45+0000\n"
+"POT-Creation-Date: 2019-09-11 18:27+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -1247,6 +1247,12 @@ msgstr ""
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
+msgid "Export and Share"
+msgstr ""
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -1381,26 +1387,10 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
-msgid ""
-"\n"
-"                 %(responded)s responded out of %(polled)s polled\n"
-"               "
-msgstr ""
-"\n"
-"%(responded)sđã phản hồi trong số %(polled)sđã khảo sát"
-
-msgid "Keywords"
+msgid "STATE"
 msgstr ""
 
 msgid "A sentence that describes how we feel about stories and the human side of things."
-msgstr ""
-
-msgid "SEARCH"
 msgstr ""
 
 msgid "Year at a Glance"
@@ -2012,6 +2002,19 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    %(responded)s responded out of %(polled)s polled\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                 %(responded)s responded out of %(polled)s polled\n"
+#~ "               "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)sđã phản hồi trong số %(polled)sđã khảo sát"
 
 #, fuzzy
 #~| msgid "Join & Engage"
