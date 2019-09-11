@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-10 18:59+0000\n"
+"POT-Creation-Date: 2019-09-11 14:45+0000\n"
 "PO-Revision-Date: 2018-10-25 18:23+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/rapidpro/ureport/language/pt_BR/)\n"
@@ -1360,6 +1360,9 @@ msgid "To exit U-Report just send stop to 24453"
 msgstr ""
 
 msgid "A sentence that describes what this page is all about and who it is for"
+msgstr ""
+
+msgid "No results found"
 msgstr ""
 
 #, fuzzy

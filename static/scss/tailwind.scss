@@ -40,6 +40,20 @@ html {
   }
 }
 
+.social-media-block {
+  transition: 2s;
+  opacity: 0;
+
+  -webkit-transition:opacity 2s ease-in-out;
+  -moz-transition:opacity 2s ease-in-out;
+  transition:opacity 2s ease-in-out;
+
+  &.open {
+    transition: 2s;
+    opacity: 1;
+  }
+}
+
 // flags in our menu
 .flag {
   width: 80px;
@@ -249,6 +263,10 @@ html {
 
   &:hover {
     @apply bg-gray-200;
+
+    &.text-white {
+      @apply bg-gray-600;
+    }
   }
 }
 

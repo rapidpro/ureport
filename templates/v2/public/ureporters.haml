@@ -89,10 +89,10 @@
 
   .bg-dark-blue.p-home.text-white.font-bold.border-b.border-white
     - for time_filter in data_time_filters
-      .engagemment-content(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
+      .engagemment-content.hover-parent(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
         - for metric in data_metrics
-          .engagement-graph-block.block.mt-16(class="md:flex" style="min-height:30rem; max-height:45rem;" data-aos="fade")
-            .(class="md:w-2/5")
+          .engagement-graph-block.hover-parent.block.mt-16(class="md:flex" style="min-height:30rem; max-height:45rem;" data-aos="fade" id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
+            .hover-parent(class="md:w-2/5")
               .bg-light1.h-1.w-16.mb-4
               .text-3xl.mb-4
                 {{ metric.title }}
@@ -100,24 +100,35 @@
               .text-black.text-2xs.flex.mb-6
                 - for segment in data_segments
                   - if forloop.first
-                    .pill-first.pill-dark-blue-inverted.selected.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                    .pill-first.pill-dark-blue-inverted.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
                   - elif forloop.last
-                    .pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
-                      .dropdown-button
+                    .pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
+                      .dropdown-butto
                         {{segment.label}}
-                      .dropdonw-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2
+                      .dropdown-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2
                         - for state in states
-                          .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white")
+                          .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white {% if forloop.counter < 4 %}is-selected bg-gray-800 text-white{% endif %}")
                             {{state.name}}
                   - else
                     .pill.pill-dark-blue-inverted.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
 
+              .share.flex-none.mb-4.flex-center-y.hover-show
+                .block
+                  %a.bg-circle-xs.border.border-white.text-white.facebook-share(href="" data-url="{% org_host_link %}{% url 'v2.public.engagement' %}")
+                    %i.fa.fa-facebook
+                  %a.bg-circle-xs.border.border-white.text-white(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.engagement' %}")
+                    %i.fa.fa-twitter
+                  %a.bg-circle-xs.border.border-white.text-white(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'v2.public.engagement' %}")
+                    %i.fa.fa-whatsapp
+                  %a.bg-circle-xs.border.border-white.text-white(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.engagement'  %}" uk-icon="icon: mail; ratio: 1.5")
+                    %i.fa.fa-envelope
+
             .block(class="md:w-3/5")
               .engagement-graph-tabs(id="graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
                 - for segment in data_segments
-                  .engagement-graph(id="graph-tabs-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
+                  .engagement-graph.hidden(id="graph-tabs-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
                     .has-graph(id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
 
 
@@ -126,68 +137,29 @@
 
   :javascript
     $(function(){
-      $(".tab-button-time-filter").on("click", function(event) {
-        event.stopPropagation();
-        $(this).siblings().removeClass("selected")
-        $(this).addClass("selected");
-        var timeFilter = $(this).attr("data-time-filter");
-        $(".engagemment-content").addClass("hidden");
-        $("#tab-content-block-" + timeFilter).removeClass("hidden");
-        $("#tab-content-block-" + timeFilter).children().children().children().children(".selected.tab-button-graph-switch").each(function() {
-          $(this).click();
-        });
-      });
-    });
-
-    $(function() {
-      $(".location-dropdown").on("click", function(event) {
-        event.stopPropagation();
-        event.preventDefault();
-        var graphId = $(this).attr("data-graph-id");
-        if($(this).children(".dropdonw-content").hasClass("hidden")) {
-          $(".dropdonw-content").addClass("hidden");
-          $(this).children(".dropdonw-content").removeClass("hidden");
-        } else {
-          $(this).children(".dropdonw-content").addClass("hidden");
-        }
-      })
-    })
-
-    $(function() {
-      $(".state-selector").on('click', function(event) {
-        event.stopPropagation();
-        var locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
-
-        if(locationIds.length < 5) {
-          $(this).toggleClass('is-selected bg-gray-800 text-white');
-        } else if ($(this).hasClass('is-selected')) {
-          $(this).removeClass('is-selected bg-gray-800 text-white');
-        } else {
-          return
-        }
-        locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
-
-        var dataDiv = $(this).parent().parent();
-
-        var metricSlug = dataDiv.attr("data-metric-slug");
-        var segmentType = dataDiv.attr("data-segment-type");
-        var timeFilter = dataDiv.attr("data-time-filter");
+      function drawGraph(metricSlug, segmentType, timeFilter){
 
         var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
+        var chartType = "column";
+        if (segmentType == 'all') {
+          chartType = "spline";
+        }
         var results = Window.UreportEngagementStats[dataSlug];
 
         var colors = ["#E3002B", "#009316", "#FED100", "#3FB5E5", "#FF8200", "#000000"];
-
-        var locationsResults = [];
-        for (i=0; i<results.length; i++){
-          result = results[i];
-          if(locationIds.includes(result.name)) {
-            result.color = colors[locationsResults.length % colors.length]
-            locationsResults.push(result);
+        var locationIds = $("#location-pill-" + dataSlug).children().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+        if (segmentType == 'location'){
+          var series = [];
+          for (i=0; i<results.length; i++){
+            result = results[i];
+            if(locationIds.includes(result.name)) {
+              result.color = colors[series.length % colors.length]
+              series.push(result);
+            }
           }
+        } else {
+          var series = results
         }
-
-        var chartType = "column";
 
         $('#engagement-graph-' + dataSlug).highcharts({
           chart: {
@@ -218,7 +190,10 @@
           },
           yAxis: {
               title: {
-                  text: null
+                  text: null,
+                  style: {
+                    color: "#DDD"
+                  }
               },
               min: 0,
               labels: {
@@ -231,7 +206,6 @@
               headerFormat: '<b>{series.name}</b><br>',
               pointFormat: '{point.x: %b %Y}: {point.y}'
           },
-
           plotOptions: {
               spline: {
                   marker: {
@@ -239,22 +213,62 @@
                   }
               }
           },
-
           credits: {
             enabled: false
           },
-
           colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
-          series : locationsResults
-          });
+          series : series
+        });
+      }
+
+      $(".tab-button-time-filter").on("click", function(event) {
+        event.stopPropagation();
+        $(this).siblings().removeClass("selected")
+        $(this).addClass("selected");
+        var timeFilter = $(this).attr("data-time-filter");
+        $(".engagemment-content").addClass("hidden");
+        $("#tab-content-block-" + timeFilter).removeClass("hidden");
+        $("#tab-content-block-" + timeFilter).children().children().children().children(".selected.tab-button-graph-switch").each(function() {
+          $(this).click();
+        });
+      });
+
+      $(".state-selector").on('click', function(event) {
+        event.stopPropagation();
+        var locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
+
+        if(locationIds.length < 5) {
+          $(this).toggleClass('is-selected bg-gray-800 text-white');
+        } else if ($(this).hasClass('is-selected')) {
+          $(this).removeClass('is-selected bg-gray-800 text-white');
+        } else {
+          return
+        }
+        var dataDiv = $(this).parent().parent();
+
+        var metricSlug = dataDiv.attr("data-metric-slug");
+        var segmentType = dataDiv.attr("data-segment-type");
+        var timeFilter = dataDiv.attr("data-time-filter");
+
+        drawGraph(metricSlug, segmentType, timeFilter);
 
       });
 
-    });
 
-    $(function(){
+      $(".pill-dark-blue-inverted").parent().each(function() {
+        var chosen = $($(this).children()[Math.floor(Math.random() * 4)])
+        chosen.addClass("selected");
+        var metricSlug = chosen.attr("data-metric-slug");
+        var segmentType = chosen.attr("data-segment-type");
+        var timeFilter = chosen.attr("data-time-filter");
+        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
+        setTimeout(function(){ 
+          drawGraph(metricSlug, segmentType, timeFilter);
+          $("#graph-tabs-" + dataSlug).removeClass("hidden");
+         }, 1000);
+      });
+
       $(".engagement-graph").each(function() {
-        //console.log($(this));
         var graphDiv = $(this).children(".has-graph");
         var metricSlug = graphDiv.attr("data-metric-slug");
         var segmentType = graphDiv.attr("data-segment-type");
@@ -292,665 +306,37 @@
           }
 
           Window.UreportEngagementStats[dataSlug] = series
-          if (segmentType != 'all') {
-            return
-          }
-
-          if(segmentType == "location") {
-            return
-          }
-
-          $('#engagement-graph-' + dataSlug).highcharts({
-            chart: {
-                type: "spline",
-                style: {
-                  fontFamily: "Montserrat"
-                }
-            },
-            title: {
-                text: null
-            },
-            legend: {
-                itemStyle: {
-                  color: "#DDD"
-                }
-            },
-            xAxis: {
-                type: 'datetime',
-                dateTimeLabelFormats: {
-                  month: '%b %Y',
-                  year: '%Y'
-                },
-                labels: {
-                  style: {
-                    color: "#DDD"
-                  }
-                },
-            },
-            yAxis: {
-                title: {
-                    text: null,
-                    style: {
-                      color: "#DDD"
-                    }
-                },
-                min: 0,
-                labels: {
-                  style: {
-                    color: "#DDD"
-                  }
-                }
-            },
-            tooltip: {
-                headerFormat: '<b>{series.name}</b><br>',
-                pointFormat: '{point.x: %b %Y}: {point.y}'
-            },
-            plotOptions: {
-                spline: {
-                    marker: {
-                        enabled: true
-                    }
-                }
-            },
-            credits: {
-              enabled: false
-            },
-            colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
-              series : series
-          });
+          drawGraph(metricSlug, segmentType, timeFilter);
         });
       });
-    });
-
-    $(function(){
+    
       $(".tab-button-graph-switch").on("click", function(event) {
-        event.stopPropagation();
-        console.log(event);
-
-        $(this).siblings().removeClass("selected")
-        $(this).siblings().children(".dropdonw-content").addClass("hidden")
-        $(this).addClass("selected");
         var metricSlug = $(this).attr("data-metric-slug");
         var segmentType = $(this).attr("data-segment-type");
-        var timeFilter = $(this)  .attr("data-time-filter");
+        var timeFilter = $(this).attr("data-time-filter");
         var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
+        event.stopPropagation();
+
+        $(this).siblings().removeClass("selected")
+        $(this).addClass("selected");
+
+        if($(this).hasClass("location-dropdown")) {
+
+          if($(this).children(".dropdown-content").hasClass("hidden")) {
+            $(".dropdown-content").addClass("hidden");
+            $(this).children(".dropdown-content").removeClass("hidden");
+          } else {
+            $(this).children(".dropdown-content").addClass("hidden");
+          }
+        } else {
+          $(this).siblings().children(".dropdown-content").addClass("hidden")
+        }
+
         $(".engagement-graph-tabs #graph-tabs-" + dataSlug).siblings().addClass("hidden");
         $("#graph-tabs-" + dataSlug).removeClass("hidden");
 
-        var chartType = "column";
-        if (segmentType == 'all') {
-          chartType = "spline";
-        }
-
-        if(segmentType == "location") {
-            return
-        }
-
-        var series = Window.UreportEngagementStats[dataSlug];
-        $('#engagement-graph-' + dataSlug).highcharts({
-          chart: {
-              type: chartType,
-              style: {
-                fontFamily: "Montserrat"
-              }
-          },
-          title: {
-              text: null
-          },
-          legend: {
-              itemStyle: {
-                color: "#DDD"
-              }
-          },
-          xAxis: {
-              type: 'datetime',
-              dateTimeLabelFormats: {
-                month: '%b %Y',
-                year: '%Y'
-              },
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              },
-          },
-          yAxis: {
-              title: {
-                  text: null,
-                  style: {
-                    color: "#DDD"
-                  }
-              },
-              min: 0,
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              }
-          },
-          tooltip: {
-              headerFormat: '<b>{series.name}</b><br>',
-              pointFormat: '{point.x: %b %Y}: {point.y}'
-          },
-          plotOptions: {
-              spline: {
-                  marker: {
-                      enabled: true
-                  }
-              }
-          },
-          credits: {
-            enabled: false
-          },
-          colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
-          series : series
-        });
+        drawGraph(metricSlug, segmentType, timeFilter);
       });
     });
 
 
-- block old-content
-  .booklet-bg
-  .booklet-bg-content
-    .page-title-block
-      .uk-grid-match(uk-grid)
-        .uk-width-1-2.page-title
-          Engagement
-
-  .engagemment-top-graph-block
-    .(uk-grid)
-      .uk-width-1-2.block-content(style="background:#000; color:#FFF;")
-        .engagement-page-yellow-text.registration-stats-labels
-          At a glance
-        .registration-stats-numbers.uk-flex-inline
-          .signup-part
-            .part-count
-              {{org.get_signups|intcomma}}
-            .part-label
-              SIGN-UPS
-          .response-rate-part
-            .part-count
-              {{average_response_rate|floatformat}} %
-            .part-label
-              AVG RESPONSE RATE
-        .registration-stats-counts.uk-flex-inline
-          .part-count.engagement-page-yellow-text
-            {{org.get_reporters_count|intcomma}}
-          .part-label
-            - trans "TOTAL U-REPORTERS IN" 
-            {{ org.name|upper }}
-          .part-signu-rate.engagement-page-yellow-text
-            +{{org.get_signup_rate|floatformat}} %
-
-        .registration-stats-graphs(uk-grid)
-          .uk-width-1-3.uk-flex-inline
-            .gender-stats
-              .gender-stat-icon
-                %img(src="{{ STATIC_URL }}img/gender-male-w.png")
-              .gender-stat-percentage
-                {{gender_stats.male_percentage}}
-              .gender-stat-count.engagement-page-yellow-text
-                {{gender_stats.male_count|intcomma}}
-            .gender-stats
-              .gender-stat-icon
-                %img(src="{{ STATIC_URL }}img/gender-female-w.png")
-              .gender-stat-percentage
-                {{gender_stats.female_percentage}}
-              .gender-stat-count.engagement-page-yellow-text
-                {{gender_stats.female_count|intcomma}}
-            -if org|config:"has_extra_gender"
-              .gender-stats
-                .gender-stat-icon
-                  %img(src="{{ STATIC_URL }}img/gender-other-w.png")
-                .gender-stat-percentage
-                  {{gender_stats.other_percentage}}
-                .gender-stat-count.engagement-page-yellow-text
-                  {{gender_stats.other_count|intcomma}}                
-          .uk-width-2-3.poll-age-graph
-            .age-stats{ id: "age-chart"}
-            
-      .uk-width-1-2.locations-stats.block-content
-        .ureport-location-map(id="ureport-location-map-id")
-          #ureport-location-map-id-placeholder.loading-placeholder
-            %img(src="{{ STATIC_URL }}img/loading.gif")
-  
-  .filters-block(style="background:#1D1D1D; padding: 2rem 0;" uk-sticky)
-    .uk-grid-match(uk-grid)
-      .uk-width-2-3
-        .filter-results-label
-          FILTER RESULTS:
-      .uk-width-1-3
-        .uk-button-group.time-filters-button(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#engagement-content-time-filters")
-          - for time_filter in data_time_filters
-            %button.uk-button.uk-button-secondary(class="{% if forloop.first %}left-most{% endif %}{% if forloop.last %}uk-active right-most{% endif %}")
-              {{time_filter.label}}
-
-  %ul.uk-switcher(id="engagement-content-time-filters")
-    - for time_filter in data_time_filters
-      %li.engagemment-content
-        - for metric in data_metrics
-          .engagement-graph-block
-            .(uk-grid)
-              .uk-width-1-3.block-content
-                .block-border
-                  .yellow-bg
-                .block-title
-                  {{ metric.title }}
-                .block-graph-tab-buttons
-                  .uk-button-group.ureport-graph-tabs-button(uk-switcher="animation: uk-animation-fade; toggle: > *; connect:#graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
-                    - for segment in data_segments
-                      -if segment.segment_type == 'location'
-                        %button.uk-button.uk-button-default(class="right-most" id="states-dropdown-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
-                          {{segment.label}}
-                        .uk-padding-remove(uk-dropdown="mode:click;" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
-                          %ul#states-selector.uk-list.uk-list-striped.uk-height-medium.uk-overflow-auto
-                            - for state in states
-                              %li.state-selector(data-location-id='{{state.name}}')
-                                {{state.name}}
-                      -else
-                        %button.uk-button.uk-button-default(class="{% if forloop.first %}left-most{% endif %}")
-                          {{segment.label}}
-              .uk-width-2-3.block-content.animate-graph(uk-scrollspy="cls:uk-animation-fade; delay:200; repeat:true;")
-                %ul.uk-switcher.engagement-graph-tabs(id="graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
-                  - for segment in data_segments
-                    %li.engagement-graph(id="graph-tabs-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}") 
-                      .has-graph(id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
-
--block extra-script
-  {{ block.super }}
-  {% compress js %}
-  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureporters_v2.coffee" />
-  {% endcompress %}
-
-  {% include "public/strings_values.html" %}
-
-  :javascript
-    $(function(){
-      $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
-        $(".ureport-location-map").each(function(){
-          var ajaxUrl = '/v2/contact_field_results/'
-          var colorsList = gradientFactory.generate({
-            from: '#DDDDDD',
-            to: '{{ org|config:"primary_color"}}',
-            stops: 6
-          });
-
-          window.initMap('ureport-location-map-id', boundaries, ajaxUrl,  '{{ district_zoom|lower }}' === 'true', colorsList, '{{ ward_zoom|lower }}' === 'true', '{{reporters|intcomma}}');
-        });
-      });
-    });
-
-    $(function(){
-
-      $(".engagement-graph").each(function() {
-        //console.log($(this));
-        var graphDiv = $(this).children(".has-graph");
-        var metricSlug = graphDiv.attr("data-metric-slug");
-        var segmentType = graphDiv.attr("data-segment-type");
-        var timeFilter = graphDiv.attr("data-time-filter");
-
-        var params = {"metric": metricSlug, "segment": segmentType, "filter": timeFilter};
-        $.ajax({url:'/v2/engagement_data/?results_params=' + encodeURIComponent(JSON.stringify(params)), dataType: "json"}).done(function(result){
-            if(!result){
-              return;
-            }
-            if(!Window.UreportEngagementStats) {
-              Window.UreportEngagementStats = {}
-            }
-
-            var colors = ['#E3002B', '#000000', '#FFD100', '#40B5E5', '#FF8200', '#009917'];
-            if(segmentType=="all"){
-              colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
-            }
-
-            if(segmentType=="gender"){
-              colors = ['#40B5E5', '#FF8200', '#019B17'];
-            }
-            
-            var serverData = result;
-            var series = [];
-            for (i=0; i<serverData.length; i++) {
-              data = serverData[i]['data']
-              cleanedData = []
-              Object.keys(data).forEach(function(key){
-                cleanedData.push([Date.parse(key), data[key]]);
-              })
-              cleanedData.sort(function(a,b){return a[0] - b[0];});
-              series.push({name: serverData[i]['name'], data: cleanedData, color: colors[i % colors.length]})
-            }
-  
-            Window.UreportEngagementStats[metricSlug + "-" + segmentType + "-" + timeFilter] = series
-        });
-  
-      });
-  
-      $(".uk-switcher li.engagement-graph").on('beforeshow', function(event) {
-        var graphDiv = $("#" + event.target.id).children(".has-graph");
-        var metricSlug = graphDiv.attr("data-metric-slug");
-        var segmentType = graphDiv.attr("data-segment-type");
-        var timeFilter = graphDiv.attr("data-time-filter");
-  
-        var chartType = "column";
-        if (segmentType == 'all') {
-          chartType = "spline";
-        }
-
-        if(segmentType == "location") {
-          return
-        }
-
-        var series = Window.UreportEngagementStats[metricSlug + "-" + segmentType + "-" + timeFilter];
-        $('#engagement-graph-' + metricSlug + "-" + segmentType + "-" + timeFilter).highcharts({
-          chart: {
-              type: chartType
-          },
-          title: {
-              text: null
-          },
-          legend: {
-           
-              itemStyle: {
-                color: "#DDD"
-              }
-          },
-          xAxis: {
-              type: 'datetime',
-              dateTimeLabelFormats: {
-                month: '%b %Y',
-                year: '%Y'
-              },
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              },
-          },
-          yAxis: {
-              title: {
-                  text: null,
-                  style: {
-                    color: "#DDD"
-                  }
-              },
-              min: 0,
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              }
-          },
-          tooltip: {
-              headerFormat: '<b>{series.name}</b><br>',
-              pointFormat: '{point.x: %b %Y}: {point.y}'
-          },
-      
-          plotOptions: {
-              spline: {
-                  marker: {
-                      enabled: true
-                  }
-              }
-          },
-          credits: {
-            enabled: false
-          },
-      
-          colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
-          series : series
-       });
-      });
-
-      $(".animate-graph").on('inview', function(event) {
-        var graphDiv = $(this).children(".engagement-graph-tabs").children(".engagement-graph").children(".has-graph");
-        var metricSlug = graphDiv.attr("data-metric-slug");
-        var segmentType = graphDiv.attr("data-segment-type");
-        var timeFilter = graphDiv.attr("data-time-filter");
-
-        var chartType = "column";
-        if (segmentType == 'all') {
-          chartType = "spline";
-        }
-
-        if(segmentType == "location") {
-          return
-        }
-        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
-        var series = Window.UreportEngagementStats[dataSlug];
-  
-        $('#engagement-graph-' + dataSlug).highcharts({
-          chart: {
-              type: chartType
-          },
-          title: {
-              text: null
-          },
-          legend: {
-              itemStyle: {
-                color: "#DDD"
-              }
-          },
-          xAxis: {
-              type: 'datetime',
-              dateTimeLabelFormats: {
-                month: '%b %Y',
-                year: '%Y'
-              },
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              }
-          },
-          yAxis: {
-              title: {
-                  text: null
-              },
-              min: 0,
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              }
-          },
-          tooltip: {
-              headerFormat: '<b>{series.name}</b><br>',
-              pointFormat: '{point.x: %b %Y}: {point.y}'
-          },
-      
-          plotOptions: {
-              spline: {
-                  marker: {
-                      enabled: true
-                  }
-              }
-          },
-  
-          credits: {   
-            enabled: false
-          },
-      
-          colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
-          series : series
-          });
-      });
-
-      $(".state-selector").on('click', function(event) {
-        event.stopPropagation();
-        var locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
-
-        if(locationIds.length < 5) {
-          $(this).toggleClass('is-selected');
-        } else if ($(this).hasClass('is-selected')) {
-          $(this).removeClass('is-selected');
-        } else {
-          return
-        }
-        locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
-
-        var dataDiv = $(this).parent().parent();
-
-        var metricSlug = dataDiv.attr("data-metric-slug");
-        var segmentType = dataDiv.attr("data-segment-type");
-        var timeFilter = dataDiv.attr("data-time-filter");
-
-        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
-        var results = Window.UreportEngagementStats[dataSlug];
-
-        var colors = ["#E3002B", "#050E28", "#FED100", "#3FB5E5", "#FF8200", "#009316"];
-
-        var locationsResults = [];
-        for (i=0; i<results.length; i++){
-          result = results[i];
-          if(locationIds.includes(result.name)) {
-            result.color = colors[locationsResults.length % colors.length]
-            locationsResults.push(result);
-          }
-        }
-
-        var chartType = "column";
-
-        $('#engagement-graph-' + dataSlug).highcharts({
-          chart: {
-              type: chartType
-          },
-          title: {
-              text: null
-          },
-          legend: {
-              itemStyle: {
-                color: "#DDD"
-              }
-          },
-          xAxis: {
-              type: 'datetime',
-              dateTimeLabelFormats: {
-                month: '%b %Y',
-                year: '%Y'
-              },
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              },
-          },
-          yAxis: {
-              title: {
-                  text: null
-              },
-              min: 0,
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              }
-          },
-          tooltip: {
-              headerFormat: '<b>{series.name}</b><br>',
-              pointFormat: '{point.x: %b %Y}: {point.y}'
-          },
-
-          plotOptions: {
-              spline: {
-                  marker: {
-                      enabled: true
-                  }
-              }
-          },
-
-          credits: {
-            enabled: false
-          },
-
-          colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
-          series : locationsResults
-          });
-
-        if($("#states-dropdown-" + question).hasClass('uk-open')) {
-          $("#states-dropdown-" + question).addClass('uk-active')
-        }
-        $('#locations-tab-' + question).addClass('uk-active');
-
-      });
-
-    });
-
-    $("#age-chart").each(function(){
-
-           var data = {{ age_stats|safe }};
-
-           {% if is_rtl_org %}
-           data.reverse();
-           {% endif %}
-
-           var categories = [];
-
-           for (i=0; i<data.length; i++) {
-             categories.push(data[i].name)
-           }
-
-           $('#age-chart').highcharts({
-             chart: {
-               type: 'column',
-               backgroundColor: "#000",
-               spacing: [ 3, 5, 3, 5],
-               height: "30%",
-             },
-             credits: {
-               enabled: false
-             },
-             legend: {
-               enabled: false
-             },
-             title: {
-                 text: null
-             },
-             subtitle: {
-                 text: null
-             },
-             xAxis: {
-               categories: categories,
-               labels : {
-                   rotation: 0,
-                   style: {
-                     fontSize: 14,
-                     fontFamily: "SharpSansDisplayBold",
-                     color: "#FED200",
-                 }
-               },
-               minorTickLength: 0,
-               tickLength: 0
-             },
-             yAxis: {
-               min: 0,
-               labels: {
-                 enabled: false
-               },
-               visible: false,
-               gridLineWidth: 0,
-               title: {
-                 text: null
-               }
-             },
-             tooltip: {
-               enabled: false
-             },
-             plotOptions: {
-                 column: {
-                     color: '#FFF',
-                     pointPadding: 0.2,
-                     pointWidth: 30,
-                     borderWidth: 0,
-                     dataLabels:  {
-                       enabled: true,
-                       style: {
-                         fontFamily: "SharpSansDisplayBold",
-                       },
-                       color: "#FFF",
-                       verticalAlign:"bottom",
-                       format: '<b>{point.y:.0f}%</b>'
-                     }
-                 }
-             },
-             series: [ {name: 'Age' , data: data } ]
-           });
-         });
