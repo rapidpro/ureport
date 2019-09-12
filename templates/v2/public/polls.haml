@@ -99,7 +99,7 @@
             -trans "TOTAL RESPONSES"
           #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:400px;min-width:300px;")
 
-          #map-info.relative.h-full.w-full.mt-4.flex.justify-center.px-auto
+          #map-info.relative.h-full.w-full.my-4.flex.justify-center.px-auto
 
 
     - for question in latest_poll.get_questions
