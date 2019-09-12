@@ -94,7 +94,7 @@ $(->
           else
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>"
         else
-         this._div.innerHTML = ""
+          this._div.innerHTML = ""
       else
         this._div.innerHTML = ""
   
@@ -239,10 +239,6 @@ $(->
           map.on 'resize', (e) ->
             map.fitBounds(boundaries.getBounds())
 
-    info.addTo(map);  
-        info.addTo(map);
-    info.addTo(map);  
-        info.addTo(map);
     info.addTo(map);  
     states = L.geoJson(geojson, { style: countStyle, onEachFeature: onEachFeature })
     states.addTo(map)
