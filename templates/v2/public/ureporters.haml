@@ -16,15 +16,18 @@
   .max-w-page.mx-auto
     .bg-dark-blue(class="md:flex")
       .flex-1.bg-black.p-home.vertical-angle
-        .font-alt.text-light1.italic.mb-4.font-bold
-          -trans "Year at a Glance"
+        .font-alt.text-light1.italic.mb-4.font-bold.mt-6
+          -trans "OVERALL STATISTICS"
 
-        .text-white.font-light
+        .text-white.font-light.mt-12
           .inline-block.pr-8.border-r.border-white
             .text-5xl.leading-none
-              {{org.get_signups|intcomma}}
+              {{org.get_reporters_count|intcomma}}
             .text-xs.font-bold
-              -trans "SIGN-UPS"
+              -trans "U-REPORTERS"
+              .inline.text-light1
+                +{{org.get_signup_rate|floatformat}}%
+                -trans "THIS YEAR"
 
           .inline-block.pl-8
             .text-5xl.leading-none
@@ -32,16 +35,7 @@
             .text-xs.font-bold
               -trans "AVG RESPONSE RATE"
 
-        .text-white.mt-4.font-bold
-          .inline.text-light1
-            {{org.get_reporters_count|intcomma}}
-          .inline.text-white
-            -trans "TOTAL U-REPORTERS IN"
-            {{ org.name|upper }}
-          .inline.text-light1
-            +{{org.get_signup_rate|floatformat}}%
-
-        .mt-4.flex
+        .mt-4.flex.mb-8(class="md:mt-12 md:mb-0")
           .flex-none.mr-8
             .text-white.text-center.inline-block.pr-4.border-r.border-white
               %img(src="{{ STATIC_URL }}img/gender-male-w.png" width="40")

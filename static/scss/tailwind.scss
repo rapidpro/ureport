@@ -460,7 +460,7 @@ html {
 @media only screen and (min-width: 768px) {
   .vertical-angle {
     -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
-    clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
+    clip-path: polygon(40px, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
   }
 
   .p-home {
