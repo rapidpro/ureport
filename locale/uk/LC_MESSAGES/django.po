@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-12 23:43+0000\n"
+"POT-Creation-Date: 2019-09-12 23:51+0000\n"
 "PO-Revision-Date: 2017-03-02 17:06+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/uk/)\n"
@@ -422,6 +422,294 @@ msgstr "Зображення для сторінки статті і в прев
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Зображення для історії та прев'ю (на вибір)"
 
+msgid "Remove Item?"
+msgstr "Видалити?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Ви впевнені, що цього хочете - видалити  <b>%(object)s</b>?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Якщо його видалити, воно зникне назавжди. Подумайте. Скасувати не вийде."
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"  Результати - %(counter)s\n"
+" "
+msgstr[1] ""
+"\n"
+"  Результати - %(counter)s\n"
+" "
+msgstr[2] ""
+"\n"
+"  Результати - %(counter)s\n"
+" "
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+" Результати: %(start)s-%(end)s з %(count)s\n"
+" "
+
+msgid "Previous"
+msgstr "Попередній"
+
+msgid "Next"
+msgstr "Наступний"
+
+msgid "edit"
+msgstr "редагувати"
+
+msgid "Sign in"
+msgstr "Зареєструватись"
+
+msgid "Login"
+msgstr "Увійти"
+
+msgid "Forgot Password?"
+msgstr "Забули пароль?"
+
+msgid "Token Expired"
+msgstr "Код застарілий"
+
+msgid "Login Failure"
+msgstr "Не вдалось увійти"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Вибачайте, Ви не можете увійти в свій обліковий запис -  %(failed_login_limit)s невдалих спроб."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Почекайте %(lockout_timeout)s хв. і зайдіть знову"
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Можете заповнити оцю форму, і вам перешлють пароль на мейл"
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Зв'яжіться з адміністратором, щоб віновити пароль"
+
+msgid "Email Address"
+msgstr "Email"
+
+msgid "Recover"
+msgstr "Відновити"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Напишіть адресу, за якою ви реєструвались, і ми щось спробуємо зробити, щоб відновити пароль"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong> Пароль більше не дійсний.</strong> Мусите обирати новий пароль кожні %(expire_days)s днів, і не використовувати цей пароль за %(window_days)s днів до цього."
+
+msgid "New Password"
+msgstr "Новий пароль"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "У паролі має бути 8 символів, серед яких великі букви, маленькі букви, і цифри"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Ви вже використовували цей пароль минулого року. Давайте новий"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Confirm Password"
+msgstr "Підтвердити пароль"
+
+msgid "Please enter your password to save changes."
+msgstr "Напишіть Ваш пароль, щоб зберегти зміни"
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Підтвердіть новий пароль, заповнивши оце поле"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Новий пароль не збігається із підтвердженим"
+
+msgid "Your Email"
+msgstr "Ваш Email"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "Відновлення Email-адреси не підтримується. Зв'яжіться з адміністратором, і він\\вона перестановить пароль вручну"
+
+msgid "Current Password"
+msgstr "Теперішній пароль"
+
+msgid "Your current password"
+msgstr "Ваш теперішній пароль"
+
+msgid "Your new password."
+msgstr "Ваш новий пароль"
+
+msgid "Confirm new Password"
+msgstr "Підтвердити новий пароль"
+
+msgid "Confirm your new password."
+msgstr "Підтвердіть Ваш новий пароль"
+
+msgid "Please enter your password to save changes"
+msgstr "Наберіть Ваш пароль, щоб зберегти "
+
+msgid "Confirm your new password by entering it here"
+msgstr "Підтвердіть Ваш пароль - введіть його тут"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Не збігається, спробуйте ще раз"
+
+msgid "New user created successfully."
+msgstr "Створено нового користувача"
+
+msgid "Groups"
+msgstr "Групи"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Користувачі мають лише права, що були надані їхнім групам"
+
+msgid "Set the user's initial password here."
+msgstr "Встановити початковий пароль користувача"
+
+msgid "Last Login"
+msgstr "Останнє відвідування"
+
+msgid "Is Active"
+msgstr "Активний"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Користувачу дозволено входити на сайт"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Користувачі матимуть лише ті права, що були надані їхнім групам"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Ви можете стерти пароль користувача, якщо ввдедете новий сюди"
+
+msgid "Username"
+msgstr "Ім'я користувача"
+
+msgid "Your password"
+msgstr "Ваш пароль"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Якщо хочете новий пароль, введіть його сюди"
+
+msgid "Confirm New Password"
+msgstr "Підтвердити новий пароль"
+
+msgid "Confirm your new password"
+msgstr "Підтвердіть Ваш новий пароль"
+
+msgid "Edit your profile"
+msgstr "Редагувати профіль"
+
+msgid "Password Recovery"
+msgstr "Відновлення паролю"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Вам надіслали лист із подальшими інструкціями"
+
+msgid "Password Recovery Request"
+msgstr "Запит на відновлення паролю"
+
+msgid "Pick a new password"
+msgstr "Оберіть новий пароль"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Ваш пароль змінено - дякуємо"
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Ви ввійшли на сайт як %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Пароль оновлено. Можете з ним заходити на сайт"
+
+msgid "Reset your Password"
+msgstr "Змінити пароль"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Ваше посилання не працює з причин безпеки. Будь ласка, відновіть процедуру - введіть ваш email"
+
+msgid "Submit"
+msgstr "Подати"
+
+msgid "Form"
+msgstr "Форма"
+
+msgid "Save Changes"
+msgstr "Зберегти"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Ваш новий %s створено"
+
+#, python-format
+msgid "Import %s"
+msgstr "Імпортувати %s"
+
 msgid "Back to Full Site"
 msgstr ""
 
@@ -433,9 +721,6 @@ msgstr ""
 
 msgid "Logout"
 msgstr "Вийти"
-
-msgid "Login"
-msgstr "Увійти"
 
 msgid "Polls"
 msgstr "Опитування"
@@ -572,12 +857,6 @@ msgid ""
 msgstr ""
 "\n"
 "<div>Коли створите віджет, скопіюйте його ID з URL, як показано тут n</div>"
-
-msgid "Next"
-msgstr "Наступний"
-
-msgid "Cancel"
-msgstr "Скасувати"
 
 msgid "Back"
 msgstr "Назад"
@@ -1018,12 +1297,6 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "Читати"
 
-msgid "Sign in"
-msgstr "Зареєструватись"
-
-msgid "Forgot Password?"
-msgstr "Забули пароль?"
-
 msgid "+ New Page"
 msgstr ""
 
@@ -1159,9 +1432,6 @@ msgstr "U-репортери в"
 msgid "FILTER RESULTS"
 msgstr "Результати"
 
-msgid "Remove Item?"
-msgstr "Видалити?"
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1174,9 +1444,6 @@ msgid ""
 msgstr ""
 "\n"
 "Ви впевнені, що цього хочете - видалити  <b>%(object)s</b>?"
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "Якщо його видалити, воно зникне назавжди. Подумайте. Скасувати не вийде."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1222,12 +1489,6 @@ msgstr ""
 " Результати: %(start)s-%(end)s з %(count)s\n"
 " "
 
-msgid "Previous"
-msgstr "Попередній"
-
-msgid "edit"
-msgstr "редагувати"
-
 msgid "SIGN IN"
 msgstr ""
 
@@ -1236,9 +1497,6 @@ msgstr ""
 
 msgid "Enter Dashboard"
 msgstr ""
-
-msgid "Login Failure"
-msgstr "Не вдалось увійти"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1265,21 +1523,6 @@ msgid ""
 msgstr ""
 "\n"
 "Почекайте %(lockout_timeout)s хв. і зайдіть знову"
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "Можете заповнити оцю форму, і вам перешлють пароль на мейл"
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "Зв'яжіться з адміністратором, щоб віновити пароль"
-
-msgid "Email Address"
-msgstr "Email"
-
-msgid "Recover"
-msgstr "Відновити"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Напишіть адресу, за якою ви реєструвались, і ми щось спробуємо зробити, щоб відновити пароль"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1806,249 +2049,6 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Щось щоб виявити місце знаходження"
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#~| "    "
-#~ msgid ""
-#~ "\n"
-#~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "Ви впевнені, що цього хочете - видалити  <b>%(object)s</b>?"
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "\t\t%(counter)s result\n"
-#~| "\t"
-#~| msgid_plural ""
-#~| "\n"
-#~| "         %(counter)s results\n"
-#~| "        "
-#~ msgid ""
-#~ "\n"
-#~ "\t %(counter)s result\n"
-#~ "\t"
-#~ msgid_plural ""
-#~ "\n"
-#~ "         %(counter)s results\n"
-#~ "        "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "  Результати - %(counter)s\n"
-#~ " "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "  Результати - %(counter)s\n"
-#~ " "
-#~ msgstr[2] ""
-#~ "\n"
-#~ "  Результати - %(counter)s\n"
-#~ " "
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "\tResults %(start)s-%(end)s of %(count)s\n"
-#~| "\t"
-#~ msgid ""
-#~ "\n"
-#~ "\tResults %(start)s-%(end)s of %(count)s\n"
-#~ "\t"
-#~ msgstr ""
-#~ "\n"
-#~ " Результати: %(start)s-%(end)s з %(count)s\n"
-#~ " "
-
-#~ msgid "Token Expired"
-#~ msgstr "Код застарілий"
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#~| "      "
-#~ msgid ""
-#~ "\n"
-#~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Вибачайте, Ви не можете увійти в свій обліковий запис -  %(failed_login_limit)s невдалих спроб."
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#~| "      "
-#~ msgid ""
-#~ "\n"
-#~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Почекайте %(lockout_timeout)s хв. і зайдіть знову"
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#~| "  "
-#~ msgid ""
-#~ "\n"
-#~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "<strong> Пароль більше не дійсний.</strong> Мусите обирати новий пароль кожні %(expire_days)s днів, і не використовувати цей пароль за %(window_days)s днів до цього."
-
-#~ msgid "New Password"
-#~ msgstr "Новий пароль"
-
-#~ msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-#~ msgstr "У паролі має бути 8 символів, серед яких великі букви, маленькі букви, і цифри"
-
-#~ msgid "You have used this password before in the past year, please use a new password."
-#~ msgstr "Ви вже використовували цей пароль минулого року. Давайте новий"
-
-#~ msgid "Password"
-#~ msgstr "Пароль"
-
-#~ msgid "Confirm Password"
-#~ msgstr "Підтвердити пароль"
-
-#~ msgid "Please enter your password to save changes."
-#~ msgstr "Напишіть Ваш пароль, щоб зберегти зміни"
-
-#~ msgid "Confirm the new password by filling the this field"
-#~ msgstr "Підтвердіть новий пароль, заповнивши оце поле"
-
-#~ msgid "New password doesn't match with its confirmation"
-#~ msgstr "Новий пароль не збігається із підтвердженим"
-
-#~ msgid "Your Email"
-#~ msgstr "Ваш Email"
-
-#~ msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-#~ msgstr "Відновлення Email-адреси не підтримується. Зв'яжіться з адміністратором, і він\\вона перестановить пароль вручну"
-
-#~ msgid "Current Password"
-#~ msgstr "Теперішній пароль"
-
-#~ msgid "Your current password"
-#~ msgstr "Ваш теперішній пароль"
-
-#~ msgid "Your new password."
-#~ msgstr "Ваш новий пароль"
-
-#~ msgid "Confirm new Password"
-#~ msgstr "Підтвердити новий пароль"
-
-#~ msgid "Confirm your new password."
-#~ msgstr "Підтвердіть Ваш новий пароль"
-
-#~ msgid "Please enter your password to save changes"
-#~ msgstr "Наберіть Ваш пароль, щоб зберегти "
-
-#~ msgid "Confirm your new password by entering it here"
-#~ msgstr "Підтвердіть Ваш пароль - введіть його тут"
-
-#~ msgid "Mismatch between your new password and confirmation, try again"
-#~ msgstr "Не збігається, спробуйте ще раз"
-
-#~ msgid "New user created successfully."
-#~ msgstr "Створено нового користувача"
-
-#~ msgid "Groups"
-#~ msgstr "Групи"
-
-#~ msgid "Users will only get those permissions that are allowed for their group."
-#~ msgstr "Користувачі мають лише права, що були надані їхнім групам"
-
-#~ msgid "Set the user's initial password here."
-#~ msgstr "Встановити початковий пароль користувача"
-
-#~ msgid "Last Login"
-#~ msgstr "Останнє відвідування"
-
-#~ msgid "Is Active"
-#~ msgstr "Активний"
-
-#~ msgid "Whether this user is allowed to log into the site"
-#~ msgstr "Користувачу дозволено входити на сайт"
-
-#~ msgid "Users will only get those permissions that are allowed for their group"
-#~ msgstr "Користувачі матимуть лише ті права, що були надані їхнім групам"
-
-#~ msgid "You can reset the user's password by entering a new password here"
-#~ msgstr "Ви можете стерти пароль користувача, якщо ввдедете новий сюди"
-
-#~ msgid "Username"
-#~ msgstr "Ім'я користувача"
-
-#~ msgid "Your password"
-#~ msgstr "Ваш пароль"
-
-#~ msgid "If you want to set a new password, enter it here"
-#~ msgstr "Якщо хочете новий пароль, введіть його сюди"
-
-#~ msgid "Confirm New Password"
-#~ msgstr "Підтвердити новий пароль"
-
-#~ msgid "Confirm your new password"
-#~ msgstr "Підтвердіть Ваш новий пароль"
-
-#~ msgid "Edit your profile"
-#~ msgstr "Редагувати профіль"
-
-#~ msgid "Password Recovery"
-#~ msgstr "Відновлення паролю"
-
-#~ msgid "An Email has been sent to your account with further instructions."
-#~ msgstr "Вам надіслали лист із подальшими інструкціями"
-
-#~ msgid "Password Recovery Request"
-#~ msgstr "Запит на відновлення паролю"
-
-#~ msgid "Pick a new password"
-#~ msgstr "Оберіть новий пароль"
-
-#~ msgid "Your password has successfully been updated, thank you."
-#~ msgstr "Ваш пароль змінено - дякуємо"
-
-#, python-format
-#~ msgid "You are now logged in as %s"
-#~ msgstr "Ви ввійшли на сайт як %s"
-
-#~ msgid "Password Updated Successfully. Now you can log in using your new password."
-#~ msgstr "Пароль оновлено. Можете з ним заходити на сайт"
-
-#~ msgid "Reset your Password"
-#~ msgstr "Змінити пароль"
-
-#~ msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-#~ msgstr "Ваше посилання не працює з причин безпеки. Будь ласка, відновіть процедуру - введіть ваш email"
-
-#~ msgid "Submit"
-#~ msgstr "Подати"
-
-#~ msgid "Form"
-#~ msgstr "Форма"
-
-#~ msgid "Save Changes"
-#~ msgstr "Зберегти"
-
-#, python-format
-#~ msgid "Your new %s has been created."
-#~ msgstr "Ваш новий %s створено"
-
-#, python-format
-#~ msgid "Import %s"
-#~ msgstr "Імпортувати %s"
 
 #, fuzzy, python-format
 #~| msgid ""
