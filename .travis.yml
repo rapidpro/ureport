@@ -75,6 +75,7 @@ script:
   - git diff --numstat | awk '$3 ~ /locale.*mo$/ { print "compilemessages needs to be rerun, see .travis.yml for command"; exit 1 }'
 
   # generate our locale messages
+  - gettext --version
   - python manage.py makemessages -a -s -e haml,html,txt,py --ignore="env/*" --no-location --no-wrap | awk '/warning/ { print; fail = 1 } END { if (fail) { print "makemessages for django contains warnings"; exit 1 }}'
   - python manage.py makemessages -d djangojs -a -s --ignore="env/*" --ignore="static/js/prettify.js" --ignore="static/bower/*" --ignore="node_modules/*" --no-location --no-wrap | awk '/warning/ { print; fail = 1 } END { if (fail) { print "makemessages for djangojs contains warnings"; exit 1 }}'
 
