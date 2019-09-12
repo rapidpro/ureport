@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-12 23:11+0000\n"
+"POT-Creation-Date: 2019-09-12 23:37+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -17,413 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-msgid "The name of this category"
-msgstr "အမ်ိဳးအစား၏ အမည္"
-
-msgid "An optional image that can describe this category"
-msgstr "ယခုအမ်ိဳးအမည္ကို ေဖာ္ျပႏိုင္ေသာ ျခြင္းခ်က္ဓါတ္ပံု "
-
-msgid "The organization this category applies to"
-msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
-
-msgid "Categories"
-msgstr "အမ်ိဳးအစား"
-
-msgid "The name to describe this image"
-msgstr "ယခုဓါတ္ပံုကို ေဖာ္ျပရန္အမည္"
-
-msgid "The category this image represents"
-msgstr "ယခုဓါတ္ပံုက ေဖာ္ျပေနေသာ အမ်ိဳးအစား"
-
-msgid "The image file to use"
-msgstr "အသံုးျပဳရန္ ဓါတ္ပံုဖိုင္"
-
-msgid "The human readable name for this content type"
-msgstr "လူဖတ္ႏိုင္မည့္ ယခုအေၾကာင္းအရာ၏အမည္"
-
-msgid "The slug to idenfity this content type, used with the template tags"
-msgstr "ယခုအေၾကာင္းအရာ အမ်ိဳးအစားကို သတ္မွန္ရန္ အမွန္အသား ပံုစံခ်ထားသည့္ tag မ်ားကိုအသံုးျပဳရန္"
-
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-msgstr "သည္အေၾကာင္းအရာ အမ်ိဳးအစားကို site ၏မည္သည့္ေနရာတြင္ အသံုးျပဲၿပီး မည္ကဲ့သို႕ေဖာ္ျပထားသည္ကို ေဖာ္ျပခ်က္"
-
-msgid "Whether this content should include a title"
-msgstr "Whether this content should include a title"
-
-msgid "Whether this content should include an image"
-msgstr "ယခုအေၾကင္းအရာသည္ ဓါတ္ပံုထည့္သင့္မသင့္"
-
-msgid "Whether this content should use a rich HTML editor"
-msgstr "ယခုအေၾကာင္းအရာသည္ HTML editor ကိုသံုးသင့္မသင့္"
-
-msgid "Whether this content should include a summary field"
-msgstr "ယခုအေၾကာင္းအရာသည္ အက်ဥ္းခ်ဳပ္ထည့္သင့္မသင့္"
-
-msgid "Whether this content should include a link"
-msgstr "ယခုအေၾကာင္းအရာသည္ link တစ္ခုထည့္သင့္မသင့္"
-
-msgid "Whether this content should allow upload of additional images, ie a gallery"
-msgstr "ယခုအေၾကာင္းအရာသည္ ဓါတ္ပံုမ်ား ေနာက္ထပ္တင္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
-
-msgid "Whether this content has a color field"
-msgstr "ယခုအေၾကာင္းအရာသည္ အေရာင္ ရွိမရွိ"
-
-msgid "Whether this content should allow setting a YouTube id"
-msgstr "ယခုအေၾကာင္းအရာသည္ YouTube id လုပ္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
-
-msgid "Whether this content should allow tags"
-msgstr "ယခုအေၾကာင္းအရာသည္ tag မ်ားကိုခြင့္ျပဳသင့္မသင့္"
-
-msgid "Content Type"
-msgstr "အေၾကာင္းအရာ အမ်ိဳးအစား"
-
-msgid "The category, or type for this content block"
-msgstr "ယခုအေၾကာင္းအရာမ်ားအတြက္ အမ်ိဳးးအမည္"
-
-msgid "The title for this block of content, optional"
-msgstr "အေၾကာင္းအရာမ်ား၏ ေခါင္းစဥ္ ျခြင္းခ်က္သာ"
-
-msgid "The summary for this item, should be short"
-msgstr "ယခုအမ်ိဳးအစား၏ အႏွစ္ခ်ဳပ္သည္ တိုတိုႏွင့္လိုရင္းသာျဖစ္သင့္သည္"
-
-msgid "The body of text for this content block, optional"
-msgstr "ယခုအေၾကာင္းအရာမ်ား၏ ကိုယ္ထည္စာသား ၿခြင္းခ်က္သာ"
-
-msgid "Any image that should be displayed with this content block, optional"
-msgstr "ယခုအေၾကာင္းအရာႏွင့္အတူ ေဖာ္ျပသင့္ေသာဓါတ္ပံု ျခြင္းခ်က္သာ"
-
-msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr "ဓါတ္ပံုအတြက္ေနာက္ခံအေရာင္သည္ ပံုစံအားျဖင့္"
-
-msgid "Any link that should be associated with this content block, optional"
-msgstr "ယခုအေၾကာင္းအရာႏွင့္ပူးတြဲသင့္ေသာ မည္သည့္ link မဆို ၿခြင္းခ်က္သာ"
-
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "ယခုအမ်ိဳးအစားႏွင့္ ခ်ိတ္ဆက္သင့္ေသာ YouTube ဗီးီယို၏ အမွတ္အသား"
-
-msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "ယခုအေၾကာင္းအရာပိုင္းအတြက္ space ျခားထားသည့္ မည္သည့္ tag မဆို ထပ္မံအေသးစိတ္ရ်ာေဖြစစ္ထုတ္ျခင္းမ်ားအတြက္ အသံုးျပဳႏိုင္သည္ ျခြင္းခ်က္သာ"
-
-msgid "The priority for this block, higher priority blocks come first"
-msgstr "ယခုအပိုင္း၏ဦးစားေပးမွာ အေရးႀကီးဆံုးအပိုင္းမ်ားကဦးစြာလာသည္"
-
-msgid "The organization this content block belongs to"
-msgstr "ယခုအေၾကာင္းအရာပိုင္းမ်ားကို ပိုင္ဆိုင္သည့္အဖြဲ႕အစည္းမွာ"
-
-msgid "Gallery"
-msgstr "စုစည္းရာ"
-
-msgid "Add Image"
-msgstr "ဓါတ္ပံုထည့္ရန္"
-
-msgid "Search"
-msgstr "ရွာေဖြရန္"
-
-msgid "Add"
-msgstr "ထပ္ထည့္ရန္"
-
-msgid "Content Types"
-msgstr "အေၾကာင္းအရာ အမ်ိဳးအစားမ်ား"
-
-msgid "Content Blocks"
-msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
-
-#, fuzzy, python-format
-#| msgid "Content Blocks"
-msgid "%s Blocks"
-msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
-
-#, fuzzy, python-format
-#| msgid "Edit"
-msgid "Edit %s"
-msgstr "တည္းျဖတ္"
-
-#, fuzzy, python-format
-#| msgid "Create"
-msgid "Create %s"
-msgstr "ဖန္တီးပါ"
-
-msgid "Create Content Block"
-msgstr "အေၾကာင္းအရာပိုင္းကိုဖန္တီးရန္"
-
-msgid "Your first name"
-msgstr "သင့္နာမည္၏ပထမအပိုင္း"
-
-msgid "Your last name"
-msgstr "သင့္နာမည္၏ဒုတိယအပိုင္း"
-
-msgid "Your email address"
-msgstr "သင့္ email လိပ္စာ"
-
-msgid "Your password, at least eight letters please"
-msgstr "သင့္လွိဳ႕၀ွက္နံပါတ္ အနည္းဆံုးစာလံုး ၈ လံုးျဖစ္ရန္"
-
-msgid "That email address is already used"
-msgstr "ယခု email လိပ္စာသည္ အသံုးျပဳျပီးသားျဖစ္ေနသည္။"
-
-msgid "Passwords must contain at least 8 letters."
-msgstr "လွိဳ႕၀ွက္နံပါတ္သည္ အနည္းဆံုးစာလံုးရွစ္လံုး ပါ၀င္ရမည္"
-
-msgid "This domain is used for subdomains"
-msgstr "ယခု domain ကို subdomains မ်ားအတြက္အသံုးျပဳသည္"
-
-msgid "Name"
-msgstr "အမည္"
-
-msgid "The name of this organization"
-msgstr "အဖြဲ႕အစည္း၏အမည္"
-
-msgid "The logo that should be used for this organization"
-msgstr "ယခုအဖြဲ႕အစည္းအတြက္အသံုးျပဳသင့္ေသာ အမွတ္တံဆိပ္"
-
-msgid "Administrators"
-msgstr "စီမံအုပ္ခ်ဳပ္သူမ်ား"
-
-msgid "The administrators in your organization"
-msgstr "သင့္အဖြဲ႕အစည္းအတြင္းရွိ စီမံအုပ္ခ်ဳပ္သူမ်ား"
-
-msgid "Viewers"
-msgstr "လာေရာက္ၾကည့္ရွဳသူမ်ား"
-
-msgid "The viewers in your organization"
-msgstr "သင့္အဖြဲ႕အစည္းရွိ လာေရာက္ၾကည့္ရွဳသူမ်ား"
-
-msgid "Editors"
-msgstr "တည္းျဖတ္သူမ်ား"
-
-msgid "The editors in your organization"
-msgstr "သင့္အဖြဲ႕အစည္းရွိ တည္းျဖတ္သူမ်ား"
-
-msgid "Language"
-msgstr "ဘာသာစကား"
-
-msgid "The main language used by this organization"
-msgstr "သည္အဖြဲ႕အစည္းကအသံုးျပဳေသာ အဓိကဘာသာစကား"
-
-msgid "Subdomain"
-msgstr ""
-
-msgid "This subdomain is not available"
-msgstr "subdomain မရႏိုင္ပါ"
-
-msgid "The subdomain for this organization"
-msgstr "သည္အဖြဲ႕အစည္း၏ subdomain"
-
-msgid "Domain"
-msgstr ""
-
-msgid "This domain is not available"
-msgstr "domain မရႏိုင္ပါ"
-
-msgid "The custom domain for this organization"
-msgstr "သည္အဖြဲ႕အစည္း၏ ပံုမွန္ domain"
-
-msgid "Timezone"
-msgstr "အခ်ိန္အပိုင္းအျခား"
-
-msgid "The timezone your organization is in."
-msgstr "သင့္အဖြဲ႕အစည္းရွိေနသည့္ အခ်ိန္အပိုင္းအျခား"
-
-msgid "JSON blob used to store configuration information associated with this organization"
-msgstr "ယခုအဖြဲ႕အစည္းႏွင့္ဆက္ႏႊယ္ေနေသာ သတင္းအခ်က္အလက္မ်ားကို  ထိန္းသိမ္းရန္ အသံုးျပဳထားေသာ JSON blob"
-
-msgid "Administrator"
-msgstr "စီမံအုပ္ခ်ဳပ္သူ"
-
-msgid "Editor"
-msgstr "တည္းျဖတ္သူ"
-
-msgid "Viewer"
-msgstr "ၾကည့္ရွဳေလ့လာသူ"
-
-msgid "Org"
-msgstr "အဖြဲ႕အစည္း"
-
-msgid "The organization to which the account is invited to view"
-msgstr "လာေရာက္ၾကည့္ရွဳရန္ ဖိတ္ျခင္းခံရေသာ အဖြဲ႕အစည္း၏ account"
-
-msgid "Email"
-msgstr "အီးေမးလ္"
-
-msgid "The email to which we send the invitation of the viewer"
-msgstr "လာေရာက္ၾကည့္ရွဳသူကို ဖိတ္ရန္ပို႕ေသာ အီးေမးလ္"
-
-msgid "Secret"
-msgstr "လွ်ိဳ႕၀ွက္"
-
-msgid "a unique code associated with this invitation"
-msgstr "ယခုဖိတ္ၾကားျခင္းႏွင့္ ႏွီးႏြယ္ေနေသာ ထူးျခားထင္ရွားသည့္ code"
-
-msgid "User Role"
-msgstr "အသံုးျပဳသူ၏ အခန္းက႑"
-
-#, python-format
-msgid "%s Invitation"
-msgstr ""
-
-msgid "Banner"
-msgstr "ေခါင္းစည္း"
-
-msgid "Pattern"
-msgstr "ပံုစံ"
-
-msgid "The organization in which the image will be used"
-msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
-
-msgid "The name to describe this background"
-msgstr "ယခုေနာက္ခံကို ေဖာ္ျပရန္အမည္"
-
-msgid "Background type"
-msgstr "ေနာက္ခံအမ်ိဳးအစား"
-
-msgid "The image file"
-msgstr "ဓါတ္ပံုဖိုင္"
-
-#, fuzzy
-#| msgid "The title for this item"
-msgid "The API token for this backend"
-msgstr "ယခုအမ်ိဳးအစား၏ေခါင္းစဥ္"
-
-#, python-format
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-
-msgid "You are invited to join {{org.name}}."
-msgstr ""
-
-msgid "Click this link to join"
-msgstr ""
-
-msgid "Edit"
-msgstr "တည္းျဖတ္"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
-
-msgid "Manage Users"
-msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
-
-msgid "Accounts"
-msgstr "account မ်ား"
-
-msgid "Admins"
-msgstr "စီစဥ္သူ"
-
-msgid "Remove"
-msgstr "ဖယ္ရွားလိုက္ပါ"
-
-msgid "You must have at least one administator"
-msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
-
-msgid "Select your Organization"
-msgstr "သင့္အဖြဲ႕အစည္းကို ေရြးျခယ္ပါ"
-
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-msgstr "သင့္ account သည္အဖြဲ႕အစည္းတစ္ခုခုႏွင့္ ပတ္သတ္ျခင္းမရွိပါ။ ေက်းဖူးျပဳၿပီး administrator ကိုဆက္သြယ္ပါ"
-
-msgid "Your Organization"
-msgstr "သင္၏အဖြဲ႕အစည္း"
-
-msgid "Invite people to your organization"
-msgstr "သင့္အဖြဲ႕အစည္းသို႕ လူမ်ားကို ဖိတ္ေခၚပါ"
-
-msgid "User group"
-msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
-
-msgid "One of the emails you entered is invalid."
-msgstr "သင္ထည့္လိုက္ေသာ အီးေမးလ္မ်ားထဲမွတစ္ခုမွာ မွားယြင္းေနပါသည္"
-
-#, python-format
-msgid "Manage %(name)s Accounts"
-msgstr ""
-
-msgid "Create"
-msgstr "ဖန္တီးပါ"
-
-msgid "Your invitation link is invalid. Please contact your organization administrator."
-msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator ကိုဆက္သြယ္ပါ"
-
-#, fuzzy, python-format
-#| msgid "Join & Engage"
-msgid "Join %(name)s"
-msgstr "U-Report တြင္ပါ၀င္ရန္"
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join"
-msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
-
-msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးျပဳၿပီး လူႀကီးမင္းအဖြဲ႕အစည္းရွိ administrator ကိုဆက္သြယ္ပါ"
-
-msgid "Task"
-msgstr ""
-
-msgid "Tasks"
-msgstr ""
-
-msgid "The title for this story"
-msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
-
-msgid "Whether this story is featured"
-msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပထားျခင္းရွိမရွိ"
-
-msgid "The summary for the story"
-msgstr "သတင္းေဆာင္းပါး၏အႏွစ္ခ်ဳပ္"
-
-msgid "The body of text for the story"
-msgstr "သတင္းေဆာင္းပါး၏စာကိုယ္"
-
-msgid "The writer of the story"
-msgstr "သတင္းေဆာင္းပါးေရးသူ"
-
-msgid "A link to an mp3 file to publish on this story"
-msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပရန္ mp3 file link "
-
-msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr "ယခုသတင္းေဆာင္းပါးျဖင့္ ခ်ိတ္ဆက္ထားသင့္သည့္ YouTube video ၏အမွတ္အသား (YouTube URL တြင္ထိုစာသားသည္ v= ၏ေနာက္တြင္ရွိၿပီး & ၏ေရွ႕တြင္ရွိလိမ့္မည္)"
-
-msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "ယခုသတင္းေဆာင္းပါးတြင္ခ်ိတ္ဆက္လိုသည္မ်ားကို space ျခားထားသည့္ အခ်ိတ္အဆက္မ်ားျဖင့္ ယခုထက္ပိုျပီးတိတိက်က်ရွာေတြနိုင္ရန္အသ၊ံုးျပဳႏိုင္ပါသည္။(သင့္ေရြးျခယ္မႈသာျဖစ္သည္)"
-
-msgid "The category for this story"
-msgstr "သတင္းေဆာင္းပါးအမ်ိဳးအစား"
-
-msgid "The organization this story belongs to"
-msgstr "ယခုသတင္းေဆာင္းပါးကိုပိုင္သည့္အဖြဲ႕အစည္း"
-
-msgid "Stories"
-msgstr "သတင္းေဆာင္းပါးမ်ား"
-
-msgid "The story to associate to"
-msgstr "သတင္းေဆာင္းပါးႏွင့္ဆက္ႏြယ္ရန္"
-
-msgid "Yes"
-msgstr "ဟုတ္ပါသည္"
-
-msgid "No"
-msgstr "မဟုတ္ပါ"
-
-msgid "Story Images"
-msgstr "သတင္းေဆာင္းပါးဓါတ္ပံုမ်ား"
-
-#, python-format
-msgid "Image %d"
-msgstr ""
-
-msgid "Image to display on story page and in previews. (optional)"
-msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
-
-msgid "Image to display on story page and in previews (optional)"
-msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
 
 msgid "Back to Full Site"
 msgstr ""
@@ -443,6 +36,9 @@ msgstr "၀င္ေရာက္ရန္"
 msgid "Polls"
 msgstr "ေမးခြန္းမ်ား"
 
+msgid "Stories"
+msgstr "သတင္းေဆာင္းပါးမ်ား"
+
 msgid "Users"
 msgstr "အသံုးျပဳသူမ်ား"
 
@@ -457,6 +53,9 @@ msgstr "ဓါတ္ပံုမ်ား"
 msgid "Jobs"
 msgstr "အလုပ္အကိုင္မ်ား"
 
+msgid "Categories"
+msgstr "အမ်ိဳးအစား"
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -467,6 +66,9 @@ msgstr "အမ်ိဳးအမည္သစ္မ်ား"
 
 msgid "Orgs"
 msgstr "အဖြဲ႕အစည္းမ်ား"
+
+msgid "Content Types"
+msgstr "အေၾကာင္းအရာ အမ်ိဳးအစားမ်ား"
 
 msgid "Images"
 msgstr "ဓါတ္ပံုမ်ား"
@@ -586,6 +188,20 @@ msgid ""
 "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
 msgstr ""
+
+msgid "Edit"
+msgstr "တည္းျဖတ္"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+
+msgid "Manage Users"
+msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+
+msgid "Add"
+msgstr "ထပ္ထည့္ရန္"
 
 msgid "ABOUT U-REPORT"
 msgstr "U-Report အေၾကာင္းသိေကာင္းစရာ"
@@ -1014,6 +630,12 @@ msgstr "၀င္ေရာက္ရန္"
 msgid "Forgot Password?"
 msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သြားပါသလား"
 
+msgid "Gallery"
+msgstr "စုစည္းရာ"
+
+msgid "Add Image"
+msgstr "ဓါတ္ပံုထည့္ရန္"
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1026,6 +648,24 @@ msgstr "တည္ေနရာမ်ား"
 #| msgid "Manage Users"
 msgid "Backends"
 msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+
+msgid "You must have at least one administator"
+msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
+
+msgid "Accounts"
+msgstr "account မ်ား"
+
+msgid "Admins"
+msgstr "စီစဥ္သူ"
+
+msgid "Editors"
+msgstr "တည္းျဖတ္သူမ်ား"
+
+msgid "Remove"
+msgstr "ဖယ္ရွားလိုက္ပါ"
+
+msgid "User group"
+msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
 
 msgid "+ New Poll"
 msgstr ""
@@ -1156,6 +796,9 @@ msgstr ""
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "ဖယ္ရွားလိုက္သည္ႏွင့္ အၿပီးပ်က္သြားမည္ျဖစ္ပါသည္ ဖယ္ရွားျခင္းကိုျပန္လည္ျပင္ဆင္ႏိုင္သည့္ နည္းလမ္းလံုး၀မရွိပါ"
 
+msgid "Search"
+msgstr "ရွာေဖြရန္"
+
 #, python-format
 msgid ""
 "\n"
@@ -1235,17 +878,32 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr ""
 
+msgid "Banner"
+msgstr "ေခါင္းစည္း"
+
+msgid "Pattern"
+msgstr "ပံုစံ"
+
 msgid "Flag"
 msgstr "အလံ"
 
+msgid "Org"
+msgstr "အဖြဲ႕အစည္း"
+
 msgid "The organization to which the image will be used"
 msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
+
+msgid "Name"
+msgstr "အမည္"
 
 msgid "A short descriptive name for this image"
 msgstr "ယခုဓါတ္ပံုအတြက္ နာမည္အတိုေကာက္"
 
 msgid "Image type"
 msgstr "ဓါတ္ပံုအမ်ိဳးအစား"
+
+msgid "The image file"
+msgstr "ဓါတ္ပံုဖိုင္"
 
 msgid "Label"
 msgstr "အညႊန္း"
@@ -1358,11 +1016,17 @@ msgstr "ယခုဗီဒီယို၏ေခါင္းစဥ္"
 msgid "A short summary description for this video"
 msgstr "ယခုဗီဒီယိုအတြက္ အက်ဥ္းခ်ံဳးေဖာ္ျပခ်က္"
 
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "ယခုအမ်ိဳးအစားႏွင့္ ခ်ိတ္ဆက္သင့္ေသာ YouTube ဗီးီယို၏ အမွတ္အသား"
+
 msgid "The organization this video belongs to"
 msgstr "ယခုဗီဒီယိုႏွင့္ သက္ဆိုင္ေသာအဖြဲ႕အစည္း"
 
 msgid "The name of this poll category"
 msgstr "ယခုေမးခြန္း အမ်ိဳးအစား"
+
+msgid "The organization this category applies to"
+msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
 
 msgid "Poll Categories"
 msgstr "ေမးခြန္းအမ်ိဳးအစားမ်ား"
@@ -1400,8 +1064,14 @@ msgstr "ေမးခြန္းအတြက္ ေျဖာ္ျပရမည�
 msgid "The organization this poll is part of"
 msgstr "ယခုေမးခြန္ႏွင့္ ပတ္သတ္ေသာ အဖြဲ႕အစည္း"
 
+msgid "The name to describe this image"
+msgstr "ယခုဓါတ္ပံုကို ေဖာ္ျပရန္အမည္"
+
 msgid "The poll to associate to"
 msgstr "ယခုေမးခြန္းႏွင့္ ဆက္ႏြယ္ေသာ"
+
+msgid "The image file to use"
+msgstr "အသံုးျပဳရန္ ဓါတ္ပံုဖိုင္"
 
 msgid "The poll for this response"
 msgstr "ယခုတံု႕ျပန္မႈအတြက္ ေမးခြန္း"
@@ -1473,6 +1143,10 @@ msgstr "ေမးခြန္းမ်ားအတြက္ ဓါတ္ပံ�
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "သင္ေဖာ္ျပလိုသည့္ မည္သည့္ တံု႕ျပန္ခ်က္ကိုမဆို ထည့္ပါ (ရွိလွ်င္)"
+
+#, python-format
+msgid "Image %d"
+msgstr ""
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "ေမးခြန္းစာမ်က္ႏွာႏွင့္ preview မ်ားတြင္ေဖာ္ျပရန္ ဓါတ္ပံု(ျခြင္းခ်က္)"
@@ -1744,6 +1418,297 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္ေသာအရာ"
+
+#~ msgid "The name of this category"
+#~ msgstr "အမ်ိဳးအစား၏ အမည္"
+
+#~ msgid "An optional image that can describe this category"
+#~ msgstr "ယခုအမ်ိဳးအမည္ကို ေဖာ္ျပႏိုင္ေသာ ျခြင္းခ်က္ဓါတ္ပံု "
+
+#~ msgid "The category this image represents"
+#~ msgstr "ယခုဓါတ္ပံုက ေဖာ္ျပေနေသာ အမ်ိဳးအစား"
+
+#~ msgid "The human readable name for this content type"
+#~ msgstr "လူဖတ္ႏိုင္မည့္ ယခုအေၾကာင္းအရာ၏အမည္"
+
+#~ msgid "The slug to idenfity this content type, used with the template tags"
+#~ msgstr "ယခုအေၾကာင္းအရာ အမ်ိဳးအစားကို သတ္မွန္ရန္ အမွန္အသား ပံုစံခ်ထားသည့္ tag မ်ားကိုအသံုးျပဳရန္"
+
+#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#~ msgstr "သည္အေၾကာင္းအရာ အမ်ိဳးအစားကို site ၏မည္သည့္ေနရာတြင္ အသံုးျပဲၿပီး မည္ကဲ့သို႕ေဖာ္ျပထားသည္ကို ေဖာ္ျပခ်က္"
+
+#~ msgid "Whether this content should include a title"
+#~ msgstr "Whether this content should include a title"
+
+#~ msgid "Whether this content should include an image"
+#~ msgstr "ယခုအေၾကင္းအရာသည္ ဓါတ္ပံုထည့္သင့္မသင့္"
+
+#~ msgid "Whether this content should use a rich HTML editor"
+#~ msgstr "ယခုအေၾကာင္းအရာသည္ HTML editor ကိုသံုးသင့္မသင့္"
+
+#~ msgid "Whether this content should include a summary field"
+#~ msgstr "ယခုအေၾကာင္းအရာသည္ အက်ဥ္းခ်ဳပ္ထည့္သင့္မသင့္"
+
+#~ msgid "Whether this content should include a link"
+#~ msgstr "ယခုအေၾကာင္းအရာသည္ link တစ္ခုထည့္သင့္မသင့္"
+
+#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
+#~ msgstr "ယခုအေၾကာင္းအရာသည္ ဓါတ္ပံုမ်ား ေနာက္ထပ္တင္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
+
+#~ msgid "Whether this content has a color field"
+#~ msgstr "ယခုအေၾကာင္းအရာသည္ အေရာင္ ရွိမရွိ"
+
+#~ msgid "Whether this content should allow setting a YouTube id"
+#~ msgstr "ယခုအေၾကာင္းအရာသည္ YouTube id လုပ္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
+
+#~ msgid "Whether this content should allow tags"
+#~ msgstr "ယခုအေၾကာင္းအရာသည္ tag မ်ားကိုခြင့္ျပဳသင့္မသင့္"
+
+#~ msgid "Content Type"
+#~ msgstr "အေၾကာင္းအရာ အမ်ိဳးအစား"
+
+#~ msgid "The category, or type for this content block"
+#~ msgstr "ယခုအေၾကာင္းအရာမ်ားအတြက္ အမ်ိဳးးအမည္"
+
+#~ msgid "The title for this block of content, optional"
+#~ msgstr "အေၾကာင္းအရာမ်ား၏ ေခါင္းစဥ္ ျခြင္းခ်က္သာ"
+
+#~ msgid "The summary for this item, should be short"
+#~ msgstr "ယခုအမ်ိဳးအစား၏ အႏွစ္ခ်ဳပ္သည္ တိုတိုႏွင့္လိုရင္းသာျဖစ္သင့္သည္"
+
+#~ msgid "The body of text for this content block, optional"
+#~ msgstr "ယခုအေၾကာင္းအရာမ်ား၏ ကိုယ္ထည္စာသား ၿခြင္းခ်က္သာ"
+
+#~ msgid "Any image that should be displayed with this content block, optional"
+#~ msgstr "ယခုအေၾကာင္းအရာႏွင့္အတူ ေဖာ္ျပသင့္ေသာဓါတ္ပံု ျခြင္းခ်က္သာ"
+
+#~ msgid "A background color to use for the image, in the format: #rrggbb"
+#~ msgstr "ဓါတ္ပံုအတြက္ေနာက္ခံအေရာင္သည္ ပံုစံအားျဖင့္"
+
+#~ msgid "Any link that should be associated with this content block, optional"
+#~ msgstr "ယခုအေၾကာင္းအရာႏွင့္ပူးတြဲသင့္ေသာ မည္သည့္ link မဆို ၿခြင္းခ်က္သာ"
+
+#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr "ယခုအေၾကာင္းအရာပိုင္းအတြက္ space ျခားထားသည့္ မည္သည့္ tag မဆို ထပ္မံအေသးစိတ္ရ်ာေဖြစစ္ထုတ္ျခင္းမ်ားအတြက္ အသံုးျပဳႏိုင္သည္ ျခြင္းခ်က္သာ"
+
+#~ msgid "The priority for this block, higher priority blocks come first"
+#~ msgstr "ယခုအပိုင္း၏ဦးစားေပးမွာ အေရးႀကီးဆံုးအပိုင္းမ်ားကဦးစြာလာသည္"
+
+#~ msgid "The organization this content block belongs to"
+#~ msgstr "ယခုအေၾကာင္းအရာပိုင္းမ်ားကို ပိုင္ဆိုင္သည့္အဖြဲ႕အစည္းမွာ"
+
+#~ msgid "Content Blocks"
+#~ msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
+
+#, fuzzy, python-format
+#~| msgid "Content Blocks"
+#~ msgid "%s Blocks"
+#~ msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
+
+#, fuzzy, python-format
+#~| msgid "Edit"
+#~ msgid "Edit %s"
+#~ msgstr "တည္းျဖတ္"
+
+#, fuzzy, python-format
+#~| msgid "Create"
+#~ msgid "Create %s"
+#~ msgstr "ဖန္တီးပါ"
+
+#~ msgid "Create Content Block"
+#~ msgstr "အေၾကာင္းအရာပိုင္းကိုဖန္တီးရန္"
+
+#~ msgid "Your first name"
+#~ msgstr "သင့္နာမည္၏ပထမအပိုင္း"
+
+#~ msgid "Your last name"
+#~ msgstr "သင့္နာမည္၏ဒုတိယအပိုင္း"
+
+#~ msgid "Your email address"
+#~ msgstr "သင့္ email လိပ္စာ"
+
+#~ msgid "Your password, at least eight letters please"
+#~ msgstr "သင့္လွိဳ႕၀ွက္နံပါတ္ အနည္းဆံုးစာလံုး ၈ လံုးျဖစ္ရန္"
+
+#~ msgid "That email address is already used"
+#~ msgstr "ယခု email လိပ္စာသည္ အသံုးျပဳျပီးသားျဖစ္ေနသည္။"
+
+#~ msgid "Passwords must contain at least 8 letters."
+#~ msgstr "လွိဳ႕၀ွက္နံပါတ္သည္ အနည္းဆံုးစာလံုးရွစ္လံုး ပါ၀င္ရမည္"
+
+#~ msgid "This domain is used for subdomains"
+#~ msgstr "ယခု domain ကို subdomains မ်ားအတြက္အသံုးျပဳသည္"
+
+#~ msgid "The name of this organization"
+#~ msgstr "အဖြဲ႕အစည္း၏အမည္"
+
+#~ msgid "The logo that should be used for this organization"
+#~ msgstr "ယခုအဖြဲ႕အစည္းအတြက္အသံုးျပဳသင့္ေသာ အမွတ္တံဆိပ္"
+
+#~ msgid "Administrators"
+#~ msgstr "စီမံအုပ္ခ်ဳပ္သူမ်ား"
+
+#~ msgid "The administrators in your organization"
+#~ msgstr "သင့္အဖြဲ႕အစည္းအတြင္းရွိ စီမံအုပ္ခ်ဳပ္သူမ်ား"
+
+#~ msgid "Viewers"
+#~ msgstr "လာေရာက္ၾကည့္ရွဳသူမ်ား"
+
+#~ msgid "The viewers in your organization"
+#~ msgstr "သင့္အဖြဲ႕အစည္းရွိ လာေရာက္ၾကည့္ရွဳသူမ်ား"
+
+#~ msgid "The editors in your organization"
+#~ msgstr "သင့္အဖြဲ႕အစည္းရွိ တည္းျဖတ္သူမ်ား"
+
+#~ msgid "Language"
+#~ msgstr "ဘာသာစကား"
+
+#~ msgid "The main language used by this organization"
+#~ msgstr "သည္အဖြဲ႕အစည္းကအသံုးျပဳေသာ အဓိကဘာသာစကား"
+
+#~ msgid "This subdomain is not available"
+#~ msgstr "subdomain မရႏိုင္ပါ"
+
+#~ msgid "The subdomain for this organization"
+#~ msgstr "သည္အဖြဲ႕အစည္း၏ subdomain"
+
+#~ msgid "This domain is not available"
+#~ msgstr "domain မရႏိုင္ပါ"
+
+#~ msgid "The custom domain for this organization"
+#~ msgstr "သည္အဖြဲ႕အစည္း၏ ပံုမွန္ domain"
+
+#~ msgid "Timezone"
+#~ msgstr "အခ်ိန္အပိုင္းအျခား"
+
+#~ msgid "The timezone your organization is in."
+#~ msgstr "သင့္အဖြဲ႕အစည္းရွိေနသည့္ အခ်ိန္အပိုင္းအျခား"
+
+#~ msgid "JSON blob used to store configuration information associated with this organization"
+#~ msgstr "ယခုအဖြဲ႕အစည္းႏွင့္ဆက္ႏႊယ္ေနေသာ သတင္းအခ်က္အလက္မ်ားကို  ထိန္းသိမ္းရန္ အသံုးျပဳထားေသာ JSON blob"
+
+#~ msgid "Administrator"
+#~ msgstr "စီမံအုပ္ခ်ဳပ္သူ"
+
+#~ msgid "Editor"
+#~ msgstr "တည္းျဖတ္သူ"
+
+#~ msgid "Viewer"
+#~ msgstr "ၾကည့္ရွဳေလ့လာသူ"
+
+#~ msgid "The organization to which the account is invited to view"
+#~ msgstr "လာေရာက္ၾကည့္ရွဳရန္ ဖိတ္ျခင္းခံရေသာ အဖြဲ႕အစည္း၏ account"
+
+#~ msgid "Email"
+#~ msgstr "အီးေမးလ္"
+
+#~ msgid "The email to which we send the invitation of the viewer"
+#~ msgstr "လာေရာက္ၾကည့္ရွဳသူကို ဖိတ္ရန္ပို႕ေသာ အီးေမးလ္"
+
+#~ msgid "Secret"
+#~ msgstr "လွ်ိဳ႕၀ွက္"
+
+#~ msgid "a unique code associated with this invitation"
+#~ msgstr "ယခုဖိတ္ၾကားျခင္းႏွင့္ ႏွီးႏြယ္ေနေသာ ထူးျခားထင္ရွားသည့္ code"
+
+#~ msgid "User Role"
+#~ msgstr "အသံုးျပဳသူ၏ အခန္းက႑"
+
+#~ msgid "The organization in which the image will be used"
+#~ msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
+
+#~ msgid "The name to describe this background"
+#~ msgstr "ယခုေနာက္ခံကို ေဖာ္ျပရန္အမည္"
+
+#~ msgid "Background type"
+#~ msgstr "ေနာက္ခံအမ်ိဳးအစား"
+
+#, fuzzy
+#~| msgid "The title for this item"
+#~ msgid "The API token for this backend"
+#~ msgstr "ယခုအမ်ိဳးအစား၏ေခါင္းစဥ္"
+
+#~ msgid "Select your Organization"
+#~ msgstr "သင့္အဖြဲ႕အစည္းကို ေရြးျခယ္ပါ"
+
+#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#~ msgstr "သင့္ account သည္အဖြဲ႕အစည္းတစ္ခုခုႏွင့္ ပတ္သတ္ျခင္းမရွိပါ။ ေက်းဖူးျပဳၿပီး administrator ကိုဆက္သြယ္ပါ"
+
+#~ msgid "Your Organization"
+#~ msgstr "သင္၏အဖြဲ႕အစည္း"
+
+#~ msgid "Invite people to your organization"
+#~ msgstr "သင့္အဖြဲ႕အစည္းသို႕ လူမ်ားကို ဖိတ္ေခၚပါ"
+
+#~ msgid "One of the emails you entered is invalid."
+#~ msgstr "သင္ထည့္လိုက္ေသာ အီးေမးလ္မ်ားထဲမွတစ္ခုမွာ မွားယြင္းေနပါသည္"
+
+#~ msgid "Create"
+#~ msgstr "ဖန္တီးပါ"
+
+#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
+#~ msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator ကိုဆက္သြယ္ပါ"
+
+#, fuzzy, python-format
+#~| msgid "Join & Engage"
+#~ msgid "Join %(name)s"
+#~ msgstr "U-Report တြင္ပါ၀င္ရန္"
+
+#, fuzzy
+#~| msgid "Join"
+#~ msgid "Join"
+#~ msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
+
+#~ msgid "Your invitation link has expired. Please contact your organization administrator."
+#~ msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးျပဳၿပီး လူႀကီးမင္းအဖြဲ႕အစည္းရွိ administrator ကိုဆက္သြယ္ပါ"
+
+#~ msgid "The title for this story"
+#~ msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
+
+#~ msgid "Whether this story is featured"
+#~ msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပထားျခင္းရွိမရွိ"
+
+#~ msgid "The summary for the story"
+#~ msgstr "သတင္းေဆာင္းပါး၏အႏွစ္ခ်ဳပ္"
+
+#~ msgid "The body of text for the story"
+#~ msgstr "သတင္းေဆာင္းပါး၏စာကိုယ္"
+
+#~ msgid "The writer of the story"
+#~ msgstr "သတင္းေဆာင္းပါးေရးသူ"
+
+#~ msgid "A link to an mp3 file to publish on this story"
+#~ msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပရန္ mp3 file link "
+
+#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+#~ msgstr "ယခုသတင္းေဆာင္းပါးျဖင့္ ခ်ိတ္ဆက္ထားသင့္သည့္ YouTube video ၏အမွတ္အသား (YouTube URL တြင္ထိုစာသားသည္ v= ၏ေနာက္တြင္ရွိၿပီး & ၏ေရွ႕တြင္ရွိလိမ့္မည္)"
+
+#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr "ယခုသတင္းေဆာင္းပါးတြင္ခ်ိတ္ဆက္လိုသည္မ်ားကို space ျခားထားသည့္ အခ်ိတ္အဆက္မ်ားျဖင့္ ယခုထက္ပိုျပီးတိတိက်က်ရွာေတြနိုင္ရန္အသ၊ံုးျပဳႏိုင္ပါသည္။(သင့္ေရြးျခယ္မႈသာျဖစ္သည္)"
+
+#~ msgid "The category for this story"
+#~ msgstr "သတင္းေဆာင္းပါးအမ်ိဳးအစား"
+
+#~ msgid "The organization this story belongs to"
+#~ msgstr "ယခုသတင္းေဆာင္းပါးကိုပိုင္သည့္အဖြဲ႕အစည္း"
+
+#~ msgid "The story to associate to"
+#~ msgstr "သတင္းေဆာင္းပါးႏွင့္ဆက္ႏြယ္ရန္"
+
+#~ msgid "Yes"
+#~ msgstr "ဟုတ္ပါသည္"
+
+#~ msgid "No"
+#~ msgstr "မဟုတ္ပါ"
+
+#~ msgid "Story Images"
+#~ msgstr "သတင္းေဆာင္းပါးဓါတ္ပံုမ်ား"
+
+#~ msgid "Image to display on story page and in previews. (optional)"
+#~ msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
+
+#~ msgid "Image to display on story page and in previews (optional)"
+#~ msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
 
 #~ msgid "Token Expired"
 #~ msgstr "ေပးထားသည္မွာ သက္တမ္းကုန္ဆံုးသြားပါၿပီ"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-12 23:11+0000\n"
+"POT-Creation-Date: 2019-09-12 23:37+0000\n"
 "PO-Revision-Date: 2018-10-25 18:23+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/rapidpro/ureport/language/pt_BR/)\n"
@@ -19,413 +19,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-msgid "The name of this category"
-msgstr "O nome desta categoria"
-
-msgid "An optional image that can describe this category"
-msgstr "Uma imagem opcional que pode descrever esta categoria"
-
-msgid "The organization this category applies to"
-msgstr "A organização a qual esta categoria pertence"
-
-msgid "Categories"
-msgstr "Categorias"
-
-msgid "The name to describe this image"
-msgstr "O nome para descrever esta imagem"
-
-msgid "The category this image represents"
-msgstr "A categoria que esta imagem representa"
-
-msgid "The image file to use"
-msgstr "O arquivo da imagem a ser usada"
-
-msgid "The human readable name for this content type"
-msgstr "Um nome legível para este tipo de conteúdo"
-
-msgid "The slug to idenfity this content type, used with the template tags"
-msgstr "O filtro para identificar esse tipo de conteúdo, usado com as tags de template"
-
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-msgstr "Uma descrição de onde este tipo de conteúdo é usado no site e como será exibido"
-
-msgid "Whether this content should include a title"
-msgstr "Se este conteúdo deve incluir um título"
-
-msgid "Whether this content should include an image"
-msgstr "Se este conteúdo deve incluir uma imagem"
-
-msgid "Whether this content should use a rich HTML editor"
-msgstr "Se este conteúdo deve usar um bom editor de HTML"
-
-msgid "Whether this content should include a summary field"
-msgstr "Se este conteúdo deve incluir um campo de resumo"
-
-msgid "Whether this content should include a link"
-msgstr "Se este conteúdo deve incluir um link"
-
-msgid "Whether this content should allow upload of additional images, ie a gallery"
-msgstr "Se este conteúdo deve permitir o carregamento de imagens adicionais, ou seja, uma galeria"
-
-msgid "Whether this content has a color field"
-msgstr "Se este conteúdo tem um campo de cor"
-
-msgid "Whether this content should allow setting a YouTube id"
-msgstr "Se este conteúdo deve permitir a criação de um ID para YouTube"
-
-msgid "Whether this content should allow tags"
-msgstr "Se este conteúdo deve permitir tags"
-
-msgid "Content Type"
-msgstr "Tipo de Conteúdo"
-
-msgid "The category, or type for this content block"
-msgstr "A categoria, ou tipo para este bloco de conteúdo"
-
-msgid "The title for this block of content, optional"
-msgstr "O título para este bloco de conteúdo é opcional"
-
-msgid "The summary for this item, should be short"
-msgstr "O resumo para este item deve ser curto"
-
-msgid "The body of text for this content block, optional"
-msgstr "O corpo de texto para este bloco de conteúdo. Opcional"
-
-msgid "Any image that should be displayed with this content block, optional"
-msgstr "Qualquer imagem que poderá ser exibida com este bloco de conteúdo. Opcional"
-
-msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr "A cor do fundo a ser usada para a imagem no formato: #rrggb"
-
-msgid "Any link that should be associated with this content block, optional"
-msgstr "Qualquer link que poderá ser associado a este bloco de conteúdo. Opcional"
-
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "O ID do vídeo do YouTube que deve ser ligada a este item"
-
-msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "Qualquer etiqueta para este bloco de conteúdo, separada por espaços, pode ser usada para fazer uma filtragem mais avançada. É opcional"
-
-msgid "The priority for this block, higher priority blocks come first"
-msgstr "Prioridade para este bloco, blocos com maior prioridade devem vir primeiro"
-
-msgid "The organization this content block belongs to"
-msgstr "A organização deste bloco de conteúdo pertence à"
-
-msgid "Gallery"
-msgstr "Galeria"
-
-msgid "Add Image"
-msgstr "Adicionar imagem"
-
-msgid "Search"
-msgstr "Procurar"
-
-msgid "Add"
-msgstr "Adicionar"
-
-msgid "Content Types"
-msgstr "Tipos de conteúdo"
-
-msgid "Content Blocks"
-msgstr "Blocos de conteúdo"
-
-#, python-format
-msgid "%s Blocks"
-msgstr "%s blocos"
-
-#, python-format
-msgid "Edit %s"
-msgstr "Editar %s"
-
-#, python-format
-msgid "Create %s"
-msgstr "Criar %s"
-
-msgid "Create Content Block"
-msgstr "Criar Bloco de Conteúdo"
-
-msgid "Your first name"
-msgstr "Seu primeiro nome"
-
-msgid "Your last name"
-msgstr "Seu último nome"
-
-msgid "Your email address"
-msgstr "Seu email"
-
-msgid "Your password, at least eight letters please"
-msgstr "Sua senha, mínimo de oito letras, por favor"
-
-msgid "That email address is already used"
-msgstr "O endereço de email já está em uso"
-
-msgid "Passwords must contain at least 8 letters."
-msgstr "Senhas devem conter pelo menos 8 letras."
-
-msgid "This domain is used for subdomains"
-msgstr "Este domínio é usado para subdomínios"
-
-msgid "Name"
-msgstr "Nome"
-
-msgid "The name of this organization"
-msgstr "O nome dessa organização"
-
-msgid "The logo that should be used for this organization"
-msgstr "O logotipo que deve ser usado para esta organização"
-
-msgid "Administrators"
-msgstr "Administradores"
-
-msgid "The administrators in your organization"
-msgstr "Os administradores na sua organização"
-
-msgid "Viewers"
-msgstr "Audiência"
-
-msgid "The viewers in your organization"
-msgstr "A audiência em sua organização"
-
-msgid "Editors"
-msgstr "Editores"
-
-msgid "The editors in your organization"
-msgstr "Os editores em sua organização"
-
-msgid "Language"
-msgstr "Idioma"
-
-msgid "The main language used by this organization"
-msgstr "O idioma principal por esta organização"
-
-msgid "Subdomain"
-msgstr "Subdomínio"
-
-msgid "This subdomain is not available"
-msgstr "Este subdomínio não está disponível"
-
-msgid "The subdomain for this organization"
-msgstr "O subdomínio para esta organização"
-
-msgid "Domain"
-msgstr "Domínio"
-
-msgid "This domain is not available"
-msgstr "Este domínio não está disponível"
-
-msgid "The custom domain for this organization"
-msgstr "O domínio personalizado para esta organização"
-
-msgid "Timezone"
-msgstr "Fuso horário"
-
-msgid "The timezone your organization is in."
-msgstr "O fuso horário que a sua organização estiver usando."
-
-msgid "JSON blob used to store configuration information associated with this organization"
-msgstr "JSON blob costumava armazenar informações de configuração associado a esta organização"
-
-msgid "Administrator"
-msgstr "Administrador"
-
-msgid "Editor"
-msgstr "Editor"
-
-msgid "Viewer"
-msgstr "Audiência"
-
-msgid "Org"
-msgstr "Organização"
-
-msgid "The organization to which the account is invited to view"
-msgstr "A organização para a qual a conta é convidada para visualizar"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "The email to which we send the invitation of the viewer"
-msgstr "O e-mail para o qual enviamos o convite da audiência"
-
-msgid "Secret"
-msgstr "Confidencial"
-
-msgid "a unique code associated with this invitation"
-msgstr "um código exclusivo associado a este convite"
-
-msgid "User Role"
-msgstr "Função de Usuário"
-
-#, python-format
-msgid "%s Invitation"
-msgstr "%s Convite"
-
-msgid "Banner"
-msgstr "Banner"
-
-msgid "Pattern"
-msgstr "Padrão"
-
-msgid "The organization in which the image will be used"
-msgstr "A organização em que a imagem será usada"
-
-msgid "The name to describe this background"
-msgstr "O nome para descrever este fundo"
-
-msgid "Background type"
-msgstr "Tipo de fundo"
-
-msgid "The image file"
-msgstr "O arquivo de imagem"
-
-#, fuzzy
-#| msgid "The title for this item"
-msgid "The API token for this backend"
-msgstr "O título para esse item"
-
-#, python-format
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"Você foi convidado para participar de %(org_name)s.\n"
-"<br/>\n"
-"Para aceitar o convite, <a href='%(host)s%(join_url)s'>clique aqui</a>."
-
-msgid "You are invited to join {{org.name}}."
-msgstr ""
-
-msgid "Click this link to join"
-msgstr ""
-
-msgid "Edit"
-msgstr "Editar"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "Gerir usuarios"
-
-msgid "Manage Users"
-msgstr "Gerir usuarios"
-
-msgid "Accounts"
-msgstr "Contas"
-
-msgid "Admins"
-msgstr "Administradores"
-
-msgid "Remove"
-msgstr "Remover"
-
-msgid "You must have at least one administator"
-msgstr "Você deve ter pelo menos um administrador"
-
-msgid "Select your Organization"
-msgstr "Escolha a sua Organização"
-
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-msgstr "A sua conta não está associada a uma organização. Por favor contacte o administrador."
-
-msgid "Your Organization"
-msgstr "Sua organização"
-
-msgid "Invite people to your organization"
-msgstr "Convide pessoas para a sua organização"
-
-msgid "User group"
-msgstr "Grupo de usuários"
-
-msgid "One of the emails you entered is invalid."
-msgstr "Um dos e-mails que você inseriu é inválido."
-
-#, python-format
-msgid "Manage %(name)s Accounts"
-msgstr "Gerenciar %(name)s Contas"
-
-msgid "Create"
-msgstr "Criar"
-
-msgid "Your invitation link is invalid. Please contact your organization administrator."
-msgstr "Seu link de convite é inválido. Por favor, entre em contato com o administrador da organização."
-
-#, python-format
-msgid "Join %(name)s"
-msgstr "Junte-se %(name)s"
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join"
-msgstr "Junte-se"
-
-msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr "Seu link de convite expirou. Entre em contato com o administrador da organização."
-
-msgid "Task"
-msgstr "Tarefa"
-
-msgid "Tasks"
-msgstr "Atividades"
-
-msgid "The title for this story"
-msgstr "O título para esta história"
-
-msgid "Whether this story is featured"
-msgstr "Se esta história é destaque"
-
-msgid "The summary for the story"
-msgstr "O resumo da história"
-
-msgid "The body of text for the story"
-msgstr "O corpo do texto para a história"
-
-msgid "The writer of the story"
-msgstr "O autor da história"
-
-msgid "A link to an mp3 file to publish on this story"
-msgstr "Um link para um arquivo de mp3 para publicar nesta história"
-
-msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr "O ID do vídeo do YouTube que deve ser ligado a esta história (este é o texto que vem depois de v = e antes e na URL do YouTube)"
-
-msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "Quaisquer tags para esta história, separadas por espaços, podem ser usadas para fazer uma filtragem mais avançada. É opcional"
-
-msgid "The category for this story"
-msgstr "A categoria para esta história"
-
-msgid "The organization this story belongs to"
-msgstr "A organização na qual esta história pertence a"
-
-msgid "Stories"
-msgstr "Histórias"
-
-msgid "The story to associate to"
-msgstr "A história a associar a"
-
-msgid "Yes"
-msgstr "Sim"
-
-msgid "No"
-msgstr "Não"
-
-msgid "Story Images"
-msgstr "Imagens da História"
-
-#, python-format
-msgid "Image %d"
-msgstr "Imagem %d"
-
-msgid "Image to display on story page and in previews. (optional)"
-msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional)"
-
-msgid "Image to display on story page and in previews (optional)"
-msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional) "
 
 msgid "Back to Full Site"
 msgstr ""
@@ -445,6 +38,9 @@ msgstr "Conectar"
 msgid "Polls"
 msgstr "Enquetes"
 
+msgid "Stories"
+msgstr "Histórias"
+
 msgid "Users"
 msgstr "Usuários"
 
@@ -459,6 +55,9 @@ msgstr "Imagens"
 msgid "Jobs"
 msgstr "Empregos"
 
+msgid "Categories"
+msgstr "Categorias"
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -469,6 +68,9 @@ msgstr "Notícias"
 
 msgid "Orgs"
 msgstr "Organizações"
+
+msgid "Content Types"
+msgstr "Tipos de conteúdo"
 
 msgid "Images"
 msgstr "Imagens"
@@ -594,6 +196,20 @@ msgid ""
 msgstr ""
 "\n"
 "Lembre-se de que para adicionar uma proposta de trabalho do Twitter, você precisa criar um widget do twitter"
+
+msgid "Edit"
+msgstr "Editar"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "Gerir usuarios"
+
+msgid "Manage Users"
+msgstr "Gerir usuarios"
+
+msgid "Add"
+msgstr "Adicionar"
 
 msgid "ABOUT U-REPORT"
 msgstr "SOBRE O U-REPORT"
@@ -1031,6 +647,12 @@ msgstr "Iniciar sessão"
 msgid "Forgot Password?"
 msgstr "Esqueceu a senha?"
 
+msgid "Gallery"
+msgstr "Galeria"
+
+msgid "Add Image"
+msgstr "Adicionar imagem"
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1043,6 +665,24 @@ msgstr "LOCALIZAÇÕES"
 #| msgid "Manage Users"
 msgid "Backends"
 msgstr "Gerir usuarios"
+
+msgid "You must have at least one administator"
+msgstr "Você deve ter pelo menos um administrador"
+
+msgid "Accounts"
+msgstr "Contas"
+
+msgid "Admins"
+msgstr "Administradores"
+
+msgid "Editors"
+msgstr "Editores"
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "User group"
+msgstr "Grupo de usuários"
 
 msgid "+ New Poll"
 msgstr ""
@@ -1185,6 +825,9 @@ msgstr ""
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Uma vez removido, desaparecerá para sempre. Não há forma de desfazer esta operação."
 
+msgid "Search"
+msgstr "Procurar"
+
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1301,17 +944,32 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "Cache %s atualizado para esta organização"
 
+msgid "Banner"
+msgstr "Banner"
+
+msgid "Pattern"
+msgstr "Padrão"
+
 msgid "Flag"
 msgstr "Bandeira"
 
+msgid "Org"
+msgstr "Organização"
+
 msgid "The organization to which the image will be used"
 msgstr "A organização para a qual a imagem será usada"
+
+msgid "Name"
+msgstr "Nome"
 
 msgid "A short descriptive name for this image"
 msgstr "Um nome descritivo curto para esta imagem"
 
 msgid "Image type"
 msgstr "Tipo de Imagem"
+
+msgid "The image file"
+msgstr "O arquivo de imagem"
 
 msgid "Label"
 msgstr "Rótulo"
@@ -1424,11 +1082,17 @@ msgstr "O título para esse vídeo"
 msgid "A short summary description for this video"
 msgstr "Uma descrição curta e resumida para esse vídeo"
 
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "O ID do vídeo do YouTube que deve ser ligada a este item"
+
 msgid "The organization this video belongs to"
 msgstr "A organização a qual esse vídeo pertence"
 
 msgid "The name of this poll category"
 msgstr "O nome da categoria dessa enquete"
+
+msgid "The organization this category applies to"
+msgstr "A organização a qual esta categoria pertence"
 
 msgid "Poll Categories"
 msgstr "Categorias das enquetes"
@@ -1466,8 +1130,14 @@ msgstr "A imagem da categoria inicial para exibir na enquete (opcional)"
 msgid "The organization this poll is part of"
 msgstr "A organização desta esquete é parte de"
 
+msgid "The name to describe this image"
+msgstr "O nome para descrever esta imagem"
+
 msgid "The poll to associate to"
 msgstr "Associar a enquete a"
+
+msgid "The image file to use"
+msgstr "O arquivo da imagem a ser usada"
 
 msgid "The poll for this response"
 msgstr "A enquete para esta resposta"
@@ -1537,6 +1207,10 @@ msgstr "Imagens da Enquete"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Agora, insira quaisquer respostas que você gostaria de destacar. (se houver alguma)"
+
+#, python-format
+msgid "Image %d"
+msgstr "Imagem %d"
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "A imagem para mostrar na página de enquetes e nas visualizações. (Opcional)"
@@ -1807,6 +1481,326 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"
+
+#~ msgid "The name of this category"
+#~ msgstr "O nome desta categoria"
+
+#~ msgid "An optional image that can describe this category"
+#~ msgstr "Uma imagem opcional que pode descrever esta categoria"
+
+#~ msgid "The category this image represents"
+#~ msgstr "A categoria que esta imagem representa"
+
+#~ msgid "The human readable name for this content type"
+#~ msgstr "Um nome legível para este tipo de conteúdo"
+
+#~ msgid "The slug to idenfity this content type, used with the template tags"
+#~ msgstr "O filtro para identificar esse tipo de conteúdo, usado com as tags de template"
+
+#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#~ msgstr "Uma descrição de onde este tipo de conteúdo é usado no site e como será exibido"
+
+#~ msgid "Whether this content should include a title"
+#~ msgstr "Se este conteúdo deve incluir um título"
+
+#~ msgid "Whether this content should include an image"
+#~ msgstr "Se este conteúdo deve incluir uma imagem"
+
+#~ msgid "Whether this content should use a rich HTML editor"
+#~ msgstr "Se este conteúdo deve usar um bom editor de HTML"
+
+#~ msgid "Whether this content should include a summary field"
+#~ msgstr "Se este conteúdo deve incluir um campo de resumo"
+
+#~ msgid "Whether this content should include a link"
+#~ msgstr "Se este conteúdo deve incluir um link"
+
+#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
+#~ msgstr "Se este conteúdo deve permitir o carregamento de imagens adicionais, ou seja, uma galeria"
+
+#~ msgid "Whether this content has a color field"
+#~ msgstr "Se este conteúdo tem um campo de cor"
+
+#~ msgid "Whether this content should allow setting a YouTube id"
+#~ msgstr "Se este conteúdo deve permitir a criação de um ID para YouTube"
+
+#~ msgid "Whether this content should allow tags"
+#~ msgstr "Se este conteúdo deve permitir tags"
+
+#~ msgid "Content Type"
+#~ msgstr "Tipo de Conteúdo"
+
+#~ msgid "The category, or type for this content block"
+#~ msgstr "A categoria, ou tipo para este bloco de conteúdo"
+
+#~ msgid "The title for this block of content, optional"
+#~ msgstr "O título para este bloco de conteúdo é opcional"
+
+#~ msgid "The summary for this item, should be short"
+#~ msgstr "O resumo para este item deve ser curto"
+
+#~ msgid "The body of text for this content block, optional"
+#~ msgstr "O corpo de texto para este bloco de conteúdo. Opcional"
+
+#~ msgid "Any image that should be displayed with this content block, optional"
+#~ msgstr "Qualquer imagem que poderá ser exibida com este bloco de conteúdo. Opcional"
+
+#~ msgid "A background color to use for the image, in the format: #rrggbb"
+#~ msgstr "A cor do fundo a ser usada para a imagem no formato: #rrggb"
+
+#~ msgid "Any link that should be associated with this content block, optional"
+#~ msgstr "Qualquer link que poderá ser associado a este bloco de conteúdo. Opcional"
+
+#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr "Qualquer etiqueta para este bloco de conteúdo, separada por espaços, pode ser usada para fazer uma filtragem mais avançada. É opcional"
+
+#~ msgid "The priority for this block, higher priority blocks come first"
+#~ msgstr "Prioridade para este bloco, blocos com maior prioridade devem vir primeiro"
+
+#~ msgid "The organization this content block belongs to"
+#~ msgstr "A organização deste bloco de conteúdo pertence à"
+
+#~ msgid "Content Blocks"
+#~ msgstr "Blocos de conteúdo"
+
+#, python-format
+#~ msgid "%s Blocks"
+#~ msgstr "%s blocos"
+
+#, python-format
+#~ msgid "Edit %s"
+#~ msgstr "Editar %s"
+
+#, python-format
+#~ msgid "Create %s"
+#~ msgstr "Criar %s"
+
+#~ msgid "Create Content Block"
+#~ msgstr "Criar Bloco de Conteúdo"
+
+#~ msgid "Your first name"
+#~ msgstr "Seu primeiro nome"
+
+#~ msgid "Your last name"
+#~ msgstr "Seu último nome"
+
+#~ msgid "Your email address"
+#~ msgstr "Seu email"
+
+#~ msgid "Your password, at least eight letters please"
+#~ msgstr "Sua senha, mínimo de oito letras, por favor"
+
+#~ msgid "That email address is already used"
+#~ msgstr "O endereço de email já está em uso"
+
+#~ msgid "Passwords must contain at least 8 letters."
+#~ msgstr "Senhas devem conter pelo menos 8 letras."
+
+#~ msgid "This domain is used for subdomains"
+#~ msgstr "Este domínio é usado para subdomínios"
+
+#~ msgid "The name of this organization"
+#~ msgstr "O nome dessa organização"
+
+#~ msgid "The logo that should be used for this organization"
+#~ msgstr "O logotipo que deve ser usado para esta organização"
+
+#~ msgid "Administrators"
+#~ msgstr "Administradores"
+
+#~ msgid "The administrators in your organization"
+#~ msgstr "Os administradores na sua organização"
+
+#~ msgid "Viewers"
+#~ msgstr "Audiência"
+
+#~ msgid "The viewers in your organization"
+#~ msgstr "A audiência em sua organização"
+
+#~ msgid "The editors in your organization"
+#~ msgstr "Os editores em sua organização"
+
+#~ msgid "Language"
+#~ msgstr "Idioma"
+
+#~ msgid "The main language used by this organization"
+#~ msgstr "O idioma principal por esta organização"
+
+#~ msgid "Subdomain"
+#~ msgstr "Subdomínio"
+
+#~ msgid "This subdomain is not available"
+#~ msgstr "Este subdomínio não está disponível"
+
+#~ msgid "The subdomain for this organization"
+#~ msgstr "O subdomínio para esta organização"
+
+#~ msgid "Domain"
+#~ msgstr "Domínio"
+
+#~ msgid "This domain is not available"
+#~ msgstr "Este domínio não está disponível"
+
+#~ msgid "The custom domain for this organization"
+#~ msgstr "O domínio personalizado para esta organização"
+
+#~ msgid "Timezone"
+#~ msgstr "Fuso horário"
+
+#~ msgid "The timezone your organization is in."
+#~ msgstr "O fuso horário que a sua organização estiver usando."
+
+#~ msgid "JSON blob used to store configuration information associated with this organization"
+#~ msgstr "JSON blob costumava armazenar informações de configuração associado a esta organização"
+
+#~ msgid "Administrator"
+#~ msgstr "Administrador"
+
+#~ msgid "Editor"
+#~ msgstr "Editor"
+
+#~ msgid "Viewer"
+#~ msgstr "Audiência"
+
+#~ msgid "The organization to which the account is invited to view"
+#~ msgstr "A organização para a qual a conta é convidada para visualizar"
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "The email to which we send the invitation of the viewer"
+#~ msgstr "O e-mail para o qual enviamos o convite da audiência"
+
+#~ msgid "Secret"
+#~ msgstr "Confidencial"
+
+#~ msgid "a unique code associated with this invitation"
+#~ msgstr "um código exclusivo associado a este convite"
+
+#~ msgid "User Role"
+#~ msgstr "Função de Usuário"
+
+#, python-format
+#~ msgid "%s Invitation"
+#~ msgstr "%s Convite"
+
+#~ msgid "The organization in which the image will be used"
+#~ msgstr "A organização em que a imagem será usada"
+
+#~ msgid "The name to describe this background"
+#~ msgstr "O nome para descrever este fundo"
+
+#~ msgid "Background type"
+#~ msgstr "Tipo de fundo"
+
+#, fuzzy
+#~| msgid "The title for this item"
+#~ msgid "The API token for this backend"
+#~ msgstr "O título para esse item"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "      You've been invited to join %(org_name)s.\n"
+#~ "      <br/>\n"
+#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+#~ "  "
+#~ msgstr ""
+#~ "\n"
+#~ "Você foi convidado para participar de %(org_name)s.\n"
+#~ "<br/>\n"
+#~ "Para aceitar o convite, <a href='%(host)s%(join_url)s'>clique aqui</a>."
+
+#~ msgid "Select your Organization"
+#~ msgstr "Escolha a sua Organização"
+
+#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#~ msgstr "A sua conta não está associada a uma organização. Por favor contacte o administrador."
+
+#~ msgid "Your Organization"
+#~ msgstr "Sua organização"
+
+#~ msgid "Invite people to your organization"
+#~ msgstr "Convide pessoas para a sua organização"
+
+#~ msgid "One of the emails you entered is invalid."
+#~ msgstr "Um dos e-mails que você inseriu é inválido."
+
+#, python-format
+#~ msgid "Manage %(name)s Accounts"
+#~ msgstr "Gerenciar %(name)s Contas"
+
+#~ msgid "Create"
+#~ msgstr "Criar"
+
+#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
+#~ msgstr "Seu link de convite é inválido. Por favor, entre em contato com o administrador da organização."
+
+#, python-format
+#~ msgid "Join %(name)s"
+#~ msgstr "Junte-se %(name)s"
+
+#, fuzzy
+#~| msgid "Join"
+#~ msgid "Join"
+#~ msgstr "Junte-se"
+
+#~ msgid "Your invitation link has expired. Please contact your organization administrator."
+#~ msgstr "Seu link de convite expirou. Entre em contato com o administrador da organização."
+
+#~ msgid "Task"
+#~ msgstr "Tarefa"
+
+#~ msgid "Tasks"
+#~ msgstr "Atividades"
+
+#~ msgid "The title for this story"
+#~ msgstr "O título para esta história"
+
+#~ msgid "Whether this story is featured"
+#~ msgstr "Se esta história é destaque"
+
+#~ msgid "The summary for the story"
+#~ msgstr "O resumo da história"
+
+#~ msgid "The body of text for the story"
+#~ msgstr "O corpo do texto para a história"
+
+#~ msgid "The writer of the story"
+#~ msgstr "O autor da história"
+
+#~ msgid "A link to an mp3 file to publish on this story"
+#~ msgstr "Um link para um arquivo de mp3 para publicar nesta história"
+
+#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+#~ msgstr "O ID do vídeo do YouTube que deve ser ligado a esta história (este é o texto que vem depois de v = e antes e na URL do YouTube)"
+
+#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr "Quaisquer tags para esta história, separadas por espaços, podem ser usadas para fazer uma filtragem mais avançada. É opcional"
+
+#~ msgid "The category for this story"
+#~ msgstr "A categoria para esta história"
+
+#~ msgid "The organization this story belongs to"
+#~ msgstr "A organização na qual esta história pertence a"
+
+#~ msgid "The story to associate to"
+#~ msgstr "A história a associar a"
+
+#~ msgid "Yes"
+#~ msgstr "Sim"
+
+#~ msgid "No"
+#~ msgstr "Não"
+
+#~ msgid "Story Images"
+#~ msgstr "Imagens da História"
+
+#~ msgid "Image to display on story page and in previews. (optional)"
+#~ msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional)"
+
+#~ msgid "Image to display on story page and in previews (optional)"
+#~ msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional) "
 
 #, fuzzy, python-format
 #~| msgid ""
