@@ -201,6 +201,13 @@ html {
   @apply w-full text-sm whitespace-no-wrap;
 }
 
+
+.poll-map-info {
+  margin-right: 15rem;
+  margin-top: 170%;
+}
+
+
 // allows an element to fade in when a parent element hovers, supports up to three levels below
 .hover-show {
   opacity: 0;
@@ -380,6 +387,7 @@ html {
 
 .search-results {
   opacity: 0;
+  display: none;
 
   overflow-y: scroll;
   overflow-x: hidden;
@@ -435,6 +443,7 @@ html {
 
   &.shown {
     opacity: 1;
+    display: block;
 
     -webkit-transition:opacity .5s ease-in-out;
     -moz-transition:opacity .5s ease-in-out;
