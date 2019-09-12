@@ -1,3 +1,20 @@
+v1.1.8
+----------
+ * Adjust cursor and sticky bar
+ * Merge pull request #451 from rapidpro/layout-tweaks
+ * age graph pane only 1/2
+ * livvic as alt font
+ * montserrat as alt font
+ * fix mobile menu spacing
+ * about page
+ * new global layouts
+ * new layouyg
+ * transition menu with slide
+
+v1.1.6
+----------
+
+
 v1.1.5
 ----------
  * Merge pull request #444 from rapidpro/admin-nav-public-site

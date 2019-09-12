@@ -18,7 +18,7 @@
       %meta(name="robots" content="noindex")
 
     // Google fonts we use
-    %link(href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:300,400,700|Montserrat:300,400,700&display=swap" rel="stylesheet")
+    %link(href="https://fonts.googleapis.com/css?family=Livvic:300,400,700|Montserrat:300,400,700&display=swap" rel="stylesheet")
 
     // Font awesome icons
     %link(href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous")
@@ -60,19 +60,19 @@
       }
 
       .border-light1 {
-        border-color: {{ org|config:'color_light1'|default:#FFD100 }};
+        border-color: {{ org|config:'color_light1'|default:'#FFD100' }};
       }
 
       .bg-light1 {
-        background: {{ org|config:'color_light1'|default:#FFD100 }};
+        background: {{ org|config:'color_light1'|default:'#FFD100' }};
       }
 
       .text-light1 {
-        color: {{ org|config:'color_light1'|default:#FFD100 }};
+        color: {{ org|config:'color_light1'|default:'#FFD100' }};
       }
 
       .bg-light2 {
-        background: {{ org|config:'color_light2'|default:#5eb3e0 }};
+        background: {{ org|config:'color_light2'|default:'#5eb3e0' }};
       }
 
 
@@ -116,6 +116,8 @@
       }(document, 'script', 'facebook-jssdk'));
     </script>
 
+    // top black bar
+    .block.bg-black.h-2
 
     // countries (off screen to start)
     #countries.bg-black.text-white
@@ -131,16 +133,13 @@
           %div
             - show_org_flags
 
-    // top black bar
-    .block.bg-black.h-2
-    
     // admin nav
     - if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
       .block.hidden(class="md:block")
         %ul.flex.bg-gray-800.text-white
           %li
             %a.inline-block.px-6.py-4(href="{% url 'orgs.org_home' %}" class="hover:text-gray-800 hover:bg-gray-300")
-              {{ org.name }} - 
+              {{ org.name }} -
                 - trans "Admin"
           - if request.user.is_superuser
             %li
@@ -151,19 +150,19 @@
                 .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
                   %a.admin-menu.small-link-no-wrap(href="{% url 'orgs.org_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "Orgs"
-    
+
                   %a.admin-menu.small-link-no-wrap(href="/users/user/" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "Users"
-                  
+
                   %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblocktype_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "Content Types"
-    
+
                   - if request.user.is_superuser or org_perms.assets.image_list
                     %a.admin-menu.small-link-no-wrap(href="{% url 'assets.image_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
                       - trans "Images"
           %li
             %a.admin-menu(href="{% url 'dashblocks.dashblock_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
-                    - trans "Content"
+              - trans "Content"
 
           -if org|config:"is_global"
             -if request.user.is_superuser or perms.countries.countryalias_list
@@ -184,12 +183,12 @@
                   %i.fa.fa-caret-down
                 .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
                   - if perms.categories.category_list or org_perms.categories.category_list
-                      %a.admin-menu.small-link-no-wrap(href="{% url 'categories.category_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
-                        - trans "Categories"
+                    %a.admin-menu.small-link-no-wrap(href="{% url 'categories.category_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                      - trans "Categories"
 
                   - if perms.categories.categoryimage_list or org_perms.categories.categoryimage_list
-                      %a.admin-menu.small-link-no-wrap(href="{% url 'categories.categoryimage_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
-                        - trans "Category Images"
+                    %a.admin-menu.small-link-no-wrap(href="{% url 'categories.categoryimage_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                      - trans "Category Images"
 
           %li
             .dropdown.relative
@@ -208,7 +207,7 @@
                   %hr
                   %a.admin-menu.small-link-no-wrap(href="{% url 'jobs.jobsource_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "Job Sources"
-    
+
                 - if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
                   %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=jobs" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "Jobs Content"
@@ -216,33 +215,33 @@
                   %hr
                   %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=about" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "About Content"
-    
+
                   %hr
                   %a.admin-menu.small-link-no-wrap(href="{% url 'news.video_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "Videos"
-    
+
                   -# %hr
                   -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=contact_us" class="hover:text-gray-800 hover:bg-gray-300")
                   -#   - trans "Contact Us Content"
-    
+
                   -# %hr
                   -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=missions" class="hover:text-gray-800 hover:bg-gray-300")
                   -#   - trans "Missions Content"
-    
+
                   -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=terms_conditions" class="hover:text-gray-800 hover:bg-gray-300")
                   -#   - trans "Terms & Conditions"
-                  
+
                   %hr
                   %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=ureporters" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "U-Reporters Content"
-                  
+
                   %hr
                   %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=join_engage" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "Join &amp; Engage Content"
-    
+
                   -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=join_steps" class="hover:text-gray-800 hover:bg-gray-300")
                   -#   - trans "Join Steps Content"
-                  
+
                   %hr
                   %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=additional_menu" class="hover:text-gray-800 hover:bg-gray-300")
                     - trans "Custom pages"
@@ -258,7 +257,6 @@
               - else
                 %a.admin-menu(href="{% url 'users.user_login' %}" class="hover:text-gray-800 hover:bg-gray-300")
                   - trans "Login"
-
 
     // desktop header
     .block.hidden(class="md:block")
@@ -295,7 +293,7 @@
             -trans "Join Now"
 
       // header menu
-      .justify-around.mt-5.mb-6.px-home.hidden(class="md:flex")
+      .max-w-page.mx-auto.justify-around.mt-5.mb-6.px-home.hidden(class="md:flex")
         .flex-1.text-center.font-bold.text-2xl.flex-center-y
           %div
             %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}")
@@ -328,15 +326,14 @@
     // mobile menu
     #mobile-menu.absolute.right-0(class="md:hidden")
       .bg-black.text-white.py-home.pl-home.pr-16
-        .border-b.pb-4
-          %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
-            -trans "Opinions"
+        %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
+          -trans "Opinions"
 
-          %a.block.font-bold(href="{% url 'v2.public.stories' %}")
-            -trans "Stories"
+        %a.block.font-bold(href="{% url 'v2.public.stories' %}")
+          -trans "Stories"
 
-          %a.block.mt-4(href="{% url 'v2.public.about' %}")
-            -trans "About"
+        %a.block.mt-4(href="{% url 'v2.public.about' %}")
+          -trans "About"
 
         %a.block(href="{% url 'v2.public.ureporters' %}")
           -trans "Engagement"
@@ -365,32 +362,35 @@
 
     {% if main_stories|slice:"1:" %}
     // footer stories
-    .bg-dark-blue.text-white.px-home.pt-home(class="md:flex")
-      - for story in main_stories|slice:"1:4"
-        %a.block(class="md:mr-4 w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
-          .block
-            {% thumbnail story.get_image "400x250" crop="top" as im %}
-            %img(width="100%" src="{{im.url}}")
-            {% endthumbnail %}
-          .font-bold.text-l.mt-4
-            {{ story.title }}
+    .bg-dark-blue
+      .max-w-page.mx-auto.text-white.px-home.pt-home(class="md:flex")
+        - for story in main_stories|slice:"1:4"
+          %a.block(class="md:mr-4 w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
+            .block
+              {% thumbnail story.get_image "400x250" crop="top" as im %}
+              %img(width="100%" src="{{im.url}}")
+              {% endthumbnail %}
+            .font-bold.text-l.mt-4
+              {{ story.title }}
 
-          .text-center.mt-4
-            %button.btn.bg-black.text-white
-              -trans "READ MORE"
+            .text-center.mt-4
+              %button.btn.bg-black.text-white
+                -trans "READ MORE"
     {% endif %}
 
     // footer engage callout
-    .bg-dark-blue.text-white.p-home(class="md:flex")
-      .div.bg-blue-u(class="md:w-1/3")
-        .div
+    .bg-dark-blue
+      .max-w-page.mx-auto.text-white.p-home(class="md:flex")
+        .div(class="md:w-1/3")
+          %img(src="{{STATIC_URL}}img/blue_u.png")
 
-      .div.text-right(class="md:w-2/3 md:pr-10 md:border-r md:border-gray-500")
-        .font-bold.text-3xl.leading-tight.mb-8
-          -trans "See by the numbers how we are engaging youth voices for positive social change."
+        .text-right(class="md:w-2/3")
+          .pb-4(class="md:pr-10 md:border-r md:border-gray-500")
+            .font-bold.text-3xl.leading-tight.mb-8
+              -trans "See by the numbers how we are engaging youth voices for positive social change."
 
-        %a.btn.bg-light2.text-white.inline-block(href="{% url 'v2.public.ureporters' %}")
-          -trans "EXPLORE ENGAGEMENT"
+            %a.btn.bg-light2.text-white.inline-block(href="{% url 'v2.public.ureporters' %}")
+              -trans "EXPLORE ENGAGEMENT"
 
     // footer navbar
     .justify-around.mt-5.mb-3.px-home(class="md:flex")

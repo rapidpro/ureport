@@ -19,22 +19,24 @@ html {
   width: 100%;
   z-index: 450;
   overflow:hidden;
-  opacity: 0;
+  opacity: 1;
 
   background-image: url("/sitestatic/img/dropdown-bkg.png");
   background-repeat: no-repeat;
   background-size: auto;
   background-position: left;
 
-  transition: .5s;
   transform: translateY(-100%);
+  transition: 1s;
 
-  -webkit-transition:opacity .5s ease-in-out;
-  -moz-transition:opacity .5s ease-in-out;
-  transition:opacity .5s ease-in-out;
+  -webkit-transition:transform .5s ease-in-out;
+  -moz-transition:transform .5s ease-in-out;
+  transition:transform .5s ease-in-out;
 
   &.open {
-    transition: .5s;
+    -webkit-transition:transform .5s ease-in-out;
+    -moz-transition:transform .5s ease-in-out;
+    transition:transform .5s ease-in-out;
     transform: translateY(0);
     opacity: 1;
   }
@@ -80,6 +82,16 @@ html {
     transform: translate(0px);
     transition: height 0s, transform 1s;
   }
+}
+
+// full width
+.max-w-page {
+  max-width: 1200px;
+}
+
+// half width
+.max-w-half-page {
+  max-width: 600px;
 }
 
 // button style
@@ -276,6 +288,7 @@ html {
 
 // light grid background
 .bg-grid {
+  background: white;
   background-size: 43px 57px;
   background-position: 0px 10px;
   background-image: linear-gradient(to right, #eee 1px, transparent 1px), linear-gradient(to bottom, #eee 1px, transparent 1px);
@@ -283,6 +296,7 @@ html {
 
 // light squares background
 .bg-squares {
+  background: white;
   background-size: 43px 57px;
   background-position: 0px 10px;
   background-image: linear-gradient(to right, #eee 1px, transparent 1px), linear-gradient(to bottom, #eee 1px, transparent 1px);
@@ -307,6 +321,7 @@ html {
 .bg-blue-u {
   background-image: url("/sitestatic/img/blue_u.png");
   background-position-x: 6rem;
+  background-position-y: -2rem;
   background-repeat: no-repeat;
   background-size: auto;
 }
@@ -431,7 +446,7 @@ html {
 @media only screen and (min-width: 768px) {
   .vertical-angle {
     -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+    clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
   }
 
   .p-home {

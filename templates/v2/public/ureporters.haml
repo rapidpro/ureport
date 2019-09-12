@@ -3,91 +3,93 @@
 -load compress ureport dashblocks thumbnail i18n humanize
 
 - block content
-  .bg-grid.border-t.p-home(class="md:flex")
-    .flex-1.flex-center-y
-      .text-5xl.font-bold
-        -trans "Engagement"
+  .bg-grid.border-t.border-b
+    .max-w-page.mx-auto.p-home(class="md:flex")
+      .flex-1.flex-center-y
+        .text-5xl.font-bold
+          -trans "Engagement"
 
-    .flex-1.flex-center-y
-      .text-xl.text-right(class="md:pl-12")
-        -trans "A sentence that describes what this page is all about and who it is for"
+      .flex-1.flex-center-y
+        .text-xl.text-right(class="md:pl-12")
+          -trans "A sentence that describes what this page is all about and who it is for"
 
-  .bg-dark-blue(class="md:flex")
-    .flex-1.bg-black.p-home.vertical-angle
-      .font-alt.text-light1.italic.mb-4.font-bold
-        -trans "Year at a Glance"
+  .max-w-page.mx-auto
+    .bg-dark-blue(class="md:flex")
+      .flex-1.bg-black.p-home.vertical-angle
+        .font-alt.text-light1.italic.mb-4.font-bold
+          -trans "Year at a Glance"
 
-      .text-white.font-light
-        .inline-block.pr-8.border-r.border-white
-          .text-5xl.leading-none
-            {{org.get_signups|intcomma}}
-          .text-xs.font-bold
-            -trans "SIGN-UPS"
+        .text-white.font-light
+          .inline-block.pr-8.border-r.border-white
+            .text-5xl.leading-none
+              {{org.get_signups|intcomma}}
+            .text-xs.font-bold
+              -trans "SIGN-UPS"
 
-        .inline-block.pl-8
-          .text-5xl.leading-none
-            {{average_response_rate|floatformat}} %
-          .text-xs.font-bold
-            -trans "AVG RESPONSE RATE"
+          .inline-block.pl-8
+            .text-5xl.leading-none
+              {{average_response_rate|floatformat}} %
+            .text-xs.font-bold
+              -trans "AVG RESPONSE RATE"
 
-      .text-white.mt-4.font-bold
-        .inline.text-light1
-          {{org.get_reporters_count|intcomma}}
-        .inline.text-white
-          -trans "TOTAL U-REPORTERS IN"
-          {{ org.name|upper }}
-        .inline.text-light1
-          +{{org.get_signup_rate|floatformat}}%
+        .text-white.mt-4.font-bold
+          .inline.text-light1
+            {{org.get_reporters_count|intcomma}}
+          .inline.text-white
+            -trans "TOTAL U-REPORTERS IN"
+            {{ org.name|upper }}
+          .inline.text-light1
+            +{{org.get_signup_rate|floatformat}}%
 
-      .mt-4.flex
-        .flex-none.mr-8
-          .text-white.text-center.inline-block.pr-4.border-r.border-white
-            %img(src="{{ STATIC_URL }}img/gender-male-w.png" width="40")
-            .font-bold.text-xl.leading-none.mt-2
-              {{gender_stats.male_percentage}}
-            .text-light1.text-sm.leading-none
-              {{gender_stats.male_count|intcomma}}
-
-          .text-white.text-center.inline-block.px-4
-            %img(src="{{ STATIC_URL }}img/gender-female-w.png" width="40")
-            .font-bold.text-xl.leading-none.mt-2
-              {{gender_stats.female_percentage}}
-            .text-light1.text-sm.leading-none
-              {{gender_stats.female_count|intcomma}}
-          - if org|config:"has_extra_gender"
-            .text-white.text-center.inline-block.px-4.border-l.border-white
-              %img(src="{{ STATIC_URL }}img/gender-other-w.png" width="40")
+        .mt-4.flex
+          .flex-none.mr-8
+            .text-white.text-center.inline-block.pr-4.border-r.border-white
+              %img(src="{{ STATIC_URL }}img/gender-male-w.png" width="40")
               .font-bold.text-xl.leading-none.mt-2
-                {{gender_stats.other_percentage}}
+                {{gender_stats.male_percentage}}
               .text-light1.text-sm.leading-none
-                {{gender_stats.other_count|intcomma}}
+                {{gender_stats.male_count|intcomma}}
 
-        .flex-1.inline-block(style="min-width:220px;max-width:350px")
-          .relative.w-full(style="height:105px")
-            {{ age_stats|json_script:"age_stats" }}
-            #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
+            .text-white.text-center.inline-block.px-4
+              %img(src="{{ STATIC_URL }}img/gender-female-w.png" width="40")
+              .font-bold.text-xl.leading-none.mt-2
+                {{gender_stats.female_percentage}}
+              .text-light1.text-sm.leading-none
+                {{gender_stats.female_count|intcomma}}
+            - if org|config:"has_extra_gender"
+              .text-white.text-center.inline-block.px-4.border-l.border-white
+                %img(src="{{ STATIC_URL }}img/gender-other-w.png" width="40")
+                .font-bold.text-xl.leading-none.mt-2
+                  {{gender_stats.other_percentage}}
+                .text-light1.text-sm.leading-none
+                  {{gender_stats.other_count|intcomma}}
 
-    .flex-1.text-white
-      .pl-6.pr-home.py-home.text-center
-        .text-sm.font-bold.mb-2
-          -trans "U-REPORTERS BY REGION"
-        {% with map_segment='{"location":"state"}' %}
-        #ureporter-map.h-full.w-full.map(data-map-url="/v2/contact_field_results/?segment={{ map_segment|urlencode }}")
-          .block(style="min-height:300px;min-width:300px;")
-        {% endwith %}
+          .flex-1.inline-block(style="min-width:220px;max-width:350px")
+            .relative.w-full(style="height:105px")
+              {{ age_stats|json_script:"age_stats" }}
+              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
 
-  .border-t.border-b.bg-dark-gray.px-home.py-4.border-gray-800.sticky.top-0.z-50(class="md:flex md:justify-between")
-    .text-white.font-bold.flex-center-y
-      -trans "FILTER RESULTS"
+      .flex-1.text-white
+        .pl-6.pr-home.py-home.text-center
+          .text-sm.font-bold.mb-2
+            -trans "U-REPORTERS BY REGION"
+          {% with map_segment='{"location":"state"}' %}
+          #ureporter-map.h-full.w-full.map(data-map-url="/v2/contact_field_results/?segment={{ map_segment|urlencode }}")
+            .block(style="min-height:300px;min-width:300px;")
+          {% endwith %}
 
-    .flex-center-y
-      .text-white.text-xs.flex
-        - for time_filter in data_time_filters
-          .border-white.pill-black.tab-button-time-filter(class="{% if forloop.first %}pill-first{% elif forloop.last %}selected pill-last{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
-            {{time_filter.label}}
+  .border-t.border-b.bg-dark-gray.sticky.top-0.z-50
+    .max-w-page.mx-auto.px-home.py-4.border-gray-800(class="md:flex md:justify-between")
+      .text-white.font-bold.flex-center-y
+        -trans "FILTER RESULTS"
 
+      .flex-center-y
+        .text-white.text-xs.flex
+          - for time_filter in data_time_filters
+            .cursor-pointer.border-white.pill-black.tab-button-time-filter(class="{% if forloop.first %}pill-first{% elif forloop.last %}selected pill-last{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
+              {{time_filter.label}}
 
-  .bg-dark-blue.p-home.text-white.font-bold.border-b.border-white
+  .max-w-page.mx-auto.bg-dark-blue.p-home.text-white.font-bold.border-b.border-white
     - for time_filter in data_time_filters
       .engagemment-content.hover-parent(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
         - for metric in data_metrics
@@ -100,10 +102,10 @@
               .text-black.text-2xs.flex.mb-6
                 - for segment in data_segments
                   - if forloop.first
-                    .pill-first.pill-dark-blue-inverted.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                    .cursor-pointer.pill-first.pill-dark-blue-inverted.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
                   - elif forloop.last
-                    .pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
+                    .cursor-pointer.pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
                       .dropdown-butto
                         {{segment.label}}
                       .dropdown-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2(data-html2canvas-ignore=true)
@@ -111,12 +113,12 @@
                           .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white {% if forloop.counter < 4 %}is-selected bg-gray-800 text-white{% endif %}")
                             {{state.name}}
                   - else
-                    .pill.pill-dark-blue-inverted.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
+                    .cursor-pointer.pill.pill-dark-blue-inverted.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
                       {{segment.label}}
 
               .share.flex-none.mb-4.flex-center-y.hover-show
                 .block
-                  %a.bg-circle-xs.border.border-white.text-white.facebook-share(href="" data-url="{% org_host_link %}{% url 'v2.public.engagement' %}")
+                  %a.cursor-pointer.bg-circle-xs.border.border-white.text-white.facebook-share(data-url="{% org_host_link %}{% url 'v2.public.engagement' %}")
                     %i.fa.fa-facebook
                   %a.bg-circle-xs.border.border-white.text-white(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'v2.public.engagement' %}")
                     %i.fa.fa-twitter
@@ -124,7 +126,7 @@
                     %i.fa.fa-whatsapp
                   %a.bg-circle-xs.border.border-white.text-white(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'v2.public.engagement'  %}" uk-icon="icon: mail; ratio: 1.5")
                     %i.fa.fa-envelope
-                  %a.bg-circle-xs.border.border-white.text-white.screenshot-share(data-screen-id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
+                  %a.cursor-pointer.bg-circle-xs.border.border-white.text-white.screenshot-share(data-screen-id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
                     %i.fa.fa-file-image-o
 
             .block(class="md:w-3/5")
