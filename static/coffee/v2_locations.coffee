@@ -51,16 +51,13 @@ $(->
     WARD_LEVEL = 3
   
     boundaries = null
-    boundaryResults = null
+    countMap = null
   
     states = null
     stateResults = null
   
     info = null
     
-    overallResults = null
-    countryResults = null
-
     # this is our info box floating off in the top right
     info = new L.control()
   
@@ -73,12 +70,6 @@ $(->
       this.update()
       return this._div
     
-    hiddenStyle = (feature) ->
-      return {
-        fillOpacity: 0.0
-        opacity: 0.0
-      }
-
     info.update = (props) ->
       if props
         if props.count?
@@ -95,18 +86,20 @@ $(->
           this._div.innerHTML = ""
       else
         this._div.innerHTML = ""
-  
+    
     # rollover treatment
     highlight = (e) ->
       layer = e.target
-      layer.setStyle(highlightStyle)
-      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge)
-        layer.bringToFront()
-  
-      info.update(e.target.feature.properties)
+      if not layer.feature.properties.level or layer.feature.properties.level == STATE_LEVEL and boundaries is states or layer.feature.properties.level in [DISTRICT_LEVEL, WARD_LEVEL] and boundaries isnt states
+        layer.setStyle(highlightStyle)
+        if (!L.Browser.ie && !L.Browser.opera)
+          layer.bringToFront()
+
+      info.update(layer.feature.properties)
   
     clickFeature = (e) ->
       if (districtZoom and e.target.feature.properties.level == STATE_LEVEL)
+        map.removeLayer(states)
         loadBoundary(url, e.target.feature.properties, e.target)
       else if (wardZoom and e.target.feature.properties.level == DISTRICT_LEVEL)
         map.removeLayer(boundaries)
@@ -116,7 +109,7 @@ $(->
   
     # resets our color on mouseout
     reset = (e) ->
-      boundaries.resetStyle(e.target)
+      states.resetStyle(e.target)
       info.update()
     
     # looks up the color for the passed in feature
@@ -140,13 +133,12 @@ $(->
       map.removeLayer(boundaries) 
   
       boundaries = states
-      boundaryResults = stateResults
+      countMap = stateResults
   
       states.setStyle(countStyle)
       map.addLayer(states)
-      map.fitBounds(states.getBounds(), {step: .25})
+      map.fitBounds(states.getBounds())
   
-      overallResults = countryResults
       info.update()
   
     loadBoundary = (url, boundary, target) ->
@@ -156,27 +148,20 @@ $(->
       # load our actual data
       if not boundary
         segment = {location:"State"}
-        overallResults = countryResults
       else if boundary and boundary.level == DISTRICT_LEVEL
         segment = {location:"Ward", parent:boundaryId}
-        overallResults = boundaryResults[boundaryId]
       else
         segment = {location:"District", parent:boundaryId}
-        overallResults = boundaryResults[boundaryId]
   
       $.ajax({url: url + '?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (counts) ->
         countMap = {}
   
         # figure out our max value
         max = 0;
-        boundaryResults = {}
         for count in counts
           countMap[count.boundary] = count
           if (count.set > max)
             max = count.set
-          
-          boundaryResults[count['boundary']] = count
-  
 
         # and create mapping of threshold values to colors
         colorSteps = []
@@ -222,17 +207,13 @@ $(->
             map.removeLayer(states)
           else
             states = boundaries
-            stateResults = boundaryResults
+            stateResults = countMap
           
           map.fitBounds(boundaries.getBounds());
           map.on 'resize', (e) ->
             map.fitBounds(boundaries.getBounds())
 
-    info.addTo(map);  
-    states = L.geoJson(geojson, { style: countStyle, onEachFeature: onEachFeature })
-    states.addTo(map)
-    map.fitBounds(states.getBounds());
-    
+    info.addTo(map);
     loadBoundary(url, null, null)
     map
 
