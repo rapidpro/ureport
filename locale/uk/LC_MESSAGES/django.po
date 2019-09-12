@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-12 22:22+0000\n"
+"POT-Creation-Date: 2019-09-12 22:47+0000\n"
 "PO-Revision-Date: 2017-03-02 17:06+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/uk/)\n"
@@ -18,6 +18,409 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "The name of this category"
+msgstr "Назва категорії"
+
+msgid "An optional image that can describe this category"
+msgstr "Зображення на вибір для опису категорії"
+
+msgid "The organization this category applies to"
+msgstr "Організація, до якої відноситься категорія"
+
+msgid "Categories"
+msgstr "Категорії"
+
+msgid "The name to describe this image"
+msgstr "Підпис до зображення"
+
+msgid "The category this image represents"
+msgstr "Категорія зображення"
+
+msgid "The image file to use"
+msgstr "Файл зображення"
+
+msgid "The human readable name for this content type"
+msgstr "\"Читабельна\" назва видну контенту"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "Опис - де знаходиться цей тип контенту на сайті, і як він відображається"
+
+msgid "Whether this content should include a title"
+msgstr "Чи в цей контент входить назва?"
+
+msgid "Whether this content should include an image"
+msgstr "Чи в цей контент входить зображення?"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Чи цей контент використовує HTML-редактор"
+
+msgid "Whether this content should include a summary field"
+msgstr "Чи цей контент включає поле висновку"
+
+msgid "Whether this content should include a link"
+msgstr "Чи в цей контент входить посилання?"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Чи в цей контент дозволяє додаткові зображення, напр.галерею?"
+
+msgid "Whether this content has a color field"
+msgstr "Чи в цей контент має поле вибору кольору"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Чи в цей контент дозволяє включити YouTube id"
+
+msgid "Whether this content should allow tags"
+msgstr "Чи в цей контент дозволяє теги"
+
+msgid "Content Type"
+msgstr "Вид контенту"
+
+msgid "The category, or type for this content block"
+msgstr "Категорія/тип для блоку контенту"
+
+msgid "The title for this block of content, optional"
+msgstr "Назва блоку контенту (вибірково)"
+
+msgid "The summary for this item, should be short"
+msgstr "Висновок для цього елементу повинен бути коротким"
+
+msgid "The body of text for this content block, optional"
+msgstr "Текст для блоку контенту (вибірково)"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Зображення, яке відображатиметься поряд із блоком контенту (вибірково)"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Колір фону для зображння у форматі #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Посилання, що має відношення до цього блоку контенту (вибірково)"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "ID відео YouTube, що пов'зується із відео"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Теги , розділені пробілом, для розширеного фільтрування (вибірково)"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "Пріоритетність блоку"
+
+msgid "The organization this content block belongs to"
+msgstr "Організація, якій належить блок"
+
+msgid "Gallery"
+msgstr "Галерея"
+
+msgid "Add Image"
+msgstr "Додати зображення"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Add"
+msgstr "Додати"
+
+msgid "Content Types"
+msgstr "Види контенту"
+
+msgid "Content Blocks"
+msgstr "Блоки контенту"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "Блоки з %s"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Редагувати %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Створити %s"
+
+msgid "Create Content Block"
+msgstr "Створити контентний блок"
+
+msgid "Your first name"
+msgstr "Ваше ім'я"
+
+msgid "Your last name"
+msgstr "Прізвище"
+
+msgid "Your email address"
+msgstr "Ваш Email "
+
+msgid "Your password, at least eight letters please"
+msgstr "Пароль -щонайменше 8 символів"
+
+msgid "That email address is already used"
+msgstr "Email-адреса вже використовується"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "У паролі повинно бути не менш ніж 8 літер"
+
+msgid "This domain is used for subdomains"
+msgstr "Цей домен використовується для субдоменів"
+
+msgid "Name"
+msgstr "Назва"
+
+msgid "The name of this organization"
+msgstr "Назва організації"
+
+msgid "The logo that should be used for this organization"
+msgstr "Логотип організації"
+
+msgid "Administrators"
+msgstr "Адміністратори"
+
+msgid "The administrators in your organization"
+msgstr "Адміністратори у Вашій організації"
+
+msgid "Viewers"
+msgstr "Переглядачі"
+
+msgid "The viewers in your organization"
+msgstr "Переглядачі у Вашій організації"
+
+msgid "Editors"
+msgstr "Редактори"
+
+msgid "The editors in your organization"
+msgstr "Редактори у Вашій організації"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "The main language used by this organization"
+msgstr "Мова, що використовується цією організацією"
+
+msgid "Subdomain"
+msgstr "Субдомен"
+
+msgid "This subdomain is not available"
+msgstr "Субдомен не працює"
+
+msgid "The subdomain for this organization"
+msgstr "Субдомен організації"
+
+msgid "Domain"
+msgstr "Домен"
+
+msgid "This domain is not available"
+msgstr "Домен не працює"
+
+msgid "The custom domain for this organization"
+msgstr "Індивідуальний домен організації"
+
+msgid "Timezone"
+msgstr "Часовий пояс"
+
+msgid "The timezone your organization is in."
+msgstr "Часовий пояс Вашої організації"
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "JSON blob, що зберігає конфігурацію інформації з даної організації"
+
+msgid "Administrator"
+msgstr "Адміністратор"
+
+msgid "Editor"
+msgstr "Редактор"
+
+msgid "Viewer"
+msgstr "Переглядач"
+
+msgid "Org"
+msgstr "Орг"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Організація, яку акаунт запрошений переглядати"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "Email, на який ми відсилаємо запрошення переглядача"
+
+msgid "Secret"
+msgstr "Секрет"
+
+msgid "a unique code associated with this invitation"
+msgstr "Унікальний код запрошення"
+
+msgid "User Role"
+msgstr "Роль користувача"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "Запрошення %s"
+
+msgid "Banner"
+msgstr "Банер"
+
+msgid "Pattern"
+msgstr "Малюнок"
+
+msgid "The organization in which the image will be used"
+msgstr "Організація, яка використовує зображення"
+
+msgid "The name to describe this background"
+msgstr "Назва, що описує фон"
+
+msgid "Background type"
+msgstr "Тип фону"
+
+msgid "The image file"
+msgstr "Файл зображення"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The API token for this backend"
+msgstr "Назва"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
+msgid "Edit"
+msgstr "Редагувати"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "Керувати користувачами"
+
+msgid "Manage Users"
+msgstr "Керувати користувачами"
+
+msgid "Accounts"
+msgstr "Облікові записи"
+
+msgid "Admins"
+msgstr "Адміни"
+
+msgid "Remove"
+msgstr "Видалити"
+
+msgid "You must have at least one administator"
+msgstr "Вам потрібен хоч один адміністратор"
+
+msgid "Select your Organization"
+msgstr "Оберіть організацію"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "Ваш обліковий запис не пов'язаний з організацією. Будь ласка, зв'яжіться із адмінстратором"
+
+msgid "Your Organization"
+msgstr "Ваша організація"
+
+msgid "Invite people to your organization"
+msgstr "Запросити в організацію"
+
+msgid "User group"
+msgstr "Група користувачів"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Один з е-мейлів неправильний"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Керувати обл. записом %(name)s "
+
+msgid "Create"
+msgstr "Створити"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "Ваше посилання не працює. Зв'яжіться з адміністратором"
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Приєднатись до %(name)s "
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join"
+msgstr "приєднатись"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "Ваше запрошення застаріло. Зв'яжіться з адміністратором"
+
+msgid "Task"
+msgstr ""
+
+msgid "Tasks"
+msgstr ""
+
+msgid "The title for this story"
+msgstr "Назва"
+
+msgid "Whether this story is featured"
+msgstr "На головній сторінці"
+
+msgid "The summary for the story"
+msgstr "Висновок"
+
+msgid "The body of text for the story"
+msgstr "Основний текст"
+
+msgid "The writer of the story"
+msgstr "Автор"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Посилання до файлу mp3"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "ID відео в YouTube до цієї історії (після v= в URL ролика)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Тематичні теги, розділені пробілом (вибірково)"
+
+msgid "The category for this story"
+msgstr "Категорії запису"
+
+msgid "The organization this story belongs to"
+msgstr "Організація, з якою пов'язана історія"
+
+msgid "Stories"
+msgstr "Блог"
+
+msgid "The story to associate to"
+msgstr "Стаття має відношення до "
+
+msgid "Yes"
+msgstr "Так"
+
+msgid "No"
+msgstr "Ні"
+
+msgid "Story Images"
+msgstr "<span></span>"
+
+#, python-format
+msgid "Image %d"
+msgstr "%d зображення"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "Зображення для сторінки статті і в прев'ю (вибірково)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "Зображення для історії та прев'ю (на вибір)"
 
 msgid "Back to Full Site"
 msgstr ""
@@ -37,9 +440,6 @@ msgstr "Увійти"
 msgid "Polls"
 msgstr "Опитування"
 
-msgid "Stories"
-msgstr "Блог"
-
 msgid "Users"
 msgstr "Користувачі"
 
@@ -54,9 +454,6 @@ msgstr "Фото"
 msgid "Jobs"
 msgstr "Цікаві вакансії"
 
-msgid "Categories"
-msgstr "Категорії"
-
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -67,9 +464,6 @@ msgstr "Новини"
 
 msgid "Orgs"
 msgstr "Орг"
-
-msgid "Content Types"
-msgstr "Види контенту"
 
 msgid "Images"
 msgstr "Фото"
@@ -195,20 +589,6 @@ msgid ""
 msgstr ""
 "\n"
 "Пам'ятайте: для джерела вакансій у Твіттер, отримайте ID віджета з Твіттеру."
-
-msgid "Edit"
-msgstr "Редагувати"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "Керувати користувачами"
-
-msgid "Manage Users"
-msgstr "Керувати користувачами"
-
-msgid "Add"
-msgstr "Додати"
 
 msgid "ABOUT U-REPORT"
 msgstr "Про UReport"
@@ -644,12 +1024,6 @@ msgstr "Зареєструватись"
 msgid "Forgot Password?"
 msgstr "Забули пароль?"
 
-msgid "Gallery"
-msgstr "Галерея"
-
-msgid "Add Image"
-msgstr "Додати зображення"
-
 msgid "+ New Page"
 msgstr ""
 
@@ -662,24 +1036,6 @@ msgstr "Географія"
 #| msgid "Manage Users"
 msgid "Backends"
 msgstr "Керувати користувачами"
-
-msgid "You must have at least one administator"
-msgstr "Вам потрібен хоч один адміністратор"
-
-msgid "Accounts"
-msgstr "Облікові записи"
-
-msgid "Admins"
-msgstr "Адміни"
-
-msgid "Editors"
-msgstr "Редактори"
-
-msgid "Remove"
-msgstr "Видалити"
-
-msgid "User group"
-msgstr "Група користувачів"
 
 msgid "+ New Poll"
 msgstr ""
@@ -822,9 +1178,6 @@ msgstr ""
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Якщо його видалити, воно зникне назавжди. Подумайте. Скасувати не вийде."
 
-msgid "Search"
-msgstr "Пошук"
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -948,32 +1301,17 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "Оновлено %s кеш для цієї організації"
 
-msgid "Banner"
-msgstr "Банер"
-
-msgid "Pattern"
-msgstr "Малюнок"
-
 msgid "Flag"
 msgstr "Прапор"
 
-msgid "Org"
-msgstr "Орг"
-
 msgid "The organization to which the image will be used"
 msgstr "Якої організації зображення"
-
-msgid "Name"
-msgstr "Назва"
 
 msgid "A short descriptive name for this image"
 msgstr "Короткий опис"
 
 msgid "Image type"
 msgstr "Вид зображення"
-
-msgid "The image file"
-msgstr "Файл зображення"
 
 msgid "Label"
 msgstr ""
@@ -1086,17 +1424,11 @@ msgstr "Назва відео"
 msgid "A short summary description for this video"
 msgstr "Опис"
 
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "ID відео YouTube, що пов'зується із відео"
-
 msgid "The organization this video belongs to"
 msgstr "Організація, чиє відео"
 
 msgid "The name of this poll category"
 msgstr "Назва категорії опитувань"
-
-msgid "The organization this category applies to"
-msgstr "Організація, до якої відноситься категорія"
 
 msgid "Poll Categories"
 msgstr "Категорії опитувань"
@@ -1134,14 +1466,8 @@ msgstr "Зображення з категорії, яке має відобра
 msgid "The organization this poll is part of"
 msgstr "Від якої організації опитування?"
 
-msgid "The name to describe this image"
-msgstr "Підпис до зображення"
-
 msgid "The poll to associate to"
 msgstr "З чим асоціюватиметься опитування"
-
-msgid "The image file to use"
-msgstr "Файл зображення"
 
 msgid "The poll for this response"
 msgstr "Опитування цієї відповіді"
@@ -1211,10 +1537,6 @@ msgstr "Зображення до опитувань"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Введіть відповіді U-репортерів, які ви хочете виділити (вибірково)"
-
-#, python-format
-msgid "Image %d"
-msgstr "%d зображення"
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "Зображення для сторінки опитування та в прев‘ю (вибірково)"
@@ -1484,304 +1806,6 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Щось щоб виявити місце знаходження"
-
-#~ msgid "The name of this category"
-#~ msgstr "Назва категорії"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "Зображення на вибір для опису категорії"
-
-#~ msgid "The category this image represents"
-#~ msgstr "Категорія зображення"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "\"Читабельна\" назва видну контенту"
-
-#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-#~ msgstr "Опис - де знаходиться цей тип контенту на сайті, і як він відображається"
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "Чи в цей контент входить назва?"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "Чи в цей контент входить зображення?"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "Чи цей контент використовує HTML-редактор"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "Чи цей контент включає поле висновку"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "Чи в цей контент входить посилання?"
-
-#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
-#~ msgstr "Чи в цей контент дозволяє додаткові зображення, напр.галерею?"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "Чи в цей контент має поле вибору кольору"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "Чи в цей контент дозволяє включити YouTube id"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "Чи в цей контент дозволяє теги"
-
-#~ msgid "Content Type"
-#~ msgstr "Вид контенту"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "Категорія/тип для блоку контенту"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "Назва блоку контенту (вибірково)"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "Висновок для цього елементу повинен бути коротким"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "Текст для блоку контенту (вибірково)"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "Зображення, яке відображатиметься поряд із блоком контенту (вибірково)"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "Колір фону для зображння у форматі #rrggbb"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "Посилання, що має відношення до цього блоку контенту (вибірково)"
-
-#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Теги , розділені пробілом, для розширеного фільтрування (вибірково)"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "Пріоритетність блоку"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "Організація, якій належить блок"
-
-#~ msgid "Content Blocks"
-#~ msgstr "Блоки контенту"
-
-#, python-format
-#~ msgid "%s Blocks"
-#~ msgstr "Блоки з %s"
-
-#, python-format
-#~ msgid "Edit %s"
-#~ msgstr "Редагувати %s"
-
-#, python-format
-#~ msgid "Create %s"
-#~ msgstr "Створити %s"
-
-#~ msgid "Create Content Block"
-#~ msgstr "Створити контентний блок"
-
-#~ msgid "Your first name"
-#~ msgstr "Ваше ім'я"
-
-#~ msgid "Your last name"
-#~ msgstr "Прізвище"
-
-#~ msgid "Your email address"
-#~ msgstr "Ваш Email "
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "Пароль -щонайменше 8 символів"
-
-#~ msgid "That email address is already used"
-#~ msgstr "Email-адреса вже використовується"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "У паролі повинно бути не менш ніж 8 літер"
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "Цей домен використовується для субдоменів"
-
-#~ msgid "The name of this organization"
-#~ msgstr "Назва організації"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "Логотип організації"
-
-#~ msgid "Administrators"
-#~ msgstr "Адміністратори"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "Адміністратори у Вашій організації"
-
-#~ msgid "Viewers"
-#~ msgstr "Переглядачі"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "Переглядачі у Вашій організації"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "Редактори у Вашій організації"
-
-#~ msgid "Language"
-#~ msgstr "Мова"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "Мова, що використовується цією організацією"
-
-#~ msgid "Subdomain"
-#~ msgstr "Субдомен"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "Субдомен не працює"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "Субдомен організації"
-
-#~ msgid "Domain"
-#~ msgstr "Домен"
-
-#~ msgid "This domain is not available"
-#~ msgstr "Домен не працює"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "Індивідуальний домен організації"
-
-#~ msgid "Timezone"
-#~ msgstr "Часовий пояс"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "Часовий пояс Вашої організації"
-
-#~ msgid "JSON blob used to store configuration information associated with this organization"
-#~ msgstr "JSON blob, що зберігає конфігурацію інформації з даної організації"
-
-#~ msgid "Administrator"
-#~ msgstr "Адміністратор"
-
-#~ msgid "Editor"
-#~ msgstr "Редактор"
-
-#~ msgid "Viewer"
-#~ msgstr "Переглядач"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "Організація, яку акаунт запрошений переглядати"
-
-#~ msgid "Email"
-#~ msgstr "Email"
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "Email, на який ми відсилаємо запрошення переглядача"
-
-#~ msgid "Secret"
-#~ msgstr "Секрет"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "Унікальний код запрошення"
-
-#~ msgid "User Role"
-#~ msgstr "Роль користувача"
-
-#, python-format
-#~ msgid "%s Invitation"
-#~ msgstr "Запрошення %s"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "Організація, яка використовує зображення"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "Назва, що описує фон"
-
-#~ msgid "Background type"
-#~ msgstr "Тип фону"
-
-#, fuzzy
-#~| msgid "The title for this item"
-#~ msgid "The API token for this backend"
-#~ msgstr "Назва"
-
-#~ msgid "Select your Organization"
-#~ msgstr "Оберіть організацію"
-
-#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-#~ msgstr "Ваш обліковий запис не пов'язаний з організацією. Будь ласка, зв'яжіться із адмінстратором"
-
-#~ msgid "Your Organization"
-#~ msgstr "Ваша організація"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "Запросити в організацію"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "Один з е-мейлів неправильний"
-
-#, python-format
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "Керувати обл. записом %(name)s "
-
-#~ msgid "Create"
-#~ msgstr "Створити"
-
-#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
-#~ msgstr "Ваше посилання не працює. Зв'яжіться з адміністратором"
-
-#, python-format
-#~ msgid "Join %(name)s"
-#~ msgstr "Приєднатись до %(name)s "
-
-#, fuzzy
-#~| msgid "Join"
-#~ msgid "Join"
-#~ msgstr "приєднатись"
-
-#~ msgid "Your invitation link has expired. Please contact your organization administrator."
-#~ msgstr "Ваше запрошення застаріло. Зв'яжіться з адміністратором"
-
-#~ msgid "The title for this story"
-#~ msgstr "Назва"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "На головній сторінці"
-
-#~ msgid "The summary for the story"
-#~ msgstr "Висновок"
-
-#~ msgid "The body of text for the story"
-#~ msgstr "Основний текст"
-
-#~ msgid "The writer of the story"
-#~ msgstr "Автор"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "Посилання до файлу mp3"
-
-#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr "ID відео в YouTube до цієї історії (після v= в URL ролика)"
-
-#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Тематичні теги, розділені пробілом (вибірково)"
-
-#~ msgid "The category for this story"
-#~ msgstr "Категорії запису"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "Організація, з якою пов'язана історія"
-
-#~ msgid "The story to associate to"
-#~ msgstr "Стаття має відношення до "
-
-#~ msgid "Yes"
-#~ msgstr "Так"
-
-#~ msgid "No"
-#~ msgstr "Ні"
-
-#~ msgid "Story Images"
-#~ msgstr "<span></span>"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "Зображення для сторінки статті і в прев'ю (вибірково)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "Зображення для історії та прев'ю (на вибір)"
 
 #, fuzzy, python-format
 #~| msgid ""

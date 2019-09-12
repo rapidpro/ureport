@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-12 22:22+0000\n"
+"POT-Creation-Date: 2019-09-12 22:47+0000\n"
 "PO-Revision-Date: 2018-08-22 11:40+0000\n"
 "Last-Translator: Jahongir Abdurahmonov <jabdurahmonov@unicef.org>\n"
 "Language-Team: Uzbek (http://www.transifex.com/rapidpro/ureport/language/uz/)\n"
@@ -16,6 +16,409 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The name of this category"
+msgstr "Ushbu toifaning nomi"
+
+msgid "An optional image that can describe this category"
+msgstr "Ushbu toifani tasvirlay oladigan ixtiyoriy surat"
+
+msgid "The organization this category applies to"
+msgstr "Ushbu toifa taalluqli bo'lgan tashkilot"
+
+msgid "Categories"
+msgstr "Toifalar"
+
+msgid "The name to describe this image"
+msgstr "Ushbu suratni tasvirlash uchun nom"
+
+msgid "The category this image represents"
+msgstr "Mazkur surat ifodalovchi toifa"
+
+msgid "The image file to use"
+msgstr "Ishlatiladigan surat-fayli"
+
+msgid "The human readable name for this content type"
+msgstr "Mazkur kontent turi uchun kishi tushunishi qulay bo'lgan nom"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "Mazkur kontent turini aniqlash uchun, andozaviy teglar bilan birga ishlatiladigan, url-manzilini tasvirlovchi qism"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "Sahifaning qayerida mazkur kontent turi qo'llanilishi va u qay tarzda namoyish etilishining ta'rifi"
+
+msgid "Whether this content should include a title"
+msgstr "Mazkur kontentda sarlavha bo'lishi kerakmi"
+
+msgid "Whether this content should include an image"
+msgstr "Mazkur kontentda surat bo'lishi kerakmi"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Mazkur kontenda keng imkoniyatli HTML muharriridan foydalanish kerakmi"
+
+msgid "Whether this content should include a summary field"
+msgstr "Mazkur kontentda hulosa qatori bo'lishi kerakmi"
+
+msgid "Whether this content should include a link"
+msgstr "Mazkur kontentda link bo'lishi kerakmi"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Mazkur kontent qo'shimcha suratlarni, ya'ni galereyani, yuklash imkonini berishi kerakmi"
+
+msgid "Whether this content has a color field"
+msgstr "Mazkur kontenda rang qatori bormi"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Mazkur kontent YouTube identifikatorini sozlash imkonini berishi kerakmi"
+
+msgid "Whether this content should allow tags"
+msgstr "Mazkur kontentda teglar bo'lishi kerakmi"
+
+msgid "Content Type"
+msgstr "Kontent turi"
+
+msgid "The category, or type for this content block"
+msgstr "Ushbu kontent to'plami uchun toifa yoki tur"
+
+msgid "The title for this block of content, optional"
+msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
+
+msgid "The summary for this item, should be short"
+msgstr "Ushbu elementning qisqacha ta'rifi, qisqa bo'lishi kerak"
+
+msgid "The body of text for this content block, optional"
+msgstr "Ushbu kontent to'plami uchun matnning asosiy qismi, ixtiyoriy"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Mazkur kontent to'plami bilan birga namoyish etiladigan har qanday surat, ixtiyoriy"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Ushbu surat uchun qo'llaniladigan orqa fon rangi, #rrggbb formatida"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Ushbu kontent to'plamiga ulanishi kerak bo'lgan har qanday link, ixtiyoriy"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Mazkur elementga bog'lanishi zarur bo'lgan YouTube videolavhasining identifikatori"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Ushbu kontent to'plami uchun, oraliq bilan ajratilgan har qanday teglar yanada chuqur filtrlash uchun ishlatilishi mumkin, ixtiyoriy"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "Ushbu to'plam uchun ustivorlik, ustivorligi yuqori bo'lgan to'plamlar avval keladi"
+
+msgid "The organization this content block belongs to"
+msgstr "Mazkur kontent to'plami qarashli bo'lgan tashkilot"
+
+msgid "Gallery"
+msgstr "Galereya"
+
+msgid "Add Image"
+msgstr "Surat qo'shish"
+
+msgid "Search"
+msgstr "Izlash"
+
+msgid "Add"
+msgstr "Qo'shish"
+
+msgid "Content Types"
+msgstr "Kontent turlari"
+
+msgid "Content Blocks"
+msgstr "Kontent to'plami"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%s to'plami"
+
+#, python-format
+msgid "Edit %s"
+msgstr "%s larni tahrir etish"
+
+#, python-format
+msgid "Create %s"
+msgstr "%s larni yaratish"
+
+msgid "Create Content Block"
+msgstr "Kontent to'plamini yaratish"
+
+msgid "Your first name"
+msgstr "Ismingiz"
+
+msgid "Your last name"
+msgstr "Familiyangiz"
+
+msgid "Your email address"
+msgstr "Elektron pochta manzilingiz"
+
+msgid "Your password, at least eight letters please"
+msgstr "Parolingiz, iltimos, kamida sakkizta harfdan iborat bo'lsin"
+
+msgid "That email address is already used"
+msgstr "Bu elektron pochta manzili avval ishlatilgan"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Parol kamida 8 harfdan tarkib topgan bo'lishi shart"
+
+msgid "This domain is used for subdomains"
+msgstr "Bu domen kichik domenlar uchun qo'llaniladi"
+
+msgid "Name"
+msgstr "Nomi"
+
+msgid "The name of this organization"
+msgstr "Ushbu tashkilot nomi"
+
+msgid "The logo that should be used for this organization"
+msgstr "Ushbu tashkilot uchun qo'llaniladigan logo"
+
+msgid "Administrators"
+msgstr "Administratorlar"
+
+msgid "The administrators in your organization"
+msgstr "Tashkilotingizdagi administratorlar"
+
+msgid "Viewers"
+msgstr "Kuzatib boruvchilar"
+
+msgid "The viewers in your organization"
+msgstr "Tashkilotingizdagi kuzatib boruvchilar"
+
+msgid "Editors"
+msgstr "Muharrirlar"
+
+msgid "The editors in your organization"
+msgstr "Tashkilotingizdagi muharrirlar"
+
+msgid "Language"
+msgstr "Til"
+
+msgid "The main language used by this organization"
+msgstr "Mazkur tashkilotda ishlatiladigan asosiy til"
+
+msgid "Subdomain"
+msgstr "Kichik domen"
+
+msgid "This subdomain is not available"
+msgstr "Ushbu kichik domen mavjud emas"
+
+msgid "The subdomain for this organization"
+msgstr "Ushbu tashkilot uchun kichik domen"
+
+msgid "Domain"
+msgstr "Domen"
+
+msgid "This domain is not available"
+msgstr "Ushbu domen mavjud emas"
+
+msgid "The custom domain for this organization"
+msgstr "Ushbu tashkilotning xususiy domeni"
+
+msgid "Timezone"
+msgstr "Vaqt zonasi"
+
+msgid "The timezone your organization is in."
+msgstr "Tashkilotingiz turgan vaqt zonasi"
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "Mazkur tashkilot bilan bog'liq bo'lgan konfiguratsiya ma'lumotlarini saqlash uchun qo'llaniladigan JSON blob"
+
+msgid "Administrator"
+msgstr "Administrator"
+
+msgid "Editor"
+msgstr "Muharrir"
+
+msgid "Viewer"
+msgstr "Kuzatib boruvchi"
+
+msgid "Org"
+msgstr "Tashk"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Kuzatib borish uchun akkaunt taklif etilgan tashkilot"
+
+msgid "Email"
+msgstr "Elektron pochta"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "Kuzatib boruvchi taklifnomasini yuboradigan elektron pochta"
+
+msgid "Secret"
+msgstr "Maxfiy"
+
+msgid "a unique code associated with this invitation"
+msgstr "ushbu taklifnomaga taalluqli noyob kod"
+
+msgid "User Role"
+msgstr "Foydalanuvchi Roli"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%s Taklifnoma"
+
+msgid "Banner"
+msgstr "Banner"
+
+msgid "Pattern"
+msgstr "Namuna"
+
+msgid "The organization in which the image will be used"
+msgstr "Surat qo'llaniladigan tashkilot"
+
+msgid "The name to describe this background"
+msgstr "Ushbu fonni tasvirlovchi nom"
+
+msgid "Background type"
+msgstr "Fon turi"
+
+msgid "The image file"
+msgstr "Surat fayli"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The API token for this backend"
+msgstr "Ushbu element uchun sarlavha"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
+msgid "Edit"
+msgstr "Tahrir qilish"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "Foydalanuvchilarni boshqarish"
+
+msgid "Manage Users"
+msgstr "Foydalanuvchilarni boshqarish"
+
+msgid "Accounts"
+msgstr "Akkauntlar"
+
+msgid "Admins"
+msgstr "Administratorlar"
+
+msgid "Remove"
+msgstr "Olib tashlash"
+
+msgid "You must have at least one administator"
+msgstr "Sizda eng kamida bitta administrator bo'lishi lozim"
+
+msgid "Select your Organization"
+msgstr "O'z tashkilotingizni tanlang"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "Sizning akkauntingizngig tashkilotga bog'liqlik yeri yo'q. Iltimos administrator bilan bog'laning"
+
+msgid "Your Organization"
+msgstr "Sizning Tashkilotingiz"
+
+msgid "Invite people to your organization"
+msgstr "Tashkilotingizga odamlarni taklif eting"
+
+msgid "User group"
+msgstr "Foydalanuvchi guruhi"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Siz kiritgan elektron pochtalardan biri noto'g'ri"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "%(name)s lar akkauntlarini boshqarish"
+
+msgid "Create"
+msgstr "Yaratish"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "Sizning taklifnoma linkingiz noto'g'ri. Iltimos tashkilotingiz administratori bilan bog'laning"
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "%(name)s ga qo'shiling"
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join"
+msgstr "Qo'shiling"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "Sizning taklifnoma linkingiz muddati tugadi. Iltimos tashkilotingiz administratori bilan bog'laning"
+
+msgid "Task"
+msgstr "Topshiriq"
+
+msgid "Tasks"
+msgstr "Topshiriqlar"
+
+msgid "The title for this story"
+msgstr "Ushbu hikoya uchun sarlavha"
+
+msgid "Whether this story is featured"
+msgstr "Mazkur hikoya bayoniymi"
+
+msgid "The summary for the story"
+msgstr "Hikoyaning qisqacha bayoni"
+
+msgid "The body of text for the story"
+msgstr "Hikoya uchun asosiy matn"
+
+msgid "The writer of the story"
+msgstr "Hikoya muallifi"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Mazkur hikoyani chop etish uchun mp3 fayliga link"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "Ushbu hikoyaga ulanishi zarur bo'lgan YouTube videolavhasining identifikatori (bu v= dan keyin va YouTube URL dan avval va ichida keladigan matn)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Mazkur hikoya uchun, oraliq bilan ajratilgan har qanday teglar yanada chuqur filtrlash uchun ishlatilishi mumkin, ixtiyoriy"
+
+msgid "The category for this story"
+msgstr "Ushbu hikoya uchun toifa"
+
+msgid "The organization this story belongs to"
+msgstr "Ushbu hikoya qarashli bo'lgan tashkilot"
+
+msgid "Stories"
+msgstr "Hikoyalar"
+
+msgid "The story to associate to"
+msgstr "Bog'lash uchun hikoya"
+
+msgid "Yes"
+msgstr "Ha"
+
+msgid "No"
+msgstr "Yo'q"
+
+msgid "Story Images"
+msgstr "Hikoya suratlari"
+
+#, python-format
+msgid "Image %d"
+msgstr "%d surati"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan surat. (ixtiyoriy)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan surat. (ixtiyoriy)"
 
 msgid "Back to Full Site"
 msgstr ""
@@ -35,9 +438,6 @@ msgstr "Kirish"
 msgid "Polls"
 msgstr "So'rovlar"
 
-msgid "Stories"
-msgstr "Hikoyalar"
-
 msgid "Users"
 msgstr "Foydalanuvchilar"
 
@@ -52,9 +452,6 @@ msgstr "Suratlar"
 msgid "Jobs"
 msgstr "Ish o'rinlari"
 
-msgid "Categories"
-msgstr "Toifalar"
-
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -65,9 +462,6 @@ msgstr "Yangiliklar"
 
 msgid "Orgs"
 msgstr "Tashkr"
-
-msgid "Content Types"
-msgstr "Kontent turlari"
 
 msgid "Images"
 msgstr "Suratlar"
@@ -193,20 +587,6 @@ msgid ""
 "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
 msgstr ""
-
-msgid "Edit"
-msgstr "Tahrir qilish"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "Foydalanuvchilarni boshqarish"
-
-msgid "Manage Users"
-msgstr "Foydalanuvchilarni boshqarish"
-
-msgid "Add"
-msgstr "Qo'shish"
 
 msgid "ABOUT U-REPORT"
 msgstr "U-REPORT TO'G'RISIDA"
@@ -637,12 +1017,6 @@ msgstr "Ro'yxatdan o'tish"
 msgid "Forgot Password?"
 msgstr "Parol yoddan ko'tarildimi?"
 
-msgid "Gallery"
-msgstr "Galereya"
-
-msgid "Add Image"
-msgstr "Surat qo'shish"
-
 msgid "+ New Page"
 msgstr ""
 
@@ -655,24 +1029,6 @@ msgstr "JOYLASHUV YERLARI"
 #| msgid "Manage Users"
 msgid "Backends"
 msgstr "Foydalanuvchilarni boshqarish"
-
-msgid "You must have at least one administator"
-msgstr "Sizda eng kamida bitta administrator bo'lishi lozim"
-
-msgid "Accounts"
-msgstr "Akkauntlar"
-
-msgid "Admins"
-msgstr "Administratorlar"
-
-msgid "Editors"
-msgstr "Muharrirlar"
-
-msgid "Remove"
-msgstr "Olib tashlash"
-
-msgid "User group"
-msgstr "Foydalanuvchi guruhi"
 
 msgid "+ New Poll"
 msgstr ""
@@ -817,9 +1173,6 @@ msgstr ""
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Olib tashlasangiz, uni keyin tiklab bo'lmaydi. Ushbu amaliyotni ortga qaytarish imkoni umuman bo'lmaydi."
 
-msgid "Search"
-msgstr "Izlash"
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -927,32 +1280,17 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "%s ning keshi bu tashkilot uchun yangilandi"
 
-msgid "Banner"
-msgstr "Banner"
-
-msgid "Pattern"
-msgstr "Namuna"
-
 msgid "Flag"
 msgstr "Bayroq"
 
-msgid "Org"
-msgstr "Tashk"
-
 msgid "The organization to which the image will be used"
 msgstr "Surat uning uchun ishlatiladigan tashkilot"
-
-msgid "Name"
-msgstr "Nomi"
 
 msgid "A short descriptive name for this image"
 msgstr "Ushbu suratga qisqacha ta'riflovchi nom"
 
 msgid "Image type"
 msgstr "Surat turi"
-
-msgid "The image file"
-msgstr "Surat fayli"
 
 msgid "Label"
 msgstr "Tamg'a"
@@ -1065,17 +1403,11 @@ msgstr "Mazkur videolavha uchun sarlavha"
 msgid "A short summary description for this video"
 msgstr "Mazkur videolavhaning qisqacha ta'rifi"
 
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "Mazkur elementga bog'lanishi zarur bo'lgan YouTube videolavhasining identifikatori"
-
 msgid "The organization this video belongs to"
 msgstr "Mazkur videolavha tegishli bo'lgan tashkilot"
 
 msgid "The name of this poll category"
 msgstr "Ushbu so'rov toifasining nomi"
-
-msgid "The organization this category applies to"
-msgstr "Ushbu toifa taalluqli bo'lgan tashkilot"
 
 msgid "Poll Categories"
 msgstr "So'rov toifalari"
@@ -1113,14 +1445,8 @@ msgstr "Grafik toifadagi surat so'rovni namoyish etadi (ixtiyoriy)"
 msgid "The organization this poll is part of"
 msgstr "Mazkur so'rov uning qismi bo'lgan tashkilot"
 
-msgid "The name to describe this image"
-msgstr "Ushbu suratni tasvirlash uchun nom"
-
 msgid "The poll to associate to"
 msgstr "... bilan bog'liq bo'lgan so'rov"
-
-msgid "The image file to use"
-msgstr "Ishlatiladigan surat-fayli"
 
 msgid "The poll for this response"
 msgstr "Ushbu javob uchun so'rov"
@@ -1190,10 +1516,6 @@ msgstr "So'rovnoma Suratlari"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Endi, siz alohida ajratib ko'rsatmoqchi bo'lgan har qanday javobni kiriting. (agar bo'lsa)"
-
-#, python-format
-msgid "Image %d"
-msgstr "%d surati"
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "So'rovnoma sahifasida va prevyularda namoyish bo'ladigan surat. (ixtiyoriy)"
@@ -1464,313 +1786,6 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
-
-#~ msgid "The name of this category"
-#~ msgstr "Ushbu toifaning nomi"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "Ushbu toifani tasvirlay oladigan ixtiyoriy surat"
-
-#~ msgid "The category this image represents"
-#~ msgstr "Mazkur surat ifodalovchi toifa"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "Mazkur kontent turi uchun kishi tushunishi qulay bo'lgan nom"
-
-#~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr "Mazkur kontent turini aniqlash uchun, andozaviy teglar bilan birga ishlatiladigan, url-manzilini tasvirlovchi qism"
-
-#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-#~ msgstr "Sahifaning qayerida mazkur kontent turi qo'llanilishi va u qay tarzda namoyish etilishining ta'rifi"
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "Mazkur kontentda sarlavha bo'lishi kerakmi"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "Mazkur kontentda surat bo'lishi kerakmi"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "Mazkur kontenda keng imkoniyatli HTML muharriridan foydalanish kerakmi"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "Mazkur kontentda hulosa qatori bo'lishi kerakmi"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "Mazkur kontentda link bo'lishi kerakmi"
-
-#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
-#~ msgstr "Mazkur kontent qo'shimcha suratlarni, ya'ni galereyani, yuklash imkonini berishi kerakmi"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "Mazkur kontenda rang qatori bormi"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "Mazkur kontent YouTube identifikatorini sozlash imkonini berishi kerakmi"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "Mazkur kontentda teglar bo'lishi kerakmi"
-
-#~ msgid "Content Type"
-#~ msgstr "Kontent turi"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "Ushbu kontent to'plami uchun toifa yoki tur"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "Mazkur kontent to'plami uchun sarlavha, ixtiyoriy"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "Ushbu elementning qisqacha ta'rifi, qisqa bo'lishi kerak"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "Ushbu kontent to'plami uchun matnning asosiy qismi, ixtiyoriy"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "Mazkur kontent to'plami bilan birga namoyish etiladigan har qanday surat, ixtiyoriy"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "Ushbu surat uchun qo'llaniladigan orqa fon rangi, #rrggbb formatida"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "Ushbu kontent to'plamiga ulanishi kerak bo'lgan har qanday link, ixtiyoriy"
-
-#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Ushbu kontent to'plami uchun, oraliq bilan ajratilgan har qanday teglar yanada chuqur filtrlash uchun ishlatilishi mumkin, ixtiyoriy"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "Ushbu to'plam uchun ustivorlik, ustivorligi yuqori bo'lgan to'plamlar avval keladi"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "Mazkur kontent to'plami qarashli bo'lgan tashkilot"
-
-#~ msgid "Content Blocks"
-#~ msgstr "Kontent to'plami"
-
-#, python-format
-#~ msgid "%s Blocks"
-#~ msgstr "%s to'plami"
-
-#, python-format
-#~ msgid "Edit %s"
-#~ msgstr "%s larni tahrir etish"
-
-#, python-format
-#~ msgid "Create %s"
-#~ msgstr "%s larni yaratish"
-
-#~ msgid "Create Content Block"
-#~ msgstr "Kontent to'plamini yaratish"
-
-#~ msgid "Your first name"
-#~ msgstr "Ismingiz"
-
-#~ msgid "Your last name"
-#~ msgstr "Familiyangiz"
-
-#~ msgid "Your email address"
-#~ msgstr "Elektron pochta manzilingiz"
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "Parolingiz, iltimos, kamida sakkizta harfdan iborat bo'lsin"
-
-#~ msgid "That email address is already used"
-#~ msgstr "Bu elektron pochta manzili avval ishlatilgan"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "Parol kamida 8 harfdan tarkib topgan bo'lishi shart"
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "Bu domen kichik domenlar uchun qo'llaniladi"
-
-#~ msgid "The name of this organization"
-#~ msgstr "Ushbu tashkilot nomi"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "Ushbu tashkilot uchun qo'llaniladigan logo"
-
-#~ msgid "Administrators"
-#~ msgstr "Administratorlar"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "Tashkilotingizdagi administratorlar"
-
-#~ msgid "Viewers"
-#~ msgstr "Kuzatib boruvchilar"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "Tashkilotingizdagi kuzatib boruvchilar"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "Tashkilotingizdagi muharrirlar"
-
-#~ msgid "Language"
-#~ msgstr "Til"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "Mazkur tashkilotda ishlatiladigan asosiy til"
-
-#~ msgid "Subdomain"
-#~ msgstr "Kichik domen"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "Ushbu kichik domen mavjud emas"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "Ushbu tashkilot uchun kichik domen"
-
-#~ msgid "Domain"
-#~ msgstr "Domen"
-
-#~ msgid "This domain is not available"
-#~ msgstr "Ushbu domen mavjud emas"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "Ushbu tashkilotning xususiy domeni"
-
-#~ msgid "Timezone"
-#~ msgstr "Vaqt zonasi"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "Tashkilotingiz turgan vaqt zonasi"
-
-#~ msgid "JSON blob used to store configuration information associated with this organization"
-#~ msgstr "Mazkur tashkilot bilan bog'liq bo'lgan konfiguratsiya ma'lumotlarini saqlash uchun qo'llaniladigan JSON blob"
-
-#~ msgid "Administrator"
-#~ msgstr "Administrator"
-
-#~ msgid "Editor"
-#~ msgstr "Muharrir"
-
-#~ msgid "Viewer"
-#~ msgstr "Kuzatib boruvchi"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "Kuzatib borish uchun akkaunt taklif etilgan tashkilot"
-
-#~ msgid "Email"
-#~ msgstr "Elektron pochta"
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "Kuzatib boruvchi taklifnomasini yuboradigan elektron pochta"
-
-#~ msgid "Secret"
-#~ msgstr "Maxfiy"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "ushbu taklifnomaga taalluqli noyob kod"
-
-#~ msgid "User Role"
-#~ msgstr "Foydalanuvchi Roli"
-
-#, python-format
-#~ msgid "%s Invitation"
-#~ msgstr "%s Taklifnoma"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "Surat qo'llaniladigan tashkilot"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "Ushbu fonni tasvirlovchi nom"
-
-#~ msgid "Background type"
-#~ msgstr "Fon turi"
-
-#, fuzzy
-#~| msgid "The title for this item"
-#~ msgid "The API token for this backend"
-#~ msgstr "Ushbu element uchun sarlavha"
-
-#~ msgid "Select your Organization"
-#~ msgstr "O'z tashkilotingizni tanlang"
-
-#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-#~ msgstr "Sizning akkauntingizngig tashkilotga bog'liqlik yeri yo'q. Iltimos administrator bilan bog'laning"
-
-#~ msgid "Your Organization"
-#~ msgstr "Sizning Tashkilotingiz"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "Tashkilotingizga odamlarni taklif eting"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "Siz kiritgan elektron pochtalardan biri noto'g'ri"
-
-#, python-format
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "%(name)s lar akkauntlarini boshqarish"
-
-#~ msgid "Create"
-#~ msgstr "Yaratish"
-
-#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
-#~ msgstr "Sizning taklifnoma linkingiz noto'g'ri. Iltimos tashkilotingiz administratori bilan bog'laning"
-
-#, python-format
-#~ msgid "Join %(name)s"
-#~ msgstr "%(name)s ga qo'shiling"
-
-#, fuzzy
-#~| msgid "Join"
-#~ msgid "Join"
-#~ msgstr "Qo'shiling"
-
-#~ msgid "Your invitation link has expired. Please contact your organization administrator."
-#~ msgstr "Sizning taklifnoma linkingiz muddati tugadi. Iltimos tashkilotingiz administratori bilan bog'laning"
-
-#~ msgid "Task"
-#~ msgstr "Topshiriq"
-
-#~ msgid "Tasks"
-#~ msgstr "Topshiriqlar"
-
-#~ msgid "The title for this story"
-#~ msgstr "Ushbu hikoya uchun sarlavha"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "Mazkur hikoya bayoniymi"
-
-#~ msgid "The summary for the story"
-#~ msgstr "Hikoyaning qisqacha bayoni"
-
-#~ msgid "The body of text for the story"
-#~ msgstr "Hikoya uchun asosiy matn"
-
-#~ msgid "The writer of the story"
-#~ msgstr "Hikoya muallifi"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "Mazkur hikoyani chop etish uchun mp3 fayliga link"
-
-#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr "Ushbu hikoyaga ulanishi zarur bo'lgan YouTube videolavhasining identifikatori (bu v= dan keyin va YouTube URL dan avval va ichida keladigan matn)"
-
-#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Mazkur hikoya uchun, oraliq bilan ajratilgan har qanday teglar yanada chuqur filtrlash uchun ishlatilishi mumkin, ixtiyoriy"
-
-#~ msgid "The category for this story"
-#~ msgstr "Ushbu hikoya uchun toifa"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "Ushbu hikoya qarashli bo'lgan tashkilot"
-
-#~ msgid "The story to associate to"
-#~ msgstr "Bog'lash uchun hikoya"
-
-#~ msgid "Yes"
-#~ msgstr "Ha"
-
-#~ msgid "No"
-#~ msgstr "Yo'q"
-
-#~ msgid "Story Images"
-#~ msgstr "Hikoya suratlari"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan surat. (ixtiyoriy)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan surat. (ixtiyoriy)"
 
 #, fuzzy, python-format
 #~| msgid ""
