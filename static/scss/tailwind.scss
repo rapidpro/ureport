@@ -203,6 +203,8 @@ html {
 
 
 #map-info {
+  min-height: 6rem;
+
   .leaflet-control-container {
     .leaflet-top, .leaflet-right, .leaflet-left, .leaflet-bottom {
       display: contents;

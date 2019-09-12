@@ -73,8 +73,8 @@
         .pl-6.pr-home.py-home.text-center
           .text-sm.font-bold.mb-2
             -trans "U-REPORTERS BY REGION"
-          #ureporter-map.h-full.w-full.map.block(data-map-url="/v2/contact_field_results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:600px;min-width:300px;")            
-          #map-info.relative.h-full.w-full.mt-4.flex.justify-center.px-auto
+          #ureporter-map.h-full.w-full.map.block(data-map-url="/v2/contact_field_results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
+          #map-info.relative.h-full.w-full.mt-2.flex.justify-center
   
   .border-t.border-b.bg-dark-gray.sticky.top-0.z-50
     .max-w-page.mx-auto.px-home.py-4.border-gray-800(class="md:flex md:justify-between")
