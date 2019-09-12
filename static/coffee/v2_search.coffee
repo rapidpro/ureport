@@ -20,11 +20,13 @@ $(->
     e.stopPropagation()
   )
 
-  $(".search-category > a").click(->
+  $(".search-category > a").click((e)->
     category = $(this).parent()
     open = $(category).hasClass("open")
     $(category).data("state", if open then "closed" else "open")
     $(category).toggleClass("open")
+    e.stopPropagation()
+    return false
   )
 
   $(".search-box").keyup(->

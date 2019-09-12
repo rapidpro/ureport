@@ -370,6 +370,9 @@ html {
 
 // search box input field
 .search-box {
+  width: 100%;
+  margin-right: 50px;
+
   &:focus {
     outline: none;
   }
@@ -379,29 +382,16 @@ html {
 }
 
 .search-results {
-  opacity: 0;
-
+  display: none;
   overflow-y: scroll;
   overflow-x: hidden;
 
-  -webkit-transition:opacity .5s ease-in-out;
-  -moz-transition:opacity .5s ease-in-out;
-  transition:opacity .5s ease-in-out;
-
   .no-results {
-    @media only screen and (min-width: 768px) {
-      width: 700px;
-    }
+    width: 100%;
   }
 
   .search-category {
-    @media only screen and (min-width: 768px) {
-      width: 700px;
-    }
-
-    @media only screen and (max-width: 768px) {
-      width: 600px;
-    }
+    width: 100%;
 
     .category-results {
       display: none;
@@ -434,11 +424,7 @@ html {
   }
 
   &.shown {
-    opacity: 1;
-
-    -webkit-transition:opacity .5s ease-in-out;
-    -moz-transition:opacity .5s ease-in-out;
-    transition:opacity .5s ease-in-out;
+    display: block;
   }
 }
 
