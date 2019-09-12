@@ -93,10 +93,10 @@ $(->
               "<div class='count'>" + props.count.set + "</div>"
           else
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>"
-      #   else
-      #     this._div.innerHTML = ""
-      # else
-      #   this._div.innerHTML = ""
+        else
+         this._div.innerHTML = ""
+      else
+        this._div.innerHTML = ""
   
     # rollover treatment
     highlight = (e) ->
