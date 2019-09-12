@@ -67,9 +67,7 @@ $(->
     info.onAdd = (map) ->
       this._div = L.DomUtil.create('div', 'leaflet-info');
       newParent = document.getElementById('map-info')
-      console.log(newParent)
       oldParent = document.getElementsByClassName('leaflet-control-container')[0]
-      console.log(oldParent)
       newParent.appendChild(oldParent)
       
       this.update()
@@ -139,7 +137,6 @@ $(->
       });
   
     resetBoundaries = ->
-      console.log(boundaries)
       map.removeLayer(boundaries) 
   
       boundaries = states
@@ -167,10 +164,8 @@ $(->
         segment = {location:"District", parent:boundaryId}
         overallResults = boundaryResults[boundaryId]
   
-      console.log(url)
       $.ajax({url: url + '?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (counts) ->
         countMap = {}
-        console.log(counts)
   
         # figure out our max value
         max = 0;
@@ -182,8 +177,7 @@ $(->
           
           boundaryResults[count['boundary']] = count
   
-        console.log(max)
-        
+
         # and create mapping of threshold values to colors
         colorSteps = []
         for color, i in colors
@@ -193,10 +187,6 @@ $(->
           }
   
 
-
-        console.log(countMap)
-        console.log(colorSteps)
-  
         # we are displaying the districts of a state, load the geojson for it
         boundaryUrl = '/boundaries/'
         if boundaryId
@@ -207,8 +197,7 @@ $(->
           if data.features.length == 0
             resetBoundaries()
             return
-  
-          console.log(data);
+
           for feature in data.features
             props = feature.properties
             count = countMap[props.id].set

@@ -202,9 +202,12 @@ html {
 }
 
 
-.poll-map-info {
-  margin-right: 15rem;
-  margin-top: 170%;
+#map-info {
+  .leaflet-control-container {
+    .leaflet-top, .leaflet-right, .leaflet-left, .leaflet-bottom {
+      display: contents;
+    }
+  }
 }
 
 
