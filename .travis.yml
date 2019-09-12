@@ -3,7 +3,7 @@ language: python
 sudo: true
 
 python:
-  - '3.6.4'
+  - '3.6.8'
 
 services:
   - redis-server
