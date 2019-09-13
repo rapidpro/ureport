@@ -65,7 +65,10 @@
       .flex-1
         .bg-light1.p-home
           .text-3xl.font-bold.leading-tight.text-center
-            Join U-Report by texting "JOIN" to 24453. You can make a difference today.
+            -if org|config:"join_text"
+              {{ org|config:"join_text" }}
+            -else
+              - trans "Join U-Report, Your voice matters."
 
           .mt-8.text-center
             %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}")
