@@ -1,3 +1,7 @@
+v1.1.18
+----------
+ * Align text in the left boxes with the left angle applied too
+
 v1.1.17
 ----------
  * Merge pull request #458 from rapidpro/engagement-charts
