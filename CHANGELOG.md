@@ -1,3 +1,7 @@
+v1.1.17
+----------
+ * Merge pull request #458 from rapidpro/engagement-charts
+
 v1.1.8
 ----------
  * Adjust cursor and sticky bar
