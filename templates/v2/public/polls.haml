@@ -121,9 +121,7 @@
                 {{ question.title }}
 
               .font-alt.mt-4
-                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
-                  {{ responded }} responded out of {{ polled }} polled
-                {% endblocktrans %}
+                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}{{ responded }} responded out of {{ polled }} polled{% endblocktrans %}
 
         .flex-1.bg-white.text-black.hover-parent
           .mx-home.py-home.hover-parent(class="md:border-t")
