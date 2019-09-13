@@ -42,31 +42,120 @@ $(->
       dragging: false
   }
 
-  # fetch our top level states
-  $.ajax({url:'/boundaries/', dataType: "json"}).done((states) ->
-    # now that we have states, initialize each map
-    $(".map").each(->
-      url = $(this).data("map-url")
-      id = $(this).attr("id")
+  initMap = (id, geojson, url, districtZoom, wardZoom) ->
+    map = L.map(id, options)
 
-      # no id? can't render, warn in console
-      if (id == undefined)
-        console.log("missing map id, not rendering")
-        return
+    # constants
+    STATE_LEVEL = 1
+    DISTRICT_LEVEL = 2
+    WARD_LEVEL = 3
+  
+    boundaries = null
+    countMap = null
+  
+    states = null
+    stateResults = null
+  
+    info = null
+    
+    # this is our info box floating off in the top right
+    info = new L.control()
+  
+    info.onAdd = (map) ->
+      this._div = L.DomUtil.create('div', 'leaflet-info');
+      newParent = document.getElementById('map-info')
+      oldParent = document.getElementsByClassName('leaflet-control-container')[0]
+      newParent.appendChild(oldParent)
+      
+      this.update()
+      return this._div
+    
+    info.update = (props) ->
+      if props
+        if props.count?
+          if props.count.unset?
+            total = props.count.set + props.count.unset
+            this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
+              "<div class='count'>" + props.count.set + " of " + total + "</div>"
+          else if props.count.set?
+            this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
+              "<div class='count'>" + props.count.set + "</div>"
+          else
+            this._div.innerHTML = "<div class='name'>" + props.name + "</div>"
+        else
+          this._div.innerHTML = ""
+      else
+        this._div.innerHTML = ""
+    
+    # rollover treatment
+    highlight = (e) ->
+      layer = e.target
+      if not layer.feature.properties.level or layer.feature.properties.level == STATE_LEVEL and boundaries is states or layer.feature.properties.level in [DISTRICT_LEVEL, WARD_LEVEL] and boundaries isnt states
+        layer.setStyle(highlightStyle)
+        if (!L.Browser.ie && !L.Browser.opera)
+          layer.bringToFront()
 
-      # no url? render empty map
-      if (url == undefined)
-        console.log("missing map url, rendering empty")
-        map = L.map(id, options)
-        boundaries = L.geoJSON(states, {style: emptyStyle})
-        boundaries.addTo(map);
-        map.fitBounds(boundaries.getBounds());
-        return
-
-      # if we have a URL load our data
-      $.getJSON(url, (counts) ->
+      info.update(layer.feature.properties)
+  
+    clickFeature = (e) ->
+      if (districtZoom and e.target.feature.properties.level == STATE_LEVEL)
+        map.removeLayer(states)
+        loadBoundary(url, e.target.feature.properties, e.target)
+      else if (wardZoom and e.target.feature.properties.level == DISTRICT_LEVEL)
+        map.removeLayer(boundaries)
+        loadBoundary(url, e.target.feature.properties, e.target)
+      else
+        resetBoundaries()
+  
+    # resets our color on mouseout
+    reset = (e) ->
+      states.resetStyle(e.target)
+      info.update()
+    
+    # looks up the color for the passed in feature
+    countStyle = (feature) ->
+      return {
+        fillColor: feature.properties.color
+        weight: 1
+        opacity: 1
+        color: 'white'
+        fillOpacity: 0.7
+      }
+  
+    onEachFeature = (feature, layer) ->
+      layer.on({
+        mouseover: highlight
+        mouseout: reset
+        click: clickFeature
+      });
+  
+    resetBoundaries = ->
+      map.removeLayer(boundaries) 
+  
+      boundaries = states
+      countMap = stateResults
+  
+      states.setStyle(countStyle)
+      map.addLayer(states)
+      map.fitBounds(states.getBounds())
+  
+      info.update()
+  
+    loadBoundary = (url, boundary, target) ->
+      boundaryId = if boundary then boundary.id else null
+      boundaryLevel = if boundary then boundary.level else null
+  
+      # load our actual data
+      if not boundary
+        segment = {location:"State"}
+      else if boundary and boundary.level == DISTRICT_LEVEL
+        segment = {location:"Ward", parent:boundaryId}
+      else
+        segment = {location:"District", parent:boundaryId}
+  
+      $.ajax({url: url + '?segment=' + encodeURIComponent(JSON.stringify(segment)), dataType: "json"}).done (counts) ->
         countMap = {}
-
+  
         # figure out our max value
         max = 0;
         for count in counts
@@ -81,85 +170,78 @@ $(->
             threshold: max * (breaks[i] / 100)
             color: colors[i]
           }
+  
 
-        # clone our states
-        states = JSON.parse(JSON.stringify(states))
+        # we are displaying the districts of a state, load the geojson for it
+        boundaryUrl = '/boundaries/'
+        if boundaryId
+          boundaryUrl += boundaryId + '/'
+  
+        $.ajax({url:boundaryUrl, dataType: "json"}).done (data) ->
+          # added to reset boundary when district has no wards
+          if data.features.length == 0
+            resetBoundaries()
+            return
 
-        # iterate through and assign colors
-        for state in states.features
-          props = state.properties
-          count = countMap[props.id].set
-
-          # merge our count values in
-          props.count = countMap[props.id]
-
-          props.color = colorSteps[colorSteps.length-1].color
-          for step in colorSteps
-            if count <= step.threshold
+          for feature in data.features
+            props = feature.properties
+            count = countMap[props.id].set
+  
+            # merge our count values in
+            props.count = countMap[props.id]
+  
+            props.color = colorSteps[colorSteps.length-1].color
+            for step in colorSteps
+              if count <= step.threshold
                 props.color = step.color
                 break
 
-        # looks up the color for the passed in feature
-        countStyle = (feature) ->
-          return {
-              fillColor: feature.properties.color
-              weight: 1
-              opacity: 1
-              color: 'white'
-              fillOpacity: 0.7
-          }
+          boundaries = L.geoJSON(data, {
+            style: countStyle,
+            onEachFeature: onEachFeature
+          })
+          boundaries.addTo(map);
 
-        boundaries = null;
-
-        # this is our info box floating off in the top right
-        info = new L.control()
-
-        info.onAdd = (map) ->
-          this._div = L.DomUtil.create('div', 'leaflet-info');
-          this.update()
-          return this._div
-
-        info.update = (props) ->
-          if props
-            if props.count.unset?
-              total = props.count.set + props.count.unset
-              this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
-                "<div class='count'>" + props.count.set + " of " + total + "</div>"
-            else if props.count.set?
-              this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
-                "<div class='count'>" + props.count.set + "</div>"
-            else
-              this._div.innerHTML = "<div class='name'>" + props.name + "</div>"
+          if boundaryId
+            states.resetStyle(target)
+            map.removeLayer(states)
           else
-            this._div.innerHTML = ""
+            states = boundaries
+            stateResults = countMap
+          
+          map.fitBounds(boundaries.getBounds());
+          map.on 'resize', (e) ->
+            map.fitBounds(boundaries.getBounds())
 
-        # rollover treatment
-        highlight = (e) ->
-          layer = e.target
-          layer.setStyle(highlightStyle)
-          if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge)
-            layer.bringToFront()
+    info.addTo(map);
+    loadBoundary(url, null, null)
+    map
 
-          info.update(e.target.feature.properties)
+  # fetch our top level states
+  $.ajax({url:'/boundaries/', dataType: "json"}).done((states) ->
+    # now that we have states, initialize each map
+    $(".map").each(->
+      url = $(this).data("map-url")
+      id = $(this).attr("id")
+      districtZoom = $(this).data("district-zoom")
+      wardZoom = $(this).data("ward-zoom")
 
-        # resets our color on mouseout
-        reset = (e) ->
-          boundaries.resetStyle(e.target)
-          info.update()
+      # no id? can't render, warn in console
+      if (id == undefined)
+        console.log("missing map id, not rendering")
+        return
 
+      # no url? render empty map
+      if (url == undefined)
+        console.log("missing map url, rendering empty")
         map = L.map(id, options)
-        boundaries = L.geoJSON(states, {
-          style: countStyle,
-          onEachFeature: (feature, layer) ->
-            layer.on({
-              mouseover: highlight
-              mouseout: reset
-            });
-        })
+        boundaries = L.geoJSON(states, {style: emptyStyle})
         boundaries.addTo(map);
-        info.addTo(map);
         map.fitBounds(boundaries.getBounds());
-      )
+        return
+      
+      map = initMap(id, states, url, districtZoom, wardZoom)
+
     )
   )
 )

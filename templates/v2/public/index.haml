@@ -78,15 +78,16 @@
 
       .flex-1
         .bg-white.p-home
-          .flex.justify-center.relative.social-media-blocks
-            -if org|config:"facebook_page_url"
-              .block.absolute.social-media-block(class='{% if org|config:"twitter_handle" %}open{% endif %}')
-                .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"630", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
-            -if org|config:"twitter_handle"
-              .block.absolute.social-media-block
-                %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
+          .block.w-full.h-full
+            .flex.justify-center.relative.social-media-blocks.mb-4(style="min-height:550px")
+              -if org|config:"facebook_page_url"
+                .block.absolute.social-media-block(class='{% if org|config:"twitter_handle" %}open{% endif %}')
+                  .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"600", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+              -if org|config:"twitter_handle"
+                .block.absolute.social-media-block
+                  %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
 
-                %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"630px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"600px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
   - if stories
     // featured-story-full

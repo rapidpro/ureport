@@ -14,17 +14,20 @@
           {{ org|config:"engagement_description"|default:""}}
 
   .max-w-page.mx-auto
-    .bg-dark-blue(class="md:flex")
-      .flex-1.bg-black.p-home.vertical-angle
-        .font-alt.text-light1.italic.mb-4.font-bold
-          -trans "Year at a Glance"
+    .bg-black(class="md:flex")
+      .flex-1.p-home
+        .font-alt.text-light1.italic.mb-4.font-bold.mt-6
+          -trans "OVERALL STATISTICS"
 
-        .text-white.font-light
+        .text-white.font-light.mt-12
           .inline-block.pr-8.border-r.border-white
             .text-5xl.leading-none
-              {{org.get_signups|intcomma}}
+              {{org.get_reporters_count|intcomma}}
             .text-xs.font-bold
-              -trans "SIGN-UPS"
+              -trans "U-REPORTERS"
+              .inline.text-light1
+                +{{org.get_signup_rate|floatformat}}%
+                -trans "THIS YEAR"
 
           .inline-block.pl-8
             .text-5xl.leading-none
@@ -32,16 +35,7 @@
             .text-xs.font-bold
               -trans "AVG RESPONSE RATE"
 
-        .text-white.mt-4.font-bold
-          .inline.text-light1
-            {{org.get_reporters_count|intcomma}}
-          .inline.text-white
-            -trans "TOTAL U-REPORTERS IN"
-            {{ org.name|upper }}
-          .inline.text-light1
-            +{{org.get_signup_rate|floatformat}}%
-
-        .mt-4.flex
+        .mt-4.flex.mb-8(class="md:mt-12 md:mb-0")
           .flex-none.mr-8
             .text-white.text-center.inline-block.pr-4.border-r.border-white
               %img(src="{{ STATIC_URL }}img/gender-male-w.png" width="40")
@@ -69,15 +63,13 @@
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
 
-      .flex-1.text-white
+      .flex-1.text-white.bg-dark-blue.vertical-angle
         .pl-6.pr-home.py-home.text-center
           .text-sm.font-bold.mb-2
-            -trans "U-REPORTERS BY REGION"
-          {% with map_segment='{"location":"state"}' %}
-          #ureporter-map.h-full.w-full.map(data-map-url="/v2/contact_field_results/?segment={{ map_segment|urlencode }}")
-            .block(style="min-height:300px;min-width:300px;")
-          {% endwith %}
-
+            -trans "RESPONSE RATE BY REGION"
+          #ureporter-map.h-full.w-full.map.block(data-map-url="/v2/contact_field_results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
+          #map-info.relative.h-full.w-full.mt-2.flex.justify-center
+  
   .border-t.border-b.bg-dark-gray.sticky.top-0.z-50
     .max-w-page.mx-auto.px-home.py-4.border-gray-800(class="md:flex md:justify-between")
       .text-white.font-bold.flex-center-y

@@ -101,10 +101,9 @@
         .pl-6.pr-home.py-home.text-center
           .text-sm.font-bold.mb-2
             -trans "TOTAL RESPONSES"
-          {% with map_segment='{"location":"state"}' %}
-          #poll-map.h-full.w-full.map(data-map-url="/pollquestion/{{ top_question.id }}/results/?segment={{ map_segment|urlencode }}")
-            .block(style="min-height:300px;min-width:300px;")
-          {% endwith %}
+          #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
+          #map-info.relative.h-full.w-full.my-4.flex.justify-center
+
 
     - for question in latest_poll.get_questions
       .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-aos="fade" style="min-height:30rem;" id="question-block-{{question.id}}")

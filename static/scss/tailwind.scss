@@ -201,6 +201,18 @@ html {
   @apply w-full text-sm whitespace-no-wrap;
 }
 
+
+#map-info {
+  min-height: 6rem;
+
+  .leaflet-control-container {
+    .leaflet-top, .leaflet-right, .leaflet-left, .leaflet-bottom {
+      display: contents;
+    }
+  }
+}
+
+
 // allows an element to fade in when a parent element hovers, supports up to three levels below
 .hover-show {
   opacity: 0;
@@ -431,7 +443,7 @@ html {
 // desktop styles
 @media only screen and (min-width: 768px) {
   .vertical-angle {
-    -webkit-clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+    -webkit-clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
     clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
   }
 
@@ -475,8 +487,8 @@ html {
 // mobile styles
 @media only screen and (max-width: 768px) {
   .vertical-angle {
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 90%);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 90%);
+    -webkit-clip-path: polygon(0 0, 0 calc(100% + 1px), 100% calc(100% + 1px),100% 30px);
+    clip-path: polygon(0 0, 0 calc(100% + 1px), 100% calc(100% + 1px),100% 30px);
   }
 
   .p-home {
