@@ -76,10 +76,10 @@ $(->
           if props.count.unset?
             total = props.count.set + props.count.unset
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
-              "<div class='count'>" + props.count.set + " of " + total + "</div>"
+              "<div class='count'>" + props.count.set.toLocaleString() + " " + window.string_Responses + " // " + total.toLocaleString() + " " + window.string_Polled + "</div>"
           else if props.count.set?
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
-              "<div class='count'>" + props.count.set + "</div>"
+              "<div class='count'>" + props.count.set.toLocaleString() + " " + window.string_Reporters + "</div>"
           else
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>"
         else
@@ -173,7 +173,7 @@ $(->
   
 
         # we are displaying the districts of a state, load the geojson for it
-        boundaryUrl = '/boundaries/'
+        boundaryUrl = '/v2/boundaries/'
         if boundaryId
           boundaryUrl += boundaryId + '/'
   
@@ -218,7 +218,7 @@ $(->
     map
 
   # fetch our top level states
-  $.ajax({url:'/boundaries/', dataType: "json"}).done((states) ->
+  $.ajax({url:'/v2/boundaries/', dataType: "json"}).done((states) ->
     # now that we have states, initialize each map
     $(".map").each(->
       url = $(this).data("map-url")

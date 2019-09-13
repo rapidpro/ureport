@@ -71,7 +71,7 @@
               .block.pl-home
                 .font-bold.mb-4
                   -trans "FEATURED STORY"
-                .font-bold.text-3xl.leading-tight.mb-4
+                .font-bold.leading-tight.mb-4(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
                   {{ story.title }}
                 .block.mb-6
                   {{ story.summary|truncatewords:50|linebreaksbr }}
@@ -108,7 +108,7 @@
         .p-home
           .font-bold.mb-4
             -trans "FEATURED STORY"
-          .font-bold.text-3xl.leading-tight.mb-4
+          .font-bold.leading-tight.mb-4(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
             {{ story.title }}
           .block.mb-6
             {{ story.summary|truncatewords:50|linebreaksbr }}

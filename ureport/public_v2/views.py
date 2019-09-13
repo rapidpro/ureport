@@ -13,7 +13,7 @@ from smartmin.views import SmartReadView, SmartTemplateView
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Q
 from django.http import HttpResponse
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -317,7 +317,7 @@ class ReportersResultsView(SmartReadView):
         segment = self.request.GET.get("segment", None)
         if segment:
             segment = json.loads(segment)
-            output_data = self.get_object().get_ureporters_locations_response_rates(segment)
+            output_data = self.get_object().get_ureporters_locations_stats(segment)
 
         return HttpResponse(json.dumps(output_data))
 
@@ -408,3 +408,36 @@ class JobsView(SmartTemplateView):
         )
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
+
+
+class BoundaryView(SmartTemplateView):
+    def render_to_response(self, context, **kwargs):
+        org = self.request.org
+
+        if org.get_config("common.is_global"):
+            location_boundaries = org.boundaries.filter(level=0)
+        else:
+            osm_id = self.kwargs.get("osm_id", None)
+
+            org_boundaries = org.boundaries.all()
+
+            limit_states = org.get_config("common.limit_states")
+            if limit_states:
+                limit_states = [elt.strip() for elt in limit_states.split(",")]
+                org_boundaries = org_boundaries.filter(
+                    Q(level=1, name__in=limit_states)
+                    | Q(parent__name__in=limit_states, level=2)
+                    | Q(parent__parent__name__in=limit_states, level=3)
+                )
+
+            if osm_id:
+                location_boundaries = org_boundaries.filter(parent__osm_id=osm_id)
+            else:
+                location_boundaries = org_boundaries.filter(level=1)
+
+        boundaries = dict(
+            type="FeatureCollection",
+            features=[elt.as_geojson() for elt in location_boundaries if elt.geometry and json.loads(elt.geometry)],
+        )
+
+        return HttpResponse(json.dumps(boundaries))

@@ -78,7 +78,7 @@
 
     :javascript
       {% if org|config:"colors" %}
-      var orgColors = {{org|config:"colors"}};
+      var orgColors = '{{org|config:"colors"}}'.split(',');
       {% else %}
       var orgColors = [
         "{{ org|config:'primary_color'|default:'#439932' }}",
@@ -501,6 +501,9 @@
     :javascript
       // global primary color
       var primaryColor = '{{ org|config:"primary_color"}}';
+      window.string_Responses = "{% trans "Responses" %}";
+      window.string_Polled = "{% trans "Polled" %}";
+      window.string_Reporters = "{% trans "Reporters" %}";
 
       // country menu toggling
       $("#countries-toggler").click(function(){

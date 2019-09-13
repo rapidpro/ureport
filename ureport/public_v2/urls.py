@@ -2,10 +2,12 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from django.conf.urls import url
+from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 
 from .views import (
     AboutView,
+    BoundaryView,
     Count,
     CustomPage,
     EngagementDataView,
@@ -31,6 +33,13 @@ urlpatterns = [
     url(r"^opinion/(?P<pk>\d+)/$", PollReadView.as_view(), {}, "v2.public.opinion_read"),
     url(r"^poll/(?P<pk>\d+)/$", PollRedirectView.as_view(), {}, "v2.public.poll_read"),
     url(r"^contact_field_results/$", ReportersResultsView.as_view(), {}, "v2.public.contact_field_results"),
+    url(r"^boundaries/$", cache_page(60 * 30)(BoundaryView.as_view()), {}, "v2.public.boundaries"),
+    url(
+        r"^boundaries/(?P<osm_id>[a-zA-Z0-9]+)/$",
+        cache_page(60 * 30)(BoundaryView.as_view()),
+        {},
+        "v2.public.boundaries",
+    ),
     url(r"^engagement/$", UreportersView.as_view(), {}, "v2.public.engagement"),
     url(r"^ureporters/$", RedirectView.as_view(pattern_name="v2.public.engagement"), {}, "v2.public.ureporters"),
     url(r"^engagement_data/$", EngagementDataView.as_view(), {}, "v2.public.engagement_data"),

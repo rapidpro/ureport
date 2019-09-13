@@ -66,7 +66,7 @@
       .flex-1.text-white.bg-dark-blue.vertical-angle
         .pl-6.pr-home.py-home.text-center
           .text-sm.font-bold.mb-2
-            -trans "RESPONSE RATE BY REGION"
+            -trans "U-REPORTERS BY REGION"
           #ureporter-map.h-full.w-full.map.block(data-map-url="/v2/contact_field_results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
           #map-info.relative.h-full.w-full.mt-2.flex.justify-center
   
@@ -141,6 +141,10 @@
           chartType = "spline";
         }
         var results = Window.UreportEngagementStats[dataSlug];
+        if (results == undefined) {
+          setTimeout(drawGraph(metricSlug, segmentType, timeFilter), 5000);
+          return
+        }
 
         var colors = ["#E3002B", "#009316", "#FED100", "#3FB5E5", "#FF8200", "#000000"];
         var locationIds = $("#location-pill-" + dataSlug).children().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
