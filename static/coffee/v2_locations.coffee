@@ -76,10 +76,10 @@ $(->
           if props.count.unset?
             total = props.count.set + props.count.unset
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
-              "<div class='count'>" + props.count.set + " of " + total + "</div>"
+              "<div class='count'>" + props.count.set.toLocaleString() + " " + window.string_Responses + " // " + total.toLocaleString() + " " + window.string_Polled + "</div>"
           else if props.count.set?
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
-              "<div class='count'>" + props.count.set + "</div>"
+              "<div class='count'>" + props.count.set.toLocaleString() + " " + window.string_Reporters + "</div>"
           else
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>"
         else
