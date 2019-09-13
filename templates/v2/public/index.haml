@@ -71,8 +71,9 @@
               -trans "JOIN NOW"
 
         .bg-black.p-home.text-white
-          .video
-            <iframe width="560" height="349" src="https://www.youtube.com/embed/KdydDDitMHA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          -if org|config:"homepage_video_id"
+            .video
+              <iframe width="560" height="349" src="https://www.youtube.com/embed/{{ org|config:"homepage_video_id" }}?rel=0&autohide=1&showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
       .flex-1
         .bg-white.p-home
