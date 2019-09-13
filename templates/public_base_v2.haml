@@ -78,7 +78,7 @@
 
     :javascript
       {% if org|config:"colors" %}
-      var orgColors = {{org|config:"colors"}};
+      var orgColors = '{{org|config:"colors"}}'.split(',');
       {% else %}
       var orgColors = [
         "{{ org|config:'primary_color'|default:'#439932' }}",

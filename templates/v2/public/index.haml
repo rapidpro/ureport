@@ -197,14 +197,14 @@
                 %img(src="{{im.url}}")
               {% endthumbnail %}
 
-  - block script
-    {{ block.super }}
+- block script
+  {{ block.super }}
 
-    :javascript
-      $(function(){
-        setInterval(function() {
-          if($(".social-media-blocks").children().length > 1) {
-            $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
-          }
-        }, 15000)
-      });
+  :javascript
+    $(function(){
+      setInterval(function() {
+        if($(".social-media-blocks").children().length > 1) {
+          $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
+        }
+      }, 15000)
+    });
