@@ -75,6 +75,10 @@
           -if org|config:"homepage_join_video_id"
             .video
               <iframe width="560" height="349" src="https://www.youtube.com/embed/{{ org|config:"homepage_join_video_id" }}?rel=0&autohide=1&showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          -else
+            .flex.justify-content(style="min-height:349px")
+              .inline-block.mx-auto.my-auto.text-center
+                %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
 
       .flex-1
         .bg-white.p-home
