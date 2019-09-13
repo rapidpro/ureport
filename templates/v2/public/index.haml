@@ -12,7 +12,7 @@
           .font-bold.text-l
             - trans "LATEST OPINION"
 
-          .font-bold.text-4xl
+          .font-bold(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
             {{ latest_poll.title }}
 
           .font-alt.font-bold.italic.left-border
@@ -111,7 +111,7 @@
                 .block
                   .font-bold.mb-4
                     {% trans "FEATURED STORY" %}
-                  .font-bold.text-3xl.leading-tight.mb-4
+                  .font-bold.leading-tight.mb-4(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
                     {{ story.title }}
                   .block.mb-6
                     {{ story.summary|truncatewords:50|linebreaksbr }}
@@ -149,7 +149,7 @@
         .p-home
           .font-bold.mb-4
             - trans "FEATURED STORY"
-          .font-bold.text-3xl.leading-tight.mb-4
+          .font-bold.leading-tight.mb-4(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
             {{ story.title }}
           .block.mb-6
             {{ story.summary|truncatewords:50|linebreaksbr }}
