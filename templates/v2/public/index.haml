@@ -184,9 +184,9 @@
         .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
           %div
             .font-bold.text-3xl
-              -trans "Photos Title"
+              {{ org|config:"photos_section_title"|default:"Photos"}}
 
-            -trans "This area can be edited when the poll is over to focus additionally on review and learnings."
+            {{ org|config:"photos_section_description"|default:""}}
 
         .flex-1.p-home.text-black.flex.flex-col.justify-center
           %div

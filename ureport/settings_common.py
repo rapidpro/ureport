@@ -245,6 +245,7 @@ ORG_CONFIG_FIELDS = [
         field=dict(
             help_text=_("The whatapp number that users will use to contact U-Report if you have one"),
             label="Whatapp Number",
+            required=False,
         ),
     ),
     dict(
@@ -258,6 +259,22 @@ ORG_CONFIG_FIELDS = [
         field=dict(
             help_text=_("The YouTube video ID for how to join U-Report section"),
             label="Homepage Video ID",
+            required=False,
+        ),
+    ),
+    dict(
+        name="photos_section_title",
+        field=dict(
+            help_text=_("The title of the photos section U-Report homepage"),
+            label="Photos Section Title",
+            required=False,
+        ),
+    ),
+    dict(
+        name="photos_section_description",
+        field=dict(
+            help_text=_("The description of the photos section U-Report homepage"),
+            label="Photos Description",
             required=False,
         ),
     ),
