@@ -8,9 +8,8 @@
       .flex-1.flex-center-y
         .text-5xl.font-bold
           -trans "Stories"
-
         .text-xl
-          -trans "A sentence that describes how we feel about stories and the human side of things."
+          {{ org|config:"stories_description"|default:""}}
 
       .flex-center-y(class="md:pl-8")
         .block.text-right.mt-4(style="width:325px")

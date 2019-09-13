@@ -11,7 +11,7 @@
 
       .flex-1.flex-center-y
         .text-xl.text-right(class="md:pl-12")
-          -trans "A sentence that describes what this page is all about and who it is for"
+          {{ org|config:"engagement_description"|default:""}}
 
   .max-w-page.mx-auto
     .bg-dark-blue(class="md:flex")

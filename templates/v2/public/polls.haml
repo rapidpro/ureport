@@ -9,7 +9,7 @@
         .text-5xl.font-bold
           -trans "Opinions"
         .text-xl.max-w-lg
-          -trans "A sentence that describes what this page is all about and who it is for"
+          {{ org|config:"opinions_description"|default:""}}
 
       .flex-center-y(class="md:pl-8")
         .block.text-right.mt-4(style="width:325px")

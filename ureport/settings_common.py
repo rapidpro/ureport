@@ -279,6 +279,28 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="opinions_description",
+        field=dict(help_text=_("The description of the opinions page"), label="Opinions Description", required=False),
+    ),
+    dict(
+        name="stories_description",
+        field=dict(help_text=_("The description of the stories page"), label="Stories Description", required=False),
+    ),
+    dict(
+        name="engagement_description",
+        field=dict(
+            help_text=_("The description of the engagement page"), label="Engagement Description", required=False
+        ),
+    ),
+    dict(
+        name="engagement_footer_callout",
+        field=dict(
+            help_text=_("The callout message on the footer engagement section"),
+            label="Egagement callout messages",
+            required=False,
+        ),
+    ),
+    dict(
         name="dark1_color",
         field=dict(help_text=_("The primary color for styling for this organization, should be dark"), required=False),
         superuser_only=True,
