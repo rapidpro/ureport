@@ -34,7 +34,7 @@ class AgeSegment(models.Model):
 class PollStats(models.Model):
     DATA_TIME_FILTERS = {3: _("90 Days"), 6: _("6 Months"), 12: _("12 Months")}
 
-    DATA_SEGMENTS = {"all": _("All"), "gender": _("Gender"), "age": _("Age"), "location": _("State")}
+    DATA_SEGMENTS = {"all": _("All"), "gender": _("Gender"), "age": _("Age"), "location": _("Location")}
 
     DATA_METRICS = {
         "opinion-responses": _("Opinion Responses"),
