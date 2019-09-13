@@ -387,7 +387,10 @@
         .text-right(class="md:w-2/3")
           .pb-4(class="md:pr-10 md:border-r md:border-gray-500")
             .font-bold.text-3xl.leading-tight.mb-8
-              -trans "See by the numbers how we are engaging youth voices for positive social change."
+              -if org|config:"engagement_footer_callout"
+                {{ org|config:"engagement_footer_callout"}}
+              -else
+                -trans "See by the numbers how we are engaging youth voices for positive social change."
 
             %a.btn.bg-light2.text-white.inline-block(href="{% url 'v2.public.ureporters' %}")
               -trans "EXPLORE ENGAGEMENT"

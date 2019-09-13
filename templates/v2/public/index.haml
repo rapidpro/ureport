@@ -1,8 +1,9 @@
 - extends "public_base_v2.html"
 
-- load thumbnail humanize ureport compress i18n
+- load thumbnail humanize ureport compress i18n dashblocks
 
 - block content
+  - load_qbs request.org 'about'
   // latest poll if we have it
   - if latest_poll and latest_poll.get_first_question
     .max-w-page.mx-auto.bg-dark1
@@ -71,8 +72,9 @@
               -trans "JOIN NOW"
 
         .bg-black.p-home.text-white
-          .video
-            <iframe width="560" height="349" src="https://www.youtube.com/embed/KdydDDitMHA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          -if org|config:"homepage_join_video_id"
+            .video
+              <iframe width="560" height="349" src="https://www.youtube.com/embed/{{ org|config:"homepage_join_video_id" }}?rel=0&autohide=1&showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
       .flex-1
         .bg-white.p-home
@@ -165,13 +167,12 @@
 
       .flex.flex-center-y(class="md:w-2/5")
         .pl-10
-          .font-bold.mb-4.text-3xl.leading-tight
-            -trans "We are all a part of a global platform changing the lives of young people worldwide."
+          - for d_block in about|slice:":1"
+            .font-bold.mb-4.text-3xl.leading-tight
+              {{ d_block.title|safe }}
 
-          .mb-6
-            - blocktrans
-              We are all a part of a global platform changing the lives of young people worldwide.
-              We are all a part of a global platform changing the lives of young people worldwide.
+            .mb-6
+              {{ d_block.summary|safe }}
 
           %a.btn.bg-light1.text-black(href="{% url 'v2.public.about' %}")
             -trans "LEARN MORE"
@@ -183,9 +184,9 @@
         .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
           %div
             .font-bold.text-3xl
-              -trans "Photos Title"
+              {{ org|config:"photos_section_title"|default:"Photos"}}
 
-            -trans "This area can be edited when the poll is over to focus additionally on review and learnings."
+            {{ org|config:"photos_section_description"|default:""}}
 
         .flex-1.p-home.text-black.flex.flex-col.justify-center
           %div

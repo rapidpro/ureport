@@ -3,6 +3,8 @@
 - load dashblocks thumbnail ureport i18n
 
 -block content
+  - load_qbs request.org 'join_engage'
+  - load_qbs request.org 'join_steps'
 
   .bg-grid.border-t.border-b
     .max-w-page.mx-auto.p-home(class="md:flex")
@@ -12,7 +14,8 @@
 
       .flex-1.flex-center-y
         .text-xl.text-right(class="md:pl-12")
-          -trans "In just a few easy steps, start here to join other young people and have your voice heard!"
+          - for d_block in join_engage|slice:":1"
+            {{ d_block.short_content_teaser|safe }}
 
   .max-w-page.mx-auto
     .p-home.bg-light1(class="md:flex")
@@ -52,47 +55,17 @@
             .block
               WhatsApp
           {% endif %}
-
-    %a(name="text")
-      .p-home.bg-dark1.text-white(class="md:flex")
+    
+    - for join_step in join_steps
+      .p-home(class="md:flex {% cycle 'bg-dark1 text-white' 'bg-dark2 text-white' 'bg-dark3 text-white' 'bg-light1 text-black' %}" id="{% if forloop.first %}text{% endif %}")
         .flex-1
-          .text-3xl.font-bold.flex.border-b.border-white.pb-4.mb-4
+          .text-3xl.font-bold.flex.border-b.pb-4.mb-4(class="{% cycle 'border-white' 'border-white' 'border-white' 'border-black' %}")
             .flex-none.flex-center-y
               .bg-circle.bg-black.text-white
-                2
+                {{forloop.counter|add:1}}
             .pl-4.pr-12.flex-center-y
-              -trans "Text"
-
+              {{ join_step.title|upper }}
+  
         .flex-1.flex-center-y
           .text-xl(class="md:pl-24 md:pr-12")
-            -trans "Text the word Join to 24453 - all U-Report SMSs are free!"
-
-    .p-home.bg-dark2.text-white(class="md:flex")
-      .flex-1
-        .text-3xl.font-bold.flex.border-b.border-white.pb-4.mb-4
-          .flex-none.flex-center-y
-            .bg-circle.bg-black.text-white
-              3
-          .pl-4.pr-12.flex-center-y
-            -trans "Sign-Up"
-
-      .flex-1.flex-center-y
-        .text-xl(class="md:pl-24 md:pr-12")
-          -trans "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
-
-    .p-home.bg-dark3.text-white(class="md:flex")
-      .flex-1
-        .text-3xl.font-bold.flex.border-b.border-white.pb-4.mb-4
-          .flex-none.flex-center-y
-            .bg-circle.bg-black.text-white
-              4
-          .pl-4.pr-12.flex-center-y
-            -trans "Get Involved!"
-
-      .flex-1.flex-center-y
-        .text-xl(class="md:pl-24 md:pr-12")
-          -trans "You will now receive messages asking your opinion on meaningful issues!"
-
-          %br
-          %br
-          -trans "To exit U-Report just send stop to 24453"
+            {{ join_step.content }}
