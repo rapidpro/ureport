@@ -11,32 +11,36 @@
         .text-xl.max-w-lg
           -trans "A sentence that describes what this page is all about and who it is for"
 
-      .flex-center-y
-        .block.text-right.mt-4
-          .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded
-            .inline-block.bg-black.border-b.border-white
-              %input.bg-black.search-box(type="text" data-results-id="poll-search-results" placeholder="SEARCH" size=14)
-              %a.search-close(href="#")
-                %i.fa.fa-caret-down
+      .flex-center-y(class="md:pl-8")
+        .block.text-right.mt-4(style="width:325px")
+          .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded.w-full
+            .flex.bg-black.border-b.border-white.w-full
+              .flex-1
+                %input.bg-black.search-box(type="text" data-results-id="poll-search-results" placeholder="SEARCH" size=14)
+              .flex-none
+                %a.search-close.cursor-pointer
+                  %i.fa.fa-caret-down
 
         .relative
-          .absolute.right-0.bg-white.search-results.h-64.border(id="poll-search-results" style="z-index:100000")
+          .absolute.left-0.bg-white.search-results.h-64.border(id="poll-search-results" style="z-index:100000;width:325px;")
             .no-results.p-4.italic.hidden
               -trans "No results found"
 
             - for category in categories
               - if category.polls.all
-                .block.py-4.bg-white.search-category
-                  %a.font-bold.px-4.block(href="#")
+                .block.py-1.bg-white.search-category
+                  %a.font-bold.px-2.block(href="#")
                     %i.fa.fa-caret-right.closed.float-left(style="padding-top:2px")
                     %i.fa.fa-caret-down.hidden.open.float-left(style="padding-top:4px")
                     .pl-3
                       {{ category.name }}
                   .category-results
                     - for poll in category.polls.all
-                      %a.block.px-4.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }}")
-                        .ml-4
+                      %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }} {{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }}")
+                        .ml-2
                           {{ poll.title }}
+                          .inline.text-xs.font-bold
+                            {{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}
 
   .max-w-page.mx-auto
     .bg-white(class="md:flex")
@@ -116,9 +120,7 @@
                 {{ question.title }}
 
               .font-alt.mt-4
-                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
-                  {{ responded }} responded out of {{ polled }} polled
-                {% endblocktrans %}
+                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}{{ responded }} responded out of {{ polled }} polled{% endblocktrans %}
 
         .flex-1.bg-white.text-black.hover-parent
           .mx-home.py-home.hover-parent(class="md:border-t")

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-11 18:27+0000\n"
+"POT-Creation-Date: 2019-09-13 00:51+0000\n"
 "PO-Revision-Date: 2017-02-22 13:15+0000\n"
 "Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
@@ -1356,15 +1356,18 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "النتائج"
 
+msgid "JOIN NOW"
+msgstr ""
+
 msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
 msgid ""
 "\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
 "\n"
-"          "
+"            "
 msgstr ""
 
 msgid "Photos Title"
@@ -1423,8 +1426,8 @@ msgstr "نسبة التجاوب "
 #| "                  "
 msgid ""
 "\n"
-"              %(responded)s responded out of %(polled)s polled\n"
-"            "
+"                  %(responded)s responded out of %(polled)s polled\n"
+"                "
 msgstr ""
 "\n"
 "قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع..."
@@ -1938,6 +1941,34 @@ msgstr "الرمز الذي سيستعمله المستخدمون للتواصل
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "النص القصير المستخدم لتوجيه الزائرين للتسجيل في يو-ريبورت"
 
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "الألوان المساندة في تنسيقات الجمعية أو المنظمة "
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "الألوان المساندة في تنسيقات الجمعية أو المنظمة "
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "إختر 6 ألوان لتنسيق الرسوم البيانية، الرجاء الفصل بين الألوان بفاصلة "
+
 msgid "The color used to draw the text on the join bar"
 msgstr "لون النص المستخدم في شريط التسجيل "
 
@@ -1952,9 +1983,6 @@ msgstr "الألوان المساندة في تنسيقات الجمعية أو 
 
 msgid "The background color for the site"
 msgstr "لون الخلفية التي تريد إستخدامها لصفحات الموقع "
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "إختر 6 ألوان لتنسيق الرسوم البيانية، الرجاء الفصل بين الألوان بفاصلة "
 
 #, fuzzy
 #| msgid "Up to 6 colors for styling charts, use comma between colors"
@@ -2072,15 +2100,15 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
 
-#, fuzzy
+#, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
 #~| "                  "
 #~ msgid ""
 #~ "\n"
-#~ "                 %(responded)s responded out of %(polled)s polled\n"
-#~ "               "
+#~ "              %(responded)s responded out of %(polled)s polled\n"
+#~ "            "
 #~ msgstr ""
 #~ "\n"
 #~ "قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع..."

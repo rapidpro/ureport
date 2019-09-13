@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-11 18:27+0000\n"
+"POT-Creation-Date: 2019-09-13 00:51+0000\n"
 "PO-Revision-Date: 2017-04-07 14:40+0000\n"
 "Last-Translator: Vincent Turmine <vincent.turmine@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
@@ -1381,15 +1381,18 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Résultats"
 
+msgid "JOIN NOW"
+msgstr ""
+
 msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
 msgid ""
 "\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
 "\n"
-"          "
+"            "
 msgstr ""
 
 msgid "Photos Title"
@@ -1448,8 +1451,8 @@ msgstr "TAUX DE RÉPONSE"
 #| "                  "
 msgid ""
 "\n"
-"              %(responded)s responded out of %(polled)s polled\n"
-"            "
+"                  %(responded)s responded out of %(polled)s polled\n"
+"                "
 msgstr ""
 "\n"
 "                    %(responded)s répondants sur %(polled)s interrogés\n"
@@ -1931,6 +1934,34 @@ msgstr "Le numéro court que les utilisateurs utiliseront pour contacter U-Repor
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Le mot-clé utilisé pour inciter les visiteurs a s'inscrire sur U-Report"
 
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "Couleur principale à utiliser pour cette organisation"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "Couleur secondaire à utiliser pour cette organisation"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "Couleur principale à utiliser pour cette organisation"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "Couleur principale à utiliser pour cette organisation"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "Couleur secondaire à utiliser pour cette organisation"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "Définir jusqu'à 6 couleurs pour le style des graphiques. Séparer les couleurs par une virgule."
+
 msgid "The color used to draw the text on the join bar"
 msgstr "La couleur du texte de la barre «Rejoindre»"
 
@@ -1945,9 +1976,6 @@ msgstr "Couleur secondaire à utiliser pour cette organisation"
 
 msgid "The background color for the site"
 msgstr "La couleur de fond du site"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Définir jusqu'à 6 couleurs pour le style des graphiques. Séparer les couleurs par une virgule."
 
 #, fuzzy
 #| msgid "Up to 6 colors for styling charts, use comma between colors"
@@ -2063,15 +2091,15 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Quelque chose pour déclencher les localisations"
 
-#, fuzzy
+#, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
 #~| "                  "
 #~ msgid ""
 #~ "\n"
-#~ "                 %(responded)s responded out of %(polled)s polled\n"
-#~ "               "
+#~ "              %(responded)s responded out of %(polled)s polled\n"
+#~ "            "
 #~ msgstr ""
 #~ "\n"
 #~ "                    %(responded)s répondants sur %(polled)s interrogés\n"

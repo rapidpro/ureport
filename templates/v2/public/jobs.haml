@@ -6,7 +6,7 @@
 - block content
   - load_qbs request.org 'jobs'
   .border-t.bg-grid
-    .max-w-page-mx-auto.p-home
+    .max-w-page.mx-auto.p-home
       .border.p-home.bg-white
         .block.mt-4.font-bold.text-5xl
           -trans "Jobs"
@@ -24,20 +24,20 @@
                 -if source.source_type == 'F'
                   .overflow-scroll.mt-12(class="w-1/3" style="max-height:45rem;")
 
-                    .text-3xl.px-8
+                    .text-3xl.pr-8
                       {{ source.title|upper }}
-                    .text-xl.p-8
+                    .text-xl.pr-8
                       .fb-like-box{data-href:'{{ source.source_url }}', data-width:"400", data-height:"600", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
 
                 -elif source.source_type == 'R'
                   .overflow-scroll.mt-12(class="w-1/3" style="max-height:45rem;")
-                    .text-3xl.px-8
+                    .text-3xl
                       {{ source.title|upper }}
-                    .px-8
+                    .pr-8
                       %a.text-dark-blue.social-link{href:"{{ source.get_return_page }}"}
                         - trans "Visit"
                         {{ source.title|title }}
-                    .p-8
+                    .py-8.pr-8
                       - for entry in source.get_entries
                         .text-2xl
                           {{ entry.title }}

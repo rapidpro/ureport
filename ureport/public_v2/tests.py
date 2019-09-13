@@ -48,7 +48,7 @@ class PublicTest(UreportTest):
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 46)
+        self.assertEqual(len(response.context["form"].fields), 51)
 
     def test_count(self):
         count_url = reverse("v2.public.count")

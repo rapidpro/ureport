@@ -12,32 +12,36 @@
         .text-xl
           -trans "A sentence that describes how we feel about stories and the human side of things."
 
-      .flex-1.flex-center-y
-        .block.text-right
-          .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded
-            .inline-block.bg-black.border-b.border-white
-              %input.bg-black.search-box(type="text" data-results-id="story-search-results" placeholder="SEARCH" size=14)
-              %a.search-close(href="#")
-                %i.fa.fa-caret-down
+      .flex-center-y(class="md:pl-8")
+        .block.text-right.mt-4(style="width:325px")
+          .bg-black.text-white.text-lg.px-4.py-2.rounded
+            .flex.bg-black.border-b.border-white
+              .flex-1
+                %input.bg-black.search-box(type="text" data-results-id="story-search-results" placeholder="SEARCH" size=14)
+              .flex-none
+                %a.search-close(href="#")
+                  %i.fa.fa-caret-down
 
         .relative
-          .absolute.right-0.bg-white.search-results.h-64.border(id="story-search-results" style="z-index:100000")
+          .absolute.right-0.bg-white.search-results.h-64.border(id="story-search-results" style="z-index:100000;width:325px;")
             .no-results.p-4.italic.hidden
               -trans "No results found"
 
             - for category in categories
               - if category.story_set.all
-                .block.py-4.bg-white.search-category
-                  %a.font-bold.px-4.block(href="#")
+                .block.py-1.bg-white.search-category
+                  %a.font-bold.px-2.block(href="#")
                     %i.fa.fa-caret-right.closed.float-left(style="padding-top:2px")
                     %i.fa.fa-caret-down.hidden.open.float-left(style="padding-top:4px")
                     .pl-3
                       {{ category.name }}
                   .category-results
                     - for story in category.story_set.all
-                      %a.block.px-4.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.story_read' story.pk %}" data-search-value="{{ story.title|addslashes }}")
-                        .ml-4
+                      %a.block.px-4.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.story_read' story.pk %}" data-search-value="{{ story.title|addslashes }} {{ story.created_on|date:\"F\" }} {{ story.created_on|date:\"Y\" }}")
+                        .ml-2
                           {{ story.title }}
+                          .inline.text-xs.font-bold
+                            {{ story.created_on|date:"F" }} {{ story.created_on|date:"Y" }}
 
   // first and second stories
   .max-w-page.mx-auto

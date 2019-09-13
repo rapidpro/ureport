@@ -3,10 +3,11 @@
 - load dashblocks thumbnail i18n
 
 -block content
-  .border-t.bg-grid.p-home
-    .border.p-home.bg-white
-      .block.mt-4.font-bold.text-5xl
-        {{ object.title|safe }}
+  .bg-grid.border-t
+    .max-w-page.mx-auto.p-home
+      .border.p-home.bg-white
+        .block.mt-4.font-bold.text-5xl
+          {{ object.title|safe }}
 
-      .block.mt-4
-        {{ object.content|safe }}
+        .block.mt-4
+          {{ object.content|safe }}

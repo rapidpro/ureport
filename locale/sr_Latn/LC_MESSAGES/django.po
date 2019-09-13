@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-11 18:27+0000\n"
+"POT-Creation-Date: 2019-09-13 00:51+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -1331,15 +1331,18 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Rezultati"
 
+msgid "JOIN NOW"
+msgstr ""
+
 msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
 msgid ""
 "\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
 "\n"
-"          "
+"            "
 msgstr ""
 
 msgid "Photos Title"
@@ -1398,8 +1401,8 @@ msgstr "STOPA ODGOVORA"
 #| "                  "
 msgid ""
 "\n"
-"              %(responded)s responded out of %(polled)s polled\n"
-"            "
+"                  %(responded)s responded out of %(polled)s polled\n"
+"                "
 msgstr ""
 "\n"
 "%(responded)sodgovorilo od %(polled)sispitanih"
@@ -1898,6 +1901,34 @@ msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Kratak tekst kojim se posetioci upućuju da se pridruže U-Reportu"
 
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "Primarna boja za ovu postavku"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "Sekundarna boja za ovu postavku"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "Primarna boja za ovu postavku"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "Primarna boja za ovu postavku"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "Sekundarna boja za ovu postavku"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "Do 6 boja za stilizovanje grafika, koristite zarez izmedju boja"
+
 msgid "The color used to draw the text on the join bar"
 msgstr "Boja za pisanje teksta na polju za pridruživanje"
 
@@ -1912,9 +1943,6 @@ msgstr "Sekundarna boja za ovu postavku"
 
 msgid "The background color for the site"
 msgstr "Pozadinska boja ove stranice"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Do 6 boja za stilizovanje grafika, koristite zarez izmedju boja"
 
 #, fuzzy
 #| msgid "Up to 6 colors for styling charts, use comma between colors"
@@ -2032,15 +2060,15 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
 
-#, fuzzy
+#, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
 #~| "                  "
 #~ msgid ""
 #~ "\n"
-#~ "                 %(responded)s responded out of %(polled)s polled\n"
-#~ "               "
+#~ "              %(responded)s responded out of %(polled)s polled\n"
+#~ "            "
 #~ msgstr ""
 #~ "\n"
 #~ "%(responded)sodgovorilo od %(polled)sispitanih"

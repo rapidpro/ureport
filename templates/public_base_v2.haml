@@ -36,48 +36,56 @@
 
     :css
       .bg-dark1 {
-        background: #439932;
+        background: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
       }
 
       .border-dark1 {
-        border-color: #439932;
+        border-color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
       }
 
       .bg-dark2 {
-        background: #1751af;
+        background: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
       }
 
       .border-dark2 {
-        border-color: #1751af;
+        border-color: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
       }
 
       .bg-dark3 {
-        background: #5eb3e0;
+        background: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
       }
 
       .border-dark3 {
-        border-color: #5eb3e0;
+        border-color: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
       }
 
       .border-light1 {
-        border-color: #FFD100;
+        border-color: {{ org|config:'color_light1'|default:'#FFD100' }};
       }
 
       .bg-light1 {
-        background: #FFD100;
+        background: {{ org|config:'color_light1'|default:'#FFD100' }};
       }
 
       .text-light1 {
-        color: #FFD100;
+        color: {{ org|config:'color_light1'|default:'#FFD100' }};
       }
 
-      .border-light1 {
-        border-color: #1751af;
+      .bg-light2 {
+        background: {{ org|config:'color_light2'|default:'#5eb3e0' }};
       }
 
 
     :javascript
-      orgColors = ["#439932", "#1751af", "#5eb3e0"];
+      {% if org|config:"colors" %}
+      var orgColors = {{org|config:"colors"}};
+      {% else %}
+      var orgColors = [
+        "{{ org|config:'primary_color'|default:'#439932' }}",
+        "{{ org|config:'secondary_color'|default:'#1751af' }}",
+        "{{ org|config:'tertiary_color'|default:'#5eb3e0' }}"
+      ];
+      {% endif %}
 
   %body.font-sans.relative
     #fb-root
@@ -381,7 +389,7 @@
             .font-bold.text-3xl.leading-tight.mb-8
               -trans "See by the numbers how we are engaging youth voices for positive social change."
 
-            %a.btn.bg-dark3.text-white.inline-block(href="{% url 'v2.public.ureporters' %}")
+            %a.btn.bg-light2.text-white.inline-block(href="{% url 'v2.public.ureporters' %}")
               -trans "EXPLORE ENGAGEMENT"
 
     // footer navbar
