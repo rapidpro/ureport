@@ -81,32 +81,38 @@
             .cursor-pointer.border-white.pill-black.tab-button-time-filter(class="{% if forloop.first %}pill-first{% elif forloop.last %}selected pill-last{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
               {{time_filter.label}}
 
-  .max-w-page.mx-auto.bg-dark-blue.p-home.text-white.font-bold.border-b.border-white
+  .max-w-page.mx-auto.bg-dark-blue.p-home.text-white.border-b.border-white
     - for time_filter in data_time_filters
       .engagemment-content.hover-parent(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
         - for metric in data_metrics
           .engagement-graph-block.hover-parent.block.mt-16.p-2.bg-dark-blue(class="md:flex" style="min-height:30rem; max-height:45rem;" data-aos="fade" id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
             .hover-parent(class="md:w-2/5")
               .bg-light1.h-1.w-16.mb-4
-              .text-3xl.mb-4
+              .text-3xl.mb-4.font-bold
                 {{ metric.title }}
 
-              .text-black.text-2xs.flex.mb-6
+              .text-xs.flex.mb-6.text-black.random-pill(data-page="engagement")
                 - for segment in data_segments
                   - if forloop.first
-                    .cursor-pointer.pill-first.pill-dark-blue-inverted.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
-                      {{segment.label}}
+                    %a.pill-first.pill-dark-blue-inverted.segment-pill(href='#' data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
+                      {{segment.label|upper}}
                   - elif forloop.last
-                    .cursor-pointer.pill-last.pill-dark-blue-inverted.tab-button-graph-switch.location-dropdown.relative(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
-                      .dropdown-butto
-                        {{segment.label}}
-                      .dropdown-content.hidden.absolute.shadow.bg-white.text-gray-800.h-64.left-0.top-auto.overflow-y-scroll.mt-2(data-html2canvas-ignore=true)
-                        - for state in states
-                          .state-selector.px-4.py-2(data-location-id='{{state.name}}' class="hover:bg-gray-400 hover:text-white {% if forloop.counter < 4 %}is-selected bg-gray-800 text-white{% endif %}")
-                            {{state.name}}
+                    %a.pill-last.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-no-wrap(href="#" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
+                      {{segment.label|upper}}
+                      %i.fa.fa-caret-down
+                      .state-dropdown.absolute.z-50(id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" style="margin-left:-1px" data-html2canvas-ignore=true)
+                        .border.border-gray-400.text-left.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;")
+                          .pt-1.text-black
+                            - for state in states
+                              .pl-2.pr-4.py-1.state-segment(data-state='{{state.id}}' class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="engagement"  data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
+                                .checkbox.float-left
+                                  %i.fa.fa-check
+                                .ml-4.whitespace-no-wrap
+                                  {{ state.name }}
+
                   - else
-                    .cursor-pointer.pill.pill-dark-blue-inverted.border-gray-400.tab-button-graph-switch(data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
-                      {{segment.label}}
+                    %a.pill.pill-dark-blue-inverted.segment-pill(href="#"  data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
+                      {{segment.label|upper}}
 
               .share.flex-none.mb-4.flex-center-y.hover-show
                 .block
@@ -125,218 +131,6 @@
               .engagement-graph-tabs(id="graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
                 - for segment in data_segments
                   .engagement-graph.hidden(id="graph-tabs-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
-                    .has-graph(id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
-
-
-- block script
-  {{ block.super }}
-
-  :javascript
-    $(function(){
-      function drawGraph(metricSlug, segmentType, timeFilter){
-
-        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
-        var chartType = "column";
-        if (segmentType == 'all') {
-          chartType = "spline";
-        }
-        var results = Window.UreportEngagementStats[dataSlug];
-        if (results == undefined) {
-          setTimeout(drawGraph(metricSlug, segmentType, timeFilter), 5000);
-          return
-        }
-
-        var colors = ["#E3002B", "#009316", "#FED100", "#3FB5E5", "#FF8200", "#000000"];
-        var locationIds = $("#location-pill-" + dataSlug).children().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
-        if (segmentType == 'location'){
-          var series = [];
-          for (i=0; i<results.length; i++){
-            result = results[i];
-            if(locationIds.includes(result.name)) {
-              result.color = colors[series.length % colors.length]
-              series.push(result);
-            }
-          }
-        } else {
-          var series = results
-        }
-
-        $('#engagement-graph-' + dataSlug).highcharts({
-          chart: {
-              type: chartType,
-              style: {
-                fontFamily: "Montserrat"
-              }
-          },
-          title: {
-              text: null
-          },
-          legend: {
-              itemStyle: {
-                color: "#DDD"
-              }
-          },
-          xAxis: {
-              type: 'datetime',
-              dateTimeLabelFormats: {
-                month: '%b %Y',
-                year: '%Y'
-              },
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              },
-          },
-          yAxis: {
-              title: {
-                  text: null,
-                  style: {
-                    color: "#DDD"
-                  }
-              },
-              min: 0,
-              labels: {
-                style: {
-                  color: "#DDD"
-                }
-              }
-          },
-          tooltip: {
-              headerFormat: '<b>{series.name}</b><br>',
-              pointFormat: '{point.x: %b %Y}: {point.y}'
-          },
-          plotOptions: {
-              spline: {
-                  marker: {
-                      enabled: true
-                  }
-              }
-          },
-          credits: {
-            enabled: false
-          },
-          colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
-          series : series
-        });
-      }
-
-      $(".tab-button-time-filter").on("click", function(event) {
-        event.stopPropagation();
-        $(this).siblings().removeClass("selected")
-        $(this).addClass("selected");
-        var timeFilter = $(this).attr("data-time-filter");
-        $(".engagemment-content").addClass("hidden");
-        $("#tab-content-block-" + timeFilter).removeClass("hidden");
-        $("#tab-content-block-" + timeFilter).children().children().children().children(".selected.tab-button-graph-switch").each(function() {
-          $(this).click();
-        });
-      });
-
-      $(".state-selector").on('click', function(event) {
-        event.stopPropagation();
-        var locationIds = $(this).parent().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();
-
-        if(locationIds.length < 5) {
-          $(this).toggleClass('is-selected bg-gray-800 text-white');
-        } else if ($(this).hasClass('is-selected')) {
-          $(this).removeClass('is-selected bg-gray-800 text-white');
-        } else {
-          return
-        }
-        var dataDiv = $(this).parent().parent();
-
-        var metricSlug = dataDiv.attr("data-metric-slug");
-        var segmentType = dataDiv.attr("data-segment-type");
-        var timeFilter = dataDiv.attr("data-time-filter");
-
-        drawGraph(metricSlug, segmentType, timeFilter);
-
-      });
-
-
-      $(".pill-dark-blue-inverted").parent().each(function() {
-        var chosen = $($(this).children()[Math.floor(Math.random() * 4)])
-        chosen.addClass("selected");
-        var metricSlug = chosen.attr("data-metric-slug");
-        var segmentType = chosen.attr("data-segment-type");
-        var timeFilter = chosen.attr("data-time-filter");
-        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
-        setTimeout(function(){ 
-          drawGraph(metricSlug, segmentType, timeFilter);
-          $("#graph-tabs-" + dataSlug).removeClass("hidden");
-         }, 1000);
-      });
-
-      $(".engagement-graph").each(function() {
-        var graphDiv = $(this).children(".has-graph");
-        var metricSlug = graphDiv.attr("data-metric-slug");
-        var segmentType = graphDiv.attr("data-segment-type");
-        var timeFilter = graphDiv.attr("data-time-filter");
-        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
-
-        var params = {"metric": metricSlug, "segment": segmentType, "filter": timeFilter};
-        $.ajax({url:'/v2/engagement_data/?results_params=' + encodeURIComponent(JSON.stringify(params)), dataType: "json"}).done(function(result){
-          if(!result){
-            return;
-          }
-          if(!Window.UreportEngagementStats) {
-            Window.UreportEngagementStats = {}
-          }
-
-          var colors = ['#E3002B', '#000000', '#FFD100', '#40B5E5', '#FF8200', '#009917'];
-          if(segmentType=="all"){
-            colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'];
-          }
-
-          if(segmentType=="gender"){
-            colors = ['#40B5E5', '#FF8200', '#019B17'];
-          }
-
-          var serverData = result;
-          var series = [];
-          for (i=0; i<serverData.length; i++) {
-            data = serverData[i]['data']
-            cleanedData = []
-            Object.keys(data).forEach(function(key){
-              cleanedData.push([Date.parse(key), data[key]]);
-            })
-            cleanedData.sort(function(a,b){return a[0] - b[0];});
-            series.push({name: serverData[i]['name'], data: cleanedData, color: colors[i % colors.length]})
-          }
-
-          Window.UreportEngagementStats[dataSlug] = series
-          drawGraph(metricSlug, segmentType, timeFilter);
-        });
-      });
-    
-      $(".tab-button-graph-switch").on("click", function(event) {
-        var metricSlug = $(this).attr("data-metric-slug");
-        var segmentType = $(this).attr("data-segment-type");
-        var timeFilter = $(this).attr("data-time-filter");
-        var dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter;
-        event.stopPropagation();
-
-        $(this).siblings().removeClass("selected")
-        $(this).addClass("selected");
-
-        if($(this).hasClass("location-dropdown")) {
-
-          if($(this).children(".dropdown-content").hasClass("hidden")) {
-            $(".dropdown-content").addClass("hidden");
-            $(this).children(".dropdown-content").removeClass("hidden");
-          } else {
-            $(this).children(".dropdown-content").addClass("hidden");
-          }
-        } else {
-          $(this).siblings().children(".dropdown-content").addClass("hidden")
-        }
-
-        $(".engagement-graph-tabs #graph-tabs-" + dataSlug).siblings().addClass("hidden");
-        $("#graph-tabs-" + dataSlug).removeClass("hidden");
-
-        drawGraph(metricSlug, segmentType, timeFilter);
-      });
-    });
+                    .engagement-chart.has-graph(id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")
 
 
