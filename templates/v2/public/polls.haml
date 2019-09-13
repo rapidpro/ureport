@@ -49,7 +49,7 @@
           .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white
             {{ latest_poll.category.name }}
 
-          .font-bold.leading-tight(class="{% if latest_poll.title|length < 50 %}text-5xl{% else %}text-4xl{% endif %}")
+          .font-bold.leading-tight(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
             {{ latest_poll.title }}
 
           .block
