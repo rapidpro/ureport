@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-11 18:27+0000\n"
+"POT-Creation-Date: 2019-09-13 00:51+0000\n"
 "PO-Revision-Date: 2018-08-22 11:40+0000\n"
 "Last-Translator: Jahongir Abdurahmonov <jabdurahmonov@unicef.org>\n"
 "Language-Team: Uzbek (http://www.transifex.com/rapidpro/ureport/language/uz/)\n"
@@ -1299,15 +1299,18 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Natijalar"
 
+msgid "JOIN NOW"
+msgstr ""
+
 msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
 msgid ""
 "\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
 "\n"
-"          "
+"            "
 msgstr ""
 
 msgid "Photos Title"
@@ -1366,8 +1369,8 @@ msgstr "JAVOB BERGANLAR ULUSHI"
 #| "                  "
 msgid ""
 "\n"
-"              %(responded)s responded out of %(polled)s polled\n"
-"            "
+"                  %(responded)s responded out of %(polled)s polled\n"
+"                "
 msgstr ""
 "\n"
 "%(responded)s berilgan savollardan %(polled)s ga javob berdilar\n"
@@ -1853,6 +1856,34 @@ msgstr "Foydalanuvchilar mahalliy darajada U-Report bilan bog'lanish uchun ishla
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Tashrif buyuruvchilarni U-Reportga qo'shilishga yo'naltiradigan qisqa matn"
 
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan birlamchi rang"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "Bezash rejasida 6 ta ranggacha ishlatish mumkin, ranglar orasini vergul bilan ajrating"
+
 msgid "The color used to draw the text on the join bar"
 msgstr "Qo'shilish satridagi matnni yozish uchun ishlatiladigan rang"
 
@@ -1867,9 +1898,6 @@ msgstr "Ushbu tashkilotni bezash uchun ishlatiladigan ikkilamchi rang"
 
 msgid "The background color for the site"
 msgstr "Sahifa uchun orqa fon rangi"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Bezash rejasida 6 ta ranggacha ishlatish mumkin, ranglar orasini vergul bilan ajrating"
 
 #, fuzzy
 #| msgid "Up to 6 colors for styling charts, use comma between colors"
@@ -1987,15 +2015,15 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
 
-#, fuzzy
+#, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
 #~| "                  "
 #~ msgid ""
 #~ "\n"
-#~ "                 %(responded)s responded out of %(polled)s polled\n"
-#~ "               "
+#~ "              %(responded)s responded out of %(polled)s polled\n"
+#~ "            "
 #~ msgstr ""
 #~ "\n"
 #~ "%(responded)s berilgan savollardan %(polled)s ga javob berdilar\n"

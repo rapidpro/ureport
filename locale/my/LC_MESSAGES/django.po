@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-11 18:27+0000\n"
+"POT-Creation-Date: 2019-09-13 00:51+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -1264,15 +1264,18 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "ရလဒ္မ်ား"
 
+msgid "JOIN NOW"
+msgstr ""
+
 msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
 msgid ""
 "\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
 "\n"
-"          "
+"            "
 msgstr ""
 
 msgid "Photos Title"
@@ -1327,8 +1330,8 @@ msgstr "တုံ႕ံျပန္မႈႏွဳန္း"
 #, python-format
 msgid ""
 "\n"
-"              %(responded)s responded out of %(polled)s polled\n"
-"            "
+"                  %(responded)s responded out of %(polled)s polled\n"
+"                "
 msgstr ""
 
 msgid "ALL"
@@ -1777,6 +1780,34 @@ msgstr "U-Report ကိုဆက္သြယ္ရန္ အသံုးျပ�
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "U-Report တြင္ပါ၀င္မည့္သူမ်ားကို လမ္းညႊန္ရန္ စာသားအတို"
 
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "သည္အဖြဲ႕အစည္းအားျခယ္မွဳန္းထားေသာ မူလအေရာင္"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "သည္အဖြဲ႕အစည္းအား ျခယ္သထားေသာ ဒုတိယအေရာင္"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "သည္အဖြဲ႕အစည္းအားျခယ္မွဳန္းထားေသာ မူလအေရာင္"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "သည္အဖြဲ႕အစည္းအားျခယ္မွဳန္းထားေသာ မူလအေရာင္"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "သည္အဖြဲ႕အစည္းအား ျခယ္သထားေသာ ဒုတိယအေရာင္"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "styling chartမ်ားအတြက္ အေရာင္ ၆မ်ိဳး၊ အေရာင္မ်ားၾကားတြင္ comma သံုးေပးရန္"
+
 msgid "The color used to draw the text on the join bar"
 msgstr "join စာသားတြင္ အသံုးျပဳမည့္အေရာင္"
 
@@ -1791,9 +1822,6 @@ msgstr "သည္အဖြဲ႕အစည္းအား ျခယ္သထာ�
 
 msgid "The background color for the site"
 msgstr "ယခု site ၏ေနာက္ခံအေရာင္"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "styling chartမ်ားအတြက္ အေရာင္ ၆မ်ိဳး၊ အေရာင္မ်ားၾကားတြင္ comma သံုးေပးရန္"
 
 #, fuzzy
 #| msgid "Up to 6 colors for styling charts, use comma between colors"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-11 18:27+0000\n"
+"POT-Creation-Date: 2019-09-13 00:51+0000\n"
 "PO-Revision-Date: 2019-01-28 17:20+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Romanian (http://www.transifex.com/rapidpro/ureport/language/ro/)\n"
@@ -1322,15 +1322,18 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Rezultate"
 
+msgid "JOIN NOW"
+msgstr ""
+
 msgid "We are all a part of a global platform changing the lives of young people worldwide."
 msgstr ""
 
 msgid ""
 "\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
-"            We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
+"              We are all a part of a global platform changing the lives of young people worldwide.\n"
 "\n"
-"          "
+"            "
 msgstr ""
 
 msgid "Photos Title"
@@ -1389,8 +1392,8 @@ msgstr "RATA DE RĂSPUNS"
 #| "                  "
 msgid ""
 "\n"
-"              %(responded)s responded out of %(polled)s polled\n"
-"            "
+"                  %(responded)s responded out of %(polled)s polled\n"
+"                "
 msgstr ""
 "\n"
 "%(responded)s au răspuns din %(polled)s chestionați"
@@ -1890,6 +1893,34 @@ msgstr "Numărul scurt pe care utilizatorii îl vor folosi pentru a contacta U-R
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Textul scurt care va fi utilizat pentru a direcționa vizitatorii să se alăture la U-Report"
 
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "Culoarea primară de stilizare pentru această organizație"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "Culoarea secundară de stilizare pentru această organizație"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "Culoarea primară de stilizare pentru această organizație"
+
+#, fuzzy
+#| msgid "The primary color for styling for this organization"
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "Culoarea primară de stilizare pentru această organizație"
+
+#, fuzzy
+#| msgid "The secondary color for styling for this organization"
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "Culoarea secundară de stilizare pentru această organizație"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "Până la 6 culori pentru stilizarea diagramelor, a se separa culorile prin virgulă"
+
 msgid "The color used to draw the text on the join bar"
 msgstr "Culoarea textului de pe bara „Alătură-te”"
 
@@ -1904,9 +1935,6 @@ msgstr "Culoarea secundară de stilizare pentru această organizație"
 
 msgid "The background color for the site"
 msgstr "Culoarea fundalului pentru site"
-
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Până la 6 culori pentru stilizarea diagramelor, a se separa culorile prin virgulă"
 
 #, fuzzy
 #| msgid "Up to 6 colors for styling charts, use comma between colors"
@@ -2024,15 +2052,15 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
 
-#, fuzzy
+#, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
 #~| "                  "
 #~ msgid ""
 #~ "\n"
-#~ "                 %(responded)s responded out of %(polled)s polled\n"
-#~ "               "
+#~ "              %(responded)s responded out of %(polled)s polled\n"
+#~ "            "
 #~ msgstr ""
 #~ "\n"
 #~ "%(responded)s au răspuns din %(polled)s chestionați"
