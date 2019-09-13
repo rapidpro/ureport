@@ -241,6 +241,13 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="whatsapp_number",
+        field=dict(
+            help_text=_("The whatapp number that users will use to contact U-Report if you have one"),
+            label="Whatapp Number",
+        ),
+    ),
+    dict(
         name="join_text",
         field=dict(
             help_text=_("The short text used to direct visitors to join U-Report"), label="Join Text", required=False
