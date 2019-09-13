@@ -141,6 +141,10 @@
           chartType = "spline";
         }
         var results = Window.UreportEngagementStats[dataSlug];
+        if (results == undefined) {
+          setTimeout(drawGraph(metricSlug, segmentType, timeFilter), 5000);
+          return
+        }
 
         var colors = ["#E3002B", "#009316", "#FED100", "#3FB5E5", "#FF8200", "#000000"];
         var locationIds = $("#location-pill-" + dataSlug).children().children('.state-selector.is-selected').map(function() { return $(this).attr('data-location-id')}).get();

@@ -173,7 +173,7 @@ $(->
   
 
         # we are displaying the districts of a state, load the geojson for it
-        boundaryUrl = '/boundaries/'
+        boundaryUrl = '/v2/boundaries/'
         if boundaryId
           boundaryUrl += boundaryId + '/'
   
@@ -218,7 +218,7 @@ $(->
     map
 
   # fetch our top level states
-  $.ajax({url:'/boundaries/', dataType: "json"}).done((states) ->
+  $.ajax({url:'/v2/boundaries/', dataType: "json"}).done((states) ->
     # now that we have states, initialize each map
     $(".map").each(->
       url = $(this).data("map-url")
