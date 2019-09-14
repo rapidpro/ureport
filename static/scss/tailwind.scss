@@ -56,6 +56,20 @@ html {
   }
 }
 
+.social-media-block-tab {
+  transition: 2s;
+
+  -webkit-transition:background-color 2s ease-in-out;
+  -moz-transition:background-color 2s ease-in-out;
+  transition:background-color 2s ease-in-out;
+  
+  @apply bg-white text-black;
+
+  &.open {
+    @apply text-white bg-black;
+  }
+}
+
 // flags in our menu
 .flag {
   width: 80px;

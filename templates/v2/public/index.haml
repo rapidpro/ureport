@@ -86,7 +86,15 @@
       .flex-1
         .bg-white.p-home
           .block.w-full.h-full
-            .flex.justify-center.relative.social-media-blocks.mb-4(style="min-height:550px")
+            .flex.justify-center.py-2.social-media-block-tabs
+              -if org|config:"facebook_page_url"
+                %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab.mr-2(class='hover:text-white hover:bg-black {% if org|config:"twitter_handle" %}open{% endif %}')
+                  %i.fa.fa-facebook
+              -if org|config:"twitter_handle"
+                %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab(class="hover:text-white hover:bg-black")
+                  %i.fa.fa-twitter
+
+            .flex.justify-center.relative.social-media-blocks.mb-4(style="min-height:500px; max-height:520px")
               -if org|config:"facebook_page_url"
                 .block.absolute.social-media-block(class='{% if org|config:"twitter_handle" %}open{% endif %}')
                   .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"600", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
@@ -94,7 +102,7 @@
                 .block.absolute.social-media-block
                   %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
 
-                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"600px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"580px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
   - if stories
     // featured-story-full
@@ -212,6 +220,7 @@
       setInterval(function() {
         if($(".social-media-blocks").children().length > 1) {
           $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
+          $(".social-media-block-tabs").children().toggleClass("open", 1000, "easeOutSine");
         }
       }, 15000)
     });
