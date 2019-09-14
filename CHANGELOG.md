@@ -1,3 +1,7 @@
+v1.1.19
+----------
+ * Add social media tab icons
+
 v1.1.18
 ----------
  * Align text in the left boxes with the left angle applied too
