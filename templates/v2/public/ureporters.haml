@@ -10,7 +10,7 @@
           -trans "Engagement"
 
       .flex-1.flex-center-y
-        .text-xl.text-right(class="md:pl-12")
+        .text-xl(class="md:pl-12 ltr:text-right rtl:text-left")
           {{ org|config:"engagement_description"|default:""}}
 
   .max-w-page.mx-auto
@@ -20,7 +20,7 @@
           -trans "OVERALL STATISTICS"
 
         .text-white.font-light.mt-12
-          .inline-block.pr-8.border-r.border-white
+          .inline-block.border-white(class="ltr:pr-8 ltr:border-r rtl:border-l rtl:pl-8")
             .text-5xl.leading-none
               {{org.get_reporters_count|intcomma}}
             .text-xs.font-bold
@@ -29,7 +29,7 @@
                 +{{org.get_signup_rate|floatformat}}%
                 -trans "THIS YEAR"
 
-          .inline-block.pl-8
+          .inline-block(class="ltr:pl-8 rtl:pr-8")
             .text-5xl.leading-none
               {{average_response_rate|floatformat}} %
             .text-xs.font-bold
@@ -37,7 +37,7 @@
 
         .mt-4.flex.mb-8(class="md:mt-12 md:mb-0")
           .flex-none.mr-8
-            .text-white.text-center.inline-block.pr-4.border-r.border-white
+            .text-white.text-center.inline-block.border-white(class="ltr:pr-4 ltr:border-r rtl:border-l rtl:pl-4")
               %img(src="{{ STATIC_URL }}img/gender-male-w.png" width="40")
               .font-bold.text-xl.leading-none.mt-2
                 {{gender_stats.male_percentage}}
@@ -51,7 +51,7 @@
               .text-light1.text-sm.leading-none
                 {{gender_stats.female_count|intcomma}}
             - if org|config:"has_extra_gender"
-              .text-white.text-center.inline-block.px-4.border-l.border-white
+              .text-white.text-center.inline-block.px-4.border-white(class="ltr:border-l rtl:border-r")
                 %img(src="{{ STATIC_URL }}img/gender-other-w.png" width="40")
                 .font-bold.text-xl.leading-none.mt-2
                   {{gender_stats.other_percentage}}
@@ -63,8 +63,8 @@
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
 
-      .flex-1.text-white.bg-dark-blue.vertical-angle
-        .pl-6.pr-home.py-home.text-center
+      .flex-1.text-white.bg-dark-blue(class="{% if is_rtl_org %}{% else %}vertical-angle{% endif %}")
+        .py-home.text-center(class="ltr:pl-6 rtl:pr-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %}")
           .text-sm.font-bold.mb-2
             -trans "U-REPORTERS BY REGION"
           #ureporter-map.h-full.w-full.map.block(data-map-url="/v2/contact_field_results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
@@ -78,7 +78,7 @@
       .flex-center-y
         .text-white.text-xs.flex
           - for time_filter in data_time_filters
-            .cursor-pointer.border-white.pill-black.tab-button-time-filter(class="{% if forloop.first %}pill-first{% elif forloop.last %}selected pill-last{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
+            .cursor-pointer.border-white.pill-black.tab-button-time-filter(class="{% if forloop.first %}{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}{% elif forloop.last %}selected {% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
               {{time_filter.label}}
 
   .max-w-page.mx-auto.bg-dark-blue.p-home.text-white.border-b.border-white
@@ -94,20 +94,20 @@
               .text-xs.flex.mb-6.text-black.random-pill(data-page="engagement")
                 - for segment in data_segments
                   - if forloop.first
-                    %a.pill-first.pill-dark-blue-inverted.segment-pill(href='#' data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
+                    %a.pill-dark-blue-inverted.segment-pill(href='#' data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}")>
                       {{segment.label|upper}}
                   - elif forloop.last
-                    %a.pill-last.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-no-wrap(href="#" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
+                    %a.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-no-wrap(href="#" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
                       {{segment.label|upper}}
                       %i.fa.fa-caret-down
                       .state-dropdown.absolute.z-50(id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" style="margin-left:-1px" data-html2canvas-ignore=true)
-                        .border.border-gray-400.text-left.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;")
+                        .border.border-gray-400.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="ltr:text-left rtl:text-right")
                           .pt-1.text-black
                             - for state in states
-                              .pl-2.pr-4.py-1.state-segment(data-state='{{state.id}}' class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="engagement"  data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
-                                .checkbox.float-left
+                              .py-1.state-segment(data-state='{{state.id}}' class="ltr:pl-2 ltr:pr-4 rtl:pr-2 rtl:pl-4  hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="engagement"  data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
+                                .checkbox(class="ltr:float-left rtl:float-right")
                                   %i.fa.fa-check
-                                .ml-4.whitespace-no-wrap
+                                .whitespace-no-wrap(class="ltr:ml-4 rtl:mr-4")
                                   {{ state.name }}
 
                   - else

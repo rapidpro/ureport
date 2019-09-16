@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 - load static compress dashblocks dashorgs thumbnail ureport smartmin i18n
 - load_qbs request.org 'additional_menu'
-%html(lang="en")
+%html(dir="{% if is_rtl_org %}rtl{% else %}ltr{% endif %}")
 
   %head
     %meta(charset="UTF-8")
@@ -121,7 +121,7 @@
 
     // countries (off screen to start)
     #countries.bg-black.text-white
-      %a#countries-closer.float-right.p-4(href="javascript:void(0)")
+      %a#countries-closer.p-4(href="javascript:void(0)" class="rtl:float-left ltr:float-right")
         %i.fa.fa-close.text-3xl
 
       .flex.p-home
@@ -143,7 +143,7 @@
                 - trans "Admin"
           - if request.user.is_superuser
             %li
-              .dropdown.relative
+              .dropdown.relative.z-10
                 %a.admin-menu.dropdown-button(href="#" class="hover:text-gray-800 hover:bg-gray-300")
                   - trans "Configuration"
                   %i.fa.fa-caret-down
@@ -177,7 +177,7 @@
 
           - if request.user.is_superuser or org_perms.categories.category_list
             %li
-              .dropdown.relative
+              .dropdown.relative.z-10
                 %a.admin-menu.dropdown-button(href="#" class="hover:text-gray-800 hover:bg-gray-300")
                   - trans "Categories"
                   %i.fa.fa-caret-down
@@ -191,7 +191,7 @@
                       - trans "Category Images"
 
           %li
-            .dropdown.relative
+            .dropdown.relative.z-10
               %a.inline-block.px-6.py-4.dropdown-button(href="#" class="hover:text-gray-800 hover:bg-gray-300")
                 - trans "Content"
                 %i.fa.fa-caret-down
@@ -247,7 +247,7 @@
                     - trans "Custom pages"
 
           - block login
-            %li.ml-auto
+            %li(class="{% if is_rtl_org %}mr-auto{% else %}ml-auto{% endif %}")
               - if request.user and request.user.is_authenticated
                 %a.admin-menu(href="{% url 'users.user_profile' request.user.pk %}"  class="hover:text-gray-800 hover:bg-gray-300")
                   {{ request.user.username }}
@@ -384,8 +384,8 @@
         .div(class="md:w-1/3")
           %img(src="{{STATIC_URL}}img/blue_u.png")
 
-        .text-right(class="md:w-2/3")
-          .pb-4(class="md:pr-10 md:border-r md:border-gray-500")
+        .(class="md:w-2/3 {% if is_rtl_org %}text-left{% else %}text-right{% endif %}")
+          .pb-4(class="{% if is_rtl_org %}md:pl-10 md:border-l{% else %}md:pr-10 md:border-r{% endif %} md:border-gray-500")
             .font-bold.text-3xl.leading-tight.mb-8
               -if org|config:"engagement_footer_callout"
                 {{ org|config:"engagement_footer_callout"}}
@@ -415,7 +415,7 @@
 
     // footer menu
     %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
-      .li.flex-initial.mr-4.py-menu
+      .li.flex-initial.py-menu(class="rtl:ml-4 ltr:mr-4")
         %a.flex-initial.py-menu(href="{% url 'users.user_login' %}")
           - trans "Login"
 
@@ -427,12 +427,12 @@
 
       .li.flex-grow.flex(class="md:justify-end")
         {% if org|config:"facebook_page_url" %}
-        %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
+        %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="rtl:mr-4 ltr:ml-4")
           %i.fa.fa-facebook
         {% endif %}
 
         {% if org|config:"twitter_handle" %}
-        %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
+        %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="rtl:mr-4 ltr:ml-4")
           %i.fa.fa-twitter
         {% endif %}
 
@@ -443,14 +443,14 @@
       .modal-content.mx-auto.my-40.p-6.border.border-black.bg-white(class="w-3/5")
         .font-bold.text-xl.mb-2.inline-block
           -trans "Export and Share"
-        %i.fa.fa-close.text-xl.float-right.export-modal-close
+        %i.fa.fa-close.text-xl.export-modal-close(class="rtl:float-left ltr:float-right")
     
         .export-modal-progress
           %progress.progress.is-small(max="100")
         .export-modal-content
           .inline-block.mb-4(class="md:w-3/4")
             -trans "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"            
-          .inline-block.float-right.text-right.mb-4(class="md:w-1/4")
+          .inline-block.mb-4(class="md:w-1/4 rtl:float-left rtl:text-left ltr:float-right ltr:text-right  ")
             %a.btn.bg-light1.text-black.inline-block.download-screenshot(href="#")
               Download
           .mt-4.shadow
