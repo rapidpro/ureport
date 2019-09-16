@@ -4,6 +4,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import calendar
 import json
 
+import operator
+from functools import reduce
 import six
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
@@ -375,8 +377,13 @@ class UreportersView(SmartTemplateView):
             dict(time_filter_number=key, label=str(val)) for key, val in PollStats.DATA_TIME_FILTERS.items()
         ]
 
+        backend_options = org.backends.filter(is_active=True).values_list("slug", flat=True)
+        show_maps = reduce(
+            operator.or_, [bool(org.get_config("%s.state_label" % option)) for option in backend_options], False
+        )
+
         context["data_segments"] = [
-            dict(segment_type=key, label=str(val)) for key, val in PollStats.DATA_SEGMENTS.items()
+            dict(segment_type=key, label=str(val)) for key, val in PollStats.DATA_SEGMENTS.items() if key != "location" or show_maps
         ]
 
         context["data_metrics"] = [dict(slug=key, title=str(val)) for key, val in PollStats.DATA_METRICS.items()]

@@ -63,12 +63,13 @@
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
 
-      .flex-1.text-white.bg-dark-blue.vertical-angle
-        .pl-6.pr-home.py-home.text-center
-          .text-sm.font-bold.mb-2
-            -trans "U-REPORTERS BY REGION"
-          #ureporter-map.h-full.w-full.map.block(data-map-url="/v2/contact_field_results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
-          #map-info.relative.h-full.w-full.mt-2.flex.justify-center
+      -if show_maps
+        .flex-1.text-white.bg-dark-blue.vertical-angle
+          .pl-6.pr-home.py-home.text-center
+            .text-sm.font-bold.mb-2
+              -trans "U-REPORTERS BY REGION"
+            #ureporter-map.h-full.w-full.map.block(data-map-url="/v2/contact_field_results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
+            #map-info.relative.h-full.w-full.mt-2.flex.justify-center
   
   .border-t.border-b.bg-dark-gray.sticky.top-0.z-50
     .max-w-page.mx-auto.px-home.py-4.border-gray-800(class="md:flex md:justify-between")
@@ -97,19 +98,22 @@
                     %a.pill-first.pill-dark-blue-inverted.segment-pill(href='#' data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
                       {{segment.label|upper}}
                   - elif forloop.last
-                    %a.pill-last.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-no-wrap(href="#" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
-                      {{segment.label|upper}}
-                      %i.fa.fa-caret-down
-                      .state-dropdown.absolute.z-50(id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" style="margin-left:-1px" data-html2canvas-ignore=true)
-                        .border.border-gray-400.text-left.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;")
-                          .pt-1.text-black
-                            - for state in states
-                              .pl-2.pr-4.py-1.state-segment(data-state='{{state.id}}' class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="engagement"  data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
-                                .checkbox.float-left
-                                  %i.fa.fa-check
-                                .ml-4.whitespace-no-wrap
-                                  {{ state.name }}
-
+                    -if show_maps
+                      %a.pill-last.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-no-wrap(href="#" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
+                        {{segment.label|upper}}
+                        %i.fa.fa-caret-down
+                        .state-dropdown.absolute.z-50(id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" style="margin-left:-1px" data-html2canvas-ignore=true)
+                          .border.border-gray-400.text-left.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;")
+                            .pt-1.text-black
+                              - for state in states
+                                .pl-2.pr-4.py-1.state-segment(data-state='{{state.id}}' class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="engagement"  data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
+                                  .checkbox.float-left
+                                    %i.fa.fa-check
+                                  .ml-4.whitespace-no-wrap
+                                    {{ state.name }}
+                    -else
+                      %a.pill-last.pill-dark-blue-inverted.segment-pill(href="#"  data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
+                        {{segment.label|upper}}
                   - else
                     %a.pill.pill-dark-blue-inverted.segment-pill(href="#"  data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
                       {{segment.label|upper}}

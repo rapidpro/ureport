@@ -96,13 +96,13 @@
               .relative.w-full(style="height:105px")
                 {{ age_stats|json_script:"age_stats" }}
                 #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats")
-
-      .flex-1.text-black
-        .pl-6.pr-home.py-home.text-center
-          .text-sm.font-bold.mb-2
-            -trans "TOTAL RESPONSES"
-          #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
-          #map-info.relative.h-full.w-full.my-4.flex.justify-center
+      -if show_maps
+        .flex-1.text-black
+          .pl-6.pr-home.py-home.text-center
+            .text-sm.font-bold.mb-2
+              -trans "TOTAL RESPONSES"
+            #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
+            #map-info.relative.h-full.w-full.my-4.flex.justify-center
 
 
     - for question in latest_poll.get_questions
@@ -131,20 +131,21 @@
                     -trans "ALL"
                   %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
                     -trans "AGE"
-                  %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
+                  %a.pill-white.segment-pill(class="{% if not show_maps %}pill-last{% else %}pill{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
                     -trans "GENDER"
-                  %a.pill-last.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions")>
-                    -trans "STATE"
-                    %i.fa.fa-caret-down
-                    .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px" data-html2canvas-ignore=true)
-                      .border.border-gray-400.text-left.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;")
-                        .pt-1.text-black
-                          - for state in states
-                            .pl-2.pr-4.py-1.state-segment(data-state='{{state.id}}' data-click-handler="" data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="opinions")
-                              .checkbox.float-left
-                                %i.fa.fa-check
-                              .ml-4.whitespace-no-wrap
-                                {{ state.name }}
+                  -if show_maps
+                    %a.pill-last.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions")>
+                      -trans "STATE"
+                      %i.fa.fa-caret-down
+                      .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px" data-html2canvas-ignore=true)
+                        .border.border-gray-400.text-left.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;")
+                          .pt-1.text-black
+                            - for state in states
+                              .pl-2.pr-4.py-1.state-segment(data-state='{{state.id}}' data-click-handler="" data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="opinions")
+                                .checkbox.float-left
+                                  %i.fa.fa-check
+                                .ml-4.whitespace-no-wrap
+                                  {{ state.name }}
 
               - else
                 .block
