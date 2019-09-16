@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-13 00:51+0000\n"
+"POT-Creation-Date: 2019-09-16 19:00+0000\n"
 "PO-Revision-Date: 2018-10-25 18:23+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/rapidpro/ureport/language/pt_BR/)\n"
@@ -1264,6 +1264,16 @@ msgid "Want to tell the world about this? Download this image to easily share on
 msgstr ""
 
 #, fuzzy
+#| msgid "polled"
+msgid "Polled"
+msgstr "questionados"
+
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reporters"
+msgstr "U-Reporters"
+
+#, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
 msgstr "LOCALIZAÇÕES"
@@ -1321,54 +1331,16 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Resultados"
 
+msgid "Join U-Report, Your voice matters."
+msgstr ""
+
 msgid "JOIN NOW"
-msgstr ""
-
-msgid "We are all a part of a global platform changing the lives of young people worldwide."
-msgstr ""
-
-msgid ""
-"\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"\n"
-"            "
-msgstr ""
-
-msgid "Photos Title"
-msgstr ""
-
-msgid "This area can be edited when the poll is over to focus additionally on review and learnings."
-msgstr ""
-
-msgid "In just a few easy steps, start here to join other young people and have your voice heard!"
 msgstr ""
 
 msgid "How would you like to join?"
 msgstr ""
 
 msgid "Text"
-msgstr ""
-
-msgid "Text the word Join to 24453 - all U-Report SMSs are free!"
-msgstr ""
-
-msgid "Sign-Up"
-msgstr ""
-
-msgid "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
-msgstr ""
-
-msgid "Get Involved!"
-msgstr ""
-
-msgid "You will now receive messages asking your opinion on meaningful issues!"
-msgstr ""
-
-msgid "To exit U-Report just send stop to 24453"
-msgstr ""
-
-msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
 msgid "No results found"
@@ -1389,10 +1361,7 @@ msgstr "TAXA DE RESPOSTA"
 #| "\n"
 #| "                    %(responded)s responded out of %(polled)s polled\n"
 #| "                  "
-msgid ""
-"\n"
-"                  %(responded)s responded out of %(polled)s polled\n"
-"                "
+msgid "%(responded)s responded out of %(polled)s polled"
 msgstr ""
 "\n"
 "%(responded)s responderam de %(polled)s questionadas"
@@ -1403,24 +1372,18 @@ msgstr ""
 msgid "STATE"
 msgstr ""
 
-msgid "A sentence that describes how we feel about stories and the human side of things."
-msgstr ""
+#, fuzzy
+#| msgid "U-REPORTER STATISTICS"
+msgid "OVERALL STATISTICS"
+msgstr "ESTATÍSTICAS DOS PARTICIPANTES "
 
-msgid "Year at a Glance"
-msgstr ""
-
-msgid "SIGN-UPS"
+msgid "THIS YEAR"
 msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
 msgid "AVG RESPONSE RATE"
 msgstr "TAXA DE RESPOSTA"
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "TOTAL U-REPORTERS IN"
-msgstr "PARTICIPANTES DO U-REPORT NO "
 
 #, fuzzy
 #| msgid "U-REPORTERS IN"
@@ -1882,8 +1845,38 @@ msgstr "Se esta organização deve aparecer na página de destino"
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "O link que os utilizadores usarão para contactar o U-Report a nível local"
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "O link que os utilizadores usarão para contactar o U-Report a nível local"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "O texto usado para direcionar os visitantes a se juntar ao UReport"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr ""
+
+msgid "The title of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the photos section U-Report homepage"
+msgstr ""
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description of the opinions page"
+msgstr "A localização do entrevistado."
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description of the stories page"
+msgstr "A localização do entrevistado."
+
+msgid "The description of the engagement page"
+msgstr ""
+
+msgid "The callout message on the footer engagement section"
+msgstr ""
 
 #, fuzzy
 #| msgid "The primary color for styling for this organization"
@@ -2051,11 +2044,16 @@ msgstr "Algo para disparar localizações"
 #~| "                  "
 #~ msgid ""
 #~ "\n"
-#~ "              %(responded)s responded out of %(polled)s polled\n"
-#~ "            "
+#~ "                  %(responded)s responded out of %(polled)s polled\n"
+#~ "                "
 #~ msgstr ""
 #~ "\n"
 #~ "%(responded)s responderam de %(polled)s questionadas"
+
+#, fuzzy
+#~| msgid "U-REPORTERS IN"
+#~ msgid "TOTAL U-REPORTERS IN"
+#~ msgstr "PARTICIPANTES DO U-REPORT NO "
 
 #, fuzzy
 #~| msgid "Join & Engage"
