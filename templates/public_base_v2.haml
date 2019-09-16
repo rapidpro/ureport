@@ -135,89 +135,85 @@
 
     // admin nav
     - if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
-      .block.hidden(class="md:block")
-        %ul.flex.bg-gray-800.text-white
+      #admin-nav.block.hidden.text-xs.text-gray-400.border-t.border-b.border-black(class="md:block")
+        %ul.flex
           %li
-            %a.inline-block.px-6.py-4(href="{% url 'orgs.org_home' %}" class="hover:text-gray-800 hover:bg-gray-300")
-              {{ org.name }} -
-                - trans "Admin"
+            %a.inline-block.px-1.pl-4.py-2(href="{% url 'orgs.org_home' %}")
+              %i.fa.fa-gear
           - if request.user.is_superuser
             %li
               .dropdown.relative
-                %a.admin-menu.dropdown-button(href="#" class="hover:text-gray-800 hover:bg-gray-300")
+                %a.admin-menu.dropdown-button(href="#")
                   - trans "Configuration"
                   %i.fa.fa-caret-down
+
                 .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'orgs.org_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap(href="{% url 'orgs.org_list' %}")
                     - trans "Orgs"
 
-                  %a.admin-menu.small-link-no-wrap(href="/users/user/" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap(href="/users/user/")
                     - trans "Users"
 
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblocktype_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblocktype_list' %}")
                     - trans "Content Types"
 
                   - if request.user.is_superuser or org_perms.assets.image_list
-                    %a.admin-menu.small-link-no-wrap(href="{% url 'assets.image_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                    %a.admin-menu.small-link-no-wrap(href="{% url 'assets.image_list' %}")
                       - trans "Images"
           %li
-            %a.admin-menu(href="{% url 'dashblocks.dashblock_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+            %a.admin-menu(href="{% url 'dashblocks.dashblock_list' %}")
               - trans "Content"
 
           -if org|config:"is_global"
             -if request.user.is_superuser or perms.countries.countryalias_list
               %li
-                %a.admin-menu(href="{% url 'countries.countryalias_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                %a.admin-menu(href="{% url 'countries.countryalias_list' %}")
                   - trans "Country Aliases"
 
           - if request.user.is_superuser or org_perms.polls.poll_list
             %li
-              %a.admin-menu(href="{% url 'polls.poll_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+              %a.admin-menu(href="{% url 'polls.poll_list' %}")
                 - trans "Polls"
 
           - if request.user.is_superuser or org_perms.categories.category_list
             %li
               .dropdown.relative
-                %a.admin-menu.dropdown-button(href="#" class="hover:text-gray-800 hover:bg-gray-300")
+                %a.admin-menu.dropdown-button(href="#0")
                   - trans "Categories"
                   %i.fa.fa-caret-down
                 .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
                   - if perms.categories.category_list or org_perms.categories.category_list
-                    %a.admin-menu.small-link-no-wrap(href="{% url 'categories.category_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                    %a.admin-menu.small-link-no-wrap(href="{% url 'categories.category_list' %}")
                       - trans "Categories"
 
                   - if perms.categories.categoryimage_list or org_perms.categories.categoryimage_list
-                    %a.admin-menu.small-link-no-wrap(href="{% url 'categories.categoryimage_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                    %a.admin-menu.small-link-no-wrap(href="{% url 'categories.categoryimage_list' %}")
                       - trans "Category Images"
 
           %li
             .dropdown.relative
-              %a.inline-block.px-6.py-4.dropdown-button(href="#" class="hover:text-gray-800 hover:bg-gray-300")
+              %a.admin-menu.dropdown-button(href="#")
                 - trans "Content"
                 %i.fa.fa-caret-down
-              .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
+              .hidden.dropdown-content.absolute.bg-gray-800.z-auto
                 -# - if request.user.is_superuser or org_perms.news.newsitem_list
                 -#   %a.inline-block.px-6.py-4.small-link-no-wrap(href="{% url 'news.newsitem_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
                 -#     - trans "News Items"
                 - if request.user.is_superuser or org_perms.stories.story_list
-                  %hr
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'stories.story_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap.separator(href="{% url 'stories.story_list' %}")
                     - trans "Stories"
                 - if request.user.is_superuser or org_perms.jobs.jobsource_list
-                  %hr
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'jobs.jobsource_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap.separator(href="{% url 'jobs.jobsource_list' %}")
                     - trans "Job Sources"
 
                 - if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=jobs" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=jobs")
                     - trans "Jobs Content"
                 -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
-                  %hr
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=about" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap.separator(href="{% url 'dashblocks.dashblock_list' %}?slug=about")
                     - trans "About Content"
 
-                  %hr
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'news.video_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap.separator(href="{% url 'news.video_list' %}")
                     - trans "Videos"
 
                   -# %hr
@@ -231,32 +227,27 @@
                   -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=terms_conditions" class="hover:text-gray-800 hover:bg-gray-300")
                   -#   - trans "Terms & Conditions"
 
-                  %hr
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=ureporters" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap.separator(href="{% url 'dashblocks.dashblock_list' %}?slug=ureporters")
                     - trans "U-Reporters Content"
 
                   %hr
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=join_engage" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=join_engage")
                     - trans "Join &amp; Engage Content"
 
                   -# %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=join_steps" class="hover:text-gray-800 hover:bg-gray-300")
                   -#   - trans "Join Steps Content"
 
                   %hr
-                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=additional_menu" class="hover:text-gray-800 hover:bg-gray-300")
+                  %a.admin-menu.small-link-no-wrap(href="{% url 'dashblocks.dashblock_list' %}?slug=additional_menu")
                     - trans "Custom pages"
 
           - block login
             %li.ml-auto
-              - if request.user and request.user.is_authenticated
-                %a.admin-menu(href="{% url 'users.user_profile' request.user.pk %}"  class="hover:text-gray-800 hover:bg-gray-300")
-                  {{ request.user.username }}
+              %a.admin-menu(href="{% url 'users.user_profile' request.user.pk %}")
+                %i.fa.fa-user-circle
 
-                %a.admin-menu(href="{% url 'users.user_logout' %}?go=/" class="hover:text-gray-800 hover:bg-gray-300")
-                  - trans "Logout"
-              - else
-                %a.admin-menu(href="{% url 'users.user_login' %}" class="hover:text-gray-800 hover:bg-gray-300")
-                  - trans "Login"
+              %a.admin-menu(href="{% url 'users.user_logout' %}?go=/")
+                %i.fa.fa-sign-out
 
     // desktop header
     .block.hidden(class="md:block")
