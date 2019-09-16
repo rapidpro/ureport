@@ -322,6 +322,7 @@
           .block.text-3xl.mr-4
             %a#mobile-menu-toggler(href="javascript:void(0)")
               %i.fa.fa-bars
+              %i.fa.fa-close.hidden
 
     // mobile menu
     #mobile-menu.absolute.right-0(class="md:hidden")
@@ -554,6 +555,7 @@
       // mobile menu toggling
       $("#mobile-menu-toggler").click(function(){
         $("#mobile-menu").toggleClass("open");
+        $("#mobile-menu-toggler").children().toggleClass("hidden");
       });
 
       // initialize our animations

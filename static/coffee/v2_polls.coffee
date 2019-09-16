@@ -397,7 +397,7 @@ $(->
   $(".random-pill").each((idx, el) -> 
     page = $(this).data("page")
     if page == "engagement"
-      chosen = $($(this).children('.segment-pill')[Math.floor(Math.random() * 4)])
+      chosen = $($(this).children('.segment-pill')[Math.floor(Math.random() * $(this).children('.segment-pill').length)])
       chosen.addClass("selected")
       metricSlug = chosen.attr("data-metric-slug")
       segmentType = chosen.attr("data-segment-type")

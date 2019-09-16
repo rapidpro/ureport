@@ -131,20 +131,21 @@
                     -trans "ALL"
                   %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
                     -trans "AGE"
-                  %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
+                  %a.pill-white.segment-pill(class="{% if not show_maps %}pill-last{% else %}pill{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
                     -trans "GENDER"
-                  %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}")>
-                    -trans "STATE"
-                    %i.fa.fa-caret-down
-                    .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px" data-html2canvas-ignore=true)
-                      .border.border-gray-400.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="rtl:text-right ltr:text-left" )
-                        .pt-1.text-black
-                          - for state in states
-                            .py-1.state-segment(data-state='{{state.id}}' data-click-handler="" data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %} rtl:pr-2 rtl:pl-4 ltr:pl-2 ltr:pr-4" data-page="opinions")
-                              .checkbox(class="rtl:float-right ltr:float-left")
-                                %i.fa.fa-check
-                              .ml-4.whitespace-no-wrap
-                                {{ state.name }}
+                  -if show_maps
+                    %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}")>
+                       -trans "STATE"
+                      %i.fa.fa-caret-down
+                      .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px" data-html2canvas-ignore=true)
+                        .border.border-gray-400.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="rtl:text-right ltr:text-left" )
+                          .pt-1.text-black
+                            - for state in states
+                              .py-1.state-segment(data-state='{{state.id}}' data-click-handler="" data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %} rtl:pr-2 rtl:pl-4 ltr:pl-2 ltr:pr-4" data-page="opinions")
+                                .checkbox(class="rtl:float-right ltr:float-left")
+                                  %i.fa.fa-check
+                                .ml-4.whitespace-no-wrap
+                                  {{ state.name }}
 
               - else
                 .block
