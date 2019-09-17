@@ -1,3 +1,14 @@
+v1.1.25
+----------
+ * Merge pull request #461 from rapidpro/RTL-support
+ * Merge pull request #462 from rapidpro/use-cached-results
+ * Really fix conflicts and merge
+ * Use cached results
+ * Use cached results
+ * fix conflicts and merge
+ * update locales
+ * tweak styles for admin nav
+
 v1.1.19
 ----------
  * Add social media tab icons
