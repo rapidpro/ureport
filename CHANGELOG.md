@@ -1,3 +1,7 @@
+v1.1.27
+----------
+ * Fix admin navbar
+
 v1.1.26
 ----------
  * Quick fixes
