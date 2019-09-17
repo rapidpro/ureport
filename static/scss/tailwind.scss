@@ -455,9 +455,14 @@ html {
 
 // desktop styles
 @media only screen and (min-width: 768px) {
-  .vertical-angle, .vertical-angle-left {
+  .vertical-angle-left, .vertical-angle-left-side {
     -webkit-clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
     clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
+  }
+
+  .vertical-angle-right, .vertical-angle-right-side {
+    -webkit-clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
+    clip-path: polygon(0 0, 95% 0,  calc(100% + 1px) 100%, 0 100%);
   }
 
   .p-home {
@@ -499,7 +504,7 @@ html {
 
 // mobile styles
 @media only screen and (max-width: 768px) {
-  .vertical-angle {
+  .vertical-angle-left, .vertical-angle-right {
     -webkit-clip-path: polygon(0 0, 0 calc(100% + 1px), 100% calc(100% + 1px),100% 30px);
     clip-path: polygon(0 0, 0 calc(100% + 1px), 100% calc(100% + 1px),100% 30px);
   }

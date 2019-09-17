@@ -63,7 +63,7 @@
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
       -if show_maps
-        .flex-1.text-white.bg-dark-blue(class="{% if is_rtl_org %}{% else %}vertical-angle{% endif %}")
+        .flex-1.text-white.bg-dark-blue(class="{% if is_rtl_org %}vertical-angle-right{% else %}vertical-angle-left{% endif %}")
           .py-home.text-center(class="ltr:pl-6 rtl:pr-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %}")
             .text-sm.font-bold.mb-2
               -trans "U-REPORTERS BY REGION"

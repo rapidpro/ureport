@@ -7,7 +7,7 @@
   // latest poll if we have it
   - if latest_poll and latest_poll.get_first_question
     .max-w-page.mx-auto.bg-white
-      .bg-dark1(class="md:flex md:-mx-12 rtl:border-l ltr:border-r {% if is_rtl_org %}md:pr-12{% else %}vertical-angle-left md:pl-12{% endif %}")
+      .bg-dark1(class="md:flex rtl:border-l ltr:border-r {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %}")
         .flex-1.bg-dark1.text-white.p-home
           .font-bold.text-l
             - trans "LATEST OPINION"
@@ -18,7 +18,7 @@
           .font-alt.font-bold.italic.left-border
             {{ latest_poll.get_first_question.title }}
 
-        .flex-1.p-home.bg-grid(class="md:border-t {% if is_rtl_org %} {% else %}vertical-angle{% endif %}")
+        .flex-1.p-home.bg-grid(class="md:border-t {% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
           .relative.w-full(style="min-height:20rem;")
             .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
