@@ -132,7 +132,7 @@
                     -trans "ALL"
                   %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
                     -trans "AGE"
-                  %a.pill-white.segment-pill(class="{% if not show_maps %}pill-last{% else %}pill{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
+                  %a.pill-white.segment-pill(class="{% if not show_maps %}{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
                     -trans "GENDER"
                   -if show_maps
                     %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}")>

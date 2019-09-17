@@ -12,7 +12,7 @@
             .font-alt.font-bold.text-4xl.leading-tight.italic
               {{ story.title }}
 
-    .block.vertical-angle-left(class="md:w-1/2")
+    .block(class="md:w-1/2 {% if is_rtl_org %}vertical-angle-right{% else %}vertical-angle-left{% endif %}")
       {% thumbnail story.get_image "900" crop="top" as im %}
       %img(src="{{im.url}}" width="100%" style="object-fit:cover;")
       {% endthumbnail %}
