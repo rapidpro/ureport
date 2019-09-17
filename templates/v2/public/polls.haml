@@ -11,8 +11,8 @@
         .text-xl.max-w-lg
           {{ org|config:"opinions_description"|default:""}}
 
-      .flex-center-y(class="md:pl-8")
-        .block.text-right.mt-4(style="width:325px")
+      .flex-center-y(class="{% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %}")
+        .block.mt-4(style="width:325px" class="rtl:text-left ltr:text-right")
           .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded.w-full
             .flex.bg-black.border-b.border-white.w-full
               .flex-1
@@ -22,7 +22,7 @@
                   %i.fa.fa-caret-down
 
         .relative
-          .absolute.left-0.bg-white.search-results.h-64.border(id="poll-search-results" style="z-index:100000;width:325px;")
+          .absolute.bg-white.search-results.h-64.border(id="poll-search-results" style="z-index:100000;width:325px;" class="rtl:right-0 ltr:left-0")
             .no-results.p-4.italic.hidden
               -trans "No results found"
 
@@ -30,21 +30,21 @@
               - if category.polls.all
                 .block.py-1.bg-white.search-category
                   %a.font-bold.px-2.block(href="#")
-                    %i.fa.fa-caret-right.closed.float-left(style="padding-top:2px")
-                    %i.fa.fa-caret-down.hidden.open.float-left(style="padding-top:4px")
-                    .pl-3
+                    %i.fa.fa-caret-right.closed(style="padding-top:2px" class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+                    %i.fa.fa-caret-down.hidden.open(style="padding-top:4px" class="rtl:float-right ltr:float-left")
+                    .(class="rtl:pr-3 ltr:pl-3")
                       {{ category.name }}
                   .category-results
                     - for poll in category.polls.all
                       %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }} {{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }}")
-                        .ml-2
+                        .(class="rtl:mr-2 ltr:ml-2")
                           {{ poll.title }}
                           .inline.text-xs.font-bold
                             {{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}
 
   .max-w-page.mx-auto
     .bg-white(class="md:flex")
-      .flex-1.my-home.border-r
+      .flex-1.my-home(class="rtl:border-l ltr:border-r")
         .px-home
           .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white
             {{ latest_poll.category.name }}
@@ -56,28 +56,28 @@
             {{ latest_poll.poll_date|date:"F jS, Y" }}
 
           .font-light.mt-4
-            .inline-block.pr-8.border-r.border-black
+            .inline-block.border-black(class="rtl:pl-8 rtl:border-l ltr:pr-8 ltr:border-r")
               .text-5xl.leading-none
                 {{ latest_poll.responded_runs|intcomma }}
               .text-xs.font-bold
                 -trans "RESPONSES"
 
-            .inline-block.pl-8
+            .inline-block(class="rtl:pr-8 ltr:pl-8")
               .text-5xl.leading-none
                 {{ latest_poll.response_percentage }}
               .text-xs.font-bold
                 -trans "RESPONSE RATE"
 
           .mt-4.flex
-            .flex-none.mr-8
-              .text-center.inline-block.pr-4
+            .flex-none(class="rtl:ml-8 ltr:mr-8")
+              .text-center.inline-block(class="rtl:pl-4 ltr:pr-4")
                 %img(src="{{ STATIC_URL }}img/gender-male.png" width="40")
                 .font-bold.text-xl.leading-none.mt-2
                   {{gender_stats.male.percentage|default:"0"}}%
                 .text-sm.leading-none
                   {{gender_stats.male.count|default:"0"|intcomma}}
 
-              .text-center.inline-block.px-4.border-l.border-black
+              .text-center.inline-block.px-4.border-black(class="rtl:border-r ltr:border-l")
                 %img(src="{{ STATIC_URL }}img/gender-female.png" width="40")
                 .font-bold.text-xl.leading-none.mt-2
                   {{gender_stats.female.percentage|default:"0"}}%
@@ -85,7 +85,7 @@
                   {{gender_stats.female.count|default:"0"|intcomma}}
 
               - if org|config:"has_extra_gender"
-                .text-center.inline-block.px-4.border-l.border-black
+                .text-center.inline-block.px-4.border-black(class="rtl:border-r ltr:border-l")
                   %img(src="{{ STATIC_URL }}img/gender-other.png" width="40")
                   .font-bold.text-xl.leading-none.mt-2
                     {{gender_stats.other.percentage|default:"0"}}%
@@ -97,12 +97,13 @@
                 {{ age_stats|json_script:"age_stats" }}
                 #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats")
 
-      .flex-1.text-black
-        .pl-6.pr-home.py-home.text-center
-          .text-sm.font-bold.mb-2
-            -trans "TOTAL RESPONSES"
-          #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="'{{ district_zoom|lower }}' === 'true'" data-ward-zoom="'{{ ward_zoom|lower }}' === 'true'" style="min-height:300px;min-width:300px;")
-          #map-info.relative.h-full.w-full.my-4.flex.justify-center
+      -if show_maps
+        .flex-1.text-black
+          .py-home.text-center(class="rtl:pr-6 ltr:pl-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %}")
+            .text-sm.font-bold.mb-2
+              -trans "TOTAL RESPONSES"
+            #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
+            #map-info.relative.h-full.w-full.my-4.flex.justify-center
 
 
     - for question in latest_poll.get_questions
@@ -113,7 +114,7 @@
               .flex-none.bg-circle.bg-black.text-white.font-bold
                 {{ forloop.counter }}
               .flex-1.flex-center-y
-                .h-1.border-t(class="{% cycle 'ml-4' 'mr-4' as margin %} {% cycle 'border-white' 'border-black' 'border-white' 'border-white' as border %}")
+                .h-1.border-t(class="{% if is_rtl_org %}{% cycle 'mr-4' 'ml-4' as margin %}{% else %}{% cycle 'ml-4' 'mr-4' as margin %}{% endif %} {% cycle 'border-white' 'border-black' 'border-white' 'border-white' as border %}")
 
             .mt-8
               .font-alt.font-bold.leading-tight.italic(class="{% if question.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
@@ -127,29 +128,30 @@
             .block.justify-between.flex.flex-wrap.hover-parent
               - if not question.is_open_ended
                 .text-xs.flex-none.mb-4
-                  %a.pill-first.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions")>
+                  %a.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}")>
                     -trans "ALL"
                   %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
                     -trans "AGE"
-                  %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
+                  %a.pill-white.segment-pill(class="{% if not show_maps %}pill-last{% else %}pill{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
                     -trans "GENDER"
-                  %a.pill-last.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions")>
-                    -trans "STATE"
-                    %i.fa.fa-caret-down
-                    .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px" data-html2canvas-ignore=true)
-                      .border.border-gray-400.text-left.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;")
-                        .pt-1.text-black
-                          - for state in states
-                            .pl-2.pr-4.py-1.state-segment(data-state='{{state.id}}' data-click-handler="" data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="opinions")
-                              .checkbox.float-left
-                                %i.fa.fa-check
-                              .ml-4.whitespace-no-wrap
-                                {{ state.name }}
+                  -if show_maps
+                    %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}")>
+                       -trans "STATE"
+                      %i.fa.fa-caret-down
+                      .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px" data-html2canvas-ignore=true)
+                        .border.border-gray-400.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="rtl:text-right ltr:text-left" )
+                          .pt-1.text-black
+                            - for state in states
+                              .py-1.state-segment(data-state='{{state.id}}' data-click-handler="" data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %} rtl:pr-2 rtl:pl-4 ltr:pl-2 ltr:pr-4" data-page="opinions")
+                                .checkbox(class="rtl:float-right ltr:float-left")
+                                  %i.fa.fa-check
+                                .ml-4.whitespace-no-wrap
+                                  {{ state.name }}
 
               - else
                 .block
 
-              .share.float-right.flex-none.mb-4.flex-center-y.hover-show
+              .share.flex-none.mb-4.flex-center-y.hover-show(class="rtl:float-left ltr:float-right")
                 .block
                   %a.cursor-pointer.bg-circle-xs.border.border-black.facebook-share(data-url="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
                     %i.fa.fa-facebook

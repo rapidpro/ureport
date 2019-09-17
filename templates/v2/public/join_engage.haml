@@ -13,7 +13,7 @@
           -trans "Join Now"
 
       .flex-1.flex-center-y
-        .text-xl.text-right(class="md:pl-12")
+        .text-xl(class="md:pl-12 rtl:text-left ltr:text-right")
           - for d_block in join_engage|slice:":1"
             {{ d_block.short_content_teaser|safe }}
 

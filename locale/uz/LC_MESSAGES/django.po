@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-13 00:51+0000\n"
+"POT-Creation-Date: 2019-09-16 19:00+0000\n"
 "PO-Revision-Date: 2018-08-22 11:40+0000\n"
 "Last-Translator: Jahongir Abdurahmonov <jabdurahmonov@unicef.org>\n"
 "Language-Team: Uzbek (http://www.transifex.com/rapidpro/ureport/language/uz/)\n"
@@ -1242,6 +1242,16 @@ msgid "Want to tell the world about this? Download this image to easily share on
 msgstr ""
 
 #, fuzzy
+#| msgid "polled"
+msgid "Polled"
+msgstr "so'raldi"
+
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reporters"
+msgstr "U-Reportyorlar"
+
+#, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
 msgstr "JOYLASHUV YERLARI"
@@ -1299,54 +1309,16 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Natijalar"
 
+msgid "Join U-Report, Your voice matters."
+msgstr ""
+
 msgid "JOIN NOW"
-msgstr ""
-
-msgid "We are all a part of a global platform changing the lives of young people worldwide."
-msgstr ""
-
-msgid ""
-"\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"\n"
-"            "
-msgstr ""
-
-msgid "Photos Title"
-msgstr ""
-
-msgid "This area can be edited when the poll is over to focus additionally on review and learnings."
-msgstr ""
-
-msgid "In just a few easy steps, start here to join other young people and have your voice heard!"
 msgstr ""
 
 msgid "How would you like to join?"
 msgstr ""
 
 msgid "Text"
-msgstr ""
-
-msgid "Text the word Join to 24453 - all U-Report SMSs are free!"
-msgstr ""
-
-msgid "Sign-Up"
-msgstr ""
-
-msgid "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
-msgstr ""
-
-msgid "Get Involved!"
-msgstr ""
-
-msgid "You will now receive messages asking your opinion on meaningful issues!"
-msgstr ""
-
-msgid "To exit U-Report just send stop to 24453"
-msgstr ""
-
-msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
 msgid "No results found"
@@ -1367,10 +1339,7 @@ msgstr "JAVOB BERGANLAR ULUSHI"
 #| "\n"
 #| "                    %(responded)s responded out of %(polled)s polled\n"
 #| "                  "
-msgid ""
-"\n"
-"                  %(responded)s responded out of %(polled)s polled\n"
-"                "
+msgid "%(responded)s responded out of %(polled)s polled"
 msgstr ""
 "\n"
 "%(responded)s berilgan savollardan %(polled)s ga javob berdilar\n"
@@ -1382,24 +1351,18 @@ msgstr ""
 msgid "STATE"
 msgstr ""
 
-msgid "A sentence that describes how we feel about stories and the human side of things."
-msgstr ""
+#, fuzzy
+#| msgid "U-REPORTER STATISTICS"
+msgid "OVERALL STATISTICS"
+msgstr "U-REPORYOR STATISTIKASI"
 
-msgid "Year at a Glance"
-msgstr ""
-
-msgid "SIGN-UPS"
+msgid "THIS YEAR"
 msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
 msgid "AVG RESPONSE RATE"
 msgstr "JAVOB BERGANLAR ULUSHI"
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "TOTAL U-REPORTERS IN"
-msgstr "U-Reportyorlar"
 
 #, fuzzy
 #| msgid "U-REPORTERS IN"
@@ -1853,8 +1816,38 @@ msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Foydalanuvchilar mahalliy darajada U-Report bilan bog'lanish uchun ishlatadigan qisqa kod"
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "Foydalanuvchilar mahalliy darajada U-Report bilan bog'lanish uchun ishlatadigan qisqa kod"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Tashrif buyuruvchilarni U-Reportga qo'shilishga yo'naltiradigan qisqa matn"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr ""
+
+msgid "The title of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the photos section U-Report homepage"
+msgstr ""
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description of the opinions page"
+msgstr "Javob beruvchining joylashuv yeri"
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description of the stories page"
+msgstr "Javob beruvchining joylashuv yeri"
+
+msgid "The description of the engagement page"
+msgstr ""
+
+msgid "The callout message on the footer engagement section"
+msgstr ""
 
 #, fuzzy
 #| msgid "The primary color for styling for this organization"
@@ -2022,12 +2015,17 @@ msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
 #~| "                  "
 #~ msgid ""
 #~ "\n"
-#~ "              %(responded)s responded out of %(polled)s polled\n"
-#~ "            "
+#~ "                  %(responded)s responded out of %(polled)s polled\n"
+#~ "                "
 #~ msgstr ""
 #~ "\n"
 #~ "%(responded)s berilgan savollardan %(polled)s ga javob berdilar\n"
 #~ " "
+
+#, fuzzy
+#~| msgid "U-REPORTERS IN"
+#~ msgid "TOTAL U-REPORTERS IN"
+#~ msgstr "U-Reportyorlar"
 
 #, fuzzy
 #~| msgid "Join & Engage"

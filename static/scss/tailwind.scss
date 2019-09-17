@@ -26,7 +26,7 @@ html {
   background-size: auto;
   background-position: left;
 
-  transform: translateY(-100%);
+  transform: translateY(-150%);
   transition: 1s;
 
   -webkit-transition:transform .5s ease-in-out;
@@ -202,19 +202,26 @@ html {
   }
 }
 
+// admin nav bar on public site
+#admin-nav {
+  background: rgb(32, 32, 32);
 
-.admin-menu {
-  @apply  inline-block px-6 py-4;
+  .admin-menu {
+    @apply inline-block px-3 py-2;
 
-  &:hover {
-    @apply text-gray-800 bg-gray-300;
+    &:hover {
+      @apply text-white;
+    }
+
+    &.small-link-no-wrap {
+      @apply w-full text-xs whitespace-no-wrap;
+
+      &.separator {
+        @apply border-t border-black;
+      }
+    }
   }
 }
-
-.small-link-no-wrap {
-  @apply w-full text-sm whitespace-no-wrap;
-}
-
 
 #map-info {
   min-height: 6rem;
@@ -397,7 +404,6 @@ html {
 // search box input field
 .search-box {
   width: 100%;
-  margin-right: 50px;
 
   &:focus {
     outline: none;
@@ -456,9 +462,14 @@ html {
 
 // desktop styles
 @media only screen and (min-width: 768px) {
-  .vertical-angle, .vertical-angle-left {
+  .vertical-angle-left, .vertical-angle-left-side {
     -webkit-clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
     clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
+  }
+
+  .vertical-angle-right, .vertical-angle-right-side {
+    -webkit-clip-path: polygon(40px 0, calc(100% + 1px) 0, calc(100% + 1px) 100%, 0 100%);
+    clip-path: polygon(0 0, 95% 0,  calc(100% + 1px) 100%, 0 100%);
   }
 
   .p-home {
@@ -500,7 +511,7 @@ html {
 
 // mobile styles
 @media only screen and (max-width: 768px) {
-  .vertical-angle {
+  .vertical-angle-left, .vertical-angle-right {
     -webkit-clip-path: polygon(0 0, 0 calc(100% + 1px), 100% calc(100% + 1px),100% 30px);
     clip-path: polygon(0 0, 0 calc(100% + 1px), 100% calc(100% + 1px),100% 30px);
   }

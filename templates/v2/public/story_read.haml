@@ -12,7 +12,7 @@
             .font-alt.font-bold.text-4xl.leading-tight.italic
               {{ story.title }}
 
-    .block.vertical-angle(class="md:w-1/2")
+    .block.vertical-angle-left(class="md:w-1/2")
       {% thumbnail story.get_image "900" crop="top" as im %}
       %img(src="{{im.url}}" width="100%" style="object-fit:cover;")
       {% endthumbnail %}

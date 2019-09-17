@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-13 00:51+0000\n"
+"POT-Creation-Date: 2019-09-16 19:00+0000\n"
 "PO-Revision-Date: 2017-03-02 17:06+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/uk/)\n"
@@ -1264,6 +1264,16 @@ msgid "Want to tell the world about this? Download this image to easily share on
 msgstr ""
 
 #, fuzzy
+#| msgid "Polls"
+msgid "Polled"
+msgstr "Опитування"
+
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reporters"
+msgstr "U-репортери"
+
+#, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
 msgstr "Географія"
@@ -1321,54 +1331,16 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "Результати"
 
+msgid "Join U-Report, Your voice matters."
+msgstr ""
+
 msgid "JOIN NOW"
-msgstr ""
-
-msgid "We are all a part of a global platform changing the lives of young people worldwide."
-msgstr ""
-
-msgid ""
-"\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"\n"
-"            "
-msgstr ""
-
-msgid "Photos Title"
-msgstr ""
-
-msgid "This area can be edited when the poll is over to focus additionally on review and learnings."
-msgstr ""
-
-msgid "In just a few easy steps, start here to join other young people and have your voice heard!"
 msgstr ""
 
 msgid "How would you like to join?"
 msgstr ""
 
 msgid "Text"
-msgstr ""
-
-msgid "Text the word Join to 24453 - all U-Report SMSs are free!"
-msgstr ""
-
-msgid "Sign-Up"
-msgstr ""
-
-msgid "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
-msgstr ""
-
-msgid "Get Involved!"
-msgstr ""
-
-msgid "You will now receive messages asking your opinion on meaningful issues!"
-msgstr ""
-
-msgid "To exit U-Report just send stop to 24453"
-msgstr ""
-
-msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
 msgid "No results found"
@@ -1389,10 +1361,7 @@ msgstr "Рівень активності"
 #| "\n"
 #| "                    %(responded)s responded out of %(polled)s polled\n"
 #| "                  "
-msgid ""
-"\n"
-"                  %(responded)s responded out of %(polled)s polled\n"
-"                "
+msgid "%(responded)s responded out of %(polled)s polled"
 msgstr ""
 "\n"
 "%(responded)s відповіли із %(polled)s"
@@ -1403,24 +1372,18 @@ msgstr ""
 msgid "STATE"
 msgstr ""
 
-msgid "A sentence that describes how we feel about stories and the human side of things."
-msgstr ""
+#, fuzzy
+#| msgid "U-REPORTER STATISTICS"
+msgid "OVERALL STATISTICS"
+msgstr "U-репортери: Статистика"
 
-msgid "Year at a Glance"
-msgstr ""
-
-msgid "SIGN-UPS"
+msgid "THIS YEAR"
 msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
 msgid "AVG RESPONSE RATE"
 msgstr "Рівень активності"
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "TOTAL U-REPORTERS IN"
-msgstr "U-репортери в"
 
 #, fuzzy
 #| msgid "U-REPORTERS IN"
@@ -1888,8 +1851,38 @@ msgstr "Чи показувати цю організацію на головн�
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Короткий номер"
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "Короткий номер"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Короткий текст для того, щоб відвідувачі сайту приєднувались до UReport"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr ""
+
+msgid "The title of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the photos section U-Report homepage"
+msgstr ""
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description of the opinions page"
+msgstr "Область, де живе автор повідомлення"
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description of the stories page"
+msgstr "Область, де живе автор повідомлення"
+
+msgid "The description of the engagement page"
+msgstr ""
+
+msgid "The callout message on the footer engagement section"
+msgstr ""
 
 #, fuzzy
 #| msgid "The primary color for styling for this organization"
@@ -2057,11 +2050,16 @@ msgstr "Щось щоб виявити місце знаходження"
 #~| "                  "
 #~ msgid ""
 #~ "\n"
-#~ "              %(responded)s responded out of %(polled)s polled\n"
-#~ "            "
+#~ "                  %(responded)s responded out of %(polled)s polled\n"
+#~ "                "
 #~ msgstr ""
 #~ "\n"
 #~ "%(responded)s відповіли із %(polled)s"
+
+#, fuzzy
+#~| msgid "U-REPORTERS IN"
+#~ msgid "TOTAL U-REPORTERS IN"
+#~ msgstr "U-репортери в"
 
 #, fuzzy
 #~| msgid "Join & Engage"

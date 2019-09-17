@@ -328,7 +328,7 @@ module.exports = {
     borderColor: ["responsive", "hover", "focus"],
     borderRadius: ["responsive"],
     borderStyle: ["responsive"],
-    borderWidth: ["responsive"],
+    borderWidth: ["responsive", "direction"],
     cursor: ["responsive"],
     display: ["responsive"],
     flexDirection: ["responsive"],
@@ -341,14 +341,14 @@ module.exports = {
     flexGrow: ["responsive"],
     flexShrink: ["responsive"],
     order: ["responsive"],
-    float: ["responsive"],
+    float: ["responsive", "direction"],
     fontFamily: ["responsive"],
     fontWeight: ["responsive", "hover", "focus"],
     height: ["responsive"],
     lineHeight: ["responsive"],
     listStylePosition: ["responsive"],
     listStyleType: ["responsive"],
-    margin: ["responsive"],
+    margin: ["responsive", "direction"],
     maxHeight: ["responsive"],
     maxWidth: ["responsive"],
     minHeight: ["responsive"],
@@ -358,7 +358,7 @@ module.exports = {
     opacity: ["responsive"],
     outline: ["responsive", "focus"],
     overflow: ["responsive"],
-    padding: ["responsive"],
+    padding: ["responsive", "direction"],
     pointerEvents: ["responsive"],
     position: ["responsive"],
     inset: ["responsive"],
@@ -367,7 +367,7 @@ module.exports = {
     fill: ["responsive"],
     stroke: ["responsive"],
     tableLayout: ["responsive"],
-    textAlign: ["responsive"],
+    textAlign: ["responsive", "direction"],
     textColor: ["responsive", "hover", "focus"],
     fontSize: ["responsive"],
     fontStyle: ["responsive"],
@@ -384,5 +384,7 @@ module.exports = {
     zIndex: ["responsive"]
   },
   corePlugins: {},
-  plugins: []
+  plugins: [
+    require('tailwindcss-dir')(),
+  ]
 };
