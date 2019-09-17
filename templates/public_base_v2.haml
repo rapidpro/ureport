@@ -177,13 +177,8 @@
 
           - if request.user.is_superuser or org_perms.categories.category_list
             %li
-<<<<<<< HEAD
               .dropdown.relative.z-10
-                %a.admin-menu.dropdown-button(href="#" class="hover:text-gray-800 hover:bg-gray-300")
-=======
-              .dropdown.relative
-                %a.admin-menu.dropdown-button(href="#0")
->>>>>>> b7886547ff310244e0d5f8b00435cadf7783b478
+                %a.admin-menu.dropdown-button(href="#")
                   - trans "Categories"
                   %i.fa.fa-caret-down
                 .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
@@ -196,13 +191,8 @@
                       - trans "Category Images"
 
           %li
-<<<<<<< HEAD
             .dropdown.relative.z-10
-              %a.inline-block.px-6.py-4.dropdown-button(href="#" class="hover:text-gray-800 hover:bg-gray-300")
-=======
-            .dropdown.relative
-              %a.admin-menu.dropdown-button(href="#")
->>>>>>> b7886547ff310244e0d5f8b00435cadf7783b478
+              %a.inline-block.px-6.py-4.dropdown-button(href="#")
                 - trans "Content"
                 %i.fa.fa-caret-down
               .hidden.dropdown-content.absolute.bg-gray-800.z-auto
@@ -252,25 +242,12 @@
                     - trans "Custom pages"
 
           - block login
-<<<<<<< HEAD
             %li(class="{% if is_rtl_org %}mr-auto{% else %}ml-auto{% endif %}")
-              - if request.user and request.user.is_authenticated
-                %a.admin-menu(href="{% url 'users.user_profile' request.user.pk %}"  class="hover:text-gray-800 hover:bg-gray-300")
-                  {{ request.user.username }}
-
-                %a.admin-menu(href="{% url 'users.user_logout' %}?go=/" class="hover:text-gray-800 hover:bg-gray-300")
-                  - trans "Logout"
-              - else
-                %a.admin-menu(href="{% url 'users.user_login' %}" class="hover:text-gray-800 hover:bg-gray-300")
-                  - trans "Login"
-=======
-            %li.ml-auto
               %a.admin-menu(href="{% url 'users.user_profile' request.user.pk %}")
                 %i.fa.fa-user-circle
 
               %a.admin-menu(href="{% url 'users.user_logout' %}?go=/")
                 %i.fa.fa-sign-out
->>>>>>> b7886547ff310244e0d5f8b00435cadf7783b478
 
     // desktop header
     .block.hidden(class="md:block")
