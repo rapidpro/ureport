@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-13 00:51+0000\n"
+"POT-Creation-Date: 2019-09-16 19:00+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -1207,6 +1207,16 @@ msgid "Want to tell the world about this? Download this image to easily share on
 msgstr ""
 
 #, fuzzy
+#| msgid "Polls"
+msgid "Polled"
+msgstr "ေမးခြန္းမ်ား"
+
+#, fuzzy
+#| msgid "U-Reporters"
+msgid "Reporters"
+msgstr "အခ်က္အလက္ေပးပို႕သူ လူငယ္မ်ား"
+
+#, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
 msgstr "တည္ေနရာမ်ား"
@@ -1264,54 +1274,16 @@ msgstr ""
 msgid "Refresh Results"
 msgstr "ရလဒ္မ်ား"
 
+msgid "Join U-Report, Your voice matters."
+msgstr ""
+
 msgid "JOIN NOW"
-msgstr ""
-
-msgid "We are all a part of a global platform changing the lives of young people worldwide."
-msgstr ""
-
-msgid ""
-"\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"\n"
-"            "
-msgstr ""
-
-msgid "Photos Title"
-msgstr ""
-
-msgid "This area can be edited when the poll is over to focus additionally on review and learnings."
-msgstr ""
-
-msgid "In just a few easy steps, start here to join other young people and have your voice heard!"
 msgstr ""
 
 msgid "How would you like to join?"
 msgstr ""
 
 msgid "Text"
-msgstr ""
-
-msgid "Text the word Join to 24453 - all U-Report SMSs are free!"
-msgstr ""
-
-msgid "Sign-Up"
-msgstr ""
-
-msgid "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
-msgstr ""
-
-msgid "Get Involved!"
-msgstr ""
-
-msgid "You will now receive messages asking your opinion on meaningful issues!"
-msgstr ""
-
-msgid "To exit U-Report just send stop to 24453"
-msgstr ""
-
-msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
 msgid "No results found"
@@ -1328,10 +1300,7 @@ msgid "TOTAL RESPONSES"
 msgstr "တုံ႕ံျပန္မႈႏွဳန္း"
 
 #, python-format
-msgid ""
-"\n"
-"                  %(responded)s responded out of %(polled)s polled\n"
-"                "
+msgid "%(responded)s responded out of %(polled)s polled"
 msgstr ""
 
 msgid "ALL"
@@ -1340,24 +1309,18 @@ msgstr ""
 msgid "STATE"
 msgstr ""
 
-msgid "A sentence that describes how we feel about stories and the human side of things."
-msgstr ""
+#, fuzzy
+#| msgid "U-REPORTER STATISTICS"
+msgid "OVERALL STATISTICS"
+msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္သူမ်ား၏ စာရင္းဇယား"
 
-msgid "Year at a Glance"
-msgstr ""
-
-msgid "SIGN-UPS"
+msgid "THIS YEAR"
 msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
 msgid "AVG RESPONSE RATE"
 msgstr "တုံ႕ံျပန္မႈႏွဳန္း"
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "TOTAL U-REPORTERS IN"
-msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္သူမ်ား ၀င္ေရာက္ရန္"
 
 #, fuzzy
 #| msgid "U-REPORTERS IN"
@@ -1777,8 +1740,38 @@ msgstr "ယခုအဖြဲ႕အစည္းကို landing စာမ်က
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "U-Report ကိုဆက္သြယ္ရန္ အသံုးျပဳသူမ်ားသံုးမည့္ နံပါတ္အတို"
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "U-Report ကိုဆက္သြယ္ရန္ အသံုးျပဳသူမ်ားသံုးမည့္ နံပါတ္အတို"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "U-Report တြင္ပါ၀င္မည့္သူမ်ားကို လမ္းညႊန္ရန္ စာသားအတို"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr ""
+
+msgid "The title of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the photos section U-Report homepage"
+msgstr ""
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description of the opinions page"
+msgstr "ျပန္လည္ေျဖၾကားသူ၏တည္ေနရာ"
+
+#, fuzzy
+#| msgid "The location of the responder."
+msgid "The description of the stories page"
+msgstr "ျပန္လည္ေျဖၾကားသူ၏တည္ေနရာ"
+
+msgid "The description of the engagement page"
+msgstr ""
+
+msgid "The callout message on the footer engagement section"
+msgstr ""
 
 #, fuzzy
 #| msgid "The primary color for styling for this organization"
@@ -1940,6 +1933,11 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္ေသာအရာ"
+
+#, fuzzy
+#~| msgid "U-REPORTERS IN"
+#~ msgid "TOTAL U-REPORTERS IN"
+#~ msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္သူမ်ား ၀င္ေရာက္ရန္"
 
 #, fuzzy
 #~| msgid "Join & Engage"

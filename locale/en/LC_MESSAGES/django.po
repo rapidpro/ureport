@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-13 00:51+0000\n"
+"POT-Creation-Date: 2019-09-16 19:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1171,6 +1171,12 @@ msgstr ""
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
 
+msgid "Polled"
+msgstr ""
+
+msgid "Reporters"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr ""
 
@@ -1213,54 +1219,16 @@ msgstr ""
 msgid "Refresh Results"
 msgstr ""
 
+msgid "Join U-Report, Your voice matters."
+msgstr ""
+
 msgid "JOIN NOW"
-msgstr ""
-
-msgid "We are all a part of a global platform changing the lives of young people worldwide."
-msgstr ""
-
-msgid ""
-"\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"              We are all a part of a global platform changing the lives of young people worldwide.\n"
-"\n"
-"            "
-msgstr ""
-
-msgid "Photos Title"
-msgstr ""
-
-msgid "This area can be edited when the poll is over to focus additionally on review and learnings."
-msgstr ""
-
-msgid "In just a few easy steps, start here to join other young people and have your voice heard!"
 msgstr ""
 
 msgid "How would you like to join?"
 msgstr ""
 
 msgid "Text"
-msgstr ""
-
-msgid "Text the word Join to 24453 - all U-Report SMSs are free!"
-msgstr ""
-
-msgid "Sign-Up"
-msgstr ""
-
-msgid "We will then send you a few questions via SMS to complete sign-up so we can learn a little about you to better listen to your voice."
-msgstr ""
-
-msgid "Get Involved!"
-msgstr ""
-
-msgid "You will now receive messages asking your opinion on meaningful issues!"
-msgstr ""
-
-msgid "To exit U-Report just send stop to 24453"
-msgstr ""
-
-msgid "A sentence that describes what this page is all about and who it is for"
 msgstr ""
 
 msgid "No results found"
@@ -1273,10 +1241,7 @@ msgid "TOTAL RESPONSES"
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"                  %(responded)s responded out of %(polled)s polled\n"
-"                "
+msgid "%(responded)s responded out of %(polled)s polled"
 msgstr ""
 
 msgid "ALL"
@@ -1285,19 +1250,13 @@ msgstr ""
 msgid "STATE"
 msgstr ""
 
-msgid "A sentence that describes how we feel about stories and the human side of things."
+msgid "OVERALL STATISTICS"
 msgstr ""
 
-msgid "Year at a Glance"
-msgstr ""
-
-msgid "SIGN-UPS"
+msgid "THIS YEAR"
 msgstr ""
 
 msgid "AVG RESPONSE RATE"
-msgstr ""
-
-msgid "TOTAL U-REPORTERS IN"
 msgstr ""
 
 msgid "U-REPORTERS BY REGION"
@@ -1707,7 +1666,31 @@ msgstr ""
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr ""
 
+msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr ""
+
 msgid "The short text used to direct visitors to join U-Report"
+msgstr ""
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr ""
+
+msgid "The title of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the photos section U-Report homepage"
+msgstr ""
+
+msgid "The description of the opinions page"
+msgstr ""
+
+msgid "The description of the stories page"
+msgstr ""
+
+msgid "The description of the engagement page"
+msgstr ""
+
+msgid "The callout message on the footer engagement section"
 msgstr ""
 
 msgid "The primary color for styling for this organization, should be dark"

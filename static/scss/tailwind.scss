@@ -26,7 +26,7 @@ html {
   background-size: auto;
   background-position: left;
 
-  transform: translateY(-100%);
+  transform: translateY(-150%);
   transition: 1s;
 
   -webkit-transition:transform .5s ease-in-out;
@@ -202,19 +202,26 @@ html {
   }
 }
 
+// admin nav bar on public site
+#admin-nav {
+  background: rgb(32, 32, 32);
 
-.admin-menu {
-  @apply  inline-block px-6 py-4;
+  .admin-menu {
+    @apply inline-block px-3 py-2;
 
-  &:hover {
-    @apply text-gray-800 bg-gray-300;
+    &:hover {
+      @apply text-white;
+    }
+
+    &.small-link-no-wrap {
+      @apply w-full text-xs whitespace-no-wrap;
+
+      &.separator {
+        @apply border-t border-black;
+      }
+    }
   }
 }
-
-.small-link-no-wrap {
-  @apply w-full text-sm whitespace-no-wrap;
-}
-
 
 #map-info {
   min-height: 6rem;
