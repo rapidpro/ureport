@@ -1,3 +1,7 @@
+v1.1.26
+----------
+ * Quick fixes
+
 v1.1.25
 ----------
  * Merge pull request #461 from rapidpro/RTL-support
