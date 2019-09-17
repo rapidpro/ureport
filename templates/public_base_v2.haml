@@ -192,10 +192,10 @@
 
           %li
             .dropdown.relative.z-10
-              %a.inline-block.px-6.py-4.dropdown-button(href="#")
+              %a.admin-menu.dropdown-button(href="#")
                 - trans "Content"
                 %i.fa.fa-caret-down
-              .hidden.dropdown-content.absolute.bg-gray-800.z-auto
+              .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
                 -# - if request.user.is_superuser or org_perms.news.newsitem_list
                 -#   %a.inline-block.px-6.py-4.small-link-no-wrap(href="{% url 'news.newsitem_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
                 -#     - trans "News Items"
