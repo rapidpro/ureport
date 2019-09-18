@@ -115,11 +115,13 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
   $.getJSON(url, (results) ->
     total = 0
     series = []
-
-    for segment, i in results
+    
+    i = 0
+    for segment in results
       data = segment['data']
       if segmentType == "location" and not states[segment.osm_id]
         continue
+      i++
       cleanedData = []
       for key, value of data
         cleanedData.push([Date.parse(key), value])
