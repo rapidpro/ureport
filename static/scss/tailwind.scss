@@ -78,11 +78,22 @@ html {
   height: 75px;
   vertical-align: top;
   display: inline-block;
+  padding: 0.5rem;
 
   img {
     margin-left: auto;
     margin-right: auto;
   }
+
+  &:hover {
+    background-color: #1d1d1d;
+    border-top: 1px solid white;
+  }
+
+  &:active {
+    background-color: white;
+  }
+
 }
 
 // mobile menu
