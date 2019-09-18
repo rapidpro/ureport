@@ -7,22 +7,22 @@
   // latest poll if we have it
   - if latest_poll and latest_poll.get_first_question
     .max-w-page.mx-auto.bg-white
-      .bg-dark1(class="md:flex rtl:border-l ltr:border-r {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %}")
-        .flex-1.bg-dark1.text-white.p-home
+      .bg-dark1(class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %}")
+        .flex-1.bg-dark1.text-white.p-home.self-center
           .font-bold.text-l
             - trans "LATEST OPINION"
 
-          .font-bold(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
+          .font-bold.mt-2(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
             {{ latest_poll.title }}
 
-          .font-alt.font-bold.italic.left-border
+          .font-alt.font-bold.italic.left-border.mt-8
             {{ latest_poll.get_first_question.title }}
 
-        .flex-1.p-home.bg-grid(class="md:border-t {% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
+        .flex-1.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
           .relative.w-full(style="min-height:20rem;")
             .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
-          .mt-12.text-center
+          .mx-2
             %a.btn.bg-light1(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
               - trans "VIEW FULL RESULTS"
 
@@ -57,7 +57,7 @@
           .flex-1.inline-block(style="min-width:220px;max-width:750px")
             .relative.w-full.h-64
               {{ age_stats|json_script:"age_stats" }}
-              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats" data-label-size="18")
+              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats" data-label-size="14")
 
   // join video and social
   .max-w-page.mx-auto
@@ -86,7 +86,7 @@
       .flex-1
         .bg-white.p-home
           .block.w-full.h-full
-            .flex.justify-center.py-2.social-media-block-tabs
+            .flex.justify-center.social-media-block-tabs.mb-8.mt-4
               -if org|config:"facebook_page_url"
                 %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab.mr-2(class='hover:text-white hover:bg-black {% if org|config:"twitter_handle" %}open{% endif %}')
                   %i.fa.fa-facebook
@@ -94,15 +94,15 @@
                 %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab(class="hover:text-white hover:bg-black")
                   %i.fa.fa-twitter
 
-            .flex.justify-center.relative.social-media-blocks.mb-4(style="min-height:500px; max-height:520px")
+            .flex.justify-center.relative.social-media-blocks.mb-4(style="min-height:400px; max-height:450px")
               -if org|config:"facebook_page_url"
-                .block.absolute.social-media-block(class='{% if org|config:"twitter_handle" %}open{% endif %}')
-                  .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"600", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+                .absolute.social-media-block(class='{% if org|config:"twitter_handle" %}open{% endif %}')
+                  .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"550", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
               -if org|config:"twitter_handle"
-                .block.absolute.social-media-block
+                .absolute.social-media-block
                   %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
 
-                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"580px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"550px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
   - if stories
     // featured-story-full
@@ -206,7 +206,7 @@
 
         .flex-1.p-home.text-black.flex.flex-col.justify-center
           %div
-            - for photo in photos|slice:":8"
+            - for photo in photos|slice:":6"
               {% thumbnail photo.get_image "200x200" crop="center" as im %}
               .inline-block.w-40.h-40.bg-gray-500.m-2
                 %img(src="{{im.url}}")
