@@ -468,13 +468,14 @@
           -trans "Export and Share"
         %i.fa.fa-close.text-xl.export-modal-close(class="rtl:float-left ltr:float-right")
     
-        .export-modal-progress
-          %progress.progress.is-small(max="100")
+        .export-modal-progress.flex.text-center(style="min-height:30rem;")
+          .fa-5x.inline-block.m-auto.self-center
+            %i.fa.fa-spinner.fa-spin
         .export-modal-content
           .inline-block.mb-4(class="md:w-3/4")
             -trans "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"            
           .inline-block.mb-4(class="md:w-1/4 rtl:float-left rtl:text-left ltr:float-right ltr:text-right  ")
-            %a.btn.bg-light1.text-black.inline-block.download-screenshot(href="#")
+            %a.btn.bg-light1.text-black.inline-block.download-screenshot.hover-dark(href="#")
               Download
           .mt-4.shadow
             %img.screenshot-rendered(src="#" alt="")
