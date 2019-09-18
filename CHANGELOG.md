@@ -1,3 +1,7 @@
+v1.1.34
+----------
+ * Increment after using the color
+
 v1.1.33
 ----------
  * Merge pull request #466 from rapidpro/beta-fixes
