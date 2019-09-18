@@ -32,6 +32,11 @@ ORG_CONTACT_COUNT_TIMEOUT = 300
 logger = logging.getLogger(__name__)
 
 
+def offline_context():
+    for org in list(Org.objects.filter(is_active=True)):
+        yield dict(STATIC_URL=settings.STATIC_URL, base_template="frame.html", org=org, debug=False, testing=False)
+
+
 def datetime_to_json_date(dt):
     """
     Formats a datetime as a string for inclusion in JSON
