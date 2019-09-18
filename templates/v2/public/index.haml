@@ -23,7 +23,7 @@
             .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
           .mx-2
-            %a.btn.bg-light1(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
+            %a.btn.bg-light1.hover-dark(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
               - trans "VIEW FULL RESULTS"
 
   // ureporters graph
@@ -71,7 +71,7 @@
               - trans "Join U-Report, Your voice matters."
 
           .mt-8.text-center
-            %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}")
+            %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}" class="hover:bg-gray-800")
               -trans "JOIN NOW"
 
         .bg-black.p-home.text-white
@@ -131,7 +131,7 @@
                   .block.mb-6
                     {{ story.summary|truncatewords:50|linebreaksbr }}
 
-                  %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
+                  %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}" class="hover:bg-gray-800")
                     {% trans "READ MORE" %}
 
               .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
@@ -190,7 +190,7 @@
             .mb-6
               {{ d_block.summary|safe }}
 
-          %a.btn.bg-light1.text-black(href="{% url 'v2.public.about' %}")
+          %a.btn.bg-light1.text-black.hover-dark(href="{% url 'v2.public.about' %}")
             -trans "LEARN MORE"
 
   - if photos

@@ -33,47 +33,78 @@
     {% compress css %}
     %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
     {% endcompress %}
-
-    :css
-      .bg-dark1 {
-        background: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
-      }
-
-      .border-dark1 {
-        border-color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
-      }
-
-      .bg-dark2 {
-        background: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
-      }
-
-      .border-dark2 {
-        border-color: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
-      }
-
-      .bg-dark3 {
-        background: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
-      }
-
-      .border-dark3 {
-        border-color: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
-      }
-
-      .border-light1 {
-        border-color: {{ org|config:'color_light1'|default:'#FFD100' }};
-      }
-
-      .bg-light1 {
-        background: {{ org|config:'color_light1'|default:'#FFD100' }};
-      }
-
-      .text-light1 {
-        color: {{ org|config:'color_light1'|default:'#FFD100' }};
-      }
-
-      .bg-light2 {
-        background: {{ org|config:'color_light2'|default:'#5eb3e0' }};
-      }
+    - compress css
+      :less
+        .bg-dark1 {
+          
+          background: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }}; 
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }}, 20%);
+            }
+          }
+        }
+  
+        .border-dark1 {
+          border-color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
+        }
+  
+        .bg-dark2 {
+          background: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }}, 20%);
+            }
+          }
+        }
+  
+        .border-dark2 {
+          border-color: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
+        }
+  
+        .bg-dark3 {
+          background: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }}, 20%);
+            }
+          }
+        }
+  
+        .border-dark3 {
+          border-color: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
+        }
+  
+        .border-light1 {
+          border-color: {{ org|config:'color_light1'|default:'#FFD100' }};
+        }
+  
+        .bg-light1 {
+          background: {{ org|config:'color_light1'|default:'#FFD100' }};
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_light1'|default:'#FFD100' }}, 20%);
+            }
+          }
+        }
+  
+        .text-light1 {
+          color: {{ org|config:'color_light1'|default:'#FFD100' }};
+        }
+  
+        .bg-light2 {
+          background: {{ org|config:'color_light2'|default:'#5eb3e0' }};
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_light2'|default:'#5eb3e0' }}, 20%);
+            }
+          }
+        }
 
 
     :javascript
@@ -281,7 +312,7 @@
             %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
               %i.fa.fa-twitter
 
-          %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}")
+          %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}" class="hover:bg-gray-800")
             -trans "Join Now"
 
       // header menu
@@ -367,7 +398,7 @@
               {{ story.title }}
 
             .mt-4
-              %button.btn.bg-black.text-white
+              %button.btn.bg-black.text-white(class="hover:bg-gray-800")
                 -trans "READ MORE"
     {% endif %}
 
@@ -385,7 +416,7 @@
               -else
                 -trans "See by the numbers how we are engaging youth voices for positive social change."
 
-            %a.btn.bg-light2.text-white.inline-block(href="{% url 'v2.public.ureporters' %}")
+            %a.btn.bg-light2.text-white.inline-block.hover-dark(href="{% url 'v2.public.ureporters' %}")
               -trans "EXPLORE ENGAGEMENT"
 
     // footer navbar
