@@ -39,4 +39,5 @@
         %img(src="{{STATIC_URL}}img/u-icon-small.png")
 
     .block.p-home
-      .fb-comments(data-href="{% org_host_link %}{% url 'public.story_read' story.pk %}" data-width="100%" data-numposts="5")
+      .px-home
+        .px-6.fb-comments(data-href="{% org_host_link %}{% url 'public.story_read' story.pk %}" data-width="100%" data-numposts="5")

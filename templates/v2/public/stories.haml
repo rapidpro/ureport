@@ -16,7 +16,7 @@
           .bg-black.text-white.text-lg.px-4.py-2.rounded
             .flex.bg-black.border-b.border-white
               .flex-1
-                %input.bg-black.search-box(type="text" data-results-id="story-search-results" placeholder="SEARCH" size=14)
+                %input.bg-black.search-box.text-sm(type="text" data-results-id="story-search-results" placeholder="SEARCH" size=14)
               .flex-none
                 %a.search-close(href="#")
                   %i.fa.fa-caret-down
@@ -29,7 +29,7 @@
             - for category in categories
               - if category.story_set.all
                 .block.py-1.bg-white.search-category
-                  %a.font-bold.px-2.block(href="#")
+                  %a.text-sm.font-bold.px-2.block(href="#")
                     %i.fa.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
                     %i.fa.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
                     .pl-3
@@ -37,7 +37,7 @@
                   .category-results
                     - for story in category.story_set.all
                       %a.block.px-4.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.story_read' story.pk %}" data-search-value="{{ story.title|addslashes }} {{ story.created_on|date:\"F\" }} {{ story.created_on|date:\"Y\" }}")
-                        .ml-2
+                        .ml-2.text-sm
                           {{ story.title }}
                           .inline.text-xs.font-bold
                             {{ story.created_on|date:"F" }} {{ story.created_on|date:"Y" }}

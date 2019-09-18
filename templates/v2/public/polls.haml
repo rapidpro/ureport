@@ -3,7 +3,7 @@
 - load compress thumbnail humanize ureport i18n
 
 - block content
-  .bg-grid.border-t.border-b
+  .bg-grid
     .max-w-page.mx-auto.p-home(class="md:flex")
       .flex-1.flex-center-y
         .text-5xl.font-bold
@@ -16,7 +16,7 @@
           .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded.w-full
             .flex.bg-black.border-b.border-white.w-full
               .flex-1
-                %input.bg-black.search-box(type="text" data-results-id="poll-search-results" placeholder="SEARCH" size=14)
+                %input.bg-black.search-box.text-sm(type="text" data-results-id="poll-search-results" placeholder="SEARCH" size=14)
               .flex-none
                 %a.search-close.cursor-pointer
                   %i.fa.fa-caret-down
@@ -32,21 +32,21 @@
                   %a.font-bold.px-2.block(href="#")
                     %i.fa.fa-caret-right.closed(style="padding-top:2px" class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
                     %i.fa.fa-caret-down.hidden.open(style="padding-top:4px" class="rtl:float-right ltr:float-left")
-                    .(class="rtl:pr-3 ltr:pl-3")
+                    .text-sm(class="rtl:pr-3 ltr:pl-3")
                       {{ category.name }}
                   .category-results
                     - for poll in category.polls.all
                       %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }} {{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }}")
-                        .(class="rtl:mr-2 ltr:ml-2")
+                        .text-sm(class="rtl:mr-2 ltr:ml-2")
                           {{ poll.title }}
                           .inline.text-xs.font-bold
                             {{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}
 
   .max-w-page.mx-auto
     .bg-white(class="md:flex")
-      .flex-1.my-home(class="rtl:border-l ltr:border-r")
+      .flex-1.my-home.self-center(class="rtl:border-l ltr:border-r")
         .px-home
-          .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white
+          .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white.mb-6
             {{ latest_poll.category.name }}
 
           .font-bold.leading-tight(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
@@ -55,7 +55,7 @@
           .block
             {{ latest_poll.poll_date|date:"F jS, Y" }}
 
-          .font-light.mt-4
+          .font-light.mt-6
             .inline-block.border-black(class="rtl:pl-8 rtl:border-l ltr:pr-8 ltr:border-r")
               .text-5xl.leading-none
                 {{ latest_poll.responded_runs|intcomma }}
@@ -68,7 +68,7 @@
               .text-xs.font-bold
                 -trans "RESPONSE RATE"
 
-          .mt-4.flex
+          .mt-6.flex
             .flex-none(class="rtl:ml-8 ltr:mr-8")
               .text-center.inline-block(class="rtl:pl-4 ltr:pr-4")
                 %img(src="{{ STATIC_URL }}img/gender-male.png" width="40")
@@ -100,16 +100,16 @@
       -if show_maps
         .flex-1.text-black
           .py-home.text-center(class="rtl:pr-6 ltr:pl-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %}")
-            .text-sm.font-bold.mb-2
+            .text-sm.font-bold.mb-8
               -trans "TOTAL RESPONSES"
             #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
-            #map-info.relative.h-full.w-full.my-4.flex.justify-center
+            #map-info.relative.h-full.w-full.mt-1.flex.justify-center
 
 
     - for question in latest_poll.get_questions
-      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-aos="fade" style="min-height:30rem;" id="question-block-{{question.id}}")
+      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-aos="fade" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932'  org|config:'color_light1'|default:'#FFD100' org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' %}")
         .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg %}")
-          .p-home
+          .p-home.h-full.flex-center-y
             .flex(class="{% cycle '' 'md:flex-row-reverse' as reverse %}")
               .flex-none.bg-circle.bg-black.text-white.font-bold
                 {{ forloop.counter }}
@@ -120,7 +120,7 @@
               .font-alt.font-bold.leading-tight.italic(class="{% if question.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
                 {{ question.title }}
 
-              .font-alt.mt-4
+              .mt-4
                 {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}{{ responded }} responded out of {{ polled }} polled{% endblocktrans %}
 
         .flex-1.bg-white.text-black.hover-parent

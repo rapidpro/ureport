@@ -115,11 +115,13 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
   $.getJSON(url, (results) ->
     total = 0
     series = []
-
-    for segment, i in results
+    
+    i = 0
+    for segment in results
       data = segment['data']
       if segmentType == "location" and not states[segment.osm_id]
         continue
+      i++
       cleanedData = []
       for key, value of data
         cleanedData.push([Date.parse(key), value])
@@ -190,6 +192,9 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
             marker: {
               enabled: true
             }
+          },
+          column: {
+            borderWidth: 0
           }
         }
         series: series
@@ -221,7 +226,8 @@ showChart = (questionID, segmentName) ->
     series = []
     categories = []
 
-    for segment, i in results
+    i = 0
+    for segment in results
       categories = []
       data = []
       for category in segment.categories
@@ -236,16 +242,33 @@ showChart = (questionID, segmentName) ->
       # ignore states that aren't included
       if segmentName == "state" and not states[segment.boundary]
         continue
+      
+      i++
+      color = orgColors[i % orgColors.length]
 
+      barColor = $("#question-block-" + questionID).data("bar-color")
+      if not barColor?
+        barColor = primaryColor
+
+
+      if segmentName  == "all"
+        color = barColor
+      
       series.push({
         name: segment.label,
-        color: orgColors[i % orgColors.length]
+        color: color,
         categories: categories,
         data: data
       })
 
     # open ended, use a cloud
     if results[0].open_ended
+      wordCloudColors = gradientFactory.generate({
+        from : '#DDDDDD'
+        to: barColor,
+        stops: 4
+      })
+
       $("#chart-" + questionID).highcharts({
         chart: {
           marginTop: 0
@@ -263,7 +286,7 @@ showChart = (questionID, segmentName) ->
         }]
         plotOptions: {
           wordcloud: {
-            colors: orgColors
+            colors: wordCloudColors
             minFontSize: 6
             rotation: {
               orientations: 1

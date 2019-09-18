@@ -33,48 +33,79 @@
     {% compress css %}
     %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
     {% endcompress %}
-
-    :css
-      .bg-dark1 {
-        background: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
-      }
-
-      .border-dark1 {
-        border-color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
-      }
-
-      .bg-dark2 {
-        background: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
-      }
-
-      .border-dark2 {
-        border-color: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
-      }
-
-      .bg-dark3 {
-        background: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
-      }
-
-      .border-dark3 {
-        border-color: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
-      }
-
-      .border-light1 {
-        border-color: {{ org|config:'color_light1'|default:'#FFD100' }};
-      }
-
-      .bg-light1 {
-        background: {{ org|config:'color_light1'|default:'#FFD100' }};
-      }
-
-      .text-light1 {
-        color: {{ org|config:'color_light1'|default:'#FFD100' }};
-      }
-
-      .bg-light2 {
-        background: {{ org|config:'color_light2'|default:'#5eb3e0' }};
-      }
-
+    {% compress css %}
+      :less
+        .bg-dark1 {
+          
+          background: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }}; 
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }}, 20%);
+            }
+          }
+        }
+  
+        .border-dark1 {
+          border-color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
+        }
+  
+        .bg-dark2 {
+          background: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }}, 20%);
+            }
+          }
+        }
+  
+        .border-dark2 {
+          border-color: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
+        }
+  
+        .bg-dark3 {
+          background: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }}, 20%);
+            }
+          }
+        }
+  
+        .border-dark3 {
+          border-color: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
+        }
+  
+        .border-light1 {
+          border-color: {{ org|config:'color_light1'|default:'#FFD100' }};
+        }
+  
+        .bg-light1 {
+          background: {{ org|config:'color_light1'|default:'#FFD100' }};
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_light1'|default:'#FFD100' }}, 20%);
+            }
+          }
+        }
+  
+        .text-light1 {
+          color: {{ org|config:'color_light1'|default:'#FFD100' }};
+        }
+  
+        .bg-light2 {
+          background: {{ org|config:'color_light2'|default:'#5eb3e0' }};
+          
+          &.hover-dark {
+            &:hover {
+              background: darken({{ org|config:'color_light2'|default:'#5eb3e0' }}, 20%);
+            }
+          }
+        }
+    {% endcompress %}
 
     :javascript
       {% if org|config:"colors" %}
@@ -127,7 +158,8 @@
       .flex.p-home
         .flex-center-y(class="md:w-1/3")
           .p-8
-            %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
+            %a.inline-block.border-white.p-2(href="https://ureport.in/" class="hover:bg-black hover:border-t")
+              %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
 
         .flex-center-y(class="md:w-2/3")
           %div
@@ -280,7 +312,7 @@
             %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
               %i.fa.fa-twitter
 
-          %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}")
+          %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}" class="hover:bg-gray-800")
             -trans "Join Now"
 
       // header menu
@@ -357,7 +389,7 @@
     .bg-dark-blue
       .max-w-page.mx-auto.text-white.px-home.pt-home(class="md:flex")
         - for story in main_stories|slice:"1:4"
-          %a.block(class="md:mr-4 w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
+          %a.block.mt-4(class="md:mr-4 md:w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
             .block
               {% thumbnail story.get_image "400x250" crop="top" as im %}
               %img(width="100%" src="{{im.url}}")
@@ -365,15 +397,15 @@
             .font-bold.text-l.mt-4
               {{ story.title }}
 
-            .text-center.mt-4
-              %button.btn.bg-black.text-white
+            .mt-4.hidden(class="md:block")
+              %button.btn.bg-black.text-white(class="hover:bg-gray-800")
                 -trans "READ MORE"
     {% endif %}
 
     // footer engage callout
     .bg-dark-blue
       .max-w-page.mx-auto.text-white.p-home(class="md:flex")
-        .div(class="md:w-1/3")
+        .hidden(class="md:w-1/3 md:block")
           %img(src="{{STATIC_URL}}img/blue_u.png")
 
         .(class="md:w-2/3 {% if is_rtl_org %}text-left{% else %}text-right{% endif %}")
@@ -384,7 +416,7 @@
               -else
                 -trans "See by the numbers how we are engaging youth voices for positive social change."
 
-            %a.btn.bg-light2.text-white.inline-block(href="{% url 'v2.public.ureporters' %}")
+            %a.btn.bg-light2.text-white.inline-block.hover-dark(href="{% url 'v2.public.ureporters' %}")
               -trans "EXPLORE ENGAGEMENT"
 
     // footer navbar
@@ -395,12 +427,12 @@
         {% endthumbnail %}
 
       .flex-1.flex(class="md:justify-end")
-        .font-bold.text-2xl.ml-2.flex-center-y
+        .font-bold.text-2xl.ml-6.flex-center-y
           %div
             %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}")
               -trans "Opinions"
 
-        .font-bold.text-2xl.ml-2.flex-center-y
+        .font-bold.text-2xl.ml-6.flex-center-y
           %div
             %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}")
               -trans "Stories"
@@ -408,10 +440,7 @@
     // footer menu
     %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
       .li.flex-initial.py-menu(class="rtl:ml-4 ltr:mr-4")
-        %a.flex-initial.py-menu(href="{% url 'users.user_login' %}")
-          - trans "Login"
-
-        %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}" class="md:ml-4")
+        %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}")
           -trans "About"
 
         %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4")
@@ -419,7 +448,7 @@
 
       .li.flex-grow.flex(class="md:justify-end")
         {% if org|config:"facebook_page_url" %}
-        %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="rtl:mr-4 ltr:ml-4")
+        %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}')
           %i.fa.fa-facebook
         {% endif %}
 
@@ -427,7 +456,9 @@
         %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="rtl:mr-4 ltr:ml-4")
           %i.fa.fa-twitter
         {% endif %}
-
+      
+        %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="rtl:mr-4 ltr:ml-4")
+          - trans "Login"
     // bottom yellow bar
     .bg-color3.h-2
 
@@ -437,13 +468,14 @@
           -trans "Export and Share"
         %i.fa.fa-close.text-xl.export-modal-close(class="rtl:float-left ltr:float-right")
     
-        .export-modal-progress
-          %progress.progress.is-small(max="100")
+        .export-modal-progress.flex.text-center(style="min-height:30rem;")
+          .fa-5x.inline-block.m-auto.self-center
+            %i.fa.fa-spinner.fa-spin
         .export-modal-content
           .inline-block.mb-4(class="md:w-3/4")
             -trans "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"            
           .inline-block.mb-4(class="md:w-1/4 rtl:float-left rtl:text-left ltr:float-right ltr:text-right  ")
-            %a.btn.bg-light1.text-black.inline-block.download-screenshot(href="#")
+            %a.btn.bg-light1.text-black.inline-block.download-screenshot.hover-dark(href="#")
               Download
           .mt-4.shadow
             %img.screenshot-rendered(src="#" alt="")

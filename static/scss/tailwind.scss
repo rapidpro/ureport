@@ -45,6 +45,7 @@ html {
 .social-media-block {
   transition: 2s;
   opacity: 0;
+  display: none;
 
   -webkit-transition:opacity 2s ease-in-out;
   -moz-transition:opacity 2s ease-in-out;
@@ -53,6 +54,7 @@ html {
   &.open {
     transition: 2s;
     opacity: 1;
+    display: block;
   }
 }
 
@@ -76,11 +78,22 @@ html {
   height: 75px;
   vertical-align: top;
   display: inline-block;
+  padding: 0.5rem;
 
   img {
     margin-left: auto;
     margin-right: auto;
   }
+
+  &:hover {
+    background-color: #1d1d1d;
+    border-top: 1px solid white;
+  }
+
+  &:active {
+    background-color: white;
+  }
+
 }
 
 // mobile menu
@@ -224,7 +237,7 @@ html {
 }
 
 #map-info {
-  min-height: 6rem;
+  min-height: 4rem;
 
   .leaflet-control-container {
     .leaflet-top, .leaflet-right, .leaflet-left, .leaflet-bottom {
@@ -294,11 +307,11 @@ html {
 // circle around number, single digit only
 .bg-circle {
   display: inline-block;
-  width: 48px;
-  line-height: 48px;
+  width: 40px;
+  line-height: 40px;
   border-radius: 50%;
   text-align: center;
-  font-size: 1.50rem;
+  font-size: 1.20rem;
 }
 
 // small circle around font awesome icon, used for sharing

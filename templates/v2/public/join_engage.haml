@@ -17,8 +17,8 @@
           - for d_block in join_engage|slice:":1"
             {{ d_block.short_content_teaser|safe }}
 
-  .max-w-page.mx-auto
-    .p-home.bg-light1(class="md:flex")
+  .bg-light1.py-12
+    .max-w-page.mx-auto.p-home(class="md:flex")
       .flex-1
         .text-3xl.font-bold.flex.border-b.border-black.pb-4.mb-4
           .flex-none.flex-center-y
@@ -56,8 +56,9 @@
               WhatsApp
           {% endif %}
     
-    - for join_step in join_steps
-      .p-home(class="md:flex {% cycle 'bg-dark1 text-white' 'bg-dark2 text-white' 'bg-dark3 text-white' 'bg-light1 text-black' %}" id="{% if forloop.first %}text{% endif %}")
+  - for join_step in join_steps
+    .py-12(class="{% cycle 'bg-dark1 text-white' 'bg-dark2 text-white' 'bg-dark3 text-white' 'bg-light1 text-black' %}")
+      .max-w-page.mx-auto.p-home(class="md:flex " id="{% if forloop.first %}text{% endif %}")
         .flex-1
           .text-3xl.font-bold.flex.border-b.pb-4.mb-4(class="{% cycle 'border-white' 'border-white' 'border-white' 'border-black' %}")
             .flex-none.flex-center-y
