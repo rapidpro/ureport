@@ -33,7 +33,7 @@
     {% compress css %}
     %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
     {% endcompress %}
-    - compress css
+    {% compress css %}
       :less
         .bg-dark1 {
           
@@ -105,7 +105,7 @@
             }
           }
         }
-
+    {% endcompress %}
 
     :javascript
       {% if org|config:"colors" %}

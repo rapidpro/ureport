@@ -16,7 +16,7 @@
           .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded.w-full
             .flex.bg-black.border-b.border-white.w-full
               .flex-1
-                %input.bg-black.search-box(type="text" data-results-id="poll-search-results" placeholder="SEARCH" size=14)
+                %input.bg-black.search-box.text-sm(type="text" data-results-id="poll-search-results" placeholder="SEARCH" size=14)
               .flex-none
                 %a.search-close.cursor-pointer
                   %i.fa.fa-caret-down
@@ -32,12 +32,12 @@
                   %a.font-bold.px-2.block(href="#")
                     %i.fa.fa-caret-right.closed(style="padding-top:2px" class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
                     %i.fa.fa-caret-down.hidden.open(style="padding-top:4px" class="rtl:float-right ltr:float-left")
-                    .(class="rtl:pr-3 ltr:pl-3")
+                    .text-sm(class="rtl:pr-3 ltr:pl-3")
                       {{ category.name }}
                   .category-results
                     - for poll in category.polls.all
                       %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'v2.public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }} {{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }}")
-                        .(class="rtl:mr-2 ltr:ml-2")
+                        .text-sm(class="rtl:mr-2 ltr:ml-2")
                           {{ poll.title }}
                           .inline.text-xs.font-bold
                             {{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}
