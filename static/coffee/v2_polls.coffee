@@ -249,6 +249,7 @@ showChart = (questionID, segmentName) ->
 
     # open ended, use a cloud
     if results[0].open_ended
+      wordCloudColors = orgColors.slice(0, 3)
       $("#chart-" + questionID).highcharts({
         chart: {
           marginTop: 0
@@ -266,7 +267,7 @@ showChart = (questionID, segmentName) ->
         }]
         plotOptions: {
           wordcloud: {
-            colors: orgColors
+            colors: wordCloudColors
             minFontSize: 6
             rotation: {
               orientations: 1

@@ -237,7 +237,7 @@ html {
 }
 
 #map-info {
-  min-height: 6rem;
+  min-height: 4rem;
 
   .leaflet-control-container {
     .leaflet-top, .leaflet-right, .leaflet-left, .leaflet-bottom {
@@ -307,11 +307,11 @@ html {
 // circle around number, single digit only
 .bg-circle {
   display: inline-block;
-  width: 48px;
-  line-height: 48px;
+  width: 40px;
+  line-height: 40px;
   border-radius: 50%;
   text-align: center;
-  font-size: 1.50rem;
+  font-size: 1.20rem;
 }
 
 // small circle around font awesome icon, used for sharing
