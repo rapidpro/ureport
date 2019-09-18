@@ -121,7 +121,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
       data = segment['data']
       if segmentType == "location" and not states[segment.osm_id]
         continue
-      i++
+
       cleanedData = []
       for key, value of data
         cleanedData.push([Date.parse(key), value])
@@ -132,6 +132,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
         color: colors[i % colors.length]
         data: cleanedData
       })
+      i++
     
     chartType = "spline"
     if segmentType == 'gender'
@@ -243,8 +244,8 @@ showChart = (questionID, segmentName) ->
       if segmentName == "state" and not states[segment.boundary]
         continue
       
-      i++
       color = orgColors[i % orgColors.length]
+      i++
 
       barColor = $("#question-block-" + questionID).data("bar-color")
       if not barColor?
