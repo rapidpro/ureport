@@ -109,7 +109,7 @@
     - for question in latest_poll.get_questions
       .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-aos="fade" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932'  org|config:'color_light1'|default:'#FFD100' org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' %}")
         .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg %}")
-          .p-home
+          .p-home.h-full.flex-center-y
             .flex(class="{% cycle '' 'md:flex-row-reverse' as reverse %}")
               .flex-none.bg-circle.bg-black.text-white.font-bold
                 {{ forloop.counter }}
