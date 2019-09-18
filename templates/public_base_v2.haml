@@ -358,7 +358,7 @@
     .bg-dark-blue
       .max-w-page.mx-auto.text-white.px-home.pt-home(class="md:flex")
         - for story in main_stories|slice:"1:4"
-          %a.block(class="md:mr-4 w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
+          %a.block.mt-4(class="md:mr-4 md:w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
             .block
               {% thumbnail story.get_image "400x250" crop="top" as im %}
               %img(width="100%" src="{{im.url}}")
@@ -396,12 +396,12 @@
         {% endthumbnail %}
 
       .flex-1.flex(class="md:justify-end")
-        .font-bold.text-2xl.ml-2.flex-center-y
+        .font-bold.text-2xl.ml-6.flex-center-y
           %div
             %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}")
               -trans "Opinions"
 
-        .font-bold.text-2xl.ml-2.flex-center-y
+        .font-bold.text-2xl.ml-6.flex-center-y
           %div
             %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}")
               -trans "Stories"
@@ -409,10 +409,7 @@
     // footer menu
     %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
       .li.flex-initial.py-menu(class="rtl:ml-4 ltr:mr-4")
-        %a.flex-initial.py-menu(href="{% url 'users.user_login' %}")
-          - trans "Login"
-
-        %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}" class="md:ml-4")
+        %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}")
           -trans "About"
 
         %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4")
@@ -420,7 +417,7 @@
 
       .li.flex-grow.flex(class="md:justify-end")
         {% if org|config:"facebook_page_url" %}
-        %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="rtl:mr-4 ltr:ml-4")
+        %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}')
           %i.fa.fa-facebook
         {% endif %}
 
@@ -428,7 +425,9 @@
         %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="rtl:mr-4 ltr:ml-4")
           %i.fa.fa-twitter
         {% endif %}
-
+      
+        %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="rtl:mr-4 ltr:ml-4")
+          - trans "Login"
     // bottom yellow bar
     .bg-color3.h-2
 

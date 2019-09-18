@@ -190,6 +190,9 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
             marker: {
               enabled: true
             }
+          },
+          column: {
+            borderWidth: 0
           }
         }
         series: series
