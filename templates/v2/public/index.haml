@@ -84,7 +84,7 @@
                 %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
 
       .flex-1
-        .bg-white.p-home
+        .bg-white.p-home(style="min-height:45rem;")
           .block.w-full.h-full
             .flex.justify-center.social-media-block-tabs.mb-8.mt-4
               -if org|config:"facebook_page_url"
@@ -205,7 +205,7 @@
             {{ org|config:"photos_section_description"|default:""}}
 
         .flex-1.p-home.text-black.flex.flex-col.justify-center
-          %div
+          .flex-1.justify-center
             - for photo in photos|slice:":6"
               {% thumbnail photo.get_image "200x200" crop="center" as im %}
               .inline-block.w-40.h-40.bg-gray-500.m-2
