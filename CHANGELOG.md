@@ -1,3 +1,8 @@
+v1.1.33
+----------
+ * Merge pull request #466 from rapidpro/beta-fixes
+ * Fix conflicting colors for state segmentation
+
 v1.1.27
 ----------
  * Fix admin navbar
