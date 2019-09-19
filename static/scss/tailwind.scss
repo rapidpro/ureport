@@ -43,27 +43,27 @@ html {
 }
 
 .social-media-block {
-  transition: 2s;
+  transition: 0.5s;
   opacity: 0;
   display: none;
 
-  -webkit-transition:opacity 2s ease-in-out;
-  -moz-transition:opacity 2s ease-in-out;
-  transition:opacity 2s ease-in-out;
+  -webkit-transition:opacity 0.5s ease-in-out;
+  -moz-transition:opacity 0.5s ease-in-out;
+  transition:opacity 0.5s ease-in-out;
 
   &.open {
-    transition: 2s;
+    transition: 0.5s;
     opacity: 1;
     display: block;
   }
 }
 
 .social-media-block-tab {
-  transition: 2s;
+  transition: 0.5s;
 
-  -webkit-transition:background-color 2s ease-in-out;
-  -moz-transition:background-color 2s ease-in-out;
-  transition:background-color 2s ease-in-out;
+  -webkit-transition:background-color 0.5s ease-in-out;
+  -moz-transition:background-color 0.5s ease-in-out;
+  transition:background-color 0.5s ease-in-out;
   
   @apply bg-white text-black;
 
