@@ -69,6 +69,9 @@
             .text-sm.font-bold.mb-2
               -trans "U-REPORTERS BY REGION"
             #ureporter-map.h-full.w-full.map.block(data-map-url="/v2/contact_field_results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
+              .flex.text-center.h-full.w-full(id="poll-map-placeholder" style="min-height:300px;min-width:300px;")
+                .fa-3x.inline-block.m-auto.self-center
+                  %i.fa.fa-spinner.fa-spin
             #map-info.relative.h-full.w-full.mt-2.flex.justify-center
   
   .border-t.border-b.bg-dark-gray.sticky.top-0.z-50

@@ -209,6 +209,7 @@ $(->
             states = boundaries
             stateResults = countMap
           
+          $("#poll-map-placeholder").addClass('hidden')
           map.fitBounds(boundaries.getBounds());
           map.on 'resize', (e) ->
             map.fitBounds(boundaries.getBounds())
