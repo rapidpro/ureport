@@ -100,7 +100,7 @@
             .flex-1.inline-block(style="min-width:220px;max-width:350px")
               .relative.w-full(style="height:105px")
                 {{ age_stats|json_script:"age_stats" }}
-                #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats")
+                #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
 
       -if show_maps
         .flex-1.text-black
@@ -108,6 +108,9 @@
             .text-sm.font-bold.mb-8
               -trans "TOTAL RESPONSES"
             #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
+              .flex.text-center.h-full.w-full(id="poll-map-placeholder" style="min-height:300px;min-width:300px;")
+                .fa-3x.inline-block.m-auto.self-center
+                  %i.fa.fa-spinner.fa-spin
             #map-info.relative.h-full.w-full.mt-1.flex.justify-center
 
 
@@ -116,7 +119,7 @@
         .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg %}")
           .p-home.h-full.flex-center-y
             .flex(class="{% cycle '' 'md:flex-row-reverse' as reverse %}")
-              .flex-none.bg-circle.bg-black.text-white.font-bold
+              .flex-none.bg-circle.bg-black.text-white.font-bold(data-html2canvas-ignore=true)
                 {{ forloop.counter }}
               .flex-1.flex-center-y
                 .h-1.border-t(class="{% if is_rtl_org %}{% cycle 'mr-4' 'ml-4' as margin %}{% else %}{% cycle 'ml-4' 'mr-4' as margin %}{% endif %} {% cycle 'border-white' 'border-black' 'border-white' 'border-white' as border %}")
@@ -130,8 +133,8 @@
                 {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}{{ responded }} responded out of {{ polled }} polled{% endblocktrans %}
 
         .flex-1.bg-white.text-black.hover-parent
-          .mx-home.py-home.hover-parent(class="md:border-t")
-            .block.justify-between.flex.flex-wrap.hover-parent
+          .mx-home.py-home.hover-parent(class="md:border-t" )
+            .block.justify-between.flex.flex-wrap.hover-parent(data-html2canvas-ignore=true)
               - if not question.is_open_ended
                 .text-xs.flex-none.mb-4
                   %a.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}")>

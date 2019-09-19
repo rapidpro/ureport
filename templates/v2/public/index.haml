@@ -59,7 +59,7 @@
           .flex-1.inline-block(style="min-width:220px;max-width:750px")
             .relative.w-full.h-40(class="md:h-64")
               {{ age_stats|json_script:"age_stats" }}
-              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats" data-label-size="14")
+              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats")
 
   // join video and social
   .max-w-page.mx-auto
@@ -223,7 +223,7 @@
         .flex-1.p-home.text-black.flex.flex-col.justify-center
           .flex.flex-wrap.justify-center
             - for photo in photos|slice:":6"
-              {% thumbnail photo.get_image "200x200" crop="cen                                       ter" as im %}
+              {% thumbnail photo.get_image "200x200" crop="center" as im %}
               .inline-block.w-40.h-40.bg-gray-500.m-2
                 %img(src="{{im.url}}")
               {% endthumbnail %}
