@@ -12,7 +12,7 @@
           .font-bold.text-l
             - trans "LATEST OPINION"
 
-          .font-bold.mt-2.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
+          .font-bold.mt-2.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl leading-tight{% endif %}")
             {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" %}
             {{ latest_poll.title }}
 
