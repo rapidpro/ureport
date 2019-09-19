@@ -59,7 +59,7 @@
           .flex-1.inline-block(style="min-width:220px;max-width:750px")
             .relative.w-full.h-40(class="md:h-64")
               {{ age_stats|json_script:"age_stats" }}
-              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats" data-label-size="14")
+              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats")
 
   // join video and social
   .max-w-page.mx-auto

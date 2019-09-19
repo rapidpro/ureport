@@ -4,12 +4,16 @@ $(->
     labelColor = $(this).data("label-color")
     labelPosition = $(this).data("label-position")
     labelSize = $(this).data("label-size")
+    labelWeight = $(this).data("label-weight")
 
     if not labelPosition?
       labelPosition = "bottom"
 
     if not labelSize?
       labelSize = 14
+
+    if not labelWeight?
+      labelWeight = 700
 
     id = $(this).attr("id")
     data = JSON.parse(document.getElementById($(this).data("stats")).textContent);
@@ -41,7 +45,7 @@ $(->
           rotation: 0
           style: {
             fontSize: labelSize
-            fontWeight: 700
+            fontWeight: labelWeight
             color: labelColor
           }
         }
