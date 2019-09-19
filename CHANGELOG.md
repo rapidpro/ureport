@@ -1,3 +1,12 @@
+v1.1.37
+----------
+ * Merge pull request #469 from rapidpro/beta-fixes
+ * Fix crop argument
+ * Add spinner on maps before they load
+ * Full width on engagement page
+ * Adjust label font weight on opinions page
+ * Hide question number on screenshot capture
+
 v1.1.36
 ----------
  * Merge pull request #467 from rapidpro/edit-blocks
