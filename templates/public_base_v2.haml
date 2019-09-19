@@ -387,7 +387,7 @@
     {% if main_stories|slice:"1:" %}
     // footer stories
     .bg-dark-blue
-      .max-w-page.mx-auto.text-white.px-home.pt-home(class="md:flex")
+      .max-w-page.mx-auto.text-white.px-home.pt-home.hover-parent(class="md:flex")
         - for story in main_stories|slice:"1:4"
           %a.block.mt-4(class="md:mr-4 md:w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
             .block
@@ -400,6 +400,8 @@
             .mt-4.hidden(class="md:block")
               %button.btn.bg-black.text-white(class="hover:bg-gray-800")
                 -trans "READ MORE"
+          {% edit_content 'stories.story_update' story.pk "" "bg-black p-2" %}
+
     {% endif %}
 
     // footer engage callout
@@ -410,7 +412,8 @@
 
         .(class="md:w-2/3 {% if is_rtl_org %}text-left{% else %}text-right{% endif %}")
           .pb-4(class="{% if is_rtl_org %}md:pl-10 md:border-l{% else %}md:pr-10 md:border-r{% endif %} md:border-gray-500")
-            .font-bold.text-3xl.leading-tight.mb-8
+            .font-bold.text-3xl.leading-tight.mb-8.hover-parent
+              {% edit_content 'orgs.org_edit' "" "#id_common.engagement_footer_callout" "-m-8" %}
               -if org|config:"engagement_footer_callout"
                 {{ org|config:"engagement_footer_callout"}}
               -else

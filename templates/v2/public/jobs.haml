@@ -24,14 +24,17 @@
                 -if source.source_type == 'F'
                   .overflow-scroll.mt-12(class="w-1/3" style="max-height:45rem;")
 
-                    .text-3xl.pr-8
+                    .text-3xl.pr-8.hover-parent
+                      {% edit_content 'jobs.jobsource_update' source.pk "#id_title" "" %}
                       {{ source.title|upper }}
-                    .text-xl.pr-8
+                    .text-xl.pr-8.hover-parent
+                      {% edit_content 'jobs.jobsource_update' source.pk "#id_source_url" "-m-8 -mt-12" %}
                       .fb-like-box{data-href:'{{ source.source_url }}', data-width:"400", data-height:"600", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
 
                 -elif source.source_type == 'R'
                   .overflow-scroll.mt-12(class="w-1/3" style="max-height:45rem;")
-                    .text-3xl
+                    .text-3xl.hover-parent
+                      {% edit_content 'jobs.jobsource_update' source.pk "#id_title" "mx-4" %}
                       {{ source.title|upper }}
                     .pr-8
                       %a.text-dark-blue.social-link{href:"{{ source.get_return_page }}"}
