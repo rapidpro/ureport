@@ -47,31 +47,32 @@
     .bg-white(class="md:flex")
       .flex-1.my-home.self-center(class="rtl:border-l ltr:border-r")
         .px-home
-          .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white.mb-6
-            {{ latest_poll.category.name }}
-
-          .font-bold.leading-tight.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
-            {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" %}
-            {{ latest_poll.title }}
-
-          .block.hover-parent
-            {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" %}
-            {{ latest_poll.poll_date|date:"F jS, Y" }}
-
-
-          .font-light.mt-6
-            .inline-block.border-black(class="rtl:pl-8 rtl:border-l ltr:pr-8 ltr:border-r")
-              .text-5xl.leading-none
-                {{ latest_poll.responded_runs|intcomma }}
-              .text-xs.font-bold
-                -trans "RESPONSES"
-
-            .inline-block(class="rtl:pr-8 ltr:pl-8")
-              .text-5xl.leading-none
-                {{ latest_poll.response_percentage }}
-              .text-xs.font-bold
-                -trans "RESPONSE RATE"
-
+          -if latest_poll
+            .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white.mb-6
+              {{ latest_poll.category.name }}
+  
+            .font-bold.leading-tight.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
+              {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" %}
+              {{ latest_poll.title }}
+  
+            .block.hover-parent
+              {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" %}
+              {{ latest_poll.poll_date|date:"F jS, Y" }}
+  
+  
+            .font-light.mt-6
+              .inline-block.border-black(class="rtl:pl-8 rtl:border-l ltr:pr-8 ltr:border-r")
+                .text-5xl.leading-none
+                  {{ latest_poll.responded_runs|intcomma }}
+                .text-xs.font-bold
+                  -trans "RESPONSES"
+  
+              .inline-block(class="rtl:pr-8 ltr:pl-8")
+                .text-5xl.leading-none
+                  {{ latest_poll.response_percentage }}
+                .text-xs.font-bold
+                  -trans "RESPONSE RATE"
+  
           .mt-6.flex
             .flex-none(class="rtl:ml-8 ltr:mr-8")
               .text-center.inline-block(class="rtl:pl-4 ltr:pr-4")

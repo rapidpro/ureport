@@ -223,7 +223,7 @@
         .flex-1.p-home.text-black.flex.flex-col.justify-center
           .flex.flex-wrap.justify-center
             - for photo in photos|slice:":6"
-              {% thumbnail photo.get_image "200x200" crop="center" as im %}
+              {% thumbnail photo.get_image "200x200" crop="cen                                       ter" as im %}
               .inline-block.w-40.h-40.bg-gray-500.m-2
                 %img(src="{{im.url}}")
               {% endthumbnail %}
