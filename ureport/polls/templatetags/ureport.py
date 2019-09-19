@@ -6,6 +6,7 @@ import logging
 from django import forms, template
 from django.conf import settings
 from django.template import TemplateSyntaxError
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 from ureport.utils import get_linked_orgs
@@ -14,9 +15,9 @@ register = template.Library()
 logger = logging.getLogger(__name__)
 
 
-@register.filter(name='add_placeholder')
+@register.filter(name="add_placeholder")
 def add_placeholder(field):
-    field.field.widget.attrs['placeholder'] = field.label
+    field.field.widget.attrs["placeholder"] = field.label
     return field
 
 
@@ -157,6 +158,19 @@ def show_org_flags(context):
         STATIC_URL=settings.STATIC_URL,
         is_iorg=context["is_iorg"],
     )
+
+
+@register.inclusion_tag("v2/public/edit_content.html", takes_context=True)
+def edit_content(context, reverse_name, reverse_arg=None, anchor_id="", extra_css_classes=""):
+    request = context["request"]
+
+    url_args = []
+    if reverse_arg:
+        url_args.append(reverse_arg)
+
+    edit_url = f"{reverse(reverse_name, args=url_args)}{anchor_id}"
+
+    return dict(request=request, edit_url=edit_url, extra_css_classes=extra_css_classes)
 
 
 @register.simple_tag(takes_context=True)

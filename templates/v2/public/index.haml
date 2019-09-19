@@ -12,24 +12,26 @@
           .font-bold.text-l
             - trans "LATEST OPINION"
 
-          .font-bold.mt-2(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
+          .font-bold.mt-2.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
+            {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" %}
             {{ latest_poll.title }}
 
-          .font-alt.font-bold.italic.left-border.mt-8
+          .font-alt.font-bold.italic.left-border.mt-8.hover-parent
+            {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.ruleset_uuid|add:"_title"  "-m-8" %}
             {{ latest_poll.get_first_question.title }}
 
         .flex-1.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
           .relative.w-full(style="min-height:20rem;")
             .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
-          .mx-2
+          .mx-2.mb-6(class="md:mb-0")
             %a.btn.bg-light1.hover-dark(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
               - trans "VIEW FULL RESULTS"
 
   // ureporters graph
   .bg-black.text-light1.bg-white-u
     .max-w-page.mx-auto.p-home(class="md:flex")
-      .flex-center-y(class="md:w-1/2")
+      .flex-center-y.mt-4.p-8(class="md:w-1/2 md:mt-0 md:p-0")
         .font-bold.text-l
           - trans "U-REPORTERS IN"
           {{ org.name|upper }}
@@ -49,13 +51,13 @@
               %span.text-white {{global_org_count|intcomma}}
               - trans "COUNTRIES WORLDWIDE"
 
-      .ml-4(class="md:w-1/2")
+      .my-16.p-4(class="md:ml-4 md:w-1/2 md:my-0 md:p-0")
         .flex
           .block.w-12.font-bold
             - trans "AGES"
 
           .flex-1.inline-block(style="min-width:220px;max-width:750px")
-            .relative.w-full.h-64
+            .relative.w-full.h-40(class="md:h-64")
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats" data-label-size="14")
 
@@ -63,7 +65,9 @@
   .max-w-page.mx-auto
     %div(class="md:flex")
       .flex-1
-        .bg-light1.p-home
+        .bg-light1.p-12.hover-parent
+          {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8" %}
+
           .text-3xl.font-bold.leading-tight.text-center
             -if org|config:"join_text"
               {{ org|config:"join_text" }}
@@ -74,7 +78,9 @@
             %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}" class="hover:bg-gray-800")
               -trans "JOIN NOW"
 
-        .bg-black.p-home.text-white
+        .bg-black.p-12.text-white.hover-parent
+          {% edit_content 'orgs.org_edit' "" "#id_common.homepage_join_video_id"  "-m-8" %}
+
           -if org|config:"homepage_join_video_id"
             .video
               <iframe width="560" height="349" src="https://www.youtube.com/embed/{{ org|config:"homepage_join_video_id" }}?rel=0&autohide=1&showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -83,7 +89,7 @@
               .inline-block.mx-auto.my-auto.text-center
                 %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
 
-      .flex-1
+      .flex-1.hidden(class="md:block")
         .bg-white.p-home(style="min-height:45rem;")
           .block.w-full.h-full
             .flex.justify-center.social-media-block-tabs.mb-8.mt-4
@@ -96,10 +102,13 @@
 
             .flex.justify-center.relative.social-media-blocks.mb-4(style="min-height:400px; max-height:450px")
               -if org|config:"facebook_page_url"
-                .absolute.social-media-block(class='{% if org|config:"twitter_handle" %}open{% endif %}')
+                .absolute.social-media-block.hover-parent(class='{% if org|config:"twitter_handle" %}open{% endif %}')
+                  {% edit_content 'orgs.org_edit' "" "#id_common.facebook_page_url" "-m-8" %}
+
                   .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"550", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
               -if org|config:"twitter_handle"
-                .absolute.social-media-block
+                .absolute.social-media-block.hover-parent
+                  {% edit_content 'orgs.org_edit' "" "#id_common.twitter_handle" "-m-8" %}
                   %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
 
                   %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"550px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
@@ -126,15 +135,18 @@
                 .block
                   .font-bold.mb-4
                     {% trans "FEATURED STORY" %}
-                  .font-bold.leading-tight.mb-4(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
+                  .font-bold.leading-tight.mb-4.hover-parent(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
+                    {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" %}
                     {{ story.title }}
-                  .block.mb-6
+                  .block.mb-6.hover-parent
+                    {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" %}
                     {{ story.summary|truncatewords:50|linebreaksbr }}
 
                   %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}" class="hover:bg-gray-800")
                     {% trans "READ MORE" %}
 
-              .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
+              .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")
+                {% edit_content 'stories.story_images' story.pk "" "-m-8" %}
                 - if story.get_image
                   {% thumbnail story.get_image "800x500" crop="center" as im %}
                   %img(width="100%" src="{{im.url}}")
@@ -184,10 +196,12 @@
       .flex.flex-center-y(class="md:w-2/5")
         .(class="rtl:pr-10 ltr:pl-10")
           - for d_block in about|slice:":1"
-            .font-bold.mb-4.text-3xl.leading-tight
+            .font-bold.mb-4.text-3xl.leading-tight.hover-parent
+              {% edit_content 'dashblocks.dashblock_update' d_block.pk "#id_title" "-m-8" %}
               {{ d_block.title|safe }}
 
-            .mb-6
+            .mb-6.hover-parent
+              {% edit_content 'dashblocks.dashblock_update' d_block.pk "#id_summary" "-m-8" %}
               {{ d_block.summary|safe }}
 
           %a.btn.bg-light1.text-black.hover-dark(href="{% url 'v2.public.about' %}")
@@ -198,16 +212,18 @@
     .max-w-page.mx-auto
       %div.text-white(class="md:flex")
         .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
-          %div
-            .font-bold.text-3xl
+          .hover-parent
+            .font-bold.text-3xl.hover-parent
+              {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_title" "-m-8" %}
               {{ org|config:"photos_section_title"|default:"Photos"}}
 
+            {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_description" "-m-8" %}
             {{ org|config:"photos_section_description"|default:""}}
 
         .flex-1.p-home.text-black.flex.flex-col.justify-center
-          %div
+          .flex.flex-wrap.justify-center
             - for photo in photos|slice:":6"
-              {% thumbnail photo.get_image "200x200" crop="center" as im %}
+              {% thumbnail photo.get_image "200x200" crop="cen                                       ter" as im %}
               .inline-block.w-40.h-40.bg-gray-500.m-2
                 %img(src="{{im.url}}")
               {% endthumbnail %}

@@ -9,8 +9,9 @@
         .text-5xl.font-bold
           -trans "Engagement"
 
-      .flex-1.flex-center-y
-        .text-xl(class="md:pl-12 ltr:text-right rtl:text-left")
+      .flex-1.flex-center-y.hover-parent
+        .text-xl.hover-parent(class="md:pl-12 ltr:text-right rtl:text-left")
+          {% edit_content 'orgs.org_edit' "" "#id_common.engagement_description" "-m-8" %}
           {{ org|config:"engagement_description"|default:""}}
 
   .max-w-page.mx-auto

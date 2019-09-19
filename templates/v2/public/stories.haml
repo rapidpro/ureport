@@ -5,7 +5,8 @@
 -block content
   .bg-grid.border-t.border-b
     .max-w-page.mx-auto.p-home(class="md:flex")
-      .flex-1.flex-center-y
+      .flex-1.flex-center-y.hover-parent
+        {% edit_content 'orgs.org_edit' "" "#id_common.stories_description" "" %}
         .text-5xl.font-bold
           -trans "Stories"
         .text-xl
@@ -59,7 +60,8 @@
         %div
           .border-solid.flex(class="{% if is_rtl_org %}{% cycle 'border-dark1 border-l-25rem' 'border-dark2 border-r-25rem' %}{% else %}{% cycle 'border-dark1 border-r-25rem' 'border-dark2 border-l-25rem' %}{% endif %}")
             - if not forloop.first
-              .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
+              .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")
+                {% edit_content 'stories.story_images' story.pk "" "-m-8" %}
                 - if story.get_image
                   {% thumbnail story.get_image "800x600" crop="center" as im %}
                   <img width="100%" height="100%" src="{{im.url}}" />
@@ -71,16 +73,19 @@
               .block(class="{% if is_rtl_org %}pr-home{% else %}pl-home{% endif %}")
                 .font-bold.mb-4
                   -trans "FEATURED STORY"
-                .font-bold.leading-tight.mb-4(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
+                .font-bold.leading-tight.mb-4.hover-parent(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
+                  {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" %}
                   {{ story.title }}
-                .block.mb-6
+                .block.mb-6.hover-parent
+                  {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" %}
                   {{ story.summary|truncatewords:50|linebreaksbr }}
   
                 %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
                   -trans "READ MORE"
             
             - if forloop.first
-              .block.p-10.bg-white.flex.flex-col.justify-center(class="w-2/3")
+              .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")
+                {% edit_content 'stories.story_images' story.pk "" "-m-8" %}
                 - if story.get_image
                   {% thumbnail story.get_image "800x600" crop="center" as im %}
                   <img width="100%" height="100%" src="{{im.url}}" />

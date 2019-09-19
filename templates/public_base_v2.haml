@@ -337,7 +337,7 @@
       .flex.justify-between
         .p-home
           %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-            {% thumbnail org.get_logo "x80" format="PNG" as im %}
+            {% thumbnail org.get_logo "x50" format="PNG" as im %}
             %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
             {% endthumbnail %}
 
@@ -387,9 +387,9 @@
     {% if main_stories|slice:"1:" %}
     // footer stories
     .bg-dark-blue
-      .max-w-page.mx-auto.text-white.px-home.pt-home(class="md:flex")
+      .max-w-page.mx-auto.text-white.px-home.pt-home.hover-parent(class="md:flex")
         - for story in main_stories|slice:"1:4"
-          %a.block.mt-4(class="md:mr-4 md:w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
+          %a.block.mt-16.p-4(class="md:mt-4 md:mr-4 md:w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
             .block
               {% thumbnail story.get_image "400x250" crop="top" as im %}
               %img(width="100%" src="{{im.url}}")
@@ -400,6 +400,8 @@
             .mt-4.hidden(class="md:block")
               %button.btn.bg-black.text-white(class="hover:bg-gray-800")
                 -trans "READ MORE"
+          {% edit_content 'stories.story_update' story.pk "" "bg-black p-2" %}
+
     {% endif %}
 
     // footer engage callout
@@ -410,7 +412,8 @@
 
         .(class="md:w-2/3 {% if is_rtl_org %}text-left{% else %}text-right{% endif %}")
           .pb-4(class="{% if is_rtl_org %}md:pl-10 md:border-l{% else %}md:pr-10 md:border-r{% endif %} md:border-gray-500")
-            .font-bold.text-3xl.leading-tight.mb-8
+            .font-bold.text-2xl.leading-tight.my-8.hover-parent(class="md:mb-8 md:mt-0 md:text-3xl")
+              {% edit_content 'orgs.org_edit' "" "#id_common.engagement_footer_callout" "-m-8" %}
               -if org|config:"engagement_footer_callout"
                 {{ org|config:"engagement_footer_callout"}}
               -else
@@ -421,13 +424,18 @@
 
     // footer navbar
     .justify-around.mt-5.mb-3.px-home(class="md:flex")
-      %a.flex-1.text-center.mb-2(href="{% url 'v2.public.index' %}")
+      %a.flex-1.text-center.mb-2.hidden(href="{% url 'v2.public.index' %}" class="md:block")
         {% thumbnail org.get_logo "x80" format="PNG" as im %}
         %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
         {% endthumbnail %}
 
+      %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'v2.public.index' %}" class="md:hidden")
+        {% thumbnail org.get_logo "x50" format="PNG" as im %}
+        %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+        {% endthumbnail %}
+
       .flex-1.flex(class="md:justify-end")
-        .font-bold.text-2xl.ml-6.flex-center-y
+        .font-bold.text-2xl.flex-center-y(class="md:ml-6")
           %div
             %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}")
               -trans "Opinions"

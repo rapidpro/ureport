@@ -64,9 +64,11 @@
             .flex-none.flex-center-y
               .bg-circle.bg-black.text-white
                 {{forloop.counter|add:1}}
-            .pl-4.pr-12.flex-center-y
+            .pl-4.pr-12.flex-center-y.hover-parent
+              {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" %}
               {{ join_step.title|upper }}
   
         .flex-1.flex-center-y
-          .text-xl(class="md:pl-24 md:pr-12")
+          .text-xl.hover-parent(class="md:pl-24 md:pr-12")
+            {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_content" "-m-8" %}
             {{ join_step.content }}
