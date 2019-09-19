@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Sandar Linn <slinn@unicef.org>, 2019
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"PO-Revision-Date: 2019-09-07 00:41+0000\n"
+"Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
+"Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: my\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "PRE"
+msgstr "PRE"
+
+msgid "LI"
+msgstr "LI"
+
+msgid "TABLE"
+msgstr "TABLE"
+
+msgid "DATA"
+msgstr "DATA"
+
+msgid "HR"
+msgstr "HR"
+
+msgid "BLOCKQUOTE"
+msgstr "BLOCKQUOTE"
+
+msgid "A"
+msgstr "A"
+
+msgid "BODY"
+msgstr "BODY"
+
+msgid "TEXTAREA"
+msgstr "TEXTAREA"
+
+msgid "DIV"
+msgstr "DIV"
+
+msgid "BR"
+msgstr "BR"
+
+msgid "SPAN"
+msgstr "SPAN"
+
+msgid "B"
+msgstr "B"
+
+msgid "U"
+msgstr "U"
+
+msgid "S"
+msgstr "S"
+
+msgid "I"
+msgstr "I"
+
+msgid "IMG"
+msgstr "IMG"
