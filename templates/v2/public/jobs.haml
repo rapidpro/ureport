@@ -6,7 +6,7 @@
 - block content
   - load_qbs request.org 'jobs'
   .bg-grid
-    .max-w-page.mx-auto.p-home
+    .max-w-page.mx-auto.p-home.pb-0
       .border.p-home.bg-white
         .block.mt-4.font-bold.text-5xl
           -trans "Jobs"
@@ -17,12 +17,12 @@
           -if job_sources
             - for source in job_sources
               -if is_iorg
-                .(class="w-1/3")
+                .(class="md:w-1/3")
                   %a.block{href:"{{ source.source_url }}"}
                     {{ source.title }}
               -else
                 -if source.source_type == 'F'
-                  .overflow-scroll.mt-12(class="w-1/3" style="max-height:45rem;")
+                  .overflow-scroll.mt-12(class="md:w-1/3" style="max-height:45rem;")
 
                     .text-3xl.pr-8
                       {{ source.title|upper }}
@@ -30,7 +30,7 @@
                       .fb-like-box{data-href:'{{ source.source_url }}', data-width:"400", data-height:"600", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
 
                 -elif source.source_type == 'R'
-                  .overflow-scroll.mt-12(class="w-1/3" style="max-height:45rem;")
+                  .overflow-scroll.mt-12(class="md:w-1/3" style="max-height:45rem;")
                     .text-3xl
                       {{ source.title|upper }}
                     .pr-8
@@ -46,11 +46,6 @@
                         .text-xl.mt-2.mb-12
                           %a.bg-light1.px-4.py-2(href="{{ entry.link }}")
                             -trans "Read more"
-
-                    %a.social-link{href:"{{ source.get_return_page }}"}
-                      - trans "Visit"
-                        {{ source.title|title }}
-                        {{ org|org_arrow_link }}
 
                   -# -elif source.source_type == 'T'
                   -#  .overflow-scroll.mt-12(class="w-1/3" style="max-height:45rem;")
