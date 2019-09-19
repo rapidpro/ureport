@@ -1,3 +1,10 @@
+v1.1.36
+----------
+ * Merge pull request #467 from rapidpro/edit-blocks
+ * Fix tests
+ * Merge pull request #465 from rapidpro/translations_djangojs-po--master_my
+ * Translate locale/en/LC_MESSAGES/djangojs.po in my
+
 v1.1.34
 ----------
  * Increment after using the color
