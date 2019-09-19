@@ -24,14 +24,14 @@
           .relative.w-full(style="min-height:20rem;")
             .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
-          .mx-2
+          .mx-2.mb-6(class="md:mb-0")
             %a.btn.bg-light1.hover-dark(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
               - trans "VIEW FULL RESULTS"
 
   // ureporters graph
   .bg-black.text-light1.bg-white-u
     .max-w-page.mx-auto.p-home(class="md:flex")
-      .flex-center-y(class="md:w-1/2")
+      .flex-center-y.mt-4.p-8(class="md:w-1/2 md:mt-0 md:p-0")
         .font-bold.text-l
           - trans "U-REPORTERS IN"
           {{ org.name|upper }}
@@ -51,13 +51,13 @@
               %span.text-white {{global_org_count|intcomma}}
               - trans "COUNTRIES WORLDWIDE"
 
-      .ml-4(class="md:w-1/2")
+      .my-16.p-4(class="md:ml-4 md:w-1/2 md:my-0 md:p-0")
         .flex
           .block.w-12.font-bold
             - trans "AGES"
 
           .flex-1.inline-block(style="min-width:220px;max-width:750px")
-            .relative.w-full.h-64
+            .relative.w-full.h-40(class="md:h-64")
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats" data-label-size="14")
 
@@ -65,7 +65,7 @@
   .max-w-page.mx-auto
     %div(class="md:flex")
       .flex-1
-        .bg-light1.p-home.hover-parent
+        .bg-light1.p-12.hover-parent
           {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8" %}
 
           .text-3xl.font-bold.leading-tight.text-center
@@ -78,7 +78,7 @@
             %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}" class="hover:bg-gray-800")
               -trans "JOIN NOW"
 
-        .bg-black.p-home.text-white.hover-parent
+        .bg-black.p-12.text-white.hover-parent
           {% edit_content 'orgs.org_edit' "" "#id_common.homepage_join_video_id"  "-m-8" %}
 
           -if org|config:"homepage_join_video_id"
@@ -89,7 +89,7 @@
               .inline-block.mx-auto.my-auto.text-center
                 %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
 
-      .flex-1
+      .flex-1.hidden(class="md:block")
         .bg-white.p-home(style="min-height:45rem;")
           .block.w-full.h-full
             .flex.justify-center.social-media-block-tabs.mb-8.mt-4
@@ -221,7 +221,7 @@
             {{ org|config:"photos_section_description"|default:""}}
 
         .flex-1.p-home.text-black.flex.flex-col.justify-center
-          %div
+          .flex.flex-wrap.justify-center
             - for photo in photos|slice:":6"
               {% thumbnail photo.get_image "200x200" crop="center" as im %}
               .inline-block.w-40.h-40.bg-gray-500.m-2
