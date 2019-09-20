@@ -1,3 +1,12 @@
+v1.1.38
+----------
+ * Show top region on maps
+ * state pill label to STATE
+ * lighten button backgrounds on hover
+ * Fix social media switching buttons
+ * Reduce line height on poll title on homepage
+ * Add bottom border on navbar
+
 v1.1.37
 ----------
  * Merge pull request #469 from rapidpro/beta-fixes
