@@ -87,7 +87,6 @@ html {
 
   &:hover {
     background-color: #1d1d1d;
-    border-top: 1px solid white;
   }
 
   &:active {
@@ -296,6 +295,17 @@ html {
   font-weight: 700;
   font-size: 1.25rem;
 
+  .label {
+    display: inline;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .name {
+    display: inline;
+  }
+  
   .count {
     font-size: 1rem;
     font-weight: 400;
@@ -309,7 +319,7 @@ html {
   line-height: 40px;
   border-radius: 50%;
   text-align: center;
-  font-size: 1.20rem;
+  font-size: 1rem;
 }
 
 // small circle around font awesome icon, used for sharing
