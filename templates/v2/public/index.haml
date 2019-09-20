@@ -75,7 +75,7 @@
               - trans "Join U-Report, Your voice matters."
 
           .mt-8.text-center
-            %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}" class="hover:bg-gray-800")
+            %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}" class="hover:bg-gray-900")
               -trans "JOIN NOW"
 
         .bg-black.p-12.text-white.hover-parent
@@ -142,7 +142,7 @@
                     {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" %}
                     {{ story.summary|truncatewords:50|linebreaksbr }}
 
-                  %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}" class="hover:bg-gray-800")
+                  %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}" class="hover:bg-gray-900")
                     {% trans "READ MORE" %}
 
               .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")

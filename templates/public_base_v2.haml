@@ -41,7 +41,7 @@
           
           &.hover-dark {
             &:hover {
-              background: darken({{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }}, 20%);
+              background: lighten({{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }}, 10%);
             }
           }
         }
@@ -55,7 +55,7 @@
           
           &.hover-dark {
             &:hover {
-              background: darken({{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }}, 20%);
+              background: lighten({{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }}, 10%);
             }
           }
         }
@@ -69,7 +69,7 @@
           
           &.hover-dark {
             &:hover {
-              background: darken({{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }}, 20%);
+              background: lighten({{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }}, 10%);
             }
           }
         }
@@ -87,7 +87,7 @@
           
           &.hover-dark {
             &:hover {
-              background: darken({{ org|config:'color_light1'|default:'#FFD100' }}, 20%);
+              background: lighten({{ org|config:'color_light1'|default:'#FFD100' }}, 10%);
             }
           }
         }
@@ -101,9 +101,13 @@
           
           &.hover-dark {
             &:hover {
-              background: darken({{ org|config:'color_light2'|default:'#5eb3e0' }}, 20%);
+              background: lighten({{ org|config:'color_light2'|default:'#5eb3e0' }}, 10%);
             }
           }
+        }
+
+        .ligth-black{
+          background: lighten(#000000, 10%);
         }
     {% endcompress %}
 
@@ -312,7 +316,7 @@
             %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
               %i.fa.fa-twitter
 
-          %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}" class="hover:bg-gray-800")
+          %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}" class="hover:bg-gray-900")
             -trans "Join Now"
 
       // header menu
@@ -398,7 +402,7 @@
               {{ story.title }}
 
             .mt-4.hidden(class="md:block")
-              %button.btn.bg-black.text-white(class="hover:bg-gray-800")
+              %button.btn.bg-black.text-white(class="hover:bg-gray-900")
                 -trans "READ MORE"
           {% edit_content 'stories.story_update' story.pk "" "bg-black p-2" %}
 
