@@ -176,7 +176,6 @@ $(->
           if (count.set > max)
             max = count.set
             topBoundary = count
-            console.log(count)
 
         # and create mapping of threshold values to colors
         colorSteps = []
