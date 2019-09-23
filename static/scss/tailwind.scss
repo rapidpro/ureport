@@ -219,14 +219,14 @@ html {
   background: rgb(32, 32, 32);
 
   .admin-menu {
-    @apply inline-block px-3 py-2;
+    @apply inline-block px-3 py-2 text-lg;
 
     &:hover {
       @apply text-white;
     }
 
     &.small-link-no-wrap {
-      @apply w-full text-xs whitespace-no-wrap;
+      @apply w-full text-sm whitespace-no-wrap;
 
       &.separator {
         @apply border-t border-black;
