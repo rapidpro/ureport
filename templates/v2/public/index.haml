@@ -8,7 +8,7 @@
   - if latest_poll and latest_poll.get_first_question
     .max-w-page.mx-auto.bg-white.mt-6
       .bg-dark1(class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %}")
-        .flex-1.bg-dark1.text-white.p-home.self-center
+        .flex-1.self-stretch.bg-dark1.text-white.p-home.self-center
           .font-bold.text-l
             - trans "LATEST OPINION"
 
@@ -20,7 +20,7 @@
             {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.ruleset_uuid|add:"_title"  "-m-8" %}
             {{ latest_poll.get_first_question.title }}
 
-        .flex-1.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
+        .flex-1.self-stretch.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
           .relative.w-full(style="min-height:20rem;")
             .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
