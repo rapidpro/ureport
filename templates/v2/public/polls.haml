@@ -117,7 +117,7 @@
     - for question in latest_poll.get_questions
       .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-aos="fade" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932'  org|config:'color_light1'|default:'#FFD100' org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' %}")
         .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg %}")
-          .p-home.h-full.flex-center-y
+          .p-home.h-full.flex-center-y(class="md:py-24")
             .flex(class="{% cycle '' 'md:flex-row-reverse' as reverse %}")
               .flex-none.bg-circle.bg-black.text-white.font-bold(data-html2canvas-ignore=true)
                 {{ forloop.counter }}
@@ -134,7 +134,7 @@
 
         .flex-1.bg-white.text-black.hover-parent
           .mx-home.py-home.hover-parent(class="md:border-t" )
-            .block.justify-between.flex.flex-wrap.hover-parent(data-html2canvas-ignore=true)
+            .block.justify-center.flex.flex-wrap.hover-parent(data-html2canvas-ignore=true)
               - if not question.is_open_ended
                 .text-xs.flex-none.mb-4
                   %a.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}")>
