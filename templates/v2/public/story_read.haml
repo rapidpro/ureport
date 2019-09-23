@@ -4,8 +4,8 @@
 -block content
   .max-w-page.mx-auto.bg-dark-blue(class="md:flex")
     .block.bg-dark-blue.outside-vertical-angle(class="md:w-1/2")
-      .py-12
-        .px-home.text-white.flex-center-y
+      .py-12.h-full
+        .px-home.text-white.flex.items-center.h-full
           .block
             .text-light1.font-bold
               STORY
@@ -35,8 +35,8 @@
       .flex-auto.px-home.story-content
         {{ story.content|safe }}
 
-      .flex-none
-        %img(src="{{STATIC_URL}}img/u-icon-small.png")
+      .flex-none.w-10
+        %img(src="{{STATIC_URL}}img/u-icon-small.png" )
 
     .block.p-home
       .px-home

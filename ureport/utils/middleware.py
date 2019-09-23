@@ -13,7 +13,12 @@ class CheckVersionMiddleware:
             new_design = org.get_config("common.has_new_design", False)
 
         path = request.path
-        if new_design and not path.startswith("/v2/") and not path.startswith("/v1/"):
+        if (
+            new_design
+            and not path.startswith("/v2/")
+            and not path.startswith("/v1/")
+            and not path.startswith("/media/")
+        ):
             return HttpResponseRedirect(f"/v2{path}")
 
         response = self.get_response(request)

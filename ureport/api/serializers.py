@@ -120,7 +120,7 @@ class PollReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Poll
-        fields = ("id", "flow_uuid", "title", "org", "category", "created_on", "questions")
+        fields = ("id", "flow_uuid", "title", "org", "category", "poll_date", "created_on", "questions")
 
     def get_questions(self, obj):
         questions = []

@@ -14,8 +14,8 @@
           {% edit_content 'orgs.org_edit' "" "#id_common.engagement_description" "-m-8" %}
           {{ org|config:"engagement_description"|default:""}}
 
-  .
-    .bg-black(class="md:flex")
+  .bg-dark-blue
+    .max-w-page.mx-auto.bg-black(class="md:flex")
       .flex-1.p-home
         .font-alt.text-light1.mb-4.font-bold.mt-6
           -trans "OVERALL STATISTICS"
@@ -75,7 +75,7 @@
             #map-info.relative.h-full.w-full.mt-2.flex.justify-center
   
   .border-t.border-b.bg-dark-gray.sticky.top-0.z-50
-    .max-w-page.mx-auto.px-home.py-4.border-gray-800(class="md:flex md:justify-between")
+    .max-w-page.mx-auto.px-home.py-4(class="md:flex md:justify-between" style="border-color: #777")
       .text-white.font-bold.flex-center-y
         -trans "FILTER RESULTS"
 
@@ -103,7 +103,7 @@
                     - elif forloop.last
                       - if show_maps
                         %a.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-no-wrap(href="#" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
-                          -trans "STATE"
+                          {{segment.label|upper}}
                           %i.fa.fa-caret-down
                           .state-dropdown.absolute.z-50(id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" style="margin-left:-1px" data-html2canvas-ignore=true)
                             .border.border-gray-400.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="ltr:text-left rtl:text-right")
