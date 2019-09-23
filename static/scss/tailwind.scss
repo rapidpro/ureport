@@ -87,7 +87,6 @@ html {
 
   &:hover {
     background-color: #1d1d1d;
-    border-top: 1px solid white;
   }
 
   &:active {
@@ -220,14 +219,14 @@ html {
   background: rgb(32, 32, 32);
 
   .admin-menu {
-    @apply inline-block px-3 py-2;
+    @apply inline-block px-3 py-2 text-lg;
 
     &:hover {
       @apply text-white;
     }
 
     &.small-link-no-wrap {
-      @apply w-full text-xs whitespace-no-wrap;
+      @apply w-full text-sm whitespace-no-wrap;
 
       &.separator {
         @apply border-t border-black;
@@ -296,6 +295,17 @@ html {
   font-weight: 700;
   font-size: 1.25rem;
 
+  .label {
+    display: inline;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .name {
+    display: inline;
+  }
+  
   .count {
     font-size: 1rem;
     font-weight: 400;
@@ -309,7 +319,7 @@ html {
   line-height: 40px;
   border-radius: 50%;
   text-align: center;
-  font-size: 1.20rem;
+  font-size: 1rem;
 }
 
 // small circle around font awesome icon, used for sharing
@@ -521,7 +531,7 @@ html {
 }
 
 // mobile styles
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .vertical-angle-left, .vertical-angle-right {
     -webkit-clip-path: polygon(0 0, 0 calc(100% + 1px), 100% calc(100% + 1px),100% 30px);
     clip-path: polygon(0 0, 0 calc(100% + 1px), 100% calc(100% + 1px),100% 30px);

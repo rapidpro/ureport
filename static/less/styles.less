@@ -1,7 +1,8 @@
-@headline-font: SharpSansDisplayBold, sans-serif;
-@subheadlines-font: SharpSansDisplayMedium, sans-serif;
-@text-font: 'Roboto', sans-serif;
+@headline-font: "Monteserrat", sans-serif;
+@subheadlines-font: "Monteserrat", sans-serif;
+@text-font: "Monteserrat", sans-serif;
 @small-text-font: 'Montserrat', sans-serif;
+
 
 @bg-dark-blue: #050E28;
 @gold-yellow: #FED100;
@@ -12,7 +13,7 @@
 @font-colors-list: #FFF, #000, #FFF;
 
 body {
-  font-family: @text-font;
+  font-family: 'Montserrat', sans-serif;
   color: #000;
 }
 
@@ -58,6 +59,8 @@ body {
   font-size: 1rem;
   line-height: 1.2rem;
   font-family: @subheadlines-font;
+  padding: 20px 80px 20px 80px;
+  border-bottom: 1px solid #000;
 
   .icon {
     font-size: 2rem;
@@ -381,8 +384,8 @@ a {
 
 .admin-header {
   padding: 60px 80px 0px 80px; 
-  background-color: rgb(6, 14, 38);
-  color: #FFFFFF;
+  background-color: white;
+  color: @bg-dark-blue;
 
   .level {
     border-bottom: 1px solid white; 
@@ -390,9 +393,7 @@ a {
 
     .square-logo {
       margin-right: 1.6rem; 
-      width: 80px; 
       height: 80px;
-      border: 1px solid green;
       background-color: white;
     }
 
@@ -414,14 +415,15 @@ a {
     }
 
     .logged-in-account {
-      color: #FFFFFF;
-      font-size: 1.2rem;
+      font-weight: 700;
+      font-size: 1.5rem;
       margin-right: 4rem;
       font-family: @subheadlines-font;
     }
 
     .logout-button {
-      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 1.5rem;
       background-color: inherit;
       font-family: @subheadlines-font;
 
@@ -510,16 +512,15 @@ a {
 }
 
 .footer {
+  background-color: white;
+
   .footer-content {
     padding: 5rem;
-    background-color: #000000;
-    color: #FFFFFF;
+    color: @bg-dark-blue;
 
     .footer-logo {
       margin-right: 1.6rem; 
-      width: 350px; 
-      height: 65px;
-      background-color: white;
+      height: 80px;
     }
 
     .big-footer-nav {
@@ -527,7 +528,7 @@ a {
       padding-bottom: 40px;
       
       .big-footer-link {
-        color: #FFFFFF;
+        color: @bg-dark-blue;
         font-size: 1.8rem;
         line-height: 3.5rem;
         border-bottom: 1px solid #FFF;
@@ -543,10 +544,9 @@ a {
 
 
     .small-footer-nav {
-      background-color: #000000;
 
       .small-footer-link {
-        color: #FFFFFF;
+        color: @bg-dark-blue;
         display: block;
         font-weight: bold;
         font-family: @subheadlines-font;
@@ -559,7 +559,6 @@ a {
         }
 
         &.is-outlined {
-          background-color: #000000;
           border-color: darkgreen;
         }
       }
@@ -568,7 +567,7 @@ a {
 }
 
 #left-menu {
-  background-color: rgb(10, 17, 44);
+  background-color: @bg-dark-blue;
   font-family: @headline-font;
 
   padding: 3rem 10px;
@@ -599,6 +598,7 @@ a {
     .menu-link-title {
       line-height: 2rem;
       vertical-align: top;
+      font-weight: 700;
     }
   }
 }
@@ -1498,8 +1498,10 @@ a.button {
   border-radius: .25em;
   font-family: @headline-font;
   font-size: 1.1rem;
-  padding: .85em 1.6em .85em 1.6em;
+  // padding: .85em 1.6em .85em 1.6em;
 }
+
+
 
 .for-stories {
   min-height: 15rem;
@@ -1689,4 +1691,16 @@ a.button {
   color: #FFF;
   font-size: 1.5rem;
   margin: 2rem
+}
+
+.table.is-hoverable.is-striped tbody tr:not(.is-selected):hover:nth-child(even), .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover {
+  background-color:#dadada;
+}
+
+.content-section-container {
+  background-color: @bg-dark-blue;
+}
+
+.bg-white {
+  background-color: white;
 }

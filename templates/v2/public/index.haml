@@ -8,7 +8,7 @@
   - if latest_poll and latest_poll.get_first_question
     .max-w-page.mx-auto.bg-white.mt-6
       .bg-dark1(class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %}")
-        .flex-1.bg-dark1.text-white.p-home.self-center
+        .flex-1.self-stretch.bg-dark1.text-white.p-home.self-center
           .font-bold.text-l
             - trans "LATEST OPINION"
 
@@ -20,7 +20,7 @@
             {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.ruleset_uuid|add:"_title"  "-m-8" %}
             {{ latest_poll.get_first_question.title }}
 
-        .flex-1.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
+        .flex-1.self-stretch.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
           .relative.w-full(style="min-height:20rem;")
             .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
@@ -75,7 +75,7 @@
               - trans "Join U-Report, Your voice matters."
 
           .mt-8.text-center
-            %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}" class="hover:bg-gray-900")
+            %a.btn.bg-black.text-white(href="{% url 'v2.public.join' %}" class="hover:bg-gray-700")
               -trans "JOIN NOW"
 
         .bg-black.p-12.text-white.hover-parent
@@ -142,7 +142,7 @@
                     {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" %}
                     {{ story.summary|truncatewords:50|linebreaksbr }}
 
-                  %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}" class="hover:bg-gray-900")
+                  %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}" class="hover:bg-gray-700")
                     {% trans "READ MORE" %}
 
               .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")
@@ -233,12 +233,12 @@
 
   :javascript
     $(function(){
-      // setInterval(function() {
-      //   if($(".social-media-blocks").children().length > 1) {
-      //     $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
-      //     $(".social-media-block-tabs").children().toggleClass("open", 1000, "easeOutSine");
-      //   }
-      // }, 15000)
+      setInterval(function() {
+        if($(".social-media-blocks").children().length > 1) {
+          $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
+          $(".social-media-block-tabs").children().toggleClass("open", 1000, "easeOutSine");
+        }
+      }, 15000)
 
       $(".social-media-block-tab").on("click", function(){
         if(!$(this).hasClass("open")){

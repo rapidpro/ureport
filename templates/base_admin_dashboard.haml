@@ -32,7 +32,7 @@
         .level
           .level-left
             %a.level-item.square-logo(href="{% url 'orgs.org_home' %}")
-              {% thumbnail org.get_logo "350x65" format="PNG" as im %}
+              {% thumbnail org.get_logo "x80" format="PNG" as im %}
               %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
               {% endthumbnail %}
             .level-item
@@ -57,9 +57,9 @@
                     - trans "Login"
 
   %section.section.is-paddingless.is-marginless
-    .content-section-container
+    .content-section-container(style="padding: 0 0px 0 60px; ")
       -block content-section
-            .columns
+            .columns.is-marginless
               .column.is-one-fifth.block#left-menu
                 -block menu
                   %aside.menu
@@ -69,7 +69,7 @@
                           %span.icon
                             %img(src="{{ STATIC_URL }}img/polls_icon.png")
                           %span.menu-link-title
-                            - trans "Polls"
+                            - trans "Opinions"
                       %li
                         %a(href="{% url 'stories.story_list' %}")
                           %span.icon
@@ -149,22 +149,9 @@
                             %span.menu-link-title
                               - trans "Images"
 
-                      %li
-                        %a(href="https://app.rapidpro.io/")
-                          %span.icon
-                            %img(src="{{ STATIC_URL }}img/rapidpro_icon.png")
-                          %span.menu-link-title
-                            RapidPro
-                      %li
-                        %a
-                          %span.icon
-                            %img(src="{{ STATIC_URL }}img/analytics_icon.png")
-                          %span.menu-link-title
-                            - trans "Analytics"
-
-              .column.is-four-fifths.is-offset-one.block
+              .column.is-four-fifths.is-offset-one.block(class="bg-white")
                 -block content-div
-                  .content-div(style="padding: 3rem 40px;")
+                  .content-div(style="padding: 3rem 70px 3rem 40px;")
                     - block messages
                       - if messages
                         - for message in messages
@@ -182,12 +169,12 @@
           .level.big-footer-nav
             .level-left
               %a.level-item.footer-logo(href="{% url 'v2.public.index' %}")
-                {% thumbnail org.get_logo "350x65" format="PNG" as im %}
+                {% thumbnail org.get_logo "x80" format="PNG" as im %}
                 %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
                 {% endthumbnail %}
             .level-right
               %a.level-item.big-footer-link(href="{% url 'v2.public.opinions' %}")
-                - trans "Polls"
+                - trans "Opinions"
               %a.level-item.big-footer-link(href="{% url 'v2.public.stories' %}")
                 - trans "Stories"
 

@@ -90,13 +90,13 @@ $(->
         if topBoundary?
           if topBoundary.unset?
             total = topBoundary.set + topBoundary.unset
-            this._div.innerHTML = "<div class='count'>" + window.string_TopRegion + ":</div><div class='name'>" + topBoundary.label + "</div>" +
+            this._div.innerHTML = "<div class='label'>" + window.string_TopRegion + ":</div><div class='name'>" + topBoundary.label + "</div>" +
                 "<div class='count'>" + topBoundary.set.toLocaleString() + " " + window.string_Responses + " // " + total.toLocaleString() + " " + window.string_Polled + "</div>"
           else if topBoundary.set?
-            this._div.innerHTML = "<div class='count'>" + window.string_TopRegion + ":</div><div class='name'>" + topBoundary.label + "</div>" +
+            this._div.innerHTML = "<div class='label'>" + window.string_TopRegion + ":</div><div class='name'>" + topBoundary.label + "</div>" +
                 "<div class='count'>" + topBoundary.set.toLocaleString() + " " + window.string_Reporters + "</div>"
           else
-            this._div.innerHTML = "<div class='count'>" + window.string_TopRegion + ":</div><div class='name'>" + topBoundary.label + "</div>"
+            this._div.innerHTML = "<div class='label'>" + window.string_TopRegion + ":</div><div class='name'>" + topBoundary.label + "</div>"
         else
            this._div.innerHTML = ""
     
@@ -176,7 +176,6 @@ $(->
           if (count.set > max)
             max = count.set
             topBoundary = count
-            console.log(count)
 
         # and create mapping of threshold values to colors
         colorSteps = []

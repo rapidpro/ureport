@@ -33,32 +33,6 @@
 
   
   :css
-    @font-face {
-      font-family: SharpSansDisplayBold;
-      src: url('{{ STATIC_URL }}fonts/SharpSansDispNo1-Bold.woff2') format("woff2"),
-           url('{{ STATIC_URL }}fonts/SharpSansDispNo1-Bold.woff') format("woff");
-    }
-
-    @font-face {
-      font-family: SharpSansDisplayBoldItalic;
-      src: url('{{ STATIC_URL }}fonts/SharpSansDispNo1-BoldIt.woff2') format("woff2"),
-           url('{{ STATIC_URL }}fonts/SharpSansDispNo1-BoldIt.woff') format("woff");
-    }
-
-    @font-face {
-      font-family: SharpSansDisplayMedium;
-      src: url('{{ STATIC_URL }}fonts/SharpSansDispNo1-Medium.woff2') format("woff2"),
-           url('{{ STATIC_URL }}fonts/SharpSansDispNo1-Medium.woff') format("woff");
-    }
-
-    @font-face {
-      font-family: SharpSansDisplayMediumItalic;
-      src: url('{{ STATIC_URL }}fonts/SharpSansDispNo1-MediumIt.woff2') format("woff2"),
-           url('{{ STATIC_URL }}fonts/SharpSansDispNo1-MediumIt.woff') format("woff");
-
-    }
-
-
     <!-- color overloads for countries -->
     .primary-border {
        border-color: {{ org|config:"primary_color"}} !important;
@@ -85,14 +59,12 @@
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit-rtl.css")
-        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_uk.less")
 
     -else
       -compress css
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
         %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
-        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_uk.less")
 
   - block extra-less
   - block extra-style
@@ -208,7 +180,7 @@
               - if request.user.is_superuser or org_perms.polls.poll_list
                 %li
                   %a{ href:"{% url 'polls.poll_list' %}"}
-                    - trans "Polls"
+                    - trans "Opinions"
 
               - if request.user.is_superuser or org_perms.categories.category_list
                 %li
