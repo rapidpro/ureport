@@ -1,3 +1,12 @@
+v1.1.45
+----------
+ * Merge pull request #472 from rapidpro/fix-stats
+ * Merge branch 'master' of github.com:rapidpro/ureport into fix-stats
+ * Merge pull request #471 from rapidpro/poll-date-api
+ * Merge pull request #470 from rapidpro/beta-fixes
+ * Add timeout to lock of poll counts rebuild
+ * Add poll date to API
+
 v1.1.38
 ----------
  * Show top region on maps
