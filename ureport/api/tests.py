@@ -334,6 +334,7 @@ class UreportAPITests(APITestCase):
                 title=poll.title,
                 org=poll.org_id,
                 questions=[],
+                poll_date=poll.poll_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                 created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
             ),
         )
@@ -367,6 +368,7 @@ class UreportAPITests(APITestCase):
                     title=poll.title,
                     org=poll.org_id,
                     created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                    poll_date=poll.poll_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     questions=[
                         dict(
                             id=poll_question.pk,
@@ -396,6 +398,7 @@ class UreportAPITests(APITestCase):
                     flow_uuid=poll.flow_uuid,
                     title=poll.title,
                     org=poll.org_id,
+                    poll_date=poll.poll_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     questions=[],
                 ),
