@@ -59,14 +59,12 @@
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit-rtl.css")
-        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_uk.less")
 
     -else
       -compress css
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
         %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
         %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
-        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles_uk.less")
 
   - block extra-less
   - block extra-style
