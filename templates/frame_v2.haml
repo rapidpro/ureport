@@ -208,7 +208,7 @@
               - if request.user.is_superuser or org_perms.polls.poll_list
                 %li
                   %a{ href:"{% url 'polls.poll_list' %}"}
-                    - trans "Polls"
+                    - trans "Opinions"
 
               - if request.user.is_superuser or org_perms.categories.category_list
                 %li
