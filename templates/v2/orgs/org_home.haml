@@ -78,22 +78,6 @@
                     .tile.is-child.is-size-4
                       - trans "Backends"
 
-            .tile.is-parent
-              %a.tile.is-child.box.has-text-centered.link-button(href="https://app.rapidpro.io/")
-                .tile.is-parent.is-vertical.small-button-link
-                  .tile.is-child
-                    %img(src="{{ STATIC_URL }}img/rapidpro_icon.png")
-                  .tile.is-child.is-size-4
-                    RapidPro
-
-            .tile.is-parent
-              %a.tile.is-child.box.has-text-centered.link-button(href="#")
-                .tile.is-parent.is-vertical.small-button-link
-                  .tile.is-child
-                    %img(src="{{ STATIC_URL }}img/analytics_icon.png")
-                  .tile.is-child.is-size-4
-                    - trans "Analytics"
-
 
 - block extra-style
   :css

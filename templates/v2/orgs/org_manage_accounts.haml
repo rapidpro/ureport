@@ -35,7 +35,7 @@
 
 
 - block fields
-  %table.table.is-stripped.is-fullwidth
+  %table.table.is-striped.is-fullwidth.is-hoverable
     %thead
       %tr
         %th
@@ -48,7 +48,7 @@
           - trans "Remove"
     %tbody
       - for user in org_users
-        %tr
+        %tr(class="{% cycle 'row2' 'row1' %}")
           %td
             {{user.email}}
             - if user.first_name or user.last_name
@@ -61,7 +61,7 @@
           %td.check.permission
             %input{type:'checkbox'}
       - for invite in invites
-        %tr.invite
+        %tr.invite(class="{% cycle 'row2' 'row1' %}")
           %td
             {{invite.email}} (Invite Sent)
           %td.permission
