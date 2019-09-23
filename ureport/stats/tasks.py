@@ -24,4 +24,4 @@ def refresh_engagement_data(org, since, until):
                     f"Task: refresh_engagement_data in progress for {time.time() - start}s, for time_filter - {time_filter}, segment - {segment}, metric - {metric}"
                 )
 
-    logger(f"Task: refresh_engagement_data finished in {time.time() - start}s")
+    logger.info(f"Task: refresh_engagement_data finished in {time.time() - start}s")

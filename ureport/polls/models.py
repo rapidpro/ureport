@@ -317,7 +317,7 @@ class Poll(SmartModel):
             logger.info("Already rebuilding counts for poll #%d on org #%d" % (poll_id, org_id))
 
         else:
-            with r.lock(key):
+            with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
                 poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list("pk", flat=True)
 
                 poll_results_ids_count = len(poll_results_ids)
