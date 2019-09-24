@@ -6,14 +6,14 @@
   .bg-grid
     .max-w-page.mx-auto.p-home(class="md:flex")
       .flex-1.flex-center-y.hover-parent
-        .text-5xl.font-bold.hover-parent
+        .text-2xl.font-bold.hover-parent(class="md:text-5xl")
           {% edit_content 'orgs.org_edit' "" "#id_common.opinions_description" "" %}
           -trans "Opinions"
         .text-xl.max-w-lg
           {{ org|config:"opinions_description"|default:""}}
 
       .flex-center-y(class="{% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %}")
-        .block.mt-4(style="width:325px" class="rtl:text-left ltr:text-right")
+        .block.mt-4(style="width:285px" class="rtl:text-left ltr:text-right")
           .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded.w-full
             .flex.bg-black.border-b.border-white.w-full
               .flex-1
@@ -23,7 +23,7 @@
                   %i.fa.fa-caret-down
 
         .relative
-          .absolute.bg-white.search-results.h-64.border(id="poll-search-results" style="z-index:100000;width:325px;" class="rtl:right-0 ltr:left-0")
+          .absolute.bg-white.search-results.h-64.border(id="poll-search-results" style="z-index:100000;width:285px;" class="rtl:right-0 ltr:left-0")
             .no-results.p-4.italic.hidden
               -trans "No results found"
 
@@ -61,21 +61,21 @@
   
   
             .font-light.mt-6
-              .inline-block.border-black(class="rtl:pl-8 rtl:border-l ltr:pr-8 ltr:border-r")
-                .text-5xl.leading-none
+              .inline-block.border-black(class="{% if is_rtl_org %}md:border-l pl-16 md:pl-8{% else %}md:border-r pr-16 md:pr-8{% endif %}")
+                .text-3xl.leading-none(class="md:text-5xl")
                   {{ latest_poll.responded_runs|intcomma }}
                 .text-xs.font-bold
                   -trans "RESPONSES"
   
-              .inline-block(class="rtl:pr-8 ltr:pl-8")
-                .text-5xl.leading-none
+              .inline-block.mt-2.mx-auto(class="md:mx-0 md:mt-0 {% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %}")
+                .text-3xl.leading-none(class="md:text-5xl")
                   {{ latest_poll.response_percentage }}
                 .text-xs.font-bold
                   -trans "RESPONSE RATE"
   
-          .mt-6.flex
-            .flex-none(class="rtl:ml-8 ltr:mr-8")
-              .text-center.inline-block(class="rtl:pl-4 ltr:pr-4")
+          .mt-6.flex.flex-wrap
+            .flex-none.mx-auto(class="md:mx-0 {% if is_rtl_org %}md:ml-8 {% else %}md:mr-8{% endif %}")
+              .text-center.inline-block(class="{% if is_rtl_org %}md:pl-4 {% else %}md:pr-4{% endif %}")
                 %img(src="{{ STATIC_URL }}img/gender-male.png" width="40")
                 .font-bold.text-xl.leading-none.mt-2
                   {{gender_stats.male.percentage|default:"0"}}%
@@ -97,7 +97,7 @@
                   .text-sm.leading-none
                     {{gender_stats.other.count|default:"0"|intcomma}}
 
-            .flex-1.inline-block(style="min-width:220px;max-width:350px")
+            .flex-1.inline-block.mt-4(style="min-width:220px;max-width:350px" class="md:mt-0")
               .relative.w-full(style="height:105px")
                 {{ age_stats|json_script:"age_stats" }}
                 #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
@@ -115,7 +115,7 @@
 
 
     - for question in latest_poll.get_questions
-      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-aos="fade" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932'  org|config:'color_light1'|default:'#FFD100' org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' %}")
+      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-page="opinions" data-aos="fade" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932'  org|config:'color_light1'|default:'#FFD100' org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' %}")
         .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg %}")
           .p-home.h-full.flex-center-y(class="md:py-24")
             .flex(class="{% cycle '' 'md:flex-row-reverse' as reverse %}")

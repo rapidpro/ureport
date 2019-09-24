@@ -49,6 +49,12 @@
         .border-dark1 {
           border-color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
         }
+
+        .hover\:border-dark1 {
+          &:hover {
+            border-color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
+          }
+        }
   
         .bg-dark2 {
           background: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
@@ -63,6 +69,12 @@
         .border-dark2 {
           border-color: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
         }
+
+        .hover\:border-dark2 {
+          &:hover {
+            border-color: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
+          }
+        }
   
         .bg-dark3 {
           background: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
@@ -76,6 +88,12 @@
   
         .border-dark3 {
           border-color: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
+        }
+
+        .hover\:border-dark3 {
+          &:hover {
+            border-color: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
+          }
         }
   
         .border-light1 {
@@ -155,7 +173,7 @@
     .block.bg-black.h-2
 
     // countries (off screen to start)
-    #countries.bg-black.text-white
+    #countries.bg-black.text-white.z-600
       %a#countries-closer.p-4(href="javascript:void(0)" class="rtl:float-left ltr:float-right")
         %i.fa.fa-close.text-3xl
 
@@ -171,15 +189,15 @@
 
     // admin nav
     - if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
-      #admin-nav.block.hidden.text-xs.text-gray-400.border-t.border-b.border-black.sticky.top-0(class="md:block" style="z-index: 51")
+      #admin-nav.block.hidden.text-xs.text-gray-400.border-t.border-b.border-black.sticky.top-0.z-500(class="md:block")
         %ul.flex
           %li
-            %a.inline-block.px-1.pl-4.py-2(href="{% url 'orgs.org_home' %}")
+            %a.inline-block.px-1.pl-4.py-2.text-lg(href="{% url 'orgs.org_home' %}")
               %i.fa.fa-gear
           - if request.user.is_superuser
             %li
               .dropdown.relative.z-10
-                %a.admin-menu.dropdown-button(href="#")
+                %a.admin-menu.dropdown-button.text-sm.leading-loose(href="#")
                   - trans "Configuration"
                   %i.fa.fa-caret-down
 
@@ -197,24 +215,24 @@
                     %a.admin-menu.small-link-no-wrap(href="{% url 'assets.image_list' %}")
                       - trans "Images"
           %li
-            %a.admin-menu(href="{% url 'dashblocks.dashblock_list' %}")
+            %a.admin-menu.text-sm.leading-loose(href="{% url 'dashblocks.dashblock_list' %}")
               - trans "Content"
 
           -if org|config:"is_global"
             -if request.user.is_superuser or perms.countries.countryalias_list
               %li
-                %a.admin-menu(href="{% url 'countries.countryalias_list' %}")
+                %a.admin-menu.text-sm.leading-loose(href="{% url 'countries.countryalias_list' %}")
                   - trans "Country Aliases"
 
           - if request.user.is_superuser or org_perms.polls.poll_list
             %li
-              %a.admin-menu(href="{% url 'polls.poll_list' %}")
+              %a.admin-menu.text-sm.leading-loose(href="{% url 'polls.poll_list' %}")
                 - trans "Opinions"
 
           - if request.user.is_superuser or org_perms.categories.category_list
             %li
               .dropdown.relative.z-10
-                %a.admin-menu.dropdown-button(href="#")
+                %a.admin-menu.dropdown-button.text-sm.leading-loose(href="#")
                   - trans "Categories"
                   %i.fa.fa-caret-down
                 .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
@@ -228,7 +246,7 @@
 
           %li
             .dropdown.relative.z-10
-              %a.admin-menu.dropdown-button(href="#")
+              %a.admin-menu.dropdown-button.text-sm.leading-loose(href="#")
                 - trans "Content"
                 %i.fa.fa-caret-down
               .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
@@ -279,10 +297,10 @@
 
           - block login
             %li(class="{% if is_rtl_org %}mr-auto{% else %}ml-auto{% endif %}")
-              %a.admin-menu(href="{% url 'users.user_profile' request.user.pk %}")
+              %a.admin-menu.text-lg(href="{% url 'users.user_profile' request.user.pk %}")
                 %i.fa.fa-user-circle
 
-              %a.admin-menu(href="{% url 'users.user_logout' %}?go=/")
+              %a.admin-menu.text-lg(href="{% url 'users.user_logout' %}?go=/")
                 %i.fa.fa-sign-out
 
     // desktop header
@@ -290,30 +308,30 @@
       // desktop header nav
       %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
         .li.flex-none.mr-4.py-menu
-          %a#countries-toggler(href="javascript:void(0)")
+          %a#countries-toggler(href="javascript:void(0)" class="hover:text-gray-600")
             %i.fa.fa-chevron-circle-down
             -trans "SELECT YOUR COUNTRY"
 
         .li.flex-grow.flex(class="md:justify-end")
-          %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4")
+          %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4 hover:text-gray-600")
             -trans "Engagement"
-          %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.about' %}")
+          %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.about' %}" class="hover:text-gray-600")
             -trans "About"
 
           - if org|config:"has_jobs"
-            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.jobs' %}")
+            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.jobs' %}" class="hover:text-gray-600")
               - trans "Jobs"
         
           - for custom_page in additional_menu|slice:":3"
-            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.custom_page' custom_page.link %}")
+            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.custom_page' custom_page.link %}" class="hover:text-gray-600")
               {{custom_page.title}}
 
           - if org|config:"facebook_page_url"
-            %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}')
+            %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-600")
               %i.fa.fa-facebook
 
           - if org|config:"twitter_handle"
-            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
+            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-600")
               %i.fa.fa-twitter
 
           %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}" class="hover:bg-gray-700")
@@ -323,17 +341,17 @@
       .max-w-page.mx-auto.justify-around.mt-5.mb-12.px-home.hidden.border-b.pb-6(class="md:flex")
         .flex-1.text-center.font-bold.text-2xl.flex-center-y
           %div
-            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}")
+            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-600 hover:border-dark1")
               -trans "Opinions"
 
         %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-          {% thumbnail org.get_logo "x80" format="PNG" as im %}
+          {% thumbnail org.get_logo "x70" format="PNG" as im %}
           %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
           {% endthumbnail %}
 
         .flex-1.text-center.font-bold.text-2xl.flex-center-y
           %div
-            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}")
+            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}" class="hover:text-gray-600 hover:border-dark1")
               -trans "Stories"
 
     // mobile header
@@ -393,7 +411,7 @@
     .bg-dark-blue
       .max-w-page.mx-auto.text-white.px-home.pt-home.hover-parent(class="md:flex")
         - for story in main_stories|slice:"1:4"
-          %a.block.mt-16.p-4(class="md:mt-4 md:mr-4 md:w-1/3" href="{% url 'v2.public.story_read' story.pk %}")
+          %a.block.mt-16.p-4(class="md:mt-4 {% if not forloop.first %} md:ml-4 {% endif %} md:w-1/3 md:p-0" href="{% url 'v2.public.story_read' story.pk %}")
             .block
               {% thumbnail story.get_image "400x250" crop="top" as im %}
               %img(width="100%" src="{{im.url}}")
@@ -404,7 +422,7 @@
             .mt-4.hidden(class="md:block")
               %button.btn.bg-black.text-white(class="hover:bg-gray-700")
                 -trans "READ MORE"
-          {% edit_content 'stories.story_update' story.pk "" "bg-black p-2" %}
+          {% edit_content 'stories.story_update' story.pk "" "bg-black p-2 md:mt-4" %}
 
     {% endif %}
 
@@ -414,7 +432,7 @@
         .hidden(class="md:w-1/3 md:block")
           %img(src="{{STATIC_URL}}img/blue_u.png")
 
-        .(class="md:w-2/3 {% if is_rtl_org %}text-left{% else %}text-right{% endif %}")
+        .text-center(class="md:w-2/3 {% if is_rtl_org %}md:text-left{% else %}md:text-right{% endif %}")
           .pb-4(class="{% if is_rtl_org %}md:pl-10 md:border-l{% else %}md:pr-10 md:border-r{% endif %} md:border-gray-500")
             .font-bold.text-2xl.leading-tight.my-8.hover-parent(class="md:mb-8 md:mt-0 md:text-3xl")
               {% edit_content 'orgs.org_edit' "" "#id_common.engagement_footer_callout" "-m-8" %}
@@ -429,7 +447,7 @@
     // footer navbar
     .justify-around.mt-12.mb-3.px-home(class="md:flex")
       %a.flex-1.text-center.mb-2.hidden(href="{% url 'v2.public.index' %}" class="md:block")
-        {% thumbnail org.get_logo "x80" format="PNG" as im %}
+        {% thumbnail org.get_logo "x70" format="PNG" as im %}
         %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
         {% endthumbnail %}
 
@@ -441,35 +459,35 @@
       .flex-1.flex(class="md:justify-end")
         .font-bold.text-2xl.flex-center-y(class="md:ml-6")
           %div
-            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}")
+            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-600")
               -trans "Opinions"
 
         .font-bold.text-2xl.ml-6.flex-center-y
           %div
-            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}")
+            %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}" class="hover:text-gray-600")
               -trans "Stories"
 
     // footer menu
     %ul.mt-5.mb-12.px-home.text-sm.font-bold(class="md:flex")
       .li.flex-initial.py-menu(class="rtl:ml-4 ltr:mr-4")
-        %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}")
+        %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}" class="hover:text-gray-600")
           -trans "About"
 
-        %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4")
+        %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4 hover:text-gray-600")
           -trans "Engagement"
 
       .li.flex-grow.flex(class="md:justify-end")
         {% if org|config:"facebook_page_url" %}
-        %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}')
+        %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-600")
           %i.fa.fa-facebook
         {% endif %}
 
         {% if org|config:"twitter_handle" %}
-        %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="rtl:mr-4 ltr:ml-4")
+        %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="rtl:mr-4 ltr:ml-4 hover:text-gray-600")
           %i.fa.fa-twitter
         {% endif %}
       
-        %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="rtl:mr-4 ltr:ml-4")
+        %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="rtl:mr-4 ltr:ml-4 hover:text-gray-600")
           - trans "Login"
     // bottom yellow bar
     .bg-color3.h-2
@@ -506,7 +524,7 @@
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js")
 
   // AOS for fade in animations on scroll
-  %script(src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js")
+  %script(src="{{STATIC_URL}}js/aos.js")
 
   {% compress js %}
   // Gradients making util

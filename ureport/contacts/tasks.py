@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import time
 
+from dash.orgs.models import Org
 from dash.orgs.tasks import org_task
 
 from django.core.cache import cache
@@ -10,10 +11,18 @@ from django.utils import timezone
 
 from celery.utils.log import get_task_logger
 
+from ureport.celery import app
 from ureport.contacts.models import Contact
 from ureport.utils import datetime_to_json_date
 
 logger = get_task_logger(__name__)
+
+
+@app.task(name="contacts.rebuild_contacts_counts")
+def rebuild_contacts_counts():
+    orgs = Org.objects.filter(is_active=True)
+    for org in orgs:
+        Contact.recalculate_reporters_stats(org)
 
 
 @org_task("contact-pull", 60 * 60 * 12)

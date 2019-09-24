@@ -89,6 +89,7 @@ $(".tab-button-time-filter").click((e) ->
         timeFilter = $(this).data("time-filter")
         showEngagementChart(metricSlug, segmentType, timeFilter)
   )
+  AOS.refresh()
   e.stopPropagation()
   return false
 )
@@ -428,4 +429,24 @@ $(->
       timeFilter = chosen.attr("data-time-filter")
       showEngagementChart(metricSlug, segmentType, timeFilter)
   )
+)
+
+$(->
+  redrawChart = (evt) ->
+    page = $("#" + evt.detail.id).data("page")
+
+    if page == "engagement"
+      graphDiv = $("#" + evt.detail.id).find(".engagement-graph").not(".hidden").find(".engagement-chart")
+      metricSlug = graphDiv.data("metric-slug")
+      segmentType = graphDiv.data("segment-type")
+      timeFilter = graphDiv.data("time-filter")
+      showEngagementChart(metricSlug, segmentType, timeFilter)
+    
+    if page == "opinions"
+      graphDiv = $("#" + evt.detail.id).find(".poll-chart")
+      questionID = graphDiv.data("question")
+      segment = graphDiv.data("segment")
+      showChart(questionID, segment)
+
+  document.addEventListener 'aos:in', redrawChart
 )

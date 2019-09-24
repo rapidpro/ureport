@@ -9,7 +9,7 @@
     .max-w-page.mx-auto.bg-white.mt-6
       .bg-dark1(class="md:flex {% if is_rtl_org %}md:-mr-12 vertical-angle-right-side  md:pr-12{% else %}vertical-angle-left-side md:pl-12 md:-ml-12{% endif %}")
         .flex-1.self-stretch.bg-dark1.text-white.p-home.self-center
-          .font-bold.text-l
+          .text-l.mb-10
             - trans "LATEST OPINION"
 
           .font-bold.mt-2.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl leading-tight{% endif %}")
@@ -24,7 +24,7 @@
           .relative.w-full(style="min-height:20rem;")
             .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")
 
-          .mx-2.mb-6(class="md:mb-0")
+          .mb-6.text-center(class="md:mb-0")
             %a.btn.bg-light1.hover-dark(href="{% url 'v2.public.opinion_read' latest_poll.pk %}")
               - trans "VIEW FULL RESULTS"
 
@@ -41,14 +41,14 @@
 
         .font-bold.text-l.min-w-sm
           %div
-            .whitespace-no-wrap
+            .(class="md:whitespace-no-wrap")
               - trans "PARTNERING WITH"
-              %span.text-white {{global_contact_count|intcomma}}
+              %span.text-white.whitespace-no-wrap {{global_contact_count|intcomma}}
               - trans "U-REPORTERS"
 
-            .whitespace-no-wrap
+            .(class="md:whitespace-no-wrap")
               - trans "IN"
-              %span.text-white {{global_org_count|intcomma}}
+              %span.text-white.whitespace-no-wrap {{global_org_count|intcomma}}
               - trans "COUNTRIES WORLDWIDE"
 
       .my-16.p-4(class="md:ml-4 md:w-1/2 md:my-0 md:p-0")
@@ -109,9 +109,10 @@
               -if org|config:"twitter_handle"
                 .absolute.social-media-block.hover-parent
                   {% edit_content 'orgs.org_edit' "" "#id_common.twitter_handle" "-m-8" %}
-                  %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
+                  .mb-6.flex.justify-center
+                    %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
 
-                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"550px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"500px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
   - if stories
     // featured-story-full
@@ -224,7 +225,7 @@
           .flex.flex-wrap.justify-center
             - for photo in photos|slice:":6"
               {% thumbnail photo.get_image "200x200" crop="center" as im %}
-              .inline-block.w-40.h-40.bg-gray-500.m-2
+              .inline-block.bg-gray-500.m-2(class="w-5/12")
                 %img(src="{{im.url}}")
               {% endthumbnail %}
 
@@ -233,13 +234,6 @@
 
   :javascript
     $(function(){
-      setInterval(function() {
-        if($(".social-media-blocks").children().length > 1) {
-          $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
-          $(".social-media-block-tabs").children().toggleClass("open", 1000, "easeOutSine");
-        }
-      }, 15000)
-
       $(".social-media-block-tab").on("click", function(){
         if(!$(this).hasClass("open")){
           if($(".social-media-blocks").children().length > 1) {
