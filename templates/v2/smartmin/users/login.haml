@@ -8,22 +8,8 @@
 - block content-section
   .content-section
     - block content
-      .columns.login-form
-        .column.is-5.left-block
-          .page-title
-            - trans "SIGN IN"
-          .grey-block(style="width:70%;")
-          .grey-block(style="width:45%;")
-          .grey-block(style="width:70%;")
-          .grey-block(style="width:55%;")
-          .grey-block
-          - if allow_email_recovery
-            %span.forgot-password-link
-              %a.has-text-info(href="{% url 'users.user_forget' %}")
-                - trans "Forgot Password?"
-
-
-        .column.is-6.is-offset-1
+      .columns.login-form.is-centered
+        .column.is-half
           %form#login-form(method="post")
             - for field, errors in form.errors.items
               - if field == '__all__'
@@ -42,5 +28,10 @@
 
               - csrf_token
 
-              %button.button.is-info.login-button.is-pulled-right(type="submit")
+              %button.button.is-info.login-button(type="submit")
                 - trans "Enter Dashboard"
+          
+          - if allow_email_recovery
+            .forgot-password-link
+              %a.has-text-info.is-large(href="{% url 'users.user_forget' %}")
+                - trans "Forgot Password?"

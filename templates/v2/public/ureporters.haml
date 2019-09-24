@@ -74,8 +74,8 @@
                   %i.fa.fa-spinner.fa-spin
             #map-info.relative.h-full.w-full.mt-2.flex.justify-center
   
-  .border-t.border-b.bg-dark-gray.sticky.top-0.z-50
-    .max-w-page.mx-auto.px-home.py-4(class="md:flex md:justify-between" style="border-color: #777")
+  .border-t.border-b.bg-dark-gray.sticky.z-500.border-gray-600(class="{% if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser %}top-45{% else %}top-0{% endif %}")
+    .max-w-page.mx-auto.px-home.py-4.border-gray-600(class="md:flex md:justify-between")
       .text-white.font-bold.flex-center-y
         -trans "FILTER RESULTS"
 
@@ -84,7 +84,7 @@
           - for time_filter in data_time_filters
             .cursor-pointer.border-white.pill-black.tab-button-time-filter(class="{% if forloop.first %}{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}{% elif forloop.last %}selected {% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
               {{time_filter.label}}
-  .bg-dark-blue.border-b.border-white
+  .bg-dark-blue.border-b.border-gray-600
     .max-w-page.mx-auto.p-home.text-white
       - for time_filter in data_time_filters
         .engagemment-content.hover-parent(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")

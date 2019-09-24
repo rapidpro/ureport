@@ -17,7 +17,6 @@ html {
 #countries {
   position: absolute;
   width: 100%;
-  z-index: 450;
   overflow:hidden;
   opacity: 1;
 
@@ -219,7 +218,7 @@ html {
   background: rgb(32, 32, 32);
 
   .admin-menu {
-    @apply inline-block px-3 py-2 text-lg;
+    @apply inline-block px-3 py-2;
 
     &:hover {
       @apply text-white;
@@ -233,6 +232,18 @@ html {
       }
     }
   }
+}
+
+.z-500 {
+  z-index: 500;
+}
+
+.z-600 {
+  z-index: 600;
+}
+
+.top-45 {
+  top: 3rem;
 }
 
 #map-info {
@@ -572,6 +583,11 @@ html {
   .pr-home {
     @apply pr-6;
   }
+
+  .top-45 {
+    top: 0;
+  }
+
 }
 
 // applied to a div will center children vertically

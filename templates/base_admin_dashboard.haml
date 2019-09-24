@@ -42,8 +42,8 @@
                     - if request.user and request.user.is_authenticated
                       - trans "Welcome, "
                       {{ request.user.first_name }} {{ request.user.last_name }}
-                .page-title-text
-                  - trans "Dashboard"
+                  .page-title-text
+                    - trans "Dashboard"
 
           .level-right
             - block login
