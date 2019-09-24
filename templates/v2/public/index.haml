@@ -109,9 +109,10 @@
               -if org|config:"twitter_handle"
                 .absolute.social-media-block.hover-parent
                   {% edit_content 'orgs.org_edit' "" "#id_common.twitter_handle" "-m-8" %}
-                  %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
+                  .mb-6.flex.justify-center
+                    %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
 
-                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"550px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"500px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
 
   - if stories
     // featured-story-full
@@ -233,13 +234,6 @@
 
   :javascript
     $(function(){
-      setInterval(function() {
-        if($(".social-media-blocks").children().length > 1) {
-          $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
-          $(".social-media-block-tabs").children().toggleClass("open", 1000, "easeOutSine");
-        }
-      }, 15000)
-
       $(".social-media-block-tab").on("click", function(){
         if(!$(this).hasClass("open")){
           if($(".social-media-blocks").children().length > 1) {
