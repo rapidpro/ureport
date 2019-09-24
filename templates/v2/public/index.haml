@@ -41,14 +41,14 @@
 
         .font-bold.text-l.min-w-sm
           %div
-            .whitespace-no-wrap
+            .(class="md:whitespace-no-wrap")
               - trans "PARTNERING WITH"
-              %span.text-white {{global_contact_count|intcomma}}
+              %span.text-white.whitespace-no-wrap {{global_contact_count|intcomma}}
               - trans "U-REPORTERS"
 
-            .whitespace-no-wrap
+            .(class="md:whitespace-no-wrap")
               - trans "IN"
-              %span.text-white {{global_org_count|intcomma}}
+              %span.text-white.whitespace-no-wrap {{global_org_count|intcomma}}
               - trans "COUNTRIES WORLDWIDE"
 
       .my-16.p-4(class="md:ml-4 md:w-1/2 md:my-0 md:p-0")
