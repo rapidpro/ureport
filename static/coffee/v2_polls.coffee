@@ -89,6 +89,7 @@ $(".tab-button-time-filter").click((e) ->
         timeFilter = $(this).data("time-filter")
         showEngagementChart(metricSlug, segmentType, timeFilter)
   )
+  AOS.refresh()
   e.stopPropagation()
   return false
 )
