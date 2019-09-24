@@ -6,7 +6,7 @@
   .bg-grid
     .max-w-page.mx-auto.p-home(class="md:flex")
       .flex-1.flex-center-y
-        .text-5xl.font-bold
+        .text-2xl.font-bold(class="md:text-5xl")
           -trans "Engagement"
 
       .flex-1.flex-center-y.hover-parent
@@ -21,8 +21,8 @@
           -trans "OVERALL STATISTICS"
 
         .text-white.font-light.mt-12
-          .inline-block.border-white(class="ltr:pr-8 ltr:border-r rtl:border-l rtl:pl-8")
-            .text-5xl.leading-none
+          .inline-block.border-white(class="{% if is_rtl_org %}md:border-l pl-8{% else %}md:border-r pr-8{% endif %}")
+            .text-2xl.leading-none(class="md:text-5xl")
               {{org.get_reporters_count|intcomma}}
             .text-xs.font-bold
               -trans "U-REPORTERS"
@@ -30,13 +30,13 @@
                 +{{org.get_signup_rate|floatformat}}%
                 -trans "THIS YEAR"
 
-          .inline-block(class="ltr:pl-8 rtl:pr-8")
-            .text-5xl.leading-none
+          .inline-block.mt-2(class="md:mt-0 {% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %}")
+            .text-2xl.leading-none(class="md:text-5xl")
               {{average_response_rate|floatformat}} %
             .text-xs.font-bold
               -trans "AVG RESPONSE RATE"
 
-        .mt-4.flex.mb-8(class="md:mt-12 md:mb-0")
+        .mt-4.flex.flex-wrap.mb-8(class="md:mt-12 md:mb-0")
           .flex-none.mr-8
             .text-white.text-center.inline-block.border-white(class="ltr:pr-4 ltr:border-r rtl:border-l rtl:pl-4")
               %img(src="{{ STATIC_URL }}img/gender-male-w.png" width="40")
@@ -59,7 +59,7 @@
                 .text-light1.text-sm.leading-none
                   {{gender_stats.other_count|intcomma}}
 
-          .flex-1.inline-block(style="min-width:220px;max-width:350px")
+          .flex-1.inline-block.mt-2(style="min-width:220px;max-width:320px" class="md:mt-0")
             .relative.w-full(style="height:105px")
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
@@ -76,13 +76,13 @@
   
   .border-t.border-b.bg-dark-gray.sticky.z-500.border-gray-600(class="{% if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser %}top-45{% else %}top-0{% endif %}")
     .max-w-page.mx-auto.px-home.py-4.border-gray-600(class="md:flex md:justify-between")
-      .text-white.font-bold.flex-center-y
+      .text-white.font-bold.flex-center-y.flex-row(class="md:flex-col")
         -trans "FILTER RESULTS"
 
-      .flex-center-y
+      .flex-center-y.flex-row(class="md:flex-col")
         .text-white.text-xs.flex
           - for time_filter in data_time_filters
-            .cursor-pointer.border-white.pill-black.tab-button-time-filter(class="{% if forloop.first %}{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}{% elif forloop.last %}selected {% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
+            .cursor-pointer.border-white.pill-black.tab-button-time-filter.whitespace-no-wrap(class="{% if forloop.first %}{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}{% elif forloop.last %}selected {% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" data-time-filter="{{time_filter.time_filter_number}}")
               {{time_filter.label}}
   .bg-dark-blue.border-b.border-gray-600
     .max-w-page.mx-auto.p-home.text-white

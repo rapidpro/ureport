@@ -588,6 +588,9 @@ html {
     top: 0;
   }
 
+  .pill, .pill-last, .pill-first {
+    padding: 0.25rem 0.5rem;
+  }
 }
 
 // applied to a div will center children vertically
