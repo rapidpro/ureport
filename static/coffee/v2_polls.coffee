@@ -264,6 +264,7 @@ showChart = (questionID, segmentName) ->
         data: data
       })
 
+    $("#chart-" + questionID).find('.chart-progress').hide()
     # open ended, use a cloud
     if results[0].open_ended
       wordCloudColors = gradientFactory.generate({
@@ -441,13 +442,14 @@ $(->
       metricSlug = graphDiv.data("metric-slug")
       segmentType = graphDiv.data("segment-type")
       timeFilter = graphDiv.data("time-filter")
-      showEngagementChart(metricSlug, segmentType, timeFilter)
-    
+      setTimeout (-> showEngagementChart(metricSlug, segmentType, timeFilter)), 1000
+
     if page == "opinions"
       graphDiv = $("#" + evt.detail.id).find(".poll-chart")
       questionID = graphDiv.data("question")
       segment = graphDiv.data("segment")
-      showChart(questionID, segment)
+      $("#chart-" + questionID).find('.chart-progress').show()
+      setTimeout (-> showChart(questionID, segment)), 1000
 
   document.addEventListener 'aos:in', redrawChart
 )

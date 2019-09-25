@@ -100,7 +100,7 @@
             .flex-1.inline-block.mt-4(style="min-width:220px;max-width:350px" class="md:mt-0")
               .relative.w-full(style="height:105px")
                 {{ age_stats|json_script:"age_stats" }}
-                #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
+                #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
 
       -if show_maps
         .flex-1.text-black
@@ -179,4 +179,6 @@
 
             .relative.w-full(style="min-height:24rem;")
               .w-full.h-full.absolute.poll-chart.block(id="chart-{{ question.id }}" data-question="{{ question.id }}" data-segment="all")
-
+                .chart-progress.flex.text-center.w-full.h-full
+                  .fa-5x.inline-block.m-auto.self-center
+                    %i.fa.fa-spinner.fa-spin
