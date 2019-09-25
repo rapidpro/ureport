@@ -1,3 +1,10 @@
+v1.1.47
+----------
+ * Adjuts jobs page
+ * Larger circles
+ * Merge pull request #473 from rapidpro/beta-fixes
+ * Refresh AOS
+
 v1.1.45
 ----------
  * Merge pull request #472 from rapidpro/fix-stats
