@@ -143,6 +143,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
     $("#engagement-graph-" + dataSlug).highcharts({
         chart: {
           type: chartType
+          backgroundColor: "#060e26"
           style: {
             fontFamily: "Montserrat"
           }
