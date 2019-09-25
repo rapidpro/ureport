@@ -323,6 +323,15 @@ html {
   }
 }
 
+.bg-circle-lg {
+  display: inline-block;
+  width: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 2rem;
+}
+
 // circle around number, single digit only
 .bg-circle {
   display: inline-block;
