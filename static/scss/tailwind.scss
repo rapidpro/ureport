@@ -41,6 +41,29 @@ html {
   }
 }
 
+.mobile-accordion {
+  .mobile-accordion-content {
+    display: none;
+  }
+  
+  &.open {
+    .mobile-accordion-content {
+      display: block;
+    }
+
+    i {
+      &.closed {
+        display: none;
+      }
+      &.open {
+        display: inline;
+      }
+    }
+  }
+
+}
+
+
 .social-media-block {
   transition: 0.5s;
   opacity: 0;

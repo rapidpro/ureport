@@ -133,7 +133,7 @@
         position: fixed;
         top: 0;
         bottom: 0;
-        width: 200px;
+        width: 230px;
         min-height: 100vh;
         will-change: transform;
         overflow-y: scroll;
@@ -209,39 +209,50 @@
     </script>
 
     // mobile menu
-    #mobile-menu-container.flex(class="md:hidden")
-      .bg-black.text-white.py-home.pl-home.pr-16.h-full
-        %a.block.font-bold(href="{% url 'v2.public.opinions' %}")
+    #mobile-menu-container.flex.bg-black(class="md:hidden")
+      .bg-black.text-white.py-home.pl-home.pr-16.h-auto
+        %a.block.font-bold(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-600")
           -trans "Opinions"
 
-        %a.block.mt-4.font-bold(href="{% url 'v2.public.stories' %}")
+        %a.block.mt-4.font-bold(href="{% url 'v2.public.stories' %}" class="hover:text-gray-600")
           -trans "Stories"
 
-        %a.block.mt-8(href="{% url 'v2.public.about' %}")
+        %a.block.mt-8(href="{% url 'v2.public.about' %}" class="hover:text-gray-600")
           -trans "About"
 
-        %a.block.mt-4(href="{% url 'v2.public.ureporters' %}")
+        %a.block.mt-4(href="{% url 'v2.public.ureporters' %}" class="hover:text-gray-600")
           -trans "Engagement"
         
         - if org|config:"has_jobs"
-          %a.block.mt-4(href="{% url 'v2.public.jobs' %}")
+          %a.block.mt-4(href="{% url 'v2.public.jobs' %}" class="hover:text-gray-600")
             - trans "Jobs"
         
         - for custom_page in additional_menu|slice:":3"
-          %a.block.mt-4(href="{% url 'v2.public.custom_page' custom_page.link %}")
+          %a.block.mt-4(href="{% url 'v2.public.custom_page' custom_page.link %}" class="hover:text-gray-600")
             {{custom_page.title}}
 
         .block.mt-4
           - if org|config:"facebook_page_url"
-            %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}')
+            %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-600")
               %i.fa.fa-facebook
     
           - if org|config:"twitter_handle"
-            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}')
+            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-600")
               %i.fa.fa-twitter
 
-        %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}")
+        %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}" class="hover:text-gray-600")
           -trans "Join Now"
+        
+        .block.mt-4.font-bold.mobile-accordion.whitespace-no-wrap.text-sm.cursor-pointer
+          %i.fa.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+          %i.fa.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
+          .px-3(class="hover:text-gray-600")
+            -trans "SELECT COUNTRY"
+          .mobile-accordion-content.text-white
+            - for site in linked_orgs
+              %a.block.mt-2.p-2(href="{{ site.host }}" class="hover:text-gray-600")
+                {{ site.name|title }}
+
 
     #mobile-sliding-panel
       // top black bar
@@ -618,6 +629,10 @@
         $(".export-modal").addClass('hidden');
       });
 
+      $(".mobile-accordion").on('click', function() {
+        $(this).toggleClass('open');
+      })
+
 
       $(".screenshot-share").on("click", function() {
         var eltID= $(this).attr("data-screen-id");
@@ -655,7 +670,7 @@
       var slideout = new Slideout({
         'panel': document.getElementById('mobile-sliding-panel'),
         'menu': document.getElementById('mobile-menu-container'),
-        'padding': 200,
+        'padding': 230,
         'tolerance': 70,
         'side': 'right',
       });
