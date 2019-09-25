@@ -24,7 +24,7 @@ from django.views.generic.base import RedirectView
 from ureport.jobs.models import JobSource
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
-from ureport.polls.models import Poll
+from ureport.polls.models import Poll, PollQuestion
 from ureport.stats.models import PollStats
 from ureport.utils import get_global_count
 
@@ -450,3 +450,21 @@ class BoundaryView(SmartTemplateView):
         )
 
         return HttpResponse(json.dumps(boundaries))
+
+
+class PollQuestionResultsView(SmartReadView):
+    model = PollQuestion
+
+    def derive_queryset(self):
+        queryset = super(PollQuestionResultsView, self).derive_queryset()
+        queryset = queryset.filter(poll__org=self.request.org, is_active=True)
+        return queryset
+
+    def render_to_response(self, context, **kwargs):
+        segment = self.request.GET.get("segment", None)
+        if segment:
+            segment = json.loads(segment)
+
+        results = self.object.get_results(segment=segment)
+
+        return HttpResponse(json.dumps(results))

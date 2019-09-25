@@ -433,7 +433,7 @@
                 -trans "Opinions"
   
           %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-            {% thumbnail org.get_logo "x70" format="PNG" as im %}
+            {% thumbnail org.get_logo "x60" format="PNG" as im %}
             %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
             {% endthumbnail %}
   
@@ -447,7 +447,7 @@
         .flex.justify-between
           .p-home
             %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-              {% thumbnail org.get_logo "x50" format="PNG" as im %}
+              {% thumbnail org.get_logo "x40" format="PNG" as im %}
               %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
               {% endthumbnail %}
   
@@ -501,12 +501,12 @@
       // footer navbar
       .justify-around.mt-12.mb-3.px-home(class="md:flex")
         %a.flex-1.text-center.mb-2.hidden(href="{% url 'v2.public.index' %}" class="md:block")
-          {% thumbnail org.get_logo "x70" format="PNG" as im %}
+          {% thumbnail org.get_logo "x60" format="PNG" as im %}
           %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
           {% endthumbnail %}
   
         %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'v2.public.index' %}" class="md:hidden")
-          {% thumbnail org.get_logo "x50" format="PNG" as im %}
+          {% thumbnail org.get_logo "x40" format="PNG" as im %}
           %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
           {% endthumbnail %}
   
@@ -550,7 +550,7 @@
         .modal-content.mx-auto.my-40.p-6.border.border-black.bg-white(class="w-3/5")
           .font-bold.text-xl.mb-2.inline-block
             -trans "Export and Share"
-          %i.fa.fa-close.text-xl.export-modal-close(class="rtl:float-left ltr:float-right")
+          %i.fa.fa-close.text-xl.export-modal-close.cursor-pointer(class="rtl:float-left ltr:float-right")
       
           .export-modal-progress.flex.text-center(style="min-height:30rem;")
             .fa-5x.inline-block.m-auto.self-center
@@ -655,8 +655,7 @@
 
       $(".dropdown-button").on('click', function(event){
         event.stopPropagation();
-        console.log($(this).siblings(".dropdown-content"));
-        console.log($(this).parent().children(".dropdown-content"));
+        event.preventDefault();
 
         if($(this).parent().children(".dropdown-content").hasClass("hidden")) {
           $(".dropdown-content").addClass("hidden");
