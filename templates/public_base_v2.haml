@@ -214,9 +214,9 @@
                   - if request.user.is_superuser or org_perms.assets.image_list
                     %a.admin-menu.small-link-no-wrap(href="{% url 'assets.image_list' %}")
                       - trans "Images"
-          %li
-            %a.admin-menu.text-sm.leading-loose(href="{% url 'dashblocks.dashblock_list' %}")
-              - trans "Content"
+            %li
+              %a.admin-menu.text-sm.leading-loose(href="{% url 'dashblocks.dashblock_list' %}")
+                - trans "Content"
 
           -if org|config:"is_global"
             -if request.user.is_superuser or perms.countries.countryalias_list
@@ -228,6 +228,11 @@
             %li
               %a.admin-menu.text-sm.leading-loose(href="{% url 'polls.poll_list' %}")
                 - trans "Opinions"
+
+          - if request.user.is_superuser or org_perms.stories.story_list
+            %li
+               %a.admin-menu.text-sm.leading-loose(href="{% url 'stories.story_list' %}")
+                - trans "Stories"
 
           - if request.user.is_superuser or org_perms.categories.category_list
             %li
@@ -253,9 +258,6 @@
                 -# - if request.user.is_superuser or org_perms.news.newsitem_list
                 -#   %a.inline-block.px-6.py-4.small-link-no-wrap(href="{% url 'news.newsitem_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
                 -#     - trans "News Items"
-                - if request.user.is_superuser or org_perms.stories.story_list
-                  %a.admin-menu.small-link-no-wrap.separator(href="{% url 'stories.story_list' %}")
-                    - trans "Stories"
                 - if request.user.is_superuser or org_perms.jobs.jobsource_list
                   %a.admin-menu.small-link-no-wrap.separator(href="{% url 'jobs.jobsource_list' %}")
                     - trans "Job Sources"
