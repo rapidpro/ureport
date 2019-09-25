@@ -94,20 +94,6 @@ html {
 
 }
 
-// mobile menu
-#mobile-menu {
-  height: 0;
-  overflow: hidden;
-  z-index: 1;
-  transform: translate(100%);
-  transition: height 0s ease 1s, transform 1s;
-
-  &.open {
-    height: 100%;
-    transform: translate(0px);
-    transition: height 0s, transform 1s;
-  }
-}
 
 // full width
 .max-w-page {

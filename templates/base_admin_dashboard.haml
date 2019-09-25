@@ -164,7 +164,7 @@
         .justify-around.mt-12.mb-3.px-home(class="md:flex")
           %a.flex-1.text-center.mb-2.hidden(href="{% url 'v2.public.index' %}" class="md:block")
             {% thumbnail org.get_logo "x70" format="PNG" as im %}
-            %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+            %img.block.logo(src="{{ im.url }}" alt="{{ org.name }}")
             {% endthumbnail %}
 
           %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'v2.public.index' %}" class="md:hidden")
