@@ -161,7 +161,7 @@ def show_org_flags(context):
 
 
 @register.inclusion_tag("v2/public/edit_content.html", takes_context=True)
-def edit_content(context, reverse_name, reverse_arg=None, anchor_id="", extra_css_classes=""):
+def edit_content(context, reverse_name, reverse_arg=None, anchor_id="", extra_css_classes="", icon_color="dark"):
     request = context["request"]
 
     url_args = []
@@ -170,7 +170,13 @@ def edit_content(context, reverse_name, reverse_arg=None, anchor_id="", extra_cs
 
     edit_url = f"{reverse(reverse_name, args=url_args)}{anchor_id}"
 
-    return dict(request=request, edit_url=edit_url, extra_css_classes=extra_css_classes)
+    return dict(
+        request=request,
+        edit_url=edit_url,
+        extra_css_classes=extra_css_classes,
+        icon_color=icon_color,
+        STATIC_URL=settings.STATIC_URL,
+    )
 
 
 @register.simple_tag(takes_context=True)

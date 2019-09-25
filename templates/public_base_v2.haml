@@ -477,7 +477,7 @@
               .mt-4.hidden(class="md:block")
                 %button.btn.bg-black.text-white(class="hover:bg-gray-700")
                   -trans "READ MORE"
-            {% edit_content 'stories.story_update' story.pk "" "bg-black p-2 md:mt-4" %}
+            {% edit_content 'stories.story_update' story.pk "" "bg-black p-2 md:mt-4" "white" %}
   
       {% endif %}
   
@@ -490,7 +490,7 @@
           .text-center(class="md:w-2/3 {% if is_rtl_org %}md:text-left{% else %}md:text-right{% endif %}")
             .pb-4(class="{% if is_rtl_org %}md:pl-10 md:border-l{% else %}md:pr-10 md:border-r{% endif %} md:border-gray-500")
               .font-bold.text-2xl.leading-tight.my-8.hover-parent(class="md:mb-8 md:mt-0 md:text-3xl")
-                {% edit_content 'orgs.org_edit' "" "#id_common.engagement_footer_callout" "-m-8" %}
+                {% edit_content 'orgs.org_edit' "" "#id_common.engagement_footer_callout" "-m-8" "white" %}
                 -if org|config:"engagement_footer_callout"
                   {{ org|config:"engagement_footer_callout"}}
                 -else

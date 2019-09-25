@@ -11,7 +11,7 @@
 
       .flex-1.flex-center-y.hover-parent
         .text-xl.hover-parent(class="md:pl-12 ltr:text-right rtl:text-left")
-          {% edit_content 'orgs.org_edit' "" "#id_common.engagement_description" "-m-8" %}
+          {% edit_content 'orgs.org_edit' "" "#id_common.engagement_description" "-m-8" "dark" %}
           {{ org|config:"engagement_description"|default:""}}
 
   .bg-dark-blue

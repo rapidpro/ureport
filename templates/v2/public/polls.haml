@@ -7,7 +7,7 @@
     .max-w-page.mx-auto.p-home(class="md:flex")
       .flex-1.flex-center-y.hover-parent
         .text-2xl.font-bold.hover-parent(class="md:text-5xl")
-          {% edit_content 'orgs.org_edit' "" "#id_common.opinions_description" "" %}
+          {% edit_content 'orgs.org_edit' "" "#id_common.opinions_description" "" "dark" %}
           -trans "Opinions"
         .text-xl.max-w-lg
           {{ org|config:"opinions_description"|default:""}}
@@ -52,11 +52,11 @@
               {{ latest_poll.category.name }}
   
             .font-bold.leading-tight.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
-              {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" %}
+              {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
               {{ latest_poll.title }}
   
             .block.hover-parent
-              {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" %}
+              {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" "dark" %}
               {{ latest_poll.poll_date|date:"F jS, Y" }}
   
   
@@ -126,7 +126,10 @@
 
             .mt-8
               .font-alt.font-bold.leading-tight.italic.hover-parent(class="{% if question.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
-                {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" %}
+                -if forloop.counter|divisibleby:"2"
+                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" "dark" %}
+                -else
+                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" "white" %}
                 {{ question.title }}
 
               .mt-4

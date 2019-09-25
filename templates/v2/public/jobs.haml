@@ -25,20 +25,20 @@
                   .mt-12
 
                     .text-2xl.pr-8.hover-parent.font-bold
-                      {% edit_content 'jobs.jobsource_update' source.pk "#id_title" "" %}
+                      {% edit_content 'jobs.jobsource_update' source.pk "#id_title" "" "dark" %}
                       {{ source.title|upper }}
                     .pr-8
                       %a.text-dark-blue.social-link{href:"{{ source.source_url }}"}
                         - trans "Visit"
                         {{ source.title|title }}
                     .text-xl.pr-8.hover-parent.overflow-scroll(style="max-height:45rem;")
-                      {% edit_content 'jobs.jobsource_update' source.pk "#id_source_url" "-m-8 -mt-12" %}
+                      {% edit_content 'jobs.jobsource_update' source.pk "#id_source_url" "-m-8 -mt-12" "dark" %}
                       .fb-like-box{data-href:'{{ source.source_url }}', data-width:"400", data-height:"600", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
 
                 -elif source.source_type == 'R'
                   .mt-12
                     .text-2xl.hover-parent.font-bold
-                      {% edit_content 'jobs.jobsource_update' source.pk "#id_title" "mx-4" %}
+                      {% edit_content 'jobs.jobsource_update' source.pk "#id_title" "mx-4" "dark" %}
                       {{ source.title|upper }}
                     .pr-8
                       %a.text-dark-blue.social-link{href:"{{ source.get_return_page }}"}
