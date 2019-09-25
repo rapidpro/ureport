@@ -277,12 +277,13 @@
       - if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
         #admin-nav.block.hidden.text-xs.text-gray-400.border-t.border-b.border-black.sticky.top-0.z-500(class="md:block")
           %ul.flex
-            %li
-              %a.inline-block.px-1.pl-4.py-2.text-lg(href="{% url 'orgs.org_home' %}")
-                %i.fa.fa-gear
             - if request.user.is_superuser
               %li
-                .dropdown.relative.z-10
+                %a.inline-block.px-1.pl-4.py-2.text-lg(href="{% url 'orgs.org_home' %}")
+                  %i.fa.fa-gear
+            - if request.user.is_superuser
+              %li
+                .dropdown.relative.z-700
                   %a.admin-menu.dropdown-button.text-sm.leading-loose(href="#")
                     - trans "Configuration"
                     %i.fa.fa-caret-down
@@ -322,13 +323,13 @@
   
             - if request.user.is_superuser or org_perms.categories.category_list
               %li
-                .dropdown.relative.z-10
+                .dropdown.relative.z-700
                   %a.admin-menu.dropdown-button.text-sm.leading-loose(href="#")
                     - trans "Categories"
                     %i.fa.fa-caret-down
-                  .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
+                  .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-700
                     - if perms.categories.category_list or org_perms.categories.category_list
-                      %a.admin-menu.small-link-no-wrap(href="{% url 'categories.category_list' %}")
+                      %a.admin-menu.small-link-no-wrap.z-700(href="{% url 'categories.category_list' %}")
                         - trans "Categories"
   
                     - if perms.categories.categoryimage_list or org_perms.categories.categoryimage_list
@@ -336,11 +337,11 @@
                         - trans "Category Images"
   
             %li
-              .dropdown.relative.z-10
+              .dropdown.relative.z-700
                 %a.admin-menu.dropdown-button.text-sm.leading-loose(href="#")
                   - trans "Content"
                   %i.fa.fa-caret-down
-                .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-auto
+                .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-700
                   -# - if request.user.is_superuser or org_perms.news.newsitem_list
                   -#   %a.inline-block.px-6.py-4.small-link-no-wrap(href="{% url 'news.newsitem_list' %}" class="hover:text-gray-800 hover:bg-gray-300")
                   -#     - trans "News Items"

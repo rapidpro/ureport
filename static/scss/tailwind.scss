@@ -243,6 +243,10 @@ html {
   }
 }
 
+.z-480 {
+  z-index: 480;
+}
+
 .z-500 {
   z-index: 500;
 }
@@ -251,8 +255,12 @@ html {
   z-index: 600;
 }
 
+.z-700 {
+  z-index: 700;
+}
+
 .top-45 {
-  top: 3rem;
+  top: 45px;
 }
 
 #map-info {

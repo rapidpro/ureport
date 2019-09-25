@@ -8,7 +8,7 @@
 - block content-section
   .content-section
     - block content
-      .columns.login-form.is-centered
+      .columns.login-form.is-centered.is-desktop
         .column.is-half
           %form#login-form(method="post")
             - for field, errors in form.errors.items
@@ -31,7 +31,7 @@
               %button.button.is-info.login-button(type="submit")
                 - trans "Enter Dashboard"
           
-          - if allow_email_recovery
-            .forgot-password-link
-              %a.has-text-info.is-large(href="{% url 'users.user_forget' %}")
-                - trans "Forgot Password?"
+              - if allow_email_recovery
+              .forgot-password-link
+                %a.has-text-info.is-large(href="{% url 'users.user_forget' %}")
+                  - trans "Forgot Password?"
