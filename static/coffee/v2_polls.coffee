@@ -353,7 +353,7 @@ showChart = (questionID, segmentName) ->
               style: {
                 color: '#333'
                 fontWeight: 'bold'
-                fontSize: '1.25rem'
+                fontSize: '0.75rem'
                 textOutline: false
               }
               formatter: ->
