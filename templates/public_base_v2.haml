@@ -211,46 +211,46 @@
     // mobile menu
     #mobile-menu-container.flex.bg-black(class="md:hidden")
       .bg-black.text-white.py-home.pl-home.pr-16.h-auto
-        %a.block.font-bold(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-600")
+        %a.block.font-bold(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-750")
           -trans "Opinions"
 
-        %a.block.mt-4.font-bold(href="{% url 'v2.public.stories' %}" class="hover:text-gray-600")
+        %a.block.mt-4.font-bold(href="{% url 'v2.public.stories' %}" class="hover:text-gray-750")
           -trans "Stories"
 
-        %a.block.mt-8(href="{% url 'v2.public.about' %}" class="hover:text-gray-600")
+        %a.block.mt-8(href="{% url 'v2.public.about' %}" class="hover:text-gray-750")
           -trans "About"
 
-        %a.block.mt-4(href="{% url 'v2.public.ureporters' %}" class="hover:text-gray-600")
+        %a.block.mt-4(href="{% url 'v2.public.ureporters' %}" class="hover:text-gray-750")
           -trans "Engagement"
         
         - if org|config:"has_jobs"
-          %a.block.mt-4(href="{% url 'v2.public.jobs' %}" class="hover:text-gray-600")
+          %a.block.mt-4(href="{% url 'v2.public.jobs' %}" class="hover:text-gray-750")
             - trans "Jobs"
         
         - for custom_page in additional_menu|slice:":3"
-          %a.block.mt-4(href="{% url 'v2.public.custom_page' custom_page.link %}" class="hover:text-gray-600")
+          %a.block.mt-4(href="{% url 'v2.public.custom_page' custom_page.link %}" class="hover:text-gray-750")
             {{custom_page.title}}
 
         .block.mt-4
           - if org|config:"facebook_page_url"
-            %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-600")
+            %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-750")
               %i.fa.fa-facebook
     
           - if org|config:"twitter_handle"
-            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-600")
+            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-750")
               %i.fa.fa-twitter
 
-        %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}" class="hover:text-gray-600")
+        %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}" class="hover:text-gray-750")
           -trans "Join Now"
         
         .block.mt-4.font-bold.mobile-accordion.whitespace-no-wrap.text-sm.cursor-pointer
           %i.fa.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
           %i.fa.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
-          .px-3(class="hover:text-gray-600")
+          .px-3(class="hover:text-gray-750")
             -trans "SELECT COUNTRY"
           .mobile-accordion-content.text-white
             - for site in linked_orgs
-              %a.block.mt-2.p-2(href="{{ site.host }}" class="hover:text-gray-600")
+              %a.block.mt-2.p-2(href="{{ site.host }}" class="hover:text-gray-750")
                 {{ site.name|title }}
 
 
@@ -397,30 +397,30 @@
         // desktop header nav
         %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
           .li.flex-none.mr-4.py-menu
-            %a#countries-toggler(href="javascript:void(0)" class="hover:text-gray-600")
+            %a#countries-toggler(href="javascript:void(0)" class="hover:text-gray-750")
               %i.fa.fa-chevron-circle-down
               -trans "SELECT YOUR COUNTRY"
   
           .li.flex-grow.flex(class="md:justify-end")
-            %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4 hover:text-gray-600")
+            %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4 hover:text-gray-750")
               -trans "Engagement"
-            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.about' %}" class="hover:text-gray-600")
+            %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.about' %}" class="hover:text-gray-750")
               -trans "About"
   
             - if org|config:"has_jobs"
-              %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.jobs' %}" class="hover:text-gray-600")
+              %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.jobs' %}" class="hover:text-gray-750")
                 - trans "Jobs"
           
             - for custom_page in additional_menu|slice:":3"
-              %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.custom_page' custom_page.link %}" class="hover:text-gray-600")
+              %a.flex-initial.ml-4.py-menu(href="{% url 'v2.public.custom_page' custom_page.link %}" class="hover:text-gray-750")
                 {{custom_page.title}}
   
             - if org|config:"facebook_page_url"
-              %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-600")
+              %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-750")
                 %i.fa.fa-facebook
   
             - if org|config:"twitter_handle"
-              %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-600")
+              %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-750")
                 %i.fa.fa-twitter
   
             %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}" class="hover:bg-gray-700")
@@ -430,7 +430,7 @@
         .max-w-page.mx-auto.justify-around.mt-5.mb-12.px-home.hidden.border-b.pb-6(class="md:flex")
           .flex-1.text-center.font-bold.text-2xl.flex-center-y
             %div
-              %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-600 hover:border-dark1")
+              %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-750 hover:border-dark1")
                 -trans "Opinions"
   
           %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
@@ -440,7 +440,7 @@
   
           .flex-1.text-center.font-bold.text-2xl.flex-center-y
             %div
-              %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}" class="hover:text-gray-600 hover:border-dark1")
+              %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}" class="hover:text-gray-750 hover:border-dark1")
                 -trans "Stories"
   
       // mobile header
@@ -514,35 +514,35 @@
         .flex-1.flex(class="md:justify-end")
           .font-bold.text-2xl.flex-center-y(class="md:ml-6")
             %div
-              %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-600")
+              %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-750")
                 -trans "Opinions"
   
           .font-bold.text-2xl.ml-6.flex-center-y
             %div
-              %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}" class="hover:text-gray-600")
+              %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}" class="hover:text-gray-750")
                 -trans "Stories"
   
       // footer menu
       %ul.mt-5.mb-12.px-home.text-sm.font-bold(class="md:flex")
         .li.flex-initial.py-menu(class="rtl:ml-4 ltr:mr-4")
-          %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}" class="hover:text-gray-600")
+          %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}" class="hover:text-gray-750")
             -trans "About"
   
-          %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4 hover:text-gray-600")
+          %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4 hover:text-gray-750")
             -trans "Engagement"
   
         .li.flex-grow.flex(class="md:justify-end")
           {% if org|config:"facebook_page_url" %}
-          %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-600")
+          %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-750")
             %i.fa.fa-facebook
           {% endif %}
   
           {% if org|config:"twitter_handle" %}
-          %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="rtl:mr-4 ltr:ml-4 hover:text-gray-600")
+          %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="rtl:mr-4 ltr:ml-4 hover:text-gray-750")
             %i.fa.fa-twitter
           {% endif %}
         
-          %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="rtl:mr-4 ltr:ml-4 hover:text-gray-600")
+          %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="rtl:mr-4 ltr:ml-4 hover:text-gray-750")
             - trans "Login"
       // bottom yellow bar
       .bg-color3.h-2
