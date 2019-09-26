@@ -323,18 +323,8 @@
   
             - if request.user.is_superuser or org_perms.categories.category_list
               %li
-                .dropdown.relative.z-700
-                  %a.admin-menu.dropdown-button.text-sm.leading-loose(href="#")
-                    - trans "Categories"
-                    %i.fa.fa-caret-down
-                  .hidden.dropdown-content.absolute.bg-gray-800.text-white.z-700
-                    - if perms.categories.category_list or org_perms.categories.category_list
-                      %a.admin-menu.small-link-no-wrap.z-700(href="{% url 'categories.category_list' %}")
-                        - trans "Categories"
-  
-                    - if perms.categories.categoryimage_list or org_perms.categories.categoryimage_list
-                      %a.admin-menu.small-link-no-wrap(href="{% url 'categories.categoryimage_list' %}")
-                        - trans "Category Images"
+                %a.admin-menu.text-sm.leading-loose(href="{% url 'categories.category_list' %}")
+                  - trans "Categories"
   
             %li
               .dropdown.relative.z-700
@@ -358,7 +348,6 @@
   
                     %a.admin-menu.small-link-no-wrap.separator(href="{% url 'dashblocks.dashblock_list' %}?slug=photos")
                       - trans "Photos"
-
 
                     %a.admin-menu.small-link-no-wrap.separator(href="{% url 'news.video_list' %}")
                       - trans "Videos"

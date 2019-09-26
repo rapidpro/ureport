@@ -102,20 +102,29 @@
                             %img(src="{{ STATIC_URL }}img/categories_icon.png")
                           %span.menu-link-title
                             - trans "Categories"
-
+                      
                       %li
-                        %a(href="{% url 'categories.categoryimage_list' %}")
+                        %a(href="{% url 'dashblocks.dashblock_list' %}?slug=photos")
                           %span.icon
                             %img(src="{{ STATIC_URL }}img/category_images_icon.png")
                           %span.menu-link-title
-                            - trans "Categories Images"
+                            - trans "Photos"
 
-                      %li
-                        %a(href="{% url 'news.newsitem_list' %}")
-                          %span.icon
-                            %img(src="{{ STATIC_URL }}img/news_icon.png")
-                          %span.menu-link-title
-                            - trans "News Items"
+                      - if request.user.is_superuser
+                        %li
+                          %a(href="{% url 'categories.categoryimage_list' %}")
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/photos_icon.png")
+                            %span.menu-link-title
+                              - trans "Categories Images"
+                      
+                      - if request.user.is_superuser
+                        %li
+                          %a(href="{% url 'news.newsitem_list' %}")
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/news_icon.png")
+                            %span.menu-link-title
+                              - trans "News Items"
                       - if request.user.is_superuser
                         %li
                           %a{href:"{% url 'orgs.org_list' %}"}

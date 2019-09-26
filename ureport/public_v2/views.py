@@ -66,7 +66,7 @@ class IndexView(SmartTemplateView):
         context["feat_images"] = range(10)
 
         # fake photos, generated from stories that are featured and have a photo
-        context["photos"] = (
+        context["stories_photos"] = (
             Story.objects.filter(org=org, featured=True, is_active=True)
             .exclude(images=None)
             .order_by("-created_on")[4:]
