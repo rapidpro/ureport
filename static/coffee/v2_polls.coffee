@@ -443,14 +443,14 @@ $(->
       metricSlug = graphDiv.data("metric-slug")
       segmentType = graphDiv.data("segment-type")
       timeFilter = graphDiv.data("time-filter")
-      setTimeout (-> showEngagementChart(metricSlug, segmentType, timeFilter)), 1000
+      setTimeout (-> showEngagementChart(metricSlug, segmentType, timeFilter)), 50
 
     if page == "opinions"
       graphDiv = $("#" + evt.detail.id).find(".poll-chart")
       questionID = graphDiv.data("question")
       segment = graphDiv.data("segment")
       $("#chart-" + questionID).find('.chart-progress').show()
-      setTimeout (-> showChart(questionID, segment)), 1000
+      setTimeout (-> showChart(questionID, segment)), 50
 
   document.addEventListener 'aos:in', redrawChart
 )

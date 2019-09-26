@@ -89,7 +89,7 @@
       - for time_filter in data_time_filters
         .engagemment-content.hover-parent(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
           - for metric in data_metrics
-            .engagement-graph-block.hover-parent.block.mt-16.p-2.bg-dark-blue(class="md:flex" style="min-height:30rem; max-height:45rem;" data-page="engagement" data-aos="fade" id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
+            .engagement-graph-block.hover-parent.block.mt-16.p-2.bg-dark-blue(class="md:flex" style="min-height:30rem; max-height:45rem;" data-page="engagement" data-aos="fade" data-aos-anchor-placement="top-center" id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
               .hover-parent(class="md:w-2/5")
                 .bg-light1.h-1.w-16.mb-4
                 .text-3xl.mb-4.font-bold
