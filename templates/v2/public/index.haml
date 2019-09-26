@@ -87,7 +87,8 @@
           -else
             .flex.justify-content(style="min-height:349px")
               .inline-block.mx-auto.my-auto.text-center
-                %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
+                .w-64
+                  %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
 
       .flex-1.hidden(class="md:block")
         .bg-white.p-home(style="min-height:45rem;")
