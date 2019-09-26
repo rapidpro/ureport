@@ -196,12 +196,10 @@
 
       .flex.flex-center-y(class="md:w-2/5")
         .(class="rtl:pr-10 ltr:pl-10")
-          .font-bold.mb-4.text-3xl.leading-tight.hover-parent
-            -trans "About"
-
-          .mb-6.hover-parent
+          .font-bold.mb-4.text-3xl.leading-tight
             -trans "We are a part of a global platform working to change the lives of young people around the world."
-            %br
+
+          .mb-6
             -trans "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 
           %a.btn.bg-light1.text-black.hover-dark(href="{% url 'v2.public.about' %}")
