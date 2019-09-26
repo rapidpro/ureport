@@ -1,3 +1,10 @@
+v1.1.59
+----------
+ * Merge pull request #476 from rapidpro/beta-fixes
+ * Move anchor placement to top center for aos and trigger redraw fast
+ * Add migration to add photo blocks type
+ * Rebuild locales
+
 v1.1.47
 ----------
  * Adjuts jobs page
