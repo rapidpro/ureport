@@ -207,7 +207,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
 
 # shows the chart with the passed in question and segment
 showChart = (questionID, segmentName) ->
-  url = "/pollquestion/" + questionID + "/results/"
+  url = "/v2/pollquestion/" + questionID + "/results/"
   query = ""
   states = {}
 
