@@ -28,8 +28,8 @@
             %a.level-item.has-text-black(href="/")
               .icon
                 %i.fas.fa-arrow-circle-left
-              - trans "Back to Full Site"
-      .admin-header
+              - trans "Back to Website"
+      .admin-header.border-b.border-gray-600
         .level
           .level-left
             .level-item.square-logo
@@ -161,7 +161,7 @@
     %footer.footer.is-paddingless
       -block footer
         // footer navbar
-        .justify-around.mt-12.mb-3.px-home(class="md:flex")
+        .justify-around.pt-12.mb-3.px-home.border-t.border-gray-600(class="md:flex")
           %a.flex-1.text-center.mb-2.hidden(href="{% url 'v2.public.index' %}" class="md:block")
             {% thumbnail org.get_logo "x60" format="PNG" as im %}
             %img.block.logo(src="{{ im.url }}" alt="{{ org.name }}")

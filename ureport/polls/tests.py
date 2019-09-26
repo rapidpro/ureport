@@ -1562,7 +1562,7 @@ class PollTest(UreportTest):
         self.assertTrue(PollImage.objects.filter(poll=poll1))
         self.assertEqual(PollImage.objects.filter(poll=poll1).count(), 1)
 
-        self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_responses", args=[poll1.pk]))
+        self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_list"))
 
     def test_responses_poll(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)

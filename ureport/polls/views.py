@@ -264,7 +264,7 @@ class PollCRUDL(SmartCRUDL):
             return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
-        success_url = "id@polls.poll_responses"
+        success_url = "@polls.poll_list"
         title = _("Poll Images")
         success_message = _("Now enter any responses you'd like to feature. (if any)")
 
@@ -588,7 +588,9 @@ class PollCRUDL(SmartCRUDL):
         def post_save(self, obj):
             poll = self.get_object()
             poll.pull_refresh_task()
-            self.success_message = _("Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d") % dict(poll_id=poll.pk, org_id=poll.org_id)
+            self.success_message = _("Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d") % dict(
+                poll_id=poll.pk, org_id=poll.org_id
+            )
 
     class Import(SmartCSVImportView):
         class ImportForm(forms.ModelForm):
