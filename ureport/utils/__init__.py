@@ -92,6 +92,8 @@ def get_linked_orgs(authenticated=False):
     all_orgs = Org.objects.filter(is_active=True).order_by("name")
 
     linked_sites = list(getattr(settings, "PREVIOUS_ORG_SITES", []))
+    for elt in linked_sites:
+        elt["order_name"] = elt["name"]
 
     # populate a ureport site for each org so we can link off to them
     for org in all_orgs:
@@ -100,9 +102,11 @@ def get_linked_orgs(authenticated=False):
         if org.get_config("common.is_on_landing_page"):
             flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
             if flag:
-                linked_sites.append(dict(name=org.subdomain, host=host, flag=flag.image.url, is_static=False))
+                linked_sites.append(
+                    dict(name=org.name, order_name=org.subdomain, host=host, flag=flag.image.url, is_static=False)
+                )
 
-    linked_sites_sorted = sorted(linked_sites, key=lambda k: k["name"].lower())
+    linked_sites_sorted = sorted(linked_sites, key=lambda k: k["order_name"].lower())
 
     return linked_sites_sorted
 

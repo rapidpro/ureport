@@ -12,7 +12,7 @@ class CheckVersionMiddleware:
         if org:
             new_design = org.get_config("common.has_new_design", False)
 
-        path = request.path
+        path = request.get_full_path_info()
         if (
             new_design
             and not path.startswith("/v2/")

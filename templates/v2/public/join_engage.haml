@@ -7,14 +7,15 @@
   - load_qbs request.org 'join_steps'
 
   .bg-grid.border-t.border-b
-    .max-w-page.mx-auto.p-home(class="md:flex")
+    .max-w-page.mx-auto.p-home.hover-parent(class="md:flex")
       .flex-1.flex-center-y
         .text-5xl.font-bold
           -trans "Join Now"
 
-      .flex-1.flex-center-y
-        .text-xl(class="md:pl-12 rtl:text-left ltr:text-right")
+      .flex-1.flex-center-y.hover-parent
+        .text-xl.hover-parent(class="md:pl-12 rtl:text-left ltr:text-right")
           - for d_block in join_engage|slice:":1"
+            {% edit_content 'dashblocks.dashblock_update' d_block.pk "#id_content" "-m-8" "dark" %}
             {{ d_block.short_content_teaser|safe }}
 
   .bg-light1.py-12
@@ -65,10 +66,16 @@
               .bg-circle.bg-black.text-white
                 {{forloop.counter|add:1}}
             .pl-4.pr-12.flex-center-y.hover-parent
-              {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" %}
+              -if forloop.counter|divisibleby:'4'
+                {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" "dark" %}
+              -else
+                {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" "white" %}
               {{ join_step.title|upper }}
   
         .flex-1.flex-center-y
           .text-xl.hover-parent(class="md:pl-24 md:pr-12")
-            {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_content" "-m-8" %}
+            -if forloop.counter|divisibleby:'4'
+              {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" "dark" %}
+            -else
+              {% edit_content 'dashblocks.dashblock_update' join_step.pk "#id_title" "-m-8" "white" %}
             {{ join_step.content }}

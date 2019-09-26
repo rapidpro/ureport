@@ -111,6 +111,9 @@ $(->
       info.update(layer.feature.properties)
   
     clickFeature = (e) ->
+      if (not districtZoom and not wardZoom)
+        highlight(e)
+        return
       if (districtZoom and e.target.feature.properties.level == STATE_LEVEL)
         map.removeLayer(states)
         loadBoundary(url, e.target.feature.properties, e.target)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-09-26 23:06+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -666,20 +666,17 @@ msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံု�
 msgid "Import %s"
 msgstr ""
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr "ယခုစာမ်က္ႏွာမွထြက္မည္"
 
-msgid "Polls"
-msgstr "ေမးခြန္းမ်ား"
+msgid "Opinions"
+msgstr ""
 
 msgid "Users"
 msgstr "အသံုးျပဳသူမ်ား"
@@ -695,6 +692,9 @@ msgstr "ဓါတ္ပံုမ်ား"
 msgid "Jobs"
 msgstr "အလုပ္အကိုင္မ်ား"
 
+msgid "Photos"
+msgstr ""
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -709,19 +709,11 @@ msgstr "အဖြဲ႕အစည္းမ်ား"
 msgid "Images"
 msgstr "ဓါတ္ပံုမ်ား"
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr "U-Report အေၾကာင္း"
 
 msgid "Engagement"
 msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -737,6 +729,9 @@ msgstr "အေၾကာင္းအရာ"
 
 msgid "Country Aliases"
 msgstr "တိုင္းျပည္ အျခားအမည္မ်ား"
+
+msgid "Polls"
+msgstr "ေမးခြန္းမ်ား"
 
 msgid "Category Images"
 msgstr "အမ်ိဳးအစားအလိုက္ ဓါတ္ပံုမ်ား"
@@ -786,8 +781,10 @@ msgstr ""
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
-msgstr ""
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
 
 msgid "READ MORE"
 msgstr "ထပ္မံဖတ္ရွဳရန္"
@@ -1194,6 +1191,9 @@ msgstr "စာရင္းသြင္းထားၿပီး"
 msgid "Week of"
 msgstr "အပတ္၏"
 
+msgid "SELECT COUNTRY"
+msgstr ""
+
 msgid "Custom pages"
 msgstr ""
 
@@ -1215,6 +1215,9 @@ msgstr "ေမးခြန္းမ်ား"
 #| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "အခ်က္အလက္ေပးပို႕သူ လူငယ္မ်ား"
+
+msgid "Top Region"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1250,6 +1253,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "ထပ္မံဖတ္ရွဳရန္"
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1280,6 +1286,12 @@ msgstr ""
 msgid "JOIN NOW"
 msgstr ""
 
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr ""
+
 msgid "How would you like to join?"
 msgstr ""
 
@@ -1306,7 +1318,12 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "တည္ေနရာမ်ား"
+
+msgid "Written by:"
 msgstr ""
 
 #, fuzzy
@@ -1355,9 +1372,6 @@ msgid ""
 "\n"
 "             Results %(start)s-%(end)s of %(count)s\n"
 "           "
-msgstr ""
-
-msgid "SIGN IN"
 msgstr ""
 
 msgid "Error"
@@ -1559,6 +1573,16 @@ msgstr "ေမးခြန္းအတြက္ ေျဖာ္ျပရမည�
 msgid "The organization this poll is part of"
 msgstr "ယခုေမးခြန္ႏွင့္ ပတ္သတ္ေသာ အဖြဲ႕အစည္း"
 
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The title for this response story"
+msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
+
+#, fuzzy
+#| msgid "The writer of the story"
+msgid "The writer of the response story"
+msgstr "သတင္းေဆာင္းပါးေရးသူ"
+
 msgid "The poll to associate to"
 msgstr "ယခုေမးခြန္းႏွင့္ ဆက္ႏြယ္ေသာ"
 
@@ -1639,32 +1663,13 @@ msgstr "ေမးခြန္းစာမ်က္ႏွာႏွင့္ previ
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "ေမးခြန္းစာမ်က္ႏွာႏွင့္ preview မ်ားတြင္ေဖာ္ျပရန္ ဓါတ္ပံု(ျခြင္းခ်က္)"
 
-msgid "Featured Poll Responses"
-msgstr "ေဖာ္ျပထားေသာ ေမးခြန္းအေျဖမ်ား"
+#, fuzzy
+#| msgid "Poll Questions"
+msgid "Poll Response"
+msgstr "ေမးခြန္းမ်ား"
 
 msgid "Your poll has been updated."
 msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံုးအဆင့္ျပဳလုပ္ထားသည္"
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr ""
-
-msgid "The name or alias of the responder."
-msgstr "ျပန္လည္ေျဖၾကားသူ၏အမည္"
-
-#, python-format
-msgid "Response %d Location"
-msgstr ""
-
-msgid "The location of the responder."
-msgstr "ျပန္လည္ေျဖၾကားသူ၏တည္ေနရာ"
-
-#, python-format
-msgid "Response %d Message"
-msgstr ""
-
-msgid "The text of the featured response."
-msgstr "ေဖာ္ျပထားေသာ အေျဖစာသား"
 
 msgid "Poll Questions"
 msgstr "ေမးခြန္းမ်ား"
@@ -1934,6 +1939,18 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္ေသာအရာ"
 
+#~ msgid "Featured Poll Responses"
+#~ msgstr "ေဖာ္ျပထားေသာ ေမးခြန္းအေျဖမ်ား"
+
+#~ msgid "The name or alias of the responder."
+#~ msgstr "ျပန္လည္ေျဖၾကားသူ၏အမည္"
+
+#~ msgid "The location of the responder."
+#~ msgstr "ျပန္လည္ေျဖၾကားသူ၏တည္ေနရာ"
+
+#~ msgid "The text of the featured response."
+#~ msgstr "ေဖာ္ျပထားေသာ အေျဖစာသား"
+
 #, fuzzy
 #~| msgid "U-REPORTERS IN"
 #~ msgid "TOTAL U-REPORTERS IN"
@@ -1948,11 +1965,6 @@ msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္�
 #~| msgid "FILTERED BY"
 #~ msgid "FILTER BY:"
 #~ msgstr "စစ္ထုတ္ေပးထားသည္"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "တည္ေနရာမ်ား"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "RapidPro account အတြက္ API token ႏွင့္တြဲထားေသာ dashboard"

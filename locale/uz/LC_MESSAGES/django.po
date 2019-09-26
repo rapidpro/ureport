@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-09-26 23:06+0000\n"
 "PO-Revision-Date: 2018-08-22 11:40+0000\n"
 "Last-Translator: Jahongir Abdurahmonov <jabdurahmonov@unicef.org>\n"
 "Language-Team: Uzbek (http://www.transifex.com/rapidpro/ureport/language/uz/)\n"
@@ -693,20 +693,17 @@ msgstr "Sizning yangi %s giz yaratildi"
 msgid "Import %s"
 msgstr "%s ni import qilish"
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr "Chiqish"
 
-msgid "Polls"
-msgstr "So'rovlar"
+msgid "Opinions"
+msgstr ""
 
 msgid "Users"
 msgstr "Foydalanuvchilar"
@@ -722,6 +719,9 @@ msgstr "Suratlar"
 msgid "Jobs"
 msgstr "Ish o'rinlari"
 
+msgid "Photos"
+msgstr ""
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -736,19 +736,11 @@ msgstr "Tashkr"
 msgid "Images"
 msgstr "Suratlar"
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr "Haqida"
 
 msgid "Engagement"
 msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "Qo'shiling"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -764,6 +756,9 @@ msgstr "Kontent"
 
 msgid "Country Aliases"
 msgstr "Mamlakatning shartli nomi"
+
+msgid "Polls"
+msgstr "So'rovlar"
 
 msgid "Category Images"
 msgstr "Toifa suratlari"
@@ -813,8 +808,10 @@ msgstr "BIZNI KUZATIB BORING"
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
-msgstr ""
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Qo'shiling"
 
 msgid "READ MORE"
 msgstr "KO'PROQ O'QISH"
@@ -1229,6 +1226,9 @@ msgstr "Ro'yxatdan o'tganlar"
 msgid "Week of"
 msgstr "Haftasi"
 
+msgid "SELECT COUNTRY"
+msgstr ""
+
 msgid "Custom pages"
 msgstr ""
 
@@ -1250,6 +1250,9 @@ msgstr "so'raldi"
 #| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "U-Reportyorlar"
+
+msgid "Top Region"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1285,6 +1288,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "KO'PROQ O'QISH"
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1313,6 +1319,12 @@ msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 msgstr ""
 
 msgid "How would you like to join?"
@@ -1348,7 +1360,12 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "JOYLASHUV YERLARI"
+
+msgid "Written by:"
 msgstr ""
 
 #, fuzzy
@@ -1412,9 +1429,6 @@ msgid ""
 "\n"
 "             Results %(start)s-%(end)s of %(count)s\n"
 "           "
-msgstr ""
-
-msgid "SIGN IN"
 msgstr ""
 
 msgid "Error"
@@ -1636,6 +1650,16 @@ msgstr "Grafik toifadagi surat so'rovni namoyish etadi (ixtiyoriy)"
 msgid "The organization this poll is part of"
 msgstr "Mazkur so'rov uning qismi bo'lgan tashkilot"
 
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The title for this response story"
+msgstr "Ushbu hikoya uchun sarlavha"
+
+#, fuzzy
+#| msgid "The writer of the story"
+msgid "The writer of the response story"
+msgstr "Hikoya muallifi"
+
 msgid "The poll to associate to"
 msgstr "... bilan bog'liq bo'lgan so'rov"
 
@@ -1714,32 +1738,13 @@ msgstr "So'rovnoma sahifasida va prevyularda namoyish bo'ladigan surat. (ixtiyor
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "So'rovnoma sahifasida va prevyularda namoyish bo'ladigan surat. (ixtiyoriy)"
 
-msgid "Featured Poll Responses"
-msgstr "So'rovnomada alohida ajrab turadigan javoblar"
+#, fuzzy
+#| msgid "Poll Questions"
+msgid "Poll Response"
+msgstr "So'rovnoma savollari"
 
 msgid "Your poll has been updated."
 msgstr "Sizning so'rovnomangiz yangilandi"
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr "%d Reportoyrning javobi"
-
-msgid "The name or alias of the responder."
-msgstr "Javob beruvchining ismi yoki taxallusi."
-
-#, python-format
-msgid "Response %d Location"
-msgstr "%d javob berilgan yer"
-
-msgid "The location of the responder."
-msgstr "Javob beruvchining joylashuv yeri"
-
-#, python-format
-msgid "Response %d Message"
-msgstr "%d javoblar xabarlarda"
-
-msgid "The text of the featured response."
-msgstr "Tavsiya etilgan javobning matni"
 
 msgid "Poll Questions"
 msgstr "So'rovnoma savollari"
@@ -2008,6 +2013,30 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
 
+#~ msgid "Featured Poll Responses"
+#~ msgstr "So'rovnomada alohida ajrab turadigan javoblar"
+
+#, python-format
+#~ msgid "Response %d Reporter"
+#~ msgstr "%d Reportoyrning javobi"
+
+#~ msgid "The name or alias of the responder."
+#~ msgstr "Javob beruvchining ismi yoki taxallusi."
+
+#, python-format
+#~ msgid "Response %d Location"
+#~ msgstr "%d javob berilgan yer"
+
+#~ msgid "The location of the responder."
+#~ msgstr "Javob beruvchining joylashuv yeri"
+
+#, python-format
+#~ msgid "Response %d Message"
+#~ msgstr "%d javoblar xabarlarda"
+
+#~ msgid "The text of the featured response."
+#~ msgstr "Tavsiya etilgan javobning matni"
+
 #, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
@@ -2058,11 +2087,6 @@ msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
 #~| msgid "FILTERED BY"
 #~ msgid "FILTER BY:"
 #~ msgstr "TOMONIDAN SARALANGAN"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "JOYLASHUV YERLARI"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "Ushbu qayd yo'zuvlarini kuzatish paneli bog'langan RapidPro akkaunti uchun amaliy dasturlash interfeysi tokeni"

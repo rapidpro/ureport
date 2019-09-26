@@ -11,7 +11,7 @@
 
       .flex-1.flex-center-y.hover-parent
         .text-xl.hover-parent(class="md:pl-12 ltr:text-right rtl:text-left")
-          {% edit_content 'orgs.org_edit' "" "#id_common.engagement_description" "-m-8" %}
+          {% edit_content 'orgs.org_edit' "" "#id_common.engagement_description" "-m-8" "dark" %}
           {{ org|config:"engagement_description"|default:""}}
 
   .bg-dark-blue
@@ -62,7 +62,7 @@
           .flex-1.inline-block.mt-2(style="min-width:220px;max-width:320px" class="md:mt-0")
             .relative.w-full(style="height:105px")
               {{ age_stats|json_script:"age_stats" }}
-              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
+              #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white" data-stats="age_stats")
       -if show_maps
         .flex-1.text-white.bg-dark-blue(class="{% if is_rtl_org %}vertical-angle-right{% else %}vertical-angle-left{% endif %}")
           .py-home.text-center(class="ltr:pl-6 rtl:pr-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %}")
@@ -74,7 +74,7 @@
                   %i.fa.fa-spinner.fa-spin
             #map-info.relative.h-full.w-full.mt-2.flex.justify-center
   
-  .border-t.border-b.bg-dark-gray.sticky.z-500.border-gray-600(class="{% if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser %}top-45{% else %}top-0{% endif %}")
+  .border-t.border-b.bg-dark-gray.sticky.z-480.border-gray-600(class="{% if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser %}top-45{% else %}top-0{% endif %}")
     .max-w-page.mx-auto.px-home.py-4.border-gray-600(class="md:flex md:justify-between")
       .text-white.font-bold.flex-center-y.flex-row(class="md:flex-col")
         -trans "FILTER RESULTS"
@@ -89,7 +89,7 @@
       - for time_filter in data_time_filters
         .engagemment-content.hover-parent(id="tab-content-block-{{time_filter.time_filter_number}}" class="{% if not forloop.last %}hidden{% endif %}")
           - for metric in data_metrics
-            .engagement-graph-block.hover-parent.block.mt-16.p-2.bg-dark-blue(class="md:flex" style="min-height:30rem; max-height:45rem;" data-page="engagement" data-aos="fade" id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
+            .engagement-graph-block.hover-parent.block.mt-16.p-2.bg-dark-blue(class="md:flex" style="min-height:30rem; max-height:45rem;" data-page="engagement" data-aos="fade" data-aos-anchor-placement="top-center" id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
               .hover-parent(class="md:w-2/5")
                 .bg-light1.h-1.w-16.mb-4
                 .text-3xl.mb-4.font-bold
@@ -140,5 +140,6 @@
                   - for segment in data_segments
                     .engagement-graph.hidden(id="graph-tabs-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")
                       .engagement-chart.has-graph(id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-page="engagement")
-
-
+                        .chart-progress.flex.text-center.w-full.h-full
+                          .fa-5x.inline-block.m-auto.self-center
+                            %i.fa.fa-spinner.fa-spin

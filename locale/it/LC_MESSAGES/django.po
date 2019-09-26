@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-09-26 23:06+0000\n"
 "PO-Revision-Date: 2017-05-10 15:46+0000\n"
 "Last-Translator: Sarah Martelli <smartelli@unicef.org>\n"
 "Language-Team: Italian (http://www.transifex.com/rapidpro/ureport/language/it/)\n"
@@ -709,20 +709,17 @@ msgstr "la tua nuova %s è stata creata"
 msgid "Import %s"
 msgstr "Importa %s"
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr "Esci"
 
-msgid "Polls"
-msgstr "Sondaggi"
+msgid "Opinions"
+msgstr ""
 
 msgid "Users"
 msgstr "Utenti"
@@ -738,6 +735,9 @@ msgstr "Immagini"
 msgid "Jobs"
 msgstr "Opportunità di lavoro"
 
+msgid "Photos"
+msgstr ""
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -752,19 +752,11 @@ msgstr "Organizzazioni"
 msgid "Images"
 msgstr "Immagini"
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr "Chi siamo"
 
 msgid "Engagement"
 msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "Aderisci"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -780,6 +772,9 @@ msgstr "Contenuto"
 
 msgid "Country Aliases"
 msgstr "Alias paese"
+
+msgid "Polls"
+msgstr "Sondaggi"
 
 msgid "Category Images"
 msgstr "Immagini Categoria"
@@ -829,8 +824,10 @@ msgstr "SEGUICI SU"
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
-msgstr ""
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Aderisci"
 
 msgid "READ MORE"
 msgstr "LEGGI DI PIÙ"
@@ -1249,6 +1246,9 @@ msgstr "Registrato"
 msgid "Week of"
 msgstr "Settimana del"
 
+msgid "SELECT COUNTRY"
+msgstr ""
+
 msgid "Custom pages"
 msgstr ""
 
@@ -1270,6 +1270,9 @@ msgstr "sondati"
 #| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "U-Reporter"
+
+msgid "Top Region"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1305,6 +1308,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "LEGGI DI PIÙ"
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1333,6 +1339,12 @@ msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 msgstr ""
 
 msgid "How would you like to join?"
@@ -1367,7 +1379,12 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "LUOGHI"
+
+msgid "Written by:"
 msgstr ""
 
 #, fuzzy
@@ -1445,9 +1462,6 @@ msgstr ""
 "\n"
 "⇥Risultati %(start)s-%(end)s di %(count)s\n"
 "⇥"
-
-msgid "SIGN IN"
-msgstr ""
 
 msgid "Error"
 msgstr ""
@@ -1666,6 +1680,16 @@ msgstr "Immagine iniziale da visualizzare per questo sondaggio (opzionale)"
 msgid "The organization this poll is part of"
 msgstr "L'organizzazione di cui è parte questo sondaggio"
 
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The title for this response story"
+msgstr "Il titolo per questa storia"
+
+#, fuzzy
+#| msgid "The writer of the story"
+msgid "The writer of the response story"
+msgstr "L'autore della storia "
+
 msgid "The poll to associate to"
 msgstr "Il sondaggio da associare a"
 
@@ -1744,32 +1768,13 @@ msgstr "Immagine da visualizzare nella pagina del sondaggio e nelle anteprime. (
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Immagine da visualizzare nella pagine dei sondaggi e nelle anteprime. (opzionale)"
 
-msgid "Featured Poll Responses"
-msgstr "Risposte sondaggio in primo piano"
+#, fuzzy
+#| msgid "Poll Questions"
+msgid "Poll Response"
+msgstr "Domande sondaggio"
 
 msgid "Your poll has been updated."
 msgstr "Il tuo sondaggio è stato aggiornato"
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr "Risposta %d Reporter"
-
-msgid "The name or alias of the responder."
-msgstr "Il nome o alias del rispondente"
-
-#, python-format
-msgid "Response %d Location"
-msgstr "Luogo %d Risposta"
-
-msgid "The location of the responder."
-msgstr "Luogo del rispondente"
-
-#, python-format
-msgid "Response %d Message"
-msgstr "Messaggio %d Risposta"
-
-msgid "The text of the featured response."
-msgstr "Il testo della risposta in primo piano"
 
 msgid "Poll Questions"
 msgstr "Domande sondaggio"
@@ -2038,6 +2043,30 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
 
+#~ msgid "Featured Poll Responses"
+#~ msgstr "Risposte sondaggio in primo piano"
+
+#, python-format
+#~ msgid "Response %d Reporter"
+#~ msgstr "Risposta %d Reporter"
+
+#~ msgid "The name or alias of the responder."
+#~ msgstr "Il nome o alias del rispondente"
+
+#, python-format
+#~ msgid "Response %d Location"
+#~ msgstr "Luogo %d Risposta"
+
+#~ msgid "The location of the responder."
+#~ msgstr "Luogo del rispondente"
+
+#, python-format
+#~ msgid "Response %d Message"
+#~ msgstr "Messaggio %d Risposta"
+
+#~ msgid "The text of the featured response."
+#~ msgstr "Il testo della risposta in primo piano"
+
 #, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
@@ -2089,11 +2118,6 @@ msgstr "Qualcosa per avviare localizzazione"
 #~| msgid "FILTERED BY"
 #~ msgid "FILTER BY:"
 #~ msgstr "Filtrato per"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "LUOGHI"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "Il token API dell'account RapidPro a cui questo dashboard è collegato"

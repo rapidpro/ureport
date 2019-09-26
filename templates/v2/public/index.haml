@@ -3,7 +3,7 @@
 - load thumbnail humanize ureport compress i18n dashblocks
 
 - block content
-  - load_qbs request.org 'about'
+  - load_qbs request.org 'photos'
   // latest poll if we have it
   - if latest_poll and latest_poll.get_first_question
     .max-w-page.mx-auto.bg-white.mt-6
@@ -13,11 +13,11 @@
             - trans "LATEST OPINION"
 
           .font-bold.mt-2.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl leading-tight{% endif %}")
-            {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" %}
+            {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark"  %}
             {{ latest_poll.title }}
 
           .font-alt.font-bold.italic.left-border.mt-8.hover-parent
-            {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.ruleset_uuid|add:"_title"  "-m-8" %}
+            {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.ruleset_uuid|add:"_title"  "-m-8" "dark" %}
             {{ latest_poll.get_first_question.title }}
 
         .flex-1.self-stretch.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
@@ -59,14 +59,14 @@
           .flex-1.inline-block(style="min-width:220px;max-width:750px")
             .relative.w-full.h-40(class="md:h-64")
               {{ age_stats|json_script:"age_stats" }}
-              #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats")
+              #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats")
 
   // join video and social
   .max-w-page.mx-auto
     %div(class="md:flex")
       .flex-1
         .bg-light1.p-12.hover-parent
-          {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8" %}
+          {% edit_content 'orgs.org_edit' "" "#id_common.join_text"  "-m-8"  "dark"  %}
 
           .text-3xl.font-bold.leading-tight.text-center
             -if org|config:"join_text"
@@ -79,7 +79,7 @@
               -trans "JOIN NOW"
 
         .bg-black.p-12.text-white.hover-parent
-          {% edit_content 'orgs.org_edit' "" "#id_common.homepage_join_video_id"  "-m-8" %}
+          {% edit_content 'orgs.org_edit' "" "#id_common.homepage_join_video_id"  "-m-8" "white" %}
 
           -if org|config:"homepage_join_video_id"
             .video
@@ -87,7 +87,8 @@
           -else
             .flex.justify-content(style="min-height:349px")
               .inline-block.mx-auto.my-auto.text-center
-                %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
+                .w-64
+                  %img(src="{{STATIC_URL}}img/u-report-global-logo-white.png")
 
       .flex-1.hidden(class="md:block")
         .bg-white.p-home(style="min-height:45rem;")
@@ -103,12 +104,12 @@
             .flex.justify-center.relative.social-media-blocks.mb-4(style="min-height:400px; max-height:450px")
               -if org|config:"facebook_page_url"
                 .absolute.social-media-block.hover-parent(class='{% if org|config:"twitter_handle" %}open{% endif %}')
-                  {% edit_content 'orgs.org_edit' "" "#id_common.facebook_page_url" "-m-8" %}
+                  {% edit_content 'orgs.org_edit' "" "#id_common.facebook_page_url" "-m-8" "dark" %}
 
                   .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"550", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
               -if org|config:"twitter_handle"
                 .absolute.social-media-block.hover-parent
-                  {% edit_content 'orgs.org_edit' "" "#id_common.twitter_handle" "-m-8" %}
+                  {% edit_content 'orgs.org_edit' "" "#id_common.twitter_handle" "-m-8" "dark" %}
                   .mb-6.flex.justify-center
                     %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
 
@@ -137,17 +138,17 @@
                   .font-bold.mb-4
                     {% trans "FEATURED STORY" %}
                   .font-bold.leading-tight.mb-4.hover-parent(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
-                    {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" %}
+                    {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" "dark" %}
                     {{ story.title }}
                   .block.mb-6.hover-parent
-                    {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" %}
+                    {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" "dark" %}
                     {{ story.summary|truncatewords:50|linebreaksbr }}
 
                   %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}" class="hover:bg-gray-700")
                     {% trans "READ MORE" %}
 
               .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")
-                {% edit_content 'stories.story_images' story.pk "" "-m-8" %}
+                {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
                 - if story.get_image
                   {% thumbnail story.get_image "800x500" crop="center" as im %}
                   %img(width="100%" src="{{im.url}}")
@@ -196,35 +197,52 @@
 
       .flex.flex-center-y(class="md:w-2/5")
         .(class="rtl:pr-10 ltr:pl-10")
-          - for d_block in about|slice:":1"
-            .font-bold.mb-4.text-3xl.leading-tight.hover-parent
-              {% edit_content 'dashblocks.dashblock_update' d_block.pk "#id_title" "-m-8" %}
-              {{ d_block.title|safe }}
+          .font-bold.mb-4.text-3xl.leading-tight
+            -trans "We are a part of a global platform working to change the lives of young people around the world."
 
-            .mb-6.hover-parent
-              {% edit_content 'dashblocks.dashblock_update' d_block.pk "#id_summary" "-m-8" %}
-              {{ d_block.summary|safe }}
+          .mb-6
+            -trans "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 
           %a.btn.bg-light1.text-black.hover-dark(href="{% url 'v2.public.about' %}")
             -trans "LEARN MORE"
 
-  - if photos
+  - if not photos
     // photos
     .max-w-page.mx-auto
       %div.text-white(class="md:flex")
         .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
           .hover-parent
             .font-bold.text-3xl.hover-parent
-              {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_title" "-m-8" %}
+              {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_title" "-m-8" "white" %}
               {{ org|config:"photos_section_title"|default:"Photos"}}
 
-            {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_description" "-m-8" %}
+            {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_description" "-m-8" "white" %}
+            {{ org|config:"photos_section_description"|default:""}}
+
+        .flex-1.p-home.text-black.flex.flex-col.justify-center
+          .flex.flex-wrap.justify-center
+            - for photo in stories_photos|slice:":6"
+              {% thumbnail photo.get_image "200x200" crop="center" as im %}
+              .inline-block.bg-gray-500.m-2(class="w-5/12")
+                %img(src="{{im.url}}")
+              {% endthumbnail %}
+  - else
+    // photos
+    .max-w-page.mx-auto
+      %div.text-white(class="md:flex")
+        .flex-1.bg-dark2.p-home.flex.flex-col.justify-center
+          .hover-parent
+            .font-bold.text-3xl.hover-parent
+              {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_title" "-m-8" "white" %}
+              {{ org|config:"photos_section_title"|default:"Photos"}}
+
+            {% edit_content 'orgs.org_edit' "" "#id_common.photos_section_description" "-m-8" "white" %}
             {{ org|config:"photos_section_description"|default:""}}
 
         .flex-1.p-home.text-black.flex.flex-col.justify-center
           .flex.flex-wrap.justify-center
             - for photo in photos|slice:":6"
-              {% thumbnail photo.get_image "200x200" crop="center" as im %}
+              {% thumbnail photo.image "200x200" crop="center" as im %}
               .inline-block.bg-gray-500.m-2(class="w-5/12")
                 %img(src="{{im.url}}")
               {% endthumbnail %}

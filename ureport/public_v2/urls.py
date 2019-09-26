@@ -15,6 +15,7 @@ from .views import (
     JobsView,
     JoinEngageView,
     NewsView,
+    PollQuestionResultsView,
     PollReadView,
     PollRedirectView,
     PollsView,
@@ -33,6 +34,7 @@ urlpatterns = [
     url(r"^opinion/(?P<pk>\d+)/$", PollReadView.as_view(), {}, "v2.public.opinion_read"),
     url(r"^poll/(?P<pk>\d+)/$", PollRedirectView.as_view(), {}, "v2.public.poll_read"),
     url(r"^contact_field_results/$", ReportersResultsView.as_view(), {}, "v2.public.contact_field_results"),
+    url(r"^pollquestion/(?P<pk>\d+)/results/$", PollQuestionResultsView.as_view(), {}, "public.pollquestion_results"),
     url(r"^boundaries/$", cache_page(60 * 30)(BoundaryView.as_view()), {}, "v2.public.boundaries"),
     url(
         r"^boundaries/(?P<osm_id>[a-zA-Z0-9]+)/$",

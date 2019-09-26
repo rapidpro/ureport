@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-09-26 23:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -653,19 +653,16 @@ msgstr ""
 msgid "Import %s"
 msgstr ""
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr ""
 
-msgid "Polls"
+msgid "Opinions"
 msgstr ""
 
 msgid "Users"
@@ -680,6 +677,9 @@ msgstr ""
 msgid "Jobs"
 msgstr ""
 
+msgid "Photos"
+msgstr ""
+
 msgid "Categories Images"
 msgstr ""
 
@@ -692,16 +692,10 @@ msgstr ""
 msgid "Images"
 msgstr ""
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr ""
 
 msgid "Engagement"
-msgstr ""
-
-msgid "Join Now"
 msgstr ""
 
 msgid "U-Report"
@@ -717,6 +711,9 @@ msgid "Content"
 msgstr ""
 
 msgid "Country Aliases"
+msgstr ""
+
+msgid "Polls"
 msgstr ""
 
 msgid "Category Images"
@@ -767,7 +764,7 @@ msgstr ""
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
+msgid "Join Now"
 msgstr ""
 
 msgid "READ MORE"
@@ -1159,6 +1156,9 @@ msgstr ""
 msgid "Week of"
 msgstr ""
 
+msgid "SELECT COUNTRY"
+msgstr ""
+
 msgid "Custom pages"
 msgstr ""
 
@@ -1175,6 +1175,9 @@ msgid "Polled"
 msgstr ""
 
 msgid "Reporters"
+msgstr ""
+
+msgid "Top Region"
 msgstr ""
 
 msgid "LATEST OPINION"
@@ -1201,6 +1204,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr ""
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1225,6 +1231,12 @@ msgstr ""
 msgid "JOIN NOW"
 msgstr ""
 
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr ""
+
 msgid "How would you like to join?"
 msgstr ""
 
@@ -1247,7 +1259,10 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+msgid "LOCATION"
+msgstr ""
+
+msgid "Written by:"
 msgstr ""
 
 msgid "OVERALL STATISTICS"
@@ -1289,9 +1304,6 @@ msgid ""
 "\n"
 "             Results %(start)s-%(end)s of %(count)s\n"
 "           "
-msgstr ""
-
-msgid "SIGN IN"
 msgstr ""
 
 msgid "Error"
@@ -1493,6 +1505,12 @@ msgstr ""
 msgid "The organization this poll is part of"
 msgstr ""
 
+msgid "The title for this response story"
+msgstr ""
+
+msgid "The writer of the response story"
+msgstr ""
+
 msgid "The poll to associate to"
 msgstr ""
 
@@ -1565,31 +1583,10 @@ msgstr ""
 msgid "Image to display on poll page and in previews (optional)"
 msgstr ""
 
-msgid "Featured Poll Responses"
+msgid "Poll Response"
 msgstr ""
 
 msgid "Your poll has been updated."
-msgstr ""
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr ""
-
-msgid "The name or alias of the responder."
-msgstr ""
-
-#, python-format
-msgid "Response %d Location"
-msgstr ""
-
-msgid "The location of the responder."
-msgstr ""
-
-#, python-format
-msgid "Response %d Message"
-msgstr ""
-
-msgid "The text of the featured response."
 msgstr ""
 
 msgid "Poll Questions"

@@ -7,7 +7,7 @@
     .max-w-page.mx-auto.p-home(class="md:flex")
       .flex-1.flex-center-y.hover-parent
         .text-2xl.font-bold.hover-parent(class="md:text-5xl")
-          {% edit_content 'orgs.org_edit' "" "#id_common.opinions_description" "" %}
+          {% edit_content 'orgs.org_edit' "" "#id_common.opinions_description" "" "dark" %}
           -trans "Opinions"
         .text-xl.max-w-lg
           {{ org|config:"opinions_description"|default:""}}
@@ -52,11 +52,11 @@
               {{ latest_poll.category.name }}
   
             .font-bold.leading-tight.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
-              {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" %}
+              {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
               {{ latest_poll.title }}
   
             .block.hover-parent
-              {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" %}
+              {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" "dark" %}
               {{ latest_poll.poll_date|date:"F jS, Y" }}
   
   
@@ -100,7 +100,7 @@
             .flex-1.inline-block.mt-4(style="min-width:220px;max-width:350px" class="md:mt-0")
               .relative.w-full(style="height:105px")
                 {{ age_stats|json_script:"age_stats" }}
-                #age-bars.w-full.h-full.absolute.age-chart(data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
+                #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
 
       -if show_maps
         .flex-1.text-black
@@ -115,7 +115,7 @@
 
 
     - for question in latest_poll.get_questions
-      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-page="opinions" data-aos="fade" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932'  org|config:'color_light1'|default:'#FFD100' org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' %}")
+      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-page="opinions" data-aos="fade" data-aos-anchor-placement="top-center" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932'  org|config:'color_light1'|default:'#FFD100' org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' %}")
         .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg %}")
           .p-home.h-full.flex-center-y(class="md:py-24")
             .flex(class="{% cycle '' 'md:flex-row-reverse' as reverse %}")
@@ -126,7 +126,10 @@
 
             .mt-8
               .font-alt.font-bold.leading-tight.italic.hover-parent(class="{% if question.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
-                {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" %}
+                -if forloop.counter|divisibleby:"2"
+                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" "dark" %}
+                -else
+                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" "white" %}
                 {{ question.title }}
 
               .mt-4
@@ -176,4 +179,33 @@
 
             .relative.w-full(style="min-height:24rem;")
               .w-full.h-full.absolute.poll-chart.block(id="chart-{{ question.id }}" data-question="{{ question.id }}" data-segment="all")
+                .chart-progress.flex.text-center.w-full.h-full
+                  .fa-5x.inline-block.m-auto.self-center
+                    %i.fa.fa-spinner.fa-spin
 
+  -if latest_poll and latest_poll.response_title and latest_poll.response_content
+    .bg-grid.pt-20
+      .bg-dark-blue.mt-20.pt-16
+        .max-w-page.mx-auto.bg-white.p-20.pb-8
+          .float-right(class="w=1/4")
+            .flex-none.w-24
+              %img(src="{{STATIC_URL}}img/u-icon-small.png" )
+          .text-3xl.font-bold.hover-parent.hover-parent(class="md:text-5xl w-3/4")
+            {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_title"  "-m-8" "dark" %}
+            {{latest_poll.response_title}}
+          -if latest_poll.response_author
+            .text-xl.font-bold.mt-6.hover-parent
+              {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_author"  "-m-8" "dark" %}
+              -trans "Written by:"
+              {{latest_poll.response_author}}
+  
+  
+    .bg-grid.pt-20
+      .bg-white.pt-12
+        .max-w-page.mx-auto.bg-white.-mt-40.px-10
+          .block.p-home.hover-parent
+            {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_content"  "-m-8" "dark" %}
+            {{latest_poll.response_content|safe}}
+          .block.p-home
+            .w-full
+              .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")
