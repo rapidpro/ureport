@@ -139,7 +139,8 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
     if segmentType == 'gender'
       chartType = "column";
     $('#engagement-graph-' + dataSlug).parent().removeClass("hidden");
-
+    
+    $("#engagement-graph-" + dataSlug).find('.chart-progress').hide()
     $("#engagement-graph-" + dataSlug).highcharts({
         chart: {
           type: chartType
