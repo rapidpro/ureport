@@ -182,3 +182,27 @@
                 .chart-progress.flex.text-center.w-full.h-full
                   .fa-5x.inline-block.m-auto.self-center
                     %i.fa.fa-spinner.fa-spin
+
+  -if latest_poll.response_title and latest_poll.response_content
+  .bg-grid.pt-20
+    .bg-dark-blue.mt-20.pt-16
+      .max-w-page.mx-auto.bg-white.p-20.pb-8
+        .float-right(class="w=1/4")
+          .flex-none.w-24
+            %img(src="{{STATIC_URL}}img/u-icon-small.png" )
+        .text-3xl.font-bold.hover-parent(class="md:text-5xl w-3/4")
+          {{latest_poll.response_title}}
+        -if latest_poll.response_author
+          .text-xl.font-bold.mt-6
+            -trans "Written by:"
+            {{latest_poll.response_author}}
+
+
+  .bg-grid.pt-20
+    .bg-white.pt-12
+      .max-w-page.mx-auto.bg-white.-mt-40.px-10
+        .block.p-home
+          {{latest_poll.response_content|safe}}
+        .block.p-home
+          .w-full
+            .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")

@@ -13,6 +13,10 @@ html {
   font-display: fallback;
 }
 
+iframe {
+  display: block;
+  width: 100%;
+}
 // countries menu
 #countries {
   position: absolute;
