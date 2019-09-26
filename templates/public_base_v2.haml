@@ -413,8 +413,8 @@
                 {{custom_page.title}}
   
             - if org|config:"instagram_username"
-            %a.flex-initial.ml-4.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-750")
-              %i.fa.fa-instagram
+              %a.flex-initial.ml-4.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-750")
+               %i.fa.fa-instagram
 
             - if org|config:"facebook_page_url"
               %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-750")
