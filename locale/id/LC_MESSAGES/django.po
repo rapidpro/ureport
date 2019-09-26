@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-09-26 23:06+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -704,20 +704,17 @@ msgstr "%s baru anda sudah berhasil dibuat"
 msgid "Import %s"
 msgstr "Impor %s"
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr "Keluar"
 
-msgid "Polls"
-msgstr "Polling"
+msgid "Opinions"
+msgstr ""
 
 msgid "Users"
 msgstr "Nama Pengguna"
@@ -733,6 +730,9 @@ msgstr "Gambar"
 msgid "Jobs"
 msgstr "Pekerjaan"
 
+msgid "Photos"
+msgstr ""
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -747,19 +747,11 @@ msgstr "Orgs"
 msgid "Images"
 msgstr "Gambar"
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr "Tentang Kami"
 
 msgid "Engagement"
 msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "Gabung"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -775,6 +767,9 @@ msgstr "Konten"
 
 msgid "Country Aliases"
 msgstr "Negara Alias"
+
+msgid "Polls"
+msgstr "Polling"
 
 msgid "Category Images"
 msgstr "Gambar Kategori"
@@ -824,8 +819,10 @@ msgstr "BERGABUNG DENGAN KAMI DI"
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
-msgstr ""
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Gabung"
 
 msgid "READ MORE"
 msgstr "LANJUT"
@@ -1259,6 +1256,9 @@ msgstr "Terdaftar"
 msgid "Week of"
 msgstr "Minggu dari"
 
+msgid "SELECT COUNTRY"
+msgstr ""
+
 msgid "Custom pages"
 msgstr ""
 
@@ -1280,6 +1280,9 @@ msgstr "Polling"
 #| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "U-Reporters"
+
+msgid "Top Region"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1315,6 +1318,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "LANJUT"
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1343,6 +1349,12 @@ msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 msgstr ""
 
 msgid "How would you like to join?"
@@ -1377,7 +1389,12 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "LOKASI"
+
+msgid "Written by:"
 msgstr ""
 
 #, fuzzy
@@ -1450,9 +1467,6 @@ msgstr ""
 "\n"
 "⇥Hasil %(start)s-%(end)s of %(count)s\n"
 "⇥"
-
-msgid "SIGN IN"
-msgstr ""
 
 msgid "Error"
 msgstr ""
@@ -1673,6 +1687,16 @@ msgstr "Kategori gambar untuk ditampilkan untuk jajak pendapat (opsional)"
 msgid "The organization this poll is part of"
 msgstr "organisasi jajak pendapat ini adalah bagian dari"
 
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The title for this response story"
+msgstr "Judul cerita"
+
+#, fuzzy
+#| msgid "The writer of the story"
+msgid "The writer of the response story"
+msgstr "Penulis cerita"
+
 msgid "The poll to associate to"
 msgstr "Jajak pendapat untuk mengaitkan ke"
 
@@ -1753,32 +1777,13 @@ msgstr "Gambar untuk ditampilkan pada halaman jajak pendapat dan di lihat. (pili
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Gambar untuk ditampilkan pada halaman jajak pendapat dan di lihat. (pilihan)"
 
-msgid "Featured Poll Responses"
-msgstr "Fitur Tanggapan Jajak Pendapat"
+#, fuzzy
+#| msgid "Poll Questions"
+msgid "Poll Response"
+msgstr "Pertanyaan polling"
 
 msgid "Your poll has been updated."
 msgstr "Polling anda sudah di rubah"
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr "Tanggapan %d UReporter"
-
-msgid "The name or alias of the responder."
-msgstr "Nama atau alias dari responden tersebut."
-
-#, python-format
-msgid "Response %d Location"
-msgstr "Tanggapan %d Lokasi"
-
-msgid "The location of the responder."
-msgstr "Lokasi responden"
-
-#, python-format
-msgid "Response %d Message"
-msgstr "Tanggapan %d Pesan"
-
-msgid "The text of the featured response."
-msgstr "Respon unggulan"
 
 msgid "Poll Questions"
 msgstr "Pertanyaan polling"
@@ -2051,6 +2056,30 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
 
+#~ msgid "Featured Poll Responses"
+#~ msgstr "Fitur Tanggapan Jajak Pendapat"
+
+#, python-format
+#~ msgid "Response %d Reporter"
+#~ msgstr "Tanggapan %d UReporter"
+
+#~ msgid "The name or alias of the responder."
+#~ msgstr "Nama atau alias dari responden tersebut."
+
+#, python-format
+#~ msgid "Response %d Location"
+#~ msgstr "Tanggapan %d Lokasi"
+
+#~ msgid "The location of the responder."
+#~ msgstr "Lokasi responden"
+
+#, python-format
+#~ msgid "Response %d Message"
+#~ msgstr "Tanggapan %d Pesan"
+
+#~ msgid "The text of the featured response."
+#~ msgstr "Respon unggulan"
+
 #, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
@@ -2095,11 +2124,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~| msgid "FILTERED BY"
 #~ msgid "FILTER BY:"
 #~ msgstr "Kata Pencarian"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "LOKASI"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "API tanda untuk akun RapidPro dashboard ini terkait dengan"
