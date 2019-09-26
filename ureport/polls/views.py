@@ -25,7 +25,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ureport.utils import json_date_to_datetime
 
-from .models import FeaturedResponse, Poll, PollImage, PollQuestion
+from .models import Poll, PollImage, PollQuestion
 
 
 class PollForm(forms.ModelForm):
@@ -61,6 +61,17 @@ class PollForm(forms.ModelForm):
     class Meta:
         model = Poll
         fields = ("is_active", "is_featured", "backend", "title", "category", "category_image")
+
+
+class PollResponseForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.org = kwargs["org"]
+        del kwargs["org"]
+        super(PollResponseForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Poll
+        fields = ("response_title", "response_author", "response_content")
 
 
 class PollFlowForm(forms.ModelForm):
@@ -264,7 +275,7 @@ class PollCRUDL(SmartCRUDL):
             return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
-        success_url = "@polls.poll_list"
+        success_url = "id@polls.poll_responses"
         title = _("Poll Images")
         success_message = _("Now enter any responses you'd like to feature. (if any)")
 
@@ -316,79 +327,16 @@ class PollCRUDL(SmartCRUDL):
             return obj
 
     class Responses(OrgObjPermsMixin, SmartUpdateView):
+        form_class = PollResponseForm
+        title = _("Poll Response")
         success_url = "@polls.poll_list"
-        title = _("Featured Poll Responses")
         success_message = _("Your poll has been updated.")
+        fields = ("response_title", "response_author", "response_content")
 
-        def get_form(self):
-            form = super(PollCRUDL.Responses, self).get_form()
-            form.fields.clear()
-
-            existing_responses = list(self.object.featured_responses.all().order_by("pk"))
-
-            # add existing responses
-            for idx in range(1, 4):
-                if existing_responses:
-                    response = existing_responses.pop(0)
-                else:
-                    response = None
-
-                # reporter, location, response
-                reporter_args = dict(
-                    max_length=64,
-                    required=False,
-                    label=_("Response %d Reporter") % idx,
-                    help_text=_("The name or alias of the responder."),
-                )
-                if response:
-                    reporter_args["initial"] = response.reporter
-                self.form.fields["reporter_%d" % idx] = forms.CharField(**reporter_args)
-
-                location_args = dict(
-                    max_length=64,
-                    required=False,
-                    label=_("Response %d Location") % idx,
-                    help_text=_("The location of the responder."),
-                )
-                if response:
-                    location_args["initial"] = response.location
-                self.form.fields["location_%d" % idx] = forms.CharField(**location_args)
-
-                message_args = dict(
-                    max_length=255,
-                    required=False,
-                    widget=forms.Textarea,
-                    label=_("Response %d Message") % idx,
-                    help_text=_("The text of the featured response."),
-                )
-                if response:
-                    message_args["initial"] = response.message
-                self.form.fields["message_%d" % idx] = forms.CharField(**message_args)
-
-            return form
-
-        def post_save(self, obj):
-            obj = super(PollCRUDL.Responses, self).post_save(obj)
-
-            # remove our existing responses
-            self.object.featured_responses.all().delete()
-
-            # overwrite our new ones
-            for idx in range(1, 4):
-                location = self.form.cleaned_data.get("location_%d" % idx, None)
-                reporter = self.form.cleaned_data.get("reporter_%d" % idx, None)
-                message = self.form.cleaned_data.get("message_%d" % idx, None)
-
-                if location and reporter and message:
-                    FeaturedResponse.objects.create(
-                        poll=self.object,
-                        location=location,
-                        reporter=reporter,
-                        message=message,
-                        created_by=self.request.user,
-                        modified_by=self.request.user,
-                    )
-            return obj
+        def get_form_kwargs(self):
+            kwargs = super(PollCRUDL.Responses, self).get_form_kwargs()
+            kwargs["org"] = self.request.org
+            return kwargs
 
     class Questions(OrgObjPermsMixin, SmartUpdateView):
         success_url = "id@polls.poll_images"
@@ -510,8 +458,8 @@ class PollCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         search_fields = ("title__icontains",)
-        fields = ("title", "poll_date", "category", "questions", "sync_status", "created_on")
-        link_fields = ("title", "poll_date", "questions", "featured_responses", "images")
+        fields = ("title", "poll_date", "category", "questions", "opinion_response", "sync_status", "created_on")
+        link_fields = ("title", "poll_date", "questions", "opinion_response", "images")
         default_order = ("-created_on", "id")
 
         def get_queryset(self):
@@ -536,8 +484,8 @@ class PollCRUDL(SmartCRUDL):
         def get_images(self, obj):
             return obj.get_images().count()
 
-        def get_featured_responses(self, obj):
-            return obj.get_featured_responses().count()
+        def get_opinion_response(self, obj):
+            return obj.response_title or "--"
 
         def get_category(self, obj):
             return obj.category.name
@@ -549,7 +497,7 @@ class PollCRUDL(SmartCRUDL):
                 return reverse("polls.poll_poll_date", args=[obj.pk])
             elif field == "images":
                 return reverse("polls.poll_images", args=[obj.pk])
-            elif field == "featured_responses":
+            elif field == "opinion_response":
                 return reverse("polls.poll_responses", args=[obj.pk])
             else:
                 return super(PollCRUDL.List, self).lookup_field_link(context, field, obj)

@@ -148,6 +148,16 @@ class Poll(SmartModel):
 
     backend = models.ForeignKey(OrgBackend, on_delete=models.PROTECT, null=True)
 
+    response_title = models.CharField(
+        max_length=255, help_text=_("The title for this response story"), null=True, blank=True
+    )
+
+    response_author = models.CharField(
+        max_length=255, help_text=_("The writer of the response story"), null=True, blank=True
+    )
+
+    response_content = models.TextField(help_text=_("The body of text for the story"), null=True, blank=True)
+
     def get_sync_progress(self):
         if not self.runs_count:
             return float(0)
