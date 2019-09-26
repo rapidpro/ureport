@@ -190,10 +190,12 @@
           .float-right(class="w=1/4")
             .flex-none.w-24
               %img(src="{{STATIC_URL}}img/u-icon-small.png" )
-          .text-3xl.font-bold.hover-parent(class="md:text-5xl w-3/4")
+          .text-3xl.font-bold.hover-parent.hover-parent(class="md:text-5xl w-3/4")
+            {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_title"  "-m-8" "dark" %}
             {{latest_poll.response_title}}
           -if latest_poll.response_author
-            .text-xl.font-bold.mt-6
+            .text-xl.font-bold.mt-6.hover-parent
+              {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_author"  "-m-8" "dark" %}
               -trans "Written by:"
               {{latest_poll.response_author}}
   
@@ -201,7 +203,8 @@
     .bg-grid.pt-20
       .bg-white.pt-12
         .max-w-page.mx-auto.bg-white.-mt-40.px-10
-          .block.p-home
+          .block.p-home.hover-parent
+            {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_content"  "-m-8" "dark" %}
             {{latest_poll.response_content|safe}}
           .block.p-home
             .w-full
