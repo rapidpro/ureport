@@ -438,9 +438,10 @@
                 -trans "Opinions"
   
           %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-            {% thumbnail org.get_logo "x60" format="PNG" as im %}
-            %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
-            {% endthumbnail %}
+            .(style="width:360px")
+              {% thumbnail org.get_logo "x180" format="PNG" as im %}
+              %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+              {% endthumbnail %}
   
           .flex-1.text-center.font-bold.text-2xl.flex-center-y
             %div
@@ -452,9 +453,10 @@
         .flex.justify-between
           .p-home
             %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-              {% thumbnail org.get_logo "x40" format="PNG" as im %}
-              %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
-              {% endthumbnail %}
+              .(style="width:270px")
+                {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+                {% endthumbnail %}
   
           .flex-center-y.p-home
             .block.text-3xl.mr-4
@@ -507,14 +509,16 @@
       // footer navbar
       .justify-around.mt-12.mb-3.px-home(class="md:flex")
         %a.flex-1.text-center.mb-2.hidden(href="{% url 'v2.public.index' %}" class="md:block")
-          {% thumbnail org.get_logo "x60" format="PNG" as im %}
-          %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
-          {% endthumbnail %}
+          .(style="width:360px")
+            {% thumbnail org.get_logo "x180" format="PNG" as im %}
+            %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+            {% endthumbnail %}
   
         %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'v2.public.index' %}" class="md:hidden")
-          {% thumbnail org.get_logo "x40" format="PNG" as im %}
-          %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
-          {% endthumbnail %}
+          .(style="width:270px")
+            {% thumbnail org.get_logo "x180" format="PNG" as im %}
+            %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+            {% endthumbnail %}
   
         .flex-1.flex(class="md:justify-end")
           .font-bold.text-2xl.flex-center-y(class="md:ml-6")
@@ -547,8 +551,13 @@
             %i.fa.fa-twitter
           {% endif %}
         
-          %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="rtl:mr-4 ltr:ml-4 hover:text-gray-750")
-            - trans "Login"
+          - if request.user and request.user.is_authenticated
+            %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+              - trans "Logout"
+          -else
+            %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+              - trans "Login"
+
       // bottom yellow bar
       .bg-color3.h-2
   

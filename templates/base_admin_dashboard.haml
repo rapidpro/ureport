@@ -33,9 +33,10 @@
         .level
           .level-left
             .level-item.square-logo
-              {% thumbnail org.get_logo "x60" format="PNG" as im %}
-              %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
-              {% endthumbnail %}
+              .(style="width:360px")
+                {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+                {% endthumbnail %}
 
           .level-right
             - block login
@@ -163,9 +164,10 @@
         // footer navbar
         .justify-around.pt-12.mb-3.px-home.border-t.border-gray-600(class="md:flex")
           %a.flex-1.text-center.mb-2.hidden(href="{% url 'v2.public.index' %}" class="md:block")
-            {% thumbnail org.get_logo "x60" format="PNG" as im %}
-            %img.block.logo(src="{{ im.url }}" alt="{{ org.name }}")
-            {% endthumbnail %}
+            .(style="width:360px")
+              {% thumbnail org.get_logo "x180" format="PNG" as im %}
+              %img.block.logo(src="{{ im.url }}" alt="{{ org.name }}")
+              {% endthumbnail %}
 
           %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'v2.public.index' %}" class="md:hidden")
             {% thumbnail org.get_logo "x40" format="PNG" as im %}
