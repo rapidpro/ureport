@@ -92,27 +92,27 @@
                       %li
                         %a(href="{% url 'jobs.jobsource_list' %}")
                           %span.icon
-                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                            %img(src="{{ STATIC_URL }}img/jobs_icon.png")
                           %span.menu-link-title
                             - trans "Jobs"
                       %li
                         %a(href="{% url 'categories.category_list' %}")
                           %span.icon
-                            %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %img(src="{{ STATIC_URL }}img/categories_icon.png")
                           %span.menu-link-title
                             - trans "Categories"
 
                       %li
                         %a(href="{% url 'categories.categoryimage_list' %}")
                           %span.icon
-                            %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %img(src="{{ STATIC_URL }}img/category_images_icon.png")
                           %span.menu-link-title
                             - trans "Categories Images"
 
                       %li
                         %a(href="{% url 'news.newsitem_list' %}")
                           %span.icon
-                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                            %img(src="{{ STATIC_URL }}img/news_icon.png")
                           %span.menu-link-title
                             - trans "News Items"
                       - if request.user.is_superuser
