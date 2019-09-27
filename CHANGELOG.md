@@ -1,3 +1,7 @@
+v1.1.61
+----------
+ * Hide photos section if no photos can be displayed
+
 v1.1.60
 ----------
  * Merge pull request #478 from rapidpro/beta-fixes
