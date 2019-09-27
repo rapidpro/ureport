@@ -394,9 +394,12 @@
         // desktop header nav
         %ul.my-5.px-home.text-sm.font-bold(class="md:flex")
           .li.flex-none.mr-4.py-menu
-            %a#countries-toggler(href="javascript:void(0)" class="hover:text-gray-750")
+            %a#countries-toggler.flex.items-center(href="javascript:void(0)" class="hover:text-gray-750")
+              .w-12.flex.mx-1
+                %img.inline(src="{{STATIC_URL}}img/selectcountry.png")
               %i.fa.fa-chevron-circle-down
-              -trans "SELECT YOUR COUNTRY"
+              .mx-2
+                -trans "SELECT YOUR COUNTRY"
   
           .li.flex-grow.flex(class="md:justify-end")
             %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4 hover:text-gray-750")
