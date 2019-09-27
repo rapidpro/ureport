@@ -1,3 +1,7 @@
+v1.1.66
+----------
+ * Fix polls maps
+
 v1.1.65
 ----------
  * Use center bottom to redraw
