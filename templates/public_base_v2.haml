@@ -453,7 +453,7 @@
         .flex.justify-between
           .p-home
             %a.flex-initial.text-center(href="{% url 'v2.public.index' %}")
-              .(style="width:270px")
+              .(style="width:180px")
                 {% thumbnail org.get_logo "x180" format="PNG" as im %}
                 %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
                 {% endthumbnail %}
@@ -515,7 +515,7 @@
             {% endthumbnail %}
   
         %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'v2.public.index' %}" class="md:hidden")
-          .(style="width:270px")
+          .(style="width:180px")
             {% thumbnail org.get_logo "x180" format="PNG" as im %}
             %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
             {% endthumbnail %}
