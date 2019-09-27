@@ -1,3 +1,11 @@
+v1.1.60
+----------
+ * Merge pull request #478 from rapidpro/beta-fixes
+ * Add select country image
+ * Add select country image
+ * Update CHANGELOG.md for v1.1.59
+ * Merge pull request #476 from rapidpro/beta-fixes
+
 v1.1.59
 ----------
  * Merge pull request #476 from rapidpro/beta-fixes
