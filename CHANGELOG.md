@@ -1,3 +1,7 @@
+v1.1.65
+----------
+ * Use center bottom to redraw
+
 v1.1.64
 ----------
  * Use top-bottom anchor to trigger redraw
