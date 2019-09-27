@@ -185,27 +185,29 @@
 
   -if latest_poll and latest_poll.response_title and latest_poll.response_content
     .bg-grid.pt-20
-      .bg-dark-blue.mt-20.pt-16
-        .max-w-page.mx-auto.bg-white.p-20.pb-8
-          .float-right(class="w=1/4")
-            .flex-none.w-24
-              %img(src="{{STATIC_URL}}img/u-icon-small.png" )
-          .text-3xl.font-bold.hover-parent.hover-parent(class="md:text-5xl w-3/4")
-            {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_title"  "-m-8" "dark" %}
-            {{latest_poll.response_title}}
-          -if latest_poll.response_author
-            .text-xl.font-bold.mt-6.hover-parent
-              {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_author"  "-m-8" "dark" %}
-              -trans "Written by:"
-              {{latest_poll.response_author}}
+      .bg-dark-blue.mt-10.pt-8(class="md:pt-20 md:pt-16")
+        .max-w-page.mx-auto.bg-white.p-4(class="md:pb-12")
+          .p-home
+            .float-right(class="w=1/4")
+              .flex-none.w-24.hidden(class="md:block")
+                %img(src="{{STATIC_URL}}img/u-icon-small.png" )
+            .text-3xl.font-bold.hover-parent.hover-parent.inline-block(class="md:text-5xl w-3/4")
+              {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_title"  "-m-8" "dark" %}
+              {{latest_poll.response_title}}
+            -if latest_poll.response_author
+              .text-xl.font-bold.mt-4.hover-parent.inline-block(class="md:mt-6")
+                {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_author"  "-m-8" "dark" %}
+                -trans "Written by:"
+                {{latest_poll.response_author}}
   
   
-    .bg-grid.pt-20
+    .bg-grid.pt-20(class="md:pt-20")
       .bg-white.pt-12
-        .max-w-page.mx-auto.bg-white.-mt-40.px-10
+        .max-w-page.mx-auto.bg-white.-mt-40.p-4
           .block.p-home.hover-parent
             {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_content"  "-m-8" "dark" %}
             {{latest_poll.response_content|safe}}
-          .block.p-home
-            .w-full
+
+          .block.p-home.pt-0
+            .block.w-full
               .fb-comments(data-href="{% org_host_link %}{% url 'v2.public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")
