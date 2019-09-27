@@ -1,3 +1,7 @@
+v1.1.64
+----------
+ * Use top-bottom anchor to trigger redraw
+
 v1.1.63
 ----------
  * Merge pull request #479 from rapidpro/beta-fixes
