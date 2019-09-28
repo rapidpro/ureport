@@ -1,3 +1,7 @@
+v1.1.67
+----------
+ * Screenshot modal position
+
 v1.1.66
 ----------
  * Fix polls maps
