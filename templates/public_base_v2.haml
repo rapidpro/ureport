@@ -657,6 +657,7 @@
         $(".export-modal-content").hide();
 
         $('.export-modal').toggleClass('hidden');
+        $('.modal-content').offset({top: $(window).scrollTop() + 150})
         var region = document.body.querySelector("#" + eltID);
 
         html2canvas(region).then(canvas => {
