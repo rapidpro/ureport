@@ -863,6 +863,7 @@ UREPORT_DEFAULT_SECONDARY_COLOR = "#1F49BF"
 # -----------------------------------------------------------------------------------
 SITE_ALLOW_NO_ORG = (
     "public.countries",
+    "public.status",
     "api",
     "api.v1",
     "api.v1.docs",
