@@ -666,6 +666,11 @@ class CheckVersionMiddlewareTest(UreportTest):
     def setUp(self):
         super(CheckVersionMiddlewareTest, self).setUp()
 
+    def test_status_view(self):
+        status_url = reverse("public.status")
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+
     def test_process_template_response(self):
         self.login(self.admin)
 
