@@ -82,7 +82,7 @@
                   {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" "dark" %}
                   {{ story.summary|truncatewords:50|linebreaksbr }}
   
-                %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
+                %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}" class="hover:bg-gray-700")
                   -trans "READ MORE"
             
             - if forloop.first
