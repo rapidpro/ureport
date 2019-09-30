@@ -1,3 +1,7 @@
+v1.1.70
+----------
+ * Allow status view without org
+
 v1.1.69
 ----------
  * Merge pull request #481 from rapidpro/status-view
