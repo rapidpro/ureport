@@ -1,3 +1,8 @@
+v1.1.69
+----------
+ * Merge pull request #481 from rapidpro/status-view
+ * Add status view
+
 v1.1.68
 ----------
  * Merge pull request #480 from rapidpro/beta-fixes
