@@ -1,3 +1,9 @@
+v1.1.68
+----------
+ * Merge pull request #480 from rapidpro/beta-fixes
+ * consistent read more button
+ * Fix stories button hover state, and screenshot modal z-index
+
 v1.1.67
 ----------
  * Screenshot modal position
