@@ -23,6 +23,7 @@ from .views import (
     StoriesView,
     StoryReadView,
     UreportersView,
+    status,
 )
 
 urlpatterns = [
@@ -47,4 +48,5 @@ urlpatterns = [
     url(r"^countries/$", CountriesView.as_view(), {}, "public.countries"),
     url(r"^added/$", AdditionalMenu.as_view(), {}, "public.added"),
     url(r"^count/$", Count.as_view(), {}, "public.count"),
+    url(r"^status/$", status, {}, "public.status"),
 ]
