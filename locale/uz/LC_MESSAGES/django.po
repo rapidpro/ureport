@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-26 23:06+0000\n"
+"POT-Creation-Date: 2019-10-01 09:23+0000\n"
 "PO-Revision-Date: 2018-08-22 11:40+0000\n"
 "Last-Translator: Jahongir Abdurahmonov <jabdurahmonov@unicef.org>\n"
 "Language-Team: Uzbek (http://www.transifex.com/rapidpro/ureport/language/uz/)\n"
@@ -1226,6 +1226,12 @@ msgstr "Ro'yxatdan o'tganlar"
 msgid "Week of"
 msgstr "Haftasi"
 
+msgid "Export and Share"
+msgstr ""
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
 msgid "SELECT COUNTRY"
 msgstr ""
 
@@ -1233,12 +1239,6 @@ msgid "Custom pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
-
-msgid "Export and Share"
-msgstr ""
-
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
 
 #, fuzzy

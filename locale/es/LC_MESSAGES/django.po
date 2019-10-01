@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-26 23:06+0000\n"
+"POT-Creation-Date: 2019-10-01 09:23+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: deimidis <guillermo.movia@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1201,6 +1201,12 @@ msgstr "Registrado"
 msgid "Week of"
 msgstr "Semana del"
 
+msgid "Export and Share"
+msgstr "Exportar y compartir"
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "¿Quieres contarle al mundo sobre esto? Descarga esta imagen para ¡compartirla fácilmente en las redes sociales o para una hermosa presentación!"
+
 #, fuzzy
 #| msgid "SELECT YOUR COUNTRY"
 msgid "SELECT COUNTRY"
@@ -1211,12 +1217,6 @@ msgstr "Páginas personalizadas"
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Mira cómo está la participación de los jóvenes para un cambio social a través de los números."
-
-msgid "Export and Share"
-msgstr "Exportar y compartir"
-
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr "¿Quieres contarle al mundo sobre esto? Descarga esta imagen para ¡compartirla fácilmente en las redes sociales o para una hermosa presentación!"
 
 msgid "Polled"
 msgstr "Encuestados"
