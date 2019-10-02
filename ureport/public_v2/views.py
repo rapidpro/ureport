@@ -466,6 +466,5 @@ class PollQuestionResultsView(SmartReadView):
             segment = json.loads(segment)
 
         results = self.object.get_results(segment=segment)
-        results = self.object.calculate_results(segment=segment)
 
         return HttpResponse(json.dumps(results))
