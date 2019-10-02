@@ -1801,35 +1801,22 @@ class PollQuestionTest(UreportTest):
         PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
         PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
 
-        with patch("ureport.polls.models.PollQuestion.get_question_results") as mock:
-            mock.return_value = dict()
+        calculated_results = [
+            dict(open_ended=False, set=0, unset=0, categories=[dict(count=0, label="Yes"), dict(count=0, label="No")])
+        ]
 
-            calculated_results = [
-                dict(
-                    open_ended=False,
-                    set=0,
-                    unset=0,
-                    categories=[dict(count=0, label="Yes"), dict(count=0, label="No")],
-                )
-            ]
+        self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
-            self.assertEqual(poll_question1.calculate_results(), calculated_results)
+        PollResponseCategory.objects.all().delete()
 
-            PollResponseCategory.objects.all().delete()
+        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
+        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
 
-            PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
-            PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
+        calculated_results = [
+            dict(open_ended=False, set=0, unset=0, categories=[dict(count=0, label="No"), dict(count=0, label="Yes")])
+        ]
 
-            calculated_results = [
-                dict(
-                    open_ended=False,
-                    set=0,
-                    unset=0,
-                    categories=[dict(count=0, label="No"), dict(count=0, label="Yes")],
-                )
-            ]
-
-            self.assertEqual(poll_question1.calculate_results(), calculated_results)
+        self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
     def test_poll_question_model(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
@@ -2015,182 +2002,197 @@ class PollQuestionTest(UreportTest):
                 # should not have used the path with custom sql
                 self.assertFalse(mock_get_dict_from_cursor.called)
 
-        question_results = dict()
-        question_results["ruleset:%s:total-ruleset-responded" % poll_question1.ruleset_uuid] = 3462
-        question_results["ruleset:%s:total-ruleset-polled" % poll_question1.ruleset_uuid] = 7156
-        question_results["ruleset:%s:category:yes" % poll_question1.ruleset_uuid] = 2210
-        question_results["ruleset:%s:category:no" % poll_question1.ruleset_uuid] = 1252
+        calculated_results = [
+            dict(open_ended=False, set=0, unset=0, categories=[dict(count=0, label="Yes"), dict(count=0, label="No")])
+        ]
 
-        with patch("ureport.polls.models.PollQuestion.get_question_results") as mock:
-            mock.return_value = dict()
+        self.assertEqual(poll_question1.calculate_results(), calculated_results)
+        poll1.rebuild_poll_results_counts()
 
-            calculated_results = [
-                dict(
-                    open_ended=False,
-                    set=0,
-                    unset=0,
-                    categories=[dict(count=0, label="Yes"), dict(count=0, label="No")],
-                )
-            ]
+        calculated_results = [
+            dict(open_ended=False, set=0, unset=7, categories=[dict(count=0, label="Yes"), dict(count=0, label="No")])
+        ]
+        self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
-            self.assertEqual(poll_question1.calculate_results(), calculated_results)
-            mock.assert_called_with()
+    def test_poll_question_calculate_results(self):
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-            self.assertEqual(poll_question1.get_responded(), 0)
-            mock.assert_called_with()
+        poll_question1 = PollQuestion.objects.create(
+            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
+        )
 
-            self.assertEqual(poll_question1.get_polled(), 0)
-            mock.assert_called_with()
+        self.assertEqual(six.text_type(poll_question1), "question 1")
 
-            with patch("ureport.polls.models.PollQuestion.get_results") as mock_get_results:
-                mock_get_results.return_value = calculated_results
-                self.assertEqual(poll_question1.get_words(), [dict(count=0, label="Yes"), dict(count=0, label="No")])
-                mock_get_results.assert_called_with()
+        # no response category are ignored
+        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-4", "No Response")
 
-            mock.return_value = question_results
-            poll1.runs_count = 7156
-            poll1.save()
+        self.assertFalse(poll_question1.is_open_ended())
 
-            calculated_results = [
-                dict(
-                    open_ended=False,
-                    set=3462,
-                    unset=3694,
-                    categories=[dict(count=2210, label="Yes"), dict(count=1252, label="No")],
-                )
-            ]
+        yes_category = PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
 
-            self.assertEqual(poll_question1.calculate_results(), calculated_results)
+        self.assertTrue(poll_question1.is_open_ended())
 
-            self.assertEqual(poll_question1.get_responded(), 3462)
-            mock.assert_called_with()
+        no_category = PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
+        PollResponseCategory.objects.filter(category="No").update(is_active=False)
 
-            self.assertEqual(poll_question1.get_polled(), 7156)
-            mock.assert_called_with()
+        self.assertTrue(poll_question1.is_open_ended())
 
-            with patch("ureport.polls.models.PollQuestion.get_results") as mock_get_results:
-                mock_get_results.return_value = calculated_results
-                self.assertEqual(
-                    poll_question1.get_words(), [dict(count=2210, label="Yes"), dict(count=1252, label="No")]
-                )
-                mock.assert_called_with()
+        PollResponseCategory.objects.filter(category="No").update(is_active=True)
 
-                self.uganda.set_config("common.ignore_words", " Yes, Allo ")
-                self.assertEqual(poll_question1.get_words(), [dict(count=1252, label="No")])
-                mock.assert_called_with()
+        self.assertFalse(poll_question1.is_open_ended())
 
-            self.assertEqual(poll_question1.get_response_percentage(), "48%")
+        # should be ignored in calculated results
+        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-3", "Other")
 
-            question_results["ruleset:%s:category:yes:state:R-KGL" % poll_question1.ruleset_uuid] = 10
-            question_results["ruleset:%s:category:yes:state:R-LAGOS" % poll_question1.ruleset_uuid] = 20
-            question_results["ruleset:%s:category:no:state:R-LAGOS" % poll_question1.ruleset_uuid] = 30
-            question_results["ruleset:%s:nocategory:state:R-LAGOS" % poll_question1.ruleset_uuid] = 33
+        male_gender = GenderSegment.objects.filter(gender="M").first()
+        female_gender = GenderSegment.objects.filter(gender="F").first()
 
-            mock.return_value = question_results
+        age_segment_20 = AgeSegment.objects.filter(min_age=20).first()
+        age_segment_25 = AgeSegment.objects.filter(min_age=25).first()
 
-            with patch("dash.orgs.models.Org.get_segment_org_boundaries") as mock_segment_boundaries:
-                mock_segment_boundaries.return_value = [
-                    dict(osm_id="R-KGL", name="Kigali"),
-                    dict(osm_id="R-LAGOS", name="Lagos"),
-                ]
+        now = timezone.now()
 
-                self.assertEqual(
-                    poll_question1.calculate_results(segment=dict(location="State")),
-                    [
-                        dict(
-                            open_ended=False,
-                            set=10,
-                            unset=0,
-                            boundary="R-KGL",
-                            label="Kigali",
-                            categories=[dict(count=10, label="Yes"), dict(count=0, label="No")],
-                        ),
-                        dict(
-                            open_ended=False,
-                            set=50,
-                            unset=33,
-                            boundary="R-LAGOS",
-                            label="Lagos",
-                            categories=[dict(count=20, label="Yes"), dict(count=30, label="No")],
-                        ),
-                    ],
-                )
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=None,
+            age_segment=None,
+            gender_segment=None,
+            location=None,
+            date=now,
+            count=1,
+        )
 
-            question_results["ruleset:%s:category:yes:gender:m" % poll_question1.ruleset_uuid] = 5
-            question_results["ruleset:%s:category:yes:gender:f" % poll_question1.ruleset_uuid] = 10
-            question_results["ruleset:%s:category:no:gender:m" % poll_question1.ruleset_uuid] = 12
-            question_results["ruleset:%s:nocategory:gender:f" % poll_question1.ruleset_uuid] = 8
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=yes_category,
+            age_segment=None,
+            gender_segment=None,
+            location=None,
+            date=now,
+            count=2,
+        )
 
-            mock.return_value = question_results
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=no_category,
+            age_segment=None,
+            gender_segment=None,
+            location=None,
+            date=now,
+            count=1,
+        )
 
-            gender_results = poll_question1.calculate_results(segment=dict(gender="Gender"))
+        calculated_results = [
+            dict(open_ended=False, set=3, unset=1, categories=[dict(count=2, label="Yes"), dict(count=1, label="No")])
+        ]
+        self.assertEqual(poll_question1.calculate_results(), calculated_results)
+        self.assertEqual(poll_question1.get_responded(), 3)
+        self.assertEqual(poll_question1.get_polled(), 4)
 
-            self.assertEqual(gender_results[0]["set"], 10)
-            self.assertEqual(gender_results[0]["unset"], 8)
-            self.assertEqual(gender_results[0]["label"].title(), "Female")
-            self.assertEqual(gender_results[0]["categories"][0]["count"], 10)
-            self.assertEqual(gender_results[0]["categories"][0]["label"], "Yes")
-            self.assertEqual(gender_results[0]["categories"][1]["count"], 0)
-            self.assertEqual(gender_results[0]["categories"][1]["label"], "No")
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=no_category,
+            age_segment=None,
+            gender_segment=male_gender,
+            location=None,
+            date=None,
+            count=2,
+        )
 
-            self.assertEqual(gender_results[1]["set"], 17)
-            self.assertEqual(gender_results[1]["unset"], 0)
-            self.assertEqual(gender_results[1]["label"].title(), "Male")
-            self.assertEqual(gender_results[1]["categories"][0]["count"], 5)
-            self.assertEqual(gender_results[1]["categories"][0]["label"], "Yes")
-            self.assertEqual(gender_results[1]["categories"][1]["count"], 12)
-            self.assertEqual(gender_results[1]["categories"][1]["label"], "No")
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=no_category,
+            age_segment=None,
+            gender_segment=female_gender,
+            location=None,
+            date=None,
+            count=1,
+        )
 
-            poll1.poll_date = timezone.now().replace(year=2015)
-            poll1.save()
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=yes_category,
+            age_segment=None,
+            gender_segment=female_gender,
+            location=None,
+            date=None,
+            count=3,
+        )
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=None,
+            age_segment=None,
+            gender_segment=female_gender,
+            location=None,
+            date=None,
+            count=5,
+        )
 
-            question_results["ruleset:%s:category:yes:born:3" % poll_question1.ruleset_uuid] = 5
-            question_results["ruleset:%s:category:yes:born:2000" % poll_question1.ruleset_uuid] = 10
-            question_results["ruleset:%s:category:yes:born:2010" % poll_question1.ruleset_uuid] = 25
-            question_results["ruleset:%s:category:no:born:1990" % poll_question1.ruleset_uuid] = 12
-            question_results["ruleset:%s:nocategory:born:28990" % poll_question1.ruleset_uuid] = 8
-            question_results["ruleset:%s:nocategory:born:1995" % poll_question1.ruleset_uuid] = 100
+        calculated_results = [
+            dict(set=2, unset=0, label="Male", categories=[dict(count=0, label="Yes"), dict(count=2, label="No")]),
+            dict(set=4, unset=5, label="Female", categories=[dict(count=3, label="Yes"), dict(count=1, label="No")]),
+        ]
+        self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
 
-            age_results = poll_question1.calculate_results(segment=dict(age="Age"))
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=no_category,
+            age_segment=age_segment_20,
+            gender_segment=None,
+            location=None,
+            date=None,
+            count=2,
+        )
 
-            self.assertEqual(
-                age_results,
-                [
-                    dict(
-                        set=25,
-                        unset=0,
-                        categories=[dict(count=25, label="Yes"), dict(count=0, label="No")],
-                        label="0-14",
-                    ),
-                    dict(
-                        set=10,
-                        unset=0,
-                        categories=[dict(count=10, label="Yes"), dict(count=0, label="No")],
-                        label="15-19",
-                    ),
-                    dict(
-                        set=0,
-                        unset=100,
-                        categories=[dict(count=0, label="Yes"), dict(count=0, label="No")],
-                        label="20-24",
-                    ),
-                    dict(
-                        set=12,
-                        unset=0,
-                        categories=[dict(count=0, label="Yes"), dict(count=12, label="No")],
-                        label="25-30",
-                    ),
-                    dict(
-                        set=0,
-                        unset=0,
-                        categories=[dict(count=0, label="Yes"), dict(count=0, label="No")],
-                        label="31-34",
-                    ),
-                    dict(
-                        set=0, unset=0, categories=[dict(count=0, label="Yes"), dict(count=0, label="No")], label="35+"
-                    ),
-                ],
-            )
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=no_category,
+            age_segment=age_segment_25,
+            gender_segment=None,
+            location=None,
+            date=None,
+            count=1,
+        )
+
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=yes_category,
+            age_segment=age_segment_25,
+            gender_segment=None,
+            location=None,
+            date=None,
+            count=3,
+        )
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=None,
+            age_segment=age_segment_25,
+            gender_segment=None,
+            location=None,
+            date=None,
+            count=5,
+        )
+
+        calculated_results = [
+            dict(set=0, unset=0, label="0-14", categories=[dict(count=0, label="Yes"), dict(count=0, label="No")]),
+            dict(set=0, unset=0, label="15-19", categories=[dict(count=0, label="Yes"), dict(count=0, label="No")]),
+            dict(set=2, unset=0, label="20-24", categories=[dict(count=0, label="Yes"), dict(count=2, label="No")]),
+            dict(set=4, unset=5, label="25-30", categories=[dict(count=3, label="Yes"), dict(count=1, label="No")]),
+            dict(set=0, unset=0, label="31-34", categories=[dict(count=0, label="Yes"), dict(count=0, label="No")]),
+            dict(set=0, unset=0, label="35+", categories=[dict(count=0, label="Yes"), dict(count=0, label="No")]),
+        ]
+        self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
 
     def test_tasks(self):
         self.org = self.create_org("burundi", pytz.timezone("Africa/Bujumbura"), self.admin)

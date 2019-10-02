@@ -776,7 +776,7 @@ def get_segment_org_boundaries(org, segment):
         if state_id:
             location_boundaries = (
                 org.boundaries.filter(level=Boundary.DISTRICT_LEVEL, is_active=True, parent__osm_id=state_id)
-                .values("osm_id", "name")
+                .values("id", "osm_id", "name")
                 .order_by("osm_id")
             )
 
@@ -785,7 +785,7 @@ def get_segment_org_boundaries(org, segment):
         if district_id:
             location_boundaries = (
                 org.boundaries.filter(level=Boundary.WARD_LEVEL, is_active=True, parent__osm_id=district_id)
-                .values("osm_id", "name")
+                .values("id", "osm_id", "name")
                 .order_by("osm_id")
             )
 
@@ -793,13 +793,13 @@ def get_segment_org_boundaries(org, segment):
         if org.get_config("common.is_global"):
             location_boundaries = (
                 org.boundaries.filter(level=Boundary.COUNTRY_LEVEL, is_active=True)
-                .values("osm_id", "name")
+                .values("id", "osm_id", "name")
                 .order_by("osm_id")
             )
         else:
             location_boundaries = (
                 org.boundaries.filter(level=Boundary.STATE_LEVEL, is_active=True)
-                .values("osm_id", "name")
+                .values("id", "osm_id", "name")
                 .order_by("osm_id")
             )
 
