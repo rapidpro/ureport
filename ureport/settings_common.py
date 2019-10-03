@@ -1021,6 +1021,13 @@ PREVIOUS_ORG_SITES = [
         count_link="http://serbia.ureport.in/count/",
     ),
     dict(
+        name="South Africa",
+        host="//sa.ureport.in",
+        flag="flag_sa.png",
+        is_static=True,
+        count_link="http://sa.ureport.in/count/",
+    ),
+    dict(
         name="Syria",
         host="//syria.ureport.in",
         flag="flag_sy.png",
