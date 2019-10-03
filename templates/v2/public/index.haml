@@ -106,7 +106,7 @@
                 .absolute.social-media-block.hover-parent(class='{% if org|config:"twitter_handle" %}open{% endif %}')
                   {% edit_content 'orgs.org_edit' "" "#id_common.facebook_page_url" "-m-8" "dark" %}
 
-                  .fb-like-box{data-href:'{{ org|config:"facebook_page_url" }}', data-width:"400", data-height:"550", data-colorscheme:"light", data-show-faces:"false", data-header:"false", data-stream:"true", data-show-border:"false"}
+                  .fb-page(data-href='{{ org|config:"facebook_page_url" }}' data-tabs="timeline" data-width="400" data-height="550" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false")
               -if org|config:"twitter_handle"
                 .absolute.social-media-block.hover-parent
                   {% edit_content 'orgs.org_edit' "" "#id_common.twitter_handle" "-m-8" "dark" %}

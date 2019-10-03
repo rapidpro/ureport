@@ -13,10 +13,16 @@ html {
   font-display: fallback;
 }
 
-iframe {
-  display: block;
-  width: 100% !important;
+.fb-comments {
+  span {
+    iframe {
+      display: block;
+      width: 100% !important;
+    }
+  }
 }
+
+
 
 // countries menu
 #countries {

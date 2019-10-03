@@ -369,14 +369,9 @@ class PollStats(models.Model):
 
     @classmethod
     def get_average_response_rate(cls, org):
-        now = timezone.now()
-        year_ago = now - timedelta(days=365)
-        start = year_ago.replace(day=1)
 
-        polled_stats = PollStats.objects.filter(org=org, date__gte=start).aggregate(Sum("count"))
-        responded_stats = (
-            PollStats.objects.filter(org=org, date__gte=start).exclude(category=None).aggregate(Sum("count"))
-        )
+        polled_stats = PollStats.objects.filter(org=org).aggregate(Sum("count"))
+        responded_stats = PollStats.objects.filter(org=org).exclude(category=None).aggregate(Sum("count"))
 
         responded = responded_stats.get("count__sum", 0)
         if responded is None:

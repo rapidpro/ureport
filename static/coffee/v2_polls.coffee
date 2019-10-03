@@ -388,7 +388,9 @@ showChart = (questionID, segmentName) ->
           tickWidth: 0
           lineColor: 'transparent'
           labels: {
-            autoRotation: false
+            autoRotationLimit: 100
+            align: 'center'
+            autoRotation: [-30]
             enabled: true
             style: {
               color: 'black'
