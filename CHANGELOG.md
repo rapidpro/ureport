@@ -1,3 +1,15 @@
+v1.1.72
+----------
+ * Merge pull request #485 from rapidpro/bugs-fix
+ * Auto rotate labels on opinion page
+ * Update FB SDK version
+ * Fix iframe styles
+ * Fix date format
+ * Fix the calculation of average response to be all time, not last year
+ * Add South Africa static flag config
+ * Merge pull request #483 from Ilhasoft/fix/api-page
+ * Fix css/js
+
 v1.1.71
 ----------
  * Merge pull request #482 from rapidpro/beta-fixes
