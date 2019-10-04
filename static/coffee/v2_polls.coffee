@@ -325,6 +325,7 @@ showChart = (questionID, segmentName) ->
           opposite: true
           tickWidth: 0
           lineColor: 'transparent'
+          tickInterval: 1
           labels: {
             enabled: true
             style: {
