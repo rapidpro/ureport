@@ -15,6 +15,10 @@
       %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css")
       %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
   :css
+    table.list-table {
+      font-size: 0.85rem;
+    }
+
     .row1 a, .row2 a {
       display: block;
       color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
@@ -23,8 +27,7 @@
     }
 
     .row1 a:hover, .row2 a:hover {
-      font-weight: bold;
-
+      background-color: #E6E7E8;
       color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
     }
 
