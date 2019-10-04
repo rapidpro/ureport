@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-10-01 09:23+0000\n"
 "PO-Revision-Date: 2019-01-28 17:20+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Romanian (http://www.transifex.com/rapidpro/ureport/language/ro/)\n"
@@ -715,20 +715,17 @@ msgstr "%s tau nou a fost creat."
 msgid "Import %s"
 msgstr "Importă %s"
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr "Deconectare"
 
-msgid "Polls"
-msgstr "Sondaje"
+msgid "Opinions"
+msgstr ""
 
 msgid "Users"
 msgstr "Utilizatori"
@@ -744,6 +741,9 @@ msgstr "Imagini"
 msgid "Jobs"
 msgstr "Oferte de muncă"
 
+msgid "Photos"
+msgstr ""
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -758,19 +758,11 @@ msgstr "Organizații"
 msgid "Images"
 msgstr "Imagini"
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr "Despre noi"
 
 msgid "Engagement"
 msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "Alătură-te"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -786,6 +778,9 @@ msgstr "Conţinut"
 
 msgid "Country Aliases"
 msgstr "Identificatoarele țării"
+
+msgid "Polls"
+msgstr "Sondaje"
 
 msgid "Category Images"
 msgstr "Categorie imagini"
@@ -835,8 +830,10 @@ msgstr "URMĂREȘTE-NE PE"
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
-msgstr ""
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Alătură-te"
 
 msgid "READ MORE"
 msgstr "CITEȘTE MAI MULTE"
@@ -1252,16 +1249,19 @@ msgstr "Înregistrați"
 msgid "Week of"
 msgstr "Săptămâna din"
 
-msgid "Custom pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
-
 msgid "Export and Share"
 msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr ""
+
+msgid "Custom pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
 #, fuzzy
@@ -1273,6 +1273,9 @@ msgstr "intervievați"
 #| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "U-Reporteri"
+
+msgid "Top Region"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1308,6 +1311,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "CITEȘTE MAI MULTE"
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1336,6 +1342,12 @@ msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 msgstr ""
 
 msgid "How would you like to join?"
@@ -1370,7 +1382,12 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "REGIUNI"
+
+msgid "Written by:"
 msgstr ""
 
 #, fuzzy
@@ -1452,9 +1469,6 @@ msgstr ""
 "\n"
 "⇥Rezultate %(start)s-%(end)s a %(count)s\n"
 "⇥"
-
-msgid "SIGN IN"
-msgstr ""
 
 msgid "Error"
 msgstr ""
@@ -1673,6 +1687,16 @@ msgstr "Categoria culorii pe care o va avea imaginea afișată pentru sondaj (op
 msgid "The organization this poll is part of"
 msgstr "Organizația la care face parte acest sondaj"
 
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The title for this response story"
+msgstr "Titlul pentru acest articol"
+
+#, fuzzy
+#| msgid "The writer of the story"
+msgid "The writer of the response story"
+msgstr "Autorul articolului"
+
 msgid "The poll to associate to"
 msgstr "Sondajul cu care trebuie asociat"
 
@@ -1751,32 +1775,13 @@ msgstr "Imaginea care să fie afişată pe pagina unde este plasat sondajul și 
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Imaginea care să fie afişată pe pagina unde este plasat sondajul și în previzualizări (opțional)"
 
-msgid "Featured Poll Responses"
-msgstr "Răspunsuri recomandate pentru sondaj"
+#, fuzzy
+#| msgid "Poll Questions"
+msgid "Poll Response"
+msgstr "Întrebările din sondaj"
 
 msgid "Your poll has been updated."
 msgstr "Sondajul a fost actualizat."
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr "Răspuns %d Raportor "
-
-msgid "The name or alias of the responder."
-msgstr "Numele sau altă denumire a respondentului."
-
-#, python-format
-msgid "Response %d Location"
-msgstr "Răspuns %d Locație"
-
-msgid "The location of the responder."
-msgstr "Regiunea unde se află respondentul."
-
-#, python-format
-msgid "Response %d Message"
-msgstr "Răspuns %d Mesaj"
-
-msgid "The text of the featured response."
-msgstr "Textul pe care să îl aibă răspunsul recomandat."
 
 msgid "Poll Questions"
 msgstr "Întrebările din sondaj"
@@ -2045,6 +2050,30 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
 
+#~ msgid "Featured Poll Responses"
+#~ msgstr "Răspunsuri recomandate pentru sondaj"
+
+#, python-format
+#~ msgid "Response %d Reporter"
+#~ msgstr "Răspuns %d Raportor "
+
+#~ msgid "The name or alias of the responder."
+#~ msgstr "Numele sau altă denumire a respondentului."
+
+#, python-format
+#~ msgid "Response %d Location"
+#~ msgstr "Răspuns %d Locație"
+
+#~ msgid "The location of the responder."
+#~ msgstr "Regiunea unde se află respondentul."
+
+#, python-format
+#~ msgid "Response %d Message"
+#~ msgstr "Răspuns %d Mesaj"
+
+#~ msgid "The text of the featured response."
+#~ msgstr "Textul pe care să îl aibă răspunsul recomandat."
+
 #, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
@@ -2072,11 +2101,6 @@ msgstr "Ceva care să seteze localizările"
 #~| msgid "FILTERED BY"
 #~ msgid "FILTER BY:"
 #~ msgstr "FILTREAZĂ DUPĂ"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "REGIUNI"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "Cheia secretă API pentru contul RapidPro cu care are legătură acest tablou de bord"

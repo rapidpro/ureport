@@ -1,6 +1,6 @@
-@headline-font: "Monteserrat", sans-serif;
-@subheadlines-font: "Monteserrat", sans-serif;
-@text-font: "Monteserrat", sans-serif;
+@headline-font: "Montserrat", sans-serif;
+@subheadlines-font: "Montserrat", sans-serif;
+@text-font: "Montserrat", sans-serif;
 @small-text-font: 'Montserrat', sans-serif;
 
 
@@ -15,6 +15,10 @@
 body {
   font-family: 'Montserrat', sans-serif;
   color: #000;
+}
+
+img {
+  display: inline-block
 }
 
 .tab-content {
@@ -60,7 +64,6 @@ body {
   line-height: 1.2rem;
   font-family: @subheadlines-font;
   padding: 20px 80px 20px 80px;
-  border-bottom: 1px solid #000;
 
   .icon {
     font-size: 2rem;
@@ -383,7 +386,7 @@ a {
 }
 
 .admin-header {
-  padding: 60px 80px 0px 80px; 
+  padding: 0px 80px; 
   background-color: white;
   color: @bg-dark-blue;
 
@@ -415,15 +418,15 @@ a {
     }
 
     .logged-in-account {
-      font-weight: 700;
-      font-size: 1.5rem;
-      margin-right: 4rem;
+      font-weight: 400;
+      font-size: 1rem;
+      margin-right: 2rem;
       font-family: @subheadlines-font;
     }
 
     .logout-button {
       font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       background-color: inherit;
       font-family: @subheadlines-font;
 
@@ -437,9 +440,8 @@ a {
   
   .forgot-password-link {
     font-size: 1.3rem;
-    padding-top:7px;
-    padding-right:150px;
-    margin-top: 4rem;
+    float: right;
+    padding-top: 1rem;
   }
 
   .right-block {
@@ -606,6 +608,7 @@ a {
       line-height: 2rem;
       vertical-align: top;
       font-weight: 700;
+      font-family: @headline-font;
     }
   }
 }

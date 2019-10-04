@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-10-01 09:23+0000\n"
 "PO-Revision-Date: 2017-04-07 14:40+0000\n"
 "Last-Translator: Vincent Turmine <vincent.turmine@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
@@ -772,20 +772,17 @@ msgstr "Votre nouveau %s a été créé."
 msgid "Import %s"
 msgstr "Importer %s"
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr "Déconnexion"
 
-msgid "Polls"
-msgstr "Sondages"
+msgid "Opinions"
+msgstr ""
 
 msgid "Users"
 msgstr "Utilisateurs"
@@ -801,6 +798,9 @@ msgstr "Images"
 msgid "Jobs"
 msgstr "Emplois"
 
+msgid "Photos"
+msgstr ""
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -815,19 +815,11 @@ msgstr "Orgs"
 msgid "Images"
 msgstr "Images"
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr "À Propos"
 
 msgid "Engagement"
 msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "Rejoindre"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -843,6 +835,9 @@ msgstr "Contenu"
 
 msgid "Country Aliases"
 msgstr "Alias des pays"
+
+msgid "Polls"
+msgstr "Sondages"
 
 msgid "Category Images"
 msgstr "Images pour catégorie"
@@ -892,8 +887,10 @@ msgstr "NOUS SUIVRE SUR"
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
-msgstr ""
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Rejoindre"
 
 msgid "READ MORE"
 msgstr "EN SAVOIR PLUS"
@@ -1311,16 +1308,19 @@ msgstr "Enregistré"
 msgid "Week of"
 msgstr "Semaine du"
 
-msgid "Custom pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
-
 msgid "Export and Share"
 msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr ""
+
+msgid "Custom pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
 #, fuzzy
@@ -1332,6 +1332,9 @@ msgstr "interrogés"
 #| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "U-Reporters"
+
+msgid "Top Region"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1367,6 +1370,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "EN SAVOIR PLUS"
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1395,6 +1401,12 @@ msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 msgstr ""
 
 msgid "How would you like to join?"
@@ -1430,7 +1442,12 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "CARTOGRAPHIE"
+
+msgid "Written by:"
 msgstr ""
 
 #, fuzzy
@@ -1493,9 +1510,6 @@ msgid ""
 "\n"
 "             Results %(start)s-%(end)s of %(count)s\n"
 "           "
-msgstr ""
-
-msgid "SIGN IN"
 msgstr ""
 
 msgid "Error"
@@ -1715,6 +1729,16 @@ msgstr ""
 msgid "The organization this poll is part of"
 msgstr "L'organisation dont ce sondage fait partie"
 
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The title for this response story"
+msgstr "Le titre de l'article"
+
+#, fuzzy
+#| msgid "The writer of the story"
+msgid "The writer of the response story"
+msgstr "L'auteur de l'article"
+
 msgid "The poll to associate to"
 msgstr "Le sondage à lui associer"
 
@@ -1793,32 +1817,13 @@ msgstr "Image à afficher sur la page du sondage et des résumés (optionnel)"
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Image à afficher sur la page du sondage et des résumés (optionnel)"
 
-msgid "Featured Poll Responses"
-msgstr "Réponses sélectionnées du sondage"
+#, fuzzy
+#| msgid "Poll Questions"
+msgid "Poll Response"
+msgstr "Questions du sondage"
 
 msgid "Your poll has been updated."
 msgstr "Votre sondage a été mis a jour."
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr "Réponses %d U-Reporters"
-
-msgid "The name or alias of the responder."
-msgstr "Le nom ou pseudo du répondeur"
-
-#, python-format
-msgid "Response %d Location"
-msgstr "Réponses %d localités"
-
-msgid "The location of the responder."
-msgstr "La localité du répondeur"
-
-#, python-format
-msgid "Response %d Message"
-msgstr "réponses %d messages"
-
-msgid "The text of the featured response."
-msgstr "Le texte de la réponse sélectionnée"
 
 msgid "Poll Questions"
 msgstr "Questions du sondage"
@@ -2084,6 +2089,30 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Quelque chose pour déclencher les localisations"
 
+#~ msgid "Featured Poll Responses"
+#~ msgstr "Réponses sélectionnées du sondage"
+
+#, python-format
+#~ msgid "Response %d Reporter"
+#~ msgstr "Réponses %d U-Reporters"
+
+#~ msgid "The name or alias of the responder."
+#~ msgstr "Le nom ou pseudo du répondeur"
+
+#, python-format
+#~ msgid "Response %d Location"
+#~ msgstr "Réponses %d localités"
+
+#~ msgid "The location of the responder."
+#~ msgstr "La localité du répondeur"
+
+#, python-format
+#~ msgid "Response %d Message"
+#~ msgstr "réponses %d messages"
+
+#~ msgid "The text of the featured response."
+#~ msgstr "Le texte de la réponse sélectionnée"
+
 #, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
@@ -2138,11 +2167,6 @@ msgstr "Quelque chose pour déclencher les localisations"
 #~| msgid "FILTERED BY"
 #~ msgid "FILTER BY:"
 #~ msgstr "FILTRÉS PAR"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "CARTOGRAPHIE"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "Le token API du compte RapidPro lié"

@@ -139,10 +139,12 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
     if segmentType == 'gender'
       chartType = "column";
     $('#engagement-graph-' + dataSlug).parent().removeClass("hidden");
-
+    
+    $("#engagement-graph-" + dataSlug).find('.chart-progress').hide()
     $("#engagement-graph-" + dataSlug).highcharts({
         chart: {
           type: chartType
+          backgroundColor: "#060e26"
           style: {
             fontFamily: "Montserrat"
           }
@@ -205,7 +207,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
 
 # shows the chart with the passed in question and segment
 showChart = (questionID, segmentName) ->
-  url = "/pollquestion/" + questionID + "/results/"
+  url = "/v2/pollquestion/" + questionID + "/results/"
   query = ""
   states = {}
 
@@ -263,6 +265,7 @@ showChart = (questionID, segmentName) ->
         data: data
       })
 
+    $("#chart-" + questionID).find('.chart-progress').hide()
     # open ended, use a cloud
     if results[0].open_ended
       wordCloudColors = gradientFactory.generate({
@@ -322,6 +325,7 @@ showChart = (questionID, segmentName) ->
           opposite: true
           tickWidth: 0
           lineColor: 'transparent'
+          tickInterval: 1
           labels: {
             enabled: true
             style: {
@@ -352,7 +356,7 @@ showChart = (questionID, segmentName) ->
               style: {
                 color: '#333'
                 fontWeight: 'bold'
-                fontSize: '1.25rem'
+                fontSize: '0.75rem'
                 textOutline: false
               }
               formatter: ->
@@ -385,12 +389,14 @@ showChart = (questionID, segmentName) ->
           tickWidth: 0
           lineColor: 'transparent'
           labels: {
-            autoRotation: false
+            autoRotationLimit: 100
+            align: 'center'
+            autoRotation: [-30]
             enabled: true
             style: {
               color: 'black'
               fontWeight: 'bold'
-              fontSize: '.75rem'
+              fontSize: '.85rem'
               textOutline: false
             }
           }
@@ -441,11 +447,12 @@ $(->
       segmentType = graphDiv.data("segment-type")
       timeFilter = graphDiv.data("time-filter")
       showEngagementChart(metricSlug, segmentType, timeFilter)
-    
+
     if page == "opinions"
       graphDiv = $("#" + evt.detail.id).find(".poll-chart")
       questionID = graphDiv.data("question")
       segment = graphDiv.data("segment")
+      $("#chart-" + questionID).find('.chart-progress').show()
       showChart(questionID, segment)
 
   document.addEventListener 'aos:in', redrawChart

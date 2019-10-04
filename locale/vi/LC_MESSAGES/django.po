@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-10-01 09:23+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -704,20 +704,17 @@ msgstr "%s mới của bạn đã được tạo."
 msgid "Import %s"
 msgstr "Nhập %s"
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr "Đăng xuất"
 
-msgid "Polls"
-msgstr "Khảo sát"
+msgid "Opinions"
+msgstr ""
 
 msgid "Users"
 msgstr "Người dùng"
@@ -733,6 +730,9 @@ msgstr "Hình ảnh"
 msgid "Jobs"
 msgstr "Công việc"
 
+msgid "Photos"
+msgstr ""
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -747,19 +747,11 @@ msgstr "Tổ chức"
 msgid "Images"
 msgstr "Hình ảnh"
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr "Thông tin"
 
 msgid "Engagement"
 msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "Tham gia"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -775,6 +767,9 @@ msgstr "Nội dung"
 
 msgid "Country Aliases"
 msgstr "Biệt hiệu Quốc gia"
+
+msgid "Polls"
+msgstr "Khảo sát"
 
 msgid "Category Images"
 msgstr "Các hình ảnh cho danh mục"
@@ -824,8 +819,10 @@ msgstr "THEO DÕI CHÚNG TÔI TẠI"
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
-msgstr ""
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "Tham gia"
 
 msgid "READ MORE"
 msgstr "XEM THÊM"
@@ -1241,16 +1238,19 @@ msgstr "Đã đăng ký"
 msgid "Week of"
 msgstr "Tuần"
 
-msgid "Custom pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
-
 msgid "Export and Share"
 msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr ""
+
+msgid "Custom pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
 #, fuzzy
@@ -1262,6 +1262,9 @@ msgstr "đã khảo sát"
 #| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "U-Reporters"
+
+msgid "Top Region"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1297,6 +1300,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "XEM THÊM"
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1325,6 +1331,12 @@ msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 msgstr ""
 
 msgid "How would you like to join?"
@@ -1359,7 +1371,12 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "ĐỊA ĐIỂM"
+
+msgid "Written by:"
 msgstr ""
 
 #, fuzzy
@@ -1431,9 +1448,6 @@ msgid ""
 msgstr ""
 "\n"
 "\t Kết quả %(start)s-%(end)s trong số %(count)s"
-
-msgid "SIGN IN"
-msgstr ""
 
 msgid "Error"
 msgstr ""
@@ -1652,6 +1666,16 @@ msgstr "Ảnh gây chú ý để hiển thị cho cuộc khảo sát (tùy chọ
 msgid "The organization this poll is part of"
 msgstr "Khảo sát này nằm trong tổ chức"
 
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The title for this response story"
+msgstr "Tiêu đề cho câu chuyện này"
+
+#, fuzzy
+#| msgid "The writer of the story"
+msgid "The writer of the response story"
+msgstr "Người viết câu chuyện"
+
 msgid "The poll to associate to"
 msgstr "Khảo sát để kết hợp với"
 
@@ -1730,32 +1754,13 @@ msgstr "Hình ảnh để hiển thị trên trang khảo sát và trong phần 
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Hình ảnh để hiển thị trên trang khảo sát và trong phần xem trước (không bắt buộc)"
 
-msgid "Featured Poll Responses"
-msgstr "Phản hồi khảo sát nổi bật"
+#, fuzzy
+#| msgid "Poll Questions"
+msgid "Poll Response"
+msgstr "Câu hỏi khảo sát"
 
 msgid "Your poll has been updated."
 msgstr "Khảo sát đã được cập nhật"
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr "Phản hồi %d phóng viên"
-
-msgid "The name or alias of the responder."
-msgstr "Tên hoặc bí danh của người trả lời"
-
-#, python-format
-msgid "Response %d Location"
-msgstr "Phản hồi %d Địa phương"
-
-msgid "The location of the responder."
-msgstr "Địa phương của phóng viên."
-
-#, python-format
-msgid "Response %d Message"
-msgstr "Phản hồi %d Tin nhắn"
-
-msgid "The text of the featured response."
-msgstr "Văn bản của phản hồi nổi bật."
 
 msgid "Poll Questions"
 msgstr "Câu hỏi khảo sát"
@@ -2024,6 +2029,30 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
 
+#~ msgid "Featured Poll Responses"
+#~ msgstr "Phản hồi khảo sát nổi bật"
+
+#, python-format
+#~ msgid "Response %d Reporter"
+#~ msgstr "Phản hồi %d phóng viên"
+
+#~ msgid "The name or alias of the responder."
+#~ msgstr "Tên hoặc bí danh của người trả lời"
+
+#, python-format
+#~ msgid "Response %d Location"
+#~ msgstr "Phản hồi %d Địa phương"
+
+#~ msgid "The location of the responder."
+#~ msgstr "Địa phương của phóng viên."
+
+#, python-format
+#~ msgid "Response %d Message"
+#~ msgstr "Phản hồi %d Tin nhắn"
+
+#~ msgid "The text of the featured response."
+#~ msgstr "Văn bản của phản hồi nổi bật."
+
 #, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
@@ -2072,11 +2101,6 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~| msgid "FILTERED BY"
 #~ msgid "FILTER BY:"
 #~ msgstr "ĐƯỢC LỌC BỞI"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "ĐỊA ĐIỂM"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "Mã thông báo API cho tài khoản RapidPro được gắn với bảng điều khiển này "

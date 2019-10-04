@@ -85,6 +85,7 @@ class UtilsTest(UreportTest):
         self.assertEqual(len(get_linked_orgs()), settings_sites_count)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site["name"].lower() == "aaaburundi")
+            self.assertFalse(old_site["order_name"].lower() == "burundi")
 
         self.org.set_config("common.is_on_landing_page", True)
 
@@ -92,6 +93,7 @@ class UtilsTest(UreportTest):
         self.assertEqual(len(get_linked_orgs()), settings_sites_count)
         for old_site in get_linked_orgs():
             self.assertFalse(old_site["name"].lower() == "aaaburundi")
+            self.assertFalse(old_site["order_name"].lower() == "burundi")
 
         Image.objects.create(
             org=self.org,
@@ -104,13 +106,15 @@ class UtilsTest(UreportTest):
 
         # burundi should be included and be the first; by alphabetical order by subdomain
         self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
-        self.assertEqual(get_linked_orgs()[0]["name"].lower(), "aaaburundi")
+        self.assertEqual(get_linked_orgs()[0]["order_name"].lower(), "aaaburundi")
+        self.assertEqual(get_linked_orgs()[0]["name"].lower(), "burundi")
 
         self.org.subdomain = "rwanda"
         self.org.save()
 
         # rwanda should be included and the third in the list alphabetically by subdomain
         self.assertEqual(len(get_linked_orgs()), settings_sites_count + 1)
+        self.assertEqual(get_linked_orgs()[settings_sites_count - 3]["order_name"].lower(), "trinidad and tobago")
         self.assertEqual(get_linked_orgs()[settings_sites_count - 3]["name"].lower(), "trinidad and tobago")
 
         # revert subdomain to burundi
@@ -661,6 +665,11 @@ class UtilsTest(UreportTest):
 class CheckVersionMiddlewareTest(UreportTest):
     def setUp(self):
         super(CheckVersionMiddlewareTest, self).setUp()
+
+    def test_status_view(self):
+        status_url = reverse("public.status")
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
 
     def test_process_template_response(self):
         self.login(self.admin)

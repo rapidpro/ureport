@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-10-01 09:23+0000\n"
 "PO-Revision-Date: 2017-02-22 13:15+0000\n"
 "Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
@@ -729,20 +729,17 @@ msgstr "تم خلق مستخدم جديد %s"
 msgid "Import %s"
 msgstr "استيراد %s"
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr "تسجيل الخروج "
 
-msgid "Polls"
-msgstr "استطلاع الرأي"
+msgid "Opinions"
+msgstr ""
 
 msgid "Users"
 msgstr "المستخدمين"
@@ -758,6 +755,9 @@ msgstr "الصور"
 msgid "Jobs"
 msgstr "الأعمال"
 
+msgid "Photos"
+msgstr ""
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -772,19 +772,11 @@ msgstr "المؤسسات"
 msgid "Images"
 msgstr "الصور"
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr "نبذة عن "
 
 msgid "Engagement"
 msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "شارك "
 
 msgid "U-Report"
 msgstr "يو-ريبورت"
@@ -800,6 +792,9 @@ msgstr "المحتوى"
 
 msgid "Country Aliases"
 msgstr "الأسماء المستعارة للمدن"
+
+msgid "Polls"
+msgstr "استطلاع الرأي"
 
 msgid "Category Images"
 msgstr "صور الفئة"
@@ -849,8 +844,10 @@ msgstr "تابعنا على "
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
-msgstr ""
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "شارك "
 
 msgid "READ MORE"
 msgstr "إقرأ المزيد "
@@ -1286,16 +1283,19 @@ msgstr "مسجل"
 msgid "Week of"
 msgstr "أسبوع من"
 
-msgid "Custom pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
-
 msgid "Export and Share"
 msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr ""
+
+msgid "Custom pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
 #, fuzzy
@@ -1307,6 +1307,9 @@ msgstr "الذين شملهم الاستطلاع"
 #| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "المشاركين في يوريبورت U-REPORT"
+
+msgid "Top Region"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1342,6 +1345,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "إقرأ المزيد "
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1370,6 +1376,12 @@ msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 msgstr ""
 
 msgid "How would you like to join?"
@@ -1404,7 +1416,12 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "مواقع "
+
+msgid "Written by:"
 msgstr ""
 
 #, fuzzy
@@ -1497,9 +1514,6 @@ msgid ""
 msgstr ""
 "\n"
 "نتائج%(start)s-%(end)s %(count)s"
-
-msgid "SIGN IN"
-msgstr ""
 
 msgid "Error"
 msgstr ""
@@ -1719,6 +1733,16 @@ msgstr "صورة فئة البداية ليتم عرضها لاستطلاعات 
 msgid "The organization this poll is part of"
 msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
 
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The title for this response story"
+msgstr "عنوان المقال"
+
+#, fuzzy
+#| msgid "The writer of the story"
+msgid "The writer of the response story"
+msgstr "كاتب المقالة"
+
 msgid "The poll to associate to"
 msgstr "يرتبط هذا الإستطلاع في "
 
@@ -1797,34 +1821,13 @@ msgstr "الصور التي تود نشرها على صفحة الإستطلاع
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "الصور التي تود نشرها على صفحة الإستطلاع (إختياري) "
 
-msgid "Featured Poll Responses"
-msgstr "ردود إستثنائية على هذا الإستطلاع "
+#, fuzzy
+#| msgid "Poll Questions"
+msgid "Poll Response"
+msgstr "أسئلة الإستطلاع "
 
 msgid "Your poll has been updated."
 msgstr "تم تحديث الإستطلاع الخاص بك "
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr ""
-"رد من أحد المشاركين في يوريبورت U-Report \n"
-" %d"
-
-msgid "The name or alias of the responder."
-msgstr "اسم صاحب الرد"
-
-#, python-format
-msgid "Response %d Location"
-msgstr "الموقع الجغرافي للرد %d"
-
-msgid "The location of the responder."
-msgstr "الموقع الجغرافي للذي قام في الرد "
-
-#, python-format
-msgid "Response %d Message"
-msgstr "نص الرد %d"
-
-msgid "The text of the featured response."
-msgstr "نص الرد المميز "
 
 msgid "Poll Questions"
 msgstr "أسئلة الإستطلاع "
@@ -2093,6 +2096,32 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
 
+#~ msgid "Featured Poll Responses"
+#~ msgstr "ردود إستثنائية على هذا الإستطلاع "
+
+#, python-format
+#~ msgid "Response %d Reporter"
+#~ msgstr ""
+#~ "رد من أحد المشاركين في يوريبورت U-Report \n"
+#~ " %d"
+
+#~ msgid "The name or alias of the responder."
+#~ msgstr "اسم صاحب الرد"
+
+#, python-format
+#~ msgid "Response %d Location"
+#~ msgstr "الموقع الجغرافي للرد %d"
+
+#~ msgid "The location of the responder."
+#~ msgstr "الموقع الجغرافي للذي قام في الرد "
+
+#, python-format
+#~ msgid "Response %d Message"
+#~ msgstr "نص الرد %d"
+
+#~ msgid "The text of the featured response."
+#~ msgstr "نص الرد المميز "
+
 #, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
@@ -2156,11 +2185,6 @@ msgstr "أداة تفعيل التعريب"
 #~| msgid "FILTERED BY"
 #~ msgid "FILTER BY:"
 #~ msgstr "صنف حسب "
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "مواقع "
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "واجهة برمجة التطبيقات المأخوذة من الحساب الخاص في RapidPro مربوطة في "

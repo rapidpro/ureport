@@ -9,6 +9,7 @@ import six
 from dash.categories.models import Category
 from dash.orgs.models import Org
 from dash.stories.models import Story
+from django_redis import get_redis_connection
 from smartmin.views import SmartReadView, SmartTemplateView
 
 from django.conf import settings
@@ -417,3 +418,26 @@ class CountriesView(SmartTemplateView):
             json_dict["text"] = whole_text
 
         return HttpResponse(json.dumps(json_dict), status=200, content_type="application/json")
+
+
+def status(request):
+    """
+    Meant to be a very lightweight view that checks our connectivity to both our database
+    and redis. This is hit by ELB to determine whether an instance is healthy.
+    """
+    # check our db
+    org = Org.objects.all().first()
+    db_up = org is not None
+
+    # check redis
+    r = get_redis_connection()
+    r.set("ping", "pong")
+    pong = r.get("ping")
+    redis_up = pong == b"pong"
+
+    body = json.dumps(dict(db_up=db_up, redis_up=redis_up))
+
+    if not db_up or not redis_up:
+        return HttpResponse(body, status=500)
+    else:
+        return HttpResponse(body, status=200)

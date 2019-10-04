@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 19:00+0000\n"
+"POT-Creation-Date: 2019-10-01 09:23+0000\n"
 "PO-Revision-Date: 2017-03-02 17:06+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/rapidpro/ureport/language/uk/)\n"
@@ -710,20 +710,17 @@ msgstr "Ваш новий %s створено"
 msgid "Import %s"
 msgstr "Імпортувати %s"
 
-msgid "Back to Full Site"
+msgid "Back to Website"
 msgstr ""
 
 msgid "Welcome, "
 msgstr ""
 
-msgid "Dashboard"
-msgstr ""
-
 msgid "Logout"
 msgstr "Вийти"
 
-msgid "Polls"
-msgstr "Опитування"
+msgid "Opinions"
+msgstr ""
 
 msgid "Users"
 msgstr "Користувачі"
@@ -739,6 +736,9 @@ msgstr "Фото"
 msgid "Jobs"
 msgstr "Цікаві вакансії"
 
+msgid "Photos"
+msgstr ""
+
 #, fuzzy
 #| msgid "Category Images"
 msgid "Categories Images"
@@ -753,19 +753,11 @@ msgstr "Орг"
 msgid "Images"
 msgstr "Фото"
 
-msgid "Analytics"
-msgstr ""
-
 msgid "About"
 msgstr "Про нас"
 
 msgid "Engagement"
 msgstr ""
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join Now"
-msgstr "приєднатись"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -781,6 +773,9 @@ msgstr "Контент"
 
 msgid "Country Aliases"
 msgstr "Назви регіонів"
+
+msgid "Polls"
+msgstr "Опитування"
 
 msgid "Category Images"
 msgstr "Зображення категорії"
@@ -830,8 +825,10 @@ msgstr ""
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-msgid "Opinions"
-msgstr ""
+#, fuzzy
+#| msgid "Join"
+msgid "Join Now"
+msgstr "приєднатись"
 
 msgid "READ MORE"
 msgstr "Читати"
@@ -1251,16 +1248,19 @@ msgstr "Зареєстровані"
 msgid "Week of"
 msgstr "Тиждень"
 
-msgid "Custom pages"
-msgstr ""
-
-msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
-
 msgid "Export and Share"
 msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr ""
+
+msgid "Custom pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
 #, fuzzy
@@ -1272,6 +1272,9 @@ msgstr "Опитування"
 #| msgid "U-Reporters"
 msgid "Reporters"
 msgstr "U-репортери"
+
+msgid "Top Region"
+msgstr ""
 
 #, fuzzy
 #| msgid "LOCATIONS"
@@ -1307,6 +1310,9 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "Читати"
 
+msgid "+ New "
+msgstr ""
+
 msgid "+ New Page"
 msgstr ""
 
@@ -1335,6 +1341,12 @@ msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
+msgstr ""
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
 msgstr ""
 
 msgid "How would you like to join?"
@@ -1369,7 +1381,12 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-msgid "STATE"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "Географія"
+
+msgid "Written by:"
 msgstr ""
 
 #, fuzzy
@@ -1451,9 +1468,6 @@ msgstr ""
 "\n"
 " Результати: %(start)s-%(end)s з %(count)s\n"
 " "
-
-msgid "SIGN IN"
-msgstr ""
 
 msgid "Error"
 msgstr ""
@@ -1672,6 +1686,16 @@ msgstr "Зображення з категорії, яке має відобра
 msgid "The organization this poll is part of"
 msgstr "Від якої організації опитування?"
 
+#, fuzzy
+#| msgid "The title for this story"
+msgid "The title for this response story"
+msgstr "Назва"
+
+#, fuzzy
+#| msgid "The writer of the story"
+msgid "The writer of the response story"
+msgstr "Автор"
+
 msgid "The poll to associate to"
 msgstr "З чим асоціюватиметься опитування"
 
@@ -1750,32 +1774,13 @@ msgstr "Зображення для сторінки опитування та �
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Зображення для сторінки опитування та в прев‘ю (вибірково)"
 
-msgid "Featured Poll Responses"
-msgstr "Цікаві відповіді"
+#, fuzzy
+#| msgid "Poll Questions"
+msgid "Poll Response"
+msgstr "Питання опитувань"
 
 msgid "Your poll has been updated."
 msgstr "Опитування змінено"
-
-#, python-format
-msgid "Response %d Reporter"
-msgstr "Відповідь %d репортер"
-
-msgid "The name or alias of the responder."
-msgstr "Ім'я учасника"
-
-#, python-format
-msgid "Response %d Location"
-msgstr "Відповідь %d місце знаходження"
-
-msgid "The location of the responder."
-msgstr "Область, де живе автор повідомлення"
-
-#, python-format
-msgid "Response %d Message"
-msgstr "Відповідь %d повідомлення"
-
-msgid "The text of the featured response."
-msgstr "Текст обраної відповіді"
 
 msgid "Poll Questions"
 msgstr "Питання опитувань"
@@ -2043,6 +2048,30 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr "Щось щоб виявити місце знаходження"
 
+#~ msgid "Featured Poll Responses"
+#~ msgstr "Цікаві відповіді"
+
+#, python-format
+#~ msgid "Response %d Reporter"
+#~ msgstr "Відповідь %d репортер"
+
+#~ msgid "The name or alias of the responder."
+#~ msgstr "Ім'я учасника"
+
+#, python-format
+#~ msgid "Response %d Location"
+#~ msgstr "Відповідь %d місце знаходження"
+
+#~ msgid "The location of the responder."
+#~ msgstr "Область, де живе автор повідомлення"
+
+#, python-format
+#~ msgid "Response %d Message"
+#~ msgstr "Відповідь %d повідомлення"
+
+#~ msgid "The text of the featured response."
+#~ msgstr "Текст обраної відповіді"
+
 #, fuzzy, python-format
 #~| msgid ""
 #~| "\n"
@@ -2070,11 +2099,6 @@ msgstr "Щось щоб виявити місце знаходження"
 #~| msgid "FILTERED BY"
 #~ msgid "FILTER BY:"
 #~ msgstr "Фільтрувати"
-
-#, fuzzy
-#~| msgid "LOCATIONS"
-#~ msgid "LOCATION"
-#~ msgstr "Географія"
 
 #~ msgid "The API token for the RapidPro account this dashboard is tied to"
 #~ msgstr "API token у RapidPro, до якого прив'язується адмінпанель"

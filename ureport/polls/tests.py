@@ -23,15 +23,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from ureport.locations.models import Boundary
-from ureport.polls.models import (
-    FeaturedResponse,
-    Poll,
-    PollImage,
-    PollQuestion,
-    PollResponseCategory,
-    PollResult,
-    PollResultsCounter,
-)
+from ureport.polls.models import Poll, PollImage, PollQuestion, PollResponseCategory, PollResult, PollResultsCounter
 from ureport.polls.tasks import (
     backfill_poll_results,
     fetch_old_sites_count,
@@ -859,46 +851,6 @@ class PollTest(UreportTest):
             self.assertEqual(poll1.most_responded_regions(), results)
             mock.assert_called_once_with(segment=dict(location="State"))
 
-    def test_get_featured_responses(self):
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
-
-        self.assertFalse(poll1.get_featured_responses())
-
-        featured_response1 = FeaturedResponse.objects.create(
-            poll=poll1,
-            location="Kampala",
-            reporter="James",
-            message="Awesome",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        self.assertEqual(six.text_type(featured_response1), "Poll 1 - Kampala - Awesome")
-
-        featured_response1.is_active = False
-        featured_response1.save()
-
-        self.assertFalse(poll1.get_featured_responses())
-
-        featured_response1.is_active = True
-        featured_response1.save()
-
-        self.assertEqual(len(poll1.get_featured_responses()), 1)
-        self.assertTrue(featured_response1 in poll1.get_featured_responses())
-
-        featured_response2 = FeaturedResponse.objects.create(
-            poll=poll1,
-            location="Entebbe",
-            reporter="George",
-            message="Exactly",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        self.assertEqual(len(poll1.get_featured_responses()), 2)
-        self.assertEqual(poll1.get_featured_responses()[0], featured_response2)
-        self.assertEqual(poll1.get_featured_responses()[1], featured_response1)
-
     def test_runs(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
@@ -1586,31 +1538,35 @@ class PollTest(UreportTest):
         response = self.client.get(uganda_poll_responses_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 9)
+        self.assertEqual(len(response.context["form"].fields), 4)
         for field in response.context["form"].fields.values():
             self.assertFalse(field.initial)
 
         response = self.client.post(uganda_poll_responses_url, dict(), follow=True, SERVER_NAME="uganda.ureport.io")
         self.assertFalse("form" in response.context)
-        self.assertFalse(FeaturedResponse.objects.filter(poll=poll1))
+        self.assertFalse(poll1.response_title)
+        self.assertFalse(poll1.response_author)
+        self.assertFalse(poll1.response_content)
 
-        post_data = dict(reporter_1="Pink Floyd", location_1="Youtube Stream", message_1="Just give me a reason")
+        post_data = dict(
+            response_author="Pink Floyd", response_title="Youtube Stream", response_content="Just give me a reason"
+        )
 
         response = self.client.post(uganda_poll_responses_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
         self.assertFalse("form" in response.context)
-        self.assertTrue(FeaturedResponse.objects.filter(poll=poll1))
-        featured_response = FeaturedResponse.objects.filter(poll=poll1)[0]
-        self.assertEqual(featured_response.message, "Just give me a reason")
-        self.assertEqual(featured_response.location, "Youtube Stream")
-        self.assertEqual(featured_response.reporter, "Pink Floyd")
+
+        poll1.refresh_from_db()
+        self.assertEqual(poll1.response_title, "Youtube Stream")
+        self.assertEqual(poll1.response_author, "Pink Floyd")
+        self.assertEqual(poll1.response_content, "Just give me a reason")
 
         response = self.client.get(uganda_poll_responses_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 9)
-        self.assertEqual(response.context["form"].fields["reporter_1"].initial, "Pink Floyd")
-        self.assertEqual(response.context["form"].fields["location_1"].initial, "Youtube Stream")
-        self.assertEqual(response.context["form"].fields["message_1"].initial, "Just give me a reason")
+        self.assertEqual(len(response.context["form"].fields), 4)
+        self.assertTrue("response_author" in response.context["form"].fields)
+        self.assertTrue("response_title" in response.context["form"].fields)
+        self.assertTrue("response_content" in response.context["form"].fields)
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_templatetags(self):

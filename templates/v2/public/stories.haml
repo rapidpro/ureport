@@ -6,7 +6,7 @@
   .bg-grid.border-t.border-b
     .max-w-page.mx-auto.p-home(class="md:flex")
       .flex-1.flex-center-y.hover-parent
-        {% edit_content 'orgs.org_edit' "" "#id_common.stories_description" "" %}
+        {% edit_content 'orgs.org_edit' "" "#id_common.stories_description" "" "dark" %}
         .text-5xl.font-bold
           -trans "Stories"
         .text-xl
@@ -61,7 +61,7 @@
           .border-solid.flex(class="{% if is_rtl_org %}{% cycle 'border-dark1 border-l-25rem' 'border-dark2 border-r-25rem' %}{% else %}{% cycle 'border-dark1 border-r-25rem' 'border-dark2 border-l-25rem' %}{% endif %}")
             - if not forloop.first
               .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")
-                {% edit_content 'stories.story_images' story.pk "" "-m-8" %}
+                {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
                 %a(href="{% url 'v2.public.story_read' story.pk %}")
                   - if story.get_image
                     {% thumbnail story.get_image "800x600" crop="center" as im %}
@@ -75,19 +75,19 @@
                 .font-bold.mb-4
                   -trans "FEATURED STORY"
                 .font-bold.leading-tight.mb-4.hover-parent(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
-                  {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" %}
+                  {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" "dark" %}
                   %a(href="{% url 'v2.public.story_read' story.pk %}")
                     {{ story.title }}
                 .block.mb-6.hover-parent
-                  {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" %}
+                  {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" "dark" %}
                   {{ story.summary|truncatewords:50|linebreaksbr }}
   
-                %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}")
+                %a.btn.bg-black.text-white(href="{% url 'v2.public.story_read' story.pk %}" class="hover:bg-gray-700")
                   -trans "READ MORE"
             
             - if forloop.first
               .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")
-                {% edit_content 'stories.story_images' story.pk "" "-m-8" %}
+                {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
                 %a(href="{% url 'v2.public.story_read' story.pk %}")
                   - if story.get_image
                     {% thumbnail story.get_image "800x600" crop="center" as im %}

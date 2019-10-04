@@ -13,6 +13,17 @@ html {
   font-display: fallback;
 }
 
+.fb-comments {
+  span {
+    iframe {
+      display: block;
+      width: 100% !important;
+    }
+  }
+}
+
+
+
 // countries menu
 #countries {
   position: absolute;
@@ -40,6 +51,29 @@ html {
     opacity: 1;
   }
 }
+
+.mobile-accordion {
+  .mobile-accordion-content {
+    display: none;
+  }
+  
+  &.open {
+    .mobile-accordion-content {
+      display: block;
+    }
+
+    i {
+      &.closed {
+        display: none;
+      }
+      &.open {
+        display: inline;
+      }
+    }
+  }
+
+}
+
 
 .social-media-block {
   transition: 0.5s;
@@ -94,20 +128,6 @@ html {
 
 }
 
-// mobile menu
-#mobile-menu {
-  height: 0;
-  overflow: hidden;
-  z-index: 1;
-  transform: translate(100%);
-  transition: height 0s ease 1s, transform 1s;
-
-  &.open {
-    height: 100%;
-    transform: translate(0px);
-    transition: height 0s, transform 1s;
-  }
-}
 
 // full width
 .max-w-page {
@@ -234,6 +254,10 @@ html {
   }
 }
 
+.z-480 {
+  z-index: 480;
+}
+
 .z-500 {
   z-index: 500;
 }
@@ -242,8 +266,12 @@ html {
   z-index: 600;
 }
 
+.z-700 {
+  z-index: 700;
+}
+
 .top-45 {
-  top: 3rem;
+  top: 45px;
 }
 
 #map-info {
