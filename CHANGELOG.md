@@ -1,3 +1,7 @@
+v1.1.73
+----------
+ * Fix to force label shows on all chart bars
+
 v1.1.72
 ----------
  * Merge pull request #485 from rapidpro/bugs-fix
