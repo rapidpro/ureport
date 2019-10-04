@@ -1,3 +1,44 @@
+v1.1.73
+----------
+ * Fix to force label shows on all chart bars
+
+v1.1.72
+----------
+ * Merge pull request #485 from rapidpro/bugs-fix
+ * Auto rotate labels on opinion page
+ * Update FB SDK version
+ * Fix iframe styles
+ * Fix date format
+ * Fix the calculation of average response to be all time, not last year
+ * Add South Africa static flag config
+ * Merge pull request #483 from Ilhasoft/fix/api-page
+ * Fix css/js
+
+v1.1.71
+----------
+ * Merge pull request #482 from rapidpro/beta-fixes
+ * Rebuild locales
+ * Fix modal scrolling behavior
+
+v1.1.70
+----------
+ * Allow status view without org
+
+v1.1.69
+----------
+ * Merge pull request #481 from rapidpro/status-view
+ * Add status view
+
+v1.1.68
+----------
+ * Merge pull request #480 from rapidpro/beta-fixes
+ * consistent read more button
+ * Fix stories button hover state, and screenshot modal z-index
+
+v1.1.67
+----------
+ * Screenshot modal position
+
 v1.1.66
 ----------
  * Fix polls maps

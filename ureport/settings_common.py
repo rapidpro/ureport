@@ -863,6 +863,7 @@ UREPORT_DEFAULT_SECONDARY_COLOR = "#1F49BF"
 # -----------------------------------------------------------------------------------
 SITE_ALLOW_NO_ORG = (
     "public.countries",
+    "public.status",
     "api",
     "api.v1",
     "api.v1.docs",
@@ -1018,6 +1019,13 @@ PREVIOUS_ORG_SITES = [
         flag="flag_sr.png",
         is_static=True,
         count_link="http://serbia.ureport.in/count/",
+    ),
+    dict(
+        name="South Africa",
+        host="//sa.ureport.in",
+        flag="flag_sa.png",
+        is_static=True,
+        count_link="http://sa.ureport.in/count/",
     ),
     dict(
         name="Syria",

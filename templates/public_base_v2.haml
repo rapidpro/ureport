@@ -188,7 +188,7 @@
             appId      : '{{ org|config:"facebook_app_id" }}',
             autoLogAppEvents: true,
             xfbml      : true,
-            version    : 'v3.2'
+            version    : 'v4.0'
           });
         };
       </script>
@@ -207,6 +207,24 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+
+    .modal.fixed.hidden.z-1.top-0.left-0.w-full.h-full.overwlow-auto.bg-gray-900.export-modal.shadow(style="z-index:900;")
+      .modal-content.mx-auto.my-40.p-6.border.border-black.bg-white.sticky.top-45(class="w-3/5")
+        .font-bold.text-xl.mb-2.inline-block
+          -trans "Export and Share"
+        %i.fa.fa-close.text-xl.export-modal-close.cursor-pointer(class="rtl:float-left ltr:float-right")
+
+        .export-modal-progress.flex.text-center(style="min-height:30rem;")
+          .fa-5x.inline-block.m-auto.self-center
+            %i.fa.fa-spinner.fa-spin
+        .export-modal-content
+          .inline-block.mb-4(class="md:w-3/4")
+            -trans "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+          .inline-block.mb-4(class="md:w-1/4 rtl:float-left rtl:text-left ltr:float-right ltr:text-right  ")
+            %a.btn.bg-light1.text-black.inline-block.download-screenshot.hover-dark(href="#")
+              Download
+          .mt-4.shadow
+            %img.screenshot-rendered(src="#" alt="")
 
     // mobile menu
     #mobile-menu-container.flex.bg-black(class="md:hidden")
@@ -563,24 +581,6 @@
       // bottom yellow bar
       .bg-color3.h-2
   
-      .modal.fixed.hidden.z-1.top-0.left-0.w-full.h-full.overwlow-auto.bg-gray-900.export-modal.shadow(style="z-index:500;")
-        .modal-content.mx-auto.my-40.p-6.border.border-black.bg-white(class="w-3/5")
-          .font-bold.text-xl.mb-2.inline-block
-            -trans "Export and Share"
-          %i.fa.fa-close.text-xl.export-modal-close.cursor-pointer(class="rtl:float-left ltr:float-right")
-      
-          .export-modal-progress.flex.text-center(style="min-height:30rem;")
-            .fa-5x.inline-block.m-auto.self-center
-              %i.fa.fa-spinner.fa-spin
-          .export-modal-content
-            .inline-block.mb-4(class="md:w-3/4")
-              -trans "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"            
-            .inline-block.mb-4(class="md:w-1/4 rtl:float-left rtl:text-left ltr:float-right ltr:text-right  ")
-              %a.btn.bg-light1.text-black.inline-block.download-screenshot.hover-dark(href="#")
-                Download
-            .mt-4.shadow
-              %img.screenshot-rendered(src="#" alt="")
-
 
   // JQuery
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js")
@@ -657,6 +657,7 @@
         $(".export-modal-content").hide();
 
         $('.export-modal').toggleClass('hidden');
+        $('.modal-content').offset({top: $(window).scrollTop() + 150})
         var region = document.body.querySelector("#" + eltID);
 
         html2canvas(region).then(canvas => {

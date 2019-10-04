@@ -51,7 +51,7 @@
                         .text
                           {{ entry.summary|safe }}
                         .text-xl.mt-2.mb-12
-                          %a.bg-black.ight1.px-4.py-2.rounded-lg.text-white(href="{{ entry.link }}" class="hover:bg-gray-600")
+                          %a.btn.bg-black.px-4.py-2.text-sm.text-white(href="{{ entry.link }}" class="hover:bg-gray-600")
                             -trans "READ MORE"
 
                   -# -elif source.source_type == 'T'

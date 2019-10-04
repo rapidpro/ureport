@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-04 23:41+0000\n"
+"POT-Creation-Date: 2019-10-04 23:29+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: deimidis <guillermo.movia@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -678,10 +678,9 @@ msgstr "Su nuevo %s ha sido creado."
 msgid "Import %s"
 msgstr "Importar %s"
 
-#, fuzzy
-#| msgid "Back to Full Site"
+
 msgid "Back to Website"
-msgstr "Volver al sitio completo"
+msgstr "Volver al sitio web"
 
 msgid "Welcome, "
 msgstr "Bienvenido,"
@@ -705,7 +704,7 @@ msgid "Jobs"
 msgstr "Trabajos"
 
 msgid "Photos"
-msgstr ""
+msgstr "Fotos"
 
 msgid "Categories Images"
 msgstr "Imágenes de categorías"
@@ -1201,6 +1200,12 @@ msgstr "Registrado"
 msgid "Week of"
 msgstr "Semana del"
 
+msgid "Export and Share"
+msgstr "Exportar y compartir"
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "¿Quieres contarle al mundo sobre esto? Descarga esta imagen para ¡compartirla fácilmente en las redes sociales o para una hermosa presentación!"
+
 #, fuzzy
 #| msgid "SELECT YOUR COUNTRY"
 msgid "SELECT COUNTRY"
@@ -1212,11 +1217,18 @@ msgstr "Páginas personalizadas"
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Mira cómo está la participación de los jóvenes para un cambio social a través de los números."
 
-msgid "Export and Share"
-msgstr "Exportar y compartir"
+msgid "SELECT COUNTRY"
+msgstr "ELIGE PAÍS"
 
-msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr "¿Quieres contarle al mundo sobre esto? Descarga esta imagen para ¡compartirla fácilmente en las redes sociales o para una hermosa presentación!"
+msgid "Custom pages"
+msgstr "Páginas personalizadas"
+
+msgid ""
+"See by the numbers how we are engaging youth voices for positive social "
+"change."
+msgstr ""
+"Mira cómo está la participación de los jóvenes para un cambio social a "
+"través de los números."
 
 msgid "Polled"
 msgstr "Encuestados"
@@ -1225,7 +1237,7 @@ msgid "Reporters"
 msgstr "U-Reporters"
 
 msgid "Top Region"
-msgstr ""
+msgstr "Región principal"
 
 msgid "LATEST OPINION"
 msgstr "OPINIONES RECIENTES"
@@ -1251,10 +1263,8 @@ msgstr "EDADES"
 msgid "LEARN MORE"
 msgstr "CONOCE MÁS"
 
-#, fuzzy
-#| msgid "+ New Page"
 msgid "+ New "
-msgstr "+ Nueva página"
+msgstr "+ Nueva"
 
 msgid "+ New Page"
 msgstr "+ Nueva página"
@@ -1280,11 +1290,21 @@ msgstr "Únete a U-Report, tu voz importa."
 msgid "JOIN NOW"
 msgstr "ÚNETE YA"
 
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
 
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgid ""
+"We are a part of a global platform working to change the lives of young "
+"people around the world."
 msgstr ""
+"Somos parte de una plataforma mundial para cambiar las vidas de los "
+"adolescentes y jóvenes alrededor del mundo."
+
+msgid ""
+"Learn more about how U-Report is empowering and connecting young people to "
+"speak out on issues that matter to them."
+msgstr ""
+"Conoce más acerca de cómo U-Report está empoderando y conectando jóvenes y "
+"adolescentes para que hablen acerca de los problemas que les preocupan."
+
 
 msgid "How would you like to join?"
 msgstr "¿Cómo te gustaría unirte?"
@@ -1308,13 +1328,11 @@ msgstr "%(responded)s respondieron de %(polled)s encuestados"
 msgid "ALL"
 msgstr "TODO"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LOCATION"
-msgstr "UBICACIONES"
+msgstr "UBICACIÓN"
 
 msgid "Written by:"
-msgstr ""
+msgstr "Escrito por:"
 
 msgid "OVERALL STATISTICS"
 msgstr "ESTADÍSTICAS GENERALES"
@@ -1572,15 +1590,11 @@ msgstr "La imagen de categoría para ser exhibida en la encuesta (opcional)"
 msgid "The organization this poll is part of"
 msgstr "La organización a la que pertenece esta encuesta"
 
-#, fuzzy
-#| msgid "The title for this story"
 msgid "The title for this response story"
-msgstr "El título para esta historia"
+msgstr "El título para esta historia de respuesta"
 
-#, fuzzy
-#| msgid "The writer of the story"
 msgid "The writer of the response story"
-msgstr "El autor de la historia"
+msgstr "El autor de esta historia de respuesta"
 
 msgid "The poll to associate to"
 msgstr "La encuesta está relacionada con"
@@ -1654,10 +1668,8 @@ msgstr "Imagen para mostrar en la página de la encuesta y en las vistas previas
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Imagen para mostrar en la página de la encuesta y en las vistas previas. (opcional)"
 
-#, fuzzy
-#| msgid "Poll Questions"
 msgid "Poll Response"
-msgstr "Preguntas de la encuesta"
+msgstr "Respuesta a la encuesta"
 
 msgid "Your poll has been updated."
 msgstr "Su encuesta ha sido actualizada."

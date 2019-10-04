@@ -18,6 +18,9 @@ class CheckVersionMiddleware:
             and not path.startswith("/v2/")
             and not path.startswith("/v1/")
             and not path.startswith("/media/")
+            and not path.startswith("/api/")
+            and not path.startswith("/count")
+            and not path.startswith("/status")
         ):
             return HttpResponseRedirect(f"/v2{path}")
 
