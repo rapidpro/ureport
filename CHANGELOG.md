@@ -1,3 +1,19 @@
+v1.1.74
+----------
+ * Merge pull request #489 from rapidpro/admin-links
+ * REduce more longer titles
+ * Merge pull request #488 from rapidpro/admin-links
+ * rebuild locales
+ * Merge master
+ * Merge pull request #487 from rapidpro/translations_django-po--master_es
+ * Rebuild locales
+ * Change bg color on hover
+ * Rebuild locales
+ * Merge branch 'master' into translations_django-po--master_es
+ * Translate /locale/en/LC_MESSAGES/django.po in es
+ * Rebuild locales
+ * Improve admin links to be noticeable
+
 v1.1.73
 ----------
  * Fix to force label shows on all chart bars
