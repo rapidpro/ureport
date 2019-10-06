@@ -1,3 +1,13 @@
+v1.1.75
+----------
+ * Rebuild locales
+ * Merge pull request #491 from rapidpro/fr-trans
+ * Rebuild locales
+ * Merge branch 'master' of github.com:rapidpro/ureport into fr-trans
+ * Merge pull request #490 from rapidpro/translations_djangojs-po--master_fr_FR
+ * Update FR translations
+ * Apply translations in fr_FR
+
 v1.1.74
 ----------
  * Merge pull request #489 from rapidpro/admin-links
