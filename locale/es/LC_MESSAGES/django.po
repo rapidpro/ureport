@@ -790,7 +790,7 @@ msgid "SELECT YOUR COUNTRY"
 msgstr "ELIGE TU PAÍS"
 
 msgid "Join Now"
-msgstr "Únete ahora"
+msgstr "Unite Ahora"
 
 msgid "READ MORE"
 msgstr "LEER MÁS"
@@ -1287,7 +1287,7 @@ msgid "Text"
 msgstr "Texto"
 
 msgid "SEARCH"
-msgstr ""
+msgstr "BUSCAR"
 
 msgid "No results found"
 msgstr "No se encontraron resultados"
