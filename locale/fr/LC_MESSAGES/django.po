@@ -5,6 +5,7 @@
 #
 # Translators:
 # Nyaruka <info@textit.in>, 2019
+# Stéphane Gbonikan <agbonikan@unicef.org>, 2019
 # Jonathan Newberry <jnewberry@unicef.org>, 2019
 #
 #, fuzzy
@@ -12,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-07 12:42+0000\n"
+"POT-Creation-Date: 2019-10-07 17:45+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Jonathan Newberry <jnewberry@unicef.org>, 2019\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -41,7 +42,7 @@ msgid "The category this image represents"
 msgstr "La rubrique que cette image représente"
 
 msgid "The image file to use"
-msgstr "Le fichier image à utiliser"
+msgstr "L'image à utiliser"
 
 msgid "The human readable name for this content type"
 msgstr "Le nom du 'type' du contenu dont l'humain pourrait acceder."
@@ -113,16 +114,16 @@ msgid "The priority for this block, higher priority blocks come first"
 msgstr ""
 
 msgid "The organization this content block belongs to"
-msgstr ""
+msgstr "L'organisation à laquelle appartient ce contenu"
 
 msgid "Gallery"
 msgstr "Galerie"
 
 msgid "Add Image"
-msgstr ""
+msgstr "Ajouter une image"
 
 msgid "Search"
-msgstr "Recherche"
+msgstr "RECHERCHE"
 
 msgid "Add"
 msgstr "Ajouter"
@@ -167,43 +168,43 @@ msgid "Passwords must contain at least 8 letters."
 msgstr "Les mots de passe doivent contenir au moins 8 lettres"
 
 msgid "This domain is used for subdomains"
-msgstr ""
+msgstr "Ce domaine est utilisé pour les sous-domaines"
 
 msgid "Name"
 msgstr "Nom"
 
 msgid "The name of this organization"
-msgstr ""
+msgstr "Le nom de cette organisation"
 
 msgid "The logo that should be used for this organization"
 msgstr ""
 
 msgid "Administrators"
-msgstr ""
+msgstr "Administrateurs"
 
 msgid "The administrators in your organization"
-msgstr ""
+msgstr "Les administrateurs de votre organisation"
 
 msgid "Viewers"
-msgstr ""
+msgstr "Visiteurs"
 
 msgid "The viewers in your organization"
 msgstr ""
 
 msgid "Editors"
-msgstr ""
+msgstr "Éditeurs"
 
 msgid "The editors in your organization"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 msgid "The main language used by this organization"
 msgstr ""
 
 msgid "Subdomain"
-msgstr ""
+msgstr "Sous-domaine"
 
 msgid "This subdomain is not available"
 msgstr ""
@@ -212,7 +213,7 @@ msgid "The subdomain for this organization"
 msgstr ""
 
 msgid "Domain"
-msgstr ""
+msgstr "Domaine"
 
 msgid "This domain is not available"
 msgstr ""
@@ -230,13 +231,13 @@ msgid "JSON blob used to store configuration information associated with this or
 msgstr ""
 
 msgid "Administrator"
-msgstr ""
+msgstr "Administrateur"
 
 msgid "Editor"
-msgstr ""
+msgstr "Éditeur"
 
 msgid "Viewer"
-msgstr ""
+msgstr "Visiteur"
 
 msgid "Org"
 msgstr "Organisation"
@@ -245,10 +246,10 @@ msgid "The organization to which the account is invited to view"
 msgstr ""
 
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 msgid "The email to which we send the invitation of the viewer"
-msgstr ""
+msgstr "L'email du visiteur à qui nous envoyons l'invitation"
 
 msgid "Secret"
 msgstr ""
@@ -709,7 +710,7 @@ msgid "About"
 msgstr "À Propos"
 
 msgid "Engagement"
-msgstr "L'Engagement"
+msgstr "L'Engagement : Statistiques"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -784,7 +785,7 @@ msgid "READ MORE"
 msgstr "EN SAVOIR PLUS"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr "Engagement en Chiffres"
+msgstr "Engagement en chiffres"
 
 msgid ""
 "\n"
@@ -1197,19 +1198,19 @@ msgid "Custom pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr "Pour voir en chiffres comment nous engageons les jeunes pour un changement positif."
+msgstr "Pour voir en chiffres de quelle façon nous engageons les jeunes pour un changement positif."
 
 msgid "Polled"
 msgstr "Interrogés"
 
 msgid "Reporters"
-msgstr ""
+msgstr "reporters"
 
 msgid "Top Region"
-msgstr "Région Principale"
+msgstr "Région principale"
 
 msgid "LATEST OPINION"
-msgstr "DERNIERE OPINION"
+msgstr "Dernier sondage"
 
 msgid "VIEW FULL RESULTS"
 msgstr "VOIR TOUS LES RÉSULTATS"
@@ -1294,7 +1295,7 @@ msgid "Written by:"
 msgstr "Ecrit par:"
 
 msgid "OVERALL STATISTICS"
-msgstr "Statistiques Nationales"
+msgstr "Statistiques nationales"
 
 msgid "THIS YEAR"
 msgstr "CETTE ANNÉE"
@@ -1655,7 +1656,9 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-msgid "The name of txbhe Contact Group that contains registered reporters"
+#, fuzzy
+#| msgid "The name of txbhe Contact Group that contains registered reporters"
+msgid "The name of the Contact Group that contains registered reporters"
 msgstr "Nom du groupe contenant les U-Reporters inscrits"
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
@@ -1755,7 +1758,7 @@ msgid "11 colors for styling maps, use comma between colors, not used if not 11 
 msgstr ""
 
 msgid "The states to show on maps only"
-msgstr ""
+msgstr "Les états à afficher sur les cartes seulement"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "ID Google Analytics Tracking pour cette organisation"
@@ -1793,7 +1796,7 @@ msgstr "Le widget Twitter utilisé pour les recherches"
 msgid "The words to filter out from the results on public site"
 msgstr ""
 
-msgid "If there are jobs to be shown on the public site. (Separated by comma)"
+msgid "If there are jobs to be shown on the public site."
 msgstr ""
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
@@ -1821,19 +1824,19 @@ msgid "The text to describe the sponsors of free messages"
 msgstr ""
 
 msgid "The font used for small text"
-msgstr ""
+msgstr "La police utilisée pour les petits textes"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr ""
 
 msgid "90 Days"
-msgstr "90 Jours"
+msgstr "90 jours"
 
 msgid "6 Months"
-msgstr "6 Mois"
+msgstr "6 mois"
 
 msgid "12 Months"
-msgstr "12 Mois"
+msgstr "12 mois"
 
 msgid "Age"
 msgstr "Age"
