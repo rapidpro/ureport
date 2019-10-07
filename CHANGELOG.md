@@ -1,3 +1,12 @@
+v1.1.77
+----------
+ * Merge pull request #493 from rapidpro/fr-trans
+ * Rebuild locales
+ * Fix tests
+ * Rebuild locales
+ * No jobs page if not configured
+ * Manual FR updates
+
 v1.1.76
 ----------
  * Rebuild locales
