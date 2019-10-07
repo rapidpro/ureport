@@ -162,7 +162,7 @@ DATA_API_BACKEND_TYPES = (
 BACKENDS_ORG_CONFIG_FIELDS = [
     dict(
         name="reporter_group",
-        field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")),
+        field=dict(help_text=_("The name of the Contact Group that contains registered reporters")),
         superuser_only=True,
         read_only=True,
     ),
@@ -474,9 +474,7 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="has_jobs",
         field=dict(
-            help_text=_("If there are jobs to be shown on the public site. (Separated by comma)"),
-            label="Display Jobs Tab",
-            required=False,
+            help_text=_("If there are jobs to be shown on the public site."), label="Display Jobs Tab", required=False
         ),
     ),
     dict(

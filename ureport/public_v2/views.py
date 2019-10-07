@@ -16,7 +16,7 @@ from smartmin.views import SmartReadView, SmartTemplateView
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
@@ -406,6 +406,12 @@ class JoinEngageView(SmartTemplateView):
 
 class JobsView(SmartTemplateView):
     template_name = "v2/public/jobs.html"
+
+    def pre_process(self, *args, **kwargs):
+        org = self.request.org
+        if not org.get_config("has_jobs"):
+            raise Http404("Page not found")
+        return None
 
     def get_context_data(self, **kwargs):
         context = super(JobsView, self).get_context_data(**kwargs)
