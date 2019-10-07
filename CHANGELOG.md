@@ -1,3 +1,10 @@
+v1.1.78
+----------
+ * Merge pull request #494 from rapidpro/argentina-bugs
+ * Revert join now changes
+ * Rebuild locales
+ * Fixes social media new tabs, polls and stories order, age chart fix
+
 v1.1.77
 ----------
  * Merge pull request #493 from rapidpro/fr-trans
