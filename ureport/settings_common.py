@@ -237,7 +237,7 @@ ORG_CONFIG_FIELDS = [
         field=dict(
             help_text=_("The shortcode that users will use to contact U-Report locally"),
             label="Shortcode",
-            required=True,
+            required=False,
         ),
     ),
     dict(

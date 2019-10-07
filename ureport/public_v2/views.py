@@ -202,7 +202,7 @@ class PollContextMixin(object):
 
         context["categories"] = (
             Category.objects.filter(org=org, is_active=True)
-            .prefetch_related(Prefetch("polls", queryset=Poll.objects.filter(is_active=True)))
+            .prefetch_related(Prefetch("polls", queryset=Poll.objects.filter(is_active=True).order_by("-poll_date")))
             .order_by("name")
         )
         context["polls"] = Poll.get_public_polls(org=org).order_by("-poll_date")
@@ -255,7 +255,9 @@ class StoriesView(SmartTemplateView):
         context["org"] = org
         context["categories"] = (
             Category.objects.filter(org=org, is_active=True)
-            .prefetch_related(Prefetch("story_set", queryset=Story.objects.filter(is_active=True)))
+            .prefetch_related(
+                Prefetch("story_set", queryset=Story.objects.filter(is_active=True).order_by("-created_on"))
+            )
             .order_by("name")
         )
         context["stories"] = Story.objects.filter(org=org, is_active=True).order_by("title")
