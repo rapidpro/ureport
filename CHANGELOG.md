@@ -1,3 +1,12 @@
+v1.1.76
+----------
+ * Rebuild locales
+ * Merge pull request #486 from Ilhasoft/fix/static
+ * Rebuild locales
+ * Merge pull request #492 from rapidpro/translations_django-po--master_it
+ * Translate /locale/en/LC_MESSAGES/django.po in it
+ * Added "sitestatic" in middleware
+
 v1.1.75
 ----------
  * Rebuild locales
