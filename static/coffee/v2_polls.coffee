@@ -106,7 +106,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
     )
   $('#engagement-graph-' + dataSlug).parent().parent().children().addClass("hidden");
 
-  colors = ['#E3002B', '#000000', '#FFD100', '#40B5E5', '#FF8200', '#009917']
+  colors = ['#E3002B', '#00B5A6', '#FFD100', '#40B5E5', '#FF8200', '#009917']
   if segmentType == "all"
     colors = ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a']
 
@@ -325,6 +325,7 @@ showChart = (questionID, segmentName) ->
           opposite: true
           tickWidth: 0
           lineColor: 'transparent'
+          tickInterval: 1
           labels: {
             enabled: true
             style: {
@@ -388,7 +389,9 @@ showChart = (questionID, segmentName) ->
           tickWidth: 0
           lineColor: 'transparent'
           labels: {
-            autoRotation: false
+            autoRotationLimit: 100
+            align: 'center'
+            autoRotation: [-30]
             enabled: true
             style: {
               color: 'black'

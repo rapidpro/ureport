@@ -1,3 +1,70 @@
+v1.1.78
+----------
+ * Merge pull request #494 from rapidpro/argentina-bugs
+ * Revert join now changes
+ * Rebuild locales
+ * Fixes social media new tabs, polls and stories order, age chart fix
+
+v1.1.77
+----------
+ * Merge pull request #493 from rapidpro/fr-trans
+ * Rebuild locales
+ * Fix tests
+ * Rebuild locales
+ * No jobs page if not configured
+ * Manual FR updates
+
+v1.1.76
+----------
+ * Rebuild locales
+ * Merge pull request #486 from Ilhasoft/fix/static
+ * Rebuild locales
+ * Merge pull request #492 from rapidpro/translations_django-po--master_it
+ * Translate /locale/en/LC_MESSAGES/django.po in it
+ * Added "sitestatic" in middleware
+
+v1.1.75
+----------
+ * Rebuild locales
+ * Merge pull request #491 from rapidpro/fr-trans
+ * Rebuild locales
+ * Merge branch 'master' of github.com:rapidpro/ureport into fr-trans
+ * Merge pull request #490 from rapidpro/translations_djangojs-po--master_fr_FR
+ * Update FR translations
+ * Apply translations in fr_FR
+
+v1.1.74
+----------
+ * Merge pull request #489 from rapidpro/admin-links
+ * REduce more longer titles
+ * Merge pull request #488 from rapidpro/admin-links
+ * rebuild locales
+ * Merge master
+ * Merge pull request #487 from rapidpro/translations_django-po--master_es
+ * Rebuild locales
+ * Change bg color on hover
+ * Rebuild locales
+ * Merge branch 'master' into translations_django-po--master_es
+ * Translate /locale/en/LC_MESSAGES/django.po in es
+ * Rebuild locales
+ * Improve admin links to be noticeable
+
+v1.1.73
+----------
+ * Fix to force label shows on all chart bars
+
+v1.1.72
+----------
+ * Merge pull request #485 from rapidpro/bugs-fix
+ * Auto rotate labels on opinion page
+ * Update FB SDK version
+ * Fix iframe styles
+ * Fix date format
+ * Fix the calculation of average response to be all time, not last year
+ * Add South Africa static flag config
+ * Merge pull request #483 from Ilhasoft/fix/api-page
+ * Fix css/js
+
 v1.1.71
 ----------
  * Merge pull request #482 from rapidpro/beta-fixes

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-01 09:23+0000\n"
+"POT-Creation-Date: 2019-10-07 20:03+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: deimidis <guillermo.movia@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -678,10 +678,8 @@ msgstr "Su nuevo %s ha sido creado."
 msgid "Import %s"
 msgstr "Importar %s"
 
-#, fuzzy
-#| msgid "Back to Full Site"
 msgid "Back to Website"
-msgstr "Volver al sitio completo"
+msgstr "Volver al sitio web"
 
 msgid "Welcome, "
 msgstr "Bienvenido,"
@@ -705,7 +703,7 @@ msgid "Jobs"
 msgstr "Trabajos"
 
 msgid "Photos"
-msgstr ""
+msgstr "Fotos"
 
 msgid "Categories Images"
 msgstr "Imágenes de categorías"
@@ -1207,10 +1205,8 @@ msgstr "Exportar y compartir"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "¿Quieres contarle al mundo sobre esto? Descarga esta imagen para ¡compartirla fácilmente en las redes sociales o para una hermosa presentación!"
 
-#, fuzzy
-#| msgid "SELECT YOUR COUNTRY"
 msgid "SELECT COUNTRY"
-msgstr "ELIGE TU PAÍS"
+msgstr "ELIGE PAÍS"
 
 msgid "Custom pages"
 msgstr "Páginas personalizadas"
@@ -1225,7 +1221,7 @@ msgid "Reporters"
 msgstr "U-Reporters"
 
 msgid "Top Region"
-msgstr ""
+msgstr "Región principal"
 
 msgid "LATEST OPINION"
 msgstr "OPINIONES RECIENTES"
@@ -1251,10 +1247,8 @@ msgstr "EDADES"
 msgid "LEARN MORE"
 msgstr "CONOCE MÁS"
 
-#, fuzzy
-#| msgid "+ New Page"
 msgid "+ New "
-msgstr "+ Nueva página"
+msgstr "+ Nueva"
 
 msgid "+ New Page"
 msgstr "+ Nueva página"
@@ -1281,16 +1275,19 @@ msgid "JOIN NOW"
 msgstr "ÚNETE YA"
 
 msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
+msgstr "Somos parte de una plataforma mundial para cambiar las vidas de los adolescentes y jóvenes alrededor del mundo."
 
 msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr ""
+msgstr "Conoce más acerca de cómo U-Report está empoderando y conectando jóvenes y adolescentes para que hablen acerca de los problemas que les preocupan."
 
 msgid "How would you like to join?"
 msgstr "¿Cómo te gustaría unirte?"
 
 msgid "Text"
 msgstr "Texto"
+
+msgid "SEARCH"
+msgstr ""
 
 msgid "No results found"
 msgstr "No se encontraron resultados"
@@ -1308,13 +1305,11 @@ msgstr "%(responded)s respondieron de %(polled)s encuestados"
 msgid "ALL"
 msgstr "TODO"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LOCATION"
-msgstr "UBICACIONES"
+msgstr "UBICACIÓN"
 
 msgid "Written by:"
-msgstr ""
+msgstr "Escrito por:"
 
 msgid "OVERALL STATISTICS"
 msgstr "ESTADÍSTICAS GENERALES"
@@ -1572,15 +1567,11 @@ msgstr "La imagen de categoría para ser exhibida en la encuesta (opcional)"
 msgid "The organization this poll is part of"
 msgstr "La organización a la que pertenece esta encuesta"
 
-#, fuzzy
-#| msgid "The title for this story"
 msgid "The title for this response story"
-msgstr "El título para esta historia"
+msgstr "El título para esta historia de respuesta"
 
-#, fuzzy
-#| msgid "The writer of the story"
 msgid "The writer of the response story"
-msgstr "El autor de la historia"
+msgstr "El autor de esta historia de respuesta"
 
 msgid "The poll to associate to"
 msgstr "La encuesta está relacionada con"
@@ -1654,10 +1645,8 @@ msgstr "Imagen para mostrar en la página de la encuesta y en las vistas previas
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Imagen para mostrar en la página de la encuesta y en las vistas previas. (opcional)"
 
-#, fuzzy
-#| msgid "Poll Questions"
 msgid "Poll Response"
-msgstr "Preguntas de la encuesta"
+msgstr "Respuesta a la encuesta"
 
 msgid "Your poll has been updated."
 msgstr "Su encuesta ha sido actualizada."
@@ -1700,7 +1689,9 @@ msgstr "Fue programada una actualización para la encuesta #%(poll_id)d en la or
 msgid "%s"
 msgstr "%s"
 
-msgid "The name of txbhe Contact Group that contains registered reporters"
+#, fuzzy
+#| msgid "The name of txbhe Contact Group that contains registered reporters"
+msgid "The name of the Contact Group that contains registered reporters"
 msgstr "El nombre del Grupo de Contactos txbhe que contiene periodistas registrados"
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
@@ -1838,7 +1829,9 @@ msgstr "El widget de Twitter usado para la búsqueda"
 msgid "The words to filter out from the results on public site"
 msgstr "Las palabras para filtrar de los resultados en el sitio público"
 
-msgid "If there are jobs to be shown on the public site. (Separated by comma)"
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site. (Separated by comma)"
+msgid "If there are jobs to be shown on the public site."
 msgstr "Si hay trabajos que mostrar en el sitio público. (Separadas por comas)"
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-01 09:23+0000\n"
+"POT-Creation-Date: 2019-10-07 20:03+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -1298,6 +1298,9 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+msgid "SEARCH"
+msgstr ""
+
 msgid "No results found"
 msgstr ""
 
@@ -1709,7 +1712,9 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-msgid "The name of txbhe Contact Group that contains registered reporters"
+#, fuzzy
+#| msgid "The name of txbhe Contact Group that contains registered reporters"
+msgid "The name of the Contact Group that contains registered reporters"
 msgstr "စာရင္းသြင္းထားျပီးေသာ အသံုးျပဳသူမ်ားပါ၀င္သည့္ txbhe contact အုပ္စုအမည္"
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
@@ -1871,7 +1876,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "If there are jobs to be shown on the public site"
-msgid "If there are jobs to be shown on the public site. (Separated by comma)"
+msgid "If there are jobs to be shown on the public site."
 msgstr "အမ်ားျပည္သူျမင္သာေသာ site တြင္သည္အလုပ္မ်ားကို ျပရန္ မျပရန္"
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
