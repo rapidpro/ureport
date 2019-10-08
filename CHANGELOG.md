@@ -1,3 +1,18 @@
+v1.1.80
+----------
+ * Rebuild locales
+ * Merge pull request #498 from rapidpro/translations_django-po--master_fr
+ * Translate /locale/en/LC_MESSAGES/django.po in fr
+
+v1.1.79
+----------
+ * Rebuild locales
+ * Rebuild locales
+ * Merge pull request #496 from rapidpro/translations_django-po--master_es
+ * Merge pull request #497 from Ilhasoft/translations_django-po--master_es
+ * Merge remote-tracking branch 'rapidpro/master' into translations_django-po--master_es
+ * Translate /locale/en/LC_MESSAGES/django.po in es
+
 v1.1.78
 ----------
  * Merge pull request #494 from rapidpro/argentina-bugs
