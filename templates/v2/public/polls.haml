@@ -17,7 +17,7 @@
           .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded.w-full
             .flex.bg-black.border-b.border-white.w-full
               .flex-1
-                %input.bg-black.search-box.text-sm(type="text" data-results-id="poll-search-results" placeholder="SEARCH" size=14)
+                %input.bg-black.search-box.text-sm(type="text" data-results-id="poll-search-results" placeholder="{% trans 'SEARCH' %}" size=14)
               .flex-none
                 %a.search-close.cursor-pointer
                   %i.fa.fa-caret-down
@@ -51,7 +51,7 @@
             .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white.mb-6
               {{ latest_poll.category.name }}
   
-            .font-bold.leading-tight.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl{% endif %}")
+            .font-bold.leading-tight.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl{% else %}text-2xl{% endif %}")
               {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
               {{ latest_poll.title }}
   
@@ -125,7 +125,7 @@
                 .h-1.border-t(class="{% if is_rtl_org %}{% cycle 'mr-4' 'ml-4' as margin %}{% else %}{% cycle 'ml-4' 'mr-4' as margin %}{% endif %} {% cycle 'border-white' 'border-black' 'border-white' 'border-white' as border %}")
 
             .mt-8
-              .font-alt.font-bold.leading-tight.italic.hover-parent(class="{% if question.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
+              .font-alt.font-bold.leading-tight.italic.hover-parent(class="{% if question.title|length < 50 %}text-3xl{% elif question.title|length < 120 %}text-2xl{% else %}text-xl{% endif %}")
                 -if forloop.counter|divisibleby:"2"
                   {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" "dark" %}
                 -else

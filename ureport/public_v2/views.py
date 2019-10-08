@@ -16,7 +16,7 @@ from smartmin.views import SmartReadView, SmartTemplateView
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
@@ -202,7 +202,7 @@ class PollContextMixin(object):
 
         context["categories"] = (
             Category.objects.filter(org=org, is_active=True)
-            .prefetch_related(Prefetch("polls", queryset=Poll.objects.filter(is_active=True)))
+            .prefetch_related(Prefetch("polls", queryset=Poll.objects.filter(is_active=True).order_by("-poll_date")))
             .order_by("name")
         )
         context["polls"] = Poll.get_public_polls(org=org).order_by("-poll_date")
@@ -255,7 +255,9 @@ class StoriesView(SmartTemplateView):
         context["org"] = org
         context["categories"] = (
             Category.objects.filter(org=org, is_active=True)
-            .prefetch_related(Prefetch("story_set", queryset=Story.objects.filter(is_active=True)))
+            .prefetch_related(
+                Prefetch("story_set", queryset=Story.objects.filter(is_active=True).order_by("-created_on"))
+            )
             .order_by("name")
         )
         context["stories"] = Story.objects.filter(org=org, is_active=True).order_by("title")
@@ -406,6 +408,12 @@ class JoinEngageView(SmartTemplateView):
 
 class JobsView(SmartTemplateView):
     template_name = "v2/public/jobs.html"
+
+    def pre_process(self, *args, **kwargs):
+        org = self.request.org
+        if not org.get_config("has_jobs"):
+            raise Http404("Page not found")
+        return None
 
     def get_context_data(self, **kwargs):
         context = super(JobsView, self).get_context_data(**kwargs)

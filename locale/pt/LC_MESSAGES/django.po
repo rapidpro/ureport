@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-01 09:23+0000\n"
+"POT-Creation-Date: 2019-10-07 20:03+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -1300,6 +1300,9 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+msgid "SEARCH"
+msgstr ""
+
 msgid "No results found"
 msgstr ""
 
@@ -1728,7 +1731,7 @@ msgstr ""
 msgid "%s"
 msgstr "%s"
 
-msgid "The name of txbhe Contact Group that contains registered reporters"
+msgid "The name of the Contact Group that contains registered reporters"
 msgstr ""
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
@@ -1888,7 +1891,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "If there are jobs to be shown on the public site"
-msgid "If there are jobs to be shown on the public site. (Separated by comma)"
+msgid "If there are jobs to be shown on the public site."
 msgstr "Se existem vagas de emprego a serem visualizados no site público"
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."

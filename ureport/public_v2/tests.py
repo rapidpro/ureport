@@ -1070,10 +1070,20 @@ class JobsTest(UreportJobsTest):
         jobs_url = reverse("v2.public.jobs")
 
         response = self.client.get(jobs_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(response.status_code, 404)
+
+        self.nigeria.set_config("common.has_jobs", True)
+
+        response = self.client.get(jobs_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context["job_sources"])
         self.assertEqual(2, len(response.context["job_sources"]))
         self.assertEqual(set(response.context["job_sources"]), set([fb_source_nigeria, tw_source_nigeria]))
+
+        response = self.client.get(jobs_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 404)
+
+        self.uganda.set_config("common.has_jobs", True)
 
         response = self.client.get(jobs_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)

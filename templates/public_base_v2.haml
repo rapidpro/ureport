@@ -251,15 +251,15 @@
 
         .block.mt-4
           - if org|config:"instagram_username"
-            %a.flex-initial.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-600")
+            %a.flex-initial.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-600" target="_blank")
               %i.fa.fa-instagram
 
           - if org|config:"facebook_page_url"
-            %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-600")
+            %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-600" target="_blank")
               %i.fa.fa-facebook
     
           - if org|config:"twitter_handle"
-            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-600")
+            %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-600" target="_blank")
               %i.fa.fa-twitter
 
         %a.block.font-bold.mt-4(href="{% url 'v2.public.join' %}" class="hover:text-gray-600")
@@ -434,15 +434,15 @@
                 {{custom_page.title}}
   
             - if org|config:"instagram_username"
-              %a.flex-initial.ml-4.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-750")
+              %a.flex-initial.ml-4.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-750" target="_blank")
                %i.fa.fa-instagram
 
             - if org|config:"facebook_page_url"
-              %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-750")
+              %a.flex-initial.ml-4.py-menu(href='{{ org|config:"facebook_page_url" }}' class="hover:text-gray-750" target="_blank")
                 %i.fa.fa-facebook
   
             - if org|config:"twitter_handle"
-              %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-750")
+              %a.flex-initial.ml-4.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="hover:text-gray-750" target="_blank")
                 %i.fa.fa-twitter
   
             %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'v2.public.join' %}" class="hover:bg-gray-700")
@@ -560,15 +560,15 @@
   
         .li.flex-grow.flex(class="md:justify-end")
           - if org|config:"instagram_username"
-            %a.flex-initial.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-750")
+            %a.flex-initial.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-750" target="_blank")
               %i.fa.fa-instagram
           
           - if org|config:"facebook_page_url"
-            %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="rtl:mr-4 ltr:ml-4 hover:text-gray-750")
+            %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="rtl:mr-4 ltr:ml-4 hover:text-gray-750" target="_blank")
               %i.fa.fa-facebook
   
           - if org|config:"twitter_handle"
-            %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="rtl:mr-4 ltr:ml-4 hover:text-gray-750")
+            %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="rtl:mr-4 ltr:ml-4 hover:text-gray-750" target="_blank")
               %i.fa.fa-twitter
         
           - if request.user and request.user.is_authenticated

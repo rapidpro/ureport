@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Eskandar BENAICHA <ebenaicha@unicef.fr>, 2016-2017
-# Ilhasoft <contato@ilhasoft.com.br>, 2016
-# Mbanje Jean Vernack <mbanjejvernack@gmail.com>, 2016
-# Nyaruka <info@textit.in>, 2015
-# renaud gaudin <rgaudin@gmail.com>, 2014
-# stucampo <stuart.campo@gmail.com>, 2014-2015
-# Vincent Turmine <vincent.turmine@gmail.com>, 2014,2016-2017
+# Nyaruka <info@textit.in>, 2019
+# Stéphane Gbonikan <agbonikan@unicef.org>, 2019
+# Jonathan Newberry <jnewberry@unicef.org>, 2019
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: UReport\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-01 09:23+0000\n"
-"PO-Revision-Date: 2017-04-07 14:40+0000\n"
-"Last-Translator: Vincent Turmine <vincent.turmine@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/rapidpro/ureport/language/fr/)\n"
+"POT-Creation-Date: 2019-10-07 20:03+0000\n"
+"PO-Revision-Date: 2019-05-15 20:27+0000\n"
+"Last-Translator: Jonathan Newberry <jnewberry@unicef.org>, 2019\n"
+"Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +27,7 @@ msgid "The name of this category"
 msgstr "Nom de la rubrique"
 
 msgid "An optional image that can describe this category"
-msgstr "Une image pour décrire cette rubrique (optionnel)"
+msgstr "Une image pour décrire cette rubrique"
 
 msgid "The organization this category applies to"
 msgstr "L'organisation à laquelle la rubrique s'applique"
@@ -43,12 +42,10 @@ msgid "The category this image represents"
 msgstr "La rubrique que cette image représente"
 
 msgid "The image file to use"
-msgstr "Le fichier image à utiliser"
+msgstr "L'image à utiliser"
 
-#, fuzzy
-#| msgid "The category for this story"
 msgid "The human readable name for this content type"
-msgstr "La rubrique pour cet article"
+msgstr "Le nom du 'type' du contenu dont l'humain pourrait acceder."
 
 msgid "The slug to idenfity this content type, used with the template tags"
 msgstr ""
@@ -56,115 +53,77 @@ msgstr ""
 msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgstr ""
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should include a title"
-msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgstr ""
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should include an image"
-msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgstr ""
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should use a rich HTML editor"
-msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgstr ""
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should include a summary field"
-msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgstr ""
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should include a link"
-msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgstr ""
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should allow upload of additional images, ie a gallery"
-msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgstr ""
 
-#, fuzzy
-#| msgid "Whether this story is featured"
 msgid "Whether this content has a color field"
-msgstr "Si cet article est mis en avant "
+msgstr ""
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should allow setting a YouTube id"
-msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgstr ""
 
-#, fuzzy
-#| msgid "Whether this poll should be featured on the homepage"
 msgid "Whether this content should allow tags"
-msgstr "Si vous souhaitez mettre ce sondage sur la page d'accueil"
+msgstr ""
 
-#, fuzzy
-#| msgid "Content Types"
 msgid "Content Type"
-msgstr "Types de contenu"
+msgstr ""
 
-#, fuzzy
-#| msgid "The category for this story"
 msgid "The category, or type for this content block"
-msgstr "La rubrique pour cet article"
+msgstr ""
 
-#, fuzzy
-#| msgid "The title of this question"
 msgid "The title for this block of content, optional"
-msgstr "Le titre de cette question"
+msgstr ""
 
-#, fuzzy
-#| msgid "The summary for the story"
 msgid "The summary for this item, should be short"
-msgstr "Le résumé de l'article"
+msgstr ""
 
-#, fuzzy
-#| msgid "The body of text for the story"
 msgid "The body of text for this content block, optional"
-msgstr "Le texte principal de l'article"
+msgstr ""
 
-#, fuzzy
-#| msgid "A link that should be associated with this item"
 msgid "Any image that should be displayed with this content block, optional"
-msgstr "Un lien à associé à ce sujet"
+msgstr ""
 
-#, fuzzy
-#| msgid "The background color for the site"
 msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr "La couleur de fond du site"
+msgstr ""
 
-#, fuzzy
-#| msgid "A link that should be associated with this item"
 msgid "Any link that should be associated with this content block, optional"
-msgstr "Un lien à associé à ce sujet"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "L'ID de la vidéo Youtube à associé à ce sujet"
 
-#, fuzzy
-#| msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
 msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "Chaque mot-clé de l'article séparé par des espaces peut être utiliser pour des filtres (optionnel)"
+msgstr ""
 
 msgid "The priority for this block, higher priority blocks come first"
 msgstr ""
 
-#, fuzzy
-#| msgid "The organization this item belongs to"
 msgid "The organization this content block belongs to"
-msgstr "L'organisation à laquelle ce sujet appartient"
+msgstr "L'organisation à laquelle appartient ce contenu"
 
 msgid "Gallery"
-msgstr "Galerie Photos"
+msgstr "Galerie"
 
 msgid "Add Image"
 msgstr "Ajouter une image"
 
 msgid "Search"
-msgstr "Rechercher"
+msgstr "RECHERCHE"
 
 msgid "Add"
 msgstr "Ajouter"
@@ -173,26 +132,22 @@ msgid "Content Types"
 msgstr "Types de contenu"
 
 msgid "Content Blocks"
-msgstr "Blocs"
+msgstr ""
 
 #, python-format
 msgid "%s Blocks"
-msgstr "%s Blocs"
+msgstr ""
 
-#, fuzzy, python-format
-#| msgid "Edit"
+#, python-format
 msgid "Edit %s"
-msgstr "Éditer"
+msgstr "Éditer %s"
 
-#, fuzzy, python-format
-#| msgid "Create"
+#, python-format
 msgid "Create %s"
-msgstr "Créer"
+msgstr "Créer %s"
 
-#, fuzzy
-#| msgid "Content Blocks"
 msgid "Create Content Block"
-msgstr "Blocs"
+msgstr ""
 
 msgid "Your first name"
 msgstr "Votre prénom"
@@ -212,19 +167,17 @@ msgstr "Cet email est déjà utilisé"
 msgid "Passwords must contain at least 8 letters."
 msgstr "Les mots de passe doivent contenir au moins 8 lettres"
 
-#, fuzzy
-#| msgid "This domain is not available"
 msgid "This domain is used for subdomains"
-msgstr "Ce domaine n'est pas disponible"
+msgstr "Ce domaine est utilisé pour les sous-domaines"
 
 msgid "Name"
 msgstr "Nom"
 
 msgid "The name of this organization"
-msgstr "Nom de l'organisation"
+msgstr "Le nom de cette organisation"
 
 msgid "The logo that should be used for this organization"
-msgstr "Le logo qui doit être utilisé pour l'organisation"
+msgstr ""
 
 msgid "Administrators"
 msgstr "Administrateurs"
@@ -236,48 +189,46 @@ msgid "Viewers"
 msgstr "Visiteurs"
 
 msgid "The viewers in your organization"
-msgstr "Visiteurs de votre organisation"
+msgstr ""
 
 msgid "Editors"
 msgstr "Éditeurs"
 
 msgid "The editors in your organization"
-msgstr "Les éditeurs de votre organisation"
+msgstr ""
 
 msgid "Language"
 msgstr "Langue"
 
 msgid "The main language used by this organization"
-msgstr "La langue principale de votre organisation"
+msgstr ""
 
 msgid "Subdomain"
 msgstr "Sous-domaine"
 
 msgid "This subdomain is not available"
-msgstr "Le sous-domaine n'est pas disponible"
+msgstr ""
 
 msgid "The subdomain for this organization"
-msgstr "Le sous-domaine pour cette organisation"
+msgstr ""
 
 msgid "Domain"
 msgstr "Domaine"
 
 msgid "This domain is not available"
-msgstr "Ce domaine n'est pas disponible"
+msgstr ""
 
-#, fuzzy
-#| msgid "The subdomain for this organization"
 msgid "The custom domain for this organization"
-msgstr "Le sous-domaine pour cette organisation"
+msgstr ""
 
 msgid "Timezone"
-msgstr "Fuseau horaire"
+msgstr ""
 
 msgid "The timezone your organization is in."
-msgstr "Le fuseau horaire pour votre organisation est "
+msgstr ""
 
 msgid "JSON blob used to store configuration information associated with this organization"
-msgstr "Blob JSON utilisé pour stocker les éléments de configuration relatifs à cette organisation"
+msgstr ""
 
 msgid "Administrator"
 msgstr "Administrateur"
@@ -292,7 +243,7 @@ msgid "Org"
 msgstr "Organisation"
 
 msgid "The organization to which the account is invited to view"
-msgstr "L'organisation à laquelle le compte est invité"
+msgstr ""
 
 msgid "Email"
 msgstr "Email"
@@ -301,17 +252,17 @@ msgid "The email to which we send the invitation of the viewer"
 msgstr "L'email du visiteur à qui nous envoyons l'invitation"
 
 msgid "Secret"
-msgstr "Secret"
+msgstr ""
 
 msgid "a unique code associated with this invitation"
-msgstr "un code unique associé à l'invitation"
+msgstr ""
 
 msgid "User Role"
-msgstr "Rôle utilisateur"
+msgstr ""
 
 #, python-format
 msgid "%s Invitation"
-msgstr "Invitation %s"
+msgstr ""
 
 msgid "Banner"
 msgstr "Bannière"
@@ -320,21 +271,19 @@ msgid "Pattern"
 msgstr "Motif"
 
 msgid "The organization in which the image will be used"
-msgstr "L'organisation pour laquelle l'image sera utilisée"
+msgstr ""
 
 msgid "The name to describe this background"
-msgstr "Le nom pour décrire cet arrière-plan"
+msgstr ""
 
 msgid "Background type"
-msgstr "Type d'arrière-plan"
+msgstr ""
 
 msgid "The image file"
 msgstr "Le fichier image"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The API token for this backend"
-msgstr "Le titre de cet élément"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -344,11 +293,6 @@ msgid ""
 "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
 "  "
 msgstr ""
-"\n"
-"      Vous avez été invité a rejoindre %(org_name)s.\n"
-"      <br/>\n"
-"      Pour accepter l'invitation, <a href='%(host)s%(join_url)s'>cliquez ici</a>.\n"
-"  "
 
 msgid "You are invited to join {{org.name}}."
 msgstr ""
@@ -359,65 +303,61 @@ msgstr ""
 msgid "Edit"
 msgstr "Éditer"
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Manage Backends"
-msgstr "Gérer les utilisateurs"
+msgstr ""
 
 msgid "Manage Users"
 msgstr "Gérer les utilisateurs"
 
 msgid "Accounts"
-msgstr "Comptes"
+msgstr ""
 
 msgid "Admins"
-msgstr "Administrateurs"
+msgstr ""
 
 msgid "Remove"
-msgstr "Retirer"
+msgstr ""
 
 msgid "You must have at least one administator"
-msgstr "Vous devez avoir au moins un administrateur"
+msgstr ""
 
 msgid "Select your Organization"
-msgstr "Choisir votre organisation"
+msgstr ""
 
 msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-msgstr "Votre compte n'est pas associé à une organisation. Merci de contacter l'administrateur."
+msgstr ""
 
 msgid "Your Organization"
-msgstr "Votre Organisation"
+msgstr ""
 
 msgid "Invite people to your organization"
-msgstr "Invitez des membres de votre organisation"
+msgstr ""
 
 msgid "User group"
-msgstr "Groupe utilisateur"
+msgstr ""
 
 msgid "One of the emails you entered is invalid."
-msgstr "Un des emails que vous avez saisi est erroné"
+msgstr ""
 
 #, python-format
 msgid "Manage %(name)s Accounts"
-msgstr "Gérer les comptes de %(name)s"
+msgstr ""
 
 msgid "Create"
-msgstr "Créer"
+msgstr ""
 
 msgid "Your invitation link is invalid. Please contact your organization administrator."
-msgstr "Le lien de votre invitation n'est pas valide. Merci de contacter l'administrateur de votre organisation."
+msgstr ""
 
 #, python-format
 msgid "Join %(name)s"
 msgstr "Rejoindre %(name)s"
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join"
 msgstr "Rejoindre"
 
 msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr "Votre invitation a expirée. Merci de contacter l'administrateur de votre organisation"
+msgstr ""
 
 msgid "Task"
 msgstr ""
@@ -426,62 +366,62 @@ msgid "Tasks"
 msgstr ""
 
 msgid "The title for this story"
-msgstr "Le titre de l'article"
+msgstr ""
 
 msgid "Whether this story is featured"
-msgstr "Si cet article est mis en avant "
+msgstr ""
 
 msgid "The summary for the story"
-msgstr "Le résumé de l'article"
+msgstr ""
 
 msgid "The body of text for the story"
-msgstr "Le texte principal de l'article"
+msgstr ""
 
 msgid "The writer of the story"
-msgstr "L'auteur de l'article"
+msgstr ""
 
 msgid "A link to an mp3 file to publish on this story"
-msgstr "Un lien vers un fichier MP3 pour publier au sein de l'article"
+msgstr ""
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr "L'ID de la vidéo YouTube que vous souhaitez lier à cet article (le code après v= et avant & au niveau de l'URL YouTube)"
+msgstr ""
 
 msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "Chaque mot-clé de l'article séparé par des espaces peut être utiliser pour des filtres (optionnel)"
+msgstr ""
 
 msgid "The category for this story"
-msgstr "La rubrique pour cet article"
+msgstr ""
 
 msgid "The organization this story belongs to"
-msgstr "L'organisation à qui appartient l'article"
+msgstr ""
 
 msgid "Stories"
 msgstr "Articles"
 
 msgid "The story to associate to"
-msgstr "L'article à associer"
+msgstr ""
 
 msgid "Yes"
-msgstr "Oui"
+msgstr ""
 
 msgid "No"
-msgstr "Non"
+msgstr ""
 
 msgid "Story Images"
-msgstr "Images de l'article"
+msgstr ""
 
 #, python-format
 msgid "Image %d"
 msgstr "Image %d"
 
 msgid "Image to display on story page and in previews. (optional)"
-msgstr "Image à afficher au sein de l'article et du résumé (optionnel)"
+msgstr ""
 
 msgid "Image to display on story page and in previews (optional)"
-msgstr "Image à afficher au sein de l'article et des résumés (optionnel)"
+msgstr ""
 
 msgid "Remove Item?"
-msgstr "Supprimer l'article ?"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -496,15 +436,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Annuler"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid ""
 "\n"
 "\t %(counter)s result\n"
@@ -515,11 +447,11 @@ msgid_plural ""
 "        "
 msgstr[0] ""
 "\n"
-"\t\t%(counter)s résultat\n"
-"\t"
+"         %(counter)s résultats        "
 msgstr[1] ""
 "\n"
-"         %(counter)s résultats        "
+"         %(counter)s résultats\n"
+"        "
 
 #, python-format
 msgid ""
@@ -527,15 +459,18 @@ msgid ""
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
 msgstr ""
+"\n"
+"\tRésultats %(start)s-%(end)s of %(count)s\n"
+"\t"
 
 msgid "Previous"
-msgstr "Précédent"
+msgstr ""
 
 msgid "Next"
 msgstr "Suivant"
 
 msgid "edit"
-msgstr "éditer"
+msgstr ""
 
 msgid "Sign in"
 msgstr "Se connecter"
@@ -547,10 +482,10 @@ msgid "Forgot Password?"
 msgstr "Mot de passe oublié ?"
 
 msgid "Token Expired"
-msgstr "Token expiré"
+msgstr ""
 
 msgid "Login Failure"
-msgstr "Echec de connexion"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -559,23 +494,12 @@ msgid ""
 "      "
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                  %(questions)s question polled on this topic\n"
-#| "                "
-#| msgid_plural ""
-#| "\n"
-#| "                  %(questions)s questions polled on this topic\n"
-#| "                "
+#, python-format
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
 msgstr ""
-"\n"
-"%(questions)s question posée sur ce sujet\n"
-"                "
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr ""
@@ -584,117 +508,92 @@ msgid "Please contact the website administrator to have your password reset."
 msgstr ""
 
 msgid "Email Address"
-msgstr "Adresse email"
+msgstr ""
 
 msgid "Recover"
-msgstr "Restaurer"
+msgstr ""
 
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "S'il vous plait, saisissez votre adresse email que vous avez utilisée pour l'inscription et nous vous aiderons a restaurer votre mot de passe."
+msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
+#, python-format
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
 msgstr ""
-"\n"
-"  <strong>Votre mot de passe a expiré.</strong> La réglementation du site implique que vous mettiez a jour votre mot de passe tous les %(expire_days)s jours, et que le mot de passe soit différent de celui utilisé %(window_days)s jours avant.\n"
-"  "
 
 msgid "New Password"
-msgstr "Nouveau mot de passe"
+msgstr ""
 
 msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Le mot de passe doit contenir au moins 8 caracteres, dont une minuscule, une majuscule et un chiffre"
+msgstr ""
 
 msgid "You have used this password before in the past year, please use a new password."
-msgstr "Ce mot de passe a deja ete utilise durant l'annee. S'il vous plait, choisissez un autre mot de passe."
+msgstr ""
 
 msgid "Password"
-msgstr "Mot de passe"
+msgstr ""
 
 msgid "Confirm Password"
-msgstr "Confirmer votre Mot de passe"
+msgstr ""
 
 msgid "Please enter your password to save changes."
-msgstr "Entrer votre mot de passe pour sauvegarder les modifications."
+msgstr ""
 
-#, fuzzy
-#| msgid "Confirm your new password"
 msgid "Confirm the new password by filling the this field"
-msgstr "Confirmer votre nouveau mot de passe"
+msgstr ""
 
 msgid "New password doesn't match with its confirmation"
 msgstr ""
 
 msgid "Your Email"
-msgstr "Votre email"
+msgstr ""
 
 msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
 msgstr ""
 
-#, fuzzy
-#| msgid "New Password"
 msgid "Current Password"
-msgstr "Nouveau mot de passe"
+msgstr ""
 
-#, fuzzy
-#| msgid "Your password"
 msgid "Your current password"
-msgstr "Votre mot de passe"
+msgstr ""
 
-#, fuzzy
-#| msgid "Your password"
 msgid "Your new password."
-msgstr "Votre mot de passe"
+msgstr ""
 
-#, fuzzy
-#| msgid "Confirm New Password"
 msgid "Confirm new Password"
-msgstr "Confirmer le nouveau mot de passe"
+msgstr ""
 
-#, fuzzy
-#| msgid "Confirm your new password"
 msgid "Confirm your new password."
-msgstr "Confirmer votre nouveau mot de passe"
+msgstr ""
 
-#, fuzzy
-#| msgid "Please enter your password to save changes."
 msgid "Please enter your password to save changes"
-msgstr "Entrer votre mot de passe pour sauvegarder les modifications."
+msgstr ""
 
-#, fuzzy
-#| msgid "Confirm your new password"
 msgid "Confirm your new password by entering it here"
-msgstr "Confirmer votre nouveau mot de passe"
+msgstr ""
 
 msgid "Mismatch between your new password and confirmation, try again"
 msgstr ""
 
 msgid "New user created successfully."
-msgstr "Un nouvel utilisateur a été créé avec succes."
+msgstr ""
 
 msgid "Groups"
-msgstr "Groupes"
+msgstr ""
 
 msgid "Users will only get those permissions that are allowed for their group."
 msgstr ""
 
-#, fuzzy
-#| msgid "Confirm your new password"
 msgid "Set the user's initial password here."
-msgstr "Confirmer votre nouveau mot de passe"
+msgstr ""
 
 msgid "Last Login"
-msgstr "Derniere connexion"
+msgstr ""
 
 msgid "Is Active"
-msgstr "Actif"
+msgstr ""
 
 msgid "Whether this user is allowed to log into the site"
 msgstr ""
@@ -702,75 +601,71 @@ msgstr ""
 msgid "Users will only get those permissions that are allowed for their group"
 msgstr ""
 
-#, fuzzy
-#| msgid "Confirm your new password"
 msgid "You can reset the user's password by entering a new password here"
-msgstr "Confirmer votre nouveau mot de passe"
+msgstr ""
 
 msgid "Username"
-msgstr "Nom Utilisateur"
+msgstr ""
 
 msgid "Your password"
-msgstr "Votre mot de passe"
+msgstr ""
 
 msgid "If you want to set a new password, enter it here"
-msgstr "Pour changer votre mot de passe, entrez le ici"
+msgstr ""
 
 msgid "Confirm New Password"
-msgstr "Confirmer le nouveau mot de passe"
+msgstr ""
 
 msgid "Confirm your new password"
-msgstr "Confirmer votre nouveau mot de passe"
+msgstr ""
 
 msgid "Edit your profile"
-msgstr "Editer votre profil"
+msgstr ""
 
 msgid "Password Recovery"
-msgstr "Restauration du mot de passe"
+msgstr ""
 
 msgid "An Email has been sent to your account with further instructions."
-msgstr "Un email vous a été envoyé sur votre compte avec les informations complémentaires"
+msgstr ""
 
 msgid "Password Recovery Request"
-msgstr "Demander une restauration du mot de passe"
+msgstr ""
 
 msgid "Pick a new password"
-msgstr "Choisir un nouveau mot de passe"
+msgstr ""
 
-#, fuzzy
-#| msgid "Your poll has been updated."
 msgid "Your password has successfully been updated, thank you."
-msgstr "Votre sondage a été mis a jour."
+msgstr ""
 
 #, python-format
 msgid "You are now logged in as %s"
-msgstr "Vous êtes connecte en tant que %s"
+msgstr ""
 
 msgid "Password Updated Successfully. Now you can log in using your new password."
 msgstr ""
 
 msgid "Reset your Password"
-msgstr "Réinitialiser votre mot de passe"
+msgstr ""
 
 msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
 msgstr ""
 
 msgid "Submit"
-msgstr "Soumettre"
+msgstr ""
 
 msgid "Form"
-msgstr "Formulaire"
+msgstr ""
 
 msgid "Save Changes"
-msgstr "Sauvegarder les modifications"
+msgstr ""
 
 #, python-format
 msgid "Your new %s has been created."
-msgstr "Votre nouveau %s a été créé."
+msgstr ""
 
 #, python-format
 msgid "Import %s"
-msgstr "Importer %s"
+msgstr ""
 
 msgid "Back to Website"
 msgstr ""
@@ -782,7 +677,7 @@ msgid "Logout"
 msgstr "Déconnexion"
 
 msgid "Opinions"
-msgstr ""
+msgstr "Sondages"
 
 msgid "Users"
 msgstr "Utilisateurs"
@@ -790,10 +685,8 @@ msgstr "Utilisateurs"
 msgid "Settings"
 msgstr ""
 
-#, fuzzy
-#| msgid "Images"
 msgid "Pages"
-msgstr "Images"
+msgstr ""
 
 msgid "Jobs"
 msgstr "Emplois"
@@ -801,10 +694,8 @@ msgstr "Emplois"
 msgid "Photos"
 msgstr ""
 
-#, fuzzy
-#| msgid "Category Images"
 msgid "Categories Images"
-msgstr "Images pour catégorie"
+msgstr ""
 
 msgid "News Items"
 msgstr "Nouveaux Sujets"
@@ -819,7 +710,7 @@ msgid "About"
 msgstr "À Propos"
 
 msgid "Engagement"
-msgstr ""
+msgstr "L'Engagement : Statistiques"
 
 msgid "U-Report"
 msgstr "U-Report"
@@ -885,18 +776,16 @@ msgid "FOLLOW US ON"
 msgstr "NOUS SUIVRE SUR"
 
 msgid "SELECT YOUR COUNTRY"
-msgstr ""
+msgstr "SÉLECTIONNER VOTRE PAYS"
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join Now"
-msgstr "Rejoindre"
+msgstr "Joindre"
 
 msgid "READ MORE"
 msgstr "EN SAVOIR PLUS"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr ""
+msgstr "Engagement en chiffres"
 
 msgid ""
 "\n"
@@ -940,10 +829,8 @@ msgstr "Pourquoi rejoindre U-Report?"
 msgid "Speak out on what's happening in your community"
 msgstr "Dire haut et fort ce qui se passe dans ta communauté"
 
-#, fuzzy
-#| msgid "Use Ureport results and information to update and increase citizen's awareness"
 msgid "Use U-Report results and information to update and increase citizen's awareness"
-msgstr "Exploiter les résultats de U-report pour informer et éveiller les citoyens"
+msgstr ""
 
 msgid "Participate in nationwide campaigns to help improve your country"
 msgstr "Participer aux campagnes nationales pour aider à l'amélioration de ton pays"
@@ -1007,7 +894,7 @@ msgid "RESPONSE RATE"
 msgstr "TAUX DE RÉPONSE"
 
 msgid "Responded out of"
-msgstr "réponses sur "
+msgstr "ont répondu sur"
 
 msgid "RESPONDER'S RATE BY LOCATION"
 msgstr "TAUX DE RÉPONSES PAR RÉGION"
@@ -1062,16 +949,16 @@ msgid "FEATURED REGION"
 msgstr "RÉGION SÉLECTIONNÉE"
 
 msgid "Check more stories in U-Report app"
-msgstr ""
+msgstr "Voir plus d'articles sur l'application U-Report"
 
 msgid "View more stories on Facebook"
 msgstr "Voir plus d’articles sur facebook"
 
 msgid "View more on Instagram"
-msgstr ""
+msgstr "Voir plus sur Instagram"
 
 msgid "Read more tweets on Twitter"
-msgstr ""
+msgstr "Lire plus des tweets sur Twitter"
 
 msgid "NEWS FEED"
 msgstr "FIL D'ACTUALITÉS"
@@ -1085,8 +972,6 @@ msgstr "Lire tout"
 msgid "Response Rate"
 msgstr "Taux de réponse"
 
-#, fuzzy
-#| msgid "Read This Story"
 msgid "Read this story"
 msgstr "Lire l'article"
 
@@ -1097,13 +982,13 @@ msgid "Scroll to see job details"
 msgstr "Descendre pour voir plus de détails sur les emplois"
 
 msgid "Tweet to"
-msgstr ""
+msgstr "Tweeter à"
 
 msgid "Read more"
 msgstr "En savoir plus"
 
 msgid "Visit"
-msgstr ""
+msgstr "Visiter"
 
 msgid "JOIN U-REPORT"
 msgstr "REJOINDRE U-REPORT"
@@ -1111,21 +996,13 @@ msgstr "REJOINDRE U-REPORT"
 msgid "HOW TO JOIN"
 msgstr "COMMENT REJOINDRE U-REPORT"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-#| "\n"
-#| "            "
+#, python-format
 msgid ""
 "\n"
 "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "              "
 msgstr ""
-"\n"
-"U-Report est un outil gratuit de l’UNICEF accessible sur tous les réseaux mobiles et Internet en %(country)s. U-Report ne demandera jamais à ses utilisateurs le moindre paiement ni aucune information bancaire personnelle. ATTENTION à bien rester vigilants, et à nous le signaler, si vous recevez des messages frauduleux vous demandant un paiement sur notre compte Twitter ou notre page Facebook.\n"
-"Tous les services et réseaux sociaux de U-Report (toutes les messages de  %(shortcode)s)  sont gratuits."
 
 msgid "U-REPORT ON SOCIAL MEDIA"
 msgstr "U-REPORT SUR LES MÉDIAS SOCIAUX"
@@ -1158,7 +1035,7 @@ msgid "response rate"
 msgstr "taux de réponse"
 
 msgid "responded out of"
-msgstr "répondants sur"
+msgstr "ont répondu sur"
 
 msgid "polled"
 msgstr "interrogés"
@@ -1173,7 +1050,7 @@ msgid ""
 "                  "
 msgstr ""
 "\n"
-"                    %(responded)s répondants sur %(polled)s interrogés\n"
+"                    %(responded)s ont répondu sur %(polled)s personnes interrogées\n"
 "                  "
 
 msgid "KEYWORDS"
@@ -1309,66 +1186,52 @@ msgid "Week of"
 msgstr "Semaine du"
 
 msgid "Export and Share"
-msgstr ""
+msgstr "Exporter et Partager"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
 
 msgid "SELECT COUNTRY"
-msgstr ""
+msgstr "SELECTIONNER PAYS"
 
 msgid "Custom pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
+msgstr "Pour voir en chiffres de quelle façon nous engageons les jeunes pour un changement positif."
 
-#, fuzzy
-#| msgid "polled"
 msgid "Polled"
-msgstr "interrogés"
+msgstr "Interrogés"
 
-#, fuzzy
-#| msgid "U-Reporters"
 msgid "Reporters"
-msgstr "U-Reporters"
+msgstr "reporters"
 
 msgid "Top Region"
-msgstr ""
+msgstr "Région principale"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST OPINION"
-msgstr "CARTOGRAPHIE"
+msgstr "Dernier sondage"
 
-#, fuzzy
-#| msgid "POLL RESULTS"
 msgid "VIEW FULL RESULTS"
-msgstr "RÉSULTATS DU SONDAGE"
+msgstr "VOIR TOUS LES RÉSULTATS"
 
 msgid "PARTNERING WITH"
-msgstr ""
+msgstr "EN PARTENARIAT AVEC"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS"
-msgstr "U-REPORTERS  - "
+msgstr "U-REPORTERS"
 
 msgid "IN"
-msgstr ""
+msgstr "DANS "
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "COUNTRIES WORLDWIDE"
-msgstr "U-REPORTERS  - "
+msgstr "PAYS A TRAVERS LE MONDE"
 
 msgid "AGES"
-msgstr ""
+msgstr "AGES"
 
-#, fuzzy
-#| msgid "READ MORE"
 msgid "LEARN MORE"
-msgstr "EN SAVOIR PLUS"
+msgstr "Clique Ici"
 
 msgid "+ New "
 msgstr ""
@@ -1376,15 +1239,11 @@ msgstr ""
 msgid "+ New Page"
 msgstr ""
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST NOTIFICATIONS"
-msgstr "CARTOGRAPHIE"
+msgstr ""
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Backends"
-msgstr "Gérer les utilisateurs"
+msgstr ""
 
 msgid "+ New Poll"
 msgstr ""
@@ -1392,86 +1251,66 @@ msgstr ""
 msgid "Poll Results Data"
 msgstr ""
 
-#, fuzzy
-#| msgid "Results"
 msgid "Refresh Results"
-msgstr "Résultats"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
-msgstr ""
+msgstr "JOINDRE"
 
 msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
+msgstr "U-Report est un mouvement global ayant un impact sur la vie de jeunes à travers le monde."
 
 msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr ""
+msgstr "Pour en savoir plus sur la façon dont U-Report permet aux jeunes de se rassembler et de faire entendre leur voix sur des enjeux qui les touchent."
 
 msgid "How would you like to join?"
-msgstr ""
+msgstr "Comment tu peux joindre?"
 
 msgid "Text"
+msgstr "Texte"
+
+msgid "SEARCH"
 msgstr ""
 
 msgid "No results found"
-msgstr ""
+msgstr "Pas de resultat "
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "RESPONSES"
-msgstr "TAUX DE RÉPONSE"
+msgstr "REPONSES"
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "TOTAL RESPONSES"
-msgstr "TAUX DE RÉPONSE"
+msgstr "Réponses"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
+#, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr ""
-"\n"
-"                    %(responded)s répondants sur %(polled)s interrogés\n"
-"                  "
+msgstr "%(responded)s ont répondu sur %(polled)s personnes interrogées"
 
 msgid "ALL"
-msgstr ""
+msgstr "TOUS"
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LOCATION"
-msgstr "CARTOGRAPHIE"
+msgstr "LIEU"
 
 msgid "Written by:"
-msgstr ""
+msgstr "Ecrit par:"
 
-#, fuzzy
-#| msgid "U-REPORTER STATISTICS"
 msgid "OVERALL STATISTICS"
-msgstr "STATISTIQUES U-REPORTERS"
+msgstr "Statistiques nationales"
 
 msgid "THIS YEAR"
-msgstr ""
+msgstr "CETTE ANNÉE"
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "AVG RESPONSE RATE"
-msgstr "TAUX DE RÉPONSE"
+msgstr "Taux de Réponse Moyen"
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS  - "
+msgstr "U-REPORTERS PAR REGION"
 
-#, fuzzy
-#| msgid "POLL RESULTS"
 msgid "FILTER RESULTS"
-msgstr "RÉSULTATS DU SONDAGE"
+msgstr "FILTRER LES RÉSULTATS"
 
 #, python-format
 msgid ""
@@ -1480,15 +1319,7 @@ msgid ""
 "          "
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid ""
 "\n"
 "             %(counter)s result\n"
@@ -1498,12 +1329,7 @@ msgid_plural ""
 "              %(counter)s results\n"
 "            "
 msgstr[0] ""
-"\n"
-"\t\t%(counter)s résultat\n"
-"\t"
 msgstr[1] ""
-"\n"
-"         %(counter)s résultats        "
 
 #, python-format
 msgid ""
@@ -1513,7 +1339,7 @@ msgid ""
 msgstr ""
 
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 msgid "Enter Dashboard"
 msgstr ""
@@ -1525,40 +1351,22 @@ msgid ""
 "              "
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                  %(questions)s question polled on this topic\n"
-#| "                "
-#| msgid_plural ""
-#| "\n"
-#| "                  %(questions)s questions polled on this topic\n"
-#| "                "
+#, python-format
 msgid ""
 "\n"
 "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "                  "
 msgstr ""
-"\n"
-"%(questions)s question posée sur ce sujet\n"
-"                "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
+#, python-format
 msgid ""
 "\n"
 "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "      "
 msgstr ""
-"\n"
-"  <strong>Votre mot de passe a expiré.</strong> La réglementation du site implique que vous mettiez a jour votre mot de passe tous les %(expire_days)s jours, et que le mot de passe soit différent de celui utilisé %(window_days)s jours avant.\n"
-"  "
 
 msgid "+ New Story"
-msgstr ""
+msgstr "+ Nouveau Article"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
@@ -1729,15 +1537,11 @@ msgstr ""
 msgid "The organization this poll is part of"
 msgstr "L'organisation dont ce sondage fait partie"
 
-#, fuzzy
-#| msgid "The title for this story"
 msgid "The title for this response story"
-msgstr "Le titre de l'article"
+msgstr ""
 
-#, fuzzy
-#| msgid "The writer of the story"
 msgid "The writer of the response story"
-msgstr "L'auteur de l'article"
+msgstr ""
 
 msgid "The poll to associate to"
 msgstr "Le sondage à lui associer"
@@ -1790,20 +1594,14 @@ msgstr ""
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr ""
 
-#, fuzzy
-#| msgid "Configuration"
 msgid "Configure flow"
-msgstr "Configuration"
+msgstr ""
 
-#, fuzzy
-#| msgid "Your poll has been updated."
 msgid "Your poll has been configured, now adjust the poll date."
-msgstr "Votre sondage a été mis a jour."
+msgstr ""
 
-#, fuzzy
-#| msgid "Your poll has been updated."
 msgid "Your poll has been created, now configure its flow."
-msgstr "Votre sondage a été mis a jour."
+msgstr ""
 
 msgid "Poll Images"
 msgstr "Images du sondage"
@@ -1817,10 +1615,8 @@ msgstr "Image à afficher sur la page du sondage et des résumés (optionnel)"
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Image à afficher sur la page du sondage et des résumés (optionnel)"
 
-#, fuzzy
-#| msgid "Poll Questions"
 msgid "Poll Response"
-msgstr "Questions du sondage"
+msgstr ""
 
 msgid "Your poll has been updated."
 msgstr "Votre sondage a été mis a jour."
@@ -1863,7 +1659,9 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-msgid "The name of txbhe Contact Group that contains registered reporters"
+#, fuzzy
+#| msgid "The name of txbhe Contact Group that contains registered reporters"
+msgid "The name of the Contact Group that contains registered reporters"
 msgstr "Nom du groupe contenant les U-Reporters inscrits"
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
@@ -1899,10 +1697,8 @@ msgstr ""
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Le numéro court que les utilisateurs utiliseront pour contacter U-Report localement"
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgstr "Le numéro court que les utilisateurs utiliseront pour contacter U-Report localement"
+msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Le mot-clé utilisé pour inciter les visiteurs a s'inscrire sur U-Report"
@@ -1916,15 +1712,11 @@ msgstr ""
 msgid "The description of the photos section U-Report homepage"
 msgstr ""
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the opinions page"
-msgstr "La localité du répondeur"
+msgstr ""
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the stories page"
-msgstr "La localité du répondeur"
+msgstr ""
 
 msgid "The description of the engagement page"
 msgstr ""
@@ -1932,30 +1724,20 @@ msgstr ""
 msgid "The callout message on the footer engagement section"
 msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
 msgid "The primary color for styling for this organization, should be dark"
-msgstr "Couleur principale à utiliser pour cette organisation"
+msgstr ""
 
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
 msgid "The secondary color for styling for this organization, should be dark"
-msgstr "Couleur secondaire à utiliser pour cette organisation"
+msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
 msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "Couleur principale à utiliser pour cette organisation"
+msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
 msgid "The primary highlight color for styling for this organization, should be light"
-msgstr "Couleur principale à utiliser pour cette organisation"
+msgstr ""
 
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
 msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "Couleur secondaire à utiliser pour cette organisation"
+msgstr ""
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "Définir jusqu'à 6 couleurs pour le style des graphiques. Séparer les couleurs par une virgule."
@@ -1975,13 +1757,11 @@ msgstr "Couleur secondaire à utiliser pour cette organisation"
 msgid "The background color for the site"
 msgstr "La couleur de fond du site"
 
-#, fuzzy
-#| msgid "Up to 6 colors for styling charts, use comma between colors"
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "Définir jusqu'à 6 couleurs pour le style des graphiques. Séparer les couleurs par une virgule."
+msgstr ""
 
 msgid "The states to show on maps only"
-msgstr ""
+msgstr "Les états à afficher sur les cartes seulement"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "ID Google Analytics Tracking pour cette organisation"
@@ -1998,10 +1778,8 @@ msgstr ""
 msgid "The integer id to the Facebook app for this organization's chat app (optional)"
 msgstr ""
 
-#, fuzzy
-#| msgid "The short text used to direct visitors to join U-Report"
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr "Le mot-clé utilisé pour inciter les visiteurs a s'inscrire sur U-Report"
+msgstr ""
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr ""
@@ -2021,7 +1799,7 @@ msgstr "Le widget Twitter utilisé pour les recherches"
 msgid "The words to filter out from the results on public site"
 msgstr ""
 
-msgid "If there are jobs to be shown on the public site. (Separated by comma)"
+msgid "If there are jobs to be shown on the public site."
 msgstr ""
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
@@ -2042,137 +1820,41 @@ msgstr ""
 msgid "The font used for normal text"
 msgstr ""
 
-#, fuzzy
-#| msgid "Participation Level"
 msgid "Hide participation stats"
-msgstr "Niveau de participation"
+msgstr ""
 
-#, fuzzy
-#| msgid "The name of the sender of the message"
 msgid "The text to describe the sponsors of free messages"
-msgstr "Le nom de l'expéditeur de ce message"
+msgstr ""
 
 msgid "The font used for small text"
-msgstr ""
+msgstr "La police utilisée pour les petits textes"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr ""
 
 msgid "90 Days"
-msgstr ""
+msgstr "90 jours"
 
 msgid "6 Months"
-msgstr ""
+msgstr "6 mois"
 
 msgid "12 Months"
-msgstr ""
+msgstr "12 mois"
 
 msgid "Age"
-msgstr ""
+msgstr "Age"
 
-#, fuzzy
-#| msgid "Population"
 msgid "Location"
-msgstr "Population"
+msgstr "Lieu"
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Opinion Responses"
-msgstr "Réponses"
+msgstr "Reponses d'Opinion"
 
 msgid "Sign Up Rate"
-msgstr ""
+msgstr "Taux d'Enregistrement"
 
 msgid "Active Users"
-msgstr ""
+msgstr "Utilisateurs actives"
 
 msgid "Something to trigger localizations"
 msgstr "Quelque chose pour déclencher les localisations"
-
-#~ msgid "Featured Poll Responses"
-#~ msgstr "Réponses sélectionnées du sondage"
-
-#, python-format
-#~ msgid "Response %d Reporter"
-#~ msgstr "Réponses %d U-Reporters"
-
-#~ msgid "The name or alias of the responder."
-#~ msgstr "Le nom ou pseudo du répondeur"
-
-#, python-format
-#~ msgid "Response %d Location"
-#~ msgstr "Réponses %d localités"
-
-#~ msgid "The location of the responder."
-#~ msgstr "La localité du répondeur"
-
-#, python-format
-#~ msgid "Response %d Message"
-#~ msgstr "réponses %d messages"
-
-#~ msgid "The text of the featured response."
-#~ msgstr "Le texte de la réponse sélectionnée"
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "                    %(responded)s responded out of %(polled)s polled\n"
-#~| "                  "
-#~ msgid ""
-#~ "\n"
-#~ "                  %(responded)s responded out of %(polled)s polled\n"
-#~ "                "
-#~ msgstr ""
-#~ "\n"
-#~ "                    %(responded)s répondants sur %(polled)s interrogés\n"
-#~ "                  "
-
-#, fuzzy
-#~| msgid "U-REPORTERS IN"
-#~ msgid "TOTAL U-REPORTERS IN"
-#~ msgstr "U-REPORTERS  - "
-
-#, fuzzy
-#~| msgid "Join & Engage"
-#~ msgid "Engage"
-#~ msgstr "Nous Rejoindre"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                  %(questions)s question polled on this topic\n"
-#~| "                "
-#~| msgid_plural ""
-#~| "\n"
-#~| "                  %(questions)s questions polled on this topic\n"
-#~| "                "
-#~ msgid ""
-#~ "\n"
-#~ "          %(questions)s question\n"
-#~ "        "
-#~ msgid_plural ""
-#~ "\n"
-#~ "          %(questions)s questions\n"
-#~ "        "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(questions)s question posée sur ce sujet\n"
-#~ "                "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(questions)s questions posées sur ce sujet\n"
-#~ "                "
-
-#, fuzzy
-#~| msgid "FILTERED BY"
-#~ msgid "FILTER BY:"
-#~ msgstr "FILTRÉS PAR"
-
-#~ msgid "The API token for the RapidPro account this dashboard is tied to"
-#~ msgstr "Le token API du compte RapidPro lié"
-
-#~ msgid "Not Set"
-#~ msgstr "Non-défini"
-
-#~ msgid "National"
-#~ msgstr "National"

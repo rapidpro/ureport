@@ -3,18 +3,49 @@
 - load smartmin i18n thumbnail ureport compress
 
 -block styles
-    %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
-    - if is_rtl_org
-      - compress css
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css")
-        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+  %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
+  - if is_rtl_org
+    - compress css
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css")
+      %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+  -else
+    -compress css
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css")
+      %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+  :css
+    table.list-table {
+      font-size: 0.85rem;
+    }
 
-    -else
-      -compress css
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
-        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css")
-        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+    .row1 a, .row2 a {
+      display: block;
+      color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
+      border-left: 5px solid {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
+      padding-left: 5px;
+    }
+
+    .row1 a:hover, .row2 a:hover {
+      background-color: #E6E7E8;
+      color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
+    }
+
+    .row1.inactive a, .row2.inactive a, {
+      border-left: 5px solid #bbb;
+      padding-left: 5px;
+    }
+
+    .row1.inactive a, .row2.inactive a, .row1.inactive td, .row2.inactive td {
+      color: #ccc;
+    }
+
+    .row1.inactive a:hover, .row2.inactive a:hover {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: normal;
+
+    }
 
 -block body-content
   %section.section.is-paddingless.is-marginless
