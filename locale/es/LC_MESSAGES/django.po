@@ -6,15 +6,16 @@
 # Translators:
 # Nyaruka <info@textit.in>, 2019
 # deimidis <guillermo.movia@gmail.com>, 2019
+# Ilhasoft <contato@ilhasoft.com.br>, 2019
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-07 20:03+0000\n"
+"POT-Creation-Date: 2019-10-08 15:25+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: deimidis <guillermo.movia@gmail.com>, 2019\n"
+"Last-Translator: Ilhasoft <contato@ilhasoft.com.br>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -790,7 +791,7 @@ msgid "SELECT YOUR COUNTRY"
 msgstr "ELIGE TU PAÍS"
 
 msgid "Join Now"
-msgstr "Únete ahora"
+msgstr "Unite ahora"
 
 msgid "READ MORE"
 msgstr "LEER MÁS"
@@ -1287,7 +1288,7 @@ msgid "Text"
 msgstr "Texto"
 
 msgid "SEARCH"
-msgstr ""
+msgstr "BUSCAR"
 
 msgid "No results found"
 msgstr "No se encontraron resultados"
@@ -1689,10 +1690,8 @@ msgstr "Fue programada una actualización para la encuesta #%(poll_id)d en la or
 msgid "%s"
 msgstr "%s"
 
-#, fuzzy
-#| msgid "The name of txbhe Contact Group that contains registered reporters"
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr "El nombre del Grupo de Contactos txbhe que contiene periodistas registrados"
+msgstr "El nombre del Grupo de Contacto que contiene reporters registrados"
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr "El nivel de Campo de Contactos que contiene la fecha de nacimiento de los periodistas"
@@ -1829,10 +1828,8 @@ msgstr "El widget de Twitter usado para la búsqueda"
 msgid "The words to filter out from the results on public site"
 msgstr "Las palabras para filtrar de los resultados en el sitio público"
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site. (Separated by comma)"
 msgid "If there are jobs to be shown on the public site."
-msgstr "Si hay trabajos que mostrar en el sitio público. (Separadas por comas)"
+msgstr "Si hay trabajos para mostrar en el sitio público."
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Si la org es para información mundial. P.ej: si se muestra un mapa del mundo en lugar de un mapa de país."
@@ -1890,39 +1887,3 @@ msgstr "Usuarios activos"
 
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
-
-#~ msgid "Dashboard"
-#~ msgstr "Tablero"
-
-#~ msgid "Analytics"
-#~ msgstr "Estadísticas"
-
-#~ msgid "STATE"
-#~ msgstr "ESTADO"
-
-#~ msgid "SIGN IN"
-#~ msgstr "INGRESAR"
-
-#~ msgid "Featured Poll Responses"
-#~ msgstr "Respuestas de la encuesta destacada"
-
-#, python-format
-#~ msgid "Response %d Reporter"
-#~ msgstr "%d Reporter de la respuesta"
-
-#~ msgid "The name or alias of the responder."
-#~ msgstr "El nombre o sobrenombre del encuestado"
-
-#, python-format
-#~ msgid "Response %d Location"
-#~ msgstr "%d Ubicación de la respuesta"
-
-#~ msgid "The location of the responder."
-#~ msgstr "La ubicación del encuestado."
-
-#, python-format
-#~ msgid "Response %d Message"
-#~ msgstr "%d mensaje de la respuesta"
-
-#~ msgid "The text of the featured response."
-#~ msgstr "El texto de la respuesta exhibida."
