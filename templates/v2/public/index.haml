@@ -12,7 +12,7 @@
           .text-l.mb-10
             - trans "LATEST OPINION"
 
-          .font-bold.mt-2.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% else %}text-3xl leading-tight{% endif %}")
+          .font-bold.mt-2.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl leading-tight{% else %}text-2xl leading-tight{% endif %}")
             {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark"  %}
             {{ latest_poll.title }}
 
@@ -52,11 +52,11 @@
               - trans "COUNTRIES WORLDWIDE"
 
       .my-16.p-4(class="md:ml-4 md:w-1/2 md:my-0 md:p-0")
-        .flex
-          .block.w-12.font-bold
+        .flex-col
+          .block.w-full.font-bold.text-center
             - trans "AGES"
 
-          .flex-1.inline-block(style="min-width:220px;max-width:750px")
+          .mt-4.block.w-full(style="min-width:260px;")
             .relative.w-full.h-40(class="md:h-64")
               {{ age_stats|json_script:"age_stats" }}
               #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="#AAA" data-label-position="top" data-stats="age_stats")
@@ -95,10 +95,10 @@
           .block.w-full.h-full
             .flex.justify-center.social-media-block-tabs.mb-8.mt-4
               -if org|config:"facebook_page_url"
-                %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab.mr-2(class='hover:text-white hover:bg-black {% if org|config:"twitter_handle" %}open{% endif %}')
+                %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab.mr-2(class='hover:text-white hover:bg-black {% if org|config:"twitter_handle" %}open{% endif %}' target="_blank")
                   %i.fa.fa-facebook
               -if org|config:"twitter_handle"
-                %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab(class="hover:text-white hover:bg-black")
+                %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab(class="hover:text-white hover:bg-black" target="_blank")
                   %i.fa.fa-twitter
 
             .flex.justify-center.relative.social-media-blocks.mb-4(style="min-height:400px; max-height:450px")
@@ -111,9 +111,9 @@
                 .absolute.social-media-block.hover-parent
                   {% edit_content 'orgs.org_edit' "" "#id_common.twitter_handle" "-m-8" "dark" %}
                   .mb-6.flex.justify-center
-                    %a.twitter-follow-button{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', data-show-count:"true", data-lang:"en"}
+                    %a.twitter-follow-button(href='https://twitter.com/{{ org|config:"twitter_handle" }}' data-show-count="true" data-lang="en" target="_blank")
 
-                  %a.twitter-timeline{ href:'https://twitter.com/{{ org|config:"twitter_handle" }}', width:"400px", height:"500px", data-chrome:"noheader nofooter", data-link-color:"#4aaad4" }
+                  %a.twitter-timeline(href='https://twitter.com/{{ org|config:"twitter_handle" }}' width="400px" height="500px" data-chrome="noheader nofooter" data-link-color="#4aaad4" target="_blank")
 
   - if stories
     // featured-story-full
