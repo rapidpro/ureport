@@ -1,3 +1,9 @@
+v1.1.80
+----------
+ * Rebuild locales
+ * Merge pull request #498 from rapidpro/translations_django-po--master_fr
+ * Translate /locale/en/LC_MESSAGES/django.po in fr
+
 v1.1.79
 ----------
  * Rebuild locales
