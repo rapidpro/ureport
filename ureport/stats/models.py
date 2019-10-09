@@ -415,7 +415,7 @@ class ContactActivity(models.Model):
 
         activity_data = defaultdict(int)
         for elt in activities_qs:
-            key = dates_map.get(str(elt["date"].date()))
+            key = dates_map.get(str(elt["date"]))
             activity_data[key] += elt["id__count"]
 
         data = dict()
