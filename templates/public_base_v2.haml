@@ -35,11 +35,11 @@
     {% compress css %}
     %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
     {% endcompress %}
-    {% compress css %}
+    :css
       .bg-dark1 {
         background: {{ org|config:'dark1_color'|default:org|config:'primary_color'|default:'#439932' }}; 
       }
-  
+
       .border-dark1 {
         border-color: {{ org|config:'dark1_color'|default:org|config:'primary_color'|default:'#439932' }};
       }
@@ -47,11 +47,11 @@
       .hover\:border-dark1:hover {
           border-color: {{ org|config:'dark1_color'|default:org|config:'primary_color'|default:'#439932' }};
       }
-  
+
       .bg-dark2 {
         background: {{ org|config:'dark2_color'|default:org|config:'secondary_color'|default:'#1751af' }};
       }
-  
+
       .border-dark2 {
         border-color: {{ org|config:'dark2_color'|default:org|config:'secondary_color'|default:'#1751af' }};
       }
@@ -59,11 +59,11 @@
       .hover\:border-dark2:hover {
           border-color: {{ org|config:'dark2_color'|default:org|config:'secondary_color'|default:'#1751af' }};
       }
-  
+
       .bg-dark3 {
         background: {{ org|config:'dark3_color'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
       }
-  
+
       .border-dark3 {
         border-color: {{ org|config:'dark3_color'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
       }
@@ -71,19 +71,19 @@
       .hover\:border-dark3:hover {
         border-color: {{ org|config:'dark3_color'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
       }
-  
+
       .border-light1 {
         border-color: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
-  
+
       .bg-light1 {
         background: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
-  
+
       .text-light1 {
         color: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
-  
+
       .bg-light2 {
         background: {{ org|config:'light2_color'|default:'#5eb3e0' }};
       }
@@ -91,8 +91,7 @@
       .ligth-black {
         background: lighten(#000000, 10%);
       }
-    {% endcompress %}
-    :css
+
       .slideout-menu {
         position: fixed;
         top: 0;
