@@ -155,7 +155,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
 # compress arguments
 COMPRESS_CSS_HASHING_METHOD = 'content'
 COMPRESS_OFFLINE = True
-COMPRESS_OFFLINE_CONTEXT = 'ureport.utils.offline_context'
 
 
 REDIS_HOST = 'redis-internal.ureport.in'
