@@ -1,3 +1,7 @@
+v1.1.82
+----------
+ * Fix links
+
 v1.1.81
 ----------
  * Merge pull request #499 from rapidpro/stories-og-tags
