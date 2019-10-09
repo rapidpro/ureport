@@ -37,39 +37,76 @@
     {% endcompress %}
     :css
       .bg-dark1 {
-        background: {{ org|config:'dark1_color'|default:org|config:'primary_color'|default:'#439932' }}; 
+        {% if org|config:'dark1_color' %}
+        background: {{ org|config:'dark1_color' }};
+        {% else %}
+        background: {{ org|config:'primary_color'|default:'#439932' }};
+        {% endif %}
+
       }
 
       .border-dark1 {
-        border-color: {{ org|config:'dark1_color'|default:org|config:'primary_color'|default:'#439932' }};
+        {% if org|config:'dark1_color' %}
+        border-color: {{ org|config:'dark1_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#439932' }};
+        {% endif %}
       }
 
       .hover\:border-dark1:hover {
-          border-color: {{ org|config:'dark1_color'|default:org|config:'primary_color'|default:'#439932' }};
+        {% if org|config:'dark1_color' %}
+        border-color: {{ org|config:'dark1_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#439932' }};
+        {% endif %}
       }
 
       .bg-dark2 {
-        background: {{ org|config:'dark2_color'|default:org|config:'secondary_color'|default:'#1751af' }};
+        {% if org|config:'dark2_color' %}
+        background: {{ org|config:'dark2_color' }};
+        {% else %}
+        background: {{ org|config:'primary_color'|default:'#1751af' }};
+        {% endif %}
       }
 
       .border-dark2 {
-        border-color: {{ org|config:'dark2_color'|default:org|config:'secondary_color'|default:'#1751af' }};
+        {% if org|config:'dark2_color' %}
+        border-color: {{ org|config:'dark2_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#1751af' }};
+        {% endif %}
       }
 
       .hover\:border-dark2:hover {
-          border-color: {{ org|config:'dark2_color'|default:org|config:'secondary_color'|default:'#1751af' }};
+        {% if org|config:'dark2_color' %}
+        border-color: {{ org|config:'dark2_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#1751af' }};
+        {% endif %}
       }
 
       .bg-dark3 {
-        background: {{ org|config:'dark3_color'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
+        {% if org|config:'dark3_color' %}
+        background: {{ org|config:'dark3_color' }};
+        {% else %}
+        background: {{ org|config:'primary_color'|default:'#5eb3e0' }};
+        {% endif %}
       }
 
       .border-dark3 {
-        border-color: {{ org|config:'dark3_color'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
+        {% if org|config:'dark3_color' %}
+        border-color: {{ org|config:'dark3_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#5eb3e0' }};
+        {% endif %}
       }
 
       .hover\:border-dark3:hover {
-        border-color: {{ org|config:'dark3_color'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
+        {% if org|config:'dark3_color' %}
+        border-color: {{ org|config:'dark3_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#5eb3e0' }};
+        {% endif %}
       }
 
       .border-light1 {
