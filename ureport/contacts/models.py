@@ -190,7 +190,6 @@ class Contact(models.Model):
 
         if self.registered_on:
             registered_on = self.registered_on.date()
-            registered_month = self.registered_on.replace(day=1, hour=0, minute=0, second=0, microsecond=0).date()
 
         generated_counters["total-reporters"] = 1
         if gender:
@@ -205,11 +204,11 @@ class Contact(models.Model):
         if registered_on:
             generated_counters[f"registered_on:{str(registered_on)}"] = 1
             if gender:
-                generated_counters[f"registered_gender:{str(registered_month)}:{gender}"] = 1
+                generated_counters[f"registered_gender:{str(registered_on)}:{gender}"] = 1
             if born:
-                generated_counters[f"registered_born:{str(registered_month)}:{born}"] = 1
+                generated_counters[f"registered_born:{str(registered_on)}:{born}"] = 1
             if state:
-                generated_counters[f"registered_state:{str(registered_month)}:{state}"] = 1
+                generated_counters[f"registered_state:{str(registered_on)}:{state}"] = 1
 
         if state:
             generated_counters[f"state:{state}"] = 1

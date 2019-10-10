@@ -142,9 +142,9 @@ class ContactTest(UreportTest):
         expected["occupation:student"] = 1
         expected["born:1990"] = 1
         expected["registered_on:2014-01-02"] = 1
-        expected["registered_gender:2014-01-01:m"] = 1
-        expected["registered_born:2014-01-01:1990"] = 1
-        expected["registered_state:2014-01-01:R-LAGOS"] = 1
+        expected["registered_gender:2014-01-02:m"] = 1
+        expected["registered_born:2014-01-02:1990"] = 1
+        expected["registered_state:2014-01-02:R-LAGOS"] = 1
         expected["state:R-LAGOS"] = 1
         expected["district:R-OYO"] = 1
 
@@ -172,10 +172,10 @@ class ContactTest(UreportTest):
         expected["born:1990"] = 1
         expected["born:1980"] = 1
         expected["registered_on:2014-01-02"] = 2
-        expected["registered_gender:2014-01-01:m"] = 2
-        expected["registered_born:2014-01-01:1990"] = 1
-        expected["registered_born:2014-01-01:1980"] = 1
-        expected["registered_state:2014-01-01:R-LAGOS"] = 2
+        expected["registered_gender:2014-01-02:m"] = 2
+        expected["registered_born:2014-01-02:1990"] = 1
+        expected["registered_born:2014-01-02:1980"] = 1
+        expected["registered_state:2014-01-02:R-LAGOS"] = 2
         expected["state:R-LAGOS"] = 2
         expected["district:R-OYO"] = 2
 
@@ -219,9 +219,9 @@ class ContactTest(UreportTest):
         expected["occupation:student"] = 1
         expected["born:1990"] = 1
         expected["registered_on:2014-01-02"] = 1
-        expected["registered_gender:2014-01-01:m"] = 1
-        expected["registered_born:2014-01-01:1990"] = 1
-        expected["registered_state:2014-01-01:R-LAGOS"] = 1
+        expected["registered_gender:2014-01-02:m"] = 1
+        expected["registered_born:2014-01-02:1990"] = 1
+        expected["registered_state:2014-01-02:R-LAGOS"] = 1
         expected["state:R-LAGOS"] = 1
         expected["district:R-OYO"] = 1
 
@@ -246,10 +246,10 @@ class ContactTest(UreportTest):
         expected["born:1990"] = 1
         expected["born:1980"] = 1
         expected["registered_on:2014-01-02"] = 2
-        expected["registered_gender:2014-01-01:m"] = 2
-        expected["registered_born:2014-01-01:1990"] = 1
-        expected["registered_born:2014-01-01:1980"] = 1
-        expected["registered_state:2014-01-01:R-LAGOS"] = 2
+        expected["registered_gender:2014-01-02:m"] = 2
+        expected["registered_born:2014-01-02:1990"] = 1
+        expected["registered_born:2014-01-02:1980"] = 1
+        expected["registered_state:2014-01-02:R-LAGOS"] = 2
         expected["state:R-LAGOS"] = 2
         expected["district:R-OYO"] = 2
 
