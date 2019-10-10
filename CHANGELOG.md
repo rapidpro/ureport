@@ -1,3 +1,7 @@
+v1.1.93
+----------
+ * Use HTML for hightcharts labels
+
 v1.1.92
 ----------
  * Merge pull request #501 from rapidpro/calculate-results-poll-stats-2
