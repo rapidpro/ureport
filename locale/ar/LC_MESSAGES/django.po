@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-08 16:33+0000\n"
+"POT-Creation-Date: 2019-10-10 00:27+0000\n"
 "PO-Revision-Date: 2017-02-22 13:15+0000\n"
 "Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
@@ -429,306 +429,6 @@ msgstr "الصورة التي تريد إدراجها في صفحة عرض ال�
 msgid "Image to display on story page and in previews (optional)"
 msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
 
-msgid "Remove Item?"
-msgstr "حذف "
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-"\n"
-"هل أنت متأكد من الحذف <b>%(object)s</b>?"
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "بحال الحذف، سوف تختفي للأبد، لا يمكن إعادة هذه العملية للخلف"
-
-msgid "Cancel"
-msgstr "إلغاء"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-"\n"
-"         %(counter)s نتيجة\n"
-"        "
-msgstr[1] ""
-"\n"
-"\t\t%(counter)s نتيجة\n"
-"\t"
-msgstr[2] ""
-"\n"
-"         %(counter)s نتيجة\n"
-"        "
-msgstr[3] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
-msgstr[4] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
-msgstr[5] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-"\n"
-"نتائج%(start)s-%(end)s %(count)s"
-
-msgid "Previous"
-msgstr "السابق"
-
-msgid "Next"
-msgstr "التالي"
-
-msgid "edit"
-msgstr "تعديل"
-
-msgid "Sign in"
-msgstr "تسجيل الدخول "
-
-msgid "Login"
-msgstr "تسجيل الدخول "
-
-msgid "Forgot Password?"
-msgstr "هل نسيت كلمة السر؟ "
-
-msgid "Token Expired"
-msgstr "رمز منتهي الصلاحية"
-
-msgid "Login Failure"
-msgstr "تسجيل دخول خاطئ"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-"\n"
-"عذرا، لا يمكنك الدخول في الوقت الحالي لأننا تلقينا اشعار خطأ %(failed_login_limit)s محاولة دخول خاطئة."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-"\n"
-"يرجى الانتظار لمدة %(lockout_timeout)s قبل إعادة محاولة الدخول مجدداً"
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "بشكل بديل، يمكنك تعبئة النموذج في الأسفل لتحصل على إعادة ضبط كلمة مرورك عن طريق البريد الالكتروني"
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "يرجى التواصل مع مدير الموقع لإعادة تعيين كلمة السر"
-
-msgid "Email Address"
-msgstr "البريد الالكتروني"
-
-msgid "Recover"
-msgstr "استعادة"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "الرجاء إدخال بريدك الالكتروني الذي قمت بالتسجيل عن طريقه أول مرة وسوف نساعدك لاستعادة كلمة المرور الخاصة بك"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-"\n"
-"<strong> لقد انتهت فترة صلاحية كلمة المرور الخاصة بك </strong> تنص سياسة الموقع على وجوب اختيار كلمة مرور جديدة كل  %(expire_days)s أيام، وبأن كلمة المرور الجديدو يجب ألا تكون قد استخدمت في السابق %(window_days)s \n"
-"."
-
-msgid "New Password"
-msgstr "كلمة المرور الجديدة"
-
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "كلمة المرور يجب أن تحوي 8 أحرف على الأقل، مع حرف كبير، حرف صغير، ورقم."
-
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "لقد قمت باستخدام كلمة المرور هذه خلال العام المنصرم، يرجى اختيار كلمة مرور جديدة"
-
-msgid "Password"
-msgstr "كلمة المرور"
-
-msgid "Confirm Password"
-msgstr "تأكيد كلمة المرور"
-
-msgid "Please enter your password to save changes."
-msgstr "أدخل كلمة المرور لحفظ التغييرات"
-
-msgid "Confirm the new password by filling the this field"
-msgstr "تأكيد كلمة المرور الجديدة ضمن هذا الحقل"
-
-msgid "New password doesn't match with its confirmation"
-msgstr "كلمة المرور لا تتطابق مع التأكيد الخاص بها"
-
-msgid "Your Email"
-msgstr "بريدك الالكتروني"
-
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "استعادة كلمة المرور عن طريق البريد الالكتروني غير مدعمة، يرجى التواصل مع مسؤول الموقع لضبط كلمة المرور بشكل يدوي"
-
-msgid "Current Password"
-msgstr "كلمة المرور الحالية"
-
-msgid "Your current password"
-msgstr "كلمة مرورك الحالية"
-
-msgid "Your new password."
-msgstr "كلمة مرورك الجديدة"
-
-msgid "Confirm new Password"
-msgstr "تأكيد كلمة المرور الجديدة"
-
-msgid "Confirm your new password."
-msgstr "تأكيد كلمة مرورك الجديدة"
-
-msgid "Please enter your password to save changes"
-msgstr "أدخل كلمة مرورك لحفظ التغييرات"
-
-msgid "Confirm your new password by entering it here"
-msgstr "يرجى إدخال كلمة مرورك الجديدة هنا لتأكيدها"
-
-msgid "Mismatch between your new password and confirmation, try again"
-msgstr "عدم توافق بين كلمة المرور الجديدة وكلمة التأكيد، يرجى المحاولة مرة أخرى"
-
-msgid "New user created successfully."
-msgstr "تم خلق مستخدم جديد بنجاح"
-
-msgid "Groups"
-msgstr "مجموعات"
-
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "يحصل المستخدمون فقط على الصلاحيات المسموحة لمجموعتهم"
-
-msgid "Set the user's initial password here."
-msgstr "تعيين كلمة المرور المبدئية هنا"
-
-msgid "Last Login"
-msgstr "الدخول الأخير"
-
-msgid "Is Active"
-msgstr "مفعل الآن"
-
-msgid "Whether this user is allowed to log into the site"
-msgstr "إذا كان هذا المستخدم مسموح له بالدخول للموقع"
-
-msgid "Users will only get those permissions that are allowed for their group"
-msgstr "يحصل المستخدمون فقط على الصلاحيات المسموحة لمجموعتهم"
-
-msgid "You can reset the user's password by entering a new password here"
-msgstr "تستطيع إعادة ضبط كلمة مرورك بإدخال كلمة المرور الجديدة هنا"
-
-msgid "Username"
-msgstr "اسم المستخدم"
-
-msgid "Your password"
-msgstr "كلمة مرورك"
-
-msgid "If you want to set a new password, enter it here"
-msgstr "إذا أردت تعيين كلمة مرور جديدة، أدخلها هنا"
-
-msgid "Confirm New Password"
-msgstr "تأكيد كلمة المرور"
-
-msgid "Confirm your new password"
-msgstr "تأكيد كلمة مرورك"
-
-msgid "Edit your profile"
-msgstr "تعديل ملفك الشخصي"
-
-msgid "Password Recovery"
-msgstr "استعادة كلمة المرور"
-
-msgid "An Email has been sent to your account with further instructions."
-msgstr "تم إرسال بريد الكتروني إلى حسابك مع توجيهات إضافية"
-
-msgid "Password Recovery Request"
-msgstr "طلب استعادة كلمة المرور"
-
-msgid "Pick a new password"
-msgstr "اختيار كلمة مرور جديدة"
-
-msgid "Your password has successfully been updated, thank you."
-msgstr "تم تحديث كلمة مرورك بنجاح، شكرا"
-
-#, python-format
-msgid "You are now logged in as %s"
-msgstr "لقد قمت بتسجيل الدخول الآن باسم %s"
-
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "تم تحديث كلمة المرور بنجاح، تستطيع الآن الدخول باستخدام كلمة مرورك الجديدة"
-
-msgid "Reset your Password"
-msgstr "إعادة ضبط كلمة المرور"
-
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "الرابط منتهي الصلاحية لأسباب أمنية، الرجاء طلب رابط جديد عن طريق ادخال بريدك الالكتروني هنا"
-
-msgid "Submit"
-msgstr "إدخال"
-
-msgid "Form"
-msgstr "نموذج"
-
-msgid "Save Changes"
-msgstr "حفظ التغييرات"
-
-#, python-format
-msgid "Your new %s has been created."
-msgstr "تم خلق مستخدم جديد %s"
-
-#, python-format
-msgid "Import %s"
-msgstr "استيراد %s"
-
 msgid "Back to Website"
 msgstr ""
 
@@ -737,6 +437,9 @@ msgstr ""
 
 msgid "Logout"
 msgstr "تسجيل الخروج "
+
+msgid "Login"
+msgstr "تسجيل الدخول "
 
 msgid "Opinions"
 msgstr ""
@@ -874,6 +577,12 @@ msgstr ""
 "\n"
 "        <div>بعد إنشاء التطبيق المصغر، قم بنسخ هويته من عنوان الموقع كما هو موضح في</div>\n"
 "      "
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "Cancel"
+msgstr "إلغاء"
 
 msgid "Back"
 msgstr "العودة"
@@ -1311,6 +1020,79 @@ msgstr "المشاركين في يوريبورت U-REPORT"
 msgid "Top Region"
 msgstr ""
 
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search"
+msgid "March"
+msgstr "بحث "
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+#, fuzzy
+#| msgid "No"
+msgid "Nov"
+msgstr "لا"
+
+msgid "Dec"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -1344,6 +1126,12 @@ msgstr ""
 #| msgid "READ MORE"
 msgid "LEARN MORE"
 msgstr "إقرأ المزيد "
+
+msgid "Sign in"
+msgstr "تسجيل الدخول "
+
+msgid "Forgot Password?"
+msgstr "هل نسيت كلمة السر؟ "
 
 msgid "+ New "
 msgstr ""
@@ -1450,6 +1238,9 @@ msgstr "المشاركين في يو-ريبورت في"
 msgid "FILTER RESULTS"
 msgstr "نتائج الإستطلاع "
 
+msgid "Remove Item?"
+msgstr "حذف "
+
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1462,6 +1253,9 @@ msgid ""
 msgstr ""
 "\n"
 "هل أنت متأكد من الحذف <b>%(object)s</b>?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "بحال الحذف، سوف تختفي للأبد، لا يمكن إعادة هذه العملية للخلف"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1518,11 +1312,20 @@ msgstr ""
 "\n"
 "نتائج%(start)s-%(end)s %(count)s"
 
+msgid "Previous"
+msgstr "السابق"
+
+msgid "edit"
+msgstr "تعديل"
+
 msgid "Error"
 msgstr ""
 
 msgid "Enter Dashboard"
 msgstr ""
+
+msgid "Login Failure"
+msgstr "تسجيل دخول خاطئ"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1549,6 +1352,21 @@ msgid ""
 msgstr ""
 "\n"
 "يرجى الانتظار لمدة %(lockout_timeout)s قبل إعادة محاولة الدخول مجدداً"
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "بشكل بديل، يمكنك تعبئة النموذج في الأسفل لتحصل على إعادة ضبط كلمة مرورك عن طريق البريد الالكتروني"
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "يرجى التواصل مع مدير الموقع لإعادة تعيين كلمة السر"
+
+msgid "Email Address"
+msgstr "البريد الالكتروني"
+
+msgid "Recover"
+msgstr "استعادة"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "الرجاء إدخال بريدك الالكتروني الذي قمت بالتسجيل عن طريقه أول مرة وسوف نساعدك لاستعادة كلمة المرور الخاصة بك"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -2069,6 +1887,261 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "إذا كنت تريد إدراج بعض رموز النطاقات الخاصة على صفحات منظمتك، مثل custom analytics code snippets "
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"هل أنت متأكد من الحذف <b>%(object)s</b>?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"         %(counter)s نتيجة\n"
+"        "
+msgstr[1] ""
+"\n"
+"\t\t%(counter)s نتيجة\n"
+"\t"
+msgstr[2] ""
+"\n"
+"         %(counter)s نتيجة\n"
+"        "
+msgstr[3] ""
+"\n"
+"         %(counter)s نتائج\n"
+"        "
+msgstr[4] ""
+"\n"
+"         %(counter)s نتائج\n"
+"        "
+msgstr[5] ""
+"\n"
+"         %(counter)s نتائج\n"
+"        "
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"نتائج%(start)s-%(end)s %(count)s"
+
+msgid "Token Expired"
+msgstr "رمز منتهي الصلاحية"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"عذرا، لا يمكنك الدخول في الوقت الحالي لأننا تلقينا اشعار خطأ %(failed_login_limit)s محاولة دخول خاطئة."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"يرجى الانتظار لمدة %(lockout_timeout)s قبل إعادة محاولة الدخول مجدداً"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong> لقد انتهت فترة صلاحية كلمة المرور الخاصة بك </strong> تنص سياسة الموقع على وجوب اختيار كلمة مرور جديدة كل  %(expire_days)s أيام، وبأن كلمة المرور الجديدو يجب ألا تكون قد استخدمت في السابق %(window_days)s \n"
+"."
+
+msgid "New Password"
+msgstr "كلمة المرور الجديدة"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "كلمة المرور يجب أن تحوي 8 أحرف على الأقل، مع حرف كبير، حرف صغير، ورقم."
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "لقد قمت باستخدام كلمة المرور هذه خلال العام المنصرم، يرجى اختيار كلمة مرور جديدة"
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Confirm Password"
+msgstr "تأكيد كلمة المرور"
+
+msgid "Please enter your password to save changes."
+msgstr "أدخل كلمة المرور لحفظ التغييرات"
+
+msgid "Confirm the new password by filling the this field"
+msgstr "تأكيد كلمة المرور الجديدة ضمن هذا الحقل"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "كلمة المرور لا تتطابق مع التأكيد الخاص بها"
+
+msgid "Your Email"
+msgstr "بريدك الالكتروني"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "استعادة كلمة المرور عن طريق البريد الالكتروني غير مدعمة، يرجى التواصل مع مسؤول الموقع لضبط كلمة المرور بشكل يدوي"
+
+msgid "Current Password"
+msgstr "كلمة المرور الحالية"
+
+msgid "Your current password"
+msgstr "كلمة مرورك الحالية"
+
+msgid "Your new password."
+msgstr "كلمة مرورك الجديدة"
+
+msgid "Confirm new Password"
+msgstr "تأكيد كلمة المرور الجديدة"
+
+msgid "Confirm your new password."
+msgstr "تأكيد كلمة مرورك الجديدة"
+
+msgid "Please enter your password to save changes"
+msgstr "أدخل كلمة مرورك لحفظ التغييرات"
+
+msgid "Confirm your new password by entering it here"
+msgstr "يرجى إدخال كلمة مرورك الجديدة هنا لتأكيدها"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "عدم توافق بين كلمة المرور الجديدة وكلمة التأكيد، يرجى المحاولة مرة أخرى"
+
+msgid "New user created successfully."
+msgstr "تم خلق مستخدم جديد بنجاح"
+
+msgid "Groups"
+msgstr "مجموعات"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "يحصل المستخدمون فقط على الصلاحيات المسموحة لمجموعتهم"
+
+msgid "Set the user's initial password here."
+msgstr "تعيين كلمة المرور المبدئية هنا"
+
+msgid "Last Login"
+msgstr "الدخول الأخير"
+
+msgid "Is Active"
+msgstr "مفعل الآن"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "إذا كان هذا المستخدم مسموح له بالدخول للموقع"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "يحصل المستخدمون فقط على الصلاحيات المسموحة لمجموعتهم"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "تستطيع إعادة ضبط كلمة مرورك بإدخال كلمة المرور الجديدة هنا"
+
+msgid "Username"
+msgstr "اسم المستخدم"
+
+msgid "Your password"
+msgstr "كلمة مرورك"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "إذا أردت تعيين كلمة مرور جديدة، أدخلها هنا"
+
+msgid "Confirm New Password"
+msgstr "تأكيد كلمة المرور"
+
+msgid "Confirm your new password"
+msgstr "تأكيد كلمة مرورك"
+
+msgid "Edit your profile"
+msgstr "تعديل ملفك الشخصي"
+
+msgid "Password Recovery"
+msgstr "استعادة كلمة المرور"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "تم إرسال بريد الكتروني إلى حسابك مع توجيهات إضافية"
+
+msgid "Password Recovery Request"
+msgstr "طلب استعادة كلمة المرور"
+
+msgid "Pick a new password"
+msgstr "اختيار كلمة مرور جديدة"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "تم تحديث كلمة مرورك بنجاح، شكرا"
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "لقد قمت بتسجيل الدخول الآن باسم %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "تم تحديث كلمة المرور بنجاح، تستطيع الآن الدخول باستخدام كلمة مرورك الجديدة"
+
+msgid "Reset your Password"
+msgstr "إعادة ضبط كلمة المرور"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "الرابط منتهي الصلاحية لأسباب أمنية، الرجاء طلب رابط جديد عن طريق ادخال بريدك الالكتروني هنا"
+
+msgid "Submit"
+msgstr "إدخال"
+
+msgid "Form"
+msgstr "نموذج"
+
+msgid "Save Changes"
+msgstr "حفظ التغييرات"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "تم خلق مستخدم جديد %s"
+
+#, python-format
+msgid "Import %s"
+msgstr "استيراد %s"
 
 msgid "90 Days"
 msgstr ""

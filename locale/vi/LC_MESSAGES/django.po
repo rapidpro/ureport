@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-08 16:33+0000\n"
+"POT-Creation-Date: 2019-10-10 00:27+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -426,284 +426,6 @@ msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước (tùy chọn)"
 
-msgid "Remove Item?"
-msgstr "Xóa Mục?"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-"\n"
-"Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Không có cách nào để hoàn tác thao tác này."
-
-msgid "Cancel"
-msgstr "Đóng"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-"\n"
-"%(counter)s kết quả"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-"\n"
-"\t Kết quả %(start)s-%(end)s trong số %(count)s"
-
-msgid "Previous"
-msgstr "Trước"
-
-msgid "Next"
-msgstr "Sau"
-
-msgid "edit"
-msgstr "chỉnh sửa"
-
-msgid "Sign in"
-msgstr "Đăng ký"
-
-msgid "Login"
-msgstr "Đăng nhập"
-
-msgid "Forgot Password?"
-msgstr "Quên mật khẩu?"
-
-msgid "Token Expired"
-msgstr "Mã hết hạn"
-
-msgid "Login Failure"
-msgstr "Đăng nhập thất bại"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-"\n"
-"Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-"\n"
-"Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "Ngoài ra, bạn có thể điền vào mẫu dưới đây để đặt lại mật khẩu của bạn qua e-mail."
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "Vui lòng liên hệ với quản trị viên trang web để đặt lại mật khẩu của bạn."
-
-msgid "Email Address"
-msgstr "Địa chỉ email"
-
-msgid "Recover"
-msgstr "Khôi phục"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Vui lòng nhập địa chỉ email bạn đã sử dụng để đăng ký và chúng tôi sẽ giúp bạn khôi phục lại mật khẩu."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-"\n"
-"<strong>Mật khẩu của bạn đã hết hạn.</strong>Chính sách của trang web yêu cầu bạn phải chọn một mật khẩu mới cứ %(expire_days)s ngày một lần và mật khẩu đó phải không được sử dụng trong %(window_days)s ngày trước đó."
-
-msgid "New Password"
-msgstr "Mật khẩu mới"
-
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Mật khẩu phải có ít nhất 8 ký tự, gồm một in hoa, một in thường và một con số"
-
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "Bạn đã sử dụng mật khẩu này trước đây, vui lòng sử dụng một mật khẩu mới."
-
-msgid "Password"
-msgstr "Mật khẩu"
-
-msgid "Confirm Password"
-msgstr "Xác nhận mật khẩu"
-
-msgid "Please enter your password to save changes."
-msgstr "Vui lòng nhập mật khẩu để lưu thay đổi."
-
-msgid "Confirm the new password by filling the this field"
-msgstr "Xác nhận mật khẩu mới của bạn bằng cách điền vào đây"
-
-msgid "New password doesn't match with its confirmation"
-msgstr "Mật khẩu mới không khớp với xác nhận của nó"
-
-msgid "Your Email"
-msgstr "Email của bạn"
-
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "Khôi phục e-mail không được hỗ trợ, vui lòng liên hệ với quản trị viên trang web để đặt lại mật khẩu theo cách thủ công."
-
-msgid "Current Password"
-msgstr "Mật khẩu hiện tại"
-
-msgid "Your current password"
-msgstr "Mật khẩu hiện tại của bạn"
-
-msgid "Your new password."
-msgstr "Mật khẩu mới của bạn."
-
-msgid "Confirm new Password"
-msgstr "Xác nhận mật khẩu mới"
-
-msgid "Confirm your new password."
-msgstr "Xác nhận mật khẩu mới của bạn."
-
-msgid "Please enter your password to save changes"
-msgstr "Vui lòng nhập mật khẩu để lưu thay đổi"
-
-msgid "Confirm your new password by entering it here"
-msgstr "Xác nhận mật khẩu mới của bạn bằng cách nhập vào đây"
-
-msgid "Mismatch between your new password and confirmation, try again"
-msgstr "Không khớp giữa mật khẩu và xác nhận mới của bạn, hãy thử lại"
-
-msgid "New user created successfully."
-msgstr "Người dùng mới được tạo thành công"
-
-msgid "Groups"
-msgstr "Nhóm"
-
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "Người dùng sẽ chỉ nhận được các quyền được phép cho nhóm của họ."
-
-msgid "Set the user's initial password here."
-msgstr "Đặt mật khẩu ban đầu của người dùng ở đây."
-
-msgid "Last Login"
-msgstr "Lân đăng nhập cuôi"
-
-msgid "Is Active"
-msgstr "Đang hoạt động"
-
-msgid "Whether this user is allowed to log into the site"
-msgstr "Người dung được đăng nhập vào trang hay không"
-
-msgid "Users will only get those permissions that are allowed for their group"
-msgstr "Người dùng sẽ chỉ nhận được các quyền được phép cho nhóm của họ"
-
-msgid "You can reset the user's password by entering a new password here"
-msgstr "Bạn có thể đặt lại mật khẩu đăng nhập bằng cách nhập mật khẩu mới vào đây"
-
-msgid "Username"
-msgstr "Tên đăng nhập"
-
-msgid "Your password"
-msgstr "Mật khẩu"
-
-msgid "If you want to set a new password, enter it here"
-msgstr "Nếu bạn muốn đặt mật khẩu mới, nhập nó tại đây"
-
-msgid "Confirm New Password"
-msgstr "Xác nhận mật khẩu mới"
-
-msgid "Confirm your new password"
-msgstr "Xác nhận mật khẩu mới của bạn"
-
-msgid "Edit your profile"
-msgstr "Chỉnh sửa hồ sơ của bạn"
-
-msgid "Password Recovery"
-msgstr "Khôi phục mật khẩu"
-
-msgid "An Email has been sent to your account with further instructions."
-msgstr "Email đã được gửi đến tài khoản của bạn kèm theo các hướng dẫn thêm."
-
-msgid "Password Recovery Request"
-msgstr "Yêu cầu khôi phục mật khẩu"
-
-msgid "Pick a new password"
-msgstr "Chọn một mật khẩu mới"
-
-msgid "Your password has successfully been updated, thank you."
-msgstr "Mật khẩu của bạn đã được cập nhật thành công, xin cảm ơn."
-
-#, python-format
-msgid "You are now logged in as %s"
-msgstr "Bạn đã đăng nhập với tư cách %s"
-
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "Cập nhật mật khẩu thành công. Bây giờ bạn có thể đăng nhập với mật khẩu mới"
-
-msgid "Reset your Password"
-msgstr "Cài lại mật khẩu"
-
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "Liên kết của bạn đã hết hạn vì lý do bảo mật. Vui lòng khởi tạo lại quy trình bằng cách nhập email của bạn ở đây."
-
-msgid "Submit"
-msgstr "Gửi đi"
-
-msgid "Form"
-msgstr "Mẫu đơn"
-
-msgid "Save Changes"
-msgstr "Lưu thay đổi"
-
-#, python-format
-msgid "Your new %s has been created."
-msgstr "%s mới của bạn đã được tạo."
-
-#, python-format
-msgid "Import %s"
-msgstr "Nhập %s"
-
 msgid "Back to Website"
 msgstr ""
 
@@ -712,6 +434,9 @@ msgstr ""
 
 msgid "Logout"
 msgstr "Đăng xuất"
+
+msgid "Login"
+msgstr "Đăng nhập"
 
 msgid "Opinions"
 msgstr ""
@@ -848,6 +573,12 @@ msgid ""
 msgstr ""
 "\n"
 "<div>Sau khi bạn tạo tiện ích, hãy sao chép id tiện ích từ url như được hiển thị trên</div>"
+
+msgid "Next"
+msgstr "Sau"
+
+msgid "Cancel"
+msgstr "Đóng"
 
 msgid "Back"
 msgstr "Quay lại"
@@ -1266,6 +997,79 @@ msgstr "U-Reporters"
 msgid "Top Region"
 msgstr ""
 
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search"
+msgid "March"
+msgstr "Tìm kiếm"
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+#, fuzzy
+#| msgid "No"
+msgid "Nov"
+msgstr "Không"
+
+msgid "Dec"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -1299,6 +1103,12 @@ msgstr ""
 #| msgid "READ MORE"
 msgid "LEARN MORE"
 msgstr "XEM THÊM"
+
+msgid "Sign in"
+msgstr "Đăng ký"
+
+msgid "Forgot Password?"
+msgstr "Quên mật khẩu?"
 
 msgid "+ New "
 msgstr ""
@@ -1405,6 +1215,9 @@ msgstr "U-REPORTERS TẠI"
 msgid "FILTER RESULTS"
 msgstr "KẾT QUẢ KHẢO SÁT"
 
+msgid "Remove Item?"
+msgstr "Xóa Mục?"
+
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1417,6 +1230,9 @@ msgid ""
 msgstr ""
 "\n"
 "Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Không có cách nào để hoàn tác thao tác này."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1452,11 +1268,20 @@ msgstr ""
 "\n"
 "\t Kết quả %(start)s-%(end)s trong số %(count)s"
 
+msgid "Previous"
+msgstr "Trước"
+
+msgid "edit"
+msgstr "chỉnh sửa"
+
 msgid "Error"
 msgstr ""
 
 msgid "Enter Dashboard"
 msgstr ""
+
+msgid "Login Failure"
+msgstr "Đăng nhập thất bại"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1483,6 +1308,21 @@ msgid ""
 msgstr ""
 "\n"
 "Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Ngoài ra, bạn có thể điền vào mẫu dưới đây để đặt lại mật khẩu của bạn qua e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Vui lòng liên hệ với quản trị viên trang web để đặt lại mật khẩu của bạn."
+
+msgid "Email Address"
+msgstr "Địa chỉ email"
+
+msgid "Recover"
+msgstr "Khôi phục"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Vui lòng nhập địa chỉ email bạn đã sử dụng để đăng ký và chúng tôi sẽ giúp bạn khôi phục lại mật khẩu."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -2002,6 +1842,239 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Nếu bạn cần bao gồm một số mã HTML tùy chỉnh trong trang tổ chức của mình, như đoạn mã phân tích tùy chỉnh"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Bạn có chắc chắn muốn xóa <b>%(object)s</b>?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"%(counter)s kết quả"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\t Kết quả %(start)s-%(end)s trong số %(count)s"
+
+msgid "Token Expired"
+msgstr "Mã hết hạn"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Xin lôi, bạn không thể dăng nhập bây giờ vì chúng tôi đã nhận %(failed_login_limit)s lần đăng nhập sai."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Vui lòng chờ %(lockout_timeout)s phút trước khi thử đăng nhập lại."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Mật khẩu của bạn đã hết hạn.</strong>Chính sách của trang web yêu cầu bạn phải chọn một mật khẩu mới cứ %(expire_days)s ngày một lần và mật khẩu đó phải không được sử dụng trong %(window_days)s ngày trước đó."
+
+msgid "New Password"
+msgstr "Mật khẩu mới"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Mật khẩu phải có ít nhất 8 ký tự, gồm một in hoa, một in thường và một con số"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Bạn đã sử dụng mật khẩu này trước đây, vui lòng sử dụng một mật khẩu mới."
+
+msgid "Password"
+msgstr "Mật khẩu"
+
+msgid "Confirm Password"
+msgstr "Xác nhận mật khẩu"
+
+msgid "Please enter your password to save changes."
+msgstr "Vui lòng nhập mật khẩu để lưu thay đổi."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Xác nhận mật khẩu mới của bạn bằng cách điền vào đây"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Mật khẩu mới không khớp với xác nhận của nó"
+
+msgid "Your Email"
+msgstr "Email của bạn"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "Khôi phục e-mail không được hỗ trợ, vui lòng liên hệ với quản trị viên trang web để đặt lại mật khẩu theo cách thủ công."
+
+msgid "Current Password"
+msgstr "Mật khẩu hiện tại"
+
+msgid "Your current password"
+msgstr "Mật khẩu hiện tại của bạn"
+
+msgid "Your new password."
+msgstr "Mật khẩu mới của bạn."
+
+msgid "Confirm new Password"
+msgstr "Xác nhận mật khẩu mới"
+
+msgid "Confirm your new password."
+msgstr "Xác nhận mật khẩu mới của bạn."
+
+msgid "Please enter your password to save changes"
+msgstr "Vui lòng nhập mật khẩu để lưu thay đổi"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Xác nhận mật khẩu mới của bạn bằng cách nhập vào đây"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Không khớp giữa mật khẩu và xác nhận mới của bạn, hãy thử lại"
+
+msgid "New user created successfully."
+msgstr "Người dùng mới được tạo thành công"
+
+msgid "Groups"
+msgstr "Nhóm"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Người dùng sẽ chỉ nhận được các quyền được phép cho nhóm của họ."
+
+msgid "Set the user's initial password here."
+msgstr "Đặt mật khẩu ban đầu của người dùng ở đây."
+
+msgid "Last Login"
+msgstr "Lân đăng nhập cuôi"
+
+msgid "Is Active"
+msgstr "Đang hoạt động"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Người dung được đăng nhập vào trang hay không"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Người dùng sẽ chỉ nhận được các quyền được phép cho nhóm của họ"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Bạn có thể đặt lại mật khẩu đăng nhập bằng cách nhập mật khẩu mới vào đây"
+
+msgid "Username"
+msgstr "Tên đăng nhập"
+
+msgid "Your password"
+msgstr "Mật khẩu"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Nếu bạn muốn đặt mật khẩu mới, nhập nó tại đây"
+
+msgid "Confirm New Password"
+msgstr "Xác nhận mật khẩu mới"
+
+msgid "Confirm your new password"
+msgstr "Xác nhận mật khẩu mới của bạn"
+
+msgid "Edit your profile"
+msgstr "Chỉnh sửa hồ sơ của bạn"
+
+msgid "Password Recovery"
+msgstr "Khôi phục mật khẩu"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Email đã được gửi đến tài khoản của bạn kèm theo các hướng dẫn thêm."
+
+msgid "Password Recovery Request"
+msgstr "Yêu cầu khôi phục mật khẩu"
+
+msgid "Pick a new password"
+msgstr "Chọn một mật khẩu mới"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Mật khẩu của bạn đã được cập nhật thành công, xin cảm ơn."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Bạn đã đăng nhập với tư cách %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Cập nhật mật khẩu thành công. Bây giờ bạn có thể đăng nhập với mật khẩu mới"
+
+msgid "Reset your Password"
+msgstr "Cài lại mật khẩu"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Liên kết của bạn đã hết hạn vì lý do bảo mật. Vui lòng khởi tạo lại quy trình bằng cách nhập email của bạn ở đây."
+
+msgid "Submit"
+msgstr "Gửi đi"
+
+msgid "Form"
+msgstr "Mẫu đơn"
+
+msgid "Save Changes"
+msgstr "Lưu thay đổi"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "%s mới của bạn đã được tạo."
+
+#, python-format
+msgid "Import %s"
+msgstr "Nhập %s"
 
 msgid "90 Days"
 msgstr ""
