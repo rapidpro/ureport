@@ -1,3 +1,7 @@
+v1.1.90
+----------
+ * Merge pull request #484 from rapidpro/calculate-results-poll-stats
+
 v1.1.89
 ----------
  * Add back some hover background with static colors
