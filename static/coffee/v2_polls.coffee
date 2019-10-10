@@ -137,7 +137,13 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
     
     chartType = "spline"
     if segmentType == 'gender'
-      chartType = "column";
+      chartType = "column"
+    
+    pointFormat = '{point.x: %b %Y}: {point.y}'
+    if timeFilter != 12
+      pointFormat = '{point.x: %e %b %Y}: {point.y}'
+
+
     $('#engagement-graph-' + dataSlug).parent().removeClass("hidden");
     
     $("#engagement-graph-" + dataSlug).find('.chart-progress').hide()
@@ -189,7 +195,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
         tooltip: {
           enabled: true
           headerFormat: '<b>{series.name}</b><br>'
-          pointFormat: '{point.x: %b %Y}: {point.y}'
+          pointFormat: pointFormat
         }
         plotOptions: {
           spline: {
