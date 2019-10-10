@@ -81,5 +81,4 @@ CACHES = {
 
 CELERY_RESULT_BACKEND = BROKER_URL
 
-COMPRESS_OFFLINE_CONTEXT = 'ureport.utils.offline_context'
 

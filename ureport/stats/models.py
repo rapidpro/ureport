@@ -124,7 +124,7 @@ class PollStats(models.Model):
     @classmethod
     def get_all_opinion_responses(cls, org, time_filter):
         responses = PollStats.objects.filter(org=org).exclude(category=None).values("date").annotate(Sum("count"))
-        return [dict(name="Opinion Responses", data=PollStats.get_counts_data(responses, time_filter))]
+        return [dict(name=str(_("Opinion Responses")), data=PollStats.get_counts_data(responses, time_filter))]
 
     @classmethod
     def get_gender_opinion_responses(cls, org, time_filter):
@@ -240,7 +240,8 @@ class PollStats(models.Model):
 
         return [
             dict(
-                name="Response Rate", data=PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
+                name=str(_("Response Rate")),
+                data=PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter),
             )
         ]
 
@@ -436,7 +437,7 @@ class ContactActivity(models.Model):
             .values("date")
             .annotate(Count("id"))
         )
-        return [dict(name="Active Users", data=ContactActivity.get_activity_data(activities, time_filter))]
+        return [dict(name=str(_("Active Users")), data=ContactActivity.get_activity_data(activities, time_filter))]
 
     @classmethod
     def get_activity_age(cls, org, time_filter):
