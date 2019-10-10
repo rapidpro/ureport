@@ -1,3 +1,14 @@
+v1.1.92
+----------
+ * Merge pull request #501 from rapidpro/calculate-results-poll-stats-2
+ * Show day in tooltip date
+ * Show day in tooltip date
+ * Show up to 3 points per month for 3 months charts
+ * Merge branch 'calculate-results-poll-stats' of github.com:rapidpro/ureport into calculate-results-poll-stats-2
+ * Merge branch 'master' of github.com:rapidpro/ureport into calculate-results-poll-stats-2
+ * Fix date key lookup
+ * Use smaller intervals for small time filters on engagement
+
 v1.1.90
 ----------
  * Merge pull request #484 from rapidpro/calculate-results-poll-stats
