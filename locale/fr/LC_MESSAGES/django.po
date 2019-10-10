@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-08 16:33+0000\n"
+"POT-Creation-Date: 2019-10-10 00:27+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2019\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -424,261 +424,6 @@ msgstr "Image à afficher dans une page article et en aperçu (facultatif)"
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Image à afficher dans une page article et en aperçu (facultatif)"
 
-msgid "Remove Item?"
-msgstr "Supprimer l’objet ?"
-
-#, python-format
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-"\n"
-"Êtes-vous sûr de vouloir supprimer <b>%(object)s</b> ?"
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "Une fois supprimé, cela sera disparu définitivement. Il n’y a aucun moyen de revenir en arrière."
-
-msgid "Cancel"
-msgstr "Annuler"
-
-#, python-format
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-"\n"
-"         %(counter)s résultats        "
-msgstr[1] ""
-"\n"
-"         %(counter)s résultats\n"
-"        "
-
-#, python-format
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-"\n"
-"\tRésultats %(start)s-%(end)s of %(count)s\n"
-"\t"
-
-msgid "Previous"
-msgstr "Précédent"
-
-msgid "Next"
-msgstr "Suivant"
-
-msgid "edit"
-msgstr "éditer"
-
-msgid "Sign in"
-msgstr "Se connecter"
-
-msgid "Login"
-msgstr "Se connecter"
-
-msgid "Forgot Password?"
-msgstr "Mot de passe oublié ?"
-
-msgid "Token Expired"
-msgstr "Token expiré"
-
-msgid "Login Failure"
-msgstr "Échec de connexion"
-
-#, python-format
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-"\n"
-"Désolé, vous ne pouvez pas vous connecter en ce moment, nous avons reçu %(failed_login_limit)s tentatives de connexion incorrecte"
-
-#, python-format
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-"\n"
-"Patientez svp %(lockout_timeout)s minutes avant de réessayer de vous connecter."
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "Sinon, vous pouvez remplir le formulaire ci-dessous pour que votre mot de passe soit réinitialisé par e-mail."
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "Veuillez contacter svp l’administrateur du site pour avoir un mot de passe réinitialisé"
-
-msgid "Email Address"
-msgstr "Adresse email"
-
-msgid "Recover"
-msgstr "Récupérer"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Veuillez svp entrer l’adresse email utilisée à votre inscription et nous vous aiderons à récupérer votre mot de passe"
-
-#, python-format
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-"\n"
-"<strong>Votre mot de passe a expiré. </strong> Les conditions générales d’utilisation du site précisent que vous devez choisir un nouveau mot de passe tous les %(expire_days)s jours, et que les mots de passe ne doivent pas avoir été utilisés lors des %(window_days)s précédents jours."
-
-msgid "New Password"
-msgstr "Nouveau mot de passe"
-
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Les mots de passe doivent avoir au moins 8 caractères, en incluant une majuscule, une minuscule et un chiffre"
-
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "Vous avez utilisé ce mot de passe lors de l’année passée, veuillez svp utiliser un nouveau mot de passe."
-
-msgid "Password"
-msgstr "Mot de passe"
-
-msgid "Confirm Password"
-msgstr "Confirmer le mot de passe"
-
-msgid "Please enter your password to save changes."
-msgstr "Veuillez svp entrer votre mot de passe pour enregistrer les modifications."
-
-msgid "Confirm the new password by filling the this field"
-msgstr "Confirmer le nouveau mot de passe en remplissant ce champ"
-
-msgid "New password doesn't match with its confirmation"
-msgstr "Le nouveau mot de passe ne correspond avec sa confirmation"
-
-msgid "Your Email"
-msgstr "Votre email"
-
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "La récupération de votre email n’est pas possible, veuillez svp contacter l’administrateur de votre site pour réinitialiser manuellement votre mot de passe."
-
-msgid "Current Password"
-msgstr "Mot de passe actuel"
-
-msgid "Your current password"
-msgstr "Votre mot de passe actuel"
-
-msgid "Your new password."
-msgstr "Votre nouveau mot de passe"
-
-msgid "Confirm new Password"
-msgstr "Confirmer un nouveau mot de passe"
-
-msgid "Confirm your new password."
-msgstr "Confirmer votre nouveau mot de passe"
-
-msgid "Please enter your password to save changes"
-msgstr "Veuillez svp entrer votre mot de passe pour enregistrer les modifications."
-
-msgid "Confirm your new password by entering it here"
-msgstr "Confirmer votre nouveau mot de passe en l’entrant ici"
-
-msgid "Mismatch between your new password and confirmation, try again"
-msgstr "Non-concordance entre votre nouveau mot de passe et la conformation, essayez encore"
-
-msgid "New user created successfully."
-msgstr "Nouvel utilisateur créé avec succès"
-
-msgid "Groups"
-msgstr "Groupes"
-
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "Les utilisateurs auront seulement ces autorisations pour leur groupe."
-
-msgid "Set the user's initial password here."
-msgstr "Mettre ici le mot de passe initial de l’utilisateur."
-
-msgid "Last Login"
-msgstr "Dernière connexion"
-
-msgid "Is Active"
-msgstr "Est actif"
-
-msgid "Whether this user is allowed to log into the site"
-msgstr "Si l’utilisateur est autorisé à se connecter au site"
-
-msgid "Users will only get those permissions that are allowed for their group"
-msgstr "Les utilisateurs auront seulement ces autorisations pour leur groupe."
-
-msgid "You can reset the user's password by entering a new password here"
-msgstr "Vous pouvez réinitialiser le mot de passe de l’utilisateur en entrant un nouveau mot de passe ici"
-
-msgid "Username"
-msgstr "Nom d’utilisateur"
-
-msgid "Your password"
-msgstr "Votre mot de passe"
-
-msgid "If you want to set a new password, enter it here"
-msgstr "Si vous voulez mettre un nouveau mot de passe, entrez-le ici"
-
-msgid "Confirm New Password"
-msgstr "Confirmer un nouveau mot de passe"
-
-msgid "Confirm your new password"
-msgstr "Confirmer votre nouveau mot de passe"
-
-msgid "Edit your profile"
-msgstr "Éditer votre profil"
-
-msgid "Password Recovery"
-msgstr "Récupération du mot de passe"
-
-msgid "An Email has been sent to your account with further instructions."
-msgstr "Un email vous a été envoyé avec plus d’informations."
-
-msgid "Password Recovery Request"
-msgstr "Demande de récupération de mot de passe"
-
-msgid "Pick a new password"
-msgstr "Choisir un nouveau mot de passe"
-
-msgid "Your password has successfully been updated, thank you."
-msgstr "Votre mot de passe a été mis à jour avec succès, merci."
-
-#, python-format
-msgid "You are now logged in as %s"
-msgstr "Vous êtes maintenant connecté en tant que %s"
-
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "Mot de passe mis à jour avec succès. Maintenant vous pouvez utiliser votre nouveau mot de passe pour vous connecter."
-
-msgid "Reset your Password"
-msgstr "Réinitialiser votre mot de passe"
-
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "Votre lien a expiré pour des raisons de sécurité. Veuillez svp réinitialiser la procédure en entrant votre email ici."
-
-msgid "Submit"
-msgstr "Soumettre"
-
-msgid "Form"
-msgstr "Formulaire"
-
-msgid "Save Changes"
-msgstr "Enregistrer les modifications"
-
-#, python-format
-msgid "Your new %s has been created."
-msgstr "Votre nouveau %s a été créé."
-
-#, python-format
-msgid "Import %s"
-msgstr "Importer %s"
-
 msgid "Back to Website"
 msgstr "Retour au site"
 
@@ -687,6 +432,9 @@ msgstr "Bienvenue,"
 
 msgid "Logout"
 msgstr "Déconnexion"
+
+msgid "Login"
+msgstr "Se connecter"
 
 msgid "Opinions"
 msgstr "Sondages"
@@ -818,6 +566,12 @@ msgstr ""
 "\n"
 "        <div>Apres avoir créé votre widget, copier l'ID du widget a partir de l'URL comme indiqué</div>\n"
 "      "
+
+msgid "Next"
+msgstr "Suivant"
+
+msgid "Cancel"
+msgstr "Annuler"
 
 msgid "Back"
 msgstr "Retour"
@@ -1229,6 +983,81 @@ msgstr "Reporters"
 msgid "Top Region"
 msgstr "Région principale"
 
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search"
+msgid "March"
+msgstr "RECHERCHE"
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+#, fuzzy
+#| msgid "Age"
+msgid "Aug"
+msgstr "Age"
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+#, fuzzy
+#| msgid "No"
+msgid "Nov"
+msgstr "Non"
+
+msgid "Dec"
+msgstr ""
+
 msgid "LATEST OPINION"
 msgstr "Dernier sondage"
 
@@ -1252,6 +1081,12 @@ msgstr "AGES"
 
 msgid "LEARN MORE"
 msgstr "Clique Ici"
+
+msgid "Sign in"
+msgstr "Se connecter"
+
+msgid "Forgot Password?"
+msgstr "Mot de passe oublié ?"
 
 msgid "+ New "
 msgstr "+ Nouveau"
@@ -1332,6 +1167,9 @@ msgstr "U-REPORTERS PAR REGION"
 msgid "FILTER RESULTS"
 msgstr "FILTRER LES RÉSULTATS"
 
+msgid "Remove Item?"
+msgstr "Supprimer l’objet ?"
+
 #, python-format
 msgid ""
 "\n"
@@ -1340,6 +1178,9 @@ msgid ""
 msgstr ""
 "\n"
 "Êtes-vous sûr de vouloir supprimer <strong>%(object)s</strong> ?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Une fois supprimé, cela sera disparu définitivement. Il n’y a aucun moyen de revenir en arrière."
 
 #, python-format
 msgid ""
@@ -1368,11 +1209,20 @@ msgstr ""
 "\n"
 "Résultats %(start)s-%(end)s of %(count)s"
 
+msgid "Previous"
+msgstr "Précédent"
+
+msgid "edit"
+msgstr "éditer"
+
 msgid "Error"
 msgstr "Erreur"
 
 msgid "Enter Dashboard"
 msgstr "Entrer dans le tableau de bord"
+
+msgid "Login Failure"
+msgstr "Échec de connexion"
 
 #, python-format
 msgid ""
@@ -1391,6 +1241,21 @@ msgid ""
 msgstr ""
 "\n"
 "Patientez svp %(lockout_timeout)s minutes avant de réessayer de vous connecter."
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Sinon, vous pouvez remplir le formulaire ci-dessous pour que votre mot de passe soit réinitialisé par e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Veuillez contacter svp l’administrateur du site pour avoir un mot de passe réinitialisé"
+
+msgid "Email Address"
+msgstr "Adresse email"
+
+msgid "Recover"
+msgstr "Récupérer"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Veuillez svp entrer l’adresse email utilisée à votre inscription et nous vous aiderons à récupérer votre mot de passe"
 
 #, python-format
 msgid ""
@@ -1865,6 +1730,216 @@ msgstr "La police utilisée pour les petits textes"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Si vous devez inclure des codes HTML personnalisés dans vos pages d'organisation, tels que des extraits de code d'analyse personnalisés"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Êtes-vous sûr de vouloir supprimer <b>%(object)s</b> ?"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"         %(counter)s résultats        "
+msgstr[1] ""
+"\n"
+"         %(counter)s résultats\n"
+"        "
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tRésultats %(start)s-%(end)s of %(count)s\n"
+"\t"
+
+msgid "Token Expired"
+msgstr "Token expiré"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Désolé, vous ne pouvez pas vous connecter en ce moment, nous avons reçu %(failed_login_limit)s tentatives de connexion incorrecte"
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Patientez svp %(lockout_timeout)s minutes avant de réessayer de vous connecter."
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Votre mot de passe a expiré. </strong> Les conditions générales d’utilisation du site précisent que vous devez choisir un nouveau mot de passe tous les %(expire_days)s jours, et que les mots de passe ne doivent pas avoir été utilisés lors des %(window_days)s précédents jours."
+
+msgid "New Password"
+msgstr "Nouveau mot de passe"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Les mots de passe doivent avoir au moins 8 caractères, en incluant une majuscule, une minuscule et un chiffre"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Vous avez utilisé ce mot de passe lors de l’année passée, veuillez svp utiliser un nouveau mot de passe."
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "Confirm Password"
+msgstr "Confirmer le mot de passe"
+
+msgid "Please enter your password to save changes."
+msgstr "Veuillez svp entrer votre mot de passe pour enregistrer les modifications."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Confirmer le nouveau mot de passe en remplissant ce champ"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Le nouveau mot de passe ne correspond avec sa confirmation"
+
+msgid "Your Email"
+msgstr "Votre email"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "La récupération de votre email n’est pas possible, veuillez svp contacter l’administrateur de votre site pour réinitialiser manuellement votre mot de passe."
+
+msgid "Current Password"
+msgstr "Mot de passe actuel"
+
+msgid "Your current password"
+msgstr "Votre mot de passe actuel"
+
+msgid "Your new password."
+msgstr "Votre nouveau mot de passe"
+
+msgid "Confirm new Password"
+msgstr "Confirmer un nouveau mot de passe"
+
+msgid "Confirm your new password."
+msgstr "Confirmer votre nouveau mot de passe"
+
+msgid "Please enter your password to save changes"
+msgstr "Veuillez svp entrer votre mot de passe pour enregistrer les modifications."
+
+msgid "Confirm your new password by entering it here"
+msgstr "Confirmer votre nouveau mot de passe en l’entrant ici"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Non-concordance entre votre nouveau mot de passe et la conformation, essayez encore"
+
+msgid "New user created successfully."
+msgstr "Nouvel utilisateur créé avec succès"
+
+msgid "Groups"
+msgstr "Groupes"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Les utilisateurs auront seulement ces autorisations pour leur groupe."
+
+msgid "Set the user's initial password here."
+msgstr "Mettre ici le mot de passe initial de l’utilisateur."
+
+msgid "Last Login"
+msgstr "Dernière connexion"
+
+msgid "Is Active"
+msgstr "Est actif"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Si l’utilisateur est autorisé à se connecter au site"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Les utilisateurs auront seulement ces autorisations pour leur groupe."
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Vous pouvez réinitialiser le mot de passe de l’utilisateur en entrant un nouveau mot de passe ici"
+
+msgid "Username"
+msgstr "Nom d’utilisateur"
+
+msgid "Your password"
+msgstr "Votre mot de passe"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Si vous voulez mettre un nouveau mot de passe, entrez-le ici"
+
+msgid "Confirm New Password"
+msgstr "Confirmer un nouveau mot de passe"
+
+msgid "Confirm your new password"
+msgstr "Confirmer votre nouveau mot de passe"
+
+msgid "Edit your profile"
+msgstr "Éditer votre profil"
+
+msgid "Password Recovery"
+msgstr "Récupération du mot de passe"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Un email vous a été envoyé avec plus d’informations."
+
+msgid "Password Recovery Request"
+msgstr "Demande de récupération de mot de passe"
+
+msgid "Pick a new password"
+msgstr "Choisir un nouveau mot de passe"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Votre mot de passe a été mis à jour avec succès, merci."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Vous êtes maintenant connecté en tant que %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Mot de passe mis à jour avec succès. Maintenant vous pouvez utiliser votre nouveau mot de passe pour vous connecter."
+
+msgid "Reset your Password"
+msgstr "Réinitialiser votre mot de passe"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Votre lien a expiré pour des raisons de sécurité. Veuillez svp réinitialiser la procédure en entrant votre email ici."
+
+msgid "Submit"
+msgstr "Soumettre"
+
+msgid "Form"
+msgstr "Formulaire"
+
+msgid "Save Changes"
+msgstr "Enregistrer les modifications"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Votre nouveau %s a été créé."
+
+#, python-format
+msgid "Import %s"
+msgstr "Importer %s"
 
 msgid "90 Days"
 msgstr "90 jours"

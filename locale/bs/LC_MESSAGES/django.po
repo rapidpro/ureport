@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-08 16:33+0000\n"
+"POT-Creation-Date: 2019-10-10 00:27+0000\n"
 "PO-Revision-Date: 2018-09-14 11:15+0000\n"
 "Last-Translator: Nineta Popovic <npopovic@unicef.org>\n"
 "Language-Team: Bosnian (http://www.transifex.com/rapidpro/ureport/language/bs/)\n"
@@ -425,276 +425,6 @@ msgstr "slike koje će se prikazati uz priču i pregled. (opciono)"
 msgid "Image to display on story page and in previews (optional)"
 msgstr "slike koje će se prikazati uz priču i pregled. (opciono)"
 
-msgid "Remove Item?"
-msgstr "Ukloni stavku?"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-"\n"
-"Jeste li sigurni da želite ukloniti<b>%(object)s</b>?"
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "Kada uklonite, nema načina da vratite sadržaj."
-
-msgid "Cancel"
-msgstr "Otkaži"
-
-#, python-format
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-"\n"
-"\tReyultati %(start)s-%(end)sod %(count)s"
-
-msgid "Previous"
-msgstr "Prethodni"
-
-msgid "Next"
-msgstr "Sljedeći"
-
-msgid "edit"
-msgstr "uredi"
-
-msgid "Sign in"
-msgstr "Upiši se"
-
-msgid "Login"
-msgstr "Prijava"
-
-msgid "Forgot Password?"
-msgstr "Zaboravili ste lozinku?"
-
-msgid "Token Expired"
-msgstr "Token je istekao"
-
-msgid "Login Failure"
-msgstr "Greška u prijavi"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-"\n"
-"Žao nam je, ne možete se prijaviti zbog %(failed_login_limit)spogrešnih pokušaja prijave."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-"\n"
-"Molimo pričekajte %(lockout_timeout)s minuta prije ponovnog pokušaja prijave."
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "Imate mogućnost ispuniti formular ispod, kako bi obnovili lozinku putem e-maila."
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "Molimo kontaktirajte administratora stranice radi ponovne postavke lozinke"
-
-msgid "Email Address"
-msgstr "E-mail adresa"
-
-msgid "Recover"
-msgstr "Obnovi"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Molimo upišite e-mail adresu koju koristite tokom upisa i mi ćemo vam pomoći da obnovite lozinku"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-"\n"
-"<strong>Lozinka vam je istekla. </strong>Pravila nalažu da morate obnoviti lozinku svakih %(expire_days)sdana, a lozinka ne smije biti ista koju ste koristili u posljednjih %(window_days)s dana."
-
-msgid "New Password"
-msgstr "Nova lozinka"
-
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Lozinka mora imati najmanje 8 znamenki, uključujući jedno veliko slovo, jedno malo slovo i jedan broj."
-
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "Ovu lozinku ste već koristili tokom protekle godine. Molimo izaberite novu."
-
-msgid "Password"
-msgstr "Lozinka"
-
-msgid "Confirm Password"
-msgstr "Potvrdi lozinku"
-
-msgid "Please enter your password to save changes."
-msgstr "Molimo unesite lozinku kako bi sačuvali promjene"
-
-msgid "Confirm the new password by filling the this field"
-msgstr "Potvrdite novu lozinku ispunjavajući ovo polje"
-
-msgid "New password doesn't match with its confirmation"
-msgstr "Nova lozinka se ne poklapa sa potvrdom"
-
-msgid "Your Email"
-msgstr "Vaš e-mail"
-
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "Obnova lozinke putem e-maila nije moguća. Molimo kontaktirajte administratora stranice, kako bi obnovio lozinku ručno."
-
-msgid "Current Password"
-msgstr "Trenutna lozinka"
-
-msgid "Your current password"
-msgstr "Vaša trenutna lozinka"
-
-msgid "Your new password."
-msgstr "Vaša nova lozinka"
-
-msgid "Confirm new Password"
-msgstr "Potvrdite novu lozinku"
-
-msgid "Confirm your new password."
-msgstr "Potvrdite vašu novu lozinku"
-
-msgid "Please enter your password to save changes"
-msgstr "Unesite lozinku da sačuvate promjene"
-
-msgid "Confirm your new password by entering it here"
-msgstr "Potvrdite novu lozinku ovdje"
-
-msgid "Mismatch between your new password and confirmation, try again"
-msgstr "Nepodudaranje izmedju nove lozinke i potvrde lozinke"
-
-msgid "New user created successfully."
-msgstr "Novi korisnik je uspješno kreiran"
-
-msgid "Groups"
-msgstr "Grupe"
-
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "Korisnici dobivaju samo one dozvole koje se odnose na njihovu grupu."
-
-msgid "Set the user's initial password here."
-msgstr "Postavi inicijalnu korisničku lozinku ovdje."
-
-msgid "Last Login"
-msgstr "Posljednja prijava"
-
-msgid "Is Active"
-msgstr "Je aktivan"
-
-msgid "Whether this user is allowed to log into the site"
-msgstr "Da li je ovom korisniku dozvoljena prijava na stranicu"
-
-msgid "Users will only get those permissions that are allowed for their group"
-msgstr "Korisnici dobijaju samo odobrenja koja se odnose na njihovu grupu"
-
-msgid "You can reset the user's password by entering a new password here"
-msgstr "Možete obnoviti korisničku lozinku, unoseći novu lozinku ovdje"
-
-msgid "Username"
-msgstr "Korisničko ime"
-
-msgid "Your password"
-msgstr "Vaša lozinka"
-
-msgid "If you want to set a new password, enter it here"
-msgstr "Ako želite postaviti novu lozinku, unesite je ovdje"
-
-msgid "Confirm New Password"
-msgstr "Potvrdi novu lozinku"
-
-msgid "Confirm your new password"
-msgstr "Potvrdite vašu novu lozinku"
-
-msgid "Edit your profile"
-msgstr "Uredite svoj profil"
-
-msgid "Password Recovery"
-msgstr "Vraćanje lozinke"
-
-msgid "An Email has been sent to your account with further instructions."
-msgstr "Poslali smo Vam e-mail sa instrukcijama"
-
-msgid "Password Recovery Request"
-msgstr "Zahtjev za vraćanje lozinke"
-
-msgid "Pick a new password"
-msgstr "Izaberite novu lozinku"
-
-msgid "Your password has successfully been updated, thank you."
-msgstr "Lozinka je uspješno ažurirana, hvala."
-
-#, python-format
-msgid "You are now logged in as %s"
-msgstr "Trenutno ste prijavljeni kao %s"
-
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "Lozinka je uspješno ažurirana. Sada se možete prijaviti sa novom lozinkom."
-
-msgid "Reset your Password"
-msgstr "Ponovo postavite lozinku"
-
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "Link je istekao iz sigurnosnih razloga. Ponovite proces upisujući vašu e-mail adresu ovdje."
-
-msgid "Submit"
-msgstr "Pošalji"
-
-msgid "Form"
-msgstr "Formular"
-
-msgid "Save Changes"
-msgstr "Sačuvaj promjene"
-
-#, python-format
-msgid "Your new %s has been created."
-msgstr "Vaš novi%sje kreiran"
-
-#, python-format
-msgid "Import %s"
-msgstr "Importuj %s"
-
 msgid "Back to Website"
 msgstr ""
 
@@ -703,6 +433,9 @@ msgstr ""
 
 msgid "Logout"
 msgstr "Odjava"
+
+msgid "Login"
+msgstr "Prijava"
 
 msgid "Opinions"
 msgstr ""
@@ -839,6 +572,12 @@ msgid ""
 msgstr ""
 "\n"
 "<div>Nakon što kreirate kopiju widget ID iz URL kako je prikazano na</div>"
+
+msgid "Next"
+msgstr "Sljedeći"
+
+msgid "Cancel"
+msgstr "Otkaži"
 
 msgid "Back"
 msgstr "Povratak nazad"
@@ -1257,6 +996,79 @@ msgstr "U-Reporteri"
 msgid "Top Region"
 msgstr ""
 
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search"
+msgid "March"
+msgstr "Traži"
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+#, fuzzy
+#| msgid "No"
+msgid "Nov"
+msgstr "Ne"
+
+msgid "Dec"
+msgstr ""
+
 #, fuzzy
 #| msgid "LOCATIONS"
 msgid "LATEST OPINION"
@@ -1290,6 +1102,12 @@ msgstr ""
 #| msgid "READ MORE"
 msgid "LEARN MORE"
 msgstr "PROČITAJ VIŠE"
+
+msgid "Sign in"
+msgstr "Upiši se"
+
+msgid "Forgot Password?"
+msgstr "Zaboravili ste lozinku?"
 
 msgid "+ New "
 msgstr ""
@@ -1396,6 +1214,9 @@ msgstr "U-REPORTERI U"
 msgid "FILTER RESULTS"
 msgstr "REZULTATI ANKETE"
 
+msgid "Remove Item?"
+msgstr "Ukloni stavku?"
+
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1408,6 +1229,9 @@ msgid ""
 msgstr ""
 "\n"
 "Jeste li sigurni da želite ukloniti<b>%(object)s</b>?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Kada uklonite, nema načina da vratite sadržaj."
 
 #, python-format
 msgid ""
@@ -1435,11 +1259,20 @@ msgstr ""
 "\n"
 "\tReyultati %(start)s-%(end)sod %(count)s"
 
+msgid "Previous"
+msgstr "Prethodni"
+
+msgid "edit"
+msgstr "uredi"
+
 msgid "Error"
 msgstr ""
 
 msgid "Enter Dashboard"
 msgstr ""
+
+msgid "Login Failure"
+msgstr "Greška u prijavi"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1466,6 +1299,21 @@ msgid ""
 msgstr ""
 "\n"
 "Molimo pričekajte %(lockout_timeout)s minuta prije ponovnog pokušaja prijave."
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Imate mogućnost ispuniti formular ispod, kako bi obnovili lozinku putem e-maila."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Molimo kontaktirajte administratora stranice radi ponovne postavke lozinke"
+
+msgid "Email Address"
+msgstr "E-mail adresa"
+
+msgid "Recover"
+msgstr "Obnovi"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Molimo upišite e-mail adresu koju koristite tokom upisa i mi ćemo vam pomoći da obnovite lozinku"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1985,6 +1833,231 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Ako trebate uključiti prilagodjeni HTML kod u vaše org stranice, poput prilagodjenih analitičkih snippet kodova"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Jeste li sigurni da želite ukloniti<b>%(object)s</b>?"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tReyultati %(start)s-%(end)sod %(count)s"
+
+msgid "Token Expired"
+msgstr "Token je istekao"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Žao nam je, ne možete se prijaviti zbog %(failed_login_limit)spogrešnih pokušaja prijave."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Molimo pričekajte %(lockout_timeout)s minuta prije ponovnog pokušaja prijave."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Lozinka vam je istekla. </strong>Pravila nalažu da morate obnoviti lozinku svakih %(expire_days)sdana, a lozinka ne smije biti ista koju ste koristili u posljednjih %(window_days)s dana."
+
+msgid "New Password"
+msgstr "Nova lozinka"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Lozinka mora imati najmanje 8 znamenki, uključujući jedno veliko slovo, jedno malo slovo i jedan broj."
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Ovu lozinku ste već koristili tokom protekle godine. Molimo izaberite novu."
+
+msgid "Password"
+msgstr "Lozinka"
+
+msgid "Confirm Password"
+msgstr "Potvrdi lozinku"
+
+msgid "Please enter your password to save changes."
+msgstr "Molimo unesite lozinku kako bi sačuvali promjene"
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Potvrdite novu lozinku ispunjavajući ovo polje"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Nova lozinka se ne poklapa sa potvrdom"
+
+msgid "Your Email"
+msgstr "Vaš e-mail"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "Obnova lozinke putem e-maila nije moguća. Molimo kontaktirajte administratora stranice, kako bi obnovio lozinku ručno."
+
+msgid "Current Password"
+msgstr "Trenutna lozinka"
+
+msgid "Your current password"
+msgstr "Vaša trenutna lozinka"
+
+msgid "Your new password."
+msgstr "Vaša nova lozinka"
+
+msgid "Confirm new Password"
+msgstr "Potvrdite novu lozinku"
+
+msgid "Confirm your new password."
+msgstr "Potvrdite vašu novu lozinku"
+
+msgid "Please enter your password to save changes"
+msgstr "Unesite lozinku da sačuvate promjene"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Potvrdite novu lozinku ovdje"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Nepodudaranje izmedju nove lozinke i potvrde lozinke"
+
+msgid "New user created successfully."
+msgstr "Novi korisnik je uspješno kreiran"
+
+msgid "Groups"
+msgstr "Grupe"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Korisnici dobivaju samo one dozvole koje se odnose na njihovu grupu."
+
+msgid "Set the user's initial password here."
+msgstr "Postavi inicijalnu korisničku lozinku ovdje."
+
+msgid "Last Login"
+msgstr "Posljednja prijava"
+
+msgid "Is Active"
+msgstr "Je aktivan"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Da li je ovom korisniku dozvoljena prijava na stranicu"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Korisnici dobijaju samo odobrenja koja se odnose na njihovu grupu"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Možete obnoviti korisničku lozinku, unoseći novu lozinku ovdje"
+
+msgid "Username"
+msgstr "Korisničko ime"
+
+msgid "Your password"
+msgstr "Vaša lozinka"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Ako želite postaviti novu lozinku, unesite je ovdje"
+
+msgid "Confirm New Password"
+msgstr "Potvrdi novu lozinku"
+
+msgid "Confirm your new password"
+msgstr "Potvrdite vašu novu lozinku"
+
+msgid "Edit your profile"
+msgstr "Uredite svoj profil"
+
+msgid "Password Recovery"
+msgstr "Vraćanje lozinke"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Poslali smo Vam e-mail sa instrukcijama"
+
+msgid "Password Recovery Request"
+msgstr "Zahtjev za vraćanje lozinke"
+
+msgid "Pick a new password"
+msgstr "Izaberite novu lozinku"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Lozinka je uspješno ažurirana, hvala."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Trenutno ste prijavljeni kao %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Lozinka je uspješno ažurirana. Sada se možete prijaviti sa novom lozinkom."
+
+msgid "Reset your Password"
+msgstr "Ponovo postavite lozinku"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Link je istekao iz sigurnosnih razloga. Ponovite proces upisujući vašu e-mail adresu ovdje."
+
+msgid "Submit"
+msgstr "Pošalji"
+
+msgid "Form"
+msgstr "Formular"
+
+msgid "Save Changes"
+msgstr "Sačuvaj promjene"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Vaš novi%sje kreiran"
+
+#, python-format
+msgid "Import %s"
+msgstr "Importuj %s"
 
 msgid "90 Days"
 msgstr ""
