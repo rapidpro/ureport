@@ -1,3 +1,12 @@
+v1.1.88
+----------
+ * Rebuild locales
+ * Merge pull request #500 from rapidpro/avoid-compressor-context-loop
+ * Rebuild locales
+ * More charts localizations
+ * Fix typo
+ * Add if block for admin site
+
 v1.1.83
 ----------
 
