@@ -82,10 +82,17 @@ def get_time_filter_dates_map(time_filter=12):
         if time_filter == 12:
             val = start_time.date().replace(day=1)
         if time_filter == 6:
-            if val.day < 15:
+            if val.day < 16:
                 val = start_time.date().replace(day=1)
             else:
-                val = start_time.date().replace(day=15)
+                val = start_time.date().replace(day=16)
+        if time_filter == 3:
+            if val.day < 11:
+                val = start_time.date().replace(day=1)
+            elif val.day < 21:
+                val = start_time.date().replace(day=11)
+            else:
+                val = start_time.date().replace(day=21)
 
         keys_map[str(start_time.date())] = str(val)
         start_time = start_time - timedelta(days=1)
