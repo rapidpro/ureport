@@ -1,3 +1,7 @@
+v1.1.94
+----------
+ * Add overflow scroll on longer labels
+
 v1.1.93
 ----------
  * Use HTML for hightcharts labels
