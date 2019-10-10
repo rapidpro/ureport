@@ -1,3 +1,8 @@
+v1.1.89
+----------
+ * Add back some hover background with static colors
+ * Rebuild locales
+
 v1.1.88
 ----------
  * Rebuild locales
