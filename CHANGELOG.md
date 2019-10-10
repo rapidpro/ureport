@@ -1,3 +1,30 @@
+v1.1.89
+----------
+ * Add back some hover background with static colors
+ * Rebuild locales
+
+v1.1.88
+----------
+ * Rebuild locales
+ * Merge pull request #500 from rapidpro/avoid-compressor-context-loop
+ * Rebuild locales
+ * More charts localizations
+ * Fix typo
+ * Add if block for admin site
+
+v1.1.83
+----------
+
+
+v1.1.82
+----------
+ * Fix links
+
+v1.1.81
+----------
+ * Merge pull request #499 from rapidpro/stories-og-tags
+ * Add open graph tags for facebook image sharing on story page
+
 v1.1.80
 ----------
  * Rebuild locales

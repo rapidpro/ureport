@@ -21,14 +21,24 @@
 
     .row1 a, .row2 a {
       display: block;
-      color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
-      border-left: 5px solid {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
       padding-left: 5px;
+
+      {% if org|config:'dark1_color' %}
+      color: {{ org|config:'dark1_color' }};
+      border-left: 5px solid {{ org|config:'dark1_color' }};
+      {% else %}
+      color: {{ org|config:'primary_color'|default:'#439932' }};
+      border-left: 5px solid {{ org|config:'primary_color'|default:'#439932' }};
+      {% endif %}
     }
 
     .row1 a:hover, .row2 a:hover {
       background-color: #E6E7E8;
-      color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
+      {% if org|config:'dark1_color' %}
+      color: {{ org|config:'dark1_color' }};
+      {% else %}
+      color: {{ org|config:'primary_color'|default:'#439932' }};
+      {% endif %}
     }
 
     .row1.inactive a, .row2.inactive a, {

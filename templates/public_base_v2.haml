@@ -17,6 +17,8 @@
     - if has_better_domain
       %meta(name="robots" content="noindex")
 
+    -block meta-extra
+
     // Google fonts we use
     %link(href="https://fonts.googleapis.com/css?family=Livvic:300,400,700|Montserrat:300,400,700&display=swap" rel="stylesheet")
 
@@ -33,102 +35,108 @@
     {% compress css %}
     %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
     {% endcompress %}
-    {% compress css %}
-      :less
-        .bg-dark1 {
-          
-          background: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }}; 
-          
-          &.hover-dark {
-            &:hover {
-              background: lighten({{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }}, 10%);
-            }
-          }
-        }
-  
-        .border-dark1 {
-          border-color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
-        }
-
-        .hover\:border-dark1 {
-          &:hover {
-            border-color: {{ org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932' }};
-          }
-        }
-  
-        .bg-dark2 {
-          background: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
-          
-          &.hover-dark {
-            &:hover {
-              background: lighten({{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }}, 10%);
-            }
-          }
-        }
-  
-        .border-dark2 {
-          border-color: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
-        }
-
-        .hover\:border-dark2 {
-          &:hover {
-            border-color: {{ org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' }};
-          }
-        }
-  
-        .bg-dark3 {
-          background: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
-          
-          &.hover-dark {
-            &:hover {
-              background: lighten({{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }}, 10%);
-            }
-          }
-        }
-  
-        .border-dark3 {
-          border-color: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
-        }
-
-        .hover\:border-dark3 {
-          &:hover {
-            border-color: {{ org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' }};
-          }
-        }
-  
-        .border-light1 {
-          border-color: {{ org|config:'color_light1'|default:'#FFD100' }};
-        }
-  
-        .bg-light1 {
-          background: {{ org|config:'color_light1'|default:'#FFD100' }};
-          
-          &.hover-dark {
-            &:hover {
-              background: lighten({{ org|config:'color_light1'|default:'#FFD100' }}, 10%);
-            }
-          }
-        }
-  
-        .text-light1 {
-          color: {{ org|config:'color_light1'|default:'#FFD100' }};
-        }
-  
-        .bg-light2 {
-          background: {{ org|config:'color_light2'|default:'#5eb3e0' }};
-          
-          &.hover-dark {
-            &:hover {
-              background: lighten({{ org|config:'color_light2'|default:'#5eb3e0' }}, 10%);
-            }
-          }
-        }
-
-        .ligth-black{
-          background: lighten(#000000, 10%);
-        }
-    {% endcompress %}
     :css
+      .bg-dark1 {
+        {% if org|config:'dark1_color' %}
+        background: {{ org|config:'dark1_color' }};
+        {% else %}
+        background: {{ org|config:'primary_color'|default:'#439932' }};
+        {% endif %}
+
+      }
+
+      .border-dark1 {
+        {% if org|config:'dark1_color' %}
+        border-color: {{ org|config:'dark1_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#439932' }};
+        {% endif %}
+      }
+
+      .hover\:border-dark1:hover {
+        {% if org|config:'dark1_color' %}
+        border-color: {{ org|config:'dark1_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#439932' }};
+        {% endif %}
+      }
+
+      .bg-dark2 {
+        {% if org|config:'dark2_color' %}
+        background: {{ org|config:'dark2_color' }};
+        {% else %}
+        background: {{ org|config:'primary_color'|default:'#1751af' }};
+        {% endif %}
+      }
+
+      .border-dark2 {
+        {% if org|config:'dark2_color' %}
+        border-color: {{ org|config:'dark2_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#1751af' }};
+        {% endif %}
+      }
+
+      .hover\:border-dark2:hover {
+        {% if org|config:'dark2_color' %}
+        border-color: {{ org|config:'dark2_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#1751af' }};
+        {% endif %}
+      }
+
+      .bg-dark3 {
+        {% if org|config:'dark3_color' %}
+        background: {{ org|config:'dark3_color' }};
+        {% else %}
+        background: {{ org|config:'primary_color'|default:'#5eb3e0' }};
+        {% endif %}
+      }
+
+      .border-dark3 {
+        {% if org|config:'dark3_color' %}
+        border-color: {{ org|config:'dark3_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#5eb3e0' }};
+        {% endif %}
+      }
+
+      .hover\:border-dark3:hover {
+        {% if org|config:'dark3_color' %}
+        border-color: {{ org|config:'dark3_color' }};
+        {% else %}
+        border-color: {{ org|config:'primary_color'|default:'#5eb3e0' }};
+        {% endif %}
+      }
+
+      .border-light1 {
+        border-color: {{ org|config:'light1_color'|default:'#FFD100' }};
+      }
+
+      .bg-light1 {
+        background: {{ org|config:'light1_color'|default:'#FFD100' }};
+      }
+      
+      .bg-light1.hover-dark:hover {
+        background: #ffda33;
+      }
+
+      .text-light1 {
+        color: {{ org|config:'light1_color'|default:'#FFD100' }};
+      }
+
+      .bg-light2 {
+        background: {{ org|config:'light2_color'|default:'#5eb3e0' }};
+      }
+
+      .bg-light2.hover-dark:hover {
+        background: #89c7e8;
+      }
+
+      .ligth-black {
+        background: lighten(#000000, 10%);
+      }
+
       .slideout-menu {
         position: fixed;
         top: 0;
@@ -633,6 +641,39 @@
       window.string_Polled = "{% trans "Polled" %}";
       window.string_Reporters = "{% trans "Reporters" %}";
       window.string_TopRegion = "{% trans "Top Region" %}";
+
+      Highcharts.setOptions({
+        lang: {
+          months: [
+            "{% trans "January" %}",
+            "{% trans "February" %}",
+            "{% trans "March" %}",
+            "{% trans "April" %}",
+            "{% trans "May" %}",
+            "{% trans "June" %}",
+            "{% trans "July" %}",
+            "{% trans "August" %}",
+            "{% trans "September" %}",
+            "{% trans "October" %}",
+            "{% trans "November" %}",
+            "{% trans "December" %}"
+          ],
+          shortMonths: [
+            "{% trans "Jan" %}",
+            "{% trans "Feb" %}",
+            "{% trans "Mar" %}",
+            "{% trans "Apr" %}",
+            "{% trans "May" %}",
+            "{% trans "Jun" %}",
+            "{% trans "Jul" %}",
+            "{% trans "Aug" %}",
+            "{% trans "Sep" %}",
+            "{% trans "Oct" %}",
+            "{% trans "Nov" %}",
+            "{% trans "Dec" %}"
+          ],
+        }
+      });
 
       // country menu toggling
       $("#countries-toggler").click(function(){

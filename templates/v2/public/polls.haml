@@ -115,7 +115,7 @@
 
 
     - for question in latest_poll.get_questions
-      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-page="opinions" data-aos="fade" data-aos-anchor-placement="center-bottom" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'color_dark1'|default:org|config:'primary_color'|default:'#439932'  org|config:'color_light1'|default:'#FFD100' org|config:'color_dark2'|default:org|config:'secondary_color'|default:'#1751af' org|config:'color_dark3'|default:org|config:'tertiary_color'|default:'#5eb3e0' %}")
+      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-page="opinions" data-aos="fade" data-aos-anchor-placement="center-bottom" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'dark1_color'|default:'#439932'  org|config:'light1_color'|default:'#FFD100' org|config:'dark2_color'|default:'#1751af' org|config:'dark3_color'|default:'#5eb3e0' %}")
         .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg %}")
           .p-home.h-full.flex-center-y(class="md:py-24")
             .flex(class="{% cycle '' 'md:flex-row-reverse' as reverse %}")
