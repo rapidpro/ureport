@@ -195,7 +195,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
         tooltip: {
           enabled: true
           headerFormat: '<b>{series.name}</b><br>'
-          pointFormat: '{point.x: %b %Y}: {point.y}'
+          pointFormat: pointFormat
         }
         plotOptions: {
           spline: {
