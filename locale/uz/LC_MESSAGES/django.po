@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 00:44+0000\n"
+"POT-Creation-Date: 2019-10-10 01:00+0000\n"
 "PO-Revision-Date: 2018-08-22 11:40+0000\n"
 "Last-Translator: Jahongir Abdurahmonov <jabdurahmonov@unicef.org>\n"
 "Language-Team: Uzbek (http://www.transifex.com/rapidpro/ureport/language/uz/)\n"
@@ -420,6 +420,279 @@ msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan surat. (ixtiyoriy)"
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan surat. (ixtiyoriy)"
 
+msgid "Remove Item?"
+msgstr "Element olib tashlansinmi?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"<b>%(object)s</b>\n"
+" ni olib tashlashga ishonchingiz komilmi?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Olib tashlasangiz, uni keyin tiklab bo'lmaydi. Ushbu amaliyotni ortga qaytarish imkoni umuman bo'lmaydi."
+
+msgid "Cancel"
+msgstr "Bekor qilish"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] "%(hisoblagich) natijalari\n"
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+
+msgid "Previous"
+msgstr "Avvalgisi"
+
+msgid "Next"
+msgstr "Navbatdagisi"
+
+msgid "edit"
+msgstr "tahrir qilish"
+
+msgid "Sign in"
+msgstr "Ro'yxatdan o'tish"
+
+msgid "Login"
+msgstr "Kirish"
+
+msgid "Forgot Password?"
+msgstr "Parol yoddan ko'tarildimi?"
+
+msgid "Token Expired"
+msgstr "Token muddati tugadi"
+
+msgid "Login Failure"
+msgstr "Kirish uddasidan chiqmadi"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Kechirasiz, siz hozir kira olmaysiz, chunki bizga %(failed_login_limit)s noto'g'ri kirish harakatlari.\n"
+" kelib tushdi"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqalarini kuting."
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Muqobil ravishda, elektron pochta orqali parolingizni qayta tiklash uchun, quyidagi shaklni to'ldirishingiz mumkin."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Iltimos, parolingizni tiklash uchun, websahifa administratori bilan bog'laning"
+
+msgid "Email Address"
+msgstr "Elektron pochta manzili"
+
+msgid "Recover"
+msgstr "Tiklash"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Iltimos, ro'yxatdan o'tish vaqtida ko'rsatgan elektron pochta manzilini kiriting va biz sizga parolingizni tiklashga yordam beramiz."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Parolingiz muddati tugadi.</strong> Sahifa qoidasiga muvofiq, har %(expire_days)s da siz yangi parol tanlashingiz kerak, hamda ushbu parollar avvalgi %(window_days)s da ishlatilmagan bo'lishi lozim.\n"
+" "
+
+msgid "New Password"
+msgstr "Yangi parol"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Parollar eng kamida 8 ta belgidan, jumladan bir katta, bir kichik va bir raqamdan, tarkib topgan bo'lishi shart"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Siz bu parolni avvalroq, o'tgan yillarda qo'llagansiz, iltimos yangi paroldan foydalaning"
+
+msgid "Password"
+msgstr "Parol"
+
+msgid "Confirm Password"
+msgstr "Parolni tasdiqlang"
+
+msgid "Please enter your password to save changes."
+msgstr "O'zgarishlarni saqlash uchun, iltimos parolingizni kiriting"
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Ushbu yerni to'ldirish orqali yangi parolni tasdiqlang"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Yangi parol uni tasdiqlashingizga mos kelmayapti"
+
+msgid "Your Email"
+msgstr "Elektron pochtangiz"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "Elektron pochtani tiklash iloji yo'q, parolingizni qo'l bilan qayta tiklash uchun, iltimos websahifa administratori bilan bog'laning"
+
+msgid "Current Password"
+msgstr "Joriy parol"
+
+msgid "Your current password"
+msgstr "Sizning joriy parolingiz"
+
+msgid "Your new password."
+msgstr "Sizning yangi parolingiz."
+
+msgid "Confirm new Password"
+msgstr "Yangi parolni tasdiglash"
+
+msgid "Confirm your new password."
+msgstr "Yangi parolingizni tasdiqlang."
+
+msgid "Please enter your password to save changes"
+msgstr "O'zgarishlarni saqlash uchun, iltimos parolingizni kiriting"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Yangi parolingizni, uni shu yerga kiritish orqali, tasdiqlang"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Yangi parolingiz va uni tasdig'i mos kelmayaptimi, yana urinib ko'ring"
+
+msgid "New user created successfully."
+msgstr "Yangi foydalanuvchini yaratish muvaffaqiyatli amalga oshdi"
+
+msgid "Groups"
+msgstr "Guruhlar"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Foydalanuvchilar ularning guruhlariga ruhsat etilgan ruhsatnomalarnigina qabul qila oladilar."
+
+msgid "Set the user's initial password here."
+msgstr "Foydalanuvchining dastlabki parolini shu yerda yarating"
+
+msgid "Last Login"
+msgstr "So'ngi kirish"
+
+msgid "Is Active"
+msgstr "Faol"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Mazkur foydalanuvchining sahifaga kirishi uchun ruhsat bormi"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Foydalanuvchilar ularning guruhlariga ruhsat etilgan ruhsatnomalarnigina qabul qila oladilar"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Foydalanuvchi parolini, shu yerga yangi parolni kiritish orqali, qayta joriy etishingiz mumkin"
+
+msgid "Username"
+msgstr "Foydalanuvchining ismi"
+
+msgid "Your password"
+msgstr "Parolingiz"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Yangi parol joriy etmoqchi bo'lsangiz, uni shu yerga kiriting"
+
+msgid "Confirm New Password"
+msgstr "Yangi parolni tasdiqlash"
+
+msgid "Confirm your new password"
+msgstr "Yangi parolingizni tasdiqlang"
+
+msgid "Edit your profile"
+msgstr "O'z profilingizni tahrir qiling"
+
+msgid "Password Recovery"
+msgstr "Parolni tiklash"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Tegishli ko'rsatmalar bitilgan elektron xat sizning akkauntingizga yuborildi"
+
+msgid "Password Recovery Request"
+msgstr "Parolni tiklashga oid talabnoma"
+
+msgid "Pick a new password"
+msgstr "Yangi parol tanlang"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Parolingizni yangilash muvaffaqiyatli amalga oshirildi, raxmat."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Endi siz %s bo'lib kirdingiz"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Parol muvaffaqiaytli yangilandi. Endi siz yangi parolingiz bilan kirishingiz mumkin."
+
+msgid "Reset your Password"
+msgstr "Parolingizni qayta joriy eting"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Sizning linkingiz muddati xavfsizlik nuqtai-nazaridan tugatildi. Iltimos, jarayonni elektron pochtangizni quyida kiritish orqali, yangittan boshlang."
+
+msgid "Submit"
+msgstr "Topshirish"
+
+msgid "Form"
+msgstr "Shakl"
+
+msgid "Save Changes"
+msgstr "O'zgarishlarni saqlash"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Sizning yangi %s giz yaratildi"
+
+#, python-format
+msgid "Import %s"
+msgstr "%s ni import qilish"
+
 msgid "Back to Website"
 msgstr ""
 
@@ -428,9 +701,6 @@ msgstr ""
 
 msgid "Logout"
 msgstr "Chiqish"
-
-msgid "Login"
-msgstr "Kirish"
 
 msgid "Opinions"
 msgstr ""
@@ -569,12 +839,6 @@ msgstr ""
 "\n"
 "<div>Vidjetni yaratganingizdan so'ng, vidjet identifikatori </div>\\da ko'rsatilganidek, url dan nusxa ko'chiring\n"
 " "
-
-msgid "Next"
-msgstr "Navbatdagisi"
-
-msgid "Cancel"
-msgstr "Bekor qilish"
 
 msgid "Back"
 msgstr "Ortga"
@@ -1097,12 +1361,6 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "KO'PROQ O'QISH"
 
-msgid "Sign in"
-msgstr "Ro'yxatdan o'tish"
-
-msgid "Forgot Password?"
-msgstr "Parol yoddan ko'tarildimi?"
-
 msgid "+ New "
 msgstr ""
 
@@ -1209,9 +1467,6 @@ msgstr "U-Reportyorlar"
 msgid "FILTER RESULTS"
 msgstr "SO'ROVNOMA NATIJALARI"
 
-msgid "Remove Item?"
-msgstr "Element olib tashlansinmi?"
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1225,9 +1480,6 @@ msgstr ""
 "\n"
 "<b>%(object)s</b>\n"
 " ni olib tashlashga ishonchingiz komilmi?"
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "Olib tashlasangiz, uni keyin tiklab bo'lmaydi. Ushbu amaliyotni ortga qaytarish imkoni umuman bo'lmaydi."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1255,20 +1507,11 @@ msgid ""
 "           "
 msgstr ""
 
-msgid "Previous"
-msgstr "Avvalgisi"
-
-msgid "edit"
-msgstr "tahrir qilish"
-
 msgid "Error"
 msgstr ""
 
 msgid "Enter Dashboard"
 msgstr ""
-
-msgid "Login Failure"
-msgstr "Kirish uddasidan chiqmadi"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1296,21 +1539,6 @@ msgid ""
 msgstr ""
 "\n"
 "Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqalarini kuting."
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "Muqobil ravishda, elektron pochta orqali parolingizni qayta tiklash uchun, quyidagi shaklni to'ldirishingiz mumkin."
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "Iltimos, parolingizni tiklash uchun, websahifa administratori bilan bog'laning"
-
-msgid "Email Address"
-msgstr "Elektron pochta manzili"
-
-msgid "Recover"
-msgstr "Tiklash"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Iltimos, ro'yxatdan o'tish vaqtida ko'rsatgan elektron pochta manzilini kiriting va biz sizga parolingizni tiklashga yordam beramiz."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1831,234 +2059,6 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Siz o'z tashkilotingiz sahifalariga ayrim xususiy HTML kodlarini kiritmoqchimisiz, xususiy tahlil dasturi bo'lagi, kabi"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-"\n"
-"<b>%(object)s</b>\n"
-" ni olib tashlashga ishonchingiz komilmi?"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] "%(hisoblagich) natijalari\n"
-
-#, python-format
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-
-msgid "Token Expired"
-msgstr "Token muddati tugadi"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-"\n"
-"Kechirasiz, siz hozir kira olmaysiz, chunki bizga %(failed_login_limit)s noto'g'ri kirish harakatlari.\n"
-" kelib tushdi"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-"\n"
-"Iltimos, yana bir bor kirishga harakat qilishdan avval %(lockout_timeout)s daqiqalarini kuting."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-"\n"
-"<strong>Parolingiz muddati tugadi.</strong> Sahifa qoidasiga muvofiq, har %(expire_days)s da siz yangi parol tanlashingiz kerak, hamda ushbu parollar avvalgi %(window_days)s da ishlatilmagan bo'lishi lozim.\n"
-" "
-
-msgid "New Password"
-msgstr "Yangi parol"
-
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Parollar eng kamida 8 ta belgidan, jumladan bir katta, bir kichik va bir raqamdan, tarkib topgan bo'lishi shart"
-
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "Siz bu parolni avvalroq, o'tgan yillarda qo'llagansiz, iltimos yangi paroldan foydalaning"
-
-msgid "Password"
-msgstr "Parol"
-
-msgid "Confirm Password"
-msgstr "Parolni tasdiqlang"
-
-msgid "Please enter your password to save changes."
-msgstr "O'zgarishlarni saqlash uchun, iltimos parolingizni kiriting"
-
-msgid "Confirm the new password by filling the this field"
-msgstr "Ushbu yerni to'ldirish orqali yangi parolni tasdiqlang"
-
-msgid "New password doesn't match with its confirmation"
-msgstr "Yangi parol uni tasdiqlashingizga mos kelmayapti"
-
-msgid "Your Email"
-msgstr "Elektron pochtangiz"
-
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "Elektron pochtani tiklash iloji yo'q, parolingizni qo'l bilan qayta tiklash uchun, iltimos websahifa administratori bilan bog'laning"
-
-msgid "Current Password"
-msgstr "Joriy parol"
-
-msgid "Your current password"
-msgstr "Sizning joriy parolingiz"
-
-msgid "Your new password."
-msgstr "Sizning yangi parolingiz."
-
-msgid "Confirm new Password"
-msgstr "Yangi parolni tasdiglash"
-
-msgid "Confirm your new password."
-msgstr "Yangi parolingizni tasdiqlang."
-
-msgid "Please enter your password to save changes"
-msgstr "O'zgarishlarni saqlash uchun, iltimos parolingizni kiriting"
-
-msgid "Confirm your new password by entering it here"
-msgstr "Yangi parolingizni, uni shu yerga kiritish orqali, tasdiqlang"
-
-msgid "Mismatch between your new password and confirmation, try again"
-msgstr "Yangi parolingiz va uni tasdig'i mos kelmayaptimi, yana urinib ko'ring"
-
-msgid "New user created successfully."
-msgstr "Yangi foydalanuvchini yaratish muvaffaqiyatli amalga oshdi"
-
-msgid "Groups"
-msgstr "Guruhlar"
-
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "Foydalanuvchilar ularning guruhlariga ruhsat etilgan ruhsatnomalarnigina qabul qila oladilar."
-
-msgid "Set the user's initial password here."
-msgstr "Foydalanuvchining dastlabki parolini shu yerda yarating"
-
-msgid "Last Login"
-msgstr "So'ngi kirish"
-
-msgid "Is Active"
-msgstr "Faol"
-
-msgid "Whether this user is allowed to log into the site"
-msgstr "Mazkur foydalanuvchining sahifaga kirishi uchun ruhsat bormi"
-
-msgid "Users will only get those permissions that are allowed for their group"
-msgstr "Foydalanuvchilar ularning guruhlariga ruhsat etilgan ruhsatnomalarnigina qabul qila oladilar"
-
-msgid "You can reset the user's password by entering a new password here"
-msgstr "Foydalanuvchi parolini, shu yerga yangi parolni kiritish orqali, qayta joriy etishingiz mumkin"
-
-msgid "Username"
-msgstr "Foydalanuvchining ismi"
-
-msgid "Your password"
-msgstr "Parolingiz"
-
-msgid "If you want to set a new password, enter it here"
-msgstr "Yangi parol joriy etmoqchi bo'lsangiz, uni shu yerga kiriting"
-
-msgid "Confirm New Password"
-msgstr "Yangi parolni tasdiqlash"
-
-msgid "Confirm your new password"
-msgstr "Yangi parolingizni tasdiqlang"
-
-msgid "Edit your profile"
-msgstr "O'z profilingizni tahrir qiling"
-
-msgid "Password Recovery"
-msgstr "Parolni tiklash"
-
-msgid "An Email has been sent to your account with further instructions."
-msgstr "Tegishli ko'rsatmalar bitilgan elektron xat sizning akkauntingizga yuborildi"
-
-msgid "Password Recovery Request"
-msgstr "Parolni tiklashga oid talabnoma"
-
-msgid "Pick a new password"
-msgstr "Yangi parol tanlang"
-
-msgid "Your password has successfully been updated, thank you."
-msgstr "Parolingizni yangilash muvaffaqiyatli amalga oshirildi, raxmat."
-
-#, python-format
-msgid "You are now logged in as %s"
-msgstr "Endi siz %s bo'lib kirdingiz"
-
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "Parol muvaffaqiaytli yangilandi. Endi siz yangi parolingiz bilan kirishingiz mumkin."
-
-msgid "Reset your Password"
-msgstr "Parolingizni qayta joriy eting"
-
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "Sizning linkingiz muddati xavfsizlik nuqtai-nazaridan tugatildi. Iltimos, jarayonni elektron pochtangizni quyida kiritish orqali, yangittan boshlang."
-
-msgid "Submit"
-msgstr "Topshirish"
-
-msgid "Form"
-msgstr "Shakl"
-
-msgid "Save Changes"
-msgstr "O'zgarishlarni saqlash"
-
-#, python-format
-msgid "Your new %s has been created."
-msgstr "Sizning yangi %s giz yaratildi"
-
-#, python-format
-msgid "Import %s"
-msgstr "%s ni import qilish"
 
 msgid "90 Days"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 00:44+0000\n"
+"POT-Creation-Date: 2019-10-10 01:00+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>\n"
 "Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
@@ -425,6 +425,247 @@ msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ previ
 msgid "Image to display on story page and in previews (optional)"
 msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
 
+msgid "Remove Item?"
+msgstr "ဖယ္ရွားလိုက္ပါ"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "ဖယ္ရွားလိုက္သည္ႏွင့္ အၿပီးပ်က္သြားမည္ျဖစ္ပါသည္ ဖယ္ရွားျခင္းကိုျပန္လည္ျပင္ဆင္ႏိုင္သည့္ နည္းလမ္းလံုး၀မရွိပါ"
+
+msgid "Cancel"
+msgstr "မလုပ္လိုပါ"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+
+msgid "Previous"
+msgstr "ယခင္"
+
+msgid "Next"
+msgstr "ေရွ႕သို႕"
+
+msgid "edit"
+msgstr "တည္းျဖတ္"
+
+msgid "Sign in"
+msgstr "၀င္ေရာက္ရန္"
+
+msgid "Login"
+msgstr "၀င္ေရာက္ရန္"
+
+msgid "Forgot Password?"
+msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သြားပါသလား"
+
+msgid "Token Expired"
+msgstr "ေပးထားသည္မွာ သက္တမ္းကုန္ဆံုးသြားပါၿပီ"
+
+msgid "Login Failure"
+msgstr "မ၀င္ေရာက္ႏိုင္ပါ"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "အျခားနည္းလမ္းတစ္ခုမွာ ေအာက္တြင္ ေဖာ္ျပထားေသာ ပံုစံကိုျဖည့္ျခင္းအားျဖင့္ အီးေမးလ္မွတဆင့္ သင့္ password ကိုေျပာင္းႏိုင္ပါသည္ "
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "သင့္ password အသစ္ျပဳလုပ္ရန္ website administrator ကိုဆက္သြယ္ပါ"
+
+msgid "Email Address"
+msgstr "အီးေမးလ္လိပ္စာ"
+
+msgid "Recover"
+msgstr "ျပန္လည္ရယူရန္"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "sign up လုပ္စဥ္ကအသံုးျပဳခဲ့ေသာ အီးေမးလ္ကိုထည့္လိုက္ပါ။ လူၾကီးမင္း password ျပန္ရေအာင္ ကူညီပါမယ္"
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+
+msgid "New Password"
+msgstr "Password အသစ္"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Password မ်ားသည္ အနည္းဆံုး၈လံုးရွိရပါမည္  uppercase တစ္လံုး၊ lowercase တစ္လံုးႏွင့္ နံပါတ္တစ္ခု"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "ေက်းဇူးျပဳၿပီး password အသစ္သံုးေပးပါ ယခု password မွာ မႏွစ္ကသံုးၿပီးသားျဖစ္ပါသည္"
+
+#, fuzzy
+#| msgid "New Password"
+msgid "Password"
+msgstr "Password အသစ္"
+
+msgid "Confirm Password"
+msgstr "Password အတည္ျပဳေပးပါ"
+
+msgid "Please enter your password to save changes."
+msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
+
+msgid "Confirm the new password by filling the this field"
+msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "password အသစ္မွာ ယခုအတည္ျပဳသည့္ password ႏွင့္မတူပါ"
+
+msgid "Your Email"
+msgstr "သင့္အီးေမးလ္"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "အီးေမးလ္ရေအာင္ျပန္လည္လုပ္လို႕မရပါ။ password အသစ္လုပ္ရန္ website administrator ကိုေက်းဇူးျပဳၿပီးဆက္သြယ္ေပးပါ"
+
+msgid "Current Password"
+msgstr "လက္ရွိ password"
+
+msgid "Your current password"
+msgstr "သင္၏လက္ရွိ password"
+
+msgid "Your new password."
+msgstr "သင္၏ password အသစ္"
+
+msgid "Confirm new Password"
+msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
+
+msgid "Confirm your new password."
+msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
+
+msgid "Please enter your password to save changes"
+msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
+
+msgid "Confirm your new password by entering it here"
+msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "password အသစ္ႏွင့္ အတည္ျပဳထားေသာ password တို႕ကိုက္ညီမႈမရွိပါ ထပ္မံၾကိဳးစားၾကည့္ပါ"
+
+msgid "New user created successfully."
+msgstr "user အသစ္ေအာင္ျမင္စြာ ဖန္တီးၿပီးပါၿပီ"
+
+msgid "Groups"
+msgstr "အုပ္စုမ်ား"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
+
+msgid "Set the user's initial password here."
+msgstr "user ၏ကနဦး password ကိုသည္ေနရာတြင္ထည့္ပါ"
+
+msgid "Last Login"
+msgstr "ေနာက္ဆံုး login"
+
+msgid "Is Active"
+msgstr "Active ျဖစ္ေနသည္"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "ယခုအသံုးျပဳသူကို သည္ site တြင္ login လုပ္ခြင့္ျပဳ မျပဳ"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "password အသစ္ရိုက္ထည့္ျခင္းျဖင့္ password ေျပာင္းလို႕ရပါတယ္"
+
+msgid "Username"
+msgstr "အသံုးျပဳသူ၏အမည္"
+
+msgid "Your password"
+msgstr "သင့္ password"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "password အသစ္လုပ္လိုလွ်င္ သည္ေနရာတြင္ထည့္ပါ"
+
+msgid "Confirm New Password"
+msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
+
+msgid "Confirm your new password"
+msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
+
+msgid "Edit your profile"
+msgstr "သင့္ profile ကိုထပ္မံျပင္ဆင္ေပးပါ"
+
+msgid "Password Recovery"
+msgstr "password ျပန္ရရန္"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "အၾကံျပဳညႊန္ၾကားခ်က္မ်ားကို သင့္အီးေမးလ္ထံပို႕လိုက္ပါၿပီ"
+
+msgid "Password Recovery Request"
+msgstr "Password ျပန္ရရန္ ေတာင္းခံျခင္း"
+
+msgid "Pick a new password"
+msgstr "Password အသစ္ထပ္ေရြးပါ"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "ေက်းဇူးတင္ပါတယ္ သင့္ passwordကို ေအာင္ျမင္စြာေျပာင္းလိုက္ပါၿပီ"
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "သင္သည္ %s အျဖစ္ login ၀င္ထားသည္"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "password ကိုေအာင္ျမင္စြာ ေျပာင္းလဲၿပီးပါၿပီ။ password အသစ္ကိုသံုးၿပီး login လုပ္ႏိုင္ပါၿပီ"
+
+msgid "Reset your Password"
+msgstr "password ေျပာင္းပါ"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "လံုျခံဳစိတ္ခ်ရျခင္းမရွိေသာေၾကာင့္ သင္၏ link သည္မရေတာ့ပါ။ သည္ေနရာတြင္သင့္ အီးေမးလ္ရိုက္ထည့္ျခင္းျဖင့္ အစမွျပန္လုပ္ပါ"
+
+msgid "Submit"
+msgstr "တင္သြင္းပါ"
+
+msgid "Form"
+msgstr "ပံုစံ"
+
+msgid "Save Changes"
+msgstr "ေျပာင္းထားသည္မ်ားကို saveလုပ္ပါ"
+
+#, fuzzy, python-format
+#| msgid "Your poll has been updated."
+msgid "Your new %s has been created."
+msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံုးအဆင့္ျပဳလုပ္ထားသည္"
+
+#, python-format
+msgid "Import %s"
+msgstr ""
+
 msgid "Back to Website"
 msgstr ""
 
@@ -433,9 +674,6 @@ msgstr ""
 
 msgid "Logout"
 msgstr "ယခုစာမ်က္ႏွာမွထြက္မည္"
-
-msgid "Login"
-msgstr "၀င္ေရာက္ရန္"
 
 msgid "Opinions"
 msgstr ""
@@ -568,12 +806,6 @@ msgid ""
 "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
 "      "
 msgstr ""
-
-msgid "Next"
-msgstr "ေရွ႕သို႕"
-
-msgid "Cancel"
-msgstr "မလုပ္လိုပါ"
 
 msgid "Back"
 msgstr ""
@@ -1094,12 +1326,6 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "ထပ္မံဖတ္ရွဳရန္"
 
-msgid "Sign in"
-msgstr "၀င္ေရာက္ရန္"
-
-msgid "Forgot Password?"
-msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သြားပါသလား"
-
 msgid "+ New "
 msgstr ""
 
@@ -1199,18 +1425,12 @@ msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္
 msgid "FILTER RESULTS"
 msgstr "မိမိသေဘာအေလ်ာက္ ျပန္လည္ေျဖၾကားမႈရလဒ္မ်ား"
 
-msgid "Remove Item?"
-msgstr "ဖယ္ရွားလိုက္ပါ"
-
 #, python-format
 msgid ""
 "\n"
 "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
 "          "
 msgstr ""
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "ဖယ္ရွားလိုက္သည္ႏွင့္ အၿပီးပ်က္သြားမည္ျဖစ္ပါသည္ ဖယ္ရွားျခင္းကိုျပန္လည္ျပင္ဆင္ႏိုင္သည့္ နည္းလမ္းလံုး၀မရွိပါ"
 
 #, python-format
 msgid ""
@@ -1230,20 +1450,11 @@ msgid ""
 "           "
 msgstr ""
 
-msgid "Previous"
-msgstr "ယခင္"
-
-msgid "edit"
-msgstr "တည္းျဖတ္"
-
 msgid "Error"
 msgstr ""
 
 msgid "Enter Dashboard"
 msgstr ""
-
-msgid "Login Failure"
-msgstr "မ၀င္ေရာက္ႏိုင္ပါ"
 
 #, python-format
 msgid ""
@@ -1258,21 +1469,6 @@ msgid ""
 "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "                  "
 msgstr ""
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "အျခားနည္းလမ္းတစ္ခုမွာ ေအာက္တြင္ ေဖာ္ျပထားေသာ ပံုစံကိုျဖည့္ျခင္းအားျဖင့္ အီးေမးလ္မွတဆင့္ သင့္ password ကိုေျပာင္းႏိုင္ပါသည္ "
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "သင့္ password အသစ္ျပဳလုပ္ရန္ website administrator ကိုဆက္သြယ္ပါ"
-
-msgid "Email Address"
-msgstr "အီးေမးလ္လိပ္စာ"
-
-msgid "Recover"
-msgstr "ျပန္လည္ရယူရန္"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "sign up လုပ္စဥ္ကအသံုးျပဳခဲ့ေသာ အီးေမးလ္ကိုထည့္လိုက္ပါ။ လူၾကီးမင္း password ျပန္ရေအာင္ ကူညီပါမယ္"
 
 #, python-format
 msgid ""
@@ -1789,202 +1985,6 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "သင့္အဖြဲ႕အစည္း၏စာမ်က္ႏွာမ်ားေပၚတြင္ သံုးေနၾက custom analytics code snippets မ်ားကဲ့သို႕ HTML code မ်ားကိုထည့္သြင္းေဖာ္ျပရန္လိုအပ္လာပါက "
-
-#, python-format
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-
-#, python-format
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-
-msgid "Token Expired"
-msgstr "ေပးထားသည္မွာ သက္တမ္းကုန္ဆံုးသြားပါၿပီ"
-
-#, python-format
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-
-msgid "New Password"
-msgstr "Password အသစ္"
-
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Password မ်ားသည္ အနည္းဆံုး၈လံုးရွိရပါမည္  uppercase တစ္လံုး၊ lowercase တစ္လံုးႏွင့္ နံပါတ္တစ္ခု"
-
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "ေက်းဇူးျပဳၿပီး password အသစ္သံုးေပးပါ ယခု password မွာ မႏွစ္ကသံုးၿပီးသားျဖစ္ပါသည္"
-
-#, fuzzy
-#| msgid "New Password"
-msgid "Password"
-msgstr "Password အသစ္"
-
-msgid "Confirm Password"
-msgstr "Password အတည္ျပဳေပးပါ"
-
-msgid "Please enter your password to save changes."
-msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
-
-msgid "Confirm the new password by filling the this field"
-msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
-
-msgid "New password doesn't match with its confirmation"
-msgstr "password အသစ္မွာ ယခုအတည္ျပဳသည့္ password ႏွင့္မတူပါ"
-
-msgid "Your Email"
-msgstr "သင့္အီးေမးလ္"
-
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "အီးေမးလ္ရေအာင္ျပန္လည္လုပ္လို႕မရပါ။ password အသစ္လုပ္ရန္ website administrator ကိုေက်းဇူးျပဳၿပီးဆက္သြယ္ေပးပါ"
-
-msgid "Current Password"
-msgstr "လက္ရွိ password"
-
-msgid "Your current password"
-msgstr "သင္၏လက္ရွိ password"
-
-msgid "Your new password."
-msgstr "သင္၏ password အသစ္"
-
-msgid "Confirm new Password"
-msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
-
-msgid "Confirm your new password."
-msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
-
-msgid "Please enter your password to save changes"
-msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
-
-msgid "Confirm your new password by entering it here"
-msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
-
-msgid "Mismatch between your new password and confirmation, try again"
-msgstr "password အသစ္ႏွင့္ အတည္ျပဳထားေသာ password တို႕ကိုက္ညီမႈမရွိပါ ထပ္မံၾကိဳးစားၾကည့္ပါ"
-
-msgid "New user created successfully."
-msgstr "user အသစ္ေအာင္ျမင္စြာ ဖန္တီးၿပီးပါၿပီ"
-
-msgid "Groups"
-msgstr "အုပ္စုမ်ား"
-
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
-
-msgid "Set the user's initial password here."
-msgstr "user ၏ကနဦး password ကိုသည္ေနရာတြင္ထည့္ပါ"
-
-msgid "Last Login"
-msgstr "ေနာက္ဆံုး login"
-
-msgid "Is Active"
-msgstr "Active ျဖစ္ေနသည္"
-
-msgid "Whether this user is allowed to log into the site"
-msgstr "ယခုအသံုးျပဳသူကို သည္ site တြင္ login လုပ္ခြင့္ျပဳ မျပဳ"
-
-msgid "Users will only get those permissions that are allowed for their group"
-msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
-
-msgid "You can reset the user's password by entering a new password here"
-msgstr "password အသစ္ရိုက္ထည့္ျခင္းျဖင့္ password ေျပာင္းလို႕ရပါတယ္"
-
-msgid "Username"
-msgstr "အသံုးျပဳသူ၏အမည္"
-
-msgid "Your password"
-msgstr "သင့္ password"
-
-msgid "If you want to set a new password, enter it here"
-msgstr "password အသစ္လုပ္လိုလွ်င္ သည္ေနရာတြင္ထည့္ပါ"
-
-msgid "Confirm New Password"
-msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
-
-msgid "Confirm your new password"
-msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
-
-msgid "Edit your profile"
-msgstr "သင့္ profile ကိုထပ္မံျပင္ဆင္ေပးပါ"
-
-msgid "Password Recovery"
-msgstr "password ျပန္ရရန္"
-
-msgid "An Email has been sent to your account with further instructions."
-msgstr "အၾကံျပဳညႊန္ၾကားခ်က္မ်ားကို သင့္အီးေမးလ္ထံပို႕လိုက္ပါၿပီ"
-
-msgid "Password Recovery Request"
-msgstr "Password ျပန္ရရန္ ေတာင္းခံျခင္း"
-
-msgid "Pick a new password"
-msgstr "Password အသစ္ထပ္ေရြးပါ"
-
-msgid "Your password has successfully been updated, thank you."
-msgstr "ေက်းဇူးတင္ပါတယ္ သင့္ passwordကို ေအာင္ျမင္စြာေျပာင္းလိုက္ပါၿပီ"
-
-#, python-format
-msgid "You are now logged in as %s"
-msgstr "သင္သည္ %s အျဖစ္ login ၀င္ထားသည္"
-
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "password ကိုေအာင္ျမင္စြာ ေျပာင္းလဲၿပီးပါၿပီ။ password အသစ္ကိုသံုးၿပီး login လုပ္ႏိုင္ပါၿပီ"
-
-msgid "Reset your Password"
-msgstr "password ေျပာင္းပါ"
-
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "လံုျခံဳစိတ္ခ်ရျခင္းမရွိေသာေၾကာင့္ သင္၏ link သည္မရေတာ့ပါ။ သည္ေနရာတြင္သင့္ အီးေမးလ္ရိုက္ထည့္ျခင္းျဖင့္ အစမွျပန္လုပ္ပါ"
-
-msgid "Submit"
-msgstr "တင္သြင္းပါ"
-
-msgid "Form"
-msgstr "ပံုစံ"
-
-msgid "Save Changes"
-msgstr "ေျပာင္းထားသည္မ်ားကို saveလုပ္ပါ"
-
-#, fuzzy, python-format
-#| msgid "Your poll has been updated."
-msgid "Your new %s has been created."
-msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံုးအဆင့္ျပဳလုပ္ထားသည္"
-
-#, python-format
-msgid "Import %s"
-msgstr ""
 
 msgid "90 Days"
 msgstr ""

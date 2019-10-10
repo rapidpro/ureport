@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 00:44+0000\n"
+"POT-Creation-Date: 2019-10-10 01:00+0000\n"
 "PO-Revision-Date: 2019-01-28 17:20+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Romanian (http://www.transifex.com/rapidpro/ureport/language/ro/)\n"
@@ -427,6 +427,294 @@ msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și în previzualizări (opțional)"
 
+msgid "Remove Item?"
+msgstr "Elimină element?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Ești sigur că vrei să ștergi<b>%(object)s</b>?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Odată eliminat, nu va mai putea fi restabilit. Nu există niciun mod de a anula această operație."
+
+msgid "Cancel"
+msgstr "Anulare"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t\t%(counter)s rezultate\n"
+"\t"
+msgstr[1] ""
+"\n"
+"         %(counter)s rezultate\n"
+"        "
+msgstr[2] ""
+"\n"
+"         %(counter)s rezultate\n"
+"        "
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"⇥Rezultate %(start)s-%(end)s a %(count)s\n"
+"⇥"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next"
+msgstr "Următor"
+
+msgid "edit"
+msgstr "editează"
+
+msgid "Sign in"
+msgstr "Conectează-te"
+
+msgid "Login"
+msgstr "Loghează-te"
+
+msgid "Forgot Password?"
+msgstr "Ai uitat parola?"
+
+msgid "Token Expired"
+msgstr "Token expirat"
+
+msgid "Login Failure"
+msgstr "Logare eșuată"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Ne pare rău, nu vă puteți conecta în acest moment, deoarece am primit %(failed_login_limit)s Încercări greșite de conectare."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Te rog așteaptă %(lockout_timeout)s minute înainte ca să încercați să vă autentificați din nou."
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "În caz contrar, poți completa formularul de mai jos pentru a-ți reseta parola prin e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Te rugăm să contactezi administratorul site-ului pentru a-ți reseta parola."
+
+msgid "Email Address"
+msgstr "E-mail"
+
+msgid "Recover"
+msgstr "Restabilire"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Te rugăm să introduci adresa de e-mail, pe care ai utilizat-o la conectare, iar noi te vom ajuta să îți restabilești parola."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Parola a expirat</strong> Politica site-ului afirmă că trebuie să alegeți o parolă nouă la fiecare %(expire_days)s zile, și că parolele nu trebuie să fi fost folosite anterior %(window_days)s zile."
+
+msgid "New Password"
+msgstr "Parola nouă"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Parolele trebuie să conțină cel puțin 8 caractere, inclusiv o majusculă, o minusculă și un număr"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Ai folosit această parolă pe parcursul ultimului an, alege o parolă nouă."
+
+msgid "Password"
+msgstr "Parolă"
+
+msgid "Confirm Password"
+msgstr "Confirmare parolă"
+
+msgid "Please enter your password to save changes."
+msgstr "Introdu parola pentru a salva modificările."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Confirmă parola nouă prin completarea acestui câmp"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Parola nouă nu se potrivește cu cea confirmată"
+
+msgid "Your Email"
+msgstr "E-mail"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "E-mailul pentru recuperarea parolei nu este confirmat, contactează administratorul site-ului pentru a-ți reseta parola manual."
+
+msgid "Current Password"
+msgstr "Parola curentă"
+
+msgid "Your current password"
+msgstr "Parola ta curentă"
+
+msgid "Your new password."
+msgstr "Parola ta nouă"
+
+msgid "Confirm new Password"
+msgstr "Confirmare parolă nouă"
+
+msgid "Confirm your new password."
+msgstr "Confirmaţi parola nouă."
+
+msgid "Please enter your password to save changes"
+msgstr "Introdu parola pentru a salva modificările"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Confirmă parola noua introducând-o aici"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Parola nouă și cea confirmată nu corespund, încearcă din nou"
+
+msgid "New user created successfully."
+msgstr "Contul nou a fost creat cu succes."
+
+msgid "Groups"
+msgstr "Grupuri"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
+
+msgid "Set the user's initial password here."
+msgstr "Introdu aici parola inițială a utilizatorului."
+
+msgid "Last Login"
+msgstr "Ultima logare"
+
+msgid "Is Active"
+msgstr "Este activ"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Dacă acestui utilizator îi este permis să se logheze pe site"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Poți reseta parola utilizatorului prin introducerea unei noi parole aici"
+
+msgid "Username"
+msgstr "Nume utilizator"
+
+msgid "Your password"
+msgstr "Parola"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Dacă dorești să setezi o parolă nouă, introdu-o aici"
+
+msgid "Confirm New Password"
+msgstr "Confirmare parola nouă"
+
+msgid "Confirm your new password"
+msgstr "Confirmă parola nouă."
+
+msgid "Edit your profile"
+msgstr "Editează profilul"
+
+msgid "Password Recovery"
+msgstr "Recuperează parola"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Un e-mail cu instrucțiuni suplimentare ți-a fost expediat în cont"
+
+msgid "Password Recovery Request"
+msgstr "Solicitare recuperare parolă"
+
+msgid "Pick a new password"
+msgstr "Alege o parolă nouă"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Parola a fost actualizată cu succes, îți mulțumim."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Acum tu ești conectat ca %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Parola a fost actualizată cu succes. Acum poți să te loghezi cu parola nouă."
+
+msgid "Reset your Password"
+msgstr "Resetează parola"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Link-ul tău a expirat din motive de securitate. Te rugăm să începi din nou prin introducerea e-mailului aici."
+
+msgid "Submit"
+msgstr "Trimite"
+
+msgid "Form"
+msgstr "Formular"
+
+msgid "Save Changes"
+msgstr "Salvează modificările"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "%s tau nou a fost creat."
+
+#, python-format
+msgid "Import %s"
+msgstr "Importă %s"
+
 msgid "Back to Website"
 msgstr ""
 
@@ -435,9 +723,6 @@ msgstr ""
 
 msgid "Logout"
 msgstr "Deconectare"
-
-msgid "Login"
-msgstr "Loghează-te"
 
 msgid "Opinions"
 msgstr ""
@@ -574,12 +859,6 @@ msgid ""
 msgstr ""
 "\n"
 "<Div> După ce creați widget-ul, copiați id-ul widget-ului din url, așa cum este prezentat în </ div> "
-
-msgid "Next"
-msgstr "Următor"
-
-msgid "Cancel"
-msgstr "Anulare"
 
 msgid "Back"
 msgstr "Înapoi"
@@ -1105,12 +1384,6 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "CITEȘTE MAI MULTE"
 
-msgid "Sign in"
-msgstr "Conectează-te"
-
-msgid "Forgot Password?"
-msgstr "Ai uitat parola?"
-
 msgid "+ New "
 msgstr ""
 
@@ -1216,9 +1489,6 @@ msgstr "U-REPORTERI ÎN"
 msgid "FILTER RESULTS"
 msgstr "REZULTATELE SONDAJULUI"
 
-msgid "Remove Item?"
-msgstr "Elimină element?"
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1231,9 +1501,6 @@ msgid ""
 msgstr ""
 "\n"
 "Ești sigur că vrei să ștergi<b>%(object)s</b>?"
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "Odată eliminat, nu va mai putea fi restabilit. Nu există niciun mod de a anula această operație."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1279,20 +1546,11 @@ msgstr ""
 "⇥Rezultate %(start)s-%(end)s a %(count)s\n"
 "⇥"
 
-msgid "Previous"
-msgstr "Anterior"
-
-msgid "edit"
-msgstr "editează"
-
 msgid "Error"
 msgstr ""
 
 msgid "Enter Dashboard"
 msgstr ""
-
-msgid "Login Failure"
-msgstr "Logare eșuată"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1319,21 +1577,6 @@ msgid ""
 msgstr ""
 "\n"
 "Te rog așteaptă %(lockout_timeout)s minute înainte ca să încercați să vă autentificați din nou."
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "În caz contrar, poți completa formularul de mai jos pentru a-ți reseta parola prin e-mail."
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "Te rugăm să contactezi administratorul site-ului pentru a-ți reseta parola."
-
-msgid "Email Address"
-msgstr "E-mail"
-
-msgid "Recover"
-msgstr "Restabilire"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Te rugăm să introduci adresa de e-mail, pe care ai utilizat-o la conectare, iar noi te vom ajuta să îți restabilești parola."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1853,249 +2096,6 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Dacă ai nevoie să incluzi unele coduri HTML personalizate în paginile organizaţiei tale, cum ar fi fragmente de cod personalizat de analiză"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-"\n"
-"Ești sigur că vrei să ștergi<b>%(object)s</b>?"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-"\n"
-"\t\t%(counter)s rezultate\n"
-"\t"
-msgstr[1] ""
-"\n"
-"         %(counter)s rezultate\n"
-"        "
-msgstr[2] ""
-"\n"
-"         %(counter)s rezultate\n"
-"        "
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-"\n"
-"⇥Rezultate %(start)s-%(end)s a %(count)s\n"
-"⇥"
-
-msgid "Token Expired"
-msgstr "Token expirat"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-"\n"
-"Ne pare rău, nu vă puteți conecta în acest moment, deoarece am primit %(failed_login_limit)s Încercări greșite de conectare."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-"\n"
-"Te rog așteaptă %(lockout_timeout)s minute înainte ca să încercați să vă autentificați din nou."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-"\n"
-"<strong>Parola a expirat</strong> Politica site-ului afirmă că trebuie să alegeți o parolă nouă la fiecare %(expire_days)s zile, și că parolele nu trebuie să fi fost folosite anterior %(window_days)s zile."
-
-msgid "New Password"
-msgstr "Parola nouă"
-
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Parolele trebuie să conțină cel puțin 8 caractere, inclusiv o majusculă, o minusculă și un număr"
-
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "Ai folosit această parolă pe parcursul ultimului an, alege o parolă nouă."
-
-msgid "Password"
-msgstr "Parolă"
-
-msgid "Confirm Password"
-msgstr "Confirmare parolă"
-
-msgid "Please enter your password to save changes."
-msgstr "Introdu parola pentru a salva modificările."
-
-msgid "Confirm the new password by filling the this field"
-msgstr "Confirmă parola nouă prin completarea acestui câmp"
-
-msgid "New password doesn't match with its confirmation"
-msgstr "Parola nouă nu se potrivește cu cea confirmată"
-
-msgid "Your Email"
-msgstr "E-mail"
-
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "E-mailul pentru recuperarea parolei nu este confirmat, contactează administratorul site-ului pentru a-ți reseta parola manual."
-
-msgid "Current Password"
-msgstr "Parola curentă"
-
-msgid "Your current password"
-msgstr "Parola ta curentă"
-
-msgid "Your new password."
-msgstr "Parola ta nouă"
-
-msgid "Confirm new Password"
-msgstr "Confirmare parolă nouă"
-
-msgid "Confirm your new password."
-msgstr "Confirmaţi parola nouă."
-
-msgid "Please enter your password to save changes"
-msgstr "Introdu parola pentru a salva modificările"
-
-msgid "Confirm your new password by entering it here"
-msgstr "Confirmă parola noua introducând-o aici"
-
-msgid "Mismatch between your new password and confirmation, try again"
-msgstr "Parola nouă și cea confirmată nu corespund, încearcă din nou"
-
-msgid "New user created successfully."
-msgstr "Contul nou a fost creat cu succes."
-
-msgid "Groups"
-msgstr "Grupuri"
-
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
-
-msgid "Set the user's initial password here."
-msgstr "Introdu aici parola inițială a utilizatorului."
-
-msgid "Last Login"
-msgstr "Ultima logare"
-
-msgid "Is Active"
-msgstr "Este activ"
-
-msgid "Whether this user is allowed to log into the site"
-msgstr "Dacă acestui utilizator îi este permis să se logheze pe site"
-
-msgid "Users will only get those permissions that are allowed for their group"
-msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
-
-msgid "You can reset the user's password by entering a new password here"
-msgstr "Poți reseta parola utilizatorului prin introducerea unei noi parole aici"
-
-msgid "Username"
-msgstr "Nume utilizator"
-
-msgid "Your password"
-msgstr "Parola"
-
-msgid "If you want to set a new password, enter it here"
-msgstr "Dacă dorești să setezi o parolă nouă, introdu-o aici"
-
-msgid "Confirm New Password"
-msgstr "Confirmare parola nouă"
-
-msgid "Confirm your new password"
-msgstr "Confirmă parola nouă."
-
-msgid "Edit your profile"
-msgstr "Editează profilul"
-
-msgid "Password Recovery"
-msgstr "Recuperează parola"
-
-msgid "An Email has been sent to your account with further instructions."
-msgstr "Un e-mail cu instrucțiuni suplimentare ți-a fost expediat în cont"
-
-msgid "Password Recovery Request"
-msgstr "Solicitare recuperare parolă"
-
-msgid "Pick a new password"
-msgstr "Alege o parolă nouă"
-
-msgid "Your password has successfully been updated, thank you."
-msgstr "Parola a fost actualizată cu succes, îți mulțumim."
-
-#, python-format
-msgid "You are now logged in as %s"
-msgstr "Acum tu ești conectat ca %s"
-
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "Parola a fost actualizată cu succes. Acum poți să te loghezi cu parola nouă."
-
-msgid "Reset your Password"
-msgstr "Resetează parola"
-
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "Link-ul tău a expirat din motive de securitate. Te rugăm să începi din nou prin introducerea e-mailului aici."
-
-msgid "Submit"
-msgstr "Trimite"
-
-msgid "Form"
-msgstr "Formular"
-
-msgid "Save Changes"
-msgstr "Salvează modificările"
-
-#, python-format
-msgid "Your new %s has been created."
-msgstr "%s tau nou a fost creat."
-
-#, python-format
-msgid "Import %s"
-msgstr "Importă %s"
 
 msgid "90 Days"
 msgstr ""

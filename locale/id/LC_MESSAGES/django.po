@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 00:44+0000\n"
+"POT-Creation-Date: 2019-10-10 01:00+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -425,6 +425,285 @@ msgstr "Gambar untuk ditampilkan pada halaman cerita dan di preview. (pilihan)"
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Image to display on story page and in previews (optional)"
 
+msgid "Remove Item?"
+msgstr "Hapus daftar?"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
+#| "    "
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Apakah Anda yakin ingin menghapus <b>%(object)s</b>?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Sekali dihapus, itu akan hilang selamanya. Tidak ada cara untuk membatalkan operasi ini."
+
+msgid "Cancel"
+msgstr "Batal"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t\t%(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"%(counter)s hasil"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"⇥Hasil %(start)s-%(end)s of %(count)s\n"
+"⇥"
+
+msgid "Previous"
+msgstr "Sebelumnya"
+
+msgid "Next"
+msgstr "Sesudahnya"
+
+msgid "edit"
+msgstr "Rubah"
+
+msgid "Sign in"
+msgstr "Masuk"
+
+msgid "Login"
+msgstr "Masuk"
+
+msgid "Forgot Password?"
+msgstr "Lupa Password"
+
+msgid "Token Expired"
+msgstr "Token Kadaluarsa"
+
+msgid "Login Failure"
+msgstr "Kegagalan Masuk"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+#| "      "
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Maaf, Anda tidak bisa login pada saat ini karena kami menerima %(failed_login_limit)s usaha login yang salah."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+#| "      "
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Silahkan tunggu %(lockout_timeout)s menit sebelum mencoba login kembali."
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Atau, Anda bisa mengisi form di bawah ini untuk memiliki password ulang via e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Silahkan hubungi administrator situs untuk memiliki ulang sandi Anda."
+
+msgid "Email Address"
+msgstr "Alamat Surel"
+
+msgid "Recover"
+msgstr "Pemulihan"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Masukkan alamat surel yang Anda gunakan untuk mendaftar dan kami akan membantu Anda mengembalikan kata kunci Anda."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+#| "  "
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<Strong> Kata sandi Anda telah kedaluwarsa. </ Strong> menyatakan kebijakan Site bahwa Anda harus memilih password baru setiap %(expire_days)s hari, dan bahwa password harus tidak telah digunakan dalam sebelumnya %(window_days)s hari"
+
+msgid "New Password"
+msgstr "Kata kunci baru"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Kata kunci harus memiliki minimal 8 karakter, termasuk satu huruf besar, satu huruf kecil dan satu nomor"
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Anda telah menggunakan sandi ini sebelum pada tahun lalu, silakan gunakan sandi baru."
+
+msgid "Password"
+msgstr "Kata kunci"
+
+msgid "Confirm Password"
+msgstr "Konfirmasi kata kunci"
+
+msgid "Please enter your password to save changes."
+msgstr "Silahkan masukkan kata kunci untuk menyimpan perubahan"
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Konfirmasi sandi baru dengan mengisi formulir berikut"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Sandi baru tidak sesuai dengan konfirmasinya"
+
+msgid "Your Email"
+msgstr "Surel anda"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "E-mail pemulihan tidak didukung, silahkan hubungi pengelola situs untuk mereset password Anda secara manual."
+
+msgid "Current Password"
+msgstr "Kata sandi saat ini"
+
+msgid "Your current password"
+msgstr "Kata sandi anda saat ini"
+
+msgid "Your new password."
+msgstr "Kata sandi baru anda"
+
+msgid "Confirm new Password"
+msgstr "Konfirmasi kata sandi"
+
+msgid "Confirm your new password."
+msgstr "Konfirmasi kata sandi baru anda"
+
+msgid "Please enter your password to save changes"
+msgstr "Silahkan masukkan kata sandi untuk menyimpan perubahan"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Konfirmasi kata sandi anda dengan memasukannya disini"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Ketidaksesuaian antara kata sandi baru dengan konfirmasi, coba lagi"
+
+msgid "New user created successfully."
+msgstr "Pengguna baru berhasil dibuat."
+
+msgid "Groups"
+msgstr "Kelompok"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Pengguna hanya akan mendapatkan hak akses yang diperbolehkan untuk grup mereka."
+
+msgid "Set the user's initial password here."
+msgstr "Set password awal pengguna di sini."
+
+msgid "Last Login"
+msgstr "Login terakhir"
+
+msgid "Is Active"
+msgstr "Aktif"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Apakah pengguna ini diperbolehkan untuk login ke situs"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Pengguna hanya akan mendapatkan hak akses yang diperbolehkan untuk kelompok mereka"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Anda dapat me-reset password pengguna dengan memasukkan password baru di sini"
+
+msgid "Username"
+msgstr "Nama pengguna"
+
+msgid "Your password"
+msgstr "Kata sandi anda"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Jika Anda ingin mengatur sandi baru, masukkan di sini"
+
+msgid "Confirm New Password"
+msgstr "Konfirmasi Password Baru"
+
+msgid "Confirm your new password"
+msgstr "Konfirmasi Password baru anda"
+
+msgid "Edit your profile"
+msgstr "Ubah Profil Anda"
+
+msgid "Password Recovery"
+msgstr "Pemulihan Password"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Email telah dikirim ke akun Anda dengan petunjuk lebih lanjut."
+
+msgid "Password Recovery Request"
+msgstr "Permintaan Pemulihan Kata Sandi"
+
+msgid "Pick a new password"
+msgstr "Pilih kata sandi baru"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Kata sandi Anda telah berhasil diperbarui, terima kasih."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Anda sekarang login sebagai %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Sandi Updated Berhasil. Sekarang Anda dapat login menggunakan password baru Anda."
+
+msgid "Reset your Password"
+msgstr "Mereset password Anda"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Link Anda telah berakhir karena alasan keamanan. Silahkan memulai proses dengan memasukkan email Anda di sini."
+
+msgid "Submit"
+msgstr "Proses"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Save Changes"
+msgstr "Simpan Perubahan"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "%s baru anda sudah berhasil dibuat"
+
+#, python-format
+msgid "Import %s"
+msgstr "Impor %s"
+
 msgid "Back to Website"
 msgstr ""
 
@@ -433,9 +712,6 @@ msgstr ""
 
 msgid "Logout"
 msgstr "Keluar"
-
-msgid "Login"
-msgstr "Masuk"
 
 msgid "Opinions"
 msgstr ""
@@ -572,12 +848,6 @@ msgid ""
 msgstr ""
 "\n"
 "<Div> Setelah Anda membuat widget menyalin widget id dari url seperti yang ditunjukkan pada </ div>"
-
-msgid "Next"
-msgstr "Sesudahnya"
-
-msgid "Cancel"
-msgstr "Batal"
 
 msgid "Back"
 msgstr "Kembali"
@@ -1121,12 +1391,6 @@ msgstr ""
 msgid "LEARN MORE"
 msgstr "LANJUT"
 
-msgid "Sign in"
-msgstr "Masuk"
-
-msgid "Forgot Password?"
-msgstr "Lupa Password"
-
 msgid "+ New "
 msgstr ""
 
@@ -1232,9 +1496,6 @@ msgstr "U-REPORTERS DI"
 msgid "FILTER RESULTS"
 msgstr "HASIL POLLING"
 
-msgid "Remove Item?"
-msgstr "Hapus daftar?"
-
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
@@ -1247,9 +1508,6 @@ msgid ""
 msgstr ""
 "\n"
 "Apakah Anda yakin ingin menghapus <b>%(object)s</b>?"
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "Sekali dihapus, itu akan hilang selamanya. Tidak ada cara untuk membatalkan operasi ini."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1286,20 +1544,11 @@ msgstr ""
 "⇥Hasil %(start)s-%(end)s of %(count)s\n"
 "⇥"
 
-msgid "Previous"
-msgstr "Sebelumnya"
-
-msgid "edit"
-msgstr "Rubah"
-
 msgid "Error"
 msgstr ""
 
 msgid "Enter Dashboard"
 msgstr ""
-
-msgid "Login Failure"
-msgstr "Kegagalan Masuk"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1326,21 +1575,6 @@ msgid ""
 msgstr ""
 "\n"
 "Silahkan tunggu %(lockout_timeout)s menit sebelum mencoba login kembali."
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "Atau, Anda bisa mengisi form di bawah ini untuk memiliki password ulang via e-mail."
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "Silahkan hubungi administrator situs untuk memiliki ulang sandi Anda."
-
-msgid "Email Address"
-msgstr "Alamat Surel"
-
-msgid "Recover"
-msgstr "Pemulihan"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Masukkan alamat surel yang Anda gunakan untuk mendaftar dan kami akan membantu Anda mengembalikan kata kunci Anda."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1868,240 +2102,6 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, seperti modifikasi kode analytics"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-"\n"
-"Apakah Anda yakin ingin menghapus <b>%(object)s</b>?"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-"\n"
-"%(counter)s hasil"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-"\n"
-"⇥Hasil %(start)s-%(end)s of %(count)s\n"
-"⇥"
-
-msgid "Token Expired"
-msgstr "Token Kadaluarsa"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-"\n"
-"Maaf, Anda tidak bisa login pada saat ini karena kami menerima %(failed_login_limit)s usaha login yang salah."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-"\n"
-"Silahkan tunggu %(lockout_timeout)s menit sebelum mencoba login kembali."
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-"\n"
-"<Strong> Kata sandi Anda telah kedaluwarsa. </ Strong> menyatakan kebijakan Site bahwa Anda harus memilih password baru setiap %(expire_days)s hari, dan bahwa password harus tidak telah digunakan dalam sebelumnya %(window_days)s hari"
-
-msgid "New Password"
-msgstr "Kata kunci baru"
-
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Kata kunci harus memiliki minimal 8 karakter, termasuk satu huruf besar, satu huruf kecil dan satu nomor"
-
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "Anda telah menggunakan sandi ini sebelum pada tahun lalu, silakan gunakan sandi baru."
-
-msgid "Password"
-msgstr "Kata kunci"
-
-msgid "Confirm Password"
-msgstr "Konfirmasi kata kunci"
-
-msgid "Please enter your password to save changes."
-msgstr "Silahkan masukkan kata kunci untuk menyimpan perubahan"
-
-msgid "Confirm the new password by filling the this field"
-msgstr "Konfirmasi sandi baru dengan mengisi formulir berikut"
-
-msgid "New password doesn't match with its confirmation"
-msgstr "Sandi baru tidak sesuai dengan konfirmasinya"
-
-msgid "Your Email"
-msgstr "Surel anda"
-
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "E-mail pemulihan tidak didukung, silahkan hubungi pengelola situs untuk mereset password Anda secara manual."
-
-msgid "Current Password"
-msgstr "Kata sandi saat ini"
-
-msgid "Your current password"
-msgstr "Kata sandi anda saat ini"
-
-msgid "Your new password."
-msgstr "Kata sandi baru anda"
-
-msgid "Confirm new Password"
-msgstr "Konfirmasi kata sandi"
-
-msgid "Confirm your new password."
-msgstr "Konfirmasi kata sandi baru anda"
-
-msgid "Please enter your password to save changes"
-msgstr "Silahkan masukkan kata sandi untuk menyimpan perubahan"
-
-msgid "Confirm your new password by entering it here"
-msgstr "Konfirmasi kata sandi anda dengan memasukannya disini"
-
-msgid "Mismatch between your new password and confirmation, try again"
-msgstr "Ketidaksesuaian antara kata sandi baru dengan konfirmasi, coba lagi"
-
-msgid "New user created successfully."
-msgstr "Pengguna baru berhasil dibuat."
-
-msgid "Groups"
-msgstr "Kelompok"
-
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "Pengguna hanya akan mendapatkan hak akses yang diperbolehkan untuk grup mereka."
-
-msgid "Set the user's initial password here."
-msgstr "Set password awal pengguna di sini."
-
-msgid "Last Login"
-msgstr "Login terakhir"
-
-msgid "Is Active"
-msgstr "Aktif"
-
-msgid "Whether this user is allowed to log into the site"
-msgstr "Apakah pengguna ini diperbolehkan untuk login ke situs"
-
-msgid "Users will only get those permissions that are allowed for their group"
-msgstr "Pengguna hanya akan mendapatkan hak akses yang diperbolehkan untuk kelompok mereka"
-
-msgid "You can reset the user's password by entering a new password here"
-msgstr "Anda dapat me-reset password pengguna dengan memasukkan password baru di sini"
-
-msgid "Username"
-msgstr "Nama pengguna"
-
-msgid "Your password"
-msgstr "Kata sandi anda"
-
-msgid "If you want to set a new password, enter it here"
-msgstr "Jika Anda ingin mengatur sandi baru, masukkan di sini"
-
-msgid "Confirm New Password"
-msgstr "Konfirmasi Password Baru"
-
-msgid "Confirm your new password"
-msgstr "Konfirmasi Password baru anda"
-
-msgid "Edit your profile"
-msgstr "Ubah Profil Anda"
-
-msgid "Password Recovery"
-msgstr "Pemulihan Password"
-
-msgid "An Email has been sent to your account with further instructions."
-msgstr "Email telah dikirim ke akun Anda dengan petunjuk lebih lanjut."
-
-msgid "Password Recovery Request"
-msgstr "Permintaan Pemulihan Kata Sandi"
-
-msgid "Pick a new password"
-msgstr "Pilih kata sandi baru"
-
-msgid "Your password has successfully been updated, thank you."
-msgstr "Kata sandi Anda telah berhasil diperbarui, terima kasih."
-
-#, python-format
-msgid "You are now logged in as %s"
-msgstr "Anda sekarang login sebagai %s"
-
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "Sandi Updated Berhasil. Sekarang Anda dapat login menggunakan password baru Anda."
-
-msgid "Reset your Password"
-msgstr "Mereset password Anda"
-
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "Link Anda telah berakhir karena alasan keamanan. Silahkan memulai proses dengan memasukkan email Anda di sini."
-
-msgid "Submit"
-msgstr "Proses"
-
-msgid "Form"
-msgstr "Form"
-
-msgid "Save Changes"
-msgstr "Simpan Perubahan"
-
-#, python-format
-msgid "Your new %s has been created."
-msgstr "%s baru anda sudah berhasil dibuat"
-
-#, python-format
-msgid "Import %s"
-msgstr "Impor %s"
 
 msgid "90 Days"
 msgstr ""
