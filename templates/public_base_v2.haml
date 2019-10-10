@@ -116,6 +116,10 @@
       .bg-light1 {
         background: {{ org|config:'light1_color'|default:'#FFD100' }};
       }
+      
+      .bg-light1.hover-dark:hover {
+        background: #ffda33;
+      }
 
       .text-light1 {
         color: {{ org|config:'light1_color'|default:'#FFD100' }};
@@ -123,6 +127,10 @@
 
       .bg-light2 {
         background: {{ org|config:'light2_color'|default:'#5eb3e0' }};
+      }
+
+      .bg-light2.hover-dark:hover {
+        background: #89c7e8;
       }
 
       .ligth-black {
