@@ -1,3 +1,7 @@
+v1.1.98
+----------
+ * Merge pull request #502 from rapidpro/add-indexes
+
 v1.1.96
 ----------
  * Disable the squash for reporters counters
