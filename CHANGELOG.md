@@ -1,3 +1,7 @@
+v1.1.95
+----------
+ * Refresh engagement data once a day
+
 v1.1.94
 ----------
  * Add overflow scroll on longer labels
