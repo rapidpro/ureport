@@ -1,3 +1,7 @@
+v1.1.96
+----------
+ * Disable the squash for reporters counters
+
 v1.1.95
 ----------
  * Refresh engagement data once a day
