@@ -305,7 +305,7 @@ class ReportersCounter(models.Model):
         counters = cls.objects.filter(org=org)
         if types:
             counters = counters.filter(type__in=types)
-        counter_counts = counters.values("type").order_by("type").annotate(count_sum=Sum("count"))
+        counter_counts = counters.values("type").annotate(count_sum=Sum("count"))
 
         return {c["type"]: c["count_sum"] for c in counter_counts}
 
