@@ -4,33 +4,33 @@ from django.db import migrations
 
 # language=SQL
 INDEX_SQL_CONTACTACTIVITY_ORG_DATE_GENDER = """
-CREATE INDEX CONCURRENTLY IF NOT EXISTS stats_contactactivity_org_id_date_gender
+CREATE INDEX IF NOT EXISTS stats_contactactivity_org_id_date_gender
   on stats_contactactivity (org_id, date, gender);
 """
 
 # language=SQL
 INDEX_SQL_CONTACTACTIVITY_ORG_DATE_STATE = """
-CREATE INDEX CONCURRENTLY IF NOT EXISTS stats_contactactivity_org_id_date_state
+CREATE INDEX IF NOT EXISTS stats_contactactivity_org_id_date_state
   on stats_contactactivity (org_id, date, state);
 """
 
 
 # language=SQL
 INDEX_SQL_POLLSTATS_ORG_DATE_GENDER = """
-CREATE INDEX CONCURRENTLY IF NOT EXISTS stats_pollstats_org_id_date_gender
+CREATE INDEX IF NOT EXISTS stats_pollstats_org_id_date_gender
   on stats_pollstats (org_id, date, gender_segment_id);
 """
 
 # language=SQL
 INDEX_SQL_POLLSTATS_ORG_DATE_AGE = """
-CREATE INDEX CONCURRENTLY IF NOT EXISTS stats_pollstats_org_id_date_age
+CREATE INDEX IF NOT EXISTS stats_pollstats_org_id_date_age
   on stats_pollstats (org_id, date, age_segment_id);
 """
 
 
 # language=SQL
 INDEX_SQL_POLLSTATS_ORG_DATE_LOCATION = """
-CREATE INDEX CONCURRENTLY IF NOT EXISTS stats_pollstats_org_id_date_location
+CREATE INDEX IF NOT EXISTS stats_pollstats_org_id_date_location
   on stats_pollstats (org_id, date, location_id);
 """
 
