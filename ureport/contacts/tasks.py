@@ -30,7 +30,7 @@ def pull_contacts(org, ignored_since, ignored_until):
     """
     Fetches updated contacts from RapidPro and updates local contacts accordingly
     """
-    from ureport.contacts.models import ReportersCounter
+    # from ureport.contacts.models import ReportersCounter
 
     results = dict()
 
@@ -83,7 +83,7 @@ def pull_contacts(org, ignored_since, ignored_until):
         logger.info("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
 
         # Squash reporters counts
-        ReportersCounter.squash_counts()
+        # ReportersCounter.squash_counts()
 
         results[backend_obj.slug] = {
             "fields": {"created": fields_created, "updated": fields_updated, "deleted": fields_deleted},
