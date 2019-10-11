@@ -843,8 +843,7 @@ CELERYBEAT_SCHEDULE = {
     },
     "refresh-engagement-data": {
         "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": timedelta(hours=6),
-        "relative": True,
+        "schedule": crontab(hour=2, minute=0),
         "args": ("ureport.stats.tasks.refresh_engagement_data", "sync"),
     },
 }
