@@ -1,3 +1,8 @@
+v1.1.99
+----------
+ * Add tests
+ * Fix poll stats without date
+
 v1.1.98
 ----------
  * Merge pull request #502 from rapidpro/add-indexes
