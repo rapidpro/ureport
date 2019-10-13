@@ -2641,6 +2641,21 @@ class PollResultsTest(UreportTest):
             ],
         )
 
+        poll_result5 = PollResult.objects.create(
+            org=self.nigeria,
+            flow=self.poll.flow_uuid,
+            ruleset=self.poll_question.ruleset_uuid,
+            date=None,
+            contact="contact-uuid",
+            completed=False,
+        )
+
+        gen_stats = poll_result5.generate_poll_stats()
+        self.assertEqual(len(gen_stats.keys()), 1)
+        self.assertEqual(
+            list(gen_stats.keys()), [(self.nigeria.id, self.poll_question.ruleset_uuid, "", "", "", "", "", "", None)]
+        )
+
     def test_poll_results_stats(self):
         nigeria_boundary = Boundary.objects.create(
             org=self.nigeria,
