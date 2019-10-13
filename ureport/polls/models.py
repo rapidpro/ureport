@@ -1280,6 +1280,9 @@ class PollResult(models.Model):
         born = ""
         gender = ""
         text = ""
+        date = None
+        if self.date:
+            date = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
 
         if self.text and self.text != "None":
             text = self.text
@@ -1313,19 +1316,7 @@ class PollResult(models.Model):
         if self.gender:
             gender = self.gender.lower()
 
-        generated_stats[
-            (
-                self.org_id,
-                ruleset,
-                category,
-                born,
-                gender,
-                state,
-                district,
-                ward,
-                self.date.replace(hour=0, minute=0, second=0, microsecond=0),
-            )
-        ] = 1
+        generated_stats[(self.org_id, ruleset, category, born, gender, state, district, ward, date)] = 1
         return generated_stats
 
     def generate_counters(self):
