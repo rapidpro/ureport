@@ -5,7 +5,7 @@ $(->
     url = "https://www.facebook.com/sharer/sharer.php?u=" + shareURL
     FB.ui({
         method: "share"
-        href: url
+        href: shareURL
       },
       (response) ->
         console.log(response);
