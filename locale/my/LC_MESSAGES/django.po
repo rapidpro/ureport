@@ -1,17 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Sandar Linn <slinn@unicef.org>, 2015-2016
+# Nyaruka <info@textit.in>, 2019
+# Sandar Linn <slinn@unicef.org>, 2019
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: UReport\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 01:00+0000\n"
-"PO-Revision-Date: 2016-10-26 13:08+0000\n"
-"Last-Translator: Sandar Linn <slinn@unicef.org>\n"
-"Language-Team: Burmese (http://www.transifex.com/rapidpro/ureport/language/my/)\n"
+"POT-Creation-Date: 2019-10-14 20:43+0000\n"
+"PO-Revision-Date: 2019-05-15 20:27+0000\n"
+"Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
+"Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
 "Language: my\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,271 +23,266 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "The name of this category"
-msgstr "အမ်ိဳးအစား၏ အမည္"
+msgstr "The name of this category"
 
 msgid "An optional image that can describe this category"
-msgstr "ယခုအမ်ိဳးအမည္ကို ေဖာ္ျပႏိုင္ေသာ ျခြင္းခ်က္ဓါတ္ပံု "
+msgstr "An optional image that can describe this category"
 
 msgid "The organization this category applies to"
-msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
+msgstr "he organization this category applies to"
 
 msgid "Categories"
-msgstr "အမ်ိဳးအစား"
+msgstr "Categories"
 
 msgid "The name to describe this image"
-msgstr "ယခုဓါတ္ပံုကို ေဖာ္ျပရန္အမည္"
+msgstr "The name to describe this image"
 
 msgid "The category this image represents"
-msgstr "ယခုဓါတ္ပံုက ေဖာ္ျပေနေသာ အမ်ိဳးအစား"
+msgstr "The category this image represents"
 
 msgid "The image file to use"
-msgstr "အသံုးျပဳရန္ ဓါတ္ပံုဖိုင္"
+msgstr "The image file to use"
 
 msgid "The human readable name for this content type"
-msgstr "လူဖတ္ႏိုင္မည့္ ယခုအေၾကာင္းအရာ၏အမည္"
+msgstr "The human readable name for this content type"
 
 msgid "The slug to idenfity this content type, used with the template tags"
-msgstr "ယခုအေၾကာင္းအရာ အမ်ိဳးအစားကို သတ္မွန္ရန္ အမွန္အသား ပံုစံခ်ထားသည့္ tag မ်ားကိုအသံုးျပဳရန္"
+msgstr "The slug to identify this content type, used with the template tags"
 
 msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-msgstr "သည္အေၾကာင္းအရာ အမ်ိဳးအစားကို site ၏မည္သည့္ေနရာတြင္ အသံုးျပဲၿပီး မည္ကဲ့သို႕ေဖာ္ျပထားသည္ကို ေဖာ္ျပခ်က္"
+msgstr "A description of where this content type is used on the site and how it will be displayed"
 
 msgid "Whether this content should include a title"
 msgstr "Whether this content should include a title"
 
 msgid "Whether this content should include an image"
-msgstr "ယခုအေၾကင္းအရာသည္ ဓါတ္ပံုထည့္သင့္မသင့္"
+msgstr "Whether this content should include an image"
 
 msgid "Whether this content should use a rich HTML editor"
-msgstr "ယခုအေၾကာင္းအရာသည္ HTML editor ကိုသံုးသင့္မသင့္"
+msgstr "Whether this content should use a rich HTML editor"
 
 msgid "Whether this content should include a summary field"
-msgstr "ယခုအေၾကာင္းအရာသည္ အက်ဥ္းခ်ဳပ္ထည့္သင့္မသင့္"
+msgstr "Whether this content should include a summary field"
 
 msgid "Whether this content should include a link"
-msgstr "ယခုအေၾကာင္းအရာသည္ link တစ္ခုထည့္သင့္မသင့္"
+msgstr "Whether this content should include a link"
 
 msgid "Whether this content should allow upload of additional images, ie a gallery"
-msgstr "ယခုအေၾကာင္းအရာသည္ ဓါတ္ပံုမ်ား ေနာက္ထပ္တင္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
+msgstr "Whether this content should allow upload of additional images, ie a gallery"
 
 msgid "Whether this content has a color field"
-msgstr "ယခုအေၾကာင္းအရာသည္ အေရာင္ ရွိမရွိ"
+msgstr "Whether this content has a color field"
 
 msgid "Whether this content should allow setting a YouTube id"
-msgstr "ယခုအေၾကာင္းအရာသည္ YouTube id လုပ္ျခင္းကို ခြင့္ျပဳသင့္မသင့္"
+msgstr "Whether this content should allow setting a YouTube id"
 
 msgid "Whether this content should allow tags"
-msgstr "ယခုအေၾကာင္းအရာသည္ tag မ်ားကိုခြင့္ျပဳသင့္မသင့္"
+msgstr "Whether this content should allow tags"
 
 msgid "Content Type"
-msgstr "အေၾကာင္းအရာ အမ်ိဳးအစား"
+msgstr "Content Type"
 
 msgid "The category, or type for this content block"
-msgstr "ယခုအေၾကာင္းအရာမ်ားအတြက္ အမ်ိဳးးအမည္"
+msgstr "The category, or type for this content block"
 
 msgid "The title for this block of content, optional"
-msgstr "အေၾကာင္းအရာမ်ား၏ ေခါင္းစဥ္ ျခြင္းခ်က္သာ"
+msgstr "The title for this block of content, optional"
 
 msgid "The summary for this item, should be short"
-msgstr "ယခုအမ်ိဳးအစား၏ အႏွစ္ခ်ဳပ္သည္ တိုတိုႏွင့္လိုရင္းသာျဖစ္သင့္သည္"
+msgstr "The summary for this item, should be short"
 
 msgid "The body of text for this content block, optional"
-msgstr "ယခုအေၾကာင္းအရာမ်ား၏ ကိုယ္ထည္စာသား ၿခြင္းခ်က္သာ"
+msgstr "The body of text for this content block, optional"
 
 msgid "Any image that should be displayed with this content block, optional"
-msgstr "ယခုအေၾကာင္းအရာႏွင့္အတူ ေဖာ္ျပသင့္ေသာဓါတ္ပံု ျခြင္းခ်က္သာ"
+msgstr "Any image that should be displayed with this content block, optional"
 
 msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr "ဓါတ္ပံုအတြက္ေနာက္ခံအေရာင္သည္ ပံုစံအားျဖင့္"
+msgstr "A background color to use for the image, in the format: #rrggbb"
 
 msgid "Any link that should be associated with this content block, optional"
-msgstr "ယခုအေၾကာင္းအရာႏွင့္ပူးတြဲသင့္ေသာ မည္သည့္ link မဆို ၿခြင္းခ်က္သာ"
+msgstr "Any link that should be associated with this content block, optional"
 
 msgid "The id of the YouTube video that should be linked to this item"
-msgstr "ယခုအမ်ိဳးအစားႏွင့္ ခ်ိတ္ဆက္သင့္ေသာ YouTube ဗီးီယို၏ အမွတ္အသား"
+msgstr "The id of the YouTube video that should be linked to this item"
 
 msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "ယခုအေၾကာင္းအရာပိုင္းအတြက္ space ျခားထားသည့္ မည္သည့္ tag မဆို ထပ္မံအေသးစိတ္ရ်ာေဖြစစ္ထုတ္ျခင္းမ်ားအတြက္ အသံုးျပဳႏိုင္သည္ ျခြင္းခ်က္သာ"
+msgstr "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
 
 msgid "The priority for this block, higher priority blocks come first"
-msgstr "ယခုအပိုင္း၏ဦးစားေပးမွာ အေရးႀကီးဆံုးအပိုင္းမ်ားကဦးစြာလာသည္"
+msgstr "The priority for this block, higher priority blocks come first"
 
 msgid "The organization this content block belongs to"
-msgstr "ယခုအေၾကာင္းအရာပိုင္းမ်ားကို ပိုင္ဆိုင္သည့္အဖြဲ႕အစည္းမွာ"
+msgstr "The organization this content block belongs to"
 
 msgid "Gallery"
-msgstr "စုစည္းရာ"
+msgstr "Gallery"
 
 msgid "Add Image"
-msgstr "ဓါတ္ပံုထည့္ရန္"
+msgstr "Add Image"
 
 msgid "Search"
-msgstr "ရွာေဖြရန္"
+msgstr "Search"
 
 msgid "Add"
-msgstr "ထပ္ထည့္ရန္"
+msgstr "Add"
 
 msgid "Content Types"
-msgstr "အေၾကာင္းအရာ အမ်ိဳးအစားမ်ား"
+msgstr "Content Types"
 
 msgid "Content Blocks"
-msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
+msgstr "Content Blocks"
 
-#, fuzzy, python-format
-#| msgid "Content Blocks"
+#, python-format
 msgid "%s Blocks"
-msgstr "အေၾကာင္းအရာ အပိုင္းမ်ား"
+msgstr ""
 
-#, fuzzy, python-format
-#| msgid "Edit"
+#, python-format
 msgid "Edit %s"
-msgstr "တည္းျဖတ္"
+msgstr ""
 
-#, fuzzy, python-format
-#| msgid "Create"
+#, python-format
 msgid "Create %s"
-msgstr "ဖန္တီးပါ"
+msgstr ""
 
 msgid "Create Content Block"
-msgstr "အေၾကာင္းအရာပိုင္းကိုဖန္တီးရန္"
+msgstr "Create Content Block"
 
 msgid "Your first name"
-msgstr "သင့္နာမည္၏ပထမအပိုင္း"
+msgstr "Your first name"
 
 msgid "Your last name"
-msgstr "သင့္နာမည္၏ဒုတိယအပိုင္း"
+msgstr "Your last name"
 
 msgid "Your email address"
-msgstr "သင့္ email လိပ္စာ"
+msgstr "Your email address"
 
 msgid "Your password, at least eight letters please"
-msgstr "သင့္လွိဳ႕၀ွက္နံပါတ္ အနည္းဆံုးစာလံုး ၈ လံုးျဖစ္ရန္"
+msgstr "Your password, at least eight letters please"
 
 msgid "That email address is already used"
-msgstr "ယခု email လိပ္စာသည္ အသံုးျပဳျပီးသားျဖစ္ေနသည္။"
+msgstr "That email address is already used"
 
 msgid "Passwords must contain at least 8 letters."
-msgstr "လွိဳ႕၀ွက္နံပါတ္သည္ အနည္းဆံုးစာလံုးရွစ္လံုး ပါ၀င္ရမည္"
+msgstr "Passwords must contain at least 8 letters."
 
 msgid "This domain is used for subdomains"
-msgstr "ယခု domain ကို subdomains မ်ားအတြက္အသံုးျပဳသည္"
+msgstr "This domain is used for subdomains"
 
 msgid "Name"
-msgstr "အမည္"
+msgstr "Name"
 
 msgid "The name of this organization"
-msgstr "အဖြဲ႕အစည္း၏အမည္"
+msgstr "The name of this organization"
 
 msgid "The logo that should be used for this organization"
-msgstr "ယခုအဖြဲ႕အစည္းအတြက္အသံုးျပဳသင့္ေသာ အမွတ္တံဆိပ္"
+msgstr "The logo that should be used for this organization"
 
 msgid "Administrators"
-msgstr "စီမံအုပ္ခ်ဳပ္သူမ်ား"
+msgstr "Administrators"
 
 msgid "The administrators in your organization"
-msgstr "သင့္အဖြဲ႕အစည္းအတြင္းရွိ စီမံအုပ္ခ်ဳပ္သူမ်ား"
+msgstr "The administrators in your organization"
 
 msgid "Viewers"
-msgstr "လာေရာက္ၾကည့္ရွဳသူမ်ား"
+msgstr "Viewers"
 
 msgid "The viewers in your organization"
-msgstr "သင့္အဖြဲ႕အစည္းရွိ လာေရာက္ၾကည့္ရွဳသူမ်ား"
+msgstr "The viewers in your organization"
 
 msgid "Editors"
-msgstr "တည္းျဖတ္သူမ်ား"
+msgstr "Editors"
 
 msgid "The editors in your organization"
-msgstr "သင့္အဖြဲ႕အစည္းရွိ တည္းျဖတ္သူမ်ား"
+msgstr "The editors in your organization"
 
 msgid "Language"
-msgstr "ဘာသာစကား"
+msgstr "Language"
 
 msgid "The main language used by this organization"
-msgstr "သည္အဖြဲ႕အစည္းကအသံုးျပဳေသာ အဓိကဘာသာစကား"
+msgstr "The main language used by this organization"
 
 msgid "Subdomain"
-msgstr ""
+msgstr "Subdomain"
 
 msgid "This subdomain is not available"
-msgstr "subdomain မရႏိုင္ပါ"
+msgstr "This subdomain is not available"
 
 msgid "The subdomain for this organization"
-msgstr "သည္အဖြဲ႕အစည္း၏ subdomain"
+msgstr "The subdomain for this organization"
 
 msgid "Domain"
-msgstr ""
+msgstr "Domain"
 
 msgid "This domain is not available"
-msgstr "domain မရႏိုင္ပါ"
+msgstr "This domain is not available"
 
 msgid "The custom domain for this organization"
-msgstr "သည္အဖြဲ႕အစည္း၏ ပံုမွန္ domain"
+msgstr "The custom domain for this organization"
 
 msgid "Timezone"
-msgstr "အခ်ိန္အပိုင္းအျခား"
+msgstr "Timezone"
 
 msgid "The timezone your organization is in."
-msgstr "သင့္အဖြဲ႕အစည္းရွိေနသည့္ အခ်ိန္အပိုင္းအျခား"
+msgstr "The timezone your organization is in."
 
 msgid "JSON blob used to store configuration information associated with this organization"
-msgstr "ယခုအဖြဲ႕အစည္းႏွင့္ဆက္ႏႊယ္ေနေသာ သတင္းအခ်က္အလက္မ်ားကို  ထိန္းသိမ္းရန္ အသံုးျပဳထားေသာ JSON blob"
+msgstr "JSON blob used to store configuration information associated with this organization"
 
 msgid "Administrator"
-msgstr "စီမံအုပ္ခ်ဳပ္သူ"
+msgstr "Administrator"
 
 msgid "Editor"
-msgstr "တည္းျဖတ္သူ"
+msgstr "Editor"
 
 msgid "Viewer"
-msgstr "ၾကည့္ရွဳေလ့လာသူ"
+msgstr "Viewer"
 
 msgid "Org"
-msgstr "အဖြဲ႕အစည္း"
+msgstr "Org"
 
 msgid "The organization to which the account is invited to view"
-msgstr "လာေရာက္ၾကည့္ရွဳရန္ ဖိတ္ျခင္းခံရေသာ အဖြဲ႕အစည္း၏ account"
+msgstr "The organization to which the account is invited to view"
 
 msgid "Email"
-msgstr "အီးေမးလ္"
+msgstr "Email"
 
 msgid "The email to which we send the invitation of the viewer"
-msgstr "လာေရာက္ၾကည့္ရွဳသူကို ဖိတ္ရန္ပို႕ေသာ အီးေမးလ္"
+msgstr "The email to which we send the invitation of the viewer"
 
 msgid "Secret"
-msgstr "လွ်ိဳ႕၀ွက္"
+msgstr "Secret"
 
 msgid "a unique code associated with this invitation"
-msgstr "ယခုဖိတ္ၾကားျခင္းႏွင့္ ႏွီးႏြယ္ေနေသာ ထူးျခားထင္ရွားသည့္ code"
+msgstr "a unique code associated with this invitation"
 
 msgid "User Role"
-msgstr "အသံုးျပဳသူ၏ အခန္းက႑"
+msgstr "User Role"
 
 #, python-format
 msgid "%s Invitation"
-msgstr ""
+msgstr "%s invitation"
 
 msgid "Banner"
-msgstr "ေခါင္းစည္း"
+msgstr "Banner"
 
 msgid "Pattern"
-msgstr "ပံုစံ"
+msgstr "Pattern"
 
 msgid "The organization in which the image will be used"
-msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
+msgstr "The organization in which the image will be used"
 
 msgid "The name to describe this background"
-msgstr "ယခုေနာက္ခံကို ေဖာ္ျပရန္အမည္"
+msgstr "The name to describe this background"
 
 msgid "Background type"
-msgstr "ေနာက္ခံအမ်ိဳးအစား"
+msgstr "Background type"
 
 msgid "The image file"
-msgstr "ဓါတ္ပံုဖိုင္"
+msgstr "The image file"
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The API token for this backend"
-msgstr "ယခုအမ်ိဳးအစား၏ေခါင္းစဥ္"
+msgstr "The API token for this backend"
 
 #, python-format
 msgid ""
@@ -295,138 +294,133 @@ msgid ""
 msgstr ""
 
 msgid "You are invited to join {{org.name}}."
-msgstr ""
+msgstr "You are invited to join {{org.name}}."
 
 msgid "Click this link to join"
-msgstr ""
+msgstr "Click this link to join"
 
 msgid "Edit"
-msgstr "တည္းျဖတ္"
+msgstr "Edit"
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Manage Backends"
-msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+msgstr "Manage Backends"
 
 msgid "Manage Users"
-msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+msgstr "Manage Users"
 
 msgid "Accounts"
-msgstr "account မ်ား"
+msgstr "Accounts"
 
 msgid "Admins"
-msgstr "စီစဥ္သူ"
+msgstr "Admins"
 
 msgid "Remove"
-msgstr "ဖယ္ရွားလိုက္ပါ"
+msgstr "Remove"
 
 msgid "You must have at least one administator"
-msgstr "အနည္းဆံုး စီမံအုပ္ခ်ဳပ္သူတစ္ေယာက္ရွိရမည္"
+msgstr "You must have at least one administrator"
 
 msgid "Select your Organization"
-msgstr "သင့္အဖြဲ႕အစည္းကို ေရြးျခယ္ပါ"
+msgstr "Select your Organization"
 
 msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-msgstr "သင့္ account သည္အဖြဲ႕အစည္းတစ္ခုခုႏွင့္ ပတ္သတ္ျခင္းမရွိပါ။ ေက်းဖူးျပဳၿပီး administrator ကိုဆက္သြယ္ပါ"
+msgstr "Your account is not associated to an organization. Please contact the administrator."
 
 msgid "Your Organization"
-msgstr "သင္၏အဖြဲ႕အစည္း"
+msgstr "Your Organization"
 
 msgid "Invite people to your organization"
-msgstr "သင့္အဖြဲ႕အစည္းသို႕ လူမ်ားကို ဖိတ္ေခၚပါ"
+msgstr "Invite people to your organization"
 
 msgid "User group"
-msgstr "အသံုးျပဳသူမ်ားအုပ္စု"
+msgstr "User group"
 
 msgid "One of the emails you entered is invalid."
-msgstr "သင္ထည့္လိုက္ေသာ အီးေမးလ္မ်ားထဲမွတစ္ခုမွာ မွားယြင္းေနပါသည္"
+msgstr "One of the emails you entered is invalid."
 
 #, python-format
 msgid "Manage %(name)s Accounts"
 msgstr ""
 
 msgid "Create"
-msgstr "ဖန္တီးပါ"
+msgstr "Create"
 
 msgid "Your invitation link is invalid. Please contact your organization administrator."
-msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးၿပဳၿပီး သင့္အဖြဲ႕အစည္း၏ administrator ကိုဆက္သြယ္ပါ"
+msgstr "Your invitation link is invalid. Please contact your organization administrator."
 
-#, fuzzy, python-format
-#| msgid "Join & Engage"
+#, python-format
 msgid "Join %(name)s"
-msgstr "U-Report တြင္ပါ၀င္ရန္"
+msgstr ""
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join"
-msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
+msgstr "Join"
 
 msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr "သင့္အားဖိတ္ေခၚထားေသာ link မွာ၀င္လို႕မရေတာ့ပါ။ ေက်းဇူးျပဳၿပီး လူႀကီးမင္းအဖြဲ႕အစည္းရွိ administrator ကိုဆက္သြယ္ပါ"
+msgstr "Your invitation link has expired. Please contact your organization administrator."
 
 msgid "Task"
-msgstr ""
+msgstr "Task"
 
 msgid "Tasks"
-msgstr ""
+msgstr "Tasks"
 
 msgid "The title for this story"
-msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
+msgstr "The title for this story"
 
 msgid "Whether this story is featured"
-msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပထားျခင္းရွိမရွိ"
+msgstr "Whether this story is featured"
 
 msgid "The summary for the story"
-msgstr "သတင္းေဆာင္းပါး၏အႏွစ္ခ်ဳပ္"
+msgstr "The summary for the story"
 
 msgid "The body of text for the story"
-msgstr "သတင္းေဆာင္းပါး၏စာကိုယ္"
+msgstr "The body of text for the story"
 
 msgid "The writer of the story"
-msgstr "သတင္းေဆာင္းပါးေရးသူ"
+msgstr "The writer of the story"
 
 msgid "A link to an mp3 file to publish on this story"
-msgstr "ဒီသတင္းေဆာင္းပါးကိုေဖာ္ျပရန္ mp3 file link "
+msgstr "A link to an mp3 file to publish on this story"
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr "ယခုသတင္းေဆာင္းပါးျဖင့္ ခ်ိတ္ဆက္ထားသင့္သည့္ YouTube video ၏အမွတ္အသား (YouTube URL တြင္ထိုစာသားသည္ v= ၏ေနာက္တြင္ရွိၿပီး & ၏ေရွ႕တြင္ရွိလိမ့္မည္)"
+msgstr "The id of the YouTube video that should be linked to this story (this is the text that comes after v= and before & in the YouTube URL)"
 
 msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "ယခုသတင္းေဆာင္းပါးတြင္ခ်ိတ္ဆက္လိုသည္မ်ားကို space ျခားထားသည့္ အခ်ိတ္အဆက္မ်ားျဖင့္ ယခုထက္ပိုျပီးတိတိက်က်ရွာေတြနိုင္ရန္အသ၊ံုးျပဳႏိုင္ပါသည္။(သင့္ေရြးျခယ္မႈသာျဖစ္သည္)"
+msgstr "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
 
 msgid "The category for this story"
-msgstr "သတင္းေဆာင္းပါးအမ်ိဳးအစား"
+msgstr "The category for this story"
 
 msgid "The organization this story belongs to"
-msgstr "ယခုသတင္းေဆာင္းပါးကိုပိုင္သည့္အဖြဲ႕အစည္း"
+msgstr "The organization this story belongs to"
 
 msgid "Stories"
-msgstr "သတင္းေဆာင္းပါးမ်ား"
+msgstr "Stories"
 
 msgid "The story to associate to"
-msgstr "သတင္းေဆာင္းပါးႏွင့္ဆက္ႏြယ္ရန္"
+msgstr "The story to associate to"
 
 msgid "Yes"
-msgstr "ဟုတ္ပါသည္"
+msgstr "Yes"
 
 msgid "No"
-msgstr "မဟုတ္ပါ"
+msgstr "No"
 
 msgid "Story Images"
-msgstr "သတင္းေဆာင္းပါးဓါတ္ပံုမ်ား"
+msgstr "Story Images"
 
 #, python-format
 msgid "Image %d"
-msgstr ""
+msgstr "Image %d"
 
 msgid "Image to display on story page and in previews. (optional)"
-msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
+msgstr "Image to display on story page and in previews. (optional)"
 
 msgid "Image to display on story page and in previews (optional)"
-msgstr "သတင္းစာမ်က္ႏွာေပၚႏွင့္ preview မ်ားတြင္ ေဖာ္ျပရန္ဓါတ္ပံု (ျခြင္းခ်က္)"
+msgstr "Image to display on story page and in previews (optional)"
 
 msgid "Remove Item?"
-msgstr "ဖယ္ရွားလိုက္ပါ"
+msgstr "Remove Item?"
 
 #, python-format
 msgid ""
@@ -436,10 +430,10 @@ msgid ""
 msgstr ""
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "ဖယ္ရွားလိုက္သည္ႏွင့္ အၿပီးပ်က္သြားမည္ျဖစ္ပါသည္ ဖယ္ရွားျခင္းကိုျပန္လည္ျပင္ဆင္ႏိုင္သည့္ နည္းလမ္းလံုး၀မရွိပါ"
+msgstr "Once it is removed, it will be gone forever. There is no way to undo this operation."
 
 msgid "Cancel"
-msgstr "မလုပ္လိုပါ"
+msgstr "Cancel"
 
 #, python-format
 msgid ""
@@ -460,28 +454,28 @@ msgid ""
 msgstr ""
 
 msgid "Previous"
-msgstr "ယခင္"
+msgstr "Previous"
 
 msgid "Next"
-msgstr "ေရွ႕သို႕"
+msgstr "Next"
 
 msgid "edit"
-msgstr "တည္းျဖတ္"
+msgstr "edit"
 
 msgid "Sign in"
-msgstr "၀င္ေရာက္ရန္"
+msgstr "Sign in"
 
 msgid "Login"
-msgstr "၀င္ေရာက္ရန္"
+msgstr "Login"
 
 msgid "Forgot Password?"
-msgstr "သင္၏လွ်ိဳ႕၀ွက္နံပတ္ ေမ့သြားပါသလား"
+msgstr "Forgot Password?"
 
 msgid "Token Expired"
-msgstr "ေပးထားသည္မွာ သက္တမ္းကုန္ဆံုးသြားပါၿပီ"
+msgstr "Token Expired"
 
 msgid "Login Failure"
-msgstr "မ၀င္ေရာက္ႏိုင္ပါ"
+msgstr "Login Failure"
 
 #, python-format
 msgid ""
@@ -498,19 +492,19 @@ msgid ""
 msgstr ""
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "အျခားနည္းလမ္းတစ္ခုမွာ ေအာက္တြင္ ေဖာ္ျပထားေသာ ပံုစံကိုျဖည့္ျခင္းအားျဖင့္ အီးေမးလ္မွတဆင့္ သင့္ password ကိုေျပာင္းႏိုင္ပါသည္ "
+msgstr "Alternatively, you can fill out the form below to have your password reset via e-mail."
 
 msgid "Please contact the website administrator to have your password reset."
-msgstr "သင့္ password အသစ္ျပဳလုပ္ရန္ website administrator ကိုဆက္သြယ္ပါ"
+msgstr "Please contact the website administrator to have your password reset."
 
 msgid "Email Address"
-msgstr "အီးေမးလ္လိပ္စာ"
+msgstr "Email Address"
 
 msgid "Recover"
-msgstr "ျပန္လည္ရယူရန္"
+msgstr "Recover"
 
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "sign up လုပ္စဥ္ကအသံုးျပဳခဲ့ေသာ အီးေမးလ္ကိုထည့္လိုက္ပါ။ လူၾကီးမင္း password ျပန္ရေအာင္ ကူညီပါမယ္"
+msgstr "Please enter the email address you used to sign up and we will help you recover your password."
 
 #, python-format
 msgid ""
@@ -520,147 +514,144 @@ msgid ""
 msgstr ""
 
 msgid "New Password"
-msgstr "Password အသစ္"
+msgstr "New Password"
 
 msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "Password မ်ားသည္ အနည္းဆံုး၈လံုးရွိရပါမည္  uppercase တစ္လံုး၊ lowercase တစ္လံုးႏွင့္ နံပါတ္တစ္ခု"
+msgstr "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
 
 msgid "You have used this password before in the past year, please use a new password."
-msgstr "ေက်းဇူးျပဳၿပီး password အသစ္သံုးေပးပါ ယခု password မွာ မႏွစ္ကသံုးၿပီးသားျဖစ္ပါသည္"
+msgstr "You have used this password before in the past year, please use a new password."
 
-#, fuzzy
-#| msgid "New Password"
 msgid "Password"
-msgstr "Password အသစ္"
+msgstr "Password"
 
 msgid "Confirm Password"
-msgstr "Password အတည္ျပဳေပးပါ"
+msgstr "Confirm Password"
 
 msgid "Please enter your password to save changes."
-msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
+msgstr "Please enter your password to save changes."
 
 msgid "Confirm the new password by filling the this field"
-msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
+msgstr "Confirm the new password by filling the this field"
 
 msgid "New password doesn't match with its confirmation"
-msgstr "password အသစ္မွာ ယခုအတည္ျပဳသည့္ password ႏွင့္မတူပါ"
+msgstr "New password doesn't match with its confirmation"
 
 msgid "Your Email"
-msgstr "သင့္အီးေမးလ္"
+msgstr "Your Email"
 
 msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "အီးေမးလ္ရေအာင္ျပန္လည္လုပ္လို႕မရပါ။ password အသစ္လုပ္ရန္ website administrator ကိုေက်းဇူးျပဳၿပီးဆက္သြယ္ေပးပါ"
+msgstr "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
 
 msgid "Current Password"
-msgstr "လက္ရွိ password"
+msgstr "Current Password"
 
 msgid "Your current password"
-msgstr "သင္၏လက္ရွိ password"
+msgstr "Your current password"
 
 msgid "Your new password."
-msgstr "သင္၏ password အသစ္"
+msgstr "Your new password."
 
 msgid "Confirm new Password"
-msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
+msgstr "Confirm new Password"
 
 msgid "Confirm your new password."
-msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
+msgstr "Confirm your new password."
 
 msgid "Please enter your password to save changes"
-msgstr "အေျပာင္းအလဲမ်ားကို save လုပ္ရန္ password ထည့္ပါ"
+msgstr "Please enter your password to save changes"
 
 msgid "Confirm your new password by entering it here"
-msgstr "သည္ေနရာတြင္ျဖည့္ျခင္းျဖင့္ password အသစ္ကိုအတည္ျပဳေပးပါ"
+msgstr "Confirm your new password by entering it here"
 
 msgid "Mismatch between your new password and confirmation, try again"
-msgstr "password အသစ္ႏွင့္ အတည္ျပဳထားေသာ password တို႕ကိုက္ညီမႈမရွိပါ ထပ္မံၾကိဳးစားၾကည့္ပါ"
+msgstr "Mismatch between your new password and confirmation, try again"
 
 msgid "New user created successfully."
-msgstr "user အသစ္ေအာင္ျမင္စြာ ဖန္တီးၿပီးပါၿပီ"
+msgstr "New user created successfully."
 
 msgid "Groups"
-msgstr "အုပ္စုမ်ား"
+msgstr "Groups"
 
 msgid "Users will only get those permissions that are allowed for their group."
-msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
+msgstr "Users will only get those permissions that are allowed for their group."
 
 msgid "Set the user's initial password here."
-msgstr "user ၏ကနဦး password ကိုသည္ေနရာတြင္ထည့္ပါ"
+msgstr "Set the user's initial password here."
 
 msgid "Last Login"
-msgstr "ေနာက္ဆံုး login"
+msgstr "Last Login"
 
 msgid "Is Active"
-msgstr "Active ျဖစ္ေနသည္"
+msgstr ""
 
 msgid "Whether this user is allowed to log into the site"
-msgstr "ယခုအသံုးျပဳသူကို သည္ site တြင္ login လုပ္ခြင့္ျပဳ မျပဳ"
+msgstr ""
 
 msgid "Users will only get those permissions that are allowed for their group"
-msgstr "user မ်ားသည္ မိမိတို႕အုပ္စုအတြက္ ခြင့္ျပဳထားေသာ ခြင့္ျပဳခ်က္မ်ားကိုသာ ရရွိလိမ့္မည္"
+msgstr ""
 
 msgid "You can reset the user's password by entering a new password here"
-msgstr "password အသစ္ရိုက္ထည့္ျခင္းျဖင့္ password ေျပာင္းလို႕ရပါတယ္"
+msgstr ""
 
 msgid "Username"
-msgstr "အသံုးျပဳသူ၏အမည္"
+msgstr ""
 
 msgid "Your password"
-msgstr "သင့္ password"
+msgstr ""
 
 msgid "If you want to set a new password, enter it here"
-msgstr "password အသစ္လုပ္လိုလွ်င္ သည္ေနရာတြင္ထည့္ပါ"
+msgstr ""
 
 msgid "Confirm New Password"
-msgstr "password အသစ္ကို အတည္ျပဳေပးပါ"
+msgstr ""
 
 msgid "Confirm your new password"
-msgstr "သင္၏ password အသစ္ကိုအတည္ျပဳေပးပါ"
+msgstr ""
 
 msgid "Edit your profile"
-msgstr "သင့္ profile ကိုထပ္မံျပင္ဆင္ေပးပါ"
+msgstr ""
 
 msgid "Password Recovery"
-msgstr "password ျပန္ရရန္"
+msgstr ""
 
 msgid "An Email has been sent to your account with further instructions."
-msgstr "အၾကံျပဳညႊန္ၾကားခ်က္မ်ားကို သင့္အီးေမးလ္ထံပို႕လိုက္ပါၿပီ"
+msgstr ""
 
 msgid "Password Recovery Request"
-msgstr "Password ျပန္ရရန္ ေတာင္းခံျခင္း"
+msgstr ""
 
 msgid "Pick a new password"
-msgstr "Password အသစ္ထပ္ေရြးပါ"
+msgstr ""
 
 msgid "Your password has successfully been updated, thank you."
-msgstr "ေက်းဇူးတင္ပါတယ္ သင့္ passwordကို ေအာင္ျမင္စြာေျပာင္းလိုက္ပါၿပီ"
+msgstr ""
 
 #, python-format
 msgid "You are now logged in as %s"
-msgstr "သင္သည္ %s အျဖစ္ login ၀င္ထားသည္"
+msgstr ""
 
 msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "password ကိုေအာင္ျမင္စြာ ေျပာင္းလဲၿပီးပါၿပီ။ password အသစ္ကိုသံုးၿပီး login လုပ္ႏိုင္ပါၿပီ"
+msgstr ""
 
 msgid "Reset your Password"
-msgstr "password ေျပာင္းပါ"
+msgstr ""
 
 msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "လံုျခံဳစိတ္ခ်ရျခင္းမရွိေသာေၾကာင့္ သင္၏ link သည္မရေတာ့ပါ။ သည္ေနရာတြင္သင့္ အီးေမးလ္ရိုက္ထည့္ျခင္းျဖင့္ အစမွျပန္လုပ္ပါ"
+msgstr ""
 
 msgid "Submit"
-msgstr "တင္သြင္းပါ"
+msgstr ""
 
 msgid "Form"
-msgstr "ပံုစံ"
+msgstr ""
 
 msgid "Save Changes"
-msgstr "ေျပာင္းထားသည္မ်ားကို saveလုပ္ပါ"
+msgstr ""
 
-#, fuzzy, python-format
-#| msgid "Your poll has been updated."
+#, python-format
 msgid "Your new %s has been created."
-msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံုးအဆင့္ျပဳလုပ္ထားသည္"
+msgstr ""
 
 #, python-format
 msgid "Import %s"
@@ -673,38 +664,34 @@ msgid "Welcome, "
 msgstr ""
 
 msgid "Logout"
-msgstr "ယခုစာမ်က္ႏွာမွထြက္မည္"
-
-msgid "Opinions"
 msgstr ""
 
+msgid "Opinions"
+msgstr "Poll Results"
+
 msgid "Users"
-msgstr "အသံုးျပဳသူမ်ား"
+msgstr ""
 
 msgid "Settings"
 msgstr ""
 
-#, fuzzy
-#| msgid "Images"
 msgid "Pages"
-msgstr "ဓါတ္ပံုမ်ား"
+msgstr ""
 
 msgid "Jobs"
-msgstr "အလုပ္အကိုင္မ်ား"
+msgstr ""
 
 msgid "Photos"
 msgstr ""
 
-#, fuzzy
-#| msgid "Category Images"
 msgid "Categories Images"
-msgstr "အမ်ိဳးအစားအလိုက္ ဓါတ္ပံုမ်ား"
+msgstr ""
 
 msgid "News Items"
-msgstr "အမ်ိဳးအမည္သစ္မ်ား"
+msgstr ""
 
 msgid "Orgs"
-msgstr "အဖြဲ႕အစည္းမ်ား"
+msgstr ""
 
 msgid "Images"
 msgstr "ဓါတ္ပံုမ်ား"
@@ -719,46 +706,46 @@ msgid "U-Report"
 msgstr "U-Report"
 
 msgid "Admin"
-msgstr "ထိန္းခ်ဳပ္သူ"
+msgstr ""
 
 msgid "Configuration"
-msgstr "အစီအစဥ္"
+msgstr ""
 
 msgid "Content"
-msgstr "အေၾကာင္းအရာ"
+msgstr ""
 
 msgid "Country Aliases"
-msgstr "တိုင္းျပည္ အျခားအမည္မ်ား"
+msgstr ""
 
 msgid "Polls"
-msgstr "ေမးခြန္းမ်ား"
+msgstr ""
 
 msgid "Category Images"
-msgstr "အမ်ိဳးအစားအလိုက္ ဓါတ္ပံုမ်ား"
+msgstr ""
 
 msgid "Job Sources"
-msgstr "အလုပ္ေနရာမ်ား"
+msgstr ""
 
 msgid "Jobs Content"
-msgstr "အလုပ္အေၾကာင္းအရာ"
+msgstr ""
 
 msgid "About Content"
-msgstr "အေၾကာင္းအရာ"
+msgstr ""
 
 msgid "Videos"
-msgstr "ဗြီဒီယိုမ်ား"
+msgstr ""
 
 msgid "Contact Us Content"
-msgstr "ဆက္သြယ္ရန္ အေၾကာင္းအရာ"
+msgstr ""
 
 msgid "Missions Content"
-msgstr "လုပ္ငန္းပိုင္း အေၾကာင္းအရာမ်ား"
+msgstr ""
 
 msgid "Terms & Conditions"
-msgstr "လိုက္နာရမည့္ အေၾကာင္းအရာ အခ်က္အလက္မ်ား"
+msgstr ""
 
 msgid "U-Reporters Content"
-msgstr "အခ်က္အလက္ေပးပိုးသူ လူငယ္မ်ားႏွင့္ပတ္သတ္ေသာ အေၾကာင္းအရာ"
+msgstr ""
 
 msgid "Join &amp; Engage Content"
 msgstr "ပူးေပါင္းပါ၀င္ရန္"
@@ -767,7 +754,7 @@ msgid "Join Steps Content"
 msgstr "ပူးေပါင္းရန္ အဆင့္မ်ား"
 
 msgid "Additional Menu"
-msgstr "ထပ္တိုး မီႏူး"
+msgstr ""
 
 msgid "U-Reporters"
 msgstr "အခ်က္အလက္ေပးပို႕သူ လူငယ္မ်ား"
@@ -781,10 +768,8 @@ msgstr ""
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join Now"
-msgstr "ပူးေပါင္းပါ၀င္လိုပါသည္"
+msgstr ""
 
 msgid "READ MORE"
 msgstr "ထပ္မံဖတ္ရွဳရန္"
@@ -831,10 +816,8 @@ msgstr "U-Reportအစီအစဥ္တြင္ ဘာေၾကာင့္ပ
 msgid "Speak out on what's happening in your community"
 msgstr "သင္ေနထိုင္ရာ ရပ္၇ြာတြင္ ဘာေတြျဖစ္ေနသလဲဆိုတာကို လြတ္လပ္စြာ ေျပာၾကားျခင္း"
 
-#, fuzzy
-#| msgid "Use Ureport results and information to update and increase citizen's awareness"
 msgid "Use U-Report results and information to update and increase citizen's awareness"
-msgstr "လူငယ့္အသံအစီအစဥ္မွရရွိလာေသာ အခ်က္အလက္မ်ားကို အသံုးျပဳၿပီး ႏိုင္ငံသားတို႕၏အသိအျမင္ဗဟုသုတကို ျမွင့္တင္ေပးျခင္း"
+msgstr ""
 
 msgid "Participate in nationwide campaigns to help improve your country"
 msgstr "ႏိုင္ငံႏွင့္အ၀ွမ္းက်င္းပေသာ လွဳပ္ရွားမႈမ်ားတြင္ ပါ၀င္ျခင္းအားျဖင့္ သင့္တိုင္းျပည္ တိုးတက္ေအာင္ ကူညီေပးႏိုင္ျခင္း"
@@ -877,20 +860,13 @@ msgid "LIST"
 msgstr "စာရင္း"
 
 msgid "Follow"
-msgstr "လိုက္လံၾကည့္သည္"
+msgstr ""
 
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
-#| "                "
 msgid ""
 "\n"
 "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
 "                "
 msgstr ""
-"\n"
-"U-Report သည္ message ကိုအသံုးျပဳသည့္ လူမွႈမီဒီယာျဖစ္ၿပီး မည္သည့္ေနရာတြင္ရွိေစ ကေလးသူငယ္အခြင့္အေရးမ်ား၊ မိမိတို႕ရပ္ရြာတြင္ျဖစ္ေပၚလ်က္ရွိသည့္ အေၾကာင္းအရာမ်းကိုသတင္းေပးပို႕ႏိုင္ၿပီး မိမိႏိုင္ငံႏွင့္ လူမ်ိဳးကိုယ္စားျပဳကာ ေကာင္းမြန္ေသာေျပာင္းလဲမႈမ်ားကိုေဆာင္ရြက္ႏိုင္ပါသည္။ "
 
 msgid "CURRENT POLL"
 msgstr "လက္ရွိေမးခြန္း"
@@ -930,7 +906,7 @@ msgid "View full results"
 msgstr ""
 
 msgid "U-REPORTERS IN"
-msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္သူမ်ား ၀င္ေရာက္ရန္"
+msgstr ""
 
 msgid "TOTAL # OF U-REPORTERS"
 msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္သူစုစုေပါင္း"
@@ -974,24 +950,20 @@ msgstr "သတင္းမ်ား"
 msgid "STORY"
 msgstr "သတင္းေဆာင္းပါး"
 
-#, fuzzy
-#| msgid "Read This Story"
 msgid "Read full story"
-msgstr "သည္သတင္းကိုဖတ္ပါ"
+msgstr ""
 
 msgid "Response Rate"
 msgstr "ျပန္လည္ေျဖၾကားႏွဳန္း"
 
-#, fuzzy
-#| msgid "Read This Story"
 msgid "Read this story"
-msgstr "သည္သတင္းကိုဖတ္ပါ"
+msgstr ""
 
 msgid "JOBS"
 msgstr "အလုပ္အကိုင္မ်ား"
 
 msgid "Scroll to see job details"
-msgstr "အလုပ္ႏွင့္ပတ္သတ္ၿပီး အေသးစိတ္သိရွိရန္ ေအာက္သို႕ဆက္သြားၾကည့္ပါ"
+msgstr ""
 
 msgid "Tweet to"
 msgstr ""
@@ -1003,7 +975,7 @@ msgid "Visit"
 msgstr ""
 
 msgid "JOIN U-REPORT"
-msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္လိုသည္"
+msgstr "U-Report အစီအစဥ္တြင္ပါဝင္ရန္"
 
 msgid "HOW TO JOIN"
 msgstr "ဘယ္လိုပါ၀င္ရမလဲ"
@@ -1023,7 +995,7 @@ msgid "Compose new Tweet"
 msgstr ""
 
 msgid "CURRENT POLL IN"
-msgstr "လက္ရွိ ေမးခြန္း ထည့္ရန္"
+msgstr "လက္ရွိ ေမးခြန္း "
 
 #, python-format
 msgid ""
@@ -1036,15 +1008,11 @@ msgid_plural ""
 "                "
 msgstr[0] ""
 
-#, fuzzy
-#| msgid "Response Rate"
 msgid "response rate"
-msgstr "ျပန္လည္ေျဖၾကားႏွဳန္း"
+msgstr ""
 
-#, fuzzy
-#| msgid "Responded out of"
 msgid "responded out of"
-msgstr "Responded out of"
+msgstr ""
 
 msgid "polled"
 msgstr ""
@@ -1078,22 +1046,22 @@ msgid "FEATURED ANSWERS"
 msgstr "ေဖာ္ျပထားေသာအေျဖမ်ား"
 
 msgid "No featured answers."
-msgstr "မေဖာ္ျပထားေသာအေျဖမ်ား"
+msgstr "ေဖာ္ျပထားေသာအေျဖမ်ား မရွိပါ"
 
 msgid "U-Reporter in"
-msgstr "အစီအစဥ္တြင္ စာရင္းသြင္းထားသူမ်ား၀င္ေရာက္ရန္"
+msgstr ""
 
 msgid "RELATED STORIES"
 msgstr "ပတ္သတ္ေနေသာ သတင္းေဆာင္းပါးမ်ား"
 
 msgid "No related stories."
-msgstr "ဆက္စပ္ျခင္းမရွိေသာ သတင္းမ်ား"
+msgstr "ဆက္စပ္ေသာ သတင္းမ်ား မရွိပါ။"
 
 msgid "FEATURED IMAGES"
-msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပံုမ်ား"
+msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပုံမ်ား"
 
 msgid "No featured images yet."
-msgstr "မေဖာ္ျပရေသးေသာ ဓါတ္ပံုမ်ား"
+msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပုံမ်ား မရွိပါ"
 
 msgid "FEATURED STORY"
 msgstr "ေဖာ္ျပထားေသာ သတင္းေဆာင္းပါး"
@@ -1120,10 +1088,10 @@ msgid "RELATED POLLS"
 msgstr "ဆက္စပ္ေနေသာ ေမးခြန္းမ်ား"
 
 msgid "No related polls."
-msgstr "မဆက္စပ္ေသာ ေမးခြန္းမ်ား"
+msgstr "ဆက္စပ္ေနေသာ ေမးခြန္းမ်ား မရွိပါ"
 
 msgid "No featured images."
-msgstr "မေဖာ္ျပထားေသာ ဓါတ္ပံုမ်ား"
+msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပုံမ်ား မရွိပါ"
 
 msgid "Even"
 msgstr "အညီအမွ်"
@@ -1144,7 +1112,7 @@ msgid "Responses"
 msgstr "ျပန္လည္ေျဖၾကားမႈမ်ား"
 
 msgid "Reporters in"
-msgstr "လူငယ့္အသံအစီအစဥ္တြင္ စာရင္းသြင္းထားသူမ်ား ၀င္ေရာက္ရန္"
+msgstr ""
 
 msgid "Results"
 msgstr "ရလဒ္မ်ား"
@@ -1156,7 +1124,7 @@ msgid "Population"
 msgstr "လူဦးေရ"
 
 msgid "Registered in"
-msgstr "စာရင္းသြင္းထားသူမ်ား ၀င္ေရာက္ရန္"
+msgstr "Registered in"
 
 msgid "Density"
 msgstr "သိပ္သည္းမႈ"
@@ -1206,15 +1174,11 @@ msgstr ""
 msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr ""
 
-#, fuzzy
-#| msgid "Polls"
 msgid "Polled"
-msgstr "ေမးခြန္းမ်ား"
+msgstr ""
 
-#, fuzzy
-#| msgid "U-Reporters"
 msgid "Reporters"
-msgstr "အခ်က္အလက္ေပးပို႕သူ လူငယ္မ်ား"
+msgstr ""
 
 msgid "Top Region"
 msgstr ""
@@ -1225,10 +1189,8 @@ msgstr ""
 msgid "February"
 msgstr ""
 
-#, fuzzy
-#| msgid "Search"
 msgid "March"
-msgstr "ရွာေဖြရန္"
+msgstr ""
 
 msgid "April"
 msgstr ""
@@ -1284,47 +1246,35 @@ msgstr ""
 msgid "Oct"
 msgstr ""
 
-#, fuzzy
-#| msgid "No"
 msgid "Nov"
-msgstr "မဟုတ္ပါ"
+msgstr ""
 
 msgid "Dec"
 msgstr ""
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST OPINION"
-msgstr "တည္ေနရာမ်ား"
+msgstr ""
 
-#, fuzzy
-#| msgid "VIEW FULL RESULT"
 msgid "VIEW FULL RESULTS"
-msgstr "ရလဒ္အျပည့္အစံုကို ၾကည့္ရန္"
+msgstr ""
 
 msgid "PARTNERING WITH"
 msgstr ""
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS"
-msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္သူမ်ား ၀င္ေရာက္ရန္"
+msgstr ""
 
 msgid "IN"
 msgstr ""
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "COUNTRIES WORLDWIDE"
-msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္သူမ်ား ၀င္ေရာက္ရန္"
+msgstr ""
 
 msgid "AGES"
 msgstr ""
 
-#, fuzzy
-#| msgid "READ MORE"
 msgid "LEARN MORE"
-msgstr "ထပ္မံဖတ္ရွဳရန္"
+msgstr ""
 
 msgid "+ New "
 msgstr ""
@@ -1332,15 +1282,11 @@ msgstr ""
 msgid "+ New Page"
 msgstr ""
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST NOTIFICATIONS"
-msgstr "တည္ေနရာမ်ား"
+msgstr ""
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Backends"
-msgstr "အသံုးျပဳသူမ်ားကို စီမံရန္"
+msgstr ""
 
 msgid "+ New Poll"
 msgstr ""
@@ -1348,10 +1294,8 @@ msgstr ""
 msgid "Poll Results Data"
 msgstr ""
 
-#, fuzzy
-#| msgid "Results"
 msgid "Refresh Results"
-msgstr "ရလဒ္မ်ား"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr ""
@@ -1377,15 +1321,11 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "RESPONSES"
-msgstr "တုံ႕ံျပန္မႈႏွဳန္း"
+msgstr ""
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "TOTAL RESPONSES"
-msgstr "တုံ႕ံျပန္မႈႏွဳန္း"
+msgstr ""
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1394,36 +1334,26 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LOCATION"
-msgstr "တည္ေနရာမ်ား"
+msgstr ""
 
 msgid "Written by:"
 msgstr ""
 
-#, fuzzy
-#| msgid "U-REPORTER STATISTICS"
 msgid "OVERALL STATISTICS"
-msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္သူမ်ား၏ စာရင္းဇယား"
+msgstr ""
 
 msgid "THIS YEAR"
 msgstr ""
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "AVG RESPONSE RATE"
-msgstr "တုံ႕ံျပန္မႈႏွဳန္း"
+msgstr ""
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS BY REGION"
-msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္သူမ်ား ၀င္ေရာက္ရန္"
+msgstr ""
 
-#, fuzzy
-#| msgid "POLL RESULTS"
 msgid "FILTER RESULTS"
-msgstr "မိမိသေဘာအေလ်ာက္ ျပန္လည္ေျဖၾကားမႈရလဒ္မ်ား"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1488,19 +1418,19 @@ msgid "Flag"
 msgstr "အလံ"
 
 msgid "The organization to which the image will be used"
-msgstr "ဓါတ္ပံုအသံုးျပဳမည့္ အဖြဲ႕အစည္း"
+msgstr "The organization to which the image will be used"
 
 msgid "A short descriptive name for this image"
-msgstr "ယခုဓါတ္ပံုအတြက္ နာမည္အတိုေကာက္"
+msgstr "A short descriptive name for this image"
 
 msgid "Image type"
-msgstr "ဓါတ္ပံုအမ်ိဳးအစား"
+msgstr "Image type"
 
 msgid "Label"
 msgstr "အညႊန္း"
 
 msgid "Key"
-msgstr "ေသာ့ခ်က္"
+msgstr "Key"
 
 msgid "Male"
 msgstr "အမ်ိဳးသား"
@@ -1515,109 +1445,109 @@ msgid "Gender"
 msgstr "က်ား မ"
 
 msgid "Gender of the contact"
-msgstr "ဆက္သြယ္လာသူ၏ က်ားမ"
+msgstr "Gender of the contact"
 
 msgid "Born Field"
-msgstr "ေမြးေန႕"
+msgstr "Born Field"
 
 msgid "Occupation Field"
-msgstr "အလုပ္အကိုင္"
+msgstr "Occupation Field"
 
 msgid "Registration Date"
-msgstr "စာရင္းသြင္းသည့္ေန႕"
+msgstr "Registration Date"
 
 msgid "State Field"
-msgstr "ျပည္နယ္"
+msgstr "State Field"
 
 msgid "District Field"
-msgstr "ခရိုင္"
+msgstr "District Field"
 
 msgid "Ward Field"
 msgstr ""
 
 msgid "Number of items with this counter"
-msgstr "ယခု counter ၏အမ်ိဳးအစား အေရအတြက္"
+msgstr ""
 
 msgid "No root user found. Please create a root user"
-msgstr "root user မေတြ႕ပါ root user တခုထပ္မံျပဳလုပ္ေပးပါ"
+msgstr ""
 
 msgid "The name for our alias"
-msgstr "အျခားေခၚဆိုသည့္အမည္"
+msgstr ""
 
 msgid "The title or name to reference this Job source."
-msgstr "သည္အလုပ္အကိုင္အရင္းအျမစ္ကို ကိုးကားရန္ ေခါင္းစဥ္ သို႕မဟုတ္ အမည္"
+msgstr ""
 
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
-msgstr "အလုပ္အကိုင္အရင္းအျမစ္အတြက္ အမ်ိဳးအစားေရြးပါ။ Twitter, ေဖ့ဘြခ္ သို႕မဟုတ္ RSS feed"
+msgstr ""
 
 msgid "The full URL to navigate to this Job source."
-msgstr "ယခု အလုပ္အကိုင္အရင္းအျမစ္ကို လမ္းညႊန္ရန္ URL အျပည့္အစံု"
+msgstr ""
 
 msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
-msgstr "Twitter အတြက္ ၀က္လ္ဆိုက္ေပၚတြင္ tweetမ်ားကို ထည့္သြင္းရန္ widget ID လိုအပ္ပါသည္"
+msgstr ""
 
 msgid "Featured job sources are shown first on the jobs page."
-msgstr "အလုပ္အကိုင္အရင္းအျမစ္မ်ားကို အလုပ္အကိုင္စာမ်က္ႏွာတြင္ ပထမဦးစြာေဖာ္ျပထားပါသည္"
+msgstr ""
 
 msgid "The organization this job source is for"
-msgstr "ယခုအလုပ္အကိုင္အရင္းအျမစ္သည္ သည္အဖြဲ႕အစည္းအတြက္"
+msgstr ""
 
 msgid "Your job source has been added successfully"
-msgstr "သင္၏အလုပ္အကိုင္အရင္းအျမစ္ကို ထည့္ၿပီးပါၿပီ"
+msgstr ""
 
 msgid "Your job source has been updated successfully"
-msgstr "သင္၏အလုပ္အကိုင္အရင္းအျမစ္ကို အသစ္ျပန္လည္ျပင္ဆင္ၿပီးပါၿပီ"
+msgstr ""
 
 msgid "This is the OSM id for this administrative boundary"
-msgstr "ယခု administrative boundary အတြက္ OSM id"
+msgstr ""
 
 msgid "The name of our administrative boundary"
-msgstr "ကၽြႏူပ္တို႕ administrative boundary ၏အမည္"
+msgstr ""
 
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
-msgstr "boundary အဆင့္ 0 သည္တိုင္းျပည္အတြက္ 1 သည္ျပန္နယ္အတြက္  2 သည္ခရိုင္အတြက္"
+msgstr ""
 
 msgid "The parent to this political boundary if any"
 msgstr ""
 
 msgid "Geometry"
-msgstr "ဂ်ီၾသေမၾတီ"
+msgstr ""
 
 msgid "The json representing the geometry type and coordinates of the boundaries"
 msgstr ""
 
 msgid "The title for this item"
-msgstr "ယခုအမ်ိဳးအစား၏ေခါင္းစဥ္"
+msgstr ""
 
 msgid "A short summary description for this item"
-msgstr "ယခုအမ်ိဳးအစားအတြက္ အက်ဥ္းခ်ဳပ္ေဖာ္ျပခ်က္"
+msgstr ""
 
 msgid "A link that should be associated with this item"
-msgstr "ယခု အမ်ိဳးအစားႏွင့္ ဆက္ႏြယ္သင့္ေသာ link "
+msgstr ""
 
 msgid "The category this item belongs to"
-msgstr "ယခုအမ်ိဳးအမည္ႏွင့္ သက္ဆိုင္ေသာ အုပ္စု"
+msgstr ""
 
 msgid "The organization this item belongs to"
-msgstr "ယခုအမ်ိဳးအစားႏွင့္ သက္ဆိုင္ေသာ အဖြဲ႕အစည္း"
+msgstr ""
 
 msgid "The title for this Video"
-msgstr "ယခုဗီဒီယို၏ေခါင္းစဥ္"
+msgstr ""
 
 msgid "A short summary description for this video"
-msgstr "ယခုဗီဒီယိုအတြက္ အက်ဥ္းခ်ံဳးေဖာ္ျပခ်က္"
+msgstr ""
 
 msgid "The organization this video belongs to"
-msgstr "ယခုဗီဒီယိုႏွင့္ သက္ဆိုင္ေသာအဖြဲ႕အစည္း"
+msgstr ""
 
 msgid "The name of this poll category"
-msgstr "ယခုေမးခြန္း အမ်ိဳးအစား"
+msgstr ""
 
 msgid "Poll Categories"
-msgstr "ေမးခြန္းအမ်ိဳးအစားမ်ား"
+msgstr ""
 
 msgid "The Flow this Poll is based on"
-msgstr "ယခုေမးခြန္း အေျခခံထားသည္မွာ"
+msgstr ""
 
 msgid "The date to display for this poll. Leave empty to use flow creation date."
 msgstr ""
@@ -1635,53 +1565,49 @@ msgid "Whether the poll has finished the initial results sync."
 msgstr ""
 
 msgid "The title for this Poll"
-msgstr "ယခုေမးခြန္းေခါင္းစဥ္"
+msgstr ""
 
 msgid "The category this Poll belongs to"
-msgstr "ယခုေမးခြန္း အမ်ိဳးအစား"
+msgstr ""
 
 msgid "Whether this poll should be featured on the homepage"
-msgstr "ယခုေမးခြန္းကို ပင္မစာမ်က္ႏွာေပၚတြင္ ေဖာ္ျပသင့္မသင့္"
+msgstr ""
 
 msgid "The splash category image to display for the poll (optional)"
-msgstr "ေမးခြန္းအတြက္ ေျဖာ္ျပရမည့္ဓါတ္ပံုအမ်ိဳးအစား (ျခြင္းခ်က္)"
+msgstr ""
 
 msgid "The organization this poll is part of"
-msgstr "ယခုေမးခြန္ႏွင့္ ပတ္သတ္ေသာ အဖြဲ႕အစည္း"
+msgstr ""
 
-#, fuzzy
-#| msgid "The title for this story"
 msgid "The title for this response story"
-msgstr "သတင္းေဆာင္းပါး၏ေခာင္းစဥ္မွာ"
+msgstr ""
 
-#, fuzzy
-#| msgid "The writer of the story"
 msgid "The writer of the response story"
-msgstr "သတင္းေဆာင္းပါးေရးသူ"
+msgstr ""
 
 msgid "The poll to associate to"
-msgstr "ယခုေမးခြန္းႏွင့္ ဆက္ႏြယ္ေသာ"
+msgstr ""
 
 msgid "The poll for this response"
-msgstr "ယခုတံု႕ျပန္မႈအတြက္ ေမးခြန္း"
+msgstr ""
 
 msgid "The location for this response"
-msgstr "ေျဖၾကားသူမ်ား၏တည္ေနရာ"
+msgstr ""
 
 msgid "The name of the sender of the message"
-msgstr "ယခုသတင္းစကားကိုေပးပို႕သူ၏အမည္"
+msgstr ""
 
 msgid "The featured response message"
-msgstr "ေဖာ္ျပထားေသာ အေျဖ"
+msgstr ""
 
 msgid "The poll this question is part of"
-msgstr "ယခုေမးခြန္းသည္ "
+msgstr ""
 
 msgid "The title of this question"
-msgstr "သည္ေမးခြန္း၏ေခါင္းစဥ္"
+msgstr ""
 
 msgid "The RuleSet this question is based on"
-msgstr "ယခုေမးခြန္းအေျခခံထားသည္မွာ"
+msgstr ""
 
 msgid "The label of the ruleset on RapidPro"
 msgstr ""
@@ -1696,68 +1622,58 @@ msgid "Your org does not have any API token configuration."
 msgstr ""
 
 msgid "You must include a title for every included question."
-msgstr "ပါ၀င္ေသာေမးခြန္းတိုင္းအတြက္ ေခါင္းစဥ္တစ္ခုထည့္ရမည္"
+msgstr ""
 
 msgid "Title too long. The max limit is 255 characters for each title"
-msgstr "ေခါင္းစဥ္ရွည္လြန္းေနသည္။ ေခါင္းစဥ္တိုင္းအတြက္ အမ်ားဆံုးခြင့္ျပဳထားသည့္ စာလံုးေရမွာ ၂၅၅လံုးသာ"
+msgstr ""
 
 msgid "You must include at least one poll question."
-msgstr "အနည္းဆံုးေမးခြန္းတစ္ခုထည့္ရမည္"
+msgstr ""
 
 msgid "Adjust poll date"
 msgstr ""
 
-#, fuzzy
-#| msgid "Your poll has been created, now pick which questions to include."
 msgid "Your poll has been updated, now pick which questions to include."
-msgstr "သင္ေမးလိုသည့္ ေမးခြန္းကိုေရြးပါ"
+msgstr ""
 
-#, fuzzy
-#| msgid "Configuration"
 msgid "Configure flow"
-msgstr "အစီအစဥ္"
+msgstr ""
 
-#, fuzzy
-#| msgid "Your poll has been created, now pick which questions to include."
 msgid "Your poll has been configured, now adjust the poll date."
-msgstr "သင္ေမးလိုသည့္ ေမးခြန္းကိုေရြးပါ"
+msgstr ""
 
-#, fuzzy
-#| msgid "Your poll has been created, now pick which questions to include."
 msgid "Your poll has been created, now configure its flow."
-msgstr "သင္ေမးလိုသည့္ ေမးခြန္းကိုေရြးပါ"
+msgstr ""
 
 msgid "Poll Images"
-msgstr "ေမးခြန္းမ်ားအတြက္ ဓါတ္ပံုမ်ား"
+msgstr ""
 
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr "သင္ေဖာ္ျပလိုသည့္ မည္သည့္ တံု႕ျပန္ခ်က္ကိုမဆို ထည့္ပါ (ရွိလွ်င္)"
+msgstr ""
 
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr "ေမးခြန္းစာမ်က္ႏွာႏွင့္ preview မ်ားတြင္ေဖာ္ျပရန္ ဓါတ္ပံု(ျခြင္းခ်က္)"
+msgstr ""
 
 msgid "Image to display on poll page and in previews (optional)"
-msgstr "ေမးခြန္းစာမ်က္ႏွာႏွင့္ preview မ်ားတြင္ေဖာ္ျပရန္ ဓါတ္ပံု(ျခြင္းခ်က္)"
+msgstr ""
 
-#, fuzzy
-#| msgid "Poll Questions"
 msgid "Poll Response"
-msgstr "ေမးခြန္းမ်ား"
+msgstr ""
 
 msgid "Your poll has been updated."
-msgstr "သင့္ေမးခြန္းကို ေနာက္ဆံုးအဆင့္ျပဳလုပ္ထားသည္"
+msgstr ""
 
 msgid "Poll Questions"
-msgstr "ေမးခြန္းမ်ား"
+msgstr ""
 
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr "သင့္ေမးခြန္းႏွင့္အတူ မည္သည့္ဓါတ္ပံုမ်ားကို ထည့္မည္ဆိုသည္ကို စဥ္းစားရန္ (ရွိလွ်င္)"
+msgstr ""
 
 msgid "Include"
-msgstr "ပါ၀င္သည္"
+msgstr ""
 
 msgid "Whether to include this question in your public results"
-msgstr "အမ်ားျပည္သူ၏ရလဒ္မ်ားတြင္ ယခုေမးခြႏ္းကို ထည့္သင့္မသင့္"
+msgstr ""
 
 msgid "Priority"
 msgstr ""
@@ -1772,10 +1688,10 @@ msgid "The label of the ruleset from RapidPro"
 msgstr ""
 
 msgid "Title"
-msgstr "ေခါင္းစဥ္"
+msgstr ""
 
 msgid "The question posed to your audience, will be displayed publicly"
-msgstr "သင္ေမးလိုက္ေသာေမးခြန္းကို အမ်ားျမင္ႏိုင္ရန္ ေဖာ္ျပထားမည္ျဖစ္သည္။"
+msgstr ""
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1785,51 +1701,47 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#, fuzzy
-#| msgid "The name of txbhe Contact Group that contains registered reporters"
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr "စာရင္းသြင္းထားျပီးေသာ အသံုးျပဳသူမ်ားပါ၀င္သည့္ txbhe contact အုပ္စုအမည္"
+msgstr ""
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
-msgstr " အသံုးျပဳသူမ်ား၏ေမြးေန႕ပါ၀င္သည့္ Contact field အမွတ္အသား"
+msgstr ""
 
 msgid "The label of the Contact Field that contains the gender of reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ က်ား၊မ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+msgstr ""
 
 msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ အလုပ္အကိုင္ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+msgstr ""
 
 msgid "The label of the Contact Field that contains the registration date of reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ စတင္အသံုးျပဳသည့္ေန႕စြဲ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+msgstr ""
 
 msgid "The label of the Contact Field that contains the State of reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ ျပည္နယ္ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+msgstr ""
 
 msgid "The label of the Contact Field that contains the District of reporters"
-msgstr "အသံုးျပဳသူမ်ား၏ ခရိုင္ ပါ၀င္သည့္ Contact field အမွတ္အသား"
+msgstr ""
 
 msgid "The label of the Contact Field that contains the Ward of reporters"
 msgstr ""
 
 msgid "The label assigned to U-Reporters that are Male."
-msgstr "U-Report အသံုးျပဳသူ ေယာ္က်ားေလးမ်ားအတြက္ သတ္မွတ္ထားေသာ အမွတ္အသား"
+msgstr ""
 
 msgid "The label assigned to U-Reporters that are Female."
-msgstr "U-Report အသံုးျပဳသူ မိန္းကေလးမ်ားအတြက္ သတ္မွတ္ထားေသာ အမွတ္အသား"
+msgstr ""
 
 msgid "Whether this org should be show on the landing page"
-msgstr "ယခုအဖြဲ႕အစည္းကို landing စာမ်က္ႏွာတြင္ျပသင့္မသင့္"
+msgstr ""
 
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr "U-Report ကိုဆက္သြယ္ရန္ အသံုးျပဳသူမ်ားသံုးမည့္ နံပါတ္အတို"
+msgstr ""
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgstr "U-Report ကိုဆက္သြယ္ရန္ အသံုးျပဳသူမ်ားသံုးမည့္ နံပါတ္အတို"
+msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
-msgstr "U-Report တြင္ပါ၀င္မည့္သူမ်ားကို လမ္းညႊန္ရန္ စာသားအတို"
+msgstr ""
 
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
@@ -1840,15 +1752,11 @@ msgstr ""
 msgid "The description of the photos section U-Report homepage"
 msgstr ""
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the opinions page"
-msgstr "ျပန္လည္ေျဖၾကားသူ၏တည္ေနရာ"
+msgstr ""
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the stories page"
-msgstr "ျပန္လည္ေျဖၾကားသူ၏တည္ေနရာ"
+msgstr ""
 
 msgid "The description of the engagement page"
 msgstr ""
@@ -1856,65 +1764,53 @@ msgstr ""
 msgid "The callout message on the footer engagement section"
 msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
 msgid "The primary color for styling for this organization, should be dark"
-msgstr "သည္အဖြဲ႕အစည္းအားျခယ္မွဳန္းထားေသာ မူလအေရာင္"
+msgstr ""
 
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
 msgid "The secondary color for styling for this organization, should be dark"
-msgstr "သည္အဖြဲ႕အစည္းအား ျခယ္သထားေသာ ဒုတိယအေရာင္"
+msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
 msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "သည္အဖြဲ႕အစည္းအားျခယ္မွဳန္းထားေသာ မူလအေရာင္"
+msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
 msgid "The primary highlight color for styling for this organization, should be light"
-msgstr "သည္အဖြဲ႕အစည္းအားျခယ္မွဳန္းထားေသာ မူလအေရာင္"
+msgstr ""
 
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
 msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "သည္အဖြဲ႕အစည္းအား ျခယ္သထားေသာ ဒုတိယအေရာင္"
+msgstr ""
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "styling chartမ်ားအတြက္ အေရာင္ ၆မ်ိဳး၊ အေရာင္မ်ားၾကားတြင္ comma သံုးေပးရန္"
+msgstr ""
 
 msgid "The color used to draw the text on the join bar"
-msgstr "join စာသားတြင္ အသံုးျပဳမည့္အေရာင္"
+msgstr ""
 
 msgid "The color used to draw the background on the join bar"
-msgstr "join bar တြင္အသံုးျပဳမည့္ေနာက္ခံအေရာင္"
+msgstr ""
 
 msgid "The primary color for styling for this organization"
-msgstr "သည္အဖြဲ႕အစည္းအားျခယ္မွဳန္းထားေသာ မူလအေရာင္"
+msgstr ""
 
 msgid "The secondary color for styling for this organization"
-msgstr "သည္အဖြဲ႕အစည္းအား ျခယ္သထားေသာ ဒုတိယအေရာင္"
+msgstr ""
 
 msgid "The background color for the site"
-msgstr "ယခု site ၏ေနာက္ခံအေရာင္"
+msgstr ""
 
-#, fuzzy
-#| msgid "Up to 6 colors for styling charts, use comma between colors"
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "styling chartမ်ားအတြက္ အေရာင္ ၆မ်ိဳး၊ အေရာင္မ်ားၾကားတြင္ comma သံုးေပးရန္"
+msgstr ""
 
 msgid "The states to show on maps only"
 msgstr ""
 
 msgid "The Google Analytics Tracking ID for this organization"
-msgstr "ယခုအဖြဲ႕အစည္းအတြက္ Google Analytics Tracking ID"
+msgstr ""
 
 msgid "The URL to the Youtube channel for this organization"
-msgstr "သည္အဖြဲ႕အစည္းအတြက္ Youtube channel ၏ URL"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
-msgstr "သည္အဖြဲ႕အစည္းအတြက္ Facebook စာမ်က္ႏွာဆီသြားႏိုင္မည့္ URL"
+msgstr ""
 
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr ""
@@ -1922,38 +1818,32 @@ msgstr ""
 msgid "The integer id to the Facebook app for this organization's chat app (optional)"
 msgstr ""
 
-#, fuzzy
-#| msgid "The short text used to direct visitors to join U-Report"
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr "U-Report တြင္ပါ၀င္မည့္သူမ်ားကို လမ္းညႊန္ရန္ စာသားအတို"
+msgstr ""
 
-#, fuzzy
-#| msgid "The URL to the Facebook page for this organization"
 msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr "သည္အဖြဲ႕အစည္းအတြက္ Facebook စာမ်က္ႏွာဆီသြားႏိုင္မည့္ URL"
+msgstr ""
 
 msgid "The Instagram username for this organization"
-msgstr "သည္အဖြဲ႕အစည္းအတြက္ Instagram username"
+msgstr ""
 
 msgid "The Instagram widget id from lightwidget.com"
 msgstr ""
 
 msgid "The Twitter handle for this organization"
-msgstr "သည္အဖြဲ႕အစည္းအတြက္ Twitter handle"
+msgstr ""
 
 msgid "The Twitter widget used for searching"
-msgstr "ရွာေဖြျခင္းမ်ားအတြက္ အသံုးျပဳေသာ Twitter widget"
+msgstr ""
 
 msgid "The words to filter out from the results on public site"
 msgstr ""
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site"
 msgid "If there are jobs to be shown on the public site."
-msgstr "အမ်ားျပည္သူျမင္သာေသာ site တြင္သည္အလုပ္မ်ားကို ျပရန္ မျပရန္"
+msgstr ""
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
-msgstr "သည္အဖြဲ႕အစည္းသည္ ႏိုင္ငံတကာအခ်က္အလက္မ်ားကို ေဖာ္ျပလွ်င္ ႏိုင္ငံတစ္ႏိုင္ငံ၏ေျမပံုအစား ႏိုင္ငံတကာေျမပံုသာ ျပလိမ့္မည္"
+msgstr ""
 
 msgid "Whether to activate an extra gender."
 msgstr ""
@@ -1970,21 +1860,17 @@ msgstr ""
 msgid "The font used for normal text"
 msgstr ""
 
-#, fuzzy
-#| msgid "Participation Level"
 msgid "Hide participation stats"
-msgstr "ပါ၀င္သည့္ အေနအထား"
+msgstr ""
 
-#, fuzzy
-#| msgid "The name of the sender of the message"
 msgid "The text to describe the sponsors of free messages"
-msgstr "ယခုသတင္းစကားကိုေပးပို႕သူ၏အမည္"
+msgstr ""
 
 msgid "The font used for small text"
 msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
-msgstr "သင့္အဖြဲ႕အစည္း၏စာမ်က္ႏွာမ်ားေပၚတြင္ သံုးေနၾက custom analytics code snippets မ်ားကဲ့သို႕ HTML code မ်ားကိုထည့္သြင္းေဖာ္ျပရန္လိုအပ္လာပါက "
+msgstr ""
 
 msgid "90 Days"
 msgstr ""
@@ -1998,15 +1884,11 @@ msgstr ""
 msgid "Age"
 msgstr ""
 
-#, fuzzy
-#| msgid "Population"
 msgid "Location"
-msgstr "လူဦးေရ"
+msgstr ""
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Opinion Responses"
-msgstr "ျပန္လည္ေျဖၾကားမႈမ်ား"
+msgstr ""
 
 msgid "Sign Up Rate"
 msgstr ""
@@ -2015,76 +1897,4 @@ msgid "Active Users"
 msgstr ""
 
 msgid "Something to trigger localizations"
-msgstr "ျမန္မာမႈျပဳရန္ လွံဳ႕ေဆာ္ေသာအရာ"
-
-#~ msgid "Featured Poll Responses"
-#~ msgstr "ေဖာ္ျပထားေသာ ေမးခြန္းအေျဖမ်ား"
-
-#~ msgid "The name or alias of the responder."
-#~ msgstr "ျပန္လည္ေျဖၾကားသူ၏အမည္"
-
-#~ msgid "The location of the responder."
-#~ msgstr "ျပန္လည္ေျဖၾကားသူ၏တည္ေနရာ"
-
-#~ msgid "The text of the featured response."
-#~ msgstr "ေဖာ္ျပထားေသာ အေျဖစာသား"
-
-#, fuzzy
-#~| msgid "U-REPORTERS IN"
-#~ msgid "TOTAL U-REPORTERS IN"
-#~ msgstr "လူငယ္အသံအစီအစဥ္တြင္ပါ၀င္သူမ်ား ၀င္ေရာက္ရန္"
-
-#, fuzzy
-#~| msgid "Join & Engage"
-#~ msgid "Engage"
-#~ msgstr "U-Report တြင္ပါ၀င္ရန္"
-
-#, fuzzy
-#~| msgid "FILTERED BY"
-#~ msgid "FILTER BY:"
-#~ msgstr "စစ္ထုတ္ေပးထားသည္"
-
-#~ msgid "The API token for the RapidPro account this dashboard is tied to"
-#~ msgstr "RapidPro account အတြက္ API token ႏွင့္တြဲထားေသာ dashboard"
-
-#~ msgid "Not Set"
-#~ msgstr "မသတ္မွတ္ရေသးပါ"
-
-#~ msgid "National"
-#~ msgstr "အမ်ိဳးသားအဆင့္"
-
-#~ msgid "Least responded"
-#~ msgstr "ျပန္လည္ေျဖၾကားမႈအနည္းဆံုး"
-
-#~ msgid "WATCH MORE VIDEOS"
-#~ msgstr "ဗီဒီယိုမ်ားထပ္ၿကည့္ရန္"
-
-#~ msgid "VIEW MORE STORIES ON FACEBOOK"
-#~ msgstr "သတင္းေဆာင္းပါးမ်ားကို facebook စာမ်က္ႏွာတြင္ဖတ္ရွဳရန္"
-
-#~ msgid "VIEW MORE ON INSTAGRAM"
-#~ msgstr "Instagram တွင္ဆက္လက္ၾကည့္ရန္"
-
-#~ msgid "READ MORE TWEETS ON TWITTER"
-#~ msgstr "Twitter တြင္ဆက္လက္ဖတ္ၾကရန္"
-
-#~ msgid "READ FULL STORY"
-#~ msgstr "သတင္းအျပည့္အစံုကို ဆက္လက္ဖတ္ရွဳရန္"
-
-#~ msgid "TWEET TO"
-#~ msgstr "Tweet လုပ္ရန္"
-
-#~ msgid "VISIT"
-#~ msgstr "လာေရာက္ေလ့လာရန္"
-
-#~ msgid "COMPOSE NEW TWEET"
-#~ msgstr "Tweet အသစ္မ်ားေရးရန္"
-
-#~ msgid "RESPONDED OUT OF"
-#~ msgstr "ျပန္လည္ေျဖၾကားခဲ့သူမ်ားမွာ"
-
-#~ msgid "POLLED"
-#~ msgstr "ေမးခဲ့သည္မ်ား"
-
-#~ msgid "The Twitter widget used for following new users"
-#~ msgstr "ေအာက္ပါ အသံုးျပဳသူအသစ္မ်ားအတြက္ Twitter widget"
+msgstr ""

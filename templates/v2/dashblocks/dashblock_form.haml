@@ -49,6 +49,22 @@
   - if type.has_rich_text
     :javascript
       $(function(){
-        $("#id_content").summernote()
-        $("#id_summary").summernote()
+        $("#id_content").summernote({
+          maximumImageFileSize: 1048576,
+          callbacks: {
+            onImageUploadError: function(message) {
+              message += "(1MB)"
+              alert(message);
+            }
+          }
+        })
+        $("#id_summary").summernote({
+          maximumImageFileSize: 1048576,
+          callbacks: {
+            onImageUploadError: function(message) {
+              message += "(1MB)"
+              alert(message);
+            }
+          }
+        })
       });
