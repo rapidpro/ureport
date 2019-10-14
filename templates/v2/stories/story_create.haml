@@ -23,6 +23,12 @@
   :javascript
     $(function(){
       $("#id_content").summernote({
-        maximumImageFileSize: 1048576
+        maximumImageFileSize: 1048576,
+        callbacks: {
+          onImageUploadError: function(message) {
+            message += "(1MB)"
+            alert(message);
+          }
+        }
       })
     });
