@@ -2,23 +2,23 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # LIliya <lilya.lyu@gmail.com>, 2019
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 01:00+0000\n"
+"POT-Creation-Date: 2019-10-14 20:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
 msgid "The name of this category"
@@ -48,9 +48,7 @@ msgstr ""
 msgid "The slug to idenfity this content type, used with the template tags"
 msgstr ""
 
-msgid ""
-"A description of where this content type is used on the site and how it will"
-" be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgstr ""
 
 msgid "Whether this content should include a title"
@@ -68,8 +66,7 @@ msgstr ""
 msgid "Whether this content should include a link"
 msgstr ""
 
-msgid ""
-"Whether this content should allow upload of additional images, ie a gallery"
+msgid "Whether this content should allow upload of additional images, ie a gallery"
 msgstr ""
 
 msgid "Whether this content has a color field"
@@ -108,9 +105,7 @@ msgstr ""
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr ""
 
-msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more"
-" advanced filtering, optional"
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
 msgstr ""
 
 msgid "The priority for this block, higher priority blocks come first"
@@ -230,9 +225,7 @@ msgstr ""
 msgid "The timezone your organization is in."
 msgstr ""
 
-msgid ""
-"JSON blob used to store configuration information associated with this "
-"organization"
+msgid "JSON blob used to store configuration information associated with this organization"
 msgstr ""
 
 msgid "Administrator"
@@ -329,9 +322,7 @@ msgstr ""
 msgid "Select your Organization"
 msgstr ""
 
-msgid ""
-"Your account is not associated to an organization. Please Contact the "
-"adminstrator."
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgstr ""
 
 msgid "Your Organization"
@@ -353,9 +344,7 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-msgid ""
-"Your invitation link is invalid. Please contact your organization "
-"administrator."
+msgid "Your invitation link is invalid. Please contact your organization administrator."
 msgstr ""
 
 #, python-format
@@ -365,9 +354,7 @@ msgstr ""
 msgid "Join"
 msgstr ""
 
-msgid ""
-"Your invitation link has expired. Please contact your organization "
-"administrator."
+msgid "Your invitation link has expired. Please contact your organization administrator."
 msgstr ""
 
 msgid "Task"
@@ -394,14 +381,10 @@ msgstr ""
 msgid "A link to an mp3 file to publish on this story"
 msgstr ""
 
-msgid ""
-"The id of the YouTube video that should be linked to this story (this is the"
-" text that comes afer v= and before & in the YouTube URL)"
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr ""
 
-msgid ""
-"Any tags for this story, separated by spaces, can be used to do more "
-"advanced filtering, optional"
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
 msgstr ""
 
 msgid "The category for this story"
@@ -445,9 +428,7 @@ msgid ""
 "    "
 msgstr ""
 
-msgid ""
-"Once it is removed, it will be gone forever. There is no way to undo this "
-"operation."
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr ""
 
 msgid "Cancel"
@@ -512,9 +493,7 @@ msgid ""
 "      "
 msgstr ""
 
-msgid ""
-"Alternatively, you can fill out the form below to have your password reset "
-"via e-mail."
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr ""
 
 msgid "Please contact the website administrator to have your password reset."
@@ -526,9 +505,7 @@ msgstr ""
 msgid "Recover"
 msgstr ""
 
-msgid ""
-"Please enter the email address you used to sign up and we will help you "
-"recover your password."
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr ""
 
 #, python-format
@@ -541,14 +518,10 @@ msgstr ""
 msgid "New Password"
 msgstr ""
 
-msgid ""
-"Passwords must have at least 8 characters, including one uppercase, one "
-"lowercase and one number"
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
 msgstr ""
 
-msgid ""
-"You have used this password before in the past year, please use a new "
-"password."
+msgid "You have used this password before in the past year, please use a new password."
 msgstr ""
 
 msgid "Password"
@@ -569,9 +542,7 @@ msgstr ""
 msgid "Your Email"
 msgstr ""
 
-msgid ""
-"E-mail recovery is not supported, please contact the website administrator "
-"to reset your password manually."
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
 msgstr ""
 
 msgid "Current Password"
@@ -604,8 +575,7 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-msgid ""
-"Users will only get those permissions that are allowed for their group."
+msgid "Users will only get those permissions that are allowed for their group."
 msgstr ""
 
 msgid "Set the user's initial password here."
@@ -663,16 +633,13 @@ msgstr ""
 msgid "You are now logged in as %s"
 msgstr ""
 
-msgid ""
-"Password Updated Successfully. Now you can log in using your new password."
+msgid "Password Updated Successfully. Now you can log in using your new password."
 msgstr ""
 
 msgid "Reset your Password"
 msgstr ""
 
-msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by"
-" entering your email here."
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
 msgstr ""
 
 msgid "Submit"
@@ -851,9 +818,7 @@ msgstr ""
 msgid "Speak out on what's happening in your community"
 msgstr ""
 
-msgid ""
-"Use U-Report results and information to update and increase citizen's "
-"awareness"
+msgid "Use U-Report results and information to update and increase citizen's awareness"
 msgstr ""
 
 msgid "Participate in nationwide campaigns to help improve your country"
@@ -1204,9 +1169,7 @@ msgstr ""
 msgid "Export and Share"
 msgstr ""
 
-msgid ""
-"Want to tell the world about this? Download this image to easily share on "
-"social media or for a beautiful presentation!"
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
 
 msgid "SELECT COUNTRY"
@@ -1215,9 +1178,7 @@ msgstr ""
 msgid "Custom pages"
 msgstr ""
 
-msgid ""
-"See by the numbers how we are engaging youth voices for positive social "
-"change."
+msgid "See by the numbers how we are engaging youth voices for positive social change."
 msgstr "Ці люди змінюють країну на краще"
 
 msgid "Polled"
@@ -1349,19 +1310,11 @@ msgstr ""
 msgid "JOIN NOW"
 msgstr "Приєднатися"
 
-msgid ""
-"We are a part of a global platform working to change the lives of young "
-"people around the world."
-msgstr ""
-"Ми частина глобальної платформи, яка змінює життя молодих людей по всьому "
-"світу"
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Ми частина глобальної платформи, яка змінює життя молодих людей по всьому світу"
 
-msgid ""
-"Learn more about how U-Report is empowering and connecting young people to "
-"speak out on issues that matter to them."
-msgstr ""
-"Дізнайтеся більше про те, як U-Report дозволяє молодим людям висловлюватися "
-"про важливі для них проблеми"
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Дізнайтеся більше про те, як U-Report дозволяє молодим людям висловлюватися про важливі для них проблеми"
 
 msgid "How would you like to join?"
 msgstr ""
@@ -1540,9 +1493,7 @@ msgstr ""
 msgid "The full URL to navigate to this Job source."
 msgstr ""
 
-msgid ""
-"For Twitter, a widget Id is required to embed tweets on the website. Read "
-"carefully the instructions above on how to get the right widget Id"
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
 msgstr ""
 
 msgid "Featured job sources are shown first on the jobs page."
@@ -1572,8 +1523,7 @@ msgstr ""
 msgid "Geometry"
 msgstr ""
 
-msgid ""
-"The json representing the geometry type and coordinates of the boundaries"
+msgid "The json representing the geometry type and coordinates of the boundaries"
 msgstr ""
 
 msgid "The title for this item"
@@ -1609,8 +1559,7 @@ msgstr ""
 msgid "The Flow this Poll is based on"
 msgstr ""
 
-msgid ""
-"The date to display for this poll. Leave empty to use flow creation date."
+msgid "The date to display for this poll. Leave empty to use flow creation date."
 msgstr ""
 
 msgid "Whether the flow for this poll is archived on RapidPro"
@@ -1739,8 +1688,7 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
-msgid ""
-"The priority of this question on the poll page, higher priority comes first"
+msgid "The priority of this question on the poll page, higher priority comes first"
 msgstr ""
 
 msgid "Ruleset Label"
@@ -1766,20 +1714,16 @@ msgstr ""
 msgid "The name of the Contact Group that contains registered reporters"
 msgstr ""
 
-msgid ""
-"The label of the Contact Field that contains the birth date of reporters"
+msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr ""
 
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr ""
 
-msgid ""
-"The label of the Contact Field that contains the occupation of reporters"
+msgid "The label of the Contact Field that contains the occupation of reporters"
 msgstr ""
 
-msgid ""
-"The label of the Contact Field that contains the registration date of "
-"reporters"
+msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr ""
 
 msgid "The label of the Contact Field that contains the State of reporters"
@@ -1803,8 +1747,7 @@ msgstr ""
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr ""
 
-msgid ""
-"The whatapp number that users will use to contact U-Report if you have one"
+msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
@@ -1840,14 +1783,10 @@ msgstr ""
 msgid "The tertiary color for styling for this organization, should be dark"
 msgstr ""
 
-msgid ""
-"The primary highlight color for styling for this organization, should be "
-"light"
+msgid "The primary highlight color for styling for this organization, should be light"
 msgstr ""
 
-msgid ""
-"The secondary highlight color for styling for this organization, should be "
-"light"
+msgid "The secondary highlight color for styling for this organization, should be light"
 msgstr ""
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
@@ -1868,9 +1807,7 @@ msgstr ""
 msgid "The background color for the site"
 msgstr ""
 
-msgid ""
-"11 colors for styling maps, use comma between colors, not used if not 11 "
-"colors"
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr ""
 
 msgid "The states to show on maps only"
@@ -1888,9 +1825,7 @@ msgstr ""
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr ""
 
-msgid ""
-"The integer id to the Facebook app for this organization's chat app "
-"(optional)"
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
 msgstr ""
 
 msgid "The short text used to greet users on Facebook Messenger Plugin"
@@ -1917,9 +1852,7 @@ msgstr ""
 msgid "If there are jobs to be shown on the public site."
 msgstr ""
 
-msgid ""
-"If this org if for global data. e.g: It shows a world map instead of a "
-"country map."
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr ""
 
 msgid "Whether to activate an extra gender."
@@ -1928,10 +1861,7 @@ msgstr ""
 msgid "Whether to activate the new design."
 msgstr ""
 
-msgid ""
-"The alpha-3 ISO code of the organization so that it appears the stories "
-"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
-"Global)."
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
 msgid "The font used for headline texts"
@@ -1949,9 +1879,7 @@ msgstr ""
 msgid "The font used for small text"
 msgstr ""
 
-msgid ""
-"If you need to include some custom HTML codes in you org pages, like custom "
-"analytics code snippets"
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr ""
 
 msgid "90 Days"
