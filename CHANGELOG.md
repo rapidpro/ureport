@@ -1,3 +1,11 @@
+v1.1.100
+----------
+ * Merge pull request #503 from rapidpro/translations-1
+ * Add callback for summernote to hints user the file is big
+ * Rebuild locales
+ * Rebuild locales
+ * Add translations manually
+
 v1.1.99
 ----------
  * Add tests
