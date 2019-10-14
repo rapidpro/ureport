@@ -1,3 +1,7 @@
+v1.1.101
+----------
+ * Fix Facebook share URL
+
 v1.1.100
 ----------
  * Merge pull request #503 from rapidpro/translations-1
