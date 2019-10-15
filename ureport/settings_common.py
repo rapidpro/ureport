@@ -233,6 +233,11 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
+        name="has_count_on_link_only",
+        field=dict(help_text=_("Whether this org count should consider the count from link only"), required=False),
+        superuser_only=True,
+    ),
+    dict(
         name="shortcode",
         field=dict(
             help_text=_("The shortcode that users will use to contact U-Report locally"),
@@ -1066,6 +1071,14 @@ PREVIOUS_ORG_SITES = [
         is_static=True,
         count_link="https://www.zambiaureport.com/count.txt/",
     ),
+]
+
+# -----------------------------------------------------------------------------------
+# Other sites to get counts for but not display the flag
+# -----------------------------------------------------------------------------------
+OTHER_ORG_COUNT_SITES = [
+    dict(name="Global", count_link="https://www.ureport.in/count/"),
+    dict(name="Nigeria24x7", count_link="https://nigeria24x7.ureport.in/count/"),
 ]
 
 

@@ -267,7 +267,9 @@ class UtilsTest(UreportTest):
     def test_fetch_old_sites_count(self):
         self.clear_cache()
 
-        settings_sites_count = len(list(getattr(settings, "PREVIOUS_ORG_SITES", [])))
+        settings_sites_count = len(list(getattr(settings, "PREVIOUS_ORG_SITES", []))) + len(
+            list(getattr(settings, "OTHER_ORG_COUNT_SITES", []))
+        )
 
         with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
             mock_datetime_ms.return_value = 500
@@ -286,10 +288,10 @@ class UtilsTest(UreportTest):
                             old_site_values, [{"time": 500, "results": dict(size=300)}] * settings_sites_count
                         )
 
-                        mock_get.assert_called_with("https://www.zambiaureport.com/count.txt/")
+                        mock_get.assert_called_with("https://nigeria24x7.ureport.in/count/")
 
                         cache_set_mock.assert_called_with(
-                            "org:zambia:reporters:old-site",
+                            "org:nigeria24x7:reporters:old-site",
                             {"time": 500, "results": dict(size=300)},
                             UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME,
                         )
