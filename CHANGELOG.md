@@ -1,3 +1,11 @@
+v1.1.102
+----------
+ * Merge pull request #504 from rapidpro/counters-config
+ * Merge pull request #505 from rapidpro/fix-countries-number
+ * Add way to sync counts from all providers for orgs that do not display flags
+ * Update rebuild counts to include older polls too
+ * Fix the query for number for countries on homepage
+
 v1.1.101
 ----------
  * Fix Facebook share URL
