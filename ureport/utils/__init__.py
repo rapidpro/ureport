@@ -231,7 +231,9 @@ def fetch_old_sites_count():
 
     start = time.time()
     this_time = datetime.now()
-    linked_sites = list(getattr(settings, "PREVIOUS_ORG_SITES", []))
+    linked_sites = list(getattr(settings, "PREVIOUS_ORG_SITES", [])) + list(
+        getattr(settings, "OTHER_ORG_COUNT_SITES", [])
+    )
 
     old_site_values = []
 
@@ -277,7 +279,7 @@ def get_global_count():
         count = sum([elt["results"].get("size", 0) for elt in cached_values if elt.get("results", None)])
 
         for org in Org.objects.filter(is_active=True):
-            if org.get_config("common.is_on_landing_page"):
+            if org.get_config("common.is_on_landing_page") and not org.get_config("has_count_on_link_only"):
                 count += get_reporters_count(org)
 
         # cached for 10 min
