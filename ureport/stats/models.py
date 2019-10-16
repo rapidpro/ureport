@@ -123,7 +123,16 @@ class PollStats(models.Model):
 
     @classmethod
     def get_all_opinion_responses(cls, org, time_filter):
-        responses = PollStats.objects.filter(org=org).exclude(category=None).values("date").annotate(Sum("count"))
+        now = timezone.now()
+        year_ago = now - timedelta(days=365)
+        start = year_ago.replace(day=1)
+
+        responses = (
+            PollStats.objects.filter(org=org, date__gte=start)
+            .exclude(category=None)
+            .values("date")
+            .annotate(Sum("count"))
+        )
         return [dict(name=str(_("Opinion Responses")), data=PollStats.get_counts_data(responses, time_filter))]
 
     @classmethod
