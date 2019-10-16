@@ -382,6 +382,17 @@ class PollStats(models.Model):
     @classmethod
     def get_average_response_rate(cls, org):
 
+        key = f"org:{org.id}:average_response_rate"
+        output_data = cache.get(key, None)
+        if output_data:
+            return output_data["results"]
+
+        return PollStats.calculate_average_response_rate(org)
+
+    @classmethod
+    def calculate_average_response_rate(cls, org):
+
+        key = f"org:{org.id}:average_response_rate"
         polled_stats = PollStats.objects.filter(org=org).aggregate(Sum("count"))
         responded_stats = PollStats.objects.filter(org=org).exclude(category=None).aggregate(Sum("count"))
 
@@ -392,7 +403,10 @@ class PollStats(models.Model):
         if polled is None or polled == 0:
             return 0
 
-        return responded * 100 / polled
+        percentage = responded * 100 / polled
+        cache.set(key, {"results": percentage}, None)
+
+        return percentage
 
 
 class ContactActivity(models.Model):
