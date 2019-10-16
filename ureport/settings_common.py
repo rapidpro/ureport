@@ -159,6 +159,8 @@ DATA_API_BACKEND_TYPES = (
 )
 
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
+
 BACKENDS_ORG_CONFIG_FIELDS = [
     dict(
         name="reporter_group",
