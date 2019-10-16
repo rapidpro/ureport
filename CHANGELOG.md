@@ -1,3 +1,8 @@
+v1.1.104
+----------
+ * Merge pull request #507 from rapidpro/limit-opinion-responses-by-date
+ * Precalculate the avearage response for the engagement page
+
 v1.1.103
 ----------
  * Merge pull request #506 from rapidpro/limit-opinion-responses-by-date
