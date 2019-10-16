@@ -1,3 +1,8 @@
+v1.1.103
+----------
+ * Merge pull request #506 from rapidpro/limit-opinion-responses-by-date
+ * Limit all opinions response to the last year
+
 v1.1.102
 ----------
  * Merge pull request #504 from rapidpro/counters-config
