@@ -1,3 +1,12 @@
+v1.1.105
+----------
+ * Rebuild locales
+ * Rebuild locales
+ * Merge pull request #509 from rapidpro/translations_django-po--master_bn
+ * Translate /locale/en/LC_MESSAGES/django.po in bn
+ * Merge pull request #508 from rapidpro/max-upload-size
+ * Increase max size allowed to upload to 10MB
+
 v1.1.104
 ----------
  * Merge pull request #507 from rapidpro/limit-opinion-responses-by-date
