@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-14 20:43+0000\n"
+"POT-Creation-Date: 2019-10-23 08:13+0000\n"
 "PO-Revision-Date: 2017-02-22 13:15+0000\n"
 "Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
@@ -1978,6 +1978,11 @@ msgstr "الاسم الذي يرمز للأعضاء الإناث "
 
 msgid "Whether this org should be show on the landing page"
 msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
+
+#, fuzzy
+#| msgid "Whether this content should include a link"
+msgid "Whether this org count should consider the count from link only"
+msgstr "بحال كان المحتوى يجب أن يحوي رابط"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "

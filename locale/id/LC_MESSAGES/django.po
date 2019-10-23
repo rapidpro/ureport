@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-14 20:43+0000\n"
+"POT-Creation-Date: 2019-10-23 08:13+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1936,6 +1936,11 @@ msgstr "Label untuk U-Reporters yang Perempuan."
 
 msgid "Whether this org should be show on the landing page"
 msgstr "Centang jika ingin ditampilkan di halaman depan"
+
+#, fuzzy
+#| msgid "Whether this content should include a link"
+msgid "Whether this org count should consider the count from link only"
+msgstr "Apakah konten ini harus menyertakan link"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"

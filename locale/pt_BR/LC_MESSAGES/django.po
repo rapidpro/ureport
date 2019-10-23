@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-14 20:43+0000\n"
+"POT-Creation-Date: 2019-10-23 08:13+0000\n"
 "PO-Revision-Date: 2018-10-25 18:23+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/rapidpro/ureport/language/pt_BR/)\n"
@@ -1924,6 +1924,11 @@ msgstr "O título atribuído às U-Reporters que são do sexo feminino."
 
 msgid "Whether this org should be show on the landing page"
 msgstr "Se esta organização deve aparecer na página de destino"
+
+#, fuzzy
+#| msgid "Whether this content should include a link"
+msgid "Whether this org count should consider the count from link only"
+msgstr "Se este conteúdo deve incluir um link"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "O link que os utilizadores usarão para contactar o U-Report a nível local"

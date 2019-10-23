@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-14 20:43+0000\n"
+"POT-Creation-Date: 2019-10-23 08:13+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -1911,6 +1911,11 @@ msgstr "Nhãn được gán cho các U-Reporters nữ."
 
 msgid "Whether this org should be show on the landing page"
 msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
+
+#, fuzzy
+#| msgid "Whether this content should include a link"
+msgid "Whether this org count should consider the count from link only"
+msgstr "Nội dung này có nên bao gồm liên kết hay không"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
