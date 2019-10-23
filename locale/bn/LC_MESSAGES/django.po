@@ -1799,10 +1799,8 @@ msgstr "মেয়ে U-reporter দের চেনার জন্য লেব
 msgid "Whether this org should be show on the landing page"
 msgstr "এই org টি কি landing পেজ এ দেখানো হবে কিনা "
 
-#, fuzzy
-#| msgid "Whether this content should include a link"
 msgid "Whether this org count should consider the count from link only"
-msgstr "এই বিষয়ের মধ্যে কি কোন লিঙ্ক থাকা উচিত"
+msgstr "এই প্রতিষ্ঠানটির গণনা কেবলমাত্র এর লিংক থেকেই করা হবে কি না"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "ব্যবহারকারীরা যে  শর্ট কোড ব্যবহার করে  U-Report এ স্থানীয়ভাবে যোগাযোগ করবে"
