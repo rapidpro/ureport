@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-14 20:43+0000\n"
+"POT-Creation-Date: 2019-10-23 08:13+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1733,6 +1733,11 @@ msgstr ""
 
 msgid "Whether this org should be show on the landing page"
 msgstr ""
+
+#, fuzzy
+#| msgid "Whether this content should include a link"
+msgid "Whether this org count should consider the count from link only"
+msgstr "Whether this content should include a link"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr ""

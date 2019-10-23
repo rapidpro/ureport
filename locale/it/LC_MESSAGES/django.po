@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-14 20:43+0000\n"
+"POT-Creation-Date: 2019-10-23 08:13+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -1801,6 +1801,11 @@ msgstr "L'etichetta assegnata alle U-Reporter donne"
 
 msgid "Whether this org should be show on the landing page"
 msgstr "Se questa org deve essere mostrato nella pagina di destinazione"
+
+#, fuzzy
+#| msgid "Whether this content should include a link"
+msgid "Whether this org count should consider the count from link only"
+msgstr "Se questo contenuto deve includere un link"
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Il codice abbreviato che gli utenti useranno per contattare U-Report localmente"
