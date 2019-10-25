@@ -1,3 +1,8 @@
+v1.1.107
+----------
+ * Merge pull request #517 from rapidpro/country-flags-common
+ * Countries count are for sites that are for the country entirely
+
 v1.1.105
 ----------
  * Rebuild locales
