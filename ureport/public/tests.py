@@ -13,11 +13,9 @@ from dash.stories.models import Story, StoryImage
 from six.moves.urllib.parse import urlencode
 
 from django.conf import settings
-from django.core.files.images import ImageFile
 from django.urls import reverse
 from django.utils.http import urlquote
 
-from ureport.assets.models import Image
 from ureport.countries.models import CountryAlias
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
@@ -78,7 +76,7 @@ class PublicTest(UreportTest):
     def test_chooser(self):
         chooser_url = reverse("public.home")
 
-        settings_sites_count = len(list(getattr(settings, "PREVIOUS_ORG_SITES", [])))
+        settings_sites_count = len(list(getattr(settings, "COUNTRY_FLAGS_SITES", [])))
 
         # remove all orgs
         OrgBackend.objects.all().delete()
@@ -88,68 +86,6 @@ class PublicTest(UreportTest):
         response = self.client.get(chooser_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["orgs"]), settings_sites_count)
-
-        # neither uganda nor nigeria should be on the landing page without flag
-        chooser_orgs = response.context["orgs"]
-        for org in chooser_orgs:
-            self.assertFalse(org["name"].lower() == "rwanda")
-            self.assertFalse(org["name"].lower() == "nigeria")
-
-        # add two orgs nigeria and rwanda
-        self.nigeria = self.create_org("nigeria", pytz.timezone("Africa/Lagos"), self.admin)
-        self.rwanda = self.create_org("rwanda", pytz.timezone("Africa/Kampala"), self.admin)
-
-        response = self.client.get(chooser_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["orgs"]), settings_sites_count)
-
-        # no org is configure to be on landing page
-        chooser_orgs = response.context["orgs"]
-        for org in chooser_orgs:
-            self.assertFalse(org["name"].lower() == "rwanda")
-            self.assertFalse(org["name"].lower() == "nigeria")
-
-        # change nigeria to be  shown on landing page
-        self.nigeria.set_config("common.is_on_landing_page", True)
-
-        response = self.client.get(chooser_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["orgs"]), settings_sites_count)
-
-        # nigeria missing flag so not included
-        chooser_orgs = response.context["orgs"]
-        for org in chooser_orgs:
-            self.assertFalse(org["name"].lower() == "rwanda")
-            self.assertFalse(org["name"].lower() == "nigeria")
-
-        # add flag for nigeria
-        test_image = open("%s/image.jpg" % settings.TESTFILES_DIR, "rb")
-        django_image_file = ImageFile(test_image)
-
-        uganda_flag = Image()
-        uganda_flag.name = "nigeria flag"
-        uganda_flag.org = self.nigeria
-        uganda_flag.image_type = "F"
-        uganda_flag.created_by = self.admin
-        uganda_flag.modified_by = self.admin
-        uganda_flag.image.save("test_image.jpg", django_image_file, save=True)
-
-        # now nigeria should be included on landing page
-        response = self.client.get(chooser_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["orgs"]), settings_sites_count + 1)
-
-        chooser_orgs = response.context["orgs"]
-        has_rwanda = False
-        has_nigeria = False
-        for org in chooser_orgs:
-            if org["name"].lower() == "rwanda":
-                has_rwanda = True
-            if org["name"].lower() == "nigeria":
-                has_nigeria = True
-
-        self.assertTrue(has_nigeria)
-        self.assertFalse(has_rwanda)
 
         # if no empty subdomain org give a tempate response
         response = self.client.get(chooser_url)
