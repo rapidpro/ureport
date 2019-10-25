@@ -58,7 +58,7 @@ class IndexView(SmartTemplateView):
 
         # global counters
         context["global_contact_count"] = get_global_count()
-        context["global_org_count"] = len(settings.COUNTRY_FLAGS_SITES)
+        context["global_org_count"] = len(settings.COUNTRY_FLAGS_SITES) - 1  # remove Nigeria24x7
 
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = json.loads(org.get_age_stats())
