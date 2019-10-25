@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# LIliya <lilya.lyu@gmail.com>, 2019
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-14 20:42+0000\n"
+"PO-Revision-Date: 2019-10-06 20:21+0000\n"
+"Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
+"Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+msgid "PRE"
+msgstr "Перегляд"
+
+msgid "LI"
+msgstr "LI"
+
+msgid "TABLE"
+msgstr "Таблиця"
+
+msgid "DATA"
+msgstr "Дані"
+
+msgid "HR"
+msgstr "HR"
+
+msgid "BLOCKQUOTE"
+msgstr "Блокквет"
+
+msgid "A"
+msgstr "A"
+
+msgid "BODY"
+msgstr "Основа"
+
+msgid "TEXTAREA"
+msgstr "Текстова частина"
+
+msgid "DIV"
+msgstr "DIV"
+
+msgid "BR"
+msgstr "BR"
+
+msgid "SPAN"
+msgstr "SPAN"
+
+msgid "B"
+msgstr "B"
+
+msgid "U"
+msgstr "U"
+
+msgid "S"
+msgstr "S"
+
+msgid "I"
+msgstr "I"
+
+msgid "IMG"
+msgstr "Зображення"
