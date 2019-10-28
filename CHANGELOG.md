@@ -1,3 +1,9 @@
+v1.1.110
+----------
+ * Merge pull request #519 from rapidpro/fix-global-count
+ * Add Bengali language option
+ * Fix global count
+
 v1.1.109
 ----------
  * Fix typo
