@@ -1,3 +1,8 @@
+v1.1.108
+----------
+ * Merge pull request #518 from rapidpro/remove-syria-flag
+ * Remove Syria flag and fix chooser flags
+
 v1.1.107
 ----------
  * Merge pull request #517 from rapidpro/country-flags-common
