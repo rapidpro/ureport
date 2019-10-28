@@ -67,6 +67,7 @@ LANGUAGE_CODE = "en"
 
 # Available languages for translation
 LANGUAGES = (
+    ("bn", "Bengali"),
     ("bs", "Bosnian"),
     ("en", "English"),
     ("fr", "French"),
