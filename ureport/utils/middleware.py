@@ -17,6 +17,7 @@ class CheckVersionMiddleware:
             new_design
             and not path.startswith("/v2/")
             and not path.startswith("/v1/")
+            and not path.startswith("/home/")
             and not path.startswith("/media/")
             and not path.startswith("/api/")
             and not path.startswith("/count")

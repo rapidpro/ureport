@@ -1242,13 +1242,6 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://sa.ureport.in/count/",
     ),
     dict(
-        name="Syria",
-        host="//syria.ureport.in",
-        flag="flag_syria.png",
-        is_static=True,
-        count_link="http://syria.ureport.in/count/",
-    ),
-    dict(
         name="Tanzania",
         host="//tanzania.ureport.in",
         flag="flag_tanzania.png",
