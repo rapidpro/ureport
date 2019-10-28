@@ -535,15 +535,6 @@ class UtilsTest(UreportTest):
 
                 self.assertEqual(get_global_count(), 0)
 
-                ReportersCounter.objects.create(org=self.org, type="total-reporters", count=5)
-
-                # ignored if not on the global homepage
-                self.assertEqual(get_global_count(), 0)
-
-                # add the org to the homepage
-                self.org.set_config("common.is_on_landing_page", True)
-                self.assertEqual(get_global_count(), 5)
-
                 mock_old_sites_count.return_value = [
                     {"time": 500, "results": dict(size=300)},
                     {"time": 500, "results": dict(size=50)},
@@ -551,10 +542,6 @@ class UtilsTest(UreportTest):
                 from django.core.cache import cache
 
                 cache.delete(GLOBAL_COUNT_CACHE_KEY)
-                self.assertEqual(get_global_count(), 355)
-
-                cache.delete(GLOBAL_COUNT_CACHE_KEY)
-                self.org.set_config("common.is_on_landing_page", False)
                 self.assertEqual(get_global_count(), 350)
 
             with patch("django.core.cache.cache.get") as cache_get_mock:
