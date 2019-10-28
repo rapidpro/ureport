@@ -1,3 +1,7 @@
+v1.1.109
+----------
+ * Fix typo
+
 v1.1.108
 ----------
  * Merge pull request #518 from rapidpro/remove-syria-flag
