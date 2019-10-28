@@ -1159,13 +1159,6 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://myanmar.ureport.in/count/",
     ),
     dict(
-        name="New Zealand",
-        host="//newzealand.ureport.in/",
-        flag="flag_new_zealand.png",
-        is_static=True,
-        count_link="http://newzealand.ureport.in/count/",
-    ),
-    dict(
         name="Nigeria",
         host="//nigeria.ureport.in",
         flag="flag_nigeria.png",
