@@ -1,3 +1,7 @@
+v1.1.111
+----------
+ * Remove New Zealand flag
+
 v1.1.110
 ----------
  * Merge pull request #519 from rapidpro/fix-global-count
