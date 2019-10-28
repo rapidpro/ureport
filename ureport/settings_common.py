@@ -936,7 +936,7 @@ COUNTRY_FLAGS_SITES = [
     dict(
         name="Burundi",
         host="//burundi.ureport.in/",
-        flag="flag_burundi.png",
+        flag="flag_burkina_faso.png",
         is_static=True,
         count_link="http://burundi.ureport.in/count/",
     ),
