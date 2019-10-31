@@ -1,3 +1,8 @@
+v1.1.112
+----------
+ * Merge pull request #520 from rapidpro/add-canada-flag
+ * Add Canada flag
+
 v1.1.111
 ----------
  * Remove New Zealand flag
