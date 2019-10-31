@@ -949,6 +949,9 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://burkinafaso.ureport.in/count/",
     ),
     dict(
+        name="Canada", host="//oneyouth.unicef.ca/en/u-report/", flag="flag_canada.png", is_static=True, count_link=""
+    ),
+    dict(
         name="Cameroun",
         host="//cameroon.ureport.in/",
         flag="flag_cameroun.png",
