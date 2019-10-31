@@ -212,8 +212,8 @@ class UtilsTest(UreportTest):
     def test_fetch_old_sites_count(self):
         self.clear_cache()
 
-        settings_sites_count = len(list(getattr(settings, "COUNTRY_FLAGS_SITES", []))) + len(
-            list(getattr(settings, "OTHER_ORG_COUNT_SITES", []))
+        settings_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", [])) + list(
+            getattr(settings, "OTHER_ORG_COUNT_SITES", [])
         )
 
         with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
@@ -230,7 +230,9 @@ class UtilsTest(UreportTest):
 
                         old_site_values = fetch_old_sites_count()
                         self.assertEqual(
-                            old_site_values, [{"time": 500, "results": dict(size=300)}] * settings_sites_count
+                            old_site_values,
+                            [{"time": 500, "results": dict(size=300)}]
+                            * len([elt for elt in settings_sites if elt["count_link"]]),
                         )
 
                         mock_get.assert_called_with("https://www.ureport.in/count/")
