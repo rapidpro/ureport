@@ -38,7 +38,7 @@ from ureport.polls.tasks import (
     update_results_age_gender,
 )
 from ureport.polls.templatetags.ureport import question_segmented_results
-from ureport.stats.models import AgeSegment, ContactActivity, GenderSegment, PollStats
+from ureport.stats.models import AgeSegment, ContactActivity, GenderSegment, PollStats, PollWordCloud
 from ureport.tests import MockTembaClient, TestBackend, UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
@@ -1924,7 +1924,7 @@ class PollQuestionTest(UreportTest):
             category="All responses",
             state="",
             district="",
-            text="from an awesome place in kigali",
+            text="from an Awesome place in kigali",
             completed=False,
         )
 
@@ -1943,6 +1943,16 @@ class PollQuestionTest(UreportTest):
 
         with patch("ureport.polls.models.PollQuestion.is_open_ended") as mock_open:
             mock_open.return_value = True
+
+            self.assertFalse(PollWordCloud.objects.all())
+            poll_question1.generate_word_cloud()
+            self.assertTrue(PollWordCloud.objects.all())
+            self.assertEquals(PollWordCloud.objects.all().count(), 1)
+
+            # another run will keep the same DB object
+            poll_question1.generate_word_cloud()
+            self.assertTrue(PollWordCloud.objects.all())
+            self.assertEquals(PollWordCloud.objects.all().count(), 1)
 
             results = poll_question1.calculate_results()
             result = results[0]

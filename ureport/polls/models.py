@@ -288,6 +288,10 @@ class Poll(SmartModel):
             question.calculate_results(segment=dict(gender="Gender"))
             question.get_most_responded_regions()
 
+    def update_question_word_clouds(self):
+        for question in self.questions.all():
+            question.generate_word_cloud()
+
     @classmethod
     def pull_poll_results_task(cls, poll):
         from ureport.polls.tasks import pull_refresh
@@ -434,6 +438,10 @@ class Poll(SmartModel):
 
                 PollStats.objects.bulk_create(poll_stats_obj_to_insert)
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
+
+                # update the word clouds for questions
+                self.update_question_word_clouds()
+
                 logger.info(
                     "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results"
                     % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
@@ -925,17 +933,13 @@ class PollQuestion(SmartModel):
 
         return self.calculate_results(segment=segment)
 
-    def calculate_results(self, segment=None):
-        from ureport.stats.models import AgeSegment, PollStats, GenderSegment
+    def generate_word_cloud(self):
+        from ureport.stats.models import PollWordCloud
 
         org = self.poll.org
         open_ended = self.is_open_ended()
-        responded = self.get_responded()
-        polled = self.get_polled()
 
-        results = []
-
-        if open_ended and not segment:
+        if open_ended:
             custom_sql = """
                       SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls_pollresult.text IS NOT NULL AND polls_pollresult.text NOT ILIKE '%s') w group by w.label;
                       """ % (
@@ -949,6 +953,30 @@ class PollQuestion(SmartModel):
                 from ureport.utils import get_dict_from_cursor
 
                 unclean_categories = get_dict_from_cursor(cursor)
+
+            categories = {}
+            for category in unclean_categories:
+                categories[category["label"]] = int(category["count"])
+
+            poll_word_cloud = PollWordCloud.objects.get_or_create(org=org, question=self)[0]
+            poll_word_cloud.words = categories
+            poll_word_cloud.save()
+
+    def calculate_results(self, segment=None):
+        from ureport.stats.models import AgeSegment, PollStats, GenderSegment, PollWordCloud
+
+        org = self.poll.org
+        open_ended = self.is_open_ended()
+        responded = self.get_responded()
+        polled = self.get_polled()
+
+        results = []
+
+        if open_ended and not segment:
+            poll_word_cloud = PollWordCloud.objects.filter(org=org, question=self).first()
+            unclean_categories = []
+            if poll_word_cloud:
+                unclean_categories = [dict(label=key, count=val) for key, val in poll_word_cloud.words.items()]
 
             ureport_languages = getattr(settings, "LANGUAGES", [("en", "English")])
 
