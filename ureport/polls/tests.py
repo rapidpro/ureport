@@ -1735,9 +1735,63 @@ class PollTest(UreportTest):
 
             self.assertTrue(PollResultsCounter.objects.all())
 
+            poll.stopped_syncing = True
+            poll.save()
+
+            poll.delete_poll_results_counter()
+
+            self.assertTrue(PollResultsCounter.objects.all())
+
+            poll.stopped_syncing = False
+            poll.save()
+
             poll.delete_poll_results_counter()
 
             self.assertFalse(PollResultsCounter.objects.all())
+
+    def test_delete_poll_stats(self):
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+
+        poll_question = PollQuestion.objects.create(
+            poll=poll, title="question 1", ruleset_uuid="step-uuid", created_by=self.admin, modified_by=self.admin
+        )
+
+        self.assertFalse(PollStats.objects.all())
+
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow=poll.flow_uuid,
+            ruleset=poll_question.ruleset_uuid,
+            date=timezone.now(),
+            contact="contact-uuid",
+            completed=False,
+        )
+
+        with self.settings(
+            CACHES={
+                "default": {
+                    "BACKEND": "django_redis.cache.RedisCache",
+                    "LOCATION": "127.0.0.1:6379:1",
+                    "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+                }
+            }
+        ):
+            poll.rebuild_poll_results_counts()
+
+            self.assertTrue(PollStats.objects.all())
+
+            poll.stopped_syncing = True
+            poll.save()
+
+            poll.delete_poll_stats()
+
+            self.assertTrue(PollStats.objects.all())
+
+            poll.stopped_syncing = False
+            poll.save()
+
+            poll.delete_poll_stats()
+            self.assertFalse(PollStats.objects.all())
 
     def test_delete_poll_results(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)

@@ -1559,6 +1559,23 @@ class RapidProBackendTest(UreportTest):
         poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
         self.assertEqual(poll_result.text, "")
 
+        poll.stopped_syncing = True
+        poll.save()
+
+        (
+            num_val_created,
+            num_val_updated,
+            num_val_ignored,
+            num_path_created,
+            num_path_updated,
+            num_path_ignored,
+        ) = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual(
+            (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
+            (0, 0, 0, 0, 0, 0),
+        )
+
     @patch("redis.client.StrictRedis.lock")
     @patch("dash.orgs.models.TembaClient.get_archives")
     @patch("django.utils.timezone.now")
@@ -1733,6 +1750,23 @@ class RapidProBackendTest(UreportTest):
         )
         self.assertEqual(3, PollResult.objects.all().count())
         self.assertEqual(1, Contact.objects.all().count())
+
+        poll.stopped_syncing = True
+        poll.save()
+
+        (
+            num_val_created,
+            num_val_updated,
+            num_val_ignored,
+            num_path_created,
+            num_path_updated,
+            num_path_ignored,
+        ) = self.backend.pull_results_from_archives(poll)
+
+        self.assertEqual(
+            (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
+            (0, 0, 0, 0, 0, 0),
+        )
 
     @patch("dash.orgs.models.TembaClient.get_runs")
     @patch("django.utils.timezone.now")

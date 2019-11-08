@@ -197,6 +197,21 @@ def pull_results_recent_polls(org, since, until):
     return results_log
 
 
+@org_task("clear-old-poll-results", 30)
+def clear_old_poll_results(org, since, until):
+    from .models import Poll
+
+    now = timezone.now()
+    time_window = now - timedelta(days=90)
+
+    old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window)
+    for poll in old_polls:
+        poll.delete_poll_results()
+        poll.stopped_syncing = True
+        poll.save()
+        logger.info("Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id))
+
+
 @app.task()
 def update_or_create_questions(poll_ids):
     from .models import Poll

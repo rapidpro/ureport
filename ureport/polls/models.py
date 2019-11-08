@@ -129,6 +129,10 @@ class Poll(SmartModel):
         default=False, help_text=_("Whether the poll has finished the initial results sync.")
     )
 
+    stopped_syncing = models.BooleanField(
+        default=False, help_text=_("Whether the poll should stop regenerating stats.")
+    )
+
     title = models.CharField(max_length=255, help_text=_("The title for this Poll"))
     category = models.ForeignKey(
         Category, on_delete=models.PROTECT, related_name="polls", help_text=_("The category this Poll belongs to")
@@ -232,6 +236,10 @@ class Poll(SmartModel):
         from ureport.utils import chunk_list
         from ureport.stats.models import PollStats
 
+        if self.stopped_syncing:
+            logger.error("Poll cannot delete stats for poll #%d on org #%d" % (self.pk, self.org_id))
+            return
+
         question_ids = self.questions.all().values_list("id", flat=True)
 
         poll_stats_ids = PollStats.objects.filter(org_id=self.org_id, question_id__in=question_ids)
@@ -246,6 +254,10 @@ class Poll(SmartModel):
 
     def delete_poll_results_counter(self):
         from ureport.utils import chunk_list
+
+        if self.stopped_syncing:
+            logger.error("Poll cannot delete poll results_counter for poll #%d on org #%d" % (self.pk, self.org_id))
+            return
 
         rulesets = self.questions.all().values_list("ruleset_uuid", flat=True)
 
@@ -308,6 +320,7 @@ class Poll(SmartModel):
             None,
         )
 
+        Poll.objects.filter(id=self.pk).update(stopped_syncing=False)
         Poll.pull_poll_results_task(self)
 
     def rebuild_poll_results_counts(self):
@@ -317,6 +330,10 @@ class Poll(SmartModel):
         import time
 
         start = time.time()
+
+        if self.stopped_syncing:
+            logger.info("Poll stopped regenating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
+            return
 
         poll_id = self.pk
         org_id = self.org_id
@@ -340,6 +357,7 @@ class Poll(SmartModel):
                 questions_dict = dict()
 
                 if not questions.exists():
+                    logger.info("Poll cannot sync without questions for poll #%d on org #%d" % (poll_id, org_id))
                     return
 
                 for qsn in questions:
