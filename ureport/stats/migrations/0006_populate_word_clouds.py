@@ -11,7 +11,11 @@ def populate_poll_word_clouds(apps, schema_editor):
     PollWordCloud = apps.get_model("stats", "PollWordCloud")
 
     for org in Org.objects.all():
-        questions = PollQuestion.objects.filter(org=org).select_related("poll").prefetch_related("response_categories")
+        questions = (
+            PollQuestion.objects.filter(poll__org_id=org.id)
+            .select_related("poll")
+            .prefetch_related("response_categories")
+        )
 
         for question in questions:
             open_ended = (
