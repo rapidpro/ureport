@@ -254,8 +254,8 @@
   :javascript
     $(function(){
     if($(".social-media-blocks").children().length == 1) {
-        $(".social-media-blocks").children().toggleClass("open", 1000, "easeOutSine");
-        $(".social-media-block-tabs").children().toggleClass("open", 1000, "easeOutSine");
+        $(".social-media-blocks").children().AddClass("open", 1000, "easeOutSine");
+        $(".social-media-block-tabs").children().AddClass("open", 1000, "easeOutSine");
     } else {
       $(".social-media-block-tab").on("click", function(){
         if(!$(this).hasClass("open")){
