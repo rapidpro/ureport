@@ -1,18 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Fadi Al-Halabi <falhalabi@unicef.org>, 2016-2017
-# Tech Tribes <Khaled@techtribes.org>, 2015-2016
+# Nyaruka <info@textit.in>, 2019
+# Abraham Okiror <okiroribra@gmail.com>, 2019
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: UReport\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-11 16:10+0000\n"
-"PO-Revision-Date: 2017-02-22 13:15+0000\n"
-"Last-Translator: Fadi Al-Halabi <falhalabi@unicef.org>\n"
-"Language-Team: Arabic (http://www.transifex.com/rapidpro/ureport/language/ar/)\n"
+"POT-Creation-Date: 2019-11-14 09:09+0000\n"
+"PO-Revision-Date: 2019-05-15 20:27+0000\n"
+"Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
+"Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -278,10 +281,8 @@ msgstr "نوع الخلفية "
 msgid "The image file"
 msgstr "ملف الصورة "
 
-#, fuzzy
-#| msgid "The title for this item"
 msgid "The API token for this backend"
-msgstr "عنوان البند "
+msgstr ""
 
 #, python-format
 msgid ""
@@ -305,10 +306,8 @@ msgstr ""
 msgid "Edit"
 msgstr "تعديل "
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Manage Backends"
-msgstr "إدارة حسابات المستخدمين "
+msgstr ""
 
 msgid "Manage Users"
 msgstr "إدارة حسابات المستخدمين "
@@ -357,10 +356,8 @@ msgstr "رابط الدعوة الخاص بك لا يعمل، الرجاء ال�
 msgid "Join %(name)s"
 msgstr "إنضم الى %(name)s"
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join"
-msgstr "شارك "
+msgstr ""
 
 msgid "Your invitation link has expired. Please contact your organization administrator."
 msgstr "لقد إنتهت الفترة المخصصة لرابط الدعوة الخاصة بك، الرجاء التوصل مع المشرف في منظمتك. "
@@ -432,18 +429,12 @@ msgstr "الصورة التي تريد إدراجها في صفحة عرض ال�
 msgid "Remove Item?"
 msgstr "حذف "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
+#, python-format
 msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
 msgstr ""
-"\n"
-"هل أنت متأكد من الحذف <b>%(object)s</b>?"
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "بحال الحذف، سوف تختفي للأبد، لا يمكن إعادة هذه العملية للخلف"
@@ -451,15 +442,7 @@ msgstr "بحال الحذف، سوف تختفي للأبد، لا يمكن إع�
 msgid "Cancel"
 msgstr "إلغاء"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid ""
 "\n"
 "\t %(counter)s result\n"
@@ -469,42 +452,18 @@ msgid_plural ""
 "         %(counter)s results\n"
 "        "
 msgstr[0] ""
-"\n"
-"         %(counter)s نتيجة\n"
-"        "
 msgstr[1] ""
-"\n"
-"\t\t%(counter)s نتيجة\n"
-"\t"
 msgstr[2] ""
-"\n"
-"         %(counter)s نتيجة\n"
-"        "
 msgstr[3] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
 msgstr[4] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
 msgstr[5] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
+#, python-format
 msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
 msgstr ""
-"\n"
-"نتائج%(start)s-%(end)s %(count)s"
 
 msgid "Previous"
 msgstr "السابق"
@@ -530,31 +489,19 @@ msgstr "رمز منتهي الصلاحية"
 msgid "Login Failure"
 msgstr "تسجيل دخول خاطئ"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
+#, python-format
 msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
 msgstr ""
-"\n"
-"عذرا، لا يمكنك الدخول في الوقت الحالي لأننا تلقينا اشعار خطأ %(failed_login_limit)s محاولة دخول خاطئة."
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
+#, python-format
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
 msgstr ""
-"\n"
-"يرجى الانتظار لمدة %(lockout_timeout)s قبل إعادة محاولة الدخول مجدداً"
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "بشكل بديل، يمكنك تعبئة النموذج في الأسفل لتحصل على إعادة ضبط كلمة مرورك عن طريق البريد الالكتروني"
@@ -571,19 +518,12 @@ msgstr "استعادة"
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "الرجاء إدخال بريدك الالكتروني الذي قمت بالتسجيل عن طريقه أول مرة وسوف نساعدك لاستعادة كلمة المرور الخاصة بك"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
+#, python-format
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
 msgstr ""
-"\n"
-"<strong> لقد انتهت فترة صلاحية كلمة المرور الخاصة بك </strong> تنص سياسة الموقع على وجوب اختيار كلمة مرور جديدة كل  %(expire_days)s أيام، وبأن كلمة المرور الجديدو يجب ألا تكون قد استخدمت في السابق %(window_days)s \n"
-"."
 
 msgid "New Password"
 msgstr "كلمة المرور الجديدة"
@@ -739,7 +679,7 @@ msgid "Logout"
 msgstr "تسجيل الخروج "
 
 msgid "Opinions"
-msgstr ""
+msgstr "استطلاع الرأي"
 
 msgid "Users"
 msgstr "المستخدمين"
@@ -747,10 +687,8 @@ msgstr "المستخدمين"
 msgid "Settings"
 msgstr ""
 
-#, fuzzy
-#| msgid "Images"
 msgid "Pages"
-msgstr "الصور"
+msgstr ""
 
 msgid "Jobs"
 msgstr "الأعمال"
@@ -758,10 +696,8 @@ msgstr "الأعمال"
 msgid "Photos"
 msgstr ""
 
-#, fuzzy
-#| msgid "Category Images"
 msgid "Categories Images"
-msgstr "صور الفئة"
+msgstr ""
 
 msgid "News Items"
 msgstr "مواد الأخبار"
@@ -776,7 +712,7 @@ msgid "About"
 msgstr "نبذة عن "
 
 msgid "Engagement"
-msgstr ""
+msgstr "مشاركة"
 
 msgid "U-Report"
 msgstr "يو-ريبورت"
@@ -842,18 +778,16 @@ msgid "FOLLOW US ON"
 msgstr "تابعنا على "
 
 msgid "SELECT YOUR COUNTRY"
-msgstr ""
+msgstr "اختر بلدك"
 
-#, fuzzy
-#| msgid "Join"
 msgid "Join Now"
-msgstr "شارك "
+msgstr "انضم الآن!"
 
 msgid "READ MORE"
 msgstr "إقرأ المزيد "
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr ""
+msgstr " استكشف كيفية المشاركة"
 
 msgid ""
 "\n"
@@ -901,10 +835,8 @@ msgstr "ماذا ستضيف لك المشاركة في يوريبورت U-REPORT
 msgid "Speak out on what's happening in your community"
 msgstr "حدثنا عن ما يجري من حولك في مجتمعك المحلي "
 
-#, fuzzy
-#| msgid "Use Ureport results and information to update and increase citizen's awareness"
 msgid "Use U-Report results and information to update and increase citizen's awareness"
-msgstr "إستعمل النتائج والمعلومات المتوفرة من يوريبورت U-REPORT لنشر الوعي في مجتمعك المحلي "
+msgstr ""
 
 msgid "Participate in nationwide campaigns to help improve your country"
 msgstr "شارك في حملاتنا الوطنية لنهوض في مجتمعك المحلي "
@@ -949,18 +881,11 @@ msgstr "القائمة "
 msgid "Follow"
 msgstr "تابع"
 
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
-#| "                "
 msgid ""
 "\n"
 "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
 "                "
 msgstr ""
-"\n"
-"يو-ريبورت هو أداة رسائل وتواصل اجتماعي تسمح لأي شخص من أي مجتمع من أي مكان حول العالم بالمشاركة في استطلاعات الرأي، التبليغ عن الحالات، دعم حقوق الطفل والعمل كوكيل تغيير إيجابي في المجتمع بالنيابة عن أهل بلدك"
 
 msgid "CURRENT POLL"
 msgstr "إستطلاعات الرأي الحالية "
@@ -1052,10 +977,8 @@ msgstr "قراءة القصة الكاملة"
 msgid "Response Rate"
 msgstr "معدل الإستجابة "
 
-#, fuzzy
-#| msgid "Read This Story"
 msgid "Read this story"
-msgstr "قراءة هذه القصة"
+msgstr ""
 
 msgid "JOBS"
 msgstr "الأعمال"
@@ -1078,20 +1001,13 @@ msgstr "شارك في يوريبورت U-REPORT الآن "
 msgid "HOW TO JOIN"
 msgstr "كيفية المشاركة "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-#| "\n"
-#| "            "
+#, python-format
 msgid ""
 "\n"
 "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 "\n"
 "              "
 msgstr ""
-"\n"
-"* U-Report هو برنامج مجاني مدعوم من قبل يونيسف بمساعدة مقدمي الشبكة في %(country)s. لن يطلب منكم U-Report أي مبالغ مالية أو معلومات مالية شخصية، يرجى تجاهل أي رسائل تطلب منكم الدفع سواء كان ذلك على هذا الرقم أو على صفحات الفيسبوك تويتر. جميع خدمات U-Report (جميع الرسائل على %(shortcode)s) مجانية "
 
 msgid "U-REPORT ON SOCIAL MEDIA"
 msgstr "تابع يوريبورتU-REPORT على مواقع التوصل الإجتماعي "
@@ -1296,17 +1212,13 @@ msgid "Custom pages"
 msgstr ""
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "بالأرقام – احصائيات مراسلي يو-ريبورت"
+
+msgid "Polled"
 msgstr ""
 
-#, fuzzy
-#| msgid "polled"
-msgid "Polled"
-msgstr "الذين شملهم الاستطلاع"
-
-#, fuzzy
-#| msgid "U-Reporters"
 msgid "Reporters"
-msgstr "المشاركين في يوريبورت U-REPORT"
+msgstr ""
 
 msgid "Top Region"
 msgstr ""
@@ -1317,10 +1229,8 @@ msgstr ""
 msgid "February"
 msgstr ""
 
-#, fuzzy
-#| msgid "Search"
 msgid "March"
-msgstr "بحث "
+msgstr ""
 
 msgid "April"
 msgstr ""
@@ -1376,47 +1286,35 @@ msgstr ""
 msgid "Oct"
 msgstr ""
 
-#, fuzzy
-#| msgid "No"
 msgid "Nov"
-msgstr "لا"
+msgstr ""
 
 msgid "Dec"
 msgstr ""
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST OPINION"
-msgstr "مواقع "
+msgstr "آخر استطلاعات الرأي"
 
-#, fuzzy
-#| msgid "POLL RESULTS"
 msgid "VIEW FULL RESULTS"
-msgstr "نتائج الإستطلاع "
+msgstr "عرض نتائج الاستطلاع"
 
 msgid "PARTNERING WITH"
 msgstr ""
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS"
-msgstr "المشاركين في يو-ريبورت في"
+msgstr ""
 
 msgid "IN"
 msgstr ""
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "COUNTRIES WORLDWIDE"
-msgstr "المشاركين في يو-ريبورت في"
-
-msgid "AGES"
 msgstr ""
 
-#, fuzzy
-#| msgid "READ MORE"
+msgid "AGES"
+msgstr "الأعمار"
+
 msgid "LEARN MORE"
-msgstr "إقرأ المزيد "
+msgstr "إعرف أكثر"
 
 msgid "+ New "
 msgstr ""
@@ -1424,15 +1322,11 @@ msgstr ""
 msgid "+ New Page"
 msgstr ""
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LATEST NOTIFICATIONS"
-msgstr "مواقع "
+msgstr ""
 
-#, fuzzy
-#| msgid "Manage Users"
 msgid "Backends"
-msgstr "إدارة حسابات المستخدمين "
+msgstr ""
 
 msgid "+ New Poll"
 msgstr ""
@@ -1440,10 +1334,8 @@ msgstr ""
 msgid "Poll Results Data"
 msgstr ""
 
-#, fuzzy
-#| msgid "Results"
 msgid "Refresh Results"
-msgstr "النتائج"
+msgstr ""
 
 msgid "Join U-Report, Your voice matters."
 msgstr ""
@@ -1452,10 +1344,10 @@ msgid "JOIN NOW"
 msgstr ""
 
 msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
+msgstr "نحن جزء من منصة عالمية تعمل على تغيير حياة الشباب في جميع أنحاء العالم"
 
 msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr ""
+msgstr " عن القضايا التي تهمهم إعرف أكثر كيف يقوم يو-ريبورت بتمكين الشباب للتواصل والتعبير "
 
 msgid "How would you like to join?"
 msgstr ""
@@ -1469,82 +1361,48 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "RESPONSES"
-msgstr "نسبة التجاوب "
+msgstr ""
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "TOTAL RESPONSES"
-msgstr "نسبة التجاوب "
+msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
+#, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr ""
-"\n"
-"قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع..."
 
 msgid "ALL"
 msgstr ""
 
-#, fuzzy
-#| msgid "LOCATIONS"
 msgid "LOCATION"
-msgstr "مواقع "
+msgstr ""
 
 msgid "Written by:"
 msgstr ""
 
-#, fuzzy
-#| msgid "U-REPORTER STATISTICS"
 msgid "OVERALL STATISTICS"
-msgstr "إحصائيات المشاركين في يوريبورت  U-Report"
+msgstr ""
 
 msgid "THIS YEAR"
 msgstr ""
 
-#, fuzzy
-#| msgid "RESPONSE RATE"
 msgid "AVG RESPONSE RATE"
-msgstr "نسبة التجاوب "
+msgstr ""
 
-#, fuzzy
-#| msgid "U-REPORTERS IN"
 msgid "U-REPORTERS BY REGION"
-msgstr "المشاركين في يو-ريبورت في"
+msgstr ""
 
-#, fuzzy
-#| msgid "POLL RESULTS"
 msgid "FILTER RESULTS"
-msgstr "نتائج الإستطلاع "
+msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#| "    "
+#, python-format
 msgid ""
 "\n"
 "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
 "          "
 msgstr ""
-"\n"
-"هل أنت متأكد من الحذف <b>%(object)s</b>?"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t\t%(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid ""
 "\n"
 "             %(counter)s result\n"
@@ -1554,42 +1412,18 @@ msgid_plural ""
 "              %(counter)s results\n"
 "            "
 msgstr[0] ""
-"\n"
-"         %(counter)s نتيجة\n"
-"        "
 msgstr[1] ""
-"\n"
-"\t\t%(counter)s نتيجة\n"
-"\t"
 msgstr[2] ""
-"\n"
-"         %(counter)s نتيجة\n"
-"        "
 msgstr[3] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
 msgstr[4] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
 msgstr[5] ""
-"\n"
-"         %(counter)s نتائج\n"
-"        "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
+#, python-format
 msgid ""
 "\n"
 "             Results %(start)s-%(end)s of %(count)s\n"
 "           "
 msgstr ""
-"\n"
-"نتائج%(start)s-%(end)s %(count)s"
 
 msgid "Error"
 msgstr ""
@@ -1597,45 +1431,26 @@ msgstr ""
 msgid "Enter Dashboard"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#| "      "
+#, python-format
 msgid ""
 "\n"
 "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "              "
 msgstr ""
-"\n"
-"عذرا، لا يمكنك الدخول في الوقت الحالي لأننا تلقينا اشعار خطأ %(failed_login_limit)s محاولة دخول خاطئة."
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#| "      "
+#, python-format
 msgid ""
 "\n"
 "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "                  "
 msgstr ""
-"\n"
-"يرجى الانتظار لمدة %(lockout_timeout)s قبل إعادة محاولة الدخول مجدداً"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#| "  "
+#, python-format
 msgid ""
 "\n"
 "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "      "
 msgstr ""
-"\n"
-"<strong> لقد انتهت فترة صلاحية كلمة المرور الخاصة بك </strong> تنص سياسة الموقع على وجوب اختيار كلمة مرور جديدة كل  %(expire_days)s أيام، وبأن كلمة المرور الجديدو يجب ألا تكون قد استخدمت في السابق %(window_days)s \n"
-"."
 
 msgid "+ New Story"
 msgstr ""
@@ -1809,15 +1624,11 @@ msgstr "صورة فئة البداية ليتم عرضها لاستطلاعات 
 msgid "The organization this poll is part of"
 msgstr "المنظمة أو الجميعية التي يتبع لها هذا الإستطلاع "
 
-#, fuzzy
-#| msgid "The title for this story"
 msgid "The title for this response story"
-msgstr "عنوان المقال"
+msgstr ""
 
-#, fuzzy
-#| msgid "The writer of the story"
 msgid "The writer of the response story"
-msgstr "كاتب المقالة"
+msgstr ""
 
 msgid "The poll to associate to"
 msgstr "يرتبط هذا الإستطلاع في "
@@ -1870,20 +1681,14 @@ msgstr "ضبط تاريخ الإستطلاع"
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr ""
 
-#, fuzzy
-#| msgid "Configuration"
 msgid "Configure flow"
-msgstr "ترتيب"
+msgstr ""
 
-#, fuzzy
-#| msgid "Your poll has been updated."
 msgid "Your poll has been configured, now adjust the poll date."
-msgstr "تم تحديث الإستطلاع الخاص بك "
+msgstr ""
 
-#, fuzzy
-#| msgid "Your poll has been updated."
 msgid "Your poll has been created, now configure its flow."
-msgstr "تم تحديث الإستطلاع الخاص بك "
+msgstr ""
 
 msgid "Poll Images"
 msgstr "الصور الخاصة بالإستطلاع"
@@ -1897,10 +1702,8 @@ msgstr "الصور التي تود نشرها على صفحة الإستطلاع
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "الصور التي تود نشرها على صفحة الإستطلاع (إختياري) "
 
-#, fuzzy
-#| msgid "Poll Questions"
 msgid "Poll Response"
-msgstr "أسئلة الإستطلاع "
+msgstr ""
 
 msgid "Your poll has been updated."
 msgstr "تم تحديث الإستطلاع الخاص بك "
@@ -1935,19 +1738,16 @@ msgstr "العنوان "
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "سيتم مشاركة السؤال الذي قمت بطرحه للفئة المستهدفة خاصتك، علناً "
 
-#, fuzzy, python-format
-#| msgid "Scheduled a pull refresh for poll #%d on org #%d"
+#, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr "من المقرر تحديث سحب للاستطلاع  #%d على منظمة #%d"
+msgstr ""
 
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-#, fuzzy
-#| msgid "The name of txbhe Contact Group that contains registered reporters"
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr "اسم Txbhe الذي يحتوي على تفاصيل المسجلين في يوريبورت U-Report "
+msgstr ""
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr "اسم الحقل الخاص في إدخال تاريخ ميلاد الماسح  "
@@ -1979,18 +1779,14 @@ msgstr "الاسم الذي يرمز للأعضاء الإناث "
 msgid "Whether this org should be show on the landing page"
 msgstr "بحال كان المحتوى يجب أن يظهر على الصفحة المقصودة"
 
-#, fuzzy
-#| msgid "Whether this content should include a link"
 msgid "Whether this org count should consider the count from link only"
-msgstr "بحال كان المحتوى يجب أن يحوي رابط"
+msgstr ""
 
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
 
-#, fuzzy
-#| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
+msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "النص القصير المستخدم لتوجيه الزائرين للتسجيل في يو-ريبورت"
@@ -2004,15 +1800,11 @@ msgstr ""
 msgid "The description of the photos section U-Report homepage"
 msgstr ""
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the opinions page"
-msgstr "الموقع الجغرافي للذي قام في الرد "
+msgstr ""
 
-#, fuzzy
-#| msgid "The location of the responder."
 msgid "The description of the stories page"
-msgstr "الموقع الجغرافي للذي قام في الرد "
+msgstr ""
 
 msgid "The description of the engagement page"
 msgstr ""
@@ -2020,30 +1812,20 @@ msgstr ""
 msgid "The callout message on the footer engagement section"
 msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
 msgid "The primary color for styling for this organization, should be dark"
-msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
+msgstr ""
 
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
 msgid "The secondary color for styling for this organization, should be dark"
-msgstr "الألوان المساندة في تنسيقات الجمعية أو المنظمة "
+msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
 msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
+msgstr ""
 
-#, fuzzy
-#| msgid "The primary color for styling for this organization"
 msgid "The primary highlight color for styling for this organization, should be light"
-msgstr "اللون الأساسي تنسيقات الجمعية أو المنظمة "
+msgstr ""
 
-#, fuzzy
-#| msgid "The secondary color for styling for this organization"
 msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr "الألوان المساندة في تنسيقات الجمعية أو المنظمة "
+msgstr ""
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr "إختر 6 ألوان لتنسيق الرسوم البيانية، الرجاء الفصل بين الألوان بفاصلة "
@@ -2063,10 +1845,8 @@ msgstr "الألوان المساندة في تنسيقات الجمعية أو 
 msgid "The background color for the site"
 msgstr "لون الخلفية التي تريد إستخدامها لصفحات الموقع "
 
-#, fuzzy
-#| msgid "Up to 6 colors for styling charts, use comma between colors"
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr "إختر 6 ألوان لتنسيق الرسوم البيانية، الرجاء الفصل بين الألوان بفاصلة "
+msgstr ""
 
 msgid "The states to show on maps only"
 msgstr ""
@@ -2086,10 +1866,8 @@ msgstr "عدد صحيح من معرّف صفحة الفيسبوك لهذه ال�
 msgid "The integer id to the Facebook app for this organization's chat app (optional)"
 msgstr "عدد صحيح من معرّف تطبيق الفيسبوك لتطبيق محادثة هذه المنظمة (اختياري)"
 
-#, fuzzy
-#| msgid "The short text used to direct visitors to join U-Report"
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr "النص القصير المستخدم لتوجيه الزائرين للتسجيل في يو-ريبورت"
+msgstr ""
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr ""
@@ -2109,10 +1887,8 @@ msgstr "التطبيق المساند الخاص بالبحث على تويتر 
 msgid "The words to filter out from the results on public site"
 msgstr ""
 
-#, fuzzy
-#| msgid "If there are jobs to be shown on the public site"
 msgid "If there are jobs to be shown on the public site."
-msgstr "بحال وجود أعمال ليتم إظهارها على الموقع العام"
+msgstr ""
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "إذا كانت هذه المنظمة للبيانات العالمية، مثال: إنها تظهر خريطة عالمية بدل الخريطة المحلية"
@@ -2132,15 +1908,11 @@ msgstr ""
 msgid "The font used for normal text"
 msgstr ""
 
-#, fuzzy
-#| msgid "Participation Level"
 msgid "Hide participation stats"
-msgstr "درجة المشاركة"
+msgstr ""
 
-#, fuzzy
-#| msgid "The name of the sender of the message"
 msgid "The text to describe the sponsors of free messages"
-msgstr "اسم مرسل الرسالة "
+msgstr ""
 
 msgid "The font used for small text"
 msgstr ""
@@ -2160,15 +1932,11 @@ msgstr ""
 msgid "Age"
 msgstr ""
 
-#, fuzzy
-#| msgid "Population"
 msgid "Location"
-msgstr "السكان"
+msgstr ""
 
-#, fuzzy
-#| msgid "Responses"
 msgid "Opinion Responses"
-msgstr "الاستجابات"
+msgstr ""
 
 msgid "Sign Up Rate"
 msgstr ""
@@ -2178,102 +1946,3 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
-
-#~ msgid "Featured Poll Responses"
-#~ msgstr "ردود إستثنائية على هذا الإستطلاع "
-
-#, python-format
-#~ msgid "Response %d Reporter"
-#~ msgstr ""
-#~ "رد من أحد المشاركين في يوريبورت U-Report \n"
-#~ " %d"
-
-#~ msgid "The name or alias of the responder."
-#~ msgstr "اسم صاحب الرد"
-
-#, python-format
-#~ msgid "Response %d Location"
-#~ msgstr "الموقع الجغرافي للرد %d"
-
-#~ msgid "The location of the responder."
-#~ msgstr "الموقع الجغرافي للذي قام في الرد "
-
-#, python-format
-#~ msgid "Response %d Message"
-#~ msgstr "نص الرد %d"
-
-#~ msgid "The text of the featured response."
-#~ msgstr "نص الرد المميز "
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "                    %(responded)s responded out of %(polled)s polled\n"
-#~| "                  "
-#~ msgid ""
-#~ "\n"
-#~ "                  %(responded)s responded out of %(polled)s polled\n"
-#~ "                "
-#~ msgstr ""
-#~ "\n"
-#~ "قام  %(responded)s بالإجابة من %(polled)s الذين شملهم الاستطلاع..."
-
-#, fuzzy
-#~| msgid "U-REPORTERS IN"
-#~ msgid "TOTAL U-REPORTERS IN"
-#~ msgstr "المشاركين في يو-ريبورت في"
-
-#, fuzzy
-#~| msgid "Join & Engage"
-#~ msgid "Engage"
-#~ msgstr "شارك وتفاعل "
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                  %(questions)s question polled on this topic\n"
-#~| "                "
-#~| msgid_plural ""
-#~| "\n"
-#~| "                  %(questions)s questions polled on this topic\n"
-#~| "                "
-#~ msgid ""
-#~ "\n"
-#~ "          %(questions)s question\n"
-#~ "        "
-#~ msgid_plural ""
-#~ "\n"
-#~ "          %(questions)s questions\n"
-#~ "        "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(questions)s سؤال تم طرحه في هذا الموضوع"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(questions)s سؤال تم طرحه في هذا الموضوع"
-#~ msgstr[2] ""
-#~ "\n"
-#~ "%(questions)s سؤال تم طرحه في هذا الموضوع"
-#~ msgstr[3] ""
-#~ "\n"
-#~ "%(questions)s سؤال تم طرحه في هذا الموضوع"
-#~ msgstr[4] ""
-#~ "\n"
-#~ "%(questions)s سؤال تم طرحه في هذا الموضوع"
-#~ msgstr[5] ""
-#~ "\n"
-#~ "%(questions)s سؤال تم طرحه في هذا الموضوع"
-
-#, fuzzy
-#~| msgid "FILTERED BY"
-#~ msgid "FILTER BY:"
-#~ msgstr "صنف حسب "
-
-#~ msgid "The API token for the RapidPro account this dashboard is tied to"
-#~ msgstr "واجهة برمجة التطبيقات المأخوذة من الحساب الخاص في RapidPro مربوطة في "
-
-#~ msgid "Not Set"
-#~ msgstr "غير محدد "
-
-#~ msgid "National"
-#~ msgstr "وطني"
