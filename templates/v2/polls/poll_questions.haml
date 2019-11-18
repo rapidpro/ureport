@@ -15,16 +15,8 @@
 
 - block post-form
   -if request.user.is_superuser or perms.polls.poll_pull_refresh
-    %form.smartmin-form(action="{% url 'polls.poll_pull_refresh' object.id %}" method="post"  enctype="multipart/form-data")
-      - csrf_token
-      .field
-        %label.label
-          - trans "Poll Results Data"
-        .control
-            .col-md-3
-              %button.button.is-primary(type="submit" name="poll" value="{{object.id}}")
-                - trans "Refresh Results"
-
+    %a.button.is-primary.posterize(type="submit" name="poll" value="{{object.id}}" href="{% url 'polls.poll_pull_refresh' object.id %}")
+      - trans "Refresh Results"
 
 -block extra-style
   :css

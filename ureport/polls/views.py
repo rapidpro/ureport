@@ -529,7 +529,7 @@ class PollCRUDL(SmartCRUDL):
             return obj
 
     class PullRefresh(SmartUpdateView):
-        fields = ("id",)
+        fields = ()
         success_url = "@polls.poll_list"
         success_message = None
 
