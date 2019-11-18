@@ -1,3 +1,18 @@
+v1.1.113
+----------
+ * Add mo files
+ * Merge pull request #525 from rapidpro/arabic-locale
+ * Rebuild locale
+ * Rebuild locale
+ * Update Arabic translations
+ * Rebuild locale
+ * Merge pull request #522 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Merge pull request #524 from Quality-Management/bugfix/socialwidget
+ * Fixed class name
+ * Fixed class for widget error
+ * fixed parameter when only one social media widget is used
+ * Apply translations in sr_RS@latin
+
 v1.1.112
 ----------
  * Merge pull request #520 from rapidpro/add-canada-flag
