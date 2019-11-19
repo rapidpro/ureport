@@ -83,6 +83,7 @@ LANGUAGES = (
     ("ro", "Romanian"),
     ("vi", "Vietnamese"),
     ("sr-latn", "Latin Serbian"),
+    ("sr-rs@latin", "Serbian (Latin, Serbia)"),
 )
 
 DEFAULT_LANGUAGE = "en"
