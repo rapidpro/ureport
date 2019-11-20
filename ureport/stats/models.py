@@ -126,9 +126,12 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        question_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
+        )
 
         responses = (
-            PollStats.objects.filter(org=org, date__gte=start)
+            PollStats.objects.filter(org=org, date__gte=start, question_id__in=question_ids)
             .exclude(category=None)
             .values("date")
             .annotate(Sum("count"))
@@ -140,6 +143,9 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        question_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
+        )
 
         genders = GenderSegment.objects.all()
         if not org.get_config("common.has_extra_gender"):
@@ -150,7 +156,9 @@ class PollStats(models.Model):
         output_data = []
         for gender in genders:
             responses = (
-                PollStats.objects.filter(org=org, date__gte=start, gender_segment_id=gender["id"])
+                PollStats.objects.filter(
+                    org=org, date__gte=start, gender_segment_id=gender["id"], question_id__in=question_ids
+                )
                 .exclude(category=None)
                 .values("date")
                 .annotate(Sum("count"))
@@ -165,6 +173,10 @@ class PollStats(models.Model):
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
 
+        question_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
+        )
+
         top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
         output_data = []
         for osm_id, name in top_boundaries.items():
@@ -174,7 +186,9 @@ class PollStats(models.Model):
                 .values_list("pk", flat=True)
             )
             responses = (
-                PollStats.objects.filter(org=org, date__gte=start, location_id__in=boundary_ids)
+                PollStats.objects.filter(
+                    org=org, date__gte=start, location_id__in=boundary_ids, question_id__in=question_ids
+                )
                 .exclude(category=None)
                 .values("date")
                 .annotate(Sum("count"))
@@ -188,6 +202,9 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        question_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
+        )
 
         ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
         output_data = []
@@ -206,7 +223,9 @@ class PollStats(models.Model):
                 data_key = "35+"
 
             responses = (
-                PollStats.objects.filter(org=org, date__gte=start, age_segment_id=age["id"])
+                PollStats.objects.filter(
+                    org=org, date__gte=start, age_segment_id=age["id"], question_id__in=question_ids
+                )
                 .exclude(category=None)
                 .values("date")
                 .annotate(Sum("count"))
@@ -238,10 +257,17 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        question_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
+        )
 
-        polled_stats = PollStats.objects.filter(org=org, date__gte=start).values("date").annotate(Sum("count"))
+        polled_stats = (
+            PollStats.objects.filter(org=org, date__gte=start, question_id__in=question_ids)
+            .values("date")
+            .annotate(Sum("count"))
+        )
         responded_stats = (
-            PollStats.objects.filter(org=org, date__gte=start)
+            PollStats.objects.filter(org=org, date__gte=start, question_id__in=question_ids)
             .exclude(category=None)
             .values("date")
             .annotate(Sum("count"))
@@ -259,6 +285,9 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        question_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
+        )
 
         top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
         output_data = []
@@ -269,12 +298,16 @@ class PollStats(models.Model):
                 .values_list("pk", flat=True)
             )
             polled_stats = (
-                PollStats.objects.filter(org=org, date__gte=start, location_id__in=boundary_ids)
+                PollStats.objects.filter(
+                    org=org, date__gte=start, location_id__in=boundary_ids, question_id__in=question_ids
+                )
                 .values("date")
                 .annotate(Sum("count"))
             )
             responded_stats = (
-                PollStats.objects.filter(org=org, date__gte=start, location_id__in=boundary_ids)
+                PollStats.objects.filter(
+                    org=org, date__gte=start, location_id__in=boundary_ids, question_id__in=question_ids
+                )
                 .exclude(category=None)
                 .values("date")
                 .annotate(Sum("count"))
@@ -288,6 +321,9 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        question_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
+        )
 
         genders = GenderSegment.objects.all()
         if not org.get_config("common.has_extra_gender"):
@@ -298,12 +334,16 @@ class PollStats(models.Model):
         output_data = []
         for gender in genders:
             polled_stats = (
-                PollStats.objects.filter(org=org, date__gte=start, gender_segment_id=gender["id"])
+                PollStats.objects.filter(
+                    org=org, date__gte=start, gender_segment_id=gender["id"], question_id__in=question_ids
+                )
                 .values("date")
                 .annotate(Sum("count"))
             )
             responded_stats = (
-                PollStats.objects.filter(org=org, date__gte=start, gender_segment_id=gender["id"])
+                PollStats.objects.filter(
+                    org=org, date__gte=start, gender_segment_id=gender["id"], question_id__in=question_ids
+                )
                 .exclude(category=None)
                 .values("date")
                 .annotate(Sum("count"))
@@ -318,6 +358,9 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        question_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
+        )
 
         ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
         output_data = []
@@ -336,12 +379,16 @@ class PollStats(models.Model):
                 data_key = "35+"
 
             polled_stats = (
-                PollStats.objects.filter(org=org, date__gte=start, age_segment_id=age["id"])
+                PollStats.objects.filter(
+                    org=org, date__gte=start, age_segment_id=age["id"], question_id__in=question_ids
+                )
                 .values("date")
                 .annotate(Sum("count"))
             )
             responded_stats = (
-                PollStats.objects.filter(org=org, date__gte=start, age_segment_id=age["id"])
+                PollStats.objects.filter(
+                    org=org, date__gte=start, age_segment_id=age["id"], question_id__in=question_ids
+                )
                 .exclude(category=None)
                 .values("date")
                 .annotate(Sum("count"))
@@ -393,8 +440,17 @@ class PollStats(models.Model):
     def calculate_average_response_rate(cls, org):
 
         key = f"org:{org.id}:average_response_rate"
-        polled_stats = PollStats.objects.filter(org=org).aggregate(Sum("count"))
-        responded_stats = PollStats.objects.filter(org=org).exclude(category=None).aggregate(Sum("count"))
+
+        question_ids = list(
+            PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
+        )
+
+        polled_stats = PollStats.objects.filter(org=org, question_id__in=question_ids).aggregate(Sum("count"))
+        responded_stats = (
+            PollStats.objects.filter(org=org, question_id__in=question_ids)
+            .exclude(category=None)
+            .aggregate(Sum("count"))
+        )
 
         responded = responded_stats.get("count__sum", 0)
         if responded is None:
