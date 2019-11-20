@@ -1104,6 +1104,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://jamaica.ureport.in/count/",
     ),
     dict(
+        name="Jordan",
+        host="//jordan.ureport.in/",
+        flag="flag_jordan.png",
+        is_static=True,
+        count_link="http://jordan.ureport.in/count/",
+    ),
+    dict(
         name="Kiribati",
         host="//kiribati.ureport.in/",
         flag="flag_kiribati.png",

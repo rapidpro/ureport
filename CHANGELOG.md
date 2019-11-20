@@ -1,3 +1,12 @@
+v1.1.114
+----------
+ * Merge pull request #528 from rapidpro/fix-engagement-data-to-ignore-inactive-questions
+ * Merge pull request #529 from rapidpro/update-locale-arabic
+ * Add Jordan flag
+ * Rebuild locale
+ * Update Arabic, rebuild locale
+ * Filter for active questions on the engagement data
+
 v1.1.113
 ----------
  * Add mo files
