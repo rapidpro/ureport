@@ -46,8 +46,18 @@ def populate_poll_word_clouds(apps, schema_editor):
                 poll_word_cloud.save()
 
 
+def reverse(apps, schema_editor):  # pragma: no cover
+    pass
+
+
+def apply_manual():  # pragma: no cover
+    from django.apps import apps
+
+    populate_poll_word_clouds(apps, None)
+
+
 class Migration(migrations.Migration):
 
     dependencies = [("stats", "0005_pollwordcloud")]
 
-    operations = [migrations.RunPython(populate_poll_word_clouds)]
+    operations = [migrations.RunPython(populate_poll_word_clouds, reverse)]
