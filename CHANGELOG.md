@@ -1,3 +1,15 @@
+v1.1.115
+----------
+ * Rebuild locale
+ * Merge pull request #526 from Ilhasoft/hotfix/limit-poll-states
+ * Merge pull request #530 from rapidpro/rebuild-locale
+ * Fix poll page graph reload and sort locations options
+ * Rebuild locale
+ * Rebuild locale
+ * Update form fields size for superadmin in v1
+ * Update form fields size for superadmin
+ * Add limit poll states config for superusers
+
 v1.1.114
 ----------
  * Merge pull request #528 from rapidpro/fix-engagement-data-to-ignore-inactive-questions
