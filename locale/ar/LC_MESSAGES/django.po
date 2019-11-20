@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-14 10:23+0000\n"
+"POT-Creation-Date: 2019-11-20 09:52+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -1341,7 +1341,7 @@ msgid "Join U-Report, Your voice matters."
 msgstr ""
 
 msgid "JOIN NOW"
-msgstr ""
+msgstr "انضم الآن!"
 
 msgid "We are a part of a global platform working to change the lives of young people around the world."
 msgstr "نحن جزء من منصة عالمية تعمل على تغيير حياة الشباب في جميع أنحاء العالم"
@@ -1350,22 +1350,22 @@ msgid "Learn more about how U-Report is empowering and connecting young people t
 msgstr " عن القضايا التي تهمهم إعرف أكثر كيف يقوم يو-ريبورت بتمكين الشباب للتواصل والتعبير "
 
 msgid "How would you like to join?"
-msgstr ""
+msgstr "كيف تريد الانضمام"
 
 msgid "Text"
 msgstr ""
 
 msgid "SEARCH"
-msgstr ""
+msgstr "ابحث "
 
 msgid "No results found"
 msgstr ""
 
 msgid "RESPONSES"
-msgstr ""
+msgstr "ستجابات"
 
 msgid "TOTAL RESPONSES"
-msgstr ""
+msgstr "مجموع الردود"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1381,19 +1381,19 @@ msgid "Written by:"
 msgstr ""
 
 msgid "OVERALL STATISTICS"
-msgstr ""
+msgstr "إحصائيات عامة"
 
 msgid "THIS YEAR"
-msgstr ""
+msgstr "السنة الحالية "
 
 msgid "AVG RESPONSE RATE"
-msgstr ""
+msgstr "متوسط ​​معدل الاستجابة"
 
 msgid "U-REPORTERS BY REGION"
 msgstr ""
 
 msgid "FILTER RESULTS"
-msgstr ""
+msgstr "تصفية النتائج"
 
 #, python-format
 msgid ""
@@ -1921,28 +1921,28 @@ msgid "If you need to include some custom HTML codes in you org pages, like cust
 msgstr "إذا كنت تريد إدراج بعض رموز النطاقات الخاصة على صفحات منظمتك، مثل custom analytics code snippets "
 
 msgid "90 Days"
-msgstr ""
+msgstr "90 يوم "
 
 msgid "6 Months"
-msgstr ""
+msgstr "6 اشهر "
 
 msgid "12 Months"
-msgstr ""
+msgstr "12 شهر "
 
 msgid "Age"
-msgstr ""
+msgstr "العمر "
 
 msgid "Location"
 msgstr ""
 
 msgid "Opinion Responses"
-msgstr ""
+msgstr "ردود الرأي"
 
 msgid "Sign Up Rate"
-msgstr ""
+msgstr "معدل الاشتراك"
 
 msgid "Active Users"
-msgstr ""
+msgstr "مستخدمين فعالين"
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
