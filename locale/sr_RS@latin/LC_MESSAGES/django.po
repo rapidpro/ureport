@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 09:52+0000\n"
+"POT-Creation-Date: 2019-11-20 14:52+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2019\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1346,9 +1346,6 @@ msgstr "Pozadinski sistemi"
 msgid "+ New Poll"
 msgstr "+ Nova Anketa"
 
-msgid "Poll Results Data"
-msgstr "Rezultati ankete"
-
 msgid "Refresh Results"
 msgstr "Osveži rezultate"
 
@@ -1643,6 +1640,11 @@ msgstr "Broj anketiranih u ovoj anketi"
 
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Da li je završena sinhronizacija inicijalnih rezultata ankete."
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
 
 msgid "The title for this Poll"
 msgstr "Naslov ankete"
@@ -1981,3 +1983,6 @@ msgstr "Aktivni Korisnici"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid "Poll Results Data"
+#~ msgstr "Rezultati ankete"

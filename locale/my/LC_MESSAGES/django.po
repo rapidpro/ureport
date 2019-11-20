@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 09:52+0000\n"
+"POT-Creation-Date: 2019-11-20 14:52+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1291,9 +1291,6 @@ msgstr ""
 msgid "+ New Poll"
 msgstr ""
 
-msgid "Poll Results Data"
-msgstr ""
-
 msgid "Refresh Results"
 msgstr ""
 
@@ -1562,6 +1559,9 @@ msgid "The number of polled reporters on this poll"
 msgstr ""
 
 msgid "Whether the poll has finished the initial results sync."
+msgstr ""
+
+msgid "Whether the poll should stop regenerating stats."
 msgstr ""
 
 msgid "The title for this Poll"
