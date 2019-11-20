@@ -98,7 +98,13 @@ class Boundary(models.Model):
         if org.get_config("common.is_global"):
             top_boundaries = cls.objects.filter(org=org, level=cls.COUNTRY_LEVEL)
         else:
-            top_boundaries = cls.objects.filter(org=org, level=cls.STATE_LEVEL)
+            # just listing states that are limited
+            limit_states = org.get_config("common.limit_poll_states")
+            if limit_states:
+                limit_states = [elt.strip() for elt in limit_states.split(",")]
+                top_boundaries = cls.objects.filter(org=org, level=cls.STATE_LEVEL, name__in=limit_states)
+            else:
+                top_boundaries = cls.objects.filter(org=org, level=cls.STATE_LEVEL)
 
         top_boundaries_values = top_boundaries.values("name", "osm_id")
 
