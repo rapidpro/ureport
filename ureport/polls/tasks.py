@@ -291,7 +291,7 @@ def fetch_old_sites_count():
     r = get_redis_connection()
 
     key = "fetch_old_sites_count_lock"
-    lock_timeout = 60
+    lock_timeout = 60 * 5
 
     if not r.get(key):
         with r.lock(key, timeout=lock_timeout):
