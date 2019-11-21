@@ -1,3 +1,8 @@
+v1.1.116
+----------
+ * Merge pull request #531 from rapidpro/language-fix
+ * Make sure we have the org language activated for precalculated data
+
 v1.1.115
 ----------
  * Rebuild locale
