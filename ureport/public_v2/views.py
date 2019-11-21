@@ -18,6 +18,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q
 from django.http import Http404, HttpResponse
 from django.urls import reverse
+from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
 
@@ -358,6 +359,7 @@ class UreportersView(SmartTemplateView):
 
         org = self.request.org
         context["org"] = org
+        translation.activate(org.language)
 
         # remove the first option '' from calender.month_abbr
         context["months"] = [six.text_type(_("%s")) % m for m in calendar.month_abbr][1:]

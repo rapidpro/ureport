@@ -21,7 +21,7 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import connection, models
 from django.db.models import Count, F, Sum
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -932,6 +932,7 @@ class PollQuestion(SmartModel):
         open_ended = self.is_open_ended()
         responded = self.get_responded()
         polled = self.get_polled()
+        translation.activate(org.language)
 
         results = []
 
