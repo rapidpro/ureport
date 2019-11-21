@@ -15,7 +15,7 @@ from dash.utils import datetime_to_ms
 from django.conf import settings
 from django.core.cache import cache
 from django.db.models import Sum
-from django.utils import timezone
+from django.utils import timezone, translation
 import pytz
 from ureport.assets.models import Image, LOGO
 from raven.contrib.django.raven_compat.models import client
@@ -446,6 +446,7 @@ def get_sign_up_rate_gender(org, time_filter):
     year_ago = now - timedelta(days=365)
     start = year_ago.replace(day=1)
     tz = pytz.timezone("UTC")
+    translation.activate(org.language)
 
     org_contacts_counts = get_org_contacts_counts(org)
 

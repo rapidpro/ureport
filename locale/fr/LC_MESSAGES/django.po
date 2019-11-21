@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 15:43+0000\n"
+"POT-Creation-Date: 2019-11-20 16:40+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2019\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1877,6 +1877,11 @@ msgid "11 colors for styling maps, use comma between colors, not used if not 11 
 msgstr "11 couleurs pour le style des cartes, utilisez des virgules entre les couleurs, non utilisé s’il n’y a pas 11 couleurs"
 
 msgid "The states to show on maps only"
+msgstr "Les états à afficher sur les cartes seulement"
+
+#, fuzzy
+#| msgid "The states to show on maps only"
+msgid "The states to show on maps only, used to filter poll results"
 msgstr "Les états à afficher sur les cartes seulement"
 
 msgid "The Google Analytics Tracking ID for this organization"

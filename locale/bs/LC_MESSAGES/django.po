@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 15:43+0000\n"
+"POT-Creation-Date: 2019-11-20 16:40+0000\n"
 "PO-Revision-Date: 2018-09-14 11:15+0000\n"
 "Last-Translator: Nineta Popovic <npopovic@unicef.org>\n"
 "Language-Team: Bosnian (http://www.transifex.com/rapidpro/ureport/language/bs/)\n"
@@ -1987,6 +1987,9 @@ msgid "11 colors for styling maps, use comma between colors, not used if not 11 
 msgstr "Do 6 boja za stiliziranje grafika, koristite zarez izmedju boja"
 
 msgid "The states to show on maps only"
+msgstr ""
+
+msgid "The states to show on maps only, used to filter poll results"
 msgstr ""
 
 msgid "The Google Analytics Tracking ID for this organization"

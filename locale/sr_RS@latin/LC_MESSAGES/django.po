@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 15:43+0000\n"
+"POT-Creation-Date: 2019-11-20 16:40+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2019\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1886,6 +1886,11 @@ msgid "11 colors for styling maps, use comma between colors, not used if not 11 
 msgstr "11 boja za oblikovanje mapa, koristiti zarez izmedju boja, ne koristiti ako nema 11 boja"
 
 msgid "The states to show on maps only"
+msgstr "Države koje se prikazuju samo na mapama"
+
+#, fuzzy
+#| msgid "The states to show on maps only"
+msgid "The states to show on maps only, used to filter poll results"
 msgstr "Države koje se prikazuju samo na mapama"
 
 msgid "The Google Analytics Tracking ID for this organization"

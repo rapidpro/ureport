@@ -8,7 +8,7 @@ from django.core.cache import cache
 from django.db import models
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, Q, Sum
 from django.db.models.functions import ExtractYear
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.utils.translation import ugettext_lazy as _
 
 from ureport.locations.models import Boundary
@@ -127,6 +127,8 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        translation.activate(org.language)
+
         question_ids = list(
             PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
         )
@@ -144,6 +146,8 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        translation.activate(org.language)
+
         question_ids = list(
             PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
         )
@@ -258,6 +262,8 @@ class PollStats(models.Model):
         now = timezone.now()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1)
+        translation.activate(org.language)
+
         question_ids = list(
             PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
         )
@@ -325,6 +331,7 @@ class PollStats(models.Model):
         question_ids = list(
             PollQuestion.objects.filter(is_active=True, poll__org_id=org.id).values_list("id", flat=True)
         )
+        translation.activate(org.language)
 
         genders = GenderSegment.objects.all()
         if not org.get_config("common.has_extra_gender"):
@@ -511,6 +518,7 @@ class ContactActivity(models.Model):
         today = now.date()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1).date()
+        translation.activate(org.language)
 
         activities = (
             ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start)
@@ -562,6 +570,7 @@ class ContactActivity(models.Model):
         today = now.date()
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1).date()
+        translation.activate(org.language)
 
         genders = GenderSegment.objects.all()
         if not org.get_config("common.has_extra_gender"):
