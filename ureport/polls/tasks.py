@@ -204,7 +204,7 @@ def clear_old_poll_results(org, since, until):
     now = timezone.now()
     time_window = now - timedelta(days=90)
 
-    old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window)
+    old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window).order_by("pk")
     for poll in old_polls:
         if not poll.stopped_syncing:
             poll.delete_poll_results()
