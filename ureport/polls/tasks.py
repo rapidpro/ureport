@@ -206,10 +206,11 @@ def clear_old_poll_results(org, since, until):
 
     old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window)
     for poll in old_polls:
-        poll.delete_poll_results()
-        poll.stopped_syncing = True
-        poll.save()
-        logger.info("Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id))
+        if not poll.stopped_syncing:
+            poll.delete_poll_results()
+            poll.stopped_syncing = True
+            poll.save()
+            logger.info("Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id))
 
 
 @app.task()
