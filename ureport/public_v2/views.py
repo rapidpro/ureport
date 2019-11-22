@@ -18,6 +18,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q
 from django.http import Http404, HttpResponse
 from django.urls import reverse
+from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
 
@@ -164,7 +165,10 @@ class PollContextMixin(object):
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = org.get_age_stats()
 
-        context["states"] = [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()]
+        context["states"] = sorted(
+            [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()],
+            key=lambda c: c["name"],
+        )
 
         main_poll = self.derive_main_poll()
         context["latest_poll"] = main_poll
@@ -355,6 +359,7 @@ class UreportersView(SmartTemplateView):
 
         org = self.request.org
         context["org"] = org
+        translation.activate(org.language)
 
         # remove the first option '' from calender.month_abbr
         context["months"] = [six.text_type(_("%s")) % m for m in calendar.month_abbr][1:]

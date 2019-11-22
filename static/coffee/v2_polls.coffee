@@ -457,7 +457,8 @@ $(->
     if page == "opinions"
       graphDiv = $("#" + evt.detail.id).find(".poll-chart")
       questionID = graphDiv.data("question")
-      segment = graphDiv.data("segment")
+      selectedPill = $("#" + evt.detail.id).find(".selected.segment-pill")
+      segment = selectedPill.data("segment")
       $("#chart-" + questionID).find('.chart-progress').show()
       showChart(questionID, segment)
 

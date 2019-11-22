@@ -1,3 +1,44 @@
+v1.1.116
+----------
+ * Merge pull request #531 from rapidpro/language-fix
+ * Make sure we have the org language activated for precalculated data
+
+v1.1.115
+----------
+ * Rebuild locale
+ * Merge pull request #526 from Ilhasoft/hotfix/limit-poll-states
+ * Merge pull request #530 from rapidpro/rebuild-locale
+ * Fix poll page graph reload and sort locations options
+ * Rebuild locale
+ * Rebuild locale
+ * Update form fields size for superadmin in v1
+ * Update form fields size for superadmin
+ * Add limit poll states config for superusers
+
+v1.1.114
+----------
+ * Merge pull request #528 from rapidpro/fix-engagement-data-to-ignore-inactive-questions
+ * Merge pull request #529 from rapidpro/update-locale-arabic
+ * Add Jordan flag
+ * Rebuild locale
+ * Update Arabic, rebuild locale
+ * Filter for active questions on the engagement data
+
+v1.1.113
+----------
+ * Add mo files
+ * Merge pull request #525 from rapidpro/arabic-locale
+ * Rebuild locale
+ * Rebuild locale
+ * Update Arabic translations
+ * Rebuild locale
+ * Merge pull request #522 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Merge pull request #524 from Quality-Management/bugfix/socialwidget
+ * Fixed class name
+ * Fixed class for widget error
+ * fixed parameter when only one social media widget is used
+ * Apply translations in sr_RS@latin
+
 v1.1.112
 ----------
  * Merge pull request #520 from rapidpro/add-canada-flag

@@ -82,7 +82,7 @@ LANGUAGES = (
     ("it", "Italian"),
     ("ro", "Romanian"),
     ("vi", "Vietnamese"),
-    ("sr-latn", "Latin Serbian"),
+    ("sr-rs@latin", "Serbian (Latin, Serbia)"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -389,6 +389,11 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="limit_states",
         field=dict(help_text=_("The states to show on maps only"), required=False),
+        superuser_only=True,
+    ),
+    dict(
+        name="limit_poll_states",
+        field=dict(help_text=_("The states to show on maps only, used to filter poll results"), required=False),
         superuser_only=True,
     ),
     dict(
@@ -1097,6 +1102,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_jamaica.png",
         is_static=True,
         count_link="http://jamaica.ureport.in/count/",
+    ),
+    dict(
+        name="Jordan",
+        host="//jordan.ureport.in/",
+        flag="flag_jordan.png",
+        is_static=True,
+        count_link="http://jordan.ureport.in/count/",
     ),
     dict(
         name="Kiribati",

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-25 13:04+0000\n"
+"POT-Creation-Date: 2019-11-20 16:40+0000\n"
 "PO-Revision-Date: 2019-01-28 17:20+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Romanian (http://www.transifex.com/rapidpro/ureport/language/ro/)\n"
@@ -2023,6 +2023,9 @@ msgid "11 colors for styling maps, use comma between colors, not used if not 11 
 msgstr "Până la 6 culori pentru stilizarea diagramelor, a se separa culorile prin virgulă"
 
 msgid "The states to show on maps only"
+msgstr ""
+
+msgid "The states to show on maps only, used to filter poll results"
 msgstr ""
 
 msgid "The Google Analytics Tracking ID for this organization"
