@@ -1,3 +1,8 @@
+v1.1.119
+----------
+ * Merge pull request #533 from Ilhasoft/hotfix/img_sizing_on_stories_v1
+ * Fixing on image responsivity while scaling large images on story detail
+
 v1.1.118
 ----------
  * Merge pull request #521 from rapidpro/old-poll-results-clear
