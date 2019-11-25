@@ -3,6 +3,7 @@ from datetime import timedelta
 
 from dash.orgs.models import Org
 
+from django.contrib.postgres.fields import JSONField
 from django.core.cache import cache
 from django.db import models
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, Q, Sum
@@ -607,3 +608,11 @@ class ContactActivity(models.Model):
             series = ContactActivity.get_activity_data(activities, time_filter)
             output_data.append(dict(name=name, osm_id=osm_id, data=series))
         return output_data
+
+
+class PollWordCloud(models.Model):
+    org = models.ForeignKey(Org, on_delete=models.PROTECT)
+
+    question = models.ForeignKey(PollQuestion, null=True, on_delete=models.SET_NULL)
+
+    words = JSONField(default=dict)

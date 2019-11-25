@@ -1347,9 +1347,6 @@ msgstr "Gerir utilizadores"
 msgid "+ New Poll"
 msgstr ""
 
-msgid "Poll Results Data"
-msgstr ""
-
 #, fuzzy
 #| msgid "Results"
 msgid "Refresh Results"
@@ -1653,6 +1650,9 @@ msgid "The number of polled reporters on this poll"
 msgstr ""
 
 msgid "Whether the poll has finished the initial results sync."
+msgstr ""
+
+msgid "Whether the poll should stop regenerating stats."
 msgstr ""
 
 msgid "The title for this Poll"

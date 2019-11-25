@@ -433,6 +433,16 @@ class RapidProBackend(BaseBackend):
             num_synced=0,
         )
 
+        if poll.stopped_syncing:
+            return (
+                stats_dict["num_val_created"],
+                stats_dict["num_val_updated"],
+                stats_dict["num_val_ignored"],
+                stats_dict["num_path_created"],
+                stats_dict["num_path_updated"],
+                stats_dict["num_path_ignored"],
+            )
+
         with r.lock(key):
             first = poll.poll_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
 
@@ -518,6 +528,16 @@ class RapidProBackend(BaseBackend):
             num_path_ignored=0,
             num_synced=0,
         )
+
+        if poll.stopped_syncing:
+            return (
+                stats_dict["num_val_created"],
+                stats_dict["num_val_updated"],
+                stats_dict["num_val_ignored"],
+                stats_dict["num_path_created"],
+                stats_dict["num_path_updated"],
+                stats_dict["num_path_ignored"],
+            )
 
         if r.get(key):
             logger.info("Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk))

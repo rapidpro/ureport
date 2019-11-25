@@ -6,7 +6,7 @@ from dash.orgs.tasks import org_task
 logger = logging.getLogger(__name__)
 
 
-@org_task("refresh-engagement-data", 60 * 30)
+@org_task("refresh-engagement-data", 60 * 60)
 def refresh_engagement_data(org, since, until):
     from .models import PollStats
 

@@ -1380,9 +1380,6 @@ msgstr "Foydalanuvchilarni boshqarish"
 msgid "+ New Poll"
 msgstr ""
 
-msgid "Poll Results Data"
-msgstr ""
-
 #, fuzzy
 #| msgid "Results"
 msgid "Refresh Results"
@@ -1710,6 +1707,11 @@ msgstr "Ushbu so'rovda savolga tutilgan muxbirlar soni"
 
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Ushbu so'rov dastlabki natijalar sinxronizasiyasini tamomladimi"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Mazkur tashkilot aniq maqsadli sahifada namoyish etilishi kerakmi"
 
 msgid "The title for this Poll"
 msgstr "Ushbu so'rov uchun sarlavha"

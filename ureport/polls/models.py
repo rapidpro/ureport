@@ -129,6 +129,10 @@ class Poll(SmartModel):
         default=False, help_text=_("Whether the poll has finished the initial results sync.")
     )
 
+    stopped_syncing = models.BooleanField(
+        default=False, help_text=_("Whether the poll should stop regenerating stats.")
+    )
+
     title = models.CharField(max_length=255, help_text=_("The title for this Poll"))
     category = models.ForeignKey(
         Category, on_delete=models.PROTECT, related_name="polls", help_text=_("The category this Poll belongs to")
@@ -232,6 +236,10 @@ class Poll(SmartModel):
         from ureport.utils import chunk_list
         from ureport.stats.models import PollStats
 
+        if self.stopped_syncing:
+            logger.error("Poll cannot delete stats for poll #%d on org #%d" % (self.pk, self.org_id))
+            return
+
         question_ids = self.questions.all().values_list("id", flat=True)
 
         poll_stats_ids = PollStats.objects.filter(org_id=self.org_id, question_id__in=question_ids)
@@ -246,6 +254,10 @@ class Poll(SmartModel):
 
     def delete_poll_results_counter(self):
         from ureport.utils import chunk_list
+
+        if self.stopped_syncing:
+            logger.error("Poll cannot delete poll results_counter for poll #%d on org #%d" % (self.pk, self.org_id))
+            return
 
         rulesets = self.questions.all().values_list("ruleset_uuid", flat=True)
 
@@ -288,6 +300,10 @@ class Poll(SmartModel):
             question.calculate_results(segment=dict(gender="Gender"))
             question.get_most_responded_regions()
 
+    def update_question_word_clouds(self):
+        for question in self.questions.all():
+            question.generate_word_cloud()
+
     @classmethod
     def pull_poll_results_task(cls, poll):
         from ureport.polls.tasks import pull_refresh
@@ -304,6 +320,7 @@ class Poll(SmartModel):
             None,
         )
 
+        Poll.objects.filter(id=self.pk).update(stopped_syncing=False)
         Poll.pull_poll_results_task(self)
 
     def rebuild_poll_results_counts(self):
@@ -313,6 +330,10 @@ class Poll(SmartModel):
         import time
 
         start = time.time()
+
+        if self.stopped_syncing:
+            logger.info("Poll stopped regenating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
+            return
 
         poll_id = self.pk
         org_id = self.org_id
@@ -336,6 +357,7 @@ class Poll(SmartModel):
                 questions_dict = dict()
 
                 if not questions.exists():
+                    logger.info("Poll cannot sync without questions for poll #%d on org #%d" % (poll_id, org_id))
                     return
 
                 for qsn in questions:
@@ -434,6 +456,10 @@ class Poll(SmartModel):
 
                 PollStats.objects.bulk_create(poll_stats_obj_to_insert)
                 PollResultsCounter.objects.bulk_create(counters_to_insert)
+
+                # update the word clouds for questions
+                self.update_question_word_clouds()
+
                 logger.info(
                     "Finished Rebuilding the counters for poll #%d on org #%d in %ds, inserted %d counters objects for %s results"
                     % (poll_id, org_id, time.time() - start, len(counters_to_insert), poll_results_ids_count)
@@ -925,18 +951,13 @@ class PollQuestion(SmartModel):
 
         return self.calculate_results(segment=segment)
 
-    def calculate_results(self, segment=None):
-        from ureport.stats.models import AgeSegment, PollStats, GenderSegment
+    def generate_word_cloud(self):
+        from ureport.stats.models import PollWordCloud
 
         org = self.poll.org
         open_ended = self.is_open_ended()
-        responded = self.get_responded()
-        polled = self.get_polled()
-        translation.activate(org.language)
 
-        results = []
-
-        if open_ended and not segment:
+        if open_ended:
             custom_sql = """
                       SELECT w.label, count(*) AS count FROM (SELECT regexp_split_to_table(LOWER(text), E'[^[:alnum:]_]') AS label FROM polls_pollresult WHERE polls_pollresult.org_id = %d AND polls_pollresult.flow = '%s' AND polls_pollresult.ruleset = '%s' AND polls_pollresult.text IS NOT NULL AND polls_pollresult.text NOT ILIKE '%s') w group by w.label;
                       """ % (
@@ -950,6 +971,31 @@ class PollQuestion(SmartModel):
                 from ureport.utils import get_dict_from_cursor
 
                 unclean_categories = get_dict_from_cursor(cursor)
+
+            categories = {}
+            for category in unclean_categories:
+                categories[category["label"]] = int(category["count"])
+
+            poll_word_cloud = PollWordCloud.objects.get_or_create(org=org, question=self)[0]
+            poll_word_cloud.words = categories
+            poll_word_cloud.save()
+
+    def calculate_results(self, segment=None):
+        from ureport.stats.models import AgeSegment, PollStats, GenderSegment, PollWordCloud
+
+        org = self.poll.org
+        open_ended = self.is_open_ended()
+        responded = self.get_responded()
+        polled = self.get_polled()
+        translation.activate(org.language)
+
+        results = []
+
+        if open_ended and not segment:
+            poll_word_cloud = PollWordCloud.objects.filter(org=org, question=self).first()
+            unclean_categories = []
+            if poll_word_cloud:
+                unclean_categories = [dict(label=key, count=val) for key, val in poll_word_cloud.words.items()]
 
             ureport_languages = getattr(settings, "LANGUAGES", [("en", "English")])
 

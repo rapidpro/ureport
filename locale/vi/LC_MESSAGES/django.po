@@ -1392,9 +1392,6 @@ msgstr "Quản lý người dùng"
 msgid "+ New Poll"
 msgstr ""
 
-msgid "Poll Results Data"
-msgstr ""
-
 #, fuzzy
 #| msgid "Results"
 msgid "Refresh Results"
@@ -1726,6 +1723,11 @@ msgstr "Số lượng phóng viên đã khảo sát trong khảo sát này"
 
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Khảo sát đã hoàn thành việc đồng bộ kết quả ban đầu hay chưa"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Liệu tổ chức này có cần được hiện diện ở trang đích"
 
 msgid "The title for this Poll"
 msgstr "Tiêu đề của khảo sát này"

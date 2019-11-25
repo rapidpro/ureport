@@ -38,7 +38,7 @@ from ureport.polls.tasks import (
     update_results_age_gender,
 )
 from ureport.polls.templatetags.ureport import question_segmented_results
-from ureport.stats.models import AgeSegment, ContactActivity, GenderSegment, PollStats
+from ureport.stats.models import AgeSegment, ContactActivity, GenderSegment, PollStats, PollWordCloud
 from ureport.tests import MockTembaClient, TestBackend, UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
@@ -1735,9 +1735,63 @@ class PollTest(UreportTest):
 
             self.assertTrue(PollResultsCounter.objects.all())
 
+            poll.stopped_syncing = True
+            poll.save()
+
+            poll.delete_poll_results_counter()
+
+            self.assertTrue(PollResultsCounter.objects.all())
+
+            poll.stopped_syncing = False
+            poll.save()
+
             poll.delete_poll_results_counter()
 
             self.assertFalse(PollResultsCounter.objects.all())
+
+    def test_delete_poll_stats(self):
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+
+        poll_question = PollQuestion.objects.create(
+            poll=poll, title="question 1", ruleset_uuid="step-uuid", created_by=self.admin, modified_by=self.admin
+        )
+
+        self.assertFalse(PollStats.objects.all())
+
+        PollResult.objects.create(
+            org=self.nigeria,
+            flow=poll.flow_uuid,
+            ruleset=poll_question.ruleset_uuid,
+            date=timezone.now(),
+            contact="contact-uuid",
+            completed=False,
+        )
+
+        with self.settings(
+            CACHES={
+                "default": {
+                    "BACKEND": "django_redis.cache.RedisCache",
+                    "LOCATION": "127.0.0.1:6379:1",
+                    "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+                }
+            }
+        ):
+            poll.rebuild_poll_results_counts()
+
+            self.assertTrue(PollStats.objects.all())
+
+            poll.stopped_syncing = True
+            poll.save()
+
+            poll.delete_poll_stats()
+
+            self.assertTrue(PollStats.objects.all())
+
+            poll.stopped_syncing = False
+            poll.save()
+
+            poll.delete_poll_stats()
+            self.assertFalse(PollStats.objects.all())
 
     def test_delete_poll_results(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
@@ -1924,7 +1978,7 @@ class PollQuestionTest(UreportTest):
             category="All responses",
             state="",
             district="",
-            text="from an awesome place in kigali",
+            text="from an Awesome place in kigali",
             completed=False,
         )
 
@@ -1943,6 +1997,16 @@ class PollQuestionTest(UreportTest):
 
         with patch("ureport.polls.models.PollQuestion.is_open_ended") as mock_open:
             mock_open.return_value = True
+
+            self.assertFalse(PollWordCloud.objects.all())
+            poll_question1.generate_word_cloud()
+            self.assertTrue(PollWordCloud.objects.all())
+            self.assertEquals(PollWordCloud.objects.all().count(), 1)
+
+            # another run will keep the same DB object
+            poll_question1.generate_word_cloud()
+            self.assertTrue(PollWordCloud.objects.all())
+            self.assertEquals(PollWordCloud.objects.all().count(), 1)
 
             results = poll_question1.calculate_results()
             result = results[0]

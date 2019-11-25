@@ -1410,9 +1410,6 @@ msgstr "Kelola Pengguna"
 msgid "+ New Poll"
 msgstr ""
 
-msgid "Poll Results Data"
-msgstr ""
-
 #, fuzzy
 #| msgid "Results"
 msgid "Refresh Results"
@@ -1747,6 +1744,11 @@ msgstr "Jumlah UReporter yang disurvei pada jajak pendapat ini"
 
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Apakah jajak pendapat telah selesai hasil awal sync."
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Centang jika ingin ditampilkan di halaman depan"
 
 msgid "The title for this Poll"
 msgstr "Judul dari jajak pendapat ini"

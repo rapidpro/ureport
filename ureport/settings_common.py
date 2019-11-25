@@ -859,6 +859,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": crontab(hour=2, minute=0),
         "args": ("ureport.stats.tasks.refresh_engagement_data", "sync"),
     },
+    "clear-old-results": {
+        "task": "dash.orgs.tasks.trigger_org_task",
+        "schedule": crontab(hour=4, minute=0),
+        "args": ("ureport.polls.tasks.clear_old_poll_results", "sync"),
+    },
 }
 
 # -----------------------------------------------------------------------------------

@@ -1403,9 +1403,6 @@ msgstr "Gestionează utilizatori"
 msgid "+ New Poll"
 msgstr ""
 
-msgid "Poll Results Data"
-msgstr ""
-
 #, fuzzy
 #| msgid "Results"
 msgid "Refresh Results"
@@ -1747,6 +1744,11 @@ msgstr "Numărul de reporteri intervievați în acest sondaj"
 
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Dacă în urma sondajului a fost finalizată sincronizarea rezultatelor inițiale."
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
 
 msgid "The title for this Poll"
 msgstr "Titlul pentru acest sondaj"

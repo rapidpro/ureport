@@ -1412,9 +1412,6 @@ msgstr "Upravljanje korisnicima"
 msgid "+ New Poll"
 msgstr ""
 
-msgid "Poll Results Data"
-msgstr ""
-
 #, fuzzy
 #| msgid "Results"
 msgid "Refresh Results"
@@ -1755,6 +1752,11 @@ msgstr "Broj anketiranih u ovoj anketi"
 
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Da li je završena sinhronizacija inicijalnih rezultata ankete"
+
+#, fuzzy
+#| msgid "Whether this org should be show on the landing page"
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Treba li se ova org prikazati na odredišnoj stranici"
 
 msgid "The title for this Poll"
 msgstr "Naslov ankete"
