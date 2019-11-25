@@ -1,3 +1,15 @@
+v1.1.118
+----------
+ * Merge pull request #521 from rapidpro/old-poll-results-clear
+ * Fix conflicts and merge master
+ * Rebuild locale
+ * Merge pull request #532 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Merge branch 'master' into translations_django-po--master_sr_RS@latin
+ * Merge pull request #527 from Ilhasoft/feature/enable_serbian_latin_serbia_language
+ * Apply translations in sr_RS@latin
+ * remove sr_latn from languages on settings_common
+ * enable locale for Serbian Latin Serbia language
+
 v1.1.116
 ----------
  * Merge pull request #531 from rapidpro/language-fix
