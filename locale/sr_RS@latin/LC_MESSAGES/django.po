@@ -5,18 +5,17 @@
 #
 # Translators:
 # A A <aandjelic@unicef.org>, 2019
-# Marko Mitrovic <mmitrovic@unicef.org>, 2019
 # Milos Cikota <mcikota@unicef.org>, 2019
 # Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2019
-#
+# Marko Mitrovic <mmitrovic@unicef.org>, 2019
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-20 16:40+0000\n"
+"POT-Creation-Date: 2019-11-22 12:46+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2019\n"
+"Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2019\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
 "Language: sr_RS@latin\n"
 "MIME-Version: 1.0\n"
@@ -1888,10 +1887,8 @@ msgstr "11 boja za oblikovanje mapa, koristiti zarez izmedju boja, ne koristiti 
 msgid "The states to show on maps only"
 msgstr "Države koje se prikazuju samo na mapama"
 
-#, fuzzy
-#| msgid "The states to show on maps only"
 msgid "The states to show on maps only, used to filter poll results"
-msgstr "Države koje se prikazuju samo na mapama"
+msgstr "Države koje se prikazuju samo na mapama, za filtriranje rezultata ankete"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "ID praćenja Google analitike za ovu organizaciju"
