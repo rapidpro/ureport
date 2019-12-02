@@ -1,3 +1,8 @@
+v1.1.120
+----------
+ * Merge pull request #535 from rapidpro/fix-poll-gender-for-gender-custom-labels
+ * Fix gender stats with custom gender labels
+
 v1.1.119
 ----------
  * Merge pull request #533 from Ilhasoft/hotfix/img_sizing_on_stories_v1
