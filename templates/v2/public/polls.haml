@@ -78,24 +78,24 @@
               .text-center.inline-block(class="{% if is_rtl_org %}md:pl-4 {% else %}md:pr-4{% endif %}")
                 %img(src="{{ STATIC_URL }}img/gender-male.png" width="40")
                 .font-bold.text-xl.leading-none.mt-2
-                  {{gender_stats.male.percentage|default:"0"}}%
+                  {{gender_stats.m.percentage|default:"0"}}%
                 .text-sm.leading-none
-                  {{gender_stats.male.count|default:"0"|intcomma}}
+                  {{gender_stats.m.count|default:"0"|intcomma}}
 
               .text-center.inline-block.px-4.border-black(class="rtl:border-r ltr:border-l")
                 %img(src="{{ STATIC_URL }}img/gender-female.png" width="40")
                 .font-bold.text-xl.leading-none.mt-2
-                  {{gender_stats.female.percentage|default:"0"}}%
+                  {{gender_stats.f.percentage|default:"0"}}%
                 .text-sm.leading-none
-                  {{gender_stats.female.count|default:"0"|intcomma}}
+                  {{gender_stats.f.count|default:"0"|intcomma}}
 
               - if org|config:"has_extra_gender"
                 .text-center.inline-block.px-4.border-black(class="rtl:border-r ltr:border-l")
                   %img(src="{{ STATIC_URL }}img/gender-other.png" width="40")
                   .font-bold.text-xl.leading-none.mt-2
-                    {{gender_stats.other.percentage|default:"0"}}%
+                    {{gender_stats.o.percentage|default:"0"}}%
                   .text-sm.leading-none
-                    {{gender_stats.other.count|default:"0"|intcomma}}
+                    {{gender_stats.o.count|default:"0"|intcomma}}
 
             .flex-1.inline-block.mt-4(style="min-width:220px;max-width:350px" class="md:mt-0")
               .relative.w-full(style="height:105px")

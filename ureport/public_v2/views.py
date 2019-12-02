@@ -26,7 +26,7 @@ from ureport.jobs.models import JobSource
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
-from ureport.stats.models import PollStats
+from ureport.stats.models import GenderSegment, PollStats
 from ureport.utils import get_global_count
 
 
@@ -182,8 +182,10 @@ class PollContextMixin(object):
                 total_gender = 0
                 for elt in gender_stats:
                     total_gender += elt["set"]
+
+                gender_label_dict = {str(v.lower()): k.lower() for k, v in GenderSegment.GENDERS.items()}
                 gender_stats_dict = {
-                    elt["label"].lower(): dict(
+                    gender_label_dict.get(elt["label"].lower()): dict(
                         count=elt["set"], percentage=int(round(elt["set"] * 100 / float(total_gender)))
                     )
                     for elt in gender_stats
