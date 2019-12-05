@@ -116,7 +116,10 @@ def chunk_list(iterable, size):
     source_iter = iter(iterable)
     while True:
         chunk_iter = islice(source_iter, size)
-        yield chain([next(chunk_iter)], chunk_iter)
+        try:
+            yield chain([next(chunk_iter)], chunk_iter)
+        except StopIteration:
+            return
 
 
 def get_linked_orgs(authenticated=False):
