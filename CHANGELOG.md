@@ -1,3 +1,13 @@
+v1.1.122
+----------
+ * Rebuild locales
+ * Merge pull request #534 from rapidpro/translations_django-po--master_pt_BR
+ * Merge pull request #537 from rapidpro/deps-update
+ * Merge pull request #536 from Ilhasoft/fixing/new-behaviour-in-python-3.7
+ * Update deps
+ * Adjustments on chunk_list(iterable, size), to avoid a runtime error 'generator raised StopIteration'
+ * Apply translations in pt_BR
+
 v1.1.121
 ----------
  * Include GA on the v2 public site
