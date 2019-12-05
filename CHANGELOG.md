@@ -1,3 +1,7 @@
+v1.1.121
+----------
+ * Include GA on the v2 public site
+
 v1.1.120
 ----------
  * Merge pull request #535 from rapidpro/fix-poll-gender-for-gender-custom-labels
