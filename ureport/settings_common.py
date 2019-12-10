@@ -990,6 +990,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://congobrazzaville.ureport.in/count/",
     ),
     dict(
+        name="Costa Rica",
+        host="//costarica.ureport.in/",
+        flag="flag_costa_rica.png",
+        is_static=True,
+        count_link="https://costarica.ureport.in/count/",
+    ),
+    dict(
         name="Cote d'ivoire",
         host="//cotedivoire.ureport.in/",
         flag="flag_cote_d_ivoire.png",
