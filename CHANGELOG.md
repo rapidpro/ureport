@@ -1,3 +1,12 @@
+v1.1.123
+----------
+ * Update JS deps
+ * Rebuild locales
+ * Merge pull request #538 from Ilhasoft/update/costa-rica-flag
+ * Merge pull request #540 from rapidpro/translations_django-po--master_ro
+ * Translate /locale/en/LC_MESSAGES/django.po in ro
+ * Added flag for Costa Rica
+
 v1.1.122
 ----------
  * Rebuild locales
