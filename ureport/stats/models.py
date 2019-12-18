@@ -50,6 +50,7 @@ class PollStats(models.Model):
     }
 
     COUNTS_SQUASH_LOCK = "org-polls-stats-squash-lock"
+    COUNTS_SQUASH_LOCK_TIMEOUT = 60 * 60 * 4
     LAST_SQUASHED_ID_KEY = "polls-stats-last-squashed-id"
 
     id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name="ID")
@@ -78,7 +79,7 @@ class PollStats(models.Model):
         if r.get(key):
             logger.info("Squash polls stats already running.")
         else:
-            with r.lock(key):
+            with r.lock(key, timeout=PollStats.COUNTS_SQUASH_LOCK_TIMEOUT):
 
                 last_squash = r.get(PollStats.LAST_SQUASHED_ID_KEY)
                 if not last_squash:
