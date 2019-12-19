@@ -72,6 +72,73 @@ class PollStats(models.Model):
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
 
     @classmethod
+    def initial_squash_counts(cls):
+        from ureport.utils import chunk_list
+
+        r = get_redis_connection()
+        start = time.time()
+        squash_count = 0
+
+        stats_ids = PollStats.objects.all().only("pk").values_list("pk", flat=True)
+        total_stats = len(stats_ids)
+
+        for batch in chunk_list(stats_ids, 1000):
+            stats = (
+                PollStats.objects.filter(pk__in=batch)
+                .values(
+                    "org_id",
+                    "question_id",
+                    "category_id",
+                    "age_segment_id",
+                    "gender_segment_id",
+                    "location_id",
+                    "date",
+                )
+                .order_by(
+                    "org_id",
+                    "question_id",
+                    "category_id",
+                    "age_segment_id",
+                    "gender_segment_id",
+                    "location_id",
+                    "date",
+                )
+            )
+
+            # get all the new added stats
+            for stat in stats:
+
+                # perform our atomic squash in SQL by calling our squash method
+                with connection.cursor() as c:
+                    c.execute(
+                        "SELECT ureport_squash_pollstats(%s, %s, %s, %s, %s, %s, %s);"
+                        % (
+                            stat["org_id"] or "null",
+                            stat["question_id"] or "null",
+                            stat["category_id"] or "null",
+                            stat["age_segment_id"] or "null",
+                            stat["gender_segment_id"] or "null",
+                            stat["location_id"] or "null",
+                            f"'{stat['date'].strftime('%Y-%m-%d %H:%M:%S')}'" if stat["date"] else "null",
+                        )
+                    )
+
+                squash_count += 1
+
+                if squash_count % 100 == 0:
+                    logger.info(
+                        "Squashing progress ... %0.2f/100 in in %0.3fs"
+                        % (squash_count * 100 / total_stats, time.time() - start)
+                    )
+
+        # insert our new top squashed id
+        max_id = PollStats.objects.all().order_by("-id").first()
+        if max_id:
+            r.set(PollStats.LAST_SQUASHED_ID_KEY, max_id.id)
+
+        logger.info("Squashed polls stats for %d types in %0.3fs" % (squash_count, time.time() - start))
+
+    @classmethod
     def squash_counts(cls):
         # get the id of the last count we squashed
         r = get_redis_connection()
@@ -91,28 +158,8 @@ class PollStats(models.Model):
                 squash_count = 0
 
                 if last_squash < 1:
-                    stats = (
-                        PollStats.objects.values(
-                            "org_id",
-                            "question_id",
-                            "category_id",
-                            "age_segment_id",
-                            "gender_segment_id",
-                            "location_id",
-                            "date",
-                        )
-                        .annotate(Count("id"))
-                        .filter(id__count__gt=1)
-                        .order_by(
-                            "org_id",
-                            "question_id",
-                            "category_id",
-                            "age_segment_id",
-                            "gender_segment_id",
-                            "location_id",
-                            "date",
-                        )
-                    )
+                    PollStats.initial_squash_counts()
+                    return
 
                 else:
                     stats = (
