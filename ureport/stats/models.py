@@ -83,26 +83,8 @@ class PollStats(models.Model):
         total_stats = len(stats_ids)
 
         for batch in chunk_list(stats_ids, 1000):
-            stats = (
-                PollStats.objects.filter(pk__in=batch)
-                .values(
-                    "org_id",
-                    "question_id",
-                    "category_id",
-                    "age_segment_id",
-                    "gender_segment_id",
-                    "location_id",
-                    "date",
-                )
-                .order_by(
-                    "org_id",
-                    "question_id",
-                    "category_id",
-                    "age_segment_id",
-                    "gender_segment_id",
-                    "location_id",
-                    "date",
-                )
+            stats = PollStats.objects.filter(pk__in=batch).values(
+                "org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date",
             )
 
             # get all the new added stats
