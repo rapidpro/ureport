@@ -9,7 +9,7 @@ BEGIN
     DELETE FROM stats_pollstats WHERE "id" IN (
       SELECT "id" FROM stats_pollstats
       WHERE "org_id" IS NOT DISTINCT FROM _org_id AND "question_id" IS NOT DISTINCT FROM _question_id AND "category_id" IS NOT DISTINCT FROM _category_id AND "age_segment_id" IS NOT DISTINCT FROM _age_segment_id AND "gender_segment_id" IS NOT DISTINCT FROM _gender_segment_id AND "location_id" IS NOT DISTINCT FROM _location_id AND "date" IS NOT DISTINCT FROM date_trunc('day', _date)::TIMESTAMP
-      LIMIT 10000
+      LIMIT 1000
     ) 
     RETURNING "count" )
     INSERT INTO stats_pollstats("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date", "count")
