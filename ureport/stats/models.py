@@ -79,10 +79,13 @@ class PollStats(models.Model):
         start = time.time()
         squash_count = 0
 
-        stats_ids = PollStats.objects.all().only("pk").values_list("pk", flat=True)
+        max_id = PollStats.objects.all().order_by("-id").first()
+        batch_start_id = 0
 
-        for batch in chunk_list(stats_ids, 1000):
-            stats = PollStats.objects.filter(pk__in=batch).values(
+        while batch_start_id < max_id:
+            batch_end_id = batch_start_id + 1000
+
+            stats = PollStats.objects.filter(pk__gte=batch_start_id, pk__lte=batch_end_id).values(
                 "org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date",
             )
 
@@ -112,10 +115,7 @@ class PollStats(models.Model):
                         % (squash_count, time.time() - start)
                     )
 
-        # insert our new top squashed id
-        max_id = PollStats.objects.all().order_by("-id").first()
-        if max_id:
-            r.set(PollStats.LAST_SQUASHED_ID_KEY, max_id.id)
+            batch_start_id = batch_end_id
 
         logger.info("Squashed polls stats for %d types in %0.3fs" % (squash_count, time.time() - start))
 

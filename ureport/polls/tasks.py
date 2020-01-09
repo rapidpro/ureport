@@ -317,4 +317,4 @@ def recheck_poll_flow_data(org_id=None):
 def polls_stats_squash():
     from ureport.stats.models import PollStats
 
-    PollStats.squash_counts()
+    PollStats.initial_squash_counts()
