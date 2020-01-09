@@ -73,9 +73,6 @@ class PollStats(models.Model):
 
     @classmethod
     def initial_squash_counts(cls):
-        from ureport.utils import chunk_list
-
-        r = get_redis_connection()
         start = time.time()
         squash_count = 0
 
