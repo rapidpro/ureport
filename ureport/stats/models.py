@@ -79,7 +79,7 @@ class PollStats(models.Model):
         start = time.time()
         squash_count = 0
 
-        max_id = PollStats.objects.all().order_by("-id").first()
+        max_id = PollStats.objects.all().order_by("-id").first().id
         batch_start_id = 0
 
         while batch_start_id < max_id:
