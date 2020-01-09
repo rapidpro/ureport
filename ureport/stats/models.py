@@ -80,7 +80,6 @@ class PollStats(models.Model):
         squash_count = 0
 
         stats_ids = PollStats.objects.all().only("pk").values_list("pk", flat=True)
-        total_stats = len(stats_ids)
 
         for batch in chunk_list(stats_ids, 1000):
             stats = PollStats.objects.filter(pk__in=batch).values(
@@ -109,8 +108,8 @@ class PollStats(models.Model):
 
                 if squash_count % 100 == 0:
                     logger.info(
-                        "Squashing progress ... %0.2f/100 in in %0.3fs"
-                        % (squash_count * 100 / total_stats, time.time() - start)
+                        "Squashing progress ... %d in in %0.3fs"
+                        % (squash_count, time.time() - start)
                     )
 
         # insert our new top squashed id
