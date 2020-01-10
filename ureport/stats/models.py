@@ -127,7 +127,6 @@ class PollStats(models.Model):
             with r.lock(key, timeout=PollStats.COUNTS_SQUASH_LOCK_TIMEOUT):
                 PollStats.initial_squash_counts()
 
-
     @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):
 
