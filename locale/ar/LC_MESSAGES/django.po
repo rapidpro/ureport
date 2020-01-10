@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-10 12:25+0000\n"
+"POT-Creation-Date: 2020-01-10 13:43+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -21,653 +21,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-
-msgid "The name of this category"
-msgstr "اسم الفئة "
-
-msgid "An optional image that can describe this category"
-msgstr "صورة لوصف هذه الفئة \"إختياري\" "
-
-msgid "The organization this category applies to"
-msgstr "المنظمة أو الجمعية التابعة لهذه الفئة "
-
-msgid "Categories"
-msgstr "الفئات "
-
-msgid "The name to describe this image"
-msgstr "وصف الصورة "
-
-msgid "The category this image represents"
-msgstr "الفئة التي ترمز لها الصورة  "
-
-msgid "The image file to use"
-msgstr "ملف الصورة التي تريد إستخدامها "
-
-msgid "The human readable name for this content type"
-msgstr "الاسم المقروء للإنسان لهذا النوع من المحتوى"
-
-msgid "The slug to idenfity this content type, used with the template tags"
-msgstr "Slug لتعريف هذا نوع من المحتوى، ويستخدم مع علامات القالب"
-
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-msgstr "وصف عن مكان استخدام نوع المحتوى هذا في الموقع وكيف سيتم عرضه"
-
-msgid "Whether this content should include a title"
-msgstr "بحال كان المحتوى يجب أن يحوى عنوان"
-
-msgid "Whether this content should include an image"
-msgstr "بحال كان المحتوى يجب أن يحوي صورة"
-
-msgid "Whether this content should use a rich HTML editor"
-msgstr "بحال كان المحتوى يجب أن يستعمل محرر لغة الترميز HTML"
-
-msgid "Whether this content should include a summary field"
-msgstr "بحال كان المحتوى يجب أن يحوي حقل ملخص"
-
-msgid "Whether this content should include a link"
-msgstr "بحال كان المحتوى يجب أن يحوي رابط"
-
-msgid "Whether this content should allow upload of additional images, ie a gallery"
-msgstr "بحال كان المحتوى يسمح برفع صور إضافية، مثال: معرض صور"
-
-msgid "Whether this content has a color field"
-msgstr "بحال كان المحتوى يحوي حقل لون"
-
-msgid "Whether this content should allow setting a YouTube id"
-msgstr "بحال كان المحتوى يجب أن يسمح بوضع مستخدم يو-تيوب"
-
-msgid "Whether this content should allow tags"
-msgstr "بحال كان المحتوى يجب أن يسمح بتنبيه الأشخاص"
-
-msgid "Content Type"
-msgstr "نوع المحتوى"
-
-msgid "The category, or type for this content block"
-msgstr "التصنيف أو الفئة لكتلة المحتوى"
-
-msgid "The title for this block of content, optional"
-msgstr "عنوان كتلة المحتوى، اختياري"
-
-msgid "The summary for this item, should be short"
-msgstr "ملخص هذا البند يجيب أن يكون قصير"
-
-msgid "The body of text for this content block, optional"
-msgstr "محتوى النص الخاص بكتلة المحتوى، اختياري"
-
-msgid "Any image that should be displayed with this content block, optional"
-msgstr "أي صورة يجب عرضها مع كتلة المحتوى، اختياري"
-
-msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr "لون خلفية للصورة، بصيغة: #rrggbb "
-
-msgid "Any link that should be associated with this content block, optional"
-msgstr "أي رابط يجب مرافقته مع كتلة المحتوى، اختياري"
-
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع هذا البند "
-
-msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "هل هناك أي وسوم تريد إضافتها، مفصولة بفراغات، ويمكن استعمالها من أجل تنقية بيانات متقدمة. اختياري"
-
-msgid "The priority for this block, higher priority blocks come first"
-msgstr "الأفضلية لهذه الكتلة، الكتل ذات الأفضلية الكبرى تأتي أولا"
-
-msgid "The organization this content block belongs to"
-msgstr "المنظمة التي تعود لها كتلة المحتوى"
-
-msgid "Gallery"
-msgstr "معرض الصور "
-
-msgid "Add Image"
-msgstr "إضافة صورة "
-
-msgid "Search"
-msgstr "بحث "
-
-msgid "Add"
-msgstr "إضافة "
-
-msgid "Content Types"
-msgstr "نوع المحتوى "
-
-msgid "Content Blocks"
-msgstr "مجموعات المحتوى الخاصة بالصفحة الإلكترونية "
-
-#, python-format
-msgid "%s Blocks"
-msgstr "مجموعات الصفحة الإلكترونية %s"
-
-#, python-format
-msgid "Edit %s"
-msgstr "تعديل %s"
-
-#, python-format
-msgid "Create %s"
-msgstr "إنشاء %s"
-
-msgid "Create Content Block"
-msgstr "إنشاء كتلة المحتوى"
-
-msgid "Your first name"
-msgstr "الاسم الأول "
-
-msgid "Your last name"
-msgstr "اسم العائلة "
-
-msgid "Your email address"
-msgstr "عنوان البريد الإلكتروني الخاص بك "
-
-msgid "Your password, at least eight letters please"
-msgstr "كلمة المرور  (8 أحرف على الأقل) "
-
-msgid "That email address is already used"
-msgstr "البريد الإلكتروني المدخل تم إستخدامه سابقاً "
-
-msgid "Passwords must contain at least 8 letters."
-msgstr "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل "
-
-msgid "This domain is used for subdomains"
-msgstr "هذا النطاق مستخدم لنطاقات فرعية"
-
-msgid "Name"
-msgstr "الاسم "
-
-msgid "The name of this organization"
-msgstr "اسم الجمعية أو المنظمة "
-
-msgid "The logo that should be used for this organization"
-msgstr "الشعار المستخدم في هذه الجمعية أو المنظمة "
-
-msgid "Administrators"
-msgstr "مشرفي الموقع "
-
-msgid "The administrators in your organization"
-msgstr "المشرفين في الجمعية أو المنظمة التي تتبع لها "
-
-msgid "Viewers"
-msgstr "المشاهدين "
-
-msgid "The viewers in your organization"
-msgstr "المشاهدين من زملائك في الجمعية أو المنظمة التي تنتمي لها "
-
-msgid "Editors"
-msgstr "المحررين "
-
-msgid "The editors in your organization"
-msgstr "المحررين في الجمعية أو المنظمة التابع لها أنت "
-
-msgid "Language"
-msgstr "اللغة "
-
-msgid "The main language used by this organization"
-msgstr "اللغة الرئيسية المستخدمة داخل هذه المنظمة "
-
-msgid "Subdomain"
-msgstr "إسم الموقع "
-
-msgid "This subdomain is not available"
-msgstr "هذا الاسم غير متوفر "
-
-msgid "The subdomain for this organization"
-msgstr "النطاق الفرعي لهذه المؤسسة"
-
-msgid "Domain"
-msgstr "نطاق"
-
-msgid "This domain is not available"
-msgstr "هذا النطاق ليس متاحاً"
-
-msgid "The custom domain for this organization"
-msgstr "النطاق الخاص بهذه المؤسسة"
-
-msgid "Timezone"
-msgstr "النطاق الزمني"
-
-msgid "The timezone your organization is in."
-msgstr "النطاق الزمني الذي تقع ضمنه مؤسستك"
-
-msgid "JSON blob used to store configuration information associated with this organization"
-msgstr "تم إستخدام لغة ترميز جافا \"جسون\" لتخزين النصوص و\"Blob\" لتخزين الصور، التسجيلات الصوتية والوسائط المتعددة، الخاصة بهذه المؤسسة "
-
-msgid "Administrator"
-msgstr "المشرف "
-
-msgid "Editor"
-msgstr "المحرر "
-
-msgid "Viewer"
-msgstr "المشاهد"
-
-msgid "Org"
-msgstr "Org"
-
-msgid "The organization to which the account is invited to view"
-msgstr "المنظمة التي أرسلت الدعوة الى هذا الحساب "
-
-msgid "Email"
-msgstr "البريد الإلكتروني "
-
-msgid "The email to which we send the invitation of the viewer"
-msgstr "البريد الإلكتروني الذي تمت إرسال الدعوة له "
-
-msgid "Secret"
-msgstr "كلمة السر "
-
-msgid "a unique code associated with this invitation"
-msgstr "الرمز السري الخاص بالدعوة"
-
-msgid "User Role"
-msgstr "دور المستخدم "
-
-#, python-format
-msgid "%s Invitation"
-msgstr "دعوة %s"
-
-msgid "Banner"
-msgstr "مساحة إعلانية "
-
-msgid "Pattern"
-msgstr "النمط الخاص "
-
-msgid "The organization in which the image will be used"
-msgstr "المنظمة التي سوف يتم إعتماد الصورة منها "
-
-msgid "The name to describe this background"
-msgstr "إسم الخلفية ووصفها "
-
-msgid "Background type"
-msgstr "نوع الخلفية "
-
-msgid "The image file"
-msgstr "ملف الصورة "
-
-msgid "The API token for this backend"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"لقد تمت دعوتك للمشاركة في%(org_name)s. \n"
-"\n"
-"لقبول الدعوة، <a href='%(host)s%(join_url)s'> اضغط هنا "
-
-msgid "You are invited to join {{org.name}}."
-msgstr ""
-
-msgid "Click this link to join"
-msgstr ""
-
-msgid "Edit"
-msgstr "تعديل "
-
-msgid "Manage Backends"
-msgstr ""
-
-msgid "Manage Users"
-msgstr "إدارة حسابات المستخدمين "
-
-msgid "Accounts"
-msgstr "حسابات "
-
-msgid "Admins"
-msgstr "المشرف "
-
-msgid "Remove"
-msgstr "حذف "
-
-msgid "You must have at least one administator"
-msgstr "يجب أن يكون لديك مشرف واحد على الأقل"
-
-msgid "Select your Organization"
-msgstr "قم بإختيار المنظمة التي تتبع لها "
-
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-msgstr "حسابك غير مرتبط بالمنظمة التي قمت بإختيارها، الرجاء التواصل مع المشرف في منظمتك "
-
-msgid "Your Organization"
-msgstr "مؤسستك"
-
-msgid "Invite people to your organization"
-msgstr "أرسل دعوة الى أحد أصدقائك للإنضمام الى منظمتك "
-
-msgid "User group"
-msgstr "مجموعة المستخدم "
-
-msgid "One of the emails you entered is invalid."
-msgstr "أحد عناوين البريد الإلكتروني المدخلة خاطئة "
-
-#, python-format
-msgid "Manage %(name)s Accounts"
-msgstr "لتحكم في حسابات %(name)s"
-
-msgid "Create"
-msgstr "إنشاء "
-
-msgid "Your invitation link is invalid. Please contact your organization administrator."
-msgstr "رابط الدعوة الخاص بك لا يعمل، الرجاء التواصل مع المشرف في منظمتك"
-
-#, python-format
-msgid "Join %(name)s"
-msgstr "إنضم الى %(name)s"
-
-msgid "Join"
-msgstr ""
-
-msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr "لقد إنتهت الفترة المخصصة لرابط الدعوة الخاصة بك، الرجاء التوصل مع المشرف في منظمتك. "
-
-msgid "Task"
-msgstr "مهمة"
-
-msgid "Tasks"
-msgstr "مهام"
-
-msgid "The title for this story"
-msgstr "عنوان المقال"
-
-msgid "Whether this story is featured"
-msgstr "هل هذه المقالة إستثنائية أو مميزة "
-
-msgid "The summary for the story"
-msgstr "ملخص المقال "
-
-msgid "The body of text for the story"
-msgstr "نص المقال"
-
-msgid "The writer of the story"
-msgstr "كاتب المقالة"
-
-msgid "A link to an mp3 file to publish on this story"
-msgstr "رابط ملف صوتي ليتم نشره عن القصة MP3"
-
-msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع مقالك ( الرمز التعرفي هو النص الموجود في الرابط بعد \"v=\" وقبل \"in\")   "
-
-msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr ""
-"هل هناك أي وسوم تريد إضافتها؟ \n"
-"\n"
-"*سيساعدك إضافة الوسوم في عملية ترتيب مقالاتك حسب الفئة، لإضافة أكثر من الوسم الرجاء الفصل بين الوسم والأخر بمسافة. "
-
-msgid "The category for this story"
-msgstr "فئة المقال"
-
-msgid "The organization this story belongs to"
-msgstr "المنظمة التي تنتمي لها هذه المقالة"
-
-msgid "Stories"
-msgstr "مقالات "
-
-msgid "The story to associate to"
-msgstr "هذه المقالة مرتبطة في "
-
-msgid "Yes"
-msgstr "نعم "
-
-msgid "No"
-msgstr "لا"
-
-msgid "Story Images"
-msgstr "صور المقال"
-
-#, python-format
-msgid "Image %d"
-msgstr "صورة %d"
-
-msgid "Image to display on story page and in previews. (optional)"
-msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
-
-msgid "Image to display on story page and in previews (optional)"
-msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
-
-msgid "Remove Item?"
-msgstr "حذف "
-
-#, python-format
-msgid ""
-"\n"
-"    Are you sure you want to remove <b>%(object)s</b>?\n"
-"    "
-msgstr ""
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "بحال الحذف، سوف تختفي للأبد، لا يمكن إعادة هذه العملية للخلف"
-
-msgid "Cancel"
-msgstr "إلغاء"
-
-#, python-format
-msgid ""
-"\n"
-"\t %(counter)s result\n"
-"\t"
-msgid_plural ""
-"\n"
-"         %(counter)s results\n"
-"        "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, python-format
-msgid ""
-"\n"
-"\tResults %(start)s-%(end)s of %(count)s\n"
-"\t"
-msgstr ""
-
-msgid "Previous"
-msgstr "السابق"
-
-msgid "Next"
-msgstr "التالي"
-
-msgid "edit"
-msgstr "تعديل"
-
-msgid "Sign in"
-msgstr "تسجيل الدخول "
-
-msgid "Login"
-msgstr "تسجيل الدخول "
-
-msgid "Forgot Password?"
-msgstr "هل نسيت كلمة السر؟ "
-
-msgid "Token Expired"
-msgstr "رمز منتهي الصلاحية"
-
-msgid "Login Failure"
-msgstr "تسجيل دخول خاطئ"
-
-#, python-format
-msgid ""
-"\n"
-"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-"      "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-"      "
-msgstr ""
-
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "بشكل بديل، يمكنك تعبئة النموذج في الأسفل لتحصل على إعادة ضبط كلمة مرورك عن طريق البريد الالكتروني"
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "يرجى التواصل مع مدير الموقع لإعادة تعيين كلمة السر"
-
-msgid "Email Address"
-msgstr "البريد الالكتروني"
-
-msgid "Recover"
-msgstr "استعادة"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "الرجاء إدخال بريدك الالكتروني الذي قمت بالتسجيل عن طريقه أول مرة وسوف نساعدك لاستعادة كلمة المرور الخاصة بك"
-
-#, python-format
-msgid ""
-"\n"
-"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-"  "
-msgstr ""
-
-msgid "New Password"
-msgstr "كلمة المرور الجديدة"
-
-msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr "كلمة المرور يجب أن تحوي 8 أحرف على الأقل، مع حرف كبير، حرف صغير، ورقم."
-
-msgid "You have used this password before in the past year, please use a new password."
-msgstr "لقد قمت باستخدام كلمة المرور هذه خلال العام المنصرم، يرجى اختيار كلمة مرور جديدة"
-
-msgid "Password"
-msgstr "كلمة المرور"
-
-msgid "Confirm Password"
-msgstr "تأكيد كلمة المرور"
-
-msgid "Please enter your password to save changes."
-msgstr "أدخل كلمة المرور لحفظ التغييرات"
-
-msgid "Confirm the new password by filling the this field"
-msgstr "تأكيد كلمة المرور الجديدة ضمن هذا الحقل"
-
-msgid "New password doesn't match with its confirmation"
-msgstr "كلمة المرور لا تتطابق مع التأكيد الخاص بها"
-
-msgid "Your Email"
-msgstr "بريدك الالكتروني"
-
-msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr "استعادة كلمة المرور عن طريق البريد الالكتروني غير مدعمة، يرجى التواصل مع مسؤول الموقع لضبط كلمة المرور بشكل يدوي"
-
-msgid "Current Password"
-msgstr "كلمة المرور الحالية"
-
-msgid "Your current password"
-msgstr "كلمة مرورك الحالية"
-
-msgid "Your new password."
-msgstr "كلمة مرورك الجديدة"
-
-msgid "Confirm new Password"
-msgstr "تأكيد كلمة المرور الجديدة"
-
-msgid "Confirm your new password."
-msgstr "تأكيد كلمة مرورك الجديدة"
-
-msgid "Please enter your password to save changes"
-msgstr "أدخل كلمة مرورك لحفظ التغييرات"
-
-msgid "Confirm your new password by entering it here"
-msgstr "يرجى إدخال كلمة مرورك الجديدة هنا لتأكيدها"
-
-msgid "Mismatch between your new password and confirmation, try again"
-msgstr "عدم توافق بين كلمة المرور الجديدة وكلمة التأكيد، يرجى المحاولة مرة أخرى"
-
-msgid "New user created successfully."
-msgstr "تم خلق مستخدم جديد بنجاح"
-
-msgid "Groups"
-msgstr "مجموعات"
-
-msgid "Users will only get those permissions that are allowed for their group."
-msgstr "يحصل المستخدمون فقط على الصلاحيات المسموحة لمجموعتهم"
-
-msgid "Set the user's initial password here."
-msgstr "تعيين كلمة المرور المبدئية هنا"
-
-msgid "Last Login"
-msgstr "الدخول الأخير"
-
-msgid "Is Active"
-msgstr "مفعل الآن"
-
-msgid "Whether this user is allowed to log into the site"
-msgstr "إذا كان هذا المستخدم مسموح له بالدخول للموقع"
-
-msgid "Users will only get those permissions that are allowed for their group"
-msgstr "يحصل المستخدمون فقط على الصلاحيات المسموحة لمجموعتهم"
-
-msgid "You can reset the user's password by entering a new password here"
-msgstr "تستطيع إعادة ضبط كلمة مرورك بإدخال كلمة المرور الجديدة هنا"
-
-msgid "Username"
-msgstr "اسم المستخدم"
-
-msgid "Your password"
-msgstr "كلمة مرورك"
-
-msgid "If you want to set a new password, enter it here"
-msgstr "إذا أردت تعيين كلمة مرور جديدة، أدخلها هنا"
-
-msgid "Confirm New Password"
-msgstr "تأكيد كلمة المرور"
-
-msgid "Confirm your new password"
-msgstr "تأكيد كلمة مرورك"
-
-msgid "Edit your profile"
-msgstr "تعديل ملفك الشخصي"
-
-msgid "Password Recovery"
-msgstr "استعادة كلمة المرور"
-
-msgid "An Email has been sent to your account with further instructions."
-msgstr "تم إرسال بريد الكتروني إلى حسابك مع توجيهات إضافية"
-
-msgid "Password Recovery Request"
-msgstr "طلب استعادة كلمة المرور"
-
-msgid "Pick a new password"
-msgstr "اختيار كلمة مرور جديدة"
-
-msgid "Your password has successfully been updated, thank you."
-msgstr "تم تحديث كلمة مرورك بنجاح، شكرا"
-
-#, python-format
-msgid "You are now logged in as %s"
-msgstr "لقد قمت بتسجيل الدخول الآن باسم %s"
-
-msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr "تم تحديث كلمة المرور بنجاح، تستطيع الآن الدخول باستخدام كلمة مرورك الجديدة"
-
-msgid "Reset your Password"
-msgstr "إعادة ضبط كلمة المرور"
-
-msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr "الرابط منتهي الصلاحية لأسباب أمنية، الرجاء طلب رابط جديد عن طريق ادخال بريدك الالكتروني هنا"
-
-msgid "Submit"
-msgstr "إدخال"
-
-msgid "Form"
-msgstr "نموذج"
-
-msgid "Save Changes"
-msgstr "حفظ التغييرات"
-
-#, python-format
-msgid "Your new %s has been created."
-msgstr "تم خلق مستخدم جديد %s"
-
-#, python-format
-msgid "Import %s"
-msgstr "استيراد %s"
 
 msgid "Back to Website"
 msgstr ""
@@ -678,8 +31,14 @@ msgstr ""
 msgid "Logout"
 msgstr "تسجيل الخروج "
 
+msgid "Login"
+msgstr "تسجيل الدخول "
+
 msgid "Opinions"
 msgstr "استطلاع الرأي"
+
+msgid "Stories"
+msgstr "مقالات "
 
 msgid "Users"
 msgstr "المستخدمين"
@@ -693,6 +52,9 @@ msgstr ""
 msgid "Jobs"
 msgstr "الأعمال"
 
+msgid "Categories"
+msgstr "الفئات "
+
 msgid "Photos"
 msgstr ""
 
@@ -704,6 +66,9 @@ msgstr "مواد الأخبار"
 
 msgid "Orgs"
 msgstr "المؤسسات"
+
+msgid "Content Types"
+msgstr "نوع المحتوى "
 
 msgid "Images"
 msgstr "الصور"
@@ -809,6 +174,12 @@ msgstr ""
 "        <div>بعد إنشاء التطبيق المصغر، قم بنسخ هويته من عنوان الموقع كما هو موضح في</div>\n"
 "      "
 
+msgid "Next"
+msgstr "التالي"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
 msgid "Back"
 msgstr "العودة"
 
@@ -819,6 +190,18 @@ msgid ""
 msgstr ""
 "\n"
 "لإضافة مصدر عمل لتويتر يجب عليك الحصول على رمز تقني من تويتر"
+
+msgid "Edit"
+msgstr "تعديل "
+
+msgid "Manage Backends"
+msgstr ""
+
+msgid "Manage Users"
+msgstr "إدارة حسابات المستخدمين "
+
+msgid "Add"
+msgstr "إضافة "
 
 msgid "ABOUT U-REPORT"
 msgstr "نبذة عن يوريبورت U-REPORT"
@@ -1316,6 +699,18 @@ msgstr "الأعمار"
 msgid "LEARN MORE"
 msgstr "إعرف أكثر"
 
+msgid "Sign in"
+msgstr "تسجيل الدخول "
+
+msgid "Forgot Password?"
+msgstr "هل نسيت كلمة السر؟ "
+
+msgid "Gallery"
+msgstr "معرض الصور "
+
+msgid "Add Image"
+msgstr "إضافة صورة "
+
 msgid "+ New "
 msgstr ""
 
@@ -1327,6 +722,24 @@ msgstr ""
 
 msgid "Backends"
 msgstr ""
+
+msgid "You must have at least one administator"
+msgstr "يجب أن يكون لديك مشرف واحد على الأقل"
+
+msgid "Accounts"
+msgstr "حسابات "
+
+msgid "Admins"
+msgstr "المشرف "
+
+msgid "Editors"
+msgstr "المحررين "
+
+msgid "Remove"
+msgstr "حذف "
+
+msgid "User group"
+msgstr "مجموعة المستخدم "
 
 msgid "+ New Poll"
 msgstr ""
@@ -1392,12 +805,21 @@ msgstr ""
 msgid "FILTER RESULTS"
 msgstr "تصفية النتائج"
 
+msgid "Remove Item?"
+msgstr "حذف "
+
 #, python-format
 msgid ""
 "\n"
 "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
 "          "
 msgstr ""
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "بحال الحذف، سوف تختفي للأبد، لا يمكن إعادة هذه العملية للخلف"
+
+msgid "Search"
+msgstr "بحث "
 
 #, python-format
 msgid ""
@@ -1422,11 +844,20 @@ msgid ""
 "           "
 msgstr ""
 
+msgid "Previous"
+msgstr "السابق"
+
+msgid "edit"
+msgstr "تعديل"
+
 msgid "Error"
 msgstr ""
 
 msgid "Enter Dashboard"
 msgstr ""
+
+msgid "Login Failure"
+msgstr "تسجيل دخول خاطئ"
 
 #, python-format
 msgid ""
@@ -1442,6 +873,21 @@ msgid ""
 "                  "
 msgstr ""
 
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "بشكل بديل، يمكنك تعبئة النموذج في الأسفل لتحصل على إعادة ضبط كلمة مرورك عن طريق البريد الالكتروني"
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "يرجى التواصل مع مدير الموقع لإعادة تعيين كلمة السر"
+
+msgid "Email Address"
+msgstr "البريد الالكتروني"
+
+msgid "Recover"
+msgstr "استعادة"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "الرجاء إدخال بريدك الالكتروني الذي قمت بالتسجيل عن طريقه أول مرة وسوف نساعدك لاستعادة كلمة المرور الخاصة بك"
+
 #, python-format
 msgid ""
 "\n"
@@ -1456,17 +902,32 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "تحديث ذاكرة التخزين المؤقت %s لهذه المؤسسة"
 
+msgid "Banner"
+msgstr "مساحة إعلانية "
+
+msgid "Pattern"
+msgstr "النمط الخاص "
+
 msgid "Flag"
 msgstr "علم"
 
+msgid "Org"
+msgstr "Org"
+
 msgid "The organization to which the image will be used"
 msgstr "المنظمة التي سوف يتم إعتماد الصورة منها "
+
+msgid "Name"
+msgstr "الاسم "
 
 msgid "A short descriptive name for this image"
 msgstr "وصف مختصر عن الصورة"
 
 msgid "Image type"
 msgstr "نوع الصورة "
+
+msgid "The image file"
+msgstr "ملف الصورة "
 
 msgid "Label"
 msgstr "ملصق"
@@ -1579,11 +1040,17 @@ msgstr "عنوان الفيديو "
 msgid "A short summary description for this video"
 msgstr "وصف مختصر عن الفيديو "
 
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع هذا البند "
+
 msgid "The organization this video belongs to"
 msgstr "المنظمة أو الجمعية التي يتبع لها هذا الفيديو "
 
 msgid "The name of this poll category"
 msgstr "إسم الفئة الخاصة بهذه االإستطلاع"
+
+msgid "The organization this category applies to"
+msgstr "المنظمة أو الجمعية التابعة لهذه الفئة "
 
 msgid "Poll Categories"
 msgstr "الفئات التي ينتمي لها الإستطلاعات والمسوحات المتوافرة "
@@ -1632,8 +1099,17 @@ msgstr ""
 msgid "The writer of the response story"
 msgstr ""
 
+msgid "The body of text for the story"
+msgstr "نص المقال"
+
+msgid "The name to describe this image"
+msgstr "وصف الصورة "
+
 msgid "The poll to associate to"
 msgstr "يرتبط هذا الإستطلاع في "
+
+msgid "The image file to use"
+msgstr "ملف الصورة التي تريد إستخدامها "
 
 msgid "The poll for this response"
 msgstr "الإستطلاع الخاص في هذا الرد"
@@ -1697,6 +1173,10 @@ msgstr "الصور الخاصة بالإستطلاع"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "الرجاء إدخال أي ردود تود أن تميزها. (إن وجدت)"
+
+#, python-format
+msgid "Image %d"
+msgstr "صورة %d"
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "الصور التي تود نشرها على صفحة الإستطلاع (إختياري) "
@@ -1951,3 +1431,460 @@ msgstr "مستخدمين فعالين"
 
 msgid "Something to trigger localizations"
 msgstr "أداة تفعيل التعريب"
+
+#~ msgid "The name of this category"
+#~ msgstr "اسم الفئة "
+
+#~ msgid "An optional image that can describe this category"
+#~ msgstr "صورة لوصف هذه الفئة \"إختياري\" "
+
+#~ msgid "The category this image represents"
+#~ msgstr "الفئة التي ترمز لها الصورة  "
+
+#~ msgid "The human readable name for this content type"
+#~ msgstr "الاسم المقروء للإنسان لهذا النوع من المحتوى"
+
+#~ msgid "The slug to idenfity this content type, used with the template tags"
+#~ msgstr "Slug لتعريف هذا نوع من المحتوى، ويستخدم مع علامات القالب"
+
+#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#~ msgstr "وصف عن مكان استخدام نوع المحتوى هذا في الموقع وكيف سيتم عرضه"
+
+#~ msgid "Whether this content should include a title"
+#~ msgstr "بحال كان المحتوى يجب أن يحوى عنوان"
+
+#~ msgid "Whether this content should include an image"
+#~ msgstr "بحال كان المحتوى يجب أن يحوي صورة"
+
+#~ msgid "Whether this content should use a rich HTML editor"
+#~ msgstr "بحال كان المحتوى يجب أن يستعمل محرر لغة الترميز HTML"
+
+#~ msgid "Whether this content should include a summary field"
+#~ msgstr "بحال كان المحتوى يجب أن يحوي حقل ملخص"
+
+#~ msgid "Whether this content should include a link"
+#~ msgstr "بحال كان المحتوى يجب أن يحوي رابط"
+
+#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
+#~ msgstr "بحال كان المحتوى يسمح برفع صور إضافية، مثال: معرض صور"
+
+#~ msgid "Whether this content has a color field"
+#~ msgstr "بحال كان المحتوى يحوي حقل لون"
+
+#~ msgid "Whether this content should allow setting a YouTube id"
+#~ msgstr "بحال كان المحتوى يجب أن يسمح بوضع مستخدم يو-تيوب"
+
+#~ msgid "Whether this content should allow tags"
+#~ msgstr "بحال كان المحتوى يجب أن يسمح بتنبيه الأشخاص"
+
+#~ msgid "Content Type"
+#~ msgstr "نوع المحتوى"
+
+#~ msgid "The category, or type for this content block"
+#~ msgstr "التصنيف أو الفئة لكتلة المحتوى"
+
+#~ msgid "The title for this block of content, optional"
+#~ msgstr "عنوان كتلة المحتوى، اختياري"
+
+#~ msgid "The summary for this item, should be short"
+#~ msgstr "ملخص هذا البند يجيب أن يكون قصير"
+
+#~ msgid "The body of text for this content block, optional"
+#~ msgstr "محتوى النص الخاص بكتلة المحتوى، اختياري"
+
+#~ msgid "Any image that should be displayed with this content block, optional"
+#~ msgstr "أي صورة يجب عرضها مع كتلة المحتوى، اختياري"
+
+#~ msgid "A background color to use for the image, in the format: #rrggbb"
+#~ msgstr "لون خلفية للصورة، بصيغة: #rrggbb "
+
+#~ msgid "Any link that should be associated with this content block, optional"
+#~ msgstr "أي رابط يجب مرافقته مع كتلة المحتوى، اختياري"
+
+#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr "هل هناك أي وسوم تريد إضافتها، مفصولة بفراغات، ويمكن استعمالها من أجل تنقية بيانات متقدمة. اختياري"
+
+#~ msgid "The priority for this block, higher priority blocks come first"
+#~ msgstr "الأفضلية لهذه الكتلة، الكتل ذات الأفضلية الكبرى تأتي أولا"
+
+#~ msgid "The organization this content block belongs to"
+#~ msgstr "المنظمة التي تعود لها كتلة المحتوى"
+
+#~ msgid "Content Blocks"
+#~ msgstr "مجموعات المحتوى الخاصة بالصفحة الإلكترونية "
+
+#, python-format
+#~ msgid "%s Blocks"
+#~ msgstr "مجموعات الصفحة الإلكترونية %s"
+
+#, python-format
+#~ msgid "Edit %s"
+#~ msgstr "تعديل %s"
+
+#, python-format
+#~ msgid "Create %s"
+#~ msgstr "إنشاء %s"
+
+#~ msgid "Create Content Block"
+#~ msgstr "إنشاء كتلة المحتوى"
+
+#~ msgid "Your first name"
+#~ msgstr "الاسم الأول "
+
+#~ msgid "Your last name"
+#~ msgstr "اسم العائلة "
+
+#~ msgid "Your email address"
+#~ msgstr "عنوان البريد الإلكتروني الخاص بك "
+
+#~ msgid "Your password, at least eight letters please"
+#~ msgstr "كلمة المرور  (8 أحرف على الأقل) "
+
+#~ msgid "That email address is already used"
+#~ msgstr "البريد الإلكتروني المدخل تم إستخدامه سابقاً "
+
+#~ msgid "Passwords must contain at least 8 letters."
+#~ msgstr "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل "
+
+#~ msgid "This domain is used for subdomains"
+#~ msgstr "هذا النطاق مستخدم لنطاقات فرعية"
+
+#~ msgid "The name of this organization"
+#~ msgstr "اسم الجمعية أو المنظمة "
+
+#~ msgid "The logo that should be used for this organization"
+#~ msgstr "الشعار المستخدم في هذه الجمعية أو المنظمة "
+
+#~ msgid "Administrators"
+#~ msgstr "مشرفي الموقع "
+
+#~ msgid "The administrators in your organization"
+#~ msgstr "المشرفين في الجمعية أو المنظمة التي تتبع لها "
+
+#~ msgid "Viewers"
+#~ msgstr "المشاهدين "
+
+#~ msgid "The viewers in your organization"
+#~ msgstr "المشاهدين من زملائك في الجمعية أو المنظمة التي تنتمي لها "
+
+#~ msgid "The editors in your organization"
+#~ msgstr "المحررين في الجمعية أو المنظمة التابع لها أنت "
+
+#~ msgid "Language"
+#~ msgstr "اللغة "
+
+#~ msgid "The main language used by this organization"
+#~ msgstr "اللغة الرئيسية المستخدمة داخل هذه المنظمة "
+
+#~ msgid "Subdomain"
+#~ msgstr "إسم الموقع "
+
+#~ msgid "This subdomain is not available"
+#~ msgstr "هذا الاسم غير متوفر "
+
+#~ msgid "The subdomain for this organization"
+#~ msgstr "النطاق الفرعي لهذه المؤسسة"
+
+#~ msgid "Domain"
+#~ msgstr "نطاق"
+
+#~ msgid "This domain is not available"
+#~ msgstr "هذا النطاق ليس متاحاً"
+
+#~ msgid "The custom domain for this organization"
+#~ msgstr "النطاق الخاص بهذه المؤسسة"
+
+#~ msgid "Timezone"
+#~ msgstr "النطاق الزمني"
+
+#~ msgid "The timezone your organization is in."
+#~ msgstr "النطاق الزمني الذي تقع ضمنه مؤسستك"
+
+#~ msgid "JSON blob used to store configuration information associated with this organization"
+#~ msgstr "تم إستخدام لغة ترميز جافا \"جسون\" لتخزين النصوص و\"Blob\" لتخزين الصور، التسجيلات الصوتية والوسائط المتعددة، الخاصة بهذه المؤسسة "
+
+#~ msgid "Administrator"
+#~ msgstr "المشرف "
+
+#~ msgid "Editor"
+#~ msgstr "المحرر "
+
+#~ msgid "Viewer"
+#~ msgstr "المشاهد"
+
+#~ msgid "The organization to which the account is invited to view"
+#~ msgstr "المنظمة التي أرسلت الدعوة الى هذا الحساب "
+
+#~ msgid "Email"
+#~ msgstr "البريد الإلكتروني "
+
+#~ msgid "The email to which we send the invitation of the viewer"
+#~ msgstr "البريد الإلكتروني الذي تمت إرسال الدعوة له "
+
+#~ msgid "Secret"
+#~ msgstr "كلمة السر "
+
+#~ msgid "a unique code associated with this invitation"
+#~ msgstr "الرمز السري الخاص بالدعوة"
+
+#~ msgid "User Role"
+#~ msgstr "دور المستخدم "
+
+#, python-format
+#~ msgid "%s Invitation"
+#~ msgstr "دعوة %s"
+
+#~ msgid "The organization in which the image will be used"
+#~ msgstr "المنظمة التي سوف يتم إعتماد الصورة منها "
+
+#~ msgid "The name to describe this background"
+#~ msgstr "إسم الخلفية ووصفها "
+
+#~ msgid "Background type"
+#~ msgstr "نوع الخلفية "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "      You've been invited to join %(org_name)s.\n"
+#~ "      <br/>\n"
+#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+#~ "  "
+#~ msgstr ""
+#~ "\n"
+#~ "لقد تمت دعوتك للمشاركة في%(org_name)s. \n"
+#~ "\n"
+#~ "لقبول الدعوة، <a href='%(host)s%(join_url)s'> اضغط هنا "
+
+#~ msgid "Select your Organization"
+#~ msgstr "قم بإختيار المنظمة التي تتبع لها "
+
+#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#~ msgstr "حسابك غير مرتبط بالمنظمة التي قمت بإختيارها، الرجاء التواصل مع المشرف في منظمتك "
+
+#~ msgid "Your Organization"
+#~ msgstr "مؤسستك"
+
+#~ msgid "Invite people to your organization"
+#~ msgstr "أرسل دعوة الى أحد أصدقائك للإنضمام الى منظمتك "
+
+#~ msgid "One of the emails you entered is invalid."
+#~ msgstr "أحد عناوين البريد الإلكتروني المدخلة خاطئة "
+
+#, python-format
+#~ msgid "Manage %(name)s Accounts"
+#~ msgstr "لتحكم في حسابات %(name)s"
+
+#~ msgid "Create"
+#~ msgstr "إنشاء "
+
+#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
+#~ msgstr "رابط الدعوة الخاص بك لا يعمل، الرجاء التواصل مع المشرف في منظمتك"
+
+#, python-format
+#~ msgid "Join %(name)s"
+#~ msgstr "إنضم الى %(name)s"
+
+#~ msgid "Your invitation link has expired. Please contact your organization administrator."
+#~ msgstr "لقد إنتهت الفترة المخصصة لرابط الدعوة الخاصة بك، الرجاء التوصل مع المشرف في منظمتك. "
+
+#~ msgid "Task"
+#~ msgstr "مهمة"
+
+#~ msgid "Tasks"
+#~ msgstr "مهام"
+
+#~ msgid "The title for this story"
+#~ msgstr "عنوان المقال"
+
+#~ msgid "Whether this story is featured"
+#~ msgstr "هل هذه المقالة إستثنائية أو مميزة "
+
+#~ msgid "The summary for the story"
+#~ msgstr "ملخص المقال "
+
+#~ msgid "The writer of the story"
+#~ msgstr "كاتب المقالة"
+
+#~ msgid "A link to an mp3 file to publish on this story"
+#~ msgstr "رابط ملف صوتي ليتم نشره عن القصة MP3"
+
+#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+#~ msgstr "الرمز التعريفي الخاص بفيديو الذي تريد ربطه مع مقالك ( الرمز التعرفي هو النص الموجود في الرابط بعد \"v=\" وقبل \"in\")   "
+
+#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr ""
+#~ "هل هناك أي وسوم تريد إضافتها؟ \n"
+#~ "\n"
+#~ "*سيساعدك إضافة الوسوم في عملية ترتيب مقالاتك حسب الفئة، لإضافة أكثر من الوسم الرجاء الفصل بين الوسم والأخر بمسافة. "
+
+#~ msgid "The category for this story"
+#~ msgstr "فئة المقال"
+
+#~ msgid "The organization this story belongs to"
+#~ msgstr "المنظمة التي تنتمي لها هذه المقالة"
+
+#~ msgid "The story to associate to"
+#~ msgstr "هذه المقالة مرتبطة في "
+
+#~ msgid "Yes"
+#~ msgstr "نعم "
+
+#~ msgid "No"
+#~ msgstr "لا"
+
+#~ msgid "Story Images"
+#~ msgstr "صور المقال"
+
+#~ msgid "Image to display on story page and in previews. (optional)"
+#~ msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
+
+#~ msgid "Image to display on story page and in previews (optional)"
+#~ msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
+
+#~ msgid "Token Expired"
+#~ msgstr "رمز منتهي الصلاحية"
+
+#~ msgid "New Password"
+#~ msgstr "كلمة المرور الجديدة"
+
+#~ msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+#~ msgstr "كلمة المرور يجب أن تحوي 8 أحرف على الأقل، مع حرف كبير، حرف صغير، ورقم."
+
+#~ msgid "You have used this password before in the past year, please use a new password."
+#~ msgstr "لقد قمت باستخدام كلمة المرور هذه خلال العام المنصرم، يرجى اختيار كلمة مرور جديدة"
+
+#~ msgid "Password"
+#~ msgstr "كلمة المرور"
+
+#~ msgid "Confirm Password"
+#~ msgstr "تأكيد كلمة المرور"
+
+#~ msgid "Please enter your password to save changes."
+#~ msgstr "أدخل كلمة المرور لحفظ التغييرات"
+
+#~ msgid "Confirm the new password by filling the this field"
+#~ msgstr "تأكيد كلمة المرور الجديدة ضمن هذا الحقل"
+
+#~ msgid "New password doesn't match with its confirmation"
+#~ msgstr "كلمة المرور لا تتطابق مع التأكيد الخاص بها"
+
+#~ msgid "Your Email"
+#~ msgstr "بريدك الالكتروني"
+
+#~ msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+#~ msgstr "استعادة كلمة المرور عن طريق البريد الالكتروني غير مدعمة، يرجى التواصل مع مسؤول الموقع لضبط كلمة المرور بشكل يدوي"
+
+#~ msgid "Current Password"
+#~ msgstr "كلمة المرور الحالية"
+
+#~ msgid "Your current password"
+#~ msgstr "كلمة مرورك الحالية"
+
+#~ msgid "Your new password."
+#~ msgstr "كلمة مرورك الجديدة"
+
+#~ msgid "Confirm new Password"
+#~ msgstr "تأكيد كلمة المرور الجديدة"
+
+#~ msgid "Confirm your new password."
+#~ msgstr "تأكيد كلمة مرورك الجديدة"
+
+#~ msgid "Please enter your password to save changes"
+#~ msgstr "أدخل كلمة مرورك لحفظ التغييرات"
+
+#~ msgid "Confirm your new password by entering it here"
+#~ msgstr "يرجى إدخال كلمة مرورك الجديدة هنا لتأكيدها"
+
+#~ msgid "Mismatch between your new password and confirmation, try again"
+#~ msgstr "عدم توافق بين كلمة المرور الجديدة وكلمة التأكيد، يرجى المحاولة مرة أخرى"
+
+#~ msgid "New user created successfully."
+#~ msgstr "تم خلق مستخدم جديد بنجاح"
+
+#~ msgid "Groups"
+#~ msgstr "مجموعات"
+
+#~ msgid "Users will only get those permissions that are allowed for their group."
+#~ msgstr "يحصل المستخدمون فقط على الصلاحيات المسموحة لمجموعتهم"
+
+#~ msgid "Set the user's initial password here."
+#~ msgstr "تعيين كلمة المرور المبدئية هنا"
+
+#~ msgid "Last Login"
+#~ msgstr "الدخول الأخير"
+
+#~ msgid "Is Active"
+#~ msgstr "مفعل الآن"
+
+#~ msgid "Whether this user is allowed to log into the site"
+#~ msgstr "إذا كان هذا المستخدم مسموح له بالدخول للموقع"
+
+#~ msgid "Users will only get those permissions that are allowed for their group"
+#~ msgstr "يحصل المستخدمون فقط على الصلاحيات المسموحة لمجموعتهم"
+
+#~ msgid "You can reset the user's password by entering a new password here"
+#~ msgstr "تستطيع إعادة ضبط كلمة مرورك بإدخال كلمة المرور الجديدة هنا"
+
+#~ msgid "Username"
+#~ msgstr "اسم المستخدم"
+
+#~ msgid "Your password"
+#~ msgstr "كلمة مرورك"
+
+#~ msgid "If you want to set a new password, enter it here"
+#~ msgstr "إذا أردت تعيين كلمة مرور جديدة، أدخلها هنا"
+
+#~ msgid "Confirm New Password"
+#~ msgstr "تأكيد كلمة المرور"
+
+#~ msgid "Confirm your new password"
+#~ msgstr "تأكيد كلمة مرورك"
+
+#~ msgid "Edit your profile"
+#~ msgstr "تعديل ملفك الشخصي"
+
+#~ msgid "Password Recovery"
+#~ msgstr "استعادة كلمة المرور"
+
+#~ msgid "An Email has been sent to your account with further instructions."
+#~ msgstr "تم إرسال بريد الكتروني إلى حسابك مع توجيهات إضافية"
+
+#~ msgid "Password Recovery Request"
+#~ msgstr "طلب استعادة كلمة المرور"
+
+#~ msgid "Pick a new password"
+#~ msgstr "اختيار كلمة مرور جديدة"
+
+#~ msgid "Your password has successfully been updated, thank you."
+#~ msgstr "تم تحديث كلمة مرورك بنجاح، شكرا"
+
+#, python-format
+#~ msgid "You are now logged in as %s"
+#~ msgstr "لقد قمت بتسجيل الدخول الآن باسم %s"
+
+#~ msgid "Password Updated Successfully. Now you can log in using your new password."
+#~ msgstr "تم تحديث كلمة المرور بنجاح، تستطيع الآن الدخول باستخدام كلمة مرورك الجديدة"
+
+#~ msgid "Reset your Password"
+#~ msgstr "إعادة ضبط كلمة المرور"
+
+#~ msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+#~ msgstr "الرابط منتهي الصلاحية لأسباب أمنية، الرجاء طلب رابط جديد عن طريق ادخال بريدك الالكتروني هنا"
+
+#~ msgid "Submit"
+#~ msgstr "إدخال"
+
+#~ msgid "Form"
+#~ msgstr "نموذج"
+
+#~ msgid "Save Changes"
+#~ msgstr "حفظ التغييرات"
+
+#, python-format
+#~ msgid "Your new %s has been created."
+#~ msgstr "تم خلق مستخدم جديد %s"
+
+#, python-format
+#~ msgid "Import %s"
+#~ msgstr "استيراد %s"
