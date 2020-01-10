@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 14:19+0000\n"
+"POT-Creation-Date: 2020-01-10 14:36+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -18,6 +18,413 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "The name of this category"
+msgstr "Tên của danh mục này"
+
+msgid "An optional image that can describe this category"
+msgstr "Một hình ảnh tùy chọn có thể mô tả danh mục này"
+
+msgid "The organization this category applies to"
+msgstr "Tổ chức mà danh mục này áp dụng"
+
+msgid "Categories"
+msgstr "Danh mục"
+
+msgid "The name to describe this image"
+msgstr "Tên để mô tả hình ảnh này"
+
+msgid "The category this image represents"
+msgstr "Danh mục hình ảnh này đại diện"
+
+msgid "The image file to use"
+msgstr "Tệp hình ảnh để sử dụng"
+
+msgid "The human readable name for this content type"
+msgstr "Tên dễ gọi cho nội dung này"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "Slug để nhận dạng loại nội dung này, được sử dụng với các thẻ khuôn mẫu"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "Mô tả vị trí nội dung này và cách thức nó được bố trí trên trang web"
+
+msgid "Whether this content should include a title"
+msgstr "Liệu có cần thiết đặt tiêu đề cho nội dung này không"
+
+msgid "Whether this content should include an image"
+msgstr "Liệu có cần thiết đặt gắn hình ảnh cho nội dung này không"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Liệu có cần thiết phải sử dụng tệp HTML cho nội dung này không"
+
+msgid "Whether this content should include a summary field"
+msgstr "Nội dung này có nên bao gồm một trường tóm tắt hay không"
+
+msgid "Whether this content should include a link"
+msgstr "Nội dung này có nên bao gồm liên kết hay không"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Nội dung này có cho phép tải lên các hình ảnh bổ sung, tức là một thư viện hay không"
+
+msgid "Whether this content has a color field"
+msgstr "Nội dung này có một trường màu sắc hay không"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Nội dung này có nên cho phép thiết lập id YouTube hay không"
+
+msgid "Whether this content should allow tags"
+msgstr "Nội dung này có nên cho phép các thẻ hay không"
+
+msgid "Content Type"
+msgstr "Loại nội dung"
+
+msgid "The category, or type for this content block"
+msgstr "Danh mục hoặc loại cho khối nội dung này"
+
+msgid "The title for this block of content, optional"
+msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
+
+msgid "The summary for this item, should be short"
+msgstr "Bản tóm tắt cho mục này, nên ngắn gọn"
+
+msgid "The body of text for this content block, optional"
+msgstr "Phần văn bản cho khối nội dung này, tùy chọn"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Bất kỳ hình ảnh nào cần được hiển thị cùng khối nội dung này, tùy chọn"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Màu nền sử dụng cho hình ảnh, theo định dạng: #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Bất kỳ liên kết nào cần được liên kết với khối nội dung này, tùy chọn"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Id của video YouTube cần được liên kết với mục này"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Bất kỳ thẻ nào cho khối nội dung này, cách nhau bởi dấu cách, có thể được sử dụng để thực hiện lọc nâng cao hơn, tùy chọn"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "Mức độ ưu tiên của khối này, các khối ưu tiên hơn sẽ xuất hiện trước tiên"
+
+msgid "The organization this content block belongs to"
+msgstr "Khối nội dung này thuộc về tổ chức"
+
+msgid "Gallery"
+msgstr "Thư viện ảnh"
+
+msgid "Add Image"
+msgstr "Thêm hình ảnh"
+
+msgid "Search"
+msgstr "Tìm kiếm"
+
+msgid "Add"
+msgstr "Thêm "
+
+msgid "Content Types"
+msgstr "Các loại nội dung"
+
+msgid "Content Blocks"
+msgstr "Khối nội dung"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%skhối"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Chỉnh sửa %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Tạo %s"
+
+msgid "Create Content Block"
+msgstr "Tạo khối nội dung"
+
+msgid "Your first name"
+msgstr "Tên của bạn"
+
+msgid "Your last name"
+msgstr "Họ của bạn"
+
+msgid "Your email address"
+msgstr "Địa chỉ email của bạn"
+
+msgid "Your password, at least eight letters please"
+msgstr "Mật khẩu của bạn, vui lòng sử dụng ít nhất 8 ký tự"
+
+msgid "That email address is already used"
+msgstr "Địa chỉ email này đã được sử dụng"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Mật khẩu phải chứa ít nhất 8 ký tự."
+
+msgid "This domain is used for subdomains"
+msgstr "Tên miền này được sử dụng cho tên miền phụ"
+
+msgid "Name"
+msgstr "Tên"
+
+msgid "The name of this organization"
+msgstr "Tên của tổ chức này"
+
+msgid "The logo that should be used for this organization"
+msgstr "Logo nên được sử dụng cho tổ chức này"
+
+msgid "Administrators"
+msgstr "Quản trị viên"
+
+msgid "The administrators in your organization"
+msgstr "Quản trị viên trong tổ chức của bạn"
+
+msgid "Viewers"
+msgstr "Người xem"
+
+msgid "The viewers in your organization"
+msgstr "Người xem trong tổ chức của bạn"
+
+msgid "Editors"
+msgstr "Biên tập viên"
+
+msgid "The editors in your organization"
+msgstr "Các biên tập viên trong tổ chức của bạn"
+
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+msgid "The main language used by this organization"
+msgstr "Ngôn ngữ chính được tổ chức này sử dụng"
+
+msgid "Subdomain"
+msgstr "Tên miền phụ"
+
+msgid "This subdomain is not available"
+msgstr "Tên miền phụ này không có sẵn"
+
+msgid "The subdomain for this organization"
+msgstr "Tên miền phụ của tổ chức này"
+
+msgid "Domain"
+msgstr "Tên miền"
+
+msgid "This domain is not available"
+msgstr "Tên miền này không có sẵn"
+
+msgid "The custom domain for this organization"
+msgstr "Miền tùy chỉnh cho tổ chức này"
+
+msgid "Timezone"
+msgstr "Múi giờ"
+
+msgid "The timezone your organization is in."
+msgstr "Múi giờ mà tổ chức bạn nằm trong."
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "JSON blob sử dụng để lưu trữ thông tin cấu hình liên quan đến tổ chức này"
+
+msgid "Administrator"
+msgstr "Quản trị viên"
+
+msgid "Editor"
+msgstr "Biên tập viên"
+
+msgid "Viewer"
+msgstr "Người xem"
+
+msgid "Org"
+msgstr "Tổ chức"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Tổ chức mà tài khoản được mời xem"
+
+msgid "Email"
+msgstr "Email "
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "Email mà chúng tôi gửi lời mời của người xem"
+
+msgid "Secret"
+msgstr "Bí mật"
+
+msgid "a unique code associated with this invitation"
+msgstr "một mã duy nhất liên kết với lời mời này"
+
+msgid "User Role"
+msgstr "Vai trò người dùng"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%s Lời mời"
+
+msgid "Banner"
+msgstr "Băng rôn"
+
+msgid "Pattern"
+msgstr "Họa tiết"
+
+msgid "The organization in which the image will be used"
+msgstr "Hình ảnh sẽ được sử dụng cho tổ chức"
+
+msgid "The name to describe this background"
+msgstr "Tên để miêu tả nền này"
+
+msgid "Background type"
+msgstr "Loại nền"
+
+msgid "The image file"
+msgstr "Tệp hình ảnh"
+
+#, fuzzy
+#| msgid "The title for this item"
+msgid "The API token for this backend"
+msgstr "Tiêu đề cho mục này"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"Bạn được mời tham gia %(org_name)s.\n"
+"<br/>\n"
+"Để chấp nhận lời mời, <a href='%(host)s%(join_url)s'>bấm vào đây</a>."
+
+msgid "You are invited to join {{org.name}}."
+msgstr ""
+
+msgid "Click this link to join"
+msgstr ""
+
+msgid "Edit"
+msgstr "Chỉnh sửa"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "Quản lý người dùng"
+
+msgid "Manage Users"
+msgstr "Quản lý người dùng"
+
+msgid "Accounts"
+msgstr "Các tài khoản"
+
+msgid "Admins"
+msgstr "Quản trị viên"
+
+msgid "Remove"
+msgstr "Xóa"
+
+msgid "You must have at least one administator"
+msgstr "Bạn phải có ít nhất một quản trị viên"
+
+msgid "Select your Organization"
+msgstr "Lựa chọn tổ chức của bạn"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "Tài khoản của bạn không được liên kết với một tổ chức. Vui lòng liên hệ với quản trị viên."
+
+msgid "Your Organization"
+msgstr "Tổ chức của bạn"
+
+msgid "Invite people to your organization"
+msgstr "Mời mọi người vào tổ chức của bạn"
+
+msgid "User group"
+msgstr "Nhóm người dùng"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Một trong các email mà bạn nhập không hợp lệ"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Quản lý %(name)sTài khoản"
+
+msgid "Create"
+msgstr "Tạo"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "Liên kết lời mời của bạn không hợp lệ. Vui lòng liên hệ với quản trị viên tổ chức của bạn."
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Tham gia %(name)s"
+
+#, fuzzy
+#| msgid "Join"
+msgid "Join"
+msgstr "Tham gia"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "Liên kết lời mời của bạn đã hết hạn. Vui lòng liên hệ với quản trị viên tổ chức của bạn."
+
+msgid "Task"
+msgstr "Nhiệm vụ"
+
+msgid "Tasks"
+msgstr "Các nhiệm vụ"
+
+msgid "The title for this story"
+msgstr "Tiêu đề cho câu chuyện này"
+
+msgid "Whether this story is featured"
+msgstr "Câu chuyện này có nổi bật hay không"
+
+msgid "The summary for the story"
+msgstr "Tóm tắt câu chuyện"
+
+msgid "The body of text for the story"
+msgstr "Phần nội dung của câu chuyện"
+
+msgid "The writer of the story"
+msgstr "Người viết câu chuyện"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Liên kết đến tệp mp3 để đăng trên câu chuyện này"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "Id của video YouTube được dẫn đến câu hcuyeejn này (đây là đoạn văn bản theo sau v= và trước & in URL YouTube)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Bất kỳ thẻ nào cho câu chuyện này, được phân cách bằng dấu cách, có thể được sử dụng để thực hiện lọc nâng cao hơn, tùy chọn"
+
+msgid "The category for this story"
+msgstr "Danh mục của câu chuyện này"
+
+msgid "The organization this story belongs to"
+msgstr "Câu chuyện này thuộc về tổ chức"
+
+msgid "Stories"
+msgstr "Câu chuyện"
+
+msgid "The story to associate to"
+msgstr "Câu chuyện để kết hợp với"
+
+msgid "Yes"
+msgstr "Có"
+
+msgid "No"
+msgstr "Không"
+
+msgid "Story Images"
+msgstr "Hình ảnh cho câu chuyện"
+
+#, python-format
+msgid "Image %d"
+msgstr "Hình ảnh %d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước. (tùy chọn)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước (tùy chọn)"
 
 msgid "Back to Website"
 msgstr ""
@@ -34,9 +441,6 @@ msgstr "Đăng nhập"
 msgid "Opinions"
 msgstr ""
 
-msgid "Stories"
-msgstr "Câu chuyện"
-
 msgid "Users"
 msgstr "Người dùng"
 
@@ -51,9 +455,6 @@ msgstr "Hình ảnh"
 msgid "Jobs"
 msgstr "Công việc"
 
-msgid "Categories"
-msgstr "Danh mục"
-
 msgid "Photos"
 msgstr ""
 
@@ -67,9 +468,6 @@ msgstr "Các mục mới"
 
 msgid "Orgs"
 msgstr "Tổ chức"
-
-msgid "Content Types"
-msgstr "Các loại nội dung"
 
 msgid "Images"
 msgstr "Hình ảnh"
@@ -192,20 +590,6 @@ msgid ""
 msgstr ""
 "\n"
 "Hãy ghi nhớ nguồn công việc Twitter mà bạn cần có một id tiện ích từ Twitter."
-
-msgid "Edit"
-msgstr "Chỉnh sửa"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "Quản lý người dùng"
-
-msgid "Manage Users"
-msgstr "Quản lý người dùng"
-
-msgid "Add"
-msgstr "Thêm "
 
 msgid "ABOUT U-REPORT"
 msgstr "THÔNG TIN VỀ U-REPORT"
@@ -726,12 +1110,6 @@ msgstr "Đăng ký"
 msgid "Forgot Password?"
 msgstr "Quên mật khẩu?"
 
-msgid "Gallery"
-msgstr "Thư viện ảnh"
-
-msgid "Add Image"
-msgstr "Thêm hình ảnh"
-
 msgid "+ New "
 msgstr ""
 
@@ -747,24 +1125,6 @@ msgstr "ĐỊA ĐIỂM"
 #| msgid "Manage Users"
 msgid "Backends"
 msgstr "Quản lý người dùng"
-
-msgid "You must have at least one administator"
-msgstr "Bạn phải có ít nhất một quản trị viên"
-
-msgid "Accounts"
-msgstr "Các tài khoản"
-
-msgid "Admins"
-msgstr "Quản trị viên"
-
-msgid "Editors"
-msgstr "Biên tập viên"
-
-msgid "Remove"
-msgstr "Xóa"
-
-msgid "User group"
-msgstr "Nhóm người dùng"
 
 msgid "+ New Poll"
 msgstr ""
@@ -870,9 +1230,6 @@ msgstr ""
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Một khi nó được gỡ bỏ, nó sẽ biến mất mãi mãi. Không có cách nào để hoàn tác thao tác này."
-
-msgid "Search"
-msgstr "Tìm kiếm"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -984,32 +1341,17 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "Đã làm mới %s bộ nhớ cache cho tổ chức này"
 
-msgid "Banner"
-msgstr "Băng rôn"
-
-msgid "Pattern"
-msgstr "Họa tiết"
-
 msgid "Flag"
 msgstr "Cờ"
 
-msgid "Org"
-msgstr "Tổ chức"
-
 msgid "The organization to which the image will be used"
 msgstr "Hình ảnh sẽ được sử dụng cho tổ chức"
-
-msgid "Name"
-msgstr "Tên"
 
 msgid "A short descriptive name for this image"
 msgstr "Tên mô tả ngắn cho hình ảnh này"
 
 msgid "Image type"
 msgstr "Loại hình ảnh"
-
-msgid "The image file"
-msgstr "Tệp hình ảnh"
 
 msgid "Label"
 msgstr "Nhãn"
@@ -1122,17 +1464,11 @@ msgstr "Tiêu đề cho video này"
 msgid "A short summary description for this video"
 msgstr "Mô tả ngắn cho video này"
 
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "Id của video YouTube cần được liên kết với mục này"
-
 msgid "The organization this video belongs to"
 msgstr "Video này thuộc về tổ chức"
 
 msgid "The name of this poll category"
 msgstr "Tên của danh mục khảo sát này"
-
-msgid "The organization this category applies to"
-msgstr "Tổ chức mà danh mục này áp dụng"
 
 msgid "Poll Categories"
 msgstr "Danh mục khảo sát"
@@ -1185,17 +1521,8 @@ msgstr "Tiêu đề cho câu chuyện này"
 msgid "The writer of the response story"
 msgstr "Người viết câu chuyện"
 
-msgid "The body of text for the story"
-msgstr "Phần nội dung của câu chuyện"
-
-msgid "The name to describe this image"
-msgstr "Tên để mô tả hình ảnh này"
-
 msgid "The poll to associate to"
 msgstr "Khảo sát để kết hợp với"
-
-msgid "The image file to use"
-msgstr "Tệp hình ảnh để sử dụng"
 
 msgid "The poll for this response"
 msgstr "Khảo sát cho phản hồi này"
@@ -1265,10 +1592,6 @@ msgstr "HÌnh ảnh cho khảo sát"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Bây giờ hãy nhập bất kỳ phản hồi nào bạn muốn hiện. (nếu có)"
-
-#, python-format
-msgid "Image %d"
-msgstr "Hình ảnh %d"
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "Hình ảnh để hiển thị trên trang khảo sát và trong phần xem trước. (không bắt buộc)"
@@ -1560,323 +1883,6 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
-
-#~ msgid "The name of this category"
-#~ msgstr "Tên của danh mục này"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "Một hình ảnh tùy chọn có thể mô tả danh mục này"
-
-#~ msgid "The category this image represents"
-#~ msgstr "Danh mục hình ảnh này đại diện"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "Tên dễ gọi cho nội dung này"
-
-#~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr "Slug để nhận dạng loại nội dung này, được sử dụng với các thẻ khuôn mẫu"
-
-#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-#~ msgstr "Mô tả vị trí nội dung này và cách thức nó được bố trí trên trang web"
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "Liệu có cần thiết đặt tiêu đề cho nội dung này không"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "Liệu có cần thiết đặt gắn hình ảnh cho nội dung này không"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "Liệu có cần thiết phải sử dụng tệp HTML cho nội dung này không"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "Nội dung này có nên bao gồm một trường tóm tắt hay không"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "Nội dung này có nên bao gồm liên kết hay không"
-
-#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
-#~ msgstr "Nội dung này có cho phép tải lên các hình ảnh bổ sung, tức là một thư viện hay không"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "Nội dung này có một trường màu sắc hay không"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "Nội dung này có nên cho phép thiết lập id YouTube hay không"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "Nội dung này có nên cho phép các thẻ hay không"
-
-#~ msgid "Content Type"
-#~ msgstr "Loại nội dung"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "Danh mục hoặc loại cho khối nội dung này"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "Tiêu đề cho khối nội dung này, tùy chọn"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "Bản tóm tắt cho mục này, nên ngắn gọn"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "Phần văn bản cho khối nội dung này, tùy chọn"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "Bất kỳ hình ảnh nào cần được hiển thị cùng khối nội dung này, tùy chọn"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "Màu nền sử dụng cho hình ảnh, theo định dạng: #rrggbb"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "Bất kỳ liên kết nào cần được liên kết với khối nội dung này, tùy chọn"
-
-#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Bất kỳ thẻ nào cho khối nội dung này, cách nhau bởi dấu cách, có thể được sử dụng để thực hiện lọc nâng cao hơn, tùy chọn"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "Mức độ ưu tiên của khối này, các khối ưu tiên hơn sẽ xuất hiện trước tiên"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "Khối nội dung này thuộc về tổ chức"
-
-#~ msgid "Content Blocks"
-#~ msgstr "Khối nội dung"
-
-#, python-format
-#~ msgid "%s Blocks"
-#~ msgstr "%skhối"
-
-#, python-format
-#~ msgid "Edit %s"
-#~ msgstr "Chỉnh sửa %s"
-
-#, python-format
-#~ msgid "Create %s"
-#~ msgstr "Tạo %s"
-
-#~ msgid "Create Content Block"
-#~ msgstr "Tạo khối nội dung"
-
-#~ msgid "Your first name"
-#~ msgstr "Tên của bạn"
-
-#~ msgid "Your last name"
-#~ msgstr "Họ của bạn"
-
-#~ msgid "Your email address"
-#~ msgstr "Địa chỉ email của bạn"
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "Mật khẩu của bạn, vui lòng sử dụng ít nhất 8 ký tự"
-
-#~ msgid "That email address is already used"
-#~ msgstr "Địa chỉ email này đã được sử dụng"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "Mật khẩu phải chứa ít nhất 8 ký tự."
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "Tên miền này được sử dụng cho tên miền phụ"
-
-#~ msgid "The name of this organization"
-#~ msgstr "Tên của tổ chức này"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "Logo nên được sử dụng cho tổ chức này"
-
-#~ msgid "Administrators"
-#~ msgstr "Quản trị viên"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "Quản trị viên trong tổ chức của bạn"
-
-#~ msgid "Viewers"
-#~ msgstr "Người xem"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "Người xem trong tổ chức của bạn"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "Các biên tập viên trong tổ chức của bạn"
-
-#~ msgid "Language"
-#~ msgstr "Ngôn ngữ"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "Ngôn ngữ chính được tổ chức này sử dụng"
-
-#~ msgid "Subdomain"
-#~ msgstr "Tên miền phụ"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "Tên miền phụ này không có sẵn"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "Tên miền phụ của tổ chức này"
-
-#~ msgid "Domain"
-#~ msgstr "Tên miền"
-
-#~ msgid "This domain is not available"
-#~ msgstr "Tên miền này không có sẵn"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "Miền tùy chỉnh cho tổ chức này"
-
-#~ msgid "Timezone"
-#~ msgstr "Múi giờ"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "Múi giờ mà tổ chức bạn nằm trong."
-
-#~ msgid "JSON blob used to store configuration information associated with this organization"
-#~ msgstr "JSON blob sử dụng để lưu trữ thông tin cấu hình liên quan đến tổ chức này"
-
-#~ msgid "Administrator"
-#~ msgstr "Quản trị viên"
-
-#~ msgid "Editor"
-#~ msgstr "Biên tập viên"
-
-#~ msgid "Viewer"
-#~ msgstr "Người xem"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "Tổ chức mà tài khoản được mời xem"
-
-#~ msgid "Email"
-#~ msgstr "Email "
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "Email mà chúng tôi gửi lời mời của người xem"
-
-#~ msgid "Secret"
-#~ msgstr "Bí mật"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "một mã duy nhất liên kết với lời mời này"
-
-#~ msgid "User Role"
-#~ msgstr "Vai trò người dùng"
-
-#, python-format
-#~ msgid "%s Invitation"
-#~ msgstr "%s Lời mời"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "Hình ảnh sẽ được sử dụng cho tổ chức"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "Tên để miêu tả nền này"
-
-#~ msgid "Background type"
-#~ msgstr "Loại nền"
-
-#, fuzzy
-#~| msgid "The title for this item"
-#~ msgid "The API token for this backend"
-#~ msgstr "Tiêu đề cho mục này"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "      You've been invited to join %(org_name)s.\n"
-#~ "      <br/>\n"
-#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "Bạn được mời tham gia %(org_name)s.\n"
-#~ "<br/>\n"
-#~ "Để chấp nhận lời mời, <a href='%(host)s%(join_url)s'>bấm vào đây</a>."
-
-#~ msgid "Select your Organization"
-#~ msgstr "Lựa chọn tổ chức của bạn"
-
-#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-#~ msgstr "Tài khoản của bạn không được liên kết với một tổ chức. Vui lòng liên hệ với quản trị viên."
-
-#~ msgid "Your Organization"
-#~ msgstr "Tổ chức của bạn"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "Mời mọi người vào tổ chức của bạn"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "Một trong các email mà bạn nhập không hợp lệ"
-
-#, python-format
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "Quản lý %(name)sTài khoản"
-
-#~ msgid "Create"
-#~ msgstr "Tạo"
-
-#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
-#~ msgstr "Liên kết lời mời của bạn không hợp lệ. Vui lòng liên hệ với quản trị viên tổ chức của bạn."
-
-#, python-format
-#~ msgid "Join %(name)s"
-#~ msgstr "Tham gia %(name)s"
-
-#, fuzzy
-#~| msgid "Join"
-#~ msgid "Join"
-#~ msgstr "Tham gia"
-
-#~ msgid "Your invitation link has expired. Please contact your organization administrator."
-#~ msgstr "Liên kết lời mời của bạn đã hết hạn. Vui lòng liên hệ với quản trị viên tổ chức của bạn."
-
-#~ msgid "Task"
-#~ msgstr "Nhiệm vụ"
-
-#~ msgid "Tasks"
-#~ msgstr "Các nhiệm vụ"
-
-#~ msgid "The title for this story"
-#~ msgstr "Tiêu đề cho câu chuyện này"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "Câu chuyện này có nổi bật hay không"
-
-#~ msgid "The summary for the story"
-#~ msgstr "Tóm tắt câu chuyện"
-
-#~ msgid "The writer of the story"
-#~ msgstr "Người viết câu chuyện"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "Liên kết đến tệp mp3 để đăng trên câu chuyện này"
-
-#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr "Id của video YouTube được dẫn đến câu hcuyeejn này (đây là đoạn văn bản theo sau v= và trước & in URL YouTube)"
-
-#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Bất kỳ thẻ nào cho câu chuyện này, được phân cách bằng dấu cách, có thể được sử dụng để thực hiện lọc nâng cao hơn, tùy chọn"
-
-#~ msgid "The category for this story"
-#~ msgstr "Danh mục của câu chuyện này"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "Câu chuyện này thuộc về tổ chức"
-
-#~ msgid "The story to associate to"
-#~ msgstr "Câu chuyện để kết hợp với"
-
-#~ msgid "Yes"
-#~ msgstr "Có"
-
-#~ msgid "No"
-#~ msgstr "Không"
-
-#~ msgid "Story Images"
-#~ msgstr "Hình ảnh cho câu chuyện"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước. (tùy chọn)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước (tùy chọn)"
 
 #, fuzzy, python-format
 #~| msgid ""

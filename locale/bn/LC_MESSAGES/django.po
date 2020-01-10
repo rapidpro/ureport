@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 14:19+0000\n"
+"POT-Creation-Date: 2020-01-10 14:36+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -21,6 +21,409 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "The name of this category"
+msgstr " বিভাগের নাম"
+
+msgid "An optional image that can describe this category"
+msgstr "এই বিভাগের জন্য অন্য ছবি"
+
+msgid "The organization this category applies to"
+msgstr "এই  বিভাগের অন্তর্ভুক্ত প্রতিষ্ঠানের নাম "
+
+msgid "Categories"
+msgstr "বিভাগগুলো "
+
+msgid "The name to describe this image"
+msgstr "এই ছবিটিকে বর্ণনা করে এমন নাম "
+
+msgid "The category this image represents"
+msgstr "যে বিভাগের ছবি"
+
+msgid "The image file to use"
+msgstr "যে ছবিটি ব্যবহার করা হবে"
+
+msgid "The human readable name for this content type"
+msgstr "এই বিষয়কে বর্ননা করতে পারে এমন নাম"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "এই একই ধরনের বিষয় কে শনাক্ত করে নমুনা হিসেবে ব্যবহার করা"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "এই বিষয়গুলো সাইটে কোথায় কিভাবে ব্যবহার এবং দেখানো হবে তার বর্ণনা "
+
+msgid "Whether this content should include a title"
+msgstr "এই বিষয়ের কি কোন শিরোনাম হবে"
+
+msgid "Whether this content should include an image"
+msgstr "এই বিষয়ের জন্য কি কোন ছবি ব্যবহার হবে"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "এই বিষয়ের জন্য কি HTML এডিটর ব্যবহার করা হবে"
+
+msgid "Whether this content should include a summary field"
+msgstr "এই বিষয়ের জন্য কি সারাংশ এর জায়গা রাখা উচিত"
+
+msgid "Whether this content should include a link"
+msgstr "এই বিষয়ের মধ্যে কি কোন লিঙ্ক থাকা উচিত"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "এই বিষয়ের মধ্যে কি অতিরিক্ত ছবি আপলোড করার অনুমতি থাকা উচিত, একটি গ্যালারি"
+
+msgid "Whether this content has a color field"
+msgstr "এই বিষয়ের মধ্যে কি কোন রঙ্গিন জায়গা থাকা উচিত"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "এই বিষয়ের মধ্যে কি YouTube আইডি যুক্ত করার সেটিং রাখা উচিত"
+
+msgid "Whether this content should allow tags"
+msgstr "এই বিষয়ের মধ্যে কি ট্যাগ করার সুযোগ থাকা উচিত"
+
+msgid "Content Type"
+msgstr "বিষয়বস্তু "
+
+msgid "The category, or type for this content block"
+msgstr "এই দলভুক্ত বিষয়ের ধরন বা বিভাগ"
+
+msgid "The title for this block of content, optional"
+msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
+
+msgid "The summary for this item, should be short"
+msgstr "এই বিষয়ের সারাংশ, ছোট হতে হবে"
+
+msgid "The body of text for this content block, optional"
+msgstr "এই দলভুক্ত বিষয়ের মূল লেখা, ঐচ্ছিক "
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "এই দলভুক্ত বিষয়ের সাথে দেখানো হবে এমন ছবি, ঐচ্ছিক"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "এই ছবির পেছনে ব্যবহার করা হবে এমন রঙ,  #rrggbb এই ফরম্যাটে"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "এই সারির বিষয়গুলোর সাথে সম্পর্কিত কোন লিংক, ঐচ্ছিক"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "YouTube ভিডিওর সাথে সম্পৃক্ত আইডি যা এই ভিডিওর সাথে ব্যবহার করা যাবে"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "এই দলভুক্ত বিষয়ের জন্য কোন ট্যাগ, যা স্পেস দিয়ে আলাদা করা থাকবে, যা ব্যবহার করা হবে এ্যডভান্স ফিল্টারিংয়ের জন্য, ঐচ্ছিক"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "এই সারির গুরুত্ব, বেশি গুরুত্বপূর্ণ সারি প্রথমে আসবে।"
+
+msgid "The organization this content block belongs to"
+msgstr "এই সারির বিষয়গুলো যে  প্রতিষ্ঠানের অন্তর্ভুক্ত"
+
+msgid "Gallery"
+msgstr "গ্যালারি"
+
+msgid "Add Image"
+msgstr "ছবি যোগ করুন"
+
+msgid "Search"
+msgstr "খুঁজুন "
+
+msgid "Add"
+msgstr "যোগ করুন"
+
+msgid "Content Types"
+msgstr "বিষয়ের ধরণ "
+
+msgid "Content Blocks"
+msgstr "বিষয়ের সারি"
+
+#, python-format
+msgid "%s Blocks"
+msgstr " %s ব্লক গুলো"
+
+#, python-format
+msgid "Edit %s"
+msgstr "সম্পাদনা করুন %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "তৈরি করুন  %s"
+
+msgid "Create Content Block"
+msgstr "বিষয়ের সারি তৈরি করুন"
+
+msgid "Your first name"
+msgstr "আপনার নামের প্রথম অংশ "
+
+msgid "Your last name"
+msgstr "আপনার নামের শেষ অংশ"
+
+msgid "Your email address"
+msgstr "আপনার ইমেইল "
+
+msgid "Your password, at least eight letters please"
+msgstr "আপনার পাসওয়ার্ড, কমপক্ষে ৮ টি অক্ষর হতে হবে"
+
+msgid "That email address is already used"
+msgstr "এই ই-মেইল টি ইতিমধ্যে ব্যবহার করা হয়েছে "
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "আপনার পাসওয়ার্ড-এ কমপক্ষে ৮ টি অক্ষর থাকতে হবে"
+
+msgid "This domain is used for subdomains"
+msgstr "এই ডোমেইন টি সাব- ডোমেইন এর জন্য ব্যবহার করা হয়। "
+
+msgid "Name"
+msgstr "নাম"
+
+msgid "The name of this organization"
+msgstr "এই প্রতিষ্ঠানের নাম "
+
+msgid "The logo that should be used for this organization"
+msgstr "এই প্রতিষ্ঠানের জন্য ব্যবহার করা হবে যে লোগো  "
+
+msgid "Administrators"
+msgstr "এ্যডমিনিসট্রেটরস"
+
+msgid "The administrators in your organization"
+msgstr "আপনার প্রতিষ্ঠানের এ্যডমিনিসট্রেটর গণ "
+
+msgid "Viewers"
+msgstr "দর্শক"
+
+msgid "The viewers in your organization"
+msgstr "আপনার প্রতিষ্ঠানের দর্শকগণ "
+
+msgid "Editors"
+msgstr "সম্পাদকগণ "
+
+msgid "The editors in your organization"
+msgstr "আপনার প্রতিষ্ঠানের সম্পাদকগণ "
+
+msgid "Language"
+msgstr "ভাষা"
+
+msgid "The main language used by this organization"
+msgstr "এই  প্রতিষ্ঠানে ব্যবহৃত মূল ভাষা"
+
+msgid "Subdomain"
+msgstr "সাব-ডোমেইন "
+
+msgid "This subdomain is not available"
+msgstr "এই সাব- ডোমেইন টি পাওয়া যাবে না"
+
+msgid "The subdomain for this organization"
+msgstr "এই সাব-ডোমেইনটি এই প্রতিষ্ঠানের জন্য"
+
+msgid "Domain"
+msgstr "ডোমেইন"
+
+msgid "This domain is not available"
+msgstr "এই ডোমেইন টি পাওয়া যাবে না"
+
+msgid "The custom domain for this organization"
+msgstr "এই বিশেষায়িত ডোমেইনটি এই প্রতিষ্ঠানের  জন্য "
+
+msgid "Timezone"
+msgstr "সময় অঞ্চল"
+
+msgid "The timezone your organization is in."
+msgstr "আপনার প্রতিষ্ঠান যে সময় অঞ্চলের অন্তর্ভুক্ত "
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "JSON  blob এই প্রতিষ্ঠানের সাথে সম্পৃক্ত কনফিগারেশন তথ্য সংরক্ষণ করে থাকে"
+
+msgid "Administrator"
+msgstr "এ্যডমিনিসট্রেটর"
+
+msgid "Editor"
+msgstr "সম্পাদক"
+
+msgid "Viewer"
+msgstr "দর্শক"
+
+msgid "Org"
+msgstr "অরগ "
+
+msgid "The organization to which the account is invited to view"
+msgstr "এই প্রতিষ্ঠানটির সাথে এই একাউন্টটি দেখার জন্য  সম্পৃক্ত করা হয়েছে "
+
+msgid "Email"
+msgstr "ই-মেইল "
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "ইমেইলটি আমরা দর্শকদের আমন্ত্রন জানাতে পাঠাবো"
+
+msgid "Secret"
+msgstr "গোপন"
+
+msgid "a unique code associated with this invitation"
+msgstr " একটি বিশেষ কোড যা এই আমন্ত্রনের সাথে সম্পৃক্ত"
+
+msgid "User Role"
+msgstr "ব্যবহারকারীর  ভূমিকা"
+
+#, python-format
+msgid "%s Invitation"
+msgstr " %s আমন্ত্রন "
+
+msgid "Banner"
+msgstr "ব্যানার "
+
+msgid "Pattern"
+msgstr "ধরণ "
+
+msgid "The organization in which the image will be used"
+msgstr "যে প্রতিষ্ঠানে এই ছবি ব্যবহার করা হবে "
+
+msgid "The name to describe this background"
+msgstr "এর পটভূমি বর্ণনা করা যায় এমন নাম"
+
+msgid "Background type"
+msgstr "পটভূমির ধরণ "
+
+msgid "The image file"
+msgstr "ছবির ফাইল টি "
+
+msgid "The API token for this backend"
+msgstr "ব্যাকএন্ডে ব্যবহার করার জন্য API টোকেন"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      %(org_name)sযোগদান করতে আপনাকে আমন্ত্রণ দেয়া হয়েছে।\n"
+"      <br/>\n"
+"      আমন্ত্রণটি গ্রহণ করতে,\n"
+" <a href='%(host)s%(join_url)s'> এখানে ক্লিক করুন। </a>.\n"
+"  "
+
+msgid "You are invited to join {{org.name}}."
+msgstr "আপনাকে যোগদান করতে আমন্ত্রন জানানো হয়েছে {{org.name}}."
+
+msgid "Click this link to join"
+msgstr "যুক্ত হতে এই লিংকে ক্লিক করুন"
+
+msgid "Edit"
+msgstr "সম্পাদনা করুন"
+
+msgid "Manage Backends"
+msgstr "ব্যাকএন্ড নিয়ন্ত্রন করুন"
+
+msgid "Manage Users"
+msgstr "ব্যবহারকারীদের পরিচালনা করুন "
+
+msgid "Accounts"
+msgstr "একাউন্টস"
+
+msgid "Admins"
+msgstr "অ্যাডমিনস"
+
+msgid "Remove"
+msgstr "মুছে ফেলুন"
+
+msgid "You must have at least one administator"
+msgstr "আপনার কমপক্ষে একজন অ্যাডমিন থাকতে  হবে"
+
+msgid "Select your Organization"
+msgstr "আপনার প্রতিষ্ঠান নিশ্চিত করুন "
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "আপনার একাউন্ট এই প্রতিষ্ঠান এর সাথে সংযুক্ত নয়। অনুগ্রহ করে অ্যাডমিনের সাথে যোগাযোগ করুন "
+
+msgid "Your Organization"
+msgstr "আপনার প্রতিষ্ঠান "
+
+msgid "Invite people to your organization"
+msgstr "আপনার প্রতিষ্ঠানে মানুষকে আমন্ত্রন জানান "
+
+msgid "User group"
+msgstr "ব্যবহারকারীদের গ্রুপ "
+
+msgid "One of the emails you entered is invalid."
+msgstr "আপনার প্রবেশ করানো ইমেইল গুলোর একটি ভুল"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "একাউন্টগুলো %(name)s নিয়ন্ত্রন করুন"
+
+msgid "Create"
+msgstr "তৈরি করুন "
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "আপনার আমন্ত্রন লিঙ্কটি সঠিক নয়। অনুগ্রহ করে আপনার প্রতিষ্ঠানের অ্যাডমিনের সাথে যোগাযোগ করুন। "
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "যোগদান %(name)s"
+
+msgid "Join"
+msgstr "যোগদান"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "আপনার আমন্ত্রন লিঙ্কটির মেয়াদ উত্তীর্ণ হয়ে গিয়েছে। অনুগ্রহ করে আপনার প্রতিষ্ঠানের  অ্যাডমিনের সাথে যোগাযোগ করুন। "
+
+msgid "Task"
+msgstr "কাজ "
+
+msgid "Tasks"
+msgstr "কাজগুলো "
+
+msgid "The title for this story"
+msgstr "এই ঘটনাটির শিরোনাম "
+
+msgid "Whether this story is featured"
+msgstr "এই ঘটনাটি প্রকাশিত হয়েছে কিনা "
+
+msgid "The summary for the story"
+msgstr "এই ঘটনাটির সারসংক্ষেপ "
+
+msgid "The body of text for the story"
+msgstr "এই ঘটনাটির মূল অংশ"
+
+msgid "The writer of the story"
+msgstr "ঘটনাটির লেখক "
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "এই ঘটনার সাথে সম্পৃক্ত একটি mp3 ফাইলের লিংকও প্রকাশ করা হবে"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "এই ঘটনার সাথে সম্পৃক্ত YouTube ভিডিওর আইডি এখানে লিঙ্ক করা থাকবে (যে  শব্দগুলো YouTube URL এর v= এর পরে ও & পরে আগে আসে)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "এই ঘটনার জন্য যে কোন ট্যাগ, যা স্পেস দিয়ে আলাদা করা থাকবে, যা ব্যবহার করা হবে এ্যডভান্স ফিল্টারিংয়ের জন্য, ঐচ্ছিক"
+
+msgid "The category for this story"
+msgstr "এই ঘটনাটির শ্রেণী "
+
+msgid "The organization this story belongs to"
+msgstr "এই ঘটনাটি যে প্রতিষ্ঠানের সাথে সংযুক্ত "
+
+msgid "Stories"
+msgstr "ঘটনাগুলো "
+
+msgid "The story to associate to"
+msgstr "এই ঘটনাটি যার সাথে সংশ্লিষ্ট"
+
+msgid "Yes"
+msgstr "হ্যাঁ "
+
+msgid "No"
+msgstr "না "
+
+msgid "Story Images"
+msgstr "ঘটনার ছবিগুলো "
+
+#, python-format
+msgid "Image %d"
+msgstr "ইমেজ 1 %d "
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "ঘটনার পেইজ এবং প্রিভিউ এর সাথে সংযুক্ত যে ছবি প্রদর্শন করা হবে (ঐচ্ছিক) "
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "ঘটনার পেইজ এবং প্রিভিউ এর সাথে সংযুক্ত যে ছবি প্রদর্শন করা হবে (ঐচ্ছিক) "
 
 msgid "Back to Website"
 msgstr "ওয়েবসাইটে ফিরে যান"
@@ -37,9 +440,6 @@ msgstr "প্রবেশ করুন "
 msgid "Opinions"
 msgstr "মতামতগুলো"
 
-msgid "Stories"
-msgstr "ঘটনাগুলো "
-
 msgid "Users"
 msgstr "ব্যবহারকারী গণ  "
 
@@ -52,9 +452,6 @@ msgstr "পেইজগুলো"
 msgid "Jobs"
 msgstr "কাজ গুলো"
 
-msgid "Categories"
-msgstr "বিভাগগুলো "
-
 msgid "Photos"
 msgstr "ছবিগুলো"
 
@@ -66,9 +463,6 @@ msgstr "সংবাদ এর অংশ গুলো "
 
 msgid "Orgs"
 msgstr "অরগ "
-
-msgid "Content Types"
-msgstr "বিষয়ের ধরণ "
 
 msgid "Images"
 msgstr "ছবি গুলো "
@@ -189,18 +583,6 @@ msgid ""
 msgstr ""
 "\n"
 "মনে রাখুন twitter এ কাজের উৎস খোঁজার  জন্য আপনাকে twitter widget id গ্রহন করতে হবে"
-
-msgid "Edit"
-msgstr "সম্পাদনা করুন"
-
-msgid "Manage Backends"
-msgstr "ব্যাকএন্ড নিয়ন্ত্রন করুন"
-
-msgid "Manage Users"
-msgstr "ব্যবহারকারীদের পরিচালনা করুন "
-
-msgid "Add"
-msgstr "যোগ করুন"
 
 msgid "ABOUT U-REPORT"
 msgstr "U-REPORT এর ব্যাপারে "
@@ -699,12 +1081,6 @@ msgstr "প্রবেশ করুন "
 msgid "Forgot Password?"
 msgstr "গোপন সংখ্যাটি ভুলে গিয়েছেন ? "
 
-msgid "Gallery"
-msgstr "গ্যালারি"
-
-msgid "Add Image"
-msgstr "ছবি যোগ করুন"
-
 msgid "+ New "
 msgstr "+ নতুন"
 
@@ -716,24 +1092,6 @@ msgstr "সর্বশেষ নটিফিকেশন"
 
 msgid "Backends"
 msgstr "ব্যাকএন্ড"
-
-msgid "You must have at least one administator"
-msgstr "আপনার কমপক্ষে একজন অ্যাডমিন থাকতে  হবে"
-
-msgid "Accounts"
-msgstr "একাউন্টস"
-
-msgid "Admins"
-msgstr "অ্যাডমিনস"
-
-msgid "Editors"
-msgstr "সম্পাদকগণ "
-
-msgid "Remove"
-msgstr "মুছে ফেলুন"
-
-msgid "User group"
-msgstr "ব্যবহারকারীদের গ্রুপ "
 
 msgid "+ New Poll"
 msgstr "+ নতুন পোল"
@@ -813,9 +1171,6 @@ msgstr ""
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "আপনি যদি একবার বাদ দেন, তাহলে এটি চিরতরে চলে যাবে। আর এটিকে আগের অবস্থায় ফেরাতে পারবেন না।"
-
-msgid "Search"
-msgstr "খুঁজুন "
 
 #, python-format
 msgid ""
@@ -909,32 +1264,17 @@ msgstr "+ নতুন ঘটনা"
 msgid "Refreshed %s cache for this organization"
 msgstr "এই প্রতিষ্ঠানের  জন্য 1 %s cache refreshed "
 
-msgid "Banner"
-msgstr "ব্যানার "
-
-msgid "Pattern"
-msgstr "ধরণ "
-
 msgid "Flag"
 msgstr "পতাকা "
 
-msgid "Org"
-msgstr "অরগ "
-
 msgid "The organization to which the image will be used"
 msgstr "যে প্রতিষ্ঠানে এই ছবি ব্যবহার করা হবে "
-
-msgid "Name"
-msgstr "নাম"
 
 msgid "A short descriptive name for this image"
 msgstr "এই ছবির জন্য একটি ছোট বর্ণনামূলক নাম "
 
 msgid "Image type"
 msgstr "ছবির ধরণ "
-
-msgid "The image file"
-msgstr "ছবির ফাইল টি "
 
 msgid "Label"
 msgstr "লেবেল "
@@ -1047,17 +1387,11 @@ msgstr "এই ভিডিও এর শিরোনাম "
 msgid "A short summary description for this video"
 msgstr "এই ভিডিও টির জন্য একটি ছোট সারসংক্ষেপ বর্ণনা "
 
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "YouTube ভিডিওর সাথে সম্পৃক্ত আইডি যা এই ভিডিওর সাথে ব্যবহার করা যাবে"
-
 msgid "The organization this video belongs to"
 msgstr "এই ভিডিও টি যে প্রতিষ্ঠান এর অন্তর্ভুক্ত"
 
 msgid "The name of this poll category"
 msgstr "এই পোল এর ধরণের নাম "
-
-msgid "The organization this category applies to"
-msgstr "এই  বিভাগের অন্তর্ভুক্ত প্রতিষ্ঠানের নাম "
 
 msgid "Poll Categories"
 msgstr "পোল এর ধরণ"
@@ -1106,17 +1440,8 @@ msgstr "মতামত জানিয়ে লেখা এই ঘটনাট�
 msgid "The writer of the response story"
 msgstr "মতামত জানিয়ে লেখা এই ঘটনাটির লেখক"
 
-msgid "The body of text for the story"
-msgstr "এই ঘটনাটির মূল অংশ"
-
-msgid "The name to describe this image"
-msgstr "এই ছবিটিকে বর্ণনা করে এমন নাম "
-
 msgid "The poll to associate to"
 msgstr "এই পোলটি সংযুক্ত "
-
-msgid "The image file to use"
-msgstr "যে ছবিটি ব্যবহার করা হবে"
 
 msgid "The poll for this response"
 msgstr "এই মতামত এর জন্য পোলটি "
@@ -1180,10 +1505,6 @@ msgstr "পোল এর ছবি সমূহ "
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "এখন এমন কোন উত্তর প্রবেশ করুন যা আপনি বিশেষায়িত করতে চান (যদি থাকে)  "
-
-#, python-format
-msgid "Image %d"
-msgstr "ইমেজ 1 %d "
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "পোল পেজ এবং প্রিভিউতে (ঐচ্ছিক) প্রদর্শনের জন্য ছবি "
@@ -1442,327 +1763,6 @@ msgstr "সক্রিয় ব্যবহারকারী"
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
-
-#~ msgid "The name of this category"
-#~ msgstr " বিভাগের নাম"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "এই বিভাগের জন্য অন্য ছবি"
-
-#~ msgid "The category this image represents"
-#~ msgstr "যে বিভাগের ছবি"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "এই বিষয়কে বর্ননা করতে পারে এমন নাম"
-
-#~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr "এই একই ধরনের বিষয় কে শনাক্ত করে নমুনা হিসেবে ব্যবহার করা"
-
-#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-#~ msgstr "এই বিষয়গুলো সাইটে কোথায় কিভাবে ব্যবহার এবং দেখানো হবে তার বর্ণনা "
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "এই বিষয়ের কি কোন শিরোনাম হবে"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "এই বিষয়ের জন্য কি কোন ছবি ব্যবহার হবে"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "এই বিষয়ের জন্য কি HTML এডিটর ব্যবহার করা হবে"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "এই বিষয়ের জন্য কি সারাংশ এর জায়গা রাখা উচিত"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "এই বিষয়ের মধ্যে কি কোন লিঙ্ক থাকা উচিত"
-
-#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
-#~ msgstr "এই বিষয়ের মধ্যে কি অতিরিক্ত ছবি আপলোড করার অনুমতি থাকা উচিত, একটি গ্যালারি"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "এই বিষয়ের মধ্যে কি কোন রঙ্গিন জায়গা থাকা উচিত"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "এই বিষয়ের মধ্যে কি YouTube আইডি যুক্ত করার সেটিং রাখা উচিত"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "এই বিষয়ের মধ্যে কি ট্যাগ করার সুযোগ থাকা উচিত"
-
-#~ msgid "Content Type"
-#~ msgstr "বিষয়বস্তু "
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "এই দলভুক্ত বিষয়ের ধরন বা বিভাগ"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "এই দলভুক্ত বিষয়ের নাম, ঐচ্ছিক"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "এই বিষয়ের সারাংশ, ছোট হতে হবে"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "এই দলভুক্ত বিষয়ের মূল লেখা, ঐচ্ছিক "
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "এই দলভুক্ত বিষয়ের সাথে দেখানো হবে এমন ছবি, ঐচ্ছিক"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "এই ছবির পেছনে ব্যবহার করা হবে এমন রঙ,  #rrggbb এই ফরম্যাটে"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "এই সারির বিষয়গুলোর সাথে সম্পর্কিত কোন লিংক, ঐচ্ছিক"
-
-#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "এই দলভুক্ত বিষয়ের জন্য কোন ট্যাগ, যা স্পেস দিয়ে আলাদা করা থাকবে, যা ব্যবহার করা হবে এ্যডভান্স ফিল্টারিংয়ের জন্য, ঐচ্ছিক"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "এই সারির গুরুত্ব, বেশি গুরুত্বপূর্ণ সারি প্রথমে আসবে।"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "এই সারির বিষয়গুলো যে  প্রতিষ্ঠানের অন্তর্ভুক্ত"
-
-#~ msgid "Content Blocks"
-#~ msgstr "বিষয়ের সারি"
-
-#, python-format
-#~ msgid "%s Blocks"
-#~ msgstr " %s ব্লক গুলো"
-
-#, python-format
-#~ msgid "Edit %s"
-#~ msgstr "সম্পাদনা করুন %s"
-
-#, python-format
-#~ msgid "Create %s"
-#~ msgstr "তৈরি করুন  %s"
-
-#~ msgid "Create Content Block"
-#~ msgstr "বিষয়ের সারি তৈরি করুন"
-
-#~ msgid "Your first name"
-#~ msgstr "আপনার নামের প্রথম অংশ "
-
-#~ msgid "Your last name"
-#~ msgstr "আপনার নামের শেষ অংশ"
-
-#~ msgid "Your email address"
-#~ msgstr "আপনার ইমেইল "
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "আপনার পাসওয়ার্ড, কমপক্ষে ৮ টি অক্ষর হতে হবে"
-
-#~ msgid "That email address is already used"
-#~ msgstr "এই ই-মেইল টি ইতিমধ্যে ব্যবহার করা হয়েছে "
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "আপনার পাসওয়ার্ড-এ কমপক্ষে ৮ টি অক্ষর থাকতে হবে"
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "এই ডোমেইন টি সাব- ডোমেইন এর জন্য ব্যবহার করা হয়। "
-
-#~ msgid "The name of this organization"
-#~ msgstr "এই প্রতিষ্ঠানের নাম "
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "এই প্রতিষ্ঠানের জন্য ব্যবহার করা হবে যে লোগো  "
-
-#~ msgid "Administrators"
-#~ msgstr "এ্যডমিনিসট্রেটরস"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "আপনার প্রতিষ্ঠানের এ্যডমিনিসট্রেটর গণ "
-
-#~ msgid "Viewers"
-#~ msgstr "দর্শক"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "আপনার প্রতিষ্ঠানের দর্শকগণ "
-
-#~ msgid "The editors in your organization"
-#~ msgstr "আপনার প্রতিষ্ঠানের সম্পাদকগণ "
-
-#~ msgid "Language"
-#~ msgstr "ভাষা"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "এই  প্রতিষ্ঠানে ব্যবহৃত মূল ভাষা"
-
-#~ msgid "Subdomain"
-#~ msgstr "সাব-ডোমেইন "
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "এই সাব- ডোমেইন টি পাওয়া যাবে না"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "এই সাব-ডোমেইনটি এই প্রতিষ্ঠানের জন্য"
-
-#~ msgid "Domain"
-#~ msgstr "ডোমেইন"
-
-#~ msgid "This domain is not available"
-#~ msgstr "এই ডোমেইন টি পাওয়া যাবে না"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "এই বিশেষায়িত ডোমেইনটি এই প্রতিষ্ঠানের  জন্য "
-
-#~ msgid "Timezone"
-#~ msgstr "সময় অঞ্চল"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "আপনার প্রতিষ্ঠান যে সময় অঞ্চলের অন্তর্ভুক্ত "
-
-#~ msgid "JSON blob used to store configuration information associated with this organization"
-#~ msgstr "JSON  blob এই প্রতিষ্ঠানের সাথে সম্পৃক্ত কনফিগারেশন তথ্য সংরক্ষণ করে থাকে"
-
-#~ msgid "Administrator"
-#~ msgstr "এ্যডমিনিসট্রেটর"
-
-#~ msgid "Editor"
-#~ msgstr "সম্পাদক"
-
-#~ msgid "Viewer"
-#~ msgstr "দর্শক"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "এই প্রতিষ্ঠানটির সাথে এই একাউন্টটি দেখার জন্য  সম্পৃক্ত করা হয়েছে "
-
-#~ msgid "Email"
-#~ msgstr "ই-মেইল "
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "ইমেইলটি আমরা দর্শকদের আমন্ত্রন জানাতে পাঠাবো"
-
-#~ msgid "Secret"
-#~ msgstr "গোপন"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr " একটি বিশেষ কোড যা এই আমন্ত্রনের সাথে সম্পৃক্ত"
-
-#~ msgid "User Role"
-#~ msgstr "ব্যবহারকারীর  ভূমিকা"
-
-#, python-format
-#~ msgid "%s Invitation"
-#~ msgstr " %s আমন্ত্রন "
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "যে প্রতিষ্ঠানে এই ছবি ব্যবহার করা হবে "
-
-#~ msgid "The name to describe this background"
-#~ msgstr "এর পটভূমি বর্ণনা করা যায় এমন নাম"
-
-#~ msgid "Background type"
-#~ msgstr "পটভূমির ধরণ "
-
-#~ msgid "The API token for this backend"
-#~ msgstr "ব্যাকএন্ডে ব্যবহার করার জন্য API টোকেন"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "      You've been invited to join %(org_name)s.\n"
-#~ "      <br/>\n"
-#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "      %(org_name)sযোগদান করতে আপনাকে আমন্ত্রণ দেয়া হয়েছে।\n"
-#~ "      <br/>\n"
-#~ "      আমন্ত্রণটি গ্রহণ করতে,\n"
-#~ " <a href='%(host)s%(join_url)s'> এখানে ক্লিক করুন। </a>.\n"
-#~ "  "
-
-#~ msgid "You are invited to join {{org.name}}."
-#~ msgstr "আপনাকে যোগদান করতে আমন্ত্রন জানানো হয়েছে {{org.name}}."
-
-#~ msgid "Click this link to join"
-#~ msgstr "যুক্ত হতে এই লিংকে ক্লিক করুন"
-
-#~ msgid "Select your Organization"
-#~ msgstr "আপনার প্রতিষ্ঠান নিশ্চিত করুন "
-
-#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-#~ msgstr "আপনার একাউন্ট এই প্রতিষ্ঠান এর সাথে সংযুক্ত নয়। অনুগ্রহ করে অ্যাডমিনের সাথে যোগাযোগ করুন "
-
-#~ msgid "Your Organization"
-#~ msgstr "আপনার প্রতিষ্ঠান "
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "আপনার প্রতিষ্ঠানে মানুষকে আমন্ত্রন জানান "
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "আপনার প্রবেশ করানো ইমেইল গুলোর একটি ভুল"
-
-#, python-format
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "একাউন্টগুলো %(name)s নিয়ন্ত্রন করুন"
-
-#~ msgid "Create"
-#~ msgstr "তৈরি করুন "
-
-#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
-#~ msgstr "আপনার আমন্ত্রন লিঙ্কটি সঠিক নয়। অনুগ্রহ করে আপনার প্রতিষ্ঠানের অ্যাডমিনের সাথে যোগাযোগ করুন। "
-
-#, python-format
-#~ msgid "Join %(name)s"
-#~ msgstr "যোগদান %(name)s"
-
-#~ msgid "Join"
-#~ msgstr "যোগদান"
-
-#~ msgid "Your invitation link has expired. Please contact your organization administrator."
-#~ msgstr "আপনার আমন্ত্রন লিঙ্কটির মেয়াদ উত্তীর্ণ হয়ে গিয়েছে। অনুগ্রহ করে আপনার প্রতিষ্ঠানের  অ্যাডমিনের সাথে যোগাযোগ করুন। "
-
-#~ msgid "Task"
-#~ msgstr "কাজ "
-
-#~ msgid "Tasks"
-#~ msgstr "কাজগুলো "
-
-#~ msgid "The title for this story"
-#~ msgstr "এই ঘটনাটির শিরোনাম "
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে কিনা "
-
-#~ msgid "The summary for the story"
-#~ msgstr "এই ঘটনাটির সারসংক্ষেপ "
-
-#~ msgid "The writer of the story"
-#~ msgstr "ঘটনাটির লেখক "
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "এই ঘটনার সাথে সম্পৃক্ত একটি mp3 ফাইলের লিংকও প্রকাশ করা হবে"
-
-#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr "এই ঘটনার সাথে সম্পৃক্ত YouTube ভিডিওর আইডি এখানে লিঙ্ক করা থাকবে (যে  শব্দগুলো YouTube URL এর v= এর পরে ও & পরে আগে আসে)"
-
-#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "এই ঘটনার জন্য যে কোন ট্যাগ, যা স্পেস দিয়ে আলাদা করা থাকবে, যা ব্যবহার করা হবে এ্যডভান্স ফিল্টারিংয়ের জন্য, ঐচ্ছিক"
-
-#~ msgid "The category for this story"
-#~ msgstr "এই ঘটনাটির শ্রেণী "
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "এই ঘটনাটি যে প্রতিষ্ঠানের সাথে সংযুক্ত "
-
-#~ msgid "The story to associate to"
-#~ msgstr "এই ঘটনাটি যার সাথে সংশ্লিষ্ট"
-
-#~ msgid "Yes"
-#~ msgstr "হ্যাঁ "
-
-#~ msgid "No"
-#~ msgstr "না "
-
-#~ msgid "Story Images"
-#~ msgstr "ঘটনার ছবিগুলো "
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "ঘটনার পেইজ এবং প্রিভিউ এর সাথে সংযুক্ত যে ছবি প্রদর্শন করা হবে (ঐচ্ছিক) "
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "ঘটনার পেইজ এবং প্রিভিউ এর সাথে সংযুক্ত যে ছবি প্রদর্শন করা হবে (ঐচ্ছিক) "
 
 #, python-format
 #~ msgid ""
