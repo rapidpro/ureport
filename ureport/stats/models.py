@@ -125,86 +125,8 @@ class PollStats(models.Model):
             logger.info("Squash polls stats already running.")
         else:
             with r.lock(key, timeout=PollStats.COUNTS_SQUASH_LOCK_TIMEOUT):
+                PollStats.initial_squash_counts()
 
-                last_squash = r.get(PollStats.LAST_SQUASHED_ID_KEY)
-                if not last_squash:
-                    last_squash = 0
-
-                last_squash = int(last_squash)
-
-                start = time.time()
-                squash_count = 0
-
-                if last_squash < 1:
-                    PollStats.initial_squash_counts()
-                    return
-
-                else:
-                    stats = (
-                        PollStats.objects.filter(id__gt=last_squash)
-                        .values(
-                            "org_id",
-                            "question_id",
-                            "category_id",
-                            "age_segment_id",
-                            "gender_segment_id",
-                            "location_id",
-                            "date",
-                        )
-                        .order_by(
-                            "org_id",
-                            "question_id",
-                            "category_id",
-                            "age_segment_id",
-                            "gender_segment_id",
-                            "location_id",
-                            "date",
-                        )
-                        .distinct(
-                            "org_id",
-                            "question_id",
-                            "category_id",
-                            "age_segment_id",
-                            "gender_segment_id",
-                            "location_id",
-                            "date",
-                        )
-                    )
-
-                total_stats = len(stats)
-
-                # get all the new added stats
-                for stat in stats:
-
-                    # perform our atomic squash in SQL by calling our squash method
-                    with connection.cursor() as c:
-                        c.execute(
-                            "SELECT ureport_squash_pollstats(%s, %s, %s, %s, %s, %s, %s);"
-                            % (
-                                stat["org_id"] or "null",
-                                stat["question_id"] or "null",
-                                stat["category_id"] or "null",
-                                stat["age_segment_id"] or "null",
-                                stat["gender_segment_id"] or "null",
-                                stat["location_id"] or "null",
-                                f"'{stat['date'].strftime('%Y-%m-%d %H:%M:%S')}'" if stat["date"] else "null",
-                            )
-                        )
-
-                    squash_count += 1
-
-                    if squash_count % 100 == 0:
-                        logger.info(
-                            "Squashing progress ... %0.2f/100 in in %0.3fs"
-                            % (squash_count * 100 / total_stats, time.time() - start)
-                        )
-
-                # insert our new top squashed id
-                max_id = PollStats.objects.all().order_by("-id").first()
-                if max_id:
-                    r.set(PollStats.LAST_SQUASHED_ID_KEY, max_id.id)
-
-                logger.info("Squashed polls stats for %d types in %0.3fs" % (squash_count, time.time() - start))
 
     @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):
