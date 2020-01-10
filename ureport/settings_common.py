@@ -945,18 +945,25 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://brasil.ureport.in/count/",
     ),
     dict(
-        name="Burundi",
-        host="//burundi.ureport.in/",
-        flag="flag_burkina_faso.png",
+        name="Botswana",
+        host="//botswana.ureport.in/",
+        flag="flag_botswana.png",
         is_static=True,
-        count_link="http://burundi.ureport.in/count/",
+        count_link="http://botswana.ureport.in/count/",
     ),
     dict(
         name="Burkina Faso",
         host="//burkinafaso.ureport.in/",
-        flag="flag_burundi.png",
+        flag="flag_burkina_faso.png",
         is_static=True,
         count_link="http://burkinafaso.ureport.in/count/",
+    ),
+    dict(
+        name="Burundi",
+        host="//burundi.ureport.in/",
+        flag="flag_burundi.png",
+        is_static=True,
+        count_link="http://burundi.ureport.in/count/",
     ),
     dict(
         name="Canada", host="//oneyouth.unicef.ca/en/u-report/", flag="flag_canada.png", is_static=True, count_link=""
