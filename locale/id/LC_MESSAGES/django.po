@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 14:36+0000\n"
+"POT-Creation-Date: 2020-01-10 14:57+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -17,413 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-msgid "The name of this category"
-msgstr "Nama kategori ini"
-
-msgid "An optional image that can describe this category"
-msgstr "Gambar opsional yang bisa menggambarkan kategori ini"
-
-msgid "The organization this category applies to"
-msgstr "Organisasi kategori ini berlaku untuk"
-
-msgid "Categories"
-msgstr "Kategori"
-
-msgid "The name to describe this image"
-msgstr "Nama untuk menjelaskan gambar ini"
-
-msgid "The category this image represents"
-msgstr "Kategori gambar ini mewakili"
-
-msgid "The image file to use"
-msgstr "File gambar yang akan digunakan"
-
-msgid "The human readable name for this content type"
-msgstr "Nama yang familiar untuk jenis konten ini"
-
-msgid "The slug to idenfity this content type, used with the template tags"
-msgstr "Untuk mengidentifikasi jenis konten ini, digunakan dengan tag template"
-
-msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-msgstr "Sebuah deskripsi di mana jenis konten ini digunakan di dalam situs dan bagaimana hal itu akan ditampilkan"
-
-msgid "Whether this content should include a title"
-msgstr "Apakah konten ini harus mencakup judul"
-
-msgid "Whether this content should include an image"
-msgstr "Apakah konten ini harus mencakup gambar"
-
-msgid "Whether this content should use a rich HTML editor"
-msgstr "Apakah konten ini harus menggunakan editor HTML"
-
-msgid "Whether this content should include a summary field"
-msgstr "Apakah konten ini harus mencakup rangkuman"
-
-msgid "Whether this content should include a link"
-msgstr "Apakah konten ini harus menyertakan link"
-
-msgid "Whether this content should allow upload of additional images, ie a gallery"
-msgstr "Apakah konten ini harus memungkinkan upload gambar tambahan, di sebuah galeri"
-
-msgid "Whether this content has a color field"
-msgstr "Apakah konten ini memiliki kolom warna"
-
-msgid "Whether this content should allow setting a YouTube id"
-msgstr "Apakah konten ini harus memungkinkan pengaturan id YouTube"
-
-msgid "Whether this content should allow tags"
-msgstr "Apakah konten ini harus memungkinkan tag"
-
-msgid "Content Type"
-msgstr "Jenis konten"
-
-msgid "The category, or type for this content block"
-msgstr "Kategori, atau jenis untuk blok konten ini"
-
-msgid "The title for this block of content, optional"
-msgstr "Judul untuk blok konten ini, opsional"
-
-msgid "The summary for this item, should be short"
-msgstr "Ringkasan untuk item ini, harus pendek"
-
-msgid "The body of text for this content block, optional"
-msgstr "Isi teks untuk blok konten ini, opsional"
-
-msgid "Any image that should be displayed with this content block, optional"
-msgstr "Setiap gambar yang harus ditampilkan dengan blok konten ini, opsional"
-
-msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr "Sebuah warna latar belakang digunakan untuk gambar, dalam format: #rrggbb"
-
-msgid "Any link that should be associated with this content block, optional"
-msgstr "Link yang harus dikaitkan dengan blok konten ini, opsional"
-
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "Id dari video YouTube yang harus dikaitkan dengan item ini"
-
-msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "Tag untuk memblokir konten ini, dipisahkan oleh spasi, dapat digunakan untuk melakukan penyaringan lebih maju, opsional"
-
-msgid "The priority for this block, higher priority blocks come first"
-msgstr "Prioritas untuk blok ini, blok prioritas yang lebih tinggi datang pertama"
-
-msgid "The organization this content block belongs to"
-msgstr "Organisasi blok konten ini milik"
-
-msgid "Gallery"
-msgstr "Galeri"
-
-msgid "Add Image"
-msgstr "Tambah Gambar"
-
-msgid "Search"
-msgstr "Cari"
-
-msgid "Add"
-msgstr "Tambah"
-
-msgid "Content Types"
-msgstr "Jenis Konten"
-
-msgid "Content Blocks"
-msgstr "Blok Konten"
-
-#, python-format
-msgid "%s Blocks"
-msgstr "%s Blok"
-
-#, python-format
-msgid "Edit %s"
-msgstr "Rubah  %s"
-
-#, python-format
-msgid "Create %s"
-msgstr "Buat %s"
-
-msgid "Create Content Block"
-msgstr "Buat Blok Konten"
-
-msgid "Your first name"
-msgstr "Nama depan"
-
-msgid "Your last name"
-msgstr "Nama belakang"
-
-msgid "Your email address"
-msgstr "Alamat surel"
-
-msgid "Your password, at least eight letters please"
-msgstr "Kata kunci, setidaknya delapan huruf"
-
-msgid "That email address is already used"
-msgstr "surel tersebut sudah digunakan"
-
-msgid "Passwords must contain at least 8 letters."
-msgstr "Kata kunci harus minimal delapan huruf."
-
-msgid "This domain is used for subdomains"
-msgstr "Domain ini digunakan untuk subdomain"
-
-msgid "Name"
-msgstr "Nama"
-
-msgid "The name of this organization"
-msgstr "Nama organisasi ini"
-
-msgid "The logo that should be used for this organization"
-msgstr "Logo yang akan dipakai di organisasi ini"
-
-msgid "Administrators"
-msgstr "Administrators"
-
-msgid "The administrators in your organization"
-msgstr "Administrator dalam organisasi Anda"
-
-msgid "Viewers"
-msgstr "Pembaca"
-
-msgid "The viewers in your organization"
-msgstr "Pembaca di organisasi ini"
-
-msgid "Editors"
-msgstr "Editor"
-
-msgid "The editors in your organization"
-msgstr "Para editor di organisasi ini"
-
-msgid "Language"
-msgstr "Bahasa"
-
-msgid "The main language used by this organization"
-msgstr "Bahasa utama yang digunakan untuk organisasi ini"
-
-msgid "Subdomain"
-msgstr "Subdomain"
-
-msgid "This subdomain is not available"
-msgstr "Subdomain ini tidak ada"
-
-msgid "The subdomain for this organization"
-msgstr "Subdomain untuk organisasi ini"
-
-msgid "Domain"
-msgstr "Domain"
-
-msgid "This domain is not available"
-msgstr "Domain ini tidak ada"
-
-msgid "The custom domain for this organization"
-msgstr "Custom domain untuk organisasi ini"
-
-msgid "Timezone"
-msgstr "Zona waktu"
-
-msgid "The timezone your organization is in."
-msgstr "Zona waktu di organisasi ini adalah"
-
-msgid "JSON blob used to store configuration information associated with this organization"
-msgstr "JSON yang digunakan untuk menyimpan informasi konfigurasi yang terkait dengan organisasi ini"
-
-msgid "Administrator"
-msgstr "Administrator"
-
-msgid "Editor"
-msgstr "Editor"
-
-msgid "Viewer"
-msgstr "Pembaca"
-
-msgid "Org"
-msgstr "Org"
-
-msgid "The organization to which the account is invited to view"
-msgstr "Organisasi yang pengguna diundang untuk melihatnya"
-
-msgid "Email"
-msgstr "Surel"
-
-msgid "The email to which we send the invitation of the viewer"
-msgstr "tujuan surel yang kami kirim undangan dari peninjau"
-
-msgid "Secret"
-msgstr "Rahasia"
-
-msgid "a unique code associated with this invitation"
-msgstr "kode unik yang terkait dengan undangan ini"
-
-msgid "User Role"
-msgstr "Peran pengguna"
-
-#, python-format
-msgid "%s Invitation"
-msgstr "%s Undangan"
-
-msgid "Banner"
-msgstr "Spanduk"
-
-msgid "Pattern"
-msgstr "Rumus"
-
-msgid "The organization in which the image will be used"
-msgstr "Organisasi di mana gambar akan digunakan"
-
-msgid "The name to describe this background"
-msgstr "Nama untuk menggambarkan latar belakang ini"
-
-msgid "Background type"
-msgstr "Jenis latar belakang"
-
-msgid "The image file"
-msgstr "File gambar"
-
-#, fuzzy
-#| msgid "The title for this item"
-msgid "The API token for this backend"
-msgstr "Judul untuk item ini"
-
-#, python-format
-msgid ""
-"\n"
-"      You've been invited to join %(org_name)s.\n"
-"      <br/>\n"
-"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-"  "
-msgstr ""
-"\n"
-"Anda telah diundang untuk bergabung %(org_name)s.\n"
-"<br/>\n"
-"Untuk menerima undangan, <a href='%(host)s%(join_url)s'>Klik disini</a>."
-
-msgid "You are invited to join {{org.name}}."
-msgstr ""
-
-msgid "Click this link to join"
-msgstr ""
-
-msgid "Edit"
-msgstr "Rubah"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Manage Backends"
-msgstr "Kelola Pengguna"
-
-msgid "Manage Users"
-msgstr "Kelola Pengguna"
-
-msgid "Accounts"
-msgstr "Akun"
-
-msgid "Admins"
-msgstr "Admin"
-
-msgid "Remove"
-msgstr "Hapus"
-
-msgid "You must have at least one administator"
-msgstr "Kamu harus mempunyai setidaknya satu administrator"
-
-msgid "Select your Organization"
-msgstr "Pilih Organisasi"
-
-msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-msgstr "Akun Anda tidak terkait dengan organisasi. Silahkan Hubungi administrator."
-
-msgid "Your Organization"
-msgstr "Organisasi Anda"
-
-msgid "Invite people to your organization"
-msgstr "Undang orang ke organisasi"
-
-msgid "User group"
-msgstr "Kelompok Pengguna"
-
-msgid "One of the emails you entered is invalid."
-msgstr "Satu dari email yang dimasukkan tidak sesuai format"
-
-#, python-format
-msgid "Manage %(name)s Accounts"
-msgstr "Kelola %(name)s Pengguna"
-
-msgid "Create"
-msgstr "Buat"
-
-msgid "Your invitation link is invalid. Please contact your organization administrator."
-msgstr "link undangan Anda tidak valid. Silahkan hubungi administrator organisasi Anda."
-
-#, python-format
-msgid "Join %(name)s"
-msgstr "Gabung %(name)s"
-
-#, fuzzy
-#| msgid "Join"
-msgid "Join"
-msgstr "Gabung"
-
-msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr "link undangan Anda telah kedaluwarsa. Silahkan hubungi administrator organisasi Anda."
-
-msgid "Task"
-msgstr "Tugas"
-
-msgid "Tasks"
-msgstr "Tugas-tugas"
-
-msgid "The title for this story"
-msgstr "Judul cerita"
-
-msgid "Whether this story is featured"
-msgstr "Cerita ini di tampilkan di halaman depan"
-
-msgid "The summary for the story"
-msgstr "Ringkasan cerita"
-
-msgid "The body of text for the story"
-msgstr "Isi cerita"
-
-msgid "The writer of the story"
-msgstr "Penulis cerita"
-
-msgid "A link to an mp3 file to publish on this story"
-msgstr "Sebuah link ke file mp3 untuk menerbitkan cerita ini"
-
-msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr "Id dari video YouTube yang harus dikaitkan dengan cerita ini (ini adalah teks yang muncul setelah v = dan sebelum & dalam URL YouTube)"
-
-msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr "Tag untuk cerita ini, dipisahkan oleh spasi, dapat digunakan untuk melakukan penyaringan lebih maju, opsional"
-
-msgid "The category for this story"
-msgstr "Kategori cerita"
-
-msgid "The organization this story belongs to"
-msgstr "Organisasi yang memiliki cerita ini"
-
-msgid "Stories"
-msgstr "Cerita"
-
-msgid "The story to associate to"
-msgstr "cerita untuk mengaitkan"
-
-msgid "Yes"
-msgstr "Ya"
-
-msgid "No"
-msgstr "Tidak"
-
-msgid "Story Images"
-msgstr "Gambar cerita"
-
-#, python-format
-msgid "Image %d"
-msgstr "Gambar %d"
-
-msgid "Image to display on story page and in previews. (optional)"
-msgstr "Gambar untuk ditampilkan pada halaman cerita dan di preview. (pilihan)"
-
-msgid "Image to display on story page and in previews (optional)"
-msgstr "Image to display on story page and in previews (optional)"
 
 msgid "Back to Website"
 msgstr ""
@@ -440,6 +33,9 @@ msgstr "Masuk"
 msgid "Opinions"
 msgstr ""
 
+msgid "Stories"
+msgstr "Cerita"
+
 msgid "Users"
 msgstr "Nama Pengguna"
 
@@ -454,6 +50,9 @@ msgstr "Gambar"
 msgid "Jobs"
 msgstr "Pekerjaan"
 
+msgid "Categories"
+msgstr "Kategori"
+
 msgid "Photos"
 msgstr ""
 
@@ -467,6 +66,9 @@ msgstr "Berita"
 
 msgid "Orgs"
 msgstr "Orgs"
+
+msgid "Content Types"
+msgstr "Jenis Konten"
 
 msgid "Images"
 msgstr "Gambar"
@@ -589,6 +191,20 @@ msgid ""
 msgstr ""
 "\n"
 "Ingat untuk sumber pekerjaan Twitter Anda diminta untuk mendapatkan id widget dari twitter."
+
+msgid "Edit"
+msgstr "Rubah"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Manage Backends"
+msgstr "Kelola Pengguna"
+
+msgid "Manage Users"
+msgstr "Kelola Pengguna"
+
+msgid "Add"
+msgstr "Tambah"
 
 msgid "ABOUT U-REPORT"
 msgstr "Tentang U-REPORT"
@@ -1127,6 +743,12 @@ msgstr "Masuk"
 msgid "Forgot Password?"
 msgstr "Lupa Password"
 
+msgid "Gallery"
+msgstr "Galeri"
+
+msgid "Add Image"
+msgstr "Tambah Gambar"
+
 msgid "+ New "
 msgstr ""
 
@@ -1142,6 +764,24 @@ msgstr "LOKASI"
 #| msgid "Manage Users"
 msgid "Backends"
 msgstr "Kelola Pengguna"
+
+msgid "You must have at least one administator"
+msgstr "Kamu harus mempunyai setidaknya satu administrator"
+
+msgid "Accounts"
+msgstr "Akun"
+
+msgid "Admins"
+msgstr "Admin"
+
+msgid "Editors"
+msgstr "Editor"
+
+msgid "Remove"
+msgstr "Hapus"
+
+msgid "User group"
+msgstr "Kelompok Pengguna"
 
 msgid "+ New Poll"
 msgstr ""
@@ -1247,6 +887,9 @@ msgstr ""
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Sekali dihapus, itu akan hilang selamanya. Tidak ada cara untuk membatalkan operasi ini."
+
+msgid "Search"
+msgstr "Cari"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -1359,17 +1002,32 @@ msgstr ""
 msgid "Refreshed %s cache for this organization"
 msgstr "Refreshed %s cache untuk organisasi ini"
 
+msgid "Banner"
+msgstr "Spanduk"
+
+msgid "Pattern"
+msgstr "Rumus"
+
 msgid "Flag"
 msgstr "Bendera"
 
+msgid "Org"
+msgstr "Org"
+
 msgid "The organization to which the image will be used"
 msgstr "Organisasi yang akan di gunakan untuk gambar ini"
+
+msgid "Name"
+msgstr "Nama"
 
 msgid "A short descriptive name for this image"
 msgstr "Sebuah nama deskriptif singkat untuk gambar ini"
 
 msgid "Image type"
 msgstr "Tipe Gambar"
+
+msgid "The image file"
+msgstr "File gambar"
 
 msgid "Label"
 msgstr "Label"
@@ -1482,11 +1140,17 @@ msgstr "Judul Video ini"
 msgid "A short summary description for this video"
 msgstr "Deskripsi ringkasan pendek untuk video ini"
 
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Id dari video YouTube yang harus dikaitkan dengan item ini"
+
 msgid "The organization this video belongs to"
 msgstr "Organisasi video ini milik"
 
 msgid "The name of this poll category"
 msgstr "Nama kategori jajak pendapat ini"
+
+msgid "The organization this category applies to"
+msgstr "Organisasi kategori ini berlaku untuk"
 
 msgid "Poll Categories"
 msgstr "Kategori Jajak Pendapat"
@@ -1541,8 +1205,17 @@ msgstr "Judul cerita"
 msgid "The writer of the response story"
 msgstr "Penulis cerita"
 
+msgid "The body of text for the story"
+msgstr "Isi cerita"
+
+msgid "The name to describe this image"
+msgstr "Nama untuk menjelaskan gambar ini"
+
 msgid "The poll to associate to"
 msgstr "Jajak pendapat untuk mengaitkan ke"
+
+msgid "The image file to use"
+msgstr "File gambar yang akan digunakan"
 
 msgid "The poll for this response"
 msgstr "Jajak pendapat untuk tanggapan ini"
@@ -1614,6 +1287,10 @@ msgstr "Gambar jajak pendapat"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Sekarang masukkan tanggapan Anda yang ingin di fitur. (jika ada)"
+
+#, python-format
+msgid "Image %d"
+msgstr "Gambar %d"
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "Gambar untuk ditampilkan pada halaman jajak pendapat dan di lihat. (pilihan)"
@@ -1909,6 +1586,323 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
+
+#~ msgid "The name of this category"
+#~ msgstr "Nama kategori ini"
+
+#~ msgid "An optional image that can describe this category"
+#~ msgstr "Gambar opsional yang bisa menggambarkan kategori ini"
+
+#~ msgid "The category this image represents"
+#~ msgstr "Kategori gambar ini mewakili"
+
+#~ msgid "The human readable name for this content type"
+#~ msgstr "Nama yang familiar untuk jenis konten ini"
+
+#~ msgid "The slug to idenfity this content type, used with the template tags"
+#~ msgstr "Untuk mengidentifikasi jenis konten ini, digunakan dengan tag template"
+
+#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#~ msgstr "Sebuah deskripsi di mana jenis konten ini digunakan di dalam situs dan bagaimana hal itu akan ditampilkan"
+
+#~ msgid "Whether this content should include a title"
+#~ msgstr "Apakah konten ini harus mencakup judul"
+
+#~ msgid "Whether this content should include an image"
+#~ msgstr "Apakah konten ini harus mencakup gambar"
+
+#~ msgid "Whether this content should use a rich HTML editor"
+#~ msgstr "Apakah konten ini harus menggunakan editor HTML"
+
+#~ msgid "Whether this content should include a summary field"
+#~ msgstr "Apakah konten ini harus mencakup rangkuman"
+
+#~ msgid "Whether this content should include a link"
+#~ msgstr "Apakah konten ini harus menyertakan link"
+
+#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
+#~ msgstr "Apakah konten ini harus memungkinkan upload gambar tambahan, di sebuah galeri"
+
+#~ msgid "Whether this content has a color field"
+#~ msgstr "Apakah konten ini memiliki kolom warna"
+
+#~ msgid "Whether this content should allow setting a YouTube id"
+#~ msgstr "Apakah konten ini harus memungkinkan pengaturan id YouTube"
+
+#~ msgid "Whether this content should allow tags"
+#~ msgstr "Apakah konten ini harus memungkinkan tag"
+
+#~ msgid "Content Type"
+#~ msgstr "Jenis konten"
+
+#~ msgid "The category, or type for this content block"
+#~ msgstr "Kategori, atau jenis untuk blok konten ini"
+
+#~ msgid "The title for this block of content, optional"
+#~ msgstr "Judul untuk blok konten ini, opsional"
+
+#~ msgid "The summary for this item, should be short"
+#~ msgstr "Ringkasan untuk item ini, harus pendek"
+
+#~ msgid "The body of text for this content block, optional"
+#~ msgstr "Isi teks untuk blok konten ini, opsional"
+
+#~ msgid "Any image that should be displayed with this content block, optional"
+#~ msgstr "Setiap gambar yang harus ditampilkan dengan blok konten ini, opsional"
+
+#~ msgid "A background color to use for the image, in the format: #rrggbb"
+#~ msgstr "Sebuah warna latar belakang digunakan untuk gambar, dalam format: #rrggbb"
+
+#~ msgid "Any link that should be associated with this content block, optional"
+#~ msgstr "Link yang harus dikaitkan dengan blok konten ini, opsional"
+
+#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr "Tag untuk memblokir konten ini, dipisahkan oleh spasi, dapat digunakan untuk melakukan penyaringan lebih maju, opsional"
+
+#~ msgid "The priority for this block, higher priority blocks come first"
+#~ msgstr "Prioritas untuk blok ini, blok prioritas yang lebih tinggi datang pertama"
+
+#~ msgid "The organization this content block belongs to"
+#~ msgstr "Organisasi blok konten ini milik"
+
+#~ msgid "Content Blocks"
+#~ msgstr "Blok Konten"
+
+#, python-format
+#~ msgid "%s Blocks"
+#~ msgstr "%s Blok"
+
+#, python-format
+#~ msgid "Edit %s"
+#~ msgstr "Rubah  %s"
+
+#, python-format
+#~ msgid "Create %s"
+#~ msgstr "Buat %s"
+
+#~ msgid "Create Content Block"
+#~ msgstr "Buat Blok Konten"
+
+#~ msgid "Your first name"
+#~ msgstr "Nama depan"
+
+#~ msgid "Your last name"
+#~ msgstr "Nama belakang"
+
+#~ msgid "Your email address"
+#~ msgstr "Alamat surel"
+
+#~ msgid "Your password, at least eight letters please"
+#~ msgstr "Kata kunci, setidaknya delapan huruf"
+
+#~ msgid "That email address is already used"
+#~ msgstr "surel tersebut sudah digunakan"
+
+#~ msgid "Passwords must contain at least 8 letters."
+#~ msgstr "Kata kunci harus minimal delapan huruf."
+
+#~ msgid "This domain is used for subdomains"
+#~ msgstr "Domain ini digunakan untuk subdomain"
+
+#~ msgid "The name of this organization"
+#~ msgstr "Nama organisasi ini"
+
+#~ msgid "The logo that should be used for this organization"
+#~ msgstr "Logo yang akan dipakai di organisasi ini"
+
+#~ msgid "Administrators"
+#~ msgstr "Administrators"
+
+#~ msgid "The administrators in your organization"
+#~ msgstr "Administrator dalam organisasi Anda"
+
+#~ msgid "Viewers"
+#~ msgstr "Pembaca"
+
+#~ msgid "The viewers in your organization"
+#~ msgstr "Pembaca di organisasi ini"
+
+#~ msgid "The editors in your organization"
+#~ msgstr "Para editor di organisasi ini"
+
+#~ msgid "Language"
+#~ msgstr "Bahasa"
+
+#~ msgid "The main language used by this organization"
+#~ msgstr "Bahasa utama yang digunakan untuk organisasi ini"
+
+#~ msgid "Subdomain"
+#~ msgstr "Subdomain"
+
+#~ msgid "This subdomain is not available"
+#~ msgstr "Subdomain ini tidak ada"
+
+#~ msgid "The subdomain for this organization"
+#~ msgstr "Subdomain untuk organisasi ini"
+
+#~ msgid "Domain"
+#~ msgstr "Domain"
+
+#~ msgid "This domain is not available"
+#~ msgstr "Domain ini tidak ada"
+
+#~ msgid "The custom domain for this organization"
+#~ msgstr "Custom domain untuk organisasi ini"
+
+#~ msgid "Timezone"
+#~ msgstr "Zona waktu"
+
+#~ msgid "The timezone your organization is in."
+#~ msgstr "Zona waktu di organisasi ini adalah"
+
+#~ msgid "JSON blob used to store configuration information associated with this organization"
+#~ msgstr "JSON yang digunakan untuk menyimpan informasi konfigurasi yang terkait dengan organisasi ini"
+
+#~ msgid "Administrator"
+#~ msgstr "Administrator"
+
+#~ msgid "Editor"
+#~ msgstr "Editor"
+
+#~ msgid "Viewer"
+#~ msgstr "Pembaca"
+
+#~ msgid "The organization to which the account is invited to view"
+#~ msgstr "Organisasi yang pengguna diundang untuk melihatnya"
+
+#~ msgid "Email"
+#~ msgstr "Surel"
+
+#~ msgid "The email to which we send the invitation of the viewer"
+#~ msgstr "tujuan surel yang kami kirim undangan dari peninjau"
+
+#~ msgid "Secret"
+#~ msgstr "Rahasia"
+
+#~ msgid "a unique code associated with this invitation"
+#~ msgstr "kode unik yang terkait dengan undangan ini"
+
+#~ msgid "User Role"
+#~ msgstr "Peran pengguna"
+
+#, python-format
+#~ msgid "%s Invitation"
+#~ msgstr "%s Undangan"
+
+#~ msgid "The organization in which the image will be used"
+#~ msgstr "Organisasi di mana gambar akan digunakan"
+
+#~ msgid "The name to describe this background"
+#~ msgstr "Nama untuk menggambarkan latar belakang ini"
+
+#~ msgid "Background type"
+#~ msgstr "Jenis latar belakang"
+
+#, fuzzy
+#~| msgid "The title for this item"
+#~ msgid "The API token for this backend"
+#~ msgstr "Judul untuk item ini"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "      You've been invited to join %(org_name)s.\n"
+#~ "      <br/>\n"
+#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+#~ "  "
+#~ msgstr ""
+#~ "\n"
+#~ "Anda telah diundang untuk bergabung %(org_name)s.\n"
+#~ "<br/>\n"
+#~ "Untuk menerima undangan, <a href='%(host)s%(join_url)s'>Klik disini</a>."
+
+#~ msgid "Select your Organization"
+#~ msgstr "Pilih Organisasi"
+
+#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#~ msgstr "Akun Anda tidak terkait dengan organisasi. Silahkan Hubungi administrator."
+
+#~ msgid "Your Organization"
+#~ msgstr "Organisasi Anda"
+
+#~ msgid "Invite people to your organization"
+#~ msgstr "Undang orang ke organisasi"
+
+#~ msgid "One of the emails you entered is invalid."
+#~ msgstr "Satu dari email yang dimasukkan tidak sesuai format"
+
+#, python-format
+#~ msgid "Manage %(name)s Accounts"
+#~ msgstr "Kelola %(name)s Pengguna"
+
+#~ msgid "Create"
+#~ msgstr "Buat"
+
+#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
+#~ msgstr "link undangan Anda tidak valid. Silahkan hubungi administrator organisasi Anda."
+
+#, python-format
+#~ msgid "Join %(name)s"
+#~ msgstr "Gabung %(name)s"
+
+#, fuzzy
+#~| msgid "Join"
+#~ msgid "Join"
+#~ msgstr "Gabung"
+
+#~ msgid "Your invitation link has expired. Please contact your organization administrator."
+#~ msgstr "link undangan Anda telah kedaluwarsa. Silahkan hubungi administrator organisasi Anda."
+
+#~ msgid "Task"
+#~ msgstr "Tugas"
+
+#~ msgid "Tasks"
+#~ msgstr "Tugas-tugas"
+
+#~ msgid "The title for this story"
+#~ msgstr "Judul cerita"
+
+#~ msgid "Whether this story is featured"
+#~ msgstr "Cerita ini di tampilkan di halaman depan"
+
+#~ msgid "The summary for the story"
+#~ msgstr "Ringkasan cerita"
+
+#~ msgid "The writer of the story"
+#~ msgstr "Penulis cerita"
+
+#~ msgid "A link to an mp3 file to publish on this story"
+#~ msgstr "Sebuah link ke file mp3 untuk menerbitkan cerita ini"
+
+#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+#~ msgstr "Id dari video YouTube yang harus dikaitkan dengan cerita ini (ini adalah teks yang muncul setelah v = dan sebelum & dalam URL YouTube)"
+
+#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr "Tag untuk cerita ini, dipisahkan oleh spasi, dapat digunakan untuk melakukan penyaringan lebih maju, opsional"
+
+#~ msgid "The category for this story"
+#~ msgstr "Kategori cerita"
+
+#~ msgid "The organization this story belongs to"
+#~ msgstr "Organisasi yang memiliki cerita ini"
+
+#~ msgid "The story to associate to"
+#~ msgstr "cerita untuk mengaitkan"
+
+#~ msgid "Yes"
+#~ msgstr "Ya"
+
+#~ msgid "No"
+#~ msgstr "Tidak"
+
+#~ msgid "Story Images"
+#~ msgstr "Gambar cerita"
+
+#~ msgid "Image to display on story page and in previews. (optional)"
+#~ msgstr "Gambar untuk ditampilkan pada halaman cerita dan di preview. (pilihan)"
+
+#~ msgid "Image to display on story page and in previews (optional)"
+#~ msgstr "Image to display on story page and in previews (optional)"
 
 #, fuzzy, python-format
 #~| msgid ""
