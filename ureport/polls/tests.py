@@ -9,7 +9,6 @@ import six
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import TaskState
-from django_redis import get_redis_connection
 from mock import Mock, patch
 from smartmin.csv_imports.models import ImportTask
 from temba_client.exceptions import TembaRateExceededError
