@@ -9,6 +9,7 @@ import six
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import TaskState
+from django_redis import get_redis_connection
 from mock import Mock, patch
 from smartmin.csv_imports.models import ImportTask
 from temba_client.exceptions import TembaRateExceededError
@@ -2257,7 +2258,6 @@ class PollQuestionTest(UreportTest):
             dict(set=0, unset=0, label="35+", categories=[dict(count=0, label="Yes"), dict(count=0, label="No")]),
         ]
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
-
 
     def test_squash_poll_stats(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)

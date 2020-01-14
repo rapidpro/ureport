@@ -1,4 +1,4 @@
-import logging  
+import logging
 import time
 
 from collections import defaultdict
@@ -19,6 +19,7 @@ from ureport.polls.models import PollQuestion, PollResponseCategory
 
 
 logger = logging.getLogger(__name__)
+
 
 class GenderSegment(models.Model):
 
@@ -48,7 +49,6 @@ class PollStats(models.Model):
         "response-rate": _("Response Rate"),
         "active-users": _("Active Users"),
     }
-
 
     SQUASH_OVER = ("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date")
 
@@ -107,7 +107,6 @@ class PollStats(models.Model):
         time_taken = time.time() - start
 
         print("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
-
 
     @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):

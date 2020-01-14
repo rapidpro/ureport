@@ -312,6 +312,7 @@ def recheck_poll_flow_data(org_id=None):
 
     logger.info("Task: recheck_poll_flow_data done")
 
+
 @app.task(name="polls.polls_stats_squash")
 def polls_stats_squash():
     from ureport.stats.models import PollStats
