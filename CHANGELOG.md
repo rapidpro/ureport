@@ -1,3 +1,19 @@
+v1.1.125
+----------
+ * Merge pull request #547 from rapidpro/pacific-flag
+ * Add Pacific flag
+ * Update CHANGELOG.md for v1.1.124
+ * Rebuild locales, with symlinks
+ * Rebuild locales
+ * Rebuild locales
+ * Rebuild locales
+ * Rebuild locales
+ * Compile messages
+ * Merge pull request #546 from rapidpro/fix-flags
+ * Merge pull request #544 from rapidpro/translations_django-po--master_bs
+ * Add Botswana flag, fix links properly
+ * Translate /locale/en/LC_MESSAGES/django.po in bs
+
 v1.1.124
 ----------
  * Rebuild locales, with symlinks
