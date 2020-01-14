@@ -2404,7 +2404,7 @@ class PollQuestionTest(UreportTest):
             age_segment=None,
             gender_segment=male_gender,
             location=None,
-            date=None,
+            date=now,
             count=2,
         )
 
@@ -2415,7 +2415,7 @@ class PollQuestionTest(UreportTest):
             age_segment=None,
             gender_segment=female_gender,
             location=None,
-            date=None,
+            date=now,
             count=1,
         )
 
@@ -2436,7 +2436,7 @@ class PollQuestionTest(UreportTest):
             age_segment=None,
             gender_segment=female_gender,
             location=None,
-            date=None,
+            date=now,
             count=5,
         )
 
@@ -2447,7 +2447,7 @@ class PollQuestionTest(UreportTest):
             age_segment=None,
             gender_segment=female_gender,
             location=None,
-            date=None,
+            date=now,
             count=4,
         )
 
@@ -2458,8 +2458,19 @@ class PollQuestionTest(UreportTest):
             age_segment=None,
             gender_segment=female_gender,
             location=None,
-            date=None,
+            date=now,
             count=1,
+        )
+
+        PollStats.objects.create(
+            org=self.uganda,
+            question=poll_question1,
+            category=None,
+            age_segment=None,
+            gender_segment=female_gender,
+            location=None,
+            date=now,
+            count=3,
         )
 
         PollStats.objects.create(
@@ -2472,17 +2483,16 @@ class PollQuestionTest(UreportTest):
             date=None,
             count=3,
         )
-
         calculated_results = [
             dict(set=2, unset=0, label="Male", categories=[dict(count=0, label="Yes"), dict(count=2, label="No")]),
-            dict(set=4, unset=13, label="Female", categories=[dict(count=3, label="Yes"), dict(count=1, label="No")]),
+            dict(set=4, unset=16, label="Female", categories=[dict(count=3, label="Yes"), dict(count=1, label="No")]),
         ]
         self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
 
-        self.assertEqual(10, PollStats.objects.all().count())
+        self.assertEqual(11, PollStats.objects.all().count())
         PollStats.squash()
 
-        self.assertEqual(7, PollStats.objects.all().count())
+        self.assertEqual(8, PollStats.objects.all().count())
         self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
 
         PollStats.objects.create(
@@ -2492,7 +2502,7 @@ class PollQuestionTest(UreportTest):
             age_segment=age_segment_20,
             gender_segment=None,
             location=None,
-            date=None,
+            date=now,
             count=2,
         )
 
@@ -2503,7 +2513,7 @@ class PollQuestionTest(UreportTest):
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
-            date=None,
+            date=now,
             count=1,
         )
 
@@ -2514,7 +2524,7 @@ class PollQuestionTest(UreportTest):
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
-            date=None,
+            date=now,
             count=3,
         )
         PollStats.objects.create(
@@ -2524,7 +2534,7 @@ class PollQuestionTest(UreportTest):
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
-            date=None,
+            date=now,
             count=5,
         )
 
@@ -2535,7 +2545,7 @@ class PollQuestionTest(UreportTest):
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
-            date=None,
+            date=now,
             count=4,
         )
         PollStats.objects.create(
@@ -2545,7 +2555,7 @@ class PollQuestionTest(UreportTest):
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
-            date=None,
+            date=now,
             count=2,
         )
 
@@ -2556,7 +2566,7 @@ class PollQuestionTest(UreportTest):
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
-            date=None,
+            date=now,
             count=1,
         )
         PollStats.objects.create(
@@ -2566,7 +2576,7 @@ class PollQuestionTest(UreportTest):
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
-            date=None,
+            date=now,
             count=6,
         )
 
@@ -2580,10 +2590,10 @@ class PollQuestionTest(UreportTest):
         ]
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
 
-        self.assertEqual(15, PollStats.objects.all().count())
+        self.assertEqual(16, PollStats.objects.all().count())
         PollStats.squash()
 
-        self.assertEqual(11, PollStats.objects.all().count())
+        self.assertEqual(12, PollStats.objects.all().count())
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
 
     def test_tasks(self):
