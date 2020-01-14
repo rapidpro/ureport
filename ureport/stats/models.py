@@ -1,6 +1,5 @@
 import logging
 import time
-
 from collections import defaultdict
 from datetime import timedelta
 
@@ -16,7 +15,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollQuestion, PollResponseCategory
-
 
 logger = logging.getLogger(__name__)
 
@@ -75,7 +73,16 @@ class PollStats(models.Model):
         start = time.time()
         num_sets = 0
 
-        stats_objs = cls.objects.exclude(is_squashed=True).exclude(date=None).order_by("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date").distinct("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date")[:5000]
+        stats_objs = (
+            cls.objects.exclude(is_squashed=True)
+            .exclude(date=None)
+            .order_by(
+                "org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date"
+            )
+            .distinct(
+                "org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date"
+            )[:5000]
+        )
 
         for distinct_set in stats_objs:
             with connection.cursor() as cursor:
@@ -97,7 +104,7 @@ class PollStats(models.Model):
                     distinct_set.age_segment_id,
                     distinct_set.gender_segment_id,
                     distinct_set.location_id,
-                    str(distinct_set.date)
+                    str(distinct_set.date),
                 ) * 2
 
                 cursor.execute(sql, params)
