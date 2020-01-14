@@ -62,6 +62,8 @@ class PollStats(models.Model):
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
 
+    is_squashed = models.BooleanField(default=False, help_text=_("Whether this row was created by squashing"))
+
     @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):
 
