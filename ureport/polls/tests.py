@@ -2349,7 +2349,7 @@ class PollQuestionTest(UreportTest):
         ]
         self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
-        PollStats.squash_counts()
+        PollStats.squash()
 
         self.assertEqual(3, PollStats.objects.all().count())
         calculated_results = [
@@ -2387,7 +2387,7 @@ class PollQuestionTest(UreportTest):
         ]
         self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
-        PollStats.squash_counts()
+        PollStats.squash()
 
         self.assertEqual(3, PollStats.objects.all().count())
         calculated_results = [
@@ -2480,7 +2480,7 @@ class PollQuestionTest(UreportTest):
         self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
 
         self.assertEqual(10, PollStats.objects.all().count())
-        PollStats.squash_counts()
+        PollStats.squash()
 
         self.assertEqual(7, PollStats.objects.all().count())
         self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
@@ -2581,7 +2581,7 @@ class PollQuestionTest(UreportTest):
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
 
         self.assertEqual(15, PollStats.objects.all().count())
-        PollStats.squash_counts()
+        PollStats.squash()
 
         self.assertEqual(11, PollStats.objects.all().count())
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
