@@ -2299,8 +2299,6 @@ class PollQuestionTest(UreportTest):
 
         PollStats.objects.all().delete()
         self.assertEqual(0, PollStats.objects.all().count())
-        r = get_redis_connection()
-        r.delete(PollStats.LAST_SQUASHED_ID_KEY)
 
         PollStats.objects.create(
             org=self.uganda,
@@ -2359,8 +2357,6 @@ class PollQuestionTest(UreportTest):
             dict(open_ended=False, set=6, unset=1, categories=[dict(count=2, label="Yes"), dict(count=4, label="No")])
         ]
         self.assertEqual(poll_question1.calculate_results(), calculated_results)
-
-        r.delete(PollStats.LAST_SQUASHED_ID_KEY)
 
         PollStats.objects.create(
             org=self.uganda,
@@ -2484,7 +2480,6 @@ class PollQuestionTest(UreportTest):
         ]
         self.assertEqual(poll_question1.calculate_results(segment=dict(gender="gender")), calculated_results)
 
-        r.delete(PollStats.LAST_SQUASHED_ID_KEY)
         self.assertEqual(10, PollStats.objects.all().count())
         PollStats.squash_counts()
 
@@ -2586,7 +2581,6 @@ class PollQuestionTest(UreportTest):
         ]
         self.assertEqual(poll_question1.calculate_results(segment=dict(age="Age")), calculated_results)
 
-        r.delete(PollStats.LAST_SQUASHED_ID_KEY)
         self.assertEqual(15, PollStats.objects.all().count())
         PollStats.squash_counts()
 

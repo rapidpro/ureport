@@ -50,8 +50,6 @@ class PollStats(models.Model):
         "active-users": _("Active Users"),
     }
 
-    SQUASH_OVER = ("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date")
-
     id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name="ID")
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="poll_stats")
@@ -70,14 +68,14 @@ class PollStats(models.Model):
 
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
 
-    is_squashed = models.BooleanField(default=False, help_text=_("Whether this row was created by squashing"))
+    is_squashed = models.BooleanField(null=True, help_text=_("Whether this row was created by squashing"))
 
     @classmethod
     def squash(cls):
         start = time.time()
         num_sets = 0
 
-        stats_objs = cls.objects.filter(is_squashed=False).order_by("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date").distinct("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date")[:5000]
+        stats_objs = cls.objects.exclude(is_squashed=True).order_by("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date").distinct("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date")[:5000]
 
         for distinct_set in stats_objs:
             with connection.cursor() as cursor:
