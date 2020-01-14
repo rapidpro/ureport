@@ -75,18 +75,20 @@ class PollStats(models.Model):
         start = time.time()
         num_sets = 0
 
-        stats_objs = cls.objects.exclude(is_squashed=True).order_by("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date").distinct("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date")[:5000]
+        stats_objs = cls.objects.exclude(is_squashed=True).exclude(date=None).order_by("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date").distinct("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date")[:5000]
 
         for distinct_set in stats_objs:
             with connection.cursor() as cursor:
                 sql = """
-                WITH deleted as (DELETE FROM stats_pollstats
-                    WHERE "org_id" IS NOT DISTINCT FROM %%s AND "question_id" IS NOT DISTINCT FROM %%s AND "category_id" IS NOT DISTINCT FROM %%s AND "age_segment_id" IS NOT DISTINCT FROM %%s AND "gender_segment_id" IS NOT DISTINCT FROM %%s AND "location_id" IS NOT DISTINCT FROM %%s AND "date" IS NOT DISTINCT FROM date_trunc('day', TIMESTAMP %%s)::TIMESTAMP
-                    LIMIT 10000
-                    RETURNING "count"
+                WITH deleted as (
+                  DELETE FROM stats_pollstats WHERE "id" IN (
+                    SELECT "id" FROM stats_pollstats
+                      WHERE "org_id" IS NOT DISTINCT FROM %s AND "question_id" IS NOT DISTINCT FROM %s AND "category_id" IS NOT DISTINCT FROM %s AND "age_segment_id" IS NOT DISTINCT FROM %s AND "gender_segment_id" IS NOT DISTINCT FROM %s AND "location_id" IS NOT DISTINCT FROM %s AND "date" IS NOT DISTINCT FROM date_trunc('day', TIMESTAMP %s)::TIMESTAMP
+                      LIMIT 10000
+                  ) RETURNING "count"
                 )
                 INSERT INTO stats_pollstats("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date", "count", "is_squashed")
-                VALUES (%%s, %%s, %%s, %%s, %%s, %%s, date_trunc('day', TIMESTAMP %%s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
+                VALUES (%s, %s, %s, %s, %s, %s, date_trunc('day', TIMESTAMP %s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
                 """
                 params = (
                     distinct_set.org_id,
