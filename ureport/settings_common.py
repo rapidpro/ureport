@@ -1214,6 +1214,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://onthemove.ureport.in/count/",
     ),
     dict(
+        name="Pacific",
+        host="//pacific.ureport.in",
+        flag="flag_pacific.png",
+        is_static=True,
+        count_link="http://pacific.ureport.in/count/",
+    ),
+    dict(
         name="Pakistan",
         host="//ureport.pk",
         flag="flag_pakistan.png",
