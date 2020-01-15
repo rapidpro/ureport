@@ -1,3 +1,8 @@
+v1.1.126
+----------
+ * Merge pull request #549 from rapidpro/remove-ca
+ * Remove CA flag
+
 v1.1.125
 ----------
  * Merge pull request #547 from rapidpro/pacific-flag
