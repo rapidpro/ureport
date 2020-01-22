@@ -86,17 +86,58 @@ class PollStats(models.Model):
 
         for distinct_set in stats_objs:
             with connection.cursor() as cursor:
+
+                where_sql = ""
+                if distinct_set.org_id is not None:
+                    where_sql += '"org_id" = %s AND ' % distinct_set.org_id
+                else:
+                    where_sql += '"org_id" IS NULL AND'
+
+                if distinct_set.question_id is not None:
+                    where_sql += '"question_id" = %s AND' % distinct_set.question_id
+                else:
+                    where_sql += '"question_id" IS NULL AND'
+
+                if distinct_set.category_id is not None:
+                    where_sql += '"category_id" = %s AND' % distinct_set.category_id
+                else:
+                    where_sql += '"category_id" IS NULL AND'
+
+                if distinct_set.age_segment_id is not None:
+                    where_sql += '"age_segment_id" = %s AND' % distinct_set.age_segment_id
+                else:
+                    where_sql += '"age_segment_id" IS NULL AND'
+
+                if distinct_set.gender_segment_id is not None:
+                    where_sql += '"gender_segment_id" = %s AND' % distinct_set.gender_segment_id
+                else:
+                    where_sql += '"gender_segment_id" IS NULL AND'
+
+                if distinct_set.location_id is not None:
+                    where_sql += '"location_id" = %s AND' % distinct_set.location_id
+                else:
+                    where_sql += '"location_id" IS NULL AND'
+
+                where_sql += """
+                "date" = date_trunc('day', TIMESTAMP '%s')::TIMESTAMP
+                """ % str(
+                    distinct_set.date
+                )
+
                 sql = """
                 WITH deleted as (
                   DELETE FROM stats_pollstats WHERE "id" IN (
                     SELECT "id" FROM stats_pollstats
-                      WHERE "org_id" IS NOT DISTINCT FROM %s AND "question_id" IS NOT DISTINCT FROM %s AND "category_id" IS NOT DISTINCT FROM %s AND "age_segment_id" IS NOT DISTINCT FROM %s AND "gender_segment_id" IS NOT DISTINCT FROM %s AND "location_id" IS NOT DISTINCT FROM %s AND "date" IS NOT DISTINCT FROM date_trunc('day', TIMESTAMP %s)::TIMESTAMP
+                      WHERE %(where_sql)s
                       LIMIT 10000
                   ) RETURNING "count"
                 )
                 INSERT INTO stats_pollstats("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date", "count", "is_squashed")
-                VALUES (%s, %s, %s, %s, %s, %s, date_trunc('day', TIMESTAMP %s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
-                """
+                VALUES (%%s, %%s, %%s, %%s, %%s, %%s, date_trunc('day', TIMESTAMP %%s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
+                """ % {
+                    "where_sql": where_sql
+                }
+
                 params = (
                     distinct_set.org_id,
                     distinct_set.question_id,
@@ -105,7 +146,7 @@ class PollStats(models.Model):
                     distinct_set.gender_segment_id,
                     distinct_set.location_id,
                     str(distinct_set.date),
-                ) * 2
+                )
 
                 cursor.execute(sql, params)
 
