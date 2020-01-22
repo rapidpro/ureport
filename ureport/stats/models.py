@@ -81,7 +81,7 @@ class PollStats(models.Model):
             )
             .distinct(
                 "org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date"
-            )[:5000]
+            )[:50000]
         )
 
         for distinct_set in stats_objs:
