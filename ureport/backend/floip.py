@@ -205,8 +205,9 @@ class FLOIPBackend(BaseBackend):
         fetches = active_query.iterfetches(retry_on_rate_exceed=True)
 
         # all contacts deleted in the same time window
-        deleted_query = client.get_contacts(deleted=True, after=modified_after, before=modified_before)
-        deleted_fetches = deleted_query.iterfetches(retry_on_rate_exceed=True)
+        # deleted_query = client.get_contacts(deleted=True, after=modified_after, before=modified_before)
+        # deleted_fetches = deleted_query.iterfetches(retry_on_rate_exceed=True)
+        deleted_fetches = []  # no way to get deleted contacts
 
         return sync_local_to_changes(
             org, ContactSyncer(backend=self.backend), fetches, deleted_fetches, progress_callback
