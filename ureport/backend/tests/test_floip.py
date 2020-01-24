@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
@@ -565,23 +564,10 @@ class FLOIPBackendTest(UreportTest):
                 ],
             ),
             # second call to get deleted contacts returns a contact we don't have
-            MockClientQuery(
-                [
-                    TembaContact.create(
-                        uuid="C-004",
-                        name=None,
-                        language=None,
-                        urns=[],
-                        groups=[],
-                        fields=None,
-                        stopped=True,
-                        blocked=False,
-                    )
-                ]
-            ),
+            MockClientQuery([]),
         ]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(9):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (3, 0, 0, 0))
@@ -625,23 +611,10 @@ class FLOIPBackendTest(UreportTest):
                 ],
             ),
             # second call to get deleted contacts returns a contact we don't have
-            MockClientQuery(
-                [
-                    TembaContact.create(
-                        uuid="C-004",
-                        name=None,
-                        language=None,
-                        urns=[],
-                        groups=[],
-                        fields=None,
-                        stopped=True,
-                        blocked=False,
-                    )
-                ]
-            ),
+            MockClientQuery([]),
         ]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(9):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 3))
@@ -687,23 +660,10 @@ class FLOIPBackendTest(UreportTest):
                 ],
             ),
             # second call to get deleted contacts returns a contact we don't have
-            MockClientQuery(
-                [
-                    TembaContact.create(
-                        uuid="C-004",
-                        name=None,
-                        language=None,
-                        urns=[],
-                        groups=[],
-                        fields=None,
-                        stopped=True,
-                        blocked=False,
-                    )
-                ]
-            ),
+            MockClientQuery([]),
         ]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(9):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (3, 0, 0, 0))
@@ -750,23 +710,10 @@ class FLOIPBackendTest(UreportTest):
                 ],
             ),
             # second call to get deleted contacts returns a contact we don't have
-            MockClientQuery(
-                [
-                    TembaContact.create(
-                        uuid="C-004",
-                        name=None,
-                        language=None,
-                        urns=[],
-                        groups=[],
-                        fields=None,
-                        stopped=True,
-                        blocked=False,
-                    )
-                ]
-            ),
+            MockClientQuery([]),
         ]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(9):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (3, 0, 0, 0))
@@ -810,23 +757,10 @@ class FLOIPBackendTest(UreportTest):
                 ]
             ),
             # second call to get deleted contacts returns a contact we don't have
-            MockClientQuery(
-                [
-                    TembaContact.create(
-                        uuid="C-004",
-                        name=None,
-                        language=None,
-                        urns=[],
-                        groups=[],
-                        fields=None,
-                        stopped=True,
-                        blocked=False,
-                    )
-                ]
-            ),
+            MockClientQuery([]),
         ]
 
-        with self.assertNumQueries(10):
+        with self.assertNumQueries(9):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
@@ -844,28 +778,15 @@ class FLOIPBackendTest(UreportTest):
             # first call to get active contacts
             MockClientQuery([]),
             # second call to get deleted contacts
-            MockClientQuery(
-                [
-                    TembaContact.create(
-                        uuid="C-002",
-                        name=None,
-                        language=None,
-                        urns=[],
-                        groups=[],
-                        fields=None,
-                        stopped=True,
-                        blocked=False,
-                    )
-                ]
-            ),
+            MockClientQuery([]),
         ]
 
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(0):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 0))
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 0))
 
-        self.assertFalse(Contact.objects.filter(uuid="C-002", is_active=True))
+        self.assertTrue(Contact.objects.filter(uuid="C-002", is_active=True))
 
     @patch("requests.request")
     @patch("redis.client.StrictRedis.lock")
