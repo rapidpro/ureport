@@ -820,6 +820,7 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
+    "polls_stats_squash": {"task": "polls.polls_stats_squash", "schedule": timedelta(minutes=10), "relative": True},
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
