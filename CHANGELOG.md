@@ -1,3 +1,12 @@
+v1.1.127
+----------
+ * Merge pull request #550 from rapidpro/squash-stats-part-1
+ * Update Django
+ * Add is_squashed field to stats model
+ * Update CHANGELOG.md for v1.1.126
+ * Merge pull request #549 from rapidpro/remove-ca
+ * Remove CA flag
+
 v1.1.126
 ----------
  * Merge pull request #549 from rapidpro/remove-ca
