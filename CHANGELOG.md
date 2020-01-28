@@ -1,3 +1,9 @@
+v1.1.128
+----------
+ * Merge pull request #551 from rapidpro/squash-stats-part-2
+ * Add migrations
+ * Add squash method and task
+
 v1.1.127
 ----------
  * Merge pull request #550 from rapidpro/squash-stats-part-1
