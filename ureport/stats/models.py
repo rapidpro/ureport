@@ -1,3 +1,5 @@
+import logging
+import time
 from collections import defaultdict
 from datetime import timedelta
 
@@ -5,7 +7,7 @@ from dash.orgs.models import Org
 
 from django.contrib.postgres.fields import JSONField
 from django.core.cache import cache
-from django.db import models
+from django.db import connection, models
 from django.db.models import Count, ExpressionWrapper, F, IntegerField, Q, Sum
 from django.db.models.functions import ExtractYear
 from django.utils import timezone, translation
@@ -13,6 +15,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollQuestion, PollResponseCategory
+
+logger = logging.getLogger(__name__)
 
 
 class GenderSegment(models.Model):
@@ -63,6 +67,94 @@ class PollStats(models.Model):
     count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
 
     is_squashed = models.BooleanField(null=True, help_text=_("Whether this row was created by squashing"))
+
+    @classmethod
+    def squash(cls):
+        start = time.time()
+        num_sets = 0
+
+        stats_objs = (
+            cls.objects.exclude(is_squashed=True)
+            .exclude(date=None)
+            .order_by(
+                "org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date"
+            )
+            .distinct(
+                "org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date"
+            )[:50000]
+        )
+
+        for distinct_set in stats_objs:
+            with connection.cursor() as cursor:
+
+                where_sql = ""
+                if distinct_set.org_id is not None:
+                    where_sql += '"org_id" = %s AND ' % distinct_set.org_id
+                else:
+                    where_sql += '"org_id" IS NULL AND'
+
+                if distinct_set.question_id is not None:
+                    where_sql += '"question_id" = %s AND' % distinct_set.question_id
+                else:
+                    where_sql += '"question_id" IS NULL AND'
+
+                if distinct_set.category_id is not None:
+                    where_sql += '"category_id" = %s AND' % distinct_set.category_id
+                else:
+                    where_sql += '"category_id" IS NULL AND'
+
+                if distinct_set.age_segment_id is not None:
+                    where_sql += '"age_segment_id" = %s AND' % distinct_set.age_segment_id
+                else:
+                    where_sql += '"age_segment_id" IS NULL AND'
+
+                if distinct_set.gender_segment_id is not None:
+                    where_sql += '"gender_segment_id" = %s AND' % distinct_set.gender_segment_id
+                else:
+                    where_sql += '"gender_segment_id" IS NULL AND'
+
+                if distinct_set.location_id is not None:
+                    where_sql += '"location_id" = %s AND' % distinct_set.location_id
+                else:
+                    where_sql += '"location_id" IS NULL AND'
+
+                where_sql += """
+                "date" = date_trunc('day', TIMESTAMP '%s')::TIMESTAMP
+                """ % str(
+                    distinct_set.date
+                )
+
+                sql = """
+                WITH deleted as (
+                  DELETE FROM stats_pollstats WHERE "id" IN (
+                    SELECT "id" FROM stats_pollstats
+                      WHERE %(where_sql)s
+                      LIMIT 10000
+                  ) RETURNING "count"
+                )
+                INSERT INTO stats_pollstats("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date", "count", "is_squashed")
+                VALUES (%%s, %%s, %%s, %%s, %%s, %%s, date_trunc('day', TIMESTAMP %%s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
+                """ % {
+                    "where_sql": where_sql
+                }
+
+                params = (
+                    distinct_set.org_id,
+                    distinct_set.question_id,
+                    distinct_set.category_id,
+                    distinct_set.age_segment_id,
+                    distinct_set.gender_segment_id,
+                    distinct_set.location_id,
+                    str(distinct_set.date),
+                )
+
+                cursor.execute(sql, params)
+
+            num_sets += 1
+
+        time_taken = time.time() - start
+
+        print("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
 
     @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):
