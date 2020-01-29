@@ -1,3 +1,8 @@
+v1.1.129
+----------
+ * Merge pull request #552 from rapidpro/fix-active-users-charts-data
+ * Active users are stored by month only so use the date for the month
+
 v1.1.128
 ----------
  * Merge pull request #551 from rapidpro/squash-stats-part-2
