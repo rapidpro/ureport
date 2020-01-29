@@ -602,7 +602,8 @@ class ContactActivity(models.Model):
 
         data = dict()
         for key in keys:
-            data[key] = activity_data[key]
+            data_key = key[:-2] + "01"
+            data[key] = activity_data[data_key]
 
         return dict(data)
 
