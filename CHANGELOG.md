@@ -1,3 +1,8 @@
+v1.1.130
+----------
+ * Merge pull request #553 from rapidpro/add-fsm
+ * Add FSM icon
+
 v1.1.129
 ----------
  * Merge pull request #552 from rapidpro/fix-active-users-charts-data
