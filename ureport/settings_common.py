@@ -1044,6 +1044,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://france.ureport.in/count/",
     ),
     dict(
+        name="FSM",
+        host="//fsm.ureport.in",
+        flag="flag_fsm.png",
+        is_static=True,
+        count_link="http://fsm.ureport.in/count/",
+    ),
+    dict(
         name="Gambia",
         host="//gambia.ureport.in/",
         flag="flag_gambia.png",
