@@ -1,3 +1,8 @@
+v1.1.131
+----------
+ * Merge pull request #554 from rapidpro/fix-geojson
+ * Update countries geoJSON
+
 v1.1.130
 ----------
  * Merge pull request #553 from rapidpro/add-fsm
