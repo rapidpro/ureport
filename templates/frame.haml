@@ -302,19 +302,19 @@
             .uk-navbar-right
               %ul.uk-navbar-nav
                 %li
-                  %a(href="{% url 'v2.public.ureporters' %}")
+                  %a(href="{% url 'public.ureporters' %}")
                     - trans "Engagement"
                 %li
-                  %a(href="{% url 'v2.public.about' %}")
+                  %a(href="{% url 'public.about' %}")
                     - trans "About"
 
                 - if org|config:"has_jobs"
                   %li
-                    %a(href="{% url 'v2.public.jobs' %}")
+                    %a(href="{% url 'public.jobs' %}")
                       - trans "Jobs"
                 - for custom_page in additional_menu|slice:":3"
                   %li
-                    %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
+                    %a(href="{% url 'public.custom_page' custom_page.link %}")
                       {{custom_page.title}}
                 %li
                   %a(href="" uk-icon="icon: facebook")
@@ -322,7 +322,7 @@
                   %a(href="" uk-icon="icon: twitter")
 
                 %li
-                  %a.join-button.button(href="{% url 'v2.public.join' %}")
+                  %a.join-button.button(href="{% url 'public.join' %}")
                     - trans "Join Now"
 
     .uk-container
@@ -331,16 +331,16 @@
           .uk-navbar-center
             .uk-navbar-center-left
               .uk-navbar-item
-                %a.main-link(href="{% url 'v2.public.opinions' %}")
+                %a.main-link(href="{% url 'public.opinions' %}")
                   - trans "Opinions"
 
-            %a.uk-navbar-item.uk-logo(href="{% url 'v2.public.index' %}" style="width: 350px;") 
+            %a.uk-navbar-item.uk-logo(href="{% url 'public.index' %}" style="width: 350px;") 
               {% thumbnail org.get_logo "1400x260" format="PNG" as im %}
               %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
               {% endthumbnail %}
             .uk-navbar-center-right.uk-margin-xlarge-left
               .uk-navbar-item
-                %a.main-link(href="{% url 'v2.public.stories' %}")
+                %a.main-link(href="{% url 'public.stories' %}")
                   - trans "Stories"
 
     .uk-container
@@ -362,7 +362,7 @@
                       .uk-width-1-1.main-story-title.is-clipped
                         {{ story.title }}
                       .uk-width-1-1.main-story-button
-                        %a.uk-button(href="{% url 'v2.public.story_read' story.pk %}")
+                        %a.uk-button(href="{% url 'public.story_read' story.pk %}")
                           - trans "READ MORE"
                           //&#8594;
             .(uk-grid)
@@ -374,7 +374,7 @@
                     // This Section is a call to action to wrap up the content and get involved
 
                   .call-to-action-button
-                    %a.uk-button.uk-button-primary.uk-float-right(href="{% url 'v2.public.ureporters' %}")
+                    %a.uk-button.uk-button-primary.uk-float-right(href="{% url 'public.ureporters' %}")
                       -trans "EXPLORE ENGAGEMENT"
 
       %footer.footer.uk-padding-remove
@@ -383,35 +383,35 @@
             .uk-width-1-1(uk-grid)
               .uk-width-2-3.uk-width-expand
                 .footer-logo
-                  %a(href="{% url 'v2.public.index' %}")
+                  %a(href="{% url 'public.index' %}")
                     {% thumbnail org.get_logo "350x65" format="PNG" as im %}
                     %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
                     {% endthumbnail %}
               .uk-width-1-3.uk-child-width-auto(uk-grid)
                 .uk-width-1-2.uk-float-right.uk-text-right.footer-nav-big-link
-                  %a(href="{% url 'v2.public.opinions' %}")
+                  %a(href="{% url 'public.opinions' %}")
                     - trans "Opinions"
                 .uk-width-1-2.uk-float-right.uk-text-right.footer-nav-big-link
-                  %a(href="{% url 'v2.public.stories' %}")
+                  %a(href="{% url 'public.stories' %}")
                     - trans "Stories"
 
             .uk-width-1-1(uk-grid)
               .uk-width-2-3.uk-child-width-auto.uk-width-expand(uk-grid)
                 .footer-nav-small-link
-                  %a(href="{% url 'v2.public.about' %}")
+                  %a(href="{% url 'public.about' %}")
                     - trans "About"
                 .footer-nav-small-link
-                  %a(href="{% url 'v2.public.ureporters' %}")
+                  %a(href="{% url 'public.ureporters' %}")
                     - trans "Engagement"
 
                 - if org|config:"has_jobs"
                   .footer-nav-small-link
-                    %a(href="{% url 'v2.public.jobs' %}")
+                    %a(href="{% url 'public.jobs' %}")
                       - trans "Jobs"
 
                 - for custom_page in additional_menu|slice:":3"
                   .footer-nav-small-link
-                    %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
+                    %a(href="{% url 'public.custom_page' custom_page.link %}")
                       {{custom_page.title}}
 
               .uk-width-1-6.uk-float-right.uk-child-width-auto.uk-margin-remove(uk-grid)
