@@ -1,4 +1,4 @@
-- extends "frame_v2.html"
+- extends "frame.html"
 
 - load smartmin i18n thumbnail ureport compress
 
@@ -213,13 +213,13 @@
       -block footer
         // footer navbar
         .justify-around.pt-12.mb-3.px-home.border-t.border-gray-600(class="md:flex")
-          %a.flex-1.text-center.mb-2.hidden(href="{% url 'v2.public.index' %}" class="md:block")
+          %a.flex-1.text-center.mb-2.hidden(href="{% url 'public.index' %}" class="md:block")
             .(style="width:360px")
               {% thumbnail org.get_logo "x180" format="PNG" as im %}
               %img.block.logo(src="{{ im.url }}" alt="{{ org.name }}")
               {% endthumbnail %}
 
-          %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'v2.public.index' %}" class="md:hidden")
+          %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'public.index' %}" class="md:hidden")
             {% thumbnail org.get_logo "x40" format="PNG" as im %}
             %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
             {% endthumbnail %}
@@ -227,21 +227,21 @@
           .flex-1.flex(class="md:justify-end")
             .font-bold.text-2xl.flex-center-y(class="md:ml-6")
               %div
-                %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.opinions' %}" class="hover:text-gray-750")
+                %a.pb-2.border-b-2.border-black(href="{% url 'public.opinions' %}" class="hover:text-gray-750")
                   -trans "Opinions"
 
             .font-bold.text-2xl.ml-6.flex-center-y
               %div
-                %a.pb-2.border-b-2.border-black(href="{% url 'v2.public.stories' %}" class="hover:text-gray-750")
+                %a.pb-2.border-b-2.border-black(href="{% url 'public.stories' %}" class="hover:text-gray-750")
                   -trans "Stories"
 
         // footer menu
         %ul.mt-5.mb-12.px-home.text-sm.font-bold(class="md:flex")
           .li.flex-initial.py-menu(class="rtl:ml-4 ltr:mr-4")
-            %a.flex-initial.py-menu(href="{% url 'v2.public.about' %}" class="hover:text-gray-750")
+            %a.flex-initial.py-menu(href="{% url 'public.about' %}" class="hover:text-gray-750")
               -trans "About"
 
-            %a.flex-initial.py-menu(href="{% url 'v2.public.ureporters' %}" class="md:ml-4 hover:text-gray-750")
+            %a.flex-initial.py-menu(href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750")
               -trans "Engagement"
 
           .li.flex-grow.flex(class="md:justify-end")

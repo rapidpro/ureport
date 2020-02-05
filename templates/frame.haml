@@ -1,18 +1,19 @@
 <!doctype html>
-- load compress dashblocks dashorgs thumbnail ureport smartmin i18n
+- load compress dashblocks thumbnail ureport smartmin i18n
+- load_qbs request.org 'additional_menu'
 
 %head
-  %meta{ charset:"utf-8"}
+  %meta(charset="utf-8")
   %title
     - block title
       - trans "U-Report"
     - block subtitle
       &nbsp;
-  %meta{ name:"description", content:""}
-  %meta{ name:"author", content:""}
+  %meta(name="description" content="")
+  %meta(name="author" content="")
 
   - if has_better_domain
-    %meta{name:"robots", content:"noindex"}
+    %meta(name="robots" content="noindex")
   
   <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
   <!--[if lt IE 9]>
@@ -20,150 +21,50 @@
     <![endif]-->
   
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  %meta{ name:"viewport", content:"width=device-width, initial-scale=1.0"}
+  %meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
   <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-  %link{ rel:"icon", type:"image/x-icon", href:"{{ STATIC_URL }}img/favicon.png"}
+  %link(rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.png")
 
+  %link(href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Condensed|Roboto:500&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet")
+  %link(rel="stylesheet" href="{{ STATIC_URL }}css/leaflet.css")
+  %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/jqcloud.css")
+  %link(href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet")
+
+  
   :css
-    @font-face {
-      font-family: UreportHeadlineFont;
-      {% if org|config:"headline_font" %}
-        src: url('{{ org|config:"headline_font" }}');
-      {% else %}
-        src: url('{{ STATIC_URL }}fonts/Montserrat-Bold.ttf');
-      {% endif %}
+    <!-- color overloads for countries -->
+    .primary-border {
+       border-color: {{ org|config:"primary_color"}} !important;
     }
 
-    @font-face {
-      font-family: UreportTextFont;
-      {% if org|config:"text_font" %}
-        src: url('{{ org|config:"text_font" }}');
-      {% else %}
-        src: url('{{ STATIC_URL }}fonts/RobotoSlab-Regular.ttf');
-      {% endif %}
+    .primary-background {
+       background: {{ org|config:"primary_color"}} !important;
     }
 
-    @font-face {
-      font-family: UreportSmallTextFont;
-      {% if org|config:"text_small_font" %}
-        src: url('{{ org|config:"text_small_font" }}');
-      {% else %}
-        src: url('{{ STATIC_URL }}fonts/DroidSerif.ttf');
-      {% endif %}
+    .highlight-background {
+       background: #FFD100;
     }
+
+    .highlight-color {
+       color: #FFD100;
+    }
+
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 
   -block styles
     - if is_rtl_org
       - compress css
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap-rtl.min.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap-theme.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/smartmin_styles.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}fonts/icons/style.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/lightbox.css"}
-        %link{ type:"text/less", rel:"stylesheet", href:"{{ STATIC_URL }}less/ureport2.less"}
-        %link{ type:"text/less", rel:"stylesheet", href:"{{ STATIC_URL }}less/ureport-rtl.less"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/jqcloud.css" }
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/social-icons.css"}
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit-rtl.css")
 
     -else
       -compress css
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/bootstrap-theme.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/smartmin_styles.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}fonts/icons/style.css"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/lightbox.css"}
-        %link{ type:"text/less", rel:"stylesheet", href:"{{ STATIC_URL }}less/ureport2.less"}
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/jqcloud.css" }
-        %link{ type:"text/css", rel:"stylesheet", href:"{{ STATIC_URL }}css/social-icons.css"}
-
-  - if org
-    :css
-      .primary-color,
-      .dropdown-menu > li > a.primary-color,
-      a.primary-color {
-        color: {{ org|config:"primary_color"}};
-        border-color: {{ org|config:"primary_color"}};
-      }
-
-      .secondary-color,
-      .dropdown-menu > li > a.secondary-color,
-      a.secondary-color {
-        color: {{ org|config:"secondary_color"}};
-      }
-
-      .public-nav .public-nav-ul li.level1.active ul li a:hover,
-      .public-nav .public-nav-ul li.level1.open ul li a:hover,
-      .level1 > .dropdown-menu > li > a:hover,
-      .level1 > .dropdown-menu > li > a:focus {
-        background-color: {{ org|config:"primary_color"}};
-        background-image: none;
-      }
-
-      .primary-bg-color {
-        background-color: {{ org|config:"primary_color"}};
-      }
-
-      .secondary-bg-color {
-        background-color: {{ org|config:"secondary_color"}};
-      }
-
-      .primary-border-color {
-        border-color: {{ org|config:"primary_color"}} !important;
-      }
-
-      .secondary-border-color {
-        border-color: {{ org|config:"secondary_color"}} !important;
-      }
-
-      .pattern-bg {
-        {% if pattern_bg %}
-          background-image: url({{MEDIA_URL}}{{pattern_bg.image}});
-        {% else %}
-          {% if org|config:"bg_color" %}
-            background: {{ org|config:"bg_color" }};
-          {% else %}
-            background: #bc9980;
-          {% endif %}
-        {% endif %}
-      }
-
-      .banner {
-        {% if banner_bg %}
-          background-image: url({{MEDIA_URL}}{{banner_bg.image}});
-        {% else %}
-          {% if org|config:"join_bg_color" %}
-            background-color: {{ org|config:"join_bg_color" }};
-          {% else %}
-            background-image: url({{STATIC_URL}}img/default_banner_bg.png);
-          {% endif %}
-        {% endif %}
-
-        {% if org|config:"join_fg_color" %}
-          color: {{ org|config:"join_fg_color"}};
-        {% endif %}
-
-      }
-
-      {% for i in 6|get_range %}
-        .poll-category-{{ forloop.counter }} .category-bar {
-          background-color: {{ org|org_color:i }};
-        }
-
-        .poll-category-{{ forloop.counter }} .category-percent {
-          color: {{ org|org_color:i }};
-        }
-
-      {% endfor %}
-
-      .hide-global-org {
-        {% if org|config:"is_global" %}
-        display:none;
-        {% endif %}
-      }
-
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/all.min.css")
+        %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/uikit.css")
+        %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
 
   - block extra-less
   - block extra-style
@@ -181,70 +82,94 @@
     <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=#{ org|config:"facebook_pixel_id" }&amp;ev=PageView&amp;noscript=1"/></noscript>
 
-%body.pattern-bg
-  #fb-root
-  -if org|config:"facebook_page_id" and org|config:"facebook_app_id"
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '{{ org|config:"facebook_app_id" }}',
-          autoLogAppEvents: true,
-          xfbml      : true,
-          version    : 'v3.2'
-        });
-      };
+%body
+  -block body-content
+    #fb-root
+    -if org|config:"facebook_page_id" and org|config:"facebook_app_id"
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '{{ org|config:"facebook_app_id" }}',
+            autoLogAppEvents: true,
+            xfbml      : true,
+            version    : 'v3.2'
+          });
+        };
+      </script>
+
+      <div class="fb-customerchat"
+        page_id="{{ org|config:"facebook_page_id" }}"
+        logged_in_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}"
+        logged_out_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}">
+      </div>
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&autoLogAppEvents=1&version=v3.2{% endif %}";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
     </script>
-
-    <div class="fb-customerchat"
-      page_id="{{ org|config:"facebook_page_id" }}"
-      logged_in_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}"
-      logged_out_greeting="{{ org|config:"facebook_welcome_text"|default:"Hi! Welcome to U-Report, chat to register and start speaking out today!" }}">
-    </div>
-
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/{{ org_lang }}/sdk/xfbml.customerchat.js{% if not org|config:'facebook_page_id' or not org|config:'facebook_app_id' %}#xfbml=1&autoLogAppEvents=1&version=v3.2{% endif %}";
-    fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-
-  - block navbar-admin
+    %section.uk-section.uk-padding-remove#ureport-top-black(style="background:#000;height:14px")
+  
+    .uk-width-auto.uk-margin-bottom.countries-overlay(uk-drop="mode: click; toggle:#select-country; offset: 100; pos:bottom-justify; boundary: #ureport-top-black; boundary-align:true; animation: uk-animation-slide-top-medium; duration: 500" style="display: none;")
+      .uk-card.uk-card-body.uk-card-default
+        .(uk-grid)
+          .uk-width-1-1.uk-display-block
+            %button.uk-float-right.uk-drop-close(type="button" uk-close)
+        .(uk-grid)
+          .main-logo.uk-width-1-4
+            %img.logo(src="{{ STATIC_URL }}img/place_countries_logo.png" alt="{{ org.name }}")
+          .uk-width-3-4
+            .uk-flex(uk-grid)
+              - if is_iorg
+                - for site in linked_orgs
+                  .
+                    %a.footer-orgs-name{ href:"{{ site.host }}" }
+                      {{ site.name }}
+              -else
+                - for site in linked_orgs
+                  .
+                    %a.flag{ href:"{{ site.host }}" }
+                      - if site.is_static
+                         %img{ src:"{{ STATIC_URL }}img/flags/{{ site.flag }}" }
+                       - else
+                         %img{ src:"{{ site.flag }}" }
     - if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser
-      %header#ureport-admin-navbar.navbar.navbar-static-top{ role:"banner"}
-        .container
-          #ureport-admin-brand.navbar-brand
-            - trans "Admin"
-
-          %nav#ureport-admin-top-navbar-collapse.ureport-admin-top-navbar.collapse.navbar-collapse{ role:"navigation"}
-            %ul.nav.navbar-nav
+      %section#ureport-admin-navbar-top-section.uk-section.uk-padding-remove-vertical
+        %nav.uk-navbar-container.ureport-admin-navbar(uk-navbar)
+          .uk-navbar-center
+            %ul.uk-navbar-nav
+              %li
+                %a(href="{% url 'orgs.org_home' %}")
+                  {{ org.name }} - 
+                  - trans "Admin"
               - if request.user.is_superuser
-                %li.dropdown
-                  %a.dropdown-toggle{href:"#", data-toggle:"dropdown"}
-                    - trans "Configuration"
-                    %b.caret
-                  %ul.dropdown-menu
-                    %li
-                      %a{href:"{% url 'orgs.org_list' %}"}
-                        - trans "Orgs"
-
-                    %li
-                      %a{ href:"/users/user/"}
-                        - trans "Users"
-
-                    %li
-                      %a{ href:"{% url 'dashblocks.dashblocktype_list' %}"}
-                        - trans "Content Types"
-
-                    - if request.user.is_superuser or org_perms.assets.image_list
-                      %li
-                        %a{ href:"{% url 'assets.image_list' %}"}
-                          - trans "Images"
-
                 %li
-                  %a{ href:"{% url 'dashblocks.dashblock_list' %}"}
-                    - trans "Content"
+                  %a(href="#")
+                    - trans "Configuration"
+                  .uk-navbar-dropdown
+                    %ul.uk-nav.uk-navbar-dropdown-nav
+                      %li
+                        %a{href:"{% url 'orgs.org_list' %}"}
+                          - trans "Orgs"
+
+                      %li
+                        %a{ href:"/users/user/"}
+                          - trans "Users"
+
+                      %li
+                        %a{ href:"{% url 'dashblocks.dashblocktype_list' %}"}
+                          - trans "Content Types"
+
+                      - if request.user.is_superuser or org_perms.assets.image_list
+                        %li
+                          %a{ href:"{% url 'assets.image_list' %}"}
+                            - trans "Images"
+                  %li
+                    %a{ href:"{% url 'dashblocks.dashblock_list' %}"}
+                      - trans "Content"
 
               -if org|config:"is_global"
                 -if request.user.is_superuser or perms.countries.countryalias_list
@@ -252,245 +177,277 @@
                     %a{ href:"{% url 'countries.countryalias_list' %}"}
                       - trans "Country Aliases"
 
-              - if request.user.is_superuser or org_perms.orgs.org_home
-                %li
-                  %a{ href:"{% url 'orgs.org_home' %}"}
-                    {{ org.name }}
-
               - if request.user.is_superuser or org_perms.polls.poll_list
                 %li
                   %a{ href:"{% url 'polls.poll_list' %}"}
-                    - trans "Polls"
+                    - trans "Opinions"
 
               - if request.user.is_superuser or org_perms.categories.category_list
                 %li
-                  %a.dropdown-toggle{href:"#", data-toggle:"dropdown"}
+                  %a(href="#")
                     - trans "Categories"
-                    %b.caret
-                  %ul.dropdown-menu
-                    - if perms.categories.category_list or org_perms.categories.category_list
-                      %li
-                        %a{ href:"{% url 'categories.category_list' %}"}
-                          - trans "Categories"
+                  .uk-navbar-dropdown
+                    %ul.uk-nav.uk-navbar-dropdown-nav
+                      - if perms.categories.category_list or org_perms.categories.category_list
+                        %li
+                          %a{ href:"{% url 'categories.category_list' %}"}
+                            - trans "Categories"
 
-                    - if perms.categories.categoryimage_list or org_perms.categories.categoryimage_list
-                      %li
-                        %a{ href:"{% url 'categories.categoryimage_list' %}"}
-                          - trans "Category Images"
-
+                      - if perms.categories.categoryimage_list or org_perms.categories.categoryimage_list
+                        %li
+                          %a{ href:"{% url 'categories.categoryimage_list' %}"}
+                            - trans "Category Images"
 
               - if request.user.is_superuser or org_perms.dashblocks.dashblock_list
-                %li.dropdown
-                  %a.dropdown-toggle{href:"#", data-toggle:"dropdown"}
+                %li
+                  %a(href="#")
                     - trans "Content"
-                    %b.caret
-                  %ul.dropdown-menu
+                  .uk-navbar-dropdown
+                    %ul.uk-nav.uk-navbar-dropdown-nav
+                      - if request.user.is_superuser or org_perms.news.newsitem_list
+                        %li
+                          %a{ href:"{% url 'news.newsitem_list' %}"}
+                            - trans "News Items"
 
-                    - if request.user.is_superuser or org_perms.news.newsitem_list
-                      %li
-                        %a{ href:"{% url 'news.newsitem_list' %}"}
-                          - trans "News Items"
+                        %li.uk-nav-divider
 
-                      %li.divider
+                      - if request.user.is_superuser or org_perms.stories.story_list
+                        %li
+                          %a{ href:"{% url 'stories.story_list' %}"}
+                            - trans "Stories"
 
-                    - if request.user.is_superuser or org_perms.stories.story_list
-                      %li
-                        %a{ href:"{% url 'stories.story_list' %}"}
-                          - trans "Stories"
+                        %li.uk-nav-divider
 
-                      %li.divider
+                      - if request.user.is_superuser or org_perms.jobs.jobsource_list
+                        %li
+                          %a{ href:"{% url 'jobs.jobsource_list' %}"}
+                            - trans "Job Sources"
 
-                    - if request.user.is_superuser or org_perms.jobs.jobsource_list
-                      %li
-                        %a{ href:"{% url 'jobs.jobsource_list' %}"}
-                          - trans "Job Sources"
+                        - if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
+                          %li
+                            %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=jobs"}
+                              - trans "Jobs Content"
+
+                        %li.uk-nav-divider
 
                       -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
                         %li
-                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=jobs"}
-                            - trans "Jobs Content"
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=about"}
+                            - trans "About Content"
 
-                      %li.divider
+                        %li
+                          %a{ href:"{% url 'news.video_list' %}"}
+                            - trans "Videos"
 
-                    -if perms.dashblocks.dashblock_list or org_perms.dashblocks.dashblock_list
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=about"}
-                          - trans "About Content"
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=contact_us"}
+                            - trans "Contact Us Content"
 
-                      %li
-                        %a{ href:"{% url 'news.video_list' %}"}
-                          - trans "Videos"
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=missions"}
+                            - trans "Missions Content"
 
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=contact_us"}
-                          - trans "Contact Us Content"
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=terms_conditions"}
+                            - trans "Terms & Conditions"
 
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=missions"}
-                          - trans "Missions Content"
+                        %li.uk-nav-divider
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=ureporters"}
+                            - trans "U-Reporters Content"
 
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=terms_conditions"}
-                          - trans "Terms & Conditions"
+                        %li.uk-nav-divider
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=join_engage"}
+                            - trans "Join &amp; Engage Content"
 
-                      %li.divider
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=ureporters"}
-                          - trans "U-Reporters Content"
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=join_steps"}
+                            - trans "Join Steps Content"
 
-                      %li.divider
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=join_engage"}
-                          - trans "Join &amp; Engage Content"
+                        %li.uk-nav-divider
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=additional_menu"}
+                            - trans "Additional Menu"
 
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=join_steps"}
-                          - trans "Join Steps Content"
 
-                      %li.divider
-                      %li
-                        %a{ href:"{% url 'dashblocks.dashblock_list' %}?slug=additional_menu"}
-                          - trans "Additional Menu"
+          .uk-navbar-right
 
-            %ul.nav.navbar-nav.navbar-right
-              - block login
-                - if request.user and request.user.is_authenticated
-                  %li
-                    %a.pull-left{ href:"{% url 'users.user_profile' request.user.pk %}"}
-                      {{ request.user.username }}
-                    %a.pull-right{ href:"{% url 'users.user_logout' %}?go=/"}
-                      - trans "Logout"
-                - else
-                  %li
-                    %a{ href:"{% url 'users.user_login' %}"}
-                      - trans "Login"
-
-  - block navbar
-    - if org
-      %header#ureport-public-navbar.ureport-header-navbar.ureport-public-navbar.navbar.navbar-static-top{ role:"banner"}
-        .container
-          .navbar-header
-            %a#brand.navbar-brand{ href:"/"}
-              - block brand
-                {% thumbnail org.logo "230x86" format="PNG" as im %}
-                %img.logo{ src:"{{ im.url }}", alt:"{{ org.name }}"}
-                {% endthumbnail %}
-
-          - block navigation
-            %nav#ureport-public-navbar-collapse.collapse.navbar-collapse.navbar-right.public-nav{role:"navigation"}
-              %ul.nav.navbar-nav.public-nav-ul
-                - load_qbs request.org 'additional_menu'
-                - for d_block in additional_menu|slice:":1"
-                  %li.level1{ class:"{% active request 'added'%}"}
-                    %a.primary-color{href:"{% url 'public.added' %}"}
-                      {{ d_block.title }}
-
-                %li.level1{ class:"{% active request 'about'%}"}
-                  %a.primary-color{href:"{% url 'public.about' %}"}
-                    - trans "About"
-
-                %li.level1{ class:"{% active request 'polls' %}"}
-                  %a.primary-color{href:"{% url 'public.polls' %}"}
-                    - trans "Polls"
-
-                %li.level1{ class:"{% active request 'stories|story' %}"}
-                  %a.primary-color{ href:"{% url 'public.stories' %}"}
-                    - trans "Stories"
-
-                %li.level1{ class:"{% active request 'ureporters' %}"}
-                  %a.primary-color{ href:"{% url 'public.ureporters' %}"}
-                    - trans "U-Reporters"
-
-                - if org|config:"has_jobs"
-                  %li.level1{ class:"{% active request 'jobs' %}"}
-                    %a.primary-color{ href:"{% url 'public.jobs' %}"}
-                      - trans "Jobs"
-
-                %li.level1{ class:"{% active request 'join' %}"}
-                  %a.primary-color{ href:"{% url 'public.join' %}"}
-                    - trans "Join & Engage"
-
-                -#%li.level1.dropdown
-                -#  %a.primary-color.dropdown-toggle{type:"button", data-toggle:"dropdown"}
-                -#    Language
-                -#    %span.caret
-                -#
-                -#  %ul.dropdown-menu{ role:"menu"}
-                -#    %li
-                -#      %a.primary-bg-color.primary-color{ href:"#"}
-                -#        English
-                -#    %li.divider.primary-bg-color
-                -#    %li
-                -#      %a.primary-color{ href:"#"}
-                -#        Francais
-                -#    %li.divider.primary-bg-color
-                -#    %li
-                -#      %a.primary-color{ href:"#"}
-                -#        Francais
-
-  #hero.jumbotron
-    - block hero
-
-  - block join-banner
-    -if org|config:"join_text"
-      .banner
-        {{ org|config:"join_text" }}
-
-  .container
-    - block content-div
-      .content
-        - block messages
-          - if messages
-            - for message in messages
-              .alert{ class:"alert-={ message.tags }"}
-                %a.close{ data-dismiss:"alert"}
-                  x
-                {{ message }}
-
-        - block pre-content
-
-        - block content
-
-  - block footer
-    .footer-container{class:'global-footer'}
-      .container
-        %footer
-          .row
-            .col-sm-9
-              - show_org_flags
-
-            .{class:'col-sm-3'}
-              .follow-us
-                -if org|config:"facebook_page_url" or org|config:"twitter_handle" or org|config:"youtube_channel"
-                  .follow-us-text
-                    - trans "FOLLOW US ON"
-                  - if org|config:"facebook_page_url"
-                    %a{href:'{{ org|config:"facebook_page_url" }}'}
-                      %img.footer-social{ src:"{{ STATIC_URL }}img/facebook_footer_icon.png" }
-
-                  - if org|config:"instagram_username"
-                    %a{href:'https://instagram.com/{{ org|config:"instagram_username"}}'}
-                      %img.footer-social{ src:"{{ STATIC_URL }}img/instagram_footer_icon.png" }
-
-                  - if org|config:"twitter_handle"
-                    %a{href:'https://twitter.com/{{ org|config:"twitter_handle" }}'}
-                      %img.footer-social{ src:"{{ STATIC_URL }}img/twitter_footer_icon.png" }
-
-                  - if org|config:"youtube_channel_url"
-                    %a{href:'{{ org|config:"youtube_channel_url" }}'}
-                      %img.footer-social{ src:"{{ STATIC_URL }}img/youtube_footer_icon.png" }
-
-              .footer-global-ureport-logo
-                %img.footer-logo{ src:"{{ STATIC_URL }}img/footer.png" }
-
-          - if not request.user.is_authenticated and not is_iorg and show_login
-            .row
-              .col-sm-12
-                .login-link
-                  %a.primary-color{href:"{% org_host_link %}/users/login/"}
+          %ul.uk-navbar-nav
+            - block login
+              - if request.user and request.user.is_authenticated
+                %li
+                  %a.pull-left{ href:"{% url 'users.user_profile' request.user.pk %}"}
+                    {{ request.user.username }}
+                %li
+                  %a.pull-right{ href:"{% url 'users.user_logout' %}?go=/"}
+                    - trans "Logout"
+              - else
+                %li
+                  %a{ href:"{% url 'users.user_login' %}"}
                     - trans "Login"
 
-    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+    .uk-container
+      #public-navbar.uk-section
+        -block navbar
+          %nav.uk-navbar.uk-navbar-container.uk-navbar-transparent
+            .uk-navbar-left
+              #select-country.uk-navbar-item
+                .
+                  %span(uk-icon="icon: world")
+                  %span(uk-icon="icon: chevron-up")
+                  %span
+                    - trans "SELECT YOUR COUNTRY"
+
+            .uk-navbar-right
+              %ul.uk-navbar-nav
+                %li
+                  %a(href="{% url 'v2.public.ureporters' %}")
+                    - trans "Engagement"
+                %li
+                  %a(href="{% url 'v2.public.about' %}")
+                    - trans "About"
+
+                - if org|config:"has_jobs"
+                  %li
+                    %a(href="{% url 'v2.public.jobs' %}")
+                      - trans "Jobs"
+                - for custom_page in additional_menu|slice:":3"
+                  %li
+                    %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
+                      {{custom_page.title}}
+                %li
+                  %a(href="" uk-icon="icon: facebook")
+                %li
+                  %a(href="" uk-icon="icon: twitter")
+
+                %li
+                  %a.join-button.button(href="{% url 'v2.public.join' %}")
+                    - trans "Join Now"
+
+    .uk-container
+      #public-header.uk-section
+        %nav.uk-navbar.uk-navbar-container.uk-navbar-transparent
+          .uk-navbar-center
+            .uk-navbar-center-left
+              .uk-navbar-item
+                %a.main-link(href="{% url 'v2.public.opinions' %}")
+                  - trans "Opinions"
+
+            %a.uk-navbar-item.uk-logo(href="{% url 'v2.public.index' %}" style="width: 350px;") 
+              {% thumbnail org.get_logo "1400x260" format="PNG" as im %}
+              %img.logo(src="{{ im.url }}" alt="{{ org.name }}" width="100%")
+              {% endthumbnail %}
+            .uk-navbar-center-right.uk-margin-xlarge-left
+              .uk-navbar-item
+                %a.main-link(href="{% url 'v2.public.stories' %}")
+                  - trans "Stories"
+
+    .uk-container
+      #public-content.uk-section
+        - block content
+
+    %section#ureport-public-footer.uk-section.uk-padding-remove
+        -block pre-footer
+          #pre-footer
+            .(uk-grid)
+              - for story in main_stories|slice:"4"
+                - if not forloop.first
+                  .(class="uk-width-1-3@s")
+                    .(uk-grid)
+                      .uk-width-1-1
+                        {% thumbnail story.get_image "450x240" crop="top" as im %}
+                        <img width="100%" src="{{im.url}}" />
+                        {% endthumbnail %}
+                      .uk-width-1-1.main-story-title.is-clipped
+                        {{ story.title }}
+                      .uk-width-1-1.main-story-button
+                        %a.uk-button(href="{% url 'v2.public.story_read' story.pk %}")
+                          - trans "READ MORE"
+                          //&#8594;
+            .(uk-grid)
+              .(class="uk-visible@s uk-width-1-3@s")
+                <img width="50%" src="{{ STATIC_URL }}img/u-icon-large.png" />
+              .(class="uk-width-2-3@s")
+                .pre-footer-call-to-action
+                  .call-to-action-text
+                    // This Section is a call to action to wrap up the content and get involved
+
+                  .call-to-action-button
+                    %a.uk-button.uk-button-primary.uk-float-right(href="{% url 'v2.public.ureporters' %}")
+                      -trans "EXPLORE ENGAGEMENT"
+
+      %footer.footer.uk-padding-remove
+        -block footer
+          #ureport-footer-desktop(uk-grid)
+            .uk-width-1-1(uk-grid)
+              .uk-width-2-3.uk-width-expand
+                .footer-logo
+                  %a(href="{% url 'v2.public.index' %}")
+                    {% thumbnail org.get_logo "350x65" format="PNG" as im %}
+                    %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+                    {% endthumbnail %}
+              .uk-width-1-3.uk-child-width-auto(uk-grid)
+                .uk-width-1-2.uk-float-right.uk-text-right.footer-nav-big-link
+                  %a(href="{% url 'v2.public.opinions' %}")
+                    - trans "Opinions"
+                .uk-width-1-2.uk-float-right.uk-text-right.footer-nav-big-link
+                  %a(href="{% url 'v2.public.stories' %}")
+                    - trans "Stories"
+
+            .uk-width-1-1(uk-grid)
+              .uk-width-2-3.uk-child-width-auto.uk-width-expand(uk-grid)
+                .footer-nav-small-link
+                  %a(href="{% url 'v2.public.about' %}")
+                    - trans "About"
+                .footer-nav-small-link
+                  %a(href="{% url 'v2.public.ureporters' %}")
+                    - trans "Engagement"
+
+                - if org|config:"has_jobs"
+                  .footer-nav-small-link
+                    %a(href="{% url 'v2.public.jobs' %}")
+                      - trans "Jobs"
+
+                - for custom_page in additional_menu|slice:":3"
+                  .footer-nav-small-link
+                    %a(href="{% url 'v2.public.custom_page' custom_page.link %}")
+                      {{custom_page.title}}
+
+              .uk-width-1-6.uk-float-right.uk-child-width-auto.uk-margin-remove(uk-grid)
+                .uk-width-1-3
+                .uk-width-1-3.uk-text-right.uk-float-right
+                  .footer-nav-small-link.social-media-link
+                    %a(href='{{ org|config:"facebook_page_url" }}' uk-icon="icon: facebook;ratio: 3")
+                .uk-width-1-3.uk-text-right.uk-float-right
+                  .footer-nav-small-link.social-media-link
+                    %a(href='https://twitter.com/{{ org|config:"twitter_handle" }}' uk-icon="icon: twitter;ratio: 3")
+    
+    %section.uk-section.uk-padding-remove(style="background:#ff0;height:14px")
+    %section.uk-section.uk-padding-remove(style="height:0px")
+      .modal.export-modal(uk-modal)
+        .modal-background
+        .modal-content
+         .uk-modal-dialog.uk-modal-body
+          .export-modal-header(uk-grid)
+            .column
+              Export and Share
+            .column
+              .button.close.is-pulled-right.export-modal-close
+                x
+          .export-modal-progress(uk-grid)
+            .column
+              %progress.progress.is-small(max="100")
+                15%
+          .is-multiline.export-modal-content(uk-grid)
+            .column.is-three-quarters
+              Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!
+            .column.is-one-quarter
+              %button.uk-button.is-black.is-pulled-right
+                %a.screenshot-link(href="")
+                  Download
+            .column
+              //%img.screenshot-rendered(src="https://bulma.io/images/placeholders/200x960.png" alt="")
 
   <!-- JavaScript at the bottom for fast page loading, conditional based on whether we are serving locally -->
   <script>
@@ -501,6 +458,7 @@
     }
 
   </script>
+
   {% if org and org|config:"google_tracking_id" %}
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -510,46 +468,63 @@
 
     ga('create', '{{ org|config:"google_tracking_id" }}', 'auto');
     ga('send', 'pageview');
+  </script>
+  {% endif %}
+  <script src="{{ STATIC_URL }}js/uikit.js"></script>
+  <script src="{{ STATIC_URL }}js/uikit-icons.js"></script>
+  <script src="{{ STATIC_URL }}/js/leaflet.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/gradientfactory.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
+  <script>
+  $(document).ready(function() {
+    // Check for click events on the navbar burger icon
+    $(".navbar-burger").click(function() {
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      $(".navbar-burger").toggleClass("is-active");
+      $("#mobileNavbar").toggleClass("is-active");
+
+    });
+  });
+
+    $(document).ready(function() {
+      $(".tabs ul li").on('click', function() {
+        var tab = $(this).data('tab');
+        $(this).parent().parent('.tabs').children().children('li').removeClass('is-active');
+
+        $(this).addClass('is-active');
+         $(this).parent().parent('.tabs').siblings(".tabs-content").children(".tab-content").removeClass('is-active');
+        $('div[data-content="' + tab + '"]').addClass('is-active');
+
+      });
+
+      $(".export-modal-close").on('click', function() {
+        $(".export-modal").removeClass('is-active');
+      });
+
+      $(".header-countries-nav").on('click', function() {
+        $(".countries-overlay").toggleClass('closed');
+      });
+
+      $('.countries-overlay .close').on('click', function() {
+        $(".countries-overlay").addClass('closed');
+      });
+    });
+
 
   </script>
 
-  {% endif %}
   <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.pjax.js"></script>
-
+  <script type="text/javascript" src="{{ STATIC_URL }}js/Chart.bundle.min.js"></script>
+  
   {% compress js %}
   <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/ureport.coffee" />
   {% endcompress %}
-
-  <script type="text/javascript" src="{{ STATIC_URL }}js/scripts.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/lightbox.min.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/gradientfactory.js"></script>
-
+  
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-  -#-#
-  -#-#  To stick the menu to the top of window
-  -#-#
-  -#<script>
-  -#
-  -#  adminBarHeight = $('#ureport-admin-navbar').outerHeight();
-  -#
-  -#  if (adminBarHeight == null) {
-  -#    adminBarHeight = 0;
-  -#  }
-  -#
-  -#  adminBarHeight += 25;
-  -#
-  -#  $('#ureport-public-navbar').affix({ offset: adminBarHeight });
-  -#
-  -#  $('#ureport-public-navbar').on('affix.bs.affix', function(){
-  -#    $('#hero').css('padding-top','98px');
-  -#  });
-  -#
-  -#  $('#ureport-public-navbar').on('affix-top.bs.affix', function(){
-  -#    $('#hero').css('padding-top','0px');
-  -#  });
-  -#</script>
 
   {# media associated with any form we are displaying #}
   {% if form %}
@@ -558,4 +533,3 @@
   
   {% block extra-script %}{% endblock %}
   {% block script %}{% endblock %}
-

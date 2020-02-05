@@ -92,7 +92,6 @@ MIDDLEWARE = (
     'smartmin.middleware.AjaxRedirect',
     'django.middleware.locale.LocaleMiddleware',
     'dash.orgs.middleware.SetOrgMiddleware',
-    "ureport.utils.middleware.CheckVersionMiddleware",
 )
 
 LOGGING = {

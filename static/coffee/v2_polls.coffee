@@ -98,7 +98,7 @@ $(".tab-button-time-filter").click((e) ->
 # show the engagement chart with the passed in params
 showEngagementChart = (metricSlug, segmentType, timeFilter) ->
   dataSlug = metricSlug + "-" + segmentType + "-" + timeFilter
-  url = "/v2/engagement_data/?results_params=" + encodeURIComponent(JSON.stringify({"metric": metricSlug, "segment": segmentType, "filter": timeFilter}))
+  url = "/engagement_data/?results_params=" + encodeURIComponent(JSON.stringify({"metric": metricSlug, "segment": segmentType, "filter": timeFilter}))
   states = {}
   if segmentType == "location"
     $("#location-pill-" + dataSlug).find(".selected").each(->
@@ -213,7 +213,7 @@ showEngagementChart = (metricSlug, segmentType, timeFilter) ->
 
 # shows the chart with the passed in question and segment
 showChart = (questionID, segmentName) ->
-  url = "/v2/pollquestion/" + questionID + "/results/"
+  url = "/pollquestion/" + questionID + "/results/"
   query = ""
   states = {}
 

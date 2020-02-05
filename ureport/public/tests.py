@@ -8,16 +8,10 @@ import mock
 import pytz
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import Org, OrgBackend
 from dash.stories.models import Story, StoryImage
-from six.moves.urllib.parse import urlencode
 
-from django.conf import settings
 from django.urls import reverse
-from django.utils.http import urlquote
 
-from ureport.countries.models import CountryAlias
-from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import PollQuestion
 from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
@@ -73,57 +67,6 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["count"], self.uganda.get_reporters_count())
         self.assertEqual(response.context["view"].template_name, "public/count")
 
-    def test_chooser(self):
-        chooser_url = reverse("public.home")
-
-        settings_sites_count = len(list(getattr(settings, "COUNTRY_FLAGS_SITES", [])))
-
-        # remove all orgs
-        OrgBackend.objects.all().delete()
-        Category.objects.all().delete()
-        Org.objects.all().delete()
-
-        response = self.client.get(chooser_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["orgs"]), settings_sites_count)
-
-        # if no empty subdomain org give a tempate response
-        response = self.client.get(chooser_url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue("orgs" in response.context)
-        self.assertContains(response, "welcome-flags")
-
-        # if we have empty subdomain org we should show its index
-        self.global_org = Org.objects.create(
-            subdomain="", name="global", created_by=self.admin, modified_by=self.admin
-        )
-        response = self.client.get(chooser_url, SERVER_NAME="blabla.ureport.io")
-        self.assertEqual(response.status_code, 301)
-        response = self.client.get(chooser_url, follow=True, SERVER_NAME="blabla.ureport.io")
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse("orgs" in response.context)
-        self.assertContains(response, "welcome-flags")
-
-        self.global_org.set_config("common.is_global", True)
-
-        # if the empty org in global the template tag should show the flags
-        response = self.client.get(chooser_url, SERVER_NAME="blabla.ureport.io")
-        self.assertEqual(response.status_code, 301)
-        response = self.client.get(chooser_url, follow=True, SERVER_NAME="blabla.ureport.io")
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse("orgs" in response.context)
-        self.assertContains(response, "welcome-flags")
-
-        self.assertEqual(response.request["SERVER_NAME"], "ureport.io")
-        self.assertEqual(response.request["wsgi.url_scheme"], "http")
-
-        with self.settings(SESSION_COOKIE_SECURE=True):
-            response = self.client.get(chooser_url, follow=True, SERVER_NAME="blabla.ureport.io")
-            self.assertEqual(response.status_code, 200)
-
-            self.assertEqual(response.request["SERVER_NAME"], "ureport.io")
-            self.assertEqual(response.request["wsgi.url_scheme"], "http")
-
     def test_has_better_domain_processors(self):
         home_url = reverse("public.index")
 
@@ -131,7 +74,7 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/")
         self.assertNotContains(response, "<meta name='robots' content='noindex'")
-        self.assertContains(response, "nigeria.ureport.io/users/login/")
+        # self.assertContains(response, "nigeria.ureport.io/users/login/")
 
         self.nigeria.domain = "ureport.ng"
         self.nigeria.save()
@@ -140,7 +83,7 @@ class PublicTest(UreportTest):
         response = self.client.get(home_url, HTTP_HOST="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/")
         self.assertContains(response, "<meta name='robots' content='noindex'")
-        self.assertContains(response, "nigeria.ureport.io/users/login/")
+        # self.assertContains(response, "nigeria.ureport.io/users/login/")
 
         # using custom domain, login is hidden  and indexing should be allow
         response = self.client.get(home_url, HTTP_HOST="ureport.ng")
@@ -399,14 +342,40 @@ class PublicTest(UreportTest):
         self.assertTrue(video2 not in response.context["videos"])
         self.assertTrue(video3 in response.context["videos"])
 
-        self.nigeria.set_config("common.custom_html", "<div>INCLUDE MY CUSTOM HTML</div>")
-        response = self.client.get(home_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertContains(response, "<div>INCLUDE MY CUSTOM HTML</div>")
+        # self.nigeria.set_config("common.custom_html", "<div>INCLUDE MY CUSTOM HTML</div>")
+        # response = self.client.get(home_url, SERVER_NAME="nigeria.ureport.io")
+        # self.assertContains(response, "<div>INCLUDE MY CUSTOM HTML</div>")
 
     def test_additional_menu(self):
-        additional_menu_url = reverse("public.added")
+        additional_menu_url = reverse("public.custom_page", args=["faq"])
+        custom_page_dashblock_type = DashBlockType.objects.get_or_create(
+            name="Custom pages",
+            slug="additional_menu",
+            description="U-Report custom pages",
+            has_title=True,
+            has_image=True,
+            has_rich_text=False,
+            has_summary=False,
+            has_link=True,
+            has_gallery=False,
+            has_color=False,
+            has_video=False,
+            has_tags=False,
+            created_by=self.admin,
+            modified_by=self.admin,
+        )[0]
+
+        DashBlock.objects.create(
+            title="Custom page",
+            content="Content...",
+            dashblock_type=custom_page_dashblock_type,
+            org=self.uganda,
+            created_by=self.admin,
+            modified_by=self.admin,
+        )
+
         response = self.client.get(additional_menu_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/added/")
+        self.assertEqual(response.request["PATH_INFO"], "/page/faq/")
         self.assertEqual(response.context["org"], self.nigeria)
 
     def test_about(self):
@@ -512,13 +481,13 @@ class PublicTest(UreportTest):
         response = self.client.get(join_engage_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/join/")
         self.assertEqual(response.context["org"], self.uganda)
-        self.assertContains(response, "All U-Report services (all msg on 3000) are free.")
+        # self.assertContains(response, "All U-Report services (all msg on 3000) are free.")
 
     def test_ureporters(self):
-        ureporters_url = reverse("public.ureporters")
+        ureporters_url = reverse("public.engagement")
 
         response = self.client.get(ureporters_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/ureporters/")
+        self.assertEqual(response.request["PATH_INFO"], "/engagement/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["view"].template_name, "public/ureporters.html")
 
@@ -536,15 +505,15 @@ class PublicTest(UreportTest):
         self.assertTrue("show_occupation_stats" in response.context)
 
         response = self.client.get(ureporters_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/ureporters/")
+        self.assertEqual(response.request["PATH_INFO"], "/engagement/")
         self.assertEqual(response.context["org"], self.uganda)
 
     @mock.patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_polls_list(self):
-        polls_url = reverse("public.polls")
+        polls_url = reverse("public.opinions")
 
         response = self.client.get(polls_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/polls/")
+        self.assertEqual(response.request["PATH_INFO"], "/opinions/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["tab"], "list")
         self.assertEqual(response.context["view"].template_name, "public/polls.html")
@@ -585,7 +554,7 @@ class PublicTest(UreportTest):
         )
 
         response = self.client.get(polls_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/polls/")
+        self.assertEqual(response.request["PATH_INFO"], "/opinions/")
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(response.context["tab"], "list")
         self.assertEqual(response.context["view"].template_name, "public/polls.html")
@@ -648,7 +617,7 @@ class PublicTest(UreportTest):
         self.assertTrue(story3 not in response.context["related_stories"])
 
         response = self.client.get(polls_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/polls/")
+        self.assertEqual(response.request["PATH_INFO"], "/opinions/")
         self.assertEqual(response.context["org"], self.uganda)
         self.assertEqual(response.context["latest_poll"], poll3)
 
@@ -804,166 +773,6 @@ class PublicTest(UreportTest):
 
         response = self.client.get(uganda_poll_read_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 404)
-
-    def test_boundary_view(self):
-        country_boundary_url = reverse("public.boundaries")
-        state_boundary_url = reverse("public.boundaries", args=["R23456"])
-
-        self.country = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R12345",
-            name="Uganda",
-            level=0,
-            parent=None,
-            geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
-        )
-
-        self.kampala = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R23456",
-            name="Kampala",
-            level=1,
-            parent=self.country,
-            geometry='{"type":"MultiPolygon", "coordinates":[[3, 4]]}',
-        )
-
-        self.lugogo = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R34567",
-            name="Lugogo",
-            level=2,
-            parent=self.kampala,
-            geometry='{"type":"MultiPolygon", "coordinates":[[5, 6]]}',
-        )
-
-        self.mbarara = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R987",
-            name="Mbarara",
-            level=1,
-            parent=self.country,
-            geometry='{"type":"MultiPolygon", "coordinates":[[9, 9]]}',
-        )
-
-        self.kasese = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R999",
-            name="Kasese",
-            level=1,
-            parent=self.country,
-            geometry='{"type":"MultiPolygon", "coordinates":[[10, 10]]}',
-        )
-
-        self.falcons = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R9988",
-            name="Falcons",
-            level=2,
-            parent=self.mbarara,
-            geometry='{"type":"MultiPolygon", "coordinates":[[8, 8]]}',
-        )
-
-        self.kabare = Boundary.objects.create(
-            org=self.uganda, osm_id="R9989", name="Kabare", level=1, parent=self.country, geometry="{}"
-        )
-
-        response = self.client.get(country_boundary_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.status_code, 200)
-
-        output = dict(
-            type="FeatureCollection",
-            features=[
-                dict(
-                    type="Feature",
-                    properties=dict(id="R999", level=1, name="Kasese"),
-                    geometry=dict(type="MultiPolygon", coordinates=[[10, 10]]),
-                ),
-                dict(
-                    type="Feature",
-                    properties=dict(id="R987", level=1, name="Mbarara"),
-                    geometry=dict(type="MultiPolygon", coordinates=[[9, 9]]),
-                ),
-                dict(
-                    type="Feature",
-                    properties=dict(id="R23456", level=1, name="Kampala"),
-                    geometry=dict(type="MultiPolygon", coordinates=[[3, 4]]),
-                ),
-            ],
-        )
-        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
-
-        response = self.client.get(state_boundary_url, SERVER_NAME="uganda.ureport.io")
-
-        output = dict(
-            type="FeatureCollection",
-            features=[
-                dict(
-                    type="Feature",
-                    properties=dict(id="R34567", level=2, name="Lugogo"),
-                    geometry=dict(type="MultiPolygon", coordinates=[[5, 6]]),
-                )
-            ],
-        )
-
-        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
-
-        self.uganda.set_config("common.is_global", True)
-
-        response = self.client.get(country_boundary_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.status_code, 200)
-
-        output = dict(
-            type="FeatureCollection",
-            features=[
-                dict(
-                    type="Feature",
-                    properties=dict(id="R12345", level=0, name="Uganda"),
-                    geometry=dict(type="MultiPolygon", coordinates=[[1, 2]]),
-                )
-            ],
-        )
-
-        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
-
-        self.uganda.set_config("common.limit_states", "Kampala")
-        self.uganda.set_config("common.is_global", False)
-
-        response = self.client.get(country_boundary_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.status_code, 200)
-
-        output = dict(
-            type="FeatureCollection",
-            features=[
-                dict(
-                    type="Feature",
-                    properties=dict(id="R23456", level=1, name="Kampala"),
-                    geometry=dict(type="MultiPolygon", coordinates=[[3, 4]]),
-                )
-            ],
-        )
-        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
-
-        self.uganda.set_config("common.limit_states", "Kampala, Kasese")
-
-        response = self.client.get(country_boundary_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.status_code, 200)
-
-        output = dict(
-            type="FeatureCollection",
-            features=[
-                dict(
-                    type="Feature",
-                    properties=dict(id="R999", level=1, name="Kasese"),
-                    geometry=dict(type="MultiPolygon", coordinates=[[10, 10]]),
-                ),
-                dict(
-                    type="Feature",
-                    properties=dict(id="R23456", level=1, name="Kampala"),
-                    geometry=dict(type="MultiPolygon", coordinates=[[3, 4]]),
-                ),
-            ],
-        )
-        self.assertEqual(json.dumps(json.loads(response.content), sort_keys=True), json.dumps(output, sort_keys=True))
 
     def test_stories_list(self):
         stories_url = reverse("public.stories")
@@ -1155,77 +964,6 @@ class PublicTest(UreportTest):
         response = self.client.get(uganda_story_read_url, SERVER_NAME="uganda.ureport.io")
         self.assertFalse(response.context["story_featured_images"])
 
-    @mock.patch("django.core.cache.cache.get")
-    def test_poll_question_results(self, mock_cache_get):
-        mock_cache_get.return_value = None
-
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
-
-        poll1_question = PollQuestion.objects.create(
-            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
-
-        poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin)
-
-        poll2_question = PollQuestion.objects.create(
-            poll=poll2, title="question poll 2", ruleset_uuid="uuid-102", created_by=self.admin, modified_by=self.admin
-        )
-
-        uganda_results_url = reverse("public.pollquestion_results", args=[poll1_question.pk])
-        nigeria_results_url = reverse("public.pollquestion_results", args=[poll2_question.pk])
-
-        with mock.patch("ureport.polls.models.PollQuestion.get_results") as mock_results:
-            mock_results.return_value = [
-                dict(
-                    open_ended=False,
-                    set=3462,
-                    unset=3694,
-                    categories=[dict(count=2210, label="Yes"), dict(count=1252, label="No")],
-                    label="All",
-                )
-            ]
-
-            response = self.client.get(nigeria_results_url, SERVER_NAME="uganda.ureport.io")
-            self.assertEqual(response.status_code, 404)
-
-            response = self.client.get(uganda_results_url, SERVER_NAME="uganda.ureport.io")
-            self.assertEqual(response.status_code, 200)
-            mock_results.assert_called_with(segment=None)
-
-            response = self.client.get(
-                uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location="State")))),
-                SERVER_NAME="uganda.ureport.io",
-            )
-            self.assertEqual(response.status_code, 200)
-            mock_results.assert_called_with(segment=dict(location="State"))
-
-            self.uganda.set_config("common.is_global", True)
-            response = self.client.get(
-                uganda_results_url + "?" + urlencode(dict(segment=json.dumps(dict(location="State")))),
-                SERVER_NAME="uganda.ureport.io",
-            )
-            mock_results.assert_called_with(segment=dict(location="State"))
-
-    def test_reporters_results(self):
-        reporters_results = reverse("public.contact_field_results")
-
-        response = self.client.get(reporters_results, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.status_code, 200)
-
-        self.assertContains(response, "[]")
-
-        with mock.patch("dash.orgs.models.Org.get_ureporters_locations_stats") as mock_ureporters_locations_stats:
-            mock_ureporters_locations_stats.return_value = "LOCATIONS_STATS"
-
-            response = self.client.get(
-                reporters_results + "?" + urlencode(dict(segment=json.dumps(dict(location="State")))),
-                SERVER_NAME="uganda.ureport.io",
-            )
-
-            self.assertEqual(response.status_code, 200)
-            self.assertContains(response, json.dumps("LOCATIONS_STATS"))
-            mock_ureporters_locations_stats.assert_called_with(dict(location="State"))
-
     def test_news(self):
         news_url = reverse("public.news")
 
@@ -1332,10 +1070,20 @@ class JobsTest(UreportJobsTest):
         jobs_url = reverse("public.jobs")
 
         response = self.client.get(jobs_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(response.status_code, 404)
+
+        self.nigeria.set_config("common.has_jobs", True)
+
+        response = self.client.get(jobs_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context["job_sources"])
         self.assertEqual(2, len(response.context["job_sources"]))
         self.assertEqual(set(response.context["job_sources"]), set([fb_source_nigeria, tw_source_nigeria]))
+
+        response = self.client.get(jobs_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 404)
+
+        self.uganda.set_config("common.has_jobs", True)
 
         response = self.client.get(jobs_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
@@ -1368,160 +1116,3 @@ class JobsTest(UreportJobsTest):
         response = self.client.get(jobs_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertFalse(response.context["job_sources"])
-
-
-class CountriesTest(UreportTest):
-    def setUp(self):
-        super(CountriesTest, self).setUp()
-
-    def test_countries(self):
-        countries_url = reverse("public.countries")
-
-        response = self.client.post(countries_url, dict())
-        self.assertEqual(response.status_code, 405)
-
-        response = self.client.post(countries_url, dict())
-        self.assertEqual(response.status_code, 405)
-
-        response = self.client.get(countries_url)
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("text" in response_json)
-        self.assertEqual(response_json["exists"], "invalid")
-        self.assertEqual(response_json["text"], "")
-        self.assertFalse("country_code" in response_json)
-
-        response = self.client.get(countries_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertEqual(response_json["exists"], "invalid")
-        self.assertEqual(response_json["text"], "")
-        self.assertFalse("country_code" in response_json)
-
-        response = self.client.get(countries_url + "?text=OK")
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertEqual(response_json["exists"], "invalid")
-        self.assertEqual(response_json["text"], "OK")
-        self.assertFalse("country_code" in response_json)
-
-        response = self.client.get(countries_url + "?text=OK", SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertEqual(response_json["exists"], "invalid")
-        self.assertEqual(response_json["text"], "OK")
-        self.assertFalse("country_code" in response_json)
-
-        response = self.client.get(countries_url + "?text=RW")
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "RW")
-
-        response = self.client.get(countries_url + "?text=RW", SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "RW")
-
-        response = self.client.get(countries_url + "?text=USA")
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "US")
-
-        response = self.client.get(countries_url + "?text=rw")
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "RW")
-
-        response = self.client.get(countries_url + "?text=usa")
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "US")
-
-        CountryAlias.objects.create(name="Etats unies", country="US", created_by=self.admin, modified_by=self.admin)
-
-        response = self.client.get(countries_url + "?text=Etats+Unies")
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "US")
-
-        # country text has quotes
-        response = self.client.get(countries_url + '?text="Etats+Unies"')
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "US")
-
-        # country text has quotes an spaces
-        response = self.client.get(countries_url + '?text="    Etats+Unies  "')
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "US")
-
-        # unicode aliases
-        CountryAlias.objects.create(name="এ্যান্ডোরা", country="AD", created_by=self.admin, modified_by=self.admin)
-
-        response = self.client.get(countries_url + "?text=%s" % urlquote("এ্যান্ডোরা"))
-
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "AD")
-
-        response = self.client.get(countries_url + '?text="   %s   "' % urlquote("এ্যান্ডোরা"))
-
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "AD")
-
-        # unicode aliases
-        CountryAlias.objects.create(name="Madžarska", country="MD", created_by=self.admin, modified_by=self.admin)
-
-        response = self.client.get(countries_url + "?text=%s" % urlquote("Madžarska"))
-
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "MD")
-
-        response = self.client.get(countries_url + '?text="   %s   "' % urlquote("Madžarska"))
-
-        self.assertEqual(response.status_code, 200)
-        response_json = json.loads(response.content)
-        self.assertTrue("exists" in response_json)
-        self.assertTrue("country_code" in response_json)
-        self.assertEqual(response_json["exists"], "valid")
-        self.assertEqual(response_json["country_code"], "MD")
