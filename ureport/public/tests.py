@@ -740,8 +740,8 @@ class PublicTest(UreportTest):
 
         poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin)
 
-        uganda_poll_read_url = reverse("public.poll_read", args=[poll1.pk])
-        nigeria_poll_read_url = reverse("public.poll_read", args=[poll2.pk])
+        uganda_poll_read_url = reverse("public.opinion_read", args=[poll1.pk])
+        nigeria_poll_read_url = reverse("public.opinion_read", args=[poll2.pk])
 
         response = self.client.get(uganda_poll_read_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 404)
