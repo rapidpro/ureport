@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 15:03+0000\n"
+"POT-Creation-Date: 2020-02-05 13:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -371,6 +371,8 @@ msgstr "Tasks"
 msgid "The title for this story"
 msgstr "The title for this story"
 
+#, fuzzy
+#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
 msgstr "Whether this story is featured"
 
@@ -636,8 +638,10 @@ msgstr "Password"
 msgid "An Email has been sent to your account with further instructions."
 msgstr ""
 
+#, fuzzy
+#| msgid "Password"
 msgid "Password Recovery Request"
-msgstr ""
+msgstr "Password"
 
 #, fuzzy
 #| msgid "Your new password."
@@ -724,6 +728,15 @@ msgstr "U-Report အေၾကာင္း"
 msgid "Engagement"
 msgstr ""
 
+msgid "Category Images"
+msgstr ""
+
+msgid "+ New "
+msgstr ""
+
+msgid "+ New Page"
+msgstr ""
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -737,12 +750,6 @@ msgid "Content"
 msgstr ""
 
 msgid "Country Aliases"
-msgstr ""
-
-msgid "Polls"
-msgstr ""
-
-msgid "Category Images"
 msgstr ""
 
 msgid "Job Sources"
@@ -778,15 +785,6 @@ msgstr "ပူးေပါင္းရန္ အဆင့္မ်ား"
 msgid "Additional Menu"
 msgstr ""
 
-msgid "U-Reporters"
-msgstr "အခ်က္အလက္ေပးပို႕သူ လူငယ္မ်ား"
-
-msgid "Join & Engage"
-msgstr "U-Report တြင္ပါ၀င္ရန္"
-
-msgid "FOLLOW US ON"
-msgstr ""
-
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
 
@@ -817,48 +815,17 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-msgid ""
-"\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
+msgid "LATEST NOTIFICATIONS"
 msgstr ""
 
-msgid "ABOUT U-REPORT"
-msgstr "U-Report အေၾကာင္းသိေကာင္းစရာ"
-
-msgid "Scroll to Learn more"
-msgstr "ပိုမိုသိရွိရန္ ေအာက္ကိုဆက္ဖတ္ၾကည့္ပါ"
-
-msgid "The mission of U-Report"
-msgstr "U-Report၏ လုပ္ငန္းတာ၀န္"
-
-msgid "Why Join U-Report?"
-msgstr "U-Reportအစီအစဥ္တြင္ ဘာေၾကာင့္ပါ၀င္သင့္သလဲဆိုေတာ့"
-
-msgid "Speak out on what's happening in your community"
-msgstr "သင္ေနထိုင္ရာ ရပ္၇ြာတြင္ ဘာေတြျဖစ္ေနသလဲဆိုတာကို လြတ္လပ္စြာ ေျပာၾကားျခင္း"
-
-msgid "Use U-Report results and information to update and increase citizen's awareness"
+msgid "Backends"
 msgstr ""
 
-msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "ႏိုင္ငံႏွင့္အ၀ွမ္းက်င္းပေသာ လွဳပ္ရွားမႈမ်ားတြင္ ပါ၀င္ျခင္းအားျဖင့္ သင့္တိုင္းျပည္ တိုးတက္ေအာင္ ကူညီေပးႏိုင္ျခင္း"
-
-#, python-format
-msgid "Share what's happening around %(country)s with other U-Reporters"
+msgid "+ New Poll"
 msgstr ""
 
-msgid "CLICK HERE TO JOIN"
-msgstr "ပူးေပါင္းပါ၀င္ရန္ သည္ေနရာတြင္ႏွိပ္ပါ"
-
-msgid "U-REPORT VIDEOS"
-msgstr "လူငယ့္အသံႏွင့္ပတ္သတ္ေသာ ဗီဒီယိုမ်ား"
-
-msgid "No videos yet."
-msgstr "ဗီဒီယိုမ်ားမရွိေသးပါ"
-
-msgid "WATCH IT ON YOUTUBE"
-msgstr "YOUTUBE တြင္ျကည့္ပါ"
+msgid "Refresh Results"
+msgstr ""
 
 msgid "MORE POLLS"
 msgstr "ေနာက္ထပ္ေမးခြန္းမ်ား"
@@ -881,239 +848,90 @@ msgstr "သိမ္းထားေသာ သတင္းေဆာင္းပ�
 msgid "LIST"
 msgstr "စာရင္း"
 
-msgid "Follow"
+msgid "LATEST OPINION"
 msgstr ""
 
-msgid ""
-"\n"
-"                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
-"                "
-msgstr ""
-
-msgid "CURRENT POLL"
-msgstr "လက္ရွိေမးခြန္း"
-
-msgid "View Full Results"
-msgstr ""
-
-msgid "All U-Report members"
-msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္ၾကသူအားလံုး"
-
-msgid "RESPONSE RATE"
-msgstr "တုံ႕ံျပန္မႈႏွဳန္း"
-
-msgid "Responded out of"
-msgstr "Responded out of"
-
-msgid "RESPONDER'S RATE BY LOCATION"
-msgstr "ျပန္လည္ေျဖၾကားသူတို႕၏ တည္ေနရာ"
-
-msgid "Most responded"
-msgstr "ျပန္လည္ေျဖၾကားမႈအမ်ားဆံုး"
-
-#, python-format
-msgid ""
-"\n"
-"                                  %(responded)s of %(total)s\n"
-"                                  "
-msgstr ""
-
-msgid "TRENDING WORDS"
-msgstr "အသံုးမ်ားေသာစကားလံုးမ်ား"
-
-msgid "FEATURED RESPONSES"
-msgstr "ေဖာ္ျပထားေသာေျဖၾကားမႈမ်ား"
-
-msgid "View full results"
+msgid "VIEW FULL RESULTS"
 msgstr ""
 
 msgid "U-REPORTERS IN"
 msgstr ""
 
-msgid "TOTAL # OF U-REPORTERS"
-msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္သူစုစုေပါင္း"
-
-msgid "4 MOST ACTIVE REGIONS"
-msgstr "တက္ၾကြမႈအရွိဆံုး နယ္ေျမေလးခု"
-
-msgid "RATE BY GENDER"
-msgstr "က်ား မအလိုက္ ႏွဳန္း"
-
-msgid "RATE BY AGE"
-msgstr "အသက္အရြယ္အလိုက္ႏွဳန္း"
-
-msgid "WHAT U-REPORTERS ARE SAYING"
-msgstr "ယခုအစီအစဥ္တြင္ပါ၀င္သူမ်ား ေျပာဆိုေဆြးေႏြးေနသည္မွာ"
-
-msgid "FEATURED VIDEO"
-msgstr "ေဖာ္ျပထားေသာဗီဒီယို"
-
-msgid "Watch more videos"
+msgid "PARTNERING WITH"
 msgstr ""
 
-msgid "FEATURED REGION"
-msgstr "ေဖာ္ျပထားေသာနယ္ေျမ"
-
-msgid "Check more stories in U-Report app"
+msgid "U-REPORTERS"
 msgstr ""
 
-msgid "View more stories on Facebook"
+msgid "IN"
 msgstr ""
 
-msgid "View more on Instagram"
+msgid "COUNTRIES WORLDWIDE"
 msgstr ""
 
-msgid "Read more tweets on Twitter"
+msgid "AGES"
 msgstr ""
 
-msgid "NEWS FEED"
-msgstr "သတင္းမ်ား"
-
-msgid "STORY"
-msgstr "သတင္းေဆာင္းပါး"
-
-msgid "Read full story"
+msgid "Join U-Report, Your voice matters."
 msgstr ""
 
-msgid "Response Rate"
-msgstr "ျပန္လည္ေျဖၾကားႏွဳန္း"
-
-msgid "Read this story"
+msgid "JOIN NOW"
 msgstr ""
-
-msgid "JOBS"
-msgstr "အလုပ္အကိုင္မ်ား"
-
-msgid "Scroll to see job details"
-msgstr ""
-
-msgid "Tweet to"
-msgstr ""
-
-msgid "Read more"
-msgstr "ဆက္လက္ဖတ္ရွဳရန္"
-
-msgid "Visit"
-msgstr ""
-
-msgid "JOIN U-REPORT"
-msgstr "U-Report အစီအစဥ္တြင္ပါဝင္ရန္"
-
-msgid "HOW TO JOIN"
-msgstr "ဘယ္လိုပါ၀င္ရမလဲ"
-
-#, python-format
-msgid ""
-"\n"
-"                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-"\n"
-"              "
-msgstr ""
-
-msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr "လူမႈကြန္ယက္မ်ားရွိ လူငယ့္အသံအစီအစဥ္"
-
-msgid "Compose new Tweet"
-msgstr ""
-
-msgid "CURRENT POLL IN"
-msgstr "လက္ရွိ ေမးခြန္း "
-
-#, python-format
-msgid ""
-"\n"
-"                  %(questions)s question polled on this topic\n"
-"                "
-msgid_plural ""
-"\n"
-"                  %(questions)s questions polled on this topic\n"
-"                "
-msgstr[0] ""
-
-msgid "response rate"
-msgstr ""
-
-msgid "responded out of"
-msgstr ""
-
-msgid "polled"
-msgstr ""
-
-msgid "POLL RESULTS"
-msgstr "မိမိသေဘာအေလ်ာက္ ျပန္လည္ေျဖၾကားမႈရလဒ္မ်ား"
-
-#, python-format
-msgid ""
-"\n"
-"                    %(responded)s responded out of %(polled)s polled\n"
-"                  "
-msgstr ""
-
-msgid "KEYWORDS"
-msgstr "အဓိကစကားလံုး"
-
-msgid "STATISTICS"
-msgstr "စာရင္းဇယား"
-
-msgid "LOCATIONS"
-msgstr "တည္ေနရာမ်ား"
-
-msgid "GENDER"
-msgstr "က်ား မ"
-
-msgid "AGE"
-msgstr "အသက္"
-
-msgid "FEATURED ANSWERS"
-msgstr "ေဖာ္ျပထားေသာအေျဖမ်ား"
-
-msgid "No featured answers."
-msgstr "ေဖာ္ျပထားေသာအေျဖမ်ား မရွိပါ"
-
-msgid "U-Reporter in"
-msgstr ""
-
-msgid "RELATED STORIES"
-msgstr "ပတ္သတ္ေနေသာ သတင္းေဆာင္းပါးမ်ား"
-
-msgid "No related stories."
-msgstr "ဆက္စပ္ေသာ သတင္းမ်ား မရွိပါ။"
-
-msgid "FEATURED IMAGES"
-msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပုံမ်ား"
-
-msgid "No featured images yet."
-msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပုံမ်ား မရွိပါ"
 
 msgid "FEATURED STORY"
 msgstr "ေဖာ္ျပထားေသာ သတင္းေဆာင္းပါး"
 
-msgid "BY"
-msgstr "အားျဖင့္"
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
 
-msgid "LATEST STORIES"
-msgstr "ေနာက္ဆံုးရ သတင္းေဆာင္းပါးမ်ား"
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr ""
 
-msgid "FILTERED BY"
-msgstr "စစ္ထုတ္ေပးထားသည္"
+msgid "LEARN MORE"
+msgstr ""
 
-msgid "Scroll to read more"
-msgstr "ထပ္မံဖတ္ရွဳရန္ "
+msgid "Visit"
+msgstr ""
 
-msgid "STORY CONTINUES"
-msgstr "သတင္းေနာက္ဆက္တြဲ"
+msgid "How would you like to join?"
+msgstr ""
 
-msgid "AUDIO"
-msgstr "အသံ"
+msgid "Text"
+msgstr ""
 
-msgid "RELATED POLLS"
-msgstr "ဆက္စပ္ေနေသာ ေမးခြန္းမ်ား"
+msgid "SEARCH"
+msgstr ""
 
-msgid "No related polls."
-msgstr "ဆက္စပ္ေနေသာ ေမးခြန္းမ်ား မရွိပါ"
+msgid "No results found"
+msgstr ""
 
-msgid "No featured images."
-msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပုံမ်ား မရွိပါ"
+msgid "RESPONSES"
+msgstr ""
+
+msgid "RESPONSE RATE"
+msgstr "တုံ႕ံျပန္မႈႏွဳန္း"
+
+msgid "TOTAL RESPONSES"
+msgstr ""
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr ""
+
+msgid "ALL"
+msgstr ""
+
+msgid "AGE"
+msgstr "အသက္"
+
+msgid "GENDER"
+msgstr "က်ား မ"
+
+msgid "LOCATION"
+msgstr ""
+
+msgid "Written by:"
+msgstr ""
 
 msgid "Even"
 msgstr "အညီအမွ်"
@@ -1160,26 +978,20 @@ msgstr ""
 msgid "the"
 msgstr ""
 
-msgid "WHO WE ARE"
+msgid "OVERALL STATISTICS"
 msgstr ""
 
-msgid "U-REPORTER STATISTICS"
-msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္သူမ်ား၏ စာရင္းဇယား"
+msgid "THIS YEAR"
+msgstr ""
 
-msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr "ပါ၀င္သည့္ လူငယ္မ်ားသည္ မည္သည့္ေနရာမ်ားကျဖစ္သလဲ"
+msgid "AVG RESPONSE RATE"
+msgstr ""
 
-msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr "လြန္ခဲ့ေသာေျခာက္လေက်ာ္က စာရင္းသြင္းမႈႏွဳန္း"
+msgid "U-REPORTERS BY REGION"
+msgstr ""
 
-msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-msgstr "အလုပ္အကိုင္ အမ်ားဆံုးေဖာ္ျပထားသည့္"
-
-msgid "Registered"
-msgstr "စာရင္းသြင္းထားၿပီး"
-
-msgid "Week of"
-msgstr "အပတ္၏"
+msgid "FILTER RESULTS"
+msgstr ""
 
 msgid "Export and Share"
 msgstr ""
@@ -1272,106 +1084,6 @@ msgid "Nov"
 msgstr ""
 
 msgid "Dec"
-msgstr ""
-
-msgid "LATEST OPINION"
-msgstr ""
-
-msgid "VIEW FULL RESULTS"
-msgstr ""
-
-msgid "PARTNERING WITH"
-msgstr ""
-
-msgid "U-REPORTERS"
-msgstr ""
-
-msgid "IN"
-msgstr ""
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr ""
-
-msgid "AGES"
-msgstr ""
-
-msgid "LEARN MORE"
-msgstr ""
-
-msgid "+ New "
-msgstr ""
-
-msgid "+ New Page"
-msgstr ""
-
-msgid "LATEST NOTIFICATIONS"
-msgstr ""
-
-msgid "Backends"
-msgstr ""
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Refresh Results"
-msgstr ""
-
-msgid "Join U-Report, Your voice matters."
-msgstr ""
-
-msgid "JOIN NOW"
-msgstr ""
-
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr ""
-
-msgid "How would you like to join?"
-msgstr ""
-
-msgid "Text"
-msgstr ""
-
-msgid "SEARCH"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid "RESPONSES"
-msgstr ""
-
-msgid "TOTAL RESPONSES"
-msgstr ""
-
-#, python-format
-msgid "%(responded)s responded out of %(polled)s polled"
-msgstr ""
-
-msgid "ALL"
-msgstr ""
-
-msgid "LOCATION"
-msgstr ""
-
-msgid "Written by:"
-msgstr ""
-
-msgid "OVERALL STATISTICS"
-msgstr ""
-
-msgid "THIS YEAR"
-msgstr ""
-
-msgid "AVG RESPONSE RATE"
-msgstr ""
-
-msgid "U-REPORTERS BY REGION"
-msgstr ""
-
-msgid "FILTER RESULTS"
 msgstr ""
 
 #, python-format
@@ -1923,8 +1635,193 @@ msgstr ""
 msgid "Sign Up Rate"
 msgstr ""
 
+msgid "Response Rate"
+msgstr "ျပန္လည္ေျဖၾကားႏွဳန္း"
+
 msgid "Active Users"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Whether this story is featured"
+
 msgid "Something to trigger localizations"
 msgstr ""
+
+#~ msgid "U-Reporters"
+#~ msgstr "အခ်က္အလက္ေပးပို႕သူ လူငယ္မ်ား"
+
+#~ msgid "Join & Engage"
+#~ msgstr "U-Report တြင္ပါ၀င္ရန္"
+
+#~ msgid "ABOUT U-REPORT"
+#~ msgstr "U-Report အေၾကာင္းသိေကာင္းစရာ"
+
+#~ msgid "Scroll to Learn more"
+#~ msgstr "ပိုမိုသိရွိရန္ ေအာက္ကိုဆက္ဖတ္ၾကည့္ပါ"
+
+#~ msgid "The mission of U-Report"
+#~ msgstr "U-Report၏ လုပ္ငန္းတာ၀န္"
+
+#~ msgid "Why Join U-Report?"
+#~ msgstr "U-Reportအစီအစဥ္တြင္ ဘာေၾကာင့္ပါ၀င္သင့္သလဲဆိုေတာ့"
+
+#~ msgid "Speak out on what's happening in your community"
+#~ msgstr "သင္ေနထိုင္ရာ ရပ္၇ြာတြင္ ဘာေတြျဖစ္ေနသလဲဆိုတာကို လြတ္လပ္စြာ ေျပာၾကားျခင္း"
+
+#~ msgid "Participate in nationwide campaigns to help improve your country"
+#~ msgstr "ႏိုင္ငံႏွင့္အ၀ွမ္းက်င္းပေသာ လွဳပ္ရွားမႈမ်ားတြင္ ပါ၀င္ျခင္းအားျဖင့္ သင့္တိုင္းျပည္ တိုးတက္ေအာင္ ကူညီေပးႏိုင္ျခင္း"
+
+#~ msgid "CLICK HERE TO JOIN"
+#~ msgstr "ပူးေပါင္းပါ၀င္ရန္ သည္ေနရာတြင္ႏွိပ္ပါ"
+
+#~ msgid "U-REPORT VIDEOS"
+#~ msgstr "လူငယ့္အသံႏွင့္ပတ္သတ္ေသာ ဗီဒီယိုမ်ား"
+
+#~ msgid "No videos yet."
+#~ msgstr "ဗီဒီယိုမ်ားမရွိေသးပါ"
+
+#~ msgid "WATCH IT ON YOUTUBE"
+#~ msgstr "YOUTUBE တြင္ျကည့္ပါ"
+
+#~ msgid "CURRENT POLL"
+#~ msgstr "လက္ရွိေမးခြန္း"
+
+#~ msgid "All U-Report members"
+#~ msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္ၾကသူအားလံုး"
+
+#~ msgid "Responded out of"
+#~ msgstr "Responded out of"
+
+#~ msgid "RESPONDER'S RATE BY LOCATION"
+#~ msgstr "ျပန္လည္ေျဖၾကားသူတို႕၏ တည္ေနရာ"
+
+#~ msgid "Most responded"
+#~ msgstr "ျပန္လည္ေျဖၾကားမႈအမ်ားဆံုး"
+
+#~ msgid "TRENDING WORDS"
+#~ msgstr "အသံုးမ်ားေသာစကားလံုးမ်ား"
+
+#~ msgid "FEATURED RESPONSES"
+#~ msgstr "ေဖာ္ျပထားေသာေျဖၾကားမႈမ်ား"
+
+#~ msgid "TOTAL # OF U-REPORTERS"
+#~ msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္သူစုစုေပါင္း"
+
+#~ msgid "4 MOST ACTIVE REGIONS"
+#~ msgstr "တက္ၾကြမႈအရွိဆံုး နယ္ေျမေလးခု"
+
+#~ msgid "RATE BY GENDER"
+#~ msgstr "က်ား မအလိုက္ ႏွဳန္း"
+
+#~ msgid "RATE BY AGE"
+#~ msgstr "အသက္အရြယ္အလိုက္ႏွဳန္း"
+
+#~ msgid "WHAT U-REPORTERS ARE SAYING"
+#~ msgstr "ယခုအစီအစဥ္တြင္ပါ၀င္သူမ်ား ေျပာဆိုေဆြးေႏြးေနသည္မွာ"
+
+#~ msgid "FEATURED VIDEO"
+#~ msgstr "ေဖာ္ျပထားေသာဗီဒီယို"
+
+#~ msgid "FEATURED REGION"
+#~ msgstr "ေဖာ္ျပထားေသာနယ္ေျမ"
+
+#~ msgid "NEWS FEED"
+#~ msgstr "သတင္းမ်ား"
+
+#~ msgid "STORY"
+#~ msgstr "သတင္းေဆာင္းပါး"
+
+#~ msgid "JOBS"
+#~ msgstr "အလုပ္အကိုင္မ်ား"
+
+#~ msgid "Read more"
+#~ msgstr "ဆက္လက္ဖတ္ရွဳရန္"
+
+#~ msgid "JOIN U-REPORT"
+#~ msgstr "U-Report အစီအစဥ္တြင္ပါဝင္ရန္"
+
+#~ msgid "HOW TO JOIN"
+#~ msgstr "ဘယ္လိုပါ၀င္ရမလဲ"
+
+#~ msgid "U-REPORT ON SOCIAL MEDIA"
+#~ msgstr "လူမႈကြန္ယက္မ်ားရွိ လူငယ့္အသံအစီအစဥ္"
+
+#~ msgid "CURRENT POLL IN"
+#~ msgstr "လက္ရွိ ေမးခြန္း "
+
+#~ msgid "POLL RESULTS"
+#~ msgstr "မိမိသေဘာအေလ်ာက္ ျပန္လည္ေျဖၾကားမႈရလဒ္မ်ား"
+
+#~ msgid "KEYWORDS"
+#~ msgstr "အဓိကစကားလံုး"
+
+#~ msgid "STATISTICS"
+#~ msgstr "စာရင္းဇယား"
+
+#~ msgid "LOCATIONS"
+#~ msgstr "တည္ေနရာမ်ား"
+
+#~ msgid "FEATURED ANSWERS"
+#~ msgstr "ေဖာ္ျပထားေသာအေျဖမ်ား"
+
+#~ msgid "No featured answers."
+#~ msgstr "ေဖာ္ျပထားေသာအေျဖမ်ား မရွိပါ"
+
+#~ msgid "RELATED STORIES"
+#~ msgstr "ပတ္သတ္ေနေသာ သတင္းေဆာင္းပါးမ်ား"
+
+#~ msgid "No related stories."
+#~ msgstr "ဆက္စပ္ေသာ သတင္းမ်ား မရွိပါ။"
+
+#~ msgid "FEATURED IMAGES"
+#~ msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပုံမ်ား"
+
+#~ msgid "No featured images yet."
+#~ msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပုံမ်ား မရွိပါ"
+
+#~ msgid "BY"
+#~ msgstr "အားျဖင့္"
+
+#~ msgid "LATEST STORIES"
+#~ msgstr "ေနာက္ဆံုးရ သတင္းေဆာင္းပါးမ်ား"
+
+#~ msgid "FILTERED BY"
+#~ msgstr "စစ္ထုတ္ေပးထားသည္"
+
+#~ msgid "Scroll to read more"
+#~ msgstr "ထပ္မံဖတ္ရွဳရန္ "
+
+#~ msgid "STORY CONTINUES"
+#~ msgstr "သတင္းေနာက္ဆက္တြဲ"
+
+#~ msgid "AUDIO"
+#~ msgstr "အသံ"
+
+#~ msgid "RELATED POLLS"
+#~ msgstr "ဆက္စပ္ေနေသာ ေမးခြန္းမ်ား"
+
+#~ msgid "No related polls."
+#~ msgstr "ဆက္စပ္ေနေသာ ေမးခြန္းမ်ား မရွိပါ"
+
+#~ msgid "No featured images."
+#~ msgstr "ေဖာ္ျပထားေသာ ဓါတ္ပုံမ်ား မရွိပါ"
+
+#~ msgid "U-REPORTER STATISTICS"
+#~ msgstr "လူငယ့္အသံအစီအစဥ္တြင္ ပါ၀င္သူမ်ား၏ စာရင္းဇယား"
+
+#~ msgid "WHERE ARE U-REPORTERS FROM?"
+#~ msgstr "ပါ၀င္သည့္ လူငယ္မ်ားသည္ မည္သည့္ေနရာမ်ားကျဖစ္သလဲ"
+
+#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
+#~ msgstr "လြန္ခဲ့ေသာေျခာက္လေက်ာ္က စာရင္းသြင္းမႈႏွဳန္း"
+
+#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
+#~ msgstr "အလုပ္အကိုင္ အမ်ားဆံုးေဖာ္ျပထားသည့္"
+
+#~ msgid "Registered"
+#~ msgstr "စာရင္းသြင္းထားၿပီး"
+
+#~ msgid "Week of"
+#~ msgstr "အပတ္၏"

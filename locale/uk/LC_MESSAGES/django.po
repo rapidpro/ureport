@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 15:03+0000\n"
+"POT-Creation-Date: 2020-02-05 13:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -706,6 +706,15 @@ msgstr ""
 msgid "Engagement"
 msgstr "U-репортери"
 
+msgid "Category Images"
+msgstr ""
+
+msgid "+ New "
+msgstr ""
+
+msgid "+ New Page"
+msgstr ""
+
 msgid "U-Report"
 msgstr ""
 
@@ -719,12 +728,6 @@ msgid "Content"
 msgstr ""
 
 msgid "Country Aliases"
-msgstr ""
-
-msgid "Polls"
-msgstr ""
-
-msgid "Category Images"
 msgstr ""
 
 msgid "Job Sources"
@@ -760,15 +763,6 @@ msgstr ""
 msgid "Additional Menu"
 msgstr ""
 
-msgid "U-Reporters"
-msgstr ""
-
-msgid "Join & Engage"
-msgstr ""
-
-msgid "FOLLOW US ON"
-msgstr ""
-
 msgid "SELECT YOUR COUNTRY"
 msgstr "Оберіть свою країну"
 
@@ -799,47 +793,16 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-msgid ""
-"\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
+msgid "LATEST NOTIFICATIONS"
 msgstr ""
 
-msgid "ABOUT U-REPORT"
+msgid "Backends"
 msgstr ""
 
-msgid "Scroll to Learn more"
+msgid "+ New Poll"
 msgstr ""
 
-msgid "The mission of U-Report"
-msgstr ""
-
-msgid "Why Join U-Report?"
-msgstr ""
-
-msgid "Speak out on what's happening in your community"
-msgstr ""
-
-msgid "Use U-Report results and information to update and increase citizen's awareness"
-msgstr ""
-
-msgid "Participate in nationwide campaigns to help improve your country"
-msgstr ""
-
-#, python-format
-msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr ""
-
-msgid "CLICK HERE TO JOIN"
-msgstr ""
-
-msgid "U-REPORT VIDEOS"
-msgstr ""
-
-msgid "No videos yet."
-msgstr ""
-
-msgid "WATCH IT ON YOUTUBE"
+msgid "Refresh Results"
 msgstr ""
 
 msgid "MORE POLLS"
@@ -863,243 +826,89 @@ msgstr ""
 msgid "LIST"
 msgstr ""
 
-msgid "Follow"
-msgstr ""
+msgid "LATEST OPINION"
+msgstr "Актуальне опитування"
 
-msgid ""
-"\n"
-"                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
-"                "
-msgstr ""
-
-msgid "CURRENT POLL"
-msgstr ""
-
-msgid "View Full Results"
-msgstr "Детальні результати"
-
-msgid "All U-Report members"
-msgstr ""
-
-msgid "RESPONSE RATE"
-msgstr "РІВЕНЬ АКТИВНОСТІ"
-
-msgid "Responded out of"
-msgstr ""
-
-msgid "RESPONDER'S RATE BY LOCATION"
-msgstr ""
-
-msgid "Most responded"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                                  %(responded)s of %(total)s\n"
-"                                  "
-msgstr ""
-
-msgid "TRENDING WORDS"
-msgstr ""
-
-msgid "FEATURED RESPONSES"
-msgstr "ОБРАНІ ВІДПОВІДІ"
-
-msgid "View full results"
+msgid "VIEW FULL RESULTS"
 msgstr "Детальні результати"
 
 msgid "U-REPORTERS IN"
 msgstr "U-Reporters в"
 
-msgid "TOTAL # OF U-REPORTERS"
+msgid "PARTNERING WITH"
+msgstr "РАЗОМ ІЗ"
+
+msgid "U-REPORTERS"
 msgstr ""
 
-msgid "4 MOST ACTIVE REGIONS"
-msgstr "4 НАЙБІЛЬШ АКТИВНІ ОБЛАСТІ"
-
-msgid "RATE BY GENDER"
+msgid "IN"
 msgstr ""
 
-msgid "RATE BY AGE"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "КРАЇНАХ СВІТУ"
+
+msgid "AGES"
+msgstr "Вік"
+
+msgid "Join U-Report, Your voice matters."
 msgstr ""
 
-msgid "WHAT U-REPORTERS ARE SAYING"
+msgid "JOIN NOW"
+msgstr "Приєднатися"
+
+msgid "FEATURED STORY"
 msgstr ""
 
-msgid "FEATURED VIDEO"
-msgstr ""
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Ми частина глобальної платформи, яка змінює життя молодих людей по всьому світу"
 
-msgid "Watch more videos"
-msgstr ""
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Дізнайтеся більше про те, як U-Report дозволяє молодим людям висловлюватися про важливі для них проблеми"
 
-msgid "FEATURED REGION"
-msgstr ""
-
-msgid "Check more stories in U-Report app"
-msgstr ""
-
-msgid "View more stories on Facebook"
-msgstr ""
-
-msgid "View more on Instagram"
-msgstr ""
-
-msgid "Read more tweets on Twitter"
-msgstr ""
-
-msgid "NEWS FEED"
-msgstr ""
-
-msgid "STORY"
-msgstr ""
-
-msgid "Read full story"
-msgstr ""
-
-msgid "Response Rate"
-msgstr "Рівень активності"
-
-msgid "Read this story"
-msgstr ""
-
-msgid "JOBS"
-msgstr ""
-
-msgid "Scroll to see job details"
-msgstr ""
-
-msgid "Tweet to"
-msgstr ""
-
-msgid "Read more"
-msgstr ""
+msgid "LEARN MORE"
+msgstr "ДІЗНАЙТЕСЯ БІЛЬШЕ"
 
 msgid "Visit"
 msgstr ""
 
-msgid "JOIN U-REPORT"
+msgid "How would you like to join?"
 msgstr ""
 
-msgid "HOW TO JOIN"
+msgid "Text"
 msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid "RESPONSES"
+msgstr "Відповіді"
+
+msgid "RESPONSE RATE"
+msgstr "РІВЕНЬ АКТИВНОСТІ"
+
+msgid "TOTAL RESPONSES"
+msgstr "ВСЬОГО ВІДПОВІДЕЙ"
 
 #, python-format
-msgid ""
-"\n"
-"                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-"\n"
-"              "
-msgstr ""
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s відповіли з %(polled)s опитаних"
 
-msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr ""
-
-msgid "Compose new Tweet"
-msgstr ""
-
-msgid "CURRENT POLL IN"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                  %(questions)s question polled on this topic\n"
-"                "
-msgid_plural ""
-"\n"
-"                  %(questions)s questions polled on this topic\n"
-"                "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-
-msgid "response rate"
-msgstr "Рівень активності"
-
-msgid "responded out of"
-msgstr ""
-
-msgid "polled"
-msgstr "опитано"
-
-msgid "POLL RESULTS"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                    %(responded)s responded out of %(polled)s polled\n"
-"                  "
-msgstr ""
-"\n"
-" %(responded)s відповіли з %(polled)s опитаних"
-
-msgid "KEYWORDS"
-msgstr ""
-
-msgid "STATISTICS"
-msgstr ""
-
-msgid "LOCATIONS"
-msgstr ""
-
-msgid "GENDER"
+msgid "ALL"
 msgstr ""
 
 msgid "AGE"
 msgstr "ВІК"
 
-msgid "FEATURED ANSWERS"
+msgid "GENDER"
 msgstr ""
 
-msgid "No featured answers."
-msgstr ""
+msgid "LOCATION"
+msgstr "ОБЛАСТЬ"
 
-msgid "U-Reporter in"
-msgstr ""
-
-msgid "RELATED STORIES"
-msgstr ""
-
-msgid "No related stories."
-msgstr ""
-
-msgid "FEATURED IMAGES"
-msgstr ""
-
-msgid "No featured images yet."
-msgstr ""
-
-msgid "FEATURED STORY"
-msgstr ""
-
-msgid "BY"
-msgstr ""
-
-msgid "LATEST STORIES"
-msgstr ""
-
-msgid "FILTERED BY"
-msgstr ""
-
-msgid "Scroll to read more"
-msgstr ""
-
-msgid "STORY CONTINUES"
-msgstr ""
-
-msgid "AUDIO"
-msgstr ""
-
-msgid "RELATED POLLS"
-msgstr ""
-
-msgid "No related polls."
-msgstr ""
-
-msgid "No featured images."
+msgid "Written by:"
 msgstr ""
 
 msgid "Even"
@@ -1147,26 +956,20 @@ msgstr ""
 msgid "the"
 msgstr ""
 
-msgid "WHO WE ARE"
-msgstr ""
+msgid "OVERALL STATISTICS"
+msgstr "ЗАГАЛЬНА СТАТИСТИКА"
 
-msgid "U-REPORTER STATISTICS"
-msgstr ""
+msgid "THIS YEAR"
+msgstr "ЦЬОГО РОКУ"
 
-msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr ""
+msgid "AVG RESPONSE RATE"
+msgstr "Середній рівень активності"
 
-msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr ""
+msgid "U-REPORTERS BY REGION"
+msgstr "U-репортери в регіонах"
 
-msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-msgstr ""
-
-msgid "Registered"
-msgstr ""
-
-msgid "Week of"
-msgstr ""
+msgid "FILTER RESULTS"
+msgstr "ФІЛЬТР РЕЗУЛЬТАТІВ"
 
 msgid "Export and Share"
 msgstr ""
@@ -1260,106 +1063,6 @@ msgstr ""
 
 msgid "Dec"
 msgstr ""
-
-msgid "LATEST OPINION"
-msgstr "Актуальне опитування"
-
-msgid "VIEW FULL RESULTS"
-msgstr "Детальні результати"
-
-msgid "PARTNERING WITH"
-msgstr "РАЗОМ ІЗ"
-
-msgid "U-REPORTERS"
-msgstr ""
-
-msgid "IN"
-msgstr ""
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "КРАЇНАХ СВІТУ"
-
-msgid "AGES"
-msgstr "Вік"
-
-msgid "LEARN MORE"
-msgstr "ДІЗНАЙТЕСЯ БІЛЬШЕ"
-
-msgid "+ New "
-msgstr ""
-
-msgid "+ New Page"
-msgstr ""
-
-msgid "LATEST NOTIFICATIONS"
-msgstr ""
-
-msgid "Backends"
-msgstr ""
-
-msgid "+ New Poll"
-msgstr ""
-
-msgid "Refresh Results"
-msgstr ""
-
-msgid "Join U-Report, Your voice matters."
-msgstr ""
-
-msgid "JOIN NOW"
-msgstr "Приєднатися"
-
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Ми частина глобальної платформи, яка змінює життя молодих людей по всьому світу"
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Дізнайтеся більше про те, як U-Report дозволяє молодим людям висловлюватися про важливі для них проблеми"
-
-msgid "How would you like to join?"
-msgstr ""
-
-msgid "Text"
-msgstr ""
-
-msgid "SEARCH"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-msgid "RESPONSES"
-msgstr "Відповіді"
-
-msgid "TOTAL RESPONSES"
-msgstr "ВСЬОГО ВІДПОВІДЕЙ"
-
-#, python-format
-msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)s відповіли з %(polled)s опитаних"
-
-msgid "ALL"
-msgstr ""
-
-msgid "LOCATION"
-msgstr "ОБЛАСТЬ"
-
-msgid "Written by:"
-msgstr ""
-
-msgid "OVERALL STATISTICS"
-msgstr "ЗАГАЛЬНА СТАТИСТИКА"
-
-msgid "THIS YEAR"
-msgstr "ЦЬОГО РОКУ"
-
-msgid "AVG RESPONSE RATE"
-msgstr "Середній рівень активності"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "U-репортери в регіонах"
-
-msgid "FILTER RESULTS"
-msgstr "ФІЛЬТР РЕЗУЛЬТАТІВ"
 
 #, python-format
 msgid ""
@@ -1911,8 +1614,41 @@ msgstr "Кількість відповідей"
 msgid "Sign Up Rate"
 msgstr "Кількість підключень"
 
+msgid "Response Rate"
+msgstr "Рівень активності"
+
 msgid "Active Users"
 msgstr "Активні користувачі"
 
+msgid "Whether this row was created by squashing"
+msgstr ""
+
 msgid "Something to trigger localizations"
 msgstr ""
+
+#~ msgid "View Full Results"
+#~ msgstr "Детальні результати"
+
+#~ msgid "FEATURED RESPONSES"
+#~ msgstr "ОБРАНІ ВІДПОВІДІ"
+
+#~ msgid "View full results"
+#~ msgstr "Детальні результати"
+
+#~ msgid "4 MOST ACTIVE REGIONS"
+#~ msgstr "4 НАЙБІЛЬШ АКТИВНІ ОБЛАСТІ"
+
+#~ msgid "response rate"
+#~ msgstr "Рівень активності"
+
+#~ msgid "polled"
+#~ msgstr "опитано"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    %(responded)s responded out of %(polled)s polled\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ " %(responded)s відповіли з %(polled)s опитаних"

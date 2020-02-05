@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 15:03+0000\n"
+"POT-Creation-Date: 2020-02-05 13:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -372,6 +372,8 @@ msgstr "Sarcini"
 msgid "The title for this story"
 msgstr "Titlul pentru acest articol"
 
+#, fuzzy
+#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
 msgstr "Dacă acest articol este recomandat"
 
@@ -729,6 +731,15 @@ msgstr "Despre noi"
 msgid "Engagement"
 msgstr "Implicare"
 
+msgid "Category Images"
+msgstr "Categorie imagini"
+
+msgid "+ New "
+msgstr "+ Nou"
+
+msgid "+ New Page"
+msgstr "+ Pagini Noi"
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -743,12 +754,6 @@ msgstr "Conţinut"
 
 msgid "Country Aliases"
 msgstr "Identificatoarele țării"
-
-msgid "Polls"
-msgstr "Sondaje"
-
-msgid "Category Images"
-msgstr "Categorie imagini"
 
 msgid "Job Sources"
 msgstr "Sursele ofertelor de muncă"
@@ -782,15 +787,6 @@ msgstr "Conţinutul câmpului „Cum să te alături”"
 
 msgid "Additional Menu"
 msgstr "Meniu suplimentar"
-
-msgid "U-Reporters"
-msgstr "U-Reporteri"
-
-msgid "Join & Engage"
-msgstr "Alătură-te și implică-te"
-
-msgid "FOLLOW US ON"
-msgstr "URMĂREȘTE-NE PE"
 
 msgid "SELECT YOUR COUNTRY"
 msgstr "SELECTEAZĂ ȚARA TA"
@@ -826,50 +822,17 @@ msgstr ""
 msgid "Back"
 msgstr "Înapoi"
 
-msgid ""
-"\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-"Rețineți, pentru a indica locul de muncă de pe Twitter, este necesar a obține un ID al widget-ului din twitter."
+msgid "LATEST NOTIFICATIONS"
+msgstr "ULTIMELE NOTIFICĂRI"
 
-msgid "ABOUT U-REPORT"
-msgstr "DESPRE U-REPORT"
+msgid "Backends"
+msgstr "Backends"
 
-msgid "Scroll to Learn more"
-msgstr "Află detalii mai jos"
+msgid "+ New Poll"
+msgstr "+ Sondaj Nou"
 
-msgid "The mission of U-Report"
-msgstr "Misiunea U-Report"
-
-msgid "Why Join U-Report?"
-msgstr "De ce să te alături U-Report?"
-
-msgid "Speak out on what's happening in your community"
-msgstr "Spune ce se întâmplă în comunitatea ta"
-
-msgid "Use U-Report results and information to update and increase citizen's awareness"
-msgstr "Utilizează rezultatele și informaţiile U-Report pentru a actualiza și a crește gradul de conştientizare a cetăţenilor"
-
-msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "Participă la campanii naţionale pentru a ajuta la îmbunătăţirea situaţiei în țară"
-
-#, python-format
-msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Împărtășeste ce se întâmplă în %(country)s cu alți U-Reporteri"
-
-msgid "CLICK HERE TO JOIN"
-msgstr "CLICK AICI PENTRU A TE ALĂTURA"
-
-msgid "U-REPORT VIDEOS"
-msgstr "VIDEOURI U-REPORT"
-
-msgid "No videos yet."
-msgstr "La moment nu există videouri."
-
-msgid "WATCH IT ON YOUTUBE"
-msgstr "URMĂREȘTE PE YOUTUBE"
+msgid "Refresh Results"
+msgstr "Actualizare Rezultate"
 
 msgid "MORE POLLS"
 msgstr "MAI MULTE SONDAJE"
@@ -892,258 +855,90 @@ msgstr "ARTICOLE ARHIVATE"
 msgid "LIST"
 msgstr "LISTĂ"
 
-msgid "Follow"
-msgstr "Urmărește"
+msgid "LATEST OPINION"
+msgstr "ULTIMELE OPINII"
 
-msgid ""
-"\n"
-"                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
-"                "
-msgstr ""
-"\n"
-"U-Report este un instrument de mesagerie socială, gratuit pentru toată lumea, oriunde v-ați afla în lume, pentru a vorbi despre problemele de dezvoltare, pentru a sprijini drepturile copilului și pentru a îmbunătăți comunitățile noastre"
-
-msgid "CURRENT POLL"
-msgstr "SONDAJ CURENT"
-
-msgid "View Full Results"
-msgstr "Vezi rezultatele complete"
-
-msgid "All U-Report members"
-msgstr "Toți membrii U-Report"
-
-msgid "RESPONSE RATE"
-msgstr "RATA DE RĂSPUNS"
-
-msgid "Responded out of"
-msgstr "Au răspuns din"
-
-msgid "RESPONDER'S RATE BY LOCATION"
-msgstr "RATA RESPONDENȚILOR DUPĂ REGIUNE"
-
-msgid "Most responded"
-msgstr "Majoritatea au răspuns"
-
-#, python-format
-msgid ""
-"\n"
-"                                  %(responded)s of %(total)s\n"
-"                                  "
-msgstr ""
-"\n"
-"%(responded)s de %(total)s"
-
-msgid "TRENDING WORDS"
-msgstr "CUVINTE CHEIE"
-
-msgid "FEATURED RESPONSES"
-msgstr "RĂSPUNSURI RECOMANDATE"
-
-msgid "View full results"
-msgstr "Vezi toate rezultatele"
+msgid "VIEW FULL RESULTS"
+msgstr "VEZI REZULTATELE DETALIATE"
 
 msgid "U-REPORTERS IN"
 msgstr "U-REPORTERI ÎN"
 
-msgid "TOTAL # OF U-REPORTERS"
-msgstr "TOTAL # DIN U-REPORTERI"
+msgid "PARTNERING WITH"
+msgstr "PARTENERIAT CU "
 
-msgid "4 MOST ACTIVE REGIONS"
-msgstr "4 CELE MAI ACTIVE REGIUNI"
+msgid "U-REPORTERS"
+msgstr "U-REPORTERS"
 
-msgid "RATE BY GENDER"
-msgstr "RATA DUPĂ SEX"
+msgid "IN"
+msgstr "ÎN"
 
-msgid "RATE BY AGE"
-msgstr "RATA DUPĂ VÂRSTĂ"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "ȚĂRILE DIN LUME"
 
-msgid "WHAT U-REPORTERS ARE SAYING"
-msgstr "CE SPUN U-REPORTERII"
+msgid "AGES"
+msgstr "ANI"
 
-msgid "FEATURED VIDEO"
-msgstr "VIDEOURI RECOMANDATE"
+msgid "Join U-Report, Your voice matters."
+msgstr "Alăturați-vă U-report, Vocea Ta Contează."
 
-msgid "Watch more videos"
-msgstr "Vezi mai multe videouri"
-
-msgid "FEATURED REGION"
-msgstr "REGIUNE RECOMANDATĂ"
-
-msgid "Check more stories in U-Report app"
-msgstr "Vezi mai multe articole în aplicaţia U-Report"
-
-msgid "View more stories on Facebook"
-msgstr "Vezi mai multe articole pe Facebook"
-
-msgid "View more on Instagram"
-msgstr "Vezi mai multe pe Instagram"
-
-msgid "Read more tweets on Twitter"
-msgstr "Citește mai multe tweet-uri pe Twitter"
-
-msgid "NEWS FEED"
-msgstr "FLUX DE ȘTIRI"
-
-msgid "STORY"
-msgstr "ARTICOL"
-
-msgid "Read full story"
-msgstr "Citește tot articolul"
-
-msgid "Response Rate"
-msgstr "Rata de răspuns"
-
-msgid "Read this story"
-msgstr "Citește acest articol"
-
-msgid "JOBS"
-msgstr "OFERTE DE MUNCĂ"
-
-msgid "Scroll to see job details"
-msgstr "Află detalii mai jos "
-
-msgid "Tweet to"
-msgstr "Distribuie"
-
-msgid "Read more"
-msgstr "Citește mai multe"
-
-msgid "Visit"
-msgstr "Vizitează"
-
-msgid "JOIN U-REPORT"
-msgstr "ALĂTURĂ-TE U-REPORT"
-
-msgid "HOW TO JOIN"
-msgstr "CUM SĂ TE ALĂTURI"
-
-#, python-format
-msgid ""
-"\n"
-"                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-"\n"
-"              "
-msgstr ""
-"\n"
-"* U-Report este un program gratuit sponsorizat de UNICEF cu ajutorul furnizorilor de rețea din %(country)s. U-Report nu va solicita nicio plată și nici informații financiare personale, Vă rugăm să ignorați orice mesaj care vă solicită plata fie pe acest număr, fie pe paginile de Facebook și Twitter. Toate serviciile U-Report %(shortcode)s sunt gratuite."
-
-msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr "U-REPORT PE REȚELELE DE SOCIALIZARE"
-
-msgid "Compose new Tweet"
-msgstr "Compune un nou tweet"
-
-msgid "CURRENT POLL IN"
-msgstr "SONDAJ CURENT"
-
-#, python-format
-msgid ""
-"\n"
-"                  %(questions)s question polled on this topic\n"
-"                "
-msgid_plural ""
-"\n"
-"                  %(questions)s questions polled on this topic\n"
-"                "
-msgstr[0] ""
-"\n"
-"                  %(questions)s ca și întrebarea chestionată pe acest subiect\n"
-"                "
-msgstr[1] ""
-"\n"
-"                  %(questions)s ca și întrebarea chestionată pe acest subiect\n"
-"                "
-msgstr[2] ""
-"\n"
-"                  %(questions)s ca și întrebarea chestionată pe acest subiect\n"
-"                "
-
-msgid "response rate"
-msgstr "rata de răspuns"
-
-msgid "responded out of"
-msgstr "au răspuns din"
-
-msgid "polled"
-msgstr "intervievați"
-
-msgid "POLL RESULTS"
-msgstr "REZULTATELE SONDAJULUI"
-
-#, python-format
-msgid ""
-"\n"
-"                    %(responded)s responded out of %(polled)s polled\n"
-"                  "
-msgstr ""
-"\n"
-"%(responded)s au răspuns din %(polled)s chestionați"
-
-msgid "KEYWORDS"
-msgstr "CUVINTE-CHEIE"
-
-msgid "STATISTICS"
-msgstr "STATISTICI"
-
-msgid "LOCATIONS"
-msgstr "REGIUNI"
-
-msgid "GENDER"
-msgstr "SEX"
-
-msgid "AGE"
-msgstr "VÂRSTĂ"
-
-msgid "FEATURED ANSWERS"
-msgstr "RĂSPUNSURI RECOMANDATE"
-
-msgid "No featured answers."
-msgstr "Niciun răspuns recomandat."
-
-msgid "U-Reporter in"
-msgstr "U-Reporter în"
-
-msgid "RELATED STORIES"
-msgstr "ARTICOLE ASOCIATE"
-
-msgid "No related stories."
-msgstr "Niciun articol asociat."
-
-msgid "FEATURED IMAGES"
-msgstr "IMAGINI RECOMANDATE"
-
-msgid "No featured images yet."
-msgstr "La moment lipsesc imagini recomandate."
+msgid "JOIN NOW"
+msgstr "ALĂTURĂ-TE ACUM"
 
 msgid "FEATURED STORY"
 msgstr "ARTICOL RECOMANDAT"
 
-msgid "BY"
-msgstr "DE CĂTRE"
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Suntem o parte a unei platforme globale care lucrează pentru a schimba viața tinerilor din întreaga lume."
 
-msgid "LATEST STORIES"
-msgstr "ULTIMELE ARTICOLE"
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Aflați mai multe despre modul în care U-Report abilitează și conectează tinerii pentru a vorbi despre problemele care contează pentru ei."
 
-msgid "FILTERED BY"
-msgstr "FILTREAZĂ DUPĂ"
+msgid "LEARN MORE"
+msgstr "ÎNVAȚĂ MAI MULT"
 
-msgid "Scroll to read more"
-msgstr "Află detalii mai jos"
+msgid "Visit"
+msgstr "Vizitează"
 
-msgid "STORY CONTINUES"
-msgstr "ISTORIA CONTINUĂ"
+msgid "How would you like to join?"
+msgstr "Cum ai vrea să te înscrii?"
 
-msgid "AUDIO"
-msgstr "AUDIO"
+msgid "Text"
+msgstr "Text "
 
-msgid "RELATED POLLS"
-msgstr "SONDAJE ASOCIATE"
+msgid "SEARCH"
+msgstr "CAUTĂ"
 
-msgid "No related polls."
-msgstr "Niciun sondaj asociat."
+msgid "No results found"
+msgstr "Nici un rezultat găsit"
 
-msgid "No featured images."
-msgstr "Nicio imagine recomandată."
+msgid "RESPONSES"
+msgstr "RĂSPUNSURI"
+
+msgid "RESPONSE RATE"
+msgstr "RATA DE RĂSPUNS"
+
+msgid "TOTAL RESPONSES"
+msgstr "TOATE RĂSPUNSURILE "
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr " 1 %(responded)s răspondenți din 2 %(polled)s intervievați"
+
+msgid "ALL"
+msgstr "TOȚI"
+
+msgid "AGE"
+msgstr "VÂRSTĂ"
+
+msgid "GENDER"
+msgstr "SEX"
+
+msgid "LOCATION"
+msgstr "LOCAȚIE"
+
+msgid "Written by:"
+msgstr "Scris de către:"
 
 msgid "Even"
 msgstr "Pe aceeași temă"
@@ -1190,26 +985,20 @@ msgstr "din"
 msgid "the"
 msgstr "cele"
 
-msgid "WHO WE ARE"
-msgstr "CINE SUNTEM"
+msgid "OVERALL STATISTICS"
+msgstr "STATISTICI GENERALE"
 
-msgid "U-REPORTER STATISTICS"
-msgstr "STATISTICI U-REPORTERI"
+msgid "THIS YEAR"
+msgstr "ACEST AN"
 
-msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr "DE UNDE VIN U-REPORTERII?"
+msgid "AVG RESPONSE RATE"
+msgstr "RATA DE RĂSPUNS AVG"
 
-msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr "RATA DE ÎNREGISTRARE: ÎN ULTIMELE 6 LUNI"
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERS DUPĂ REGIUNE"
 
-msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-msgstr "OCUPAȚIA: TOP 9 CELE MAI DES MENŢIONATE"
-
-msgid "Registered"
-msgstr "Înregistrați"
-
-msgid "Week of"
-msgstr "Săptămâna din"
+msgid "FILTER RESULTS"
+msgstr "FILTRU DE REZULTATE"
 
 msgid "Export and Share"
 msgstr "Exportă și Partajează"
@@ -1303,106 +1092,6 @@ msgstr "Nov"
 
 msgid "Dec"
 msgstr "Dec"
-
-msgid "LATEST OPINION"
-msgstr "ULTIMELE OPINII"
-
-msgid "VIEW FULL RESULTS"
-msgstr "VEZI REZULTATELE DETALIATE"
-
-msgid "PARTNERING WITH"
-msgstr "PARTENERIAT CU "
-
-msgid "U-REPORTERS"
-msgstr "U-REPORTERS"
-
-msgid "IN"
-msgstr "ÎN"
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "ȚĂRILE DIN LUME"
-
-msgid "AGES"
-msgstr "ANI"
-
-msgid "LEARN MORE"
-msgstr "ÎNVAȚĂ MAI MULT"
-
-msgid "+ New "
-msgstr "+ Nou"
-
-msgid "+ New Page"
-msgstr "+ Pagini Noi"
-
-msgid "LATEST NOTIFICATIONS"
-msgstr "ULTIMELE NOTIFICĂRI"
-
-msgid "Backends"
-msgstr "Backends"
-
-msgid "+ New Poll"
-msgstr "+ Sondaj Nou"
-
-msgid "Refresh Results"
-msgstr "Actualizare Rezultate"
-
-msgid "Join U-Report, Your voice matters."
-msgstr "Alăturați-vă U-report, Vocea Ta Contează."
-
-msgid "JOIN NOW"
-msgstr "ALĂTURĂ-TE ACUM"
-
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Suntem o parte a unei platforme globale care lucrează pentru a schimba viața tinerilor din întreaga lume."
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Aflați mai multe despre modul în care U-Report abilitează și conectează tinerii pentru a vorbi despre problemele care contează pentru ei."
-
-msgid "How would you like to join?"
-msgstr "Cum ai vrea să te înscrii?"
-
-msgid "Text"
-msgstr "Text "
-
-msgid "SEARCH"
-msgstr "CAUTĂ"
-
-msgid "No results found"
-msgstr "Nici un rezultat găsit"
-
-msgid "RESPONSES"
-msgstr "RĂSPUNSURI"
-
-msgid "TOTAL RESPONSES"
-msgstr "TOATE RĂSPUNSURILE "
-
-#, python-format
-msgid "%(responded)s responded out of %(polled)s polled"
-msgstr " 1 %(responded)s răspondenți din 2 %(polled)s intervievați"
-
-msgid "ALL"
-msgstr "TOȚI"
-
-msgid "LOCATION"
-msgstr "LOCAȚIE"
-
-msgid "Written by:"
-msgstr "Scris de către:"
-
-msgid "OVERALL STATISTICS"
-msgstr "STATISTICI GENERALE"
-
-msgid "THIS YEAR"
-msgstr "ACEST AN"
-
-msgid "AVG RESPONSE RATE"
-msgstr "RATA DE RĂSPUNS AVG"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS DUPĂ REGIUNE"
-
-msgid "FILTER RESULTS"
-msgstr "FILTRU DE REZULTATE"
 
 #, python-format
 msgid ""
@@ -1972,8 +1661,326 @@ msgstr "Răspunsuri de opinie"
 msgid "Sign Up Rate"
 msgstr "Rata de Înregistrare"
 
+msgid "Response Rate"
+msgstr "Rata de răspuns"
+
 msgid "Active Users"
 msgstr "Utilizatori Activi"
 
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Dacă acest articol este recomandat"
+
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
+
+#~ msgid "Polls"
+#~ msgstr "Sondaje"
+
+#~ msgid "U-Reporters"
+#~ msgstr "U-Reporteri"
+
+#~ msgid "Join & Engage"
+#~ msgstr "Alătură-te și implică-te"
+
+#~ msgid "FOLLOW US ON"
+#~ msgstr "URMĂREȘTE-NE PE"
+
+#~ msgid ""
+#~ "\n"
+#~ "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "Rețineți, pentru a indica locul de muncă de pe Twitter, este necesar a obține un ID al widget-ului din twitter."
+
+#~ msgid "ABOUT U-REPORT"
+#~ msgstr "DESPRE U-REPORT"
+
+#~ msgid "Scroll to Learn more"
+#~ msgstr "Află detalii mai jos"
+
+#~ msgid "The mission of U-Report"
+#~ msgstr "Misiunea U-Report"
+
+#~ msgid "Why Join U-Report?"
+#~ msgstr "De ce să te alături U-Report?"
+
+#~ msgid "Speak out on what's happening in your community"
+#~ msgstr "Spune ce se întâmplă în comunitatea ta"
+
+#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
+#~ msgstr "Utilizează rezultatele și informaţiile U-Report pentru a actualiza și a crește gradul de conştientizare a cetăţenilor"
+
+#~ msgid "Participate in nationwide campaigns to help improve your country"
+#~ msgstr "Participă la campanii naţionale pentru a ajuta la îmbunătăţirea situaţiei în țară"
+
+#, python-format
+#~ msgid "Share what's happening around %(country)s with other U-Reporters"
+#~ msgstr "Împărtășeste ce se întâmplă în %(country)s cu alți U-Reporteri"
+
+#~ msgid "CLICK HERE TO JOIN"
+#~ msgstr "CLICK AICI PENTRU A TE ALĂTURA"
+
+#~ msgid "U-REPORT VIDEOS"
+#~ msgstr "VIDEOURI U-REPORT"
+
+#~ msgid "No videos yet."
+#~ msgstr "La moment nu există videouri."
+
+#~ msgid "WATCH IT ON YOUTUBE"
+#~ msgstr "URMĂREȘTE PE YOUTUBE"
+
+#~ msgid "Follow"
+#~ msgstr "Urmărește"
+
+#~ msgid ""
+#~ "\n"
+#~ "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "U-Report este un instrument de mesagerie socială, gratuit pentru toată lumea, oriunde v-ați afla în lume, pentru a vorbi despre problemele de dezvoltare, pentru a sprijini drepturile copilului și pentru a îmbunătăți comunitățile noastre"
+
+#~ msgid "CURRENT POLL"
+#~ msgstr "SONDAJ CURENT"
+
+#~ msgid "View Full Results"
+#~ msgstr "Vezi rezultatele complete"
+
+#~ msgid "All U-Report members"
+#~ msgstr "Toți membrii U-Report"
+
+#~ msgid "Responded out of"
+#~ msgstr "Au răspuns din"
+
+#~ msgid "RESPONDER'S RATE BY LOCATION"
+#~ msgstr "RATA RESPONDENȚILOR DUPĂ REGIUNE"
+
+#~ msgid "Most responded"
+#~ msgstr "Majoritatea au răspuns"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                                  %(responded)s of %(total)s\n"
+#~ "                                  "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)s de %(total)s"
+
+#~ msgid "TRENDING WORDS"
+#~ msgstr "CUVINTE CHEIE"
+
+#~ msgid "FEATURED RESPONSES"
+#~ msgstr "RĂSPUNSURI RECOMANDATE"
+
+#~ msgid "View full results"
+#~ msgstr "Vezi toate rezultatele"
+
+#~ msgid "TOTAL # OF U-REPORTERS"
+#~ msgstr "TOTAL # DIN U-REPORTERI"
+
+#~ msgid "4 MOST ACTIVE REGIONS"
+#~ msgstr "4 CELE MAI ACTIVE REGIUNI"
+
+#~ msgid "RATE BY GENDER"
+#~ msgstr "RATA DUPĂ SEX"
+
+#~ msgid "RATE BY AGE"
+#~ msgstr "RATA DUPĂ VÂRSTĂ"
+
+#~ msgid "WHAT U-REPORTERS ARE SAYING"
+#~ msgstr "CE SPUN U-REPORTERII"
+
+#~ msgid "FEATURED VIDEO"
+#~ msgstr "VIDEOURI RECOMANDATE"
+
+#~ msgid "Watch more videos"
+#~ msgstr "Vezi mai multe videouri"
+
+#~ msgid "FEATURED REGION"
+#~ msgstr "REGIUNE RECOMANDATĂ"
+
+#~ msgid "Check more stories in U-Report app"
+#~ msgstr "Vezi mai multe articole în aplicaţia U-Report"
+
+#~ msgid "View more stories on Facebook"
+#~ msgstr "Vezi mai multe articole pe Facebook"
+
+#~ msgid "View more on Instagram"
+#~ msgstr "Vezi mai multe pe Instagram"
+
+#~ msgid "Read more tweets on Twitter"
+#~ msgstr "Citește mai multe tweet-uri pe Twitter"
+
+#~ msgid "NEWS FEED"
+#~ msgstr "FLUX DE ȘTIRI"
+
+#~ msgid "STORY"
+#~ msgstr "ARTICOL"
+
+#~ msgid "Read full story"
+#~ msgstr "Citește tot articolul"
+
+#~ msgid "Read this story"
+#~ msgstr "Citește acest articol"
+
+#~ msgid "JOBS"
+#~ msgstr "OFERTE DE MUNCĂ"
+
+#~ msgid "Scroll to see job details"
+#~ msgstr "Află detalii mai jos "
+
+#~ msgid "Tweet to"
+#~ msgstr "Distribuie"
+
+#~ msgid "Read more"
+#~ msgstr "Citește mai multe"
+
+#~ msgid "JOIN U-REPORT"
+#~ msgstr "ALĂTURĂ-TE U-REPORT"
+
+#~ msgid "HOW TO JOIN"
+#~ msgstr "CUM SĂ TE ALĂTURI"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+#~ "\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "* U-Report este un program gratuit sponsorizat de UNICEF cu ajutorul furnizorilor de rețea din %(country)s. U-Report nu va solicita nicio plată și nici informații financiare personale, Vă rugăm să ignorați orice mesaj care vă solicită plata fie pe acest număr, fie pe paginile de Facebook și Twitter. Toate serviciile U-Report %(shortcode)s sunt gratuite."
+
+#~ msgid "U-REPORT ON SOCIAL MEDIA"
+#~ msgstr "U-REPORT PE REȚELELE DE SOCIALIZARE"
+
+#~ msgid "Compose new Tweet"
+#~ msgstr "Compune un nou tweet"
+
+#~ msgid "CURRENT POLL IN"
+#~ msgstr "SONDAJ CURENT"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                  %(questions)s question polled on this topic\n"
+#~ "                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                  %(questions)s questions polled on this topic\n"
+#~ "                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                  %(questions)s ca și întrebarea chestionată pe acest subiect\n"
+#~ "                "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "                  %(questions)s ca și întrebarea chestionată pe acest subiect\n"
+#~ "                "
+#~ msgstr[2] ""
+#~ "\n"
+#~ "                  %(questions)s ca și întrebarea chestionată pe acest subiect\n"
+#~ "                "
+
+#~ msgid "response rate"
+#~ msgstr "rata de răspuns"
+
+#~ msgid "responded out of"
+#~ msgstr "au răspuns din"
+
+#~ msgid "polled"
+#~ msgstr "intervievați"
+
+#~ msgid "POLL RESULTS"
+#~ msgstr "REZULTATELE SONDAJULUI"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    %(responded)s responded out of %(polled)s polled\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)s au răspuns din %(polled)s chestionați"
+
+#~ msgid "KEYWORDS"
+#~ msgstr "CUVINTE-CHEIE"
+
+#~ msgid "STATISTICS"
+#~ msgstr "STATISTICI"
+
+#~ msgid "LOCATIONS"
+#~ msgstr "REGIUNI"
+
+#~ msgid "FEATURED ANSWERS"
+#~ msgstr "RĂSPUNSURI RECOMANDATE"
+
+#~ msgid "No featured answers."
+#~ msgstr "Niciun răspuns recomandat."
+
+#~ msgid "U-Reporter in"
+#~ msgstr "U-Reporter în"
+
+#~ msgid "RELATED STORIES"
+#~ msgstr "ARTICOLE ASOCIATE"
+
+#~ msgid "No related stories."
+#~ msgstr "Niciun articol asociat."
+
+#~ msgid "FEATURED IMAGES"
+#~ msgstr "IMAGINI RECOMANDATE"
+
+#~ msgid "No featured images yet."
+#~ msgstr "La moment lipsesc imagini recomandate."
+
+#~ msgid "BY"
+#~ msgstr "DE CĂTRE"
+
+#~ msgid "LATEST STORIES"
+#~ msgstr "ULTIMELE ARTICOLE"
+
+#~ msgid "FILTERED BY"
+#~ msgstr "FILTREAZĂ DUPĂ"
+
+#~ msgid "Scroll to read more"
+#~ msgstr "Află detalii mai jos"
+
+#~ msgid "STORY CONTINUES"
+#~ msgstr "ISTORIA CONTINUĂ"
+
+#~ msgid "AUDIO"
+#~ msgstr "AUDIO"
+
+#~ msgid "RELATED POLLS"
+#~ msgstr "SONDAJE ASOCIATE"
+
+#~ msgid "No related polls."
+#~ msgstr "Niciun sondaj asociat."
+
+#~ msgid "No featured images."
+#~ msgstr "Nicio imagine recomandată."
+
+#~ msgid "WHO WE ARE"
+#~ msgstr "CINE SUNTEM"
+
+#~ msgid "U-REPORTER STATISTICS"
+#~ msgstr "STATISTICI U-REPORTERI"
+
+#~ msgid "WHERE ARE U-REPORTERS FROM?"
+#~ msgstr "DE UNDE VIN U-REPORTERII?"
+
+#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
+#~ msgstr "RATA DE ÎNREGISTRARE: ÎN ULTIMELE 6 LUNI"
+
+#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
+#~ msgstr "OCUPAȚIA: TOP 9 CELE MAI DES MENŢIONATE"
+
+#~ msgid "Registered"
+#~ msgstr "Înregistrați"
+
+#~ msgid "Week of"
+#~ msgstr "Săptămâna din"
