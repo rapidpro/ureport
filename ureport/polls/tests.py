@@ -367,9 +367,9 @@ class PollTest(UreportTest):
 
             self.assertEqual(response.context["org"], self.uganda)
             self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_list"))
-            # self.assertContains(
-            #     response, "Scheduled a pull refresh for poll #%d on org #%d" % (poll1.pk, poll1.org_id)
-            # )
+            self.assertContains(
+                response, "Scheduled a pull refresh for poll #%d on org #%d" % (poll1.pk, poll1.org_id)
+            )
 
             mock_pull_refresh.assert_called_once_with()
 
