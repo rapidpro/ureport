@@ -160,7 +160,7 @@ def show_org_flags(context):
     )
 
 
-@register.inclusion_tag("v2/public/edit_content.html", takes_context=True)
+@register.inclusion_tag("public/edit_content.html", takes_context=True)
 def edit_content(context, reverse_name, reverse_arg=None, anchor_id="", extra_css_classes="", icon_color="dark"):
     request = context["request"]
 

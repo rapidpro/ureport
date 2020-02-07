@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 15:03+0000\n"
+"POT-Creation-Date: 2020-02-05 13:58+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -374,6 +374,8 @@ msgstr "Các nhiệm vụ"
 msgid "The title for this story"
 msgstr "Tiêu đề cho câu chuyện này"
 
+#, fuzzy
+#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
 msgstr "Câu chuyện này có nổi bật hay không"
 
@@ -753,6 +755,15 @@ msgstr "Thông tin"
 msgid "Engagement"
 msgstr ""
 
+msgid "Category Images"
+msgstr "Các hình ảnh cho danh mục"
+
+msgid "+ New "
+msgstr ""
+
+msgid "+ New Page"
+msgstr ""
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -767,12 +778,6 @@ msgstr "Nội dung"
 
 msgid "Country Aliases"
 msgstr "Biệt hiệu Quốc gia"
-
-msgid "Polls"
-msgstr "Khảo sát"
-
-msgid "Category Images"
-msgstr "Các hình ảnh cho danh mục"
 
 msgid "Job Sources"
 msgstr "Nguồn công việc"
@@ -806,15 +811,6 @@ msgstr "Nội dung các Bước Tham gia "
 
 msgid "Additional Menu"
 msgstr "Menu bổ sung"
-
-msgid "U-Reporters"
-msgstr "U-Reporters"
-
-msgid "Join & Engage"
-msgstr "Tham gia & Kết nối"
-
-msgid "FOLLOW US ON"
-msgstr "THEO DÕI CHÚNG TÔI TẠI"
 
 msgid "SELECT YOUR COUNTRY"
 msgstr ""
@@ -852,50 +848,23 @@ msgstr ""
 msgid "Back"
 msgstr "Quay lại"
 
-msgid ""
-"\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST NOTIFICATIONS"
+msgstr "ĐỊA ĐIỂM"
+
+#, fuzzy
+#| msgid "Manage Users"
+msgid "Backends"
+msgstr "Quản lý người dùng"
+
+msgid "+ New Poll"
 msgstr ""
-"\n"
-"Hãy ghi nhớ nguồn công việc Twitter mà bạn cần có một id tiện ích từ Twitter."
 
-msgid "ABOUT U-REPORT"
-msgstr "THÔNG TIN VỀ U-REPORT"
-
-msgid "Scroll to Learn more"
-msgstr "Cuộc để xem thêm"
-
-msgid "The mission of U-Report"
-msgstr "Sứ mệnh của U-Reprot"
-
-msgid "Why Join U-Report?"
-msgstr "Tại sao nên tham gia U-Report?"
-
-msgid "Speak out on what's happening in your community"
-msgstr "Nói lên những điều đang diễn ra tại cộng đồng của bạn"
-
-msgid "Use U-Report results and information to update and increase citizen's awareness"
-msgstr "Sử dụng kết quả và thông tin của U-Report để cập nhật và nâng cao nhận thức công dân"
-
-msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "Tham gia vào các chiến dịch toàn quốc để giúp cải thiện đất nước bạn"
-
-#, python-format
-msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Chia sẻ những gì đang xảy ra xung quanh %(country)s với U-Reporters"
-
-msgid "CLICK HERE TO JOIN"
-msgstr "BẤM VÀO ĐÂY ĐỂ THAM GIA"
-
-msgid "U-REPORT VIDEOS"
-msgstr "VIDEO VỀ U-REPORT"
-
-msgid "No videos yet."
-msgstr "Chưa có video."
-
-msgid "WATCH IT ON YOUTUBE"
-msgstr "XEM TRÊN YOUTUBE"
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "Kết quả"
 
 msgid "MORE POLLS"
 msgstr "THÊM KHẢO SÁT"
@@ -918,259 +887,112 @@ msgstr "CÁC CÂU CHUYỆN ĐÃ LƯU TRỮ"
 msgid "LIST"
 msgstr "DANH SÁCH"
 
-msgid "Follow"
-msgstr "Theo dõi"
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LATEST OPINION"
+msgstr "ĐỊA ĐIỂM"
 
 #, fuzzy
-#| msgid ""
-#| "\n"
-#| "                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
-#| "                "
-msgid ""
-"\n"
-"                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
-"                "
-msgstr ""
-"\n"
-"U-Report là một công cụ nhắn tin xã hội cho phép bất cứ ai từ bất kỳ cộng đồng nào, bất cứ nơi nào trên thế giới phản hồi các cuộc thăm dò ý kiến, báo cáo vấn đề, hỗ trợ quyền trẻ em và đóng vai trò những tác nhân thay đổi tích cực thay mặt cho người dân ở nước họ"
-
-msgid "CURRENT POLL"
-msgstr "KHẢO SÁT HIỆN TẠI"
-
-msgid "View Full Results"
-msgstr "Xem toàn bộ kết quả"
-
-msgid "All U-Report members"
-msgstr "Tất cả các thành viên U-Report"
-
-msgid "RESPONSE RATE"
-msgstr "TỶ LỆ PHẢN HỒI"
-
-msgid "Responded out of"
-msgstr "Đã phản hồi trong số"
-
-msgid "RESPONDER'S RATE BY LOCATION"
-msgstr "TỶ LỆ NGƯỜI PHẢN HỒI THEO ĐỊA PHƯƠNG"
-
-msgid "Most responded"
-msgstr "Phản hồi nhiều nhất"
-
-#, python-format
-msgid ""
-"\n"
-"                                  %(responded)s of %(total)s\n"
-"                                  "
-msgstr ""
-"\n"
-"%(responded)strong số%(total)s"
-
-msgid "TRENDING WORDS"
-msgstr "CÁC TỪ ĐANG ĐƯỢC ƯU CHUỘNG"
-
-msgid "FEATURED RESPONSES"
-msgstr "PHẢN HỒI NỔI BẬT"
-
-msgid "View full results"
-msgstr "Xem toàn bộ kết quả"
+#| msgid "POLL RESULTS"
+msgid "VIEW FULL RESULTS"
+msgstr "KẾT QUẢ KHẢO SÁT"
 
 msgid "U-REPORTERS IN"
 msgstr "U-REPORTERS TẠI"
 
-msgid "TOTAL # OF U-REPORTERS"
-msgstr "TỔNG SỐ U-REPORTERS"
-
-msgid "4 MOST ACTIVE REGIONS"
-msgstr "4 KHU VỰC TÍCH CỰC NHẤT"
-
-msgid "RATE BY GENDER"
-msgstr "TỶ LỆ TÍNH THEO GIỚI TÍNH"
-
-msgid "RATE BY AGE"
-msgstr "TỶ LỆ TÍNH THEO ĐỘ TUỔI"
-
-msgid "WHAT U-REPORTERS ARE SAYING"
-msgstr "U-REPORTERS NÓI GÌ"
-
-msgid "FEATURED VIDEO"
-msgstr "VIDEO NỔI BẬT"
-
-msgid "Watch more videos"
-msgstr "Xem thêm video"
-
-msgid "FEATURED REGION"
-msgstr "KHU VỰC NỔI BẬT"
-
-msgid "Check more stories in U-Report app"
-msgstr "Xem thêm các câu chuyện trên ứng dụng U-Report"
-
-msgid "View more stories on Facebook"
-msgstr "Xem thêm trên Facebook"
-
-msgid "View more on Instagram"
-msgstr "Xem thêm trên Instagram"
-
-msgid "Read more tweets on Twitter"
-msgstr "Đọc thêm trên Twitter"
-
-msgid "NEWS FEED"
-msgstr "TIN TỨC"
-
-msgid "STORY"
-msgstr "Câu chuyện"
-
-msgid "Read full story"
-msgstr "Đọc toàn bộ câu chuyện"
-
-msgid "Response Rate"
-msgstr "Tỉ lệ phản hồi"
-
-msgid "Read this story"
-msgstr "Đọc câu chuyện này"
-
-msgid "JOBS"
-msgstr "CÔNG VIỆC"
-
-msgid "Scroll to see job details"
-msgstr "Cuộn để xem thông tin công việc"
-
-msgid "Tweet to"
-msgstr "Tweet đến"
-
-msgid "Read more"
-msgstr "Đọc thêm"
-
-msgid "Visit"
-msgstr "Ghé thăm"
-
-msgid "JOIN U-REPORT"
-msgstr "THAM GIA U-REPORT"
-
-msgid "HOW TO JOIN"
-msgstr "CÁCH THAM GIA"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-#| "\n"
-#| "            "
-msgid ""
-"\n"
-"                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-"\n"
-"              "
+msgid "PARTNERING WITH"
 msgstr ""
-"\n"
-"* U-Report là một chương trình miễn phí do UNICEF tài trợ với sự trợ giúp của các Nhà cung cấp Mạng tại %(country)s. U-Report sẽ không yêu cầu thanh toán và thông tin tài chính cá nhân, vui lòng bỏ qua bất kỳ tin nhắn nào yêu cầu bạn thanh toán bằng số này hoặc trên các trang Facebook và Twitter. Tất cả các dịch vụ U-Report (tất cả các tin nhắn trên %(shortcode)s) đều miễn phí."
 
-msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr "U-REPORT TRÊN MẠNG XÃ HỘI"
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS"
+msgstr "U-REPORTERS TẠI"
 
-msgid "Compose new Tweet"
-msgstr "Soạn Tweet mới"
-
-msgid "CURRENT POLL IN"
-msgstr "KHẢO SÁT HIỆN TẠI THUỘC CHỦ ĐỀ"
-
-#, python-format
-msgid ""
-"\n"
-"                  %(questions)s question polled on this topic\n"
-"                "
-msgid_plural ""
-"\n"
-"                  %(questions)s questions polled on this topic\n"
-"                "
-msgstr[0] ""
-"\n"
-"%(questions)s câu hỏi đã khảo sát trong chủ đề này"
-
-msgid "response rate"
-msgstr "tỷ lệ phản hồi"
-
-msgid "responded out of"
-msgstr "phản hồi trong tổng số"
-
-msgid "polled"
-msgstr "đã khảo sát"
-
-msgid "POLL RESULTS"
-msgstr "KẾT QUẢ KHẢO SÁT"
-
-#, python-format
-msgid ""
-"\n"
-"                    %(responded)s responded out of %(polled)s polled\n"
-"                  "
+msgid "IN"
 msgstr ""
-"\n"
-"%(responded)sđã phản hồi trong số %(polled)sđã khảo sát"
 
-msgid "KEYWORDS"
-msgstr "TỪ KHÓA"
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "U-REPORTERS TẠI"
 
-msgid "STATISTICS"
-msgstr "SỐ LIỆU"
+msgid "AGES"
+msgstr ""
 
-msgid "LOCATIONS"
-msgstr "ĐỊA ĐIỂM"
+msgid "Join U-Report, Your voice matters."
+msgstr ""
 
-msgid "GENDER"
-msgstr "GIỚI TÍNH"
-
-msgid "AGE"
-msgstr "TUỔI"
-
-msgid "FEATURED ANSWERS"
-msgstr "CÂU TRẢ LỜI NỔI BẬT"
-
-msgid "No featured answers."
-msgstr "Không có câu trở lời nổi bật"
-
-msgid "U-Reporter in"
-msgstr "U-Reporter tại"
-
-msgid "RELATED STORIES"
-msgstr "CÁC CÂU CHUYỆN LIÊN QUAN"
-
-msgid "No related stories."
-msgstr "Không có câu chuyện liên quan."
-
-msgid "FEATURED IMAGES"
-msgstr "HÌNH ẢNH NỔI BẬT"
-
-msgid "No featured images yet."
-msgstr "Chưa có hình ảnh nổi bật"
+msgid "JOIN NOW"
+msgstr ""
 
 msgid "FEATURED STORY"
 msgstr "CÂU CHUYỆN NỔI BẬT"
 
-msgid "BY"
-msgstr "BỞI"
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
 
-msgid "LATEST STORIES"
-msgstr "CÁC CÂU CHUYỆN MỚI NHẤT"
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr ""
 
-msgid "FILTERED BY"
-msgstr "ĐƯỢC LỌC BỞI"
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "XEM THÊM"
 
-msgid "Scroll to read more"
-msgstr "Cuộn để đọc thêm"
+msgid "Visit"
+msgstr "Ghé thăm"
 
-msgid "STORY CONTINUES"
-msgstr "Câu chuyện tiếp tục"
+msgid "How would you like to join?"
+msgstr ""
 
-msgid "AUDIO"
-msgstr "AUDIO"
+msgid "Text"
+msgstr ""
 
-msgid "RELATED POLLS"
-msgstr "CÁC KHẢO SÁT LIÊN QUAN"
+msgid "SEARCH"
+msgstr ""
 
-msgid "No related polls."
-msgstr "Không có khảo sát liên quan."
+msgid "No results found"
+msgstr ""
 
-msgid "No featured images."
-msgstr "Không có hình ảnh đặc trưng."
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONSES"
+msgstr "TỶ LỆ PHẢN HỒI"
+
+msgid "RESPONSE RATE"
+msgstr "TỶ LỆ PHẢN HỒI"
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "TOTAL RESPONSES"
+msgstr "TỶ LỆ PHẢN HỒI"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                    %(responded)s responded out of %(polled)s polled\n"
+#| "                  "
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr ""
+"\n"
+"%(responded)sđã phản hồi trong số %(polled)sđã khảo sát"
+
+msgid "ALL"
+msgstr ""
+
+msgid "AGE"
+msgstr "TUỔI"
+
+msgid "GENDER"
+msgstr "GIỚI TÍNH"
+
+#, fuzzy
+#| msgid "LOCATIONS"
+msgid "LOCATION"
+msgstr "ĐỊA ĐIỂM"
+
+msgid "Written by:"
+msgstr ""
 
 msgid "Even"
 msgstr "Thậm chí"
@@ -1217,26 +1039,28 @@ msgstr "của"
 msgid "the"
 msgstr ""
 
-msgid "WHO WE ARE"
-msgstr "CHÚNG TÔI LÀ AI"
-
-msgid "U-REPORTER STATISTICS"
+#, fuzzy
+#| msgid "U-REPORTER STATISTICS"
+msgid "OVERALL STATISTICS"
 msgstr "SỐ LIỆU VỀ U-REPORTERS"
 
-msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr "CÁC U-REPORTERS ĐẾN TỪ ĐÂU?"
+msgid "THIS YEAR"
+msgstr ""
 
-msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr "TỈ LỆ ĐĂNG KÝ: TRONG 6 THÁNG QUA"
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "AVG RESPONSE RATE"
+msgstr "TỶ LỆ PHẢN HỒI"
 
-msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-msgstr "NGHỀ NGHIỆP: TOP 9 ĐƯỢC NHẮC ĐẾN"
+#, fuzzy
+#| msgid "U-REPORTERS IN"
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERS TẠI"
 
-msgid "Registered"
-msgstr "Đã đăng ký"
-
-msgid "Week of"
-msgstr "Tuần"
+#, fuzzy
+#| msgid "POLL RESULTS"
+msgid "FILTER RESULTS"
+msgstr "KẾT QUẢ KHẢO SÁT"
 
 msgid "Export and Share"
 msgstr ""
@@ -1338,142 +1162,6 @@ msgstr "Không"
 
 msgid "Dec"
 msgstr ""
-
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST OPINION"
-msgstr "ĐỊA ĐIỂM"
-
-#, fuzzy
-#| msgid "POLL RESULTS"
-msgid "VIEW FULL RESULTS"
-msgstr "KẾT QUẢ KHẢO SÁT"
-
-msgid "PARTNERING WITH"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "U-REPORTERS"
-msgstr "U-REPORTERS TẠI"
-
-msgid "IN"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "COUNTRIES WORLDWIDE"
-msgstr "U-REPORTERS TẠI"
-
-msgid "AGES"
-msgstr ""
-
-#, fuzzy
-#| msgid "READ MORE"
-msgid "LEARN MORE"
-msgstr "XEM THÊM"
-
-msgid "+ New "
-msgstr ""
-
-msgid "+ New Page"
-msgstr ""
-
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LATEST NOTIFICATIONS"
-msgstr "ĐỊA ĐIỂM"
-
-#, fuzzy
-#| msgid "Manage Users"
-msgid "Backends"
-msgstr "Quản lý người dùng"
-
-msgid "+ New Poll"
-msgstr ""
-
-#, fuzzy
-#| msgid "Results"
-msgid "Refresh Results"
-msgstr "Kết quả"
-
-msgid "Join U-Report, Your voice matters."
-msgstr ""
-
-msgid "JOIN NOW"
-msgstr ""
-
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr ""
-
-msgid "How would you like to join?"
-msgstr ""
-
-msgid "Text"
-msgstr ""
-
-msgid "SEARCH"
-msgstr ""
-
-msgid "No results found"
-msgstr ""
-
-#, fuzzy
-#| msgid "RESPONSE RATE"
-msgid "RESPONSES"
-msgstr "TỶ LỆ PHẢN HỒI"
-
-#, fuzzy
-#| msgid "RESPONSE RATE"
-msgid "TOTAL RESPONSES"
-msgstr "TỶ LỆ PHẢN HỒI"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                    %(responded)s responded out of %(polled)s polled\n"
-#| "                  "
-msgid "%(responded)s responded out of %(polled)s polled"
-msgstr ""
-"\n"
-"%(responded)sđã phản hồi trong số %(polled)sđã khảo sát"
-
-msgid "ALL"
-msgstr ""
-
-#, fuzzy
-#| msgid "LOCATIONS"
-msgid "LOCATION"
-msgstr "ĐỊA ĐIỂM"
-
-msgid "Written by:"
-msgstr ""
-
-#, fuzzy
-#| msgid "U-REPORTER STATISTICS"
-msgid "OVERALL STATISTICS"
-msgstr "SỐ LIỆU VỀ U-REPORTERS"
-
-msgid "THIS YEAR"
-msgstr ""
-
-#, fuzzy
-#| msgid "RESPONSE RATE"
-msgid "AVG RESPONSE RATE"
-msgstr "TỶ LỆ PHẢN HỒI"
-
-#, fuzzy
-#| msgid "U-REPORTERS IN"
-msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS TẠI"
-
-#, fuzzy
-#| msgid "POLL RESULTS"
-msgid "FILTER RESULTS"
-msgstr "KẾT QUẢ KHẢO SÁT"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -2111,11 +1799,330 @@ msgstr "Phản hồi"
 msgid "Sign Up Rate"
 msgstr ""
 
+msgid "Response Rate"
+msgstr "Tỉ lệ phản hồi"
+
 msgid "Active Users"
 msgstr ""
 
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Câu chuyện này có nổi bật hay không"
+
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
+
+#~ msgid "Polls"
+#~ msgstr "Khảo sát"
+
+#~ msgid "U-Reporters"
+#~ msgstr "U-Reporters"
+
+#~ msgid "Join & Engage"
+#~ msgstr "Tham gia & Kết nối"
+
+#~ msgid "FOLLOW US ON"
+#~ msgstr "THEO DÕI CHÚNG TÔI TẠI"
+
+#~ msgid ""
+#~ "\n"
+#~ "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "Hãy ghi nhớ nguồn công việc Twitter mà bạn cần có một id tiện ích từ Twitter."
+
+#~ msgid "ABOUT U-REPORT"
+#~ msgstr "THÔNG TIN VỀ U-REPORT"
+
+#~ msgid "Scroll to Learn more"
+#~ msgstr "Cuộc để xem thêm"
+
+#~ msgid "The mission of U-Report"
+#~ msgstr "Sứ mệnh của U-Reprot"
+
+#~ msgid "Why Join U-Report?"
+#~ msgstr "Tại sao nên tham gia U-Report?"
+
+#~ msgid "Speak out on what's happening in your community"
+#~ msgstr "Nói lên những điều đang diễn ra tại cộng đồng của bạn"
+
+#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
+#~ msgstr "Sử dụng kết quả và thông tin của U-Report để cập nhật và nâng cao nhận thức công dân"
+
+#~ msgid "Participate in nationwide campaigns to help improve your country"
+#~ msgstr "Tham gia vào các chiến dịch toàn quốc để giúp cải thiện đất nước bạn"
+
+#, python-format
+#~ msgid "Share what's happening around %(country)s with other U-Reporters"
+#~ msgstr "Chia sẻ những gì đang xảy ra xung quanh %(country)s với U-Reporters"
+
+#~ msgid "CLICK HERE TO JOIN"
+#~ msgstr "BẤM VÀO ĐÂY ĐỂ THAM GIA"
+
+#~ msgid "U-REPORT VIDEOS"
+#~ msgstr "VIDEO VỀ U-REPORT"
+
+#~ msgid "No videos yet."
+#~ msgstr "Chưa có video."
+
+#~ msgid "WATCH IT ON YOUTUBE"
+#~ msgstr "XEM TRÊN YOUTUBE"
+
+#~ msgid "Follow"
+#~ msgstr "Theo dõi"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "U-Report là một công cụ nhắn tin xã hội cho phép bất cứ ai từ bất kỳ cộng đồng nào, bất cứ nơi nào trên thế giới phản hồi các cuộc thăm dò ý kiến, báo cáo vấn đề, hỗ trợ quyền trẻ em và đóng vai trò những tác nhân thay đổi tích cực thay mặt cho người dân ở nước họ"
+
+#~ msgid "CURRENT POLL"
+#~ msgstr "KHẢO SÁT HIỆN TẠI"
+
+#~ msgid "View Full Results"
+#~ msgstr "Xem toàn bộ kết quả"
+
+#~ msgid "All U-Report members"
+#~ msgstr "Tất cả các thành viên U-Report"
+
+#~ msgid "Responded out of"
+#~ msgstr "Đã phản hồi trong số"
+
+#~ msgid "RESPONDER'S RATE BY LOCATION"
+#~ msgstr "TỶ LỆ NGƯỜI PHẢN HỒI THEO ĐỊA PHƯƠNG"
+
+#~ msgid "Most responded"
+#~ msgstr "Phản hồi nhiều nhất"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                                  %(responded)s of %(total)s\n"
+#~ "                                  "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)strong số%(total)s"
+
+#~ msgid "TRENDING WORDS"
+#~ msgstr "CÁC TỪ ĐANG ĐƯỢC ƯU CHUỘNG"
+
+#~ msgid "FEATURED RESPONSES"
+#~ msgstr "PHẢN HỒI NỔI BẬT"
+
+#~ msgid "View full results"
+#~ msgstr "Xem toàn bộ kết quả"
+
+#~ msgid "TOTAL # OF U-REPORTERS"
+#~ msgstr "TỔNG SỐ U-REPORTERS"
+
+#~ msgid "4 MOST ACTIVE REGIONS"
+#~ msgstr "4 KHU VỰC TÍCH CỰC NHẤT"
+
+#~ msgid "RATE BY GENDER"
+#~ msgstr "TỶ LỆ TÍNH THEO GIỚI TÍNH"
+
+#~ msgid "RATE BY AGE"
+#~ msgstr "TỶ LỆ TÍNH THEO ĐỘ TUỔI"
+
+#~ msgid "WHAT U-REPORTERS ARE SAYING"
+#~ msgstr "U-REPORTERS NÓI GÌ"
+
+#~ msgid "FEATURED VIDEO"
+#~ msgstr "VIDEO NỔI BẬT"
+
+#~ msgid "Watch more videos"
+#~ msgstr "Xem thêm video"
+
+#~ msgid "FEATURED REGION"
+#~ msgstr "KHU VỰC NỔI BẬT"
+
+#~ msgid "Check more stories in U-Report app"
+#~ msgstr "Xem thêm các câu chuyện trên ứng dụng U-Report"
+
+#~ msgid "View more stories on Facebook"
+#~ msgstr "Xem thêm trên Facebook"
+
+#~ msgid "View more on Instagram"
+#~ msgstr "Xem thêm trên Instagram"
+
+#~ msgid "Read more tweets on Twitter"
+#~ msgstr "Đọc thêm trên Twitter"
+
+#~ msgid "NEWS FEED"
+#~ msgstr "TIN TỨC"
+
+#~ msgid "STORY"
+#~ msgstr "Câu chuyện"
+
+#~ msgid "Read full story"
+#~ msgstr "Đọc toàn bộ câu chuyện"
+
+#~ msgid "Read this story"
+#~ msgstr "Đọc câu chuyện này"
+
+#~ msgid "JOBS"
+#~ msgstr "CÔNG VIỆC"
+
+#~ msgid "Scroll to see job details"
+#~ msgstr "Cuộn để xem thông tin công việc"
+
+#~ msgid "Tweet to"
+#~ msgstr "Tweet đến"
+
+#~ msgid "Read more"
+#~ msgstr "Đọc thêm"
+
+#~ msgid "JOIN U-REPORT"
+#~ msgstr "THAM GIA U-REPORT"
+
+#~ msgid "HOW TO JOIN"
+#~ msgstr "CÁCH THAM GIA"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+#~| "\n"
+#~| "            "
+#~ msgid ""
+#~ "\n"
+#~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+#~ "\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "* U-Report là một chương trình miễn phí do UNICEF tài trợ với sự trợ giúp của các Nhà cung cấp Mạng tại %(country)s. U-Report sẽ không yêu cầu thanh toán và thông tin tài chính cá nhân, vui lòng bỏ qua bất kỳ tin nhắn nào yêu cầu bạn thanh toán bằng số này hoặc trên các trang Facebook và Twitter. Tất cả các dịch vụ U-Report (tất cả các tin nhắn trên %(shortcode)s) đều miễn phí."
+
+#~ msgid "U-REPORT ON SOCIAL MEDIA"
+#~ msgstr "U-REPORT TRÊN MẠNG XÃ HỘI"
+
+#~ msgid "Compose new Tweet"
+#~ msgstr "Soạn Tweet mới"
+
+#~ msgid "CURRENT POLL IN"
+#~ msgstr "KHẢO SÁT HIỆN TẠI THUỘC CHỦ ĐỀ"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                  %(questions)s question polled on this topic\n"
+#~ "                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                  %(questions)s questions polled on this topic\n"
+#~ "                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(questions)s câu hỏi đã khảo sát trong chủ đề này"
+
+#~ msgid "response rate"
+#~ msgstr "tỷ lệ phản hồi"
+
+#~ msgid "responded out of"
+#~ msgstr "phản hồi trong tổng số"
+
+#~ msgid "polled"
+#~ msgstr "đã khảo sát"
+
+#~ msgid "POLL RESULTS"
+#~ msgstr "KẾT QUẢ KHẢO SÁT"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    %(responded)s responded out of %(polled)s polled\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)sđã phản hồi trong số %(polled)sđã khảo sát"
+
+#~ msgid "KEYWORDS"
+#~ msgstr "TỪ KHÓA"
+
+#~ msgid "STATISTICS"
+#~ msgstr "SỐ LIỆU"
+
+#~ msgid "LOCATIONS"
+#~ msgstr "ĐỊA ĐIỂM"
+
+#~ msgid "FEATURED ANSWERS"
+#~ msgstr "CÂU TRẢ LỜI NỔI BẬT"
+
+#~ msgid "No featured answers."
+#~ msgstr "Không có câu trở lời nổi bật"
+
+#~ msgid "U-Reporter in"
+#~ msgstr "U-Reporter tại"
+
+#~ msgid "RELATED STORIES"
+#~ msgstr "CÁC CÂU CHUYỆN LIÊN QUAN"
+
+#~ msgid "No related stories."
+#~ msgstr "Không có câu chuyện liên quan."
+
+#~ msgid "FEATURED IMAGES"
+#~ msgstr "HÌNH ẢNH NỔI BẬT"
+
+#~ msgid "No featured images yet."
+#~ msgstr "Chưa có hình ảnh nổi bật"
+
+#~ msgid "BY"
+#~ msgstr "BỞI"
+
+#~ msgid "LATEST STORIES"
+#~ msgstr "CÁC CÂU CHUYỆN MỚI NHẤT"
+
+#~ msgid "FILTERED BY"
+#~ msgstr "ĐƯỢC LỌC BỞI"
+
+#~ msgid "Scroll to read more"
+#~ msgstr "Cuộn để đọc thêm"
+
+#~ msgid "STORY CONTINUES"
+#~ msgstr "Câu chuyện tiếp tục"
+
+#~ msgid "AUDIO"
+#~ msgstr "AUDIO"
+
+#~ msgid "RELATED POLLS"
+#~ msgstr "CÁC KHẢO SÁT LIÊN QUAN"
+
+#~ msgid "No related polls."
+#~ msgstr "Không có khảo sát liên quan."
+
+#~ msgid "No featured images."
+#~ msgstr "Không có hình ảnh đặc trưng."
+
+#~ msgid "WHO WE ARE"
+#~ msgstr "CHÚNG TÔI LÀ AI"
+
+#~ msgid "U-REPORTER STATISTICS"
+#~ msgstr "SỐ LIỆU VỀ U-REPORTERS"
+
+#~ msgid "WHERE ARE U-REPORTERS FROM?"
+#~ msgstr "CÁC U-REPORTERS ĐẾN TỪ ĐÂU?"
+
+#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
+#~ msgstr "TỈ LỆ ĐĂNG KÝ: TRONG 6 THÁNG QUA"
+
+#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
+#~ msgstr "NGHỀ NGHIỆP: TOP 9 ĐƯỢC NHẮC ĐẾN"
+
+#~ msgid "Registered"
+#~ msgstr "Đã đăng ký"
+
+#~ msgid "Week of"
+#~ msgstr "Tuần"
 
 #~ msgid "Featured Poll Responses"
 #~ msgstr "Phản hồi khảo sát nổi bật"

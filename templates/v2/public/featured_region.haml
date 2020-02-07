@@ -1,8 +1,0 @@
-- load ureport
-
-.row
-  .col-md-9
-    .poll-map{ data-question: "={ question.id }", data-region: '{{ org|config:"featured_state"}}', id: "map-{{question.id}}" }
-  .col-md-3
-    .question    
-      {{ latest_poll.title }}    

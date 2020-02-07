@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 15:03+0000\n"
+"POT-Creation-Date: 2020-02-05 13:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2019\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -372,6 +372,8 @@ msgstr "Zadaci"
 msgid "The title for this story"
 msgstr "Naslov priče"
 
+#, fuzzy
+#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
 msgstr "Da li je priča objavljena"
 
@@ -728,6 +730,15 @@ msgstr "O nama"
 msgid "Engagement"
 msgstr "Angažovanje"
 
+msgid "Category Images"
+msgstr "Slike kategorija"
+
+msgid "+ New "
+msgstr "+ Novo"
+
+msgid "+ New Page"
+msgstr "+ Nova Stranica"
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -742,12 +753,6 @@ msgstr "Sadržaj"
 
 msgid "Country Aliases"
 msgstr "Sinonimi za državu"
-
-msgid "Polls"
-msgstr "Ankete"
-
-msgid "Category Images"
-msgstr "Slike kategorija"
 
 msgid "Job Sources"
 msgstr "Izvori zadataka"
@@ -781,15 +786,6 @@ msgstr "Koraci za pridruživanje, sadržaj"
 
 msgid "Additional Menu"
 msgstr "Dodatni meni"
-
-msgid "U-Reporters"
-msgstr "U-Reporteri"
-
-msgid "Join & Engage"
-msgstr "Pridruži se i angažuj"
-
-msgid "FOLLOW US ON"
-msgstr "PRATITE NAS NA"
 
 msgid "SELECT YOUR COUNTRY"
 msgstr "ODABERI SVOJU ZEMLJU"
@@ -825,50 +821,17 @@ msgstr ""
 msgid "Back"
 msgstr "Povratak nazad"
 
-msgid ""
-"\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-"Ne zaboravite da za Twitter zadatke morate imati widget id Twittera."
+msgid "LATEST NOTIFICATIONS"
+msgstr "POSLEDNJA OBAVEŠTENJA"
 
-msgid "ABOUT U-REPORT"
-msgstr "O U-REPORTU"
+msgid "Backends"
+msgstr "Pozadinski sistemi"
 
-msgid "Scroll to Learn more"
-msgstr "Listajte dalje za više informacija"
+msgid "+ New Poll"
+msgstr "+ Nova Anketa"
 
-msgid "The mission of U-Report"
-msgstr "Šta je misija U-Reporta"
-
-msgid "Why Join U-Report?"
-msgstr "Zašto se priključiti U-Reportu"
-
-msgid "Speak out on what's happening in your community"
-msgstr "Recite šta se događa u vašoj zajednici"
-
-msgid "Use U-Report results and information to update and increase citizen's awareness"
-msgstr "Koristite rezultate i informacije iz U-Reporta kako biste pratili i povećali građansku svest"
-
-msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "Učestvujte u kampanjama širom države, kako biste uticali na stanje u našoj zemlji."
-
-#, python-format
-msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Podelite šta se dešava sa ostalim U-Reporterima u %(country)s"
-
-msgid "CLICK HERE TO JOIN"
-msgstr "KLIKNI OVDE DA SE PRIDRUŽIŠ"
-
-msgid "U-REPORT VIDEOS"
-msgstr "U-REPORT VIDEO"
-
-msgid "No videos yet."
-msgstr "Još uvek nema video snimaka."
-
-msgid "WATCH IT ON YOUTUBE"
-msgstr "POGLEDAJTE NA YOUTUBE"
+msgid "Refresh Results"
+msgstr "Osveži rezultate"
 
 msgid "MORE POLLS"
 msgstr "VIŠE ANKETA"
@@ -891,261 +854,90 @@ msgstr "ARHIVIRANE PRIČE"
 msgid "LIST"
 msgstr "LISTA"
 
-msgid "Follow"
-msgstr "Prati"
+msgid "LATEST OPINION"
+msgstr "POSLEDNJE MIŠLJENJE"
 
-msgid ""
-"\n"
-"                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
-"                "
-msgstr ""
-"\n"
-"U-Report je platforma koja omogućava svima da putem poruka iz bilo kojeg dela sveta odgovore na upitnike, izveštavaju o problemima, podrže prava deteta i aktivno učestvuju u promenama za dobrobit zajednice."
-
-msgid "CURRENT POLL"
-msgstr "TRENUTNA ANKETA"
-
-msgid "View Full Results"
-msgstr "Pogledaj kompletne rezultate"
-
-msgid "All U-Report members"
-msgstr "Svi članovi U-Reporta"
-
-msgid "RESPONSE RATE"
-msgstr "STOPA ODGOVORA"
-
-msgid "Responded out of"
-msgstr "Od ukupnog broja odgovora"
-
-msgid "RESPONDER'S RATE BY LOCATION"
-msgstr "STOPA ODGOVORA PO LOKACIJI"
-
-msgid "Most responded"
-msgstr "Najviše odgovora "
-
-#, python-format
-msgid ""
-"\n"
-"                                  %(responded)s of %(total)s\n"
-"                                  "
-msgstr ""
-"\n"
-"                                  %(responded)s od %(total)s\n"
-"                                  "
-
-msgid "TRENDING WORDS"
-msgstr "REČI U TRENDU"
-
-msgid "FEATURED RESPONSES"
-msgstr "ISTAKNUTI ODGOVORI"
-
-msgid "View full results"
-msgstr "Pogledaj kompletne rezultate"
+msgid "VIEW FULL RESULTS"
+msgstr "POGLEDAJ SVE REZULTATE"
 
 msgid "U-REPORTERS IN"
 msgstr "U-REPORTERI U"
 
-msgid "TOTAL # OF U-REPORTERS"
-msgstr "UKUPAN # U-REPORTERA"
+msgid "PARTNERING WITH"
+msgstr "PARTNERSTVO SA"
 
-msgid "4 MOST ACTIVE REGIONS"
-msgstr "4 NAJAKTIVNIJE LOKACIJE"
+msgid "U-REPORTERS"
+msgstr "U-REPORTERI"
 
-msgid "RATE BY GENDER"
-msgstr "STOPA PO POLU"
+msgid "IN"
+msgstr "U"
 
-msgid "RATE BY AGE"
-msgstr "STOPA PO STAROSTI"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "ZEMLJE ŠIROM SVETA"
 
-msgid "WHAT U-REPORTERS ARE SAYING"
-msgstr "ŠTA KAŽU U-REPORTERI"
-
-msgid "FEATURED VIDEO"
-msgstr "ISTAKNUTI SNIMCI"
-
-msgid "Watch more videos"
-msgstr "Pogledaj još video snimaka"
-
-msgid "FEATURED REGION"
-msgstr "ISTAKNUTA REGIJA"
-
-msgid "Check more stories in U-Report app"
-msgstr "Pogledajte više priča unutar U-Report aplikacije"
-
-msgid "View more stories on Facebook"
-msgstr "Pogledajte više priča na Facebooku"
-
-msgid "View more on Instagram"
-msgstr "Pogledaj više na Instagramu"
-
-msgid "Read more tweets on Twitter"
-msgstr "Pročitaj više na Twitteru"
-
-msgid "NEWS FEED"
-msgstr "VESTI"
-
-msgid "STORY"
-msgstr "PRIČA"
-
-msgid "Read full story"
-msgstr "Pročitaj celu priču"
-
-msgid "Response Rate"
-msgstr "Stopa odgovora"
-
-msgid "Read this story"
-msgstr "Pročitaj ovu priču"
-
-msgid "JOBS"
-msgstr "ZADACI"
-
-msgid "Scroll to see job details"
-msgstr "Listajte dalje da vidite detalje zadataka"
-
-msgid "Tweet to"
-msgstr "Tvituj"
-
-msgid "Read more"
-msgstr "Pročitaj više"
-
-msgid "Visit"
-msgstr "Poseti"
-
-msgid "JOIN U-REPORT"
-msgstr "PRIDRUŽI SE U-REPORTU"
-
-msgid "HOW TO JOIN"
-msgstr "KAKO SE PRIDRUŽITI"
-
-#, python-format
-msgid ""
-"\n"
-"                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-"\n"
-"              "
-msgstr ""
-"\n"
-"              * U-Report je besplatan program pod okriljem UNICEF-a u %(country)s. U-Report neće od vas tražiti nikakve uplate, niti informacije o vašim računima, MOLIMO vas zanemarite svaki upit o finansijskim informacijama ili plaćanju, kako ovdje, tako na Facebook-u i Viber-u. Sve usluge U-Reporta (sve poruke na %(shortcode)s) su besplatne.\n"
-"\n"
-"            "
-
-msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr "U-REPORT NA DRUŠTVENIM MREŽAMA"
-
-msgid "Compose new Tweet"
-msgstr "Sastavi novi tweet"
-
-msgid "CURRENT POLL IN"
-msgstr "TRENUTNA ANKETA U"
-
-#, python-format
-msgid ""
-"\n"
-"                  %(questions)s question polled on this topic\n"
-"                "
-msgid_plural ""
-"\n"
-"                  %(questions)s questions polled on this topic\n"
-"                "
-msgstr[0] ""
-"\n"
-"                  %(questions)s pitanja postavljenih na ovu temu \n"
-"                "
-msgstr[1] ""
-"\n"
-"                  %(questions)s pitanja postavljenih na ovu temu\n"
-"                "
-msgstr[2] ""
-"\n"
-"                  %(questions)spitanja postavljenih na ovu temu \n"
-"                "
-
-msgid "response rate"
-msgstr "stopa odgovora"
-
-msgid "responded out of"
-msgstr "odgovorilo od ukupno"
-
-msgid "polled"
-msgstr "anketirani"
-
-msgid "POLL RESULTS"
-msgstr "REZULTATI ANKETE"
-
-#, python-format
-msgid ""
-"\n"
-"                    %(responded)s responded out of %(polled)s polled\n"
-"                  "
-msgstr ""
-"\n"
-"%(responded)sodgovorilo od %(polled)sispitanih"
-
-msgid "KEYWORDS"
-msgstr "KLJUČNE REČI"
-
-msgid "STATISTICS"
-msgstr "STATISTIKE"
-
-msgid "LOCATIONS"
-msgstr "LOKACIJE"
-
-msgid "GENDER"
-msgstr "POL"
-
-msgid "AGE"
+msgid "AGES"
 msgstr "GODINE"
 
-msgid "FEATURED ANSWERS"
-msgstr "ISTAKNUTI ODGOVORI"
+msgid "Join U-Report, Your voice matters."
+msgstr "Pridruži se U-Reportu, Tvoj glas je bitan."
 
-msgid "No featured answers."
-msgstr "Nema istaknutih odgovora"
-
-msgid "U-Reporter in"
-msgstr "U-Reporter u"
-
-msgid "RELATED STORIES"
-msgstr "POVEZANE PRIČE"
-
-msgid "No related stories."
-msgstr "Nema povezanih priča"
-
-msgid "FEATURED IMAGES"
-msgstr "ISTAKNUTE SLIKE"
-
-msgid "No featured images yet."
-msgstr "Nema istaknutih slika za sada"
+msgid "JOIN NOW"
+msgstr "PRIDRUŽI SE SADA"
 
 msgid "FEATURED STORY"
 msgstr "ISTAKNUTE PRIČE"
 
-msgid "BY"
-msgstr "OD"
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Mi smo deo globalne platforme koja radi na poboljšanju života mladih ljudi širom sveta."
 
-msgid "LATEST STORIES"
-msgstr "NAJNOVIJE PRIČE"
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Saznajte više o tome kako U-Report osnažuje i povezuje mlade da govore o temama koje su za njih bitne."
 
-msgid "FILTERED BY"
-msgstr "FILTRIRANO PO"
+msgid "LEARN MORE"
+msgstr "NAUČI VIŠE"
 
-msgid "Scroll to read more"
-msgstr "Listajte dalje da vidite ostatak"
+msgid "Visit"
+msgstr "Poseti"
 
-msgid "STORY CONTINUES"
-msgstr "PRIČA SE NASTAVLJA"
+msgid "How would you like to join?"
+msgstr "Kako želiš da se pridružiš?"
 
-msgid "AUDIO"
-msgstr "ZVUČNI ZAPIS"
+msgid "Text"
+msgstr "Tekst"
 
-msgid "RELATED POLLS"
-msgstr "VEZANE ANKETE"
+msgid "SEARCH"
+msgstr "PRETRAGA"
 
-msgid "No related polls."
-msgstr "Nema povezanih anketa."
+msgid "No results found"
+msgstr "Nema rezultata"
 
-msgid "No featured images."
-msgstr "Nema istaknutih slika."
+msgid "RESPONSES"
+msgstr "ODGOVORI"
+
+msgid "RESPONSE RATE"
+msgstr "STOPA ODGOVORA"
+
+msgid "TOTAL RESPONSES"
+msgstr "SVI ODGOVORI"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s je odgovorilo od %(polled)s anketiranih"
+
+msgid "ALL"
+msgstr "SVE"
+
+msgid "AGE"
+msgstr "GODINE"
+
+msgid "GENDER"
+msgstr "POL"
+
+msgid "LOCATION"
+msgstr "LOKACIJA"
+
+msgid "Written by:"
+msgstr "Napisao:"
 
 msgid "Even"
 msgstr "Jednako"
@@ -1192,26 +984,20 @@ msgstr "od"
 msgid "the"
 msgstr " "
 
-msgid "WHO WE ARE"
-msgstr "KO SMO MI"
+msgid "OVERALL STATISTICS"
+msgstr "STATISTIKA"
 
-msgid "U-REPORTER STATISTICS"
-msgstr "STATISTIKE O U-REPORTERIMA"
+msgid "THIS YEAR"
+msgstr "OVE GODINE"
 
-msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr "ODAKLE DOLAZE U-REPORTERI?"
+msgid "AVG RESPONSE RATE"
+msgstr "PROSEČNA STOPA ODGOVORA"
 
-msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr "STOPA REGISTRACIJE: U ZADNJIH 6 MESECI"
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERI PO REGIONIMA"
 
-msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-msgstr "ZANIMANJE: 9 NAJČEŠĆIH"
-
-msgid "Registered"
-msgstr "Registrovani"
-
-msgid "Week of"
-msgstr "Nedelja"
+msgid "FILTER RESULTS"
+msgstr "FILTRIRANI REZULTATI"
 
 msgid "Export and Share"
 msgstr "Preuzmi i Podeli"
@@ -1305,106 +1091,6 @@ msgstr "Nov"
 
 msgid "Dec"
 msgstr "Dec"
-
-msgid "LATEST OPINION"
-msgstr "POSLEDNJE MIŠLJENJE"
-
-msgid "VIEW FULL RESULTS"
-msgstr "POGLEDAJ SVE REZULTATE"
-
-msgid "PARTNERING WITH"
-msgstr "PARTNERSTVO SA"
-
-msgid "U-REPORTERS"
-msgstr "U-REPORTERI"
-
-msgid "IN"
-msgstr "U"
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "ZEMLJE ŠIROM SVETA"
-
-msgid "AGES"
-msgstr "GODINE"
-
-msgid "LEARN MORE"
-msgstr "NAUČI VIŠE"
-
-msgid "+ New "
-msgstr "+ Novo"
-
-msgid "+ New Page"
-msgstr "+ Nova Stranica"
-
-msgid "LATEST NOTIFICATIONS"
-msgstr "POSLEDNJA OBAVEŠTENJA"
-
-msgid "Backends"
-msgstr "Pozadinski sistemi"
-
-msgid "+ New Poll"
-msgstr "+ Nova Anketa"
-
-msgid "Refresh Results"
-msgstr "Osveži rezultate"
-
-msgid "Join U-Report, Your voice matters."
-msgstr "Pridruži se U-Reportu, Tvoj glas je bitan."
-
-msgid "JOIN NOW"
-msgstr "PRIDRUŽI SE SADA"
-
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Mi smo deo globalne platforme koja radi na poboljšanju života mladih ljudi širom sveta."
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Saznajte više o tome kako U-Report osnažuje i povezuje mlade da govore o temama koje su za njih bitne."
-
-msgid "How would you like to join?"
-msgstr "Kako želiš da se pridružiš?"
-
-msgid "Text"
-msgstr "Tekst"
-
-msgid "SEARCH"
-msgstr "PRETRAGA"
-
-msgid "No results found"
-msgstr "Nema rezultata"
-
-msgid "RESPONSES"
-msgstr "ODGOVORI"
-
-msgid "TOTAL RESPONSES"
-msgstr "SVI ODGOVORI"
-
-#, python-format
-msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)s je odgovorilo od %(polled)s anketiranih"
-
-msgid "ALL"
-msgstr "SVE"
-
-msgid "LOCATION"
-msgstr "LOKACIJA"
-
-msgid "Written by:"
-msgstr "Napisao:"
-
-msgid "OVERALL STATISTICS"
-msgstr "STATISTIKA"
-
-msgid "THIS YEAR"
-msgstr "OVE GODINE"
-
-msgid "AVG RESPONSE RATE"
-msgstr "PROSEČNA STOPA ODGOVORA"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERI PO REGIONIMA"
-
-msgid "FILTER RESULTS"
-msgstr "FILTRIRANI REZULTATI"
 
 #, python-format
 msgid ""
@@ -1980,11 +1666,332 @@ msgstr "Mišljenja"
 msgid "Sign Up Rate"
 msgstr "Stopa prijava"
 
+msgid "Response Rate"
+msgstr "Stopa odgovora"
+
 msgid "Active Users"
 msgstr "Aktivni Korisnici"
 
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Da li je priča objavljena"
+
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid "Polls"
+#~ msgstr "Ankete"
+
+#~ msgid "U-Reporters"
+#~ msgstr "U-Reporteri"
+
+#~ msgid "Join & Engage"
+#~ msgstr "Pridruži se i angažuj"
+
+#~ msgid "FOLLOW US ON"
+#~ msgstr "PRATITE NAS NA"
+
+#~ msgid ""
+#~ "\n"
+#~ "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "Ne zaboravite da za Twitter zadatke morate imati widget id Twittera."
+
+#~ msgid "ABOUT U-REPORT"
+#~ msgstr "O U-REPORTU"
+
+#~ msgid "Scroll to Learn more"
+#~ msgstr "Listajte dalje za više informacija"
+
+#~ msgid "The mission of U-Report"
+#~ msgstr "Šta je misija U-Reporta"
+
+#~ msgid "Why Join U-Report?"
+#~ msgstr "Zašto se priključiti U-Reportu"
+
+#~ msgid "Speak out on what's happening in your community"
+#~ msgstr "Recite šta se događa u vašoj zajednici"
+
+#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
+#~ msgstr "Koristite rezultate i informacije iz U-Reporta kako biste pratili i povećali građansku svest"
+
+#~ msgid "Participate in nationwide campaigns to help improve your country"
+#~ msgstr "Učestvujte u kampanjama širom države, kako biste uticali na stanje u našoj zemlji."
+
+#, python-format
+#~ msgid "Share what's happening around %(country)s with other U-Reporters"
+#~ msgstr "Podelite šta se dešava sa ostalim U-Reporterima u %(country)s"
+
+#~ msgid "CLICK HERE TO JOIN"
+#~ msgstr "KLIKNI OVDE DA SE PRIDRUŽIŠ"
+
+#~ msgid "U-REPORT VIDEOS"
+#~ msgstr "U-REPORT VIDEO"
+
+#~ msgid "No videos yet."
+#~ msgstr "Još uvek nema video snimaka."
+
+#~ msgid "WATCH IT ON YOUTUBE"
+#~ msgstr "POGLEDAJTE NA YOUTUBE"
+
+#~ msgid "Follow"
+#~ msgstr "Prati"
+
+#~ msgid ""
+#~ "\n"
+#~ "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "U-Report je platforma koja omogućava svima da putem poruka iz bilo kojeg dela sveta odgovore na upitnike, izveštavaju o problemima, podrže prava deteta i aktivno učestvuju u promenama za dobrobit zajednice."
+
+#~ msgid "CURRENT POLL"
+#~ msgstr "TRENUTNA ANKETA"
+
+#~ msgid "View Full Results"
+#~ msgstr "Pogledaj kompletne rezultate"
+
+#~ msgid "All U-Report members"
+#~ msgstr "Svi članovi U-Reporta"
+
+#~ msgid "Responded out of"
+#~ msgstr "Od ukupnog broja odgovora"
+
+#~ msgid "RESPONDER'S RATE BY LOCATION"
+#~ msgstr "STOPA ODGOVORA PO LOKACIJI"
+
+#~ msgid "Most responded"
+#~ msgstr "Najviše odgovora "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                                  %(responded)s of %(total)s\n"
+#~ "                                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                                  %(responded)s od %(total)s\n"
+#~ "                                  "
+
+#~ msgid "TRENDING WORDS"
+#~ msgstr "REČI U TRENDU"
+
+#~ msgid "FEATURED RESPONSES"
+#~ msgstr "ISTAKNUTI ODGOVORI"
+
+#~ msgid "View full results"
+#~ msgstr "Pogledaj kompletne rezultate"
+
+#~ msgid "TOTAL # OF U-REPORTERS"
+#~ msgstr "UKUPAN # U-REPORTERA"
+
+#~ msgid "4 MOST ACTIVE REGIONS"
+#~ msgstr "4 NAJAKTIVNIJE LOKACIJE"
+
+#~ msgid "RATE BY GENDER"
+#~ msgstr "STOPA PO POLU"
+
+#~ msgid "RATE BY AGE"
+#~ msgstr "STOPA PO STAROSTI"
+
+#~ msgid "WHAT U-REPORTERS ARE SAYING"
+#~ msgstr "ŠTA KAŽU U-REPORTERI"
+
+#~ msgid "FEATURED VIDEO"
+#~ msgstr "ISTAKNUTI SNIMCI"
+
+#~ msgid "Watch more videos"
+#~ msgstr "Pogledaj još video snimaka"
+
+#~ msgid "FEATURED REGION"
+#~ msgstr "ISTAKNUTA REGIJA"
+
+#~ msgid "Check more stories in U-Report app"
+#~ msgstr "Pogledajte više priča unutar U-Report aplikacije"
+
+#~ msgid "View more stories on Facebook"
+#~ msgstr "Pogledajte više priča na Facebooku"
+
+#~ msgid "View more on Instagram"
+#~ msgstr "Pogledaj više na Instagramu"
+
+#~ msgid "Read more tweets on Twitter"
+#~ msgstr "Pročitaj više na Twitteru"
+
+#~ msgid "NEWS FEED"
+#~ msgstr "VESTI"
+
+#~ msgid "STORY"
+#~ msgstr "PRIČA"
+
+#~ msgid "Read full story"
+#~ msgstr "Pročitaj celu priču"
+
+#~ msgid "Read this story"
+#~ msgstr "Pročitaj ovu priču"
+
+#~ msgid "JOBS"
+#~ msgstr "ZADACI"
+
+#~ msgid "Scroll to see job details"
+#~ msgstr "Listajte dalje da vidite detalje zadataka"
+
+#~ msgid "Tweet to"
+#~ msgstr "Tvituj"
+
+#~ msgid "Read more"
+#~ msgstr "Pročitaj više"
+
+#~ msgid "JOIN U-REPORT"
+#~ msgstr "PRIDRUŽI SE U-REPORTU"
+
+#~ msgid "HOW TO JOIN"
+#~ msgstr "KAKO SE PRIDRUŽITI"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+#~ "\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "              * U-Report je besplatan program pod okriljem UNICEF-a u %(country)s. U-Report neće od vas tražiti nikakve uplate, niti informacije o vašim računima, MOLIMO vas zanemarite svaki upit o finansijskim informacijama ili plaćanju, kako ovdje, tako na Facebook-u i Viber-u. Sve usluge U-Reporta (sve poruke na %(shortcode)s) su besplatne.\n"
+#~ "\n"
+#~ "            "
+
+#~ msgid "U-REPORT ON SOCIAL MEDIA"
+#~ msgstr "U-REPORT NA DRUŠTVENIM MREŽAMA"
+
+#~ msgid "Compose new Tweet"
+#~ msgstr "Sastavi novi tweet"
+
+#~ msgid "CURRENT POLL IN"
+#~ msgstr "TRENUTNA ANKETA U"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                  %(questions)s question polled on this topic\n"
+#~ "                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                  %(questions)s questions polled on this topic\n"
+#~ "                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                  %(questions)s pitanja postavljenih na ovu temu \n"
+#~ "                "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "                  %(questions)s pitanja postavljenih na ovu temu\n"
+#~ "                "
+#~ msgstr[2] ""
+#~ "\n"
+#~ "                  %(questions)spitanja postavljenih na ovu temu \n"
+#~ "                "
+
+#~ msgid "response rate"
+#~ msgstr "stopa odgovora"
+
+#~ msgid "responded out of"
+#~ msgstr "odgovorilo od ukupno"
+
+#~ msgid "polled"
+#~ msgstr "anketirani"
+
+#~ msgid "POLL RESULTS"
+#~ msgstr "REZULTATI ANKETE"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    %(responded)s responded out of %(polled)s polled\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)sodgovorilo od %(polled)sispitanih"
+
+#~ msgid "KEYWORDS"
+#~ msgstr "KLJUČNE REČI"
+
+#~ msgid "STATISTICS"
+#~ msgstr "STATISTIKE"
+
+#~ msgid "LOCATIONS"
+#~ msgstr "LOKACIJE"
+
+#~ msgid "FEATURED ANSWERS"
+#~ msgstr "ISTAKNUTI ODGOVORI"
+
+#~ msgid "No featured answers."
+#~ msgstr "Nema istaknutih odgovora"
+
+#~ msgid "U-Reporter in"
+#~ msgstr "U-Reporter u"
+
+#~ msgid "RELATED STORIES"
+#~ msgstr "POVEZANE PRIČE"
+
+#~ msgid "No related stories."
+#~ msgstr "Nema povezanih priča"
+
+#~ msgid "FEATURED IMAGES"
+#~ msgstr "ISTAKNUTE SLIKE"
+
+#~ msgid "No featured images yet."
+#~ msgstr "Nema istaknutih slika za sada"
+
+#~ msgid "BY"
+#~ msgstr "OD"
+
+#~ msgid "LATEST STORIES"
+#~ msgstr "NAJNOVIJE PRIČE"
+
+#~ msgid "FILTERED BY"
+#~ msgstr "FILTRIRANO PO"
+
+#~ msgid "Scroll to read more"
+#~ msgstr "Listajte dalje da vidite ostatak"
+
+#~ msgid "STORY CONTINUES"
+#~ msgstr "PRIČA SE NASTAVLJA"
+
+#~ msgid "AUDIO"
+#~ msgstr "ZVUČNI ZAPIS"
+
+#~ msgid "RELATED POLLS"
+#~ msgstr "VEZANE ANKETE"
+
+#~ msgid "No related polls."
+#~ msgstr "Nema povezanih anketa."
+
+#~ msgid "No featured images."
+#~ msgstr "Nema istaknutih slika."
+
+#~ msgid "WHO WE ARE"
+#~ msgstr "KO SMO MI"
+
+#~ msgid "U-REPORTER STATISTICS"
+#~ msgstr "STATISTIKE O U-REPORTERIMA"
+
+#~ msgid "WHERE ARE U-REPORTERS FROM?"
+#~ msgstr "ODAKLE DOLAZE U-REPORTERI?"
+
+#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
+#~ msgstr "STOPA REGISTRACIJE: U ZADNJIH 6 MESECI"
+
+#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
+#~ msgstr "ZANIMANJE: 9 NAJČEŠĆIH"
+
+#~ msgid "Registered"
+#~ msgstr "Registrovani"
+
+#~ msgid "Week of"
+#~ msgstr "Nedelja"
 
 #~ msgid "Poll Results Data"
 #~ msgstr "Rezultati ankete"

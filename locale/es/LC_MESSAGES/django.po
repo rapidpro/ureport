@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 15:03+0000\n"
+"POT-Creation-Date: 2020-02-05 13:58+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: deimidis <guillermo.movia@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -373,6 +373,8 @@ msgstr "Tareas"
 msgid "The title for this story"
 msgstr "El título para esta historia"
 
+#, fuzzy
+#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
 msgstr "Si esta historia está destacada"
 
@@ -725,6 +727,15 @@ msgstr "Acerca "
 msgid "Engagement"
 msgstr "Participación"
 
+msgid "Category Images"
+msgstr "Imágenes de categorías"
+
+msgid "+ New "
+msgstr "+ Nueva"
+
+msgid "+ New Page"
+msgstr "+ Nueva página"
+
 msgid "U-Report"
 msgstr "U-Report"
 
@@ -739,12 +750,6 @@ msgstr "Contenido"
 
 msgid "Country Aliases"
 msgstr "Alias del país"
-
-msgid "Polls"
-msgstr "Opiniones"
-
-msgid "Category Images"
-msgstr "Imágenes de categorías"
 
 msgid "Job Sources"
 msgstr "Fuentes de trabajos"
@@ -778,15 +783,6 @@ msgstr "Contenido de Pasos para Unirse"
 
 msgid "Additional Menu"
 msgstr "Menú adicional"
-
-msgid "U-Reporters"
-msgstr "U-Reporters"
-
-msgid "Join & Engage"
-msgstr "Únete y Participa"
-
-msgid "FOLLOW US ON"
-msgstr "Síguenos en"
 
 msgid "SELECT YOUR COUNTRY"
 msgstr "ELIGE TU PAÍS"
@@ -822,50 +818,17 @@ msgstr ""
 msgid "Back"
 msgstr "Volver"
 
-msgid ""
-"\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr ""
-"\n"
-"Recuerda que para agregar una fuente de Twitter debes obtener el ID de widget desde twitter."
+msgid "LATEST NOTIFICATIONS"
+msgstr "NOTIFICACIONES RECIENTES"
 
-msgid "ABOUT U-REPORT"
-msgstr "SOBRE U-REPORT"
+msgid "Backends"
+msgstr "Servicios"
 
-msgid "Scroll to Learn more"
-msgstr "Mueva el cursor para saber más sobre"
+msgid "+ New Poll"
+msgstr "+ Nueva encuesta"
 
-msgid "The mission of U-Report"
-msgstr "La misión de U-Report"
-
-msgid "Why Join U-Report?"
-msgstr "¿Por qué unirte a U-Report?"
-
-msgid "Speak out on what's happening in your community"
-msgstr "Habla sobre lo que está sucediendo en tu comunidad"
-
-msgid "Use U-Report results and information to update and increase citizen's awareness"
-msgstr "Usa la información y los resultados de U-Report para actualizar y aumentar el conocimiento de los ciudadanos"
-
-msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "Participa en campañas nacionales para ayudar a mejorar tu país"
-
-#, python-format
-msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Comparte lo que pasa en %(country)s con otros U-Reporters"
-
-msgid "CLICK HERE TO JOIN"
-msgstr "HAGA CLIC AQUÍ PARA PARTICIPAR"
-
-msgid "U-REPORT VIDEOS"
-msgstr "VIDEOS U-REPORT"
-
-msgid "No videos yet."
-msgstr "Aún no hay videos."
-
-msgid "WATCH IT ON YOUTUBE"
-msgstr "VERLO EN YOUTUBE"
+msgid "Refresh Results"
+msgstr "Actualizar resultados"
 
 msgid "MORE POLLS"
 msgstr "MÁS ENCUESTAS"
@@ -888,252 +851,90 @@ msgstr "HISTORIAS ARCHIVADAS"
 msgid "LIST"
 msgstr "LISTA"
 
-msgid "Follow"
-msgstr "Seguir"
+msgid "LATEST OPINION"
+msgstr "OPINIONES RECIENTES"
 
-msgid ""
-"\n"
-"                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
-"                "
-msgstr ""
-"\n"
-"U-Report es una herramienta de mensajería social gratuita,  que permite que donde sea que estés en el mundo, puedas opinar sobre los problemas del mundo, apoyes los derechos de los niños y mejores tu comunidad."
-
-msgid "CURRENT POLL"
-msgstr "ENCUESTA ACTUAL"
-
-msgid "View Full Results"
-msgstr "Ver los resultados completos"
-
-msgid "All U-Report members"
-msgstr "Todos los miembros de U-Report"
-
-msgid "RESPONSE RATE"
-msgstr "TASA DE RESPUESTA"
-
-msgid "Responded out of"
-msgstr "Respondido de un total de"
-
-msgid "RESPONDER'S RATE BY LOCATION"
-msgstr "TASA DE RESPUESTA POR UBICACIÓN"
-
-msgid "Most responded"
-msgstr "Más respondidas"
-
-#, python-format
-msgid ""
-"\n"
-"                                  %(responded)s of %(total)s\n"
-"                                  "
-msgstr ""
-"\n"
-"%(responded)s de %(total)s"
-
-msgid "TRENDING WORDS"
-msgstr "PALABRAS MÁS FRECUENTES"
-
-msgid "FEATURED RESPONSES"
-msgstr "RESPUESTAS DESTACADAS"
-
-msgid "View full results"
-msgstr "Ver los resultados completos"
+msgid "VIEW FULL RESULTS"
+msgstr "VER RESULTADOS COMPLETOS"
 
 msgid "U-REPORTERS IN"
 msgstr "U-REPORTERS EN"
 
-msgid "TOTAL # OF U-REPORTERS"
-msgstr "NÚMERO TOTAL DE U-REPORTERS"
+msgid "PARTNERING WITH"
+msgstr "ASOCIADO CON"
 
-msgid "4 MOST ACTIVE REGIONS"
-msgstr "4 REGIONES MÁS ACTIVAS"
+msgid "U-REPORTERS"
+msgstr "U-REPORTERS"
 
-msgid "RATE BY GENDER"
-msgstr "TASA POR GÉNERO"
+msgid "IN"
+msgstr "EN"
 
-msgid "RATE BY AGE"
-msgstr "TASA POR EDAD"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "PAÍSES DEL MUNDO"
 
-msgid "WHAT U-REPORTERS ARE SAYING"
-msgstr "LO QUE LOS U-REPORTERS ESTÁN DICIENDO"
+msgid "AGES"
+msgstr "EDADES"
 
-msgid "FEATURED VIDEO"
-msgstr "VIDEO DESTACADO"
+msgid "Join U-Report, Your voice matters."
+msgstr "Únete a U-Report, tu voz importa."
 
-msgid "Watch more videos"
-msgstr "Ver más videos"
-
-msgid "FEATURED REGION"
-msgstr "REGIÓN DESTACADA"
-
-msgid "Check more stories in U-Report app"
-msgstr "MIra más historias de U-Report en la aplicación"
-
-msgid "View more stories on Facebook"
-msgstr "Mira más historias en Facebook"
-
-msgid "View more on Instagram"
-msgstr "Mira más en Instagram"
-
-msgid "Read more tweets on Twitter"
-msgstr "Lee más tweets en Twitter"
-
-msgid "NEWS FEED"
-msgstr "PÁGINA DE NOTICIAS"
-
-msgid "STORY"
-msgstr "Historia"
-
-msgid "Read full story"
-msgstr "Lee la historia completa"
-
-msgid "Response Rate"
-msgstr "Tasa de respuesta"
-
-msgid "Read this story"
-msgstr "Lee esta historia"
-
-msgid "JOBS"
-msgstr "TRABAJOS"
-
-msgid "Scroll to see job details"
-msgstr "Desplácese para ver los detalles del trabajo"
-
-msgid "Tweet to"
-msgstr "Twittear a"
-
-msgid "Read more"
-msgstr "Leer más"
-
-msgid "Visit"
-msgstr "Visita"
-
-msgid "JOIN U-REPORT"
-msgstr "PARTICIPAR EN U-REPORT"
-
-msgid "HOW TO JOIN"
-msgstr "CÓMO PARTICIPAR"
-
-#, python-format
-msgid ""
-"\n"
-"                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-"\n"
-"              "
-msgstr ""
-"\n"
-"* U-Report es un programa gratuito apoyado por UNICEF con la ayuda de Proveedores de Red en %(country)s. U-Report no te pedirá pagos ni información financiera personal, POR FAVOR ignora cualquier mensaje que te pida cualquier pago ya sea en este número o a través de las páginas de Facebook y Twitter. Todos los servicios de U-Report (todos los mensajes en %(shortcode)s) son gratuitos."
-
-msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr "U-REPORT EN LAS REDES SOCIALES"
-
-msgid "Compose new Tweet"
-msgstr "Crea un nuevo tweet"
-
-msgid "CURRENT POLL IN"
-msgstr "ENCUESTA ACTUAL EN"
-
-#, python-format
-msgid ""
-"\n"
-"                  %(questions)s question polled on this topic\n"
-"                "
-msgid_plural ""
-"\n"
-"                  %(questions)s questions polled on this topic\n"
-"                "
-msgstr[0] ""
-"\n"
-"%(questions)s preguntas realizadas en este tema"
-msgstr[1] ""
-"\n"
-"%(questions)s preguntas realizadas en este tema"
-
-msgid "response rate"
-msgstr "tasa de respuesta"
-
-msgid "responded out of"
-msgstr "respuestas de "
-
-msgid "polled"
-msgstr "encuestados"
-
-msgid "POLL RESULTS"
-msgstr "RESULTADOS DE LA ENCUESTA"
-
-#, python-format
-msgid ""
-"\n"
-"                    %(responded)s responded out of %(polled)s polled\n"
-"                  "
-msgstr ""
-"\n"
-"%(responded)s respondieron de %(polled)s encuestados"
-
-msgid "KEYWORDS"
-msgstr "PALABRAS CLAVE"
-
-msgid "STATISTICS"
-msgstr "ESTADÍSTICAS"
-
-msgid "LOCATIONS"
-msgstr "UBICACIONES"
-
-msgid "GENDER"
-msgstr "GÉNERO"
-
-msgid "AGE"
-msgstr "EDAD"
-
-msgid "FEATURED ANSWERS"
-msgstr "RESPUESTAS DESTACADAS"
-
-msgid "No featured answers."
-msgstr "Sin respuestas destacadas."
-
-msgid "U-Reporter in"
-msgstr "U-Reporter en"
-
-msgid "RELATED STORIES"
-msgstr "HISTORIAS RELACIONADAS"
-
-msgid "No related stories."
-msgstr "Sin historias relacionadas."
-
-msgid "FEATURED IMAGES"
-msgstr "IMÁGENES DESTACADAS"
-
-msgid "No featured images yet."
-msgstr "Todavía sin imágenes destacadas."
+msgid "JOIN NOW"
+msgstr "ÚNETE YA"
 
 msgid "FEATURED STORY"
 msgstr "HISTORIA DESTACADA"
 
-msgid "BY"
-msgstr "POR"
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Somos parte de una plataforma mundial para cambiar las vidas de los adolescentes y jóvenes alrededor del mundo."
 
-msgid "LATEST STORIES"
-msgstr "HISTORIAS RECIENTES"
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Conoce más acerca de cómo U-Report está empoderando y conectando jóvenes y adolescentes para que hablen acerca de los problemas que les preocupan."
 
-msgid "FILTERED BY"
-msgstr "FILTRADO POR"
+msgid "LEARN MORE"
+msgstr "CONOCE MÁS"
 
-msgid "Scroll to read more"
-msgstr "Mueva el cursor para leer más"
+msgid "Visit"
+msgstr "Visita"
 
-msgid "STORY CONTINUES"
-msgstr "LA HISTORIA CONTINÚA"
+msgid "How would you like to join?"
+msgstr "¿Cómo te gustaría unirte?"
 
-msgid "AUDIO"
-msgstr "AUDIO"
+msgid "Text"
+msgstr "Texto"
 
-msgid "RELATED POLLS"
-msgstr "ENCUESTAS RELACIONADAS"
+msgid "SEARCH"
+msgstr "BUSCAR"
 
-msgid "No related polls."
-msgstr "Sin encuestas relacionadas."
+msgid "No results found"
+msgstr "No se encontraron resultados"
 
-msgid "No featured images."
-msgstr "Sin imágenes destacadas."
+msgid "RESPONSES"
+msgstr "RESPUESTAS"
+
+msgid "RESPONSE RATE"
+msgstr "TASA DE RESPUESTA"
+
+msgid "TOTAL RESPONSES"
+msgstr "TOTAL DE RESPUESTAS"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s respondieron de %(polled)s encuestados"
+
+msgid "ALL"
+msgstr "TODO"
+
+msgid "AGE"
+msgstr "EDAD"
+
+msgid "GENDER"
+msgstr "GÉNERO"
+
+msgid "LOCATION"
+msgstr "UBICACIÓN"
+
+msgid "Written by:"
+msgstr "Escrito por:"
 
 msgid "Even"
 msgstr "Todavía"
@@ -1180,26 +981,20 @@ msgstr "de"
 msgid "the"
 msgstr "la"
 
-msgid "WHO WE ARE"
-msgstr "QUIÉNES SOMOS"
+msgid "OVERALL STATISTICS"
+msgstr "ESTADÍSTICAS GENERALES"
 
-msgid "U-REPORTER STATISTICS"
-msgstr "ESTADÍSTICAS DE U-REPORTERS"
+msgid "THIS YEAR"
+msgstr "ESTE AÑO"
 
-msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr "¿DE DÓNDE SON LOS U-REPORTERS?"
+msgid "AVG RESPONSE RATE"
+msgstr "% DE RESPUESTA"
 
-msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr "TASA DE REGISTRO: EN LOS ÚLTIMOS 6 MESES"
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERS POR REGIÓN"
 
-msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-msgstr "OCUPACIÓN: LAS 9 MÁS MENCIONADAS"
-
-msgid "Registered"
-msgstr "Registrado"
-
-msgid "Week of"
-msgstr "Semana del"
+msgid "FILTER RESULTS"
+msgstr "FILTRAR RESULTADOS"
 
 msgid "Export and Share"
 msgstr "Exportar y compartir"
@@ -1293,106 +1088,6 @@ msgstr "Nov"
 
 msgid "Dec"
 msgstr "Dic"
-
-msgid "LATEST OPINION"
-msgstr "OPINIONES RECIENTES"
-
-msgid "VIEW FULL RESULTS"
-msgstr "VER RESULTADOS COMPLETOS"
-
-msgid "PARTNERING WITH"
-msgstr "ASOCIADO CON"
-
-msgid "U-REPORTERS"
-msgstr "U-REPORTERS"
-
-msgid "IN"
-msgstr "EN"
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "PAÍSES DEL MUNDO"
-
-msgid "AGES"
-msgstr "EDADES"
-
-msgid "LEARN MORE"
-msgstr "CONOCE MÁS"
-
-msgid "+ New "
-msgstr "+ Nueva"
-
-msgid "+ New Page"
-msgstr "+ Nueva página"
-
-msgid "LATEST NOTIFICATIONS"
-msgstr "NOTIFICACIONES RECIENTES"
-
-msgid "Backends"
-msgstr "Servicios"
-
-msgid "+ New Poll"
-msgstr "+ Nueva encuesta"
-
-msgid "Refresh Results"
-msgstr "Actualizar resultados"
-
-msgid "Join U-Report, Your voice matters."
-msgstr "Únete a U-Report, tu voz importa."
-
-msgid "JOIN NOW"
-msgstr "ÚNETE YA"
-
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Somos parte de una plataforma mundial para cambiar las vidas de los adolescentes y jóvenes alrededor del mundo."
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Conoce más acerca de cómo U-Report está empoderando y conectando jóvenes y adolescentes para que hablen acerca de los problemas que les preocupan."
-
-msgid "How would you like to join?"
-msgstr "¿Cómo te gustaría unirte?"
-
-msgid "Text"
-msgstr "Texto"
-
-msgid "SEARCH"
-msgstr "BUSCAR"
-
-msgid "No results found"
-msgstr "No se encontraron resultados"
-
-msgid "RESPONSES"
-msgstr "RESPUESTAS"
-
-msgid "TOTAL RESPONSES"
-msgstr "TOTAL DE RESPUESTAS"
-
-#, python-format
-msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)s respondieron de %(polled)s encuestados"
-
-msgid "ALL"
-msgstr "TODO"
-
-msgid "LOCATION"
-msgstr "UBICACIÓN"
-
-msgid "Written by:"
-msgstr "Escrito por:"
-
-msgid "OVERALL STATISTICS"
-msgstr "ESTADÍSTICAS GENERALES"
-
-msgid "THIS YEAR"
-msgstr "ESTE AÑO"
-
-msgid "AVG RESPONSE RATE"
-msgstr "% DE RESPUESTA"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS POR REGIÓN"
-
-msgid "FILTER RESULTS"
-msgstr "FILTRAR RESULTADOS"
 
 #, python-format
 msgid ""
@@ -1962,11 +1657,323 @@ msgstr "Respuestas"
 msgid "Sign Up Rate"
 msgstr "Tasa de suscripción"
 
+msgid "Response Rate"
+msgstr "Tasa de respuesta"
+
 msgid "Active Users"
 msgstr "Usuarios activos"
 
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Si esta historia está destacada"
+
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
+
+#~ msgid "Polls"
+#~ msgstr "Opiniones"
+
+#~ msgid "U-Reporters"
+#~ msgstr "U-Reporters"
+
+#~ msgid "Join & Engage"
+#~ msgstr "Únete y Participa"
+
+#~ msgid "FOLLOW US ON"
+#~ msgstr "Síguenos en"
+
+#~ msgid ""
+#~ "\n"
+#~ "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "Recuerda que para agregar una fuente de Twitter debes obtener el ID de widget desde twitter."
+
+#~ msgid "ABOUT U-REPORT"
+#~ msgstr "SOBRE U-REPORT"
+
+#~ msgid "Scroll to Learn more"
+#~ msgstr "Mueva el cursor para saber más sobre"
+
+#~ msgid "The mission of U-Report"
+#~ msgstr "La misión de U-Report"
+
+#~ msgid "Why Join U-Report?"
+#~ msgstr "¿Por qué unirte a U-Report?"
+
+#~ msgid "Speak out on what's happening in your community"
+#~ msgstr "Habla sobre lo que está sucediendo en tu comunidad"
+
+#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
+#~ msgstr "Usa la información y los resultados de U-Report para actualizar y aumentar el conocimiento de los ciudadanos"
+
+#~ msgid "Participate in nationwide campaigns to help improve your country"
+#~ msgstr "Participa en campañas nacionales para ayudar a mejorar tu país"
+
+#, python-format
+#~ msgid "Share what's happening around %(country)s with other U-Reporters"
+#~ msgstr "Comparte lo que pasa en %(country)s con otros U-Reporters"
+
+#~ msgid "CLICK HERE TO JOIN"
+#~ msgstr "HAGA CLIC AQUÍ PARA PARTICIPAR"
+
+#~ msgid "U-REPORT VIDEOS"
+#~ msgstr "VIDEOS U-REPORT"
+
+#~ msgid "No videos yet."
+#~ msgstr "Aún no hay videos."
+
+#~ msgid "WATCH IT ON YOUTUBE"
+#~ msgstr "VERLO EN YOUTUBE"
+
+#~ msgid "Follow"
+#~ msgstr "Seguir"
+
+#~ msgid ""
+#~ "\n"
+#~ "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "U-Report es una herramienta de mensajería social gratuita,  que permite que donde sea que estés en el mundo, puedas opinar sobre los problemas del mundo, apoyes los derechos de los niños y mejores tu comunidad."
+
+#~ msgid "CURRENT POLL"
+#~ msgstr "ENCUESTA ACTUAL"
+
+#~ msgid "View Full Results"
+#~ msgstr "Ver los resultados completos"
+
+#~ msgid "All U-Report members"
+#~ msgstr "Todos los miembros de U-Report"
+
+#~ msgid "Responded out of"
+#~ msgstr "Respondido de un total de"
+
+#~ msgid "RESPONDER'S RATE BY LOCATION"
+#~ msgstr "TASA DE RESPUESTA POR UBICACIÓN"
+
+#~ msgid "Most responded"
+#~ msgstr "Más respondidas"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                                  %(responded)s of %(total)s\n"
+#~ "                                  "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)s de %(total)s"
+
+#~ msgid "TRENDING WORDS"
+#~ msgstr "PALABRAS MÁS FRECUENTES"
+
+#~ msgid "FEATURED RESPONSES"
+#~ msgstr "RESPUESTAS DESTACADAS"
+
+#~ msgid "View full results"
+#~ msgstr "Ver los resultados completos"
+
+#~ msgid "TOTAL # OF U-REPORTERS"
+#~ msgstr "NÚMERO TOTAL DE U-REPORTERS"
+
+#~ msgid "4 MOST ACTIVE REGIONS"
+#~ msgstr "4 REGIONES MÁS ACTIVAS"
+
+#~ msgid "RATE BY GENDER"
+#~ msgstr "TASA POR GÉNERO"
+
+#~ msgid "RATE BY AGE"
+#~ msgstr "TASA POR EDAD"
+
+#~ msgid "WHAT U-REPORTERS ARE SAYING"
+#~ msgstr "LO QUE LOS U-REPORTERS ESTÁN DICIENDO"
+
+#~ msgid "FEATURED VIDEO"
+#~ msgstr "VIDEO DESTACADO"
+
+#~ msgid "Watch more videos"
+#~ msgstr "Ver más videos"
+
+#~ msgid "FEATURED REGION"
+#~ msgstr "REGIÓN DESTACADA"
+
+#~ msgid "Check more stories in U-Report app"
+#~ msgstr "MIra más historias de U-Report en la aplicación"
+
+#~ msgid "View more stories on Facebook"
+#~ msgstr "Mira más historias en Facebook"
+
+#~ msgid "View more on Instagram"
+#~ msgstr "Mira más en Instagram"
+
+#~ msgid "Read more tweets on Twitter"
+#~ msgstr "Lee más tweets en Twitter"
+
+#~ msgid "NEWS FEED"
+#~ msgstr "PÁGINA DE NOTICIAS"
+
+#~ msgid "STORY"
+#~ msgstr "Historia"
+
+#~ msgid "Read full story"
+#~ msgstr "Lee la historia completa"
+
+#~ msgid "Read this story"
+#~ msgstr "Lee esta historia"
+
+#~ msgid "JOBS"
+#~ msgstr "TRABAJOS"
+
+#~ msgid "Scroll to see job details"
+#~ msgstr "Desplácese para ver los detalles del trabajo"
+
+#~ msgid "Tweet to"
+#~ msgstr "Twittear a"
+
+#~ msgid "Read more"
+#~ msgstr "Leer más"
+
+#~ msgid "JOIN U-REPORT"
+#~ msgstr "PARTICIPAR EN U-REPORT"
+
+#~ msgid "HOW TO JOIN"
+#~ msgstr "CÓMO PARTICIPAR"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+#~ "\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "* U-Report es un programa gratuito apoyado por UNICEF con la ayuda de Proveedores de Red en %(country)s. U-Report no te pedirá pagos ni información financiera personal, POR FAVOR ignora cualquier mensaje que te pida cualquier pago ya sea en este número o a través de las páginas de Facebook y Twitter. Todos los servicios de U-Report (todos los mensajes en %(shortcode)s) son gratuitos."
+
+#~ msgid "U-REPORT ON SOCIAL MEDIA"
+#~ msgstr "U-REPORT EN LAS REDES SOCIALES"
+
+#~ msgid "Compose new Tweet"
+#~ msgstr "Crea un nuevo tweet"
+
+#~ msgid "CURRENT POLL IN"
+#~ msgstr "ENCUESTA ACTUAL EN"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                  %(questions)s question polled on this topic\n"
+#~ "                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                  %(questions)s questions polled on this topic\n"
+#~ "                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(questions)s preguntas realizadas en este tema"
+#~ msgstr[1] ""
+#~ "\n"
+#~ "%(questions)s preguntas realizadas en este tema"
+
+#~ msgid "response rate"
+#~ msgstr "tasa de respuesta"
+
+#~ msgid "responded out of"
+#~ msgstr "respuestas de "
+
+#~ msgid "polled"
+#~ msgstr "encuestados"
+
+#~ msgid "POLL RESULTS"
+#~ msgstr "RESULTADOS DE LA ENCUESTA"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    %(responded)s responded out of %(polled)s polled\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)s respondieron de %(polled)s encuestados"
+
+#~ msgid "KEYWORDS"
+#~ msgstr "PALABRAS CLAVE"
+
+#~ msgid "STATISTICS"
+#~ msgstr "ESTADÍSTICAS"
+
+#~ msgid "LOCATIONS"
+#~ msgstr "UBICACIONES"
+
+#~ msgid "FEATURED ANSWERS"
+#~ msgstr "RESPUESTAS DESTACADAS"
+
+#~ msgid "No featured answers."
+#~ msgstr "Sin respuestas destacadas."
+
+#~ msgid "U-Reporter in"
+#~ msgstr "U-Reporter en"
+
+#~ msgid "RELATED STORIES"
+#~ msgstr "HISTORIAS RELACIONADAS"
+
+#~ msgid "No related stories."
+#~ msgstr "Sin historias relacionadas."
+
+#~ msgid "FEATURED IMAGES"
+#~ msgstr "IMÁGENES DESTACADAS"
+
+#~ msgid "No featured images yet."
+#~ msgstr "Todavía sin imágenes destacadas."
+
+#~ msgid "BY"
+#~ msgstr "POR"
+
+#~ msgid "LATEST STORIES"
+#~ msgstr "HISTORIAS RECIENTES"
+
+#~ msgid "FILTERED BY"
+#~ msgstr "FILTRADO POR"
+
+#~ msgid "Scroll to read more"
+#~ msgstr "Mueva el cursor para leer más"
+
+#~ msgid "STORY CONTINUES"
+#~ msgstr "LA HISTORIA CONTINÚA"
+
+#~ msgid "AUDIO"
+#~ msgstr "AUDIO"
+
+#~ msgid "RELATED POLLS"
+#~ msgstr "ENCUESTAS RELACIONADAS"
+
+#~ msgid "No related polls."
+#~ msgstr "Sin encuestas relacionadas."
+
+#~ msgid "No featured images."
+#~ msgstr "Sin imágenes destacadas."
+
+#~ msgid "WHO WE ARE"
+#~ msgstr "QUIÉNES SOMOS"
+
+#~ msgid "U-REPORTER STATISTICS"
+#~ msgstr "ESTADÍSTICAS DE U-REPORTERS"
+
+#~ msgid "WHERE ARE U-REPORTERS FROM?"
+#~ msgstr "¿DE DÓNDE SON LOS U-REPORTERS?"
+
+#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
+#~ msgstr "TASA DE REGISTRO: EN LOS ÚLTIMOS 6 MESES"
+
+#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
+#~ msgstr "OCUPACIÓN: LAS 9 MÁS MENCIONADAS"
+
+#~ msgid "Registered"
+#~ msgstr "Registrado"
+
+#~ msgid "Week of"
+#~ msgstr "Semana del"
 
 #~ msgid "Poll Results Data"
 #~ msgstr "Datos de los resultados de la encuesta"
