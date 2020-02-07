@@ -1,13 +1,3 @@
-v1.1.132
-----------
- * Merge pull request #555 from rapidpro/v1-design-remove-part1
- * Revert "Temporal disable messages test for poll refresh"
-
-v1.1.132
-----------
- * Merge pull request #555 from rapidpro/v1-design-remove-part1
- * Revert "Temporal disable messages test for poll refresh"
-
 v1.1.131
 ----------
  * Merge pull request #554 from rapidpro/fix-geojson
