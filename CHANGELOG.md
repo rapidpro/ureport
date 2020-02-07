@@ -1,3 +1,12 @@
+v1.1.133
+----------
+ * Add back the status view
+
+v1.1.132
+----------
+ * Merge pull request #555 from rapidpro/v1-design-remove-part1
+ * Remove V1 design templates
+
 v1.1.131
 ----------
  * Merge pull request #554 from rapidpro/fix-geojson
