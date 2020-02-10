@@ -51,7 +51,7 @@ install:
   - pip install -r pip-freeze.txt --upgrade
   - pip install coveralls
   - pip install flake8
-  - npm install -g less
+  - npm install -g less@3.10.3
   - npm install -g coffee-script
 
 before_script:
