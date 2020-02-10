@@ -1,3 +1,9 @@
+v1.1.135
+----------
+ * Merge pull request #557 from rapidpro/v1-design-remove-part2
+ * Pin less to 3.10.3
+ * Pin less to 3.10.3
+
 v1.1.134
 ----------
  * Merge pull request #556 from rapidpro/v1-design-remove-part2
