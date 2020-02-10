@@ -1,3 +1,26 @@
+v1.1.135
+----------
+ * Merge pull request #557 from rapidpro/v1-design-remove-part2
+ * Pin less to 3.10.3
+ * Pin less to 3.10.3
+
+v1.1.134
+----------
+ * Merge pull request #556 from rapidpro/v1-design-remove-part2
+ * Merge branch 'master' of github.com:rapidpro/ureport into v1-design-remove-part2
+ * Update flake8
+ * Replace print statement
+ * Stop using PollReporterCounter and improve the tests to be more correct
+
+v1.1.133
+----------
+ * Add back the status view
+
+v1.1.132
+----------
+ * Merge pull request #555 from rapidpro/v1-design-remove-part1
+ * Remove V1 design templates
+
 v1.1.131
 ----------
  * Merge pull request #554 from rapidpro/fix-geojson

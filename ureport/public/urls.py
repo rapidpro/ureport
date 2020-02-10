@@ -23,6 +23,7 @@ from .views import (
     StoriesView,
     StoryReadView,
     UreportersView,
+    status,
 )
 
 urlpatterns = [
@@ -51,4 +52,5 @@ urlpatterns = [
     url(r"^jobs/$", JobsView.as_view(), {}, "public.jobs"),
     url(r"^page/(?P<link>\w+)/$", CustomPage.as_view(), {}, "public.custom_page"),
     url(r"^count/$", Count.as_view(), {}, "public.count"),
+    url(r"^status/$", status, {}, "public.status"),
 ]

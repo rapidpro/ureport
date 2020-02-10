@@ -1060,6 +1060,11 @@ class PublicTest(UreportTest):
 
         self.assertEqual(json.loads(response.content), dict(next=False, news=[]))
 
+    def test_status_view(self):
+        status_url = reverse("public.status")
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+
 
 class JobsTest(UreportJobsTest):
     def setUp(self):
