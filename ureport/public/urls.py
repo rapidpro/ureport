@@ -9,6 +9,7 @@ from .views import (
     AboutView,
     BoundaryView,
     Count,
+    CountriesView,
     CustomPage,
     EngagementDataView,
     IndexView,
@@ -53,4 +54,5 @@ urlpatterns = [
     url(r"^page/(?P<link>\w+)/$", CustomPage.as_view(), {}, "public.custom_page"),
     url(r"^count/$", Count.as_view(), {}, "public.count"),
     url(r"^status/$", status, {}, "public.status"),
+    url(r"^countries/$", CountriesView.as_view(), {}, "public.countries"),
 ]
