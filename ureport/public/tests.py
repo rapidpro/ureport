@@ -123,7 +123,9 @@ class PublicTest(UreportTest):
 
     @mock.patch("dash.orgs.models.TembaClient", MockTembaClient)
     @mock.patch("django.core.cache.cache.get")
-    def test_index(self, mock_cache_get):
+    @mock.patch("ureport.public.views.get_global_count")
+    def test_index(self, mock_get_global_count, mock_cache_get):
+        mock_get_global_count.return_value = 0
         mock_cache_get.return_value = None
         home_url = reverse("public.index")
 
@@ -483,7 +485,10 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.uganda)
         # self.assertContains(response, "All U-Report services (all msg on 3000) are free.")
 
-    def test_ureporters(self):
+    @mock.patch("ureport.utils.fetch_old_sites_count")
+    def test_ureporters(self, mock_old_sites_count):
+        mock_old_sites_count.return_value = []
+
         ureporters_url = reverse("public.engagement")
 
         response = self.client.get(ureporters_url, SERVER_NAME="nigeria.ureport.io")

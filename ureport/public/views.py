@@ -312,7 +312,7 @@ class StoryReadView(SmartReadView):
         related_stories = related_stories.order_by("-created_on")
         context["related_stories"] = related_stories
 
-        context["story_featured_images"] = story.get_featured_images()
+        context["story_featured_images"] = story.get_featured_images().order_by("-created_on")
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
 

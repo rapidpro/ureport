@@ -154,7 +154,7 @@ class PollStats(models.Model):
 
         time_taken = time.time() - start
 
-        print("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
+        logger.info("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
 
     @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):
