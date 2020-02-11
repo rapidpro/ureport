@@ -6,6 +6,7 @@ import json
 import operator
 from functools import reduce
 
+import pycountry
 import six
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
@@ -20,9 +21,12 @@ from django.db.models import Prefetch, Q
 from django.http import Http404, HttpResponse
 from django.urls import reverse
 from django.utils import translation
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import RedirectView
 
+from ureport.countries.models import CountryAlias
 from ureport.jobs.models import JobSource
 from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
@@ -484,6 +488,56 @@ class PollQuestionResultsView(SmartReadView):
         results = self.object.get_results(segment=segment)
 
         return HttpResponse(json.dumps(results))
+
+
+class CountriesView(SmartTemplateView):
+    template_name = "public/countries.html"
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(CountriesView, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        json_dict = dict(exists="invalid")
+
+        whole_text = request.GET.get("text", "")
+        text = CountryAlias.normalize_name(whole_text)
+
+        text_length = len(text)
+
+        country = None
+        if text_length == 2:
+            try:
+                country = pycountry.countries.get(alpha_2=text.upper())
+            except KeyError:
+                pass
+
+        elif text_length == 3:
+            try:
+                country = pycountry.countries.get(alpha_3=text.upper())
+            except KeyError:
+                pass
+
+        if not country:
+            try:
+                country = pycountry.countries.get(name=text.title())
+            except KeyError:
+                pass
+
+        country_code = None
+        if not country:
+            country = CountryAlias.is_valid(text)
+            if country:
+                country_code = country.code
+
+        if country and country_code:
+            json_dict = dict(exists="valid", country_code=country_code)
+        elif country:
+            json_dict = dict(exists="valid", country_code=country.alpha_2)
+        else:
+            json_dict["text"] = whole_text
+
+        return HttpResponse(json.dumps(json_dict), status=200, content_type="application/json")
 
 
 def status(request):

@@ -11,7 +11,9 @@ from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.stories.models import Story, StoryImage
 
 from django.urls import reverse
+from django.utils.http import urlquote
 
+from ureport.countries.models import CountryAlias
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import PollQuestion
 from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
@@ -1126,3 +1128,160 @@ class JobsTest(UreportJobsTest):
         response = self.client.get(jobs_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertFalse(response.context["job_sources"])
+
+
+class CountriesTest(UreportTest):
+    def setUp(self):
+        super(CountriesTest, self).setUp()
+
+    def test_countries(self):
+        countries_url = reverse("public.countries")
+
+        response = self.client.post(countries_url, dict())
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.post(countries_url, dict())
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.get(countries_url)
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("text" in response_json)
+        self.assertEqual(response_json["exists"], "invalid")
+        self.assertEqual(response_json["text"], "")
+        self.assertFalse("country_code" in response_json)
+
+        response = self.client.get(countries_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertEqual(response_json["exists"], "invalid")
+        self.assertEqual(response_json["text"], "")
+        self.assertFalse("country_code" in response_json)
+
+        response = self.client.get(countries_url + "?text=OK")
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertEqual(response_json["exists"], "invalid")
+        self.assertEqual(response_json["text"], "OK")
+        self.assertFalse("country_code" in response_json)
+
+        response = self.client.get(countries_url + "?text=OK", SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertEqual(response_json["exists"], "invalid")
+        self.assertEqual(response_json["text"], "OK")
+        self.assertFalse("country_code" in response_json)
+
+        response = self.client.get(countries_url + "?text=RW")
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "RW")
+
+        response = self.client.get(countries_url + "?text=RW", SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "RW")
+
+        response = self.client.get(countries_url + "?text=USA")
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "US")
+
+        response = self.client.get(countries_url + "?text=rw")
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "RW")
+
+        response = self.client.get(countries_url + "?text=usa")
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "US")
+
+        CountryAlias.objects.create(name="Etats unies", country="US", created_by=self.admin, modified_by=self.admin)
+
+        response = self.client.get(countries_url + "?text=Etats+Unies")
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "US")
+
+        # country text has quotes
+        response = self.client.get(countries_url + '?text="Etats+Unies"')
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "US")
+
+        # country text has quotes an spaces
+        response = self.client.get(countries_url + '?text="    Etats+Unies  "')
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "US")
+
+        # unicode aliases
+        CountryAlias.objects.create(name="এ্যান্ডোরা", country="AD", created_by=self.admin, modified_by=self.admin)
+
+        response = self.client.get(countries_url + "?text=%s" % urlquote("এ্যান্ডোরা"))
+
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "AD")
+
+        response = self.client.get(countries_url + '?text="   %s   "' % urlquote("এ্যান্ডোরা"))
+
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "AD")
+
+        # unicode aliases
+        CountryAlias.objects.create(name="Madžarska", country="MD", created_by=self.admin, modified_by=self.admin)
+
+        response = self.client.get(countries_url + "?text=%s" % urlquote("Madžarska"))
+
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "MD")
+
+        response = self.client.get(countries_url + '?text="   %s   "' % urlquote("Madžarska"))
+
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+        self.assertTrue("exists" in response_json)
+        self.assertTrue("country_code" in response_json)
+        self.assertEqual(response_json["exists"], "valid")
+        self.assertEqual(response_json["country_code"], "MD")

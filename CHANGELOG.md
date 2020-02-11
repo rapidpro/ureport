@@ -1,3 +1,10 @@
+v1.1.136
+----------
+ * Merge pull request #559 from rapidpro/fix-countries
+ * Merge branch 'fix-countries' of github.com:rapidpro/ureport into fix-countries
+ * Add countries view back
+ * Add coutries view back
+
 v1.1.135
 ----------
  * Merge pull request #557 from rapidpro/v1-design-remove-part2
