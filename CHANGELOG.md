@@ -1,3 +1,7 @@
+v1.1.138
+----------
+ * Merge pull request #558 from rapidpro/v1-design-remove-part3
+
 v1.1.136
 ----------
  * Merge pull request #559 from rapidpro/fix-countries
