@@ -1324,19 +1324,3 @@ class PollResult(models.Model):
 
     class Meta:
         index_together = [["org", "flow"], ["org", "flow", "ruleset", "text"]]
-
-
-class PollResultsCounter(models.Model):
-
-    id = models.BigAutoField(auto_created=True, primary_key=True, verbose_name="ID")
-
-    org = models.ForeignKey(Org, on_delete=models.PROTECT, related_name="results_counters")
-
-    ruleset = models.CharField(max_length=36)
-
-    type = models.CharField(max_length=255)
-
-    count = models.IntegerField(default=0, help_text=_("Number of items with this counter"))
-
-    class Meta:
-        index_together = ["org", "ruleset", "type"]
