@@ -20,7 +20,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import connection, models
-from django.db.models import Count, F, Sum
+from django.db.models import Count, F, Q, Sum
 from django.utils import timezone, translation
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -998,7 +998,12 @@ class PollQuestion(SmartModel):
                         osm_id = boundary.get("osm_id").upper()
 
                         categories_results = (
-                            PollStats.objects.filter(org=org, question=self, location__id=boundary["id"])
+                            PollStats.objects.filter(org=org, question=self)
+                            .filter(
+                                Q(location__id=boundary["id"])
+                                | Q(location__parent__id=boundary["id"])
+                                | Q(location__parent__parent__id=boundary["id"])
+                            )
                             .exclude(category=None)
                             .values("category__category")
                             .annotate(label=F("category__category"), count=Sum("count"))
@@ -1006,9 +1011,15 @@ class PollQuestion(SmartModel):
                         )
                         categories_results_dict = {elt["label"]: elt["count"] for elt in categories_results}
 
-                        unset_count_stats = PollStats.objects.filter(
-                            org=org, question=self, category=None, location__id=boundary["id"]
-                        ).aggregate(Sum("count"))
+                        unset_count_stats = (
+                            PollStats.objects.filter(org=org, question=self, category=None)
+                            .filter(
+                                Q(location__id=boundary["id"])
+                                | Q(location__parent__id=boundary["id"])
+                                | Q(location__parent__parent__id=boundary["id"])
+                            )
+                            .aggregate(Sum("count"))
+                        )
                         unset_count = unset_count_stats.get("count__sum", 0) or 0
 
                         for categorie_label in categories_label:

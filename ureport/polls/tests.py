@@ -2,6 +2,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
+import uuid
 from datetime import datetime, timedelta
 
 import pytz
@@ -2934,7 +2935,7 @@ class PollResultsTest(UreportTest):
         lagos_boundary = Boundary.objects.create(
             org=self.nigeria,
             osm_id="R-LAGOS",
-            name="NigerLagosia",
+            name="Lagos",
             parent=nigeria_boundary,
             level=1,
             geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
@@ -2958,7 +2959,13 @@ class PollResultsTest(UreportTest):
             geometry='{"type":"MultiPolygon", "coordinates":[[1, 2]]}',
         )
 
-        yes_category = PollResponseCategory.objects.create(question=self.poll_question, category="Yes")
+        rule_uuid = uuid.uuid4()
+        yes_category = PollResponseCategory.objects.create(
+            question=self.poll_question, category="Yes", rule_uuid=rule_uuid
+        )
+
+        rule_uuid = uuid.uuid4()
+        PollResponseCategory.objects.create(question=self.poll_question, category="No", rule_uuid=rule_uuid)
 
         PollResult.objects.create(
             org=self.nigeria,
@@ -3005,6 +3012,23 @@ class PollResultsTest(UreportTest):
         )
         self.assertEqual(PollStats.objects.filter(category=yes_category).aggregate(Sum("count"))["count__sum"], 2)
         self.assertEqual(PollStats.objects.filter(location=ikeja_boundary).aggregate(Sum("count"))["count__sum"], 1)
+
+        self.assertEqual(
+            self.poll_question.calculate_results()[0]["categories"],
+            [{"count": 2, "label": "Yes"}, {"count": 0, "label": "No"}],
+        )
+        self.assertEqual(
+            self.poll_question.calculate_results(segment=dict(location="State"))[0]["categories"],
+            [{"count": 1, "label": "Yes"}, {"count": 0, "label": "No"}],
+        )
+        self.assertEqual(
+            self.poll_question.calculate_results(segment=dict(location="District", parent="R-LAGOS"))[0]["categories"],
+            [{"count": 1, "label": "Yes"}, {"count": 0, "label": "No"}],
+        )
+        self.assertEqual(
+            self.poll_question.calculate_results(segment=dict(location="Ward", parent="R-OYO"))[0]["categories"],
+            [{"count": 1, "label": "Yes"}, {"count": 0, "label": "No"}],
+        )
 
 
 class PollsTasksTest(UreportTest):
