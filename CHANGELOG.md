@@ -1,3 +1,11 @@
+v1.1.139
+----------
+ * Update Burmese
+ * Rebuild locale
+ * Rebuild locale
+ * Fix maps stats to properly count the parents stats
+ * Translate /locale/en/LC_MESSAGES/django.po in bs
+
 v1.1.138
 ----------
  * Merge pull request #558 from rapidpro/v1-design-remove-part3
