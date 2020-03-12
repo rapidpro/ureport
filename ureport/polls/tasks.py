@@ -206,10 +206,12 @@ def clear_old_poll_results(org, since, until):
 
     old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window).order_by("pk")
     for poll in old_polls:
+        # one last stats rebuild for the poll
+        poll.rebuild_poll_results_counts()
+
         if not poll.stopped_syncing:
             poll.delete_poll_results()
-            poll.stopped_syncing = True
-            poll.save()
+            Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
             logger.info("Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id))
 
 

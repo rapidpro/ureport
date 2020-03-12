@@ -328,113 +328,118 @@ class Poll(SmartModel):
 
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
-                poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list("pk", flat=True)
+                flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow)
+                for flow_poll in flow_polls:
+                    poll_id = flow_poll.id
+                    poll_year = flow_poll.poll_date.year
 
-                poll_results_ids_count = len(poll_results_ids)
+                    poll_results_ids = PollResult.objects.filter(org_id=org_id, flow=flow).values_list("pk", flat=True)
 
-                questions = self.questions.all().prefetch_related("response_categories")
-                questions_dict = dict()
+                    poll_results_ids_count = len(poll_results_ids)
 
-                if not questions.exists():
-                    logger.info("Poll cannot sync without questions for poll #%d on org #%d" % (poll_id, org_id))
-                    return
+                    questions = flow_poll.questions.all().prefetch_related("response_categories")
+                    questions_dict = dict()
 
-                for qsn in questions:
-                    categories = qsn.response_categories.all()
-                    categoryies_dict = {elt.category.lower(): elt.id for elt in categories}
-                    questions_dict[qsn.ruleset_uuid] = dict(id=qsn.id, categories=categoryies_dict)
+                    if not questions.exists():
+                        logger.info("Poll cannot sync without questions for poll #%d on org #%d" % (poll_id, org_id))
+                        return
 
-                gender_dict = {elt.gender.lower(): elt.id for elt in GenderSegment.objects.all()}
-                age_dict = {elt.min_age: elt.id for elt in AgeSegment.objects.all()}
+                    for qsn in questions:
+                        categories = qsn.response_categories.all()
+                        categoryies_dict = {elt.category.lower(): elt.id for elt in categories}
+                        questions_dict[qsn.ruleset_uuid] = dict(id=qsn.id, categories=categoryies_dict)
 
-                boundaries = Boundary.objects.filter(org_id=org_id)
-                location_dict = {elt.osm_id.upper(): elt.id for elt in boundaries}
+                    gender_dict = {elt.gender.lower(): elt.id for elt in GenderSegment.objects.all()}
+                    age_dict = {elt.min_age: elt.id for elt in AgeSegment.objects.all()}
 
-                logger.info("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
+                    boundaries = Boundary.objects.filter(org_id=org_id)
+                    location_dict = {elt.osm_id.upper(): elt.id for elt in boundaries}
 
-                logger.info("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
+                    logger.info("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
 
-                processed_results = 0
-                stats_dict = defaultdict(int)
+                    logger.info("Results query time for pair %s, %s took %ds" % (org_id, flow, time.time() - start))
 
-                for batch in chunk_list(poll_results_ids, 1000):
-                    poll_results = list(PollResult.objects.filter(pk__in=batch))
+                    processed_results = 0
+                    stats_dict = defaultdict(int)
 
-                    for result in poll_results:
-                        gen_stats = result.generate_poll_stats()
-                        for dict_key in gen_stats.keys():
-                            stats_dict[dict_key] += gen_stats[dict_key]
+                    for batch in chunk_list(poll_results_ids, 1000):
+                        poll_results = list(PollResult.objects.filter(pk__in=batch))
 
-                        processed_results += 1
+                        for result in poll_results:
+                            gen_stats = result.generate_poll_stats()
+                            for dict_key in gen_stats.keys():
+                                stats_dict[dict_key] += gen_stats[dict_key]
 
-                logger.info(
-                    "Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds"
-                    % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
-                )
+                            processed_results += 1
 
-                poll_stats_obj_to_insert = []
-                for stat_tuple in stats_dict.keys():
-                    org_id, ruleset, category, born, gender, state, district, ward, date = stat_tuple
-                    count = stats_dict.get(stat_tuple)
-                    stat_kwargs = dict(org_id=org_id, count=count, date=date)
+                    logger.info(
+                        "Rebuild counts progress... build counters dict for pair %s, %s, processed %d of %d in %ds"
+                        % (org_id, flow, processed_results, poll_results_ids_count, time.time() - start)
+                    )
 
-                    if ruleset not in questions_dict:
-                        continue
+                    poll_stats_obj_to_insert = []
+                    for stat_tuple in stats_dict.keys():
+                        org_id, ruleset, category, born, gender, state, district, ward, date = stat_tuple
+                        count = stats_dict.get(stat_tuple)
+                        stat_kwargs = dict(org_id=org_id, count=count, date=date)
 
-                    question_id = questions_dict[ruleset].get("id")
-                    if not question_id:
-                        continue
+                        if ruleset not in questions_dict:
+                            continue
 
-                    category_id = questions_dict[ruleset].get("categories", dict()).get(category)
+                        question_id = questions_dict[ruleset].get("id")
+                        if not question_id:
+                            continue
 
-                    gender_id = None
-                    if gender:
-                        gender_id = gender_dict.get(gender, gender_dict.get("O"))
+                        category_id = questions_dict[ruleset].get("categories", dict()).get(category)
 
-                    age_id = None
-                    if born:
-                        age_id = age_dict.get(AgeSegment.get_age_segment_min_age(max(poll_year - int(born), 0)))
+                        gender_id = None
+                        if gender:
+                            gender_id = gender_dict.get(gender, gender_dict.get("O"))
 
-                    location_id = None
-                    if ward:
-                        location_id = location_dict.get(ward)
-                    elif district:
-                        location_id = location_dict.get(district)
-                    elif state:
-                        location_id = location_dict.get(state)
+                        age_id = None
+                        if born:
+                            age_id = age_dict.get(AgeSegment.get_age_segment_min_age(max(poll_year - int(born), 0)))
 
-                    if question_id:
-                        stat_kwargs["question_id"] = question_id
-                    if category_id:
-                        stat_kwargs["category_id"] = category_id
-                    if age_id:
-                        stat_kwargs["age_segment_id"] = age_id
-                    if gender_id:
-                        stat_kwargs["gender_segment_id"] = gender_id
-                    if location_id:
-                        stat_kwargs["location_id"] = location_id
+                        location_id = None
+                        if ward:
+                            location_id = location_dict.get(ward)
+                        elif district:
+                            location_id = location_dict.get(district)
+                        elif state:
+                            location_id = location_dict.get(state)
 
-                    poll_stats_obj_to_insert.append(PollStats(**stat_kwargs))
+                        if question_id:
+                            stat_kwargs["question_id"] = question_id
+                        if category_id:
+                            stat_kwargs["category_id"] = category_id
+                        if age_id:
+                            stat_kwargs["age_segment_id"] = age_id
+                        if gender_id:
+                            stat_kwargs["gender_segment_id"] = gender_id
+                        if location_id:
+                            stat_kwargs["location_id"] = location_id
 
-                # Delete existing counters and then create new counters
-                self.delete_poll_stats()
+                        poll_stats_obj_to_insert.append(PollStats(**stat_kwargs))
 
-                PollStats.objects.bulk_create(poll_stats_obj_to_insert)
+                    # Delete existing counters and then create new counters
+                    flow_poll.delete_poll_stats()
 
-                # update the word clouds for questions
-                self.update_question_word_clouds()
+                    PollStats.objects.bulk_create(poll_stats_obj_to_insert)
 
-                start_update_cache = time.time()
-                self.update_questions_results_cache()
-                logger.info(
-                    "Calculated questions results and updated the cache for poll #%d on org #%d in %ds"
-                    % (poll_id, org_id, time.time() - start_update_cache)
-                )
+                    # update the word clouds for questions
+                    flow_poll.update_question_word_clouds()
 
-                logger.info(
-                    "Poll responses counts for poll #%d on org #%d are %s responded out of %s polled"
-                    % (poll_id, org_id, self.responded_runs(), self.runs())
-                )
+                    start_update_cache = time.time()
+                    flow_poll.update_questions_results_cache()
+                    logger.info(
+                        "Calculated questions results and updated the cache for poll #%d on org #%d in %ds"
+                        % (poll_id, org_id, time.time() - start_update_cache)
+                    )
+
+                    logger.info(
+                        "Poll responses counts for poll #%d on org #%d are %s responded out of %s polled"
+                        % (poll_id, org_id, flow_poll.responded_runs(), flow_poll.runs())
+                    )
 
     def get_question_uuids(self):
         return self.questions.values_list("ruleset_uuid", flat=True)
