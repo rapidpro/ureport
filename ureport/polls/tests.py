@@ -1749,6 +1749,22 @@ class PollTest(UreportTest):
             poll.delete_poll_stats()
             self.assertFalse(PollStats.objects.all())
 
+            poll2 = self.create_poll(self.nigeria, "Poll 2", "flow-uuid", self.education_nigeria, self.admin)
+            PollQuestion.objects.create(
+                poll=poll2, title="question 1", ruleset_uuid="step-uuid", created_by=self.admin, modified_by=self.admin
+            )
+
+            self.assertFalse(PollStats.objects.all())
+            self.assertFalse(PollStats.objects.filter(question__poll__id=poll.id))
+            self.assertFalse(PollStats.objects.filter(question__poll__id=poll2.id))
+
+            # rebuild for first poll will rebuild for poll2 as well
+            poll.rebuild_poll_results_counts()
+
+            self.assertTrue(PollStats.objects.all())
+            self.assertTrue(PollStats.objects.filter(question__poll__id=poll.id))
+            self.assertTrue(PollStats.objects.filter(question__poll__id=poll2.id))
+
     def test_delete_poll_results(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
