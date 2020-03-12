@@ -1,3 +1,8 @@
+v1.1.140
+----------
+ * Merge pull request #563 from rapidpro/stats-for-same-flow-polls
+ * Rebuild stats for polls of the same flow at the same time
+
 v1.1.139
 ----------
  * Update Burmese
