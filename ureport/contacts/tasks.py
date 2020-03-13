@@ -13,7 +13,7 @@ from celery.utils.log import get_task_logger
 
 from ureport.celery import app
 from ureport.contacts.models import Contact
-from ureport.utils import datetime_to_json_date
+from ureport.utils import datetime_to_json_date, update_cache_org_contact_counts
 
 logger = get_task_logger(__name__)
 
@@ -23,6 +23,11 @@ def rebuild_contacts_counts():
     orgs = Org.objects.filter(is_active=True)
     for org in orgs:
         Contact.recalculate_reporters_stats(org)
+
+
+@org_task("update-org-contact-counts", 60 * 20)
+def update_org_contact_count(org, ignored_since, ignored_until):
+    update_cache_org_contact_counts(org)
 
 
 @org_task("contact-pull", 60 * 60 * 12)

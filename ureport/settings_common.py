@@ -825,6 +825,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
         "args": ("ureport.contacts.tasks.pull_contacts",),
     },
+    "update-org-contact-counts": {
+        "task": "dash.orgs.tasks.trigger_org_task",
+        "schedule": crontab(minute=[10, 30, 50]),
+        "args": ("ureport.contacts.tasks.update_org_contact_count",),
+    },
     "backfill-poll-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": timedelta(minutes=10),

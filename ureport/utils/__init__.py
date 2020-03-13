@@ -27,7 +27,7 @@ from ureport.stats.models import PollStats, GenderSegment, AgeSegment
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
 ORG_CONTACT_COUNT_KEY = "org:%d:contacts-counts"
-ORG_CONTACT_COUNT_TIMEOUT = 300
+ORG_CONTACT_COUNT_TIMEOUT = 3600
 
 logger = logging.getLogger(__name__)
 
@@ -278,13 +278,18 @@ def get_global_count():
 
 def get_org_contacts_counts(org):
 
-    from ureport.contacts.models import ReportersCounter
-
     key = ORG_CONTACT_COUNT_KEY % org.pk
     org_contacts_counts = cache.get(key, None)
     if org_contacts_counts:
         return org_contacts_counts
 
+    return update_cache_org_contact_counts(org)
+
+
+def update_cache_org_contact_counts(org):
+    from ureport.contacts.models import ReportersCounter
+
+    key = ORG_CONTACT_COUNT_KEY % org.pk
     org_contacts_counts = ReportersCounter.get_counts(org)
     cache.set(key, org_contacts_counts, ORG_CONTACT_COUNT_TIMEOUT)
     return org_contacts_counts
