@@ -1,3 +1,10 @@
+v1.1.142
+----------
+ * Update django
+ * Rebuild locale
+ * Merge pull request #565 from rapidpro/translations_django-po--master_bg
+ * Translate /locale/en/LC_MESSAGES/django.po in bg
+
 v1.1.141
 ----------
  * Merge pull request #564 from rapidpro/contacts-counts-performance
