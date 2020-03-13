@@ -25,6 +25,13 @@ def rebuild_contacts_counts():
         Contact.recalculate_reporters_stats(org)
 
 
+@org_task("update-org-contact-counts", 60 * 20)
+def update_org_contact_count(org, ignored_since, ignored_until):
+    from ureport.utils import update_cache_org_contact_counts
+
+    update_cache_org_contact_counts(org)
+
+
 @org_task("contact-pull", 60 * 60 * 12)
 def pull_contacts(org, ignored_since, ignored_until):
     """
