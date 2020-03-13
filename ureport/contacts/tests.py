@@ -5,7 +5,7 @@ from dash.orgs.models import TaskState
 from mock import patch
 
 from ureport.contacts.models import Contact, ContactField, ReportersCounter
-from ureport.contacts.tasks import pull_contacts
+from ureport.contacts.tasks import pull_contacts, update_org_contact_count
 from ureport.locations.models import Boundary
 from ureport.tests import TestBackend, UreportTest
 from ureport.utils import json_date_to_datetime
@@ -290,6 +290,14 @@ class ContactTest(UreportTest):
 class ContactsTasksTest(UreportTest):
     def setUp(self):
         super(ContactsTasksTest, self).setUp()
+
+    @patch("ureport.contacts.tasks.update_cache_org_contact_counts")
+    def test_update_org_contact_count(self, mock_update_cache_org_contact_counts):
+        mock_update_cache_org_contact_counts.return_value = "Called"
+
+        update_org_contact_count(self.nigeria.pk)
+
+        mock_update_cache_org_contact_counts.assert_called_once_with(self.nigeria)
 
     @patch("dash.orgs.models.Org.get_backend")
     @patch("ureport.contacts.models.ReportersCounter.squash_counts")
