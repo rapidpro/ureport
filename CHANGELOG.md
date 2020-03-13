@@ -1,3 +1,9 @@
+v1.1.141
+----------
+ * Merge pull request #564 from rapidpro/contacts-counts-performance
+ * More tests
+ * Increase cache time for contacts counts and add task to update the cache
+
 v1.1.140
 ----------
  * Merge pull request #563 from rapidpro/stats-for-same-flow-polls
