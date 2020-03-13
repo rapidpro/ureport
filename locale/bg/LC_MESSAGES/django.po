@@ -1,0 +1,1842 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Maria Alexandrova <malexandrova017@gmail.com>, 2020
+# Stanislav Dodov <stanislav.dodov@gmail.com>, 2020
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-11 15:23+0000\n"
+"PO-Revision-Date: 2019-05-15 20:27+0000\n"
+"Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
+"Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "The name of this category"
+msgstr "Името на тази категория"
+
+msgid "An optional image that can describe this category"
+msgstr "Изображение по избор, което може да опише тази категория"
+
+msgid "The organization this category applies to"
+msgstr "Организацията, към която тази категория се отнася."
+
+msgid "Categories"
+msgstr "Категории"
+
+msgid "The name to describe this image"
+msgstr "Името, което описва това изображение"
+
+msgid "The category this image represents"
+msgstr "Категорията, но която това изображение съответства"
+
+msgid "The image file to use"
+msgstr "Изображението, което да бъде използвано"
+
+msgid "The human readable name for this content type"
+msgstr "Четливото потребителско име за този вид материали"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr ""
+"Франгметът за идентификация на този тип съдържание заедно с неговите "
+"шаблонови етикети"
+
+msgid ""
+"A description of where this content type is used on the site and how it will"
+" be dsiplayed"
+msgstr ""
+"Описание на това къде този тип материали се използва на сайта и как те ще "
+"бъдат изложени на него."
+
+msgid "Whether this content should include a title"
+msgstr "Дали този тип материали трябва да включват заглавие"
+
+msgid "Whether this content should include an image"
+msgstr "Дали този тип материали трябва да включват изображение"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Дали тази организация трябва да използва детайлен редактор на HTML"
+
+msgid "Whether this content should include a summary field"
+msgstr "Дали този тип материали трябва да включват поле с резюме"
+
+msgid "Whether this content should include a link"
+msgstr "Дали този материал трябва да включва линк"
+
+msgid ""
+"Whether this content should allow upload of additional images, ie a gallery"
+msgstr ""
+"Дали този материал трябва да разреши качването на допълнителни изображения, "
+"т.е. галерия"
+
+msgid "Whether this content has a color field"
+msgstr "Дали този материал съдържа цветно поле"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Дали този материал трябва да позволява настройката на YouTube ID"
+
+msgid "Whether this content should allow tags"
+msgstr "Дали този материал трябва да позволи използването на етикети"
+
+msgid "Content Type"
+msgstr "Тип материали"
+
+msgid "The category, or type for this content block"
+msgstr "Категорията или типа на това текстово поле"
+
+msgid "The title for this block of content, optional"
+msgstr "Заглавие на това текстово поле, по избор"
+
+msgid "The summary for this item, should be short"
+msgstr "Резюмето на този материал трябва да е кратко"
+
+msgid "The body of text for this content block, optional"
+msgstr "Тестът в това поле е по избор"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr ""
+"Каквото и да е изображение, което трябва да е показано с това текстово поле,"
+" незадължително"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Цвят за фон на това изображение  в формат-а #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr ""
+"Какъвто и да е линк, който да е свързан с това текстово поле, по избор"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Youtube ID, която трябва да бъде свързана с този материал"
+
+msgid ""
+"Any tags for this content block, separated by spaces, can be used to do more"
+" advanced filtering, optional"
+msgstr ""
+"Каквито и да е етикети към текстово поле, разделени чрез интервали, могат да"
+" бъдат използвани за по-разширено филтриране на информация - по избор"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr ""
+"Степен на приоритет за това поле. Полетата с по-висока степен на приоритет "
+"застават на по-високи позиции"
+
+msgid "The organization this content block belongs to"
+msgstr "Организацията, към която това текстово поле принадлежи"
+
+msgid "Gallery"
+msgstr "Галерия"
+
+msgid "Add Image"
+msgstr "Добави изображение"
+
+msgid "Search"
+msgstr "Търсене"
+
+msgid "Add"
+msgstr "Добави"
+
+msgid "Content Types"
+msgstr "Типове материали"
+
+msgid "Content Blocks"
+msgstr "Текстови полета"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%sПолета"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Редактирай %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Създай%s"
+
+msgid "Create Content Block"
+msgstr "Създай текстово поле"
+
+msgid "Your first name"
+msgstr "Вашето лично име"
+
+msgid "Your last name"
+msgstr "Вашата фамилия"
+
+msgid "Your email address"
+msgstr "Вашата електронна поща"
+
+msgid "Your password, at least eight letters please"
+msgstr "Вашата парола, поне осем букви, моля"
+
+msgid "That email address is already used"
+msgstr "Този email адрес вече се използва"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Всяка парола трябва да съдържа не по-малко от 8 букви"
+
+msgid "This domain is used for subdomains"
+msgstr "Този домейн се използва от субдомейни"
+
+msgid "Name"
+msgstr "Име"
+
+msgid "The name of this organization"
+msgstr "Името на тази организация"
+
+msgid "The logo that should be used for this organization"
+msgstr "Логото, което трябва да бъде използванo за тази организация"
+
+msgid "Administrators"
+msgstr "Администратори"
+
+msgid "The administrators in your organization"
+msgstr "Администраторите във вашата организация"
+
+msgid "Viewers"
+msgstr "Зрители"
+
+msgid "The viewers in your organization"
+msgstr "Зрителите, включени във вашата организация"
+
+msgid "Editors"
+msgstr "Редактори"
+
+msgid "The editors in your organization"
+msgstr "Редакторите във вашата организация"
+
+msgid "Language"
+msgstr "Език"
+
+msgid "The main language used by this organization"
+msgstr "Основният език, който се използва във вашата организация"
+
+msgid "Subdomain"
+msgstr "Субдомейн"
+
+msgid "This subdomain is not available"
+msgstr "Този субдомейн не е наличен"
+
+msgid "The subdomain for this organization"
+msgstr "Субдомейнът за тази организация"
+
+msgid "Domain"
+msgstr "Домейн"
+
+msgid "This domain is not available"
+msgstr "Този домейн не е наличен"
+
+msgid "The custom domain for this organization"
+msgstr "Персонализираният домейн за тази организация"
+
+msgid "Timezone"
+msgstr "Часова зона"
+
+msgid "The timezone your organization is in."
+msgstr "Часовата зона, в която се намира вашата организация"
+
+msgid ""
+"JSON blob used to store configuration information associated with this "
+"organization"
+msgstr ""
+"квадрат на програмен език JSON, съдържащ конфигурираща информация за тази "
+"организация"
+
+msgid "Administrator"
+msgstr "Администратор "
+
+msgid "Editor"
+msgstr "Редактор"
+
+msgid "Viewer"
+msgstr "Зрител"
+
+msgid "Org"
+msgstr "Оргазация"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Организацията, която профилът е поканен да види"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "Email адреса, на който изпращаме поканата на зрителя"
+
+msgid "Secret"
+msgstr "Тайна"
+
+msgid "a unique code associated with this invitation"
+msgstr "Уникален код, свързан с тази покана"
+
+msgid "User Role"
+msgstr "Роля на потребителя"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%sПокана"
+
+msgid "Banner"
+msgstr "Банер"
+
+msgid "Pattern"
+msgstr "Шарка"
+
+msgid "The organization in which the image will be used"
+msgstr "Организацията, към която ще бъде използвано това изображение"
+
+msgid "The name to describe this background"
+msgstr "Името, което описва този фон"
+
+msgid "Background type"
+msgstr "Вид на фона"
+
+msgid "The image file"
+msgstr "Файлът на изображението"
+
+msgid "The API token for this backend"
+msgstr " API-token-ът за това backend приложение"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"Поканен сте да се присъедините към %(org_name)s\n"
+"<br/>\n"
+"За да приемете поканата, <a href='%(host)s%(join_url)s'>кликнете тук</a>\n"
+" "
+
+msgid "You are invited to join {{org.name}}."
+msgstr "Поканени сте да се присъедините към {{името на организацията}}."
+
+msgid "Click this link to join"
+msgstr "Кликнете този линк, за да се присъедините"
+
+msgid "Edit"
+msgstr "Редактирай"
+
+msgid "Manage Backends"
+msgstr "Управлявайте Backend-овете"
+
+msgid "Manage Users"
+msgstr "Управлявай потребителите"
+
+msgid "Accounts"
+msgstr "Профили"
+
+msgid "Admins"
+msgstr "Администратори"
+
+msgid "Remove"
+msgstr "Премахни"
+
+msgid "You must have at least one administator"
+msgstr "Трябва да има поне един администратор"
+
+msgid "Select your Organization"
+msgstr "Изберете вашата организация"
+
+msgid ""
+"Your account is not associated to an organization. Please Contact the "
+"adminstrator."
+msgstr ""
+"Вашият профил не е свързан с организация. Моля, свържете се с администратора"
+" на желаната от вас организация"
+
+msgid "Your Organization"
+msgstr "Вашата организация"
+
+msgid "Invite people to your organization"
+msgstr "Поканете хора да се присъединят към вашата организация"
+
+msgid "User group"
+msgstr "Потребителска група"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Един от email-ите, които сте въвели, е невалиден"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Управлявайте %(name)sпрофили"
+
+msgid "Create"
+msgstr "Създай"
+
+msgid ""
+"Your invitation link is invalid. Please contact your organization "
+"administrator."
+msgstr ""
+"Вашият линк за покана е невалиден. Моля, свържете се с администратора на "
+"вашата организация."
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Присъедини се към %(name)s "
+
+msgid "Join"
+msgstr "Присъедини се"
+
+msgid ""
+"Your invitation link has expired. Please contact your organization "
+"administrator."
+msgstr ""
+"Вашият линк за покана е изтекъл. Моля, свържете се с администратора на "
+"вашата организация."
+
+msgid "Task"
+msgstr "Задача"
+
+msgid "Tasks"
+msgstr "Задачи"
+
+msgid "The title for this story"
+msgstr "Заглавието на тази история"
+
+msgid "Whether this story is featured"
+msgstr "Дали тази история е избрана"
+
+msgid "The summary for the story"
+msgstr "Резюмето на тази история "
+
+msgid "The body of text for the story"
+msgstr "Съдържание на историята"
+
+msgid "The writer of the story"
+msgstr "Авторът на тази история"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Линк към mp3 файл, който да бъде публикуван към тази история"
+
+msgid ""
+"The id of the YouTube video that should be linked to this story (this is the"
+" text that comes afer v= and before & in the YouTube URL)"
+msgstr ""
+"Идентификацията на YouTube клипа (Това е текстът, който следва след v= и е "
+"преди & в YouTube линка)"
+
+msgid ""
+"Any tags for this story, separated by spaces, can be used to do more "
+"advanced filtering, optional"
+msgstr ""
+"Каквито и да е етикети към тази история, разделени чрез интервали, могат да "
+"бъдат използвани за по-разширено филтриране на информация - по избор"
+
+msgid "The category for this story"
+msgstr "Категорията на тази история"
+
+msgid "The organization this story belongs to"
+msgstr "Организацията, към която тази история принадлежи"
+
+msgid "Stories"
+msgstr "Истории"
+
+msgid "The story to associate to"
+msgstr "Тази история е свързана с"
+
+msgid "Yes"
+msgstr "Да "
+
+msgid "No"
+msgstr "Не"
+
+msgid "Story Images"
+msgstr "Изображения към историята"
+
+#, python-format
+msgid "Image %d"
+msgstr "Изображение%d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr ""
+"Изображение, което да бъде включено към страницата на историята и към нейния"
+" предварителен преглед. (по избор)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr ""
+"Изображение, което да бъде включено към страницата на историята и към нейния"
+" предварителен преглед. (по избор)"
+
+msgid "Remove Item?"
+msgstr "Изтриване?"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Сигурни ли сте, че искате да премахнете<b>%(object)s</b>?"
+
+msgid ""
+"Once it is removed, it will be gone forever. There is no way to undo this "
+"operation."
+msgstr "Веднъж премахнато, това не може да бъде върнато"
+
+msgid "Cancel"
+msgstr "Отмени"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t%(counter)sрезултати \n"
+"\t"
+msgstr[1] ""
+"\n"
+"%(counter)sброй резултати"
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"Резултати %(start)s%(end)sна %(count)s"
+
+msgid "Previous"
+msgstr "Предишен"
+
+msgid "Next"
+msgstr "Следващ"
+
+msgid "edit"
+msgstr "редактирай"
+
+msgid "Sign in"
+msgstr "Вход"
+
+msgid "Login"
+msgstr "Вписване"
+
+msgid "Forgot Password?"
+msgstr "Забравена парола?"
+
+msgid "Token Expired"
+msgstr "Token-ът е изтекъл"
+
+msgid "Login Failure"
+msgstr "Неуспешен опит за вписване"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Съжаляваме, не може да влезете в момента, тъй като получихме %(failed_login_limit)sнеправилни опита за влизане"
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Моля изчакайте %(lockout_timeout)s минути преди да опитате да влезете отново."
+
+msgid ""
+"Alternatively, you can fill out the form below to have your password reset "
+"via e-mail."
+msgstr ""
+"Като друг вариант може да попълните електронния формуляр по-долу, за да бъде"
+" обновена паролата ви чрез e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr ""
+"Моля свържете се с администратора на сайта, за да бъде обновена паролата ви."
+
+msgid "Email Address"
+msgstr "Email адрес"
+
+msgid "Recover"
+msgstr "Възстанови"
+
+msgid ""
+"Please enter the email address you used to sign up and we will help you "
+"recover your password."
+msgstr ""
+"Моля, въведете email-а, който сте използвали при регистрацията и ние ще ви "
+"помогнем да възстановите паролата си."
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Паролата ви е изтекла</strong>Според политиката на сайта трябва да избирате нова парола на всеки %(expire_days)sдни и всяка от тях не бива да е била използвана в срок от преходни %(window_days)sдни. "
+
+msgid "New Password"
+msgstr "Нова парола"
+
+msgid ""
+"Passwords must have at least 8 characters, including one uppercase, one "
+"lowercase and one number"
+msgstr ""
+"Паролите трябва да съдържат поне 8 символа - една главна буква, една малка "
+"буква и една цифра."
+
+msgid ""
+"You have used this password before in the past year, please use a new "
+"password."
+msgstr ""
+"Паролата е била използвана преди през последната година. Моля използвайте "
+"нова."
+
+msgid "Password"
+msgstr "Парола"
+
+msgid "Confirm Password"
+msgstr "Потвърдете паролата"
+
+msgid "Please enter your password to save changes."
+msgstr "Моля, въведете вашата парола, за да запазите направените промени. "
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Потвърдете новата парола, като попълните това поле"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Новата парола не съвпада с потвърждението си."
+
+msgid "Your Email"
+msgstr "Вашият Email"
+
+msgid ""
+"E-mail recovery is not supported, please contact the website administrator "
+"to reset your password manually."
+msgstr ""
+"Възстановяване на паролата чрез email не се поддържа, моля свържете се с "
+"администратора на сайта, за да бъде обновена ръчно."
+
+msgid "Current Password"
+msgstr "Настояща парола "
+
+msgid "Your current password"
+msgstr "Настоящата ви парола "
+
+msgid "Your new password."
+msgstr "Новата ви парола "
+
+msgid "Confirm new Password"
+msgstr "Потвърдете нова парола"
+
+msgid "Confirm your new password."
+msgstr "Потвърдете вашата нова парола"
+
+msgid "Please enter your password to save changes"
+msgstr "Моля, въведете паролата си, за да запазите направените промени "
+
+msgid "Confirm your new password by entering it here"
+msgstr "Потвърдете новата си парола, като я въведете тук"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr ""
+"Несъответствие между новата ви парола и потвърждението ѝ, опитайте отново."
+
+msgid "New user created successfully."
+msgstr "Новият потребител е създаден успешно."
+
+msgid "Groups"
+msgstr "Групи"
+
+msgid ""
+"Users will only get those permissions that are allowed for their group."
+msgstr ""
+"Потребителите ще имат достъп само до онези разрешения, които са одобрени за "
+"тяхната група"
+
+msgid "Set the user's initial password here."
+msgstr "Въведи първоначалната парола на този потребител тук"
+
+msgid "Last Login"
+msgstr "Последно вписване"
+
+msgid "Is Active"
+msgstr "Е Активен"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Дали този потребител има разрешение да влиза в сайта"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr ""
+"Потребителите ще имат достъп само до онези разрешения, които са одобрени за "
+"тяхната група"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr ""
+"Може да обновите паролата на съответния потребител, като въведете нова тук"
+
+msgid "Username"
+msgstr "Потребителско име"
+
+msgid "Your password"
+msgstr "Вашата парола"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Ако желаете да настройте нова парола, въведе я тук"
+
+msgid "Confirm New Password"
+msgstr "Потвърждаване на нова парола"
+
+msgid "Confirm your new password"
+msgstr "Потвърдете вашата нова парола"
+
+msgid "Edit your profile"
+msgstr "Редактирайте профил"
+
+msgid "Password Recovery"
+msgstr "Възстановяване на парола"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr ""
+"На предоставения на вашия профил адрес е изпратен e-mail, съдържащ следващи "
+"инструкции"
+
+msgid "Password Recovery Request"
+msgstr "Искане за възстановяване на парола"
+
+msgid "Pick a new password"
+msgstr "Изберете нова парола"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Новата парола е актуализирана успешно. Благодарим ви."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Сега сте вписан като %s"
+
+msgid ""
+"Password Updated Successfully. Now you can log in using your new password."
+msgstr ""
+"Паролата е актуализирана успешно. Сега може да използвате новата си парола, "
+"за да влизате в сайта."
+
+msgid "Reset your Password"
+msgstr "Променете паролата си"
+
+msgid ""
+"Your link has expired for security reasons. Please reinitiate the process by"
+" entering your email here."
+msgstr ""
+"Линкът е изтекъл поради мерки за сигурност. Моля започнете процеса нанова, "
+"като въведете email-а си тук "
+
+msgid "Submit"
+msgstr "Предай"
+
+msgid "Form"
+msgstr "От"
+
+msgid "Save Changes"
+msgstr "Запази промените"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Нов %sе създаден"
+
+#, python-format
+msgid "Import %s"
+msgstr "Вмъкни %s"
+
+msgid "Back to Website"
+msgstr "Връщане към уебстраницата"
+
+msgid "Welcome, "
+msgstr "Добре дошли"
+
+msgid "Logout"
+msgstr "Излизане"
+
+msgid "Opinions"
+msgstr "Мнения"
+
+msgid "Users"
+msgstr "Потребители"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Pages"
+msgstr "Страници"
+
+msgid "Jobs"
+msgstr "Заети длъжности"
+
+msgid "Photos"
+msgstr "Снимки"
+
+msgid "Categories Images"
+msgstr "Категории изображения"
+
+msgid "News Items"
+msgstr "Новини"
+
+msgid "Orgs"
+msgstr "Организации"
+
+msgid "Images"
+msgstr "Изображения"
+
+msgid "About"
+msgstr "За повече информация"
+
+msgid "Engagement"
+msgstr "Участие"
+
+msgid "Category Images"
+msgstr "Категории изображения"
+
+msgid "+ New "
+msgstr "+Нов"
+
+msgid "+ New Page"
+msgstr "+Нова страница"
+
+msgid "U-Report"
+msgstr "U-Report"
+
+msgid "Admin"
+msgstr "Администратор"
+
+msgid "Configuration"
+msgstr "Конфигурация"
+
+msgid "Content"
+msgstr "Съдържание"
+
+msgid "Country Aliases"
+msgstr "Други наименования на държавата"
+
+msgid "Job Sources"
+msgstr "Източници на работни места"
+
+msgid "Jobs Content"
+msgstr "Съдържание на Работа"
+
+msgid "About Content"
+msgstr "Съдържание на За нас"
+
+msgid "Videos"
+msgstr "Видеоклипове"
+
+msgid "Contact Us Content"
+msgstr "Съдържание на Контакти"
+
+msgid "Missions Content"
+msgstr "Съдържание на Мисии"
+
+msgid "Terms & Conditions"
+msgstr "Условия за ползване"
+
+msgid "U-Reporters Content"
+msgstr "Съдържание на U-Репортери"
+
+msgid "Join &amp; Engage Content"
+msgstr "Включи се към &amp; ??????"
+
+msgid "Join Steps Content"
+msgstr "Съдържание на Стъпки за включване"
+
+msgid "Additional Menu"
+msgstr "Допълнително меню"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "ИЗБЕРЕТЕ ДЪРЖАВАТА, В КОЯТО ЖИВЕЕТЕ"
+
+msgid "Join Now"
+msgstr "Включи се сега!"
+
+msgid "READ MORE"
+msgstr "ПРОЧЕТИ ПОВЕЧЕ"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr "ВИЖТЕ КОЙ И КАКВО СПОДЕЛЯ"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"за да добавите източник на работно място в Twitter, се изисква да се сдобиете с етикет на разширение от Twitter"
+
+msgid "Follow this step by step guide"
+msgstr "Следвайте указанията стъпка по стъпка"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"<div>След като създадете разширението, копирайте етикета му от URL, както е показано</div>"
+
+msgid "Back"
+msgstr "Връщане назад"
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "НАЙ-НОВИ ИЗВЕСТИЯ"
+
+msgid "Backends"
+msgstr "Backends"
+
+msgid "+ New Poll"
+msgstr "+Ново допитване"
+
+msgid "Refresh Results"
+msgstr "Обнови резултатите"
+
+msgid "MORE POLLS"
+msgstr "ОЩЕ ДОПИТВАНИЯ"
+
+msgid "FILTER"
+msgstr "ФИЛТЪР"
+
+msgid "All"
+msgstr "Всички"
+
+msgid "POLL LIST"
+msgstr "СПИСЪК С ДОПИТВАНИЯ"
+
+msgid "All polls from most recent to oldest"
+msgstr "Всички допитвания, сортирани от най-актуална до най-стара "
+
+msgid "ARCHIVED STORIES"
+msgstr "АРХИВИРАНИ ИСТОРИИ"
+
+msgid "LIST"
+msgstr "СПИСЪК"
+
+msgid "LATEST OPINION"
+msgstr "НАЙ-АКТУАЛНО МНЕНИЯ"
+
+msgid "VIEW FULL RESULTS"
+msgstr "ВИЖ ПЪЛНИТЕ РЕЗУЛТАТИ"
+
+msgid "U-REPORTERS IN"
+msgstr "U-РЕПОРТЕРИ В"
+
+msgid "PARTNERING WITH"
+msgstr "В СЪТРУДНИЧЕСТВО С"
+
+msgid "U-REPORTERS"
+msgstr "U-Репортери"
+
+msgid "IN"
+msgstr "В"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "СТРАНИ ПО СВЕТА"
+
+msgid "AGES"
+msgstr "ВЪЗРАСТОВИ ГРУПИ"
+
+msgid "Join U-Report, Your voice matters."
+msgstr "Включи се в U-Report: Твоят глас е важен!"
+
+msgid "JOIN NOW"
+msgstr "ВКЛЮЧИ СЕ СЕГА"
+
+msgid "FEATURED STORY"
+msgstr "ИЗБРАНА ИСТОРИЯ"
+
+msgid ""
+"We are a part of a global platform working to change the lives of young "
+"people around the world."
+msgstr ""
+"Ние сме част от от глобална платформа, която цели да промени живота на "
+"младите хора по целия свят."
+
+msgid ""
+"Learn more about how U-Report is empowering and connecting young people to "
+"speak out on issues that matter to them."
+msgstr ""
+"Научи повече за това как U-Report свързва и дава възможност на младите хора "
+"да говорят открито за проблемите, които ги интересуват."
+
+msgid "LEARN MORE"
+msgstr "НАУЧИ ПОВЕЧЕ"
+
+msgid "Visit"
+msgstr "Посети"
+
+msgid "How would you like to join?"
+msgstr "По какъв начин желаете да се присъедините?"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "SEARCH"
+msgstr "ТЪРСЕНЕ"
+
+msgid "No results found"
+msgstr "Няма намерени резултати"
+
+msgid "RESPONSES"
+msgstr "ОТГОВОРИ"
+
+msgid "RESPONSE RATE"
+msgstr " ПРОЦЕНТ ОТГОВОРИЛИ"
+
+msgid "TOTAL RESPONSES"
+msgstr "ОБЩО ОТГОВОРИ"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)sотговорили от %(polled)sзапитани"
+
+msgid "ALL"
+msgstr "ВСИЧКИ"
+
+msgid "AGE"
+msgstr "ВЪЗРАСТ"
+
+msgid "GENDER"
+msgstr "ПОЛ"
+
+msgid "LOCATION"
+msgstr "МЕСТОПОЛОЖЕНИЕ"
+
+msgid "Written by:"
+msgstr "Написана от:"
+
+msgid "Even"
+msgstr "Дори ако"
+
+msgid "State"
+msgstr "Област"
+
+msgid "Other"
+msgstr "Други"
+
+msgid "District"
+msgstr "Община"
+
+msgid "Participation Level"
+msgstr "Ниво на участие"
+
+msgid "Responses"
+msgstr "Отговори"
+
+msgid "Reporters in"
+msgstr "U-Репортери в"
+
+msgid "Results"
+msgstr "Резултати"
+
+msgid "*Other answers include"
+msgstr "*Други отговори включват"
+
+msgid "Population"
+msgstr "Население"
+
+msgid "Registered in"
+msgstr "Регистрирани в"
+
+msgid "Density"
+msgstr "Гъстота"
+
+msgid "total"
+msgstr "общо"
+
+msgid "of"
+msgstr "от"
+
+msgid "the"
+msgstr "-"
+
+msgid "OVERALL STATISTICS"
+msgstr "ОБЩА СТАТИСТИКА"
+
+msgid "THIS YEAR"
+msgstr "ТАЗИ ГОДИНА"
+
+msgid "AVG RESPONSE RATE"
+msgstr "СРЕДЕН ПРОЦЕНТ НА ОТГОВАРЯНЕ"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "U-РЕПОРТЕРИ ПО РЕГИОН"
+
+msgid "FILTER RESULTS"
+msgstr "ФИЛТРИРАЙ РЕЗУЛТАТИТЕ"
+
+msgid "Export and Share"
+msgstr "Експортирай и сподели"
+
+msgid ""
+"Want to tell the world about this? Download this image to easily share on "
+"social media or for a beautiful presentation!"
+msgstr ""
+"Искаш ли светът да узнае за това? Изтегли го като изображение, за да го "
+"споделиш в социалните мрежи или за да го приложиш в страхотна презентация!"
+
+msgid "SELECT COUNTRY"
+msgstr "ИЗБЕРЕТЕ ДЪРЖАВА"
+
+msgid "Custom pages"
+msgstr "Персонализирани страници"
+
+msgid ""
+"See by the numbers how we are engaging youth voices for positive social "
+"change."
+msgstr ""
+"Виж в цифри как включваме гласовете на младите хора за социална промяна!"
+
+msgid "Polled"
+msgstr "Запитани"
+
+msgid "Reporters"
+msgstr "Репортери"
+
+msgid "Top Region"
+msgstr "Топ регион"
+
+msgid "January"
+msgstr "януари"
+
+msgid "February"
+msgstr "февруари"
+
+msgid "March"
+msgstr "март"
+
+msgid "April"
+msgstr "април"
+
+msgid "May"
+msgstr "май"
+
+msgid "June"
+msgstr "юни"
+
+msgid "July"
+msgstr "юли"
+
+msgid "August"
+msgstr "август "
+
+msgid "September"
+msgstr "септември"
+
+msgid "October"
+msgstr "октомври"
+
+msgid "November"
+msgstr "ноември"
+
+msgid "December"
+msgstr "декември"
+
+msgid "Jan"
+msgstr "януари"
+
+msgid "Feb"
+msgstr "февруари"
+
+msgid "Mar"
+msgstr "март"
+
+msgid "Apr"
+msgstr "април"
+
+msgid "Jun"
+msgstr "юни"
+
+msgid "Jul"
+msgstr "юли"
+
+msgid "Aug"
+msgstr "август"
+
+msgid "Sep"
+msgstr "септември"
+
+msgid "Oct"
+msgstr "октомври"
+
+msgid "Nov"
+msgstr "ноември"
+
+msgid "Dec"
+msgstr "декември"
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Сигурни ли сте, че искате да премахнете <strong>%(object)s</strong>?"
+
+#, python-format
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+"\n"
+"%(counter)sрезултати"
+msgstr[1] ""
+"\n"
+"%(counter)sрезултати"
+
+#, python-format
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+"\n"
+"Резултати %(start)s%(end)sна %(count)s"
+
+msgid "Error"
+msgstr "Грешка"
+
+msgid "Enter Dashboard"
+msgstr "Влез в таблото"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Съжаляваме, не може да влезете в момента, тъй като получихме %(failed_login_limit)sнеправилни опита за влизане"
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Моля, изчакайте %(lockout_timeout)sминути преди да опитате да влезете отново."
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"<strong>Паролата ви е изтекла</strong>Според политиката на сайта трябва да избирате нова парола на всеки %(expire_days)sдни и всяка от тях не бива да е била използвана в срок от преходни %(window_days)sдни. "
+
+msgid "+ New Story"
+msgstr "Нова История"
+
+#, python-format
+msgid "Refreshed %s cache for this organization"
+msgstr "Обновени %s от кеша за тази организация"
+
+msgid "Flag"
+msgstr "Докладва/Flag"
+
+msgid "The organization to which the image will be used"
+msgstr "Организацията, към която ще бъде използвано това изображение"
+
+msgid "A short descriptive name for this image"
+msgstr "Кратко описание на изображението"
+
+msgid "Image type"
+msgstr "Вид на изображението"
+
+msgid "Label"
+msgstr "Етикет"
+
+msgid "Key"
+msgstr "Ключ"
+
+msgid "Male"
+msgstr "Мъж"
+
+msgid "Female"
+msgstr "Жена"
+
+msgid "Organization"
+msgstr "Организация"
+
+msgid "Gender"
+msgstr "Пол"
+
+msgid "Gender of the contact"
+msgstr "Пол"
+
+msgid "Born Field"
+msgstr "Година на раждане"
+
+msgid "Occupation Field"
+msgstr "Професия"
+
+msgid "Registration Date"
+msgstr "Дата на регистриране"
+
+msgid "State Field"
+msgstr "Държава"
+
+msgid "District Field"
+msgstr "Област"
+
+msgid "Ward Field"
+msgstr "Община"
+
+msgid "Number of items with this counter"
+msgstr "Брой артикули с този брояч"
+
+msgid "No root user found. Please create a root user"
+msgstr ""
+"Първоначален потребител не е намерен. Моля създайте първоначален потребител "
+
+msgid "The name for our alias"
+msgstr "Други наименования"
+
+msgid "The title or name to reference this Job source."
+msgstr "Заглавието, което пренасочва към този източник на работно място"
+
+msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
+msgstr "Изберете типа за източника на работа: Twitter, Facebook или RSS feed"
+
+msgid "The full URL to navigate to this Job source."
+msgstr "Пълният URL, водещ към източника на работа"
+
+msgid ""
+"For Twitter, a widget Id is required to embed tweets on the website. Read "
+"carefully the instructions above on how to get the right widget Id"
+msgstr ""
+"За Twitter  се изисква  етикет на разширение за туитовете, които се "
+"прикачват към сайта. Прочетете внимателно инструкциите по-горе за това как "
+"да получите правилния widget ID"
+
+msgid "Featured job sources are shown first on the jobs page."
+msgstr "Включените източници на работа са показани първи на страницата"
+
+msgid "The organization this job source is for"
+msgstr "Организацията, към която принадлежи този източник на работа"
+
+msgid "Your job source has been added successfully"
+msgstr "Вашият източник на работно място е добавен успешно"
+
+msgid "Your job source has been updated successfully"
+msgstr "Вашият източник на работно място е актуализиран успешно"
+
+msgid "This is the OSM id for this administrative boundary"
+msgstr "Това е OSM ID за тази административна граница"
+
+msgid "The name of our administrative boundary"
+msgstr "Името на нашата административна единица"
+
+msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
+msgstr "Ниво на разграничение - 0-държава, 1-област, 2-община"
+
+msgid "The parent to this political boundary if any"
+msgstr "Parent-категория на тази политическа граница, ако има такъва."
+
+msgid "Geometry"
+msgstr "Геометрия"
+
+msgid ""
+"The json representing the geometry type and coordinates of the boundaries"
+msgstr ""
+"JSON файлът, който представлява геометричния тип и координатите на границите"
+
+msgid "The title for this item"
+msgstr "Заглавието нa този артикул"
+
+msgid "A short summary description for this item"
+msgstr "Кратко описание на този артикул"
+
+msgid "A link that should be associated with this item"
+msgstr "Линк, който да е свързан с този артикул"
+
+msgid "The category this item belongs to"
+msgstr "Категорията, към която този артикул принадлежи"
+
+msgid "The organization this item belongs to"
+msgstr "Организацията, към която този артикул принадлежи"
+
+msgid "The title for this Video"
+msgstr "Заглавието на този клип"
+
+msgid "A short summary description for this video"
+msgstr "Кратко описание за този видеоклип"
+
+msgid "The organization this video belongs to"
+msgstr "Организацията, към която това видео принадлежи"
+
+msgid "The name of this poll category"
+msgstr "Името на тази категория от допитвания"
+
+msgid "Poll Categories"
+msgstr "Категории допитвания"
+
+msgid "The Flow this Poll is based on"
+msgstr "Потокът, на който е базирано това допитване"
+
+msgid ""
+"The date to display for this poll. Leave empty to use flow creation date."
+msgstr ""
+"Датата, която ще е покана на това допитване. Оставете полето празно, за да "
+"бъде използвана датата на създаване на потока, отговарящ на това допитване."
+
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr "Дали този поток е архивиран в RapidPro"
+
+msgid "The base language of the flow to use"
+msgstr "Основният език за този поток"
+
+msgid "The number of polled reporters on this poll"
+msgstr "Брой запитани U-Репортери в това допитване"
+
+msgid "Whether the poll has finished the initial results sync."
+msgstr ""
+"Дали допитването е завършило първоначалното синхронизиране на резултатите"
+
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Дали това допитване трябва да спре да обновява данни"
+
+msgid "The title for this Poll"
+msgstr "Заглавието на това допитване"
+
+msgid "The category this Poll belongs to"
+msgstr "Категорията, към която това допитване принадлежи"
+
+msgid "Whether this poll should be featured on the homepage"
+msgstr "Дали това допитване трябва да бъде показано на началната страница"
+
+msgid "The splash category image to display for the poll (optional)"
+msgstr ""
+"Изображението, което ще се използва при уведомяване за зареждане на "
+"допитването. (незадължително)"
+
+msgid "The organization this poll is part of"
+msgstr "Организацията, към която това допитване принадлежи"
+
+msgid "The title for this response story"
+msgstr "Заглавието на статията, базирана на отговори от анкета"
+
+msgid "The writer of the response story"
+msgstr "Авторът на статията, базирана на отговори от анкета"
+
+msgid "The poll to associate to"
+msgstr "Допитването, към което да се свърже"
+
+msgid "The poll for this response"
+msgstr "Допитването към този отговор"
+
+msgid "The location for this response"
+msgstr "Местоположението, от където идва този отговор "
+
+msgid "The name of the sender of the message"
+msgstr "Името на подателя на съобщението"
+
+msgid "The featured response message"
+msgstr "Включеното съобщение, съдържащо отговор"
+
+msgid "The poll this question is part of"
+msgstr "Допитването, от което е част този въпрос"
+
+msgid "The title of this question"
+msgstr "Заглавието на този въпрос"
+
+msgid "The RuleSet this question is based on"
+msgstr "Ruleset-ът, на който е базиран този въпрос"
+
+msgid "The label of the ruleset on RapidPro"
+msgstr "Етикетът на ruleset-a в RapidPro"
+
+msgid "The priority number for this question on the poll"
+msgstr "Степен на приоритет на този въпрос от допитването"
+
+msgid "The Rule this response category is based on"
+msgstr "Правилото, на което е базирана тази категория отговор"
+
+msgid "Your org does not have any API token configuration."
+msgstr "Вашата организация няма конфигурация за Приложно-програмен интерфейс"
+
+msgid "You must include a title for every included question."
+msgstr "Всеки въпрос, включен в допитването, трябва да има заглавие"
+
+msgid "Title too long. The max limit is 255 characters for each title"
+msgstr ""
+"Заглавието е прекалено дълго. Максималният лимит на символи е 255 за всяко "
+"заглавие."
+
+msgid "You must include at least one poll question."
+msgstr "Поне един въпрос трябва да е включен в допитването."
+
+msgid "Adjust poll date"
+msgstr "Регулирайте датата на допитването"
+
+msgid "Your poll has been updated, now pick which questions to include."
+msgstr ""
+"Допитването е актуализирано. Сега изберете кои въпроси да бъдат включени в "
+"него."
+
+msgid "Configure flow"
+msgstr "Конфигурирайте потока"
+
+msgid "Your poll has been configured, now adjust the poll date."
+msgstr "Допитването е конфигурирано, сега регулирайте неговата дата."
+
+msgid "Your poll has been created, now configure its flow."
+msgstr "Допитването е създадено, сега конфигурирайте потока към него."
+
+msgid "Poll Images"
+msgstr "Изображения към допитването"
+
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr ""
+"Сега въведете някои отговори, които желаете да включите (ако има такива) "
+
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr ""
+"Изображение, което да бъде показано на страницата на допитването и в "
+"предварителни прегледи на нея (незадължително)"
+
+msgid "Image to display on poll page and in previews (optional)"
+msgstr ""
+"Изображение, което да бъде показано на страницата на допитването и в "
+"предварителни прегледи на нея (незадължително)"
+
+msgid "Poll Response"
+msgstr "Отговор на допитването"
+
+msgid "Your poll has been updated."
+msgstr "Допитването е актуализирано"
+
+msgid "Poll Questions"
+msgstr "Въпроси в допитването"
+
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr ""
+"Сега настройте изображенията, които искате да бъдат показани на страницата "
+"на допитването  (ако има такива)"
+
+msgid "Include"
+msgstr "Включи"
+
+msgid "Whether to include this question in your public results"
+msgstr "Дали този въпрос да бъде включен в публичните резултати"
+
+msgid "Priority"
+msgstr "Приоритет"
+
+msgid ""
+"The priority of this question on the poll page, higher priority comes first"
+msgstr ""
+"Степен на приоритет за този въпрос от допитването. Въпросите с по-висока "
+"степен на приоритет застават на по-високи позиции"
+
+msgid "Ruleset Label"
+msgstr "Етикет на ruleset"
+
+msgid "The label of the ruleset from RapidPro"
+msgstr "Етикетът на ruleset-а от RapidPro"
+
+msgid "Title"
+msgstr "Заглавие"
+
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Въпросът, зададен на вашатата публика, ще бъде показан публично"
+
+#, python-format
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
+msgstr ""
+"Планирана актуализация на допитването # %(poll_id)dорганизацията  # "
+"%(org_id)d"
+
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+msgid "The name of the Contact Group that contains registered reporters"
+msgstr "Името на групата, която съдържа регистрираните репортери"
+
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
+msgstr "Етикетът на полето с датата на раждане на репортерите"
+
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr "Етикетът на полето с пола на репортерите"
+
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
+msgstr "Етикетът на полето с професията на репортерите"
+
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr "Етикетът на полето с датата на регистриране на репортерите"
+
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr "Етикетът на полето с областта на репортерите"
+
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr "Етикетът на полето с общината на репортерите"
+
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr "Етикетът на полето с общината на репортерите"
+
+msgid "The label assigned to U-Reporters that are Male."
+msgstr "Етикетът за U-Репортерите, които са от мъжки пол"
+
+msgid "The label assigned to U-Reporters that are Female."
+msgstr "Етикетът за U-Репортерите, които са от женски пол"
+
+msgid "Whether this org should be show on the landing page"
+msgstr "Дали тази организация трябва да бъде показана на целевата страница"
+
+msgid "Whether this org count should consider the count from link only"
+msgstr ""
+"Дали броя на посещенията на тази организация трябва да се отчитат само от "
+"нейния линк"
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr ""
+"Краткият код, който потребителите ще използват, за да се свързват с U-Report"
+" на местно ниво"
+
+msgid ""
+"The whatapp number that users will use to contact U-Report if you have one"
+msgstr "Номерът за свързване с U-Report през WhatsApp, ако има такъв"
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr ""
+"Краткият текст, който насочва посетителите да се присъединят към U-Report"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr ""
+"Идентификация на YouTube клипа за това как да се присъедините към U-Report"
+
+msgid "The title of the photos section U-Report homepage"
+msgstr "Заглавието на секцията със снимки на началната страница на U-Report "
+
+msgid "The description of the photos section U-Report homepage"
+msgstr "Описанието на секцията със снимки на началната страница на U-Report "
+
+msgid "The description of the opinions page"
+msgstr "Описанието на страницата с допитвания"
+
+msgid "The description of the stories page"
+msgstr "Описанието на страницата с мнения"
+
+msgid "The description of the engagement page"
+msgstr "Описанието на страницата с данните за участие"
+
+msgid "The callout message on the footer engagement section"
+msgstr "Предупредително съобщение в долната секция"
+
+msgid "The primary color for styling for this organization, should be dark"
+msgstr ""
+"Основният цвят за оформление на страницата на тази организация трябва да е "
+"тъмен"
+
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr ""
+"Второстепенният цвят за оформление на страницата на тази организация трябва "
+"да е тъмен"
+
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr ""
+"Третостепенният цвят за оформление на страницата на тази организация трябва "
+"да е тъмен"
+
+msgid ""
+"The primary highlight color for styling for this organization, should be "
+"light"
+msgstr ""
+"Основният цвят за подчертаване на страницата на тази организация трябва да е"
+" тъмен"
+
+msgid ""
+"The secondary highlight color for styling for this organization, should be "
+"light"
+msgstr ""
+"Второстепенният цвят за оформление страницата на тази организация трябва да "
+"е светъл"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr ""
+"До 6 цвята в диаграмите за оформление, използвайте запетая между цветовете"
+
+msgid "The color used to draw the text on the join bar"
+msgstr "Цветът, използван за текста в полето за присъединяване"
+
+msgid "The color used to draw the background on the join bar"
+msgstr "Цвят на фона на полето за присъединяване"
+
+msgid "The primary color for styling for this organization"
+msgstr "Основният цвят за оформление на страницата на тази организация "
+
+msgid "The secondary color for styling for this organization"
+msgstr "Второстепенният цвят за оформление на страницата на тази отганизация"
+
+msgid "The background color for the site"
+msgstr "Цвят на фона на сайта"
+
+msgid ""
+"11 colors for styling maps, use comma between colors, not used if not 11 "
+"colors"
+msgstr ""
+"11 цвята за оформление на карти, използвайте запетая между цветовете, не "
+"може да се използва, ако не са 11 цвята"
+
+msgid "The states to show on maps only"
+msgstr "Само областите, които да бъдат показани на картите"
+
+msgid "The states to show on maps only, used to filter poll results"
+msgstr ""
+"Картите с показаните области, които се използват за филтриране на "
+"резултатите от допитването"
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr "ID за проследяване на Google Analytics за тази организация"
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr "URL към YouTube канала за тази организация"
+
+msgid "The URL to the Facebook page for this organization"
+msgstr "URL към Facebook страницата за тази организация"
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr ""
+"Пълното ID към Facebook страницата на тази организация (незадължително)"
+
+msgid ""
+"The integer id to the Facebook app for this organization's chat app "
+"(optional)"
+msgstr ""
+"Пълното ID към Facebook чат приложението на тази организация "
+"(незадължително)"
+
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr ""
+"Краткият текст, който ще приветства потребителите на Facebook Messenger"
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr "Идентификация на Facebook Pixel за тази организация (по избор)"
+
+msgid "The Instagram username for this organization"
+msgstr "Потребителското име в Instagram за тази организация"
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr "Instagram етикет за приложение от lightwidget.com"
+
+msgid "The Twitter handle for this organization"
+msgstr "Потребителското име в Twitter на тази организация"
+
+msgid "The Twitter widget used for searching"
+msgstr " Twitter приложение за търсене"
+
+msgid "The words to filter out from the results on public site"
+msgstr "Думите, които да бъдат филтрирани от публичните резултати"
+
+msgid "If there are jobs to be shown on the public site."
+msgstr "Ако има работни места за показване в публичен сайт"
+
+msgid ""
+"If this org if for global data. e.g: It shows a world map instead of a "
+"country map."
+msgstr ""
+"Ако тази организация е за глобални данни, например: показва световна карта, "
+"вместо национална карта"
+
+msgid "Whether to activate an extra gender."
+msgstr "Дали да бъде активирана допълнителна опция за пол"
+
+msgid "Whether to activate the new design."
+msgstr "Дали да бъде активиран новия дизайн"
+
+msgid ""
+"The alpha-3 ISO code of the organization so that it appears the stories "
+"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
+"Global)."
+msgstr ""
+" Аlpha-3 ISO кодът на организацията, който да се появява в историите на "
+"U-Report приложението. Например: BRA, NIG, CMR (Use GLOBAL if U-Report is "
+"Global)."
+
+msgid "The font used for headline texts"
+msgstr "Шрифтът, използван за заглавен текст"
+
+msgid "The font used for normal text"
+msgstr "Шрифтът, използван за обикновен текст "
+
+msgid "Hide participation stats"
+msgstr "Скрий статистическите данни за участието на потребителите "
+
+msgid "The text to describe the sponsors of free messages"
+msgstr "Текстът, който описва спонсорите на безплатни съобщения"
+
+msgid "The font used for small text"
+msgstr "Шрифт,  който се използва за малък текст"
+
+msgid ""
+"If you need to include some custom HTML codes in you org pages, like custom "
+"analytics code snippets"
+msgstr ""
+"Ако има нужда да включите персонализирани HTML кодове в страницата на вашата"
+" организация - например откъси от такива за персонализиран анализ "
+
+msgid "90 Days"
+msgstr "90 дни"
+
+msgid "6 Months"
+msgstr "6 месеца"
+
+msgid "12 Months"
+msgstr "12 месеца"
+
+msgid "Age"
+msgstr "Възраст"
+
+msgid "Location"
+msgstr "Местоположение"
+
+msgid "Opinion Responses"
+msgstr "Отговори"
+
+msgid "Sign Up Rate"
+msgstr "Процент записани"
+
+msgid "Response Rate"
+msgstr "Процент на отговорилите"
+
+msgid "Active Users"
+msgstr "Активни потребители"
+
+msgid "Whether this row was created by squashing"
+msgstr "Дали тази редица е създадена чрез сбиване"
+
+msgid "Something to trigger localizations"
+msgstr "Нещо, което да задейства локализиране"
