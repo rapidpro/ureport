@@ -8,25 +8,33 @@ import time
 import logging
 from datetime import timedelta, datetime
 from itertools import islice, chain
+from collections import defaultdict
 
 from dash.orgs.models import Org
 from dash.utils import datetime_to_ms
 from django.conf import settings
 from django.core.cache import cache
-from django.utils import timezone
+from django.db.models import Sum
+from django.utils import timezone, translation
 import pytz
-from ureport.assets.models import Image, FLAG
+from ureport.assets.models import Image, LOGO
 from raven.contrib.django.raven_compat.models import client
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
+from ureport.stats.models import PollStats, GenderSegment, AgeSegment
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
 ORG_CONTACT_COUNT_KEY = "org:%d:contacts-counts"
-ORG_CONTACT_COUNT_TIMEOUT = 300
+ORG_CONTACT_COUNT_TIMEOUT = 3600
 
 logger = logging.getLogger(__name__)
+
+
+def offline_context():
+    for org in list(Org.objects.filter(is_active=True)):
+        yield dict(STATIC_URL=settings.STATIC_URL, base_template="frame.html", org=org, debug=False, testing=False)
 
 
 def datetime_to_json_date(dt):
@@ -45,6 +53,53 @@ def json_date_to_datetime(date_str):
     return iso8601.parse_date(date_str)
 
 
+def get_last_months(months_num=12, start_time=None):
+    if start_time is None:
+        start_time = datetime.now()
+
+    start = start_time.date().replace(day=1)
+
+    months = [str(start)]
+    i = 1
+    while i < months_num:
+        start = (start - timedelta(days=1)).replace(day=1)
+        months.insert(0, str(start))
+        i += 1
+
+    return months
+
+
+def get_time_filter_dates_map(time_filter=12):
+    start_time = datetime.now()
+    end_time = start_time - timedelta(days=time_filter * 30)
+
+    if time_filter != 3:
+        end_time = end_time.replace(day=1)
+
+    keys_map = dict()
+    while start_time >= end_time:
+        val = start_time.date()
+        if time_filter == 12:
+            val = start_time.date().replace(day=1)
+        if time_filter == 6:
+            if val.day < 16:
+                val = start_time.date().replace(day=1)
+            else:
+                val = start_time.date().replace(day=16)
+        if time_filter == 3:
+            if val.day < 11:
+                val = start_time.date().replace(day=1)
+            elif val.day < 21:
+                val = start_time.date().replace(day=11)
+            else:
+                val = start_time.date().replace(day=21)
+
+        keys_map[str(start_time.date())] = str(val)
+        start_time = start_time - timedelta(days=1)
+
+    return keys_map
+
+
 def get_dict_from_cursor(cursor):
     """
     Returns all rows from a cursor as a dict
@@ -61,26 +116,25 @@ def chunk_list(iterable, size):
     source_iter = iter(iterable)
     while True:
         chunk_iter = islice(source_iter, size)
-        yield chain([next(chunk_iter)], chunk_iter)
+        try:
+            yield chain([next(chunk_iter)], chunk_iter)
+        except StopIteration:
+            return
 
 
 def get_linked_orgs(authenticated=False):
-    all_orgs = Org.objects.filter(is_active=True).order_by("name")
-
-    linked_sites = list(getattr(settings, "PREVIOUS_ORG_SITES", []))
-
-    # populate a ureport site for each org so we can link off to them
-    for org in all_orgs:
-        host = org.build_host_link(authenticated)
-        org.host = host
-        if org.get_config("common.is_on_landing_page"):
-            flag = Image.objects.filter(org=org, is_active=True, image_type=FLAG).first()
-            if flag:
-                linked_sites.append(dict(name=org.subdomain, host=host, flag=flag.image.url, is_static=False))
-
+    linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
     linked_sites_sorted = sorted(linked_sites, key=lambda k: k["name"].lower())
 
     return linked_sites_sorted
+
+
+def get_logo(org):
+    logo_field = org.logo
+    logo = Image.objects.filter(org=org, is_active=True, image_type=LOGO).first()
+    if logo:
+        logo_field = logo.image
+    return logo_field
 
 
 def fetch_flows(org, backend=None):
@@ -164,7 +218,9 @@ def fetch_old_sites_count():
 
     start = time.time()
     this_time = datetime.now()
-    linked_sites = list(getattr(settings, "PREVIOUS_ORG_SITES", []))
+    linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", [])) + list(
+        getattr(settings, "OTHER_ORG_COUNT_SITES", [])
+    )
 
     old_site_values = []
 
@@ -209,10 +265,6 @@ def get_global_count():
 
         count = sum([elt["results"].get("size", 0) for elt in cached_values if elt.get("results", None)])
 
-        for org in Org.objects.filter(is_active=True):
-            if org.get_config("common.is_on_landing_page"):
-                count += get_reporters_count(org)
-
         # cached for 10 min
         cache.set(GLOBAL_COUNT_CACHE_KEY, count, 60 * 10)
     except AttributeError:
@@ -226,13 +278,18 @@ def get_global_count():
 
 def get_org_contacts_counts(org):
 
-    from ureport.contacts.models import ReportersCounter
-
     key = ORG_CONTACT_COUNT_KEY % org.pk
     org_contacts_counts = cache.get(key, None)
     if org_contacts_counts:
         return org_contacts_counts
 
+    return update_cache_org_contact_counts(org)
+
+
+def update_cache_org_contact_counts(org):
+    from ureport.contacts.models import ReportersCounter
+
+    key = ORG_CONTACT_COUNT_KEY % org.pk
     org_contacts_counts = ReportersCounter.get_counts(org)
     cache.set(key, org_contacts_counts, ORG_CONTACT_COUNT_TIMEOUT)
     return org_contacts_counts
@@ -241,23 +298,43 @@ def get_org_contacts_counts(org):
 def get_gender_stats(org):
     org_contacts_counts = get_org_contacts_counts(org)
 
+    has_extra_gender = org.get_config("common.has_extra_gender")
+
     female_count = org_contacts_counts.get("gender:f", 0)
     male_count = org_contacts_counts.get("gender:m", 0)
+    other_count = org_contacts_counts.get("gender:o", 0)
 
     if not female_count and not male_count:
-        return dict(female_count=female_count, female_percentage="---", male_count=male_count, male_percentage="---")
+        output = dict(female_count=female_count, female_percentage="---", male_count=male_count, male_percentage="---")
+        if has_extra_gender:
+            output["other_count"] = 0
+            output["other_percentage"] = "---"
+
+        return output
 
     total = female_count + male_count
+    if has_extra_gender:
+        total += other_count
 
     female_percentage = female_count * 100 // total
-    male_percentage = 100 - female_percentage
 
-    return dict(
+    other_percentage = 0
+    if has_extra_gender:
+        other_percentage = other_count * 100 // total
+
+    male_percentage = 100 - female_percentage - other_percentage
+
+    output = dict(
         female_count=female_count,
         female_percentage=six.text_type(female_percentage) + "%",
         male_count=male_count,
         male_percentage=six.text_type(male_percentage) + "%",
     )
+    if has_extra_gender:
+        output["other_count"] = other_count
+        output["other_percentage"] = six.text_type(other_percentage) + "%"
+
+    return output
 
 
 def get_age_stats(org):
@@ -300,6 +377,194 @@ def get_age_stats(org):
     return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.items()], key=lambda i: i["name"]))
 
 
+def get_sign_up_rate(org, time_filter):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_on")}
+
+    interval_dict = defaultdict(int)
+
+    dates_map = get_time_filter_dates_map(time_filter=time_filter)
+    keys = list(set(dates_map.values()))
+
+    for date_key, date_count in registered_on_counts.items():
+        parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+
+        if parsed_time > start:
+            key = dates_map.get(str(parsed_time.date()))
+
+            interval_dict[key] += date_count
+
+    data = dict()
+    for key in keys:
+        data[key] = interval_dict[key]
+
+    return [dict(name="Sign-Up Rate", data=data)]
+
+
+def get_sign_up_rate_location(org, time_filter):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[17:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_state")}
+
+    top_boundaries = Boundary.get_org_top_level_boundaries_name(org)
+
+    dates_map = get_time_filter_dates_map(time_filter=time_filter)
+    keys = list(set(dates_map.values()))
+
+    output_data = []
+
+    for osm_id, name in top_boundaries.items():
+        interval_dict = defaultdict(int)
+        for date_key, date_count in registered_on_counts.items():
+            if date_key.endswith(f":{osm_id.upper()}"):
+                date_key = date_key[:10]
+            else:
+                continue
+
+            parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
+
+            if parsed_time > start:
+                key = dates_map.get(str(parsed_time.date()))
+                interval_dict[key] += date_count
+
+        data = dict()
+        for key in keys:
+            data[key] = interval_dict[key]
+        output_data.append(dict(name=name, osm_id=osm_id, data=data))
+    return output_data
+
+
+def get_sign_up_rate_gender(org, time_filter):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+    translation.activate(org.language)
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[18:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_gender")}
+
+    genders = GenderSegment.objects.all()
+    if not org.get_config("common.has_extra_gender"):
+        genders = genders.exclude(gender="O")
+
+    genders = genders.values("gender", "id")
+
+    dates_map = get_time_filter_dates_map(time_filter=time_filter)
+    keys = list(set(dates_map.values()))
+    output_data = []
+
+    for gender in genders:
+        interval_dict = defaultdict(int)
+        for date_key, date_count in registered_on_counts.items():
+            if date_key.endswith(f":{gender['gender'].lower()}"):
+                date_key = date_key[:-2]
+            else:
+                continue
+
+            parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d")).replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
+
+            if parsed_time > start:
+                key = dates_map.get(str(parsed_time.date()))
+                interval_dict[key] += date_count
+
+        data = dict()
+        for key in keys:
+            data[key] = interval_dict[key]
+        output_data.append(dict(name=str(GenderSegment.GENDERS.get(gender["gender"])), data=data))
+    return output_data
+
+
+def get_sign_up_rate_age(org, time_filter):
+    now = timezone.now()
+    current_year = now.year
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[16:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_born")}
+    registered_on_counts_by_age = {
+        "0-14": defaultdict(int),
+        "15-19": defaultdict(int),
+        "20-24": defaultdict(int),
+        "25-30": defaultdict(int),
+        "31-34": defaultdict(int),
+        "35+": defaultdict(int),
+    }
+
+    dates_map = get_time_filter_dates_map(time_filter=time_filter)
+    keys = list(set(dates_map.values()))
+
+    for date_key, date_count in registered_on_counts.items():
+        date_key_date, date_key_year = date_key.split(":")
+        parsed_time = tz.localize(datetime.strptime(date_key_date, "%Y-%m-%d")).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        if parsed_time < start:
+            continue
+
+        date_key_date = dates_map.get(str(parsed_time.date()))
+
+        age = current_year - int(date_key_year)
+        if age > 34:
+            registered_on_counts_by_age["35+"][date_key_date] += date_count
+        elif age > 30:
+            registered_on_counts_by_age["31-34"][date_key_date] += date_count
+        elif age > 24:
+            registered_on_counts_by_age["25-30"][date_key_date] += date_count
+        elif age > 19:
+            registered_on_counts_by_age["20-24"][date_key_date] += date_count
+        elif age > 14:
+            registered_on_counts_by_age["15-19"][date_key_date] += date_count
+        else:
+            registered_on_counts_by_age["0-14"][date_key_date] += date_count
+
+    ages = AgeSegment.objects.all().values("id", "min_age", "max_age")
+    output_data = []
+    for age in ages:
+        if age["min_age"] == 0:
+            data_key = "0-14"
+        elif age["min_age"] == 15:
+            data_key = "15-19"
+        elif age["min_age"] == 20:
+            data_key = "20-24"
+        elif age["min_age"] == 25:
+            data_key = "25-30"
+        elif age["min_age"] == 31:
+            data_key = "31-34"
+        elif age["min_age"] == 35:
+            data_key = "35+"
+
+        age_data = registered_on_counts_by_age[data_key]
+        data = dict()
+        for key in keys:
+            data[key] = age_data[key]
+
+        output_data.append(dict(name=data_key, data=data))
+
+    return output_data
+
+
 def get_registration_stats(org):
     now = timezone.now()
     six_months_ago = now - timedelta(days=180)
@@ -336,6 +601,56 @@ def get_registration_stats(org):
         start = start + timedelta(days=7)
 
     return json.dumps(categories)
+
+
+def get_reporter_registration_dates(org):
+    now = timezone.now()
+    one_year_ago = now - timedelta(days=365)
+    one_year_ago = one_year_ago - timedelta(one_year_ago.weekday())
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[14:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_on")}
+
+    interval_dict = dict()
+
+    for date_key, date_count in registered_on_counts.items():
+        parsed_time = tz.localize(datetime.strptime(date_key, "%Y-%m-%d"))
+
+        # this is in the range we care about
+        if parsed_time > one_year_ago:
+            # get the week of the year
+            dict_key = parsed_time.strftime("%W")
+
+            if interval_dict.get(dict_key, None):
+                interval_dict[dict_key] += date_count
+            else:
+                interval_dict[dict_key] = date_count
+
+    # build our final dict using week numbers
+    categories = []
+    start = one_year_ago
+    while start < timezone.now():
+        week_dict = start.strftime("%W")
+        count = interval_dict.get(week_dict, 0)
+        categories.append(dict(label=start.strftime("%m/%d/%y"), count=count))
+
+        start = start + timedelta(days=7)
+    return categories
+
+
+def get_signups(org):
+    registrations = get_reporter_registration_dates(org)
+    return sum([elt.get("count", 0) for elt in registrations])
+
+
+def get_signup_rate(org):
+    new_signups = get_signups(org)
+    total = get_reporters_count(org)
+    if not total:
+        return 0
+    return new_signups * 100 / total
 
 
 def get_ureporters_locations_stats(org, segment):
@@ -380,6 +695,66 @@ def get_ureporters_locations_stats(org, segment):
     return [
         dict(boundary=elt["osm_id"], label=elt["name"], set=location_counts.get(elt["osm_id"], 0))
         for elt in boundaries
+    ]
+
+
+def get_ureporters_locations_response_rates(org, segment):
+    parent = segment.get("parent", None)
+    field_type = segment.get("location", None)
+
+    location_stats = []
+
+    if not field_type or field_type.lower() not in ["state", "district", "ward"]:
+        return location_stats
+
+    field_type = field_type.lower()
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+
+    if field_type == "state":
+        boundary_top_level = Boundary.COUNTRY_LEVEL if org.get_config("common.is_global") else Boundary.STATE_LEVEL
+        boundaries = (
+            Boundary.objects.filter(org=org, level=boundary_top_level, is_active=True)
+            .values("osm_id", "name", "id")
+            .order_by("osm_id")
+        )
+
+    elif field_type == "ward":
+        boundaries = (
+            Boundary.objects.filter(org=org, level=Boundary.WARD_LEVEL, parent__osm_id__iexact=parent)
+            .values("osm_id", "name", "id")
+            .order_by("osm_id")
+        )
+    else:
+        boundaries = (
+            Boundary.objects.filter(
+                org=org, level=Boundary.DISTRICT_LEVEL, is_active=True, parent__osm_id__iexact=parent
+            )
+            .values("osm_id", "name", "id")
+            .order_by("osm_id")
+        )
+
+    boundaries_ids = [elt["id"] for elt in boundaries]
+    polled_stats = (
+        PollStats.objects.filter(org=org, date__gte=year_ago, location_id__in=boundaries_ids)
+        .values("location__osm_id")
+        .annotate(Sum("count"))
+    )
+    polled_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in polled_stats}
+    responded_stats = (
+        PollStats.objects.filter(org=org, date__gte=year_ago, location_id__in=boundaries_ids)
+        .exclude(category=None)
+        .values("location__osm_id")
+        .annotate(Sum("count"))
+    )
+    responded_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in responded_stats}
+
+    response_rates = {
+        key: round(responded_stats_dict.get(key, 0) * 100 / val, 1) for key, val in polled_stats_dict.items()
+    }
+
+    return [
+        dict(boundary=elt["osm_id"], label=elt["name"], set=response_rates.get(elt["osm_id"], 0)) for elt in boundaries
     ]
 
 
@@ -434,7 +809,7 @@ def get_segment_org_boundaries(org, segment):
         if state_id:
             location_boundaries = (
                 org.boundaries.filter(level=Boundary.DISTRICT_LEVEL, is_active=True, parent__osm_id=state_id)
-                .values("osm_id", "name")
+                .values("id", "osm_id", "name")
                 .order_by("osm_id")
             )
 
@@ -443,7 +818,7 @@ def get_segment_org_boundaries(org, segment):
         if district_id:
             location_boundaries = (
                 org.boundaries.filter(level=Boundary.WARD_LEVEL, is_active=True, parent__osm_id=district_id)
-                .values("osm_id", "name")
+                .values("id", "osm_id", "name")
                 .order_by("osm_id")
             )
 
@@ -451,13 +826,13 @@ def get_segment_org_boundaries(org, segment):
         if org.get_config("common.is_global"):
             location_boundaries = (
                 org.boundaries.filter(level=Boundary.COUNTRY_LEVEL, is_active=True)
-                .values("osm_id", "name")
+                .values("id", "osm_id", "name")
                 .order_by("osm_id")
             )
         else:
             location_boundaries = (
                 org.boundaries.filter(level=Boundary.STATE_LEVEL, is_active=True)
-                .values("osm_id", "name")
+                .values("id", "osm_id", "name")
                 .order_by("osm_id")
             )
 
@@ -506,6 +881,61 @@ def populate_age_and_gender_poll_results(org=None):
         )
 
 
+def populate_contact_activity(org):
+    from ureport.contacts.models import Contact
+
+    now = timezone.now()
+    now_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    start_date = now - timedelta(days=365)
+
+    flows = list(
+        Poll.objects.filter(org_id=org.id, poll_date__gte=start_date)
+        .only("flow_uuid")
+        .values_list("flow_uuid", flat=True)
+    )
+
+    all_contacts = Contact.objects.filter(org=org).values_list("id", flat=True).order_by("id")
+
+    start = time.time()
+    i = 0
+
+    all_contacts = list(all_contacts)
+
+    for contact_id_batch in chunk_list(all_contacts, 1000):
+        contact_batch = list(contact_id_batch)
+        contacts = Contact.objects.filter(id__in=contact_batch)
+        for contact in contacts:
+            i += 1
+            results = PollResult.objects.filter(contact=contact.uuid, org_id=org.id, flow__in=flows).exclude(date=None)
+
+            oldest_id = None
+            newest_id = None
+            oldest_seen = now
+            newest_seen = start_date
+            for result in results:
+                if result.date > newest_seen:
+                    newest_seen = result.date
+                    newest_id = result.id
+                if result.date < oldest_seen:
+                    oldest_seen = result.date
+                    oldest_id = result.id
+
+                if oldest_seen <= start_date and newest_seen >= now_month:
+                    break
+
+            ids_to_update = []
+            if oldest_id:
+                ids_to_update.append(oldest_id)
+            if newest_id:
+                ids_to_update.append(newest_id)
+
+            PollResult.objects.filter(id__in=ids_to_update).update(contact=contact.uuid)
+
+        logger.info(
+            "Processed poll results update %d / %d contacts in %ds" % (i, len(all_contacts), time.time() - start)
+        )
+
+
 Org.get_occupation_stats = get_occupation_stats
 Org.get_reporters_count = get_reporters_count
 Org.get_ureporters_locations_stats = get_ureporters_locations_stats
@@ -515,3 +945,11 @@ Org.get_gender_stats = get_gender_stats
 Org.get_regions_stats = get_regions_stats
 Org.get_flows = get_flows
 Org.get_segment_org_boundaries = get_segment_org_boundaries
+Org.get_signups = get_signups
+Org.get_signup_rate = get_signup_rate
+Org.get_ureporters_locations_response_rates = get_ureporters_locations_response_rates
+Org.get_sign_up_rate = get_sign_up_rate
+Org.get_sign_up_rate_gender = get_sign_up_rate_gender
+Org.get_sign_up_rate_age = get_sign_up_rate_age
+Org.get_logo = get_logo
+Org.get_sign_up_rate_location = get_sign_up_rate_location

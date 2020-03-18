@@ -20,14 +20,14 @@
   .form-group.smartmin-form-buttons
     .col-sm-offset-2.col-sm-10
       - if 'source_type' in fields
-        %button.btn.btn-primary.next-part
+        %button.button.is-primary.next-part
           - trans "Next"
-        %a.btn.btn-default{href:"{% url 'jobs.jobsource_list' %}"}
+        %a.button{href:"{% url 'jobs.jobsource_list' %}"}
           - trans "Cancel"
       - else
-        %button.btn.btn-primary{type:"submit"}
+        %button.button.is-primary{type:"submit"}
           {{ submit_button_name }}
-        %a.btn.btn-default{href:"{% url 'jobs.jobsource_create' %}"}
+        %a.button{href:"{% url 'jobs.jobsource_create' %}"}
           - trans "Back"
 
 

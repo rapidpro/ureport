@@ -10,8 +10,9 @@ from django.utils.translation import ugettext_lazy as _
 BANNER = "B"
 PATTERN = "P"
 FLAG = "F"
+LOGO = "L"
 
-IMAGE_TYPES = ((BANNER, _("Banner")), (PATTERN, _("Pattern")), (FLAG, _("Flag")))
+IMAGE_TYPES = ((BANNER, _("Banner")), (PATTERN, _("Pattern")), (FLAG, _("Flag")), (LOGO, "LOGO"))
 
 
 class Image(SmartModel):

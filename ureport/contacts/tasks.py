@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import time
 
+from dash.orgs.models import Org
 from dash.orgs.tasks import org_task
 
 from django.core.cache import cache
@@ -10,18 +11,31 @@ from django.utils import timezone
 
 from celery.utils.log import get_task_logger
 
+from ureport.celery import app
 from ureport.contacts.models import Contact
-from ureport.utils import datetime_to_json_date
+from ureport.utils import datetime_to_json_date, update_cache_org_contact_counts
 
 logger = get_task_logger(__name__)
 
 
-@org_task("contact-pull", 60 * 60 * 3)
+@app.task(name="contacts.rebuild_contacts_counts")
+def rebuild_contacts_counts():
+    orgs = Org.objects.filter(is_active=True)
+    for org in orgs:
+        Contact.recalculate_reporters_stats(org)
+
+
+@org_task("update-org-contact-counts", 60 * 20)
+def update_org_contact_count(org, ignored_since, ignored_until):
+    update_cache_org_contact_counts(org)
+
+
+@org_task("contact-pull", 60 * 60 * 12)
 def pull_contacts(org, ignored_since, ignored_until):
     """
     Fetches updated contacts from RapidPro and updates local contacts accordingly
     """
-    from ureport.contacts.models import ReportersCounter
+    # from ureport.contacts.models import ReportersCounter
 
     results = dict()
 
@@ -74,7 +88,7 @@ def pull_contacts(org, ignored_since, ignored_until):
         logger.info("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
 
         # Squash reporters counts
-        ReportersCounter.squash_counts()
+        # ReportersCounter.squash_counts()
 
         results[backend_obj.slug] = {
             "fields": {"created": fields_created, "updated": fields_updated, "deleted": fields_deleted},

@@ -252,6 +252,7 @@ class ContactSyncer(BaseSyncer):
         gender_field = org.get_config("%s.gender_label" % self.backend.slug, default="")
         female_label = org.get_config("%s.female_label" % self.backend.slug, default="")
         male_label = org.get_config("%s.male_label" % self.backend.slug, default="")
+        extra_gender = org.get_config("common.has_extra_gender", default=False)
 
         if gender_field:
             gender_field = gender_field.lower()
@@ -261,6 +262,8 @@ class ContactSyncer(BaseSyncer):
                 gender = self.model.FEMALE
             elif gender and gender.lower() == male_label.lower():
                 gender = self.model.MALE
+            elif gender and extra_gender:
+                gender = self.model.OTHER
             else:
                 gender = ""
 
@@ -320,6 +323,10 @@ class RapidProBackend(BaseBackend):
             flow_json["archived"] = flow.archived
             flow_json["runs"] = flow.runs.active + flow.runs.expired + flow.runs.completed + flow.runs.interrupted
             flow_json["completed_runs"] = flow.runs.completed
+            flow_json["results"] = [
+                {"key": elt.key, "name": elt.name, "categories": elt.categories, "node_uuids": elt.node_uuids}
+                for elt in flow.results
+            ]
 
             all_flows[flow.uuid] = flow_json
         return all_flows
@@ -339,35 +346,22 @@ class RapidProBackend(BaseBackend):
         return flow_definition
 
     def update_poll_questions(self, org, poll, user):
-        flow_definition = self.get_definition(org, poll.flow_uuid)
+        api_flow = poll.get_flow()
 
-        if flow_definition is None:
-            return
+        flow_results = api_flow["results"]
 
-        base_language = flow_definition["base_language"]
-
-        poll.base_language = base_language
-        poll.save()
-
-        flow_rulesets = flow_definition["rule_sets"]
-
-        for ruleset in flow_rulesets:
-            label = ruleset["label"]
-            ruleset_uuid = ruleset["uuid"]
-            ruleset_type = ruleset["ruleset_type"]
+        for result in flow_results:
+            label = result["name"]
+            ruleset_uuid = result["node_uuids"][-1]
+            ruleset_type = "wait_message"
 
             question = PollQuestion.update_or_create(user, poll, label, ruleset_uuid, ruleset_type)
 
-            rapidpro_rules = []
-            for rule in ruleset["rules"]:
-                category = rule["category"][base_language]
-                rule_uuid = rule["uuid"]
-                rapidpro_rules.append(rule_uuid)
-
-                PollResponseCategory.update_or_create(question, rule_uuid, category)
+            for category in result["categories"]:
+                PollResponseCategory.update_or_create(question, None, category)
 
             # deactivate if corresponding rules are removed
-            PollResponseCategory.objects.filter(question=question).exclude(rule_uuid__in=rapidpro_rules).update(
+            PollResponseCategory.objects.filter(question=question).exclude(category__in=result["categories"]).update(
                 is_active=False
             )
 
@@ -438,6 +432,16 @@ class RapidProBackend(BaseBackend):
             num_path_ignored=0,
             num_synced=0,
         )
+
+        if poll.stopped_syncing:
+            return (
+                stats_dict["num_val_created"],
+                stats_dict["num_val_updated"],
+                stats_dict["num_val_ignored"],
+                stats_dict["num_path_created"],
+                stats_dict["num_path_updated"],
+                stats_dict["num_path_ignored"],
+            )
 
         with r.lock(key):
             first = poll.poll_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
@@ -524,6 +528,16 @@ class RapidProBackend(BaseBackend):
             num_path_ignored=0,
             num_synced=0,
         )
+
+        if poll.stopped_syncing:
+            return (
+                stats_dict["num_val_created"],
+                stats_dict["num_val_updated"],
+                stats_dict["num_val_ignored"],
+                stats_dict["num_path_created"],
+                stats_dict["num_path_updated"],
+                stats_dict["num_path_ignored"],
+            )
 
         if r.get(key):
             logger.info("Skipping pulling results for poll #%d on org #%d as it is still running" % (poll.pk, org.pk))

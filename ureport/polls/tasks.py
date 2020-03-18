@@ -197,6 +197,24 @@ def pull_results_recent_polls(org, since, until):
     return results_log
 
 
+@org_task("clear-old-poll-results", 60 * 60 * 3)
+def clear_old_poll_results(org, since, until):
+    from .models import Poll
+
+    now = timezone.now()
+    time_window = now - timedelta(days=90)
+
+    old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window).order_by("pk")
+    for poll in old_polls:
+        # one last stats rebuild for the poll
+        poll.rebuild_poll_results_counts()
+
+        if not poll.stopped_syncing:
+            poll.delete_poll_results()
+            Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
+            logger.info("Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id))
+
+
 @app.task()
 def update_or_create_questions(poll_ids):
     from .models import Poll
@@ -223,7 +241,9 @@ def pull_refresh_from_archives(poll_id):
 def rebuild_counts():
     from .models import Poll
 
-    for poll in Poll.objects.all():
+    polls = Poll.objects.filter(is_active=True)
+
+    for poll in polls:
         poll.rebuild_poll_results_counts()
 
 
@@ -274,7 +294,7 @@ def fetch_old_sites_count():
     r = get_redis_connection()
 
     key = "fetch_old_sites_count_lock"
-    lock_timeout = 60
+    lock_timeout = 60 * 5
 
     if not r.get(key):
         with r.lock(key, timeout=lock_timeout):
@@ -293,3 +313,10 @@ def recheck_poll_flow_data(org_id=None):
         update_poll_flow_data(org)
 
     logger.info("Task: recheck_poll_flow_data done")
+
+
+@app.task(name="polls.polls_stats_squash")
+def polls_stats_squash():
+    from ureport.stats.models import PollStats
+
+    PollStats.squash()

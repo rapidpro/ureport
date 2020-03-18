@@ -1,406 +1,218 @@
--extends "public_base.html"
+- extends "public_base.html"
 
--load compress thumbnail humanize ureport i18n
-
-- block hero
-  - if latest_poll
-    .hero-container
-      .hero-dark-container
-      .poll-hero
-        .container
-          .hero-small-background
-          .row
-            .col-sm-12
-              .hero-title.hero-top-title.primary-bg-color
-                - if tab == 'list'
-                  - trans "CURRENT POLL IN"
-                {{ latest_poll.category.name|upper }}
-
-          .row
-            .col-sm-6
-              .hero-description.poll-hero-title
-                {{ latest_poll.title }}
-              .hero-description.poll-hero-questions
-                {% blocktrans count questions=latest_poll.get_questions.count %}
-                  {{ questions }} question polled on this topic
-                {% plural %}
-                  {{ questions }} questions polled on this topic
-                {% endblocktrans %}
-
-                .poll-hero-circle-outer
-                .poll-hero-circle-inner.primary-border-color
-
-            .col-sm-6.left-col-border{style:"border-color:#FFF"}
-              .hero-description.small-text
-                {{ latest_poll.response_percentage }}
-                %span
-                  - trans "response rate"
-              .hero-description.small-text
-                {{ latest_poll.responded_runs|intcomma }}
-                %span
-                  - trans "responded out of"
-                {{ latest_poll.runs|intcomma }}
-                %span
-                  - trans "polled"
-
-          .latest-poll-questions.hide-on-small
-            - with latest_poll.get_questions as questions
-              .row-no-padding
-                - for question in questions
-                  {% if forloop.counter0 == 4 %}</div><div class="row-no-padding">{% endif %}
-                  .col-sm-3
-                    .top-poll-question
-                      {% if forloop.counter0 <= 3 %}
-                      .question-hline{ class: "{% if forloop.first %}hline-first{% endif %} {% if forloop.counter0 == 3 or forloop.last %}hline-last{% endif %}" }
-                      .question-vline{ class: "{% if forloop.last or forloop.counter0 == 3 %}vline-last{% endif %}" }
-                      {% endif %}
-                      .question-date.primary-bg-color{ style: "{% if forloop.counter0 > 3 %}margin-top: 20px{% endif %}" }
-                        {{ latest_poll.poll_date|date:"M j. Y" }}
-                      .question-title
-                        {{ question.title }}
-
-  - block banner
-    {{ block.super }}
-
+- load compress thumbnail humanize ureport i18n
 
 - block content
-  .section
-    %h1.level-1-title
-      - trans "POLL RESULTS"
+  .bg-grid
+    .max-w-page.mx-auto.p-home(class="md:flex")
+      .flex-1.flex-center-y.hover-parent
+        .text-2xl.font-bold.hover-parent(class="md:text-5xl")
+          {% edit_content 'orgs.org_edit' "" "#id_common.opinions_description" "" "dark" %}
+          -trans "Opinions"
+        .text-xl.max-w-lg
+          {{ org|config:"opinions_description"|default:""}}
 
-    .poll-questions
-      {% for question in latest_poll.get_questions %}
-        .poll-question
-          .white-card-container
-            .white-card-inner
-              .white-card-title.primary-bg-color
-                {{ latest_poll.poll_date|date:"M j. Y"|upper }}
-              .white-card-content.white-card-padding
-                .poll-question-title
-                  {{ question.title }}
-                .poll-question-response-rate
-                  {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}
-                    {{ responded }} responded out of {{ polled }} polled
-                  {% endblocktrans %}
-                .poll-question-visualization
-                  .poll-question-tabs-border.primary-border-color{role:"tablist"}
-                    .poll-question-tabs.primary-bg-color
-                      - if question.is_open_ended
-                        %a.poll-question-tab.active.primary-color.primary-bg-color{ href:"#keywords-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                          - trans "KEYWORDS"
-                      - else
+      .flex-center-y(class="{% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %}")
+        .block.mt-4(style="width:285px" class="rtl:text-left ltr:text-right")
+          .inline-block.bg-black.text-white.text-lg.px-4.py-2.rounded.w-full
+            .flex.bg-black.border-b.border-white.w-full
+              .flex-1
+                %input.bg-black.search-box.text-sm(type="text" data-results-id="poll-search-results" placeholder="{% trans 'SEARCH' %}" size=14)
+              .flex-none
+                %a.search-close.cursor-pointer
+                  %i.fa.fa-caret-down
 
-                        %a.poll-question-tab.active.primary-color.primary-bg-color{href:"#statistics-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                          - trans "STATISTICS"
+        .relative
+          .absolute.bg-white.search-results.h-64.border(id="poll-search-results" style="z-index:100000;width:285px;" class="rtl:right-0 ltr:left-0")
+            .no-results.p-4.italic.hidden
+              -trans "No results found"
 
-                        - if not is_iorg and show_maps
-                          %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#locations-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                            - trans "LOCATIONS"
+            - for category in categories
+              - if category.polls.all
+                .block.py-1.bg-white.search-category
+                  %a.font-bold.px-2.block(href="#")
+                    %i.fa.fa-caret-right.closed(style="padding-top:2px" class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+                    %i.fa.fa-caret-down.hidden.open(style="padding-top:4px" class="rtl:float-right ltr:float-left")
+                    .text-sm(class="rtl:pr-3 ltr:pl-3")
+                      {{ category.name }}
+                  .category-results
+                    - for poll in category.polls.all
+                      %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }} {{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }}")
+                        .text-sm(class="rtl:mr-2 ltr:ml-2")
+                          {{ poll.title }}
+                          .inline.text-xs.font-bold
+                            {{ poll.poll_date|date:"F" }} {{ poll.poll_date|date:"Y" }}
 
-                        - if not is_iorg and show_gender_stats
-                          %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#gender-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                            - trans "GENDER"
+  .max-w-page.mx-auto
+    .bg-white(class="md:flex")
+      .flex-1.my-home.self-center(class="rtl:border-l ltr:border-r")
+        .px-home
+          -if latest_poll
+            .bg-dark2.inline-block.px-4.py-2.uppercase.leading-none.font-bold.text-sm.text-white.mb-6
+              {{ latest_poll.category.name }}
+  
+            .font-bold.leading-tight.hover-parent(class="{% if latest_poll.title|length < 50 %}text-4xl{% elif latest_poll.title|length < 120 %}text-3xl{% else %}text-2xl{% endif %}")
+              {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+              {{ latest_poll.title }}
+  
+            .block.hover-parent
+              {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" "dark" %}
+              {{ latest_poll.poll_date|date:"F j, Y" }}
+  
+  
+            .font-light.mt-6
+              .inline-block.border-black(class="{% if is_rtl_org %}md:border-l pl-16 md:pl-8{% else %}md:border-r pr-16 md:pr-8{% endif %}")
+                .text-3xl.leading-none(class="md:text-5xl")
+                  {{ latest_poll.responded_runs|intcomma }}
+                .text-xs.font-bold
+                  -trans "RESPONSES"
+  
+              .inline-block.mt-2.mx-auto(class="md:mx-0 md:mt-0 {% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %}")
+                .text-3xl.leading-none(class="md:text-5xl")
+                  {{ latest_poll.response_percentage }}
+                .text-xs.font-bold
+                  -trans "RESPONSE RATE"
+  
+          .mt-6.flex.flex-wrap
+            .flex-none.mx-auto(class="md:mx-0 {% if is_rtl_org %}md:ml-8 {% else %}md:mr-8{% endif %}")
+              .text-center.inline-block(class="{% if is_rtl_org %}md:pl-4 {% else %}md:pr-4{% endif %}")
+                %img(src="{{ STATIC_URL }}img/gender-male.png" width="40")
+                .font-bold.text-xl.leading-none.mt-2
+                  {{gender_stats.m.percentage|default:"0"}}%
+                .text-sm.leading-none
+                  {{gender_stats.m.count|default:"0"|intcomma}}
 
-                        - if not is_iorg and show_age_stats
-                          %a.poll-question-tab.inactive.primary-color.primary-bg-color.hide-on-small{href:"#age-tab-{{ question.id }}", role:"tab", data-toggle:"tab"}
-                            - trans "AGE"
+              .text-center.inline-block.px-4.border-black(class="rtl:border-r ltr:border-l")
+                %img(src="{{ STATIC_URL }}img/gender-female.png" width="40")
+                .font-bold.text-xl.leading-none.mt-2
+                  {{gender_stats.f.percentage|default:"0"}}%
+                .text-sm.leading-none
+                  {{gender_stats.f.count|default:"0"|intcomma}}
 
+              - if org|config:"has_extra_gender"
+                .text-center.inline-block.px-4.border-black(class="rtl:border-r ltr:border-l")
+                  %img(src="{{ STATIC_URL }}img/gender-other.png" width="40")
+                  .font-bold.text-xl.leading-none.mt-2
+                    {{gender_stats.o.percentage|default:"0"}}%
+                  .text-sm.leading-none
+                    {{gender_stats.o.count|default:"0"|intcomma}}
 
-                  .tab-content
-                    - if question.is_open_ended
-                      .tab-pane.active{id:"keywords-tab-{{ question.id }}"}
-                        .poll-word-cloud{data-question:"{{ question.id }}", id:"word-cloud-{{ question.id }}" }
-                          .keyword-placeholder{id:"word-cloud-{{ question.id }}-placeholder"}
-                            -with results=question|question_results
-                              -for category in results.categories|slice:":50"
-                                .keyword.primary-bg-color
-                                  {{ category.label }}
+            .flex-1.inline-block.mt-4(style="min-width:220px;max-width:350px" class="md:mt-0")
+              .relative.w-full(style="height:105px")
+                {{ age_stats|json_script:"age_stats" }}
+                #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
 
-                    - else
-                      -if not is_iorg and show_maps
-                        .tab-pane{id:"locations-tab-{{ question.id }}"}
-                          .poll-map{ data-question: "{{ question.id }}", id: "map-{{ question.id }}" }
-                            .loading-placeholder{id:"map-{{ question.id }}-placeholder"}
-                              %img{src:"{{ STATIC_URL }}img/loading.gif"}
-
-                      -if not is_iorg and show_gender_stats
-                        .tab-pane{id:"gender-tab-{{ question.id }}"}
-                          -with seg_results=question|question_segmented_results:"gender"
-                            -for results in seg_results
-                              .graph-title
-                                {{results.label}}
-
-                              .poll-graph
-
-                                -with categories=results.categories
-                                  -for category in categories
-                                    .poll-category
-                                      .category-container{ class:"poll-category-{% cycle '1' '2' '3' '4' '5' '6' %}" }
-                                        .category-dash
-
-                                        .category-percent
-                                          {% widthratio category.count results.set 100 %}%
-
-                                        .category-label-below
-                                          {{ category.label }}
-
-                                        .category-bar{ style:"width:{% widthratio category.count results.set 90 %}%" }
-                                          &nbsp;
-
-                                        .category-label-above
-                                          {{ category.label }}
-                              -if not forloop.last
-                                %hr
-
-                      -if not is_iorg and show_age_stats
-                        .tab-pane{id:"age-tab-{{ question.id }}"}
-                          -with seg_results=question|question_segmented_results:"age"
-                            -for results in seg_results
-                              .graph-title
-                                {{results.label}}
-
-                              .poll-graph
-
-                                -with categories=results.categories
-                                  -for category in categories
-                                    .poll-category
-                                      .category-container{ class:"poll-category-{% cycle '1' '2' '3' '4' '5' '6' %}" }
-                                        .category-dash
-
-                                        .category-percent
-                                          {% widthratio category.count results.set 100 %}%
-
-                                        .category-label-below
-                                          {{ category.label }}
-
-                                        .category-bar{ style:"width:{% widthratio category.count results.set 90 %}%" }
-                                          &nbsp;
-
-                                        .category-label-above
-                                          {{ category.label }}
-                              -if not forloop.last
-                                %hr
-
-                      .tab-pane.active{id:"statistics-tab-{{ question.id }}"}
-                        .poll-graph
-                          -with results=question|question_results
-                            -with categories=results.categories
-                              -for category in categories
-                                .poll-category
-                                  .category-container{ class:"poll-category-{% cycle '1' '2' '3' '4' '5' '6' %}" }
-                                    .category-dash
-
-                                    .category-percent
-                                      {% widthratio category.count results.set 100 %}%
-
-                                    .category-label-below
-                                      {{ category.label }}
-
-                                    .category-bar{ style:"width:{% widthratio category.count results.set 90 %}%" }
-                                      &nbsp;
-
-                                    .category-label-above
-                                      {{ category.label }}
+      -if show_maps
+        .flex-1.text-black
+          .py-home.text-center(class="rtl:pr-6 ltr:pl-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %}")
+            .text-sm.font-bold.mb-8
+              -trans "TOTAL RESPONSES"
+            #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
+              .flex.text-center.h-full.w-full(id="poll-map-placeholder" style="min-height:300px;min-width:300px;")
+                .fa-3x.inline-block.m-auto.self-center
+                  %i.fa.fa-spinner.fa-spin
+            #map-info.relative.h-full.w-full.mt-1.flex.justify-center
 
 
-      {% endfor %}
+    - for question in latest_poll.get_questions
+      .block(class="md:flex {% cycle '' 'md:flex-row-reverse' %}" data-page="opinions" data-aos="fade" data-aos-anchor-placement="center-bottom" style="min-height:30rem;" id="question-block-{{question.id}}" data-bar-color="{% cycle org|config:'dark1_color'|default:'#439932'  org|config:'light1_color'|default:'#FFD100' org|config:'dark2_color'|default:'#1751af' org|config:'dark3_color'|default:'#5eb3e0' %}")
+        .flex-1(class="{% cycle 'bg-dark1 text-white' 'bg-light1 text-black' 'bg-dark2 text-white' 'bg-dark3 text-black' as bg %}")
+          .p-home.h-full.flex-center-y(class="md:py-24")
+            .flex(class="{% cycle '' 'md:flex-row-reverse' as reverse %}")
+              .flex-none.bg-circle.bg-black.text-white.font-bold(data-html2canvas-ignore=true)
+                {{ forloop.counter }}
+              .flex-1.flex-center-y
+                .h-1.border-t(class="{% if is_rtl_org %}{% cycle 'mr-4' 'ml-4' as margin %}{% else %}{% cycle 'ml-4' 'mr-4' as margin %}{% endif %} {% cycle 'border-white' 'border-black' 'border-white' 'border-white' as border %}")
 
+            .mt-8
+              .font-alt.font-bold.leading-tight.italic.hover-parent(class="{% if question.title|length < 50 %}text-3xl{% elif question.title|length < 120 %}text-2xl{% else %}text-xl{% endif %}")
+                -if forloop.counter|divisibleby:"2"
+                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" "dark" %}
+                -else
+                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" "white" %}
+                {{ question.title }}
 
-  %hr.aaa
-  .row
-    .col-md-8
-      .section
-        %h1.level-1-title
-          - trans "FEATURED ANSWERS"
-        .level-1-title-description.secondary-color
-        - if not latest_poll.get_featured_responses
-          .current-poll-featured-response{style:"width: 100%"}
-            .card.card-padding
-              .featured-response-text.no-answers
-                - trans "No featured answers."
+              .mt-4
+                {% blocktrans with responded=question.get_responded|intcomma polled=question.get_polled|intcomma %}{{ responded }} responded out of {{ polled }} polled{% endblocktrans %}
 
-        - for response in latest_poll.get_featured_responses|slice:"4"
-          .current-poll-featured-response{class:"{% cycle 'right-part' 'left-part' %} for{{ forloop.counter}} len{{latest_poll.get_featured_responses|length}}"}
-            .card.card-padding
-              .featured-response-text
-                {{ response.message }}
-              .half-border.none-color
-              .featured-response-reporter
-                - if response.reporter
-                  {{ response.reporter|title }}
-              .featured-response-region
-                - trans "U-Reporter in"
-                {{ response.location }}
+        .flex-1.bg-white.text-black.hover-parent
+          .mx-home.py-home.hover-parent(class="md:border-t" )
+            .block.justify-center.flex.flex-wrap.hover-parent(data-html2canvas-ignore=true)
+              - if not question.is_open_ended
+                .text-xs.flex-none.mb-4
+                  %a.pill-white.selected.segment-pill(href='#' data-question="{{question.id}}" data-segment="all" data-page="opinions" class="{% if is_rtl_org %}pill-last{% else %}pill-first{% endif %}")>
+                    .whitespace-no-wrap
+                      -trans "ALL"
+                  %a.pill.pill-white.segment-pill(href='#' data-question="{{question.id}}" data-segment="age" data-page="opinions")>
+                    .whitespace-no-wrap
+                      -trans "AGE"
+                  %a.pill-white.segment-pill(class="{% if not show_maps %}{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}{% else %}pill{% endif %}" href='#' data-question="{{question.id}}" data-segment="gender" data-page="opinions")>
+                    .whitespace-no-wrap
+                      -trans "GENDER"
+                  -if show_maps
+                    %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}")>
+                      %span.whitespace-no-wrap
+                        -trans "LOCATION"
+                      %i.fa.fa-caret-down
+                      .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px" data-html2canvas-ignore=true)
+                        .border.border-gray-400.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="rtl:text-right ltr:text-left" )
+                          .pt-1.text-black
+                            - for state in states
+                              .py-1.state-segment(data-state='{{state.id}}' data-click-handler="" data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %} rtl:pr-2 rtl:pl-4 ltr:pl-2 ltr:pr-4" data-page="opinions")
+                                .checkbox(class="rtl:float-right ltr:float-left")
+                                  %i.fa.fa-check
+                                .ml-4.whitespace-no-wrap
+                                  {{ state.name }}
 
-    .col-md-4.left-col-border
-      .section
-        %h1.level-1-title
-          - trans "RELATED STORIES"
-        .level-1-title-description.secondary-color
-        .card.card-padding
-          - if not related_stories
-            -trans "No related stories."
-
-          - for story in related_stories|slice:"1"
-            .related-story-image
-              - if story.get_image
-                {% thumbnail story.get_image "400x300" crop="center" as im %}
-                <img width="100%" src="{{im.url}}" />
-                {% endthumbnail %}
               - else
-                <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
-            .related-story-title.primary-color
-              {{ story.title }}
-            .related-story-date
-              {{ story.created_on|date:"M j. Y" }}
-            .related-story-teaser
-              {{ story.short_teaser|safe }}
-            %a.related-story-link.primary-color{ href:"{% url 'public.story_read' story.pk %}"}
-              - trans "Read more"
-              &#8594;
+                .block
 
-  %hr.aaa
-  .section
-    %h1.level-1-title
-      - trans "FEATURED IMAGES"
-    .card.card-padding
-      .row
-        - if not latest_poll.get_featured_images
-          .col-md-12.no-content
-            - trans "No featured images yet."
-        - for poll_image in latest_poll.get_featured_images|slice:"3"
-          .col-md-4{class:"{% cycle 'small-pad-right' 'small-pad-middle' 'small-pad-left' %}"}
-            {% thumbnail poll_image.image "1200x800" as im %}
-            <a href="{{ im.url}}" data-lightbox="poll-image-garelly-{{ latest_poll.id }}">
-            <img width="100%" height="100%" src="{{im.url}}" />
-            </a>
-            {% endthumbnail %}
-
-  %hr.aaa
-  -include "public/all_polls.html"
+              .share.flex-none.mb-4.flex-center-y.hover-show(class="rtl:float-left ltr:float-right")
+                .block
+                  %a.cursor-pointer.bg-circle-xs.border.border-black.facebook-share(data-url="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                    %i.fa.fa-facebook
+                  %a.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                    %i.fa.fa-twitter
+                  %a.bg-circle-xs.border.border-black(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                    %i.fa.fa-whatsapp
+                  %a.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
+                    %i.fa.fa-envelope
+                  %a.cursor-pointer.bg-circle-xs.border.border-black.screenshot-share(data-screen-id="question-block-{{question.id}}")
+                    %i.fa.fa-file-image-o
 
 
-- block extra-style
-  {{ block.super }}
+            .relative.w-full(style="min-height:24rem;")
+              .w-full.h-full.absolute.poll-chart.block(id="chart-{{ question.id }}" data-question="{{ question.id }}" data-segment="all")
+                .chart-progress.flex.text-center.w-full.h-full
+                  .fa-5x.inline-block.m-auto.self-center
+                    %i.fa.fa-spinner.fa-spin
 
-  :css
-    .hero-container {
-      {% if latest_poll %}
-      {% thumbnail latest_poll.get_category_image "1280x678" crop="top" as im %}
-        background-image:url('{{im.url}}');
-      {% empty %}
-        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
-      {% endthumbnail %}
-      {% endif%}
-    }
+  -if latest_poll and latest_poll.response_title and latest_poll.response_content
+    .bg-grid.pt-20(class="md:mt-12")
+      .bg-dark-blue.mt-10.pt-8(class="md:pt-20 md:pt-16")
+        .max-w-page.mx-auto.bg-white.p-home(class="md:pb-12")
+          .p-home
+            .float-right(class="w=1/4")
+              .flex-none.w-16.hidden(class="md:block")
+                %img(src="{{STATIC_URL}}img/u-icon-small.png" )
+            .text-3xl.font-bold.hover-parent.hover-parent.inline-block(class="md:text-5xl w-3/4")
+              {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_title"  "-m-8" "dark" %}
+              {{latest_poll.response_title}}
+            -if latest_poll.response_author
+              .text-base.font-bold.mt-4.hover-parent.inline-block(class="md:mt-6")
+                {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_author"  "-m-8" "dark" %}
+                -trans "Written by:"
+                {{latest_poll.response_author}}
+  
+  
+    .bg-grid.pt-16
+      .bg-white.pt-8
+        .max-w-page.mx-auto.bg-white.-mt-24(class="md:-mt-40")
+          .block.hover-parent.p-home.pt-0
+            .px-home
+              {% edit_content 'polls.poll_responses' latest_poll.pk "#id_response_content"  "-m-8" "dark" %}
+              {{latest_poll.response_content|safe}}
 
-    .hero-small-background {
-      {% if latest_poll %}
-      {% thumbnail latest_poll.get_category_image "768x508" crop="top" as im %}
-        background-image:url('{{im.url}}');
-      {% empty %}
-        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
-      {% endthumbnail %}
-      {% endif%}
-    }
-
-    .poll-map {
-      height: 500px;
-      width: 100%;
-    }
-
-    .poll-map svg {
-      height: 480px;
-    }
-
-    .leaflet-container {
-      background: #fff;
-    }
-
-    .top-color {
-      color: rgb(0,104,55);
-    }
-
-    .other-color {
-      color: rgb(165,0,38);
-    }
-
-    .poll-word-cloud {
-      width: 100%;
-      min-height: 750px;
-    }
-
-    .scale {
-      {% if org|config:"is_global" %}
-      display: none;
-      {% endif %}
-    }
-
--block extra-script
-  {{ block.super }}
-  <script src="{{ STATIC_URL }}js/jqcloud.min.js"></script>
-  {% compress js %}
-  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/locations.coffee" />
-  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/all_polls.coffee" />
-  {% endcompress %}
-
-  {% include "public/strings_values.html" %}
-  :javascript
-    $(function(){
-
-      $(".poll-question-tab").on('click', function (){
-        $(this).parent('.poll-question-tabs').children('.poll-question-tab').removeClass('active');
-        $(this).parent('.poll-question-tabs').children('.poll-question-tab').children('a').removeClass('primary-bg-color')
-        $(this).parent('.poll-question-tabs').children('.poll-question-tab').children('a').addClass('primary-color')
-
-        $(this).addClass('active');
-        $(this).children('a').removeClass('primary-color');
-        $(this).children('a').addClass('primary-bg-color');
-      });
-
-      $(".poll-question-tab").on('shown.bs.tab', function(e) {
-         var tabPaneShown = e.target.getAttribute('href');
-         var mapDiv = $(tabPaneShown).children('.poll-map');
-
-         if (mapDiv.length) {
-            var map = mapDiv.data('map');
-            map.invalidateSize(false);
-         }
-      });
-
-
-      $.ajax({url:'/boundaries/', dataType: "json"}).done(function(boundaries){
-        $(".poll-map").each(function(){
-          var question = $(this).attr("data-question");
-          var colorList = {{ colors_map|safe }};
-          var map = window.initMap('map-' + question, boundaries, question, '{{ district_zoom|lower }}' === 'true', '{{ ward_zoom|lower }}' === 'true', colorList=colorList);
-
-          $(this).data('map', map);
-        });
-      });
-
-      $(".poll-word-cloud").each(function(){
-        var question = $(this).attr("data-question");
-        $.ajax({url:'/pollquestion/' + question + '/results/', dataType: "json"}).done(function(result){
-
-          if(!result){
-            return;
-          }
-
-          var results = result[0];
-          var cloudData = [];
-
-          for (i=0; i<=25 && i<=results.categories.length; i++){
-            word = results.categories[i];
-            if (word){
-              label = word.label.trim().toUpperCase();
-              cloudData.push({ text: label, weight: Math.sqrt(word.count)})
-            }
-          }
-
-          $('#word-cloud-' + question + '-placeholder').hide();
-          $('#word-cloud-' + question).jQCloud(cloudData);
-
-        });
-      });
-    });
+          .block.p-home.pt-0
+            .block.w-full.px-home
+              .fb-comments(data-href="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}" data-width="100%" data-numposts="5")

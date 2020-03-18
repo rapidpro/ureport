@@ -1,11 +1,20 @@
 -extends "smartmin/list.html"
 -load i18n
 
+- block content-title
+  %h2.is-size-2.has-text-weight-bold
+    %img(src="{{ STATIC_URL }}img/polls_icon.png")
+    .is-inline-block.content-title-text
+      -trans "Opinions"
+
+
 -block table-buttons
   -if view.add_button
-    <a class="btn btn-primary pull-right" href="./create/">{% trans "Add" %}</a>
+    %a.button.is-primary.is-pulled-right(href="./create/")
+      - trans "+ New Poll"
 
 -block extra-style
+  {{block.super}}
   :css
       td.field_created_on, td.field_poll_date {
         white-space: nowrap;

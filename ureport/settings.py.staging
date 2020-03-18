@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 # import our default settings
 from ureport.settings_common import *
 import os
+import dj_database_url
 
 DEBUG = False
 THUMBNAIL_DEBUG = DEBUG
@@ -68,19 +69,7 @@ STATICFILES_FINDERS = (
 SITE_API_HOST = 'https://api.rapidpro.io'
 
 # Set your production database settings here
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ureport',
-        'USER': 'ureport',
-        'PASSWORD': 'nyarukaglue',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        'CONN_MAX_AGE': 60,
-        'OPTIONS': {
-        }
-    }
-}
+DATABASES['default'] = dj_database_url.config()
 
 # no debug toolbar in prod
 MIDDLEWARE = (
@@ -148,7 +137,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
 # compress arguments
 COMPRESS_CSS_HASHING_METHOD = 'content'
 COMPRESS_OFFLINE = True
-COMPRESS_OFFLINE_CONTEXT = dict(STATIC_URL=STATIC_URL, base_template='frame.html', debug=False, testing=False)
+COMPRESS_OFFLINE_CONTEXT = dict(STATIC_URL=STATIC_URL, base_template='frame.html', org=None, debug=False, testing=False)
 
 REDIS_HOST = 'localhost'
 

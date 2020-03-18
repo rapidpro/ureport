@@ -75,8 +75,18 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
 
+<<<<<<< HEAD
 REDIS_HOST = config('REDIS_HOST')
 REDIS_DATABASE = config('REDIS_DATABASE', default='1')
+=======
+# compress arguments
+COMPRESS_CSS_HASHING_METHOD = 'content'
+COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE_CONTEXT = dict(STATIC_URL=STATIC_URL, base_template='frame.html', org=None, debug=False, testing=False)
+
+
+REDIS_HOST = 'redis-internal.ureport.in'
+>>>>>>> 6b14c512268850207aaed4ec181fd06852ea3aa8
 
 BROKER_URL = 'redis://{}:6379/{}'.format(REDIS_HOST, REDIS_DATABASE)
 

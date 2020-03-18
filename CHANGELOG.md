@@ -1,3 +1,743 @@
+v1.1.143
+----------
+ * Merge pull request #566 from rapidpro/fix-pill-button-broken-by-translate
+ * Fix alerts
+ * Fix pills button broken by translate
+
+v1.1.142
+----------
+ * Update django
+ * Rebuild locale
+ * Merge pull request #565 from rapidpro/translations_django-po--master_bg
+ * Translate /locale/en/LC_MESSAGES/django.po in bg
+
+v1.1.141
+----------
+ * Merge pull request #564 from rapidpro/contacts-counts-performance
+ * More tests
+ * Increase cache time for contacts counts and add task to update the cache
+
+v1.1.140
+----------
+ * Merge pull request #563 from rapidpro/stats-for-same-flow-polls
+ * Rebuild stats for polls of the same flow at the same time
+
+v1.1.139
+----------
+ * Update Burmese
+ * Rebuild locale
+ * Rebuild locale
+ * Fix maps stats to properly count the parents stats
+ * Translate /locale/en/LC_MESSAGES/django.po in bs
+
+v1.1.138
+----------
+ * Merge pull request #558 from rapidpro/v1-design-remove-part3
+
+v1.1.136
+----------
+ * Merge pull request #559 from rapidpro/fix-countries
+ * Merge branch 'fix-countries' of github.com:rapidpro/ureport into fix-countries
+ * Add countries view back
+ * Add coutries view back
+
+v1.1.135
+----------
+ * Merge pull request #557 from rapidpro/v1-design-remove-part2
+ * Pin less to 3.10.3
+ * Pin less to 3.10.3
+
+v1.1.134
+----------
+ * Merge pull request #556 from rapidpro/v1-design-remove-part2
+ * Merge branch 'master' of github.com:rapidpro/ureport into v1-design-remove-part2
+ * Update flake8
+ * Replace print statement
+ * Stop using PollReporterCounter and improve the tests to be more correct
+
+v1.1.133
+----------
+ * Add back the status view
+
+v1.1.132
+----------
+ * Merge pull request #555 from rapidpro/v1-design-remove-part1
+ * Remove V1 design templates
+
+v1.1.131
+----------
+ * Merge pull request #554 from rapidpro/fix-geojson
+ * Update countries geoJSON
+
+v1.1.130
+----------
+ * Merge pull request #553 from rapidpro/add-fsm
+ * Add FSM icon
+
+v1.1.129
+----------
+ * Merge pull request #552 from rapidpro/fix-active-users-charts-data
+ * Active users are stored by month only so use the date for the month
+
+v1.1.128
+----------
+ * Merge pull request #551 from rapidpro/squash-stats-part-2
+ * Add migrations
+ * Add squash method and task
+
+v1.1.127
+----------
+ * Merge pull request #550 from rapidpro/squash-stats-part-1
+ * Update Django
+ * Add is_squashed field to stats model
+ * Update CHANGELOG.md for v1.1.126
+ * Merge pull request #549 from rapidpro/remove-ca
+ * Remove CA flag
+
+v1.1.126
+----------
+ * Merge pull request #549 from rapidpro/remove-ca
+ * Remove CA flag
+
+v1.1.125
+----------
+ * Merge pull request #547 from rapidpro/pacific-flag
+ * Add Pacific flag
+ * Update CHANGELOG.md for v1.1.124
+ * Rebuild locales, with symlinks
+ * Rebuild locales
+ * Rebuild locales
+ * Rebuild locales
+ * Rebuild locales
+ * Compile messages
+ * Merge pull request #546 from rapidpro/fix-flags
+ * Merge pull request #544 from rapidpro/translations_django-po--master_bs
+ * Add Botswana flag, fix links properly
+ * Translate /locale/en/LC_MESSAGES/django.po in bs
+
+v1.1.124
+----------
+ * Rebuild locales, with symlinks
+ * Rebuild locales
+ * Rebuild locales
+ * Rebuild locales
+ * Rebuild locales
+ * Compile messages
+ * Merge pull request #546 from rapidpro/fix-flags
+ * Merge pull request #544 from rapidpro/translations_django-po--master_bs
+ * Add Botswana flag, fix links properly
+ * Translate /locale/en/LC_MESSAGES/django.po in bs
+
+v1.1.123
+----------
+ * Update JS deps
+ * Rebuild locales
+ * Merge pull request #538 from Ilhasoft/update/costa-rica-flag
+ * Merge pull request #540 from rapidpro/translations_django-po--master_ro
+ * Translate /locale/en/LC_MESSAGES/django.po in ro
+ * Added flag for Costa Rica
+
+v1.1.122
+----------
+ * Rebuild locales
+ * Merge pull request #534 from rapidpro/translations_django-po--master_pt_BR
+ * Merge pull request #537 from rapidpro/deps-update
+ * Merge pull request #536 from Ilhasoft/fixing/new-behaviour-in-python-3.7
+ * Update deps
+ * Adjustments on chunk_list(iterable, size), to avoid a runtime error 'generator raised StopIteration'
+ * Apply translations in pt_BR
+
+v1.1.121
+----------
+ * Include GA on the v2 public site
+
+v1.1.120
+----------
+ * Merge pull request #535 from rapidpro/fix-poll-gender-for-gender-custom-labels
+ * Fix gender stats with custom gender labels
+
+v1.1.119
+----------
+ * Merge pull request #533 from Ilhasoft/hotfix/img_sizing_on_stories_v1
+ * Fixing on image responsivity while scaling large images on story detail
+
+v1.1.118
+----------
+ * Merge pull request #521 from rapidpro/old-poll-results-clear
+ * Fix conflicts and merge master
+ * Rebuild locale
+ * Merge pull request #532 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Merge branch 'master' into translations_django-po--master_sr_RS@latin
+ * Merge pull request #527 from Ilhasoft/feature/enable_serbian_latin_serbia_language
+ * Apply translations in sr_RS@latin
+ * remove sr_latn from languages on settings_common
+ * enable locale for Serbian Latin Serbia language
+
+v1.1.116
+----------
+ * Merge pull request #531 from rapidpro/language-fix
+ * Make sure we have the org language activated for precalculated data
+
+v1.1.115
+----------
+ * Rebuild locale
+ * Merge pull request #526 from Ilhasoft/hotfix/limit-poll-states
+ * Merge pull request #530 from rapidpro/rebuild-locale
+ * Fix poll page graph reload and sort locations options
+ * Rebuild locale
+ * Rebuild locale
+ * Update form fields size for superadmin in v1
+ * Update form fields size for superadmin
+ * Add limit poll states config for superusers
+
+v1.1.114
+----------
+ * Merge pull request #528 from rapidpro/fix-engagement-data-to-ignore-inactive-questions
+ * Merge pull request #529 from rapidpro/update-locale-arabic
+ * Add Jordan flag
+ * Rebuild locale
+ * Update Arabic, rebuild locale
+ * Filter for active questions on the engagement data
+
+v1.1.113
+----------
+ * Add mo files
+ * Merge pull request #525 from rapidpro/arabic-locale
+ * Rebuild locale
+ * Rebuild locale
+ * Update Arabic translations
+ * Rebuild locale
+ * Merge pull request #522 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Merge pull request #524 from Quality-Management/bugfix/socialwidget
+ * Fixed class name
+ * Fixed class for widget error
+ * fixed parameter when only one social media widget is used
+ * Apply translations in sr_RS@latin
+
+v1.1.112
+----------
+ * Merge pull request #520 from rapidpro/add-canada-flag
+ * Add Canada flag
+
+v1.1.111
+----------
+ * Remove New Zealand flag
+
+v1.1.110
+----------
+ * Merge pull request #519 from rapidpro/fix-global-count
+ * Add Bengali language option
+ * Fix global count
+
+v1.1.109
+----------
+ * Fix typo
+
+v1.1.108
+----------
+ * Merge pull request #518 from rapidpro/remove-syria-flag
+ * Remove Syria flag and fix chooser flags
+
+v1.1.107
+----------
+ * Merge pull request #517 from rapidpro/country-flags-common
+ * Countries count are for sites that are for the country entirely
+
+v1.1.105
+----------
+ * Rebuild locales
+ * Rebuild locales
+ * Merge pull request #509 from rapidpro/translations_django-po--master_bn
+ * Translate /locale/en/LC_MESSAGES/django.po in bn
+ * Merge pull request #508 from rapidpro/max-upload-size
+ * Increase max size allowed to upload to 10MB
+
+v1.1.104
+----------
+ * Merge pull request #507 from rapidpro/limit-opinion-responses-by-date
+ * Precalculate the avearage response for the engagement page
+
+v1.1.103
+----------
+ * Merge pull request #506 from rapidpro/limit-opinion-responses-by-date
+ * Limit all opinions response to the last year
+
+v1.1.102
+----------
+ * Merge pull request #504 from rapidpro/counters-config
+ * Merge pull request #505 from rapidpro/fix-countries-number
+ * Add way to sync counts from all providers for orgs that do not display flags
+ * Update rebuild counts to include older polls too
+ * Fix the query for number for countries on homepage
+
+v1.1.101
+----------
+ * Fix Facebook share URL
+
+v1.1.100
+----------
+ * Merge pull request #503 from rapidpro/translations-1
+ * Add callback for summernote to hints user the file is big
+ * Rebuild locales
+ * Rebuild locales
+ * Add translations manually
+
+v1.1.99
+----------
+ * Add tests
+ * Fix poll stats without date
+
+v1.1.98
+----------
+ * Merge pull request #502 from rapidpro/add-indexes
+
+v1.1.96
+----------
+ * Disable the squash for reporters counters
+
+v1.1.95
+----------
+ * Refresh engagement data once a day
+
+v1.1.94
+----------
+ * Add overflow scroll on longer labels
+
+v1.1.93
+----------
+ * Use HTML for hightcharts labels
+
+v1.1.92
+----------
+ * Merge pull request #501 from rapidpro/calculate-results-poll-stats-2
+ * Show day in tooltip date
+ * Show day in tooltip date
+ * Show up to 3 points per month for 3 months charts
+ * Merge branch 'calculate-results-poll-stats' of github.com:rapidpro/ureport into calculate-results-poll-stats-2
+ * Merge branch 'master' of github.com:rapidpro/ureport into calculate-results-poll-stats-2
+ * Fix date key lookup
+ * Use smaller intervals for small time filters on engagement
+
+v1.1.90
+----------
+ * Merge pull request #484 from rapidpro/calculate-results-poll-stats
+
+v1.1.89
+----------
+ * Add back some hover background with static colors
+ * Rebuild locales
+
+v1.1.88
+----------
+ * Rebuild locales
+ * Merge pull request #500 from rapidpro/avoid-compressor-context-loop
+ * Rebuild locales
+ * More charts localizations
+ * Fix typo
+ * Add if block for admin site
+
+v1.1.83
+----------
+
+
+v1.1.82
+----------
+ * Fix links
+
+v1.1.81
+----------
+ * Merge pull request #499 from rapidpro/stories-og-tags
+ * Add open graph tags for facebook image sharing on story page
+
+v1.1.80
+----------
+ * Rebuild locales
+ * Merge pull request #498 from rapidpro/translations_django-po--master_fr
+ * Translate /locale/en/LC_MESSAGES/django.po in fr
+
+v1.1.79
+----------
+ * Rebuild locales
+ * Rebuild locales
+ * Merge pull request #496 from rapidpro/translations_django-po--master_es
+ * Merge pull request #497 from Ilhasoft/translations_django-po--master_es
+ * Merge remote-tracking branch 'rapidpro/master' into translations_django-po--master_es
+ * Translate /locale/en/LC_MESSAGES/django.po in es
+
+v1.1.78
+----------
+ * Merge pull request #494 from rapidpro/argentina-bugs
+ * Revert join now changes
+ * Rebuild locales
+ * Fixes social media new tabs, polls and stories order, age chart fix
+
+v1.1.77
+----------
+ * Merge pull request #493 from rapidpro/fr-trans
+ * Rebuild locales
+ * Fix tests
+ * Rebuild locales
+ * No jobs page if not configured
+ * Manual FR updates
+
+v1.1.76
+----------
+ * Rebuild locales
+ * Merge pull request #486 from Ilhasoft/fix/static
+ * Rebuild locales
+ * Merge pull request #492 from rapidpro/translations_django-po--master_it
+ * Translate /locale/en/LC_MESSAGES/django.po in it
+ * Added "sitestatic" in middleware
+
+v1.1.75
+----------
+ * Rebuild locales
+ * Merge pull request #491 from rapidpro/fr-trans
+ * Rebuild locales
+ * Merge branch 'master' of github.com:rapidpro/ureport into fr-trans
+ * Merge pull request #490 from rapidpro/translations_djangojs-po--master_fr_FR
+ * Update FR translations
+ * Apply translations in fr_FR
+
+v1.1.74
+----------
+ * Merge pull request #489 from rapidpro/admin-links
+ * REduce more longer titles
+ * Merge pull request #488 from rapidpro/admin-links
+ * rebuild locales
+ * Merge master
+ * Merge pull request #487 from rapidpro/translations_django-po--master_es
+ * Rebuild locales
+ * Change bg color on hover
+ * Rebuild locales
+ * Merge branch 'master' into translations_django-po--master_es
+ * Translate /locale/en/LC_MESSAGES/django.po in es
+ * Rebuild locales
+ * Improve admin links to be noticeable
+
+v1.1.73
+----------
+ * Fix to force label shows on all chart bars
+
+v1.1.72
+----------
+ * Merge pull request #485 from rapidpro/bugs-fix
+ * Auto rotate labels on opinion page
+ * Update FB SDK version
+ * Fix iframe styles
+ * Fix date format
+ * Fix the calculation of average response to be all time, not last year
+ * Add South Africa static flag config
+ * Merge pull request #483 from Ilhasoft/fix/api-page
+ * Fix css/js
+
+v1.1.71
+----------
+ * Merge pull request #482 from rapidpro/beta-fixes
+ * Rebuild locales
+ * Fix modal scrolling behavior
+
+v1.1.70
+----------
+ * Allow status view without org
+
+v1.1.69
+----------
+ * Merge pull request #481 from rapidpro/status-view
+ * Add status view
+
+v1.1.68
+----------
+ * Merge pull request #480 from rapidpro/beta-fixes
+ * consistent read more button
+ * Fix stories button hover state, and screenshot modal z-index
+
+v1.1.67
+----------
+ * Screenshot modal position
+
+v1.1.66
+----------
+ * Fix polls maps
+
+v1.1.65
+----------
+ * Use center bottom to redraw
+
+v1.1.64
+----------
+ * Use top-bottom anchor to trigger redraw
+
+v1.1.63
+----------
+ * Merge pull request #479 from rapidpro/beta-fixes
+
+v1.1.61
+----------
+ * Hide photos section if no photos can be displayed
+
+v1.1.60
+----------
+ * Merge pull request #478 from rapidpro/beta-fixes
+ * Add select country image
+ * Add select country image
+ * Update CHANGELOG.md for v1.1.59
+ * Merge pull request #476 from rapidpro/beta-fixes
+
+v1.1.59
+----------
+ * Merge pull request #476 from rapidpro/beta-fixes
+ * Move anchor placement to top center for aos and trigger redraw fast
+ * Add migration to add photo blocks type
+ * Rebuild locales
+
+v1.1.47
+----------
+ * Adjuts jobs page
+ * Larger circles
+ * Merge pull request #473 from rapidpro/beta-fixes
+ * Refresh AOS
+
+v1.1.45
+----------
+ * Merge pull request #472 from rapidpro/fix-stats
+ * Merge branch 'master' of github.com:rapidpro/ureport into fix-stats
+ * Merge pull request #471 from rapidpro/poll-date-api
+ * Merge pull request #470 from rapidpro/beta-fixes
+ * Add timeout to lock of poll counts rebuild
+ * Add poll date to API
+
+v1.1.38
+----------
+ * Show top region on maps
+ * state pill label to STATE
+ * lighten button backgrounds on hover
+ * Fix social media switching buttons
+ * Reduce line height on poll title on homepage
+ * Add bottom border on navbar
+
+v1.1.37
+----------
+ * Merge pull request #469 from rapidpro/beta-fixes
+ * Fix crop argument
+ * Add spinner on maps before they load
+ * Full width on engagement page
+ * Adjust label font weight on opinions page
+ * Hide question number on screenshot capture
+
+v1.1.36
+----------
+ * Merge pull request #467 from rapidpro/edit-blocks
+ * Fix tests
+ * Merge pull request #465 from rapidpro/translations_djangojs-po--master_my
+ * Translate locale/en/LC_MESSAGES/djangojs.po in my
+
+v1.1.34
+----------
+ * Increment after using the color
+
+v1.1.33
+----------
+ * Merge pull request #466 from rapidpro/beta-fixes
+ * Fix conflicting colors for state segmentation
+
+v1.1.27
+----------
+ * Fix admin navbar
+
+v1.1.26
+----------
+ * Quick fixes
+
+v1.1.25
+----------
+ * Merge pull request #461 from rapidpro/RTL-support
+ * Merge pull request #462 from rapidpro/use-cached-results
+ * Really fix conflicts and merge
+ * Use cached results
+ * Use cached results
+ * fix conflicts and merge
+ * update locales
+ * tweak styles for admin nav
+
+v1.1.19
+----------
+ * Add social media tab icons
+
+v1.1.18
+----------
+ * Align text in the left boxes with the left angle applied too
+
+v1.1.17
+----------
+ * Merge pull request #458 from rapidpro/engagement-charts
+
+v1.1.8
+----------
+ * Adjust cursor and sticky bar
+ * Merge pull request #451 from rapidpro/layout-tweaks
+ * age graph pane only 1/2
+ * livvic as alt font
+ * montserrat as alt font
+ * fix mobile menu spacing
+ * about page
+ * new global layouts
+ * new layouyg
+ * transition menu with slide
+
+v1.1.6
+----------
+
+
+v1.1.5
+----------
+ * Merge pull request #444 from rapidpro/admin-nav-public-site
+ * labels for age charts
+ * Extra utility classes for the admin menu links
+ * better segmented labeling
+ * fix top logo
+ * rebuild locales
+ * Add admin navbar on top on public site
+ * Merge branch 'master' of github.com:rapidpro/ureport into admin-nav-public-site
+ * Merge pull request #443 from rapidpro/locale-fix
+ * Makemessages and compile messages
+ * WIP admin navbar for public site
+ * Merge branch 'master' of github.com:rapidpro/ureport into locale-fix
+ * Makemessages and compile messages
+ * Merge pull request #442 from rapidpro/uikit
+ * Rebuild locale
+ * Merge pull request #428 from rapidpro/css-tweaks
+ * Merge pull request #441 from rapidpro/tailwind-design
+ * Fix SASS countries background
+ * Only allow search engines on the rigth domains
+ * Merge master
+ * Update CHANGELOG.md for v1.1.4
+ * Merge pull request #440 from rapidpro/fix-org-counts
+ * Fix contacts triggers to not consider contacts with is_active False
+ * Fix recalculate to ignore contact not active
+ * Update CHANGELOG.md for v1.1.3
+ * Merge pull request #436 from rapidpro/revert-maps-file
+ * Fix script name
+ * Revert leaflet library
+ * Revert maps change to keep supporting properly the old version
+ * Update CHANGELOG.md for v1.1.2
+ * Ignore node_mudules
+ * Merge pull request #434 from rapidpro/fix-design
+ * Fix endif tag place
+ * Update CHANGELOG.md for v1.1.1
+ * Merge pull request #433 from rapidpro/post-deploy-fixes
+ * More adjustements
+ * Remove placeholders and adjust logos
+ * Update CHANGELOG.md for v1.1.0
+ * Merge pull request #432 from rapidpro/uikit
+
+v1.1.4
+----------
+ * Fix contacts triggers to not consider contacts with is_active False
+ * Fix recalculate to ignore contact not active
+
+v1.1.3
+----------
+ * Revert leaflet library
+ * Revert maps change to keep supporting properly the old version
+
+v1.1.2
+----------
+ * Ignore node_mudules
+ * Fix endif tag place
+
+v1.1.1
+----------
+ * Merge pull request #433 from rapidpro/post-deploy-fixes
+ * More adjustements
+ * Remove placeholders and adjust logos
+
+v1.1.0
+----------
+ * Merge pull request #432 from rapidpro/uikit
+
+v1.0.459
+----------
+ * Fix staging DATABASES config
+
+v1.0.458
+----------
+ * Merge pull request #420 from rapidpro/contact-activity
+ * Merge pull request #419 from rapidpro/poll-stats
+
+v1.0.457
+----------
+ * Merge pull request #415 from rapidpro/fix-global-locations-data
+ * Fix coverage
+ * Change World geojson data
+ * Merge pull request #414 from Ilhasoft/feature/flagsupdate
+ * Fix "test_get_linked_orgs".
+ * Added Honduras, Iraq and removed U.K. flags.
+ * Merge pull request #83 from rapidpro/master
+
+v1.0.456
+----------
+ * Rerun compilemessages and makemessages
+ * Fix poll response categories to be deactivated if they are replaced
+
+v1.0.455
+----------
+ * Merge pull request #411 from rapidpro/dependabot/pip/django-2.1.9
+ * Bump django from 2.1.5 to 2.1.9
+
+v1.0.454
+----------
+ * Add Bolivia and Ecuador flags on the footer
+
+v1.0.453
+----------
+ * Add India flag on the footer
+
+v1.0.452
+----------
+ * Merge pull request #409 from rapidpro/no-flow-def-use
+ * Use flow results metada for all poll flows
+
+v1.0.451
+----------
+ * Update rapidpro-python to 2.6.1
+
+v1.0.450
+----------
+ * Make flow metadate node uuids optional
+
+v1.0.449
+----------
+ * Merge pull request #408 from rapidpro/use-flow-metadata
+ * Update the rapidpro client
+ * Use the metadata only for flows that do not have rulesets on the definition
+ * Use flow results metadata to create questions and their categories
+ * Merge pull request #407 from rapidpro/verify-locales
+ * update uz locale file
+ * fix warnings, update locale files, set up travis to catch errors / missing rebuilds
+ * Update CHANGELOG.md for v1.0.448
+ * Increase contact pull lock timeout to 12 hours
+
+v1.0.448
+----------
+ * Increase contact pull lock timeout to 12 hours
+
+v1.0.447
+----------
+ * Merge pull request #405 from rapidpro/ureport-v2-1
+ * Add missing file
+ * Disable some tests temporaly
+ * Add /v2 urls for public site, site under construction page
+ * Merge pull request #403 from Ilhasoft/fix/error-pages
+ * Change U-Report Logo
+ * Merge pull request #79 from rapidpro/master
+ * Merge pull request #402 from Ilhasoft/hotfix/news-date
+ * Fix tests to support new date format localized
+ * Fix spacing between imports and code
+ * Refactor created date for News by using the localization to format it
+ * Merge pull request #78 from rapidpro/master
+ * Merge pull request #76 from rapidpro/master
+
 v1.0.446
 ----------
  * Update FB customerchat plugin SDK

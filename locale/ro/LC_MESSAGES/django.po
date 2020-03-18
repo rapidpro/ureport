@@ -1,388 +1,290 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 # Translators:
-# Alex Petrov <alexandrupetrov@gmail.com>, 2017
-# Ana Rizescu <arizescu@unicef.org>, 2019
-# Tales Souza <tales@ilhasoft.com.br>, 2019
+# Nyaruka <info@textit.in>, 2019
+# Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2019
+# AIex Petrov <alexandrupetrov@gmail.com>, 2019
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: UReport\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-10 09:35+0000\n"
-"PO-Revision-Date: 2019-01-28 17:20+0000\n"
-"Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
-"Language-Team: Romanian (http://www.transifex.com/rapidpro/ureport/language/ro/)\n"
+"POT-Creation-Date: 2020-03-13 12:46+0000\n"
+"PO-Revision-Date: 2019-05-15 20:27+0000\n"
+"Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
+"Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ro\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
-#: dash/categories/models.py:20
 msgid "The name of this category"
 msgstr "Denumirea acestei categorii"
 
-#: dash/categories/models.py:23
 msgid "An optional image that can describe this category"
 msgstr "O imagine opţională care poate să descrie această categorie"
 
-#: dash/categories/models.py:26 ureport/polls/models.py:65
 msgid "The organization this category applies to"
 msgstr "Organizația la care se aplică această categorie"
 
-#: dash/categories/models.py:47 templates/frame.haml:285
-#: templates/frame.haml:292
 msgid "Categories"
 msgstr "Categorii"
 
-#: dash/categories/models.py:53 dash/stories/models.py:129
-#: ureport/polls/models.py:639
 msgid "The name to describe this image"
 msgstr "Denumirea pentru a descrie această imagine"
 
-#: dash/categories/models.py:56
 msgid "The category this image represents"
 msgstr "Categoria pe care această imagine o reprezintă"
 
-#: dash/categories/models.py:59 dash/stories/models.py:135
-#: ureport/polls/models.py:645
 msgid "The image file to use"
 msgstr "Fișierul imagine pentru utilizare"
 
-#: dash/dashblocks/models.py:19
 msgid "The human readable name for this content type"
 msgstr "Denumirea lizibilă de către om pentru acest tip de conținut"
 
-#: dash/dashblocks/models.py:22
 msgid "The slug to idenfity this content type, used with the template tags"
 msgstr "Câmpul pentru identificarea acestui tip de conținut, utilizat cu tag-uri șablon"
 
-#: dash/dashblocks/models.py:26
-msgid ""
-"A description of where this content type is used on the site and how it will"
-" be dsiplayed"
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
 msgstr "O descriere a locului unde acest tip de conținut este folosit pe site și modul în care va fi afișat"
 
-#: dash/dashblocks/models.py:31
 msgid "Whether this content should include a title"
 msgstr "Dacă acest conținut ar trebui să includă un titlu"
 
-#: dash/dashblocks/models.py:34
 msgid "Whether this content should include an image"
 msgstr "Dacă acest conținut ar trebui să includă o imagine"
 
-#: dash/dashblocks/models.py:37
 msgid "Whether this content should use a rich HTML editor"
 msgstr "Dacă acest conținut ar trebui să utilizeze un editor HTML bogat"
 
-#: dash/dashblocks/models.py:40
 msgid "Whether this content should include a summary field"
 msgstr "Dacă acest conținut ar trebui să includă un câmp rezumat"
 
-#: dash/dashblocks/models.py:43
 msgid "Whether this content should include a link"
 msgstr "Dacă acest conținut ar trebui să includă un link"
 
-#: dash/dashblocks/models.py:46
-msgid ""
-"Whether this content should allow upload of additional images, ie a gallery"
+msgid "Whether this content should allow upload of additional images, ie a gallery"
 msgstr "Dacă acest conținut ar trebui să permită încărcarea de imagini suplimentare, adică o galerie"
 
-#: dash/dashblocks/models.py:50
 msgid "Whether this content has a color field"
 msgstr "Dacă acest conținut are un câmp de culoare"
 
-#: dash/dashblocks/models.py:53
 msgid "Whether this content should allow setting a YouTube id"
 msgstr "Dacă acest conținut ar trebui să permită stabilirea unui ID YouTube"
 
-#: dash/dashblocks/models.py:56
 msgid "Whether this content should allow tags"
 msgstr "Dacă acest conținut ar trebui să permită tag-uri"
 
-#: dash/dashblocks/models.py:69
 msgid "Content Type"
 msgstr "Tipul de conținut"
 
-#: dash/dashblocks/models.py:70
 msgid "The category, or type for this content block"
 msgstr "Categoria sau tipul pentru acest bloc de conținut"
 
-#: dash/dashblocks/models.py:74
 msgid "The title for this block of content, optional"
 msgstr "Titlul pentru acest bloc de conținut, opțional"
 
-#: dash/dashblocks/models.py:77
 msgid "The summary for this item, should be short"
 msgstr "Rezumatul pentru acest element, trebuie să fie scurt"
 
-#: dash/dashblocks/models.py:80
 msgid "The body of text for this content block, optional"
 msgstr "Corpul de text pentru acest bloc de conținut, opțional"
 
-#: dash/dashblocks/models.py:83
 msgid "Any image that should be displayed with this content block, optional"
 msgstr "Orice imagine care ar trebui să fie afişată cu acest bloc de conţinut, opţional"
 
-#: dash/dashblocks/models.py:87
 msgid "A background color to use for the image, in the format: #rrggbb"
 msgstr "O culoare fundal pentru imagine, în formatul: #rrggbb"
 
-#: dash/dashblocks/models.py:91
 msgid "Any link that should be associated with this content block, optional"
 msgstr "Orice link care ar trebui să fie asociat cu acest bloc de conținut, opțional"
 
-#: dash/dashblocks/models.py:95 ureport/news/models.py:42
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "ID-ul videoului de pe YouTube care ar trebui să fie legat de acest element"
 
-#: dash/dashblocks/models.py:99
-msgid ""
-"Any tags for this content block, separated by spaces, can be used to do more"
-" advanced filtering, optional"
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
 msgstr "Orice tag-uri pentru acest bloc de conținut, separate prin spații, pot fi folosite pentru o filtrare mai avansată, opțional"
 
-#: dash/dashblocks/models.py:103
 msgid "The priority for this block, higher priority blocks come first"
 msgstr "Prioritatea pentru acest bloc, blocurile cu prioritate mai mare sunt poziționate în partea de sus a paginii"
 
-#: dash/dashblocks/models.py:108
 msgid "The organization this content block belongs to"
 msgstr "Organizația la care aparţine acest bloc de conţinut"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:8
 msgid "Gallery"
 msgstr "Galerie"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_form.haml:17
 msgid "Add Image"
 msgstr "Adăugare imagine"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:34
-#: smartmin/templates/smartmin/list.html:14
 msgid "Search"
 msgstr "Caută"
 
-#: dash/dashblocks/templates/dashblocks/dashblock_list.haml:61
-#: smartmin/templates/smartmin/list.html:25 templates/polls/poll_list.haml:6
 msgid "Add"
 msgstr "Adăugare"
 
-#: dash/dashblocks/views.py:16 templates/frame.haml:235
 msgid "Content Types"
 msgstr "Tipuri de conținut"
 
-#: dash/dashblocks/views.py:118
 msgid "Content Blocks"
 msgstr "Blocuri de conţinut"
 
-#: dash/dashblocks/views.py:120
 #, python-format
 msgid "%s Blocks"
 msgstr "%s Blocuri"
 
-#: dash/dashblocks/views.py:158 smartmin/views.py:1105
 #, python-format
 msgid "Edit %s"
 msgstr "Revizuire %s"
 
-#: dash/dashblocks/views.py:182 smartmin/views.py:1328
 #, python-format
 msgid "Create %s"
 msgstr "Crează %s"
 
-#: dash/dashblocks/views.py:184
 msgid "Create Content Block"
 msgstr "Creează bloc de conținut"
 
-#: dash/orgs/forms.py:12
 msgid "Your first name"
 msgstr "Prenumele"
 
-#: dash/orgs/forms.py:13
 msgid "Your last name"
 msgstr "Numele"
 
-#: dash/orgs/forms.py:14
 msgid "Your email address"
 msgstr "E-mail"
 
-#: dash/orgs/forms.py:17
 msgid "Your password, at least eight letters please"
 msgstr "Parola, trebuie să conțină cel puțin opt litere"
 
-#: dash/orgs/forms.py:23
 msgid "That email address is already used"
 msgstr "Acest e-mail este deja utilizat"
 
-#: dash/orgs/forms.py:30
 msgid "Passwords must contain at least 8 letters."
 msgstr "Parolele trebuie să conțină cel puțin 8 litere."
 
-#: dash/orgs/forms.py:49
 msgid "This domain is used for subdomains"
 msgstr "Acest domeniu este utilizat pentru subdomenii"
 
-#: dash/orgs/models.py:36 dash/orgs/models.py:365 ureport/assets/models.py:19
 msgid "Name"
 msgstr "Denumirea"
 
-#: dash/orgs/models.py:37
 msgid "The name of this organization"
 msgstr "Denumirea acestei organizații"
 
-#: dash/orgs/models.py:41
 msgid "The logo that should be used for this organization"
 msgstr "Logoul care ar trebui să fie utilizat pentru această organizație"
 
-#: dash/orgs/models.py:44 dash/orgs/views.py:297
 msgid "Administrators"
 msgstr "Administratori"
 
-#: dash/orgs/models.py:45
 msgid "The administrators in your organization"
 msgstr "Administratorii din cadrul organizației voastre"
 
-#: dash/orgs/models.py:48
 msgid "Viewers"
 msgstr "Vizualizatori"
 
-#: dash/orgs/models.py:49
 msgid "The viewers in your organization"
 msgstr "Vizualizatorii din cadrul organizației voastre"
 
-#: dash/orgs/models.py:52 dash/orgs/templates/orgs/org_manage_accounts.haml:19
-#: dash/orgs/views.py:298
 msgid "Editors"
 msgstr "Editori"
 
-#: dash/orgs/models.py:53
 msgid "The editors in your organization"
 msgstr "Editorii din cadrul organizației voastre"
 
-#: dash/orgs/models.py:56
 msgid "Language"
 msgstr "Limba"
 
-#: dash/orgs/models.py:57
 msgid "The main language used by this organization"
 msgstr "Limba principală utilizată de această organizație"
 
-#: dash/orgs/models.py:60
 msgid "Subdomain"
 msgstr "Subdomeniul"
 
-#: dash/orgs/models.py:61
 msgid "This subdomain is not available"
 msgstr "Acest subdomeniu nu este disponibil"
 
-#: dash/orgs/models.py:62
 msgid "The subdomain for this organization"
 msgstr "Subdomeniul pentru această organizație"
 
-#: dash/orgs/models.py:65
 msgid "Domain"
 msgstr "Domeniul"
 
-#: dash/orgs/models.py:66
 msgid "This domain is not available"
 msgstr "Acest domeniu nu este disponibil"
 
-#: dash/orgs/models.py:67
 msgid "The custom domain for this organization"
 msgstr "Domeniul personalizat pentru această organizaţie"
 
-#: dash/orgs/models.py:70
 msgid "Timezone"
 msgstr "Fus orar"
 
-#: dash/orgs/models.py:71
 msgid "The timezone your organization is in."
 msgstr "Fusul orar al organizației voastre"
 
-#: dash/orgs/models.py:75
-msgid "The API token for the RapidPro account this dashboard is tied to"
-msgstr "Cheia secretă API pentru contul RapidPro cu care are legătură acest tablou de bord"
-
-#: dash/orgs/models.py:80
-msgid ""
-"JSON blob used to store configuration information associated with this "
-"organization"
+msgid "JSON blob used to store configuration information associated with this organization"
 msgstr "Fișierele JSON utilizate pentru a stoca informațiile de configurare asociate cu această organizație"
 
-#: dash/orgs/models.py:295
 msgid "Administrator"
 msgstr "Administrator"
 
-#: dash/orgs/models.py:296
 msgid "Editor"
 msgstr "Editor"
 
-#: dash/orgs/models.py:297
 msgid "Viewer"
 msgstr "Vizualizator"
 
-#: dash/orgs/models.py:302 dash/orgs/models.py:361 ureport/assets/models.py:16
-#: ureport/contacts/models.py:44
 msgid "Org"
 msgstr "Organizație"
 
-#: dash/orgs/models.py:303
 msgid "The organization to which the account is invited to view"
 msgstr "Organizaţia al cărei profil a fost invitat pentru vizualizare"
 
-#: dash/orgs/models.py:306
 msgid "Email"
 msgstr "E-mail"
 
-#: dash/orgs/models.py:307
 msgid "The email to which we send the invitation of the viewer"
 msgstr "E-mailul la care trimitem invitația vizualizatorului"
 
-#: dash/orgs/models.py:310
 msgid "Secret"
 msgstr "Secret"
 
-#: dash/orgs/models.py:311
 msgid "a unique code associated with this invitation"
 msgstr "un cod unic asociat cu această invitație"
 
-#: dash/orgs/models.py:314
 msgid "User Role"
 msgstr "Rol utilizator"
 
-#: dash/orgs/models.py:345
 #, python-format
 msgid "%s Invitation"
 msgstr "%s invitație"
 
-#: dash/orgs/models.py:357 ureport/assets/models.py:11
 msgid "Banner"
 msgstr "Banner"
 
-#: dash/orgs/models.py:358 ureport/assets/models.py:12
 msgid "Pattern"
 msgstr "Model"
 
-#: dash/orgs/models.py:362
 msgid "The organization in which the image will be used"
 msgstr "Organizația în care imaginea va fi utilizată"
 
-#: dash/orgs/models.py:366
 msgid "The name to describe this background"
 msgstr "Denumirea pentru a descrie acest fundal"
 
-#: dash/orgs/models.py:369
 msgid "Background type"
 msgstr "Tipul fundalului"
 
-#: dash/orgs/models.py:371 ureport/assets/models.py:24
 msgid "The image file"
 msgstr "Fișierul imagine"
 
-#: dash/orgs/templates/orgs/email/invitation_email.html:9
+msgid "The API token for this backend"
+msgstr "Tokenul API pentru acest backend"
+
 #, python-format
 msgid ""
 "\n"
@@ -390,1695 +292,1695 @@ msgid ""
 "      <br/>\n"
 "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
 "  "
-msgstr "\nAi fost invitat să te alături %(org_name)s.\n<br/>\nPentru a accepta invitația, <a href='%(host)s%(join_url)s'>clic aici</a>."
+msgstr ""
+"\n"
+"Ai fost invitat să te alături %(org_name)s.\n"
+"<br/>\n"
+"Pentru a accepta invitația, <a href='%(host)s%(join_url)s'>clic aici</a>."
 
-#: dash/orgs/templates/orgs/org_home.haml:8 templates/orgs/org_home.haml:8
+msgid "You are invited to join {{org.name}}."
+msgstr "Tu ești invitat să te alături {{org.name}}."
+
+msgid "Click this link to join"
+msgstr "Click aici să te alături"
+
 msgid "Edit"
 msgstr "Editează"
 
-#: dash/orgs/templates/orgs/org_home.haml:13 templates/orgs/org_home.haml:13
+msgid "Manage Backends"
+msgstr "Gestionează Backends"
+
 msgid "Manage Users"
 msgstr "Gestionează utilizatori"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:13
 msgid "Accounts"
 msgstr "Conturi"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:16
 msgid "Admins"
 msgstr "Administratori"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:22
-#: smartmin/templates/smartmin/delete_confirm.html:26
-#: smartmin/templates/smartmin/update.html:10
 msgid "Remove"
 msgstr "Elimină"
 
-#: dash/orgs/templates/orgs/org_manage_accounts.haml:29
 msgid "You must have at least one administator"
 msgstr "Trebuie să aveți cel puțin un administrator"
 
-#: dash/orgs/views.py:168
 msgid "Select your Organization"
 msgstr "Selectați organizația voastră"
 
-#: dash/orgs/views.py:179
-msgid ""
-"Your account is not associated to an organization. Please Contact the "
-"adminstrator."
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
 msgstr "Contul dat nu este asociat unei organizații. Vă rugăm să contactați administratorul."
 
-#: dash/orgs/views.py:219 dash/orgs/views.py:229
 msgid "Your Organization"
 msgstr "Organizația voastră"
 
-#: dash/orgs/views.py:226
-msgid "Not Set"
-msgstr "Nu este setat"
-
-#: dash/orgs/views.py:296
 msgid "Invite people to your organization"
 msgstr "Invitaţi oameni în organizaţia voastră"
 
-#: dash/orgs/views.py:299
 msgid "User group"
 msgstr "Grupul utilizatorilor"
 
-#: dash/orgs/views.py:310
 msgid "One of the emails you entered is invalid."
 msgstr "Una dintre adresele de e-mail pe care le-ai introdus nu este validă."
 
-#: dash/orgs/views.py:323
 #, python-format
 msgid "Manage %(name)s Accounts"
 msgstr "Administrează %(name)s Aconturi"
 
-#: dash/orgs/views.py:437 smartmin/views.py:1299
 msgid "Create"
 msgstr "Creează"
 
-#: dash/orgs/views.py:445
-msgid ""
-"Your invitation link is invalid. Please contact your organization "
-"administrator."
+msgid "Your invitation link is invalid. Please contact your organization administrator."
 msgstr "Link-ul invitației tale nu este valid. Vă rugăm să contactați administratorul organizației voastre."
 
-#: dash/orgs/views.py:501 dash/orgs/views.py:546
 #, python-format
 msgid "Join %(name)s"
 msgstr "Alăturăte %(name)s"
 
-#: dash/orgs/views.py:523
 msgid "Join"
 msgstr "Alătură-te"
 
-#: dash/orgs/views.py:532
-msgid ""
-"Your invitation link has expired. Please contact your organization "
-"administrator."
+msgid "Your invitation link has expired. Please contact your organization administrator."
 msgstr "Link-ul invitației tale a expirat. Vă rugăm să contactați administratorul organizației voastre."
 
-#: dash/orgs/views.py:639
 msgid "Task"
 msgstr "Sarcină"
 
-#: dash/orgs/views.py:643
 msgid "Tasks"
 msgstr "Sarcini"
 
-#: dash/stories/models.py:13
 msgid "The title for this story"
 msgstr "Titlul pentru acest articol"
 
-#: dash/stories/models.py:17
+#, fuzzy
+#| msgid "Whether this story is featured"
 msgid "Whether this story is featured"
 msgstr "Dacă acest articol este recomandat"
 
-#: dash/stories/models.py:20
 msgid "The summary for the story"
 msgstr "Rezumatul pentru articol"
 
-#: dash/stories/models.py:22
 msgid "The body of text for the story"
 msgstr "Corpul de text pentru articol"
 
-#: dash/stories/models.py:24
 msgid "The writer of the story"
 msgstr "Autorul articolului"
 
-#: dash/stories/models.py:27
 msgid "A link to an mp3 file to publish on this story"
 msgstr "Un link către un fişier MP3 care să fie publicat în acest articol"
 
-#: dash/stories/models.py:31
-msgid ""
-"The id of the YouTube video that should be linked to this story (this is the"
-" text that comes afer v= and before & in the YouTube URL)"
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
 msgstr "ID-ul videoului de pe YouTube care trebuie să fie ataşat la acest articol (acesta este textul care urmează după v= și înainte de & în adresa URL a canalului YouTube)"
 
-#: dash/stories/models.py:37
-msgid ""
-"Any tags for this story, separated by spaces, can be used to do more "
-"advanced filtering, optional"
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
 msgstr "Orice tag-uri pentru acest articol, separate prin spații, pot fi folosite pentru o filtrare mai avansată, opțional"
 
-#: dash/stories/models.py:42
 msgid "The category for this story"
 msgstr "Categoria pentru acest articol"
 
-#: dash/stories/models.py:46
 msgid "The organization this story belongs to"
 msgstr "Organizația căreia îi aparține acest articol"
 
-#: dash/stories/models.py:124 templates/frame.haml:329
-#: templates/frame.haml:481 templates/public/stories.haml:7
 msgid "Stories"
 msgstr "Articole"
 
-#: dash/stories/models.py:132
 msgid "The story to associate to"
 msgstr "Articolul cu care trebuie asociat"
 
-#: dash/stories/views.py:59
 msgid "Yes"
 msgstr "Da"
 
-#: dash/stories/views.py:60
 msgid "No"
 msgstr "Nu"
 
-#: dash/stories/views.py:79
 msgid "Story Images"
 msgstr "Imagini articol"
 
-#: dash/stories/views.py:91 dash/stories/views.py:99
-#: ureport/polls/views.py:164 ureport/polls/views.py:171
 #, python-format
 msgid "Image %d"
 msgstr "Imagine %d"
 
-#: dash/stories/views.py:92
 msgid "Image to display on story page and in previews. (optional)"
 msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și în previzualizări. (opțional)"
 
-#: dash/stories/views.py:100
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și în previzualizări (opțional)"
 
-#: smartmin/templates/smartmin/delete_confirm.html:11
 msgid "Remove Item?"
 msgstr "Elimină element?"
 
-#: smartmin/templates/smartmin/delete_confirm.html:13
 #, python-format
 msgid ""
 "\n"
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
-msgstr "\nEști sigur că vrei să ștergi<b>%(object)s</b>?"
+msgstr ""
+"\n"
+"Ești sigură că vrei să elimini 1%(object)s1?"
 
-#: smartmin/templates/smartmin/delete_confirm.html:17
-msgid ""
-"Once it is removed, it will be gone forever. There is no way to undo this "
-"operation."
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
 msgstr "Odată eliminat, nu va mai putea fi restabilit. Nu există niciun mod de a anula această operație."
 
-#: smartmin/templates/smartmin/delete_confirm.html:24
-#: smartmin/templates/smartmin/form.html:50
-#: smartmin/templates/smartmin/update.html:8
-#: templates/jobs/jobsource_create.haml:33
 msgid "Cancel"
 msgstr "Anulare"
 
-#: smartmin/templates/smartmin/list.html:79
 #, python-format
 msgid ""
 "\n"
-"\t\t%(counter)s result\n"
+"\t %(counter)s result\n"
 "\t"
 msgid_plural ""
 "\n"
 "         %(counter)s results\n"
 "        "
-msgstr[0] "\n\t\t%(counter)s rezultate\n\t"
-msgstr[1] "\n         %(counter)s rezultate\n        "
-msgstr[2] "\n         %(counter)s rezultate\n        "
+msgstr[0] ""
+"\n"
+"\t %(counter)s rezultate\n"
+"\t"
+msgstr[1] ""
+"\n"
+"         %(counter)s rezultate\n"
+"        "
+msgstr[2] ""
+"\n"
+"         %(counter)s rezultate\n"
+"        "
 
-#: smartmin/templates/smartmin/list.html:85
 #, python-format
 msgid ""
 "\n"
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
-msgstr "\n⇥Rezultate %(start)s-%(end)s a %(count)s\n⇥"
+msgstr ""
+"\n"
+"\t\n"
+"Rezultate %(start)s-%(end)s of %(count)s\t"
 
-#: smartmin/templates/smartmin/list.html:95
-#: smartmin/templates/smartmin/list.html:97
 msgid "Previous"
 msgstr "Anterior"
 
-#: smartmin/templates/smartmin/list.html:128
-#: smartmin/templates/smartmin/list.html:130
-#: templates/jobs/jobsource_create.haml:30
 msgid "Next"
 msgstr "Următor"
 
-#: smartmin/templates/smartmin/read.html:13
 msgid "edit"
 msgstr "editează"
 
-#: smartmin/templates/smartmin/users/login.html:10
-#: templates/smartmin/users/login.haml:14
 msgid "Sign in"
 msgstr "Conectează-te"
 
-#: smartmin/templates/smartmin/users/login.html:33 templates/frame.haml:429
-#: templates/frame.haml:606 templates/smartmin/users/login.haml:49
 msgid "Login"
 msgstr "Loghează-te"
 
-#: smartmin/templates/smartmin/users/login.html:35
-#: templates/smartmin/users/login.haml:54
 msgid "Forgot Password?"
 msgstr "Ai uitat parola?"
 
-#: smartmin/templates/smartmin/users/user_expired.html:7
 msgid "Token Expired"
 msgstr "Token expirat"
 
-#: smartmin/templates/smartmin/users/user_failed.html:9
 msgid "Login Failure"
 msgstr "Logare eșuată"
 
-#: smartmin/templates/smartmin/users/user_failed.html:11
 #, python-format
 msgid ""
 "\n"
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
-msgstr "\nNe pare rău, nu vă puteți conecta în acest moment, deoarece am primit %(failed_login_limit)s Încercări greșite de conectare."
+msgstr ""
+"\n"
+"Ne pare rău, nu vă puteți autentifica în acest moment, deoarece am primit 1 %(failed_login_limit)s încercări de conectare nereușite."
 
-#: smartmin/templates/smartmin/users/user_failed.html:18
 #, python-format
 msgid ""
 "\n"
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
-msgstr "\nTe rog așteaptă %(lockout_timeout)s minute înainte ca să încercați să vă autentificați din nou."
+msgstr ""
+"\n"
+"Vă rugăm să așteptați 1 %(lockout_timeout)s minute înainte să încercați să vă autentificați din nou."
 
-#: smartmin/templates/smartmin/users/user_failed.html:25
-msgid ""
-"Alternatively, you can fill out the form below to have your password reset "
-"via e-mail."
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
 msgstr "În caz contrar, poți completa formularul de mai jos pentru a-ți reseta parola prin e-mail."
 
-#: smartmin/templates/smartmin/users/user_failed.html:27
 msgid "Please contact the website administrator to have your password reset."
 msgstr "Te rugăm să contactezi administratorul site-ului pentru a-ți reseta parola."
 
-#: smartmin/templates/smartmin/users/user_failed.html:39
 msgid "Email Address"
 msgstr "E-mail"
 
-#: smartmin/templates/smartmin/users/user_failed.html:41
 msgid "Recover"
 msgstr "Restabilire"
 
-#: smartmin/templates/smartmin/users/user_forget.html:6
-msgid ""
-"Please enter the email address you used to sign up and we will help you "
-"recover your password."
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
 msgstr "Te rugăm să introduci adresa de e-mail, pe care ai utilizat-o la conectare, iar noi te vom ajuta să îți restabilești parola."
 
-#: smartmin/templates/smartmin/users/user_newpassword.html:7
 #, python-format
 msgid ""
 "\n"
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
-msgstr "\n<strong>Parola a expirat</strong> Politica site-ului afirmă că trebuie să alegeți o parolă nouă la fiecare %(expire_days)s zile, și că parolele nu trebuie să fi fost folosite anterior %(window_days)s zile."
+msgstr ""
+"\n"
+"1 Pai parola dvs. a expirat. 1 Politica site-ului prevede că trebuie să alegeți o nouă parolă la fiecare 1 %(expire_days)s zile, și că parolele nu trebuie să fi fost utilizate în precedentele 1 %(window_days)s zile."
 
-#: smartmin/users/views.py:28 smartmin/users/views.py:69
-#: smartmin/users/views.py:87 smartmin/users/views.py:137
-#: smartmin/users/views.py:243 smartmin/users/views.py:271
 msgid "New Password"
 msgstr "Parola nouă"
 
-#: smartmin/users/views.py:37 smartmin/users/views.py:75
-#: smartmin/users/views.py:110 smartmin/users/views.py:161
-msgid ""
-"Passwords must have at least 8 characters, including one uppercase, one "
-"lowercase and one number"
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
 msgstr "Parolele trebuie să conțină cel puțin 8 caractere, inclusiv o majusculă, o minusculă și un număr"
 
-#: smartmin/users/views.py:79 smartmin/users/views.py:114
-#: smartmin/users/views.py:165
-msgid ""
-"You have used this password before in the past year, please use a new "
-"password."
+msgid "You have used this password before in the past year, please use a new password."
 msgstr "Ai folosit această parolă pe parcursul ultimului an, alege o parolă nouă."
 
-#: smartmin/users/views.py:86 smartmin/users/views.py:220
-#: smartmin/users/views.py:270
 msgid "Password"
 msgstr "Parolă"
 
-#: smartmin/users/views.py:88
 msgid "Confirm Password"
 msgstr "Confirmare parolă"
 
-#: smartmin/users/views.py:94
 msgid "Please enter your password to save changes."
 msgstr "Introdu parola pentru a salva modificările."
 
-#: smartmin/users/views.py:103
 msgid "Confirm the new password by filling the this field"
 msgstr "Confirmă parola nouă prin completarea acestui câmp"
 
-#: smartmin/users/views.py:106
 msgid "New password doesn't match with its confirmation"
 msgstr "Parola nouă nu se potrivește cu cea confirmată"
 
-#: smartmin/users/views.py:121
 msgid "Your Email"
 msgstr "E-mail"
 
-#: smartmin/users/views.py:128
-msgid ""
-"E-mail recovery is not supported, please contact the website administrator "
-"to reset your password manually."
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
 msgstr "E-mailul pentru recuperarea parolei nu este confirmat, contactează administratorul site-ului pentru a-ți reseta parola manual."
 
-#: smartmin/users/views.py:135
 msgid "Current Password"
 msgstr "Parola curentă"
 
-#: smartmin/users/views.py:136
 msgid "Your current password"
 msgstr "Parola ta curentă"
 
-#: smartmin/users/views.py:138
 msgid "Your new password."
 msgstr "Parola ta nouă"
 
-#: smartmin/users/views.py:139
 msgid "Confirm new Password"
 msgstr "Confirmare parolă nouă"
 
-#: smartmin/users/views.py:140
 msgid "Confirm your new password."
 msgstr "Confirmaţi parola nouă."
 
-#: smartmin/users/views.py:145
 msgid "Please enter your password to save changes"
 msgstr "Introdu parola pentru a salva modificările"
 
-#: smartmin/users/views.py:154
 msgid "Confirm your new password by entering it here"
 msgstr "Confirmă parola noua introducând-o aici"
 
-#: smartmin/users/views.py:157
 msgid "Mismatch between your new password and confirmation, try again"
 msgstr "Parola nouă și cea confirmată nu corespund, încearcă din nou"
 
-#: smartmin/users/views.py:215
 msgid "New user created successfully."
 msgstr "Contul nou a fost creat cu succes."
 
-#: smartmin/users/views.py:218 smartmin/users/views.py:241
 msgid "Groups"
 msgstr "Grupuri"
 
-#: smartmin/users/views.py:219
-msgid ""
-"Users will only get those permissions that are allowed for their group."
+msgid "Users will only get those permissions that are allowed for their group."
 msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
 
-#: smartmin/users/views.py:220
 msgid "Set the user's initial password here."
 msgstr "Introdu aici parola inițială a utilizatorului."
 
-#: smartmin/users/views.py:239
 msgid "Last Login"
 msgstr "Ultima logare"
 
-#: smartmin/users/views.py:240
 msgid "Is Active"
 msgstr "Este activ"
 
-#: smartmin/users/views.py:240
 msgid "Whether this user is allowed to log into the site"
 msgstr "Dacă acestui utilizator îi este permis să se logheze pe site"
 
-#: smartmin/users/views.py:242
 msgid "Users will only get those permissions that are allowed for their group"
 msgstr "Utilizatorii vor primi doar permisiunile care sunt admise pentru grupul lor."
 
-#: smartmin/users/views.py:244
 msgid "You can reset the user's password by entering a new password here"
 msgstr "Poți reseta parola utilizatorului prin introducerea unei noi parole aici"
 
-#: smartmin/users/views.py:269
 msgid "Username"
 msgstr "Nume utilizator"
 
-#: smartmin/users/views.py:270
 msgid "Your password"
 msgstr "Parola"
 
-#: smartmin/users/views.py:271
 msgid "If you want to set a new password, enter it here"
 msgstr "Dacă dorești să setezi o parolă nouă, introdu-o aici"
 
-#: smartmin/users/views.py:272
 msgid "Confirm New Password"
 msgstr "Confirmare parola nouă"
 
-#: smartmin/users/views.py:272
 msgid "Confirm your new password"
 msgstr "Confirmă parola nouă."
 
-#: smartmin/users/views.py:287
 msgid "Edit your profile"
 msgstr "Editează profilul"
 
-#: smartmin/users/views.py:290
 msgid "Password Recovery"
 msgstr "Recuperează parola"
 
-#: smartmin/users/views.py:294
 msgid "An Email has been sent to your account with further instructions."
 msgstr "Un e-mail cu instrucțiuni suplimentare ți-a fost expediat în cont"
 
-#: smartmin/users/views.py:323
 msgid "Password Recovery Request"
 msgstr "Solicitare recuperare parolă"
 
-#: smartmin/users/views.py:332
 msgid "Pick a new password"
 msgstr "Alege o parolă nouă"
 
-#: smartmin/users/views.py:334
 msgid "Your password has successfully been updated, thank you."
 msgstr "Parola a fost actualizată cu succes, îți mulțumim."
 
-#: smartmin/users/views.py:360
 #, python-format
 msgid "You are now logged in as %s"
 msgstr "Acum tu ești conectat ca %s"
 
-#: smartmin/users/views.py:376
-msgid ""
-"Password Updated Successfully. Now you can log in using your new password."
+msgid "Password Updated Successfully. Now you can log in using your new password."
 msgstr "Parola a fost actualizată cu succes. Acum poți să te loghezi cu parola nouă."
 
-#: smartmin/users/views.py:379
 msgid "Reset your Password"
 msgstr "Resetează parola"
 
-#: smartmin/users/views.py:391
-msgid ""
-"Your link has expired for security reasons. Please reinitiate the process by"
-" entering your email here."
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
 msgstr "Link-ul tău a expirat din motive de securitate. Te rugăm să începi din nou prin introducerea e-mailului aici."
 
-#: smartmin/views.py:848
 msgid "Submit"
 msgstr "Trimite"
 
-#: smartmin/views.py:855
 msgid "Form"
 msgstr "Formular"
 
-#: smartmin/views.py:1173
 msgid "Save Changes"
 msgstr "Salvează modificările"
 
-#: smartmin/views.py:1319
 #, python-format
 msgid "Your new %s has been created."
 msgstr "%s tau nou a fost creat."
 
-#: smartmin/views.py:1339
 #, python-format
 msgid "Import %s"
 msgstr "Importă %s"
 
-#: templates/frame.haml:8 templates/public/org_chooser.haml:7
-msgid "U-Report"
-msgstr "U-Report"
+msgid "Back to Website"
+msgstr "Înapoi la website "
 
-#: templates/frame.haml:209
-msgid "Admin"
-msgstr "Admin"
+msgid "Welcome, "
+msgstr "Bine ai venit,"
 
-#: templates/frame.haml:217
-msgid "Configuration"
-msgstr "Configurare"
-
-#: templates/frame.haml:223
-msgid "Orgs"
-msgstr "Organizații"
-
-#: templates/frame.haml:229
-msgid "Users"
-msgstr "Utilizatori"
-
-#: templates/frame.haml:242
-msgid "Images"
-msgstr "Imagini"
-
-#: templates/frame.haml:251 templates/frame.haml:312
-msgid "Content"
-msgstr "Conţinut"
-
-#: templates/frame.haml:260
-msgid "Country Aliases"
-msgstr "Identificatoarele țării"
-
-#: templates/frame.haml:277 templates/frame.haml:475
-msgid "Polls"
-msgstr "Sondaje"
-
-#: templates/frame.haml:300
-msgid "Category Images"
-msgstr "Categorie imagini"
-
-#: templates/frame.haml:320
-msgid "News Items"
-msgstr "Știri"
-
-#: templates/frame.haml:338
-msgid "Job Sources"
-msgstr "Sursele ofertelor de muncă"
-
-#: templates/frame.haml:345
-msgid "Jobs Content"
-msgstr "Conţinutul câmpului „Oferte de muncă”"
-
-#: templates/frame.haml:355
-msgid "About Content"
-msgstr "Conţinutul câmpului „Despre noi”"
-
-#: templates/frame.haml:361
-msgid "Videos"
-msgstr "Video"
-
-#: templates/frame.haml:367
-msgid "Contact Us Content"
-msgstr "Conţinutul câmpului „Contactați-ne”"
-
-#: templates/frame.haml:373
-msgid "Missions Content"
-msgstr "Conţinutul câmpului „Misiune”"
-
-#: templates/frame.haml:379
-msgid "Terms & Conditions"
-msgstr "Termeni și condiții"
-
-#: templates/frame.haml:386
-msgid "U-Reporters Content"
-msgstr "Conţinutul câmpului „U-Reporteri”"
-
-#: templates/frame.haml:393
-msgid "Join &amp; Engage Content"
-msgstr "Conţinutul câmpului „Alătură-te &amp; Implică-te”"
-
-#: templates/frame.haml:399
-msgid "Join Steps Content"
-msgstr "Conţinutul câmpului „Cum să te alături”"
-
-#: templates/frame.haml:406
-msgid "Additional Menu"
-msgstr "Meniu suplimentar"
-
-#: templates/frame.haml:423
 msgid "Logout"
 msgstr "Deconectare"
 
-#: templates/frame.haml:469
-msgid "About"
-msgstr "Despre noi"
+msgid "Opinions"
+msgstr "Opinii"
 
-#: templates/frame.haml:487
-msgid "U-Reporters"
-msgstr "U-Reporteri"
+msgid "Users"
+msgstr "Utilizatori"
 
-#: templates/frame.haml:494 templates/public/jobs.haml:7
+msgid "Settings"
+msgstr "Setări"
+
+msgid "Pages"
+msgstr "Pagini"
+
 msgid "Jobs"
 msgstr "Oferte de muncă"
 
-#: templates/frame.haml:501
-msgid "Join & Engage"
-msgstr "Alătură-te și implică-te"
+msgid "Photos"
+msgstr "Fotografii"
 
-#: templates/frame.haml:567
-msgid "FOLLOW US ON"
-msgstr "URMĂREȘTE-NE PE"
+msgid "Categories Images"
+msgstr "Categoriile imaginilor"
 
-#: templates/jobs/jobsource_create.haml:8
+msgid "News Items"
+msgstr "Știri"
+
+msgid "Orgs"
+msgstr "Organizații"
+
+msgid "Images"
+msgstr "Imagini"
+
+msgid "About"
+msgstr "Despre noi"
+
+msgid "Engagement"
+msgstr "Implicare"
+
+msgid "Category Images"
+msgstr "Categorie imagini"
+
+msgid "+ New "
+msgstr "+ Nou"
+
+msgid "+ New Page"
+msgstr "+ Pagini Noi"
+
+msgid "U-Report"
+msgstr "U-Report"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Configuration"
+msgstr "Configurare"
+
+msgid "Content"
+msgstr "Conţinut"
+
+msgid "Country Aliases"
+msgstr "Identificatoarele țării"
+
+msgid "Job Sources"
+msgstr "Sursele ofertelor de muncă"
+
+msgid "Jobs Content"
+msgstr "Conţinutul câmpului „Oferte de muncă”"
+
+msgid "About Content"
+msgstr "Conţinutul câmpului „Despre noi”"
+
+msgid "Videos"
+msgstr "Video"
+
+msgid "Contact Us Content"
+msgstr "Conţinutul câmpului „Contactați-ne”"
+
+msgid "Missions Content"
+msgstr "Conţinutul câmpului „Misiune”"
+
+msgid "Terms & Conditions"
+msgstr "Termeni și condiții"
+
+msgid "U-Reporters Content"
+msgstr "Conţinutul câmpului „U-Reporteri”"
+
+msgid "Join &amp; Engage Content"
+msgstr "Conţinutul câmpului „Alătură-te &amp; Implică-te”"
+
+msgid "Join Steps Content"
+msgstr "Conţinutul câmpului „Cum să te alături”"
+
+msgid "Additional Menu"
+msgstr "Meniu suplimentar"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "SELECTEAZĂ ȚARA TA"
+
+msgid "Join Now"
+msgstr "Alătură-te Acum"
+
+msgid "READ MORE"
+msgstr "CITEȘTE MAI MULTE"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr "EXPLOREAZĂ POSIBILITĂȚILE IMPLICĂRII"
+
 msgid ""
 "\n"
 "        To add a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
-msgstr "\nPentru a adăuga locul de muncă de pe Twitter este necesare a obține ID-ul widget-ului din twitter."
+msgstr ""
+"\n"
+"Pentru a adăuga locul de muncă de pe Twitter este necesare a obține ID-ul widget-ului din twitter."
 
-#: templates/jobs/jobsource_create.haml:12
-#: templates/jobs/jobsource_update.haml:12
 msgid "Follow this step by step guide"
 msgstr "Urmează acest ghid pas cu pas"
 
-#: templates/jobs/jobsource_create.haml:15
-#: templates/jobs/jobsource_update.haml:15
 msgid ""
 "\n"
 "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
 "      "
-msgstr "\n<Div> După ce creați widget-ul, copiați id-ul widget-ului din url, așa cum este prezentat în </ div> "
+msgstr ""
+"\n"
+"<Div> După ce creați widget-ul, copiați id-ul widget-ului din url, așa cum este prezentat în </ div> "
 
-#: templates/jobs/jobsource_create.haml:40
 msgid "Back"
 msgstr "Înapoi"
 
-#: templates/jobs/jobsource_update.haml:8
-msgid ""
-"\n"
-"        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
-"      "
-msgstr "\nRețineți, pentru a indica locul de muncă de pe Twitter, este necesar a obține un ID al widget-ului din twitter."
+msgid "LATEST NOTIFICATIONS"
+msgstr "ULTIMELE NOTIFICĂRI"
 
-#: templates/public/about.haml:16 templates/public/about.haml:68
-msgid "ABOUT U-REPORT"
-msgstr "DESPRE U-REPORT"
+msgid "Backends"
+msgstr "Backends"
 
-#: templates/public/about.haml:22 templates/public/ureporters.haml:23
-msgid "Scroll to Learn more"
-msgstr "Află detalii mai jos"
+msgid "+ New Poll"
+msgstr "+ Sondaj Nou"
 
-#: templates/public/about.haml:80
-msgid "The mission of U-Report"
-msgstr "Misiunea U-Report"
+msgid "Refresh Results"
+msgstr "Actualizare Rezultate"
 
-#: templates/public/about.haml:119
-msgid "Why Join U-Report?"
-msgstr "De ce să te alături U-Report?"
-
-#: templates/public/about.haml:124
-msgid "Speak out on what's happening in your community"
-msgstr "Spune ce se întâmplă în comunitatea ta"
-
-#: templates/public/about.haml:127
-msgid ""
-"Use U-Report results and information to update and increase citizen's "
-"awareness"
-msgstr "Utilizează rezultatele și informaţiile U-Report pentru a actualiza și a crește gradul de conştientizare a cetăţenilor"
-
-#: templates/public/about.haml:130
-msgid "Participate in nationwide campaigns to help improve your country"
-msgstr "Participă la campanii naţionale pentru a ajuta la îmbunătăţirea situaţiei în țară"
-
-#: templates/public/about.haml:133
-#, python-format
-msgid "Share what's happening around %(country)s with other U-Reporters"
-msgstr "Împărtășeste ce se întâmplă în %(country)s cu alți U-Reporteri"
-
-#: templates/public/about.haml:139
-msgid "CLICK HERE TO JOIN"
-msgstr "CLICK AICI PENTRU A TE ALĂTURA"
-
-#: templates/public/about.haml:153
-msgid "U-REPORT VIDEOS"
-msgstr "VIDEOURI U-REPORT"
-
-#: templates/public/about.haml:160
-msgid "No videos yet."
-msgstr "La moment nu există videouri."
-
-#: templates/public/about.haml:178
-msgid "WATCH IT ON YOUTUBE"
-msgstr "URMĂREȘTE PE YOUTUBE"
-
-#: templates/public/all_polls.haml:5
 msgid "MORE POLLS"
 msgstr "MAI MULTE SONDAJE"
 
-#: templates/public/all_polls.haml:12
-#: templates/public/archived_stories.haml:12
 msgid "FILTER"
 msgstr "FILTRARE"
 
-#: templates/public/all_polls.haml:19
-#: templates/public/archived_stories.haml:19 templates/public/stories.haml:72
-#: templates/public/strings_values.haml:5
 msgid "All"
 msgstr "Toate"
 
-#: templates/public/all_polls.haml:33
 msgid "POLL LIST"
 msgstr "LISTA SONDAJELOR"
 
-#: templates/public/all_polls.haml:35
 msgid "All polls from most recent to oldest"
 msgstr "Toate sondajele, de la cele mai recente la cele mai vechi"
 
-#: templates/public/archived_stories.haml:5
 msgid "ARCHIVED STORIES"
 msgstr "ARTICOLE ARHIVATE"
 
-#: templates/public/archived_stories.haml:33
 msgid "LIST"
 msgstr "LISTĂ"
 
-#: templates/public/index.haml:21
-msgid "Follow"
-msgstr "Urmărește"
+msgid "LATEST OPINION"
+msgstr "ULTIMELE OPINII"
 
-#: templates/public/index.haml:29
-msgid ""
-"\n"
-"                  U-Report is a social messaging tool allowing anyone from any community, anywhere in the world to respond to polls, report issues, support child rights and work as positive agents of change on behalf of people in their country.\n"
-"                "
-msgstr "\nU-Report este un instrument de mesagerie socială care permite oricărei comunități, oriunde în lume, să răspundă la sondaje, să raporteze probleme, să susțină drepturile copilului și să lucreze ca agenți pozitivi ai schimbării în numele oamenilor din țara lor."
+msgid "VIEW FULL RESULTS"
+msgstr "VEZI REZULTATELE DETALIATE"
 
-#: templates/public/index.haml:36 templates/public/index.haml:74
-msgid "CURRENT POLL"
-msgstr "SONDAJ CURENT"
-
-#: templates/public/index.haml:42
-msgid "View Full Results"
-msgstr "Vezi rezultatele complete"
-
-#: templates/public/index.haml:52
-msgid "All U-Report members"
-msgstr "Toți membrii U-Report"
-
-#: templates/public/index.haml:97
-msgid "RESPONSE RATE"
-msgstr "RATA DE RĂSPUNS"
-
-#: templates/public/index.haml:103
-msgid "Responded out of"
-msgstr "Au răspuns din"
-
-#: templates/public/index.haml:111
-msgid "RESPONDER'S RATE BY LOCATION"
-msgstr "RATA RESPONDENȚILOR DUPĂ REGIUNE"
-
-#: templates/public/index.haml:117
-msgid "Most responded"
-msgstr "Majoritatea au răspuns"
-
-#: templates/public/index.haml:149
-#, python-format
-msgid ""
-"\n"
-"                                  %(responded)s of %(total)s\n"
-"                                  "
-msgstr "\n%(responded)s de %(total)s"
-
-#: templates/public/index.haml:164
-msgid "TRENDING WORDS"
-msgstr "CUVINTE CHEIE"
-
-#: templates/public/index.haml:174
-msgid "FEATURED RESPONSES"
-msgstr "RĂSPUNSURI RECOMANDATE"
-
-#: templates/public/index.haml:197 templates/public/index.haml:557
-msgid "View full results"
-msgstr "Vezi toate rezultatele"
-
-#: templates/public/index.haml:217 templates/public/ureporters.haml:16
 msgid "U-REPORTERS IN"
 msgstr "U-REPORTERI ÎN"
 
-#: templates/public/index.haml:225
-msgid "TOTAL # OF U-REPORTERS"
-msgstr "TOTAL # DIN U-REPORTERI"
+msgid "PARTNERING WITH"
+msgstr "PARTENERIAT CU "
 
-#: templates/public/index.haml:237
-msgid "4 MOST ACTIVE REGIONS"
-msgstr "4 CELE MAI ACTIVE REGIUNI"
+msgid "U-REPORTERS"
+msgstr "U-REPORTERS"
 
-#: templates/public/index.haml:248 templates/public/index.haml:269
-msgid "RATE BY GENDER"
-msgstr "RATA DUPĂ SEX"
+msgid "IN"
+msgstr "ÎN"
 
-#: templates/public/index.haml:257 templates/public/index.haml:310
-msgid "RATE BY AGE"
-msgstr "RATA DUPĂ VÂRSTĂ"
+msgid "COUNTRIES WORLDWIDE"
+msgstr "ȚĂRILE DIN LUME"
 
-#: templates/public/index.haml:322
-msgid "WHAT U-REPORTERS ARE SAYING"
-msgstr "CE SPUN U-REPORTERII"
+msgid "AGES"
+msgstr "ANI"
 
-#: templates/public/index.haml:331
-msgid "FEATURED VIDEO"
-msgstr "VIDEOURI RECOMANDATE"
+msgid "Join U-Report, Your voice matters."
+msgstr "Alăturați-vă U-report, Vocea Ta Contează."
 
-#: templates/public/index.haml:337
-msgid "Watch more videos"
-msgstr "Vezi mai multe videouri"
+msgid "JOIN NOW"
+msgstr "ALĂTURĂ-TE ACUM"
 
-#: templates/public/index.haml:348
-msgid "FEATURED REGION"
-msgstr "REGIUNE RECOMANDATĂ"
-
-#: templates/public/index.haml:372
-msgid "Check more stories in U-Report app"
-msgstr "Vezi mai multe articole în aplicaţia U-Report"
-
-#: templates/public/index.haml:391 templates/public/join_engage.haml:99
-msgid "View more stories on Facebook"
-msgstr "Vezi mai multe articole pe Facebook"
-
-#: templates/public/index.haml:410
-msgid "View more on Instagram"
-msgstr "Vezi mai multe pe Instagram"
-
-#: templates/public/index.haml:430
-msgid "Read more tweets on Twitter"
-msgstr "Citește mai multe tweet-uri pe Twitter"
-
-#: templates/public/index.haml:441
-msgid "NEWS FEED"
-msgstr "FLUX DE ȘTIRI"
-
-#: templates/public/index.haml:456 templates/public/index.haml:489
-#: templates/public/index.haml:571
-msgid "STORY"
-msgstr "ARTICOL"
-
-#: templates/public/index.haml:477 templates/public/index.haml:511
-#: templates/public/index.haml:596 templates/public/stories.haml:39
-#: templates/public/stories.haml:123
-msgid "Read full story"
-msgstr "Citește tot articolul"
-
-#: templates/public/index.haml:534
-msgid "Response Rate"
-msgstr "Rata de răspuns"
-
-#: templates/public/index.haml:737
-msgid "Read this story"
-msgstr "Citește acest articol"
-
-#: templates/public/jobs.haml:22
-msgid "JOBS"
-msgstr "OFERTE DE MUNCĂ"
-
-#: templates/public/jobs.haml:28
-msgid "Scroll to see job details"
-msgstr "Află detalii mai jos "
-
-#: templates/public/jobs.haml:78 templates/public/join_engage.haml:119
-msgid "Tweet to"
-msgstr "Distribuie"
-
-#: templates/public/jobs.haml:99 templates/public/polls.haml:379
-msgid "Read more"
-msgstr "Citește mai multe"
-
-#: templates/public/jobs.haml:108
-msgid "Visit"
-msgstr "Vizitează"
-
-#: templates/public/join_engage.haml:17
-msgid "JOIN U-REPORT"
-msgstr "ALĂTURĂ-TE U-REPORT"
-
-#: templates/public/join_engage.haml:44
-msgid "HOW TO JOIN"
-msgstr "CUM SĂ TE ALĂTURI"
-
-#: templates/public/join_engage.haml:73
-#, python-format
-msgid ""
-"\n"
-"              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
-"\n"
-"            "
-msgstr "\n* U-Report este un program gratuit sponsorizat de UNICEF cu ajutorul furnizorilor de rețea în %(country)s. U-Report nu va solicita niciun fel de plăți și nici informații financiare personale, VĂ RUGĂM să nu luați în considerare mesajele care vă solicită plata fie pe acest număr, fie pe paginile Facebook și Twitter. Toate serviciile U-Report (toate mesajele pe %(shortcode)s) sunt gratuite"
-
-#: templates/public/join_engage.haml:84
-msgid "U-REPORT ON SOCIAL MEDIA"
-msgstr "U-REPORT PE REȚELELE DE SOCIALIZARE"
-
-#: templates/public/join_engage.haml:140
-msgid "Compose new Tweet"
-msgstr "Compune un nou tweet"
-
-#: templates/public/polls.haml:16
-msgid "CURRENT POLL IN"
-msgstr "SONDAJ CURENT"
-
-#: templates/public/polls.haml:29
-#, python-format
-msgid ""
-"\n"
-"                  %(questions)s question polled on this topic\n"
-"                "
-msgid_plural ""
-"\n"
-"                  %(questions)s questions polled on this topic\n"
-"                "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#: templates/public/polls.haml:43
-msgid "response rate"
-msgstr "rata de răspuns"
-
-#: templates/public/polls.haml:49
-msgid "responded out of"
-msgstr "au răspuns din"
-
-#: templates/public/polls.haml:53
-msgid "polled"
-msgstr "intervievați"
-
-#: templates/public/polls.haml:96
-msgid "POLL RESULTS"
-msgstr "REZULTATELE SONDAJULUI"
-
-#: templates/public/polls.haml:112
-#, python-format
-msgid ""
-"\n"
-"                    %(responded)s responded out of %(polled)s polled\n"
-"                  "
-msgstr "\n%(responded)s au răspuns din %(polled)s chestionați"
-
-#: templates/public/polls.haml:121
-msgid "KEYWORDS"
-msgstr "CUVINTE-CHEIE"
-
-#: templates/public/polls.haml:126
-msgid "STATISTICS"
-msgstr "STATISTICI"
-
-#: templates/public/polls.haml:131
-msgid "LOCATIONS"
-msgstr "REGIUNI"
-
-#: templates/public/polls.haml:137 templates/public/ureporters.haml:83
-msgid "GENDER"
-msgstr "SEX"
-
-#: templates/public/polls.haml:143 templates/public/ureporters.haml:63
-msgid "AGE"
-msgstr "VÂRSTĂ"
-
-#: templates/public/polls.haml:313
-msgid "FEATURED ANSWERS"
-msgstr "RĂSPUNSURI RECOMANDATE"
-
-#: templates/public/polls.haml:320
-msgid "No featured answers."
-msgstr "Niciun răspuns recomandat."
-
-#: templates/public/polls.haml:339
-msgid "U-Reporter in"
-msgstr "U-Reporter în"
-
-#: templates/public/polls.haml:351 templates/public/story_read.haml:129
-msgid "RELATED STORIES"
-msgstr "ARTICOLE ASOCIATE"
-
-#: templates/public/polls.haml:356 templates/public/story_read.haml:134
-msgid "No related stories."
-msgstr "Niciun articol asociat."
-
-#: templates/public/polls.haml:391 templates/public/story_read.haml:102
-msgid "FEATURED IMAGES"
-msgstr "IMAGINI RECOMANDATE"
-
-#: templates/public/polls.haml:397
-msgid "No featured images yet."
-msgstr "La moment lipsesc imagini recomandate."
-
-#: templates/public/stories.haml:20
 msgid "FEATURED STORY"
 msgstr "ARTICOL RECOMANDAT"
 
-#: templates/public/stories.haml:30 templates/public/story_read.haml:26
-msgid "BY"
-msgstr "DE CĂTRE"
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Suntem o parte a unei platforme globale care lucrează pentru a schimba viața tinerilor din întreaga lume."
 
-#: templates/public/stories.haml:59
-msgid "LATEST STORIES"
-msgstr "ULTIMELE ARTICOLE"
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Aflați mai multe despre modul în care U-Report abilitează și conectează tinerii pentru a vorbi despre problemele care contează pentru ei."
 
-#: templates/public/stories.haml:64
-msgid "FILTERED BY"
-msgstr "FILTREAZĂ DUPĂ"
+msgid "LEARN MORE"
+msgstr "ÎNVAȚĂ MAI MULT"
 
-#: templates/public/story_read.haml:31
-msgid "Scroll to read more"
-msgstr "Află detalii mai jos"
+msgid "Visit"
+msgstr "Vizitează"
 
-#: templates/public/story_read.haml:50
-msgid "STORY CONTINUES"
-msgstr "ISTORIA CONTINUĂ"
+msgid "How would you like to join?"
+msgstr "Cum ai vrea să te înscrii?"
 
-#: templates/public/story_read.haml:68
-msgid "AUDIO"
-msgstr "AUDIO"
+msgid "Text"
+msgstr "Text "
 
-#: templates/public/story_read.haml:81
-msgid "RELATED POLLS"
-msgstr "SONDAJE ASOCIATE"
+msgid "SEARCH"
+msgstr "CAUTĂ"
 
-#: templates/public/story_read.haml:86
-msgid "No related polls."
-msgstr "Niciun sondaj asociat."
+msgid "No results found"
+msgstr "Nici un rezultat găsit"
 
-#: templates/public/story_read.haml:107
-msgid "No featured images."
-msgstr "Nicio imagine recomandată."
+msgid "RESPONSES"
+msgstr "RĂSPUNSURI"
 
-#: templates/public/story_read.haml:160
-msgid "READ MORE"
-msgstr "CITEȘTE MAI MULTE"
+msgid "RESPONSE RATE"
+msgstr "RATA DE RĂSPUNS"
 
-#: templates/public/strings_values.haml:6
+msgid "TOTAL RESPONSES"
+msgstr "TOATE RĂSPUNSURILE "
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr " 1 %(responded)s răspondenți din 2 %(polled)s intervievați"
+
+msgid "ALL"
+msgstr "TOȚI"
+
+msgid "AGE"
+msgstr "VÂRSTĂ"
+
+msgid "GENDER"
+msgstr "SEX"
+
+msgid "LOCATION"
+msgstr "LOCAȚIE"
+
+msgid "Written by:"
+msgstr "Scris de către:"
+
 msgid "Even"
 msgstr "Pe aceeași temă"
 
-#: templates/public/strings_values.haml:7
-#: templates/public/strings_values.haml:10
 msgid "State"
 msgstr "Statul"
 
-#: templates/public/strings_values.haml:8
 msgid "Other"
 msgstr "Altele"
 
-#: templates/public/strings_values.haml:9
-msgid "National"
-msgstr "Național"
-
-#: templates/public/strings_values.haml:11
 msgid "District"
 msgstr "Regional"
 
-#: templates/public/strings_values.haml:12
 msgid "Participation Level"
 msgstr "Nivelul de participare"
 
-#: templates/public/strings_values.haml:13
 msgid "Responses"
 msgstr "Răspunsuri"
 
-#: templates/public/strings_values.haml:14
 msgid "Reporters in"
 msgstr "Reporteri în"
 
-#: templates/public/strings_values.haml:15
 msgid "Results"
 msgstr "Rezultate"
 
-#: templates/public/strings_values.haml:16
 msgid "*Other answers include"
 msgstr "*Alte răspunsuri includ"
 
-#: templates/public/strings_values.haml:17
 msgid "Population"
 msgstr "Populație"
 
-#: templates/public/strings_values.haml:18
 msgid "Registered in"
 msgstr "Înregistrat în"
 
-#: templates/public/strings_values.haml:19
 msgid "Density"
 msgstr "Densitate"
 
-#: templates/public/strings_values.haml:20
 msgid "total"
 msgstr "total"
 
-#: templates/public/strings_values.haml:21
 msgid "of"
 msgstr "din"
 
-#: templates/public/strings_values.haml:22
 msgid "the"
-msgstr " "
+msgstr "cele"
 
-#: templates/public/ureporters.haml:44
-msgid "WHO WE ARE"
-msgstr "CINE SUNTEM"
+msgid "OVERALL STATISTICS"
+msgstr "STATISTICI GENERALE"
 
-#: templates/public/ureporters.haml:55
-msgid "U-REPORTER STATISTICS"
-msgstr "STATISTICI U-REPORTERI"
+msgid "THIS YEAR"
+msgstr "ACEST AN"
 
-#: templates/public/ureporters.haml:134
-msgid "WHERE ARE U-REPORTERS FROM?"
-msgstr "DE UNDE VIN U-REPORTERII?"
+msgid "AVG RESPONSE RATE"
+msgstr "RATA DE RĂSPUNS AVG"
 
-#: templates/public/ureporters.haml:154
-msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
-msgstr "RATA DE ÎNREGISTRARE: ÎN ULTIMELE 6 LUNI"
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERS DUPĂ REGIUNE"
 
-#: templates/public/ureporters.haml:174
-msgid "OCCUPATION: TOP 9 MOST MENTIONED"
-msgstr "OCUPAȚIA: TOP 9 CELE MAI DES MENŢIONATE"
+msgid "FILTER RESULTS"
+msgstr "FILTRU DE REZULTATE"
 
-#: templates/public/ureporters.haml:377
-msgid "Registered"
-msgstr "Înregistrați"
+msgid "Export and Share"
+msgstr "Exportă și Partajează"
 
-#: templates/public/ureporters.haml:392
-msgid "Week of"
-msgstr "Săptămâna din"
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "Vrei să spui lumii despre asta? Descărcați această imagine pentru a partaja cu ușurință pe rețelile sociale sau pentru o prezentare frumoasă!"
 
-#: ureport/admins/views.py:22
+msgid "SELECT COUNTRY"
+msgstr "SELECTEAZĂ ȚARA"
+
+msgid "Custom pages"
+msgstr "Pagini personalizate"
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "Vedeți după numere cum interacționăm cu propunerile tinerilor pentru schimbări sociale pozitive."
+
+msgid "Polled"
+msgstr "Intervievați"
+
+msgid "Reporters"
+msgstr "Raportori"
+
+msgid "Top Region"
+msgstr "Regiunea Top"
+
+msgid "January"
+msgstr "Ianuarie "
+
+msgid "February"
+msgstr "Februarie"
+
+msgid "March"
+msgstr "Martie"
+
+msgid "April"
+msgstr "Aprilie"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "June"
+msgstr "Iunie"
+
+msgid "July"
+msgstr "Iulie"
+
+msgid "August"
+msgstr "August"
+
+msgid "September"
+msgstr "Septembrie"
+
+msgid "October"
+msgstr "Octombrie"
+
+msgid "November"
+msgstr "Noiembrie"
+
+msgid "December"
+msgstr "Decembrie"
+
+msgid "Jan"
+msgstr "Ian"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Apr"
+
+msgid "Jun"
+msgstr "Iun"
+
+msgid "Jul"
+msgstr "Iul"
+
+msgid "Aug"
+msgstr "Aug"
+
+msgid "Sep"
+msgstr "Sep"
+
+msgid "Oct"
+msgstr "Oct"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Dec"
+msgstr "Dec"
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"Ești sigur că vrei să elimini 1 %(object)s1?"
+
+#, python-format
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+"\n"
+"             %(counter)s rezultate\n"
+"           "
+msgstr[1] ""
+"\n"
+"              %(counter)s rezultate\n"
+"            "
+msgstr[2] ""
+"\n"
+"              %(counter)s rezultate\n"
+"            "
+
+#, python-format
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+"\n"
+"Results 1 %(start)s-%(end)s din %(count)s"
+
+msgid "Error"
+msgstr "Eroare"
+
+msgid "Enter Dashboard"
+msgstr "Introduce Dashboard "
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"Ne pare rău, nu vă puteți autentifica în acest moment, deoarece am primit 1 %(failed_login_limit)s încercări de conectare incorecte."
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"Vă rugăm să așteptați 1 %(lockout_timeout)s minute înainte să încercați să vă autentificați din nou."
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"1 Parola dvs. a expirat. 1 Politica site-ului prevede că trebuie să alegeți o nouă parolă la fiecare 1 %(expire_days)s days, și că parolele nu trebuie să fi fost utilizate în precedentele 2 %(window_days)s days."
+
+msgid "+ New Story"
+msgstr "+ Istorie Nouă"
+
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Actualizat %s pentru această organizație"
 
-#: ureport/assets/models.py:13
 msgid "Flag"
 msgstr "Steag"
 
-#: ureport/assets/models.py:17
 msgid "The organization to which the image will be used"
 msgstr "Organizația pentru care imaginea va fi utilizată"
 
-#: ureport/assets/models.py:20
 msgid "A short descriptive name for this image"
 msgstr "O scurtă denumire descriptivă pentru această imagine"
 
-#: ureport/assets/models.py:22
 msgid "Image type"
 msgstr "Tipul imaginii"
 
-#: ureport/contacts/models.py:46
 msgid "Label"
 msgstr "Etichetă"
 
-#: ureport/contacts/models.py:48
 msgid "Key"
 msgstr "Cheie"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:870
 msgid "Male"
 msgstr "Masculin"
 
-#: ureport/contacts/models.py:86 ureport/polls/models.py:870
 msgid "Female"
 msgstr "Feminin"
 
-#: ureport/contacts/models.py:92 ureport/locations/models.py:24
 msgid "Organization"
 msgstr "Organizație"
 
-#: ureport/contacts/models.py:94
 msgid "Gender"
 msgstr "Sex"
 
-#: ureport/contacts/models.py:95
 msgid "Gender of the contact"
 msgstr "Sexul persoanei"
 
-#: ureport/contacts/models.py:97
 msgid "Born Field"
 msgstr "Câmpul „Data nașterii”"
 
-#: ureport/contacts/models.py:99
 msgid "Occupation Field"
 msgstr "Câmpul „Ocupație”"
 
-#: ureport/contacts/models.py:101
 msgid "Registration Date"
 msgstr "Data înregistrării"
 
-#: ureport/contacts/models.py:103
 msgid "State Field"
 msgstr "Câmpul „Stat”"
 
-#: ureport/contacts/models.py:105
 msgid "District Field"
 msgstr "Câmpul „Regiune”"
 
-#: ureport/contacts/models.py:107
 msgid "Ward Field"
 msgstr "Câmpul „Raion”"
 
-#: ureport/contacts/models.py:240 ureport/polls/models.py:1102
 msgid "Number of items with this counter"
 msgstr "Numărul de elemente cu acest contor"
 
-#: ureport/countries/management/commands/add_country_alias.py:55
 msgid "No root user found. Please create a root user"
 msgstr "Nu a fost găsit niciun utilizator administrator. Creează un nou utilizator administrator"
 
-#: ureport/countries/models.py:11
 msgid "The name for our alias"
 msgstr "Numele pentru alias-ul nostru"
 
-#: ureport/jobs/models.py:22
 msgid "The title or name to reference this Job source."
 msgstr "Titlul sau denumirea pentru a face referire la această sursă de oferte de muncă."
 
-#: ureport/jobs/models.py:24
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
 msgstr "Alege tipul pentru sursa ofertei de muncă. Twitter, Facebook sau feed-urile RSS"
 
-#: ureport/jobs/models.py:25
 msgid "The full URL to navigate to this Job source."
 msgstr "URL-ul complet pentru a naviga la această sursă de oferte de muncă."
 
-#: ureport/jobs/models.py:27
-msgid ""
-"For Twitter, a widget Id is required to embed tweets on the website. Read "
-"carefully the instructions above on how to get the right widget Id"
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
 msgstr "Pentru Twitter, un widget ID este necesar pentru a include tweet-uri pe site-ul web. Citeşte cu atenție instrucţiunile de mai sus despre cum să obţii widget ID-ul potrivit"
 
-#: ureport/jobs/models.py:30
 msgid "Featured job sources are shown first on the jobs page."
 msgstr "Sursele ofertelor de muncă sunt afișate primele pe pagina cu oferte de muncă."
 
-#: ureport/jobs/models.py:32
 msgid "The organization this job source is for"
 msgstr "Organizația la care se referă această sursă de oferte de muncă"
 
-#: ureport/jobs/views.py:13
 msgid "Your job source has been added successfully"
 msgstr "Sursa ta de oferte de muncă a fost adăugată cu succes"
 
-#: ureport/jobs/views.py:39
 msgid "Your job source has been updated successfully"
 msgstr "Sursa ta de oferte de muncă a fost actualizată cu succes"
 
-#: ureport/locations/models.py:29
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Acesta este ID-ul OSM pentru această frontieră administrativă"
 
-#: ureport/locations/models.py:32
 msgid "The name of our administrative boundary"
 msgstr "Denumirea frontierei noastre administrative"
 
-#: ureport/locations/models.py:34
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
 msgstr "Nivelul frontierei, 0 pentru țară, 1 pentru stat, 2 pentru raion"
 
-#: ureport/locations/models.py:37
 msgid "The parent to this political boundary if any"
 msgstr "Părintele către această frontieră politică, dacă există"
 
-#: ureport/locations/models.py:39
 msgid "Geometry"
 msgstr "Geometrie"
 
-#: ureport/locations/models.py:40
-msgid ""
-"The json representing the geometry type and coordinates of the boundaries"
+msgid "The json representing the geometry type and coordinates of the boundaries"
 msgstr "JSON care reprezintă tipul de geometrie și coordonatele frontierelor"
 
-#: ureport/news/models.py:11
 msgid "The title for this item"
 msgstr "Titlul pentru acest element"
 
-#: ureport/news/models.py:14
 msgid "A short summary description for this item"
 msgstr "O descriere pe scurt pentru acest element"
 
-#: ureport/news/models.py:17
 msgid "A link that should be associated with this item"
 msgstr "Un link care trebuie să fie asociat cu acest element"
 
-#: ureport/news/models.py:20 ureport/news/models.py:45
 msgid "The category this item belongs to"
 msgstr "Categoria la care aparține acest element"
 
-#: ureport/news/models.py:23
 msgid "The organization this item belongs to"
 msgstr "Organizația la care aparține acest element"
 
-#: ureport/news/models.py:36
 msgid "The title for this Video"
 msgstr "Titlul pentru acest video"
 
-#: ureport/news/models.py:39
 msgid "A short summary description for this video"
 msgstr "O descriere pe scurt pentru acest video"
 
-#: ureport/news/models.py:48
 msgid "The organization this video belongs to"
 msgstr "Organizația la care aparține acest video"
 
-#: ureport/polls/models.py:63
 msgid "The name of this poll category"
 msgstr "Denumirea acestei categorii de sondaje"
 
-#: ureport/polls/models.py:72
 msgid "Poll Categories"
 msgstr "Categorii de sondaje"
 
-#: ureport/polls/models.py:103
 msgid "The Flow this Poll is based on"
 msgstr "Fluxul care stă la baza acestui sondaj"
 
-#: ureport/polls/models.py:105
-msgid ""
-"The date to display for this poll. Leave empty to use flow creation date."
+msgid "The date to display for this poll. Leave empty to use flow creation date."
 msgstr "Data care să fie afişată pentru acest sondaj. A se lăsa gol pentru a utiliza data creării fluxului."
 
-#: ureport/polls/models.py:109
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr "Dacă fluxul pentru acest sondaj este arhivat pe RapidPro"
 
-#: ureport/polls/models.py:111
 msgid "The base language of the flow to use"
 msgstr "Limba de bază pe care trebuie să o utilizeze fluxul"
 
-#: ureport/polls/models.py:114
 msgid "The number of polled reporters on this poll"
 msgstr "Numărul de reporteri intervievați în acest sondaj"
 
-#: ureport/polls/models.py:117
 msgid "Whether the poll has finished the initial results sync."
 msgstr "Dacă în urma sondajului a fost finalizată sincronizarea rezultatelor inițiale."
 
-#: ureport/polls/models.py:120
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Dacă sondajul ar trebui să înceteze regenerarea statisticilor."
+
 msgid "The title for this Poll"
 msgstr "Titlul pentru acest sondaj"
 
-#: ureport/polls/models.py:122
 msgid "The category this Poll belongs to"
 msgstr "Categoria la care aparține acest sondaj"
 
-#: ureport/polls/models.py:124
 msgid "Whether this poll should be featured on the homepage"
 msgstr "Dacă acest sondaj ar trebui să fie afișat pe pagina principală"
 
-#: ureport/polls/models.py:126
 msgid "The splash category image to display for the poll (optional)"
 msgstr "Categoria culorii pe care o va avea imaginea afișată pentru sondaj (opțional)"
 
-#: ureport/polls/models.py:128
 msgid "The organization this poll is part of"
 msgstr "Organizația la care face parte acest sondaj"
 
-#: ureport/polls/models.py:642
+msgid "The title for this response story"
+msgstr "Titlul acestei povești de răspuns"
+
+msgid "The writer of the response story"
+msgstr "Scriitorul istorioarei de răspuns"
+
 msgid "The poll to associate to"
 msgstr "Sondajul cu care trebuie asociat"
 
-#: ureport/polls/models.py:656
 msgid "The poll for this response"
 msgstr "Sondajul la care aparţine acest răspuns"
 
-#: ureport/polls/models.py:659
 msgid "The location for this response"
 msgstr "Regiunea la care aparţine acest răspuns"
 
-#: ureport/polls/models.py:662
 msgid "The name of the sender of the message"
 msgstr "Numele persoanei care a trimis mesajul"
 
-#: ureport/polls/models.py:665
 msgid "The featured response message"
 msgstr "Mesajul cu răspunsul recomandat"
 
-#: ureport/polls/models.py:681
 msgid "The poll this question is part of"
 msgstr "Sondajul din care face parte această întrebare"
 
-#: ureport/polls/models.py:683
 msgid "The title of this question"
 msgstr "Titlul acestei întrebări"
 
-#: ureport/polls/models.py:684
 msgid "The RuleSet this question is based on"
 msgstr "Setul de reguli pe care se bazează această întrebare"
 
-#: ureport/polls/models.py:689
 msgid "The label of the ruleset on RapidPro"
 msgstr "Eticheta setului de reguli de pe RapidPro"
 
-#: ureport/polls/models.py:692
 msgid "The priority number for this question on the poll"
 msgstr "Numărul priorităţii în sondaj pentru această întrebare"
 
-#: ureport/polls/models.py:965
 msgid "The Rule this response category is based on"
 msgstr "Regula pe care se bazează această categorie de răspuns"
 
-#: ureport/polls/views.py:85
+msgid "Your org does not have any API token configuration."
+msgstr "Organizația dvs. nu are nicio configurație cu simbolul API."
+
 msgid "You must include a title for every included question."
 msgstr "Trebuie să incluzi un titlu pentru fiecare întrebare inclusă."
 
-#: ureport/polls/views.py:88
 msgid "Title too long. The max limit is 255 characters for each title"
 msgstr "Titlu prea lung. Limita maximă pentru fiecare titlu este de 255 de caractere"
 
-#: ureport/polls/views.py:93
 msgid "You must include at least one poll question."
 msgstr "Trebuie să incluzi cel puţin o întrebare în sondaj."
 
-#: ureport/polls/views.py:108
 msgid "Adjust poll date"
 msgstr "Ajustează data sondajului"
 
-#: ureport/polls/views.py:111
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr "Sondajul a fost actualizat, acum alege întrebările care să fie incluse."
 
-#: ureport/polls/views.py:122
-msgid "Your poll has been created, now adjust the poll date."
-msgstr "Sondajul a fost creat, acum ajustează data sondajului."
+msgid "Configure flow"
+msgstr "Configurați fluxul"
 
-#: ureport/polls/views.py:152
+msgid "Your poll has been configured, now adjust the poll date."
+msgstr "Sondajul dvs. a fost configurat, ajustați acum data sondajului."
+
+msgid "Your poll has been created, now configure its flow."
+msgstr "Sondajul dvs. a fost creat, configurați-l acum."
+
 msgid "Poll Images"
 msgstr "Imagini sondaj"
 
-#: ureport/polls/views.py:153
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Acum, introdu orice răspuns care ai dori să fie afișat. (dacă există)"
 
-#: ureport/polls/views.py:165
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "Imaginea care să fie afişată pe pagina unde este plasat sondajul și în previzualizări. (opțional)"
 
-#: ureport/polls/views.py:172
 msgid "Image to display on poll page and in previews (optional)"
 msgstr "Imaginea care să fie afişată pe pagina unde este plasat sondajul și în previzualizări (opțional)"
 
-#: ureport/polls/views.py:196
-msgid "Featured Poll Responses"
-msgstr "Răspunsuri recomandate pentru sondaj"
+msgid "Poll Response"
+msgstr "Răspuns la sondaje"
 
-#: ureport/polls/views.py:197
 msgid "Your poll has been updated."
 msgstr "Sondajul a fost actualizat."
 
-#: ureport/polls/views.py:214
-#, python-format
-msgid "Response %d Reporter"
-msgstr "Răspuns %d Raportor "
-
-#: ureport/polls/views.py:214
-msgid "The name or alias of the responder."
-msgstr "Numele sau altă denumire a respondentului."
-
-#: ureport/polls/views.py:219
-#, python-format
-msgid "Response %d Location"
-msgstr "Răspuns %d Locație"
-
-#: ureport/polls/views.py:219
-msgid "The location of the responder."
-msgstr "Regiunea unde se află respondentul."
-
-#: ureport/polls/views.py:224
-#, python-format
-msgid "Response %d Message"
-msgstr "Răspuns %d Mesaj"
-
-#: ureport/polls/views.py:224
-msgid "The text of the featured response."
-msgstr "Textul pe care să îl aibă răspunsul recomandat."
-
-#: ureport/polls/views.py:250
 msgid "Poll Questions"
 msgstr "Întrebările din sondaj"
 
-#: ureport/polls/views.py:252
 msgid "Now set what images you want displayed on your poll page. (if any)"
 msgstr "Acum setează imaginile care dorești să fie afișate pe pagina cu sondajul tău. (dacă există)"
 
-#: ureport/polls/views.py:281
 msgid "Include"
 msgstr "Include"
 
-#: ureport/polls/views.py:282
 msgid "Whether to include this question in your public results"
 msgstr "Dacă această întrebare trebuie inclusă în rezultatele tale publice"
 
-#: ureport/polls/views.py:286
 msgid "Priority"
 msgstr "Prioritate"
 
-#: ureport/polls/views.py:287
-msgid ""
-"The priority of this question on the poll page, higher priority comes first"
+msgid "The priority of this question on the poll page, higher priority comes first"
 msgstr "Prioritatea acestei întrebări pe pagina de sondaj, prioritatea mai mare se află în partea de sus a paginii"
 
-#: ureport/polls/views.py:291
 msgid "Ruleset Label"
 msgstr "Eticheta setului de reguli"
 
-#: ureport/polls/views.py:292
 msgid "The label of the ruleset from RapidPro"
 msgstr "Eticheta setului de reguli de pe RapidPro"
 
-#: ureport/polls/views.py:296
 msgid "Title"
 msgstr "Titlu"
 
-#: ureport/polls/views.py:297
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Întrebarea pusă persoanelor pe care le-ai intervievat va fi afișată pentru toți"
 
-#: ureport/polls/views.py:417
 #, python-format
-msgid "Scheduled a pull refresh for poll #%d on org #%d"
-msgstr "O actualizare pentru un sondaj programată poll #%d pe org #%d"
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
+msgstr "S-a programat un refresh pentru sondajul # 1 %(poll_id)d pe org # 2 %(org_id)d"
 
-#: ureport/public/views.py:310
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-#: ureport/settings_common.py:132
-msgid "Whether this org should be show on the landing page"
-msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
+msgid "The name of the Contact Group that contains registered reporters"
+msgstr "Numele Grupului de Contact care conține reporteri înregistrați"
 
-#: ureport/settings_common.py:133
-msgid "The shortcode that users will use to contact U-Report locally"
-msgstr "Numărul scurt pe care utilizatorii îl vor folosi pentru a contacta U-Reporterul la nivel local"
-
-#: ureport/settings_common.py:134
-msgid "The short text used to direct visitors to join U-Report"
-msgstr "Textul scurt care va fi utilizat pentru a direcționa vizitatorii să se alăture la U-Report"
-
-#: ureport/settings_common.py:135
-msgid "The color used to draw the text on the join bar"
-msgstr "Culoarea textului de pe bara „Alătură-te”"
-
-#: ureport/settings_common.py:136
-msgid "The color used to draw the background on the join bar"
-msgstr "Culoarea fundalului de pe bara „Alătură-te”"
-
-#: ureport/settings_common.py:137
-msgid "The primary color for styling for this organization"
-msgstr "Culoarea primară de stilizare pentru această organizație"
-
-#: ureport/settings_common.py:138
-msgid "The secondary color for styling for this organization"
-msgstr "Culoarea secundară de stilizare pentru această organizație"
-
-#: ureport/settings_common.py:139
-msgid "The background color for the site"
-msgstr "Culoarea fundalului pentru site"
-
-#: ureport/settings_common.py:140
-msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Până la 6 culori pentru stilizarea diagramelor, a se separa culorile prin virgulă"
-
-#: ureport/settings_common.py:141
-msgid "The Google Analytics Tracking ID for this organization"
-msgstr "ID-ul de urmărire Google Analytics pentru această organizație"
-
-#: ureport/settings_common.py:142
-msgid "The URL to the Youtube channel for this organization"
-msgstr "Adresa URL la canalul YouTube al acestei organizații"
-
-#: ureport/settings_common.py:143
-msgid "The URL to the Facebook page for this organization"
-msgstr "Adresa URL la pagina Facebook a acestei organizații"
-
-#: ureport/settings_common.py:144
-msgid "The integer id to the Facebook page for this organization (optional)"
-msgstr "ID-ul de tip Integer la pagina Facebook a acestei organizații (opțional)"
-
-#: ureport/settings_common.py:145
-msgid ""
-"The integer id to the Facebook app for this organization's chat app "
-"(optional)"
-msgstr "ID-ul de tip Integer spre aplicaţia Facebook pentru aplicațiile chat ale acestei organizații (opțional)"
-
-#: ureport/settings_common.py:146
-msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr "ID-ul pixelului Facebook al acestei organizații (opțional)"
-
-#: ureport/settings_common.py:147
-msgid "The Instagram username for this organization"
-msgstr "Numele de utilizator pe Instagram al acestei organizații"
-
-#: ureport/settings_common.py:148
-msgid "The Instagram widget id from lightwidget.com"
-msgstr "Widget ID-ul pentru Instagram de la lightwidget.com"
-
-#: ureport/settings_common.py:149
-msgid "The Twitter handle for this organization"
-msgstr "Twitter handle pentru această organizație"
-
-#: ureport/settings_common.py:150
-msgid "The Twitter widget used for searching"
-msgstr "Twitter widget-ul folosit pentru căutare"
-
-#: ureport/settings_common.py:151
-msgid "The name of txbhe Contact Group that contains registered reporters"
-msgstr "Denumirea grupului de contacte txbhe care include reporterii înregistrați"
-
-#: ureport/settings_common.py:152
-msgid ""
-"The label of the Contact Field that contains the birth date of reporters"
+msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr "Eticheta câmpului „Contacte” care include data nașterii a reporterilor"
 
-#: ureport/settings_common.py:153
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Eticheta câmpului „Contacte” care include sexul reporterilor"
 
-#: ureport/settings_common.py:154
-msgid ""
-"The label of the Contact Field that contains the occupation of reporters"
+msgid "The label of the Contact Field that contains the occupation of reporters"
 msgstr "Eticheta câmpului „Contacte” care include ocupaţia reporterilor"
 
-#: ureport/settings_common.py:155
-msgid ""
-"The label of the Contact Field that contains the registration date of "
-"reporters"
+msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Eticheta câmpului „Contacte” care include data la care s-au înregistrat reporterii"
 
-#: ureport/settings_common.py:156
 msgid "The label of the Contact Field that contains the State of reporters"
 msgstr "Eticheta câmpului „Contacte” care include țara de unde provin reporterii"
 
-#: ureport/settings_common.py:157
 msgid "The label of the Contact Field that contains the District of reporters"
 msgstr "Eticheta câmpului „Contacte” care include regiunea de unde provin reporterii"
 
-#: ureport/settings_common.py:158
 msgid "The label of the Contact Field that contains the Ward of reporters"
 msgstr "Eticheta câmpului „Contacte” care include raionul de unde provin reporterii"
 
-#: ureport/settings_common.py:159
 msgid "The label assigned to U-Reporters that are Male."
 msgstr "Eticheta atribuită U-Reporterilor de sex masculin."
 
-#: ureport/settings_common.py:160
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "Eticheta atribuită U-Reporterilor de sex feminin."
 
-#: ureport/settings_common.py:161
-msgid "If there are jobs to be shown on the public site"
-msgstr "Dacă există oferte de muncă care să fie afișate pe site-ul public"
+msgid "Whether this org should be show on the landing page"
+msgstr "Dacă această organizație trebuie să fie afișată pe pagina țintă"
 
-#: ureport/settings_common.py:162
-msgid ""
-"If this org if for global data. e.g: It shows a world map instead of a "
-"country map."
+msgid "Whether this org count should consider the count from link only"
+msgstr "Dacă dacă acest număr de org ar trebui să ia în considerare doar numărul de link-uri"
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr "Numărul scurt pe care utilizatorii îl vor folosi pentru a contacta U-Reporterul la nivel local"
+
+msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr "Textul scurt care va fi utilizat pentru a direcționa vizitatorii să se alăture la U-Report"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr "Codul video YouTube pentru a vă alătura secțiunii U-Report"
+
+msgid "The title of the photos section U-Report homepage"
+msgstr "Titlul secțiunii fotografii pe Pagina de pornire U-Report"
+
+msgid "The description of the photos section U-Report homepage"
+msgstr "Descrierea secțiunii fotografii pe Pagina de pornire U-report"
+
+msgid "The description of the opinions page"
+msgstr "Descrierea paginii de opinii"
+
+msgid "The description of the stories page"
+msgstr "Descrierea paginii de istorioare"
+
+msgid "The description of the engagement page"
+msgstr "Descrierea paginii de angajament"
+
+msgid "The callout message on the footer engagement section"
+msgstr "Mesajul de apelare în secțiunea de implicare la subsol"
+
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "Culoarea principală pentru styling pentru această organizație, ar trebui să fie întunecată"
+
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "Culoarea secundară pentru styling pentru această organizație, ar trebui să fie întunecată"
+
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "Culoarea terțiară pentru styling pentru această organizație, ar trebui să fie întunecată"
+
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "Culoarea primordială pentru stilul acestei organizații ar trebui să fie deschisă"
+
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "Culoarea secundară evidențiată pentru stilul acestei organizații, ar trebui să fie deschisă"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "Până la 6 culori pentru stilizarea diagramelor, a se separa culorile prin virgulă"
+
+msgid "The color used to draw the text on the join bar"
+msgstr "Culoarea textului de pe bara „Alătură-te”"
+
+msgid "The color used to draw the background on the join bar"
+msgstr "Culoarea fundalului de pe bara „Alătură-te”"
+
+msgid "The primary color for styling for this organization"
+msgstr "Culoarea primară de stilizare pentru această organizație"
+
+msgid "The secondary color for styling for this organization"
+msgstr "Culoarea secundară de stilizare pentru această organizație"
+
+msgid "The background color for the site"
+msgstr "Culoarea fundalului pentru site"
+
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgstr "11 culori pentru hărți de styling, utilizați virgula între culori, nu sunt folosite dacă nu sunt cel puțin 11 culori"
+
+msgid "The states to show on maps only"
+msgstr "Statele trebuie afișate doar pe hărți"
+
+msgid "The states to show on maps only, used to filter poll results"
+msgstr "Statele vor fi afișate doar pe hărți, folosite pentru a filtra rezultatele sondajului"
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr "ID-ul de urmărire Google Analytics pentru această organizație"
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr "Adresa URL la canalul YouTube al acestei organizații"
+
+msgid "The URL to the Facebook page for this organization"
+msgstr "Adresa URL la pagina Facebook a acestei organizații"
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr "ID-ul de tip Integer la pagina Facebook a acestei organizații (opțional)"
+
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
+msgstr "ID-ul de tip Integer spre aplicaţia Facebook pentru aplicațiile chat ale acestei organizații (opțional)"
+
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr "Textul scurt folosit pentru a saluta utilizatorii de pe Facebook Messenger Plugin"
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr "ID-ul pixelului Facebook al acestei organizații (opțional)"
+
+msgid "The Instagram username for this organization"
+msgstr "Numele de utilizator pe Instagram al acestei organizații"
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr "Widget ID-ul pentru Instagram de la lightwidget.com"
+
+msgid "The Twitter handle for this organization"
+msgstr "Twitter handle pentru această organizație"
+
+msgid "The Twitter widget used for searching"
+msgstr "Twitter widget-ul folosit pentru căutare"
+
+msgid "The words to filter out from the results on public site"
+msgstr "Cuvintele pentru a filtra rezultatele de pe site-ul public"
+
+msgid "If there are jobs to be shown on the public site."
+msgstr "Cuvintele pentru a filtra rezultatele de pe site-ul public"
+
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr "Dacă această organizație este destinată pentru date globale, de ex.: Aceasta afișează o hartă globală în locul unei hărți a unei țări."
 
-#: ureport/settings_common.py:163
-msgid ""
-"The alpha-3 ISO code of the organization so that it appears the stories "
-"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
-"Global)."
+msgid "Whether to activate an extra gender."
+msgstr "În caz dacă activați un gen suplimentar."
+
+msgid "Whether to activate the new design."
+msgstr "În caz dacă activați noul design."
+
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr "Codul ISO alpha-3 pentru organizaţie care va apărea în widget-ul de istorii U-Report App. De exemplu: BRA, NIG, CMR (a se utiliza GLOBAL dacă U-Reporterul este Global)."
 
-#: ureport/settings_common.py:164
-msgid ""
-"If you need to include some custom HTML codes in you org pages, like custom "
-"analytics code snippets"
+msgid "The font used for headline texts"
+msgstr "Fontul folosit pentru textele din titlu"
+
+msgid "The font used for normal text"
+msgstr "Fontul folosit pentru textul normal"
+
+msgid "Hide participation stats"
+msgstr "Ascundeți statisticile de participare"
+
+msgid "The text to describe the sponsors of free messages"
+msgstr "Textul pentru a descrie sponsorii mesajelor gratuite"
+
+msgid "The font used for small text"
+msgstr "Fontul folosit pentru textul mic"
+
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Dacă ai nevoie să incluzi unele coduri HTML personalizate în paginile organizaţiei tale, cum ar fi fragmente de cod personalizat de analiză"
 
-#: ureport/translation.py:14
+msgid "90 Days"
+msgstr "90 zile"
+
+msgid "6 Months"
+msgstr "6 Luni "
+
+msgid "12 Months"
+msgstr "12 Luni"
+
+msgid "Age"
+msgstr "Vârsta"
+
+msgid "Location"
+msgstr "Locația"
+
+msgid "Opinion Responses"
+msgstr "Răspunsuri de opinie"
+
+msgid "Sign Up Rate"
+msgstr "Rata de Înregistrare"
+
+msgid "Response Rate"
+msgstr "Rata de răspuns"
+
+msgid "Active Users"
+msgstr "Utilizatori Activi"
+
+#, fuzzy
+#| msgid "Whether this story is featured"
+msgid "Whether this row was created by squashing"
+msgstr "Dacă acest articol este recomandat"
+
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
+
+#~ msgid "Polls"
+#~ msgstr "Sondaje"
+
+#~ msgid "U-Reporters"
+#~ msgstr "U-Reporteri"
+
+#~ msgid "Join & Engage"
+#~ msgstr "Alătură-te și implică-te"
+
+#~ msgid "FOLLOW US ON"
+#~ msgstr "URMĂREȘTE-NE PE"
+
+#~ msgid ""
+#~ "\n"
+#~ "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
+#~ "      "
+#~ msgstr ""
+#~ "\n"
+#~ "Rețineți, pentru a indica locul de muncă de pe Twitter, este necesar a obține un ID al widget-ului din twitter."
+
+#~ msgid "ABOUT U-REPORT"
+#~ msgstr "DESPRE U-REPORT"
+
+#~ msgid "Scroll to Learn more"
+#~ msgstr "Află detalii mai jos"
+
+#~ msgid "The mission of U-Report"
+#~ msgstr "Misiunea U-Report"
+
+#~ msgid "Why Join U-Report?"
+#~ msgstr "De ce să te alături U-Report?"
+
+#~ msgid "Speak out on what's happening in your community"
+#~ msgstr "Spune ce se întâmplă în comunitatea ta"
+
+#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
+#~ msgstr "Utilizează rezultatele și informaţiile U-Report pentru a actualiza și a crește gradul de conştientizare a cetăţenilor"
+
+#~ msgid "Participate in nationwide campaigns to help improve your country"
+#~ msgstr "Participă la campanii naţionale pentru a ajuta la îmbunătăţirea situaţiei în țară"
+
+#, python-format
+#~ msgid "Share what's happening around %(country)s with other U-Reporters"
+#~ msgstr "Împărtășeste ce se întâmplă în %(country)s cu alți U-Reporteri"
+
+#~ msgid "CLICK HERE TO JOIN"
+#~ msgstr "CLICK AICI PENTRU A TE ALĂTURA"
+
+#~ msgid "U-REPORT VIDEOS"
+#~ msgstr "VIDEOURI U-REPORT"
+
+#~ msgid "No videos yet."
+#~ msgstr "La moment nu există videouri."
+
+#~ msgid "WATCH IT ON YOUTUBE"
+#~ msgstr "URMĂREȘTE PE YOUTUBE"
+
+#~ msgid "Follow"
+#~ msgstr "Urmărește"
+
+#~ msgid ""
+#~ "\n"
+#~ "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "U-Report este un instrument de mesagerie socială, gratuit pentru toată lumea, oriunde v-ați afla în lume, pentru a vorbi despre problemele de dezvoltare, pentru a sprijini drepturile copilului și pentru a îmbunătăți comunitățile noastre"
+
+#~ msgid "CURRENT POLL"
+#~ msgstr "SONDAJ CURENT"
+
+#~ msgid "View Full Results"
+#~ msgstr "Vezi rezultatele complete"
+
+#~ msgid "All U-Report members"
+#~ msgstr "Toți membrii U-Report"
+
+#~ msgid "Responded out of"
+#~ msgstr "Au răspuns din"
+
+#~ msgid "RESPONDER'S RATE BY LOCATION"
+#~ msgstr "RATA RESPONDENȚILOR DUPĂ REGIUNE"
+
+#~ msgid "Most responded"
+#~ msgstr "Majoritatea au răspuns"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                                  %(responded)s of %(total)s\n"
+#~ "                                  "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)s de %(total)s"
+
+#~ msgid "TRENDING WORDS"
+#~ msgstr "CUVINTE CHEIE"
+
+#~ msgid "FEATURED RESPONSES"
+#~ msgstr "RĂSPUNSURI RECOMANDATE"
+
+#~ msgid "View full results"
+#~ msgstr "Vezi toate rezultatele"
+
+#~ msgid "TOTAL # OF U-REPORTERS"
+#~ msgstr "TOTAL # DIN U-REPORTERI"
+
+#~ msgid "4 MOST ACTIVE REGIONS"
+#~ msgstr "4 CELE MAI ACTIVE REGIUNI"
+
+#~ msgid "RATE BY GENDER"
+#~ msgstr "RATA DUPĂ SEX"
+
+#~ msgid "RATE BY AGE"
+#~ msgstr "RATA DUPĂ VÂRSTĂ"
+
+#~ msgid "WHAT U-REPORTERS ARE SAYING"
+#~ msgstr "CE SPUN U-REPORTERII"
+
+#~ msgid "FEATURED VIDEO"
+#~ msgstr "VIDEOURI RECOMANDATE"
+
+#~ msgid "Watch more videos"
+#~ msgstr "Vezi mai multe videouri"
+
+#~ msgid "FEATURED REGION"
+#~ msgstr "REGIUNE RECOMANDATĂ"
+
+#~ msgid "Check more stories in U-Report app"
+#~ msgstr "Vezi mai multe articole în aplicaţia U-Report"
+
+#~ msgid "View more stories on Facebook"
+#~ msgstr "Vezi mai multe articole pe Facebook"
+
+#~ msgid "View more on Instagram"
+#~ msgstr "Vezi mai multe pe Instagram"
+
+#~ msgid "Read more tweets on Twitter"
+#~ msgstr "Citește mai multe tweet-uri pe Twitter"
+
+#~ msgid "NEWS FEED"
+#~ msgstr "FLUX DE ȘTIRI"
+
+#~ msgid "STORY"
+#~ msgstr "ARTICOL"
+
+#~ msgid "Read full story"
+#~ msgstr "Citește tot articolul"
+
+#~ msgid "Read this story"
+#~ msgstr "Citește acest articol"
+
+#~ msgid "JOBS"
+#~ msgstr "OFERTE DE MUNCĂ"
+
+#~ msgid "Scroll to see job details"
+#~ msgstr "Află detalii mai jos "
+
+#~ msgid "Tweet to"
+#~ msgstr "Distribuie"
+
+#~ msgid "Read more"
+#~ msgstr "Citește mai multe"
+
+#~ msgid "JOIN U-REPORT"
+#~ msgstr "ALĂTURĂ-TE U-REPORT"
+
+#~ msgid "HOW TO JOIN"
+#~ msgstr "CUM SĂ TE ALĂTURI"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
+#~ "\n"
+#~ "              "
+#~ msgstr ""
+#~ "\n"
+#~ "* U-Report este un program gratuit sponsorizat de UNICEF cu ajutorul furnizorilor de rețea din %(country)s. U-Report nu va solicita nicio plată și nici informații financiare personale, Vă rugăm să ignorați orice mesaj care vă solicită plata fie pe acest număr, fie pe paginile de Facebook și Twitter. Toate serviciile U-Report %(shortcode)s sunt gratuite."
+
+#~ msgid "U-REPORT ON SOCIAL MEDIA"
+#~ msgstr "U-REPORT PE REȚELELE DE SOCIALIZARE"
+
+#~ msgid "Compose new Tweet"
+#~ msgstr "Compune un nou tweet"
+
+#~ msgid "CURRENT POLL IN"
+#~ msgstr "SONDAJ CURENT"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                  %(questions)s question polled on this topic\n"
+#~ "                "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                  %(questions)s questions polled on this topic\n"
+#~ "                "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                  %(questions)s ca și întrebarea chestionată pe acest subiect\n"
+#~ "                "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "                  %(questions)s ca și întrebarea chestionată pe acest subiect\n"
+#~ "                "
+#~ msgstr[2] ""
+#~ "\n"
+#~ "                  %(questions)s ca și întrebarea chestionată pe acest subiect\n"
+#~ "                "
+
+#~ msgid "response rate"
+#~ msgstr "rata de răspuns"
+
+#~ msgid "responded out of"
+#~ msgstr "au răspuns din"
+
+#~ msgid "polled"
+#~ msgstr "intervievați"
+
+#~ msgid "POLL RESULTS"
+#~ msgstr "REZULTATELE SONDAJULUI"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    %(responded)s responded out of %(polled)s polled\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "%(responded)s au răspuns din %(polled)s chestionați"
+
+#~ msgid "KEYWORDS"
+#~ msgstr "CUVINTE-CHEIE"
+
+#~ msgid "STATISTICS"
+#~ msgstr "STATISTICI"
+
+#~ msgid "LOCATIONS"
+#~ msgstr "REGIUNI"
+
+#~ msgid "FEATURED ANSWERS"
+#~ msgstr "RĂSPUNSURI RECOMANDATE"
+
+#~ msgid "No featured answers."
+#~ msgstr "Niciun răspuns recomandat."
+
+#~ msgid "U-Reporter in"
+#~ msgstr "U-Reporter în"
+
+#~ msgid "RELATED STORIES"
+#~ msgstr "ARTICOLE ASOCIATE"
+
+#~ msgid "No related stories."
+#~ msgstr "Niciun articol asociat."
+
+#~ msgid "FEATURED IMAGES"
+#~ msgstr "IMAGINI RECOMANDATE"
+
+#~ msgid "No featured images yet."
+#~ msgstr "La moment lipsesc imagini recomandate."
+
+#~ msgid "BY"
+#~ msgstr "DE CĂTRE"
+
+#~ msgid "LATEST STORIES"
+#~ msgstr "ULTIMELE ARTICOLE"
+
+#~ msgid "FILTERED BY"
+#~ msgstr "FILTREAZĂ DUPĂ"
+
+#~ msgid "Scroll to read more"
+#~ msgstr "Află detalii mai jos"
+
+#~ msgid "STORY CONTINUES"
+#~ msgstr "ISTORIA CONTINUĂ"
+
+#~ msgid "AUDIO"
+#~ msgstr "AUDIO"
+
+#~ msgid "RELATED POLLS"
+#~ msgstr "SONDAJE ASOCIATE"
+
+#~ msgid "No related polls."
+#~ msgstr "Niciun sondaj asociat."
+
+#~ msgid "No featured images."
+#~ msgstr "Nicio imagine recomandată."
+
+#~ msgid "WHO WE ARE"
+#~ msgstr "CINE SUNTEM"
+
+#~ msgid "U-REPORTER STATISTICS"
+#~ msgstr "STATISTICI U-REPORTERI"
+
+#~ msgid "WHERE ARE U-REPORTERS FROM?"
+#~ msgstr "DE UNDE VIN U-REPORTERII?"
+
+#~ msgid "REGISTRATION RATE: IN THE PAST 6 MONTHS"
+#~ msgstr "RATA DE ÎNREGISTRARE: ÎN ULTIMELE 6 LUNI"
+
+#~ msgid "OCCUPATION: TOP 9 MOST MENTIONED"
+#~ msgstr "OCUPAȚIA: TOP 9 CELE MAI DES MENŢIONATE"
+
+#~ msgid "Registered"
+#~ msgstr "Înregistrați"
+
+#~ msgid "Week of"
+#~ msgstr "Săptămâna din"

@@ -1,0 +1,265 @@
+- extends "frame.html"
+
+- load smartmin i18n thumbnail ureport compress
+
+-block styles
+  %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
+  - if is_rtl_org
+    - compress css
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma-rtl0.7.1.css")
+      %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+  -else
+    -compress css
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma.css")
+      %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/Chart.min.css")
+      %link(type="text/less" rel="stylesheet" href="{{ STATIC_URL }}less/styles.less")
+  :css
+    table.list-table {
+      font-size: 0.85rem;
+    }
+
+    .row1 a, .row2 a {
+      display: block;
+      padding-left: 5px;
+
+      {% if org|config:'dark1_color' %}
+      color: {{ org|config:'dark1_color' }};
+      border-left: 5px solid {{ org|config:'dark1_color' }};
+      {% else %}
+      color: {{ org|config:'primary_color'|default:'#439932' }};
+      border-left: 5px solid {{ org|config:'primary_color'|default:'#439932' }};
+      {% endif %}
+    }
+
+    .row1 a:hover, .row2 a:hover {
+      background-color: #E6E7E8;
+      {% if org|config:'dark1_color' %}
+      color: {{ org|config:'dark1_color' }};
+      {% else %}
+      color: {{ org|config:'primary_color'|default:'#439932' }};
+      {% endif %}
+    }
+
+    .row1.inactive a, .row2.inactive a, {
+      border-left: 5px solid #bbb;
+      padding-left: 5px;
+    }
+
+    .row1.inactive a, .row2.inactive a, .row1.inactive td, .row2.inactive td {
+      color: #ccc;
+    }
+
+    .row1.inactive a:hover, .row2.inactive a:hover {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: normal;
+
+    }
+
+-block body-content
+  %section.section.is-paddingless.is-marginless
+    .
+      .level.is-marginless.has-background-black(style="height:15px")
+
+    -block navbar
+      .top-nav-container(style="padding: 20px 80px 20px 80px;")
+        .level
+          .level-left
+            %a.level-item.has-text-black(href="/")
+              .icon
+                %i.fas.fa-arrow-circle-left
+              - trans "Back to Website"
+      .admin-header.border-b.border-gray-600
+        .level
+          .level-left
+            .level-item.square-logo
+              .(style="width:360px")
+                {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+                {% endthumbnail %}
+
+          .level-right
+            - block login
+              - if request.user and request.user.is_authenticated
+                .level-item.logged-in-account.has-text-right
+                  - trans "Welcome, "
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                  %br
+                  {{ request.user.username }}
+                %a.level-item.button.is-outlined.logout-button(href="{% url 'users.user_logout' %}?go=/")
+                  - trans "Logout"
+              - else
+                %a.level-item.button.is-outlined(href="{% url 'users.user_login' %}")
+                    - trans "Login"
+
+  %section.section.is-paddingless.is-marginless
+    .content-section-container(style="padding: 0 0px 0 60px; ")
+      -block content-section
+            .columns.is-marginless
+              .column.is-one-fifth.block#left-menu
+                -block menu
+                  %aside.menu
+                    %ul.menu-list
+                      %li
+                        %a(href="{% url 'polls.poll_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/polls_icon.png")
+                          %span.menu-link-title
+                            - trans "Opinions"
+                      %li
+                        %a(href="{% url 'stories.story_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/stories_icon.png")
+                          %span.menu-link-title
+                            - trans "Stories"
+                      %li
+                        %a(href="{% url 'orgs.org_manage_accounts' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/users_icon.png")
+                          %span.menu-link-title
+                            - trans "Users"
+                      %li
+                        %a(href="{% url 'orgs.org_edit' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                          %span.menu-link-title
+                            - trans "Settings"
+                      %li
+                        %a(href="{% url 'dashblocks.dashblock_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/pages_icon.png")
+                          %span.menu-link-title
+                            - trans "Pages"
+                      %li
+                        %a(href="{% url 'jobs.jobsource_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/jobs_icon.png")
+                          %span.menu-link-title
+                            - trans "Jobs"
+                      %li
+                        %a(href="{% url 'categories.category_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/categories_icon.png")
+                          %span.menu-link-title
+                            - trans "Categories"
+                      
+                      %li
+                        %a(href="{% url 'dashblocks.dashblock_list' %}?slug=photos")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/photos_icon.png")
+                          %span.menu-link-title
+                            - trans "Photos"
+
+                      - if request.user.is_superuser
+                        %li
+                          %a(href="{% url 'categories.categoryimage_list' %}")
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/photos_icon.png")
+                            %span.menu-link-title
+                              - trans "Categories Images"
+                      
+                      - if request.user.is_superuser
+                        %li
+                          %a(href="{% url 'news.newsitem_list' %}")
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/news_icon.png")
+                            %span.menu-link-title
+                              - trans "News Items"
+                      - if request.user.is_superuser
+                        %li
+                          %a{href:"{% url 'orgs.org_list' %}"}
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Orgs"
+
+                        %li
+                          %a{ href:"/users/user/"}
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Users"
+
+                        %li
+                          %a{ href:"{% url 'dashblocks.dashblocktype_list' %}"}
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Content Types"
+
+                        %li
+                          %a{ href:"{% url 'assets.image_list' %}"}
+                            %span.icon
+                              %img(src="{{ STATIC_URL }}img/settings_icon.png")
+                            %span.menu-link-title
+                              - trans "Images"
+
+              .column.is-four-fifths.is-offset-one.block(class="bg-white")
+                -block content-div
+                  .content-div(style="padding: 3rem 70px 3rem 40px;")
+                    - block messages
+                      - if messages
+                        - for message in messages
+                          .notification(class="is-{{ message.tags }}")
+                            {{ message }}
+
+                    - block pre-content
+
+                    - block content
+   
+  %section.section.is-paddingless.is-marginless
+    %footer.footer.is-paddingless
+      -block footer
+        // footer navbar
+        .justify-around.pt-12.mb-3.px-home.border-t.border-gray-600(class="md:flex")
+          %a.flex-1.text-center.mb-2.hidden(href="{% url 'public.index' %}" class="md:block")
+            .(style="width:360px")
+              {% thumbnail org.get_logo "x180" format="PNG" as im %}
+              %img.block.logo(src="{{ im.url }}" alt="{{ org.name }}")
+              {% endthumbnail %}
+
+          %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'public.index' %}" class="md:hidden")
+            {% thumbnail org.get_logo "x40" format="PNG" as im %}
+            %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+            {% endthumbnail %}
+
+          .flex-1.flex(class="md:justify-end")
+            .font-bold.text-2xl.flex-center-y(class="md:ml-6")
+              %div
+                %a.pb-2.border-b-2.border-black(href="{% url 'public.opinions' %}" class="hover:text-gray-750")
+                  -trans "Opinions"
+
+            .font-bold.text-2xl.ml-6.flex-center-y
+              %div
+                %a.pb-2.border-b-2.border-black(href="{% url 'public.stories' %}" class="hover:text-gray-750")
+                  -trans "Stories"
+
+        // footer menu
+        %ul.mt-5.mb-12.px-home.text-sm.font-bold(class="md:flex")
+          .li.flex-initial.py-menu(class="rtl:ml-4 ltr:mr-4")
+            %a.flex-initial.py-menu(href="{% url 'public.about' %}" class="hover:text-gray-750")
+              -trans "About"
+
+            %a.flex-initial.py-menu(href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750")
+              -trans "Engagement"
+
+          .li.flex-grow.flex(class="md:justify-end")
+            - if org|config:"instagram_username"
+              %a.flex-initial.py-menu(href='https://www.instagram.com/{{ org|config:"instagram_username" }}/' class="hover:text-gray-750")
+                %i.fab.fa-instagram
+            
+            - if org|config:"facebook_page_url"
+              %a.flex-initial.py-menu(href='{{ org|config:"facebook_page_url" }}' class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+                %i.fab.fa-facebook-f
+
+            - if org|config:"twitter_handle"
+              %a.flex-initial.py-menu(href='https://twitter.com/{{ org|config:"twitter_handle" }}' class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+               %i.fab.fa-twitter
+
+          - if request.user and request.user.is_authenticated
+            %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+              - trans "Logout"
+          -else
+            %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+              - trans "Login"

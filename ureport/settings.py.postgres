@@ -20,6 +20,11 @@ SITE_API_HOST = 'rapidpro.io'
 SITE_API_HOST = 'https://api.rapidpro.io'
 HOSTNAME = 'ureport.io' if TESTING else 'ureport.io:8000'
 
+LOGGING['loggers']['celery.worker'] = {
+    'level': 'DEBUG',
+    'handlers': ['console'],
+    'propagate': False,
+}
 
 # we store files on S3 on prod boxes
 # AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID_UREPORT', 'MISSING_AWS_ACCESS_KEY_ID')
@@ -55,3 +60,25 @@ DATABASES = {
         }
     }
 }
+
+REDIS_HOST = 'localhost'
+
+REDIS_HOST = REDIS_HOST
+REDIS_PORT = 6379
+REDIS_DB = '1'
+
+BROKER_URL = 'redis://%s:%s/%s' % (REDIS_HOST, REDIS_PORT, REDIS_DB)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': BROKER_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+CELERY_RESULT_BACKEND = BROKER_URL
+
+

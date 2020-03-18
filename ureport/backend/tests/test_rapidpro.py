@@ -27,7 +27,7 @@ from django.utils import timezone
 from ureport.backend.rapidpro import BoundarySyncer, ContactSyncer, FieldSyncer, RapidProBackend
 from ureport.contacts.models import Contact, ContactField
 from ureport.locations.models import Boundary
-from ureport.polls.models import Poll, PollQuestion, PollResult
+from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.tests import MockResponse, UreportTest
 from ureport.utils import datetime_to_json_date, json_date_to_datetime
 
@@ -1096,7 +1096,7 @@ class RapidProBackendTest(UreportTest):
             ]
         )
 
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(7):
             num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 1))
@@ -1559,6 +1559,23 @@ class RapidProBackendTest(UreportTest):
         poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
         self.assertEqual(poll_result.text, "")
 
+        poll.stopped_syncing = True
+        poll.save()
+
+        (
+            num_val_created,
+            num_val_updated,
+            num_val_ignored,
+            num_path_created,
+            num_path_updated,
+            num_path_ignored,
+        ) = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual(
+            (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
+            (0, 0, 0, 0, 0, 0),
+        )
+
     @patch("redis.client.StrictRedis.lock")
     @patch("dash.orgs.models.TembaClient.get_archives")
     @patch("django.utils.timezone.now")
@@ -1734,6 +1751,23 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(3, PollResult.objects.all().count())
         self.assertEqual(1, Contact.objects.all().count())
 
+        poll.stopped_syncing = True
+        poll.save()
+
+        (
+            num_val_created,
+            num_val_updated,
+            num_val_ignored,
+            num_path_created,
+            num_path_updated,
+            num_path_ignored,
+        ) = self.backend.pull_results_from_archives(poll)
+
+        self.assertEqual(
+            (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
+            (0, 0, 0, 0, 0, 0),
+        )
+
     @patch("dash.orgs.models.TembaClient.get_runs")
     @patch("django.utils.timezone.now")
     @patch("django.core.cache.cache.get")
@@ -1790,6 +1824,44 @@ class RapidProBackendTest(UreportTest):
 
         poll_result = PollResult.objects.filter(flow="flow-uuid-3", ruleset="ruleset-uuid", contact="C-021").first()
         self.assertEqual(poll_result.ward, "R-IKEJA")
+
+    @patch("ureport.polls.models.Poll.get_flow")
+    def test_update_poll_questions(self, mock_poll_flow):
+        mock_poll_flow.return_value = dict(
+            results=[
+                dict(
+                    key="color",
+                    name="Color",
+                    categories=["Orange", "Blue", "Other", "Nothing"],
+                    node_uuids=["uuid-101"],
+                )
+            ]
+        )
+
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.education_nigeria, self.admin, has_synced=True)
+
+        self.backend.update_poll_questions(self.nigeria, poll1, self.admin)
+
+        self.assertEqual(PollQuestion.objects.filter(poll=poll1).count(), 1)
+        question = PollQuestion.objects.filter(poll=poll1).first()
+        self.assertEqual(PollResponseCategory.objects.filter(question=question).count(), 4)
+        self.assertEqual(PollResponseCategory.objects.filter(question=question, is_active=True).count(), 4)
+        mock_poll_flow.return_value = dict(
+            results=[
+                dict(
+                    key="color",
+                    name="Color",
+                    categories=["Orange", "Green", "Other", "Nothing"],
+                    node_uuids=["uuid-101"],
+                )
+            ]
+        )
+        self.backend.update_poll_questions(self.nigeria, poll1, self.admin)
+
+        self.assertEqual(PollQuestion.objects.filter(poll=poll1).count(), 1)
+        question = PollQuestion.objects.filter(poll=poll1).first()
+        self.assertEqual(PollResponseCategory.objects.filter(question=question).count(), 5)
+        self.assertEqual(PollResponseCategory.objects.filter(question=question, is_active=True).count(), 4)
 
 
 class PerfTest(UreportTest):

@@ -1,8 +1,9 @@
+dist: bionic
 language: python
 sudo: true
 
 python:
-  - '3.6.4'
+  - '3.6.8'
 
 services:
   - redis-server
@@ -16,22 +17,41 @@ cache:
     - $HOME/.cache/pip
 
 before_install:
+  # add PPA for PG 9.6 on bionic
+  - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  - sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
+
+  # install the chosen PG version
+  - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install postgresql-$PGDB postgresql-client-$PGDB postgresql-$PGDB-postgis-2.4 postgresql-$PGDB-postgis-2.4-scripts
+  - sudo -E sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
+  - sudo -E sed -i 's/port = 5433/port = 5432/' /etc/postgresql/*/main/postgresql.conf
+
+  # give PG some time to finish setup
+  - sleep 10
+
+  # stop any running postgres versions
   - sudo -E service postgresql stop 9.2
   - sudo -E service postgresql stop 9.3
   - sudo -E service postgresql stop 9.4
   - sudo -E service postgresql stop 9.5
   - sudo -E service postgresql stop 9.6
-  - sudo -E apt-get -yq --no-install-suggests --no-install-recommends $(travis_apt_get_options) install postgresql-$PGDB postgresql-client-$PGDB postgresql-$PGDB-postgis-2.4 postgresql-$PGDB-postgis-2.4-scripts
-  - sudo -E sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
-  - sudo -E sed -i 's/port = 5433/port = 5432/' /etc/postgresql/*/main/postgresql.conf
-  - sudo -E service postgresql restart $PGDB
+  - sudo -E service postgresql stop 10
+  - sudo -E service postgresql stop 11
+  - sudo -E ps axuwww | grep -i postg
+
+  # possibly a Travis bug but data directory sometimes not initialized
+  - if [ ! -d /var/ramfs/postgresql/$PGDB/main ]; then sudo -u postgres /usr/lib/postgresql/$PGDB/bin/initdb -D /var/ramfs/postgresql/$PGDB/main; fi
+
+  # start the chosen PG version
+  - sudo -E systemctl -l restart postgresql@$PGDB-main
+  - sudo -E systemctl -l status postgresql@$PGDB-main
 
 install:
   - pip install --upgrade pip
   - pip install -r pip-freeze.txt --upgrade
   - pip install coveralls
   - pip install flake8
-  - npm install -g less
+  - npm install -g less@3.10.3
   - npm install -g coffee-script
 
 before_script:
@@ -42,6 +62,27 @@ before_script:
 
 script:
   - flake8
+
+  # need to symlink smartmin and dash so we can localize them
+  - pip show smartmin | awk '/Location:/ { print $2 "/smartmin" }' | xargs ln -s
+  - pip show rapidpro-dash | awk '/Location:/ { print $2 "/dash" }' | xargs ln -s
+  
+  # compile messages
+  - cd ureport && python ../manage.py compilemessages && cd ..
+
+  # fail if there are changes
+  - git diff --numstat
+  - git diff --numstat | awk '$3 ~ /locale.*mo$/ { print "compilemessages needs to be rerun, see .travis.yml for command"; exit 1 }'
+
+  # generate our locale messages
+  - gettext --version
+  - python manage.py makemessages -a -s -e haml,html,txt,py --ignore="env/*" --no-location --no-wrap | awk '/warning/ { print; fail = 1 } END { if (fail) { print "makemessages for django contains warnings"; exit 1 }}'
+  - python manage.py makemessages -d djangojs -a -s --ignore="env/*" --ignore="static/js/prettify.js" --ignore="static/bower/*" --ignore="node_modules/*" --no-location --no-wrap | awk '/warning/ { print; fail = 1 } END { if (fail) { print "makemessages for djangojs contains warnings"; exit 1 }}'
+
+  # fail if there are changes
+  - git diff
+  - git diff -U0 --summary --color=never | awk '/^+"/ && $0 !~ /POT-Creation-Date/ && $0 !~ /fuzzy/ { print $0, "\n\nMake messages needs to be rerun, see travis.yml or command"; exit 1; }'
+  
   - coverage run --source="." manage.py test ureport ureport/admins ureport/assets ureport/contacts ureport/countries ureport/jobs ureport/locations ureport/news ureport/polls ureport/public ureport/utils --verbosity=2 --noinput
 
 after_success:

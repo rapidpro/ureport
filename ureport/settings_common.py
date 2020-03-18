@@ -44,8 +44,8 @@ EMPTY_SUBDOMAIN_HOST = "http://localhost:8000"
 SITE_API_HOST = "http://localhost:8001"
 SITE_API_USER_AGENT = "ureport/0.1"
 HOSTNAME = "localhost:8000"
-SITE_CHOOSER_TEMPLATE = "public/org_chooser.haml"
-SITE_CHOOSER_URL_NAME = "public.home"
+SITE_CHOOSER_TEMPLATE = "public/index.haml"
+SITE_CHOOSER_URL_NAME = "public.index"
 
 
 SITE_BACKEND = "ureport.backend.rapidpro.RapidProBackend"
@@ -67,6 +67,7 @@ LANGUAGE_CODE = "en"
 
 # Available languages for translation
 LANGUAGES = (
+    ("bn", "Bengali"),
     ("bs", "Bosnian"),
     ("en", "English"),
     ("fr", "French"),
@@ -81,7 +82,7 @@ LANGUAGES = (
     ("it", "Italian"),
     ("ro", "Romanian"),
     ("vi", "Vietnamese"),
-    ("sr-latn", "Latin Serbian"),
+    ("sr-rs@latin", "Serbian (Latin, Serbia)"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -158,10 +159,12 @@ DATA_API_BACKEND_TYPES = (
 )
 
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
+
 BACKENDS_ORG_CONFIG_FIELDS = [
     dict(
         name="reporter_group",
-        field=dict(help_text=_("The name of txbhe Contact Group that contains registered reporters")),
+        field=dict(help_text=_("The name of the Contact Group that contains registered reporters")),
         superuser_only=True,
         read_only=True,
     ),
@@ -232,11 +235,24 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
+        name="has_count_on_link_only",
+        field=dict(help_text=_("Whether this org count should consider the count from link only"), required=False),
+        superuser_only=True,
+    ),
+    dict(
         name="shortcode",
         field=dict(
             help_text=_("The shortcode that users will use to contact U-Report locally"),
             label="Shortcode",
-            required=True,
+            required=False,
+        ),
+    ),
+    dict(
+        name="whatsapp_number",
+        field=dict(
+            help_text=_("The whatapp number that users will use to contact U-Report if you have one"),
+            label="Whatapp Number",
+            required=False,
         ),
     ),
     dict(
@@ -246,33 +262,119 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
-        name="join_fg_color",
-        field=dict(help_text=_("The color used to draw the text on the join bar"), required=False),
+        name="homepage_join_video_id",
+        field=dict(
+            help_text=_("The YouTube video ID for how to join U-Report section"),
+            label="Homepage Video ID",
+            required=False,
+        ),
+    ),
+    dict(
+        name="photos_section_title",
+        field=dict(
+            help_text=_("The title of the photos section U-Report homepage"),
+            label="Photos Section Title",
+            required=False,
+        ),
+    ),
+    dict(
+        name="photos_section_description",
+        field=dict(
+            help_text=_("The description of the photos section U-Report homepage"),
+            label="Photos Description",
+            required=False,
+        ),
+    ),
+    dict(
+        name="opinions_description",
+        field=dict(help_text=_("The description of the opinions page"), label="Opinions Description", required=False),
+    ),
+    dict(
+        name="stories_description",
+        field=dict(help_text=_("The description of the stories page"), label="Stories Description", required=False),
+    ),
+    dict(
+        name="engagement_description",
+        field=dict(
+            help_text=_("The description of the engagement page"), label="Engagement Description", required=False
+        ),
+    ),
+    dict(
+        name="engagement_footer_callout",
+        field=dict(
+            help_text=_("The callout message on the footer engagement section"),
+            label="Egagement callout messages",
+            required=False,
+        ),
+    ),
+    dict(
+        name="dark1_color",
+        field=dict(help_text=_("The primary color for styling for this organization, should be dark"), required=False),
         superuser_only=True,
     ),
     dict(
-        name="join_bg_color",
-        field=dict(help_text=_("The color used to draw the background on the join bar"), required=False),
+        name="dark2_color",
+        field=dict(
+            help_text=_("The secondary color for styling for this organization, should be dark"), required=False
+        ),
         superuser_only=True,
     ),
     dict(
-        name="primary_color",
-        field=dict(help_text=_("The primary color for styling for this organization"), required=False),
+        name="dark3_color",
+        field=dict(
+            help_text=_("The tertiary color for styling for this organization, should be dark"), required=False
+        ),
         superuser_only=True,
     ),
     dict(
-        name="secondary_color",
-        field=dict(help_text=_("The secondary color for styling for this organization"), required=False),
+        name="light1_color",
+        field=dict(
+            help_text=_("The primary highlight color for styling for this organization, should be light"),
+            required=False,
+        ),
         superuser_only=True,
     ),
     dict(
-        name="bg_color",
-        field=dict(help_text=_("The background color for the site"), required=False),
+        name="light2_color",
+        field=dict(
+            help_text=_("The secondary highlight color for styling for this organization, should be light"),
+            required=False,
+        ),
         superuser_only=True,
     ),
     dict(
         name="colors",
         field=dict(help_text=_("Up to 6 colors for styling charts, use comma between colors"), required=False),
+        superuser_only=True,
+    ),
+    # deprecated, can be removed after v2 launch
+    dict(
+        name="join_fg_color",
+        field=dict(help_text=_("The color used to draw the text on the join bar"), required=False),
+        superuser_only=True,
+    ),
+    # deprecated, can be removed after v2 launch
+    dict(
+        name="join_bg_color",
+        field=dict(help_text=_("The color used to draw the background on the join bar"), required=False),
+        superuser_only=True,
+    ),
+    # deprecated, should be replaced by dark1
+    dict(
+        name="primary_color",
+        field=dict(help_text=_("The primary color for styling for this organization"), required=False),
+        superuser_only=True,
+    ),
+    # deprecated, should be replaced by dark2
+    dict(
+        name="secondary_color",
+        field=dict(help_text=_("The secondary color for styling for this organization"), required=False),
+        superuser_only=True,
+    ),
+    # deprecated, can be removed after v2 launch
+    dict(
+        name="bg_color",
+        field=dict(help_text=_("The background color for the site"), required=False),
         superuser_only=True,
     ),
     dict(
@@ -286,6 +388,11 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="limit_states",
         field=dict(help_text=_("The states to show on maps only"), required=False),
+        superuser_only=True,
+    ),
+    dict(
+        name="limit_poll_states",
+        field=dict(help_text=_("The states to show on maps only, used to filter poll results"), required=False),
         superuser_only=True,
     ),
     dict(
@@ -379,9 +486,7 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="has_jobs",
         field=dict(
-            help_text=_("If there are jobs to be shown on the public site. (Separated by comma)"),
-            label="Display Jobs Tab",
-            required=False,
+            help_text=_("If there are jobs to be shown on the public site."), label="Display Jobs Tab", required=False
         ),
     ),
     dict(
@@ -391,6 +496,18 @@ ORG_CONFIG_FIELDS = [
             required=False,
         ),
         superuser_only=True,
+    ),
+    dict(
+        name="has_extra_gender",
+        field=dict(help_text=_("Whether to activate an extra gender."), required=False),
+        superuser_only=True,
+        read_only=True,
+    ),
+    dict(
+        name="has_new_design",
+        field=dict(help_text=_("Whether to activate the new design."), required=False),
+        superuser_only=True,
+        read_only=True,
     ),
     dict(
         name="iso_code",
@@ -477,6 +594,7 @@ INSTALLED_APPS = (
     "ureport.locations",
     "ureport.news",
     "ureport.polls",
+    "ureport.stats",
     "django_countries",
     "rest_framework",
     "rest_framework_swagger",
@@ -540,6 +658,7 @@ TEMPLATES = [
                 "ureport.assets.context_processors.set_assets_processor",
                 "ureport.public.context_processors.set_has_better_domain",
                 "ureport.public.context_processors.set_is_iorg",
+                "ureport.public.context_processors.set_linked_sites",
                 "ureport.public.context_processors.set_config_display_flags",
                 "ureport.public.context_processors.set_org_lang_params",
                 "ureport.public.context_processors.set_story_widget_url",
@@ -700,10 +819,16 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
+    "polls_stats_squash": {"task": "polls.polls_stats_squash", "schedule": timedelta(minutes=10), "relative": True},
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
         "args": ("ureport.contacts.tasks.pull_contacts",),
+    },
+    "update-org-contact-counts": {
+        "task": "dash.orgs.tasks.trigger_org_task",
+        "schedule": crontab(minute=[10, 30, 50]),
+        "args": ("ureport.contacts.tasks.update_org_contact_count",),
     },
     "backfill-poll-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
@@ -734,6 +859,16 @@ CELERYBEAT_SCHEDULE = {
         "relative": True,
         "args": ("ureport.polls.tasks.pull_results_other_polls", "sync"),
     },
+    "refresh-engagement-data": {
+        "task": "dash.orgs.tasks.trigger_org_task",
+        "schedule": crontab(hour=2, minute=0),
+        "args": ("ureport.stats.tasks.refresh_engagement_data", "sync"),
+    },
+    "clear-old-results": {
+        "task": "dash.orgs.tasks.trigger_org_task",
+        "schedule": crontab(hour=4, minute=0),
+        "args": ("ureport.polls.tasks.clear_old_poll_results", "sync"),
+    },
 }
 
 # -----------------------------------------------------------------------------------
@@ -748,6 +883,7 @@ UREPORT_DEFAULT_SECONDARY_COLOR = "#1F49BF"
 # -----------------------------------------------------------------------------------
 SITE_ALLOW_NO_ORG = (
     "public.countries",
+    "public.status",
     "api",
     "api.v1",
     "api.v1.docs",
@@ -768,157 +904,483 @@ SITE_ALLOW_NO_ORG = (
 
 
 # -----------------------------------------------------------------------------------
-# Old country sites
+# Country flags
 # -----------------------------------------------------------------------------------
-PREVIOUS_ORG_SITES = [
+COUNTRY_FLAGS_SITES = [
     dict(
         name="Argentina",
         host="//argentina.ureport.in/",
-        flag="flag_ar.png",
+        flag="flag_argentina.png",
         is_static=True,
         count_link="http://argentina.ureport.in/count/",
     ),
     dict(
         name="Bangladesh",
         host="//bangladesh.ureport.in/",
-        flag="flag_bd.png",
+        flag="flag_bangladesh.png",
         is_static=True,
         count_link="http://bangladesh.ureport.in/count/",
     ),
     dict(
         name="Belize",
         host="//belize.ureport.in/",
-        flag="flag_bz.png",
+        flag="flag_belize.png",
         is_static=True,
         count_link="http://belize.ureport.in/count/",
     ),
     dict(
+        name="Bolivia",
+        host="//bolivia.ureport.in/",
+        flag="flag_bolivia.png",
+        is_static=True,
+        count_link="http://bolivia.ureport.in/count/",
+    ),
+    dict(
         name="Bosnia and Herzegovina",
         host="//bih.ureport.in/",
-        flag="flag_bs.png",
+        flag="flag_bosnia_and_herzegovina.png",
         is_static=True,
         count_link="http://bih.ureport.in/count/",
     ),
     dict(
         name="Brazil",
         host="//ureportbrasil.org.br/",
-        flag="flag_br.png",
+        flag="flag_brazil.png",
         is_static=True,
         count_link="http://brasil.ureport.in/count/",
     ),
     dict(
+        name="Botswana",
+        host="//botswana.ureport.in/",
+        flag="flag_botswana.png",
+        is_static=True,
+        count_link="http://botswana.ureport.in/count/",
+    ),
+    dict(
+        name="Burkina Faso",
+        host="//burkinafaso.ureport.in/",
+        flag="flag_burkina_faso.png",
+        is_static=True,
+        count_link="http://burkinafaso.ureport.in/count/",
+    ),
+    dict(
+        name="Burundi",
+        host="//burundi.ureport.in/",
+        flag="flag_burundi.png",
+        is_static=True,
+        count_link="http://burundi.ureport.in/count/",
+    ),
+    dict(
+        name="Cameroun",
+        host="//cameroon.ureport.in/",
+        flag="flag_cameroun.png",
+        is_static=True,
+        count_link="http://cameroon.ureport.in/count/",
+    ),
+    dict(
+        name="CAR",
+        host="//centrafrique.ureport.in/",
+        flag="flag_car.png",
+        is_static=True,
+        count_link="http://centrafrique.ureport.in/count/",
+    ),
+    dict(
+        name="Chile",
+        host="//chile.ureport.in/",
+        flag="flag_chile.png",
+        is_static=True,
+        count_link="http://chile.ureport.in/count/",
+    ),
+    dict(
+        name="CAR",
+        host="//congobrazzaville.ureport.in/",
+        flag="flag_congo_brazzaville.png",
+        is_static=True,
+        count_link="http://congobrazzaville.ureport.in/count/",
+    ),
+    dict(
+        name="Costa Rica",
+        host="//costarica.ureport.in/",
+        flag="flag_costa_rica.png",
+        is_static=True,
+        count_link="https://costarica.ureport.in/count/",
+    ),
+    dict(
+        name="Cote d'ivoire",
+        host="//cotedivoire.ureport.in/",
+        flag="flag_cote_d_ivoire.png",
+        is_static=True,
+        count_link="http://cotedivoire.ureport.in/count/",
+    ),
+    dict(
+        name="DRC",
+        host="//drc.ureport.in/",
+        flag="flag_drc.png",
+        is_static=True,
+        count_link="http://drc.ureport.in/count/",
+    ),
+    dict(
+        name="Ecuador",
+        host="//ecuador.ureport.in/",
+        flag="flag_ecuador.png",
+        is_static=True,
+        count_link="http://ecuador.ureport.in/count/",
+    ),
+    dict(
         name="El Salvador",
         host="//elsalvador.ureport.in/",
-        flag="flag_sv.png",
+        flag="flag_el_salvador.png",
         is_static=True,
         count_link="http://elsalvador.ureport.in/count/",
     ),
     dict(
-        name="Guatemala",
-        host="//guatemala.ureport.in/",
-        flag="flag_gt.png",
+        name="Eswatini",
+        host="//eswatini.ureport.in/",
+        flag="flag_eswatini.png",
         is_static=True,
-        count_link="http://guatemala.ureport.in/count/",
+        count_link="http://eswatini.ureport.in/count/",
     ),
     dict(
         name="France",
         host="//france.ureport.in",
-        flag="flag_fr.png",
+        flag="flag_france.png",
         is_static=True,
         count_link="http://france.ureport.in/count/",
     ),
     dict(
+        name="FSM",
+        host="//fsm.ureport.in",
+        flag="flag_fsm.png",
+        is_static=True,
+        count_link="http://fsm.ureport.in/count/",
+    ),
+    dict(
+        name="Gambia",
+        host="//gambia.ureport.in/",
+        flag="flag_gambia.png",
+        is_static=True,
+        count_link="http://gambia.ureport.in/count/",
+    ),
+    dict(
+        name="Ghana",
+        host="//ghana.ureport.in/",
+        flag="flag_ghana.png",
+        is_static=True,
+        count_link="http://ghana.ureport.in/count/",
+    ),
+    dict(
+        name="Guatemala",
+        host="//guatemala.ureport.in/",
+        flag="flag_guatemala.png",
+        is_static=True,
+        count_link="http://guatemala.ureport.in/count/",
+    ),
+    dict(
+        name="Guinea",
+        host="//guinea.ureport.in/",
+        flag="flag_guinea.png",
+        is_static=True,
+        count_link="http://guinea.ureport.in/count/",
+    ),
+    dict(
+        name="Haiti",
+        host="//haiti.ureport.in/",
+        flag="flag_haiti.png",
+        is_static=True,
+        count_link="http://haiti.ureport.in/count/",
+    ),
+    dict(
+        name="Honduras",
+        host="//honduras.ureport.in",
+        flag="flag_honduras.png",
+        is_static=True,
+        count_link="http://honduras.ureport.in/count/",
+    ),
+    dict(
+        name="India",
+        host="//india.ureport.in",
+        flag="flag_india.png",
+        is_static=True,
+        count_link="http://india.ureport.in/count/",
+    ),
+    dict(
+        name="Indonesia",
+        host="//indonesia.ureport.in",
+        flag="flag_indonesia.png",
+        is_static=True,
+        count_link="http://indonesia.ureport.in/count/",
+    ),
+    dict(
+        name="Iraq",
+        host="//iraq.ureport.in",
+        flag="flag_iraq.png",
+        is_static=True,
+        count_link="http://iraq.ureport.in/count/",
+    ),
+    dict(
         name="Ireland",
         host="//ireland.ureport.in",
-        flag="flag_ir.png",
+        flag="flag_ireland.png",
         is_static=True,
         count_link="http://ireland.ureport.in/count/",
     ),
     dict(
         name="Jamaica",
         host="//jamaica.ureport.in/",
-        flag="flag_jm.png",
+        flag="flag_jamaica.png",
         is_static=True,
         count_link="http://jamaica.ureport.in/count/",
     ),
     dict(
+        name="Jordan",
+        host="//jordan.ureport.in/",
+        flag="flag_jordan.png",
+        is_static=True,
+        count_link="http://jordan.ureport.in/count/",
+    ),
+    dict(
+        name="Kiribati",
+        host="//kiribati.ureport.in/",
+        flag="flag_kiribati.png",
+        is_static=True,
+        count_link="http://kiribati.ureport.in/count/",
+    ),
+    dict(
+        name="Liberia",
+        host="//liberia.ureport.in/",
+        flag="flag_liberia.png",
+        is_static=True,
+        count_link="http://liberia.ureport.in/count/",
+    ),
+    dict(
+        name="Malawi",
+        host="//ureport.mw/",
+        flag="flag_malawi.png",
+        is_static=True,
+        count_link="http://ureport.mw/count/",
+    ),
+    dict(
+        name="Malaysia",
+        host="//malaysia.ureport.in/",
+        flag="flag_malaysia.png",
+        is_static=True,
+        count_link="http://malaysia.ureport.in/count/",
+    ),
+    dict(
+        name="Mali",
+        host="//mali.ureport.in/",
+        flag="flag_mali.png",
+        is_static=True,
+        count_link="http://mali.ureport.in/count/",
+    ),
+    dict(
+        name="Mexico",
+        host="//mexico.ureport.in/",
+        flag="flag_mexico.png",
+        is_static=True,
+        count_link="http://mexico.ureport.in/count/",
+    ),
+    dict(
         name="Moldova",
         host="//moldova.ureport.in",
-        flag="flag_md.png",
+        flag="flag_moldova.png",
         is_static=True,
         count_link="http://moldova.ureport.in/count/",
     ),
     dict(
-        name="New Zealand",
-        host="//newzealand.ureport.in/",
-        flag="flag_nz.png",
+        name="Mozambiqui",
+        host="//smsbiz.co.mz/",
+        flag="flag_mozambique.png",
         is_static=True,
-        count_link="http://newzealand.ureport.in/count/",
+        count_link="http://smsbiz.co.mz/count/",
+    ),
+    dict(
+        name="Myanmar",
+        host="//myanmar.ureport.in",
+        flag="flag_myanmar.png",
+        is_static=True,
+        count_link="http://myanmar.ureport.in/count/",
+    ),
+    dict(
+        name="Nigeria",
+        host="//nigeria.ureport.in",
+        flag="flag_nigeria.png",
+        is_static=True,
+        count_link="http://nigeria.ureport.in/count/",
+    ),
+    dict(
+        name="Nigeria24x7",
+        host="//nigeria24x7.ureport.in",
+        flag="flag_nigeria24x7.png",
+        is_static=True,
+        count_link="http://nigeria24x7.ureport.in/count/",
+    ),
+    dict(
+        name="On the move",
+        host="//onthemove.ureport.in",
+        flag="flag_on_the_move.png",
+        is_static=True,
+        count_link="http://onthemove.ureport.in/count/",
+    ),
+    dict(
+        name="Pacific",
+        host="//pacific.ureport.in",
+        flag="flag_pacific.png",
+        is_static=True,
+        count_link="http://pacific.ureport.in/count/",
+    ),
+    dict(
+        name="Pakistan",
+        host="//ureport.pk",
+        flag="flag_pakistan.png",
+        is_static=True,
+        count_link="http://ureport.pk/count/",
+    ),
+    dict(
+        name="Philippines",
+        host="//philippines.ureport.in",
+        flag="flag_philippines.png",
+        is_static=True,
+        count_link="http://philippines.ureport.in/count/",
+    ),
+    dict(
+        name="PNG",
+        host="//png.ureport.in",
+        flag="flag_png.png",
+        is_static=True,
+        count_link="http://png.ureport.in/count/",
     ),
     dict(
         name="România",
         host="//romania.ureport.in/",
-        flag="flag_ro.png",
+        flag="flag_romania.png",
         is_static=True,
         count_link="http://romania.ureport.in/count/",
     ),
     dict(
+        name="Senegal",
+        host="//senegal.ureport.in/",
+        flag="flag_senegal.png",
+        is_static=True,
+        count_link="http://senegal.ureport.in/count/",
+    ),
+    dict(
         name="Serbia",
         host="//serbia.ureport.in/",
-        flag="flag_sr.png",
+        flag="flag_serbia.png",
         is_static=True,
         count_link="http://serbia.ureport.in/count/",
     ),
     dict(
-        name="Syria",
-        host="//syria.ureport.in",
-        flag="flag_sy.png",
+        name="Sierra Leone",
+        host="//sierraleone.ureport.in",
+        flag="flag_sierra_leone.png",
         is_static=True,
-        count_link="http://syria.ureport.in/count/",
+        count_link="http://sierraleone.ureport.in/count/",
+    ),
+    dict(
+        name="South Africa",
+        host="//sa.ureport.in",
+        flag="flag_south_africa.png",
+        is_static=True,
+        count_link="http://sa.ureport.in/count/",
+    ),
+    dict(
+        name="Tanzania",
+        host="//tanzania.ureport.in",
+        flag="flag_tanzania.png",
+        is_static=True,
+        count_link="http://tanzania.ureport.in/count/",
+    ),
+    dict(
+        name="Tchad",
+        host="//tchad.ureport.in",
+        flag="flag_tchad.png",
+        is_static=True,
+        count_link="http://tchad.ureport.in/count/",
     ),
     dict(
         name="Thailand",
         host="//thailand.ureport.in",
-        flag="flag_th.png",
+        flag="flag_thailand.png",
         is_static=True,
         count_link="http://thailand.ureport.in/count/",
     ),
     dict(
         name="Trinidad and Tobago",
         host="//tt.ureport.in/",
-        flag="flag_tt.png",
+        flag="flag_trinidad_and_tobago.png",
         is_static=True,
         count_link="http://tt.ureport.in/count/",
     ),
     dict(
-        name="United Kingdom",
-        host="//uk.ureport.in",
-        flag="flag_uk.png",
+        name="Tunisia",
+        host="//tunisie.ureport.in",
+        flag="flag_tunisia.png",
         is_static=True,
-        count_link="http://uk.ureport.in/count/",
+        count_link="http://tunisie.ureport.in/count/",
+    ),
+    dict(
+        name="Uganda",
+        host="//ureport.ug",
+        flag="flag_uganda.png",
+        is_static=True,
+        count_link="http://ureport.ug/count/",
+    ),
+    dict(
+        name="Ukraine",
+        host="//ukraine.ureport.in",
+        flag="flag_ukraine.png",
+        is_static=True,
+        count_link="http://ukraine.ureport.in/count/",
     ),
     dict(
         name="Uzbekistan",
         host="//uzbekistan.ureport.in",
-        flag="flag_uz.png",
+        flag="flag_uzberkistan.png",
         is_static=True,
         count_link="http://uzbekistan.ureport.in/count/",
     ),
     dict(
+        name="Vietnam",
+        host="//vietnam.ureport.in",
+        flag="flag_vietnam.png",
+        is_static=True,
+        count_link="http://vietnam.ureport.in/count/",
+    ),
+    dict(
         name="Western Balkans",
         host="//westernbalkans.ureport.in",
-        flag="flag_wb.png",
+        flag="flag_western_balkans.png",
         is_static=True,
         count_link="http://westernbalkans.ureport.in/count/",
     ),
     dict(
         name="Zambia",
         host="//www.zambiaureport.com/home/",
-        flag="flag_zm.png",
+        flag="flag_zambia.png",
         is_static=True,
-        count_link="https://www.zambiaureport.com/count.txt/",
+        count_link="http://www.zambiaureport.com/count.txt/",
+    ),
+    dict(
+        name="Zimbabwe",
+        host="//zimbabwe.ureport.in",
+        flag="flag_zimbabwe.png",
+        is_static=True,
+        count_link="http://zimbabwe.ureport.in/count/",
     ),
 ]
+
+
+# -----------------------------------------------------------------------------------
+# Old country sites
+# -----------------------------------------------------------------------------------
+PREVIOUS_ORG_SITES = []  # Not uset anymore
+
+# -----------------------------------------------------------------------------------
+# Other sites to get counts for but not display the flag
+# -----------------------------------------------------------------------------------
+OTHER_ORG_COUNT_SITES = [dict(name="Global", count_link="https://www.ureport.in/count/")]
 
 
 # -----------------------------------------------------------------------------------

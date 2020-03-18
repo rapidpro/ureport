@@ -2,141 +2,125 @@
 
 - load thumbnail ureport i18n compress
 
--block subtitle
-  &nbsp;-
-  -trans "Stories"
+-block content
+  .bg-grid.border-t.border-b
+    .max-w-page.mx-auto.p-home(class="md:flex")
+      .flex-1.flex-center-y.hover-parent
+        {% edit_content 'orgs.org_edit' "" "#id_common.stories_description" "" "dark" %}
+        .text-5xl.font-bold
+          -trans "Stories"
+        .text-xl
+          {{ org|config:"stories_description"|default:""}}
 
-- block hero
-  - for main_story in featured|slice:"1"
-    .hero-container
-      .hero-dark-container
-        .container
-          .hero-small-background
-          .row
-            .col-md-6
-              .story-hero
-                .hero-title.hero-top-title.primary-bg-color
-                  - trans "FEATURED STORY"
-                .story-hero-title
-                  {{ main_story.title }}
-                .story-hero-date
-                  {{ main_story.created_on|date }}
-                -if story.created_by.first_name
-                  .hero-author
-                    - trans "BY"
-                    {{ story.created_by.first_name|upper }} {{story.created_by.last_name|upper}}
-                .hero-info.story-hero-info
-                  {{ main_story.short_teaser }}
-                .hero-title.hero-link.primary-bg-color
-                  %a{href:"{% url 'public.story_read' main_story.pk %}"}
-                    - trans "Read full story"
-                    {{ org|org_arrow_link }}
+      .flex-center-y(class="{% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %}")
+        .block.mt-4(style="width:285px" class="ltr:text-right rtl:text-left")
+          .bg-black.text-white.text-lg.px-4.py-2.rounded
+            .flex.bg-black.border-b.border-white
+              .flex-1
+                %input.bg-black.search-box.text-sm(type="text" data-results-id="story-search-results" placeholder="{% trans 'SEARCH' %}" size=14)
+              .flex-none
+                %a.search-close(href="#")
+                  %i.fa.fa-caret-down
 
-  - block banner
-    {{ block.super }}
+        .relative
+          .absolute.bg-white.search-results.h-64.border(id="story-search-results" style="z-index:100000;width:285px;" class="lrt:right-0 rtl:left-0")
+            .no-results.p-4.italic.hidden
+              -trans "No results found"
 
-- block content
-  .section.hide-on-small
-    %h1.level-1-title
-      - trans "LATEST STORIES"
-    .level-1-title-description.secondary-color
-    .card.card-padding
-      .filter-title.primary-color
-        - trans "FILTERED BY"
-      %hr.hr12.primary-bg-color
-      .featured-stories-filters
-        .row
-          .col-md-12
-            %input.category{ type:"radio", name:"category", value:"-1", checked:"true", id:"category-all"}
-            %label{ for:"category-all" }
-              -trans "All"
+            - for category in categories
+              - if category.story_set.all
+                .block.py-1.bg-white.search-category
+                  %a.text-sm.font-bold.px-2.block(href="#")
+                    %i.fa.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+                    %i.fa.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
+                    .pl-3
+                      {{ category.name }}
+                  .category-results
+                    - for story in category.story_set.all
+                      %a.block.px-4.py-1.searchable(class="hover:bg-gray-200" href="{% url 'public.story_read' story.pk %}" data-search-value="{{ story.title|addslashes }} {{ story.created_on|date:\"F\" }} {{ story.created_on|date:\"Y\" }}")
+                        .ml-2.text-sm
+                          {{ story.title }}
+                          .inline.text-xs.font-bold
+                            {{ story.created_on|date:"F" }} {{ story.created_on|date:"Y" }}
 
-        .row
-          -for category in categories
-            .col-md-4{style: "white-space: nowrap; overflow: hidden;"}
-              %input.category{ type:"radio", name:"category", value:"{{category.id}}", id:"category-{{category.id}}"}=
-              %label{ for:"category-{{category.id}}" }= category.name
-  .row
-    .col-sm-12
-      .stories-filtered
-        - for featured_story in featured
-          %hr.card-clear
+  // first and second stories
+  .max-w-page.mx-auto
+    - for story in featured|slice:"2"
+      // first-story-full
+      .hidden(class="md:block")
+        .flex
+          - if forloop.first
+            .flex-1.h-10
+            .flex-1.bg-dark1
+              &nbsp;
+          -else
+            .flex-1.h-10.bg-dark2
+            .flex-1.h-10
 
-          .story-filtered{ data-category:"{{ featured_story.category.id }}" }
-            .white-card-container
-              .white-card-inner{style:"min-height:400px,"}
-                .white-card-title.primary-bg-color
-                  {{ featured_story.category.name|upper }}
-                .white-card-image.featured-story-image
-                  - if featured_story.get_image
-                    {% thumbnail featured_story.get_image "300x200" crop="top" as im %}
-                    <img width="100%" src="{{im.url}}" />
+        %div
+          .border-solid.flex(class="{% if is_rtl_org %}{% cycle 'border-dark1 border-l-25rem' 'border-dark2 border-r-25rem' %}{% else %}{% cycle 'border-dark1 border-r-25rem' 'border-dark2 border-l-25rem' %}{% endif %}")
+            - if not forloop.first
+              .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")
+                {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
+                %a(href="{% url 'public.story_read' story.pk %}")
+                  - if story.get_image
+                    {% thumbnail story.get_image "800x600" crop="center" as im %}
+                    <img width="100%" height="100%" src="{{im.url}}" />
                     {% endthumbnail %}
                   - else
-                    <img width="100%" src="{{ STATIC_URL }}img/missing_image_placeholder.jpg" />
+                    %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+            
+            .flex.flex-col.justify-center(class="w-1/3")
+              .block(class="{% if is_rtl_org %}pr-home{% else %}pl-home{% endif %}")
+                .font-bold.mb-4
+                  -trans "FEATURED STORY"
+                .font-bold.leading-tight.mb-4.hover-parent(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
+                  {% edit_content 'stories.story_update' story.pk "#id_title" "-m-8" "dark" %}
+                  %a(href="{% url 'public.story_read' story.pk %}")
+                    {{ story.title }}
+                .block.mb-6.hover-parent
+                  {% edit_content 'stories.story_update' story.pk "#id_summary" "-m-8" "dark" %}
+                  {{ story.summary|truncatewords:50|linebreaksbr }}
+  
+                %a.btn.bg-black.text-white(href="{% url 'public.story_read' story.pk %}" class="hover:bg-gray-700")
+                  -trans "READ MORE"
+            
+            - if forloop.first
+              .block.p-10.bg-white.flex.flex-col.justify-center.hover-parent(class="w-2/3")
+                {% edit_content 'stories.story_images' story.pk "" "-m-8" "dark" %}
+                %a(href="{% url 'public.story_read' story.pk %}")
+                  - if story.get_image
+                    {% thumbnail story.get_image "800x600" crop="center" as im %}
+                    <img width="100%" height="100%" src="{{im.url}}" />
+                    {% endthumbnail %}
+                  - else
+                    %img{height:"100%", src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+  
+        .flex
+          -if forloop.first
+            .flex-1.h-10
+            .flex-1.bg-dark1
+              &nbsp;
+          -else
+            .flex-1.h-20.bg-dark2
+            .flex-1.h-20
 
-                .white-card-content.white-card-padding
-                  .featured-story-title
-                    {{ featured_story.title }}
-                  .featured-story-date
-                    {{ featured_story.created_on|date }}
-                  .half-border.none-color
-                  .featured-story-teaser
-                    {{ featured_story.short_teaser|safe }}
-                %a.featured-story-link{href:"{% url 'public.story_read' featured_story.pk %}"}
-                  - trans "Read full story"
-                  {{ org|org_arrow_link }}
+      // first-story-mobile
+      %div(class="md:hidden")
+        - if story.get_image
+          {% thumbnail story.get_image "800x600" crop="center" as im %}
+          <img width="100%" height="100%" src="{{im.url}}" />
+          {% endthumbnail %}
+        - else
+          %img{src:"{{ STATIC_URL }}img/missing_image_placeholder.jpg"}
+        .p-home
+          .font-bold.mb-4
+            -trans "FEATURED STORY"
+          .font-bold.leading-tight.mb-4(class="{% if story.title|length < 50 %}text-3xl{% else %}text-2xl{% endif %}")
+            {{ story.title }}
+          .block.mb-6
+            {{ story.summary|truncatewords:50|linebreaksbr }}
+  
+          %a.btn.bg-black.text-white(href="{% url 'public.story_read' story.pk %}")
+            -trans "READ MORE"
 
-  %hr.aaa
-  - include "public/archived_stories.html"
-
-
--block extra-script
-  {{ block.super }}
-  {% compress js %}
-  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/archived_stories.coffee" />
-  <script type="text/coffeescript" src="{{ STATIC_URL }}coffee/featured_stories.coffee" />
-  {% endcompress %}
-
-
-- block extra-style
-  {{ block.super }}
-
-  :css
-    .hero-container {
-      {% for main_story in featured|slice:"1" %}
-      {% thumbnail main_story.get_category_image "1280x678" crop="top" as im %}
-        background-image:url('{{im.url}}');
-      {% empty %}
-        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
-      {% endthumbnail %}
-      {% endfor %}
-    }
-
-    .hero-small-background {
-      {% for main_story in featured|slice:"1" %}
-      {% thumbnail main_story.get_category_image "768x508" crop="top" as im %}
-        background-image:url('{{im.url}}');
-      {% empty %}
-        background-image: url('{{ STATIC_URL }}img/missing_image_placeholder.jpg');
-      {% endthumbnail %}
-      {% endfor %}
-    }
-
-    .summary {
-      margin-bottom: 15px;
-      font-style: italic;
-    }
-
-    span.link {
-      padding:10px;
-    }
-
-    span.link > a {
-      color: #fff;
-
-    }
-
-    .featured-story-teaser img {
-      max-width: 100%;
-    }
