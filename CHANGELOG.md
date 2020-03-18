@@ -1,3 +1,9 @@
+v1.1.143
+----------
+ * Merge pull request #566 from rapidpro/fix-pill-button-broken-by-translate
+ * Fix alerts
+ * Fix pills button broken by translate
+
 v1.1.142
 ----------
  * Update django
