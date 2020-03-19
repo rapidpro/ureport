@@ -956,7 +956,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_bulgaria.png",
         is_static=True,
         count_link="http://bulgaria.ureport.in/count/",
-    ),    
+    ),
     dict(
         name="Botswana",
         host="//botswana.ureport.in/",
