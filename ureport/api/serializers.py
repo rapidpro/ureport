@@ -125,24 +125,28 @@ class PollReadSerializer(serializers.ModelSerializer):
     def get_questions(self, obj):
         questions = []
         for question in obj.get_questions():
-            results_dict = dict(open_ended=question.is_open_ended())
+            open_ended = question.is_open_ended()
+            results_dict = dict(open_ended=open_ended)
             results = question.get_results()
             if results:
                 results_dict = results[0]
             results_by_age = question.get_results(segment=dict(age="Age"))
             results_by_gender = question.get_results(segment=dict(gender="Gender"))
             results_by_state = question.get_results(segment=dict(location="State"))
-            questions.append(
-                {
-                    "id": question.pk,
-                    "ruleset_uuid": question.ruleset_uuid,
-                    "title": question.title,
-                    "results": results_dict,
-                    "results_by_age": results_by_age,
-                    "results_by_gender": results_by_gender,
-                    "results_by_location": results_by_state,
-                }
-            )
+
+            question_data = {
+                "id": question.pk,
+                "ruleset_uuid": question.ruleset_uuid,
+                "title": question.title,
+                "results": results_dict,
+            }
+
+            if not open_ended:
+                question_data["results_by_age"] = results_by_age
+                question_data["results_by_gender"] = results_by_gender
+                question_data["results_by_location"] = results_by_state
+
+            questions.append(question_data)
 
         return questions
 
