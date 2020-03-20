@@ -1,3 +1,11 @@
+v1.1.144
+----------
+ * Merge pull request #568 from rapidpro/api-poll-data
+ * Merge pull request #567 from Ilhasoft/feature/add-bulgaria
+ * Only include the results segmentation maintained for the existing graphs
+ * fix a trailing space
+ * add bulgaria to ureport
+
 v1.1.143
 ----------
  * Merge pull request #566 from rapidpro/fix-pill-button-broken-by-translate
