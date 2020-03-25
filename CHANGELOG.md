@@ -1,3 +1,8 @@
+v1.1.145
+----------
+ * Merge pull request #569 from rapidpro/support-results-without-input
+ * Allo saving text for node results without reporter input
+
 v1.1.144
 ----------
  * Merge pull request #568 from rapidpro/api-poll-data
