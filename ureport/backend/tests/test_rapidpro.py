@@ -1557,7 +1557,7 @@ class RapidProBackendTest(UreportTest):
         )
 
         poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
-        self.assertEqual(poll_result.text, "")
+        self.assertEqual(poll_result.text, "Whatever")
 
         poll.stopped_syncing = True
         poll.save()

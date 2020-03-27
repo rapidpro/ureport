@@ -83,6 +83,7 @@ LANGUAGES = (
     ("ro", "Romanian"),
     ("vi", "Vietnamese"),
     ("sr-rs@latin", "Serbian (Latin, Serbia)"),
+    ("bg", "Bulgarian"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -948,6 +949,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_brazil.png",
         is_static=True,
         count_link="http://brasil.ureport.in/count/",
+    ),
+    dict(
+        name="Bulgaria",
+        host="//bulgaria.ureport.in/",
+        flag="flag_bulgaria.png",
+        is_static=True,
+        count_link="http://bulgaria.ureport.in/count/",
     ),
     dict(
         name="Botswana",

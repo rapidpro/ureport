@@ -1,3 +1,29 @@
+v1.1.145
+----------
+ * Merge pull request #569 from rapidpro/support-results-without-input
+ * Allo saving text for node results without reporter input
+
+v1.1.144
+----------
+ * Merge pull request #568 from rapidpro/api-poll-data
+ * Merge pull request #567 from Ilhasoft/feature/add-bulgaria
+ * Only include the results segmentation maintained for the existing graphs
+ * fix a trailing space
+ * add bulgaria to ureport
+
+v1.1.143
+----------
+ * Merge pull request #566 from rapidpro/fix-pill-button-broken-by-translate
+ * Fix alerts
+ * Fix pills button broken by translate
+
+v1.1.142
+----------
+ * Update django
+ * Rebuild locale
+ * Merge pull request #565 from rapidpro/translations_django-po--master_bg
+ * Translate /locale/en/LC_MESSAGES/django.po in bg
+
 v1.1.141
 ----------
  * Merge pull request #564 from rapidpro/contacts-counts-performance
