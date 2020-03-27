@@ -1,3 +1,7 @@
+v1.1.147
+----------
+ * Fix if block
+
 v1.1.146
 ----------
  * Merge pull request #570 from rapidpro/translations_django-po--master_bg
