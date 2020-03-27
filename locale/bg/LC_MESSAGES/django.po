@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-13 12:46+0000\n"
+"POT-Creation-Date: 2020-03-27 12:38+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -688,7 +688,7 @@ msgid "Logout"
 msgstr "Излизане"
 
 msgid "Opinions"
-msgstr "Мнения"
+msgstr "Допитвания"
 
 msgid "Users"
 msgstr "Потребители"
@@ -718,10 +718,10 @@ msgid "Images"
 msgstr "Изображения"
 
 msgid "About"
-msgstr "За повече информация"
+msgstr "За нас"
 
 msgid "Engagement"
-msgstr "Участие"
+msgstr "Участие в цифри"
 
 msgid "Category Images"
 msgstr "Категории изображения"
@@ -781,10 +781,10 @@ msgid "Additional Menu"
 msgstr "Допълнително меню"
 
 msgid "SELECT YOUR COUNTRY"
-msgstr "ИЗБЕРЕТЕ ДЪРЖАВАТА, В КОЯТО ЖИВЕЕТЕ"
+msgstr "ИЗБЕРЕТЕ ДЪРЖАВА"
 
 msgid "Join Now"
-msgstr "Включи се сега!"
+msgstr "Включи се!"
 
 msgid "READ MORE"
 msgstr "ПРОЧЕТИ ПОВЕЧЕ"
@@ -869,7 +869,7 @@ msgid "COUNTRIES WORLDWIDE"
 msgstr "СТРАНИ ПО СВЕТА"
 
 msgid "AGES"
-msgstr "ВЪЗРАСТОВИ ГРУПИ"
+msgstr "ВЪЗРАСТИ"
 
 msgid "Join U-Report, Your voice matters."
 msgstr "Включи се в U-Report: Твоят глас е важен!"
@@ -893,7 +893,7 @@ msgid "Visit"
 msgstr "Посети"
 
 msgid "How would you like to join?"
-msgstr "По какъв начин желаете да се присъедините?"
+msgstr "U-Report е на линия за теб във Viber!"
 
 msgid "Text"
 msgstr "Текст"
