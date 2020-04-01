@@ -1,3 +1,23 @@
+v1.1.147
+----------
+ * Fix if block
+
+v1.1.146
+----------
+ * Merge pull request #570 from rapidpro/translations_django-po--master_bg
+ * Rebuild locale
+ * Fix conflicts
+ * Merge pull request #571 from rapidpro/use-show-login
+ * Rebuild locale
+ * Translate /locale/en/LC_MESSAGES/django.po in bg
+ * Translate /locale/en/LC_MESSAGES/django.po in bg
+ * Do not show login on custom domain
+
+v1.1.145
+----------
+ * Merge pull request #569 from rapidpro/support-results-without-input
+ * Allo saving text for node results without reporter input
+
 v1.1.144
 ----------
  * Merge pull request #568 from rapidpro/api-poll-data

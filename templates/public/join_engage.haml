@@ -39,7 +39,7 @@
               -trans "Text"
           {% endif %}
 
-          {% if org|config:"facebook_page_url" %}
+          {% if org|config:"facebook_page_id" %}
           .mb-4.text-center(class="md:mx-4")
             %a(href='http://m.me/{{ org|config:"facebook_page_id" }}')
               .bg-circle-lg.bg-white.text-black.border.border-black
