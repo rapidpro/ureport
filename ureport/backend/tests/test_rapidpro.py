@@ -1576,6 +1576,56 @@ class RapidProBackendTest(UreportTest):
             (0, 0, 0, 0, 0, 0),
         )
 
+        PollResult.objects.all().delete()
+        poll.stopped_syncing = False
+        poll.save()
+
+        # When a contact loops into the same node, prevent overwriting the result with a set category
+        # with one from path unless they are more that 5 seconds older
+        temba_run = TembaRun.create(
+            id=1234,
+            flow=ObjectRef.create(uuid="flow-uuid", name="Flow 1"),
+            contact=ObjectRef.create(uuid="C-001", name="Wiz Kid"),
+            responded=True,
+            values={
+                "win": TembaRun.Value.create(
+                    value="We'll win today", input="We'll win today", category="Win", node="ruleset-uuid", time=now
+                )
+            },
+            path=[
+                TembaRun.Step.create(node="ruleset-uuid", time=now),
+                TembaRun.Step.create(node="ruleset-uuid", time=now + timedelta(seconds=1)),
+            ],
+            created_on=now,
+            modified_on=now,
+            exited_on=now,
+            exit_type="completed",
+        )
+
+        mock_get_runs.side_effect = [MockClientQuery([temba_run])]
+
+        with self.assertNumQueries(5):
+            (
+                num_val_created,
+                num_val_updated,
+                num_val_ignored,
+                num_path_created,
+                num_path_updated,
+                num_path_ignored,
+            ) = self.backend.pull_results(poll, None, None)
+
+        self.assertEqual(
+            (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
+            (1, 0, 0, 0, 0, 2),
+        )
+
+        poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
+        self.assertEqual(poll_result.contact, "C-001")
+        self.assertEqual(poll_result.ruleset, "ruleset-uuid")
+        self.assertEqual(poll_result.flow, "flow-uuid")
+        self.assertEqual(poll_result.category, "Win")
+        self.assertEqual(poll_result.text, "We'll win today")
+
     @patch("redis.client.StrictRedis.lock")
     @patch("dash.orgs.models.TembaClient.get_archives")
     @patch("django.utils.timezone.now")

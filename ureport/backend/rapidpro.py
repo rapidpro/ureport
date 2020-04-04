@@ -7,6 +7,7 @@ import json
 import logging
 import time
 from collections import defaultdict
+from datetime import timedelta
 
 import pytz
 import requests
@@ -883,7 +884,9 @@ class RapidProBackend(BaseBackend):
                 poll_result_to_save = poll_results_to_save_map.get(contact_uuid, dict()).get(ruleset_uuid, None)
 
                 if existing_poll_result is not None:
-                    if existing_poll_result.date is None or value_date > existing_poll_result.date:
+                    if existing_poll_result.date is None or value_date > (
+                        existing_poll_result.date + timedelta(seconds=5)
+                    ):
                         # update the db object
                         PollResult.objects.filter(pk=existing_poll_result.pk).update(
                             category=category,
@@ -915,7 +918,7 @@ class RapidProBackend(BaseBackend):
                         stats_dict["num_path_ignored"] += 1
 
                 elif poll_result_to_save is not None:
-                    if value_date > poll_result_to_save.date:
+                    if value_date > (poll_result_to_save.date + timedelta(seconds=5)):
                         result_obj = PollResult(
                             org=org,
                             flow=flow_uuid,
