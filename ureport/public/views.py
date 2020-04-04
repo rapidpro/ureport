@@ -46,21 +46,6 @@ class IndexView(SmartTemplateView):
 
         latest_poll = Poll.get_main_poll(org)
         context["latest_poll"] = latest_poll
-        if context["latest_poll"]:
-            context["trending_words"] = latest_poll.get_trending_words()
-
-        brick_poll_ids = Poll.get_brick_polls_ids(org)
-        context["recent_polls"] = Poll.objects.filter(id__in=brick_poll_ids).order_by("-created_on")
-
-        context["stories"] = Story.objects.filter(org=org, is_active=True, featured=True).order_by("-created_on")
-
-        videos = Video.objects.filter(is_active=True, org=org).order_by("-created_on")
-        context["videos"] = videos
-
-        news = NewsItem.objects.filter(is_active=True, org=org).order_by("-created_on")
-        context["news"] = news.count() > 0
-
-        context["most_active_regions"] = org.get_regions_stats()
 
         # global counters
         context["global_contact_count"] = get_global_count()
@@ -218,12 +203,6 @@ class PollContextMixin(object):
         )
         context["polls"] = Poll.get_public_polls(org=org).order_by("-poll_date")
 
-        context["related_stories"] = []
-        if main_poll:
-            related_stories = Story.objects.filter(org=org, is_active=True, category=main_poll.category)
-            related_stories = related_stories.order_by("-featured", "-created_on")
-            context["related_stories"] = related_stories
-
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
 
@@ -273,11 +252,8 @@ class StoriesView(SmartTemplateView):
         )
         context["stories"] = Story.objects.filter(org=org, is_active=True).order_by("title")
 
-        context["featured"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
-        context["other_stories"] = Story.objects.filter(org=org, featured=False, is_active=True).order_by(
-            "-created_on"
-        )
-        context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
+        featured_stories = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
+        context["main_stories"] = featured_stories
 
         return context
 
@@ -296,27 +272,9 @@ class StoryReadView(SmartReadView):
 
         org = self.request.org
 
-        story = self.get_object()
-        story_category = story.category
-
         context["org"] = org
         context["categories"] = Category.objects.filter(org=org, is_active=True).order_by("name")
-        context["other_stories"] = Story.objects.filter(org=org, featured=False, is_active=True).order_by(
-            "-created_on"
-        )
 
-        related_polls = Poll.objects.filter(
-            org=org, is_active=True, has_synced=True, category=story_category
-        ).order_by("-created_on")
-        context["related_polls"] = related_polls
-
-        related_stories = Story.objects.filter(
-            org=org, is_active=True, category=story_category, featured=True
-        ).exclude(pk=story.pk)
-        related_stories = related_stories.order_by("-created_on")
-        context["related_stories"] = related_stories
-
-        context["story_featured_images"] = story.get_featured_images().order_by("-created_on")
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
 
