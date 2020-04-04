@@ -45,7 +45,7 @@
 
   // first and second stories
   .max-w-page.mx-auto
-    - for story in featured|slice:"2"
+    - for story in main_stories|slice:"2"
       // first-story-full
       .hidden(class="md:block")
         .flex

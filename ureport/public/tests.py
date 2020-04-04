@@ -8,7 +8,7 @@ import mock
 import pytz
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.stories.models import Story, StoryImage
+from dash.stories.models import Story
 
 from django.urls import reverse
 from django.utils.http import urlquote
@@ -141,18 +141,11 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.uganda)
 
         self.assertIsNone(response.context["latest_poll"])
-        self.assertFalse("trending_words" in response.context)
-        self.assertTrue("recent_polls" in response.context)
         self.assertTrue("gender_stats" in response.context)
         self.assertTrue("age_stats" in response.context)
         self.assertTrue("reporters" in response.context)
-        self.assertTrue("most_active_regions" in response.context)
-
-        self.assertFalse(response.context["recent_polls"])
-
-        self.assertFalse(response.context["stories"])
-        self.assertFalse(response.context["videos"])
-        self.assertFalse(response.context["news"])
+        self.assertTrue("main_stories" in response.context)
+        self.assertFalse(response.context["main_stories"])
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
@@ -161,9 +154,6 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.uganda)
 
         self.assertIsNone(response.context["latest_poll"])
-        self.assertFalse("trending_words" in response.context)
-        self.assertTrue("recent_polls" in response.context)
-        self.assertFalse(response.context["recent_polls"])
 
         PollQuestion.objects.create(
             poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
@@ -174,9 +164,6 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.uganda)
 
         self.assertEqual(poll1, response.context["latest_poll"])
-        self.assertTrue("trending_words" in response.context)
-        self.assertTrue("recent_polls" in response.context)
-        self.assertFalse(response.context["recent_polls"])
 
         poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, has_synced=True)
 
@@ -189,9 +176,6 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.uganda)
 
         self.assertEqual(poll1, response.context["latest_poll"])
-        self.assertTrue("trending_words" in response.context)
-        self.assertTrue("recent_polls" in response.context)
-        self.assertFalse(response.context["recent_polls"])
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
@@ -204,10 +188,6 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.uganda)
 
         self.assertEqual(poll3, response.context["latest_poll"])
-        self.assertTrue("trending_words" in response.context)
-        self.assertTrue("recent_polls" in response.context)
-        self.assertTrue(response.context["recent_polls"])
-        self.assertTrue(poll1 in response.context["recent_polls"])
 
         story1 = Story.objects.create(
             title="story 1",
@@ -222,8 +202,8 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        self.assertTrue(response.context["stories"])
-        self.assertTrue(story1 in response.context["stories"])
+        self.assertTrue(response.context["main_stories"])
+        self.assertTrue(story1 in response.context["main_stories"])
 
         story2 = Story.objects.create(
             title="story 2",
@@ -238,8 +218,8 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        self.assertTrue(response.context["stories"])
-        self.assertTrue(story1 in response.context["stories"])
+        self.assertTrue(response.context["main_stories"])
+        self.assertFalse(story2 in response.context["main_stories"])
 
         story3 = Story.objects.create(
             title="story 3",
@@ -254,8 +234,8 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        self.assertTrue(response.context["stories"])
-        self.assertTrue(story1 in response.context["stories"])
+        self.assertTrue(response.context["main_stories"])
+        self.assertFalse(story3 in response.context["main_stories"])
 
         story4 = Story.objects.create(
             title="story 4",
@@ -270,11 +250,10 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        self.assertTrue(response.context["stories"])
-        self.assertFalse(story2 in response.context["stories"])
-        self.assertFalse(story3 in response.context["stories"])
-        self.assertEqual(response.context["stories"][0].pk, story4.pk)
-        self.assertEqual(response.context["stories"][1].pk, story1.pk)
+        self.assertTrue(response.context["main_stories"])
+        self.assertFalse(story2 in response.context["main_stories"])
+        self.assertFalse(story3 in response.context["main_stories"])
+        self.assertEqual(response.context["main_stories"][0].pk, story4.pk)
 
         story4.featured = False
         story4.save()
@@ -283,72 +262,7 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/")
         self.assertEqual(response.context["org"], self.uganda)
 
-        video1 = Video.objects.create(
-            title="video 1",
-            video_id="video_1",
-            category=self.health_uganda,
-            org=self.uganda,
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        response = self.client.get(home_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/")
-        self.assertEqual(response.context["org"], self.uganda)
-
-        self.assertTrue(response.context["videos"])
-        self.assertTrue(video1 in response.context["videos"])
-
-        video2 = Video.objects.create(
-            title="video 2",
-            video_id="video_2",
-            category=self.education_nigeria,
-            org=self.nigeria,
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        response = self.client.get(home_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/")
-        self.assertEqual(response.context["org"], self.uganda)
-
-        self.assertTrue(response.context["videos"])
-        self.assertTrue(video1 in response.context["videos"])
-        self.assertTrue(video2 not in response.context["videos"])
-
-        video3 = Video.objects.create(
-            title="video 3",
-            video_id="video_3",
-            category=self.health_uganda,
-            org=self.uganda,
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        response = self.client.get(home_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/")
-        self.assertEqual(response.context["org"], self.uganda)
-
-        self.assertTrue(response.context["videos"])
-        self.assertTrue(video1 in response.context["videos"])
-        self.assertTrue(video2 not in response.context["videos"])
-        self.assertTrue(video3 in response.context["videos"])
-
-        video1.is_active = False
-        video1.save()
-
-        response = self.client.get(home_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.request["PATH_INFO"], "/")
-        self.assertEqual(response.context["org"], self.uganda)
-
-        self.assertTrue(response.context["videos"])
-        self.assertTrue(video1 not in response.context["videos"])
-        self.assertTrue(video2 not in response.context["videos"])
-        self.assertTrue(video3 in response.context["videos"])
-
-        # self.nigeria.set_config("common.custom_html", "<div>INCLUDE MY CUSTOM HTML</div>")
-        # response = self.client.get(home_url, SERVER_NAME="nigeria.ureport.io")
-        # self.assertContains(response, "<div>INCLUDE MY CUSTOM HTML</div>")
+        self.assertFalse(story4 in response.context["main_stories"])
 
     def test_additional_menu(self):
         additional_menu_url = reverse("public.custom_page", args=["faq"])
@@ -526,7 +440,6 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["view"].template_name, "public/polls.html")
         self.assertFalse(response.context["latest_poll"])
         self.assertFalse(response.context["polls"])
-        self.assertFalse(response.context["related_stories"])
 
         self.assertEqual(len(response.context["categories"]), 1)
         self.assertTrue(self.education_nigeria in response.context["categories"])
@@ -578,8 +491,6 @@ class PublicTest(UreportTest):
         self.assertTrue(poll2 not in response.context["polls"])
         self.assertTrue(poll3 not in response.context["polls"])
 
-        self.assertFalse(response.context["related_stories"])
-
         story1 = Story.objects.create(
             title="story 1",
             content="body contents 1",
@@ -617,11 +528,11 @@ class PublicTest(UreportTest):
         )
 
         response = self.client.get(polls_url, SERVER_NAME="nigeria.ureport.io")
-        self.assertEqual(len(response.context["related_stories"]), 1)
-        self.assertTrue(story4 in response.context["related_stories"])
-        self.assertTrue(story1 not in response.context["related_stories"])
-        self.assertTrue(story2 not in response.context["related_stories"])
-        self.assertTrue(story3 not in response.context["related_stories"])
+        self.assertEqual(len(response.context["main_stories"]), 0)
+        self.assertTrue(story4 not in response.context["main_stories"])
+        self.assertTrue(story1 not in response.context["main_stories"])
+        self.assertTrue(story2 not in response.context["main_stories"])
+        self.assertTrue(story3 not in response.context["main_stories"])
 
         response = self.client.get(polls_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/opinions/")
@@ -644,36 +555,32 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["polls"][1], poll2)
         self.assertEqual(response.context["polls"][2], poll1)
 
-        self.assertEqual(len(response.context["related_stories"]), 2)
-        self.assertTrue(story4 not in response.context["related_stories"])
-        self.assertTrue(story1 in response.context["related_stories"])
-        self.assertTrue(story2 not in response.context["related_stories"])
-        self.assertTrue(story3 in response.context["related_stories"])
-        self.assertEqual(response.context["related_stories"][0], story3)
-        self.assertEqual(response.context["related_stories"][1], story1)
+        self.assertEqual(len(response.context["main_stories"]), 0)
+        self.assertTrue(story4 not in response.context["main_stories"])
+        self.assertTrue(story1 not in response.context["main_stories"])
+        self.assertTrue(story2 not in response.context["main_stories"])
+        self.assertTrue(story3 not in response.context["main_stories"])
 
         story1.featured = True
         story1.save()
 
         response = self.client.get(polls_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(len(response.context["related_stories"]), 2)
-        self.assertTrue(story4 not in response.context["related_stories"])
-        self.assertTrue(story1 in response.context["related_stories"])
-        self.assertTrue(story2 not in response.context["related_stories"])
-        self.assertTrue(story3 in response.context["related_stories"])
-        self.assertEqual(response.context["related_stories"][0], story1)
-        self.assertEqual(response.context["related_stories"][1], story3)
+        self.assertEqual(len(response.context["main_stories"]), 1)
+        self.assertTrue(story1 in response.context["main_stories"])
+        self.assertTrue(story4 not in response.context["main_stories"])
+        self.assertTrue(story2 not in response.context["main_stories"])
+        self.assertTrue(story3 not in response.context["main_stories"])
+        self.assertEqual(response.context["main_stories"][0], story1)
 
         story1.is_active = False
         story1.save()
 
         response = self.client.get(polls_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(len(response.context["related_stories"]), 1)
-        self.assertTrue(story4 not in response.context["related_stories"])
-        self.assertTrue(story1 not in response.context["related_stories"])
-        self.assertTrue(story2 not in response.context["related_stories"])
-        self.assertTrue(story3 in response.context["related_stories"])
-        self.assertEqual(response.context["related_stories"][0], story3)
+        self.assertEqual(len(response.context["main_stories"]), 0)
+        self.assertTrue(story4 not in response.context["main_stories"])
+        self.assertTrue(story1 not in response.context["main_stories"])
+        self.assertTrue(story2 not in response.context["main_stories"])
+        self.assertTrue(story3 not in response.context["main_stories"])
 
         poll1.is_featured = True
         poll1.save()
@@ -829,9 +736,7 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.nigeria)
         self.assertEqual(len(response.context["categories"]), 1)
         self.assertEqual(response.context["categories"][0], self.education_nigeria)
-        self.assertEqual(len(response.context["other_stories"]), 1)
-        self.assertEqual(response.context["other_stories"][0], story4)
-        self.assertFalse(response.context["featured"])
+        self.assertEqual(len(response.context["main_stories"]), 0)
 
         response = self.client.get(stories_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.context["org"], self.uganda)
@@ -839,27 +744,28 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["categories"][0], education_uganda)
         self.assertEqual(response.context["categories"][1], self.health_uganda)
 
-        self.assertEqual(len(response.context["other_stories"]), 2)
-        self.assertEqual(response.context["other_stories"][0], story3)
-        self.assertEqual(response.context["other_stories"][1], story2)
-        self.assertEqual(len(response.context["featured"]), 1)
-        self.assertEqual(response.context["featured"][0], story1)
+        self.assertEqual(len(response.context["main_stories"]), 1)
+        self.assertEqual(response.context["main_stories"][0], story1)
 
         story2.is_active = False
         story2.save()
 
         response = self.client.get(stories_url, SERVER_NAME="uganda.ureport.io")
 
-        self.assertEqual(len(response.context["other_stories"]), 1)
-        self.assertEqual(response.context["other_stories"][0], story3)
+        self.assertEqual(len(response.context["main_stories"]), 1)
+        self.assertEqual(response.context["main_stories"][0], story1)
 
         story2.is_active = True
         story2.save()
         education_uganda.is_active = False
         education_uganda.save()
 
-        self.assertEqual(len(response.context["other_stories"]), 1)
-        self.assertEqual(response.context["other_stories"][0], story3)
+        self.assertEqual(len(response.context["stories"]), 3)
+        self.assertEqual(response.context["stories"][0], story1)
+        self.assertTrue(story1 in response.context["stories"])
+        self.assertTrue(story2 in response.context["stories"])
+        self.assertTrue(story3 in response.context["stories"])
+        self.assertFalse(story4 in response.context["stories"])
 
     def test_story_read(self):
 
@@ -905,12 +811,6 @@ class PublicTest(UreportTest):
             modified_by=self.admin,
         )
 
-        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
-
-        self.create_poll(self.uganda, "Poll 2", "uuid-2", education_uganda, self.admin)
-
-        poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin)
-
         uganda_story_read_url = reverse("public.story_read", args=[story1.pk])
         nigeria_story_read_url = reverse("public.story_read", args=[story4.pk])
 
@@ -926,50 +826,11 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["categories"][0], education_uganda)
         self.assertEqual(response.context["categories"][1], self.health_uganda)
 
-        self.assertEqual(len(response.context["other_stories"]), 1)
-        self.assertEqual(response.context["other_stories"][0], story2)
-
-        self.assertEqual(len(response.context["related_polls"]), 1)
-        self.assertEqual(response.context["related_polls"][0], poll1)
-        self.assertFalse(poll3 in response.context["related_polls"])
-
-        self.assertEqual(len(response.context["related_stories"]), 1)
-        self.assertEqual(response.context["related_stories"][0], story3)
-
-        self.assertFalse(response.context["story_featured_images"])
-
-        story_image1 = StoryImage.objects.create(
-            story=story1, image="stories/someimage.jpg", name="image 1", created_by=self.admin, modified_by=self.admin
-        )
-
-        response = self.client.get(uganda_story_read_url, SERVER_NAME="uganda.ureport.io")
-
-        self.assertEqual(len(response.context["story_featured_images"]), 1)
-        self.assertEqual(response.context["story_featured_images"][0], story_image1)
-
-        story_image2 = StoryImage.objects.create(
-            story=story1, image="stories/someimage.jpg", name="image 2", created_by=self.admin, modified_by=self.admin
-        )
-
-        response = self.client.get(uganda_story_read_url, SERVER_NAME="uganda.ureport.io")
-
-        self.assertEqual(len(response.context["story_featured_images"]), 2)
-        self.assertEqual(response.context["story_featured_images"][0], story_image2)
-        self.assertEqual(response.context["story_featured_images"][1], story_image1)
-
-        story_image2.is_active = False
-        story_image2.save()
-
-        response = self.client.get(uganda_story_read_url, SERVER_NAME="uganda.ureport.io")
-
-        self.assertEqual(len(response.context["story_featured_images"]), 1)
-        self.assertEqual(response.context["story_featured_images"][0], story_image1)
-
-        story_image1.image = ""
-        story_image1.save()
-
-        response = self.client.get(uganda_story_read_url, SERVER_NAME="uganda.ureport.io")
-        self.assertFalse(response.context["story_featured_images"])
+        self.assertEqual(len(response.context["main_stories"]), 2)
+        self.assertFalse(story4 in response.context["main_stories"])
+        self.assertFalse(story2 in response.context["main_stories"])
+        self.assertTrue(story1 in response.context["main_stories"])
+        self.assertTrue(story3 in response.context["main_stories"])
 
     def test_news(self):
         news_url = reverse("public.news")
