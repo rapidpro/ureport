@@ -1,3 +1,15 @@
+v1.1.148
+----------
+ * Rebuild locale
+ * Merge pull request #573 from rapidpro/translations_django-po--master_uz
+ * Merge pull request #572 from rapidpro/translations_django-po--master_bg
+ * Merge pull request #575 from rapidpro/remove-unused-variables
+ * Remove unused context variables
+ * Merge pull request #574 from rapidpro/prevent-looped-run-results-overwrite
+ * Only replace results with category with one which is empty if they are 5 seconds older
+ * Translate /locale/en/LC_MESSAGES/django.po in uz
+ * Translate /locale/en/LC_MESSAGES/django.po in bg
+
 v1.1.147
 ----------
  * Fix if block

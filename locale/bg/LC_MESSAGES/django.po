@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 12:38+0000\n"
+"POT-Creation-Date: 2020-04-04 18:53+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -261,7 +261,7 @@ msgstr "Роля на потребителя"
 
 #, python-format
 msgid "%s Invitation"
-msgstr "%sПокана"
+msgstr "%s Покана"
 
 msgid "Banner"
 msgstr "Банер"
@@ -416,7 +416,7 @@ msgstr "Изображения към историята"
 
 #, python-format
 msgid "Image %d"
-msgstr "Изображение%d"
+msgstr "Изображение %d"
 
 msgid "Image to display on story page and in previews. (optional)"
 msgstr "Изображение, което да бъде включено към страницата на историята и към нейния предварителен преглед. (по избор)"
@@ -915,7 +915,7 @@ msgstr "ОБЩО ОТГОВОРИ"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)sотговорили от %(polled)sзапитани"
+msgstr "%(responded)s отговорили от %(polled)s запитани"
 
 msgid "ALL"
 msgstr "ВСИЧКИ"
@@ -1108,7 +1108,7 @@ msgstr[0] ""
 "%(counter)sрезултати"
 msgstr[1] ""
 "\n"
-"%(counter)sрезултати"
+"%(counter)s резултати"
 
 #, python-format
 msgid ""
@@ -1117,7 +1117,7 @@ msgid ""
 "           "
 msgstr ""
 "\n"
-"Резултати %(start)s%(end)sна %(count)s"
+"Резултати %(start)s%(end)s на %(count)s"
 
 msgid "Error"
 msgstr "Грешка"
@@ -1141,7 +1141,7 @@ msgid ""
 "                  "
 msgstr ""
 "\n"
-"Моля, изчакайте %(lockout_timeout)sминути преди да опитате да влезете отново."
+"Моля, изчакайте %(lockout_timeout)s минути преди да опитате да влезете отново."
 
 #, python-format
 msgid ""
@@ -1150,7 +1150,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"<strong>Паролата ви е изтекла</strong>Според политиката на сайта трябва да избирате нова парола на всеки %(expire_days)sдни и всяка от тях не бива да е била използвана в срок от преходни %(window_days)sдни. "
+"<strong>Паролата ви е изтекла</strong>Според политиката на сайта трябва да избирате нова парола на всеки %(expire_days)s дни и всяка от тях не бива да е била използвана в срок от преходни %(window_days)s дни. "
 
 msgid "+ New Story"
 msgstr "Нова История"
