@@ -855,9 +855,6 @@ msgstr "ARTICOLE ARHIVATE"
 msgid "LIST"
 msgstr "LISTĂ"
 
-msgid "LATEST OPINION"
-msgstr "ULTIMELE OPINII"
-
 msgid "VIEW FULL RESULTS"
 msgstr "VEZI REZULTATELE DETALIATE"
 
@@ -920,10 +917,6 @@ msgstr "RATA DE RĂSPUNS"
 
 msgid "TOTAL RESPONSES"
 msgstr "TOATE RĂSPUNSURILE "
-
-#, python-format
-msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)s răspondenți din %(polled)s intervievațis"
 
 msgid "ALL"
 msgstr "TOȚI"
@@ -1096,102 +1089,9 @@ msgstr "Dec"
 msgid "LATEST OPINION"
 msgstr "ULTIMELE OPINII"
 
-msgid "VIEW FULL RESULTS"
-msgstr "VEZI REZULTATELE DETALIATE"
-
-msgid "PARTNERING WITH"
-msgstr "PARTENERIAT CU "
-
-msgid "U-REPORTERS"
-msgstr "U-REPORTERS"
-
-msgid "IN"
-msgstr "ÎN"
-
-msgid "COUNTRIES WORLDWIDE"
-msgstr "ȚĂRILE DIN LUME"
-
-msgid "AGES"
-msgstr "ANI"
-
-msgid "LEARN MORE"
-msgstr "ÎNVAȚĂ MAI MULT"
-
-msgid "+ New "
-msgstr "+ Nou"
-
-msgid "+ New Page"
-msgstr "+ Pagini Noi"
-
-msgid "LATEST NOTIFICATIONS"
-msgstr "ULTIMELE NOTIFICĂRI"
-
-msgid "Backends"
-msgstr "Backends"
-
-msgid "+ New Poll"
-msgstr "+ Sondaj Nou"
-
-msgid "Refresh Results"
-msgstr "Actualizare Rezultate"
-
-msgid "Join U-Report, Your voice matters."
-msgstr "Alăturați-vă U-report, Vocea Ta Contează."
-
-msgid "JOIN NOW"
-msgstr "ALĂTURĂ-TE ACUM"
-
-msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr "Suntem o parte a unei platforme globale care lucrează pentru a schimba viața tinerilor din întreaga lume."
-
-msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr "Aflați mai multe despre modul în care U-Report abilitează și conectează tinerii pentru a vorbi despre problemele care contează pentru ei."
-
-msgid "How would you like to join?"
-msgstr "Cum ai vrea să te înscrii?"
-
-msgid "Text"
-msgstr "Text "
-
-msgid "SEARCH"
-msgstr "CAUTĂ"
-
-msgid "No results found"
-msgstr "Nici un rezultat găsit"
-
-msgid "RESPONSES"
-msgstr "RĂSPUNSURI"
-
-msgid "TOTAL RESPONSES"
-msgstr "TOATE RĂSPUNSURILE "
-
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
 msgstr "%(responded)s răspondenți din %(polled)s intervievați"
-
-msgid "ALL"
-msgstr "TOȚI"
-
-msgid "LOCATION"
-msgstr "LOCAȚIE"
-
-msgid "Written by:"
-msgstr "Scris de către:"
-
-msgid "OVERALL STATISTICS"
-msgstr "STATISTICI GENERALE"
-
-msgid "THIS YEAR"
-msgstr "ACEST AN"
-
-msgid "AVG RESPONSE RATE"
-msgstr "RATA DE RĂSPUNS AVG"
-
-msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERS DUPĂ REGIUNE"
-
-msgid "FILTER RESULTS"
-msgstr "FILTRU DE REZULTATE"
 
 #, python-format
 msgid ""
