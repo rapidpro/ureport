@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 23:33+0000\n"
+"POT-Creation-Date: 2020-04-04 18:53+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -22,8 +22,661 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+msgid "The name of this category"
+msgstr "Името на тази категория"
+
+msgid "An optional image that can describe this category"
+msgstr "Изображение по избор, което може да опише тази категория"
+
+msgid "The organization this category applies to"
+msgstr "Организацията, към която тази категория се отнася."
+
+msgid "Categories"
+msgstr "Категории"
+
+msgid "The name to describe this image"
+msgstr "Името, което описва това изображение"
+
+msgid "The category this image represents"
+msgstr "Категорията, но която това изображение съответства"
+
+msgid "The image file to use"
+msgstr "Изображението, което да бъде използвано"
+
+msgid "The human readable name for this content type"
+msgstr "Четливото потребителско име за този вид материали"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "Франгметът за идентификация на този тип съдържание заедно с неговите шаблонови етикети"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "Описание на това къде този тип материали се използва на сайта и как те ще бъдат изложени на него."
+
+msgid "Whether this content should include a title"
+msgstr "Дали този тип материали трябва да включват заглавие"
+
+msgid "Whether this content should include an image"
+msgstr "Дали този тип материали трябва да включват изображение"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Дали тази организация трябва да използва детайлен редактор на HTML"
+
+msgid "Whether this content should include a summary field"
+msgstr "Дали този тип материали трябва да включват поле с резюме"
+
+msgid "Whether this content should include a link"
+msgstr "Дали този материал трябва да включва линк"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Дали този материал трябва да разреши качването на допълнителни изображения, т.е. галерия"
+
+msgid "Whether this content has a color field"
+msgstr "Дали този материал съдържа цветно поле"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Дали този материал трябва да позволява настройката на YouTube ID"
+
+msgid "Whether this content should allow tags"
+msgstr "Дали този материал трябва да позволи използването на етикети"
+
+msgid "Content Type"
+msgstr "Тип материали"
+
+msgid "The category, or type for this content block"
+msgstr "Категорията или типа на това текстово поле"
+
+msgid "The title for this block of content, optional"
+msgstr "Заглавие на това текстово поле, по избор"
+
+msgid "The summary for this item, should be short"
+msgstr "Резюмето на този материал трябва да е кратко"
+
+msgid "The body of text for this content block, optional"
+msgstr "Тестът в това поле е по избор"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Каквото и да е изображение, което трябва да е показано с това текстово поле, незадължително"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Цвят за фон на това изображение  в формат-а #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Какъвто и да е линк, който да е свързан с това текстово поле, по избор"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "Youtube ID, която трябва да бъде свързана с този материал"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Каквито и да е етикети към текстово поле, разделени чрез интервали, могат да бъдат използвани за по-разширено филтриране на информация - по избор"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "Степен на приоритет за това поле. Полетата с по-висока степен на приоритет застават на по-високи позиции"
+
+msgid "The organization this content block belongs to"
+msgstr "Организацията, към която това текстово поле принадлежи"
+
+msgid "Gallery"
+msgstr "Галерия"
+
+msgid "Add Image"
+msgstr "Добави изображение"
+
+msgid "Search"
+msgstr "Търсене"
+
+msgid "Add"
+msgstr "Добави"
+
+msgid "Content Types"
+msgstr "Типове материали"
+
+msgid "Content Blocks"
+msgstr "Текстови полета"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%sПолета"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Редактирай %s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Създай%s"
+
+msgid "Create Content Block"
+msgstr "Създай текстово поле"
+
+msgid "Your first name"
+msgstr "Вашето лично име"
+
+msgid "Your last name"
+msgstr "Вашата фамилия"
+
+msgid "Your email address"
+msgstr "Вашата електронна поща"
+
+msgid "Your password, at least eight letters please"
+msgstr "Вашата парола, поне осем букви, моля"
+
+msgid "That email address is already used"
+msgstr "Този email адрес вече се използва"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Всяка парола трябва да съдържа не по-малко от 8 букви"
+
+msgid "This domain is used for subdomains"
+msgstr "Този домейн се използва от субдомейни"
+
+msgid "Name"
+msgstr "Име"
+
+msgid "The name of this organization"
+msgstr "Името на тази организация"
+
+msgid "The logo that should be used for this organization"
+msgstr "Логото, което трябва да бъде използванo за тази организация"
+
+msgid "Administrators"
+msgstr "Администратори"
+
+msgid "The administrators in your organization"
+msgstr "Администраторите във вашата организация"
+
+msgid "Viewers"
+msgstr "Зрители"
+
+msgid "The viewers in your organization"
+msgstr "Зрителите, включени във вашата организация"
+
+msgid "Editors"
+msgstr "Редактори"
+
+msgid "The editors in your organization"
+msgstr "Редакторите във вашата организация"
+
+msgid "Language"
+msgstr "Език"
+
+msgid "The main language used by this organization"
+msgstr "Основният език, който се използва във вашата организация"
+
+msgid "Subdomain"
+msgstr "Субдомейн"
+
+msgid "This subdomain is not available"
+msgstr "Този субдомейн не е наличен"
+
+msgid "The subdomain for this organization"
+msgstr "Субдомейнът за тази организация"
+
+msgid "Domain"
+msgstr "Домейн"
+
+msgid "This domain is not available"
+msgstr "Този домейн не е наличен"
+
+msgid "The custom domain for this organization"
+msgstr "Персонализираният домейн за тази организация"
+
+msgid "Timezone"
+msgstr "Часова зона"
+
+msgid "The timezone your organization is in."
+msgstr "Часовата зона, в която се намира вашата организация"
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "квадрат на програмен език JSON, съдържащ конфигурираща информация за тази организация"
+
+msgid "Administrator"
+msgstr "Администратор "
+
+msgid "Editor"
+msgstr "Редактор"
+
+msgid "Viewer"
+msgstr "Зрител"
+
+msgid "Org"
+msgstr "Оргазация"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Организацията, която профилът е поканен да види"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "Email адреса, на който изпращаме поканата на зрителя"
+
+msgid "Secret"
+msgstr "Тайна"
+
+msgid "a unique code associated with this invitation"
+msgstr "Уникален код, свързан с тази покана"
+
+msgid "User Role"
+msgstr "Роля на потребителя"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%s Покана"
+
+msgid "Banner"
+msgstr "Банер"
+
+msgid "Pattern"
+msgstr "Шарка"
+
+msgid "The organization in which the image will be used"
+msgstr "Организацията, към която ще бъде използвано това изображение"
+
+msgid "The name to describe this background"
+msgstr "Името, което описва този фон"
+
+msgid "Background type"
+msgstr "Вид на фона"
+
+msgid "The image file"
+msgstr "Файлът на изображението"
+
+msgid "The API token for this backend"
+msgstr " API-token-ът за това backend приложение"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
 msgstr ""
+"\n"
+"Поканен сте да се присъедините към %(org_name)s\n"
+"<br/>\n"
+"За да приемете поканата, <a href='%(host)s%(join_url)s'>кликнете тук</a>\n"
+" "
+
+msgid "You are invited to join {{org.name}}."
+msgstr "Поканени сте да се присъедините към {{името на организацията}}."
+
+msgid "Click this link to join"
+msgstr "Кликнете този линк, за да се присъедините"
+
+msgid "Edit"
+msgstr "Редактирай"
+
+msgid "Manage Backends"
+msgstr "Управлявайте Backend-овете"
+
+msgid "Manage Users"
+msgstr "Управлявай потребителите"
+
+msgid "Accounts"
+msgstr "Профили"
+
+msgid "Admins"
+msgstr "Администратори"
+
+msgid "Remove"
+msgstr "Премахни"
+
+msgid "You must have at least one administator"
+msgstr "Трябва да има поне един администратор"
+
+msgid "Select your Organization"
+msgstr "Изберете вашата организация"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "Вашият профил не е свързан с организация. Моля, свържете се с администратора на желаната от вас организация"
+
+msgid "Your Organization"
+msgstr "Вашата организация"
+
+msgid "Invite people to your organization"
+msgstr "Поканете хора да се присъединят към вашата организация"
+
+msgid "User group"
+msgstr "Потребителска група"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Един от email-ите, които сте въвели, е невалиден"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Управлявайте %(name)sпрофили"
+
+msgid "Create"
+msgstr "Създай"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "Вашият линк за покана е невалиден. Моля, свържете се с администратора на вашата организация."
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Присъедини се към %(name)s "
+
+msgid "Join"
+msgstr "Присъедини се"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "Вашият линк за покана е изтекъл. Моля, свържете се с администратора на вашата организация."
+
+msgid "Task"
+msgstr "Задача"
+
+msgid "Tasks"
+msgstr "Задачи"
+
+msgid "The title for this story"
+msgstr "Заглавието на тази история"
+
+msgid "Whether this story is featured"
+msgstr "Дали тази история е избрана"
+
+msgid "The summary for the story"
+msgstr "Резюмето на тази история "
+
+msgid "The body of text for the story"
+msgstr "Съдържание на историята"
+
+msgid "The writer of the story"
+msgstr "Авторът на тази история"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Линк към mp3 файл, който да бъде публикуван към тази история"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "Идентификацията на YouTube клипа (Това е текстът, който следва след v= и е преди & в YouTube линка)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Каквито и да е етикети към тази история, разделени чрез интервали, могат да бъдат използвани за по-разширено филтриране на информация - по избор"
+
+msgid "The category for this story"
+msgstr "Категорията на тази история"
+
+msgid "The organization this story belongs to"
+msgstr "Организацията, към която тази история принадлежи"
+
+msgid "Stories"
+msgstr "Истории"
+
+msgid "The story to associate to"
+msgstr "Тази история е свързана с"
+
+msgid "Yes"
+msgstr "Да "
+
+msgid "No"
+msgstr "Не"
+
+msgid "Story Images"
+msgstr "Изображения към историята"
+
+#, python-format
+msgid "Image %d"
+msgstr "Изображение %d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "Изображение, което да бъде включено към страницата на историята и към нейния предварителен преглед. (по избор)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "Изображение, което да бъде включено към страницата на историята и към нейния предварителен преглед. (по избор)"
+
+msgid "Remove Item?"
+msgstr "Изтриване?"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"Сигурни ли сте, че искате да премахнете<b>%(object)s</b>?"
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Веднъж премахнато, това не може да бъде върнато"
+
+msgid "Cancel"
+msgstr "Отмени"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t%(counter)sрезултати \n"
+"\t"
+msgstr[1] ""
+"\n"
+"%(counter)sброй резултати"
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"Резултати %(start)s%(end)sна %(count)s"
+
+msgid "Previous"
+msgstr "Предишен"
+
+msgid "Next"
+msgstr "Следващ"
+
+msgid "edit"
+msgstr "редактирай"
+
+msgid "Sign in"
+msgstr "Вход"
+
+msgid "Login"
+msgstr "Вписване"
+
+msgid "Forgot Password?"
+msgstr "Забравена парола?"
+
+msgid "Token Expired"
+msgstr "Token-ът е изтекъл"
+
+msgid "Login Failure"
+msgstr "Неуспешен опит за вписване"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"Съжаляваме, не може да влезете в момента, тъй като получихме %(failed_login_limit)sнеправилни опита за влизане"
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"Моля изчакайте %(lockout_timeout)s минути преди да опитате да влезете отново."
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Като друг вариант може да попълните електронния формуляр по-долу, за да бъде обновена паролата ви чрез e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Моля свържете се с администратора на сайта, за да бъде обновена паролата ви."
+
+msgid "Email Address"
+msgstr "Email адрес"
+
+msgid "Recover"
+msgstr "Възстанови"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Моля, въведете email-а, който сте използвали при регистрацията и ние ще ви помогнем да възстановите паролата си."
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"<strong>Паролата ви е изтекла</strong>Според политиката на сайта трябва да избирате нова парола на всеки %(expire_days)sдни и всяка от тях не бива да е била използвана в срок от преходни %(window_days)sдни. "
+
+msgid "New Password"
+msgstr "Нова парола"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Паролите трябва да съдържат поне 8 символа - една главна буква, една малка буква и една цифра."
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Паролата е била използвана преди през последната година. Моля използвайте нова."
+
+msgid "Password"
+msgstr "Парола"
+
+msgid "Confirm Password"
+msgstr "Потвърдете паролата"
+
+msgid "Please enter your password to save changes."
+msgstr "Моля, въведете вашата парола, за да запазите направените промени. "
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Потвърдете новата парола, като попълните това поле"
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Новата парола не съвпада с потвърждението си."
+
+msgid "Your Email"
+msgstr "Вашият Email"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "Възстановяване на паролата чрез email не се поддържа, моля свържете се с администратора на сайта, за да бъде обновена ръчно."
+
+msgid "Current Password"
+msgstr "Настояща парола "
+
+msgid "Your current password"
+msgstr "Настоящата ви парола "
+
+msgid "Your new password."
+msgstr "Новата ви парола "
+
+msgid "Confirm new Password"
+msgstr "Потвърдете нова парола"
+
+msgid "Confirm your new password."
+msgstr "Потвърдете вашата нова парола"
+
+msgid "Please enter your password to save changes"
+msgstr "Моля, въведете паролата си, за да запазите направените промени "
+
+msgid "Confirm your new password by entering it here"
+msgstr "Потвърдете новата си парола, като я въведете тук"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Несъответствие между новата ви парола и потвърждението ѝ, опитайте отново."
+
+msgid "New user created successfully."
+msgstr "Новият потребител е създаден успешно."
+
+msgid "Groups"
+msgstr "Групи"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Потребителите ще имат достъп само до онези разрешения, които са одобрени за тяхната група"
+
+msgid "Set the user's initial password here."
+msgstr "Въведи първоначалната парола на този потребител тук"
+
+msgid "Last Login"
+msgstr "Последно вписване"
+
+msgid "Is Active"
+msgstr "Е Активен"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Дали този потребител има разрешение да влиза в сайта"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Потребителите ще имат достъп само до онези разрешения, които са одобрени за тяхната група"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Може да обновите паролата на съответния потребител, като въведете нова тук"
+
+msgid "Username"
+msgstr "Потребителско име"
+
+msgid "Your password"
+msgstr "Вашата парола"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Ако желаете да настройте нова парола, въведе я тук"
+
+msgid "Confirm New Password"
+msgstr "Потвърждаване на нова парола"
+
+msgid "Confirm your new password"
+msgstr "Потвърдете вашата нова парола"
+
+msgid "Edit your profile"
+msgstr "Редактирайте профил"
+
+msgid "Password Recovery"
+msgstr "Възстановяване на парола"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "На предоставения на вашия профил адрес е изпратен e-mail, съдържащ следващи инструкции"
+
+msgid "Password Recovery Request"
+msgstr "Искане за възстановяване на парола"
+
+msgid "Pick a new password"
+msgstr "Изберете нова парола"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Новата парола е актуализирана успешно. Благодарим ви."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Сега сте вписан като %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Паролата е актуализирана успешно. Сега може да използвате новата си парола, за да влизате в сайта."
+
+msgid "Reset your Password"
+msgstr "Променете паролата си"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Линкът е изтекъл поради мерки за сигурност. Моля започнете процеса нанова, като въведете email-а си тук "
+
+msgid "Submit"
+msgstr "Предай"
+
+msgid "Form"
+msgstr "От"
+
+msgid "Save Changes"
+msgstr "Запази промените"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Нов %sе създаден"
+
+#, python-format
+msgid "Import %s"
+msgstr "Вмъкни %s"
 
 msgid "Back to Website"
 msgstr "Връщане към уебстраницата"
@@ -34,14 +687,8 @@ msgstr "Добре дошли"
 msgid "Logout"
 msgstr "Излизане"
 
-msgid "Login"
-msgstr "Вписване"
-
 msgid "Opinions"
 msgstr "Допитвания"
-
-msgid "Stories"
-msgstr "Истории"
 
 msgid "Users"
 msgstr "Потребители"
@@ -55,9 +702,6 @@ msgstr "Страници"
 msgid "Jobs"
 msgstr "Заети длъжности"
 
-msgid "Categories"
-msgstr "Категории"
-
 msgid "Photos"
 msgstr "Снимки"
 
@@ -70,9 +714,6 @@ msgstr "Новини"
 msgid "Orgs"
 msgstr "Организации"
 
-msgid "Content Types"
-msgstr "Типове материали"
-
 msgid "Images"
 msgstr "Изображения"
 
@@ -84,12 +725,6 @@ msgstr "Участие в цифри"
 
 msgid "Category Images"
 msgstr "Категории изображения"
-
-msgid "Gallery"
-msgstr "Галерия"
-
-msgid "Add Image"
-msgstr "Добави изображение"
 
 msgid "+ New "
 msgstr "+Нов"
@@ -176,12 +811,6 @@ msgstr ""
 "\n"
 "<div>След като създадете разширението, копирайте етикета му от URL, както е показано</div>"
 
-msgid "Next"
-msgstr "Следващ"
-
-msgid "Cancel"
-msgstr "Отмени"
-
 msgid "Back"
 msgstr "Връщане назад"
 
@@ -190,24 +819,6 @@ msgstr "НАЙ-НОВИ ИЗВЕСТИЯ"
 
 msgid "Backends"
 msgstr "Backends"
-
-msgid "You must have at least one administator"
-msgstr "Трябва да има поне един администратор"
-
-msgid "Accounts"
-msgstr "Профили"
-
-msgid "Admins"
-msgstr "Администратори"
-
-msgid "Editors"
-msgstr "Редактори"
-
-msgid "Remove"
-msgstr "Премахни"
-
-msgid "User group"
-msgstr "Потребителска група"
 
 msgid "+ New Poll"
 msgstr "+Ново допитване"
@@ -474,9 +1085,6 @@ msgstr "ноември"
 msgid "Dec"
 msgstr "декември"
 
-msgid "Remove Item?"
-msgstr "Изтриване?"
-
 #, python-format
 msgid ""
 "\n"
@@ -485,15 +1093,6 @@ msgid ""
 msgstr ""
 "\n"
 "Сигурни ли сте, че искате да премахнете <strong>%(object)s</strong>?"
-
-msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "Веднъж премахнато, това не може да бъде върнато"
-
-msgid "Search"
-msgstr "Търсене"
-
-msgid "Add"
-msgstr "Добави"
 
 #, python-format
 msgid ""
@@ -520,23 +1119,11 @@ msgstr ""
 "\n"
 "Резултати %(start)s%(end)s на %(count)s"
 
-msgid "Previous"
-msgstr "Предишен"
-
-msgid "edit"
-msgstr "редактирай"
-
 msgid "Error"
 msgstr "Грешка"
 
 msgid "Enter Dashboard"
 msgstr "Влез в таблото"
-
-msgid "Forgot Password?"
-msgstr "Забравена парола?"
-
-msgid "Login Failure"
-msgstr "Неуспешен опит за вписване"
 
 #, python-format
 msgid ""
@@ -556,21 +1143,6 @@ msgstr ""
 "\n"
 "Моля, изчакайте %(lockout_timeout)s минути преди да опитате да влезете отново."
 
-msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "Като друг вариант може да попълните електронния формуляр по-долу, за да бъде обновена паролата ви чрез e-mail."
-
-msgid "Please contact the website administrator to have your password reset."
-msgstr "Моля свържете се с администратора на сайта, за да бъде обновена паролата ви."
-
-msgid "Email Address"
-msgstr "Email адрес"
-
-msgid "Recover"
-msgstr "Възстанови"
-
-msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Моля, въведете email-а, който сте използвали при регистрацията и ние ще ви помогнем да възстановите паролата си."
-
 #, python-format
 msgid ""
 "\n"
@@ -587,32 +1159,17 @@ msgstr "Нова История"
 msgid "Refreshed %s cache for this organization"
 msgstr "Обновени %s от кеша за тази организация"
 
-msgid "Banner"
-msgstr "Банер"
-
-msgid "Pattern"
-msgstr "Шарка"
-
 msgid "Flag"
 msgstr "Докладва/Flag"
 
-msgid "Org"
-msgstr "Оргазация"
-
 msgid "The organization to which the image will be used"
 msgstr "Организацията, към която ще бъде използвано това изображение"
-
-msgid "Name"
-msgstr "Име"
 
 msgid "A short descriptive name for this image"
 msgstr "Кратко описание на изображението"
 
 msgid "Image type"
 msgstr "Вид на изображението"
-
-msgid "The image file"
-msgstr "Файлът на изображението"
 
 msgid "Label"
 msgstr "Етикет"
@@ -725,17 +1282,11 @@ msgstr "Заглавието на този клип"
 msgid "A short summary description for this video"
 msgstr "Кратко описание за този видеоклип"
 
-msgid "The id of the YouTube video that should be linked to this item"
-msgstr "Youtube ID, която трябва да бъде свързана с този материал"
-
 msgid "The organization this video belongs to"
 msgstr "Организацията, към която това видео принадлежи"
 
 msgid "The name of this poll category"
 msgstr "Името на тази категория от допитвания"
-
-msgid "The organization this category applies to"
-msgstr "Организацията, към която тази категория се отнася."
 
 msgid "Poll Categories"
 msgstr "Категории допитвания"
@@ -782,17 +1333,8 @@ msgstr "Заглавието на статията, базирана на отг
 msgid "The writer of the response story"
 msgstr "Авторът на статията, базирана на отговори от анкета"
 
-msgid "The body of text for the story"
-msgstr "Съдържание на историята"
-
-msgid "The name to describe this image"
-msgstr "Името, което описва това изображение"
-
 msgid "The poll to associate to"
 msgstr "Допитването, към което да се свърже"
-
-msgid "The image file to use"
-msgstr "Изображението, което да бъде използвано"
 
 msgid "The poll for this response"
 msgstr "Допитването към този отговор"
@@ -856,10 +1398,6 @@ msgstr "Изображения към допитването"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr "Сега въведете някои отговори, които желаете да включите (ако има такива) "
-
-#, python-format
-msgid "Image %d"
-msgstr "Изображение %d"
 
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr "Изображение, което да бъде показано на страницата на допитването и в предварителни прегледи на нея (незадължително)"
@@ -951,11 +1489,6 @@ msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Краткият код, който потребителите ще използват, за да се свързват с U-Report на местно ниво"
 
 msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgstr "Номерът за свързване с U-Report през WhatsApp, ако има такъв"
-
-#, fuzzy
-#| msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgid "The viber url that users will use to contact U-Report if you have one"
 msgstr "Номерът за свързване с U-Report през WhatsApp, ако има такъв"
 
 msgid "The short text used to direct visitors to join U-Report"
@@ -1125,528 +1658,3 @@ msgstr "Дали тази редица е създадена чрез сбива
 
 msgid "Something to trigger localizations"
 msgstr "Нещо, което да задейства локализиране"
-
-#~ msgid "The name of this category"
-#~ msgstr "Името на тази категория"
-
-#~ msgid "An optional image that can describe this category"
-#~ msgstr "Изображение по избор, което може да опише тази категория"
-
-#~ msgid "The category this image represents"
-#~ msgstr "Категорията, но която това изображение съответства"
-
-#~ msgid "The human readable name for this content type"
-#~ msgstr "Четливото потребителско име за този вид материали"
-
-#~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr "Франгметът за идентификация на този тип съдържание заедно с неговите шаблонови етикети"
-
-#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-#~ msgstr "Описание на това къде този тип материали се използва на сайта и как те ще бъдат изложени на него."
-
-#~ msgid "Whether this content should include a title"
-#~ msgstr "Дали този тип материали трябва да включват заглавие"
-
-#~ msgid "Whether this content should include an image"
-#~ msgstr "Дали този тип материали трябва да включват изображение"
-
-#~ msgid "Whether this content should use a rich HTML editor"
-#~ msgstr "Дали тази организация трябва да използва детайлен редактор на HTML"
-
-#~ msgid "Whether this content should include a summary field"
-#~ msgstr "Дали този тип материали трябва да включват поле с резюме"
-
-#~ msgid "Whether this content should include a link"
-#~ msgstr "Дали този материал трябва да включва линк"
-
-#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
-#~ msgstr "Дали този материал трябва да разреши качването на допълнителни изображения, т.е. галерия"
-
-#~ msgid "Whether this content has a color field"
-#~ msgstr "Дали този материал съдържа цветно поле"
-
-#~ msgid "Whether this content should allow setting a YouTube id"
-#~ msgstr "Дали този материал трябва да позволява настройката на YouTube ID"
-
-#~ msgid "Whether this content should allow tags"
-#~ msgstr "Дали този материал трябва да позволи използването на етикети"
-
-#~ msgid "Content Type"
-#~ msgstr "Тип материали"
-
-#~ msgid "The category, or type for this content block"
-#~ msgstr "Категорията или типа на това текстово поле"
-
-#~ msgid "The title for this block of content, optional"
-#~ msgstr "Заглавие на това текстово поле, по избор"
-
-#~ msgid "The summary for this item, should be short"
-#~ msgstr "Резюмето на този материал трябва да е кратко"
-
-#~ msgid "The body of text for this content block, optional"
-#~ msgstr "Тестът в това поле е по избор"
-
-#~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr "Каквото и да е изображение, което трябва да е показано с това текстово поле, незадължително"
-
-#~ msgid "A background color to use for the image, in the format: #rrggbb"
-#~ msgstr "Цвят за фон на това изображение  в формат-а #rrggbb"
-
-#~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr "Какъвто и да е линк, който да е свързан с това текстово поле, по избор"
-
-#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Каквито и да е етикети към текстово поле, разделени чрез интервали, могат да бъдат използвани за по-разширено филтриране на информация - по избор"
-
-#~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr "Степен на приоритет за това поле. Полетата с по-висока степен на приоритет застават на по-високи позиции"
-
-#~ msgid "The organization this content block belongs to"
-#~ msgstr "Организацията, към която това текстово поле принадлежи"
-
-#~ msgid "Content Blocks"
-#~ msgstr "Текстови полета"
-
-#~ msgid "%s Blocks"
-#~ msgstr "%sПолета"
-
-#~ msgid "Edit %s"
-#~ msgstr "Редактирай %s"
-
-#~ msgid "Create %s"
-#~ msgstr "Създай%s"
-
-#~ msgid "Create Content Block"
-#~ msgstr "Създай текстово поле"
-
-#~ msgid "Your first name"
-#~ msgstr "Вашето лично име"
-
-#~ msgid "Your last name"
-#~ msgstr "Вашата фамилия"
-
-#~ msgid "Your email address"
-#~ msgstr "Вашата електронна поща"
-
-#~ msgid "Your password, at least eight letters please"
-#~ msgstr "Вашата парола, поне осем букви, моля"
-
-#~ msgid "That email address is already used"
-#~ msgstr "Този email адрес вече се използва"
-
-#~ msgid "Passwords must contain at least 8 letters."
-#~ msgstr "Всяка парола трябва да съдържа не по-малко от 8 букви"
-
-#~ msgid "This domain is used for subdomains"
-#~ msgstr "Този домейн се използва от субдомейни"
-
-#~ msgid "The name of this organization"
-#~ msgstr "Името на тази организация"
-
-#~ msgid "The logo that should be used for this organization"
-#~ msgstr "Логото, което трябва да бъде използванo за тази организация"
-
-#~ msgid "Administrators"
-#~ msgstr "Администратори"
-
-#~ msgid "The administrators in your organization"
-#~ msgstr "Администраторите във вашата организация"
-
-#~ msgid "Viewers"
-#~ msgstr "Зрители"
-
-#~ msgid "The viewers in your organization"
-#~ msgstr "Зрителите, включени във вашата организация"
-
-#~ msgid "The editors in your organization"
-#~ msgstr "Редакторите във вашата организация"
-
-#~ msgid "Language"
-#~ msgstr "Език"
-
-#~ msgid "The main language used by this organization"
-#~ msgstr "Основният език, който се използва във вашата организация"
-
-#~ msgid "Subdomain"
-#~ msgstr "Субдомейн"
-
-#~ msgid "This subdomain is not available"
-#~ msgstr "Този субдомейн не е наличен"
-
-#~ msgid "The subdomain for this organization"
-#~ msgstr "Субдомейнът за тази организация"
-
-#~ msgid "Domain"
-#~ msgstr "Домейн"
-
-#~ msgid "This domain is not available"
-#~ msgstr "Този домейн не е наличен"
-
-#~ msgid "The custom domain for this organization"
-#~ msgstr "Персонализираният домейн за тази организация"
-
-#~ msgid "Timezone"
-#~ msgstr "Часова зона"
-
-#~ msgid "The timezone your organization is in."
-#~ msgstr "Часовата зона, в която се намира вашата организация"
-
-#~ msgid "JSON blob used to store configuration information associated with this organization"
-#~ msgstr "квадрат на програмен език JSON, съдържащ конфигурираща информация за тази организация"
-
-#~ msgid "Administrator"
-#~ msgstr "Администратор "
-
-#~ msgid "Editor"
-#~ msgstr "Редактор"
-
-#~ msgid "Viewer"
-#~ msgstr "Зрител"
-
-#~ msgid "The organization to which the account is invited to view"
-#~ msgstr "Организацията, която профилът е поканен да види"
-
-#~ msgid "Email"
-#~ msgstr "Email"
-
-#~ msgid "The email to which we send the invitation of the viewer"
-#~ msgstr "Email адреса, на който изпращаме поканата на зрителя"
-
-#~ msgid "Secret"
-#~ msgstr "Тайна"
-
-#~ msgid "a unique code associated with this invitation"
-#~ msgstr "Уникален код, свързан с тази покана"
-
-#~ msgid "User Role"
-#~ msgstr "Роля на потребителя"
-
-#~ msgid "%s Invitation"
-#~ msgstr "%s Покана"
-
-#~ msgid "The organization in which the image will be used"
-#~ msgstr "Организацията, към която ще бъде използвано това изображение"
-
-#~ msgid "The name to describe this background"
-#~ msgstr "Името, което описва този фон"
-
-#~ msgid "Background type"
-#~ msgstr "Вид на фона"
-
-#~ msgid "The API token for this backend"
-#~ msgstr " API-token-ът за това backend приложение"
-
-#~ msgid ""
-#~ "\n"
-#~ "      You've been invited to join %(org_name)s.\n"
-#~ "      <br/>\n"
-#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "Поканен сте да се присъедините към %(org_name)s\n"
-#~ "<br/>\n"
-#~ "За да приемете поканата, <a href='%(host)s%(join_url)s'>кликнете тук</a>\n"
-#~ " "
-
-#~ msgid "You are invited to join {{org.name}}."
-#~ msgstr "Поканени сте да се присъедините към {{името на организацията}}."
-
-#~ msgid "Click this link to join"
-#~ msgstr "Кликнете този линк, за да се присъедините"
-
-#~ msgid "Edit"
-#~ msgstr "Редактирай"
-
-#~ msgid "Manage Backends"
-#~ msgstr "Управлявайте Backend-овете"
-
-#~ msgid "Manage Users"
-#~ msgstr "Управлявай потребителите"
-
-#~ msgid "Select your Organization"
-#~ msgstr "Изберете вашата организация"
-
-#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-#~ msgstr "Вашият профил не е свързан с организация. Моля, свържете се с администратора на желаната от вас организация"
-
-#~ msgid "Your Organization"
-#~ msgstr "Вашата организация"
-
-#~ msgid "Invite people to your organization"
-#~ msgstr "Поканете хора да се присъединят към вашата организация"
-
-#~ msgid "One of the emails you entered is invalid."
-#~ msgstr "Един от email-ите, които сте въвели, е невалиден"
-
-#~ msgid "Manage %(name)s Accounts"
-#~ msgstr "Управлявайте %(name)sпрофили"
-
-#~ msgid "Create"
-#~ msgstr "Създай"
-
-#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
-#~ msgstr "Вашият линк за покана е невалиден. Моля, свържете се с администратора на вашата организация."
-
-#~ msgid "Join %(name)s"
-#~ msgstr "Присъедини се към %(name)s "
-
-#~ msgid "Join"
-#~ msgstr "Присъедини се"
-
-#~ msgid "Your invitation link has expired. Please contact your organization administrator."
-#~ msgstr "Вашият линк за покана е изтекъл. Моля, свържете се с администратора на вашата организация."
-
-#~ msgid "Task"
-#~ msgstr "Задача"
-
-#~ msgid "Tasks"
-#~ msgstr "Задачи"
-
-#~ msgid "The title for this story"
-#~ msgstr "Заглавието на тази история"
-
-#~ msgid "Whether this story is featured"
-#~ msgstr "Дали тази история е избрана"
-
-#~ msgid "The summary for the story"
-#~ msgstr "Резюмето на тази история "
-
-#~ msgid "The writer of the story"
-#~ msgstr "Авторът на тази история"
-
-#~ msgid "A link to an mp3 file to publish on this story"
-#~ msgstr "Линк към mp3 файл, който да бъде публикуван към тази история"
-
-#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr "Идентификацията на YouTube клипа (Това е текстът, който следва след v= и е преди & в YouTube линка)"
-
-#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-#~ msgstr "Каквито и да е етикети към тази история, разделени чрез интервали, могат да бъдат използвани за по-разширено филтриране на информация - по избор"
-
-#~ msgid "The category for this story"
-#~ msgstr "Категорията на тази история"
-
-#~ msgid "The organization this story belongs to"
-#~ msgstr "Организацията, към която тази история принадлежи"
-
-#~ msgid "The story to associate to"
-#~ msgstr "Тази история е свързана с"
-
-#~ msgid "Yes"
-#~ msgstr "Да "
-
-#~ msgid "No"
-#~ msgstr "Не"
-
-#~ msgid "Story Images"
-#~ msgstr "Изображения към историята"
-
-#~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr "Изображение, което да бъде включено към страницата на историята и към нейния предварителен преглед. (по избор)"
-
-#~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr "Изображение, което да бъде включено към страницата на историята и към нейния предварителен преглед. (по избор)"
-
-#~ msgid ""
-#~ "\n"
-#~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "Сигурни ли сте, че искате да премахнете<b>%(object)s</b>?"
-
-#~ msgid ""
-#~ "\n"
-#~ "\t %(counter)s result\n"
-#~ "\t"
-#~ msgid_plural ""
-#~ "\n"
-#~ "         %(counter)s results\n"
-#~ "        "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "\t%(counter)sрезултати \n"
-#~ "\t"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(counter)sброй резултати"
-
-#~ msgid ""
-#~ "\n"
-#~ "\tResults %(start)s-%(end)s of %(count)s\n"
-#~ "\t"
-#~ msgstr ""
-#~ "\n"
-#~ "Резултати %(start)s%(end)sна %(count)s"
-
-#~ msgid "Sign in"
-#~ msgstr "Вход"
-
-#~ msgid "Token Expired"
-#~ msgstr "Token-ът е изтекъл"
-
-#~ msgid ""
-#~ "\n"
-#~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Съжаляваме, не може да влезете в момента, тъй като получихме %(failed_login_limit)sнеправилни опита за влизане"
-
-#~ msgid ""
-#~ "\n"
-#~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Моля изчакайте %(lockout_timeout)s минути преди да опитате да влезете отново."
-
-#~ msgid ""
-#~ "\n"
-#~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
-#~ "  "
-#~ msgstr ""
-#~ "\n"
-#~ "<strong>Паролата ви е изтекла</strong>Според политиката на сайта трябва да избирате нова парола на всеки %(expire_days)sдни и всяка от тях не бива да е била използвана в срок от преходни %(window_days)sдни. "
-
-#~ msgid "New Password"
-#~ msgstr "Нова парола"
-
-#~ msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-#~ msgstr "Паролите трябва да съдържат поне 8 символа - една главна буква, една малка буква и една цифра."
-
-#~ msgid "You have used this password before in the past year, please use a new password."
-#~ msgstr "Паролата е била използвана преди през последната година. Моля използвайте нова."
-
-#~ msgid "Password"
-#~ msgstr "Парола"
-
-#~ msgid "Confirm Password"
-#~ msgstr "Потвърдете паролата"
-
-#~ msgid "Please enter your password to save changes."
-#~ msgstr "Моля, въведете вашата парола, за да запазите направените промени. "
-
-#~ msgid "Confirm the new password by filling the this field"
-#~ msgstr "Потвърдете новата парола, като попълните това поле"
-
-#~ msgid "New password doesn't match with its confirmation"
-#~ msgstr "Новата парола не съвпада с потвърждението си."
-
-#~ msgid "Your Email"
-#~ msgstr "Вашият Email"
-
-#~ msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-#~ msgstr "Възстановяване на паролата чрез email не се поддържа, моля свържете се с администратора на сайта, за да бъде обновена ръчно."
-
-#~ msgid "Current Password"
-#~ msgstr "Настояща парола "
-
-#~ msgid "Your current password"
-#~ msgstr "Настоящата ви парола "
-
-#~ msgid "Your new password."
-#~ msgstr "Новата ви парола "
-
-#~ msgid "Confirm new Password"
-#~ msgstr "Потвърдете нова парола"
-
-#~ msgid "Confirm your new password."
-#~ msgstr "Потвърдете вашата нова парола"
-
-#~ msgid "Please enter your password to save changes"
-#~ msgstr "Моля, въведете паролата си, за да запазите направените промени "
-
-#~ msgid "Confirm your new password by entering it here"
-#~ msgstr "Потвърдете новата си парола, като я въведете тук"
-
-#~ msgid "Mismatch between your new password and confirmation, try again"
-#~ msgstr "Несъответствие между новата ви парола и потвърждението ѝ, опитайте отново."
-
-#~ msgid "New user created successfully."
-#~ msgstr "Новият потребител е създаден успешно."
-
-#~ msgid "Groups"
-#~ msgstr "Групи"
-
-#~ msgid "Users will only get those permissions that are allowed for their group."
-#~ msgstr "Потребителите ще имат достъп само до онези разрешения, които са одобрени за тяхната група"
-
-#~ msgid "Set the user's initial password here."
-#~ msgstr "Въведи първоначалната парола на този потребител тук"
-
-#~ msgid "Last Login"
-#~ msgstr "Последно вписване"
-
-#~ msgid "Is Active"
-#~ msgstr "Е Активен"
-
-#~ msgid "Whether this user is allowed to log into the site"
-#~ msgstr "Дали този потребител има разрешение да влиза в сайта"
-
-#~ msgid "Users will only get those permissions that are allowed for their group"
-#~ msgstr "Потребителите ще имат достъп само до онези разрешения, които са одобрени за тяхната група"
-
-#~ msgid "You can reset the user's password by entering a new password here"
-#~ msgstr "Може да обновите паролата на съответния потребител, като въведете нова тук"
-
-#~ msgid "Username"
-#~ msgstr "Потребителско име"
-
-#~ msgid "Your password"
-#~ msgstr "Вашата парола"
-
-#~ msgid "If you want to set a new password, enter it here"
-#~ msgstr "Ако желаете да настройте нова парола, въведе я тук"
-
-#~ msgid "Confirm New Password"
-#~ msgstr "Потвърждаване на нова парола"
-
-#~ msgid "Confirm your new password"
-#~ msgstr "Потвърдете вашата нова парола"
-
-#~ msgid "Edit your profile"
-#~ msgstr "Редактирайте профил"
-
-#~ msgid "Password Recovery"
-#~ msgstr "Възстановяване на парола"
-
-#~ msgid "An Email has been sent to your account with further instructions."
-#~ msgstr "На предоставения на вашия профил адрес е изпратен e-mail, съдържащ следващи инструкции"
-
-#~ msgid "Password Recovery Request"
-#~ msgstr "Искане за възстановяване на парола"
-
-#~ msgid "Pick a new password"
-#~ msgstr "Изберете нова парола"
-
-#~ msgid "Your password has successfully been updated, thank you."
-#~ msgstr "Новата парола е актуализирана успешно. Благодарим ви."
-
-#~ msgid "You are now logged in as %s"
-#~ msgstr "Сега сте вписан като %s"
-
-#~ msgid "Password Updated Successfully. Now you can log in using your new password."
-#~ msgstr "Паролата е актуализирана успешно. Сега може да използвате новата си парола, за да влизате в сайта."
-
-#~ msgid "Reset your Password"
-#~ msgstr "Променете паролата си"
-
-#~ msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-#~ msgstr "Линкът е изтекъл поради мерки за сигурност. Моля започнете процеса нанова, като въведете email-а си тук "
-
-#~ msgid "Submit"
-#~ msgstr "Предай"
-
-#~ msgid "Form"
-#~ msgstr "От"
-
-#~ msgid "Save Changes"
-#~ msgstr "Запази промените"
-
-#~ msgid "Your new %s has been created."
-#~ msgstr "Нов %sе създаден"
-
-#~ msgid "Import %s"
-#~ msgstr "Вмъкни %s"
