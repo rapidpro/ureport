@@ -13,814 +13,1123 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 21:25+0000\n"
+"POT-Creation-Date: 2020-04-27 21:46+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/"
-"teams/226/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ureport/admins/views.py:35
+msgid "Back to Website"
+msgstr "Voltar para o Website"
+
+msgid "Welcome, "
+msgstr "Olá,"
+
+msgid "Logout"
+msgstr "Sair"
+
+msgid "Login"
+msgstr "Conectar"
+
+msgid "Opinions"
+msgstr "Opiniões"
+
+msgid "Stories"
+msgstr "Histórias"
+
+msgid "Users"
+msgstr "Usuários"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Pages"
+msgstr "Páginas"
+
+msgid "Jobs"
+msgstr "Empregos"
+
+msgid "Categories"
+msgstr "Categorias"
+
+msgid "Photos"
+msgstr "Fotos"
+
+msgid "Categories Images"
+msgstr "Categorias de imagens"
+
+msgid "News Items"
+msgstr "Notícias"
+
+msgid "Orgs"
+msgstr "Organizações"
+
+msgid "Content Types"
+msgstr "Tipos de conteúdo"
+
+msgid "Images"
+msgstr "Imagens"
+
+msgid "About"
+msgstr "Sobre"
+
+msgid "Engagement"
+msgstr "Engajamento"
+
+msgid "Category Images"
+msgstr "Categoria de Imagens"
+
+msgid "Gallery"
+msgstr "Galeria"
+
+msgid "Add Image"
+msgstr "Adicionar imagem"
+
+msgid "+ New "
+msgstr "+ Novo"
+
+msgid "+ New Page"
+msgstr "+ Nova página"
+
+msgid "U-Report"
+msgstr "U-Report"
+
+msgid "Admin"
+msgstr "Administrador"
+
+msgid "Configuration"
+msgstr "Configuração"
+
+msgid "Content"
+msgstr "Conteúdo"
+
+msgid "Country Aliases"
+msgstr "Sigla dos Países"
+
+msgid "Job Sources"
+msgstr "Fontes de Emprego"
+
+msgid "Jobs Content"
+msgstr "Conteúdo de Emprego"
+
+msgid "About Content"
+msgstr "Sobre Conteúdo"
+
+msgid "Videos"
+msgstr "Vídeos "
+
+msgid "Contact Us Content"
+msgstr "Conteúdo do Entre em contato"
+
+msgid "Missions Content"
+msgstr "Conteúdo das Missões"
+
+msgid "Terms & Conditions"
+msgstr "Termos & Condições"
+
+msgid "U-Reporters Content"
+msgstr "Conteúdo do U-Reporter"
+
+msgid "Join &amp; Engage Content"
+msgstr "Junte-se &amp; Envolva-se"
+
+msgid "Join Steps Content"
+msgstr "Conteúdo do Passos para participar"
+
+msgid "Additional Menu"
+msgstr "Menu Adicional"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "Selecione o seu país"
+
+msgid "Join Now"
+msgstr "Entre agora"
+
+msgid "READ MORE"
+msgstr "LEIA MAIS"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr "Explore o engajamento"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"Para adicionar uma proposta de trabalho do Twitter, você precisa criar um widget id do twitter"
+
+msgid "Follow this step by step guide"
+msgstr "Siga nosso guia passo-a-passo"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"<div>Depois de criar o widget, copie o id da url como mostrado em</div>"
+
+msgid "Next"
+msgstr "Próximo"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Back"
+msgstr "Voltar"
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "Últimas notificações"
+
+msgid "Backends"
+msgstr "Backends"
+
+msgid "You must have at least one administator"
+msgstr "Você deve ter pelo menos um administrador"
+
+msgid "Accounts"
+msgstr "Contas"
+
+msgid "Admins"
+msgstr "Administradores"
+
+msgid "Editors"
+msgstr "Editores"
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "User group"
+msgstr "Grupo de usuários"
+
+msgid "+ New Poll"
+msgstr "+ Nova pesquisa "
+
+msgid "Refresh Results"
+msgstr "Atualizar resultados"
+
+msgid "MORE POLLS"
+msgstr "MAIS ENQUETES"
+
+msgid "FILTER"
+msgstr "FILTRO"
+
+msgid "All"
+msgstr "Todos"
+
+msgid "POLL LIST"
+msgstr "LISTA DE ENQUETES"
+
+msgid "All polls from most recent to oldest"
+msgstr "Todas as enquetes, das mais recentes às mais antigas"
+
+msgid "ARCHIVED STORIES"
+msgstr "HISTÓRIAS ARQUIVADAS"
+
+msgid "LIST"
+msgstr "LISTA"
+
+msgid "LATEST OPINION"
+msgstr "Últimas opiniões"
+
+msgid "VIEW FULL RESULTS"
+msgstr "Veja os resultados completos"
+
+msgid "U-REPORTERS IN"
+msgstr "PARTICIPANTES DO U-REPORT NO "
+
+msgid "PARTNERING WITH"
+msgstr "EM PARCERIA COM"
+
+msgid "U-REPORTERS"
+msgstr "U-REPORTERS"
+
+msgid "IN"
+msgstr "EM"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "países em todo o mundo"
+
+msgid "AGES"
+msgstr "Idades"
+
+msgid "Join U-Report, Your voice matters."
+msgstr "Faça parte do U-Report, aqui sua voz tem poder."
+
+msgid "JOIN NOW"
+msgstr "PARTICIPE JÁ!"
+
+msgid "FEATURED STORY"
+msgstr "HISTÓRIAS EM DESTAQUE"
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Nós somos parte de uma plataforma global trabalhando para transformar as vidas de jovens ao redor do mundo."
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Saiba mais sobre como o U-Report está empoderando e conectando jovens para falar sobre questões que importam para a juventude."
+
+msgid "LEARN MORE"
+msgstr "Leia mais"
+
+msgid "Visit"
+msgstr "Visite"
+
+msgid "How would you like to join?"
+msgstr "Como você gostaria de fazer parte?"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "SEARCH"
+msgstr "BUSCAR"
+
+msgid "No results found"
+msgstr "Os resultados não foram encontrados"
+
+msgid "RESPONSES"
+msgstr "RESPOSTAS"
+
+msgid "RESPONSE RATE"
+msgstr "TAXA DE RESPOSTA"
+
+msgid "TOTAL RESPONSES"
+msgstr "TOTAL DE RESPOSTAS"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s responderam de %(polled)s questionadas"
+
+msgid "ALL"
+msgstr "Todos"
+
+msgid "AGE"
+msgstr "IDADE"
+
+msgid "GENDER"
+msgstr "GÊNERO"
+
+msgid "LOCATION"
+msgstr "LOCALIZAÇÃO"
+
+msgid "Written by:"
+msgstr "Escrito por"
+
+msgid "Even"
+msgstr "Até"
+
+msgid "State"
+msgstr "Estado"
+
+msgid "Other"
+msgstr "Outro"
+
+msgid "District"
+msgstr "Distrito"
+
+msgid "Participation Level"
+msgstr "Nível de Participação"
+
+msgid "Responses"
+msgstr "Respostas"
+
+msgid "Reporters in"
+msgstr "Reporters em"
+
+msgid "Results"
+msgstr "Resultados"
+
+msgid "*Other answers include"
+msgstr "*Outras respostas incluem"
+
+msgid "Population"
+msgstr "População"
+
+msgid "Registered in"
+msgstr "Registrado em"
+
+msgid "Density"
+msgstr "Densidade"
+
+msgid "total"
+msgstr "total"
+
+msgid "of"
+msgstr "de"
+
+msgid "the"
+msgstr "o"
+
+msgid "OVERALL STATISTICS"
+msgstr "ESTATÍSTICAS GERAIS"
+
+msgid "THIS YEAR"
+msgstr "ESTE ANO"
+
+msgid "AVG RESPONSE RATE"
+msgstr "Taxa de resposta do AVG"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "U-REPORTERS POR REGIÃO"
+
+msgid "FILTER RESULTS"
+msgstr "FILTRAR RESULTADOS"
+
+msgid "Export and Share"
+msgstr "Exportar e Compartilhar"
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "Quer contar ao mundo sobre isso? Faça o download desta imagem para compartilhar facilmente nas mídias sociais ou para uma bela apresentação!"
+
+msgid "SELECT COUNTRY"
+msgstr "Selecione o país"
+
+msgid "Custom pages"
+msgstr "Personalizar páginas"
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "Veja pelos números como nós estamos engajando as vozes da juventude para mudanças sociais positivas."
+
+msgid "Polled"
+msgstr "Questionado"
+
+msgid "Reporters"
+msgstr "Reporters"
+
+msgid "Top Region"
+msgstr "Regiões mais ativas"
+
+msgid "January"
+msgstr "Janeiro"
+
+msgid "February"
+msgstr "Fevereiro"
+
+msgid "March"
+msgstr "Março"
+
+msgid "April"
+msgstr "Abril"
+
+msgid "May"
+msgstr "Maio"
+
+msgid "June"
+msgstr "Junho"
+
+msgid "July"
+msgstr "Julho"
+
+msgid "August"
+msgstr "Agosto"
+
+msgid "September"
+msgstr "Setembro"
+
+msgid "October"
+msgstr "Outubro"
+
+msgid "November"
+msgstr "Novembro"
+
+msgid "December"
+msgstr "Dezembro"
+
+msgid "Jan"
+msgstr "Jan"
+
+msgid "Feb"
+msgstr "Fev"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Abr"
+
+msgid "Jun"
+msgstr "Jun"
+
+msgid "Jul"
+msgstr "Jul"
+
+msgid "Aug"
+msgstr "Ago"
+
+msgid "Sep"
+msgstr "Set"
+
+msgid "Oct"
+msgstr "Out"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Dec"
+msgstr "Dez"
+
+msgid "Remove Item?"
+msgstr "Remover item?"
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"            Você tem certeza que quer remover <strong>%(object)s</strong>?\n"
+"          "
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Uma vez removido, desaparecerá para sempre. Não há forma de desfazer esta operação."
+
+msgid "Search"
+msgstr "Procurar"
+
+msgid "Add"
+msgstr "Adicionar"
+
+#, python-format
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+"\n"
+"             %(counter)s resultado\n"
+"           "
+msgstr[1] ""
+"\n"
+"              %(counter)s resultados\n"
+"            "
+
+#, python-format
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+"\n"
+"             Resultados %(start)s-%(end)s de %(count)s\n"
+"           "
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "edit"
+msgstr "editar"
+
+msgid "Error"
+msgstr "Erro"
+
+msgid "Enter Dashboard"
+msgstr "Entrar no painel de controle"
+
+msgid "Forgot Password?"
+msgstr "Esqueceu a senha?"
+
+msgid "Login Failure"
+msgstr "Login Falhou"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"                Desculpe, você não pode entrar nesse momento porque nós recebemos%(failed_login_limit)s tentativas incorretas.\n"
+"              "
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"                    Por favor espere%(lockout_timeout)s minutos antes de tentar entrar novamente.\n"
+"                  "
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Eventualmente, você pode preencher o formulário abaixo para que a sua senha seja redefinida via e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Entre em contato com o administrador do site para ter a sua senha redefinida."
+
+msgid "Email Address"
+msgstr "Email"
+
+msgid "Recover"
+msgstr "Recuperar"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Por favor, insira o endereço de e-mail que usou para se inscrever e nós vamos ajudá-lo a recuperar sua senha."
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"        <strong>Sua senha expirou.</strong>A política do site declara que você deve escolher uma nova senha a cada %(expire_days)s e que as senhas não devem ter sido usadas nos %(window_days)s dias anteriores.\n"
+"      "
+
+msgid "+ New Story"
+msgstr "+ Nova história"
+
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr "Cache %s atualizado para esta organização"
 
-#: ureport/assets/models.py:15
 msgid "Banner"
 msgstr "Banner"
 
-#: ureport/assets/models.py:15
 msgid "Pattern"
 msgstr "Padrão"
 
-#: ureport/assets/models.py:15
 msgid "Flag"
 msgstr "Bandeira"
 
-#: ureport/assets/models.py:22 ureport/contacts/models.py:52
 msgid "Org"
 msgstr "Organização"
 
-#: ureport/assets/models.py:24
 msgid "The organization to which the image will be used"
 msgstr "A organização para a qual a imagem será usada"
 
-#: ureport/assets/models.py:28
 msgid "Name"
 msgstr "Nome"
 
-#: ureport/assets/models.py:28
 msgid "A short descriptive name for this image"
 msgstr "Um nome descritivo curto para esta imagem"
 
-#: ureport/assets/models.py:31
 msgid "Image type"
 msgstr "Tipo de Imagem"
 
-#: ureport/assets/models.py:33
 msgid "The image file"
 msgstr "O arquivo de imagem"
 
-#: ureport/contacts/models.py:54
 msgid "Label"
 msgstr "Rótulo"
 
-#: ureport/contacts/models.py:56
 msgid "Key"
 msgstr "Chave"
 
-#: ureport/contacts/models.py:79 ureport/stats/models.py:24
 msgid "Male"
 msgstr "Masculino"
 
-#: ureport/contacts/models.py:79 ureport/stats/models.py:24
 msgid "Female"
 msgstr "Feminino"
 
-#: ureport/contacts/models.py:79 ureport/stats/models.py:24
-msgid "Other"
-msgstr "Outro"
-
-#: ureport/contacts/models.py:87 ureport/locations/models.py:28
 msgid "Organization"
 msgstr "Organização"
 
-#: ureport/contacts/models.py:91 ureport/stats/models.py:42
 msgid "Gender"
 msgstr "Gênero"
 
-#: ureport/contacts/models.py:95
 msgid "Gender of the contact"
 msgstr "Gênero do contato"
 
-#: ureport/contacts/models.py:98
 msgid "Born Field"
 msgstr "Campo de nascimento"
 
-#: ureport/contacts/models.py:100
 msgid "Occupation Field"
 msgstr "Campo da ocupação"
 
-#: ureport/contacts/models.py:102
 msgid "Registration Date"
 msgstr "Data de registro"
 
-#: ureport/contacts/models.py:104
 msgid "State Field"
 msgstr "Campo do Estado"
 
-#: ureport/contacts/models.py:106
 msgid "District Field"
 msgstr "Campo do Distrito"
 
-#: ureport/contacts/models.py:108
 msgid "Ward Field"
 msgstr "Campo do Vilarejo"
 
-#: ureport/contacts/models.py:235 ureport/stats/models.py:67
 msgid "Number of items with this counter"
 msgstr "Número de itens com esse contador"
 
-#: ureport/countries/management/commands/add_country_alias.py:65
 msgid "No root user found. Please create a root user"
-msgstr ""
-"Nenhum administrador encontrado. Por favor, crie um usuário administrador"
+msgstr "Nenhum administrador encontrado. Por favor, crie um usuário administrador"
 
-#: ureport/countries/models.py:15
 msgid "The name for our alias"
 msgstr "O nome para os nossos alias"
 
-#: ureport/jobs/models.py:28
 msgid "The title or name to reference this Job source."
 msgstr "O título ou nome para referenciar esta fonte de emprego."
 
-#: ureport/jobs/models.py:32
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
 msgstr "Escolha o tipo para a fonte de Emprego. Twitter, Facebook ou RSS."
 
-#: ureport/jobs/models.py:34
 msgid "The full URL to navigate to this Job source."
 msgstr "O URL completo para navegar para esta fonte de emprego."
 
-#: ureport/jobs/models.py:40
-msgid ""
-"For Twitter, a widget Id is required to embed tweets on the website. Read "
-"carefully the instructions above on how to get the right widget Id"
-msgstr ""
-"Para o Twitter, um widget de Id é necessária para incorporar os tweets no "
-"site. Leia atentamente as instruções acima sobre como obter o widget Id "
-"correto"
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
+msgstr "Para o Twitter, um widget de Id é necessária para incorporar os tweets no site. Leia atentamente as instruções acima sobre como obter o widget Id correto"
 
-#: ureport/jobs/models.py:45
 msgid "Featured job sources are shown first on the jobs page."
-msgstr ""
-"As fontes de emprego selecionadas são mostradas em primeiro lugar na página "
-"de emprego."
+msgstr "As fontes de emprego selecionadas são mostradas em primeiro lugar na página de emprego."
 
-#: ureport/jobs/models.py:47
 msgid "The organization this job source is for"
 msgstr "A organização desta fonte de emprego é para"
 
-#: ureport/jobs/views.py:18
 msgid "Your job source has been added successfully"
 msgstr "A fonte de emprego foi adicionada com sucesso"
 
-#: ureport/jobs/views.py:44
 msgid "Your job source has been updated successfully"
 msgstr "A fonte de emprego foi atualizada com sucesso"
 
-#: ureport/locations/models.py:34
 msgid "This is the OSM id for this administrative boundary"
 msgstr "Este é o id OSM para este limite administrativo"
 
-#: ureport/locations/models.py:36
 msgid "The name of our administrative boundary"
 msgstr "O nome do nosso limite administrativo"
 
-#: ureport/locations/models.py:38
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
 msgstr "O nível de limite, 0 para país, 1 para estado, 2 para distrito"
 
-#: ureport/locations/models.py:45
 msgid "The parent to this political boundary if any"
 msgstr "A matriz desse limite administrativo, se houver"
 
-#: ureport/locations/models.py:49
 msgid "Geometry"
 msgstr "Geometria"
 
-#: ureport/locations/models.py:50
-msgid ""
-"The json representing the geometry type and coordinates of the boundaries"
+msgid "The json representing the geometry type and coordinates of the boundaries"
 msgstr "O json representando o tipo de geometria e coordenadas dos limites"
 
-#: ureport/news/models.py:14
 msgid "The title for this item"
 msgstr "O título para esse item"
 
-#: ureport/news/models.py:16
 msgid "A short summary description for this item"
 msgstr "Uma descrição curta e resumida para esse item"
 
-#: ureport/news/models.py:18
 msgid "A link that should be associated with this item"
 msgstr "Um link que deveria ser associado com esse item"
 
-#: ureport/news/models.py:21 ureport/news/models.py:50
 msgid "The category this item belongs to"
 msgstr "A categoria que esse item pertence"
 
-#: ureport/news/models.py:24
 msgid "The organization this item belongs to"
 msgstr "A organização que esse item pertence"
 
-#: ureport/news/models.py:41
 msgid "The title for this Video"
 msgstr "O título para esse vídeo"
 
-#: ureport/news/models.py:43
 msgid "A short summary description for this video"
 msgstr "Uma descrição curta e resumida para esse vídeo"
 
-#: ureport/news/models.py:46
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "O ID do vídeo do YouTube que deve ser ligada a este item"
 
-#: ureport/news/models.py:53
 msgid "The organization this video belongs to"
 msgstr "A organização a qual esse vídeo pertence"
 
-#: ureport/polls/models.py:68
 msgid "The name of this poll category"
 msgstr "O nome da categoria dessa enquete"
 
-#: ureport/polls/models.py:69
 msgid "The organization this category applies to"
 msgstr "A organização a qual esta categoria pertence"
 
-#: ureport/polls/models.py:76
 msgid "Poll Categories"
 msgstr "Categorias das enquetes"
 
-#: ureport/polls/models.py:114
 msgid "The Flow this Poll is based on"
 msgstr "O fluxo dessa enquete é baseada em"
 
-#: ureport/polls/models.py:117
-msgid ""
-"The date to display for this poll. Leave empty to use flow creation date."
-msgstr ""
-"Data para exibição dessa enquelte. Deixe em branco para usar a data de "
-"criação do fluxo."
+msgid "The date to display for this poll. Leave empty to use flow creation date."
+msgstr "Data para exibição dessa enquelte. Deixe em branco para usar a data de criação do fluxo."
 
-#: ureport/polls/models.py:121
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr "Uma vez que o fluxo para essa enquete seja arquivado no RapidPro"
 
-#: ureport/polls/models.py:124
 msgid "The base language of the flow to use"
 msgstr "O idioma padrão usado pelo fluxo"
 
-#: ureport/polls/models.py:126
 msgid "The number of polled reporters on this poll"
 msgstr "O número de reporters questionados nessa enquete"
 
-#: ureport/polls/models.py:129
 msgid "Whether the poll has finished the initial results sync."
-msgstr ""
-"Uma vez que essa enquete tenha finalizado a sincronia inicial de resultados."
+msgstr "Uma vez que essa enquete tenha finalizado a sincronia inicial de resultados."
 
-#: ureport/polls/models.py:133
 msgid "Whether the poll should stop regenerating stats."
 msgstr "Se a pesquisa deve parar de regenerar estatísticas"
 
-#: ureport/polls/models.py:136
 msgid "The title for this Poll"
 msgstr "O título dessa enquete"
 
-#: ureport/polls/models.py:138
 msgid "The category this Poll belongs to"
 msgstr "A categoria a qual esta enquete pertence"
 
-#: ureport/polls/models.py:141
 msgid "Whether this poll should be featured on the homepage"
 msgstr "Se essa enquete deve ser destaque na página inicial"
 
-#: ureport/polls/models.py:147
 msgid "The splash category image to display for the poll (optional)"
 msgstr "A imagem da categoria inicial para exibir na enquete (opcional)"
 
-#: ureport/polls/models.py:150
 msgid "The organization this poll is part of"
 msgstr "A organização desta esquete é parte de"
 
-#: ureport/polls/models.py:156
 msgid "The title for this response story"
 msgstr "O título para a resposta desta história "
 
-#: ureport/polls/models.py:160
 msgid "The writer of the response story"
 msgstr "O escritor da resposta dessa história"
 
-#: ureport/polls/models.py:163
 msgid "The body of text for the story"
 msgstr "O corpo do texto para a história"
 
-#: ureport/polls/models.py:782
 msgid "The name to describe this image"
 msgstr "O nome para descrever esta imagem"
 
-#: ureport/polls/models.py:785
 msgid "The poll to associate to"
 msgstr "Associar a enquete a"
 
-#: ureport/polls/models.py:788
 msgid "The image file to use"
 msgstr "O arquivo da imagem a ser usada"
 
-#: ureport/polls/models.py:801
 msgid "The poll for this response"
 msgstr "A enquete para esta resposta"
 
-#: ureport/polls/models.py:804
 msgid "The location for this response"
 msgstr "A localização para esta resposta"
 
-#: ureport/polls/models.py:807
 msgid "The name of the sender of the message"
 msgstr "O nome do remetente da mensagem"
 
-#: ureport/polls/models.py:810
 msgid "The featured response message"
 msgstr "A mensagem de resposta em destaque"
 
-#: ureport/polls/models.py:827
 msgid "The poll this question is part of"
 msgstr "A enquete na qual esta pergunta faz parte"
 
-#: ureport/polls/models.py:829
 msgid "The title of this question"
 msgstr "O título desta pergunta"
 
-#: ureport/polls/models.py:830
 msgid "The RuleSet this question is based on"
 msgstr "As regras dessa pergunta se baseiam em"
 
-#: ureport/polls/models.py:835
 msgid "The label of the ruleset on RapidPro"
 msgstr "O título da ruleset no RapidPro"
 
-#: ureport/polls/models.py:839
 msgid "The priority number for this question on the poll"
 msgstr "A ordem de prioridade para essa pergunta na enquete"
 
-#: ureport/polls/models.py:1235
 msgid "The Rule this response category is based on"
 msgstr "A regra que esta categoria de resposta é baseada em"
 
-#: ureport/polls/views.py:57
 msgid "Your org does not have any API token configuration."
 msgstr "Sua organização não possui nenhuma configuração de token da API."
 
-#: ureport/polls/views.py:138
 msgid "You must include a title for every included question."
 msgstr "Você deve incluir um título para cada questão incluída."
 
-#: ureport/polls/views.py:141
 msgid "Title too long. The max limit is 255 characters for each title"
 msgstr "O título é muito longo. O limite máximo é de 255 caracteres por título"
 
-#: ureport/polls/views.py:146
 msgid "You must include at least one poll question."
 msgstr "Você deve incluir pelo menos uma pergunta da enquete."
 
-#: ureport/polls/views.py:172
 msgid "Adjust poll date"
 msgstr "Ajustar data da enquete"
 
-#: ureport/polls/views.py:175
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr "Sua enquete foi atualizada, agora escolha as perguntas a incluir."
 
-#: ureport/polls/views.py:185
 msgid "Configure flow"
 msgstr "Configure o fluxo"
 
-#: ureport/polls/views.py:188
 msgid "Your poll has been configured, now adjust the poll date."
 msgstr "Sua pesquisa foi configurada, agora ajuste a data da pesquisa."
 
-#: ureport/polls/views.py:241
 msgid "Your poll has been created, now configure its flow."
 msgstr "Sua enquete foi criada, agora configure o fluxo"
 
-#: ureport/polls/views.py:279
 msgid "Poll Images"
 msgstr "Imagens da Enquete"
 
-#: ureport/polls/views.py:280
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr ""
-"Agora, insira quaisquer respostas que você gostaria de destacar. (se houver "
-"alguma)"
+msgstr "Agora, insira quaisquer respostas que você gostaria de destacar. (se houver alguma)"
 
-#: ureport/polls/views.py:294 ureport/polls/views.py:304
 #, python-format
 msgid "Image %d"
 msgstr "Imagem %d"
 
-#: ureport/polls/views.py:295
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr ""
-"A imagem para mostrar na página de enquetes e nas visualizações. (Opcional)"
+msgstr "A imagem para mostrar na página de enquetes e nas visualizações. (Opcional)"
 
-#: ureport/polls/views.py:305
 msgid "Image to display on poll page and in previews (optional)"
-msgstr ""
-"A imagem para mostrar na página de enquetes e nas visualizações. (Opcional)"
+msgstr "A imagem para mostrar na página de enquetes e nas visualizações. (Opcional)"
 
-#: ureport/polls/views.py:331
 msgid "Poll Response"
 msgstr "Respostas da pesquisa"
 
-#: ureport/polls/views.py:333
 msgid "Your poll has been updated."
 msgstr "Sua enquete foi atualizada."
 
-#: ureport/polls/views.py:343
 msgid "Poll Questions"
 msgstr "Questões da enquete"
 
-#: ureport/polls/views.py:345
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr ""
-"Agora, defina as imagens que você deseja mostrar na sua página de enquete. "
-"(Se houver alguma)"
+msgstr "Agora, defina as imagens que você deseja mostrar na sua página de enquete. (Se houver alguma)"
 
-#: ureport/polls/views.py:375
 msgid "Include"
 msgstr "Incluir"
 
-#: ureport/polls/views.py:378
 msgid "Whether to include this question in your public results"
 msgstr "Se deseja incluir esta questão nos seus resultados públicos"
 
-#: ureport/polls/views.py:384
 msgid "Priority"
 msgstr "Prioridade"
 
-#: ureport/polls/views.py:387
-msgid ""
-"The priority of this question on the poll page, higher priority comes first"
-msgstr ""
-"Prioridade dessa pergunta na página de enquetes, a maior aparecerá primeiro"
+msgid "The priority of this question on the poll page, higher priority comes first"
+msgstr "Prioridade dessa pergunta na página de enquetes, a maior aparecerá primeiro"
 
-#: ureport/polls/views.py:393
 msgid "Ruleset Label"
 msgstr "Título da Ruleset"
 
-#: ureport/polls/views.py:397
 msgid "The label of the ruleset from RapidPro"
 msgstr "Título da ruleset do RapidPro"
 
-#: ureport/polls/views.py:403
 msgid "Title"
 msgstr "Título"
 
-#: ureport/polls/views.py:407
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "A pergunta realizada ao seu público alvo será mostrada publicamente"
 
-#: ureport/polls/views.py:539
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr ""
-"Atualização agendada para pesquisa #%(poll_id)dna organização # %(org_id)d"
+msgstr "Atualização agendada para pesquisa #%(poll_id)dna organização # %(org_id)d"
 
-#: ureport/public/views.py:330
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-#: ureport/settings_common.py:168
 msgid "The name of the Contact Group that contains registered reporters"
 msgstr "O nome do grupo de contatos que contém u-reporters registrados"
 
-#: ureport/settings_common.py:174
-msgid ""
-"The label of the Contact Field that contains the birth date of reporters"
-msgstr ""
-"O título do campo de contato que contém a data de nascimento dos repórteres"
+msgid "The label of the Contact Field that contains the birth date of reporters"
+msgstr "O título do campo de contato que contém a data de nascimento dos repórteres"
 
-#: ureport/settings_common.py:180
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "O título do campo de contato que contém o gênero dos repórteres"
 
-#: ureport/settings_common.py:187
-msgid ""
-"The label of the Contact Field that contains the occupation of reporters"
+msgid "The label of the Contact Field that contains the occupation of reporters"
 msgstr "O título do campo de contato que contém a ocupação dos repórteres"
 
-#: ureport/settings_common.py:194
-msgid ""
-"The label of the Contact Field that contains the registration date of "
-"reporters"
-msgstr ""
-"O título do campo de contato que contém a data de registro dos repórters"
+msgid "The label of the Contact Field that contains the registration date of reporters"
+msgstr "O título do campo de contato que contém a data de registro dos repórters"
 
-#: ureport/settings_common.py:200
 msgid "The label of the Contact Field that contains the State of reporters"
 msgstr "O título do campo de contato que contém o Estado dos repórteres"
 
-#: ureport/settings_common.py:207
 msgid "The label of the Contact Field that contains the District of reporters"
 msgstr "O título do campo de contato que contém o Distrito dos repórteres"
 
-#: ureport/settings_common.py:214
 msgid "The label of the Contact Field that contains the Ward of reporters"
 msgstr "O título do campo de contato que contém o \"Ward\" dos reporters"
 
-#: ureport/settings_common.py:220
 msgid "The label assigned to U-Reporters that are Male."
 msgstr "O título atribuído aos U-Reporters que são do sexo masculino."
 
-#: ureport/settings_common.py:226
 msgid "The label assigned to U-Reporters that are Female."
 msgstr "O título atribuído às U-Reporters que são do sexo feminino."
 
-#: ureport/settings_common.py:235
 msgid "Whether this org should be show on the landing page"
 msgstr "Se esta organização deve aparecer na página de destino"
 
-#: ureport/settings_common.py:240
 msgid "Whether this org count should consider the count from link only"
-msgstr ""
-"Se essa contagem de organizações deve considerar apenas a contagem do link"
+msgstr "Se essa contagem de organizações deve considerar apenas a contagem do link"
 
-#: ureport/settings_common.py:246
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr ""
-"O link que os utilizadores usarão para contactar o U-Report a nível local"
+msgstr "O link que os utilizadores usarão para contactar o U-Report a nível local"
 
-#: ureport/settings_common.py:254
-msgid ""
-"The whatapp number that users will use to contact U-Report if you have one"
-msgstr ""
-"O número do Whatsapp que os usuários usarão para entrar em contato com o U-"
-"Report se você tiver um"
+msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "O número do Whatsapp que os usuários usarão para entrar em contato com o U-Report se você tiver um"
 
-#: ureport/settings_common.py:262
 #, fuzzy
-#| msgid ""
-#| "The whatapp number that users will use to contact U-Report if you have one"
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The viber url that users will use to contact U-Report if you have one"
-msgstr ""
-"O número do Whatsapp que os usuários usarão para entrar em contato com o U-"
-"Report se você tiver um"
+msgstr "O número do Whatsapp que os usuários usarão para entrar em contato com o U-Report se você tiver um"
 
-#: ureport/settings_common.py:270
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "O texto usado para direcionar os visitantes a se juntar ao UReport"
 
-#: ureport/settings_common.py:276
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr "O ID do vídeo do YouTube sobre como participar da seção U-Report"
 
-#: ureport/settings_common.py:284
 msgid "The title of the photos section U-Report homepage"
 msgstr "O título da seção de fotos da página inicial do U-Report"
 
-#: ureport/settings_common.py:292
 msgid "The description of the photos section U-Report homepage"
 msgstr "A descrição da seção de fotos da página inicial do U-Report"
 
-#: ureport/settings_common.py:299
 msgid "The description of the opinions page"
 msgstr "A descrição da página de opiniões"
 
-#: ureport/settings_common.py:303
 msgid "The description of the stories page"
 msgstr "A descrição da página de histórias"
 
-#: ureport/settings_common.py:308
 msgid "The description of the engagement page"
 msgstr "A descrição da página de engajamento"
 
-#: ureport/settings_common.py:314
 msgid "The callout message on the footer engagement section"
 msgstr "A mensagem de destaque no rodapé da seção de engajamento"
 
-#: ureport/settings_common.py:321
 msgid "The primary color for styling for this organization, should be dark"
 msgstr "A cor principal do estilo para esta organização deve ser escura"
 
-#: ureport/settings_common.py:327
 msgid "The secondary color for styling for this organization, should be dark"
 msgstr "A cor secundária para o estilo desta organização deve ser escura"
 
-#: ureport/settings_common.py:334
 msgid "The tertiary color for styling for this organization, should be dark"
 msgstr "A cor terciária do estilo para esta organização deve ser escura"
 
-#: ureport/settings_common.py:341
-msgid ""
-"The primary highlight color for styling for this organization, should be "
-"light"
-msgstr ""
-"A cor principal de destaque para o estilo desta organização deve ser clara"
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "A cor principal de destaque para o estilo desta organização deve ser clara"
 
-#: ureport/settings_common.py:349
-msgid ""
-"The secondary highlight color for styling for this organization, should be "
-"light"
-msgstr ""
-"A cor de destaque secundária do estilo para esta organização deve ser clara"
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "A cor de destaque secundária do estilo para esta organização deve ser clara"
 
-#: ureport/settings_common.py:356
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr ""
-"Até 6 cores para definir o estilo dos gráficos, use vírgula entre as cores."
+msgstr "Até 6 cores para definir o estilo dos gráficos, use vírgula entre as cores."
 
-#: ureport/settings_common.py:362
 msgid "The color used to draw the text on the join bar"
 msgstr "A cor usada no texto da barra de registro"
 
-#: ureport/settings_common.py:368
 msgid "The color used to draw the background on the join bar"
 msgstr "A cor usada no fundo na barra de registro"
 
-#: ureport/settings_common.py:374
 msgid "The primary color for styling for this organization"
 msgstr "A cor primária para definir o estilo desta organização"
 
-#: ureport/settings_common.py:380
 msgid "The secondary color for styling for this organization"
 msgstr "A cor secundária para definir o estilo desta organização"
 
-#: ureport/settings_common.py:386
 msgid "The background color for the site"
 msgstr "A cor de fundo para o site"
 
-#: ureport/settings_common.py:392
-msgid ""
-"11 colors for styling maps, use comma between colors, not used if not 11 "
-"colors"
-msgstr ""
-"11 cores para estilizar mapas, use vírgula entre cores, não usado se não "
-"tiver 11 cores"
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgstr "11 cores para estilizar mapas, use vírgula entre cores, não usado se não tiver 11 cores"
 
-#: ureport/settings_common.py:399
 msgid "The states to show on maps only"
 msgstr "Os estados a serem mostrados apenas nos mapas"
 
-#: ureport/settings_common.py:404
 msgid "The states to show on maps only, used to filter poll results"
-msgstr ""
-"Os estados a serem exibidos apenas nos mapas, usados ​​para filtrar os "
-"resultados da pesquisa"
+msgstr "Os estados a serem exibidos apenas nos mapas, usados ​​para filtrar os resultados da pesquisa"
 
-#: ureport/settings_common.py:410
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "O Rastreamento ID Google Analytics para esta organização"
 
-#: ureport/settings_common.py:418
 msgid "The URL to the Youtube channel for this organization"
 msgstr "O URL do canal do Youtube para esta organização"
 
-#: ureport/settings_common.py:426
 msgid "The URL to the Facebook page for this organization"
 msgstr "O URL da página do Facebook para esta organização"
 
-#: ureport/settings_common.py:434
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr "O ID numérico para a página no Facebook dessa org (opcional)"
 
-#: ureport/settings_common.py:442
-msgid ""
-"The integer id to the Facebook app for this organization's chat app "
-"(optional)"
-msgstr ""
-"O ID numérico do aplicativo no Facebook para o chat dessa org (opcional)"
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
+msgstr "O ID numérico do aplicativo no Facebook para o chat dessa org (opcional)"
 
-#: ureport/settings_common.py:450
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr ""
-"O texto curto usado para cumprimentar os usuários no plugin do Facebook "
-"Messenger"
+msgstr "O texto curto usado para cumprimentar os usuários no plugin do Facebook Messenger"
 
-#: ureport/settings_common.py:458
 msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr "O ID numérico para o Facebook Pixel dessa org (opcional)"
 
-#: ureport/settings_common.py:466
 msgid "The Instagram username for this organization"
 msgstr "O nome de usuário do Instagram para esta organização"
 
-#: ureport/settings_common.py:472
 msgid "The Instagram widget id from lightwidget.com"
 msgstr "O ID no Instagram widget do lightwidget.com"
 
-#: ureport/settings_common.py:479
 msgid "The Twitter handle for this organization"
 msgstr "O Twitter handle para esta organização"
 
-#: ureport/settings_common.py:484
 msgid "The Twitter widget used for searching"
 msgstr "O Widget do Twitter usado para pesquisar"
 
-#: ureport/settings_common.py:490
 msgid "The words to filter out from the results on public site"
 msgstr "As palavras para filtrar os resultados na parte pública do site"
 
-#: ureport/settings_common.py:498
 msgid "If there are jobs to be shown on the public site."
 msgstr "Se houver trabalhos a serem exibidos no site público."
 
-#: ureport/settings_common.py:504
-msgid ""
-"If this org if for global data. e.g: It shows a world map instead of a "
-"country map."
-msgstr ""
-"Se esta organização é para dados globais. Por exemplo: Ela mostra um mapa do "
-"mundo em vez de um mapa do país."
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgstr "Se esta organização é para dados globais. Por exemplo: Ela mostra um mapa do mundo em vez de um mapa do país."
 
-#: ureport/settings_common.py:511
 msgid "Whether to activate an extra gender."
 msgstr "Se deve ativar um gênero extra."
 
-#: ureport/settings_common.py:517
 msgid "Whether to activate the new design."
 msgstr "Se deve ativar o novo design."
 
-#: ureport/settings_common.py:525
-msgid ""
-"The alpha-3 ISO code of the organization so that it appears the stories "
-"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
-"Global)."
-msgstr ""
-"O código alfa-3 ISO da organização que aparecerá no widget de histórias no "
-"aplicativo do U-Report. Exemplo: BRA, NIG, CMR (Use GLOBAL se U-Report for "
-"Global)."
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
+msgstr "O código alfa-3 ISO da organização que aparecerá no widget de histórias no aplicativo do U-Report. Exemplo: BRA, NIG, CMR (Use GLOBAL se U-Report for Global)."
 
-#: ureport/settings_common.py:533
 msgid "The font used for headline texts"
 msgstr "A fonte usada para os títulos dos textos"
 
-#: ureport/settings_common.py:537
 msgid "The font used for normal text"
 msgstr "Nenhuma fonte usada para texto normal"
 
-#: ureport/settings_common.py:541
 msgid "Hide participation stats"
 msgstr "Ocultar estatísticas de participação"
 
-#: ureport/settings_common.py:547
 msgid "The text to describe the sponsors of free messages"
 msgstr "O texto para descrever apoiadores de mensagens gratuitas"
 
-#: ureport/settings_common.py:553
 msgid "The font used for small text"
 msgstr "A fonte usada para pequenos textos"
 
-#: ureport/settings_common.py:560
-msgid ""
-"If you need to include some custom HTML codes in you org pages, like custom "
-"analytics code snippets"
-msgstr ""
-"Se você precisar incluir alguns códigos HTML personalizados nas suas páginas "
-"de organizações, como trechos de código analytics"
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
+msgstr "Se você precisar incluir alguns códigos HTML personalizados nas suas páginas de organizações, como trechos de código analytics"
 
-#: ureport/stats/models.py:40
 msgid "90 Days"
 msgstr "90 dias"
 
-#: ureport/stats/models.py:40
 msgid "6 Months"
 msgstr "6 meses"
 
-#: ureport/stats/models.py:40
 msgid "12 Months"
 msgstr "12 meses"
 
-#: ureport/stats/models.py:42
-msgid "All"
-msgstr "Todos"
-
-#: ureport/stats/models.py:42
 msgid "Age"
 msgstr "Idade"
 
-#: ureport/stats/models.py:42
 msgid "Location"
 msgstr "Localização"
 
-#: ureport/stats/models.py:45 ureport/stats/models.py:236
 msgid "Opinion Responses"
 msgstr "Respostas de opinião"
 
-#: ureport/stats/models.py:46
 msgid "Sign Up Rate"
 msgstr "Taxa de inscrições"
 
-#: ureport/stats/models.py:47 ureport/stats/models.py:379
 msgid "Response Rate"
 msgstr "Taxa de Respostas"
 
-#: ureport/stats/models.py:48 ureport/stats/models.py:623
 msgid "Active Users"
 msgstr "Usuários ativos"
 
-#: ureport/stats/models.py:69
 #, fuzzy
 #| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
 msgstr "Se esta história é destaque"
 
-#: ureport/translation.py:19
 msgid "Something to trigger localizations"
 msgstr "Algo para disparar localizações"
 
@@ -830,9 +1139,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "An optional image that can describe this category"
 #~ msgstr "Uma imagem opcional que pode descrever esta categoria"
 
-#~ msgid "Categories"
-#~ msgstr "Categorias"
-
 #~ msgid "The category this image represents"
 #~ msgstr "A categoria que esta imagem representa"
 
@@ -840,16 +1146,10 @@ msgstr "Algo para disparar localizações"
 #~ msgstr "Um nome legível para este tipo de conteúdo"
 
 #~ msgid "The slug to idenfity this content type, used with the template tags"
-#~ msgstr ""
-#~ "O filtro para identificar esse tipo de conteúdo, usado com as tags de "
-#~ "template"
+#~ msgstr "O filtro para identificar esse tipo de conteúdo, usado com as tags de template"
 
-#~ msgid ""
-#~ "A description of where this content type is used on the site and how it "
-#~ "will be dsiplayed"
-#~ msgstr ""
-#~ "Uma descrição de onde este tipo de conteúdo é usado no site e como será "
-#~ "exibido"
+#~ msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+#~ msgstr "Uma descrição de onde este tipo de conteúdo é usado no site e como será exibido"
 
 #~ msgid "Whether this content should include a title"
 #~ msgstr "Se este conteúdo deve incluir um título"
@@ -866,12 +1166,8 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Whether this content should include a link"
 #~ msgstr "Se este conteúdo deve incluir um link"
 
-#~ msgid ""
-#~ "Whether this content should allow upload of additional images, ie a "
-#~ "gallery"
-#~ msgstr ""
-#~ "Se este conteúdo deve permitir o carregamento de imagens adicionais, ou "
-#~ "seja, uma galeria"
+#~ msgid "Whether this content should allow upload of additional images, ie a gallery"
+#~ msgstr "Se este conteúdo deve permitir o carregamento de imagens adicionais, ou seja, uma galeria"
 
 #~ msgid "Whether this content has a color field"
 #~ msgstr "Se este conteúdo tem um campo de cor"
@@ -898,45 +1194,22 @@ msgstr "Algo para disparar localizações"
 #~ msgstr "O corpo de texto para este bloco de conteúdo. Opcional"
 
 #~ msgid "Any image that should be displayed with this content block, optional"
-#~ msgstr ""
-#~ "Qualquer imagem que poderá ser exibida com este bloco de conteúdo. "
-#~ "Opcional"
+#~ msgstr "Qualquer imagem que poderá ser exibida com este bloco de conteúdo. Opcional"
 
 #~ msgid "A background color to use for the image, in the format: #rrggbb"
 #~ msgstr "A cor do fundo a ser usada para a imagem no formato: #rrggb"
 
 #~ msgid "Any link that should be associated with this content block, optional"
-#~ msgstr ""
-#~ "Qualquer link que poderá ser associado a este bloco de conteúdo. Opcional"
+#~ msgstr "Qualquer link que poderá ser associado a este bloco de conteúdo. Opcional"
 
-#~ msgid ""
-#~ "Any tags for this content block, separated by spaces, can be used to do "
-#~ "more advanced filtering, optional"
-#~ msgstr ""
-#~ "Qualquer etiqueta para este bloco de conteúdo, separada por espaços, pode "
-#~ "ser usada para fazer uma filtragem mais avançada. É opcional"
+#~ msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr "Qualquer etiqueta para este bloco de conteúdo, separada por espaços, pode ser usada para fazer uma filtragem mais avançada. É opcional"
 
 #~ msgid "The priority for this block, higher priority blocks come first"
-#~ msgstr ""
-#~ "Prioridade para este bloco, blocos com maior prioridade devem vir primeiro"
+#~ msgstr "Prioridade para este bloco, blocos com maior prioridade devem vir primeiro"
 
 #~ msgid "The organization this content block belongs to"
 #~ msgstr "A organização deste bloco de conteúdo pertence à"
-
-#~ msgid "Gallery"
-#~ msgstr "Galeria"
-
-#~ msgid "Add Image"
-#~ msgstr "Adicionar imagem"
-
-#~ msgid "Search"
-#~ msgstr "Procurar"
-
-#~ msgid "Add"
-#~ msgstr "Adicionar"
-
-#~ msgid "Content Types"
-#~ msgstr "Tipos de conteúdo"
 
 #~ msgid "Content Blocks"
 #~ msgstr "Blocos de conteúdo"
@@ -995,9 +1268,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "The viewers in your organization"
 #~ msgstr "A audiência em sua organização"
 
-#~ msgid "Editors"
-#~ msgstr "Editores"
-
 #~ msgid "The editors in your organization"
 #~ msgstr "Os editores em sua organização"
 
@@ -1031,12 +1301,8 @@ msgstr "Algo para disparar localizações"
 #~ msgid "The timezone your organization is in."
 #~ msgstr "O fuso horário que a sua organização estiver usando."
 
-#~ msgid ""
-#~ "JSON blob used to store configuration information associated with this "
-#~ "organization"
-#~ msgstr ""
-#~ "JSON blob costumava armazenar informações de configuração associado a "
-#~ "esta organização"
+#~ msgid "JSON blob used to store configuration information associated with this organization"
+#~ msgstr "JSON blob costumava armazenar informações de configuração associado a esta organização"
 
 #~ msgid "Administrator"
 #~ msgstr "Administrador"
@@ -1086,8 +1352,7 @@ msgstr "Algo para disparar localizações"
 #~ "\n"
 #~ "      You've been invited to join %(org_name)s.\n"
 #~ "      <br/>\n"
-#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click "
-#~ "here</a>.\n"
+#~ "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
 #~ "  "
 #~ msgstr ""
 #~ "\n"
@@ -1110,36 +1375,17 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Manage Users"
 #~ msgstr "Gerir usuarios"
 
-#~ msgid "Accounts"
-#~ msgstr "Contas"
-
-#~ msgid "Admins"
-#~ msgstr "Administradores"
-
-#~ msgid "Remove"
-#~ msgstr "Remover"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "Você deve ter pelo menos um administrador"
-
 #~ msgid "Select your Organization"
 #~ msgstr "Escolha a sua Organização"
 
-#~ msgid ""
-#~ "Your account is not associated to an organization. Please Contact the "
-#~ "adminstrator."
-#~ msgstr ""
-#~ "A sua conta não está associada a uma organização. Por favor contacte o "
-#~ "administrador."
+#~ msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+#~ msgstr "A sua conta não está associada a uma organização. Por favor contacte o administrador."
 
 #~ msgid "Your Organization"
 #~ msgstr "Sua organização"
 
 #~ msgid "Invite people to your organization"
 #~ msgstr "Convide pessoas para a sua organização"
-
-#~ msgid "User group"
-#~ msgstr "Grupo de usuários"
 
 #~ msgid "One of the emails you entered is invalid."
 #~ msgstr "Um dos e-mails que você inseriu é inválido."
@@ -1151,12 +1397,8 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Create"
 #~ msgstr "Criar"
 
-#~ msgid ""
-#~ "Your invitation link is invalid. Please contact your organization "
-#~ "administrator."
-#~ msgstr ""
-#~ "Seu link de convite é inválido. Por favor, entre em contato com o "
-#~ "administrador da organização."
+#~ msgid "Your invitation link is invalid. Please contact your organization administrator."
+#~ msgstr "Seu link de convite é inválido. Por favor, entre em contato com o administrador da organização."
 
 #, python-format
 #~ msgid "Join %(name)s"
@@ -1165,12 +1407,8 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Join"
 #~ msgstr "Faça parte"
 
-#~ msgid ""
-#~ "Your invitation link has expired. Please contact your organization "
-#~ "administrator."
-#~ msgstr ""
-#~ "Seu link de convite expirou. Entre em contato com o administrador da "
-#~ "organização."
+#~ msgid "Your invitation link has expired. Please contact your organization administrator."
+#~ msgstr "Seu link de convite expirou. Entre em contato com o administrador da organização."
 
 #~ msgid "Task"
 #~ msgstr "Tarefa"
@@ -1195,28 +1433,17 @@ msgstr "Algo para disparar localizações"
 #~ msgid "A link to an mp3 file to publish on this story"
 #~ msgstr "Um link para um arquivo de mp3 para publicar nesta história"
 
-#~ msgid ""
-#~ "The id of the YouTube video that should be linked to this story (this is "
-#~ "the text that comes afer v= and before & in the YouTube URL)"
-#~ msgstr ""
-#~ "O ID do vídeo do YouTube que deve ser ligado a esta história (este é o "
-#~ "texto que vem depois de v = e antes e na URL do YouTube)"
+#~ msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+#~ msgstr "O ID do vídeo do YouTube que deve ser ligado a esta história (este é o texto que vem depois de v = e antes e na URL do YouTube)"
 
-#~ msgid ""
-#~ "Any tags for this story, separated by spaces, can be used to do more "
-#~ "advanced filtering, optional"
-#~ msgstr ""
-#~ "Quaisquer tags para esta história, separadas por espaços, podem ser "
-#~ "usadas para fazer uma filtragem mais avançada. É opcional"
+#~ msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+#~ msgstr "Quaisquer tags para esta história, separadas por espaços, podem ser usadas para fazer uma filtragem mais avançada. É opcional"
 
 #~ msgid "The category for this story"
 #~ msgstr "A categoria para esta história"
 
 #~ msgid "The organization this story belongs to"
 #~ msgstr "A organização na qual esta história pertence a"
-
-#~ msgid "Stories"
-#~ msgstr "Histórias"
 
 #~ msgid "The story to associate to"
 #~ msgstr "A história a associar a"
@@ -1231,15 +1458,10 @@ msgstr "Algo para disparar localizações"
 #~ msgstr "Imagens da História"
 
 #~ msgid "Image to display on story page and in previews. (optional)"
-#~ msgstr ""
-#~ "Imagem a ser exibida na página de história e na visualização. (Opcional)"
+#~ msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional)"
 
 #~ msgid "Image to display on story page and in previews (optional)"
-#~ msgstr ""
-#~ "Imagem a ser exibida na página de história e na visualização. (Opcional) "
-
-#~ msgid "Remove Item?"
-#~ msgstr "Remover item?"
+#~ msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional) "
 
 #, python-format
 #~ msgid ""
@@ -1250,16 +1472,6 @@ msgstr "Algo para disparar localizações"
 #~ "\n"
 #~ "   Você tem certeza de que quer remover<b>%(object)s</b>?\n"
 #~ "    "
-
-#~ msgid ""
-#~ "Once it is removed, it will be gone forever. There is no way to undo this "
-#~ "operation."
-#~ msgstr ""
-#~ "Uma vez removido, desaparecerá para sempre. Não há forma de desfazer esta "
-#~ "operação."
-
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
 
 #, python-format
 #~ msgid ""
@@ -1289,107 +1501,49 @@ msgstr "Algo para disparar localizações"
 #~ "\tResultados%(start)s-%(end)s de %(count)s\n"
 #~ "\t"
 
-#~ msgid "Previous"
-#~ msgstr "Anterior"
-
-#~ msgid "Next"
-#~ msgstr "Próximo"
-
-#~ msgid "edit"
-#~ msgstr "editar"
-
 #~ msgid "Sign in"
 #~ msgstr "Iniciar sessão"
-
-#~ msgid "Login"
-#~ msgstr "Conectar"
-
-#~ msgid "Forgot Password?"
-#~ msgstr "Esqueceu a senha?"
 
 #~ msgid "Token Expired"
 #~ msgstr "Token expirado"
 
-#~ msgid "Login Failure"
-#~ msgstr "Login Falhou"
-
 #, python-format
 #~ msgid ""
 #~ "\n"
-#~ "      Sorry, you cannot log in at this time because we received "
-#~ "%(failed_login_limit)s incorrect login attempts.\n"
+#~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 #~ "      "
 #~ msgstr ""
 #~ "\n"
-#~ "      Desculpe, você não pode entrar no momento porque recebemos "
-#~ "%(failed_login_limit)stentativas incorretas de entrar.\n"
+#~ "      Desculpe, você não pode entrar no momento porque recebemos %(failed_login_limit)stentativas incorretas de entrar.\n"
 #~ "      "
 
 #, python-format
 #~ msgid ""
 #~ "\n"
-#~ "      Please wait %(lockout_timeout)s minutes before to try log in "
-#~ "again.\n"
+#~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 #~ "      "
 #~ msgstr ""
 #~ "\n"
-#~ "      Por favor, espere %(lockout_timeout)s minutos antes de tentar "
-#~ "entrar novamente\n"
+#~ "      Por favor, espere %(lockout_timeout)s minutos antes de tentar entrar novamente\n"
 #~ "      "
-
-#~ msgid ""
-#~ "Alternatively, you can fill out the form below to have your password "
-#~ "reset via e-mail."
-#~ msgstr ""
-#~ "Eventualmente, você pode preencher o formulário abaixo para que a sua "
-#~ "senha seja redefinida via e-mail."
-
-#~ msgid ""
-#~ "Please contact the website administrator to have your password reset."
-#~ msgstr ""
-#~ "Entre em contato com o administrador do site para ter a sua senha "
-#~ "redefinida."
-
-#~ msgid "Email Address"
-#~ msgstr "Email"
-
-#~ msgid "Recover"
-#~ msgstr "Recuperar"
-
-#~ msgid ""
-#~ "Please enter the email address you used to sign up and we will help you "
-#~ "recover your password."
-#~ msgstr ""
-#~ "Por favor, insira o endereço de e-mail que usou para se inscrever e nós "
-#~ "vamos ajudá-lo a recuperar sua senha."
 
 #, python-format
 #~ msgid ""
 #~ "\n"
-#~ "  <strong>Your password has expired.</strong> Site policy states that you "
-#~ "must pick a new password every %(expire_days)s days, and that passwords "
-#~ "must not have been used within the previous %(window_days)s days.\n"
+#~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 #~ "  "
 #~ msgstr ""
 #~ "\n"
-#~ "  <strong>Sua senha expirou.</strong>A política do site declara que você "
-#~ "deve escolher uma nova senha a cada %(expire_days)sdias e que as senhas "
-#~ "não devem ter sido usadas nos %(window_days)s dias anteriores.\n"
+#~ "  <strong>Sua senha expirou.</strong>A política do site declara que você deve escolher uma nova senha a cada %(expire_days)sdias e que as senhas não devem ter sido usadas nos %(window_days)s dias anteriores.\n"
 #~ "  "
 
 #~ msgid "New Password"
 #~ msgstr "Nova Senha"
 
-#~ msgid ""
-#~ "Passwords must have at least 8 characters, including one uppercase, one "
-#~ "lowercase and one number"
-#~ msgstr ""
-#~ "As senhas devem ter pelo menos 8 caracteres, incluindo uma maiúscula, uma "
-#~ "minúscula e um número"
+#~ msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+#~ msgstr "As senhas devem ter pelo menos 8 caracteres, incluindo uma maiúscula, uma minúscula e um número"
 
-#~ msgid ""
-#~ "You have used this password before in the past year, please use a new "
-#~ "password."
+#~ msgid "You have used this password before in the past year, please use a new password."
 #~ msgstr "Você já utilizou esta senha, por favor escolha uma nova senha."
 
 #~ msgid "Password"
@@ -1410,12 +1564,8 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Your Email"
 #~ msgstr "Seu e-mail"
 
-#~ msgid ""
-#~ "E-mail recovery is not supported, please contact the website "
-#~ "administrator to reset your password manually."
-#~ msgstr ""
-#~ "A recuperação do e-mail não é suportada, por favor, entre em contacto com "
-#~ "o administrador do site para redefinir a senha manualmente."
+#~ msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+#~ msgstr "A recuperação do e-mail não é suportada, por favor, entre em contacto com o administrador do site para redefinir a senha manualmente."
 
 #~ msgid "Current Password"
 #~ msgstr "Senha atual"
@@ -1447,11 +1597,8 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Groups"
 #~ msgstr "Grupos"
 
-#~ msgid ""
-#~ "Users will only get those permissions that are allowed for their group."
-#~ msgstr ""
-#~ "Os usuário receberão apenas permissões que forem autorizadas para o seu "
-#~ "grupo."
+#~ msgid "Users will only get those permissions that are allowed for their group."
+#~ msgstr "Os usuário receberão apenas permissões que forem autorizadas para o seu grupo."
 
 #~ msgid "Set the user's initial password here."
 #~ msgstr "Definir a senha inicial do usuário aqui"
@@ -1465,15 +1612,11 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Whether this user is allowed to log into the site"
 #~ msgstr "Se o usuário tem permissão para entrar no site"
 
-#~ msgid ""
-#~ "Users will only get those permissions that are allowed for their group"
-#~ msgstr ""
-#~ "Os usuário receberão apenas permissões que forem autorizadas para o seu "
-#~ "grupo."
+#~ msgid "Users will only get those permissions that are allowed for their group"
+#~ msgstr "Os usuário receberão apenas permissões que forem autorizadas para o seu grupo."
 
 #~ msgid "You can reset the user's password by entering a new password here"
-#~ msgstr ""
-#~ "Você pode redefinir a senha do usuário inserindo uma nova senha aqui"
+#~ msgstr "Você pode redefinir a senha do usuário inserindo uma nova senha aqui"
 
 #~ msgid "Username"
 #~ msgstr "Nome do Usuário"
@@ -1512,20 +1655,14 @@ msgstr "Algo para disparar localizações"
 #~ msgid "You are now logged in as %s"
 #~ msgstr "Você agora está conectado como %s"
 
-#~ msgid ""
-#~ "Password Updated Successfully. Now you can log in using your new password."
-#~ msgstr ""
-#~ "Senha atualizada com sucesso. Agora você pode entrar usando a nova senha."
+#~ msgid "Password Updated Successfully. Now you can log in using your new password."
+#~ msgstr "Senha atualizada com sucesso. Agora você pode entrar usando a nova senha."
 
 #~ msgid "Reset your Password"
 #~ msgstr "Redefinir sua senha"
 
-#~ msgid ""
-#~ "Your link has expired for security reasons. Please reinitiate the process "
-#~ "by entering your email here."
-#~ msgstr ""
-#~ "O seu link expirou por razões de segurança. Por favor, reinicie o "
-#~ "processo, digitando o seu e-mail aqui."
+#~ msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+#~ msgstr "O seu link expirou por razões de segurança. Por favor, reinicie o processo, digitando o seu e-mail aqui."
 
 #~ msgid "Submit"
 #~ msgstr "Enviar"
@@ -1544,513 +1681,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Import %s"
 #~ msgstr "Importar %s"
 
-#~ msgid "Back to Website"
-#~ msgstr "Voltar para o Website"
-
-#~ msgid "Welcome, "
-#~ msgstr "Olá,"
-
-#~ msgid "Logout"
-#~ msgstr "Sair"
-
-#~ msgid "Opinions"
-#~ msgstr "Opiniões"
-
-#~ msgid "Users"
-#~ msgstr "Usuários"
-
-#~ msgid "Settings"
-#~ msgstr "Configurações"
-
-#~ msgid "Pages"
-#~ msgstr "Páginas"
-
-#~ msgid "Jobs"
-#~ msgstr "Empregos"
-
-#~ msgid "Photos"
-#~ msgstr "Fotos"
-
-#~ msgid "Categories Images"
-#~ msgstr "Categorias de imagens"
-
-#~ msgid "News Items"
-#~ msgstr "Notícias"
-
-#~ msgid "Orgs"
-#~ msgstr "Organizações"
-
-#~ msgid "Images"
-#~ msgstr "Imagens"
-
-#~ msgid "About"
-#~ msgstr "Sobre"
-
-#~ msgid "Engagement"
-#~ msgstr "Engajamento"
-
-#~ msgid "Category Images"
-#~ msgstr "Categoria de Imagens"
-
-#~ msgid "+ New "
-#~ msgstr "+ Novo"
-
-#~ msgid "+ New Page"
-#~ msgstr "+ Nova página"
-
-#~ msgid "U-Report"
-#~ msgstr "U-Report"
-
-#~ msgid "Admin"
-#~ msgstr "Administrador"
-
-#~ msgid "Configuration"
-#~ msgstr "Configuração"
-
-#~ msgid "Content"
-#~ msgstr "Conteúdo"
-
-#~ msgid "Country Aliases"
-#~ msgstr "Sigla dos Países"
-
-#~ msgid "Job Sources"
-#~ msgstr "Fontes de Emprego"
-
-#~ msgid "Jobs Content"
-#~ msgstr "Conteúdo de Emprego"
-
-#~ msgid "About Content"
-#~ msgstr "Sobre Conteúdo"
-
-#~ msgid "Videos"
-#~ msgstr "Vídeos "
-
-#~ msgid "Contact Us Content"
-#~ msgstr "Conteúdo do Entre em contato"
-
-#~ msgid "Missions Content"
-#~ msgstr "Conteúdo das Missões"
-
-#~ msgid "Terms & Conditions"
-#~ msgstr "Termos & Condições"
-
-#~ msgid "U-Reporters Content"
-#~ msgstr "Conteúdo do U-Reporter"
-
-#~ msgid "Join &amp; Engage Content"
-#~ msgstr "Junte-se &amp; Envolva-se"
-
-#~ msgid "Join Steps Content"
-#~ msgstr "Conteúdo do Passos para participar"
-
-#~ msgid "Additional Menu"
-#~ msgstr "Menu Adicional"
-
-#~ msgid "SELECT YOUR COUNTRY"
-#~ msgstr "Selecione o seu país"
-
-#~ msgid "Join Now"
-#~ msgstr "Entre agora"
-
-#~ msgid "READ MORE"
-#~ msgstr "LEIA MAIS"
-
-#~ msgid "EXPLORE ENGAGEMENT"
-#~ msgstr "Explore o engajamento"
-
-#~ msgid ""
-#~ "\n"
-#~ "        To add a Twitter job source you are required to get a widget id "
-#~ "from twitter.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "Para adicionar uma proposta de trabalho do Twitter, você precisa criar um "
-#~ "widget id do twitter"
-
-#~ msgid "Follow this step by step guide"
-#~ msgstr "Siga nosso guia passo-a-passo"
-
-#~ msgid ""
-#~ "\n"
-#~ "        <div>After you create the widget copy the widget id from the url "
-#~ "as shown on</div>\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "<div>Depois de criar o widget, copie o id da url como mostrado em</div>"
-
-#~ msgid "Back"
-#~ msgstr "Voltar"
-
-#~ msgid "LATEST NOTIFICATIONS"
-#~ msgstr "Últimas notificações"
-
-#~ msgid "Backends"
-#~ msgstr "Backends"
-
-#~ msgid "+ New Poll"
-#~ msgstr "+ Nova pesquisa "
-
-#~ msgid "Refresh Results"
-#~ msgstr "Atualizar resultados"
-
-#~ msgid "MORE POLLS"
-#~ msgstr "MAIS ENQUETES"
-
-#~ msgid "FILTER"
-#~ msgstr "FILTRO"
-
-#~ msgid "POLL LIST"
-#~ msgstr "LISTA DE ENQUETES"
-
-#~ msgid "All polls from most recent to oldest"
-#~ msgstr "Todas as enquetes, das mais recentes às mais antigas"
-
-#~ msgid "ARCHIVED STORIES"
-#~ msgstr "HISTÓRIAS ARQUIVADAS"
-
-#~ msgid "LIST"
-#~ msgstr "LISTA"
-
-#~ msgid "LATEST OPINION"
-#~ msgstr "Últimas opiniões"
-
-#~ msgid "VIEW FULL RESULTS"
-#~ msgstr "Veja os resultados completos"
-
-#~ msgid "U-REPORTERS IN"
-#~ msgstr "PARTICIPANTES DO U-REPORT NO "
-
-#~ msgid "PARTNERING WITH"
-#~ msgstr "EM PARCERIA COM"
-
-#~ msgid "U-REPORTERS"
-#~ msgstr "U-REPORTERS"
-
-#~ msgid "IN"
-#~ msgstr "EM"
-
-#~ msgid "COUNTRIES WORLDWIDE"
-#~ msgstr "países em todo o mundo"
-
-#~ msgid "AGES"
-#~ msgstr "Idades"
-
-#~ msgid "Join U-Report, Your voice matters."
-#~ msgstr "Faça parte do U-Report, aqui sua voz tem poder."
-
-#~ msgid "JOIN NOW"
-#~ msgstr "PARTICIPE JÁ!"
-
-#~ msgid "FEATURED STORY"
-#~ msgstr "HISTÓRIAS EM DESTAQUE"
-
-#~ msgid ""
-#~ "We are a part of a global platform working to change the lives of young "
-#~ "people around the world."
-#~ msgstr ""
-#~ "Nós somos parte de uma plataforma global trabalhando para transformar as "
-#~ "vidas de jovens ao redor do mundo."
-
-#~ msgid ""
-#~ "Learn more about how U-Report is empowering and connecting young people "
-#~ "to speak out on issues that matter to them."
-#~ msgstr ""
-#~ "Saiba mais sobre como o U-Report está empoderando e conectando jovens "
-#~ "para falar sobre questões que importam para a juventude."
-
-#~ msgid "LEARN MORE"
-#~ msgstr "Leia mais"
-
-#~ msgid "Visit"
-#~ msgstr "Visite"
-
-#~ msgid "How would you like to join?"
-#~ msgstr "Como você gostaria de fazer parte?"
-
-#~ msgid "Text"
-#~ msgstr "Texto"
-
-#~ msgid "SEARCH"
-#~ msgstr "BUSCAR"
-
-#~ msgid "No results found"
-#~ msgstr "Os resultados não foram encontrados"
-
-#~ msgid "RESPONSES"
-#~ msgstr "RESPOSTAS"
-
-#~ msgid "RESPONSE RATE"
-#~ msgstr "TAXA DE RESPOSTA"
-
-#~ msgid "TOTAL RESPONSES"
-#~ msgstr "TOTAL DE RESPOSTAS"
-
-#, python-format
-#~ msgid "%(responded)s responded out of %(polled)s polled"
-#~ msgstr "%(responded)s responderam de %(polled)s questionadas"
-
-#~ msgid "ALL"
-#~ msgstr "Todos"
-
-#~ msgid "AGE"
-#~ msgstr "IDADE"
-
-#~ msgid "GENDER"
-#~ msgstr "GÊNERO"
-
-#~ msgid "LOCATION"
-#~ msgstr "LOCALIZAÇÃO"
-
-#~ msgid "Written by:"
-#~ msgstr "Escrito por"
-
-#~ msgid "Even"
-#~ msgstr "Até"
-
-#~ msgid "State"
-#~ msgstr "Estado"
-
-#~ msgid "District"
-#~ msgstr "Distrito"
-
-#~ msgid "Participation Level"
-#~ msgstr "Nível de Participação"
-
-#~ msgid "Responses"
-#~ msgstr "Respostas"
-
-#~ msgid "Reporters in"
-#~ msgstr "Reporters em"
-
-#~ msgid "Results"
-#~ msgstr "Resultados"
-
-#~ msgid "*Other answers include"
-#~ msgstr "*Outras respostas incluem"
-
-#~ msgid "Population"
-#~ msgstr "População"
-
-#~ msgid "Registered in"
-#~ msgstr "Registrado em"
-
-#~ msgid "Density"
-#~ msgstr "Densidade"
-
-#~ msgid "total"
-#~ msgstr "total"
-
-#~ msgid "of"
-#~ msgstr "de"
-
-#~ msgid "the"
-#~ msgstr "o"
-
-#~ msgid "OVERALL STATISTICS"
-#~ msgstr "ESTATÍSTICAS GERAIS"
-
-#~ msgid "THIS YEAR"
-#~ msgstr "ESTE ANO"
-
-#~ msgid "AVG RESPONSE RATE"
-#~ msgstr "Taxa de resposta do AVG"
-
-#~ msgid "U-REPORTERS BY REGION"
-#~ msgstr "U-REPORTERS POR REGIÃO"
-
-#~ msgid "FILTER RESULTS"
-#~ msgstr "FILTRAR RESULTADOS"
-
-#~ msgid "Export and Share"
-#~ msgstr "Exportar e Compartilhar"
-
-#~ msgid ""
-#~ "Want to tell the world about this? Download this image to easily share on "
-#~ "social media or for a beautiful presentation!"
-#~ msgstr ""
-#~ "Quer contar ao mundo sobre isso? Faça o download desta imagem para "
-#~ "compartilhar facilmente nas mídias sociais ou para uma bela apresentação!"
-
-#~ msgid "SELECT COUNTRY"
-#~ msgstr "Selecione o país"
-
-#~ msgid "Custom pages"
-#~ msgstr "Personalizar páginas"
-
-#~ msgid ""
-#~ "See by the numbers how we are engaging youth voices for positive social "
-#~ "change."
-#~ msgstr ""
-#~ "Veja pelos números como nós estamos engajando as vozes da juventude para "
-#~ "mudanças sociais positivas."
-
-#~ msgid "Polled"
-#~ msgstr "Questionado"
-
-#~ msgid "Reporters"
-#~ msgstr "Reporters"
-
-#~ msgid "Top Region"
-#~ msgstr "Regiões mais ativas"
-
-#~ msgid "January"
-#~ msgstr "Janeiro"
-
-#~ msgid "February"
-#~ msgstr "Fevereiro"
-
-#~ msgid "March"
-#~ msgstr "Março"
-
-#~ msgid "April"
-#~ msgstr "Abril"
-
-#~ msgid "May"
-#~ msgstr "Maio"
-
-#~ msgid "June"
-#~ msgstr "Junho"
-
-#~ msgid "July"
-#~ msgstr "Julho"
-
-#~ msgid "August"
-#~ msgstr "Agosto"
-
-#~ msgid "September"
-#~ msgstr "Setembro"
-
-#~ msgid "October"
-#~ msgstr "Outubro"
-
-#~ msgid "November"
-#~ msgstr "Novembro"
-
-#~ msgid "December"
-#~ msgstr "Dezembro"
-
-#~ msgid "Jan"
-#~ msgstr "Jan"
-
-#~ msgid "Feb"
-#~ msgstr "Fev"
-
-#~ msgid "Mar"
-#~ msgstr "Mar"
-
-#~ msgid "Apr"
-#~ msgstr "Abr"
-
-#~ msgid "Jun"
-#~ msgstr "Jun"
-
-#~ msgid "Jul"
-#~ msgstr "Jul"
-
-#~ msgid "Aug"
-#~ msgstr "Ago"
-
-#~ msgid "Sep"
-#~ msgstr "Set"
-
-#~ msgid "Oct"
-#~ msgstr "Out"
-
-#~ msgid "Nov"
-#~ msgstr "Nov"
-
-#~ msgid "Dec"
-#~ msgstr "Dez"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
-#~ "          "
-#~ msgstr ""
-#~ "\n"
-#~ "            Você tem certeza que quer remover <strong>%(object)s</"
-#~ "strong>?\n"
-#~ "          "
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "             %(counter)s result\n"
-#~ "           "
-#~ msgid_plural ""
-#~ "\n"
-#~ "              %(counter)s results\n"
-#~ "            "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "             %(counter)s resultado\n"
-#~ "           "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "              %(counter)s resultados\n"
-#~ "            "
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "             Results %(start)s-%(end)s of %(count)s\n"
-#~ "           "
-#~ msgstr ""
-#~ "\n"
-#~ "             Resultados %(start)s-%(end)s de %(count)s\n"
-#~ "           "
-
-#~ msgid "Error"
-#~ msgstr "Erro"
-
-#~ msgid "Enter Dashboard"
-#~ msgstr "Entrar no painel de controle"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                Sorry, you cannot log in at this time because we received "
-#~ "%(failed_login_limit)s incorrect login attempts.\n"
-#~ "              "
-#~ msgstr ""
-#~ "\n"
-#~ "                Desculpe, você não pode entrar nesse momento porque nós "
-#~ "recebemos%(failed_login_limit)s tentativas incorretas.\n"
-#~ "              "
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                    Please wait %(lockout_timeout)s minutes before to try "
-#~ "log in again.\n"
-#~ "                  "
-#~ msgstr ""
-#~ "\n"
-#~ "                    Por favor espere%(lockout_timeout)s minutos antes de "
-#~ "tentar entrar novamente.\n"
-#~ "                  "
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "        <strong>Your password has expired.</strong> Site policy states "
-#~ "that you must pick a new password every %(expire_days)s days, and that "
-#~ "passwords must not have been used within the previous %(window_days)s "
-#~ "days.\n"
-#~ "      "
-#~ msgstr ""
-#~ "\n"
-#~ "        <strong>Sua senha expirou.</strong>A política do site declara que "
-#~ "você deve escolher uma nova senha a cada %(expire_days)s e que as senhas "
-#~ "não devem ter sido usadas nos %(window_days)s dias anteriores.\n"
-#~ "      "
-
-#~ msgid "+ New Story"
-#~ msgstr "+ Nova história"
-
 #~ msgid "Polls"
 #~ msgstr "Enquetes"
 
@@ -2065,13 +1695,11 @@ msgstr "Algo para disparar localizações"
 
 #~ msgid ""
 #~ "\n"
-#~ "        Remember for a Twitter job source you are required to get a "
-#~ "widget id from twitter.\n"
+#~ "        Remember for a Twitter job source you are required to get a widget id from twitter.\n"
 #~ "      "
 #~ msgstr ""
 #~ "\n"
-#~ "Lembre-se de que para adicionar uma proposta de trabalho do Twitter, você "
-#~ "precisa criar um widget do twitter"
+#~ "Lembre-se de que para adicionar uma proposta de trabalho do Twitter, você precisa criar um widget do twitter"
 
 #~ msgid "ABOUT U-REPORT"
 #~ msgstr "SOBRE O U-REPORT"
@@ -2088,22 +1716,15 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Speak out on what's happening in your community"
 #~ msgstr "Fale sobre o que está acontecendo na sua comunidade"
 
-#~ msgid ""
-#~ "Use U-Report results and information to update and increase citizen's "
-#~ "awareness"
-#~ msgstr ""
-#~ "Utilize resultados e informações do U-Report para atualizar e melhorar a "
-#~ "consciência cidadã"
+#~ msgid "Use U-Report results and information to update and increase citizen's awareness"
+#~ msgstr "Utilize resultados e informações do U-Report para atualizar e melhorar a consciência cidadã"
 
 #~ msgid "Participate in nationwide campaigns to help improve your country"
-#~ msgstr ""
-#~ "Participe das campanhas em nível nacional para ajudar a melhor o seu País."
+#~ msgstr "Participe das campanhas em nível nacional para ajudar a melhor o seu País."
 
 #, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
-#~ msgstr ""
-#~ "Compartilhe o que está acontecendo ao redor %(country)s com outros U-"
-#~ "Reporters"
+#~ msgstr "Compartilhe o que está acontecendo ao redor %(country)s com outros U-Reporters"
 
 #~ msgid "CLICK HERE TO JOIN"
 #~ msgstr "CLIQUE PARA ENTRAR"
@@ -2122,16 +1743,11 @@ msgstr "Algo para disparar localizações"
 
 #~ msgid ""
 #~ "\n"
-#~ "                  U-Report is a social messaging tool that is free to "
-#~ "everyone, wherever you are in the world, to speak out on development "
-#~ "issues, support child rights and improve our communities\n"
+#~ "                  U-Report is a social messaging tool that is free to everyone, wherever you are in the world, to speak out on development issues, support child rights and improve our communities\n"
 #~ "                "
 #~ msgstr ""
 #~ "\n"
-#~ "O U-Report é uma ferramenta social de mensagens gratuita para todos, onde "
-#~ "quer que se esteja no mundo, para falar sobre questões de "
-#~ "desenvolvimento, apoiar os direitos da criança e melhorar as nossas "
-#~ "comunidades"
+#~ "O U-Report é uma ferramenta social de mensagens gratuita para todos, onde quer que se esteja no mundo, para falar sobre questões de desenvolvimento, apoiar os direitos da criança e melhorar as nossas comunidades"
 
 #~ msgid "CURRENT POLL"
 #~ msgstr "ÚLTIMA ENQUETE"
@@ -2239,22 +1855,12 @@ msgstr "Algo para disparar localizações"
 #, python-format
 #~ msgid ""
 #~ "\n"
-#~ "                * U-Report is a free program sponsored by UNICEF with "
-#~ "help of Network Providers in %(country)s. U-Report will not ask for any "
-#~ "payments nor personal financial information, PLEASE disregard any "
-#~ "messages which ask you for payment either on this number or on the "
-#~ "Facebook and Twitter pages. All U-Report services (all msg on "
-#~ "%(shortcode)s) are free.\n"
+#~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
 #~ "\n"
 #~ "              "
 #~ msgstr ""
 #~ "\n"
-#~ "                *O U-Report é um programa gratuito, patrocinado pelo "
-#~ "UNICEF com a ajuda de provedores de rede em%(country)s. Por isso, não "
-#~ "solicitará pagamentos, nem informações financeiras pessoais; POR FAVOR, "
-#~ "desconsidere qualquer mensagem deste número, das páginas do Facebook e "
-#~ "Twitter que solicitem pagamento. Todos os serviços do U-Report (todas as "
-#~ "mensagens em %(shortcode)s) são gratuitos.\n"
+#~ "                *O U-Report é um programa gratuito, patrocinado pelo UNICEF com a ajuda de provedores de rede em%(country)s. Por isso, não solicitará pagamentos, nem informações financeiras pessoais; POR FAVOR, desconsidere qualquer mensagem deste número, das páginas do Facebook e Twitter que solicitem pagamento. Todos os serviços do U-Report (todas as mensagens em %(shortcode)s) são gratuitos.\n"
 #~ "\n"
 #~ "              "
 

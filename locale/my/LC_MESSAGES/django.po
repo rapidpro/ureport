@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 21:25+0000\n"
+"POT-Creation-Date: 2020-04-27 21:46+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -22,952 +22,1135 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ureport/admins/views.py:35
+msgid "Back to Website"
+msgstr ""
+
+msgid "Welcome, "
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Opinions"
+msgstr "Poll Results"
+
+msgid "Stories"
+msgstr "Stories"
+
+msgid "Users"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Images"
+msgid "Pages"
+msgstr "ဓါတ်ပုံများ"
+
+msgid "Jobs"
+msgstr ""
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "Photos"
+msgstr ""
+
+#, fuzzy
+#| msgid "Categories"
+msgid "Categories Images"
+msgstr "Categories"
+
+msgid "News Items"
+msgstr ""
+
+msgid "Orgs"
+msgstr ""
+
+msgid "Content Types"
+msgstr "Content Types"
+
+msgid "Images"
+msgstr "ဓါတ်ပုံများ"
+
+msgid "About"
+msgstr "U-Report အကြောင်း"
+
+msgid "Engagement"
+msgstr ""
+
+#, fuzzy
+#| msgid "Categories"
+msgid "Category Images"
+msgstr "Categories"
+
+msgid "Gallery"
+msgstr "Gallery"
+
+msgid "Add Image"
+msgstr "Add Image"
+
+msgid "+ New "
+msgstr ""
+
+msgid "+ New Page"
+msgstr ""
+
+msgid "U-Report"
+msgstr "U-Report"
+
+#, fuzzy
+#| msgid "Admins"
+msgid "Admin"
+msgstr "Admins"
+
+#, fuzzy
+#| msgid "Population"
+msgid "Configuration"
+msgstr "လူဦးရေ"
+
+#, fuzzy
+#| msgid "Content Types"
+msgid "Content"
+msgstr "Content Types"
+
+msgid "Country Aliases"
+msgstr ""
+
+msgid "Job Sources"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join Steps Content"
+msgid "Jobs Content"
+msgstr "ပူးပေါင်းရန် အဆင့်များ"
+
+#, fuzzy
+#| msgid "Join Steps Content"
+msgid "About Content"
+msgstr "ပူးပေါင်းရန် အဆင့်များ"
+
+msgid "Videos"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join Steps Content"
+msgid "Contact Us Content"
+msgstr "ပူးပေါင်းရန် အဆင့်များ"
+
+#, fuzzy
+#| msgid "Join Steps Content"
+msgid "Missions Content"
+msgstr "ပူးပေါင်းရန် အဆင့်များ"
+
+msgid "Terms & Conditions"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join Steps Content"
+msgid "U-Reporters Content"
+msgstr "ပူးပေါင်းရန် အဆင့်များ"
+
+msgid "Join &amp; Engage Content"
+msgstr "ပူးပေါင်းပါဝင်ရန်"
+
+msgid "Join Steps Content"
+msgstr "ပူးပေါင်းရန် အဆင့်များ"
+
+msgid "Additional Menu"
+msgstr ""
+
+msgid "SELECT YOUR COUNTRY"
+msgstr ""
+
+msgid "Join Now"
+msgstr ""
+
+msgid "READ MORE"
+msgstr "ထပ်မံဖတ်ရှုရန်"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr ""
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+
+msgid "Follow this step by step guide"
+msgstr ""
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+
+msgid "Next"
+msgstr "Next"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Back"
+msgstr ""
+
+msgid "LATEST NOTIFICATIONS"
+msgstr ""
+
+#, fuzzy
+#| msgid "Manage Backends"
+msgid "Backends"
+msgstr "Manage Backends"
+
+msgid "You must have at least one administator"
+msgstr "You must have at least one administrator"
+
+msgid "Accounts"
+msgstr "Accounts"
+
+msgid "Admins"
+msgstr "Admins"
+
+msgid "Editors"
+msgstr "Editors"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "User group"
+msgstr "User group"
+
+msgid "+ New Poll"
+msgstr ""
+
+#, fuzzy
+#| msgid "Results"
+msgid "Refresh Results"
+msgstr "ရလဒ်များ"
+
+msgid "MORE POLLS"
+msgstr "နောက်ထပ်မေးခွန်းများ"
+
+msgid "FILTER"
+msgstr "စစ်ထုတ်ပေးခြင်း"
+
+msgid "All"
+msgstr "အားလုံး"
+
+msgid "POLL LIST"
+msgstr "မေးခွန်းစာရင်း"
+
+msgid "All polls from most recent to oldest"
+msgstr "နောက်ဆုံးမေးခွန်းများမှ ပြီးခဲ့သောမေးခွန်းများအထိ"
+
+msgid "ARCHIVED STORIES"
+msgstr "သိမ်းထားသော သတင်းဆောင်းပါးများ"
+
+msgid "LIST"
+msgstr "LIST"
+
+msgid "LATEST OPINION"
+msgstr ""
+
+msgid "VIEW FULL RESULTS"
+msgstr ""
+
+msgid "U-REPORTERS IN"
+msgstr ""
+
+msgid "PARTNERING WITH"
+msgstr ""
+
+msgid "U-REPORTERS"
+msgstr ""
+
+msgid "IN"
+msgstr ""
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr ""
+
+msgid "AGES"
+msgstr "အသက်"
+
+msgid "Join U-Report, Your voice matters."
+msgstr ""
+
+msgid "JOIN NOW"
+msgstr ""
+
+msgid "FEATURED STORY"
+msgstr "ဖော်ပြထားသော သတင်းဆောင်းပါး"
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr ""
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr ""
+
+#, fuzzy
+#| msgid "READ MORE"
+msgid "LEARN MORE"
+msgstr "ထပ်မံဖတ်ရှုရန်"
+
+msgid "Visit"
+msgstr ""
+
+msgid "How would you like to join?"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "SEARCH"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONSES"
+msgstr "တုံံ့ပြန်မှုနှုန်း"
+
+msgid "RESPONSE RATE"
+msgstr "တုံံ့ပြန်မှုနှုန်း"
+
+msgid "TOTAL RESPONSES"
+msgstr ""
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr ""
+
+msgid "ALL"
+msgstr "အားလုံး"
+
+msgid "AGE"
+msgstr "အသက်"
+
+msgid "GENDER"
+msgstr "ကျား မ"
+
+msgid "LOCATION"
+msgstr "တည်နေရာ"
+
+msgid "Written by:"
+msgstr ""
+
+msgid "Even"
+msgstr "အညီအမျှ"
+
+msgid "State"
+msgstr "ပြည်နယ်"
+
+msgid "Other"
+msgstr "အခြား"
+
+#, fuzzy
+#| msgid "District Field"
+msgid "District"
+msgstr "District Field"
+
+msgid "Participation Level"
+msgstr "ပါဝင်သည့် အနေအထား"
+
+msgid "Responses"
+msgstr "ပြန်လည်ဖြေကြားမှုများ"
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "Reporters in"
+msgstr "U-Report"
+
+msgid "Results"
+msgstr "ရလဒ်များ"
+
+msgid "*Other answers include"
+msgstr "အခြားအဖြေများမှာ"
+
+msgid "Population"
+msgstr "လူဦးရေ"
+
+msgid "Registered in"
+msgstr "Registered in"
+
+msgid "Density"
+msgstr "သိပ်သည်းမှု"
+
+msgid "total"
+msgstr "စုစုပေါင်း"
+
+msgid "of"
+msgstr ""
+
+#, fuzzy
+#| msgid "Other"
+msgid "the"
+msgstr "အခြား"
+
+msgid "OVERALL STATISTICS"
+msgstr ""
+
+msgid "THIS YEAR"
+msgstr ""
+
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "AVG RESPONSE RATE"
+msgstr "တုံံ့ပြန်မှုနှုန်း"
+
+msgid "U-REPORTERS BY REGION"
+msgstr ""
+
+#, fuzzy
+#| msgid "FILTER"
+msgid "FILTER RESULTS"
+msgstr "စစ်ထုတ်ပေးခြင်း"
+
+msgid "Export and Share"
+msgstr ""
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT COUNTRY"
+msgstr ""
+
+msgid "Custom pages"
+msgstr ""
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr ""
+
+msgid "Polled"
+msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "Reporters"
+msgstr "U-Report"
+
+msgid "Top Region"
+msgstr ""
+
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search"
+msgid "March"
+msgstr "Search"
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "Remove Item?"
+msgstr "Remove Item?"
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Once it is removed, it will be gone forever. There is no way to undo this operation."
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Add"
+msgstr "Add"
+
+#, python-format
+msgid ""
+"\n"
+"             %(counter)s result\n"
+"           "
+msgid_plural ""
+"\n"
+"              %(counter)s results\n"
+"            "
+msgstr[0] ""
+
+#, python-format
+msgid ""
+"\n"
+"             Results %(start)s-%(end)s of %(count)s\n"
+"           "
+msgstr ""
+
+msgid "Previous"
+msgstr "Previous"
+
+msgid "edit"
+msgstr "edit"
+
+msgid "Error"
+msgstr ""
+
+msgid "Enter Dashboard"
+msgstr ""
+
+msgid "Forgot Password?"
+msgstr "Forgot Password?"
+
+msgid "Login Failure"
+msgstr "Login Failure"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Alternatively, you can fill out the form below to have your password reset via e-mail."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Please contact the website administrator to have your password reset."
+
+msgid "Email Address"
+msgstr "Email Address"
+
+msgid "Recover"
+msgstr "Recover"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Please enter the email address you used to sign up and we will help you recover your password."
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+
+msgid "+ New Story"
+msgstr ""
+
 #, python-format
 msgid "Refreshed %s cache for this organization"
 msgstr ""
 
-#: ureport/assets/models.py:15
 msgid "Banner"
 msgstr "Banner"
 
-#: ureport/assets/models.py:15
 msgid "Pattern"
 msgstr "Pattern"
 
-#: ureport/assets/models.py:15
 msgid "Flag"
 msgstr "အလံ"
 
-#: ureport/assets/models.py:22 ureport/contacts/models.py:52
 msgid "Org"
 msgstr "Org"
 
-#: ureport/assets/models.py:24
 msgid "The organization to which the image will be used"
 msgstr "The organization to which the image will be used"
 
-#: ureport/assets/models.py:28
 msgid "Name"
 msgstr "Name"
 
-#: ureport/assets/models.py:28
 msgid "A short descriptive name for this image"
 msgstr "A short descriptive name for this image"
 
-#: ureport/assets/models.py:31
 msgid "Image type"
 msgstr "Image type"
 
-#: ureport/assets/models.py:33
 msgid "The image file"
 msgstr "The image file"
 
-#: ureport/contacts/models.py:54
 msgid "Label"
 msgstr "အညွှန်း"
 
-#: ureport/contacts/models.py:56
 msgid "Key"
 msgstr "Key"
 
-#: ureport/contacts/models.py:79 ureport/stats/models.py:24
 msgid "Male"
 msgstr "အမျိုးသား"
 
-#: ureport/contacts/models.py:79 ureport/stats/models.py:24
 msgid "Female"
 msgstr "အမျိုးသမီး"
 
-#: ureport/contacts/models.py:79 ureport/stats/models.py:24
-msgid "Other"
-msgstr "အခြား"
-
-#: ureport/contacts/models.py:87 ureport/locations/models.py:28
 msgid "Organization"
 msgstr "အဖွဲ့အစည်း"
 
-#: ureport/contacts/models.py:91 ureport/stats/models.py:42
 msgid "Gender"
 msgstr "ကျား မ"
 
-#: ureport/contacts/models.py:95
 msgid "Gender of the contact"
 msgstr "Gender of the contact"
 
-#: ureport/contacts/models.py:98
 msgid "Born Field"
 msgstr "Born Field"
 
-#: ureport/contacts/models.py:100
 msgid "Occupation Field"
 msgstr "Occupation Field"
 
-#: ureport/contacts/models.py:102
 msgid "Registration Date"
 msgstr "Registration Date"
 
-#: ureport/contacts/models.py:104
 msgid "State Field"
 msgstr "State Field"
 
-#: ureport/contacts/models.py:106
 msgid "District Field"
 msgstr "District Field"
 
-#: ureport/contacts/models.py:108
 msgid "Ward Field"
 msgstr ""
 
-#: ureport/contacts/models.py:235 ureport/stats/models.py:67
 msgid "Number of items with this counter"
 msgstr ""
 
-#: ureport/countries/management/commands/add_country_alias.py:65
 msgid "No root user found. Please create a root user"
 msgstr ""
 
-#: ureport/countries/models.py:15
 msgid "The name for our alias"
 msgstr ""
 
-#: ureport/jobs/models.py:28
 msgid "The title or name to reference this Job source."
 msgstr ""
 
-#: ureport/jobs/models.py:32
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
 msgstr ""
 
-#: ureport/jobs/models.py:34
 msgid "The full URL to navigate to this Job source."
 msgstr ""
 
-#: ureport/jobs/models.py:40
-msgid ""
-"For Twitter, a widget Id is required to embed tweets on the website. Read "
-"carefully the instructions above on how to get the right widget Id"
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
 msgstr ""
 
-#: ureport/jobs/models.py:45
 msgid "Featured job sources are shown first on the jobs page."
 msgstr ""
 
-#: ureport/jobs/models.py:47
 msgid "The organization this job source is for"
 msgstr ""
 
-#: ureport/jobs/views.py:18
 msgid "Your job source has been added successfully"
 msgstr ""
 
-#: ureport/jobs/views.py:44
 msgid "Your job source has been updated successfully"
 msgstr ""
 
-#: ureport/locations/models.py:34
 msgid "This is the OSM id for this administrative boundary"
 msgstr ""
 
-#: ureport/locations/models.py:36
 msgid "The name of our administrative boundary"
 msgstr ""
 
-#: ureport/locations/models.py:38
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
 msgstr ""
 
-#: ureport/locations/models.py:45
 msgid "The parent to this political boundary if any"
 msgstr ""
 
-#: ureport/locations/models.py:49
 msgid "Geometry"
 msgstr ""
 
-#: ureport/locations/models.py:50
-msgid ""
-"The json representing the geometry type and coordinates of the boundaries"
+msgid "The json representing the geometry type and coordinates of the boundaries"
 msgstr ""
 
-#: ureport/news/models.py:14
 msgid "The title for this item"
 msgstr ""
 
-#: ureport/news/models.py:16
 msgid "A short summary description for this item"
 msgstr ""
 
-#: ureport/news/models.py:18
 msgid "A link that should be associated with this item"
 msgstr ""
 
-#: ureport/news/models.py:21 ureport/news/models.py:50
 msgid "The category this item belongs to"
 msgstr ""
 
-#: ureport/news/models.py:24
 msgid "The organization this item belongs to"
 msgstr ""
 
-#: ureport/news/models.py:41
 msgid "The title for this Video"
 msgstr ""
 
-#: ureport/news/models.py:43
 msgid "A short summary description for this video"
 msgstr ""
 
-#: ureport/news/models.py:46
 msgid "The id of the YouTube video that should be linked to this item"
 msgstr "The id of the YouTube video that should be linked to this item"
 
-#: ureport/news/models.py:53
 msgid "The organization this video belongs to"
 msgstr ""
 
-#: ureport/polls/models.py:68
 msgid "The name of this poll category"
 msgstr ""
 
-#: ureport/polls/models.py:69
 msgid "The organization this category applies to"
 msgstr "he organization this category applies to"
 
-#: ureport/polls/models.py:76
 msgid "Poll Categories"
 msgstr ""
 
-#: ureport/polls/models.py:114
 msgid "The Flow this Poll is based on"
 msgstr ""
 
-#: ureport/polls/models.py:117
-msgid ""
-"The date to display for this poll. Leave empty to use flow creation date."
+msgid "The date to display for this poll. Leave empty to use flow creation date."
 msgstr ""
 
-#: ureport/polls/models.py:121
 msgid "Whether the flow for this poll is archived on RapidPro"
 msgstr ""
 
-#: ureport/polls/models.py:124
 msgid "The base language of the flow to use"
 msgstr ""
 
-#: ureport/polls/models.py:126
 msgid "The number of polled reporters on this poll"
 msgstr ""
 
-#: ureport/polls/models.py:129
 msgid "Whether the poll has finished the initial results sync."
 msgstr ""
 
-#: ureport/polls/models.py:133
 msgid "Whether the poll should stop regenerating stats."
 msgstr ""
 
-#: ureport/polls/models.py:136
 msgid "The title for this Poll"
 msgstr ""
 
-#: ureport/polls/models.py:138
 msgid "The category this Poll belongs to"
 msgstr ""
 
-#: ureport/polls/models.py:141
 msgid "Whether this poll should be featured on the homepage"
 msgstr ""
 
-#: ureport/polls/models.py:147
 msgid "The splash category image to display for the poll (optional)"
 msgstr ""
 
-#: ureport/polls/models.py:150
 msgid "The organization this poll is part of"
 msgstr ""
 
-#: ureport/polls/models.py:156
 msgid "The title for this response story"
 msgstr ""
 
-#: ureport/polls/models.py:160
 msgid "The writer of the response story"
 msgstr ""
 
-#: ureport/polls/models.py:163
 msgid "The body of text for the story"
 msgstr "The body of text for the story"
 
-#: ureport/polls/models.py:782
 msgid "The name to describe this image"
 msgstr "The name to describe this image"
 
-#: ureport/polls/models.py:785
 msgid "The poll to associate to"
 msgstr ""
 
-#: ureport/polls/models.py:788
 msgid "The image file to use"
 msgstr "The image file to use"
 
-#: ureport/polls/models.py:801
 msgid "The poll for this response"
 msgstr ""
 
-#: ureport/polls/models.py:804
 msgid "The location for this response"
 msgstr ""
 
-#: ureport/polls/models.py:807
 msgid "The name of the sender of the message"
 msgstr ""
 
-#: ureport/polls/models.py:810
 msgid "The featured response message"
 msgstr ""
 
-#: ureport/polls/models.py:827
 msgid "The poll this question is part of"
 msgstr ""
 
-#: ureport/polls/models.py:829
 msgid "The title of this question"
 msgstr ""
 
-#: ureport/polls/models.py:830
 msgid "The RuleSet this question is based on"
 msgstr ""
 
-#: ureport/polls/models.py:835
 msgid "The label of the ruleset on RapidPro"
 msgstr ""
 
-#: ureport/polls/models.py:839
 msgid "The priority number for this question on the poll"
 msgstr ""
 
-#: ureport/polls/models.py:1235
 msgid "The Rule this response category is based on"
 msgstr ""
 
-#: ureport/polls/views.py:57
 msgid "Your org does not have any API token configuration."
 msgstr ""
 
-#: ureport/polls/views.py:138
 msgid "You must include a title for every included question."
 msgstr ""
 
-#: ureport/polls/views.py:141
 msgid "Title too long. The max limit is 255 characters for each title"
 msgstr ""
 
-#: ureport/polls/views.py:146
 msgid "You must include at least one poll question."
 msgstr ""
 
-#: ureport/polls/views.py:172
 msgid "Adjust poll date"
 msgstr ""
 
-#: ureport/polls/views.py:175
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr ""
 
-#: ureport/polls/views.py:185
 msgid "Configure flow"
 msgstr ""
 
-#: ureport/polls/views.py:188
 msgid "Your poll has been configured, now adjust the poll date."
 msgstr ""
 
-#: ureport/polls/views.py:241
 msgid "Your poll has been created, now configure its flow."
 msgstr ""
 
-#: ureport/polls/views.py:279
 msgid "Poll Images"
 msgstr ""
 
-#: ureport/polls/views.py:280
 msgid "Now enter any responses you'd like to feature. (if any)"
 msgstr ""
 
-#: ureport/polls/views.py:294 ureport/polls/views.py:304
 #, python-format
 msgid "Image %d"
 msgstr "Image %d"
 
-#: ureport/polls/views.py:295
 msgid "Image to display on poll page and in previews. (optional)"
 msgstr ""
 
-#: ureport/polls/views.py:305
 msgid "Image to display on poll page and in previews (optional)"
 msgstr ""
 
-#: ureport/polls/views.py:331
 msgid "Poll Response"
 msgstr ""
 
-#: ureport/polls/views.py:333
 msgid "Your poll has been updated."
 msgstr ""
 
-#: ureport/polls/views.py:343
 msgid "Poll Questions"
 msgstr ""
 
-#: ureport/polls/views.py:345
 msgid "Now set what images you want displayed on your poll page. (if any)"
 msgstr ""
 
-#: ureport/polls/views.py:375
 msgid "Include"
 msgstr ""
 
-#: ureport/polls/views.py:378
 msgid "Whether to include this question in your public results"
 msgstr ""
 
-#: ureport/polls/views.py:384
 msgid "Priority"
 msgstr ""
 
-#: ureport/polls/views.py:387
-msgid ""
-"The priority of this question on the poll page, higher priority comes first"
+msgid "The priority of this question on the poll page, higher priority comes first"
 msgstr ""
 
-#: ureport/polls/views.py:393
 msgid "Ruleset Label"
 msgstr ""
 
-#: ureport/polls/views.py:397
 msgid "The label of the ruleset from RapidPro"
 msgstr ""
 
-#: ureport/polls/views.py:403
 msgid "Title"
 msgstr ""
 
-#: ureport/polls/views.py:407
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr ""
 
-#: ureport/polls/views.py:539
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr ""
 
-#: ureport/public/views.py:330
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: ureport/settings_common.py:168
 msgid "The name of the Contact Group that contains registered reporters"
 msgstr ""
 
-#: ureport/settings_common.py:174
-msgid ""
-"The label of the Contact Field that contains the birth date of reporters"
+msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr ""
 
-#: ureport/settings_common.py:180
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr ""
 
-#: ureport/settings_common.py:187
-msgid ""
-"The label of the Contact Field that contains the occupation of reporters"
+msgid "The label of the Contact Field that contains the occupation of reporters"
 msgstr ""
 
-#: ureport/settings_common.py:194
-msgid ""
-"The label of the Contact Field that contains the registration date of "
-"reporters"
+msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr ""
 
-#: ureport/settings_common.py:200
 msgid "The label of the Contact Field that contains the State of reporters"
 msgstr ""
 
-#: ureport/settings_common.py:207
 msgid "The label of the Contact Field that contains the District of reporters"
 msgstr ""
 
-#: ureport/settings_common.py:214
 msgid "The label of the Contact Field that contains the Ward of reporters"
 msgstr ""
 
-#: ureport/settings_common.py:220
 msgid "The label assigned to U-Reporters that are Male."
 msgstr ""
 
-#: ureport/settings_common.py:226
 msgid "The label assigned to U-Reporters that are Female."
 msgstr ""
 
-#: ureport/settings_common.py:235
 msgid "Whether this org should be show on the landing page"
 msgstr ""
 
-#: ureport/settings_common.py:240
 msgid "Whether this org count should consider the count from link only"
 msgstr ""
 
-#: ureport/settings_common.py:246
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr ""
 
-#: ureport/settings_common.py:254
-msgid ""
-"The whatapp number that users will use to contact U-Report if you have one"
+msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgstr ""
 
-#: ureport/settings_common.py:262
 msgid "The viber url that users will use to contact U-Report if you have one"
 msgstr ""
 
-#: ureport/settings_common.py:270
 msgid "The short text used to direct visitors to join U-Report"
 msgstr ""
 
-#: ureport/settings_common.py:276
 msgid "The YouTube video ID for how to join U-Report section"
 msgstr ""
 
-#: ureport/settings_common.py:284
 msgid "The title of the photos section U-Report homepage"
 msgstr ""
 
-#: ureport/settings_common.py:292
 msgid "The description of the photos section U-Report homepage"
 msgstr ""
 
-#: ureport/settings_common.py:299
 msgid "The description of the opinions page"
 msgstr ""
 
-#: ureport/settings_common.py:303
 msgid "The description of the stories page"
 msgstr ""
 
-#: ureport/settings_common.py:308
 msgid "The description of the engagement page"
 msgstr ""
 
-#: ureport/settings_common.py:314
 msgid "The callout message on the footer engagement section"
 msgstr ""
 
-#: ureport/settings_common.py:321
 msgid "The primary color for styling for this organization, should be dark"
 msgstr ""
 
-#: ureport/settings_common.py:327
 msgid "The secondary color for styling for this organization, should be dark"
 msgstr ""
 
-#: ureport/settings_common.py:334
 msgid "The tertiary color for styling for this organization, should be dark"
 msgstr ""
 
-#: ureport/settings_common.py:341
-msgid ""
-"The primary highlight color for styling for this organization, should be "
-"light"
+msgid "The primary highlight color for styling for this organization, should be light"
 msgstr ""
 
-#: ureport/settings_common.py:349
-msgid ""
-"The secondary highlight color for styling for this organization, should be "
-"light"
+msgid "The secondary highlight color for styling for this organization, should be light"
 msgstr ""
 
-#: ureport/settings_common.py:356
 msgid "Up to 6 colors for styling charts, use comma between colors"
 msgstr ""
 
-#: ureport/settings_common.py:362
 msgid "The color used to draw the text on the join bar"
 msgstr ""
 
-#: ureport/settings_common.py:368
 msgid "The color used to draw the background on the join bar"
 msgstr ""
 
-#: ureport/settings_common.py:374
 msgid "The primary color for styling for this organization"
 msgstr ""
 
-#: ureport/settings_common.py:380
 msgid "The secondary color for styling for this organization"
 msgstr ""
 
-#: ureport/settings_common.py:386
 msgid "The background color for the site"
 msgstr ""
 
-#: ureport/settings_common.py:392
-msgid ""
-"11 colors for styling maps, use comma between colors, not used if not 11 "
-"colors"
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
 msgstr ""
 
-#: ureport/settings_common.py:399
 msgid "The states to show on maps only"
 msgstr ""
 
-#: ureport/settings_common.py:404
 msgid "The states to show on maps only, used to filter poll results"
 msgstr ""
 
-#: ureport/settings_common.py:410
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr ""
 
-#: ureport/settings_common.py:418
 msgid "The URL to the Youtube channel for this organization"
 msgstr ""
 
-#: ureport/settings_common.py:426
 msgid "The URL to the Facebook page for this organization"
 msgstr ""
 
-#: ureport/settings_common.py:434
 msgid "The integer id to the Facebook page for this organization (optional)"
 msgstr ""
 
-#: ureport/settings_common.py:442
-msgid ""
-"The integer id to the Facebook app for this organization's chat app "
-"(optional)"
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
 msgstr ""
 
-#: ureport/settings_common.py:450
 msgid "The short text used to greet users on Facebook Messenger Plugin"
 msgstr ""
 
-#: ureport/settings_common.py:458
 msgid "The id of the Facebook Pixel for this organization (optional)"
 msgstr ""
 
-#: ureport/settings_common.py:466
 msgid "The Instagram username for this organization"
 msgstr ""
 
-#: ureport/settings_common.py:472
 msgid "The Instagram widget id from lightwidget.com"
 msgstr ""
 
-#: ureport/settings_common.py:479
 msgid "The Twitter handle for this organization"
 msgstr ""
 
-#: ureport/settings_common.py:484
 msgid "The Twitter widget used for searching"
 msgstr ""
 
-#: ureport/settings_common.py:490
 msgid "The words to filter out from the results on public site"
 msgstr ""
 
-#: ureport/settings_common.py:498
 msgid "If there are jobs to be shown on the public site."
 msgstr ""
 
-#: ureport/settings_common.py:504
-msgid ""
-"If this org if for global data. e.g: It shows a world map instead of a "
-"country map."
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
 msgstr ""
 
-#: ureport/settings_common.py:511
 msgid "Whether to activate an extra gender."
 msgstr ""
 
-#: ureport/settings_common.py:517
 msgid "Whether to activate the new design."
 msgstr ""
 
-#: ureport/settings_common.py:525
-msgid ""
-"The alpha-3 ISO code of the organization so that it appears the stories "
-"widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
-"Global)."
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
 msgstr ""
 
-#: ureport/settings_common.py:533
 msgid "The font used for headline texts"
 msgstr ""
 
-#: ureport/settings_common.py:537
 msgid "The font used for normal text"
 msgstr ""
 
-#: ureport/settings_common.py:541
 msgid "Hide participation stats"
 msgstr ""
 
-#: ureport/settings_common.py:547
 msgid "The text to describe the sponsors of free messages"
 msgstr ""
 
-#: ureport/settings_common.py:553
 msgid "The font used for small text"
 msgstr ""
 
-#: ureport/settings_common.py:560
-msgid ""
-"If you need to include some custom HTML codes in you org pages, like custom "
-"analytics code snippets"
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr ""
 
-#: ureport/stats/models.py:40
 msgid "90 Days"
 msgstr ""
 
-#: ureport/stats/models.py:40
 msgid "6 Months"
 msgstr ""
 
-#: ureport/stats/models.py:40
 msgid "12 Months"
 msgstr ""
 
-#: ureport/stats/models.py:42
-msgid "All"
-msgstr "အားလုံး"
-
-#: ureport/stats/models.py:42
 msgid "Age"
 msgstr ""
 
-#: ureport/stats/models.py:42
 msgid "Location"
 msgstr "တည်နေရာ"
 
-#: ureport/stats/models.py:45 ureport/stats/models.py:236
 msgid "Opinion Responses"
 msgstr ""
 
-#: ureport/stats/models.py:46
 msgid "Sign Up Rate"
 msgstr ""
 
-#: ureport/stats/models.py:47 ureport/stats/models.py:379
 msgid "Response Rate"
 msgstr "ပြန်လည်ဖြေကြားနှုန်း"
 
-#: ureport/stats/models.py:48 ureport/stats/models.py:623
 msgid "Active Users"
 msgstr ""
 
-#: ureport/stats/models.py:69
 msgid "Whether this row was created by squashing"
 msgstr ""
 
-#: ureport/translation.py:19
 msgid "Something to trigger localizations"
 msgstr ""
-
-#~ msgid "Categories"
-#~ msgstr "Categories"
-
-#~ msgid "Gallery"
-#~ msgstr "Gallery"
-
-#~ msgid "Add Image"
-#~ msgstr "Add Image"
-
-#~ msgid "Search"
-#~ msgstr "Search"
-
-#~ msgid "Add"
-#~ msgstr "Add"
-
-#~ msgid "Content Types"
-#~ msgstr "Content Types"
-
-#~ msgid "Editors"
-#~ msgstr "Editors"
 
 #~ msgid "Edit"
 #~ msgstr "Edit"
 
-#~ msgid "Manage Backends"
-#~ msgstr "Manage Backends"
-
 #~ msgid "Manage Users"
 #~ msgstr "Manage Users"
 
-#~ msgid "Accounts"
-#~ msgstr "Accounts"
-
-#~ msgid "Admins"
-#~ msgstr "Admins"
-
-#~ msgid "Remove"
-#~ msgstr "Remove"
-
-#~ msgid "You must have at least one administator"
-#~ msgstr "You must have at least one administrator"
-
-#~ msgid "User group"
-#~ msgstr "User group"
-
-#~ msgid "Stories"
-#~ msgstr "Stories"
-
-#~ msgid "Remove Item?"
-#~ msgstr "Remove Item?"
-
-#~ msgid ""
-#~ "Once it is removed, it will be gone forever. There is no way to undo this "
-#~ "operation."
-#~ msgstr ""
-#~ "Once it is removed, it will be gone forever. There is no way to undo this "
-#~ "operation."
-
-#~ msgid "Cancel"
-#~ msgstr "Cancel"
-
-#~ msgid "Previous"
-#~ msgstr "Previous"
-
-#~ msgid "Next"
-#~ msgstr "Next"
-
-#~ msgid "edit"
-#~ msgstr "edit"
-
 #~ msgid "Sign in"
 #~ msgstr "Sign in"
-
-#~ msgid "Login"
-#~ msgstr "Login"
-
-#~ msgid "Forgot Password?"
-#~ msgstr "Forgot Password?"
-
-#~ msgid "Login Failure"
-#~ msgstr "Login Failure"
-
-#~ msgid ""
-#~ "Alternatively, you can fill out the form below to have your password "
-#~ "reset via e-mail."
-#~ msgstr ""
-#~ "Alternatively, you can fill out the form below to have your password "
-#~ "reset via e-mail."
-
-#~ msgid ""
-#~ "Please contact the website administrator to have your password reset."
-#~ msgstr ""
-#~ "Please contact the website administrator to have your password reset."
-
-#~ msgid "Email Address"
-#~ msgstr "Email Address"
-
-#~ msgid "Recover"
-#~ msgstr "Recover"
-
-#~ msgid ""
-#~ "Please enter the email address you used to sign up and we will help you "
-#~ "recover your password."
-#~ msgstr ""
-#~ "Please enter the email address you used to sign up and we will help you "
-#~ "recover your password."
-
-#~ msgid "Opinions"
-#~ msgstr "Poll Results"
-
-#~ msgid "Images"
-#~ msgstr "ဓါတ်ပုံများ"
-
-#~ msgid "About"
-#~ msgstr "U-Report အကြောင်း"
-
-#~ msgid "U-Report"
-#~ msgstr "U-Report"
-
-#~ msgid "Join &amp; Engage Content"
-#~ msgstr "ပူးပေါင်းပါဝင်ရန်"
-
-#~ msgid "Join Steps Content"
-#~ msgstr "ပူးပေါင်းရန် အဆင့်များ"
-
-#~ msgid "READ MORE"
-#~ msgstr "ထပ်မံဖတ်ရှုရန်"
-
-#~ msgid "MORE POLLS"
-#~ msgstr "နောက်ထပ်မေးခွန်းများ"
-
-#~ msgid "FILTER"
-#~ msgstr "စစ်ထုတ်ပေးခြင်း"
-
-#~ msgid "POLL LIST"
-#~ msgstr "မေးခွန်းစာရင်း"
-
-#~ msgid "All polls from most recent to oldest"
-#~ msgstr "နောက်ဆုံးမေးခွန်းများမှ ပြီးခဲ့သောမေးခွန်းများအထိ"
-
-#~ msgid "ARCHIVED STORIES"
-#~ msgstr "သိမ်းထားသော သတင်းဆောင်းပါးများ"
-
-#~ msgid "LIST"
-#~ msgstr "LIST"
-
-#~ msgid "AGES"
-#~ msgstr "အသက်"
-
-#~ msgid "FEATURED STORY"
-#~ msgstr "ဖော်ပြထားသော သတင်းဆောင်းပါး"
-
-#~ msgid "RESPONSE RATE"
-#~ msgstr "တုံံ့ပြန်မှုနှုန်း"
-
-#~ msgid "ALL"
-#~ msgstr "အားလုံး"
-
-#~ msgid "AGE"
-#~ msgstr "အသက်"
-
-#~ msgid "GENDER"
-#~ msgstr "ကျား မ"
-
-#~ msgid "LOCATION"
-#~ msgstr "တည်နေရာ"
-
-#~ msgid "Even"
-#~ msgstr "အညီအမျှ"
-
-#~ msgid "State"
-#~ msgstr "ပြည်နယ်"
-
-#~ msgid "Participation Level"
-#~ msgstr "ပါဝင်သည့် အနေအထား"
-
-#~ msgid "Responses"
-#~ msgstr "ပြန်လည်ဖြေကြားမှုများ"
-
-#~ msgid "Results"
-#~ msgstr "ရလဒ်များ"
-
-#~ msgid "*Other answers include"
-#~ msgstr "အခြားအဖြေများမှာ"
-
-#~ msgid "Population"
-#~ msgstr "လူဦးရေ"
-
-#~ msgid "Registered in"
-#~ msgstr "Registered in"
-
-#~ msgid "Density"
-#~ msgstr "သိပ်သည်းမှု"
-
-#~ msgid "total"
-#~ msgstr "စုစုပေါင်း"
