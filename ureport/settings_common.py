@@ -1371,13 +1371,13 @@ COUNTRY_FLAGS_SITES = [
         is_static=True,
         count_link="http://westernbalkans.ureport.in/count/",
     ),
-    # dict(
-    #     name="Zambia",
-    #     host="//www.zambiaureport.com/home/",
-    #     flag="flag_zambia.png",
-    #     is_static=True,
-    #     count_link="http://www.zambiaureport.com/count.txt/",
-    # ),
+    dict(
+        name="Zambia",
+        host="//www.zambiaureport.com/home/",
+        flag="flag_zambia.png",
+        is_static=True,
+        count_link="http://www.zambiaureport.com/count.txt/",
+    ),
     dict(
         name="Zimbabwe",
         host="//zimbabwe.ureport.in",
