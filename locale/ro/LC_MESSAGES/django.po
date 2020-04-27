@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 21:58+0000\n"
+"POT-Creation-Date: 2020-04-27 23:02+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -22,6 +22,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+msgid "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+msgstr ""
 
 msgid "Back to Website"
 msgstr "Înapoi la website "
@@ -1213,15 +1216,12 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "Content Blocks"
 #~ msgstr "Blocuri de conţinut"
 
-#, python-format
 #~ msgid "%s Blocks"
 #~ msgstr "%s Blocuri"
 
-#, python-format
 #~ msgid "Edit %s"
 #~ msgstr "Revizuire %s"
 
-#, python-format
 #~ msgid "Create %s"
 #~ msgstr "Crează %s"
 
@@ -1330,7 +1330,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "User Role"
 #~ msgstr "Rol utilizator"
 
-#, python-format
 #~ msgid "%s Invitation"
 #~ msgstr "%s invitație"
 
@@ -1346,7 +1345,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "The API token for this backend"
 #~ msgstr "Tokenul API pentru acest backend"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      You've been invited to join %(org_name)s.\n"
@@ -1389,7 +1387,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "One of the emails you entered is invalid."
 #~ msgstr "Una dintre adresele de e-mail pe care le-ai introdus nu este validă."
 
-#, python-format
 #~ msgid "Manage %(name)s Accounts"
 #~ msgstr "Administrează %(name)s Aconturi"
 
@@ -1399,7 +1396,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "Your invitation link is invalid. Please contact your organization administrator."
 #~ msgstr "Link-ul invitației tale nu este valid. Vă rugăm să contactați administratorul organizației voastre."
 
-#, python-format
 #~ msgid "Join %(name)s"
 #~ msgstr "Alăturăte %(name)s"
 
@@ -1462,7 +1458,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "Image to display on story page and in previews (optional)"
 #~ msgstr "Imaginea care să fie afişată pe pagina unde este plasat articolul și în previzualizări (opțional)"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -1471,7 +1466,6 @@ msgstr "Ceva care să seteze localizările"
 #~ "\n"
 #~ "Ești sigură că vrei să elimini 1%(object)s1?"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\t %(counter)s result\n"
@@ -1493,7 +1487,6 @@ msgstr "Ceva care să seteze localizările"
 #~ "         %(counter)s rezultate\n"
 #~ "        "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1509,7 +1502,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "Token Expired"
 #~ msgstr "Token expirat"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -1518,7 +1510,6 @@ msgstr "Ceva care să seteze localizările"
 #~ "\n"
 #~ "Ne pare rău, nu vă puteți autentifica în acest moment, deoarece am primit 1 %(failed_login_limit)s încercări de conectare nereușite."
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -1527,7 +1518,6 @@ msgstr "Ceva care să seteze localizările"
 #~ "\n"
 #~ "Vă rugăm să așteptați 1 %(lockout_timeout)s minute înainte să încercați să vă autentificați din nou."
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -1650,7 +1640,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "Your password has successfully been updated, thank you."
 #~ msgstr "Parola a fost actualizată cu succes, îți mulțumim."
 
-#, python-format
 #~ msgid "You are now logged in as %s"
 #~ msgstr "Acum tu ești conectat ca %s"
 
@@ -1672,11 +1661,9 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "Save Changes"
 #~ msgstr "Salvează modificările"
 
-#, python-format
 #~ msgid "Your new %s has been created."
 #~ msgstr "%s tau nou a fost creat."
 
-#, python-format
 #~ msgid "Import %s"
 #~ msgstr "Importă %s"
 
@@ -1721,7 +1708,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Participă la campanii naţionale pentru a ajuta la îmbunătăţirea situaţiei în țară"
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Împărtășeste ce se întâmplă în %(country)s cu alți U-Reporteri"
 
@@ -1766,7 +1752,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "Most responded"
 #~ msgstr "Majoritatea au răspuns"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -1850,7 +1835,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "CUM SĂ TE ALĂTURI"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -1869,7 +1853,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "SONDAJ CURENT"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                  %(questions)s question polled on this topic\n"
@@ -1903,7 +1886,6 @@ msgstr "Ceva care să seteze localizările"
 #~ msgid "POLL RESULTS"
 #~ msgstr "REZULTATELE SONDAJULUI"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"

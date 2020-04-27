@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 21:58+0000\n"
+"POT-Creation-Date: 2020-04-27 23:02+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -21,6 +21,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+msgstr ""
 
 msgid "Back to Website"
 msgstr "ওয়েবসাইটে ফিরে যান"
@@ -1215,15 +1218,12 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Content Blocks"
 #~ msgstr "বিষয়ের সারি"
 
-#, python-format
 #~ msgid "%s Blocks"
 #~ msgstr " %s ব্লক গুলো"
 
-#, python-format
 #~ msgid "Edit %s"
 #~ msgstr "সম্পাদনা করুন %s"
 
-#, python-format
 #~ msgid "Create %s"
 #~ msgstr "তৈরি করুন  %s"
 
@@ -1332,7 +1332,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "User Role"
 #~ msgstr "ব্যবহারকারীর  ভূমিকা"
 
-#, python-format
 #~ msgid "%s Invitation"
 #~ msgstr " %s আমন্ত্রন "
 
@@ -1348,7 +1347,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "The API token for this backend"
 #~ msgstr "ব্যাকএন্ডে ব্যবহার করার জন্য API টোকেন"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      You've been invited to join %(org_name)s.\n"
@@ -1393,7 +1391,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "One of the emails you entered is invalid."
 #~ msgstr "আপনার প্রবেশ করানো ইমেইল গুলোর একটি ভুল"
 
-#, python-format
 #~ msgid "Manage %(name)s Accounts"
 #~ msgstr "একাউন্টগুলো %(name)s নিয়ন্ত্রন করুন"
 
@@ -1403,7 +1400,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Your invitation link is invalid. Please contact your organization administrator."
 #~ msgstr "আপনার আমন্ত্রন লিঙ্কটি সঠিক নয়। অনুগ্রহ করে আপনার প্রতিষ্ঠানের অ্যাডমিনের সাথে যোগাযোগ করুন। "
 
-#, python-format
 #~ msgid "Join %(name)s"
 #~ msgstr "যোগদান %(name)s"
 
@@ -1466,7 +1462,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Image to display on story page and in previews (optional)"
 #~ msgstr "ঘটনার পেইজ এবং প্রিভিউ এর সাথে সংযুক্ত যে ছবি প্রদর্শন করা হবে (ঐচ্ছিক) "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -1476,7 +1471,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ " আপনি নিশ্চিত আপনি বাদ দিতে চান 1\n"
 #~ "%(object)s 1?"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\t %(counter)s result\n"
@@ -1494,7 +1488,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ "     %(counter)s ফলাফল\n"
 #~ "        "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1510,7 +1503,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Token Expired"
 #~ msgstr "টোকেন এর মেয়াদ শেষ হয়ে গিয়েছে "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -1519,7 +1511,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ "\n"
 #~ "দুঃখিত, আপনি এখন লগ ইন করতে পারবেন না কারন আমরা 1 %(failed_login_limit)s যে লগ ইন-এর তথ্য পেয়েছি সেটা সঠিক নয়"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -1528,7 +1519,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ "\n"
 #~ "অনুগ্রহ করে আবার লগ ইন করার আগে 1 %(lockout_timeout)s মিনিট অপেক্ষা করুন"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -1651,7 +1641,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Your password has successfully been updated, thank you."
 #~ msgstr "আপনার পাসওয়ার্ডটি সফলভাবে হালনাগাদ করা হয়েছে। ধন্যবাদ "
 
-#, python-format
 #~ msgid "You are now logged in as %s"
 #~ msgstr "আপনি এখন লগ ইন করেছেন %s হিসেবে "
 
@@ -1673,11 +1662,9 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Save Changes"
 #~ msgstr "পরিবর্তনগুলো সংরক্ষণ করুন "
 
-#, python-format
 #~ msgid "Your new %s has been created."
 #~ msgstr "আপনার নতুন %s তৈরি সম্পূর্ণ হয়েছে "
 
-#, python-format
 #~ msgid "Import %s"
 #~ msgstr "আনুন %s"
 
@@ -1722,7 +1709,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "সারা দেশব্যাপী প্রচারণায় অংশ নিয়ে আপনার দেশ এর উন্নয়নে সহায়তা করুন"
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "আপনার চারপাশের অন্যান্য U-reporter দের সাথে কি হচ্ছে সেটি সবাইকে জানান '%(country)s'"
 
@@ -1767,7 +1753,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Most responded"
 #~ msgstr "বেশি উত্তর প্রদানকারী "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -1851,7 +1836,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "HOW TO JOIN"
 #~ msgstr "কিভাবে যোগদান করবেন "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -1870,7 +1854,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "চলতি পোলটি "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                  %(questions)s question polled on this topic\n"
@@ -1901,7 +1884,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "POLL RESULTS"
 #~ msgstr "পোল এর ফলাফল "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"

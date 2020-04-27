@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 21:58+0000\n"
+"POT-Creation-Date: 2020-04-27 23:02+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -21,6 +21,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+msgstr ""
 
 msgid "Back to Website"
 msgstr "Връщане към уебстраницата"
@@ -1204,15 +1207,12 @@ msgstr "Нещо, което да задейства локализиране"
 #~ msgid "Content Blocks"
 #~ msgstr "Текстови полета"
 
-#, python-format
 #~ msgid "%s Blocks"
 #~ msgstr "%sПолета"
 
-#, python-format
 #~ msgid "Edit %s"
 #~ msgstr "Редактирай %s"
 
-#, python-format
 #~ msgid "Create %s"
 #~ msgstr "Създай%s"
 
@@ -1321,7 +1321,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ msgid "User Role"
 #~ msgstr "Роля на потребителя"
 
-#, python-format
 #~ msgid "%s Invitation"
 #~ msgstr "%s Покана"
 
@@ -1337,7 +1336,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ msgid "The API token for this backend"
 #~ msgstr " API-token-ът за това backend приложение"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      You've been invited to join %(org_name)s.\n"
@@ -1381,7 +1379,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ msgid "One of the emails you entered is invalid."
 #~ msgstr "Един от email-ите, които сте въвели, е невалиден"
 
-#, python-format
 #~ msgid "Manage %(name)s Accounts"
 #~ msgstr "Управлявайте %(name)sпрофили"
 
@@ -1391,7 +1388,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ msgid "Your invitation link is invalid. Please contact your organization administrator."
 #~ msgstr "Вашият линк за покана е невалиден. Моля, свържете се с администратора на вашата организация."
 
-#, python-format
 #~ msgid "Join %(name)s"
 #~ msgstr "Присъедини се към %(name)s "
 
@@ -1452,7 +1448,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ msgid "Image to display on story page and in previews (optional)"
 #~ msgstr "Изображение, което да бъде включено към страницата на историята и към нейния предварителен преглед. (по избор)"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -1461,7 +1456,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ "\n"
 #~ "Сигурни ли сте, че искате да премахнете<b>%(object)s</b>?"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\t %(counter)s result\n"
@@ -1478,7 +1472,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ "\n"
 #~ "%(counter)sброй резултати"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1493,7 +1486,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ msgid "Token Expired"
 #~ msgstr "Token-ът е изтекъл"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -1502,7 +1494,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ "\n"
 #~ "Съжаляваме, не може да влезете в момента, тъй като получихме %(failed_login_limit)sнеправилни опита за влизане"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -1511,7 +1502,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ "\n"
 #~ "Моля изчакайте %(lockout_timeout)s минути преди да опитате да влезете отново."
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -1634,7 +1624,6 @@ msgstr "Нещо, което да задейства локализиране"
 #~ msgid "Your password has successfully been updated, thank you."
 #~ msgstr "Новата парола е актуализирана успешно. Благодарим ви."
 
-#, python-format
 #~ msgid "You are now logged in as %s"
 #~ msgstr "Сега сте вписан като %s"
 
@@ -1656,10 +1645,8 @@ msgstr "Нещо, което да задейства локализиране"
 #~ msgid "Save Changes"
 #~ msgstr "Запази промените"
 
-#, python-format
 #~ msgid "Your new %s has been created."
 #~ msgstr "Нов %sе създаден"
 
-#, python-format
 #~ msgid "Import %s"
 #~ msgstr "Вмъкни %s"

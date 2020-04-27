@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 21:58+0000\n"
+"POT-Creation-Date: 2020-04-27 23:02+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -22,6 +22,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+msgstr ""
 
 msgid "Back to Website"
 msgstr "Voltar para o Website"
@@ -1214,15 +1217,12 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Content Blocks"
 #~ msgstr "Blocos de conteúdo"
 
-#, python-format
 #~ msgid "%s Blocks"
 #~ msgstr "%s blocos"
 
-#, python-format
 #~ msgid "Edit %s"
 #~ msgstr "Editar %s"
 
-#, python-format
 #~ msgid "Create %s"
 #~ msgstr "Criar %s"
 
@@ -1331,7 +1331,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "User Role"
 #~ msgstr "Função de Usuário"
 
-#, python-format
 #~ msgid "%s Invitation"
 #~ msgstr "%s Convite"
 
@@ -1347,7 +1346,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "The API token for this backend"
 #~ msgstr "O token da API para este backend"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      You've been invited to join %(org_name)s.\n"
@@ -1390,7 +1388,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "One of the emails you entered is invalid."
 #~ msgstr "Um dos e-mails que você inseriu é inválido."
 
-#, python-format
 #~ msgid "Manage %(name)s Accounts"
 #~ msgstr "Gerenciar %(name)s Contas"
 
@@ -1400,7 +1397,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Your invitation link is invalid. Please contact your organization administrator."
 #~ msgstr "Seu link de convite é inválido. Por favor, entre em contato com o administrador da organização."
 
-#, python-format
 #~ msgid "Join %(name)s"
 #~ msgstr "Faça parte %(name)s"
 
@@ -1463,7 +1459,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Image to display on story page and in previews (optional)"
 #~ msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional) "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -1473,7 +1468,6 @@ msgstr "Algo para disparar localizações"
 #~ "   Você tem certeza de que quer remover<b>%(object)s</b>?\n"
 #~ "    "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\t %(counter)s result\n"
@@ -1491,7 +1485,6 @@ msgstr "Algo para disparar localizações"
 #~ "         %(counter)s resultados\n"
 #~ "        "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1507,7 +1500,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Token Expired"
 #~ msgstr "Token expirado"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -1517,7 +1509,6 @@ msgstr "Algo para disparar localizações"
 #~ "      Desculpe, você não pode entrar no momento porque recebemos %(failed_login_limit)stentativas incorretas de entrar.\n"
 #~ "      "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -1527,7 +1518,6 @@ msgstr "Algo para disparar localizações"
 #~ "      Por favor, espere %(lockout_timeout)s minutos antes de tentar entrar novamente\n"
 #~ "      "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -1651,7 +1641,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Your password has successfully been updated, thank you."
 #~ msgstr "Sua senha foi atualizada com sucesso, obrigado."
 
-#, python-format
 #~ msgid "You are now logged in as %s"
 #~ msgstr "Você agora está conectado como %s"
 
@@ -1673,11 +1662,9 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Save Changes"
 #~ msgstr "Salvar Alterações."
 
-#, python-format
 #~ msgid "Your new %s has been created."
 #~ msgstr "O seu novo %s foi criado."
 
-#, python-format
 #~ msgid "Import %s"
 #~ msgstr "Importar %s"
 
@@ -1722,7 +1709,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Participe das campanhas em nível nacional para ajudar a melhor o seu País."
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Compartilhe o que está acontecendo ao redor %(country)s com outros U-Reporters"
 
@@ -1767,7 +1753,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "Most responded"
 #~ msgstr "A maioria respondeu"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -1852,7 +1837,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "COMO PARTICIPAR"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -1873,7 +1857,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "ENQUETE ATUAL NO"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                  %(questions)s question polled on this topic\n"
@@ -1903,7 +1886,6 @@ msgstr "Algo para disparar localizações"
 #~ msgid "POLL RESULTS"
 #~ msgstr "RESULTADOS DAS ENQUETES"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"

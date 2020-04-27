@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 21:58+0000\n"
+"POT-Creation-Date: 2020-04-27 23:02+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -18,6 +18,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+msgstr ""
 
 msgid "Back to Website"
 msgstr ""
@@ -1342,15 +1345,12 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Content Blocks"
 #~ msgstr "Sadržajni blokovi"
 
-#, python-format
 #~ msgid "%s Blocks"
 #~ msgstr "1%s Blokovi"
 
-#, python-format
 #~ msgid "Edit %s"
 #~ msgstr "Uredi 1%s"
 
-#, python-format
 #~ msgid "Create %s"
 #~ msgstr "Kreiraj 1%s"
 
@@ -1459,7 +1459,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "User Role"
 #~ msgstr "Uloge korisnika"
 
-#, python-format
 #~ msgid "%s Invitation"
 #~ msgstr "1%s poziv"
 
@@ -1477,7 +1476,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "The API token for this backend"
 #~ msgstr "Naslov ove stavke"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      You've been invited to join %(org_name)s.\n"
@@ -1516,7 +1514,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "One of the emails you entered is invalid."
 #~ msgstr "Jedna od e-mail adresa koje ste naveli nije važeća"
 
-#, python-format
 #~ msgid "Manage %(name)s Accounts"
 #~ msgstr "Uredi %(name)sNaloge"
 
@@ -1526,7 +1523,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Your invitation link is invalid. Please contact your organization administrator."
 #~ msgstr "Vaš pozivni link nije ispravan. Molimo obratite se administratoru vaše organizacije."
 
-#, python-format
 #~ msgid "Join %(name)s"
 #~ msgstr "Pridruži se%(name)s"
 
@@ -1591,7 +1587,7 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Image to display on story page and in previews (optional)"
 #~ msgstr "slike koje će se prikazati uz priču i pregled. (opciono)"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -1604,7 +1600,7 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "\n"
 #~ "Jeste li sigurni da želite ukloniti <b>%(object)s</b>?"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "\t\t%(counter)s result\n"
@@ -1634,7 +1630,7 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "         %(counter)s Rezultati\n"
 #~ "        "
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1653,7 +1649,7 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Token Expired"
 #~ msgstr "Token je istekao"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -1666,7 +1662,7 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "\n"
 #~ "Žao nam je, ne možete se prijaviti zbog %(failed_login_limit)spogrešnih pokušaja prijave."
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -1679,7 +1675,7 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "\n"
 #~ "Molimo sačekajte %(lockout_timeout)s minuta pre ponovnog pokušaja prijave."
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -1806,7 +1802,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Your password has successfully been updated, thank you."
 #~ msgstr "Lozinka je uspešno ažurirana, hvala."
 
-#, python-format
 #~ msgid "You are now logged in as %s"
 #~ msgstr "Trenutno ste prijavljeni kao %s"
 
@@ -1828,11 +1823,9 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Save Changes"
 #~ msgstr "Sačuvaj promene"
 
-#, python-format
 #~ msgid "Your new %s has been created."
 #~ msgstr "Vaš novi %s je kreiran"
 
-#, python-format
 #~ msgid "Import %s"
 #~ msgstr "Uvezi %s"
 
@@ -1877,7 +1870,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Učestvujte u kampanjama širom države, kako biste uticali na stanje u našoj zemlji."
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Podelite šta se dešava sa ostalim U-Reporterima u %(country)s"
 
@@ -1927,7 +1919,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Most responded"
 #~ msgstr "Najviše odgovora "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -2011,7 +2002,7 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "KAKO SE PRIDRUŽITI"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -2037,7 +2028,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "TRENUTNA ANKETA U"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                  %(questions)s question polled on this topic\n"
@@ -2071,7 +2061,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "POLL RESULTS"
 #~ msgstr "REZULTATI ANKETE"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"
@@ -2161,28 +2150,25 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Featured Poll Responses"
 #~ msgstr "Karakteristični odgovori iz ankete"
 
-#, python-format
 #~ msgid "Response %d Reporter"
 #~ msgstr "Odgovor %dReporter"
 
 #~ msgid "The name or alias of the responder."
 #~ msgstr "Ime ili pseudonim ispitanika"
 
-#, python-format
 #~ msgid "Response %d Location"
 #~ msgstr "Odgovor %d Lokacija"
 
 #~ msgid "The location of the responder."
 #~ msgstr "Lokacija ispitanika"
 
-#, python-format
 #~ msgid "Response %d Message"
 #~ msgstr "Odgovor %d Poruka"
 
 #~ msgid "The text of the featured response."
 #~ msgstr "Tekst objavljenih karakterističnih odgovora"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"

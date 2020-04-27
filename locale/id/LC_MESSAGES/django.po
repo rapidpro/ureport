@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 21:58+0000\n"
+"POT-Creation-Date: 2020-04-27 23:02+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -17,6 +17,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+msgstr ""
 
 msgid "Back to Website"
 msgstr ""
@@ -1341,15 +1344,12 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Content Blocks"
 #~ msgstr "Blok Konten"
 
-#, python-format
 #~ msgid "%s Blocks"
 #~ msgstr "%s Blok"
 
-#, python-format
 #~ msgid "Edit %s"
 #~ msgstr "Rubah  %s"
 
-#, python-format
 #~ msgid "Create %s"
 #~ msgstr "Buat %s"
 
@@ -1458,7 +1458,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "User Role"
 #~ msgstr "Peran pengguna"
 
-#, python-format
 #~ msgid "%s Invitation"
 #~ msgstr "%s Undangan"
 
@@ -1476,7 +1475,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "The API token for this backend"
 #~ msgstr "Judul untuk item ini"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      You've been invited to join %(org_name)s.\n"
@@ -1515,7 +1513,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "One of the emails you entered is invalid."
 #~ msgstr "Satu dari email yang dimasukkan tidak sesuai format"
 
-#, python-format
 #~ msgid "Manage %(name)s Accounts"
 #~ msgstr "Kelola %(name)s Pengguna"
 
@@ -1525,7 +1522,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Your invitation link is invalid. Please contact your organization administrator."
 #~ msgstr "link undangan Anda tidak valid. Silahkan hubungi administrator organisasi Anda."
 
-#, python-format
 #~ msgid "Join %(name)s"
 #~ msgstr "Gabung %(name)s"
 
@@ -1590,7 +1586,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Image to display on story page and in previews (optional)"
 #~ msgstr "Image to display on story page and in previews (optional)"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -1603,7 +1599,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ "\n"
 #~ "Apakah Anda yakin ingin menghapus <b>%(object)s</b>?"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "\t\t%(counter)s result\n"
@@ -1624,7 +1620,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ "\n"
 #~ "%(counter)s hasil"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1644,7 +1640,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Token Expired"
 #~ msgstr "Token Kadaluarsa"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -1657,7 +1653,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ "\n"
 #~ "Maaf, Anda tidak bisa login pada saat ini karena kami menerima %(failed_login_limit)s usaha login yang salah."
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -1670,7 +1666,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ "\n"
 #~ "Silahkan tunggu %(lockout_timeout)s menit sebelum mencoba login kembali."
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -1797,7 +1793,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Your password has successfully been updated, thank you."
 #~ msgstr "Kata sandi Anda telah berhasil diperbarui, terima kasih."
 
-#, python-format
 #~ msgid "You are now logged in as %s"
 #~ msgstr "Anda sekarang login sebagai %s"
 
@@ -1819,11 +1814,9 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Save Changes"
 #~ msgstr "Simpan Perubahan"
 
-#, python-format
 #~ msgid "Your new %s has been created."
 #~ msgstr "%s baru anda sudah berhasil dibuat"
 
-#, python-format
 #~ msgid "Import %s"
 #~ msgstr "Impor %s"
 
@@ -1870,7 +1863,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Berpartisipasi dalam kampanye nasional untuk membantu berkembangnya negara Anda"
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Bagi apa yang terjadi di sekitar %(country)s dengan U-Reporters lainnya"
 
@@ -1917,7 +1909,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Most responded"
 #~ msgstr "Respon paling banyak"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
@@ -1988,7 +1980,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "CARA BERGABUNG"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -2009,7 +2001,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "POLLING TERBARU DI"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
@@ -2039,7 +2031,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "POLL RESULTS"
 #~ msgstr "HASIL POLLING"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"
@@ -2129,28 +2120,25 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Featured Poll Responses"
 #~ msgstr "Fitur Tanggapan Jajak Pendapat"
 
-#, python-format
 #~ msgid "Response %d Reporter"
 #~ msgstr "Tanggapan %d UReporter"
 
 #~ msgid "The name or alias of the responder."
 #~ msgstr "Nama atau alias dari responden tersebut."
 
-#, python-format
 #~ msgid "Response %d Location"
 #~ msgstr "Tanggapan %d Lokasi"
 
 #~ msgid "The location of the responder."
 #~ msgstr "Lokasi responden"
 
-#, python-format
 #~ msgid "Response %d Message"
 #~ msgstr "Tanggapan %d Pesan"
 
 #~ msgid "The text of the featured response."
 #~ msgstr "Respon unggulan"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"

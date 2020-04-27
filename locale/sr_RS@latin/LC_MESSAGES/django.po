@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 21:58+0000\n"
+"POT-Creation-Date: 2020-04-27 23:02+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2019\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -22,6 +22,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+msgstr ""
 
 msgid "Back to Website"
 msgstr "Nazad na sajt"
@@ -1219,15 +1222,12 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Content Blocks"
 #~ msgstr "Sadržajni blokovi"
 
-#, python-format
 #~ msgid "%s Blocks"
 #~ msgstr "1%s Blokovi"
 
-#, python-format
 #~ msgid "Edit %s"
 #~ msgstr "Uredi 1%s"
 
-#, python-format
 #~ msgid "Create %s"
 #~ msgstr "Kreiraj 1%s"
 
@@ -1336,7 +1336,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "User Role"
 #~ msgstr "Uloge korisnika"
 
-#, python-format
 #~ msgid "%s Invitation"
 #~ msgstr "1%s poziv"
 
@@ -1352,7 +1351,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "The API token for this backend"
 #~ msgstr "API token za pozadinski sistem"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      You've been invited to join %(org_name)s.\n"
@@ -1395,7 +1393,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "One of the emails you entered is invalid."
 #~ msgstr "Jedna od e-mail adresa koje ste naveli nije važeća"
 
-#, python-format
 #~ msgid "Manage %(name)s Accounts"
 #~ msgstr "Upravljanje %(name)s Nalozima"
 
@@ -1405,7 +1402,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Your invitation link is invalid. Please contact your organization administrator."
 #~ msgstr "Vaš pozivni link nije ispravan. Molimo obratite se administratoru vaše organizacije."
 
-#, python-format
 #~ msgid "Join %(name)s"
 #~ msgstr "Pridruži se %(name)s"
 
@@ -1468,7 +1464,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Image to display on story page and in previews (optional)"
 #~ msgstr "slike koje će se prikazati uz priču i pregled. (opciono)"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "    Are you sure you want to remove <b>%(object)s</b>?\n"
@@ -1477,7 +1472,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "\n"
 #~ "Jeste li sigurni da želite ukloniti <b>%(object)s</b>?"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\t %(counter)s result\n"
@@ -1499,7 +1493,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "         %(counter)s Rezultati\n"
 #~ "        "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1514,7 +1507,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Token Expired"
 #~ msgstr "Token je istekao"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
@@ -1523,7 +1515,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "\n"
 #~ "Žao nam je, ne možete se prijaviti zbog %(failed_login_limit)spogrešnih pokušaja prijave."
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
@@ -1532,7 +1523,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "\n"
 #~ "Molimo sačekajte %(lockout_timeout)s minuta pre ponovnog pokušaja prijave."
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
@@ -1655,7 +1645,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Your password has successfully been updated, thank you."
 #~ msgstr "Lozinka je uspešno ažurirana, hvala."
 
-#, python-format
 #~ msgid "You are now logged in as %s"
 #~ msgstr "Trenutno ste prijavljeni kao %s"
 
@@ -1677,11 +1666,9 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Save Changes"
 #~ msgstr "Sačuvaj promene"
 
-#, python-format
 #~ msgid "Your new %s has been created."
 #~ msgstr "Vaš novi %s je kreiran"
 
-#, python-format
 #~ msgid "Import %s"
 #~ msgstr "Uvezi %s"
 
@@ -1726,7 +1713,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Učestvujte u kampanjama širom države, kako biste uticali na stanje u našoj zemlji."
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Podelite šta se dešava sa ostalim U-Reporterima u %(country)s"
 
@@ -1771,7 +1757,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Most responded"
 #~ msgstr "Najviše odgovora "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -1856,7 +1841,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "KAKO SE PRIDRUŽITI"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -1877,7 +1861,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "TRENUTNA ANKETA U"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                  %(questions)s question polled on this topic\n"
@@ -1911,7 +1894,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "POLL RESULTS"
 #~ msgstr "REZULTATI ANKETE"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"
