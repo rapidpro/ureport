@@ -56,6 +56,15 @@
             .block
               WhatsApp
           {% endif %}
+
+          {% if org|config:"viber_url" %}
+          .mb-4.text-center(class="md:mx-4")
+            %a(href='{{ org|config:"viber_url" }}')
+              .bg-circle-lg.bg-white.text-black.border.border-black
+                %i.fab.fa-viber
+            .block
+              Viber
+          {% endif %}
     
   - for join_step in join_steps
     .py-12(class="{% cycle 'bg-dark1 text-white' 'bg-dark2 text-white' 'bg-dark3 text-white' 'bg-light1 text-black' %}")
