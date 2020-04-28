@@ -6,7 +6,7 @@ import time
 
 import six
 from temba_client.exceptions import TembaBadRequestError
-from temba_client.v2 import TembaClient
+from temba_client.v1 import TembaClient
 
 from django.conf import settings
 from django.db import migrations
