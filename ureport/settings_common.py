@@ -257,10 +257,10 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
-        name="viber_url",
+        name="viber_username",
         field=dict(
-            help_text=_("The viber url that users will use to contact U-Report if you have one"),
-            label="Viber URL",
+            help_text=_("The viber username that users will use to contact U-Report if you have one"),
+            label="Viber Username",
             required=False,
         ),
     ),
