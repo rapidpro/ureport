@@ -23,6 +23,20 @@ html {
 }
 
 
+// languages toggle
+.language-menu {
+  display: inline-block;
+
+  .language-dropdown {
+    display: none;
+  }
+
+  &.open {
+    .language-dropdown {
+      display: block;
+    }
+  }
+}
 
 // countries menu
 #countries {

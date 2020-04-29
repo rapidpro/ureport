@@ -556,6 +556,11 @@ ORG_CONFIG_FIELDS = [
             widget=Textarea,
         ),
     ),
+    dict(
+        name="other_languages_sites",
+        field=dict(help_text=_("Other language sites links"), required=False),
+        superuser_only=True,
+    ),
 ]
 
 
