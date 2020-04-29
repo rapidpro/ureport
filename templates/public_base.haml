@@ -455,7 +455,22 @@
   
             %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'public.join' %}" class="hover:bg-gray-700")
               -trans "Join Now"
-  
+
+            - if other_languages_sites
+              %a#languages-toggler.flex-initial.ml-4.w-10.py-menu.language-menu(class="rtl:float-left ltr:float-right")
+                %i.fa.fa-caret-down.mx-1.mt-1(class="rtl:float-left ltr:float-right")
+                %span.whitespace-no-wrap.text-base(class="rtl:float-left ltr:float-right")
+                  %i.fa.fa-language
+                
+
+                .language-dropdown.absolute.z-50.mt-5
+                  .border.border-gray-400.bg-white(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="ltr:text-left rtl:text-right")
+                    .pt-1.text-black
+                      - for lang in other_languages_sites
+                        %button(onclick='location.href="{{lang.link}}"' type="button" class="focus:outline-none")
+                          .whitespace-no-wrap.p-2
+                            {{ lang.name }}
+        
         // header menu
         .max-w-page.mx-auto.justify-around.mt-5.mb-12.px-home.hidden.border-b.pb-6(class="md:flex")
           .flex-1.text-center.font-bold.text-2xl.flex-center-y
@@ -694,6 +709,10 @@
       });
       $("#countries-closer").click(function(){
         $("#countries").removeClass("open");
+      });
+
+      $("#languages-toggler").click(function(){
+        $(this).toggleClass("open");
       });
 
       $(".export-modal-close").on('click', function() {

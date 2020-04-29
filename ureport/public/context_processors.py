@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import json
 import operator
 from functools import reduce
 
@@ -83,6 +84,14 @@ def set_config_display_flags(request):
             operator.or_, [bool(org.get_config("%s.occupation_label" % option)) for option in backend_options], False
         )
         context["colors_map"] = [str(color.strip()) for color in org.get_config("colors_map", "").split(",")]
+
+        other_languages_sites = {}
+        try:
+            other_languages_sites = json.loads(org.get_config("other_languages_sites"))
+        except Exception:
+            pass
+
+        context["other_languages_sites"] = [dict(name=key, link=val) for key, val in other_languages_sites.items()]
 
     return context
 
