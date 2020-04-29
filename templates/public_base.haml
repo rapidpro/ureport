@@ -273,6 +273,23 @@
         %a.block.font-bold.mt-4(href="{% url 'public.join' %}" class="hover:text-gray-600")
           -trans "Join Now"
         
+        - if other_languages_sites
+          .block.mt-4.font-bold.mobile-accordion.text-sm.cursor-pointer
+            %i.fa.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+            %i.fa.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
+            .px-3.whitespace-no-wrap(class="hover:text-gray-750")
+              -trans "SELECT LANGUAGE"
+            .mobile-accordion-content.text-white
+              - for lang in other_languages_sites
+                - if lang.link
+                  %a.block.p-1(href="{{ lang.link }}" class="hover:text-gray-600")
+                    {{ lang.name|title }}
+                - else
+                  .block.p-1.cursor-text
+                    %i.fa.fa-check.inline
+                    {{ lang.name|title }}
+
+
         .block.mt-4.font-bold.mobile-accordion.text-sm.cursor-pointer
           %i.fa.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
           %i.fa.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
@@ -463,14 +480,19 @@
                   %i.fa.fa-language
                 
 
-                .language-dropdown.absolute.z-50.mt-5
+                .language-dropdown.absolute.z-50.mt-6.mx-6(class="ltr:-ml-8 rtl:-mr-8")
                   .border.border-gray-400.bg-white(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="ltr:text-left rtl:text-right")
                     .pt-1.text-black
                       - for lang in other_languages_sites
-                        %button(onclick='location.href="{{lang.link}}"' type="button" class="focus:outline-none")
-                          .whitespace-no-wrap.p-2
-                            {{ lang.name }}
-        
+                        -if lang.link
+                          %button.w-full(onclick='location.href="{{lang.link}}"' type="button" class="focus:outline-none hover:bg-gray-200")
+                            .whitespace-no-wrap.p-2
+                              {{ lang.name }}
+                        -else
+                          %button.w-full.cursor-text(type="button" class="focus:outline-none")
+                            .whitespace-no-wrap.p-2
+                              %i.fa.fa-check.inline
+                              {{ lang.name }}
         // header menu
         .max-w-page.mx-auto.justify-around.mt-5.mb-12.px-home.hidden.border-b.pb-6(class="md:flex")
           .flex-1.text-center.font-bold.text-2xl.flex-center-y

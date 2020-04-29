@@ -91,7 +91,9 @@ def set_config_display_flags(request):
         except Exception:
             pass
 
-        context["other_languages_sites"] = [dict(name=key, link=val) for key, val in other_languages_sites.items()]
+        context["other_languages_sites"] = sorted(
+            [dict(name=key, link=val) for key, val in other_languages_sites.items()], key=lambda q: q["name"]
+        )
 
     return context
 
