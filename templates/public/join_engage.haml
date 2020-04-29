@@ -59,7 +59,7 @@
 
           {% if org|config:"viber_username" %}
           .mb-4.text-center(class="md:mx-4")
-            %a(href='{{ org|config:"viber_username" }}')
+            %a(href='https://chats.viber.com/{{ org|config:"viber_username" }}')
               .bg-circle-lg.bg-white.text-black.border.border-black
                 %i.fab.fa-viber
             .block
