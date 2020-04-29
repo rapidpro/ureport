@@ -1,3 +1,9 @@
+v1.1.149
+----------
+ * Merge pull request #579 from rapidpro/other-lang-sites
+ * Include current site with a check mark
+ * Add a way to link sites as connected sites in a different language
+
 v1.1.148
 ----------
  * Rebuild locale
