@@ -1,3 +1,9 @@
+v1.1.150
+----------
+ * Merge pull request #580 from Ilhasoft/hotfix/fix-size-bulgaria-flag
+ * Remove overflow style
+ * fix size bulgaria flag
+
 v1.1.149
 ----------
  * Merge pull request #579 from rapidpro/other-lang-sites
