@@ -840,7 +840,7 @@ CELERYBEAT_SCHEDULE = {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": timedelta(minutes=10),
         "relative": True,
-        "args": ("ureport.polls.tasks.backfill_poll_results", "sync"),
+        "args": ("ureport.polls.tasks.backfill_poll_results",),
     },
     "results-pull-main-poll": {
         "task": "dash.orgs.tasks.trigger_org_task",
@@ -873,7 +873,7 @@ CELERYBEAT_SCHEDULE = {
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=4, minute=0),
-        "args": ("ureport.polls.tasks.clear_old_poll_results", "sync"),
+        "args": ("ureport.polls.tasks.clear_old_poll_results",),
     },
 }
 
