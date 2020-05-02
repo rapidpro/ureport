@@ -1,3 +1,8 @@
+v1.1.151
+----------
+ * Merge pull request #581 from rapidpro/move-task-queues
+ * Move task queues
+
 v1.1.150
 ----------
  * Merge pull request #580 from Ilhasoft/hotfix/fix-size-bulgaria-flag
