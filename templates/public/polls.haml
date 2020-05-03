@@ -20,7 +20,7 @@
                 %input.bg-black.search-box.text-sm(type="text" data-results-id="poll-search-results" placeholder="{% trans 'SEARCH' %}" size=14)
               .flex-none
                 %a.search-close.cursor-pointer
-                  %i.fa.fa-caret-down
+                  %i.fas.fa-caret-down
 
         .relative
           .absolute.bg-white.search-results.h-64.border(id="poll-search-results" style="z-index:100000;width:285px;" class="rtl:right-0 ltr:left-0")
@@ -31,8 +31,8 @@
               - if category.polls.all
                 .block.py-1.bg-white.search-category
                   %a.font-bold.px-2.block(href="#")
-                    %i.fa.fa-caret-right.closed(style="padding-top:2px" class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
-                    %i.fa.fa-caret-down.hidden.open(style="padding-top:4px" class="rtl:float-right ltr:float-left")
+                    %i.fas.fa-caret-right.closed(style="padding-top:2px" class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+                    %i.fas.fa-caret-down.hidden.open(style="padding-top:4px" class="rtl:float-right ltr:float-left")
                     .text-sm(class="rtl:pr-3 ltr:pl-3")
                       {{ category.name }}
                   .category-results
@@ -110,7 +110,7 @@
             #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
               .flex.text-center.h-full.w-full(id="poll-map-placeholder" style="min-height:300px;min-width:300px;")
                 .fa-3x.inline-block.m-auto.self-center
-                  %i.fa.fa-spinner.fa-spin
+                  %i.fas.fa-spinner
             #map-info.relative.h-full.w-full.mt-1.flex.justify-center
 
 
@@ -153,14 +153,14 @@
                     %a.pill-white.segment-pill.relative.state-pill(href='#' data-question="{{question.id}}" data-segment="state" data-page="opinions" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}")>
                       %span.whitespace-no-wrap
                         -trans "LOCATION"
-                      %i.fa.fa-caret-down
+                      %i.fas.fa-caret-down
                       .state-dropdown.absolute.z-50(id="states-{{question.id}}" style="margin-left:-1px" data-html2canvas-ignore=true)
                         .border.border-gray-400.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="rtl:text-right ltr:text-left" )
                           .pt-1.text-black
                             - for state in states
                               .py-1.state-segment(data-state='{{state.id}}' data-click-handler="" data-question="{{question.id}}" class="hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %} rtl:pr-2 rtl:pl-4 ltr:pl-2 ltr:pr-4" data-page="opinions")
                                 .checkbox(class="rtl:float-right ltr:float-left")
-                                  %i.fa.fa-check
+                                  %i.fas.fa-check
                                 .ml-4.whitespace-no-wrap
                                   {{ state.name }}
 
@@ -170,22 +170,22 @@
               .share.flex-none.mb-4.flex-center-y.hover-show(class="rtl:float-left ltr:float-right")
                 .block
                   %a.cursor-pointer.bg-circle-xs.border.border-black.facebook-share(data-url="{% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                    %i.fa.fa-facebook
+                    %i.fab.fa-facebook-f
                   %a.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                    %i.fa.fa-twitter
+                    %i.fab.fa-twitter
                   %a.bg-circle-xs.border.border-black(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                    %i.fa.fa-whatsapp
+                    %i.fab.fa-whatsapp
                   %a.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'public.opinion_read' latest_poll.pk %}#question-id-{{question.id}}")
-                    %i.fa.fa-envelope
+                    %i.fas.fa-envelope
                   %a.cursor-pointer.bg-circle-xs.border.border-black.screenshot-share(data-screen-id="question-block-{{question.id}}")
-                    %i.fa.fa-file-image-o
+                    %i.fas.fa-file-image
 
 
             .relative.w-full(style="min-height:24rem;")
               .w-full.h-full.absolute.poll-chart.block(id="chart-{{ question.id }}" data-question="{{ question.id }}" data-segment="all")
                 .chart-progress.flex.text-center.w-full.h-full
                   .fa-5x.inline-block.m-auto.self-center
-                    %i.fa.fa-spinner.fa-spin
+                    %i.fas.fa-spinner
 
   -if latest_poll and latest_poll.response_title and latest_poll.response_content
     .bg-grid.pt-20(class="md:mt-12")
