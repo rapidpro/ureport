@@ -1101,6 +1101,46 @@ class RapidProBackendTest(UreportTest):
 
         self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 1))
 
+        mock_get_boundaries.return_value = MockClientQuery(
+            [
+                TembaBoundary.create(
+                    osm_id="OLD123", name="CHANGED2", parent=None, level=Boundary.COUNTRY_LEVEL, geometry=geometry
+                ),
+                TembaBoundary.create(
+                    osm_id="NEW123",
+                    name="NEW_CHANGE",
+                    parent=TembaBoundary.BoundaryRef.create(osm_id="OLD123", name="CHANGED2"),
+                    level=Boundary.STATE_LEVEL,
+                    geometry=geometry,
+                ),
+            ]
+        )
+
+        with self.assertNumQueries(7):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 1))
+
+        mock_get_boundaries.return_value = MockClientQuery(
+            [
+                TembaBoundary.create(
+                    osm_id="SOME123", name="Rwanda", parent=None, level=Boundary.COUNTRY_LEVEL, geometry=geometry
+                ),
+                TembaBoundary.create(
+                    osm_id="OTHER123",
+                    name="Kigali",
+                    parent=TembaBoundary.BoundaryRef.create(osm_id="SOME123", name="Rwanda"),
+                    level=Boundary.STATE_LEVEL,
+                    geometry=geometry,
+                ),
+            ]
+        )
+
+        with self.assertNumQueries(13):
+            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+
+        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 2, 0))
+
     @patch("redis.client.StrictRedis.lock")
     @patch("dash.orgs.models.TembaClient.get_runs")
     @patch("django.utils.timezone.now")
