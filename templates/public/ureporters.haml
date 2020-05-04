@@ -71,7 +71,7 @@
             #ureporter-map.h-full.w-full.map.block(data-map-url="/contact_field_results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
               .flex.text-center.h-full.w-full(id="poll-map-placeholder" style="min-height:300px;min-width:300px;")
                 .fa-3x.inline-block.m-auto.self-center
-                  %i.fas.fa-spinner
+                  %i.fas.fa-spinner.fa-spin
             #map-info.relative.h-full.w-full.mt-2.flex.justify-center
   
   .border-t.border-b.bg-dark-gray.sticky.z-480.border-gray-600(class="{% if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser %}top-45{% else %}top-0{% endif %}")
@@ -142,4 +142,4 @@
                       .engagement-chart.has-graph(id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-page="engagement")
                         .chart-progress.flex.text-center.w-full.h-full
                           .fa-5x.inline-block.m-auto.self-center
-                            %i.fas.fa-spinner
+                            %i.fas.fa-spinner.fa-spin

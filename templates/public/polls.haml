@@ -110,7 +110,7 @@
             #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
               .flex.text-center.h-full.w-full(id="poll-map-placeholder" style="min-height:300px;min-width:300px;")
                 .fa-3x.inline-block.m-auto.self-center
-                  %i.fas.fa-spinner
+                  %i.fas.fa-spinner.fa-spin
             #map-info.relative.h-full.w-full.mt-1.flex.justify-center
 
 
@@ -185,7 +185,7 @@
               .w-full.h-full.absolute.poll-chart.block(id="chart-{{ question.id }}" data-question="{{ question.id }}" data-segment="all")
                 .chart-progress.flex.text-center.w-full.h-full
                   .fa-5x.inline-block.m-auto.self-center
-                    %i.fas.fa-spinner
+                    %i.fas.fa-spinner.fa-spin
 
   -if latest_poll and latest_poll.response_title and latest_poll.response_content
     .bg-grid.pt-20(class="md:mt-12")
