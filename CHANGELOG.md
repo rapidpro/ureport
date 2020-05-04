@@ -1,3 +1,10 @@
+v1.1.152
+----------
+ * Merge pull request #583 from rapidpro/fix-locations-sync
+ * Merge pull request #584 from Ilhasoft/feature/add-lesotho
+ * add lesotho to ureport
+ * Add ordering so we can delete to update the locations boundaries without constraint
+
 v1.1.151
 ----------
  * Merge pull request #581 from rapidpro/move-task-queues
