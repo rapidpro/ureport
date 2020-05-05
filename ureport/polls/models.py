@@ -1020,7 +1020,7 @@ class PollQuestion(SmartModel):
                             .annotate(label=F("category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        categories_results_dict = {elt["label"]: elt["count"] for elt in categories_results}
+                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
 
                         unset_count_stats = (
                             PollStats.objects.filter(org=org, question=self, category=None)
@@ -1036,7 +1036,7 @@ class PollQuestion(SmartModel):
                         for category_obj in categories_qs:
                             key = category_obj.category.lower()
                             categorie_label = category_obj.category_displayed or category_obj.category
-                            if key.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
+                            if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
                                 categories.append(dict(count=category_count, label=categorie_label))
 
@@ -1076,7 +1076,7 @@ class PollQuestion(SmartModel):
                             .annotate(label=F("category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        categories_results_dict = {elt["label"]: elt["count"] for elt in categories_results}
+                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
 
                         unset_count_stats = PollStats.objects.filter(
                             org=org, question=self, category=None, age_segment_id=age["id"]
@@ -1087,7 +1087,7 @@ class PollQuestion(SmartModel):
                         for category_obj in categories_qs:
                             key = category_obj.category.lower()
                             categorie_label = category_obj.category_displayed or category_obj.category
-                            if key.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
+                            if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
                                 categories.append(dict(count=category_count, label=categorie_label))
 
