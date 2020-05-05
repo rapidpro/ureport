@@ -466,6 +466,18 @@ class PollCRUDL(SmartCRUDL):
             queryset = super(PollCRUDL.List, self).get_queryset().filter(org=self.request.org)
             return queryset
 
+        def get_context_data(self, **kwargs):
+            context = super(PollCRUDL.List, self).get_context_data(**kwargs)
+
+            unsynced_polls = (
+                Poll.objects.filter(org=self.request.org, has_synced=False)
+                .exclude(is_active=False)
+                .exclude(flow_uuid="")
+            )
+            context["unsynced_polls"] = unsynced_polls
+
+            return context
+
         def get_sync_status(self, obj):
             if obj.has_synced:
                 last_synced = cache.get(Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (obj.org.pk, obj.flow_uuid), None)
