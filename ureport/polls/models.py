@@ -21,6 +21,7 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import connection, models
 from django.db.models import Count, F, Q, Sum
+from django.db.models.functions import Lower
 from django.utils import timezone, translation
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -859,6 +860,13 @@ class PollQuestion(SmartModel):
             )
         return question
 
+    def get_public_categories(self):
+        return (
+            self.response_categories.filter(is_active=True)
+            .annotate(lower_category=Lower("category"))
+            .exclude(lower_category__in=PollResponseCategory.IGNORED_CATEGORY_RULES)
+        )
+
     def get_most_responded_regions(self):
         top_regions = []
 
@@ -984,9 +992,7 @@ class PollQuestion(SmartModel):
             results.append(dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories))
 
         else:
-            categories_label = (
-                self.response_categories.filter(is_active=True).order_by("pk").values_list("category", flat=True)
-            )
+            categories_qs = self.response_categories.filter(is_active=True).order_by("pk")
 
             if segment:
 
@@ -1027,8 +1033,9 @@ class PollQuestion(SmartModel):
                         )
                         unset_count = unset_count_stats.get("count__sum", 0) or 0
 
-                        for categorie_label in categories_label:
-                            key = categorie_label
+                        for category_obj in categories_qs:
+                            key = category_obj.category.lower()
+                            categorie_label = category_obj.category_displayed or category_obj.category
                             if key.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
                                 categories.append(dict(count=category_count, label=categorie_label))
@@ -1077,8 +1084,9 @@ class PollQuestion(SmartModel):
                         unset_count = unset_count_stats.get("count__sum", 0) or 0
 
                         categories = []
-                        for categorie_label in categories_label:
-                            key = categorie_label
+                        for category_obj in categories_qs:
+                            key = category_obj.category.lower()
+                            categorie_label = category_obj.category_displayed or category_obj.category
                             if key.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
                                 categories.append(dict(count=category_count, label=categorie_label))
@@ -1114,8 +1122,9 @@ class PollQuestion(SmartModel):
                         ).aggregate(Sum("count"))
                         unset_count = unset_count_stats.get("count__sum", 0) or 0
 
-                        for categorie_label in categories_label:
-                            key = categorie_label.lower()
+                        for category_obj in categories_qs:
+                            key = category_obj.category.lower()
+                            categorie_label = category_obj.category_displayed or category_obj.category
                             if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
                                 categories.append(dict(count=category_count, label=categorie_label))
@@ -1140,8 +1149,10 @@ class PollQuestion(SmartModel):
                 )
                 categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
                 categories = []
-                for categorie_label in categories_label:
-                    key = categorie_label.lower()
+
+                for category_obj in categories_qs:
+                    key = category_obj.category.lower()
+                    categorie_label = category_obj.category_displayed or category_obj.category
                     if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                         category_count = categories_results_dict.get(key, 0)
                         categories.append(dict(count=category_count, label=categorie_label))
@@ -1236,6 +1247,8 @@ class PollResponseCategory(models.Model):
 
     category = models.TextField(null=True)
 
+    category_displayed = models.TextField(null=True)
+
     is_active = models.BooleanField(default=True)
 
     @classmethod
@@ -1250,7 +1263,9 @@ class PollResponseCategory(models.Model):
         if existing:
             existing.update(category=category, is_active=True)
         else:
-            existing = cls.objects.create(question=question, rule_uuid=rule_uuid, category=category, is_active=True)
+            existing = cls.objects.create(
+                question=question, rule_uuid=rule_uuid, category=category, category_displayed=category, is_active=True
+            )
         return existing
 
     class Meta:
