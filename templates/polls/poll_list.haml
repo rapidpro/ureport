@@ -7,6 +7,11 @@
     .is-inline-block.content-title-text
       -trans "Opinions"
 
+- block pre-content
+  - if unsynced_polls
+    .notification(class="is-info")
+      - blocktrans with counter=unsynced_polls|length
+        There is/are currently {{ counter }} new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.
 
 -block table-buttons
   -if view.add_button

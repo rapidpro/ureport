@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-05-06 21:17+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -823,6 +823,14 @@ msgstr "Ultime notifiche"
 msgid "Backends"
 msgstr "Backends"
 
+#, python-format
+msgid ""
+"\n"
+"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
+"\n"
+"      "
+msgstr ""
+
 msgid "+ New Poll"
 msgstr "+ Nuovo Sondaggio"
 
@@ -1000,6 +1008,9 @@ msgstr "Esporta e condividi"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Vuoi condividere il risultato ad utenti esterni? scarica questa immagine per i tuoi social media o inseriscila in una presentazione!"
+
+msgid "SELECT LANGUAGE"
+msgstr ""
 
 msgid "SELECT COUNTRY"
 msgstr "SELEZIONA IL PAESE"
@@ -1648,6 +1659,9 @@ msgstr "il Font usato per piccoli testi"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Se hai bisogno di inserire alcuni codici personalizzati HTML nelle tue pagine org, come  frammenti di codici analitici personalizzati"
+
+msgid "Other language sites links"
+msgstr ""
 
 msgid "90 Days"
 msgstr "90 giorni"

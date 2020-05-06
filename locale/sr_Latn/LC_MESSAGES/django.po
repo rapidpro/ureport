@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-05-06 21:17+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -867,6 +867,14 @@ msgstr "LOKACIJE"
 msgid "Backends"
 msgstr "Upravljanje korisnicima"
 
+#, python-format
+msgid ""
+"\n"
+"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
+"\n"
+"      "
+msgstr ""
+
 msgid "+ New Poll"
 msgstr ""
 
@@ -1075,6 +1083,9 @@ msgid "Export and Share"
 msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT LANGUAGE"
 msgstr ""
 
 msgid "SELECT COUNTRY"
@@ -1791,6 +1802,9 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Ako treba uključiti prilagođeni HTML kod u vaše org stranice, poput prilagođenih analitičkih snippet kodova"
+
+msgid "Other language sites links"
+msgstr ""
 
 msgid "90 Days"
 msgstr ""
