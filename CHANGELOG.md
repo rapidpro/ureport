@@ -1,3 +1,14 @@
+v1.1.153
+----------
+ * Better message
+ * Hide multiple pages for mobile
+ * Improve mobile site
+ * Remove unused method
+ * Add migration file
+ * Fix the location and age segmentation
+ * Add a way to configure the display of the category for poll questions
+ * Show clear feedback to admin on polls being synced
+
 v1.1.152
 ----------
  * Merge pull request #583 from rapidpro/fix-locations-sync
