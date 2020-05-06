@@ -10,21 +10,8 @@
 - block pre-content
   - if unsynced_polls
     .notification(class="is-info")
-      - blocktrans count counter=unsynced_polls|length
-        New polls are not displayed to the public site until we have synced results to display.
-        %br
-        %b
-          We currently have {{ counter }} poll syncing in the background.
-        %br
-        This message will dissappear when all polls synced and have results to display
-      -plural
-        New polls are not displayed to the public site until we have synced results to display.
-        %br
-        %b
-          We currently have {{ counter }} polls syncing in the background.
-        %br
-        This message will dissappear when all polls synced and have results to display
-
+      - blocktrans with counter=unsynced_polls|length
+        There is/are currently {{ counter }} new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.
 
 -block table-buttons
   -if view.add_button
