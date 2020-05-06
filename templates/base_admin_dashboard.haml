@@ -63,17 +63,17 @@
       .level.is-marginless.has-background-black(style="height:15px")
 
     -block navbar
-      .top-nav-container(style="padding: 20px 80px 20px 80px;")
+      .top-nav-container
         .level
           .level-left
-            %a.level-item.has-text-black(href="/")
+            %a.level-item.has-text-black(href="/" style="justify-content: start;")
               .icon
                 %i.fas.fa-arrow-circle-left
               - trans "Back to Website"
       .admin-header.border-b.border-gray-600
         .level
           .level-left
-            .level-item.square-logo
+            .level-item.square-logo(style="justify-content: start;")
               .(style="width:360px")
                 {% thumbnail org.get_logo "x180" format="PNG" as im %}
                 %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
@@ -85,7 +85,7 @@
                 .level-item.logged-in-account.has-text-right
                   - trans "Welcome, "
                     {{ request.user.first_name }} {{ request.user.last_name }}
-                  %br
+                  %br.is-hidden-mobile
                   {{ request.user.username }}
                 %a.level-item.button.is-outlined.logout-button(href="{% url 'users.user_logout' %}?go=/")
                   - trans "Logout"
@@ -94,7 +94,7 @@
                     - trans "Login"
 
   %section.section.is-paddingless.is-marginless
-    .content-section-container(style="padding: 0 0px 0 60px; ")
+    .content-section-container
       -block content-section
             .columns.is-marginless
               .column.is-one-fifth.block#left-menu
@@ -197,7 +197,7 @@
 
               .column.is-four-fifths.is-offset-one.block(class="bg-white")
                 -block content-div
-                  .content-div(style="padding: 3rem 70px 3rem 40px;")
+                  .content-div
                     - block messages
                       - if messages
                         - for message in messages
@@ -219,7 +219,7 @@
               %img.block.logo(src="{{ im.url }}" alt="{{ org.name }}")
               {% endthumbnail %}
 
-          %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'public.index' %}" class="md:hidden")
+          %a.flex-1.text-center.mt-4.mb-4.inline-flex(href="{% url 'public.index' %}" class="md:hidden")
             {% thumbnail org.get_logo "x40" format="PNG" as im %}
             %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
             {% endthumbnail %}
@@ -259,7 +259,7 @@
 
           - if show_login
             - if request.user and request.user.is_authenticated
-              %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+              %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}md  :mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
                 - trans "Logout"
             -else
               %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
