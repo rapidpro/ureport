@@ -6,11 +6,18 @@
     -for field in fields
       -if 'include' in field
         <div class="question">
+      -if 'cat_label' in field
+        <div class="ruleset_category">
+      -if 'priority' in field
+        <br/>
 
       {% render_field field %}
 
-      -if 'title' in field
+      -if 'priority' in field
         </div>
+      -if 'cat_display' in field
+        </div>
+
   </fieldset>
 
 - block post-form
@@ -26,4 +33,10 @@
       padding: 10px;
     }
 
+    .ruleset_category {
+      border: 1px solid #eee;
+      padding: 10px;
+      margin-bottom: 5px;
+      margin-left: 18.25%;
+    }
 

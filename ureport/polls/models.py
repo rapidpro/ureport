@@ -21,6 +21,7 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db import connection, models
 from django.db.models import Count, F, Q, Sum
+from django.db.models.functions import Lower
 from django.utils import timezone, translation
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -106,8 +107,6 @@ class Poll(SmartModel):
     POLL_RESULTS_BATCHES_LATEST_CACHE_KEY = "last:poll_pull_results_cursor_latest:org:%d:poll:%s"
 
     POLL_PULL_ALL_RESULTS_AFTER_DELETE_FLAG = "poll-results-pull-after-delete-flag:%s:%s"
-
-    POLL_MOST_RESPONDED_REGIONS_CACHE_KEY = "most-responded-regions:%s"
 
     POLL_SYNC_LOCK_TIMEOUT = 60 * 60 * 2
 
@@ -277,7 +276,6 @@ class Poll(SmartModel):
             question.calculate_results(segment=dict(location="State"))
             question.calculate_results(segment=dict(age="Age"))
             question.calculate_results(segment=dict(gender="Gender"))
-            question.get_most_responded_regions()
 
     def update_question_word_clouds(self):
         for question in self.questions.all():
@@ -545,19 +543,6 @@ class Poll(SmartModel):
 
         backend.update_poll_questions(org, self, user)
 
-    def most_responded_regions(self):
-        # get our first question
-        top_question = self.get_questions().first()
-        if top_question:
-            # do we already have a cached set
-            cached = cache.get(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % top_question.ruleset_uuid)
-            if cached:
-                return cached
-
-            return top_question.get_most_responded_regions()
-
-        return []
-
     def response_percentage(self):
         """
         The response rate for this flow
@@ -566,33 +551,6 @@ class Poll(SmartModel):
         if top_question:
             return top_question.get_response_percentage()
         return "---"
-
-    def get_trending_words(self):
-        cache_key = "trending_words:%d" % self.pk
-        trending_words = cache.get(cache_key)
-
-        if not trending_words:
-            words = dict()
-
-            questions = self.questions.all()
-            for question in questions:
-                for category in question.get_words():
-                    key = category["label"].lower()
-
-                    if key not in words:
-                        words[key] = int(category["count"])
-
-                    else:
-                        words[key] += int(category["count"])
-
-            tuples = [(k, v) for k, v in words.items()]
-            tuples.sort(key=lambda t: t[1])
-
-            trending_words = [k for k, v in tuples]
-
-            cache.set(cache_key, trending_words, 3600)
-
-        return trending_words
 
     def get_featured_responses(self):
         return self.featured_responses.filter(is_active=True).order_by("-created_on")
@@ -859,43 +817,12 @@ class PollQuestion(SmartModel):
             )
         return question
 
-    def get_most_responded_regions(self):
-        top_regions = []
-
-        boundary_results = self.get_results(segment=dict(location="State"))
-        if not boundary_results:
-            return []
-
-        boundary_responses = dict()
-        for boundary in boundary_results:
-            total = boundary["set"] + boundary["unset"]
-            responded = boundary["set"]
-            boundary_responses[boundary["label"]] = dict(responded=responded, total=total)
-
-        for boundary in sorted(
-            boundary_responses,
-            key=lambda x: (boundary_responses[x]["responded"], -boundary_responses[x]["total"]),
-            reverse=True,
-        )[:5]:
-            responded = boundary_responses[boundary]
-            percent = round((100 * responded["responded"])) // responded["total"] if responded["total"] > 0 else 0
-            top_regions.append(
-                dict(
-                    boundary=boundary,
-                    responded=responded["responded"],
-                    total=responded["total"],
-                    type="best",
-                    percent=percent,
-                )
-            )
-
-        # no actual results by region yet
-        if top_regions and top_regions[0]["responded"] == 0:
-            top_regions = []
-
-        cache.set(Poll.POLL_MOST_RESPONDED_REGIONS_CACHE_KEY % self.ruleset_uuid, top_regions, 900)
-
-        return top_regions
+    def get_public_categories(self):
+        return (
+            self.response_categories.filter(is_active=True)
+            .annotate(lower_category=Lower("category"))
+            .exclude(lower_category__in=PollResponseCategory.IGNORED_CATEGORY_RULES)
+        )
 
     def get_results(self, segment=None):
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
@@ -984,9 +911,7 @@ class PollQuestion(SmartModel):
             results.append(dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories))
 
         else:
-            categories_label = (
-                self.response_categories.filter(is_active=True).order_by("pk").values_list("category", flat=True)
-            )
+            categories_qs = self.response_categories.filter(is_active=True).order_by("pk")
 
             if segment:
 
@@ -1014,7 +939,7 @@ class PollQuestion(SmartModel):
                             .annotate(label=F("category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        categories_results_dict = {elt["label"]: elt["count"] for elt in categories_results}
+                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
 
                         unset_count_stats = (
                             PollStats.objects.filter(org=org, question=self, category=None)
@@ -1027,9 +952,10 @@ class PollQuestion(SmartModel):
                         )
                         unset_count = unset_count_stats.get("count__sum", 0) or 0
 
-                        for categorie_label in categories_label:
-                            key = categorie_label
-                            if key.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
+                        for category_obj in categories_qs:
+                            key = category_obj.category.lower()
+                            categorie_label = category_obj.category_displayed or category_obj.category
+                            if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
                                 categories.append(dict(count=category_count, label=categorie_label))
 
@@ -1069,7 +995,7 @@ class PollQuestion(SmartModel):
                             .annotate(label=F("category__category"), count=Sum("count"))
                             .values("label", "count")
                         )
-                        categories_results_dict = {elt["label"]: elt["count"] for elt in categories_results}
+                        categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
 
                         unset_count_stats = PollStats.objects.filter(
                             org=org, question=self, category=None, age_segment_id=age["id"]
@@ -1077,9 +1003,10 @@ class PollQuestion(SmartModel):
                         unset_count = unset_count_stats.get("count__sum", 0) or 0
 
                         categories = []
-                        for categorie_label in categories_label:
-                            key = categorie_label
-                            if key.lower() not in PollResponseCategory.IGNORED_CATEGORY_RULES:
+                        for category_obj in categories_qs:
+                            key = category_obj.category.lower()
+                            categorie_label = category_obj.category_displayed or category_obj.category
+                            if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
                                 categories.append(dict(count=category_count, label=categorie_label))
 
@@ -1114,8 +1041,9 @@ class PollQuestion(SmartModel):
                         ).aggregate(Sum("count"))
                         unset_count = unset_count_stats.get("count__sum", 0) or 0
 
-                        for categorie_label in categories_label:
-                            key = categorie_label.lower()
+                        for category_obj in categories_qs:
+                            key = category_obj.category.lower()
+                            categorie_label = category_obj.category_displayed or category_obj.category
                             if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
                                 categories.append(dict(count=category_count, label=categorie_label))
@@ -1140,8 +1068,10 @@ class PollQuestion(SmartModel):
                 )
                 categories_results_dict = {elt["label"].lower(): elt["count"] for elt in categories_results}
                 categories = []
-                for categorie_label in categories_label:
-                    key = categorie_label.lower()
+
+                for category_obj in categories_qs:
+                    key = category_obj.category.lower()
+                    categorie_label = category_obj.category_displayed or category_obj.category
                     if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                         category_count = categories_results_dict.get(key, 0)
                         categories.append(dict(count=category_count, label=categorie_label))
@@ -1236,6 +1166,8 @@ class PollResponseCategory(models.Model):
 
     category = models.TextField(null=True)
 
+    category_displayed = models.TextField(null=True)
+
     is_active = models.BooleanField(default=True)
 
     @classmethod
@@ -1250,7 +1182,9 @@ class PollResponseCategory(models.Model):
         if existing:
             existing.update(category=category, is_active=True)
         else:
-            existing = cls.objects.create(question=question, rule_uuid=rule_uuid, category=category, is_active=True)
+            existing = cls.objects.create(
+                question=question, rule_uuid=rule_uuid, category=category, category_displayed=category, is_active=True
+            )
         return existing
 
     class Meta:
