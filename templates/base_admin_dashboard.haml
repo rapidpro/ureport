@@ -219,7 +219,7 @@
               %img.block.logo(src="{{ im.url }}" alt="{{ org.name }}")
               {% endthumbnail %}
 
-          %a.flex-1.text-center.mb-6.inline-flex(href="{% url 'public.index' %}" class="md:hidden")
+          %a.flex-1.text-center.mt-4.mb-4.inline-flex(href="{% url 'public.index' %}" class="md:hidden")
             {% thumbnail org.get_logo "x40" format="PNG" as im %}
             %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
             {% endthumbnail %}
@@ -259,7 +259,7 @@
 
           - if show_login
             - if request.user and request.user.is_authenticated
-              %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+              %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}md  :mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
                 - trans "Logout"
             -else
               %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
