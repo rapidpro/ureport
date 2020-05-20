@@ -825,7 +825,6 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
-    "polls_stats_squash": {"task": "polls.polls_stats_squash", "schedule": timedelta(minutes=10), "relative": True},
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
@@ -868,12 +867,18 @@ CELERYBEAT_SCHEDULE = {
     "refresh-engagement-data": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=2, minute=0),
-        "args": ("ureport.stats.tasks.refresh_engagement_data", "sync"),
+        "args": ("ureport.stats.tasks.refresh_engagement_data", "slow"),
     },
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=4, minute=0),
-        "args": ("ureport.polls.tasks.clear_old_poll_results",),
+        "args": ("ureport.polls.tasks.clear_old_poll_results", "slow"),
+    },
+    "polls_stats_squash": {
+        "task": "polls.polls_stats_squash",
+        "schedule": timedelta(minutes=10),
+        "relative": True,
+        "options": {"queue": "slow"},
     },
 }
 
