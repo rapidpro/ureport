@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-06 21:17+0000\n"
+"POT-Creation-Date: 2020-05-20 23:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1410,6 +1410,20 @@ msgid "Title"
 msgstr ""
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr ""
+
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Categories"
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr ""
+
+msgid "Display {idx+1}"
+msgstr ""
+
+msgid "The label to display of the category on the public site"
 msgstr ""
 
 #, python-format

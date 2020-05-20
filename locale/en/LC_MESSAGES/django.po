@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-06 21:17+0000\n"
+"POT-Creation-Date: 2020-05-20 23:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1407,6 +1407,18 @@ msgid "Title"
 msgstr ""
 
 msgid "The question posed to your audience, will be displayed publicly"
+msgstr ""
+
+msgid "Category {idx+1}"
+msgstr ""
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr ""
+
+msgid "Display {idx+1}"
+msgstr ""
+
+msgid "The label to display of the category on the public site"
 msgstr ""
 
 #, python-format
