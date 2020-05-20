@@ -1,3 +1,8 @@
+v1.1.154
+----------
+ * Merge pull request #589 from rapidpro/slow-queue
+ * Add slow queue, fix django compressor offline context
+
 v1.1.153
 ----------
  * Better message
