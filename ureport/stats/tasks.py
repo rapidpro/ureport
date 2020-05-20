@@ -21,9 +21,9 @@ def refresh_engagement_data(org, since, until):
             for metric in metrics:
                 PollStats.refresh_engagement_data(org, metric, segment, time_filter)
                 logger.info(
-                    f"Task: refresh_engagement_data in progress for {time.time() - start}s, for time_filter - {time_filter}, segment - {segment}, metric - {metric}"
+                    f"Task: refresh_engagement_data org {org.id} in progress for {time.time() - start}s, for time_filter - {time_filter}, segment - {segment}, metric - {metric}"
                 )
 
     PollStats.calculate_average_response_rate(org)
 
-    logger.info(f"Task: refresh_engagement_data finished in {time.time() - start}s")
+    logger.info(f"Task: refresh_engagement_data org {org.id} finished in {time.time() - start}s")

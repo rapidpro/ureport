@@ -3,7 +3,8 @@
 - load smartmin i18n thumbnail ureport compress
 
 -block styles
-  %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
+  - compress css
+    %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
   - if is_rtl_org
     - compress css
       %link(type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/bulma0.7.1.css")
