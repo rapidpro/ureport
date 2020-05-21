@@ -1,3 +1,8 @@
+v1.1.155
+----------
+ * Merge pull request #591 from rapidpro/order-categories
+ * Reorder the categories
+
 v1.1.154
 ----------
  * Merge pull request #589 from rapidpro/slow-queue
