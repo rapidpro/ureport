@@ -821,7 +821,7 @@ class PollQuestion(SmartModel):
         return (
             self.response_categories.filter(is_active=True)
             .annotate(lower_category=Lower("category"))
-            .exclude(lower_category__in=PollResponseCategory.IGNORED_CATEGORY_RULES)
+            .exclude(lower_category__in=PollResponseCategory.IGNORED_CATEGORY_RULES).order_by('pk')
         )
 
     def get_results(self, segment=None):
