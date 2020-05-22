@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-06 21:17+0000\n"
+"POT-Creation-Date: 2020-05-20 23:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -1544,6 +1544,24 @@ msgstr "Naslov"
 
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Pitanje upućeno publici biće javno objavljeno"
+
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Kategorije"
+
+#, fuzzy
+#| msgid "The label of the ruleset from RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Oznaka niza pravila iz RapidPro-a"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site."
+msgid "The label to display of the category on the public site"
+msgstr "Trebaju li radnje biti prikazane na javnoj stranici"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"

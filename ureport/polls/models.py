@@ -13,7 +13,6 @@ from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import Org, OrgBackend
 from django_redis import get_redis_connection
 from smartmin.models import SmartModel
-from stop_words import safe_get_stop_words
 from xlrd import XLRDError
 
 from django.conf import settings
@@ -821,7 +820,8 @@ class PollQuestion(SmartModel):
         return (
             self.response_categories.filter(is_active=True)
             .annotate(lower_category=Lower("category"))
-            .exclude(lower_category__in=PollResponseCategory.IGNORED_CATEGORY_RULES).order_by('pk')
+            .exclude(lower_category__in=PollResponseCategory.IGNORED_CATEGORY_RULES)
+            .order_by("pk")
         )
 
     def get_results(self, segment=None):
@@ -873,6 +873,7 @@ class PollQuestion(SmartModel):
 
     def calculate_results(self, segment=None):
         from ureport.stats.models import AgeSegment, PollStats, GenderSegment, PollWordCloud
+        from stop_words import safe_get_stop_words
 
         org = self.poll.org
         open_ended = self.is_open_ended()
