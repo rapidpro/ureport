@@ -1,3 +1,14 @@
+v1.1.156
+----------
+ * Merge pull request #592 from rapidpro/update-settings
+ * Update settings
+ * Update README.md
+ * Update CI badges
+ * Merge pull request #590 from rapidpro/update-CI
+ * Update CI, add code_check and format code
+ * Merge branch 'master' of github.com:rapidpro/ureport
+ * Update CHANGELOG.md for v1.1.155
+
 v1.1.155
 ----------
  * Merge pull request #591 from rapidpro/order-categories
