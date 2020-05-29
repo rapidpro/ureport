@@ -22,10 +22,10 @@ ADMINS = (
 )
 
 # set the mail settings, we send through gmail
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '${gmail_user}'
-DEFAULT_FROM_EMAIL = '${gmail_user}'
-EMAIL_HOST_PASSWORD = '${gmail_password}'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '${gmail_user}')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', '${gmail_user}')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '${gmail_password}')
 EMAIL_USE_TLS = True
 
 MANAGERS = ADMINS
@@ -35,7 +35,6 @@ INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compa
 
 RAVEN_CONFIG = {
     'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
-    'release': '${version}'
 }
 
 # static dir is different for staging
