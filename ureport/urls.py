@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from django.conf import settings
 from django.conf.urls import include, url
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.views import static
