@@ -5,13 +5,13 @@ import logging
 import time
 from collections import defaultdict
 
-from dash.orgs.models import Org, OrgBackend
 from django_redis import get_redis_connection
 
 from django.db import connection, models
 from django.db.models import Count, Sum
 from django.utils.translation import ugettext_lazy as _
 
+from dash.orgs.models import Org, OrgBackend
 from ureport.utils import chunk_list
 
 CONTACT_LOCK_KEY = "lock:contact:%d:%s"
@@ -82,7 +82,7 @@ class Contact(models.Model):
 
     backend = models.ForeignKey(OrgBackend, on_delete=models.PROTECT, null=True)
 
-    uuid = models.CharField(max_length=36, unique=True)
+    uuid = models.CharField(max_length=36)
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, verbose_name=_("Organization"), related_name="contacts")
 
