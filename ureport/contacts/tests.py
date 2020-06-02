@@ -147,16 +147,6 @@ class ContactTest(UreportTest):
         self.assertEqual(created_contact.pk, existing_contact.pk)
         self.assertEqual(existing_contact.born, 2000)
 
-    def test_create_with_same_uuid(self):
-        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").first())
-        self.assertIsNone(Contact.objects.filter(org=self.uganda, uuid="contact-uuid").first())
-
-        created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid")
-
-        created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid")
-
-        self.assertEqual(created_contact_uganda.uuid, created_contact_nigeria.uuid)
-
     def test_create_with_different_uuid(self):
         self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid-nigeria").first())
         self.assertIsNone(Contact.objects.filter(org=self.uganda, uuid="contact-uuid-uganda").first())
@@ -166,6 +156,16 @@ class ContactTest(UreportTest):
         created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid-uganda")
 
         self.assertNotEqual(created_contact_nigeria.uuid, created_contact_uganda.uuid)
+
+    def test_create_with_same_uuid(self):
+        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").first())
+        self.assertIsNone(Contact.objects.filter(org=self.uganda, uuid="contact-uuid").first())
+
+        created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid")
+
+        created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid")
+
+        self.assertEqual(created_contact_uganda.uuid, created_contact_nigeria.uuid)
 
     def test_contact_ward_field(self):
 
