@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from dash.orgs.models import TaskState
 from mock import patch
 
+from dash.orgs.models import TaskState
 from ureport.contacts.models import Contact, ContactField, ReportersCounter
 from ureport.contacts.tasks import pull_contacts, update_org_contact_count
 from ureport.locations.models import Boundary
@@ -160,9 +160,9 @@ class ContactTest(UreportTest):
     def test_create_with_different_uuid(self):
         self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid-nigeria").first())
         self.assertIsNone(Contact.objects.filter(org=self.uganda, uuid="contact-uuid-uganda").first())
-        
+
         created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid-nigeria")
-        
+
         created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid-uganda")
 
         self.assertNotEqual(created_contact_nigeria.uuid, created_contact_uganda.uuid)

@@ -6,13 +6,9 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contacts', '0022_install_triggers'),
+        ("contacts", "0022_install_triggers"),
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='contact',
-            name='uuid',
-            field=models.CharField(max_length=36),
-        ),
+        migrations.AlterField(model_name="contact", name="uuid", field=models.CharField(max_length=36),),
     ]

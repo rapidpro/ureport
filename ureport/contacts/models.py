@@ -5,13 +5,13 @@ import logging
 import time
 from collections import defaultdict
 
-from dash.orgs.models import Org, OrgBackend
 from django_redis import get_redis_connection
 
 from django.db import connection, models
 from django.db.models import Count, Sum
 from django.utils.translation import ugettext_lazy as _
 
+from dash.orgs.models import Org, OrgBackend
 from ureport.utils import chunk_list
 
 CONTACT_LOCK_KEY = "lock:contact:%d:%s"
