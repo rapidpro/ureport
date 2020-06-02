@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-20 23:00+0000\n"
+"POT-Creation-Date: 2020-06-02 22:54+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2019\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -1753,7 +1753,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Učestvujte u kampanjama širom države, kako biste uticali na stanje u našoj zemlji."
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Podelite šta se dešava sa ostalim U-Reporterima u %(country)s"
 
@@ -1798,7 +1797,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Most responded"
 #~ msgstr "Najviše odgovora "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -1883,7 +1881,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "KAKO SE PRIDRUŽITI"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -1904,7 +1901,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "TRENUTNA ANKETA U"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                  %(questions)s question polled on this topic\n"
@@ -1938,7 +1934,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "POLL RESULTS"
 #~ msgstr "REZULTATI ANKETE"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"
