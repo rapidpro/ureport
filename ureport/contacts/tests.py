@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from dash.orgs.models import TaskState
 from mock import patch
 
+from dash.orgs.models import TaskState
 from ureport.contacts.models import Contact, ContactField, ReportersCounter
 from ureport.contacts.tasks import pull_contacts, update_org_contact_count
 from ureport.locations.models import Boundary
@@ -25,7 +25,6 @@ class ContactTest(UreportTest):
         self.nigeria.set_config("rapidpro.female_label", "Female")
         self.nigeria.set_config("rapidpro.male_label", "Male")
 
-        self.uganda.set_config("rapidpro.reporter_group", "Ureporters")
         self.uganda.set_config("rapidpro.registration_label", "Registration Date")
         self.uganda.set_config("rapidpro.state_label", "State")
         self.uganda.set_config("rapidpro.district_label", "LGA")
@@ -84,53 +83,6 @@ class ContactTest(UreportTest):
         self.born_field = ContactField.objects.create(org=self.nigeria, key="born", label="Born", value_type="T")
         self.gender_field = ContactField.objects.create(org=self.nigeria, key="gender", label="Gender", value_type="T")
 
-        self.country = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R-UGANDA",
-            name="Uganda",
-            level=Boundary.COUNTRY_LEVEL,
-            parent=None,
-            geometry='{"foo":"bar-country"}',
-        )
-        self.state = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R-LAGOS",
-            name="Lagos",
-            level=Boundary.STATE_LEVEL,
-            parent=self.country,
-            geometry='{"foo":"bar-state"}',
-        )
-        self.district = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R-OYO",
-            name="Oyo",
-            level=Boundary.DISTRICT_LEVEL,
-            parent=self.state,
-            geometry='{"foo":"bar-state"}',
-        )
-        self.ward = Boundary.objects.create(
-            org=self.uganda,
-            osm_id="R-IKEJA",
-            name="Ikeja",
-            level=Boundary.WARD_LEVEL,
-            parent=self.district,
-            geometry='{"foo":"bar-ward"}',
-        )
-
-        self.registration_date = ContactField.objects.create(
-            org=self.uganda, key="registration_date", label="Registration Date", value_type="T"
-        )
-
-        self.state_field = ContactField.objects.create(org=self.uganda, key="state", label="State", value_type="S")
-        self.district_field = ContactField.objects.create(org=self.uganda, key="lga", label="LGA", value_type="D")
-        self.ward_field = ContactField.objects.create(org=self.uganda, key="ward", label="Ward", value_type="W")
-        self.occupation_field = ContactField.objects.create(
-            org=self.uganda, key="occupation", label="Activité", value_type="T"
-        )
-
-        self.born_field = ContactField.objects.create(org=self.uganda, key="born", label="Born", value_type="T")
-        self.gender_field = ContactField.objects.create(org=self.uganda, key="gender", label="Gender", value_type="T")
-
     def test_get_or_create(self):
 
         self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").first())
@@ -147,25 +99,32 @@ class ContactTest(UreportTest):
         self.assertEqual(created_contact.pk, existing_contact.pk)
         self.assertEqual(existing_contact.born, 2000)
 
-    def test_create_with_same_uuid(self):
+    def test_create_users_in_different_orgs(self):
         self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").first())
         self.assertIsNone(Contact.objects.filter(org=self.uganda, uuid="contact-uuid").first())
-
-        created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid")
-
-        created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid")
-
-        self.assertEqual(created_contact_uganda.uuid, created_contact_nigeria.uuid)
-
-    def test_create_with_different_uuid(self):
         self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid-nigeria").first())
         self.assertIsNone(Contact.objects.filter(org=self.uganda, uuid="contact-uuid-uganda").first())
 
-        created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid-nigeria")
+        created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid")
+        created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid")
 
+        self.assertNotEqual(created_contact_uganda.id, created_contact_nigeria.id)
+        self.assertEqual(created_contact_uganda.uuid, created_contact_nigeria.uuid)
+
+        Contact.objects.all().delete()
+
+        created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid-nigeria")
         created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid-uganda")
 
         self.assertNotEqual(created_contact_nigeria.uuid, created_contact_uganda.uuid)
+
+        Contact.objects.all().delete()
+
+        created_contact_nigeria_1 = Contact.get_or_create(self.nigeria, "contact-uuid")
+        created_contact_nigeria_2 = Contact.get_or_create(self.nigeria, "contact-uuid")
+
+        self.assertEqual(created_contact_nigeria_1.id, created_contact_nigeria_2.id)
+        self.assertEqual(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").count(), 1)
 
     def test_contact_ward_field(self):
 
