@@ -25,16 +25,6 @@ class ContactTest(UreportTest):
         self.nigeria.set_config("rapidpro.female_label", "Female")
         self.nigeria.set_config("rapidpro.male_label", "Male")
 
-        self.uganda.set_config("rapidpro.registration_label", "Registration Date")
-        self.uganda.set_config("rapidpro.state_label", "State")
-        self.uganda.set_config("rapidpro.district_label", "LGA")
-        self.uganda.set_config("rapidpro.ward_label", "Ward")
-        self.uganda.set_config("rapidpro.occupation_label", "Activité")
-        self.uganda.set_config("rapidpro.born_label", "Born")
-        self.uganda.set_config("rapidpro.gender_label", "Gender")
-        self.uganda.set_config("rapidpro.female_label", "Female")
-        self.uganda.set_config("rapidpro.male_label", "Male")
-
         # boundaries fetched
         self.country = Boundary.objects.create(
             org=self.nigeria,
@@ -102,21 +92,12 @@ class ContactTest(UreportTest):
     def test_create_users_in_different_orgs(self):
         self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").first())
         self.assertIsNone(Contact.objects.filter(org=self.uganda, uuid="contact-uuid").first())
-        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid-nigeria").first())
-        self.assertIsNone(Contact.objects.filter(org=self.uganda, uuid="contact-uuid-uganda").first())
 
         created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid")
         created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid")
 
         self.assertNotEqual(created_contact_uganda.id, created_contact_nigeria.id)
         self.assertEqual(created_contact_uganda.uuid, created_contact_nigeria.uuid)
-
-        Contact.objects.all().delete()
-
-        created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid-nigeria")
-        created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid-uganda")
-
-        self.assertNotEqual(created_contact_nigeria.uuid, created_contact_uganda.uuid)
 
         Contact.objects.all().delete()
 
