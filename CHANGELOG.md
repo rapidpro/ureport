@@ -1,3 +1,8 @@
+v1.1.157
+----------
+ * Merge pull request #595 from rapidpro/update-django
+ * Update django
+
 v1.1.156
 ----------
  * Merge pull request #592 from rapidpro/update-settings
