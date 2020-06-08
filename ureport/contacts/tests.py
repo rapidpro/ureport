@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from dash.orgs.models import TaskState
 from mock import patch
 
+from dash.orgs.models import TaskState
 from ureport.contacts.models import Contact, ContactField, ReportersCounter
 from ureport.contacts.tasks import pull_contacts, update_org_contact_count
 from ureport.locations.models import Boundary
