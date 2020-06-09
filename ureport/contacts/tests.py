@@ -89,6 +89,24 @@ class ContactTest(UreportTest):
         self.assertEqual(created_contact.pk, existing_contact.pk)
         self.assertEqual(existing_contact.born, 2000)
 
+    def test_create_users_in_different_orgs(self):
+        self.assertIsNone(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").first())
+        self.assertIsNone(Contact.objects.filter(org=self.uganda, uuid="contact-uuid").first())
+
+        created_contact_nigeria = Contact.get_or_create(self.nigeria, "contact-uuid")
+        created_contact_uganda = Contact.get_or_create(self.uganda, "contact-uuid")
+
+        self.assertNotEqual(created_contact_uganda.id, created_contact_nigeria.id)
+        self.assertEqual(created_contact_uganda.uuid, created_contact_nigeria.uuid)
+
+        Contact.objects.all().delete()
+
+        created_contact_nigeria_1 = Contact.get_or_create(self.nigeria, "contact-uuid")
+        created_contact_nigeria_2 = Contact.get_or_create(self.nigeria, "contact-uuid")
+
+        self.assertEqual(created_contact_nigeria_1.id, created_contact_nigeria_2.id)
+        self.assertEqual(Contact.objects.filter(org=self.nigeria, uuid="contact-uuid").count(), 1)
+
     def test_contact_ward_field(self):
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), dict())
