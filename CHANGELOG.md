@@ -1,3 +1,8 @@
+v1.1.158
+----------
+ * Merge pull request #593 from Ilhasoft/feature/create-contact
+ * Removed unique from the uuid field of the contact model
+
 v1.1.157
 ----------
  * Merge pull request #595 from rapidpro/update-django
