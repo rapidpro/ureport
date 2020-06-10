@@ -35,12 +35,6 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=lambda v: [
 SESSION_COOKIE_DOMAIN = config('SESSION_COOKIE_DOMAIN', 'ureport.in')
 SESSION_COOKIE_SECURE = False
 
-# Set your DSN value
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
-
-}
-
 ANONYMOUS_USER_ID = -1
 
 ADMINS = config('ADMINS',
