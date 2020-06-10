@@ -39,6 +39,8 @@ SESSION_COOKIE_SECURE = False
 RAVEN_CONFIG = {
     'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
 
+}
+
 ANONYMOUS_USER_ID = -1
 
 ADMINS = config('ADMINS',
