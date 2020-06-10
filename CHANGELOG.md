@@ -1,3 +1,69 @@
+v1.1.158
+----------
+ * Merge pull request #593 from Ilhasoft/feature/create-contact
+ * Removed unique from the uuid field of the contact model
+
+v1.1.157
+----------
+ * Merge pull request #595 from rapidpro/update-django
+ * Update django
+
+v1.1.156
+----------
+ * Merge pull request #592 from rapidpro/update-settings
+ * Update settings
+ * Update README.md
+ * Update CI badges
+ * Merge pull request #590 from rapidpro/update-CI
+ * Update CI, add code_check and format code
+ * Merge branch 'master' of github.com:rapidpro/ureport
+ * Update CHANGELOG.md for v1.1.155
+
+v1.1.155
+----------
+ * Merge pull request #591 from rapidpro/order-categories
+ * Reorder the categories
+
+v1.1.154
+----------
+ * Merge pull request #589 from rapidpro/slow-queue
+ * Add slow queue, fix django compressor offline context
+
+v1.1.153
+----------
+ * Better message
+ * Hide multiple pages for mobile
+ * Improve mobile site
+ * Remove unused method
+ * Add migration file
+ * Fix the location and age segmentation
+ * Add a way to configure the display of the category for poll questions
+ * Show clear feedback to admin on polls being synced
+
+v1.1.152
+----------
+ * Merge pull request #583 from rapidpro/fix-locations-sync
+ * Merge pull request #584 from Ilhasoft/feature/add-lesotho
+ * add lesotho to ureport
+ * Add ordering so we can delete to update the locations boundaries without constraint
+
+v1.1.151
+----------
+ * Merge pull request #581 from rapidpro/move-task-queues
+ * Move task queues
+
+v1.1.150
+----------
+ * Merge pull request #580 from Ilhasoft/hotfix/fix-size-bulgaria-flag
+ * Remove overflow style
+ * fix size bulgaria flag
+
+v1.1.149
+----------
+ * Merge pull request #579 from rapidpro/other-lang-sites
+ * Include current site with a check mark
+ * Add a way to link sites as connected sites in a different language
+
 v1.1.148
 ----------
  * Rebuild locale

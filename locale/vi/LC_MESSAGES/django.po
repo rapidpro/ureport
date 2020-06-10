@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-05-20 23:00+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -858,6 +858,14 @@ msgstr "ĐỊA ĐIỂM"
 msgid "Backends"
 msgstr "Quản lý người dùng"
 
+#, python-format
+msgid ""
+"\n"
+"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
+"\n"
+"      "
+msgstr ""
+
 msgid "+ New Poll"
 msgstr ""
 
@@ -1066,6 +1074,9 @@ msgid "Export and Share"
 msgstr ""
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr ""
+
+msgid "SELECT LANGUAGE"
 msgstr ""
 
 msgid "SELECT COUNTRY"
@@ -1558,6 +1569,24 @@ msgstr "Tiêu đề"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Câu hỏi đặt ra cho đối tượng nhắm đến của bạn, sẽ được hiển thị công khai"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Danh mục"
+
+#, fuzzy
+#| msgid "The label of the ruleset from RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Nhãn của ruleset từ RapidPro"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site"
+msgid "The label to display of the category on the public site"
+msgstr "Nếu có công việc để được hiển thị trên trang web công cộng"
+
 #, fuzzy, python-format
 #| msgid "Scheduled a pull refresh for poll #%d on org #%d"
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1773,6 +1802,9 @@ msgstr ""
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Nếu bạn cần bao gồm một số mã HTML tùy chỉnh trong trang tổ chức của mình, như đoạn mã phân tích tùy chỉnh"
+
+msgid "Other language sites links"
+msgstr ""
 
 msgid "90 Days"
 msgstr ""

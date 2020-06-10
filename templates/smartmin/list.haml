@@ -35,7 +35,7 @@
   - block pjax
     #pjax
       .columns
-        .column.is-12
+        .column.is-12.mobile-scroll
           -block pre-table
 
           -block table
@@ -102,17 +102,17 @@
                 -else
                   - if page_obj.number < 5
                     - if page_num < 10
-                      %li
+                      %li.is-hidden-mobile
                         %a.pagination-link(href="{{url_params|safe}}{{order_params|safe}}page={{page_num}}")
                           {{ page_num }}
                 
                   - elif page_num < page_obj.number|add:"5" and page_num > page_obj.number|add:"-5"
-  	                %li
+  	                %li.is-hidden-mobile
                       %a.pagination-link(href="{{url_params|safe}}{{order_params|safe}}page={{page_num}}")
                         {{ page_num }}
 
                   - elif page_obj.number > paginator.num_pages|add:"-5"
-                    %li
+                    %li.is-hidden-mobile
                       %a.pagination-link(href="{{url_params|safe}}{{order_params|safe}}page={{page_num}}")
                         {{ page_num }}
               - if page_obj.has_next

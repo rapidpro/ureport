@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-05-20 23:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -820,6 +820,14 @@ msgstr "НАЙ-НОВИ ИЗВЕСТИЯ"
 msgid "Backends"
 msgstr "Backends"
 
+#, python-format
+msgid ""
+"\n"
+"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
+"\n"
+"      "
+msgstr ""
+
 msgid "+ New Poll"
 msgstr "+Ново допитване"
 
@@ -997,6 +1005,9 @@ msgstr "Експортирай и сподели"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Искаш ли светът да узнае за това? Изтегли го като изображение, за да го споделиш в социалните мрежи или за да го приложиш в страхотна презентация!"
+
+msgid "SELECT LANGUAGE"
+msgstr ""
 
 msgid "SELECT COUNTRY"
 msgstr "ИЗБЕРЕТЕ ДЪРЖАВА"
@@ -1441,6 +1452,24 @@ msgstr "Заглавие"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Въпросът, зададен на вашатата публика, ще бъде показан публично"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Категории"
+
+#, fuzzy
+#| msgid "The label of the ruleset from RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Етикетът на ruleset-а от RapidPro"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site."
+msgid "The label to display of the category on the public site"
+msgstr "Ако има работни места за показване в публичен сайт"
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "Планирана актуализация на допитването # %(poll_id)dорганизацията  # %(org_id)d"
@@ -1625,6 +1654,9 @@ msgstr "Шрифт,  който се използва за малък текст
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Ако има нужда да включите персонализирани HTML кодове в страницата на вашата организация - например откъси от такива за персонализиран анализ "
+
+msgid "Other language sites links"
+msgstr ""
 
 msgid "90 Days"
 msgstr "90 дни"

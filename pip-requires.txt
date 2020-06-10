@@ -1,7 +1,8 @@
 smartmin
-Django>=2.2.10,<3.0
+Django<3.0
 rapidpro-dash
 celery[redis]
+colorama
 coverage
 django-compressor
 django-debug-toolbar

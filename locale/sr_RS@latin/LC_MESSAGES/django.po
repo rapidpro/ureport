@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-05-20 23:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2019\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -827,6 +827,14 @@ msgstr "POSLEDNJA OBAVEŠTENJA"
 msgid "Backends"
 msgstr "Pozadinski sistemi"
 
+#, python-format
+msgid ""
+"\n"
+"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
+"\n"
+"      "
+msgstr ""
+
 msgid "+ New Poll"
 msgstr "+ Nova Anketa"
 
@@ -1004,6 +1012,9 @@ msgstr "Preuzmi i Podeli"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Želite reći svetu o ovome? Preuzmite sliku da biste je lakše podelili na društvenim mrežama ili za kreiranje lepše prezentacije!"
+
+msgid "SELECT LANGUAGE"
+msgstr ""
 
 msgid "SELECT COUNTRY"
 msgstr "ODABERI SVOJU ZEMLJU"
@@ -1460,6 +1471,24 @@ msgstr "Naslov"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Pitanje upućeno publici biće javno objavljeno"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Kategorije"
+
+#, fuzzy
+#| msgid "The label of the ruleset from RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Oznaka niza pravila iz RapidPro-a"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site."
+msgid "The label to display of the category on the public site"
+msgstr "Ako postoje zadaci koje treba prikazati na javnoj stranici."
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "Zakazano ažuriranje za anketu #%(poll_id)d na org #%(org_id)d"
@@ -1644,6 +1673,9 @@ msgstr "Font koji se koristi za kratki tekst"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Ako treba uključiti prilagođeni HTML kod u vaše org stranice, poput prilagođenih analitičkih snippet kodova"
+
+msgid "Other language sites links"
+msgstr ""
 
 msgid "90 Days"
 msgstr "90 Dana"

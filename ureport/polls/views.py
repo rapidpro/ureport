@@ -25,7 +25,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ureport.utils import json_date_to_datetime
 
-from .models import Poll, PollImage, PollQuestion
+from .models import Poll, PollImage, PollQuestion, PollResponseCategory
 
 
 class PollForm(forms.ModelForm):
@@ -350,9 +350,15 @@ class PollCRUDL(SmartCRUDL):
             fields = []
             for question in questions:
                 fields.append("ruleset_%s_include" % question.ruleset_uuid)
-                fields.append("ruleset_%s_priority" % question.ruleset_uuid)
                 fields.append("ruleset_%s_label" % question.ruleset_uuid)
                 fields.append("ruleset_%s_title" % question.ruleset_uuid)
+
+                categories = question.get_public_categories()
+                for category in categories:
+                    fields.append(f"ruleset_{question.ruleset_uuid}_cat_label_{category.id}")
+                    fields.append(f"ruleset_{question.ruleset_uuid}_cat_display_{category.id}")
+
+                fields.append("ruleset_%s_priority" % question.ruleset_uuid)
 
             return fields
 
@@ -397,7 +403,7 @@ class PollCRUDL(SmartCRUDL):
                     help_text=_("The label of the ruleset from RapidPro"),
                 )
 
-                title_field_name = "ruleset_%s_title" % question.ruleset_uuid
+                title_field_name = f"ruleset_{question.ruleset_uuid}_title"
                 title_field_initial = initial.get(title_field_name, "")
                 title_field = forms.CharField(
                     label=_("Title"),
@@ -411,6 +417,30 @@ class PollCRUDL(SmartCRUDL):
                 self.form.fields[priority_field_name] = priority_field
                 self.form.fields[label_field_name] = label_field
                 self.form.fields[title_field_name] = title_field
+
+                categories = question.get_public_categories()
+                for idx, category in enumerate(categories):
+                    cat_label_field_name = f"ruleset_{question.ruleset_uuid}_cat_label_{category.id}"
+                    cat_label_field_initial = initial.get(cat_label_field_name, "")
+                    cat_label_field = forms.CharField(
+                        label=_(f"Category {idx+1}"),
+                        widget=forms.TextInput(attrs={"readonly": "readonly"}),
+                        required=False,
+                        initial=cat_label_field_initial,
+                        help_text=_("The label of the category from backend(such as RapidPro)"),
+                    )
+
+                    cat_display_field_name = f"ruleset_{question.ruleset_uuid}_cat_display_{category.id}"
+                    cat_display_field_initial = initial.get(cat_display_field_name, "")
+                    cat_display_field = forms.CharField(
+                        label=_(f"Display {idx+1}"),
+                        required=False,
+                        initial=cat_display_field_initial,
+                        help_text=_("The label to display of the category on the public site"),
+                    )
+
+                    self.form.fields[cat_label_field_name] = cat_label_field
+                    self.form.fields[cat_display_field_name] = cat_display_field
 
             return self.form
 
@@ -434,6 +464,15 @@ class PollCRUDL(SmartCRUDL):
                     is_active=included, title=title, priority=priority
                 )
 
+                categories = question.get_public_categories()
+                for category in categories:
+                    category_id = category.id
+                    category_displayed = data[f"ruleset_{r_uuid}_cat_display_{category_id}"]
+                    if not category_displayed:
+                        category_displayed = category.category
+
+                    PollResponseCategory.objects.filter(id=category_id).update(category_displayed=category_displayed)
+
             return self.object
 
         def post_save(self, obj):
@@ -454,6 +493,13 @@ class PollCRUDL(SmartCRUDL):
                 initial["ruleset_%s_label" % question.ruleset_uuid] = question.ruleset_label
                 initial["ruleset_%s_title" % question.ruleset_uuid] = question.title
 
+                categories = question.get_public_categories()
+                for category in categories:
+                    initial[f"ruleset_{question.ruleset_uuid}_cat_label_{category.id}"] = category.category
+                    initial[f"ruleset_{question.ruleset_uuid}_cat_display_{category.id}"] = (
+                        category.category_displayed or category.category
+                    )
+
             return initial
 
     class List(OrgPermsMixin, SmartListView):
@@ -465,6 +511,18 @@ class PollCRUDL(SmartCRUDL):
         def get_queryset(self):
             queryset = super(PollCRUDL.List, self).get_queryset().filter(org=self.request.org)
             return queryset
+
+        def get_context_data(self, **kwargs):
+            context = super(PollCRUDL.List, self).get_context_data(**kwargs)
+
+            unsynced_polls = (
+                Poll.objects.filter(org=self.request.org, has_synced=False)
+                .exclude(is_active=False)
+                .exclude(flow_uuid="")
+            )
+            context["unsynced_polls"] = unsynced_polls
+
+            return context
 
         def get_sync_status(self, obj):
             if obj.has_synced:

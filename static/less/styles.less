@@ -1709,7 +1709,52 @@ a.button {
 
 .content-section-container {
   background-color: @bg-dark-blue;
+  padding: 0 0px 0 60px;
 }
+
+.content-div {
+  padding: 3rem 70px 3rem 40px;
+}
+
+@media screen and (max-width: 769px) {
+  .content-section-container {
+    padding: 0;
+  }
+
+  .content-section {
+    padding: 2rem;
+  }
+
+  .top-nav-container {
+    padding: 2rem;
+  }
+
+  .admin-header {
+    padding: 0 2rem;
+
+    .level {
+      .logged-in-account {
+        justify-content: flex-start;
+        margin: 0;
+      }
+
+      .logout-button {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  .content-div {
+    padding: 0;
+  }
+
+  .mobile-scroll {
+    overflow: scroll;
+    width: 100%
+  }
+
+}
+
 
 .bg-white {
   background-color: white;

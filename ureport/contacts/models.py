@@ -82,7 +82,7 @@ class Contact(models.Model):
 
     backend = models.ForeignKey(OrgBackend, on_delete=models.PROTECT, null=True)
 
-    uuid = models.CharField(max_length=36, unique=True)
+    uuid = models.CharField(max_length=36)
 
     org = models.ForeignKey(Org, on_delete=models.PROTECT, verbose_name=_("Organization"), related_name="contacts")
 

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-05-20 23:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -826,6 +826,14 @@ msgstr "সর্বশেষ নটিফিকেশন"
 msgid "Backends"
 msgstr "ব্যাকএন্ড"
 
+#, python-format
+msgid ""
+"\n"
+"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
+"\n"
+"      "
+msgstr ""
+
 msgid "+ New Poll"
 msgstr "+ নতুন পোল"
 
@@ -1003,6 +1011,9 @@ msgstr "পাঠিয়ে দিন এবং ভাগ করে নিন"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "এর সম্পর্কে পৃথিবীকে জানাতে চান? সামাজিক যোগাযোগ মাধ্যমে খুব সহজে শেয়ার করতে কিংবা দারুন কোন প্রেজেন্টেশন তেরি করতে ছবিটি ডাউনলোড করে নিন! "
+
+msgid "SELECT LANGUAGE"
+msgstr ""
 
 msgid "SELECT COUNTRY"
 msgstr "দেশের নাম বেছে নিন"
@@ -1452,6 +1463,24 @@ msgstr "শিরোনাম "
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "আপনার শ্রোতা কে করা প্রশ্ন গুলো, জনসমক্ষে দেখানো হবে"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "বিভাগগুলো "
+
+#, fuzzy
+#| msgid "The label of the ruleset from RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "RapidPro এর নিয়মাবলীর লেবেল"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site."
+msgid "The label to display of the category on the public site"
+msgstr "যদি কোন চাকুরী থাকে তাহলে তা পাবলিক সাইটে প্রদর্শিত হবে"
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "প্রতিষ্ঠানে %(org_id)d-এ পোল %(poll_id)d-এর একটি pull refresh-এর সময় নির্ধারণ করা হয়েছে"
@@ -1640,6 +1669,9 @@ msgstr "ছোট বার্তার জন্য যে ফন্ট ব্�
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "আপনার প্রতিষ্ঠান এর পেজ এর জন্য যদি কোন বিশেষায়িত এইচ টি এম এল কোড দরকার হয় যেমন বিশেষায়িত বিশ্লেষণ কোড "
+
+msgid "Other language sites links"
+msgstr ""
 
 msgid "90 Days"
 msgstr "৯০ দিন"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-05-20 23:00+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -828,6 +828,14 @@ msgstr "Últimas notificações"
 msgid "Backends"
 msgstr "Backends"
 
+#, python-format
+msgid ""
+"\n"
+"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
+"\n"
+"      "
+msgstr ""
+
 msgid "+ New Poll"
 msgstr "+ Nova pesquisa "
 
@@ -1005,6 +1013,9 @@ msgstr "Exportar e Compartilhar"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Quer contar ao mundo sobre isso? Faça o download desta imagem para compartilhar facilmente nas mídias sociais ou para uma bela apresentação!"
+
+msgid "SELECT LANGUAGE"
+msgstr ""
 
 msgid "SELECT COUNTRY"
 msgstr "Selecione o país"
@@ -1456,6 +1467,24 @@ msgstr "Título"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "A pergunta realizada ao seu público alvo será mostrada publicamente"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Categorias"
+
+#, fuzzy
+#| msgid "The label of the ruleset from RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Título da ruleset do RapidPro"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site."
+msgid "The label to display of the category on the public site"
+msgstr "Se houver trabalhos a serem exibidos no site público."
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "Atualização agendada para pesquisa #%(poll_id)dna organização # %(org_id)d"
@@ -1640,6 +1669,9 @@ msgstr "A fonte usada para pequenos textos"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Se você precisar incluir alguns códigos HTML personalizados nas suas páginas de organizações, como trechos de código analytics"
+
+msgid "Other language sites links"
+msgstr ""
 
 msgid "90 Days"
 msgstr "90 dias"
