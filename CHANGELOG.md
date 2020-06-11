@@ -1,3 +1,8 @@
+v1.1.159
+----------
+ * Merge pull request #596 from rapidpro/LB-flag
+ * Add Lebanon flag
+
 v1.1.158
 ----------
  * Merge pull request #593 from Ilhasoft/feature/create-contact
