@@ -1164,6 +1164,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://kiribati.ureport.in/count/",
     ),
     dict(
+        name="Lebanon",
+        host="//lebanon.ureport.in/",
+        flag="flag_lebanon.png",
+        is_static=True,
+        count_link="http://lebanon.ureport.in/count/",
+    ),
+    dict(
         name="Lesotho",
         host="//les.ureport.in/",
         flag="flag_lesotho.png",
