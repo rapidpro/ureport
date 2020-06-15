@@ -1,3 +1,8 @@
+v1.1.160
+----------
+ * Merge pull request #597 from rapidpro/fix-arabic-design
+ * Adjustments for RTL design on admin site
+
 v1.1.159
 ----------
  * Merge pull request #596 from rapidpro/LB-flag
