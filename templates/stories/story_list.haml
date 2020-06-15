@@ -11,5 +11,5 @@
 
 - block table-buttons
   - if view.add_button
-    %a.button.is-primary.is-pulled-right(href="./create/")
+    %a.button.is-primary(href="./create/" class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %}")
       - trans "+ New Story"
