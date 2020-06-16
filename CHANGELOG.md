@@ -1,3 +1,8 @@
+v1.1.161
+----------
+ * Merge pull request #598 from rapidpro/fix-image-size
+ * Adjust about image size
+
 v1.1.160
 ----------
  * Merge pull request #597 from rapidpro/fix-arabic-design
