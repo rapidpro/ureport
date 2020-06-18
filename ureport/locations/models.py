@@ -97,6 +97,10 @@ class Boundary(models.Model):
     def get_org_top_level_boundaries_name(cls, org):
         if org.get_config("common.is_global"):
             top_boundaries = cls.objects.filter(org=org, level=cls.COUNTRY_LEVEL)
+            limit_states = org.get_config("common.limit_poll_states")
+            if limit_states:
+                limit_states = [elt.strip() for elt in limit_states.split(",")]
+                top_boundaries = top_boundaries.filter(osm_id__in=limit_states)
         else:
             # just listing states that are limited
             limit_states = org.get_config("common.limit_poll_states")
