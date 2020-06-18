@@ -1,3 +1,8 @@
+v1.1.162
+----------
+ * Merge pull request #599 from rapidpro/limit-global-map
+ * Add config to limit countries on World map
+
 v1.1.161
 ----------
  * Merge pull request #598 from rapidpro/fix-image-size
