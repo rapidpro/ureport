@@ -403,6 +403,11 @@ class BoundaryView(SmartTemplateView):
 
         if org.get_config("common.is_global"):
             location_boundaries = org.boundaries.filter(level=0)
+            limit_states = org.get_config("common.limit_states")
+            if limit_states:
+                limit_states = [elt.strip() for elt in limit_states.split(",")]
+                location_boundaries = location_boundaries.filter(osm_id__in=limit_states)
+
         else:
             osm_id = self.kwargs.get("osm_id", None)
 
