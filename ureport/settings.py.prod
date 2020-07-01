@@ -9,7 +9,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from ureport.settings_common import *  # noqa
 
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 API_BOUNDARY_CACHE_TIME = 30
@@ -511,7 +511,7 @@ PREVIOUS_ORG_SITES = [
 ]
 
 sentry_sdk.init(
-    dsn=config('RAVEN_CONFIG', default=''),
+    dsn="htps://c91ad31f95454bcf8d659c6914f6b417@sentry.ilhasoft.mobi/5"
     integrations=[DjangoIntegration()]
 )
 
