@@ -1318,6 +1318,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://sa.ureport.in/count/",
     ),
     dict(
+        name="South Asia",
+        host="//southasia.ureport.in",
+        flag="flag_south_asia.png",
+        is_static=True,
+        count_link="http://southasia.ureport.in/count/",
+    ),
+    dict(
         name="Tanzania",
         host="//tanzania.ureport.in",
         flag="flag_tanzania.png",
