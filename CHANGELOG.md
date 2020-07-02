@@ -1,3 +1,8 @@
+v1.1.163
+----------
+ * Merge pull request #600 from rapidpro/add-south-asia
+ * Add South Asia flag
+
 v1.1.162
 ----------
  * Merge pull request #599 from rapidpro/limit-global-map
