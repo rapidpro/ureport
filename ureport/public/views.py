@@ -281,7 +281,7 @@ class StoryReadView(SmartReadView):
 
 class ReportersResultsView(SmartReadView):
     model = Org
-    http_method_names = ['get']
+    http_method_names = ["get"]
 
     def get_object(self):
         return self.request.org
@@ -298,7 +298,7 @@ class ReportersResultsView(SmartReadView):
 
 class EngagementDataView(SmartReadView):
     model = Org
-    http_method_names = ['get']
+    http_method_names = ["get"]
 
     def get_object(self):
         return self.request.org
@@ -320,7 +320,7 @@ class EngagementDataView(SmartReadView):
 
 class UreportersView(SmartTemplateView):
     template_name = "public/ureporters.html"
-    http_method_names = ['get']
+    http_method_names = ["get"]
 
     def get_context_data(self, **kwargs):
         context = super(UreportersView, self).get_context_data(**kwargs)

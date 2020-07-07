@@ -37,7 +37,12 @@ urlpatterns = [
     url(r"^opinion/(?P<pk>\d+)/$", PollReadView.as_view(), {}, "public.opinion_read"),
     url(r"^poll/(?P<pk>\d+)/$", PollRedirectView.as_view(), {}, "public.poll_read"),
     url(r"^contact_field_results/$", ReportersResultsView.as_view(), {}, "public.contact_field_results"),
-    url(r"^pollquestion/(?P<pk>\d+)/results/$", csrf_exempt(PollQuestionResultsView.as_view()), {}, "public.pollquestion_results"),
+    url(
+        r"^pollquestion/(?P<pk>\d+)/results/$",
+        csrf_exempt(PollQuestionResultsView.as_view()),
+        {},
+        "public.pollquestion_results",
+    ),
     url(r"^boundaries/$", cache_page(60 * 30)(BoundaryView.as_view()), {}, "public.boundaries"),
     url(
         r"^boundaries/(?P<osm_id>[a-zA-Z0-9]+)/$",
