@@ -11,6 +11,7 @@
       &nbsp;
   %meta(name="description" content="")
   %meta(name="author" content="")
+  %meta(http-equiv="Content-Security-Policy" content="frame-ancestors 'none';")
 
   - if has_better_domain
     %meta(name="robots" content="noindex")
@@ -277,14 +278,14 @@
             - block login
               - if request.user and request.user.is_authenticated
                 %li
-                  %a.pull-left{ href:"{% url 'users.user_profile' request.user.pk %}"}
+                  %a.pull-left{ href:"{% org_host_link %}{% url 'users.user_profile' request.user.pk %}"}
                     {{ request.user.username }}
                 %li
                   %a.pull-right{ href:"{% url 'users.user_logout' %}?go=/"}
                     - trans "Logout"
               - else
                 %li
-                  %a{ href:"{% url 'users.user_login' %}"}
+                  %a{ href:"{% org_host_link %}{% url 'users.user_login' %}"}
                     - trans "Login"
 
     .uk-container
