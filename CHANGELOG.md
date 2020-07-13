@@ -1,3 +1,7 @@
+v1.1.168
+----------
+ * Merge pull request #601 from rapidpro/update-sec
+
 v1.1.163
 ----------
  * Merge pull request #600 from rapidpro/add-south-asia
