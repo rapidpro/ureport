@@ -144,8 +144,15 @@ MIDDLEWARE = (
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "dash.orgs.middleware.SetOrgMiddleware",
 )
+
+X_FRAME_OPTIONS = "DENY"
+
+SESSION_COOKIE_AGE = 900
+CSRF_COOKIE_AGE = 7200
+
 
 ROOT_URLCONF = "ureport.urls"
 

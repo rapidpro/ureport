@@ -16,6 +16,7 @@ from smartmin.views import SmartCreateView, SmartCRUDL, SmartCSVImportView, Smar
 from django import forms
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_image_file_extension
 from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -293,6 +294,7 @@ class PollCRUDL(SmartCRUDL):
                     initial=image.image,
                     label=_("Image %d") % idx,
                     help_text=_("Image to display on poll page and in previews. (optional)"),
+                    validators=[validate_image_file_extension],
                 )
 
                 self.form.fields[image_field_name] = image_field
@@ -303,6 +305,7 @@ class PollCRUDL(SmartCRUDL):
                     required=False,
                     label=_("Image %d") % idx,
                     help_text=_("Image to display on poll page and in previews (optional)"),
+                    validators=[validate_image_file_extension],
                 )
                 idx += 1
 
