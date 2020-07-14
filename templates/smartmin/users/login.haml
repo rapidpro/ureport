@@ -19,12 +19,11 @@
                   {{ errors }}
 
             %fieldset
-              - for field in form
-                .field.login-input(class="{% if field.error %}is-danger{% endif %}")
-                  {{ field|add_placeholder|add_css:"input" }}
-                  - if field.error
-                    %span.help-block
-                      {{ field.error }}
+              .field.login-input
+                %input(type="text" name="username" autofocus="" placeholder="Username" class="input" required="" id="id_username")
+
+              .field.login-input
+                %input(type="password" name="password" placeholder="Password" class="input" required="" id="id_password" autocomplete="off")
 
               - csrf_token
 
