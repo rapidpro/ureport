@@ -276,6 +276,11 @@ class Poll(SmartModel):
             question.calculate_results(segment=dict(age="Age"))
             question.calculate_results(segment=dict(gender="Gender"))
 
+    def update_questions_results_cache_task(self):
+        from ureport.polls.tasks import update_questions_results_cache
+
+        update_questions_results_cache.delay(self.pk)
+
     def update_question_word_clouds(self):
         for question in self.questions.all():
             question.generate_word_cloud()
