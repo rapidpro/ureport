@@ -230,6 +230,15 @@ def pull_refresh(poll_id):
     Poll.pull_results(poll_id)
 
 
+@app.task(name="polls.update_questions_results_cache")
+def update_questions_results_cache(poll_id):
+    from .models import Poll
+
+    poll = Poll.objects.filter(id=poll_id).prefetch_related("questions").first()
+    if poll:
+        poll.update_questions_results_cache()
+
+
 @app.task(name="polls.pull_refresh_from_archives")
 def pull_refresh_from_archives(poll_id):
     from .models import Poll
