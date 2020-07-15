@@ -1,3 +1,8 @@
+v1.1.170
+----------
+ * Merge pull request #605 from rapidpro/clear-old-results-with-lock-key
+ * Grab lock before clearing old results so we do not interfere with ongoing sync
+
 v1.1.169
 ----------
  * Merge pull request #604 from rapidpro/fix-bug-rebuilding-polls-stats
