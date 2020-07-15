@@ -1,3 +1,10 @@
+v1.1.169
+----------
+ * Merge pull request #604 from rapidpro/fix-bug-rebuilding-polls-stats
+ * Merge pull request #603 from rapidpro/recalculate-stats
+ * Only update stats for polls that are not stopped syncing
+ * Trigger update results cache in a task when a poll questions are updated
+
 v1.1.168
 ----------
  * Merge pull request #601 from rapidpro/update-sec
