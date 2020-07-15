@@ -325,7 +325,7 @@ class Poll(SmartModel):
 
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
-                flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow)
+                flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=False)
                 for flow_poll in flow_polls:
                     poll_id = flow_poll.id
                     poll_year = flow_poll.poll_date.year
