@@ -202,17 +202,28 @@ def clear_old_poll_results(org, since, until):
     from .models import Poll
 
     now = timezone.now()
+    r = get_redis_connection()
     time_window = now - timedelta(days=90)
 
     old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window).order_by("pk")
     for poll in old_polls:
-        # one last stats rebuild for the poll
-        poll.rebuild_poll_results_counts()
 
-        if not poll.stopped_syncing:
-            poll.delete_poll_results()
-            Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
-            logger.info("Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id))
+        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
+        if r.get(key):
+            logger.info(
+                "Skipping clearing old results for poll #%d on org #%d as it is still syncing" % (poll.pk, org.pk)
+            )
+        else:
+            with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
+                # one last stats rebuild for the poll
+                poll.rebuild_poll_results_counts()
+
+                if not poll.stopped_syncing:
+                    poll.delete_poll_results()
+                    Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
+                    logger.info(
+                        "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
+                    )
 
 
 @app.task()
