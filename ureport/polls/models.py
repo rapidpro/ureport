@@ -521,7 +521,7 @@ class Poll(SmartModel):
     @classmethod
     def get_recent_polls(cls, org):
         now = timezone.now()
-        recent_window = now - timedelta(days=7)
+        recent_window = now - timedelta(days=45)
         main_poll = Poll.get_main_poll(org)
 
         recent_other_polls = Poll.get_public_polls(org)
