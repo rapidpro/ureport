@@ -53,6 +53,8 @@ INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compa
 RAVEN_CONFIG = {
     'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
 
+}
+
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
