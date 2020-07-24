@@ -1,3 +1,19 @@
+v1.1.171
+----------
+ * Merge pull request #608 from rapidpro/increase-recent-polls-window
+ * Merge pull request #607 from Ilhasoft/feature/add-croatian-language
+ * fix correct path for croatian language
+ * Merge branch 'master' of https://github.com/rapidpro/ureport into feature/add-croatian-language
+ * Add HR mo file
+ * Merge branch 'master' of github.com:rapidpro/ureport into increase-recent-polls-window
+ * Merge pull request #609 from rapidpro/dependabot/npm_and_yarn/lodash-4.17.19
+ * Merge pull request #606 from rapidpro/translations_django-po--master_hr_HR
+ * Bump lodash from 4.17.15 to 4.17.19
+ * Increase recent polls window to 45 days
+ * Enable croatian language
+ * Apply translations in hr_HR
+ * Apply translations in hr_HR
+
 v1.1.170
 ----------
  * Merge pull request #605 from rapidpro/clear-old-results-with-lock-key
