@@ -84,6 +84,7 @@ LANGUAGES = (
     ("vi", "Vietnamese"),
     ("sr-rs@latin", "Serbian (Latin, Serbia)"),
     ("bg", "Bulgarian"),
+    ("hr-hr", "Croatian"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -144,8 +145,15 @@ MIDDLEWARE = (
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "dash.orgs.middleware.SetOrgMiddleware",
 )
+
+X_FRAME_OPTIONS = "DENY"
+
+SESSION_COOKIE_AGE = 900
+CSRF_COOKIE_AGE = 7200
+
 
 ROOT_URLCONF = "ureport.urls"
 
@@ -1172,6 +1180,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://kiribati.ureport.in/count/",
     ),
     dict(
+        name="Lebanon",
+        host="//lebanon.ureport.in/",
+        flag="flag_lebanon.png",
+        is_static=True,
+        count_link="http://lebanon.ureport.in/count/",
+    ),
+    dict(
         name="Lesotho",
         host="//les.ureport.in/",
         flag="flag_lesotho.png",
@@ -1317,6 +1332,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_south_africa.png",
         is_static=True,
         count_link="http://sa.ureport.in/count/",
+    ),
+    dict(
+        name="South Asia",
+        host="//southasia.ureport.in",
+        flag="flag_south_asia.png",
+        is_static=True,
+        count_link="http://southasia.ureport.in/count/",
     ),
     dict(
         name="Tanzania",

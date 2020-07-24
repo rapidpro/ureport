@@ -9,33 +9,25 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from ureport.settings_common import *  # noqa
 
 
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 TEMPLATE_DEBUG = DEBUG
-
-API_BOUNDARY_CACHE_TIME = 30
-API_GROUP_CACHE_TIME = 30
-API_RESULT_CACHE_TIME = 30
-API_CONTACT_RESULT_CACHE_TIME = 30
-API_CONTACTS_CACHE_TIME = 30
-API_FLOWS_CACHE_TIME = 30
-
-# set the mail settings, we send through gmail
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '${gmail_user}')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', '${gmail_user}')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '${gmail_password}')
-EMAIL_USE_TLS = True
 
 EMPTY_SUBDOMAIN_HOST = config('EMPTY_SUBDOMAIN_HOST', 'https://ureport.in')
 HOSTNAME = config('APP_HOSTNAME', 'ureport.in')
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=lambda v: [
                        s.strip() for s in v.split(',')])
-
 SESSION_COOKIE_DOMAIN = config('SESSION_COOKIE_DOMAIN', 'ureport.in')
 SESSION_COOKIE_SECURE = False
 
-ANONYMOUS_USER_ID = -1
+SECURE_HSTS_SECONDS = 1800
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_AGE = 10800
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
 
 ADMINS = config('ADMINS',
                 default='Ilhasoft|contato@ilhasoft.com.br',
@@ -44,33 +36,49 @@ ADMINS = config('ADMINS',
                         s.strip().split('|')[0],
                         s.strip().split('|')[1],
                     ) for s in v.split(',')] if v else [])
-MANAGERS = ADMINS
 
-TIME_ZONE = config('TIME_ZONE', default='America/Sao_Paulo')
-USER_TIME_ZONE = config('USER_TIME_ZONE', default='America/Sao_Paulo')
-
+# set the mail settings, we send through gmail
 EMAIL_HOST = config('EMAIL_HOST', default='localhost')
-EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', 'no-reply@ilhasoft.com.br')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='no-reply@ilhasoft.com.br')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='no-reply@ilhasoft.com.br')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MANAGERS = ADMINS
+
+INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat', 'storages')
+
+# Set your DSN value
+RAVEN_CONFIG = {
+    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
+
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
-
 AWS_S3_SECURE_URLS = False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 AWS_QUERYSTRING_AUTH = False
-AWS_S3_FILE_OVERWRITE = False
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+
+}
 
 MEDIA_URL = config('MEDIA_URL', default='https://ureport.ilhasoft.mobi/media/')
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+
 SITE_API_HOST = config(
     'SITE_API_HOST', default='https://rapidpro.ilhasoft.mobi')
 API_ENDPOINT = config(
     'SITE_API_HOST', default='https://rapidpro.ilhasoft.mobi')
+
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.parse(config('DEFAULT_DATABASE'))
@@ -143,8 +151,25 @@ LOGGING = {
 }
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+SESSION_CACHE_ALIAS = "default"
+
+# trust connections that are coming in on this protocol
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
 
+# compress arguments
+COMPRESS_ENABLED = config('COMPRESS_ENABLED', default=True, cast=bool)
+COMPRESS_CSS_HASHING_METHOD = 'content'
+COMPRESS_OFFLINE = config('COMPRESS_OFFLINE', default=True, cast=bool)
+COMPRESS_OFFLINE_CONTEXT = [
+    dict(STATIC_URL=STATIC_URL, base_template='frame.html', org=None, debug=False, testing=False),
+    dict(STATIC_URL=STATIC_URL, base_template='public_base.html', org=None, debug=False, testing=False)
+]
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
+
+
+# redis configuration
 REDIS_HOST = config('REDIS_HOST')
 REDIS_DATABASE = config('REDIS_DATABASE', default='1')
 
@@ -166,354 +191,11 @@ CELERY_EAGER_PROPAGATES_EXCEPTIONS = config(
     'CELERY_EAGER_PROPAGATES_EXCEPTIONS', default=True, cast=bool)
 
 
-
-# compress arguments
-
-COMPRESS_CSS_HASHING_METHOD = 'content'
-
-COMPRESS_ENABLED = config('COMPRESS_ENABLED', default=True, cast=bool)
-
-COMPRESS_OFFLINE = config('COMPRESS_OFFLINE', default=True, cast=bool)
-
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
-
-COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
-
-COMPRESS_OFFLINE_CONTEXT = [
-    dict(STATIC_URL=STATIC_URL, base_template='frame.html', org=None, debug=False, testing=False),
-    dict(STATIC_URL=STATIC_URL, base_template='public_base.html', org=None, debug=False, testing=False)
-]
-
-PREVIOUS_ORG_SITES = [
-    dict(
-        name='24x7',
-        host='https://nigeria24x7.ureport.in/',
-        flag='https://rapidpro-static-data.s3-eu-west-1.amazonaws.com/flag_24x7.png',
-        is_static=False,
-        count_link='https://nigeria24x7.ureport.in/count/',
-    ),
-    dict(
-        name='Botswana',
-        host='https://botswana.ureport.in/',
-        flag='https://rapidpro-static-data.s3-eu-west-1.amazonaws.com/Icon_Country+Name_RGB.png',
-        is_static=False,
-        count_link='https://botswana.ureport.in/count/',
-    ),
-    dict(
-        name='Burkina Faso',
-        host='https://burkinafaso.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Burkina_Faso_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://burkinafaso.ureport.in/count/',
-    ),
-    dict(
-        name='Burundi',
-        host='https://burundi.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_bi.png'),
-        is_static=False,
-        count_link='https://burundi.ureport.in/count/',
-    ),
-    dict(
-        name='Cameroon',
-        host='https://cameroon.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_cm.png'),
-        is_static=False,
-        count_link='https://cameroon.ureport.in/count/',
-    ),
-    dict(
-        name='Republique Centrafricaine',
-        host='https://centrafrique.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_cf.png'),
-        is_static=False,
-        count_link='https://centrafrique.ureport.in/count/',
-    ),
-    dict(
-        name='Chile',
-        host='https://chile.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Chile_Landing_Page_Icon_2.png'),
-        is_static=False,
-        count_link='https://chile.ureport.in/count/',
-    ),
-    dict(
-        name='Congo Brazzavile',
-        host='https://congobrazzaville.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Congo_Brazzaville.png'),
-        is_static=False,
-        count_link='https://congobrazzaville.ureport.in/count/',
-    ),
-    dict(
-        name='Cote dIvoire',
-        host='https://cotedivoire.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Cote_dIvoire_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://cotedivoire.ureport.in/count/',
-    ),
-    dict(
-        name='RD Congo',
-        host='https://drc.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Congo.png'),
-        is_static=False,
-        count_link='https://drc.ureport.in/count/',
-    ),
-    dict(
-        name='Global',
-        host='https://ureport.in/',
-        flag='https://rapidpro-static-data.s3-eu-west-1.amazonaws.com/global.png',
-        is_static=False,
-        count_link='https://ureport.in/count/',
-    ),
-    dict(
-        name='Guinea',
-        host='https://guinea.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Guinea_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://guinea.ureport.in/count/',
-    ),
-    dict(
-        name='The Gambia',
-        host='https://gambia.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_gm.png'),
-        is_static=False,
-        count_link='https://gambia.ureport.in/count/',
-    ),
-    dict(
-        name='Indonesia',
-        host='https://indonesia.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Indonesia_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://indonesia.ureport.in/count/',
-    ),
-    dict(
-        name='Liberia',
-        host='https://liberia.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_lr.png'),
-        is_static=False,
-        count_link='https://liberia.ureport.in/count/',
-    ),
-    dict(
-        name='Malawi',
-        host='http://ureport.mw/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Malawi_Web_Deployment-01.png'),
-        is_static=False,
-        count_link='http://ureport.mw/count/',
-    ),
-    dict(
-        name='Malaysia',
-        host='https://malaysia.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Malaysia_Web_Deployment-01.png'),
-        is_static=False,
-        count_link='https://malaysia.ureport.in/count/',
-    ),
-    dict(
-        name='Mali',
-        host='https://mali.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_ml.png'),
-        is_static=False,
-        count_link='https://mali.ureport.in/count/',
-    ),
-    dict(
-        name='Mexico',
-        host='https://mexico.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Mexico_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://mexico.ureport.in/count/',
-    ),
-    dict(
-        name='Mozambique',
-        host='https://mozambique.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Mozambique_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://mozambique.ureport.in/count/',
-    ),
-    dict(
-        name='Pakistan',
-        host='http://ureport.pk/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Pakistan_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='http://ureport.pk/count/',
-    ),
-    dict(
-        name='Philippines',
-        host='https://philippines.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_ph.png'),
-        is_static=False,
-        count_link='https://philippines.ureport.in/count/',
-    ),
-    dict(
-        name='Senegal',
-        host='https://senegal.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Senegal_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://senegal.ureport.in/count/',
-    ),
-    dict(
-        name='Sierra Leone',
-        host='https://sierraleone.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_sl.png'),
-        is_static=False,
-        count_link='https://sierraleone.ureport.in/count/',
-    ),
-    dict(
-        name='Uganda',
-        host='http://ureport.ug',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Uganda_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='http://ureport.ug/count/',
-    ),
-    dict(
-        name='Ukraine',
-        host='https://ukraine.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_ua.png'),
-        is_static=False,
-        count_link='https://ukraine.ureport.in/count/',
-    ),
-    dict(
-        name='Vietnam',
-        host='https://vietnam.ureport.in/',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Vietnam_Web_Deployment-01.png'),
-        is_static=False,
-        count_link='https://vietnam.ureport.in/count/',
-    ),
-    dict(
-        name='Zambia',
-        host='http://zambiaureport.org/',
-        flag='https://zambia.ureport.in/sitestatic/img/flags/flag_zm.png',
-        is_static=False,
-        count_link="https://www.zambiaureport.com/count.txt/",
-    ),
-    dict(
-        name='Zimbabwe',
-        host='https://zimbabwe.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_zw.png'),
-        is_static=False,
-        count_link='https://zimbabwe.ureport.in/count/',
-    ),
-    dict(
-        name='Myanmar',
-        host='https://myanmar.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_mm.png'),
-        is_static=False,
-        count_link='https://myanmar.ureport.in/count/',
-    ),
-    dict(
-        name='Nigeria',
-        host='https://nigeria.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_ng.png'),
-        is_static=False,
-        count_link='https://nigeria.ureport.in/count/',
-    ),
-    dict(
-        name='Papua New Guinea',
-        host='https://png.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Papua_New_Guinea_Landing_Page_Icon_1_PNG.png'),
-        is_static=False,
-        count_link='https://png.ureport.in/count/',
-    ),
-    dict(
-        name='Tunisie',
-        host='https://tunisie.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_Tunisia_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://tunisie.ureport.in/count/',
-    ),
-    dict(
-        name='Tanzania',
-        host='https://tanzania.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Tanzania_Web_Deployment-01_flag1.png'),
-        is_static=False,
-        count_link='https://tanzania.ureport.in/count/',
-    ),
-    dict(
-        name='Tchad',
-        host='https://tchad.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_td.png'),
-        is_static=False,
-        count_link='https://tchad.ureport.in/count/',
-    ),
-    dict(
-        name='South Africa',
-        host='https://sa.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_South_Africa_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://sa.ureport.in/count/',
-    ),
-    dict(
-        name='On The Move',
-        host='https://onthemove.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'U-Report_On_The_Move_Landing_Page_Icon.png'),
-        is_static=False,
-        count_link='https://onthemove.ureport.in/count/',
-    ),
-    dict(
-        name='Ghana',
-        host='https://ghana.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Ghana_Web_Deployment-01.png'),
-        is_static=False,
-        count_link='https://ghana.ureport.in/count/',
-    ),
-    dict(
-        name='Fiji',
-        host='https://fiji.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_fj.png'),
-        is_static=False,
-        count_link='https://fiji.ureport.in/count/',
-    ),
-    dict(
-        name='Eswatini',
-        host='https://eswatini.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Eswatini_Web_Deployment-01.png'),
-        is_static=False,
-        count_link='https://eswatini.ureport.in/count/',
-    ),
-    dict(
-        name='Kiribati',
-        host='https://kiribati.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Kiribati_Web_Deployment-01.png'),
-        is_static=False,
-        count_link='https://kiribati.ureport.in/count/',
-    ),
-    dict(
-        name='Haiti',
-        host='https://haiti.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'Haiti_Web_Deployment-01.png'),
-        is_static=False,
-        count_link='https://haiti.ureport.in/count/',
-    ),
-    dict(
-        name='Jordan',
-        host='https://jordan.ureport.in',
-        flag='https://rapidpro-static-data.s3-eu-west-1.amazonaws.com/flag_jo.png',
-        is_static=False,
-        count_link='https://jordan.ureport.in/count/',
-    ),
-    dict(
-        name='Mauritanie',
-        host='https://mauritania.ureport.in',
-        flag='https://rapidpro-static-data.s3-eu-west-1.amazonaws.com/flag_mr.png',
-        is_static=False,
-        count_link='https://mauritania.ureport.in/count/',
-    ),
-    dict(
-        name='Nepal',
-        host='https://nepal.ureport.in',
-        flag='https://{}.s3.amazonaws.com/images/{}'.format('dl-ureport', 'flag_np.png'),
-        is_static=False,
-        count_link='https://nepal.ureport.in/count/',
-    ),
-    dict(
-        name='Pacific',
-        host='https://pacific.ureport.in',
-        flag='https://rapidpro-static-data.s3-eu-west-1.amazonaws.com/flag_pacific.png',
-        is_static=False,
-        count_link='https://pacific.ureport.in/count/',
-    ),
-]
-
-sentry_sdk.init(
-    dsn="htps://c91ad31f95454bcf8d659c6914f6b417@sentry.ilhasoft.mobi/5"
-    integrations=[DjangoIntegration()]
-)
-
 UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME = config('UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME', default=3600)
 UREPORT_RUN_FETCHED_DATA_CACHE_TIME = config('UREPORT_RUN_FETCHED_DATA_CACHE_TIME', default=600)
+
+
+TIME_ZONE = config('TIME_ZONE', default='America/Sao_Paulo')
+USER_TIME_ZONE = config('USER_TIME_ZONE', default='America/Sao_Paulo')
+
+

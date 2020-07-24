@@ -19,9 +19,9 @@
 - block table-buttons
   - if view.add_button
     - if filtered_type
-      %a.button.is-primary.is-pulled-right(href="./create/?type={{filtered_type.pk}}")
+      %a.button.is-primary(href="./create/?type={{filtered_type.pk}}" class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %}")
         -trans "+ New "
         {{filtered_type.name}}
     -else
-      %a.button.is-primary.is-pulled-right(href="./create/")
+      %a.button.is-primary(href="./create/" class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %}")
         - trans "+ New Page"

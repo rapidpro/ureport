@@ -71,7 +71,7 @@ pyflakes==2.1.1           # via flake8
 python-dateutil==2.7.3    # via botocore, rapidpro-dash
 python-decouple==3.1
 pytz==2018.5              # via celery, django, django-timezone-field, rapidpro-python, smartmin
-rapidpro-dash==1.4.5
+rapidpro-dash==1.4.6
 rapidpro-python==2.6.1
 raven==6.9.0
 rcssmin==1.0.6            # via django-compressor
@@ -83,7 +83,7 @@ s3transfer==0.1.13        # via boto3
 sentry-sdk==0.7.3
 simplejson==3.16.0        # via django-rest-swagger
 six==1.11.0               # via django-rosetta, microsofttranslator, mock, pip-tools, python-dateutil
-smartmin==2.2.0
+smartmin==2.2.2
 smmap2==2.0.4             # via gitdb2
 sqlparse==0.2.4           # via django, django-debug-toolbar, smartmin
 toml==0.9.4               # via black

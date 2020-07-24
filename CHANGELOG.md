@@ -1,3 +1,44 @@
+v1.1.170
+----------
+ * Merge pull request #605 from rapidpro/clear-old-results-with-lock-key
+ * Grab lock before clearing old results so we do not interfere with ongoing sync
+
+v1.1.169
+----------
+ * Merge pull request #604 from rapidpro/fix-bug-rebuilding-polls-stats
+ * Merge pull request #603 from rapidpro/recalculate-stats
+ * Only update stats for polls that are not stopped syncing
+ * Trigger update results cache in a task when a poll questions are updated
+
+v1.1.168
+----------
+ * Merge pull request #601 from rapidpro/update-sec
+
+v1.1.163
+----------
+ * Merge pull request #600 from rapidpro/add-south-asia
+ * Add South Asia flag
+
+v1.1.162
+----------
+ * Merge pull request #599 from rapidpro/limit-global-map
+ * Add config to limit countries on World map
+
+v1.1.161
+----------
+ * Merge pull request #598 from rapidpro/fix-image-size
+ * Adjust about image size
+
+v1.1.160
+----------
+ * Merge pull request #597 from rapidpro/fix-arabic-design
+ * Adjustments for RTL design on admin site
+
+v1.1.159
+----------
+ * Merge pull request #596 from rapidpro/LB-flag
+ * Add Lebanon flag
+
 v1.1.158
 ----------
  * Merge pull request #593 from Ilhasoft/feature/create-contact

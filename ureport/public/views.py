@@ -281,6 +281,7 @@ class StoryReadView(SmartReadView):
 
 class ReportersResultsView(SmartReadView):
     model = Org
+    http_method_names = ["get"]
 
     def get_object(self):
         return self.request.org
@@ -297,6 +298,7 @@ class ReportersResultsView(SmartReadView):
 
 class EngagementDataView(SmartReadView):
     model = Org
+    http_method_names = ["get"]
 
     def get_object(self):
         return self.request.org
@@ -318,6 +320,7 @@ class EngagementDataView(SmartReadView):
 
 class UreportersView(SmartTemplateView):
     template_name = "public/ureporters.html"
+    http_method_names = ["get"]
 
     def get_context_data(self, **kwargs):
         context = super(UreportersView, self).get_context_data(**kwargs)
@@ -403,6 +406,11 @@ class BoundaryView(SmartTemplateView):
 
         if org.get_config("common.is_global"):
             location_boundaries = org.boundaries.filter(level=0)
+            limit_states = org.get_config("common.limit_states")
+            if limit_states:
+                limit_states = [elt.strip() for elt in limit_states.split(",")]
+                location_boundaries = location_boundaries.filter(osm_id__in=limit_states)
+
         else:
             osm_id = self.kwargs.get("osm_id", None)
 
