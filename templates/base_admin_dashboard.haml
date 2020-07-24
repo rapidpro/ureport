@@ -271,11 +271,7 @@
 
           - if show_login
             - if request.user and request.user.is_authenticated
-<<<<<<< HEAD
-              %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}md  :mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
-=======
               %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
->>>>>>> 7465d04a573f4eb3de1bd865ae9c2b0a48ed9720
                 - trans "Logout"
             -else
               %a.flex-initial.py-menu(href="{% org_host_link %}{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
