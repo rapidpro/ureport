@@ -1404,10 +1404,10 @@ COUNTRY_FLAGS_SITES = [
     ),
     dict(
         name="Zambia",
-        host="//www.zambiaureport.com/home/",
+        host="//zm.ureport.in",
         flag="flag_zambia.png",
         is_static=True,
-        count_link="http://www.zambiaureport.com/count.txt/",
+        count_link="http://zm.ureport.in/count/",
     ),
     dict(
         name="Zimbabwe",
