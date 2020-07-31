@@ -1,3 +1,15 @@
+v1.1.172
+----------
+ * Merge pull request #615 from rapidpro/poll-list
+ * Add sync schedule on opinions admin list
+ * Merge pull request #616 from rapidpro/update-cssnano
+ * Update cssnano to fix dot-prop vurnerable version
+ * Merge pull request #614 from rapidpro/dependabot/npm_and_yarn/elliptic-6.5.3
+ * Bump elliptic from 6.5.2 to 6.5.3
+ * Merge pull request #612 from rapidpro/translations_django-po--master_hr_HR
+ * Run code check
+ * Apply translations in hr_HR
+
 v1.1.171
 ----------
  * Merge pull request #608 from rapidpro/increase-recent-polls-window
