@@ -76,7 +76,7 @@
             -elif obj == main_poll
               - trans "Main poll syncs scheduled every 10min"
             -elif obj in recent_polls
-              - trans "Main poll syncs scheduled every 60min"
+              - trans "Recent poll syncs scheduled every 60min"
             -elif obj in other_polls or obj.id in brick_polls_ids
               -if obj.stopped_syncing
                 -trans "No longer scheduling syncs, runs archived"
