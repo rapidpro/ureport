@@ -1,3 +1,7 @@
+v1.1.173
+----------
+ * Fix typo
+
 v1.1.172
 ----------
  * Merge pull request #615 from rapidpro/poll-list
