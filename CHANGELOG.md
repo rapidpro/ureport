@@ -1,3 +1,8 @@
+v1.1.174
+----------
+ * Merge pull request #617 from rapidpro/adjust-hsts-time
+ * Adjust SECURE HSTS SECONDS
+
 v1.1.173
 ----------
  * Fix typo
