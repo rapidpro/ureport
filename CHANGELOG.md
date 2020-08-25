@@ -1,3 +1,7 @@
+v1.1.176
+----------
+ * Increase session age
+
 v1.1.175
 ----------
  * Adjust SECURE HSTS SECONDS
