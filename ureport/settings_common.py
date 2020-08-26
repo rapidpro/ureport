@@ -1044,7 +1044,7 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_croatia.png",
         is_static=True,
         count_link="http://croatia.ureport.in/count/",
-    ),    
+    ),
     dict(
         name="DRC",
         host="//drc.ureport.in/",
