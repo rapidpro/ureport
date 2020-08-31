@@ -152,9 +152,6 @@ class PollContextMixin(object):
         org = self.request.org
         context["org"] = org
 
-        context["gender_stats"] = org.get_gender_stats()
-        context["age_stats"] = org.get_age_stats()
-
         context["states"] = sorted(
             [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()],
             key=lambda c: c["name"],
@@ -195,6 +192,10 @@ class PollContextMixin(object):
                     if total_age
                 ]
                 context["locations_stats"] = top_question.get_location_stats()
+
+        if not main_poll or not main_poll.get_questions().first():
+            context["gender_stats"] = org.get_gender_stats()
+            context["age_stats"] = org.get_age_stats()
 
         context["categories"] = (
             Category.objects.filter(org=org, is_active=True)
