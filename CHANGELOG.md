@@ -1,3 +1,11 @@
+v1.1.177
+----------
+ * Merge pull request #620 from rapidpro/update-cache-for-polls-no-longer-syncing
+ * Update cache for results for poll stopped syncing, reduce number we call slow queries
+ * Merge pull request #618 from Ilhasoft/feature/add-croatian-flag
+ * fix the white space
+ * add Croatia flag
+
 v1.1.176
 ----------
  * Increase session age
