@@ -1,3 +1,40 @@
+v1.1.177
+----------
+ * Merge pull request #620 from rapidpro/update-cache-for-polls-no-longer-syncing
+ * Update cache for results for poll stopped syncing, reduce number we call slow queries
+ * Merge pull request #618 from Ilhasoft/feature/add-croatian-flag
+ * fix the white space
+ * add Croatia flag
+
+v1.1.176
+----------
+ * Increase session age
+
+v1.1.175
+----------
+ * Adjust SECURE HSTS SECONDS
+
+v1.1.174
+----------
+ * Merge pull request #617 from rapidpro/adjust-hsts-time
+ * Adjust SECURE HSTS SECONDS
+
+v1.1.173
+----------
+ * Fix typo
+
+v1.1.172
+----------
+ * Merge pull request #615 from rapidpro/poll-list
+ * Add sync schedule on opinions admin list
+ * Merge pull request #616 from rapidpro/update-cssnano
+ * Update cssnano to fix dot-prop vurnerable version
+ * Merge pull request #614 from rapidpro/dependabot/npm_and_yarn/elliptic-6.5.3
+ * Bump elliptic from 6.5.2 to 6.5.3
+ * Merge pull request #612 from rapidpro/translations_django-po--master_hr_HR
+ * Run code check
+ * Apply translations in hr_HR
+
 v1.1.171
 ----------
  * Merge pull request #608 from rapidpro/increase-recent-polls-window
