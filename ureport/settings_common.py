@@ -1261,6 +1261,12 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_nigeria24x7.png",
         is_static=True,
         count_link="http://nigeria24x7.ureport.in/count/",
+    ),dict(
+        name="Norge",
+        host="//norge.ureport.in",
+        flag="flag_norway.png",
+        is_static=True,
+        count_link="http://norge.ureport.in/count/",
     ),
     dict(
         name="On the move",
