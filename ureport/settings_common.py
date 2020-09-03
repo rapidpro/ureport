@@ -1264,7 +1264,7 @@ COUNTRY_FLAGS_SITES = [
     ),dict(
         name="Norge",
         host="//norge.ureport.in",
-        flag="flag_norway.png",
+        flag="flag_norge.png",
         is_static=True,
         count_link="http://norge.ureport.in/count/",
     ),
