@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020
 # Marijana Muhic <mmuhic@unicef.org>, 2020
-#
+# Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020
+
 #, fuzzy
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-04 12:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2020\n"
+"Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
 "Language: hr_HR\n"
 "MIME-Version: 1.0\n"
@@ -698,7 +698,7 @@ msgid "Logout"
 msgstr "Odjava"
 
 msgid "Opinions"
-msgstr "Mišljenja"
+msgstr "Stavovi"
 
 msgid "Users"
 msgstr "Korisnici"
@@ -731,7 +731,7 @@ msgid "About"
 msgstr "O nama"
 
 msgid "Engagement"
-msgstr "Angažman"
+msgstr "Sudjelovanje"
 
 msgid "Category Images"
 msgstr "Slike kategorija"
@@ -779,7 +779,7 @@ msgid "Terms & Conditions"
 msgstr "Uvjeti korištenja"
 
 msgid "U-Reporters Content"
-msgstr "U-Reporteri, sadržaj"
+msgstr "Glasovi mladih, sadržaj"
 
 msgid "Join &amp; Engage Content"
 msgstr "Pridruži se i angažiraj, sadržaj"
@@ -800,7 +800,7 @@ msgid "READ MORE"
 msgstr "PROČITAJ VIŠE"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr "ISTRAŽI ANGAŽMAN"
+msgstr "PRIDRUŽI SE I SUDJELUJ"
 
 msgid ""
 "\n"
@@ -832,61 +832,55 @@ msgstr "NOVE NOTIFIKACIJE"
 msgid "Backends"
 msgstr "Pozadine"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
-#| "\n"
-#| "      "
-msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
-msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+#, python-format
+msgid ""
+"There is currently %(counter)s new poll syncing. Polls are displayed on the "
+"public site once they have completely synced their results."
+msgid_plural ""
+"There are currently %(counter)s new polls syncing. Polls are displayed on "
+"the public site once they have completely synced their results."
 msgstr[0] ""
-"\n"
-"        Trenutno se %(counter)s nove ankete sinkroniziraju. Ankete se prikazuju na stranici makon što su rezultati u potpunosti sinkronizirani.\n"
-"\n"
-"      "
+"Trenutno se sinkronizira %(counter)s novih anketa. Ankete se prikazuju na "
+"web stranici nakon sinkronizacije rezultata."
 msgstr[1] ""
-"\n"
-"        Trenutno se %(counter)s nove ankete sinkroniziraju. Ankete se prikazuju na stranici makon što su rezultati u potpunosti sinkronizirani.\n"
-"\n"
-"      "
+" Trenutno se sinkronizira %(counter)s novih anketa. Ankete se prikazuju na "
+"web stranici nakon sinkronizacije rezultata."
 msgstr[2] ""
-"\n"
-"        Trenutno se %(counter)s nove ankete sinkroniziraju. Ankete se prikazuju na stranici makon što su rezultati u potpunosti sinkronizirani.\n"
-"\n"
-"      "
+"Trenutno se sinkronizira %(counter)s  novih anketa. Ankete se prikazuju na "
+"web stranici nakon sinkronizacije rezultata."
+
 
 msgid "+ New Poll"
 msgstr "+ Nova anketa"
 
-#, fuzzy, python-format
-#| msgid "Poll Questions"
+#, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] "Anketna pitanja"
-msgstr[1] "Anketna pitanja"
-msgstr[2] "Anketna pitanja"
+msgstr[0] "%(counter)s anketna pitanja"
+msgstr[1] "%(counter)sanketna pitanja"
+msgstr[2] "%(counter)s anketna pitanja"
 
 msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
+msgstr "Nova sinkronizacija ankete zakazana je svakih 10 minuta"
 
 msgid "Main poll syncs scheduled every 10min"
-msgstr ""
+msgstr "Glavna anketa sinkronizira se svakih 10 minuta"
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
+msgstr "Sinkroniziranje posljednje ankete zakazano je svakih 60 minuta"
 
 msgid "No longer scheduling syncs, runs archived"
-msgstr ""
+msgstr "Više se ne sinkronizira, arhivira se"
 
 msgid "Poll syncs scheduled every 24h"
-msgstr ""
+msgstr "Anketa se sinkronizira svakih 24 sata"
 
 msgid "Not scheduling syncs, not active"
-msgstr ""
+msgstr "Ne sinkronizira se, neaktivno"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
+msgstr "Ne planira sinkronizaciju, nema flowa za anketu"
+
 
 msgid "Refresh Results"
 msgstr "Osvježi rezultate"
@@ -913,19 +907,19 @@ msgid "LIST"
 msgstr "LISTA"
 
 msgid "LATEST OPINION"
-msgstr "NAJNOVIJA ANEKTA"
+msgstr "POSLJEDNJA ANKETA"
 
 msgid "VIEW FULL RESULTS"
 msgstr "POGLEDAJ UKUPNE REZULTATE"
 
 msgid "U-REPORTERS IN"
-msgstr "MLADI REPORTERI"
+msgstr "GLASOVA MLADIH U"
 
 msgid "PARTNERING WITH"
 msgstr "U PARTNERSTVU SA"
 
 msgid "U-REPORTERS"
-msgstr "MLADI REPORTERI"
+msgstr "ZABUM VOICE ZAJEDNICA"
 
 msgid "IN"
 msgstr "U"
@@ -986,7 +980,7 @@ msgid "ALL"
 msgstr "SVI"
 
 msgid "AGE"
-msgstr "GODINE"
+msgstr "DOBNE SKUPINE"
 
 msgid "GENDER"
 msgstr "SPOL"
@@ -1016,7 +1010,7 @@ msgid "Responses"
 msgstr "Odgovori"
 
 msgid "Reporters in"
-msgstr "Reporteri u"
+msgstr "Glasova mladih u"
 
 msgid "Results"
 msgstr "Rezultati"
@@ -1052,7 +1046,7 @@ msgid "AVG RESPONSE RATE"
 msgstr "PROSJEČNA STOPA ODGOVORA"
 
 msgid "U-REPORTERS BY REGION"
-msgstr "MLADI REPORTERI PO LOKACIJI"
+msgstr "GLASOVI MLADIH PO LOKACIJI"
 
 msgid "FILTER RESULTS"
 msgstr "FILTERI REZULTATA"
@@ -1079,7 +1073,7 @@ msgid "Polled"
 msgstr "Anketiranih"
 
 msgid "Reporters"
-msgstr "Reporteri"
+msgstr "Glasovi mladih"
 
 msgid "Top Region"
 msgstr "Top Regija"
@@ -1163,40 +1157,16 @@ msgstr ""
 "            Jeste li si siguran/na da želiš izbrisati <strong>%(object)s</strong>?\n"
 "          "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\t %(counter)s result\n"
-#| "\t"
-#| msgid_plural ""
-#| "\n"
-#| "         %(counter)s results\n"
-#| "        "
+#, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] ""
-"\n"
-"\t %(counter)s rezultat\n"
-"\t"
-msgstr[1] ""
-"\n"
-"         %(counter)s rezultat\n"
-"        "
-msgstr[2] ""
-"\n"
-"         %(counter)s rezultati\n"
-"        "
+msgstr[0] "%(counter)s rezultati"
+msgstr[1] "%(counter)s rezultati"
+msgstr[2] "%(counter)srezultati  "
 
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "\tResults %(start)s-%(end)s of %(count)s\n"
-#| "\t"
+#, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
-"\n"
-"\tRezultati %(start)s-%(end)s of %(count)s\n"
-"\t"
+msgstr "Rezultati%(start)s-%(end)s od %(count)s"
 
 msgid "Error"
 msgstr "Greška"
@@ -1536,22 +1506,23 @@ msgid "The label to display of the category on the public site"
 msgstr "Oznaka za prikaz kategorije na javnoj stranici"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr ""
+msgstr "Planirana sinkronizacija trenutno je u tijeku ..."
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr ""
+msgstr "Posljednji rezultati sinkronizirani prije %(time)s "
 
 msgid "Synced"
-msgstr ""
+msgstr "Sinkronizirano"
 
 #, python-brace-format
 msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr ""
+msgstr "Sinkronizacija u tijeku... {sync_progress:.1f}%"
 
 #, python-brace-format
 msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr ""
+msgstr "Uređivanje ankete za flow[{flow_name} ({flow_date_hint})]"
+
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1562,34 +1533,39 @@ msgid "%s"
 msgstr "%s"
 
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr "Naziv kontakt grupe sa registriranim reporterima"
+msgstr "Naziv kontakt grupe sa registriranim mladima"
 
-msgid "The label of the Contact Field that contains the birth date of reporters"
-msgstr "Naziv polja kontakta koji sadrži datum rodjenja reportera"
+msgid ""
+"The label of the Contact Field that contains the birth date of reporters"
+msgstr "Naziv polja kontakta koji sadrži datum rodjenja mladih"
+
 
 msgid "The label of the Contact Field that contains the gender of reporters"
-msgstr "Naziv polja kontakta koji sadrži spol reportera"
+msgstr "Naziv polja kontakta koji sadrži spol mladih"
 
-msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Naziv polja kontakta koji sadrži zanimanje reportera"
+msgid ""
+"The label of the Contact Field that contains the occupation of reporters"
+msgstr "Naziv polja kontakta koji sadrži zanimanje mladih"
 
-msgid "The label of the Contact Field that contains the registration date of reporters"
-msgstr "Naziv polja kontakta koji sadrži datum registracije reportera"
+msgid ""
+"The label of the Contact Field that contains the registration date of "
+"reporters"
+msgstr "Naziv polja kontakta koji sadrži datum registracije mladih"
 
 msgid "The label of the Contact Field that contains the State of reporters"
-msgstr "Oznaka za polje kontakta u kojem je Država iz koje su reporteri"
+msgstr "Oznaka za polje kontakta u kojem je Županija iz koje su mladi"
 
 msgid "The label of the Contact Field that contains the District of reporters"
-msgstr "Naziv polja kontakta koji sadrži Županiju iz koje su reporteri"
+msgstr "Naziv polja kontakta koji sadrži Općina iz koje su mladi"
 
 msgid "The label of the Contact Field that contains the Ward of reporters"
-msgstr "Naziv za polje kontakta, koje sadrži odjel za reportere"
+msgstr "Naziv za polje kontakta, koje sadrži odjel za mlade"
 
 msgid "The label assigned to U-Reporters that are Male."
-msgstr "Oznaka koja se dodjeljuje reporterima muškog spola."
+msgstr "Oznaka koja se dodjeljuje mladima muškog spola."
 
 msgid "The label assigned to U-Reporters that are Female."
-msgstr "Oznaka koja se dodjeljuje reporterima ženskog spola."
+msgstr "Oznaka koja se dodjeljuje mladima ženskog spola."
 
 msgid "Whether this org should be show on the landing page"
 msgstr "Treba li se ova org prikazati na glavnoj stranici."
@@ -1616,13 +1592,13 @@ msgid "The description of the photos section U-Report homepage"
 msgstr "Opis sekcije za slike na ZABUM voice naslovnoj strani"
 
 msgid "The description of the opinions page"
-msgstr "Opis stranice sa odgovorima"
+msgstr "Opis stranice s odgovorima"
 
 msgid "The description of the stories page"
 msgstr "Opis stranice sa pričama"
 
 msgid "The description of the engagement page"
-msgstr "Opis za stranicu angažmana"
+msgstr "Opis za stranicu sudjelovanja"
 
 msgid "The callout message on the footer engagement section"
 msgstr "Poruka u footeru sekcije aktivnosti"
@@ -1751,7 +1727,7 @@ msgid "12 Months"
 msgstr "12 mjeseci"
 
 msgid "Age"
-msgstr "Godine"
+msgstr "Dobne skupine"
 
 msgid "Location"
 msgstr "Lokacija"
