@@ -275,7 +275,7 @@
         
         - if other_languages_sites
           .block.mt-4.font-bold.mobile-accordion.text-sm.cursor-pointer
-            %i.fas.fa-times(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+            %i.fa.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
             %i.fas.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
             .px-3.whitespace-no-wrap(class="hover:text-gray-750")
               -trans "SELECT LANGUAGE"
@@ -291,7 +291,7 @@
 
 
         .block.mt-4.font-bold.mobile-accordion.text-sm.cursor-pointer
-          %i.fas.fa-times(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
+          %i.fa.closed(style="padding-top:2px" class="ltr:float-left rtl:float-right {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
           %i.fas.fa-caret-down.hidden.open(style="padding-top:4px"  class="ltr:float-left rtl:float-right")
           .px-3.whitespace-no-wrap(class="hover:text-gray-750")
             -trans "SELECT COUNTRY"
