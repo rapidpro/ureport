@@ -6,8 +6,8 @@ from dash.orgs.models import Org
 from smartmin.models import SmartModel
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from django.utils import formats
+from django.utils.translation import ugettext_lazy as _
 
 
 class NewsItem(SmartModel):

@@ -1,12 +1,6 @@
-U-report  
-=========
+# U-Report [![Build Status](https://github.com/rapidpro/ureport/workflows/CI/badge.svg)](https://github.com/rapidpro/ureport/actions?query=workflow%3ACI) [![codecov](https://codecov.io/gh/rapidpro/ureport/branch/master/graph/badge.svg)](https://codecov.io/gh/rapidpro/ureport)
 
-[![Build Status][master-build-image]][travis-ci]
-
-[travis-ci]: https://travis-ci.org/rapidpro/ureport/
-[master-build-image]: https://travis-ci.org/rapidpro/ureport.svg?branch=master
-
-This is the U-report dashboard built on data collected by RapidPro.
+This is the U-Report dashboard built on data collected by RapidPro.
 
 Built for UNICEF by Nyaruka - http://nyaruka.com
 

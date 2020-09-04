@@ -27,15 +27,15 @@
                     - trans "Search"
         - else
           &nbsp;
-      .column.is-pulled-right.is-2
+      .column.is-2(class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %}")
         - block table-buttons
           - if view.add_button
-            %a.button.is-primary.is-pulled-right(href="./create/")
+            %a.button.is-primary(href="./create/" class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %}")
               - trans "Add"
   - block pjax
     #pjax
       .columns
-        .column.is-12
+        .column.is-12.mobile-scroll
           -block pre-table
 
           -block table
@@ -69,13 +69,13 @@
       .column.is-3
         .pagination-text
           - if not paginator or paginator.num_pages <= 1
-            {% blocktrans count counter=object_list|length %}
+            {% blocktrans trimmed count counter=object_list|length %}
   	          {{ counter }} result
   	        {% plural %}
               {{ counter }} results
             {% endblocktrans %}
           -else
-            {% blocktrans with start=page_obj.start_index end=start_obj.end_index count=paginator.count %}
+            {% blocktrans trimmed with start=page_obj.start_index end=start_obj.end_index count=paginator.count %}
           	  Results {{ start }}-{{ end }} of {{ count }}
   	        {% endblocktrans %}
             
@@ -102,17 +102,17 @@
                 -else
                   - if page_obj.number < 5
                     - if page_num < 10
-                      %li
+                      %li.is-hidden-mobile
                         %a.pagination-link(href="{{url_params|safe}}{{order_params|safe}}page={{page_num}}")
                           {{ page_num }}
                 
                   - elif page_num < page_obj.number|add:"5" and page_num > page_obj.number|add:"-5"
-  	                %li
+  	                %li.is-hidden-mobile
                       %a.pagination-link(href="{{url_params|safe}}{{order_params|safe}}page={{page_num}}")
                         {{ page_num }}
 
                   - elif page_obj.number > paginator.num_pages|add:"-5"
-                    %li
+                    %li.is-hidden-mobile
                       %a.pagination-link(href="{{url_params|safe}}{{order_params|safe}}page={{page_num}}")
                         {{ page_num }}
               - if page_obj.has_next

@@ -16,8 +16,19 @@ COMPRESS_ENABLED = True
 EMPTY_SUBDOMAIN_HOST = 'http://ureport.in'
 HOSTNAME = 'ureport.in'
 ALLOWED_HOSTS = ['*']
+
 SESSION_COOKIE_DOMAIN = 'ureport.in'
 SESSION_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_AGE = 10800
+
+SECURE_HSTS_SECONDS = 86400
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
 
 # these guys will get email from sentry
 ADMINS = (
@@ -25,10 +36,10 @@ ADMINS = (
 )
 
 # set the mail settings, we send through gmail
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '${gmail_user}'
-DEFAULT_FROM_EMAIL = '${gmail_user}'
-EMAIL_HOST_PASSWORD = '${gmail_password}'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '${gmail_user}')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', '${gmail_user}')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '${gmail_password}')
 EMAIL_USE_TLS = True
 
 MANAGERS = ADMINS
@@ -39,7 +50,6 @@ INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compa
 # Set your DSN value
 RAVEN_CONFIG = {
     'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
-    'release': '${version}'
 
 }
 
@@ -154,8 +164,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
 # compress arguments
 COMPRESS_CSS_HASHING_METHOD = 'content'
 COMPRESS_OFFLINE = True
-COMPRESS_OFFLINE_CONTEXT = dict(STATIC_URL=STATIC_URL, base_template='frame.html', org=None, debug=False, testing=False)
-
+COMPRESS_OFFLINE_CONTEXT = [
+    dict(STATIC_URL=STATIC_URL, base_template='frame.html', org=None, debug=False, testing=False),
+    dict(STATIC_URL=STATIC_URL, base_template='public_base.html', org=None, debug=False, testing=False)
+]
 
 REDIS_HOST = 'redis-internal.ureport.in'
 

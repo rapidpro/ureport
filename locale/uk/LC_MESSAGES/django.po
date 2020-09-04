@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-08-04 12:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -799,7 +799,44 @@ msgstr ""
 msgid "Backends"
 msgstr ""
 
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 msgid "+ New Poll"
+msgstr ""
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 msgid "Refresh Results"
@@ -977,6 +1014,9 @@ msgstr ""
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
 
+msgid "SELECT LANGUAGE"
+msgstr ""
+
 msgid "SELECT COUNTRY"
 msgstr ""
 
@@ -1072,24 +1112,15 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
 #, python-format
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 
 msgid "Error"
@@ -1408,6 +1439,36 @@ msgstr ""
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr ""
 
+msgid "Category {idx+1}"
+msgstr ""
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr ""
+
+msgid "Display {idx+1}"
+msgstr ""
+
+msgid "The label to display of the category on the public site"
+msgstr ""
+
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr ""
@@ -1593,6 +1654,9 @@ msgstr ""
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr ""
 
+msgid "Other language sites links"
+msgstr ""
+
 msgid "90 Days"
 msgstr "90 днів"
 
@@ -1626,6 +1690,34 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr ""
 
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "                    %(responded)s responded out of %(polled)s polled\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ " %(responded)s відповіли з %(polled)s опитаних"
+#~ msgstr[1] ""
+#~ "\n"
+#~ " %(responded)s відповіли з %(polled)s опитаних"
+#~ msgstr[2] ""
+#~ "\n"
+#~ " %(responded)s відповіли з %(polled)s опитаних"
+#~ msgstr[3] ""
+#~ "\n"
+#~ " %(responded)s відповіли з %(polled)s опитаних"
+
 #~ msgid "View Full Results"
 #~ msgstr "Детальні результати"
 
@@ -1643,12 +1735,3 @@ msgstr ""
 
 #~ msgid "polled"
 #~ msgstr "опитано"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                    %(responded)s responded out of %(polled)s polled\n"
-#~ "                  "
-#~ msgstr ""
-#~ "\n"
-#~ " %(responded)s відповіли з %(polled)s опитаних"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-08-04 12:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -820,8 +820,42 @@ msgstr "НАЙ-НОВИ ИЗВЕСТИЯ"
 msgid "Backends"
 msgstr "Backends"
 
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "+ New Poll"
 msgstr "+Ново допитване"
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "Въпроси в допитването"
+msgstr[1] "Въпроси в допитването"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
 
 msgid "Refresh Results"
 msgstr "Обнови резултатите"
@@ -998,6 +1032,9 @@ msgstr "Експортирай и сподели"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "Искаш ли светът да узнае за това? Изтегли го като изображение, за да го споделиш в социалните мрежи или за да го приложиш в страхотна презентация!"
 
+msgid "SELECT LANGUAGE"
+msgstr ""
+
 msgid "SELECT COUNTRY"
 msgstr "ИЗБЕРЕТЕ ДЪРЖАВА"
 
@@ -1094,30 +1131,34 @@ msgstr ""
 "\n"
 "Сигурни ли сте, че искате да премахнете <strong>%(object)s</strong>?"
 
-#, python-format
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t %(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
 msgstr[0] ""
 "\n"
-"%(counter)sрезултати"
+"\t%(counter)sрезултати \n"
+"\t"
 msgstr[1] ""
 "\n"
-"%(counter)s резултати"
+"%(counter)sброй резултати"
 
-#, python-format
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
-"Резултати %(start)s%(end)s на %(count)s"
+"Резултати %(start)s%(end)sна %(count)s"
 
 msgid "Error"
 msgstr "Грешка"
@@ -1441,6 +1482,42 @@ msgstr "Заглавие"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Въпросът, зададен на вашатата публика, ще бъде показан публично"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Категории"
+
+#, fuzzy
+#| msgid "The label of the ruleset from RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Етикетът на ruleset-а от RapidPro"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site."
+msgid "The label to display of the category on the public site"
+msgstr "Ако има работни места за показване в публичен сайт"
+
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "Планирана актуализация на допитването # %(poll_id)dорганизацията  # %(org_id)d"
@@ -1626,6 +1703,9 @@ msgstr "Шрифт,  който се използва за малък текст
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Ако има нужда да включите персонализирани HTML кодове в страницата на вашата организация - например откъси от такива за персонализиран анализ "
 
+msgid "Other language sites links"
+msgstr ""
+
 msgid "90 Days"
 msgstr "90 дни"
 
@@ -1658,3 +1738,59 @@ msgstr "Дали тази редица е създадена чрез сбива
 
 msgid "Something to trigger localizations"
 msgstr "Нещо, което да задейства локализиране"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "             %(counter)s result\n"
+#~ "           "
+#~ msgid_plural ""
+#~ "\n"
+#~ "              %(counter)s results\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(counter)sрезултати"
+#~ msgstr[1] ""
+#~ "\n"
+#~ "%(counter)s резултати"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "Резултати %(start)s%(end)s на %(count)s"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "             %(counter)s result\n"
+#~| "           "
+#~| msgid_plural ""
+#~| "\n"
+#~| "              %(counter)s results\n"
+#~| "            "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(counter)sрезултати"
+#~ msgstr[1] ""
+#~ "\n"
+#~ "%(counter)s резултати"
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "Въпроси в допитването"

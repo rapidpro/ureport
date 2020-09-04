@@ -84,6 +84,7 @@ LANGUAGES = (
     ("vi", "Vietnamese"),
     ("sr-rs@latin", "Serbian (Latin, Serbia)"),
     ("bg", "Bulgarian"),
+    ("hr-hr", "Croatian"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -144,8 +145,15 @@ MIDDLEWARE = (
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "dash.orgs.middleware.SetOrgMiddleware",
 )
+
+X_FRAME_OPTIONS = "DENY"
+
+SESSION_COOKIE_AGE = 900
+CSRF_COOKIE_AGE = 7200
+
 
 ROOT_URLCONF = "ureport.urls"
 
@@ -825,7 +833,6 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
-    "polls_stats_squash": {"task": "polls.polls_stats_squash", "schedule": timedelta(minutes=10), "relative": True},
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
@@ -868,12 +875,18 @@ CELERYBEAT_SCHEDULE = {
     "refresh-engagement-data": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=2, minute=0),
-        "args": ("ureport.stats.tasks.refresh_engagement_data", "sync"),
+        "args": ("ureport.stats.tasks.refresh_engagement_data", "slow"),
     },
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=4, minute=0),
-        "args": ("ureport.polls.tasks.clear_old_poll_results",),
+        "args": ("ureport.polls.tasks.clear_old_poll_results", "slow"),
+    },
+    "polls_stats_squash": {
+        "task": "polls.polls_stats_squash",
+        "schedule": timedelta(minutes=10),
+        "relative": True,
+        "options": {"queue": "slow"},
     },
 }
 
@@ -1026,6 +1039,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://cotedivoire.ureport.in/count/",
     ),
     dict(
+        name="Croatia",
+        host="//croatia.ureport.in/",
+        flag="flag_croatia.png",
+        is_static=True,
+        count_link="http://croatia.ureport.in/count/",
+    ),
+    dict(
         name="DRC",
         host="//drc.ureport.in/",
         flag="flag_drc.png",
@@ -1157,6 +1177,20 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_kiribati.png",
         is_static=True,
         count_link="http://kiribati.ureport.in/count/",
+    ),
+    dict(
+        name="Lebanon",
+        host="//lebanon.ureport.in/",
+        flag="flag_lebanon.png",
+        is_static=True,
+        count_link="http://lebanon.ureport.in/count/",
+    ),
+    dict(
+        name="Lesotho",
+        host="//les.ureport.in/",
+        flag="flag_lesotho.png",
+        is_static=True,
+        count_link="http://les.ureport.in/count/",
     ),
     dict(
         name="Liberia",
@@ -1297,6 +1331,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_south_africa.png",
         is_static=True,
         count_link="http://sa.ureport.in/count/",
+    ),
+    dict(
+        name="South Asia",
+        host="//southasia.ureport.in",
+        flag="flag_south_asia.png",
+        is_static=True,
+        count_link="http://southasia.ureport.in/count/",
     ),
     dict(
         name="Tanzania",

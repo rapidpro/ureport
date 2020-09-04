@@ -71,6 +71,10 @@ class BoundarySyncer(BaseSyncer):
     prefetch_related = ("backend",)
     local_backend_attr = "backend"
 
+    def fetch_all(self, org):
+        qs = self.model.objects.filter(org=org, backend=self.backend).order_by("-level")
+        return qs
+
     def local_kwargs(self, org, remote):
         geometry = json.dumps(dict())
         if remote.geometry:

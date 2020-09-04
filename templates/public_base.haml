@@ -32,9 +32,9 @@
     %link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css")
 
     // U-Report styles, compress so they cache bust
-    {% compress css %}
-    %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
-    {% endcompress %}
+    -compress css
+      %link(rel="stylesheet" href="{{STATIC_URL}}css/tailwind.css")
+
     :css
       .bg-dark1 {
         {% if org|config:'dark1_color' %}
@@ -426,7 +426,7 @@
   
             - block login
               %li(class="{% if is_rtl_org %}mr-auto{% else %}ml-auto{% endif %}")
-                %a.admin-menu.text-lg(href="{% url 'users.user_profile' request.user.pk %}")
+                %a.admin-menu.text-lg(href="{% org_host_link %}{% url 'users.user_profile' request.user.pk %}")
                   %i.fas.fa-user-circle
   
                 %a.admin-menu.text-lg(href="{% url 'users.user_logout' %}?go=/")
@@ -621,7 +621,7 @@
               %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
                 - trans "Logout"
             -else
-              %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+              %a.flex-initial.py-menu(href="{% org_host_link %}{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
                 - trans "Login"
 
       // bottom yellow bar
