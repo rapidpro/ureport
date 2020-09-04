@@ -23,6 +23,20 @@ html {
 }
 
 
+// languages toggle
+.language-menu {
+  display: inline-block;
+
+  .language-dropdown {
+    display: none;
+  }
+
+  &.open {
+    .language-dropdown {
+      display: block;
+    }
+  }
+}
 
 // countries menu
 #countries {
@@ -645,6 +659,10 @@ html {
 .left-border {
   border-left: 1px solid white;
   padding: .5em 1.25em;
+}
+
+.notuse {
+  color: #000;
 }
 
 @tailwind utilities;

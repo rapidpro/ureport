@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-08-04 12:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -826,8 +826,42 @@ msgstr "সর্বশেষ নটিফিকেশন"
 msgid "Backends"
 msgstr "ব্যাকএন্ড"
 
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "+ New Poll"
 msgstr "+ নতুন পোল"
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "পোল এর প্রশ্নগুলো "
+msgstr[1] "পোল এর প্রশ্নগুলো "
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
 
 msgid "Refresh Results"
 msgstr "ফলাফল রিফ্রেশ করুন"
@@ -1004,6 +1038,9 @@ msgstr "পাঠিয়ে দিন এবং ভাগ করে নিন"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "এর সম্পর্কে পৃথিবীকে জানাতে চান? সামাজিক যোগাযোগ মাধ্যমে খুব সহজে শেয়ার করতে কিংবা দারুন কোন প্রেজেন্টেশন তেরি করতে ছবিটি ডাউনলোড করে নিন! "
 
+msgid "SELECT LANGUAGE"
+msgstr ""
+
 msgid "SELECT COUNTRY"
 msgstr "দেশের নাম বেছে নিন"
 
@@ -1100,15 +1137,17 @@ msgstr ""
 "\n"
 " আপনি নিশ্চিত আপনি বাদ দিতে চান %(object)s?"
 
-#, python-format
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t %(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
 msgstr[0] ""
 "\n"
 "     %(counter)s ফলাফল\n"
@@ -1118,11 +1157,12 @@ msgstr[1] ""
 "     %(counter)s ফলাফল\n"
 "        "
 
-#, python-format
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "\tফলাফল %(start)s-%(end)s / %(count)s\n"
@@ -1452,6 +1492,42 @@ msgstr "শিরোনাম "
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "আপনার শ্রোতা কে করা প্রশ্ন গুলো, জনসমক্ষে দেখানো হবে"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "বিভাগগুলো "
+
+#, fuzzy
+#| msgid "The label of the ruleset from RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "RapidPro এর নিয়মাবলীর লেবেল"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site."
+msgid "The label to display of the category on the public site"
+msgstr "যদি কোন চাকুরী থাকে তাহলে তা পাবলিক সাইটে প্রদর্শিত হবে"
+
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "প্রতিষ্ঠানে %(org_id)d-এ পোল %(poll_id)d-এর একটি pull refresh-এর সময় নির্ধারণ করা হয়েছে"
@@ -1641,6 +1717,9 @@ msgstr "ছোট বার্তার জন্য যে ফন্ট ব্�
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "আপনার প্রতিষ্ঠান এর পেজ এর জন্য যদি কোন বিশেষায়িত এইচ টি এম এল কোড দরকার হয় যেমন বিশেষায়িত বিশ্লেষণ কোড "
 
+msgid "Other language sites links"
+msgstr ""
+
 msgid "90 Days"
 msgstr "৯০ দিন"
 
@@ -1675,6 +1754,68 @@ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে ক�
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "             %(counter)s result\n"
+#~ "           "
+#~ msgid_plural ""
+#~ "\n"
+#~ "              %(counter)s results\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "     %(counter)s ফলাফল\n"
+#~ "        "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "     %(counter)s ফলাফল\n"
+#~ "        "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "\tফলাফল %(start)s-%(end)s / %(count)s\n"
+#~ "\t"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "                  %(questions)s question polled on this topic\n"
+#~| "                "
+#~| msgid_plural ""
+#~| "\n"
+#~| "                  %(questions)s questions polled on this topic\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                এই বিষয়ের উপর %(questions)s  -টি প্রশ্নের জরিপ করা হয়েছে\n"
+#~ "  \n"
+#~ "              "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "                 এই বিষয়ের উপর %(questions)s-টি প্রশ্নের জরিপ করা হয়েছে\n"
+#~ "                "
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "পোল এর প্রশ্নগুলো "
 
 #~ msgid "Polls"
 #~ msgstr "পোল গুলো "
@@ -1864,25 +2005,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "চলতি পোলটি "
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                  %(questions)s question polled on this topic\n"
-#~ "                "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                  %(questions)s questions polled on this topic\n"
-#~ "                "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "                এই বিষয়ের উপর %(questions)s  -টি প্রশ্নের জরিপ করা হয়েছে\n"
-#~ "  \n"
-#~ "              "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "                 এই বিষয়ের উপর %(questions)s-টি প্রশ্নের জরিপ করা হয়েছে\n"
-#~ "                "
 
 #~ msgid "response rate"
 #~ msgstr "উত্তর দেওয়ার হার "

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-08-04 12:22+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: deimidis <guillermo.movia@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -824,8 +824,42 @@ msgstr "NOTIFICACIONES RECIENTES"
 msgid "Backends"
 msgstr "Servicios"
 
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "+ New Poll"
 msgstr "+ Nueva encuesta"
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "Preguntas de la encuesta"
+msgstr[1] "Preguntas de la encuesta"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
 
 msgid "Refresh Results"
 msgstr "Actualizar resultados"
@@ -1002,6 +1036,9 @@ msgstr "Exportar y compartir"
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr "¿Quieres contarle al mundo sobre esto? Descarga esta imagen para ¡compartirla fácilmente en las redes sociales o para una hermosa presentación!"
 
+msgid "SELECT LANGUAGE"
+msgstr ""
+
 msgid "SELECT COUNTRY"
 msgstr "ELIGE PAÍS"
 
@@ -1098,29 +1135,32 @@ msgstr ""
 "\n"
 "¿Estás seguro de querer borrar <strong>%(object)s</strong>?"
 
-#, python-format
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t %(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
 msgstr[0] ""
 "\n"
-"         %(counter)s resultado\n"
+"         %(counter)s resultados\n"
 "        "
 msgstr[1] ""
 "\n"
 "         %(counter)s resultados\n"
 "        "
 
-#, python-format
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "Resultados %(start)s-%(end)s de %(count)s"
@@ -1449,6 +1489,42 @@ msgstr "Título"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "La pregunta planteada a su público, será exhibida públicamente"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Categorías"
+
+#, fuzzy
+#| msgid "The label of the ruleset from RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "La etiqueta del ruleset para RapidPro"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site."
+msgid "The label to display of the category on the public site"
+msgstr "Si hay trabajos para mostrar en el sitio público."
+
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "Fue programada una actualización para la encuesta #%(poll_id)d en la org #%(org_id)d"
@@ -1636,6 +1712,9 @@ msgstr "La tipografía usada para el texto pequeño"
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Si necesitas incluir código HTML personalizado en tu página de org, por ejemplo el código de un analizador de estadísticas"
 
+msgid "Other language sites links"
+msgstr ""
+
 msgid "90 Days"
 msgstr "90 días"
 
@@ -1670,6 +1749,64 @@ msgstr "Si esta historia está destacada"
 
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "             %(counter)s result\n"
+#~ "           "
+#~ msgid_plural ""
+#~ "\n"
+#~ "              %(counter)s results\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "         %(counter)s resultado\n"
+#~ "        "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "         %(counter)s resultados\n"
+#~ "        "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "Resultados %(start)s-%(end)s de %(count)s"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "                  %(questions)s question polled on this topic\n"
+#~| "                "
+#~| msgid_plural ""
+#~| "\n"
+#~| "                  %(questions)s questions polled on this topic\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(questions)s preguntas realizadas en este tema"
+#~ msgstr[1] ""
+#~ "\n"
+#~ "%(questions)s preguntas realizadas en este tema"
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "Preguntas de la encuesta"
 
 #~ msgid "Polls"
 #~ msgstr "Opiniones"
@@ -1859,22 +1996,6 @@ msgstr "Algo para activar las localizaciones "
 
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "ENCUESTA ACTUAL EN"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                  %(questions)s question polled on this topic\n"
-#~ "                "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                  %(questions)s questions polled on this topic\n"
-#~ "                "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(questions)s preguntas realizadas en este tema"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(questions)s preguntas realizadas en este tema"
 
 #~ msgid "response rate"
 #~ msgstr "tasa de respuesta"

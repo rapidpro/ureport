@@ -1,0 +1,56 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    name: Test
+    strategy:
+      matrix:
+        pg-version: ['9.6', '10', '11']
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Install PostgreSQL
+      uses: harmon758/postgresql-action@v1
+      with:
+        postgresql version: ${{ matrix.pg-version }}
+        postgresql db: ureport
+        postgresql user: ureport
+        postgresql password: nyaruka
+
+    - name: Install Redis
+      uses: zhulik/redis-action@v1.0.0
+      with:
+        redis version: '5'
+
+    - name: Install Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.6.x'
+
+    - name: Initialize environment
+      run: |
+        pip install --upgrade pip
+        pip install -r pip-freeze.txt
+        pip install codecov
+        sudo npm install -g coffee-script less
+        ln -s ${{ github.workspace }}/ureport/settings.py.postgres ${{ github.workspace }}/ureport/settings.py
+
+        pip show smartmin | awk '/Location:/ { print $2 "/smartmin  ${{ github.workspace }}/smartmin" }' | xargs ln -s
+        pip show rapidpro-dash | awk '/Location:/ { print $2 "/dash ${{ github.workspace }}/dash" }' | xargs ln -s
+
+    - name: Run pre-test checks
+      run: |
+        sudo apt-get install gettext
+        ./code_check.py --debug
+    - name: Run tests
+      run: |
+        coverage run manage.py test --verbosity=2 --noinput
+        coverage xml
+    - name: Upload coverage
+      if: success()
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: true

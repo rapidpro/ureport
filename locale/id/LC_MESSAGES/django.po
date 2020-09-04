@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-08-04 12:22+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -858,7 +858,39 @@ msgstr "LOKASI"
 msgid "Backends"
 msgstr "Kelola Pengguna"
 
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+
 msgid "+ New Poll"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "Pertanyaan polling"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 #, fuzzy
@@ -1068,6 +1100,9 @@ msgstr ""
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
 
+msgid "SELECT LANGUAGE"
+msgstr ""
+
 msgid "SELECT COUNTRY"
 msgstr ""
 
@@ -1185,14 +1220,8 @@ msgstr ""
 #| "\n"
 #| "         %(counter)s results\n"
 #| "        "
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
 msgstr[0] ""
 "\n"
 "%(counter)s hasil"
@@ -1202,10 +1231,7 @@ msgstr[0] ""
 #| "\n"
 #| "\tResults %(start)s-%(end)s of %(count)s\n"
 #| "\t"
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "⇥Hasil %(start)s-%(end)s of %(count)s\n"
@@ -1565,6 +1591,42 @@ msgstr "Judul"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "Pertanyaan yang diajukan untuk audiens Anda, akan ditampilkan untuk umum"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Kategori"
+
+#, fuzzy
+#| msgid "The label of the ruleset on RapidPro"
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Label aturan ditetapkan pada RapidPro"
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site"
+msgid "The label to display of the category on the public site"
+msgstr "Jika ada pekerjaan yang akan ditampilkan pada situs umum"
+
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, fuzzy, python-format
 #| msgid "Scheduled a pull refresh for poll #%d on org #%d"
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1783,6 +1845,9 @@ msgstr ""
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr "Jika Anda perlu menyertakan beberapa kode HTML di dalam halaman ORG, seperti modifikasi kode analytics"
 
+msgid "Other language sites links"
+msgstr ""
+
 msgid "90 Days"
 msgstr ""
 
@@ -1821,6 +1886,65 @@ msgstr "Cerita ini di tampilkan di halaman depan"
 
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "\t\t%(counter)s result\n"
+#~| "\t"
+#~| msgid_plural ""
+#~| "\n"
+#~| "         %(counter)s results\n"
+#~| "        "
+#~ msgid ""
+#~ "\n"
+#~ "             %(counter)s result\n"
+#~ "           "
+#~ msgid_plural ""
+#~ "\n"
+#~ "              %(counter)s results\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(counter)s hasil"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "\tResults %(start)s-%(end)s of %(count)s\n"
+#~| "\t"
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "⇥Hasil %(start)s-%(end)s of %(count)s\n"
+#~ "⇥"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "                    %(responded)s responded out of %(polled)s polled\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(responded)s direspon dari %(polled)s jajak pendapat"
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "Pertanyaan polling"
 
 #~ msgid "Polls"
 #~ msgstr "Polling"
@@ -2003,23 +2127,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "POLLING TERBARU DI"
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "                    %(responded)s responded out of %(polled)s polled\n"
-#~| "                  "
-#~ msgid ""
-#~ "\n"
-#~ "                  %(questions)s question polled on this topic\n"
-#~ "                "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                  %(questions)s questions polled on this topic\n"
-#~ "                "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(responded)s direspon dari %(polled)s jajak pendapat"
 
 #, fuzzy
 #~| msgid "Response Rate"

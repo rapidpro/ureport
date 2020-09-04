@@ -152,9 +152,6 @@ class PollContextMixin(object):
         org = self.request.org
         context["org"] = org
 
-        context["gender_stats"] = org.get_gender_stats()
-        context["age_stats"] = org.get_age_stats()
-
         context["states"] = sorted(
             [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()],
             key=lambda c: c["name"],
@@ -195,6 +192,10 @@ class PollContextMixin(object):
                     if total_age
                 ]
                 context["locations_stats"] = top_question.get_location_stats()
+
+        if not main_poll or not main_poll.get_questions().first():
+            context["gender_stats"] = org.get_gender_stats()
+            context["age_stats"] = org.get_age_stats()
 
         context["categories"] = (
             Category.objects.filter(org=org, is_active=True)
@@ -281,6 +282,7 @@ class StoryReadView(SmartReadView):
 
 class ReportersResultsView(SmartReadView):
     model = Org
+    http_method_names = ["get"]
 
     def get_object(self):
         return self.request.org
@@ -297,6 +299,7 @@ class ReportersResultsView(SmartReadView):
 
 class EngagementDataView(SmartReadView):
     model = Org
+    http_method_names = ["get"]
 
     def get_object(self):
         return self.request.org
@@ -318,6 +321,7 @@ class EngagementDataView(SmartReadView):
 
 class UreportersView(SmartTemplateView):
     template_name = "public/ureporters.html"
+    http_method_names = ["get"]
 
     def get_context_data(self, **kwargs):
         context = super(UreportersView, self).get_context_data(**kwargs)
@@ -403,6 +407,11 @@ class BoundaryView(SmartTemplateView):
 
         if org.get_config("common.is_global"):
             location_boundaries = org.boundaries.filter(level=0)
+            limit_states = org.get_config("common.limit_states")
+            if limit_states:
+                limit_states = [elt.strip() for elt in limit_states.split(",")]
+                location_boundaries = location_boundaries.filter(osm_id__in=limit_states)
+
         else:
             osm_id = self.kwargs.get("osm_id", None)
 

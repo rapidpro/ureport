@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 18:53+0000\n"
+"POT-Creation-Date: 2020-08-04 12:22+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -824,7 +824,41 @@ msgstr "LOCALIZAÇÕES"
 msgid "Backends"
 msgstr "Gerir utilizadores"
 
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "+ New Poll"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "Perguntas do Inquérito"
+msgstr[1] "Perguntas do Inquérito"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 #, fuzzy
@@ -1034,6 +1068,9 @@ msgstr ""
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
 msgstr ""
 
+msgid "SELECT LANGUAGE"
+msgstr ""
+
 msgid "SELECT COUNTRY"
 msgstr ""
 
@@ -1142,27 +1179,19 @@ msgstr ""
 "\n"
 "Tens a certeza que desejas remover <b>%(object)s</b>?"
 
-#, python-format
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
-msgstr[0] ""
-msgstr[1] ""
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] "Perguntas do Inquérito"
+msgstr[1] "Perguntas do Inquérito"
 
 #, fuzzy, python-format
 #| msgid ""
 #| "\n"
 #| "\tResults %(start)s-%(end)s of %(count)s\n"
 #| "\t"
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "⇥Resultados %(start)s-%(end)s de %(count)s"
@@ -1495,6 +1524,40 @@ msgstr "Título"
 msgid "The question posed to your audience, will be displayed publicly"
 msgstr "A pergunta feita a tua audiência, será mostrada publicamente"
 
+#, fuzzy
+#| msgid "Categories"
+msgid "Category {idx+1}"
+msgstr "Categorias"
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr ""
+
+msgid "Display {idx+1}"
+msgstr ""
+
+#, fuzzy
+#| msgid "If there are jobs to be shown on the public site"
+msgid "The label to display of the category on the public site"
+msgstr "Se existem vagas de emprego a serem visualizados no site público"
+
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr ""
@@ -1708,6 +1771,9 @@ msgstr ""
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
 msgstr ""
 
+msgid "Other language sites links"
+msgstr ""
+
 msgid "90 Days"
 msgstr ""
 
@@ -1746,6 +1812,46 @@ msgstr "Se esta história é selecionada"
 
 msgid "Something to trigger localizations"
 msgstr ""
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "\tResults %(start)s-%(end)s of %(count)s\n"
+#~| "\t"
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "⇥Resultados %(start)s-%(end)s de %(count)s"
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "\n"
+#~| "                    %(responded)s responded out of %(polled)s polled\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(responded)s responderam dos %(polled)s alcançados"
+#~ msgstr[1] ""
+#~ "\n"
+#~ "%(responded)s responderam dos %(polled)s alcançados"
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "Perguntas do Inquérito"
 
 #~ msgid "Polls"
 #~ msgstr "Inquéritos"
@@ -1927,15 +2033,6 @@ msgstr ""
 
 #~ msgid "POLL RESULTS"
 #~ msgstr "RESULTADOS DOS INQUÉRITOS"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                    %(responded)s responded out of %(polled)s polled\n"
-#~ "                  "
-#~ msgstr ""
-#~ "\n"
-#~ "%(responded)s responderam dos %(polled)s alcançados"
 
 #~ msgid "KEYWORDS"
 #~ msgstr "PALAVRAS-CHAVES"

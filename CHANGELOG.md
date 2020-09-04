@@ -1,3 +1,163 @@
+v1.1.177
+----------
+ * Merge pull request #620 from rapidpro/update-cache-for-polls-no-longer-syncing
+ * Update cache for results for poll stopped syncing, reduce number we call slow queries
+ * Merge pull request #618 from Ilhasoft/feature/add-croatian-flag
+ * fix the white space
+ * add Croatia flag
+
+v1.1.176
+----------
+ * Increase session age
+
+v1.1.175
+----------
+ * Adjust SECURE HSTS SECONDS
+
+v1.1.174
+----------
+ * Merge pull request #617 from rapidpro/adjust-hsts-time
+ * Adjust SECURE HSTS SECONDS
+
+v1.1.173
+----------
+ * Fix typo
+
+v1.1.172
+----------
+ * Merge pull request #615 from rapidpro/poll-list
+ * Add sync schedule on opinions admin list
+ * Merge pull request #616 from rapidpro/update-cssnano
+ * Update cssnano to fix dot-prop vurnerable version
+ * Merge pull request #614 from rapidpro/dependabot/npm_and_yarn/elliptic-6.5.3
+ * Bump elliptic from 6.5.2 to 6.5.3
+ * Merge pull request #612 from rapidpro/translations_django-po--master_hr_HR
+ * Run code check
+ * Apply translations in hr_HR
+
+v1.1.171
+----------
+ * Merge pull request #608 from rapidpro/increase-recent-polls-window
+ * Merge pull request #607 from Ilhasoft/feature/add-croatian-language
+ * fix correct path for croatian language
+ * Merge branch 'master' of https://github.com/rapidpro/ureport into feature/add-croatian-language
+ * Add HR mo file
+ * Merge branch 'master' of github.com:rapidpro/ureport into increase-recent-polls-window
+ * Merge pull request #609 from rapidpro/dependabot/npm_and_yarn/lodash-4.17.19
+ * Merge pull request #606 from rapidpro/translations_django-po--master_hr_HR
+ * Bump lodash from 4.17.15 to 4.17.19
+ * Increase recent polls window to 45 days
+ * Enable croatian language
+ * Apply translations in hr_HR
+ * Apply translations in hr_HR
+
+v1.1.170
+----------
+ * Merge pull request #605 from rapidpro/clear-old-results-with-lock-key
+ * Grab lock before clearing old results so we do not interfere with ongoing sync
+
+v1.1.169
+----------
+ * Merge pull request #604 from rapidpro/fix-bug-rebuilding-polls-stats
+ * Merge pull request #603 from rapidpro/recalculate-stats
+ * Only update stats for polls that are not stopped syncing
+ * Trigger update results cache in a task when a poll questions are updated
+
+v1.1.168
+----------
+ * Merge pull request #601 from rapidpro/update-sec
+
+v1.1.163
+----------
+ * Merge pull request #600 from rapidpro/add-south-asia
+ * Add South Asia flag
+
+v1.1.162
+----------
+ * Merge pull request #599 from rapidpro/limit-global-map
+ * Add config to limit countries on World map
+
+v1.1.161
+----------
+ * Merge pull request #598 from rapidpro/fix-image-size
+ * Adjust about image size
+
+v1.1.160
+----------
+ * Merge pull request #597 from rapidpro/fix-arabic-design
+ * Adjustments for RTL design on admin site
+
+v1.1.159
+----------
+ * Merge pull request #596 from rapidpro/LB-flag
+ * Add Lebanon flag
+
+v1.1.158
+----------
+ * Merge pull request #593 from Ilhasoft/feature/create-contact
+ * Removed unique from the uuid field of the contact model
+
+v1.1.157
+----------
+ * Merge pull request #595 from rapidpro/update-django
+ * Update django
+
+v1.1.156
+----------
+ * Merge pull request #592 from rapidpro/update-settings
+ * Update settings
+ * Update README.md
+ * Update CI badges
+ * Merge pull request #590 from rapidpro/update-CI
+ * Update CI, add code_check and format code
+ * Merge branch 'master' of github.com:rapidpro/ureport
+ * Update CHANGELOG.md for v1.1.155
+
+v1.1.155
+----------
+ * Merge pull request #591 from rapidpro/order-categories
+ * Reorder the categories
+
+v1.1.154
+----------
+ * Merge pull request #589 from rapidpro/slow-queue
+ * Add slow queue, fix django compressor offline context
+
+v1.1.153
+----------
+ * Better message
+ * Hide multiple pages for mobile
+ * Improve mobile site
+ * Remove unused method
+ * Add migration file
+ * Fix the location and age segmentation
+ * Add a way to configure the display of the category for poll questions
+ * Show clear feedback to admin on polls being synced
+
+v1.1.152
+----------
+ * Merge pull request #583 from rapidpro/fix-locations-sync
+ * Merge pull request #584 from Ilhasoft/feature/add-lesotho
+ * add lesotho to ureport
+ * Add ordering so we can delete to update the locations boundaries without constraint
+
+v1.1.151
+----------
+ * Merge pull request #581 from rapidpro/move-task-queues
+ * Move task queues
+
+v1.1.150
+----------
+ * Merge pull request #580 from Ilhasoft/hotfix/fix-size-bulgaria-flag
+ * Remove overflow style
+ * fix size bulgaria flag
+
+v1.1.149
+----------
+ * Merge pull request #579 from rapidpro/other-lang-sites
+ * Include current site with a check mark
+ * Add a way to link sites as connected sites in a different language
+
 v1.1.148
 ----------
  * Rebuild locale
