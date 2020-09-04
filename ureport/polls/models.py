@@ -312,14 +312,18 @@ class Poll(SmartModel):
 
         start = time.time()
 
-        if self.stopped_syncing:
-            logger.info("Poll stopped regenating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
-            return
-
         poll_id = self.pk
         org_id = self.org_id
         flow = self.flow_uuid
         poll_year = self.poll_date.year
+
+        if self.stopped_syncing:
+            flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=True)
+            for flow_poll in flow_polls:
+                flow_poll.update_questions_results_cache()
+
+            logger.info("Poll stopped regenating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
+            return
 
         r = get_redis_connection()
 
@@ -521,7 +525,7 @@ class Poll(SmartModel):
     @classmethod
     def get_recent_polls(cls, org):
         now = timezone.now()
-        recent_window = now - timedelta(days=7)
+        recent_window = now - timedelta(days=45)
         main_poll = Poll.get_main_poll(org)
 
         recent_other_polls = Poll.get_public_polls(org)

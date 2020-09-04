@@ -69,13 +69,13 @@
       .column.is-3
         .pagination-text
           - if not paginator or paginator.num_pages <= 1
-            {% blocktrans count counter=object_list|length %}
+            {% blocktrans trimmed count counter=object_list|length %}
   	          {{ counter }} result
   	        {% plural %}
               {{ counter }} results
             {% endblocktrans %}
           -else
-            {% blocktrans with start=page_obj.start_index end=start_obj.end_index count=paginator.count %}
+            {% blocktrans trimmed with start=page_obj.start_index end=start_obj.end_index count=paginator.count %}
           	  Results {{ start }}-{{ end }} of {{ count }}
   	        {% endblocktrans %}
             
