@@ -37,13 +37,13 @@
       .flex-none
         .share
           %a.mb-2.bg-circle-xs.border.border-black.facebook-share(href="#" data-url="{% org_host_link %}{% url 'public.story_read' story.pk %}")
-            %i.fa.fa-facebook
+            %i.fab.fa-facebook-f
           %a.mb-2.block.bg-circle-xs.border.border-black(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.story_read' story.pk %}")
-            %i.fa.fa-twitter
+            %i.fab.fa-twitter
           %a.mb-2.block.bg-circle-xs.border.border-black(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.story_read' story.pk %}")
-            %i.fa.fa-whatsapp
+            %i.fab.fa-whatsapp
           %a.mb-2.block.bg-circle-xs.border.border-black(href="mailto:?subject=Check out {{ story.title|urlencode:\"\" }} results&amp;body={% url 'public.story_read' story.pk %}" uk-icon="icon: mail; ratio: 1.5")
-            %i.fa.fa-envelope
+            %i.fas.fa-envelope
 
       .flex-auto.px-home.story-content.hover-parent
         {% edit_content 'stories.story_update' story.pk "#id_content" "-m-8" "dark" %}
