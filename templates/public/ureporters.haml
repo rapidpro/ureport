@@ -71,7 +71,7 @@
             #ureporter-map.h-full.w-full.map.block(data-map-url="/contact_field_results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
               .flex.text-center.h-full.w-full(id="poll-map-placeholder" style="min-height:300px;min-width:300px;")
                 .fa-3x.inline-block.m-auto.self-center
-                  %i.fa.fa-spinner.fa-spin
+                  %i.fas.fa-spinner.fa-spin
             #map-info.relative.h-full.w-full.mt-2.flex.justify-center
   
   .border-t.border-b.bg-dark-gray.sticky.z-480.border-gray-600(class="{% if request.user.is_authenticated and request.org in request.user.get_user_orgs or request.user.is_superuser %}top-45{% else %}top-0{% endif %}")
@@ -104,14 +104,14 @@
                       - if show_maps
                         %a.pill-dark-blue-inverted.segment-pill.state-pill.relative.whitespace-no-wrap(href="#" class="{% if is_rtl_org %}pill-first{% else %}pill-last{% endif %}" data-page="engagement" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-graph-id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}")>
                           {{segment.label|upper}}
-                          %i.fa.fa-caret-down
+                          %i.fas.fa-caret-down
                           .state-dropdown.absolute.z-50(id="location-pill-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" style="margin-left:-1px" data-html2canvas-ignore=true)
                             .border.border-gray-400.bg-white.h-64(style="overflow-y:scroll;margin-top:.5rem;margin-left:-1rem;" class="ltr:text-left rtl:text-right")
                               .pt-1.text-black
                                 - for state in states
                                   .py-1.state-segment(data-state='{{state.id}}' class="ltr:pl-2 ltr:pr-4 rtl:pr-2 rtl:pl-4  hover:bg-gray-200 {% if forloop.counter0 < 3 %}selected{% endif %}" data-page="engagement"  data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}")>
                                     .checkbox(class="ltr:float-left rtl:float-right")
-                                      %i.fa.fa-check
+                                      %i.fas.fa-check
                                     .whitespace-no-wrap(class="ltr:ml-4 rtl:mr-4")
                                       {{ state.name }}
                       - else
@@ -125,15 +125,15 @@
                 .share.flex-none.mb-4.flex-center-y.hover-show
                   .block
                     %a.cursor-pointer.bg-circle-xs.border.border-white.text-white.facebook-share(data-url="{% org_host_link %}{% url 'public.engagement' %}")
-                      %i.fa.fa-facebook
+                      %i.fab.fa-facebook-f
                     %a.bg-circle-xs.border.border-white.text-white(href="https://twitter.com/intent/tweet?url={% org_host_link %}{% url 'public.engagement' %}")
-                      %i.fa.fa-twitter
+                      %i.fab.fa-twitter
                     %a.bg-circle-xs.border.border-white.text-white(href="https://api.whatsapp.com/send?text={% org_host_link %}{% url 'public.engagement' %}")
-                      %i.fa.fa-whatsapp
+                      %i.fab.fa-whatsapp
                     %a.bg-circle-xs.border.border-white.text-white(href="mailto:?subject=Check out {{ poll.title|urlencode:\"\" }} results&amp;body=Check out the results for U-Report poll on {% org_host_link %}{% url 'public.engagement'  %}" uk-icon="icon: mail; ratio: 1.5")
-                      %i.fa.fa-envelope
+                      %i.fas.fa-envelope
                     %a.cursor-pointer.bg-circle-xs.border.border-white.text-white.screenshot-share(data-screen-id="graph-block-{{metric.slug}}-{{time_filter.time_filter_number}}")
-                      %i.fa.fa-file-image-o
+                      %i.fas.fa-file-image
   
               .block(class="md:w-3/5")
                 .engagement-graph-tabs(id="graph-tabs-{{metric.slug}}-{{time_filter.time_filter_number}}")
@@ -142,4 +142,4 @@
                       .engagement-chart.has-graph(id="engagement-graph-{{metric.slug}}-{{segment.segment_type}}-{{time_filter.time_filter_number}}" data-metric-slug="{{metric.slug}}" data-segment-type="{{segment.segment_type}}" data-time-filter="{{time_filter.time_filter_number}}" data-page="engagement")
                         .chart-progress.flex.text-center.w-full.h-full
                           .fa-5x.inline-block.m-auto.self-center
-                            %i.fa.fa-spinner.fa-spin
+                            %i.fas.fa-spinner.fa-spin
