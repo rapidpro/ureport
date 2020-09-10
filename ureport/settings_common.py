@@ -85,6 +85,7 @@ LANGUAGES = (
     ("sr-rs@latin", "Serbian (Latin, Serbia)"),
     ("bg", "Bulgarian"),
     ("hr-hr", "Croatian"),
+    ("no", "Norwegian"),
 )
 
 DEFAULT_LANGUAGE = "en"
