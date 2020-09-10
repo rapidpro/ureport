@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-04 12:22+0000\n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1684,6 +1684,11 @@ msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "teks singkat yang digunakan untuk mengarahkan pengunjung untuk bergabung U-Report"
 
@@ -1887,7 +1892,7 @@ msgstr "Cerita ini di tampilkan di halaman depan"
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "\t\t%(counter)s result\n"
@@ -1908,7 +1913,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ "\n"
 #~ "%(counter)s hasil"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1922,7 +1927,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ "⇥Hasil %(start)s-%(end)s of %(count)s\n"
 #~ "⇥"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
@@ -1989,7 +1994,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Berpartisipasi dalam kampanye nasional untuk membantu berkembangnya negara Anda"
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Bagi apa yang terjadi di sekitar %(country)s dengan U-Reporters lainnya"
 
@@ -2036,7 +2040,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Most responded"
 #~ msgstr "Respon paling banyak"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
@@ -2107,7 +2111,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "CARA BERGABUNG"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -2141,7 +2145,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "POLL RESULTS"
 #~ msgstr "HASIL POLLING"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"
@@ -2231,28 +2234,25 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Featured Poll Responses"
 #~ msgstr "Fitur Tanggapan Jajak Pendapat"
 
-#, python-format
 #~ msgid "Response %d Reporter"
 #~ msgstr "Tanggapan %d UReporter"
 
 #~ msgid "The name or alias of the responder."
 #~ msgstr "Nama atau alias dari responden tersebut."
 
-#, python-format
 #~ msgid "Response %d Location"
 #~ msgstr "Tanggapan %d Lokasi"
 
 #~ msgid "The location of the responder."
 #~ msgstr "Lokasi responden"
 
-#, python-format
 #~ msgid "Response %d Message"
 #~ msgstr "Tanggapan %d Pesan"
 
 #~ msgid "The text of the featured response."
 #~ msgstr "Respon unggulan"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"

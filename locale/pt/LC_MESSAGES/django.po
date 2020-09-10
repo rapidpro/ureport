@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-04 12:22+0000\n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -1612,6 +1612,11 @@ msgstr "O código curto que os utilizadores usarão para contactar a nível loca
 msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgstr "O código curto que os utilizadores usarão para contactar a nível local o SMS BIZ"
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "O código curto que os utilizadores usarão para contactar a nível local o SMS BIZ"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "O texto curto usado para direcionar os visitantes para se juntar ao SMS BIZ"
 
@@ -1813,7 +1818,7 @@ msgstr "Se esta história é selecionada"
 msgid "Something to trigger localizations"
 msgstr ""
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1826,7 +1831,7 @@ msgstr ""
 #~ "\n"
 #~ "⇥Resultados %(start)s-%(end)s de %(count)s"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
@@ -1888,7 +1893,6 @@ msgstr ""
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Porque é seguro e confidencial."
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr ""
 #~ "Porque fornece informação credível acerca da saúde sexual e reprodutiva, de forma aberta e sem nenhum tipo de discriminação ou tabus.\n"
@@ -1927,7 +1931,6 @@ msgstr ""
 #~ msgid "Most responded"
 #~ msgstr "A maioria respondeu"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -2115,28 +2118,25 @@ msgstr ""
 #~ msgid "Featured Poll Responses"
 #~ msgstr "Respostas do Inquérito selecionado "
 
-#, python-format
 #~ msgid "Response %d Reporter"
 #~ msgstr "Resposta %d do brada SMS BIZ"
 
 #~ msgid "The name or alias of the responder."
 #~ msgstr "O nome ou alcunha da pessoa que responde."
 
-#, python-format
 #~ msgid "Response %d Location"
 #~ msgstr "Resposta %d Localização"
 
 #~ msgid "The location of the responder."
 #~ msgstr "A localização da pessoa que responde."
 
-#, python-format
 #~ msgid "Response %d Message"
 #~ msgstr "Resposta %d Mensagem"
 
 #~ msgid "The text of the featured response."
 #~ msgstr "O texto da resposta selecionada."
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
