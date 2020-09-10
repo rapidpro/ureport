@@ -6,13 +6,12 @@
 # Translators:
 # Marijana Muhic <mmuhic@unicef.org>, 2020
 # Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020
-
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-04 12:22+0000\n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -833,22 +832,11 @@ msgid "Backends"
 msgstr "Pozadine"
 
 #, python-format
-msgid ""
-"There is currently %(counter)s new poll syncing. Polls are displayed on the "
-"public site once they have completely synced their results."
-msgid_plural ""
-"There are currently %(counter)s new polls syncing. Polls are displayed on "
-"the public site once they have completely synced their results."
-msgstr[0] ""
-"Trenutno se sinkronizira %(counter)s novih anketa. Ankete se prikazuju na "
-"web stranici nakon sinkronizacije rezultata."
-msgstr[1] ""
-" Trenutno se sinkronizira %(counter)s novih anketa. Ankete se prikazuju na "
-"web stranici nakon sinkronizacije rezultata."
-msgstr[2] ""
-"Trenutno se sinkronizira %(counter)s  novih anketa. Ankete se prikazuju na "
-"web stranici nakon sinkronizacije rezultata."
-
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] "Trenutno se sinkronizira %(counter)s novih anketa. Ankete se prikazuju na web stranici nakon sinkronizacije rezultata."
+msgstr[1] " Trenutno se sinkronizira %(counter)s novih anketa. Ankete se prikazuju na web stranici nakon sinkronizacije rezultata."
+msgstr[2] "Trenutno se sinkronizira %(counter)s  novih anketa. Ankete se prikazuju na web stranici nakon sinkronizacije rezultata."
 
 msgid "+ New Poll"
 msgstr "+ Nova anketa"
@@ -880,7 +868,6 @@ msgstr "Ne sinkronizira se, neaktivno"
 
 msgid "Not scheduling syncs, no flow for poll"
 msgstr "Ne planira sinkronizaciju, nema flowa za anketu"
-
 
 msgid "Refresh Results"
 msgstr "Osvježi rezultate"
@@ -1523,7 +1510,6 @@ msgstr "Sinkronizacija u tijeku... {sync_progress:.1f}%"
 msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
 msgstr "Uređivanje ankete za flow[{flow_name} ({flow_date_hint})]"
 
-
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "Rasporedjeno ažuriranje anketa #%(poll_id)d na org #%(org_id)d"
@@ -1535,21 +1521,16 @@ msgstr "%s"
 msgid "The name of the Contact Group that contains registered reporters"
 msgstr "Naziv kontakt grupe sa registriranim mladima"
 
-msgid ""
-"The label of the Contact Field that contains the birth date of reporters"
+msgid "The label of the Contact Field that contains the birth date of reporters"
 msgstr "Naziv polja kontakta koji sadrži datum rodjenja mladih"
-
 
 msgid "The label of the Contact Field that contains the gender of reporters"
 msgstr "Naziv polja kontakta koji sadrži spol mladih"
 
-msgid ""
-"The label of the Contact Field that contains the occupation of reporters"
+msgid "The label of the Contact Field that contains the occupation of reporters"
 msgstr "Naziv polja kontakta koji sadrži zanimanje mladih"
 
-msgid ""
-"The label of the Contact Field that contains the registration date of "
-"reporters"
+msgid "The label of the Contact Field that contains the registration date of reporters"
 msgstr "Naziv polja kontakta koji sadrži datum registracije mladih"
 
 msgid "The label of the Contact Field that contains the State of reporters"
@@ -1577,6 +1558,11 @@ msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju ZABUM voice lokalno"
 
 msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "Whatsapp broj koji će korisnici koristiti da kontaktiraju ZABUM voice ako ga imamo"
+
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Whatsapp broj koji će korisnici koristiti da kontaktiraju ZABUM voice ako ga imamo"
 
 msgid "The short text used to direct visitors to join U-Report"
@@ -1750,7 +1736,6 @@ msgstr "Je li priča objavljena"
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "             %(counter)s result\n"
@@ -1772,7 +1757,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "              %(counter)s rezultati\n"
 #~ "            "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "             Results %(start)s-%(end)s of %(count)s\n"
@@ -1782,7 +1766,7 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ "             Rezultati %(start)s-%(end)s of %(count)s\n"
 #~ "           "
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "             %(counter)s result\n"
