@@ -96,10 +96,10 @@
             .flex.justify-center.social-media-block-tabs.mb-8.mt-4
               -if org|config:"facebook_page_url"
                 %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab.mr-2(class='hover:text-white hover:bg-black {% if org|config:"twitter_handle" %}open{% endif %}' target="_blank")
-                  %i.fa.fa-facebook
+                  %i.fab.fa-facebook-f
               -if org|config:"twitter_handle"
                 %a.cursor-pointer.bg-circle-xs.border.border-black.social-media-block-tab(class="hover:text-white hover:bg-black" target="_blank")
-                  %i.fa.fa-twitter
+                  %i.fab.fa-twitter
 
             .flex.justify-center.relative.social-media-blocks.mb-4(style="min-height:400px; max-height:450px")
               -if org|config:"facebook_page_url"

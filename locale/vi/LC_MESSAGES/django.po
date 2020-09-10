@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-04 12:22+0000\n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -1677,6 +1677,11 @@ msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-
 msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
 
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Văn bản ngắn sử dụng để hướng khách truy cập tham gia U-Report"
 
@@ -1878,7 +1883,7 @@ msgstr "Câu chuyện này có nổi bật hay không"
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "\t\t%(counter)s result\n"
@@ -1899,7 +1904,7 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~ "\n"
 #~ "%(counter)s kết quả"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "\tResults %(start)s-%(end)s of %(count)s\n"
@@ -1912,7 +1917,7 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~ "\n"
 #~ "\t Kết quả %(start)s-%(end)s trong số %(count)s"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                  %(questions)s question polled on this topic\n"
@@ -1981,7 +1986,6 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Tham gia vào các chiến dịch toàn quốc để giúp cải thiện đất nước bạn"
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Chia sẻ những gì đang xảy ra xung quanh %(country)s với U-Reporters"
 
@@ -2031,7 +2035,6 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~ msgid "Most responded"
 #~ msgstr "Phản hồi nhiều nhất"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -2115,7 +2118,7 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "CÁCH THAM GIA"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -2151,7 +2154,6 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~ msgid "POLL RESULTS"
 #~ msgstr "KẾT QUẢ KHẢO SÁT"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"
@@ -2241,28 +2243,25 @@ msgstr "Một số thứ để thể hiện tính địa phương"
 #~ msgid "Featured Poll Responses"
 #~ msgstr "Phản hồi khảo sát nổi bật"
 
-#, python-format
 #~ msgid "Response %d Reporter"
 #~ msgstr "Phản hồi %d phóng viên"
 
 #~ msgid "The name or alias of the responder."
 #~ msgstr "Tên hoặc bí danh của người trả lời"
 
-#, python-format
 #~ msgid "Response %d Location"
 #~ msgstr "Phản hồi %d Địa phương"
 
 #~ msgid "The location of the responder."
 #~ msgstr "Địa phương của phóng viên."
 
-#, python-format
 #~ msgid "Response %d Message"
 #~ msgstr "Phản hồi %d Tin nhắn"
 
 #~ msgid "The text of the featured response."
 #~ msgstr "Văn bản của phản hồi nổi bật."
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"

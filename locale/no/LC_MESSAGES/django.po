@@ -4,8 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Nyaruka <info@textit.in>, 2019
-# Sandar Linn <slinn@unicef.org>, 2019
+# Cathrine Standal <cathrinestandal@gmail.com>, 2020
 #
 #, fuzzy
 msgid ""
@@ -14,275 +13,275 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
-"Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
-"Language: my\n"
+"Last-Translator: Cathrine Standal <cathrinestandal@gmail.com>, 2020\n"
+"Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
+"Language: no\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "The name of this category"
-msgstr ""
+msgstr "Navnet på denne kategorien"
 
 msgid "An optional image that can describe this category"
-msgstr ""
+msgstr "Et valgfritt bilde som kan beskrive denne kategorien"
 
 msgid "The organization this category applies to"
-msgstr "he organization this category applies to"
+msgstr "Organisasjonen som tilhører denne kategorien"
 
 msgid "Categories"
-msgstr "Categories"
+msgstr "Kategorier"
 
 msgid "The name to describe this image"
-msgstr "The name to describe this image"
+msgstr "Navnet som beskriver dette bildet"
 
 msgid "The category this image represents"
-msgstr ""
+msgstr "Kategorien dette bildet representerer"
 
 msgid "The image file to use"
-msgstr "The image file to use"
+msgstr "Bildefilen som skal benyttes"
 
 msgid "The human readable name for this content type"
-msgstr ""
+msgstr "Det menneskelige lesbare navnet for denne innholdstypen"
 
 msgid "The slug to idenfity this content type, used with the template tags"
-msgstr ""
+msgstr "URL-kode til å identifisere denne innholdstypen, brukt sammen med template tags"
 
 msgid "A description of where this content type is used on the site and how it will be dsiplayed"
-msgstr ""
+msgstr "En beskrivelse av hvor denne innholdstypen er brukt på siden, og hvordan det vil se ut"
 
 msgid "Whether this content should include a title"
-msgstr ""
+msgstr "Innholdet skal ha en tittel"
 
 msgid "Whether this content should include an image"
-msgstr ""
+msgstr "Innholdet skal ha et bilde"
 
 msgid "Whether this content should use a rich HTML editor"
-msgstr ""
+msgstr "Innholdet skal bruke et avansert HTML program"
 
 msgid "Whether this content should include a summary field"
-msgstr ""
+msgstr "Innholdet skal ha et oppsummeringsfelt"
 
 msgid "Whether this content should include a link"
-msgstr ""
+msgstr "Innholdet skal ha en lenke"
 
 msgid "Whether this content should allow upload of additional images, ie a gallery"
-msgstr ""
+msgstr "Innholdet kan tillate opplasting av bilder"
 
 msgid "Whether this content has a color field"
-msgstr ""
+msgstr "Innholdet har et fargefelt"
 
 msgid "Whether this content should allow setting a YouTube id"
-msgstr ""
+msgstr "Innholdet tillater å sette inn YouTube id"
 
 msgid "Whether this content should allow tags"
-msgstr ""
+msgstr "Innholdet tillater emneknagger"
 
 msgid "Content Type"
-msgstr ""
+msgstr "Innholdstype"
 
 msgid "The category, or type for this content block"
-msgstr ""
+msgstr "Kategorien, eller formatet på dette innholdet"
 
 msgid "The title for this block of content, optional"
-msgstr ""
+msgstr "Tittel for denne innholdsblokken, valgfritt"
 
 msgid "The summary for this item, should be short"
-msgstr ""
+msgstr "Et sammendrag til dette punktet, burde være kort"
 
 msgid "The body of text for this content block, optional"
-msgstr ""
+msgstr "Brødtekst for denne innholdsblokken, valgfritt"
 
 msgid "Any image that should be displayed with this content block, optional"
-msgstr ""
+msgstr "Et bilde som skal vises sammen med denne innholdsblokken, valgfritt"
 
 msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr ""
+msgstr "Bruk en bakgrunnsfarge som bilde, i formatet: #rrggbb"
 
 msgid "Any link that should be associated with this content block, optional"
-msgstr ""
+msgstr "En lenke som skal benyttes sammen med denne innholdsblokken, valgfritt"
 
 msgid "The id of the YouTube video that should be linked to this item"
-msgstr "The id of the YouTube video that should be linked to this item"
+msgstr "Id til YouTube-videoen som tilhører dette innholdet"
 
 msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr ""
+msgstr "Emneknagger for denne innholdsblokken, separert med mellomrom, kan brukes til mer avansert filtrering, valgfritt"
 
 msgid "The priority for this block, higher priority blocks come first"
-msgstr ""
+msgstr "Prioriteringen av denne innholdsblokken, høyest prioritet vises først "
 
 msgid "The organization this content block belongs to"
-msgstr ""
+msgstr "Organisasjonen denne innholdsblokken tilhører"
 
 msgid "Gallery"
-msgstr "Gallery"
+msgstr "Galleri"
 
 msgid "Add Image"
-msgstr "Add Image"
+msgstr "Legg til bilde"
 
 msgid "Search"
-msgstr "Search"
+msgstr "Søk"
 
 msgid "Add"
-msgstr "Add"
+msgstr "Legg til"
 
 msgid "Content Types"
-msgstr "Content Types"
+msgstr "Innholdstyper"
 
 msgid "Content Blocks"
-msgstr ""
+msgstr "Innholdsblokker"
 
 #, python-format
 msgid "%s Blocks"
-msgstr ""
+msgstr "%s Blokker"
 
 #, python-format
 msgid "Edit %s"
-msgstr ""
+msgstr "Rediger %s "
 
 #, python-format
 msgid "Create %s"
-msgstr ""
+msgstr "%s Opprett"
 
 msgid "Create Content Block"
-msgstr ""
+msgstr "Lag innholdsblokk"
 
 msgid "Your first name"
-msgstr ""
+msgstr "Fornavn"
 
 msgid "Your last name"
-msgstr ""
+msgstr "Etternavn"
 
 msgid "Your email address"
-msgstr ""
+msgstr "E-post"
 
 msgid "Your password, at least eight letters please"
-msgstr ""
+msgstr "Ditt passord, minst åtte bokstaver"
 
 msgid "That email address is already used"
-msgstr ""
+msgstr "E-post adressen er allerede i bruk"
 
 msgid "Passwords must contain at least 8 letters."
-msgstr ""
+msgstr "Passordet må inneholde minst 8 bokstaver."
 
 msgid "This domain is used for subdomains"
-msgstr ""
+msgstr "Dette domene er brukt for underdomener"
 
 msgid "Name"
-msgstr "Name"
+msgstr "Navn"
 
 msgid "The name of this organization"
-msgstr ""
+msgstr "Navnet på denne organisasjonen"
 
 msgid "The logo that should be used for this organization"
-msgstr ""
+msgstr "Logoen som skal brukes for denne organisasjonen"
 
 msgid "Administrators"
-msgstr ""
+msgstr "Administratorer"
 
 msgid "The administrators in your organization"
-msgstr ""
+msgstr "Administratorene i din organisasjon"
 
 msgid "Viewers"
-msgstr ""
+msgstr "Seere"
 
 msgid "The viewers in your organization"
-msgstr ""
+msgstr "Seerne i din organisasjon"
 
 msgid "Editors"
-msgstr "Editors"
+msgstr "Redaktører"
 
 msgid "The editors in your organization"
-msgstr ""
+msgstr "Redaktørene i din organisasjon"
 
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 msgid "The main language used by this organization"
-msgstr ""
+msgstr "Hovedspråket brukt i denne organisasjonen"
 
 msgid "Subdomain"
-msgstr ""
+msgstr "Underdomene"
 
 msgid "This subdomain is not available"
-msgstr ""
+msgstr "Dette underdomene er utilgjengelig"
 
 msgid "The subdomain for this organization"
-msgstr ""
+msgstr "Underdomene for denne organisasjonen"
 
 msgid "Domain"
-msgstr ""
+msgstr "Domene"
 
 msgid "This domain is not available"
-msgstr ""
+msgstr "Dette domene er ikke tilgjengelig"
 
 msgid "The custom domain for this organization"
-msgstr ""
+msgstr "Tilpasset domene for denne organisasjonen"
 
 msgid "Timezone"
-msgstr ""
+msgstr "Tidssone"
 
 msgid "The timezone your organization is in."
-msgstr ""
+msgstr "Tidssonen til din organisasjon."
 
 msgid "JSON blob used to store configuration information associated with this organization"
-msgstr ""
+msgstr "JSON blob brukt til å lagre konfigurasjonsinformasjonen til denne organisasjonen"
 
 msgid "Administrator"
-msgstr ""
+msgstr "Administrator"
 
 msgid "Editor"
-msgstr ""
+msgstr "Redaktør"
 
 msgid "Viewer"
-msgstr ""
+msgstr "Seer"
 
 msgid "Org"
 msgstr "Org"
 
 msgid "The organization to which the account is invited to view"
-msgstr ""
+msgstr "Organisasjonen som kontoen er invitert til å vise"
 
 msgid "Email"
-msgstr ""
+msgstr "E-post"
 
 msgid "The email to which we send the invitation of the viewer"
-msgstr ""
+msgstr "E-posten som invitasjonen blir sendt til"
 
 msgid "Secret"
-msgstr ""
+msgstr "Hemmelig"
 
 msgid "a unique code associated with this invitation"
-msgstr ""
+msgstr "en unik kode assosiert med denne invitasjonen"
 
 msgid "User Role"
-msgstr ""
+msgstr "Brukerrolle"
 
 #, python-format
 msgid "%s Invitation"
-msgstr ""
+msgstr "%s Invitasjon"
 
 msgid "Banner"
-msgstr "Banner"
+msgstr "Fane"
 
 msgid "Pattern"
-msgstr "Pattern"
+msgstr "Mønster"
 
 msgid "The organization in which the image will be used"
-msgstr ""
+msgstr "Organisasjonen som bildet vil brukes i"
 
 msgid "The name to describe this background"
-msgstr ""
+msgstr "Navnet som beskriver denne bakgrunnen"
 
 msgid "Background type"
-msgstr ""
+msgstr "Bakgrunnstype"
 
 msgid "The image file"
-msgstr "The image file"
+msgstr "Bildefil"
 
 msgid "The API token for this backend"
-msgstr ""
+msgstr "API nøkkel for denne backend-serveren "
 
 #, python-format
 msgid ""
@@ -292,135 +291,139 @@ msgid ""
 "      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
 "  "
 msgstr ""
+"\n"
+"Du har blitt invitert til å bli med i %(org_name)s.\n"
+"<br/>\n"
+"For å akseptere invitasjonen, <a href='%(host)s%(join_url)s'>klikk her</a>."
 
 msgid "You are invited to join {{org.name}}."
-msgstr ""
+msgstr "Du er invitert til å bli med i {{org.navn}}."
 
 msgid "Click this link to join"
-msgstr ""
+msgstr "Klikk her for å bli med"
 
 msgid "Edit"
-msgstr "Edit"
+msgstr "Rediger"
 
 msgid "Manage Backends"
-msgstr "Manage Backends"
+msgstr "Administrer Backends"
 
 msgid "Manage Users"
-msgstr "Manage Users"
+msgstr "Administrer Brukere"
 
 msgid "Accounts"
-msgstr "Accounts"
+msgstr "Kontoer"
 
 msgid "Admins"
-msgstr "Admins"
+msgstr "Administratorer"
 
 msgid "Remove"
-msgstr "Remove"
+msgstr "Fjern"
 
 msgid "You must have at least one administator"
-msgstr "You must have at least one administrator"
+msgstr "Du må ha minst én administrator"
 
 msgid "Select your Organization"
-msgstr ""
+msgstr "Velg din Organisasjon"
 
 msgid "Your account is not associated to an organization. Please Contact the adminstrator."
-msgstr ""
+msgstr "Kontoen din er ikke tilknyttet en organisasjon. Vennligst Kontakt administratoren."
 
 msgid "Your Organization"
-msgstr ""
+msgstr "Din Organisasjon"
 
 msgid "Invite people to your organization"
-msgstr ""
+msgstr "Inviter folk til din organisasjon"
 
 msgid "User group"
-msgstr "User group"
+msgstr "Brukergruppe"
 
 msgid "One of the emails you entered is invalid."
-msgstr ""
+msgstr "En av e-post adressene er ugyldig."
 
 #, python-format
 msgid "Manage %(name)s Accounts"
-msgstr ""
+msgstr "Administrer %(name)s Kontoer"
 
 msgid "Create"
-msgstr ""
+msgstr "Opprett"
 
 msgid "Your invitation link is invalid. Please contact your organization administrator."
-msgstr ""
+msgstr "Invitasjonslenken er ugyldig. Vennligst kontakt administrator for din organisasjon."
 
 #, python-format
 msgid "Join %(name)s"
-msgstr ""
+msgstr "Bli med %(name)s"
 
 msgid "Join"
-msgstr ""
+msgstr "Bli med"
 
 msgid "Your invitation link has expired. Please contact your organization administrator."
-msgstr ""
+msgstr "Invitasjonslenken har utløpt. Vennligst kontakt administratoren for din organisasjon."
 
 msgid "Task"
-msgstr ""
+msgstr "Oppgave"
 
 msgid "Tasks"
-msgstr ""
+msgstr "Oppgaver"
 
 msgid "The title for this story"
-msgstr ""
+msgstr "Tittel for denne historien"
 
 msgid "Whether this story is featured"
-msgstr ""
+msgstr "Er en feature-historie"
 
 msgid "The summary for the story"
-msgstr ""
+msgstr "Sammendrag av denne historien"
 
 msgid "The body of text for the story"
-msgstr "The body of text for the story"
+msgstr "Brødteksten for denne historien"
 
 msgid "The writer of the story"
-msgstr ""
+msgstr "Forfatteren av historien"
 
 msgid "A link to an mp3 file to publish on this story"
-msgstr ""
+msgstr "Lenke til mp3 fil som skal publiseres med denne historien"
 
 msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
-msgstr ""
+msgstr "Id til YouTube-video som skal linkes til denne historien (dette er teksten som kommer etter \"v=\" og før \"&\" i YouTube videoens URL)"
 
 msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
-msgstr ""
+msgstr "Emneknagger for denne historien, separeres med mellomrom, kan brukes for mer avansert filtrering, valgfritt"
 
 msgid "The category for this story"
-msgstr ""
+msgstr "Kategorien til denne historien"
 
 msgid "The organization this story belongs to"
-msgstr ""
+msgstr "Organisasjonen historien tilhører"
 
 msgid "Stories"
-msgstr "Stories"
+msgstr "Historier"
 
 msgid "The story to associate to"
-msgstr ""
+msgstr "Historien assosieres med"
 
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 msgid "No"
-msgstr ""
+msgstr "Nei"
 
 msgid "Story Images"
-msgstr ""
+msgstr "Historiebilder"
 
 #, python-format
 msgid "Image %d"
-msgstr "Image %d"
+msgstr "Bilde %d"
 
 msgid "Image to display on story page and in previews. (optional)"
-msgstr ""
+msgstr "Bilde som skal vises på historiesiden og i forhåndsvisninger. (valgfritt)"
 
 msgid "Image to display on story page and in previews (optional)"
-msgstr ""
+msgstr "Bilde som skal vises på historiesiden og i forhåndsvisninger (valgfritt)"
 
 msgid "Remove Item?"
-msgstr "Remove Item?"
+msgstr "Vil du slette objektet?"
 
 #, python-format
 msgid ""
@@ -428,12 +431,14 @@ msgid ""
 "    Are you sure you want to remove <b>%(object)s</b>?\n"
 "    "
 msgstr ""
+"\n"
+"Er du sikker på at du ønsker å slette<b>%(object)s</b>?"
 
 msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
-msgstr "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Dersom du sletter dette, er det borte for alltid. Denne operasjonen er irreversibel."
 
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Avbryt"
 
 #, python-format
 msgid ""
@@ -445,6 +450,12 @@ msgid_plural ""
 "         %(counter)s results\n"
 "        "
 msgstr[0] ""
+"\n"
+"\t%(counter)sresult\n"
+"\t"
+msgstr[1] ""
+"\n"
+"%(counter)s resultater"
 
 #, python-format
 msgid ""
@@ -452,30 +463,33 @@ msgid ""
 "\tResults %(start)s-%(end)s of %(count)s\n"
 "\t"
 msgstr ""
+"\n"
+"\tResultater%(start)s-%(end)s av %(count)s\n"
+"\t"
 
 msgid "Previous"
-msgstr "Previous"
+msgstr "Forrige"
 
 msgid "Next"
-msgstr "Next"
+msgstr "Neste"
 
 msgid "edit"
-msgstr "edit"
+msgstr "rediger"
 
 msgid "Sign in"
-msgstr "Sign in"
+msgstr "Registrer deg"
 
 msgid "Login"
-msgstr "Login"
+msgstr "Logg inn"
 
 msgid "Forgot Password?"
-msgstr "Forgot Password?"
+msgstr "Glemt Passord?"
 
 msgid "Token Expired"
-msgstr ""
+msgstr "Økten er Utløpt"
 
 msgid "Login Failure"
-msgstr "Login Failure"
+msgstr "Innlogging Feilet"
 
 #, python-format
 msgid ""
@@ -483,6 +497,8 @@ msgid ""
 "      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "      "
 msgstr ""
+"\n"
+"Du kan dessverre ikke logge inn for øyeblikket ettersom vi har mottatt %(failed_login_limit)s ukorrekte innloggingsforsøk."
 
 #, python-format
 msgid ""
@@ -490,21 +506,23 @@ msgid ""
 "      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "      "
 msgstr ""
+"\n"
+"Vennligst vent %(lockout_timeout)s minutter før du prøver å logge inn på nytt."
 
 msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
-msgstr "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Alternativt, fyll ut skjemaet nedenfor for å nullstille passordet ditt via din registrerte e-post adresse."
 
 msgid "Please contact the website administrator to have your password reset."
-msgstr "Please contact the website administrator to have your password reset."
+msgstr "Vennligst kontakt nettsidens administrator for å nullstille ditt passord."
 
 msgid "Email Address"
-msgstr "Email Address"
+msgstr "E-post Adresse"
 
 msgid "Recover"
-msgstr "Recover"
+msgstr "Gjenopprett"
 
 msgid "Please enter the email address you used to sign up and we will help you recover your password."
-msgstr "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Vennligst gjenta eport adressen du brukte til registrering og vi vil hjelpe deg med å gjenopprette passord."
 
 #, python-format
 msgid ""
@@ -512,587 +530,595 @@ msgid ""
 "  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "  "
 msgstr ""
+"\n"
+"<strong>Passordet ditt har utløpt. </strong>Sidens rettningslinjer sier at du må lage nytt passord hver %(expire_days)s dag. Det nye passordet kan ikke ha vært brukt de siste %(window_days)s dagene."
 
 msgid "New Password"
-msgstr ""
+msgstr "Nytt passord"
 
 msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
-msgstr ""
+msgstr "Passordet må ha minst 8 tegn, inkludert en stor bokstav, en liten bokstav og ett tall."
 
 msgid "You have used this password before in the past year, please use a new password."
-msgstr ""
+msgstr "Du har brukt dette passordet tidligere i år, vennligst velg et nytt passord."
 
 msgid "Password"
-msgstr ""
+msgstr "Passord"
 
 msgid "Confirm Password"
-msgstr ""
+msgstr "Bekreft passord"
 
 msgid "Please enter your password to save changes."
-msgstr ""
+msgstr "Vennligst skriv inn ditt passord for å lagre endringene."
 
 msgid "Confirm the new password by filling the this field"
-msgstr ""
+msgstr "Bekreft ditt nye passord ved å fylle inn dette feltet"
 
 msgid "New password doesn't match with its confirmation"
-msgstr ""
+msgstr "Nytt passord stemmer ikke "
 
 msgid "Your Email"
-msgstr ""
+msgstr "Din e-post adresse"
 
 msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
-msgstr ""
+msgstr "E-post gjenopprettelsen er ikke støttet, vennligst kontakt nettsidens administrator for å nullstille passordet manuelt."
 
 msgid "Current Password"
-msgstr ""
+msgstr "Nåværende passord"
 
 msgid "Your current password"
-msgstr ""
+msgstr "Ditt nåværende passord"
 
 msgid "Your new password."
-msgstr ""
+msgstr "Ditt nye passord."
 
 msgid "Confirm new Password"
-msgstr ""
+msgstr "Bekreft nytt passord"
 
 msgid "Confirm your new password."
-msgstr ""
+msgstr "Bekreft ditt nye passord."
 
 msgid "Please enter your password to save changes"
-msgstr ""
+msgstr "Vennligst skriv inn ditt nye passord for å lagre endringene"
 
 msgid "Confirm your new password by entering it here"
-msgstr ""
+msgstr "Bekreft ditt nye passord ved å skrive det inn her"
 
 msgid "Mismatch between your new password and confirmation, try again"
-msgstr ""
+msgstr "Passordene samsvarer ikke, vennligst prøv på nytt"
 
 msgid "New user created successfully."
-msgstr ""
+msgstr "Ny bruker opprettet."
 
 msgid "Groups"
-msgstr ""
+msgstr "Grupper"
 
 msgid "Users will only get those permissions that are allowed for their group."
-msgstr ""
+msgstr "Brukere vil kun få tillatelser som er tillat for gruppen de tilhører."
 
 msgid "Set the user's initial password here."
-msgstr ""
+msgstr "Skriv inn brukerens gamle passord her."
 
 msgid "Last Login"
-msgstr ""
+msgstr "Siste innlogging"
 
 msgid "Is Active"
-msgstr ""
+msgstr "Er aktiv"
 
 msgid "Whether this user is allowed to log into the site"
-msgstr ""
+msgstr "Brukeren kan logge inn på siden"
 
 msgid "Users will only get those permissions that are allowed for their group"
-msgstr ""
+msgstr "Brukere vil kun få tillatelse til gruppen de tilhører "
 
 msgid "You can reset the user's password by entering a new password here"
-msgstr ""
+msgstr "Du kan nullstille passordet ved å skrive inn ett nytt passord her"
 
 msgid "Username"
-msgstr ""
+msgstr "Brukernavn"
 
 msgid "Your password"
-msgstr ""
+msgstr "Ditt passord"
 
 msgid "If you want to set a new password, enter it here"
-msgstr ""
+msgstr "Hvis du ønsker å lage et nytt passord, skriv det inn her"
 
 msgid "Confirm New Password"
-msgstr ""
+msgstr "Bekreft nytt passord"
 
 msgid "Confirm your new password"
-msgstr ""
+msgstr "Bekreft ditt nye passord"
 
 msgid "Edit your profile"
-msgstr ""
+msgstr "Rediger din profil"
 
 msgid "Password Recovery"
-msgstr ""
+msgstr "Gjenopprett passord"
 
 msgid "An Email has been sent to your account with further instructions."
-msgstr ""
+msgstr "Vi har sendt en mail til din e-post adresse med videre instruksjoner."
 
 msgid "Password Recovery Request"
-msgstr ""
+msgstr "Forespørsel om å gjenoprrette passord "
 
 msgid "Pick a new password"
-msgstr ""
+msgstr "Velg et nytt passord"
 
 msgid "Your password has successfully been updated, thank you."
-msgstr ""
+msgstr "Passordet ditt har blitt oppdatert, takk."
 
 #, python-format
 msgid "You are now logged in as %s"
-msgstr ""
+msgstr "Du er nå logget inn som %s"
 
 msgid "Password Updated Successfully. Now you can log in using your new password."
-msgstr ""
+msgstr "Passordet ble oppdatert. Du kan nå logge inn med ditt nye passord."
 
 msgid "Reset your Password"
-msgstr ""
+msgstr "Nullstill passord"
 
 msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
-msgstr ""
+msgstr "Av sikkerhetsmessige årsaker har denne lenken utløpt. Vennligst prøv på nytt ved å skrive inn din e-post adresse her."
 
 msgid "Submit"
-msgstr ""
+msgstr "Send inn"
 
 msgid "Form"
-msgstr ""
+msgstr "Skjema"
 
 msgid "Save Changes"
-msgstr ""
+msgstr "Lagre endringer"
 
 #, python-format
 msgid "Your new %s has been created."
-msgstr ""
+msgstr "Ditt nye %s har blitt opprettet."
 
 #, python-format
 msgid "Import %s"
-msgstr ""
+msgstr "Importer %s"
 
 msgid "Back to Website"
-msgstr ""
+msgstr "Tilbake til nettsiden"
 
 msgid "Welcome, "
-msgstr ""
+msgstr "Velkommen, "
 
 msgid "Logout"
-msgstr ""
+msgstr "Logg ut"
 
 msgid "Opinions"
-msgstr "Poll Results"
+msgstr "Alternativer"
 
 msgid "Users"
-msgstr ""
+msgstr "Brukere"
 
 msgid "Settings"
-msgstr ""
+msgstr "Innstillinger"
 
 msgid "Pages"
-msgstr ""
+msgstr "Sider"
 
 msgid "Jobs"
-msgstr ""
+msgstr "Jobber"
 
 msgid "Photos"
-msgstr ""
+msgstr "Bilder"
 
 msgid "Categories Images"
-msgstr ""
+msgstr "Kategori Bilder"
 
 msgid "News Items"
-msgstr ""
+msgstr "Nyheter "
 
 msgid "Orgs"
-msgstr ""
+msgstr "Organisasjoner"
 
 msgid "Images"
-msgstr "ဓါတ်ပုံများ"
+msgstr "Bilder"
 
 msgid "About"
-msgstr "U-Report အကြောင်း"
+msgstr "Om oss"
 
 msgid "Engagement"
-msgstr ""
+msgstr "Engasjement"
 
 msgid "Category Images"
-msgstr ""
+msgstr "Bildekategorier"
 
 msgid "+ New "
-msgstr ""
+msgstr "+ Ny"
 
 msgid "+ New Page"
-msgstr ""
+msgstr "+ Ny side"
 
 msgid "U-Report"
 msgstr "U-Report"
 
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 msgid "Configuration"
-msgstr ""
+msgstr "Konfigurasjon"
 
 msgid "Content"
-msgstr ""
+msgstr "Innhold"
 
 msgid "Country Aliases"
-msgstr ""
+msgstr "Landaliaser"
 
 msgid "Job Sources"
-msgstr ""
+msgstr "Jobbkilder"
 
 msgid "Jobs Content"
-msgstr ""
+msgstr "Jobbinnhold"
 
 msgid "About Content"
-msgstr ""
+msgstr "Om innhold"
 
 msgid "Videos"
-msgstr ""
+msgstr "Videoer"
 
 msgid "Contact Us Content"
-msgstr ""
+msgstr "Kontakt oss innhold"
 
 msgid "Missions Content"
-msgstr ""
+msgstr "Oppdragets innhold"
 
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "Vilkår og betingelser"
 
 msgid "U-Reporters Content"
-msgstr ""
+msgstr "U-Reporters innhold"
 
 msgid "Join &amp; Engage Content"
-msgstr "ပူးပေါင်းပါဝင်ရန်"
+msgstr "Delta &amp; innholdsengasjement"
 
 msgid "Join Steps Content"
-msgstr "ပူးပေါင်းရန် အဆင့်များ"
+msgstr "Delta Steg Innhold"
 
 msgid "Additional Menu"
-msgstr ""
+msgstr "Tilleggsmeny"
 
 msgid "SELECT YOUR COUNTRY"
-msgstr ""
+msgstr "VELG DITT LAND"
 
 msgid "Join Now"
-msgstr ""
+msgstr "Delta nå"
 
 msgid "READ MORE"
-msgstr "ထပ်မံဖတ်ရှုရန်"
+msgstr "LES MER"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr ""
+msgstr "UTFORSK ENGASJEMENT"
 
 msgid ""
 "\n"
 "        To add a Twitter job source you are required to get a widget id from twitter.\n"
 "      "
 msgstr ""
+"\n"
+"For å legge til Twitter jobbkilde må du ha en widget id fra twitter."
 
 msgid "Follow this step by step guide"
-msgstr ""
+msgstr "Følg denne steg for steg manualen"
 
 msgid ""
 "\n"
 "        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
 "      "
 msgstr ""
+"\n"
+"<div>Etter du har laget din widget, kopiér widget id fra url som vist på</div>"
 
 msgid "Back"
-msgstr ""
+msgstr "Tilbake"
 
 msgid "LATEST NOTIFICATIONS"
-msgstr ""
+msgstr "SISTE VARSLER"
 
 msgid "Backends"
-msgstr ""
+msgstr "Backends"
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
-msgstr[0] ""
+msgstr[0] "Det er nå %(counter)s ny undersøkelse som synkroniseres. Resultatene blir vist på den offentlige siden når synkroniseringen er fullført."
+msgstr[1] "Det er nå %(counter)s nye undersøkelser som synkroniseres. Resultatene blir vist på den offentlige siden når synkroniseringen er fullført."
 
 msgid "+ New Poll"
-msgstr ""
+msgstr "+ Ny undersøkelse"
 
 #, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] ""
+msgstr[0] "%(counter)s undersøkelsespørsmål"
+msgstr[1] "%(counter)s undersøkelsesspørsmål"
 
 msgid "New poll initial syncs scheduled every 10min"
-msgstr ""
+msgstr "Nye undersøkelser synkroniseres hvert 10 minutt"
 
 msgid "Main poll syncs scheduled every 10min"
-msgstr ""
+msgstr "Hovedundersøkelsen synkroniseres hvert 10 minutt"
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
+msgstr "Nylige undersøkelser synkronieres hvert 60 minutt"
 
 msgid "No longer scheduling syncs, runs archived"
-msgstr ""
+msgstr "Planlegger ikke lenger synkroniseringer, sykroniserte løp er arkivert"
 
 msgid "Poll syncs scheduled every 24h"
-msgstr ""
+msgstr "Undersøkelsen synkroniseres som helhet hver 24 time"
 
 msgid "Not scheduling syncs, not active"
-msgstr ""
+msgstr "Synkroniseringer er ikke planlagt, ikke aktiv"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr ""
+msgstr "Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for undersøkelsen"
 
 msgid "Refresh Results"
-msgstr ""
+msgstr "Oppdater resultatene"
 
 msgid "MORE POLLS"
-msgstr "နောက်ထပ်မေးခွန်းများ"
+msgstr "FLERE UNDERSØKELSER"
 
 msgid "FILTER"
-msgstr "စစ်ထုတ်ပေးခြင်း"
+msgstr "FILTER"
 
 msgid "All"
-msgstr "အားလုံး"
+msgstr "Alle"
 
 msgid "POLL LIST"
-msgstr "မေးခွန်းစာရင်း"
+msgstr "LISTE OVER UNDERSØKELSER "
 
 msgid "All polls from most recent to oldest"
-msgstr "နောက်ဆုံးမေးခွန်းများမှ ပြီးခဲ့သောမေးခွန်းများအထိ"
+msgstr "Alle undersøkelser er rangert nyest til eldst "
 
 msgid "ARCHIVED STORIES"
-msgstr "သိမ်းထားသော သတင်းဆောင်းပါးများ"
+msgstr "ARKIVERTE HISTORIER"
 
 msgid "LIST"
-msgstr "LIST"
+msgstr "LISTE"
 
 msgid "LATEST OPINION"
-msgstr ""
+msgstr "NYESTE ALTERNATIV  "
 
 msgid "VIEW FULL RESULTS"
-msgstr ""
+msgstr "VIS ALLE RESULTATER"
 
 msgid "U-REPORTERS IN"
-msgstr ""
+msgstr "U-REPORTERS I"
 
 msgid "PARTNERING WITH"
-msgstr ""
+msgstr "SAMARBEIDER MED"
 
 msgid "U-REPORTERS"
-msgstr ""
+msgstr "U-REPORTERS"
 
 msgid "IN"
-msgstr ""
+msgstr "I"
 
 msgid "COUNTRIES WORLDWIDE"
-msgstr ""
+msgstr "LAND VERDEN OVER"
 
 msgid "AGES"
-msgstr "အသက်"
+msgstr "ALDER"
 
 msgid "Join U-Report, Your voice matters."
-msgstr ""
+msgstr "Bli en U-Reporter, din stemme betyr noe. "
 
 msgid "JOIN NOW"
-msgstr ""
+msgstr "BLI MED NÅ"
 
 msgid "FEATURED STORY"
-msgstr "ဖော်ပြထားသော သတင်းဆောင်းပါး"
+msgstr "FEATURE-ARTIKKEL"
 
 msgid "We are a part of a global platform working to change the lives of young people around the world."
-msgstr ""
+msgstr "Vi er en del av en global plattform som har som målsetting å endre livene til barn og unge verden over."
 
 msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
-msgstr ""
+msgstr "Les mer om hvordan U-Report engasjerer og kobler unge mennesker til å si sin mening i saker som betyr noe for dem."
 
 msgid "LEARN MORE"
-msgstr ""
+msgstr "LES MER"
 
 msgid "Visit"
-msgstr ""
+msgstr "Besøk"
 
 msgid "How would you like to join?"
-msgstr ""
+msgstr "Hvordan ønsker du å bli med?"
 
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 msgid "SEARCH"
-msgstr ""
+msgstr "SØK"
 
 msgid "No results found"
-msgstr ""
+msgstr "Ingen resultater"
 
 msgid "RESPONSES"
-msgstr ""
+msgstr "SVAR"
 
 msgid "RESPONSE RATE"
-msgstr "တုံံ့ပြန်မှုနှုန်း"
+msgstr "SVARPROSENT"
 
 msgid "TOTAL RESPONSES"
-msgstr ""
+msgstr "TOTALT ANTALL SVAR"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr ""
+msgstr "%(responded)s har svart av %(polled)s spurt"
 
 msgid "ALL"
-msgstr "အားလုံး"
+msgstr "ALLE"
 
 msgid "AGE"
-msgstr "အသက်"
+msgstr "ALDER"
 
 msgid "GENDER"
-msgstr "ကျား မ"
+msgstr "KJØNNSIDENTITET"
 
 msgid "LOCATION"
-msgstr "တည်နေရာ"
+msgstr "BOSTED"
 
 msgid "Written by:"
-msgstr ""
+msgstr "Skrevet av:"
 
 msgid "Even"
-msgstr "အညီအမျှ"
+msgstr "Til og med"
 
 msgid "State"
-msgstr "ပြည်နယ်"
+msgstr "Fylke"
 
 msgid "Other"
-msgstr "အခြား"
+msgstr "Annet"
 
 msgid "District"
-msgstr ""
+msgstr "Kommune"
 
 msgid "Participation Level"
-msgstr "ပါဝင်သည့် အနေအထား"
+msgstr "Deltakelsenivå"
 
 msgid "Responses"
-msgstr "ပြန်လည်ဖြေကြားမှုများ"
+msgstr "Svar"
 
 msgid "Reporters in"
-msgstr ""
+msgstr "U-Reporters i"
 
 msgid "Results"
-msgstr "ရလဒ်များ"
+msgstr "Resultater"
 
 msgid "*Other answers include"
-msgstr "အခြားအဖြေများမှာ"
+msgstr "*Andre svar inkluderer"
 
 msgid "Population"
-msgstr "လူဦးရေ"
+msgstr "Populasjon"
 
 msgid "Registered in"
-msgstr "Registered in"
+msgstr "Registrert i"
 
 msgid "Density"
-msgstr "သိပ်သည်းမှု"
+msgstr "Tetthet"
 
 msgid "total"
-msgstr "စုစုပေါင်း"
+msgstr "totalt"
 
 msgid "of"
-msgstr ""
+msgstr "av"
 
 msgid "the"
-msgstr ""
+msgstr "den"
 
 msgid "OVERALL STATISTICS"
-msgstr ""
+msgstr "SAMLET STATISTIKK"
 
 msgid "THIS YEAR"
-msgstr ""
+msgstr "DETTE ÅRET"
 
 msgid "AVG RESPONSE RATE"
-msgstr ""
+msgstr "GJENNOMSNITTLIG SVARPROSENT"
 
 msgid "U-REPORTERS BY REGION"
-msgstr ""
+msgstr "U-REPORTERS I REGIONEN"
 
 msgid "FILTER RESULTS"
-msgstr ""
+msgstr "FILTRER SVAR"
 
 msgid "Export and Share"
-msgstr ""
+msgstr "Eksporter og del"
 
 msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
-msgstr ""
+msgstr "Har du lyst til å fortelle vennene dine om dette? Da kan du enkelt dele dette bilde på sosiale medier!"
 
 msgid "SELECT LANGUAGE"
-msgstr ""
+msgstr "VELG SPRÅK"
 
 msgid "SELECT COUNTRY"
-msgstr ""
+msgstr "VELG LAND"
 
 msgid "Custom pages"
-msgstr ""
+msgstr "Egendefinerte sider"
 
 msgid "See by the numbers how we are engaging youth voices for positive social change."
-msgstr ""
+msgstr "Se hvor mange barn og unge som ønsker at vi skal høre akkurat deres stemme som bidrar til en positiv endring."
 
 msgid "Polled"
-msgstr ""
+msgstr "Spurt"
 
 msgid "Reporters"
-msgstr ""
+msgstr "U-Reporters"
 
 msgid "Top Region"
-msgstr ""
+msgstr "Topp region"
 
 msgid "January"
-msgstr ""
+msgstr "Januar"
 
 msgid "February"
-msgstr ""
+msgstr "Februar"
 
 msgid "March"
-msgstr ""
+msgstr "Mars"
 
 msgid "April"
-msgstr ""
+msgstr "April"
 
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 msgid "August"
-msgstr ""
+msgstr "August"
 
 msgid "September"
-msgstr ""
+msgstr "September"
 
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 msgid "November"
-msgstr ""
+msgstr "November"
 
 msgid "December"
-msgstr ""
+msgstr "Desember"
 
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
 msgid "Mar"
-msgstr ""
+msgstr "Mar"
 
 msgid "Apr"
-msgstr ""
+msgstr "Apr"
 
 msgid "Jun"
-msgstr ""
+msgstr "Jun"
 
 msgid "Jul"
-msgstr ""
+msgstr "Jul"
 
 msgid "Aug"
-msgstr ""
+msgstr "Aug"
 
 msgid "Sep"
-msgstr ""
+msgstr "Sep"
 
 msgid "Oct"
-msgstr ""
+msgstr "Okt"
 
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
 msgid "Dec"
-msgstr ""
+msgstr "Des"
 
 #, python-format
 msgid ""
@@ -1100,21 +1126,24 @@ msgid ""
 "            Are you sure you want to remove <strong>%(object)s</strong>?\n"
 "          "
 msgstr ""
+"\n"
+"Er du sikker på at du vil fjerne <strong>%(object)s</strong>?"
 
 #, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] ""
+msgstr[0] "%(counter)s resultat"
+msgstr[1] "%(counter)s resultater"
 
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr ""
+msgstr "Resultater %(start)s-%(end)s av %(count)s"
 
 msgid "Error"
-msgstr ""
+msgstr "Feilmelding"
 
 msgid "Enter Dashboard"
-msgstr ""
+msgstr "Gå til dashbord"
 
 #, python-format
 msgid ""
@@ -1122,6 +1151,8 @@ msgid ""
 "                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
 "              "
 msgstr ""
+"\n"
+"Beklager, du kan ikke logge inn fordi vi har registerert %(failed_login_limit)s ukorrekte innloggingsforsøk. "
 
 #, python-format
 msgid ""
@@ -1129,6 +1160,8 @@ msgid ""
 "                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
 "                  "
 msgstr ""
+"\n"
+"Vennligst vent %(lockout_timeout)s minutter før du prøver å logge inn på nytt."
 
 #, python-format
 msgid ""
@@ -1136,548 +1169,550 @@ msgid ""
 "        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
 "      "
 msgstr ""
+"\n"
+"<strong>Passordet ditt er utdatert. </strong>Du må endre ditt passord hver %(expire_days)s dag. Det nye passordet kan ikke ha vært brukt de siste %(window_days)s dagene. "
 
 msgid "+ New Story"
-msgstr ""
+msgstr "+ Ny historie"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
-msgstr ""
+msgstr "Oppdatert %s for denne organisasjonen"
 
 msgid "Flag"
-msgstr "အလံ"
+msgstr "Flagg"
 
 msgid "The organization to which the image will be used"
-msgstr "The organization to which the image will be used"
+msgstr "Bildet som vil brukes sammen med organisasjonen"
 
 msgid "A short descriptive name for this image"
-msgstr "A short descriptive name for this image"
+msgstr "En kort  beskrivelse av dette bildet"
 
 msgid "Image type"
-msgstr "Image type"
+msgstr "Bildetype"
 
 msgid "Label"
-msgstr "အညွှန်း"
+msgstr "Etikett"
 
 msgid "Key"
-msgstr "Key"
+msgstr "Nøkkel"
 
 msgid "Male"
-msgstr "အမျိုးသား"
+msgstr "Gutt"
 
 msgid "Female"
-msgstr "အမျိုးသမီး"
+msgstr "Jente"
 
 msgid "Organization"
-msgstr "အဖွဲ့အစည်း"
+msgstr "Organisasjon"
 
 msgid "Gender"
-msgstr "ကျား မ"
+msgstr "Kjønnsidentitet"
 
 msgid "Gender of the contact"
-msgstr "Gender of the contact"
+msgstr "Kjønnsidentiteten til kontakten"
 
 msgid "Born Field"
-msgstr "Born Field"
+msgstr "Fødselsdato Field"
 
 msgid "Occupation Field"
-msgstr "Occupation Field"
+msgstr "Jobb Field"
 
 msgid "Registration Date"
-msgstr "Registration Date"
+msgstr "Registreringsdato"
 
 msgid "State Field"
-msgstr "State Field"
+msgstr "Fylke Field"
 
 msgid "District Field"
-msgstr "District Field"
+msgstr "Kommune Field"
 
 msgid "Ward Field"
-msgstr ""
+msgstr "Avdeling Field "
 
 msgid "Number of items with this counter"
-msgstr ""
+msgstr "Antall enheter"
 
 msgid "No root user found. Please create a root user"
-msgstr ""
+msgstr "Ingen rotbrukere funnet. Opprett en rotbruker."
 
 msgid "The name for our alias"
-msgstr ""
+msgstr "Navnet på vårt alias"
 
 msgid "The title or name to reference this Job source."
-msgstr ""
+msgstr "Tittel eller navn på din jobbkilde. "
 
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
-msgstr ""
+msgstr "Velg type for jobbkilden. Twitter, Facebook eller RSS Feed."
 
 msgid "The full URL to navigate to this Job source."
-msgstr ""
+msgstr "Fullstendig URL for å navigere til denne jobbkilden."
 
 msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
-msgstr ""
+msgstr "For å koble til Twitter trenger vi en widget Id, dersom vi skal publisere tweets på siden. Les instruksene over nøye for å få tak i rett widget Id."
 
 msgid "Featured job sources are shown first on the jobs page."
-msgstr ""
+msgstr "Utvalgte jobbkilder vises først på jobbsiden."
 
 msgid "The organization this job source is for"
-msgstr ""
+msgstr "Organisasjonen jobbkilden er for"
 
 msgid "Your job source has been added successfully"
-msgstr ""
+msgstr "Jobbkilden har blitt lagt til"
 
 msgid "Your job source has been updated successfully"
-msgstr ""
+msgstr "Jobbkilden har blitt oppdatert"
 
 msgid "This is the OSM id for this administrative boundary"
-msgstr ""
+msgstr "Dette er OSM id for denne administrative grensen"
 
 msgid "The name of our administrative boundary"
-msgstr ""
+msgstr "Navnet på vår administrative grense"
 
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
-msgstr ""
+msgstr "Nivå for grensen: 0 for land, 1 for fylke, 2 for kommune"
 
 msgid "The parent to this political boundary if any"
-msgstr ""
+msgstr "Forkommeren til denne politiske grensen, hvis noen"
 
 msgid "Geometry"
-msgstr ""
+msgstr "Geometri"
 
 msgid "The json representing the geometry type and coordinates of the boundaries"
-msgstr ""
+msgstr "Json som representerer type geometri og koordinater for grensene "
 
 msgid "The title for this item"
-msgstr ""
+msgstr "Tittelen på dette elementet"
 
 msgid "A short summary description for this item"
-msgstr ""
+msgstr "En kort oppsummerende beskrivelse av dette elementet"
 
 msgid "A link that should be associated with this item"
-msgstr ""
+msgstr "En link som bør knyttes til dette elementet"
 
 msgid "The category this item belongs to"
-msgstr ""
+msgstr "Kategorien dette elementet tilhører"
 
 msgid "The organization this item belongs to"
-msgstr ""
+msgstr "Organisasjonen dette elementet tilhører"
 
 msgid "The title for this Video"
-msgstr ""
+msgstr "Tittelen på denne videoen"
 
 msgid "A short summary description for this video"
-msgstr ""
+msgstr "En beskrivelse av denne videoen"
 
 msgid "The organization this video belongs to"
-msgstr ""
+msgstr "Organisasjonen denne videoen tilhører"
 
 msgid "The name of this poll category"
-msgstr ""
+msgstr "Navnet på denne avstemningskategorien"
 
 msgid "Poll Categories"
-msgstr ""
+msgstr "Avstemningskategorier"
 
 msgid "The Flow this Poll is based on"
-msgstr ""
+msgstr "Flowen denne avstemningen er basert på"
 
 msgid "The date to display for this poll. Leave empty to use flow creation date."
-msgstr ""
+msgstr "Datoen som skal vises for denne avstemningen. La feltet stå tomt for å bruke datoen flowen ble opprettet."
 
 msgid "Whether the flow for this poll is archived on RapidPro"
-msgstr ""
+msgstr "Flowen for denne undersøkelsen er arkivert i RapidPro"
 
 msgid "The base language of the flow to use"
-msgstr ""
+msgstr "Hovedspråket for flowen som skal brukes"
 
 msgid "The number of polled reporters on this poll"
-msgstr ""
+msgstr "Antall spurt i denne undersøkelsen"
 
 msgid "Whether the poll has finished the initial results sync."
-msgstr ""
+msgstr "Undersøkelsen har fullført den påbegynte synkroniseringen av resultater."
 
 msgid "Whether the poll should stop regenerating stats."
-msgstr ""
+msgstr "Avstemningen skal slutte regenerering av statistikk."
 
 msgid "The title for this Poll"
-msgstr ""
+msgstr "Tittelen for denne undersøkelsen"
 
 msgid "The category this Poll belongs to"
-msgstr ""
+msgstr "Kategorien denne undersøkelsen tilhører"
 
 msgid "Whether this poll should be featured on the homepage"
-msgstr ""
+msgstr "Undersøkelsen skal vises på hovedsiden"
 
 msgid "The splash category image to display for the poll (optional)"
-msgstr ""
+msgstr "Splash kategori bildet som vises i undersøkelsen (valgfritt) "
 
 msgid "The organization this poll is part of"
-msgstr ""
+msgstr "Organisasjonen denne undersøkelsen tilhører"
 
 msgid "The title for this response story"
-msgstr ""
+msgstr "Tittel til denne responshistorien"
 
 msgid "The writer of the response story"
-msgstr ""
+msgstr "Forfatter av responshistorien"
 
 msgid "The poll to associate to"
-msgstr ""
+msgstr "Undersøkelsen dette kan assosieres med"
 
 msgid "The poll for this response"
-msgstr ""
+msgstr "Undersøkelsen for dette svaret"
 
 msgid "The location for this response"
-msgstr ""
+msgstr "Lokasjon for denne responsen "
 
 msgid "The name of the sender of the message"
-msgstr ""
+msgstr "Navnet til avsender"
 
 msgid "The featured response message"
-msgstr ""
+msgstr "Feature responsmelding "
 
 msgid "The poll this question is part of"
-msgstr ""
+msgstr "Undersøkelsen dette spørsmålet er en del av"
 
 msgid "The title of this question"
-msgstr ""
+msgstr "Tittelen på dette spørsmålet"
 
 msgid "The RuleSet this question is based on"
-msgstr ""
+msgstr "Regelverket dette spørsmålet er basert på"
 
 msgid "The label of the ruleset on RapidPro"
-msgstr ""
+msgstr "Etiketten for regelverket på RapidPro"
 
 msgid "The priority number for this question on the poll"
-msgstr ""
+msgstr "Nummer på prioritering av dette spørsmålet i undersøkelsen"
 
 msgid "The Rule this response category is based on"
-msgstr ""
+msgstr "Regelen denne responskategorien er basert på"
 
 msgid "Your org does not have any API token configuration."
-msgstr ""
+msgstr "Din organisasjon har ingen API token konfigurasjon."
 
 msgid "You must include a title for every included question."
-msgstr ""
+msgstr "Du må ha en tittel for hvert spørsmål."
 
 msgid "Title too long. The max limit is 255 characters for each title"
-msgstr ""
+msgstr "Tittelen er for lang. Det er maksimalt 255 tegn per tittel."
 
 msgid "You must include at least one poll question."
-msgstr ""
+msgstr "Du må inkludere minst ett undersøkelsesspørsmål."
 
 msgid "Adjust poll date"
-msgstr ""
+msgstr "Tilpass undersøkelsesdato"
 
 msgid "Your poll has been updated, now pick which questions to include."
-msgstr ""
+msgstr "Din undersøkelse har blitt oppdatert. Du kan nå velge hvilke spørsmål du ønsker å inkludere."
 
 msgid "Configure flow"
-msgstr ""
+msgstr "Konfiguér flow"
 
 msgid "Your poll has been configured, now adjust the poll date."
-msgstr ""
+msgstr "Undersøkelsen har blitt konfigurert. Du kan nå tilpasse undersøkelsesdatoen."
 
 msgid "Your poll has been created, now configure its flow."
-msgstr ""
+msgstr "Undersøkelsen er opprettet. Du kan nå konfigurere flow."
 
 msgid "Poll Images"
-msgstr ""
+msgstr "Undersøkelsesbilder"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr ""
+msgstr "Legg til de svaralternativene du ønsker. (dersom det er noen)"
 
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr ""
+msgstr "Bilde som skal vises på undersøkelsessiden og i forhåndsvisninger. (valgfritt)"
 
 msgid "Image to display on poll page and in previews (optional)"
-msgstr ""
+msgstr "Bilde som skal vises på undersøkelsesside og i forhåndsvisninger (valgfritt)"
 
 msgid "Poll Response"
-msgstr ""
+msgstr "Undersøkelsessvar"
 
 msgid "Your poll has been updated."
-msgstr ""
+msgstr "Din undersøkelse har blitt oppdatert."
 
 msgid "Poll Questions"
-msgstr ""
+msgstr "Undersøkelsesspørsmål"
 
 msgid "Now set what images you want displayed on your poll page. (if any)"
-msgstr ""
+msgstr "Du kan nå velge hvilke bilder du ønsker skal vises på din undersøkelsesside. (valgfritt)"
 
 msgid "Include"
-msgstr ""
+msgstr "Inkludér"
 
 msgid "Whether to include this question in your public results"
-msgstr ""
+msgstr "Spørsmålet skal inkluderes i offentlige resultater"
 
 msgid "Priority"
-msgstr ""
+msgstr "Prioritet"
 
 msgid "The priority of this question on the poll page, higher priority comes first"
-msgstr ""
+msgstr "Prioriteten av dette spørsmålet på undersøkelsessiden, høyeste prioritering kommer først."
 
 msgid "Ruleset Label"
-msgstr ""
+msgstr "Regelsett etikett"
 
 msgid "The label of the ruleset from RapidPro"
-msgstr ""
+msgstr "Etikett for regelsettet fra RapidPro"
 
 msgid "Title"
-msgstr ""
+msgstr "Tittel"
 
 msgid "The question posed to your audience, will be displayed publicly"
-msgstr ""
+msgstr "Spørsmålet som stilles til ditt publikum, vil vises offentlig"
 
-#, fuzzy
-#| msgid "Categories"
 msgid "Category {idx+1}"
-msgstr "Categories"
+msgstr "Kategori {idx+1}"
 
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr ""
+msgstr "Etikett for backend kategori (feks RapidPro)"
 
 msgid "Display {idx+1}"
-msgstr ""
+msgstr "Display {idx+1}"
 
 msgid "The label to display of the category on the public site"
-msgstr ""
+msgstr "Etiketten for kategorien som skal vises på den offentlige siden"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr ""
+msgstr "Planlagt synkronisering under arbeid..."
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr ""
+msgstr "Siste resultat ble synkronisert %(time)s siden"
 
 msgid "Synced"
-msgstr ""
+msgstr "Synkronisert"
 
 #, python-brace-format
 msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr ""
+msgstr "Synkronisering pågår... {sync_progress:.1f}%"
 
 #, python-brace-format
 msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr ""
+msgstr "Rediger undersøkelsen for flowen [{flow_name} ({flow_date_hint})]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr ""
+msgstr "Planlagt en oppdatering for undersøkelse #%(poll_id)d i organisasjon #%(org_id)d"
 
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr ""
+msgstr "Navnet på Contact Group som inneholder registrerte U-reporters"
 
 msgid "The label of the Contact Field that contains the birth date of reporters"
-msgstr ""
+msgstr "Etikett på Contact Field som inneholder fødselsdatoene til U-reporterne"
 
 msgid "The label of the Contact Field that contains the gender of reporters"
-msgstr ""
+msgstr "Etikett på Contact Field som inneholder kjønnet til U-reporterne"
 
 msgid "The label of the Contact Field that contains the occupation of reporters"
-msgstr ""
+msgstr "Etikett på Contact Field som inneholder yrket til U-reporterne"
 
 msgid "The label of the Contact Field that contains the registration date of reporters"
-msgstr ""
+msgstr "Etikett på Contact Field som inneholder registreringsdato til U-reporterne"
 
 msgid "The label of the Contact Field that contains the State of reporters"
-msgstr ""
+msgstr "Etikett på Contact Field som inneholder hvilket Fylke U-reporterne bor i"
 
 msgid "The label of the Contact Field that contains the District of reporters"
-msgstr ""
+msgstr "Etikett på Contact Field som inneholder hvilken kommune U-reporterne bor i"
 
 msgid "The label of the Contact Field that contains the Ward of reporters"
-msgstr ""
+msgstr "Etiketten til Contact Field som inneholder Avdeling av U-Reporters"
 
 msgid "The label assigned to U-Reporters that are Male."
-msgstr ""
+msgstr "Etikett tildelt U-Reportere som har registrert seg som \"Gutt\"."
 
 msgid "The label assigned to U-Reporters that are Female."
-msgstr ""
+msgstr "Etikett tildelt U-Reportere som har registrert seg som \"Jente\"."
 
 msgid "Whether this org should be show on the landing page"
-msgstr ""
+msgstr "Organisasjonen skal vises på landingssiden"
 
 msgid "Whether this org count should consider the count from link only"
-msgstr ""
+msgstr "Organisasjonsopptellingen skal kun ta i betraktning tall fra linken"
 
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr ""
+msgstr "En enkel kode brukere vil benytte for å kontakte U-Report lokalt"
 
 msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgstr ""
+msgstr "Nummeret til Whatsapp som brukere vil benytte for å kontakte U-Report"
 
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The viber username that users will use to contact U-Report if you have one"
-msgstr ""
+msgstr "Nummeret til Whatsapp som brukere vil benytte for å kontakte U-Report"
 
 msgid "The short text used to direct visitors to join U-Report"
-msgstr ""
+msgstr "En enkel tekst som brukes til å veilede besøkende til å bli med i U-Report"
 
 msgid "The YouTube video ID for how to join U-Report section"
-msgstr ""
+msgstr "YouTube video ID til video for \"Hvordan bli en U-Reporter\" - seksjonen"
 
 msgid "The title of the photos section U-Report homepage"
-msgstr ""
+msgstr "Tittel på bildeseksjonen for U-Report landingssiden"
 
 msgid "The description of the photos section U-Report homepage"
-msgstr ""
+msgstr "Beskrivelse av bildeseksjonen for U-Report landingsside"
 
 msgid "The description of the opinions page"
-msgstr ""
+msgstr "Beskrivelse av meningssiden"
 
 msgid "The description of the stories page"
-msgstr ""
+msgstr "Beskrivelse av historiesiden"
 
 msgid "The description of the engagement page"
-msgstr ""
+msgstr "Beskrivelse av engasjementsiden"
 
 msgid "The callout message on the footer engagement section"
-msgstr ""
+msgstr "Nedre beskjed i bunnlinjen til engasjementsiden "
 
 msgid "The primary color for styling for this organization, should be dark"
-msgstr ""
+msgstr "Primærfargen for styling tilknyttet denne organisasjonen, bør være mørk"
 
 msgid "The secondary color for styling for this organization, should be dark"
-msgstr ""
+msgstr "Sekundærfargen for styling tilknyttet denne organisasjonen, bør være mørk"
 
 msgid "The tertiary color for styling for this organization, should be dark"
-msgstr ""
+msgstr "Tertierfargen for styling tilknyttet denne organisasjonen, bør være mørk"
 
 msgid "The primary highlight color for styling for this organization, should be light"
-msgstr ""
+msgstr "Den primære highlight-fargen tilknyttet denne organisasjonen, bør være lys"
 
 msgid "The secondary highlight color for styling for this organization, should be light"
-msgstr ""
+msgstr "Den sekundære highlight-fargen tilknyttet denne organisasjonen, bør være lys"
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr ""
+msgstr "Du kan ha opptil 6 farger for styling charts, bruk komma mellom fargene"
 
 msgid "The color used to draw the text on the join bar"
-msgstr ""
+msgstr "Tekstfarge på \"delta/bli med\"-baren"
 
 msgid "The color used to draw the background on the join bar"
-msgstr ""
+msgstr "Bakgrunnsfarge for \"delta/bli med\"-baren"
 
 msgid "The primary color for styling for this organization"
-msgstr ""
+msgstr "Primærfargen for styling tilknyttet denne organisasjonen"
 
 msgid "The secondary color for styling for this organization"
-msgstr ""
+msgstr "Sekundærfargen for styling tilknyttet denne organisasjonen"
 
 msgid "The background color for the site"
-msgstr ""
+msgstr "Bakgrunnsfargen for siden"
 
 msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
-msgstr ""
+msgstr "11 farger for styling-kart, bruk komma mellom fargene, vil kun fungere med 11 farger"
 
 msgid "The states to show on maps only"
-msgstr ""
+msgstr "Fylkene som kun skal vises på kartet"
 
 msgid "The states to show on maps only, used to filter poll results"
-msgstr ""
+msgstr "Fylkene som skal vises på kart, brukes til å filtrere undersøkelsesresultater"
 
 msgid "The Google Analytics Tracking ID for this organization"
-msgstr ""
+msgstr "Google Analytics Tracking ID for denne organisasjonen"
 
 msgid "The URL to the Youtube channel for this organization"
-msgstr ""
+msgstr "URL til YouTube kanalen til denne organisasjonen"
 
 msgid "The URL to the Facebook page for this organization"
-msgstr ""
+msgstr "URL til Facebook siden til denne organisasjonen"
 
 msgid "The integer id to the Facebook page for this organization (optional)"
-msgstr ""
+msgstr "URL til Facebook siden til denne organisasjonen (valgfritt)"
 
 msgid "The integer id to the Facebook app for this organization's chat app (optional)"
-msgstr ""
+msgstr "Integer id til Facebook applikasjonen for denne organisasjonens chat app (valgfritt)"
 
 msgid "The short text used to greet users on Facebook Messenger Plugin"
-msgstr ""
+msgstr "En kort tekst som brukes til å velkomme brukere på Facebook Messenger Plugin"
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr ""
+msgstr "Id for Facebook Pixel til denne organisasjonen (valgfritt)"
 
 msgid "The Instagram username for this organization"
-msgstr ""
+msgstr "Instagram brukernavn for denne organisasjonen"
 
 msgid "The Instagram widget id from lightwidget.com"
-msgstr ""
+msgstr "Instagram widget id fra lightwidget.com"
 
 msgid "The Twitter handle for this organization"
-msgstr ""
+msgstr "Twitter handle til denne organisasjonen"
 
 msgid "The Twitter widget used for searching"
-msgstr ""
+msgstr "Twitter widget brukt til søk"
 
 msgid "The words to filter out from the results on public site"
-msgstr ""
+msgstr "Ord som skal filtreres ut fra resultatene på den offentlige siden"
 
 msgid "If there are jobs to be shown on the public site."
-msgstr ""
+msgstr "Er disse jobber som skal vises på den offentlige siden?"
 
 msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
-msgstr ""
+msgstr "Skal denne organisasjonen ha global data? MAO: skal det være et verdenskart isteden for et landskart"
 
 msgid "Whether to activate an extra gender."
-msgstr ""
+msgstr "Aktiver fler kjønnsidentiteter"
 
 msgid "Whether to activate the new design."
-msgstr ""
+msgstr "Aktiver nytt design"
 
 msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
-msgstr ""
+msgstr "Alpha-3 ISO koden for organisasjonen, slik at story widget fra U-Report appen fremvises. For eksempel: BRA, NIG, CMR (bruk GLOBAL hvis U-Reporten er global)."
 
 msgid "The font used for headline texts"
-msgstr ""
+msgstr "Font til overskrifter"
 
 msgid "The font used for normal text"
-msgstr ""
+msgstr "Font til normal tekst"
 
 msgid "Hide participation stats"
-msgstr ""
+msgstr "Skjul deltakelsesstatistikk"
 
 msgid "The text to describe the sponsors of free messages"
-msgstr ""
+msgstr "Teksten som beskriver sponsorer av gratis meldinger"
 
 msgid "The font used for small text"
-msgstr ""
+msgstr "Font til liten tekst"
 
 msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
-msgstr ""
+msgstr "Om du trenger en tilpasset HTML kode for din organisasjon sine sider, slik som tilpassede analytics code snippets"
 
 msgid "Other language sites links"
-msgstr ""
+msgstr "Lenker til sider med andre språk"
 
 msgid "90 Days"
-msgstr ""
+msgstr "90 dager"
 
 msgid "6 Months"
-msgstr ""
+msgstr "6 måneder"
 
 msgid "12 Months"
-msgstr ""
+msgstr "12 måneder"
 
 msgid "Age"
-msgstr ""
+msgstr "Alder"
 
 msgid "Location"
-msgstr "တည်နေရာ"
+msgstr "Bosted"
 
 msgid "Opinion Responses"
-msgstr ""
+msgstr "Meninger"
 
 msgid "Sign Up Rate"
-msgstr ""
+msgstr "Registreringsrate"
 
 msgid "Response Rate"
-msgstr "ပြန်လည်ဖြေကြားနှုန်း"
+msgstr "Responsrate"
 
 msgid "Active Users"
-msgstr ""
+msgstr "Aktive brukere"
 
 msgid "Whether this row was created by squashing"
-msgstr ""
+msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
-msgstr ""
+msgstr "Noe som skal trigge lokalisering"
