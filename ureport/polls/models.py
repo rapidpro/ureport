@@ -842,9 +842,11 @@ class PollQuestion(SmartModel):
         if cached_value:
             return cached_value["results"]
 
-        if getattr(settings, "PROD", False):
+        if getattr(settings, "IS_PROD", False):
             if not segment:
                 logger.error("Question get results without segment cache missed", extra={"stack": True})
+            else:
+                logger.error("Question get results cache missed", extra={"stack": True})
 
             if segment and "location" in segment and segment.get("location").lower() == "state":
                 logger.error("Question get results with state segment cache missed", extra={"stack": True})

@@ -7,7 +7,7 @@ from ureport.settings_common import *
 import os
 import dj_database_url
 
-
+IS_PROD=True
 DEBUG = False
 THUMBNAIL_DEBUG = DEBUG
 COMPRESS_ENABLED = True
