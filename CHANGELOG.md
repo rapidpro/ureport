@@ -1,3 +1,41 @@
+v1.1.179
+----------
+ * Log cache misses
+ * Merge pull request #578 from Ilhasoft/feature/viber
+ * Merge pull request #624 from Ilhasoft/feature/enable-no-language
+ * fix tests
+ * Merge remote-tracking branch 'origin/master' into feature/viber
+ * run code check
+ * Enable Norwegian language
+ * Merge branch 'master' into feature/viber
+ * Merge branch 'master' of https://github.com/rapidpro/ureport into feature/viber
+ * removed old font-aweasome version
+ * Change url
+ * Change viber_url to viber_username
+ * Fix flake8
+ * Fix flake8
+ * Fix flake8
+ * Fix messages
+ * Fix flake8
+ * Fix messages
+ * Fix messages
+ * Fix messages
+ * Fix flake8
+ * Fix messages
+ * Update messages
+ * Update messages
+ * Merge branch 'feature/viber' of https://github.com/Ilhasoft/ureport into HEAD
+ * Update messages
+ * Fix tests
+ * Merge branch 'feature/viber' of https://github.com/Ilhasoft/ureport into HEAD
+ * Fix tests
+ * Merge branch 'feature/viber' of https://github.com/Ilhasoft/ureport into feature/viber
+ * Fix tests
+ * Update messages
+ * Update settings_commons
+ * Added support for viber
+ * Added support for viber
+
 v1.1.178
 ----------
  * Run code check
