@@ -452,7 +452,8 @@ class Poll(SmartModel):
 
     @classmethod
     def get_public_polls(cls, org):
-        return Poll.objects.filter(org=org, is_active=True, category__is_active=True, has_synced=True).exclude(
+        categories = Category.objects.filter(org=org, is_active=True).only("id")
+        return Poll.objects.filter(org=org, is_active=True, category_id__in=categories, has_synced=True).exclude(
             flow_uuid=""
         )
 
