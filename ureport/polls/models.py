@@ -1093,24 +1093,11 @@ class PollQuestion(SmartModel):
                     dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories)
                 )
 
-        cache_time = PollQuestion.POLL_QUESTION_RESULTS_CACHE_TIMEOUT
-        if not segment:
-            cache_time = None
-
-        if segment and segment.get("location", "").lower() == "state":
-            cache_time = None
-
-        if segment and segment.get("age", "").lower() == "age":
-            cache_time = None
-
-        if segment and segment.get("gender", "").lower() == "gender":
-            cache_time = None
-
         key = PollQuestion.POLL_QUESTION_RESULTS_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         if segment:
             key += ":" + slugify(six.text_type(json.dumps(segment)))
 
-        cache.set(key, {"results": results}, cache_time)
+        cache.set(key, {"results": results}, None)
 
         return results
 
