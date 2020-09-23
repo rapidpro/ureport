@@ -1,3 +1,10 @@
+v1.1.180
+----------
+ * Merge pull request #626 from rapidpro/get-public-poll-query
+ * Run code check
+ * Never expire cache for poll results and rebuild them once a day
+ * Try to use category index for getting polls
+
 v1.1.179
 ----------
  * Log cache misses
