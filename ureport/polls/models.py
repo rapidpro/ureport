@@ -271,6 +271,8 @@ class Poll(SmartModel):
 
     def update_questions_results_cache(self):
         for question in self.questions.all():
+            question.calculate_polled()
+            question.calculate_responded()
             question.calculate_results()
             question.calculate_results(segment=dict(location="State"))
             question.calculate_results(segment=dict(age="Age"))
@@ -787,6 +789,8 @@ class PollQuestion(SmartModel):
     the RuleSets in a flow.
     """
 
+    POLL_QUESTION_RESPONDED_CACHE_KEY = "org:%d:poll:%d:question_responded:%d"
+    POLL_QUESTION_POLLED_CACHE_KEY = "org:%d:poll:%d:question_polled:%d"
     POLL_QUESTION_RESULTS_CACHE_KEY = "org:%d:poll:%d:question_results:%d"
     POLL_QUESTION_RESULTS_CACHE_TIMEOUT = 60 * 12
 
@@ -889,8 +893,8 @@ class PollQuestion(SmartModel):
 
         org = self.poll.org
         open_ended = self.is_open_ended()
-        responded = self.get_responded()
-        polled = self.get_polled()
+        responded = self.calculate_responded()
+        polled = self.calculate_polled()
         translation.activate(org.language)
 
         results = []
@@ -1111,20 +1115,47 @@ class PollQuestion(SmartModel):
         return self.response_categories.filter(is_active=True).exclude(category__icontains="no response").count() == 1
 
     def get_responded(self):
+        key = PollQuestion.POLL_QUESTION_RESPONDED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+        cached_value = cache.get(key, None)
+        if cached_value:
+            return cached_value["results"]
+        if getattr(settings, "IS_PROD", False):
+            logger.error("Question get responded cache missed", extra={"stack": True})
+
+        return self.calculate_responded()
+
+    def calculate_responded(self):
         from ureport.stats.models import PollStats
 
+        key = PollQuestion.POLL_QUESTION_RESPONDED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         responded_stats = (
             PollStats.objects.filter(org=self.poll.org_id, question=self)
             .exclude(category=None)
             .aggregate(Sum("count"))
         )
-        return responded_stats.get("count__sum", 0) or 0
+        results = responded_stats.get("count__sum", 0) or 0
+        cache.set(key, {"results": results}, None)
+        return results
 
     def get_polled(self):
+        key = PollQuestion.POLL_QUESTION_POLLED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
+        cached_value = cache.get(key, None)
+        if cached_value:
+            return cached_value["results"]
+        if getattr(settings, "IS_PROD", False):
+            logger.error("Question get responded cache missed", extra={"stack": True})
+
+        return self.calculate_polled()
+
+    def calculate_polled(self):
         from ureport.stats.models import PollStats
+        key = PollQuestion.POLL_QUESTION_POLLED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
 
         polled_stats = PollStats.objects.filter(org_id=self.poll.org_id, question=self).aggregate(Sum("count"))
-        return polled_stats.get("count__sum", 0) or 0
+        results = polled_stats.get("count__sum", 0) or 0
+
+        cache.set(key, {"results": results}, None)
+        return results
 
     def get_response_percentage(self):
         polled = self.get_polled()
