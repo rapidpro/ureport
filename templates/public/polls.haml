@@ -28,7 +28,7 @@
               -trans "No results found"
 
             - for category in categories
-              - if category.polls.all
+              - if category.polls|length > 0
                 .block.py-1.bg-white.search-category
                   %a.font-bold.px-2.block(href="#")
                     %i.fas.fa-caret-right.closed(style="padding-top:2px" class="rtl:float-right ltr:float-left {% if is_rtl_org %}fa-caret-left{% else %}fa-caret-right{% endif %}")
@@ -36,7 +36,7 @@
                     .text-sm(class="rtl:pr-3 ltr:pl-3")
                       {{ category.name }}
                   .category-results
-                    - for poll in category.polls.all
+                    - for poll in category.polls
                       %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }} {{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }}")
                         .text-sm(class="rtl:mr-2 ltr:ml-2")
                           {{ poll.title }}

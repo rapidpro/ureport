@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import calendar
 import json
 import operator
+from collections import defaultdict
 from functools import reduce
 
 import pycountry
@@ -197,12 +198,16 @@ class PollContextMixin(object):
             context["gender_stats"] = org.get_gender_stats()
             context["age_stats"] = org.get_age_stats()
 
-        context["categories"] = (
-            Category.objects.filter(org=org, is_active=True)
-            .prefetch_related(Prefetch("polls", queryset=Poll.objects.filter(is_active=True).order_by("-poll_date")))
-            .order_by("name")
+        polls = Poll.get_public_polls(org=org).order_by("-poll_date").select_related("category")
+
+        categories_dict = defaultdict(list)
+        for poll in polls:
+            categories_dict[poll.category.name].append(poll)
+
+        context["categories"] = sorted(
+            [dict(name=k, polls=v) for k, v in categories_dict.items()], key=lambda c: c["name"]
         )
-        context["polls"] = Poll.get_public_polls(org=org).order_by("-poll_date")
+        context["polls"] = polls
 
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
