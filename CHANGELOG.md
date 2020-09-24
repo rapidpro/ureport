@@ -1,3 +1,8 @@
+v1.1.181
+----------
+ * Merge pull request #629 from rapidpro/fix-polls-page-slow
+ * Fix opinions page to load faster
+
 v1.1.180
 ----------
  * Merge pull request #626 from rapidpro/get-public-poll-query
