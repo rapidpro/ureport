@@ -1149,6 +1149,7 @@ class PollQuestion(SmartModel):
 
     def calculate_polled(self):
         from ureport.stats.models import PollStats
+
         key = PollQuestion.POLL_QUESTION_POLLED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
 
         polled_stats = PollStats.objects.filter(org_id=self.poll.org_id, question=self).aggregate(Sum("count"))
