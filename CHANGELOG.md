@@ -1,3 +1,9 @@
+v1.1.182
+----------
+ * Merge pull request #630 from rapidpro/fix-polls-page-slow
+ * Run code check
+ * Cache question responded count and polled count
+
 v1.1.181
 ----------
  * Merge pull request #629 from rapidpro/fix-polls-page-slow
