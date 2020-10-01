@@ -1,3 +1,17 @@
+v1.1.183
+----------
+ * Merge pull request #635 from rapidpro/remove-zambia-link
+ * Run code check
+ * Remove broken Zambia link
+ * Merge pull request #628 from rapidpro/translations_django-po--master_no
+ * Merge pull request #632 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Merge pull request #634 from Ilhasoft/translations_django-po--master_sr_RS@latin
+ * Merge pull request #633 from Ilhasoft/translations_django-po--master_no
+ * run code_check
+ * run code_check
+ * Apply translations in sr_RS@latin
+ * Translate /locale/en/LC_MESSAGES/django.po in no
+
 v1.1.182
 ----------
  * Merge pull request #630 from rapidpro/fix-polls-page-slow
