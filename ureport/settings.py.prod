@@ -8,8 +8,9 @@ from decouple import config
 from sentry_sdk.integrations.django import DjangoIntegration
 from ureport.settings_common import *  # noqa
 
-
+IS_PROD=config('IS_PROD', default=True, cast=bool)
 DEBUG = config('DEBUG', default=False, cast=bool)
+THUMBNAIL_DEBUG = DEBUG
 TEMPLATE_DEBUG = DEBUG
 
 EMPTY_SUBDOMAIN_HOST = config('EMPTY_SUBDOMAIN_HOST', 'https://ureport.in')

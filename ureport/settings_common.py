@@ -85,6 +85,7 @@ LANGUAGES = (
     ("sr-rs@latin", "Serbian (Latin, Serbia)"),
     ("bg", "Bulgarian"),
     ("hr-hr", "Croatian"),
+    ("no", "Norwegian"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -885,6 +886,7 @@ CELERYBEAT_SCHEDULE = {
         "schedule": crontab(hour=2, minute=0),
         "args": ("ureport.stats.tasks.refresh_engagement_data", "slow"),
     },
+    "rebuild-poll-results-count": {"task": "polls.rebuild_counts", "schedule": crontab(hour=4, minute=0)},
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=4, minute=0),
@@ -1269,6 +1271,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_nigeria24x7.png",
         is_static=True,
         count_link="http://nigeria24x7.ureport.in/count/",
+    ),
+    dict(
+        name="Norge",
+        host="//norge.ureport.in",
+        flag="flag_norge.png",
+        is_static=True,
+        count_link="http://norge.ureport.in/count/",
     ),
     dict(
         name="On the move",

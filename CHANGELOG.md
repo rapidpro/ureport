@@ -1,3 +1,82 @@
+v1.1.182
+----------
+ * Merge pull request #630 from rapidpro/fix-polls-page-slow
+ * Run code check
+ * Cache question responded count and polled count
+
+v1.1.181
+----------
+ * Merge pull request #629 from rapidpro/fix-polls-page-slow
+ * Fix opinions page to load faster
+
+v1.1.180
+----------
+ * Merge pull request #626 from rapidpro/get-public-poll-query
+ * Run code check
+ * Never expire cache for poll results and rebuild them once a day
+ * Try to use category index for getting polls
+
+v1.1.179
+----------
+ * Log cache misses
+ * Merge pull request #578 from Ilhasoft/feature/viber
+ * Merge pull request #624 from Ilhasoft/feature/enable-no-language
+ * fix tests
+ * Merge remote-tracking branch 'origin/master' into feature/viber
+ * run code check
+ * Enable Norwegian language
+ * Merge branch 'master' into feature/viber
+ * Merge branch 'master' of https://github.com/rapidpro/ureport into feature/viber
+ * removed old font-aweasome version
+ * Change url
+ * Change viber_url to viber_username
+ * Fix flake8
+ * Fix flake8
+ * Fix flake8
+ * Fix messages
+ * Fix flake8
+ * Fix messages
+ * Fix messages
+ * Fix messages
+ * Fix flake8
+ * Fix messages
+ * Update messages
+ * Update messages
+ * Merge branch 'feature/viber' of https://github.com/Ilhasoft/ureport into HEAD
+ * Update messages
+ * Fix tests
+ * Merge branch 'feature/viber' of https://github.com/Ilhasoft/ureport into HEAD
+ * Fix tests
+ * Merge branch 'feature/viber' of https://github.com/Ilhasoft/ureport into feature/viber
+ * Fix tests
+ * Update messages
+ * Update settings_commons
+ * Added support for viber
+ * Added support for viber
+
+v1.1.178
+----------
+ * Run code check
+ * Merge pull request #622 from Ilhasoft/fix/temba_client-migrate-version
+ * Merge pull request #582 from Ilhasoft/feature/font-aweasome-5
+ * Merge pull request #623 from rapidpro/translations_django-po--master_no
+ * removed viber icon from font-aweasome update branch
+ * Translate /locale/en/LC_MESSAGES/django.po in no
+ * fixed prefix
+ * Merge pull request #621 from Ilhasoft/feature/add-norge-flag
+ * Merge branch 'master' of https://github.com/rapidpro/ureport into feature/font-aweasome-5
+ * applied fix from sugestion
+ * fixed temba_client version to v2
+ * fix pep8
+ * change the flag name
+ * add norge flag
+ * Merge pull request #619 from rapidpro/translations_django-po--master_hr_HR
+ * Run code check
+ * Merge branch 'master' into translations_django-po--master_hr_HR
+ * Apply translations in hr_HR
+ * Fix icons
+ * Updated icons for font aweasome 5
+
 v1.1.177
 ----------
  * Merge pull request #620 from rapidpro/update-cache-for-polls-no-longer-syncing

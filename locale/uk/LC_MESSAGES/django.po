@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-04 12:22+0000\n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -1519,6 +1519,9 @@ msgstr ""
 msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgstr ""
 
+msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr ""
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr ""
 
@@ -1690,7 +1693,7 @@ msgstr ""
 msgid "Something to trigger localizations"
 msgstr ""
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
