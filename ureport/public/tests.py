@@ -401,6 +401,52 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["org"], self.uganda)
         # self.assertContains(response, "All U-Report services (all msg on 3000) are free.")
 
+    def test_poll_results(self):
+
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
+
+        question1 = PollQuestion.objects.create(
+            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
+        )
+
+        pollquestion_results_url = reverse("public.pollquestion_results", args=[question1.pk])
+
+        response = self.client.get(pollquestion_results_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], f"/pollquestion/{question1.pk}/results/")
+
+        response = self.client.get(
+            pollquestion_results_url + "?segment=%0D%0ASPIHeader%3A%20SPIValue&", SERVER_NAME="uganda.ureport.io"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], f"/pollquestion/{question1.pk}/results/")
+
+    def test_reporter_results(self):
+        reporter_results_url = reverse("public.contact_field_results")
+
+        response = self.client.get(reporter_results_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], "/contact_field_results/")
+
+        response = self.client.get(
+            reporter_results_url + "?segment=%0D%0ASPIHeader%3A%20SPIValue&", SERVER_NAME="nigeria.ureport.io"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], "/contact_field_results/")
+
+    def test_engagement_data(self):
+        ureporters_url = reverse("public.engagement_data")
+
+        response = self.client.get(ureporters_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], "/engagement_data/")
+
+        response = self.client.get(
+            ureporters_url + "?results_params=%0D%0ASPIHeader%3A%20SPIValue&", SERVER_NAME="nigeria.ureport.io"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], "/engagement_data/")
+
     @mock.patch("ureport.utils.fetch_old_sites_count")
     def test_ureporters(self, mock_old_sites_count):
         mock_old_sites_count.return_value = []
