@@ -85,6 +85,7 @@ LANGUAGES = (
     ("sr-rs@latin", "Serbian (Latin, Serbia)"),
     ("bg", "Bulgarian"),
     ("hr-hr", "Croatian"),
+    ("no", "Norwegian"),
 )
 
 DEFAULT_LANGUAGE = "en"
@@ -261,6 +262,14 @@ ORG_CONFIG_FIELDS = [
         field=dict(
             help_text=_("The whatapp number that users will use to contact U-Report if you have one"),
             label="Whatapp Number",
+            required=False,
+        ),
+    ),
+    dict(
+        name="viber_username",
+        field=dict(
+            help_text=_("The viber username that users will use to contact U-Report if you have one"),
+            label="Viber Username",
             required=False,
         ),
     ),
@@ -877,6 +886,7 @@ CELERYBEAT_SCHEDULE = {
         "schedule": crontab(hour=2, minute=0),
         "args": ("ureport.stats.tasks.refresh_engagement_data", "slow"),
     },
+    "rebuild-poll-results-count": {"task": "polls.rebuild_counts", "schedule": crontab(hour=4, minute=0)},
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=4, minute=0),
@@ -1037,6 +1047,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_cote_d_ivoire.png",
         is_static=True,
         count_link="http://cotedivoire.ureport.in/count/",
+    ),
+    dict(
+        name="Croatia",
+        host="//croatia.ureport.in/",
+        flag="flag_croatia.png",
+        is_static=True,
+        count_link="http://croatia.ureport.in/count/",
     ),
     dict(
         name="DRC",
@@ -1254,6 +1271,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_nigeria24x7.png",
         is_static=True,
         count_link="http://nigeria24x7.ureport.in/count/",
+    ),
+    dict(
+        name="Norge",
+        host="//norge.ureport.in",
+        flag="flag_norge.png",
+        is_static=True,
+        count_link="http://norge.ureport.in/count/",
     ),
     dict(
         name="On the move",

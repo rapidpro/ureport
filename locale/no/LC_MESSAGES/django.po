@@ -4,8 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Milos Cikota <mcikota@unicef.org>, 2019
-# Marko Mitrovic <mmitrovic@unicef.org>, 2020
+# Cathrine Standal <cathrinestandal@gmail.com>, 2020
 # 
 #, fuzzy
 msgid ""
@@ -14,289 +13,292 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2020\n"
-"Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
+"Last-Translator: Cathrine Standal <cathrinestandal@gmail.com>, 2020\n"
+"Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sr_RS@latin\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: no\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "The name of this category"
-msgstr "Naziv kategorije"
+msgstr "Navnet på denne kategorien"
 
 msgid "An optional image that can describe this category"
-msgstr "Slika po izboru za opis kategorije"
+msgstr "Et valgfritt bilde som kan beskrive denne kategorien"
 
 msgid "The organization this category applies to"
-msgstr "Organizacija na koju se odnosi ova kategorija"
+msgstr "Organisasjonen som tilhører denne kategorien"
 
 msgid "Categories"
-msgstr "Kategorije"
+msgstr "Kategorier"
 
 msgid "The name to describe this image"
-msgstr "Naziv za opis ove slike"
+msgstr "Navnet som beskriver dette bildet"
 
 msgid "The category this image represents"
-msgstr "Kategorija koju slika predstavlja"
+msgstr "Kategorien dette bildet representerer"
 
 msgid "The image file to use"
-msgstr "Fajl za sliku koja će se koristiti"
+msgstr "Bildefilen som skal benyttes"
 
 msgid "The human readable name for this content type"
-msgstr "Čitljivo ime ove vrste sadržaja"
+msgstr "Det menneskelige lesbare navnet for denne innholdstypen"
 
 msgid "The slug to idenfity this content type, used with the template tags"
 msgstr ""
-"Umetak (deo URL-a) za identifikaciju ove vrste sadržaja, koristi se sa "
-"oznakama template-a"
+"URL-kode til å identifisere denne innholdstypen, brukt sammen med template "
+"tags"
 
 msgid ""
 "A description of where this content type is used on the site and how it will"
 " be dsiplayed"
 msgstr ""
-"Opis gde se ovaj tip sadržaja koristi na stranici i kako će biti prikazan"
+"En beskrivelse av hvor denne innholdstypen er brukt på siden, og hvordan det"
+" vil se ut"
 
 msgid "Whether this content should include a title"
-msgstr "Da li bi ovaj sadržaj trebalo da sadrži naslov"
+msgstr "Innholdet skal ha en tittel"
 
 msgid "Whether this content should include an image"
-msgstr "Da li bi ovaj sadržaj trebalo da sadrži sliku"
+msgstr "Innholdet skal ha et bilde"
 
 msgid "Whether this content should use a rich HTML editor"
-msgstr "Da li bi ovaj sadržaj trebalo da koristi rich HTML editor"
+msgstr "Innholdet skal bruke et avansert HTML program"
 
 msgid "Whether this content should include a summary field"
-msgstr "Uključuje li ovaj sadržaj prostor za rezime"
+msgstr "Innholdet skal ha et oppsummeringsfelt"
 
 msgid "Whether this content should include a link"
-msgstr "Hoće li ovaj sadržaj uključivati linkove"
+msgstr "Innholdet skal ha en lenke"
 
 msgid ""
 "Whether this content should allow upload of additional images, ie a gallery"
-msgstr ""
-"Hoće li ovaj sadržaj dozvoljavati učitavanje dodatnih slika, npr. galeriju"
+msgstr "Innholdet kan tillate opplasting av bilder"
 
 msgid "Whether this content has a color field"
-msgstr "Ima li ovaj sadržaj polje za odabir boje"
+msgstr "Innholdet har et fargefelt"
 
 msgid "Whether this content should allow setting a YouTube id"
-msgstr "Da li ovaj sadržaj omogućava postavljanje You Tube ID-a"
+msgstr "Innholdet tillater å sette inn YouTube id"
 
 msgid "Whether this content should allow tags"
-msgstr "Omogućava li ovaj sadržaj postavljanje tagova"
+msgstr "Innholdet tillater emneknagger"
 
 msgid "Content Type"
-msgstr "Vrsta sadržaja"
+msgstr "Innholdstype"
 
 msgid "The category, or type for this content block"
-msgstr "Kategorija ili tip ovog sadržajnog bloka"
+msgstr "Kategorien, eller formatet på dette innholdet"
 
 msgid "The title for this block of content, optional"
-msgstr "Naziv sadržajnog bloka, opciono"
+msgstr "Tittel for denne innholdsblokken, valgfritt"
 
 msgid "The summary for this item, should be short"
-msgstr "Rezime ovog dela, treba biti kratak"
+msgstr "Et sammendrag til dette punktet, burde være kort"
 
 msgid "The body of text for this content block, optional"
-msgstr "Struktura teksta za ovaj sadržajni blok, opciono"
+msgstr "Brødtekst for denne innholdsblokken, valgfritt"
 
 msgid "Any image that should be displayed with this content block, optional"
-msgstr "Slika koja bi trebala biti prikazana uz ovaj sadržajni blok, opciono"
+msgstr "Et bilde som skal vises sammen med denne innholdsblokken, valgfritt"
 
 msgid "A background color to use for the image, in the format: #rrggbb"
-msgstr "Boja pozadine za sliku, u formatu #rrggbb"
+msgstr "Bruk en bakgrunnsfarge som bilde, i formatet: #rrggbb"
 
 msgid "Any link that should be associated with this content block, optional"
-msgstr "Link, koji treba da ide uz ovaj sadržajni blok, opciono"
+msgstr ""
+"En lenke som skal benyttes sammen med denne innholdsblokken, valgfritt"
 
 msgid "The id of the YouTube video that should be linked to this item"
-msgstr "ID You Tube videa, koji se vezuje uz ovu stavku"
+msgstr "Id til YouTube-videoen som tilhører dette innholdet"
 
 msgid ""
 "Any tags for this content block, separated by spaces, can be used to do more"
 " advanced filtering, optional"
 msgstr ""
-"Tagovi za sadržajni blok, odvojeno ukucani, koji se mogu koristiti za "
-"naprednije filtriranje, opciono"
+"Emneknagger for denne innholdsblokken, separert med mellomrom, kan brukes "
+"til mer avansert filtrering, valgfritt"
 
 msgid "The priority for this block, higher priority blocks come first"
 msgstr ""
-"Prioritet ovog bloka, blokovi sa većim prioritetom postavljaju se prvi"
+"Prioriteringen av denne innholdsblokken, høyest prioritet vises først "
 
 msgid "The organization this content block belongs to"
-msgstr "Organizacija kojoj sadržaj pripada"
+msgstr "Organisasjonen denne innholdsblokken tilhører"
 
 msgid "Gallery"
-msgstr "Galerija"
+msgstr "Galleri"
 
 msgid "Add Image"
-msgstr "Dodaj sliku"
+msgstr "Legg til bilde"
 
 msgid "Search"
-msgstr "Traži"
+msgstr "Søk"
 
 msgid "Add"
-msgstr "Dodaj"
+msgstr "Legg til"
 
 msgid "Content Types"
-msgstr "Vrste sadržaja"
+msgstr "Innholdstyper"
 
 msgid "Content Blocks"
-msgstr "Sadržajni blokovi"
+msgstr "Innholdsblokker"
 
 #, python-format
 msgid "%s Blocks"
-msgstr "1%s Blokovi"
+msgstr "%s Blokker"
 
 #, python-format
 msgid "Edit %s"
-msgstr "Uredi 1%s"
+msgstr "Rediger %s "
 
 #, python-format
 msgid "Create %s"
-msgstr "Kreiraj 1%s"
+msgstr "%s Opprett"
 
 msgid "Create Content Block"
-msgstr "Kreiraj sadržajni blok"
+msgstr "Lag innholdsblokk"
 
 msgid "Your first name"
-msgstr "Vaše ime"
+msgstr "Fornavn"
 
 msgid "Your last name"
-msgstr "Vaše prezime"
+msgstr "Etternavn"
 
 msgid "Your email address"
-msgstr "Vaša e-mail adresa"
+msgstr "E-post"
 
 msgid "Your password, at least eight letters please"
-msgstr "Vaša lozinka, najmanje osam slova"
+msgstr "Ditt passord, minst åtte bokstaver"
 
 msgid "That email address is already used"
-msgstr "Ova e-mail adresa je već upotrebljena"
+msgstr "E-post adressen er allerede i bruk"
 
 msgid "Passwords must contain at least 8 letters."
-msgstr "Lozinka mora sadržati najmanje 8 slova"
+msgstr "Passordet må inneholde minst 8 bokstaver."
 
 msgid "This domain is used for subdomains"
-msgstr "Ovaj domen se koristi za pod-domene"
+msgstr "Dette domene er brukt for underdomener"
 
 msgid "Name"
-msgstr "Ime"
+msgstr "Navn"
 
 msgid "The name of this organization"
-msgstr "Naziv organizacije"
+msgstr "Navnet på denne organisasjonen"
 
 msgid "The logo that should be used for this organization"
-msgstr "Logotip organizacije"
+msgstr "Logoen som skal brukes for denne organisasjonen"
 
 msgid "Administrators"
-msgstr "Administratori"
+msgstr "Administratorer"
 
 msgid "The administrators in your organization"
-msgstr "Administratori u vašoj organizaciji"
+msgstr "Administratorene i din organisasjon"
 
 msgid "Viewers"
-msgstr "Posetioci"
+msgstr "Seere"
 
 msgid "The viewers in your organization"
-msgstr "Posetioci u vašoj organizaciji"
+msgstr "Seerne i din organisasjon"
 
 msgid "Editors"
-msgstr "Urednici"
+msgstr "Redaktører"
 
 msgid "The editors in your organization"
-msgstr "Urednici u vašoj organizaciji"
+msgstr "Redaktørene i din organisasjon"
 
 msgid "Language"
-msgstr "Jezik"
+msgstr "Språk"
 
 msgid "The main language used by this organization"
-msgstr "Jezik koji se koristi u vašoj organizaciji"
+msgstr "Hovedspråket brukt i denne organisasjonen"
 
 msgid "Subdomain"
-msgstr "Pod-domen"
+msgstr "Underdomene"
 
 msgid "This subdomain is not available"
-msgstr "Pod-domen nije dostupan"
+msgstr "Dette underdomene er utilgjengelig"
 
 msgid "The subdomain for this organization"
-msgstr "Pod-domen vaše organizacije"
+msgstr "Underdomene for denne organisasjonen"
 
 msgid "Domain"
-msgstr "Domen"
+msgstr "Domene"
 
 msgid "This domain is not available"
-msgstr "Domen nije dostupan"
+msgstr "Dette domene er ikke tilgjengelig"
 
 msgid "The custom domain for this organization"
-msgstr "Prilagođen domen vaše organizacije"
+msgstr "Tilpasset domene for denne organisasjonen"
 
 msgid "Timezone"
-msgstr "Vremenska zona"
+msgstr "Tidssone"
 
 msgid "The timezone your organization is in."
-msgstr "Vaša vremenska zona"
+msgstr "Tidssonen til din organisasjon."
 
 msgid ""
 "JSON blob used to store configuration information associated with this "
 "organization"
-msgstr "JSON blob za čuvanje informacija vezanih za organizaciju"
+msgstr ""
+"JSON blob brukt til å lagre konfigurasjonsinformasjonen til denne "
+"organisasjonen"
 
 msgid "Administrator"
 msgstr "Administrator"
 
 msgid "Editor"
-msgstr "Urednik"
+msgstr "Redaktør"
 
 msgid "Viewer"
-msgstr "Posetilac"
+msgstr "Seer"
 
 msgid "Org"
 msgstr "Org"
 
 msgid "The organization to which the account is invited to view"
-msgstr "Organizacija na koju je nalog pozvan da pregleda"
+msgstr "Organisasjonen som kontoen er invitert til å vise"
 
 msgid "Email"
-msgstr "Email"
+msgstr "E-post"
 
 msgid "The email to which we send the invitation of the viewer"
-msgstr "E-mail na koji se šalje poziv posetioca"
+msgstr "E-posten som invitasjonen blir sendt til"
 
 msgid "Secret"
-msgstr "Tajno"
+msgstr "Hemmelig"
 
 msgid "a unique code associated with this invitation"
-msgstr "jedinstveni kod koji je povezan sa ovim pozivom"
+msgstr "en unik kode assosiert med denne invitasjonen"
 
 msgid "User Role"
-msgstr "Uloga korisnika"
+msgstr "Brukerrolle"
 
 #, python-format
 msgid "%s Invitation"
-msgstr "1%s poziv"
+msgstr "%s Invitasjon"
 
 msgid "Banner"
-msgstr "Baner"
+msgstr "Fane"
 
 msgid "Pattern"
-msgstr "Uzorak/šara"
+msgstr "Mønster"
 
 msgid "The organization in which the image will be used"
-msgstr "Organizacija u kojoj će slika biti korišćena"
+msgstr "Organisasjonen som bildet vil brukes i"
 
 msgid "The name to describe this background"
-msgstr "Naziv za opis pozadine"
+msgstr "Navnet som beskriver denne bakgrunnen"
 
 msgid "Background type"
-msgstr "Vrsta pozadine"
+msgstr "Bakgrunnstype"
 
 msgid "The image file"
-msgstr "Fajl slike"
+msgstr "Bildefil"
 
 msgid "The API token for this backend"
-msgstr "API token za pozadinski sistem"
+msgstr "API nøkkel for denne backend-serveren "
 
 #, python-format
 msgid ""
@@ -307,158 +309,160 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"Pozivamo vas da se pridružite %(org_name)s. \n"
+"Du har blitt invitert til å bli med i %(org_name)s.\n"
 "<br/>\n"
-" Da prihvatite poziv,<a href='%(host)s%(join_url)s'>kliknite ovde </a>."
+"For å akseptere invitasjonen, <a href='%(host)s%(join_url)s'>klikk her</a>."
 
 msgid "You are invited to join {{org.name}}."
-msgstr "Pozvani ste da se pridružite {{org.name}}."
+msgstr "Du er invitert til å bli med i {{org.navn}}."
 
 msgid "Click this link to join"
-msgstr "Kliknite na link da biste se pridružili"
+msgstr "Klikk her for å bli med"
 
 msgid "Edit"
-msgstr "Uredi"
+msgstr "Rediger"
 
 msgid "Manage Backends"
-msgstr "Upravljanje pozadinskim sistemima"
+msgstr "Administrer Backends"
 
 msgid "Manage Users"
-msgstr "Upravljanje korisnicima"
+msgstr "Administrer Brukere"
 
 msgid "Accounts"
-msgstr "Nalozi"
+msgstr "Kontoer"
 
 msgid "Admins"
-msgstr "Administratori"
+msgstr "Administratorer"
 
 msgid "Remove"
-msgstr "Ukloni"
+msgstr "Fjern"
 
 msgid "You must have at least one administator"
-msgstr "Morate imati najmanje jednog administratora"
+msgstr "Du må ha minst én administrator"
 
 msgid "Select your Organization"
-msgstr "Odaberite vašu organizaciju"
+msgstr "Velg din Organisasjon"
 
 msgid ""
 "Your account is not associated to an organization. Please Contact the "
 "adminstrator."
 msgstr ""
-"Vaš nalog nije povezan sa organizacijom. Molimo kontaktirajte "
-"administratora."
+"Kontoen din er ikke tilknyttet en organisasjon. Vennligst Kontakt "
+"administratoren."
 
 msgid "Your Organization"
-msgstr "Vaša organizacija"
+msgstr "Din Organisasjon"
 
 msgid "Invite people to your organization"
-msgstr "Pozovite ljude u vašu organizaciju"
+msgstr "Inviter folk til din organisasjon"
 
 msgid "User group"
-msgstr "Korisnička grupa"
+msgstr "Brukergruppe"
 
 msgid "One of the emails you entered is invalid."
-msgstr "Jedna od e-mail adresa koje ste naveli nije važeća"
+msgstr "En av e-post adressene er ugyldig."
 
 #, python-format
 msgid "Manage %(name)s Accounts"
-msgstr "Uredi %(name)sNaloge"
+msgstr "Administrer %(name)s Kontoer"
 
 msgid "Create"
-msgstr "Kreiraj"
+msgstr "Opprett"
 
 msgid ""
 "Your invitation link is invalid. Please contact your organization "
 "administrator."
 msgstr ""
-"Vaš pozivni link nije ispravan. Molimo obratite se administratoru vaše "
-"organizacije."
+"Invitasjonslenken er ugyldig. Vennligst kontakt administrator for din "
+"organisasjon."
 
 #, python-format
 msgid "Join %(name)s"
-msgstr "Pridruži se %(name)s"
+msgstr "Bli med %(name)s"
 
 msgid "Join"
-msgstr "Pridruži se"
+msgstr "Bli med"
 
 msgid ""
 "Your invitation link has expired. Please contact your organization "
 "administrator."
 msgstr ""
-"Vaš pozivni link je istekao. Molimo kontaktirajte administratora u vašoj "
-"organizaciji."
+"Invitasjonslenken har utløpt. Vennligst kontakt administratoren for din "
+"organisasjon."
 
 msgid "Task"
-msgstr "Zadatak"
+msgstr "Oppgave"
 
 msgid "Tasks"
-msgstr "Zadaci"
+msgstr "Oppgaver"
 
 msgid "The title for this story"
-msgstr "Naslov priče"
+msgstr "Tittel for denne historien"
 
 msgid "Whether this story is featured"
-msgstr "Da li je priča objavljena"
+msgstr "Er en feature-historie"
 
 msgid "The summary for the story"
-msgstr "Rezime priče"
+msgstr "Sammendrag av denne historien"
 
 msgid "The body of text for the story"
-msgstr "Struktura teksta priče"
+msgstr "Brødteksten for denne historien"
 
 msgid "The writer of the story"
-msgstr "Autor priče"
+msgstr "Forfatteren av historien"
 
 msgid "A link to an mp3 file to publish on this story"
-msgstr "Link za mp3 fajl koji će biti objavljen uz priču"
+msgstr "Lenke til mp3 fil som skal publiseres med denne historien"
 
 msgid ""
 "The id of the YouTube video that should be linked to this story (this is the"
 " text that comes afer v= and before & in the YouTube URL)"
 msgstr ""
-"ID YouTube videa koji treba biti linkovan uz ovu priču (tekst koji sledi "
-"nakon v= i pre & unutar You Tube URL)"
+"Id til YouTube-video som skal linkes til denne historien (dette er teksten "
+"som kommer etter \"v=\" og før \"&\" i YouTube videoens URL)"
 
 msgid ""
 "Any tags for this story, separated by spaces, can be used to do more "
 "advanced filtering, optional"
 msgstr ""
-"Oznake za priču, odvojeno razmacima, koje mogu biti korišćene za napredno "
-"filtriranje, opciono"
+"Emneknagger for denne historien, separeres med mellomrom, kan brukes for mer"
+" avansert filtrering, valgfritt"
 
 msgid "The category for this story"
-msgstr "Kategorija za ovu priču"
+msgstr "Kategorien til denne historien"
 
 msgid "The organization this story belongs to"
-msgstr "Organizacija kojoj priča pripada"
+msgstr "Organisasjonen historien tilhører"
 
 msgid "Stories"
-msgstr "Priče"
+msgstr "Historier"
 
 msgid "The story to associate to"
-msgstr "Priča se veže uz"
+msgstr "Historien assosieres med"
 
 msgid "Yes"
-msgstr "Da"
+msgstr "Ja"
 
 msgid "No"
-msgstr "Ne"
+msgstr "Nei"
 
 msgid "Story Images"
-msgstr "Slike uz priču"
+msgstr "Historiebilder"
 
 #, python-format
 msgid "Image %d"
-msgstr "Slika %d"
+msgstr "Bilde %d"
 
 msgid "Image to display on story page and in previews. (optional)"
-msgstr "Slike koje će se prikazati uz priču i pregled. (opciono)"
+msgstr ""
+"Bilde som skal vises på historiesiden og i forhåndsvisninger. (valgfritt)"
 
 msgid "Image to display on story page and in previews (optional)"
-msgstr "Slike koje će se prikazati uz priču i pregled. (opciono)"
+msgstr ""
+"Bilde som skal vises på historiesiden og i forhåndsvisninger (valgfritt)"
 
 msgid "Remove Item?"
-msgstr "Ukloni stavku?"
+msgstr "Vil du slette objektet?"
 
 #, python-format
 msgid ""
@@ -467,15 +471,17 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"Jeste li sigurni da želite ukloniti <b>%(object)s</b>?"
+"Er du sikker på at du ønsker å slette<b>%(object)s</b>?"
 
 msgid ""
 "Once it is removed, it will be gone forever. There is no way to undo this "
 "operation."
-msgstr "Kada uklonite, nema načina da vratite sadržaj."
+msgstr ""
+"Dersom du sletter dette, er det borte for alltid. Denne operasjonen er "
+"irreversibel."
 
 msgid "Cancel"
-msgstr "Otkaži"
+msgstr "Avbryt"
 
 #, python-format
 msgid ""
@@ -488,16 +494,11 @@ msgid_plural ""
 "        "
 msgstr[0] ""
 "\n"
-"\t %(counter)s rezultati\n"
+"\t%(counter)sresult\n"
 "\t"
 msgstr[1] ""
 "\n"
-"\t %(counter)s rezultati\n"
-"\t"
-msgstr[2] ""
-"\n"
-"         %(counter)s rezultati\n"
-"        "
+"%(counter)s resultater"
 
 #, python-format
 msgid ""
@@ -506,31 +507,32 @@ msgid ""
 "\t"
 msgstr ""
 "\n"
-"\tRezultati %(start)s-%(end)sod %(count)s"
+"\tResultater%(start)s-%(end)s av %(count)s\n"
+"\t"
 
 msgid "Previous"
-msgstr "Prethodni"
+msgstr "Forrige"
 
 msgid "Next"
-msgstr "Sledeći"
+msgstr "Neste"
 
 msgid "edit"
-msgstr "uredi"
+msgstr "rediger"
 
 msgid "Sign in"
-msgstr "Prijavi se"
+msgstr "Registrer deg"
 
 msgid "Login"
-msgstr "Prijava"
+msgstr "Logg inn"
 
 msgid "Forgot Password?"
-msgstr "Zaboravili ste lozinku?"
+msgstr "Glemt Passord?"
 
 msgid "Token Expired"
-msgstr "Token je istekao"
+msgstr "Økten er Utløpt"
 
 msgid "Login Failure"
-msgstr "Greška u prijavi"
+msgstr "Innlogging Feilet"
 
 #, python-format
 msgid ""
@@ -539,7 +541,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"Žao nam je, trenutno se ne možete se prijaviti zbog %(failed_login_limit)spogrešnih pokušaja prijave."
+"Du kan dessverre ikke logge inn for øyeblikket ettersom vi har mottatt %(failed_login_limit)s ukorrekte innloggingsforsøk."
 
 #, python-format
 msgid ""
@@ -548,30 +550,31 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"Molimo sačekajte %(lockout_timeout)s minuta pre ponovnog pokušaja prijave."
+"Vennligst vent %(lockout_timeout)s minutter før du prøver å logge inn på nytt."
 
 msgid ""
 "Alternatively, you can fill out the form below to have your password reset "
 "via e-mail."
 msgstr ""
-"Možete ispuniti formular ispod, kako biste obnovili lozinku putem e-maila."
+"Alternativt, fyll ut skjemaet nedenfor for å nullstille passordet ditt via "
+"din registrerte e-post adresse."
 
 msgid "Please contact the website administrator to have your password reset."
 msgstr ""
-"Molimo kontaktirajte administratora stranice radi ponovne postavke lozinke"
+"Vennligst kontakt nettsidens administrator for å nullstille ditt passord."
 
 msgid "Email Address"
-msgstr "E-mail adresa"
+msgstr "E-post Adresse"
 
 msgid "Recover"
-msgstr "Obnovi"
+msgstr "Gjenopprett"
 
 msgid ""
 "Please enter the email address you used to sign up and we will help you "
 "recover your password."
 msgstr ""
-"Molimo upišite e-mail adresu koju koristite za pristup i mi ćemo vam pomoći "
-"da obnovite lozinku"
+"Vennligst gjenta eport adressen du brukte til registrering og vi vil hjelpe "
+"deg med å gjenopprette passord."
 
 #, python-format
 msgid ""
@@ -580,284 +583,282 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"<strong>Lozinka vam je istekla. </strong> Morate da obnovite lozinku svakih %(expire_days)sdana, a lozinka ne sme biti ista kao ona koju ste koristili u poslednjih %(window_days)s dana."
+"<strong>Passordet ditt har utløpt. </strong>Sidens rettningslinjer sier at du må lage nytt passord hver %(expire_days)s dag. Det nye passordet kan ikke ha vært brukt de siste %(window_days)s dagene."
 
 msgid "New Password"
-msgstr "Nova lozinka"
+msgstr "Nytt passord"
 
 msgid ""
 "Passwords must have at least 8 characters, including one uppercase, one "
 "lowercase and one number"
 msgstr ""
-"Lozinka mora imati najmanje 8 znakova, uključujući jedno veliko slovo, jedno"
-" malo slovo i jedan broj."
+"Passordet må ha minst 8 tegn, inkludert en stor bokstav, en liten bokstav og"
+" ett tall."
 
 msgid ""
 "You have used this password before in the past year, please use a new "
 "password."
 msgstr ""
-"Ovu lozinku ste već koristili tokom protekle godine. Molimo Vas da izaberete"
-" novu."
+"Du har brukt dette passordet tidligere i år, vennligst velg et nytt passord."
 
 msgid "Password"
-msgstr "Lozinka"
+msgstr "Passord"
 
 msgid "Confirm Password"
-msgstr "Potvrdi lozinku"
+msgstr "Bekreft passord"
 
 msgid "Please enter your password to save changes."
-msgstr "Molimo unesite lozinku kako biste sačuvali promene"
+msgstr "Vennligst skriv inn ditt passord for å lagre endringene."
 
 msgid "Confirm the new password by filling the this field"
-msgstr "Potvrdite novu lozinku ovde"
+msgstr "Bekreft ditt nye passord ved å fylle inn dette feltet"
 
 msgid "New password doesn't match with its confirmation"
-msgstr "Nova lozinka se ne poklapa sa potvrdom"
+msgstr "Nytt passord stemmer ikke "
 
 msgid "Your Email"
-msgstr "Vaš e-mail"
+msgstr "Din e-post adresse"
 
 msgid ""
 "E-mail recovery is not supported, please contact the website administrator "
 "to reset your password manually."
 msgstr ""
-"Obnova lozinke putem e-maila nije moguća. Molimo kontaktirajte "
-"administratora stranice, kako bi obnovio lozinku ručno."
+"E-post gjenopprettelsen er ikke støttet, vennligst kontakt nettsidens "
+"administrator for å nullstille passordet manuelt."
 
 msgid "Current Password"
-msgstr "Trenutna lozinka"
+msgstr "Nåværende passord"
 
 msgid "Your current password"
-msgstr "Vaša trenutna lozinka"
+msgstr "Ditt nåværende passord"
 
 msgid "Your new password."
-msgstr "Vaša nova lozinka"
+msgstr "Ditt nye passord."
 
 msgid "Confirm new Password"
-msgstr "Potvrdite novu lozinku"
+msgstr "Bekreft nytt passord"
 
 msgid "Confirm your new password."
-msgstr "Potvrdite vašu novu lozinku"
+msgstr "Bekreft ditt nye passord."
 
 msgid "Please enter your password to save changes"
-msgstr "Unesite lozinku da sačuvate promene"
+msgstr "Vennligst skriv inn ditt nye passord for å lagre endringene"
 
 msgid "Confirm your new password by entering it here"
-msgstr "Potvrdite novu lozinku ovde"
+msgstr "Bekreft ditt nye passord ved å skrive det inn her"
 
 msgid "Mismatch between your new password and confirmation, try again"
-msgstr "Nepodudaranje između nove lozinke i potvrde, pokušajte ponovo"
+msgstr "Passordene samsvarer ikke, vennligst prøv på nytt"
 
 msgid "New user created successfully."
-msgstr "Novi korisnik je uspešno kreiran"
+msgstr "Ny bruker opprettet."
 
 msgid "Groups"
-msgstr "Grupe"
+msgstr "Grupper"
 
 msgid ""
 "Users will only get those permissions that are allowed for their group."
-msgstr "Korisnici dobijaju samo one dozvole koje se odnose na njihovu grupu."
+msgstr "Brukere vil kun få tillatelser som er tillat for gruppen de tilhører."
 
 msgid "Set the user's initial password here."
-msgstr "Postavi inicijalnu korisničku lozinku ovde."
+msgstr "Skriv inn brukerens gamle passord her."
 
 msgid "Last Login"
-msgstr "Poslednja prijava"
+msgstr "Siste innlogging"
 
 msgid "Is Active"
-msgstr "Je aktivan"
+msgstr "Er aktiv"
 
 msgid "Whether this user is allowed to log into the site"
-msgstr "Da li je ovom korisniku dozvoljena prijava na stranicu"
+msgstr "Brukeren kan logge inn på siden"
 
 msgid "Users will only get those permissions that are allowed for their group"
-msgstr "Korisnici dobijaju samo odobrenja koja se odnose na njihovu grupu"
+msgstr "Brukere vil kun få tillatelse til gruppen de tilhører "
 
 msgid "You can reset the user's password by entering a new password here"
-msgstr "Možete obnoviti korisničku lozinku, unoseći novu lozinku ovde"
+msgstr "Du kan nullstille passordet ved å skrive inn ett nytt passord her"
 
 msgid "Username"
-msgstr "Korisničko ime"
+msgstr "Brukernavn"
 
 msgid "Your password"
-msgstr "Vaša lozinka"
+msgstr "Ditt passord"
 
 msgid "If you want to set a new password, enter it here"
-msgstr "Ako želite da postavite novu lozinku, unesite je ovde"
+msgstr "Hvis du ønsker å lage et nytt passord, skriv det inn her"
 
 msgid "Confirm New Password"
-msgstr "Potvrdi novu lozinku"
+msgstr "Bekreft nytt passord"
 
 msgid "Confirm your new password"
-msgstr "Potvrdite vašu novu lozinku"
+msgstr "Bekreft ditt nye passord"
 
 msgid "Edit your profile"
-msgstr "Uredite svoj profil"
+msgstr "Rediger din profil"
 
 msgid "Password Recovery"
-msgstr "Vraćanje lozinke"
+msgstr "Gjenopprett passord"
 
 msgid "An Email has been sent to your account with further instructions."
-msgstr "Poslali smo Vam e-mail sa instrukcijama"
+msgstr "Vi har sendt en mail til din e-post adresse med videre instruksjoner."
 
 msgid "Password Recovery Request"
-msgstr "Zahtev za vraćanje lozinke"
+msgstr "Forespørsel om å gjenoprrette passord "
 
 msgid "Pick a new password"
-msgstr "Izaberite novu lozinku"
+msgstr "Velg et nytt passord"
 
 msgid "Your password has successfully been updated, thank you."
-msgstr "Lozinka je uspešno ažurirana, hvala."
+msgstr "Passordet ditt har blitt oppdatert, takk."
 
 #, python-format
 msgid "You are now logged in as %s"
-msgstr "Trenutno ste prijavljeni kao %s"
+msgstr "Du er nå logget inn som %s"
 
 msgid ""
 "Password Updated Successfully. Now you can log in using your new password."
-msgstr ""
-"Lozinka je uspešno ažurirana. Sada se možete prijaviti sa novom lozinkom."
+msgstr "Passordet ble oppdatert. Du kan nå logge inn med ditt nye passord."
 
 msgid "Reset your Password"
-msgstr "Ponovo podesite lozinku"
+msgstr "Nullstill passord"
 
 msgid ""
 "Your link has expired for security reasons. Please reinitiate the process by"
 " entering your email here."
 msgstr ""
-"Link je istekao iz sigurnosnih razloga. Ponovo unesite vašu e-mail adresu "
-"ovde."
+"Av sikkerhetsmessige årsaker har denne lenken utløpt. Vennligst prøv på nytt"
+" ved å skrive inn din e-post adresse her."
 
 msgid "Submit"
-msgstr "Pošalji"
+msgstr "Send inn"
 
 msgid "Form"
-msgstr "Formular"
+msgstr "Skjema"
 
 msgid "Save Changes"
-msgstr "Sačuvaj promene"
+msgstr "Lagre endringer"
 
 #, python-format
 msgid "Your new %s has been created."
-msgstr "Vaš novi %s je kreiran"
+msgstr "Ditt nye %s har blitt opprettet."
 
 #, python-format
 msgid "Import %s"
-msgstr "Uvezi %s"
+msgstr "Importer %s"
 
 msgid "Back to Website"
-msgstr "Nazad na sajt"
+msgstr "Tilbake til nettsiden"
 
 msgid "Welcome, "
-msgstr "Dobrodošli,"
+msgstr "Velkommen, "
 
 msgid "Logout"
-msgstr "Odjava"
+msgstr "Logg ut"
 
 msgid "Opinions"
-msgstr "Ankete"
+msgstr "Meninger"
 
 msgid "Users"
-msgstr "Korisnici"
+msgstr "Brukere"
 
 msgid "Settings"
-msgstr "Podešavanja"
+msgstr "Innstillinger"
 
 msgid "Pages"
-msgstr "Stranice"
+msgstr "Sider"
 
 msgid "Jobs"
-msgstr "Poslovi"
+msgstr "Jobber"
 
 msgid "Photos"
-msgstr "Slike"
+msgstr "Bilder"
 
 msgid "Categories Images"
-msgstr "Slike kategorija"
+msgstr "Kategori Bilder"
 
 msgid "News Items"
-msgstr "Stavke novosti"
+msgstr "Nyheter "
 
 msgid "Orgs"
-msgstr "Orgs"
+msgstr "Organisasjoner"
 
 msgid "Images"
-msgstr "Slike"
+msgstr "Bilder"
 
 msgid "About"
-msgstr "O nama"
+msgstr "Om oss"
 
 msgid "Engagement"
-msgstr "Statistika"
+msgstr "Engasjement"
 
 msgid "Category Images"
-msgstr "Slike kategorija"
+msgstr "Bildekategorier"
 
 msgid "+ New "
-msgstr "+ Novo"
+msgstr "+ Ny"
 
 msgid "+ New Page"
-msgstr "+ Nova Stranica"
+msgstr "+ Ny side"
 
 msgid "U-Report"
 msgstr "U-Report"
 
 msgid "Admin"
-msgstr "Administrator"
+msgstr "Admin"
 
 msgid "Configuration"
-msgstr "Konfiguracija"
+msgstr "Konfigurasjon"
 
 msgid "Content"
-msgstr "Sadržaj"
+msgstr "Innhold"
 
 msgid "Country Aliases"
-msgstr "Sinonimi za državu"
+msgstr "Landaliaser"
 
 msgid "Job Sources"
-msgstr "Izvori zadataka"
+msgstr "Jobbkilder"
 
 msgid "Jobs Content"
-msgstr "Sadržaj zadataka"
+msgstr "Jobbinnhold"
 
 msgid "About Content"
-msgstr "O nama, sadržaj"
+msgstr "Om innhold"
 
 msgid "Videos"
-msgstr "Video"
+msgstr "Videoer"
 
 msgid "Contact Us Content"
-msgstr "Kontaktirajte nas, sadržaj"
+msgstr "Kontakt oss innhold"
 
 msgid "Missions Content"
-msgstr "Misija, sadržaj"
+msgstr "Oppdragets innhold"
 
 msgid "Terms & Conditions"
-msgstr "Uslovi korišćenja"
+msgstr "Vilkår og betingelser"
 
 msgid "U-Reporters Content"
-msgstr "U-Reporteri, sadržaj"
+msgstr "U-Reporters innhold"
 
 msgid "Join &amp; Engage Content"
-msgstr "Pridruži se i angažuj, sadržaj"
+msgstr "Delta &amp; innholdsengasjement"
 
 msgid "Join Steps Content"
-msgstr "Koraci za pridruživanje, sadržaj"
+msgstr "Delta Steg Innhold"
 
 msgid "Additional Menu"
-msgstr "Dodatni meni"
+msgstr "Tilleggsmeny"
 
 msgid "SELECT YOUR COUNTRY"
-msgstr "ODABERI SVOJU ZEMLJU"
+msgstr "VELG DITT LAND"
 
 msgid "Join Now"
-msgstr "Pridruži se"
+msgstr "Delta nå"
 
 msgid "READ MORE"
-msgstr "PROČITAJ VIŠE"
+msgstr "LES MER"
 
 msgid "EXPLORE ENGAGEMENT"
-msgstr "Statistika"
+msgstr "UTFORSK ENGASJEMENT"
 
 msgid ""
 "\n"
@@ -865,10 +866,10 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"za Twitter zadatke morate imati widget id Twittera."
+"For å legge til Twitter jobbkilde må du ha en widget id fra twitter."
 
 msgid "Follow this step by step guide"
-msgstr "Pratite ovo uputstvo korak po korak"
+msgstr "Følg denne steg for steg manualen"
 
 msgid ""
 "\n"
@@ -876,16 +877,16 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"<div>Nakon što kreirate widget kopirajte widget ID iz URL kako je prikazano na</div>"
+"<div>Etter du har laget din widget, kopiér widget id fra url som vist på</div>"
 
 msgid "Back"
-msgstr "Povratak nazad"
+msgstr "Tilbake"
 
 msgid "LATEST NOTIFICATIONS"
-msgstr "POSLEDNJA OBAVEŠTENJA"
+msgstr "SISTE VARSLER"
 
 msgid "Backends"
-msgstr "Pozadinski sistemi"
+msgstr "Backends"
 
 #, python-format
 msgid ""
@@ -895,257 +896,255 @@ msgid_plural ""
 "There are currently %(counter)s new polls syncing. Polls are displayed on "
 "the public site once they have completely synced their results."
 msgstr[0] ""
-"Trenutno se sinhronizuje %(counter)s novih anketa. Ankete se prikazuju na "
-"web stranici nakon ."
+"Det er nå %(counter)s ny undersøkelse som synkroniseres. Resultatene blir "
+"vist på den offentlige siden når synkroniseringen er fullført."
 msgstr[1] ""
-"There is currently %(counter)s new poll syncing. Polls are displayed on the "
-"public site once they have completely synced their results."
-msgstr[2] ""
-"There are currently %(counter)s new polls syncing. Polls are displayed on "
-"the public site once they have completely synced their results."
+"Det er nå %(counter)s nye undersøkelser som synkroniseres. Resultatene blir "
+"vist på den offentlige siden når synkroniseringen er fullført."
 
 msgid "+ New Poll"
-msgstr "+ Nova Anketa"
+msgstr "+ Ny undersøkelse"
 
 #, python-format
 msgid "%(counter)s poll question"
 msgid_plural "%(counter)s poll questions"
-msgstr[0] "%(counter)s anketna pitanja"
-msgstr[1] "%(counter)s  anketna pitanja"
-msgstr[2] "%(counter)s anketna pitanja"
+msgstr[0] "%(counter)s undersøkelsespørsmål"
+msgstr[1] "%(counter)s undersøkelsesspørsmål"
 
 msgid "New poll initial syncs scheduled every 10min"
-msgstr "Sinhronizacije nove ankete obavljaju se na svakih 10 minuta"
+msgstr "Nye undersøkelser synkroniseres hvert 10 minutt"
 
 msgid "Main poll syncs scheduled every 10min"
-msgstr "Sinhronizacije glavne ankete obavljaju se na svakih 10 minuta"
+msgstr "Hovedundersøkelsen synkroniseres hvert 10 minutt"
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr "Sinhronizacije nedavne ankete obavljaju se na svakih 60 minuta"
+msgstr "Nylige undersøkelser synkronieres hvert 60 minutt"
 
 msgid "No longer scheduling syncs, runs archived"
-msgstr "Nema više sinhronizacije, sve je arhivirano"
+msgstr "Planlegger ikke lenger synkroniseringer, sykroniserte løp er arkivert"
 
 msgid "Poll syncs scheduled every 24h"
-msgstr "Sinhronizacije ankete obavljaju se na svakih 24h"
+msgstr "Undersøkelsen synkroniseres som helhet hver 24 time"
 
 msgid "Not scheduling syncs, not active"
-msgstr "Nema sinhronizacije, nije aktivno"
+msgstr "Synkroniseringer er ikke planlagt, ikke aktiv"
 
 msgid "Not scheduling syncs, no flow for poll"
-msgstr "Nema sinhronizacije, nema flow-ova za anketu"
+msgstr ""
+"Synkroniseringer er ikke planlagt, finner ingen strømmelinjer for "
+"undersøkelsen"
 
 msgid "Refresh Results"
-msgstr "Osveži rezultate"
+msgstr "Oppdater resultatene"
 
 msgid "MORE POLLS"
-msgstr "VIŠE ANKETA"
+msgstr "FLERE UNDERSØKELSER"
 
 msgid "FILTER"
 msgstr "FILTER"
 
 msgid "All"
-msgstr "Sve"
+msgstr "Alle"
 
 msgid "POLL LIST"
-msgstr "LISTA ANKETA"
+msgstr "LISTE OVER UNDERSØKELSER "
 
 msgid "All polls from most recent to oldest"
-msgstr "Sve ankete od poslednje do prve"
+msgstr "Alle undersøkelser er rangert nyest til eldst "
 
 msgid "ARCHIVED STORIES"
-msgstr "ARHIVIRANE PRIČE"
+msgstr "ARKIVERTE HISTORIER"
 
 msgid "LIST"
-msgstr "LISTA"
+msgstr "LISTE"
 
 msgid "LATEST OPINION"
-msgstr "POSLEDNJE MIŠLJENJE"
+msgstr "NYESTE ALTERNATIV  "
 
 msgid "VIEW FULL RESULTS"
-msgstr "POGLEDAJ SVE REZULTATE"
+msgstr "VIS ALLE RESULTATER"
 
 msgid "U-REPORTERS IN"
-msgstr "U-REPORTERA U"
+msgstr "U-REPORTERS I"
 
 msgid "PARTNERING WITH"
-msgstr "PARTNERSTVO SA"
+msgstr "SAMARBEIDER MED"
 
 msgid "U-REPORTERS"
-msgstr "U-REPORTERA"
+msgstr "U-REPORTERS"
 
 msgid "IN"
-msgstr "U"
+msgstr "I"
 
 msgid "COUNTRIES WORLDWIDE"
-msgstr "ZEMALJA ŠIROM SVETA"
+msgstr "LAND VERDEN OVER"
 
 msgid "AGES"
-msgstr "GODINE"
+msgstr "ALDER"
 
 msgid "Join U-Report, Your voice matters."
-msgstr "Pridruži se U-Reportu, Tvoj glas je bitan."
+msgstr "Bli en U-Reporter, din stemme betyr noe. "
 
 msgid "JOIN NOW"
-msgstr "PRIDRUŽI SE SADA"
+msgstr "BLI MED NÅ"
 
 msgid "FEATURED STORY"
-msgstr "ISTAKNUTE PRIČE"
+msgstr "FEATURE-ARTIKKEL"
 
 msgid ""
 "We are a part of a global platform working to change the lives of young "
 "people around the world."
 msgstr ""
-"Mi smo deo globalne platforme koja radi na poboljšanju života mladih ljudi "
-"širom sveta."
+"Vi er en del av en global plattform som har som målsetting å endre livene "
+"til barn og unge verden over."
 
 msgid ""
 "Learn more about how U-Report is empowering and connecting young people to "
 "speak out on issues that matter to them."
 msgstr ""
-"Saznajte više o tome kako U-Report osnažuje i povezuje mlade da govore o "
-"temama koje su za njih bitne."
+"Les mer om hvordan U-Report engasjerer og kobler unge mennesker til å si sin"
+" mening i saker som betyr noe for dem."
 
 msgid "LEARN MORE"
-msgstr "NAUČI VIŠE"
+msgstr "LES MER"
 
 msgid "Visit"
-msgstr "Poseti"
+msgstr "Besøk"
 
 msgid "How would you like to join?"
-msgstr "Kako želiš da se pridružiš?"
+msgstr "Hvordan ønsker du å bli med?"
 
 msgid "Text"
 msgstr "Tekst"
 
 msgid "SEARCH"
-msgstr "PRETRAGA"
+msgstr "SØK"
 
 msgid "No results found"
-msgstr "Nema rezultata"
+msgstr "Ingen resultater"
 
 msgid "RESPONSES"
-msgstr "ODGOVORA"
+msgstr "SVAR"
 
 msgid "RESPONSE RATE"
-msgstr "STOPA ODGOVORA"
+msgstr "SVARPROSENT"
 
 msgid "TOTAL RESPONSES"
-msgstr "SVI ODGOVORI"
+msgstr "TOTALT ANTALL SVAR"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)s je odgovorilo od %(polled)s anketiranih"
+msgstr "%(responded)s har svart av %(polled)s spurt"
 
 msgid "ALL"
-msgstr "SVE"
+msgstr "ALLE"
 
 msgid "AGE"
-msgstr "GODINE"
+msgstr "ALDER"
 
 msgid "GENDER"
-msgstr "POL"
+msgstr "KJØNNSIDENTITET"
 
 msgid "LOCATION"
-msgstr "LOKACIJA"
+msgstr "BOSTED"
 
 msgid "Written by:"
-msgstr "Napisao:"
+msgstr "Skrevet av:"
 
 msgid "Even"
-msgstr "Jednako"
+msgstr "Til og med"
 
 msgid "State"
-msgstr "Okrug"
+msgstr "Fylke"
 
 msgid "Other"
-msgstr "Drugo"
+msgstr "Annet"
 
 msgid "District"
-msgstr "Opština"
+msgstr "Kommune"
 
 msgid "Participation Level"
-msgstr "Nivo učešća"
+msgstr "Deltakelsenivå"
 
 msgid "Responses"
-msgstr "Odgovora"
+msgstr "Svar"
 
 msgid "Reporters in"
-msgstr "Reporteri u"
+msgstr "U-Reporters i"
 
 msgid "Results"
-msgstr "Rezultati"
+msgstr "Resultater"
 
 msgid "*Other answers include"
-msgstr "*Drugi odgovori uključuju"
+msgstr "*Andre svar inkluderer"
 
 msgid "Population"
-msgstr "Populacija"
+msgstr "Populasjon"
 
 msgid "Registered in"
-msgstr "Registrovani u"
+msgstr "Registrert i"
 
 msgid "Density"
-msgstr "Gustina"
+msgstr "Tetthet"
 
 msgid "total"
-msgstr "total"
+msgstr "totalt"
 
 msgid "of"
-msgstr "od"
+msgstr "av"
 
 msgid "the"
-msgstr " "
+msgstr "den"
 
 msgid "OVERALL STATISTICS"
-msgstr "STATISTIKA"
+msgstr "SAMLET STATISTIKK"
 
 msgid "THIS YEAR"
-msgstr "OVE GODINE"
+msgstr "DETTE ÅRET"
 
 msgid "AVG RESPONSE RATE"
-msgstr "PROSEČNA STOPA ODGOVORA"
+msgstr "GJENNOMSNITTLIG SVARPROSENT"
 
 msgid "U-REPORTERS BY REGION"
-msgstr "U-REPORTERI PO REGIONIMA"
+msgstr "U-REPORTERS I REGIONEN"
 
 msgid "FILTER RESULTS"
-msgstr "FILTRIRANI REZULTATI"
+msgstr "FILTRER SVAR"
 
 msgid "Export and Share"
-msgstr "Preuzmi i Podeli"
+msgstr "Eksporter og del"
 
 msgid ""
 "Want to tell the world about this? Download this image to easily share on "
 "social media or for a beautiful presentation!"
 msgstr ""
-"Želite reći svetu o ovome? Preuzmite sliku da biste je lakše podelili na "
-"društvenim mrežama ili za kreiranje lepše prezentacije!"
+"Har du lyst til å fortelle vennene dine om dette? Da kan du enkelt dele "
+"dette bilde på sosiale medier!"
 
 msgid "SELECT LANGUAGE"
-msgstr "ODABERI JEZIK"
+msgstr "VELG SPRÅK"
 
 msgid "SELECT COUNTRY"
-msgstr "ODABERI SVOJU ZEMLJU"
+msgstr "VELG LAND"
 
 msgid "Custom pages"
-msgstr "Dodatni meni"
+msgstr "Egendefinerte sider"
 
 msgid ""
 "See by the numbers how we are engaging youth voices for positive social "
 "change."
 msgstr ""
-"Pogledajte po brojevima na koji način uključujemo glasove mladih u pozitivne"
-" društvene promene."
+"Se hvor mange barn og unge som ønsker at vi skal høre akkurat deres stemme "
+"som bidrar til en positiv endring."
 
 msgid "Polled"
-msgstr "Anketirani"
+msgstr "Spurt"
 
 msgid "Reporters"
-msgstr "Reporteri"
+msgstr "U-Reporters"
 
 msgid "Top Region"
-msgstr "Top Region"
+msgstr "Topp region"
 
 msgid "January"
 msgstr "Januar"
@@ -1154,34 +1153,34 @@ msgid "February"
 msgstr "Februar"
 
 msgid "March"
-msgstr "Mart"
+msgstr "Mars"
 
 msgid "April"
 msgstr "April"
 
 msgid "May"
-msgstr "Maj"
+msgstr "Mai"
 
 msgid "June"
-msgstr "Jun"
+msgstr "Juni"
 
 msgid "July"
-msgstr "Jul"
+msgstr "Juli"
 
 msgid "August"
-msgstr "Avgust"
+msgstr "August"
 
 msgid "September"
-msgstr "Septembar"
+msgstr "September"
 
 msgid "October"
-msgstr "Oktobar"
+msgstr "Oktober"
 
 msgid "November"
-msgstr "Novembar"
+msgstr "November"
 
 msgid "December"
-msgstr "Decembar"
+msgstr "Desember"
 
 msgid "Jan"
 msgstr "Jan"
@@ -1202,7 +1201,7 @@ msgid "Jul"
 msgstr "Jul"
 
 msgid "Aug"
-msgstr "Avg"
+msgstr "Aug"
 
 msgid "Sep"
 msgstr "Sep"
@@ -1214,7 +1213,7 @@ msgid "Nov"
 msgstr "Nov"
 
 msgid "Dec"
-msgstr "Dec"
+msgstr "Des"
 
 #, python-format
 msgid ""
@@ -1223,25 +1222,23 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"            Da li ste sigurni da želite da uklonite <strong>%(object)s</strong>?\n"
-"          "
+"Er du sikker på at du vil fjerne <strong>%(object)s</strong>?"
 
 #, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
-msgstr[0] "%(counter)s rezultati"
-msgstr[1] "%(counter)s rezultati"
-msgstr[2] "%(counter)s rezultati"
+msgstr[0] "%(counter)s resultat"
+msgstr[1] "%(counter)s resultater"
 
 #, python-format
 msgid "Results %(start)s-%(end)s of %(count)s"
-msgstr "Rezultati %(start)s-%(end)s od %(count)s"
+msgstr "Resultater %(start)s-%(end)s av %(count)s"
 
 msgid "Error"
-msgstr "Greška"
+msgstr "Feilmelding"
 
 msgid "Enter Dashboard"
-msgstr "Vidi Grafikon"
+msgstr "Gå til dashbord"
 
 #, python-format
 msgid ""
@@ -1250,8 +1247,7 @@ msgid ""
 "              "
 msgstr ""
 "\n"
-"                Izvinite, trenutno se ne možete prijaviti jer smo primili %(failed_login_limit)s pogrešnih pokušaja prijave.\n"
-"              "
+"Beklager, du kan ikke logge inn fordi vi har registerert %(failed_login_limit)s ukorrekte innloggingsforsøk. "
 
 #, python-format
 msgid ""
@@ -1260,8 +1256,7 @@ msgid ""
 "                  "
 msgstr ""
 "\n"
-"                    Molimo sačekajte %(lockout_timeout)s minuta pre nego što pokušate da se prijavite ponovo.\n"
-"                  "
+"Vennligst vent %(lockout_timeout)s minutter før du prøver å logge inn på nytt."
 
 #, python-format
 msgid ""
@@ -1270,290 +1265,295 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"<strong>Lozinka vam je istekla. </strong> Morate da obnovite lozinku svakih %(expire_days)sdana, a lozinka ne sme biti ista kao ona koju ste koristili u poslednjih %(window_days)s dana."
+"<strong>Passordet ditt er utdatert. </strong>Du må endre ditt passord hver %(expire_days)s dag. Det nye passordet kan ikke ha vært brukt de siste %(window_days)s dagene. "
 
 msgid "+ New Story"
-msgstr "+ Nova Priča"
+msgstr "+ Ny historie"
 
 #, python-format
 msgid "Refreshed %s cache for this organization"
-msgstr "Osveženo %s predmemorije organizacije"
+msgstr "Oppdatert %s for denne organisasjonen"
 
 msgid "Flag"
-msgstr "Oznaka"
+msgstr "Flagg"
 
 msgid "The organization to which the image will be used"
-msgstr "Organizacija u kojoj će slika biti korišćena"
+msgstr "Bildet som vil brukes sammen med organisasjonen"
 
 msgid "A short descriptive name for this image"
-msgstr "Kratko opisno ime za ovu sliku"
+msgstr "En kort  beskrivelse av dette bildet"
 
 msgid "Image type"
-msgstr "Tip slike"
+msgstr "Bildetype"
 
 msgid "Label"
-msgstr "Oznaka"
+msgstr "Etikett"
 
 msgid "Key"
-msgstr "Ključni"
+msgstr "Nøkkel"
 
 msgid "Male"
-msgstr "Muško"
+msgstr "Gutt"
 
 msgid "Female"
-msgstr "Žensko"
+msgstr "Jente"
 
 msgid "Organization"
-msgstr "Organizacija"
+msgstr "Organisasjon"
 
 msgid "Gender"
-msgstr "Pol"
+msgstr "Kjønnsidentitet"
 
 msgid "Gender of the contact"
-msgstr "Pol korisnika"
+msgstr "Kjønnsidentiteten til kontakten"
 
 msgid "Born Field"
-msgstr "Polje rodjenja"
+msgstr "Fødselsdato Field"
 
 msgid "Occupation Field"
-msgstr "Polje zanimanja"
+msgstr "Jobb Field"
 
 msgid "Registration Date"
-msgstr "Datum registracije"
+msgstr "Registreringsdato"
 
 msgid "State Field"
-msgstr "Polje regiona"
+msgstr "Fylke Field"
 
 msgid "District Field"
-msgstr "Polje opštine"
+msgstr "Kommune Field"
 
 msgid "Ward Field"
-msgstr "Polje odeljenja"
+msgstr "Avdeling Field "
 
 msgid "Number of items with this counter"
-msgstr "Broj stavki sa ovim brojačem"
+msgstr "Antall enheter"
 
 msgid "No root user found. Please create a root user"
-msgstr "Nije pronađen root korisnik. Molimo kreirajte root korisnika"
+msgstr "Ingen rotbrukere funnet. Opprett en rotbruker."
 
 msgid "The name for our alias"
-msgstr "Naziv za sinonime"
+msgstr "Navnet på vårt alias"
 
 msgid "The title or name to reference this Job source."
-msgstr "Naslov ili ime da poveže ovaj zadatak"
+msgstr "Tittel eller navn på din jobbkilde. "
 
 msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
-msgstr "Izaberi kanal za ovaj zadatak. Twitter, Facebook ili RSS feed"
+msgstr "Velg type for jobbkilden. Twitter, Facebook eller RSS Feed."
 
 msgid "The full URL to navigate to this Job source."
-msgstr "Potpuni URL koji vodi na ovaj zadatak"
+msgstr "Fullstendig URL for å navigere til denne jobbkilden."
 
 msgid ""
 "For Twitter, a widget Id is required to embed tweets on the website. Read "
 "carefully the instructions above on how to get the right widget Id"
 msgstr ""
-"Za Twitter, traži se widget ID, kako bi se tvitovi uvrstili na web stranicu."
-" Pažljivo pročitajte uputstvo iznad o tome kako dobiti ispravan widget ID."
+"For å koble til Twitter trenger vi en widget Id, dersom vi skal publisere "
+"tweets på siden. Les instruksene over nøye for å få tak i rett widget Id."
 
 msgid "Featured job sources are shown first on the jobs page."
-msgstr "Istaknuti zadaci su pokazani prvi na stranici zadataka"
+msgstr "Utvalgte jobbkilder vises først på jobbsiden."
 
 msgid "The organization this job source is for"
-msgstr "Organizaciona jedinica kojoj vaš izvor zadataka pripada"
+msgstr "Organisasjonen jobbkilden er for"
 
 msgid "Your job source has been added successfully"
-msgstr "Vaš izvor zadataka uspešno dodat"
+msgstr "Jobbkilden har blitt lagt til"
 
 msgid "Your job source has been updated successfully"
-msgstr "Vaš izvor zadataka uspešno ažuriran"
+msgstr "Jobbkilden har blitt oppdatert"
 
 msgid "This is the OSM id for this administrative boundary"
-msgstr "Ovo je OSM ID za ovo administrativno ograničenje"
+msgstr "Dette er OSM id for denne administrative grensen"
 
 msgid "The name of our administrative boundary"
-msgstr "Naziv administrativnog ograničenja"
+msgstr "Navnet på vår administrative grense"
 
 msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
-msgstr "Nivo razgraničenja, 0 za državu, 1 za region, 2 za opštine"
+msgstr "Nivå for grensen: 0 for land, 1 for fylke, 2 for kommune"
 
 msgid "The parent to this political boundary if any"
-msgstr "Poreklo političkog ograničenja, ako ga ima"
+msgstr "Forkommeren til denne politiske grensen, hvis noen"
 
 msgid "Geometry"
-msgstr "Geometrija"
+msgstr "Geometri"
 
 msgid ""
 "The json representing the geometry type and coordinates of the boundaries"
-msgstr "json predstavlja geometrijsku vrstu i koordinate ograničenja"
+msgstr "Json som representerer type geometri og koordinater for grensene "
 
 msgid "The title for this item"
-msgstr "Naslov ove stavke"
+msgstr "Tittelen på dette elementet"
 
 msgid "A short summary description for this item"
-msgstr "Kratak opis stavke"
+msgstr "En kort oppsummerende beskrivelse av dette elementet"
 
 msgid "A link that should be associated with this item"
-msgstr "Link koji se veže uz ovu stavku"
+msgstr "En link som bør knyttes til dette elementet"
 
 msgid "The category this item belongs to"
-msgstr "Kategorija kojoj ova stavka pripada"
+msgstr "Kategorien dette elementet tilhører"
 
 msgid "The organization this item belongs to"
-msgstr "Organizacija kojoj stavka pripada"
+msgstr "Organisasjonen dette elementet tilhører"
 
 msgid "The title for this Video"
-msgstr "Naslov videa"
+msgstr "Tittelen på denne videoen"
 
 msgid "A short summary description for this video"
-msgstr "Kratak opis video snimka"
+msgstr "En beskrivelse av denne videoen"
 
 msgid "The organization this video belongs to"
-msgstr "Organizacija kojoj video pripada"
+msgstr "Organisasjonen denne videoen tilhører"
 
 msgid "The name of this poll category"
-msgstr "Naziv kategorije ove ankete"
+msgstr "Navnet på denne avstemningskategorien"
 
 msgid "Poll Categories"
-msgstr "Kategorije ankete"
+msgstr "Avstemningskategorier"
 
 msgid "The Flow this Poll is based on"
-msgstr "Dijagram na kome je ova anketa zasnovana"
+msgstr "Flowen denne avstemningen er basert på"
 
 msgid ""
 "The date to display for this poll. Leave empty to use flow creation date."
 msgstr ""
-"Datum koji treba prikazati za ovu anketu. Ostavite prazno ako želite da "
-"ostane datum kreiranja dijagrama."
+"Datoen som skal vises for denne avstemningen. La feltet stå tomt for å bruke"
+" datoen flowen ble opprettet."
 
 msgid "Whether the flow for this poll is archived on RapidPro"
-msgstr "Da li je dijagram za ovu anketu arhiviran na RapidPro"
+msgstr "Flowen for denne undersøkelsen er arkivert i RapidPro"
 
 msgid "The base language of the flow to use"
-msgstr "Osnovni jezik koji se koristi u anketi"
+msgstr "Hovedspråket for flowen som skal brukes"
 
 msgid "The number of polled reporters on this poll"
-msgstr "Broj anketiranih u ovoj anketi"
+msgstr "Antall spurt i denne undersøkelsen"
 
 msgid "Whether the poll has finished the initial results sync."
-msgstr "Da li je završena sinhronizacija inicijalnih rezultata ankete."
+msgstr ""
+"Undersøkelsen har fullført den påbegynte synkroniseringen av resultater."
 
 msgid "Whether the poll should stop regenerating stats."
-msgstr "Da li bi anketa trebalo da zaustavi obnavljanje statistike."
+msgstr "Avstemningen skal slutte regenerering av statistikk."
 
 msgid "The title for this Poll"
-msgstr "Naslov ankete"
+msgstr "Tittelen for denne undersøkelsen"
 
 msgid "The category this Poll belongs to"
-msgstr "Kategorija kojoj anketa pripada"
+msgstr "Kategorien denne undersøkelsen tilhører"
 
 msgid "Whether this poll should be featured on the homepage"
-msgstr "Treba li anketa biti prikazana na početnoj stranici"
+msgstr "Undersøkelsen skal vises på hovedsiden"
 
 msgid "The splash category image to display for the poll (optional)"
-msgstr "Slika iz splash kategorije koja se može prikazati uz anketu (opciono)"
+msgstr "Splash kategori bildet som vises i undersøkelsen (valgfritt) "
 
 msgid "The organization this poll is part of"
-msgstr "Organizacija kojoj anketa pripada"
+msgstr "Organisasjonen denne undersøkelsen tilhører"
 
 msgid "The title for this response story"
-msgstr "Naslov priče"
+msgstr "Tittel til denne responshistorien"
 
 msgid "The writer of the response story"
-msgstr "Autor priče"
+msgstr "Forfatter av responshistorien"
 
 msgid "The poll to associate to"
-msgstr "Anketa uz koju se vezuje"
+msgstr "Undersøkelsen dette kan assosieres med"
 
 msgid "The poll for this response"
-msgstr "Anketa za ovaj odgovor"
+msgstr "Undersøkelsen for dette svaret"
 
 msgid "The location for this response"
-msgstr "Lokacija za ovaj odgovor"
+msgstr "Lokasjon for denne responsen "
 
 msgid "The name of the sender of the message"
-msgstr "Ime pošiljaoca poruke"
+msgstr "Navnet til avsender"
 
 msgid "The featured response message"
-msgstr "Istaknuta poruka uz odgovor"
+msgstr "Feature responsmelding "
 
 msgid "The poll this question is part of"
-msgstr "Anketa kojoj ovo pitanje pripada"
+msgstr "Undersøkelsen dette spørsmålet er en del av"
 
 msgid "The title of this question"
-msgstr "Naslov pitanja"
+msgstr "Tittelen på dette spørsmålet"
 
 msgid "The RuleSet this question is based on"
-msgstr "Niz pravila na kojima je ovo pitanje bazirano"
+msgstr "Regelverket dette spørsmålet er basert på"
 
 msgid "The label of the ruleset on RapidPro"
-msgstr "Oznaka skupa pravila na RapidPro"
+msgstr "Etiketten for regelverket på RapidPro"
 
 msgid "The priority number for this question on the poll"
-msgstr "Broj prioriteta ovog pitanja u anketi"
+msgstr "Nummer på prioritering av dette spørsmålet i undersøkelsen"
 
 msgid "The Rule this response category is based on"
-msgstr "Pravilo na kom je bazirana ova kategorija odgovora"
+msgstr "Regelen denne responskategorien er basert på"
 
 msgid "Your org does not have any API token configuration."
-msgstr "Vaša org nema definisanu API token konfiguraciju"
+msgstr "Din organisasjon har ingen API token konfigurasjon."
 
 msgid "You must include a title for every included question."
-msgstr "Morate staviti naslov za svako navedeno pitanje"
+msgstr "Du må ha en tittel for hvert spørsmål."
 
 msgid "Title too long. The max limit is 255 characters for each title"
-msgstr "Naslov je predugačak. Ograničenje za svaki naslov je 255 karaktera."
+msgstr "Tittelen er for lang. Det er maksimalt 255 tegn per tittel."
 
 msgid "You must include at least one poll question."
-msgstr "Morate uključiti najmanje jedno anketno pitanje"
+msgstr "Du må inkludere minst ett undersøkelsesspørsmål."
 
 msgid "Adjust poll date"
-msgstr "Podesi datum ankete"
+msgstr "Tilpass undersøkelsesdato"
 
 msgid "Your poll has been updated, now pick which questions to include."
 msgstr ""
-"Vaša anketa je ažurirana, sada izaberite pitanja koja želite da se uključe"
+"Din undersøkelse har blitt oppdatert. Du kan nå velge hvilke spørsmål du "
+"ønsker å inkludere."
 
 msgid "Configure flow"
-msgstr "Konfiguracija"
+msgstr "Konfiguér flow"
 
 msgid "Your poll has been configured, now adjust the poll date."
-msgstr "Vaša anketa je kreirana, sada prilagodite datum ankete"
+msgstr ""
+"Undersøkelsen har blitt konfigurert. Du kan nå tilpasse undersøkelsesdatoen."
 
 msgid "Your poll has been created, now configure its flow."
-msgstr "Vaša anketa je kreirana, sada prilagodite njen tok"
+msgstr "Undersøkelsen er opprettet. Du kan nå konfigurere flow."
 
 msgid "Poll Images"
-msgstr "Slike za anketu"
+msgstr "Undersøkelsesbilder"
 
 msgid "Now enter any responses you'd like to feature. (if any)"
-msgstr ""
-"Unesite bilo koji karakterističan odgovor koji želite da se objavi (ako "
-"postoji)"
+msgstr "Legg til de svaralternativene du ønsker. (dersom det er noen)"
 
 msgid "Image to display on poll page and in previews. (optional)"
-msgstr "Slika koja će se prikazati na strani ankete i u pregledima (opciono)"
+msgstr ""
+"Bilde som skal vises på undersøkelsessiden og i forhåndsvisninger. "
+"(valgfritt)"
 
 msgid "Image to display on poll page and in previews (optional)"
-msgstr "Slika koja će se prikazati na strani ankete i u pregledima (opciono)"
+msgstr ""
+"Bilde som skal vises på undersøkelsesside og i forhåndsvisninger (valgfritt)"
 
 msgid "Poll Response"
-msgstr "Odgovori na anketu"
+msgstr "Undersøkelsessvar"
 
 msgid "Your poll has been updated."
-msgstr "Vaša anketa je ažurirana"
+msgstr "Din undersøkelse har blitt oppdatert."
 
 msgid "Poll Questions"
-msgstr "Anketna pitanja"
+msgstr "Undersøkelsesspørsmål"
 
 msgid "Now set what images you want displayed on your poll page. (if any)"
 msgstr ""
-"Sada postavite slike koje želite objaviti na anketnoj stranici (ako postoje)"
+"Du kan nå velge hvilke bilder du ønsker skal vises på din undersøkelsesside."
+" (valgfritt)"
 
 msgid "Include"
-msgstr "Uključi"
+msgstr "Inkludér"
 
 msgid "Whether to include this question in your public results"
-msgstr "Da li ovo pitanje treba uključiti u javno dostupne rezultate"
+msgstr "Spørsmålet skal inkluderes i offentlige resultater"
 
 msgid "Priority"
 msgstr "Prioritet"
@@ -1561,309 +1561,321 @@ msgstr "Prioritet"
 msgid ""
 "The priority of this question on the poll page, higher priority comes first"
 msgstr ""
-"Nivo prioriteta ovog pitanja u anketi. Pitanja s najvećim prioritetom idu "
-"prva"
+"Prioriteten av dette spørsmålet på undersøkelsessiden, høyeste prioritering "
+"kommer først."
 
 msgid "Ruleset Label"
-msgstr "Oznaka niza pravila"
+msgstr "Regelsett etikett"
 
 msgid "The label of the ruleset from RapidPro"
-msgstr "Oznaka niza pravila iz RapidPro-a"
+msgstr "Etikett for regelsettet fra RapidPro"
 
 msgid "Title"
-msgstr "Naslov"
+msgstr "Tittel"
 
 msgid "The question posed to your audience, will be displayed publicly"
-msgstr "Pitanje upućeno publici biće javno objavljeno"
+msgstr "Spørsmålet som stilles til ditt publikum, vil vises offentlig"
 
 msgid "Category {idx+1}"
-msgstr "Kategorija {idx+1}"
+msgstr "Kategori {idx+1}"
 
 msgid "The label of the category from backend(such as RapidPro)"
-msgstr "Oznaka kategorije backend-a (poput RapidPro)"
+msgstr "Etikett for backend kategori (feks RapidPro)"
 
 msgid "Display {idx+1}"
-msgstr "Prikaz {idx+1}"
+msgstr "Display {idx+1}"
 
 msgid "The label to display of the category on the public site"
-msgstr "Oznaka za prikaz kategorije na sajtu"
+msgstr "Etiketten for kategorien som skal vises på den offentlige siden"
 
 msgid "Scheduled Sync currently in progress..."
-msgstr "Zakazana sinhronizacija je trenutno u toku ..."
+msgstr "Planlagt synkronisering under arbeid..."
 
 #, python-format
 msgid "Last results synced %(time)s ago"
-msgstr "Poslednji rezultati sinhronizovani pre %(time)s"
+msgstr "Siste resultat ble synkronisert %(time)s siden"
 
 msgid "Synced"
-msgstr "Sinhronizovano"
+msgstr "Synkronisert"
 
 #, python-brace-format
 msgid "Sync currently in progress... {sync_progress:.1f}%"
-msgstr "Trenutno je sinhronizacija u toku... {sync_progress:.1f}%"
+msgstr "Synkronisering pågår... {sync_progress:.1f}%"
 
 #, python-brace-format
 msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
-msgstr "Izmenite anketu za flow [{flow_name} ({flow_date_hint})]"
+msgstr "Rediger undersøkelsen for flowen [{flow_name} ({flow_date_hint})]"
 
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
-msgstr "Zakazano ažuriranje za anketu #%(poll_id)d na org #%(org_id)d"
+msgstr ""
+"Planlagt en oppdatering for undersøkelse #%(poll_id)d i organisasjon "
+"#%(org_id)d"
 
 #, python-format
 msgid "%s"
 msgstr "%s"
 
 msgid "The name of the Contact Group that contains registered reporters"
-msgstr "Ime kontakt grupe koji sadrži registrovane reportere"
+msgstr "Navnet på Contact Group som inneholder registrerte U-reporters"
 
 msgid ""
 "The label of the Contact Field that contains the birth date of reporters"
-msgstr "Naziv polja kontakta koji sadrži datum rođenja reportera"
+msgstr ""
+"Etikett på Contact Field som inneholder fødselsdatoene til U-reporterne"
 
 msgid "The label of the Contact Field that contains the gender of reporters"
-msgstr "Naziv polja kontakta koji sadrži pol reportera"
+msgstr "Etikett på Contact Field som inneholder kjønnet til U-reporterne"
 
 msgid ""
 "The label of the Contact Field that contains the occupation of reporters"
-msgstr "Naziv polja kontakta koji sadrži zanimanje reportera"
+msgstr "Etikett på Contact Field som inneholder yrket til U-reporterne"
 
 msgid ""
 "The label of the Contact Field that contains the registration date of "
 "reporters"
-msgstr "Naziv polja kontakta koji sadrži datum registracije reportera"
+msgstr ""
+"Etikett på Contact Field som inneholder registreringsdato til U-reporterne"
 
 msgid "The label of the Contact Field that contains the State of reporters"
-msgstr "Oznaka za polje kontakta u kom je država iz koje su reporteri"
+msgstr ""
+"Etikett på Contact Field som inneholder hvilket Fylke U-reporterne bor i"
 
 msgid "The label of the Contact Field that contains the District of reporters"
-msgstr "Naziv polja kontakta koji sadrži opštinu iz koje su reporteri"
+msgstr ""
+"Etikett på Contact Field som inneholder hvilken kommune U-reporterne bor i"
 
 msgid "The label of the Contact Field that contains the Ward of reporters"
-msgstr "Naziv za polje kontakta, koje sadrži odeljak za reportere"
+msgstr "Etiketten til Contact Field som inneholder Avdeling av U-Reporters"
 
 msgid "The label assigned to U-Reporters that are Male."
-msgstr "Oznaka koja se dodeljuje U-Reporterima muškog pola"
+msgstr "Etikett tildelt U-Reportere som har registrert seg som \"Gutt\"."
 
 msgid "The label assigned to U-Reporters that are Female."
-msgstr "Oznaka koja se dodeluje U-Reporterima ženskog pola"
+msgstr "Etikett tildelt U-Reportere som har registrert seg som \"Jente\"."
 
 msgid "Whether this org should be show on the landing page"
-msgstr "Treba li se ova org prikazati na odredišnoj stranici"
+msgstr "Organisasjonen skal vises på landingssiden"
 
 msgid "Whether this org count should consider the count from link only"
-msgstr "Da li ovaj org brojač treba da uzme u obzir samo brojanje sa linka"
+msgstr "Organisasjonsopptellingen skal kun ta i betraktning tall fra linken"
 
 msgid "The shortcode that users will use to contact U-Report locally"
-msgstr ""
-"Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno"
+msgstr "En enkel kode brukere vil benytte for å kontakte U-Report lokalt"
 
 msgid ""
 "The whatapp number that users will use to contact U-Report if you have one"
-msgstr ""
-"Whatsapp broj koji će korisnicni koristiti da kontaktiraju U-Report, ako ga "
-"imate"
+msgstr "Nummeret til Whatsapp som brukere vil benytte for å kontakte U-Report"
 
 msgid ""
 "The viber username that users will use to contact U-Report if you have one"
 msgstr ""
-"Korisničko ime za viber koje će korisnici koristiti za kontaktiranje "
-"U-Report-a ako ga imate"
+"Viber-brukernavnet som brukere må benytte seg av for å kontakte U-Report "
+"Norge"
 
 msgid "The short text used to direct visitors to join U-Report"
-msgstr "Kratak tekst kojim se posetioci upućuju da se pridruže U-Reportu"
+msgstr ""
+"En enkel tekst som brukes til å veilede besøkende til å bli med i U-Report"
 
 msgid "The YouTube video ID for how to join U-Report section"
-msgstr "YouTube video ID za priključivanje U-Reportu"
+msgstr "YouTube video ID til video for \"Hvordan bli en U-Reporter\" - seksjonen"
 
 msgid "The title of the photos section U-Report homepage"
-msgstr "Naslov odeljka sa slikama U-Report početne stranice"
+msgstr "Tittel på bildeseksjonen for U-Report landingssiden"
 
 msgid "The description of the photos section U-Report homepage"
-msgstr "Opis odeljka sa slikama U-Report početne stranice"
+msgstr "Beskrivelse av bildeseksjonen for U-Report landingsside"
 
 msgid "The description of the opinions page"
-msgstr "Opis stranice sa mišljenjima"
+msgstr "Beskrivelse av meningssiden"
 
 msgid "The description of the stories page"
-msgstr "Opis stranice sa pričama"
+msgstr "Beskrivelse av historiesiden"
 
 msgid "The description of the engagement page"
-msgstr "Opis stranice za angažovanje"
+msgstr "Beskrivelse av engasjementsiden"
 
 msgid "The callout message on the footer engagement section"
-msgstr "Dodatna poruka u donjem delu sekcije za angažovanje"
+msgstr "Nedre beskjed i bunnlinjen til engasjementsiden "
 
 msgid "The primary color for styling for this organization, should be dark"
-msgstr "Primarna boja za ovu postavku, treba da bude tamna"
+msgstr ""
+"Primærfargen for styling tilknyttet denne organisasjonen, bør være mørk"
 
 msgid "The secondary color for styling for this organization, should be dark"
-msgstr "Sekundarna boja za ovu postavku, treba da bude tamna"
+msgstr ""
+"Sekundærfargen for styling tilknyttet denne organisasjonen, bør være mørk"
 
 msgid "The tertiary color for styling for this organization, should be dark"
-msgstr "Tercijalna boja za ovu postavku, treba da bude tamna"
+msgstr ""
+"Tertierfargen for styling tilknyttet denne organisasjonen, bør være mørk"
 
 msgid ""
 "The primary highlight color for styling for this organization, should be "
 "light"
-msgstr "Primarna istaknuta boja za ovu postavku, treba da bude svetla"
+msgstr ""
+"Den primære highlight-fargen tilknyttet denne organisasjonen, bør være lys"
 
 msgid ""
 "The secondary highlight color for styling for this organization, should be "
 "light"
-msgstr "Sekundarna istaknuta boja za ovu postavku, treba da bude svetla"
+msgstr ""
+"Den sekundære highlight-fargen tilknyttet denne organisasjonen, bør være lys"
 
 msgid "Up to 6 colors for styling charts, use comma between colors"
-msgstr "Do 6 boja za oblikovanje grafikona, koristite zarez izmedju boja"
+msgstr ""
+"Du kan ha opptil 6 farger for styling charts, bruk komma mellom fargene"
 
 msgid "The color used to draw the text on the join bar"
-msgstr "Boja za pisanje teksta na polju za pridruživanje"
+msgstr "Tekstfarge på \"delta/bli med\"-baren"
 
 msgid "The color used to draw the background on the join bar"
-msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
+msgstr "Bakgrunnsfarge for \"delta/bli med\"-baren"
 
 msgid "The primary color for styling for this organization"
-msgstr "Primarna boja za ovu postavku"
+msgstr "Primærfargen for styling tilknyttet denne organisasjonen"
 
 msgid "The secondary color for styling for this organization"
-msgstr "Sekundarna boja za ovu postavku"
+msgstr "Sekundærfargen for styling tilknyttet denne organisasjonen"
 
 msgid "The background color for the site"
-msgstr "Pozadinska boja ove stranice"
+msgstr "Bakgrunnsfargen for siden"
 
 msgid ""
 "11 colors for styling maps, use comma between colors, not used if not 11 "
 "colors"
 msgstr ""
-"11 boja za oblikovanje mapa, koristiti zarez izmedju boja, ne koristiti ako "
-"nema 11 boja"
+"11 farger for styling-kart, bruk komma mellom fargene, vil kun fungere med "
+"11 farger"
 
 msgid "The states to show on maps only"
-msgstr "Države koje se prikazuju samo na mapama"
+msgstr "Fylkene som kun skal vises på kartet"
 
 msgid "The states to show on maps only, used to filter poll results"
 msgstr ""
-"Države koje se prikazuju samo na mapama, za filtriranje rezultata ankete"
+"Fylkene som skal vises på kart, brukes til å filtrere "
+"undersøkelsesresultater"
 
 msgid "The Google Analytics Tracking ID for this organization"
-msgstr "ID praćenja Google analitike za ovu organizaciju"
+msgstr "Google Analytics Tracking ID for denne organisasjonen"
 
 msgid "The URL to the Youtube channel for this organization"
-msgstr "URL link za You Tube kanal organizacije"
+msgstr "URL til YouTube kanalen til denne organisasjonen"
 
 msgid "The URL to the Facebook page for this organization"
-msgstr "URL link na Facebook stranicu ove organizacije"
+msgstr "URL til Facebook siden til denne organisasjonen"
 
 msgid "The integer id to the Facebook page for this organization (optional)"
-msgstr "Brojčani ID za Facebook aplikaciju (opciono)"
+msgstr "URL til Facebook siden til denne organisasjonen (valgfritt)"
 
 msgid ""
 "The integer id to the Facebook app for this organization's chat app "
 "(optional)"
-msgstr "Brojčani ID za Facebook aplikaciju za chat (opciono)"
+msgstr ""
+"Integer id til Facebook applikasjonen for denne organisasjonens chat app "
+"(valgfritt)"
 
 msgid "The short text used to greet users on Facebook Messenger Plugin"
 msgstr ""
-"Kratak tekst koji se koristi za dobrodošlicu korisnika na Facebook Messenger"
-" Plugin-u"
+"En kort tekst som brukes til å velkomme brukere på Facebook Messenger Plugin"
 
 msgid "The id of the Facebook Pixel for this organization (optional)"
-msgstr "ID Facebook Pixela vaše organizacije (opciono)"
+msgstr "Id for Facebook Pixel til denne organisasjonen (valgfritt)"
 
 msgid "The Instagram username for this organization"
-msgstr "Instagram korisnicko ime organizacije"
+msgstr "Instagram brukernavn for denne organisasjonen"
 
 msgid "The Instagram widget id from lightwidget.com"
-msgstr "Instagram widget ID sa lightwidget.com"
+msgstr "Instagram widget id fra lightwidget.com"
 
 msgid "The Twitter handle for this organization"
-msgstr "Twitter hendl organizacije"
+msgstr "Twitter handle til denne organisasjonen"
 
 msgid "The Twitter widget used for searching"
-msgstr "Twitter widget za traženje"
+msgstr "Twitter widget brukt til søk"
 
 msgid "The words to filter out from the results on public site"
-msgstr "Reči koje treba da se filtriraju iz rezultata sa javnog sajta"
+msgstr "Ord som skal filtreres ut fra resultatene på den offentlige siden"
 
 msgid "If there are jobs to be shown on the public site."
-msgstr "Ako postoje zadaci koje treba prikazati na javnoj stranici."
+msgstr "Er disse jobber som skal vises på den offentlige siden?"
 
 msgid ""
 "If this org if for global data. e.g: It shows a world map instead of a "
 "country map."
 msgstr ""
-"Da li ova postavka uključuje globalne podatke, npr. mapu sveta umesto mape "
-"države."
+"Skal denne organisasjonen ha global data? MAO: skal det være et verdenskart "
+"isteden for et landskart"
 
 msgid "Whether to activate an extra gender."
-msgstr "Da li aktivirati dodatni pol."
+msgstr "Aktiver fler kjønnsidentiteter"
 
 msgid "Whether to activate the new design."
-msgstr "Da li aktivirati novi dizajn"
+msgstr "Aktiver nytt design"
 
 msgid ""
 "The alpha-3 ISO code of the organization so that it appears the stories "
 "widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is "
 "Global)."
 msgstr ""
-"Alpha-3 ISO kod organizacije koji će inicirati widget priče U-Report "
-"aplikacije. Primer: BRA, NIG, CMR (Koristite GLOBAL ako je U-Report "
-"globalan)."
+"Alpha-3 ISO koden for organisasjonen, slik at story widget fra U-Report "
+"appen fremvises. For eksempel: BRA, NIG, CMR (bruk GLOBAL hvis U-Reporten er"
+" global)."
 
 msgid "The font used for headline texts"
-msgstr "Font koji se koristi za naslove"
+msgstr "Font til overskrifter"
 
 msgid "The font used for normal text"
-msgstr "Font koji se koristi za normalan tekst"
+msgstr "Font til normal tekst"
 
 msgid "Hide participation stats"
-msgstr "Sakrij statistiku učešća"
+msgstr "Skjul deltakelsesstatistikk"
 
 msgid "The text to describe the sponsors of free messages"
-msgstr "Tekst za opis sponzora besplatnih poruka"
+msgstr "Teksten som beskriver sponsorer av gratis meldinger"
 
 msgid "The font used for small text"
-msgstr "Font koji se koristi za kratki tekst"
+msgstr "Font til liten tekst"
 
 msgid ""
 "If you need to include some custom HTML codes in you org pages, like custom "
 "analytics code snippets"
 msgstr ""
-"Ako treba uključiti prilagođeni HTML kod u vaše org stranice, poput "
-"prilagođenih analitičkih snippet kodova"
+"Om du trenger en tilpasset HTML kode for din organisasjon sine sider, slik "
+"som tilpassede analytics code snippets"
 
 msgid "Other language sites links"
-msgstr "Linkovi sa sajta na drugom jeziku"
+msgstr "Lenker til sider med andre språk"
 
 msgid "90 Days"
-msgstr "90 Dana"
+msgstr "90 dager"
 
 msgid "6 Months"
-msgstr "6 Meseci"
+msgstr "6 måneder"
 
 msgid "12 Months"
-msgstr "12 meseci"
+msgstr "12 måneder"
 
 msgid "Age"
-msgstr "Godine"
+msgstr "Alder"
 
 msgid "Location"
-msgstr "Lokacija"
+msgstr "Bosted"
 
 msgid "Opinion Responses"
-msgstr "Mišljenja"
+msgstr "Meninger"
 
 msgid "Sign Up Rate"
-msgstr "Stopa prijava"
+msgstr "Registreringsrate"
 
 msgid "Response Rate"
-msgstr "Stopa odgovora"
+msgstr "Responsrate"
 
 msgid "Active Users"
-msgstr "Aktivni Korisnici"
+msgstr "Aktive brukere"
 
 msgid "Whether this row was created by squashing"
-msgstr "Da li je ovaj red stvoren zbijanjem"
+msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
-msgstr "Nešto što inicira lokalizaciju"
+msgstr "Noe som skal trigge lokalisering"

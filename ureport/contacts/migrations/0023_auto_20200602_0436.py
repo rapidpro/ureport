@@ -10,5 +10,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(model_name="contact", name="uuid", field=models.CharField(max_length=36),),
+        migrations.AlterField(
+            model_name="contact",
+            name="uuid",
+            field=models.CharField(max_length=36),
+        ),
     ]

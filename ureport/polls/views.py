@@ -10,6 +10,7 @@ from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import OrgBackend
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
+from django_redis import get_redis_connection
 from smartmin.csv_imports.models import ImportTask
 from smartmin.views import SmartCreateView, SmartCRUDL, SmartCSVImportView, SmartListView, SmartUpdateView
 
@@ -512,6 +513,7 @@ class PollCRUDL(SmartCRUDL):
         fields = ("title", "poll_date", "category", "questions", "opinion_response", "sync_status", "created_on")
         link_fields = ("title", "poll_date", "questions", "opinion_response", "images")
         default_order = ("-created_on", "id")
+        paginate_by = 10
 
         def get_queryset(self):
             queryset = super(PollCRUDL.List, self).get_queryset().filter(org=self.request.org)
@@ -520,26 +522,38 @@ class PollCRUDL(SmartCRUDL):
         def get_context_data(self, **kwargs):
             context = super(PollCRUDL.List, self).get_context_data(**kwargs)
 
+            org = self.request.org
+
             unsynced_polls = (
-                Poll.objects.filter(org=self.request.org, has_synced=False)
-                .exclude(is_active=False)
-                .exclude(flow_uuid="")
+                Poll.objects.filter(org=org, has_synced=False).exclude(is_active=False).exclude(flow_uuid="")
             )
             context["unsynced_polls"] = unsynced_polls
+
+            context["main_poll"] = Poll.get_main_poll(org)
+            context["other_polls"] = Poll.get_other_polls(org)
+            context["brick_polls_ids"] = Poll.get_brick_polls_ids(org)
+            context["recent_polls"] = Poll.get_recent_polls(org)
 
             return context
 
         def get_sync_status(self, obj):
             if obj.has_synced:
+                r = get_redis_connection()
+                key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (obj.org.pk, obj.flow_uuid)
+                if r.get(key):
+                    return _("Scheduled Sync currently in progress...")
+
                 last_synced = cache.get(Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (obj.org.pk, obj.flow_uuid), None)
                 if last_synced:
-                    return "Last synced %s ago" % timesince(json_date_to_datetime(last_synced))
+                    return _(
+                        "Last results synced %(time)s ago" % dict(time=timesince(json_date_to_datetime(last_synced)))
+                    )
 
                 # we know we synced do not check the the progress since that is slow
-                return "Synced 100%"
+                return _("Synced")
 
             sync_progress = obj.get_sync_progress()
-            return "Syncing... {0:.1f}%".format(sync_progress)
+            return _(f"Sync currently in progress... {sync_progress:.1f}%")
 
         def get_questions(self, obj):
             return obj.get_questions().count()
@@ -579,7 +593,7 @@ class PollCRUDL(SmartCRUDL):
             flow_name = flow.get("name", "")
             flow_date_hint = flow.get("date_hint", "")
 
-            return "Edit Poll for flow [%s (%s)]" % (flow_name, flow_date_hint)
+            return _(f"Edit Poll for flow [{flow_name} ({flow_date_hint})]")
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Update, self).get_form_kwargs()

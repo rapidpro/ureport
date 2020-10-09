@@ -45,12 +45,12 @@ class PublicTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 39)
+        self.assertEqual(len(response.context["form"].fields), 40)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 62)
+        self.assertEqual(len(response.context["form"].fields), 63)
 
     def test_count(self):
         count_url = reverse("public.count")
@@ -441,9 +441,8 @@ class PublicTest(UreportTest):
         self.assertFalse(response.context["latest_poll"])
         self.assertFalse(response.context["polls"])
 
-        self.assertEqual(len(response.context["categories"]), 1)
-        self.assertTrue(self.education_nigeria in response.context["categories"])
-        self.assertTrue(self.health_uganda not in response.context["categories"])
+        self.assertEqual(len(response.context["categories"]), 0)
+        self.assertEqual(response.context["categories"], [])
 
         education_uganda = Category.objects.create(
             org=self.uganda, name="Education", created_by=self.admin, modified_by=self.admin
@@ -481,9 +480,7 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["latest_poll"], poll4)
 
         self.assertEqual(len(response.context["categories"]), 1)
-        self.assertTrue(self.education_nigeria in response.context["categories"])
-        self.assertTrue(self.health_uganda not in response.context["categories"])
-        self.assertTrue(education_uganda not in response.context["categories"])
+        self.assertEqual(response.context["categories"][0]["name"], self.education_nigeria.name)
 
         self.assertEqual(len(response.context["polls"]), 1)
         self.assertTrue(poll4 in response.context["polls"])
@@ -540,11 +537,8 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["latest_poll"], poll3)
 
         self.assertEqual(len(response.context["categories"]), 2)
-        self.assertTrue(self.education_nigeria not in response.context["categories"])
-        self.assertTrue(self.health_uganda in response.context["categories"])
-        self.assertTrue(education_uganda in response.context["categories"])
-        self.assertEqual(response.context["categories"][0], education_uganda)
-        self.assertEqual(response.context["categories"][1], self.health_uganda)
+        self.assertEqual(response.context["categories"][0]["name"], education_uganda.name)
+        self.assertEqual(response.context["categories"][1]["name"], self.health_uganda.name)
 
         self.assertEqual(len(response.context["polls"]), 3)
         self.assertTrue(poll4 not in response.context["polls"])
@@ -589,11 +583,8 @@ class PublicTest(UreportTest):
         self.assertEqual(response.context["latest_poll"], poll1)
 
         self.assertEqual(len(response.context["categories"]), 2)
-        self.assertTrue(self.education_nigeria not in response.context["categories"])
-        self.assertTrue(self.health_uganda in response.context["categories"])
-        self.assertTrue(education_uganda in response.context["categories"])
-        self.assertEqual(response.context["categories"][0], education_uganda)
-        self.assertEqual(response.context["categories"][1], self.health_uganda)
+        self.assertEqual(response.context["categories"][0]["name"], education_uganda.name)
+        self.assertEqual(response.context["categories"][1]["name"], self.health_uganda.name)
 
         self.assertEqual(len(response.context["polls"]), 3)
         self.assertTrue(poll4 not in response.context["polls"])

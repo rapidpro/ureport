@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-20 23:00+0000\n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -859,14 +859,38 @@ msgid "Backends"
 msgstr "Kelola Pengguna"
 
 #, python-format
-msgid ""
-"\n"
-"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
-"\n"
-"      "
-msgstr ""
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
 
 msgid "+ New Poll"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "Pertanyaan polling"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 #, fuzzy
@@ -1196,14 +1220,8 @@ msgstr ""
 #| "\n"
 #| "         %(counter)s results\n"
 #| "        "
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
 msgstr[0] ""
 "\n"
 "%(counter)s hasil"
@@ -1213,10 +1231,7 @@ msgstr[0] ""
 #| "\n"
 #| "\tResults %(start)s-%(end)s of %(count)s\n"
 #| "\t"
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "⇥Hasil %(start)s-%(end)s of %(count)s\n"
@@ -1594,6 +1609,24 @@ msgstr ""
 msgid "The label to display of the category on the public site"
 msgstr "Jika ada pekerjaan yang akan ditampilkan pada situs umum"
 
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, fuzzy, python-format
 #| msgid "Scheduled a pull refresh for poll #%d on org #%d"
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1649,6 +1682,11 @@ msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 
 msgid "The short text used to direct visitors to join U-Report"
@@ -1854,6 +1892,65 @@ msgstr "Cerita ini di tampilkan di halaman depan"
 msgid "Something to trigger localizations"
 msgstr "Sesuatu untuk memicu lokalisasi"
 
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "\t\t%(counter)s result\n"
+#~| "\t"
+#~| msgid_plural ""
+#~| "\n"
+#~| "         %(counter)s results\n"
+#~| "        "
+#~ msgid ""
+#~ "\n"
+#~ "             %(counter)s result\n"
+#~ "           "
+#~ msgid_plural ""
+#~ "\n"
+#~ "              %(counter)s results\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(counter)s hasil"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "\tResults %(start)s-%(end)s of %(count)s\n"
+#~| "\t"
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "⇥Hasil %(start)s-%(end)s of %(count)s\n"
+#~ "⇥"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                    %(responded)s responded out of %(polled)s polled\n"
+#~| "                  "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(responded)s direspon dari %(polled)s jajak pendapat"
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "Pertanyaan polling"
+
 #~ msgid "Polls"
 #~ msgstr "Polling"
 
@@ -1897,7 +1994,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Berpartisipasi dalam kampanye nasional untuk membantu berkembangnya negara Anda"
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Bagi apa yang terjadi di sekitar %(country)s dengan U-Reporters lainnya"
 
@@ -1944,7 +2040,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Most responded"
 #~ msgstr "Respon paling banyak"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"
@@ -2015,7 +2111,7 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "CARA BERGABUNG"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -2036,23 +2132,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "POLLING TERBARU DI"
 
-#, fuzzy, python-format
-#~| msgid ""
-#~| "\n"
-#~| "                    %(responded)s responded out of %(polled)s polled\n"
-#~| "                  "
-#~ msgid ""
-#~ "\n"
-#~ "                  %(questions)s question polled on this topic\n"
-#~ "                "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                  %(questions)s questions polled on this topic\n"
-#~ "                "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(responded)s direspon dari %(polled)s jajak pendapat"
-
 #, fuzzy
 #~| msgid "Response Rate"
 #~ msgid "response rate"
@@ -2066,7 +2145,6 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "POLL RESULTS"
 #~ msgstr "HASIL POLLING"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"
@@ -2156,28 +2234,25 @@ msgstr "Sesuatu untuk memicu lokalisasi"
 #~ msgid "Featured Poll Responses"
 #~ msgstr "Fitur Tanggapan Jajak Pendapat"
 
-#, python-format
 #~ msgid "Response %d Reporter"
 #~ msgstr "Tanggapan %d UReporter"
 
 #~ msgid "The name or alias of the responder."
 #~ msgstr "Nama atau alias dari responden tersebut."
 
-#, python-format
 #~ msgid "Response %d Location"
 #~ msgstr "Tanggapan %d Lokasi"
 
 #~ msgid "The location of the responder."
 #~ msgstr "Lokasi responden"
 
-#, python-format
 #~ msgid "Response %d Message"
 #~ msgstr "Tanggapan %d Pesan"
 
 #~ msgid "The text of the featured response."
 #~ msgstr "Respon unggulan"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"

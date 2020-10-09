@@ -34,7 +34,7 @@
           .mb-4.text-center(class="md:mx-4")
             %a(href='#text')
               .bg-circle-lg.bg-white.text-black.border.border-black
-                %i.fa.fa-comment
+                %i.fas.fa-comment
             .block
               -trans "Text"
           {% endif %}
@@ -43,7 +43,7 @@
           .mb-4.text-center(class="md:mx-4")
             %a(href='http://m.me/{{ org|config:"facebook_page_id" }}')
               .bg-circle-lg.bg-white.text-black.border.border-black
-                %i.fa.fa-facebook
+                %i.fab.fa-facebook-f
             .block
               Facebook
           {% endif %}
@@ -52,11 +52,20 @@
           .mb-4.text-center(class="md:mx-4")
             %a(href='https://wa.me/{{ org|config:"whatsapp_number" }}')
               .bg-circle-lg.bg-white.text-black.border.border-black
-                %i.fa.fa-whatsapp
+                %i.fab.fa-whatsapp
             .block
               WhatsApp
           {% endif %}
-    
+
+          {% if org|config:"viber_username" %}
+          .mb-4.text-center(class="md:mx-4")
+            %a(href='https://chats.viber.com/{{ org|config:"viber_username" }}')
+              .bg-circle-lg.bg-white.text-black.border.border-black
+                %i.fab.fa-viber
+            .block
+              Viber
+          {% endif %}
+
   - for join_step in join_steps
     .py-12(class="{% cycle 'bg-dark1 text-white' 'bg-dark2 text-white' 'bg-dark3 text-white' 'bg-light1 text-black' %}")
       .max-w-page.mx-auto.p-home(class="md:flex " id="{% if forloop.first %}text{% endif %}")

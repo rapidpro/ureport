@@ -11,6 +11,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="pollresponsecategory", name="category_displayed", field=models.TextField(null=True),
+            model_name="pollresponsecategory",
+            name="category_displayed",
+            field=models.TextField(null=True),
         ),
     ]
