@@ -1,3 +1,7 @@
+v1.1.189
+----------
+ * Update API docs
+
 v1.1.188
 ----------
  * Update npm packages
