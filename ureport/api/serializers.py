@@ -98,6 +98,7 @@ class StoryReadSerializer(serializers.ModelSerializer):
             "title",
             "featured",
             "summary",
+            "content",
             "video_id",
             "audio_link",
             "tags",
