@@ -493,6 +493,7 @@ class UreportAPITests(APITestCase):
                 video_id=story.video_id,
                 audio_link=story.audio_link,
                 summary=story.summary,
+                content=story.content,
                 featured=story.featured,
                 tags=story.tags,
                 images=StoryReadSerializer().get_images(story),
