@@ -294,10 +294,17 @@ class ReportersResultsView(SmartReadView):
 
     def render_to_response(self, context, **kwargs):
         output_data = []
-        segment = self.request.GET.get("segment", None)
-        if segment:
-            segment = json.loads(segment)
-            output_data = self.get_object().get_ureporters_locations_stats(segment)
+        try:
+            segment = self.request.GET.get("segment", None)
+            if segment:
+                segment = json.loads(segment)
+                output_data = self.get_object().get_ureporters_locations_stats(segment)
+        except json.JSONDecodeError:
+            output_data = []
+            pass
+        except Exception as e:
+            output_data = []
+            raise e
 
         return HttpResponse(json.dumps(output_data))
 
@@ -312,14 +319,21 @@ class EngagementDataView(SmartReadView):
     def render_to_response(self, context, **kwargs):
         output_data = []
 
-        results_params = self.request.GET.get("results_params", None)
-        if results_params:
-            results_params = json.loads(results_params)
-            metric = results_params.get("metric")
-            segment_slug = results_params.get("segment")
-            time_filter = int(results_params.get("filter", "12"))
+        try:
+            results_params = self.request.GET.get("results_params", None)
+            if results_params:
+                results_params = json.loads(results_params)
+                metric = results_params.get("metric")
+                segment_slug = results_params.get("segment")
+                time_filter = int(results_params.get("filter", "12"))
 
-            output_data = PollStats.get_engagement_data(self.get_object(), metric, segment_slug, time_filter)
+                output_data = PollStats.get_engagement_data(self.get_object(), metric, segment_slug, time_filter)
+        except json.JSONDecodeError:
+            output_data = []
+            pass
+        except Exception as e:
+            output_data = []
+            raise e
 
         return HttpResponse(json.dumps(output_data))
 
@@ -453,11 +467,19 @@ class PollQuestionResultsView(SmartReadView):
         return queryset
 
     def render_to_response(self, context, **kwargs):
-        segment = self.request.GET.get("segment", None)
-        if segment:
-            segment = json.loads(segment)
+        results = []
+        try:
+            segment = self.request.GET.get("segment", None)
+            if segment:
+                segment = json.loads(segment)
 
-        results = self.object.get_results(segment=segment)
+            results = self.object.get_results(segment=segment)
+        except json.JSONDecodeError:
+            results = []
+            pass
+        except Exception as e:
+            results = []
+            raise e
 
         return HttpResponse(json.dumps(results))
 
