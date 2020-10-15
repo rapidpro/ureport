@@ -28,8 +28,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 
-USE_X_FORWARDED_HOST = True
-
 # these guys will get email from sentry
 ADMINS = (
     ('Nyaruka Ops', 'ops@nyaruka.com'),
