@@ -1,3 +1,8 @@
+v1.1.188
+----------
+ * Update npm packages
+ * Merge pull request #639 from rapidpro/updates
+
 v1.1.183
 ----------
  * Merge pull request #635 from rapidpro/remove-zambia-link
