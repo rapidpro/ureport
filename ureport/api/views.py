@@ -754,6 +754,7 @@ class StoryList(BaseListAPIView):
     * **featured** - whether the story if FEATURED or not (boolean)
     * **org** - the ID of the org that owns this story (int)
     * **summary** - the summary of the story (string)
+    * **content** - the content of the story (string), this can be containing HTML code data as the content is managed as WYSIWYG
     * **video_id** - YouTube ID of the video in this story (string)
     * **audio_link** - the AUDIO_LINK in this story (string)
     * **tags** - the TAGS in this story (string)
@@ -776,6 +777,7 @@ class StoryList(BaseListAPIView):
                 "title": "Test Story",
                 "featured": true,
                 "summary": "This is the summary of the story.",
+                "content": "This is the <b>content</b> of the story.",
                 "video_id": "",
                 "audio_link": null,
                 "tags": " test, story ",
@@ -814,6 +816,7 @@ class StoryDetails(RetrieveAPIView):
             "title": "Test Story",
             "featured": true,
             "summary": "This is the summary of the story.",
+            "content": "This is the <b>content</b> of the story.",
             "video_id": "",
             "audio_link": null,
             "tags": " test, story ",
