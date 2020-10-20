@@ -937,6 +937,13 @@ SITE_ALLOW_NO_ORG = (
 # -----------------------------------------------------------------------------------
 COUNTRY_FLAGS_SITES = [
     dict(
+        name="Afghanistan",
+        host="//afghanistan.ureport.in/",
+        flag="flag_afghanistan.png",
+        is_static=True,
+        count_link="http://afghanistan.ureport.in/count/",
+    ),
+    dict(
         name="Argentina",
         host="//argentina.ureport.in/",
         flag="flag_argentina.png",
