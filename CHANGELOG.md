@@ -1,3 +1,9 @@
+v1.1.190
+----------
+ * Merge pull request #640 from rapidpro/add-AFG
+ * Update tests
+ * Add Afghanistan link
+
 v1.1.189
 ----------
  * Update API docs
