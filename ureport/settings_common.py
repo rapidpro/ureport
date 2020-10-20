@@ -1042,7 +1042,7 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://chile.ureport.in/count/",
     ),
     dict(
-        name="CAR",
+        name="Congo Brazzaville",
         host="//congobrazzaville.ureport.in/",
         flag="flag_congo_brazzaville.png",
         is_static=True,
