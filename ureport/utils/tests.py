@@ -77,7 +77,7 @@ class UtilsTest(UreportTest):
 
         # we have 3 old org in the settings
         self.assertEqual(len(get_linked_orgs()), settings_sites_count)
-        self.assertEqual(get_linked_orgs()[0]["name"].lower(), "argentina")
+        self.assertEqual(get_linked_orgs()[0]["name"].lower(), "afghanistan")
 
     @patch("dash.orgs.models.TembaClient.get_flows")
     def test_fetch_flows(self, mock_get_flows):
