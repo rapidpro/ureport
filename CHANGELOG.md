@@ -1,3 +1,8 @@
+v1.1.191
+----------
+ * Merge pull request #641 from rapidpro/fix-duplicated-country-name
+ * Fix counries duplicate name
+
 v1.1.190
 ----------
  * Merge pull request #640 from rapidpro/add-AFG
