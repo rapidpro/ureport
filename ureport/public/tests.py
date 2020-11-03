@@ -10,6 +10,7 @@ from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.stories.models import Story
 
+from django.conf import settings
 from django.urls import reverse
 from django.utils.http import urlquote
 
@@ -965,6 +966,24 @@ class PublicTest(UreportTest):
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
 
+    def test_shared_sites_count(self):
+        shared_sites_count_url = reverse("public.shared_sites_count")
+
+        response = self.client.post(shared_sites_count_url)
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.get(shared_sites_count_url)
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+
+        self.assertTrue("global_count" in response_json)
+        self.assertTrue("linked_sites" in response_json)
+        self.assertTrue("countries_count" in response_json)
+
+        settings_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
+        settings_sites_count = len(settings_sites)
+        self.assertEqual(response_json["countries_count"], settings_sites_count - 2)
+
 
 class JobsTest(UreportJobsTest):
     def setUp(self):
@@ -1034,9 +1053,6 @@ class CountriesTest(UreportTest):
 
     def test_countries(self):
         countries_url = reverse("public.countries")
-
-        response = self.client.post(countries_url, dict())
-        self.assertEqual(response.status_code, 405)
 
         response = self.client.post(countries_url, dict())
         self.assertEqual(response.status_code, 405)

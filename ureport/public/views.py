@@ -17,6 +17,7 @@ from django_redis import get_redis_connection
 from smartmin.views import SmartReadView, SmartTemplateView
 
 from django.conf import settings
+from django.core.cache import cache
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q
 from django.http import Http404, HttpResponse
@@ -33,7 +34,12 @@ from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
 from ureport.stats.models import GenderSegment, PollStats
-from ureport.utils import get_global_count
+from ureport.utils import (
+    get_global_count,
+    get_shared_countries_number,
+    get_shared_global_count,
+    get_shared_sites_count,
+)
 
 
 class IndexView(SmartTemplateView):
@@ -48,9 +54,13 @@ class IndexView(SmartTemplateView):
         latest_poll = Poll.get_main_poll(org)
         context["latest_poll"] = latest_poll
 
+        cache_value = cache.get("shared_sites", None)
+        if not cache_value:
+            get_shared_sites_count()
+
         # global counters
-        context["global_contact_count"] = get_global_count()
-        context["global_org_count"] = len(settings.COUNTRY_FLAGS_SITES) - 1  # remove Nigeria24x7
+        context["global_contact_count"] = get_shared_global_count()
+        context["global_org_count"] = get_shared_countries_number()
 
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = json.loads(org.get_age_stats())
@@ -79,6 +89,29 @@ class Count(SmartTemplateView):
         context["org"] = org
         context["count"] = org.get_reporters_count()
         return context
+
+
+class SharedSitesCount(SmartTemplateView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(SharedSitesCount, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        global_count = get_global_count()
+        linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
+
+        for elt in linked_sites:
+            if (
+                elt.get("show_icon", True)
+                and elt.get("flag", "")
+                and not elt["flag"].startswith("https://ureport.in/sitestatic/img/site_flags/")
+            ):
+                elt["flag"] = f'https://ureport.in/sitestatic/img/site_flags/{elt["flag"]}'
+
+        countries_count = len([elt for elt in linked_sites if elt.get("count_as_country", True)])
+        json_dict = dict(global_count=global_count, linked_sites=linked_sites, countries_count=countries_count)
+
+        return HttpResponse(json.dumps(json_dict), status=200, content_type="application/json")
 
 
 class NewsView(SmartTemplateView):
