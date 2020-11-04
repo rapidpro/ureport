@@ -1347,6 +1347,24 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://ureport.ug/count/",
     ),
     dict(
+        name="Uniendo Voces - Bolivia",
+        host="//uniendovoces-bol.ureport.in",
+        flag="flag_uni_bolivia.png",
+        count_link="http://uniendovoces-bol.ureport.in/count/",
+    ),
+    dict(
+        name="Uniendo Voces - Brasil",
+        host="//uniendovoces-br.ureport.in",
+        flag="flag_uni_brasil.png",
+        count_link="http://uniendovoces-br.ureport.in/count/",
+    ),
+        dict(
+        name="Uniendo Voces - Ecuador",
+        host="//uniendovoces-ec.ureport.in",
+        flag="flag_uni_ecuador.png",
+        count_link="http://uniendovoces-ec.ureport.in/count/",
+    ),
+    dict(
         name="Ukraine",
         host="//ukraine.ureport.in",
         flag="flag_ukraine.png",
