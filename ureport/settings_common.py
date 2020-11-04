@@ -1247,7 +1247,7 @@ COUNTRY_FLAGS_SITES = [
     dict(
         name="OECS",
         host="//oecs.ureport.in",
-        flag="flag_on_the_move.png",
+        flag="flag_oecs.png",
         count_link="http://oecs.ureport.in/count/",
     ),
     dict(
