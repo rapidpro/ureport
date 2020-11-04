@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import json
 from datetime import datetime
 
+import mock
 import pytz
 import redis
 from dash.categories.models import Category
@@ -71,12 +72,19 @@ class UtilsTest(UreportTest):
         self.assertEqual(json_date_to_datetime("2014-01-02T01:04:05.000Z"), d2)
         self.assertEqual(json_date_to_datetime("2014-01-02T01:04:05.000"), d2)
 
-    def test_get_linked_orgs(self):
+    @mock.patch("ureport.utils.get_shared_sites_count")
+    def test_get_linked_orgs(self, mock_get_shared_sites_count):
+        settings_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
+        mock_get_shared_sites_count.return_value = {
+            "global_count": 120,
+            "countries_count": 12,
+            "linked_sites": settings_sites,
+        }
 
-        settings_sites_count = len(list(getattr(settings, "COUNTRY_FLAGS_SITES", [])))
+        settings_sites_count = len(settings_sites)
 
-        # we have 3 old org in the settings
-        self.assertEqual(len(get_linked_orgs()), settings_sites_count)
+        # we have 1 org in settings we do not show its link (global)
+        self.assertEqual(len(get_linked_orgs()), settings_sites_count - 1)
         self.assertEqual(get_linked_orgs()[0]["name"].lower(), "afghanistan")
 
     @patch("dash.orgs.models.TembaClient.get_flows")
@@ -211,9 +219,7 @@ class UtilsTest(UreportTest):
     def test_fetch_old_sites_count(self):
         self.clear_cache()
 
-        settings_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", [])) + list(
-            getattr(settings, "OTHER_ORG_COUNT_SITES", [])
-        )
+        settings_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
 
         with patch("ureport.utils.datetime_to_ms") as mock_datetime_ms:
             mock_datetime_ms.return_value = 500
