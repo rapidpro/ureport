@@ -1,3 +1,8 @@
+v1.1.192
+----------
+ * Merge pull request #642 from rapidpro/shared-flags
+ * Add view for shared sites count
+
 v1.1.191
 ----------
  * Merge pull request #641 from rapidpro/fix-duplicated-country-name
