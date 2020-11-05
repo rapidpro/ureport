@@ -108,7 +108,11 @@ class SharedSitesCount(SmartTemplateView):
             ):
                 elt["flag"] = f'https://ureport.in/sitestatic/img/site_flags/{elt["flag"]}'
 
-        countries_count = len([elt for elt in linked_sites if elt.get("count_as_country", True)])
+        unique_countries = set()
+        for elt in linked_sites:
+            unique_countries.update(elt.get("countries_codes", []))
+        countries_count = len(unique_countries)
+
         json_dict = dict(global_count=global_count, linked_sites=linked_sites, countries_count=countries_count)
 
         return HttpResponse(json.dumps(json_dict), status=200, content_type="application/json")

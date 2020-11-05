@@ -10,7 +10,7 @@ from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.stories.models import Story
 
-from django.conf import settings
+from django.test import override_settings
 from django.urls import reverse
 from django.utils.http import urlquote
 
@@ -966,6 +966,31 @@ class PublicTest(UreportTest):
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
 
+    @override_settings(
+        COUNTRY_FLAGS_SITES=[
+            dict(
+                name="Afghanistan",
+                host="//afghanistan.ureport.in/",
+                flag="flag_afghanistan.png",
+                countries_codes=["AFG"],
+                count_link="http://afghanistan.ureport.in/count/",
+            ),
+            dict(
+                name="Argentina",
+                host="//argentina.ureport.in/",
+                flag="flag_argentina.png",
+                countries_codes=["ARG"],
+                count_link="http://argentina.ureport.in/count/",
+            ),
+            dict(
+                name="South Asia",
+                host="//southasia.ureport.in/",
+                flag="flag_southasia.png",
+                countries_codes=["AFG", "IND", "IDN", "NPL"],
+                count_link="http://southasia.ureport.in/count/",
+            ),
+        ]
+    )
     def test_shared_sites_count(self):
         shared_sites_count_url = reverse("public.shared_sites_count")
 
@@ -979,10 +1004,7 @@ class PublicTest(UreportTest):
         self.assertTrue("global_count" in response_json)
         self.assertTrue("linked_sites" in response_json)
         self.assertTrue("countries_count" in response_json)
-
-        settings_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
-        settings_sites_count = len(settings_sites)
-        self.assertEqual(response_json["countries_count"], settings_sites_count - 2)
+        self.assertEqual(response_json["countries_count"], 5)
 
 
 class JobsTest(UreportJobsTest):
