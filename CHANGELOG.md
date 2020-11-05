@@ -1,3 +1,9 @@
+v1.1.193
+----------
+ * Merge pull request #645 from rapidpro/fix-countries-count
+ * Remove unused flags
+ * Use ISO codes of countries to count site countries
+
 v1.1.192
 ----------
  * Merge pull request #642 from rapidpro/shared-flags
