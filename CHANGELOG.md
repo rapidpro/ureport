@@ -1,3 +1,8 @@
+v1.1.194
+----------
+ * Merge pull request #646 from rapidpro/fix-countries-count
+ * Update pacific countries
+
 v1.1.193
 ----------
  * Merge pull request #645 from rapidpro/fix-countries-count
