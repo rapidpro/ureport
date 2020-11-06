@@ -1305,7 +1305,7 @@ COUNTRY_FLAGS_SITES = [
         name="Pacific",
         host="//pacific.ureport.in",
         flag="flag_pacific.png",
-        countries_codes=["FSM", "FJI"],
+        countries_codes=["COK", "FJI", "MHL", "NRU", "NIU", "PLW", "WSM", "TKL", "TON", "TUV", "VUT"],
         count_link="http://pacific.ureport.in/count/",
     ),
     dict(
