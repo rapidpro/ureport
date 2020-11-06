@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Cathrine Standal <cathrinestandal@gmail.com>, 2020
+# Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: Cathrine Standal <cathrinestandal@gmail.com>, 2020\n"
+"Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1034,7 +1035,7 @@ msgstr "TOTALT ANTALL SVAR"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)s har svart av %(polled)s spurt"
+msgstr "%(responded)s har svart av %(polled)s spurte"
 
 msgid "ALL"
 msgstr "ALLE"
@@ -1138,7 +1139,7 @@ msgstr ""
 "som bidrar til en positiv endring."
 
 msgid "Polled"
-msgstr "Spurt"
+msgstr "Spurte"
 
 msgid "Reporters"
 msgstr "U-Reporters"
@@ -1427,7 +1428,7 @@ msgid "The base language of the flow to use"
 msgstr "Hovedspråket for flowen som skal brukes"
 
 msgid "The number of polled reporters on this poll"
-msgstr "Antall spurt i denne undersøkelsen"
+msgstr "Antall spurte i denne undersøkelsen"
 
 msgid "Whether the poll has finished the initial results sync."
 msgstr ""
