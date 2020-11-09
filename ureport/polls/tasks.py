@@ -17,6 +17,7 @@ from ureport.celery import app
 from ureport.utils import (
     fetch_flows,
     fetch_old_sites_count as do_fetch_old_sites_count,
+    fetch_shared_sites_count,
     populate_age_and_gender_poll_results,
     update_poll_flow_data,
 )
@@ -322,6 +323,7 @@ def fetch_old_sites_count():
     if not r.get(key):
         with r.lock(key, timeout=lock_timeout):
             do_fetch_old_sites_count()
+            fetch_shared_sites_count()
             logger.info("Task: fetch_old_sites_count took %ss" % (time.time() - start))
 
 

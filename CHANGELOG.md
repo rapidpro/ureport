@@ -1,3 +1,53 @@
+v1.1.194
+----------
+ * Merge pull request #646 from rapidpro/fix-countries-count
+ * Update pacific countries
+
+v1.1.193
+----------
+ * Merge pull request #645 from rapidpro/fix-countries-count
+ * Remove unused flags
+ * Use ISO codes of countries to count site countries
+
+v1.1.192
+----------
+ * Merge pull request #642 from rapidpro/shared-flags
+ * Add view for shared sites count
+
+v1.1.191
+----------
+ * Merge pull request #641 from rapidpro/fix-duplicated-country-name
+ * Fix counries duplicate name
+
+v1.1.190
+----------
+ * Merge pull request #640 from rapidpro/add-AFG
+ * Update tests
+ * Add Afghanistan link
+
+v1.1.189
+----------
+ * Update API docs
+
+v1.1.188
+----------
+ * Update npm packages
+ * Merge pull request #639 from rapidpro/updates
+
+v1.1.183
+----------
+ * Merge pull request #635 from rapidpro/remove-zambia-link
+ * Run code check
+ * Remove broken Zambia link
+ * Merge pull request #628 from rapidpro/translations_django-po--master_no
+ * Merge pull request #632 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Merge pull request #634 from Ilhasoft/translations_django-po--master_sr_RS@latin
+ * Merge pull request #633 from Ilhasoft/translations_django-po--master_no
+ * run code_check
+ * run code_check
+ * Apply translations in sr_RS@latin
+ * Translate /locale/en/LC_MESSAGES/django.po in no
+
 v1.1.182
 ----------
  * Merge pull request #630 from rapidpro/fix-polls-page-slow
