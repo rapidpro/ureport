@@ -22,6 +22,7 @@ from .views import (
     PollRedirectView,
     PollsView,
     ReportersResultsView,
+    SharedSitesCount,
     StoriesView,
     StoryReadView,
     UreportersView,
@@ -59,6 +60,7 @@ urlpatterns = [
     url(r"^jobs/$", JobsView.as_view(), {}, "public.jobs"),
     url(r"^page/(?P<link>\w+)/$", CustomPage.as_view(), {}, "public.custom_page"),
     url(r"^count/$", Count.as_view(), {}, "public.count"),
+    url(r"^shared_sites_count/$", SharedSitesCount.as_view(), {}, "public.shared_sites_count"),
     url(r"^status/$", status, {}, "public.status"),
     url(r"^countries/$", CountriesView.as_view(), {}, "public.countries"),
 ]

@@ -15,12 +15,12 @@ EMPTY_SUBDOMAIN_HOST = 'http://nigeria.ureport.staging.nyaruka.com'
 HOSTNAME = 'ureport.staging.nyaruka.com'
 ALLOWED_HOSTS = ['.nyaruka.com', '.ureport.in']
 
-SESSION_COOKIE_DOMAIN = 'ureport.staging.nyaruka.com'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_AGE = 1209600  # 2 weeks
 
 CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = "Strict"
 CSRF_COOKIE_AGE = 10800
 
 SECURE_HSTS_SECONDS = 86400

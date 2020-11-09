@@ -19,11 +19,12 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=lambda v: [
                        s.strip() for s in v.split(',')])
 
 SESSION_COOKIE_DOMAIN = config('SESSION_COOKIE_DOMAIN', 'ureport.in')
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 1209600  # 2 weeks
 
 CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = "Strict"
 CSRF_COOKIE_AGE = 10800
 
 SECURE_HSTS_SECONDS = 86400

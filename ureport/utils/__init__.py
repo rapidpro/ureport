@@ -122,13 +122,6 @@ def chunk_list(iterable, size):
             return
 
 
-def get_linked_orgs(authenticated=False):
-    linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
-    linked_sites_sorted = sorted(linked_sites, key=lambda k: k["name"].lower())
-
-    return linked_sites_sorted
-
-
 def get_logo(org):
     logo_field = org.logo
     logo = Image.objects.filter(org=org, is_active=True, image_type=LOGO).first()
@@ -211,6 +204,53 @@ def update_poll_flow_data(org):
                         Poll.objects.filter(pk=poll.pk).update(**updated_fields)
 
 
+def fetch_shared_sites_count():
+    import requests
+
+    this_time = datetime.now()
+    try:
+        response = requests.get("https://ureport.in/shared_sites_count/")
+        response.raise_for_status()
+
+        value = {"time": datetime_to_ms(this_time), "results": response.json()}
+        cache.set("shared_sites", value, None)
+        return value["results"]
+    except Exception:
+        import traceback
+
+        traceback.print_exc()
+
+
+def get_shared_sites_count():
+    cache_value = cache.get("shared_sites", None)
+    if cache_value:
+        return cache_value["results"]
+    if getattr(settings, "IS_PROD", False):
+        return fetch_shared_sites_count()
+    return {}
+
+
+def get_shared_global_count():
+    return get_shared_sites_count().get("global_count", 0)
+
+
+def get_shared_countries_number():
+    return get_shared_sites_count().get("countries_count", 0)
+
+
+def get_shared_linked_sites():
+    return get_shared_sites_count().get("linked_sites", [])
+
+
+def get_linked_orgs(authenticated=False):
+    shared_linked_sites = get_shared_linked_sites()
+    linked_sites = [elt for elt in shared_linked_sites if elt.get("show_icon", True)]
+
+    linked_sites_sorted = sorted(linked_sites, key=lambda k: k["name"].lower())
+
+    return linked_sites_sorted
+
+
 def fetch_old_sites_count():
     import requests
     import re
@@ -218,9 +258,7 @@ def fetch_old_sites_count():
 
     start = time.time()
     this_time = datetime.now()
-    linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", [])) + list(
-        getattr(settings, "OTHER_ORG_COUNT_SITES", [])
-    )
+    linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
 
     old_site_values = []
 

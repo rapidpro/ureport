@@ -10,6 +10,7 @@ from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.stories.models import Story
 
+from django.test import override_settings
 from django.urls import reverse
 from django.utils.http import urlquote
 
@@ -400,6 +401,52 @@ class PublicTest(UreportTest):
         self.assertEqual(response.request["PATH_INFO"], "/join/")
         self.assertEqual(response.context["org"], self.uganda)
         # self.assertContains(response, "All U-Report services (all msg on 3000) are free.")
+
+    def test_poll_results(self):
+
+        poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
+
+        question1 = PollQuestion.objects.create(
+            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
+        )
+
+        pollquestion_results_url = reverse("public.pollquestion_results", args=[question1.pk])
+
+        response = self.client.get(pollquestion_results_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], f"/pollquestion/{question1.pk}/results/")
+
+        response = self.client.get(
+            pollquestion_results_url + "?segment=%0D%0ASPIHeader%3A%20SPIValue&", SERVER_NAME="uganda.ureport.io"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], f"/pollquestion/{question1.pk}/results/")
+
+    def test_reporter_results(self):
+        reporter_results_url = reverse("public.contact_field_results")
+
+        response = self.client.get(reporter_results_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], "/contact_field_results/")
+
+        response = self.client.get(
+            reporter_results_url + "?segment=%0D%0ASPIHeader%3A%20SPIValue&", SERVER_NAME="nigeria.ureport.io"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], "/contact_field_results/")
+
+    def test_engagement_data(self):
+        ureporters_url = reverse("public.engagement_data")
+
+        response = self.client.get(ureporters_url, SERVER_NAME="nigeria.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], "/engagement_data/")
+
+        response = self.client.get(
+            ureporters_url + "?results_params=%0D%0ASPIHeader%3A%20SPIValue&", SERVER_NAME="nigeria.ureport.io"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.request["PATH_INFO"], "/engagement_data/")
 
     @mock.patch("ureport.utils.fetch_old_sites_count")
     def test_ureporters(self, mock_old_sites_count):
@@ -919,6 +966,46 @@ class PublicTest(UreportTest):
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
 
+    @override_settings(
+        COUNTRY_FLAGS_SITES=[
+            dict(
+                name="Afghanistan",
+                host="//afghanistan.ureport.in/",
+                flag="flag_afghanistan.png",
+                countries_codes=["AFG"],
+                count_link="http://afghanistan.ureport.in/count/",
+            ),
+            dict(
+                name="Argentina",
+                host="//argentina.ureport.in/",
+                flag="flag_argentina.png",
+                countries_codes=["ARG"],
+                count_link="http://argentina.ureport.in/count/",
+            ),
+            dict(
+                name="South Asia",
+                host="//southasia.ureport.in/",
+                flag="flag_southasia.png",
+                countries_codes=["AFG", "IND", "IDN", "NPL"],
+                count_link="http://southasia.ureport.in/count/",
+            ),
+        ]
+    )
+    def test_shared_sites_count(self):
+        shared_sites_count_url = reverse("public.shared_sites_count")
+
+        response = self.client.post(shared_sites_count_url)
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.get(shared_sites_count_url)
+        self.assertEqual(response.status_code, 200)
+        response_json = json.loads(response.content)
+
+        self.assertTrue("global_count" in response_json)
+        self.assertTrue("linked_sites" in response_json)
+        self.assertTrue("countries_count" in response_json)
+        self.assertEqual(response_json["countries_count"], 5)
+
 
 class JobsTest(UreportJobsTest):
     def setUp(self):
@@ -988,9 +1075,6 @@ class CountriesTest(UreportTest):
 
     def test_countries(self):
         countries_url = reverse("public.countries")
-
-        response = self.client.post(countries_url, dict())
-        self.assertEqual(response.status_code, 405)
 
         response = self.client.post(countries_url, dict())
         self.assertEqual(response.status_code, 405)
