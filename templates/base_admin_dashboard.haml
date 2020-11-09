@@ -66,24 +66,27 @@
     -block navbar
       .top-nav-container
         .level
-          .level-left
+          -if is_rtl_org
+            .level-left
+          .(class="{% if is_rtl_org %}level-right{% else %}level-left{% endif %}")
             %a.level-item.has-text-black(href="/" style="justify-content: start;")
-              .icon
-                %i.fas.fa-arrow-circle-left
+              .icon(style="{% if is_rtl_org %}margin-right:0; margin-left:1.25rem;{% endif %}")
+                %i.fas(class="{% if is_rtl_org %}fa-arrow-circle-right{% else %}fa-arrow-circle-left{% endif %}")
               - trans "Back to Website"
       .admin-header.border-b.border-gray-600
         .level
-          .level-left
-            .level-item.square-logo(style="justify-content: start;")
-              .(style="width:360px")
-                {% thumbnail org.get_logo "x180" format="PNG" as im %}
-                %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
-                {% endthumbnail %}
+          -if not is_rtl_org
+            .level-left
+              .level-item.square-logo(style="justify-content: start;")
+                .(style="width:360px")
+                  {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                  %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+                  {% endthumbnail %}
 
-          .level-right
+          .(class="{% if is_rtl_org %}level-left{% else %}level-right{% endif %}")
             - block login
               - if request.user and request.user.is_authenticated
-                .level-item.logged-in-account.has-text-right
+                .level-item.logged-in-account(class="{% if is_rtl_org %}has-text-left{% else %}has-text-right{% endif %}")
                   - trans "Welcome, "
                     {{ request.user.first_name }} {{ request.user.last_name }}
                   %br.is-hidden-mobile
@@ -91,8 +94,16 @@
                 %a.level-item.button.is-outlined.logout-button(href="{% url 'users.user_logout' %}?go=/")
                   - trans "Logout"
               - else
-                %a.level-item.button.is-outlined(href="{% url 'users.user_login' %}")
+                %a.level-item.button.is-outlined(href="{% org_host_link %}{% url 'users.user_login' %}")
                     - trans "Login"
+
+          -if is_rtl_org
+            .level-right
+              .level-item.square-logo(style="justify-content: start; margin-right: 0rem;")
+                .(style="width:360px")
+                  {% thumbnail org.get_logo "x180" format="PNG" as im %}
+                  %img.logo(src="{{ im.url }}" alt="{{ org.name }}")
+                  {% endthumbnail %}
 
   %section.section.is-paddingless.is-marginless
     .content-section-container
@@ -226,12 +237,12 @@
             {% endthumbnail %}
 
           .flex-1.flex(class="md:justify-end")
-            .font-bold.text-2xl.flex-center-y(class="md:ml-6")
+            .font-bold.text-2xl.flex-center-y(class="{% if is_rtl_org %}md:mr-6{% else %}md:ml-6{% endif %}")
               %div
                 %a.pb-2.border-b-2.border-black(href="{% url 'public.opinions' %}" class="hover:text-gray-750")
                   -trans "Opinions"
 
-            .font-bold.text-2xl.ml-6.flex-center-y
+            .font-bold.text-2xl.flex-center-y(class="{% if is_rtl_org %}md:mr-6{% else %}md:ml-6{% endif %}")
               %div
                 %a.pb-2.border-b-2.border-black(href="{% url 'public.stories' %}" class="hover:text-gray-750")
                   -trans "Stories"
@@ -242,7 +253,7 @@
             %a.flex-initial.py-menu(href="{% url 'public.about' %}" class="hover:text-gray-750")
               -trans "About"
 
-            %a.flex-initial.py-menu(href="{% url 'public.ureporters' %}" class="md:ml-4 hover:text-gray-750")
+            %a.flex-initial.py-menu(href="{% url 'public.ureporters' %}" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
               -trans "Engagement"
 
           .li.flex-grow.flex(class="md:justify-end")
@@ -260,8 +271,8 @@
 
           - if show_login
             - if request.user and request.user.is_authenticated
-              %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}md  :mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
+              %a.flex-initial.py-menu(href="{% url 'users.user_logout' %}?go=/" class="{% if is_rtl_org %}md:mr-4{% else %}md:ml-4{% endif %} hover:text-gray-750")
                 - trans "Logout"
             -else
-              %a.flex-initial.py-menu(href="{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
+              %a.flex-initial.py-menu(href="{% org_host_link %}{% url 'users.user_login' %}" class="{% if is_rtl_org %}mr-4{% else %}ml-4{% endif %} hover:text-gray-750")
                 - trans "Login"

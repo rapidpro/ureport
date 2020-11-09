@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-20 23:00+0000\n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -827,15 +827,41 @@ msgid "Backends"
 msgstr "ব্যাকএন্ড"
 
 #, python-format
-msgid ""
-"\n"
-"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
-"\n"
-"      "
-msgstr ""
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "+ New Poll"
 msgstr "+ নতুন পোল"
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "পোল এর প্রশ্নগুলো "
+msgstr[1] "পোল এর প্রশ্নগুলো "
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
 
 msgid "Refresh Results"
 msgstr "ফলাফল রিফ্রেশ করুন"
@@ -1111,15 +1137,17 @@ msgstr ""
 "\n"
 " আপনি নিশ্চিত আপনি বাদ দিতে চান %(object)s?"
 
-#, python-format
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t %(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
 msgstr[0] ""
 "\n"
 "     %(counter)s ফলাফল\n"
@@ -1129,11 +1157,12 @@ msgstr[1] ""
 "     %(counter)s ফলাফল\n"
 "        "
 
-#, python-format
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "\tফলাফল %(start)s-%(end)s / %(count)s\n"
@@ -1481,6 +1510,24 @@ msgstr ""
 msgid "The label to display of the category on the public site"
 msgstr "যদি কোন চাকুরী থাকে তাহলে তা পাবলিক সাইটে প্রদর্শিত হবে"
 
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "প্রতিষ্ঠানে %(org_id)d-এ পোল %(poll_id)d-এর একটি pull refresh-এর সময় নির্ধারণ করা হয়েছে"
@@ -1529,6 +1576,11 @@ msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "ব্যবহারকারীরা যে  শর্ট কোড ব্যবহার করে  U-Report এ স্থানীয়ভাবে যোগাযোগ করবে"
 
 msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
+
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
 
 msgid "The short text used to direct visitors to join U-Report"
@@ -1708,6 +1760,66 @@ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে ক�
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
 
+#~ msgid ""
+#~ "\n"
+#~ "             %(counter)s result\n"
+#~ "           "
+#~ msgid_plural ""
+#~ "\n"
+#~ "              %(counter)s results\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "     %(counter)s ফলাফল\n"
+#~ "        "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "     %(counter)s ফলাফল\n"
+#~ "        "
+
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "\tফলাফল %(start)s-%(end)s / %(count)s\n"
+#~ "\t"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(questions)s question polled on this topic\n"
+#~| "                "
+#~| msgid_plural ""
+#~| "\n"
+#~| "                  %(questions)s questions polled on this topic\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                এই বিষয়ের উপর %(questions)s  -টি প্রশ্নের জরিপ করা হয়েছে\n"
+#~ "  \n"
+#~ "              "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "                 এই বিষয়ের উপর %(questions)s-টি প্রশ্নের জরিপ করা হয়েছে\n"
+#~ "                "
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "পোল এর প্রশ্নগুলো "
+
 #~ msgid "Polls"
 #~ msgstr "পোল গুলো "
 
@@ -1749,7 +1861,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "সারা দেশব্যাপী প্রচারণায় অংশ নিয়ে আপনার দেশ এর উন্নয়নে সহায়তা করুন"
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "আপনার চারপাশের অন্যান্য U-reporter দের সাথে কি হচ্ছে সেটি সবাইকে জানান '%(country)s'"
 
@@ -1794,7 +1905,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "Most responded"
 #~ msgstr "বেশি উত্তর প্রদানকারী "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -1878,7 +1988,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "HOW TO JOIN"
 #~ msgstr "কিভাবে যোগদান করবেন "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -1897,25 +2006,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "চলতি পোলটি "
 
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                  %(questions)s question polled on this topic\n"
-#~ "                "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                  %(questions)s questions polled on this topic\n"
-#~ "                "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "                এই বিষয়ের উপর %(questions)s  -টি প্রশ্নের জরিপ করা হয়েছে\n"
-#~ "  \n"
-#~ "              "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "                 এই বিষয়ের উপর %(questions)s-টি প্রশ্নের জরিপ করা হয়েছে\n"
-#~ "                "
-
 #~ msgid "response rate"
 #~ msgstr "উত্তর দেওয়ার হার "
 
@@ -1928,7 +2018,6 @@ msgstr "স্থানীয়করণকে সহায়তা করে এম
 #~ msgid "POLL RESULTS"
 #~ msgstr "পোল এর ফলাফল "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"

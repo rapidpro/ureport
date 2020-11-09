@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-20 23:00+0000\n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -868,14 +868,42 @@ msgid "Backends"
 msgstr "Upravljanje korisnicima"
 
 #, python-format
-msgid ""
-"\n"
-"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
-"\n"
-"      "
-msgstr ""
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "+ New Poll"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "Anketna pitanja"
+msgstr[1] "Anketna pitanja"
+msgstr[2] "Anketna pitanja"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
 msgstr ""
 
 #, fuzzy
@@ -1205,14 +1233,8 @@ msgstr ""
 #| "\n"
 #| "         %(counter)s results\n"
 #| "        "
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
 msgstr[0] ""
 "\n"
 "\t\t%(counter)s Rezultati\n"
@@ -1231,10 +1253,7 @@ msgstr[2] ""
 #| "\n"
 #| "\tResults %(start)s-%(end)s of %(count)s\n"
 #| "\t"
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "\tRezultati %(start)s-%(end)sod %(count)s"
@@ -1605,6 +1624,24 @@ msgstr ""
 msgid "The label to display of the category on the public site"
 msgstr "Ako postoje zadaci koje treba prikazati na javnoj stranici"
 
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, fuzzy, python-format
 #| msgid "Scheduled a pull refresh for poll #%d on org #%d"
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
@@ -1660,6 +1697,11 @@ msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno"
+
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno"
 
 msgid "The short text used to direct visitors to join U-Report"
@@ -1863,6 +1905,86 @@ msgstr "Da li je priča objavljena"
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
 
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "\t\t%(counter)s result\n"
+#~| "\t"
+#~| msgid_plural ""
+#~| "\n"
+#~| "         %(counter)s results\n"
+#~| "        "
+#~ msgid ""
+#~ "\n"
+#~ "             %(counter)s result\n"
+#~ "           "
+#~ msgid_plural ""
+#~ "\n"
+#~ "              %(counter)s results\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "\t\t%(counter)s Rezultati\n"
+#~ "\t"
+#~ msgstr[1] ""
+#~ "\n"
+#~ "         %(counter)s Rezultati\n"
+#~ "        "
+#~ msgstr[2] ""
+#~ "\n"
+#~ "         %(counter)s Rezultati\n"
+#~ "        "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "\tResults %(start)s-%(end)s of %(count)s\n"
+#~| "\t"
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "\tRezultati %(start)s-%(end)sod %(count)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(questions)s question polled on this topic\n"
+#~| "                "
+#~| msgid_plural ""
+#~| "\n"
+#~| "                  %(questions)s questions polled on this topic\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "                  %(questions)s pitanje postavljeno na ovu temu\n"
+#~ "                "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "                  %(questions)s broj pitanja postavljenih na ovu temu\n"
+#~ "                "
+#~ msgstr[2] ""
+#~ "\n"
+#~ "                  %(questions)s pitanja postavljenih na ovu temu\n"
+#~ "                "
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "Anketna pitanja"
+
 #~ msgid "Polls"
 #~ msgstr "Ankete"
 
@@ -1904,7 +2026,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Učestvujte u kampanjama širom države, kako biste uticali na stanje u našoj zemlji."
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Podelite šta se dešava sa ostalim U-Reporterima u %(country)s"
 
@@ -1954,7 +2075,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Most responded"
 #~ msgstr "Najviše odgovora "
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -2038,7 +2158,7 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "HOW TO JOIN"
 #~ msgstr "KAKO SE PRIDRUŽITI"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "              * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -2064,28 +2184,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "TRENUTNA ANKETA U"
 
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                  %(questions)s question polled on this topic\n"
-#~ "                "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                  %(questions)s questions polled on this topic\n"
-#~ "                "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "                  %(questions)s pitanje postavljeno na ovu temu\n"
-#~ "                "
-#~ msgstr[1] ""
-#~ "\n"
-#~ "                  %(questions)s broj pitanja postavljenih na ovu temu\n"
-#~ "                "
-#~ msgstr[2] ""
-#~ "\n"
-#~ "                  %(questions)s pitanja postavljenih na ovu temu\n"
-#~ "                "
-
 #~ msgid "response rate"
 #~ msgstr "stopa odgovora"
 
@@ -2098,7 +2196,6 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "POLL RESULTS"
 #~ msgstr "REZULTATI ANKETE"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"
@@ -2188,28 +2285,25 @@ msgstr "Nešto što inicira lokalizaciju"
 #~ msgid "Featured Poll Responses"
 #~ msgstr "Karakteristični odgovori iz ankete"
 
-#, python-format
 #~ msgid "Response %d Reporter"
 #~ msgstr "Odgovor %dReporter"
 
 #~ msgid "The name or alias of the responder."
 #~ msgstr "Ime ili pseudonim ispitanika"
 
-#, python-format
 #~ msgid "Response %d Location"
 #~ msgstr "Odgovor %d Lokacija"
 
 #~ msgid "The location of the responder."
 #~ msgstr "Lokacija ispitanika"
 
-#, python-format
 #~ msgid "Response %d Message"
 #~ msgstr "Odgovor %d Poruka"
 
 #~ msgid "The text of the featured response."
 #~ msgstr "Tekst objavljenih karakterističnih odgovora"
 
-#, fuzzy, python-format
+#, fuzzy
 #~| msgid ""
 #~| "\n"
 #~| "                    %(responded)s responded out of %(polled)s polled\n"

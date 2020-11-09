@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import calendar
 import json
 import operator
+from collections import defaultdict
 from functools import reduce
 
 import pycountry
@@ -16,6 +17,7 @@ from django_redis import get_redis_connection
 from smartmin.views import SmartReadView, SmartTemplateView
 
 from django.conf import settings
+from django.core.cache import cache
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q
 from django.http import Http404, HttpResponse
@@ -32,7 +34,12 @@ from ureport.locations.models import Boundary
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
 from ureport.stats.models import GenderSegment, PollStats
-from ureport.utils import get_global_count
+from ureport.utils import (
+    get_global_count,
+    get_shared_countries_number,
+    get_shared_global_count,
+    get_shared_sites_count,
+)
 
 
 class IndexView(SmartTemplateView):
@@ -47,9 +54,13 @@ class IndexView(SmartTemplateView):
         latest_poll = Poll.get_main_poll(org)
         context["latest_poll"] = latest_poll
 
+        cache_value = cache.get("shared_sites", None)
+        if not cache_value:
+            get_shared_sites_count()
+
         # global counters
-        context["global_contact_count"] = get_global_count()
-        context["global_org_count"] = len(settings.COUNTRY_FLAGS_SITES) - 1  # remove Nigeria24x7
+        context["global_contact_count"] = get_shared_global_count()
+        context["global_org_count"] = get_shared_countries_number()
 
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = json.loads(org.get_age_stats())
@@ -78,6 +89,33 @@ class Count(SmartTemplateView):
         context["org"] = org
         context["count"] = org.get_reporters_count()
         return context
+
+
+class SharedSitesCount(SmartTemplateView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(SharedSitesCount, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        global_count = get_global_count()
+        linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
+
+        for elt in linked_sites:
+            if (
+                elt.get("show_icon", True)
+                and elt.get("flag", "")
+                and not elt["flag"].startswith("https://ureport.in/sitestatic/img/site_flags/")
+            ):
+                elt["flag"] = f'https://ureport.in/sitestatic/img/site_flags/{elt["flag"]}'
+
+        unique_countries = set()
+        for elt in linked_sites:
+            unique_countries.update(elt.get("countries_codes", []))
+        countries_count = len(unique_countries)
+
+        json_dict = dict(global_count=global_count, linked_sites=linked_sites, countries_count=countries_count)
+
+        return HttpResponse(json.dumps(json_dict), status=200, content_type="application/json")
 
 
 class NewsView(SmartTemplateView):
@@ -152,9 +190,6 @@ class PollContextMixin(object):
         org = self.request.org
         context["org"] = org
 
-        context["gender_stats"] = org.get_gender_stats()
-        context["age_stats"] = org.get_age_stats()
-
         context["states"] = sorted(
             [dict(id=k, name=v) for k, v in Boundary.get_org_top_level_boundaries_name(org).items()],
             key=lambda c: c["name"],
@@ -196,12 +231,20 @@ class PollContextMixin(object):
                 ]
                 context["locations_stats"] = top_question.get_location_stats()
 
-        context["categories"] = (
-            Category.objects.filter(org=org, is_active=True)
-            .prefetch_related(Prefetch("polls", queryset=Poll.objects.filter(is_active=True).order_by("-poll_date")))
-            .order_by("name")
+        if not main_poll or not main_poll.get_questions().first():
+            context["gender_stats"] = org.get_gender_stats()
+            context["age_stats"] = org.get_age_stats()
+
+        polls = Poll.get_public_polls(org=org).order_by("-poll_date").select_related("category")
+
+        categories_dict = defaultdict(list)
+        for poll in polls:
+            categories_dict[poll.category.name].append(poll)
+
+        context["categories"] = sorted(
+            [dict(name=k, polls=v) for k, v in categories_dict.items()], key=lambda c: c["name"]
         )
-        context["polls"] = Poll.get_public_polls(org=org).order_by("-poll_date")
+        context["polls"] = polls
 
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
         return context
@@ -281,22 +324,31 @@ class StoryReadView(SmartReadView):
 
 class ReportersResultsView(SmartReadView):
     model = Org
+    http_method_names = ["get"]
 
     def get_object(self):
         return self.request.org
 
     def render_to_response(self, context, **kwargs):
         output_data = []
-        segment = self.request.GET.get("segment", None)
-        if segment:
-            segment = json.loads(segment)
-            output_data = self.get_object().get_ureporters_locations_stats(segment)
+        try:
+            segment = self.request.GET.get("segment", None)
+            if segment:
+                segment = json.loads(segment)
+                output_data = self.get_object().get_ureporters_locations_stats(segment)
+        except json.JSONDecodeError:
+            output_data = []
+            pass
+        except Exception as e:
+            output_data = []
+            raise e
 
         return HttpResponse(json.dumps(output_data))
 
 
 class EngagementDataView(SmartReadView):
     model = Org
+    http_method_names = ["get"]
 
     def get_object(self):
         return self.request.org
@@ -304,20 +356,28 @@ class EngagementDataView(SmartReadView):
     def render_to_response(self, context, **kwargs):
         output_data = []
 
-        results_params = self.request.GET.get("results_params", None)
-        if results_params:
-            results_params = json.loads(results_params)
-            metric = results_params.get("metric")
-            segment_slug = results_params.get("segment")
-            time_filter = int(results_params.get("filter", "12"))
+        try:
+            results_params = self.request.GET.get("results_params", None)
+            if results_params:
+                results_params = json.loads(results_params)
+                metric = results_params.get("metric")
+                segment_slug = results_params.get("segment")
+                time_filter = int(results_params.get("filter", "12"))
 
-            output_data = PollStats.get_engagement_data(self.get_object(), metric, segment_slug, time_filter)
+                output_data = PollStats.get_engagement_data(self.get_object(), metric, segment_slug, time_filter)
+        except json.JSONDecodeError:
+            output_data = []
+            pass
+        except Exception as e:
+            output_data = []
+            raise e
 
         return HttpResponse(json.dumps(output_data))
 
 
 class UreportersView(SmartTemplateView):
     template_name = "public/ureporters.html"
+    http_method_names = ["get"]
 
     def get_context_data(self, **kwargs):
         context = super(UreportersView, self).get_context_data(**kwargs)
@@ -403,6 +463,11 @@ class BoundaryView(SmartTemplateView):
 
         if org.get_config("common.is_global"):
             location_boundaries = org.boundaries.filter(level=0)
+            limit_states = org.get_config("common.limit_states")
+            if limit_states:
+                limit_states = [elt.strip() for elt in limit_states.split(",")]
+                location_boundaries = location_boundaries.filter(osm_id__in=limit_states)
+
         else:
             osm_id = self.kwargs.get("osm_id", None)
 
@@ -439,11 +504,19 @@ class PollQuestionResultsView(SmartReadView):
         return queryset
 
     def render_to_response(self, context, **kwargs):
-        segment = self.request.GET.get("segment", None)
-        if segment:
-            segment = json.loads(segment)
+        results = []
+        try:
+            segment = self.request.GET.get("segment", None)
+            if segment:
+                segment = json.loads(segment)
 
-        results = self.object.get_results(segment=segment)
+            results = self.object.get_results(segment=segment)
+        except json.JSONDecodeError:
+            results = []
+            pass
+        except Exception as e:
+            results = []
+            raise e
 
         return HttpResponse(json.dumps(results))
 

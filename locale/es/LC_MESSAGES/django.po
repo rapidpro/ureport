@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-20 23:00+0000\n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: deimidis <guillermo.movia@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -825,15 +825,41 @@ msgid "Backends"
 msgstr "Servicios"
 
 #, python-format
-msgid ""
-"\n"
-"        There is/are currently %(counter)s new poll(s) syncing. Polls are displayed on the public site once they have completely synced their results.\n"
-"\n"
-"      "
-msgstr ""
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "+ New Poll"
 msgstr "+ Nueva encuesta"
+
+#, fuzzy, python-format
+#| msgid "Poll Questions"
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "Preguntas de la encuesta"
+msgstr[1] "Preguntas de la encuesta"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr ""
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr ""
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr ""
+
+msgid "Poll syncs scheduled every 24h"
+msgstr ""
+
+msgid "Not scheduling syncs, not active"
+msgstr ""
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr ""
 
 msgid "Refresh Results"
 msgstr "Actualizar resultados"
@@ -1109,29 +1135,32 @@ msgstr ""
 "\n"
 "¿Estás seguro de querer borrar <strong>%(object)s</strong>?"
 
-#, python-format
-msgid ""
-"\n"
-"             %(counter)s result\n"
-"           "
-msgid_plural ""
-"\n"
-"              %(counter)s results\n"
-"            "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\t %(counter)s result\n"
+#| "\t"
+#| msgid_plural ""
+#| "\n"
+#| "         %(counter)s results\n"
+#| "        "
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
 msgstr[0] ""
 "\n"
-"         %(counter)s resultado\n"
+"         %(counter)s resultados\n"
 "        "
 msgstr[1] ""
 "\n"
 "         %(counter)s resultados\n"
 "        "
 
-#, python-format
-msgid ""
-"\n"
-"             Results %(start)s-%(end)s of %(count)s\n"
-"           "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "\tResults %(start)s-%(end)s of %(count)s\n"
+#| "\t"
+msgid "Results %(start)s-%(end)s of %(count)s"
 msgstr ""
 "\n"
 "Resultados %(start)s-%(end)s de %(count)s"
@@ -1478,6 +1507,24 @@ msgstr ""
 msgid "The label to display of the category on the public site"
 msgstr "Si hay trabajos para mostrar en el sitio público."
 
+msgid "Scheduled Sync currently in progress..."
+msgstr ""
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr ""
+
+msgid "Synced"
+msgstr ""
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr ""
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr ""
+
 #, python-format
 msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
 msgstr "Fue programada una actualización para la encuesta #%(poll_id)d en la org #%(org_id)d"
@@ -1526,6 +1573,11 @@ msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "El código corto que los usuarios deben usar para contactar localmente a U-Report "
 
 msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "El número de whatsapp que los usuarios deben usar para contactar con U-Report si tiene uno"
+
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "El número de whatsapp que los usuarios deben usar para contactar con U-Report si tiene uno"
 
 msgid "The short text used to direct visitors to join U-Report"
@@ -1703,6 +1755,62 @@ msgstr "Si esta historia está destacada"
 msgid "Something to trigger localizations"
 msgstr "Algo para activar las localizaciones "
 
+#~ msgid ""
+#~ "\n"
+#~ "             %(counter)s result\n"
+#~ "           "
+#~ msgid_plural ""
+#~ "\n"
+#~ "              %(counter)s results\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "         %(counter)s resultado\n"
+#~ "        "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "         %(counter)s resultados\n"
+#~ "        "
+
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "Resultados %(start)s-%(end)s de %(count)s"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                  %(questions)s question polled on this topic\n"
+#~| "                "
+#~| msgid_plural ""
+#~| "\n"
+#~| "                  %(questions)s questions polled on this topic\n"
+#~| "                "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "%(questions)s preguntas realizadas en este tema"
+#~ msgstr[1] ""
+#~ "\n"
+#~ "%(questions)s preguntas realizadas en este tema"
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "Preguntas de la encuesta"
+
 #~ msgid "Polls"
 #~ msgstr "Opiniones"
 
@@ -1744,7 +1852,6 @@ msgstr "Algo para activar las localizaciones "
 #~ msgid "Participate in nationwide campaigns to help improve your country"
 #~ msgstr "Participa en campañas nacionales para ayudar a mejorar tu país"
 
-#, python-format
 #~ msgid "Share what's happening around %(country)s with other U-Reporters"
 #~ msgstr "Comparte lo que pasa en %(country)s con otros U-Reporters"
 
@@ -1789,7 +1896,6 @@ msgstr "Algo para activar las localizaciones "
 #~ msgid "Most responded"
 #~ msgstr "Más respondidas"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                                  %(responded)s of %(total)s\n"
@@ -1873,7 +1979,6 @@ msgstr "Algo para activar las localizaciones "
 #~ msgid "HOW TO JOIN"
 #~ msgstr "CÓMO PARTICIPAR"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                * U-Report is a free program sponsored by UNICEF with help of Network Providers in %(country)s. U-Report will not ask for any payments nor personal financial information, PLEASE disregard any messages which ask you for payment either on this number or on the Facebook and Twitter pages. All U-Report services (all msg on %(shortcode)s) are free.\n"
@@ -1892,22 +1997,6 @@ msgstr "Algo para activar las localizaciones "
 #~ msgid "CURRENT POLL IN"
 #~ msgstr "ENCUESTA ACTUAL EN"
 
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                  %(questions)s question polled on this topic\n"
-#~ "                "
-#~ msgid_plural ""
-#~ "\n"
-#~ "                  %(questions)s questions polled on this topic\n"
-#~ "                "
-#~ msgstr[0] ""
-#~ "\n"
-#~ "%(questions)s preguntas realizadas en este tema"
-#~ msgstr[1] ""
-#~ "\n"
-#~ "%(questions)s preguntas realizadas en este tema"
-
 #~ msgid "response rate"
 #~ msgstr "tasa de respuesta"
 
@@ -1920,7 +2009,6 @@ msgstr "Algo para activar las localizaciones "
 #~ msgid "POLL RESULTS"
 #~ msgstr "RESULTADOS DE LA ENCUESTA"
 
-#, python-format
 #~ msgid ""
 #~ "\n"
 #~ "                    %(responded)s responded out of %(polled)s polled\n"

@@ -13,7 +13,7 @@
               -trans "Users"
 
       .column
-        .field.is-horizontal.is-pulled-right
+        .field.is-horizontal(class="{% if is_rtl_org %}is-pulled-left{% else %}is-pulled-right{% endif %}")
           .field-label
           .field-body
             .field.is-grouped

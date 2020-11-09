@@ -6,6 +6,7 @@ from ureport.settings_common import *
 import os
 import dj_database_url
 
+IS_PROD = True
 DEBUG = False
 THUMBNAIL_DEBUG = DEBUG
 COMPRESS_ENABLED = True
@@ -13,8 +14,19 @@ COMPRESS_ENABLED = True
 EMPTY_SUBDOMAIN_HOST = 'http://nigeria.ureport.staging.nyaruka.com'
 HOSTNAME = 'ureport.staging.nyaruka.com'
 ALLOWED_HOSTS = ['.nyaruka.com', '.ureport.in']
-SESSION_COOKIE_DOMAIN = 'ureport.staging.nyaruka.com'
-SESSION_COOKIE_SECURE = False
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = "Strict"
+CSRF_COOKIE_AGE = 10800
+
+SECURE_HSTS_SECONDS = 86400
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
 
 # these guys will get email from sentry
 ADMINS = (

@@ -1,0 +1,1804 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Marijana Muhic <mmuhic@unicef.org>, 2020
+# Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"PO-Revision-Date: 2019-05-15 20:27+0000\n"
+"Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
+"Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
+"Language: hr_HR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+msgid "The name of this category"
+msgstr "Naziv ove kategorije"
+
+msgid "An optional image that can describe this category"
+msgstr "Slika po izboru, za opis te kategorije"
+
+msgid "The organization this category applies to"
+msgstr "Organizacija na koju se odnosi ova kategorija"
+
+msgid "Categories"
+msgstr "Kategorije"
+
+msgid "The name to describe this image"
+msgstr "Naziv za opis ove slike"
+
+msgid "The category this image represents"
+msgstr "Kategorija koju ova slika predstavlja"
+
+msgid "The image file to use"
+msgstr "Datoteka za sliku koja će se koristiti"
+
+msgid "The human readable name for this content type"
+msgstr "Čitljivo ime ove vrste sadržaja"
+
+msgid "The slug to idenfity this content type, used with the template tags"
+msgstr "Kojom frazom će se definirati sadržaj u okviru template tagova"
+
+msgid "A description of where this content type is used on the site and how it will be dsiplayed"
+msgstr "Opis web lokacije sadržaja i načina prikazivanja"
+
+msgid "Whether this content should include a title"
+msgstr "Uključuje li ovaj sadržaj naslov"
+
+msgid "Whether this content should include an image"
+msgstr "Uključuje li ovaj sadržaj sliku"
+
+msgid "Whether this content should use a rich HTML editor"
+msgstr "Hoće li će ovaj sadržaj koristiti rich HTML editor"
+
+msgid "Whether this content should include a summary field"
+msgstr "Uključuje li ovaj sadržaj prostor za sažetak"
+
+msgid "Whether this content should include a link"
+msgstr "Hoće li ovaj sadržaj uključivati linkove"
+
+msgid "Whether this content should allow upload of additional images, ie a gallery"
+msgstr "Hoće li ovaj sadržaj dozvoljavati upload dodatnih slika, npr. galeriju"
+
+msgid "Whether this content has a color field"
+msgstr "Ima li ovaj sadržaj polje za odabir boje"
+
+msgid "Whether this content should allow setting a YouTube id"
+msgstr "Omogućuje li ovaj sadržaj postavljanje You Tube ID"
+
+msgid "Whether this content should allow tags"
+msgstr "Omogućuje li ovaj sadržaj postavljanje tagova"
+
+msgid "Content Type"
+msgstr "Vrsta sadržaja"
+
+msgid "The category, or type for this content block"
+msgstr "Kategorija ili tip ovog sadržajnog bloka"
+
+msgid "The title for this block of content, optional"
+msgstr "Naziv sadržajnog bloka, izborno"
+
+msgid "The summary for this item, should be short"
+msgstr "Sažetak ovog dijela, treba biti kratko"
+
+msgid "The body of text for this content block, optional"
+msgstr "Struktura teksta za ovaj sadržajni blok, izborno"
+
+msgid "Any image that should be displayed with this content block, optional"
+msgstr "Slika koja bi trebala biti prikazana uz ovaj sadržajni blok, izborno"
+
+msgid "A background color to use for the image, in the format: #rrggbb"
+msgstr "Boja pozadine za sliku, u formatu #rrggbb"
+
+msgid "Any link that should be associated with this content block, optional"
+msgstr "Link koji bi trebao biti pridružen ovom sadržajnom bloku, izborno"
+
+msgid "The id of the YouTube video that should be linked to this item"
+msgstr "ID You Tube videa, koji se vezuje uz ovu stavku"
+
+msgid "Any tags for this content block, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Tagovi za sadržajni blok, odvojeni razmacima, koji se mogu koristiti za naprednije filtriranje, izborno"
+
+msgid "The priority for this block, higher priority blocks come first"
+msgstr "Prioritet ovog bloka, blokovi sa većim prioritetom postavljaju se prvi"
+
+msgid "The organization this content block belongs to"
+msgstr "Organizacija kojoj sadržaj pripada"
+
+msgid "Gallery"
+msgstr "Galerija"
+
+msgid "Add Image"
+msgstr "Dodaj sliku"
+
+msgid "Search"
+msgstr "Traži"
+
+msgid "Add"
+msgstr "Dodaj"
+
+msgid "Content Types"
+msgstr "Vrste sadržaja"
+
+msgid "Content Blocks"
+msgstr "Sadržajni blokovi"
+
+#, python-format
+msgid "%s Blocks"
+msgstr "%s Blokovi"
+
+#, python-format
+msgid "Edit %s"
+msgstr "Uredi%s"
+
+#, python-format
+msgid "Create %s"
+msgstr "Kreiraj%s"
+
+msgid "Create Content Block"
+msgstr "Kreiraj sadržajni blok"
+
+msgid "Your first name"
+msgstr "Vaše ime"
+
+msgid "Your last name"
+msgstr "Vaše prezime"
+
+msgid "Your email address"
+msgstr "Vaša e-mail adresa"
+
+msgid "Your password, at least eight letters please"
+msgstr "Vaša lozinka, najmanje osam znamenki"
+
+msgid "That email address is already used"
+msgstr "Ova e-mail adresa je već upotrijebljena"
+
+msgid "Passwords must contain at least 8 letters."
+msgstr "Lozinka mora sadržavati najmanje 8 slova"
+
+msgid "This domain is used for subdomains"
+msgstr "Ova domena se koristi za pod-domene"
+
+msgid "Name"
+msgstr "Ime"
+
+msgid "The name of this organization"
+msgstr "Naziv organizacije"
+
+msgid "The logo that should be used for this organization"
+msgstr "Logotip organizacije"
+
+msgid "Administrators"
+msgstr "Administratori"
+
+msgid "The administrators in your organization"
+msgstr "Administratori u vašoj organizaciji"
+
+msgid "Viewers"
+msgstr "Publika"
+
+msgid "The viewers in your organization"
+msgstr "Publika u vašoj organizaciji"
+
+msgid "Editors"
+msgstr "Urednici"
+
+msgid "The editors in your organization"
+msgstr "Urednici u vašoj organizaciji"
+
+msgid "Language"
+msgstr "Jezik"
+
+msgid "The main language used by this organization"
+msgstr "Jezik koji se koristi u vašoj organizaciji"
+
+msgid "Subdomain"
+msgstr "Pod-domena"
+
+msgid "This subdomain is not available"
+msgstr "Pod-domena nije dostupna"
+
+msgid "The subdomain for this organization"
+msgstr "Pod-domena vaše organizacije"
+
+msgid "Domain"
+msgstr "Domena"
+
+msgid "This domain is not available"
+msgstr "Domena nije dostupna"
+
+msgid "The custom domain for this organization"
+msgstr "Prilagođjena domena vaše organizacije"
+
+msgid "Timezone"
+msgstr "Vremenska zona"
+
+msgid "The timezone your organization is in."
+msgstr "Vaša vremenska zona"
+
+msgid "JSON blob used to store configuration information associated with this organization"
+msgstr "JSON blob za pohranjivanje informacija vezanih za organizaciju"
+
+msgid "Administrator"
+msgstr "Administrator"
+
+msgid "Editor"
+msgstr "Urednik"
+
+msgid "Viewer"
+msgstr "Posjetitelj"
+
+msgid "Org"
+msgstr "Org"
+
+msgid "The organization to which the account is invited to view"
+msgstr "Organizacija čiji je korisnički račun pozvan za pregled"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "The email to which we send the invitation of the viewer"
+msgstr "E-mail na koji se šalje poziv posjetitelju"
+
+msgid "Secret"
+msgstr "Tajno"
+
+msgid "a unique code associated with this invitation"
+msgstr "jedinstveni kod koji se asocira s ovim pozivom"
+
+msgid "User Role"
+msgstr "Uloge korisnika"
+
+#, python-format
+msgid "%s Invitation"
+msgstr "%s Pozivnica"
+
+msgid "Banner"
+msgstr "Baner"
+
+msgid "Pattern"
+msgstr "Uzorak"
+
+msgid "The organization in which the image will be used"
+msgstr "Sekcija u kojoj će slika biti korištena"
+
+msgid "The name to describe this background"
+msgstr "Naziv za opis pozadine"
+
+msgid "Background type"
+msgstr "Vrsta pozadine"
+
+msgid "The image file"
+msgstr "Datoteka slike"
+
+msgid "The API token for this backend"
+msgstr "API token za ovu pozadinu"
+
+#, python-format
+msgid ""
+"\n"
+"      You've been invited to join %(org_name)s.\n"
+"      <br/>\n"
+"      To accept the invitation, <a href='%(host)s%(join_url)s'>click here</a>.\n"
+"  "
+msgstr ""
+"\n"
+"      Pozivamo vas da se pridružite %(org_name)s.\n"
+"      <br/>\n"
+"      Kako biste prihvatili poziv, <a href='%(host)s%(join_url)s'>kliknite ovdje</a>.\n"
+"  "
+
+msgid "You are invited to join {{org.name}}."
+msgstr "Pridružite se {{org.name}}."
+
+msgid "Click this link to join"
+msgstr "Klikni na link da se pridružiš"
+
+msgid "Edit"
+msgstr "Uredi"
+
+msgid "Manage Backends"
+msgstr "Uredi pozadine"
+
+msgid "Manage Users"
+msgstr "Upravljanje korisnicima"
+
+msgid "Accounts"
+msgstr "Korisnički računi"
+
+msgid "Admins"
+msgstr "Administratori"
+
+msgid "Remove"
+msgstr "Ukloni"
+
+msgid "You must have at least one administator"
+msgstr "Morate imati najmanje jednog administratora"
+
+msgid "Select your Organization"
+msgstr "Odaberite vašu organizaciju"
+
+msgid "Your account is not associated to an organization. Please Contact the adminstrator."
+msgstr "Vaš korisnički račun nije vezan uz organizaciju. Molimo kontaktirajte administratora."
+
+msgid "Your Organization"
+msgstr "Vaša organizacija"
+
+msgid "Invite people to your organization"
+msgstr "Pozovite ljude u vašu organizaciju"
+
+msgid "User group"
+msgstr "Korisnička grupa"
+
+msgid "One of the emails you entered is invalid."
+msgstr "Jedna od e-mail adresa koje ste naveli nije važeća"
+
+#, python-format
+msgid "Manage %(name)s Accounts"
+msgstr "Upravljaj%(name)s Korisničkim računima"
+
+msgid "Create"
+msgstr "Kreiraj"
+
+msgid "Your invitation link is invalid. Please contact your organization administrator."
+msgstr "Vaš pozivni link nije ispravan. Molimo obratite se administratoru vaše organizacije."
+
+#, python-format
+msgid "Join %(name)s"
+msgstr "Pridruži se%(name)s"
+
+msgid "Join"
+msgstr "Pridruži se"
+
+msgid "Your invitation link has expired. Please contact your organization administrator."
+msgstr "Vaš pozivni link je istekao. Molimo kontaktirajte administratora u vašoj organizaciji."
+
+msgid "Task"
+msgstr "Zadatak"
+
+msgid "Tasks"
+msgstr "Zadaci"
+
+msgid "The title for this story"
+msgstr "Naslov priče"
+
+msgid "Whether this story is featured"
+msgstr "Je li priča objavljena"
+
+msgid "The summary for the story"
+msgstr "Sažetak priče"
+
+msgid "The body of text for the story"
+msgstr "Struktura teksta priče"
+
+msgid "The writer of the story"
+msgstr "Autor priče"
+
+msgid "A link to an mp3 file to publish on this story"
+msgstr "Link za mp3 datoteka koji će biti objavljen uz priču"
+
+msgid "The id of the YouTube video that should be linked to this story (this is the text that comes afer v= and before & in the YouTube URL)"
+msgstr "ID You Tube videa koji treba biti linkovan uz ovu priču (tekst koji slijedi nakon v= i prije & unutar You Tube URL)"
+
+msgid "Any tags for this story, separated by spaces, can be used to do more advanced filtering, optional"
+msgstr "Oznake za priču, odvojeno razmacima, koje mogu biti korištene za napredno filtriranje, izborno"
+
+msgid "The category for this story"
+msgstr "Kategorija za ovu priču"
+
+msgid "The organization this story belongs to"
+msgstr "Organizacija kojoj priča pripada"
+
+msgid "Stories"
+msgstr "Priče"
+
+msgid "The story to associate to"
+msgstr "Priča se veže uz"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Story Images"
+msgstr "Slike uz priču"
+
+#, python-format
+msgid "Image %d"
+msgstr "Slika%d"
+
+msgid "Image to display on story page and in previews. (optional)"
+msgstr "slike koje će se prikazati uz priču i pregled. (izborno)"
+
+msgid "Image to display on story page and in previews (optional)"
+msgstr "slike koje će se prikazati uz priču i pregled. (izborno)"
+
+msgid "Remove Item?"
+msgstr "Ukloni stavku?"
+
+#, python-format
+msgid ""
+"\n"
+"    Are you sure you want to remove <b>%(object)s</b>?\n"
+"    "
+msgstr ""
+"\n"
+"    Jeste li sigurni da želite ukloniti <b>%(object)s</b>?\n"
+"    "
+
+msgid "Once it is removed, it will be gone forever. There is no way to undo this operation."
+msgstr "Kada uklonite, nema načina da vratite sadržaj."
+
+msgid "Cancel"
+msgstr "Otkaži"
+
+#, python-format
+msgid ""
+"\n"
+"\t %(counter)s result\n"
+"\t"
+msgid_plural ""
+"\n"
+"         %(counter)s results\n"
+"        "
+msgstr[0] ""
+"\n"
+"\t %(counter)s rezultat\n"
+"\t"
+msgstr[1] ""
+"\n"
+"         %(counter)s rezultat\n"
+"        "
+msgstr[2] ""
+"\n"
+"         %(counter)s rezultati\n"
+"        "
+
+#, python-format
+msgid ""
+"\n"
+"\tResults %(start)s-%(end)s of %(count)s\n"
+"\t"
+msgstr ""
+"\n"
+"\tRezultati %(start)s-%(end)s of %(count)s\n"
+"\t"
+
+msgid "Previous"
+msgstr "Prethodni"
+
+msgid "Next"
+msgstr "Sljedeći"
+
+msgid "edit"
+msgstr "uredi"
+
+msgid "Sign in"
+msgstr "Prijavi se"
+
+msgid "Login"
+msgstr "Prijava"
+
+msgid "Forgot Password?"
+msgstr "Zaboravljena lozinka"
+
+msgid "Token Expired"
+msgstr "Token je istekao"
+
+msgid "Login Failure"
+msgstr "Greška u prijavi"
+
+#, python-format
+msgid ""
+"\n"
+"      Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"      "
+msgstr ""
+"\n"
+"      Žao nam je, ne možete se prijaviti zbog %(failed_login_limit)s pogrešnih pokušaja prijave.\n"
+"      "
+
+#, python-format
+msgid ""
+"\n"
+"      Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"      "
+msgstr ""
+"\n"
+"      Molimo pričekajte %(lockout_timeout)s minuta prije ponovnog pokušaja prijave.\n"
+"      "
+
+msgid "Alternatively, you can fill out the form below to have your password reset via e-mail."
+msgstr "Imate mogućnost ispuniti formular ispod, kako bi obnovili lozinku putem e-maila."
+
+msgid "Please contact the website administrator to have your password reset."
+msgstr "Molimo kontaktirajte administratora stranice radi ponovne postavke lozinke."
+
+msgid "Email Address"
+msgstr "E-mail adresa"
+
+msgid "Recover"
+msgstr "Obnovi"
+
+msgid "Please enter the email address you used to sign up and we will help you recover your password."
+msgstr "Molimo upišite e-mail adresu koju koristite tokom upisa i mi ćemo vam pomoći da obnovite lozinku."
+
+#, python-format
+msgid ""
+"\n"
+"  <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"  "
+msgstr ""
+"\n"
+"  <strong>Lozinka vam je istekla. </strong> Pravila nalažu da morate obnoviti lozinku svakih  %(expire_days)s dana, a lozinka ne smije biti ista koju ste koristili u posljednjih %(window_days)s dana.\n"
+"  "
+
+msgid "New Password"
+msgstr "Nova lozinka"
+
+msgid "Passwords must have at least 8 characters, including one uppercase, one lowercase and one number"
+msgstr "Lozinka mora imati najmanje 8 znakova, uključujući jedno veliko slovo, jedno malo slovo i jedan broj."
+
+msgid "You have used this password before in the past year, please use a new password."
+msgstr "Ovu lozinku ste već koristili tijekom protekle godine. Molimo izaberite novu."
+
+msgid "Password"
+msgstr "Lozinka"
+
+msgid "Confirm Password"
+msgstr "Potvrdi lozinku"
+
+msgid "Please enter your password to save changes."
+msgstr "Molimo unesite lozinku kako bi sačuvali promjene."
+
+msgid "Confirm the new password by filling the this field"
+msgstr "Potvrdite novu lozinku ispunjavajući ovo polje."
+
+msgid "New password doesn't match with its confirmation"
+msgstr "Nova lozinka se ne poklapa s potvrdom."
+
+msgid "Your Email"
+msgstr "Vaš e-mail"
+
+msgid "E-mail recovery is not supported, please contact the website administrator to reset your password manually."
+msgstr "Obnova lozinke putem e-maila nije moguća. Molimo kontaktirajte administratora stranice, kako bi obnovio lozinku ručno."
+
+msgid "Current Password"
+msgstr "Trenutna lozinka"
+
+msgid "Your current password"
+msgstr "Vaša trenutna lozinka"
+
+msgid "Your new password."
+msgstr "Vaša nova lozinka"
+
+msgid "Confirm new Password"
+msgstr "Potvrdite novu lozinku"
+
+msgid "Confirm your new password."
+msgstr "Potvrdite vašu novu lozinku"
+
+msgid "Please enter your password to save changes"
+msgstr "Molimo unesite lozinku kako bi sačuvali promjene"
+
+msgid "Confirm your new password by entering it here"
+msgstr "Potvrdite novu lozinku ovdje"
+
+msgid "Mismatch between your new password and confirmation, try again"
+msgstr "Nepodudaranje izmedju nove lozinke i potvrde lozinke"
+
+msgid "New user created successfully."
+msgstr "Novi korisnik je uspješno kreiran"
+
+msgid "Groups"
+msgstr "Grupe"
+
+msgid "Users will only get those permissions that are allowed for their group."
+msgstr "Korisnici dobivaju samo one dozvole koje se odnose na njihovu grupu."
+
+msgid "Set the user's initial password here."
+msgstr "Postavi inicijalnu korisničku lozinku ovdje."
+
+msgid "Last Login"
+msgstr "Posljednja prijava"
+
+msgid "Is Active"
+msgstr "Je aktivan"
+
+msgid "Whether this user is allowed to log into the site"
+msgstr "Je li ovom korisniku dozvoljena prijava na stranicu"
+
+msgid "Users will only get those permissions that are allowed for their group"
+msgstr "Korisnici dobivaju samo odobrenja koja se odnose na njihovu grupu"
+
+msgid "You can reset the user's password by entering a new password here"
+msgstr "Možete obnoviti korisničku lozinku, unoseći novu lozinku ovdje"
+
+msgid "Username"
+msgstr "Korisničko ime"
+
+msgid "Your password"
+msgstr "Vaša lozinka"
+
+msgid "If you want to set a new password, enter it here"
+msgstr "Ako želite postaviti novu lozinku, unesite je ovdje"
+
+msgid "Confirm New Password"
+msgstr "Potvrdi novu lozinku"
+
+msgid "Confirm your new password"
+msgstr "Potvrdite vašu novu lozinku"
+
+msgid "Edit your profile"
+msgstr "Uredi profil"
+
+msgid "Password Recovery"
+msgstr "Vraćanje lozinke"
+
+msgid "An Email has been sent to your account with further instructions."
+msgstr "Poslali smo Vam e-mail sa instrukcijama"
+
+msgid "Password Recovery Request"
+msgstr "Zahtjev za vraćanje lozinke"
+
+msgid "Pick a new password"
+msgstr "Izaberite novu lozinku"
+
+msgid "Your password has successfully been updated, thank you."
+msgstr "Lozinka je uspješno ažurirana, hvala."
+
+#, python-format
+msgid "You are now logged in as %s"
+msgstr "Trenutno ste prijavljeni kao %s"
+
+msgid "Password Updated Successfully. Now you can log in using your new password."
+msgstr "Lozinka je uspješno ažurirana. Sada se možete prijaviti sa novom lozinkom."
+
+msgid "Reset your Password"
+msgstr "Ponovo postavite lozinku"
+
+msgid "Your link has expired for security reasons. Please reinitiate the process by entering your email here."
+msgstr "Link je istekao iz sigurnosnih razloga. Ponovite postupak upisujući vašu e-mail adresu ovdje."
+
+msgid "Submit"
+msgstr "Pošalji"
+
+msgid "Form"
+msgstr "Formular"
+
+msgid "Save Changes"
+msgstr "Sačuvaj promjene"
+
+#, python-format
+msgid "Your new %s has been created."
+msgstr "Vaš novi %s je kreiran."
+
+#, python-format
+msgid "Import %s"
+msgstr "Uvezi%s"
+
+msgid "Back to Website"
+msgstr "Povratak na stranicu"
+
+msgid "Welcome, "
+msgstr "Dobrodošli,"
+
+msgid "Logout"
+msgstr "Odjava"
+
+msgid "Opinions"
+msgstr "Stavovi"
+
+msgid "Users"
+msgstr "Korisnici"
+
+msgid "Settings"
+msgstr "Postavke"
+
+msgid "Pages"
+msgstr "Stranice"
+
+msgid "Jobs"
+msgstr "Poslovi"
+
+msgid "Photos"
+msgstr "Slike"
+
+msgid "Categories Images"
+msgstr "Kategorije slika"
+
+msgid "News Items"
+msgstr "Stavke novosti"
+
+msgid "Orgs"
+msgstr "Orgs"
+
+msgid "Images"
+msgstr "Slike"
+
+msgid "About"
+msgstr "O nama"
+
+msgid "Engagement"
+msgstr "Sudjelovanje"
+
+msgid "Category Images"
+msgstr "Slike kategorija"
+
+msgid "+ New "
+msgstr "+ Novo"
+
+msgid "+ New Page"
+msgstr "+ Nova stranica"
+
+msgid "U-Report"
+msgstr "ZABUM voice"
+
+msgid "Admin"
+msgstr "Administrator"
+
+msgid "Configuration"
+msgstr "Konfiguracija"
+
+msgid "Content"
+msgstr "Sadržaj"
+
+msgid "Country Aliases"
+msgstr "Sinonimi za državu"
+
+msgid "Job Sources"
+msgstr "Izvori zadataka"
+
+msgid "Jobs Content"
+msgstr "Sadržaj zadataka"
+
+msgid "About Content"
+msgstr "O sadržaju"
+
+msgid "Videos"
+msgstr "Video"
+
+msgid "Contact Us Content"
+msgstr "O nama, sadržaj"
+
+msgid "Missions Content"
+msgstr "Misija, sadržaj"
+
+msgid "Terms & Conditions"
+msgstr "Uvjeti korištenja"
+
+msgid "U-Reporters Content"
+msgstr "Glasovi mladih, sadržaj"
+
+msgid "Join &amp; Engage Content"
+msgstr "Pridruži se i angažiraj, sadržaj"
+
+msgid "Join Steps Content"
+msgstr "Koraci za pridruživanje, sadržaj"
+
+msgid "Additional Menu"
+msgstr "Dodatni izbornik"
+
+msgid "SELECT YOUR COUNTRY"
+msgstr "Izaberite svoju zemlju"
+
+msgid "Join Now"
+msgstr "Pridruži se"
+
+msgid "READ MORE"
+msgstr "PROČITAJ VIŠE"
+
+msgid "EXPLORE ENGAGEMENT"
+msgstr "PRIDRUŽI SE I SUDJELUJ"
+
+msgid ""
+"\n"
+"        To add a Twitter job source you are required to get a widget id from twitter.\n"
+"      "
+msgstr ""
+"\n"
+"        za Twitter zadatke trebate imati widget id twittera..\n"
+"      "
+
+msgid "Follow this step by step guide"
+msgstr "Slijedite ovo uputstvo korak po korak"
+
+msgid ""
+"\n"
+"        <div>After you create the widget copy the widget id from the url as shown on</div>\n"
+"      "
+msgstr ""
+"\n"
+"        <div>Nakon što kreirate kopiju widget ID iz URL kako je prikazano na</div>\n"
+"      "
+
+msgid "Back"
+msgstr "Povratak nazad"
+
+msgid "LATEST NOTIFICATIONS"
+msgstr "NOVE NOTIFIKACIJE"
+
+msgid "Backends"
+msgstr "Pozadine"
+
+#, python-format
+msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
+msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
+msgstr[0] "Trenutno se sinkronizira %(counter)s novih anketa. Ankete se prikazuju na web stranici nakon sinkronizacije rezultata."
+msgstr[1] " Trenutno se sinkronizira %(counter)s novih anketa. Ankete se prikazuju na web stranici nakon sinkronizacije rezultata."
+msgstr[2] "Trenutno se sinkronizira %(counter)s  novih anketa. Ankete se prikazuju na web stranici nakon sinkronizacije rezultata."
+
+msgid "+ New Poll"
+msgstr "+ Nova anketa"
+
+#, python-format
+msgid "%(counter)s poll question"
+msgid_plural "%(counter)s poll questions"
+msgstr[0] "%(counter)s anketna pitanja"
+msgstr[1] "%(counter)sanketna pitanja"
+msgstr[2] "%(counter)s anketna pitanja"
+
+msgid "New poll initial syncs scheduled every 10min"
+msgstr "Nova sinkronizacija ankete zakazana je svakih 10 minuta"
+
+msgid "Main poll syncs scheduled every 10min"
+msgstr "Glavna anketa sinkronizira se svakih 10 minuta"
+
+msgid "Recent poll syncs scheduled every 60min"
+msgstr "Sinkroniziranje posljednje ankete zakazano je svakih 60 minuta"
+
+msgid "No longer scheduling syncs, runs archived"
+msgstr "Više se ne sinkronizira, arhivira se"
+
+msgid "Poll syncs scheduled every 24h"
+msgstr "Anketa se sinkronizira svakih 24 sata"
+
+msgid "Not scheduling syncs, not active"
+msgstr "Ne sinkronizira se, neaktivno"
+
+msgid "Not scheduling syncs, no flow for poll"
+msgstr "Ne planira sinkronizaciju, nema flowa za anketu"
+
+msgid "Refresh Results"
+msgstr "Osvježi rezultate"
+
+msgid "MORE POLLS"
+msgstr "VIŠE ANKETA"
+
+msgid "FILTER"
+msgstr "FILTER"
+
+msgid "All"
+msgstr "Sve"
+
+msgid "POLL LIST"
+msgstr "LISTA ANKETA"
+
+msgid "All polls from most recent to oldest"
+msgstr "Sve ankete od posljednje do prve"
+
+msgid "ARCHIVED STORIES"
+msgstr "ARHIVIRANE PRIČE"
+
+msgid "LIST"
+msgstr "LISTA"
+
+msgid "LATEST OPINION"
+msgstr "POSLJEDNJA ANKETA"
+
+msgid "VIEW FULL RESULTS"
+msgstr "POGLEDAJ UKUPNE REZULTATE"
+
+msgid "U-REPORTERS IN"
+msgstr "GLASOVA MLADIH U"
+
+msgid "PARTNERING WITH"
+msgstr "U PARTNERSTVU SA"
+
+msgid "U-REPORTERS"
+msgstr "ZABUM VOICE ZAJEDNICA"
+
+msgid "IN"
+msgstr "U"
+
+msgid "COUNTRIES WORLDWIDE"
+msgstr "ZEMLJE ŠIROM SVIJETA"
+
+msgid "AGES"
+msgstr "DOBNE SKUPINE"
+
+msgid "Join U-Report, Your voice matters."
+msgstr "Pridruži se ZABUM voice-u, tvoj glas je važan"
+
+msgid "JOIN NOW"
+msgstr "PRIDRUŽI SE"
+
+msgid "FEATURED STORY"
+msgstr "PRIČA IZ ŽIVOTA"
+
+msgid "We are a part of a global platform working to change the lives of young people around the world."
+msgstr "Mi smo dio globalne platforme mladih, koji se trude promijeniti živote mladih širom svijeta."
+
+msgid "Learn more about how U-Report is empowering and connecting young people to speak out on issues that matter to them."
+msgstr "Nauči više o tome kako ZABUM voice daje mogućnost mladima da se povežu i izraze svoje mišljenje."
+
+msgid "LEARN MORE"
+msgstr "SAZNAJ VIŠE"
+
+msgid "Visit"
+msgstr "Posjeti"
+
+msgid "How would you like to join?"
+msgstr "Na koji način se želiš pridružiti?"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "SEARCH"
+msgstr "PRETRAŽI"
+
+msgid "No results found"
+msgstr "Rezultati nisu pronađjeni"
+
+msgid "RESPONSES"
+msgstr "ODGOVORI"
+
+msgid "RESPONSE RATE"
+msgstr "STOPA ODGOVORA"
+
+msgid "TOTAL RESPONSES"
+msgstr "SVI ODGOVORI"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s je odgovorilo od %(polled)s ispitanih"
+
+msgid "ALL"
+msgstr "SVI"
+
+msgid "AGE"
+msgstr "DOBNE SKUPINE"
+
+msgid "GENDER"
+msgstr "SPOL"
+
+msgid "LOCATION"
+msgstr "LOKACIJA"
+
+msgid "Written by:"
+msgstr "Napisao/la:"
+
+msgid "Even"
+msgstr "Jednako"
+
+msgid "State"
+msgstr "Država"
+
+msgid "Other"
+msgstr "Ostalo"
+
+msgid "District"
+msgstr "Županija"
+
+msgid "Participation Level"
+msgstr "Razina sudjelovanja"
+
+msgid "Responses"
+msgstr "Odgovori"
+
+msgid "Reporters in"
+msgstr "Glasova mladih u"
+
+msgid "Results"
+msgstr "Rezultati"
+
+msgid "*Other answers include"
+msgstr "*Drugi odgovori uključuju"
+
+msgid "Population"
+msgstr "Populacija"
+
+msgid "Registered in"
+msgstr "Registrirani u"
+
+msgid "Density"
+msgstr "Gustoća"
+
+msgid "total"
+msgstr "ukupno"
+
+msgid "of"
+msgstr "."
+
+msgid "the"
+msgstr "."
+
+msgid "OVERALL STATISTICS"
+msgstr "UKUPNA STATISTIKA"
+
+msgid "THIS YEAR"
+msgstr "OVA GODINA"
+
+msgid "AVG RESPONSE RATE"
+msgstr "PROSJEČNA STOPA ODGOVORA"
+
+msgid "U-REPORTERS BY REGION"
+msgstr "GLASOVI MLADIH PO LOKACIJI"
+
+msgid "FILTER RESULTS"
+msgstr "FILTERI REZULTATA"
+
+msgid "Export and Share"
+msgstr "Izvezi i podijeli"
+
+msgid "Want to tell the world about this? Download this image to easily share on social media or for a beautiful presentation!"
+msgstr "Želiš podijeliti ovo? Preuzmi ovu sliku, koju možeš podijeliti ili iskoristiti za prezentaciju."
+
+msgid "SELECT LANGUAGE"
+msgstr "."
+
+msgid "SELECT COUNTRY"
+msgstr "IZABERI ZEMLJU"
+
+msgid "Custom pages"
+msgstr "Prilagodjena stranica"
+
+msgid "See by the numbers how we are engaging youth voices for positive social change."
+msgstr "Pogledajte kako se glas mladih koristi za stvaranje pozitivnih društvenih promjena."
+
+msgid "Polled"
+msgstr "Anketiranih"
+
+msgid "Reporters"
+msgstr "Glasovi mladih"
+
+msgid "Top Region"
+msgstr "Top Regija"
+
+msgid "January"
+msgstr "Siječanj"
+
+msgid "February"
+msgstr "Veljača"
+
+msgid "March"
+msgstr "Ožujak"
+
+msgid "April"
+msgstr "Travanj"
+
+msgid "May"
+msgstr "Svibanj"
+
+msgid "June"
+msgstr "Lipanj"
+
+msgid "July"
+msgstr "Srpanj"
+
+msgid "August"
+msgstr "Kolovoz"
+
+msgid "September"
+msgstr "Rujan"
+
+msgid "October"
+msgstr "Listopad"
+
+msgid "November"
+msgstr "Studeni"
+
+msgid "December"
+msgstr "Prosinac"
+
+msgid "Jan"
+msgstr "Sij"
+
+msgid "Feb"
+msgstr "Velj"
+
+msgid "Mar"
+msgstr "Ožu"
+
+msgid "Apr"
+msgstr "Tra"
+
+msgid "Jun"
+msgstr "Lip"
+
+msgid "Jul"
+msgstr "Srp"
+
+msgid "Aug"
+msgstr "Kol"
+
+msgid "Sep"
+msgstr "Ruj"
+
+msgid "Oct"
+msgstr "Lis"
+
+msgid "Nov"
+msgstr "Stu"
+
+msgid "Dec"
+msgstr "Pro"
+
+#, python-format
+msgid ""
+"\n"
+"            Are you sure you want to remove <strong>%(object)s</strong>?\n"
+"          "
+msgstr ""
+"\n"
+"            Jeste li si siguran/na da želiš izbrisati <strong>%(object)s</strong>?\n"
+"          "
+
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] "%(counter)s rezultati"
+msgstr[1] "%(counter)s rezultati"
+msgstr[2] "%(counter)srezultati  "
+
+#, python-format
+msgid "Results %(start)s-%(end)s of %(count)s"
+msgstr "Rezultati%(start)s-%(end)s od %(count)s"
+
+msgid "Error"
+msgstr "Greška"
+
+msgid "Enter Dashboard"
+msgstr "Udji u nadzornu ploču"
+
+#, python-format
+msgid ""
+"\n"
+"                Sorry, you cannot log in at this time because we received %(failed_login_limit)s incorrect login attempts.\n"
+"              "
+msgstr ""
+"\n"
+"                Žao nam je, ne možete se logirati jer smo zaprimili %(failed_login_limit)s netočnih login pokušaja.\n"
+"              "
+
+#, python-format
+msgid ""
+"\n"
+"                    Please wait %(lockout_timeout)s minutes before to try log in again.\n"
+"                  "
+msgstr ""
+"\n"
+"                    Molimo pričekajte %(lockout_timeout)s minuta prije ponovnog pokušaja prijavljivanja.\n"
+"                  "
+
+#, python-format
+msgid ""
+"\n"
+"        <strong>Your password has expired.</strong> Site policy states that you must pick a new password every %(expire_days)s days, and that passwords must not have been used within the previous %(window_days)s days.\n"
+"      "
+msgstr ""
+"\n"
+"        <strong>Vaša lozinka je istekla.</strong> Morate odabrati novu lozinku svakih %(expire_days)s dana. Ta lozinka ne smije biti korištena u prethodnih %(window_days)s dana.\n"
+"      "
+
+msgid "+ New Story"
+msgstr "+ Nova priča"
+
+#, python-format
+msgid "Refreshed %s cache for this organization"
+msgstr "Ažurirano %s predmemorije organizacije"
+
+msgid "Flag"
+msgstr "Oznaka"
+
+msgid "The organization to which the image will be used"
+msgstr "Organizacijska jedinice u kojoj će slika biti korištena"
+
+msgid "A short descriptive name for this image"
+msgstr "Kratko opisno ime za ovu sliku"
+
+msgid "Image type"
+msgstr "Tip slike"
+
+msgid "Label"
+msgstr "Oznaka"
+
+msgid "Key"
+msgstr "Ključni"
+
+msgid "Male"
+msgstr "Muško"
+
+msgid "Female"
+msgstr "Žensko"
+
+msgid "Organization"
+msgstr "Organizacija"
+
+msgid "Gender"
+msgstr "Spol"
+
+msgid "Gender of the contact"
+msgstr "Spol korisnika"
+
+msgid "Born Field"
+msgstr "Polje rodjenja"
+
+msgid "Occupation Field"
+msgstr "Polje zanimanja"
+
+msgid "Registration Date"
+msgstr "Datum registracije"
+
+msgid "State Field"
+msgstr "Polje države"
+
+msgid "District Field"
+msgstr "Polje grada/općine"
+
+msgid "Ward Field"
+msgstr "Polje odjela"
+
+msgid "Number of items with this counter"
+msgstr "Broj stavki ovog mjerila"
+
+msgid "No root user found. Please create a root user"
+msgstr "Nije pronadjen root korisnik. Molimo kreirajte root korisnika"
+
+msgid "The name for our alias"
+msgstr "Naziv za sinonime"
+
+msgid "The title or name to reference this Job source."
+msgstr "Naslov ili ime da poveže ovaj zadatak."
+
+msgid "Choose the type for the Job source. Twitter, Facebook or RSS feed"
+msgstr "Izaberi kanal za ovaj zadatak. Twitter, Facebook ili RSS feed"
+
+msgid "The full URL to navigate to this Job source."
+msgstr "Potpuni URL koji navigava na ovaj zadatak."
+
+msgid "For Twitter, a widget Id is required to embed tweets on the website. Read carefully the instructions above on how to get the right widget Id"
+msgstr "Za twitter, traži se widget ID, kako bi se objave uvrstile na web stranicu. Pažljivo pročitajte upute iznad, o tome kako dobiti ispravan widget ID."
+
+msgid "Featured job sources are shown first on the jobs page."
+msgstr "Istaknuti zadaci prikazani prvi na stranici zadataka."
+
+msgid "The organization this job source is for"
+msgstr "Organizacijska jedinica kojoj vaš izvor zadataka pripada"
+
+msgid "Your job source has been added successfully"
+msgstr "Vaš izvor zadataka uspješno dodan"
+
+msgid "Your job source has been updated successfully"
+msgstr "Vaš izvor zadataka uspješno ažuriran"
+
+msgid "This is the OSM id for this administrative boundary"
+msgstr "Ovo je OSM ID za ovo administrativno ograničenje"
+
+msgid "The name of our administrative boundary"
+msgstr "Naziv administrativnog ograničenja"
+
+msgid "The level of the boundary, 0 for country, 1 for state, 2 for district"
+msgstr "Razina razgranišenja, 0 za državu, 1 za županije, 2 za općine/gradove"
+
+msgid "The parent to this political boundary if any"
+msgstr "Porijeklo političkog ograničenja, ako ga ima"
+
+msgid "Geometry"
+msgstr "Geometrija"
+
+msgid "The json representing the geometry type and coordinates of the boundaries"
+msgstr "json predstavlja geometrijsku vrstu i koordinate ograničenja"
+
+msgid "The title for this item"
+msgstr "Naslov ove stavke"
+
+msgid "A short summary description for this item"
+msgstr "Kratak opis stavke"
+
+msgid "A link that should be associated with this item"
+msgstr "Link koji se veže uz ovu stavku"
+
+msgid "The category this item belongs to"
+msgstr "Kategorija kojoj ova stavka pripada"
+
+msgid "The organization this item belongs to"
+msgstr "Organizacija kojoj stavka pripada"
+
+msgid "The title for this Video"
+msgstr "Naslov videa"
+
+msgid "A short summary description for this video"
+msgstr "Kratak sažetak opisa videa"
+
+msgid "The organization this video belongs to"
+msgstr "Organizacija kojoj video pripada"
+
+msgid "The name of this poll category"
+msgstr "Naziv kategorije ove ankete"
+
+msgid "Poll Categories"
+msgstr "Kategorije ankete"
+
+msgid "The Flow this Poll is based on"
+msgstr "Dijagram na kojem je ova anketa zasnovana"
+
+msgid "The date to display for this poll. Leave empty to use flow creation date."
+msgstr "Datum koji treba prikazati za ovu anketu. Ostavite prazno ako želite da ostane datum kreiranja dijagrama."
+
+msgid "Whether the flow for this poll is archived on RapidPro"
+msgstr "Da li je dijagram za ovu anketu arhiviran na RapidPro?"
+
+msgid "The base language of the flow to use"
+msgstr "Osnovni jezik koji se koristi u anketi"
+
+msgid "The number of polled reporters on this poll"
+msgstr "Broj anketiranih u ovoj anketi"
+
+msgid "Whether the poll has finished the initial results sync."
+msgstr "Je li završena sinkronizacija inicijalnih rezultata ankete"
+
+msgid "Whether the poll should stop regenerating stats."
+msgstr "Želite da anketa prestane ažurirati statistike"
+
+msgid "The title for this Poll"
+msgstr "Naslov ankete"
+
+msgid "The category this Poll belongs to"
+msgstr "Kategorija kojoj anketa pripada"
+
+msgid "Whether this poll should be featured on the homepage"
+msgstr "Treba li anketa biti prikazana na početnoj stranici"
+
+msgid "The splash category image to display for the poll (optional)"
+msgstr "Slika iz splash kategorije koja se može prikazati uz anketu (izborno)"
+
+msgid "The organization this poll is part of"
+msgstr "Organizacija kojoj anketa pripada"
+
+msgid "The title for this response story"
+msgstr "Naslov za ovu priču ili odgovor"
+
+msgid "The writer of the response story"
+msgstr "Autor priče ili odgovora"
+
+msgid "The poll to associate to"
+msgstr "Anketa uz koju se vezuje"
+
+msgid "The poll for this response"
+msgstr "Anketa za ovaj odgovor"
+
+msgid "The location for this response"
+msgstr "Lokacija za ovaj odgovor"
+
+msgid "The name of the sender of the message"
+msgstr "Ime pošiljatelja poruke"
+
+msgid "The featured response message"
+msgstr "Istaknuta poruka uz odgovor"
+
+msgid "The poll this question is part of"
+msgstr "Anketa, kojoj ovo pitanje pripada"
+
+msgid "The title of this question"
+msgstr "Naslov pitanja"
+
+msgid "The RuleSet this question is based on"
+msgstr "Niz pravila na kojima je ovo pitanje bazirano"
+
+msgid "The label of the ruleset on RapidPro"
+msgstr "Oznaka seta pravila na RapidPro"
+
+msgid "The priority number for this question on the poll"
+msgstr "Broj prioriteta ovog pitanja u anketi"
+
+msgid "The Rule this response category is based on"
+msgstr "Pravilo na kojem je bazirana ova kategorija odgovora"
+
+msgid "Your org does not have any API token configuration."
+msgstr "Vaša organizacija nema konfiguraciju za API token."
+
+msgid "You must include a title for every included question."
+msgstr "Morate staviti naslov za svako navedeno pitanje."
+
+msgid "Title too long. The max limit is 255 characters for each title"
+msgstr "Naslov je predugačak. Ograničenje za svaki naslov je 255 znakova."
+
+msgid "You must include at least one poll question."
+msgstr "Morate uključiti najmanje jedno anketno pitanje."
+
+msgid "Adjust poll date"
+msgstr "Podesi datum ankete"
+
+msgid "Your poll has been updated, now pick which questions to include."
+msgstr "Vaša anketa je ažurirana, sada izaberite pitanja koja želite uključiti."
+
+msgid "Configure flow"
+msgstr "Konfiguriraj tijek, flow, ankete."
+
+msgid "Your poll has been configured, now adjust the poll date."
+msgstr "Anketa je konfigurirama, sada uredite datum ankete."
+
+msgid "Your poll has been created, now configure its flow."
+msgstr "Anketa je kreirana, sada konfigurirajte tijek, flow."
+
+msgid "Poll Images"
+msgstr "Slike za anketu"
+
+msgid "Now enter any responses you'd like to feature. (if any)"
+msgstr "Unesite bilo koji karakterističan odgovor koji želite da se objavi. (ako ga ima)"
+
+msgid "Image to display on poll page and in previews. (optional)"
+msgstr "Slika koja će se prikazati na strani ankete i u pregledima (izborno)"
+
+msgid "Image to display on poll page and in previews (optional)"
+msgstr "Slika koja će se prikazati na strani ankete i u pregledima (izborno)"
+
+msgid "Poll Response"
+msgstr "Odgovori na anketu"
+
+msgid "Your poll has been updated."
+msgstr "Vaša anketa je ažurirana"
+
+msgid "Poll Questions"
+msgstr "Anketna pitanja"
+
+msgid "Now set what images you want displayed on your poll page. (if any)"
+msgstr "Sada postavite slike koje želite objaviti na anketnoj stranici (ako ih ima)"
+
+msgid "Include"
+msgstr "Uključi"
+
+msgid "Whether to include this question in your public results"
+msgstr "Je li ovo pitanje treba uključiti u javno dostupne rezultate"
+
+msgid "Priority"
+msgstr "Prioritet"
+
+msgid "The priority of this question on the poll page, higher priority comes first"
+msgstr "Razina prioriteta ovog pitanja u anketi. Pitanja s najvećim prioritetom idu prva"
+
+msgid "Ruleset Label"
+msgstr "Oznaka niza pravila"
+
+msgid "The label of the ruleset from RapidPro"
+msgstr "Oznaka niza pravila iz RapidPro-a"
+
+msgid "Title"
+msgstr "Naslov"
+
+msgid "The question posed to your audience, will be displayed publicly"
+msgstr "Pitanje upućeno javnosti bit će javno objavljeno"
+
+msgid "Category {idx+1}"
+msgstr "Kategorija {idx+1}"
+
+msgid "The label of the category from backend(such as RapidPro)"
+msgstr "Oznaka kategorije iz pozadine (poput RapidPro)"
+
+msgid "Display {idx+1}"
+msgstr "Prikaži {idx+1}"
+
+msgid "The label to display of the category on the public site"
+msgstr "Oznaka za prikaz kategorije na javnoj stranici"
+
+msgid "Scheduled Sync currently in progress..."
+msgstr "Planirana sinkronizacija trenutno je u tijeku ..."
+
+#, python-format
+msgid "Last results synced %(time)s ago"
+msgstr "Posljednji rezultati sinkronizirani prije %(time)s "
+
+msgid "Synced"
+msgstr "Sinkronizirano"
+
+#, python-brace-format
+msgid "Sync currently in progress... {sync_progress:.1f}%"
+msgstr "Sinkronizacija u tijeku... {sync_progress:.1f}%"
+
+#, python-brace-format
+msgid "Edit Poll for flow [{flow_name} ({flow_date_hint})]"
+msgstr "Uređivanje ankete za flow[{flow_name} ({flow_date_hint})]"
+
+#, python-format
+msgid "Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d"
+msgstr "Rasporedjeno ažuriranje anketa #%(poll_id)d na org #%(org_id)d"
+
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+msgid "The name of the Contact Group that contains registered reporters"
+msgstr "Naziv kontakt grupe sa registriranim mladima"
+
+msgid "The label of the Contact Field that contains the birth date of reporters"
+msgstr "Naziv polja kontakta koji sadrži datum rodjenja mladih"
+
+msgid "The label of the Contact Field that contains the gender of reporters"
+msgstr "Naziv polja kontakta koji sadrži spol mladih"
+
+msgid "The label of the Contact Field that contains the occupation of reporters"
+msgstr "Naziv polja kontakta koji sadrži zanimanje mladih"
+
+msgid "The label of the Contact Field that contains the registration date of reporters"
+msgstr "Naziv polja kontakta koji sadrži datum registracije mladih"
+
+msgid "The label of the Contact Field that contains the State of reporters"
+msgstr "Oznaka za polje kontakta u kojem je Županija iz koje su mladi"
+
+msgid "The label of the Contact Field that contains the District of reporters"
+msgstr "Naziv polja kontakta koji sadrži Općina iz koje su mladi"
+
+msgid "The label of the Contact Field that contains the Ward of reporters"
+msgstr "Naziv za polje kontakta, koje sadrži odjel za mlade"
+
+msgid "The label assigned to U-Reporters that are Male."
+msgstr "Oznaka koja se dodjeljuje mladima muškog spola."
+
+msgid "The label assigned to U-Reporters that are Female."
+msgstr "Oznaka koja se dodjeljuje mladima ženskog spola."
+
+msgid "Whether this org should be show on the landing page"
+msgstr "Treba li se ova org prikazati na glavnoj stranici."
+
+msgid "Whether this org count should consider the count from link only"
+msgstr "Da li ovaj org brojač treba brojati samo iz veze"
+
+msgid "The shortcode that users will use to contact U-Report locally"
+msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju ZABUM voice lokalno"
+
+msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgstr "Whatsapp broj koji će korisnici koristiti da kontaktiraju ZABUM voice ako ga imamo"
+
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The viber username that users will use to contact U-Report if you have one"
+msgstr "Whatsapp broj koji će korisnici koristiti da kontaktiraju ZABUM voice ako ga imamo"
+
+msgid "The short text used to direct visitors to join U-Report"
+msgstr "Kratak tekst kojim se posjetitelji upućuju da se pridruže ZABUM voice-u"
+
+msgid "The YouTube video ID for how to join U-Report section"
+msgstr "Youtube video ID o tome kako se pridružiti ZABUM voice-u"
+
+msgid "The title of the photos section U-Report homepage"
+msgstr "Naslov foto sekcije na ZABUM voice naslovnoj strani"
+
+msgid "The description of the photos section U-Report homepage"
+msgstr "Opis sekcije za slike na ZABUM voice naslovnoj strani"
+
+msgid "The description of the opinions page"
+msgstr "Opis stranice s odgovorima"
+
+msgid "The description of the stories page"
+msgstr "Opis stranice sa pričama"
+
+msgid "The description of the engagement page"
+msgstr "Opis za stranicu sudjelovanja"
+
+msgid "The callout message on the footer engagement section"
+msgstr "Poruka u footeru sekcije aktivnosti"
+
+msgid "The primary color for styling for this organization, should be dark"
+msgstr "Primarna boja za uredjivanje ovog dijela treba biti tamna"
+
+msgid "The secondary color for styling for this organization, should be dark"
+msgstr "Sekundarna boja za uredjivanje ovog dijela treba biti tamna"
+
+msgid "The tertiary color for styling for this organization, should be dark"
+msgstr "Tercijarna boja za uredjivanje ovog dijela treba biti tamna"
+
+msgid "The primary highlight color for styling for this organization, should be light"
+msgstr "Primarna boja za naglašavanje ovog dijela treba biti svijetla"
+
+msgid "The secondary highlight color for styling for this organization, should be light"
+msgstr "Sekundarna boja za naglašavanje ovog dijela treba biti svijetla"
+
+msgid "Up to 6 colors for styling charts, use comma between colors"
+msgstr "Do 6 boja za stiliziranje grafika, koristite zarez izmedju boja"
+
+msgid "The color used to draw the text on the join bar"
+msgstr "Boja za pisanje teksta na polju za pridruživanje"
+
+msgid "The color used to draw the background on the join bar"
+msgstr "Boja koja će se koristiti za pozadinu polja za pridruživanje"
+
+msgid "The primary color for styling for this organization"
+msgstr "Primarna boja za ovu postavku"
+
+msgid "The secondary color for styling for this organization"
+msgstr "Sekundarna boja za ovu postavku"
+
+msgid "The background color for the site"
+msgstr "Pozadinska boja ove stranice"
+
+msgid "11 colors for styling maps, use comma between colors, not used if not 11 colors"
+msgstr "11 boja za stiliziranje mapa, koristi zarez izmedju boja, ne koristiti ako nije 11 boja"
+
+msgid "The states to show on maps only"
+msgstr "Regije koje se prikazuju na mapi"
+
+msgid "The states to show on maps only, used to filter poll results"
+msgstr "Regije koje se prikazuju na mapi za filtriranje rezultata"
+
+msgid "The Google Analytics Tracking ID for this organization"
+msgstr "traking ID na Google Analytics za ovu organizaciju"
+
+msgid "The URL to the Youtube channel for this organization"
+msgstr "URL link za You Tube kanal organizacije"
+
+msgid "The URL to the Facebook page for this organization"
+msgstr "URL link na Facebook stranicu ove organizacije"
+
+msgid "The integer id to the Facebook page for this organization (optional)"
+msgstr "Brojčani ID za Facebook aplikaciju (izborno)"
+
+msgid "The integer id to the Facebook app for this organization's chat app (optional)"
+msgstr "Brojčani ID za Facebook aplikaciju za chat (izborno)"
+
+msgid "The short text used to greet users on Facebook Messenger Plugin"
+msgstr "Kratki pozdravni tekst pri pokretanju Facebook messenger-a"
+
+msgid "The id of the Facebook Pixel for this organization (optional)"
+msgstr "ID Facebook Pixela vaše organizacije (izborno)"
+
+msgid "The Instagram username for this organization"
+msgstr "Instagram korisnično ime organizacije"
+
+msgid "The Instagram widget id from lightwidget.com"
+msgstr "Instagram widget ID sa lightwidget.com"
+
+msgid "The Twitter handle for this organization"
+msgstr "Twitter hendl organizacije"
+
+msgid "The Twitter widget used for searching"
+msgstr "Twitter widget za traženje"
+
+msgid "The words to filter out from the results on public site"
+msgstr "Riječi koje se filtriraju iz rezultata sa javne stranice"
+
+msgid "If there are jobs to be shown on the public site."
+msgstr "Trebaju li radnje biti prikazane na javnoj stranici"
+
+msgid "If this org if for global data. e.g: It shows a world map instead of a country map."
+msgstr "Je li ova postavka uključuje globalne podatke, npr. mapu svijeta umjesto državne"
+
+msgid "Whether to activate an extra gender."
+msgstr "Treba li aktivirati dodatno rodno opredjeljenje"
+
+msgid "Whether to activate the new design."
+msgstr "Treba li aktivirati novi dizajn"
+
+msgid "The alpha-3 ISO code of the organization so that it appears the stories widget U-Report App. Example: BRA, NIG, CMR (Use GLOBAL if U-Report is Global)."
+msgstr "Alpha-3 ISO kod organizacije koji će inicirati widget priče U-Report App. Primjer: BRA, NIG, CMR (Koristite GLOBAL ako je U-Report globalan)."
+
+msgid "The font used for headline texts"
+msgstr "Font za naslov"
+
+msgid "The font used for normal text"
+msgstr "Font koji se koristi za normalan tekst"
+
+msgid "Hide participation stats"
+msgstr "Sakrij statistike o sudjelovanju"
+
+msgid "The text to describe the sponsors of free messages"
+msgstr "Tekst kojim se opisuju sponzori besplatnih poruka"
+
+msgid "The font used for small text"
+msgstr "Font za manje tekstove"
+
+msgid "If you need to include some custom HTML codes in you org pages, like custom analytics code snippets"
+msgstr "Ako trebate uključiti prilagodjeni HTML kod u vaše org stranice, poput prilagodjenih analitičkih snippet kodova"
+
+msgid "Other language sites links"
+msgstr "."
+
+msgid "90 Days"
+msgstr "90 dana"
+
+msgid "6 Months"
+msgstr "6 mjeseci"
+
+msgid "12 Months"
+msgstr "12 mjeseci"
+
+msgid "Age"
+msgstr "Dobne skupine"
+
+msgid "Location"
+msgstr "Lokacija"
+
+msgid "Opinion Responses"
+msgstr "Odgovori o stavovima"
+
+msgid "Sign Up Rate"
+msgstr "Broj-postotak upisa"
+
+msgid "Response Rate"
+msgstr "Stopa odgovora"
+
+msgid "Active Users"
+msgstr "Aktivni korisnici"
+
+msgid "Whether this row was created by squashing"
+msgstr "Je li priča objavljena"
+
+msgid "Something to trigger localizations"
+msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid ""
+#~ "\n"
+#~ "             %(counter)s result\n"
+#~ "           "
+#~ msgid_plural ""
+#~ "\n"
+#~ "              %(counter)s results\n"
+#~ "            "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "             %(counter)s rezultat\n"
+#~ "           "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "              %(counter)s rezultat\n"
+#~ "            "
+#~ msgstr[2] ""
+#~ "\n"
+#~ "              %(counter)s rezultati\n"
+#~ "            "
+
+#~ msgid ""
+#~ "\n"
+#~ "             Results %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+#~ msgstr ""
+#~ "\n"
+#~ "             Rezultati %(start)s-%(end)s of %(count)s\n"
+#~ "           "
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "             %(counter)s result\n"
+#~| "           "
+#~| msgid_plural ""
+#~| "\n"
+#~| "              %(counter)s results\n"
+#~| "            "
+#~ msgid ""
+#~ "\n"
+#~ "                    %(counter)s poll question\n"
+#~ "                    "
+#~ msgid_plural ""
+#~ "\n"
+#~ "                      %(counter)s poll questions\n"
+#~ "\n"
+#~ "\n"
+#~ "                  "
+#~ msgstr[0] ""
+#~ "\n"
+#~ "             %(counter)s rezultat\n"
+#~ "           "
+#~ msgstr[1] ""
+#~ "\n"
+#~ "              %(counter)s rezultat\n"
+#~ "            "
+#~ msgstr[2] ""
+#~ "\n"
+#~ "              %(counter)s rezultati\n"
+#~ "            "
+
+#, fuzzy
+#~| msgid "Poll Questions"
+#~ msgid "questions"
+#~ msgstr "Anketna pitanja"

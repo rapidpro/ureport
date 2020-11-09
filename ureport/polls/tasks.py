@@ -17,6 +17,7 @@ from ureport.celery import app
 from ureport.utils import (
     fetch_flows,
     fetch_old_sites_count as do_fetch_old_sites_count,
+    fetch_shared_sites_count,
     populate_age_and_gender_poll_results,
     update_poll_flow_data,
 )
@@ -202,17 +203,28 @@ def clear_old_poll_results(org, since, until):
     from .models import Poll
 
     now = timezone.now()
+    r = get_redis_connection()
     time_window = now - timedelta(days=90)
 
     old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window).order_by("pk")
     for poll in old_polls:
-        # one last stats rebuild for the poll
-        poll.rebuild_poll_results_counts()
 
-        if not poll.stopped_syncing:
-            poll.delete_poll_results()
-            Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
-            logger.info("Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id))
+        key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
+        if r.get(key):
+            logger.info(
+                "Skipping clearing old results for poll #%d on org #%d as it is still syncing" % (poll.pk, org.pk)
+            )
+        else:
+            with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
+                # one last stats rebuild for the poll
+                poll.rebuild_poll_results_counts()
+
+                if not poll.stopped_syncing:
+                    poll.delete_poll_results()
+                    Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
+                    logger.info(
+                        "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
+                    )
 
 
 @app.task()
@@ -230,6 +242,15 @@ def pull_refresh(poll_id):
     Poll.pull_results(poll_id)
 
 
+@app.task(name="polls.update_questions_results_cache")
+def update_questions_results_cache(poll_id):
+    from .models import Poll
+
+    poll = Poll.objects.filter(id=poll_id).prefetch_related("questions").first()
+    if poll:
+        poll.update_questions_results_cache()
+
+
 @app.task(name="polls.pull_refresh_from_archives")
 def pull_refresh_from_archives(poll_id):
     from .models import Poll
@@ -241,10 +262,13 @@ def pull_refresh_from_archives(poll_id):
 def rebuild_counts():
     from .models import Poll
 
+    logger.info("Task: polls.rebuild_counts started")
     polls = Poll.objects.filter(is_active=True)
 
     for poll in polls:
         poll.rebuild_poll_results_counts()
+
+    logger.info("Task: polls.rebuild_counts finished")
 
 
 @app.task(name="update_results_age_gender")
@@ -299,6 +323,7 @@ def fetch_old_sites_count():
     if not r.get(key):
         with r.lock(key, timeout=lock_timeout):
             do_fetch_old_sites_count()
+            fetch_shared_sites_count()
             logger.info("Task: fetch_old_sites_count took %ss" % (time.time() - start))
 
 

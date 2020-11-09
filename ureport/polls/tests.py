@@ -622,9 +622,9 @@ class PollTest(UreportTest):
         self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[:9])))
 
         now = timezone.now()
-        a_month_ago = now - timedelta(days=30)
+        two_month_ago = now - timedelta(days=60)
 
-        Poll.objects.filter(pk__in=[polls[0].pk, polls[1].pk]).update(created_on=a_month_ago)
+        Poll.objects.filter(pk__in=[polls[0].pk, polls[1].pk]).update(created_on=two_month_ago)
 
         self.assertTrue(Poll.get_recent_polls(self.uganda))
         self.assertEqual(list(Poll.get_recent_polls(self.uganda)), list(reversed(polls[2:9])))
@@ -1148,7 +1148,7 @@ class PollTest(UreportTest):
         response = self.client.get(list_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["object_list"]), 1)
-        self.assertRegexpMatches(response.content.decode("utf-8"), "Last synced 5(.*)minutes ago")
+        self.assertRegexpMatches(response.content.decode("utf-8"), "Last results synced 5(.*)minutes ago")
 
     @patch("dash.orgs.models.TembaClient", MockTembaClient)
     def test_questions_poll(self):

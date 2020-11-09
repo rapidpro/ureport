@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import logging
 
-from temba_client.v1 import TembaClient
+from temba_client.v2 import TembaClient
 
 from django.conf import settings
 from django.db import migrations

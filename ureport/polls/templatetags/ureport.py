@@ -31,7 +31,7 @@ def question_results(question):
         if results:
             return results[0]
     except Exception:
-        if getattr(settings, "PROD", False):
+        if getattr(settings, "IS_PROD", False):
             logger.error(
                 "Question get results without segment in template tag raised exception", extra={"stack": True}
             )
@@ -54,7 +54,7 @@ def question_segmented_results(question, field):
         if results:
             return results
     except Exception:
-        if getattr(settings, "PROD", False):
+        if getattr(settings, "IS_PROD", False):
             logger.error("Question get results with segment in template tag raised exception", extra={"stack": True})
         return None
 
@@ -163,12 +163,13 @@ def show_org_flags(context):
 @register.inclusion_tag("public/edit_content.html", takes_context=True)
 def edit_content(context, reverse_name, reverse_arg=None, anchor_id="", extra_css_classes="", icon_color="dark"):
     request = context["request"]
+    org = context["org"]
 
     url_args = []
     if reverse_arg:
         url_args.append(reverse_arg)
 
-    edit_url = f"{reverse(reverse_name, args=url_args)}{anchor_id}"
+    edit_url = f"{org.build_host_link()}{reverse(reverse_name, args=url_args)}{anchor_id}"
 
     return dict(
         request=request,
