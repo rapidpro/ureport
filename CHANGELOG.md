@@ -1,3 +1,11 @@
+v1.1.195
+----------
+ * Merge pull request #654 from rapidpro/add-np
+ * Add Nepal to countries dropdown
+ * Run code check
+ * Merge pull request #653 from rapidpro/translations_django-po--master_no
+ * Translate /locale/en/LC_MESSAGES/django.po in no
+
 v1.1.194
 ----------
  * Merge pull request #646 from rapidpro/fix-countries-count
