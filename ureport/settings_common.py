@@ -1288,6 +1288,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://nigeria24x7.ureport.in/count/",
     ),
     dict(
+        name="Nepal",
+        host="//nepal.ureport.in",
+        flag="flag_nepal.png",
+        countries_codes=["NPL"],
+        count_link="http://nepal.ureport.in/count/",
+    ),
+    dict(
         name="Norge",
         host="//norge.ureport.in",
         flag="flag_norge.png",
