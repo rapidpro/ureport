@@ -1,3 +1,8 @@
+v1.1.196
+----------
+ * Merge pull request #655 from rapidpro/pacific-as-1
+ * Regional site countries excluded from count for now
+
 v1.1.195
 ----------
  * Merge pull request #654 from rapidpro/add-np
