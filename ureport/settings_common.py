@@ -1312,7 +1312,7 @@ COUNTRY_FLAGS_SITES = [
         name="Pacific",
         host="//pacific.ureport.in",
         flag="flag_pacific.png",
-        countries_codes=["COK", "FJI", "MHL", "NRU", "NIU", "PLW", "WSM", "TKL", "TON", "TUV", "VUT"],
+        countries_codes=["FJI"],  # ["COK", "FJI", "MHL", "NRU", "NIU", "PLW", "WSM", "TKL", "TON", "TUV", "VUT"],
         count_link="http://pacific.ureport.in/count/",
     ),
     dict(
@@ -1375,7 +1375,7 @@ COUNTRY_FLAGS_SITES = [
         name="South Asia",
         host="//southasia.ureport.in",
         flag="flag_south_asia.png",
-        countries_codes=["AFG", "BGD", "BTN", "IND", "MDV", "NPL", "PAK", "LKA"],
+        countries_codes=[],  # ["AFG", "BGD", "BTN", "IND", "MDV", "NPL", "PAK", "LKA"],
         count_link="http://southasia.ureport.in/count/",
     ),
     dict(
