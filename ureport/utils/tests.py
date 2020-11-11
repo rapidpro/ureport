@@ -549,6 +549,7 @@ class UtilsTest(UreportTest):
                 from django.core.cache import cache
 
                 cache.delete(GLOBAL_COUNT_CACHE_KEY)
+                cache.set("org:ignored:reporters:old-site", {"time": 500, "results": dict(size=100)}, None)
                 self.assertEqual(get_global_count(), 350)
 
             with patch("django.core.cache.cache.get") as cache_get_mock:

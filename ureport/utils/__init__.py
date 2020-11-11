@@ -293,9 +293,16 @@ def get_global_count():
         return count_cached_value
 
     try:
-        old_site_reporter_counter_keys = cache.keys("org:*:reporters:old-site")
+        linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
 
-        cached_values = [cache.get(key) for key in old_site_reporter_counter_keys]
+        cached_values = []
+        for site in linked_sites:
+            count_link = site.get("count_link", "")
+            if count_link:
+                key = "org:%s:reporters:%s" % (site.get("name").lower(), "old-site")
+                value = cache.get(key)
+                if value:
+                    cached_values.append(value)
 
         # no old sites cache values, double check with a fetch
         if not cached_values:
