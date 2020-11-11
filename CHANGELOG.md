@@ -1,3 +1,8 @@
+v1.1.197
+----------
+ * Merge pull request #656 from rapidpro/fix-counts-cache-to-consider
+ * Generate cache keys for the configured sites only
+
 v1.1.196
 ----------
  * Merge pull request #655 from rapidpro/pacific-as-1
