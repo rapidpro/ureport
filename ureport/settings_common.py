@@ -158,7 +158,6 @@ CSRF_COOKIE_AGE = 7200
 
 ROOT_URLCONF = "ureport.urls"
 
-
 DATA_API_BACKENDS_CONFIG = {
     "rapidpro": {"name": "RapidPro", "slug": "rapidpro", "class_type": "ureport.backend.rapidpro.RapidProBackend"}
 }
@@ -772,8 +771,14 @@ LOGOUT_REDIRECT_URL = "/"
 # -----------------------------------------------------------------------------------
 # Auth Configuration
 # -----------------------------------------------------------------------------------
-
 AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+
+AUTH_PASSWORD_VALIDATORS = [
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", "OPTIONS": {"min_length": 8}},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+]
 
 ANONYMOUS_USER_NAME = "AnonymousUser"
 
