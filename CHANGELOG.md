@@ -1,3 +1,7 @@
+v1.1.202
+----------
+ * Merge pull request #658 from rapidpro/fix-stories-homepage
+
 v1.1.200
 ----------
  * Merge pull request #657 from rapidpro/sec-adjustments
