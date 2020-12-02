@@ -359,15 +359,17 @@ showChart = (questionID, segmentName) ->
               inside: true
               align: "left"
               useHTML: true
+              crop: false
+              overflow: 'allow'
               padding: 10
               style: {
                 color: '#333'
                 fontWeight: 'bold'
                 fontSize: '0.75rem'
                 textOutline: false
-                resize: "horizontal"
-                width: "12rem"
-                overflow: "hidden"
+                resize: 'horizontal'
+                width: '180px'
+                overflow: 'hidden'
               }
               formatter: ->
                 return this.point.name.toUpperCase()
