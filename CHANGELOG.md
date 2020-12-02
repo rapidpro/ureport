@@ -1,3 +1,8 @@
+v1.1.203
+----------
+ * Merge pull request #659 from rapidpro/fix-chart-labels-alignment
+ * Align labels to the left
+
 v1.1.202
 ----------
  * Merge pull request #658 from rapidpro/fix-stories-homepage
