@@ -358,7 +358,9 @@ showChart = (questionID, segmentName) ->
               enabled: true
               inside: true
               align: "left"
-              x: 10
+              useHTML: true
+              crop: false
+              overflow: "allow"
               padding: 10
               style: {
                 color: '#333'
