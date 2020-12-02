@@ -334,7 +334,6 @@ showChart = (questionID, segmentName) ->
           tickInterval: 1
           labels: {
             enabled: true
-            align: "left"
             style: {
               color: 'black'
               fontWeight: 'bold'
@@ -359,6 +358,7 @@ showChart = (questionID, segmentName) ->
               enabled: true
               inside: true
               align: "left"
+              x: 10
               padding: 10
               style: {
                 color: '#333'
