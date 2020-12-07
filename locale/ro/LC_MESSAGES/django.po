@@ -891,9 +891,6 @@ msgstr "ARTICOLE ARHIVATE"
 msgid "LIST"
 msgstr "LISTĂ"
 
-msgid "LATEST OPINION"
-msgstr "ULTIMELE OPINII"
-
 msgid "VIEW FULL RESULTS"
 msgstr "VEZI REZULTATELE DETALIATE"
 
@@ -956,10 +953,6 @@ msgstr "RATA DE RĂSPUNS"
 
 msgid "TOTAL RESPONSES"
 msgstr "TOATE RĂSPUNSURILE "
-
-#, python-format
-msgid "%(responded)s responded out of %(polled)s polled"
-msgstr " 1 %(responded)s răspondenți din 2 %(polled)s intervievați"
 
 msgid "ALL"
 msgstr "TOȚI"
@@ -1131,6 +1124,13 @@ msgstr "Nov"
 
 msgid "Dec"
 msgstr "Dec"
+
+msgid "LATEST OPINION"
+msgstr "ULTIMELE OPINII"
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s răspondenți din %(polled)s intervievați"
 
 #, python-format
 msgid ""

@@ -992,13 +992,13 @@ msgid "Results"
 msgstr "Natijalar"
 
 msgid "*Other answers include"
-msgstr "Boshqa javoblar o'zida mujassam etadi"
+msgstr "Boshqa javoblar o′zida mujassam etadi"
 
 msgid "Population"
 msgstr "Aholi"
 
 msgid "Registered in"
-msgstr "Ro'yxatdan o'tganlar"
+msgstr "Ro′yxatdan o′tganlar"
 
 msgid "Density"
 msgstr "Zichlik"
