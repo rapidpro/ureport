@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2020-12-07 15:28+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1197,6 +1197,11 @@ msgstr "Tidak"
 
 msgid "Dec"
 msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "Ureport API"
+msgstr "U-Report"
 
 #, fuzzy, python-format
 #| msgid ""

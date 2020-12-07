@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2020-12-07 15:28+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -1165,6 +1165,11 @@ msgstr "Não"
 
 msgid "Dec"
 msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "Ureport API"
+msgstr "SMS BIZ"
 
 #, fuzzy, python-format
 #| msgid ""

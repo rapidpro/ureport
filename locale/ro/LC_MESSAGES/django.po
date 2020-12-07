@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2020-12-07 15:28+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -891,6 +891,9 @@ msgstr "ARTICOLE ARHIVATE"
 msgid "LIST"
 msgstr "LISTĂ"
 
+msgid "LATEST OPINION"
+msgstr "ULTIMELE OPINII"
+
 msgid "VIEW FULL RESULTS"
 msgstr "VEZI REZULTATELE DETALIATE"
 
@@ -953,6 +956,10 @@ msgstr "RATA DE RĂSPUNS"
 
 msgid "TOTAL RESPONSES"
 msgstr "TOATE RĂSPUNSURILE "
+
+#, python-format
+msgid "%(responded)s responded out of %(polled)s polled"
+msgstr "%(responded)s răspondenți din %(polled)s intervievați"
 
 msgid "ALL"
 msgstr "TOȚI"
@@ -1125,12 +1132,10 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dec"
 
-msgid "LATEST OPINION"
-msgstr "ULTIMELE OPINII"
-
-#, python-format
-msgid "%(responded)s responded out of %(polled)s polled"
-msgstr "%(responded)s răspondenți din %(polled)s intervievați"
+#, fuzzy
+#| msgid "U-Report"
+msgid "Ureport API"
+msgstr "U-Report"
 
 #, python-format
 msgid ""

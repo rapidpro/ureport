@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2020-12-07 15:28+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -1210,6 +1210,11 @@ msgstr "Ne"
 
 msgid "Dec"
 msgstr ""
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "Ureport API"
+msgstr "U-Report"
 
 #, fuzzy, python-format
 #| msgid ""

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2020-12-07 15:28+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -1122,6 +1122,11 @@ msgstr "Noy."
 
 msgid "Dec"
 msgstr "Dek."
+
+#, fuzzy
+#| msgid "U-Report"
+msgid "Ureport API"
+msgstr "U-Report"
 
 #, python-format
 msgid ""
