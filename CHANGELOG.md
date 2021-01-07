@@ -1,3 +1,13 @@
+v1.1.204
+----------
+ * Merge pull request #664 from rapidpro/polls-api
+ * Merge pull request #665 from rapidpro/countries-flag
+ * Run code checks
+ * Add Canada on countries list
+ * Filter API polls to only show polls displayed on the public site
+ * Merge pull request #662 from rapidpro/dependabot/npm_and_yarn/ini-1.3.8
+ * Bump ini from 1.3.5 to 1.3.8
+
 v1.1.203
 ----------
  * Merge pull request #659 from rapidpro/fix-chart-labels-alignment
