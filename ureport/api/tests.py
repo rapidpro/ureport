@@ -56,6 +56,8 @@ class UreportAPITests(APITestCase):
             modified_by=self.superuser,
         )
 
+        self.non_synced_poll = self.create_poll("unsynced", has_synced=False)
+
         self.news_item = self.create_news_item("Some item")
         self.create_video("Test Video")
         self.create_story("Test Story")
@@ -76,7 +78,7 @@ class UreportAPITests(APITestCase):
         self.assertEqual(Org.objects.filter(domain=subdomain).count(), 1)
         return Org.objects.get(domain=subdomain)
 
-    def create_poll(self, title, is_featured=False):
+    def create_poll(self, title, is_featured=False, has_synced=True):
         now = timezone.now()
         return Poll.objects.create(
             flow_uuid=six.text_type(randint(1000, 9999)),
@@ -85,6 +87,7 @@ class UreportAPITests(APITestCase):
             poll_date=now,
             org=self.uganda,
             is_featured=is_featured,
+            has_synced=has_synced,
             created_by=self.superuser,
             modified_by=self.superuser,
         )
@@ -294,10 +297,10 @@ class UreportAPITests(APITestCase):
         url2 = "/api/v1/polls/org/%d/" % self.nigeria.pk
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["count"], Poll.objects.filter(org=self.uganda).count())
+        self.assertEqual(response.data["count"], Poll.objects.filter(org=self.uganda, is_active=True, has_synced=True).count())
         response = self.client.get(url2)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["count"], Poll.objects.filter(org=self.nigeria).count())
+        self.assertEqual(response.data["count"], Poll.objects.filter(org=self.nigeria, is_active=True, has_synced=True).count())
 
     def test_polls_by_org_list_with_flow_uuid_parameter(self):
         url = "/api/v1/polls/org/%d/?flow_uuid=%s" % (self.uganda.pk, self.reg_poll.flow_uuid)
