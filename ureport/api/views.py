@@ -523,7 +523,12 @@ class FeaturedPollList(BaseListAPIView):
 
     def get_queryset(self):
         q = super(FeaturedPollList, self).get_queryset()
-        q = q.filter(is_active=True, has_synced=True).exclude(flow_uuid="").filter(is_featured=True).order_by("-created_on")
+        q = (
+            q.filter(is_active=True, has_synced=True)
+            .exclude(flow_uuid="")
+            .filter(is_featured=True)
+            .order_by("-created_on")
+        )
         return q
 
 

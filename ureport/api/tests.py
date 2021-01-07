@@ -297,10 +297,14 @@ class UreportAPITests(APITestCase):
         url2 = "/api/v1/polls/org/%d/" % self.nigeria.pk
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["count"], Poll.objects.filter(org=self.uganda, is_active=True, has_synced=True).count())
+        self.assertEqual(
+            response.data["count"], Poll.objects.filter(org=self.uganda, is_active=True, has_synced=True).count()
+        )
         response = self.client.get(url2)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["count"], Poll.objects.filter(org=self.nigeria, is_active=True, has_synced=True).count())
+        self.assertEqual(
+            response.data["count"], Poll.objects.filter(org=self.nigeria, is_active=True, has_synced=True).count()
+        )
 
     def test_polls_by_org_list_with_flow_uuid_parameter(self):
         url = "/api/v1/polls/org/%d/?flow_uuid=%s" % (self.uganda.pk, self.reg_poll.flow_uuid)
