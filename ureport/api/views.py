@@ -261,6 +261,7 @@ class PollList(BaseListAPIView):
 
     def get_queryset(self):
         q = super(PollList, self).get_queryset()
+        q = q.filter(is_active=True, has_synced=True).exclude(flow_uuid="")
         if self.request.query_params.get("flow_uuid", None):
             q = q.filter(flow_uuid=self.request.query_params.get("flow_uuid"))
         return q
@@ -385,7 +386,7 @@ class PollDetails(RetrieveAPIView):
     """
 
     serializer_class = PollReadSerializer
-    queryset = Poll.objects.filter(is_active=True)
+    queryset = Poll.objects.filter(is_active=True, has_synced=True).exclude(flow_uuid="")
 
 
 class FeaturedPollList(BaseListAPIView):
@@ -521,7 +522,13 @@ class FeaturedPollList(BaseListAPIView):
     model = Poll
 
     def get_queryset(self):
-        q = super(FeaturedPollList, self).get_queryset().filter(is_featured=True).order_by("-created_on")
+        q = super(FeaturedPollList, self).get_queryset()
+        q = (
+            q.filter(is_active=True, has_synced=True)
+            .exclude(flow_uuid="")
+            .filter(is_featured=True)
+            .order_by("-created_on")
+        )
         return q
 
 
