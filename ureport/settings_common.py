@@ -1027,6 +1027,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://burundi.ureport.in/count/",
     ),
     dict(
+        name="Canada",
+        host="//canada.ureport.in/",
+        flag="flag_canada.png",
+        countries_codes=["CAN"],
+        count_link="http://canada.ureport.in/count/",
+    ),
+    dict(
         name="Cameroun",
         host="//cameroon.ureport.in/",
         flag="flag_cameroun.png",
