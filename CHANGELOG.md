@@ -1,3 +1,10 @@
+v1.1.205
+----------
+ * Merge pull request #667 from rapidpro/update-idx
+ * Move FB pixel to public site
+ * Add index on reporterscounter
+ * Bump CI testing to PG 11 and 12
+
 v1.1.204
 ----------
  * Merge pull request #664 from rapidpro/polls-api
