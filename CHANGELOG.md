@@ -1,3 +1,10 @@
+v1.1.206
+----------
+ * Merge pull request #669 from rapidpro/translations_django-po--master_mk_MK
+ * Merge pull request #670 from rapidpro/update-sentry-sdk
+ * Update sentry SDK
+ * Apply translations in mk_MK
+
 v1.1.205
 ----------
  * Merge pull request #667 from rapidpro/update-idx
