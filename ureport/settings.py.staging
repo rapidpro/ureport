@@ -48,11 +48,7 @@ EMAIL_USE_TLS = True
 MANAGERS = ADMINS
 
 # add gunicorn
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat',)
-
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
-}
+INSTALLED_APPS = INSTALLED_APPS + ('gunicorn',)
 
 # static dir is different for staging
 STATIC_URL = '/sitestatic/'
@@ -90,7 +86,6 @@ DATABASES['default'] = dj_database_url.config()
 # no debug toolbar in prod
 MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
-    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -105,10 +100,6 @@ MIDDLEWARE = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
-    },
     'formatters': {
         'verbose': {
 
@@ -116,10 +107,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -129,11 +116,6 @@ LOGGING = {
     'loggers': {
         'django.db.backends': {
             'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': False,
         },

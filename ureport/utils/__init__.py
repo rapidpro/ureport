@@ -18,7 +18,7 @@ from django.db.models import Sum
 from django.utils import timezone, translation
 import pytz
 from ureport.assets.models import Image, LOGO
-from raven.contrib.django.raven_compat.models import client
+from sentry_sdk import capture_exception
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
@@ -153,8 +153,8 @@ def fetch_flows(org, backend=None):
             cache_key = CACHE_ORG_FLOWS_KEY % (org.pk, backend_obj.slug)
             cache.set(cache_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
-        except Exception:
-            client.captureException()
+        except Exception as e:
+            capture_exception(e)
             import traceback
 
             traceback.print_exc()

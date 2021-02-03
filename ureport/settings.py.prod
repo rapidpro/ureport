@@ -50,15 +50,9 @@ EMAIL_USE_TLS = True
 MANAGERS = ADMINS
 
 # add gunicorn
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat', 'storages')
+INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'storages')
 
-# Set your DSN value
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
 
-}
-
-# we store files on S3 on prod boxes
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
@@ -99,7 +93,6 @@ DATABASES['default']['CONN_MAX_AGE'] = 60
 # no debug toolbar in prod
 MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
-    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -114,20 +107,12 @@ MIDDLEWARE = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
-    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -141,11 +126,6 @@ LOGGING = {
     'loggers': {
         'django.db.backends': {
             'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': False,
         },
