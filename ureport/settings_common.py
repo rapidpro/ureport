@@ -1053,7 +1053,7 @@ COUNTRY_FLAGS_SITES = [
         host="//canada.ureport.in/",
         flag="flag_canada.png",
         countries_codes=["CAN"],
-        count_link="http://canada.ureport.in/count/",
+        count_link="http://canada-en.ureport.in/count/",
     ),
     dict(
         name="Cameroun",
