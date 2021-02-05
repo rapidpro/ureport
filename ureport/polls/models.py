@@ -22,6 +22,7 @@ from django.db import connection, models
 from django.db.models import Count, F, Q, Sum
 from django.db.models.functions import Lower
 from django.utils import timezone, translation
+from django.utils.html import strip_tags
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -923,7 +924,7 @@ class PollQuestion(SmartModel):
 
             for category in unclean_categories:
                 if len(category["label"]) > 1 and category["label"] not in ignore_words and len(categories) < 100:
-                    categories.append(dict(label=category["label"], count=int(category["count"])))
+                    categories.append(dict(label=strip_tags(category["label"]), count=int(category["count"])))
 
             results.append(dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories))
 
@@ -974,7 +975,7 @@ class PollQuestion(SmartModel):
                             categorie_label = category_obj.category_displayed or category_obj.category
                             if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
-                                categories.append(dict(count=category_count, label=categorie_label))
+                                categories.append(dict(count=category_count, label=strip_tags(categorie_label)))
 
                         set_count = sum([elt["count"] for elt in categories])
 
@@ -984,7 +985,7 @@ class PollQuestion(SmartModel):
                                 set=set_count,
                                 unset=unset_count,
                                 boundary=osm_id,
-                                label=boundary.get("name"),
+                                label=strip_tags(boundary.get("name")),
                                 categories=categories,
                             )
                         )
@@ -1025,7 +1026,7 @@ class PollQuestion(SmartModel):
                             categorie_label = category_obj.category_displayed or category_obj.category
                             if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
-                                categories.append(dict(count=category_count, label=categorie_label))
+                                categories.append(dict(count=category_count, label=strip_tags(categorie_label)))
 
                         set_count = sum([elt["count"] for elt in categories])
 
@@ -1063,7 +1064,7 @@ class PollQuestion(SmartModel):
                             categorie_label = category_obj.category_displayed or category_obj.category
                             if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                                 category_count = categories_results_dict.get(key, 0)
-                                categories.append(dict(count=category_count, label=categorie_label))
+                                categories.append(dict(count=category_count, label=strip_tags(categorie_label)))
 
                         set_count = sum([elt["count"] for elt in categories])
                         results.append(
@@ -1091,7 +1092,7 @@ class PollQuestion(SmartModel):
                     categorie_label = category_obj.category_displayed or category_obj.category
                     if key not in PollResponseCategory.IGNORED_CATEGORY_RULES:
                         category_count = categories_results_dict.get(key, 0)
-                        categories.append(dict(count=category_count, label=categorie_label))
+                        categories.append(dict(count=category_count, label=strip_tags(categorie_label)))
 
                 results.append(
                     dict(open_ended=open_ended, set=responded, unset=polled - responded, categories=categories)
