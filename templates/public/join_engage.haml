@@ -10,7 +10,10 @@
     .max-w-page.mx-auto.p-home.hover-parent(class="md:flex")
       .flex-1.flex-center-y
         .text-5xl.font-bold
-          -trans "Join Now"
+          - if org|config:"join_button_text"
+            {{ org|config:"join_button_text" }}
+          - else
+            -trans "Join Now"
       
       .flex-1.flex-center-y.hover-parent
         .text-xl.hover-parent(class="md:pl-12 rtl:text-left ltr:text-right")

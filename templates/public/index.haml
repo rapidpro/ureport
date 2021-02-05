@@ -76,7 +76,10 @@
 
           .mt-8.text-center
             %a.btn.bg-black.text-white(href="{% url 'public.join' %}" class="hover:bg-gray-700")
-              -trans "JOIN NOW"
+              - if org|config:"join_button_text"
+                {{ org|config:"join_button_text" }}
+              - else
+                -trans "Join Now"
 
         .bg-black.p-12.text-white.hover-parent
           {% edit_content 'orgs.org_edit' "" "#id_common.homepage_join_video_id"  "-m-8" "white" %}
