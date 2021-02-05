@@ -296,9 +296,7 @@ ORG_CONFIG_FIELDS = [
     ),
     dict(
         name="join_button_text",
-        field=dict(
-            help_text=_("The join button text"), label="Join Button Text", required=False
-        ),
+        field=dict(help_text=_("The join button text"), label="Join Button Text", required=False),
     ),
     dict(
         name="join_text",

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -918,9 +918,6 @@ msgstr "ANI"
 msgid "Join U-Report, Your voice matters."
 msgstr "Alăturați-vă U-report, Vocea Ta Contează."
 
-msgid "JOIN NOW"
-msgstr "ALĂTURĂ-TE ACUM"
-
 msgid "FEATURED STORY"
 msgstr "ARTICOL RECOMANDAT"
 
@@ -1589,6 +1586,11 @@ msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
 
+#, fuzzy
+#| msgid "The font used for normal text"
+msgid "The join button text"
+msgstr "Fontul folosit pentru textul normal"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Textul scurt care va fi utilizat pentru a direcționa vizitatorii să se alăture la U-Report"
 
@@ -1761,6 +1763,9 @@ msgstr "Dacă acest articol este recomandat"
 
 msgid "Something to trigger localizations"
 msgstr "Ceva care să seteze localizările"
+
+#~ msgid "JOIN NOW"
+#~ msgstr "ALĂTURĂ-TE ACUM"
 
 #~ msgid ""
 #~ "\n"

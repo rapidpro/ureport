@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -890,9 +890,6 @@ msgstr "Вік"
 msgid "Join U-Report, Your voice matters."
 msgstr ""
 
-msgid "JOIN NOW"
-msgstr "Приєднатися"
-
 msgid "FEATURED STORY"
 msgstr ""
 
@@ -1522,6 +1519,9 @@ msgstr ""
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr ""
 
+msgid "The join button text"
+msgstr ""
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr ""
 
@@ -1692,6 +1692,9 @@ msgstr ""
 
 msgid "Something to trigger localizations"
 msgstr ""
+
+#~ msgid "JOIN NOW"
+#~ msgstr "Приєднатися"
 
 #, fuzzy
 #~| msgid ""
