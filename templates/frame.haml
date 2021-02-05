@@ -310,7 +310,10 @@
 
                 %li
                   %a.join-button.button(href="{% url 'public.join' %}")
-                    - trans "Join Now"
+                    - if org|config:"join_button_text"
+                      {{ org|config:"join_button_text" }}
+                    - else
+                      -trans "Join Now"
 
     .uk-container
       #public-header.uk-section

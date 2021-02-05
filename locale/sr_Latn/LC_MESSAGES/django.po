@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -967,9 +967,6 @@ msgstr ""
 msgid "Join U-Report, Your voice matters."
 msgstr ""
 
-msgid "JOIN NOW"
-msgstr ""
-
 msgid "FEATURED STORY"
 msgstr "PRIČA IZ ŽIVOTA"
 
@@ -1703,6 +1700,9 @@ msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno
 #| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno"
+
+msgid "The join button text"
+msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Kratak tekst kojim se posetioci upućuju da se pridruže U-Reportu"

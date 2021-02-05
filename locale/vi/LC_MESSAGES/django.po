@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -954,9 +954,6 @@ msgstr ""
 msgid "Join U-Report, Your voice matters."
 msgstr ""
 
-msgid "JOIN NOW"
-msgstr ""
-
 msgid "FEATURED STORY"
 msgstr "CÂU CHUYỆN NỔI BẬT"
 
@@ -1681,6 +1678,9 @@ msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-
 #| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Mã ngắn mà người dùng sẽ sử dụng để liên hệ với U-Report tại địa phương"
+
+msgid "The join button text"
+msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Văn bản ngắn sử dụng để hướng khách truy cập tham gia U-Report"

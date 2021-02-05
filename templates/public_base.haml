@@ -284,7 +284,10 @@
               %i.fab.fa-twitter
 
         %a.block.font-bold.mt-4(href="{% url 'public.join' %}" class="hover:text-gray-600")
-          -trans "Join Now"
+          - if org|config:"join_button_text"
+            {{ org|config:"join_button_text" }}
+          - else
+            -trans "Join Now"
         
         - if other_languages_sites
           .block.mt-4.font-bold.mobile-accordion.text-sm.cursor-pointer
@@ -484,7 +487,10 @@
                 %i.fab.fa-twitter
   
             %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'public.join' %}" class="hover:bg-gray-700")
-              -trans "Join Now"
+              - if org|config:"join_button_text"
+                {{ org|config:"join_button_text" }}
+              - else
+                -trans "Join Now"
 
             - if other_languages_sites
               %a#languages-toggler.flex-initial.ml-4.w-10.py-menu.language-menu(class="rtl:float-left ltr:float-right")
