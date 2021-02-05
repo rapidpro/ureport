@@ -1,3 +1,10 @@
+v1.1.208
+----------
+ * Add locale
+ * Merge pull request #671 from rapidpro/custom-join-button
+ * Run code checks
+ * Allow customizing join button text
+
 v1.1.207
 ----------
  * Fix count link
