@@ -1,3 +1,11 @@
+v1.1.209
+----------
+ * Merge pull request #673 from rapidpro/update-smartmin
+ * Merge pull request #672 from rapidpro/fix-sec-issues
+ * Update deps
+ * Update jquery
+ * Make more variables safer with strip_tags
+
 v1.1.208
 ----------
  * Add locale
