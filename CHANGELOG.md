@@ -1,3 +1,8 @@
+v1.1.210
+----------
+ * Merge pull request #675 from rapidpro/better-display-of-login-errors
+ * Better display login errors
+
 v1.1.209
 ----------
  * Merge pull request #673 from rapidpro/update-smartmin
