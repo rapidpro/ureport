@@ -9,12 +9,12 @@ import pytz
 import redis
 from dash.categories.models import Category
 from dash.test import MockClientQuery
-from dash_test_runner.tests import MockResponse
 from mock import patch
 from temba_client.v2 import Flow
 
 from django.conf import settings
 from django.utils import timezone
+from django.utils.encoding import force_text
 
 from ureport.contacts.models import ReportersCounter
 from ureport.locations.models import Boundary
@@ -40,6 +40,19 @@ from ureport.utils import (
     json_date_to_datetime,
     update_poll_flow_data,
 )
+
+
+class MockResponse(object):
+    def __init__(self, status_code, content=""):
+        self.content = content
+        self.status_code = status_code
+
+    def raise_for_status(self):
+        if self.status_code != 200:
+            raise Exception("Server returned %s" % force_text(self.status_code))
+
+    def json(self, **kwargs):
+        return json.loads(self.content)
 
 
 class UtilsTest(UreportTest):
