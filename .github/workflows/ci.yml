@@ -31,7 +31,7 @@ jobs:
 
     - name: Initialize environment
       run: |
-        pip install --upgrade pip
+        pip install --upgrade pip poetry
         pip install -r pip-freeze.txt
         pip install -r test-freeze.txt
         pip install codecov
