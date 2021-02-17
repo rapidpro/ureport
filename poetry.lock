@@ -693,7 +693,7 @@ python-versions = "*"
 
 [[package]]
 name = "rapidpro-dash"
-version = "1.5.1"
+version = "1.5.2"
 description = "Support library for RapidPro dashboards"
 category = "main"
 optional = false
@@ -1008,7 +1008,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "db1d143f59ce3a0b924b7c3e25b7e97c99f8aa6e643832582fc40a2fdbb10625"
+content-hash = "0695e90b4f5b55b58e5b13523d5683f7989dbe3c720b265ed1dc991ef34aaa05"
 
 [metadata.files]
 amqp = [
@@ -1393,8 +1393,8 @@ pytz = [
     {file = "pytz-2020.5.tar.gz", hash = "sha256:180befebb1927b16f6b57101720075a984c019ac16b1b7575673bea42c6c3da5"},
 ]
 rapidpro-dash = [
-    {file = "rapidpro-dash-1.5.1.tar.gz", hash = "sha256:30188953df2192d873c4feed735f233f02e4af0d8a8633d09847d19b47ebbe22"},
-    {file = "rapidpro_dash-1.5.1-py3-none-any.whl", hash = "sha256:0d69c2806819170e04400354305836a908974fd0570eb9b483272d30a5daaeb6"},
+    {file = "rapidpro-dash-1.5.2.tar.gz", hash = "sha256:371857fa24e72343a0975a3abe1e33e9147aef04b744c555a94cb143c0832c1e"},
+    {file = "rapidpro_dash-1.5.2-py3-none-any.whl", hash = "sha256:1f0479f1b5977a9e7accd728615a208439cf8e19b7505e69a87ab477c64aadaf"},
 ]
 rapidpro-python = [
     {file = "rapidpro-python-2.8.1.tar.gz", hash = "sha256:df3d51f82dab55bf65a63aeaa442679df99318f40266aa67ea372dbdc3e6308a"},
