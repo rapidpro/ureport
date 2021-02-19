@@ -1,3 +1,9 @@
+v1.1.212
+----------
+ * Merge pull request #677 from rapidpro/polls-api-order
+ * Add optional parameters to sort polls by modified on descending when that is specified
+ * Merge pull request #676 from rapidpro/use-poetry
+
 v1.1.210
 ----------
  * Merge pull request #675 from rapidpro/better-display-of-login-errors
