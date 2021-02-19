@@ -130,6 +130,8 @@ class PollList(BaseListAPIView):
     * **org** - the ID of the org that owns this poll (int)
     * **category** - the CATEGORIES of of this poll (dictionary)
 
+    * **sort** - Order the results by modified on desceding if specified and equal to ```modified_on```
+
     Example:
 
         GET /api/v1/polls/org/1/
@@ -249,6 +251,8 @@ class PollList(BaseListAPIView):
                         "image_url": "http://test.ureport.in/media/categories/StraightOuttaSomewhere_2.jpg",
                         "name": "tests"
                     },
+                    "poll_date": "2015-09-02T08:53:30.313251Z",
+                    "modified_on": "2015-09-02T08:53:30.313251Z",
                     "created_on": "2015-09-02T08:53:30.313251Z"
                 }
                 ...
@@ -264,6 +268,10 @@ class PollList(BaseListAPIView):
         q = q.filter(is_active=True, has_synced=True).exclude(flow_uuid="")
         if self.request.query_params.get("flow_uuid", None):
             q = q.filter(flow_uuid=self.request.query_params.get("flow_uuid"))
+
+        if self.request.query_params.get("sort", None) == "modified_on":
+            q = q.order_by("-modified_on")
+
         return q
 
 
@@ -395,6 +403,8 @@ class FeaturedPollList(BaseListAPIView):
 
     ## Listing Featured Polls
 
+    * **sort** - Order the results by modified on desceding if specified and equal to ```modified_on```
+
     Example:
 
         GET /api/v1/polls/org/1/featured/
@@ -511,6 +521,8 @@ class FeaturedPollList(BaseListAPIView):
                         "image_url": "http://test.ureport.in/media/categories/StraightOuttaSomewhere_2.jpg",
                         "name": "tests"
                     },
+                    "poll_date": "2015-09-02T08:53:30.313251Z",
+                    "modified_on": "2015-09-02T08:53:30.313251Z",
                     "created_on": "2015-09-02T08:53:30.313251Z"
                 }
                 ...
@@ -523,12 +535,21 @@ class FeaturedPollList(BaseListAPIView):
 
     def get_queryset(self):
         q = super(FeaturedPollList, self).get_queryset()
-        q = (
-            q.filter(is_active=True, has_synced=True)
-            .exclude(flow_uuid="")
-            .filter(is_featured=True)
-            .order_by("-created_on")
-        )
+
+        if self.request.query_params.get("sort", None) == "modified_on":
+            q = (
+                q.filter(is_active=True, has_synced=True)
+                .exclude(flow_uuid="")
+                .filter(is_featured=True)
+                .order_by("-modified_on")
+            )
+        else:
+            q = (
+                q.filter(is_active=True, has_synced=True)
+                .exclude(flow_uuid="")
+                .filter(is_featured=True)
+                .order_by("-created_on")
+            )
         return q
 
 
