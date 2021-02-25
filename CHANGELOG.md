@@ -1,3 +1,7 @@
+v1.1.214
+----------
+ * Revert "Add a public storage class to use with thumbnail"
+
 v1.1.213
 ----------
  * Merge pull request #679 from rapidpro/fix-thumbnail-storage0-permission
