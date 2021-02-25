@@ -1,3 +1,10 @@
+v1.1.213
+----------
+ * Merge pull request #679 from rapidpro/fix-thumbnail-storage0-permission
+ * Merge pull request #678 from Ilhasoft/feature/add-macedonia-flag
+ * Add a public storage class to use with thumbnail
+ * Add flag file and inset into settings_common dict
+
 v1.1.212
 ----------
  * Merge pull request #677 from rapidpro/polls-api-order
