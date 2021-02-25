@@ -1054,7 +1054,7 @@ COUNTRY_FLAGS_SITES = [
     ),
     dict(
         name="Canada",
-        host="//canada.ureport.in/",
+        host="//canada-en.ureport.in/",
         flag="flag_canada.png",
         countries_codes=["CAN"],
         count_link="http://canada-en.ureport.in/count/",
