@@ -1,5 +1,10 @@
 v1.1.214
 ----------
+ * Update AWS DEFAULT ACL
+ * Revert "Add a public storage class to use with thumbnail"
+
+v1.1.214
+----------
  * Revert "Add a public storage class to use with thumbnail"
 
 v1.1.213
