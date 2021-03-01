@@ -1,3 +1,7 @@
+v1.1.216
+----------
+ * Revert Add Macedonia's flag
+
 
 v1.1.215
 ----------
