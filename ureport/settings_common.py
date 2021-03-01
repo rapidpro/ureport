@@ -1263,13 +1263,6 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://liberia.ureport.in/count/",
     ),
     dict(
-        name="Macedonia",
-        host="//mk.ureport.in/",
-        flag="flag_macedonia.png",
-        countries_codes=["MKD"],
-        count_link="http://mk.ureport.in/count/",
-    ),
-    dict(
         name="Malawi",
         host="//ureport.mw/",
         flag="flag_malawi.png",
