@@ -1,3 +1,8 @@
+v1.1.216
+----------
+ * Merge pull request #680 from rapidpro/revert-678-feature/add-macedonia-flag
+ * Revert "Add Macedonia's flag"
+
 v1.1.215
 ----------
  * Fix Canada URL
