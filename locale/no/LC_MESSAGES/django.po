@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 15:28+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -907,9 +907,6 @@ msgstr "ALDER"
 msgid "Join U-Report, Your voice matters."
 msgstr "Bli en U-Reporter, din stemme betyr noe. "
 
-msgid "JOIN NOW"
-msgstr "BLI MED NÅ"
-
 msgid "FEATURED STORY"
 msgstr "FEATURE-ARTIKKEL"
 
@@ -1550,6 +1547,9 @@ msgstr "Nummeret til Whatsapp som brukere vil benytte for å kontakte U-Report"
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Viber-brukernavnet som brukere må benytte seg av for å kontakte U-Report Norge"
 
+msgid "The join button text"
+msgstr "Font til normal tekst"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "En enkel tekst som brukes til å veilede besøkende til å bli med i U-Report"
 
@@ -1720,3 +1720,6 @@ msgstr "Raden ble opprettet av squashing"
 
 msgid "Something to trigger localizations"
 msgstr "Noe som skal trigge lokalisering"
+
+#~ msgid "JOIN NOW"
+#~ msgstr "BLI MED NÅ"

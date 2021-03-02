@@ -5,10 +5,32 @@ import os
 import sys
 from datetime import timedelta
 
+import sentry_sdk
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration, ignore_logger
+
 from django.forms import Textarea
 from django.utils.translation import ugettext_lazy as _
 
 from celery.schedules import crontab
+
+SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
+
+
+def traces_sampler(sampling_context):  # pragma: no cover
+    return 0 if ("shell" in sys.argv) else 1.0
+
+
+if SENTRY_DSN:  # pragma: no cover
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration(), CeleryIntegration(), LoggingIntegration()],
+        send_default_pii=True,
+        traces_sampler=traces_sampler,
+    )
+    ignore_logger("django.security.DisallowedHost")
+
 
 # -----------------------------------------------------------------------------------
 # Sets TESTING to True if this configuration is read during a unit test
@@ -271,6 +293,10 @@ ORG_CONFIG_FIELDS = [
             label="Viber Username",
             required=False,
         ),
+    ),
+    dict(
+        name="join_button_text",
+        field=dict(help_text=_("The join button text"), label="Join Button Text", required=False),
     ),
     dict(
         name="join_text",
@@ -1025,6 +1051,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_burundi.png",
         countries_codes=["BDI"],
         count_link="http://burundi.ureport.in/count/",
+    ),
+    dict(
+        name="Canada",
+        host="//canada-en.ureport.in/",
+        flag="flag_canada.png",
+        countries_codes=["CAN"],
+        count_link="http://canada-en.ureport.in/count/",
     ),
     dict(
         name="Cameroun",

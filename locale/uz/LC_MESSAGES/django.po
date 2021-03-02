@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 15:28+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -909,9 +909,6 @@ msgstr "YOSHLAR"
 msgid "Join U-Report, Your voice matters."
 msgstr "U-Reportga qo'shiling, Sizning fikringiz muhimdir."
 
-msgid "JOIN NOW"
-msgstr "HOZIR QO'SHILING"
-
 msgid "FEATURED STORY"
 msgstr "ALOHIDA AJRAB TURADIGAN HIKOYA"
 
@@ -1580,6 +1577,11 @@ msgstr "Foydalanuvchilar U-Report bilan bog'lanishlari mumkin bo'lgan whatsapp r
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Foydalanuvchilar U-Report bilan bog'lanishlari mumkin bo'lgan whatsapp raqami, agar sizda mavjud bo'lsa. "
 
+#, fuzzy
+#| msgid "The font used for normal text"
+msgid "The join button text"
+msgstr "Oddiy matn uchun qo'llaniluvchi shrift"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Tashrif buyuruvchilarni U-Reportga qo'shilishga yo'naltiradigan qisqa matn"
 
@@ -1750,6 +1752,9 @@ msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"
+
+#~ msgid "JOIN NOW"
+#~ msgstr "HOZIR QO'SHILING"
 
 #~ msgid ""
 #~ "\n"

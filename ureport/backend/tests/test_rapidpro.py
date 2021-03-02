@@ -2802,7 +2802,7 @@ class PerfTest(UreportTest):
         mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before="2015-04-08T12:48:44.320Z")
 
     @override_settings(DEBUG=True)
-    @patch("temba_client.clients.BaseClient._request")
+    @patch("dash.orgs.models.TembaClient._request")
     @patch("ureport.polls.tasks.pull_refresh.apply_async")
     @patch("django.core.cache.cache.set")
     @patch("django.utils.timezone.now")

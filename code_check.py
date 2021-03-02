@@ -84,6 +84,8 @@ if __name__ == "__main__":
     update_po_files()
     status("Recompiling locale MO files")
     cmd("python manage.py compilemessages")
+    status("Exporting requirements")
+    cmd("poetry export -f requirements.txt -o pip-freeze.txt --without-hashes")
 
     # if any code changes were made, exit with error
     if cmd("git diff ureport locale"):

@@ -8,8 +8,7 @@ import mock
 import pytz
 import redis
 from dash.categories.models import Category
-from dash.test import MockClientQuery
-from dash_test_runner.tests import MockResponse
+from dash.test import MockClientQuery, MockResponse
 from mock import patch
 from temba_client.v2 import Flow
 

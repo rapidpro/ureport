@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 15:28+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Jesus EKIE <jesus@fehudigital.com>, 2020\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -912,9 +912,6 @@ msgstr "AGES"
 msgid "Join U-Report, Your voice matters."
 msgstr "Rejoins U-Report, ta voix compte."
 
-msgid "JOIN NOW"
-msgstr "JOINDRE"
-
 msgid "FEATURED STORY"
 msgstr "ARTICLE SELECTIONNÉ"
 
@@ -1555,6 +1552,9 @@ msgstr "Le numéro WhatsApp que les utilisateurs utiliseront pour contacter U-Re
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Le nom d'utilisateur Viber que les utilisateurs utiliseront pour contacter U-Report si vous en avez un"
 
+msgid "The join button text"
+msgstr "La police utilisée pour un texte normal"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Le mot-clé utilisé pour inciter les visiteurs a s'inscrire sur U-Report"
 
@@ -1725,3 +1725,6 @@ msgstr "Si cette ligne a été créée en écrasant"
 
 msgid "Something to trigger localizations"
 msgstr "Quelque chose pour déclencher les localisations"
+
+#~ msgid "JOIN NOW"
+#~ msgstr "JOINDRE"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 15:28+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -914,9 +914,6 @@ msgstr "বয়স"
 msgid "Join U-Report, Your voice matters."
 msgstr "U-Report-এর সাথে যুক্ত হোন, আপনার কথা গুরুত্বপূর্ণ"
 
-msgid "JOIN NOW"
-msgstr "এখুনি যোগদান করুন"
-
 msgid "FEATURED STORY"
 msgstr "বিশেষায়িত ঘটনা "
 
@@ -1588,6 +1585,11 @@ msgstr "ব্যবহারকারীদের যদি কোন WhatsApp 
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
 
+#, fuzzy
+#| msgid "The font used for normal text"
+msgid "The join button text"
+msgstr "সাধারন টেক্সটের জন্য যে ফন্ট ব্যবহার করা হবে"
+
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "ক্ষুদ্র বর্ণনা যা দর্শনার্থীদের U-Report এ যোগদান করার পথ দেখাবে "
 
@@ -1764,6 +1766,9 @@ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে ক�
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
+
+#~ msgid "JOIN NOW"
+#~ msgstr "এখুনি যোগদান করুন"
 
 #~ msgid ""
 #~ "\n"

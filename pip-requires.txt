@@ -16,7 +16,7 @@ boto3
 Pillow
 gunicorn
 pisa
-raven
+sentry-sdk
 django-redis
 psycopg2-binary
 xlutils

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 15:28+0000\n"
+"POT-Creation-Date: 2021-02-05 09:48+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2020\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -913,9 +913,6 @@ msgstr "GODINE"
 msgid "Join U-Report, Your voice matters."
 msgstr "Pridruži se U-Reportu, Tvoj glas je bitan."
 
-msgid "JOIN NOW"
-msgstr "PRIDRUŽI SE SADA"
-
 msgid "FEATURED STORY"
 msgstr "ISTAKNUTE PRIČE"
 
@@ -1730,3 +1727,6 @@ msgstr "Da li je ovaj red stvoren zbijanjem"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"
+
+#~ msgid "JOIN NOW"
+#~ msgstr "PRIDRUŽI SE SADA"

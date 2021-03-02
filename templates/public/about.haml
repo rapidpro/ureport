@@ -11,7 +11,7 @@
         - for d_block in about|slice:":1"
           .block.mt-4.font-bold.text-5xl.hover-parent
             {% edit_content 'dashblocks.dashblock_update' d_block.pk "#id_title" "-m-8" "dark" %}
-            {{ d_block.title|safe }}
+            {{ d_block.title }}
 
           .block.mt-4.hover-parent
             {% edit_content 'dashblocks.dashblock_update' d_block.pk "#id_content" "-m-8" "dark"  %}
