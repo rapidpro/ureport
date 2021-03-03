@@ -100,6 +100,7 @@ LANGUAGES = (
     ("uk", "Ukrainian"),
     ("uz", "Uzbek"),
     ("my", "Burmese"),
+    ("mk_MK", "Macedonian"),
     ("id", "Indonesian"),
     ("it", "Italian"),
     ("ro", "Romanian"),
