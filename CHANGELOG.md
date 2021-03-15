@@ -1,3 +1,11 @@
+v1.1.217
+----------
+ * Merge pull request #666 from rapidpro/panama-flag
+ * Update README.md
+ * Merge pull request #681 from Ilhasoft/feature/macedonia-language
+ * feat: Added Macedonian language
+ * Add Panama icon
+
 v1.1.216
 ----------
  * Revert Add Macedonia's flag
