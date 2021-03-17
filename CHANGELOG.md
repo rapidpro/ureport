@@ -1,3 +1,8 @@
+v1.1.218
+----------
+ * Bump elliptic from 6.5.3 to 6.5.4
+ * Add Solomon Islands flag
+
 v1.1.217
 ----------
  * Merge pull request #666 from rapidpro/panama-flag
