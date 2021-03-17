@@ -1411,6 +1411,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://sierraleone.ureport.in/count/",
     ),
     dict(
+        name="Solomon Islands",
+        host="//solomonislands.ureport.in",
+        flag="flag_solomon_islands.png",
+        countries_codes=["SLB"],
+        count_link="http://solomonislands.ureport.in/count/",
+    ),
+    dict(
         name="South Africa",
         host="//sa.ureport.in",
         flag="flag_south_africa.png",
