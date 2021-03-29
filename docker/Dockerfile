@@ -3,6 +3,8 @@ FROM python:3.6
 ENV WORKDIR /ureport
 WORKDIR $WORKDIR
 
+ENV PROJECT_PATH /ureport
+
 RUN apt update
 RUN apt upgrade -y
 RUN apt install -y \
