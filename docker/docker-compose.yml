@@ -19,9 +19,9 @@ services:
       context: ..
       dockerfile: ./docker/Dockerfile
     ports:
-      - 8000:8000
-      - 8080:8080
+      - ${APP_PORT:-8000}:8000
     environment:
+      - APP_PORT=${APP_PORT:-8000}
       - DEBUG=${DEBUG:-false}
       - APP_HOSTNAME=${APP_HOSTNAME:-localhost}
       - EMPTY_SUBDOMAIN_HOST=${EMPTY_SUBDOMAIN_HOST:-http://localhost}
