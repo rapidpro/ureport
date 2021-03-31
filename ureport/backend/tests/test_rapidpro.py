@@ -1184,7 +1184,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1252,7 +1252,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1296,7 +1296,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1321,7 +1321,7 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.text, "We'll celebrate today")
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (
                 num_val_created,
                 num_val_updated,
@@ -1338,7 +1338,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (
                 num_val_created,
                 num_val_updated,
@@ -1382,7 +1382,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1427,7 +1427,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1454,7 +1454,7 @@ class RapidProBackendTest(UreportTest):
         PollResult.objects.filter(ruleset="ruleset-uuid-2").update(date=None)
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1472,7 +1472,7 @@ class RapidProBackendTest(UreportTest):
         PollResult.objects.filter(ruleset="ruleset-uuid").update(date=None)
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1581,7 +1581,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_no_response])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1644,7 +1644,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1896,7 +1896,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
