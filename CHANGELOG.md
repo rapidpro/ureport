@@ -1,3 +1,20 @@
+v1.1.219
+----------
+ * Merge pull request #690 from rapidpro/poll-sync-modified-on
+ * Update Poll modified_on when the new poll results are completed
+ * Merge pull request #689 from rapidpro/update-deps
+ * Remove unused file
+ * Update deps
+ * Merge pull request #687 from Ilhasoft/feat/add-macedonia-flag
+ * Merge pull request #686 from rapidpro/translations_django-po--master_mk_MK
+ * Merge pull request #688 from rapidpro/dependabot/npm_and_yarn/y18n-4.0.1
+ * Bump y18n from 4.0.0 to 4.0.1
+ * Add macedonia flag
+ * Apply translations in mk_MK
+ * Merge pull request #685 from rapidpro/translations_django-po--master_mk_MK
+ * Run code checks
+ * Apply translations in mk_MK
+
 v1.1.218
 ----------
  * Bump elliptic from 6.5.3 to 6.5.4
