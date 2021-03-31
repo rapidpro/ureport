@@ -1010,9 +1010,10 @@ class RapidProBackend(BaseBackend):
         # update the time for this poll from which we fetch next time
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), latest_synced_obj_time, None)
         # update the last time the sync happened
+        now = timezone.now()
         cache.set(
             Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (org.pk, poll.flow_uuid),
-            datetime_to_json_date(timezone.now()),
+            datetime_to_json_date(now),
             None,
         )
         # clear the saved cursor
@@ -1022,6 +1023,8 @@ class RapidProBackend(BaseBackend):
         # to sync all polls without hitting the API rate limit
         cache.set(
             Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid),
-            datetime_to_json_date(timezone.now()),
+            datetime_to_json_date(now),
             Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_TIMEOUT,
         )
+
+        Poll.objects.filter(id=poll.pk).update(modified_on=now)

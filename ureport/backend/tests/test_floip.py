@@ -1155,7 +1155,7 @@ class FLOIPBackendTest(UreportTest):
             modified_by=self.admin,
         )
 
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(4):
             (
                 num_val_created,
                 num_val_updated,
