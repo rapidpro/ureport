@@ -6,7 +6,7 @@ import time
 from collections import defaultdict
 
 import requests
-from dash.utils.sync import BaseSyncer, sync_local_to_changes
+from dash.utils.sync import BaseSyncer, SyncOutcome, sync_local_to_changes
 from django_redis import get_redis_connection
 from temba_client.v2 import TembaClient
 
@@ -191,11 +191,11 @@ class FLOIPBackend(BaseBackend):
 
     def pull_fields(self, org):
         # Not needed
-        return 0, 0, 0, 0
+        return {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0}
 
     def pull_boundaries(self, org):
         # Not needed
-        return 0, 0, 0, 0
+        return {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0}
 
     def pull_contacts(self, org, modified_after, modified_before, progress_callback=None):
         client = self._get_client(org)
