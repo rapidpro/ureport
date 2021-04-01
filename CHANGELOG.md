@@ -1,3 +1,16 @@
+v1.1.220
+----------
+ * Merge pull request #691 from rapidpro/update-dash
+ * Merge pull request #694 from rapidpro/fix-search
+ * Fix search toggle button
+ * Merge pull request #693 from rapidpro/fix-sec-alerts
+ * Merge pull request #692 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Fix sec alerts
+ * Rn code checks
+ * Update test deps
+ * Apply translations in sr_RS@latin
+ * Update to use latest rapidpro-dash
+
 v1.1.219
 ----------
  * Merge pull request #690 from rapidpro/poll-sync-modified-on
