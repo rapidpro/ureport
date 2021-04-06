@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from dash.categories.models import Category
 from dash.test import MockClientQuery
+from dash.utils.sync import SyncOutcome
 from mock import patch
 from temba_client.v2.types import Contact as TembaContact, ObjectRef
 
@@ -501,10 +502,16 @@ class FLOIPBackendTest(UreportTest):
         self.assertEqual(PollResponseCategory.objects.filter(category="other").count(), 2)
 
     def test_pull_fields(self):
-        self.assertEqual(self.backend.pull_fields(self.nigeria), (0, 0, 0, 0))
+        self.assertEqual(
+            self.backend.pull_fields(self.nigeria),
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
     def test_pull_boundaries(self):
-        self.assertEqual(self.backend.pull_boundaries(self.nigeria), (0, 0, 0, 0))
+        self.assertEqual(
+            self.backend.pull_boundaries(self.nigeria),
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
     @patch("ureport.backend.floip.TembaClient.get_contacts")
     def test_pull_contacts(self, mock_get_contacts):
@@ -520,9 +527,12 @@ class FLOIPBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(0):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         # fecthed contact not in configured group get ignored
         mock_get_contacts.side_effect = [
@@ -581,9 +591,12 @@ class FLOIPBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(10):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (3, 0, 0, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 3, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         mock_get_contacts.side_effect = [
             # first call to get active contacts will return two fetches of 2 and 1 contacts
@@ -641,9 +654,12 @@ class FLOIPBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(10):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 3))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 3},
+        )
 
         Contact.objects.all().delete()
 
@@ -703,9 +719,12 @@ class FLOIPBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(10):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (3, 0, 0, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 3, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         Contact.objects.all().delete()
 
@@ -766,9 +785,12 @@ class FLOIPBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(10):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (3, 0, 0, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 3, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         contact_jan = Contact.objects.filter(uuid="C-001").first()
         self.assertFalse(contact_jan.born)
@@ -826,9 +848,12 @@ class FLOIPBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(10):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 2, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         contact_jan = Contact.objects.filter(uuid="C-001").first()
 
@@ -860,9 +885,12 @@ class FLOIPBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(3):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 1, SyncOutcome.ignored: 0},
+        )
 
         self.assertFalse(Contact.objects.filter(uuid="C-002", is_active=True))
 
@@ -1155,7 +1183,7 @@ class FLOIPBackendTest(UreportTest):
             modified_by=self.admin,
         )
 
-        with self.assertNumQueries(3):
+        with self.assertNumQueries(4):
             (
                 num_val_created,
                 num_val_updated,

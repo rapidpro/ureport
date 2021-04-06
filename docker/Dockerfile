@@ -1,3 +1,13 @@
+FROM python:3.6-slim as build-poetry
+
+WORKDIR /app
+
+COPY ./pyproject.toml .
+COPY ./poetry.lock .
+
+RUN python -m pip install -U poetry
+RUN poetry export --output requirements.txt
+
 FROM python:3.6-slim-buster AS base
 
 ARG APP_UID=1000
@@ -71,9 +81,12 @@ RUN if [ ! "x${BUILD_DEPS}" = "x" ] ; then apt-get update \
   && apt-get install -y --no-install-recommends ${BUILD_DEPS} ; fi
 
 # install dependencies
-COPY pip-freeze.txt .
+COPY --from=build-poetry /app/requirements.txt .
+COPY weni_requirements.txt .
+
 RUN mkdir /install \
-  && pip install --no-cache-dir --prefix=/install -r pip-freeze.txt
+  && pip install --no-cache-dir --prefix=/install --require-hashes -r requirements.txt \
+  && pip install --no-cache-dir --prefix=/install -r weni_requirements.txt
 
 FROM base
 

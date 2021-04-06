@@ -6,7 +6,7 @@ import time
 from collections import defaultdict
 
 import requests
-from dash.utils.sync import BaseSyncer, sync_local_to_changes
+from dash.utils.sync import BaseSyncer, SyncOutcome, sync_local_to_changes
 from django_redis import get_redis_connection
 from temba_client.v2 import TembaClient
 
@@ -191,11 +191,11 @@ class FLOIPBackend(BaseBackend):
 
     def pull_fields(self, org):
         # Not needed
-        return 0, 0, 0, 0
+        return {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0}
 
     def pull_boundaries(self, org):
         # Not needed
-        return 0, 0, 0, 0
+        return {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0}
 
     def pull_contacts(self, org, modified_after, modified_before, progress_callback=None):
         client = self._get_client(org)
@@ -657,9 +657,10 @@ class FLOIPBackend(BaseBackend):
         # update the time for this poll from which we fetch next time
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), latest_synced_obj_time, None)
         # update the last time the sync happened
+        now = timezone.now()
         cache.set(
             Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (org.pk, poll.flow_uuid),
-            datetime_to_json_date(timezone.now()),
+            datetime_to_json_date(now),
             None,
         )
         # clear the saved cursor
@@ -669,6 +670,8 @@ class FLOIPBackend(BaseBackend):
         # to sync all polls without hitting the API rate limit
         cache.set(
             Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY % (org.id, poll.flow_uuid),
-            datetime_to_json_date(timezone.now()),
+            datetime_to_json_date(now),
             Poll.POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_TIMEOUT,
         )
+
+        Poll.objects.filter(id=poll.pk).update(modified_on=now)

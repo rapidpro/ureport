@@ -2,6 +2,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from dash.orgs.models import TaskState
+from dash.utils.sync import SyncOutcome
 from mock import patch
 
 from ureport.contacts.models import Contact, ContactField, ReportersCounter
@@ -326,9 +327,22 @@ class ContactsTasksTest(UreportTest):
         self, mock_pull_contacts, mock_pull_boundaries, mock_pull_fields, mock_squash_counts, mock_get_backend
     ):
         mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
-        mock_pull_fields.return_value = (1, 2, 3, 4)
-        mock_pull_boundaries.return_value = (5, 6, 7, 8)
-        mock_pull_contacts.return_value = (9, 10, 11, 12)
+        mock_pull_fields.return_value = {
+            SyncOutcome.created: 1,
+            SyncOutcome.updated: 2,
+            SyncOutcome.deleted: 3,
+            SyncOutcome.ignored: 4,
+        }
+        mock_pull_boundaries.return_value = {
+            SyncOutcome.created: 5,
+            SyncOutcome.updated: 6,
+            SyncOutcome.deleted: 7,
+            SyncOutcome.ignored: 8,
+        }
+        mock_pull_contacts.return_value = (
+            {SyncOutcome.created: 9, SyncOutcome.updated: 10, SyncOutcome.deleted: 11, SyncOutcome.ignored: 12},
+            None,
+        )
         mock_squash_counts.return_value = "Called"
 
         # keep only on backend config

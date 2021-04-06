@@ -15,6 +15,11 @@ $(->
       )
   )
 
+  $(".search-close").click(->
+    results = "#" + $(this).data("results-id")
+    $(results).toggleClass("shown")
+  )
+
   # don't bubble events past our search results or box
   $(".search-results,.search-box").click((e) ->
     e.stopPropagation()

@@ -1264,6 +1264,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://liberia.ureport.in/count/",
     ),
     dict(
+        name="Macedona",
+        host="//mk.ureport.in/",
+        flag="flag_macedonia.png",
+        countries_codes=["MKD"],
+        count_link="http://mk.ureport.in/count/",
+    ),
+    dict(
         name="Malawi",
         host="//ureport.mw/",
         flag="flag_malawi.png",
@@ -1362,6 +1369,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://ureport.pk/count/",
     ),
     dict(
+        name="Panama",
+        host="//panama.ureport.in",
+        flag="flag_panama.png",
+        countries_codes=["PAN"],
+        count_link="http://panama.ureport.in/count/",
+    ),
+    dict(
         name="Philippines",
         host="//philippines.ureport.in",
         flag="flag_philippines.png",
@@ -1402,6 +1416,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_sierra_leone.png",
         countries_codes=["SLE"],
         count_link="http://sierraleone.ureport.in/count/",
+    ),
+    dict(
+        name="Solomon Islands",
+        host="//solomonislands.ureport.in",
+        flag="flag_solomon_islands.png",
+        countries_codes=["SLB"],
+        count_link="http://solomonislands.ureport.in/count/",
     ),
     dict(
         name="South Africa",

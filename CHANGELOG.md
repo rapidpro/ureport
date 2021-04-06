@@ -1,7 +1,45 @@
+v1.1.220
+----------
+ * Merge pull request #691 from rapidpro/update-dash
+ * Merge pull request #694 from rapidpro/fix-search
+ * Fix search toggle button
+ * Merge pull request #693 from rapidpro/fix-sec-alerts
+ * Merge pull request #692 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Fix sec alerts
+ * Rn code checks
+ * Update test deps
+ * Apply translations in sr_RS@latin
+ * Update to use latest rapidpro-dash
+
+v1.1.219
+----------
+ * Merge pull request #690 from rapidpro/poll-sync-modified-on
+ * Update Poll modified_on when the new poll results are completed
+ * Merge pull request #689 from rapidpro/update-deps
+ * Remove unused file
+ * Update deps
+ * Merge pull request #687 from Ilhasoft/feat/add-macedonia-flag
+ * Merge pull request #686 from rapidpro/translations_django-po--master_mk_MK
+ * Merge pull request #688 from rapidpro/dependabot/npm_and_yarn/y18n-4.0.1
+ * Bump y18n from 4.0.0 to 4.0.1
+ * Add macedonia flag
+ * Apply translations in mk_MK
+ * Merge pull request #685 from rapidpro/translations_django-po--master_mk_MK
+ * Run code checks
+ * Apply translations in mk_MK
+
+v1.1.218
+----------
+ * Bump elliptic from 6.5.3 to 6.5.4
+ * Add Solomon Islands flag
+
 v1.1.217
 ----------
- * Recreating Dockerfile
-
+ * Merge pull request #666 from rapidpro/panama-flag
+ * Update README.md
+ * Merge pull request #681 from Ilhasoft/feature/macedonia-language
+ * feat: Added Macedonian language
+ * Add Panama icon
 
 v1.1.216
 ----------
