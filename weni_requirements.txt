@@ -3,3 +3,4 @@ raven==6.9.0
 typed-ast==1.4.1
 toml==0.10.1
 whitenoise==4.1.2
+elastic-apm==6.1.1

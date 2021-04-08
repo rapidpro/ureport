@@ -55,7 +55,9 @@ EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 
 MANAGERS = ADMINS
 
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat', 'storages')
+INSTALLED_APPS = INSTALLED_APPS + (
+    'gunicorn', 'raven.contrib.django.raven_compat', 'storages', 'elasticapm.contrib.django'
+)
 
 # Set your DSN value
 sentry_sdk.init(
@@ -96,6 +98,8 @@ DATABASES['default']['CONN_MAX_AGE'] = 60
 
 # no debug toolbar in prod
 MIDDLEWARE = (
+    'elasticapm.contrib.django.middleware.TracingMiddleware',
+    'elasticapm.contrib.django.middleware.Catch404Middleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -104,7 +108,7 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'smartmin.middleware.AjaxRedirect',
     'django.middleware.locale.LocaleMiddleware',
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'dash.orgs.middleware.SetOrgMiddleware',
 )
 
@@ -129,6 +133,10 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.NullHandler',
         },
+        'elasticapm': {
+            'level': 'WARNING',
+            'class': 'elasticapm.contrib.django.handlers.LoggingHandler',
+        },
     },
     'loggers': {
         'django.db.backends': {
@@ -145,7 +153,23 @@ LOGGING = {
             'handlers': ['null'],
             'propagate': False,
         },
+        'elasticapm.errors': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
     },
+}
+
+ELASTIC_APM = {
+    "SERVICE_NAME": config("APM_SERVICE_NAME", default=""),
+    "SECRET_TOKEN": config("APM_SECRET_TOKEN", default=""),
+    "DISABLE_SEND": config("APM_DISABLE_SEND", default=False, cast=bool),
+    "DEBUG": config("APM_SERVICE_DEBUG", default=False, cast=bool),
+    "SERVER_URL": config("APM_SERVER_URL", default=""),
+    "ENVIRONMENT": config("APM_SERVICE_ENVIRONMENT", default="production"),
+    "DJANGO_TRANSACTION_NAME_FROM_ROUTE": True,
+    "PROCESSORS": (),
 }
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
