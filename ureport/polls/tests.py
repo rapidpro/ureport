@@ -1594,6 +1594,44 @@ class PollTest(UreportTest):
         self.assertEqual(mock_get_backend.call_args[1], {"backend_slug": "rapidpro"})
         mock_pull_results.assert_called_once()
 
+    @patch("ureport.polls.tasks.pull_refresh_from_archives.apply_async")
+    @patch("ureport.polls.models.Poll.get_flow_date")
+    @patch("dash.orgs.models.Org.get_backend")
+    @patch("ureport.tests.TestBackend.pull_results")
+    def test_poll_pull_results_old_flows(
+        self, mock_pull_results, mock_get_backend, mock_poll_flow_date, mock_pull_refresh_from_archives_task
+    ):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+
+        mock_poll_flow_date.return_value = timezone.now() - timedelta(days=88)
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+
+        self.assertFalse(poll.has_synced)
+        Poll.pull_results(poll.pk)
+
+        poll = Poll.objects.get(pk=poll.pk)
+        self.assertTrue(poll.has_synced)
+
+        self.assertFalse(mock_pull_refresh_from_archives_task.called)
+
+        poll.has_synced = False
+        poll.save()
+
+        mock_pull_results.reset_mock()
+        mock_poll_flow_date.return_value = timezone.now() - timedelta(days=91)
+
+        self.assertFalse(poll.has_synced)
+        Poll.pull_results(poll.pk)
+
+        poll = Poll.objects.get(pk=poll.pk)
+        self.assertTrue(poll.has_synced)
+
+        mock_pull_refresh_from_archives_task.assert_called_once_with((poll.pk,), queue="sync")
+
+        self.assertEqual(mock_get_backend.call_args[1], {"backend_slug": "rapidpro"})
+        mock_pull_results.assert_called_once()
+
 
 class PollQuestionTest(UreportTest):
     def setUp(self):
