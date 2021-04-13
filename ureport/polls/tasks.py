@@ -204,9 +204,15 @@ def clear_old_poll_results(org, since, until):
 
     now = timezone.now()
     r = get_redis_connection()
-    time_window = now - timedelta(days=90)
+    syncing_window = now - timedelta(days=90)
+    new_window = now - timedelta(days=14)
 
-    old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window).order_by("pk")
+    old_polls = (
+        Poll.objects.filter(org=org)
+        .exclude(poll_date__gte=syncing_window)
+        .exclude(created_on__gte=new_window)
+        .order_by("pk")
+    )
     for poll in old_polls:
 
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
