@@ -1570,11 +1570,16 @@ class PollTest(UreportTest):
 
         self.assertFalse(PollResult.objects.filter(org=self.nigeria, flow=poll.flow_uuid))
 
+    @patch("ureport.polls.tasks.pull_refresh_from_archives.apply_async")
+    @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.Org.get_backend")
     @patch("ureport.tests.TestBackend.pull_results")
-    def test_poll_pull_results(self, mock_pull_results, mock_get_backend):
+    def test_poll_pull_results(
+        self, mock_pull_results, mock_get_backend, mock_poll_flow_date, mock_pull_refresh_from_archives_task
+    ):
         mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_poll_flow_date.return_value = None
 
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
@@ -1583,6 +1588,46 @@ class PollTest(UreportTest):
 
         poll = Poll.objects.get(pk=poll.pk)
         self.assertTrue(poll.has_synced)
+
+        mock_pull_refresh_from_archives_task.assert_called_once_with((poll.pk,), queue="sync")
+
+        self.assertEqual(mock_get_backend.call_args[1], {"backend_slug": "rapidpro"})
+        mock_pull_results.assert_called_once()
+
+    @patch("ureport.polls.tasks.pull_refresh_from_archives.apply_async")
+    @patch("ureport.polls.models.Poll.get_flow_date")
+    @patch("dash.orgs.models.Org.get_backend")
+    @patch("ureport.tests.TestBackend.pull_results")
+    def test_poll_pull_results_old_flows(
+        self, mock_pull_results, mock_get_backend, mock_poll_flow_date, mock_pull_refresh_from_archives_task
+    ):
+        mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
+        mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+
+        mock_poll_flow_date.return_value = timezone.now() - timedelta(days=88)
+        poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
+
+        self.assertFalse(poll.has_synced)
+        Poll.pull_results(poll.pk)
+
+        poll = Poll.objects.get(pk=poll.pk)
+        self.assertTrue(poll.has_synced)
+
+        self.assertFalse(mock_pull_refresh_from_archives_task.called)
+
+        poll.has_synced = False
+        poll.save()
+
+        mock_pull_results.reset_mock()
+        mock_poll_flow_date.return_value = timezone.now() - timedelta(days=91)
+
+        self.assertFalse(poll.has_synced)
+        Poll.pull_results(poll.pk)
+
+        poll = Poll.objects.get(pk=poll.pk)
+        self.assertTrue(poll.has_synced)
+
+        mock_pull_refresh_from_archives_task.assert_called_once_with((poll.pk,), queue="sync")
 
         self.assertEqual(mock_get_backend.call_args[1], {"backend_slug": "rapidpro"})
         mock_pull_results.assert_called_once()
@@ -2851,13 +2896,15 @@ class PollsTasksTest(UreportTest):
         self.create_poll(self.nigeria, "Poll 4", "", self.education_nigeria, self.admin, has_synced=False)
         self.create_poll(self.nigeria, "Poll 5", "", self.education_nigeria, self.admin, has_synced=True)
 
+    @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.Org.get_backend")
     @patch("ureport.tests.TestBackend.pull_results")
     @patch("ureport.polls.models.Poll.get_main_poll")
-    def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results, mock_get_backend):
+    def test_pull_results_main_poll(self, mock_get_main_poll, mock_pull_results, mock_get_backend, mock_get_flow_date):
         mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_get_main_poll.return_value = self.poll
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_get_flow_date.return_value = None
 
         pull_results_main_poll(self.nigeria.pk)
 
@@ -2874,13 +2921,17 @@ class PollsTasksTest(UreportTest):
             },
         )
 
+    @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.Org.get_backend")
     @patch("ureport.tests.TestBackend.pull_results")
     @patch("ureport.polls.models.Poll.get_brick_polls_ids")
-    def test_pull_results_brick_polls(self, mock_get_brick_polls_ids, mock_pull_results, mock_get_backend):
+    def test_pull_results_brick_polls(
+        self, mock_get_brick_polls_ids, mock_pull_results, mock_get_backend, mock_get_flow_date
+    ):
         mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_get_brick_polls_ids.return_value = [poll.pk for poll in self.polls_query]
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_get_flow_date.return_value = None
 
         pull_results_brick_polls(self.nigeria.pk)
 
@@ -2908,15 +2959,19 @@ class PollsTasksTest(UreportTest):
         self.assertEqual(task_state.get_last_results(), {})
         mock_pull_results.assert_called_once()
 
+    @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.Org.get_backend")
     @patch("django.core.cache.cache.get")
     @patch("ureport.tests.TestBackend.pull_results")
     @patch("ureport.polls.models.Poll.get_other_polls")
-    def test_pull_results_other_polls(self, mock_get_other_polls, mock_pull_results, mock_cache_get, mock_get_backend):
+    def test_pull_results_other_polls(
+        self, mock_get_other_polls, mock_pull_results, mock_cache_get, mock_get_backend, mock_get_flow_date
+    ):
         mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_get_other_polls.return_value = self.polls_query
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
         mock_cache_get.return_value = None
+        mock_get_flow_date.return_value = None
 
         self.poll.created_on = timezone.now() - timedelta(days=8)
         self.poll.save()
@@ -2947,11 +3002,13 @@ class PollsTasksTest(UreportTest):
         self.assertEqual(task_state.get_last_results(), {})
         mock_pull_results.assert_called_once()
 
+    @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.Org.get_backend")
     @patch("ureport.tests.TestBackend.pull_results")
-    def test_backfill_poll_results(self, mock_pull_results, mock_get_backend):
+    def test_backfill_poll_results(self, mock_pull_results, mock_get_backend, mock_get_flow_date):
         mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
+        mock_get_flow_date.return_value = None
 
         self.poll.has_synced = True
         self.poll.save()

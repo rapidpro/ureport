@@ -199,6 +199,13 @@ class Poll(SmartModel):
         poll = Poll.objects.get(pk=poll_id)
         backend = poll.org.get_backend(backend_slug=poll.backend.slug)
 
+        flow_date = poll.get_flow_date()
+
+        if (flow_date is None or (flow_date + timedelta(days=90) < timezone.now())) and not poll.has_synced:
+            from ureport.polls.tasks import pull_refresh_from_archives
+
+            pull_refresh_from_archives.apply_async((poll.pk,), queue="sync")
+
         (
             num_val_created,
             num_val_updated,
@@ -545,6 +552,10 @@ class Poll(SmartModel):
         """
         flows_dict = self.org.get_flows(backend=self.backend)
         return flows_dict.get(self.flow_uuid, None)
+
+    def get_flow_date(self):
+        flow = self.get_flow()
+        return flow.get("created_on", None) if flow else None
 
     def update_or_create_questions(self, user=None):
         if not user:
