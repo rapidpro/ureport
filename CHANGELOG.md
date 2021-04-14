@@ -1,3 +1,9 @@
+v1.1.223
+----------
+ * Merge pull request #698 from rapidpro/fix-boundaries-url
+ * Run code checks
+ * Add support for hyphens and underscore in osm IDs for boundaries URLs
+
 v1.1.222
 ----------
  * Merge pull request #697 from rapidpro/fix-date-format
