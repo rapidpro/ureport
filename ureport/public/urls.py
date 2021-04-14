@@ -46,7 +46,7 @@ urlpatterns = [
     ),
     url(r"^boundaries/$", cache_page(60 * 30)(BoundaryView.as_view()), {}, "public.boundaries"),
     url(
-        r"^boundaries/(?P<osm_id>[a-zA-Z0-9]+)/$",
+        r"^boundaries/(?P<osm_id>[a-zA-Z0-9_-]+)/$",
         cache_page(60 * 30)(BoundaryView.as_view()),
         {},
         "public.boundaries",

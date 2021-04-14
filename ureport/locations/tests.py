@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import json
 
 from mock import Mock, patch
+from django.urls import reverse
 
 from ureport.tests import UreportTest
 
@@ -67,6 +68,9 @@ class LocationTest(UreportTest):
         expected["R-NIGERIA"] = "Nigeria"
 
         self.assertEqual(Boundary.get_org_top_level_boundaries_name(self.nigeria), expected)
+
+        self.assertEqual(reverse("public.boundaries", args=["R-Nigeria"]), "/boundaries/R-Nigeria/")
+        self.assertEqual(reverse("public.boundaries", args=["232_23"]), "/boundaries/232_23/")
 
     def test_build_global_boundaries(self):
         with patch("ureport.locations.models.open") as my_mock:
