@@ -1,3 +1,10 @@
+v1.1.221
+----------
+ * Merge pull request #696 from rapidpro/adding-poll-from-flow-archived-results
+ * More tests
+ * Update django
+ * Pull results from archives for really old flow polls
+
 v1.1.220
 ----------
  * Merge pull request #691 from rapidpro/update-dash
