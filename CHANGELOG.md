@@ -1,3 +1,8 @@
+v1.1.222
+----------
+ * Merge pull request #697 from rapidpro/fix-date-format
+ * Fix to handle flow date as a json datetime
+
 v1.1.221
 ----------
  * Merge pull request #696 from rapidpro/adding-poll-from-flow-archived-results
