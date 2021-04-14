@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import json
 
 from mock import Mock, patch
+
 from django.urls import reverse
 
 from ureport.tests import UreportTest
