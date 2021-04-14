@@ -196,12 +196,19 @@ class Poll(SmartModel):
 
     @classmethod
     def pull_results(cls, poll_id):
+        from ureport.utils import json_date_to_datetime
+
         poll = Poll.objects.get(pk=poll_id)
         backend = poll.org.get_backend(backend_slug=poll.backend.slug)
 
-        flow_date = poll.get_flow_date()
+        flow_date_json = poll.get_flow_date()
+        now = timezone.now()
 
-        if (flow_date is None or (flow_date + timedelta(days=90) < timezone.now())) and not poll.has_synced:
+        has_archives_results = flow_date_json is None or (
+            json_date_to_datetime(flow_date_json) + timedelta(days=90) < now
+        )
+
+        if has_archives_results and not poll.has_synced:
             from ureport.polls.tasks import pull_refresh_from_archives
 
             pull_refresh_from_archives.apply_async((poll.pk,), queue="sync")

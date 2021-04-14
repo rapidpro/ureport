@@ -1604,7 +1604,7 @@ class PollTest(UreportTest):
         mock_get_backend.return_value = TestBackend(self.rapidpro_backend)
         mock_pull_results.return_value = (1, 2, 3, 4, 5, 6)
 
-        mock_poll_flow_date.return_value = timezone.now() - timedelta(days=88)
+        mock_poll_flow_date.return_value = datetime_to_json_date(timezone.now() - timedelta(days=88))
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
         self.assertFalse(poll.has_synced)
@@ -1619,7 +1619,7 @@ class PollTest(UreportTest):
         poll.save()
 
         mock_pull_results.reset_mock()
-        mock_poll_flow_date.return_value = timezone.now() - timedelta(days=91)
+        mock_poll_flow_date.return_value = datetime_to_json_date(timezone.now() - timedelta(days=91))
 
         self.assertFalse(poll.has_synced)
         Poll.pull_results(poll.pk)
