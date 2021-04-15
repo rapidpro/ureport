@@ -1,3 +1,8 @@
+v1.1.224
+----------
+ * Merge pull request #699 from rapidpro/fix-clear-results
+ * Log error for clearing results, and continue for other polls
+
 v1.1.223
 ----------
  * Merge pull request #698 from rapidpro/fix-boundaries-url
