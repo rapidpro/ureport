@@ -222,14 +222,20 @@ def clear_old_poll_results(org, since, until):
             )
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
-                # one last stats rebuild for the poll
-                poll.rebuild_poll_results_counts()
+                try:
+                    # one last stats rebuild for the poll
+                    poll.rebuild_poll_results_counts()
 
-                if not poll.stopped_syncing:
-                    poll.delete_poll_results()
-                    Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
-                    logger.info(
-                        "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
+                    if not poll.stopped_syncing:
+                        poll.delete_poll_results()
+                        Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
+                        logger.info(
+                            "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
+                        )
+                except Exception:
+                    logger.error(
+                        "Error clearing old poll results for poll #%s on org #%s" % (poll.id, poll.org_id),
+                        extra={"stack": True},
                     )
 
 
