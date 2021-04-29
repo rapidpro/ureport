@@ -1,3 +1,8 @@
+v1.1.225
+----------
+ * Merge pull request #702 from rapidpro/fix-colors-poll-status-message
+ * Fix primary  color, adjust poll status message
+
 v1.1.224
 ----------
  * Merge pull request #699 from rapidpro/fix-clear-results
