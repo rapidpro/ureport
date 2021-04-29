@@ -204,7 +204,7 @@ def clear_old_poll_results(org, since, until):
 
     now = timezone.now()
     r = get_redis_connection()
-    syncing_window = now - timedelta(days=90)
+    syncing_window = now - timedelta(days=365)
     new_window = now - timedelta(days=14)
 
     old_polls = (
