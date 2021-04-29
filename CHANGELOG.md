@@ -1,3 +1,8 @@
+v1.1.227
+----------
+ * Merge pull request #705 from rapidpro/adjust-sync-schedule-message
+ * Adjust message for sync schedule
+
 v1.1.226
 ----------
  * Merge pull request #701 from rapidpro/translations_django-po--master_hr_HR
