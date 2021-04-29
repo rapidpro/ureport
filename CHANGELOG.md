@@ -1,3 +1,15 @@
+v1.1.226
+----------
+ * Merge pull request #701 from rapidpro/translations_django-po--master_hr_HR
+ * Merge pull request #704 from rapidpro/keep-results-longer
+ * Run code checks
+ * Merge branch 'translations_django-po--master_hr_HR' of github.com:rapidpro/ureport into translations_django-po--master_hr_HR
+ * Merge pull request #703 from rapidpro/better-indexes
+ * Keep poll results for up to a year syncing from RapidPro
+ * Run code checks
+ * Add partial indexes
+ * Apply translations in hr_HR
+
 v1.1.225
 ----------
  * Merge pull request #702 from rapidpro/fix-colors-poll-status-message
