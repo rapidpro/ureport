@@ -1,3 +1,9 @@
+v1.1.228
+----------
+ * Merge pull request #706 from rapidpro/update-district-caches
+ * Run code checks
+ * Update district poll results cache
+
 v1.1.227
 ----------
  * Merge pull request #705 from rapidpro/adjust-sync-schedule-message
