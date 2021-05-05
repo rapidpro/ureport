@@ -196,8 +196,22 @@ class Poll(SmartModel):
 
     @classmethod
     def pull_results(cls, poll_id):
+        from ureport.utils import json_date_to_datetime
+
         poll = Poll.objects.get(pk=poll_id)
         backend = poll.org.get_backend(backend_slug=poll.backend.slug)
+
+        flow_date_json = poll.get_flow_date()
+        now = timezone.now()
+
+        has_archives_results = flow_date_json is None or (
+            json_date_to_datetime(flow_date_json) + timedelta(days=90) < now
+        )
+
+        if has_archives_results and not poll.has_synced:
+            from ureport.polls.tasks import pull_refresh_from_archives
+
+            pull_refresh_from_archives.apply_async((poll.pk,), queue="sync")
 
         (
             num_val_created,
@@ -279,6 +293,8 @@ class Poll(SmartModel):
             question.calculate_results(segment=dict(age="Age"))
             question.calculate_results(segment=dict(gender="Gender"))
 
+        self.update_poll_participation_maps_cache()
+
     def update_questions_results_cache_task(self):
         from ureport.polls.tasks import update_questions_results_cache
 
@@ -287,6 +303,16 @@ class Poll(SmartModel):
     def update_question_word_clouds(self):
         for question in self.questions.all():
             question.generate_word_cloud()
+
+    def update_poll_participation_maps_cache(self):
+        top_question = self.get_questions().first()
+        org = self.org
+        states = org.get_segment_org_boundaries({"location": "State"})
+        for state in states:
+            top_question.calculate_results(segment=dict(location="District", parent=state["osm_id"]))
+            districts = org.get_segment_org_boundaries(dict(location="state", parent=state["osm_id"]))
+            for district in districts:
+                top_question.calculate_results(segment=dict(location="Ward", parent=district["osm_id"]))
 
     @classmethod
     def pull_poll_results_task(cls, poll):
@@ -323,7 +349,13 @@ class Poll(SmartModel):
         if self.stopped_syncing:
             flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=True)
             for flow_poll in flow_polls:
-                flow_poll.update_questions_results_cache()
+                if flow_poll.is_active:
+                    flow_poll.update_questions_results_cache()
+                else:
+                    logger.info(
+                        "Skipping rebuilding results counts for inactive poll #%d on org #%d"
+                        % (flow_poll.pk, flow_poll.org_id)
+                    )
 
             logger.info("Poll stopped regenating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
             return
@@ -545,6 +577,10 @@ class Poll(SmartModel):
         """
         flows_dict = self.org.get_flows(backend=self.backend)
         return flows_dict.get(self.flow_uuid, None)
+
+    def get_flow_date(self):
+        flow = self.get_flow()
+        return flow.get("created_on", None) if flow else None
 
     def update_or_create_questions(self, user=None):
         if not user:

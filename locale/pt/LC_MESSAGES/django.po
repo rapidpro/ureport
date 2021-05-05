@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 09:48+0000\n"
+"POT-Creation-Date: 2021-04-29 21:28+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -843,13 +843,13 @@ msgstr[1] "Perguntas do Inquérito"
 msgid "New poll initial syncs scheduled every 10min"
 msgstr ""
 
-msgid "Main poll syncs scheduled every 10min"
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
 msgstr ""
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
-
-msgid "No longer scheduling syncs, runs archived"
 msgstr ""
 
 msgid "Poll syncs scheduled every 24h"

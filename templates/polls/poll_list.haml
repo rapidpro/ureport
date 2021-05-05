@@ -73,15 +73,14 @@
           %td
             -if obj in unsynced_polls
               - trans "New poll initial syncs scheduled every 10min"
+            -elif obj.stopped_syncing
+              -trans "No longer scheduling syncs for old polls, runs archived"
             -elif obj == main_poll
-              - trans "Main poll syncs scheduled every 10min"
+              - trans "Main poll syncs scheduled every 20min"
             -elif obj in recent_polls
               - trans "Recent poll syncs scheduled every 60min"
             -elif obj in other_polls or obj.id in brick_polls_ids
-              -if obj.stopped_syncing
-                -trans "No longer scheduling syncs, runs archived"
-              - else
-                - trans "Poll syncs scheduled every 24h"
+              - trans "Poll syncs scheduled every 24h"
             -elif not obj.is_active
               -trans "Not scheduling syncs, not active"
             -elif not obj.flow_uuid

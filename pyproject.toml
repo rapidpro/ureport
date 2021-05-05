@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "ureport"
-version = "1.1.220"
+version = "1.1.230"
 description = "U-Report dashboard built on data collected by RapidPro"
 authors = ["Nyaruka Ltd <code@nyaruka.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6"
-Django = "~2.2.13"
+Django = "~2.2.20"
 smartmin = "~2.3.2"
 rapidpro-dash = "~1.6.0"
 colorama = "^0.4.3"

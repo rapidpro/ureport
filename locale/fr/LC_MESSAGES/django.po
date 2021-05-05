@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 09:48+0000\n"
+"POT-Creation-Date: 2021-04-29 21:28+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Jesus EKIE <jesus@fehudigital.com>, 2020\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -843,14 +843,18 @@ msgstr[1] "%(counter)s questions de sondage"
 msgid "New poll initial syncs scheduled every 10min"
 msgstr "Nouvelles synchronisations initiales du sondage planifiées toutes les 10 minutes"
 
-msgid "Main poll syncs scheduled every 10min"
+#, fuzzy
+#| msgid "No longer scheduling syncs, runs archived"
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr "Ne plus planifier les synchronisations, exécutions archivées"
+
+#, fuzzy
+#| msgid "Main poll syncs scheduled every 10min"
+msgid "Main poll syncs scheduled every 20min"
 msgstr "Synchronisation du sondage principal programmée toutes les 10 minutes"
 
 msgid "Recent poll syncs scheduled every 60min"
 msgstr "Synchronisations de sondages récentes planifiées toutes les 60 minutes"
-
-msgid "No longer scheduling syncs, runs archived"
-msgstr "Ne plus planifier les synchronisations, exécutions archivées"
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Synchronisation des sondages programmée toutes les 24h"

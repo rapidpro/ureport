@@ -449,7 +449,12 @@ class RapidProBackend(BaseBackend):
             )
 
         with r.lock(key):
-            first = poll.poll_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            flow_date_json = poll.get_flow_date()
+            first = (
+                json_date_to_datetime(flow_date_json).replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+                if flow_date_json
+                else None
+            )
 
             client = self._get_client(org, 2)
 

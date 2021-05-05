@@ -1719,10 +1719,13 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.text, "We'll win today")
 
     @patch("redis.client.StrictRedis.lock")
+    @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.TembaClient.get_archives")
     @patch("django.utils.timezone.now")
     @patch("requests.get")
-    def test_pull_results_from_archives(self, mock_request_get, mock_timezone_now, mock_get_archives, mock_redis_lock):
+    def test_pull_results_from_archives(
+        self, mock_request_get, mock_timezone_now, mock_get_archives, mock_poll_flow_date, mock_redis_lock
+    ):
         def gzipped_records(records):
             stream = io.BytesIO()
             gz = gzip.GzipFile(fileobj=stream, mode="wb")
@@ -1736,6 +1739,8 @@ class RapidProBackendTest(UreportTest):
 
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
+
+        mock_poll_flow_date.return_value = None
 
         PollResult.objects.all().delete()
         Contact.objects.create(
@@ -1805,9 +1810,7 @@ class RapidProBackendTest(UreportTest):
             (1, 0, 0, 0, 0, 1),
         )
 
-        mock_get_archives.assert_called_with(
-            archive_type="run", after=now_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        )
+        mock_get_archives.assert_called_with(archive_type="run", after=None)
         mock_redis_lock.assert_called_once_with(Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid))
 
         poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()

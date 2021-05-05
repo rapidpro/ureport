@@ -1,3 +1,64 @@
+v1.1.230
+----------
+ * Merge pull request #708 from rapidpro/fix-top-question-lookup
+ * Skip rebuilding stats for inactive polls
+
+v1.1.229
+----------
+ * Merge pull request #707 from rapidpro/fix-top-question-lookup
+ * Fix top question lookup
+
+v1.1.228
+----------
+ * Merge pull request #706 from rapidpro/update-district-caches
+ * Run code checks
+ * Update district poll results cache
+
+v1.1.227
+----------
+ * Merge pull request #705 from rapidpro/adjust-sync-schedule-message
+ * Adjust message for sync schedule
+
+v1.1.226
+----------
+ * Merge pull request #701 from rapidpro/translations_django-po--master_hr_HR
+ * Merge pull request #704 from rapidpro/keep-results-longer
+ * Run code checks
+ * Merge branch 'translations_django-po--master_hr_HR' of github.com:rapidpro/ureport into translations_django-po--master_hr_HR
+ * Merge pull request #703 from rapidpro/better-indexes
+ * Keep poll results for up to a year syncing from RapidPro
+ * Run code checks
+ * Add partial indexes
+ * Apply translations in hr_HR
+
+v1.1.225
+----------
+ * Merge pull request #702 from rapidpro/fix-colors-poll-status-message
+ * Fix primary  color, adjust poll status message
+
+v1.1.224
+----------
+ * Merge pull request #699 from rapidpro/fix-clear-results
+ * Log error for clearing results, and continue for other polls
+
+v1.1.223
+----------
+ * Merge pull request #698 from rapidpro/fix-boundaries-url
+ * Run code checks
+ * Add support for hyphens and underscore in osm IDs for boundaries URLs
+
+v1.1.222
+----------
+ * Merge pull request #697 from rapidpro/fix-date-format
+ * Fix to handle flow date as a json datetime
+
+v1.1.221
+----------
+ * Merge pull request #696 from rapidpro/adding-poll-from-flow-archived-results
+ * More tests
+ * Update django
+ * Pull results from archives for really old flow polls
+
 v1.1.220
 ----------
  * Merge pull request #691 from rapidpro/update-dash

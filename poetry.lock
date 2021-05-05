@@ -209,7 +209,7 @@ python-versions = "*"
 
 [[package]]
 name = "django"
-version = "2.2.19"
+version = "2.2.20"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
@@ -1006,7 +1006,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "b5dcdf5d68714bb83e5778466586ab9e0cc513822be392951991a83b11644f6f"
+content-hash = "1d40eed46ac15071d9f35640dc54a9237e4b7531583f4cc08a8c9435be75bd3b"
 
 [metadata.files]
 amqp = [
@@ -1103,8 +1103,8 @@ dj-database-url = [
     {file = "dj_database_url-0.5.0-py2.py3-none-any.whl", hash = "sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9"},
 ]
 django = [
-    {file = "Django-2.2.19-py3-none-any.whl", hash = "sha256:e319a7164d6d30cb177b3fd74d02c52f1185c37304057bb76d74047889c605d9"},
-    {file = "Django-2.2.19.tar.gz", hash = "sha256:30c235dec87e05667597e339f194c9fed6c855bda637266ceee891bf9093da43"},
+    {file = "Django-2.2.20-py3-none-any.whl", hash = "sha256:2484f115891ab1a0e9ae153602a641fbc15d7894c036d79fb78662c0965d7954"},
+    {file = "Django-2.2.20.tar.gz", hash = "sha256:2569f9dc5f8e458a5e988b03d6b7a02bda59b006d6782f4ea0fd590ed7336a64"},
 ]
 django-appconf = [
     {file = "django-appconf-1.0.4.tar.gz", hash = "sha256:be58deb54a43d77d2e1621fe59f787681376d3cd0b8bd8e4758ef6c3a6453380"},
