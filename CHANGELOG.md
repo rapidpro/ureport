@@ -1,3 +1,8 @@
+v1.1.230
+----------
+ * Merge pull request #708 from rapidpro/fix-top-question-lookup
+ * Skip rebuilding stats for inactive polls
+
 v1.1.229
 ----------
  * Merge pull request #707 from rapidpro/fix-top-question-lookup
