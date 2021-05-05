@@ -293,6 +293,8 @@ class Poll(SmartModel):
             question.calculate_results(segment=dict(age="Age"))
             question.calculate_results(segment=dict(gender="Gender"))
 
+        self.update_poll_participation_maps_cache()
+
     def update_questions_results_cache_task(self):
         from ureport.polls.tasks import update_questions_results_cache
 
@@ -301,6 +303,16 @@ class Poll(SmartModel):
     def update_question_word_clouds(self):
         for question in self.questions.all():
             question.generate_word_cloud()
+
+    def update_poll_participation_maps_cache(self):
+        question = self.get_first_question()
+        org = self.org
+        states = org.get_segment_org_boundaries({"location": "State"})
+        for state in states:
+            question.calculate_results(segment=dict(location="District", parent=state["osm_id"]))
+            districts = org.get_segment_org_boundaries(dict(location="state", parent=state["osm_id"]))
+            for district in districts:
+                question.calculate_results(segment=dict(location="Ward", parent=district["osm_id"]))
 
     @classmethod
     def pull_poll_results_task(cls, poll):

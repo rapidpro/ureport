@@ -849,7 +849,7 @@ def get_segment_org_boundaries(org, segment):
     if not segment:
         return location_boundaries
 
-    if segment.get("location") == "District":
+    if segment.get("location").lower() == "district":
         state_id = segment.get("parent", None)
         if state_id:
             location_boundaries = (
@@ -858,7 +858,7 @@ def get_segment_org_boundaries(org, segment):
                 .order_by("osm_id")
             )
 
-    elif segment.get("location") == "Ward":
+    elif segment.get("location").lower() == "ward":
         district_id = segment.get("parent", None)
         if district_id:
             location_boundaries = (
