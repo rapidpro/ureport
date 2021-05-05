@@ -305,14 +305,14 @@ class Poll(SmartModel):
             question.generate_word_cloud()
 
     def update_poll_participation_maps_cache(self):
-        question = self.get_first_question()
+        top_question = self.get_questions().first()
         org = self.org
         states = org.get_segment_org_boundaries({"location": "State"})
         for state in states:
-            question.calculate_results(segment=dict(location="District", parent=state["osm_id"]))
+            top_question.calculate_results(segment=dict(location="District", parent=state["osm_id"]))
             districts = org.get_segment_org_boundaries(dict(location="state", parent=state["osm_id"]))
             for district in districts:
-                question.calculate_results(segment=dict(location="Ward", parent=district["osm_id"]))
+                top_question.calculate_results(segment=dict(location="Ward", parent=district["osm_id"]))
 
     @classmethod
     def pull_poll_results_task(cls, poll):
