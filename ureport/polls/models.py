@@ -349,7 +349,13 @@ class Poll(SmartModel):
         if self.stopped_syncing:
             flow_polls = Poll.objects.filter(org_id=org_id, flow_uuid=flow, stopped_syncing=True)
             for flow_poll in flow_polls:
-                flow_poll.update_questions_results_cache()
+                if flow_poll.is_active:
+                    flow_poll.update_questions_results_cache()
+                else:
+                    logger.info(
+                        "Skipping rebuilding results counts for inactive poll #%d on org #%d"
+                        % (flow_poll.pk, flow_poll.org_id)
+                    )
 
             logger.info("Poll stopped regenating new stats for poll #%d on org #%d" % (self.pk, self.org_id))
             return
