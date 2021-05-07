@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 21:28+0000\n"
+"POT-Creation-Date: 2021-05-07 15:19+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -1774,6 +1774,9 @@ msgstr "Google Analytics Tracking ID cho tổ chức này"
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "URL kênh Youtube cho tổ chức này"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL trang Facebook cho tổ chức này"

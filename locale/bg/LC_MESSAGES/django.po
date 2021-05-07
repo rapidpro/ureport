@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 21:28+0000\n"
+"POT-Creation-Date: 2021-05-07 15:19+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -1651,6 +1651,9 @@ msgstr "ID за проследяване на Google Analytics за тази о�
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "URL към YouTube канала за тази организация"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL към Facebook страницата за тази организация"

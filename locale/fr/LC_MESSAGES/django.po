@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 21:28+0000\n"
+"POT-Creation-Date: 2021-05-07 15:19+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Jesus EKIE <jesus@fehudigital.com>, 2020\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -1630,6 +1630,9 @@ msgstr "ID Google Analytics Tracking pour cette organisation"
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "URL de la chaine Youtube de cette organisation"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL de la page Facebook de cette organisation"

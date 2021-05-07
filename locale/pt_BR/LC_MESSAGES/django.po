@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 21:28+0000\n"
+"POT-Creation-Date: 2021-05-07 15:19+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -1665,6 +1665,9 @@ msgstr "O Rastreamento ID Google Analytics para esta organização"
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "O URL do canal do Youtube para esta organização"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "O URL da página do Facebook para esta organização"
