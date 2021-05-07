@@ -456,6 +456,15 @@ ORG_CONFIG_FIELDS = [
         ),
     ),
     dict(
+        name="facebook_meta_verification",
+        field=dict(
+            help_text=_("The content for the meta tag for Facebook Domain Verification"),
+            label="Facebook Domain Verification",
+            required=False,
+        ),
+        superuser_only=True,
+    ),
+    dict(
         name="facebook_page_url",
         field=dict(
             help_text=_("The URL to the Facebook page for this organization"),
