@@ -250,7 +250,7 @@ class Poll(SmartModel):
         from ureport.stats.models import PollStats
 
         if self.stopped_syncing:
-            logger.error("Poll cannot delete stats for poll #%d on org #%d" % (self.pk, self.org_id))
+            logger.error("Poll cannot delete stats for poll #%d on org #%d" % (self.pk, self.org_id), exc_info=True)
             return
 
         question_ids = self.questions.all().values_list("id", flat=True)
@@ -886,12 +886,14 @@ class PollQuestion(SmartModel):
 
         if getattr(settings, "IS_PROD", False):
             if not segment:
-                logger.error("Question get results without segment cache missed", extra={"stack": True})
+                logger.error("Question get results without segment cache missed", exc_info=True, extra={"stack": True})
             else:
-                logger.error("Question get results cache missed", extra={"stack": True})
+                logger.error("Question get results cache missed", exc_info=True, extra={"stack": True})
 
             if segment and "location" in segment and segment.get("location").lower() == "state":
-                logger.error("Question get results with state segment cache missed", extra={"stack": True})
+                logger.error(
+                    "Question get results with state segment cache missed", exc_info=True, extra={"stack": True}
+                )
 
         return self.calculate_results(segment=segment)
 
@@ -1157,7 +1159,7 @@ class PollQuestion(SmartModel):
         if cached_value:
             return cached_value["results"]
         if getattr(settings, "IS_PROD", False):
-            logger.error("Question get responded cache missed", extra={"stack": True})
+            logger.error("Question get responded cache missed", exc_info=True, extra={"stack": True})
 
         return self.calculate_responded()
 
@@ -1180,7 +1182,7 @@ class PollQuestion(SmartModel):
         if cached_value:
             return cached_value["results"]
         if getattr(settings, "IS_PROD", False):
-            logger.error("Question get responded cache missed", extra={"stack": True})
+            logger.error("Question get responded cache missed", exc_info=True, extra={"stack": True})
 
         return self.calculate_polled()
 

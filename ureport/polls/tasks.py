@@ -233,8 +233,10 @@ def clear_old_poll_results(org, since, until):
                             "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
                         )
                 except Exception:
+
                     logger.error(
                         "Error clearing old poll results for poll #%s on org #%s" % (poll.id, poll.org_id),
+                        exc_info=True,
                         extra={"stack": True},
                     )
 
