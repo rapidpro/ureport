@@ -1,3 +1,8 @@
+v1.1.232
+----------
+ * Merge pull request #710 from rapidpro/add-exc-info-to-error
+ * add execution info on error logging
+
 v1.1.231
 ----------
  * Merge pull request #709 from rapidpro/FB-verification
