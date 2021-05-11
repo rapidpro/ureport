@@ -306,6 +306,9 @@ class Poll(SmartModel):
 
     def update_poll_participation_maps_cache(self):
         top_question = self.get_questions().first()
+        if not top_question:
+            return
+
         org = self.org
         states = org.get_segment_org_boundaries({"location": "State"})
         for state in states:
