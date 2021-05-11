@@ -198,7 +198,7 @@ def pull_results_recent_polls(org, since, until):
     return results_log
 
 
-@org_task("clear-old-poll-results", 60 * 60 * 3)
+@org_task("clear-old-poll-results", 60 * 60 * 5)
 def clear_old_poll_results(org, since, until):
     from .models import Poll
 
