@@ -1,3 +1,8 @@
+v1.1.233
+----------
+ * Merge pull request #711 from rapidpro/fix-errors
+ * Fix errors breaking the clear old results
+
 v1.1.232
 ----------
  * Merge pull request #710 from rapidpro/add-exc-info-to-error
