@@ -440,6 +440,14 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
+        name="google_tag_manager_id",
+        field=dict(
+            help_text=_("The Google Tag Manager ID for this organization"),
+            label="Google Tag Manager ID",
+            required=False,
+        ),
+    ),
+    dict(
         name="google_tracking_id",
         field=dict(
             help_text=_("The Google Analytics Tracking ID for this organization"),
