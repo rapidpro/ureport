@@ -440,6 +440,14 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
+        name="google_tag_manager_id",
+        field=dict(
+            help_text=_("The Google Tag Manager ID for this organization"),
+            label="Google Tag Manager ID",
+            required=False,
+        ),
+    ),
+    dict(
         name="google_tracking_id",
         field=dict(
             help_text=_("The Google Analytics Tracking ID for this organization"),
@@ -930,7 +938,7 @@ CELERYBEAT_SCHEDULE = {
     "rebuild-poll-results-count": {"task": "polls.rebuild_counts", "schedule": crontab(hour=4, minute=0)},
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(hour=4, minute=0),
+        "schedule": crontab(hour=6, minute=0),
         "args": ("ureport.polls.tasks.clear_old_poll_results", "slow"),
     },
     "polls_stats_squash": {
@@ -1404,6 +1412,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_romania.png",
         countries_codes=["ROU"],
         count_link="http://romania.ureport.in/count/",
+    ),
+    dict(
+        name="São Tomé and Príncipe",
+        host="//stp.ureport.in",
+        flag="flag_stp.png",
+        countries_codes=["STP"],
+        count_link="http://stp.ureport.in/count/",
     ),
     dict(
         name="Senegal",

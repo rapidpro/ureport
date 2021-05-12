@@ -189,6 +189,15 @@
       ];
       {% endif %}
 
+    -if org and org|config:"google_tag_manager_id"
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','{{ org|config:"google_tag_manager_id" }}');</script>
+      <!-- End Google Tag Manager -->
+
     -if org|config:"facebook_pixel_id"
       <script>
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -230,6 +239,13 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+
+    - if org and org|config:"google_tag_manager_id"
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ org|config:'google_tag_manager_id' }}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+      <!-- End Google Tag Manager (noscript) -->
 
     .modal.fixed.hidden.z-1.top-0.left-0.w-full.h-full.overwlow-auto.bg-gray-900.export-modal.shadow(style="z-index:900;")
       .modal-content.mx-auto.my-40.p-6.border.border-black.bg-white.sticky.top-45(class="w-3/5")

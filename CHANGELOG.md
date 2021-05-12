@@ -1,3 +1,24 @@
+v1.1.235
+----------
+ * Merge pull request #712 from Ilhasoft/feature/stp-flag
+ * fix: Removed ST from countries_codes
+ * feat: Added São Tomé and Príncipe flag
+
+v1.1.234
+----------
+ * Merge pull request #713 from rapidpro/GTM
+ * Add support for Google Tag Manager
+
+v1.1.233
+----------
+ * Merge pull request #711 from rapidpro/fix-errors
+ * Fix errors breaking the clear old results
+
+v1.1.232
+----------
+ * Merge pull request #710 from rapidpro/add-exc-info-to-error
+ * add execution info on error logging
+
 v1.1.231
 ----------
  * Merge pull request #709 from rapidpro/FB-verification

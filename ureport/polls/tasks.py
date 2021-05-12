@@ -198,7 +198,7 @@ def pull_results_recent_polls(org, since, until):
     return results_log
 
 
-@org_task("clear-old-poll-results", 60 * 60 * 3)
+@org_task("clear-old-poll-results", 60 * 60 * 5)
 def clear_old_poll_results(org, since, until):
     from .models import Poll
 
@@ -233,8 +233,10 @@ def clear_old_poll_results(org, since, until):
                             "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
                         )
                 except Exception:
+
                     logger.error(
                         "Error clearing old poll results for poll #%s on org #%s" % (poll.id, poll.org_id),
+                        exc_info=True,
                         extra={"stack": True},
                     )
 
