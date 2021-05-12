@@ -1409,7 +1409,7 @@ COUNTRY_FLAGS_SITES = [
         name="São Tomé and Príncipe",
         host="//stp.ureport.in",
         flag="flag_stp.png",
-        countries_codes=["STP", "ST"],
+        countries_codes=["STP"],
         count_link="http://stp.ureport.in/count/",
     ),
     dict(
