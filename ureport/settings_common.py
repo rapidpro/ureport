@@ -1414,6 +1414,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://romania.ureport.in/count/",
     ),
     dict(
+        name="São Tomé and Príncipe",
+        host="//stp.ureport.in",
+        flag="flag_stp.png",
+        countries_codes=["STP"],
+        count_link="http://stp.ureport.in/count/",
+    ),
+    dict(
         name="Senegal",
         host="//senegal.ureport.in/",
         flag="flag_senegal.png",
