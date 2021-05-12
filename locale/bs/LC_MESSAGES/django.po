@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-07 15:19+0000\n"
+"POT-Creation-Date: 2021-05-11 21:51+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Benjamin Omerbegović <bomerbegovic@unicef.org>, 2020\n"
 "Language-Team: Bosnian (https://www.transifex.com/rapidpro/teams/226/bs/)\n"
@@ -1744,6 +1744,11 @@ msgstr "Regije koje se prikazuju na mapi"
 
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "Regije koje se prikazuju na mapi za filtriranje rezultata"
+
+#, fuzzy
+#| msgid "The Google Analytics Tracking ID for this organization"
+msgid "The Google Tag Manager ID for this organization"
+msgstr "traking ID na Google analytics za ovu organizaciju"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "traking ID na Google analytics za ovu organizaciju"

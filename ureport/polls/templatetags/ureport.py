@@ -33,7 +33,9 @@ def question_results(question):
     except Exception:
         if getattr(settings, "IS_PROD", False):
             logger.error(
-                "Question get results without segment in template tag raised exception", extra={"stack": True}
+                "Question get results without segment in template tag raised exception",
+                exc_info=True,
+                extra={"stack": True},
             )
         return None
 
@@ -55,7 +57,11 @@ def question_segmented_results(question, field):
             return results
     except Exception:
         if getattr(settings, "IS_PROD", False):
-            logger.error("Question get results with segment in template tag raised exception", extra={"stack": True})
+            logger.error(
+                "Question get results with segment in template tag raised exception",
+                exc_info=True,
+                extra={"stack": True},
+            )
         return None
 
 
