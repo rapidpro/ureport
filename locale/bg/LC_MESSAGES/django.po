@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-07 15:19+0000\n"
+"POT-Creation-Date: 2021-05-11 21:51+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -1640,6 +1640,11 @@ msgstr "Само областите, които да бъдат показани
 
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "Картите с показаните области, които се използват за филтриране на резултатите от допитването"
+
+#, fuzzy
+#| msgid "The Google Analytics Tracking ID for this organization"
+msgid "The Google Tag Manager ID for this organization"
+msgstr "ID за проследяване на Google Analytics за тази организация"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "ID за проследяване на Google Analytics за тази организация"

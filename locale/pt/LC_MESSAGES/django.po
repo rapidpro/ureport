@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-07 15:19+0000\n"
+"POT-Creation-Date: 2021-05-11 21:51+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -1698,6 +1698,11 @@ msgstr ""
 
 msgid "The states to show on maps only, used to filter poll results"
 msgstr ""
+
+#, fuzzy
+#| msgid "The name of this organization"
+msgid "The Google Tag Manager ID for this organization"
+msgstr "O nome desta organização"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr ""

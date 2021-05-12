@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-07 15:19+0000\n"
+"POT-Creation-Date: 2021-05-11 21:51+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -1654,6 +1654,11 @@ msgstr "Os estados a serem mostrados apenas nos mapas"
 
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "Os estados a serem exibidos apenas nos mapas, usados ​​para filtrar os resultados da pesquisa"
+
+#, fuzzy
+#| msgid "The Google Analytics Tracking ID for this organization"
+msgid "The Google Tag Manager ID for this organization"
+msgstr "O Rastreamento ID Google Analytics para esta organização"
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "O Rastreamento ID Google Analytics para esta organização"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-07 15:19+0000\n"
+"POT-Creation-Date: 2021-05-11 21:51+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -1652,6 +1652,11 @@ msgstr "বিভাগগুলো কেবলমাত্র মানচি�
 #| msgid "The states to show on maps only"
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "বিভাগগুলো কেবলমাত্র মানচিত্রে প্রদর্শিত হবে"
+
+#, fuzzy
+#| msgid "The Google Analytics Tracking ID for this organization"
+msgid "The Google Tag Manager ID for this organization"
+msgstr "এই প্রতিষ্ঠান এর গুগল অ্যানালিটিক্স ট্র্যাকিং আইডি "
 
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "এই প্রতিষ্ঠান এর গুগল অ্যানালিটিক্স ট্র্যাকিং আইডি "
