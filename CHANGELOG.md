@@ -1,3 +1,9 @@
+v1.1.235
+----------
+ * Merge pull request #712 from Ilhasoft/feature/stp-flag
+ * fix: Removed ST from countries_codes
+ * feat: Added São Tomé and Príncipe flag
+
 v1.1.234
 ----------
  * Merge pull request #713 from rapidpro/GTM
