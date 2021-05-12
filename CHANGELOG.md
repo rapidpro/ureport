@@ -1,3 +1,8 @@
+v1.1.234
+----------
+ * Merge pull request #713 from rapidpro/GTM
+ * Add support for Google Tag Manager
+
 v1.1.233
 ----------
  * Merge pull request #711 from rapidpro/fix-errors
