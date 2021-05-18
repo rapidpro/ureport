@@ -1253,6 +1253,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://jordan.ureport.in/count/",
     ),
     dict(
+        name="Kenya",
+        host="//kenya.ureport.in/",
+        flag="flag_kenya.png",
+        countries_codes=["KEN"],
+        count_link="http://kenya.ureport.in/count/",
+    ),
+    dict(
         name="Kiribati",
         host="//kiribati.ureport.in/",
         flag="flag_kiribati.png",
