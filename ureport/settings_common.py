@@ -1239,6 +1239,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://ireland.ureport.in/count/",
     ),
     dict(
+        name="Italia",
+        host="//italia.ureport.in",
+        flag="flag_italia.png",
+        countries_codes=["ITA"],
+        count_link="http://italia.ureport.in/count/",
+    ),
+    dict(
         name="Jamaica",
         host="//jamaica.ureport.in/",
         flag="flag_jamaica.png",
