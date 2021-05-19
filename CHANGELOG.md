@@ -1,3 +1,11 @@
+v1.1.236
+----------
+ * Merge pull request #715 from Ilhasoft/feature/italia-flag
+ * fix: Update Italy map
+ * Merge pull request #714 from Ilhasoft/feature/kenya-flag
+ * feat: Add Italia flag
+ * feat: Add Kenya flag
+
 v1.1.235
 ----------
  * Merge pull request #712 from Ilhasoft/feature/stp-flag
