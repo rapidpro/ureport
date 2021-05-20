@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 21:51+0000\n"
+"POT-Creation-Date: 2021-05-20 14:36+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -1559,8 +1559,15 @@ msgstr "Da li ovaj org brojač treba brojati samo iz veze"
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju ZABUM voice lokalno"
 
-msgid "The whatapp number that users will use to contact U-Report if you have one"
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
 msgstr "Whatsapp broj koji će korisnici koristiti da kontaktiraju ZABUM voice ako ga imamo"
+
+#, fuzzy
+#| msgid "The viber username that users will use to contact U-Report if you have one"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgstr "Korisničko ime za Viber koje će korisnici koristiti za kontaktiranje ZABUM voicea, ukoliko je primjenjivo"
 
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Korisničko ime za Viber koje će korisnici koristiti za kontaktiranje ZABUM voicea, ukoliko je primjenjivo"

@@ -282,8 +282,16 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="whatsapp_number",
         field=dict(
-            help_text=_("The whatapp number that users will use to contact U-Report if you have one"),
-            label="Whatapp Number",
+            help_text=_("The WhatsApp number that users will use to contact U-Report if you have one"),
+            label="WhatApp Number",
+            required=False,
+        ),
+    ),
+    dict(
+        name="telegram_bot",
+        field=dict(
+            help_text=_("The Telegram bot that users will use to contact U-Report if you have one"),
+            label="Telegram Bot",
             required=False,
         ),
     ),
