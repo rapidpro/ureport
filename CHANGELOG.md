@@ -1,3 +1,10 @@
+v1.1.237
+----------
+ * Merge pull request #716 from rapidpro/add-Angola
+ * Merge pull request #717 from rapidpro/add-telegram-bot-config
+ * Add Telegram bot org config
+ * Add Angola icon
+
 v1.1.236
 ----------
  * Merge pull request #715 from Ilhasoft/feature/italia-flag
