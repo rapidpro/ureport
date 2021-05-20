@@ -1276,7 +1276,7 @@ COUNTRY_FLAGS_SITES = [
     ),
     dict(
         name="Kenya",
-        host="//kenya.ureport.in/",
+        host="//yunitok.in/",
         flag="flag_kenya.png",
         countries_codes=["KEN"],
         count_link="http://kenya.ureport.in/count/",
