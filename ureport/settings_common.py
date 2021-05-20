@@ -1002,6 +1002,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://afghanistan.ureport.in/count/",
     ),
     dict(
+        name="Angola",
+        host="//angola.ureport.in",
+        flag="flag_angola.png",
+        countries_codes=["AGO"],
+        count_link="http://angola.ureport.in/count/",
+    ),
+    dict(
         name="Argentina",
         host="//argentina.ureport.in/",
         flag="flag_argentina.png",
