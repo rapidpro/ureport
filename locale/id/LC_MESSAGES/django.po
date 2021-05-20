@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 21:51+0000\n"
+"POT-Creation-Date: 2021-05-20 14:36+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -1683,7 +1683,12 @@ msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
-msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 
 #, fuzzy

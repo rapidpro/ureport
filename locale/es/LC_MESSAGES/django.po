@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 21:51+0000\n"
+"POT-Creation-Date: 2021-05-20 14:36+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: deimidis <guillermo.movia@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -1574,7 +1574,14 @@ msgstr "Cuando esta organización debe solamente contar los enlaces"
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "El código corto que los usuarios deben usar para contactar localmente a U-Report "
 
-msgid "The whatapp number that users will use to contact U-Report if you have one"
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr "El número de whatsapp que los usuarios deben usar para contactar con U-Report si tiene uno"
+
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "El número de whatsapp que los usuarios deben usar para contactar con U-Report si tiene uno"
 
 #, fuzzy

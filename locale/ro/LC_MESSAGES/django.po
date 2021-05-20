@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 21:51+0000\n"
+"POT-Creation-Date: 2021-05-20 14:36+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -1583,7 +1583,14 @@ msgstr "Dacă dacă acest număr de org ar trebui să ia în considerare doar nu
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Numărul scurt pe care utilizatorii îl vor folosi pentru a contacta U-Reporterul la nivel local"
 
-msgid "The whatapp number that users will use to contact U-Report if you have one"
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
+
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Numărul WhatsApp pe care utilizatorii îl vor utiliza pentru a contacta U-Report dacă aveți unul"
 
 #, fuzzy

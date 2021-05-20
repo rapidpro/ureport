@@ -23,7 +23,7 @@
 
   .bg-light1.py-12
     .max-w-page.mx-auto.p-home(class="md:flex")
-      .flex-1
+      .flex-1(class="md:md:w-1/2")
         .text-3xl.font-bold.flex.border-b.border-black.pb-4.mb-4
           .flex-none.flex-center-y
             .bg-circle.bg-black.text-white
@@ -31,8 +31,8 @@
           .pl-4.pr-12.flex-center-y
             -trans "How would you like to join?"
 
-      .flex-1.flex-center-y
-        .text-xl.font-bold.flex.justify-around(class="md:pl-24 md:pr-12")
+      .flex-1.flex-center(class="md:w-1/2")
+        .grid.grid-cols-3.text-xl.font-bold.flex.justify-around(class="md:pl-24 md:pr-12")
           {% if org|config:"shortcode" %}
           .mb-4.text-center(class="md:mx-4")
             %a(href='#text')
@@ -58,6 +58,15 @@
                 %i.fab.fa-whatsapp
             .block
               WhatsApp
+          {% endif %}
+
+          {% if org|config:"telegram_bot" %}
+          .mb-4.text-center(class="md:mx-4")
+            %a(href='https://t.me/{{ org|config:"telegram_bot" }}')
+              .bg-circle-lg.bg-white.text-black.border.border-black
+                %i.fab.fa-telegram
+            .block
+              Telegram
           {% endif %}
 
           {% if org|config:"viber_username" %}
