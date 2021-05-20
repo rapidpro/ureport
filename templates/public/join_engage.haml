@@ -60,6 +60,15 @@
               WhatsApp
           {% endif %}
 
+          {% if org|config:"telegram_bot" %}
+          .mb-4.text-center(class="md:mx-4")
+            %a(href='https://t.me/{{ org|config:"telegram_bot" }}')
+              .bg-circle-lg.bg-white.text-black.border.border-black
+                %i.fab.fa-telegram
+            .block
+              Telegram
+          {% endif %}
+
           {% if org|config:"viber_username" %}
           .mb-4.text-center(class="md:mx-4")
             %a(href='https://chats.viber.com/{{ org|config:"viber_username" }}')

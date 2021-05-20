@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-11 21:51+0000\n"
+"POT-Creation-Date: 2021-05-20 14:36+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -1548,8 +1548,15 @@ msgstr ""
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
 
-msgid "The whatapp number that users will use to contact U-Report if you have one"
-msgstr ""
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
+
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
+msgstr "الرمز الذي سيستعمله المستخدمون للتواصل مع يو-ريبورت محلياً "
 
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
