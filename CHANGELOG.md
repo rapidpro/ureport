@@ -1,3 +1,10 @@
+v1.1.238
+----------
+ * Merge pull request #719 from rapidpro/fix-join-icons
+ * fix join icons to use a grid of 3 cols
+ * Merge pull request #718 from Ilhasoft/hotfix/change-kenya-address
+ * fix to change address from Kenya Ureport
+
 v1.1.237
 ----------
  * Merge pull request #716 from rapidpro/add-Angola
