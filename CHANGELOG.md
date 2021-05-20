@@ -1,3 +1,25 @@
+v1.1.238
+----------
+ * Merge pull request #719 from rapidpro/fix-join-icons
+ * fix join icons to use a grid of 3 cols
+ * Merge pull request #718 from Ilhasoft/hotfix/change-kenya-address
+ * fix to change address from Kenya Ureport
+
+v1.1.237
+----------
+ * Merge pull request #716 from rapidpro/add-Angola
+ * Merge pull request #717 from rapidpro/add-telegram-bot-config
+ * Add Telegram bot org config
+ * Add Angola icon
+
+v1.1.236
+----------
+ * Merge pull request #715 from Ilhasoft/feature/italia-flag
+ * fix: Update Italy map
+ * Merge pull request #714 from Ilhasoft/feature/kenya-flag
+ * feat: Add Italia flag
+ * feat: Add Kenya flag
+
 v1.1.235
 ----------
  * Merge pull request #712 from Ilhasoft/feature/stp-flag

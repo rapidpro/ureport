@@ -282,8 +282,16 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="whatsapp_number",
         field=dict(
-            help_text=_("The whatapp number that users will use to contact U-Report if you have one"),
-            label="Whatapp Number",
+            help_text=_("The WhatsApp number that users will use to contact U-Report if you have one"),
+            label="WhatApp Number",
+            required=False,
+        ),
+    ),
+    dict(
+        name="telegram_bot",
+        field=dict(
+            help_text=_("The Telegram bot that users will use to contact U-Report if you have one"),
+            label="Telegram Bot",
             required=False,
         ),
     ),
@@ -994,6 +1002,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://afghanistan.ureport.in/count/",
     ),
     dict(
+        name="Angola",
+        host="//angola.ureport.in",
+        flag="flag_angola.png",
+        countries_codes=["AGO"],
+        count_link="http://angola.ureport.in/count/",
+    ),
+    dict(
         name="Argentina",
         host="//argentina.ureport.in/",
         flag="flag_argentina.png",
@@ -1239,6 +1254,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://ireland.ureport.in/count/",
     ),
     dict(
+        name="Italia",
+        host="//italia.ureport.in",
+        flag="flag_italia.png",
+        countries_codes=["ITA"],
+        count_link="http://italia.ureport.in/count/",
+    ),
+    dict(
         name="Jamaica",
         host="//jamaica.ureport.in/",
         flag="flag_jamaica.png",
@@ -1251,6 +1273,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_jordan.png",
         countries_codes=["JOR"],
         count_link="http://jordan.ureport.in/count/",
+    ),
+    dict(
+        name="Kenya",
+        host="//yunitok.in/",
+        flag="flag_kenya.png",
+        countries_codes=["KEN"],
+        count_link="http://kenya.ureport.in/count/",
     ),
     dict(
         name="Kiribati",
