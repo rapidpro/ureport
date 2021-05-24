@@ -1,3 +1,10 @@
+v1.1.239
+----------
+ * Merge pull request #722 from Ilhasoft/feature/paraguay-flag
+ * Merge pull request #721 from rapidpro/dependabot/npm_and_yarn/lodash-4.17.21
+ * Add Paraguay flag
+ * Bump lodash from 4.17.19 to 4.17.21
+
 v1.1.238
 ----------
  * Merge pull request #719 from rapidpro/fix-join-icons
