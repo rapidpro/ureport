@@ -1422,6 +1422,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://panama.ureport.in/count/",
     ),
     dict(
+        name="Paraguay",
+        host="//paraguay.ureport.in",
+        flag="flag_paraguay.png",
+        countries_codes=["PAR"],
+        count_link="http://paraguay.ureport.in/count/",
+    ),
+    dict(
         name="Philippines",
         host="//philippines.ureport.in",
         flag="flag_philippines.png",
