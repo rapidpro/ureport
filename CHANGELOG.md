@@ -1,3 +1,8 @@
+v1.1.240
+----------
+ * Merge pull request #723 from rapidpro/add-index-org-question
+ * Add index on poll stats org and question
+
 v1.1.239
 ----------
  * Merge pull request #722 from Ilhasoft/feature/paraguay-flag
