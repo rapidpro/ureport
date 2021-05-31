@@ -1,3 +1,7 @@
+v1.1.242
+----------
+ * Merge pull request #725 from rapidpro/update-js-deps
+
 v1.1.240
 ----------
  * Merge pull request #723 from rapidpro/add-index-org-question
