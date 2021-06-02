@@ -1,3 +1,8 @@
+v1.1.244
+----------
+ * Merge pull request #727 from rapidpro/fix-reported-errors
+ * Fix API endpoint to only accept int IDs
+
 v1.1.243
 ----------
  * Merge pull request #726 from rapidpro/increase-engagement-data-lock-time
