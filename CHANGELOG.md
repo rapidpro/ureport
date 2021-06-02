@@ -1,3 +1,8 @@
+v1.1.243
+----------
+ * Merge pull request #726 from rapidpro/increase-engagement-data-lock-time
+ * Increase lock timeout for refreshing engagement data task
+
 v1.1.242
 ----------
  * Merge pull request #725 from rapidpro/update-js-deps
