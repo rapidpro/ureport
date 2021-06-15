@@ -1,3 +1,8 @@
+v1.1.246
+----------
+ * Merge pull request #731 from rapidpro/contact-pull-on-status
+ * Add a new task status endpoint
+
 v1.1.245
 ----------
  * Merge pull request #730 from rapidpro/icons
