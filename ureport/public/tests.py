@@ -8,10 +8,12 @@ import mock
 import pytz
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import TaskState
 from dash.stories.models import Story
 
 from django.test import override_settings
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.http import urlquote
 
 from ureport.countries.models import CountryAlias
@@ -965,6 +967,17 @@ class PublicTest(UreportTest):
         status_url = reverse("public.status")
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(list(response.json())), 3)
+        self.assertEqual(set(response.json()), set({"redis_up", "db_up", "contact_sync_up"}))
+
+        three_hours_ago = timezone.now() - timedelta(hours=3)
+        TaskState.objects.create(
+            org=self.uganda, task_key="contact-pull", last_successfully_started_on=three_hours_ago, is_disabled=False
+        )
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(len(list(response.json())), 3)
+        self.assertEqual(set(response.json()), set({"redis_up", "db_up", "contact_sync_up"}))
 
     @override_settings(
         COUNTRY_FLAGS_SITES=[

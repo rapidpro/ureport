@@ -5,13 +5,14 @@ import calendar
 import json
 import operator
 from collections import defaultdict
+from datetime import timedelta
 from functools import reduce
 
 import pycountry
 import six
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import Org
+from dash.orgs.models import Org, TaskState
 from dash.stories.models import Story
 from django_redis import get_redis_connection
 from smartmin.views import SmartReadView, SmartTemplateView
@@ -22,7 +23,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q
 from django.http import Http404, HttpResponse
 from django.urls import reverse
-from django.utils import translation
+from django.utils import timezone, translation
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
@@ -586,9 +587,19 @@ def status(request):
     pong = r.get("ping")
     redis_up = pong == b"pong"
 
-    body = json.dumps(dict(db_up=db_up, redis_up=redis_up))
+    two_hour_ago = timezone.now() - timedelta(hours=2)
 
-    if not db_up or not redis_up:
-        return HttpResponse(body, status=500)
+    active_contact_pull_states = TaskState.objects.filter(task_key="contact-pull", is_disabled=False)
+    failing_contact_pull_states = active_contact_pull_states.exclude(
+        last_successfully_started_on__gte=two_hour_ago
+    ).exists()
+
+    contact_sync_up = not failing_contact_pull_states
+
+    body = json.dumps(dict(db_up=db_up, redis_up=redis_up, contact_sync_up=contact_sync_up))
+
+    if not db_up or not redis_up or not contact_sync_up:
+
+        return HttpResponse(body, status=500, content_type="application/json")
     else:
-        return HttpResponse(body, status=200)
+        return HttpResponse(body, status=200, content_type="application/json")
