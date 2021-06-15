@@ -92,6 +92,26 @@ class Count(SmartTemplateView):
         return context
 
 
+class IconsDisplay(SmartTemplateView):
+    template_name = "public/icons.html"
+
+    def has_permission(self, request, *args, **kwargs):
+        return request.user.is_authenticated
+
+    def get_context_data(self, **kwargs):
+        context = super(IconsDisplay, self).get_context_data(**kwargs)
+
+        linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
+        icon_sites = []
+        for elt in linked_sites:
+            if elt.get("show_icon", True) and elt.get("flag", ""):
+
+                icon_sites.append(elt)
+
+        context["icon_sites"] = icon_sites
+        return context
+
+
 class SharedSitesCount(SmartTemplateView):
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
