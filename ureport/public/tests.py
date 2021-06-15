@@ -967,8 +967,23 @@ class PublicTest(UreportTest):
         status_url = reverse("public.status")
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(list(response.json())), 3)
-        self.assertEqual(set(response.json()), set({"redis_up", "db_up", "contact_sync_up"}))
+        self.assertEqual(len(list(response.json())), 2)
+        self.assertEqual(
+            set(response.json()),
+            set(
+                {
+                    "redis_up",
+                    "db_up",
+                }
+            ),
+        )
+
+    def test_task_status_view(self):
+        status_url = reverse("public.task_status")
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(list(response.json())), 1)
+        self.assertEqual(set(response.json()), set({"contact_sync_up"}))
 
         three_hours_ago = timezone.now() - timedelta(hours=3)
         TaskState.objects.create(
@@ -976,8 +991,16 @@ class PublicTest(UreportTest):
         )
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 500)
-        self.assertEqual(len(list(response.json())), 3)
-        self.assertEqual(set(response.json()), set({"redis_up", "db_up", "contact_sync_up"}))
+        self.assertEqual(len(list(response.json())), 2)
+        self.assertEqual(set(response.json()), set({"contact_sync_up", "failing_tasks"}))
+
+        self.uganda.domain = "beta"
+        self.uganda.save()
+
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(list(response.json())), 1)
+        self.assertEqual(set(response.json()), set({"contact_sync_up"}))
 
     @override_settings(
         COUNTRY_FLAGS_SITES=[
