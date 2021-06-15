@@ -607,19 +607,35 @@ def status(request):
     pong = r.get("ping")
     redis_up = pong == b"pong"
 
-    two_hour_ago = timezone.now() - timedelta(hours=2)
+    body = json.dumps(dict(db_up=db_up, redis_up=redis_up))
 
-    active_contact_pull_states = TaskState.objects.filter(task_key="contact-pull", is_disabled=False)
-    failing_contact_pull_states = active_contact_pull_states.exclude(
-        last_successfully_started_on__gte=two_hour_ago
-    ).exists()
-
-    contact_sync_up = not failing_contact_pull_states
-
-    body = json.dumps(dict(db_up=db_up, redis_up=redis_up, contact_sync_up=contact_sync_up))
-
-    if not db_up or not redis_up or not contact_sync_up:
+    if not db_up or not redis_up:
 
         return HttpResponse(body, status=500, content_type="application/json")
     else:
         return HttpResponse(body, status=200, content_type="application/json")
+
+
+def task_status(request):
+    two_hour_ago = timezone.now() - timedelta(hours=2)
+
+    active_contact_pull_states = (
+        TaskState.objects.filter(task_key="contact-pull", is_disabled=False)
+        .exclude(org__is_active=False)
+        .exclude(org__domain__in=["beta", "test"])
+    )
+    failing_contact_pull_states = active_contact_pull_states.exclude(last_successfully_started_on__gte=two_hour_ago)
+
+    contact_sync_up = not failing_contact_pull_states.exists()
+
+    body = dict(contact_sync_up=contact_sync_up)
+
+    if not contact_sync_up:
+        body["failing_tasks"] = [
+            f"{obj.org.name} - {obj.task_key} - {obj.last_successfully_started_on}"
+            for obj in failing_contact_pull_states
+        ]
+
+        return HttpResponse(json.dumps(body), status=500, content_type="application/json")
+    else:
+        return HttpResponse(json.dumps(body), status=200, content_type="application/json")
