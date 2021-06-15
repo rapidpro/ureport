@@ -1149,6 +1149,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://drc.ureport.in/count/",
     ),
     dict(
+        name="Eastern Caribbean Area",
+        host="//eca.ureport.in/",
+        flag="flag_eca.png",
+        countries_codes=["ECA"],
+        count_link="http://eca.ureport.in/count/",
+    ),
+    dict(
         name="Ecuador",
         host="//ecuador.ureport.in/",
         flag="flag_ecuador.png",
