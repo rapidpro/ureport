@@ -1,3 +1,10 @@
+v1.1.245
+----------
+ * Merge pull request #730 from rapidpro/icons
+ * Add view to display icons added are matching the dimensions expected
+ * Merge pull request #729 from rapidpro/contact-pull-on-status
+ * Add contact sync up key to status monitoring endpoint
+
 v1.1.244
 ----------
  * Merge pull request #727 from rapidpro/fix-reported-errors
