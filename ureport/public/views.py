@@ -638,9 +638,11 @@ def task_status(request):
         if obj in failing_contact_pull_states:
             failing_tasks[f"{obj.org.name} - {obj.task_key}"] = f"{obj.last_successfully_started_on}"
 
-    body = dict(contact_sync_up=contact_sync_up, tasks=all_tasks, failing_tasks=failing_tasks)
+    body = json.dumps(
+        dict(contact_sync_up=contact_sync_up, tasks=all_tasks, failing_tasks=failing_tasks), sort_keys=True
+    )
 
     if not contact_sync_up:
-        return HttpResponse(json.dumps(body), status=500, content_type="application/json")
+        return HttpResponse(body, status=500, content_type="application/json")
     else:
-        return HttpResponse(json.dumps(body), status=200, content_type="application/json")
+        return HttpResponse(body, status=200, content_type="application/json")
