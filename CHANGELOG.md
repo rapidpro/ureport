@@ -1,3 +1,8 @@
+v1.1.248
+----------
+ * Merge pull request #733 from rapidpro/contact-pull-on-status
+ * Better ordering or keys
+
 v1.1.247
 ----------
  * Merge pull request #732 from rapidpro/contact-pull-on-status
