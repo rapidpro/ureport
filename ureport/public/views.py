@@ -619,23 +619,28 @@ def status(request):
 def task_status(request):
     two_hour_ago = timezone.now() - timedelta(hours=2)
 
-    active_contact_pull_states = (
-        TaskState.objects.filter(task_key="contact-pull", is_disabled=False)
+    active_states = (
+        TaskState.objects.filter(is_disabled=False)
         .exclude(org__is_active=False)
         .exclude(org__domain__in=["beta", "test"])
     )
+
+    active_contact_pull_states = active_states.filter(task_key="contact-pull")
     failing_contact_pull_states = active_contact_pull_states.exclude(last_successfully_started_on__gte=two_hour_ago)
 
     contact_sync_up = not failing_contact_pull_states.exists()
 
-    body = dict(contact_sync_up=contact_sync_up)
+    all_tasks = dict()
+    failing_tasks = dict()
+
+    for obj in active_states:
+        all_tasks[f"{obj.org.name} - {obj.task_key}"] = f"{obj.last_successfully_started_on}"
+        if obj in failing_contact_pull_states:
+            failing_tasks[f"{obj.org.name} - {obj.task_key}"] = f"{obj.last_successfully_started_on}"
+
+    body = dict(contact_sync_up=contact_sync_up, tasks=all_tasks, failing_tasks=failing_tasks)
 
     if not contact_sync_up:
-        body["failing_tasks"] = [
-            f"{obj.org.name} - {obj.task_key} - {obj.last_successfully_started_on}"
-            for obj in failing_contact_pull_states
-        ]
-
         return HttpResponse(json.dumps(body), status=500, content_type="application/json")
     else:
         return HttpResponse(json.dumps(body), status=200, content_type="application/json")
