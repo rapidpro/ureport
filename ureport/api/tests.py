@@ -342,6 +342,9 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["count"], 0)
 
+        response = self.client.get("/api/v1/polls/org/foo/featured/")
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
     def test_single_poll(self):
         url = "/api/v1/polls/%d/" % self.reg_poll.pk
         response = self.client.get(url)

@@ -1,3 +1,39 @@
+v1.1.248
+----------
+ * Merge pull request #733 from rapidpro/contact-pull-on-status
+ * Better ordering or keys
+
+v1.1.247
+----------
+ * Merge pull request #732 from rapidpro/contact-pull-on-status
+ * Add tasks last successful time on task status endpoint
+
+v1.1.246
+----------
+ * Merge pull request #731 from rapidpro/contact-pull-on-status
+ * Add a new task status endpoint
+
+v1.1.245
+----------
+ * Merge pull request #730 from rapidpro/icons
+ * Add view to display icons added are matching the dimensions expected
+ * Merge pull request #729 from rapidpro/contact-pull-on-status
+ * Add contact sync up key to status monitoring endpoint
+
+v1.1.244
+----------
+ * Merge pull request #727 from rapidpro/fix-reported-errors
+ * Fix API endpoint to only accept int IDs
+
+v1.1.243
+----------
+ * Merge pull request #726 from rapidpro/increase-engagement-data-lock-time
+ * Increase lock timeout for refreshing engagement data task
+
+v1.1.242
+----------
+ * Merge pull request #725 from rapidpro/update-js-deps
+
 v1.1.240
 ----------
  * Merge pull request #723 from rapidpro/add-index-org-question

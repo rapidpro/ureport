@@ -13,6 +13,7 @@ from .views import (
     CountriesView,
     CustomPage,
     EngagementDataView,
+    IconsDisplay,
     IndexView,
     JobsView,
     JoinEngageView,
@@ -27,6 +28,7 @@ from .views import (
     StoryReadView,
     UreportersView,
     status,
+    task_status,
 )
 
 urlpatterns = [
@@ -61,6 +63,8 @@ urlpatterns = [
     url(r"^page/(?P<link>\w+)/$", CustomPage.as_view(), {}, "public.custom_page"),
     url(r"^count/$", Count.as_view(), {}, "public.count"),
     url(r"^shared_sites_count/$", SharedSitesCount.as_view(), {}, "public.shared_sites_count"),
+    url(r"^icons_display/$", IconsDisplay.as_view(), {}, "public.icons_display"),
     url(r"^status/$", status, {}, "public.status"),
+    url(r"^task_status/$", task_status, {}, "public.task_status"),
     url(r"^countries/$", CountriesView.as_view(), {}, "public.countries"),
 ]
