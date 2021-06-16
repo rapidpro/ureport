@@ -1,3 +1,8 @@
+v1.1.247
+----------
+ * Merge pull request #732 from rapidpro/contact-pull-on-status
+ * Add tasks last successful time on task status endpoint
+
 v1.1.246
 ----------
  * Merge pull request #731 from rapidpro/contact-pull-on-status
