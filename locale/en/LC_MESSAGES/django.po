@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -905,13 +905,13 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr ""
 
 msgid "RESPONSE RATE"
 msgstr ""
 
-msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr ""
 
 #, python-format
@@ -948,7 +948,7 @@ msgstr ""
 msgid "Participation Level"
 msgstr ""
 
-msgid "Responses"
+msgid "Responders"
 msgstr ""
 
 msgid "Reporters in"

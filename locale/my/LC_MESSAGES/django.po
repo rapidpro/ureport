@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -907,13 +907,15 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-msgid "RESPONSES"
-msgstr ""
+#, fuzzy
+#| msgid "RESPONSE RATE"
+msgid "RESPONDERS"
+msgstr "တုံံ့ပြန်မှုနှုန်း"
 
 msgid "RESPONSE RATE"
 msgstr "တုံံ့ပြန်မှုနှုန်း"
 
-msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr ""
 
 #, python-format
@@ -950,7 +952,9 @@ msgstr ""
 msgid "Participation Level"
 msgstr "ပါဝင်သည့် အနေအထား"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "ပြန်လည်ဖြေကြားမှုများ"
 
 msgid "Reporters in"

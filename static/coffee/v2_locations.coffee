@@ -78,7 +78,7 @@ $(->
           if props.count.unset?
             total = props.count.set + props.count.unset
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
-              "<div class='count'>" + props.count.set.toLocaleString() + " " + window.string_Responses + " // " + total.toLocaleString() + " " + window.string_Polled + "</div>"
+              "<div class='count'>" + props.count.set.toLocaleString() + " " + window.string_Responders + " // " + total.toLocaleString() + " " + window.string_Polled + "</div>"
           else if props.count.set?
             this._div.innerHTML = "<div class='name'>" + props.name + "</div>" +
               "<div class='count'>" + props.count.set.toLocaleString() + " " + window.string_Reporters + "</div>"
@@ -91,7 +91,7 @@ $(->
           if topBoundary.unset?
             total = topBoundary.set + topBoundary.unset
             this._div.innerHTML = "<div class='label'>" + window.string_TopRegion + ":</div><div class='name'>" + topBoundary.label + "</div>" +
-                "<div class='count'>" + topBoundary.set.toLocaleString() + " " + window.string_Responses + " // " + total.toLocaleString() + " " + window.string_Polled + "</div>"
+                "<div class='count'>" + topBoundary.set.toLocaleString() + " " + window.string_Responders + " // " + total.toLocaleString() + " " + window.string_Polled + "</div>"
           else if topBoundary.set?
             this._div.innerHTML = "<div class='label'>" + window.string_TopRegion + ":</div><div class='name'>" + topBoundary.label + "</div>" +
                 "<div class='count'>" + topBoundary.set.toLocaleString() + " " + window.string_Reporters + "</div>"

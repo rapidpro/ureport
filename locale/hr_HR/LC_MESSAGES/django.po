@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marijana Muhic <mmuhic@unicef.org>, 2021\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/rapidpro/teams/226/hr_HR/)\n"
@@ -952,13 +952,17 @@ msgstr "PRETRAŽI"
 msgid "No results found"
 msgstr "Rezultati nisu pronađjeni"
 
-msgid "RESPONSES"
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "ODGOVORI"
 
 msgid "RESPONSE RATE"
 msgstr "STOPA ODGOVORA"
 
-msgid "TOTAL RESPONSES"
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "SVI ODGOVORI"
 
 #, python-format
@@ -995,7 +999,9 @@ msgstr "Županija"
 msgid "Participation Level"
 msgstr "Razina sudjelovanja"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Odgovori"
 
 msgid "Reporters in"

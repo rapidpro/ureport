@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -985,7 +985,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
-msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "RATING TANGGAPAN"
 
 msgid "RESPONSE RATE"
@@ -993,7 +993,7 @@ msgstr "RATING TANGGAPAN"
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
-msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "RATING TANGGAPAN"
 
 #, fuzzy, python-format
@@ -1038,7 +1038,9 @@ msgstr "Kota"
 msgid "Participation Level"
 msgstr "Tingkat Partisipasi"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Tanggapan"
 
 msgid "Reporters in"
