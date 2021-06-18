@@ -65,7 +65,7 @@
                 .text-3xl.leading-none(class="md:text-5xl")
                   {{ latest_poll.responded_runs|intcomma }}
                 .text-xs.font-bold
-                  -trans "RESPONSES"
+                  -trans "RESPONDERS"
   
               .inline-block.mt-2.mx-auto(class="md:mx-0 md:mt-0 {% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %}")
                 .text-3xl.leading-none(class="md:text-5xl")
@@ -106,7 +106,7 @@
         .flex-1.text-black
           .py-home.text-center(class="rtl:pr-6 ltr:pl-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %}")
             .text-sm.font-bold.mb-8
-              -trans "TOTAL RESPONSES"
+              -trans "TOTAL RESPONDERS"
             #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
               .flex.text-center.h-full.w-full(id="poll-map-placeholder" style="min-height:300px;min-width:300px;")
                 .fa-3x.inline-block.m-auto.self-center

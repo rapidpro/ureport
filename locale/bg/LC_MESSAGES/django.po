@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -935,13 +935,17 @@ msgstr "ТЪРСЕНЕ"
 msgid "No results found"
 msgstr "Няма намерени резултати"
 
-msgid "RESPONSES"
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "ОТГОВОРИ"
 
 msgid "RESPONSE RATE"
 msgstr " ПРОЦЕНТ ОТГОВОРИЛИ"
 
-msgid "TOTAL RESPONSES"
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "ОБЩО ОТГОВОРИ"
 
 #, python-format
@@ -978,7 +982,9 @@ msgstr "Община"
 msgid "Participation Level"
 msgstr "Ниво на участие"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Отговори"
 
 msgid "Reporters in"

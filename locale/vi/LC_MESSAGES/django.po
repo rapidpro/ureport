@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -985,7 +985,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
-msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "TỶ LỆ PHẢN HỒI"
 
 msgid "RESPONSE RATE"
@@ -993,7 +993,7 @@ msgstr "TỶ LỆ PHẢN HỒI"
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
-msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "TỶ LỆ PHẢN HỒI"
 
 #, fuzzy, python-format
@@ -1038,7 +1038,9 @@ msgstr "Quận, huyện"
 msgid "Participation Level"
 msgstr "Mức độ tham gia"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Phản hồi"
 
 msgid "Reporters in"

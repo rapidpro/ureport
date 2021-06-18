@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: deimidis <guillermo.movia@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -939,13 +939,17 @@ msgstr "BUSCAR"
 msgid "No results found"
 msgstr "No se encontraron resultados"
 
-msgid "RESPONSES"
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "RESPUESTAS"
 
 msgid "RESPONSE RATE"
 msgstr "TASA DE RESPUESTA"
 
-msgid "TOTAL RESPONSES"
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "TOTAL DE RESPUESTAS"
 
 #, python-format
@@ -982,7 +986,9 @@ msgstr "Municipio"
 msgid "Participation Level"
 msgstr "Nivel de participación"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Respuestas"
 
 msgid "Reporters in"

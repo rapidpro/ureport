@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -941,13 +941,17 @@ msgstr "সার্চ"
 msgid "No results found"
 msgstr "কোন ফলাফল খুঁজে পাওয়া যায়নি"
 
-msgid "RESPONSES"
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "প্রতিক্রিয়া"
 
 msgid "RESPONSE RATE"
 msgstr "প্রতিক্রিয়া হার"
 
-msgid "TOTAL RESPONSES"
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "সকল প্রতিক্রিয়া"
 
 #, python-format
@@ -984,7 +988,9 @@ msgstr "অঞ্চল "
 msgid "Participation Level"
 msgstr "অংশগ্রহন এর মাত্রা "
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "উত্তর গুলো "
 
 msgid "Reporters in"
