@@ -1248,7 +1248,7 @@ COUNTRY_FLAGS_SITES = [
         name="OECS",
         host="//oecs.ureport.in",
         flag="flag_oecs.png",
-        countries_codes=["ATG"], # ["ATG", "VGB", "DMA", "GRD", "MSR", "KNA", "LCA", "VCT", "TCA"],
+        countries_codes=["ATG"],  # ["ATG", "VGB", "DMA", "GRD", "MSR", "KNA", "LCA", "VCT", "TCA"],
         count_link="http://oecs.ureport.in/count/",
     ),
     dict(
