@@ -1,3 +1,11 @@
+v1.1.249
+----------
+ * Merge pull request #735 from rapidpro/responders
+ * Compile messages
+ * Update translations
+ * Merge pull request #734 from rapidpro/responders
+ * Rename responses to responders
+
 v1.1.248
 ----------
  * Merge pull request #733 from rapidpro/contact-pull-on-status
