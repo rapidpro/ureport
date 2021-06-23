@@ -1,3 +1,23 @@
+v1.1.250
+----------
+ * Merge pull request #728 from Ilhasoft/feature/eastern-caribbean-flag
+ * Merge pull request #644 from Ilhasoft/feature/add-oecs-flag
+ * fix: Adjusted Eastern Caribbean flag
+ * fix: Runing black
+ * fix: Adjusted OECS flag and countries_codes
+ * add eastern caribbean flag on ureport
+ * fix: Fix countries code OECS remove the flag
+ * fix the name of flag file
+ * add oecs flag
+
+v1.1.249
+----------
+ * Merge pull request #735 from rapidpro/responders
+ * Compile messages
+ * Update translations
+ * Merge pull request #734 from rapidpro/responders
+ * Rename responses to responders
+
 v1.1.248
 ----------
  * Merge pull request #733 from rapidpro/contact-pull-on-status

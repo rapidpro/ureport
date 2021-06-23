@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2021\n"
 "Language-Team: Macedonian (Macedonia) (https://www.transifex.com/rapidpro/teams/226/mk_MK/)\n"
@@ -946,13 +946,17 @@ msgstr "БАРАЈ"
 msgid "No results found"
 msgstr "Не се пронајдени резултати"
 
-msgid "RESPONSES"
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "ОДГОВОРИ"
 
 msgid "RESPONSE RATE"
 msgstr "СТАПКА НА ОДГОВОРИ"
 
-msgid "TOTAL RESPONSES"
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "ВКУПНО ОДГОВОРИ"
 
 #, python-format
@@ -989,7 +993,9 @@ msgstr "Област"
 msgid "Participation Level"
 msgstr "Ниво на учество"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Одговори"
 
 msgid "Reporters in"

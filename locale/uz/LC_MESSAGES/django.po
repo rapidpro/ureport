@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-20 14:36+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -936,13 +936,17 @@ msgstr "IZLASH"
 msgid "No results found"
 msgstr "Hech qanday natija topilmadi"
 
-msgid "RESPONSES"
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "JAVOBLAR"
 
 msgid "RESPONSE RATE"
 msgstr "JAVOB BERGANLAR ULUSHI"
 
-msgid "TOTAL RESPONSES"
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "JA'MI JAVOBLAR"
 
 #, python-format
@@ -979,7 +983,9 @@ msgstr "Tuman"
 msgid "Participation Level"
 msgstr "Ishtirok etish darajasi"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Javoblar"
 
 msgid "Reporters in"

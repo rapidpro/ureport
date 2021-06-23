@@ -1150,6 +1150,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://drc.ureport.in/count/",
     ),
     dict(
+        name="Eastern Caribbean Area",
+        host="//eca.ureport.in/",
+        flag="flag_eca.png",
+        countries_codes=["ECA"],
+        count_link="http://eca.ureport.in/count/",
+    ),
+    dict(
         name="Ecuador",
         host="//ecuador.ureport.in/",
         flag="flag_ecuador.png",
@@ -1393,6 +1400,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_norge.png",
         countries_codes=["NOR"],
         count_link="http://norge.ureport.in/count/",
+    ),
+    dict(
+        name="OECS",
+        host="//oecs.ureport.in",
+        flag="flag_oecs.png",
+        countries_codes=["ATG"],  # ["ATG", "VGB", "DMA", "GRD", "MSR", "KNA", "LCA", "VCT", "TCA"],
+        count_link="http://oecs.ureport.in/count/",
     ),
     dict(
         name="On the move",
