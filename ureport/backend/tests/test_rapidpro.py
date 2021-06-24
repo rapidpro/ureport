@@ -1250,7 +1250,7 @@ class RapidProBackendTest(UreportTest):
             (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
             (1, 0, 0, 0, 0, 1),
         )
-        mock_get_runs.assert_called_with(flow="flow-uuid", after=None, before=datetime_to_json_date(now))
+        mock_get_runs.assert_called_with(flow="flow-uuid", after=None, before=datetime_to_json_date(now), reverse=True)
         mock_redis_lock.assert_called_once_with(
             Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid), timeout=7200
         )
@@ -1965,7 +1965,9 @@ class RapidProBackendTest(UreportTest):
             (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
             (1, 0, 0, 0, 0, 1),
         )
-        mock_get_runs.assert_called_with(flow="flow-uuid-3", after=None, before=datetime_to_json_date(now))
+        mock_get_runs.assert_called_with(
+            flow="flow-uuid-3", after=None, before=datetime_to_json_date(now), reverse=True
+        )
 
         poll_result = PollResult.objects.filter(flow="flow-uuid-3", ruleset="ruleset-uuid", contact="C-021").first()
         self.assertEqual(poll_result.ward, "R-IKEJA")
@@ -2152,7 +2154,9 @@ class PerfTest(UreportTest):
             num_path_ignored,
         ) = self.backend.pull_results(poll, None, None)
 
-        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before=datetime_to_json_date(now))
+        mock_get_runs.assert_called_once_with(
+            flow=poll.flow_uuid, after=None, before=datetime_to_json_date(now), reverse=True
+        )
 
         self.assertEqual(
             (num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored),
@@ -2687,7 +2691,7 @@ class PerfTest(UreportTest):
                 None,
             ),
             (
-                Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                 "2015-04-07T12:48:44.320Z",
                 None,
             ),
@@ -2721,7 +2725,7 @@ class PerfTest(UreportTest):
                 None,
             ),
             (
-                Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
+                Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid),
                 "2015-04-07T12:48:44.320Z",
                 None,
             ),
@@ -2854,7 +2858,9 @@ class PerfTest(UreportTest):
         ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_delete)))
-        mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before="2015-04-08T12:48:44.320Z")
+        mock_get_runs.assert_called_once_with(
+            flow=poll.flow_uuid, after=None, before="2015-04-08T12:48:44.320Z", reverse=True
+        )
 
     @override_settings(DEBUG=True)
     @patch("dash.orgs.models.TembaClient._request")
@@ -2902,7 +2908,7 @@ class PerfTest(UreportTest):
                 "2015-04-08T12:48:44.320Z",
                 None,
             ),
-            (Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid), None, None),
+            (Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (self.nigeria.pk, poll.flow_uuid), None, None),
         ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
