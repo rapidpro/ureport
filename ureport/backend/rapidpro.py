@@ -560,30 +560,20 @@ class RapidProBackend(BaseBackend):
 
                 # ignore the TaskState time and use the time we stored in redis
                 (
-                    after,
-                    before,
                     latest_synced_obj_time,
-                    batches_latest,
-                    resume_cursor,
                     pull_after_delete,
                 ) = poll.get_pull_cached_params()
 
                 if pull_after_delete is not None:
-                    after = None
                     latest_synced_obj_time = None
-                    resume_cursor = None
                     poll.delete_poll_results()
                     pull_refresh_from_archives.apply_async((poll.pk,), queue="sync")
-
-                if resume_cursor is None:
-                    before = datetime_to_json_date(timezone.now())
-                    after = latest_synced_obj_time
 
                 start = time.time()
                 logger.info("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))
 
-                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=after, before=before, reverse=True)
-                fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True, resume_cursor=resume_cursor)
+                poll_runs_query = client.get_runs(flow=poll.flow_uuid, after=latest_synced_obj_time, reverse=True)
+                fetches = poll_runs_query.iterfetches(retry_on_rate_exceed=True)
 
                 try:
                     fetch_start = time.time()
@@ -645,27 +635,20 @@ class RapidProBackend(BaseBackend):
                         ):
                             poll.rebuild_poll_results_counts()
 
-                            cursor = fetches.get_cursor()
-                            self._mark_poll_results_sync_paused(
-                                org, poll, cursor, after, before, latest_synced_obj_time
-                            )
+                            self._mark_poll_results_sync_paused(org, poll, latest_synced_obj_time)
 
                             logger.info(
                                 "Break pull results for poll #%d on org #%d in %ds, "
-                                " Times: after= %s, before= %s, sync_latest= %s"
-                                " Objects: created %d, updated %d, ignored %d. "
-                                "Before cursor %s"
+                                "Times: sync_latest= %s, "
+                                "Objects: created %d, updated %d, ignored %d. "
                                 % (
                                     poll.pk,
                                     org.pk,
                                     time.time() - start,
-                                    after,
-                                    before,
                                     latest_synced_obj_time,
                                     stats_dict["num_val_created"],
                                     stats_dict["num_val_updated"],
                                     stats_dict["num_val_ignored"],
-                                    cursor,
                                 )
                             )
 
@@ -680,25 +663,20 @@ class RapidProBackend(BaseBackend):
                 except TembaRateExceededError:
                     poll.rebuild_poll_results_counts()
 
-                    cursor = fetches.get_cursor()
-                    self._mark_poll_results_sync_paused(org, poll, cursor, after, before, latest_synced_obj_time)
+                    self._mark_poll_results_sync_paused(org, poll, latest_synced_obj_time)
 
                     logger.info(
                         "Break pull results for poll #%d on org #%d in %ds, "
-                        " Times: after= %s, before= %s, sync_latest= %s"
-                        " Objects: created %d, updated %d, ignored %d. "
-                        "Before cursor %s"
+                        "Times: sync_latest= %s,"
+                        "Objects: created %d, updated %d, ignored %d. "
                         % (
                             poll.pk,
                             org.pk,
                             time.time() - start,
-                            after,
-                            before,
                             latest_synced_obj_time,
                             stats_dict["num_val_created"],
                             stats_dict["num_val_updated"],
                             stats_dict["num_val_ignored"],
-                            cursor,
                         )
                     )
 
@@ -723,7 +701,7 @@ class RapidProBackend(BaseBackend):
 
                 logger.info(
                     "Finished pulling results for poll #%d on org #%d runs in %ds, "
-                    "Times: sync_latest= %s,"
+                    "Times: sync_latest= %s, "
                     "Objects: created %d, updated %d, ignored %d"
                     % (
                         poll.pk,
@@ -997,11 +975,9 @@ class RapidProBackend(BaseBackend):
         PollResult.objects.bulk_create(new_poll_results)
 
     @staticmethod
-    def _mark_poll_results_sync_paused(org, poll, cursor, after, before, latest_synced_obj_time):
-        cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid), cursor, None)
-        cache.set(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (org.pk, poll.flow_uuid), after, None)
-        cache.set(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (org.pk, poll.flow_uuid), before, None)
-        cache.set(Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (org.pk, poll.flow_uuid), latest_synced_obj_time, None)
+    def _mark_poll_results_sync_paused(org, poll, latest_synced_obj_time):
+        # update the time for this poll from which we fetch next time
+        cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), latest_synced_obj_time, None)
 
         from ureport.polls.tasks import pull_refresh
 
@@ -1011,15 +987,14 @@ class RapidProBackend(BaseBackend):
     def _mark_poll_results_sync_completed(poll, org, latest_synced_obj_time):
         # update the time for this poll from which we fetch next time
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), latest_synced_obj_time, None)
-        # update the last time the sync happened
+
+        # update the last time the sync happened, for displaying in polls list on admin page
         now = timezone.now()
         cache.set(
             Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (org.pk, poll.flow_uuid),
             datetime_to_json_date(now),
             None,
         )
-        # clear the saved cursor
-        cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid))
 
         # Use redis cache with expiring(in 48 hrs) key to allow other polls task
         # to sync all polls without hitting the API rate limit
