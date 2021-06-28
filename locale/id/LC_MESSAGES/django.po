@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -875,13 +875,13 @@ msgstr[0] "Pertanyaan polling"
 msgid "New poll initial syncs scheduled every 10min"
 msgstr ""
 
-msgid "Main poll syncs scheduled every 10min"
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
 msgstr ""
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
-
-msgid "No longer scheduling syncs, runs archived"
 msgstr ""
 
 msgid "Poll syncs scheduled every 24h"
@@ -954,9 +954,6 @@ msgstr ""
 msgid "Join U-Report, Your voice matters."
 msgstr ""
 
-msgid "JOIN NOW"
-msgstr ""
-
 msgid "FEATURED STORY"
 msgstr "FITUR CERITA"
 
@@ -988,7 +985,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
-msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "RATING TANGGAPAN"
 
 msgid "RESPONSE RATE"
@@ -996,7 +993,7 @@ msgstr "RATING TANGGAPAN"
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
-msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "RATING TANGGAPAN"
 
 #, fuzzy, python-format
@@ -1041,7 +1038,9 @@ msgstr "Kota"
 msgid "Participation Level"
 msgstr "Tingkat Partisipasi"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Tanggapan"
 
 msgid "Reporters in"
@@ -1681,13 +1680,21 @@ msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
-msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
 
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Shortcode yang pengguna akan gunakan untuk menghubungi U-Report lokal"
+
+msgid "The join button text"
+msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "teks singkat yang digunakan untuk mengarahkan pengunjung untuk bergabung U-Report"
@@ -1771,11 +1778,19 @@ msgstr ""
 msgid "The states to show on maps only, used to filter poll results"
 msgstr ""
 
+#, fuzzy
+#| msgid "The Google Analytics Tracking ID for this organization"
+msgid "The Google Tag Manager ID for this organization"
+msgstr "Google Analytics Tracking ID untuk organisasi ini"
+
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Google Analytics Tracking ID untuk organisasi ini"
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "URL ke saluran Youtube untuk organisasi ini"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL ke halaman Facebook untuk organisasi ini"

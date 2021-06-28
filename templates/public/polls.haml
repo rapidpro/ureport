@@ -19,7 +19,7 @@
               .flex-1
                 %input.bg-black.search-box.text-sm(type="text" data-results-id="poll-search-results" placeholder="{% trans 'SEARCH' %}" size=14)
               .flex-none
-                %a.search-close.cursor-pointer
+                %a.search-close.cursor-pointer(data-results-id="poll-search-results")
                   %i.fas.fa-caret-down
 
         .relative
@@ -65,7 +65,7 @@
                 .text-3xl.leading-none(class="md:text-5xl")
                   {{ latest_poll.responded_runs|intcomma }}
                 .text-xs.font-bold
-                  -trans "RESPONSES"
+                  -trans "RESPONDERS"
   
               .inline-block.mt-2.mx-auto(class="md:mx-0 md:mt-0 {% if is_rtl_org %}md:pr-8{% else %}md:pl-8{% endif %}")
                 .text-3xl.leading-none(class="md:text-5xl")
@@ -100,13 +100,13 @@
             .flex-1.inline-block.mt-4(style="min-width:220px;max-width:350px" class="md:mt-0")
               .relative.w-full(style="height:105px")
                 {{ age_stats|json_script:"age_stats" }}
-                #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"primary_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
+                #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"dark1_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
 
       -if show_maps
         .flex-1.text-black
           .py-home.text-center(class="rtl:pr-6 ltr:pl-6 {% if is_rtl_org %}pl-home{% else %}pr-home{% endif %}")
             .text-sm.font-bold.mb-8
-              -trans "TOTAL RESPONSES"
+              -trans "TOTAL RESPONDERS"
             #poll-map.h-full.w-full.map.block(data-map-url="/pollquestion/{{ top_question.id }}/results/" data-district-zoom="{% if district_zoom %}true{% else %}false{% endif %}" data-ward-zoom="{% if ward_zoom %}true{% else %}false{% endif %}" style="min-height:300px;min-width:300px;")
               .flex.text-center.h-full.w-full(id="poll-map-placeholder" style="min-height:300px;min-width:300px;")
                 .fa-3x.inline-block.m-auto.self-center

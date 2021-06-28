@@ -5,13 +5,14 @@ import calendar
 import json
 import operator
 from collections import defaultdict
+from datetime import timedelta
 from functools import reduce
 
 import pycountry
 import six
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
-from dash.orgs.models import Org
+from dash.orgs.models import Org, TaskState
 from dash.stories.models import Story
 from django_redis import get_redis_connection
 from smartmin.views import SmartReadView, SmartTemplateView
@@ -22,7 +23,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q
 from django.http import Http404, HttpResponse
 from django.urls import reverse
-from django.utils import translation
+from django.utils import timezone, translation
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
@@ -91,6 +92,26 @@ class Count(SmartTemplateView):
         return context
 
 
+class IconsDisplay(SmartTemplateView):
+    template_name = "public/icons.html"
+
+    def has_permission(self, request, *args, **kwargs):
+        return request.user.is_authenticated
+
+    def get_context_data(self, **kwargs):
+        context = super(IconsDisplay, self).get_context_data(**kwargs)
+
+        linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
+        icon_sites = []
+        for elt in linked_sites:
+            if elt.get("show_icon", True) and elt.get("flag", ""):
+
+                icon_sites.append(elt)
+
+        context["icon_sites"] = icon_sites
+        return context
+
+
 class SharedSitesCount(SmartTemplateView):
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
@@ -108,7 +129,11 @@ class SharedSitesCount(SmartTemplateView):
             ):
                 elt["flag"] = f'https://ureport.in/sitestatic/img/site_flags/{elt["flag"]}'
 
-        countries_count = len([elt for elt in linked_sites if elt.get("count_as_country", True)])
+        unique_countries = set()
+        for elt in linked_sites:
+            unique_countries.update(elt.get("countries_codes", []))
+        countries_count = len(unique_countries)
+
         json_dict = dict(global_count=global_count, linked_sites=linked_sites, countries_count=countries_count)
 
         return HttpResponse(json.dumps(json_dict), status=200, content_type="application/json")
@@ -585,6 +610,39 @@ def status(request):
     body = json.dumps(dict(db_up=db_up, redis_up=redis_up))
 
     if not db_up or not redis_up:
-        return HttpResponse(body, status=500)
+
+        return HttpResponse(body, status=500, content_type="application/json")
     else:
-        return HttpResponse(body, status=200)
+        return HttpResponse(body, status=200, content_type="application/json")
+
+
+def task_status(request):
+    two_hour_ago = timezone.now() - timedelta(hours=2)
+
+    active_states = (
+        TaskState.objects.filter(is_disabled=False)
+        .exclude(org__is_active=False)
+        .exclude(org__domain__in=["beta", "test"])
+    )
+
+    active_contact_pull_states = active_states.filter(task_key="contact-pull")
+    failing_contact_pull_states = active_contact_pull_states.exclude(last_successfully_started_on__gte=two_hour_ago)
+
+    contact_sync_up = not failing_contact_pull_states.exists()
+
+    all_tasks = dict()
+    failing_tasks = dict()
+
+    for obj in active_states:
+        all_tasks[f"{obj.org.name} - {obj.task_key}"] = f"{obj.last_successfully_started_on}"
+        if obj in failing_contact_pull_states:
+            failing_tasks[f"{obj.org.name} - {obj.task_key}"] = f"{obj.last_successfully_started_on}"
+
+    body = json.dumps(
+        dict(contact_sync_up=contact_sync_up, tasks=all_tasks, failing_tasks=failing_tasks), sort_keys=True
+    )
+
+    if not contact_sync_up:
+        return HttpResponse(body, status=500, content_type="application/json")
+    else:
+        return HttpResponse(body, status=200, content_type="application/json")

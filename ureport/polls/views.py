@@ -22,6 +22,7 @@ from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.html import strip_tags
 from django.utils.timesince import timesince
 from django.utils.translation import ugettext_lazy as _
 
@@ -471,7 +472,13 @@ class PollCRUDL(SmartCRUDL):
                 categories = question.get_public_categories()
                 for category in categories:
                     category_id = category.id
-                    category_displayed = data[f"ruleset_{r_uuid}_cat_display_{category_id}"]
+                    category_displayed_data = data[f"ruleset_{r_uuid}_cat_display_{category_id}"]
+
+                    try:
+                        category_displayed = strip_tags(category_displayed_data)
+                    except NotImplementedError:
+                        category_displayed = None
+
                     if not category_displayed:
                         category_displayed = category.category
 

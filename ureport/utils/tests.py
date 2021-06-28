@@ -8,8 +8,7 @@ import mock
 import pytz
 import redis
 from dash.categories.models import Category
-from dash.test import MockClientQuery
-from dash_test_runner.tests import MockResponse
+from dash.test import MockClientQuery, MockResponse
 from mock import patch
 from temba_client.v2 import Flow
 
@@ -549,6 +548,7 @@ class UtilsTest(UreportTest):
                 from django.core.cache import cache
 
                 cache.delete(GLOBAL_COUNT_CACHE_KEY)
+                cache.set("org:ignored:reporters:old-site", {"time": 500, "results": dict(size=100)}, None)
                 self.assertEqual(get_global_count(), 350)
 
             with patch("django.core.cache.cache.get") as cache_get_mock:

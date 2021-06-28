@@ -9,6 +9,7 @@ from datetime import timedelta
 
 from dash.categories.models import Category
 from dash.test import MockClientQuery
+from dash.utils.sync import SyncOutcome
 from mock import PropertyMock, patch
 from temba_client.exceptions import TembaRateExceededError
 from temba_client.v2.types import (
@@ -606,9 +607,12 @@ class RapidProBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(1):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         # fecthed contact not in configured group get ignored
         mock_get_contacts.side_effect = [
@@ -667,9 +671,12 @@ class RapidProBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(5):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 3))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 3},
+        )
 
         mock_get_contacts.side_effect = [
             # first call to get active contacts will return two fetches of 2 and 1 contacts
@@ -731,9 +738,12 @@ class RapidProBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(10):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 2))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 1, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 2},
+        )
 
         Contact.objects.all().delete()
 
@@ -797,9 +807,12 @@ class RapidProBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(11):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 1))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 2, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 1},
+        )
 
         Contact.objects.all().delete()
 
@@ -864,9 +877,12 @@ class RapidProBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(12):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (3, 0, 0, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 3, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         contact_jan = Contact.objects.filter(uuid="C-001").first()
         self.assertFalse(contact_jan.born)
@@ -927,9 +943,12 @@ class RapidProBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(12):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 2, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         contact_jan = Contact.objects.filter(uuid="C-001").first()
 
@@ -962,9 +981,12 @@ class RapidProBackendTest(UreportTest):
         ]
 
         with self.assertNumQueries(4):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_contacts(self.nigeria, None, None)
+            contact_results, resume_cursor = self.backend.pull_contacts(self.nigeria, None, None)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 0))
+        self.assertEqual(
+            contact_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 1, SyncOutcome.ignored: 0},
+        )
 
         self.assertFalse(Contact.objects.filter(uuid="C-002", is_active=True))
 
@@ -981,9 +1003,12 @@ class RapidProBackendTest(UreportTest):
         )
 
         with self.assertNumQueries(6):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
+            field_results = self.backend.pull_fields(self.nigeria)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 0))
+        self.assertEqual(
+            field_results,
+            {SyncOutcome.created: 2, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         ContactField.objects.get(key="nick_name", label="Nickname", value_type="T", is_active=True)
         ContactField.objects.get(key="age", label="Age", value_type="N", is_active=True)
@@ -996,9 +1021,12 @@ class RapidProBackendTest(UreportTest):
         )
 
         with self.assertNumQueries(8):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
+            field_results = self.backend.pull_fields(self.nigeria)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 1, 1, 0))
+        self.assertEqual(
+            field_results,
+            {SyncOutcome.created: 1, SyncOutcome.updated: 1, SyncOutcome.deleted: 1, SyncOutcome.ignored: 0},
+        )
 
         self.assertFalse(
             ContactField.objects.filter(org=self.nigeria, key="nick_name", label="Nickname", value_type="T")
@@ -1008,9 +1036,12 @@ class RapidProBackendTest(UreportTest):
 
         # check that no changes means no updates
         with self.assertNumQueries(6):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_fields(self.nigeria)
+            field_results = self.backend.pull_fields(self.nigeria)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 0, 2))
+        self.assertEqual(
+            field_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 2},
+        )
 
     @patch("dash.orgs.models.TembaClient.get_boundaries")
     def test_pull_boundaries(self, mock_get_boundaries):
@@ -1032,11 +1063,14 @@ class RapidProBackendTest(UreportTest):
         mock_get_boundaries.return_value = MockClientQuery([remote])
 
         with self.assertNumQueries(5):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+            boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
         mock_get_boundaries.assert_called_once_with(geometry=True)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 0))
+        self.assertEqual(
+            boundaries_results,
+            {SyncOutcome.created: 1, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         for boundary in Boundary.objects.all():
             release_boundary(boundary)
@@ -1052,9 +1086,12 @@ class RapidProBackendTest(UreportTest):
         )
 
         with self.assertNumQueries(6):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+            boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 0, 0))
+        self.assertEqual(
+            boundaries_results,
+            {SyncOutcome.created: 2, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         mock_get_boundaries.return_value = MockClientQuery(
             [
@@ -1068,9 +1105,12 @@ class RapidProBackendTest(UreportTest):
         )
 
         with self.assertNumQueries(7):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+            boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 1, 0, 1))
+        self.assertEqual(
+            boundaries_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 1, SyncOutcome.deleted: 0, SyncOutcome.ignored: 1},
+        )
 
         mock_get_boundaries.return_value = MockClientQuery(
             [
@@ -1084,9 +1124,12 @@ class RapidProBackendTest(UreportTest):
         )
 
         with self.assertNumQueries(8):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+            boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 2, 0, 0))
+        self.assertEqual(
+            boundaries_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 2, SyncOutcome.deleted: 0, SyncOutcome.ignored: 0},
+        )
 
         mock_get_boundaries.return_value = MockClientQuery(
             [
@@ -1097,9 +1140,12 @@ class RapidProBackendTest(UreportTest):
         )
 
         with self.assertNumQueries(7):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+            boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (0, 0, 1, 1))
+        self.assertEqual(
+            boundaries_results,
+            {SyncOutcome.created: 0, SyncOutcome.updated: 0, SyncOutcome.deleted: 1, SyncOutcome.ignored: 1},
+        )
 
         mock_get_boundaries.return_value = MockClientQuery(
             [
@@ -1117,9 +1163,12 @@ class RapidProBackendTest(UreportTest):
         )
 
         with self.assertNumQueries(7):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+            boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (1, 0, 0, 1))
+        self.assertEqual(
+            boundaries_results,
+            {SyncOutcome.created: 1, SyncOutcome.updated: 0, SyncOutcome.deleted: 0, SyncOutcome.ignored: 1},
+        )
 
         mock_get_boundaries.return_value = MockClientQuery(
             [
@@ -1137,9 +1186,12 @@ class RapidProBackendTest(UreportTest):
         )
 
         with self.assertNumQueries(13):
-            num_created, num_updated, num_deleted, num_ignored = self.backend.pull_boundaries(self.nigeria)
+            boundaries_results = self.backend.pull_boundaries(self.nigeria)
 
-        self.assertEqual((num_created, num_updated, num_deleted, num_ignored), (2, 0, 2, 0))
+        self.assertEqual(
+            boundaries_results,
+            {SyncOutcome.created: 2, SyncOutcome.updated: 0, SyncOutcome.deleted: 2, SyncOutcome.ignored: 0},
+        )
 
     @patch("redis.client.StrictRedis.lock")
     @patch("dash.orgs.models.TembaClient.get_runs")
@@ -1184,7 +1236,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1252,7 +1304,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1296,7 +1348,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1321,7 +1373,7 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.text, "We'll celebrate today")
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_3])]
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (
                 num_val_created,
                 num_val_updated,
@@ -1338,7 +1390,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_1, temba_run_2])]
 
-        with self.assertNumQueries(4):
+        with self.assertNumQueries(5):
             (
                 num_val_created,
                 num_val_updated,
@@ -1382,7 +1434,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1427,7 +1479,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1454,7 +1506,7 @@ class RapidProBackendTest(UreportTest):
         PollResult.objects.filter(ruleset="ruleset-uuid-2").update(date=None)
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1472,7 +1524,7 @@ class RapidProBackendTest(UreportTest):
         PollResult.objects.filter(ruleset="ruleset-uuid").update(date=None)
         mock_get_runs.side_effect = [MockClientQuery([temba_run_4])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1581,7 +1633,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run_no_response])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1644,7 +1696,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -1667,10 +1719,13 @@ class RapidProBackendTest(UreportTest):
         self.assertEqual(poll_result.text, "We'll win today")
 
     @patch("redis.client.StrictRedis.lock")
+    @patch("ureport.polls.models.Poll.get_flow_date")
     @patch("dash.orgs.models.TembaClient.get_archives")
     @patch("django.utils.timezone.now")
     @patch("requests.get")
-    def test_pull_results_from_archives(self, mock_request_get, mock_timezone_now, mock_get_archives, mock_redis_lock):
+    def test_pull_results_from_archives(
+        self, mock_request_get, mock_timezone_now, mock_get_archives, mock_poll_flow_date, mock_redis_lock
+    ):
         def gzipped_records(records):
             stream = io.BytesIO()
             gz = gzip.GzipFile(fileobj=stream, mode="wb")
@@ -1684,6 +1739,8 @@ class RapidProBackendTest(UreportTest):
 
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
+
+        mock_poll_flow_date.return_value = None
 
         PollResult.objects.all().delete()
         Contact.objects.create(
@@ -1753,9 +1810,7 @@ class RapidProBackendTest(UreportTest):
             (1, 0, 0, 0, 0, 1),
         )
 
-        mock_get_archives.assert_called_with(
-            archive_type="run", after=now_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        )
+        mock_get_archives.assert_called_with(archive_type="run", after=None)
         mock_redis_lock.assert_called_once_with(Poll.POLL_PULL_RESULTS_TASK_LOCK % (poll.org.pk, poll.flow_uuid))
 
         poll_result = PollResult.objects.filter(flow="flow-uuid", ruleset="ruleset-uuid", contact="C-001").first()
@@ -1896,7 +1951,7 @@ class RapidProBackendTest(UreportTest):
 
         mock_get_runs.side_effect = [MockClientQuery([temba_run])]
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(6):
             (
                 num_val_created,
                 num_val_updated,
@@ -2802,7 +2857,7 @@ class PerfTest(UreportTest):
         mock_get_runs.assert_called_once_with(flow=poll.flow_uuid, after=None, before="2015-04-08T12:48:44.320Z")
 
     @override_settings(DEBUG=True)
-    @patch("temba_client.clients.BaseClient._request")
+    @patch("dash.orgs.models.TembaClient._request")
     @patch("ureport.polls.tasks.pull_refresh.apply_async")
     @patch("django.core.cache.cache.set")
     @patch("django.utils.timezone.now")

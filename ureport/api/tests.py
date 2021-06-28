@@ -56,6 +56,8 @@ class UreportAPITests(APITestCase):
             modified_by=self.superuser,
         )
 
+        self.non_synced_poll = self.create_poll("unsynced", has_synced=False)
+
         self.news_item = self.create_news_item("Some item")
         self.create_video("Test Video")
         self.create_story("Test Story")
@@ -76,7 +78,7 @@ class UreportAPITests(APITestCase):
         self.assertEqual(Org.objects.filter(domain=subdomain).count(), 1)
         return Org.objects.get(domain=subdomain)
 
-    def create_poll(self, title, is_featured=False):
+    def create_poll(self, title, is_featured=False, has_synced=True):
         now = timezone.now()
         return Poll.objects.create(
             flow_uuid=six.text_type(randint(1000, 9999)),
@@ -85,6 +87,7 @@ class UreportAPITests(APITestCase):
             poll_date=now,
             org=self.uganda,
             is_featured=is_featured,
+            has_synced=has_synced,
             created_by=self.superuser,
             modified_by=self.superuser,
         )
@@ -294,10 +297,23 @@ class UreportAPITests(APITestCase):
         url2 = "/api/v1/polls/org/%d/" % self.nigeria.pk
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["count"], Poll.objects.filter(org=self.uganda).count())
+        self.assertEqual(
+            response.data["count"], Poll.objects.filter(org=self.uganda, is_active=True, has_synced=True).count()
+        )
+        self.assertTrue(response.data["results"][0]["created_on"] > response.data["results"][1]["created_on"])
+
         response = self.client.get(url2)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["count"], Poll.objects.filter(org=self.nigeria).count())
+        self.assertEqual(
+            response.data["count"], Poll.objects.filter(org=self.nigeria, is_active=True, has_synced=True).count()
+        )
+
+        response = self.client.get(f"{url}?sort=modified_on")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data["count"], Poll.objects.filter(org=self.uganda, is_active=True, has_synced=True).count()
+        )
+        self.assertTrue(response.data["results"][0]["modified_on"] > response.data["results"][1]["modified_on"])
 
     def test_polls_by_org_list_with_flow_uuid_parameter(self):
         url = "/api/v1/polls/org/%d/?flow_uuid=%s" % (self.uganda.pk, self.reg_poll.flow_uuid)
@@ -313,12 +329,21 @@ class UreportAPITests(APITestCase):
         self.assertEqual(response.data["count"], 2)
         self.assertEqual(response.data["results"][0]["title"], "second featured")
         self.assertEqual(response.data["results"][1]["title"], "first featured")
+        self.assertTrue(response.data["results"][0]["created_on"] > response.data["results"][1]["created_on"])
+
+        response = self.client.get(f"{url}?sort=modified_on")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["count"], 2)
+        self.assertTrue(response.data["results"][0]["modified_on"] > response.data["results"][1]["modified_on"])
 
     def test_featured_poll_by_org_list_when_no_featured_polls_exists(self):
         url = "/api/v1/polls/org/%d/featured/" % self.nigeria.pk
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["count"], 0)
+
+        response = self.client.get("/api/v1/polls/org/foo/featured/")
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_single_poll(self):
         url = "/api/v1/polls/%d/" % self.reg_poll.pk
@@ -335,6 +360,7 @@ class UreportAPITests(APITestCase):
                 org=poll.org_id,
                 questions=[],
                 poll_date=poll.poll_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                modified_on=poll.modified_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                 created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
             ),
         )
@@ -368,6 +394,7 @@ class UreportAPITests(APITestCase):
                     title=poll.title,
                     org=poll.org_id,
                     created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                    modified_on=poll.modified_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     poll_date=poll.poll_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     questions=[
                         dict(
@@ -399,6 +426,7 @@ class UreportAPITests(APITestCase):
                     title=poll.title,
                     org=poll.org_id,
                     poll_date=poll.poll_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                    modified_on=poll.modified_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     created_on=poll.created_on.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     questions=[],
                 ),

@@ -1,3 +1,343 @@
+v1.1.250
+----------
+ * Merge pull request #728 from Ilhasoft/feature/eastern-caribbean-flag
+ * Merge pull request #644 from Ilhasoft/feature/add-oecs-flag
+ * fix: Adjusted Eastern Caribbean flag
+ * fix: Runing black
+ * fix: Adjusted OECS flag and countries_codes
+ * add eastern caribbean flag on ureport
+ * fix: Fix countries code OECS remove the flag
+ * fix the name of flag file
+ * add oecs flag
+
+v1.1.249
+----------
+ * Merge pull request #735 from rapidpro/responders
+ * Compile messages
+ * Update translations
+ * Merge pull request #734 from rapidpro/responders
+ * Rename responses to responders
+
+v1.1.248
+----------
+ * Merge pull request #733 from rapidpro/contact-pull-on-status
+ * Better ordering or keys
+
+v1.1.247
+----------
+ * Merge pull request #732 from rapidpro/contact-pull-on-status
+ * Add tasks last successful time on task status endpoint
+
+v1.1.246
+----------
+ * Merge pull request #731 from rapidpro/contact-pull-on-status
+ * Add a new task status endpoint
+
+v1.1.245
+----------
+ * Merge pull request #730 from rapidpro/icons
+ * Add view to display icons added are matching the dimensions expected
+ * Merge pull request #729 from rapidpro/contact-pull-on-status
+ * Add contact sync up key to status monitoring endpoint
+
+v1.1.244
+----------
+ * Merge pull request #727 from rapidpro/fix-reported-errors
+ * Fix API endpoint to only accept int IDs
+
+v1.1.243
+----------
+ * Merge pull request #726 from rapidpro/increase-engagement-data-lock-time
+ * Increase lock timeout for refreshing engagement data task
+
+v1.1.242
+----------
+ * Merge pull request #725 from rapidpro/update-js-deps
+
+v1.1.240
+----------
+ * Merge pull request #723 from rapidpro/add-index-org-question
+ * Add index on poll stats org and question
+
+v1.1.239
+----------
+ * Merge pull request #722 from Ilhasoft/feature/paraguay-flag
+ * Merge pull request #721 from rapidpro/dependabot/npm_and_yarn/lodash-4.17.21
+ * Add Paraguay flag
+ * Bump lodash from 4.17.19 to 4.17.21
+
+v1.1.238
+----------
+ * Merge pull request #719 from rapidpro/fix-join-icons
+ * fix join icons to use a grid of 3 cols
+ * Merge pull request #718 from Ilhasoft/hotfix/change-kenya-address
+ * fix to change address from Kenya Ureport
+
+v1.1.237
+----------
+ * Merge pull request #716 from rapidpro/add-Angola
+ * Merge pull request #717 from rapidpro/add-telegram-bot-config
+ * Add Telegram bot org config
+ * Add Angola icon
+
+v1.1.236
+----------
+ * Merge pull request #715 from Ilhasoft/feature/italia-flag
+ * fix: Update Italy map
+ * Merge pull request #714 from Ilhasoft/feature/kenya-flag
+ * feat: Add Italia flag
+ * feat: Add Kenya flag
+
+v1.1.235
+----------
+ * Merge pull request #712 from Ilhasoft/feature/stp-flag
+ * fix: Removed ST from countries_codes
+ * feat: Added São Tomé and Príncipe flag
+
+v1.1.234
+----------
+ * Merge pull request #713 from rapidpro/GTM
+ * Add support for Google Tag Manager
+
+v1.1.233
+----------
+ * Merge pull request #711 from rapidpro/fix-errors
+ * Fix errors breaking the clear old results
+
+v1.1.232
+----------
+ * Merge pull request #710 from rapidpro/add-exc-info-to-error
+ * add execution info on error logging
+
+v1.1.231
+----------
+ * Merge pull request #709 from rapidpro/FB-verification
+ * Add configuration for FB domain verification
+
+v1.1.230
+----------
+ * Merge pull request #708 from rapidpro/fix-top-question-lookup
+ * Skip rebuilding stats for inactive polls
+
+v1.1.229
+----------
+ * Merge pull request #707 from rapidpro/fix-top-question-lookup
+ * Fix top question lookup
+
+v1.1.228
+----------
+ * Merge pull request #706 from rapidpro/update-district-caches
+ * Run code checks
+ * Update district poll results cache
+
+v1.1.227
+----------
+ * Merge pull request #705 from rapidpro/adjust-sync-schedule-message
+ * Adjust message for sync schedule
+
+v1.1.226
+----------
+ * Merge pull request #701 from rapidpro/translations_django-po--master_hr_HR
+ * Merge pull request #704 from rapidpro/keep-results-longer
+ * Run code checks
+ * Merge branch 'translations_django-po--master_hr_HR' of github.com:rapidpro/ureport into translations_django-po--master_hr_HR
+ * Merge pull request #703 from rapidpro/better-indexes
+ * Keep poll results for up to a year syncing from RapidPro
+ * Run code checks
+ * Add partial indexes
+ * Apply translations in hr_HR
+
+v1.1.225
+----------
+ * Merge pull request #702 from rapidpro/fix-colors-poll-status-message
+ * Fix primary  color, adjust poll status message
+
+v1.1.224
+----------
+ * Merge pull request #699 from rapidpro/fix-clear-results
+ * Log error for clearing results, and continue for other polls
+
+v1.1.223
+----------
+ * Merge pull request #698 from rapidpro/fix-boundaries-url
+ * Run code checks
+ * Add support for hyphens and underscore in osm IDs for boundaries URLs
+
+v1.1.222
+----------
+ * Merge pull request #697 from rapidpro/fix-date-format
+ * Fix to handle flow date as a json datetime
+
+v1.1.221
+----------
+ * Merge pull request #696 from rapidpro/adding-poll-from-flow-archived-results
+ * More tests
+ * Update django
+ * Pull results from archives for really old flow polls
+
+v1.1.220
+----------
+ * Merge pull request #691 from rapidpro/update-dash
+ * Merge pull request #694 from rapidpro/fix-search
+ * Fix search toggle button
+ * Merge pull request #693 from rapidpro/fix-sec-alerts
+ * Merge pull request #692 from rapidpro/translations_django-po--master_sr_RS@latin
+ * Fix sec alerts
+ * Rn code checks
+ * Update test deps
+ * Apply translations in sr_RS@latin
+ * Update to use latest rapidpro-dash
+
+v1.1.219
+----------
+ * Merge pull request #690 from rapidpro/poll-sync-modified-on
+ * Update Poll modified_on when the new poll results are completed
+ * Merge pull request #689 from rapidpro/update-deps
+ * Remove unused file
+ * Update deps
+ * Merge pull request #687 from Ilhasoft/feat/add-macedonia-flag
+ * Merge pull request #686 from rapidpro/translations_django-po--master_mk_MK
+ * Merge pull request #688 from rapidpro/dependabot/npm_and_yarn/y18n-4.0.1
+ * Bump y18n from 4.0.0 to 4.0.1
+ * Add macedonia flag
+ * Apply translations in mk_MK
+ * Merge pull request #685 from rapidpro/translations_django-po--master_mk_MK
+ * Run code checks
+ * Apply translations in mk_MK
+
+v1.1.218
+----------
+ * Bump elliptic from 6.5.3 to 6.5.4
+ * Add Solomon Islands flag
+
+v1.1.217
+----------
+ * Merge pull request #666 from rapidpro/panama-flag
+ * Update README.md
+ * Merge pull request #681 from Ilhasoft/feature/macedonia-language
+ * feat: Added Macedonian language
+ * Add Panama icon
+
+v1.1.216
+----------
+ * Revert Add Macedonia's flag
+
+
+v1.1.215
+----------
+ * Fix Canada URL
+
+v1.1.214
+----------
+ * Fix changelog
+ * Revert Update AWS DEFAULT ACL
+ * Update AWS DEFAULT ACL
+ * Revert Add a public storage class to use with thumbnail
+
+
+v1.1.213
+----------
+ * Merge pull request #679 from rapidpro/fix-thumbnail-storage0-permission
+ * Merge pull request #678 from Ilhasoft/feature/add-macedonia-flag
+ * Add a public storage class to use with thumbnail
+ * Add flag file and inset into settings_common dict
+
+v1.1.212
+----------
+ * Merge pull request #677 from rapidpro/polls-api-order
+ * Add optional parameters to sort polls by modified on descending when that is specified
+ * Merge pull request #676 from rapidpro/use-poetry
+
+v1.1.210
+----------
+ * Merge pull request #675 from rapidpro/better-display-of-login-errors
+ * Better display login errors
+
+v1.1.209
+----------
+ * Merge pull request #673 from rapidpro/update-smartmin
+ * Merge pull request #672 from rapidpro/fix-sec-issues
+ * Update deps
+ * Update jquery
+ * Make more variables safer with strip_tags
+
+v1.1.208
+----------
+ * Add locale
+ * Merge pull request #671 from rapidpro/custom-join-button
+ * Run code checks
+ * Allow customizing join button text
+
+v1.1.207
+----------
+ * Fix count link
+
+v1.1.206
+----------
+ * Merge pull request #669 from rapidpro/translations_django-po--master_mk_MK
+ * Merge pull request #670 from rapidpro/update-sentry-sdk
+ * Update sentry SDK
+ * Apply translations in mk_MK
+
+v1.1.205
+----------
+ * Merge pull request #667 from rapidpro/update-idx
+ * Move FB pixel to public site
+ * Add index on reporterscounter
+ * Bump CI testing to PG 11 and 12
+
+v1.1.204
+----------
+ * Merge pull request #664 from rapidpro/polls-api
+ * Merge pull request #665 from rapidpro/countries-flag
+ * Run code checks
+ * Add Canada on countries list
+ * Filter API polls to only show polls displayed on the public site
+ * Merge pull request #662 from rapidpro/dependabot/npm_and_yarn/ini-1.3.8
+ * Bump ini from 1.3.5 to 1.3.8
+
+v1.1.203
+----------
+ * Merge pull request #659 from rapidpro/fix-chart-labels-alignment
+ * Align labels to the left
+
+v1.1.202
+----------
+ * Merge pull request #658 from rapidpro/fix-stories-homepage
+
+v1.1.200
+----------
+ * Merge pull request #657 from rapidpro/sec-adjustments
+
+v1.1.197
+----------
+ * Merge pull request #656 from rapidpro/fix-counts-cache-to-consider
+ * Generate cache keys for the configured sites only
+
+v1.1.196
+----------
+ * Merge pull request #655 from rapidpro/pacific-as-1
+ * Regional site countries excluded from count for now
+
+v1.1.195
+----------
+ * Merge pull request #654 from rapidpro/add-np
+ * Add Nepal to countries dropdown
+ * Run code check
+ * Merge pull request #653 from rapidpro/translations_django-po--master_no
+ * Translate /locale/en/LC_MESSAGES/django.po in no
+
+v1.1.194
+----------
+ * Merge pull request #646 from rapidpro/fix-countries-count
+ * Update pacific countries
+
+v1.1.193
+----------
+ * Merge pull request #645 from rapidpro/fix-countries-count
+ * Remove unused flags
+ * Use ISO codes of countries to count site countries
+
 v1.1.192
 ----------
  * Merge pull request #642 from rapidpro/shared-flags

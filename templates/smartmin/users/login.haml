@@ -13,7 +13,7 @@
           %form#login-form(method="post")
             - for field, errors in form.errors.items
               - if field == '__all__'
-                .alert.alert-danger.form-errors
+                .alert.alert-danger.form-errors.notification.is-warning
                   %h3
                     - trans "Error"
                   {{ errors }}

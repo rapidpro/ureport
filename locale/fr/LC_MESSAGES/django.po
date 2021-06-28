@@ -4,19 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Nyaruka <info@textit.in>, 2019
-# Stéphane Gbonikan <agbonikan@unicef.org>, 2019
-# Jonathan Newberry <jnewberry@unicef.org>, 2019
-# Jesus EKIE <jesus@fehudigital.com>, 2020
+# Nyaruka <info@textit.in>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
-"PO-Revision-Date: 2019-05-15 20:27+0000\n"
-"Last-Translator: Jesus EKIE <jesus@fehudigital.com>, 2020\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"PO-Revision-Date: 2021-03-30 14:28+0000\n"
+"Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -938,15 +935,15 @@ msgstr ""
 "Nouvelles synchronisations initiales du sondage planifiées toutes les 10 "
 "minutes"
 
-msgid "Main poll syncs scheduled every 10min"
-msgstr "Synchronisation du sondage principal programmée toutes les 10 minutes"
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
+msgstr ""
 
 msgid "Recent poll syncs scheduled every 60min"
 msgstr ""
 "Synchronisations de sondages récentes planifiées toutes les 60 minutes"
-
-msgid "No longer scheduling syncs, runs archived"
-msgstr "Ne plus planifier les synchronisations, exécutions archivées"
 
 msgid "Poll syncs scheduled every 24h"
 msgstr "Synchronisation des sondages programmée toutes les 24h"
@@ -1009,9 +1006,6 @@ msgstr "AGES"
 msgid "Join U-Report, Your voice matters."
 msgstr "Rejoins U-Report, ta voix compte."
 
-msgid "JOIN NOW"
-msgstr "JOINDRE"
-
 msgid "FEATURED STORY"
 msgstr "ARTICLE SELECTIONNÉ"
 
@@ -1047,14 +1041,14 @@ msgstr "RECHERCHE"
 msgid "No results found"
 msgstr "Pas de resultat "
 
-msgid "RESPONSES"
-msgstr "REPONSES"
+msgid "RESPONDERS"
+msgstr "REPONDEURS"
 
 msgid "RESPONSE RATE"
 msgstr "TAUX DE RÉPONSE"
 
-msgid "TOTAL RESPONSES"
-msgstr "Réponses"
+msgid "TOTAL RESPONDERS"
+msgstr "TOUS REPONDEURS"
 
 #, python-format
 msgid "%(responded)s responded out of %(polled)s polled"
@@ -1090,8 +1084,8 @@ msgstr "Régional"
 msgid "Participation Level"
 msgstr "Niveau de participation"
 
-msgid "Responses"
-msgstr "Réponses"
+msgid "Responders"
+msgstr "Répondeurs"
 
 msgid "Reporters in"
 msgstr "U-Reporters dans"
@@ -1695,16 +1689,21 @@ msgstr ""
 "localement"
 
 msgid ""
-"The whatapp number that users will use to contact U-Report if you have one"
+"The WhatsApp number that users will use to contact U-Report if you have one"
 msgstr ""
-"Le numéro WhatsApp que les utilisateurs utiliseront pour contacter U-Report "
-"si vous en avez un"
+
+msgid ""
+"The Telegram bot that users will use to contact U-Report if you have one"
+msgstr ""
 
 msgid ""
 "The viber username that users will use to contact U-Report if you have one"
 msgstr ""
 "Le nom d'utilisateur Viber que les utilisateurs utiliseront pour contacter "
 "U-Report si vous en avez un"
+
+msgid "The join button text"
+msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr ""
@@ -1792,11 +1791,17 @@ msgstr ""
 "Les états à afficher uniquement sur les cartes, utilisés pour filtrer les "
 "résultats des sondages"
 
+msgid "The Google Tag Manager ID for this organization"
+msgstr ""
+
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "ID Google Analytics Tracking pour cette organisation"
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "URL de la chaine Youtube de cette organisation"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL de la page Facebook de cette organisation"

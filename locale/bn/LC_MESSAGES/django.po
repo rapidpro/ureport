@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -845,13 +845,13 @@ msgstr[1] "পোল এর প্রশ্নগুলো "
 msgid "New poll initial syncs scheduled every 10min"
 msgstr ""
 
-msgid "Main poll syncs scheduled every 10min"
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
 msgstr ""
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
-
-msgid "No longer scheduling syncs, runs archived"
 msgstr ""
 
 msgid "Poll syncs scheduled every 24h"
@@ -914,9 +914,6 @@ msgstr "বয়স"
 msgid "Join U-Report, Your voice matters."
 msgstr "U-Report-এর সাথে যুক্ত হোন, আপনার কথা গুরুত্বপূর্ণ"
 
-msgid "JOIN NOW"
-msgstr "এখুনি যোগদান করুন"
-
 msgid "FEATURED STORY"
 msgstr "বিশেষায়িত ঘটনা "
 
@@ -944,13 +941,17 @@ msgstr "সার্চ"
 msgid "No results found"
 msgstr "কোন ফলাফল খুঁজে পাওয়া যায়নি"
 
-msgid "RESPONSES"
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "প্রতিক্রিয়া"
 
 msgid "RESPONSE RATE"
 msgstr "প্রতিক্রিয়া হার"
 
-msgid "TOTAL RESPONSES"
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "সকল প্রতিক্রিয়া"
 
 #, python-format
@@ -987,7 +988,9 @@ msgstr "অঞ্চল "
 msgid "Participation Level"
 msgstr "অংশগ্রহন এর মাত্রা "
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "উত্তর গুলো "
 
 msgid "Reporters in"
@@ -1575,13 +1578,25 @@ msgstr "এই প্রতিষ্ঠানটির গণনা কেবল
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "ব্যবহারকারীরা যে  শর্ট কোড ব্যবহার করে  U-Report এ স্থানীয়ভাবে যোগাযোগ করবে"
 
-msgid "The whatapp number that users will use to contact U-Report if you have one"
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
+
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
 
 #, fuzzy
 #| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "ব্যবহারকারীদের যদি কোন WhatsApp নম্বর থেকে থাকে যা দিয়ে তারা চাইলে U-Report-এর সাথে যোগাযোগ করতে পারবে"
+
+#, fuzzy
+#| msgid "The font used for normal text"
+msgid "The join button text"
+msgstr "সাধারন টেক্সটের জন্য যে ফন্ট ব্যবহার করা হবে"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "ক্ষুদ্র বর্ণনা যা দর্শনার্থীদের U-Report এ যোগদান করার পথ দেখাবে "
@@ -1651,11 +1666,19 @@ msgstr "বিভাগগুলো কেবলমাত্র মানচি�
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "বিভাগগুলো কেবলমাত্র মানচিত্রে প্রদর্শিত হবে"
 
+#, fuzzy
+#| msgid "The Google Analytics Tracking ID for this organization"
+msgid "The Google Tag Manager ID for this organization"
+msgstr "এই প্রতিষ্ঠান এর গুগল অ্যানালিটিক্স ট্র্যাকিং আইডি "
+
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "এই প্রতিষ্ঠান এর গুগল অ্যানালিটিক্স ট্র্যাকিং আইডি "
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "এই প্রতিষ্ঠান এর YouTube চ্যানেল এর URL"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "এই প্রতিষ্ঠান এর ফেসবুক পেজ এর URL"
@@ -1759,6 +1782,9 @@ msgstr "এই ঘটনাটি প্রকাশিত হয়েছে ক�
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "
+
+#~ msgid "JOIN NOW"
+#~ msgstr "এখুনি যোগদান করুন"
 
 #~ msgid ""
 #~ "\n"

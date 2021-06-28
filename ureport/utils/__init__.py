@@ -18,7 +18,7 @@ from django.db.models import Sum
 from django.utils import timezone, translation
 import pytz
 from ureport.assets.models import Image, LOGO
-from raven.contrib.django.raven_compat.models import client
+from sentry_sdk import capture_exception
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
@@ -153,8 +153,8 @@ def fetch_flows(org, backend=None):
             cache_key = CACHE_ORG_FLOWS_KEY % (org.pk, backend_obj.slug)
             cache.set(cache_key, org_flows, UREPORT_ASYNC_FETCHED_DATA_CACHE_TIME)
 
-        except Exception:
-            client.captureException()
+        except Exception as e:
+            capture_exception(e)
             import traceback
 
             traceback.print_exc()
@@ -293,9 +293,16 @@ def get_global_count():
         return count_cached_value
 
     try:
-        old_site_reporter_counter_keys = cache.keys("org:*:reporters:old-site")
+        linked_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
 
-        cached_values = [cache.get(key) for key in old_site_reporter_counter_keys]
+        cached_values = []
+        for site in linked_sites:
+            count_link = site.get("count_link", "")
+            if count_link:
+                key = "org:%s:reporters:%s" % (site.get("name").lower(), "old-site")
+                value = cache.get(key)
+                if value:
+                    cached_values.append(value)
 
         # no old sites cache values, double check with a fetch
         if not cached_values:
@@ -842,7 +849,7 @@ def get_segment_org_boundaries(org, segment):
     if not segment:
         return location_boundaries
 
-    if segment.get("location") == "District":
+    if segment.get("location").lower() == "district":
         state_id = segment.get("parent", None)
         if state_id:
             location_boundaries = (
@@ -851,7 +858,7 @@ def get_segment_org_boundaries(org, segment):
                 .order_by("osm_id")
             )
 
-    elif segment.get("location") == "Ward":
+    elif segment.get("location").lower() == "ward":
         district_id = segment.get("parent", None)
         if district_id:
             location_boundaries = (

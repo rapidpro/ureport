@@ -5,10 +5,32 @@ import os
 import sys
 from datetime import timedelta
 
+import sentry_sdk
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration, ignore_logger
+
 from django.forms import Textarea
 from django.utils.translation import ugettext_lazy as _
 
 from celery.schedules import crontab
+
+SENTRY_DSN = os.environ.get("SENTRY_DSN", "")
+
+
+def traces_sampler(sampling_context):  # pragma: no cover
+    return 0 if ("shell" in sys.argv) else 1.0
+
+
+if SENTRY_DSN:  # pragma: no cover
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration(), CeleryIntegration(), LoggingIntegration()],
+        send_default_pii=True,
+        traces_sampler=traces_sampler,
+    )
+    ignore_logger("django.security.DisallowedHost")
+
 
 # -----------------------------------------------------------------------------------
 # Sets TESTING to True if this configuration is read during a unit test
@@ -78,6 +100,7 @@ LANGUAGES = (
     ("uk", "Ukrainian"),
     ("uz", "Uzbek"),
     ("my", "Burmese"),
+    ("mk_MK", "Macedonian"),
     ("id", "Indonesian"),
     ("it", "Italian"),
     ("ro", "Romanian"),
@@ -157,7 +180,6 @@ CSRF_COOKIE_AGE = 7200
 
 
 ROOT_URLCONF = "ureport.urls"
-
 
 DATA_API_BACKENDS_CONFIG = {
     "rapidpro": {"name": "RapidPro", "slug": "rapidpro", "class_type": "ureport.backend.rapidpro.RapidProBackend"}
@@ -260,8 +282,16 @@ ORG_CONFIG_FIELDS = [
     dict(
         name="whatsapp_number",
         field=dict(
-            help_text=_("The whatapp number that users will use to contact U-Report if you have one"),
-            label="Whatapp Number",
+            help_text=_("The WhatsApp number that users will use to contact U-Report if you have one"),
+            label="WhatApp Number",
+            required=False,
+        ),
+    ),
+    dict(
+        name="telegram_bot",
+        field=dict(
+            help_text=_("The Telegram bot that users will use to contact U-Report if you have one"),
+            label="Telegram Bot",
             required=False,
         ),
     ),
@@ -272,6 +302,10 @@ ORG_CONFIG_FIELDS = [
             label="Viber Username",
             required=False,
         ),
+    ),
+    dict(
+        name="join_button_text",
+        field=dict(help_text=_("The join button text"), label="Join Button Text", required=False),
     ),
     dict(
         name="join_text",
@@ -414,6 +448,14 @@ ORG_CONFIG_FIELDS = [
         superuser_only=True,
     ),
     dict(
+        name="google_tag_manager_id",
+        field=dict(
+            help_text=_("The Google Tag Manager ID for this organization"),
+            label="Google Tag Manager ID",
+            required=False,
+        ),
+    ),
+    dict(
         name="google_tracking_id",
         field=dict(
             help_text=_("The Google Analytics Tracking ID for this organization"),
@@ -428,6 +470,15 @@ ORG_CONFIG_FIELDS = [
             label="Youtube Channel URL",
             required=False,
         ),
+    ),
+    dict(
+        name="facebook_meta_verification",
+        field=dict(
+            help_text=_("The content for the meta tag for Facebook Domain Verification"),
+            label="Facebook Domain Verification",
+            required=False,
+        ),
+        superuser_only=True,
     ),
     dict(
         name="facebook_page_url",
@@ -772,8 +823,14 @@ LOGOUT_REDIRECT_URL = "/"
 # -----------------------------------------------------------------------------------
 # Auth Configuration
 # -----------------------------------------------------------------------------------
-
 AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+
+AUTH_PASSWORD_VALIDATORS = [
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", "OPTIONS": {"min_length": 8}},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+]
 
 ANONYMOUS_USER_NAME = "AnonymousUser"
 
@@ -889,7 +946,7 @@ CELERYBEAT_SCHEDULE = {
     "rebuild-poll-results-count": {"task": "polls.rebuild_counts", "schedule": crontab(hour=4, minute=0)},
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
-        "schedule": crontab(hour=4, minute=0),
+        "schedule": crontab(hour=6, minute=0),
         "args": ("ureport.polls.tasks.clear_old_poll_results", "slow"),
     },
     "polls_stats_squash": {
@@ -913,6 +970,7 @@ UREPORT_DEFAULT_SECONDARY_COLOR = "#1F49BF"
 SITE_ALLOW_NO_ORG = (
     "public.countries",
     "public.status",
+    "public.task_status",
     "public.shared_sites_count",
     "api",
     "api.v1",
@@ -941,409 +999,560 @@ COUNTRY_FLAGS_SITES = [
         name="Afghanistan",
         host="//afghanistan.ureport.in/",
         flag="flag_afghanistan.png",
+        countries_codes=["AFG"],
         count_link="http://afghanistan.ureport.in/count/",
+    ),
+    dict(
+        name="Angola",
+        host="//angola.ureport.in",
+        flag="flag_angola.png",
+        countries_codes=["AGO"],
+        count_link="http://angola.ureport.in/count/",
     ),
     dict(
         name="Argentina",
         host="//argentina.ureport.in/",
         flag="flag_argentina.png",
+        countries_codes=["ARG"],
         count_link="http://argentina.ureport.in/count/",
     ),
     dict(
         name="Bangladesh",
         host="//bangladesh.ureport.in/",
         flag="flag_bangladesh.png",
+        countries_codes=["BGD"],
         count_link="http://bangladesh.ureport.in/count/",
     ),
     dict(
         name="Barbados",
         host="//barbados.ureport.in/",
         flag="flag_barbados.png",
+        countries_codes=["BRB"],
         count_link="http://barbados.ureport.in/count/",
     ),
     dict(
         name="Belize",
         host="//belize.ureport.in/",
         flag="flag_belize.png",
+        countries_codes=["BLZ"],
         count_link="http://belize.ureport.in/count/",
     ),
     dict(
         name="Bolivia",
         host="//bolivia.ureport.in/",
         flag="flag_bolivia.png",
+        countries_codes=["BOL"],
         count_link="http://bolivia.ureport.in/count/",
     ),
     dict(
         name="Bosnia and Herzegovina",
         host="//bih.ureport.in/",
         flag="flag_bosnia_and_herzegovina.png",
+        countries_codes=["BIH"],
         count_link="http://bih.ureport.in/count/",
     ),
     dict(
         name="Brazil",
         host="//ureportbrasil.org.br/",
         flag="flag_brazil.png",
+        countries_codes=["BRA"],
         count_link="http://brasil.ureport.in/count/",
     ),
     dict(
         name="Bulgaria",
         host="//bulgaria.ureport.in/",
         flag="flag_bulgaria.png",
+        countries_codes=["BGA"],
         count_link="http://bulgaria.ureport.in/count/",
     ),
     dict(
         name="Botswana",
         host="//botswana.ureport.in/",
         flag="flag_botswana.png",
+        countries_codes=["BWA"],
         count_link="http://botswana.ureport.in/count/",
     ),
     dict(
         name="Burkina Faso",
         host="//burkinafaso.ureport.in/",
         flag="flag_burkina_faso.png",
+        countries_codes=["BFA"],
         count_link="http://burkinafaso.ureport.in/count/",
     ),
     dict(
         name="Burundi",
         host="//burundi.ureport.in/",
         flag="flag_burundi.png",
+        countries_codes=["BDI"],
         count_link="http://burundi.ureport.in/count/",
+    ),
+    dict(
+        name="Canada",
+        host="//canada-en.ureport.in/",
+        flag="flag_canada.png",
+        countries_codes=["CAN"],
+        count_link="http://canada-en.ureport.in/count/",
     ),
     dict(
         name="Cameroun",
         host="//cameroon.ureport.in/",
         flag="flag_cameroun.png",
+        countries_codes=["CMR"],
         count_link="http://cameroon.ureport.in/count/",
     ),
     dict(
         name="CAR",
         host="//centrafrique.ureport.in/",
         flag="flag_car.png",
+        countries_codes=["CAF"],
         count_link="http://centrafrique.ureport.in/count/",
     ),
     dict(
         name="Chile",
         host="//chile.ureport.in/",
         flag="flag_chile.png",
+        countries_codes=["CHL"],
         count_link="http://chile.ureport.in/count/",
     ),
     dict(
         name="Congo Brazzaville",
         host="//congobrazzaville.ureport.in/",
         flag="flag_congo_brazzaville.png",
+        countries_codes=["COG"],
         count_link="http://congobrazzaville.ureport.in/count/",
     ),
     dict(
         name="Costa Rica",
         host="//costarica.ureport.in/",
         flag="flag_costa_rica.png",
+        countries_codes=["CRI"],
         count_link="https://costarica.ureport.in/count/",
     ),
     dict(
         name="Cote d'ivoire",
         host="//cotedivoire.ureport.in/",
         flag="flag_cote_d_ivoire.png",
+        countries_codes=["CIV"],
         count_link="http://cotedivoire.ureport.in/count/",
     ),
     dict(
         name="Croatia",
         host="//croatia.ureport.in/",
         flag="flag_croatia.png",
+        countries_codes=["HRV"],
         count_link="http://croatia.ureport.in/count/",
     ),
     dict(
         name="DRC",
         host="//drc.ureport.in/",
         flag="flag_drc.png",
+        countries_codes=["COD"],
         count_link="http://drc.ureport.in/count/",
+    ),
+    dict(
+        name="Eastern Caribbean Area",
+        host="//eca.ureport.in/",
+        flag="flag_eca.png",
+        countries_codes=["ECA"],
+        count_link="http://eca.ureport.in/count/",
     ),
     dict(
         name="Ecuador",
         host="//ecuador.ureport.in/",
         flag="flag_ecuador.png",
+        countries_codes=["ECU"],
         count_link="http://ecuador.ureport.in/count/",
     ),
     dict(
         name="El Salvador",
         host="//elsalvador.ureport.in/",
         flag="flag_el_salvador.png",
+        countries_codes=["SLV"],
         count_link="http://elsalvador.ureport.in/count/",
     ),
     dict(
         name="Eswatini",
         host="//eswatini.ureport.in/",
         flag="flag_eswatini.png",
+        countries_codes=["SWZ"],
         count_link="http://eswatini.ureport.in/count/",
     ),
     dict(
         name="France",
         host="//france.ureport.in",
         flag="flag_france.png",
+        countries_codes=["FRA"],
         count_link="http://france.ureport.in/count/",
     ),
     dict(
         name="FSM",
         host="//fsm.ureport.in",
         flag="flag_fsm.png",
+        countries_codes=["FSM"],
         count_link="http://fsm.ureport.in/count/",
     ),
     dict(
         name="Gambia",
         host="//gambia.ureport.in/",
         flag="flag_gambia.png",
+        countries_codes=["GMB"],
         count_link="http://gambia.ureport.in/count/",
     ),
     dict(
         name="Ghana",
         host="//ghana.ureport.in/",
         flag="flag_ghana.png",
+        countries_codes=["GHA"],
         count_link="http://ghana.ureport.in/count/",
     ),
     dict(
         name="Guatemala",
         host="//guatemala.ureport.in/",
         flag="flag_guatemala.png",
+        countries_codes=["GTM"],
         count_link="http://guatemala.ureport.in/count/",
     ),
     dict(
         name="Guinea",
         host="//guinea.ureport.in/",
         flag="flag_guinea.png",
+        countries_codes=["GIN"],
         count_link="http://guinea.ureport.in/count/",
     ),
     dict(
         name="Haiti",
         host="//haiti.ureport.in/",
         flag="flag_haiti.png",
+        countries_codes=["HTI"],
         count_link="http://haiti.ureport.in/count/",
     ),
     dict(
         name="Honduras",
         host="//honduras.ureport.in",
         flag="flag_honduras.png",
+        countries_codes=["HND"],
         count_link="http://honduras.ureport.in/count/",
     ),
     dict(
         name="India",
         host="//india.ureport.in",
         flag="flag_india.png",
+        countries_codes=["IND"],
         count_link="http://india.ureport.in/count/",
     ),
     dict(
         name="Indonesia",
         host="//indonesia.ureport.in",
         flag="flag_indonesia.png",
+        countries_codes=["IDN"],
         count_link="http://indonesia.ureport.in/count/",
     ),
     dict(
         name="Iraq",
         host="//iraq.ureport.in",
         flag="flag_iraq.png",
+        countries_codes=["IRQ"],
         count_link="http://iraq.ureport.in/count/",
     ),
     dict(
         name="Ireland",
         host="//ireland.ureport.in",
         flag="flag_ireland.png",
+        countries_codes=["IRL"],
         count_link="http://ireland.ureport.in/count/",
+    ),
+    dict(
+        name="Italia",
+        host="//italia.ureport.in",
+        flag="flag_italia.png",
+        countries_codes=["ITA"],
+        count_link="http://italia.ureport.in/count/",
     ),
     dict(
         name="Jamaica",
         host="//jamaica.ureport.in/",
         flag="flag_jamaica.png",
+        countries_codes=["JAM"],
         count_link="http://jamaica.ureport.in/count/",
     ),
     dict(
         name="Jordan",
         host="//jordan.ureport.in/",
         flag="flag_jordan.png",
+        countries_codes=["JOR"],
         count_link="http://jordan.ureport.in/count/",
+    ),
+    dict(
+        name="Kenya",
+        host="//yunitok.in/",
+        flag="flag_kenya.png",
+        countries_codes=["KEN"],
+        count_link="http://kenya.ureport.in/count/",
     ),
     dict(
         name="Kiribati",
         host="//kiribati.ureport.in/",
         flag="flag_kiribati.png",
+        countries_codes=["KIR"],
         count_link="http://kiribati.ureport.in/count/",
     ),
     dict(
         name="Lebanon",
         host="//lebanon.ureport.in/",
         flag="flag_lebanon.png",
+        countries_codes=["LBN"],
         count_link="http://lebanon.ureport.in/count/",
     ),
     dict(
         name="Lesotho",
         host="//les.ureport.in/",
         flag="flag_lesotho.png",
+        countries_codes=["LSO"],
         count_link="http://les.ureport.in/count/",
     ),
     dict(
         name="Liberia",
         host="//liberia.ureport.in/",
         flag="flag_liberia.png",
+        countries_codes=["LBR"],
         count_link="http://liberia.ureport.in/count/",
+    ),
+    dict(
+        name="Macedona",
+        host="//mk.ureport.in/",
+        flag="flag_macedonia.png",
+        countries_codes=["MKD"],
+        count_link="http://mk.ureport.in/count/",
     ),
     dict(
         name="Malawi",
         host="//ureport.mw/",
         flag="flag_malawi.png",
+        countries_codes=["MWI"],
         count_link="http://ureport.mw/count/",
     ),
     dict(
         name="Malaysia",
         host="//malaysia.ureport.in/",
         flag="flag_malaysia.png",
+        countries_codes=["MYS"],
         count_link="http://malaysia.ureport.in/count/",
     ),
     dict(
         name="Mali",
         host="//mali.ureport.in/",
         flag="flag_mali.png",
+        countries_codes=["MLI"],
         count_link="http://mali.ureport.in/count/",
     ),
     dict(
         name="Mexico",
         host="//mexico.ureport.in/",
         flag="flag_mexico.png",
+        countries_codes=["MEX"],
         count_link="http://mexico.ureport.in/count/",
     ),
     dict(
         name="Moldova",
         host="//moldova.ureport.in",
         flag="flag_moldova.png",
+        countries_codes=["MDA"],
         count_link="http://moldova.ureport.in/count/",
     ),
     dict(
-        name="Mozambiqui",
+        name="Mozambique",
         host="//smsbiz.co.mz/",
         flag="flag_mozambique.png",
+        countries_codes=["MOZ"],
         count_link="http://smsbiz.co.mz/count/",
     ),
     dict(
         name="Myanmar",
         host="//myanmar.ureport.in",
         flag="flag_myanmar.png",
+        countries_codes=["MMR"],
         count_link="http://myanmar.ureport.in/count/",
     ),
     dict(
         name="Nigeria",
         host="//nigeria.ureport.in",
         flag="flag_nigeria.png",
+        countries_codes=["NGA"],
         count_link="http://nigeria.ureport.in/count/",
     ),
     dict(
         name="Nigeria24x7",
         host="//nigeria24x7.ureport.in",
         flag="flag_nigeria24x7.png",
-        count_as_country=False,
+        countries_codes=["NGA"],
         count_link="http://nigeria24x7.ureport.in/count/",
+    ),
+    dict(
+        name="Nepal",
+        host="//nepal.ureport.in",
+        flag="flag_nepal.png",
+        countries_codes=["NPL"],
+        count_link="http://nepal.ureport.in/count/",
     ),
     dict(
         name="Norge",
         host="//norge.ureport.in",
         flag="flag_norge.png",
+        countries_codes=["NOR"],
         count_link="http://norge.ureport.in/count/",
+    ),
+    dict(
+        name="OECS",
+        host="//oecs.ureport.in",
+        flag="flag_oecs.png",
+        countries_codes=["ATG"],  # ["ATG", "VGB", "DMA", "GRD", "MSR", "KNA", "LCA", "VCT", "TCA"],
+        count_link="http://oecs.ureport.in/count/",
     ),
     dict(
         name="On the move",
         host="//onthemove.ureport.in",
         flag="flag_on_the_move.png",
+        countries_codes=["ITA"],
         count_link="http://onthemove.ureport.in/count/",
     ),
     dict(
         name="Pacific",
         host="//pacific.ureport.in",
         flag="flag_pacific.png",
+        countries_codes=["FJI"],  # ["COK", "FJI", "MHL", "NRU", "NIU", "PLW", "WSM", "TKL", "TON", "TUV", "VUT"],
         count_link="http://pacific.ureport.in/count/",
     ),
     dict(
         name="Pakistan",
         host="//ureport.pk",
         flag="flag_pakistan.png",
+        countries_codes=["PAK"],
         count_link="http://ureport.pk/count/",
+    ),
+    dict(
+        name="Panama",
+        host="//panama.ureport.in",
+        flag="flag_panama.png",
+        countries_codes=["PAN"],
+        count_link="http://panama.ureport.in/count/",
+    ),
+    dict(
+        name="Paraguay",
+        host="//paraguay.ureport.in",
+        flag="flag_paraguay.png",
+        countries_codes=["PAR"],
+        count_link="http://paraguay.ureport.in/count/",
     ),
     dict(
         name="Philippines",
         host="//philippines.ureport.in",
         flag="flag_philippines.png",
+        countries_codes=["PHL"],
         count_link="http://philippines.ureport.in/count/",
     ),
     dict(
         name="PNG",
         host="//png.ureport.in",
         flag="flag_png.png",
+        countries_codes=["PNG"],
         count_link="http://png.ureport.in/count/",
     ),
     dict(
         name="România",
         host="//romania.ureport.in/",
         flag="flag_romania.png",
+        countries_codes=["ROU"],
         count_link="http://romania.ureport.in/count/",
+    ),
+    dict(
+        name="São Tomé and Príncipe",
+        host="//stp.ureport.in",
+        flag="flag_stp.png",
+        countries_codes=["STP"],
+        count_link="http://stp.ureport.in/count/",
     ),
     dict(
         name="Senegal",
         host="//senegal.ureport.in/",
         flag="flag_senegal.png",
+        countries_codes=["SEN"],
         count_link="http://senegal.ureport.in/count/",
     ),
     dict(
         name="Serbia",
         host="//serbia.ureport.in/",
         flag="flag_serbia.png",
+        countries_codes=["SRB"],
         count_link="http://serbia.ureport.in/count/",
     ),
     dict(
         name="Sierra Leone",
         host="//sierraleone.ureport.in",
         flag="flag_sierra_leone.png",
+        countries_codes=["SLE"],
         count_link="http://sierraleone.ureport.in/count/",
+    ),
+    dict(
+        name="Solomon Islands",
+        host="//solomonislands.ureport.in",
+        flag="flag_solomon_islands.png",
+        countries_codes=["SLB"],
+        count_link="http://solomonislands.ureport.in/count/",
     ),
     dict(
         name="South Africa",
         host="//sa.ureport.in",
         flag="flag_south_africa.png",
+        countries_codes=["ZAF"],
         count_link="http://sa.ureport.in/count/",
     ),
     dict(
         name="South Asia",
         host="//southasia.ureport.in",
         flag="flag_south_asia.png",
+        countries_codes=[],  # ["AFG", "BGD", "BTN", "IND", "MDV", "NPL", "PAK", "LKA"],
         count_link="http://southasia.ureport.in/count/",
     ),
     dict(
         name="Tanzania",
         host="//tanzania.ureport.in",
         flag="flag_tanzania.png",
+        countries_codes=["TZA"],
         count_link="http://tanzania.ureport.in/count/",
     ),
     dict(
         name="Tchad",
         host="//tchad.ureport.in",
         flag="flag_tchad.png",
+        countries_codes=["TCD"],
         count_link="http://tchad.ureport.in/count/",
     ),
     dict(
         name="Thailand",
         host="//thailand.ureport.in",
         flag="flag_thailand.png",
+        countries_codes=["THA"],
         count_link="http://thailand.ureport.in/count/",
     ),
     dict(
         name="Trinidad and Tobago",
         host="//tt.ureport.in/",
         flag="flag_trinidad_and_tobago.png",
+        countries_codes=["TTO"],
         count_link="http://tt.ureport.in/count/",
     ),
     dict(
         name="Tunisia",
         host="//tunisie.ureport.in",
         flag="flag_tunisia.png",
+        countries_codes=["TUN"],
         count_link="http://tunisie.ureport.in/count/",
     ),
     dict(
         name="Uganda",
         host="//ureport.ug",
         flag="flag_uganda.png",
+        countries_codes=["UGA"],
         count_link="http://ureport.ug/count/",
     ),
     dict(
@@ -1368,43 +1577,49 @@ COUNTRY_FLAGS_SITES = [
         name="Ukraine",
         host="//ukraine.ureport.in",
         flag="flag_ukraine.png",
+        countries_codes=["UKR"],
         count_link="http://ukraine.ureport.in/count/",
     ),
     dict(
         name="Uzbekistan",
         host="//uzbekistan.ureport.in",
         flag="flag_uzberkistan.png",
+        countries_codes=["UZB"],
         count_link="http://uzbekistan.ureport.in/count/",
     ),
     dict(
         name="Vietnam",
         host="//vietnam.ureport.in",
         flag="flag_vietnam.png",
+        countries_codes=["VNM"],
         count_link="http://vietnam.ureport.in/count/",
     ),
     dict(
         name="Western Balkans",
         host="//westernbalkans.ureport.in",
         flag="flag_western_balkans.png",
+        countries_codes=["ALB", "XKX", "MNE"],
         count_link="http://westernbalkans.ureport.in/count/",
     ),
     dict(
         name="Zambia",
         host="//zm.ureport.in",
         flag="flag_zambia.png",
+        countries_codes=["ZMB"],
         count_link="http://zm.ureport.in/count/",
     ),
     dict(
         name="Zimbabwe",
         host="//zimbabwe.ureport.in",
         flag="flag_zimbabwe.png",
+        countries_codes=["ZWE"],
         count_link="http://zimbabwe.ureport.in/count/",
     ),
     dict(
         name="Global",
         host="//ureport.in",
         flag="",
-        count_as_country=False,
+        countries_codes=[],
         show_icon=False,
         count_link="https://www.ureport.in/count/",
     ),

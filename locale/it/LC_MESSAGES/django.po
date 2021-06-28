@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -842,13 +842,13 @@ msgstr[1] "Domande sondaggio"
 msgid "New poll initial syncs scheduled every 10min"
 msgstr ""
 
-msgid "Main poll syncs scheduled every 10min"
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
 msgstr ""
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
-
-msgid "No longer scheduling syncs, runs archived"
 msgstr ""
 
 msgid "Poll syncs scheduled every 24h"
@@ -911,9 +911,6 @@ msgstr "ETÀ"
 msgid "Join U-Report, Your voice matters."
 msgstr "Unisciti a U-Report, la tua voce conta"
 
-msgid "JOIN NOW"
-msgstr "ADERISCI ORA"
-
 msgid "FEATURED STORY"
 msgstr "STORIA IN PRIMO PIANO"
 
@@ -941,13 +938,17 @@ msgstr ""
 msgid "No results found"
 msgstr "Nessun risultato trovato"
 
-msgid "RESPONSES"
+#, fuzzy
+#| msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "RISPOSTE"
 
 msgid "RESPONSE RATE"
 msgstr "TASSO DI RISPOSTA"
 
-msgid "TOTAL RESPONSES"
+#, fuzzy
+#| msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "RISPOSTE TOTALI"
 
 #, python-format
@@ -984,7 +985,9 @@ msgstr "Provincia"
 msgid "Participation Level"
 msgstr "Livello di partecipazione"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Risposte"
 
 msgid "Reporters in"
@@ -1583,13 +1586,25 @@ msgstr "Se questo contenuto deve includere un link"
 msgid "The shortcode that users will use to contact U-Report locally"
 msgstr "Il codice abbreviato che gli utenti useranno per contattare U-Report localmente"
 
-msgid "The whatapp number that users will use to contact U-Report if you have one"
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr "Il numero whatsapp che gli utenti useranno per contattare U-Report, se disponibile"
+
+#, fuzzy
+#| msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Il numero whatsapp che gli utenti useranno per contattare U-Report, se disponibile"
 
 #, fuzzy
 #| msgid "The whatapp number that users will use to contact U-Report if you have one"
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Il numero whatsapp che gli utenti useranno per contattare U-Report, se disponibile"
+
+#, fuzzy
+#| msgid "The font used for normal text"
+msgid "The join button text"
+msgstr "Il font usato per i testi normali"
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Il testo abbreviato usato per invitare i visitatori ad aderire a U-Report"
@@ -1659,11 +1674,19 @@ msgstr "Gli stati da mostrare solo nelle mappe"
 msgid "The states to show on maps only, used to filter poll results"
 msgstr "Gli stati da mostrare solo nelle mappe"
 
+#, fuzzy
+#| msgid "The Google Analytics Tracking ID for this organization"
+msgid "The Google Tag Manager ID for this organization"
+msgstr "Il tracking ID Google Analytics per questa organizzazione"
+
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "Il tracking ID Google Analytics per questa organizzazione"
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "L'URL per il canale Youtube per questa organizzazione"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "L'URL per la pagina Facebook per questa organizzazione"
@@ -1767,6 +1790,9 @@ msgstr "Se questa storia è apparsa"
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"
+
+#~ msgid "JOIN NOW"
+#~ msgstr "ADERISCI ORA"
 
 #~ msgid ""
 #~ "\n"

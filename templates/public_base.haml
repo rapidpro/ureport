@@ -5,6 +5,8 @@
 
   %head
     %meta(charset="UTF-8")
+    -if org|config:"facebook_meta_verification"
+      %meta(name="facebook-domain-verification" content='{{ org|config:"facebook_meta_verification" }}')
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     %meta(http-equiv="X-UA-Compatible" content="ie=edge")
     %title
@@ -187,6 +189,28 @@
       ];
       {% endif %}
 
+    -if org and org|config:"google_tag_manager_id"
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','{{ org|config:"google_tag_manager_id" }}');</script>
+      <!-- End Google Tag Manager -->
+
+    -if org|config:"facebook_pixel_id"
+      <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','//connect.facebook.net/{{ org_lang }}/fbevents.js');
+        fbq('init', '{{ org|config:"facebook_pixel_id" }}');
+        fbq('track', 'PageView');
+      </script>
+      <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=#{ org|config:"facebook_pixel_id" }&amp;ev=PageView&amp;noscript=1"/></noscript>
+
   %body.font-sans.relative
     #fb-root
     -if org|config:"facebook_page_id" and org|config:"facebook_app_id"
@@ -215,6 +239,13 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+
+    - if org and org|config:"google_tag_manager_id"
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ org|config:'google_tag_manager_id' }}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+      <!-- End Google Tag Manager (noscript) -->
 
     .modal.fixed.hidden.z-1.top-0.left-0.w-full.h-full.overwlow-auto.bg-gray-900.export-modal.shadow(style="z-index:900;")
       .modal-content.mx-auto.my-40.p-6.border.border-black.bg-white.sticky.top-45(class="w-3/5")
@@ -271,7 +302,10 @@
               %i.fab.fa-twitter
 
         %a.block.font-bold.mt-4(href="{% url 'public.join' %}" class="hover:text-gray-600")
-          -trans "Join Now"
+          - if org|config:"join_button_text"
+            {{ org|config:"join_button_text" }}
+          - else
+            -trans "Join Now"
         
         - if other_languages_sites
           .block.mt-4.font-bold.mobile-accordion.text-sm.cursor-pointer
@@ -471,7 +505,10 @@
                 %i.fab.fa-twitter
   
             %a.flex-initial.rounded-lg.bg-black.text-white.ml-4.px-4.py-menu(href="{% url 'public.join' %}" class="hover:bg-gray-700")
-              -trans "Join Now"
+              - if org|config:"join_button_text"
+                {{ org|config:"join_button_text" }}
+              - else
+                -trans "Join Now"
 
             - if other_languages_sites
               %a#languages-toggler.flex-initial.ml-4.w-10.py-menu.language-menu(class="rtl:float-left ltr:float-right")
@@ -686,8 +723,12 @@
   -block script
     :javascript
       // global primary color
+      {% if org|config:"dark1_color" %}
+      var primaryColor = '{{ org|config:"dark1_color"}}';
+      {% else %}
       var primaryColor = '{{ org|config:"primary_color"}}';
-      window.string_Responses = "{% trans "Responses" %}";
+      {% endif %}
+      window.string_Responders = "{% trans "Responders" %}";
       window.string_Polled = "{% trans "Polled" %}";
       window.string_Reporters = "{% trans "Reporters" %}";
       window.string_TopRegion = "{% trans "Top Region" %}";

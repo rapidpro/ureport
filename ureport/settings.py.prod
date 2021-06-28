@@ -25,10 +25,15 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = "Strict"
 CSRF_COOKIE_AGE = 10800
 
-SECURE_HSTS_SECONDS = 86400
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
+SECURE_HSTS_PRELOAD = False
+SECURE_HSTS_SECONDS = 86400
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'HTTPS')
+SECURE_REDIRECT_EXEMPT =  []
+SECURE_SSL_HOST = None
+SECURE_SSL_REDIRECT = False
 
 # these guys will get email from sentry
 ADMINS = (
@@ -45,15 +50,9 @@ EMAIL_USE_TLS = True
 MANAGERS = ADMINS
 
 # add gunicorn
-INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'raven.contrib.django.raven_compat', 'storages')
+INSTALLED_APPS = INSTALLED_APPS + ('gunicorn', 'storages')
 
-# Set your DSN value
-RAVEN_CONFIG = {
-    'dsn': os.environ.get('RAVEN_DSN', 'MISSING_RAVEN_DSN'),
 
-}
-
-# we store files on S3 on prod boxes
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'MISSING_AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'MISSING_AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'dl-ureport'
@@ -93,7 +92,7 @@ DATABASES['default']['CONN_MAX_AGE'] = 60
 
 # no debug toolbar in prod
 MIDDLEWARE = (
-    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -101,26 +100,19 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'smartmin.middleware.AjaxRedirect',
     'django.middleware.locale.LocaleMiddleware',
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'dash.orgs.middleware.SetOrgMiddleware',
 )
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
-    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },
     },
     'handlers': {
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -134,11 +126,6 @@ LOGGING = {
     'loggers': {
         'django.db.backends': {
             'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': False,
         },

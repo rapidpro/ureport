@@ -198,15 +198,21 @@ def pull_results_recent_polls(org, since, until):
     return results_log
 
 
-@org_task("clear-old-poll-results", 60 * 60 * 3)
+@org_task("clear-old-poll-results", 60 * 60 * 5)
 def clear_old_poll_results(org, since, until):
     from .models import Poll
 
     now = timezone.now()
     r = get_redis_connection()
-    time_window = now - timedelta(days=90)
+    syncing_window = now - timedelta(days=365)
+    new_window = now - timedelta(days=14)
 
-    old_polls = Poll.objects.filter(org=org).exclude(poll_date__gte=time_window).order_by("pk")
+    old_polls = (
+        Poll.objects.filter(org=org)
+        .exclude(poll_date__gte=syncing_window)
+        .exclude(created_on__gte=new_window)
+        .order_by("pk")
+    )
     for poll in old_polls:
 
         key = Poll.POLL_PULL_RESULTS_TASK_LOCK % (org.pk, poll.flow_uuid)
@@ -216,14 +222,22 @@ def clear_old_poll_results(org, since, until):
             )
         else:
             with r.lock(key, timeout=Poll.POLL_SYNC_LOCK_TIMEOUT):
-                # one last stats rebuild for the poll
-                poll.rebuild_poll_results_counts()
+                try:
+                    # one last stats rebuild for the poll
+                    poll.rebuild_poll_results_counts()
 
-                if not poll.stopped_syncing:
-                    poll.delete_poll_results()
-                    Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
-                    logger.info(
-                        "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
+                    if not poll.stopped_syncing:
+                        poll.delete_poll_results()
+                        Poll.objects.filter(org=org, flow_uuid=poll.flow_uuid).update(stopped_syncing=True)
+                        logger.info(
+                            "Cleared poll results and stopped syncing for poll #%s on org #%s" % (poll.id, poll.org_id)
+                        )
+                except Exception:
+
+                    logger.error(
+                        "Error clearing old poll results for poll #%s on org #%s" % (poll.id, poll.org_id),
+                        exc_info=True,
+                        extra={"stack": True},
                     )
 
 

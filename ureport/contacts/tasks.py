@@ -5,6 +5,7 @@ import time
 
 from dash.orgs.models import Org
 from dash.orgs.tasks import org_task
+from dash.utils.sync import SyncOutcome
 
 from django.core.cache import cache
 from django.utils import timezone
@@ -53,7 +54,12 @@ def pull_contacts(org, ignored_since, ignored_until):
 
         start = time.time()
 
-        fields_created, fields_updated, fields_deleted, ignored = backend.pull_fields(org)
+        backend_fields_results = backend.pull_fields(org)
+
+        fields_created = backend_fields_results[SyncOutcome.created]
+        fields_updated = backend_fields_results[SyncOutcome.updated]
+        fields_deleted = backend_fields_results[SyncOutcome.deleted]
+        ignored = backend_fields_results[SyncOutcome.ignored]
 
         logger.info(
             "Fetched contact fields for org #%d. "
@@ -64,7 +70,12 @@ def pull_contacts(org, ignored_since, ignored_until):
 
         start_boundaries = time.time()
 
-        boundaries_created, boundaries_updated, boundaries_deleted, ignored = backend.pull_boundaries(org)
+        backend_boundaries_results = backend.pull_boundaries(org)
+
+        boundaries_created = backend_boundaries_results[SyncOutcome.created]
+        boundaries_updated = backend_boundaries_results[SyncOutcome.updated]
+        boundaries_deleted = backend_boundaries_results[SyncOutcome.deleted]
+        ignored = backend_boundaries_results[SyncOutcome.ignored]
 
         logger.info(
             "Fetched boundaries for org #%d. "
@@ -75,7 +86,12 @@ def pull_contacts(org, ignored_since, ignored_until):
         logger.info("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
         start_contacts = time.time()
 
-        contacts_created, contacts_updated, contacts_deleted, ignored = backend.pull_contacts(org, since, until)
+        backend_contact_results, resume_cursor = backend.pull_contacts(org, since, until)
+
+        contacts_created = backend_contact_results[SyncOutcome.created]
+        contacts_updated = backend_contact_results[SyncOutcome.updated]
+        contacts_deleted = backend_contact_results[SyncOutcome.deleted]
+        ignored = backend_contact_results[SyncOutcome.ignored]
 
         cache.set(last_fetch_date_key, until, None)
 

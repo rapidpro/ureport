@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 14:10+0000\n"
+"POT-Creation-Date: 2021-06-18 20:31+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -888,13 +888,13 @@ msgstr[2] "Anketna pitanja"
 msgid "New poll initial syncs scheduled every 10min"
 msgstr ""
 
-msgid "Main poll syncs scheduled every 10min"
+msgid "No longer scheduling syncs for old polls, runs archived"
+msgstr ""
+
+msgid "Main poll syncs scheduled every 20min"
 msgstr ""
 
 msgid "Recent poll syncs scheduled every 60min"
-msgstr ""
-
-msgid "No longer scheduling syncs, runs archived"
 msgstr ""
 
 msgid "Poll syncs scheduled every 24h"
@@ -967,9 +967,6 @@ msgstr ""
 msgid "Join U-Report, Your voice matters."
 msgstr ""
 
-msgid "JOIN NOW"
-msgstr ""
-
 msgid "FEATURED STORY"
 msgstr "PRIČA IZ ŽIVOTA"
 
@@ -1001,7 +998,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
-msgid "RESPONSES"
+msgid "RESPONDERS"
 msgstr "STOPA ODGOVORA"
 
 msgid "RESPONSE RATE"
@@ -1009,7 +1006,7 @@ msgstr "STOPA ODGOVORA"
 
 #, fuzzy
 #| msgid "RESPONSE RATE"
-msgid "TOTAL RESPONSES"
+msgid "TOTAL RESPONDERS"
 msgstr "STOPA ODGOVORA"
 
 #, fuzzy, python-format
@@ -1054,7 +1051,9 @@ msgstr "Opština"
 msgid "Participation Level"
 msgstr "Nivo učešća"
 
-msgid "Responses"
+#, fuzzy
+#| msgid "Responses"
+msgid "Responders"
 msgstr "Odgovori"
 
 msgid "Reporters in"
@@ -1696,13 +1695,21 @@ msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno
 
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
-msgid "The whatapp number that users will use to contact U-Report if you have one"
+msgid "The WhatsApp number that users will use to contact U-Report if you have one"
+msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno"
+
+#, fuzzy
+#| msgid "The shortcode that users will use to contact U-Report locally"
+msgid "The Telegram bot that users will use to contact U-Report if you have one"
 msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno"
 
 #, fuzzy
 #| msgid "The shortcode that users will use to contact U-Report locally"
 msgid "The viber username that users will use to contact U-Report if you have one"
 msgstr "Kratki kod koji će korisnici koristiti da kontaktiraju U-Report lokalno"
+
+msgid "The join button text"
+msgstr ""
 
 msgid "The short text used to direct visitors to join U-Report"
 msgstr "Kratak tekst kojim se posetioci upućuju da se pridruže U-Reportu"
@@ -1786,11 +1793,19 @@ msgstr ""
 msgid "The states to show on maps only, used to filter poll results"
 msgstr ""
 
+#, fuzzy
+#| msgid "The Google Analytics Tracking ID for this organization"
+msgid "The Google Tag Manager ID for this organization"
+msgstr "ID praćenja Google analitike za ovu organizaciju"
+
 msgid "The Google Analytics Tracking ID for this organization"
 msgstr "ID praćenja Google analitike za ovu organizaciju"
 
 msgid "The URL to the Youtube channel for this organization"
 msgstr "URL link za You Tube kanal organizacije"
+
+msgid "The content for the meta tag for Facebook Domain Verification"
+msgstr ""
 
 msgid "The URL to the Facebook page for this organization"
 msgstr "URL link na Facebook stranicu ove organizacije"

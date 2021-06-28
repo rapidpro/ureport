@@ -8,10 +8,12 @@ import mock
 import pytz
 from dash.categories.models import Category
 from dash.dashblocks.models import DashBlock, DashBlockType
+from dash.orgs.models import TaskState
 from dash.stories.models import Story
 
-from django.conf import settings
+from django.test import override_settings
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.http import urlquote
 
 from ureport.countries.models import CountryAlias
@@ -46,12 +48,12 @@ class PublicTest(UreportTest):
         self.login(self.admin)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 40)
+        self.assertEqual(len(response.context["form"].fields), 43)
 
         self.login(self.superuser)
         response = self.client.get(edit_url, SERVER_NAME="nigeria.ureport.io")
         self.assertTrue("form" in response.context)
-        self.assertEqual(len(response.context["form"].fields), 63)
+        self.assertEqual(len(response.context["form"].fields), 67)
 
     def test_count(self):
         count_url = reverse("public.count")
@@ -965,7 +967,66 @@ class PublicTest(UreportTest):
         status_url = reverse("public.status")
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(list(response.json())), 2)
+        self.assertEqual(
+            set(response.json()),
+            set(
+                {
+                    "redis_up",
+                    "db_up",
+                }
+            ),
+        )
 
+    def test_task_status_view(self):
+        status_url = reverse("public.task_status")
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(list(response.json())), 3)
+        self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks"}))
+
+        three_hours_ago = timezone.now() - timedelta(hours=3)
+        TaskState.objects.create(
+            org=self.uganda, task_key="contact-pull", last_successfully_started_on=three_hours_ago, is_disabled=False
+        )
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(len(list(response.json())), 3)
+        self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks"}))
+
+        self.uganda.domain = "beta"
+        self.uganda.save()
+
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(list(response.json())), 3)
+        self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks"}))
+
+    @override_settings(
+        COUNTRY_FLAGS_SITES=[
+            dict(
+                name="Afghanistan",
+                host="//afghanistan.ureport.in/",
+                flag="flag_afghanistan.png",
+                countries_codes=["AFG"],
+                count_link="http://afghanistan.ureport.in/count/",
+            ),
+            dict(
+                name="Argentina",
+                host="//argentina.ureport.in/",
+                flag="flag_argentina.png",
+                countries_codes=["ARG"],
+                count_link="http://argentina.ureport.in/count/",
+            ),
+            dict(
+                name="South Asia",
+                host="//southasia.ureport.in/",
+                flag="flag_southasia.png",
+                countries_codes=["AFG", "IND", "IDN", "NPL"],
+                count_link="http://southasia.ureport.in/count/",
+            ),
+        ]
+    )
     def test_shared_sites_count(self):
         shared_sites_count_url = reverse("public.shared_sites_count")
 
@@ -979,10 +1040,7 @@ class PublicTest(UreportTest):
         self.assertTrue("global_count" in response_json)
         self.assertTrue("linked_sites" in response_json)
         self.assertTrue("countries_count" in response_json)
-
-        settings_sites = list(getattr(settings, "COUNTRY_FLAGS_SITES", []))
-        settings_sites_count = len(settings_sites)
-        self.assertEqual(response_json["countries_count"], settings_sites_count - 2)
+        self.assertEqual(response_json["countries_count"], 5)
 
 
 class JobsTest(UreportJobsTest):
