@@ -1,3 +1,11 @@
+v1.1.251
+----------
+ * Merge pull request #643 from Ilhasoft/feature/add-uniendovoces-flags
+ * add country codes to uniendo voces workspaces
+ * Merge branch 'main' of https://github.com/rapidpro/ureport into feature/add-uniendovoces-flags
+ * fix uniendo voces ecuador sintaxe
+ * add uniendo voces flags
+
 v1.1.250
 ----------
  * Merge pull request #728 from Ilhasoft/feature/eastern-caribbean-flag
