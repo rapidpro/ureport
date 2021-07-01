@@ -1,3 +1,8 @@
+v1.1.252
+----------
+ * Merge pull request #739 from rapidpro/fix-boundaries-ids
+ * Fix boundaries to allow IDs with dots
+
 v1.1.251
 ----------
  * Merge pull request #643 from Ilhasoft/feature/add-uniendovoces-flags
