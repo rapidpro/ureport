@@ -2688,7 +2688,7 @@ class PerfTest(UreportTest):
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
         self.assertFalse(mock_cache_delete.called)
-        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue="sync")
+        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=60, queue="sync")
 
         mock_max_runs.return_value = 10000
         mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
@@ -2853,4 +2853,4 @@ class PerfTest(UreportTest):
         ]
 
         self.assertEqual(set(expected_args), set(self.get_mock_args_list(mock_cache_set)))
-        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=300, queue="sync")
+        mock_pull_refresh.assert_called_once_with((poll.pk,), countdown=60, queue="sync")
