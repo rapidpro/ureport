@@ -981,7 +981,7 @@ class RapidProBackend(BaseBackend):
 
         from ureport.polls.tasks import pull_refresh
 
-        pull_refresh.apply_async((poll.pk,), countdown=60, queue="sync")
+        pull_refresh.apply_async((poll.pk,), countdown=300, queue="sync")
 
     @staticmethod
     def _mark_poll_results_sync_completed(poll, org, latest_synced_obj_time):

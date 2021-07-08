@@ -92,7 +92,7 @@ class Poll(SmartModel):
 
     POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY = "last:sync_time:org:%d:poll:%s"
 
-    POLL_RESULTS_MAX_SYNC_RUNS = 10_000
+    POLL_RESULTS_MAX_SYNC_RUNS = 100_000
 
     POLL_RESULTS_LAST_OTHER_POLLS_SYNCED_CACHE_KEY = "last:poll_last_other_polls_sync:org:%d:poll:%s"
 
