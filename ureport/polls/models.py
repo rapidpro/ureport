@@ -316,6 +316,7 @@ class Poll(SmartModel):
 
     def rebuild_poll_results_counts_task(self, schedule_time=0):
         from ureport.polls.tasks import rebuild_poll_results_counts_async
+
         rebuild_poll_results_counts_async.apply_async((self.pk,), queue="sync")
 
     def rebuild_poll_results_counts(self):

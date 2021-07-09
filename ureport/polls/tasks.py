@@ -264,6 +264,7 @@ def update_questions_results_cache(poll_id):
     if poll:
         poll.update_questions_results_cache()
 
+
 @app.task(name="polls.rebuild_poll_results_counts")
 def rebuild_poll_results_counts_async(poll_id):
     from .models import Poll
