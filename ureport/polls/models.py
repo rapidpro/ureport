@@ -88,6 +88,8 @@ class Poll(SmartModel):
 
     POLL_REBUILD_COUNTS_LOCK = "poll-rebuild-counts-lock:org:%d:poll:%s"
 
+    POLL_REBUILD_COUNTS_SAME_TASK_KEY = "poll-rebuild-counts-same-task:org:%d:poll:%d"
+
     POLL_RESULTS_LAST_PULL_CACHE_KEY = "last:pull_results:reverse:org:%d:poll:%s"
 
     POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY = "last:sync_time:org:%d:poll:%s"
@@ -180,9 +182,7 @@ class Poll(SmartModel):
         ) = backend.pull_results_from_archives(poll)
 
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
-            poll.rebuild_poll_results_counts()
-
-        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
+            poll.rebuild_poll_results_counts_task()
 
         return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
 
@@ -215,9 +215,7 @@ class Poll(SmartModel):
         ) = backend.pull_results(poll, None, None)
 
         if num_val_created + num_val_updated + num_path_created + num_path_updated != 0:
-            poll.rebuild_poll_results_counts()
-
-        Poll.objects.filter(org=poll.org_id, flow_uuid=poll.flow_uuid).update(has_synced=True)
+            poll.rebuild_poll_results_counts_task()
 
         return num_val_created, num_val_updated, num_val_ignored, num_path_created, num_path_updated, num_path_ignored
 
@@ -315,6 +313,10 @@ class Poll(SmartModel):
 
         Poll.objects.filter(id=self.pk).update(stopped_syncing=False)
         Poll.pull_poll_results_task(self)
+
+    def rebuild_poll_results_counts_task(self, schedule_time=0):
+        from ureport.polls.tasks import rebuild_poll_results_counts_async
+        rebuild_poll_results_counts_async.apply_async((self.pk,), queue="sync")
 
     def rebuild_poll_results_counts(self):
         from ureport.utils import chunk_list

@@ -33,6 +33,7 @@ from ureport.polls.tasks import (
     pull_results_main_poll,
     pull_results_other_polls,
     rebuild_counts,
+    rebuild_poll_results_counts_async,
     recheck_poll_flow_data,
     refresh_org_flows,
     update_or_create_questions,
@@ -1585,6 +1586,7 @@ class PollTest(UreportTest):
 
         self.assertFalse(poll.has_synced)
         Poll.pull_results(poll.pk)
+        rebuild_poll_results_counts_async(poll.id)
 
         poll = Poll.objects.get(pk=poll.pk)
         self.assertTrue(poll.has_synced)
@@ -1609,6 +1611,7 @@ class PollTest(UreportTest):
 
         self.assertFalse(poll.has_synced)
         Poll.pull_results(poll.pk)
+        rebuild_poll_results_counts_async(poll.id)
 
         poll = Poll.objects.get(pk=poll.pk)
         self.assertTrue(poll.has_synced)
@@ -1623,6 +1626,7 @@ class PollTest(UreportTest):
 
         self.assertFalse(poll.has_synced)
         Poll.pull_results(poll.pk)
+        rebuild_poll_results_counts_async(poll.id)
 
         poll = Poll.objects.get(pk=poll.pk)
         self.assertTrue(poll.has_synced)

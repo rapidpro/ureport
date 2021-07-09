@@ -633,7 +633,7 @@ class RapidProBackend(BaseBackend):
                             stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS
                             or time.time() > lock_expiration
                         ):
-                            poll.rebuild_poll_results_counts()
+                            poll.rebuild_poll_results_counts_task()
 
                             self._mark_poll_results_sync_paused(org, poll, latest_synced_obj_time)
 
@@ -661,7 +661,7 @@ class RapidProBackend(BaseBackend):
                                 stats_dict["num_path_ignored"],
                             )
                 except TembaRateExceededError:
-                    poll.rebuild_poll_results_counts()
+                    poll.rebuild_poll_results_counts_task()
 
                     self._mark_poll_results_sync_paused(org, poll, latest_synced_obj_time)
 

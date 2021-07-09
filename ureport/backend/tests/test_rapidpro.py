@@ -2482,12 +2482,12 @@ class PerfTest(UreportTest):
 
         PollResult.objects.all().delete()
 
-        with patch("ureport.polls.models.Poll.rebuild_poll_results_counts") as mock_rebuild_counts:
+        with patch("ureport.polls.models.Poll.rebuild_poll_results_counts_task") as mock_rebuild_counts_task:
             with patch(
                 "ureport.polls.models.Poll.POLL_RESULTS_MAX_SYNC_RUNS", new_callable=PropertyMock
             ) as mock_max_runs:
                 mock_max_runs.return_value = 300
-                mock_rebuild_counts.return_value = "REBUILT"
+                mock_rebuild_counts_task.return_value = "REBUILT"
 
                 mock_get_runs.side_effect = [MockClientQuery(*active_fetches)]
 
@@ -2513,7 +2513,7 @@ class PerfTest(UreportTest):
                     (1, 0, 2 * fetch_size * num_steps - 1, 0, 0, 0),
                 )
 
-                mock_rebuild_counts.assert_called_with()
+                mock_rebuild_counts_task.assert_called_with()
 
                 mock_max_runs.return_value = 200
                 redis_client.delete(key)
@@ -2543,7 +2543,7 @@ class PerfTest(UreportTest):
                     ),
                     (1, 0, fetch_size * num_steps - 1, 0, 0, 0),
                 )
-                mock_rebuild_counts.assert_called_with()
+                mock_rebuild_counts_task.assert_called_with()
 
         now_date = datetime_to_json_date(now_date)
         mock_get_pull_cached_params.side_effect = [
@@ -2595,12 +2595,12 @@ class PerfTest(UreportTest):
     @patch("dash.orgs.models.TembaClient.get_runs")
     @patch("django.utils.timezone.now")
     @patch("ureport.polls.models.Poll.get_pull_cached_params")
-    @patch("ureport.polls.models.Poll.rebuild_poll_results_counts")
+    @patch("ureport.polls.models.Poll.rebuild_poll_results_counts_task")
     @patch("ureport.polls.models.Poll.POLL_RESULTS_MAX_SYNC_RUNS", new_callable=PropertyMock)
     def test_pull_results_batching(
         self,
         mock_max_runs,
-        mock_rebuild_counts,
+        mock_rebuild_counts_task,
         mock_get_pull_cached_params,
         mock_timezone_now,
         mock_get_runs,
@@ -2610,7 +2610,7 @@ class PerfTest(UreportTest):
     ):
 
         mock_max_runs.return_value = 300
-        mock_rebuild_counts.return_value = "REBUILT"
+        mock_rebuild_counts_task.return_value = "REBUILT"
         mock_get_pull_cached_params.side_effect = [(None, None)]
 
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
