@@ -88,7 +88,7 @@ class Poll(SmartModel):
 
     POLL_REBUILD_COUNTS_LOCK = "poll-rebuild-counts-lock:org:%d:poll:%s"
 
-    POLL_RESULTS_LAST_PULL_CACHE_KEY = "last:pull_results:org:%d:poll:%s"
+    POLL_RESULTS_LAST_PULL_CACHE_KEY = "last:pull_results:reverse:org:%d:poll:%s"
 
     POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY = "last:sync_time:org:%d:poll:%s"
 
