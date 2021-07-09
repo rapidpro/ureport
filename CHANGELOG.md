@@ -1,3 +1,17 @@
+v1.1.254
+----------
+ * Merge pull request #736 from rapidpro/sync-reverse
+ * Change last pull results redis key so polls still syncing do not miss results
+ * Update CHANGELOG.md for v1.1.252
+ * Merge pull request #739 from rapidpro/fix-boundaries-ids
+ * Fix boundaries to allow IDs with dots
+ * Update CHANGELOG.md for v1.1.251
+ * Merge pull request #643 from Ilhasoft/feature/add-uniendovoces-flags
+ * add country codes to uniendo voces workspaces
+ * Merge branch 'main' of https://github.com/rapidpro/ureport into feature/add-uniendovoces-flags
+ * fix uniendo voces ecuador sintaxe
+ * add uniendo voces flags
+
 v1.1.252
 ----------
  * Merge pull request #739 from rapidpro/fix-boundaries-ids
