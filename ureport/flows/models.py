@@ -1,8 +1,9 @@
-from django.db import models
-
 from dash.orgs.models import Org
 
+from django.db import models
+
 # Create your models here.
+
 
 class FlowResult(models.Model):
     is_active = models.BooleanField(default=True)
@@ -23,16 +24,19 @@ class FlowResult(models.Model):
             existing.update(result_name=result_name)
             obj = existing.first()
         else:
-            obj = FlowResult.objects.create(org=org, low_uuid=flow_uuid, result_uuid=result_uuid, result_name=result_name)
+            obj = FlowResult.objects.create(
+                org=org, low_uuid=flow_uuid, result_uuid=result_uuid, result_name=result_name
+            )
 
         return obj
 
     class Meta:
-        unique_together = ("org", "flow_uuid",  "result_uuid")
+        unique_together = ("org", "flow_uuid", "result_uuid")
+
 
 class FlowResultCategory(models.Model):
     is_active = models.BooleanField(default=True)
-    
+
     flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT, related_name="result_categories")
 
     category = models.TextField(null=True)
