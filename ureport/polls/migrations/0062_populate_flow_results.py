@@ -18,10 +18,11 @@ def populate_flow_results(apps, schema_editor):  # pragma: no cover
     FlowResultCategory = apps.get_model("flows", "FlowResultCategory")
 
     start_time = time.time()
-    orgs = Org.objects.all()
+    orgs = Org.objects.all().order_by("id")
+    all_count = 0
 
     for org in orgs:
-        poll_questions = PollQuestion.objects.filter(poll__org_id=org.id).select_related("poll")
+        poll_questions = PollQuestion.objects.filter(poll__org_id=org.id, flow_result=None).select_related("poll")
 
         total = poll_questions.count()
         count = 0
@@ -60,8 +61,12 @@ def populate_flow_results(apps, schema_editor):  # pragma: no cover
                 elapsed = time.time() - start_time
                 print(f"Migrated {count} of {total} questions on org #{org.id} in {elapsed:.1f} seconds")
 
+        elapsed = time.time() - start_time
+        print(f"Migrated {total} questions on org #{org.id} in {elapsed:.1f} seconds")
+        all_count += total
+
     elapsed = time.time() - start_time
-    print(f"Finished population flow results in {elapsed:.1f} seconds")
+    print(f"Finished population flow results for {all_count} poll questions in {elapsed:.1f} seconds")
 
 
 def apply_manual():  # pragma: no cover
