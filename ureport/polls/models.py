@@ -26,6 +26,8 @@ from django.utils.html import strip_tags
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
+from ureport.flows.models import FlowResult, FlowResultCategory
+
 logger = logging.getLogger(__name__)
 
 # cache whether a question is open ended for a month
@@ -830,12 +832,15 @@ class PollQuestion(SmartModel):
         default=0, null=True, blank=True, help_text=_("The priority number for this question on the poll")
     )
 
+    flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT, null=True)
+
     @classmethod
     def update_or_create(cls, user, poll, ruleset_label, uuid, ruleset_type):
+        flow_result = FlowResult.update_or_create(poll.org, poll.flow_uuid, uuid, ruleset_label)
         existing = cls.objects.filter(ruleset_uuid=uuid, poll=poll)
 
         if existing:
-            existing.update(ruleset_type=ruleset_type, ruleset_label=ruleset_label)
+            existing.update(ruleset_type=ruleset_type, ruleset_label=ruleset_label, flow_result=flow_result)
             question = existing.first()
         else:
             question = PollQuestion.objects.create(
@@ -844,6 +849,7 @@ class PollQuestion(SmartModel):
                 title=ruleset_label,
                 ruleset_type=ruleset_type,
                 ruleset_label=ruleset_label,
+                flow_result=flow_result,
                 is_active=False,
                 created_by=user,
                 modified_by=user,
@@ -1224,8 +1230,12 @@ class PollResponseCategory(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    flow_result_category = models.ForeignKey(FlowResultCategory, on_delete=models.PROTECT, null=True)
+
     @classmethod
     def update_or_create(cls, question, rule_uuid, category):
+        flow_result_category = FlowResultCategory.update_or_create(question.flow_result, category)
+
         existing = cls.objects.filter(question=question)
         if rule_uuid is not None:
             existing = existing.filter(rule_uuid=rule_uuid)
@@ -1234,10 +1244,15 @@ class PollResponseCategory(models.Model):
             rule_uuid = uuid.uuid4()
 
         if existing:
-            existing.update(category=category, is_active=True)
+            existing.update(category=category, is_active=True, flow_result_category=flow_result_category)
         else:
             existing = cls.objects.create(
-                question=question, rule_uuid=rule_uuid, category=category, category_displayed=category, is_active=True
+                question=question,
+                rule_uuid=rule_uuid,
+                category=category,
+                category_displayed=category,
+                flow_result_category=flow_result_category,
+                is_active=True,
             )
         return existing
 

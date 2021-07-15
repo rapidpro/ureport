@@ -25,7 +25,7 @@ class FlowResult(models.Model):
             obj = existing.first()
         else:
             obj = FlowResult.objects.create(
-                org=org, low_uuid=flow_uuid, result_uuid=result_uuid, result_name=result_name
+                org=org, flow_uuid=flow_uuid, result_uuid=result_uuid, result_name=result_name
             )
 
         return obj
@@ -47,6 +47,7 @@ class FlowResultCategory(models.Model):
 
         if existing:
             existing.update(is_active=True)
+            obj = existing.first()
         else:
-            existing = cls.objects.create(flow_result=flow_result, category=category, is_active=True)
-        return existing
+            obj = cls.objects.create(flow_result=flow_result, category=category, is_active=True)
+        return obj

@@ -1651,9 +1651,7 @@ class PollQuestionTest(UreportTest):
     def test_poll_question_category_order(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll_question1 = PollQuestion.objects.create(
-            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question1 = PollQuestion.update_or_create(self.admin, poll1, "question 1", "uuid-101", "wait_message")
 
         PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
         PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
@@ -1678,9 +1676,7 @@ class PollQuestionTest(UreportTest):
     def test_poll_question_model(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll_question1 = PollQuestion.objects.create(
-            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question1 = PollQuestion.update_or_create(self.admin, poll1, "question 1", "uuid-101", "wait_message")
 
         self.assertEqual(six.text_type(poll_question1), "question 1")
 
@@ -1884,9 +1880,7 @@ class PollQuestionTest(UreportTest):
     def test_poll_question_calculate_results(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll_question1 = PollQuestion.objects.create(
-            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question1 = PollQuestion.update_or_create(self.admin, poll1, "question 1", "uuid-101", "wait_message")
 
         self.assertEqual(six.text_type(poll_question1), "question 1")
 
@@ -2064,9 +2058,7 @@ class PollQuestionTest(UreportTest):
     def test_squash_poll_stats(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll_question1 = PollQuestion.objects.create(
-            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question1 = PollQuestion.update_or_create(self.admin, poll1, "question 1", "uuid-101", "wait_message")
 
         self.assertEqual(six.text_type(poll_question1), "question 1")
 
