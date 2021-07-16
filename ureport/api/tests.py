@@ -19,6 +19,7 @@ from django.utils import timezone
 
 from ureport.api.serializers import CategoryReadSerializer, StoryReadSerializer, generate_absolute_url_from_file
 from ureport.contacts.models import ReportersCounter
+from ureport.flows.models import FlowResult
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
 
@@ -83,17 +84,29 @@ class UreportAPITests(APITestCase):
             modified_by=self.superuser,
         )
 
-    def create_poll_question(self, user, poll, ruleset_label, ruleset_uuid):
-        question = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll).first()
+    def create_poll_question(self, user, poll, result_name, result_uuid):
+        flow_result = FlowResult.objects.filter(
+            org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=result_uuid
+        ).first()
+        if flow_result:
+            flow_result.result_name = result_name
+            flow_result.save(update_fields=("result_name", ))
+        else:
+            flow_result = FlowResult.objects.create(
+                org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=result_uuid, result_name=result_name
+            )
+
+        question = PollQuestion.objects.filter(flow_result=flow_result, poll=poll).first()
         if question:
-            question.ruleset_label = ruleset_label
+            question.ruleset_label = result_name
             question.save(update_fields=("ruleset_label",))
         else:
             question = PollQuestion.objects.create(
                 poll=poll,
-                title=ruleset_label,
-                ruleset_label=ruleset_label,
-                ruleset_uuid=ruleset_uuid,
+                title=result_name,
+                ruleset_label=result_name,
+                ruleset_uuid=result_uuid,
+                flow_result=flow_result,
                 created_by=user,
                 modified_by=user,
             )

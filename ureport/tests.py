@@ -220,7 +220,7 @@ class UreportTest(SmartminTest, DashTest):
             flow_result.save(update_fields=("result_name",))
         else:
             flow_result = FlowResult.objects.create(
-                org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=ruleset_uuid, result_name=ruleset_label
+                org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=result_uuid, result_name=result_name
             )
 
         question = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll).first()
@@ -231,9 +231,9 @@ class UreportTest(SmartminTest, DashTest):
         else:
             question = PollQuestion.objects.create(
                 poll=poll,
-                title=ruleset_label,
-                ruleset_label=ruleset_label,
-                ruleset_uuid=ruleset_uuid,
+                title=result_name,
+                ruleset_label=result_name,
+                ruleset_uuid=result_uuid,
                 flow_result=flow_result,
                 created_by=user,
                 modified_by=user,

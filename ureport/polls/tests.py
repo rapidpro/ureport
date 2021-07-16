@@ -1178,7 +1178,7 @@ class PollTest(UreportTest):
         PollResult.objects.create(
             org=self.nigeria,
             flow=poll.flow_uuid,
-            ruleset=poll_question.ruleset_uuid,
+            ruleset=poll_question.flow_result.result_uuid,
             date=timezone.now(),
             contact="contact-uuid",
             completed=False,
@@ -1232,7 +1232,7 @@ class PollTest(UreportTest):
         PollResult.objects.create(
             org=self.nigeria,
             flow=poll.flow_uuid,
-            ruleset=poll_question.ruleset_uuid,
+            ruleset=poll_question.flow_result.result_uuid,
             date=timezone.now(),
             contact="contact-uuid",
             completed=False,
@@ -1377,7 +1377,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-1",
             date=now,
             category="All responses",
@@ -1390,7 +1390,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-2",
             date=now,
             category="All responses",
@@ -1403,7 +1403,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-3",
             date=now,
             category="All responses",
@@ -1416,7 +1416,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-3",
             date=now,
             category="All responses",
@@ -1429,7 +1429,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-4",
             date=now,
             category="All responses",
@@ -1442,7 +1442,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-5",
             date=now,
             category="All responses",
@@ -1455,7 +1455,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-5",
             date=now,
             category="All responses",
@@ -2146,7 +2146,7 @@ class PollResultsTest(UreportTest):
         PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             date=self.now,
             contact="contact-uuid",
             completed=False,
@@ -2157,7 +2157,7 @@ class PollResultsTest(UreportTest):
         PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             category="No",
             date=self.now,
             contact="contact-uuid",
@@ -2270,7 +2270,7 @@ class PollResultsTest(UreportTest):
         poll_result1 = PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             date=self.now,
             contact="contact-uuid",
             completed=False,
@@ -2283,7 +2283,7 @@ class PollResultsTest(UreportTest):
             [
                 (
                     self.nigeria.id,
-                    self.poll_question.ruleset_uuid,
+                    self.poll_question.flow_result.result_uuid,
                     "",
                     "",
                     "",
@@ -2418,7 +2418,7 @@ class PollResultsTest(UreportTest):
         poll_result5 = PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             date=None,
             contact="contact-uuid",
             completed=False,
@@ -2427,7 +2427,8 @@ class PollResultsTest(UreportTest):
         gen_stats = poll_result5.generate_poll_stats()
         self.assertEqual(len(gen_stats.keys()), 1)
         self.assertEqual(
-            list(gen_stats.keys()), [(self.nigeria.id, self.poll_question.ruleset_uuid, "", "", "", "", "", "", None)]
+            list(gen_stats.keys()),
+            [(self.nigeria.id, self.poll_question.flow_result.result_uuid, "", "", "", "", "", "", None)],
         )
 
     def test_poll_results_stats(self):
@@ -2476,7 +2477,7 @@ class PollResultsTest(UreportTest):
         PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             contact="contact-uuid",
             category="Yes",
             text="Yeah",
@@ -2503,7 +2504,7 @@ class PollResultsTest(UreportTest):
         PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             contact="contact-uuid",
             category="Yes",
             text="Yeah",
