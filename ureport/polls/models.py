@@ -374,7 +374,16 @@ class Poll(SmartModel):
                     for qsn in questions:
                         categories = qsn.response_categories.all().select_related("flow_result_category")
                         categoryies_dict = {elt.flow_result_category.category.lower(): elt.id for elt in categories}
-                        questions_dict[qsn.flow_result.result_uuid] = dict(id=qsn.id, categories=categoryies_dict)
+                        flow_categories_dict = {
+                            elt.flow_result_category.category.lower(): elt.flow_result_category.id
+                            for elt in categories
+                        }
+                        questions_dict[qsn.flow_result.result_uuid] = dict(
+                            id=qsn.id,
+                            flow_result_id=qsn.flow_result_id,
+                            categories=categoryies_dict,
+                            flow_categories=flow_categories_dict,
+                        )
 
                     gender_dict = {elt.gender.lower(): elt.id for elt in GenderSegment.objects.all()}
                     age_dict = {elt.min_age: elt.id for elt in AgeSegment.objects.all()}
@@ -417,7 +426,10 @@ class Poll(SmartModel):
                         if not question_id:
                             continue
 
+                        flow_result_id = questions_dict[ruleset].get("flow_result_id")
+
                         category_id = questions_dict[ruleset].get("categories", dict()).get(category)
+                        flow_category_id = questions_dict[ruleset].get("flow_categories", dict()).get(category)
 
                         gender_id = None
                         if gender:
@@ -437,6 +449,12 @@ class Poll(SmartModel):
 
                         if question_id:
                             stat_kwargs["question_id"] = question_id
+                        if flow_result_id:
+                            stat_kwargs["flow_result_id"] = flow_result_id
+
+                        if flow_category_id:
+                            stat_kwargs["flow_result_category_id"] = flow_category_id
+
                         if category_id:
                             stat_kwargs["category_id"] = category_id
                         if age_id:
@@ -792,7 +810,9 @@ class PollQuestion(SmartModel):
             for category in unclean_categories:
                 categories[category["label"]] = int(category["count"])
 
-            poll_word_cloud = PollWordCloud.objects.get_or_create(org=org, question=self)[0]
+            poll_word_cloud = PollWordCloud.objects.get_or_create(
+                org=org, question=self, flow_result=self.flow_result
+            )[0]
             poll_word_cloud.words = categories
             poll_word_cloud.save()
 
