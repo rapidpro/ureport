@@ -1166,29 +1166,10 @@ class FLOIPBackendTest(UreportTest):
         poll = self.create_poll(
             self.nigeria, "Flow 1", "2a754346-a0dc-4176-a8b9-0f978f6b04c7", self.education_nigeria, self.admin
         )
-        PollQuestion.objects.create(
-            poll=poll,
-            title="question 1",
-            ruleset_uuid="q_1522956745304_75",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
 
-        PollQuestion.objects.create(
-            poll=poll,
-            title="question 2",
-            ruleset_uuid="q_1522956746998_26",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        PollQuestion.objects.create(
-            poll=poll,
-            title="question 3",
-            ruleset_uuid="q_1522957067432_34",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
+        self.create_poll_question(self.admin, poll, "question 1", "q_1522956745304_75")
+        self.create_poll_question(self.admin, poll, "question 2", "q_1522956746998_26")
+        self.create_poll_question(self.admin, poll, "question 3", "q_1522957067432_34")
 
         with self.assertNumQueries(4):
             (

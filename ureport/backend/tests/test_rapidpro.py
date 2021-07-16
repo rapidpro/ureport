@@ -1209,13 +1209,9 @@ class RapidProBackendTest(UreportTest):
             org=self.nigeria, uuid="C-001", gender="M", born=1990, state="R-LAGOS", district="R-OYO"
         )
         poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
-        PollQuestion.objects.create(
-            poll=poll, title="question 1", ruleset_uuid="ruleset-uuid", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
 
-        PollQuestion.objects.create(
-            poll=poll, title="question 2", ruleset_uuid="ruleset-uuid-2", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 2", "ruleset-uuid-2")
 
         now = timezone.now()
         temba_run = TembaRun.create(
@@ -1751,13 +1747,9 @@ class RapidProBackendTest(UreportTest):
         poll.poll_date = now_date
         poll.save()
 
-        PollQuestion.objects.create(
-            poll=poll, title="question 1", ruleset_uuid="ruleset-uuid", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
 
-        PollQuestion.objects.create(
-            poll=poll, title="question 2", ruleset_uuid="ruleset-uuid-2", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 2", "ruleset-uuid-2")
 
         now = timezone.now()
         temba_run = TembaRun.create(
@@ -1930,9 +1922,7 @@ class RapidProBackendTest(UreportTest):
 
         poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid-3", self.education_nigeria, self.admin)
 
-        PollQuestion.objects.create(
-            poll=poll, title="question 1", ruleset_uuid="ruleset-uuid", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
 
         now = timezone.now()
         temba_run = TembaRun.create(
