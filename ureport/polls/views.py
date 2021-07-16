@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import json
 import re
 from datetime import timedelta
 
-import six
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import OrgBackend
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
 from django_redis import get_redis_connection
-from smartmin.csv_imports.models import ImportTask
-from smartmin.views import SmartCreateView, SmartCRUDL, SmartCSVImportView, SmartListView, SmartUpdateView
+from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 
 from django import forms
 from django.core.cache import cache
@@ -165,7 +162,6 @@ class PollCRUDL(SmartCRUDL):
         "images",
         "responses",
         "pull_refresh",
-        "import",
         "poll_date",
         "poll_flow",
     )
@@ -623,40 +619,3 @@ class PollCRUDL(SmartCRUDL):
             self.success_message = _("Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d") % dict(
                 poll_id=poll.pk, org_id=poll.org_id
             )
-
-    class Import(SmartCSVImportView):
-        class ImportForm(forms.ModelForm):
-            def __init__(self, *args, **kwargs):
-                self.org = kwargs["org"]
-                del kwargs["org"]
-                super(PollCRUDL.Import.ImportForm, self).__init__(*args, **kwargs)
-
-            class Meta:
-                model = ImportTask
-                fields = "__all__"
-
-        form_class = ImportForm
-        model = ImportTask
-        fields = ("csv_file",)
-        success_message = ""
-
-        def post_save(self, task):
-            # configure import params with current org and timezone
-            org = self.request.org
-            params = dict(
-                org_id=org.id,
-                timezone=six.text_type(org.timezone),
-                original_filename=self.form.cleaned_data["csv_file"].name,
-            )
-            params_dump = json.dumps(params)
-            ImportTask.objects.filter(pk=task.pk).update(import_params=params_dump)
-
-            # start the task
-            task.start()
-
-            return task
-
-        def get_form_kwargs(self):
-            kwargs = super(PollCRUDL.Import, self).get_form_kwargs()
-            kwargs["org"] = self.request.org
-            return kwargs
