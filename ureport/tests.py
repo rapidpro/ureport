@@ -29,6 +29,7 @@ from django.utils import timezone
 from django.utils.encoding import force_text
 
 from ureport.backend.rapidpro import RapidProBackend
+from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.jobs.models import JobSource
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory
 from ureport.public.views import IndexView
@@ -211,32 +212,60 @@ class UreportTest(SmartminTest, DashTest):
         return poll
 
     def create_poll_question(self, user, poll, ruleset_label, ruleset_uuid):
-        existing = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll)
-        if existing:
-            existing.update(ruleset_label=ruleset_label)
-            question = existing.first()
+        existing_flow_result = FlowResult.objects.filter(
+            org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=ruleset_uuid
+        )
+        if existing_flow_result:
+            existing_flow_result.update(result_name=ruleset_label)
+            flow_result = existing_flow_result.first()
+        else:
+            flow_result = FlowResult.objects.create(
+                org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=ruleset_uuid, result_name=ruleset_label
+            )
+
+        existing_question = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll)
+        if existing_question:
+            existing_question.update(ruleset_label=ruleset_label, flow_result=flow_result)
+            question = existing_question.first()
         else:
             question = PollQuestion.objects.create(
                 poll=poll,
                 title=ruleset_label,
                 ruleset_label=ruleset_label,
                 ruleset_uuid=ruleset_uuid,
+                flow_result=flow_result,
                 created_by=user,
                 modified_by=user,
             )
         return question
 
     def create_poll_response_category(self, question, rule_uuid, category):
+        existing_flow_result_category = FlowResultCategory.objects.filter(
+            flow_result=question.flow_result, category=category
+        )
+        if existing_flow_result_category:
+            existing_flow_result_category.update(is_active=True)
+            flow_result_category = existing_flow_result_category.first()
+        else:
+            flow_result_category = FlowResultCategory.objects.create(
+                flow_result=question.flow_result, category=category, is_active=True
+            )
+
         existing = PollResponseCategory.objects.filter(question=question, category=category)
         if not rule_uuid:
             rule_uuid = uuid.uuid4()
 
         if existing:
-            existing.update(category=category, is_active=True)
+            existing.update(category=category, is_active=True, flow_result_category=flow_result_category)
             obj = existing.first()
         else:
             obj = PollResponseCategory.objects.create(
-                question=question, rule_uuid=rule_uuid, category=category, category_displayed=category, is_active=True
+                question=question,
+                rule_uuid=rule_uuid,
+                category=category,
+                category_displayed=category,
+                flow_result_category=flow_result_category,
+                is_active=True,
             )
         return obj
 
