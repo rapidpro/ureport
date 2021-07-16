@@ -18,7 +18,6 @@ from django.utils.http import urlquote
 
 from ureport.countries.models import CountryAlias
 from ureport.news.models import NewsItem, Video
-from ureport.polls.models import PollQuestion
 from ureport.tests import MockTembaClient, UreportJobsTest, UreportTest
 
 
@@ -158,9 +157,7 @@ class PublicTest(UreportTest):
 
         self.assertIsNone(response.context["latest_poll"])
 
-        PollQuestion.objects.create(
-            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
         response = self.client.get(home_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/")
@@ -170,9 +167,7 @@ class PublicTest(UreportTest):
 
         poll2 = self.create_poll(self.nigeria, "Poll 2", "uuid-2", self.education_nigeria, self.admin, has_synced=True)
 
-        PollQuestion.objects.create(
-            poll=poll2, title="question poll 2", ruleset_uuid="uuid-202", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll2, "question poll 2", "uuid-202")
 
         response = self.client.get(home_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/")
@@ -182,9 +177,7 @@ class PublicTest(UreportTest):
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
-        PollQuestion.objects.create(
-            poll=poll3, title="question poll 3", ruleset_uuid="uuid-303", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll3, "question poll 3", "uuid-303")
 
         response = self.client.get(home_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/")
@@ -408,9 +401,7 @@ class PublicTest(UreportTest):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
-        question1 = PollQuestion.objects.create(
-            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        question1 = self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
         pollquestion_results_url = reverse("public.pollquestion_results", args=[question1.pk])
 
@@ -499,27 +490,18 @@ class PublicTest(UreportTest):
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, has_synced=True)
 
-        PollQuestion.objects.create(
-            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", education_uganda, self.admin, has_synced=True)
 
-        PollQuestion.objects.create(
-            poll=poll2, title="question poll 2", ruleset_uuid="uuid-102", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll2, "question poll 2", "uuid-102")
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
-
-        PollQuestion.objects.create(
-            poll=poll3, title="question poll 3", ruleset_uuid="uuid-103", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll3, "question poll 3", "uuid-103")
 
         poll4 = self.create_poll(self.nigeria, "Poll 4", "uuid-4", self.education_nigeria, self.admin, has_synced=True)
 
-        PollQuestion.objects.create(
-            poll=poll4, title="question poll 4", ruleset_uuid="uuid-104", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll4, "question poll 4", "uuid-104")
 
         response = self.client.get(polls_url, SERVER_NAME="nigeria.ureport.io")
         self.assertEqual(response.request["PATH_INFO"], "/opinions/")
