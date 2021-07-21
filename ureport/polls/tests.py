@@ -1323,11 +1323,7 @@ class PollQuestionTest(UreportTest):
     def test_poll_question_category_order(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-<<<<<<< HEAD
-        poll_question1 = PollQuestion.update_or_create(self.admin, poll1, "question 1", "uuid-101", "wait_message")
-=======
         poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
->>>>>>> e0b61a46... Add test methods to create questions and response categories
 
         self.create_poll_response_category(poll_question1, "rule-uuid-1", "Yes")
         self.create_poll_response_category(poll_question1, "rule-uuid-2", "No")
@@ -1351,11 +1347,7 @@ class PollQuestionTest(UreportTest):
     def test_poll_question_model(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-<<<<<<< HEAD
-        poll_question1 = PollQuestion.update_or_create(self.admin, poll1, "question 1", "uuid-101", "wait_message")
-=======
         poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
->>>>>>> e0b61a46... Add test methods to create questions and response categories
 
         self.assertEqual(six.text_type(poll_question1), "question 1")
 
@@ -1559,11 +1551,7 @@ class PollQuestionTest(UreportTest):
     def test_poll_question_calculate_results(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-<<<<<<< HEAD
-        poll_question1 = PollQuestion.update_or_create(self.admin, poll1, "question 1", "uuid-101", "wait_message")
-=======
         poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
->>>>>>> e0b61a46... Add test methods to create questions and response categories
 
         self.assertEqual(six.text_type(poll_question1), "question 1")
 
@@ -1741,11 +1729,7 @@ class PollQuestionTest(UreportTest):
     def test_squash_poll_stats(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-<<<<<<< HEAD
-        poll_question1 = PollQuestion.update_or_create(self.admin, poll1, "question 1", "uuid-101", "wait_message")
-=======
         poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
->>>>>>> e0b61a46... Add test methods to create questions and response categories
 
         self.assertEqual(six.text_type(poll_question1), "question 1")
 

@@ -706,11 +706,13 @@ class PollQuestion(SmartModel):
     @classmethod
     def update_or_create(cls, user, poll, ruleset_label, uuid, ruleset_type):
         flow_result = FlowResult.update_or_create(poll.org, poll.flow_uuid, uuid, ruleset_label)
-        existing = cls.objects.filter(ruleset_uuid=uuid, poll=poll)
+        question = cls.objects.filter(ruleset_uuid=uuid, poll=poll).first()
 
-        if existing:
-            existing.update(ruleset_type=ruleset_type, ruleset_label=ruleset_label, flow_result=flow_result)
-            question = existing.first()
+        if question:
+            question.ruleset_type = ruleset_type
+            question.ruleset_label = ruleset_label
+            question.flow_result = flow_result
+            question.save(update_fields=("ruleset_type", "ruleset_label", "flow_result"))
         else:
             question = PollQuestion.objects.create(
                 poll=poll,

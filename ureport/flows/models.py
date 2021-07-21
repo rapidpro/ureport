@@ -18,11 +18,11 @@ class FlowResult(models.Model):
 
     @classmethod
     def update_or_create(cls, org, flow_uuid, result_uuid, result_name):
-        existing = cls.objects.filter(org=org, flow_uuid=flow_uuid, result_uuid=result_uuid)
+        obj = cls.objects.filter(org=org, flow_uuid=flow_uuid, result_uuid=result_uuid).first()
 
-        if existing:
-            existing.update(result_name=result_name)
-            obj = existing.first()
+        if obj:
+            obj.result_name = result_name
+            obj.save(update_fields=("result_name",))
         else:
             obj = FlowResult.objects.create(
                 org=org, flow_uuid=flow_uuid, result_uuid=result_uuid, result_name=result_name
@@ -43,11 +43,11 @@ class FlowResultCategory(models.Model):
 
     @classmethod
     def update_or_create(cls, flow_result, category):
-        existing = cls.objects.filter(flow_result=flow_result, category=category)
+        obj = cls.objects.filter(flow_result=flow_result, category=category).first()
 
-        if existing:
-            existing.update(is_active=True)
-            obj = existing.first()
+        if obj:
+            obj.is_active = True
+            obj.save(update_fields=("is_active",))
         else:
             obj = cls.objects.create(flow_result=flow_result, category=category, is_active=True)
         return obj

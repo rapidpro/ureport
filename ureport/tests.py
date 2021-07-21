@@ -212,21 +212,22 @@ class UreportTest(SmartminTest, DashTest):
         return poll
 
     def create_poll_question(self, user, poll, ruleset_label, ruleset_uuid):
-        existing_flow_result = FlowResult.objects.filter(
+        flow_result = FlowResult.objects.filter(
             org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=ruleset_uuid
-        )
-        if existing_flow_result:
-            existing_flow_result.update(result_name=ruleset_label)
-            flow_result = existing_flow_result.first()
+        ).first()
+        if flow_result:
+            flow_result.result_name = ruleset_label
+            flow_result.save(update_fields=("result_name",))
         else:
             flow_result = FlowResult.objects.create(
                 org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=ruleset_uuid, result_name=ruleset_label
             )
 
-        existing_question = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll)
-        if existing_question:
-            existing_question.update(ruleset_label=ruleset_label, flow_result=flow_result)
-            question = existing_question.first()
+        question = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll).first()
+        if question:
+            question.ruleset_label = ruleset_label
+            question.flow_result = flow_result
+            question.save(update_fields=("ruleset_label", "flow_result"))
         else:
             question = PollQuestion.objects.create(
                 poll=poll,
