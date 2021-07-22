@@ -27,6 +27,7 @@ from django.utils import timezone
 
 from ureport.backend.rapidpro import BoundarySyncer, ContactSyncer, FieldSyncer, RapidProBackend
 from ureport.contacts.models import Contact, ContactField
+from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.tests import MockResponse, UreportTest
@@ -1208,13 +1209,9 @@ class RapidProBackendTest(UreportTest):
             org=self.nigeria, uuid="C-001", gender="M", born=1990, state="R-LAGOS", district="R-OYO"
         )
         poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid", self.education_nigeria, self.admin)
-        PollQuestion.objects.create(
-            poll=poll, title="question 1", ruleset_uuid="ruleset-uuid", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
 
-        PollQuestion.objects.create(
-            poll=poll, title="question 2", ruleset_uuid="ruleset-uuid-2", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 2", "ruleset-uuid-2")
 
         now = timezone.now()
         temba_run = TembaRun.create(
@@ -1750,13 +1747,9 @@ class RapidProBackendTest(UreportTest):
         poll.poll_date = now_date
         poll.save()
 
-        PollQuestion.objects.create(
-            poll=poll, title="question 1", ruleset_uuid="ruleset-uuid", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
 
-        PollQuestion.objects.create(
-            poll=poll, title="question 2", ruleset_uuid="ruleset-uuid-2", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 2", "ruleset-uuid-2")
 
         now = timezone.now()
         temba_run = TembaRun.create(
@@ -1929,9 +1922,7 @@ class RapidProBackendTest(UreportTest):
 
         poll = self.create_poll(self.nigeria, "Flow 1", "flow-uuid-3", self.education_nigeria, self.admin)
 
-        PollQuestion.objects.create(
-            poll=poll, title="question 1", ruleset_uuid="ruleset-uuid", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll, "question 1", "ruleset-uuid")
 
         now = timezone.now()
         temba_run = TembaRun.create(
@@ -1973,6 +1964,7 @@ class RapidProBackendTest(UreportTest):
     @patch("ureport.polls.models.Poll.get_flow")
     def test_update_poll_questions(self, mock_poll_flow):
         mock_poll_flow.return_value = dict(
+            uuid="uuid-1",
             results=[
                 dict(
                     key="color",
@@ -1980,7 +1972,7 @@ class RapidProBackendTest(UreportTest):
                     categories=["Orange", "Blue", "Other", "Nothing"],
                     node_uuids=["uuid-101"],
                 )
-            ]
+            ],
         )
 
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.education_nigeria, self.admin, has_synced=True)
@@ -1988,10 +1980,16 @@ class RapidProBackendTest(UreportTest):
         self.backend.update_poll_questions(self.nigeria, poll1, self.admin)
 
         self.assertEqual(PollQuestion.objects.filter(poll=poll1).count(), 1)
+        self.assertEqual(FlowResult.objects.filter(flow_uuid=poll1.flow_uuid).count(), 1)
         question = PollQuestion.objects.filter(poll=poll1).first()
+        flow_result = FlowResult.objects.filter(flow_uuid=poll1.flow_uuid).first()
+
         self.assertEqual(PollResponseCategory.objects.filter(question=question).count(), 4)
+        self.assertEqual(FlowResultCategory.objects.filter(flow_result=flow_result).count(), 4)
         self.assertEqual(PollResponseCategory.objects.filter(question=question, is_active=True).count(), 4)
+        self.assertEqual(FlowResultCategory.objects.filter(flow_result=flow_result, is_active=True).count(), 4)
         mock_poll_flow.return_value = dict(
+            uuid="uuid-1",
             results=[
                 dict(
                     key="color",
@@ -1999,14 +1997,19 @@ class RapidProBackendTest(UreportTest):
                     categories=["Orange", "Green", "Other", "Nothing"],
                     node_uuids=["uuid-101"],
                 )
-            ]
+            ],
         )
         self.backend.update_poll_questions(self.nigeria, poll1, self.admin)
 
         self.assertEqual(PollQuestion.objects.filter(poll=poll1).count(), 1)
+        self.assertEqual(FlowResult.objects.filter(flow_uuid=poll1.flow_uuid).count(), 1)
         question = PollQuestion.objects.filter(poll=poll1).first()
+        flow_result = FlowResult.objects.filter(flow_uuid=poll1.flow_uuid).first()
+
         self.assertEqual(PollResponseCategory.objects.filter(question=question).count(), 5)
+        self.assertEqual(FlowResultCategory.objects.filter(flow_result=flow_result).count(), 5)
         self.assertEqual(PollResponseCategory.objects.filter(question=question, is_active=True).count(), 4)
+        self.assertEqual(FlowResultCategory.objects.filter(flow_result=flow_result, is_active=True).count(), 4)
 
 
 class PerfTest(UreportTest):

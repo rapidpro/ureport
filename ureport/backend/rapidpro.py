@@ -21,6 +21,7 @@ from django.core.cache import cache
 from django.utils import timezone
 
 from ureport.contacts.models import Contact, ContactField
+from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import pull_refresh_from_archives
@@ -369,6 +370,9 @@ class RapidProBackend(BaseBackend):
             PollResponseCategory.objects.filter(question=question).exclude(category__in=result["categories"]).update(
                 is_active=False
             )
+            FlowResultCategory.objects.filter(flow_result=question.flow_result).exclude(
+                category__in=result["categories"]
+            ).update(is_active=False)
 
     def pull_fields(self, org):
         client = self._get_client(org, 2)

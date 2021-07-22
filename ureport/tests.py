@@ -2,6 +2,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
+import uuid
 
 import pytz
 from dash.orgs.middleware import SetOrgMiddleware
@@ -28,8 +29,9 @@ from django.utils import timezone
 from django.utils.encoding import force_text
 
 from ureport.backend.rapidpro import RapidProBackend
+from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.jobs.models import JobSource
-from ureport.polls.models import Poll
+from ureport.polls.models import Poll, PollQuestion, PollResponseCategory
 from ureport.public.views import IndexView
 
 
@@ -208,6 +210,69 @@ class UreportTest(SmartminTest, DashTest):
         )
 
         return poll
+
+    def create_poll_question(self, user, poll, ruleset_label, ruleset_uuid):
+        flow_result = FlowResult.objects.filter(
+            org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=ruleset_uuid
+        ).first()
+        if flow_result:
+            flow_result.result_name = ruleset_label
+            flow_result.save(update_fields=("result_name",))
+        else:
+            flow_result = FlowResult.objects.create(
+                org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=ruleset_uuid, result_name=ruleset_label
+            )
+
+        question = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll).first()
+        if question:
+            question.ruleset_label = ruleset_label
+            question.flow_result = flow_result
+            question.save(update_fields=("ruleset_label", "flow_result"))
+        else:
+            question = PollQuestion.objects.create(
+                poll=poll,
+                title=ruleset_label,
+                ruleset_label=ruleset_label,
+                ruleset_uuid=ruleset_uuid,
+                flow_result=flow_result,
+                created_by=user,
+                modified_by=user,
+            )
+        return question
+
+    def create_poll_response_category(self, question, rule_uuid, category):
+        flow_result_category = FlowResultCategory.objects.filter(
+            flow_result=question.flow_result, category=category
+        ).first()
+        if flow_result_category:
+            flow_result_category.is_active = True
+            flow_result_category.save(update_fields=("is_active",))
+        else:
+            flow_result_category = FlowResultCategory.objects.create(
+                flow_result=question.flow_result, category=category, is_active=True
+            )
+
+        obj = PollResponseCategory.objects.filter(question=question, category=category).first()
+
+        if obj:
+            obj.is_active = True
+            obj.category = category
+            obj.flow_result_category = flow_result_category
+            obj.save(update_fields=("is_active", "category", "flow_result_category"))
+
+        else:
+            if not rule_uuid:
+                rule_uuid = uuid.uuid4()
+
+            obj = PollResponseCategory.objects.create(
+                question=question,
+                rule_uuid=rule_uuid,
+                category=category,
+                category_displayed=category,
+                flow_result_category=flow_result_category,
+                is_active=True,
+            )
+        return obj
 
 
 class UreportJobsTest(UreportTest):

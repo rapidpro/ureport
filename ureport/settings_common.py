@@ -664,6 +664,7 @@ INSTALLED_APPS = (
     "ureport.assets",
     "ureport.contacts",
     "ureport.countries",
+    "ureport.flows",
     "ureport.jobs",
     "ureport.locations",
     "ureport.news",
