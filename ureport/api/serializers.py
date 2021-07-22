@@ -137,7 +137,7 @@ class PollReadSerializer(serializers.ModelSerializer):
 
             question_data = {
                 "id": question.pk,
-                "ruleset_uuid": question.ruleset_uuid,
+                "ruleset_uuid": question.flow_result.result_uuid,
                 "title": question.title,
                 "results": results_dict,
             }
