@@ -1,3 +1,13 @@
+v1.1.256
+----------
+ * Merge pull request #743 from rapidpro/tests-methods
+ * Merge master
+ * Merge pull request #742 from rapidpro/remove-poll-import
+ * Merge pull request #740 from rapidpro/separate-data-models-and-display-config-models
+ * Simpler querysets
+ * Add test methods to create questions and response categories
+ * Remove unused polls import
+
 v1.1.254
 ----------
  * Merge pull request #736 from rapidpro/sync-reverse
