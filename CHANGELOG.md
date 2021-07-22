@@ -1,3 +1,9 @@
+v1.1.257
+----------
+ * Merge pull request #741 from rapidpro/flow-results-2
+ * Migrate poll question that do not have the flow result field yet set
+ * Add data migrations to populate the flow results and flow result categories
+
 v1.1.256
 ----------
  * Merge pull request #743 from rapidpro/tests-methods
