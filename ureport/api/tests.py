@@ -90,7 +90,7 @@ class UreportAPITests(APITestCase):
         ).first()
         if flow_result:
             flow_result.result_name = result_name
-            flow_result.save(update_fields=("result_name", ))
+            flow_result.save(update_fields=("result_name",))
         else:
             flow_result = FlowResult.objects.create(
                 org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=result_uuid, result_name=result_name
