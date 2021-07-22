@@ -26,8 +26,4 @@ class Migration(migrations.Migration):
             name="pollquestion",
             unique_together={("poll", "ruleset_uuid"), ("poll", "flow_result")},
         ),
-        migrations.AlterUniqueTogether(
-            name="pollresponsecategory",
-            unique_together={("question", "rule_uuid"), ("question", "flow_result_category")},
-        ),
     ]
