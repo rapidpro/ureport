@@ -1,3 +1,10 @@
+v1.1.258
+----------
+ * Merge pull request #747 from rapidpro/flow-results-2
+ * Merge pull request #744 from rapidpro/flow-results-3
+ * fix conflicts
+ * Use fields from flow results and flow result categories
+
 v1.1.257
 ----------
  * Merge pull request #741 from rapidpro/flow-results-2
