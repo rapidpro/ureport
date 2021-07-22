@@ -241,25 +241,29 @@ class UreportTest(SmartminTest, DashTest):
         return question
 
     def create_poll_response_category(self, question, rule_uuid, category):
-        existing_flow_result_category = FlowResultCategory.objects.filter(
+        flow_result_category = FlowResultCategory.objects.filter(
             flow_result=question.flow_result, category=category
-        )
-        if existing_flow_result_category:
-            existing_flow_result_category.update(is_active=True)
-            flow_result_category = existing_flow_result_category.first()
+        ).first()
+        if flow_result_category:
+            flow_result_category.is_active = True
+            flow_result_category.save(update_fields=("is_active",))
         else:
             flow_result_category = FlowResultCategory.objects.create(
                 flow_result=question.flow_result, category=category, is_active=True
             )
 
-        existing = PollResponseCategory.objects.filter(question=question, category=category)
-        if not rule_uuid:
-            rule_uuid = uuid.uuid4()
+        obj = PollResponseCategory.objects.filter(question=question, category=category).first()
 
-        if existing:
-            existing.update(category=category, is_active=True, flow_result_category=flow_result_category)
-            obj = existing.first()
+        if obj:
+            obj.is_active = True
+            obj.category = category
+            obj.flow_result_category = flow_result_category
+            obj.save(update_fields=("is_active", "category", "flow_result_category"))
+
         else:
+            if not rule_uuid:
+                rule_uuid = uuid.uuid4()
+
             obj = PollResponseCategory.objects.create(
                 question=question,
                 rule_uuid=rule_uuid,
