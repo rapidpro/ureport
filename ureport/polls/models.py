@@ -13,7 +13,6 @@ from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import Org, OrgBackend
 from django_redis import get_redis_connection
 from smartmin.models import SmartModel
-from xlrd import XLRDError
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -25,6 +24,8 @@ from django.utils import timezone, translation
 from django.utils.html import strip_tags
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+
+from ureport.flows.models import FlowResult, FlowResultCategory
 
 logger = logging.getLogger(__name__)
 
@@ -621,87 +622,6 @@ class Poll(SmartModel):
             return self.category.get_first_image()
 
     @classmethod
-    def prepare_fields(cls, field_dict, import_params=None, user=None):
-        if not import_params or "org_id" not in import_params:
-            raise Exception("Import params must include org_id")
-
-        field_dict["created_by"] = user
-        field_dict["org"] = Org.objects.get(pk=import_params["org_id"])
-
-        return field_dict
-
-    @classmethod
-    def create_instance(cls, field_dict):
-        if "org" not in field_dict:
-            raise ValueError("Import fields dictionary must include org")
-
-        if "created_by" not in field_dict:
-            raise ValueError("Import fields dictionary must include created_by")
-
-        if "category" not in field_dict:
-            raise ValueError("Import fields dictionary must include category")
-
-        if "uuid" not in field_dict:
-            raise ValueError("Import fields dictionary must include uuid")
-
-        if "name" not in field_dict:
-            raise ValueError("Import fields dictionary must include name")
-
-        if "created_on" not in field_dict:
-            raise ValueError("Import fields dictionary must include created_on")
-
-        if "ruleset_uuid" not in field_dict:
-            raise ValueError("Import fields dictionary must include ruleset_uuid")
-
-        if "question" not in field_dict:
-            raise ValueError("Import fields dictionary must include question")
-
-        org = field_dict.pop("org")
-        user = field_dict.pop("created_by")
-
-        category = field_dict.pop("category")
-
-        uuid = field_dict.pop("uuid")
-        name = field_dict.pop("name")
-        created_on = field_dict.pop("created_on")
-
-        ruleset_uuid = field_dict.pop("ruleset_uuid")
-        question = field_dict.pop("question")
-
-        category_obj = Category.objects.filter(org=org, name=category).first()
-        if not category_obj:
-            category_obj = Category.objects.create(org=org, name=category, created_by=user, modified_by=user)
-
-        existing_polls = Poll.objects.filter(org=org, flow_uuid=uuid, category=category_obj)
-
-        imported_poll = None
-        for poll in existing_polls:
-            if poll.questions.filter(ruleset_uuid=ruleset_uuid).exists():
-                imported_poll = Poll.objects.filter(pk=poll.pk).first()
-
-                if imported_poll:
-                    Poll.objects.filter(pk=imported_poll.pk).update(title=name)
-
-        if not imported_poll:
-            imported_poll = Poll.objects.create(
-                flow_uuid=uuid,
-                title=name,
-                poll_date=created_on,
-                org=org,
-                category=category_obj,
-                created_by=user,
-                modified_by=user,
-            )
-
-        poll_question = PollQuestion.update_or_create(user, imported_poll, "", ruleset_uuid, "wait_message")
-        PollQuestion.objects.filter(pk=poll_question.pk).update(title=question, is_active=True)
-
-        # hide all other questions
-        PollQuestion.objects.filter(poll=imported_poll).exclude(pk=poll_question.pk).update(is_active=False)
-
-        return imported_poll
-
-    @classmethod
     def update_or_create_questions_task(cls, records):
         from .tasks import update_or_create_questions
 
@@ -712,55 +632,6 @@ class Poll(SmartModel):
 
         if record_ids:
             update_or_create_questions.delay(record_ids)
-
-    @classmethod
-    def import_csv(cls, task, log=None):
-        csv_file = task.csv_file
-        csv_file.open()
-
-        # this file isn't good enough, lets write it to local disk
-        from django.conf import settings
-        from uuid import uuid4
-        import os
-
-        # make sure our tmp directory is present (throws if already present)
-        try:
-            os.makedirs(os.path.join(settings.MEDIA_ROOT, "tmp"))
-        except Exception:
-            pass
-
-        # write our file out
-        tmp_file = os.path.join(settings.MEDIA_ROOT, "tmp/%s" % six.text_type(uuid4()))
-
-        out_file = open(tmp_file, "wb")
-        out_file.write(csv_file.read())
-        out_file.close()
-
-        filename = out_file
-        user = task.created_by
-
-        import_params = None
-        import_results = dict()
-
-        # additional parameters are optional
-        if task.import_params:
-            try:
-                import_params = json.loads(task.import_params)
-            except Exception:
-                pass
-
-        try:
-            records = cls.import_xls(filename, user, import_params, log, import_results)
-        except XLRDError:
-            records = cls.import_raw_csv(filename, user, import_params, log, import_results)
-        finally:
-            os.remove(tmp_file)
-
-        task.import_results = json.dumps(import_results)
-
-        Poll.update_or_create_questions_task(records)
-
-        return records
 
     def __str__(self):
         return self.title
@@ -830,13 +701,18 @@ class PollQuestion(SmartModel):
         default=0, null=True, blank=True, help_text=_("The priority number for this question on the poll")
     )
 
+    flow_result = models.ForeignKey(FlowResult, on_delete=models.PROTECT, null=True)
+
     @classmethod
     def update_or_create(cls, user, poll, ruleset_label, uuid, ruleset_type):
-        existing = cls.objects.filter(ruleset_uuid=uuid, poll=poll)
+        flow_result = FlowResult.update_or_create(poll.org, poll.flow_uuid, uuid, ruleset_label)
+        question = cls.objects.filter(ruleset_uuid=uuid, poll=poll).first()
 
-        if existing:
-            existing.update(ruleset_type=ruleset_type, ruleset_label=ruleset_label)
-            question = existing.first()
+        if question:
+            question.ruleset_type = ruleset_type
+            question.ruleset_label = ruleset_label
+            question.flow_result = flow_result
+            question.save(update_fields=("ruleset_type", "ruleset_label", "flow_result"))
         else:
             question = PollQuestion.objects.create(
                 poll=poll,
@@ -844,6 +720,7 @@ class PollQuestion(SmartModel):
                 title=ruleset_label,
                 ruleset_type=ruleset_type,
                 ruleset_label=ruleset_label,
+                flow_result=flow_result,
                 is_active=False,
                 created_by=user,
                 modified_by=user,
@@ -1224,8 +1101,12 @@ class PollResponseCategory(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    flow_result_category = models.ForeignKey(FlowResultCategory, on_delete=models.PROTECT, null=True)
+
     @classmethod
     def update_or_create(cls, question, rule_uuid, category):
+        flow_result_category = FlowResultCategory.update_or_create(question.flow_result, category)
+
         existing = cls.objects.filter(question=question)
         if rule_uuid is not None:
             existing = existing.filter(rule_uuid=rule_uuid)
@@ -1234,10 +1115,15 @@ class PollResponseCategory(models.Model):
             rule_uuid = uuid.uuid4()
 
         if existing:
-            existing.update(category=category, is_active=True)
+            existing.update(category=category, is_active=True, flow_result_category=flow_result_category)
         else:
             existing = cls.objects.create(
-                question=question, rule_uuid=rule_uuid, category=category, category_displayed=category, is_active=True
+                question=question,
+                rule_uuid=rule_uuid,
+                category=category,
+                category_displayed=category,
+                flow_result_category=flow_result_category,
+                is_active=True,
             )
         return existing
 

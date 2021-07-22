@@ -57,9 +57,8 @@ class UreportAPITests(APITestCase):
     def create_org(self, subdomain, user):
         name = subdomain
 
-        orgs = Org.objects.filter(subdomain=subdomain)
-        if orgs:
-            org = orgs[0]
+        org = Org.objects.filter(subdomain=subdomain).first()
+        if org:
             org.name = name
             org.save()
         else:
@@ -85,10 +84,10 @@ class UreportAPITests(APITestCase):
         )
 
     def create_poll_question(self, user, poll, ruleset_label, ruleset_uuid):
-        existing = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll)
-        if existing:
-            existing.update(ruleset_label=ruleset_label)
-            question = existing.first()
+        question = PollQuestion.objects.filter(ruleset_uuid=ruleset_uuid, poll=poll).first()
+        if question:
+            question.ruleset_label = ruleset_label
+            question.save(update_fields=("ruleset_label",))
         else:
             question = PollQuestion.objects.create(
                 poll=poll,
