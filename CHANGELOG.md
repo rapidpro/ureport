@@ -1,3 +1,7 @@
+v1.1.260
+----------
+ * Merge pull request #748 from rapidpro/fix-constraint
+
 v1.1.258
 ----------
  * Merge pull request #747 from rapidpro/flow-results-2
