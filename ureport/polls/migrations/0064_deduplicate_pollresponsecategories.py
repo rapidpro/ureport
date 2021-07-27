@@ -12,6 +12,28 @@ def noop(apps, schema_editor):  # pragma: no cover
     pass
 
 
+def score(obj):
+    obj_score = 0
+
+    # hidden categories
+    if not obj.is_active:
+        return 0
+
+    # when we have a mix for is_active False and True, True is the best to keep
+    if obj.is_active:
+        obj_score += 1
+
+    # category dispaly was set
+    if obj.category_display is not None:
+        obj_score += 2
+
+        # category display has been updated that should be the best to keep
+        if obj.category_display != obj.category:
+            obj_score += 4
+
+    return obj_score
+
+
 def deduplicate_pollresponsecategories(apps, schema_editor):  # pragma: no cover
     PollResponseCategory = apps.get_model("polls", "PollResponseCategory")
 
@@ -29,18 +51,21 @@ def deduplicate_pollresponsecategories(apps, schema_editor):  # pragma: no cover
     )
 
     for duplicate in duplicates:
-        choosen_one = PollResponseCategory.objects.filter(
+
+        duplicate_objs = PollResponseCategory.objects.filter(
             question_id=duplicate["question"],
             flow_result_category_id=duplicate["flow_result_category"],
-        ).first()
+        )
+        choosen_one = duplicate_objs.first()
+        choosen_score = score(choosen_one)
 
-        # If we had different is_active state, make sure it is the one with is_active as True
-        if duplicate["is_active__count"] == 2 and not choosen_one.is_active:
-            choosen_one = PollResponseCategory.objects.filter(
-                is_active=True,
-                question_id=duplicate["question"],
-                flow_result_category_id=duplicate["flow_result_category"],
-            ).first()
+        # select the best to keep
+        for obj in duplicate_objs:
+            obj_score = score(obj)
+
+            if obj_score > choosen_score:
+                choosen_one = obj
+                choosen_score = obj_score
 
         # poll response categories ids to remove
         poll_response_categories_ids = list(
