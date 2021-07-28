@@ -24,11 +24,11 @@ def score(obj):
         obj_score += 1
 
     # category dispaly was set
-    if obj.category_display is not None:
+    if obj.category_displayed is not None:
         obj_score += 2
 
         # category display has been updated that should be the best to keep
-        if obj.category_display != obj.category:
+        if obj.category_displayed != obj.category:
             obj_score += 4
 
     return obj_score
