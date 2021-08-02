@@ -82,7 +82,8 @@ def deduplicate_pollresponsecategories(apps, schema_editor):  # pragma: no cover
             "id", flat=True
         )
         for batch in chunk_list(category_stats_ids, 1000):
-            updated = PollStats.objects.filter(pk__in=batch).update(category_id=choosen_one.id)
+            stats_batch = list(batch)
+            updated = PollStats.objects.filter(id__in=stats_batch).update(category_id=choosen_one.id)
             count += updated
             elapsed = time.time() - start_time
             print(f"Migrated {count} poll stats for duplicated categories in {elapsed:.1f} seconds")
