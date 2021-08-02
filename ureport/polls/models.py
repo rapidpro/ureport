@@ -1145,7 +1145,7 @@ class PollResponseCategory(models.Model):
         return existing
 
     class Meta:
-        unique_together = (("question", "rule_uuid"),)
+        unique_together = (("question", "rule_uuid"), ("question", "flow_result_category"))
 
 
 class PollResult(models.Model):
