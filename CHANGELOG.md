@@ -1,3 +1,7 @@
+v1.1.263
+----------
+ * Merge pull request #749 from rapidpro/dedupe-poll-response-categories
+
 v1.1.260
 ----------
  * Merge pull request #748 from rapidpro/fix-constraint
