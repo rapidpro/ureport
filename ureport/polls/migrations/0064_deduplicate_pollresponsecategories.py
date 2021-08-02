@@ -78,7 +78,9 @@ def deduplicate_pollresponsecategories(apps, schema_editor):  # pragma: no cover
         )
 
         # update foreign key for their stats
-        category_stats_ids = PollStats.objects.filter(category_id__in=poll_response_categories_ids).only("id")
+        category_stats_ids = PollStats.objects.filter(category_id__in=poll_response_categories_ids).values_list(
+            "id", flat=True
+        )
         for batch in chunk_list(category_stats_ids, 1000):
             updated = PollStats.objects.filter(pk__in=batch).update(category_id=choosen_one.id)
             count += updated
