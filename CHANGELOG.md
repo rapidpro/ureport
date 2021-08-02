@@ -1,3 +1,8 @@
+v1.1.264
+----------
+ * Fix migration queryset
+ * Fix migration queryset
+
 v1.1.263
 ----------
  * Merge pull request #749 from rapidpro/dedupe-poll-response-categories
