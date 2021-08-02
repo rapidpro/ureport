@@ -1,3 +1,9 @@
+v1.1.265
+----------
+ * Merge pull request #751 from rapidpro/dedupe-poll-response-categories
+ * Merge pull request #750 from rapidpro/unique-pollresponsecategory-constraint
+ * Add constraint for unique together on poll response categories
+
 v1.1.264
 ----------
  * Fix migration queryset
