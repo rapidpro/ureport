@@ -34,7 +34,9 @@ def populate_flow_results(apps, schema_editor):  # pragma: no cover
 
             for batch in chunk_list(poll_stats_ids, 1000):
                 stats_batch = [elt.id for elt in list(batch)]
-                updated = PollStats.objects.filter(pk__in=stats_batch).update(flow_result_id=poll_question.flow_result_id)
+                updated = PollStats.objects.filter(pk__in=stats_batch).update(
+                    flow_result_id=poll_question.flow_result_id
+                )
                 count += updated
                 elapsed = time.time() - start_time
                 print(f"Migrated {count} of {total} poll stats in {elapsed:.1f} seconds")
