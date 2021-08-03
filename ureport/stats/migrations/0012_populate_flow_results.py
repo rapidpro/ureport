@@ -41,8 +41,10 @@ def populate_flow_results(apps, schema_editor):  # pragma: no cover
                 elapsed = time.time() - start_time
                 print(f"Migrated flow_result for {count} of {total} poll stats in {elapsed:.1f} seconds")
 
-            question_total = poll_stats_ids.count()
-            question_count = 0
+            question_with_category_total = (
+                PollStats.objects.filter(question_id=poll_question.id).exclude(category=None).count()
+            )
+            migrated_count = 0
             poll_response_categories = PollResponseCategory.objects.filter(question=poll_question)
 
             for poll_response_category in poll_response_categories:
@@ -53,10 +55,10 @@ def populate_flow_results(apps, schema_editor):  # pragma: no cover
                     updated = PollStats.objects.filter(pk__in=stats_batch).update(
                         flow_result_category_id=poll_response_category.flow_result_category_id
                     )
-                    question_count += updated
+                    migrated_count += updated
                     elapsed = time.time() - start_time
                     print(
-                        f"Migrated flow_result_category for {question_count} of {question_total} poll stats for quetion {poll_question.id} in {elapsed:.1f} seconds"
+                        f"Migrated flow_result_category for {migrated_count} of {question_with_category_total} poll stats for quetion {poll_question.id} in {elapsed:.1f} seconds"
                     )
 
         print(f"Finished migrating polls stats on org #{org.id}")
