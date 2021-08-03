@@ -1768,7 +1768,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1779,7 +1781,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1790,7 +1794,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1801,7 +1807,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1826,7 +1834,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1837,7 +1847,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1866,7 +1878,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=male_gender,
             location=None,
@@ -1877,7 +1891,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1888,7 +1904,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1898,7 +1916,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1909,7 +1929,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1920,7 +1942,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1931,6 +1955,7 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
             age_segment=None,
             gender_segment=female_gender,
@@ -1942,7 +1967,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1964,7 +1991,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=age_segment_20,
             gender_segment=None,
             location=None,
@@ -1975,7 +2004,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -1986,7 +2017,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -1996,7 +2029,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2007,7 +2042,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2017,7 +2054,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2028,7 +2067,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2038,7 +2079,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
