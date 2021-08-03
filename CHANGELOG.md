@@ -1,3 +1,35 @@
+v1.1.267
+----------
+ * Merge pull request #745 from rapidpro/flow-results-4
+ * Merge branch 'main' of github.com:rapidpro/ureport into flow-results-4
+ * Update CHANGELOG.md for v1.1.265
+ * Merge pull request #751 from rapidpro/dedupe-poll-response-categories
+ * Merge pull request #750 from rapidpro/unique-pollresponsecategory-constraint
+ * Update CHANGELOG.md for v1.1.264
+ * Fix migration queryset
+ * Fix migration queryset
+ * Update CHANGELOG.md for v1.1.263
+ * Merge pull request #749 from rapidpro/dedupe-poll-response-categories
+ * Add constraint for unique together on poll response categories
+ * Fix field name
+ * Improve the way to select the obj to keep
+ * Add migrations to deduplicates the poll response categories
+ * Update CHANGELOG.md for v1.1.260
+ * Merge pull request #748 from rapidpro/fix-constraint
+ * Remove constraints on PollResponseCategory
+ * Update CHANGELOG.md for v1.1.258
+ * Merge pull request #747 from rapidpro/flow-results-2
+ * Merge pull request #744 from rapidpro/flow-results-3
+ * Update CHANGELOG.md for v1.1.257
+ * Merge pull request #741 from rapidpro/flow-results-2
+ * Update CHANGELOG.md for v1.1.256
+ * Merge pull request #743 from rapidpro/tests-methods
+ * Merge master
+ * Merge pull request #742 from rapidpro/remove-poll-import
+ * Merge pull request #740 from rapidpro/separate-data-models-and-display-config-models
+ * Add test methods to create questions and response categories
+ * Remove unused polls import
+
 v1.1.265
 ----------
  * Merge pull request #751 from rapidpro/dedupe-poll-response-categories
