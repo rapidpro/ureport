@@ -1326,6 +1326,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://mk.ureport.in/count/",
     ),
     dict(
+        name="Madagascar",
+        host="//madagascar.ureport.in/",
+        flag="flag_madagascar.png",
+        countries_codes=["MG"],
+        count_link="http://madagascar.ureport.in/count/",
+    ),
+    dict(
         name="Malawi",
         host="//ureport.mw/",
         flag="flag_malawi.png",
