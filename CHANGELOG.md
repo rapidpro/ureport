@@ -1,3 +1,8 @@
+v1.1.269
+----------
+ * Merge pull request #752 from evansmurithi/add-madagasikara-flag
+ * Add Madagascar flag
+
 v1.1.268
 ----------
  * Merge pull request #746 from rapidpro/flow-results-5
