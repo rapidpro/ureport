@@ -1,3 +1,8 @@
+v1.1.268
+----------
+ * Merge pull request #746 from rapidpro/flow-results-5
+ * Populate flow result on poll stats
+
 v1.1.267
 ----------
  * Merge pull request #745 from rapidpro/flow-results-4
