@@ -788,7 +788,7 @@ def get_ureporters_locations_response_rates(org, segment):
     polled_stats_dict = {elt["location__osm_id"]: elt["count__sum"] for elt in polled_stats}
     responded_stats = (
         PollStats.objects.filter(org=org, date__gte=year_ago, location_id__in=boundaries_ids)
-        .exclude(category=None)
+        .exclude(flow_result_category=None)
         .values("location__osm_id")
         .annotate(Sum("count"))
     )
