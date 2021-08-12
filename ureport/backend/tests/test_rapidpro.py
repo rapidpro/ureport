@@ -542,7 +542,7 @@ class ContactSyncerTest(UreportTest):
 
         result.refresh_from_db()
         self.assertFalse(result.state)
-        
+
         contact = self.syncer.create_local(self.syncer.local_kwargs(self.nigeria, remote))
 
         self.assertEqual(contact.org, self.nigeria)
@@ -552,7 +552,6 @@ class ContactSyncerTest(UreportTest):
 
         result.refresh_from_db()
         self.assertFalse(result.state)
-
 
         now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
         mock_timezone_now.return_value = now_date
@@ -585,7 +584,7 @@ class ContactSyncerTest(UreportTest):
         self.assertFalse(result.state)
 
         contact = self.syncer.create_local(self.syncer.local_kwargs(self.nigeria, remote))
-        
+
         self.assertEqual(contact.org, self.nigeria)
         self.assertEqual(contact.uuid, "C-009")
         self.assertEqual(contact.registered_on, json_date_to_datetime("2015-04-09T12:48:44.320Z"))
@@ -593,6 +592,7 @@ class ContactSyncerTest(UreportTest):
 
         result.refresh_from_db()
         self.assertEqual(result.state, "R-LAGOS")
+
 
 class RapidProBackendTest(UreportTest):
     def setUp(self):
