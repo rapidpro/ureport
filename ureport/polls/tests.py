@@ -590,7 +590,7 @@ class PollTest(UreportTest):
                 self.assertTrue("backend" in response.context["form"].fields)
                 self.assertEquals(len(response.context["form"].fields["backend"].choices), 3)
                 self.assertEquals(
-                    set(response.context["form"].fields["backend"].choices),
+                    set([(getattr(elt[0], "value", ""), elt[1]) for elt in response.context["form"].fields["backend"].choices]),
                     set([("", "---------"), (poll.backend.pk, "rapidpro"), (floip_backend.pk, "floip")]),
                 )
 

@@ -5,10 +5,9 @@ from datetime import timedelta
 
 from dash.orgs.models import Org
 
-from django.contrib.postgres.fields import JSONField
 from django.core.cache import cache
 from django.db import connection, models
-from django.db.models import Count, ExpressionWrapper, F, IntegerField, Q, Sum
+from django.db.models import Count, ExpressionWrapper, F, IntegerField, JSONField, Q, Sum
 from django.db.models.functions import ExtractYear
 from django.utils import timezone, translation
 from django.utils.translation import ugettext_lazy as _
