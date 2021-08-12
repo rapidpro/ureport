@@ -1658,7 +1658,7 @@ REST_FRAMEWORK = {
     "PAGINATE_BY_PARAM": "page_size",  # Allow client to override, using `?page_size=xxx`.
     "MAX_PAGINATE_BY": 100,
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
 
