@@ -508,6 +508,91 @@ class ContactSyncerTest(UreportTest):
             },
         )
 
+    @patch("django.utils.timezone.now")
+    def test_create_local(self, mock_timezone_now):
+
+        now_date = json_date_to_datetime("2020-04-08T12:48:44.320Z")
+        mock_timezone_now.return_value = now_date
+
+        remote = TembaContact.create(
+            uuid="C-008",
+            name="Jan",
+            urns=["tel:123"],
+            groups=[ObjectRef.create(uuid="G-001", name="ureporters"), ObjectRef.create(uuid="G-007", name="Actors")],
+            fields={
+                "registration_date": "2014-01-02T03:04:05.000000Z",
+                "state": "Lagos",
+                "lga": "Oyo",
+                "ward": "Ikeja",
+                "occupation": "Student",
+                "born": "1990",
+                "gender": "Male",
+            },
+            language="eng",
+        )
+
+        result = PollResult.objects.create(
+            org=self.nigeria,
+            flow="flow-uuid",
+            ruleset="ruleset-uuid",
+            contact="C-008",
+            completed=False,
+            date=json_date_to_datetime("2014-01-02T03:04:05.000Z"),
+        )
+
+        result.refresh_from_db()
+        self.assertFalse(result.state)
+        
+        contact = self.syncer.create_local(self.syncer.local_kwargs(self.nigeria, remote))
+
+        self.assertEqual(contact.org, self.nigeria)
+        self.assertEqual(contact.uuid, "C-008")
+        self.assertEqual(contact.registered_on, json_date_to_datetime("2014-01-02T03:04:05.000000Z"))
+        self.assertEqual(contact.state, "R-LAGOS")
+
+        result.refresh_from_db()
+        self.assertFalse(result.state)
+
+
+        now_date = json_date_to_datetime("2015-04-08T12:48:44.320Z")
+        mock_timezone_now.return_value = now_date
+
+        remote = TembaContact.create(
+            uuid="C-009",
+            name="Jan",
+            urns=["tel:123"],
+            groups=[ObjectRef.create(uuid="G-001", name="ureporters"), ObjectRef.create(uuid="G-007", name="Actors")],
+            fields={
+                "registration_date": "2015-04-09T12:48:44.320Z",
+                "state": "Lagos",
+                "lga": "Oyo",
+                "ward": "Ikeja",
+                "occupation": "Student",
+                "born": "1990",
+                "gender": "Male",
+            },
+            language="eng",
+        )
+
+        result = PollResult.objects.create(
+            org=self.nigeria,
+            flow="flow-uuid",
+            ruleset="ruleset-uuid",
+            contact="C-009",
+            completed=False,
+            date=json_date_to_datetime("2015-04-09T12:48:44.320Z"),
+        )
+        self.assertFalse(result.state)
+
+        contact = self.syncer.create_local(self.syncer.local_kwargs(self.nigeria, remote))
+        
+        self.assertEqual(contact.org, self.nigeria)
+        self.assertEqual(contact.uuid, "C-009")
+        self.assertEqual(contact.registered_on, json_date_to_datetime("2015-04-09T12:48:44.320Z"))
+        self.assertEqual(contact.state, "R-LAGOS")
+
+        result.refresh_from_db()
+        self.assertEqual(result.state, "R-LAGOS")
 
 class RapidProBackendTest(UreportTest):
     def setUp(self):
