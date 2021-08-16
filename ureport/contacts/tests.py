@@ -203,8 +203,8 @@ class ContactTest(UreportTest):
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
-        Contact.objects.create(
-            is_active=False,
+        contact = Contact.objects.create(
+            is_active=True,
             uuid="C-009",
             org=self.nigeria,
             gender="M",
@@ -214,6 +214,9 @@ class ContactTest(UreportTest):
             state="R-LAGOS",
             district="R-OYO",
         )
+        contact.is_active = False
+        contact.save()
+
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
         Contact.recalculate_reporters_stats(self.nigeria)
 
