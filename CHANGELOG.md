@@ -1,3 +1,7 @@
+v1.1.270
+----------
+ * Merge pull request #754 from rapidpro/django-3
+
 v1.1.269
 ----------
  * Merge pull request #752 from evansmurithi/add-madagasikara-flag
