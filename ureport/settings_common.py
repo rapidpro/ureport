@@ -55,6 +55,8 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 # set the mail settings, we send throught gmail
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "server@nyaruka.com"
@@ -100,7 +102,7 @@ LANGUAGES = (
     ("uk", "Ukrainian"),
     ("uz", "Uzbek"),
     ("my", "Burmese"),
-    ("mk_MK", "Macedonian"),
+    ("mk-mk", "Macedonian"),
     ("id", "Indonesian"),
     ("it", "Italian"),
     ("ro", "Romanian"),
@@ -1656,6 +1658,7 @@ REST_FRAMEWORK = {
     "PAGINATE_BY_PARAM": "page_size",  # Allow client to override, using `?page_size=xxx`.
     "MAX_PAGINATE_BY": 100,
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
 
