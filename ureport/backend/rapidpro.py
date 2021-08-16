@@ -305,6 +305,28 @@ class ContactSyncer(BaseSyncer):
             ]
         )
 
+    def create_local(self, remote_as_kwargs):
+        obj = super().create_local(remote_as_kwargs)
+
+        one_month_ago = timezone.now() - timedelta(days=30)
+        if obj.registered_on is not None and obj.registered_on > one_month_ago:
+            recent_results = PollResult.objects.filter(
+                org=obj.org,
+                contact=obj.uuid,
+                date__gte=one_month_ago,
+            ).exists()
+
+            if recent_results:
+                PollResult.objects.filter(org=obj.org, contact=obj.uuid, date__gte=one_month_ago).update(
+                    state=obj.state,
+                    district=obj.district,
+                    ward=obj.ward,
+                    gender=obj.gender,
+                    born=obj.born,
+                )
+
+        return obj
+
 
 class RapidProBackend(BaseBackend):
     """
