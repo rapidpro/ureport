@@ -1,3 +1,10 @@
+v1.1.271
+----------
+ * Merge pull request #755 from rapidpro/update-result-for-new-contacts
+ * Merge branch 'main' of github.com:rapidpro/ureport into update-result-for-new-contacts
+ * Run code_checks
+ * Update results for new contacts
+
 v1.1.270
 ----------
  * Merge pull request #754 from rapidpro/django-3
