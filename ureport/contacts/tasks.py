@@ -3,9 +3,11 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import time
 
-from dash.orgs.models import Org
+from dash.orgs.models import Org, TaskState
 from dash.orgs.tasks import org_task
 from dash.utils.sync import SyncOutcome
+
+from django_redis import get_redis_connection
 
 from django.core.cache import cache
 from django.utils import timezone
@@ -21,9 +23,12 @@ logger = get_task_logger(__name__)
 
 @app.task(name="contacts.rebuild_contacts_counts")
 def rebuild_contacts_counts():
+    r = get_redis_connection()
     orgs = Org.objects.filter(is_active=True)
     for org in orgs:
-        Contact.recalculate_reporters_stats(org)
+        key = TaskState.get_lock_key(org, "contact-pull")
+        with r.lock(key):
+            Contact.recalculate_reporters_stats(org)
 
 
 @org_task("update-org-contact-counts", 60 * 20)
