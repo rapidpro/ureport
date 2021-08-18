@@ -6,7 +6,6 @@ import time
 from dash.orgs.models import Org, TaskState
 from dash.orgs.tasks import org_task
 from dash.utils.sync import SyncOutcome
-
 from django_redis import get_redis_connection
 
 from django.core.cache import cache
