@@ -1,3 +1,8 @@
+v1.1.274
+----------
+ * Merge pull request #759 from rapidpro/counts-status
+ * Better stats on counts status
+
 v1.1.273
 ----------
  * Merge pull request #758 from rapidpro/counts-status
