@@ -3,9 +3,10 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import time
 
-from dash.orgs.models import Org
+from dash.orgs.models import Org, TaskState
 from dash.orgs.tasks import org_task
 from dash.utils.sync import SyncOutcome
+from django_redis import get_redis_connection
 
 from django.core.cache import cache
 from django.utils import timezone
@@ -21,9 +22,12 @@ logger = get_task_logger(__name__)
 
 @app.task(name="contacts.rebuild_contacts_counts")
 def rebuild_contacts_counts():
+    r = get_redis_connection()
     orgs = Org.objects.filter(is_active=True)
     for org in orgs:
-        Contact.recalculate_reporters_stats(org)
+        key = TaskState.get_lock_key(org, "contact-pull")
+        with r.lock(key):
+            Contact.recalculate_reporters_stats(org)
 
 
 @app.task(name="contacts.check_contacts_count_mismatch")
@@ -36,7 +40,12 @@ def check_contacts_count_mismatch():
         db_contacts_counts = Contact.objects.filter(org=org, is_active=True).count()
         counter_counts = ReportersCounter.get_counts(org).get("total-reporters", 0)
 
-        if db_contacts_counts != counter_counts:
+        count_diff = abs(db_contacts_counts - counter_counts)
+        pct_diff = 0
+        if db_contacts_counts:
+            pct_diff = count_diff / db_contacts_counts
+
+        if count_diff > 50 or pct_diff > 0.025:
             mismatch_counts[f"{org.id}"] = dict(db=db_contacts_counts, count=counter_counts)
 
     cache.set("contact_counts_mismatch", mismatch_counts, None)
