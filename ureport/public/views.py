@@ -646,3 +646,14 @@ def task_status(request):
         return HttpResponse(body, status=500, content_type="application/json")
     else:
         return HttpResponse(body, status=200, content_type="application/json")
+
+
+def counts_status(request):
+    mismatch_counts = cache.get("contact_counts_mismatch", dict())
+
+    body = json.dumps(mismatch_counts)
+
+    if mismatch_counts:
+        return HttpResponse(body, status=500, content_type="application/json")
+    else:
+        return HttpResponse(body, status=200, content_type="application/json")

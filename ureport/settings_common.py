@@ -902,6 +902,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
+    "check_contact_mismatch": {
+        "task": "contacts.check_contacts_count_mismatch",
+        "schedule": timedelta(minutes=30),
+        "relative": True,
+    },
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),

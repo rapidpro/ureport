@@ -13,7 +13,7 @@ from django.utils import timezone
 from celery.utils.log import get_task_logger
 
 from ureport.celery import app
-from ureport.contacts.models import Contact
+from ureport.contacts.models import Contact, ReportersCounter
 from ureport.utils import datetime_to_json_date, update_cache_org_contact_counts
 
 logger = get_task_logger(__name__)
@@ -24,6 +24,22 @@ def rebuild_contacts_counts():
     orgs = Org.objects.filter(is_active=True)
     for org in orgs:
         Contact.recalculate_reporters_stats(org)
+
+
+@app.task(name="contacts.check_contacts_count_mismatch")
+def check_contacts_count_mismatch():
+    orgs = Org.objects.filter(is_active=True)
+
+    mismatch_counts = dict()
+
+    for org in orgs:
+        db_contacts_counts = Contact.objects.filter(org=org, is_active=True).count()
+        counter_counts = ReportersCounter.get_counts(org).get("total-reporters", 0)
+
+        if db_contacts_counts != counter_counts:
+            mismatch_counts[f"{org.id}"] = dict(db=db_contacts_counts, count=counter_counts)
+
+    cache.set("contact_counts_mismatch", mismatch_counts, None)
 
 
 @org_task("update-org-contact-counts", 60 * 20)
