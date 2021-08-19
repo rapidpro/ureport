@@ -984,6 +984,19 @@ class PublicTest(UreportTest):
         self.assertEqual(len(list(response.json())), 3)
         self.assertEqual(set(response.json()), set({"contact_sync_up", "tasks", "failing_tasks"}))
 
+    @mock.patch("django.core.cache.cache.get")
+    def test_counts_status_view(self, mock_cache_get):
+        mock_cache_get.return_value = {}
+
+        status_url = reverse("public.counts_status")
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 200)
+
+        mock_cache_get.return_value = {f"{self.uganda.pk}": {"db": 0, "count": 1000}}
+
+        response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
+        self.assertEqual(response.status_code, 500)
+
     @override_settings(
         COUNTRY_FLAGS_SITES=[
             dict(
