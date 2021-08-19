@@ -649,11 +649,13 @@ def task_status(request):
 
 
 def counts_status(request):
-    mismatch_counts = cache.get("contact_counts_mismatch", dict())
+    cached_counts_stats = cache.get("contact_counts_status", dict())
 
-    body = json.dumps(mismatch_counts)
+    has_error = cached_counts_stats.get("error_counts", dict())
 
-    if mismatch_counts:
+    body = json.dumps(cached_counts_stats)
+
+    if has_error:
         return HttpResponse(body, status=500, content_type="application/json")
     else:
         return HttpResponse(body, status=200, content_type="application/json")

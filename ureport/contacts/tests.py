@@ -322,10 +322,16 @@ class ContactsTasksTest(UreportTest):
         check_contacts_count_mismatch()
 
         mock_cache_set.assert_called_once_with(
-            "contact_counts_mismatch",
+            "contact_counts_status",
             {
-                f"{self.uganda.pk}": {"db": 0, "count": 1000},
-                f"{self.nigeria.pk}": {"db": 1, "count": 1000},
+                "mismatch_counts": {
+                    f"{self.uganda.pk}": {"db": 0, "count": 1000},
+                    f"{self.nigeria.pk}": {"db": 1, "count": 1000},
+                },
+                "error_counts": {
+                    f"{self.uganda.pk}": {"db": 0, "count": 1000},
+                    f"{self.nigeria.pk}": {"db": 1, "count": 1000},
+                },
             },
             None,
         )
@@ -335,7 +341,9 @@ class ContactsTasksTest(UreportTest):
 
         check_contacts_count_mismatch()
 
-        mock_cache_set.assert_called_once_with("contact_counts_mismatch", {}, None)
+        mock_cache_set.assert_called_once_with(
+            "contact_counts_status", {"mismatch_counts": {}, "error_counts": {}}, None
+        )
 
     @patch("ureport.contacts.tasks.update_cache_org_contact_counts")
     def test_update_org_contact_count(self, mock_update_cache_org_contact_counts):
