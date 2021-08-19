@@ -1,3 +1,8 @@
+v1.1.272
+----------
+ * Merge pull request #757 from rapidpro/counts-status
+ * Add counts status view
+
 v1.1.271
 ----------
  * Merge pull request #755 from rapidpro/update-result-for-new-contacts
