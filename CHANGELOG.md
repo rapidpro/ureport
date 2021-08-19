@@ -1,3 +1,8 @@
+v1.1.273
+----------
+ * Merge pull request #758 from rapidpro/counts-status
+ * consider mismatch for a diff more that 50 or 2.5%
+
 v1.1.272
 ----------
  * Merge pull request #757 from rapidpro/counts-status
