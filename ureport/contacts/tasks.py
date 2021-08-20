@@ -47,10 +47,14 @@ def check_contacts_count_mismatch():
             pct_diff = count_diff / db_contacts_counts
 
         if count_diff:
-            mismatch_counts[f"{org.id}"] = dict(db=db_contacts_counts, count=counter_counts)
+            mismatch_counts[f"{org.id}"] = dict(
+                db=db_contacts_counts, count=counter_counts, count_diff=count_diff, pct_diff=pct_diff
+            )
 
         if count_diff > 50 or pct_diff > 0.025:
-            error_counts[f"{org.id}"] = dict(db=db_contacts_counts, count=counter_counts)
+            error_counts[f"{org.id}"] = dict(
+                db=db_contacts_counts, count=counter_counts, count_diff=count_diff, pct_diff=pct_diff
+            )
 
     output = dict(mismatch_counts=mismatch_counts, error_counts=error_counts)
     cache.set("contact_counts_status", output, None)
