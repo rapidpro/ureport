@@ -1,3 +1,29 @@
+v1.1.274
+----------
+ * Merge pull request #759 from rapidpro/counts-status
+ * Better stats on counts status
+
+v1.1.273
+----------
+ * Merge pull request #758 from rapidpro/counts-status
+ * consider mismatch for a diff more that 50 or 2.5%
+
+v1.1.272
+----------
+ * Merge pull request #757 from rapidpro/counts-status
+ * Add counts status view
+
+v1.1.271
+----------
+ * Merge pull request #755 from rapidpro/update-result-for-new-contacts
+ * Merge branch 'main' of github.com:rapidpro/ureport into update-result-for-new-contacts
+ * Run code_checks
+ * Update results for new contacts
+
+v1.1.270
+----------
+ * Merge pull request #754 from rapidpro/django-3
+
 v1.1.269
 ----------
  * Merge pull request #752 from evansmurithi/add-madagasikara-flag

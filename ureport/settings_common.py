@@ -55,6 +55,8 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 # set the mail settings, we send throught gmail
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "server@nyaruka.com"
@@ -100,7 +102,7 @@ LANGUAGES = (
     ("uk", "Ukrainian"),
     ("uz", "Uzbek"),
     ("my", "Burmese"),
-    ("mk_MK", "Macedonian"),
+    ("mk-mk", "Macedonian"),
     ("id", "Indonesian"),
     ("it", "Italian"),
     ("ro", "Romanian"),
@@ -900,6 +902,11 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(minutes=20),
         "relative": True,
     },
+    "check_contact_mismatch": {
+        "task": "contacts.check_contacts_count_mismatch",
+        "schedule": timedelta(minutes=30),
+        "relative": True,
+    },
     "contact-pull": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(minute=[0, 10, 20, 30, 40, 50]),
@@ -1656,6 +1663,7 @@ REST_FRAMEWORK = {
     "PAGINATE_BY_PARAM": "page_size",  # Allow client to override, using `?page_size=xxx`.
     "MAX_PAGINATE_BY": 100,
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
 

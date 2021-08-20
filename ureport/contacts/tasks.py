@@ -3,9 +3,10 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import time
 
-from dash.orgs.models import Org
+from dash.orgs.models import Org, TaskState
 from dash.orgs.tasks import org_task
 from dash.utils.sync import SyncOutcome
+from django_redis import get_redis_connection
 
 from django.core.cache import cache
 from django.utils import timezone
@@ -13,7 +14,7 @@ from django.utils import timezone
 from celery.utils.log import get_task_logger
 
 from ureport.celery import app
-from ureport.contacts.models import Contact
+from ureport.contacts.models import Contact, ReportersCounter
 from ureport.utils import datetime_to_json_date, update_cache_org_contact_counts
 
 logger = get_task_logger(__name__)
@@ -21,9 +22,38 @@ logger = get_task_logger(__name__)
 
 @app.task(name="contacts.rebuild_contacts_counts")
 def rebuild_contacts_counts():
+    r = get_redis_connection()
     orgs = Org.objects.filter(is_active=True)
     for org in orgs:
-        Contact.recalculate_reporters_stats(org)
+        key = TaskState.get_lock_key(org, "contact-pull")
+        with r.lock(key):
+            Contact.recalculate_reporters_stats(org)
+
+
+@app.task(name="contacts.check_contacts_count_mismatch")
+def check_contacts_count_mismatch():
+    orgs = Org.objects.filter(is_active=True)
+
+    error_counts = dict()
+    mismatch_counts = dict()
+
+    for org in orgs:
+        db_contacts_counts = Contact.objects.filter(org=org, is_active=True).count()
+        counter_counts = ReportersCounter.get_counts(org).get("total-reporters", 0)
+
+        count_diff = abs(db_contacts_counts - counter_counts)
+        pct_diff = 0
+        if db_contacts_counts:
+            pct_diff = count_diff / db_contacts_counts
+
+        if count_diff:
+            mismatch_counts[f"{org.id}"] = dict(db=db_contacts_counts, count=counter_counts)
+
+        if count_diff > 50 or pct_diff > 0.025:
+            error_counts[f"{org.id}"] = dict(db=db_contacts_counts, count=counter_counts)
+
+    output = dict(mismatch_counts=mismatch_counts, error_counts=error_counts)
+    cache.set("contact_counts_status", output, None)
 
 
 @org_task("update-org-contact-counts", 60 * 20)
