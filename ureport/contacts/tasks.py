@@ -34,16 +34,26 @@ def rebuild_contacts_counts():
 def check_contacts_count_mismatch():
     orgs = Org.objects.filter(is_active=True)
 
+    error_counts = dict()
     mismatch_counts = dict()
 
     for org in orgs:
         db_contacts_counts = Contact.objects.filter(org=org, is_active=True).count()
         counter_counts = ReportersCounter.get_counts(org).get("total-reporters", 0)
 
-        if db_contacts_counts != counter_counts:
+        count_diff = abs(db_contacts_counts - counter_counts)
+        pct_diff = 0
+        if db_contacts_counts:
+            pct_diff = count_diff / db_contacts_counts
+
+        if count_diff:
             mismatch_counts[f"{org.id}"] = dict(db=db_contacts_counts, count=counter_counts)
 
-    cache.set("contact_counts_mismatch", mismatch_counts, None)
+        if count_diff > 50 or pct_diff > 0.025:
+            error_counts[f"{org.id}"] = dict(db=db_contacts_counts, count=counter_counts)
+
+    output = dict(mismatch_counts=mismatch_counts, error_counts=error_counts)
+    cache.set("contact_counts_status", output, None)
 
 
 @org_task("update-org-contact-counts", 60 * 20)
