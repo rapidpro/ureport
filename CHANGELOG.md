@@ -1,3 +1,8 @@
+v1.1.275
+----------
+ * Merge pull request #760 from rapidpro/counts-status
+ * Show calculated stats too on counts status
+
 v1.1.274
 ----------
  * Merge pull request #759 from rapidpro/counts-status
