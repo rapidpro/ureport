@@ -315,9 +315,10 @@ class ContactsTasksTest(UreportTest):
     def test_check_contacts_count_mismatch(self, mock_counter_counts, mock_cache_set):
         mock_counter_counts.return_value = {"total-reporters": 1000}
 
-        Contact.objects.create(
-            org=self.nigeria, uuid="C-001", gender="M", born=1990, state="R-LAGOS", district="R-OYO"
-        )
+        for i in range(1250):
+            Contact.objects.create(
+                org=self.nigeria, uuid=f"C-00{i}", gender="M", born=1990, state="R-LAGOS", district="R-OYO"
+            )
 
         check_contacts_count_mismatch()
 
@@ -325,19 +326,19 @@ class ContactsTasksTest(UreportTest):
             "contact_counts_status",
             {
                 "mismatch_counts": {
-                    f"{self.uganda.pk}": {"db": 0, "count": 1000},
-                    f"{self.nigeria.pk}": {"db": 1, "count": 1000},
+                    f"{self.uganda.pk}": {"db": 0, "count": 1000, "count_diff": 1000, "pct_diff": 0},
+                    f"{self.nigeria.pk}": {"db": 1250, "count": 1000, "count_diff": 250, "pct_diff": 0.2},
                 },
                 "error_counts": {
-                    f"{self.uganda.pk}": {"db": 0, "count": 1000},
-                    f"{self.nigeria.pk}": {"db": 1, "count": 1000},
+                    f"{self.uganda.pk}": {"db": 0, "count": 1000, "count_diff": 1000, "pct_diff": 0},
+                    f"{self.nigeria.pk}": {"db": 1250, "count": 1000, "count_diff": 250, "pct_diff": 0.2},
                 },
             },
             None,
         )
 
         mock_cache_set.reset_mock()
-        mock_counter_counts.side_effect = [{"total-reporters": 0}, {"total-reporters": 1}]
+        mock_counter_counts.side_effect = [{"total-reporters": 0}, {"total-reporters": 1250}]
 
         check_contacts_count_mismatch()
 

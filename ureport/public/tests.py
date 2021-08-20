@@ -994,7 +994,7 @@ class PublicTest(UreportTest):
 
         mock_cache_get.return_value = {
             "mismatch_counts": {},
-            "error_counts": {f"{self.uganda.pk}": {"db": 0, "count": 1000}},
+            "error_counts": {f"{self.uganda.pk}": {"db": 0, "count": 1000, "count_diff": 1000, "pct_diff": 0}},
         }
 
         response = self.client.get(status_url, SERVER_NAME="uganda.ureport.io")
