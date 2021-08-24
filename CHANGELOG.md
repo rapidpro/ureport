@@ -1,3 +1,12 @@
+v1.1.276
+----------
+ * Merge pull request #756 from rapidpro/update-contacts-triggers
+ * Merge branch 'main' of github.com:rapidpro/ureport into update-contacts-triggers
+ * Merge branch 'main' of github.com:rapidpro/ureport into update-contacts-triggers
+ * Run code_checks
+ * Grab lock when recalculating the contacts stats
+ * Fix bugs in contacts triggers
+
 v1.1.275
 ----------
  * Merge pull request #760 from rapidpro/counts-status
