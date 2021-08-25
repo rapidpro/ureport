@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-25 15:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -1787,6 +1787,16 @@ msgstr "Utenti attivi"
 #| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
 msgstr "Se questa storia è apparsa"
+
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this topic"
+msgstr "Il nome di questa categoria"
+
+#, fuzzy
+#| msgid "The organization this story belongs to"
+msgid "The organization this topic belongs to"
+msgstr "L'organizzazione alla quale appartiene questa storia "
 
 msgid "Something to trigger localizations"
 msgstr "Qualcosa per avviare localizzazione"

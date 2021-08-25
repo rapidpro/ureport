@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-25 15:50+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -1894,6 +1894,16 @@ msgstr ""
 #| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
 msgstr "Câu chuyện này có nổi bật hay không"
+
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this topic"
+msgstr "Tên của danh mục này"
+
+#, fuzzy
+#| msgid "The organization this story belongs to"
+msgid "The organization this topic belongs to"
+msgstr "Câu chuyện này thuộc về tổ chức"
 
 msgid "Something to trigger localizations"
 msgstr "Một số thứ để thể hiện tính địa phương"

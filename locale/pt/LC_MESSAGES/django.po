@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-25 15:50+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -1829,6 +1829,16 @@ msgstr ""
 #| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
 msgstr "Se esta história é selecionada"
+
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this topic"
+msgstr "O nome desta categoria"
+
+#, fuzzy
+#| msgid "The organization this story belongs to"
+msgid "The organization this topic belongs to"
+msgstr "A organização na qual esta história pertence a"
 
 msgid "Something to trigger localizations"
 msgstr ""

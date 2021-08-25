@@ -1,6 +1,8 @@
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
-from smartmin.views import SmartCRUDL, SmartCreateView, SmartListView, SmartUpdateView
+from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
+
 from ureport.topics.models import Topic
+
 
 class TopicCRUDL(SmartCRUDL):
     model = Topic

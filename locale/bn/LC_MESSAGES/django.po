@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-25 15:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -1779,6 +1779,16 @@ msgstr "সক্রিয় ব্যবহারকারী"
 #| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
 msgstr "এই ঘটনাটি প্রকাশিত হয়েছে কিনা "
+
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this topic"
+msgstr " বিভাগের নাম"
+
+#, fuzzy
+#| msgid "The organization this story belongs to"
+msgid "The organization this topic belongs to"
+msgstr "এই ঘটনাটি যে প্রতিষ্ঠানের সাথে সংযুক্ত "
 
 msgid "Something to trigger localizations"
 msgstr "স্থানীয়করণকে সহায়তা করে এমন কিছু  "

@@ -3,7 +3,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import json
 import logging
-from ureport.topics.models import Topic
 import uuid
 from collections import defaultdict
 from datetime import timedelta
@@ -27,6 +26,7 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from ureport.flows.models import FlowResult, FlowResultCategory
+from ureport.topics.models import Topic
 
 logger = logging.getLogger(__name__)
 

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-25 15:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -1765,6 +1765,16 @@ msgstr "Faol Foydalanuvchilar"
 
 msgid "Whether this row was created by squashing"
 msgstr "Mazkur qator zichlashtirish orqali yaratilganmi"
+
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this topic"
+msgstr "Ushbu toifaning nomi"
+
+#, fuzzy
+#| msgid "The organization this story belongs to"
+msgid "The organization this topic belongs to"
+msgstr "Ushbu hikoya mansub bo'lgan tashkilot"
 
 msgid "Something to trigger localizations"
 msgstr "Aniqlashga turtki bo'ladigna ayrim narsalar"

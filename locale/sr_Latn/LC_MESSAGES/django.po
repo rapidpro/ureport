@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-25 15:50+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -1916,6 +1916,16 @@ msgstr ""
 #| msgid "Whether this story is featured"
 msgid "Whether this row was created by squashing"
 msgstr "Da li je priča objavljena"
+
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this topic"
+msgstr "Naziv kategorije"
+
+#, fuzzy
+#| msgid "The organization this story belongs to"
+msgid "The organization this topic belongs to"
+msgstr "Organizacija kojoj priča pripada"
 
 msgid "Something to trigger localizations"
 msgstr "Nešto što inicira lokalizaciju"

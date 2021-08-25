@@ -1,10 +1,8 @@
-
-from django.db import models
-
-from django.utils.translation import ugettext_lazy as _
-
 from dash.orgs.models import Org
 from smartmin.models import SmartModel
+
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class Topic(SmartModel):
@@ -14,6 +12,6 @@ class Topic(SmartModel):
 
     def __str__(self) -> str:
         return self.name
-    
+
     class Meta:
         unique_together = ("name", "org")

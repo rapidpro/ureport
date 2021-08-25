@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-25 15:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1683,6 +1683,12 @@ msgid "Active Users"
 msgstr ""
 
 msgid "Whether this row was created by squashing"
+msgstr ""
+
+msgid "The name of this topic"
+msgstr ""
+
+msgid "The organization this topic belongs to"
 msgstr ""
 
 msgid "Something to trigger localizations"

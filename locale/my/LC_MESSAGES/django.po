@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-25 15:50+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1691,6 +1691,16 @@ msgstr ""
 
 msgid "Whether this row was created by squashing"
 msgstr ""
+
+#, fuzzy
+#| msgid "The name to describe this image"
+msgid "The name of this topic"
+msgstr "The name to describe this image"
+
+#, fuzzy
+#| msgid "The organization this category applies to"
+msgid "The organization this topic belongs to"
+msgstr "he organization this category applies to"
 
 msgid "Something to trigger localizations"
 msgstr ""
