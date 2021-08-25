@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-25 15:50+0000\n"
+"POT-Creation-Date: 2021-08-25 15:58+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/rapidpro/teams/226/es/)\n"
@@ -688,6 +688,9 @@ msgstr "Cerrar sesión"
 
 msgid "Opinions"
 msgstr "Opiniones"
+
+msgid "Topics"
+msgstr ""
 
 msgid "Users"
 msgstr "Usuarios"

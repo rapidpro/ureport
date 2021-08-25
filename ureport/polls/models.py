@@ -155,7 +155,7 @@ class Poll(SmartModel):
 
     response_content = models.TextField(help_text=_("The body of text for the story"), null=True, blank=True)
 
-    topics = models.ManyToManyField(Topic, null=True)
+    topics = models.ManyToManyField(Topic)
 
     def get_sync_progress(self):
         if not self.runs_count:

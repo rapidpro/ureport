@@ -119,6 +119,14 @@
                             %img(src="{{ STATIC_URL }}img/polls_icon.png")
                           %span.menu-link-title
                             - trans "Opinions"
+
+                      %li
+                        %a(href="{% url 'topics.topic_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/categories_icon.png")
+                          %span.menu-link-title
+                            - trans "Topics"
+
                       %li
                         %a(href="{% url 'stories.story_list' %}")
                           %span.icon

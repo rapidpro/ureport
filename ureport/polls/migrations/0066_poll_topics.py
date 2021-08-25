@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="poll",
             name="topics",
-            field=models.ManyToManyField(null=True, to="topics.Topic"),
+            field=models.ManyToManyField(to="topics.Topic"),
         ),
     ]
