@@ -40,6 +40,7 @@ def check_contacts_count_mismatch():
     for org in orgs:
         db_contacts_counts = Contact.objects.filter(org=org, is_active=True).count()
         counter_counts = ReportersCounter.get_counts(org).get("total-reporters", 0)
+        key = TaskState.get_lock_key(org, "contact-pull")
 
         count_diff = abs(db_contacts_counts - counter_counts)
         pct_diff = 0
@@ -48,7 +49,7 @@ def check_contacts_count_mismatch():
 
         if count_diff:
             mismatch_counts[f"{org.id}"] = dict(
-                db=db_contacts_counts, count=counter_counts, count_diff=count_diff, pct_diff=pct_diff
+                db=db_contacts_counts, count=counter_counts, count_diff=count_diff, pct_diff=pct_diff, 
             )
 
         if count_diff > 50 or pct_diff > 0.025:

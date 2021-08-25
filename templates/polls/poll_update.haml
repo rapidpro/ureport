@@ -1,0 +1,14 @@
+- extends "smartmin/update.html"
+
+
+- block extra-style
+  :css
+    .select2 .selection {
+        min-width: 1000px
+    }
+
+- block extra-script
+  :javascript
+    $(document).ready(function() {
+      $('#id_topics').select2();
+    });

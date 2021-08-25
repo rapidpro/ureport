@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import json
 import logging
+from ureport.topics.models import Topic
 import uuid
 from collections import defaultdict
 from datetime import timedelta
@@ -153,6 +154,8 @@ class Poll(SmartModel):
     )
 
     response_content = models.TextField(help_text=_("The body of text for the story"), null=True, blank=True)
+
+    topics = models.ManyToManyField(Topic, null=True)
 
     def get_sync_progress(self):
         if not self.runs_count:
