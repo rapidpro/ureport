@@ -791,7 +791,7 @@ class PollTest(UreportTest):
             self.assertEqual(response.status_code, 200)
             self.assertTrue("form" in response.context)
 
-            self.assertEqual(len(response.context["form"].fields), 6)
+            self.assertEqual(len(response.context["form"].fields), 7)
             self.assertTrue("is_active" in response.context["form"].fields)
             self.assertTrue("is_featured" in response.context["form"].fields)
             self.assertTrue("title" in response.context["form"].fields)

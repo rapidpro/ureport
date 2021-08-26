@@ -11,6 +11,7 @@ import pytz
 import six
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import Org, OrgBackend
+from dash.tags.models import Tag
 from django_redis import get_redis_connection
 from smartmin.models import SmartModel
 
@@ -153,6 +154,8 @@ class Poll(SmartModel):
     )
 
     response_content = models.TextField(help_text=_("The body of text for the story"), null=True, blank=True)
+
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def get_sync_progress(self):
         if not self.runs_count:

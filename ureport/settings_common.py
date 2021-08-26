@@ -660,6 +660,7 @@ INSTALLED_APPS = (
     "dash.stories",
     "dash.utils",
     "dash.categories",
+    "dash.tags",
     # ureport apps
     "ureport.admins",
     "ureport.api",

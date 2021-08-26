@@ -1,0 +1,16 @@
+- extends "smartmin/create.html"
+
+
+- block extra-style
+  :css
+    .select2-container {
+        width: 100%
+    }
+
+- block extra-script
+  :javascript
+    $(document).ready(function() {
+      $('#id_tags').select2({
+          width: '100%'
+      });
+    });

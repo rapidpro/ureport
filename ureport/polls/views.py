@@ -60,7 +60,7 @@ class PollForm(forms.ModelForm):
 
     class Meta:
         model = Poll
-        fields = ("is_active", "is_featured", "backend", "title", "category", "category_image")
+        fields = ("is_active", "is_featured", "backend", "title", "category", "category_image", "tags")
 
 
 class PollResponseForm(forms.ModelForm):
@@ -523,7 +523,7 @@ class PollCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         search_fields = ("title__icontains",)
-        fields = ("title", "poll_date", "category", "questions", "opinion_response", "sync_status", "created_on")
+        fields = ("title", "poll_date", "category", "questions", "opinion_response", "sync_status", "created_on", "tags")
         link_fields = ("title", "poll_date", "questions", "opinion_response", "images")
         default_order = ("-created_on", "id")
         paginate_by = 10
@@ -594,7 +594,7 @@ class PollCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
-        fields = ("is_active", "is_featured", "title", "category", "category_image")
+        fields = ("is_active", "is_featured", "title", "category", "category_image", "tags")
         success_url = "id@polls.poll_poll_flow"
 
         def derive_title(self):
