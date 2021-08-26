@@ -11,7 +11,7 @@ class Topic(SmartModel):
     org = models.ForeignKey(Org, on_delete=models.PROTECT, help_text=_("The organization this topic belongs to"))
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.org} - {self.name}"
 
     class Meta:
         unique_together = ("name", "org")

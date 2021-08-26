@@ -236,7 +236,6 @@ class PollCRUDL(SmartCRUDL):
     class Create(OrgPermsMixin, SmartCreateView):
         form_class = PollForm
         success_url = "id@polls.poll_poll_flow"
-        fields = ("is_featured", "backend", "title", "category", "category_image", "topics")
         success_message = _("Your poll has been created, now configure its flow.")
 
         def derive_fields(self):
@@ -244,8 +243,8 @@ class PollCRUDL(SmartCRUDL):
 
             backend_options = org.backends.filter(is_active=True).values_list("slug", flat=True)
             if len(backend_options) <= 1:
-                return ("is_featured", "title", "category", "category_image")
-            return ("is_featured", "backend", "title", "category", "category_image")
+                return ("is_featured", "title", "category", "category_image", "topics")
+            return ("is_featured", "backend", "title", "category", "category_image", "topics")
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Create, self).get_form_kwargs()
