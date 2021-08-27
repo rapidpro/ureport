@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-27 13:40+0000\n"
 "PO-Revision-Date: 2019-02-04 17:54+0000\n"
 "Last-Translator: Tales Souza <tales@ilhasoft.com.br>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/rapidpro/ureport/language/sr_RS%40latin/)\n"
@@ -428,6 +428,11 @@ msgstr "slike koje će se prikazati uz priču i pregled. (opciono)"
 msgid "Image to display on story page and in previews (optional)"
 msgstr "slike koje će se prikazati uz priču i pregled. (opciono)"
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "Naziv kategorije"
+
 msgid "Remove Item?"
 msgstr "Ukloni stavku?"
 
@@ -740,6 +745,9 @@ msgstr "Slike"
 
 msgid "Jobs"
 msgstr "Poslovi"
+
+msgid "Tags"
+msgstr ""
 
 msgid "Photos"
 msgstr ""

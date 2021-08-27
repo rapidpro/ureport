@@ -523,7 +523,16 @@ class PollCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         search_fields = ("title__icontains",)
-        fields = ("title", "poll_date", "category", "questions", "opinion_response", "sync_status", "created_on", "tags")
+        fields = (
+            "title",
+            "poll_date",
+            "category",
+            "questions",
+            "opinion_response",
+            "sync_status",
+            "created_on",
+            "tags",
+        )
         link_fields = ("title", "poll_date", "questions", "opinion_response", "images")
         default_order = ("-created_on", "id")
         paginate_by = 10
