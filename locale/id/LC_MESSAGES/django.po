@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-27 13:40+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -427,6 +427,11 @@ msgstr "Gambar untuk ditampilkan pada halaman cerita dan di preview. (pilihan)"
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Image to display on story page and in previews (optional)"
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "Nama kategori ini"
+
 msgid "Remove Item?"
 msgstr "Hapus daftar?"
 
@@ -731,6 +736,9 @@ msgstr "Gambar"
 
 msgid "Jobs"
 msgstr "Pekerjaan"
+
+msgid "Tags"
+msgstr ""
 
 msgid "Photos"
 msgstr ""
