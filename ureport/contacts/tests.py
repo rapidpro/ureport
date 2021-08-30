@@ -6,7 +6,7 @@ from dash.utils.sync import SyncOutcome
 from mock import patch
 
 from ureport.contacts.models import Contact, ContactField, ReportersCounter
-from ureport.contacts.tasks import pull_contacts, update_org_contact_count
+from ureport.contacts.tasks import check_contacts_count_mismatch, pull_contacts, update_org_contact_count
 from ureport.locations.models import Boundary
 from ureport.tests import TestBackend, UreportTest
 from ureport.utils import json_date_to_datetime
@@ -203,8 +203,8 @@ class ContactTest(UreportTest):
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
-        Contact.objects.create(
-            is_active=False,
+        contact = Contact.objects.create(
+            is_active=True,
             uuid="C-009",
             org=self.nigeria,
             gender="M",
@@ -214,6 +214,9 @@ class ContactTest(UreportTest):
             state="R-LAGOS",
             district="R-OYO",
         )
+        contact.is_active = False
+        contact.save()
+
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
         Contact.recalculate_reporters_stats(self.nigeria)
 
@@ -309,6 +312,42 @@ class ContactTest(UreportTest):
 class ContactsTasksTest(UreportTest):
     def setUp(self):
         super(ContactsTasksTest, self).setUp()
+
+    @patch("django.core.cache.cache.set")
+    @patch("ureport.contacts.models.ReportersCounter.get_counts")
+    def test_check_contacts_count_mismatch(self, mock_counter_counts, mock_cache_set):
+        mock_counter_counts.return_value = {"total-reporters": 1000}
+
+        for i in range(1250):
+            Contact.objects.create(
+                org=self.nigeria, uuid=f"C-00{i}", gender="M", born=1990, state="R-LAGOS", district="R-OYO"
+            )
+
+        check_contacts_count_mismatch()
+
+        mock_cache_set.assert_called_once_with(
+            "contact_counts_status",
+            {
+                "mismatch_counts": {
+                    f"{self.uganda.pk}": {"db": 0, "count": 1000, "count_diff": 1000, "pct_diff": 0},
+                    f"{self.nigeria.pk}": {"db": 1250, "count": 1000, "count_diff": 250, "pct_diff": 0.2},
+                },
+                "error_counts": {
+                    f"{self.uganda.pk}": {"db": 0, "count": 1000, "count_diff": 1000, "pct_diff": 0},
+                    f"{self.nigeria.pk}": {"db": 1250, "count": 1000, "count_diff": 250, "pct_diff": 0.2},
+                },
+            },
+            None,
+        )
+
+        mock_cache_set.reset_mock()
+        mock_counter_counts.side_effect = [{"total-reporters": 0}, {"total-reporters": 1250}]
+
+        check_contacts_count_mismatch()
+
+        mock_cache_set.assert_called_once_with(
+            "contact_counts_status", {"mismatch_counts": {}, "error_counts": {}}, None
+        )
 
     @patch("ureport.contacts.tasks.update_cache_org_contact_counts")
     def test_update_org_contact_count(self, mock_update_cache_org_contact_counts):

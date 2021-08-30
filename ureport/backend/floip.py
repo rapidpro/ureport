@@ -332,30 +332,19 @@ class FLOIPBackend(BaseBackend):
 
                 # ignore the TaskState time and use the time we stored in redis
                 (
-                    after,
-                    before,
                     latest_synced_obj_time,
-                    batches_latest,
-                    resume_cursor,
                     pull_after_delete,
                 ) = poll.get_pull_cached_params()
 
                 if pull_after_delete is not None:
-                    after = None
                     latest_synced_obj_time = None
-                    batches_latest = None
-                    resume_cursor = None
                     poll.delete_poll_results()
-
-                if resume_cursor is None:
-                    before = datetime_to_json_date(timezone.now())
-                    after = latest_synced_obj_time
 
                 start = time.time()
                 logger.info("Start fetching runs for poll #%d on org #%d" % (poll.pk, org.pk))
 
                 params = dict(
-                    filter={"end-timestamp": before, "start-timestamp": after}, page={"beforeCursor": resume_cursor}
+                    filter={"start-timestamp": latest_synced_obj_time},
                 )
 
                 while poll_results_url:
@@ -370,10 +359,10 @@ class FLOIPBackend(BaseBackend):
                     )
 
                     for result in results:
-                        if batches_latest is None or json_date_to_datetime(result[0]) > json_date_to_datetime(
-                            batches_latest
+                        if latest_synced_obj_time is None or json_date_to_datetime(result[0]) > json_date_to_datetime(
+                            latest_synced_obj_time
                         ):
-                            batches_latest = result[0]
+                            latest_synced_obj_time = result[0]
 
                         contact_obj = contacts_map.get(result[2], None)
                         self._process_run_poll_results(
@@ -404,26 +393,20 @@ class FLOIPBackend(BaseBackend):
                     if stats_dict["num_synced"] >= Poll.POLL_RESULTS_MAX_SYNC_RUNS or time.time() > lock_expiration:
                         poll.rebuild_poll_results_counts()
 
-                        cursor = result[1]
-                        self._mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest)
+                        self._mark_poll_results_sync_paused(org, poll, latest_synced_obj_time)
 
                         logger.info(
                             "Break pull results for poll #%d on org #%d in %ds, "
-                            " Times: after= %s, before= %s, batch_latest= %s, sync_latest= %s"
-                            " Objects: created %d, updated %d, ignored %d. "
-                            "Before cursor %s"
+                            "Times: sync_latest= %s, "
+                            "Objects: created %d, updated %d, ignored %d. "
                             % (
                                 poll.pk,
                                 org.pk,
                                 time.time() - start,
-                                after,
-                                before,
-                                batches_latest,
                                 latest_synced_obj_time,
                                 stats_dict["num_val_created"],
                                 stats_dict["num_val_updated"],
                                 stats_dict["num_val_ignored"],
-                                cursor,
                             )
                         )
 
@@ -435,12 +418,6 @@ class FLOIPBackend(BaseBackend):
                             stats_dict["num_path_updated"],
                             stats_dict["num_path_ignored"],
                         )
-
-                if batches_latest is not None and (
-                    latest_synced_obj_time is None
-                    or json_date_to_datetime(latest_synced_obj_time) <= json_date_to_datetime(batches_latest)
-                ):
-                    latest_synced_obj_time = batches_latest
 
                 self._mark_poll_results_sync_completed(poll, org, latest_synced_obj_time)
 
@@ -642,11 +619,9 @@ class FLOIPBackend(BaseBackend):
         PollResult.objects.bulk_create(new_poll_results)
 
     @staticmethod
-    def _mark_poll_results_sync_paused(org, poll, cursor, after, before, batches_latest):
-        cache.set(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid), cursor, None)
-        cache.set(Poll.POLL_RESULTS_CURSOR_AFTER_CACHE_KEY % (org.pk, poll.flow_uuid), after, None)
-        cache.set(Poll.POLL_RESULTS_CURSOR_BEFORE_CACHE_KEY % (org.pk, poll.flow_uuid), before, None)
-        cache.set(Poll.POLL_RESULTS_BATCHES_LATEST_CACHE_KEY % (org.pk, poll.flow_uuid), batches_latest, None)
+    def _mark_poll_results_sync_paused(org, poll, latest_synced_obj_time):
+        # update the time for this poll from which we fetch next time
+        cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), latest_synced_obj_time, None)
 
         from ureport.polls.tasks import pull_refresh
 
@@ -656,15 +631,14 @@ class FLOIPBackend(BaseBackend):
     def _mark_poll_results_sync_completed(poll, org, latest_synced_obj_time):
         # update the time for this poll from which we fetch next time
         cache.set(Poll.POLL_RESULTS_LAST_PULL_CACHE_KEY % (org.pk, poll.flow_uuid), latest_synced_obj_time, None)
-        # update the last time the sync happened
+
+        # update the last time the sync happened, for displaying in polls list on admin page
         now = timezone.now()
         cache.set(
             Poll.POLL_RESULTS_LAST_SYNC_TIME_CACHE_KEY % (org.pk, poll.flow_uuid),
             datetime_to_json_date(now),
             None,
         )
-        # clear the saved cursor
-        cache.delete(Poll.POLL_RESULTS_LAST_PULL_CURSOR % (org.pk, poll.flow_uuid))
 
         # Use redis cache with expiring(in 48 hrs) key to allow other polls task
         # to sync all polls without hitting the API rate limit

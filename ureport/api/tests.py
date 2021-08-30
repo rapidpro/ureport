@@ -19,6 +19,7 @@ from django.utils import timezone
 
 from ureport.api.serializers import CategoryReadSerializer, StoryReadSerializer, generate_absolute_url_from_file
 from ureport.contacts.models import ReportersCounter
+from ureport.flows.models import FlowResult
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll, PollQuestion
 
@@ -40,22 +41,14 @@ class UreportAPITests(APITestCase):
         self.reg_poll = self.create_poll("registration")
         self.another_poll = self.create_poll("another")
         self.first_featured_poll = self.create_poll("first featured", is_featured=True)
-        self.first_poll_question = PollQuestion.objects.create(
-            poll=self.first_featured_poll,
-            title="test question",
-            ruleset_uuid="uuid1",
-            created_by=self.superuser,
-            modified_by=self.superuser,
+        self.first_poll_question = self.create_poll_question(
+            self.superuser, self.first_featured_poll, "test question", "uuid1"
         )
         self.second_featured_poll = self.create_poll("second featured", is_featured=True)
-        self.second_poll_question = PollQuestion.objects.create(
-            poll=self.second_featured_poll,
-            title="another test question",
-            ruleset_uuid="uuid2",
-            created_by=self.superuser,
-            modified_by=self.superuser,
-        )
 
+        self.second_poll_question = self.create_poll_question(
+            self.superuser, self.second_featured_poll, "another test question", "uuid2"
+        )
         self.non_synced_poll = self.create_poll("unsynced", has_synced=False)
 
         self.news_item = self.create_news_item("Some item")
@@ -65,9 +58,8 @@ class UreportAPITests(APITestCase):
     def create_org(self, subdomain, user):
         name = subdomain
 
-        orgs = Org.objects.filter(subdomain=subdomain)
-        if orgs:
-            org = orgs[0]
+        org = Org.objects.filter(subdomain=subdomain).first()
+        if org:
             org.name = name
             org.save()
         else:
@@ -91,6 +83,34 @@ class UreportAPITests(APITestCase):
             created_by=self.superuser,
             modified_by=self.superuser,
         )
+
+    def create_poll_question(self, user, poll, result_name, result_uuid):
+        flow_result = FlowResult.objects.filter(
+            org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=result_uuid
+        ).first()
+        if flow_result:
+            flow_result.result_name = result_name
+            flow_result.save(update_fields=("result_name",))
+        else:
+            flow_result = FlowResult.objects.create(
+                org=poll.org, flow_uuid=poll.flow_uuid, result_uuid=result_uuid, result_name=result_name
+            )
+
+        question = PollQuestion.objects.filter(flow_result=flow_result, poll=poll).first()
+        if question:
+            question.ruleset_label = result_name
+            question.save(update_fields=("ruleset_label",))
+        else:
+            question = PollQuestion.objects.create(
+                poll=poll,
+                title=result_name,
+                ruleset_label=result_name,
+                ruleset_uuid=result_uuid,
+                flow_result=flow_result,
+                created_by=user,
+                modified_by=user,
+            )
+        return question
 
     def create_news_item(self, title):
         return NewsItem.objects.create(
@@ -375,13 +395,7 @@ class UreportAPITests(APITestCase):
         with patch("ureport.polls.models.PollQuestion.get_results") as mock_get_results:
             mock_get_results.return_value = [dict(set=20, unset=10, open_ended=False, categories="CATEGORIES-DICT")]
 
-            poll_question = PollQuestion.objects.create(
-                poll=self.reg_poll,
-                title="What's on mind? :)",
-                ruleset_uuid="uuid1",
-                created_by=self.superuser,
-                modified_by=self.superuser,
-            )
+            poll_question = self.create_poll_question(self.superuser, self.reg_poll, "What's on mind? :)", "uuid1")
 
             response = self.client.get(url)
             self.assertEqual(response.status_code, status.HTTP_200_OK)

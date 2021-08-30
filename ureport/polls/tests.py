@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import json
 import uuid
 from datetime import datetime, timedelta
 
@@ -11,10 +10,8 @@ from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import TaskState
 from mock import Mock, patch
-from smartmin.csv_imports.models import ImportTask
 from temba_client.exceptions import TembaRateExceededError
 
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db.models import Sum
@@ -53,275 +50,6 @@ class PollTest(UreportTest):
 
         self.education_nigeria = Category.objects.create(
             org=self.nigeria, name="Education", created_by=self.admin, modified_by=self.admin
-        )
-
-    def test_prepare_fields(self):
-
-        with self.assertRaises(Exception):
-            Poll.prepare_fields(dict())
-
-        with self.assertRaises(Exception):
-            Poll.prepare_fields(dict(), dict())
-
-        self.assertEqual(
-            dict(org=self.uganda, created_by=self.superuser),
-            Poll.prepare_fields(dict(), dict(org_id=self.uganda.pk), user=self.superuser),
-        )
-
-    def test_poll_create_instance(self):
-
-        self.assertFalse(Poll.objects.filter(org=self.uganda))
-        self.assertFalse(PollQuestion.objects.filter(poll__org=self.uganda))
-
-        with self.assertRaises(ValueError):
-            Poll.create_instance(dict())
-
-        with self.assertRaises(ValueError):
-            Poll.create_instance(dict(org=self.uganda))
-
-        with self.assertRaises(ValueError):
-            Poll.create_instance(dict(org=self.uganda, created_by=self.superuser))
-
-        with self.assertRaises(ValueError):
-            Poll.create_instance(dict(org=self.uganda, created_by=self.superuser, category="Sports"))
-
-        with self.assertRaises(ValueError):
-            Poll.create_instance(
-                dict(org=self.uganda, created_by=self.superuser, category="Sports", uuid="uuid-flow-1")
-            )
-
-        with self.assertRaises(ValueError):
-            Poll.create_instance(
-                dict(org=self.uganda, created_by=self.superuser, category="Sports", uuid="uuid-flow-1", name="Flow 1")
-            )
-
-        with self.assertRaises(ValueError):
-            Poll.create_instance(
-                dict(
-                    org=self.uganda,
-                    created_by=self.superuser,
-                    category="Sports",
-                    uuid="uuid-flow-1",
-                    name="Flow 1",
-                    created_on="2010-07-07T14:24:12.753000Z",
-                )
-            )
-
-        with self.assertRaises(ValueError):
-            Poll.create_instance(
-                dict(
-                    org=self.uganda,
-                    created_by=self.superuser,
-                    category="Sports",
-                    uuid="uuid-flow-1",
-                    name="Sport Activities",
-                    created_on="2010-07-07T14:24:12.753000Z",
-                    ruleset_uuid="question-uuid-1",
-                )
-            )
-
-        poll = Poll.create_instance(
-            dict(
-                org=self.uganda,
-                created_by=self.superuser,
-                category="Sports",
-                uuid="uuid-flow-1",
-                name="Sport Activities",
-                created_on="2010-07-07T14:24:12.753000Z",
-                ruleset_uuid="question-uuid-1",
-                question="Did you participate in #CarFreeDay?",
-            )
-        )
-
-        self.assertTrue(Poll.objects.filter(org=self.uganda, flow_uuid="uuid-flow-1"))
-        self.assertTrue(poll in Poll.objects.filter(org=self.uganda, flow_uuid="uuid-flow-1"))
-        self.assertTrue(
-            PollQuestion.objects.filter(
-                poll__org=self.uganda, ruleset_uuid="question-uuid-1", title="Did you participate in #CarFreeDay?"
-            )
-        )
-
-        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 1)
-
-        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 1)
-
-        # same row does not add duplicates
-        Poll.create_instance(
-            dict(
-                org=self.uganda,
-                created_by=self.superuser,
-                category="Sports",
-                uuid="uuid-flow-1",
-                name="Sport Activities Here",
-                created_on="2010-07-07T14:24:12.753000Z",
-                ruleset_uuid="question-uuid-1",
-                question="Did you participate in #CarFreeDay?",
-            )
-        )
-
-        self.assertTrue(Poll.objects.filter(org=self.uganda, flow_uuid="uuid-flow-1"))
-        self.assertTrue(
-            PollQuestion.objects.filter(
-                poll__org=self.uganda, ruleset_uuid="question-uuid-1", title="Did you participate in #CarFreeDay?"
-            )
-        )
-
-        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 1)
-        poll = Poll.objects.filter(org=self.uganda).first()
-        # however update the poll title
-        self.assertEqual(poll.title, "Sport Activities Here")
-
-        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 1)
-
-        # new row add new poll and its questions
-        Poll.create_instance(
-            dict(
-                org=self.uganda,
-                created_by=self.superuser,
-                category="Music",
-                uuid="uuid-flow-2",
-                name="Showbiz",
-                created_on="2010-07-07T14:24:12.753000Z",
-                ruleset_uuid="question-uuid-2",
-                question="Which concert?",
-            )
-        )
-
-        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 2)
-
-        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 2)
-
-        # no hidden question
-        self.assertFalse(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False))
-
-        # same flow without the question should add a new flow
-        Poll.create_instance(
-            dict(
-                org=self.uganda,
-                created_by=self.superuser,
-                category="Music",
-                uuid="uuid-flow-2",
-                name="Sounds",
-                created_on="2010-07-07T14:24:12.753000Z",
-                ruleset_uuid="question-uuid-3",
-                question="Which album?",
-            )
-        )
-
-        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 3)
-
-        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 3)
-        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=True).count(), 3)
-
-        # no hidden question
-        self.assertFalse(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False))
-
-        poll = Poll.objects.filter(org=self.uganda, flow_uuid="uuid-flow-2").first()
-        question = PollQuestion.update_or_create(self.superuser, poll, "", "question-uuid-4", "wait_message")
-        PollQuestion.objects.filter(pk=question.pk).update(is_active=True)
-
-        # same flow with the ruleset question existing should hide old questions without new flow
-        Poll.create_instance(
-            dict(
-                org=self.uganda,
-                created_by=self.superuser,
-                category="Music",
-                uuid="uuid-flow-2",
-                name="Sounds",
-                created_on="2010-07-07T14:24:12.753000Z",
-                ruleset_uuid="question-uuid-2",
-                question="Which album?",
-            )
-        )
-
-        self.assertEqual(Poll.objects.filter(org=self.uganda).count(), 3)
-
-        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda).count(), 4)
-        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=True).count(), 3)
-
-        # poll other questions are hidden
-        self.assertEqual(PollQuestion.objects.filter(poll__org=self.uganda, is_active=False).count(), 1)
-        self.assertEqual(
-            PollQuestion.objects.filter(
-                poll__org=self.uganda, is_active=False, ruleset_uuid="question-uuid-4"
-            ).count(),
-            1,
-        )
-
-    @patch("ureport.polls.models.Poll.update_or_create_questions_task")
-    def test_poll_import_csv(self, mock_poll_update_or_create_questions_task):
-        poll1 = self.create_poll(self.uganda, "Poll 1", "flow-uuid-1", self.health_uganda, self.admin)
-        PollQuestion.objects.create(
-            poll=poll1,
-            title="question poll 1",
-            ruleset_uuid="ruleset-uuid-1",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-        poll2 = self.create_poll(self.uganda, "Poll 2", "flow-uuid-2", self.health_uganda, self.admin)
-
-        PollQuestion.objects.create(
-            poll=poll2,
-            title="question poll 2",
-            ruleset_uuid="ruleset-uuid-2",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        mock_poll_update_or_create_questions_task.side_effect = None
-
-        import_params = dict(
-            org_id=self.uganda.id, timezone=six.text_type(self.uganda.timezone), original_filename="polls.csv"
-        )
-
-        task = ImportTask.objects.create(
-            created_by=self.superuser,
-            modified_by=self.superuser,
-            csv_file="test_imports/polls.csv",
-            model_class="Poll",
-            import_params=json.dumps(import_params),
-            import_log="",
-            task_id="A",
-        )
-
-        Poll.import_csv(task, log=None)
-
-        place_poll = Poll.objects.filter(id=poll1.pk).first()
-        time_poll = Poll.objects.filter(id=poll2.pk).first()
-
-        self.assertEqual(place_poll.title, "Place poll")
-        self.assertEqual(time_poll.title, "Time poll")
-
-        mock_poll_update_or_create_questions_task.assert_called_once_with([place_poll, time_poll])
-
-    def test_poll_import(self):
-        import_url = reverse("polls.poll_import")
-
-        response = self.client.get(import_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
-
-        self.login(self.admin)
-
-        response = self.client.get(import_url, SERVER_NAME="uganda.ureport.io")
-        self.assertLoginRedirect(response)
-
-        self.login(self.superuser)
-
-        response = self.client.get(import_url, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(response.status_code, 200)
-
-        self.assertTrue("csv_file" in response.context["form"].fields)
-
-        csv_file = open("%s/test_imports/polls.csv" % settings.MEDIA_ROOT, "rb")
-        post_data = dict(csv_file=csv_file)
-
-        response = self.client.post(import_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
-        self.assertEqual(200, response.status_code)
-
-        task = ImportTask.objects.get()
-        self.assertEqual(
-            json.loads(task.import_params),
-            dict(timezone="Africa/Kampala", org_id=self.uganda.pk, original_filename="polls.csv"),
         )
 
     @patch("ureport.polls.tasks.update_or_create_questions.delay")
@@ -430,27 +158,21 @@ class PollTest(UreportTest):
         self.assertIsNone(Poll.get_main_poll(self.uganda))
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
-        PollQuestion.objects.create(
-            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
         self.assertEqual(Poll.get_main_poll(self.uganda), poll1)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
         poll2 = self.create_poll(self.uganda, "Poll 2", "uuid-2", self.health_uganda, self.admin, has_synced=True)
 
-        PollQuestion.objects.create(
-            poll=poll2, title="question poll 2", ruleset_uuid="uuid-202", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll2, "question poll 2", "uuid-202")
 
         self.assertEqual(Poll.get_main_poll(self.uganda), poll2)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
 
         poll3 = self.create_poll(self.uganda, "Poll 3", "uuid-3", self.health_uganda, self.admin, has_synced=True)
 
-        PollQuestion.objects.create(
-            poll=poll3, title="question poll 3", ruleset_uuid="uuid-303", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll3, "question poll 3", "uuid-303")
 
         self.assertEqual(Poll.get_main_poll(self.uganda), poll3)
         self.assertIsNone(Poll.get_main_poll(self.nigeria))
@@ -486,9 +208,7 @@ class PollTest(UreportTest):
         self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
         self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
-        PollQuestion.objects.create(
-            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
         self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
         self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
@@ -498,9 +218,7 @@ class PollTest(UreportTest):
         self.assertFalse(Poll.get_brick_polls_ids(self.uganda))
         self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
-        PollQuestion.objects.create(
-            poll=poll2, title="question poll 2", ruleset_uuid="uuid-202", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll2, "question poll 2", "uuid-202")
 
         self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
         self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
@@ -530,9 +248,7 @@ class PollTest(UreportTest):
         self.assertTrue(poll3.pk not in Poll.get_brick_polls_ids(self.uganda))
         self.assertFalse(Poll.get_brick_polls_ids(self.nigeria))
 
-        PollQuestion.objects.create(
-            poll=poll3, title="question poll 3", ruleset_uuid="uuid-303", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll3, "question poll 3", "uuid-303")
 
         self.assertTrue(Poll.get_brick_polls_ids(self.uganda))
         self.assertTrue(poll2.pk in Poll.get_brick_polls_ids(self.uganda))
@@ -580,13 +296,7 @@ class PollTest(UreportTest):
                 featured=True,
                 has_synced=True,
             )
-            PollQuestion.objects.create(
-                poll=poll,
-                title="question poll %s" % i,
-                ruleset_uuid="uuid-10-%s" % i,
-                created_by=self.admin,
-                modified_by=self.admin,
-            )
+            self.create_poll_question(self.admin, poll, "question poll %s" % i, "uuid-10-%s" % i)
 
             polls.append(poll)
 
@@ -608,13 +318,7 @@ class PollTest(UreportTest):
                 featured=True,
                 has_synced=True,
             )
-            PollQuestion.objects.create(
-                poll=poll,
-                title="question poll %s" % i,
-                ruleset_uuid="uuid-10-%s" % i,
-                created_by=self.admin,
-                modified_by=self.admin,
-            )
+            self.create_poll_question(self.admin, poll, "question poll %s" % i, "uuid-10-%s" % i)
 
             polls.append(poll)
 
@@ -643,9 +347,7 @@ class PollTest(UreportTest):
 
         self.assertEqual(poll1.runs(), "----")
 
-        PollQuestion.objects.create(
-            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
         with patch("ureport.polls.models.PollQuestion.get_polled") as mock:
             mock.return_value = 100
@@ -658,9 +360,7 @@ class PollTest(UreportTest):
 
         self.assertEqual(poll1.responded_runs(), "---")
 
-        PollQuestion.objects.create(
-            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
         with patch("ureport.polls.models.PollQuestion.get_responded") as mock:
             mock.return_value = 40
@@ -673,10 +373,7 @@ class PollTest(UreportTest):
 
         self.assertEqual(poll1.response_percentage(), "---")
 
-        PollQuestion.objects.create(
-            poll=poll1, title="question poll 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
-
+        self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
         with patch("ureport.polls.models.PollQuestion.get_response_percentage") as mock_response_percentage:
             mock_response_percentage.return_value = "40%"
 
@@ -893,7 +590,12 @@ class PollTest(UreportTest):
                 self.assertTrue("backend" in response.context["form"].fields)
                 self.assertEquals(len(response.context["form"].fields["backend"].choices), 3)
                 self.assertEquals(
-                    set(response.context["form"].fields["backend"].choices),
+                    set(
+                        [
+                            (getattr(elt[0], "value", ""), elt[1])
+                            for elt in response.context["form"].fields["backend"].choices
+                        ]
+                    ),
                     set([("", "---------"), (poll.backend.pk, "rapidpro"), (floip_backend.pk, "floip")]),
                 )
 
@@ -1176,14 +878,7 @@ class PollTest(UreportTest):
         self.assertTrue("form" in response.context)
         self.assertEqual(len(response.context["form"].fields), 0)
 
-        PollQuestion.objects.create(
-            poll=poll1,
-            title="question poll 1",
-            ruleset_label="question poll 1",
-            ruleset_uuid="uuid-101",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
+        self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
         response = self.client.get(uganda_questions_url, SERVER_NAME="uganda.ureport.io")
         self.assertEqual(response.status_code, 200)
@@ -1458,13 +1153,7 @@ class PollTest(UreportTest):
 
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
-            poll1_question = PollQuestion.objects.create(
-                poll=poll1,
-                title="question poll 1",
-                ruleset_uuid="uuid-101",
-                created_by=self.admin,
-                modified_by=self.admin,
-            )
+            poll1_question = self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
 
             self.assertEqual(question_results(poll1_question), "Results")
 
@@ -1477,14 +1166,7 @@ class PollTest(UreportTest):
 
             poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin)
 
-            poll1_question = PollQuestion.objects.create(
-                poll=poll1,
-                title="question poll 1",
-                ruleset_uuid="uuid-101",
-                created_by=self.admin,
-                modified_by=self.admin,
-            )
-
+            poll1_question = self.create_poll_question(self.admin, poll1, "question poll 1", "uuid-101")
             self.assertEqual(question_segmented_results(poll1_question, "gender"), ["Results"])
 
             mock_results.side_effect = KeyError
@@ -1494,16 +1176,14 @@ class PollTest(UreportTest):
     def test_delete_poll_stats(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
-        poll_question = PollQuestion.objects.create(
-            poll=poll, title="question 1", ruleset_uuid="step-uuid", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question = self.create_poll_question(self.admin, poll, "question 1", "step-uuid")
 
         self.assertFalse(PollStats.objects.all())
 
         PollResult.objects.create(
             org=self.nigeria,
             flow=poll.flow_uuid,
-            ruleset=poll_question.ruleset_uuid,
+            ruleset=poll_question.flow_result.result_uuid,
             date=timezone.now(),
             contact="contact-uuid",
             completed=False,
@@ -1536,9 +1216,7 @@ class PollTest(UreportTest):
             self.assertFalse(PollStats.objects.all())
 
             poll2 = self.create_poll(self.nigeria, "Poll 2", "flow-uuid", self.education_nigeria, self.admin)
-            PollQuestion.objects.create(
-                poll=poll2, title="question 1", ruleset_uuid="step-uuid", created_by=self.admin, modified_by=self.admin
-            )
+            self.create_poll_question(self.admin, poll2, "question 1", "step-uuid")
 
             self.assertFalse(PollStats.objects.all())
             self.assertFalse(PollStats.objects.filter(question__poll__id=poll.id))
@@ -1554,13 +1232,12 @@ class PollTest(UreportTest):
     def test_delete_poll_results(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
-        poll_question = PollQuestion.objects.create(
-            poll=poll, title="question 1", ruleset_uuid="step-uuid", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question = self.create_poll_question(self.admin, poll, "question 1", "step-uuid")
+
         PollResult.objects.create(
             org=self.nigeria,
             flow=poll.flow_uuid,
-            ruleset=poll_question.ruleset_uuid,
+            ruleset=poll_question.flow_result.result_uuid,
             date=timezone.now(),
             contact="contact-uuid",
             completed=False,
@@ -1651,12 +1328,10 @@ class PollQuestionTest(UreportTest):
     def test_poll_question_category_order(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll_question1 = PollQuestion.objects.create(
-            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
 
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
+        self.create_poll_response_category(poll_question1, "rule-uuid-1", "Yes")
+        self.create_poll_response_category(poll_question1, "rule-uuid-2", "No")
 
         calculated_results = [
             dict(open_ended=False, set=0, unset=0, categories=[dict(count=0, label="Yes"), dict(count=0, label="No")])
@@ -1665,9 +1340,8 @@ class PollQuestionTest(UreportTest):
         self.assertEqual(poll_question1.calculate_results(), calculated_results)
 
         PollResponseCategory.objects.all().delete()
-
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
+        self.create_poll_response_category(poll_question1, "rule-uuid-2", "No")
+        self.create_poll_response_category(poll_question1, "rule-uuid-1", "Yes")
 
         calculated_results = [
             dict(open_ended=False, set=0, unset=0, categories=[dict(count=0, label="No"), dict(count=0, label="Yes")])
@@ -1678,22 +1352,20 @@ class PollQuestionTest(UreportTest):
     def test_poll_question_model(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll_question1 = PollQuestion.objects.create(
-            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
 
         self.assertEqual(six.text_type(poll_question1), "question 1")
 
         # no response category are ignored
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-4", "No Response")
+        self.create_poll_response_category(poll_question1, "rule-uuid-4", "No Response")
 
         self.assertFalse(poll_question1.is_open_ended())
 
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
+        self.create_poll_response_category(poll_question1, "rule-uuid-1", "Yes")
 
         self.assertTrue(poll_question1.is_open_ended())
 
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
+        self.create_poll_response_category(poll_question1, "rule-uuid-2", "No")
         PollResponseCategory.objects.filter(category="No").update(is_active=False)
 
         self.assertTrue(poll_question1.is_open_ended())
@@ -1703,14 +1375,14 @@ class PollQuestionTest(UreportTest):
         self.assertFalse(poll_question1.is_open_ended())
 
         # should be ignored in calculated results
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-3", "Other")
+        self.create_poll_response_category(poll_question1, "rule-uuid-3", "Other")
 
         now = timezone.now()
 
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-1",
             date=now,
             category="All responses",
@@ -1723,7 +1395,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-2",
             date=now,
             category="All responses",
@@ -1736,7 +1408,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-3",
             date=now,
             category="All responses",
@@ -1749,7 +1421,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-3",
             date=now,
             category="All responses",
@@ -1762,7 +1434,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-4",
             date=now,
             category="All responses",
@@ -1775,7 +1447,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-5",
             date=now,
             category="All responses",
@@ -1788,7 +1460,7 @@ class PollQuestionTest(UreportTest):
         PollResult.objects.create(
             org=self.uganda,
             flow=poll1.flow_uuid,
-            ruleset=poll_question1.ruleset_uuid,
+            ruleset=poll_question1.flow_result.result_uuid,
             contact="contact-5",
             date=now,
             category="All responses",
@@ -1884,22 +1556,20 @@ class PollQuestionTest(UreportTest):
     def test_poll_question_calculate_results(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll_question1 = PollQuestion.objects.create(
-            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
 
         self.assertEqual(six.text_type(poll_question1), "question 1")
 
         # no response category are ignored
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-4", "No Response")
+        self.create_poll_response_category(poll_question1, "rule-uuid-4", "No Response")
 
         self.assertFalse(poll_question1.is_open_ended())
 
-        yes_category = PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
+        yes_category = self.create_poll_response_category(poll_question1, "rule-uuid-1", "Yes")
 
         self.assertTrue(poll_question1.is_open_ended())
 
-        no_category = PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
+        no_category = self.create_poll_response_category(poll_question1, "rule-uuid-2", "No")
         PollResponseCategory.objects.filter(category="No").update(is_active=False)
 
         self.assertTrue(poll_question1.is_open_ended())
@@ -1909,7 +1579,7 @@ class PollQuestionTest(UreportTest):
         self.assertFalse(poll_question1.is_open_ended())
 
         # should be ignored in calculated results
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-3", "Other")
+        self.create_poll_response_category(poll_question1, "rule-uuid-3", "Other")
 
         male_gender = GenderSegment.objects.filter(gender="M").first()
         female_gender = GenderSegment.objects.filter(gender="F").first()
@@ -2064,22 +1734,20 @@ class PollQuestionTest(UreportTest):
     def test_squash_poll_stats(self):
         poll1 = self.create_poll(self.uganda, "Poll 1", "uuid-1", self.health_uganda, self.admin, featured=True)
 
-        poll_question1 = PollQuestion.objects.create(
-            poll=poll1, title="question 1", ruleset_uuid="uuid-101", created_by=self.admin, modified_by=self.admin
-        )
+        poll_question1 = self.create_poll_question(self.admin, poll1, "question 1", "uuid-101")
 
         self.assertEqual(six.text_type(poll_question1), "question 1")
 
         # no response category are ignored
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-4", "No Response")
+        self.create_poll_response_category(poll_question1, "rule-uuid-4", "No Response")
 
         self.assertFalse(poll_question1.is_open_ended())
 
-        yes_category = PollResponseCategory.update_or_create(poll_question1, "rule-uuid-1", "Yes")
+        yes_category = self.create_poll_response_category(poll_question1, "rule-uuid-1", "Yes")
 
         self.assertTrue(poll_question1.is_open_ended())
 
-        no_category = PollResponseCategory.update_or_create(poll_question1, "rule-uuid-2", "No")
+        no_category = self.create_poll_response_category(poll_question1, "rule-uuid-2", "No")
         PollResponseCategory.objects.filter(category="No").update(is_active=False)
 
         self.assertTrue(poll_question1.is_open_ended())
@@ -2089,7 +1757,7 @@ class PollQuestionTest(UreportTest):
         self.assertFalse(poll_question1.is_open_ended())
 
         # should be ignored in calculated results
-        PollResponseCategory.update_or_create(poll_question1, "rule-uuid-3", "Other")
+        self.create_poll_response_category(poll_question1, "rule-uuid-3", "Other")
 
         male_gender = GenderSegment.objects.filter(gender="M").first()
         female_gender = GenderSegment.objects.filter(gender="F").first()
@@ -2105,7 +1773,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -2116,7 +1786,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -2127,7 +1799,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -2138,7 +1812,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -2163,7 +1839,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -2174,7 +1852,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -2203,7 +1883,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=male_gender,
             location=None,
@@ -2214,7 +1896,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -2225,7 +1909,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -2235,7 +1921,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -2246,7 +1934,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -2257,7 +1947,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -2268,6 +1960,7 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
             age_segment=None,
             gender_segment=female_gender,
@@ -2279,7 +1972,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -2301,7 +1996,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=age_segment_20,
             gender_segment=None,
             location=None,
@@ -2312,7 +2009,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2323,7 +2022,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2333,7 +2034,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2344,7 +2047,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2354,7 +2059,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2365,7 +2072,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2375,7 +2084,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2471,9 +2182,7 @@ class PollResultsTest(UreportTest):
 
         self.poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
 
-        self.poll_question = PollQuestion.objects.create(
-            poll=self.poll, title="question 1", ruleset_uuid="step-uuid", created_by=self.admin, modified_by=self.admin
-        )
+        self.poll_question = self.create_poll_question(self.admin, self.poll, "question 1", "step-uuid")
 
         self.now = timezone.now()
         self.last_week = self.now - timedelta(days=7)
@@ -2485,7 +2194,7 @@ class PollResultsTest(UreportTest):
         PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             date=self.now,
             contact="contact-uuid",
             completed=False,
@@ -2496,7 +2205,7 @@ class PollResultsTest(UreportTest):
         PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             category="No",
             date=self.now,
             contact="contact-uuid",
@@ -2609,7 +2318,7 @@ class PollResultsTest(UreportTest):
         poll_result1 = PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             date=self.now,
             contact="contact-uuid",
             completed=False,
@@ -2622,7 +2331,7 @@ class PollResultsTest(UreportTest):
             [
                 (
                     self.nigeria.id,
-                    self.poll_question.ruleset_uuid,
+                    self.poll_question.flow_result.result_uuid,
                     "",
                     "",
                     "",
@@ -2757,7 +2466,7 @@ class PollResultsTest(UreportTest):
         poll_result5 = PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             date=None,
             contact="contact-uuid",
             completed=False,
@@ -2766,7 +2475,8 @@ class PollResultsTest(UreportTest):
         gen_stats = poll_result5.generate_poll_stats()
         self.assertEqual(len(gen_stats.keys()), 1)
         self.assertEqual(
-            list(gen_stats.keys()), [(self.nigeria.id, self.poll_question.ruleset_uuid, "", "", "", "", "", "", None)]
+            list(gen_stats.keys()),
+            [(self.nigeria.id, self.poll_question.flow_result.result_uuid, "", "", "", "", "", "", None)],
         )
 
     def test_poll_results_stats(self):
@@ -2807,17 +2517,15 @@ class PollResultsTest(UreportTest):
         )
 
         rule_uuid = uuid.uuid4()
-        yes_category = PollResponseCategory.objects.create(
-            question=self.poll_question, category="Yes", rule_uuid=rule_uuid
-        )
+        yes_category = self.create_poll_response_category(self.poll_question, rule_uuid, "Yes")
 
         rule_uuid = uuid.uuid4()
-        PollResponseCategory.objects.create(question=self.poll_question, category="No", rule_uuid=rule_uuid)
+        self.create_poll_response_category(self.poll_question, rule_uuid, "No")
 
         PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             contact="contact-uuid",
             category="Yes",
             text="Yeah",
@@ -2844,7 +2552,7 @@ class PollResultsTest(UreportTest):
         PollResult.objects.create(
             org=self.nigeria,
             flow=self.poll.flow_uuid,
-            ruleset=self.poll_question.ruleset_uuid,
+            ruleset=self.poll_question.flow_result.result_uuid,
             contact="contact-uuid",
             category="Yes",
             text="Yeah",

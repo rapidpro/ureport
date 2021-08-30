@@ -5,14 +5,14 @@ from datetime import timedelta
 
 from dash.orgs.models import Org
 
-from django.contrib.postgres.fields import JSONField
 from django.core.cache import cache
 from django.db import connection, models
-from django.db.models import Count, ExpressionWrapper, F, IntegerField, Q, Sum
+from django.db.models import Count, ExpressionWrapper, F, IntegerField, JSONField, Q, Sum
 from django.db.models.functions import ExtractYear
 from django.utils import timezone, translation
 from django.utils.translation import ugettext_lazy as _
 
+from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import PollQuestion, PollResponseCategory
 
@@ -54,7 +54,11 @@ class PollStats(models.Model):
 
     question = models.ForeignKey(PollQuestion, null=True, on_delete=models.SET_NULL)
 
+    flow_result = models.ForeignKey(FlowResult, null=True, on_delete=models.SET_NULL)
+
     category = models.ForeignKey(PollResponseCategory, null=True, on_delete=models.SET_NULL)
+
+    flow_result_category = models.ForeignKey(FlowResultCategory, null=True, on_delete=models.SET_NULL)
 
     age_segment = models.ForeignKey(AgeSegment, null=True, on_delete=models.SET_NULL)
 
@@ -77,10 +81,26 @@ class PollStats(models.Model):
             cls.objects.exclude(is_squashed=True)
             .exclude(date=None)
             .order_by(
-                "org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date"
+                "org_id",
+                "question_id",
+                "flow_result_id",
+                "category_id",
+                "flow_result_category_id",
+                "age_segment_id",
+                "gender_segment_id",
+                "location_id",
+                "date",
             )
             .distinct(
-                "org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date"
+                "org_id",
+                "question_id",
+                "flow_result_id",
+                "category_id",
+                "flow_result_category_id",
+                "age_segment_id",
+                "gender_segment_id",
+                "location_id",
+                "date",
             )[:50000]
         )
 
@@ -98,10 +118,20 @@ class PollStats(models.Model):
                 else:
                     where_sql += '"question_id" IS NULL AND'
 
+                if distinct_set.flow_result_id is not None:
+                    where_sql += '"flow_result_id" = %s AND' % distinct_set.flow_result_id
+                else:
+                    where_sql += '"flow_result_id" IS NULL AND'
+
                 if distinct_set.category_id is not None:
                     where_sql += '"category_id" = %s AND' % distinct_set.category_id
                 else:
                     where_sql += '"category_id" IS NULL AND'
+
+                if distinct_set.flow_result_category_id is not None:
+                    where_sql += '"flow_result_category_id" = %s AND' % distinct_set.flow_result_category_id
+                else:
+                    where_sql += '"flow_result_category_id" IS NULL AND'
 
                 if distinct_set.age_segment_id is not None:
                     where_sql += '"age_segment_id" = %s AND' % distinct_set.age_segment_id
@@ -132,8 +162,8 @@ class PollStats(models.Model):
                       LIMIT 10000
                   ) RETURNING "count"
                 )
-                INSERT INTO stats_pollstats("org_id", "question_id", "category_id", "age_segment_id", "gender_segment_id", "location_id", "date", "count", "is_squashed")
-                VALUES (%%s, %%s, %%s, %%s, %%s, %%s, date_trunc('day', TIMESTAMP %%s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
+                INSERT INTO stats_pollstats("org_id", "question_id", "flow_result_id", "category_id", "flow_result_category_id", "age_segment_id", "gender_segment_id", "location_id", "date", "count", "is_squashed")
+                VALUES (%%s, %%s, %%s, %%s, %%s, %%s, %%s, %%s, date_trunc('day', TIMESTAMP %%s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
                 """ % {
                     "where_sql": where_sql
                 }
@@ -141,7 +171,9 @@ class PollStats(models.Model):
                 params = (
                     distinct_set.org_id,
                     distinct_set.question_id,
+                    distinct_set.flow_result_id,
                     distinct_set.category_id,
+                    distinct_set.flow_result_category_id,
                     distinct_set.age_segment_id,
                     distinct_set.gender_segment_id,
                     distinct_set.location_id,
@@ -713,5 +745,7 @@ class PollWordCloud(models.Model):
     org = models.ForeignKey(Org, on_delete=models.PROTECT)
 
     question = models.ForeignKey(PollQuestion, null=True, on_delete=models.SET_NULL)
+
+    flow_result = models.ForeignKey(FlowResult, null=True, on_delete=models.SET_NULL)
 
     words = JSONField(default=dict)
