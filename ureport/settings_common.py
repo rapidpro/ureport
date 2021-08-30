@@ -111,7 +111,7 @@ LANGUAGES = (
     ("bg", "Bulgarian"),
     ("hr-hr", "Croatian"),
     ("no", "Norwegian"),
-    ("sv_SE", "Swedish"),
+    ("sv-se", "Swedish"),
 )
 
 DEFAULT_LANGUAGE = "en"
