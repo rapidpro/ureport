@@ -55,11 +55,6 @@
               {% edit_content 'polls.poll_update' latest_poll.pk "#id_title"  "-m-8" "dark" %}
               {{ latest_poll.title }}
   
-            .block.tags
-              -for tag in latest_poll.tags.all
-                .inline-block.px-2.py-1.leading-none.text-xs.mb-1.border-gray-400.border
-                  .whitespace-no-wrap
-                    {{tag.name}}
 
             .block.hover-parent
               {% edit_content 'polls.poll_poll_date' latest_poll.pk "#id_title"  "-m-8" "dark" %}
@@ -106,6 +101,12 @@
               .relative.w-full(style="height:105px")
                 {{ age_stats|json_script:"age_stats" }}
                 #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"dark1_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
+
+            .block.tags.mt-8
+              -for tag in latest_poll.tags.all
+                .inline-block.px-2.py-1.leading-none.text-xs.mb-1.border-gray-400.border
+                  .whitespace-no-wrap
+                    {{tag.name}}
 
       -if show_maps
         .flex-1.text-black
