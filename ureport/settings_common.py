@@ -55,6 +55,8 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 # set the mail settings, we send throught gmail
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "server@nyaruka.com"
@@ -100,7 +102,7 @@ LANGUAGES = (
     ("uk", "Ukrainian"),
     ("uz", "Uzbek"),
     ("my", "Burmese"),
-    ("mk_MK", "Macedonian"),
+    ("mk-mk", "Macedonian"),
     ("id", "Indonesian"),
     ("it", "Italian"),
     ("ro", "Romanian"),
@@ -664,6 +666,7 @@ INSTALLED_APPS = (
     "ureport.assets",
     "ureport.contacts",
     "ureport.countries",
+    "ureport.flows",
     "ureport.jobs",
     "ureport.locations",
     "ureport.news",
@@ -897,6 +900,11 @@ CELERYBEAT_SCHEDULE = {
     "fetch_old_sites_count": {
         "task": "polls.fetch_old_sites_count",
         "schedule": timedelta(minutes=20),
+        "relative": True,
+    },
+    "check_contact_mismatch": {
+        "task": "contacts.check_contacts_count_mismatch",
+        "schedule": timedelta(minutes=30),
         "relative": True,
     },
     "contact-pull": {
@@ -1325,6 +1333,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://mk.ureport.in/count/",
     ),
     dict(
+        name="Madagascar",
+        host="//madagascar.ureport.in/",
+        flag="flag_madagascar.png",
+        countries_codes=["MG"],
+        count_link="http://madagascar.ureport.in/count/",
+    ),
+    dict(
         name="Malawi",
         host="//ureport.mw/",
         flag="flag_malawi.png",
@@ -1648,6 +1663,7 @@ REST_FRAMEWORK = {
     "PAGINATE_BY_PARAM": "page_size",  # Allow client to override, using `?page_size=xxx`.
     "MAX_PAGINATE_BY": 100,
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
 

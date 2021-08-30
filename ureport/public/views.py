@@ -646,3 +646,16 @@ def task_status(request):
         return HttpResponse(body, status=500, content_type="application/json")
     else:
         return HttpResponse(body, status=200, content_type="application/json")
+
+
+def counts_status(request):
+    cached_counts_stats = cache.get("contact_counts_status", dict())
+
+    has_error = cached_counts_stats.get("error_counts", dict())
+
+    body = json.dumps(cached_counts_stats)
+
+    if has_error:
+        return HttpResponse(body, status=500, content_type="application/json")
+    else:
+        return HttpResponse(body, status=200, content_type="application/json")

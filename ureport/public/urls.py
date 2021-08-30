@@ -27,6 +27,7 @@ from .views import (
     StoriesView,
     StoryReadView,
     UreportersView,
+    counts_status,
     status,
     task_status,
 )
@@ -48,7 +49,7 @@ urlpatterns = [
     ),
     url(r"^boundaries/$", cache_page(60 * 30)(BoundaryView.as_view()), {}, "public.boundaries"),
     url(
-        r"^boundaries/(?P<osm_id>[a-zA-Z0-9_-]+)/$",
+        r"^boundaries/(?P<osm_id>[\.a-zA-Z0-9_-]+)/$",
         cache_page(60 * 30)(BoundaryView.as_view()),
         {},
         "public.boundaries",
@@ -66,5 +67,6 @@ urlpatterns = [
     url(r"^icons_display/$", IconsDisplay.as_view(), {}, "public.icons_display"),
     url(r"^status/$", status, {}, "public.status"),
     url(r"^task_status/$", task_status, {}, "public.task_status"),
+    url(r"^count_status/$", counts_status, {}, "public.counts_status"),
     url(r"^countries/$", CountriesView.as_view(), {}, "public.countries"),
 ]

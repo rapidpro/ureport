@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import json
 import re
 from datetime import timedelta
 
-import six
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import OrgBackend
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
 from django_redis import get_redis_connection
-from smartmin.csv_imports.models import ImportTask
-from smartmin.views import SmartCreateView, SmartCRUDL, SmartCSVImportView, SmartListView, SmartUpdateView
+from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 
 from django import forms
 from django.core.cache import cache
@@ -165,7 +162,6 @@ class PollCRUDL(SmartCRUDL):
         "images",
         "responses",
         "pull_refresh",
-        "import",
         "poll_date",
         "poll_flow",
     )
@@ -350,25 +346,27 @@ class PollCRUDL(SmartCRUDL):
         success_message = _("Now set what images you want displayed on your poll page. (if any)")
 
         def derive_fields(self):
-            questions = self.object.questions.all()
+            questions = self.object.questions.all().select_related("flow_result")
 
             fields = []
             for question in questions:
-                fields.append("ruleset_%s_include" % question.ruleset_uuid)
-                fields.append("ruleset_%s_label" % question.ruleset_uuid)
-                fields.append("ruleset_%s_title" % question.ruleset_uuid)
+                result_uuid = question.flow_result.result_uuid
+
+                fields.append("ruleset_%s_include" % result_uuid)
+                fields.append("ruleset_%s_label" % result_uuid)
+                fields.append("ruleset_%s_title" % result_uuid)
 
                 categories = question.get_public_categories()
                 for category in categories:
-                    fields.append(f"ruleset_{question.ruleset_uuid}_cat_label_{category.id}")
-                    fields.append(f"ruleset_{question.ruleset_uuid}_cat_display_{category.id}")
+                    fields.append(f"ruleset_{result_uuid}_cat_label_{category.id}")
+                    fields.append(f"ruleset_{result_uuid}_cat_display_{category.id}")
 
-                fields.append("ruleset_%s_priority" % question.ruleset_uuid)
+                fields.append("ruleset_%s_priority" % result_uuid)
 
             return fields
 
         def get_questions(self):
-            return self.object.questions.all().order_by("-priority", "pk")
+            return self.object.questions.all().select_related("flow_result").order_by("-priority", "pk")
 
         def get_form(self):
             form = super(PollCRUDL.Questions, self).get_form()
@@ -380,7 +378,9 @@ class PollCRUDL(SmartCRUDL):
             initial = self.derive_initial()
 
             for question in questions:
-                include_field_name = "ruleset_%s_include" % question.ruleset_uuid
+                result_uuid = question.flow_result.result_uuid
+
+                include_field_name = f"ruleset_{result_uuid}_include"
                 include_field_initial = initial.get(include_field_name, False)
                 include_field = forms.BooleanField(
                     label=_("Include"),
@@ -389,7 +389,7 @@ class PollCRUDL(SmartCRUDL):
                     help_text=_("Whether to include this question in your public results"),
                 )
 
-                priority_field_name = "ruleset_%s_priority" % question.ruleset_uuid
+                priority_field_name = f"ruleset_{result_uuid}_priority"
                 priority_field_initial = initial.get(priority_field_name, None)
                 priority_field = forms.IntegerField(
                     label=_("Priority"),
@@ -398,7 +398,7 @@ class PollCRUDL(SmartCRUDL):
                     help_text=_("The priority of this question on the poll page, higher priority comes first"),
                 )
 
-                label_field_name = "ruleset_%s_label" % question.ruleset_uuid
+                label_field_name = f"ruleset_{result_uuid}_label"
                 label_field_initial = initial.get(label_field_name, "")
                 label_field = forms.CharField(
                     label=_("Ruleset Label"),
@@ -408,7 +408,7 @@ class PollCRUDL(SmartCRUDL):
                     help_text=_("The label of the ruleset from RapidPro"),
                 )
 
-                title_field_name = f"ruleset_{question.ruleset_uuid}_title"
+                title_field_name = f"ruleset_{result_uuid}_title"
                 title_field_initial = initial.get(title_field_name, "")
                 title_field = forms.CharField(
                     label=_("Title"),
@@ -425,7 +425,7 @@ class PollCRUDL(SmartCRUDL):
 
                 categories = question.get_public_categories()
                 for idx, category in enumerate(categories):
-                    cat_label_field_name = f"ruleset_{question.ruleset_uuid}_cat_label_{category.id}"
+                    cat_label_field_name = f"ruleset_{result_uuid}_cat_label_{category.id}"
                     cat_label_field_initial = initial.get(cat_label_field_name, "")
                     cat_label_field = forms.CharField(
                         label=_(f"Category {idx+1}"),
@@ -435,7 +435,7 @@ class PollCRUDL(SmartCRUDL):
                         help_text=_("The label of the category from backend(such as RapidPro)"),
                     )
 
-                    cat_display_field_name = f"ruleset_{question.ruleset_uuid}_cat_display_{category.id}"
+                    cat_display_field_name = f"ruleset_{result_uuid}_cat_display_{category.id}"
                     cat_display_field_initial = initial.get(cat_display_field_name, "")
                     cat_display_field = forms.CharField(
                         label=_(f"Display {idx+1}"),
@@ -456,23 +456,25 @@ class PollCRUDL(SmartCRUDL):
 
             # for each question
             for question in questions:
-                r_uuid = question.ruleset_uuid
+                result_uuid = question.flow_result.result_uuid
 
-                included = data.get("ruleset_%s_include" % r_uuid, False)
-                priority = data.get("ruleset_%s_priority" % r_uuid, None)
+                included = data.get(f"ruleset_{result_uuid}_include", False)
+                priority = data.get(f"ruleset_{result_uuid}_priority", None)
                 if not priority:
                     priority = 0
 
-                title = data["ruleset_%s_title" % r_uuid]
+                title = data[f"ruleset_{result_uuid}_title"]
 
-                PollQuestion.objects.filter(poll=poll, ruleset_uuid=r_uuid).update(
+                PollQuestion.objects.filter(poll=poll, flow_result__result_uuid=result_uuid).update(
                     is_active=included, title=title, priority=priority
                 )
 
                 categories = question.get_public_categories()
                 for category in categories:
+                    flow_category = category.flow_result_category.category
                     category_id = category.id
-                    category_displayed_data = data[f"ruleset_{r_uuid}_cat_display_{category_id}"]
+
+                    category_displayed_data = data[f"ruleset_{result_uuid}_cat_display_{category_id}"]
 
                     try:
                         category_displayed = strip_tags(category_displayed_data)
@@ -480,7 +482,7 @@ class PollCRUDL(SmartCRUDL):
                         category_displayed = None
 
                     if not category_displayed:
-                        category_displayed = category.category
+                        category_displayed = flow_category
 
                     PollResponseCategory.objects.filter(id=category_id).update(category_displayed=category_displayed)
 
@@ -501,16 +503,20 @@ class PollCRUDL(SmartCRUDL):
             questions = self.get_questions()
 
             for question in questions:
-                initial["ruleset_%s_include" % question.ruleset_uuid] = question.is_active
-                initial["ruleset_%s_priority" % question.ruleset_uuid] = question.priority
-                initial["ruleset_%s_label" % question.ruleset_uuid] = question.ruleset_label
-                initial["ruleset_%s_title" % question.ruleset_uuid] = question.title
+                result_uuid = question.flow_result.result_uuid
+                result_name = question.flow_result.result_name
+
+                initial["ruleset_%s_include" % result_uuid] = question.is_active
+                initial["ruleset_%s_priority" % result_uuid] = question.priority
+                initial["ruleset_%s_label" % result_uuid] = result_name
+                initial["ruleset_%s_title" % result_uuid] = question.title
 
                 categories = question.get_public_categories()
                 for category in categories:
-                    initial[f"ruleset_{question.ruleset_uuid}_cat_label_{category.id}"] = category.category
-                    initial[f"ruleset_{question.ruleset_uuid}_cat_display_{category.id}"] = (
-                        category.category_displayed or category.category
+                    flow_category = category.flow_result_category.category
+                    initial[f"ruleset_{result_uuid}_cat_label_{category.id}"] = flow_category
+                    initial[f"ruleset_{result_uuid}_cat_display_{category.id}"] = (
+                        category.category_displayed or flow_category
                     )
 
             return initial
@@ -623,40 +629,3 @@ class PollCRUDL(SmartCRUDL):
             self.success_message = _("Scheduled a pull refresh for poll #%(poll_id)d on org #%(org_id)d") % dict(
                 poll_id=poll.pk, org_id=poll.org_id
             )
-
-    class Import(SmartCSVImportView):
-        class ImportForm(forms.ModelForm):
-            def __init__(self, *args, **kwargs):
-                self.org = kwargs["org"]
-                del kwargs["org"]
-                super(PollCRUDL.Import.ImportForm, self).__init__(*args, **kwargs)
-
-            class Meta:
-                model = ImportTask
-                fields = "__all__"
-
-        form_class = ImportForm
-        model = ImportTask
-        fields = ("csv_file",)
-        success_message = ""
-
-        def post_save(self, task):
-            # configure import params with current org and timezone
-            org = self.request.org
-            params = dict(
-                org_id=org.id,
-                timezone=six.text_type(org.timezone),
-                original_filename=self.form.cleaned_data["csv_file"].name,
-            )
-            params_dump = json.dumps(params)
-            ImportTask.objects.filter(pk=task.pk).update(import_params=params_dump)
-
-            # start the task
-            task.start()
-
-            return task
-
-        def get_form_kwargs(self):
-            kwargs = super(PollCRUDL.Import, self).get_form_kwargs()
-            kwargs["org"] = self.request.org
-            return kwargs

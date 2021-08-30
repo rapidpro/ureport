@@ -72,6 +72,8 @@ class LocationTest(UreportTest):
 
         self.assertEqual(reverse("public.boundaries", args=["R-Nigeria"]), "/boundaries/R-Nigeria/")
         self.assertEqual(reverse("public.boundaries", args=["232_23"]), "/boundaries/232_23/")
+        self.assertEqual(reverse("public.boundaries", args=["COD.16_1"]), "/boundaries/COD.16_1/")
+        self.assertEqual(reverse("public.boundaries", args=["COD.16_1_2"]), "/boundaries/COD.16_1_2/")
 
     def test_build_global_boundaries(self):
         with patch("ureport.locations.models.open") as my_mock:

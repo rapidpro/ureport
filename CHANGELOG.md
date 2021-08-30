@@ -1,3 +1,146 @@
+v1.1.276
+----------
+ * Merge pull request #756 from rapidpro/update-contacts-triggers
+ * Merge branch 'main' of github.com:rapidpro/ureport into update-contacts-triggers
+ * Merge branch 'main' of github.com:rapidpro/ureport into update-contacts-triggers
+ * Run code_checks
+ * Grab lock when recalculating the contacts stats
+ * Fix bugs in contacts triggers
+
+v1.1.275
+----------
+ * Merge pull request #760 from rapidpro/counts-status
+ * Show calculated stats too on counts status
+
+v1.1.274
+----------
+ * Merge pull request #759 from rapidpro/counts-status
+ * Better stats on counts status
+
+v1.1.273
+----------
+ * Merge pull request #758 from rapidpro/counts-status
+ * consider mismatch for a diff more that 50 or 2.5%
+
+v1.1.272
+----------
+ * Merge pull request #757 from rapidpro/counts-status
+ * Add counts status view
+
+v1.1.271
+----------
+ * Merge pull request #755 from rapidpro/update-result-for-new-contacts
+ * Merge branch 'main' of github.com:rapidpro/ureport into update-result-for-new-contacts
+ * Run code_checks
+ * Update results for new contacts
+
+v1.1.270
+----------
+ * Merge pull request #754 from rapidpro/django-3
+
+v1.1.269
+----------
+ * Merge pull request #752 from evansmurithi/add-madagasikara-flag
+ * Add Madagascar flag
+
+v1.1.268
+----------
+ * Merge pull request #746 from rapidpro/flow-results-5
+ * Populate flow result on poll stats
+
+v1.1.267
+----------
+ * Merge pull request #745 from rapidpro/flow-results-4
+ * Merge branch 'main' of github.com:rapidpro/ureport into flow-results-4
+ * Update CHANGELOG.md for v1.1.265
+ * Merge pull request #751 from rapidpro/dedupe-poll-response-categories
+ * Merge pull request #750 from rapidpro/unique-pollresponsecategory-constraint
+ * Update CHANGELOG.md for v1.1.264
+ * Fix migration queryset
+ * Fix migration queryset
+ * Update CHANGELOG.md for v1.1.263
+ * Merge pull request #749 from rapidpro/dedupe-poll-response-categories
+ * Add constraint for unique together on poll response categories
+ * Fix field name
+ * Improve the way to select the obj to keep
+ * Add migrations to deduplicates the poll response categories
+ * Update CHANGELOG.md for v1.1.260
+ * Merge pull request #748 from rapidpro/fix-constraint
+ * Remove constraints on PollResponseCategory
+ * Update CHANGELOG.md for v1.1.258
+ * Merge pull request #747 from rapidpro/flow-results-2
+ * Merge pull request #744 from rapidpro/flow-results-3
+ * Update CHANGELOG.md for v1.1.257
+ * Merge pull request #741 from rapidpro/flow-results-2
+ * Update CHANGELOG.md for v1.1.256
+ * Merge pull request #743 from rapidpro/tests-methods
+ * Merge master
+ * Merge pull request #742 from rapidpro/remove-poll-import
+ * Merge pull request #740 from rapidpro/separate-data-models-and-display-config-models
+ * Add test methods to create questions and response categories
+ * Remove unused polls import
+
+v1.1.265
+----------
+ * Merge pull request #751 from rapidpro/dedupe-poll-response-categories
+ * Merge pull request #750 from rapidpro/unique-pollresponsecategory-constraint
+ * Add constraint for unique together on poll response categories
+
+v1.1.264
+----------
+ * Fix migration queryset
+ * Fix migration queryset
+
+v1.1.263
+----------
+ * Merge pull request #749 from rapidpro/dedupe-poll-response-categories
+
+v1.1.260
+----------
+ * Merge pull request #748 from rapidpro/fix-constraint
+
+v1.1.258
+----------
+ * Merge pull request #747 from rapidpro/flow-results-2
+ * Merge pull request #744 from rapidpro/flow-results-3
+ * fix conflicts
+ * Use fields from flow results and flow result categories
+
+v1.1.257
+----------
+ * Merge pull request #741 from rapidpro/flow-results-2
+ * Migrate poll question that do not have the flow result field yet set
+ * Add data migrations to populate the flow results and flow result categories
+
+v1.1.256
+----------
+ * Merge pull request #743 from rapidpro/tests-methods
+ * Merge master
+ * Merge pull request #742 from rapidpro/remove-poll-import
+ * Merge pull request #740 from rapidpro/separate-data-models-and-display-config-models
+ * Simpler querysets
+ * Add test methods to create questions and response categories
+ * Remove unused polls import
+
+v1.1.254
+----------
+ * Merge pull request #736 from rapidpro/sync-reverse
+ * Change last pull results redis key so polls still syncing do not miss results
+ * Update CHANGELOG.md for v1.1.252
+ * Merge pull request #739 from rapidpro/fix-boundaries-ids
+ * Fix boundaries to allow IDs with dots
+ * Update CHANGELOG.md for v1.1.251
+ * Merge pull request #643 from Ilhasoft/feature/add-uniendovoces-flags
+ * add country codes to uniendo voces workspaces
+ * Merge branch 'main' of https://github.com/rapidpro/ureport into feature/add-uniendovoces-flags
+ * fix uniendo voces ecuador sintaxe
+ * add uniendo voces flags
+
+v1.1.252
+----------
+ * Merge pull request #739 from rapidpro/fix-boundaries-ids
+ * Fix boundaries to allow IDs with dots
+
 v1.1.251
 ----------
  * Merge pull request #643 from Ilhasoft/feature/add-uniendovoces-flags

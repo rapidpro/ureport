@@ -17,7 +17,7 @@
             {{ latest_poll.title }}
 
           .font-alt.font-bold.italic.left-border.mt-8.hover-parent
-            {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.ruleset_uuid|add:"_title"  "-m-8" "dark" %}
+            {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.flow_result.result_uuid|add:"_title"  "-m-8" "dark" %}
             {{ latest_poll.get_first_question.title }}
 
         .flex-1.self-stretch.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")

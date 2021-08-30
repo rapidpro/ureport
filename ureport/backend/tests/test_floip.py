@@ -9,6 +9,7 @@ from temba_client.v2.types import Contact as TembaContact, ObjectRef
 
 from ureport.backend.floip import ContactSyncer, FLOIPBackend
 from ureport.contacts.models import Contact
+from ureport.flows.models import FlowResult, FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollQuestion, PollResponseCategory, PollResult
 from ureport.tests import MockResponse, UreportTest
@@ -493,13 +494,19 @@ class FLOIPBackendTest(UreportTest):
             self.nigeria, "Flow 1", "2a754346-a0dc-4176-a8b9-0f978f6b04c7", self.education_nigeria, self.admin
         )
         self.assertEqual(PollQuestion.objects.all().count(), 0)
+        self.assertEqual(FlowResult.objects.all().count(), 0)
         self.assertEqual(PollResponseCategory.objects.all().count(), 0)
+        self.assertEqual(FlowResultCategory.objects.all().count(), 0)
 
         self.backend.update_poll_questions(self.nigeria, poll, self.admin)
 
         self.assertEqual(PollQuestion.objects.all().count(), 3)
+        self.assertEqual(FlowResult.objects.all().count(), 3)
+
         self.assertEqual(PollResponseCategory.objects.all().count(), 4)
+        self.assertEqual(FlowResultCategory.objects.all().count(), 4)
         self.assertEqual(PollResponseCategory.objects.filter(category="other").count(), 2)
+        self.assertEqual(FlowResultCategory.objects.filter(category="other").count(), 2)
 
     def test_pull_fields(self):
         self.assertEqual(
@@ -1159,29 +1166,10 @@ class FLOIPBackendTest(UreportTest):
         poll = self.create_poll(
             self.nigeria, "Flow 1", "2a754346-a0dc-4176-a8b9-0f978f6b04c7", self.education_nigeria, self.admin
         )
-        PollQuestion.objects.create(
-            poll=poll,
-            title="question 1",
-            ruleset_uuid="q_1522956745304_75",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
 
-        PollQuestion.objects.create(
-            poll=poll,
-            title="question 2",
-            ruleset_uuid="q_1522956746998_26",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
-
-        PollQuestion.objects.create(
-            poll=poll,
-            title="question 3",
-            ruleset_uuid="q_1522957067432_34",
-            created_by=self.admin,
-            modified_by=self.admin,
-        )
+        self.create_poll_question(self.admin, poll, "question 1", "q_1522956745304_75")
+        self.create_poll_question(self.admin, poll, "question 2", "q_1522956746998_26")
+        self.create_poll_question(self.admin, poll, "question 3", "q_1522957067432_34")
 
         with self.assertNumQueries(4):
             (

@@ -127,9 +127,9 @@
             .mt-8
               .font-alt.font-bold.leading-tight.italic.hover-parent(class="{% if question.title|length < 50 %}text-3xl{% elif question.title|length < 120 %}text-2xl{% else %}text-xl{% endif %}")
                 -if forloop.counter|divisibleby:"2"
-                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" "dark" %}
+                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.flow_result.result_uuid|add:"_title"  "-m-8" "dark" %}
                 -else
-                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.ruleset_uuid|add:"_title"  "-m-8" "white" %}
+                  {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:question.flow_result.result_uuid|add:"_title"  "-m-8" "white" %}
                 {{ question.title }}
 
               .mt-4
