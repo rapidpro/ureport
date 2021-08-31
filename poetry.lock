@@ -749,7 +749,7 @@ sorl-thumbnail = "^12.7.0"
 type = "git"
 url = "https://github.com/rapidpro/dash.git"
 reference = "add-tags"
-resolved_reference = "74e8a2b73dd3c945eb91f341d8463f8a0ae6056d"
+resolved_reference = "707d9bcc0edbbaacc79b4f3dadac149951bb7725"
 
 [[package]]
 name = "rapidpro-python"

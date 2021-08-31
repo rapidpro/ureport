@@ -9,9 +9,11 @@ import six
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import TaskState
+from dash.tags.models import Tag
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError
 
+from django import forms
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db.models import Sum
@@ -50,6 +52,13 @@ class PollTest(UreportTest):
 
         self.education_nigeria = Category.objects.create(
             org=self.nigeria, name="Education", created_by=self.admin, modified_by=self.admin
+        )
+
+        self.tag_uganda = Tag.objects.create(
+            org=self.uganda, name="sports", created_by=self.admin, modified_by=self.admin
+        )
+        self.tag_nigeria = Tag.objects.create(
+            org=self.nigeria, name="news", created_by=self.admin, modified_by=self.admin
         )
 
     @patch("ureport.polls.tasks.update_or_create_questions.delay")
@@ -789,27 +798,34 @@ class PollTest(UreportTest):
 
             response = self.client.get(uganda_update_url, SERVER_NAME="uganda.ureport.io")
             self.assertEqual(response.status_code, 200)
-            self.assertTrue("form" in response.context)
+            self.assertIn("form", response.context)
 
             self.assertEqual(len(response.context["form"].fields), 7)
-            self.assertTrue("is_active" in response.context["form"].fields)
-            self.assertTrue("is_featured" in response.context["form"].fields)
-            self.assertTrue("title" in response.context["form"].fields)
-            self.assertTrue("category" in response.context["form"].fields)
+            self.assertIn("is_active", response.context["form"].fields)
+            self.assertIn("is_featured", response.context["form"].fields)
+            self.assertIn("title", response.context["form"].fields)
+            self.assertIn("category", response.context["form"].fields)
             self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
             self.assertEqual(
                 list(response.context["form"].fields["category"].choices),
                 [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
             )
-            self.assertTrue("category_image" in response.context["form"].fields)
-            self.assertTrue("loc" in response.context["form"].fields)
+            self.assertIn("category_image", response.context["form"].fields)
+            self.assertIn("tags", response.context["form"].fields)
+            self.assertEqual(len(list(response.context["form"].fields["tags"].choices)), 1)
+            self.assertEqual(
+                list(response.context["form"].fields["tags"].choices),
+                [(forms.models.ModelChoiceIteratorValue(self.tag_uganda.pk, self.tag_uganda), "sports")],
+            )
+
+            self.assertIn("loc", response.context["form"].fields)
 
             response = self.client.post(uganda_update_url, dict(), SERVER_NAME="uganda.ureport.io")
-            self.assertTrue("form" in response.context)
+            self.assertIn("form", response.context)
             self.assertTrue(response.context["form"].errors)
             self.assertEqual(len(response.context["form"].errors), 2)
-            self.assertTrue("title" in response.context["form"].errors)
-            self.assertTrue("category" in response.context["form"].errors)
+            self.assertIn("title", response.context["form"].errors)
+            self.assertIn("category", response.context["form"].errors)
 
             post_data = dict(title="title updated", category=self.health_uganda.pk, is_featured=False)
             response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")

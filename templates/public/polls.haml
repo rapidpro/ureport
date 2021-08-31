@@ -37,7 +37,7 @@
                       {{ category.name }}
                   .category-results
                     - for poll in category.polls
-                      %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }} {{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }} {% for tag in poll.tags.all %}{{tag.name|addslashes}}{% endfor%}")
+                      %a.block.px-2.py-1.searchable(class="hover:bg-gray-200" href="{% url 'public.opinion_read' poll.pk %}" data-search-value="{{ poll.title|addslashes }} {{ poll.poll_date|date:\"F\" }} {{ poll.poll_date|date:\"Y\" }} {% for tag in poll.tags.all %}{% if tag.is_active %}{{tag.name|addslashes}}{% endif %}{% endfor%}")
                         .text-sm(class="rtl:mr-2 ltr:ml-2")
                           {{ poll.title }}
                           .inline.text-xs.font-bold
@@ -102,11 +102,13 @@
                 {{ age_stats|json_script:"age_stats" }}
                 #age-bars.w-full.h-full.absolute.age-chart(data-aos="fade" data-graph-type="age-chart" data-bar-color='{{ org|config:"dark1_color"}}' data-label-color="black" data-stats="age_stats" data-label-weight="400")
 
+          .flex
             .block.tags.mt-8
               -for tag in latest_poll.tags.all
-                .inline-block.px-2.py-1.leading-none.text-xs.mb-1.border-gray-400.border
-                  .whitespace-no-wrap
-                    {{tag.name}}
+                -if tag.is_active
+                  .inline-block.px-2.py-1.leading-none.text-xs.mb-1.border-gray-400.border
+                    .whitespace-no-wrap
+                      {{tag.name}}
 
       -if show_maps
         .flex-1.text-black

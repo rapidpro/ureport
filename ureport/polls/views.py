@@ -8,6 +8,7 @@ from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import OrgBackend
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
+from dash.tags.models import Tag
 from django_redis import get_redis_connection
 from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 
@@ -34,6 +35,7 @@ class PollForm(forms.ModelForm):
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = CategoryChoiceField(Category.objects.none())
     category_image = forms.ModelChoiceField(CategoryImage.objects.none(), required=False)
+    tags = forms.ModelMultipleChoiceField(Tag.objects.none(), required=False)
 
     def __init__(self, *args, **kwargs):
         self.org = kwargs["org"]
@@ -48,6 +50,8 @@ class PollForm(forms.ModelForm):
         self.fields["category_image"].queryset = CategoryImage.objects.filter(
             category__org=self.org, is_active=True
         ).order_by("category__name", "name")
+
+        self.fields["tags"].queryset = Tag.objects.filter(org=self.org, is_active=True).order_by("name")
 
     def clean(self):
 
