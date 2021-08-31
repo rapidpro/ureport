@@ -12,9 +12,9 @@ Getting Started
 
 Install dependencies
 ```
-% virtualenv env
-% source env/bin/activate
-% pip install -r pip-requires.txt
+% pip install --upgrade pip poetry
+% poetry install --no-root
+% poetry shell
 ```
 
 Link up a settings file (you'll need to create the postgres db first, username: 'ureport' password: 'nyaruka')
