@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 13:40+0000\n"
+"POT-Creation-Date: 2021-08-31 20:12+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -438,6 +438,9 @@ msgstr "الصورة التي تريد إدراجها في صفحة عرض ال�
 #| msgid "The name of this category"
 msgid "The name of this tag"
 msgstr "اسم الفئة "
+
+msgid "Delete"
+msgstr ""
 
 msgid "Remove Item?"
 msgstr "حذف "
