@@ -793,6 +793,7 @@ GROUP_PERMISSIONS = {
         "polls.featuredresponse.*",
         "stories.story.*",
         "stories.storyimage.*",
+        "tags.tag.*",
         "users.user_profile",
     ),
     "Editors": (
@@ -811,6 +812,7 @@ GROUP_PERMISSIONS = {
         "polls.featuredresponse.*",
         "stories.story.*",
         "stories.storyimage.*",
+        "tags.tag.*",
         "users.user_profile",
     ),
     "Global": ("countries.countryalias.*",),
