@@ -1,3 +1,13 @@
+v1.1.277
+----------
+ * Add MO file
+ * Merge pull request #764 from rapidpro/contact-counts-monitor
+ * Merge pull request #763 from rapidpro/update-README
+ * Add message for when the contact task is running on status for mismatch counts
+ * Update README
+ * Merge pull request #761 from rapidpro/translations_django-po--master_sv_SE
+ * Apply translations in sv_SE
+
 v1.1.276
 ----------
  * Merge pull request #756 from rapidpro/update-contacts-triggers
