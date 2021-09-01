@@ -641,15 +641,14 @@ class PollCRUDL(SmartCRUDL):
             cleaned_data = form.cleaned_data
             obj = self.get_object()
             org = obj.org
+            user = self.request.user
 
             tags = cleaned_data["poll_tags"]
             poll_tag_ids = []
 
             for tag_dict in tags:
                 if tag_dict["new"]:
-                    tag_obj = Tag.objects.create(
-                        org=org, name=tag_dict["name"], created_by=obj.created_by, modified_by=obj.created_by
-                    )
+                    tag_obj = Tag.objects.create(org=org, name=tag_dict["name"], created_by=user, modified_by=user)
                 else:
                     tag_obj = Tag.objects.filter(org=org, name=tag_dict["name"]).first()
 
