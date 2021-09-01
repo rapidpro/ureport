@@ -813,6 +813,8 @@ class PollTest(UreportTest):
             self.assertIn("poll_tags", response.context["form"].fields)
             self.assertIn("loc", response.context["form"].fields)
 
+            self.assertEqual(response.context["tags_data"], [dict(id=self.tag_uganda.pk, text=self.tag_uganda.name)])
+
             response = self.client.post(uganda_update_url, dict(), SERVER_NAME="uganda.ureport.io")
             self.assertIn("form", response.context)
             self.assertTrue(response.context["form"].errors)
@@ -827,6 +829,13 @@ class PollTest(UreportTest):
             self.assertFalse(updated_poll.is_featured)
 
             self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_poll_date", args=[updated_poll.pk]))
+
+            post_data["poll_tags"] = [self.tag_uganda.pk, "[NEW_TAG]_Trending"]
+            response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
+            updated_poll = Poll.objects.get(pk=poll1.pk)
+            self.assertEqual(updated_poll.title, "title updated")
+            self.assertEqual(updated_poll.tags.all().count(), 2)
+            self.assertEqual(set(updated_poll.tags.all().values_list("name", flat=True)), {"Trending", "sports"})
 
     def test_list_poll(self):
         list_url = reverse("polls.poll_list")

@@ -69,7 +69,7 @@ class PollForm(forms.ModelForm):
             else:
                 tag_obj = Tag.objects.filter(org=self.org, pk=tag).first()
                 if tag_obj:
-                    tags.append(dict(name=tag.name, new=False))
+                    tags.append(dict(name=tag_obj.name, new=False))
 
         cleaned_data["poll_tags"] = tags
 
