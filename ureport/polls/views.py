@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import ast
 import re
 from datetime import timedelta
 
@@ -16,6 +17,7 @@ from django import forms
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_image_file_extension
+from django.db.models.functions import Lower
 from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -35,7 +37,7 @@ class PollForm(forms.ModelForm):
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = CategoryChoiceField(Category.objects.none())
     category_image = forms.ModelChoiceField(CategoryImage.objects.none(), required=False)
-    tags = forms.ModelMultipleChoiceField(Tag.objects.none(), required=False)
+    poll_tags = forms.CharField(widget=forms.SelectMultiple, required=False)
 
     def __init__(self, *args, **kwargs):
         self.org = kwargs["org"]
@@ -51,11 +53,25 @@ class PollForm(forms.ModelForm):
             category__org=self.org, is_active=True
         ).order_by("category__name", "name")
 
-        self.fields["tags"].queryset = Tag.objects.filter(org=self.org, is_active=True).order_by("name")
-
     def clean(self):
 
         cleaned_data = self.cleaned_data
+
+        poll_tags = cleaned_data.get("poll_tags", "[]")
+        if poll_tags:
+            poll_tags = ast.literal_eval(poll_tags)
+
+        tags = []
+
+        for tag in poll_tags:
+            if tag.startswith("[NEW_TAG]_"):
+                tags.append(dict(name=tag[10:], new=True))
+            else:
+                tag_obj = Tag.objects.filter(org=self.org, pk=tag).first()
+                if tag_obj:
+                    tags.append(dict(name=tag.name, new=False))
+
+        cleaned_data["poll_tags"] = tags
 
         if not self.org.backends.filter(is_active=True).exists():
             raise ValidationError(_("Your org does not have any API token configuration."))
@@ -64,7 +80,7 @@ class PollForm(forms.ModelForm):
 
     class Meta:
         model = Poll
-        fields = ("is_active", "is_featured", "backend", "title", "category", "category_image", "tags")
+        fields = ("is_active", "is_featured", "backend", "title", "category", "category_image", "poll_tags")
 
 
 class PollResponseForm(forms.ModelForm):
@@ -607,7 +623,7 @@ class PollCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
-        fields = ("is_active", "is_featured", "title", "category", "category_image", "tags")
+        fields = ("is_active", "is_featured", "title", "category", "category_image", "poll_tags")
         success_url = "id@polls.poll_poll_flow"
 
         def derive_title(self):
@@ -620,6 +636,46 @@ class PollCRUDL(SmartCRUDL):
             flow_date_hint = flow.get("date_hint", "")
 
             return _(f"Edit Poll for flow [{flow_name} ({flow_date_hint})]")
+
+        def form_valid(self, form):
+            cleaned_data = form.cleaned_data
+            obj = self.get_object()
+            org = obj.org
+
+            tags = cleaned_data["poll_tags"]
+            poll_tag_ids = []
+
+            for tag_dict in tags:
+                if tag_dict["new"]:
+                    tag_obj = Tag.objects.create(
+                        org=org, name=tag_dict["name"], created_by=obj.created_by, modified_by=obj.created_by
+                    )
+                else:
+                    tag_obj = Tag.objects.filter(org=org, name=tag_dict["name"]).first()
+
+                poll_tag_ids.append(tag_obj.pk)
+
+            for tag in obj.tags.all():
+                if tag not in poll_tag_ids:
+                    obj.tags.remove(tag)
+
+            for tag in Tag.objects.filter(id__in=poll_tag_ids):
+                obj.tags.add(tag)
+
+            return super().form_valid(form)
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            obj = self.get_object()
+            org = obj.org
+
+            tags = Tag.objects.filter(org=org).order_by(Lower("name"))
+            tags_data = [dict(id=tag.id, text=tag.name) for tag in tags]
+            context["tags_data"] = tags_data
+
+            context["poll_tags"] = [tag.id for tag in obj.tags.all()]
+
+            return context
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Update, self).get_form_kwargs()

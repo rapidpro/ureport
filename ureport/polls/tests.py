@@ -13,7 +13,6 @@ from dash.tags.models import Tag
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError
 
-from django import forms
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db.models import Sum
@@ -811,13 +810,7 @@ class PollTest(UreportTest):
                 [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
             )
             self.assertIn("category_image", response.context["form"].fields)
-            self.assertIn("tags", response.context["form"].fields)
-            self.assertEqual(len(list(response.context["form"].fields["tags"].choices)), 1)
-            self.assertEqual(
-                list(response.context["form"].fields["tags"].choices),
-                [(forms.models.ModelChoiceIteratorValue(self.tag_uganda.pk, self.tag_uganda), "sports")],
-            )
-
+            self.assertIn("poll_tags", response.context["form"].fields)
             self.assertIn("loc", response.context["form"].fields)
 
             response = self.client.post(uganda_update_url, dict(), SERVER_NAME="uganda.ureport.io")

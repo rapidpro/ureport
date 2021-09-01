@@ -18,9 +18,27 @@
 - block extra-script
   :javascript
     $(document).ready(function() {
-      $('#id_tags').select2({
+      $('#id_poll_tags').select2({
           placeholder: 'Select tags',
+          data: {{tags_data|safe}},
           maximumSelectionLength: 5,
           width: '100%',
+          tags: true,
+          createTag: function (params) {
+            var term = $.trim(params.term);
+
+            if (term === '') {
+              return null;
+            }
+
+            return {
+              id: "[NEW_TAG]_" + term,
+              text: term,
+              newTag: true // add additional parameters
+            }
+          }
       });
+      $('#id_poll_tags').val({{poll_tags|safe}});
+      $('#id_poll_tags').trigger('change');
+
     });
