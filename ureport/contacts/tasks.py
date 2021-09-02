@@ -33,7 +33,7 @@ def rebuild_contacts_counts():
 @app.task(name="contacts.check_contacts_count_mismatch")
 def check_contacts_count_mismatch():
     r = get_redis_connection()
-    orgs = Org.objects.filter(is_active=True)
+    orgs = Org.objects.filter(is_active=True).order_by("pk")
 
     error_counts = dict()
     mismatch_counts = dict()
