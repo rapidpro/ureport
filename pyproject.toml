@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.6"
 Django = "^3.2.6"
 smartmin = "^3.0.0"
-rapidpro-dash = {git = "https://github.com/rapidpro/dash.git", rev = "add-tags"}
+rapidpro-dash = "^1.7.2"
 colorama = "^0.4.3"
 coverage = "^4.5.1"
 django-compressor = "^2.3"
