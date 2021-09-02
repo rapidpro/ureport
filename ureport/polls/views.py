@@ -264,13 +264,21 @@ class PollCRUDL(SmartCRUDL):
 
             backend_options = org.backends.filter(is_active=True).values_list("slug", flat=True)
             if len(backend_options) <= 1:
-                return ("is_featured", "title", "category", "category_image")
-            return ("is_featured", "backend", "title", "category", "category_image")
+                return ("is_featured", "title", "category", "category_image", "poll_tags")
+            return ("is_featured", "backend", "title", "category", "category_image", "poll_tags")
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Create, self).get_form_kwargs()
             kwargs["org"] = self.request.org
             return kwargs
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+
+            tags = Tag.objects.filter(org=self.org).order_by(Lower("name"))
+            context["tags_data"] = [dict(id=tag.id, text=tag.name) for tag in tags]
+
+            return context
 
         def pre_save(self, obj):
             obj = super(PollCRUDL.Create, self).pre_save(obj)
@@ -291,6 +299,31 @@ class PollCRUDL(SmartCRUDL):
                 obj = similar_poll
 
             obj.poll_date = timezone.now()
+            return obj
+
+        def post_save(self, obj):
+            cleaned_data = self.form.cleaned_data
+            org = obj.org
+            user = self.request.user
+
+            tags = cleaned_data["poll_tags"]
+            poll_tag_ids = []
+
+            for tag_dict in tags:
+                if tag_dict["new"]:
+                    tag_obj = Tag.objects.create(org=org, name=tag_dict["name"], created_by=user, modified_by=user)
+                else:
+                    tag_obj = Tag.objects.filter(org=org, name=tag_dict["name"]).first()
+
+                poll_tag_ids.append(tag_obj.pk)
+
+            for tag in obj.tags.all():
+                if tag not in poll_tag_ids:
+                    obj.tags.remove(tag)
+
+            for tag in Tag.objects.filter(id__in=poll_tag_ids):
+                obj.tags.add(tag)
+
             return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
@@ -637,32 +670,6 @@ class PollCRUDL(SmartCRUDL):
 
             return _(f"Edit Poll for flow [{flow_name} ({flow_date_hint})]")
 
-        def form_valid(self, form):
-            cleaned_data = form.cleaned_data
-            obj = self.get_object()
-            org = obj.org
-            user = self.request.user
-
-            tags = cleaned_data["poll_tags"]
-            poll_tag_ids = []
-
-            for tag_dict in tags:
-                if tag_dict["new"]:
-                    tag_obj = Tag.objects.create(org=org, name=tag_dict["name"], created_by=user, modified_by=user)
-                else:
-                    tag_obj = Tag.objects.filter(org=org, name=tag_dict["name"]).first()
-
-                poll_tag_ids.append(tag_obj.pk)
-
-            for tag in obj.tags.all():
-                if tag not in poll_tag_ids:
-                    obj.tags.remove(tag)
-
-            for tag in Tag.objects.filter(id__in=poll_tag_ids):
-                obj.tags.add(tag)
-
-            return super().form_valid(form)
-
         def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             obj = self.get_object()
@@ -684,6 +691,29 @@ class PollCRUDL(SmartCRUDL):
         def post_save(self, obj):
             obj = super(PollCRUDL.Update, self).post_save(obj)
             obj.update_or_create_questions(user=self.request.user)
+
+            cleaned_data = self.form.cleaned_data
+            org = obj.org
+            user = self.request.user
+
+            tags = cleaned_data["poll_tags"]
+            poll_tag_ids = []
+
+            for tag_dict in tags:
+                if tag_dict["new"]:
+                    tag_obj = Tag.objects.create(org=org, name=tag_dict["name"], created_by=user, modified_by=user)
+                else:
+                    tag_obj = Tag.objects.filter(org=org, name=tag_dict["name"]).first()
+
+                poll_tag_ids.append(tag_obj.pk)
+
+            for tag in obj.tags.all():
+                if tag not in poll_tag_ids:
+                    obj.tags.remove(tag)
+
+            for tag in Tag.objects.filter(id__in=poll_tag_ids):
+                obj.tags.add(tag)
+
             return obj
 
     class PullRefresh(SmartUpdateView):
