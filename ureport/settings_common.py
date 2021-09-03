@@ -1532,6 +1532,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://southasia.ureport.in/count/",
     ),
     dict(
+        name="Sverige",
+        host="//sverige.ureport.in",
+        flag="flag_sverige.png",
+        countries_codes=["SWE"],
+        count_link="http://sverige.ureport.in/count/",
+    ),
+    dict(
         name="Tanzania",
         host="//tanzania.ureport.in",
         flag="flag_tanzania.png",
