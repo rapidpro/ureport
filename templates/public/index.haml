@@ -23,10 +23,9 @@
           .flex
             .block.tags.mt-8
               -for tag in latest_poll.tags.all
-                -if tag.is_active
-                  .inline-block.px-2.py-1.leading-none.text-xs.mb-1.border-gray-400.border
-                    .whitespace-no-wrap
-                      {{tag.name}}
+                .inline-block.px-2.py-1.leading-none.text-xs.mb-1.border-gray-400.border
+                  .whitespace-no-wrap
+                    {{tag.name}}
 
 
         .flex-1.self-stretch.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
