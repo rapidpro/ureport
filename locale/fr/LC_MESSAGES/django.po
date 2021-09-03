@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-31 20:12+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2021-03-30 14:28+0000\n"
 "Last-Translator: Nyaruka <info@textit.in>, 2021\n"
 "Language-Team: French (https://www.transifex.com/rapidpro/teams/226/fr/)\n"
@@ -833,6 +833,9 @@ msgstr "Dernières notifications"
 msgid "Backends"
 msgstr "Backends"
 
+msgid "Add os Select tags"
+msgstr ""
+
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1396,6 +1399,11 @@ msgstr "Le nombre prioritaire pour cette question du sondage"
 
 msgid "The Rule this response category is based on"
 msgstr "La règle sur laquelle cette catégorie de réponse est basée"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "Le titre du sondage"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Votre organisation n'a aucune configuration de jeton d'API."

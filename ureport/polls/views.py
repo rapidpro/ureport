@@ -37,7 +37,7 @@ class PollForm(forms.ModelForm):
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = CategoryChoiceField(Category.objects.none())
     category_image = forms.ModelChoiceField(CategoryImage.objects.none(), required=False)
-    poll_tags = forms.CharField(widget=forms.SelectMultiple, required=False)
+    poll_tags = forms.CharField(widget=forms.SelectMultiple, required=False, help_text=_("Select tags for this poll"))
 
     def __init__(self, *args, **kwargs):
         self.org = kwargs["org"]

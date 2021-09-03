@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-31 20:12+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2017-05-08 07:40+0000\n"
 "Last-Translator: Francelino Edson Manuel Murela <fmurela@unicef.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/rapidpro/ureport/language/pt/)\n"
@@ -835,6 +835,9 @@ msgstr "LOCALIZAÇÕES"
 msgid "Backends"
 msgstr "Gerir utilizadores"
 
+msgid "Add os Select tags"
+msgstr ""
+
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1450,6 +1453,11 @@ msgstr ""
 
 msgid "The Rule this response category is based on"
 msgstr ""
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "O título para este Inquérito"
 
 msgid "Your org does not have any API token configuration."
 msgstr ""

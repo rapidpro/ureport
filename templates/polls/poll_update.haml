@@ -19,7 +19,7 @@
   :javascript
     $(document).ready(function() {
       $('#id_poll_tags').select2({
-          placeholder: 'Select tags',
+          placeholder: '{{ _("Add os Select tags")|escapejs }}',
           data: {{tags_data|safe}},
           maximumSelectionLength: 5,
           width: '100%',

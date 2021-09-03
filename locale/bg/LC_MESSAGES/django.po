@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-31 20:12+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Stanislav Dodov <stanislav.dodov@gmail.com>, 2020\n"
 "Language-Team: Bulgarian (https://www.transifex.com/rapidpro/teams/226/bg/)\n"
@@ -831,6 +831,9 @@ msgstr "НАЙ-НОВИ ИЗВЕСТИЯ"
 msgid "Backends"
 msgstr "Backends"
 
+msgid "Add os Select tags"
+msgstr ""
+
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
 msgid_plural "There are currently %(counter)s new polls syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1420,6 +1423,11 @@ msgstr "Степен на приоритет на този въпрос от д�
 
 msgid "The Rule this response category is based on"
 msgstr "Правилото, на което е базирана тази категория отговор"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "Заглавието на това допитване"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Вашата организация няма конфигурация за Приложно-програмен интерфейс"
