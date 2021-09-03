@@ -1,3 +1,10 @@
+v1.1.281
+----------
+ * Merge pull request #766 from rapidpro/add-tags
+ * Merge pull request #765 from rapidpro/dependabot/npm_and_yarn/path-parse-1.0.7
+ * Remove is_active tag check
+ * Bump path-parse from 1.0.6 to 1.0.7
+
 v1.1.277
 ----------
  * Add MO file
