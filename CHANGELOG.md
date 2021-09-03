@@ -1,3 +1,9 @@
+v1.1.282
+----------
+ * Merge pull request #767 from rapidpro/fix-localization
+ * Adjust styles
+ * Make text localizable
+
 v1.1.281
 ----------
  * Merge pull request #766 from rapidpro/add-tags
