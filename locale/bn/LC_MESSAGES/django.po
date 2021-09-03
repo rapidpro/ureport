@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-08-31 20:12+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -427,6 +427,14 @@ msgstr "ঘটনার পেইজ এবং প্রিভিউ এর স�
 msgid "Image to display on story page and in previews (optional)"
 msgstr "ঘটনার পেইজ এবং প্রিভিউ এর সাথে সংযুক্ত যে ছবি প্রদর্শন করা হবে (ঐচ্ছিক) "
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr " বিভাগের নাম"
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "বিষয়টি বাদ দিতে চান? "
 
@@ -707,6 +715,9 @@ msgstr "পেইজগুলো"
 
 msgid "Jobs"
 msgstr "কাজ গুলো"
+
+msgid "Tags"
+msgstr ""
 
 msgid "Photos"
 msgstr "ছবিগুলো"

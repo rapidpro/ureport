@@ -155,6 +155,12 @@
                             %img(src="{{ STATIC_URL }}img/categories_icon.png")
                           %span.menu-link-title
                             - trans "Categories"
+                      %li
+                        %a(href="{% url 'tags.tag_list' %}")
+                          %span.icon
+                            %img(src="{{ STATIC_URL }}img/categories_icon.png")
+                          %span.menu-link-title
+                            - trans "Tags"
                       
                       %li
                         %a(href="{% url 'dashblocks.dashblock_list' %}?slug=photos")

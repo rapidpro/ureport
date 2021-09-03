@@ -660,6 +660,7 @@ INSTALLED_APPS = (
     "dash.stories",
     "dash.utils",
     "dash.categories",
+    "dash.tags",
     # ureport apps
     "ureport.admins",
     "ureport.api",
@@ -792,6 +793,7 @@ GROUP_PERMISSIONS = {
         "polls.featuredresponse.*",
         "stories.story.*",
         "stories.storyimage.*",
+        "tags.tag.*",
         "users.user_profile",
     ),
     "Editors": (
@@ -810,6 +812,7 @@ GROUP_PERMISSIONS = {
         "polls.featuredresponse.*",
         "stories.story.*",
         "stories.storyimage.*",
+        "tags.tag.*",
         "users.user_profile",
     ),
     "Global": ("countries.countryalias.*",),

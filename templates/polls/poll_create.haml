@@ -1,0 +1,41 @@
+- extends "smartmin/update.html"
+
+
+- block extra-style
+  :css
+    .select2-container {
+        width: 75%
+    }
+
+    .select2-container .selection {
+        width: 100%
+    }
+
+    .select2-results__option--selected {
+      display: none;
+    }
+
+- block extra-script
+  :javascript
+    $(document).ready(function() {
+      $('#id_poll_tags').select2({
+          placeholder: 'Select tags',
+          data: {{tags_data|safe}},
+          maximumSelectionLength: 5,
+          width: '100%',
+          tags: true,
+          createTag: function (params) {
+            var term = $.trim(params.term);
+
+            if (term === '') {
+              return null;
+            }
+
+            return {
+              id: "[NEW_TAG]_" + term,
+              text: term,
+              newTag: true
+            }
+          }
+      });
+    });

@@ -20,6 +20,14 @@
             {% edit_content 'polls.poll_questions' latest_poll.pk "#id_ruleset_"|add:latest_poll.get_first_question.flow_result.result_uuid|add:"_title"  "-m-8" "dark" %}
             {{ latest_poll.get_first_question.title }}
 
+          .flex
+            .block.tags.mt-8
+              -for tag in latest_poll.tags.all
+                .inline-block.px-2.py-1.leading-none.text-xs.mb-1.border-gray-400.border
+                  .whitespace-no-wrap
+                    {{tag.name}}
+
+
         .flex-1.self-stretch.p-home.bg-grid.self-center(class="{% if is_rtl_org %} vertical-angle-right{% else %}vertical-angle-left{% endif %}")
           .relative.w-full(style="min-height:20rem;")
             .w-full.h-full.absolute.poll-chart.block(id="chart-{{ latest_poll.get_first_question.id }}" data-question="{{ latest_poll.get_first_question.id }}" data-segment="all")

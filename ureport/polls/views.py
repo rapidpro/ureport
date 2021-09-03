@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import ast
 import re
 from datetime import timedelta
 
@@ -8,6 +9,7 @@ from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import OrgBackend
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
+from dash.tags.models import Tag
 from django_redis import get_redis_connection
 from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 
@@ -15,6 +17,7 @@ from django import forms
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_image_file_extension
+from django.db.models.functions import Lower
 from django.forms import ModelForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -34,6 +37,7 @@ class PollForm(forms.ModelForm):
     title = forms.CharField(max_length=255, widget=forms.Textarea)
     category = CategoryChoiceField(Category.objects.none())
     category_image = forms.ModelChoiceField(CategoryImage.objects.none(), required=False)
+    poll_tags = forms.CharField(widget=forms.SelectMultiple, required=False)
 
     def __init__(self, *args, **kwargs):
         self.org = kwargs["org"]
@@ -53,6 +57,22 @@ class PollForm(forms.ModelForm):
 
         cleaned_data = self.cleaned_data
 
+        poll_tags = cleaned_data.get("poll_tags", "[]")
+        if poll_tags:
+            poll_tags = ast.literal_eval(poll_tags)
+
+        tags = []
+
+        for tag in poll_tags:
+            if tag.startswith("[NEW_TAG]_"):
+                tags.append(dict(name=tag[10:], new=True))
+            else:
+                tag_obj = Tag.objects.filter(org=self.org, pk=tag).first()
+                if tag_obj:
+                    tags.append(dict(name=tag_obj.name, new=False))
+
+        cleaned_data["poll_tags"] = tags
+
         if not self.org.backends.filter(is_active=True).exists():
             raise ValidationError(_("Your org does not have any API token configuration."))
 
@@ -60,7 +80,7 @@ class PollForm(forms.ModelForm):
 
     class Meta:
         model = Poll
-        fields = ("is_active", "is_featured", "backend", "title", "category", "category_image")
+        fields = ("is_active", "is_featured", "backend", "title", "category", "category_image", "poll_tags")
 
 
 class PollResponseForm(forms.ModelForm):
@@ -244,13 +264,21 @@ class PollCRUDL(SmartCRUDL):
 
             backend_options = org.backends.filter(is_active=True).values_list("slug", flat=True)
             if len(backend_options) <= 1:
-                return ("is_featured", "title", "category", "category_image")
-            return ("is_featured", "backend", "title", "category", "category_image")
+                return ("is_featured", "title", "category", "category_image", "poll_tags")
+            return ("is_featured", "backend", "title", "category", "category_image", "poll_tags")
 
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Create, self).get_form_kwargs()
             kwargs["org"] = self.request.org
             return kwargs
+
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+
+            tags = Tag.objects.filter(org=self.org).order_by(Lower("name"))
+            context["tags_data"] = [dict(id=tag.id, text=tag.name) for tag in tags]
+
+            return context
 
         def pre_save(self, obj):
             obj = super(PollCRUDL.Create, self).pre_save(obj)
@@ -271,6 +299,31 @@ class PollCRUDL(SmartCRUDL):
                 obj = similar_poll
 
             obj.poll_date = timezone.now()
+            return obj
+
+        def post_save(self, obj):
+            cleaned_data = self.form.cleaned_data
+            org = obj.org
+            user = self.request.user
+
+            tags = cleaned_data["poll_tags"]
+            poll_tag_ids = []
+
+            for tag_dict in tags:
+                if tag_dict["new"]:
+                    tag_obj = Tag.objects.create(org=org, name=tag_dict["name"], created_by=user, modified_by=user)
+                else:
+                    tag_obj = Tag.objects.filter(org=org, name=tag_dict["name"]).first()
+
+                poll_tag_ids.append(tag_obj.pk)
+
+            for tag in obj.tags.all():
+                if tag not in poll_tag_ids:
+                    obj.tags.remove(tag)
+
+            for tag in Tag.objects.filter(id__in=poll_tag_ids):
+                obj.tags.add(tag)
+
             return obj
 
     class Images(OrgObjPermsMixin, SmartUpdateView):
@@ -523,7 +576,16 @@ class PollCRUDL(SmartCRUDL):
 
     class List(OrgPermsMixin, SmartListView):
         search_fields = ("title__icontains",)
-        fields = ("title", "poll_date", "category", "questions", "opinion_response", "sync_status", "created_on")
+        fields = (
+            "title",
+            "poll_date",
+            "category",
+            "questions",
+            "opinion_response",
+            "sync_status",
+            "created_on",
+            "tags",
+        )
         link_fields = ("title", "poll_date", "questions", "opinion_response", "images")
         default_order = ("-created_on", "id")
         paginate_by = 10
@@ -594,7 +656,7 @@ class PollCRUDL(SmartCRUDL):
 
     class Update(OrgObjPermsMixin, SmartUpdateView):
         form_class = PollForm
-        fields = ("is_active", "is_featured", "title", "category", "category_image")
+        fields = ("is_active", "is_featured", "title", "category", "category_image", "poll_tags")
         success_url = "id@polls.poll_poll_flow"
 
         def derive_title(self):
@@ -608,6 +670,19 @@ class PollCRUDL(SmartCRUDL):
 
             return _(f"Edit Poll for flow [{flow_name} ({flow_date_hint})]")
 
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            obj = self.get_object()
+            org = obj.org
+
+            tags = Tag.objects.filter(org=org).order_by(Lower("name"))
+            tags_data = [dict(id=tag.id, text=tag.name) for tag in tags]
+            context["tags_data"] = tags_data
+
+            context["poll_tags"] = [tag.id for tag in obj.tags.all()]
+
+            return context
+
         def get_form_kwargs(self):
             kwargs = super(PollCRUDL.Update, self).get_form_kwargs()
             kwargs["org"] = self.request.org
@@ -616,6 +691,29 @@ class PollCRUDL(SmartCRUDL):
         def post_save(self, obj):
             obj = super(PollCRUDL.Update, self).post_save(obj)
             obj.update_or_create_questions(user=self.request.user)
+
+            cleaned_data = self.form.cleaned_data
+            org = obj.org
+            user = self.request.user
+
+            tags = cleaned_data["poll_tags"]
+            poll_tag_ids = []
+
+            for tag_dict in tags:
+                if tag_dict["new"]:
+                    tag_obj = Tag.objects.create(org=org, name=tag_dict["name"], created_by=user, modified_by=user)
+                else:
+                    tag_obj = Tag.objects.filter(org=org, name=tag_dict["name"]).first()
+
+                poll_tag_ids.append(tag_obj.pk)
+
+            for tag in obj.tags.all():
+                if tag not in poll_tag_ids:
+                    obj.tags.remove(tag)
+
+            for tag in Tag.objects.filter(id__in=poll_tag_ids):
+                obj.tags.add(tag)
+
             return obj
 
     class PullRefresh(SmartUpdateView):
