@@ -1,3 +1,8 @@
+v1.1.285
+----------
+ * Merge pull request #770 from rapidpro/fix-engagements-queries
+ * Update engagment stats to start using flow result foreign key
+
 v1.1.284
 ----------
  * Merge pull request #769 from rapidpro/fix-responded
