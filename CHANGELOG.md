@@ -1,3 +1,11 @@
+v1.1.283
+----------
+ * Merge pull request #753 from rapidpro/flow-results-6
+ * Merge pull request #768 from Ilhasoft/feature/sverige_flag
+ * feature: sverige flag
+ * Merge branch 'main' of github.com:rapidpro/ureport into flow-results-6
+ * Build a unique set of stats going forward, for existing stats check if we need to filter by question
+
 v1.1.282
 ----------
  * Merge pull request #767 from rapidpro/fix-localization
