@@ -1,3 +1,8 @@
+v1.1.284
+----------
+ * Merge pull request #769 from rapidpro/fix-responded
+ * Fix query for responded counts
+
 v1.1.283
 ----------
  * Merge pull request #753 from rapidpro/flow-results-6
