@@ -21,6 +21,7 @@ from django.template import TemplateSyntaxError
 from django.urls import reverse
 from django.utils import timezone
 
+from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollImage, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import (
@@ -1242,18 +1243,18 @@ class PollTest(UreportTest):
             self.assertFalse(PollStats.objects.all())
 
             poll2 = self.create_poll(self.nigeria, "Poll 2", "flow-uuid", self.education_nigeria, self.admin)
-            self.create_poll_question(self.admin, poll2, "question 1", "step-uuid")
+            poll_question2 = self.create_poll_question(self.admin, poll2, "question 1", "step-uuid")
 
             self.assertFalse(PollStats.objects.all())
-            self.assertFalse(PollStats.objects.filter(question__poll__id=poll.id))
-            self.assertFalse(PollStats.objects.filter(question__poll__id=poll2.id))
+            self.assertFalse(PollStats.objects.filter(flow_result_id=poll_question.flow_result_id))
+            self.assertFalse(PollStats.objects.filter(flow_result_id=poll_question2.flow_result_id))
 
             # rebuild for first poll will rebuild for poll2 as well
             poll.rebuild_poll_results_counts()
 
             self.assertTrue(PollStats.objects.all())
-            self.assertTrue(PollStats.objects.filter(question__poll__id=poll.id))
-            self.assertTrue(PollStats.objects.filter(question__poll__id=poll2.id))
+            self.assertTrue(PollStats.objects.filter(flow_result_id=poll_question.flow_result_id))
+            self.assertTrue(PollStats.objects.filter(flow_result_id=poll_question2.flow_result_id))
 
     def test_delete_poll_results(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
@@ -1393,10 +1394,12 @@ class PollQuestionTest(UreportTest):
 
         self.create_poll_response_category(poll_question1, "rule-uuid-2", "No")
         PollResponseCategory.objects.filter(category="No").update(is_active=False)
+        FlowResultCategory.objects.filter(category="No").update(is_active=False)
 
         self.assertTrue(poll_question1.is_open_ended())
 
         PollResponseCategory.objects.filter(category="No").update(is_active=True)
+        FlowResultCategory.objects.filter(category="No").update(is_active=True)
 
         self.assertFalse(poll_question1.is_open_ended())
 
@@ -1618,7 +1621,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1629,7 +1634,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1640,7 +1647,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1658,7 +1667,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=male_gender,
             location=None,
@@ -1669,7 +1680,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1680,7 +1693,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1690,7 +1705,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1707,7 +1724,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=age_segment_20,
             gender_segment=None,
             location=None,
@@ -1718,7 +1737,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -1729,7 +1750,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -1739,7 +1762,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2568,8 +2593,8 @@ class PollResultsTest(UreportTest):
         poll_stat = PollStats.objects.get()
 
         self.assertEqual(poll_stat.org, self.nigeria)
-        self.assertEqual(poll_stat.question, self.poll_question)
-        self.assertEqual(poll_stat.category, yes_category)
+        self.assertEqual(poll_stat.flow_result, self.poll_question.flow_result)
+        self.assertEqual(poll_stat.flow_result_category, yes_category.flow_result_category)
         self.assertEqual(poll_stat.location, ikeja_boundary)
         self.assertEqual(poll_stat.gender_segment, GenderSegment.objects.get(gender="M"))
         self.assertEqual(poll_stat.age_segment, AgeSegment.objects.get(min_age=0))
@@ -2589,9 +2614,15 @@ class PollResultsTest(UreportTest):
         self.poll.rebuild_poll_results_counts()
         self.assertEqual(PollStats.objects.all().count(), 2)
         self.assertEqual(
-            PollStats.objects.filter(question=self.poll_question).aggregate(Sum("count"))["count__sum"], 2
+            PollStats.objects.filter(flow_result=self.poll_question.flow_result).aggregate(Sum("count"))["count__sum"],
+            2,
         )
-        self.assertEqual(PollStats.objects.filter(category=yes_category).aggregate(Sum("count"))["count__sum"], 2)
+        self.assertEqual(
+            PollStats.objects.filter(flow_result_category=yes_category.flow_result_category).aggregate(Sum("count"))[
+                "count__sum"
+            ],
+            2,
+        )
         self.assertEqual(PollStats.objects.filter(location=ikeja_boundary).aggregate(Sum("count"))["count__sum"], 1)
 
         self.assertEqual(

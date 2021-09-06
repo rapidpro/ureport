@@ -189,6 +189,15 @@ class PollStats(models.Model):
         logger.info("Squashed %d distinct sets of %s in %0.3fs" % (num_sets, cls.__name__, time_taken))
 
     @classmethod
+    def get_question_stats(cls, org_id, question):
+        matching_question = PollStats.objects.filter(
+            org_id=org_id, flow_result=question.flow_result, question=question
+        ).exists()
+        if matching_question:
+            return PollStats.objects.filter(org_id=org_id, flow_result=question.flow_result, question=question)
+        return PollStats.objects.filter(org_id=org_id, flow_result=question.flow_result)
+
+    @classmethod
     def get_engagement_data(cls, org, metric, segment_slug, time_filter):
 
         key = f"org:{org.id}:metric:{metric}:segment:{segment_slug}:filter:{time_filter}"
@@ -261,7 +270,7 @@ class PollStats(models.Model):
 
         responses = (
             PollStats.objects.filter(org=org, date__gte=start, question_id__in=question_ids)
-            .exclude(category=None)
+            .exclude(flow_result_category=None)
             .values("date")
             .annotate(Sum("count"))
         )
@@ -290,7 +299,7 @@ class PollStats(models.Model):
                 PollStats.objects.filter(
                     org=org, date__gte=start, gender_segment_id=gender["id"], question_id__in=question_ids
                 )
-                .exclude(category=None)
+                .exclude(flow_result_category=None)
                 .values("date")
                 .annotate(Sum("count"))
             )
@@ -320,7 +329,7 @@ class PollStats(models.Model):
                 PollStats.objects.filter(
                     org=org, date__gte=start, location_id__in=boundary_ids, question_id__in=question_ids
                 )
-                .exclude(category=None)
+                .exclude(flow_result_category=None)
                 .values("date")
                 .annotate(Sum("count"))
             )
@@ -357,7 +366,7 @@ class PollStats(models.Model):
                 PollStats.objects.filter(
                     org=org, date__gte=start, age_segment_id=age["id"], question_id__in=question_ids
                 )
-                .exclude(category=None)
+                .exclude(flow_result_category=None)
                 .values("date")
                 .annotate(Sum("count"))
             )
@@ -401,7 +410,7 @@ class PollStats(models.Model):
         )
         responded_stats = (
             PollStats.objects.filter(org=org, date__gte=start, question_id__in=question_ids)
-            .exclude(category=None)
+            .exclude(flow_result_category=None)
             .values("date")
             .annotate(Sum("count"))
         )
@@ -441,7 +450,7 @@ class PollStats(models.Model):
                 PollStats.objects.filter(
                     org=org, date__gte=start, location_id__in=boundary_ids, question_id__in=question_ids
                 )
-                .exclude(category=None)
+                .exclude(flow_result_category=None)
                 .values("date")
                 .annotate(Sum("count"))
             )
@@ -478,7 +487,7 @@ class PollStats(models.Model):
                 PollStats.objects.filter(
                     org=org, date__gte=start, gender_segment_id=gender["id"], question_id__in=question_ids
                 )
-                .exclude(category=None)
+                .exclude(flow_result_category=None)
                 .values("date")
                 .annotate(Sum("count"))
             )
@@ -523,7 +532,7 @@ class PollStats(models.Model):
                 PollStats.objects.filter(
                     org=org, date__gte=start, age_segment_id=age["id"], question_id__in=question_ids
                 )
-                .exclude(category=None)
+                .exclude(flow_result_category=None)
                 .values("date")
                 .annotate(Sum("count"))
             )
@@ -582,7 +591,7 @@ class PollStats(models.Model):
         polled_stats = PollStats.objects.filter(org=org, question_id__in=question_ids).aggregate(Sum("count"))
         responded_stats = (
             PollStats.objects.filter(org=org, question_id__in=question_ids)
-            .exclude(category=None)
+            .exclude(flow_result_category=None)
             .aggregate(Sum("count"))
         )
 
@@ -745,3 +754,14 @@ class PollWordCloud(models.Model):
     flow_result = models.ForeignKey(FlowResult, null=True, on_delete=models.SET_NULL)
 
     words = JSONField(default=dict)
+
+    @classmethod
+    def get_question_poll_cloud(cls, org, question):
+        matching_question = PollWordCloud.objects.filter(
+            org=org, flow_result_id=question.flow_result_id, question=question
+        ).exists()
+        if matching_question:
+            return PollWordCloud.objects.filter(
+                org=org, flow_result_id=question.flow_result_id, question=question
+            ).first()
+        return PollWordCloud.objects.filter(org=org, flow_result_id=question.flow_result_id).first()
