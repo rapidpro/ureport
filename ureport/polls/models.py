@@ -1074,7 +1074,7 @@ class PollQuestion(SmartModel):
         key = PollQuestion.POLL_QUESTION_RESPONDED_CACHE_KEY % (self.poll.org.pk, self.poll.pk, self.pk)
         responded_stats = (
             PollStats.get_question_stats(self.poll.org_id, question=self)
-            .exclude(category=None)
+            .exclude(flow_result_category=None)
             .aggregate(Sum("count"))
         )
         results = responded_stats.get("count__sum", 0) or 0
