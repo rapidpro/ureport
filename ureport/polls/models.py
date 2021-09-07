@@ -805,7 +805,10 @@ class PollQuestion(SmartModel):
             for category in unclean_categories:
                 categories[category["label"]] = int(category["count"])
 
-            poll_word_cloud = PollWordCloud.objects.get_or_create(org=org, flow_result=self.flow_result)[0]
+            poll_word_cloud = PollWordCloud.get_question_poll_cloud(org, self)
+            if not poll_word_cloud:
+                poll_word_cloud = PollWordCloud.objects.create(org=org, flow_result=self.flow_result)
+
             poll_word_cloud.words = categories
             poll_word_cloud.save()
 
