@@ -1,3 +1,8 @@
+v1.1.286
+----------
+ * Merge pull request #771 from rapidpro/poll-cloud-query
+ * Adjust poll word cloud query
+
 v1.1.285
 ----------
  * Merge pull request #770 from rapidpro/fix-engagements-queries
