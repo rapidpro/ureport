@@ -172,6 +172,8 @@ class Contact(models.Model):
         district = ""
         ward = ""
 
+        scheme = ""
+
         if self.gender:
             gender = self.gender.lower()
 
@@ -183,6 +185,9 @@ class Contact(models.Model):
 
         if self.ward:
             ward = self.ward.upper()
+
+        if self.scheme:
+            scheme = self.scheme.lower()
 
         if self.born:
             born = self.born
@@ -211,6 +216,8 @@ class Contact(models.Model):
                 generated_counters[f"registered_born:{str(registered_on)}:{born}"] = 1
             if state:
                 generated_counters[f"registered_state:{str(registered_on)}:{state}"] = 1
+            if scheme:
+                generated_counters[f"registered_scheme:{str(registered_on)}:{scheme}"] = 1
 
         if state:
             generated_counters[f"state:{state}"] = 1
@@ -218,6 +225,9 @@ class Contact(models.Model):
             generated_counters[f"district:{district}"] = 1
         if ward:
             generated_counters[f"ward:{ward}"] = 1
+
+        if scheme:
+            generated_counters[f"scheme:{scheme}"] = 1
 
         return generated_counters
 

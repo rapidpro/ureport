@@ -273,6 +273,11 @@ class ContactSyncer(BaseSyncer):
             else:
                 gender = ""
 
+        scheme = ""
+        if remote.urns:
+            primary_urn = remote.urns[0]
+            scheme, path = primary_urn.split(":", 1)
+
         return {
             "backend": self.backend,
             "org": org,
@@ -284,6 +289,7 @@ class ContactSyncer(BaseSyncer):
             "state": state,
             "district": district,
             "ward": ward,
+            "scheme": scheme,
         }
 
     def update_required(self, local, remote, local_kwargs):
@@ -302,6 +308,7 @@ class ContactSyncer(BaseSyncer):
                 local.state != local_kwargs["state"],
                 local.district != local_kwargs["district"],
                 local.ward != local_kwargs["ward"],
+                local.scheme != local_kwargs["scheme"],
             ]
         )
 
@@ -323,6 +330,7 @@ class ContactSyncer(BaseSyncer):
                     ward=obj.ward,
                     gender=obj.gender,
                     born=obj.born,
+                    scheme=obj.scheme,
                 )
 
         return obj
@@ -781,12 +789,14 @@ class RapidProBackend(BaseBackend):
         ward = ""
         born = None
         gender = None
+        scheme = ""
         if contact_obj is not None:
             state = contact_obj.state
             district = contact_obj.district
             ward = contact_obj.ward
             born = contact_obj.born
             gender = contact_obj.gender
+            scheme = contact_obj.scheme
 
         for temba_value in sorted(temba_run.values.values(), key=lambda val: val.time):
             ruleset_uuid = temba_value.node
@@ -801,7 +811,17 @@ class RapidProBackend(BaseBackend):
             if existing_poll_result is not None:
 
                 update_required = self._check_update_required(
-                    existing_poll_result, category, text, state, district, ward, born, gender, completed, value_date
+                    existing_poll_result,
+                    category,
+                    text,
+                    state,
+                    district,
+                    ward,
+                    born,
+                    gender,
+                    scheme,
+                    completed,
+                    value_date,
                 )
 
                 if update_required:
@@ -815,6 +835,7 @@ class RapidProBackend(BaseBackend):
                         date=value_date,
                         born=born,
                         gender=gender,
+                        scheme=scheme,
                         completed=completed,
                     )
 
@@ -827,6 +848,7 @@ class RapidProBackend(BaseBackend):
                     existing_poll_result.date = value_date
                     existing_poll_result.born = born
                     existing_poll_result.gender = gender
+                    existing_poll_result.scheme = scheme
                     existing_poll_result.completed = completed
 
                     existing_db_poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
@@ -838,7 +860,17 @@ class RapidProBackend(BaseBackend):
             elif poll_result_to_save is not None:
 
                 replace_save_map = self._check_update_required(
-                    poll_result_to_save, category, text, state, district, ward, born, gender, completed, value_date
+                    poll_result_to_save,
+                    category,
+                    text,
+                    state,
+                    district,
+                    ward,
+                    born,
+                    gender,
+                    scheme,
+                    completed,
+                    value_date,
                 )
 
                 if replace_save_map:
@@ -854,6 +886,7 @@ class RapidProBackend(BaseBackend):
                         ward=ward,
                         born=born,
                         gender=gender,
+                        scheme=scheme,
                         date=value_date,
                         completed=completed,
                     )
@@ -875,6 +908,7 @@ class RapidProBackend(BaseBackend):
                     ward=ward,
                     born=born,
                     gender=gender,
+                    scheme=scheme,
                     date=value_date,
                     completed=completed,
                 )
@@ -907,6 +941,7 @@ class RapidProBackend(BaseBackend):
                             date=value_date,
                             born=born,
                             gender=gender,
+                            scheme=scheme,
                             completed=completed,
                         )
 
@@ -919,6 +954,7 @@ class RapidProBackend(BaseBackend):
                         existing_poll_result.date = value_date
                         existing_poll_result.born = born
                         existing_poll_result.gender = gender
+                        existing_poll_result.scheme = scheme
                         existing_poll_result.completed = completed
 
                         existing_db_poll_results_map[contact_uuid][ruleset_uuid] = existing_poll_result
@@ -941,6 +977,7 @@ class RapidProBackend(BaseBackend):
                             ward=ward,
                             born=born,
                             gender=gender,
+                            scheme=scheme,
                             date=value_date,
                             completed=completed,
                         )
@@ -963,6 +1000,7 @@ class RapidProBackend(BaseBackend):
                         ward=ward,
                         born=born,
                         gender=gender,
+                        scheme=scheme,
                         date=value_date,
                         completed=completed,
                     )
@@ -975,13 +1013,16 @@ class RapidProBackend(BaseBackend):
                 stats_dict["num_path_ignored"] += 1
 
     @staticmethod
-    def _check_update_required(poll_obj, category, text, state, district, ward, born, gender, completed, value_date):
+    def _check_update_required(
+        poll_obj, category, text, state, district, ward, born, gender, scheme, completed, value_date
+    ):
         update_required = poll_obj.category != category or poll_obj.text != text
         update_required = update_required or poll_obj.state != state
         update_required = update_required or poll_obj.district != district
         update_required = update_required or poll_obj.ward != ward
         update_required = update_required or poll_obj.born != born
         update_required = update_required or poll_obj.gender != gender
+        update_required = update_required or poll_obj.scheme != scheme
         update_required = update_required or poll_obj.completed != completed
         # if the reporter answered the step, check if this is a newer run
         if poll_obj.date is not None:
