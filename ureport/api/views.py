@@ -598,6 +598,7 @@ class NewsItemList(BaseListAPIView):
 
     serializer_class = NewsItemReadSerializer
     model = NewsItem
+    queryset = NewsItem.objects.filter(is_active=True)
 
 
 class NewsItemDetails(RetrieveAPIView):
@@ -673,6 +674,7 @@ class VideoList(BaseListAPIView):
 
     serializer_class = VideoReadSerializer
     model = Video
+    queryset = Video.objects.filter(is_active=True)
 
 
 class VideoDetails(RetrieveAPIView):
@@ -742,6 +744,7 @@ class ImageList(BaseListAPIView):
 
     serializer_class = ImageReadSerializer
     model = Image
+    queryset = Image.objects.filter(is_active=True, image_type="L")
 
 
 class ImageDetails(RetrieveAPIView):
@@ -765,7 +768,7 @@ class ImageDetails(RetrieveAPIView):
     """
 
     serializer_class = ImageReadSerializer
-    queryset = Image.objects.filter(is_active=True)
+    queryset = Image.objects.filter(is_active=True, image_type="L")
 
 
 class StoryList(BaseListAPIView):
@@ -825,6 +828,7 @@ class StoryList(BaseListAPIView):
 
     serializer_class = StoryReadSerializer
     model = Story
+    queryset = Story.objects.filter(is_active=True)
 
 
 class StoryDetails(RetrieveAPIView):
