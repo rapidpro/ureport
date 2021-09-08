@@ -1,3 +1,7 @@
+v1.1.289
+----------
+ * Merge pull request #773 from rapidpro/dashblock-api
+
 v1.1.286
 ----------
  * Merge pull request #771 from rapidpro/poll-cloud-query
