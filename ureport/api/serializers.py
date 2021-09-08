@@ -5,6 +5,7 @@ import json
 
 import six
 from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock
 from dash.orgs.models import Org
 from dash.stories.models import Story
 from rest_framework import serializers
@@ -183,3 +184,37 @@ class ImageReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = ("id", "image_url", "image_type", "org", "name", "created_on")
+
+
+class DashblockReadSerializer(serializers.ModelSerializer):
+    dashblock_type = SerializerMethodField()
+    image_url = SerializerMethodField()
+    path = SerializerMethodField()
+
+    def get_image_url(self, obj):
+        if obj.image:
+            return generate_absolute_url_from_file(self.context["request"], obj.image, "800x600")
+        return None
+
+    def get_dashblock_type(self, obj):
+        return obj.dashblock_type.slug
+
+    def get_path(self, obj):
+        return obj.link
+
+    class Meta:
+        model = DashBlock
+        fields = (
+            "id",
+            "org",
+            "dashblock_type",
+            "priority",
+            "title",
+            "summary",
+            "content",
+            "image_url",
+            "color",
+            "path",
+            "video_id",
+            "tags",
+        )
