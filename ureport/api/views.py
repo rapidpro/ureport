@@ -600,7 +600,6 @@ class NewsItemList(BaseListAPIView):
 
     serializer_class = NewsItemReadSerializer
     model = NewsItem
-    queryset = NewsItem.objects.filter(is_active=True)
 
 
 class NewsItemDetails(RetrieveAPIView):
@@ -676,7 +675,6 @@ class VideoList(BaseListAPIView):
 
     serializer_class = VideoReadSerializer
     model = Video
-    queryset = Video.objects.filter(is_active=True)
 
 
 class VideoDetails(RetrieveAPIView):
@@ -746,7 +744,10 @@ class ImageList(BaseListAPIView):
 
     serializer_class = ImageReadSerializer
     model = Image
-    queryset = Image.objects.filter(is_active=True, image_type="L")
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(is_active=True, image_type="L")
 
 
 class ImageDetails(RetrieveAPIView):
@@ -830,7 +831,6 @@ class StoryList(BaseListAPIView):
 
     serializer_class = StoryReadSerializer
     model = Story
-    queryset = Story.objects.filter(is_active=True)
 
 
 class StoryDetails(RetrieveAPIView):
@@ -939,7 +939,10 @@ class DashBlockList(BaseListAPIView):
     serializer_class = DashblockReadSerializer
     model = DashBlock
     exclusive_params = ("dashblock_type",)
-    queryset = DashBlock.objects.filter(is_active=True).select_related("dashblock_type")
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(is_active=True).select_related("dashblock_type")
 
     def filter_queryset(self, queryset):
         params = self.request.query_params
