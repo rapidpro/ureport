@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+from dash.dashblocks.models import DashBlock
 from dash.orgs.models import Org
 from dash.stories.models import Story
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from ureport.api.serializers import (
+    DashblockReadSerializer,
     ImageReadSerializer,
     NewsItemReadSerializer,
     OrgReadSerializer,
@@ -598,7 +600,6 @@ class NewsItemList(BaseListAPIView):
 
     serializer_class = NewsItemReadSerializer
     model = NewsItem
-    queryset = NewsItem.objects.filter(is_active=True)
 
 
 class NewsItemDetails(RetrieveAPIView):
@@ -674,7 +675,6 @@ class VideoList(BaseListAPIView):
 
     serializer_class = VideoReadSerializer
     model = Video
-    queryset = Video.objects.filter(is_active=True)
 
 
 class VideoDetails(RetrieveAPIView):
@@ -744,7 +744,10 @@ class ImageList(BaseListAPIView):
 
     serializer_class = ImageReadSerializer
     model = Image
-    queryset = Image.objects.filter(is_active=True, image_type="L")
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(is_active=True, image_type="L")
 
 
 class ImageDetails(RetrieveAPIView):
@@ -828,7 +831,6 @@ class StoryList(BaseListAPIView):
 
     serializer_class = StoryReadSerializer
     model = Story
-    queryset = Story.objects.filter(is_active=True)
 
 
 class StoryDetails(RetrieveAPIView):
@@ -839,7 +841,7 @@ class StoryDetails(RetrieveAPIView):
 
     Example:
 
-        GET /api/v1/story/1/
+        GET /api/v1/stories/1/
 
     Response is a single story:
 
@@ -866,3 +868,121 @@ class StoryDetails(RetrieveAPIView):
 
     serializer_class = StoryReadSerializer
     queryset = Story.objects.filter(is_active=True)
+
+
+class DashBlockList(BaseListAPIView):
+    """
+    This endpoint allows you to list dashblocks.
+
+    ## Listing dashblocks
+
+    By making a ```GET``` request you can list all the dashblocks for an organization, filtering them as needed.  Each
+    dashblock has the following attributes:
+
+    * **id** - the ID of the story (int)
+    * **org** - the ID of the org that owns this dashblock (int)
+    * **dashblock_type** - the type of the dashblock (string)  filterable as `dashblock_type`.
+    * **priority** - the priority of the dashblock (int)
+    * **title** - the title of the dashblock (string)
+    * **summary** - the summary of the dashblock (string)
+    * **content** - the content of the dashblock (string), this can be containing HTML code data as the content is managed as WYSIWYG
+    * **image_url** - the image url of the dashblock image (string)
+    * **color** - the color of the dashblock (string)
+    * **path** - the path of the dashblock to use after the root URL (string)
+    * **video_id** - the video_id of the dashblock image (string)
+    * **tags** - the tags of the dashblock (string)
+
+
+    Example:
+
+        GET /api/v1/dashblocks/org/1/
+
+    Response is the list of dashblocks of the organisation
+        {
+            "count": 13,
+            "next": "http://test.ureport.in/api/v1/dashblocks/org/1/?limit=10&offset=10",
+            "previous": null,
+            "results": [
+                {
+                  "id": 12,
+                  "org": 1,
+                  "dashblock_type": "photos",
+                  "priority": 1,
+                  "title": "CRC@30",
+                  "summary": null,
+                  "content": "Happy Child",
+                  "image_url": "http://test.ureport.in/media/cache/ac/a7/aca7e7ae228e107b9186e77f222faabe.jpg",
+                  "color": null,
+                  "path": null,
+                  "video_id": null,
+                  "tags": null
+                },
+                {
+                  "id": 54,
+                  "org": 1,
+                  "dashblock_type": "photos",
+                  "priority": 0,
+                  "title": "World Mental Day Poll",
+                  "summary": null,
+                  "content": "",
+                  "image_url": "http://test.ureport.in/media/cache/0b/0b/0b0ba4976ac12600c1e1b957d21f5d6d.jpg",
+                  "color": null,
+                  "link": null,
+                  "video_id": null,
+                  "tags": null
+                }
+            ]
+        }
+
+    """
+
+    serializer_class = DashblockReadSerializer
+    model = DashBlock
+    exclusive_params = ("dashblock_type",)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(is_active=True).select_related("dashblock_type")
+
+    def filter_queryset(self, queryset):
+        params = self.request.query_params
+
+        # filter by UUID (optional)
+        d_type = params.get("dashblock_type")
+        if d_type:
+            queryset = queryset.filter(dashblock_type__slug=d_type)
+
+        return queryset
+
+
+class DashBlockDetails(RetrieveAPIView):
+    """
+    This endpoint allows you to a single dashblock.
+
+    ## A single dashblock
+
+    Example:
+
+        GET /api/v1/dashblocks/1/
+
+    Response is a single dashblock:
+
+        {
+            "id": 1,
+            "org": 1,
+            "dashblock_type": "about",
+            "priority": 0,
+            "title": "About",
+            "summary": "U-report is a free SMS social monitoring.",
+            "content": "U-report is a free SMS social monitoring tool for community participation, designed to address issues that the population cares about.",
+            "image_url": "http://test.ureport.in/media/cache/0b/0b/0b0ba4976ac12600c1e1b957d21f5d6d.jpg",
+            "color": null,
+            "link": null,
+            "video_id": null,
+            "tags": null
+        },
+    """
+
+    serializer_class = DashblockReadSerializer
+    model = DashBlock
+    queryset = DashBlock.objects.filter(is_active=True)
