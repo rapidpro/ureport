@@ -8,6 +8,7 @@ from random import randint
 import pytz
 import six
 from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock, DashBlockType
 from dash.orgs.models import Org
 from dash.stories.models import Story
 from mock import patch
@@ -50,6 +51,59 @@ class UreportAPITests(APITestCase):
             self.superuser, self.second_featured_poll, "another test question", "uuid2"
         )
         self.non_synced_poll = self.create_poll("unsynced", has_synced=False)
+
+        self.type_foo = DashBlockType.objects.create(
+            name="Foo",
+            slug="foo",
+            description="foo description",
+            has_title=True,
+            has_image=True,
+            has_rich_text=True,
+            has_summary=True,
+            has_link=True,
+            has_color=False,
+            has_video=False,
+            has_tags=True,
+            has_gallery=False,
+            created_by=self.superuser,
+            modified_by=self.superuser,
+        )
+
+        self.type_bar = DashBlockType.objects.create(
+            name="Bar",
+            slug="bar",
+            description="bar description",
+            has_title=False,
+            has_image=False,
+            has_rich_text=False,
+            has_summary=False,
+            has_link=False,
+            has_color=False,
+            has_video=False,
+            has_tags=True,
+            has_gallery=False,
+            created_by=self.superuser,
+            modified_by=self.superuser,
+        )
+
+        self.dashblock1 = DashBlock.objects.create(
+            dashblock_type=self.type_foo,
+            org=self.uganda,
+            title="First",
+            content="First content",
+            summary="first summary",
+            created_by=self.superuser,
+            modified_by=self.superuser,
+        )
+
+        self.dashblock2 = DashBlock.objects.create(
+            dashblock_type=self.type_bar,
+            org=self.uganda,
+            content="Bar content",
+            summary="bar summary here",
+            created_by=self.superuser,
+            modified_by=self.superuser,
+        )
 
         self.news_item = self.create_news_item("Some item")
         self.create_video("Test Video")
@@ -546,4 +600,44 @@ class UreportAPITests(APITestCase):
         self.assertDictEqual(
             dict(category),
             dict(name=story.category.name, image_url=CategoryReadSerializer().get_image_url(story.category)),
+        )
+
+    def test_dashblock_by_org_list(self):
+        url_uganda = "/api/v1/dashblocks/org/%d/" % self.uganda.pk
+        url_nigeria = "/api/v1/dashblocks/org/%d/" % self.nigeria.pk
+        response = self.client.get(url_uganda)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["count"], DashBlock.objects.filter(org=self.uganda).count())
+        response = self.client.get(url_nigeria)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["count"], DashBlock.objects.filter(org=self.nigeria).count())
+
+        response = self.client.get(url_uganda + "?dashblock_type=foo")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data["count"], DashBlock.objects.filter(org=self.uganda, dashblock_type__slug="foo").count()
+        )
+
+    def test_single_dashblock(self):
+        url = "/api/v1/dashblocks/%d/" % self.dashblock1.pk
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        dashblock = self.dashblock1
+
+        self.assertDictEqual(
+            response.data,
+            dict(
+                id=dashblock.pk,
+                org=dashblock.org.pk,
+                dashblock_type=dashblock.dashblock_type.slug,
+                priority=dashblock.priority,
+                title=dashblock.title,
+                summary=dashblock.summary,
+                content=dashblock.content,
+                image_url=None,
+                color=dashblock.color,
+                path=dashblock.link,
+                video_id=dashblock.video_id,
+                tags=dashblock.tags,
+            ),
         )

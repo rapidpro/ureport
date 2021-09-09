@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Marko Mitrovic <mmitrovic@unicef.org>, 2021\n"
 "Language-Team: Serbian (Latin) (Serbia) (https://www.transifex.com/rapidpro/teams/226/sr_RS@latin/)\n"
@@ -423,6 +423,14 @@ msgstr "Slike koje će se prikazati uz priču i pregled. (opciono)"
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Slike koje će se prikazati uz priču i pregled. (opciono)"
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "Naziv kategorije"
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "Ukloni stavku?"
 
@@ -706,6 +714,9 @@ msgstr "Stranice"
 msgid "Jobs"
 msgstr "Poslovi"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr "Slike"
 
@@ -823,6 +834,9 @@ msgstr "POSLEDNJA OBAVEŠTENJA"
 
 msgid "Backends"
 msgstr "Pozadinski sistemi"
+
+msgid "Add os Select tags"
+msgstr ""
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1408,6 +1422,11 @@ msgstr "Broj prioriteta ovog pitanja u anketi"
 
 msgid "The Rule this response category is based on"
 msgstr "Pravilo na kom je bazirana ova kategorija odgovora"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "Naslov ankete"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Vaša org nema definisanu API token konfiguraciju"

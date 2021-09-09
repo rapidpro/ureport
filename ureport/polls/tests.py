@@ -9,6 +9,7 @@ import six
 from dash.categories.fields import CategoryChoiceField
 from dash.categories.models import Category, CategoryImage
 from dash.orgs.models import TaskState
+from dash.tags.models import Tag
 from mock import Mock, patch
 from temba_client.exceptions import TembaRateExceededError
 
@@ -20,6 +21,7 @@ from django.template import TemplateSyntaxError
 from django.urls import reverse
 from django.utils import timezone
 
+from ureport.flows.models import FlowResultCategory
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollImage, PollQuestion, PollResponseCategory, PollResult
 from ureport.polls.tasks import (
@@ -50,6 +52,13 @@ class PollTest(UreportTest):
 
         self.education_nigeria = Category.objects.create(
             org=self.nigeria, name="Education", created_by=self.admin, modified_by=self.admin
+        )
+
+        self.tag_uganda = Tag.objects.create(
+            org=self.uganda, name="sports", created_by=self.admin, modified_by=self.admin
+        )
+        self.tag_nigeria = Tag.objects.create(
+            org=self.nigeria, name="news", created_by=self.admin, modified_by=self.admin
         )
 
     @patch("ureport.polls.tasks.update_or_create_questions.delay")
@@ -468,29 +477,32 @@ class PollTest(UreportTest):
             self.login(self.admin)
             response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
             self.assertEqual(response.status_code, 200)
-            self.assertTrue("form" in response.context)
+            self.assertIn("form", response.context)
 
-            self.assertEqual(len(response.context["form"].fields), 5)
-            self.assertTrue("is_featured" in response.context["form"].fields)
-            self.assertTrue("title" in response.context["form"].fields)
-            self.assertTrue("category" in response.context["form"].fields)
+            self.assertEqual(len(response.context["form"].fields), 6)
+            self.assertIn("is_featured", response.context["form"].fields)
+            self.assertIn("title", response.context["form"].fields)
+            self.assertIn("category", response.context["form"].fields)
             self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
             self.assertEqual(
                 list(response.context["form"].fields["category"].choices),
                 [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
             )
-            self.assertTrue("category_image" in response.context["form"].fields)
-            self.assertTrue("loc" in response.context["form"].fields)
+            self.assertIn("category_image", response.context["form"].fields)
+            self.assertIn("poll_tags", response.context["form"].fields)
+            self.assertIn("loc", response.context["form"].fields)
 
             response = self.client.post(create_url, dict(), SERVER_NAME="uganda.ureport.io")
             self.assertTrue(response.context["form"].errors)
 
             self.assertEqual(len(response.context["form"].errors), 2)
-            self.assertTrue("title" in response.context["form"].errors)
-            self.assertTrue("category" in response.context["form"].errors)
+            self.assertIn("title", response.context["form"].errors)
+            self.assertIn("category", response.context["form"].errors)
             self.assertFalse(Poll.objects.all())
 
-            post_data = dict(title="Poll 1", category=self.health_uganda.pk)
+            post_data = dict(
+                title="Poll 1", category=self.health_uganda.pk, poll_tags=[self.tag_uganda.pk, "[NEW_TAG]_Books"]
+            )
 
             response = self.client.post(create_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
             self.assertTrue(Poll.objects.all())
@@ -500,11 +512,15 @@ class PollTest(UreportTest):
             self.assertEquals(poll.backend.slug, "rapidpro")
             self.assertEquals(poll.org, self.uganda)
 
+            self.assertEqual(poll.tags.all().count(), 2)
+            self.assertEqual(set(poll.tags.all().values_list("name", flat=True)), {"Books", "sports"})
+
             self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_poll_flow", args=[poll.pk]))
 
             self.assertEqual(Poll.objects.all().count(), 1)
 
             # new submission should not create a new poll
+            post_data = dict(title="Poll 1", category=self.health_uganda.pk)
             response = self.client.post(create_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
             self.assertEqual(Poll.objects.all().count(), 1)
 
@@ -556,10 +572,10 @@ class PollTest(UreportTest):
 
                 response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
                 self.assertEqual(response.status_code, 200)
-                self.assertTrue("form" in response.context)
+                self.assertIn("form", response.context)
 
-                self.assertEqual(len(response.context["form"].fields), 5)
-                self.assertFalse("backend" in response.context["form"].fields)
+                self.assertEqual(len(response.context["form"].fields), 6)
+                self.assertNotIn("backend", response.context["form"].fields)
 
                 # add the config for a second backend
                 floip_backend = self.uganda.backends.create(
@@ -573,21 +589,22 @@ class PollTest(UreportTest):
 
                 response = self.client.get(create_url, SERVER_NAME="uganda.ureport.io")
                 self.assertEqual(response.status_code, 200)
-                self.assertTrue("form" in response.context)
+                self.assertIn("form", response.context)
 
-                self.assertEqual(len(response.context["form"].fields), 6)
-                self.assertTrue("is_featured" in response.context["form"].fields)
-                self.assertTrue("title" in response.context["form"].fields)
-                self.assertTrue("category" in response.context["form"].fields)
+                self.assertEqual(len(response.context["form"].fields), 7)
+                self.assertIn("is_featured", response.context["form"].fields)
+                self.assertIn("title", response.context["form"].fields)
+                self.assertIn("category", response.context["form"].fields)
                 self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
                 self.assertEqual(
                     list(response.context["form"].fields["category"].choices),
                     [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
                 )
-                self.assertTrue("category_image" in response.context["form"].fields)
-                self.assertTrue("loc" in response.context["form"].fields)
+                self.assertIn("category_image", response.context["form"].fields)
+                self.assertIn("poll_tags", response.context["form"].fields)
+                self.assertIn("loc", response.context["form"].fields)
 
-                self.assertTrue("backend" in response.context["form"].fields)
+                self.assertIn("backend", response.context["form"].fields)
                 self.assertEquals(len(response.context["form"].fields["backend"].choices), 3)
                 self.assertEquals(
                     set(
@@ -789,27 +806,30 @@ class PollTest(UreportTest):
 
             response = self.client.get(uganda_update_url, SERVER_NAME="uganda.ureport.io")
             self.assertEqual(response.status_code, 200)
-            self.assertTrue("form" in response.context)
+            self.assertIn("form", response.context)
 
-            self.assertEqual(len(response.context["form"].fields), 6)
-            self.assertTrue("is_active" in response.context["form"].fields)
-            self.assertTrue("is_featured" in response.context["form"].fields)
-            self.assertTrue("title" in response.context["form"].fields)
-            self.assertTrue("category" in response.context["form"].fields)
+            self.assertEqual(len(response.context["form"].fields), 7)
+            self.assertIn("is_active", response.context["form"].fields)
+            self.assertIn("is_featured", response.context["form"].fields)
+            self.assertIn("title", response.context["form"].fields)
+            self.assertIn("category", response.context["form"].fields)
             self.assertIsInstance(response.context["form"].fields["category"].choices.field, CategoryChoiceField)
             self.assertEqual(
                 list(response.context["form"].fields["category"].choices),
                 [("", "---------"), (self.health_uganda.pk, "uganda - Health")],
             )
-            self.assertTrue("category_image" in response.context["form"].fields)
-            self.assertTrue("loc" in response.context["form"].fields)
+            self.assertIn("category_image", response.context["form"].fields)
+            self.assertIn("poll_tags", response.context["form"].fields)
+            self.assertIn("loc", response.context["form"].fields)
+
+            self.assertEqual(response.context["tags_data"], [dict(id=self.tag_uganda.pk, text=self.tag_uganda.name)])
 
             response = self.client.post(uganda_update_url, dict(), SERVER_NAME="uganda.ureport.io")
-            self.assertTrue("form" in response.context)
+            self.assertIn("form", response.context)
             self.assertTrue(response.context["form"].errors)
             self.assertEqual(len(response.context["form"].errors), 2)
-            self.assertTrue("title" in response.context["form"].errors)
-            self.assertTrue("category" in response.context["form"].errors)
+            self.assertIn("title", response.context["form"].errors)
+            self.assertIn("category", response.context["form"].errors)
 
             post_data = dict(title="title updated", category=self.health_uganda.pk, is_featured=False)
             response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
@@ -818,6 +838,13 @@ class PollTest(UreportTest):
             self.assertFalse(updated_poll.is_featured)
 
             self.assertEqual(response.request["PATH_INFO"], reverse("polls.poll_poll_date", args=[updated_poll.pk]))
+
+            post_data["poll_tags"] = [self.tag_uganda.pk, "[NEW_TAG]_Trending"]
+            response = self.client.post(uganda_update_url, post_data, follow=True, SERVER_NAME="uganda.ureport.io")
+            updated_poll = Poll.objects.get(pk=poll1.pk)
+            self.assertEqual(updated_poll.title, "title updated")
+            self.assertEqual(updated_poll.tags.all().count(), 2)
+            self.assertEqual(set(updated_poll.tags.all().values_list("name", flat=True)), {"Trending", "sports"})
 
     def test_list_poll(self):
         list_url = reverse("polls.poll_list")
@@ -1216,18 +1243,18 @@ class PollTest(UreportTest):
             self.assertFalse(PollStats.objects.all())
 
             poll2 = self.create_poll(self.nigeria, "Poll 2", "flow-uuid", self.education_nigeria, self.admin)
-            self.create_poll_question(self.admin, poll2, "question 1", "step-uuid")
+            poll_question2 = self.create_poll_question(self.admin, poll2, "question 1", "step-uuid")
 
             self.assertFalse(PollStats.objects.all())
-            self.assertFalse(PollStats.objects.filter(question__poll__id=poll.id))
-            self.assertFalse(PollStats.objects.filter(question__poll__id=poll2.id))
+            self.assertFalse(PollStats.objects.filter(flow_result_id=poll_question.flow_result_id))
+            self.assertFalse(PollStats.objects.filter(flow_result_id=poll_question2.flow_result_id))
 
             # rebuild for first poll will rebuild for poll2 as well
             poll.rebuild_poll_results_counts()
 
             self.assertTrue(PollStats.objects.all())
-            self.assertTrue(PollStats.objects.filter(question__poll__id=poll.id))
-            self.assertTrue(PollStats.objects.filter(question__poll__id=poll2.id))
+            self.assertTrue(PollStats.objects.filter(flow_result_id=poll_question.flow_result_id))
+            self.assertTrue(PollStats.objects.filter(flow_result_id=poll_question2.flow_result_id))
 
     def test_delete_poll_results(self):
         poll = self.create_poll(self.nigeria, "Poll 1", "flow-uuid", self.education_nigeria, self.admin)
@@ -1367,10 +1394,12 @@ class PollQuestionTest(UreportTest):
 
         self.create_poll_response_category(poll_question1, "rule-uuid-2", "No")
         PollResponseCategory.objects.filter(category="No").update(is_active=False)
+        FlowResultCategory.objects.filter(category="No").update(is_active=False)
 
         self.assertTrue(poll_question1.is_open_ended())
 
         PollResponseCategory.objects.filter(category="No").update(is_active=True)
+        FlowResultCategory.objects.filter(category="No").update(is_active=True)
 
         self.assertFalse(poll_question1.is_open_ended())
 
@@ -1592,7 +1621,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1603,7 +1634,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1614,7 +1647,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=None,
             location=None,
@@ -1632,7 +1667,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=male_gender,
             location=None,
@@ -1643,7 +1680,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1654,7 +1693,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1664,7 +1705,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=None,
             gender_segment=female_gender,
             location=None,
@@ -1681,7 +1724,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=age_segment_20,
             gender_segment=None,
             location=None,
@@ -1692,7 +1737,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=no_category,
+            flow_result_category=no_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -1703,7 +1750,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=yes_category,
+            flow_result_category=yes_category.flow_result_category,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -1713,7 +1762,9 @@ class PollQuestionTest(UreportTest):
         PollStats.objects.create(
             org=self.uganda,
             question=poll_question1,
+            flow_result=poll_question1.flow_result,
             category=None,
+            flow_result_category=None,
             age_segment=age_segment_25,
             gender_segment=None,
             location=None,
@@ -2542,8 +2593,8 @@ class PollResultsTest(UreportTest):
         poll_stat = PollStats.objects.get()
 
         self.assertEqual(poll_stat.org, self.nigeria)
-        self.assertEqual(poll_stat.question, self.poll_question)
-        self.assertEqual(poll_stat.category, yes_category)
+        self.assertEqual(poll_stat.flow_result, self.poll_question.flow_result)
+        self.assertEqual(poll_stat.flow_result_category, yes_category.flow_result_category)
         self.assertEqual(poll_stat.location, ikeja_boundary)
         self.assertEqual(poll_stat.gender_segment, GenderSegment.objects.get(gender="M"))
         self.assertEqual(poll_stat.age_segment, AgeSegment.objects.get(min_age=0))
@@ -2563,9 +2614,15 @@ class PollResultsTest(UreportTest):
         self.poll.rebuild_poll_results_counts()
         self.assertEqual(PollStats.objects.all().count(), 2)
         self.assertEqual(
-            PollStats.objects.filter(question=self.poll_question).aggregate(Sum("count"))["count__sum"], 2
+            PollStats.objects.filter(flow_result=self.poll_question.flow_result).aggregate(Sum("count"))["count__sum"],
+            2,
         )
-        self.assertEqual(PollStats.objects.filter(category=yes_category).aggregate(Sum("count"))["count__sum"], 2)
+        self.assertEqual(
+            PollStats.objects.filter(flow_result_category=yes_category.flow_result_category).aggregate(Sum("count"))[
+                "count__sum"
+            ],
+            2,
+        )
         self.assertEqual(PollStats.objects.filter(location=ikeja_boundary).aggregate(Sum("count"))["count__sum"], 1)
 
         self.assertEqual(

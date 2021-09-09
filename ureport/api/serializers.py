@@ -5,26 +5,25 @@ import json
 
 import six
 from dash.categories.models import Category
+from dash.dashblocks.models import DashBlock
 from dash.orgs.models import Org
 from dash.stories.models import Story
 from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
+from sorl.thumbnail import get_thumbnail
 
 from ureport.assets.models import Image
 from ureport.news.models import NewsItem, Video
 from ureport.polls.models import Poll
 
 
-def generate_absolute_url_from_file(request, file):
-    return request.build_absolute_uri(file.url)
+def generate_absolute_url_from_file(request, file, thumbnail_geometry):
+    thumnail = get_thumbnail(file, thumbnail_geometry, crop="center", quality=99)
+    return request.build_absolute_uri(thumnail.url)
 
 
 class CategoryReadSerializer(serializers.ModelSerializer):
     image_url = SerializerMethodField()
-
-    class Meta:
-        model = Category
-        fields = ("image_url", "name")
 
     def get_image_url(self, obj):
         image = None
@@ -33,8 +32,12 @@ class CategoryReadSerializer(serializers.ModelSerializer):
         elif obj.get_first_image():
             image = obj.get_first_image()
         if image:
-            return generate_absolute_url_from_file(self.context["request"], image)
+            return generate_absolute_url_from_file(self.context["request"], image, "800x600")
         return None
+
+    class Meta:
+        model = Category
+        fields = ("image_url", "name")
 
 
 class OrgReadSerializer(serializers.ModelSerializer):
@@ -64,8 +67,8 @@ class OrgReadSerializer(serializers.ModelSerializer):
         )
 
     def get_logo_url(self, obj):
-        if obj.logo:
-            return generate_absolute_url_from_file(self.context["request"], obj.logo)
+        if obj.get_logo():
+            return generate_absolute_url_from_file(self.context["request"], obj.get_logo(), "x180")
         return None
 
     def get_gender_stats(self, obj):
@@ -91,6 +94,12 @@ class StoryReadSerializer(serializers.ModelSerializer):
     category = CategoryReadSerializer()
     images = SerializerMethodField()
 
+    def get_images(self, obj):
+        return [
+            generate_absolute_url_from_file(self.context["request"], image.image, "800x600")
+            for image in obj.get_featured_images()
+        ]
+
     class Meta:
         model = Story
         fields = (
@@ -108,20 +117,10 @@ class StoryReadSerializer(serializers.ModelSerializer):
             "created_on",
         )
 
-    def get_images(self, obj):
-        return [
-            generate_absolute_url_from_file(self.context["request"], image.image)
-            for image in obj.get_featured_images()
-        ]
-
 
 class PollReadSerializer(serializers.ModelSerializer):
     category = CategoryReadSerializer()
     questions = SerializerMethodField()
-
-    class Meta:
-        model = Poll
-        fields = ("id", "flow_uuid", "title", "org", "category", "poll_date", "modified_on", "created_on", "questions")
 
     def get_questions(self, obj):
         questions = []
@@ -151,17 +150,21 @@ class PollReadSerializer(serializers.ModelSerializer):
 
         return questions
 
+    class Meta:
+        model = Poll
+        fields = ("id", "flow_uuid", "title", "org", "category", "poll_date", "modified_on", "created_on", "questions")
+
 
 class NewsItemReadSerializer(serializers.ModelSerializer):
     short_description = SerializerMethodField()
     category = CategoryReadSerializer()
 
+    def get_short_description(self, obj):
+        return obj.short_description()
+
     class Meta:
         model = NewsItem
         fields = ("id", "short_description", "category", "title", "description", "link", "org", "created_on")
-
-    def get_short_description(self, obj):
-        return obj.short_description()
 
 
 class VideoReadSerializer(serializers.ModelSerializer):
@@ -175,9 +178,43 @@ class VideoReadSerializer(serializers.ModelSerializer):
 class ImageReadSerializer(serializers.ModelSerializer):
     image_url = SerializerMethodField()
 
+    def get_image_url(self, obj):
+        return generate_absolute_url_from_file(self.context["request"], obj.image, "x180")
+
     class Meta:
         model = Image
         fields = ("id", "image_url", "image_type", "org", "name", "created_on")
 
+
+class DashblockReadSerializer(serializers.ModelSerializer):
+    dashblock_type = SerializerMethodField()
+    image_url = SerializerMethodField()
+    path = SerializerMethodField()
+
     def get_image_url(self, obj):
-        return generate_absolute_url_from_file(self.context["request"], obj.image)
+        if obj.image:
+            return generate_absolute_url_from_file(self.context["request"], obj.image, "800x600")
+        return None
+
+    def get_dashblock_type(self, obj):
+        return obj.dashblock_type.slug
+
+    def get_path(self, obj):
+        return obj.link
+
+    class Meta:
+        model = DashBlock
+        fields = (
+            "id",
+            "org",
+            "dashblock_type",
+            "priority",
+            "title",
+            "summary",
+            "content",
+            "image_url",
+            "color",
+            "path",
+            "video_id",
+            "tags",
+        )

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: LIliya <lilya.lyu@gmail.com>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/rapidpro/teams/226/uk/)\n"
@@ -420,6 +420,12 @@ msgstr ""
 msgid "Image to display on story page and in previews (optional)"
 msgstr ""
 
+msgid "The name of this tag"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr ""
 
@@ -685,6 +691,9 @@ msgstr ""
 msgid "Jobs"
 msgstr ""
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr "Фото"
 
@@ -797,6 +806,9 @@ msgid "LATEST NOTIFICATIONS"
 msgstr ""
 
 msgid "Backends"
+msgstr ""
+
+msgid "Add os Select tags"
 msgstr ""
 
 #, python-format
@@ -1368,6 +1380,9 @@ msgid "The priority number for this question on the poll"
 msgstr ""
 
 msgid "The Rule this response category is based on"
+msgstr ""
+
+msgid "Select tags for this poll"
 msgstr ""
 
 msgid "Your org does not have any API token configuration."

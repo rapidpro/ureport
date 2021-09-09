@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -428,6 +428,14 @@ msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Hình ảnh để hiển thị trên trang câu chuyện và trong bản xem trước (tùy chọn)"
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "Tên của danh mục này"
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "Xóa Mục?"
 
@@ -732,6 +740,9 @@ msgstr "Hình ảnh"
 msgid "Jobs"
 msgstr "Công việc"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr ""
 
@@ -857,6 +868,9 @@ msgstr "ĐỊA ĐIỂM"
 #| msgid "Manage Users"
 msgid "Backends"
 msgstr "Quản lý người dùng"
+
+msgid "Add os Select tags"
+msgstr ""
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1504,6 +1518,11 @@ msgstr "Con số ưu tiên cho câu hỏi này trong cuộc khảo sát"
 
 msgid "The Rule this response category is based on"
 msgstr "Nguyên tắc mà danh mục phản hồi này dựa vào"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "Tiêu đề của khảo sát này"
 
 msgid "Your org does not have any API token configuration."
 msgstr ""

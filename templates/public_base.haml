@@ -407,6 +407,11 @@
                 %a.admin-menu.text-sm.leading-loose(href="{% url 'categories.category_list' %}")
                   - trans "Categories"
   
+            - if request.user.is_superuser or org_perms.tags.tag_list
+              %li
+                %a.admin-menu.text-sm.leading-loose(href="{% url 'tags.tag_list' %}")
+                  - trans "Tags"
+
             %li
               .dropdown.relative.z-700
                 %a.admin-menu.dropdown-button.text-sm.leading-loose(href="#")

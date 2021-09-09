@@ -41,11 +41,15 @@
           %td(style="max-width: 500px;min-width: 300px;")
             %b.detail-link
               - get_value obj 'category'
+
             .detail-link
               %a(href="{% get_field_link 'title' obj %}")
                 %span.big-poll-detail
                   - get_value obj 'title'
-
+                .tags
+                  -for tag in obj.tags.all
+                    %span.tag.is-light
+                      {{tag.name}}
             .detail-link
               .(style="margin: 0 10px;") -
               %a.small-detail-link(href="{% get_field_link 'poll_date' obj %}")

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Syeara Koomkoom, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/rapidpro/teams/226/bn/)\n"
@@ -427,6 +427,14 @@ msgstr "ঘটনার পেইজ এবং প্রিভিউ এর স�
 msgid "Image to display on story page and in previews (optional)"
 msgstr "ঘটনার পেইজ এবং প্রিভিউ এর সাথে সংযুক্ত যে ছবি প্রদর্শন করা হবে (ঐচ্ছিক) "
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr " বিভাগের নাম"
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "বিষয়টি বাদ দিতে চান? "
 
@@ -708,6 +716,9 @@ msgstr "পেইজগুলো"
 msgid "Jobs"
 msgstr "কাজ গুলো"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr "ছবিগুলো"
 
@@ -825,6 +836,9 @@ msgstr "সর্বশেষ নটিফিকেশন"
 
 msgid "Backends"
 msgstr "ব্যাকএন্ড"
+
+msgid "Add os Select tags"
+msgstr ""
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1424,6 +1438,11 @@ msgstr "এই পোল এর প্রশ্নের অগ্রাধি�
 
 msgid "The Rule this response category is based on"
 msgstr "এই উত্তর এর বিষয় টি যে নিয়ম এর উপর ভিত্তি করে করা হয়েছে "
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "এই পোল এর শিরোনাম "
 
 msgid "Your org does not have any API token configuration."
 msgstr "আপনার প্রতিষ্ঠানের কোন API টোকেন কনফিগারেশন নেই"

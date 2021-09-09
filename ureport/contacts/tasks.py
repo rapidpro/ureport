@@ -32,12 +32,14 @@ def rebuild_contacts_counts():
 
 @app.task(name="contacts.check_contacts_count_mismatch")
 def check_contacts_count_mismatch():
-    orgs = Org.objects.filter(is_active=True)
+    r = get_redis_connection()
+    orgs = Org.objects.filter(is_active=True).order_by("pk")
 
     error_counts = dict()
     mismatch_counts = dict()
 
     for org in orgs:
+        key = TaskState.get_lock_key(org, "contact-pull")
         db_contacts_counts = Contact.objects.filter(org=org, is_active=True).count()
         counter_counts = ReportersCounter.get_counts(org).get("total-reporters", 0)
 
@@ -46,15 +48,24 @@ def check_contacts_count_mismatch():
         if db_contacts_counts:
             pct_diff = count_diff / db_contacts_counts
 
-        if count_diff:
-            mismatch_counts[f"{org.id}"] = dict(
-                db=db_contacts_counts, count=counter_counts, count_diff=count_diff, pct_diff=pct_diff
-            )
-
-        if count_diff > 50 or pct_diff > 0.025:
-            error_counts[f"{org.id}"] = dict(
-                db=db_contacts_counts, count=counter_counts, count_diff=count_diff, pct_diff=pct_diff
-            )
+        if r.get(key):
+            if count_diff:
+                mismatch_counts[f"{org.id}"] = dict(
+                    db=db_contacts_counts,
+                    count=counter_counts,
+                    count_diff=count_diff,
+                    pct_diff=pct_diff,
+                    message="contact task running",
+                )
+        else:
+            if count_diff:
+                mismatch_counts[f"{org.id}"] = dict(
+                    db=db_contacts_counts, count=counter_counts, count_diff=count_diff, pct_diff=pct_diff
+                )
+            if count_diff > 50 or pct_diff > 0.025:
+                error_counts[f"{org.id}"] = dict(
+                    db=db_contacts_counts, count=counter_counts, count_diff=count_diff, pct_diff=pct_diff
+                )
 
     output = dict(mismatch_counts=mismatch_counts, error_counts=error_counts)
     cache.set("contact_counts_status", output, None)

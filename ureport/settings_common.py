@@ -661,6 +661,7 @@ INSTALLED_APPS = (
     "dash.stories",
     "dash.utils",
     "dash.categories",
+    "dash.tags",
     # ureport apps
     "ureport.admins",
     "ureport.api",
@@ -793,6 +794,7 @@ GROUP_PERMISSIONS = {
         "polls.featuredresponse.*",
         "stories.story.*",
         "stories.storyimage.*",
+        "tags.tag.*",
         "users.user_profile",
     ),
     "Editors": (
@@ -811,6 +813,7 @@ GROUP_PERMISSIONS = {
         "polls.featuredresponse.*",
         "stories.story.*",
         "stories.storyimage.*",
+        "tags.tag.*",
         "users.user_profile",
     ),
     "Global": ("countries.countryalias.*",),
@@ -1528,6 +1531,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_south_asia.png",
         countries_codes=[],  # ["AFG", "BGD", "BTN", "IND", "MDV", "NPL", "PAK", "LKA"],
         count_link="http://southasia.ureport.in/count/",
+    ),
+    dict(
+        name="Sverige",
+        host="//sverige.ureport.in",
+        flag="flag_sverige.png",
+        countries_codes=["SWE"],
+        count_link="http://sverige.ureport.in/count/",
     ),
     dict(
         name="Tanzania",

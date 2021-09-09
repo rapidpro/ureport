@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Nathallia Salvador <nathallia.salvador@ilhasoft.com.br>, 2020\n"
 "Language-Team: Norwegian (https://www.transifex.com/rapidpro/teams/226/no/)\n"
@@ -423,6 +423,14 @@ msgstr "Bilde som skal vises på historiesiden og i forhåndsvisninger. (valgfri
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Bilde som skal vises på historiesiden og i forhåndsvisninger (valgfritt)"
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "Navnet på denne kategorien"
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "Vil du slette objektet?"
 
@@ -702,6 +710,9 @@ msgstr "Sider"
 msgid "Jobs"
 msgstr "Jobber"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr "Bilder"
 
@@ -819,6 +830,9 @@ msgstr "SISTE VARSLER"
 
 msgid "Backends"
 msgstr "Backends"
+
+msgid "Add os Select tags"
+msgstr ""
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1398,6 +1412,11 @@ msgstr "Nummer på prioritering av dette spørsmålet i undersøkelsen"
 
 msgid "The Rule this response category is based on"
 msgstr "Regelen denne responskategorien er basert på"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "Tittelen for denne undersøkelsen"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Din organisasjon har ingen API token konfigurasjon."
