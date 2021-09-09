@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Abraham Okiror <okiroribra@gmail.com>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/rapidpro/teams/226/ar/)\n"
@@ -434,6 +434,14 @@ msgstr "الصورة التي تريد إدراجها في صفحة عرض ال�
 msgid "Image to display on story page and in previews (optional)"
 msgstr "الصورة التي تريد إدراجها في صفحة عرض المقال (إختياري) "
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "اسم الفئة "
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "حذف "
 
@@ -701,6 +709,9 @@ msgstr ""
 msgid "Jobs"
 msgstr "الأعمال"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr ""
 
@@ -818,6 +829,9 @@ msgid "LATEST NOTIFICATIONS"
 msgstr ""
 
 msgid "Backends"
+msgstr ""
+
+msgid "Add os Select tags"
 msgstr ""
 
 #, python-format
@@ -1402,6 +1416,11 @@ msgstr "ترتيب أولوية هذا السؤال على الاستطلاع"
 
 msgid "The Rule this response category is based on"
 msgstr "القاعدة التي تستند عليها فئة الإجابة هذه"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "عنوان الإستطلاع "
 
 msgid "Your org does not have any API token configuration."
 msgstr ""

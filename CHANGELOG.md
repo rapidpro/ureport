@@ -1,3 +1,53 @@
+v1.1.289
+----------
+ * Merge pull request #773 from rapidpro/dashblock-api
+
+v1.1.286
+----------
+ * Merge pull request #771 from rapidpro/poll-cloud-query
+ * Adjust poll word cloud query
+
+v1.1.285
+----------
+ * Merge pull request #770 from rapidpro/fix-engagements-queries
+ * Update engagment stats to start using flow result foreign key
+
+v1.1.284
+----------
+ * Merge pull request #769 from rapidpro/fix-responded
+ * Fix query for responded counts
+
+v1.1.283
+----------
+ * Merge pull request #753 from rapidpro/flow-results-6
+ * Merge pull request #768 from Ilhasoft/feature/sverige_flag
+ * feature: sverige flag
+ * Merge branch 'main' of github.com:rapidpro/ureport into flow-results-6
+ * Build a unique set of stats going forward, for existing stats check if we need to filter by question
+
+v1.1.282
+----------
+ * Merge pull request #767 from rapidpro/fix-localization
+ * Adjust styles
+ * Make text localizable
+
+v1.1.281
+----------
+ * Merge pull request #766 from rapidpro/add-tags
+ * Merge pull request #765 from rapidpro/dependabot/npm_and_yarn/path-parse-1.0.7
+ * Remove is_active tag check
+ * Bump path-parse from 1.0.6 to 1.0.7
+
+v1.1.277
+----------
+ * Add MO file
+ * Merge pull request #764 from rapidpro/contact-counts-monitor
+ * Merge pull request #763 from rapidpro/update-README
+ * Add message for when the contact task is running on status for mismatch counts
+ * Update README
+ * Merge pull request #761 from rapidpro/translations_django-po--master_sv_SE
+ * Apply translations in sv_SE
+
 v1.1.276
 ----------
  * Merge pull request #756 from rapidpro/update-contacts-triggers

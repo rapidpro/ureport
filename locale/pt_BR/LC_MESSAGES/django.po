@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Viração Educomunicação <comunicacao@viracao.org>, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/rapidpro/teams/226/pt_BR/)\n"
@@ -426,6 +426,14 @@ msgstr "Imagem a ser exibida na página de história e na visualização. (Opcio
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Imagem a ser exibida na página de história e na visualização. (Opcional) "
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "O nome desta categoria"
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "Remover item?"
 
@@ -710,6 +718,9 @@ msgstr "Páginas"
 msgid "Jobs"
 msgstr "Empregos"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr "Fotos"
 
@@ -827,6 +838,9 @@ msgstr "Últimas notificações"
 
 msgid "Backends"
 msgstr "Backends"
+
+msgid "Add os Select tags"
+msgstr ""
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1428,6 +1442,11 @@ msgstr "A ordem de prioridade para essa pergunta na enquete"
 
 msgid "The Rule this response category is based on"
 msgstr "A regra que esta categoria de resposta é baseada em"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "O título dessa enquete"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Sua organização não possui nenhuma configuração de token da API."

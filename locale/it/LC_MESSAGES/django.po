@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Chiara Saturnino <csaturnino@unicef.org>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/rapidpro/teams/226/it/)\n"
@@ -425,6 +425,14 @@ msgstr "L'immagine da visualizzare sulla pagina della storia e nelle anteprime (
 msgid "Image to display on story page and in previews (optional)"
 msgstr "L'immagine da visualizzare sulla pagina della storia e nelle anteprime (opzionale)"
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "Il nome di questa categoria"
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "Rimuovere l'elemento?"
 
@@ -705,6 +713,9 @@ msgstr "Pagine"
 msgid "Jobs"
 msgstr "Opportunità di lavoro"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr "Foto"
 
@@ -822,6 +833,9 @@ msgstr "Ultime notifiche"
 
 msgid "Backends"
 msgstr "Backends"
+
+msgid "Add os Select tags"
+msgstr ""
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1428,6 +1442,11 @@ msgstr "Il numero di priorità per questa domanda sul sondaggio"
 
 msgid "The Rule this response category is based on"
 msgstr "La regola su cui è basata questa categoria di risposta"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "Il titolo per questo Sondaggio"
 
 msgid "Your org does not have any API token configuration."
 msgstr "La tua organizzazione non ha nessuna configurazione API token "

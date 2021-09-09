@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Farhodhon Jurahonov <farhodj@gmail.com>, 2020\n"
 "Language-Team: Uzbek (https://www.transifex.com/rapidpro/teams/226/uz/)\n"
@@ -424,6 +424,14 @@ msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan tasvir (ixtiyoriy)."
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Hikoya sahifasi va prevyularda namoyish etiladigan tasvir (ixtiyoriy)."
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "Ushbu toifaning nomi"
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "Element olib tashlansinmi?"
 
@@ -703,6 +711,9 @@ msgstr "Sahifalar"
 msgid "Jobs"
 msgstr "Ish o'rinlari"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr "Fotosur'atlar"
 
@@ -822,6 +833,9 @@ msgstr "SO'NGGI BILDIRISHLAR"
 
 msgid "Backends"
 msgstr "Bekendlar"
+
+msgid "Add os Select tags"
+msgstr ""
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1416,6 +1430,11 @@ msgstr "So'rovdagi mazkur savol uchun ustivor raqam"
 
 msgid "The Rule this response category is based on"
 msgstr "Ushbu javob toifasi asoslanadigan Qoida"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "Ushbu so'rov uchun sarlavha"
 
 msgid "Your org does not have any API token configuration."
 msgstr "Tashkilotingizning hech qanday API tokeni konfiguratsiyasi yo'q"

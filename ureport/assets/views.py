@@ -4,6 +4,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from dash.orgs.views import OrgObjPermsMixin, OrgPermsMixin
 from smartmin.views import SmartCreateView, SmartCRUDL, SmartListView, SmartUpdateView
 
+from django.db.models.functions import Lower
+
 from ureport.assets.models import Image
 
 
@@ -34,7 +36,7 @@ class ImageCRUDL(SmartCRUDL):
             if not self.get_user().is_superuser:
                 queryset = queryset.filter(org=self.derive_org())
 
-            return queryset
+            return queryset.order_by(Lower("org__name"), Lower("name"))
 
     class Create(OrgPermsMixin, SmartCreateView):
         def derive_fields(self):

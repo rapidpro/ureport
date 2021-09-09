@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 20:31+0000\n"
+"POT-Creation-Date: 2021-09-03 13:49+0000\n"
 "PO-Revision-Date: 2016-10-26 13:08+0000\n"
 "Last-Translator: I made suwancita <isuwancita@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/rapidpro/ureport/language/id/)\n"
@@ -427,6 +427,14 @@ msgstr "Gambar untuk ditampilkan pada halaman cerita dan di preview. (pilihan)"
 msgid "Image to display on story page and in previews (optional)"
 msgstr "Image to display on story page and in previews (optional)"
 
+#, fuzzy
+#| msgid "The name of this category"
+msgid "The name of this tag"
+msgstr "Nama kategori ini"
+
+msgid "Delete"
+msgstr ""
+
 msgid "Remove Item?"
 msgstr "Hapus daftar?"
 
@@ -732,6 +740,9 @@ msgstr "Gambar"
 msgid "Jobs"
 msgstr "Pekerjaan"
 
+msgid "Tags"
+msgstr ""
+
 msgid "Photos"
 msgstr ""
 
@@ -857,6 +868,9 @@ msgstr "LOKASI"
 #| msgid "Manage Users"
 msgid "Backends"
 msgstr "Kelola Pengguna"
+
+msgid "Add os Select tags"
+msgstr ""
 
 #, python-format
 msgid "There is currently %(counter)s new poll syncing. Polls are displayed on the public site once they have completely synced their results."
@@ -1507,6 +1521,11 @@ msgstr "Nomor prioritas untuk pertanyaan ini dalam polling"
 
 msgid "The Rule this response category is based on"
 msgstr "Aturan kategori respons ini didasarkan pada"
+
+#, fuzzy
+#| msgid "The title for this Poll"
+msgid "Select tags for this poll"
+msgstr "Judul dari jajak pendapat ini"
 
 msgid "Your org does not have any API token configuration."
 msgstr ""
