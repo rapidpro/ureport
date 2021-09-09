@@ -623,6 +623,8 @@ class ContactActivity(models.Model):
 
     ward = models.CharField(max_length=255, null=True)
 
+    scheme = models.CharField(max_length=16, null=True)
+
     date = models.DateField(help_text="The starting date for for the month")
 
     class Meta:
