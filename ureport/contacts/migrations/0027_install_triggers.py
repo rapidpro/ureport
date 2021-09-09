@@ -5,13 +5,10 @@ from django.db import migrations
 from ureport.sql import InstallSQL
 
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contacts', '0026_contact_scheme'),
+        ("contacts", "0026_contact_scheme"),
     ]
 
-    operations = [
-        InstallSQL("contacts_0027")
-    ]
+    operations = [InstallSQL("contacts_0027")]
