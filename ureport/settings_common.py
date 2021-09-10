@@ -1049,6 +1049,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://belize.ureport.in/count/",
     ),
     dict(
+        name="Benin",
+        host="//benin.ureport.in/",
+        flag="flag_benin.png",
+        countries_codes=["BEN"],
+        count_link="http://benin.ureport.in/count/",
+    ),
+    dict(
         name="Bolivia",
         host="//bolivia.ureport.in/",
         flag="flag_bolivia.png",
