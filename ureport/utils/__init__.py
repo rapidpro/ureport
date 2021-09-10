@@ -610,6 +610,47 @@ def get_sign_up_rate_age(org, time_filter):
     return output_data
 
 
+def get_sign_up_rate_scheme(org, time_filter):
+    now = timezone.now()
+    year_ago = now - timedelta(days=365)
+    start = year_ago.replace(day=1)
+    tz = pytz.timezone("UTC")
+
+    org_contacts_counts = get_org_contacts_counts(org)
+
+    registered_on_counts = {k[18:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_scheme")}
+
+    registered_on_counts_by_scheme = {}
+
+    dates_map = get_time_filter_dates_map(time_filter=time_filter)
+    keys = list(set(dates_map.values()))
+
+    for date_key, date_count in registered_on_counts.items():
+        date_key_date, scheme = date_key.split(":")
+        parsed_time = tz.localize(datetime.strptime(date_key_date, "%Y-%m-%d")).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        if parsed_time < start:
+            continue
+
+        date_key_date = dates_map.get(str(parsed_time.date()))
+
+        if scheme not in registered_on_counts_by_scheme:
+            registered_on_counts_by_scheme[scheme] = defaultdict(int)
+        registered_on_counts_by_scheme[scheme][date_key_date] += date_count
+
+    output_data = []
+    for scheme in registered_on_counts_by_scheme.keys():
+        scheme_data = registered_on_counts_by_scheme[scheme]
+        data = dict()
+        for key in keys:
+            data[key] = scheme_data[key]
+
+        output_data.append(dict(name=scheme, data=data))
+
+    return output_data
+
+
 def get_registration_stats(org):
     now = timezone.now()
     six_months_ago = now - timedelta(days=180)
