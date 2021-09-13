@@ -6,15 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('stats', '0014_contactactivity_scheme'),
+        ("stats", "0014_contactactivity_scheme"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SchemeSegment',
+            name="SchemeSegment",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('scheme', models.CharField(max_length=16, unique=True)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("scheme", models.CharField(max_length=16, unique=True)),
             ],
         ),
     ]
