@@ -36,6 +36,10 @@ class AgeSegment(models.Model):
         return [elt for elt in min_ages if age >= elt][-1]
 
 
+class SchemeSegment(models.Model):
+    scheme = models.CharField(max_length=16, unique=True)
+
+
 class PollStats(models.Model):
     DATA_TIME_FILTERS = {3: _("90 Days"), 6: _("6 Months"), 12: _("12 Months")}
 
