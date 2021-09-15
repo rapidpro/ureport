@@ -183,10 +183,10 @@ def populate_schemes():
         contact_pull_key = TaskState.get_lock_key(org, "contact-pull")
         with r.lock(contact_pull_key):
 
-            last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.pk, "rapidpro")
+            last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.id, "rapidpro")
             cache.delete(last_fetch_date_key)
 
-            pull_contacts(org)
+            pull_contacts(org.id)
 
             Contact.recalculate_reporters_stats(org)
 
@@ -197,7 +197,7 @@ def populate_schemes():
             update_cache_org_contact_counts(org)
 
         logger.info(f"Finished updating schemes counts on contacts for org #{org.id}")
-        contact_ids = Contact.objects.filter(org_id=org.pk).values_list("id", flat=True)
+        contact_ids = Contact.objects.filter(org_id=org.id).values_list("id", flat=True)
 
         contacts_count = 0
 
