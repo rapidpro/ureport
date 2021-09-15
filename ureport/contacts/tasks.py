@@ -172,6 +172,8 @@ def populate_schemes():
     r = get_redis_connection()
     orgs = Org.objects.filter(is_active=True)
     for org in orgs:
+        start_time = time.time()
+
         schemes_populated_key = f"schemes_populated:{org.id}"
 
         if cache.get(schemes_populated_key):
@@ -181,6 +183,11 @@ def populate_schemes():
         logger.info(f"Starting populating schemes for org #{org.id}")
 
         contact_pull_key = TaskState.get_lock_key(org, "contact-pull")
+
+        if Contact.objects.filter(org_id=org.id, scheme=None).exists():
+            # for ourself to make sure our task below will be run
+            r.delete(contact_pull_key)
+
         with r.lock(contact_pull_key):
 
             last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.id, "rapidpro")
@@ -189,14 +196,15 @@ def populate_schemes():
             pull_contacts(org.id)
 
             Contact.recalculate_reporters_stats(org)
-
-        logger.info(f"Finished populating schemes on contacts for org #{org.id}")
+        elapsed = time.time() - start_time
+        logger.info(f"Finished populating schemes on contacts for org #{org.id} in {elapsed:.1f} seconds")
 
         contact_count_cache_updates_key = TaskState.get_lock_key(org, "update-org-contact-counts")
         with r.lock(contact_count_cache_updates_key):
             update_cache_org_contact_counts(org)
 
-        logger.info(f"Finished updating schemes counts on contacts for org #{org.id}")
+        elapsed = time.time() - start_time
+        logger.info(f"Finished updating schemes counts on contacts for org #{org.id} in {elapsed:.1f} seconds")
         contact_ids = Contact.objects.filter(org_id=org.id).values_list("id", flat=True)
 
         contacts_count = 0
@@ -211,16 +219,21 @@ def populate_schemes():
 
             contacts_count += len(batch_ids)
 
+            elapsed = time.time() - start_time
             logger.info(
-                f"Populating schemes on contacts activities and poll results batch {contacts_count} for org #{org.id}"
+                f"Populating schemes on contacts activities and poll results batch {contacts_count} for org #{org.id} in {elapsed:.1f} seconds"
             )
 
-        logger.info(f"Finished populating schemes on contacts activities and poll results for org #{org.id}")
+        elapsed = time.time() - start_time
+        logger.info(
+            f"Finished populating schemes on contacts activities and poll results for org #{org.id} in {elapsed:.1f} seconds"
+        )
 
         polls = Poll.objects.filter(is_active=True, org_id=org.id)
         for poll in polls:
             poll.rebuild_poll_results_counts()
 
-        logger.info(f"Finished populating schemes on poll stats for org #{org.id}")
+        elapsed = time.time() - start_time
+        logger.info(f"Finished populating schemes on poll stats for org #{org.id} in {elapsed:.1f} seconds")
 
         cache.set(schemes_populated_key, datetime_to_json_date(timezone.now()), None)
