@@ -15,7 +15,8 @@ from celery.utils.log import get_task_logger
 
 from ureport.celery import app
 from ureport.contacts.models import Contact, ReportersCounter
-from ureport.utils import datetime_to_json_date, update_cache_org_contact_counts
+from ureport.stats.models import ContactActivity
+from ureport.utils import chunk_list, datetime_to_json_date, update_cache_org_contact_counts
 
 logger = get_task_logger(__name__)
 
@@ -162,3 +163,64 @@ def pull_contacts(org, ignored_since, ignored_until):
         }
 
     return results
+
+
+@app.task(name="contacts.populate_schemes")
+def populate_schemes():
+    from ureport.polls.models import PollResult, Poll
+
+    r = get_redis_connection()
+    orgs = Org.objects.filter(is_active=True)
+    for org in orgs:
+        schemes_populated_key = f"schemes_populated:{org.id}"
+
+        if cache.get(schemes_populated_key):
+            logger.info(f"Skipping populating schemes for org #{org.id}")
+            continue
+
+        logger.info(f"Starting populating schemes for org #{org.id}")
+
+        contact_pull_key = TaskState.get_lock_key(org, "contact-pull")
+        with r.lock(contact_pull_key):
+
+            last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.pk, "rapidpro")
+            cache.delete(last_fetch_date_key)
+
+            pull_contacts(org)
+
+            Contact.recalculate_reporters_stats(org)
+
+        logger.info(f"Finished populating schemes on contacts for org #{org.id}")
+
+        contact_count_cache_updates_key = TaskState.get_lock_key(org, "update-org-contact-counts")
+        with r.lock(contact_count_cache_updates_key):
+            update_cache_org_contact_counts(org)
+
+        logger.info(f"Finished updating schemes counts on contacts for org #{org.id}")
+        contact_ids = Contact.objects.filter(org_id=org.pk).values_list("id", flat=True)
+
+        contacts_count = 0
+
+        for batch in chunk_list(contact_ids, 1000):
+            batch_ids = list(batch)
+            contacts = Contact.objects.filter(id__in=batch_ids)
+            for contact in contacts:
+                ContactActivity.objects.filter(org_id=org.id, contact=contact.uuid).update(scheme=contact.scheme)
+
+                PollResult.object.filter(org_id=org.id, contact=contact.uuid).update(scheme=contact.scheme)
+
+            contacts_count += len(batch_ids)
+
+            logger.info(
+                f"Populating schemes on contacts activities and poll results batch {contacts_count} for org #{org.id}"
+            )
+
+        logger.info(f"Finished populating schemes on contacts activities and poll results for org #{org.id}")
+
+        polls = Poll.objects.filter(is_active=True, org_id=org.id)
+        for poll in polls:
+            poll.rebuild_poll_results_counts()
+
+        logger.info(f"Finished populating schemes on poll stats for org #{org.id}")
+
+        cache.set(schemes_populated_key, datetime_to_json_date(timezone.now()), None)
