@@ -193,9 +193,71 @@ def populate_schemes():
             last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.id, "rapidpro")
             cache.delete(last_fetch_date_key)
 
-            pull_contacts(org.id)
+            backends = org.backends.filter(is_active=True)
+            for backend_obj in backends:
+                backend = org.get_backend(backend_slug=backend_obj.slug)
+
+                last_fetch_date_key = Contact.CONTACT_LAST_FETCHED_CACHE_KEY % (org.pk, backend_obj.slug)
+
+                until = datetime_to_json_date(timezone.now())
+                since = cache.get(last_fetch_date_key, None)
+
+                if not since:
+                    logger.info("First time run for org #%d. Will sync all contacts" % org.pk)
+
+                start = time.time()
+
+                backend_fields_results = backend.pull_fields(org)
+
+                fields_created = backend_fields_results[SyncOutcome.created]
+                fields_updated = backend_fields_results[SyncOutcome.updated]
+                fields_deleted = backend_fields_results[SyncOutcome.deleted]
+                ignored = backend_fields_results[SyncOutcome.ignored]
+
+                logger.info(
+                    "Fetched contact fields for org #%d. "
+                    "Created %s, Updated %s, Deleted %d, Ignored %d"
+                    % (org.pk, fields_created, fields_updated, fields_deleted, ignored)
+                )
+                logger.info("Fetch fields for org #%d took %ss" % (org.pk, time.time() - start))
+
+                start_boundaries = time.time()
+
+                backend_boundaries_results = backend.pull_boundaries(org)
+
+                boundaries_created = backend_boundaries_results[SyncOutcome.created]
+                boundaries_updated = backend_boundaries_results[SyncOutcome.updated]
+                boundaries_deleted = backend_boundaries_results[SyncOutcome.deleted]
+                ignored = backend_boundaries_results[SyncOutcome.ignored]
+
+                logger.info(
+                    "Fetched boundaries for org #%d. "
+                    "Created %s, Updated %s, Deleted %d, Ignored %d"
+                    % (org.pk, boundaries_created, boundaries_updated, boundaries_deleted, ignored)
+                )
+
+                logger.info("Fetch boundaries for org #%d took %ss" % (org.pk, time.time() - start_boundaries))
+                start_contacts = time.time()
+
+                backend_contact_results, resume_cursor = backend.pull_contacts(org, since, until)
+
+                contacts_created = backend_contact_results[SyncOutcome.created]
+                contacts_updated = backend_contact_results[SyncOutcome.updated]
+                contacts_deleted = backend_contact_results[SyncOutcome.deleted]
+                ignored = backend_contact_results[SyncOutcome.ignored]
+
+                cache.set(last_fetch_date_key, until, None)
+
+                logger.info(
+                    "Fetched contacts for org #%d. "
+                    "Created %s, Updated %s, Deleted %d, Ignored %d"
+                    % (org.pk, contacts_created, contacts_updated, contacts_deleted, ignored)
+                )
+
+                logger.info("Fetch contacts for org #%d took %ss" % (org.pk, time.time() - start_contacts))
 
             Contact.recalculate_reporters_stats(org)
+
         elapsed = time.time() - start_time
         logger.info(f"Finished populating schemes on contacts for org #{org.id} in {elapsed:.1f} seconds")
 
