@@ -440,7 +440,7 @@ class Poll(SmartModel):
                     if scheme:
                         scheme_id = scheme_dict.get(scheme, None)
                         if scheme_id is None:
-                            scheme_obj = SchemeSegment.objects.get_or_create(scheme=scheme.lower())
+                            scheme_obj, created_flag = SchemeSegment.objects.get_or_create(scheme=scheme.lower())
                             scheme_dict[scheme.lower()] = scheme_obj.id
 
                     location_id = None
