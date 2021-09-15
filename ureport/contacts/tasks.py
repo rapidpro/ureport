@@ -207,7 +207,7 @@ def populate_schemes():
             for contact in contacts:
                 ContactActivity.objects.filter(org_id=org.id, contact=contact.uuid).update(scheme=contact.scheme)
 
-                PollResult.object.filter(org_id=org.id, contact=contact.uuid).update(scheme=contact.scheme)
+                PollResult.objects.filter(org_id=org.id, contact=contact.uuid).update(scheme=contact.scheme)
 
             contacts_count += len(batch_ids)
 
