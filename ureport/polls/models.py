@@ -1209,6 +1209,8 @@ class PollResult(models.Model):
 
     born = models.IntegerField(null=True)
 
+    scheme = models.CharField(max_length=16, null=True)
+
     def generate_poll_stats(self):
         generated_stats = dict()
 

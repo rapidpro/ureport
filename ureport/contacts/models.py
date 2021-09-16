@@ -107,6 +107,8 @@ class Contact(models.Model):
 
     ward = models.CharField(max_length=255, verbose_name=_("Ward Field"), null=True)
 
+    scheme = models.CharField(max_length=16, null=True)
+
     @classmethod
     def get_or_create(cls, org, uuid):
 

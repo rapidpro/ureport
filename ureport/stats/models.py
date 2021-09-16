@@ -36,6 +36,10 @@ class AgeSegment(models.Model):
         return [elt for elt in min_ages if age >= elt][-1]
 
 
+class SchemeSegment(models.Model):
+    scheme = models.CharField(max_length=16, unique=True)
+
+
 class PollStats(models.Model):
     DATA_TIME_FILTERS = {3: _("90 Days"), 6: _("6 Months"), 12: _("12 Months")}
 
@@ -64,6 +68,8 @@ class PollStats(models.Model):
 
     gender_segment = models.ForeignKey(GenderSegment, null=True, on_delete=models.SET_NULL)
 
+    scheme_segment = models.ForeignKey(SchemeSegment, null=True, on_delete=models.SET_NULL)
+
     location = models.ForeignKey(Boundary, null=True, on_delete=models.SET_NULL)
 
     date = models.DateTimeField(null=True)
@@ -88,6 +94,7 @@ class PollStats(models.Model):
                 "flow_result_category_id",
                 "age_segment_id",
                 "gender_segment_id",
+                "scheme_segment_id",
                 "location_id",
                 "date",
             )
@@ -99,6 +106,7 @@ class PollStats(models.Model):
                 "flow_result_category_id",
                 "age_segment_id",
                 "gender_segment_id",
+                "scheme_segment_id",
                 "location_id",
                 "date",
             )[:50000]
@@ -143,6 +151,11 @@ class PollStats(models.Model):
                 else:
                     where_sql += '"gender_segment_id" IS NULL AND'
 
+                if distinct_set.scheme_segment_id is not None:
+                    where_sql += '"scheme_segment_id" = %s AND' % distinct_set.scheme_segment_id
+                else:
+                    where_sql += '"scheme_segment_id" IS NULL AND'
+
                 if distinct_set.location_id is not None:
                     where_sql += '"location_id" = %s AND' % distinct_set.location_id
                 else:
@@ -162,8 +175,8 @@ class PollStats(models.Model):
                       LIMIT 10000
                   ) RETURNING "count"
                 )
-                INSERT INTO stats_pollstats("org_id", "question_id", "flow_result_id", "category_id", "flow_result_category_id", "age_segment_id", "gender_segment_id", "location_id", "date", "count", "is_squashed")
-                VALUES (%%s, %%s, %%s, %%s, %%s, %%s, %%s, %%s, date_trunc('day', TIMESTAMP %%s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
+                INSERT INTO stats_pollstats("org_id", "question_id", "flow_result_id", "category_id", "flow_result_category_id", "age_segment_id", "gender_segment_id", "scheme_segment_id", "location_id", "date", "count", "is_squashed")
+                VALUES (%%s, %%s, %%s, %%s, %%s, %%s, %%s, %%s, %%s, date_trunc('day', TIMESTAMP %%s)::TIMESTAMP, GREATEST(0, (SELECT SUM("count") FROM deleted)), TRUE);
                 """ % {
                     "where_sql": where_sql
                 }
@@ -176,6 +189,7 @@ class PollStats(models.Model):
                     distinct_set.flow_result_category_id,
                     distinct_set.age_segment_id,
                     distinct_set.gender_segment_id,
+                    distinct_set.scheme_segment_id,
                     distinct_set.location_id,
                     str(distinct_set.date),
                 )
@@ -622,6 +636,8 @@ class ContactActivity(models.Model):
     district = models.CharField(max_length=255, null=True)
 
     ward = models.CharField(max_length=255, null=True)
+
+    scheme = models.CharField(max_length=16, null=True)
 
     date = models.DateField(help_text="The starting date for for the month")
 
