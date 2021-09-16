@@ -1,3 +1,10 @@
+v1.1.291
+----------
+ * Merge pull request #776 from rapidpro/add-benin
+ * Add Benin icon
+ * Merge pull request #774 from rapidpro/support-scheme-1
+ * WIP add Benin to countries list
+
 v1.1.289
 ----------
  * Merge pull request #773 from rapidpro/dashblock-api
