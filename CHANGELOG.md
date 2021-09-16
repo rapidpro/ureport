@@ -1,3 +1,18 @@
+v1.1.292
+----------
+ * Merge pull request #775 from rapidpro/support-scheme-2
+ * Fix returned tuple assignment for get_or_create
+ * Copy actually task code to not go through the decorator
+ * For pull contacts from scratch if we have contacts without scheme set
+ * Fix query
+ * Fix argument to pull_contact method
+ * Add task to populate the schemes
+ * Save scheme on contact activity
+ * Save scheme on poll stats
+ * Add sign rate by scheme function
+ * Run code checks
+ * Write scheme for contacts and poll results when syncing
+
 v1.1.291
 ----------
  * Merge pull request #776 from rapidpro/add-benin
