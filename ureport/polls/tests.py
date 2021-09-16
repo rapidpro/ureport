@@ -2389,6 +2389,7 @@ class PollResultsTest(UreportTest):
                     "",
                     "",
                     "",
+                    "",
                     self.now.replace(hour=0, minute=0, second=0, microsecond=0),
                 )
             ],
@@ -2406,6 +2407,7 @@ class PollResultsTest(UreportTest):
             state="R-LAGOS",
             district="R-oyo",
             ward="R-IKEJA",
+            scheme="tel",
         )
 
         gen_stats = poll_result2.generate_poll_stats()
@@ -2429,6 +2431,7 @@ class PollResultsTest(UreportTest):
                     state,
                     district,
                     ward,
+                    "tel",
                     self.now.replace(hour=0, minute=0, second=0, microsecond=0),
                 )
             ],
@@ -2446,6 +2449,7 @@ class PollResultsTest(UreportTest):
             state="R-LAGOS",
             district="R-oyo",
             ward="R-IKEJA",
+            scheme="facebook",
         )
 
         gen_stats = poll_result3.generate_poll_stats()
@@ -2468,6 +2472,7 @@ class PollResultsTest(UreportTest):
                     state,
                     district,
                     ward,
+                    "facebook",
                     self.now.replace(hour=0, minute=0, second=0, microsecond=0),
                 )
             ],
@@ -2487,6 +2492,7 @@ class PollResultsTest(UreportTest):
             state="R-LAGOS",
             district="R-oyo",
             ward="R-IKEJA",
+            scheme="tel",
         )
 
         gen_stats = poll_result4.generate_poll_stats()
@@ -2509,6 +2515,7 @@ class PollResultsTest(UreportTest):
                     state,
                     district,
                     ward,
+                    "tel",
                     self.now.replace(hour=0, minute=0, second=0, microsecond=0),
                 )
             ],
@@ -2527,7 +2534,7 @@ class PollResultsTest(UreportTest):
         self.assertEqual(len(gen_stats.keys()), 1)
         self.assertEqual(
             list(gen_stats.keys()),
-            [(self.nigeria.id, self.poll_question.flow_result.result_uuid, "", "", "", "", "", "", None)],
+            [(self.nigeria.id, self.poll_question.flow_result.result_uuid, "", "", "", "", "", "", "", None)],
         )
 
     def test_poll_results_stats(self):

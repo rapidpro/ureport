@@ -322,7 +322,7 @@ class Poll(SmartModel):
 
     def rebuild_poll_results_counts(self):
         from ureport.utils import chunk_list
-        from ureport.stats.models import PollStats, AgeSegment, GenderSegment
+        from ureport.stats.models import PollStats, AgeSegment, GenderSegment, SchemeSegment
         from ureport.locations.models import Boundary
         import time
 
@@ -382,6 +382,7 @@ class Poll(SmartModel):
 
                 gender_dict = {elt.gender.lower(): elt.id for elt in GenderSegment.objects.all()}
                 age_dict = {elt.min_age: elt.id for elt in AgeSegment.objects.all()}
+                scheme_dict = {elt.scheme.lower(): elt.id for elt in SchemeSegment.objects.all()}
 
                 boundaries = Boundary.objects.filter(org_id=org_id)
                 location_dict = {elt.osm_id.upper(): elt.id for elt in boundaries}
@@ -410,7 +411,7 @@ class Poll(SmartModel):
 
                 poll_stats_obj_to_insert = []
                 for stat_tuple in stats_dict.keys():
-                    org_id, ruleset, category, born, gender, state, district, ward, date = stat_tuple
+                    org_id, ruleset, category, born, gender, state, district, ward, scheme, date = stat_tuple
                     count = stats_dict.get(stat_tuple)
                     stat_kwargs = dict(org_id=org_id, count=count, date=date)
 
@@ -435,6 +436,13 @@ class Poll(SmartModel):
                     if born:
                         age_id = age_dict.get(AgeSegment.get_age_segment_min_age(max(poll_year - int(born), 0)))
 
+                    scheme_id = None
+                    if scheme:
+                        scheme_id = scheme_dict.get(scheme, None)
+                        if scheme_id is None:
+                            scheme_obj, created_flag = SchemeSegment.objects.get_or_create(scheme=scheme.lower())
+                            scheme_dict[scheme.lower()] = scheme_obj.id
+
                     location_id = None
                     if ward:
                         location_id = location_dict.get(ward)
@@ -453,6 +461,8 @@ class Poll(SmartModel):
                         stat_kwargs["age_segment_id"] = age_id
                     if gender_id:
                         stat_kwargs["gender_segment_id"] = gender_id
+                    if scheme_id:
+                        stat_kwargs["scheme_segment_id"] = scheme_id
                     if location_id:
                         stat_kwargs["location_id"] = location_id
 
@@ -1224,6 +1234,7 @@ class PollResult(models.Model):
         ward = ""
         born = ""
         gender = ""
+        scheme = ""
         text = ""
         date = None
         if self.date:
@@ -1261,7 +1272,10 @@ class PollResult(models.Model):
         if self.gender:
             gender = self.gender.lower()
 
-        generated_stats[(self.org_id, ruleset, category, born, gender, state, district, ward, date)] = 1
+        if self.scheme:
+            scheme = self.scheme.lower()
+
+        generated_stats[(self.org_id, ruleset, category, born, gender, state, district, ward, scheme, date)] = 1
         return generated_stats
 
     class Meta:

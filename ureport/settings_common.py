@@ -955,6 +955,10 @@ CELERYBEAT_SCHEDULE = {
         "args": ("ureport.stats.tasks.refresh_engagement_data", "slow"),
     },
     "rebuild-poll-results-count": {"task": "polls.rebuild_counts", "schedule": crontab(hour=4, minute=0)},
+    "populate-schemes": {
+        "task": "contacts.populate_schemes",
+        "schedule": crontab(hour=4, minute=0, day_of_week="thu,sun"),
+    },
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=6, minute=0),
