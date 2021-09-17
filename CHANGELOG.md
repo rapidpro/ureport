@@ -1,3 +1,8 @@
+v1.1.293
+----------
+ * Merge pull request #777 from rapidpro/make_many_different_task_to_backfill
+ * Distribute the backfill task for schemes
+
 v1.1.292
 ----------
  * Merge pull request #775 from rapidpro/support-scheme-2
