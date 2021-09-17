@@ -174,9 +174,7 @@ def populate_contact_schemes(org, since, until):
 
     if cache.get(schemes_populated_key):
         logger.info(f"Skipping populating schemes for org #{org.id}")
-        populate_contact_activities_schemes.apply_async(
-            (org.id,),
-        )
+        populate_contact_activities_schemes.apply_async((org.id,), queue="slow")
         return
 
     logger.info(f"Starting populating schemes for org #{org.id}")
@@ -267,9 +265,7 @@ def populate_contact_schemes(org, since, until):
     elapsed = time.time() - start_time
     logger.info(f"Finished updating schemes counts on contacts for org #{org.id} in {elapsed:.1f} seconds")
     cache.set(schemes_populated_key, datetime_to_json_date(timezone.now()), None)
-    populate_contact_activities_schemes.apply_async(
-        (org.id,),
-    )
+    populate_contact_activities_schemes.apply_async((org.id,), queue="slow")
 
 
 @app.task(name="contacts.populate_contact_activities_schemes")
