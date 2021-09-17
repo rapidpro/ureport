@@ -1,3 +1,8 @@
+v1.1.294
+----------
+ * Merge pull request #778 from rapidpro/use-slow-queue-to-backfill
+ * Use the slow queue to backfill the schemes
+
 v1.1.293
 ----------
  * Merge pull request #777 from rapidpro/make_many_different_task_to_backfill
