@@ -1,3 +1,35 @@
+v1.1.294
+----------
+ * Merge pull request #778 from rapidpro/use-slow-queue-to-backfill
+ * Use the slow queue to backfill the schemes
+
+v1.1.293
+----------
+ * Merge pull request #777 from rapidpro/make_many_different_task_to_backfill
+ * Distribute the backfill task for schemes
+
+v1.1.292
+----------
+ * Merge pull request #775 from rapidpro/support-scheme-2
+ * Fix returned tuple assignment for get_or_create
+ * Copy actually task code to not go through the decorator
+ * For pull contacts from scratch if we have contacts without scheme set
+ * Fix query
+ * Fix argument to pull_contact method
+ * Add task to populate the schemes
+ * Save scheme on contact activity
+ * Save scheme on poll stats
+ * Add sign rate by scheme function
+ * Run code checks
+ * Write scheme for contacts and poll results when syncing
+
+v1.1.291
+----------
+ * Merge pull request #776 from rapidpro/add-benin
+ * Add Benin icon
+ * Merge pull request #774 from rapidpro/support-scheme-1
+ * WIP add Benin to countries list
+
 v1.1.289
 ----------
  * Merge pull request #773 from rapidpro/dashblock-api

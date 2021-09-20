@@ -954,8 +954,9 @@ CELERYBEAT_SCHEDULE = {
     },
     "rebuild-poll-results-count": {"task": "polls.rebuild_counts", "schedule": crontab(hour=4, minute=0)},
     "populate-schemes": {
-        "task": "contacts.populate_schemes",
-        "schedule": crontab(hour=4, minute=0, day_of_week="thu,sun"),
+        "task": "dash.orgs.tasks.trigger_org_task",
+        "schedule": crontab(hour=6, minute=0),
+        "args": ("ureport.contacts.tasks.populate_contact_schemes", "slow"),
     },
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
@@ -1049,6 +1050,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_belize.png",
         countries_codes=["BLZ"],
         count_link="http://belize.ureport.in/count/",
+    ),
+    dict(
+        name="Benin",
+        host="//benin.ureport.in/",
+        flag="flag_benin.png",
+        countries_codes=["BEN"],
+        count_link="http://benin.ureport.in/count/",
     ),
     dict(
         name="Bolivia",
