@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UReport\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 15:40+0000\n"
+"POT-Creation-Date: 2021-09-21 16:03+0000\n"
 "PO-Revision-Date: 2017-11-07 07:04+0000\n"
 "Last-Translator: Brian Cotter <brian_d_cotter@yahoo.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/rapidpro/ureport/language/vi/)\n"
@@ -1889,6 +1889,11 @@ msgstr ""
 
 msgid "Age"
 msgstr ""
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Lưu thay đổi"
 
 #, fuzzy
 #| msgid "Population"

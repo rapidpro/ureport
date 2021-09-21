@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 15:40+0000\n"
+"POT-Creation-Date: 2021-09-21 16:03+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: AIex Petrov <alexandrupetrov@gmail.com>, 2019\n"
 "Language-Team: Romanian (https://www.transifex.com/rapidpro/teams/226/ro/)\n"
@@ -1780,6 +1780,11 @@ msgstr "12 Luni"
 
 msgid "Age"
 msgstr "Vârsta"
+
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Salvează modificările"
 
 msgid "Location"
 msgstr "Locația"

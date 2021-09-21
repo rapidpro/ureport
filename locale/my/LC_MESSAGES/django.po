@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 15:40+0000\n"
+"POT-Creation-Date: 2021-09-21 16:03+0000\n"
 "PO-Revision-Date: 2019-05-15 20:27+0000\n"
 "Last-Translator: Sandar Linn <slinn@unicef.org>, 2019\n"
 "Language-Team: Burmese (https://www.transifex.com/rapidpro/teams/226/my/)\n"
@@ -1689,6 +1689,9 @@ msgid "12 Months"
 msgstr ""
 
 msgid "Age"
+msgstr ""
+
+msgid "Channels"
 msgstr ""
 
 msgid "Location"
