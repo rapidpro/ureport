@@ -1781,6 +1781,11 @@ msgstr "12 Luni"
 msgid "Age"
 msgstr "Vârsta"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Salvează modificările"
+
 msgid "Location"
 msgstr "Locația"
 

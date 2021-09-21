@@ -1749,6 +1749,11 @@ msgstr "12 meseci"
 msgid "Age"
 msgstr "Godine"
 
+#, fuzzy
+#| msgid "Save Changes"
+msgid "Channels"
+msgstr "Sačuvaj promene"
+
 msgid "Location"
 msgstr "Lokacija"
 

@@ -422,6 +422,26 @@ def get_age_stats(org):
     return json.dumps(sorted([dict(name=k, y=v) for k, v in age_stats.items()], key=lambda i: i["name"]))
 
 
+def get_schemes_stats(org):
+    org_contacts_counts = get_org_contacts_counts(org)
+    schemes_counts = {k[7:]: v for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]}
+
+    total = 0
+    schemes_stats_data = defaultdict(int)
+    for scheme, count in schemes_counts.items():
+        total += count
+        if scheme == "tel":
+            schemes_stats_data["SMS"] += count
+        else:
+            schemes_stats_data[scheme.upper()] += count
+
+    schemes_stats = schemes_stats_data
+    if total > 0:
+        schemes_stats = {k: int(round(v * 100 / float(total))) for k, v in schemes_stats_data.items()}
+
+    return sorted([dict(name=k, y=v) for k, v in schemes_stats.items()], key=lambda i: i["name"])
+
+
 def get_sign_up_rate(org, time_filter):
     now = timezone.now()
     year_ago = now - timedelta(days=365)
@@ -646,7 +666,11 @@ def get_sign_up_rate_scheme(org, time_filter):
         for key in keys:
             data[key] = scheme_data[key]
 
-        output_data.append(dict(name=scheme, data=data))
+        name = scheme.upper()
+        if name == "TEL":
+            name = "SMS"
+
+        output_data.append(dict(name=name, data=data))
 
     return output_data
 
@@ -1037,5 +1061,7 @@ Org.get_ureporters_locations_response_rates = get_ureporters_locations_response_
 Org.get_sign_up_rate = get_sign_up_rate
 Org.get_sign_up_rate_gender = get_sign_up_rate_gender
 Org.get_sign_up_rate_age = get_sign_up_rate_age
+Org.get_sign_up_rate_scheme = get_sign_up_rate_scheme
+Org.get_schemes_stats = get_schemes_stats
 Org.get_logo = get_logo
 Org.get_sign_up_rate_location = get_sign_up_rate_location
