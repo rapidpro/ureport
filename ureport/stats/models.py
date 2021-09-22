@@ -346,9 +346,14 @@ class PollStats(models.Model):
         )
 
         schemes = SchemeSegment.objects.all().values("scheme", "id")
+        org_contacts_counts = org.get_org_contacts_counts()
+        org_schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]]
 
         output_data = []
         for scheme in schemes:
+            if scheme["scheme"] not in org_schemes:
+                continue
+
             responses = (
                 PollStats.objects.filter(
                     org=org, date__gte=start, scheme_segment_id=scheme["id"], flow_result_id__in=flow_result_ids
@@ -527,9 +532,14 @@ class PollStats(models.Model):
         )
 
         schemes = SchemeSegment.objects.all().values("scheme", "id")
+        org_contacts_counts = org.get_org_contacts_counts()
+        org_schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]]
 
         output_data = []
         for scheme in schemes:
+            if scheme["scheme"] not in org_schemes:
+                continue
+
             polled_stats = (
                 PollStats.objects.filter(
                     org=org, date__gte=start, scheme_segment_id=scheme["id"], flow_result_id__in=flow_result_ids
@@ -851,17 +861,18 @@ class ContactActivity(models.Model):
         year_ago = now - timedelta(days=365)
         start = year_ago.replace(day=1).date()
 
-        schemes = SchemeSegment.objects.all().values("scheme")
+        org_contacts_counts = org.get_org_contacts_counts()
+        schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]]
 
         output_data = []
         for scheme in schemes:
             activities = (
-                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, scheme=scheme["scheme"])
+                ContactActivity.objects.filter(org=org, date__lte=today, date__gte=start, scheme=scheme)
                 .values("date")
                 .annotate(Count("id"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
-            name = scheme["scheme"].upper()
+            name = scheme.upper()
             if name == "TEL":
                 name = "SMS"
 

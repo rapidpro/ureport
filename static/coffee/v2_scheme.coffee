@@ -10,11 +10,13 @@ showSchemeChart = (id, data) ->
       plotBorderWidth: null
       plotShadow: false
       type: 'pie'
+      width: 450
     }
     title: null
     credits: { enabled: false }
     tooltip: {
-      pointFormat: '<b>{point.percentage:.1f}%</b>'
+      pointFormat: '<b>{point.percentage:.1f}%</b> </br></br> {point.y}'
+      useHTML: true
     }
     accessibility: {
       point: {
@@ -26,9 +28,11 @@ showSchemeChart = (id, data) ->
         allowPointSelect: true,
         cursor: 'pointer',
         colors: colors,
+        size: 200,
         dataLabels: {
-          enabled: false,
-          format: '<b>{point.name}</b>:</br> {point.percentage:.1f} %'
+          enabled: true,
+          format: '<b>{point.name}</b>:</br> {point.percentage:.1f}%',
+          color: 'white'
         }
       }
     }
