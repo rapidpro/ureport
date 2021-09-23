@@ -22,7 +22,7 @@ from sentry_sdk import capture_exception
 
 from ureport.locations.models import Boundary
 from ureport.polls.models import Poll, PollResult
-from ureport.stats.models import PollStats, GenderSegment, AgeSegment
+from ureport.stats.models import PollStats, GenderSegment, AgeSegment, SchemeSegment
 
 GLOBAL_COUNT_CACHE_KEY = "global_count"
 
@@ -424,18 +424,37 @@ def get_age_stats(org):
 
 def get_schemes_stats(org):
     org_contacts_counts = get_org_contacts_counts(org)
-    schemes_counts = {k[7:]: v for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]}
+    schemes_counts = {
+        k[7:]: v for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:] and k[7:] != "ext"
+    }
 
     total = 0
     schemes_stats_data = defaultdict(int)
     for scheme, count in schemes_counts.items():
         total += count
-        if scheme == "tel":
-            schemes_stats_data["SMS"] += count
-        else:
-            schemes_stats_data[scheme.upper()] += count
 
-    return sorted([dict(name=k, y=v) for k, v in schemes_stats_data.items()], key=lambda i: i["name"])
+        name = SchemeSegment.SCHEME_DISPLAY.get(scheme, scheme.upper())
+        if not name:
+            continue
+        schemes_stats_data[name] += count
+
+    scheme_stats = schemes_stats_data
+    if total > 0:
+        scheme_stats = {k: int(round(v * 100 / float(total))) for k, v in schemes_stats_data.items()}
+
+    other_stat = 0
+    output_dict = dict()
+    for name, v in scheme_stats.items():
+        if v <= 5:
+            other_stat += v
+        else:
+            output_dict[name] = v
+
+    output = sorted([dict(name=k, y=v) for k, v in output_dict.items()], key=lambda i: i["name"])
+
+    if other_stat:
+        output.append(dict(name="OTHERS", y=other_stat))
+    return output
 
 
 def get_sign_up_rate(org, time_filter):
@@ -636,7 +655,7 @@ def get_sign_up_rate_scheme(org, time_filter):
 
     registered_on_counts = {k[18:]: v for k, v in org_contacts_counts.items() if k.startswith("registered_scheme")}
 
-    schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:]]
+    schemes = [k[7:] for k, v in org_contacts_counts.items() if k.startswith("scheme:") if k[7:] and k[7:] != "ext"]
     registered_on_counts_by_scheme = {}
 
     for scheme in schemes:
@@ -666,10 +685,9 @@ def get_sign_up_rate_scheme(org, time_filter):
         for key in keys:
             data[key] = scheme_data[key]
 
-        name = scheme.upper()
-        if name == "TEL":
-            name = "SMS"
-
+        name = SchemeSegment.SCHEME_DISPLAY.get(scheme, scheme.upper())
+        if not name:
+            continue
         output_data.append(dict(name=name, data=data))
 
     return output_data

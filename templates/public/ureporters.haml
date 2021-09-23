@@ -68,7 +68,7 @@
           .flex.inline-block
             .relative.w-full(style="height:250px")
               {{ schemes_stats|json_script:"schemes_stats" }}
-              #schemes-pie.h-full.absolute.scheme-chart(data-aos="fade" data-graph-type="scheme-chart"  data-stats="schemes_stats")
+              #schemes-pie.h-full.absolute.scheme-chart(data-aos="fade" data-graph-type="scheme-chart"  data-stats="schemes_stats" data-bar-color='{{ org|config:"light1_color"|default:"#FFD100"}}' data-label-color="white")
 
       -if show_maps
         .flex-1.text-white.bg-dark-blue(class="{% if is_rtl_org %}vertical-angle-right{% else %}vertical-angle-left{% endif %}")
