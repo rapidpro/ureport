@@ -37,6 +37,9 @@ class AgeSegment(models.Model):
 
 
 class SchemeSegment(models.Model):
+
+    SCHEME_DISPLAY = {"tel": "SMS", "twitterid": "TWITTER", "ext": None}
+
     scheme = models.CharField(max_length=16, unique=True)
 
 
@@ -364,10 +367,9 @@ class PollStats(models.Model):
             )
             series = PollStats.get_counts_data(responses, time_filter)
 
-            name = scheme["scheme"].upper()
-            if name == "TEL":
-                name = "SMS"
-
+            name = SchemeSegment.SCHEME_DISPLAY.get(scheme["scheme"], scheme["scheme"].upper())
+            if not name:
+                continue
             output_data.append(dict(name=name, data=series))
         return output_data
 
@@ -557,10 +559,9 @@ class PollStats(models.Model):
             )
             gender_rate_series = PollStats.get_response_rate_data(polled_stats, responded_stats, time_filter)
 
-            name = scheme["scheme"].upper()
-            if name == "TEL":
-                name = "SMS"
-
+            name = SchemeSegment.SCHEME_DISPLAY.get(scheme["scheme"], scheme["scheme"].upper())
+            if not name:
+                continue
             output_data.append(dict(name=name, data=gender_rate_series))
 
         return output_data
@@ -872,9 +873,10 @@ class ContactActivity(models.Model):
                 .annotate(Count("id"))
             )
             series = ContactActivity.get_activity_data(activities, time_filter)
-            name = scheme.upper()
-            if name == "TEL":
-                name = "SMS"
+
+            name = SchemeSegment.SCHEME_DISPLAY.get(scheme, scheme.upper())
+            if not name:
+                continue
 
             output_data.append(dict(name=name, data=series))
 
