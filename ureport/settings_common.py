@@ -1320,6 +1320,13 @@ COUNTRY_FLAGS_SITES = [
         count_link="http://kiribati.ureport.in/count/",
     ),
     dict(
+        name="Kyrgyzstan",
+        host="//kyrgyzstan.ureport.in/",
+        flag="flag_kyrgyzstan.png",
+        countries_codes=["KGZ"],
+        count_link="http://kyrgyzstan.ureport.in/count/",
+    ),
+    dict(
         name="Lebanon",
         host="//lebanon.ureport.in/",
         flag="flag_lebanon.png",
