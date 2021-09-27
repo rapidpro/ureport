@@ -345,7 +345,7 @@ def populate_poll_results_schemes(org_id):
     elapsed = time.time() - start_time
     logger.info(f"Finished populating schemes on poll results for org #{org_id} in {elapsed:.1f} seconds")
 
-    polls = Poll.objects.filter(is_active=True, org_id=org_id)
+    polls = Poll.objects.filter(is_active=True, org_id=org_id, stopped_syncing=False)
     for poll in polls:
         poll.rebuild_poll_results_counts()
 
