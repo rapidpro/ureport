@@ -956,6 +956,11 @@ CELERYBEAT_SCHEDULE = {
         "args": ("ureport.stats.tasks.refresh_engagement_data", "slow"),
     },
     "rebuild-poll-results-count": {"task": "polls.rebuild_counts", "schedule": crontab(hour=4, minute=0)},
+    "populate-schemes": {
+        "task": "dash.orgs.tasks.trigger_org_task",
+        "schedule": crontab(hour=6, minute=0),
+        "args": ("ureport.contacts.tasks.populate_contact_schemes", "slow"),
+    },
     "clear-old-results": {
         "task": "dash.orgs.tasks.trigger_org_task",
         "schedule": crontab(hour=6, minute=0),
@@ -1048,6 +1053,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_belize.png",
         countries_codes=["BLZ"],
         count_link="http://belize.ureport.in/count/",
+    ),
+    dict(
+        name="Benin",
+        host="//benin.ureport.in/",
+        flag="flag_benin.png",
+        countries_codes=["BEN"],
+        count_link="http://benin.ureport.in/count/",
     ),
     dict(
         name="Bolivia",
@@ -1307,6 +1319,13 @@ COUNTRY_FLAGS_SITES = [
         flag="flag_kiribati.png",
         countries_codes=["KIR"],
         count_link="http://kiribati.ureport.in/count/",
+    ),
+    dict(
+        name="Kyrgyzstan",
+        host="//kyrgyzstan.ureport.in/",
+        flag="flag_kyrgyzstan.png",
+        countries_codes=["KGZ"],
+        count_link="http://kyrgyzstan.ureport.in/count/",
     ),
     dict(
         name="Lebanon",

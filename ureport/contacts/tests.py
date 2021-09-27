@@ -153,6 +153,7 @@ class ContactTest(UreportTest):
             registered_on=json_date_to_datetime("2014-01-02T03:04:05.000"),
             state="R-LAGOS",
             district="R-OYO",
+            scheme="tel",
         )
 
         expected = dict()
@@ -164,8 +165,10 @@ class ContactTest(UreportTest):
         expected["registered_gender:2014-01-02:m"] = 1
         expected["registered_born:2014-01-02:1990"] = 1
         expected["registered_state:2014-01-02:R-LAGOS"] = 1
+        expected["registered_scheme:2014-01-02:tel"] = 1
         expected["state:R-LAGOS"] = 1
         expected["district:R-OYO"] = 1
+        expected["scheme:tel"] = 1
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
         Contact.recalculate_reporters_stats(self.nigeria)
@@ -181,6 +184,7 @@ class ContactTest(UreportTest):
             registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
             state="R-LAGOS",
             district="R-OYO",
+            scheme="facebook",
         )
 
         expected = dict()
@@ -195,8 +199,12 @@ class ContactTest(UreportTest):
         expected["registered_born:2014-01-02:1990"] = 1
         expected["registered_born:2014-01-02:1980"] = 1
         expected["registered_state:2014-01-02:R-LAGOS"] = 2
+        expected["registered_scheme:2014-01-02:tel"] = 1
+        expected["registered_scheme:2014-01-02:facebook"] = 1
         expected["state:R-LAGOS"] = 2
         expected["district:R-OYO"] = 2
+        expected["scheme:tel"] = 1
+        expected["scheme:facebook"] = 1
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
         Contact.recalculate_reporters_stats(self.nigeria)
@@ -233,6 +241,7 @@ class ContactTest(UreportTest):
             registered_on=json_date_to_datetime("2014-01-02T03:04:05.000"),
             state="R-LAGOS",
             district="R-OYO",
+            scheme="tel",
         )
 
         expected = dict()
@@ -244,8 +253,10 @@ class ContactTest(UreportTest):
         expected["registered_gender:2014-01-02:m"] = 1
         expected["registered_born:2014-01-02:1990"] = 1
         expected["registered_state:2014-01-02:R-LAGOS"] = 1
+        expected["registered_scheme:2014-01-02:tel"] = 1
         expected["state:R-LAGOS"] = 1
         expected["district:R-OYO"] = 1
+        expected["scheme:tel"] = 1
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
@@ -258,6 +269,7 @@ class ContactTest(UreportTest):
             registered_on=json_date_to_datetime("2014-01-02T03:07:05.000"),
             state="R-LAGOS",
             district="R-OYO",
+            scheme="facebook",
         )
 
         expected = dict()
@@ -272,8 +284,12 @@ class ContactTest(UreportTest):
         expected["registered_born:2014-01-02:1990"] = 1
         expected["registered_born:2014-01-02:1980"] = 1
         expected["registered_state:2014-01-02:R-LAGOS"] = 2
+        expected["registered_scheme:2014-01-02:tel"] = 1
+        expected["registered_scheme:2014-01-02:facebook"] = 1
         expected["state:R-LAGOS"] = 2
         expected["district:R-OYO"] = 2
+        expected["scheme:tel"] = 1
+        expected["scheme:facebook"] = 1
 
         self.assertEqual(ReportersCounter.get_counts(self.nigeria), expected)
 
