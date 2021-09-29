@@ -310,7 +310,7 @@ def populate_contact_activities_schemes(org_id):
 
 @app.task(name="contacts.populate_poll_results_schemes")
 def populate_poll_results_schemes(org_id):
-    from ureport.polls.models import PollResult, Poll
+    from ureport.polls.models import PollResult
 
     poll_results_schemes_populated_key = f"poll_results_schemes_populated:{org_id}"
 
