@@ -20,7 +20,7 @@ showSchemeChart = (id, data, barColor, labelColor) ->
 
   $("#" + id).highcharts({
     chart: {
-      type: 'column'
+      type: 'bar'
       width: 450
       backgroundColor: 'transparent'
       marginTop: if labelPosition == "top" then labelSize*2.2 else 0
@@ -53,16 +53,17 @@ showSchemeChart = (id, data, barColor, labelColor) ->
         groupPadding: 0.1
         borderWidth: 0
       }
-      column: {
+      bar: {
         color: barColor,
         pointPadding: 0
+        maxPointWidth: 40
         dataLabels: {
           enabled: true
-          verticalAlign: "top"
+          align: "left"
           style: {
             fontSize: ".75rem"
             textOutline: false
-            color: "black"
+            color: "white"
           }
           formatter: ->
             this.y + "%"

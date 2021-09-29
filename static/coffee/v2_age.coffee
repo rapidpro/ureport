@@ -54,11 +54,11 @@ showAgeChart = (id, data, barColor, labelColor, labelPosition, labelSize, labelW
         pointPadding: 0
         dataLabels: {
           enabled: true
-          verticalAlign: "top"
+          verticalAlign: "bottom"
           style: {
             fontSize: ".75rem"
             textOutline: false
-            color: "black"
+            color: 'white'
           }
           formatter: ->
             this.y + "%"
