@@ -260,11 +260,12 @@ class PollContextMixin(object):
 
         categories_dict = defaultdict(list)
         for poll in polls:
-            categories_dict[poll.category.name].append(poll)
+            month_key = poll.poll_date.date().replace(day=1)
 
-        context["categories"] = sorted(
-            [dict(name=k, polls=v) for k, v in categories_dict.items()], key=lambda c: c["name"]
-        )
+            categories_dict[month_key].append(poll)
+
+        context["categories"] = [dict(name=k, polls=v) for k, v in categories_dict.items()]
+
         context["polls"] = polls
 
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
