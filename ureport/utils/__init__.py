@@ -450,7 +450,7 @@ def get_schemes_stats(org):
         else:
             output_dict[name] = v
 
-    output = sorted([dict(name=k, y=v) for k, v in output_dict.items()], key=lambda i: i["name"])
+    output = sorted([dict(name=k, y=v) for k, v in output_dict.items()], key=lambda i: -i["y"])
 
     if other_stat:
         output.append(dict(name="OTHERS", y=other_stat))

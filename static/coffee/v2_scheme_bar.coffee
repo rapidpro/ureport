@@ -56,7 +56,7 @@ showSchemeChart = (id, data, barColor, labelColor) ->
       bar: {
         color: barColor,
         pointPadding: 0
-        maxPointWidth: 40
+        maxPointWidth: 35
         dataLabels: {
           enabled: true
           align: "left"

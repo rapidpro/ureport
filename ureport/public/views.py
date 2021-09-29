@@ -419,7 +419,10 @@ class UreportersView(SmartTemplateView):
         context["gender_stats"] = org.get_gender_stats()
         context["age_stats"] = json.loads(org.get_age_stats())
         context["registration_stats"] = org.get_registration_stats()
-        context["schemes_stats"] = org.get_schemes_stats()
+
+        scheme_stats = org.get_schemes_stats()
+        context["scheme_bar_height"] = (50 * len(scheme_stats)) + 30
+        context["schemes_stats"] = scheme_stats
         context["reporters"] = org.get_reporters_count()
         context["main_stories"] = Story.objects.filter(org=org, featured=True, is_active=True).order_by("-created_on")
 
