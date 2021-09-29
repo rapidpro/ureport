@@ -278,12 +278,16 @@ def populate_contact_activities_schemes(org_id):
         populate_poll_results_schemes.apply_async((org_id,), queue="slow")
         return
 
+    contact_activities_schemes_max_id_key = f"contact_activities_schemes_max_id:{org_id}"
+    max_id = cache.get(contact_activities_schemes_max_id_key, 0)
+
     start_time = time.time()
     logger.info(f"started populating schemes on contacts activities for org #{org_id}")
     contact_ids = (
-        Contact.objects.filter(org_id=org_id, is_active=True)
+        Contact.objects.filter(org_id=org_id, is_active=True, id__gt=max_id)
         .exclude(scheme=None)
         .exclude(scheme="")
+        .order_by("id")
         .values_list("id", flat=True)
     )
 
@@ -294,6 +298,7 @@ def populate_contact_activities_schemes(org_id):
         contacts = Contact.objects.filter(id__in=batch_ids)
         for contact in contacts:
             ContactActivity.objects.filter(org_id=contact.org_id, contact=contact.uuid).update(scheme=contact.scheme)
+            cache.set(contact_activities_schemes_max_id_key, contact.id, None)
 
         contacts_count += len(batch_ids)
 
@@ -318,12 +323,16 @@ def populate_poll_results_schemes(org_id):
         logger.info(f"Skipping populating schemes for org #{org_id}")
         return
 
+    poll_results_schemes_max_id_key = f"poll_results_schemes_max_id:{org_id}"
+    max_id = cache.get(poll_results_schemes_max_id_key, 0)
+
     start_time = time.time()
     logger.info(f"started populating schemes on poll results for org #{org_id}")
     contact_ids = (
-        Contact.objects.filter(org_id=org_id, is_active=True)
+        Contact.objects.filter(org_id=org_id, is_active=True, id__gt=max_id)
         .exclude(scheme=None)
         .exclude(scheme="")
+        .order_by("id")
         .values_list("id", flat=True)
     )
 
@@ -334,6 +343,7 @@ def populate_poll_results_schemes(org_id):
         contacts = Contact.objects.filter(id__in=batch_ids)
         for contact in contacts:
             PollResult.objects.filter(contact=contact.uuid).update(scheme=contact.scheme)
+            cache.set(poll_results_schemes_max_id_key, contact.id, None)
 
         contacts_count += len(batch_ids)
 
